@@ -1,0 +1,314 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!--NewPage-->
+<HTML>
+<HEAD>
+<TITLE>
+Grfhic (POI API Documentation)
+</TITLE>
+
+<META NAME="keywords" CONTENT="org.apache.poi.hwpf.model.Grfhic class">
+
+<LINK REL ="stylesheet" TYPE="text/css" HREF="../../../../../stylesheet.css" TITLE="Style">
+
+<SCRIPT type="text/javascript">
+function windowTitle()
+{
+    parent.document.title="Grfhic (POI API Documentation)";
+}
+</SCRIPT>
+<NOSCRIPT>
+</NOSCRIPT>
+
+</HEAD>
+
+<BODY BGCOLOR="white" onload="windowTitle();">
+
+
+<!-- ========= START OF TOP NAVBAR ======= -->
+<A NAME="navbar_top"><!-- --></A>
+<A HREF="#skip-navbar_top" title="Skip navigation links"></A>
+<TABLE BORDER="0" WIDTH="100%" CELLPADDING="1" CELLSPACING="0" SUMMARY="">
+<TR>
+<TD COLSPAN=2 BGCOLOR="#EEEEFF" CLASS="NavBarCell1">
+<A NAME="navbar_top_firstrow"><!-- --></A>
+<TABLE BORDER="0" CELLPADDING="0" CELLSPACING="3" SUMMARY="">
+  <TR ALIGN="center" VALIGN="top">
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../overview-summary.html"><FONT CLASS="NavBarFont1"><B>Overview</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="package-summary.html"><FONT CLASS="NavBarFont1"><B>Package</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#FFFFFF" CLASS="NavBarCell1Rev"> &nbsp;<FONT CLASS="NavBarFont1Rev"><B>Class</B></FONT>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="class-use/Grfhic.html"><FONT CLASS="NavBarFont1"><B>Use</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="package-tree.html"><FONT CLASS="NavBarFont1"><B>Tree</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../deprecated-list.html"><FONT CLASS="NavBarFont1"><B>Deprecated</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../index-all.html"><FONT CLASS="NavBarFont1"><B>Index</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../help-doc.html"><FONT CLASS="NavBarFont1"><B>Help</B></FONT></A>&nbsp;</TD>
+  </TR>
+</TABLE>
+</TD>
+<TD ALIGN="right" VALIGN="top" ROWSPAN=3><EM>
+</EM>
+</TD>
+</TR>
+
+<TR>
+<TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
+&nbsp;<A HREF="../../../../../org/apache/poi/hwpf/model/GenericPropertyNode.html" title="class in org.apache.poi.hwpf.model"><B>PREV CLASS</B></A>&nbsp;
+&nbsp;<A HREF="../../../../../org/apache/poi/hwpf/model/HDFType.html" title="interface in org.apache.poi.hwpf.model"><B>NEXT CLASS</B></A></FONT></TD>
+<TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
+  <A HREF="../../../../../index.html?org/apache/poi/hwpf/model/Grfhic.html" target="_top"><B>FRAMES</B></A>  &nbsp;
+&nbsp;<A HREF="Grfhic.html" target="_top"><B>NO FRAMES</B></A>  &nbsp;
+&nbsp;<SCRIPT type="text/javascript">
+  <!--
+  if(window==top) {
+    document.writeln('<A HREF="../../../../../allclasses-noframe.html"><B>All Classes</B></A>');
+  }
+  //-->
+</SCRIPT>
+<NOSCRIPT>
+  <A HREF="../../../../../allclasses-noframe.html"><B>All Classes</B></A>
+</NOSCRIPT>
+
+
+</FONT></TD>
+</TR>
+<TR>
+<TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
+  SUMMARY:&nbsp;NESTED&nbsp;|&nbsp;<A HREF="#fields_inherited_from_class_org.apache.poi.hwpf.model.types.GrfhicAbstractType">FIELD</A>&nbsp;|&nbsp;<A HREF="#constructor_summary">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_summary">METHOD</A></FONT></TD>
+<TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
+DETAIL:&nbsp;FIELD&nbsp;|&nbsp;<A HREF="#constructor_detail">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_detail">METHOD</A></FONT></TD>
+</TR>
+</TABLE>
+<A NAME="skip-navbar_top"></A>
+<!-- ========= END OF TOP NAVBAR ========= -->
+
+<HR>
+<!-- ======== START OF CLASS DATA ======== -->
+<H2>
+<FONT SIZE="-1">
+org.apache.poi.hwpf.model</FONT>
+<BR>
+Class Grfhic</H2>
+<PRE>
+java.lang.Object
+  <IMG SRC="../../../../../resources/inherit.gif" ALT="extended by "><A HREF="../../../../../org/apache/poi/hwpf/model/types/GrfhicAbstractType.html" title="class in org.apache.poi.hwpf.model.types">org.apache.poi.hwpf.model.types.GrfhicAbstractType</A>
+      <IMG SRC="../../../../../resources/inherit.gif" ALT="extended by "><B>org.apache.poi.hwpf.model.Grfhic</B>
+</PRE>
+<HR>
+<DL>
+<DT><PRE><FONT SIZE="-1"><A HREF="../../../../../org/apache/poi/util/Internal.html" title="annotation in org.apache.poi.util">@Internal</A>
+</FONT>public class <B>Grfhic</B><DT>extends <A HREF="../../../../../org/apache/poi/hwpf/model/types/GrfhicAbstractType.html" title="class in org.apache.poi.hwpf.model.types">GrfhicAbstractType</A></DL>
+</PRE>
+
+<P>
+The grfhic structure is a set of HTML incompatibility flags that specify the
+ HTML incompatibilities of a list structure. The values specify possible
+ incompatibilities between an LVL or LVLF and HTML lists. The values do not
+ define list properties.
+ <p>
+ Class and fields descriptions are quoted from [MS-DOC] -- v20110315 Word
+ (.doc) Binary File Format specification
+ <p>
+ This class is internal. It content or properties may change without notice
+ due to changes in our knowledge of internal Microsoft Word binary structures.
+<P>
+
+<P>
+<DL>
+<DT><B>Author:</B></DT>
+  <DD>Sergey Vladimirov; according to [MS-DOC] -- v20110315 Word (.doc)
+         Binary File Format specification</DD>
+</DL>
+<HR>
+
+<P>
+<!-- =========== FIELD SUMMARY =========== -->
+
+<A NAME="field_summary"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+<B>Field Summary</B></FONT></TH>
+</TR>
+</TABLE>
+&nbsp;<A NAME="fields_inherited_from_class_org.apache.poi.hwpf.model.types.GrfhicAbstractType"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#EEEEFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left"><B>Fields inherited from class org.apache.poi.hwpf.model.types.<A HREF="../../../../../org/apache/poi/hwpf/model/types/GrfhicAbstractType.html" title="class in org.apache.poi.hwpf.model.types">GrfhicAbstractType</A></B></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><A HREF="../../../../../org/apache/poi/hwpf/model/types/GrfhicAbstractType.html#field_1_grfhic">field_1_grfhic</A></CODE></TD>
+</TR>
+</TABLE>
+&nbsp;
+<!-- ======== CONSTRUCTOR SUMMARY ======== -->
+
+<A NAME="constructor_summary"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+<B>Constructor Summary</B></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/model/Grfhic.html#Grfhic()">Grfhic</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/model/Grfhic.html#Grfhic(byte[], int)">Grfhic</A></B>(byte[]&nbsp;bytes,
+       int&nbsp;offset)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+</TABLE>
+&nbsp;
+<!-- ========== METHOD SUMMARY =========== -->
+
+<A NAME="method_summary"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+<B>Method Summary</B></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;byte[]</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/model/Grfhic.html#toByteArray()">toByteArray</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+</TABLE>
+&nbsp;<A NAME="methods_inherited_from_class_org.apache.poi.hwpf.model.types.GrfhicAbstractType"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#EEEEFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left"><B>Methods inherited from class org.apache.poi.hwpf.model.types.<A HREF="../../../../../org/apache/poi/hwpf/model/types/GrfhicAbstractType.html" title="class in org.apache.poi.hwpf.model.types">GrfhicAbstractType</A></B></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><A HREF="../../../../../org/apache/poi/hwpf/model/types/GrfhicAbstractType.html#equals(java.lang.Object)">equals</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/GrfhicAbstractType.html#fillFields(byte[], int)">fillFields</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/GrfhicAbstractType.html#getGrfhic()">getGrfhic</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/GrfhicAbstractType.html#getSize()">getSize</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/GrfhicAbstractType.html#hashCode()">hashCode</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/GrfhicAbstractType.html#isFHtmlBuiltInBullet()">isFHtmlBuiltInBullet</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/GrfhicAbstractType.html#isFHtmlChecked()">isFHtmlChecked</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/GrfhicAbstractType.html#isFHtmlFirstLineMismatch()">isFHtmlFirstLineMismatch</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/GrfhicAbstractType.html#isFHtmlHangingIndentBeneathNumber()">isFHtmlHangingIndentBeneathNumber</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/GrfhicAbstractType.html#isFHtmlListTextNotSharpDot()">isFHtmlListTextNotSharpDot</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/GrfhicAbstractType.html#isFHtmlNotPeriod()">isFHtmlNotPeriod</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/GrfhicAbstractType.html#isFHtmlTabLeftIndentMismatch()">isFHtmlTabLeftIndentMismatch</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/GrfhicAbstractType.html#isFHtmlUnsupported()">isFHtmlUnsupported</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/GrfhicAbstractType.html#serialize()">serialize</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/GrfhicAbstractType.html#serialize(byte[], int)">serialize</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/GrfhicAbstractType.html#setFHtmlBuiltInBullet(boolean)">setFHtmlBuiltInBullet</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/GrfhicAbstractType.html#setFHtmlChecked(boolean)">setFHtmlChecked</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/GrfhicAbstractType.html#setFHtmlFirstLineMismatch(boolean)">setFHtmlFirstLineMismatch</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/GrfhicAbstractType.html#setFHtmlHangingIndentBeneathNumber(boolean)">setFHtmlHangingIndentBeneathNumber</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/GrfhicAbstractType.html#setFHtmlListTextNotSharpDot(boolean)">setFHtmlListTextNotSharpDot</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/GrfhicAbstractType.html#setFHtmlNotPeriod(boolean)">setFHtmlNotPeriod</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/GrfhicAbstractType.html#setFHtmlTabLeftIndentMismatch(boolean)">setFHtmlTabLeftIndentMismatch</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/GrfhicAbstractType.html#setFHtmlUnsupported(boolean)">setFHtmlUnsupported</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/GrfhicAbstractType.html#setGrfhic(byte)">setGrfhic</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/GrfhicAbstractType.html#toString()">toString</A></CODE></TD>
+</TR>
+</TABLE>
+&nbsp;<A NAME="methods_inherited_from_class_java.lang.Object"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#EEEEFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left"><B>Methods inherited from class java.lang.Object</B></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE>clone, finalize, getClass, notify, notifyAll, wait, wait, wait</CODE></TD>
+</TR>
+</TABLE>
+&nbsp;
+<P>
+
+<!-- ========= CONSTRUCTOR DETAIL ======== -->
+
+<A NAME="constructor_detail"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="1"><FONT SIZE="+2">
+<B>Constructor Detail</B></FONT></TH>
+</TR>
+</TABLE>
+
+<A NAME="Grfhic()"><!-- --></A><H3>
+Grfhic</H3>
+<PRE>
+public <B>Grfhic</B>()</PRE>
+<DL>
+</DL>
+<HR>
+
+<A NAME="Grfhic(byte[], int)"><!-- --></A><H3>
+Grfhic</H3>
+<PRE>
+public <B>Grfhic</B>(byte[]&nbsp;bytes,
+              int&nbsp;offset)</PRE>
+<DL>
+</DL>
+
+<!-- ============ METHOD DETAIL ========== -->
+
+<A NAME="method_detail"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="1"><FONT SIZE="+2">
+<B>Method Detail</B></FONT></TH>
+</TR>
+</TABLE>
+
+<A NAME="toByteArray()"><!-- --></A><H3>
+toByteArray</H3>
+<PRE>
+public byte[] <B>toByteArray</B>()</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<!-- ========= END OF CLASS DATA ========= -->
+<HR>
+
+
+<!-- ======= START OF BOTTOM NAVBAR ====== -->
+<A NAME="navbar_bottom"><!-- --></A>
+<A HREF="#skip-navbar_bottom" title="Skip navigation links"></A>
+<TABLE BORDER="0" WIDTH="100%" CELLPADDING="1" CELLSPACING="0" SUMMARY="">
+<TR>
+<TD COLSPAN=2 BGCOLOR="#EEEEFF" CLASS="NavBarCell1">
+<A NAME="navbar_bottom_firstrow"><!-- --></A>
+<TABLE BORDER="0" CELLPADDING="0" CELLSPACING="3" SUMMARY="">
+  <TR ALIGN="center" VALIGN="top">
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../overview-summary.html"><FONT CLASS="NavBarFont1"><B>Overview</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="package-summary.html"><FONT CLASS="NavBarFont1"><B>Package</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#FFFFFF" CLASS="NavBarCell1Rev"> &nbsp;<FONT CLASS="NavBarFont1Rev"><B>Class</B></FONT>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="class-use/Grfhic.html"><FONT CLASS="NavBarFont1"><B>Use</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="package-tree.html"><FONT CLASS="NavBarFont1"><B>Tree</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../deprecated-list.html"><FONT CLASS="NavBarFont1"><B>Deprecated</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../index-all.html"><FONT CLASS="NavBarFont1"><B>Index</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../help-doc.html"><FONT CLASS="NavBarFont1"><B>Help</B></FONT></A>&nbsp;</TD>
+  </TR>
+</TABLE>
+</TD>
+<TD ALIGN="right" VALIGN="top" ROWSPAN=3><EM>
+</EM>
+</TD>
+</TR>
+
+<TR>
+<TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
+&nbsp;<A HREF="../../../../../org/apache/poi/hwpf/model/GenericPropertyNode.html" title="class in org.apache.poi.hwpf.model"><B>PREV CLASS</B></A>&nbsp;
+&nbsp;<A HREF="../../../../../org/apache/poi/hwpf/model/HDFType.html" title="interface in org.apache.poi.hwpf.model"><B>NEXT CLASS</B></A></FONT></TD>
+<TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
+  <A HREF="../../../../../index.html?org/apache/poi/hwpf/model/Grfhic.html" target="_top"><B>FRAMES</B></A>  &nbsp;
+&nbsp;<A HREF="Grfhic.html" target="_top"><B>NO FRAMES</B></A>  &nbsp;
+&nbsp;<SCRIPT type="text/javascript">
+  <!--
+  if(window==top) {
+    document.writeln('<A HREF="../../../../../allclasses-noframe.html"><B>All Classes</B></A>');
+  }
+  //-->
+</SCRIPT>
+<NOSCRIPT>
+  <A HREF="../../../../../allclasses-noframe.html"><B>All Classes</B></A>
+</NOSCRIPT>
+
+
+</FONT></TD>
+</TR>
+<TR>
+<TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
+  SUMMARY:&nbsp;NESTED&nbsp;|&nbsp;<A HREF="#fields_inherited_from_class_org.apache.poi.hwpf.model.types.GrfhicAbstractType">FIELD</A>&nbsp;|&nbsp;<A HREF="#constructor_summary">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_summary">METHOD</A></FONT></TD>
+<TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
+DETAIL:&nbsp;FIELD&nbsp;|&nbsp;<A HREF="#constructor_detail">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_detail">METHOD</A></FONT></TD>
+</TR>
+</TABLE>
+<A NAME="skip-navbar_bottom"></A>
+<!-- ======== END OF BOTTOM NAVBAR ======= -->
+
+<HR>
+
+                <i>Copyright 2014 The Apache Software Foundation or
+        its licensors, as applicable.</i>
+            
+</BODY>
+</HTML>

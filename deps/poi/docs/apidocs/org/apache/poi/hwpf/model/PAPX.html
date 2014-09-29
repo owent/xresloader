@@ -1,0 +1,523 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!--NewPage-->
+<HTML>
+<HEAD>
+<TITLE>
+PAPX (POI API Documentation)
+</TITLE>
+
+<META NAME="keywords" CONTENT="org.apache.poi.hwpf.model.PAPX class">
+
+<LINK REL ="stylesheet" TYPE="text/css" HREF="../../../../../stylesheet.css" TITLE="Style">
+
+<SCRIPT type="text/javascript">
+function windowTitle()
+{
+    parent.document.title="PAPX (POI API Documentation)";
+}
+</SCRIPT>
+<NOSCRIPT>
+</NOSCRIPT>
+
+</HEAD>
+
+<BODY BGCOLOR="white" onload="windowTitle();">
+
+
+<!-- ========= START OF TOP NAVBAR ======= -->
+<A NAME="navbar_top"><!-- --></A>
+<A HREF="#skip-navbar_top" title="Skip navigation links"></A>
+<TABLE BORDER="0" WIDTH="100%" CELLPADDING="1" CELLSPACING="0" SUMMARY="">
+<TR>
+<TD COLSPAN=2 BGCOLOR="#EEEEFF" CLASS="NavBarCell1">
+<A NAME="navbar_top_firstrow"><!-- --></A>
+<TABLE BORDER="0" CELLPADDING="0" CELLSPACING="3" SUMMARY="">
+  <TR ALIGN="center" VALIGN="top">
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../overview-summary.html"><FONT CLASS="NavBarFont1"><B>Overview</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="package-summary.html"><FONT CLASS="NavBarFont1"><B>Package</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#FFFFFF" CLASS="NavBarCell1Rev"> &nbsp;<FONT CLASS="NavBarFont1Rev"><B>Class</B></FONT>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="class-use/PAPX.html"><FONT CLASS="NavBarFont1"><B>Use</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="package-tree.html"><FONT CLASS="NavBarFont1"><B>Tree</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../deprecated-list.html"><FONT CLASS="NavBarFont1"><B>Deprecated</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../index-all.html"><FONT CLASS="NavBarFont1"><B>Index</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../help-doc.html"><FONT CLASS="NavBarFont1"><B>Help</B></FONT></A>&nbsp;</TD>
+  </TR>
+</TABLE>
+</TD>
+<TD ALIGN="right" VALIGN="top" ROWSPAN=3><EM>
+</EM>
+</TD>
+</TR>
+
+<TR>
+<TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
+&nbsp;<A HREF="../../../../../org/apache/poi/hwpf/model/PAPFormattedDiskPage.html" title="class in org.apache.poi.hwpf.model"><B>PREV CLASS</B></A>&nbsp;
+&nbsp;<A HREF="../../../../../org/apache/poi/hwpf/model/ParagraphHeight.html" title="class in org.apache.poi.hwpf.model"><B>NEXT CLASS</B></A></FONT></TD>
+<TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
+  <A HREF="../../../../../index.html?org/apache/poi/hwpf/model/PAPX.html" target="_top"><B>FRAMES</B></A>  &nbsp;
+&nbsp;<A HREF="PAPX.html" target="_top"><B>NO FRAMES</B></A>  &nbsp;
+&nbsp;<SCRIPT type="text/javascript">
+  <!--
+  if(window==top) {
+    document.writeln('<A HREF="../../../../../allclasses-noframe.html"><B>All Classes</B></A>');
+  }
+  //-->
+</SCRIPT>
+<NOSCRIPT>
+  <A HREF="../../../../../allclasses-noframe.html"><B>All Classes</B></A>
+</NOSCRIPT>
+
+
+</FONT></TD>
+</TR>
+<TR>
+<TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
+  SUMMARY:&nbsp;<A HREF="#nested_classes_inherited_from_class_org.apache.poi.hwpf.model.PropertyNode">NESTED</A>&nbsp;|&nbsp;<A HREF="#fields_inherited_from_class_org.apache.poi.hwpf.model.PropertyNode">FIELD</A>&nbsp;|&nbsp;<A HREF="#constructor_summary">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_summary">METHOD</A></FONT></TD>
+<TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
+DETAIL:&nbsp;FIELD&nbsp;|&nbsp;<A HREF="#constructor_detail">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_detail">METHOD</A></FONT></TD>
+</TR>
+</TABLE>
+<A NAME="skip-navbar_top"></A>
+<!-- ========= END OF TOP NAVBAR ========= -->
+
+<HR>
+<!-- ======== START OF CLASS DATA ======== -->
+<H2>
+<FONT SIZE="-1">
+org.apache.poi.hwpf.model</FONT>
+<BR>
+Class PAPX</H2>
+<PRE>
+java.lang.Object
+  <IMG SRC="../../../../../resources/inherit.gif" ALT="extended by "><A HREF="../../../../../org/apache/poi/hwpf/model/PropertyNode.html" title="class in org.apache.poi.hwpf.model">org.apache.poi.hwpf.model.PropertyNode</A>&lt;T&gt;
+      <IMG SRC="../../../../../resources/inherit.gif" ALT="extended by "><A HREF="../../../../../org/apache/poi/hwpf/model/BytePropertyNode.html" title="class in org.apache.poi.hwpf.model">org.apache.poi.hwpf.model.BytePropertyNode</A>&lt;<A HREF="../../../../../org/apache/poi/hwpf/model/PAPX.html" title="class in org.apache.poi.hwpf.model">PAPX</A>&gt;
+          <IMG SRC="../../../../../resources/inherit.gif" ALT="extended by "><B>org.apache.poi.hwpf.model.PAPX</B>
+</PRE>
+<DL>
+<DT><B>All Implemented Interfaces:</B> <DD>java.lang.Cloneable, java.lang.Comparable&lt;<A HREF="../../../../../org/apache/poi/hwpf/model/PAPX.html" title="class in org.apache.poi.hwpf.model">PAPX</A>&gt;</DD>
+</DL>
+<HR>
+<DL>
+<DT><PRE><FONT SIZE="-1"><A HREF="../../../../../org/apache/poi/util/Internal.html" title="annotation in org.apache.poi.util">@Internal</A>
+</FONT>public final class <B>PAPX</B><DT>extends <A HREF="../../../../../org/apache/poi/hwpf/model/BytePropertyNode.html" title="class in org.apache.poi.hwpf.model">BytePropertyNode</A>&lt;<A HREF="../../../../../org/apache/poi/hwpf/model/PAPX.html" title="class in org.apache.poi.hwpf.model">PAPX</A>&gt;</DL>
+</PRE>
+
+<P>
+DANGER - works in bytes!
+
+ Make sure you call getStart() / getEnd() when you want characters
+  (normal use), but getStartByte() / getEndByte() when you're
+  reading in / writing out!
+<P>
+
+<P>
+<DL>
+<DT><B>Author:</B></DT>
+  <DD>Ryan Ackley</DD>
+</DL>
+<HR>
+
+<P>
+<!-- ======== NESTED CLASS SUMMARY ======== -->
+
+<A NAME="nested_class_summary"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+<B>Nested Class Summary</B></FONT></TH>
+</TR>
+</TABLE>
+&nbsp;<A NAME="nested_classes_inherited_from_class_org.apache.poi.hwpf.model.PropertyNode"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#EEEEFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left"><B>Nested classes/interfaces inherited from class org.apache.poi.hwpf.model.<A HREF="../../../../../org/apache/poi/hwpf/model/PropertyNode.html" title="class in org.apache.poi.hwpf.model">PropertyNode</A></B></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><A HREF="../../../../../org/apache/poi/hwpf/model/PropertyNode.EndComparator.html" title="class in org.apache.poi.hwpf.model">PropertyNode.EndComparator</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/PropertyNode.StartComparator.html" title="class in org.apache.poi.hwpf.model">PropertyNode.StartComparator</A></CODE></TD>
+</TR>
+</TABLE>
+&nbsp;
+<!-- =========== FIELD SUMMARY =========== -->
+
+<A NAME="field_summary"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+<B>Field Summary</B></FONT></TH>
+</TR>
+</TABLE>
+&nbsp;<A NAME="fields_inherited_from_class_org.apache.poi.hwpf.model.PropertyNode"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#EEEEFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left"><B>Fields inherited from class org.apache.poi.hwpf.model.<A HREF="../../../../../org/apache/poi/hwpf/model/PropertyNode.html" title="class in org.apache.poi.hwpf.model">PropertyNode</A></B></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><A HREF="../../../../../org/apache/poi/hwpf/model/PropertyNode.html#_buf">_buf</A></CODE></TD>
+</TR>
+</TABLE>
+&nbsp;
+<!-- ======== CONSTRUCTOR SUMMARY ======== -->
+
+<A NAME="constructor_summary"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+<B>Constructor Summary</B></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/model/PAPX.html#PAPX(int, int, byte[], org.apache.poi.hwpf.model.ParagraphHeight, byte[])">PAPX</A></B>(int&nbsp;charStart,
+     int&nbsp;charEnd,
+     byte[]&nbsp;papx,
+     <A HREF="../../../../../org/apache/poi/hwpf/model/ParagraphHeight.html" title="class in org.apache.poi.hwpf.model">ParagraphHeight</A>&nbsp;phe,
+     byte[]&nbsp;dataStream)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/model/PAPX.html#PAPX(int, int, org.apache.poi.hwpf.model.CharIndexTranslator, byte[], org.apache.poi.hwpf.model.ParagraphHeight, byte[])">PAPX</A></B>(int&nbsp;fcStart,
+     int&nbsp;fcEnd,
+     <A HREF="../../../../../org/apache/poi/hwpf/model/CharIndexTranslator.html" title="interface in org.apache.poi.hwpf.model">CharIndexTranslator</A>&nbsp;translator,
+     byte[]&nbsp;papx,
+     <A HREF="../../../../../org/apache/poi/hwpf/model/ParagraphHeight.html" title="class in org.apache.poi.hwpf.model">ParagraphHeight</A>&nbsp;phe,
+     byte[]&nbsp;dataStream)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/model/PAPX.html#PAPX(int, int, org.apache.poi.hwpf.model.CharIndexTranslator, org.apache.poi.hwpf.sprm.SprmBuffer, byte[])">PAPX</A></B>(int&nbsp;fcStart,
+     int&nbsp;fcEnd,
+     <A HREF="../../../../../org/apache/poi/hwpf/model/CharIndexTranslator.html" title="interface in org.apache.poi.hwpf.model">CharIndexTranslator</A>&nbsp;translator,
+     <A HREF="../../../../../org/apache/poi/hwpf/sprm/SprmBuffer.html" title="class in org.apache.poi.hwpf.sprm">SprmBuffer</A>&nbsp;buf,
+     byte[]&nbsp;dataStream)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/model/PAPX.html#PAPX(int, int, org.apache.poi.hwpf.sprm.SprmBuffer)">PAPX</A></B>(int&nbsp;charStart,
+     int&nbsp;charEnd,
+     <A HREF="../../../../../org/apache/poi/hwpf/sprm/SprmBuffer.html" title="class in org.apache.poi.hwpf.sprm">SprmBuffer</A>&nbsp;buf)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+</TABLE>
+&nbsp;
+<!-- ========== METHOD SUMMARY =========== -->
+
+<A NAME="method_summary"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+<B>Method Summary</B></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/model/PAPX.html#equals(java.lang.Object)">equals</A></B>(java.lang.Object&nbsp;o)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;byte[]</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/model/PAPX.html#getGrpprl()">getGrpprl</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;short</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/model/PAPX.html#getIstd()">getIstd</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../../../org/apache/poi/hwpf/model/ParagraphHeight.html" title="class in org.apache.poi.hwpf.model">ParagraphHeight</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/model/PAPX.html#getParagraphHeight()">getParagraphHeight</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../../../org/apache/poi/hwpf/usermodel/ParagraphProperties.html" title="class in org.apache.poi.hwpf.usermodel">ParagraphProperties</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/model/PAPX.html#getParagraphProperties(org.apache.poi.hwpf.model.StyleSheet)">getParagraphProperties</A></B>(<A HREF="../../../../../org/apache/poi/hwpf/model/StyleSheet.html" title="class in org.apache.poi.hwpf.model">StyleSheet</A>&nbsp;ss)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../../../org/apache/poi/hwpf/sprm/SprmBuffer.html" title="class in org.apache.poi.hwpf.sprm">SprmBuffer</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/model/PAPX.html#getSprmBuf()">getSprmBuf</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;java.lang.String</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/model/PAPX.html#toString()">toString</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+</TABLE>
+&nbsp;<A NAME="methods_inherited_from_class_org.apache.poi.hwpf.model.BytePropertyNode"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#EEEEFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left"><B>Methods inherited from class org.apache.poi.hwpf.model.<A HREF="../../../../../org/apache/poi/hwpf/model/BytePropertyNode.html" title="class in org.apache.poi.hwpf.model">BytePropertyNode</A></B></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><A HREF="../../../../../org/apache/poi/hwpf/model/BytePropertyNode.html#getEndBytes()">getEndBytes</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/BytePropertyNode.html#getStartBytes()">getStartBytes</A></CODE></TD>
+</TR>
+</TABLE>
+&nbsp;<A NAME="methods_inherited_from_class_org.apache.poi.hwpf.model.PropertyNode"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#EEEEFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left"><B>Methods inherited from class org.apache.poi.hwpf.model.<A HREF="../../../../../org/apache/poi/hwpf/model/PropertyNode.html" title="class in org.apache.poi.hwpf.model">PropertyNode</A></B></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><A HREF="../../../../../org/apache/poi/hwpf/model/PropertyNode.html#adjustForDelete(int, int)">adjustForDelete</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/PropertyNode.html#clone()">clone</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/PropertyNode.html#compareTo(T)">compareTo</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/PropertyNode.html#getEnd()">getEnd</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/PropertyNode.html#getStart()">getStart</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/PropertyNode.html#hashCode()">hashCode</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/PropertyNode.html#limitsAreEqual(java.lang.Object)">limitsAreEqual</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/PropertyNode.html#setEnd(int)">setEnd</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/PropertyNode.html#setStart(int)">setStart</A></CODE></TD>
+</TR>
+</TABLE>
+&nbsp;<A NAME="methods_inherited_from_class_java.lang.Object"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#EEEEFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left"><B>Methods inherited from class java.lang.Object</B></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE>finalize, getClass, notify, notifyAll, wait, wait, wait</CODE></TD>
+</TR>
+</TABLE>
+&nbsp;
+<P>
+
+<!-- ========= CONSTRUCTOR DETAIL ======== -->
+
+<A NAME="constructor_detail"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="1"><FONT SIZE="+2">
+<B>Constructor Detail</B></FONT></TH>
+</TR>
+</TABLE>
+
+<A NAME="PAPX(int, int, org.apache.poi.hwpf.model.CharIndexTranslator, byte[], org.apache.poi.hwpf.model.ParagraphHeight, byte[])"><!-- --></A><H3>
+PAPX</H3>
+<PRE>
+public <B>PAPX</B>(int&nbsp;fcStart,
+            int&nbsp;fcEnd,
+            <A HREF="../../../../../org/apache/poi/hwpf/model/CharIndexTranslator.html" title="interface in org.apache.poi.hwpf.model">CharIndexTranslator</A>&nbsp;translator,
+            byte[]&nbsp;papx,
+            <A HREF="../../../../../org/apache/poi/hwpf/model/ParagraphHeight.html" title="class in org.apache.poi.hwpf.model">ParagraphHeight</A>&nbsp;phe,
+            byte[]&nbsp;dataStream)</PRE>
+<DL>
+</DL>
+<HR>
+
+<A NAME="PAPX(int, int, byte[], org.apache.poi.hwpf.model.ParagraphHeight, byte[])"><!-- --></A><H3>
+PAPX</H3>
+<PRE>
+public <B>PAPX</B>(int&nbsp;charStart,
+            int&nbsp;charEnd,
+            byte[]&nbsp;papx,
+            <A HREF="../../../../../org/apache/poi/hwpf/model/ParagraphHeight.html" title="class in org.apache.poi.hwpf.model">ParagraphHeight</A>&nbsp;phe,
+            byte[]&nbsp;dataStream)</PRE>
+<DL>
+</DL>
+<HR>
+
+<A NAME="PAPX(int, int, org.apache.poi.hwpf.model.CharIndexTranslator, org.apache.poi.hwpf.sprm.SprmBuffer, byte[])"><!-- --></A><H3>
+PAPX</H3>
+<PRE>
+<FONT SIZE="-1">@Deprecated
+</FONT>public <B>PAPX</B>(int&nbsp;fcStart,
+                       int&nbsp;fcEnd,
+                       <A HREF="../../../../../org/apache/poi/hwpf/model/CharIndexTranslator.html" title="interface in org.apache.poi.hwpf.model">CharIndexTranslator</A>&nbsp;translator,
+                       <A HREF="../../../../../org/apache/poi/hwpf/sprm/SprmBuffer.html" title="class in org.apache.poi.hwpf.sprm">SprmBuffer</A>&nbsp;buf,
+                       byte[]&nbsp;dataStream)</PRE>
+<DL>
+<DD><B>Deprecated.</B>&nbsp;
+<P>
+</DL>
+<HR>
+
+<A NAME="PAPX(int, int, org.apache.poi.hwpf.sprm.SprmBuffer)"><!-- --></A><H3>
+PAPX</H3>
+<PRE>
+public <B>PAPX</B>(int&nbsp;charStart,
+            int&nbsp;charEnd,
+            <A HREF="../../../../../org/apache/poi/hwpf/sprm/SprmBuffer.html" title="class in org.apache.poi.hwpf.sprm">SprmBuffer</A>&nbsp;buf)</PRE>
+<DL>
+</DL>
+
+<!-- ============ METHOD DETAIL ========== -->
+
+<A NAME="method_detail"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="1"><FONT SIZE="+2">
+<B>Method Detail</B></FONT></TH>
+</TR>
+</TABLE>
+
+<A NAME="getParagraphHeight()"><!-- --></A><H3>
+getParagraphHeight</H3>
+<PRE>
+public <A HREF="../../../../../org/apache/poi/hwpf/model/ParagraphHeight.html" title="class in org.apache.poi.hwpf.model">ParagraphHeight</A> <B>getParagraphHeight</B>()</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getGrpprl()"><!-- --></A><H3>
+getGrpprl</H3>
+<PRE>
+public byte[] <B>getGrpprl</B>()</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getIstd()"><!-- --></A><H3>
+getIstd</H3>
+<PRE>
+public short <B>getIstd</B>()</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getSprmBuf()"><!-- --></A><H3>
+getSprmBuf</H3>
+<PRE>
+public <A HREF="../../../../../org/apache/poi/hwpf/sprm/SprmBuffer.html" title="class in org.apache.poi.hwpf.sprm">SprmBuffer</A> <B>getSprmBuf</B>()</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getParagraphProperties(org.apache.poi.hwpf.model.StyleSheet)"><!-- --></A><H3>
+getParagraphProperties</H3>
+<PRE>
+<FONT SIZE="-1">@Deprecated
+<A HREF="../../../../../org/apache/poi/util/Internal.html" title="annotation in org.apache.poi.util">@Internal</A>
+</FONT>public <A HREF="../../../../../org/apache/poi/hwpf/usermodel/ParagraphProperties.html" title="class in org.apache.poi.hwpf.usermodel">ParagraphProperties</A> <B>getParagraphProperties</B>(<A HREF="../../../../../org/apache/poi/hwpf/model/StyleSheet.html" title="class in org.apache.poi.hwpf.model">StyleSheet</A>&nbsp;ss)</PRE>
+<DL>
+<DD><B>Deprecated.</B>&nbsp;
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="equals(java.lang.Object)"><!-- --></A><H3>
+equals</H3>
+<PRE>
+public boolean <B>equals</B>(java.lang.Object&nbsp;o)</PRE>
+<DL>
+<DD><DL>
+<DT><B>Overrides:</B><DD><CODE><A HREF="../../../../../org/apache/poi/hwpf/model/PropertyNode.html#equals(java.lang.Object)">equals</A></CODE> in class <CODE><A HREF="../../../../../org/apache/poi/hwpf/model/PropertyNode.html" title="class in org.apache.poi.hwpf.model">PropertyNode</A>&lt;<A HREF="../../../../../org/apache/poi/hwpf/model/PAPX.html" title="class in org.apache.poi.hwpf.model">PAPX</A>&gt;</CODE></DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="toString()"><!-- --></A><H3>
+toString</H3>
+<PRE>
+public java.lang.String <B>toString</B>()</PRE>
+<DL>
+<DD><DL>
+<DT><B>Overrides:</B><DD><CODE>toString</CODE> in class <CODE>java.lang.Object</CODE></DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<!-- ========= END OF CLASS DATA ========= -->
+<HR>
+
+
+<!-- ======= START OF BOTTOM NAVBAR ====== -->
+<A NAME="navbar_bottom"><!-- --></A>
+<A HREF="#skip-navbar_bottom" title="Skip navigation links"></A>
+<TABLE BORDER="0" WIDTH="100%" CELLPADDING="1" CELLSPACING="0" SUMMARY="">
+<TR>
+<TD COLSPAN=2 BGCOLOR="#EEEEFF" CLASS="NavBarCell1">
+<A NAME="navbar_bottom_firstrow"><!-- --></A>
+<TABLE BORDER="0" CELLPADDING="0" CELLSPACING="3" SUMMARY="">
+  <TR ALIGN="center" VALIGN="top">
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../overview-summary.html"><FONT CLASS="NavBarFont1"><B>Overview</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="package-summary.html"><FONT CLASS="NavBarFont1"><B>Package</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#FFFFFF" CLASS="NavBarCell1Rev"> &nbsp;<FONT CLASS="NavBarFont1Rev"><B>Class</B></FONT>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="class-use/PAPX.html"><FONT CLASS="NavBarFont1"><B>Use</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="package-tree.html"><FONT CLASS="NavBarFont1"><B>Tree</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../deprecated-list.html"><FONT CLASS="NavBarFont1"><B>Deprecated</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../index-all.html"><FONT CLASS="NavBarFont1"><B>Index</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../help-doc.html"><FONT CLASS="NavBarFont1"><B>Help</B></FONT></A>&nbsp;</TD>
+  </TR>
+</TABLE>
+</TD>
+<TD ALIGN="right" VALIGN="top" ROWSPAN=3><EM>
+</EM>
+</TD>
+</TR>
+
+<TR>
+<TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
+&nbsp;<A HREF="../../../../../org/apache/poi/hwpf/model/PAPFormattedDiskPage.html" title="class in org.apache.poi.hwpf.model"><B>PREV CLASS</B></A>&nbsp;
+&nbsp;<A HREF="../../../../../org/apache/poi/hwpf/model/ParagraphHeight.html" title="class in org.apache.poi.hwpf.model"><B>NEXT CLASS</B></A></FONT></TD>
+<TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
+  <A HREF="../../../../../index.html?org/apache/poi/hwpf/model/PAPX.html" target="_top"><B>FRAMES</B></A>  &nbsp;
+&nbsp;<A HREF="PAPX.html" target="_top"><B>NO FRAMES</B></A>  &nbsp;
+&nbsp;<SCRIPT type="text/javascript">
+  <!--
+  if(window==top) {
+    document.writeln('<A HREF="../../../../../allclasses-noframe.html"><B>All Classes</B></A>');
+  }
+  //-->
+</SCRIPT>
+<NOSCRIPT>
+  <A HREF="../../../../../allclasses-noframe.html"><B>All Classes</B></A>
+</NOSCRIPT>
+
+
+</FONT></TD>
+</TR>
+<TR>
+<TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
+  SUMMARY:&nbsp;<A HREF="#nested_classes_inherited_from_class_org.apache.poi.hwpf.model.PropertyNode">NESTED</A>&nbsp;|&nbsp;<A HREF="#fields_inherited_from_class_org.apache.poi.hwpf.model.PropertyNode">FIELD</A>&nbsp;|&nbsp;<A HREF="#constructor_summary">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_summary">METHOD</A></FONT></TD>
+<TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
+DETAIL:&nbsp;FIELD&nbsp;|&nbsp;<A HREF="#constructor_detail">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_detail">METHOD</A></FONT></TD>
+</TR>
+</TABLE>
+<A NAME="skip-navbar_bottom"></A>
+<!-- ======== END OF BOTTOM NAVBAR ======= -->
+
+<HR>
+
+                <i>Copyright 2014 The Apache Software Foundation or
+        its licensors, as applicable.</i>
+            
+</BODY>
+</HTML>

@@ -1,0 +1,395 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!--NewPage-->
+<HTML>
+<HEAD>
+<TITLE>
+PicturesTable (POI API Documentation)
+</TITLE>
+
+<META NAME="keywords" CONTENT="org.apache.poi.hwpf.model.PicturesTable class">
+
+<LINK REL ="stylesheet" TYPE="text/css" HREF="../../../../../stylesheet.css" TITLE="Style">
+
+<SCRIPT type="text/javascript">
+function windowTitle()
+{
+    parent.document.title="PicturesTable (POI API Documentation)";
+}
+</SCRIPT>
+<NOSCRIPT>
+</NOSCRIPT>
+
+</HEAD>
+
+<BODY BGCOLOR="white" onload="windowTitle();">
+
+
+<!-- ========= START OF TOP NAVBAR ======= -->
+<A NAME="navbar_top"><!-- --></A>
+<A HREF="#skip-navbar_top" title="Skip navigation links"></A>
+<TABLE BORDER="0" WIDTH="100%" CELLPADDING="1" CELLSPACING="0" SUMMARY="">
+<TR>
+<TD COLSPAN=2 BGCOLOR="#EEEEFF" CLASS="NavBarCell1">
+<A NAME="navbar_top_firstrow"><!-- --></A>
+<TABLE BORDER="0" CELLPADDING="0" CELLSPACING="3" SUMMARY="">
+  <TR ALIGN="center" VALIGN="top">
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../overview-summary.html"><FONT CLASS="NavBarFont1"><B>Overview</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="package-summary.html"><FONT CLASS="NavBarFont1"><B>Package</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#FFFFFF" CLASS="NavBarCell1Rev"> &nbsp;<FONT CLASS="NavBarFont1Rev"><B>Class</B></FONT>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="class-use/PicturesTable.html"><FONT CLASS="NavBarFont1"><B>Use</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="package-tree.html"><FONT CLASS="NavBarFont1"><B>Tree</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../deprecated-list.html"><FONT CLASS="NavBarFont1"><B>Deprecated</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../index-all.html"><FONT CLASS="NavBarFont1"><B>Index</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../help-doc.html"><FONT CLASS="NavBarFont1"><B>Help</B></FONT></A>&nbsp;</TD>
+  </TR>
+</TABLE>
+</TD>
+<TD ALIGN="right" VALIGN="top" ROWSPAN=3><EM>
+</EM>
+</TD>
+</TR>
+
+<TR>
+<TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
+&nbsp;<A HREF="../../../../../org/apache/poi/hwpf/model/PICFAndOfficeArtData.html" title="class in org.apache.poi.hwpf.model"><B>PREV CLASS</B></A>&nbsp;
+&nbsp;<A HREF="../../../../../org/apache/poi/hwpf/model/PieceDescriptor.html" title="class in org.apache.poi.hwpf.model"><B>NEXT CLASS</B></A></FONT></TD>
+<TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
+  <A HREF="../../../../../index.html?org/apache/poi/hwpf/model/PicturesTable.html" target="_top"><B>FRAMES</B></A>  &nbsp;
+&nbsp;<A HREF="PicturesTable.html" target="_top"><B>NO FRAMES</B></A>  &nbsp;
+&nbsp;<SCRIPT type="text/javascript">
+  <!--
+  if(window==top) {
+    document.writeln('<A HREF="../../../../../allclasses-noframe.html"><B>All Classes</B></A>');
+  }
+  //-->
+</SCRIPT>
+<NOSCRIPT>
+  <A HREF="../../../../../allclasses-noframe.html"><B>All Classes</B></A>
+</NOSCRIPT>
+
+
+</FONT></TD>
+</TR>
+<TR>
+<TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
+  SUMMARY:&nbsp;NESTED&nbsp;|&nbsp;FIELD&nbsp;|&nbsp;<A HREF="#constructor_summary">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_summary">METHOD</A></FONT></TD>
+<TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
+DETAIL:&nbsp;FIELD&nbsp;|&nbsp;<A HREF="#constructor_detail">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_detail">METHOD</A></FONT></TD>
+</TR>
+</TABLE>
+<A NAME="skip-navbar_top"></A>
+<!-- ========= END OF TOP NAVBAR ========= -->
+
+<HR>
+<!-- ======== START OF CLASS DATA ======== -->
+<H2>
+<FONT SIZE="-1">
+org.apache.poi.hwpf.model</FONT>
+<BR>
+Class PicturesTable</H2>
+<PRE>
+java.lang.Object
+  <IMG SRC="../../../../../resources/inherit.gif" ALT="extended by "><B>org.apache.poi.hwpf.model.PicturesTable</B>
+</PRE>
+<HR>
+<DL>
+<DT><PRE><FONT SIZE="-1"><A HREF="../../../../../org/apache/poi/util/Internal.html" title="annotation in org.apache.poi.util">@Internal</A>
+</FONT>public final class <B>PicturesTable</B><DT>extends java.lang.Object</DL>
+</PRE>
+
+<P>
+Holds information about all pictures embedded in Word Document either via "Insert -> Picture -> From File" or via
+ clipboard. Responsible for images extraction and determining whether some document's piece contains embedded image.
+ Analyzes raw data bytestream 'Data' (where Word stores all embedded objects) provided by HWPFDocument.
+
+ Word stores images as is within so called "Data stream" - the stream within a Word docfile containing various data
+ that hang off of characters in the main stream. For example, binary data describing in-line pictures and/or
+ formfields an also embedded objects-native data. Word picture structures are concatenated one after the other in
+ the data stream if the document contains pictures.
+ Data stream is easily reachable via HWPFDocument._dataStream property.
+ A picture is represented in the document text stream as a special character, an Unicode  whose
+ CharacterRun.isSpecial() returns true. The file location of the picture in the Word binary file is accessed
+ via CharacterRun.getPicOffset(). The CharacterRun.getPicOffset() is a byte offset into the data stream.
+ Beginning at the position recorded in picOffset, a header data structure, will be stored.
+<P>
+
+<P>
+<DL>
+<DT><B>Author:</B></DT>
+  <DD>Dmitry Romanov</DD>
+</DL>
+<HR>
+
+<P>
+
+<!-- ======== CONSTRUCTOR SUMMARY ======== -->
+
+<A NAME="constructor_summary"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+<B>Constructor Summary</B></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/model/PicturesTable.html#PicturesTable(org.apache.poi.hwpf.HWPFDocument, byte[], byte[])">PicturesTable</A></B>(<A HREF="../../../../../org/apache/poi/hwpf/HWPFDocument.html" title="class in org.apache.poi.hwpf">HWPFDocument</A>&nbsp;_document,
+              byte[]&nbsp;_dataStream,
+              byte[]&nbsp;_mainStream)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/model/PicturesTable.html#PicturesTable(org.apache.poi.hwpf.HWPFDocument, byte[], byte[], org.apache.poi.hwpf.model.FSPATable, org.apache.poi.hwpf.model.EscherRecordHolder)">PicturesTable</A></B>(<A HREF="../../../../../org/apache/poi/hwpf/HWPFDocument.html" title="class in org.apache.poi.hwpf">HWPFDocument</A>&nbsp;_document,
+              byte[]&nbsp;_dataStream,
+              byte[]&nbsp;_mainStream,
+              <A HREF="../../../../../org/apache/poi/hwpf/model/FSPATable.html" title="class in org.apache.poi.hwpf.model">FSPATable</A>&nbsp;fspa,
+              <A HREF="../../../../../org/apache/poi/hwpf/model/EscherRecordHolder.html" title="class in org.apache.poi.hwpf.model">EscherRecordHolder</A>&nbsp;dgg)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;</TD>
+</TR>
+</TABLE>
+&nbsp;
+<!-- ========== METHOD SUMMARY =========== -->
+
+<A NAME="method_summary"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+<B>Method Summary</B></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../../../org/apache/poi/hwpf/usermodel/Picture.html" title="class in org.apache.poi.hwpf.usermodel">Picture</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/model/PicturesTable.html#extractPicture(org.apache.poi.hwpf.usermodel.CharacterRun, boolean)">extractPicture</A></B>(<A HREF="../../../../../org/apache/poi/hwpf/usermodel/CharacterRun.html" title="class in org.apache.poi.hwpf.usermodel">CharacterRun</A>&nbsp;run,
+               boolean&nbsp;fillBytes)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns picture object tied to specified CharacterRun</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;java.util.List&lt;<A HREF="../../../../../org/apache/poi/hwpf/usermodel/Picture.html" title="class in org.apache.poi.hwpf.usermodel">Picture</A>&gt;</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/model/PicturesTable.html#getAllPictures()">getAllPictures</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Not all documents have all the images concatenated in the data stream
+ although MS claims so.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/model/PicturesTable.html#hasEscherPicture(org.apache.poi.hwpf.usermodel.CharacterRun)">hasEscherPicture</A></B>(<A HREF="../../../../../org/apache/poi/hwpf/usermodel/CharacterRun.html" title="class in org.apache.poi.hwpf.usermodel">CharacterRun</A>&nbsp;run)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/model/PicturesTable.html#hasHorizontalLine(org.apache.poi.hwpf.usermodel.CharacterRun)">hasHorizontalLine</A></B>(<A HREF="../../../../../org/apache/poi/hwpf/usermodel/CharacterRun.html" title="class in org.apache.poi.hwpf.usermodel">CharacterRun</A>&nbsp;run)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;determines whether specified CharacterRun contains reference to a picture</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/model/PicturesTable.html#hasPicture(org.apache.poi.hwpf.usermodel.CharacterRun)">hasPicture</A></B>(<A HREF="../../../../../org/apache/poi/hwpf/usermodel/CharacterRun.html" title="class in org.apache.poi.hwpf.usermodel">CharacterRun</A>&nbsp;run)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;determines whether specified CharacterRun contains reference to a picture</TD>
+</TR>
+</TABLE>
+&nbsp;<A NAME="methods_inherited_from_class_java.lang.Object"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#EEEEFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left"><B>Methods inherited from class java.lang.Object</B></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE>clone, equals, finalize, getClass, hashCode, notify, notifyAll, toString, wait, wait, wait</CODE></TD>
+</TR>
+</TABLE>
+&nbsp;
+<P>
+
+<!-- ========= CONSTRUCTOR DETAIL ======== -->
+
+<A NAME="constructor_detail"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="1"><FONT SIZE="+2">
+<B>Constructor Detail</B></FONT></TH>
+</TR>
+</TABLE>
+
+<A NAME="PicturesTable(org.apache.poi.hwpf.HWPFDocument, byte[], byte[], org.apache.poi.hwpf.model.FSPATable, org.apache.poi.hwpf.model.EscherRecordHolder)"><!-- --></A><H3>
+PicturesTable</H3>
+<PRE>
+<FONT SIZE="-1">@Deprecated
+</FONT>public <B>PicturesTable</B>(<A HREF="../../../../../org/apache/poi/hwpf/HWPFDocument.html" title="class in org.apache.poi.hwpf">HWPFDocument</A>&nbsp;_document,
+                                byte[]&nbsp;_dataStream,
+                                byte[]&nbsp;_mainStream,
+                                <A HREF="../../../../../org/apache/poi/hwpf/model/FSPATable.html" title="class in org.apache.poi.hwpf.model">FSPATable</A>&nbsp;fspa,
+                                <A HREF="../../../../../org/apache/poi/hwpf/model/EscherRecordHolder.html" title="class in org.apache.poi.hwpf.model">EscherRecordHolder</A>&nbsp;dgg)</PRE>
+<DL>
+<DD><B>Deprecated.</B>&nbsp;
+<P>
+<DL>
+<DT><B>Parameters:</B><DD><CODE>_document</CODE> - <DD><CODE>_dataStream</CODE> - </DL>
+</DL>
+<HR>
+
+<A NAME="PicturesTable(org.apache.poi.hwpf.HWPFDocument, byte[], byte[])"><!-- --></A><H3>
+PicturesTable</H3>
+<PRE>
+public <B>PicturesTable</B>(<A HREF="../../../../../org/apache/poi/hwpf/HWPFDocument.html" title="class in org.apache.poi.hwpf">HWPFDocument</A>&nbsp;_document,
+                     byte[]&nbsp;_dataStream,
+                     byte[]&nbsp;_mainStream)</PRE>
+<DL>
+</DL>
+
+<!-- ============ METHOD DETAIL ========== -->
+
+<A NAME="method_detail"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="1"><FONT SIZE="+2">
+<B>Method Detail</B></FONT></TH>
+</TR>
+</TABLE>
+
+<A NAME="hasPicture(org.apache.poi.hwpf.usermodel.CharacterRun)"><!-- --></A><H3>
+hasPicture</H3>
+<PRE>
+public boolean <B>hasPicture</B>(<A HREF="../../../../../org/apache/poi/hwpf/usermodel/CharacterRun.html" title="class in org.apache.poi.hwpf.usermodel">CharacterRun</A>&nbsp;run)</PRE>
+<DL>
+<DD>determines whether specified CharacterRun contains reference to a picture
+<P>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>run</CODE> - </DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="hasEscherPicture(org.apache.poi.hwpf.usermodel.CharacterRun)"><!-- --></A><H3>
+hasEscherPicture</H3>
+<PRE>
+public boolean <B>hasEscherPicture</B>(<A HREF="../../../../../org/apache/poi/hwpf/usermodel/CharacterRun.html" title="class in org.apache.poi.hwpf.usermodel">CharacterRun</A>&nbsp;run)</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="hasHorizontalLine(org.apache.poi.hwpf.usermodel.CharacterRun)"><!-- --></A><H3>
+hasHorizontalLine</H3>
+<PRE>
+public boolean <B>hasHorizontalLine</B>(<A HREF="../../../../../org/apache/poi/hwpf/usermodel/CharacterRun.html" title="class in org.apache.poi.hwpf.usermodel">CharacterRun</A>&nbsp;run)</PRE>
+<DL>
+<DD>determines whether specified CharacterRun contains reference to a picture
+<P>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>run</CODE> - </DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="extractPicture(org.apache.poi.hwpf.usermodel.CharacterRun, boolean)"><!-- --></A><H3>
+extractPicture</H3>
+<PRE>
+public <A HREF="../../../../../org/apache/poi/hwpf/usermodel/Picture.html" title="class in org.apache.poi.hwpf.usermodel">Picture</A> <B>extractPicture</B>(<A HREF="../../../../../org/apache/poi/hwpf/usermodel/CharacterRun.html" title="class in org.apache.poi.hwpf.usermodel">CharacterRun</A>&nbsp;run,
+                              boolean&nbsp;fillBytes)</PRE>
+<DL>
+<DD>Returns picture object tied to specified CharacterRun
+<P>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>run</CODE> - <DD><CODE>fillBytes</CODE> - if true, Picture will be returned with filled byte array that represent picture's contents. If you don't want
+ to have that byte array in memory but only write picture's contents to stream, pass false and then use Picture.writeImageContent
+<DT><B>Returns:</B><DD>a Picture object if picture exists for specified CharacterRun, null otherwise. PicturesTable.hasPicture is used to determine this.<DT><B>See Also:</B><DD><A HREF="../../../../../org/apache/poi/hwpf/usermodel/Picture.html#writeImageContent(java.io.OutputStream)"><CODE>Picture.writeImageContent(java.io.OutputStream)</CODE></A>, 
+<A HREF="../../../../../org/apache/poi/hwpf/model/PicturesTable.html#hasPicture(org.apache.poi.hwpf.usermodel.CharacterRun)"><CODE>hasPicture(org.apache.poi.hwpf.usermodel.CharacterRun)</CODE></A></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getAllPictures()"><!-- --></A><H3>
+getAllPictures</H3>
+<PRE>
+public java.util.List&lt;<A HREF="../../../../../org/apache/poi/hwpf/usermodel/Picture.html" title="class in org.apache.poi.hwpf.usermodel">Picture</A>&gt; <B>getAllPictures</B>()</PRE>
+<DL>
+<DD>Not all documents have all the images concatenated in the data stream
+ although MS claims so. The best approach is to scan all character runs.
+<P>
+<DD><DL>
+
+<DT><B>Returns:</B><DD>a list of Picture objects found in current document</DL>
+</DD>
+</DL>
+<!-- ========= END OF CLASS DATA ========= -->
+<HR>
+
+
+<!-- ======= START OF BOTTOM NAVBAR ====== -->
+<A NAME="navbar_bottom"><!-- --></A>
+<A HREF="#skip-navbar_bottom" title="Skip navigation links"></A>
+<TABLE BORDER="0" WIDTH="100%" CELLPADDING="1" CELLSPACING="0" SUMMARY="">
+<TR>
+<TD COLSPAN=2 BGCOLOR="#EEEEFF" CLASS="NavBarCell1">
+<A NAME="navbar_bottom_firstrow"><!-- --></A>
+<TABLE BORDER="0" CELLPADDING="0" CELLSPACING="3" SUMMARY="">
+  <TR ALIGN="center" VALIGN="top">
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../overview-summary.html"><FONT CLASS="NavBarFont1"><B>Overview</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="package-summary.html"><FONT CLASS="NavBarFont1"><B>Package</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#FFFFFF" CLASS="NavBarCell1Rev"> &nbsp;<FONT CLASS="NavBarFont1Rev"><B>Class</B></FONT>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="class-use/PicturesTable.html"><FONT CLASS="NavBarFont1"><B>Use</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="package-tree.html"><FONT CLASS="NavBarFont1"><B>Tree</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../deprecated-list.html"><FONT CLASS="NavBarFont1"><B>Deprecated</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../index-all.html"><FONT CLASS="NavBarFont1"><B>Index</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../help-doc.html"><FONT CLASS="NavBarFont1"><B>Help</B></FONT></A>&nbsp;</TD>
+  </TR>
+</TABLE>
+</TD>
+<TD ALIGN="right" VALIGN="top" ROWSPAN=3><EM>
+</EM>
+</TD>
+</TR>
+
+<TR>
+<TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
+&nbsp;<A HREF="../../../../../org/apache/poi/hwpf/model/PICFAndOfficeArtData.html" title="class in org.apache.poi.hwpf.model"><B>PREV CLASS</B></A>&nbsp;
+&nbsp;<A HREF="../../../../../org/apache/poi/hwpf/model/PieceDescriptor.html" title="class in org.apache.poi.hwpf.model"><B>NEXT CLASS</B></A></FONT></TD>
+<TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
+  <A HREF="../../../../../index.html?org/apache/poi/hwpf/model/PicturesTable.html" target="_top"><B>FRAMES</B></A>  &nbsp;
+&nbsp;<A HREF="PicturesTable.html" target="_top"><B>NO FRAMES</B></A>  &nbsp;
+&nbsp;<SCRIPT type="text/javascript">
+  <!--
+  if(window==top) {
+    document.writeln('<A HREF="../../../../../allclasses-noframe.html"><B>All Classes</B></A>');
+  }
+  //-->
+</SCRIPT>
+<NOSCRIPT>
+  <A HREF="../../../../../allclasses-noframe.html"><B>All Classes</B></A>
+</NOSCRIPT>
+
+
+</FONT></TD>
+</TR>
+<TR>
+<TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
+  SUMMARY:&nbsp;NESTED&nbsp;|&nbsp;FIELD&nbsp;|&nbsp;<A HREF="#constructor_summary">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_summary">METHOD</A></FONT></TD>
+<TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
+DETAIL:&nbsp;FIELD&nbsp;|&nbsp;<A HREF="#constructor_detail">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_detail">METHOD</A></FONT></TD>
+</TR>
+</TABLE>
+<A NAME="skip-navbar_bottom"></A>
+<!-- ======== END OF BOTTOM NAVBAR ======= -->
+
+<HR>
+
+                <i>Copyright 2014 The Apache Software Foundation or
+        its licensors, as applicable.</i>
+            
+</BODY>
+</HTML>

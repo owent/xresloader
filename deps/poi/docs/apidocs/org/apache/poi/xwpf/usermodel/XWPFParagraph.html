@@ -1,0 +1,2254 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!--NewPage-->
+<HTML>
+<HEAD>
+<TITLE>
+XWPFParagraph (POI API Documentation)
+</TITLE>
+
+<META NAME="keywords" CONTENT="org.apache.poi.xwpf.usermodel.XWPFParagraph class">
+
+<LINK REL ="stylesheet" TYPE="text/css" HREF="../../../../../stylesheet.css" TITLE="Style">
+
+<SCRIPT type="text/javascript">
+function windowTitle()
+{
+    parent.document.title="XWPFParagraph (POI API Documentation)";
+}
+</SCRIPT>
+<NOSCRIPT>
+</NOSCRIPT>
+
+</HEAD>
+
+<BODY BGCOLOR="white" onload="windowTitle();">
+
+
+<!-- ========= START OF TOP NAVBAR ======= -->
+<A NAME="navbar_top"><!-- --></A>
+<A HREF="#skip-navbar_top" title="Skip navigation links"></A>
+<TABLE BORDER="0" WIDTH="100%" CELLPADDING="1" CELLSPACING="0" SUMMARY="">
+<TR>
+<TD COLSPAN=2 BGCOLOR="#EEEEFF" CLASS="NavBarCell1">
+<A NAME="navbar_top_firstrow"><!-- --></A>
+<TABLE BORDER="0" CELLPADDING="0" CELLSPACING="3" SUMMARY="">
+  <TR ALIGN="center" VALIGN="top">
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../overview-summary.html"><FONT CLASS="NavBarFont1"><B>Overview</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="package-summary.html"><FONT CLASS="NavBarFont1"><B>Package</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#FFFFFF" CLASS="NavBarCell1Rev"> &nbsp;<FONT CLASS="NavBarFont1Rev"><B>Class</B></FONT>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="class-use/XWPFParagraph.html"><FONT CLASS="NavBarFont1"><B>Use</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="package-tree.html"><FONT CLASS="NavBarFont1"><B>Tree</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../deprecated-list.html"><FONT CLASS="NavBarFont1"><B>Deprecated</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../index-all.html"><FONT CLASS="NavBarFont1"><B>Index</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../help-doc.html"><FONT CLASS="NavBarFont1"><B>Help</B></FONT></A>&nbsp;</TD>
+  </TR>
+</TABLE>
+</TD>
+<TD ALIGN="right" VALIGN="top" ROWSPAN=3><EM>
+</EM>
+</TD>
+</TR>
+
+<TR>
+<TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
+&nbsp;<A HREF="../../../../../org/apache/poi/xwpf/usermodel/XWPFNumbering.html" title="class in org.apache.poi.xwpf.usermodel"><B>PREV CLASS</B></A>&nbsp;
+&nbsp;<A HREF="../../../../../org/apache/poi/xwpf/usermodel/XWPFPicture.html" title="class in org.apache.poi.xwpf.usermodel"><B>NEXT CLASS</B></A></FONT></TD>
+<TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
+  <A HREF="../../../../../index.html?org/apache/poi/xwpf/usermodel/XWPFParagraph.html" target="_top"><B>FRAMES</B></A>  &nbsp;
+&nbsp;<A HREF="XWPFParagraph.html" target="_top"><B>NO FRAMES</B></A>  &nbsp;
+&nbsp;<SCRIPT type="text/javascript">
+  <!--
+  if(window==top) {
+    document.writeln('<A HREF="../../../../../allclasses-noframe.html"><B>All Classes</B></A>');
+  }
+  //-->
+</SCRIPT>
+<NOSCRIPT>
+  <A HREF="../../../../../allclasses-noframe.html"><B>All Classes</B></A>
+</NOSCRIPT>
+
+
+</FONT></TD>
+</TR>
+<TR>
+<TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
+  SUMMARY:&nbsp;NESTED&nbsp;|&nbsp;<A HREF="#field_summary">FIELD</A>&nbsp;|&nbsp;<A HREF="#constructor_summary">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_summary">METHOD</A></FONT></TD>
+<TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
+DETAIL:&nbsp;<A HREF="#field_detail">FIELD</A>&nbsp;|&nbsp;<A HREF="#constructor_detail">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_detail">METHOD</A></FONT></TD>
+</TR>
+</TABLE>
+<A NAME="skip-navbar_top"></A>
+<!-- ========= END OF TOP NAVBAR ========= -->
+
+<HR>
+<!-- ======== START OF CLASS DATA ======== -->
+<H2>
+<FONT SIZE="-1">
+org.apache.poi.xwpf.usermodel</FONT>
+<BR>
+Class XWPFParagraph</H2>
+<PRE>
+java.lang.Object
+  <IMG SRC="../../../../../resources/inherit.gif" ALT="extended by "><B>org.apache.poi.xwpf.usermodel.XWPFParagraph</B>
+</PRE>
+<DL>
+<DT><B>All Implemented Interfaces:</B> <DD><A HREF="../../../../../org/apache/poi/xwpf/usermodel/IBodyElement.html" title="interface in org.apache.poi.xwpf.usermodel">IBodyElement</A>, <A HREF="../../../../../org/apache/poi/xwpf/usermodel/IRunBody.html" title="interface in org.apache.poi.xwpf.usermodel">IRunBody</A>, <A HREF="../../../../../org/apache/poi/xwpf/usermodel/ISDTContents.html" title="interface in org.apache.poi.xwpf.usermodel">ISDTContents</A></DD>
+</DL>
+<HR>
+<DL>
+<DT><PRE>public class <B>XWPFParagraph</B><DT>extends java.lang.Object<DT>implements <A HREF="../../../../../org/apache/poi/xwpf/usermodel/IBodyElement.html" title="interface in org.apache.poi.xwpf.usermodel">IBodyElement</A>, <A HREF="../../../../../org/apache/poi/xwpf/usermodel/IRunBody.html" title="interface in org.apache.poi.xwpf.usermodel">IRunBody</A>, <A HREF="../../../../../org/apache/poi/xwpf/usermodel/ISDTContents.html" title="interface in org.apache.poi.xwpf.usermodel">ISDTContents</A></DL>
+</PRE>
+
+<P>
+<p>A Paragraph within a Document, Table, Header etc.</p> 
+ 
+ <p>A paragraph has a lot of styling information, but the
+  actual text (possibly along with more styling) is held on
+  the child <A HREF="../../../../../org/apache/poi/xwpf/usermodel/XWPFRun.html" title="class in org.apache.poi.xwpf.usermodel"><CODE>XWPFRun</CODE></A>s.</p>
+<P>
+
+<P>
+<HR>
+
+<P>
+<!-- =========== FIELD SUMMARY =========== -->
+
+<A NAME="field_summary"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+<B>Field Summary</B></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>protected &nbsp;<A HREF="../../../../../org/apache/poi/xwpf/usermodel/XWPFDocument.html" title="class in org.apache.poi.xwpf.usermodel">XWPFDocument</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xwpf/usermodel/XWPFParagraph.html#document">document</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;For access to the document's hyperlink, comments, tables etc</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>protected &nbsp;java.util.List&lt;<A HREF="../../../../../org/apache/poi/xwpf/usermodel/IRunElement.html" title="interface in org.apache.poi.xwpf.usermodel">IRunElement</A>&gt;</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xwpf/usermodel/XWPFParagraph.html#iruns">iruns</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>protected &nbsp;<A HREF="../../../../../org/apache/poi/xwpf/usermodel/IBody.html" title="interface in org.apache.poi.xwpf.usermodel">IBody</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xwpf/usermodel/XWPFParagraph.html#part">part</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>protected &nbsp;java.util.List&lt;<A HREF="../../../../../org/apache/poi/xwpf/usermodel/XWPFRun.html" title="class in org.apache.poi.xwpf.usermodel">XWPFRun</A>&gt;</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xwpf/usermodel/XWPFParagraph.html#runs">runs</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+</TABLE>
+&nbsp;
+<!-- ======== CONSTRUCTOR SUMMARY ======== -->
+
+<A NAME="constructor_summary"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+<B>Constructor Summary</B></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xwpf/usermodel/XWPFParagraph.html#XWPFParagraph(org.openxmlformats.schemas.wordprocessingml.x2006.main.CTP, org.apache.poi.xwpf.usermodel.IBody)">XWPFParagraph</A></B>(org.openxmlformats.schemas.wordprocessingml.x2006.main.CTP&nbsp;prgrph,
+              <A HREF="../../../../../org/apache/poi/xwpf/usermodel/IBody.html" title="interface in org.apache.poi.xwpf.usermodel">IBody</A>&nbsp;part)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+</TABLE>
+&nbsp;
+<!-- ========== METHOD SUMMARY =========== -->
+
+<A NAME="method_summary"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+<B>Method Summary</B></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>protected &nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xwpf/usermodel/XWPFParagraph.html#addRun(org.openxmlformats.schemas.wordprocessingml.x2006.main.CTR)">addRun</A></B>(org.openxmlformats.schemas.wordprocessingml.x2006.main.CTR&nbsp;run)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;add a new run at the end of the position of 
+ the content of parameter run</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xwpf/usermodel/XWPFParagraph.html#addRun(org.apache.poi.xwpf.usermodel.XWPFRun)">addRun</A></B>(<A HREF="../../../../../org/apache/poi/xwpf/usermodel/XWPFRun.html" title="class in org.apache.poi.xwpf.usermodel">XWPFRun</A>&nbsp;r)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;adds a new Run to the Paragraph</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../../../org/apache/poi/xwpf/usermodel/XWPFRun.html" title="class in org.apache.poi.xwpf.usermodel">XWPFRun</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xwpf/usermodel/XWPFParagraph.html#createRun()">createRun</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Appends a new run to this paragraph</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../../../org/apache/poi/xwpf/usermodel/ParagraphAlignment.html" title="enum in org.apache.poi.xwpf.usermodel">ParagraphAlignment</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xwpf/usermodel/XWPFParagraph.html#getAlignment()">getAlignment</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns the paragraph alignment which shall be applied to text in this
+ paragraph.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../../../org/apache/poi/xwpf/usermodel/IBody.html" title="interface in org.apache.poi.xwpf.usermodel">IBody</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xwpf/usermodel/XWPFParagraph.html#getBody()">getBody</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html" title="enum in org.apache.poi.xwpf.usermodel">Borders</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xwpf/usermodel/XWPFParagraph.html#getBorderBetween()">getBorderBetween</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Specifies the border which shall be displayed between each paragraph in a
+ set of paragraphs which have the same set of paragraph border settings.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html" title="enum in org.apache.poi.xwpf.usermodel">Borders</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xwpf/usermodel/XWPFParagraph.html#getBorderBottom()">getBorderBottom</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Specifies the border which shall be displayed below a set of
+ paragraphs which have the same set of paragraph border settings.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html" title="enum in org.apache.poi.xwpf.usermodel">Borders</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xwpf/usermodel/XWPFParagraph.html#getBorderLeft()">getBorderLeft</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Specifies the border which shall be displayed on the left side of the
+ page around the specified paragraph.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html" title="enum in org.apache.poi.xwpf.usermodel">Borders</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xwpf/usermodel/XWPFParagraph.html#getBorderRight()">getBorderRight</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Specifies the border which shall be displayed on the right side of the
+ page around the specified paragraph.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html" title="enum in org.apache.poi.xwpf.usermodel">Borders</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xwpf/usermodel/XWPFParagraph.html#getBorderTop()">getBorderTop</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Specifies the border which shall be displayed above a set of paragraphs
+ which have the same set of paragraph border settings.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;org.openxmlformats.schemas.wordprocessingml.x2006.main.CTP</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xwpf/usermodel/XWPFParagraph.html#getCTP()">getCTP</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../../../org/apache/poi/xwpf/usermodel/XWPFDocument.html" title="class in org.apache.poi.xwpf.usermodel">XWPFDocument</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xwpf/usermodel/XWPFParagraph.html#getDocument()">getDocument</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../../../org/apache/poi/xwpf/usermodel/BodyElementType.html" title="enum in org.apache.poi.xwpf.usermodel">BodyElementType</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xwpf/usermodel/XWPFParagraph.html#getElementType()">getElementType</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;returns the type of the BodyElement Paragraph</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;java.lang.String</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xwpf/usermodel/XWPFParagraph.html#getFootnoteText()">getFootnoteText</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns the footnote text of the paragraph</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;int</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xwpf/usermodel/XWPFParagraph.html#getIndentationFirstLine()">getIndentationFirstLine</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Specifies the additional indentation which shall be applied to the first
+ line of the parent paragraph.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;int</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xwpf/usermodel/XWPFParagraph.html#getIndentationHanging()">getIndentationHanging</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Specifies the indentation which shall be removed from the first line of
+ the parent paragraph, by moving the indentation on the first line back
+ towards the beginning of the direction of text flow.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;int</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xwpf/usermodel/XWPFParagraph.html#getIndentationLeft()">getIndentationLeft</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Specifies the indentation which shall be placed between the left text
+ margin for this paragraph and the left edge of that paragraph's content
+ in a left to right paragraph, and the right text margin and the right
+ edge of that paragraph's text in a right to left paragraph
+ <p/>
+ If this attribute is omitted, its value shall be assumed to be zero.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;int</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xwpf/usermodel/XWPFParagraph.html#getIndentationRight()">getIndentationRight</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Specifies the indentation which shall be placed between the right text
+ margin for this paragraph and the right edge of that paragraph's content
+ in a left to right paragraph, and the right text margin and the right
+ edge of that paragraph's text in a right to left paragraph
+ <p/>
+ If this attribute is omitted, its value shall be assumed to be zero.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;java.util.List&lt;<A HREF="../../../../../org/apache/poi/xwpf/usermodel/IRunElement.html" title="interface in org.apache.poi.xwpf.usermodel">IRunElement</A>&gt;</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xwpf/usermodel/XWPFParagraph.html#getIRuns()">getIRuns</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Return literal runs and sdt/content control objects.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;java.lang.String</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xwpf/usermodel/XWPFParagraph.html#getNumFmt()">getNumFmt</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns numbering format for this paragraph, eg bullet or
+  lowerLetter.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;java.math.BigInteger</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xwpf/usermodel/XWPFParagraph.html#getNumID()">getNumID</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;If style exist for this paragraph
+ NumId of the paragraph will be returned.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;java.math.BigInteger</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xwpf/usermodel/XWPFParagraph.html#getNumIlvl()">getNumIlvl</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns Ilvl of the numeric style for this paragraph.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;java.lang.String</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xwpf/usermodel/XWPFParagraph.html#getParagraphText()">getParagraphText</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns the text of the paragraph, but not of any objects in the
+ paragraph</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../../../org/apache/poi/POIXMLDocumentPart.html" title="class in org.apache.poi">POIXMLDocumentPart</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xwpf/usermodel/XWPFParagraph.html#getPart()">getPart</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;returns the part of the bodyElement</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../../../org/apache/poi/xwpf/usermodel/BodyType.html" title="enum in org.apache.poi.xwpf.usermodel">BodyType</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xwpf/usermodel/XWPFParagraph.html#getPartType()">getPartType</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;returns the partType of the bodyPart which owns the bodyElement</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;java.lang.String</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xwpf/usermodel/XWPFParagraph.html#getPictureText()">getPictureText</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns any text from any suitable pictures in the paragraph</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../../../org/apache/poi/xwpf/usermodel/XWPFRun.html" title="class in org.apache.poi.xwpf.usermodel">XWPFRun</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xwpf/usermodel/XWPFParagraph.html#getRun(org.openxmlformats.schemas.wordprocessingml.x2006.main.CTR)">getRun</A></B>(org.openxmlformats.schemas.wordprocessingml.x2006.main.CTR&nbsp;r)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return the XWPFRun-Element which owns the CTR run-Element</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;java.util.List&lt;<A HREF="../../../../../org/apache/poi/xwpf/usermodel/XWPFRun.html" title="class in org.apache.poi.xwpf.usermodel">XWPFRun</A>&gt;</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xwpf/usermodel/XWPFParagraph.html#getRuns()">getRuns</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;int</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xwpf/usermodel/XWPFParagraph.html#getSpacingAfter()">getSpacingAfter</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Specifies the spacing that should be added after the last line in this
+ paragraph in the document in absolute units.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;int</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xwpf/usermodel/XWPFParagraph.html#getSpacingAfterLines()">getSpacingAfterLines</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Specifies the spacing that should be added after the last line in this
+ paragraph in the document in absolute units.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;int</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xwpf/usermodel/XWPFParagraph.html#getSpacingBefore()">getSpacingBefore</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Specifies the spacing that should be added above the first line in this
+ paragraph in the document in absolute units.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;int</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xwpf/usermodel/XWPFParagraph.html#getSpacingBeforeLines()">getSpacingBeforeLines</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Specifies the spacing that should be added before the first line in this paragraph in the
+ document in line units.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../../../org/apache/poi/xwpf/usermodel/LineSpacingRule.html" title="enum in org.apache.poi.xwpf.usermodel">LineSpacingRule</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xwpf/usermodel/XWPFParagraph.html#getSpacingLineRule()">getSpacingLineRule</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Specifies how the spacing between lines is calculated as stored in the
+ line attribute.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;java.lang.String</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xwpf/usermodel/XWPFParagraph.html#getStyle()">getStyle</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;java.lang.String</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xwpf/usermodel/XWPFParagraph.html#getStyleID()">getStyleID</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Return styleID of the paragraph if style exist for this paragraph
+ if not, null will be returned</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;java.lang.String</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xwpf/usermodel/XWPFParagraph.html#getText()">getText</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Return the textual content of the paragraph, including text from pictures
+ and sdt elements in it.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;java.lang.String</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xwpf/usermodel/XWPFParagraph.html#getText(org.apache.poi.xwpf.usermodel.TextSegement)">getText</A></B>(<A HREF="../../../../../org/apache/poi/xwpf/usermodel/TextSegement.html" title="class in org.apache.poi.xwpf.usermodel">TextSegement</A>&nbsp;segment)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;get a Text</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../../../org/apache/poi/xwpf/usermodel/TextAlignment.html" title="enum in org.apache.poi.xwpf.usermodel">TextAlignment</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xwpf/usermodel/XWPFParagraph.html#getVerticalAlignment()">getVerticalAlignment</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns the text vertical alignment which shall be applied to text in
+ this paragraph.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../../../org/apache/poi/xwpf/usermodel/XWPFRun.html" title="class in org.apache.poi.xwpf.usermodel">XWPFRun</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xwpf/usermodel/XWPFParagraph.html#insertNewRun(int)">insertNewRun</A></B>(int&nbsp;pos)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;insert a new Run in RunArray</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xwpf/usermodel/XWPFParagraph.html#isEmpty()">isEmpty</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xwpf/usermodel/XWPFParagraph.html#isPageBreak()">isPageBreak</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Specifies that when rendering this document in a paginated
+ view, the contents of this paragraph are rendered on the start of a new
+ page in the document.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xwpf/usermodel/XWPFParagraph.html#isWordWrap()">isWordWrap</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;This element specifies whether a consumer shall break Latin text which
+ exceeds the text extents of a line by breaking the word across two lines
+ (breaking on the character level) or by moving the word to the following
+ line (breaking on the word level).</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xwpf/usermodel/XWPFParagraph.html#removeRun(int)">removeRun</A></B>(int&nbsp;pos)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;removes a Run at the position pos in the paragraph</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../../../org/apache/poi/xwpf/usermodel/TextSegement.html" title="class in org.apache.poi.xwpf.usermodel">TextSegement</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xwpf/usermodel/XWPFParagraph.html#searchText(java.lang.String, org.apache.poi.xwpf.usermodel.PositionInParagraph)">searchText</A></B>(java.lang.String&nbsp;searched,
+           <A HREF="../../../../../org/apache/poi/xwpf/usermodel/PositionInParagraph.html" title="class in org.apache.poi.xwpf.usermodel">PositionInParagraph</A>&nbsp;startPos)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;this methods parse the paragraph and search for the string searched.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xwpf/usermodel/XWPFParagraph.html#setAlignment(org.apache.poi.xwpf.usermodel.ParagraphAlignment)">setAlignment</A></B>(<A HREF="../../../../../org/apache/poi/xwpf/usermodel/ParagraphAlignment.html" title="enum in org.apache.poi.xwpf.usermodel">ParagraphAlignment</A>&nbsp;align)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Specifies the paragraph alignment which shall be applied to text in this
+ paragraph.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xwpf/usermodel/XWPFParagraph.html#setBorderBetween(org.apache.poi.xwpf.usermodel.Borders)">setBorderBetween</A></B>(<A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html" title="enum in org.apache.poi.xwpf.usermodel">Borders</A>&nbsp;border)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Specifies the border which shall be displayed between each paragraph in a
+ set of paragraphs which have the same set of paragraph border settings.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xwpf/usermodel/XWPFParagraph.html#setBorderBottom(org.apache.poi.xwpf.usermodel.Borders)">setBorderBottom</A></B>(<A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html" title="enum in org.apache.poi.xwpf.usermodel">Borders</A>&nbsp;border)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Specifies the border which shall be displayed below a set of paragraphs
+ which have the same set of paragraph border settings.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xwpf/usermodel/XWPFParagraph.html#setBorderLeft(org.apache.poi.xwpf.usermodel.Borders)">setBorderLeft</A></B>(<A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html" title="enum in org.apache.poi.xwpf.usermodel">Borders</A>&nbsp;border)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Specifies the border which shall be displayed on the left side of the
+ page around the specified paragraph.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xwpf/usermodel/XWPFParagraph.html#setBorderRight(org.apache.poi.xwpf.usermodel.Borders)">setBorderRight</A></B>(<A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html" title="enum in org.apache.poi.xwpf.usermodel">Borders</A>&nbsp;border)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Specifies the border which shall be displayed on the right side of the
+ page around the specified paragraph.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xwpf/usermodel/XWPFParagraph.html#setBorderTop(org.apache.poi.xwpf.usermodel.Borders)">setBorderTop</A></B>(<A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html" title="enum in org.apache.poi.xwpf.usermodel">Borders</A>&nbsp;border)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Specifies the border which shall be displayed above a set of paragraphs
+ which have the same set of paragraph border settings.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xwpf/usermodel/XWPFParagraph.html#setIndentationFirstLine(int)">setIndentationFirstLine</A></B>(int&nbsp;indentation)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Specifies the additional indentation which shall be applied to the first
+ line of the parent paragraph.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xwpf/usermodel/XWPFParagraph.html#setIndentationHanging(int)">setIndentationHanging</A></B>(int&nbsp;indentation)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Specifies the indentation which shall be removed from the first line of
+ the parent paragraph, by moving the indentation on the first line back
+ towards the beginning of the direction of text flow.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xwpf/usermodel/XWPFParagraph.html#setIndentationLeft(int)">setIndentationLeft</A></B>(int&nbsp;indentation)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Specifies the indentation which shall be placed between the left text
+ margin for this paragraph and the left edge of that paragraph's content
+ in a left to right paragraph, and the right text margin and the right
+ edge of that paragraph's text in a right to left paragraph
+ <p/>
+ If this attribute is omitted, its value shall be assumed to be zero.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xwpf/usermodel/XWPFParagraph.html#setIndentationRight(int)">setIndentationRight</A></B>(int&nbsp;indentation)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Specifies the indentation which shall be placed between the right text
+ margin for this paragraph and the right edge of that paragraph's content
+ in a left to right paragraph, and the right text margin and the right
+ edge of that paragraph's text in a right to left paragraph
+ <p/>
+ If this attribute is omitted, its value shall be assumed to be zero.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xwpf/usermodel/XWPFParagraph.html#setNumID(java.math.BigInteger)">setNumID</A></B>(java.math.BigInteger&nbsp;numPos)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;setNumID of Paragraph</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xwpf/usermodel/XWPFParagraph.html#setPageBreak(boolean)">setPageBreak</A></B>(boolean&nbsp;pageBreak)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Specifies that when rendering this document in a paginated
+ view, the contents of this paragraph are rendered on the start of a new
+ page in the document.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xwpf/usermodel/XWPFParagraph.html#setSpacingAfter(int)">setSpacingAfter</A></B>(int&nbsp;spaces)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Specifies the spacing that should be added after the last line in this
+ paragraph in the document in absolute units.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xwpf/usermodel/XWPFParagraph.html#setSpacingAfterLines(int)">setSpacingAfterLines</A></B>(int&nbsp;spaces)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Specifies the spacing that should be added after the last line in this
+ paragraph in the document in line units.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xwpf/usermodel/XWPFParagraph.html#setSpacingBefore(int)">setSpacingBefore</A></B>(int&nbsp;spaces)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Specifies the spacing that should be added above the first line in this
+ paragraph in the document in absolute units.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xwpf/usermodel/XWPFParagraph.html#setSpacingBeforeLines(int)">setSpacingBeforeLines</A></B>(int&nbsp;spaces)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Specifies the spacing that should be added before the first line in this
+ paragraph in the document in line units.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xwpf/usermodel/XWPFParagraph.html#setSpacingLineRule(org.apache.poi.xwpf.usermodel.LineSpacingRule)">setSpacingLineRule</A></B>(<A HREF="../../../../../org/apache/poi/xwpf/usermodel/LineSpacingRule.html" title="enum in org.apache.poi.xwpf.usermodel">LineSpacingRule</A>&nbsp;rule)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Specifies how the spacing between lines is calculated as stored in the
+ line attribute.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xwpf/usermodel/XWPFParagraph.html#setStyle(java.lang.String)">setStyle</A></B>(java.lang.String&nbsp;newStyle)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;This method provides a style to the paragraph
+ This is useful when, e.g.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xwpf/usermodel/XWPFParagraph.html#setVerticalAlignment(org.apache.poi.xwpf.usermodel.TextAlignment)">setVerticalAlignment</A></B>(<A HREF="../../../../../org/apache/poi/xwpf/usermodel/TextAlignment.html" title="enum in org.apache.poi.xwpf.usermodel">TextAlignment</A>&nbsp;valign)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Specifies the text vertical alignment which shall be applied to text in
+ this paragraph.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xwpf/usermodel/XWPFParagraph.html#setWordWrap(boolean)">setWordWrap</A></B>(boolean&nbsp;wrap)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;This element specifies whether a consumer shall break Latin text which
+ exceeds the text extents of a line by breaking the word across two lines
+ (breaking on the character level) or by moving the word to the following
+ line (breaking on the word level).</TD>
+</TR>
+</TABLE>
+&nbsp;<A NAME="methods_inherited_from_class_java.lang.Object"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#EEEEFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left"><B>Methods inherited from class java.lang.Object</B></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE>clone, equals, finalize, getClass, hashCode, notify, notifyAll, toString, wait, wait, wait</CODE></TD>
+</TR>
+</TABLE>
+&nbsp;
+<P>
+
+<!-- ============ FIELD DETAIL =========== -->
+
+<A NAME="field_detail"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="1"><FONT SIZE="+2">
+<B>Field Detail</B></FONT></TH>
+</TR>
+</TABLE>
+
+<A NAME="part"><!-- --></A><H3>
+part</H3>
+<PRE>
+protected <A HREF="../../../../../org/apache/poi/xwpf/usermodel/IBody.html" title="interface in org.apache.poi.xwpf.usermodel">IBody</A> <B>part</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="document"><!-- --></A><H3>
+document</H3>
+<PRE>
+protected <A HREF="../../../../../org/apache/poi/xwpf/usermodel/XWPFDocument.html" title="class in org.apache.poi.xwpf.usermodel">XWPFDocument</A> <B>document</B></PRE>
+<DL>
+<DD>For access to the document's hyperlink, comments, tables etc
+<P>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="runs"><!-- --></A><H3>
+runs</H3>
+<PRE>
+protected java.util.List&lt;<A HREF="../../../../../org/apache/poi/xwpf/usermodel/XWPFRun.html" title="class in org.apache.poi.xwpf.usermodel">XWPFRun</A>&gt; <B>runs</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="iruns"><!-- --></A><H3>
+iruns</H3>
+<PRE>
+protected java.util.List&lt;<A HREF="../../../../../org/apache/poi/xwpf/usermodel/IRunElement.html" title="interface in org.apache.poi.xwpf.usermodel">IRunElement</A>&gt; <B>iruns</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+
+<!-- ========= CONSTRUCTOR DETAIL ======== -->
+
+<A NAME="constructor_detail"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="1"><FONT SIZE="+2">
+<B>Constructor Detail</B></FONT></TH>
+</TR>
+</TABLE>
+
+<A NAME="XWPFParagraph(org.openxmlformats.schemas.wordprocessingml.x2006.main.CTP, org.apache.poi.xwpf.usermodel.IBody)"><!-- --></A><H3>
+XWPFParagraph</H3>
+<PRE>
+public <B>XWPFParagraph</B>(org.openxmlformats.schemas.wordprocessingml.x2006.main.CTP&nbsp;prgrph,
+                     <A HREF="../../../../../org/apache/poi/xwpf/usermodel/IBody.html" title="interface in org.apache.poi.xwpf.usermodel">IBody</A>&nbsp;part)</PRE>
+<DL>
+</DL>
+
+<!-- ============ METHOD DETAIL ========== -->
+
+<A NAME="method_detail"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="1"><FONT SIZE="+2">
+<B>Method Detail</B></FONT></TH>
+</TR>
+</TABLE>
+
+<A NAME="getCTP()"><!-- --></A><H3>
+getCTP</H3>
+<PRE>
+<FONT SIZE="-1"><A HREF="../../../../../org/apache/poi/util/Internal.html" title="annotation in org.apache.poi.util">@Internal</A>
+</FONT>public org.openxmlformats.schemas.wordprocessingml.x2006.main.CTP <B>getCTP</B>()</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getRuns()"><!-- --></A><H3>
+getRuns</H3>
+<PRE>
+public java.util.List&lt;<A HREF="../../../../../org/apache/poi/xwpf/usermodel/XWPFRun.html" title="class in org.apache.poi.xwpf.usermodel">XWPFRun</A>&gt; <B>getRuns</B>()</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getIRuns()"><!-- --></A><H3>
+getIRuns</H3>
+<PRE>
+public java.util.List&lt;<A HREF="../../../../../org/apache/poi/xwpf/usermodel/IRunElement.html" title="interface in org.apache.poi.xwpf.usermodel">IRunElement</A>&gt; <B>getIRuns</B>()</PRE>
+<DL>
+<DD>Return literal runs and sdt/content control objects.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+
+<DT><B>Returns:</B><DD>List<IRunElement></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="isEmpty()"><!-- --></A><H3>
+isEmpty</H3>
+<PRE>
+public boolean <B>isEmpty</B>()</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getDocument()"><!-- --></A><H3>
+getDocument</H3>
+<PRE>
+public <A HREF="../../../../../org/apache/poi/xwpf/usermodel/XWPFDocument.html" title="class in org.apache.poi.xwpf.usermodel">XWPFDocument</A> <B>getDocument</B>()</PRE>
+<DL>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../../../../org/apache/poi/xwpf/usermodel/IRunBody.html#getDocument()">getDocument</A></CODE> in interface <CODE><A HREF="../../../../../org/apache/poi/xwpf/usermodel/IRunBody.html" title="interface in org.apache.poi.xwpf.usermodel">IRunBody</A></CODE></DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getText()"><!-- --></A><H3>
+getText</H3>
+<PRE>
+public java.lang.String <B>getText</B>()</PRE>
+<DL>
+<DD>Return the textual content of the paragraph, including text from pictures
+ and sdt elements in it.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getStyleID()"><!-- --></A><H3>
+getStyleID</H3>
+<PRE>
+public java.lang.String <B>getStyleID</B>()</PRE>
+<DL>
+<DD>Return styleID of the paragraph if style exist for this paragraph
+ if not, null will be returned
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+
+<DT><B>Returns:</B><DD>styleID as String</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getNumID()"><!-- --></A><H3>
+getNumID</H3>
+<PRE>
+public java.math.BigInteger <B>getNumID</B>()</PRE>
+<DL>
+<DD>If style exist for this paragraph
+ NumId of the paragraph will be returned.
+ If style not exist null will be returned
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+
+<DT><B>Returns:</B><DD>NumID as BigInteger</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getNumIlvl()"><!-- --></A><H3>
+getNumIlvl</H3>
+<PRE>
+public java.math.BigInteger <B>getNumIlvl</B>()</PRE>
+<DL>
+<DD>Returns Ilvl of the numeric style for this paragraph.
+ Returns null if this paragraph does not have numeric style.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+
+<DT><B>Returns:</B><DD>Ilvl as BigInteger</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getNumFmt()"><!-- --></A><H3>
+getNumFmt</H3>
+<PRE>
+public java.lang.String <B>getNumFmt</B>()</PRE>
+<DL>
+<DD>Returns numbering format for this paragraph, eg bullet or
+  lowerLetter.
+ Returns null if this paragraph does not have numeric style.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setNumID(java.math.BigInteger)"><!-- --></A><H3>
+setNumID</H3>
+<PRE>
+public void <B>setNumID</B>(java.math.BigInteger&nbsp;numPos)</PRE>
+<DL>
+<DD>setNumID of Paragraph
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>numPos</CODE> - </DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getParagraphText()"><!-- --></A><H3>
+getParagraphText</H3>
+<PRE>
+public java.lang.String <B>getParagraphText</B>()</PRE>
+<DL>
+<DD>Returns the text of the paragraph, but not of any objects in the
+ paragraph
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getPictureText()"><!-- --></A><H3>
+getPictureText</H3>
+<PRE>
+public java.lang.String <B>getPictureText</B>()</PRE>
+<DL>
+<DD>Returns any text from any suitable pictures in the paragraph
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getFootnoteText()"><!-- --></A><H3>
+getFootnoteText</H3>
+<PRE>
+public java.lang.String <B>getFootnoteText</B>()</PRE>
+<DL>
+<DD>Returns the footnote text of the paragraph
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+
+<DT><B>Returns:</B><DD>the footnote text or empty string if the paragraph does not have footnotes</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="createRun()"><!-- --></A><H3>
+createRun</H3>
+<PRE>
+public <A HREF="../../../../../org/apache/poi/xwpf/usermodel/XWPFRun.html" title="class in org.apache.poi.xwpf.usermodel">XWPFRun</A> <B>createRun</B>()</PRE>
+<DL>
+<DD>Appends a new run to this paragraph
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+
+<DT><B>Returns:</B><DD>a new text run</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getAlignment()"><!-- --></A><H3>
+getAlignment</H3>
+<PRE>
+public <A HREF="../../../../../org/apache/poi/xwpf/usermodel/ParagraphAlignment.html" title="enum in org.apache.poi.xwpf.usermodel">ParagraphAlignment</A> <B>getAlignment</B>()</PRE>
+<DL>
+<DD>Returns the paragraph alignment which shall be applied to text in this
+ paragraph.
+ <p/>
+ <p/>
+ If this element is not set on a given paragraph, its value is determined
+ by the setting previously set at any level of the style hierarchy (i.e.
+ that previous setting remains unchanged). If this setting is never
+ specified in the style hierarchy, then no alignment is applied to the
+ paragraph.
+ </p>
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+
+<DT><B>Returns:</B><DD>the paragraph alignment of this paragraph.</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setAlignment(org.apache.poi.xwpf.usermodel.ParagraphAlignment)"><!-- --></A><H3>
+setAlignment</H3>
+<PRE>
+public void <B>setAlignment</B>(<A HREF="../../../../../org/apache/poi/xwpf/usermodel/ParagraphAlignment.html" title="enum in org.apache.poi.xwpf.usermodel">ParagraphAlignment</A>&nbsp;align)</PRE>
+<DL>
+<DD>Specifies the paragraph alignment which shall be applied to text in this
+ paragraph.
+ <p/>
+ <p/>
+ If this element is not set on a given paragraph, its value is determined
+ by the setting previously set at any level of the style hierarchy (i.e.
+ that previous setting remains unchanged). If this setting is never
+ specified in the style hierarchy, then no alignment is applied to the
+ paragraph.
+ </p>
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>align</CODE> - the paragraph alignment to apply to this paragraph.</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getVerticalAlignment()"><!-- --></A><H3>
+getVerticalAlignment</H3>
+<PRE>
+public <A HREF="../../../../../org/apache/poi/xwpf/usermodel/TextAlignment.html" title="enum in org.apache.poi.xwpf.usermodel">TextAlignment</A> <B>getVerticalAlignment</B>()</PRE>
+<DL>
+<DD>Returns the text vertical alignment which shall be applied to text in
+ this paragraph.
+ <p/>
+ If the line height (before any added spacing) is larger than one or more
+ characters on the line, all characters will be aligned to each other as
+ specified by this element.
+ </p>
+ <p/>
+ If this element is omitted on a given paragraph, its value is determined
+ by the setting previously set at any level of the style hierarchy (i.e.
+ that previous setting remains unchanged). If this setting is never
+ specified in the style hierarchy, then the vertical alignment of all
+ characters on the line shall be automatically determined by the consumer.
+ </p>
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+
+<DT><B>Returns:</B><DD>the vertical alignment of this paragraph.</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setVerticalAlignment(org.apache.poi.xwpf.usermodel.TextAlignment)"><!-- --></A><H3>
+setVerticalAlignment</H3>
+<PRE>
+public void <B>setVerticalAlignment</B>(<A HREF="../../../../../org/apache/poi/xwpf/usermodel/TextAlignment.html" title="enum in org.apache.poi.xwpf.usermodel">TextAlignment</A>&nbsp;valign)</PRE>
+<DL>
+<DD>Specifies the text vertical alignment which shall be applied to text in
+ this paragraph.
+ <p/>
+ If the line height (before any added spacing) is larger than one or more
+ characters on the line, all characters will be aligned to each other as
+ specified by this element.
+ </p>
+ <p/>
+ If this element is omitted on a given paragraph, its value is determined
+ by the setting previously set at any level of the style hierarchy (i.e.
+ that previous setting remains unchanged). If this setting is never
+ specified in the style hierarchy, then the vertical alignment of all
+ characters on the line shall be automatically determined by the consumer.
+ </p>
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>valign</CODE> - the paragraph vertical alignment to apply to this
+               paragraph.</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setBorderTop(org.apache.poi.xwpf.usermodel.Borders)"><!-- --></A><H3>
+setBorderTop</H3>
+<PRE>
+public void <B>setBorderTop</B>(<A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html" title="enum in org.apache.poi.xwpf.usermodel">Borders</A>&nbsp;border)</PRE>
+<DL>
+<DD>Specifies the border which shall be displayed above a set of paragraphs
+ which have the same set of paragraph border settings.
+ <p/>
+ <p/>
+ To determine if any two adjoining paragraphs shall have an individual top
+ and bottom border or a between border, the set of borders on the two
+ adjoining paragraphs are compared. If the border information on those two
+ paragraphs is identical for all possible paragraphs borders, then the
+ between border is displayed. Otherwise, the final paragraph shall use its
+ bottom border and the following paragraph shall use its top border,
+ respectively. If this border specifies a space attribute, that value
+ determines the space above the text (ignoring any spacing above) which
+ should be left before this border is drawn, specified in points.
+ </p>
+ <p/>
+ If this element is omitted on a given paragraph, its value is determined
+ by the setting previously set at any level of the style hierarchy (i.e.
+ that previous setting remains unchanged). If this setting is never
+ specified in the style hierarchy, then no between border shall be applied
+ above identical paragraphs.
+ </p>
+ <b>This border can only be a line border.</b>
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>border</CODE> - <DT><B>See Also:</B><DD><A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html" title="enum in org.apache.poi.xwpf.usermodel"><CODE>for a list of all types of borders</CODE></A></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getBorderTop()"><!-- --></A><H3>
+getBorderTop</H3>
+<PRE>
+public <A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html" title="enum in org.apache.poi.xwpf.usermodel">Borders</A> <B>getBorderTop</B>()</PRE>
+<DL>
+<DD>Specifies the border which shall be displayed above a set of paragraphs
+ which have the same set of paragraph border settings.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+
+<DT><B>Returns:</B><DD>paragraphBorder - the top border for the paragraph<DT><B>See Also:</B><DD><A HREF="../../../../../org/apache/poi/xwpf/usermodel/XWPFParagraph.html#setBorderTop(org.apache.poi.xwpf.usermodel.Borders)"><CODE>setBorderTop(Borders)</CODE></A>, 
+<A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html" title="enum in org.apache.poi.xwpf.usermodel"><CODE>a list of all types of borders</CODE></A></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setBorderBottom(org.apache.poi.xwpf.usermodel.Borders)"><!-- --></A><H3>
+setBorderBottom</H3>
+<PRE>
+public void <B>setBorderBottom</B>(<A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html" title="enum in org.apache.poi.xwpf.usermodel">Borders</A>&nbsp;border)</PRE>
+<DL>
+<DD>Specifies the border which shall be displayed below a set of paragraphs
+ which have the same set of paragraph border settings.
+ <p/>
+ To determine if any two adjoining paragraphs shall have an individual top
+ and bottom border or a between border, the set of borders on the two
+ adjoining paragraphs are compared. If the border information on those two
+ paragraphs is identical for all possible paragraphs borders, then the
+ between border is displayed. Otherwise, the final paragraph shall use its
+ bottom border and the following paragraph shall use its top border,
+ respectively. If this border specifies a space attribute, that value
+ determines the space after the bottom of the text (ignoring any space
+ below) which should be left before this border is drawn, specified in
+ points.
+ </p>
+ <p/>
+ If this element is omitted on a given paragraph, its value is determined
+ by the setting previously set at any level of the style hierarchy (i.e.
+ that previous setting remains unchanged). If this setting is never
+ specified in the style hierarchy, then no between border shall be applied
+ below identical paragraphs.
+ </p>
+ <b>This border can only be a line border.</b>
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>border</CODE> - <DT><B>See Also:</B><DD><A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html" title="enum in org.apache.poi.xwpf.usermodel"><CODE>a list of all types of borders</CODE></A></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getBorderBottom()"><!-- --></A><H3>
+getBorderBottom</H3>
+<PRE>
+public <A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html" title="enum in org.apache.poi.xwpf.usermodel">Borders</A> <B>getBorderBottom</B>()</PRE>
+<DL>
+<DD>Specifies the border which shall be displayed below a set of
+ paragraphs which have the same set of paragraph border settings.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+
+<DT><B>Returns:</B><DD>paragraphBorder - the bottom border for the paragraph<DT><B>See Also:</B><DD><A HREF="../../../../../org/apache/poi/xwpf/usermodel/XWPFParagraph.html#setBorderBottom(org.apache.poi.xwpf.usermodel.Borders)"><CODE>setBorderBottom(Borders)</CODE></A>, 
+<A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html" title="enum in org.apache.poi.xwpf.usermodel"><CODE>a list of all types of borders</CODE></A></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setBorderLeft(org.apache.poi.xwpf.usermodel.Borders)"><!-- --></A><H3>
+setBorderLeft</H3>
+<PRE>
+public void <B>setBorderLeft</B>(<A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html" title="enum in org.apache.poi.xwpf.usermodel">Borders</A>&nbsp;border)</PRE>
+<DL>
+<DD>Specifies the border which shall be displayed on the left side of the
+ page around the specified paragraph.
+ <p/>
+ To determine if any two adjoining paragraphs should have a left border
+ which spans the full line height or not, the left border shall be drawn
+ between the top border or between border at the top (whichever would be
+ rendered for the current paragraph), and the bottom border or between
+ border at the bottom (whichever would be rendered for the current
+ paragraph).
+ </p>
+ <p/>
+ If this element is omitted on a given paragraph, its value is determined
+ by the setting previously set at any level of the style hierarchy (i.e.
+ that previous setting remains unchanged). If this setting is never
+ specified in the style hierarchy, then no left border shall be applied.
+ </p>
+ <b>This border can only be a line border.</b>
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>border</CODE> - <DT><B>See Also:</B><DD><A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html" title="enum in org.apache.poi.xwpf.usermodel"><CODE>for a list of all possible borders</CODE></A></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getBorderLeft()"><!-- --></A><H3>
+getBorderLeft</H3>
+<PRE>
+public <A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html" title="enum in org.apache.poi.xwpf.usermodel">Borders</A> <B>getBorderLeft</B>()</PRE>
+<DL>
+<DD>Specifies the border which shall be displayed on the left side of the
+ page around the specified paragraph.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+
+<DT><B>Returns:</B><DD>ParagraphBorder - the left border for the paragraph<DT><B>See Also:</B><DD><A HREF="../../../../../org/apache/poi/xwpf/usermodel/XWPFParagraph.html#setBorderLeft(org.apache.poi.xwpf.usermodel.Borders)"><CODE>setBorderLeft(Borders)</CODE></A>, 
+<A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html" title="enum in org.apache.poi.xwpf.usermodel"><CODE>for a list of all possible borders</CODE></A></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setBorderRight(org.apache.poi.xwpf.usermodel.Borders)"><!-- --></A><H3>
+setBorderRight</H3>
+<PRE>
+public void <B>setBorderRight</B>(<A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html" title="enum in org.apache.poi.xwpf.usermodel">Borders</A>&nbsp;border)</PRE>
+<DL>
+<DD>Specifies the border which shall be displayed on the right side of the
+ page around the specified paragraph.
+ <p/>
+ To determine if any two adjoining paragraphs should have a right border
+ which spans the full line height or not, the right border shall be drawn
+ between the top border or between border at the top (whichever would be
+ rendered for the current paragraph), and the bottom border or between
+ border at the bottom (whichever would be rendered for the current
+ paragraph).
+ </p>
+ <p/>
+ If this element is omitted on a given paragraph, its value is determined
+ by the setting previously set at any level of the style hierarchy (i.e.
+ that previous setting remains unchanged). If this setting is never
+ specified in the style hierarchy, then no right border shall be applied.
+ </p>
+ <b>This border can only be a line border.</b>
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>border</CODE> - <DT><B>See Also:</B><DD><A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html" title="enum in org.apache.poi.xwpf.usermodel"><CODE>for a list of all possible borders</CODE></A></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getBorderRight()"><!-- --></A><H3>
+getBorderRight</H3>
+<PRE>
+public <A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html" title="enum in org.apache.poi.xwpf.usermodel">Borders</A> <B>getBorderRight</B>()</PRE>
+<DL>
+<DD>Specifies the border which shall be displayed on the right side of the
+ page around the specified paragraph.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+
+<DT><B>Returns:</B><DD>ParagraphBorder - the right border for the paragraph<DT><B>See Also:</B><DD><A HREF="../../../../../org/apache/poi/xwpf/usermodel/XWPFParagraph.html#setBorderRight(org.apache.poi.xwpf.usermodel.Borders)"><CODE>setBorderRight(Borders)</CODE></A>, 
+<A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html" title="enum in org.apache.poi.xwpf.usermodel"><CODE>for a list of all possible borders</CODE></A></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setBorderBetween(org.apache.poi.xwpf.usermodel.Borders)"><!-- --></A><H3>
+setBorderBetween</H3>
+<PRE>
+public void <B>setBorderBetween</B>(<A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html" title="enum in org.apache.poi.xwpf.usermodel">Borders</A>&nbsp;border)</PRE>
+<DL>
+<DD>Specifies the border which shall be displayed between each paragraph in a
+ set of paragraphs which have the same set of paragraph border settings.
+ <p/>
+ To determine if any two adjoining paragraphs should have a between border
+ or an individual top and bottom border, the set of borders on the two
+ adjoining paragraphs are compared. If the border information on those two
+ paragraphs is identical for all possible paragraphs borders, then the
+ between border is displayed. Otherwise, each paragraph shall use its
+ bottom and top border, respectively. If this border specifies a space
+ attribute, that value is ignored - this border is always located at the
+ bottom of each paragraph with an identical following paragraph, taking
+ into account any space after the line pitch.
+ </p>
+ <p/>
+ If this element is omitted on a given paragraph, its value is determined
+ by the setting previously set at any level of the style hierarchy (i.e.
+ that previous setting remains unchanged). If this setting is never
+ specified in the style hierarchy, then no between border shall be applied
+ between identical paragraphs.
+ </p>
+ <b>This border can only be a line border.</b>
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>border</CODE> - <DT><B>See Also:</B><DD><A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html" title="enum in org.apache.poi.xwpf.usermodel"><CODE>for a list of all possible borders</CODE></A></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getBorderBetween()"><!-- --></A><H3>
+getBorderBetween</H3>
+<PRE>
+public <A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html" title="enum in org.apache.poi.xwpf.usermodel">Borders</A> <B>getBorderBetween</B>()</PRE>
+<DL>
+<DD>Specifies the border which shall be displayed between each paragraph in a
+ set of paragraphs which have the same set of paragraph border settings.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+
+<DT><B>Returns:</B><DD>ParagraphBorder - the between border for the paragraph<DT><B>See Also:</B><DD><A HREF="../../../../../org/apache/poi/xwpf/usermodel/XWPFParagraph.html#setBorderBetween(org.apache.poi.xwpf.usermodel.Borders)"><CODE>setBorderBetween(Borders)</CODE></A>, 
+<A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html" title="enum in org.apache.poi.xwpf.usermodel"><CODE>for a list of all possible borders</CODE></A></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setPageBreak(boolean)"><!-- --></A><H3>
+setPageBreak</H3>
+<PRE>
+public void <B>setPageBreak</B>(boolean&nbsp;pageBreak)</PRE>
+<DL>
+<DD>Specifies that when rendering this document in a paginated
+ view, the contents of this paragraph are rendered on the start of a new
+ page in the document.
+ <p/>
+ If this element is omitted on a given paragraph,
+ its value is determined by the setting previously set at any level of the
+ style hierarchy (i.e. that previous setting remains unchanged). If this
+ setting is never specified in the style hierarchy, then this property
+ shall not be applied. Since the paragraph is specified to start on a new
+ page, it begins page two even though it could have fit on page one.
+ </p>
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>pageBreak</CODE> - -
+                  boolean value</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="isPageBreak()"><!-- --></A><H3>
+isPageBreak</H3>
+<PRE>
+public boolean <B>isPageBreak</B>()</PRE>
+<DL>
+<DD>Specifies that when rendering this document in a paginated
+ view, the contents of this paragraph are rendered on the start of a new
+ page in the document.
+ <p/>
+ If this element is omitted on a given paragraph,
+ its value is determined by the setting previously set at any level of the
+ style hierarchy (i.e. that previous setting remains unchanged). If this
+ setting is never specified in the style hierarchy, then this property
+ shall not be applied. Since the paragraph is specified to start on a new
+ page, it begins page two even though it could have fit on page one.
+ </p>
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+
+<DT><B>Returns:</B><DD>boolean - if page break is set</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setSpacingAfter(int)"><!-- --></A><H3>
+setSpacingAfter</H3>
+<PRE>
+public void <B>setSpacingAfter</B>(int&nbsp;spaces)</PRE>
+<DL>
+<DD>Specifies the spacing that should be added after the last line in this
+ paragraph in the document in absolute units.
+ <p/>
+ If the afterLines attribute or the afterAutoSpacing attribute is also
+ specified, then this attribute value is ignored.
+ </p>
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>spaces</CODE> - -
+               a positive whole number, whose contents consist of a
+               measurement in twentieths of a point.</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getSpacingAfter()"><!-- --></A><H3>
+getSpacingAfter</H3>
+<PRE>
+public int <B>getSpacingAfter</B>()</PRE>
+<DL>
+<DD>Specifies the spacing that should be added after the last line in this
+ paragraph in the document in absolute units.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+
+<DT><B>Returns:</B><DD>int - value representing the spacing after the paragraph</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setSpacingAfterLines(int)"><!-- --></A><H3>
+setSpacingAfterLines</H3>
+<PRE>
+public void <B>setSpacingAfterLines</B>(int&nbsp;spaces)</PRE>
+<DL>
+<DD>Specifies the spacing that should be added after the last line in this
+ paragraph in the document in line units.
+ <b>The value of this attribute is
+ specified in one hundredths of a line.
+ </b>
+ <p/>
+ If the afterAutoSpacing attribute
+ is also specified, then this attribute value is ignored. If this setting
+ is never specified in the style hierarchy, then its value shall be zero
+ (if needed)
+ </p>
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>spaces</CODE> - -
+               a positive whole number, whose contents consist of a
+               measurement in twentieths of a</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getSpacingAfterLines()"><!-- --></A><H3>
+getSpacingAfterLines</H3>
+<PRE>
+public int <B>getSpacingAfterLines</B>()</PRE>
+<DL>
+<DD>Specifies the spacing that should be added after the last line in this
+ paragraph in the document in absolute units.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+
+<DT><B>Returns:</B><DD>bigInteger - value representing the spacing after the paragraph<DT><B>See Also:</B><DD><A HREF="../../../../../org/apache/poi/xwpf/usermodel/XWPFParagraph.html#setSpacingAfterLines(int)"><CODE>setSpacingAfterLines(int)</CODE></A></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setSpacingBefore(int)"><!-- --></A><H3>
+setSpacingBefore</H3>
+<PRE>
+public void <B>setSpacingBefore</B>(int&nbsp;spaces)</PRE>
+<DL>
+<DD>Specifies the spacing that should be added above the first line in this
+ paragraph in the document in absolute units.
+ <p/>
+ If the beforeLines attribute or the beforeAutoSpacing attribute is also
+ specified, then this attribute value is ignored.
+ </p>
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>spaces</CODE> - </DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getSpacingBefore()"><!-- --></A><H3>
+getSpacingBefore</H3>
+<PRE>
+public int <B>getSpacingBefore</B>()</PRE>
+<DL>
+<DD>Specifies the spacing that should be added above the first line in this
+ paragraph in the document in absolute units.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+
+<DT><B>Returns:</B><DD>the spacing that should be added above the first line<DT><B>See Also:</B><DD><A HREF="../../../../../org/apache/poi/xwpf/usermodel/XWPFParagraph.html#setSpacingBefore(int)"><CODE>setSpacingBefore(int)</CODE></A></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setSpacingBeforeLines(int)"><!-- --></A><H3>
+setSpacingBeforeLines</H3>
+<PRE>
+public void <B>setSpacingBeforeLines</B>(int&nbsp;spaces)</PRE>
+<DL>
+<DD>Specifies the spacing that should be added before the first line in this
+ paragraph in the document in line units. <b> The value of this attribute
+ is specified in one hundredths of a line. </b>
+ <p/>
+ If the beforeAutoSpacing attribute is also specified, then this attribute
+ value is ignored. If this setting is never specified in the style
+ hierarchy, then its value shall be zero.
+ </p>
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>spaces</CODE> - </DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getSpacingBeforeLines()"><!-- --></A><H3>
+getSpacingBeforeLines</H3>
+<PRE>
+public int <B>getSpacingBeforeLines</B>()</PRE>
+<DL>
+<DD>Specifies the spacing that should be added before the first line in this paragraph in the
+ document in line units.
+ The value of this attribute is specified in one hundredths of a line.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+
+<DT><B>Returns:</B><DD>the spacing that should be added before the first line in this paragraph<DT><B>See Also:</B><DD><A HREF="../../../../../org/apache/poi/xwpf/usermodel/XWPFParagraph.html#setSpacingBeforeLines(int)"><CODE>setSpacingBeforeLines(int)</CODE></A></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setSpacingLineRule(org.apache.poi.xwpf.usermodel.LineSpacingRule)"><!-- --></A><H3>
+setSpacingLineRule</H3>
+<PRE>
+public void <B>setSpacingLineRule</B>(<A HREF="../../../../../org/apache/poi/xwpf/usermodel/LineSpacingRule.html" title="enum in org.apache.poi.xwpf.usermodel">LineSpacingRule</A>&nbsp;rule)</PRE>
+<DL>
+<DD>Specifies how the spacing between lines is calculated as stored in the
+ line attribute. If this attribute is omitted, then it shall be assumed to
+ be of a value auto if a line attribute value is present.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>rule</CODE> - <DT><B>See Also:</B><DD><A HREF="../../../../../org/apache/poi/xwpf/usermodel/LineSpacingRule.html" title="enum in org.apache.poi.xwpf.usermodel"><CODE>LineSpacingRule</CODE></A></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getSpacingLineRule()"><!-- --></A><H3>
+getSpacingLineRule</H3>
+<PRE>
+public <A HREF="../../../../../org/apache/poi/xwpf/usermodel/LineSpacingRule.html" title="enum in org.apache.poi.xwpf.usermodel">LineSpacingRule</A> <B>getSpacingLineRule</B>()</PRE>
+<DL>
+<DD>Specifies how the spacing between lines is calculated as stored in the
+ line attribute. If this attribute is omitted, then it shall be assumed to
+ be of a value auto if a line attribute value is present.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+
+<DT><B>Returns:</B><DD>rule<DT><B>See Also:</B><DD><A HREF="../../../../../org/apache/poi/xwpf/usermodel/LineSpacingRule.html" title="enum in org.apache.poi.xwpf.usermodel"><CODE>LineSpacingRule</CODE></A>, 
+<A HREF="../../../../../org/apache/poi/xwpf/usermodel/XWPFParagraph.html#setSpacingLineRule(org.apache.poi.xwpf.usermodel.LineSpacingRule)"><CODE>setSpacingLineRule(LineSpacingRule)</CODE></A></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setIndentationLeft(int)"><!-- --></A><H3>
+setIndentationLeft</H3>
+<PRE>
+public void <B>setIndentationLeft</B>(int&nbsp;indentation)</PRE>
+<DL>
+<DD>Specifies the indentation which shall be placed between the left text
+ margin for this paragraph and the left edge of that paragraph's content
+ in a left to right paragraph, and the right text margin and the right
+ edge of that paragraph's text in a right to left paragraph
+ <p/>
+ If this attribute is omitted, its value shall be assumed to be zero.
+ Negative values are defined such that the text is moved past the text margin,
+ positive values move the text inside the text margin.
+ </p>
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>indentation</CODE> - </DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getIndentationLeft()"><!-- --></A><H3>
+getIndentationLeft</H3>
+<PRE>
+public int <B>getIndentationLeft</B>()</PRE>
+<DL>
+<DD>Specifies the indentation which shall be placed between the left text
+ margin for this paragraph and the left edge of that paragraph's content
+ in a left to right paragraph, and the right text margin and the right
+ edge of that paragraph's text in a right to left paragraph
+ <p/>
+ If this attribute is omitted, its value shall be assumed to be zero.
+ Negative values are defined such that the text is moved past the text margin,
+ positive values move the text inside the text margin.
+ </p>
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+
+<DT><B>Returns:</B><DD>indentation or null if indentation is not set</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setIndentationRight(int)"><!-- --></A><H3>
+setIndentationRight</H3>
+<PRE>
+public void <B>setIndentationRight</B>(int&nbsp;indentation)</PRE>
+<DL>
+<DD>Specifies the indentation which shall be placed between the right text
+ margin for this paragraph and the right edge of that paragraph's content
+ in a left to right paragraph, and the right text margin and the right
+ edge of that paragraph's text in a right to left paragraph
+ <p/>
+ If this attribute is omitted, its value shall be assumed to be zero.
+ Negative values are defined such that the text is moved past the text margin,
+ positive values move the text inside the text margin.
+ </p>
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>indentation</CODE> - </DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getIndentationRight()"><!-- --></A><H3>
+getIndentationRight</H3>
+<PRE>
+public int <B>getIndentationRight</B>()</PRE>
+<DL>
+<DD>Specifies the indentation which shall be placed between the right text
+ margin for this paragraph and the right edge of that paragraph's content
+ in a left to right paragraph, and the right text margin and the right
+ edge of that paragraph's text in a right to left paragraph
+ <p/>
+ If this attribute is omitted, its value shall be assumed to be zero.
+ Negative values are defined such that the text is moved past the text margin,
+ positive values move the text inside the text margin.
+ </p>
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+
+<DT><B>Returns:</B><DD>indentation or null if indentation is not set</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setIndentationHanging(int)"><!-- --></A><H3>
+setIndentationHanging</H3>
+<PRE>
+public void <B>setIndentationHanging</B>(int&nbsp;indentation)</PRE>
+<DL>
+<DD>Specifies the indentation which shall be removed from the first line of
+ the parent paragraph, by moving the indentation on the first line back
+ towards the beginning of the direction of text flow.
+ This indentation is specified relative to the paragraph indentation which is specified for
+ all other lines in the parent paragraph.
+ <p/>
+ The firstLine and hanging attributes are mutually exclusive, if both are specified, then the
+ firstLine value is ignored.
+ </p>
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>indentation</CODE> - </DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getIndentationHanging()"><!-- --></A><H3>
+getIndentationHanging</H3>
+<PRE>
+public int <B>getIndentationHanging</B>()</PRE>
+<DL>
+<DD>Specifies the indentation which shall be removed from the first line of
+ the parent paragraph, by moving the indentation on the first line back
+ towards the beginning of the direction of text flow.
+ This indentation is
+ specified relative to the paragraph indentation which is specified for
+ all other lines in the parent paragraph.
+ The firstLine and hanging
+ attributes are mutually exclusive, if both are specified, then the
+ firstLine value is ignored.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+
+<DT><B>Returns:</B><DD>indentation or null if indentation is not set</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setIndentationFirstLine(int)"><!-- --></A><H3>
+setIndentationFirstLine</H3>
+<PRE>
+public void <B>setIndentationFirstLine</B>(int&nbsp;indentation)</PRE>
+<DL>
+<DD>Specifies the additional indentation which shall be applied to the first
+ line of the parent paragraph. This additional indentation is specified
+ relative to the paragraph indentation which is specified for all other
+ lines in the parent paragraph.
+ The firstLine and hanging attributes are
+ mutually exclusive, if both are specified, then the firstLine value is
+ ignored.
+ If the firstLineChars attribute is also specified, then this
+ value is ignored. If this attribute is omitted, then its value shall be
+ assumed to be zero (if needed).
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>indentation</CODE> - </DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getIndentationFirstLine()"><!-- --></A><H3>
+getIndentationFirstLine</H3>
+<PRE>
+public int <B>getIndentationFirstLine</B>()</PRE>
+<DL>
+<DD>Specifies the additional indentation which shall be applied to the first
+ line of the parent paragraph. This additional indentation is specified
+ relative to the paragraph indentation which is specified for all other
+ lines in the parent paragraph.
+ The firstLine and hanging attributes are
+ mutually exclusive, if both are specified, then the firstLine value is
+ ignored.
+ If the firstLineChars attribute is also specified, then this
+ value is ignored.
+ If this attribute is omitted, then its value shall be
+ assumed to be zero (if needed).
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+
+<DT><B>Returns:</B><DD>indentation or null if indentation is not set</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setWordWrap(boolean)"><!-- --></A><H3>
+setWordWrap</H3>
+<PRE>
+public void <B>setWordWrap</B>(boolean&nbsp;wrap)</PRE>
+<DL>
+<DD>This element specifies whether a consumer shall break Latin text which
+ exceeds the text extents of a line by breaking the word across two lines
+ (breaking on the character level) or by moving the word to the following
+ line (breaking on the word level).
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>wrap</CODE> - - boolean</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="isWordWrap()"><!-- --></A><H3>
+isWordWrap</H3>
+<PRE>
+public boolean <B>isWordWrap</B>()</PRE>
+<DL>
+<DD>This element specifies whether a consumer shall break Latin text which
+ exceeds the text extents of a line by breaking the word across two lines
+ (breaking on the character level) or by moving the word to the following
+ line (breaking on the word level).
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+
+<DT><B>Returns:</B><DD>boolean</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setStyle(java.lang.String)"><!-- --></A><H3>
+setStyle</H3>
+<PRE>
+public void <B>setStyle</B>(java.lang.String&nbsp;newStyle)</PRE>
+<DL>
+<DD>This method provides a style to the paragraph
+ This is useful when, e.g. an Heading style has to be assigned
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>newStyle</CODE> - </DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getStyle()"><!-- --></A><H3>
+getStyle</H3>
+<PRE>
+public java.lang.String <B>getStyle</B>()</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+
+<DT><B>Returns:</B><DD>the style of the paragraph</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="addRun(org.openxmlformats.schemas.wordprocessingml.x2006.main.CTR)"><!-- --></A><H3>
+addRun</H3>
+<PRE>
+protected void <B>addRun</B>(org.openxmlformats.schemas.wordprocessingml.x2006.main.CTR&nbsp;run)</PRE>
+<DL>
+<DD>add a new run at the end of the position of 
+ the content of parameter run
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>run</CODE> - </DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="searchText(java.lang.String, org.apache.poi.xwpf.usermodel.PositionInParagraph)"><!-- --></A><H3>
+searchText</H3>
+<PRE>
+public <A HREF="../../../../../org/apache/poi/xwpf/usermodel/TextSegement.html" title="class in org.apache.poi.xwpf.usermodel">TextSegement</A> <B>searchText</B>(java.lang.String&nbsp;searched,
+                               <A HREF="../../../../../org/apache/poi/xwpf/usermodel/PositionInParagraph.html" title="class in org.apache.poi.xwpf.usermodel">PositionInParagraph</A>&nbsp;startPos)</PRE>
+<DL>
+<DD>this methods parse the paragraph and search for the string searched.
+ If it finds the string, it will return true and the position of the String
+ will be saved in the parameter startPos.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>searched</CODE> - <DD><CODE>startPos</CODE> - </DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="insertNewRun(int)"><!-- --></A><H3>
+insertNewRun</H3>
+<PRE>
+public <A HREF="../../../../../org/apache/poi/xwpf/usermodel/XWPFRun.html" title="class in org.apache.poi.xwpf.usermodel">XWPFRun</A> <B>insertNewRun</B>(int&nbsp;pos)</PRE>
+<DL>
+<DD>insert a new Run in RunArray
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>pos</CODE> - 
+<DT><B>Returns:</B><DD>the inserted run</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getText(org.apache.poi.xwpf.usermodel.TextSegement)"><!-- --></A><H3>
+getText</H3>
+<PRE>
+public java.lang.String <B>getText</B>(<A HREF="../../../../../org/apache/poi/xwpf/usermodel/TextSegement.html" title="class in org.apache.poi.xwpf.usermodel">TextSegement</A>&nbsp;segment)</PRE>
+<DL>
+<DD>get a Text
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>segment</CODE> - </DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="removeRun(int)"><!-- --></A><H3>
+removeRun</H3>
+<PRE>
+public boolean <B>removeRun</B>(int&nbsp;pos)</PRE>
+<DL>
+<DD>removes a Run at the position pos in the paragraph
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>pos</CODE> - 
+<DT><B>Returns:</B><DD>true if the run was removed</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getElementType()"><!-- --></A><H3>
+getElementType</H3>
+<PRE>
+public <A HREF="../../../../../org/apache/poi/xwpf/usermodel/BodyElementType.html" title="enum in org.apache.poi.xwpf.usermodel">BodyElementType</A> <B>getElementType</B>()</PRE>
+<DL>
+<DD>returns the type of the BodyElement Paragraph
+<P>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../../../../org/apache/poi/xwpf/usermodel/IBodyElement.html#getElementType()">getElementType</A></CODE> in interface <CODE><A HREF="../../../../../org/apache/poi/xwpf/usermodel/IBodyElement.html" title="interface in org.apache.poi.xwpf.usermodel">IBodyElement</A></CODE></DL>
+</DD>
+<DD><DL>
+<DT><B>See Also:</B><DD><A HREF="../../../../../org/apache/poi/xwpf/usermodel/IBodyElement.html#getElementType()"><CODE>IBodyElement.getElementType()</CODE></A></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getBody()"><!-- --></A><H3>
+getBody</H3>
+<PRE>
+public <A HREF="../../../../../org/apache/poi/xwpf/usermodel/IBody.html" title="interface in org.apache.poi.xwpf.usermodel">IBody</A> <B>getBody</B>()</PRE>
+<DL>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../../../../org/apache/poi/xwpf/usermodel/IBodyElement.html#getBody()">getBody</A></CODE> in interface <CODE><A HREF="../../../../../org/apache/poi/xwpf/usermodel/IBodyElement.html" title="interface in org.apache.poi.xwpf.usermodel">IBodyElement</A></CODE></DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getPart()"><!-- --></A><H3>
+getPart</H3>
+<PRE>
+public <A HREF="../../../../../org/apache/poi/POIXMLDocumentPart.html" title="class in org.apache.poi">POIXMLDocumentPart</A> <B>getPart</B>()</PRE>
+<DL>
+<DD>returns the part of the bodyElement
+<P>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../../../../org/apache/poi/xwpf/usermodel/IBodyElement.html#getPart()">getPart</A></CODE> in interface <CODE><A HREF="../../../../../org/apache/poi/xwpf/usermodel/IBodyElement.html" title="interface in org.apache.poi.xwpf.usermodel">IBodyElement</A></CODE><DT><B>Specified by:</B><DD><CODE><A HREF="../../../../../org/apache/poi/xwpf/usermodel/IRunBody.html#getPart()">getPart</A></CODE> in interface <CODE><A HREF="../../../../../org/apache/poi/xwpf/usermodel/IRunBody.html" title="interface in org.apache.poi.xwpf.usermodel">IRunBody</A></CODE></DL>
+</DD>
+<DD><DL>
+<DT><B>See Also:</B><DD><A HREF="../../../../../org/apache/poi/xwpf/usermodel/IBody.html#getPart()"><CODE>IBody.getPart()</CODE></A></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getPartType()"><!-- --></A><H3>
+getPartType</H3>
+<PRE>
+public <A HREF="../../../../../org/apache/poi/xwpf/usermodel/BodyType.html" title="enum in org.apache.poi.xwpf.usermodel">BodyType</A> <B>getPartType</B>()</PRE>
+<DL>
+<DD>returns the partType of the bodyPart which owns the bodyElement
+<P>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../../../../org/apache/poi/xwpf/usermodel/IBodyElement.html#getPartType()">getPartType</A></CODE> in interface <CODE><A HREF="../../../../../org/apache/poi/xwpf/usermodel/IBodyElement.html" title="interface in org.apache.poi.xwpf.usermodel">IBodyElement</A></CODE></DL>
+</DD>
+<DD><DL>
+<DT><B>See Also:</B><DD><A HREF="../../../../../org/apache/poi/xwpf/usermodel/IBody.html#getPartType()"><CODE>IBody.getPartType()</CODE></A></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="addRun(org.apache.poi.xwpf.usermodel.XWPFRun)"><!-- --></A><H3>
+addRun</H3>
+<PRE>
+public void <B>addRun</B>(<A HREF="../../../../../org/apache/poi/xwpf/usermodel/XWPFRun.html" title="class in org.apache.poi.xwpf.usermodel">XWPFRun</A>&nbsp;r)</PRE>
+<DL>
+<DD>adds a new Run to the Paragraph
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>r</CODE> - </DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getRun(org.openxmlformats.schemas.wordprocessingml.x2006.main.CTR)"><!-- --></A><H3>
+getRun</H3>
+<PRE>
+public <A HREF="../../../../../org/apache/poi/xwpf/usermodel/XWPFRun.html" title="class in org.apache.poi.xwpf.usermodel">XWPFRun</A> <B>getRun</B>(org.openxmlformats.schemas.wordprocessingml.x2006.main.CTR&nbsp;r)</PRE>
+<DL>
+<DD>return the XWPFRun-Element which owns the CTR run-Element
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>r</CODE> - </DL>
+</DD>
+</DL>
+<!-- ========= END OF CLASS DATA ========= -->
+<HR>
+
+
+<!-- ======= START OF BOTTOM NAVBAR ====== -->
+<A NAME="navbar_bottom"><!-- --></A>
+<A HREF="#skip-navbar_bottom" title="Skip navigation links"></A>
+<TABLE BORDER="0" WIDTH="100%" CELLPADDING="1" CELLSPACING="0" SUMMARY="">
+<TR>
+<TD COLSPAN=2 BGCOLOR="#EEEEFF" CLASS="NavBarCell1">
+<A NAME="navbar_bottom_firstrow"><!-- --></A>
+<TABLE BORDER="0" CELLPADDING="0" CELLSPACING="3" SUMMARY="">
+  <TR ALIGN="center" VALIGN="top">
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../overview-summary.html"><FONT CLASS="NavBarFont1"><B>Overview</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="package-summary.html"><FONT CLASS="NavBarFont1"><B>Package</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#FFFFFF" CLASS="NavBarCell1Rev"> &nbsp;<FONT CLASS="NavBarFont1Rev"><B>Class</B></FONT>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="class-use/XWPFParagraph.html"><FONT CLASS="NavBarFont1"><B>Use</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="package-tree.html"><FONT CLASS="NavBarFont1"><B>Tree</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../deprecated-list.html"><FONT CLASS="NavBarFont1"><B>Deprecated</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../index-all.html"><FONT CLASS="NavBarFont1"><B>Index</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../help-doc.html"><FONT CLASS="NavBarFont1"><B>Help</B></FONT></A>&nbsp;</TD>
+  </TR>
+</TABLE>
+</TD>
+<TD ALIGN="right" VALIGN="top" ROWSPAN=3><EM>
+</EM>
+</TD>
+</TR>
+
+<TR>
+<TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
+&nbsp;<A HREF="../../../../../org/apache/poi/xwpf/usermodel/XWPFNumbering.html" title="class in org.apache.poi.xwpf.usermodel"><B>PREV CLASS</B></A>&nbsp;
+&nbsp;<A HREF="../../../../../org/apache/poi/xwpf/usermodel/XWPFPicture.html" title="class in org.apache.poi.xwpf.usermodel"><B>NEXT CLASS</B></A></FONT></TD>
+<TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
+  <A HREF="../../../../../index.html?org/apache/poi/xwpf/usermodel/XWPFParagraph.html" target="_top"><B>FRAMES</B></A>  &nbsp;
+&nbsp;<A HREF="XWPFParagraph.html" target="_top"><B>NO FRAMES</B></A>  &nbsp;
+&nbsp;<SCRIPT type="text/javascript">
+  <!--
+  if(window==top) {
+    document.writeln('<A HREF="../../../../../allclasses-noframe.html"><B>All Classes</B></A>');
+  }
+  //-->
+</SCRIPT>
+<NOSCRIPT>
+  <A HREF="../../../../../allclasses-noframe.html"><B>All Classes</B></A>
+</NOSCRIPT>
+
+
+</FONT></TD>
+</TR>
+<TR>
+<TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
+  SUMMARY:&nbsp;NESTED&nbsp;|&nbsp;<A HREF="#field_summary">FIELD</A>&nbsp;|&nbsp;<A HREF="#constructor_summary">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_summary">METHOD</A></FONT></TD>
+<TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
+DETAIL:&nbsp;<A HREF="#field_detail">FIELD</A>&nbsp;|&nbsp;<A HREF="#constructor_detail">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_detail">METHOD</A></FONT></TD>
+</TR>
+</TABLE>
+<A NAME="skip-navbar_bottom"></A>
+<!-- ======== END OF BOTTOM NAVBAR ======= -->
+
+<HR>
+
+                <i>Copyright 2014 The Apache Software Foundation or
+        its licensors, as applicable.</i>
+            
+</BODY>
+</HTML>

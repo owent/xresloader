@@ -1,0 +1,1724 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!--NewPage-->
+<HTML>
+<HEAD>
+<TITLE>
+StdfBaseAbstractType (POI API Documentation)
+</TITLE>
+
+<META NAME="keywords" CONTENT="org.apache.poi.hwpf.model.types.StdfBaseAbstractType class">
+
+<LINK REL ="stylesheet" TYPE="text/css" HREF="../../../../../../stylesheet.css" TITLE="Style">
+
+<SCRIPT type="text/javascript">
+function windowTitle()
+{
+    parent.document.title="StdfBaseAbstractType (POI API Documentation)";
+}
+</SCRIPT>
+<NOSCRIPT>
+</NOSCRIPT>
+
+</HEAD>
+
+<BODY BGCOLOR="white" onload="windowTitle();">
+
+
+<!-- ========= START OF TOP NAVBAR ======= -->
+<A NAME="navbar_top"><!-- --></A>
+<A HREF="#skip-navbar_top" title="Skip navigation links"></A>
+<TABLE BORDER="0" WIDTH="100%" CELLPADDING="1" CELLSPACING="0" SUMMARY="">
+<TR>
+<TD COLSPAN=2 BGCOLOR="#EEEEFF" CLASS="NavBarCell1">
+<A NAME="navbar_top_firstrow"><!-- --></A>
+<TABLE BORDER="0" CELLPADDING="0" CELLSPACING="3" SUMMARY="">
+  <TR ALIGN="center" VALIGN="top">
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../../overview-summary.html"><FONT CLASS="NavBarFont1"><B>Overview</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="package-summary.html"><FONT CLASS="NavBarFont1"><B>Package</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#FFFFFF" CLASS="NavBarCell1Rev"> &nbsp;<FONT CLASS="NavBarFont1Rev"><B>Class</B></FONT>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="class-use/StdfBaseAbstractType.html"><FONT CLASS="NavBarFont1"><B>Use</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="package-tree.html"><FONT CLASS="NavBarFont1"><B>Tree</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../../deprecated-list.html"><FONT CLASS="NavBarFont1"><B>Deprecated</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../../index-all.html"><FONT CLASS="NavBarFont1"><B>Index</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../../help-doc.html"><FONT CLASS="NavBarFont1"><B>Help</B></FONT></A>&nbsp;</TD>
+  </TR>
+</TABLE>
+</TD>
+<TD ALIGN="right" VALIGN="top" ROWSPAN=3><EM>
+</EM>
+</TD>
+</TR>
+
+<TR>
+<TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
+&nbsp;<A HREF="../../../../../../org/apache/poi/hwpf/model/types/SHDAbstractType.html" title="class in org.apache.poi.hwpf.model.types"><B>PREV CLASS</B></A>&nbsp;
+&nbsp;<A HREF="../../../../../../org/apache/poi/hwpf/model/types/StdfPost2000AbstractType.html" title="class in org.apache.poi.hwpf.model.types"><B>NEXT CLASS</B></A></FONT></TD>
+<TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
+  <A HREF="../../../../../../index.html?org/apache/poi/hwpf/model/types/StdfBaseAbstractType.html" target="_top"><B>FRAMES</B></A>  &nbsp;
+&nbsp;<A HREF="StdfBaseAbstractType.html" target="_top"><B>NO FRAMES</B></A>  &nbsp;
+&nbsp;<SCRIPT type="text/javascript">
+  <!--
+  if(window==top) {
+    document.writeln('<A HREF="../../../../../../allclasses-noframe.html"><B>All Classes</B></A>');
+  }
+  //-->
+</SCRIPT>
+<NOSCRIPT>
+  <A HREF="../../../../../../allclasses-noframe.html"><B>All Classes</B></A>
+</NOSCRIPT>
+
+
+</FONT></TD>
+</TR>
+<TR>
+<TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
+  SUMMARY:&nbsp;NESTED&nbsp;|&nbsp;<A HREF="#field_summary">FIELD</A>&nbsp;|&nbsp;<A HREF="#constructor_summary">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_summary">METHOD</A></FONT></TD>
+<TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
+DETAIL:&nbsp;<A HREF="#field_detail">FIELD</A>&nbsp;|&nbsp;<A HREF="#constructor_detail">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_detail">METHOD</A></FONT></TD>
+</TR>
+</TABLE>
+<A NAME="skip-navbar_top"></A>
+<!-- ========= END OF TOP NAVBAR ========= -->
+
+<HR>
+<!-- ======== START OF CLASS DATA ======== -->
+<H2>
+<FONT SIZE="-1">
+org.apache.poi.hwpf.model.types</FONT>
+<BR>
+Class StdfBaseAbstractType</H2>
+<PRE>
+java.lang.Object
+  <IMG SRC="../../../../../../resources/inherit.gif" ALT="extended by "><B>org.apache.poi.hwpf.model.types.StdfBaseAbstractType</B>
+</PRE>
+<HR>
+<DL>
+<DT><PRE><FONT SIZE="-1"><A HREF="../../../../../../org/apache/poi/util/Internal.html" title="annotation in org.apache.poi.util">@Internal</A>
+</FONT>public abstract class <B>StdfBaseAbstractType</B><DT>extends java.lang.Object</DL>
+</PRE>
+
+<P>
+The StdfBase structure specifies general information about a style. <p>Class
+        and fields descriptions are quoted from Microsoft Office Word 97-2007 Binary File Format and
+        [MS-DOC] - v20110608 Word (.doc) Binary File Format
+
+ <p>
+ NOTE: This source is automatically generated please do not modify this file.  Either subclass or
+       remove the record in src/types/definitions.
+ <p>
+ This class is internal. It content or properties may change without notice 
+ due to changes in our knowledge of internal Microsoft Word binary structures.
+<P>
+
+<P>
+<DL>
+<DT><B>Author:</B></DT>
+  <DD>Sergey Vladimirov; according to Microsoft Office Word 97-2007 Binary File Format
+        Specification [*.doc] and [MS-DOC] - v20110608 Word (.doc) Binary File Format</DD>
+</DL>
+<HR>
+
+<P>
+<!-- =========== FIELD SUMMARY =========== -->
+
+<A NAME="field_summary"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+<B>Field Summary</B></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>protected &nbsp;short</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../org/apache/poi/hwpf/model/types/StdfBaseAbstractType.html#field_1_info1">field_1_info1</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>protected &nbsp;short</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../org/apache/poi/hwpf/model/types/StdfBaseAbstractType.html#field_2_info2">field_2_info2</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>protected &nbsp;short</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../org/apache/poi/hwpf/model/types/StdfBaseAbstractType.html#field_3_info3">field_3_info3</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>protected &nbsp;int</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../org/apache/poi/hwpf/model/types/StdfBaseAbstractType.html#field_4_bchUpe">field_4_bchUpe</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>protected &nbsp;short</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../org/apache/poi/hwpf/model/types/StdfBaseAbstractType.html#field_5_grfstd">field_5_grfstd</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+</TABLE>
+&nbsp;
+<!-- ======== CONSTRUCTOR SUMMARY ======== -->
+
+<A NAME="constructor_summary"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+<B>Constructor Summary</B></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>protected </CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../org/apache/poi/hwpf/model/types/StdfBaseAbstractType.html#StdfBaseAbstractType()">StdfBaseAbstractType</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+</TABLE>
+&nbsp;
+<!-- ========== METHOD SUMMARY =========== -->
+
+<A NAME="method_summary"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+<B>Method Summary</B></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>protected &nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../org/apache/poi/hwpf/model/types/StdfBaseAbstractType.html#fillFields(byte[], int)">fillFields</A></B>(byte[]&nbsp;data,
+           int&nbsp;offset)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;int</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../org/apache/poi/hwpf/model/types/StdfBaseAbstractType.html#getBchUpe()">getBchUpe</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;An unsigned integer that specifies the size, in bytes, of std in LPStd.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;byte</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../org/apache/poi/hwpf/model/types/StdfBaseAbstractType.html#getCupx()">getCupx</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;number of UPXs (and UPEs)</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;byte</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../org/apache/poi/hwpf/model/types/StdfBaseAbstractType.html#getFReserved()">getFReserved</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;This value MUST be 0 and MUST be ignored</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;short</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../org/apache/poi/hwpf/model/types/StdfBaseAbstractType.html#getGrfstd()">getGrfstd</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A GRFSTD that specifies miscellaneous style properties.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;short</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../org/apache/poi/hwpf/model/types/StdfBaseAbstractType.html#getInfo1()">getInfo1</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Get the info1 field for the StdfBase record.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;short</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../org/apache/poi/hwpf/model/types/StdfBaseAbstractType.html#getInfo2()">getInfo2</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Get the info2 field for the StdfBase record.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;short</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../org/apache/poi/hwpf/model/types/StdfBaseAbstractType.html#getInfo3()">getInfo3</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Get the info3 field for the StdfBase record.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;short</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../org/apache/poi/hwpf/model/types/StdfBaseAbstractType.html#getIstdBase()">getIstdBase</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;base style</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;short</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../org/apache/poi/hwpf/model/types/StdfBaseAbstractType.html#getIstdNext()">getIstdNext</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;next style</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;int</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../org/apache/poi/hwpf/model/types/StdfBaseAbstractType.html#getSize()">getSize</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Size of record</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;short</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../org/apache/poi/hwpf/model/types/StdfBaseAbstractType.html#getSti()">getSti</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;An unsigned integer that specifies the invariant style identifier for application-defined styles, or 0x0FFE for user-defined styles</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;byte</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../org/apache/poi/hwpf/model/types/StdfBaseAbstractType.html#getStk()">getStk</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;style kind</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../org/apache/poi/hwpf/model/types/StdfBaseAbstractType.html#isF97LidsSet()">isF97LidsSet</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Specifies whether sprmCRgLid0_80 and sprmCRgLid1_80 were applied, as appropriate, to this paragraph or character style for compatibility with applications that do not support sprmCRgLid0, sprmCRgLid1, and sprmCFNoProof</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../org/apache/poi/hwpf/model/types/StdfBaseAbstractType.html#isFAutoRedef()">isFAutoRedef</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;number of UPXs (and UPEs)</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../org/apache/poi/hwpf/model/types/StdfBaseAbstractType.html#isFCopyLang()">isFCopyLang</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;If f97LidsSet is 1, this value specifies whether the applied compatibility sprmCRgLid0_80 or sprmCRgLid1_80 specified an actual language or a special LID value (0x0400) signifying that no proofing is needed for the text.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../org/apache/poi/hwpf/model/types/StdfBaseAbstractType.html#isFHasUpe()">isFHasUpe</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;This bit is undefined and MUST be ignored</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../org/apache/poi/hwpf/model/types/StdfBaseAbstractType.html#isFHidden()">isFHidden</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Specifies whether this style is not shown in the application UI</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../org/apache/poi/hwpf/model/types/StdfBaseAbstractType.html#isFInternalUse()">isFInternalUse</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;This bit is undefined and MUST be ignored</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../org/apache/poi/hwpf/model/types/StdfBaseAbstractType.html#isFInvalHeight()">isFInvalHeight</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Specifies whether the paragraph height information in the fcPlcfPhe field of FibRgFcLcb97, for any paragraphs having this paragraph style, MUST be ignored.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../org/apache/poi/hwpf/model/types/StdfBaseAbstractType.html#isFLocked()">isFLocked</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Specifies whether this style is prevented from being applied by using the application UI</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../org/apache/poi/hwpf/model/types/StdfBaseAbstractType.html#isFMassCopy()">isFMassCopy</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;This bit is undefined and MUST be ignored</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../org/apache/poi/hwpf/model/types/StdfBaseAbstractType.html#isFNoHtmlExport()">isFNoHtmlExport</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;This value MUST be 0 and MUST be ignored</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../org/apache/poi/hwpf/model/types/StdfBaseAbstractType.html#isFPersonal()">isFPersonal</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Specifies whether this character style was applied to format all message text from one or more users in an e-mail</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../org/apache/poi/hwpf/model/types/StdfBaseAbstractType.html#isFPersonalCompose()">isFPersonalCompose</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Specifies whether this character style can be used to automatically format the new message text in a new e-mail</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../org/apache/poi/hwpf/model/types/StdfBaseAbstractType.html#isFPersonalReply()">isFPersonalReply</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Specifies whether this character style can be used to automatically format the new message text when replying to an e-mail</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../org/apache/poi/hwpf/model/types/StdfBaseAbstractType.html#isFQFormat()">isFQFormat</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Specifies whether this style is shown in the Ribbon Style gallery</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../org/apache/poi/hwpf/model/types/StdfBaseAbstractType.html#isFScratch()">isFScratch</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;spare field for any temporary use, always reset back to zero!</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../org/apache/poi/hwpf/model/types/StdfBaseAbstractType.html#isFSemiHidden()">isFSemiHidden</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Specifies whether this style is not shown in the simplified main styles UI of the application</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../org/apache/poi/hwpf/model/types/StdfBaseAbstractType.html#isFUnhideWhenUsed()">isFUnhideWhenUsed</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Specifies whether the fSemiHidden property is to be set to 0 when this style is used</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../org/apache/poi/hwpf/model/types/StdfBaseAbstractType.html#serialize(byte[], int)">serialize</A></B>(byte[]&nbsp;data,
+          int&nbsp;offset)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../org/apache/poi/hwpf/model/types/StdfBaseAbstractType.html#setBchUpe(int)">setBchUpe</A></B>(int&nbsp;field_4_bchUpe)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;An unsigned integer that specifies the size, in bytes, of std in LPStd.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../org/apache/poi/hwpf/model/types/StdfBaseAbstractType.html#setCupx(byte)">setCupx</A></B>(byte&nbsp;value)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sets the cupx field value.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../org/apache/poi/hwpf/model/types/StdfBaseAbstractType.html#setF97LidsSet(boolean)">setF97LidsSet</A></B>(boolean&nbsp;value)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sets the f97LidsSet field value.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../org/apache/poi/hwpf/model/types/StdfBaseAbstractType.html#setFAutoRedef(boolean)">setFAutoRedef</A></B>(boolean&nbsp;value)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sets the fAutoRedef field value.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../org/apache/poi/hwpf/model/types/StdfBaseAbstractType.html#setFCopyLang(boolean)">setFCopyLang</A></B>(boolean&nbsp;value)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sets the fCopyLang field value.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../org/apache/poi/hwpf/model/types/StdfBaseAbstractType.html#setFHasUpe(boolean)">setFHasUpe</A></B>(boolean&nbsp;value)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sets the fHasUpe field value.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../org/apache/poi/hwpf/model/types/StdfBaseAbstractType.html#setFHidden(boolean)">setFHidden</A></B>(boolean&nbsp;value)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sets the fHidden field value.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../org/apache/poi/hwpf/model/types/StdfBaseAbstractType.html#setFInternalUse(boolean)">setFInternalUse</A></B>(boolean&nbsp;value)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sets the fInternalUse field value.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../org/apache/poi/hwpf/model/types/StdfBaseAbstractType.html#setFInvalHeight(boolean)">setFInvalHeight</A></B>(boolean&nbsp;value)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sets the fInvalHeight field value.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../org/apache/poi/hwpf/model/types/StdfBaseAbstractType.html#setFLocked(boolean)">setFLocked</A></B>(boolean&nbsp;value)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sets the fLocked field value.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../org/apache/poi/hwpf/model/types/StdfBaseAbstractType.html#setFMassCopy(boolean)">setFMassCopy</A></B>(boolean&nbsp;value)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sets the fMassCopy field value.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../org/apache/poi/hwpf/model/types/StdfBaseAbstractType.html#setFNoHtmlExport(boolean)">setFNoHtmlExport</A></B>(boolean&nbsp;value)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sets the fNoHtmlExport field value.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../org/apache/poi/hwpf/model/types/StdfBaseAbstractType.html#setFPersonal(boolean)">setFPersonal</A></B>(boolean&nbsp;value)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sets the fPersonal field value.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../org/apache/poi/hwpf/model/types/StdfBaseAbstractType.html#setFPersonalCompose(boolean)">setFPersonalCompose</A></B>(boolean&nbsp;value)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sets the fPersonalCompose field value.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../org/apache/poi/hwpf/model/types/StdfBaseAbstractType.html#setFPersonalReply(boolean)">setFPersonalReply</A></B>(boolean&nbsp;value)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sets the fPersonalReply field value.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../org/apache/poi/hwpf/model/types/StdfBaseAbstractType.html#setFQFormat(boolean)">setFQFormat</A></B>(boolean&nbsp;value)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sets the fQFormat field value.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../org/apache/poi/hwpf/model/types/StdfBaseAbstractType.html#setFReserved(byte)">setFReserved</A></B>(byte&nbsp;value)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sets the fReserved field value.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../org/apache/poi/hwpf/model/types/StdfBaseAbstractType.html#setFScratch(boolean)">setFScratch</A></B>(boolean&nbsp;value)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sets the fScratch field value.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../org/apache/poi/hwpf/model/types/StdfBaseAbstractType.html#setFSemiHidden(boolean)">setFSemiHidden</A></B>(boolean&nbsp;value)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sets the fSemiHidden field value.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../org/apache/poi/hwpf/model/types/StdfBaseAbstractType.html#setFUnhideWhenUsed(boolean)">setFUnhideWhenUsed</A></B>(boolean&nbsp;value)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sets the fUnhideWhenUsed field value.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../org/apache/poi/hwpf/model/types/StdfBaseAbstractType.html#setGrfstd(short)">setGrfstd</A></B>(short&nbsp;field_5_grfstd)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A GRFSTD that specifies miscellaneous style properties.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../org/apache/poi/hwpf/model/types/StdfBaseAbstractType.html#setInfo1(short)">setInfo1</A></B>(short&nbsp;field_1_info1)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Set the info1 field for the StdfBase record.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../org/apache/poi/hwpf/model/types/StdfBaseAbstractType.html#setInfo2(short)">setInfo2</A></B>(short&nbsp;field_2_info2)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Set the info2 field for the StdfBase record.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../org/apache/poi/hwpf/model/types/StdfBaseAbstractType.html#setInfo3(short)">setInfo3</A></B>(short&nbsp;field_3_info3)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Set the info3 field for the StdfBase record.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../org/apache/poi/hwpf/model/types/StdfBaseAbstractType.html#setIstdBase(short)">setIstdBase</A></B>(short&nbsp;value)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sets the istdBase field value.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../org/apache/poi/hwpf/model/types/StdfBaseAbstractType.html#setIstdNext(short)">setIstdNext</A></B>(short&nbsp;value)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sets the istdNext field value.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../org/apache/poi/hwpf/model/types/StdfBaseAbstractType.html#setSti(short)">setSti</A></B>(short&nbsp;value)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sets the sti field value.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../org/apache/poi/hwpf/model/types/StdfBaseAbstractType.html#setStk(byte)">setStk</A></B>(byte&nbsp;value)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sets the stk field value.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;java.lang.String</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../org/apache/poi/hwpf/model/types/StdfBaseAbstractType.html#toString()">toString</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+</TABLE>
+&nbsp;<A NAME="methods_inherited_from_class_java.lang.Object"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#EEEEFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left"><B>Methods inherited from class java.lang.Object</B></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE>clone, equals, finalize, getClass, hashCode, notify, notifyAll, wait, wait, wait</CODE></TD>
+</TR>
+</TABLE>
+&nbsp;
+<P>
+
+<!-- ============ FIELD DETAIL =========== -->
+
+<A NAME="field_detail"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="1"><FONT SIZE="+2">
+<B>Field Detail</B></FONT></TH>
+</TR>
+</TABLE>
+
+<A NAME="field_1_info1"><!-- --></A><H3>
+field_1_info1</H3>
+<PRE>
+protected short <B>field_1_info1</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="field_2_info2"><!-- --></A><H3>
+field_2_info2</H3>
+<PRE>
+protected short <B>field_2_info2</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="field_3_info3"><!-- --></A><H3>
+field_3_info3</H3>
+<PRE>
+protected short <B>field_3_info3</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="field_4_bchUpe"><!-- --></A><H3>
+field_4_bchUpe</H3>
+<PRE>
+protected int <B>field_4_bchUpe</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="field_5_grfstd"><!-- --></A><H3>
+field_5_grfstd</H3>
+<PRE>
+protected short <B>field_5_grfstd</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+
+<!-- ========= CONSTRUCTOR DETAIL ======== -->
+
+<A NAME="constructor_detail"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="1"><FONT SIZE="+2">
+<B>Constructor Detail</B></FONT></TH>
+</TR>
+</TABLE>
+
+<A NAME="StdfBaseAbstractType()"><!-- --></A><H3>
+StdfBaseAbstractType</H3>
+<PRE>
+protected <B>StdfBaseAbstractType</B>()</PRE>
+<DL>
+</DL>
+
+<!-- ============ METHOD DETAIL ========== -->
+
+<A NAME="method_detail"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="1"><FONT SIZE="+2">
+<B>Method Detail</B></FONT></TH>
+</TR>
+</TABLE>
+
+<A NAME="fillFields(byte[], int)"><!-- --></A><H3>
+fillFields</H3>
+<PRE>
+protected void <B>fillFields</B>(byte[]&nbsp;data,
+                          int&nbsp;offset)</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="serialize(byte[], int)"><!-- --></A><H3>
+serialize</H3>
+<PRE>
+public void <B>serialize</B>(byte[]&nbsp;data,
+                      int&nbsp;offset)</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getSize()"><!-- --></A><H3>
+getSize</H3>
+<PRE>
+public static int <B>getSize</B>()</PRE>
+<DL>
+<DD>Size of record
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="toString()"><!-- --></A><H3>
+toString</H3>
+<PRE>
+public java.lang.String <B>toString</B>()</PRE>
+<DL>
+<DD><DL>
+<DT><B>Overrides:</B><DD><CODE>toString</CODE> in class <CODE>java.lang.Object</CODE></DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getInfo1()"><!-- --></A><H3>
+getInfo1</H3>
+<PRE>
+<FONT SIZE="-1"><A HREF="../../../../../../org/apache/poi/util/Internal.html" title="annotation in org.apache.poi.util">@Internal</A>
+</FONT>public short <B>getInfo1</B>()</PRE>
+<DL>
+<DD>Get the info1 field for the StdfBase record.
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setInfo1(short)"><!-- --></A><H3>
+setInfo1</H3>
+<PRE>
+<FONT SIZE="-1"><A HREF="../../../../../../org/apache/poi/util/Internal.html" title="annotation in org.apache.poi.util">@Internal</A>
+</FONT>public void <B>setInfo1</B>(short&nbsp;field_1_info1)</PRE>
+<DL>
+<DD>Set the info1 field for the StdfBase record.
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getInfo2()"><!-- --></A><H3>
+getInfo2</H3>
+<PRE>
+<FONT SIZE="-1"><A HREF="../../../../../../org/apache/poi/util/Internal.html" title="annotation in org.apache.poi.util">@Internal</A>
+</FONT>public short <B>getInfo2</B>()</PRE>
+<DL>
+<DD>Get the info2 field for the StdfBase record.
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setInfo2(short)"><!-- --></A><H3>
+setInfo2</H3>
+<PRE>
+<FONT SIZE="-1"><A HREF="../../../../../../org/apache/poi/util/Internal.html" title="annotation in org.apache.poi.util">@Internal</A>
+</FONT>public void <B>setInfo2</B>(short&nbsp;field_2_info2)</PRE>
+<DL>
+<DD>Set the info2 field for the StdfBase record.
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getInfo3()"><!-- --></A><H3>
+getInfo3</H3>
+<PRE>
+<FONT SIZE="-1"><A HREF="../../../../../../org/apache/poi/util/Internal.html" title="annotation in org.apache.poi.util">@Internal</A>
+</FONT>public short <B>getInfo3</B>()</PRE>
+<DL>
+<DD>Get the info3 field for the StdfBase record.
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setInfo3(short)"><!-- --></A><H3>
+setInfo3</H3>
+<PRE>
+<FONT SIZE="-1"><A HREF="../../../../../../org/apache/poi/util/Internal.html" title="annotation in org.apache.poi.util">@Internal</A>
+</FONT>public void <B>setInfo3</B>(short&nbsp;field_3_info3)</PRE>
+<DL>
+<DD>Set the info3 field for the StdfBase record.
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getBchUpe()"><!-- --></A><H3>
+getBchUpe</H3>
+<PRE>
+<FONT SIZE="-1"><A HREF="../../../../../../org/apache/poi/util/Internal.html" title="annotation in org.apache.poi.util">@Internal</A>
+</FONT>public int <B>getBchUpe</B>()</PRE>
+<DL>
+<DD>An unsigned integer that specifies the size, in bytes, of std in LPStd. This value MUST be equal to cbStd in LPStd.
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setBchUpe(int)"><!-- --></A><H3>
+setBchUpe</H3>
+<PRE>
+<FONT SIZE="-1"><A HREF="../../../../../../org/apache/poi/util/Internal.html" title="annotation in org.apache.poi.util">@Internal</A>
+</FONT>public void <B>setBchUpe</B>(int&nbsp;field_4_bchUpe)</PRE>
+<DL>
+<DD>An unsigned integer that specifies the size, in bytes, of std in LPStd. This value MUST be equal to cbStd in LPStd.
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getGrfstd()"><!-- --></A><H3>
+getGrfstd</H3>
+<PRE>
+<FONT SIZE="-1"><A HREF="../../../../../../org/apache/poi/util/Internal.html" title="annotation in org.apache.poi.util">@Internal</A>
+</FONT>public short <B>getGrfstd</B>()</PRE>
+<DL>
+<DD>A GRFSTD that specifies miscellaneous style properties.
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setGrfstd(short)"><!-- --></A><H3>
+setGrfstd</H3>
+<PRE>
+<FONT SIZE="-1"><A HREF="../../../../../../org/apache/poi/util/Internal.html" title="annotation in org.apache.poi.util">@Internal</A>
+</FONT>public void <B>setGrfstd</B>(short&nbsp;field_5_grfstd)</PRE>
+<DL>
+<DD>A GRFSTD that specifies miscellaneous style properties.
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setSti(short)"><!-- --></A><H3>
+setSti</H3>
+<PRE>
+<FONT SIZE="-1"><A HREF="../../../../../../org/apache/poi/util/Internal.html" title="annotation in org.apache.poi.util">@Internal</A>
+</FONT>public void <B>setSti</B>(short&nbsp;value)</PRE>
+<DL>
+<DD>Sets the sti field value.
+ An unsigned integer that specifies the invariant style identifier for application-defined styles, or 0x0FFE for user-defined styles
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getSti()"><!-- --></A><H3>
+getSti</H3>
+<PRE>
+<FONT SIZE="-1"><A HREF="../../../../../../org/apache/poi/util/Internal.html" title="annotation in org.apache.poi.util">@Internal</A>
+</FONT>public short <B>getSti</B>()</PRE>
+<DL>
+<DD>An unsigned integer that specifies the invariant style identifier for application-defined styles, or 0x0FFE for user-defined styles
+<P>
+<DD><DL>
+
+<DT><B>Returns:</B><DD>the sti field value.</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setFScratch(boolean)"><!-- --></A><H3>
+setFScratch</H3>
+<PRE>
+<FONT SIZE="-1"><A HREF="../../../../../../org/apache/poi/util/Internal.html" title="annotation in org.apache.poi.util">@Internal</A>
+</FONT>public void <B>setFScratch</B>(boolean&nbsp;value)</PRE>
+<DL>
+<DD>Sets the fScratch field value.
+ spare field for any temporary use, always reset back to zero!
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="isFScratch()"><!-- --></A><H3>
+isFScratch</H3>
+<PRE>
+<FONT SIZE="-1"><A HREF="../../../../../../org/apache/poi/util/Internal.html" title="annotation in org.apache.poi.util">@Internal</A>
+</FONT>public boolean <B>isFScratch</B>()</PRE>
+<DL>
+<DD>spare field for any temporary use, always reset back to zero!
+<P>
+<DD><DL>
+
+<DT><B>Returns:</B><DD>the fScratch field value.</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setFInvalHeight(boolean)"><!-- --></A><H3>
+setFInvalHeight</H3>
+<PRE>
+<FONT SIZE="-1"><A HREF="../../../../../../org/apache/poi/util/Internal.html" title="annotation in org.apache.poi.util">@Internal</A>
+</FONT>public void <B>setFInvalHeight</B>(boolean&nbsp;value)</PRE>
+<DL>
+<DD>Sets the fInvalHeight field value.
+ Specifies whether the paragraph height information in the fcPlcfPhe field of FibRgFcLcb97, for any paragraphs having this paragraph style, MUST be ignored. SHOULD be 0
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="isFInvalHeight()"><!-- --></A><H3>
+isFInvalHeight</H3>
+<PRE>
+<FONT SIZE="-1"><A HREF="../../../../../../org/apache/poi/util/Internal.html" title="annotation in org.apache.poi.util">@Internal</A>
+</FONT>public boolean <B>isFInvalHeight</B>()</PRE>
+<DL>
+<DD>Specifies whether the paragraph height information in the fcPlcfPhe field of FibRgFcLcb97, for any paragraphs having this paragraph style, MUST be ignored. SHOULD be 0
+<P>
+<DD><DL>
+
+<DT><B>Returns:</B><DD>the fInvalHeight field value.</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setFHasUpe(boolean)"><!-- --></A><H3>
+setFHasUpe</H3>
+<PRE>
+<FONT SIZE="-1"><A HREF="../../../../../../org/apache/poi/util/Internal.html" title="annotation in org.apache.poi.util">@Internal</A>
+</FONT>public void <B>setFHasUpe</B>(boolean&nbsp;value)</PRE>
+<DL>
+<DD>Sets the fHasUpe field value.
+ This bit is undefined and MUST be ignored
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="isFHasUpe()"><!-- --></A><H3>
+isFHasUpe</H3>
+<PRE>
+<FONT SIZE="-1"><A HREF="../../../../../../org/apache/poi/util/Internal.html" title="annotation in org.apache.poi.util">@Internal</A>
+</FONT>public boolean <B>isFHasUpe</B>()</PRE>
+<DL>
+<DD>This bit is undefined and MUST be ignored
+<P>
+<DD><DL>
+
+<DT><B>Returns:</B><DD>the fHasUpe field value.</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setFMassCopy(boolean)"><!-- --></A><H3>
+setFMassCopy</H3>
+<PRE>
+<FONT SIZE="-1"><A HREF="../../../../../../org/apache/poi/util/Internal.html" title="annotation in org.apache.poi.util">@Internal</A>
+</FONT>public void <B>setFMassCopy</B>(boolean&nbsp;value)</PRE>
+<DL>
+<DD>Sets the fMassCopy field value.
+ This bit is undefined and MUST be ignored
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="isFMassCopy()"><!-- --></A><H3>
+isFMassCopy</H3>
+<PRE>
+<FONT SIZE="-1"><A HREF="../../../../../../org/apache/poi/util/Internal.html" title="annotation in org.apache.poi.util">@Internal</A>
+</FONT>public boolean <B>isFMassCopy</B>()</PRE>
+<DL>
+<DD>This bit is undefined and MUST be ignored
+<P>
+<DD><DL>
+
+<DT><B>Returns:</B><DD>the fMassCopy field value.</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setStk(byte)"><!-- --></A><H3>
+setStk</H3>
+<PRE>
+<FONT SIZE="-1"><A HREF="../../../../../../org/apache/poi/util/Internal.html" title="annotation in org.apache.poi.util">@Internal</A>
+</FONT>public void <B>setStk</B>(byte&nbsp;value)</PRE>
+<DL>
+<DD>Sets the stk field value.
+ style kind
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getStk()"><!-- --></A><H3>
+getStk</H3>
+<PRE>
+<FONT SIZE="-1"><A HREF="../../../../../../org/apache/poi/util/Internal.html" title="annotation in org.apache.poi.util">@Internal</A>
+</FONT>public byte <B>getStk</B>()</PRE>
+<DL>
+<DD>style kind
+<P>
+<DD><DL>
+
+<DT><B>Returns:</B><DD>the stk field value.</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setIstdBase(short)"><!-- --></A><H3>
+setIstdBase</H3>
+<PRE>
+<FONT SIZE="-1"><A HREF="../../../../../../org/apache/poi/util/Internal.html" title="annotation in org.apache.poi.util">@Internal</A>
+</FONT>public void <B>setIstdBase</B>(short&nbsp;value)</PRE>
+<DL>
+<DD>Sets the istdBase field value.
+ base style
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getIstdBase()"><!-- --></A><H3>
+getIstdBase</H3>
+<PRE>
+<FONT SIZE="-1"><A HREF="../../../../../../org/apache/poi/util/Internal.html" title="annotation in org.apache.poi.util">@Internal</A>
+</FONT>public short <B>getIstdBase</B>()</PRE>
+<DL>
+<DD>base style
+<P>
+<DD><DL>
+
+<DT><B>Returns:</B><DD>the istdBase field value.</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setCupx(byte)"><!-- --></A><H3>
+setCupx</H3>
+<PRE>
+<FONT SIZE="-1"><A HREF="../../../../../../org/apache/poi/util/Internal.html" title="annotation in org.apache.poi.util">@Internal</A>
+</FONT>public void <B>setCupx</B>(byte&nbsp;value)</PRE>
+<DL>
+<DD>Sets the cupx field value.
+ number of UPXs (and UPEs)
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getCupx()"><!-- --></A><H3>
+getCupx</H3>
+<PRE>
+<FONT SIZE="-1"><A HREF="../../../../../../org/apache/poi/util/Internal.html" title="annotation in org.apache.poi.util">@Internal</A>
+</FONT>public byte <B>getCupx</B>()</PRE>
+<DL>
+<DD>number of UPXs (and UPEs)
+<P>
+<DD><DL>
+
+<DT><B>Returns:</B><DD>the cupx field value.</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setIstdNext(short)"><!-- --></A><H3>
+setIstdNext</H3>
+<PRE>
+<FONT SIZE="-1"><A HREF="../../../../../../org/apache/poi/util/Internal.html" title="annotation in org.apache.poi.util">@Internal</A>
+</FONT>public void <B>setIstdNext</B>(short&nbsp;value)</PRE>
+<DL>
+<DD>Sets the istdNext field value.
+ next style
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getIstdNext()"><!-- --></A><H3>
+getIstdNext</H3>
+<PRE>
+<FONT SIZE="-1"><A HREF="../../../../../../org/apache/poi/util/Internal.html" title="annotation in org.apache.poi.util">@Internal</A>
+</FONT>public short <B>getIstdNext</B>()</PRE>
+<DL>
+<DD>next style
+<P>
+<DD><DL>
+
+<DT><B>Returns:</B><DD>the istdNext field value.</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setFAutoRedef(boolean)"><!-- --></A><H3>
+setFAutoRedef</H3>
+<PRE>
+<FONT SIZE="-1"><A HREF="../../../../../../org/apache/poi/util/Internal.html" title="annotation in org.apache.poi.util">@Internal</A>
+</FONT>public void <B>setFAutoRedef</B>(boolean&nbsp;value)</PRE>
+<DL>
+<DD>Sets the fAutoRedef field value.
+ number of UPXs (and UPEs)
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="isFAutoRedef()"><!-- --></A><H3>
+isFAutoRedef</H3>
+<PRE>
+<FONT SIZE="-1"><A HREF="../../../../../../org/apache/poi/util/Internal.html" title="annotation in org.apache.poi.util">@Internal</A>
+</FONT>public boolean <B>isFAutoRedef</B>()</PRE>
+<DL>
+<DD>number of UPXs (and UPEs)
+<P>
+<DD><DL>
+
+<DT><B>Returns:</B><DD>the fAutoRedef field value.</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setFHidden(boolean)"><!-- --></A><H3>
+setFHidden</H3>
+<PRE>
+<FONT SIZE="-1"><A HREF="../../../../../../org/apache/poi/util/Internal.html" title="annotation in org.apache.poi.util">@Internal</A>
+</FONT>public void <B>setFHidden</B>(boolean&nbsp;value)</PRE>
+<DL>
+<DD>Sets the fHidden field value.
+ Specifies whether this style is not shown in the application UI
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="isFHidden()"><!-- --></A><H3>
+isFHidden</H3>
+<PRE>
+<FONT SIZE="-1"><A HREF="../../../../../../org/apache/poi/util/Internal.html" title="annotation in org.apache.poi.util">@Internal</A>
+</FONT>public boolean <B>isFHidden</B>()</PRE>
+<DL>
+<DD>Specifies whether this style is not shown in the application UI
+<P>
+<DD><DL>
+
+<DT><B>Returns:</B><DD>the fHidden field value.</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setF97LidsSet(boolean)"><!-- --></A><H3>
+setF97LidsSet</H3>
+<PRE>
+<FONT SIZE="-1"><A HREF="../../../../../../org/apache/poi/util/Internal.html" title="annotation in org.apache.poi.util">@Internal</A>
+</FONT>public void <B>setF97LidsSet</B>(boolean&nbsp;value)</PRE>
+<DL>
+<DD>Sets the f97LidsSet field value.
+ Specifies whether sprmCRgLid0_80 and sprmCRgLid1_80 were applied, as appropriate, to this paragraph or character style for compatibility with applications that do not support sprmCRgLid0, sprmCRgLid1, and sprmCFNoProof
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="isF97LidsSet()"><!-- --></A><H3>
+isF97LidsSet</H3>
+<PRE>
+<FONT SIZE="-1"><A HREF="../../../../../../org/apache/poi/util/Internal.html" title="annotation in org.apache.poi.util">@Internal</A>
+</FONT>public boolean <B>isF97LidsSet</B>()</PRE>
+<DL>
+<DD>Specifies whether sprmCRgLid0_80 and sprmCRgLid1_80 were applied, as appropriate, to this paragraph or character style for compatibility with applications that do not support sprmCRgLid0, sprmCRgLid1, and sprmCFNoProof
+<P>
+<DD><DL>
+
+<DT><B>Returns:</B><DD>the f97LidsSet field value.</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setFCopyLang(boolean)"><!-- --></A><H3>
+setFCopyLang</H3>
+<PRE>
+<FONT SIZE="-1"><A HREF="../../../../../../org/apache/poi/util/Internal.html" title="annotation in org.apache.poi.util">@Internal</A>
+</FONT>public void <B>setFCopyLang</B>(boolean&nbsp;value)</PRE>
+<DL>
+<DD>Sets the fCopyLang field value.
+ If f97LidsSet is 1, this value specifies whether the applied compatibility sprmCRgLid0_80 or sprmCRgLid1_80 specified an actual language or a special LID value (0x0400) signifying that no proofing is needed for the text. This MUST be ignored if f97LidsSet is 0
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="isFCopyLang()"><!-- --></A><H3>
+isFCopyLang</H3>
+<PRE>
+<FONT SIZE="-1"><A HREF="../../../../../../org/apache/poi/util/Internal.html" title="annotation in org.apache.poi.util">@Internal</A>
+</FONT>public boolean <B>isFCopyLang</B>()</PRE>
+<DL>
+<DD>If f97LidsSet is 1, this value specifies whether the applied compatibility sprmCRgLid0_80 or sprmCRgLid1_80 specified an actual language or a special LID value (0x0400) signifying that no proofing is needed for the text. This MUST be ignored if f97LidsSet is 0
+<P>
+<DD><DL>
+
+<DT><B>Returns:</B><DD>the fCopyLang field value.</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setFPersonalCompose(boolean)"><!-- --></A><H3>
+setFPersonalCompose</H3>
+<PRE>
+<FONT SIZE="-1"><A HREF="../../../../../../org/apache/poi/util/Internal.html" title="annotation in org.apache.poi.util">@Internal</A>
+</FONT>public void <B>setFPersonalCompose</B>(boolean&nbsp;value)</PRE>
+<DL>
+<DD>Sets the fPersonalCompose field value.
+ Specifies whether this character style can be used to automatically format the new message text in a new e-mail
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="isFPersonalCompose()"><!-- --></A><H3>
+isFPersonalCompose</H3>
+<PRE>
+<FONT SIZE="-1"><A HREF="../../../../../../org/apache/poi/util/Internal.html" title="annotation in org.apache.poi.util">@Internal</A>
+</FONT>public boolean <B>isFPersonalCompose</B>()</PRE>
+<DL>
+<DD>Specifies whether this character style can be used to automatically format the new message text in a new e-mail
+<P>
+<DD><DL>
+
+<DT><B>Returns:</B><DD>the fPersonalCompose field value.</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setFPersonalReply(boolean)"><!-- --></A><H3>
+setFPersonalReply</H3>
+<PRE>
+<FONT SIZE="-1"><A HREF="../../../../../../org/apache/poi/util/Internal.html" title="annotation in org.apache.poi.util">@Internal</A>
+</FONT>public void <B>setFPersonalReply</B>(boolean&nbsp;value)</PRE>
+<DL>
+<DD>Sets the fPersonalReply field value.
+ Specifies whether this character style can be used to automatically format the new message text when replying to an e-mail
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="isFPersonalReply()"><!-- --></A><H3>
+isFPersonalReply</H3>
+<PRE>
+<FONT SIZE="-1"><A HREF="../../../../../../org/apache/poi/util/Internal.html" title="annotation in org.apache.poi.util">@Internal</A>
+</FONT>public boolean <B>isFPersonalReply</B>()</PRE>
+<DL>
+<DD>Specifies whether this character style can be used to automatically format the new message text when replying to an e-mail
+<P>
+<DD><DL>
+
+<DT><B>Returns:</B><DD>the fPersonalReply field value.</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setFPersonal(boolean)"><!-- --></A><H3>
+setFPersonal</H3>
+<PRE>
+<FONT SIZE="-1"><A HREF="../../../../../../org/apache/poi/util/Internal.html" title="annotation in org.apache.poi.util">@Internal</A>
+</FONT>public void <B>setFPersonal</B>(boolean&nbsp;value)</PRE>
+<DL>
+<DD>Sets the fPersonal field value.
+ Specifies whether this character style was applied to format all message text from one or more users in an e-mail
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="isFPersonal()"><!-- --></A><H3>
+isFPersonal</H3>
+<PRE>
+<FONT SIZE="-1"><A HREF="../../../../../../org/apache/poi/util/Internal.html" title="annotation in org.apache.poi.util">@Internal</A>
+</FONT>public boolean <B>isFPersonal</B>()</PRE>
+<DL>
+<DD>Specifies whether this character style was applied to format all message text from one or more users in an e-mail
+<P>
+<DD><DL>
+
+<DT><B>Returns:</B><DD>the fPersonal field value.</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setFNoHtmlExport(boolean)"><!-- --></A><H3>
+setFNoHtmlExport</H3>
+<PRE>
+<FONT SIZE="-1"><A HREF="../../../../../../org/apache/poi/util/Internal.html" title="annotation in org.apache.poi.util">@Internal</A>
+</FONT>public void <B>setFNoHtmlExport</B>(boolean&nbsp;value)</PRE>
+<DL>
+<DD>Sets the fNoHtmlExport field value.
+ This value MUST be 0 and MUST be ignored
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="isFNoHtmlExport()"><!-- --></A><H3>
+isFNoHtmlExport</H3>
+<PRE>
+<FONT SIZE="-1"><A HREF="../../../../../../org/apache/poi/util/Internal.html" title="annotation in org.apache.poi.util">@Internal</A>
+</FONT>public boolean <B>isFNoHtmlExport</B>()</PRE>
+<DL>
+<DD>This value MUST be 0 and MUST be ignored
+<P>
+<DD><DL>
+
+<DT><B>Returns:</B><DD>the fNoHtmlExport field value.</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setFSemiHidden(boolean)"><!-- --></A><H3>
+setFSemiHidden</H3>
+<PRE>
+<FONT SIZE="-1"><A HREF="../../../../../../org/apache/poi/util/Internal.html" title="annotation in org.apache.poi.util">@Internal</A>
+</FONT>public void <B>setFSemiHidden</B>(boolean&nbsp;value)</PRE>
+<DL>
+<DD>Sets the fSemiHidden field value.
+ Specifies whether this style is not shown in the simplified main styles UI of the application
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="isFSemiHidden()"><!-- --></A><H3>
+isFSemiHidden</H3>
+<PRE>
+<FONT SIZE="-1"><A HREF="../../../../../../org/apache/poi/util/Internal.html" title="annotation in org.apache.poi.util">@Internal</A>
+</FONT>public boolean <B>isFSemiHidden</B>()</PRE>
+<DL>
+<DD>Specifies whether this style is not shown in the simplified main styles UI of the application
+<P>
+<DD><DL>
+
+<DT><B>Returns:</B><DD>the fSemiHidden field value.</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setFLocked(boolean)"><!-- --></A><H3>
+setFLocked</H3>
+<PRE>
+<FONT SIZE="-1"><A HREF="../../../../../../org/apache/poi/util/Internal.html" title="annotation in org.apache.poi.util">@Internal</A>
+</FONT>public void <B>setFLocked</B>(boolean&nbsp;value)</PRE>
+<DL>
+<DD>Sets the fLocked field value.
+ Specifies whether this style is prevented from being applied by using the application UI
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="isFLocked()"><!-- --></A><H3>
+isFLocked</H3>
+<PRE>
+<FONT SIZE="-1"><A HREF="../../../../../../org/apache/poi/util/Internal.html" title="annotation in org.apache.poi.util">@Internal</A>
+</FONT>public boolean <B>isFLocked</B>()</PRE>
+<DL>
+<DD>Specifies whether this style is prevented from being applied by using the application UI
+<P>
+<DD><DL>
+
+<DT><B>Returns:</B><DD>the fLocked field value.</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setFInternalUse(boolean)"><!-- --></A><H3>
+setFInternalUse</H3>
+<PRE>
+<FONT SIZE="-1"><A HREF="../../../../../../org/apache/poi/util/Internal.html" title="annotation in org.apache.poi.util">@Internal</A>
+</FONT>public void <B>setFInternalUse</B>(boolean&nbsp;value)</PRE>
+<DL>
+<DD>Sets the fInternalUse field value.
+ This bit is undefined and MUST be ignored
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="isFInternalUse()"><!-- --></A><H3>
+isFInternalUse</H3>
+<PRE>
+<FONT SIZE="-1"><A HREF="../../../../../../org/apache/poi/util/Internal.html" title="annotation in org.apache.poi.util">@Internal</A>
+</FONT>public boolean <B>isFInternalUse</B>()</PRE>
+<DL>
+<DD>This bit is undefined and MUST be ignored
+<P>
+<DD><DL>
+
+<DT><B>Returns:</B><DD>the fInternalUse field value.</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setFUnhideWhenUsed(boolean)"><!-- --></A><H3>
+setFUnhideWhenUsed</H3>
+<PRE>
+<FONT SIZE="-1"><A HREF="../../../../../../org/apache/poi/util/Internal.html" title="annotation in org.apache.poi.util">@Internal</A>
+</FONT>public void <B>setFUnhideWhenUsed</B>(boolean&nbsp;value)</PRE>
+<DL>
+<DD>Sets the fUnhideWhenUsed field value.
+ Specifies whether the fSemiHidden property is to be set to 0 when this style is used
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="isFUnhideWhenUsed()"><!-- --></A><H3>
+isFUnhideWhenUsed</H3>
+<PRE>
+<FONT SIZE="-1"><A HREF="../../../../../../org/apache/poi/util/Internal.html" title="annotation in org.apache.poi.util">@Internal</A>
+</FONT>public boolean <B>isFUnhideWhenUsed</B>()</PRE>
+<DL>
+<DD>Specifies whether the fSemiHidden property is to be set to 0 when this style is used
+<P>
+<DD><DL>
+
+<DT><B>Returns:</B><DD>the fUnhideWhenUsed field value.</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setFQFormat(boolean)"><!-- --></A><H3>
+setFQFormat</H3>
+<PRE>
+<FONT SIZE="-1"><A HREF="../../../../../../org/apache/poi/util/Internal.html" title="annotation in org.apache.poi.util">@Internal</A>
+</FONT>public void <B>setFQFormat</B>(boolean&nbsp;value)</PRE>
+<DL>
+<DD>Sets the fQFormat field value.
+ Specifies whether this style is shown in the Ribbon Style gallery
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="isFQFormat()"><!-- --></A><H3>
+isFQFormat</H3>
+<PRE>
+<FONT SIZE="-1"><A HREF="../../../../../../org/apache/poi/util/Internal.html" title="annotation in org.apache.poi.util">@Internal</A>
+</FONT>public boolean <B>isFQFormat</B>()</PRE>
+<DL>
+<DD>Specifies whether this style is shown in the Ribbon Style gallery
+<P>
+<DD><DL>
+
+<DT><B>Returns:</B><DD>the fQFormat field value.</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setFReserved(byte)"><!-- --></A><H3>
+setFReserved</H3>
+<PRE>
+<FONT SIZE="-1"><A HREF="../../../../../../org/apache/poi/util/Internal.html" title="annotation in org.apache.poi.util">@Internal</A>
+</FONT>public void <B>setFReserved</B>(byte&nbsp;value)</PRE>
+<DL>
+<DD>Sets the fReserved field value.
+ This value MUST be 0 and MUST be ignored
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getFReserved()"><!-- --></A><H3>
+getFReserved</H3>
+<PRE>
+<FONT SIZE="-1"><A HREF="../../../../../../org/apache/poi/util/Internal.html" title="annotation in org.apache.poi.util">@Internal</A>
+</FONT>public byte <B>getFReserved</B>()</PRE>
+<DL>
+<DD>This value MUST be 0 and MUST be ignored
+<P>
+<DD><DL>
+
+<DT><B>Returns:</B><DD>the fReserved field value.</DL>
+</DD>
+</DL>
+<!-- ========= END OF CLASS DATA ========= -->
+<HR>
+
+
+<!-- ======= START OF BOTTOM NAVBAR ====== -->
+<A NAME="navbar_bottom"><!-- --></A>
+<A HREF="#skip-navbar_bottom" title="Skip navigation links"></A>
+<TABLE BORDER="0" WIDTH="100%" CELLPADDING="1" CELLSPACING="0" SUMMARY="">
+<TR>
+<TD COLSPAN=2 BGCOLOR="#EEEEFF" CLASS="NavBarCell1">
+<A NAME="navbar_bottom_firstrow"><!-- --></A>
+<TABLE BORDER="0" CELLPADDING="0" CELLSPACING="3" SUMMARY="">
+  <TR ALIGN="center" VALIGN="top">
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../../overview-summary.html"><FONT CLASS="NavBarFont1"><B>Overview</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="package-summary.html"><FONT CLASS="NavBarFont1"><B>Package</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#FFFFFF" CLASS="NavBarCell1Rev"> &nbsp;<FONT CLASS="NavBarFont1Rev"><B>Class</B></FONT>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="class-use/StdfBaseAbstractType.html"><FONT CLASS="NavBarFont1"><B>Use</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="package-tree.html"><FONT CLASS="NavBarFont1"><B>Tree</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../../deprecated-list.html"><FONT CLASS="NavBarFont1"><B>Deprecated</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../../index-all.html"><FONT CLASS="NavBarFont1"><B>Index</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../../help-doc.html"><FONT CLASS="NavBarFont1"><B>Help</B></FONT></A>&nbsp;</TD>
+  </TR>
+</TABLE>
+</TD>
+<TD ALIGN="right" VALIGN="top" ROWSPAN=3><EM>
+</EM>
+</TD>
+</TR>
+
+<TR>
+<TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
+&nbsp;<A HREF="../../../../../../org/apache/poi/hwpf/model/types/SHDAbstractType.html" title="class in org.apache.poi.hwpf.model.types"><B>PREV CLASS</B></A>&nbsp;
+&nbsp;<A HREF="../../../../../../org/apache/poi/hwpf/model/types/StdfPost2000AbstractType.html" title="class in org.apache.poi.hwpf.model.types"><B>NEXT CLASS</B></A></FONT></TD>
+<TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
+  <A HREF="../../../../../../index.html?org/apache/poi/hwpf/model/types/StdfBaseAbstractType.html" target="_top"><B>FRAMES</B></A>  &nbsp;
+&nbsp;<A HREF="StdfBaseAbstractType.html" target="_top"><B>NO FRAMES</B></A>  &nbsp;
+&nbsp;<SCRIPT type="text/javascript">
+  <!--
+  if(window==top) {
+    document.writeln('<A HREF="../../../../../../allclasses-noframe.html"><B>All Classes</B></A>');
+  }
+  //-->
+</SCRIPT>
+<NOSCRIPT>
+  <A HREF="../../../../../../allclasses-noframe.html"><B>All Classes</B></A>
+</NOSCRIPT>
+
+
+</FONT></TD>
+</TR>
+<TR>
+<TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
+  SUMMARY:&nbsp;NESTED&nbsp;|&nbsp;<A HREF="#field_summary">FIELD</A>&nbsp;|&nbsp;<A HREF="#constructor_summary">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_summary">METHOD</A></FONT></TD>
+<TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
+DETAIL:&nbsp;<A HREF="#field_detail">FIELD</A>&nbsp;|&nbsp;<A HREF="#constructor_detail">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_detail">METHOD</A></FONT></TD>
+</TR>
+</TABLE>
+<A NAME="skip-navbar_bottom"></A>
+<!-- ======== END OF BOTTOM NAVBAR ======= -->
+
+<HR>
+
+                <i>Copyright 2014 The Apache Software Foundation or
+        its licensors, as applicable.</i>
+            
+</BODY>
+</HTML>

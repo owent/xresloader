@@ -1,0 +1,564 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!--NewPage-->
+<HTML>
+<HEAD>
+<TITLE>
+HWPFList (POI API Documentation)
+</TITLE>
+
+<META NAME="keywords" CONTENT="org.apache.poi.hwpf.usermodel.HWPFList class">
+
+<LINK REL ="stylesheet" TYPE="text/css" HREF="../../../../../stylesheet.css" TITLE="Style">
+
+<SCRIPT type="text/javascript">
+function windowTitle()
+{
+    parent.document.title="HWPFList (POI API Documentation)";
+}
+</SCRIPT>
+<NOSCRIPT>
+</NOSCRIPT>
+
+</HEAD>
+
+<BODY BGCOLOR="white" onload="windowTitle();">
+
+
+<!-- ========= START OF TOP NAVBAR ======= -->
+<A NAME="navbar_top"><!-- --></A>
+<A HREF="#skip-navbar_top" title="Skip navigation links"></A>
+<TABLE BORDER="0" WIDTH="100%" CELLPADDING="1" CELLSPACING="0" SUMMARY="">
+<TR>
+<TD COLSPAN=2 BGCOLOR="#EEEEFF" CLASS="NavBarCell1">
+<A NAME="navbar_top_firstrow"><!-- --></A>
+<TABLE BORDER="0" CELLPADDING="0" CELLSPACING="3" SUMMARY="">
+  <TR ALIGN="center" VALIGN="top">
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../overview-summary.html"><FONT CLASS="NavBarFont1"><B>Overview</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="package-summary.html"><FONT CLASS="NavBarFont1"><B>Package</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#FFFFFF" CLASS="NavBarCell1Rev"> &nbsp;<FONT CLASS="NavBarFont1Rev"><B>Class</B></FONT>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="class-use/HWPFList.html"><FONT CLASS="NavBarFont1"><B>Use</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="package-tree.html"><FONT CLASS="NavBarFont1"><B>Tree</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../deprecated-list.html"><FONT CLASS="NavBarFont1"><B>Deprecated</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../index-all.html"><FONT CLASS="NavBarFont1"><B>Index</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../help-doc.html"><FONT CLASS="NavBarFont1"><B>Help</B></FONT></A>&nbsp;</TD>
+  </TR>
+</TABLE>
+</TD>
+<TD ALIGN="right" VALIGN="top" ROWSPAN=3><EM>
+</EM>
+</TD>
+</TR>
+
+<TR>
+<TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
+&nbsp;<A HREF="../../../../../org/apache/poi/hwpf/usermodel/HeaderStories.html" title="class in org.apache.poi.hwpf.usermodel"><B>PREV CLASS</B></A>&nbsp;
+&nbsp;<A HREF="../../../../../org/apache/poi/hwpf/usermodel/LineSpacingDescriptor.html" title="class in org.apache.poi.hwpf.usermodel"><B>NEXT CLASS</B></A></FONT></TD>
+<TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
+  <A HREF="../../../../../index.html?org/apache/poi/hwpf/usermodel/HWPFList.html" target="_top"><B>FRAMES</B></A>  &nbsp;
+&nbsp;<A HREF="HWPFList.html" target="_top"><B>NO FRAMES</B></A>  &nbsp;
+&nbsp;<SCRIPT type="text/javascript">
+  <!--
+  if(window==top) {
+    document.writeln('<A HREF="../../../../../allclasses-noframe.html"><B>All Classes</B></A>');
+  }
+  //-->
+</SCRIPT>
+<NOSCRIPT>
+  <A HREF="../../../../../allclasses-noframe.html"><B>All Classes</B></A>
+</NOSCRIPT>
+
+
+</FONT></TD>
+</TR>
+<TR>
+<TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
+  SUMMARY:&nbsp;NESTED&nbsp;|&nbsp;FIELD&nbsp;|&nbsp;<A HREF="#constructor_summary">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_summary">METHOD</A></FONT></TD>
+<TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
+DETAIL:&nbsp;FIELD&nbsp;|&nbsp;<A HREF="#constructor_detail">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_detail">METHOD</A></FONT></TD>
+</TR>
+</TABLE>
+<A NAME="skip-navbar_top"></A>
+<!-- ========= END OF TOP NAVBAR ========= -->
+
+<HR>
+<!-- ======== START OF CLASS DATA ======== -->
+<H2>
+<FONT SIZE="-1">
+org.apache.poi.hwpf.usermodel</FONT>
+<BR>
+Class HWPFList</H2>
+<PRE>
+java.lang.Object
+  <IMG SRC="../../../../../resources/inherit.gif" ALT="extended by "><B>org.apache.poi.hwpf.usermodel.HWPFList</B>
+</PRE>
+<HR>
+<DL>
+<DT><PRE>public final class <B>HWPFList</B><DT>extends java.lang.Object</DL>
+</PRE>
+
+<P>
+This class is used to create a list in a Word document. It is used in
+ conjunction with
+ <A HREF="../../../../../org/apache/poi/hwpf/HWPFDocument.html#registerList(org.apache.poi.hwpf.usermodel.HWPFList)"><CODE>registerList</CODE></A>
+ in <A HREF="../../../../../org/apache/poi/hwpf/HWPFDocument.html" title="class in org.apache.poi.hwpf"><CODE>HWPFDocument</CODE></A>.
+ 
+ In Word, lists are not ranged entities, meaning you can't actually add one to
+ the document. Lists only act as properties for list entries. Once you
+ register a list, you can add list entries to a document that are a part of
+ the list.
+ 
+ The only benefit of this that I see, is that you can add a list entry
+ anywhere in the document and continue numbering from the previous list.
+<P>
+
+<P>
+<DL>
+<DT><B>Author:</B></DT>
+  <DD>Ryan Ackley</DD>
+</DL>
+<HR>
+
+<P>
+
+<!-- ======== CONSTRUCTOR SUMMARY ======== -->
+
+<A NAME="constructor_summary"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+<B>Constructor Summary</B></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/usermodel/HWPFList.html#HWPFList(boolean, org.apache.poi.hwpf.model.StyleSheet)">HWPFList</A></B>(boolean&nbsp;numbered,
+         <A HREF="../../../../../org/apache/poi/hwpf/model/StyleSheet.html" title="class in org.apache.poi.hwpf.model">StyleSheet</A>&nbsp;styleSheet)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/usermodel/HWPFList.html#HWPFList(org.apache.poi.hwpf.model.StyleSheet, org.apache.poi.hwpf.model.ListTables, int)">HWPFList</A></B>(<A HREF="../../../../../org/apache/poi/hwpf/model/StyleSheet.html" title="class in org.apache.poi.hwpf.model">StyleSheet</A>&nbsp;styleSheet,
+         <A HREF="../../../../../org/apache/poi/hwpf/model/ListTables.html" title="class in org.apache.poi.hwpf.model">ListTables</A>&nbsp;listTables,
+         int&nbsp;ilfo)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+</TABLE>
+&nbsp;
+<!-- ========== METHOD SUMMARY =========== -->
+
+<A NAME="method_summary"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+<B>Method Summary</B></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../../../org/apache/poi/hwpf/model/LFO.html" title="class in org.apache.poi.hwpf.model">LFO</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/usermodel/HWPFList.html#getLFO()">getLFO</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../../../org/apache/poi/hwpf/model/LFOData.html" title="class in org.apache.poi.hwpf.model">LFOData</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/usermodel/HWPFList.html#getLFOData()">getLFOData</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../../../org/apache/poi/hwpf/model/ListData.html" title="class in org.apache.poi.hwpf.model">ListData</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/usermodel/HWPFList.html#getListData()">getListData</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;int</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/usermodel/HWPFList.html#getLsid()">getLsid</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;int</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/usermodel/HWPFList.html#getNumberFormat(char)">getNumberFormat</A></B>(char&nbsp;level)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;An MSONFC, as specified in [MS-OSHARED] section 2.2.1.3, that specifies
+ the format of the level numbers that replace the placeholders for this
+ level in the xst fields of the LVLs in this list.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;java.lang.String</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/usermodel/HWPFList.html#getNumberText(char)">getNumberText</A></B>(char&nbsp;level)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;int</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/usermodel/HWPFList.html#getStartAt(char)">getStartAt</A></B>(char&nbsp;level)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;byte</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/usermodel/HWPFList.html#getTypeOfCharFollowingTheNumber(char)">getTypeOfCharFollowingTheNumber</A></B>(char&nbsp;level)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"The type of character following the number text for the paragraph: 0 == tab, 1 == space, 2 == nothing."</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/usermodel/HWPFList.html#isIgnoreLogicalLeftIdentation()">isIgnoreLogicalLeftIdentation</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/usermodel/HWPFList.html#isStartAtOverriden(char)">isStartAtOverriden</A></B>(char&nbsp;level)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/usermodel/HWPFList.html#setIgnoreLogicalLeftIdentation(boolean)">setIgnoreLogicalLeftIdentation</A></B>(boolean&nbsp;ignoreLogicalLeftIdentation)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/usermodel/HWPFList.html#setLevelNumberProperties(int, org.apache.poi.hwpf.usermodel.CharacterProperties)">setLevelNumberProperties</A></B>(int&nbsp;level,
+                         <A HREF="../../../../../org/apache/poi/hwpf/usermodel/CharacterProperties.html" title="class in org.apache.poi.hwpf.usermodel">CharacterProperties</A>&nbsp;chp)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sets the character properties of the list numbers.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/usermodel/HWPFList.html#setLevelParagraphProperties(int, org.apache.poi.hwpf.usermodel.ParagraphProperties)">setLevelParagraphProperties</A></B>(int&nbsp;level,
+                            <A HREF="../../../../../org/apache/poi/hwpf/usermodel/ParagraphProperties.html" title="class in org.apache.poi.hwpf.usermodel">ParagraphProperties</A>&nbsp;pap)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sets the paragraph properties for a particular level of the list.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/usermodel/HWPFList.html#setLevelStyle(int, int)">setLevelStyle</A></B>(int&nbsp;level,
+              int&nbsp;styleIndex)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+</TABLE>
+&nbsp;<A NAME="methods_inherited_from_class_java.lang.Object"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#EEEEFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left"><B>Methods inherited from class java.lang.Object</B></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE>clone, equals, finalize, getClass, hashCode, notify, notifyAll, toString, wait, wait, wait</CODE></TD>
+</TR>
+</TABLE>
+&nbsp;
+<P>
+
+<!-- ========= CONSTRUCTOR DETAIL ======== -->
+
+<A NAME="constructor_detail"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="1"><FONT SIZE="+2">
+<B>Constructor Detail</B></FONT></TH>
+</TR>
+</TABLE>
+
+<A NAME="HWPFList(boolean, org.apache.poi.hwpf.model.StyleSheet)"><!-- --></A><H3>
+HWPFList</H3>
+<PRE>
+public <B>HWPFList</B>(boolean&nbsp;numbered,
+                <A HREF="../../../../../org/apache/poi/hwpf/model/StyleSheet.html" title="class in org.apache.poi.hwpf.model">StyleSheet</A>&nbsp;styleSheet)</PRE>
+<DL>
+<DL>
+<DT><B>Parameters:</B><DD><CODE>numbered</CODE> - true if the list should be numbered; false if it should be
+            bulleted.<DD><CODE>styleSheet</CODE> - The document's stylesheet.</DL>
+</DL>
+<HR>
+
+<A NAME="HWPFList(org.apache.poi.hwpf.model.StyleSheet, org.apache.poi.hwpf.model.ListTables, int)"><!-- --></A><H3>
+HWPFList</H3>
+<PRE>
+public <B>HWPFList</B>(<A HREF="../../../../../org/apache/poi/hwpf/model/StyleSheet.html" title="class in org.apache.poi.hwpf.model">StyleSheet</A>&nbsp;styleSheet,
+                <A HREF="../../../../../org/apache/poi/hwpf/model/ListTables.html" title="class in org.apache.poi.hwpf.model">ListTables</A>&nbsp;listTables,
+                int&nbsp;ilfo)</PRE>
+<DL>
+</DL>
+
+<!-- ============ METHOD DETAIL ========== -->
+
+<A NAME="method_detail"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="1"><FONT SIZE="+2">
+<B>Method Detail</B></FONT></TH>
+</TR>
+</TABLE>
+
+<A NAME="getLFO()"><!-- --></A><H3>
+getLFO</H3>
+<PRE>
+<FONT SIZE="-1"><A HREF="../../../../../org/apache/poi/util/Internal.html" title="annotation in org.apache.poi.util">@Internal</A>
+</FONT>public <A HREF="../../../../../org/apache/poi/hwpf/model/LFO.html" title="class in org.apache.poi.hwpf.model">LFO</A> <B>getLFO</B>()</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getLFOData()"><!-- --></A><H3>
+getLFOData</H3>
+<PRE>
+<FONT SIZE="-1"><A HREF="../../../../../org/apache/poi/util/Internal.html" title="annotation in org.apache.poi.util">@Internal</A>
+</FONT>public <A HREF="../../../../../org/apache/poi/hwpf/model/LFOData.html" title="class in org.apache.poi.hwpf.model">LFOData</A> <B>getLFOData</B>()</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getListData()"><!-- --></A><H3>
+getListData</H3>
+<PRE>
+<FONT SIZE="-1"><A HREF="../../../../../org/apache/poi/util/Internal.html" title="annotation in org.apache.poi.util">@Internal</A>
+</FONT>public <A HREF="../../../../../org/apache/poi/hwpf/model/ListData.html" title="class in org.apache.poi.hwpf.model">ListData</A> <B>getListData</B>()</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getLsid()"><!-- --></A><H3>
+getLsid</H3>
+<PRE>
+public int <B>getLsid</B>()</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getNumberFormat(char)"><!-- --></A><H3>
+getNumberFormat</H3>
+<PRE>
+public int <B>getNumberFormat</B>(char&nbsp;level)</PRE>
+<DL>
+<DD>An MSONFC, as specified in [MS-OSHARED] section 2.2.1.3, that specifies
+ the format of the level numbers that replace the placeholders for this
+ level in the xst fields of the LVLs in this list. This value MUST not be
+ equal to 0x08, 0x09, 0x0F, or 0x13. If this is equal to 0xFF or 0x17,
+ this level does not have a number sequence and therefore has no number
+ formatting. If this is equal to 0x17, the level uses bullets.
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getNumberText(char)"><!-- --></A><H3>
+getNumberText</H3>
+<PRE>
+public java.lang.String <B>getNumberText</B>(char&nbsp;level)</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getStartAt(char)"><!-- --></A><H3>
+getStartAt</H3>
+<PRE>
+public int <B>getStartAt</B>(char&nbsp;level)</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getTypeOfCharFollowingTheNumber(char)"><!-- --></A><H3>
+getTypeOfCharFollowingTheNumber</H3>
+<PRE>
+public byte <B>getTypeOfCharFollowingTheNumber</B>(char&nbsp;level)</PRE>
+<DL>
+<DD>"The type of character following the number text for the paragraph: 0 == tab, 1 == space, 2 == nothing."
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="isIgnoreLogicalLeftIdentation()"><!-- --></A><H3>
+isIgnoreLogicalLeftIdentation</H3>
+<PRE>
+public boolean <B>isIgnoreLogicalLeftIdentation</B>()</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="isStartAtOverriden(char)"><!-- --></A><H3>
+isStartAtOverriden</H3>
+<PRE>
+public boolean <B>isStartAtOverriden</B>(char&nbsp;level)</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setIgnoreLogicalLeftIdentation(boolean)"><!-- --></A><H3>
+setIgnoreLogicalLeftIdentation</H3>
+<PRE>
+public void <B>setIgnoreLogicalLeftIdentation</B>(boolean&nbsp;ignoreLogicalLeftIdentation)</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setLevelNumberProperties(int, org.apache.poi.hwpf.usermodel.CharacterProperties)"><!-- --></A><H3>
+setLevelNumberProperties</H3>
+<PRE>
+public void <B>setLevelNumberProperties</B>(int&nbsp;level,
+                                     <A HREF="../../../../../org/apache/poi/hwpf/usermodel/CharacterProperties.html" title="class in org.apache.poi.hwpf.usermodel">CharacterProperties</A>&nbsp;chp)</PRE>
+<DL>
+<DD>Sets the character properties of the list numbers.
+<P>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>level</CODE> - the level number that the properties should apply to.<DD><CODE>chp</CODE> - The character properties.</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setLevelParagraphProperties(int, org.apache.poi.hwpf.usermodel.ParagraphProperties)"><!-- --></A><H3>
+setLevelParagraphProperties</H3>
+<PRE>
+public void <B>setLevelParagraphProperties</B>(int&nbsp;level,
+                                        <A HREF="../../../../../org/apache/poi/hwpf/usermodel/ParagraphProperties.html" title="class in org.apache.poi.hwpf.usermodel">ParagraphProperties</A>&nbsp;pap)</PRE>
+<DL>
+<DD>Sets the paragraph properties for a particular level of the list.
+<P>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>level</CODE> - The level number.<DD><CODE>pap</CODE> - The paragraph properties</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setLevelStyle(int, int)"><!-- --></A><H3>
+setLevelStyle</H3>
+<PRE>
+public void <B>setLevelStyle</B>(int&nbsp;level,
+                          int&nbsp;styleIndex)</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<!-- ========= END OF CLASS DATA ========= -->
+<HR>
+
+
+<!-- ======= START OF BOTTOM NAVBAR ====== -->
+<A NAME="navbar_bottom"><!-- --></A>
+<A HREF="#skip-navbar_bottom" title="Skip navigation links"></A>
+<TABLE BORDER="0" WIDTH="100%" CELLPADDING="1" CELLSPACING="0" SUMMARY="">
+<TR>
+<TD COLSPAN=2 BGCOLOR="#EEEEFF" CLASS="NavBarCell1">
+<A NAME="navbar_bottom_firstrow"><!-- --></A>
+<TABLE BORDER="0" CELLPADDING="0" CELLSPACING="3" SUMMARY="">
+  <TR ALIGN="center" VALIGN="top">
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../overview-summary.html"><FONT CLASS="NavBarFont1"><B>Overview</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="package-summary.html"><FONT CLASS="NavBarFont1"><B>Package</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#FFFFFF" CLASS="NavBarCell1Rev"> &nbsp;<FONT CLASS="NavBarFont1Rev"><B>Class</B></FONT>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="class-use/HWPFList.html"><FONT CLASS="NavBarFont1"><B>Use</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="package-tree.html"><FONT CLASS="NavBarFont1"><B>Tree</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../deprecated-list.html"><FONT CLASS="NavBarFont1"><B>Deprecated</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../index-all.html"><FONT CLASS="NavBarFont1"><B>Index</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../help-doc.html"><FONT CLASS="NavBarFont1"><B>Help</B></FONT></A>&nbsp;</TD>
+  </TR>
+</TABLE>
+</TD>
+<TD ALIGN="right" VALIGN="top" ROWSPAN=3><EM>
+</EM>
+</TD>
+</TR>
+
+<TR>
+<TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
+&nbsp;<A HREF="../../../../../org/apache/poi/hwpf/usermodel/HeaderStories.html" title="class in org.apache.poi.hwpf.usermodel"><B>PREV CLASS</B></A>&nbsp;
+&nbsp;<A HREF="../../../../../org/apache/poi/hwpf/usermodel/LineSpacingDescriptor.html" title="class in org.apache.poi.hwpf.usermodel"><B>NEXT CLASS</B></A></FONT></TD>
+<TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
+  <A HREF="../../../../../index.html?org/apache/poi/hwpf/usermodel/HWPFList.html" target="_top"><B>FRAMES</B></A>  &nbsp;
+&nbsp;<A HREF="HWPFList.html" target="_top"><B>NO FRAMES</B></A>  &nbsp;
+&nbsp;<SCRIPT type="text/javascript">
+  <!--
+  if(window==top) {
+    document.writeln('<A HREF="../../../../../allclasses-noframe.html"><B>All Classes</B></A>');
+  }
+  //-->
+</SCRIPT>
+<NOSCRIPT>
+  <A HREF="../../../../../allclasses-noframe.html"><B>All Classes</B></A>
+</NOSCRIPT>
+
+
+</FONT></TD>
+</TR>
+<TR>
+<TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
+  SUMMARY:&nbsp;NESTED&nbsp;|&nbsp;FIELD&nbsp;|&nbsp;<A HREF="#constructor_summary">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_summary">METHOD</A></FONT></TD>
+<TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
+DETAIL:&nbsp;FIELD&nbsp;|&nbsp;<A HREF="#constructor_detail">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_detail">METHOD</A></FONT></TD>
+</TR>
+</TABLE>
+<A NAME="skip-navbar_bottom"></A>
+<!-- ======== END OF BOTTOM NAVBAR ======= -->
+
+<HR>
+
+                <i>Copyright 2014 The Apache Software Foundation or
+        its licensors, as applicable.</i>
+            
+</BODY>
+</HTML>

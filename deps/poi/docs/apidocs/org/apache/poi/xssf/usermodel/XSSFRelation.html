@@ -1,0 +1,975 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!--NewPage-->
+<HTML>
+<HEAD>
+<TITLE>
+XSSFRelation (POI API Documentation)
+</TITLE>
+
+<META NAME="keywords" CONTENT="org.apache.poi.xssf.usermodel.XSSFRelation class">
+
+<LINK REL ="stylesheet" TYPE="text/css" HREF="../../../../../stylesheet.css" TITLE="Style">
+
+<SCRIPT type="text/javascript">
+function windowTitle()
+{
+    parent.document.title="XSSFRelation (POI API Documentation)";
+}
+</SCRIPT>
+<NOSCRIPT>
+</NOSCRIPT>
+
+</HEAD>
+
+<BODY BGCOLOR="white" onload="windowTitle();">
+
+
+<!-- ========= START OF TOP NAVBAR ======= -->
+<A NAME="navbar_top"><!-- --></A>
+<A HREF="#skip-navbar_top" title="Skip navigation links"></A>
+<TABLE BORDER="0" WIDTH="100%" CELLPADDING="1" CELLSPACING="0" SUMMARY="">
+<TR>
+<TD COLSPAN=2 BGCOLOR="#EEEEFF" CLASS="NavBarCell1">
+<A NAME="navbar_top_firstrow"><!-- --></A>
+<TABLE BORDER="0" CELLPADDING="0" CELLSPACING="3" SUMMARY="">
+  <TR ALIGN="center" VALIGN="top">
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../overview-summary.html"><FONT CLASS="NavBarFont1"><B>Overview</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="package-summary.html"><FONT CLASS="NavBarFont1"><B>Package</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#FFFFFF" CLASS="NavBarCell1Rev"> &nbsp;<FONT CLASS="NavBarFont1Rev"><B>Class</B></FONT>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="class-use/XSSFRelation.html"><FONT CLASS="NavBarFont1"><B>Use</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="package-tree.html"><FONT CLASS="NavBarFont1"><B>Tree</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../deprecated-list.html"><FONT CLASS="NavBarFont1"><B>Deprecated</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../index-all.html"><FONT CLASS="NavBarFont1"><B>Index</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../help-doc.html"><FONT CLASS="NavBarFont1"><B>Help</B></FONT></A>&nbsp;</TD>
+  </TR>
+</TABLE>
+</TD>
+<TD ALIGN="right" VALIGN="top" ROWSPAN=3><EM>
+</EM>
+</TD>
+</TR>
+
+<TR>
+<TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
+&nbsp;<A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFPrintSetup.html" title="class in org.apache.poi.xssf.usermodel"><B>PREV CLASS</B></A>&nbsp;
+&nbsp;<A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFRichTextString.html" title="class in org.apache.poi.xssf.usermodel"><B>NEXT CLASS</B></A></FONT></TD>
+<TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
+  <A HREF="../../../../../index.html?org/apache/poi/xssf/usermodel/XSSFRelation.html" target="_top"><B>FRAMES</B></A>  &nbsp;
+&nbsp;<A HREF="XSSFRelation.html" target="_top"><B>NO FRAMES</B></A>  &nbsp;
+&nbsp;<SCRIPT type="text/javascript">
+  <!--
+  if(window==top) {
+    document.writeln('<A HREF="../../../../../allclasses-noframe.html"><B>All Classes</B></A>');
+  }
+  //-->
+</SCRIPT>
+<NOSCRIPT>
+  <A HREF="../../../../../allclasses-noframe.html"><B>All Classes</B></A>
+</NOSCRIPT>
+
+
+</FONT></TD>
+</TR>
+<TR>
+<TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
+  SUMMARY:&nbsp;NESTED&nbsp;|&nbsp;<A HREF="#field_summary">FIELD</A>&nbsp;|&nbsp;CONSTR&nbsp;|&nbsp;<A HREF="#method_summary">METHOD</A></FONT></TD>
+<TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
+DETAIL:&nbsp;<A HREF="#field_detail">FIELD</A>&nbsp;|&nbsp;CONSTR&nbsp;|&nbsp;<A HREF="#method_detail">METHOD</A></FONT></TD>
+</TR>
+</TABLE>
+<A NAME="skip-navbar_top"></A>
+<!-- ========= END OF TOP NAVBAR ========= -->
+
+<HR>
+<!-- ======== START OF CLASS DATA ======== -->
+<H2>
+<FONT SIZE="-1">
+org.apache.poi.xssf.usermodel</FONT>
+<BR>
+Class XSSFRelation</H2>
+<PRE>
+java.lang.Object
+  <IMG SRC="../../../../../resources/inherit.gif" ALT="extended by "><A HREF="../../../../../org/apache/poi/POIXMLRelation.html" title="class in org.apache.poi">org.apache.poi.POIXMLRelation</A>
+      <IMG SRC="../../../../../resources/inherit.gif" ALT="extended by "><B>org.apache.poi.xssf.usermodel.XSSFRelation</B>
+</PRE>
+<HR>
+<DL>
+<DT><PRE>public final class <B>XSSFRelation</B><DT>extends <A HREF="../../../../../org/apache/poi/POIXMLRelation.html" title="class in org.apache.poi">POIXMLRelation</A></DL>
+</PRE>
+
+<P>
+<HR>
+
+<P>
+<!-- =========== FIELD SUMMARY =========== -->
+
+<A NAME="field_summary"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+<B>Field Summary</B></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>protected static&nbsp;java.util.Map&lt;java.lang.String,<A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFRelation.html" title="class in org.apache.poi.xssf.usermodel">XSSFRelation</A>&gt;</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFRelation.html#_table">_table</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A map to lookup POIXMLRelation by its relation type</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;<A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFRelation.html" title="class in org.apache.poi.xssf.usermodel">XSSFRelation</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFRelation.html#ACTIVEX_BINS">ACTIVEX_BINS</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;<A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFRelation.html" title="class in org.apache.poi.xssf.usermodel">XSSFRelation</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFRelation.html#ACTIVEX_CONTROLS">ACTIVEX_CONTROLS</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;<A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFRelation.html" title="class in org.apache.poi.xssf.usermodel">XSSFRelation</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFRelation.html#CALC_CHAIN">CALC_CHAIN</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;<A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFRelation.html" title="class in org.apache.poi.xssf.usermodel">XSSFRelation</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFRelation.html#CHART">CHART</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;<A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFRelation.html" title="class in org.apache.poi.xssf.usermodel">XSSFRelation</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFRelation.html#CHARTSHEET">CHARTSHEET</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;<A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFRelation.html" title="class in org.apache.poi.xssf.usermodel">XSSFRelation</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFRelation.html#CUSTOM_XML_MAPPINGS">CUSTOM_XML_MAPPINGS</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;<A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFRelation.html" title="class in org.apache.poi.xssf.usermodel">XSSFRelation</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFRelation.html#DRAWINGS">DRAWINGS</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;<A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFRelation.html" title="class in org.apache.poi.xssf.usermodel">XSSFRelation</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFRelation.html#IMAGE_BMP">IMAGE_BMP</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;<A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFRelation.html" title="class in org.apache.poi.xssf.usermodel">XSSFRelation</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFRelation.html#IMAGE_DIB">IMAGE_DIB</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;<A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFRelation.html" title="class in org.apache.poi.xssf.usermodel">XSSFRelation</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFRelation.html#IMAGE_EMF">IMAGE_EMF</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;<A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFRelation.html" title="class in org.apache.poi.xssf.usermodel">XSSFRelation</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFRelation.html#IMAGE_EPS">IMAGE_EPS</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;<A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFRelation.html" title="class in org.apache.poi.xssf.usermodel">XSSFRelation</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFRelation.html#IMAGE_GIF">IMAGE_GIF</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;<A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFRelation.html" title="class in org.apache.poi.xssf.usermodel">XSSFRelation</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFRelation.html#IMAGE_JPEG">IMAGE_JPEG</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;<A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFRelation.html" title="class in org.apache.poi.xssf.usermodel">XSSFRelation</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFRelation.html#IMAGE_PICT">IMAGE_PICT</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;<A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFRelation.html" title="class in org.apache.poi.xssf.usermodel">XSSFRelation</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFRelation.html#IMAGE_PNG">IMAGE_PNG</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;<A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFRelation.html" title="class in org.apache.poi.xssf.usermodel">XSSFRelation</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFRelation.html#IMAGE_TIFF">IMAGE_TIFF</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;<A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFRelation.html" title="class in org.apache.poi.xssf.usermodel">XSSFRelation</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFRelation.html#IMAGE_WMF">IMAGE_WMF</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;<A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFRelation.html" title="class in org.apache.poi.xssf.usermodel">XSSFRelation</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFRelation.html#IMAGE_WPG">IMAGE_WPG</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;<A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFRelation.html" title="class in org.apache.poi.xssf.usermodel">XSSFRelation</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFRelation.html#IMAGES">IMAGES</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;<A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFRelation.html" title="class in org.apache.poi.xssf.usermodel">XSSFRelation</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFRelation.html#MACRO_ADDIN_WORKBOOK">MACRO_ADDIN_WORKBOOK</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;<A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFRelation.html" title="class in org.apache.poi.xssf.usermodel">XSSFRelation</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFRelation.html#MACRO_TEMPLATE_WORKBOOK">MACRO_TEMPLATE_WORKBOOK</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;<A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFRelation.html" title="class in org.apache.poi.xssf.usermodel">XSSFRelation</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFRelation.html#MACROS_WORKBOOK">MACROS_WORKBOOK</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;<A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFRelation.html" title="class in org.apache.poi.xssf.usermodel">XSSFRelation</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFRelation.html#OLEEMBEDDINGS">OLEEMBEDDINGS</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;<A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFRelation.html" title="class in org.apache.poi.xssf.usermodel">XSSFRelation</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFRelation.html#PACKEMBEDDINGS">PACKEMBEDDINGS</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;<A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFRelation.html" title="class in org.apache.poi.xssf.usermodel">XSSFRelation</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFRelation.html#PRINTER_SETTINGS">PRINTER_SETTINGS</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;<A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFRelation.html" title="class in org.apache.poi.xssf.usermodel">XSSFRelation</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFRelation.html#SHARED_STRINGS">SHARED_STRINGS</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;<A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFRelation.html" title="class in org.apache.poi.xssf.usermodel">XSSFRelation</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFRelation.html#SHEET_COMMENTS">SHEET_COMMENTS</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;<A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFRelation.html" title="class in org.apache.poi.xssf.usermodel">XSSFRelation</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFRelation.html#SHEET_HYPERLINKS">SHEET_HYPERLINKS</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;<A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFRelation.html" title="class in org.apache.poi.xssf.usermodel">XSSFRelation</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFRelation.html#SINGLE_XML_CELLS">SINGLE_XML_CELLS</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;<A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFRelation.html" title="class in org.apache.poi.xssf.usermodel">XSSFRelation</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFRelation.html#STYLES">STYLES</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;<A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFRelation.html" title="class in org.apache.poi.xssf.usermodel">XSSFRelation</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFRelation.html#TABLE">TABLE</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;<A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFRelation.html" title="class in org.apache.poi.xssf.usermodel">XSSFRelation</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFRelation.html#TEMPLATE_WORKBOOK">TEMPLATE_WORKBOOK</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;<A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFRelation.html" title="class in org.apache.poi.xssf.usermodel">XSSFRelation</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFRelation.html#THEME">THEME</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;<A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFRelation.html" title="class in org.apache.poi.xssf.usermodel">XSSFRelation</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFRelation.html#VBA_MACROS">VBA_MACROS</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;<A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFRelation.html" title="class in org.apache.poi.xssf.usermodel">XSSFRelation</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFRelation.html#VML_DRAWINGS">VML_DRAWINGS</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;<A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFRelation.html" title="class in org.apache.poi.xssf.usermodel">XSSFRelation</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFRelation.html#WORKBOOK">WORKBOOK</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;<A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFRelation.html" title="class in org.apache.poi.xssf.usermodel">XSSFRelation</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFRelation.html#WORKSHEET">WORKSHEET</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+</TABLE>
+&nbsp;<A NAME="fields_inherited_from_class_org.apache.poi.POIXMLRelation"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#EEEEFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left"><B>Fields inherited from class org.apache.poi.<A HREF="../../../../../org/apache/poi/POIXMLRelation.html" title="class in org.apache.poi">POIXMLRelation</A></B></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><A HREF="../../../../../org/apache/poi/POIXMLRelation.html#_defaultName">_defaultName</A>, <A HREF="../../../../../org/apache/poi/POIXMLRelation.html#_relation">_relation</A>, <A HREF="../../../../../org/apache/poi/POIXMLRelation.html#_type">_type</A></CODE></TD>
+</TR>
+</TABLE>
+&nbsp;
+<!-- ========== METHOD SUMMARY =========== -->
+
+<A NAME="method_summary"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+<B>Method Summary</B></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;java.io.InputStream</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFRelation.html#getContents(org.apache.poi.openxml4j.opc.PackagePart)">getContents</A></B>(<A HREF="../../../../../org/apache/poi/openxml4j/opc/PackagePart.html" title="class in org.apache.poi.openxml4j.opc">PackagePart</A>&nbsp;corePart)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Fetches the InputStream to read the contents, based
+  of the specified core part, for which we are defined
+  as a suitable relationship</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;<A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFRelation.html" title="class in org.apache.poi.xssf.usermodel">XSSFRelation</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFRelation.html#getInstance(java.lang.String)">getInstance</A></B>(java.lang.String&nbsp;rel)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Get POIXMLRelation by relation type</TD>
+</TR>
+</TABLE>
+&nbsp;<A NAME="methods_inherited_from_class_org.apache.poi.POIXMLRelation"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#EEEEFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left"><B>Methods inherited from class org.apache.poi.<A HREF="../../../../../org/apache/poi/POIXMLRelation.html" title="class in org.apache.poi">POIXMLRelation</A></B></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><A HREF="../../../../../org/apache/poi/POIXMLRelation.html#getContentType()">getContentType</A>, <A HREF="../../../../../org/apache/poi/POIXMLRelation.html#getDefaultFileName()">getDefaultFileName</A>, <A HREF="../../../../../org/apache/poi/POIXMLRelation.html#getFileName(int)">getFileName</A>, <A HREF="../../../../../org/apache/poi/POIXMLRelation.html#getRelation()">getRelation</A>, <A HREF="../../../../../org/apache/poi/POIXMLRelation.html#getRelationClass()">getRelationClass</A></CODE></TD>
+</TR>
+</TABLE>
+&nbsp;<A NAME="methods_inherited_from_class_java.lang.Object"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#EEEEFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left"><B>Methods inherited from class java.lang.Object</B></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE>clone, equals, finalize, getClass, hashCode, notify, notifyAll, toString, wait, wait, wait</CODE></TD>
+</TR>
+</TABLE>
+&nbsp;
+<P>
+
+<!-- ============ FIELD DETAIL =========== -->
+
+<A NAME="field_detail"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="1"><FONT SIZE="+2">
+<B>Field Detail</B></FONT></TH>
+</TR>
+</TABLE>
+
+<A NAME="_table"><!-- --></A><H3>
+_table</H3>
+<PRE>
+protected static java.util.Map&lt;java.lang.String,<A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFRelation.html" title="class in org.apache.poi.xssf.usermodel">XSSFRelation</A>&gt; <B>_table</B></PRE>
+<DL>
+<DD>A map to lookup POIXMLRelation by its relation type
+<P>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="WORKBOOK"><!-- --></A><H3>
+WORKBOOK</H3>
+<PRE>
+public static final <A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFRelation.html" title="class in org.apache.poi.xssf.usermodel">XSSFRelation</A> <B>WORKBOOK</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="MACROS_WORKBOOK"><!-- --></A><H3>
+MACROS_WORKBOOK</H3>
+<PRE>
+public static final <A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFRelation.html" title="class in org.apache.poi.xssf.usermodel">XSSFRelation</A> <B>MACROS_WORKBOOK</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="TEMPLATE_WORKBOOK"><!-- --></A><H3>
+TEMPLATE_WORKBOOK</H3>
+<PRE>
+public static final <A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFRelation.html" title="class in org.apache.poi.xssf.usermodel">XSSFRelation</A> <B>TEMPLATE_WORKBOOK</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="MACRO_TEMPLATE_WORKBOOK"><!-- --></A><H3>
+MACRO_TEMPLATE_WORKBOOK</H3>
+<PRE>
+public static final <A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFRelation.html" title="class in org.apache.poi.xssf.usermodel">XSSFRelation</A> <B>MACRO_TEMPLATE_WORKBOOK</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="MACRO_ADDIN_WORKBOOK"><!-- --></A><H3>
+MACRO_ADDIN_WORKBOOK</H3>
+<PRE>
+public static final <A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFRelation.html" title="class in org.apache.poi.xssf.usermodel">XSSFRelation</A> <B>MACRO_ADDIN_WORKBOOK</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="WORKSHEET"><!-- --></A><H3>
+WORKSHEET</H3>
+<PRE>
+public static final <A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFRelation.html" title="class in org.apache.poi.xssf.usermodel">XSSFRelation</A> <B>WORKSHEET</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="CHARTSHEET"><!-- --></A><H3>
+CHARTSHEET</H3>
+<PRE>
+public static final <A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFRelation.html" title="class in org.apache.poi.xssf.usermodel">XSSFRelation</A> <B>CHARTSHEET</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="SHARED_STRINGS"><!-- --></A><H3>
+SHARED_STRINGS</H3>
+<PRE>
+public static final <A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFRelation.html" title="class in org.apache.poi.xssf.usermodel">XSSFRelation</A> <B>SHARED_STRINGS</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="STYLES"><!-- --></A><H3>
+STYLES</H3>
+<PRE>
+public static final <A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFRelation.html" title="class in org.apache.poi.xssf.usermodel">XSSFRelation</A> <B>STYLES</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="DRAWINGS"><!-- --></A><H3>
+DRAWINGS</H3>
+<PRE>
+public static final <A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFRelation.html" title="class in org.apache.poi.xssf.usermodel">XSSFRelation</A> <B>DRAWINGS</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="VML_DRAWINGS"><!-- --></A><H3>
+VML_DRAWINGS</H3>
+<PRE>
+public static final <A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFRelation.html" title="class in org.apache.poi.xssf.usermodel">XSSFRelation</A> <B>VML_DRAWINGS</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="CHART"><!-- --></A><H3>
+CHART</H3>
+<PRE>
+public static final <A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFRelation.html" title="class in org.apache.poi.xssf.usermodel">XSSFRelation</A> <B>CHART</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="CUSTOM_XML_MAPPINGS"><!-- --></A><H3>
+CUSTOM_XML_MAPPINGS</H3>
+<PRE>
+public static final <A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFRelation.html" title="class in org.apache.poi.xssf.usermodel">XSSFRelation</A> <B>CUSTOM_XML_MAPPINGS</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="SINGLE_XML_CELLS"><!-- --></A><H3>
+SINGLE_XML_CELLS</H3>
+<PRE>
+public static final <A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFRelation.html" title="class in org.apache.poi.xssf.usermodel">XSSFRelation</A> <B>SINGLE_XML_CELLS</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="TABLE"><!-- --></A><H3>
+TABLE</H3>
+<PRE>
+public static final <A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFRelation.html" title="class in org.apache.poi.xssf.usermodel">XSSFRelation</A> <B>TABLE</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="IMAGES"><!-- --></A><H3>
+IMAGES</H3>
+<PRE>
+public static final <A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFRelation.html" title="class in org.apache.poi.xssf.usermodel">XSSFRelation</A> <B>IMAGES</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="IMAGE_EMF"><!-- --></A><H3>
+IMAGE_EMF</H3>
+<PRE>
+public static final <A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFRelation.html" title="class in org.apache.poi.xssf.usermodel">XSSFRelation</A> <B>IMAGE_EMF</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="IMAGE_WMF"><!-- --></A><H3>
+IMAGE_WMF</H3>
+<PRE>
+public static final <A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFRelation.html" title="class in org.apache.poi.xssf.usermodel">XSSFRelation</A> <B>IMAGE_WMF</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="IMAGE_PICT"><!-- --></A><H3>
+IMAGE_PICT</H3>
+<PRE>
+public static final <A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFRelation.html" title="class in org.apache.poi.xssf.usermodel">XSSFRelation</A> <B>IMAGE_PICT</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="IMAGE_JPEG"><!-- --></A><H3>
+IMAGE_JPEG</H3>
+<PRE>
+public static final <A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFRelation.html" title="class in org.apache.poi.xssf.usermodel">XSSFRelation</A> <B>IMAGE_JPEG</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="IMAGE_PNG"><!-- --></A><H3>
+IMAGE_PNG</H3>
+<PRE>
+public static final <A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFRelation.html" title="class in org.apache.poi.xssf.usermodel">XSSFRelation</A> <B>IMAGE_PNG</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="IMAGE_DIB"><!-- --></A><H3>
+IMAGE_DIB</H3>
+<PRE>
+public static final <A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFRelation.html" title="class in org.apache.poi.xssf.usermodel">XSSFRelation</A> <B>IMAGE_DIB</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="IMAGE_GIF"><!-- --></A><H3>
+IMAGE_GIF</H3>
+<PRE>
+public static final <A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFRelation.html" title="class in org.apache.poi.xssf.usermodel">XSSFRelation</A> <B>IMAGE_GIF</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="IMAGE_TIFF"><!-- --></A><H3>
+IMAGE_TIFF</H3>
+<PRE>
+public static final <A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFRelation.html" title="class in org.apache.poi.xssf.usermodel">XSSFRelation</A> <B>IMAGE_TIFF</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="IMAGE_EPS"><!-- --></A><H3>
+IMAGE_EPS</H3>
+<PRE>
+public static final <A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFRelation.html" title="class in org.apache.poi.xssf.usermodel">XSSFRelation</A> <B>IMAGE_EPS</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="IMAGE_BMP"><!-- --></A><H3>
+IMAGE_BMP</H3>
+<PRE>
+public static final <A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFRelation.html" title="class in org.apache.poi.xssf.usermodel">XSSFRelation</A> <B>IMAGE_BMP</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="IMAGE_WPG"><!-- --></A><H3>
+IMAGE_WPG</H3>
+<PRE>
+public static final <A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFRelation.html" title="class in org.apache.poi.xssf.usermodel">XSSFRelation</A> <B>IMAGE_WPG</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="SHEET_COMMENTS"><!-- --></A><H3>
+SHEET_COMMENTS</H3>
+<PRE>
+public static final <A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFRelation.html" title="class in org.apache.poi.xssf.usermodel">XSSFRelation</A> <B>SHEET_COMMENTS</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="SHEET_HYPERLINKS"><!-- --></A><H3>
+SHEET_HYPERLINKS</H3>
+<PRE>
+public static final <A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFRelation.html" title="class in org.apache.poi.xssf.usermodel">XSSFRelation</A> <B>SHEET_HYPERLINKS</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="OLEEMBEDDINGS"><!-- --></A><H3>
+OLEEMBEDDINGS</H3>
+<PRE>
+public static final <A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFRelation.html" title="class in org.apache.poi.xssf.usermodel">XSSFRelation</A> <B>OLEEMBEDDINGS</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="PACKEMBEDDINGS"><!-- --></A><H3>
+PACKEMBEDDINGS</H3>
+<PRE>
+public static final <A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFRelation.html" title="class in org.apache.poi.xssf.usermodel">XSSFRelation</A> <B>PACKEMBEDDINGS</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="VBA_MACROS"><!-- --></A><H3>
+VBA_MACROS</H3>
+<PRE>
+public static final <A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFRelation.html" title="class in org.apache.poi.xssf.usermodel">XSSFRelation</A> <B>VBA_MACROS</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="ACTIVEX_CONTROLS"><!-- --></A><H3>
+ACTIVEX_CONTROLS</H3>
+<PRE>
+public static final <A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFRelation.html" title="class in org.apache.poi.xssf.usermodel">XSSFRelation</A> <B>ACTIVEX_CONTROLS</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="ACTIVEX_BINS"><!-- --></A><H3>
+ACTIVEX_BINS</H3>
+<PRE>
+public static final <A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFRelation.html" title="class in org.apache.poi.xssf.usermodel">XSSFRelation</A> <B>ACTIVEX_BINS</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="THEME"><!-- --></A><H3>
+THEME</H3>
+<PRE>
+public static final <A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFRelation.html" title="class in org.apache.poi.xssf.usermodel">XSSFRelation</A> <B>THEME</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="CALC_CHAIN"><!-- --></A><H3>
+CALC_CHAIN</H3>
+<PRE>
+public static final <A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFRelation.html" title="class in org.apache.poi.xssf.usermodel">XSSFRelation</A> <B>CALC_CHAIN</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="PRINTER_SETTINGS"><!-- --></A><H3>
+PRINTER_SETTINGS</H3>
+<PRE>
+public static final <A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFRelation.html" title="class in org.apache.poi.xssf.usermodel">XSSFRelation</A> <B>PRINTER_SETTINGS</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+
+<!-- ============ METHOD DETAIL ========== -->
+
+<A NAME="method_detail"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="1"><FONT SIZE="+2">
+<B>Method Detail</B></FONT></TH>
+</TR>
+</TABLE>
+
+<A NAME="getContents(org.apache.poi.openxml4j.opc.PackagePart)"><!-- --></A><H3>
+getContents</H3>
+<PRE>
+public java.io.InputStream <B>getContents</B>(<A HREF="../../../../../org/apache/poi/openxml4j/opc/PackagePart.html" title="class in org.apache.poi.openxml4j.opc">PackagePart</A>&nbsp;corePart)
+                                throws java.io.IOException,
+                                       <A HREF="../../../../../org/apache/poi/openxml4j/exceptions/InvalidFormatException.html" title="class in org.apache.poi.openxml4j.exceptions">InvalidFormatException</A></PRE>
+<DL>
+<DD>Fetches the InputStream to read the contents, based
+  of the specified core part, for which we are defined
+  as a suitable relationship
+<P>
+<DD><DL>
+
+<DT><B>Throws:</B>
+<DD><CODE>java.io.IOException</CODE>
+<DD><CODE><A HREF="../../../../../org/apache/poi/openxml4j/exceptions/InvalidFormatException.html" title="class in org.apache.poi.openxml4j.exceptions">InvalidFormatException</A></CODE></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getInstance(java.lang.String)"><!-- --></A><H3>
+getInstance</H3>
+<PRE>
+public static <A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFRelation.html" title="class in org.apache.poi.xssf.usermodel">XSSFRelation</A> <B>getInstance</B>(java.lang.String&nbsp;rel)</PRE>
+<DL>
+<DD>Get POIXMLRelation by relation type
+<P>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>rel</CODE> - relation type, for example,
+    <code>http://schemas.openxmlformats.org/officeDocument/2006/relationships/image</code>
+<DT><B>Returns:</B><DD>registered POIXMLRelation or null if not found</DL>
+</DD>
+</DL>
+<!-- ========= END OF CLASS DATA ========= -->
+<HR>
+
+
+<!-- ======= START OF BOTTOM NAVBAR ====== -->
+<A NAME="navbar_bottom"><!-- --></A>
+<A HREF="#skip-navbar_bottom" title="Skip navigation links"></A>
+<TABLE BORDER="0" WIDTH="100%" CELLPADDING="1" CELLSPACING="0" SUMMARY="">
+<TR>
+<TD COLSPAN=2 BGCOLOR="#EEEEFF" CLASS="NavBarCell1">
+<A NAME="navbar_bottom_firstrow"><!-- --></A>
+<TABLE BORDER="0" CELLPADDING="0" CELLSPACING="3" SUMMARY="">
+  <TR ALIGN="center" VALIGN="top">
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../overview-summary.html"><FONT CLASS="NavBarFont1"><B>Overview</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="package-summary.html"><FONT CLASS="NavBarFont1"><B>Package</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#FFFFFF" CLASS="NavBarCell1Rev"> &nbsp;<FONT CLASS="NavBarFont1Rev"><B>Class</B></FONT>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="class-use/XSSFRelation.html"><FONT CLASS="NavBarFont1"><B>Use</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="package-tree.html"><FONT CLASS="NavBarFont1"><B>Tree</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../deprecated-list.html"><FONT CLASS="NavBarFont1"><B>Deprecated</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../index-all.html"><FONT CLASS="NavBarFont1"><B>Index</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../help-doc.html"><FONT CLASS="NavBarFont1"><B>Help</B></FONT></A>&nbsp;</TD>
+  </TR>
+</TABLE>
+</TD>
+<TD ALIGN="right" VALIGN="top" ROWSPAN=3><EM>
+</EM>
+</TD>
+</TR>
+
+<TR>
+<TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
+&nbsp;<A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFPrintSetup.html" title="class in org.apache.poi.xssf.usermodel"><B>PREV CLASS</B></A>&nbsp;
+&nbsp;<A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFRichTextString.html" title="class in org.apache.poi.xssf.usermodel"><B>NEXT CLASS</B></A></FONT></TD>
+<TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
+  <A HREF="../../../../../index.html?org/apache/poi/xssf/usermodel/XSSFRelation.html" target="_top"><B>FRAMES</B></A>  &nbsp;
+&nbsp;<A HREF="XSSFRelation.html" target="_top"><B>NO FRAMES</B></A>  &nbsp;
+&nbsp;<SCRIPT type="text/javascript">
+  <!--
+  if(window==top) {
+    document.writeln('<A HREF="../../../../../allclasses-noframe.html"><B>All Classes</B></A>');
+  }
+  //-->
+</SCRIPT>
+<NOSCRIPT>
+  <A HREF="../../../../../allclasses-noframe.html"><B>All Classes</B></A>
+</NOSCRIPT>
+
+
+</FONT></TD>
+</TR>
+<TR>
+<TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
+  SUMMARY:&nbsp;NESTED&nbsp;|&nbsp;<A HREF="#field_summary">FIELD</A>&nbsp;|&nbsp;CONSTR&nbsp;|&nbsp;<A HREF="#method_summary">METHOD</A></FONT></TD>
+<TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
+DETAIL:&nbsp;<A HREF="#field_detail">FIELD</A>&nbsp;|&nbsp;CONSTR&nbsp;|&nbsp;<A HREF="#method_detail">METHOD</A></FONT></TD>
+</TR>
+</TABLE>
+<A NAME="skip-navbar_bottom"></A>
+<!-- ======== END OF BOTTOM NAVBAR ======= -->
+
+<HR>
+
+                <i>Copyright 2014 The Apache Software Foundation or
+        its licensors, as applicable.</i>
+            
+</BODY>
+</HTML>

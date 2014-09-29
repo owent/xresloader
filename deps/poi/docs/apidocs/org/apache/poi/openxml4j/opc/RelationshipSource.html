@@ -1,0 +1,486 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!--NewPage-->
+<HTML>
+<HEAD>
+<TITLE>
+RelationshipSource (POI API Documentation)
+</TITLE>
+
+<META NAME="keywords" CONTENT="org.apache.poi.openxml4j.opc.RelationshipSource interface">
+
+<LINK REL ="stylesheet" TYPE="text/css" HREF="../../../../../stylesheet.css" TITLE="Style">
+
+<SCRIPT type="text/javascript">
+function windowTitle()
+{
+    parent.document.title="RelationshipSource (POI API Documentation)";
+}
+</SCRIPT>
+<NOSCRIPT>
+</NOSCRIPT>
+
+</HEAD>
+
+<BODY BGCOLOR="white" onload="windowTitle();">
+
+
+<!-- ========= START OF TOP NAVBAR ======= -->
+<A NAME="navbar_top"><!-- --></A>
+<A HREF="#skip-navbar_top" title="Skip navigation links"></A>
+<TABLE BORDER="0" WIDTH="100%" CELLPADDING="1" CELLSPACING="0" SUMMARY="">
+<TR>
+<TD COLSPAN=2 BGCOLOR="#EEEEFF" CLASS="NavBarCell1">
+<A NAME="navbar_top_firstrow"><!-- --></A>
+<TABLE BORDER="0" CELLPADDING="0" CELLSPACING="3" SUMMARY="">
+  <TR ALIGN="center" VALIGN="top">
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../overview-summary.html"><FONT CLASS="NavBarFont1"><B>Overview</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="package-summary.html"><FONT CLASS="NavBarFont1"><B>Package</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#FFFFFF" CLASS="NavBarCell1Rev"> &nbsp;<FONT CLASS="NavBarFont1Rev"><B>Class</B></FONT>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="class-use/RelationshipSource.html"><FONT CLASS="NavBarFont1"><B>Use</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="package-tree.html"><FONT CLASS="NavBarFont1"><B>Tree</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../deprecated-list.html"><FONT CLASS="NavBarFont1"><B>Deprecated</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../index-all.html"><FONT CLASS="NavBarFont1"><B>Index</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../help-doc.html"><FONT CLASS="NavBarFont1"><B>Help</B></FONT></A>&nbsp;</TD>
+  </TR>
+</TABLE>
+</TD>
+<TD ALIGN="right" VALIGN="top" ROWSPAN=3><EM>
+</EM>
+</TD>
+</TR>
+
+<TR>
+<TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
+&nbsp;<A HREF="../../../../../org/apache/poi/openxml4j/opc/PackagingURIHelper.html" title="class in org.apache.poi.openxml4j.opc"><B>PREV CLASS</B></A>&nbsp;
+&nbsp;<A HREF="../../../../../org/apache/poi/openxml4j/opc/StreamHelper.html" title="class in org.apache.poi.openxml4j.opc"><B>NEXT CLASS</B></A></FONT></TD>
+<TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
+  <A HREF="../../../../../index.html?org/apache/poi/openxml4j/opc/RelationshipSource.html" target="_top"><B>FRAMES</B></A>  &nbsp;
+&nbsp;<A HREF="RelationshipSource.html" target="_top"><B>NO FRAMES</B></A>  &nbsp;
+&nbsp;<SCRIPT type="text/javascript">
+  <!--
+  if(window==top) {
+    document.writeln('<A HREF="../../../../../allclasses-noframe.html"><B>All Classes</B></A>');
+  }
+  //-->
+</SCRIPT>
+<NOSCRIPT>
+  <A HREF="../../../../../allclasses-noframe.html"><B>All Classes</B></A>
+</NOSCRIPT>
+
+
+</FONT></TD>
+</TR>
+<TR>
+<TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
+  SUMMARY:&nbsp;NESTED&nbsp;|&nbsp;FIELD&nbsp;|&nbsp;CONSTR&nbsp;|&nbsp;<A HREF="#method_summary">METHOD</A></FONT></TD>
+<TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
+DETAIL:&nbsp;FIELD&nbsp;|&nbsp;CONSTR&nbsp;|&nbsp;<A HREF="#method_detail">METHOD</A></FONT></TD>
+</TR>
+</TABLE>
+<A NAME="skip-navbar_top"></A>
+<!-- ========= END OF TOP NAVBAR ========= -->
+
+<HR>
+<!-- ======== START OF CLASS DATA ======== -->
+<H2>
+<FONT SIZE="-1">
+org.apache.poi.openxml4j.opc</FONT>
+<BR>
+Interface RelationshipSource</H2>
+<DL>
+<DT><B>All Known Implementing Classes:</B> <DD><A HREF="../../../../../org/apache/poi/openxml4j/opc/internal/signature/DigitalCertificatePart.html" title="class in org.apache.poi.openxml4j.opc.internal.signature">DigitalCertificatePart</A>, <A HREF="../../../../../org/apache/poi/openxml4j/opc/internal/MemoryPackagePart.html" title="class in org.apache.poi.openxml4j.opc.internal">MemoryPackagePart</A>, <A HREF="../../../../../org/apache/poi/openxml4j/opc/OPCPackage.html" title="class in org.apache.poi.openxml4j.opc">OPCPackage</A>, <A HREF="../../../../../org/apache/poi/openxml4j/opc/Package.html" title="class in org.apache.poi.openxml4j.opc">Package</A>, <A HREF="../../../../../org/apache/poi/openxml4j/opc/signature/PackageDigitalSignature.html" title="class in org.apache.poi.openxml4j.opc.signature">PackageDigitalSignature</A>, <A HREF="../../../../../org/apache/poi/openxml4j/opc/PackagePart.html" title="class in org.apache.poi.openxml4j.opc">PackagePart</A>, <A HREF="../../../../../org/apache/poi/openxml4j/opc/internal/PackagePropertiesPart.html" title="class in org.apache.poi.openxml4j.opc.internal">PackagePropertiesPart</A>, <A HREF="../../../../../org/apache/poi/openxml4j/opc/ZipPackage.html" title="class in org.apache.poi.openxml4j.opc">ZipPackage</A>, <A HREF="../../../../../org/apache/poi/openxml4j/opc/ZipPackagePart.html" title="class in org.apache.poi.openxml4j.opc">ZipPackagePart</A></DD>
+</DL>
+<HR>
+<DL>
+<DT><PRE>public interface <B>RelationshipSource</B></DL>
+</PRE>
+
+<P>
+<HR>
+
+<P>
+
+<!-- ========== METHOD SUMMARY =========== -->
+
+<A NAME="method_summary"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+<B>Method Summary</B></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../../../org/apache/poi/openxml4j/opc/PackageRelationship.html" title="class in org.apache.poi.openxml4j.opc">PackageRelationship</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/openxml4j/opc/RelationshipSource.html#addExternalRelationship(java.lang.String, java.lang.String)">addExternalRelationship</A></B>(java.lang.String&nbsp;target,
+                        java.lang.String&nbsp;relationshipType)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Adds an external relationship to a part
+  (except relationships part).</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../../../org/apache/poi/openxml4j/opc/PackageRelationship.html" title="class in org.apache.poi.openxml4j.opc">PackageRelationship</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/openxml4j/opc/RelationshipSource.html#addExternalRelationship(java.lang.String, java.lang.String, java.lang.String)">addExternalRelationship</A></B>(java.lang.String&nbsp;target,
+                        java.lang.String&nbsp;relationshipType,
+                        java.lang.String&nbsp;id)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Adds an external relationship to a part
+  (except relationships part).</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../../../org/apache/poi/openxml4j/opc/PackageRelationship.html" title="class in org.apache.poi.openxml4j.opc">PackageRelationship</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/openxml4j/opc/RelationshipSource.html#addRelationship(org.apache.poi.openxml4j.opc.PackagePartName, org.apache.poi.openxml4j.opc.TargetMode, java.lang.String)">addRelationship</A></B>(<A HREF="../../../../../org/apache/poi/openxml4j/opc/PackagePartName.html" title="class in org.apache.poi.openxml4j.opc">PackagePartName</A>&nbsp;targetPartName,
+                <A HREF="../../../../../org/apache/poi/openxml4j/opc/TargetMode.html" title="enum in org.apache.poi.openxml4j.opc">TargetMode</A>&nbsp;targetMode,
+                java.lang.String&nbsp;relationshipType)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Add a relationship to a part (except relationships part).</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../../../org/apache/poi/openxml4j/opc/PackageRelationship.html" title="class in org.apache.poi.openxml4j.opc">PackageRelationship</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/openxml4j/opc/RelationshipSource.html#addRelationship(org.apache.poi.openxml4j.opc.PackagePartName, org.apache.poi.openxml4j.opc.TargetMode, java.lang.String, java.lang.String)">addRelationship</A></B>(<A HREF="../../../../../org/apache/poi/openxml4j/opc/PackagePartName.html" title="class in org.apache.poi.openxml4j.opc">PackagePartName</A>&nbsp;targetPartName,
+                <A HREF="../../../../../org/apache/poi/openxml4j/opc/TargetMode.html" title="enum in org.apache.poi.openxml4j.opc">TargetMode</A>&nbsp;targetMode,
+                java.lang.String&nbsp;relationshipType,
+                java.lang.String&nbsp;id)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Add a relationship to a part (except relationships part).</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/openxml4j/opc/RelationshipSource.html#clearRelationships()">clearRelationships</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Delete all the relationships attached to this.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../../../org/apache/poi/openxml4j/opc/PackageRelationship.html" title="class in org.apache.poi.openxml4j.opc">PackageRelationship</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/openxml4j/opc/RelationshipSource.html#getRelationship(java.lang.String)">getRelationship</A></B>(java.lang.String&nbsp;id)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Retrieves a package relationship from its id.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../../../org/apache/poi/openxml4j/opc/PackageRelationshipCollection.html" title="class in org.apache.poi.openxml4j.opc">PackageRelationshipCollection</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/openxml4j/opc/RelationshipSource.html#getRelationships()">getRelationships</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Retrieve all the relationships attached to this.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../../../org/apache/poi/openxml4j/opc/PackageRelationshipCollection.html" title="class in org.apache.poi.openxml4j.opc">PackageRelationshipCollection</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/openxml4j/opc/RelationshipSource.html#getRelationshipsByType(java.lang.String)">getRelationshipsByType</A></B>(java.lang.String&nbsp;relationshipType)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Retrieve all relationships attached to this part which have the specified
+ type.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/openxml4j/opc/RelationshipSource.html#hasRelationships()">hasRelationships</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Knows if the part have any relationships.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/openxml4j/opc/RelationshipSource.html#isRelationshipExists(org.apache.poi.openxml4j.opc.PackageRelationship)">isRelationshipExists</A></B>(<A HREF="../../../../../org/apache/poi/openxml4j/opc/PackageRelationship.html" title="class in org.apache.poi.openxml4j.opc">PackageRelationship</A>&nbsp;rel)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Checks if the specified relationship is part of this package part.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/openxml4j/opc/RelationshipSource.html#removeRelationship(java.lang.String)">removeRelationship</A></B>(java.lang.String&nbsp;id)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Delete the relationship specified by its id.</TD>
+</TR>
+</TABLE>
+&nbsp;
+<P>
+
+<!-- ============ METHOD DETAIL ========== -->
+
+<A NAME="method_detail"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="1"><FONT SIZE="+2">
+<B>Method Detail</B></FONT></TH>
+</TR>
+</TABLE>
+
+<A NAME="addRelationship(org.apache.poi.openxml4j.opc.PackagePartName, org.apache.poi.openxml4j.opc.TargetMode, java.lang.String)"><!-- --></A><H3>
+addRelationship</H3>
+<PRE>
+<A HREF="../../../../../org/apache/poi/openxml4j/opc/PackageRelationship.html" title="class in org.apache.poi.openxml4j.opc">PackageRelationship</A> <B>addRelationship</B>(<A HREF="../../../../../org/apache/poi/openxml4j/opc/PackagePartName.html" title="class in org.apache.poi.openxml4j.opc">PackagePartName</A>&nbsp;targetPartName,
+                                    <A HREF="../../../../../org/apache/poi/openxml4j/opc/TargetMode.html" title="enum in org.apache.poi.openxml4j.opc">TargetMode</A>&nbsp;targetMode,
+                                    java.lang.String&nbsp;relationshipType)</PRE>
+<DL>
+<DD>Add a relationship to a part (except relationships part).
+<P>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>targetPartName</CODE> - Name of the target part. This one must be relative to the
+            source root directory of the part.<DD><CODE>targetMode</CODE> - Mode [Internal|External].<DD><CODE>relationshipType</CODE> - Type of relationship.
+<DT><B>Returns:</B><DD>The newly created and added relationship</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="addRelationship(org.apache.poi.openxml4j.opc.PackagePartName, org.apache.poi.openxml4j.opc.TargetMode, java.lang.String, java.lang.String)"><!-- --></A><H3>
+addRelationship</H3>
+<PRE>
+<A HREF="../../../../../org/apache/poi/openxml4j/opc/PackageRelationship.html" title="class in org.apache.poi.openxml4j.opc">PackageRelationship</A> <B>addRelationship</B>(<A HREF="../../../../../org/apache/poi/openxml4j/opc/PackagePartName.html" title="class in org.apache.poi.openxml4j.opc">PackagePartName</A>&nbsp;targetPartName,
+                                    <A HREF="../../../../../org/apache/poi/openxml4j/opc/TargetMode.html" title="enum in org.apache.poi.openxml4j.opc">TargetMode</A>&nbsp;targetMode,
+                                    java.lang.String&nbsp;relationshipType,
+                                    java.lang.String&nbsp;id)</PRE>
+<DL>
+<DD>Add a relationship to a part (except relationships part).
+ <p>
+ Check rule M1.25: The Relationships part shall not have relationships to
+ any other part. Package implementers shall enforce this requirement upon
+ the attempt to create such a relationship and shall treat any such
+ relationship as invalid.
+ </p>
+<P>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>targetPartName</CODE> - Name of the target part. This one must be relative to the
+            source root directory of the part.<DD><CODE>targetMode</CODE> - Mode [Internal|External].<DD><CODE>relationshipType</CODE> - Type of relationship.<DD><CODE>id</CODE> - Relationship unique id.
+<DT><B>Returns:</B><DD>The newly created and added relationship
+<DT><B>Throws:</B>
+<DD><CODE><A HREF="../../../../../org/apache/poi/openxml4j/exceptions/InvalidFormatException.html" title="class in org.apache.poi.openxml4j.exceptions">InvalidFormatException</A></CODE> - If the URI point to a relationship part URI.</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="addExternalRelationship(java.lang.String, java.lang.String)"><!-- --></A><H3>
+addExternalRelationship</H3>
+<PRE>
+<A HREF="../../../../../org/apache/poi/openxml4j/opc/PackageRelationship.html" title="class in org.apache.poi.openxml4j.opc">PackageRelationship</A> <B>addExternalRelationship</B>(java.lang.String&nbsp;target,
+                                            java.lang.String&nbsp;relationshipType)</PRE>
+<DL>
+<DD>Adds an external relationship to a part
+  (except relationships part).
+
+ The targets of external relationships are not
+  subject to the same validity checks that internal
+  ones are, as the contents is potentially
+  any file, URL or similar.
+<P>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>target</CODE> - External target of the relationship<DD><CODE>relationshipType</CODE> - Type of relationship.
+<DT><B>Returns:</B><DD>The newly created and added relationship<DT><B>See Also:</B><DD><A HREF="../../../../../org/apache/poi/openxml4j/opc/RelationshipSource.html#addExternalRelationship(java.lang.String, java.lang.String)"><CODE>addExternalRelationship(java.lang.String, java.lang.String)</CODE></A></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="addExternalRelationship(java.lang.String, java.lang.String, java.lang.String)"><!-- --></A><H3>
+addExternalRelationship</H3>
+<PRE>
+<A HREF="../../../../../org/apache/poi/openxml4j/opc/PackageRelationship.html" title="class in org.apache.poi.openxml4j.opc">PackageRelationship</A> <B>addExternalRelationship</B>(java.lang.String&nbsp;target,
+                                            java.lang.String&nbsp;relationshipType,
+                                            java.lang.String&nbsp;id)</PRE>
+<DL>
+<DD>Adds an external relationship to a part
+  (except relationships part).
+
+ The targets of external relationships are not
+  subject to the same validity checks that internal
+  ones are, as the contents is potentially
+  any file, URL or similar.
+<P>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>target</CODE> - External target of the relationship<DD><CODE>relationshipType</CODE> - Type of relationship.<DD><CODE>id</CODE> - Relationship unique id.
+<DT><B>Returns:</B><DD>The newly created and added relationship<DT><B>See Also:</B><DD><A HREF="../../../../../org/apache/poi/openxml4j/opc/RelationshipSource.html#addExternalRelationship(java.lang.String, java.lang.String)"><CODE>addExternalRelationship(java.lang.String, java.lang.String)</CODE></A></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="clearRelationships()"><!-- --></A><H3>
+clearRelationships</H3>
+<PRE>
+void <B>clearRelationships</B>()</PRE>
+<DL>
+<DD>Delete all the relationships attached to this.
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="removeRelationship(java.lang.String)"><!-- --></A><H3>
+removeRelationship</H3>
+<PRE>
+void <B>removeRelationship</B>(java.lang.String&nbsp;id)</PRE>
+<DL>
+<DD>Delete the relationship specified by its id.
+<P>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>id</CODE> - The ID identified the part to delete.</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getRelationships()"><!-- --></A><H3>
+getRelationships</H3>
+<PRE>
+<A HREF="../../../../../org/apache/poi/openxml4j/opc/PackageRelationshipCollection.html" title="class in org.apache.poi.openxml4j.opc">PackageRelationshipCollection</A> <B>getRelationships</B>()
+                                               throws <A HREF="../../../../../org/apache/poi/openxml4j/exceptions/InvalidFormatException.html" title="class in org.apache.poi.openxml4j.exceptions">InvalidFormatException</A>,
+                                                      <A HREF="../../../../../org/apache/poi/openxml4j/exceptions/OpenXML4JException.html" title="class in org.apache.poi.openxml4j.exceptions">OpenXML4JException</A></PRE>
+<DL>
+<DD>Retrieve all the relationships attached to this.
+<P>
+<DD><DL>
+
+<DT><B>Returns:</B><DD>This part's relationships.
+<DT><B>Throws:</B>
+<DD><CODE><A HREF="../../../../../org/apache/poi/openxml4j/exceptions/OpenXML4JException.html" title="class in org.apache.poi.openxml4j.exceptions">OpenXML4JException</A></CODE>
+<DD><CODE><A HREF="../../../../../org/apache/poi/openxml4j/exceptions/InvalidFormatException.html" title="class in org.apache.poi.openxml4j.exceptions">InvalidFormatException</A></CODE></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getRelationship(java.lang.String)"><!-- --></A><H3>
+getRelationship</H3>
+<PRE>
+<A HREF="../../../../../org/apache/poi/openxml4j/opc/PackageRelationship.html" title="class in org.apache.poi.openxml4j.opc">PackageRelationship</A> <B>getRelationship</B>(java.lang.String&nbsp;id)</PRE>
+<DL>
+<DD>Retrieves a package relationship from its id.
+<P>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>id</CODE> - ID of the package relationship to retrieve.
+<DT><B>Returns:</B><DD>The package relationship</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getRelationshipsByType(java.lang.String)"><!-- --></A><H3>
+getRelationshipsByType</H3>
+<PRE>
+<A HREF="../../../../../org/apache/poi/openxml4j/opc/PackageRelationshipCollection.html" title="class in org.apache.poi.openxml4j.opc">PackageRelationshipCollection</A> <B>getRelationshipsByType</B>(java.lang.String&nbsp;relationshipType)
+                                                     throws <A HREF="../../../../../org/apache/poi/openxml4j/exceptions/InvalidFormatException.html" title="class in org.apache.poi.openxml4j.exceptions">InvalidFormatException</A>,
+                                                            java.lang.IllegalArgumentException,
+                                                            <A HREF="../../../../../org/apache/poi/openxml4j/exceptions/OpenXML4JException.html" title="class in org.apache.poi.openxml4j.exceptions">OpenXML4JException</A></PRE>
+<DL>
+<DD>Retrieve all relationships attached to this part which have the specified
+ type.
+<P>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>relationshipType</CODE> - Relationship type filter.
+<DT><B>Returns:</B><DD>All relationships from this part that have the specified type.
+<DT><B>Throws:</B>
+<DD><CODE><A HREF="../../../../../org/apache/poi/openxml4j/exceptions/InvalidFormatException.html" title="class in org.apache.poi.openxml4j.exceptions">InvalidFormatException</A></CODE> - If an error occurs while parsing the part.
+<DD><CODE><A HREF="../../../../../org/apache/poi/openxml4j/exceptions/InvalidOperationException.html" title="class in org.apache.poi.openxml4j.exceptions">InvalidOperationException</A></CODE> - If the package is open in write only mode.
+<DD><CODE>java.lang.IllegalArgumentException</CODE>
+<DD><CODE><A HREF="../../../../../org/apache/poi/openxml4j/exceptions/OpenXML4JException.html" title="class in org.apache.poi.openxml4j.exceptions">OpenXML4JException</A></CODE></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="hasRelationships()"><!-- --></A><H3>
+hasRelationships</H3>
+<PRE>
+boolean <B>hasRelationships</B>()</PRE>
+<DL>
+<DD>Knows if the part have any relationships.
+<P>
+<DD><DL>
+
+<DT><B>Returns:</B><DD><b>true</b> if the part have at least one relationship else
+         <b>false</b>.</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="isRelationshipExists(org.apache.poi.openxml4j.opc.PackageRelationship)"><!-- --></A><H3>
+isRelationshipExists</H3>
+<PRE>
+boolean <B>isRelationshipExists</B>(<A HREF="../../../../../org/apache/poi/openxml4j/opc/PackageRelationship.html" title="class in org.apache.poi.openxml4j.opc">PackageRelationship</A>&nbsp;rel)</PRE>
+<DL>
+<DD>Checks if the specified relationship is part of this package part.
+<P>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>rel</CODE> - The relationship to check.
+<DT><B>Returns:</B><DD><b>true</b> if the specified relationship exists in this part,
+         else returns <b>false</b></DL>
+</DD>
+</DL>
+<!-- ========= END OF CLASS DATA ========= -->
+<HR>
+
+
+<!-- ======= START OF BOTTOM NAVBAR ====== -->
+<A NAME="navbar_bottom"><!-- --></A>
+<A HREF="#skip-navbar_bottom" title="Skip navigation links"></A>
+<TABLE BORDER="0" WIDTH="100%" CELLPADDING="1" CELLSPACING="0" SUMMARY="">
+<TR>
+<TD COLSPAN=2 BGCOLOR="#EEEEFF" CLASS="NavBarCell1">
+<A NAME="navbar_bottom_firstrow"><!-- --></A>
+<TABLE BORDER="0" CELLPADDING="0" CELLSPACING="3" SUMMARY="">
+  <TR ALIGN="center" VALIGN="top">
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../overview-summary.html"><FONT CLASS="NavBarFont1"><B>Overview</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="package-summary.html"><FONT CLASS="NavBarFont1"><B>Package</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#FFFFFF" CLASS="NavBarCell1Rev"> &nbsp;<FONT CLASS="NavBarFont1Rev"><B>Class</B></FONT>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="class-use/RelationshipSource.html"><FONT CLASS="NavBarFont1"><B>Use</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="package-tree.html"><FONT CLASS="NavBarFont1"><B>Tree</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../deprecated-list.html"><FONT CLASS="NavBarFont1"><B>Deprecated</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../index-all.html"><FONT CLASS="NavBarFont1"><B>Index</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../help-doc.html"><FONT CLASS="NavBarFont1"><B>Help</B></FONT></A>&nbsp;</TD>
+  </TR>
+</TABLE>
+</TD>
+<TD ALIGN="right" VALIGN="top" ROWSPAN=3><EM>
+</EM>
+</TD>
+</TR>
+
+<TR>
+<TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
+&nbsp;<A HREF="../../../../../org/apache/poi/openxml4j/opc/PackagingURIHelper.html" title="class in org.apache.poi.openxml4j.opc"><B>PREV CLASS</B></A>&nbsp;
+&nbsp;<A HREF="../../../../../org/apache/poi/openxml4j/opc/StreamHelper.html" title="class in org.apache.poi.openxml4j.opc"><B>NEXT CLASS</B></A></FONT></TD>
+<TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
+  <A HREF="../../../../../index.html?org/apache/poi/openxml4j/opc/RelationshipSource.html" target="_top"><B>FRAMES</B></A>  &nbsp;
+&nbsp;<A HREF="RelationshipSource.html" target="_top"><B>NO FRAMES</B></A>  &nbsp;
+&nbsp;<SCRIPT type="text/javascript">
+  <!--
+  if(window==top) {
+    document.writeln('<A HREF="../../../../../allclasses-noframe.html"><B>All Classes</B></A>');
+  }
+  //-->
+</SCRIPT>
+<NOSCRIPT>
+  <A HREF="../../../../../allclasses-noframe.html"><B>All Classes</B></A>
+</NOSCRIPT>
+
+
+</FONT></TD>
+</TR>
+<TR>
+<TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
+  SUMMARY:&nbsp;NESTED&nbsp;|&nbsp;FIELD&nbsp;|&nbsp;CONSTR&nbsp;|&nbsp;<A HREF="#method_summary">METHOD</A></FONT></TD>
+<TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
+DETAIL:&nbsp;FIELD&nbsp;|&nbsp;CONSTR&nbsp;|&nbsp;<A HREF="#method_detail">METHOD</A></FONT></TD>
+</TR>
+</TABLE>
+<A NAME="skip-navbar_bottom"></A>
+<!-- ======== END OF BOTTOM NAVBAR ======= -->
+
+<HR>
+
+                <i>Copyright 2014 The Apache Software Foundation or
+        its licensors, as applicable.</i>
+            
+</BODY>
+</HTML>

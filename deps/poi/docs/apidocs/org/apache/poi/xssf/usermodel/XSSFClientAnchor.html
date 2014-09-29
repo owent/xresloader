@@ -1,0 +1,1012 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!--NewPage-->
+<HTML>
+<HEAD>
+<TITLE>
+XSSFClientAnchor (POI API Documentation)
+</TITLE>
+
+<META NAME="keywords" CONTENT="org.apache.poi.xssf.usermodel.XSSFClientAnchor class">
+
+<LINK REL ="stylesheet" TYPE="text/css" HREF="../../../../../stylesheet.css" TITLE="Style">
+
+<SCRIPT type="text/javascript">
+function windowTitle()
+{
+    parent.document.title="XSSFClientAnchor (POI API Documentation)";
+}
+</SCRIPT>
+<NOSCRIPT>
+</NOSCRIPT>
+
+</HEAD>
+
+<BODY BGCOLOR="white" onload="windowTitle();">
+
+
+<!-- ========= START OF TOP NAVBAR ======= -->
+<A NAME="navbar_top"><!-- --></A>
+<A HREF="#skip-navbar_top" title="Skip navigation links"></A>
+<TABLE BORDER="0" WIDTH="100%" CELLPADDING="1" CELLSPACING="0" SUMMARY="">
+<TR>
+<TD COLSPAN=2 BGCOLOR="#EEEEFF" CLASS="NavBarCell1">
+<A NAME="navbar_top_firstrow"><!-- --></A>
+<TABLE BORDER="0" CELLPADDING="0" CELLSPACING="3" SUMMARY="">
+  <TR ALIGN="center" VALIGN="top">
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../overview-summary.html"><FONT CLASS="NavBarFont1"><B>Overview</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="package-summary.html"><FONT CLASS="NavBarFont1"><B>Package</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#FFFFFF" CLASS="NavBarCell1Rev"> &nbsp;<FONT CLASS="NavBarFont1Rev"><B>Class</B></FONT>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="class-use/XSSFClientAnchor.html"><FONT CLASS="NavBarFont1"><B>Use</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="package-tree.html"><FONT CLASS="NavBarFont1"><B>Tree</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../deprecated-list.html"><FONT CLASS="NavBarFont1"><B>Deprecated</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../index-all.html"><FONT CLASS="NavBarFont1"><B>Index</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../help-doc.html"><FONT CLASS="NavBarFont1"><B>Help</B></FONT></A>&nbsp;</TD>
+  </TR>
+</TABLE>
+</TD>
+<TD ALIGN="right" VALIGN="top" ROWSPAN=3><EM>
+</EM>
+</TD>
+</TR>
+
+<TR>
+<TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
+&nbsp;<A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFChildAnchor.html" title="class in org.apache.poi.xssf.usermodel"><B>PREV CLASS</B></A>&nbsp;
+&nbsp;<A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFColor.html" title="class in org.apache.poi.xssf.usermodel"><B>NEXT CLASS</B></A></FONT></TD>
+<TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
+  <A HREF="../../../../../index.html?org/apache/poi/xssf/usermodel/XSSFClientAnchor.html" target="_top"><B>FRAMES</B></A>  &nbsp;
+&nbsp;<A HREF="XSSFClientAnchor.html" target="_top"><B>NO FRAMES</B></A>  &nbsp;
+&nbsp;<SCRIPT type="text/javascript">
+  <!--
+  if(window==top) {
+    document.writeln('<A HREF="../../../../../allclasses-noframe.html"><B>All Classes</B></A>');
+  }
+  //-->
+</SCRIPT>
+<NOSCRIPT>
+  <A HREF="../../../../../allclasses-noframe.html"><B>All Classes</B></A>
+</NOSCRIPT>
+
+
+</FONT></TD>
+</TR>
+<TR>
+<TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
+  SUMMARY:&nbsp;NESTED&nbsp;|&nbsp;FIELD&nbsp;|&nbsp;<A HREF="#constructor_summary">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_summary">METHOD</A></FONT></TD>
+<TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
+DETAIL:&nbsp;FIELD&nbsp;|&nbsp;<A HREF="#constructor_detail">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_detail">METHOD</A></FONT></TD>
+</TR>
+</TABLE>
+<A NAME="skip-navbar_top"></A>
+<!-- ========= END OF TOP NAVBAR ========= -->
+
+<HR>
+<!-- ======== START OF CLASS DATA ======== -->
+<H2>
+<FONT SIZE="-1">
+org.apache.poi.xssf.usermodel</FONT>
+<BR>
+Class XSSFClientAnchor</H2>
+<PRE>
+java.lang.Object
+  <IMG SRC="../../../../../resources/inherit.gif" ALT="extended by "><A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFAnchor.html" title="class in org.apache.poi.xssf.usermodel">org.apache.poi.xssf.usermodel.XSSFAnchor</A>
+      <IMG SRC="../../../../../resources/inherit.gif" ALT="extended by "><B>org.apache.poi.xssf.usermodel.XSSFClientAnchor</B>
+</PRE>
+<DL>
+<DT><B>All Implemented Interfaces:</B> <DD><A HREF="../../../../../org/apache/poi/ss/usermodel/ClientAnchor.html" title="interface in org.apache.poi.ss.usermodel">ClientAnchor</A></DD>
+</DL>
+<HR>
+<DL>
+<DT><PRE>public final class <B>XSSFClientAnchor</B><DT>extends <A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFAnchor.html" title="class in org.apache.poi.xssf.usermodel">XSSFAnchor</A><DT>implements <A HREF="../../../../../org/apache/poi/ss/usermodel/ClientAnchor.html" title="interface in org.apache.poi.ss.usermodel">ClientAnchor</A></DL>
+</PRE>
+
+<P>
+A client anchor is attached to an excel worksheet.  It anchors against
+ top-left and bottom-right cells.
+<P>
+
+<P>
+<DL>
+<DT><B>Author:</B></DT>
+  <DD>Yegor Kozlov</DD>
+</DL>
+<HR>
+
+<P>
+<!-- =========== FIELD SUMMARY =========== -->
+
+<A NAME="field_summary"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+<B>Field Summary</B></FONT></TH>
+</TR>
+</TABLE>
+&nbsp;<A NAME="fields_inherited_from_class_org.apache.poi.ss.usermodel.ClientAnchor"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#EEEEFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left"><B>Fields inherited from interface org.apache.poi.ss.usermodel.<A HREF="../../../../../org/apache/poi/ss/usermodel/ClientAnchor.html" title="interface in org.apache.poi.ss.usermodel">ClientAnchor</A></B></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><A HREF="../../../../../org/apache/poi/ss/usermodel/ClientAnchor.html#DONT_MOVE_AND_RESIZE">DONT_MOVE_AND_RESIZE</A>, <A HREF="../../../../../org/apache/poi/ss/usermodel/ClientAnchor.html#MOVE_AND_RESIZE">MOVE_AND_RESIZE</A>, <A HREF="../../../../../org/apache/poi/ss/usermodel/ClientAnchor.html#MOVE_DONT_RESIZE">MOVE_DONT_RESIZE</A></CODE></TD>
+</TR>
+</TABLE>
+&nbsp;
+<!-- ======== CONSTRUCTOR SUMMARY ======== -->
+
+<A NAME="constructor_summary"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+<B>Constructor Summary</B></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFClientAnchor.html#XSSFClientAnchor()">XSSFClientAnchor</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Creates a new client anchor and defaults all the anchor positions to 0.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>protected </CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFClientAnchor.html#XSSFClientAnchor(org.openxmlformats.schemas.drawingml.x2006.spreadsheetDrawing.CTMarker, org.openxmlformats.schemas.drawingml.x2006.spreadsheetDrawing.CTMarker)">XSSFClientAnchor</A></B>(org.openxmlformats.schemas.drawingml.x2006.spreadsheetDrawing.CTMarker&nbsp;cell1,
+                 org.openxmlformats.schemas.drawingml.x2006.spreadsheetDrawing.CTMarker&nbsp;cell2)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Create XSSFClientAnchor from existing xml beans</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFClientAnchor.html#XSSFClientAnchor(int, int, int, int, int, int, int, int)">XSSFClientAnchor</A></B>(int&nbsp;dx1,
+                 int&nbsp;dy1,
+                 int&nbsp;dx2,
+                 int&nbsp;dy2,
+                 int&nbsp;col1,
+                 int&nbsp;row1,
+                 int&nbsp;col2,
+                 int&nbsp;row2)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Creates a new client anchor and sets the top-left and bottom-right
+ coordinates of the anchor.</TD>
+</TR>
+</TABLE>
+&nbsp;
+<!-- ========== METHOD SUMMARY =========== -->
+
+<A NAME="method_summary"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+<B>Method Summary</B></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFClientAnchor.html#equals(java.lang.Object)">equals</A></B>(java.lang.Object&nbsp;o)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;int</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFClientAnchor.html#getAnchorType()">getAnchorType</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gets the anchor type</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;short</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFClientAnchor.html#getCol1()">getCol1</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns the column (0 based) of the first cell.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;short</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFClientAnchor.html#getCol2()">getCol2</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns the column (0 based) of the second cell.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;int</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFClientAnchor.html#getDx1()">getDx1</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns the x coordinate within the first cell.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;int</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFClientAnchor.html#getDx2()">getDx2</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns the x coordinate within the second cell
+
+ Note - XSSF and HSSF have a slightly different coordinate
+  system, values in XSSF are larger by a factor of
+  <A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFShape.html#EMU_PER_PIXEL"><CODE>XSSFShape.EMU_PER_PIXEL</CODE></A></TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;int</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFClientAnchor.html#getDy1()">getDy1</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns the y coordinate within the first cell
+
+ Note - XSSF and HSSF have a slightly different coordinate
+  system, values in XSSF are larger by a factor of
+  <A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFShape.html#EMU_PER_PIXEL"><CODE>XSSFShape.EMU_PER_PIXEL</CODE></A></TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;int</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFClientAnchor.html#getDy2()">getDy2</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sets the y coordinate within the second cell
+
+ Note - XSSF and HSSF have a slightly different coordinate
+  system, values in XSSF are larger by a factor of
+  <A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFShape.html#EMU_PER_PIXEL"><CODE>XSSFShape.EMU_PER_PIXEL</CODE></A></TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;org.openxmlformats.schemas.drawingml.x2006.spreadsheetDrawing.CTMarker</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFClientAnchor.html#getFrom()">getFrom</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Return starting anchor point</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;int</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFClientAnchor.html#getRow1()">getRow1</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns the row (0 based) of the first cell.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;int</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFClientAnchor.html#getRow2()">getRow2</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns the row (0 based) of the second cell.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;org.openxmlformats.schemas.drawingml.x2006.spreadsheetDrawing.CTMarker</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFClientAnchor.html#getTo()">getTo</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Return ending anchor point</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFClientAnchor.html#isSet()">isSet</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFClientAnchor.html#setAnchorType(int)">setAnchorType</A></B>(int&nbsp;anchorType)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sets the anchor type</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFClientAnchor.html#setCol1(int)">setCol1</A></B>(int&nbsp;col1)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sets the column (0 based) of the first cell.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFClientAnchor.html#setCol2(int)">setCol2</A></B>(int&nbsp;col2)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns the column (0 based) of the second cell.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFClientAnchor.html#setDx1(int)">setDx1</A></B>(int&nbsp;dx1)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sets the x coordinate within the first cell
+
+ Note - XSSF and HSSF have a slightly different coordinate
+  system, values in XSSF are larger by a factor of
+  <A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFShape.html#EMU_PER_PIXEL"><CODE>XSSFShape.EMU_PER_PIXEL</CODE></A></TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFClientAnchor.html#setDx2(int)">setDx2</A></B>(int&nbsp;dx2)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sets the x coordinate within the second cell
+
+ Note - XSSF and HSSF have a slightly different coordinate
+  system, values in XSSF are larger by a factor of
+  <A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFShape.html#EMU_PER_PIXEL"><CODE>XSSFShape.EMU_PER_PIXEL</CODE></A></TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFClientAnchor.html#setDy1(int)">setDy1</A></B>(int&nbsp;dy1)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sets the y coordinate within the first cell
+
+ Note - XSSF and HSSF have a slightly different coordinate
+  system, values in XSSF are larger by a factor of
+  <A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFShape.html#EMU_PER_PIXEL"><CODE>XSSFShape.EMU_PER_PIXEL</CODE></A></TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFClientAnchor.html#setDy2(int)">setDy2</A></B>(int&nbsp;dy2)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sets the y coordinate within the second cell
+
+ Note - XSSF and HSSF have a slightly different coordinate
+  system, values in XSSF are larger by a factor of
+  <A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFShape.html#EMU_PER_PIXEL"><CODE>XSSFShape.EMU_PER_PIXEL</CODE></A></TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>protected &nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFClientAnchor.html#setFrom(org.openxmlformats.schemas.drawingml.x2006.spreadsheetDrawing.CTMarker)">setFrom</A></B>(org.openxmlformats.schemas.drawingml.x2006.spreadsheetDrawing.CTMarker&nbsp;from)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFClientAnchor.html#setRow1(int)">setRow1</A></B>(int&nbsp;row1)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns the row (0 based) of the first cell.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFClientAnchor.html#setRow2(int)">setRow2</A></B>(int&nbsp;row2)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns the row (0 based) of the first cell.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>protected &nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFClientAnchor.html#setTo(org.openxmlformats.schemas.drawingml.x2006.spreadsheetDrawing.CTMarker)">setTo</A></B>(org.openxmlformats.schemas.drawingml.x2006.spreadsheetDrawing.CTMarker&nbsp;to)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;java.lang.String</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFClientAnchor.html#toString()">toString</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+</TABLE>
+&nbsp;<A NAME="methods_inherited_from_class_java.lang.Object"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#EEEEFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left"><B>Methods inherited from class java.lang.Object</B></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE>clone, finalize, getClass, hashCode, notify, notifyAll, wait, wait, wait</CODE></TD>
+</TR>
+</TABLE>
+&nbsp;
+<P>
+
+<!-- ========= CONSTRUCTOR DETAIL ======== -->
+
+<A NAME="constructor_detail"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="1"><FONT SIZE="+2">
+<B>Constructor Detail</B></FONT></TH>
+</TR>
+</TABLE>
+
+<A NAME="XSSFClientAnchor()"><!-- --></A><H3>
+XSSFClientAnchor</H3>
+<PRE>
+public <B>XSSFClientAnchor</B>()</PRE>
+<DL>
+<DD>Creates a new client anchor and defaults all the anchor positions to 0.
+<P>
+</DL>
+<HR>
+
+<A NAME="XSSFClientAnchor(int, int, int, int, int, int, int, int)"><!-- --></A><H3>
+XSSFClientAnchor</H3>
+<PRE>
+public <B>XSSFClientAnchor</B>(int&nbsp;dx1,
+                        int&nbsp;dy1,
+                        int&nbsp;dx2,
+                        int&nbsp;dy2,
+                        int&nbsp;col1,
+                        int&nbsp;row1,
+                        int&nbsp;col2,
+                        int&nbsp;row2)</PRE>
+<DL>
+<DD>Creates a new client anchor and sets the top-left and bottom-right
+ coordinates of the anchor.
+<P>
+<DL>
+<DT><B>Parameters:</B><DD><CODE>dx1</CODE> - the x coordinate within the first cell.<DD><CODE>dy1</CODE> - the y coordinate within the first cell.<DD><CODE>dx2</CODE> - the x coordinate within the second cell.<DD><CODE>dy2</CODE> - the y coordinate within the second cell.<DD><CODE>col1</CODE> - the column (0 based) of the first cell.<DD><CODE>row1</CODE> - the row (0 based) of the first cell.<DD><CODE>col2</CODE> - the column (0 based) of the second cell.<DD><CODE>row2</CODE> - the row (0 based) of the second cell.</DL>
+</DL>
+<HR>
+
+<A NAME="XSSFClientAnchor(org.openxmlformats.schemas.drawingml.x2006.spreadsheetDrawing.CTMarker, org.openxmlformats.schemas.drawingml.x2006.spreadsheetDrawing.CTMarker)"><!-- --></A><H3>
+XSSFClientAnchor</H3>
+<PRE>
+protected <B>XSSFClientAnchor</B>(org.openxmlformats.schemas.drawingml.x2006.spreadsheetDrawing.CTMarker&nbsp;cell1,
+                           org.openxmlformats.schemas.drawingml.x2006.spreadsheetDrawing.CTMarker&nbsp;cell2)</PRE>
+<DL>
+<DD>Create XSSFClientAnchor from existing xml beans
+<P>
+<DL>
+<DT><B>Parameters:</B><DD><CODE>cell1</CODE> - starting anchor point<DD><CODE>cell2</CODE> - ending anchor point</DL>
+</DL>
+
+<!-- ============ METHOD DETAIL ========== -->
+
+<A NAME="method_detail"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="1"><FONT SIZE="+2">
+<B>Method Detail</B></FONT></TH>
+</TR>
+</TABLE>
+
+<A NAME="getCol1()"><!-- --></A><H3>
+getCol1</H3>
+<PRE>
+public short <B>getCol1</B>()</PRE>
+<DL>
+<DD><B>Description copied from interface: <CODE><A HREF="../../../../../org/apache/poi/ss/usermodel/ClientAnchor.html#getCol1()">ClientAnchor</A></CODE></B></DD>
+<DD>Returns the column (0 based) of the first cell.
+<P>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../../../../org/apache/poi/ss/usermodel/ClientAnchor.html#getCol1()">getCol1</A></CODE> in interface <CODE><A HREF="../../../../../org/apache/poi/ss/usermodel/ClientAnchor.html" title="interface in org.apache.poi.ss.usermodel">ClientAnchor</A></CODE></DL>
+</DD>
+<DD><DL>
+
+<DT><B>Returns:</B><DD>0-based column of the first cell.</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setCol1(int)"><!-- --></A><H3>
+setCol1</H3>
+<PRE>
+public void <B>setCol1</B>(int&nbsp;col1)</PRE>
+<DL>
+<DD><B>Description copied from interface: <CODE><A HREF="../../../../../org/apache/poi/ss/usermodel/ClientAnchor.html#setCol1(int)">ClientAnchor</A></CODE></B></DD>
+<DD>Sets the column (0 based) of the first cell.
+<P>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../../../../org/apache/poi/ss/usermodel/ClientAnchor.html#setCol1(int)">setCol1</A></CODE> in interface <CODE><A HREF="../../../../../org/apache/poi/ss/usermodel/ClientAnchor.html" title="interface in org.apache.poi.ss.usermodel">ClientAnchor</A></CODE></DL>
+</DD>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>col1</CODE> - 0-based column of the first cell.</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getCol2()"><!-- --></A><H3>
+getCol2</H3>
+<PRE>
+public short <B>getCol2</B>()</PRE>
+<DL>
+<DD><B>Description copied from interface: <CODE><A HREF="../../../../../org/apache/poi/ss/usermodel/ClientAnchor.html#getCol2()">ClientAnchor</A></CODE></B></DD>
+<DD>Returns the column (0 based) of the second cell.
+<P>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../../../../org/apache/poi/ss/usermodel/ClientAnchor.html#getCol2()">getCol2</A></CODE> in interface <CODE><A HREF="../../../../../org/apache/poi/ss/usermodel/ClientAnchor.html" title="interface in org.apache.poi.ss.usermodel">ClientAnchor</A></CODE></DL>
+</DD>
+<DD><DL>
+
+<DT><B>Returns:</B><DD>0-based column of the second cell.</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setCol2(int)"><!-- --></A><H3>
+setCol2</H3>
+<PRE>
+public void <B>setCol2</B>(int&nbsp;col2)</PRE>
+<DL>
+<DD><B>Description copied from interface: <CODE><A HREF="../../../../../org/apache/poi/ss/usermodel/ClientAnchor.html#setCol2(int)">ClientAnchor</A></CODE></B></DD>
+<DD>Returns the column (0 based) of the second cell.
+<P>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../../../../org/apache/poi/ss/usermodel/ClientAnchor.html#setCol2(int)">setCol2</A></CODE> in interface <CODE><A HREF="../../../../../org/apache/poi/ss/usermodel/ClientAnchor.html" title="interface in org.apache.poi.ss.usermodel">ClientAnchor</A></CODE></DL>
+</DD>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>col2</CODE> - 0-based column of the second cell.</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getRow1()"><!-- --></A><H3>
+getRow1</H3>
+<PRE>
+public int <B>getRow1</B>()</PRE>
+<DL>
+<DD><B>Description copied from interface: <CODE><A HREF="../../../../../org/apache/poi/ss/usermodel/ClientAnchor.html#getRow1()">ClientAnchor</A></CODE></B></DD>
+<DD>Returns the row (0 based) of the first cell.
+<P>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../../../../org/apache/poi/ss/usermodel/ClientAnchor.html#getRow1()">getRow1</A></CODE> in interface <CODE><A HREF="../../../../../org/apache/poi/ss/usermodel/ClientAnchor.html" title="interface in org.apache.poi.ss.usermodel">ClientAnchor</A></CODE></DL>
+</DD>
+<DD><DL>
+
+<DT><B>Returns:</B><DD>0-based row of the first cell.</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setRow1(int)"><!-- --></A><H3>
+setRow1</H3>
+<PRE>
+public void <B>setRow1</B>(int&nbsp;row1)</PRE>
+<DL>
+<DD><B>Description copied from interface: <CODE><A HREF="../../../../../org/apache/poi/ss/usermodel/ClientAnchor.html#setRow1(int)">ClientAnchor</A></CODE></B></DD>
+<DD>Returns the row (0 based) of the first cell.
+<P>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../../../../org/apache/poi/ss/usermodel/ClientAnchor.html#setRow1(int)">setRow1</A></CODE> in interface <CODE><A HREF="../../../../../org/apache/poi/ss/usermodel/ClientAnchor.html" title="interface in org.apache.poi.ss.usermodel">ClientAnchor</A></CODE></DL>
+</DD>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>row1</CODE> - 0-based row of the first cell.</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getRow2()"><!-- --></A><H3>
+getRow2</H3>
+<PRE>
+public int <B>getRow2</B>()</PRE>
+<DL>
+<DD><B>Description copied from interface: <CODE><A HREF="../../../../../org/apache/poi/ss/usermodel/ClientAnchor.html#getRow2()">ClientAnchor</A></CODE></B></DD>
+<DD>Returns the row (0 based) of the second cell.
+<P>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../../../../org/apache/poi/ss/usermodel/ClientAnchor.html#getRow2()">getRow2</A></CODE> in interface <CODE><A HREF="../../../../../org/apache/poi/ss/usermodel/ClientAnchor.html" title="interface in org.apache.poi.ss.usermodel">ClientAnchor</A></CODE></DL>
+</DD>
+<DD><DL>
+
+<DT><B>Returns:</B><DD>0-based row of the second cell.</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setRow2(int)"><!-- --></A><H3>
+setRow2</H3>
+<PRE>
+public void <B>setRow2</B>(int&nbsp;row2)</PRE>
+<DL>
+<DD><B>Description copied from interface: <CODE><A HREF="../../../../../org/apache/poi/ss/usermodel/ClientAnchor.html#setRow2(int)">ClientAnchor</A></CODE></B></DD>
+<DD>Returns the row (0 based) of the first cell.
+<P>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../../../../org/apache/poi/ss/usermodel/ClientAnchor.html#setRow2(int)">setRow2</A></CODE> in interface <CODE><A HREF="../../../../../org/apache/poi/ss/usermodel/ClientAnchor.html" title="interface in org.apache.poi.ss.usermodel">ClientAnchor</A></CODE></DL>
+</DD>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>row2</CODE> - 0-based row of the first cell.</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getDx1()"><!-- --></A><H3>
+getDx1</H3>
+<PRE>
+public int <B>getDx1</B>()</PRE>
+<DL>
+<DD><B>Description copied from interface: <CODE><A HREF="../../../../../org/apache/poi/ss/usermodel/ClientAnchor.html#getDx1()">ClientAnchor</A></CODE></B></DD>
+<DD>Returns the x coordinate within the first cell.
+ 
+ Note - XSSF and HSSF have a slightly different coordinate
+  system, values in XSSF are larger by a factor of
+  <A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFShape.html#EMU_PER_PIXEL"><CODE>XSSFShape.EMU_PER_PIXEL</CODE></A>
+<P>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../../../../org/apache/poi/ss/usermodel/ClientAnchor.html#getDx1()">getDx1</A></CODE> in interface <CODE><A HREF="../../../../../org/apache/poi/ss/usermodel/ClientAnchor.html" title="interface in org.apache.poi.ss.usermodel">ClientAnchor</A></CODE><DT><B>Specified by:</B><DD><CODE><A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFAnchor.html#getDx1()">getDx1</A></CODE> in class <CODE><A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFAnchor.html" title="class in org.apache.poi.xssf.usermodel">XSSFAnchor</A></CODE></DL>
+</DD>
+<DD><DL>
+
+<DT><B>Returns:</B><DD>the x coordinate within the first cell</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setDx1(int)"><!-- --></A><H3>
+setDx1</H3>
+<PRE>
+public void <B>setDx1</B>(int&nbsp;dx1)</PRE>
+<DL>
+<DD><B>Description copied from interface: <CODE><A HREF="../../../../../org/apache/poi/ss/usermodel/ClientAnchor.html#setDx1(int)">ClientAnchor</A></CODE></B></DD>
+<DD>Sets the x coordinate within the first cell
+
+ Note - XSSF and HSSF have a slightly different coordinate
+  system, values in XSSF are larger by a factor of
+  <A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFShape.html#EMU_PER_PIXEL"><CODE>XSSFShape.EMU_PER_PIXEL</CODE></A>
+<P>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../../../../org/apache/poi/ss/usermodel/ClientAnchor.html#setDx1(int)">setDx1</A></CODE> in interface <CODE><A HREF="../../../../../org/apache/poi/ss/usermodel/ClientAnchor.html" title="interface in org.apache.poi.ss.usermodel">ClientAnchor</A></CODE><DT><B>Specified by:</B><DD><CODE><A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFAnchor.html#setDx1(int)">setDx1</A></CODE> in class <CODE><A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFAnchor.html" title="class in org.apache.poi.xssf.usermodel">XSSFAnchor</A></CODE></DL>
+</DD>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>dx1</CODE> - the x coordinate within the first cell</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getDy1()"><!-- --></A><H3>
+getDy1</H3>
+<PRE>
+public int <B>getDy1</B>()</PRE>
+<DL>
+<DD><B>Description copied from interface: <CODE><A HREF="../../../../../org/apache/poi/ss/usermodel/ClientAnchor.html#getDy1()">ClientAnchor</A></CODE></B></DD>
+<DD>Returns the y coordinate within the first cell
+
+ Note - XSSF and HSSF have a slightly different coordinate
+  system, values in XSSF are larger by a factor of
+  <A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFShape.html#EMU_PER_PIXEL"><CODE>XSSFShape.EMU_PER_PIXEL</CODE></A>
+<P>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../../../../org/apache/poi/ss/usermodel/ClientAnchor.html#getDy1()">getDy1</A></CODE> in interface <CODE><A HREF="../../../../../org/apache/poi/ss/usermodel/ClientAnchor.html" title="interface in org.apache.poi.ss.usermodel">ClientAnchor</A></CODE><DT><B>Specified by:</B><DD><CODE><A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFAnchor.html#getDy1()">getDy1</A></CODE> in class <CODE><A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFAnchor.html" title="class in org.apache.poi.xssf.usermodel">XSSFAnchor</A></CODE></DL>
+</DD>
+<DD><DL>
+
+<DT><B>Returns:</B><DD>the y coordinate within the first cell</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setDy1(int)"><!-- --></A><H3>
+setDy1</H3>
+<PRE>
+public void <B>setDy1</B>(int&nbsp;dy1)</PRE>
+<DL>
+<DD><B>Description copied from interface: <CODE><A HREF="../../../../../org/apache/poi/ss/usermodel/ClientAnchor.html#setDy1(int)">ClientAnchor</A></CODE></B></DD>
+<DD>Sets the y coordinate within the first cell
+
+ Note - XSSF and HSSF have a slightly different coordinate
+  system, values in XSSF are larger by a factor of
+  <A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFShape.html#EMU_PER_PIXEL"><CODE>XSSFShape.EMU_PER_PIXEL</CODE></A>
+<P>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../../../../org/apache/poi/ss/usermodel/ClientAnchor.html#setDy1(int)">setDy1</A></CODE> in interface <CODE><A HREF="../../../../../org/apache/poi/ss/usermodel/ClientAnchor.html" title="interface in org.apache.poi.ss.usermodel">ClientAnchor</A></CODE><DT><B>Specified by:</B><DD><CODE><A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFAnchor.html#setDy1(int)">setDy1</A></CODE> in class <CODE><A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFAnchor.html" title="class in org.apache.poi.xssf.usermodel">XSSFAnchor</A></CODE></DL>
+</DD>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>dy1</CODE> - the y coordinate within the first cell</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getDy2()"><!-- --></A><H3>
+getDy2</H3>
+<PRE>
+public int <B>getDy2</B>()</PRE>
+<DL>
+<DD><B>Description copied from interface: <CODE><A HREF="../../../../../org/apache/poi/ss/usermodel/ClientAnchor.html#getDy2()">ClientAnchor</A></CODE></B></DD>
+<DD>Sets the y coordinate within the second cell
+
+ Note - XSSF and HSSF have a slightly different coordinate
+  system, values in XSSF are larger by a factor of
+  <A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFShape.html#EMU_PER_PIXEL"><CODE>XSSFShape.EMU_PER_PIXEL</CODE></A>
+<P>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../../../../org/apache/poi/ss/usermodel/ClientAnchor.html#getDy2()">getDy2</A></CODE> in interface <CODE><A HREF="../../../../../org/apache/poi/ss/usermodel/ClientAnchor.html" title="interface in org.apache.poi.ss.usermodel">ClientAnchor</A></CODE><DT><B>Specified by:</B><DD><CODE><A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFAnchor.html#getDy2()">getDy2</A></CODE> in class <CODE><A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFAnchor.html" title="class in org.apache.poi.xssf.usermodel">XSSFAnchor</A></CODE></DL>
+</DD>
+<DD><DL>
+
+<DT><B>Returns:</B><DD>the y coordinate within the second cell</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setDy2(int)"><!-- --></A><H3>
+setDy2</H3>
+<PRE>
+public void <B>setDy2</B>(int&nbsp;dy2)</PRE>
+<DL>
+<DD><B>Description copied from interface: <CODE><A HREF="../../../../../org/apache/poi/ss/usermodel/ClientAnchor.html#setDy2(int)">ClientAnchor</A></CODE></B></DD>
+<DD>Sets the y coordinate within the second cell
+
+ Note - XSSF and HSSF have a slightly different coordinate
+  system, values in XSSF are larger by a factor of
+  <A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFShape.html#EMU_PER_PIXEL"><CODE>XSSFShape.EMU_PER_PIXEL</CODE></A>
+<P>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../../../../org/apache/poi/ss/usermodel/ClientAnchor.html#setDy2(int)">setDy2</A></CODE> in interface <CODE><A HREF="../../../../../org/apache/poi/ss/usermodel/ClientAnchor.html" title="interface in org.apache.poi.ss.usermodel">ClientAnchor</A></CODE><DT><B>Specified by:</B><DD><CODE><A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFAnchor.html#setDy2(int)">setDy2</A></CODE> in class <CODE><A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFAnchor.html" title="class in org.apache.poi.xssf.usermodel">XSSFAnchor</A></CODE></DL>
+</DD>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>dy2</CODE> - the y coordinate within the second cell</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getDx2()"><!-- --></A><H3>
+getDx2</H3>
+<PRE>
+public int <B>getDx2</B>()</PRE>
+<DL>
+<DD><B>Description copied from interface: <CODE><A HREF="../../../../../org/apache/poi/ss/usermodel/ClientAnchor.html#getDx2()">ClientAnchor</A></CODE></B></DD>
+<DD>Returns the x coordinate within the second cell
+
+ Note - XSSF and HSSF have a slightly different coordinate
+  system, values in XSSF are larger by a factor of
+  <A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFShape.html#EMU_PER_PIXEL"><CODE>XSSFShape.EMU_PER_PIXEL</CODE></A>
+<P>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../../../../org/apache/poi/ss/usermodel/ClientAnchor.html#getDx2()">getDx2</A></CODE> in interface <CODE><A HREF="../../../../../org/apache/poi/ss/usermodel/ClientAnchor.html" title="interface in org.apache.poi.ss.usermodel">ClientAnchor</A></CODE><DT><B>Specified by:</B><DD><CODE><A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFAnchor.html#getDx2()">getDx2</A></CODE> in class <CODE><A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFAnchor.html" title="class in org.apache.poi.xssf.usermodel">XSSFAnchor</A></CODE></DL>
+</DD>
+<DD><DL>
+
+<DT><B>Returns:</B><DD>the x coordinate within the second cell</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setDx2(int)"><!-- --></A><H3>
+setDx2</H3>
+<PRE>
+public void <B>setDx2</B>(int&nbsp;dx2)</PRE>
+<DL>
+<DD><B>Description copied from interface: <CODE><A HREF="../../../../../org/apache/poi/ss/usermodel/ClientAnchor.html#setDx2(int)">ClientAnchor</A></CODE></B></DD>
+<DD>Sets the x coordinate within the second cell
+
+ Note - XSSF and HSSF have a slightly different coordinate
+  system, values in XSSF are larger by a factor of
+  <A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFShape.html#EMU_PER_PIXEL"><CODE>XSSFShape.EMU_PER_PIXEL</CODE></A>
+<P>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../../../../org/apache/poi/ss/usermodel/ClientAnchor.html#setDx2(int)">setDx2</A></CODE> in interface <CODE><A HREF="../../../../../org/apache/poi/ss/usermodel/ClientAnchor.html" title="interface in org.apache.poi.ss.usermodel">ClientAnchor</A></CODE><DT><B>Specified by:</B><DD><CODE><A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFAnchor.html#setDx2(int)">setDx2</A></CODE> in class <CODE><A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFAnchor.html" title="class in org.apache.poi.xssf.usermodel">XSSFAnchor</A></CODE></DL>
+</DD>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>dx2</CODE> - the x coordinate within the second cell</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="equals(java.lang.Object)"><!-- --></A><H3>
+equals</H3>
+<PRE>
+public boolean <B>equals</B>(java.lang.Object&nbsp;o)</PRE>
+<DL>
+<DD><DL>
+<DT><B>Overrides:</B><DD><CODE>equals</CODE> in class <CODE>java.lang.Object</CODE></DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="toString()"><!-- --></A><H3>
+toString</H3>
+<PRE>
+public java.lang.String <B>toString</B>()</PRE>
+<DL>
+<DD><DL>
+<DT><B>Overrides:</B><DD><CODE>toString</CODE> in class <CODE>java.lang.Object</CODE></DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getFrom()"><!-- --></A><H3>
+getFrom</H3>
+<PRE>
+<FONT SIZE="-1"><A HREF="../../../../../org/apache/poi/util/Internal.html" title="annotation in org.apache.poi.util">@Internal</A>
+</FONT>public org.openxmlformats.schemas.drawingml.x2006.spreadsheetDrawing.CTMarker <B>getFrom</B>()</PRE>
+<DL>
+<DD>Return starting anchor point
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+
+<DT><B>Returns:</B><DD>starting anchor point</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setFrom(org.openxmlformats.schemas.drawingml.x2006.spreadsheetDrawing.CTMarker)"><!-- --></A><H3>
+setFrom</H3>
+<PRE>
+protected void <B>setFrom</B>(org.openxmlformats.schemas.drawingml.x2006.spreadsheetDrawing.CTMarker&nbsp;from)</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getTo()"><!-- --></A><H3>
+getTo</H3>
+<PRE>
+<FONT SIZE="-1"><A HREF="../../../../../org/apache/poi/util/Internal.html" title="annotation in org.apache.poi.util">@Internal</A>
+</FONT>public org.openxmlformats.schemas.drawingml.x2006.spreadsheetDrawing.CTMarker <B>getTo</B>()</PRE>
+<DL>
+<DD>Return ending anchor point
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+
+<DT><B>Returns:</B><DD>ending anchor point</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setTo(org.openxmlformats.schemas.drawingml.x2006.spreadsheetDrawing.CTMarker)"><!-- --></A><H3>
+setTo</H3>
+<PRE>
+protected void <B>setTo</B>(org.openxmlformats.schemas.drawingml.x2006.spreadsheetDrawing.CTMarker&nbsp;to)</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setAnchorType(int)"><!-- --></A><H3>
+setAnchorType</H3>
+<PRE>
+public void <B>setAnchorType</B>(int&nbsp;anchorType)</PRE>
+<DL>
+<DD>Sets the anchor type
+ <p>
+ 0 = Move and size with Cells, 2 = Move but don't size with cells, 3 = Don't move or size with cells.
+<P>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../../../../org/apache/poi/ss/usermodel/ClientAnchor.html#setAnchorType(int)">setAnchorType</A></CODE> in interface <CODE><A HREF="../../../../../org/apache/poi/ss/usermodel/ClientAnchor.html" title="interface in org.apache.poi.ss.usermodel">ClientAnchor</A></CODE></DL>
+</DD>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>anchorType</CODE> - the anchor type<DT><B>See Also:</B><DD><A HREF="../../../../../org/apache/poi/ss/usermodel/ClientAnchor.html#MOVE_AND_RESIZE"><CODE>ClientAnchor.MOVE_AND_RESIZE</CODE></A>, 
+<A HREF="../../../../../org/apache/poi/ss/usermodel/ClientAnchor.html#MOVE_DONT_RESIZE"><CODE>ClientAnchor.MOVE_DONT_RESIZE</CODE></A>, 
+<A HREF="../../../../../org/apache/poi/ss/usermodel/ClientAnchor.html#DONT_MOVE_AND_RESIZE"><CODE>ClientAnchor.DONT_MOVE_AND_RESIZE</CODE></A></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getAnchorType()"><!-- --></A><H3>
+getAnchorType</H3>
+<PRE>
+public int <B>getAnchorType</B>()</PRE>
+<DL>
+<DD>Gets the anchor type
+ <p>
+ 0 = Move and size with Cells, 2 = Move but don't size with cells, 3 = Don't move or size with cells.
+<P>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../../../../org/apache/poi/ss/usermodel/ClientAnchor.html#getAnchorType()">getAnchorType</A></CODE> in interface <CODE><A HREF="../../../../../org/apache/poi/ss/usermodel/ClientAnchor.html" title="interface in org.apache.poi.ss.usermodel">ClientAnchor</A></CODE></DL>
+</DD>
+<DD><DL>
+
+<DT><B>Returns:</B><DD>the anchor type<DT><B>See Also:</B><DD><A HREF="../../../../../org/apache/poi/ss/usermodel/ClientAnchor.html#MOVE_AND_RESIZE"><CODE>ClientAnchor.MOVE_AND_RESIZE</CODE></A>, 
+<A HREF="../../../../../org/apache/poi/ss/usermodel/ClientAnchor.html#MOVE_DONT_RESIZE"><CODE>ClientAnchor.MOVE_DONT_RESIZE</CODE></A>, 
+<A HREF="../../../../../org/apache/poi/ss/usermodel/ClientAnchor.html#DONT_MOVE_AND_RESIZE"><CODE>ClientAnchor.DONT_MOVE_AND_RESIZE</CODE></A></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="isSet()"><!-- --></A><H3>
+isSet</H3>
+<PRE>
+public boolean <B>isSet</B>()</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<!-- ========= END OF CLASS DATA ========= -->
+<HR>
+
+
+<!-- ======= START OF BOTTOM NAVBAR ====== -->
+<A NAME="navbar_bottom"><!-- --></A>
+<A HREF="#skip-navbar_bottom" title="Skip navigation links"></A>
+<TABLE BORDER="0" WIDTH="100%" CELLPADDING="1" CELLSPACING="0" SUMMARY="">
+<TR>
+<TD COLSPAN=2 BGCOLOR="#EEEEFF" CLASS="NavBarCell1">
+<A NAME="navbar_bottom_firstrow"><!-- --></A>
+<TABLE BORDER="0" CELLPADDING="0" CELLSPACING="3" SUMMARY="">
+  <TR ALIGN="center" VALIGN="top">
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../overview-summary.html"><FONT CLASS="NavBarFont1"><B>Overview</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="package-summary.html"><FONT CLASS="NavBarFont1"><B>Package</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#FFFFFF" CLASS="NavBarCell1Rev"> &nbsp;<FONT CLASS="NavBarFont1Rev"><B>Class</B></FONT>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="class-use/XSSFClientAnchor.html"><FONT CLASS="NavBarFont1"><B>Use</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="package-tree.html"><FONT CLASS="NavBarFont1"><B>Tree</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../deprecated-list.html"><FONT CLASS="NavBarFont1"><B>Deprecated</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../index-all.html"><FONT CLASS="NavBarFont1"><B>Index</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../help-doc.html"><FONT CLASS="NavBarFont1"><B>Help</B></FONT></A>&nbsp;</TD>
+  </TR>
+</TABLE>
+</TD>
+<TD ALIGN="right" VALIGN="top" ROWSPAN=3><EM>
+</EM>
+</TD>
+</TR>
+
+<TR>
+<TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
+&nbsp;<A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFChildAnchor.html" title="class in org.apache.poi.xssf.usermodel"><B>PREV CLASS</B></A>&nbsp;
+&nbsp;<A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFColor.html" title="class in org.apache.poi.xssf.usermodel"><B>NEXT CLASS</B></A></FONT></TD>
+<TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
+  <A HREF="../../../../../index.html?org/apache/poi/xssf/usermodel/XSSFClientAnchor.html" target="_top"><B>FRAMES</B></A>  &nbsp;
+&nbsp;<A HREF="XSSFClientAnchor.html" target="_top"><B>NO FRAMES</B></A>  &nbsp;
+&nbsp;<SCRIPT type="text/javascript">
+  <!--
+  if(window==top) {
+    document.writeln('<A HREF="../../../../../allclasses-noframe.html"><B>All Classes</B></A>');
+  }
+  //-->
+</SCRIPT>
+<NOSCRIPT>
+  <A HREF="../../../../../allclasses-noframe.html"><B>All Classes</B></A>
+</NOSCRIPT>
+
+
+</FONT></TD>
+</TR>
+<TR>
+<TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
+  SUMMARY:&nbsp;NESTED&nbsp;|&nbsp;FIELD&nbsp;|&nbsp;<A HREF="#constructor_summary">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_summary">METHOD</A></FONT></TD>
+<TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
+DETAIL:&nbsp;FIELD&nbsp;|&nbsp;<A HREF="#constructor_detail">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_detail">METHOD</A></FONT></TD>
+</TR>
+</TABLE>
+<A NAME="skip-navbar_bottom"></A>
+<!-- ======== END OF BOTTOM NAVBAR ======= -->
+
+<HR>
+
+                <i>Copyright 2014 The Apache Software Foundation or
+        its licensors, as applicable.</i>
+            
+</BODY>
+</HTML>

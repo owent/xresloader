@@ -1,0 +1,1117 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!--NewPage-->
+<HTML>
+<HEAD>
+<TITLE>
+XSSFSimpleShape (POI API Documentation)
+</TITLE>
+
+<META NAME="keywords" CONTENT="org.apache.poi.xssf.usermodel.XSSFSimpleShape class">
+
+<LINK REL ="stylesheet" TYPE="text/css" HREF="../../../../../stylesheet.css" TITLE="Style">
+
+<SCRIPT type="text/javascript">
+function windowTitle()
+{
+    parent.document.title="XSSFSimpleShape (POI API Documentation)";
+}
+</SCRIPT>
+<NOSCRIPT>
+</NOSCRIPT>
+
+</HEAD>
+
+<BODY BGCOLOR="white" onload="windowTitle();">
+
+
+<!-- ========= START OF TOP NAVBAR ======= -->
+<A NAME="navbar_top"><!-- --></A>
+<A HREF="#skip-navbar_top" title="Skip navigation links"></A>
+<TABLE BORDER="0" WIDTH="100%" CELLPADDING="1" CELLSPACING="0" SUMMARY="">
+<TR>
+<TD COLSPAN=2 BGCOLOR="#EEEEFF" CLASS="NavBarCell1">
+<A NAME="navbar_top_firstrow"><!-- --></A>
+<TABLE BORDER="0" CELLPADDING="0" CELLSPACING="3" SUMMARY="">
+  <TR ALIGN="center" VALIGN="top">
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../overview-summary.html"><FONT CLASS="NavBarFont1"><B>Overview</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="package-summary.html"><FONT CLASS="NavBarFont1"><B>Package</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#FFFFFF" CLASS="NavBarCell1Rev"> &nbsp;<FONT CLASS="NavBarFont1Rev"><B>Class</B></FONT>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="class-use/XSSFSimpleShape.html"><FONT CLASS="NavBarFont1"><B>Use</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="package-tree.html"><FONT CLASS="NavBarFont1"><B>Tree</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../deprecated-list.html"><FONT CLASS="NavBarFont1"><B>Deprecated</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../index-all.html"><FONT CLASS="NavBarFont1"><B>Index</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../help-doc.html"><FONT CLASS="NavBarFont1"><B>Help</B></FONT></A>&nbsp;</TD>
+  </TR>
+</TABLE>
+</TD>
+<TD ALIGN="right" VALIGN="top" ROWSPAN=3><EM>
+</EM>
+</TD>
+</TR>
+
+<TR>
+<TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
+&nbsp;<A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFSheetConditionalFormatting.html" title="class in org.apache.poi.xssf.usermodel"><B>PREV CLASS</B></A>&nbsp;
+&nbsp;<A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFTable.html" title="class in org.apache.poi.xssf.usermodel"><B>NEXT CLASS</B></A></FONT></TD>
+<TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
+  <A HREF="../../../../../index.html?org/apache/poi/xssf/usermodel/XSSFSimpleShape.html" target="_top"><B>FRAMES</B></A>  &nbsp;
+&nbsp;<A HREF="XSSFSimpleShape.html" target="_top"><B>NO FRAMES</B></A>  &nbsp;
+&nbsp;<SCRIPT type="text/javascript">
+  <!--
+  if(window==top) {
+    document.writeln('<A HREF="../../../../../allclasses-noframe.html"><B>All Classes</B></A>');
+  }
+  //-->
+</SCRIPT>
+<NOSCRIPT>
+  <A HREF="../../../../../allclasses-noframe.html"><B>All Classes</B></A>
+</NOSCRIPT>
+
+
+</FONT></TD>
+</TR>
+<TR>
+<TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
+  SUMMARY:&nbsp;NESTED&nbsp;|&nbsp;<A HREF="#fields_inherited_from_class_org.apache.poi.xssf.usermodel.XSSFShape">FIELD</A>&nbsp;|&nbsp;<A HREF="#constructor_summary">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_summary">METHOD</A></FONT></TD>
+<TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
+DETAIL:&nbsp;FIELD&nbsp;|&nbsp;<A HREF="#constructor_detail">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_detail">METHOD</A></FONT></TD>
+</TR>
+</TABLE>
+<A NAME="skip-navbar_top"></A>
+<!-- ========= END OF TOP NAVBAR ========= -->
+
+<HR>
+<!-- ======== START OF CLASS DATA ======== -->
+<H2>
+<FONT SIZE="-1">
+org.apache.poi.xssf.usermodel</FONT>
+<BR>
+Class XSSFSimpleShape</H2>
+<PRE>
+java.lang.Object
+  <IMG SRC="../../../../../resources/inherit.gif" ALT="extended by "><A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFShape.html" title="class in org.apache.poi.xssf.usermodel">org.apache.poi.xssf.usermodel.XSSFShape</A>
+      <IMG SRC="../../../../../resources/inherit.gif" ALT="extended by "><B>org.apache.poi.xssf.usermodel.XSSFSimpleShape</B>
+</PRE>
+<DL>
+<DT><B>All Implemented Interfaces:</B> <DD>java.lang.Iterable&lt;<A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFTextParagraph.html" title="class in org.apache.poi.xssf.usermodel">XSSFTextParagraph</A>&gt;</DD>
+</DL>
+<DL>
+<DT><B>Direct Known Subclasses:</B> <DD><A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFTextBox.html" title="class in org.apache.poi.xssf.usermodel">XSSFTextBox</A></DD>
+</DL>
+<HR>
+<DL>
+<DT><PRE>public class <B>XSSFSimpleShape</B><DT>extends <A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFShape.html" title="class in org.apache.poi.xssf.usermodel">XSSFShape</A><DT>implements java.lang.Iterable&lt;<A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFTextParagraph.html" title="class in org.apache.poi.xssf.usermodel">XSSFTextParagraph</A>&gt;</DL>
+</PRE>
+
+<P>
+Represents a shape with a predefined geometry in a SpreadsheetML drawing.
+ Possible shape types are defined in <A HREF="../../../../../org/apache/poi/ss/usermodel/ShapeTypes.html" title="class in org.apache.poi.ss.usermodel"><CODE>ShapeTypes</CODE></A>
+<P>
+
+<P>
+<HR>
+
+<P>
+<!-- =========== FIELD SUMMARY =========== -->
+
+<A NAME="field_summary"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+<B>Field Summary</B></FONT></TH>
+</TR>
+</TABLE>
+&nbsp;<A NAME="fields_inherited_from_class_org.apache.poi.xssf.usermodel.XSSFShape"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#EEEEFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left"><B>Fields inherited from class org.apache.poi.xssf.usermodel.<A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFShape.html" title="class in org.apache.poi.xssf.usermodel">XSSFShape</A></B></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFShape.html#anchor">anchor</A>, <A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFShape.html#drawing">drawing</A>, <A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFShape.html#EMU_PER_PIXEL">EMU_PER_PIXEL</A>, <A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFShape.html#EMU_PER_POINT">EMU_PER_POINT</A>, <A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFShape.html#parent">parent</A>, <A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFShape.html#PIXEL_DPI">PIXEL_DPI</A>, <A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFShape.html#POINT_DPI">POINT_DPI</A></CODE></TD>
+</TR>
+</TABLE>
+&nbsp;
+<!-- ======== CONSTRUCTOR SUMMARY ======== -->
+
+<A NAME="constructor_summary"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+<B>Constructor Summary</B></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>protected </CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFSimpleShape.html#XSSFSimpleShape(org.apache.poi.xssf.usermodel.XSSFDrawing, org.openxmlformats.schemas.drawingml.x2006.spreadsheetDrawing.CTShape)">XSSFSimpleShape</A></B>(<A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFDrawing.html" title="class in org.apache.poi.xssf.usermodel">XSSFDrawing</A>&nbsp;drawing,
+                org.openxmlformats.schemas.drawingml.x2006.spreadsheetDrawing.CTShape&nbsp;ctShape)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+</TABLE>
+&nbsp;
+<!-- ========== METHOD SUMMARY =========== -->
+
+<A NAME="method_summary"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+<B>Method Summary</B></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFTextParagraph.html" title="class in org.apache.poi.xssf.usermodel">XSSFTextParagraph</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFSimpleShape.html#addNewTextParagraph()">addNewTextParagraph</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Add a new paragraph run to this shape</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFTextParagraph.html" title="class in org.apache.poi.xssf.usermodel">XSSFTextParagraph</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFSimpleShape.html#addNewTextParagraph(java.lang.String)">addNewTextParagraph</A></B>(java.lang.String&nbsp;text)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Add a new paragraph run to this shape, set to the provided string</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFTextParagraph.html" title="class in org.apache.poi.xssf.usermodel">XSSFTextParagraph</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFSimpleShape.html#addNewTextParagraph(org.apache.poi.xssf.usermodel.XSSFRichTextString)">addNewTextParagraph</A></B>(<A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFRichTextString.html" title="class in org.apache.poi.xssf.usermodel">XSSFRichTextString</A>&nbsp;str)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Add a new paragraph run to this shape, set to the provided rich text string</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFSimpleShape.html#clearText()">clearText</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Clear all text from this shape</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;double</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFSimpleShape.html#getBottomInset()">getBottomInset</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns the distance (in points) between the bottom of the text frame
+ and the bottom of the inscribed rectangle of the shape that contains the text.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;org.openxmlformats.schemas.drawingml.x2006.spreadsheetDrawing.CTShape</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFSimpleShape.html#getCTShape()">getCTShape</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;double</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFSimpleShape.html#getLeftInset()">getLeftInset</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns the distance (in points) between the left edge of the text frame
+  and the left edge of the inscribed rectangle of the shape that contains
+  the text.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;double</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFSimpleShape.html#getRightInset()">getRightInset</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns the distance (in points) between the right edge of the
+  text frame and the right edge of the inscribed rectangle of the shape
+  that contains the text.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>protected &nbsp;org.openxmlformats.schemas.drawingml.x2006.main.CTShapeProperties</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFSimpleShape.html#getShapeProperties()">getShapeProperties</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns xml bean with shape properties.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;int</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFSimpleShape.html#getShapeType()">getShapeType</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gets the shape type, one of the constants defined in <A HREF="../../../../../org/apache/poi/ss/usermodel/ShapeTypes.html" title="class in org.apache.poi.ss.usermodel"><CODE>ShapeTypes</CODE></A>.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;java.lang.String</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFSimpleShape.html#getText()">getText</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns the text from all paragraphs in the shape.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../../../org/apache/poi/xssf/usermodel/TextAutofit.html" title="enum in org.apache.poi.xssf.usermodel">TextAutofit</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFSimpleShape.html#getTextAutofit()">getTextAutofit</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../../../org/apache/poi/xssf/usermodel/TextDirection.html" title="enum in org.apache.poi.xssf.usermodel">TextDirection</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFSimpleShape.html#getTextDirection()">getTextDirection</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gets the vertical orientation of the text</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../../../org/apache/poi/xssf/usermodel/TextHorizontalOverflow.html" title="enum in org.apache.poi.xssf.usermodel">TextHorizontalOverflow</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFSimpleShape.html#getTextHorizontalOverflow()">getTextHorizontalOverflow</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns the type of horizontal overflow for the text.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;java.util.List&lt;<A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFTextParagraph.html" title="class in org.apache.poi.xssf.usermodel">XSSFTextParagraph</A>&gt;</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFSimpleShape.html#getTextParagraphs()">getTextParagraphs</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns a collection of the XSSFTextParagraphs that are attached to this shape</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../../../org/apache/poi/xssf/usermodel/TextVerticalOverflow.html" title="enum in org.apache.poi.xssf.usermodel">TextVerticalOverflow</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFSimpleShape.html#getTextVerticalOverflow()">getTextVerticalOverflow</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns the type of vertical overflow for the text.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;double</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFSimpleShape.html#getTopInset()">getTopInset</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns the distance (in points) between the top of the text frame
+  and the top of the inscribed rectangle of the shape that contains the text.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../../../org/apache/poi/ss/usermodel/VerticalAlignment.html" title="enum in org.apache.poi.ss.usermodel">VerticalAlignment</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFSimpleShape.html#getVerticalAlignment()">getVerticalAlignment</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns the type of vertical alignment for the text within the shape.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFSimpleShape.html#getWordWrap()">getWordWrap</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;java.util.Iterator&lt;<A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFTextParagraph.html" title="class in org.apache.poi.xssf.usermodel">XSSFTextParagraph</A>&gt;</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFSimpleShape.html#iterator()">iterator</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>protected static&nbsp;org.openxmlformats.schemas.drawingml.x2006.spreadsheetDrawing.CTShape</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFSimpleShape.html#prototype()">prototype</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Prototype with the default structure of a new auto-shape.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFSimpleShape.html#setBottomInset(double)">setBottomInset</A></B>(double&nbsp;margin)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sets the bottom inset.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFSimpleShape.html#setLeftInset(double)">setLeftInset</A></B>(double&nbsp;margin)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sets the left inset.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFSimpleShape.html#setRightInset(double)">setRightInset</A></B>(double&nbsp;margin)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sets the right inset.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFSimpleShape.html#setShapeType(int)">setShapeType</A></B>(int&nbsp;type)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sets the shape types.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFSimpleShape.html#setText(java.lang.String)">setText</A></B>(java.lang.String&nbsp;text)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Set a single paragraph of text on the shape.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFSimpleShape.html#setText(org.apache.poi.xssf.usermodel.XSSFRichTextString)">setText</A></B>(<A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFRichTextString.html" title="class in org.apache.poi.xssf.usermodel">XSSFRichTextString</A>&nbsp;str)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Set a single paragraph of text on the shape.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFSimpleShape.html#setTextAutofit(org.apache.poi.xssf.usermodel.TextAutofit)">setTextAutofit</A></B>(<A HREF="../../../../../org/apache/poi/xssf/usermodel/TextAutofit.html" title="enum in org.apache.poi.xssf.usermodel">TextAutofit</A>&nbsp;value)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Specifies that a shape should be auto-fit to fully contain the text described within it.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFSimpleShape.html#setTextDirection(org.apache.poi.xssf.usermodel.TextDirection)">setTextDirection</A></B>(<A HREF="../../../../../org/apache/poi/xssf/usermodel/TextDirection.html" title="enum in org.apache.poi.xssf.usermodel">TextDirection</A>&nbsp;orientation)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sets the vertical orientation of the text</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFSimpleShape.html#setTextHorizontalOverflow(org.apache.poi.xssf.usermodel.TextHorizontalOverflow)">setTextHorizontalOverflow</A></B>(<A HREF="../../../../../org/apache/poi/xssf/usermodel/TextHorizontalOverflow.html" title="enum in org.apache.poi.xssf.usermodel">TextHorizontalOverflow</A>&nbsp;overflow)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sets the type of horizontal overflow for the text.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFSimpleShape.html#setTextVerticalOverflow(org.apache.poi.xssf.usermodel.TextVerticalOverflow)">setTextVerticalOverflow</A></B>(<A HREF="../../../../../org/apache/poi/xssf/usermodel/TextVerticalOverflow.html" title="enum in org.apache.poi.xssf.usermodel">TextVerticalOverflow</A>&nbsp;overflow)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sets the type of vertical overflow for the text.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFSimpleShape.html#setTopInset(double)">setTopInset</A></B>(double&nbsp;margin)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sets the top inset.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFSimpleShape.html#setVerticalAlignment(org.apache.poi.ss.usermodel.VerticalAlignment)">setVerticalAlignment</A></B>(<A HREF="../../../../../org/apache/poi/ss/usermodel/VerticalAlignment.html" title="enum in org.apache.poi.ss.usermodel">VerticalAlignment</A>&nbsp;anchor)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sets the type of vertical alignment for the text within the shape.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFSimpleShape.html#setWordWrap(boolean)">setWordWrap</A></B>(boolean&nbsp;wrap)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+</TABLE>
+&nbsp;<A NAME="methods_inherited_from_class_org.apache.poi.xssf.usermodel.XSSFShape"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#EEEEFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left"><B>Methods inherited from class org.apache.poi.xssf.usermodel.<A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFShape.html" title="class in org.apache.poi.xssf.usermodel">XSSFShape</A></B></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFShape.html#getAnchor()">getAnchor</A>, <A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFShape.html#getDrawing()">getDrawing</A>, <A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFShape.html#getParent()">getParent</A>, <A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFShape.html#isNoFill()">isNoFill</A>, <A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFShape.html#setFillColor(int, int, int)">setFillColor</A>, <A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFShape.html#setLineStyle(int)">setLineStyle</A>, <A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFShape.html#setLineStyleColor(int, int, int)">setLineStyleColor</A>, <A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFShape.html#setLineWidth(double)">setLineWidth</A>, <A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFShape.html#setNoFill(boolean)">setNoFill</A></CODE></TD>
+</TR>
+</TABLE>
+&nbsp;<A NAME="methods_inherited_from_class_java.lang.Object"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#EEEEFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left"><B>Methods inherited from class java.lang.Object</B></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE>clone, equals, finalize, getClass, hashCode, notify, notifyAll, toString, wait, wait, wait</CODE></TD>
+</TR>
+</TABLE>
+&nbsp;
+<P>
+
+<!-- ========= CONSTRUCTOR DETAIL ======== -->
+
+<A NAME="constructor_detail"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="1"><FONT SIZE="+2">
+<B>Constructor Detail</B></FONT></TH>
+</TR>
+</TABLE>
+
+<A NAME="XSSFSimpleShape(org.apache.poi.xssf.usermodel.XSSFDrawing, org.openxmlformats.schemas.drawingml.x2006.spreadsheetDrawing.CTShape)"><!-- --></A><H3>
+XSSFSimpleShape</H3>
+<PRE>
+protected <B>XSSFSimpleShape</B>(<A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFDrawing.html" title="class in org.apache.poi.xssf.usermodel">XSSFDrawing</A>&nbsp;drawing,
+                          org.openxmlformats.schemas.drawingml.x2006.spreadsheetDrawing.CTShape&nbsp;ctShape)</PRE>
+<DL>
+</DL>
+
+<!-- ============ METHOD DETAIL ========== -->
+
+<A NAME="method_detail"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="1"><FONT SIZE="+2">
+<B>Method Detail</B></FONT></TH>
+</TR>
+</TABLE>
+
+<A NAME="prototype()"><!-- --></A><H3>
+prototype</H3>
+<PRE>
+protected static org.openxmlformats.schemas.drawingml.x2006.spreadsheetDrawing.CTShape <B>prototype</B>()</PRE>
+<DL>
+<DD>Prototype with the default structure of a new auto-shape.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getCTShape()"><!-- --></A><H3>
+getCTShape</H3>
+<PRE>
+<FONT SIZE="-1"><A HREF="../../../../../org/apache/poi/util/Internal.html" title="annotation in org.apache.poi.util">@Internal</A>
+</FONT>public org.openxmlformats.schemas.drawingml.x2006.spreadsheetDrawing.CTShape <B>getCTShape</B>()</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="iterator()"><!-- --></A><H3>
+iterator</H3>
+<PRE>
+public java.util.Iterator&lt;<A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFTextParagraph.html" title="class in org.apache.poi.xssf.usermodel">XSSFTextParagraph</A>&gt; <B>iterator</B>()</PRE>
+<DL>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE>iterator</CODE> in interface <CODE>java.lang.Iterable&lt;<A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFTextParagraph.html" title="class in org.apache.poi.xssf.usermodel">XSSFTextParagraph</A>&gt;</CODE></DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getText()"><!-- --></A><H3>
+getText</H3>
+<PRE>
+public java.lang.String <B>getText</B>()</PRE>
+<DL>
+<DD>Returns the text from all paragraphs in the shape. Paragraphs are separated by new lines.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+
+<DT><B>Returns:</B><DD>text contained within this shape or empty string</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="clearText()"><!-- --></A><H3>
+clearText</H3>
+<PRE>
+public void <B>clearText</B>()</PRE>
+<DL>
+<DD>Clear all text from this shape
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setText(java.lang.String)"><!-- --></A><H3>
+setText</H3>
+<PRE>
+public void <B>setText</B>(java.lang.String&nbsp;text)</PRE>
+<DL>
+<DD>Set a single paragraph of text on the shape. Note this will replace all existing paragraphs created on the shape.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>text</CODE> - string representing the paragraph text</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setText(org.apache.poi.xssf.usermodel.XSSFRichTextString)"><!-- --></A><H3>
+setText</H3>
+<PRE>
+public void <B>setText</B>(<A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFRichTextString.html" title="class in org.apache.poi.xssf.usermodel">XSSFRichTextString</A>&nbsp;str)</PRE>
+<DL>
+<DD>Set a single paragraph of text on the shape. Note this will replace all existing paragraphs created on the shape.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>str</CODE> - rich text string representing the paragraph text</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getTextParagraphs()"><!-- --></A><H3>
+getTextParagraphs</H3>
+<PRE>
+public java.util.List&lt;<A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFTextParagraph.html" title="class in org.apache.poi.xssf.usermodel">XSSFTextParagraph</A>&gt; <B>getTextParagraphs</B>()</PRE>
+<DL>
+<DD>Returns a collection of the XSSFTextParagraphs that are attached to this shape
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+
+<DT><B>Returns:</B><DD>text paragraphs in this shape</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="addNewTextParagraph()"><!-- --></A><H3>
+addNewTextParagraph</H3>
+<PRE>
+public <A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFTextParagraph.html" title="class in org.apache.poi.xssf.usermodel">XSSFTextParagraph</A> <B>addNewTextParagraph</B>()</PRE>
+<DL>
+<DD>Add a new paragraph run to this shape
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+
+<DT><B>Returns:</B><DD>created paragraph run</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="addNewTextParagraph(java.lang.String)"><!-- --></A><H3>
+addNewTextParagraph</H3>
+<PRE>
+public <A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFTextParagraph.html" title="class in org.apache.poi.xssf.usermodel">XSSFTextParagraph</A> <B>addNewTextParagraph</B>(java.lang.String&nbsp;text)</PRE>
+<DL>
+<DD>Add a new paragraph run to this shape, set to the provided string
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+
+<DT><B>Returns:</B><DD>created paragraph run</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="addNewTextParagraph(org.apache.poi.xssf.usermodel.XSSFRichTextString)"><!-- --></A><H3>
+addNewTextParagraph</H3>
+<PRE>
+public <A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFTextParagraph.html" title="class in org.apache.poi.xssf.usermodel">XSSFTextParagraph</A> <B>addNewTextParagraph</B>(<A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFRichTextString.html" title="class in org.apache.poi.xssf.usermodel">XSSFRichTextString</A>&nbsp;str)</PRE>
+<DL>
+<DD>Add a new paragraph run to this shape, set to the provided rich text string
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+
+<DT><B>Returns:</B><DD>created paragraph run</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setTextHorizontalOverflow(org.apache.poi.xssf.usermodel.TextHorizontalOverflow)"><!-- --></A><H3>
+setTextHorizontalOverflow</H3>
+<PRE>
+public void <B>setTextHorizontalOverflow</B>(<A HREF="../../../../../org/apache/poi/xssf/usermodel/TextHorizontalOverflow.html" title="enum in org.apache.poi.xssf.usermodel">TextHorizontalOverflow</A>&nbsp;overflow)</PRE>
+<DL>
+<DD>Sets the type of horizontal overflow for the text.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>overflow</CODE> - - the type of horizontal overflow.
+ A <code>null</code> values unsets this property.</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getTextHorizontalOverflow()"><!-- --></A><H3>
+getTextHorizontalOverflow</H3>
+<PRE>
+public <A HREF="../../../../../org/apache/poi/xssf/usermodel/TextHorizontalOverflow.html" title="enum in org.apache.poi.xssf.usermodel">TextHorizontalOverflow</A> <B>getTextHorizontalOverflow</B>()</PRE>
+<DL>
+<DD>Returns the type of horizontal overflow for the text.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+
+<DT><B>Returns:</B><DD>the type of horizontal overflow</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setTextVerticalOverflow(org.apache.poi.xssf.usermodel.TextVerticalOverflow)"><!-- --></A><H3>
+setTextVerticalOverflow</H3>
+<PRE>
+public void <B>setTextVerticalOverflow</B>(<A HREF="../../../../../org/apache/poi/xssf/usermodel/TextVerticalOverflow.html" title="enum in org.apache.poi.xssf.usermodel">TextVerticalOverflow</A>&nbsp;overflow)</PRE>
+<DL>
+<DD>Sets the type of vertical overflow for the text.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>overflow</CODE> - - the type of vertical overflow.
+ A <code>null</code> values unsets this property.</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getTextVerticalOverflow()"><!-- --></A><H3>
+getTextVerticalOverflow</H3>
+<PRE>
+public <A HREF="../../../../../org/apache/poi/xssf/usermodel/TextVerticalOverflow.html" title="enum in org.apache.poi.xssf.usermodel">TextVerticalOverflow</A> <B>getTextVerticalOverflow</B>()</PRE>
+<DL>
+<DD>Returns the type of vertical overflow for the text.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+
+<DT><B>Returns:</B><DD>the type of vertical overflow</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setVerticalAlignment(org.apache.poi.ss.usermodel.VerticalAlignment)"><!-- --></A><H3>
+setVerticalAlignment</H3>
+<PRE>
+public void <B>setVerticalAlignment</B>(<A HREF="../../../../../org/apache/poi/ss/usermodel/VerticalAlignment.html" title="enum in org.apache.poi.ss.usermodel">VerticalAlignment</A>&nbsp;anchor)</PRE>
+<DL>
+<DD>Sets the type of vertical alignment for the text within the shape.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>anchor</CODE> - - the type of alignment.
+ A <code>null</code> values unsets this property.</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getVerticalAlignment()"><!-- --></A><H3>
+getVerticalAlignment</H3>
+<PRE>
+public <A HREF="../../../../../org/apache/poi/ss/usermodel/VerticalAlignment.html" title="enum in org.apache.poi.ss.usermodel">VerticalAlignment</A> <B>getVerticalAlignment</B>()</PRE>
+<DL>
+<DD>Returns the type of vertical alignment for the text within the shape.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+
+<DT><B>Returns:</B><DD>the type of vertical alignment</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setTextDirection(org.apache.poi.xssf.usermodel.TextDirection)"><!-- --></A><H3>
+setTextDirection</H3>
+<PRE>
+public void <B>setTextDirection</B>(<A HREF="../../../../../org/apache/poi/xssf/usermodel/TextDirection.html" title="enum in org.apache.poi.xssf.usermodel">TextDirection</A>&nbsp;orientation)</PRE>
+<DL>
+<DD>Sets the vertical orientation of the text
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>orientation</CODE> - vertical orientation of the text
+ A <code>null</code> values unsets this property.</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getTextDirection()"><!-- --></A><H3>
+getTextDirection</H3>
+<PRE>
+public <A HREF="../../../../../org/apache/poi/xssf/usermodel/TextDirection.html" title="enum in org.apache.poi.xssf.usermodel">TextDirection</A> <B>getTextDirection</B>()</PRE>
+<DL>
+<DD>Gets the vertical orientation of the text
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+
+<DT><B>Returns:</B><DD>vertical orientation of the text</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getBottomInset()"><!-- --></A><H3>
+getBottomInset</H3>
+<PRE>
+public double <B>getBottomInset</B>()</PRE>
+<DL>
+<DD>Returns the distance (in points) between the bottom of the text frame
+ and the bottom of the inscribed rectangle of the shape that contains the text.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+
+<DT><B>Returns:</B><DD>the bottom inset in points</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getLeftInset()"><!-- --></A><H3>
+getLeftInset</H3>
+<PRE>
+public double <B>getLeftInset</B>()</PRE>
+<DL>
+<DD>Returns the distance (in points) between the left edge of the text frame
+  and the left edge of the inscribed rectangle of the shape that contains
+  the text.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+
+<DT><B>Returns:</B><DD>the left inset in points</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getRightInset()"><!-- --></A><H3>
+getRightInset</H3>
+<PRE>
+public double <B>getRightInset</B>()</PRE>
+<DL>
+<DD>Returns the distance (in points) between the right edge of the
+  text frame and the right edge of the inscribed rectangle of the shape
+  that contains the text.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+
+<DT><B>Returns:</B><DD>the right inset in points</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getTopInset()"><!-- --></A><H3>
+getTopInset</H3>
+<PRE>
+public double <B>getTopInset</B>()</PRE>
+<DL>
+<DD>Returns the distance (in points) between the top of the text frame
+  and the top of the inscribed rectangle of the shape that contains the text.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+
+<DT><B>Returns:</B><DD>the top inset in points</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setBottomInset(double)"><!-- --></A><H3>
+setBottomInset</H3>
+<PRE>
+public void <B>setBottomInset</B>(double&nbsp;margin)</PRE>
+<DL>
+<DD>Sets the bottom inset.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>margin</CODE> - the bottom margin<DT><B>See Also:</B><DD><A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFSimpleShape.html#getBottomInset()"><CODE>getBottomInset()</CODE></A></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setLeftInset(double)"><!-- --></A><H3>
+setLeftInset</H3>
+<PRE>
+public void <B>setLeftInset</B>(double&nbsp;margin)</PRE>
+<DL>
+<DD>Sets the left inset.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>margin</CODE> - the left margin<DT><B>See Also:</B><DD><A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFSimpleShape.html#getLeftInset()"><CODE>getLeftInset()</CODE></A></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setRightInset(double)"><!-- --></A><H3>
+setRightInset</H3>
+<PRE>
+public void <B>setRightInset</B>(double&nbsp;margin)</PRE>
+<DL>
+<DD>Sets the right inset.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>margin</CODE> - the right margin<DT><B>See Also:</B><DD><A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFSimpleShape.html#getRightInset()"><CODE>getRightInset()</CODE></A></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setTopInset(double)"><!-- --></A><H3>
+setTopInset</H3>
+<PRE>
+public void <B>setTopInset</B>(double&nbsp;margin)</PRE>
+<DL>
+<DD>Sets the top inset.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>margin</CODE> - the top margin<DT><B>See Also:</B><DD><A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFSimpleShape.html#getTopInset()"><CODE>getTopInset()</CODE></A></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getWordWrap()"><!-- --></A><H3>
+getWordWrap</H3>
+<PRE>
+public boolean <B>getWordWrap</B>()</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+
+<DT><B>Returns:</B><DD>whether to wrap words within the bounding rectangle</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setWordWrap(boolean)"><!-- --></A><H3>
+setWordWrap</H3>
+<PRE>
+public void <B>setWordWrap</B>(boolean&nbsp;wrap)</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>wrap</CODE> - whether to wrap words within the bounding rectangle</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setTextAutofit(org.apache.poi.xssf.usermodel.TextAutofit)"><!-- --></A><H3>
+setTextAutofit</H3>
+<PRE>
+public void <B>setTextAutofit</B>(<A HREF="../../../../../org/apache/poi/xssf/usermodel/TextAutofit.html" title="enum in org.apache.poi.xssf.usermodel">TextAutofit</A>&nbsp;value)</PRE>
+<DL>
+<DD>Specifies that a shape should be auto-fit to fully contain the text described within it.
+ Auto-fitting is when text within a shape is scaled in order to contain all the text inside
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>value</CODE> - type of autofit</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getTextAutofit()"><!-- --></A><H3>
+getTextAutofit</H3>
+<PRE>
+public <A HREF="../../../../../org/apache/poi/xssf/usermodel/TextAutofit.html" title="enum in org.apache.poi.xssf.usermodel">TextAutofit</A> <B>getTextAutofit</B>()</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+
+<DT><B>Returns:</B><DD>type of autofit</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getShapeType()"><!-- --></A><H3>
+getShapeType</H3>
+<PRE>
+public int <B>getShapeType</B>()</PRE>
+<DL>
+<DD>Gets the shape type, one of the constants defined in <A HREF="../../../../../org/apache/poi/ss/usermodel/ShapeTypes.html" title="class in org.apache.poi.ss.usermodel"><CODE>ShapeTypes</CODE></A>.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+
+<DT><B>Returns:</B><DD>the shape type<DT><B>See Also:</B><DD><A HREF="../../../../../org/apache/poi/ss/usermodel/ShapeTypes.html" title="class in org.apache.poi.ss.usermodel"><CODE>ShapeTypes</CODE></A></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setShapeType(int)"><!-- --></A><H3>
+setShapeType</H3>
+<PRE>
+public void <B>setShapeType</B>(int&nbsp;type)</PRE>
+<DL>
+<DD>Sets the shape types.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>type</CODE> - the shape type, one of the constants defined in <A HREF="../../../../../org/apache/poi/ss/usermodel/ShapeTypes.html" title="class in org.apache.poi.ss.usermodel"><CODE>ShapeTypes</CODE></A>.<DT><B>See Also:</B><DD><A HREF="../../../../../org/apache/poi/ss/usermodel/ShapeTypes.html" title="class in org.apache.poi.ss.usermodel"><CODE>ShapeTypes</CODE></A></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getShapeProperties()"><!-- --></A><H3>
+getShapeProperties</H3>
+<PRE>
+protected org.openxmlformats.schemas.drawingml.x2006.main.CTShapeProperties <B>getShapeProperties</B>()</PRE>
+<DL>
+<DD><B>Description copied from class: <CODE><A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFShape.html#getShapeProperties()">XSSFShape</A></CODE></B></DD>
+<DD>Returns xml bean with shape properties.
+<P>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFShape.html#getShapeProperties()">getShapeProperties</A></CODE> in class <CODE><A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFShape.html" title="class in org.apache.poi.xssf.usermodel">XSSFShape</A></CODE></DL>
+</DD>
+<DD><DL>
+
+<DT><B>Returns:</B><DD>xml bean with shape properties.</DL>
+</DD>
+</DL>
+<!-- ========= END OF CLASS DATA ========= -->
+<HR>
+
+
+<!-- ======= START OF BOTTOM NAVBAR ====== -->
+<A NAME="navbar_bottom"><!-- --></A>
+<A HREF="#skip-navbar_bottom" title="Skip navigation links"></A>
+<TABLE BORDER="0" WIDTH="100%" CELLPADDING="1" CELLSPACING="0" SUMMARY="">
+<TR>
+<TD COLSPAN=2 BGCOLOR="#EEEEFF" CLASS="NavBarCell1">
+<A NAME="navbar_bottom_firstrow"><!-- --></A>
+<TABLE BORDER="0" CELLPADDING="0" CELLSPACING="3" SUMMARY="">
+  <TR ALIGN="center" VALIGN="top">
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../overview-summary.html"><FONT CLASS="NavBarFont1"><B>Overview</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="package-summary.html"><FONT CLASS="NavBarFont1"><B>Package</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#FFFFFF" CLASS="NavBarCell1Rev"> &nbsp;<FONT CLASS="NavBarFont1Rev"><B>Class</B></FONT>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="class-use/XSSFSimpleShape.html"><FONT CLASS="NavBarFont1"><B>Use</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="package-tree.html"><FONT CLASS="NavBarFont1"><B>Tree</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../deprecated-list.html"><FONT CLASS="NavBarFont1"><B>Deprecated</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../index-all.html"><FONT CLASS="NavBarFont1"><B>Index</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../help-doc.html"><FONT CLASS="NavBarFont1"><B>Help</B></FONT></A>&nbsp;</TD>
+  </TR>
+</TABLE>
+</TD>
+<TD ALIGN="right" VALIGN="top" ROWSPAN=3><EM>
+</EM>
+</TD>
+</TR>
+
+<TR>
+<TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
+&nbsp;<A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFSheetConditionalFormatting.html" title="class in org.apache.poi.xssf.usermodel"><B>PREV CLASS</B></A>&nbsp;
+&nbsp;<A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFTable.html" title="class in org.apache.poi.xssf.usermodel"><B>NEXT CLASS</B></A></FONT></TD>
+<TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
+  <A HREF="../../../../../index.html?org/apache/poi/xssf/usermodel/XSSFSimpleShape.html" target="_top"><B>FRAMES</B></A>  &nbsp;
+&nbsp;<A HREF="XSSFSimpleShape.html" target="_top"><B>NO FRAMES</B></A>  &nbsp;
+&nbsp;<SCRIPT type="text/javascript">
+  <!--
+  if(window==top) {
+    document.writeln('<A HREF="../../../../../allclasses-noframe.html"><B>All Classes</B></A>');
+  }
+  //-->
+</SCRIPT>
+<NOSCRIPT>
+  <A HREF="../../../../../allclasses-noframe.html"><B>All Classes</B></A>
+</NOSCRIPT>
+
+
+</FONT></TD>
+</TR>
+<TR>
+<TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
+  SUMMARY:&nbsp;NESTED&nbsp;|&nbsp;<A HREF="#fields_inherited_from_class_org.apache.poi.xssf.usermodel.XSSFShape">FIELD</A>&nbsp;|&nbsp;<A HREF="#constructor_summary">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_summary">METHOD</A></FONT></TD>
+<TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
+DETAIL:&nbsp;FIELD&nbsp;|&nbsp;<A HREF="#constructor_detail">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_detail">METHOD</A></FONT></TD>
+</TR>
+</TABLE>
+<A NAME="skip-navbar_bottom"></A>
+<!-- ======== END OF BOTTOM NAVBAR ======= -->
+
+<HR>
+
+                <i>Copyright 2014 The Apache Software Foundation or
+        its licensors, as applicable.</i>
+            
+</BODY>
+</HTML>

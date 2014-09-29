@@ -1,0 +1,659 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!--NewPage-->
+<HTML>
+<HEAD>
+<TITLE>
+StyleTextPropAtom (POI API Documentation)
+</TITLE>
+
+<META NAME="keywords" CONTENT="org.apache.poi.hslf.record.StyleTextPropAtom class">
+
+<LINK REL ="stylesheet" TYPE="text/css" HREF="../../../../../stylesheet.css" TITLE="Style">
+
+<SCRIPT type="text/javascript">
+function windowTitle()
+{
+    parent.document.title="StyleTextPropAtom (POI API Documentation)";
+}
+</SCRIPT>
+<NOSCRIPT>
+</NOSCRIPT>
+
+</HEAD>
+
+<BODY BGCOLOR="white" onload="windowTitle();">
+
+
+<!-- ========= START OF TOP NAVBAR ======= -->
+<A NAME="navbar_top"><!-- --></A>
+<A HREF="#skip-navbar_top" title="Skip navigation links"></A>
+<TABLE BORDER="0" WIDTH="100%" CELLPADDING="1" CELLSPACING="0" SUMMARY="">
+<TR>
+<TD COLSPAN=2 BGCOLOR="#EEEEFF" CLASS="NavBarCell1">
+<A NAME="navbar_top_firstrow"><!-- --></A>
+<TABLE BORDER="0" CELLPADDING="0" CELLSPACING="3" SUMMARY="">
+  <TR ALIGN="center" VALIGN="top">
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../overview-summary.html"><FONT CLASS="NavBarFont1"><B>Overview</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="package-summary.html"><FONT CLASS="NavBarFont1"><B>Package</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#FFFFFF" CLASS="NavBarCell1Rev"> &nbsp;<FONT CLASS="NavBarFont1Rev"><B>Class</B></FONT>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="class-use/StyleTextPropAtom.html"><FONT CLASS="NavBarFont1"><B>Use</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="package-tree.html"><FONT CLASS="NavBarFont1"><B>Tree</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../deprecated-list.html"><FONT CLASS="NavBarFont1"><B>Deprecated</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../index-all.html"><FONT CLASS="NavBarFont1"><B>Index</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../help-doc.html"><FONT CLASS="NavBarFont1"><B>Help</B></FONT></A>&nbsp;</TD>
+  </TR>
+</TABLE>
+</TD>
+<TD ALIGN="right" VALIGN="top" ROWSPAN=3><EM>
+</EM>
+</TD>
+</TR>
+
+<TR>
+<TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
+&nbsp;<A HREF="../../../../../org/apache/poi/hslf/record/StyleTextProp9Atom.html" title="class in org.apache.poi.hslf.record"><B>PREV CLASS</B></A>&nbsp;
+&nbsp;<A HREF="../../../../../org/apache/poi/hslf/record/TextAutoNumberSchemeEnum.html" title="enum in org.apache.poi.hslf.record"><B>NEXT CLASS</B></A></FONT></TD>
+<TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
+  <A HREF="../../../../../index.html?org/apache/poi/hslf/record/StyleTextPropAtom.html" target="_top"><B>FRAMES</B></A>  &nbsp;
+&nbsp;<A HREF="StyleTextPropAtom.html" target="_top"><B>NO FRAMES</B></A>  &nbsp;
+&nbsp;<SCRIPT type="text/javascript">
+  <!--
+  if(window==top) {
+    document.writeln('<A HREF="../../../../../allclasses-noframe.html"><B>All Classes</B></A>');
+  }
+  //-->
+</SCRIPT>
+<NOSCRIPT>
+  <A HREF="../../../../../allclasses-noframe.html"><B>All Classes</B></A>
+</NOSCRIPT>
+
+
+</FONT></TD>
+</TR>
+<TR>
+<TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
+  SUMMARY:&nbsp;NESTED&nbsp;|&nbsp;<A HREF="#field_summary">FIELD</A>&nbsp;|&nbsp;<A HREF="#constructor_summary">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_summary">METHOD</A></FONT></TD>
+<TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
+DETAIL:&nbsp;<A HREF="#field_detail">FIELD</A>&nbsp;|&nbsp;<A HREF="#constructor_detail">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_detail">METHOD</A></FONT></TD>
+</TR>
+</TABLE>
+<A NAME="skip-navbar_top"></A>
+<!-- ========= END OF TOP NAVBAR ========= -->
+
+<HR>
+<!-- ======== START OF CLASS DATA ======== -->
+<H2>
+<FONT SIZE="-1">
+org.apache.poi.hslf.record</FONT>
+<BR>
+Class StyleTextPropAtom</H2>
+<PRE>
+java.lang.Object
+  <IMG SRC="../../../../../resources/inherit.gif" ALT="extended by "><A HREF="../../../../../org/apache/poi/hslf/record/Record.html" title="class in org.apache.poi.hslf.record">org.apache.poi.hslf.record.Record</A>
+      <IMG SRC="../../../../../resources/inherit.gif" ALT="extended by "><A HREF="../../../../../org/apache/poi/hslf/record/RecordAtom.html" title="class in org.apache.poi.hslf.record">org.apache.poi.hslf.record.RecordAtom</A>
+          <IMG SRC="../../../../../resources/inherit.gif" ALT="extended by "><B>org.apache.poi.hslf.record.StyleTextPropAtom</B>
+</PRE>
+<HR>
+<DL>
+<DT><PRE>public final class <B>StyleTextPropAtom</B><DT>extends <A HREF="../../../../../org/apache/poi/hslf/record/RecordAtom.html" title="class in org.apache.poi.hslf.record">RecordAtom</A></DL>
+</PRE>
+
+<P>
+A StyleTextPropAtom (type 4001). Holds basic character properties
+  (bold, italic, underline, font size etc) and paragraph properties
+  (alignment, line spacing etc) for the block of text (TextBytesAtom
+  or TextCharsAtom) that this record follows.
+ You will find two lists within this class.
+  1 - Paragraph style list (paragraphStyles)
+  2 - Character style list (charStyles)
+ Both are lists of TextPropCollections. These define how many characters
+  the style applies to, and what style elements make up the style (another
+  list, this time of TextProps). Each TextProp has a value, which somehow
+  encapsulates a property of the style
+<P>
+
+<P>
+<DL>
+<DT><B>Author:</B></DT>
+  <DD>Nick Burch, Yegor Kozlov</DD>
+</DL>
+<HR>
+
+<P>
+<!-- =========== FIELD SUMMARY =========== -->
+
+<A NAME="field_summary"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+<B>Field Summary</B></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;<A HREF="../../../../../org/apache/poi/hslf/model/textproperties/TextProp.html" title="class in org.apache.poi.hslf.model.textproperties">TextProp</A>[]</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/record/StyleTextPropAtom.html#characterTextPropTypes">characterTextPropTypes</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;All the different kinds of character properties we might handle</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;<A HREF="../../../../../org/apache/poi/hslf/model/textproperties/TextProp.html" title="class in org.apache.poi.hslf.model.textproperties">TextProp</A>[]</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/record/StyleTextPropAtom.html#paragraphTextPropTypes">paragraphTextPropTypes</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;All the different kinds of paragraph properties we might handle</TD>
+</TR>
+</TABLE>
+&nbsp;<A NAME="fields_inherited_from_class_org.apache.poi.hslf.record.Record"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#EEEEFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left"><B>Fields inherited from class org.apache.poi.hslf.record.<A HREF="../../../../../org/apache/poi/hslf/record/Record.html" title="class in org.apache.poi.hslf.record">Record</A></B></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><A HREF="../../../../../org/apache/poi/hslf/record/Record.html#logger">logger</A></CODE></TD>
+</TR>
+</TABLE>
+&nbsp;
+<!-- ======== CONSTRUCTOR SUMMARY ======== -->
+
+<A NAME="constructor_summary"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+<B>Constructor Summary</B></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/record/StyleTextPropAtom.html#StyleTextPropAtom(byte[], int, int)">StyleTextPropAtom</A></B>(byte[]&nbsp;source,
+                  int&nbsp;start,
+                  int&nbsp;len)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;For the Text Style Properties (StyleTextProp) Atom</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/record/StyleTextPropAtom.html#StyleTextPropAtom(int)">StyleTextPropAtom</A></B>(int&nbsp;parentTextSize)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A new set of text style properties for some text without any.</TD>
+</TR>
+</TABLE>
+&nbsp;
+<!-- ========== METHOD SUMMARY =========== -->
+
+<A NAME="method_summary"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+<B>Method Summary</B></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../../../org/apache/poi/hslf/model/textproperties/TextPropCollection.html" title="class in org.apache.poi.hslf.model.textproperties">TextPropCollection</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/record/StyleTextPropAtom.html#addCharacterTextPropCollection(int)">addCharacterTextPropCollection</A></B>(int&nbsp;charactersCovered)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Create a new Character TextPropCollection, and add it to the list</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../../../org/apache/poi/hslf/model/textproperties/TextPropCollection.html" title="class in org.apache.poi.hslf.model.textproperties">TextPropCollection</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/record/StyleTextPropAtom.html#addParagraphTextPropCollection(int)">addParagraphTextPropCollection</A></B>(int&nbsp;charactersCovered)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Create a new Paragraph TextPropCollection, and add it to the list</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;java.util.LinkedList&lt;<A HREF="../../../../../org/apache/poi/hslf/model/textproperties/TextPropCollection.html" title="class in org.apache.poi.hslf.model.textproperties">TextPropCollection</A>&gt;</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/record/StyleTextPropAtom.html#getCharacterStyles()">getCharacterStyles</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;int</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/record/StyleTextPropAtom.html#getCharacterTextLengthCovered()">getCharacterTextLengthCovered</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns how many characters the character's
+  TextPropCollections cover.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;java.util.LinkedList&lt;<A HREF="../../../../../org/apache/poi/hslf/model/textproperties/TextPropCollection.html" title="class in org.apache.poi.hslf.model.textproperties">TextPropCollection</A>&gt;</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/record/StyleTextPropAtom.html#getParagraphStyles()">getParagraphStyles</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;int</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/record/StyleTextPropAtom.html#getParagraphTextLengthCovered()">getParagraphTextLengthCovered</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns how many characters the paragraph's
+  TextPropCollections cover.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;long</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/record/StyleTextPropAtom.html#getRecordType()">getRecordType</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;We are of type 4001</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/record/StyleTextPropAtom.html#setCharacterStyles(java.util.LinkedList)">setCharacterStyles</A></B>(java.util.LinkedList&lt;<A HREF="../../../../../org/apache/poi/hslf/model/textproperties/TextPropCollection.html" title="class in org.apache.poi.hslf.model.textproperties">TextPropCollection</A>&gt;&nbsp;cs)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Updates the link list of TextPropCollections which make up the
+  character stylings</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/record/StyleTextPropAtom.html#setParagraphStyles(java.util.LinkedList)">setParagraphStyles</A></B>(java.util.LinkedList&lt;<A HREF="../../../../../org/apache/poi/hslf/model/textproperties/TextPropCollection.html" title="class in org.apache.poi.hslf.model.textproperties">TextPropCollection</A>&gt;&nbsp;ps)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Updates the link list of TextPropCollections which make up the
+  paragraph stylings</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/record/StyleTextPropAtom.html#setParentTextSize(int)">setParentTextSize</A></B>(int&nbsp;size)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Tell us how much text the parent TextCharsAtom or TextBytesAtom
+  contains, so we can go ahead and initialise ourselves.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/record/StyleTextPropAtom.html#setRawContents(byte[])">setRawContents</A></B>(byte[]&nbsp;bytes)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;java.lang.String</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/record/StyleTextPropAtom.html#toString()">toString</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Dump the record content into <code>StringBuffer</code></TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/record/StyleTextPropAtom.html#writeOut(java.io.OutputStream)">writeOut</A></B>(java.io.OutputStream&nbsp;out)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Write the contents of the record back, so it can be written
+  to disk</TD>
+</TR>
+</TABLE>
+&nbsp;<A NAME="methods_inherited_from_class_org.apache.poi.hslf.record.RecordAtom"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#EEEEFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left"><B>Methods inherited from class org.apache.poi.hslf.record.<A HREF="../../../../../org/apache/poi/hslf/record/RecordAtom.html" title="class in org.apache.poi.hslf.record">RecordAtom</A></B></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><A HREF="../../../../../org/apache/poi/hslf/record/RecordAtom.html#getChildRecords()">getChildRecords</A>, <A HREF="../../../../../org/apache/poi/hslf/record/RecordAtom.html#isAnAtom()">isAnAtom</A></CODE></TD>
+</TR>
+</TABLE>
+&nbsp;<A NAME="methods_inherited_from_class_org.apache.poi.hslf.record.Record"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#EEEEFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left"><B>Methods inherited from class org.apache.poi.hslf.record.<A HREF="../../../../../org/apache/poi/hslf/record/Record.html" title="class in org.apache.poi.hslf.record">Record</A></B></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><A HREF="../../../../../org/apache/poi/hslf/record/Record.html#buildRecordAtOffset(byte[], int)">buildRecordAtOffset</A>, <A HREF="../../../../../org/apache/poi/hslf/record/Record.html#createRecordForType(long, byte[], int, int)">createRecordForType</A>, <A HREF="../../../../../org/apache/poi/hslf/record/Record.html#findChildRecords(byte[], int, int)">findChildRecords</A>, <A HREF="../../../../../org/apache/poi/hslf/record/Record.html#writeLittleEndian(int, java.io.OutputStream)">writeLittleEndian</A>, <A HREF="../../../../../org/apache/poi/hslf/record/Record.html#writeLittleEndian(short, java.io.OutputStream)">writeLittleEndian</A></CODE></TD>
+</TR>
+</TABLE>
+&nbsp;<A NAME="methods_inherited_from_class_java.lang.Object"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#EEEEFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left"><B>Methods inherited from class java.lang.Object</B></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE>clone, equals, finalize, getClass, hashCode, notify, notifyAll, wait, wait, wait</CODE></TD>
+</TR>
+</TABLE>
+&nbsp;
+<P>
+
+<!-- ============ FIELD DETAIL =========== -->
+
+<A NAME="field_detail"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="1"><FONT SIZE="+2">
+<B>Field Detail</B></FONT></TH>
+</TR>
+</TABLE>
+
+<A NAME="paragraphTextPropTypes"><!-- --></A><H3>
+paragraphTextPropTypes</H3>
+<PRE>
+public static <A HREF="../../../../../org/apache/poi/hslf/model/textproperties/TextProp.html" title="class in org.apache.poi.hslf.model.textproperties">TextProp</A>[] <B>paragraphTextPropTypes</B></PRE>
+<DL>
+<DD>All the different kinds of paragraph properties we might handle
+<P>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="characterTextPropTypes"><!-- --></A><H3>
+characterTextPropTypes</H3>
+<PRE>
+public static <A HREF="../../../../../org/apache/poi/hslf/model/textproperties/TextProp.html" title="class in org.apache.poi.hslf.model.textproperties">TextProp</A>[] <B>characterTextPropTypes</B></PRE>
+<DL>
+<DD>All the different kinds of character properties we might handle
+<P>
+<DL>
+</DL>
+</DL>
+
+<!-- ========= CONSTRUCTOR DETAIL ======== -->
+
+<A NAME="constructor_detail"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="1"><FONT SIZE="+2">
+<B>Constructor Detail</B></FONT></TH>
+</TR>
+</TABLE>
+
+<A NAME="StyleTextPropAtom(byte[], int, int)"><!-- --></A><H3>
+StyleTextPropAtom</H3>
+<PRE>
+public <B>StyleTextPropAtom</B>(byte[]&nbsp;source,
+                         int&nbsp;start,
+                         int&nbsp;len)</PRE>
+<DL>
+<DD>For the Text Style Properties (StyleTextProp) Atom
+<P>
+</DL>
+<HR>
+
+<A NAME="StyleTextPropAtom(int)"><!-- --></A><H3>
+StyleTextPropAtom</H3>
+<PRE>
+public <B>StyleTextPropAtom</B>(int&nbsp;parentTextSize)</PRE>
+<DL>
+<DD>A new set of text style properties for some text without any.
+<P>
+</DL>
+
+<!-- ============ METHOD DETAIL ========== -->
+
+<A NAME="method_detail"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="1"><FONT SIZE="+2">
+<B>Method Detail</B></FONT></TH>
+</TR>
+</TABLE>
+
+<A NAME="getParagraphStyles()"><!-- --></A><H3>
+getParagraphStyles</H3>
+<PRE>
+public java.util.LinkedList&lt;<A HREF="../../../../../org/apache/poi/hslf/model/textproperties/TextPropCollection.html" title="class in org.apache.poi.hslf.model.textproperties">TextPropCollection</A>&gt; <B>getParagraphStyles</B>()</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setParagraphStyles(java.util.LinkedList)"><!-- --></A><H3>
+setParagraphStyles</H3>
+<PRE>
+public void <B>setParagraphStyles</B>(java.util.LinkedList&lt;<A HREF="../../../../../org/apache/poi/hslf/model/textproperties/TextPropCollection.html" title="class in org.apache.poi.hslf.model.textproperties">TextPropCollection</A>&gt;&nbsp;ps)</PRE>
+<DL>
+<DD>Updates the link list of TextPropCollections which make up the
+  paragraph stylings
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getCharacterStyles()"><!-- --></A><H3>
+getCharacterStyles</H3>
+<PRE>
+public java.util.LinkedList&lt;<A HREF="../../../../../org/apache/poi/hslf/model/textproperties/TextPropCollection.html" title="class in org.apache.poi.hslf.model.textproperties">TextPropCollection</A>&gt; <B>getCharacterStyles</B>()</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setCharacterStyles(java.util.LinkedList)"><!-- --></A><H3>
+setCharacterStyles</H3>
+<PRE>
+public void <B>setCharacterStyles</B>(java.util.LinkedList&lt;<A HREF="../../../../../org/apache/poi/hslf/model/textproperties/TextPropCollection.html" title="class in org.apache.poi.hslf.model.textproperties">TextPropCollection</A>&gt;&nbsp;cs)</PRE>
+<DL>
+<DD>Updates the link list of TextPropCollections which make up the
+  character stylings
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getParagraphTextLengthCovered()"><!-- --></A><H3>
+getParagraphTextLengthCovered</H3>
+<PRE>
+public int <B>getParagraphTextLengthCovered</B>()</PRE>
+<DL>
+<DD>Returns how many characters the paragraph's
+  TextPropCollections cover.
+ (May be one or two more than the underlying text does,
+  due to having extra characters meaning something
+  special to powerpoint)
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getCharacterTextLengthCovered()"><!-- --></A><H3>
+getCharacterTextLengthCovered</H3>
+<PRE>
+public int <B>getCharacterTextLengthCovered</B>()</PRE>
+<DL>
+<DD>Returns how many characters the character's
+  TextPropCollections cover.
+ (May be one or two more than the underlying text does,
+  due to having extra characters meaning something
+  special to powerpoint)
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getRecordType()"><!-- --></A><H3>
+getRecordType</H3>
+<PRE>
+public long <B>getRecordType</B>()</PRE>
+<DL>
+<DD>We are of type 4001
+<P>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../../../../org/apache/poi/hslf/record/Record.html#getRecordType()">getRecordType</A></CODE> in class <CODE><A HREF="../../../../../org/apache/poi/hslf/record/Record.html" title="class in org.apache.poi.hslf.record">Record</A></CODE></DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="writeOut(java.io.OutputStream)"><!-- --></A><H3>
+writeOut</H3>
+<PRE>
+public void <B>writeOut</B>(java.io.OutputStream&nbsp;out)
+              throws java.io.IOException</PRE>
+<DL>
+<DD>Write the contents of the record back, so it can be written
+  to disk
+<P>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../../../../org/apache/poi/hslf/record/Record.html#writeOut(java.io.OutputStream)">writeOut</A></CODE> in class <CODE><A HREF="../../../../../org/apache/poi/hslf/record/Record.html" title="class in org.apache.poi.hslf.record">Record</A></CODE></DL>
+</DD>
+<DD><DL>
+
+<DT><B>Throws:</B>
+<DD><CODE>java.io.IOException</CODE></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setParentTextSize(int)"><!-- --></A><H3>
+setParentTextSize</H3>
+<PRE>
+public void <B>setParentTextSize</B>(int&nbsp;size)</PRE>
+<DL>
+<DD>Tell us how much text the parent TextCharsAtom or TextBytesAtom
+  contains, so we can go ahead and initialise ourselves.
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setRawContents(byte[])"><!-- --></A><H3>
+setRawContents</H3>
+<PRE>
+public void <B>setRawContents</B>(byte[]&nbsp;bytes)</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="addParagraphTextPropCollection(int)"><!-- --></A><H3>
+addParagraphTextPropCollection</H3>
+<PRE>
+public <A HREF="../../../../../org/apache/poi/hslf/model/textproperties/TextPropCollection.html" title="class in org.apache.poi.hslf.model.textproperties">TextPropCollection</A> <B>addParagraphTextPropCollection</B>(int&nbsp;charactersCovered)</PRE>
+<DL>
+<DD>Create a new Paragraph TextPropCollection, and add it to the list
+<P>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>charactersCovered</CODE> - The number of characters this TextPropCollection will cover
+<DT><B>Returns:</B><DD>the new TextPropCollection, which will then be in the list</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="addCharacterTextPropCollection(int)"><!-- --></A><H3>
+addCharacterTextPropCollection</H3>
+<PRE>
+public <A HREF="../../../../../org/apache/poi/hslf/model/textproperties/TextPropCollection.html" title="class in org.apache.poi.hslf.model.textproperties">TextPropCollection</A> <B>addCharacterTextPropCollection</B>(int&nbsp;charactersCovered)</PRE>
+<DL>
+<DD>Create a new Character TextPropCollection, and add it to the list
+<P>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>charactersCovered</CODE> - The number of characters this TextPropCollection will cover
+<DT><B>Returns:</B><DD>the new TextPropCollection, which will then be in the list</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="toString()"><!-- --></A><H3>
+toString</H3>
+<PRE>
+public java.lang.String <B>toString</B>()</PRE>
+<DL>
+<DD>Dump the record content into <code>StringBuffer</code>
+<P>
+<DD><DL>
+<DT><B>Overrides:</B><DD><CODE>toString</CODE> in class <CODE>java.lang.Object</CODE></DL>
+</DD>
+<DD><DL>
+
+<DT><B>Returns:</B><DD>the string representation of the record data</DL>
+</DD>
+</DL>
+<!-- ========= END OF CLASS DATA ========= -->
+<HR>
+
+
+<!-- ======= START OF BOTTOM NAVBAR ====== -->
+<A NAME="navbar_bottom"><!-- --></A>
+<A HREF="#skip-navbar_bottom" title="Skip navigation links"></A>
+<TABLE BORDER="0" WIDTH="100%" CELLPADDING="1" CELLSPACING="0" SUMMARY="">
+<TR>
+<TD COLSPAN=2 BGCOLOR="#EEEEFF" CLASS="NavBarCell1">
+<A NAME="navbar_bottom_firstrow"><!-- --></A>
+<TABLE BORDER="0" CELLPADDING="0" CELLSPACING="3" SUMMARY="">
+  <TR ALIGN="center" VALIGN="top">
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../overview-summary.html"><FONT CLASS="NavBarFont1"><B>Overview</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="package-summary.html"><FONT CLASS="NavBarFont1"><B>Package</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#FFFFFF" CLASS="NavBarCell1Rev"> &nbsp;<FONT CLASS="NavBarFont1Rev"><B>Class</B></FONT>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="class-use/StyleTextPropAtom.html"><FONT CLASS="NavBarFont1"><B>Use</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="package-tree.html"><FONT CLASS="NavBarFont1"><B>Tree</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../deprecated-list.html"><FONT CLASS="NavBarFont1"><B>Deprecated</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../index-all.html"><FONT CLASS="NavBarFont1"><B>Index</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../help-doc.html"><FONT CLASS="NavBarFont1"><B>Help</B></FONT></A>&nbsp;</TD>
+  </TR>
+</TABLE>
+</TD>
+<TD ALIGN="right" VALIGN="top" ROWSPAN=3><EM>
+</EM>
+</TD>
+</TR>
+
+<TR>
+<TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
+&nbsp;<A HREF="../../../../../org/apache/poi/hslf/record/StyleTextProp9Atom.html" title="class in org.apache.poi.hslf.record"><B>PREV CLASS</B></A>&nbsp;
+&nbsp;<A HREF="../../../../../org/apache/poi/hslf/record/TextAutoNumberSchemeEnum.html" title="enum in org.apache.poi.hslf.record"><B>NEXT CLASS</B></A></FONT></TD>
+<TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
+  <A HREF="../../../../../index.html?org/apache/poi/hslf/record/StyleTextPropAtom.html" target="_top"><B>FRAMES</B></A>  &nbsp;
+&nbsp;<A HREF="StyleTextPropAtom.html" target="_top"><B>NO FRAMES</B></A>  &nbsp;
+&nbsp;<SCRIPT type="text/javascript">
+  <!--
+  if(window==top) {
+    document.writeln('<A HREF="../../../../../allclasses-noframe.html"><B>All Classes</B></A>');
+  }
+  //-->
+</SCRIPT>
+<NOSCRIPT>
+  <A HREF="../../../../../allclasses-noframe.html"><B>All Classes</B></A>
+</NOSCRIPT>
+
+
+</FONT></TD>
+</TR>
+<TR>
+<TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
+  SUMMARY:&nbsp;NESTED&nbsp;|&nbsp;<A HREF="#field_summary">FIELD</A>&nbsp;|&nbsp;<A HREF="#constructor_summary">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_summary">METHOD</A></FONT></TD>
+<TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
+DETAIL:&nbsp;<A HREF="#field_detail">FIELD</A>&nbsp;|&nbsp;<A HREF="#constructor_detail">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_detail">METHOD</A></FONT></TD>
+</TR>
+</TABLE>
+<A NAME="skip-navbar_bottom"></A>
+<!-- ======== END OF BOTTOM NAVBAR ======= -->
+
+<HR>
+
+                <i>Copyright 2014 The Apache Software Foundation or
+        its licensors, as applicable.</i>
+            
+</BODY>
+</HTML>

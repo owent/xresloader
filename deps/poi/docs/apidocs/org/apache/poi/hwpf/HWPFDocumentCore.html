@@ -1,0 +1,859 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!--NewPage-->
+<HTML>
+<HEAD>
+<TITLE>
+HWPFDocumentCore (POI API Documentation)
+</TITLE>
+
+<META NAME="keywords" CONTENT="org.apache.poi.hwpf.HWPFDocumentCore class">
+
+<LINK REL ="stylesheet" TYPE="text/css" HREF="../../../../stylesheet.css" TITLE="Style">
+
+<SCRIPT type="text/javascript">
+function windowTitle()
+{
+    parent.document.title="HWPFDocumentCore (POI API Documentation)";
+}
+</SCRIPT>
+<NOSCRIPT>
+</NOSCRIPT>
+
+</HEAD>
+
+<BODY BGCOLOR="white" onload="windowTitle();">
+
+
+<!-- ========= START OF TOP NAVBAR ======= -->
+<A NAME="navbar_top"><!-- --></A>
+<A HREF="#skip-navbar_top" title="Skip navigation links"></A>
+<TABLE BORDER="0" WIDTH="100%" CELLPADDING="1" CELLSPACING="0" SUMMARY="">
+<TR>
+<TD COLSPAN=2 BGCOLOR="#EEEEFF" CLASS="NavBarCell1">
+<A NAME="navbar_top_firstrow"><!-- --></A>
+<TABLE BORDER="0" CELLPADDING="0" CELLSPACING="3" SUMMARY="">
+  <TR ALIGN="center" VALIGN="top">
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../overview-summary.html"><FONT CLASS="NavBarFont1"><B>Overview</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="package-summary.html"><FONT CLASS="NavBarFont1"><B>Package</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#FFFFFF" CLASS="NavBarCell1Rev"> &nbsp;<FONT CLASS="NavBarFont1Rev"><B>Class</B></FONT>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="class-use/HWPFDocumentCore.html"><FONT CLASS="NavBarFont1"><B>Use</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="package-tree.html"><FONT CLASS="NavBarFont1"><B>Tree</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../deprecated-list.html"><FONT CLASS="NavBarFont1"><B>Deprecated</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../index-all.html"><FONT CLASS="NavBarFont1"><B>Index</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../help-doc.html"><FONT CLASS="NavBarFont1"><B>Help</B></FONT></A>&nbsp;</TD>
+  </TR>
+</TABLE>
+</TD>
+<TD ALIGN="right" VALIGN="top" ROWSPAN=3><EM>
+</EM>
+</TD>
+</TR>
+
+<TR>
+<TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
+&nbsp;<A HREF="../../../../org/apache/poi/hwpf/HWPFDocument.html" title="class in org.apache.poi.hwpf"><B>PREV CLASS</B></A>&nbsp;
+&nbsp;<A HREF="../../../../org/apache/poi/hwpf/HWPFOldDocument.html" title="class in org.apache.poi.hwpf"><B>NEXT CLASS</B></A></FONT></TD>
+<TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
+  <A HREF="../../../../index.html?org/apache/poi/hwpf/HWPFDocumentCore.html" target="_top"><B>FRAMES</B></A>  &nbsp;
+&nbsp;<A HREF="HWPFDocumentCore.html" target="_top"><B>NO FRAMES</B></A>  &nbsp;
+&nbsp;<SCRIPT type="text/javascript">
+  <!--
+  if(window==top) {
+    document.writeln('<A HREF="../../../../allclasses-noframe.html"><B>All Classes</B></A>');
+  }
+  //-->
+</SCRIPT>
+<NOSCRIPT>
+  <A HREF="../../../../allclasses-noframe.html"><B>All Classes</B></A>
+</NOSCRIPT>
+
+
+</FONT></TD>
+</TR>
+<TR>
+<TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
+  SUMMARY:&nbsp;NESTED&nbsp;|&nbsp;<A HREF="#field_summary">FIELD</A>&nbsp;|&nbsp;<A HREF="#constructor_summary">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_summary">METHOD</A></FONT></TD>
+<TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
+DETAIL:&nbsp;<A HREF="#field_detail">FIELD</A>&nbsp;|&nbsp;<A HREF="#constructor_detail">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_detail">METHOD</A></FONT></TD>
+</TR>
+</TABLE>
+<A NAME="skip-navbar_top"></A>
+<!-- ========= END OF TOP NAVBAR ========= -->
+
+<HR>
+<!-- ======== START OF CLASS DATA ======== -->
+<H2>
+<FONT SIZE="-1">
+org.apache.poi.hwpf</FONT>
+<BR>
+Class HWPFDocumentCore</H2>
+<PRE>
+java.lang.Object
+  <IMG SRC="../../../../resources/inherit.gif" ALT="extended by "><A HREF="../../../../org/apache/poi/POIDocument.html" title="class in org.apache.poi">org.apache.poi.POIDocument</A>
+      <IMG SRC="../../../../resources/inherit.gif" ALT="extended by "><B>org.apache.poi.hwpf.HWPFDocumentCore</B>
+</PRE>
+<DL>
+<DT><B>Direct Known Subclasses:</B> <DD><A HREF="../../../../org/apache/poi/hwpf/HWPFDocument.html" title="class in org.apache.poi.hwpf">HWPFDocument</A>, <A HREF="../../../../org/apache/poi/hwpf/HWPFOldDocument.html" title="class in org.apache.poi.hwpf">HWPFOldDocument</A></DD>
+</DL>
+<HR>
+<DL>
+<DT><PRE>public abstract class <B>HWPFDocumentCore</B><DT>extends <A HREF="../../../../org/apache/poi/POIDocument.html" title="class in org.apache.poi">POIDocument</A></DL>
+</PRE>
+
+<P>
+This class holds much of the core of a Word document, but
+  without some of the table structure information.
+ You generally want to work with one of
+  <A HREF="../../../../org/apache/poi/hwpf/HWPFDocument.html" title="class in org.apache.poi.hwpf"><CODE>HWPFDocument</CODE></A> or <A HREF="../../../../org/apache/poi/hwpf/HWPFOldDocument.html" title="class in org.apache.poi.hwpf"><CODE>HWPFOldDocument</CODE></A>
+<P>
+
+<P>
+<HR>
+
+<P>
+<!-- =========== FIELD SUMMARY =========== -->
+
+<A NAME="field_summary"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+<B>Field Summary</B></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>protected &nbsp;<A HREF="../../../../org/apache/poi/hwpf/model/CHPBinTable.html" title="class in org.apache.poi.hwpf.model">CHPBinTable</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../org/apache/poi/hwpf/HWPFDocumentCore.html#_cbt">_cbt</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Contains formatting properties for text</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>protected &nbsp;<A HREF="../../../../org/apache/poi/hwpf/model/FileInformationBlock.html" title="class in org.apache.poi.hwpf.model">FileInformationBlock</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../org/apache/poi/hwpf/HWPFDocumentCore.html#_fib">_fib</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The FIB</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>protected &nbsp;<A HREF="../../../../org/apache/poi/hwpf/model/FontTable.html" title="class in org.apache.poi.hwpf.model">FontTable</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../org/apache/poi/hwpf/HWPFDocumentCore.html#_ft">_ft</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Holds fonts for this document.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>protected &nbsp;<A HREF="../../../../org/apache/poi/hwpf/model/ListTables.html" title="class in org.apache.poi.hwpf.model">ListTables</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../org/apache/poi/hwpf/HWPFDocumentCore.html#_lt">_lt</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Hold list tables</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>protected &nbsp;byte[]</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../org/apache/poi/hwpf/HWPFDocumentCore.html#_mainStream">_mainStream</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;main document stream buffer</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>protected &nbsp;<A HREF="../../../../org/apache/poi/hwpf/usermodel/ObjectPoolImpl.html" title="class in org.apache.poi.hwpf.usermodel">ObjectPoolImpl</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../org/apache/poi/hwpf/HWPFDocumentCore.html#_objectPool">_objectPool</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Holds OLE2 objects</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>protected &nbsp;<A HREF="../../../../org/apache/poi/hwpf/model/PAPBinTable.html" title="class in org.apache.poi.hwpf.model">PAPBinTable</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../org/apache/poi/hwpf/HWPFDocumentCore.html#_pbt">_pbt</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Contains formatting properties for paragraphs</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>protected &nbsp;<A HREF="../../../../org/apache/poi/hwpf/model/StyleSheet.html" title="class in org.apache.poi.hwpf.model">StyleSheet</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../org/apache/poi/hwpf/HWPFDocumentCore.html#_ss">_ss</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Holds styles for this document.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>protected &nbsp;<A HREF="../../../../org/apache/poi/hwpf/model/SectionTable.html" title="class in org.apache.poi.hwpf.model">SectionTable</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../org/apache/poi/hwpf/HWPFDocumentCore.html#_st">_st</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Contains formatting properties for sections.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>protected static&nbsp;java.lang.String</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../org/apache/poi/hwpf/HWPFDocumentCore.html#STREAM_OBJECT_POOL">STREAM_OBJECT_POOL</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>protected static&nbsp;java.lang.String</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../org/apache/poi/hwpf/HWPFDocumentCore.html#STREAM_WORD_DOCUMENT">STREAM_WORD_DOCUMENT</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+</TABLE>
+&nbsp;<A NAME="fields_inherited_from_class_org.apache.poi.POIDocument"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#EEEEFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left"><B>Fields inherited from class org.apache.poi.<A HREF="../../../../org/apache/poi/POIDocument.html" title="class in org.apache.poi">POIDocument</A></B></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><A HREF="../../../../org/apache/poi/POIDocument.html#directory">directory</A></CODE></TD>
+</TR>
+</TABLE>
+&nbsp;
+<!-- ======== CONSTRUCTOR SUMMARY ======== -->
+
+<A NAME="constructor_summary"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+<B>Constructor Summary</B></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>protected </CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../org/apache/poi/hwpf/HWPFDocumentCore.html#HWPFDocumentCore()">HWPFDocumentCore</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../org/apache/poi/hwpf/HWPFDocumentCore.html#HWPFDocumentCore(org.apache.poi.poifs.filesystem.DirectoryNode)">HWPFDocumentCore</A></B>(<A HREF="../../../../org/apache/poi/poifs/filesystem/DirectoryNode.html" title="class in org.apache.poi.poifs.filesystem">DirectoryNode</A>&nbsp;directory)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;This constructor loads a Word document from a specific point
+  in a POIFSFileSystem, probably not the default.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../org/apache/poi/hwpf/HWPFDocumentCore.html#HWPFDocumentCore(java.io.InputStream)">HWPFDocumentCore</A></B>(java.io.InputStream&nbsp;istream)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;This constructor loads a Word document from an InputStream.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../org/apache/poi/hwpf/HWPFDocumentCore.html#HWPFDocumentCore(org.apache.poi.poifs.filesystem.POIFSFileSystem)">HWPFDocumentCore</A></B>(<A HREF="../../../../org/apache/poi/poifs/filesystem/POIFSFileSystem.html" title="class in org.apache.poi.poifs.filesystem">POIFSFileSystem</A>&nbsp;pfilesystem)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;This constructor loads a Word document from a POIFSFileSystem</TD>
+</TR>
+</TABLE>
+&nbsp;
+<!-- ========== METHOD SUMMARY =========== -->
+
+<A NAME="method_summary"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+<B>Method Summary</B></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../../org/apache/poi/hwpf/model/CHPBinTable.html" title="class in org.apache.poi.hwpf.model">CHPBinTable</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../org/apache/poi/hwpf/HWPFDocumentCore.html#getCharacterTable()">getCharacterTable</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;java.lang.String</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../org/apache/poi/hwpf/HWPFDocumentCore.html#getDocumentText()">getDocumentText</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns document text, i.e.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../../org/apache/poi/hwpf/model/FileInformationBlock.html" title="class in org.apache.poi.hwpf.model">FileInformationBlock</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../org/apache/poi/hwpf/HWPFDocumentCore.html#getFileInformationBlock()">getFileInformationBlock</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../../org/apache/poi/hwpf/model/FontTable.html" title="class in org.apache.poi.hwpf.model">FontTable</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../org/apache/poi/hwpf/HWPFDocumentCore.html#getFontTable()">getFontTable</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../../org/apache/poi/hwpf/model/ListTables.html" title="class in org.apache.poi.hwpf.model">ListTables</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../org/apache/poi/hwpf/HWPFDocumentCore.html#getListTables()">getListTables</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../../org/apache/poi/hwpf/usermodel/ObjectsPool.html" title="interface in org.apache.poi.hwpf.usermodel">ObjectsPool</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../org/apache/poi/hwpf/HWPFDocumentCore.html#getObjectsPool()">getObjectsPool</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>abstract &nbsp;<A HREF="../../../../org/apache/poi/hwpf/usermodel/Range.html" title="class in org.apache.poi.hwpf.usermodel">Range</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../org/apache/poi/hwpf/HWPFDocumentCore.html#getOverallRange()">getOverallRange</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns the range that covers all text in the file, including main text,
+ footnotes, headers and comments</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../../org/apache/poi/hwpf/model/PAPBinTable.html" title="class in org.apache.poi.hwpf.model">PAPBinTable</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../org/apache/poi/hwpf/HWPFDocumentCore.html#getParagraphTable()">getParagraphTable</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>abstract &nbsp;<A HREF="../../../../org/apache/poi/hwpf/usermodel/Range.html" title="class in org.apache.poi.hwpf.usermodel">Range</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../org/apache/poi/hwpf/HWPFDocumentCore.html#getRange()">getRange</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns the range which covers the whole of the document, but excludes
+ any headers and footers.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../../org/apache/poi/hwpf/model/SectionTable.html" title="class in org.apache.poi.hwpf.model">SectionTable</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../org/apache/poi/hwpf/HWPFDocumentCore.html#getSectionTable()">getSectionTable</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../../org/apache/poi/hwpf/model/StyleSheet.html" title="class in org.apache.poi.hwpf.model">StyleSheet</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../org/apache/poi/hwpf/HWPFDocumentCore.html#getStyleSheet()">getStyleSheet</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>abstract &nbsp;java.lang.StringBuilder</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../org/apache/poi/hwpf/HWPFDocumentCore.html#getText()">getText</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Internal method to access document text</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>abstract &nbsp;<A HREF="../../../../org/apache/poi/hwpf/model/TextPieceTable.html" title="class in org.apache.poi.hwpf.model">TextPieceTable</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../org/apache/poi/hwpf/HWPFDocumentCore.html#getTextTable()">getTextTable</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;<A HREF="../../../../org/apache/poi/poifs/filesystem/POIFSFileSystem.html" title="class in org.apache.poi.poifs.filesystem">POIFSFileSystem</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../org/apache/poi/hwpf/HWPFDocumentCore.html#verifyAndBuildPOIFS(java.io.InputStream)">verifyAndBuildPOIFS</A></B>(java.io.InputStream&nbsp;istream)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Takens an InputStream, verifies that it's not RTF, builds a
+  POIFSFileSystem from it, and returns that.</TD>
+</TR>
+</TABLE>
+&nbsp;<A NAME="methods_inherited_from_class_org.apache.poi.POIDocument"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#EEEEFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left"><B>Methods inherited from class org.apache.poi.<A HREF="../../../../org/apache/poi/POIDocument.html" title="class in org.apache.poi">POIDocument</A></B></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><A HREF="../../../../org/apache/poi/POIDocument.html#copyNodeRecursively(org.apache.poi.poifs.filesystem.Entry, org.apache.poi.poifs.filesystem.DirectoryEntry)">copyNodeRecursively</A>, <A HREF="../../../../org/apache/poi/POIDocument.html#copyNodes(org.apache.poi.poifs.filesystem.DirectoryNode, org.apache.poi.poifs.filesystem.DirectoryNode, java.util.List)">copyNodes</A>, <A HREF="../../../../org/apache/poi/POIDocument.html#copyNodes(org.apache.poi.poifs.filesystem.POIFSFileSystem, org.apache.poi.poifs.filesystem.POIFSFileSystem, java.util.List)">copyNodes</A>, <A HREF="../../../../org/apache/poi/POIDocument.html#createInformationProperties()">createInformationProperties</A>, <A HREF="../../../../org/apache/poi/POIDocument.html#getDocumentSummaryInformation()">getDocumentSummaryInformation</A>, <A HREF="../../../../org/apache/poi/POIDocument.html#getPropertySet(java.lang.String)">getPropertySet</A>, <A HREF="../../../../org/apache/poi/POIDocument.html#getSummaryInformation()">getSummaryInformation</A>, <A HREF="../../../../org/apache/poi/POIDocument.html#readProperties()">readProperties</A>, <A HREF="../../../../org/apache/poi/POIDocument.html#write(java.io.OutputStream)">write</A>, <A HREF="../../../../org/apache/poi/POIDocument.html#writeProperties(org.apache.poi.poifs.filesystem.POIFSFileSystem)">writeProperties</A>, <A HREF="../../../../org/apache/poi/POIDocument.html#writeProperties(org.apache.poi.poifs.filesystem.POIFSFileSystem, java.util.List)">writeProperties</A>, <A HREF="../../../../org/apache/poi/POIDocument.html#writePropertySet(java.lang.String, org.apache.poi.hpsf.PropertySet, org.apache.poi.poifs.filesystem.POIFSFileSystem)">writePropertySet</A></CODE></TD>
+</TR>
+</TABLE>
+&nbsp;<A NAME="methods_inherited_from_class_java.lang.Object"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#EEEEFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left"><B>Methods inherited from class java.lang.Object</B></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE>clone, equals, finalize, getClass, hashCode, notify, notifyAll, toString, wait, wait, wait</CODE></TD>
+</TR>
+</TABLE>
+&nbsp;
+<P>
+
+<!-- ============ FIELD DETAIL =========== -->
+
+<A NAME="field_detail"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="1"><FONT SIZE="+2">
+<B>Field Detail</B></FONT></TH>
+</TR>
+</TABLE>
+
+<A NAME="STREAM_OBJECT_POOL"><!-- --></A><H3>
+STREAM_OBJECT_POOL</H3>
+<PRE>
+protected static final java.lang.String <B>STREAM_OBJECT_POOL</B></PRE>
+<DL>
+<DL>
+<DT><B>See Also:</B><DD><A HREF="../../../../constant-values.html#org.apache.poi.hwpf.HWPFDocumentCore.STREAM_OBJECT_POOL">Constant Field Values</A></DL>
+</DL>
+<HR>
+
+<A NAME="STREAM_WORD_DOCUMENT"><!-- --></A><H3>
+STREAM_WORD_DOCUMENT</H3>
+<PRE>
+protected static final java.lang.String <B>STREAM_WORD_DOCUMENT</B></PRE>
+<DL>
+<DL>
+<DT><B>See Also:</B><DD><A HREF="../../../../constant-values.html#org.apache.poi.hwpf.HWPFDocumentCore.STREAM_WORD_DOCUMENT">Constant Field Values</A></DL>
+</DL>
+<HR>
+
+<A NAME="_objectPool"><!-- --></A><H3>
+_objectPool</H3>
+<PRE>
+protected <A HREF="../../../../org/apache/poi/hwpf/usermodel/ObjectPoolImpl.html" title="class in org.apache.poi.hwpf.usermodel">ObjectPoolImpl</A> <B>_objectPool</B></PRE>
+<DL>
+<DD>Holds OLE2 objects
+<P>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="_fib"><!-- --></A><H3>
+_fib</H3>
+<PRE>
+protected <A HREF="../../../../org/apache/poi/hwpf/model/FileInformationBlock.html" title="class in org.apache.poi.hwpf.model">FileInformationBlock</A> <B>_fib</B></PRE>
+<DL>
+<DD>The FIB
+<P>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="_ss"><!-- --></A><H3>
+_ss</H3>
+<PRE>
+protected <A HREF="../../../../org/apache/poi/hwpf/model/StyleSheet.html" title="class in org.apache.poi.hwpf.model">StyleSheet</A> <B>_ss</B></PRE>
+<DL>
+<DD>Holds styles for this document.
+<P>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="_cbt"><!-- --></A><H3>
+_cbt</H3>
+<PRE>
+protected <A HREF="../../../../org/apache/poi/hwpf/model/CHPBinTable.html" title="class in org.apache.poi.hwpf.model">CHPBinTable</A> <B>_cbt</B></PRE>
+<DL>
+<DD>Contains formatting properties for text
+<P>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="_pbt"><!-- --></A><H3>
+_pbt</H3>
+<PRE>
+protected <A HREF="../../../../org/apache/poi/hwpf/model/PAPBinTable.html" title="class in org.apache.poi.hwpf.model">PAPBinTable</A> <B>_pbt</B></PRE>
+<DL>
+<DD>Contains formatting properties for paragraphs
+<P>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="_st"><!-- --></A><H3>
+_st</H3>
+<PRE>
+protected <A HREF="../../../../org/apache/poi/hwpf/model/SectionTable.html" title="class in org.apache.poi.hwpf.model">SectionTable</A> <B>_st</B></PRE>
+<DL>
+<DD>Contains formatting properties for sections.
+<P>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="_ft"><!-- --></A><H3>
+_ft</H3>
+<PRE>
+protected <A HREF="../../../../org/apache/poi/hwpf/model/FontTable.html" title="class in org.apache.poi.hwpf.model">FontTable</A> <B>_ft</B></PRE>
+<DL>
+<DD>Holds fonts for this document.
+<P>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="_lt"><!-- --></A><H3>
+_lt</H3>
+<PRE>
+protected <A HREF="../../../../org/apache/poi/hwpf/model/ListTables.html" title="class in org.apache.poi.hwpf.model">ListTables</A> <B>_lt</B></PRE>
+<DL>
+<DD>Hold list tables
+<P>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="_mainStream"><!-- --></A><H3>
+_mainStream</H3>
+<PRE>
+protected byte[] <B>_mainStream</B></PRE>
+<DL>
+<DD>main document stream buffer
+<P>
+<DL>
+</DL>
+</DL>
+
+<!-- ========= CONSTRUCTOR DETAIL ======== -->
+
+<A NAME="constructor_detail"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="1"><FONT SIZE="+2">
+<B>Constructor Detail</B></FONT></TH>
+</TR>
+</TABLE>
+
+<A NAME="HWPFDocumentCore()"><!-- --></A><H3>
+HWPFDocumentCore</H3>
+<PRE>
+protected <B>HWPFDocumentCore</B>()</PRE>
+<DL>
+</DL>
+<HR>
+
+<A NAME="HWPFDocumentCore(java.io.InputStream)"><!-- --></A><H3>
+HWPFDocumentCore</H3>
+<PRE>
+public <B>HWPFDocumentCore</B>(java.io.InputStream&nbsp;istream)
+                 throws java.io.IOException</PRE>
+<DL>
+<DD>This constructor loads a Word document from an InputStream.
+<P>
+<DL>
+<DT><B>Parameters:</B><DD><CODE>istream</CODE> - The InputStream that contains the Word document.
+<DT><B>Throws:</B>
+<DD><CODE>java.io.IOException</CODE> - If there is an unexpected IOException from the passed
+         in InputStream.</DL>
+</DL>
+<HR>
+
+<A NAME="HWPFDocumentCore(org.apache.poi.poifs.filesystem.POIFSFileSystem)"><!-- --></A><H3>
+HWPFDocumentCore</H3>
+<PRE>
+public <B>HWPFDocumentCore</B>(<A HREF="../../../../org/apache/poi/poifs/filesystem/POIFSFileSystem.html" title="class in org.apache.poi.poifs.filesystem">POIFSFileSystem</A>&nbsp;pfilesystem)
+                 throws java.io.IOException</PRE>
+<DL>
+<DD>This constructor loads a Word document from a POIFSFileSystem
+<P>
+<DL>
+<DT><B>Parameters:</B><DD><CODE>pfilesystem</CODE> - The POIFSFileSystem that contains the Word document.
+<DT><B>Throws:</B>
+<DD><CODE>java.io.IOException</CODE> - If there is an unexpected IOException from the passed
+         in POIFSFileSystem.</DL>
+</DL>
+<HR>
+
+<A NAME="HWPFDocumentCore(org.apache.poi.poifs.filesystem.DirectoryNode)"><!-- --></A><H3>
+HWPFDocumentCore</H3>
+<PRE>
+public <B>HWPFDocumentCore</B>(<A HREF="../../../../org/apache/poi/poifs/filesystem/DirectoryNode.html" title="class in org.apache.poi.poifs.filesystem">DirectoryNode</A>&nbsp;directory)
+                 throws java.io.IOException</PRE>
+<DL>
+<DD>This constructor loads a Word document from a specific point
+  in a POIFSFileSystem, probably not the default.
+ Used typically to open embeded documents.
+<P>
+<DL>
+<DT><B>Parameters:</B><DD><CODE>directory</CODE> - The DirectoryNode that contains the Word document.
+<DT><B>Throws:</B>
+<DD><CODE>java.io.IOException</CODE> - If there is an unexpected IOException from the passed
+         in POIFSFileSystem.</DL>
+</DL>
+
+<!-- ============ METHOD DETAIL ========== -->
+
+<A NAME="method_detail"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="1"><FONT SIZE="+2">
+<B>Method Detail</B></FONT></TH>
+</TR>
+</TABLE>
+
+<A NAME="verifyAndBuildPOIFS(java.io.InputStream)"><!-- --></A><H3>
+verifyAndBuildPOIFS</H3>
+<PRE>
+public static <A HREF="../../../../org/apache/poi/poifs/filesystem/POIFSFileSystem.html" title="class in org.apache.poi.poifs.filesystem">POIFSFileSystem</A> <B>verifyAndBuildPOIFS</B>(java.io.InputStream&nbsp;istream)
+                                           throws java.io.IOException</PRE>
+<DL>
+<DD>Takens an InputStream, verifies that it's not RTF, builds a
+  POIFSFileSystem from it, and returns that.
+<P>
+<DD><DL>
+
+<DT><B>Throws:</B>
+<DD><CODE>java.io.IOException</CODE></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getRange()"><!-- --></A><H3>
+getRange</H3>
+<PRE>
+public abstract <A HREF="../../../../org/apache/poi/hwpf/usermodel/Range.html" title="class in org.apache.poi.hwpf.usermodel">Range</A> <B>getRange</B>()</PRE>
+<DL>
+<DD>Returns the range which covers the whole of the document, but excludes
+ any headers and footers.
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getOverallRange()"><!-- --></A><H3>
+getOverallRange</H3>
+<PRE>
+public abstract <A HREF="../../../../org/apache/poi/hwpf/usermodel/Range.html" title="class in org.apache.poi.hwpf.usermodel">Range</A> <B>getOverallRange</B>()</PRE>
+<DL>
+<DD>Returns the range that covers all text in the file, including main text,
+ footnotes, headers and comments
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getDocumentText()"><!-- --></A><H3>
+getDocumentText</H3>
+<PRE>
+public java.lang.String <B>getDocumentText</B>()</PRE>
+<DL>
+<DD>Returns document text, i.e. text information from all text pieces,
+ including OLE descriptions and field codes
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getText()"><!-- --></A><H3>
+getText</H3>
+<PRE>
+<FONT SIZE="-1"><A HREF="../../../../org/apache/poi/util/Internal.html" title="annotation in org.apache.poi.util">@Internal</A>
+</FONT>public abstract java.lang.StringBuilder <B>getText</B>()</PRE>
+<DL>
+<DD>Internal method to access document text
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getCharacterTable()"><!-- --></A><H3>
+getCharacterTable</H3>
+<PRE>
+public <A HREF="../../../../org/apache/poi/hwpf/model/CHPBinTable.html" title="class in org.apache.poi.hwpf.model">CHPBinTable</A> <B>getCharacterTable</B>()</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getParagraphTable()"><!-- --></A><H3>
+getParagraphTable</H3>
+<PRE>
+public <A HREF="../../../../org/apache/poi/hwpf/model/PAPBinTable.html" title="class in org.apache.poi.hwpf.model">PAPBinTable</A> <B>getParagraphTable</B>()</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getSectionTable()"><!-- --></A><H3>
+getSectionTable</H3>
+<PRE>
+public <A HREF="../../../../org/apache/poi/hwpf/model/SectionTable.html" title="class in org.apache.poi.hwpf.model">SectionTable</A> <B>getSectionTable</B>()</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getStyleSheet()"><!-- --></A><H3>
+getStyleSheet</H3>
+<PRE>
+public <A HREF="../../../../org/apache/poi/hwpf/model/StyleSheet.html" title="class in org.apache.poi.hwpf.model">StyleSheet</A> <B>getStyleSheet</B>()</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getListTables()"><!-- --></A><H3>
+getListTables</H3>
+<PRE>
+public <A HREF="../../../../org/apache/poi/hwpf/model/ListTables.html" title="class in org.apache.poi.hwpf.model">ListTables</A> <B>getListTables</B>()</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getFontTable()"><!-- --></A><H3>
+getFontTable</H3>
+<PRE>
+public <A HREF="../../../../org/apache/poi/hwpf/model/FontTable.html" title="class in org.apache.poi.hwpf.model">FontTable</A> <B>getFontTable</B>()</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getFileInformationBlock()"><!-- --></A><H3>
+getFileInformationBlock</H3>
+<PRE>
+public <A HREF="../../../../org/apache/poi/hwpf/model/FileInformationBlock.html" title="class in org.apache.poi.hwpf.model">FileInformationBlock</A> <B>getFileInformationBlock</B>()</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getObjectsPool()"><!-- --></A><H3>
+getObjectsPool</H3>
+<PRE>
+public <A HREF="../../../../org/apache/poi/hwpf/usermodel/ObjectsPool.html" title="interface in org.apache.poi.hwpf.usermodel">ObjectsPool</A> <B>getObjectsPool</B>()</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getTextTable()"><!-- --></A><H3>
+getTextTable</H3>
+<PRE>
+public abstract <A HREF="../../../../org/apache/poi/hwpf/model/TextPieceTable.html" title="class in org.apache.poi.hwpf.model">TextPieceTable</A> <B>getTextTable</B>()</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<!-- ========= END OF CLASS DATA ========= -->
+<HR>
+
+
+<!-- ======= START OF BOTTOM NAVBAR ====== -->
+<A NAME="navbar_bottom"><!-- --></A>
+<A HREF="#skip-navbar_bottom" title="Skip navigation links"></A>
+<TABLE BORDER="0" WIDTH="100%" CELLPADDING="1" CELLSPACING="0" SUMMARY="">
+<TR>
+<TD COLSPAN=2 BGCOLOR="#EEEEFF" CLASS="NavBarCell1">
+<A NAME="navbar_bottom_firstrow"><!-- --></A>
+<TABLE BORDER="0" CELLPADDING="0" CELLSPACING="3" SUMMARY="">
+  <TR ALIGN="center" VALIGN="top">
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../overview-summary.html"><FONT CLASS="NavBarFont1"><B>Overview</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="package-summary.html"><FONT CLASS="NavBarFont1"><B>Package</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#FFFFFF" CLASS="NavBarCell1Rev"> &nbsp;<FONT CLASS="NavBarFont1Rev"><B>Class</B></FONT>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="class-use/HWPFDocumentCore.html"><FONT CLASS="NavBarFont1"><B>Use</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="package-tree.html"><FONT CLASS="NavBarFont1"><B>Tree</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../deprecated-list.html"><FONT CLASS="NavBarFont1"><B>Deprecated</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../index-all.html"><FONT CLASS="NavBarFont1"><B>Index</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../help-doc.html"><FONT CLASS="NavBarFont1"><B>Help</B></FONT></A>&nbsp;</TD>
+  </TR>
+</TABLE>
+</TD>
+<TD ALIGN="right" VALIGN="top" ROWSPAN=3><EM>
+</EM>
+</TD>
+</TR>
+
+<TR>
+<TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
+&nbsp;<A HREF="../../../../org/apache/poi/hwpf/HWPFDocument.html" title="class in org.apache.poi.hwpf"><B>PREV CLASS</B></A>&nbsp;
+&nbsp;<A HREF="../../../../org/apache/poi/hwpf/HWPFOldDocument.html" title="class in org.apache.poi.hwpf"><B>NEXT CLASS</B></A></FONT></TD>
+<TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
+  <A HREF="../../../../index.html?org/apache/poi/hwpf/HWPFDocumentCore.html" target="_top"><B>FRAMES</B></A>  &nbsp;
+&nbsp;<A HREF="HWPFDocumentCore.html" target="_top"><B>NO FRAMES</B></A>  &nbsp;
+&nbsp;<SCRIPT type="text/javascript">
+  <!--
+  if(window==top) {
+    document.writeln('<A HREF="../../../../allclasses-noframe.html"><B>All Classes</B></A>');
+  }
+  //-->
+</SCRIPT>
+<NOSCRIPT>
+  <A HREF="../../../../allclasses-noframe.html"><B>All Classes</B></A>
+</NOSCRIPT>
+
+
+</FONT></TD>
+</TR>
+<TR>
+<TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
+  SUMMARY:&nbsp;NESTED&nbsp;|&nbsp;<A HREF="#field_summary">FIELD</A>&nbsp;|&nbsp;<A HREF="#constructor_summary">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_summary">METHOD</A></FONT></TD>
+<TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
+DETAIL:&nbsp;<A HREF="#field_detail">FIELD</A>&nbsp;|&nbsp;<A HREF="#constructor_detail">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_detail">METHOD</A></FONT></TD>
+</TR>
+</TABLE>
+<A NAME="skip-navbar_bottom"></A>
+<!-- ======== END OF BOTTOM NAVBAR ======= -->
+
+<HR>
+
+                <i>Copyright 2014 The Apache Software Foundation or
+        its licensors, as applicable.</i>
+            
+</BODY>
+</HTML>

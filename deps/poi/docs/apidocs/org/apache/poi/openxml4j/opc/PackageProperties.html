@@ -1,0 +1,1004 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!--NewPage-->
+<HTML>
+<HEAD>
+<TITLE>
+PackageProperties (POI API Documentation)
+</TITLE>
+
+<META NAME="keywords" CONTENT="org.apache.poi.openxml4j.opc.PackageProperties interface">
+
+<LINK REL ="stylesheet" TYPE="text/css" HREF="../../../../../stylesheet.css" TITLE="Style">
+
+<SCRIPT type="text/javascript">
+function windowTitle()
+{
+    parent.document.title="PackageProperties (POI API Documentation)";
+}
+</SCRIPT>
+<NOSCRIPT>
+</NOSCRIPT>
+
+</HEAD>
+
+<BODY BGCOLOR="white" onload="windowTitle();">
+
+
+<!-- ========= START OF TOP NAVBAR ======= -->
+<A NAME="navbar_top"><!-- --></A>
+<A HREF="#skip-navbar_top" title="Skip navigation links"></A>
+<TABLE BORDER="0" WIDTH="100%" CELLPADDING="1" CELLSPACING="0" SUMMARY="">
+<TR>
+<TD COLSPAN=2 BGCOLOR="#EEEEFF" CLASS="NavBarCell1">
+<A NAME="navbar_top_firstrow"><!-- --></A>
+<TABLE BORDER="0" CELLPADDING="0" CELLSPACING="3" SUMMARY="">
+  <TR ALIGN="center" VALIGN="top">
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../overview-summary.html"><FONT CLASS="NavBarFont1"><B>Overview</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="package-summary.html"><FONT CLASS="NavBarFont1"><B>Package</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#FFFFFF" CLASS="NavBarCell1Rev"> &nbsp;<FONT CLASS="NavBarFont1Rev"><B>Class</B></FONT>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="class-use/PackageProperties.html"><FONT CLASS="NavBarFont1"><B>Use</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="package-tree.html"><FONT CLASS="NavBarFont1"><B>Tree</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../deprecated-list.html"><FONT CLASS="NavBarFont1"><B>Deprecated</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../index-all.html"><FONT CLASS="NavBarFont1"><B>Index</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../help-doc.html"><FONT CLASS="NavBarFont1"><B>Help</B></FONT></A>&nbsp;</TD>
+  </TR>
+</TABLE>
+</TD>
+<TD ALIGN="right" VALIGN="top" ROWSPAN=3><EM>
+</EM>
+</TD>
+</TR>
+
+<TR>
+<TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
+&nbsp;<A HREF="../../../../../org/apache/poi/openxml4j/opc/PackagePartName.html" title="class in org.apache.poi.openxml4j.opc"><B>PREV CLASS</B></A>&nbsp;
+&nbsp;<A HREF="../../../../../org/apache/poi/openxml4j/opc/PackageRelationship.html" title="class in org.apache.poi.openxml4j.opc"><B>NEXT CLASS</B></A></FONT></TD>
+<TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
+  <A HREF="../../../../../index.html?org/apache/poi/openxml4j/opc/PackageProperties.html" target="_top"><B>FRAMES</B></A>  &nbsp;
+&nbsp;<A HREF="PackageProperties.html" target="_top"><B>NO FRAMES</B></A>  &nbsp;
+&nbsp;<SCRIPT type="text/javascript">
+  <!--
+  if(window==top) {
+    document.writeln('<A HREF="../../../../../allclasses-noframe.html"><B>All Classes</B></A>');
+  }
+  //-->
+</SCRIPT>
+<NOSCRIPT>
+  <A HREF="../../../../../allclasses-noframe.html"><B>All Classes</B></A>
+</NOSCRIPT>
+
+
+</FONT></TD>
+</TR>
+<TR>
+<TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
+  SUMMARY:&nbsp;NESTED&nbsp;|&nbsp;<A HREF="#field_summary">FIELD</A>&nbsp;|&nbsp;CONSTR&nbsp;|&nbsp;<A HREF="#method_summary">METHOD</A></FONT></TD>
+<TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
+DETAIL:&nbsp;<A HREF="#field_detail">FIELD</A>&nbsp;|&nbsp;CONSTR&nbsp;|&nbsp;<A HREF="#method_detail">METHOD</A></FONT></TD>
+</TR>
+</TABLE>
+<A NAME="skip-navbar_top"></A>
+<!-- ========= END OF TOP NAVBAR ========= -->
+
+<HR>
+<!-- ======== START OF CLASS DATA ======== -->
+<H2>
+<FONT SIZE="-1">
+org.apache.poi.openxml4j.opc</FONT>
+<BR>
+Interface PackageProperties</H2>
+<DL>
+<DT><B>All Known Implementing Classes:</B> <DD><A HREF="../../../../../org/apache/poi/openxml4j/opc/internal/PackagePropertiesPart.html" title="class in org.apache.poi.openxml4j.opc.internal">PackagePropertiesPart</A></DD>
+</DL>
+<HR>
+<DL>
+<DT><PRE>public interface <B>PackageProperties</B></DL>
+</PRE>
+
+<P>
+Represents the core properties of an OPC package.
+<P>
+
+<P>
+<DL>
+<DT><B>Version:</B></DT>
+  <DD>1.0</DD>
+<DT><B>Author:</B></DT>
+  <DD>Julien Chable</DD>
+<DT><B>See Also:</B><DD><A HREF="../../../../../org/apache/poi/openxml4j/opc/OPCPackage.html" title="class in org.apache.poi.openxml4j.opc"><CODE>OPCPackage</CODE></A></DL>
+<HR>
+
+<P>
+<!-- =========== FIELD SUMMARY =========== -->
+
+<A NAME="field_summary"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+<B>Field Summary</B></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;java.lang.String</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/openxml4j/opc/PackageProperties.html#NAMESPACE_DC">NAMESPACE_DC</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Dublin Core namespace URI.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;java.lang.String</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/openxml4j/opc/PackageProperties.html#NAMESPACE_DCTERMS">NAMESPACE_DCTERMS</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Dublin Core Terms URI.</TD>
+</TR>
+</TABLE>
+&nbsp;
+<!-- ========== METHOD SUMMARY =========== -->
+
+<A NAME="method_summary"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+<B>Method Summary</B></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../../../org/apache/poi/openxml4j/util/Nullable.html" title="class in org.apache.poi.openxml4j.util">Nullable</A>&lt;java.lang.String&gt;</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/openxml4j/opc/PackageProperties.html#getCategoryProperty()">getCategoryProperty</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Set the category of the content of this package.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../../../org/apache/poi/openxml4j/util/Nullable.html" title="class in org.apache.poi.openxml4j.util">Nullable</A>&lt;java.lang.String&gt;</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/openxml4j/opc/PackageProperties.html#getContentStatusProperty()">getContentStatusProperty</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Set the status of the content.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../../../org/apache/poi/openxml4j/util/Nullable.html" title="class in org.apache.poi.openxml4j.util">Nullable</A>&lt;java.lang.String&gt;</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/openxml4j/opc/PackageProperties.html#getContentTypeProperty()">getContentTypeProperty</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Get the type of content represented, generally defined by a specific use
+ and intended audience.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../../../org/apache/poi/openxml4j/util/Nullable.html" title="class in org.apache.poi.openxml4j.util">Nullable</A>&lt;java.util.Date&gt;</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/openxml4j/opc/PackageProperties.html#getCreatedProperty()">getCreatedProperty</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Get the date of creation of the resource.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../../../org/apache/poi/openxml4j/util/Nullable.html" title="class in org.apache.poi.openxml4j.util">Nullable</A>&lt;java.lang.String&gt;</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/openxml4j/opc/PackageProperties.html#getCreatorProperty()">getCreatorProperty</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Get the entity primarily responsible for making the content of the
+ resource.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../../../org/apache/poi/openxml4j/util/Nullable.html" title="class in org.apache.poi.openxml4j.util">Nullable</A>&lt;java.lang.String&gt;</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/openxml4j/opc/PackageProperties.html#getDescriptionProperty()">getDescriptionProperty</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Get the explanation of the content of the resource.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../../../org/apache/poi/openxml4j/util/Nullable.html" title="class in org.apache.poi.openxml4j.util">Nullable</A>&lt;java.lang.String&gt;</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/openxml4j/opc/PackageProperties.html#getIdentifierProperty()">getIdentifierProperty</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Get an unambiguous reference to the resource within a given context.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../../../org/apache/poi/openxml4j/util/Nullable.html" title="class in org.apache.poi.openxml4j.util">Nullable</A>&lt;java.lang.String&gt;</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/openxml4j/opc/PackageProperties.html#getKeywordsProperty()">getKeywordsProperty</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Get a delimited set of keywords to support searching and indexing.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../../../org/apache/poi/openxml4j/util/Nullable.html" title="class in org.apache.poi.openxml4j.util">Nullable</A>&lt;java.lang.String&gt;</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/openxml4j/opc/PackageProperties.html#getLanguageProperty()">getLanguageProperty</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Get the language of the intellectual content of the resource.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../../../org/apache/poi/openxml4j/util/Nullable.html" title="class in org.apache.poi.openxml4j.util">Nullable</A>&lt;java.lang.String&gt;</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/openxml4j/opc/PackageProperties.html#getLastModifiedByProperty()">getLastModifiedByProperty</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Get the user who performed the last modification.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../../../org/apache/poi/openxml4j/util/Nullable.html" title="class in org.apache.poi.openxml4j.util">Nullable</A>&lt;java.util.Date&gt;</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/openxml4j/opc/PackageProperties.html#getLastPrintedProperty()">getLastPrintedProperty</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Get the date and time of the last printing.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../../../org/apache/poi/openxml4j/util/Nullable.html" title="class in org.apache.poi.openxml4j.util">Nullable</A>&lt;java.util.Date&gt;</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/openxml4j/opc/PackageProperties.html#getModifiedProperty()">getModifiedProperty</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Get the date on which the resource was changed.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../../../org/apache/poi/openxml4j/util/Nullable.html" title="class in org.apache.poi.openxml4j.util">Nullable</A>&lt;java.lang.String&gt;</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/openxml4j/opc/PackageProperties.html#getRevisionProperty()">getRevisionProperty</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Get the revision number.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../../../org/apache/poi/openxml4j/util/Nullable.html" title="class in org.apache.poi.openxml4j.util">Nullable</A>&lt;java.lang.String&gt;</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/openxml4j/opc/PackageProperties.html#getSubjectProperty()">getSubjectProperty</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Get the topic of the content of the resource.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../../../org/apache/poi/openxml4j/util/Nullable.html" title="class in org.apache.poi.openxml4j.util">Nullable</A>&lt;java.lang.String&gt;</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/openxml4j/opc/PackageProperties.html#getTitleProperty()">getTitleProperty</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Get the name given to the resource.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../../../org/apache/poi/openxml4j/util/Nullable.html" title="class in org.apache.poi.openxml4j.util">Nullable</A>&lt;java.lang.String&gt;</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/openxml4j/opc/PackageProperties.html#getVersionProperty()">getVersionProperty</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Get the version number.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/openxml4j/opc/PackageProperties.html#setCategoryProperty(java.lang.String)">setCategoryProperty</A></B>(java.lang.String&nbsp;category)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Set the category of the content of this package.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/openxml4j/opc/PackageProperties.html#setContentStatusProperty(java.lang.String)">setContentStatusProperty</A></B>(java.lang.String&nbsp;contentStatus)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Get the status of the content.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/openxml4j/opc/PackageProperties.html#setContentTypeProperty(java.lang.String)">setContentTypeProperty</A></B>(java.lang.String&nbsp;contentType)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Set the type of content represented, generally defined by a specific use
+ and intended audience.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/openxml4j/opc/PackageProperties.html#setCreatedProperty(org.apache.poi.openxml4j.util.Nullable)">setCreatedProperty</A></B>(<A HREF="../../../../../org/apache/poi/openxml4j/util/Nullable.html" title="class in org.apache.poi.openxml4j.util">Nullable</A>&lt;java.util.Date&gt;&nbsp;created)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Set the date of creation of the resource.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/openxml4j/opc/PackageProperties.html#setCreatedProperty(java.lang.String)">setCreatedProperty</A></B>(java.lang.String&nbsp;created)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Set the date of creation of the resource.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/openxml4j/opc/PackageProperties.html#setCreatorProperty(java.lang.String)">setCreatorProperty</A></B>(java.lang.String&nbsp;creator)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Set the entity primarily responsible for making the content of the
+ resource.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/openxml4j/opc/PackageProperties.html#setDescriptionProperty(java.lang.String)">setDescriptionProperty</A></B>(java.lang.String&nbsp;description)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Set the explanation of the content of the resource.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/openxml4j/opc/PackageProperties.html#setIdentifierProperty(java.lang.String)">setIdentifierProperty</A></B>(java.lang.String&nbsp;identifier)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Set an unambiguous reference to the resource within a given context.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/openxml4j/opc/PackageProperties.html#setKeywordsProperty(java.lang.String)">setKeywordsProperty</A></B>(java.lang.String&nbsp;keywords)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Set a delimited set of keywords to support searching and indexing.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/openxml4j/opc/PackageProperties.html#setLanguageProperty(java.lang.String)">setLanguageProperty</A></B>(java.lang.String&nbsp;language)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Set the language of the intellectual content of the resource.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/openxml4j/opc/PackageProperties.html#setLastModifiedByProperty(java.lang.String)">setLastModifiedByProperty</A></B>(java.lang.String&nbsp;lastModifiedBy)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Set the user who performed the last modification.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/openxml4j/opc/PackageProperties.html#setLastPrintedProperty(org.apache.poi.openxml4j.util.Nullable)">setLastPrintedProperty</A></B>(<A HREF="../../../../../org/apache/poi/openxml4j/util/Nullable.html" title="class in org.apache.poi.openxml4j.util">Nullable</A>&lt;java.util.Date&gt;&nbsp;lastPrinted)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Set the date and time of the last printing.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/openxml4j/opc/PackageProperties.html#setLastPrintedProperty(java.lang.String)">setLastPrintedProperty</A></B>(java.lang.String&nbsp;lastPrinted)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Set the date and time of the last printing.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/openxml4j/opc/PackageProperties.html#setModifiedProperty(org.apache.poi.openxml4j.util.Nullable)">setModifiedProperty</A></B>(<A HREF="../../../../../org/apache/poi/openxml4j/util/Nullable.html" title="class in org.apache.poi.openxml4j.util">Nullable</A>&lt;java.util.Date&gt;&nbsp;modified)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Set the date on which the resource was changed.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/openxml4j/opc/PackageProperties.html#setModifiedProperty(java.lang.String)">setModifiedProperty</A></B>(java.lang.String&nbsp;modified)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Set the date on which the resource was changed.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/openxml4j/opc/PackageProperties.html#setRevisionProperty(java.lang.String)">setRevisionProperty</A></B>(java.lang.String&nbsp;revision)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Set the revision number.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/openxml4j/opc/PackageProperties.html#setSubjectProperty(java.lang.String)">setSubjectProperty</A></B>(java.lang.String&nbsp;subject)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Set the topic of the content of the resource.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/openxml4j/opc/PackageProperties.html#setTitleProperty(java.lang.String)">setTitleProperty</A></B>(java.lang.String&nbsp;title)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Set the name given to the resource.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/openxml4j/opc/PackageProperties.html#setVersionProperty(java.lang.String)">setVersionProperty</A></B>(java.lang.String&nbsp;version)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Set the version number.</TD>
+</TR>
+</TABLE>
+&nbsp;
+<P>
+
+<!-- ============ FIELD DETAIL =========== -->
+
+<A NAME="field_detail"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="1"><FONT SIZE="+2">
+<B>Field Detail</B></FONT></TH>
+</TR>
+</TABLE>
+
+<A NAME="NAMESPACE_DCTERMS"><!-- --></A><H3>
+NAMESPACE_DCTERMS</H3>
+<PRE>
+static final java.lang.String <B>NAMESPACE_DCTERMS</B></PRE>
+<DL>
+<DD>Dublin Core Terms URI.
+<P>
+<DL>
+<DT><B>See Also:</B><DD><A HREF="../../../../../constant-values.html#org.apache.poi.openxml4j.opc.PackageProperties.NAMESPACE_DCTERMS">Constant Field Values</A></DL>
+</DL>
+<HR>
+
+<A NAME="NAMESPACE_DC"><!-- --></A><H3>
+NAMESPACE_DC</H3>
+<PRE>
+static final java.lang.String <B>NAMESPACE_DC</B></PRE>
+<DL>
+<DD>Dublin Core namespace URI.
+<P>
+<DL>
+<DT><B>See Also:</B><DD><A HREF="../../../../../constant-values.html#org.apache.poi.openxml4j.opc.PackageProperties.NAMESPACE_DC">Constant Field Values</A></DL>
+</DL>
+
+<!-- ============ METHOD DETAIL ========== -->
+
+<A NAME="method_detail"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="1"><FONT SIZE="+2">
+<B>Method Detail</B></FONT></TH>
+</TR>
+</TABLE>
+
+<A NAME="getCategoryProperty()"><!-- --></A><H3>
+getCategoryProperty</H3>
+<PRE>
+<A HREF="../../../../../org/apache/poi/openxml4j/util/Nullable.html" title="class in org.apache.poi.openxml4j.util">Nullable</A>&lt;java.lang.String&gt; <B>getCategoryProperty</B>()</PRE>
+<DL>
+<DD>Set the category of the content of this package.
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setCategoryProperty(java.lang.String)"><!-- --></A><H3>
+setCategoryProperty</H3>
+<PRE>
+void <B>setCategoryProperty</B>(java.lang.String&nbsp;category)</PRE>
+<DL>
+<DD>Set the category of the content of this package.
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getContentStatusProperty()"><!-- --></A><H3>
+getContentStatusProperty</H3>
+<PRE>
+<A HREF="../../../../../org/apache/poi/openxml4j/util/Nullable.html" title="class in org.apache.poi.openxml4j.util">Nullable</A>&lt;java.lang.String&gt; <B>getContentStatusProperty</B>()</PRE>
+<DL>
+<DD>Set the status of the content.
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setContentStatusProperty(java.lang.String)"><!-- --></A><H3>
+setContentStatusProperty</H3>
+<PRE>
+void <B>setContentStatusProperty</B>(java.lang.String&nbsp;contentStatus)</PRE>
+<DL>
+<DD>Get the status of the content.
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getContentTypeProperty()"><!-- --></A><H3>
+getContentTypeProperty</H3>
+<PRE>
+<A HREF="../../../../../org/apache/poi/openxml4j/util/Nullable.html" title="class in org.apache.poi.openxml4j.util">Nullable</A>&lt;java.lang.String&gt; <B>getContentTypeProperty</B>()</PRE>
+<DL>
+<DD>Get the type of content represented, generally defined by a specific use
+ and intended audience.
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setContentTypeProperty(java.lang.String)"><!-- --></A><H3>
+setContentTypeProperty</H3>
+<PRE>
+void <B>setContentTypeProperty</B>(java.lang.String&nbsp;contentType)</PRE>
+<DL>
+<DD>Set the type of content represented, generally defined by a specific use
+ and intended audience.
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getCreatedProperty()"><!-- --></A><H3>
+getCreatedProperty</H3>
+<PRE>
+<A HREF="../../../../../org/apache/poi/openxml4j/util/Nullable.html" title="class in org.apache.poi.openxml4j.util">Nullable</A>&lt;java.util.Date&gt; <B>getCreatedProperty</B>()</PRE>
+<DL>
+<DD>Get the date of creation of the resource.
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setCreatedProperty(java.lang.String)"><!-- --></A><H3>
+setCreatedProperty</H3>
+<PRE>
+void <B>setCreatedProperty</B>(java.lang.String&nbsp;created)</PRE>
+<DL>
+<DD>Set the date of creation of the resource.
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setCreatedProperty(org.apache.poi.openxml4j.util.Nullable)"><!-- --></A><H3>
+setCreatedProperty</H3>
+<PRE>
+void <B>setCreatedProperty</B>(<A HREF="../../../../../org/apache/poi/openxml4j/util/Nullable.html" title="class in org.apache.poi.openxml4j.util">Nullable</A>&lt;java.util.Date&gt;&nbsp;created)</PRE>
+<DL>
+<DD>Set the date of creation of the resource.
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getCreatorProperty()"><!-- --></A><H3>
+getCreatorProperty</H3>
+<PRE>
+<A HREF="../../../../../org/apache/poi/openxml4j/util/Nullable.html" title="class in org.apache.poi.openxml4j.util">Nullable</A>&lt;java.lang.String&gt; <B>getCreatorProperty</B>()</PRE>
+<DL>
+<DD>Get the entity primarily responsible for making the content of the
+ resource.
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setCreatorProperty(java.lang.String)"><!-- --></A><H3>
+setCreatorProperty</H3>
+<PRE>
+void <B>setCreatorProperty</B>(java.lang.String&nbsp;creator)</PRE>
+<DL>
+<DD>Set the entity primarily responsible for making the content of the
+ resource.
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getDescriptionProperty()"><!-- --></A><H3>
+getDescriptionProperty</H3>
+<PRE>
+<A HREF="../../../../../org/apache/poi/openxml4j/util/Nullable.html" title="class in org.apache.poi.openxml4j.util">Nullable</A>&lt;java.lang.String&gt; <B>getDescriptionProperty</B>()</PRE>
+<DL>
+<DD>Get the explanation of the content of the resource.
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setDescriptionProperty(java.lang.String)"><!-- --></A><H3>
+setDescriptionProperty</H3>
+<PRE>
+void <B>setDescriptionProperty</B>(java.lang.String&nbsp;description)</PRE>
+<DL>
+<DD>Set the explanation of the content of the resource.
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getIdentifierProperty()"><!-- --></A><H3>
+getIdentifierProperty</H3>
+<PRE>
+<A HREF="../../../../../org/apache/poi/openxml4j/util/Nullable.html" title="class in org.apache.poi.openxml4j.util">Nullable</A>&lt;java.lang.String&gt; <B>getIdentifierProperty</B>()</PRE>
+<DL>
+<DD>Get an unambiguous reference to the resource within a given context.
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setIdentifierProperty(java.lang.String)"><!-- --></A><H3>
+setIdentifierProperty</H3>
+<PRE>
+void <B>setIdentifierProperty</B>(java.lang.String&nbsp;identifier)</PRE>
+<DL>
+<DD>Set an unambiguous reference to the resource within a given context.
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getKeywordsProperty()"><!-- --></A><H3>
+getKeywordsProperty</H3>
+<PRE>
+<A HREF="../../../../../org/apache/poi/openxml4j/util/Nullable.html" title="class in org.apache.poi.openxml4j.util">Nullable</A>&lt;java.lang.String&gt; <B>getKeywordsProperty</B>()</PRE>
+<DL>
+<DD>Get a delimited set of keywords to support searching and indexing. This
+ is typically a list of terms that are not available elsewhere in the
+ properties
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setKeywordsProperty(java.lang.String)"><!-- --></A><H3>
+setKeywordsProperty</H3>
+<PRE>
+void <B>setKeywordsProperty</B>(java.lang.String&nbsp;keywords)</PRE>
+<DL>
+<DD>Set a delimited set of keywords to support searching and indexing. This
+ is typically a list of terms that are not available elsewhere in the
+ properties
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getLanguageProperty()"><!-- --></A><H3>
+getLanguageProperty</H3>
+<PRE>
+<A HREF="../../../../../org/apache/poi/openxml4j/util/Nullable.html" title="class in org.apache.poi.openxml4j.util">Nullable</A>&lt;java.lang.String&gt; <B>getLanguageProperty</B>()</PRE>
+<DL>
+<DD>Get the language of the intellectual content of the resource.
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setLanguageProperty(java.lang.String)"><!-- --></A><H3>
+setLanguageProperty</H3>
+<PRE>
+void <B>setLanguageProperty</B>(java.lang.String&nbsp;language)</PRE>
+<DL>
+<DD>Set the language of the intellectual content of the resource.
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getLastModifiedByProperty()"><!-- --></A><H3>
+getLastModifiedByProperty</H3>
+<PRE>
+<A HREF="../../../../../org/apache/poi/openxml4j/util/Nullable.html" title="class in org.apache.poi.openxml4j.util">Nullable</A>&lt;java.lang.String&gt; <B>getLastModifiedByProperty</B>()</PRE>
+<DL>
+<DD>Get the user who performed the last modification.
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setLastModifiedByProperty(java.lang.String)"><!-- --></A><H3>
+setLastModifiedByProperty</H3>
+<PRE>
+void <B>setLastModifiedByProperty</B>(java.lang.String&nbsp;lastModifiedBy)</PRE>
+<DL>
+<DD>Set the user who performed the last modification.
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getLastPrintedProperty()"><!-- --></A><H3>
+getLastPrintedProperty</H3>
+<PRE>
+<A HREF="../../../../../org/apache/poi/openxml4j/util/Nullable.html" title="class in org.apache.poi.openxml4j.util">Nullable</A>&lt;java.util.Date&gt; <B>getLastPrintedProperty</B>()</PRE>
+<DL>
+<DD>Get the date and time of the last printing.
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setLastPrintedProperty(java.lang.String)"><!-- --></A><H3>
+setLastPrintedProperty</H3>
+<PRE>
+void <B>setLastPrintedProperty</B>(java.lang.String&nbsp;lastPrinted)</PRE>
+<DL>
+<DD>Set the date and time of the last printing.
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setLastPrintedProperty(org.apache.poi.openxml4j.util.Nullable)"><!-- --></A><H3>
+setLastPrintedProperty</H3>
+<PRE>
+void <B>setLastPrintedProperty</B>(<A HREF="../../../../../org/apache/poi/openxml4j/util/Nullable.html" title="class in org.apache.poi.openxml4j.util">Nullable</A>&lt;java.util.Date&gt;&nbsp;lastPrinted)</PRE>
+<DL>
+<DD>Set the date and time of the last printing.
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getModifiedProperty()"><!-- --></A><H3>
+getModifiedProperty</H3>
+<PRE>
+<A HREF="../../../../../org/apache/poi/openxml4j/util/Nullable.html" title="class in org.apache.poi.openxml4j.util">Nullable</A>&lt;java.util.Date&gt; <B>getModifiedProperty</B>()</PRE>
+<DL>
+<DD>Get the date on which the resource was changed.
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setModifiedProperty(java.lang.String)"><!-- --></A><H3>
+setModifiedProperty</H3>
+<PRE>
+void <B>setModifiedProperty</B>(java.lang.String&nbsp;modified)</PRE>
+<DL>
+<DD>Set the date on which the resource was changed.
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setModifiedProperty(org.apache.poi.openxml4j.util.Nullable)"><!-- --></A><H3>
+setModifiedProperty</H3>
+<PRE>
+void <B>setModifiedProperty</B>(<A HREF="../../../../../org/apache/poi/openxml4j/util/Nullable.html" title="class in org.apache.poi.openxml4j.util">Nullable</A>&lt;java.util.Date&gt;&nbsp;modified)</PRE>
+<DL>
+<DD>Set the date on which the resource was changed.
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getRevisionProperty()"><!-- --></A><H3>
+getRevisionProperty</H3>
+<PRE>
+<A HREF="../../../../../org/apache/poi/openxml4j/util/Nullable.html" title="class in org.apache.poi.openxml4j.util">Nullable</A>&lt;java.lang.String&gt; <B>getRevisionProperty</B>()</PRE>
+<DL>
+<DD>Get the revision number.
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setRevisionProperty(java.lang.String)"><!-- --></A><H3>
+setRevisionProperty</H3>
+<PRE>
+void <B>setRevisionProperty</B>(java.lang.String&nbsp;revision)</PRE>
+<DL>
+<DD>Set the revision number.
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getSubjectProperty()"><!-- --></A><H3>
+getSubjectProperty</H3>
+<PRE>
+<A HREF="../../../../../org/apache/poi/openxml4j/util/Nullable.html" title="class in org.apache.poi.openxml4j.util">Nullable</A>&lt;java.lang.String&gt; <B>getSubjectProperty</B>()</PRE>
+<DL>
+<DD>Get the topic of the content of the resource.
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setSubjectProperty(java.lang.String)"><!-- --></A><H3>
+setSubjectProperty</H3>
+<PRE>
+void <B>setSubjectProperty</B>(java.lang.String&nbsp;subject)</PRE>
+<DL>
+<DD>Set the topic of the content of the resource.
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getTitleProperty()"><!-- --></A><H3>
+getTitleProperty</H3>
+<PRE>
+<A HREF="../../../../../org/apache/poi/openxml4j/util/Nullable.html" title="class in org.apache.poi.openxml4j.util">Nullable</A>&lt;java.lang.String&gt; <B>getTitleProperty</B>()</PRE>
+<DL>
+<DD>Get the name given to the resource.
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setTitleProperty(java.lang.String)"><!-- --></A><H3>
+setTitleProperty</H3>
+<PRE>
+void <B>setTitleProperty</B>(java.lang.String&nbsp;title)</PRE>
+<DL>
+<DD>Set the name given to the resource.
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getVersionProperty()"><!-- --></A><H3>
+getVersionProperty</H3>
+<PRE>
+<A HREF="../../../../../org/apache/poi/openxml4j/util/Nullable.html" title="class in org.apache.poi.openxml4j.util">Nullable</A>&lt;java.lang.String&gt; <B>getVersionProperty</B>()</PRE>
+<DL>
+<DD>Get the version number.
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setVersionProperty(java.lang.String)"><!-- --></A><H3>
+setVersionProperty</H3>
+<PRE>
+void <B>setVersionProperty</B>(java.lang.String&nbsp;version)</PRE>
+<DL>
+<DD>Set the version number.
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<!-- ========= END OF CLASS DATA ========= -->
+<HR>
+
+
+<!-- ======= START OF BOTTOM NAVBAR ====== -->
+<A NAME="navbar_bottom"><!-- --></A>
+<A HREF="#skip-navbar_bottom" title="Skip navigation links"></A>
+<TABLE BORDER="0" WIDTH="100%" CELLPADDING="1" CELLSPACING="0" SUMMARY="">
+<TR>
+<TD COLSPAN=2 BGCOLOR="#EEEEFF" CLASS="NavBarCell1">
+<A NAME="navbar_bottom_firstrow"><!-- --></A>
+<TABLE BORDER="0" CELLPADDING="0" CELLSPACING="3" SUMMARY="">
+  <TR ALIGN="center" VALIGN="top">
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../overview-summary.html"><FONT CLASS="NavBarFont1"><B>Overview</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="package-summary.html"><FONT CLASS="NavBarFont1"><B>Package</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#FFFFFF" CLASS="NavBarCell1Rev"> &nbsp;<FONT CLASS="NavBarFont1Rev"><B>Class</B></FONT>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="class-use/PackageProperties.html"><FONT CLASS="NavBarFont1"><B>Use</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="package-tree.html"><FONT CLASS="NavBarFont1"><B>Tree</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../deprecated-list.html"><FONT CLASS="NavBarFont1"><B>Deprecated</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../index-all.html"><FONT CLASS="NavBarFont1"><B>Index</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../help-doc.html"><FONT CLASS="NavBarFont1"><B>Help</B></FONT></A>&nbsp;</TD>
+  </TR>
+</TABLE>
+</TD>
+<TD ALIGN="right" VALIGN="top" ROWSPAN=3><EM>
+</EM>
+</TD>
+</TR>
+
+<TR>
+<TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
+&nbsp;<A HREF="../../../../../org/apache/poi/openxml4j/opc/PackagePartName.html" title="class in org.apache.poi.openxml4j.opc"><B>PREV CLASS</B></A>&nbsp;
+&nbsp;<A HREF="../../../../../org/apache/poi/openxml4j/opc/PackageRelationship.html" title="class in org.apache.poi.openxml4j.opc"><B>NEXT CLASS</B></A></FONT></TD>
+<TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
+  <A HREF="../../../../../index.html?org/apache/poi/openxml4j/opc/PackageProperties.html" target="_top"><B>FRAMES</B></A>  &nbsp;
+&nbsp;<A HREF="PackageProperties.html" target="_top"><B>NO FRAMES</B></A>  &nbsp;
+&nbsp;<SCRIPT type="text/javascript">
+  <!--
+  if(window==top) {
+    document.writeln('<A HREF="../../../../../allclasses-noframe.html"><B>All Classes</B></A>');
+  }
+  //-->
+</SCRIPT>
+<NOSCRIPT>
+  <A HREF="../../../../../allclasses-noframe.html"><B>All Classes</B></A>
+</NOSCRIPT>
+
+
+</FONT></TD>
+</TR>
+<TR>
+<TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
+  SUMMARY:&nbsp;NESTED&nbsp;|&nbsp;<A HREF="#field_summary">FIELD</A>&nbsp;|&nbsp;CONSTR&nbsp;|&nbsp;<A HREF="#method_summary">METHOD</A></FONT></TD>
+<TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
+DETAIL:&nbsp;<A HREF="#field_detail">FIELD</A>&nbsp;|&nbsp;CONSTR&nbsp;|&nbsp;<A HREF="#method_detail">METHOD</A></FONT></TD>
+</TR>
+</TABLE>
+<A NAME="skip-navbar_bottom"></A>
+<!-- ======== END OF BOTTOM NAVBAR ======= -->
+
+<HR>
+
+                <i>Copyright 2014 The Apache Software Foundation or
+        its licensors, as applicable.</i>
+            
+</BODY>
+</HTML>

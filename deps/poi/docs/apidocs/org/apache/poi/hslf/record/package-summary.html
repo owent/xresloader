@@ -1,0 +1,538 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!--NewPage-->
+<HTML>
+<HEAD>
+<TITLE>
+org.apache.poi.hslf.record (POI API Documentation)
+</TITLE>
+
+<META NAME="keywords" CONTENT="org.apache.poi.hslf.record package">
+
+<LINK REL ="stylesheet" TYPE="text/css" HREF="../../../../../stylesheet.css" TITLE="Style">
+
+<SCRIPT type="text/javascript">
+function windowTitle()
+{
+    parent.document.title="org.apache.poi.hslf.record (POI API Documentation)";
+}
+</SCRIPT>
+<NOSCRIPT>
+</NOSCRIPT>
+
+</HEAD>
+
+<BODY BGCOLOR="white" onload="windowTitle();">
+
+
+<!-- ========= START OF TOP NAVBAR ======= -->
+<A NAME="navbar_top"><!-- --></A>
+<A HREF="#skip-navbar_top" title="Skip navigation links"></A>
+<TABLE BORDER="0" WIDTH="100%" CELLPADDING="1" CELLSPACING="0" SUMMARY="">
+<TR>
+<TD COLSPAN=2 BGCOLOR="#EEEEFF" CLASS="NavBarCell1">
+<A NAME="navbar_top_firstrow"><!-- --></A>
+<TABLE BORDER="0" CELLPADDING="0" CELLSPACING="3" SUMMARY="">
+  <TR ALIGN="center" VALIGN="top">
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../overview-summary.html"><FONT CLASS="NavBarFont1"><B>Overview</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#FFFFFF" CLASS="NavBarCell1Rev"> &nbsp;<FONT CLASS="NavBarFont1Rev"><B>Package</B></FONT>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <FONT CLASS="NavBarFont1">Class</FONT>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="package-use.html"><FONT CLASS="NavBarFont1"><B>Use</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="package-tree.html"><FONT CLASS="NavBarFont1"><B>Tree</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../deprecated-list.html"><FONT CLASS="NavBarFont1"><B>Deprecated</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../index-all.html"><FONT CLASS="NavBarFont1"><B>Index</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../help-doc.html"><FONT CLASS="NavBarFont1"><B>Help</B></FONT></A>&nbsp;</TD>
+  </TR>
+</TABLE>
+</TD>
+<TD ALIGN="right" VALIGN="top" ROWSPAN=3><EM>
+</EM>
+</TD>
+</TR>
+
+<TR>
+<TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
+&nbsp;<A HREF="../../../../../org/apache/poi/hslf/model/textproperties/package-summary.html"><B>PREV PACKAGE</B></A>&nbsp;
+&nbsp;<A HREF="../../../../../org/apache/poi/hslf/usermodel/package-summary.html"><B>NEXT PACKAGE</B></A></FONT></TD>
+<TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
+  <A HREF="../../../../../index.html?org/apache/poi/hslf/record/package-summary.html" target="_top"><B>FRAMES</B></A>  &nbsp;
+&nbsp;<A HREF="package-summary.html" target="_top"><B>NO FRAMES</B></A>  &nbsp;
+&nbsp;<SCRIPT type="text/javascript">
+  <!--
+  if(window==top) {
+    document.writeln('<A HREF="../../../../../allclasses-noframe.html"><B>All Classes</B></A>');
+  }
+  //-->
+</SCRIPT>
+<NOSCRIPT>
+  <A HREF="../../../../../allclasses-noframe.html"><B>All Classes</B></A>
+</NOSCRIPT>
+
+
+</FONT></TD>
+</TR>
+</TABLE>
+<A NAME="skip-navbar_top"></A>
+<!-- ========= END OF TOP NAVBAR ========= -->
+
+<HR>
+<H2>
+Package org.apache.poi.hslf.record
+</H2>
+
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+<B>Interface Summary</B></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD WIDTH="15%"><B><A HREF="../../../../../org/apache/poi/hslf/record/ParentAwareRecord.html" title="interface in org.apache.poi.hslf.record">ParentAwareRecord</A></B></TD>
+<TD>Interface to define how a record can indicate it cares about what its
+  parent is, and how it wants to be told which record is its parent.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD WIDTH="15%"><B><A HREF="../../../../../org/apache/poi/hslf/record/PersistRecord.html" title="interface in org.apache.poi.hslf.record">PersistRecord</A></B></TD>
+<TD>A record that can be referenced in PersistPtr storage.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD WIDTH="15%"><B><A HREF="../../../../../org/apache/poi/hslf/record/PositionDependentRecord.html" title="interface in org.apache.poi.hslf.record">PositionDependentRecord</A></B></TD>
+<TD>Records which either care about where they are on disk, or have other
+  records who care about where they are, will implement this interface.</TD>
+</TR>
+</TABLE>
+&nbsp;
+
+<P>
+
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+<B>Class Summary</B></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD WIDTH="15%"><B><A HREF="../../../../../org/apache/poi/hslf/record/AnimationInfo.html" title="class in org.apache.poi.hslf.record">AnimationInfo</A></B></TD>
+<TD>A container record that specifies information about animation information for a shape.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD WIDTH="15%"><B><A HREF="../../../../../org/apache/poi/hslf/record/AnimationInfoAtom.html" title="class in org.apache.poi.hslf.record">AnimationInfoAtom</A></B></TD>
+<TD>An atom record that specifies the animation information for a shape.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD WIDTH="15%"><B><A HREF="../../../../../org/apache/poi/hslf/record/BinaryTagDataBlob.html" title="class in org.apache.poi.hslf.record">BinaryTagDataBlob</A></B></TD>
+<TD>If we come across a record we know has children of (potential)
+  interest, but where the record itself is boring, but where other
+  records may care about where this one lives, we create one
+  of these.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD WIDTH="15%"><B><A HREF="../../../../../org/apache/poi/hslf/record/ColorSchemeAtom.html" title="class in org.apache.poi.hslf.record">ColorSchemeAtom</A></B></TD>
+<TD>A ColorSchemeAtom (type 2032).</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD WIDTH="15%"><B><A HREF="../../../../../org/apache/poi/hslf/record/Comment2000.html" title="class in org.apache.poi.hslf.record">Comment2000</A></B></TD>
+<TD>This class represents a comment on a slide, in the format used by
+  PPT 2000/XP/etc.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD WIDTH="15%"><B><A HREF="../../../../../org/apache/poi/hslf/record/Comment2000Atom.html" title="class in org.apache.poi.hslf.record">Comment2000Atom</A></B></TD>
+<TD>An atomic record containing information about a comment.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD WIDTH="15%"><B><A HREF="../../../../../org/apache/poi/hslf/record/CString.html" title="class in org.apache.poi.hslf.record">CString</A></B></TD>
+<TD>A CString (type 4026).</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD WIDTH="15%"><B><A HREF="../../../../../org/apache/poi/hslf/record/CurrentUserAtom.html" title="class in org.apache.poi.hslf.record">CurrentUserAtom</A></B></TD>
+<TD>This is a special kind of Atom, becauase it doesn't live inside the
+  PowerPoint document.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD WIDTH="15%"><B><A HREF="../../../../../org/apache/poi/hslf/record/Document.html" title="class in org.apache.poi.hslf.record">Document</A></B></TD>
+<TD>Master container for Document.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD WIDTH="15%"><B><A HREF="../../../../../org/apache/poi/hslf/record/DocumentAtom.html" title="class in org.apache.poi.hslf.record">DocumentAtom</A></B></TD>
+<TD>A Document Atom (type 1001).</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD WIDTH="15%"><B><A HREF="../../../../../org/apache/poi/hslf/record/DocumentAtom.SlideSize.html" title="class in org.apache.poi.hslf.record">DocumentAtom.SlideSize</A></B></TD>
+<TD>Holds the different Slide Size values</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD WIDTH="15%"><B><A HREF="../../../../../org/apache/poi/hslf/record/DocumentEncryptionAtom.html" title="class in org.apache.poi.hslf.record">DocumentEncryptionAtom</A></B></TD>
+<TD>A Document Encryption Atom (type 12052).</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD WIDTH="15%"><B><A HREF="../../../../../org/apache/poi/hslf/record/DummyPositionSensitiveRecordWithChildren.html" title="class in org.apache.poi.hslf.record">DummyPositionSensitiveRecordWithChildren</A></B></TD>
+<TD>If we come across a record we know has children of (potential)
+  interest, but where the record itself is boring, but where other
+  records may care about where this one lives, we create one
+  of these.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD WIDTH="15%"><B><A HREF="../../../../../org/apache/poi/hslf/record/DummyRecordWithChildren.html" title="class in org.apache.poi.hslf.record">DummyRecordWithChildren</A></B></TD>
+<TD>If we come across a record we know has children of (potential)
+  interest, but where the record itself is boring, we create one
+  of these.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD WIDTH="15%"><B><A HREF="../../../../../org/apache/poi/hslf/record/Environment.html" title="class in org.apache.poi.hslf.record">Environment</A></B></TD>
+<TD>Environment, which contains lots of settings for the document.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD WIDTH="15%"><B><A HREF="../../../../../org/apache/poi/hslf/record/EscherTextboxWrapper.html" title="class in org.apache.poi.hslf.record">EscherTextboxWrapper</A></B></TD>
+<TD>A wrapper around a DDF (Escher) EscherTextbox Record.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD WIDTH="15%"><B><A HREF="../../../../../org/apache/poi/hslf/record/ExAviMovie.html" title="class in org.apache.poi.hslf.record">ExAviMovie</A></B></TD>
+<TD>A container record that specifies information about a movie stored externally.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD WIDTH="15%"><B><A HREF="../../../../../org/apache/poi/hslf/record/ExControl.html" title="class in org.apache.poi.hslf.record">ExControl</A></B></TD>
+<TD>A container record that specifies information about an ActiveX control.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD WIDTH="15%"><B><A HREF="../../../../../org/apache/poi/hslf/record/ExControlAtom.html" title="class in org.apache.poi.hslf.record">ExControlAtom</A></B></TD>
+<TD>An atom record that specifies an ActiveX control.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD WIDTH="15%"><B><A HREF="../../../../../org/apache/poi/hslf/record/ExEmbed.html" title="class in org.apache.poi.hslf.record">ExEmbed</A></B></TD>
+<TD>This data represents an embedded object in the document.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD WIDTH="15%"><B><A HREF="../../../../../org/apache/poi/hslf/record/ExEmbedAtom.html" title="class in org.apache.poi.hslf.record">ExEmbedAtom</A></B></TD>
+<TD>The atom that holds metadata on a specific embedded object in the document.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD WIDTH="15%"><B><A HREF="../../../../../org/apache/poi/hslf/record/ExHyperlink.html" title="class in org.apache.poi.hslf.record">ExHyperlink</A></B></TD>
+<TD>This class represents the data of a link in the document.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD WIDTH="15%"><B><A HREF="../../../../../org/apache/poi/hslf/record/ExHyperlinkAtom.html" title="class in org.apache.poi.hslf.record">ExHyperlinkAtom</A></B></TD>
+<TD>Tne atom that holds metadata on a specific Link in the document.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD WIDTH="15%"><B><A HREF="../../../../../org/apache/poi/hslf/record/ExMCIMovie.html" title="class in org.apache.poi.hslf.record">ExMCIMovie</A></B></TD>
+<TD>A container record that specifies information about a movie stored externally.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD WIDTH="15%"><B><A HREF="../../../../../org/apache/poi/hslf/record/ExMediaAtom.html" title="class in org.apache.poi.hslf.record">ExMediaAtom</A></B></TD>
+<TD>An atom record that specifies information about external audio or video data.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD WIDTH="15%"><B><A HREF="../../../../../org/apache/poi/hslf/record/ExObjList.html" title="class in org.apache.poi.hslf.record">ExObjList</A></B></TD>
+<TD>This class holds the links to exernal objects referenced
+  from the document.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD WIDTH="15%"><B><A HREF="../../../../../org/apache/poi/hslf/record/ExObjListAtom.html" title="class in org.apache.poi.hslf.record">ExObjListAtom</A></B></TD>
+<TD>Tne atom that holds the seed info used by a ExObjList</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD WIDTH="15%"><B><A HREF="../../../../../org/apache/poi/hslf/record/ExOleObjAtom.html" title="class in org.apache.poi.hslf.record">ExOleObjAtom</A></B></TD>
+<TD>Atom storing information for an OLE object.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD WIDTH="15%"><B><A HREF="../../../../../org/apache/poi/hslf/record/ExOleObjStg.html" title="class in org.apache.poi.hslf.record">ExOleObjStg</A></B></TD>
+<TD>Storage for embedded OLE objects.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD WIDTH="15%"><B><A HREF="../../../../../org/apache/poi/hslf/record/ExVideoContainer.html" title="class in org.apache.poi.hslf.record">ExVideoContainer</A></B></TD>
+<TD>A container record that specifies information about external video data.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD WIDTH="15%"><B><A HREF="../../../../../org/apache/poi/hslf/record/FontCollection.html" title="class in org.apache.poi.hslf.record">FontCollection</A></B></TD>
+<TD><code>FontCollection</code> ia a container that holds information
+ about all the fonts in the presentation.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD WIDTH="15%"><B><A HREF="../../../../../org/apache/poi/hslf/record/FontEntityAtom.html" title="class in org.apache.poi.hslf.record">FontEntityAtom</A></B></TD>
+<TD>This atom corresponds exactly to a Windows Logical Font (LOGFONT) structure.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD WIDTH="15%"><B><A HREF="../../../../../org/apache/poi/hslf/record/HeadersFootersAtom.html" title="class in org.apache.poi.hslf.record">HeadersFootersAtom</A></B></TD>
+<TD>An atom record that specifies options for displaying headers and footers
+ on a presentation slide or notes slide.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD WIDTH="15%"><B><A HREF="../../../../../org/apache/poi/hslf/record/HeadersFootersContainer.html" title="class in org.apache.poi.hslf.record">HeadersFootersContainer</A></B></TD>
+<TD>A container record that specifies information about the footers on a presentation slide.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD WIDTH="15%"><B><A HREF="../../../../../org/apache/poi/hslf/record/InteractiveInfo.html" title="class in org.apache.poi.hslf.record">InteractiveInfo</A></B></TD>
+<TD>This class represents the metadata of a link in a slide/notes/etc.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD WIDTH="15%"><B><A HREF="../../../../../org/apache/poi/hslf/record/InteractiveInfoAtom.html" title="class in org.apache.poi.hslf.record">InteractiveInfoAtom</A></B></TD>
+<TD>Tne atom that holds metadata on Links in the document.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD WIDTH="15%"><B><A HREF="../../../../../org/apache/poi/hslf/record/MainMaster.html" title="class in org.apache.poi.hslf.record">MainMaster</A></B></TD>
+<TD>Master slide</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD WIDTH="15%"><B><A HREF="../../../../../org/apache/poi/hslf/record/Notes.html" title="class in org.apache.poi.hslf.record">Notes</A></B></TD>
+<TD>Master container for Notes.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD WIDTH="15%"><B><A HREF="../../../../../org/apache/poi/hslf/record/NotesAtom.html" title="class in org.apache.poi.hslf.record">NotesAtom</A></B></TD>
+<TD>A Notes Atom (type 1009).</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD WIDTH="15%"><B><A HREF="../../../../../org/apache/poi/hslf/record/OEPlaceholderAtom.html" title="class in org.apache.poi.hslf.record">OEPlaceholderAtom</A></B></TD>
+<TD>OEPlaceholderAtom (3011).</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD WIDTH="15%"><B><A HREF="../../../../../org/apache/poi/hslf/record/OEShapeAtom.html" title="class in org.apache.poi.hslf.record">OEShapeAtom</A></B></TD>
+<TD>Atom that contains information that describes shape client data.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD WIDTH="15%"><B><A HREF="../../../../../org/apache/poi/hslf/record/OutlineTextRefAtom.html" title="class in org.apache.poi.hslf.record">OutlineTextRefAtom</A></B></TD>
+<TD>OEPlaceholderAtom (3998).</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD WIDTH="15%"><B><A HREF="../../../../../org/apache/poi/hslf/record/PersistPtrHolder.html" title="class in org.apache.poi.hslf.record">PersistPtrHolder</A></B></TD>
+<TD>General holder for PersistPtrFullBlock and PersistPtrIncrementalBlock
+  records.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD WIDTH="15%"><B><A HREF="../../../../../org/apache/poi/hslf/record/PositionDependentRecordAtom.html" title="class in org.apache.poi.hslf.record">PositionDependentRecordAtom</A></B></TD>
+<TD>A special (and dangerous) kind of Record Atom that cares about where
+  it lives on the disk, or who has other Atoms that care about where
+  this is on the disk.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD WIDTH="15%"><B><A HREF="../../../../../org/apache/poi/hslf/record/PositionDependentRecordContainer.html" title="class in org.apache.poi.hslf.record">PositionDependentRecordContainer</A></B></TD>
+<TD>A special (and dangerous) kind of Record Container, for which other
+  Atoms care about where this one lives on disk.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD WIDTH="15%"><B><A HREF="../../../../../org/apache/poi/hslf/record/PPDrawing.html" title="class in org.apache.poi.hslf.record">PPDrawing</A></B></TD>
+<TD>These are actually wrappers onto Escher drawings.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD WIDTH="15%"><B><A HREF="../../../../../org/apache/poi/hslf/record/PPDrawingGroup.html" title="class in org.apache.poi.hslf.record">PPDrawingGroup</A></B></TD>
+<TD>Container records which always exists inside Document.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD WIDTH="15%"><B><A HREF="../../../../../org/apache/poi/hslf/record/Record.html" title="class in org.apache.poi.hslf.record">Record</A></B></TD>
+<TD>This abstract class represents a record in the PowerPoint document.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD WIDTH="15%"><B><A HREF="../../../../../org/apache/poi/hslf/record/RecordAtom.html" title="class in org.apache.poi.hslf.record">RecordAtom</A></B></TD>
+<TD>Abstract class which all atom records will extend.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD WIDTH="15%"><B><A HREF="../../../../../org/apache/poi/hslf/record/RecordContainer.html" title="class in org.apache.poi.hslf.record">RecordContainer</A></B></TD>
+<TD>Abstract class which all container records will extend.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD WIDTH="15%"><B><A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.html" title="class in org.apache.poi.hslf.record">RecordTypes</A></B></TD>
+<TD>List of all known record types in a PowerPoint document, and the
+  classes that handle them.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD WIDTH="15%"><B><A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.Type.html" title="class in org.apache.poi.hslf.record">RecordTypes.Type</A></B></TD>
+<TD>Wrapper for the details of a PowerPoint or Escher record type.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD WIDTH="15%"><B><A HREF="../../../../../org/apache/poi/hslf/record/RoundTripHFPlaceholder12.html" title="class in org.apache.poi.hslf.record">RoundTripHFPlaceholder12</A></B></TD>
+<TD>An atom record that specifies that a shape is a header or footer placeholder shape</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD WIDTH="15%"><B><A HREF="../../../../../org/apache/poi/hslf/record/SheetContainer.html" title="class in org.apache.poi.hslf.record">SheetContainer</A></B></TD>
+<TD>The superclass of all sheet container records - Slide, Notes, MainMaster, etc.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD WIDTH="15%"><B><A HREF="../../../../../org/apache/poi/hslf/record/Slide.html" title="class in org.apache.poi.hslf.record">Slide</A></B></TD>
+<TD>Master container for Slides.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD WIDTH="15%"><B><A HREF="../../../../../org/apache/poi/hslf/record/SlideAtom.html" title="class in org.apache.poi.hslf.record">SlideAtom</A></B></TD>
+<TD>A Slide Atom (type 1007).</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD WIDTH="15%"><B><A HREF="../../../../../org/apache/poi/hslf/record/SlideListWithText.html" title="class in org.apache.poi.hslf.record">SlideListWithText</A></B></TD>
+<TD>These are tricky beasts.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD WIDTH="15%"><B><A HREF="../../../../../org/apache/poi/hslf/record/SlidePersistAtom.html" title="class in org.apache.poi.hslf.record">SlidePersistAtom</A></B></TD>
+<TD>A SlidePersist Atom (type 1011).</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD WIDTH="15%"><B><A HREF="../../../../../org/apache/poi/hslf/record/Sound.html" title="class in org.apache.poi.hslf.record">Sound</A></B></TD>
+<TD>A container holding information about a sound.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD WIDTH="15%"><B><A HREF="../../../../../org/apache/poi/hslf/record/SoundCollection.html" title="class in org.apache.poi.hslf.record">SoundCollection</A></B></TD>
+<TD>Is a container for all sound related atoms and containers.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD WIDTH="15%"><B><A HREF="../../../../../org/apache/poi/hslf/record/SoundData.html" title="class in org.apache.poi.hslf.record">SoundData</A></B></TD>
+<TD>Storage for embedded sounds.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD WIDTH="15%"><B><A HREF="../../../../../org/apache/poi/hslf/record/SSSlideInfoAtom.html" title="class in org.apache.poi.hslf.record">SSSlideInfoAtom</A></B></TD>
+<TD>A SlideShowSlideInfo Atom (type 1017).<br/>
+ <br/>
+  
+ An atom record that specifies which transition effects to perform
+ during a slide show, and how to advance to the next presentation slide.<br/>
+ <br/>
+
+ Combination of effectType and effectDirection:
+ 
+ typedescriptiondirection
+ 0cut0x00 = no transition, 0x01 = black transition
+ 1random0x00
+ 2blinds0x00 = vertical, 0x01 = horizontal
+ 3checkerlike blinds
+ 4cover0x00 = left, 0x01 = up, 0x02 = right, 0x03 = down, 0x04 = left/up, 0x05 = right/up, 0x06 left/down, 0x07 = left/down
+ 5dissolve0x00
+ 6fade0x00
+ 7uncoverlike cover
+ 8random barslike blinds
+ 9stripslike 0x04 - 0x07 of cover
+ 10wipelike 0x00 - 0x03 of cover
+ 11box in/out0x00 = out, 0x01 = in
+ 13split0x00 = horizontally out, 0x01 = horizontally in, 0x02 = vertically out, 0x03 = vertically in
+ 17diamond0x00
+ 18plus0x00
+ 19wedge0x00
+ 20pushlike 0x00 - 0x03 of cover
+ 21comblike blinds
+ 22newsflash0x00
+ 23alphafade0x00
+ 26wheelnumber of radial divisions (0x01,0x02,0x03,0x04,0x08)
+ 27circle0x00
+ 255undefined0x00
+ </TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD WIDTH="15%"><B><A HREF="../../../../../org/apache/poi/hslf/record/StyleTextProp9Atom.html" title="class in org.apache.poi.hslf.record">StyleTextProp9Atom</A></B></TD>
+<TD>The atom record that specifies additional text formatting.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD WIDTH="15%"><B><A HREF="../../../../../org/apache/poi/hslf/record/StyleTextPropAtom.html" title="class in org.apache.poi.hslf.record">StyleTextPropAtom</A></B></TD>
+<TD>A StyleTextPropAtom (type 4001).</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD WIDTH="15%"><B><A HREF="../../../../../org/apache/poi/hslf/record/TextBytesAtom.html" title="class in org.apache.poi.hslf.record">TextBytesAtom</A></B></TD>
+<TD>A TextBytesAtom (type 4008).</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD WIDTH="15%"><B><A HREF="../../../../../org/apache/poi/hslf/record/TextCharsAtom.html" title="class in org.apache.poi.hslf.record">TextCharsAtom</A></B></TD>
+<TD>A TextCharsAtom (type 4000).</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD WIDTH="15%"><B><A HREF="../../../../../org/apache/poi/hslf/record/TextHeaderAtom.html" title="class in org.apache.poi.hslf.record">TextHeaderAtom</A></B></TD>
+<TD>A TextHeaderAtom  (type 3999).</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD WIDTH="15%"><B><A HREF="../../../../../org/apache/poi/hslf/record/TextRulerAtom.html" title="class in org.apache.poi.hslf.record">TextRulerAtom</A></B></TD>
+<TD>Ruler of a text as it differs from the style's ruler settings.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD WIDTH="15%"><B><A HREF="../../../../../org/apache/poi/hslf/record/TextSpecInfoAtom.html" title="class in org.apache.poi.hslf.record">TextSpecInfoAtom</A></B></TD>
+<TD>The special info runs contained in this text.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD WIDTH="15%"><B><A HREF="../../../../../org/apache/poi/hslf/record/TextSpecInfoAtom.TextSpecInfoRun.html" title="class in org.apache.poi.hslf.record">TextSpecInfoAtom.TextSpecInfoRun</A></B></TD>
+<TD>&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD WIDTH="15%"><B><A HREF="../../../../../org/apache/poi/hslf/record/TxInteractiveInfoAtom.html" title="class in org.apache.poi.hslf.record">TxInteractiveInfoAtom</A></B></TD>
+<TD>Tne atom that holds starting and ending character positions of a hyperlink</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD WIDTH="15%"><B><A HREF="../../../../../org/apache/poi/hslf/record/TxMasterStyleAtom.html" title="class in org.apache.poi.hslf.record">TxMasterStyleAtom</A></B></TD>
+<TD>TxMasterStyleAtom atom (4003).</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD WIDTH="15%"><B><A HREF="../../../../../org/apache/poi/hslf/record/UnknownRecordPlaceholder.html" title="class in org.apache.poi.hslf.record">UnknownRecordPlaceholder</A></B></TD>
+<TD>If we come across a record we don't know about, we create one of
+  these.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD WIDTH="15%"><B><A HREF="../../../../../org/apache/poi/hslf/record/UserEditAtom.html" title="class in org.apache.poi.hslf.record">UserEditAtom</A></B></TD>
+<TD>A UserEdit Atom (type 4085).</TD>
+</TR>
+</TABLE>
+&nbsp;
+
+<P>
+
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+<B>Enum Summary</B></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD WIDTH="15%"><B><A HREF="../../../../../org/apache/poi/hslf/record/TextAutoNumberSchemeEnum.html" title="enum in org.apache.poi.hslf.record">TextAutoNumberSchemeEnum</A></B></TD>
+<TD>&nbsp;</TD>
+</TR>
+</TABLE>
+&nbsp;
+
+<P>
+<DL>
+</DL>
+<HR>
+
+
+<!-- ======= START OF BOTTOM NAVBAR ====== -->
+<A NAME="navbar_bottom"><!-- --></A>
+<A HREF="#skip-navbar_bottom" title="Skip navigation links"></A>
+<TABLE BORDER="0" WIDTH="100%" CELLPADDING="1" CELLSPACING="0" SUMMARY="">
+<TR>
+<TD COLSPAN=2 BGCOLOR="#EEEEFF" CLASS="NavBarCell1">
+<A NAME="navbar_bottom_firstrow"><!-- --></A>
+<TABLE BORDER="0" CELLPADDING="0" CELLSPACING="3" SUMMARY="">
+  <TR ALIGN="center" VALIGN="top">
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../overview-summary.html"><FONT CLASS="NavBarFont1"><B>Overview</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#FFFFFF" CLASS="NavBarCell1Rev"> &nbsp;<FONT CLASS="NavBarFont1Rev"><B>Package</B></FONT>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <FONT CLASS="NavBarFont1">Class</FONT>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="package-use.html"><FONT CLASS="NavBarFont1"><B>Use</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="package-tree.html"><FONT CLASS="NavBarFont1"><B>Tree</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../deprecated-list.html"><FONT CLASS="NavBarFont1"><B>Deprecated</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../index-all.html"><FONT CLASS="NavBarFont1"><B>Index</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../help-doc.html"><FONT CLASS="NavBarFont1"><B>Help</B></FONT></A>&nbsp;</TD>
+  </TR>
+</TABLE>
+</TD>
+<TD ALIGN="right" VALIGN="top" ROWSPAN=3><EM>
+</EM>
+</TD>
+</TR>
+
+<TR>
+<TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
+&nbsp;<A HREF="../../../../../org/apache/poi/hslf/model/textproperties/package-summary.html"><B>PREV PACKAGE</B></A>&nbsp;
+&nbsp;<A HREF="../../../../../org/apache/poi/hslf/usermodel/package-summary.html"><B>NEXT PACKAGE</B></A></FONT></TD>
+<TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
+  <A HREF="../../../../../index.html?org/apache/poi/hslf/record/package-summary.html" target="_top"><B>FRAMES</B></A>  &nbsp;
+&nbsp;<A HREF="package-summary.html" target="_top"><B>NO FRAMES</B></A>  &nbsp;
+&nbsp;<SCRIPT type="text/javascript">
+  <!--
+  if(window==top) {
+    document.writeln('<A HREF="../../../../../allclasses-noframe.html"><B>All Classes</B></A>');
+  }
+  //-->
+</SCRIPT>
+<NOSCRIPT>
+  <A HREF="../../../../../allclasses-noframe.html"><B>All Classes</B></A>
+</NOSCRIPT>
+
+
+</FONT></TD>
+</TR>
+</TABLE>
+<A NAME="skip-navbar_bottom"></A>
+<!-- ======== END OF BOTTOM NAVBAR ======= -->
+
+<HR>
+
+                <i>Copyright 2014 The Apache Software Foundation or
+        its licensors, as applicable.</i>
+            
+</BODY>
+</HTML>

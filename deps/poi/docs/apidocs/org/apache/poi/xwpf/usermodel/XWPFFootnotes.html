@@ -1,0 +1,530 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!--NewPage-->
+<HTML>
+<HEAD>
+<TITLE>
+XWPFFootnotes (POI API Documentation)
+</TITLE>
+
+<META NAME="keywords" CONTENT="org.apache.poi.xwpf.usermodel.XWPFFootnotes class">
+
+<LINK REL ="stylesheet" TYPE="text/css" HREF="../../../../../stylesheet.css" TITLE="Style">
+
+<SCRIPT type="text/javascript">
+function windowTitle()
+{
+    parent.document.title="XWPFFootnotes (POI API Documentation)";
+}
+</SCRIPT>
+<NOSCRIPT>
+</NOSCRIPT>
+
+</HEAD>
+
+<BODY BGCOLOR="white" onload="windowTitle();">
+
+
+<!-- ========= START OF TOP NAVBAR ======= -->
+<A NAME="navbar_top"><!-- --></A>
+<A HREF="#skip-navbar_top" title="Skip navigation links"></A>
+<TABLE BORDER="0" WIDTH="100%" CELLPADDING="1" CELLSPACING="0" SUMMARY="">
+<TR>
+<TD COLSPAN=2 BGCOLOR="#EEEEFF" CLASS="NavBarCell1">
+<A NAME="navbar_top_firstrow"><!-- --></A>
+<TABLE BORDER="0" CELLPADDING="0" CELLSPACING="3" SUMMARY="">
+  <TR ALIGN="center" VALIGN="top">
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../overview-summary.html"><FONT CLASS="NavBarFont1"><B>Overview</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="package-summary.html"><FONT CLASS="NavBarFont1"><B>Package</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#FFFFFF" CLASS="NavBarCell1Rev"> &nbsp;<FONT CLASS="NavBarFont1Rev"><B>Class</B></FONT>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="class-use/XWPFFootnotes.html"><FONT CLASS="NavBarFont1"><B>Use</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="package-tree.html"><FONT CLASS="NavBarFont1"><B>Tree</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../deprecated-list.html"><FONT CLASS="NavBarFont1"><B>Deprecated</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../index-all.html"><FONT CLASS="NavBarFont1"><B>Index</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../help-doc.html"><FONT CLASS="NavBarFont1"><B>Help</B></FONT></A>&nbsp;</TD>
+  </TR>
+</TABLE>
+</TD>
+<TD ALIGN="right" VALIGN="top" ROWSPAN=3><EM>
+</EM>
+</TD>
+</TR>
+
+<TR>
+<TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
+&nbsp;<A HREF="../../../../../org/apache/poi/xwpf/usermodel/XWPFFootnote.html" title="class in org.apache.poi.xwpf.usermodel"><B>PREV CLASS</B></A>&nbsp;
+&nbsp;<A HREF="../../../../../org/apache/poi/xwpf/usermodel/XWPFHeader.html" title="class in org.apache.poi.xwpf.usermodel"><B>NEXT CLASS</B></A></FONT></TD>
+<TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
+  <A HREF="../../../../../index.html?org/apache/poi/xwpf/usermodel/XWPFFootnotes.html" target="_top"><B>FRAMES</B></A>  &nbsp;
+&nbsp;<A HREF="XWPFFootnotes.html" target="_top"><B>NO FRAMES</B></A>  &nbsp;
+&nbsp;<SCRIPT type="text/javascript">
+  <!--
+  if(window==top) {
+    document.writeln('<A HREF="../../../../../allclasses-noframe.html"><B>All Classes</B></A>');
+  }
+  //-->
+</SCRIPT>
+<NOSCRIPT>
+  <A HREF="../../../../../allclasses-noframe.html"><B>All Classes</B></A>
+</NOSCRIPT>
+
+
+</FONT></TD>
+</TR>
+<TR>
+<TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
+  SUMMARY:&nbsp;NESTED&nbsp;|&nbsp;<A HREF="#field_summary">FIELD</A>&nbsp;|&nbsp;<A HREF="#constructor_summary">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_summary">METHOD</A></FONT></TD>
+<TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
+DETAIL:&nbsp;<A HREF="#field_detail">FIELD</A>&nbsp;|&nbsp;<A HREF="#constructor_detail">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_detail">METHOD</A></FONT></TD>
+</TR>
+</TABLE>
+<A NAME="skip-navbar_top"></A>
+<!-- ========= END OF TOP NAVBAR ========= -->
+
+<HR>
+<!-- ======== START OF CLASS DATA ======== -->
+<H2>
+<FONT SIZE="-1">
+org.apache.poi.xwpf.usermodel</FONT>
+<BR>
+Class XWPFFootnotes</H2>
+<PRE>
+java.lang.Object
+  <IMG SRC="../../../../../resources/inherit.gif" ALT="extended by "><A HREF="../../../../../org/apache/poi/POIXMLDocumentPart.html" title="class in org.apache.poi">org.apache.poi.POIXMLDocumentPart</A>
+      <IMG SRC="../../../../../resources/inherit.gif" ALT="extended by "><B>org.apache.poi.xwpf.usermodel.XWPFFootnotes</B>
+</PRE>
+<HR>
+<DL>
+<DT><PRE>public class <B>XWPFFootnotes</B><DT>extends <A HREF="../../../../../org/apache/poi/POIXMLDocumentPart.html" title="class in org.apache.poi">POIXMLDocumentPart</A></DL>
+</PRE>
+
+<P>
+Looks after the collection of Footnotes for a document
+<P>
+
+<P>
+<HR>
+
+<P>
+<!-- =========== FIELD SUMMARY =========== -->
+
+<A NAME="field_summary"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+<B>Field Summary</B></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>protected &nbsp;<A HREF="../../../../../org/apache/poi/xwpf/usermodel/XWPFDocument.html" title="class in org.apache.poi.xwpf.usermodel">XWPFDocument</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xwpf/usermodel/XWPFFootnotes.html#document">document</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+</TABLE>
+&nbsp;<A NAME="fields_inherited_from_class_org.apache.poi.POIXMLDocumentPart"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#EEEEFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left"><B>Fields inherited from class org.apache.poi.<A HREF="../../../../../org/apache/poi/POIXMLDocumentPart.html" title="class in org.apache.poi">POIXMLDocumentPart</A></B></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><A HREF="../../../../../org/apache/poi/POIXMLDocumentPart.html#DEFAULT_XML_OPTIONS">DEFAULT_XML_OPTIONS</A></CODE></TD>
+</TR>
+</TABLE>
+&nbsp;
+<!-- ======== CONSTRUCTOR SUMMARY ======== -->
+
+<A NAME="constructor_summary"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+<B>Constructor Summary</B></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xwpf/usermodel/XWPFFootnotes.html#XWPFFootnotes()">XWPFFootnotes</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Construct XWPFFootnotes from scratch for a new document.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xwpf/usermodel/XWPFFootnotes.html#XWPFFootnotes(org.apache.poi.openxml4j.opc.PackagePart, org.apache.poi.openxml4j.opc.PackageRelationship)">XWPFFootnotes</A></B>(<A HREF="../../../../../org/apache/poi/openxml4j/opc/PackagePart.html" title="class in org.apache.poi.openxml4j.opc">PackagePart</A>&nbsp;part,
+              <A HREF="../../../../../org/apache/poi/openxml4j/opc/PackageRelationship.html" title="class in org.apache.poi.openxml4j.opc">PackageRelationship</A>&nbsp;rel)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Construct XWPFFootnotes from a package part</TD>
+</TR>
+</TABLE>
+&nbsp;
+<!-- ========== METHOD SUMMARY =========== -->
+
+<A NAME="method_summary"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+<B>Method Summary</B></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../../../org/apache/poi/xwpf/usermodel/XWPFFootnote.html" title="class in org.apache.poi.xwpf.usermodel">XWPFFootnote</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xwpf/usermodel/XWPFFootnotes.html#addFootnote(org.openxmlformats.schemas.wordprocessingml.x2006.main.CTFtnEdn)">addFootnote</A></B>(org.openxmlformats.schemas.wordprocessingml.x2006.main.CTFtnEdn&nbsp;note)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;add a footnote to the document</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xwpf/usermodel/XWPFFootnotes.html#addFootnote(org.apache.poi.xwpf.usermodel.XWPFFootnote)">addFootnote</A></B>(<A HREF="../../../../../org/apache/poi/xwpf/usermodel/XWPFFootnote.html" title="class in org.apache.poi.xwpf.usermodel">XWPFFootnote</A>&nbsp;footnote)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;add an XWPFFootnote to the document</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>protected &nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xwpf/usermodel/XWPFFootnotes.html#commit()">commit</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Save the content in the underlying package part.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../../../org/apache/poi/xwpf/usermodel/XWPFFootnote.html" title="class in org.apache.poi.xwpf.usermodel">XWPFFootnote</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xwpf/usermodel/XWPFFootnotes.html#getFootnoteById(int)">getFootnoteById</A></B>(int&nbsp;id)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;java.util.List&lt;<A HREF="../../../../../org/apache/poi/xwpf/usermodel/XWPFFootnote.html" title="class in org.apache.poi.xwpf.usermodel">XWPFFootnote</A>&gt;</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xwpf/usermodel/XWPFFootnotes.html#getFootnotesList()">getFootnotesList</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../../../org/apache/poi/xwpf/usermodel/XWPFDocument.html" title="class in org.apache.poi.xwpf.usermodel">XWPFDocument</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xwpf/usermodel/XWPFFootnotes.html#getXWPFDocument()">getXWPFDocument</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>protected &nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xwpf/usermodel/XWPFFootnotes.html#onDocumentRead()">onDocumentRead</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Read document</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xwpf/usermodel/XWPFFootnotes.html#setFootnotes(org.openxmlformats.schemas.wordprocessingml.x2006.main.CTFootnotes)">setFootnotes</A></B>(org.openxmlformats.schemas.wordprocessingml.x2006.main.CTFootnotes&nbsp;footnotes)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sets the ctFootnotes</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xwpf/usermodel/XWPFFootnotes.html#setXWPFDocument(org.apache.poi.xwpf.usermodel.XWPFDocument)">setXWPFDocument</A></B>(<A HREF="../../../../../org/apache/poi/xwpf/usermodel/XWPFDocument.html" title="class in org.apache.poi.xwpf.usermodel">XWPFDocument</A>&nbsp;doc)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+</TABLE>
+&nbsp;<A NAME="methods_inherited_from_class_org.apache.poi.POIXMLDocumentPart"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#EEEEFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left"><B>Methods inherited from class org.apache.poi.<A HREF="../../../../../org/apache/poi/POIXMLDocumentPart.html" title="class in org.apache.poi">POIXMLDocumentPart</A></B></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><A HREF="../../../../../org/apache/poi/POIXMLDocumentPart.html#addRelation(java.lang.String, org.apache.poi.POIXMLDocumentPart)">addRelation</A>, <A HREF="../../../../../org/apache/poi/POIXMLDocumentPart.html#createRelationship(org.apache.poi.POIXMLRelation, org.apache.poi.POIXMLFactory)">createRelationship</A>, <A HREF="../../../../../org/apache/poi/POIXMLDocumentPart.html#createRelationship(org.apache.poi.POIXMLRelation, org.apache.poi.POIXMLFactory, int)">createRelationship</A>, <A HREF="../../../../../org/apache/poi/POIXMLDocumentPart.html#createRelationship(org.apache.poi.POIXMLRelation, org.apache.poi.POIXMLFactory, int, boolean)">createRelationship</A>, <A HREF="../../../../../org/apache/poi/POIXMLDocumentPart.html#getPackagePart()">getPackagePart</A>, <A HREF="../../../../../org/apache/poi/POIXMLDocumentPart.html#getPackageRelationship()">getPackageRelationship</A>, <A HREF="../../../../../org/apache/poi/POIXMLDocumentPart.html#getParent()">getParent</A>, <A HREF="../../../../../org/apache/poi/POIXMLDocumentPart.html#getRelationById(java.lang.String)">getRelationById</A>, <A HREF="../../../../../org/apache/poi/POIXMLDocumentPart.html#getRelationId(org.apache.poi.POIXMLDocumentPart)">getRelationId</A>, <A HREF="../../../../../org/apache/poi/POIXMLDocumentPart.html#getRelations()">getRelations</A>, <A HREF="../../../../../org/apache/poi/POIXMLDocumentPart.html#getTargetPart(org.apache.poi.openxml4j.opc.PackageRelationship)">getTargetPart</A>, <A HREF="../../../../../org/apache/poi/POIXMLDocumentPart.html#onDocumentCreate()">onDocumentCreate</A>, <A HREF="../../../../../org/apache/poi/POIXMLDocumentPart.html#onDocumentRemove()">onDocumentRemove</A>, <A HREF="../../../../../org/apache/poi/POIXMLDocumentPart.html#onSave(java.util.Set)">onSave</A>, <A HREF="../../../../../org/apache/poi/POIXMLDocumentPart.html#prepareForCommit()">prepareForCommit</A>, <A HREF="../../../../../org/apache/poi/POIXMLDocumentPart.html#read(org.apache.poi.POIXMLFactory, java.util.Map)">read</A>, <A HREF="../../../../../org/apache/poi/POIXMLDocumentPart.html#rebase(org.apache.poi.openxml4j.opc.OPCPackage)">rebase</A>, <A HREF="../../../../../org/apache/poi/POIXMLDocumentPart.html#removeRelation(org.apache.poi.POIXMLDocumentPart)">removeRelation</A>, <A HREF="../../../../../org/apache/poi/POIXMLDocumentPart.html#removeRelation(org.apache.poi.POIXMLDocumentPart, boolean)">removeRelation</A>, <A HREF="../../../../../org/apache/poi/POIXMLDocumentPart.html#toString()">toString</A></CODE></TD>
+</TR>
+</TABLE>
+&nbsp;<A NAME="methods_inherited_from_class_java.lang.Object"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#EEEEFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left"><B>Methods inherited from class java.lang.Object</B></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE>clone, equals, finalize, getClass, hashCode, notify, notifyAll, wait, wait, wait</CODE></TD>
+</TR>
+</TABLE>
+&nbsp;
+<P>
+
+<!-- ============ FIELD DETAIL =========== -->
+
+<A NAME="field_detail"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="1"><FONT SIZE="+2">
+<B>Field Detail</B></FONT></TH>
+</TR>
+</TABLE>
+
+<A NAME="document"><!-- --></A><H3>
+document</H3>
+<PRE>
+protected <A HREF="../../../../../org/apache/poi/xwpf/usermodel/XWPFDocument.html" title="class in org.apache.poi.xwpf.usermodel">XWPFDocument</A> <B>document</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+
+<!-- ========= CONSTRUCTOR DETAIL ======== -->
+
+<A NAME="constructor_detail"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="1"><FONT SIZE="+2">
+<B>Constructor Detail</B></FONT></TH>
+</TR>
+</TABLE>
+
+<A NAME="XWPFFootnotes(org.apache.poi.openxml4j.opc.PackagePart, org.apache.poi.openxml4j.opc.PackageRelationship)"><!-- --></A><H3>
+XWPFFootnotes</H3>
+<PRE>
+public <B>XWPFFootnotes</B>(<A HREF="../../../../../org/apache/poi/openxml4j/opc/PackagePart.html" title="class in org.apache.poi.openxml4j.opc">PackagePart</A>&nbsp;part,
+                     <A HREF="../../../../../org/apache/poi/openxml4j/opc/PackageRelationship.html" title="class in org.apache.poi.openxml4j.opc">PackageRelationship</A>&nbsp;rel)
+              throws java.io.IOException,
+                     <A HREF="../../../../../org/apache/poi/openxml4j/exceptions/OpenXML4JException.html" title="class in org.apache.poi.openxml4j.exceptions">OpenXML4JException</A></PRE>
+<DL>
+<DD>Construct XWPFFootnotes from a package part
+<P>
+<DL>
+<DT><B>Parameters:</B><DD><CODE>part</CODE> - the package part holding the data of the footnotes,<DD><CODE>rel</CODE> - the package relationship of type "http://schemas.openxmlformats.org/officeDocument/2006/relationships/footnotes"
+<DT><B>Throws:</B>
+<DD><CODE>java.io.IOException</CODE>
+<DD><CODE><A HREF="../../../../../org/apache/poi/openxml4j/exceptions/OpenXML4JException.html" title="class in org.apache.poi.openxml4j.exceptions">OpenXML4JException</A></CODE></DL>
+</DL>
+<HR>
+
+<A NAME="XWPFFootnotes()"><!-- --></A><H3>
+XWPFFootnotes</H3>
+<PRE>
+public <B>XWPFFootnotes</B>()</PRE>
+<DL>
+<DD>Construct XWPFFootnotes from scratch for a new document.
+<P>
+</DL>
+
+<!-- ============ METHOD DETAIL ========== -->
+
+<A NAME="method_detail"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="1"><FONT SIZE="+2">
+<B>Method Detail</B></FONT></TH>
+</TR>
+</TABLE>
+
+<A NAME="onDocumentRead()"><!-- --></A><H3>
+onDocumentRead</H3>
+<PRE>
+protected void <B>onDocumentRead</B>()
+                       throws java.io.IOException</PRE>
+<DL>
+<DD>Read document
+<P>
+<DD><DL>
+<DT><B>Overrides:</B><DD><CODE><A HREF="../../../../../org/apache/poi/POIXMLDocumentPart.html#onDocumentRead()">onDocumentRead</A></CODE> in class <CODE><A HREF="../../../../../org/apache/poi/POIXMLDocumentPart.html" title="class in org.apache.poi">POIXMLDocumentPart</A></CODE></DL>
+</DD>
+<DD><DL>
+
+<DT><B>Throws:</B>
+<DD><CODE>java.io.IOException</CODE></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="commit()"><!-- --></A><H3>
+commit</H3>
+<PRE>
+protected void <B>commit</B>()
+               throws java.io.IOException</PRE>
+<DL>
+<DD><B>Description copied from class: <CODE><A HREF="../../../../../org/apache/poi/POIXMLDocumentPart.html#commit()">POIXMLDocumentPart</A></CODE></B></DD>
+<DD>Save the content in the underlying package part.
+ Default implementation is empty meaning that the package part is left unmodified.
+
+ Sub-classes should override and add logic to marshal the "model" into Ooxml4J.
+
+ For example, the code saving a generic XML entry may look as follows:
+ <pre><code>
+ protected void commit() throws IOException {
+   PackagePart part = getPackagePart();
+   OutputStream out = part.getOutputStream();
+   XmlObject bean = getXmlBean(); //the "model" which holds changes in memory
+   bean.save(out, DEFAULT_XML_OPTIONS);
+   out.close();
+ }
+  </code></pre>
+<P>
+<DD><DL>
+<DT><B>Overrides:</B><DD><CODE><A HREF="../../../../../org/apache/poi/POIXMLDocumentPart.html#commit()">commit</A></CODE> in class <CODE><A HREF="../../../../../org/apache/poi/POIXMLDocumentPart.html" title="class in org.apache.poi">POIXMLDocumentPart</A></CODE></DL>
+</DD>
+<DD><DL>
+
+<DT><B>Throws:</B>
+<DD><CODE>java.io.IOException</CODE></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getFootnotesList()"><!-- --></A><H3>
+getFootnotesList</H3>
+<PRE>
+public java.util.List&lt;<A HREF="../../../../../org/apache/poi/xwpf/usermodel/XWPFFootnote.html" title="class in org.apache.poi.xwpf.usermodel">XWPFFootnote</A>&gt; <B>getFootnotesList</B>()</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getFootnoteById(int)"><!-- --></A><H3>
+getFootnoteById</H3>
+<PRE>
+public <A HREF="../../../../../org/apache/poi/xwpf/usermodel/XWPFFootnote.html" title="class in org.apache.poi.xwpf.usermodel">XWPFFootnote</A> <B>getFootnoteById</B>(int&nbsp;id)</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setFootnotes(org.openxmlformats.schemas.wordprocessingml.x2006.main.CTFootnotes)"><!-- --></A><H3>
+setFootnotes</H3>
+<PRE>
+public void <B>setFootnotes</B>(org.openxmlformats.schemas.wordprocessingml.x2006.main.CTFootnotes&nbsp;footnotes)</PRE>
+<DL>
+<DD>Sets the ctFootnotes
+<P>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>footnotes</CODE> - </DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="addFootnote(org.apache.poi.xwpf.usermodel.XWPFFootnote)"><!-- --></A><H3>
+addFootnote</H3>
+<PRE>
+public void <B>addFootnote</B>(<A HREF="../../../../../org/apache/poi/xwpf/usermodel/XWPFFootnote.html" title="class in org.apache.poi.xwpf.usermodel">XWPFFootnote</A>&nbsp;footnote)</PRE>
+<DL>
+<DD>add an XWPFFootnote to the document
+<P>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>footnote</CODE> - 
+<DT><B>Throws:</B>
+<DD><CODE>java.io.IOException</CODE></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="addFootnote(org.openxmlformats.schemas.wordprocessingml.x2006.main.CTFtnEdn)"><!-- --></A><H3>
+addFootnote</H3>
+<PRE>
+public <A HREF="../../../../../org/apache/poi/xwpf/usermodel/XWPFFootnote.html" title="class in org.apache.poi.xwpf.usermodel">XWPFFootnote</A> <B>addFootnote</B>(org.openxmlformats.schemas.wordprocessingml.x2006.main.CTFtnEdn&nbsp;note)</PRE>
+<DL>
+<DD>add a footnote to the document
+<P>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>note</CODE> - 
+<DT><B>Throws:</B>
+<DD><CODE>java.io.IOException</CODE></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setXWPFDocument(org.apache.poi.xwpf.usermodel.XWPFDocument)"><!-- --></A><H3>
+setXWPFDocument</H3>
+<PRE>
+public void <B>setXWPFDocument</B>(<A HREF="../../../../../org/apache/poi/xwpf/usermodel/XWPFDocument.html" title="class in org.apache.poi.xwpf.usermodel">XWPFDocument</A>&nbsp;doc)</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getXWPFDocument()"><!-- --></A><H3>
+getXWPFDocument</H3>
+<PRE>
+public <A HREF="../../../../../org/apache/poi/xwpf/usermodel/XWPFDocument.html" title="class in org.apache.poi.xwpf.usermodel">XWPFDocument</A> <B>getXWPFDocument</B>()</PRE>
+<DL>
+<DD><DL>
+<DT><B>See Also:</B><DD><A HREF="../../../../../org/apache/poi/xwpf/usermodel/IBody.html#getPart()"><CODE>IBody.getPart()</CODE></A></DL>
+</DD>
+</DL>
+<!-- ========= END OF CLASS DATA ========= -->
+<HR>
+
+
+<!-- ======= START OF BOTTOM NAVBAR ====== -->
+<A NAME="navbar_bottom"><!-- --></A>
+<A HREF="#skip-navbar_bottom" title="Skip navigation links"></A>
+<TABLE BORDER="0" WIDTH="100%" CELLPADDING="1" CELLSPACING="0" SUMMARY="">
+<TR>
+<TD COLSPAN=2 BGCOLOR="#EEEEFF" CLASS="NavBarCell1">
+<A NAME="navbar_bottom_firstrow"><!-- --></A>
+<TABLE BORDER="0" CELLPADDING="0" CELLSPACING="3" SUMMARY="">
+  <TR ALIGN="center" VALIGN="top">
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../overview-summary.html"><FONT CLASS="NavBarFont1"><B>Overview</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="package-summary.html"><FONT CLASS="NavBarFont1"><B>Package</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#FFFFFF" CLASS="NavBarCell1Rev"> &nbsp;<FONT CLASS="NavBarFont1Rev"><B>Class</B></FONT>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="class-use/XWPFFootnotes.html"><FONT CLASS="NavBarFont1"><B>Use</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="package-tree.html"><FONT CLASS="NavBarFont1"><B>Tree</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../deprecated-list.html"><FONT CLASS="NavBarFont1"><B>Deprecated</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../index-all.html"><FONT CLASS="NavBarFont1"><B>Index</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../help-doc.html"><FONT CLASS="NavBarFont1"><B>Help</B></FONT></A>&nbsp;</TD>
+  </TR>
+</TABLE>
+</TD>
+<TD ALIGN="right" VALIGN="top" ROWSPAN=3><EM>
+</EM>
+</TD>
+</TR>
+
+<TR>
+<TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
+&nbsp;<A HREF="../../../../../org/apache/poi/xwpf/usermodel/XWPFFootnote.html" title="class in org.apache.poi.xwpf.usermodel"><B>PREV CLASS</B></A>&nbsp;
+&nbsp;<A HREF="../../../../../org/apache/poi/xwpf/usermodel/XWPFHeader.html" title="class in org.apache.poi.xwpf.usermodel"><B>NEXT CLASS</B></A></FONT></TD>
+<TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
+  <A HREF="../../../../../index.html?org/apache/poi/xwpf/usermodel/XWPFFootnotes.html" target="_top"><B>FRAMES</B></A>  &nbsp;
+&nbsp;<A HREF="XWPFFootnotes.html" target="_top"><B>NO FRAMES</B></A>  &nbsp;
+&nbsp;<SCRIPT type="text/javascript">
+  <!--
+  if(window==top) {
+    document.writeln('<A HREF="../../../../../allclasses-noframe.html"><B>All Classes</B></A>');
+  }
+  //-->
+</SCRIPT>
+<NOSCRIPT>
+  <A HREF="../../../../../allclasses-noframe.html"><B>All Classes</B></A>
+</NOSCRIPT>
+
+
+</FONT></TD>
+</TR>
+<TR>
+<TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
+  SUMMARY:&nbsp;NESTED&nbsp;|&nbsp;<A HREF="#field_summary">FIELD</A>&nbsp;|&nbsp;<A HREF="#constructor_summary">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_summary">METHOD</A></FONT></TD>
+<TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
+DETAIL:&nbsp;<A HREF="#field_detail">FIELD</A>&nbsp;|&nbsp;<A HREF="#constructor_detail">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_detail">METHOD</A></FONT></TD>
+</TR>
+</TABLE>
+<A NAME="skip-navbar_bottom"></A>
+<!-- ======== END OF BOTTOM NAVBAR ======= -->
+
+<HR>
+
+                <i>Copyright 2014 The Apache Software Foundation or
+        its licensors, as applicable.</i>
+            
+</BODY>
+</HTML>

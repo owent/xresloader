@@ -1,0 +1,604 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!--NewPage-->
+<HTML>
+<HEAD>
+<TITLE>
+ColumnHelper (POI API Documentation)
+</TITLE>
+
+<META NAME="keywords" CONTENT="org.apache.poi.xssf.usermodel.helpers.ColumnHelper class">
+
+<LINK REL ="stylesheet" TYPE="text/css" HREF="../../../../../../stylesheet.css" TITLE="Style">
+
+<SCRIPT type="text/javascript">
+function windowTitle()
+{
+    parent.document.title="ColumnHelper (POI API Documentation)";
+}
+</SCRIPT>
+<NOSCRIPT>
+</NOSCRIPT>
+
+</HEAD>
+
+<BODY BGCOLOR="white" onload="windowTitle();">
+
+
+<!-- ========= START OF TOP NAVBAR ======= -->
+<A NAME="navbar_top"><!-- --></A>
+<A HREF="#skip-navbar_top" title="Skip navigation links"></A>
+<TABLE BORDER="0" WIDTH="100%" CELLPADDING="1" CELLSPACING="0" SUMMARY="">
+<TR>
+<TD COLSPAN=2 BGCOLOR="#EEEEFF" CLASS="NavBarCell1">
+<A NAME="navbar_top_firstrow"><!-- --></A>
+<TABLE BORDER="0" CELLPADDING="0" CELLSPACING="3" SUMMARY="">
+  <TR ALIGN="center" VALIGN="top">
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../../overview-summary.html"><FONT CLASS="NavBarFont1"><B>Overview</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="package-summary.html"><FONT CLASS="NavBarFont1"><B>Package</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#FFFFFF" CLASS="NavBarCell1Rev"> &nbsp;<FONT CLASS="NavBarFont1Rev"><B>Class</B></FONT>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="class-use/ColumnHelper.html"><FONT CLASS="NavBarFont1"><B>Use</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="package-tree.html"><FONT CLASS="NavBarFont1"><B>Tree</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../../deprecated-list.html"><FONT CLASS="NavBarFont1"><B>Deprecated</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../../index-all.html"><FONT CLASS="NavBarFont1"><B>Index</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../../help-doc.html"><FONT CLASS="NavBarFont1"><B>Help</B></FONT></A>&nbsp;</TD>
+  </TR>
+</TABLE>
+</TD>
+<TD ALIGN="right" VALIGN="top" ROWSPAN=3><EM>
+</EM>
+</TD>
+</TR>
+
+<TR>
+<TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
+&nbsp;PREV CLASS&nbsp;
+&nbsp;<A HREF="../../../../../../org/apache/poi/xssf/usermodel/helpers/HeaderFooterHelper.html" title="class in org.apache.poi.xssf.usermodel.helpers"><B>NEXT CLASS</B></A></FONT></TD>
+<TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
+  <A HREF="../../../../../../index.html?org/apache/poi/xssf/usermodel/helpers/ColumnHelper.html" target="_top"><B>FRAMES</B></A>  &nbsp;
+&nbsp;<A HREF="ColumnHelper.html" target="_top"><B>NO FRAMES</B></A>  &nbsp;
+&nbsp;<SCRIPT type="text/javascript">
+  <!--
+  if(window==top) {
+    document.writeln('<A HREF="../../../../../../allclasses-noframe.html"><B>All Classes</B></A>');
+  }
+  //-->
+</SCRIPT>
+<NOSCRIPT>
+  <A HREF="../../../../../../allclasses-noframe.html"><B>All Classes</B></A>
+</NOSCRIPT>
+
+
+</FONT></TD>
+</TR>
+<TR>
+<TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
+  SUMMARY:&nbsp;NESTED&nbsp;|&nbsp;FIELD&nbsp;|&nbsp;<A HREF="#constructor_summary">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_summary">METHOD</A></FONT></TD>
+<TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
+DETAIL:&nbsp;FIELD&nbsp;|&nbsp;<A HREF="#constructor_detail">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_detail">METHOD</A></FONT></TD>
+</TR>
+</TABLE>
+<A NAME="skip-navbar_top"></A>
+<!-- ========= END OF TOP NAVBAR ========= -->
+
+<HR>
+<!-- ======== START OF CLASS DATA ======== -->
+<H2>
+<FONT SIZE="-1">
+org.apache.poi.xssf.usermodel.helpers</FONT>
+<BR>
+Class ColumnHelper</H2>
+<PRE>
+java.lang.Object
+  <IMG SRC="../../../../../../resources/inherit.gif" ALT="extended by "><B>org.apache.poi.xssf.usermodel.helpers.ColumnHelper</B>
+</PRE>
+<HR>
+<DL>
+<DT><PRE>public class <B>ColumnHelper</B><DT>extends java.lang.Object</DL>
+</PRE>
+
+<P>
+Helper class for dealing with the Column settings on
+  a CTWorksheet (the data part of a sheet).
+ Note - within POI, we use 0 based column indexes, but
+  the column definitions in the XML are 1 based!
+<P>
+
+<P>
+<HR>
+
+<P>
+
+<!-- ======== CONSTRUCTOR SUMMARY ======== -->
+
+<A NAME="constructor_summary"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+<B>Constructor Summary</B></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><B><A HREF="../../../../../../org/apache/poi/xssf/usermodel/helpers/ColumnHelper.html#ColumnHelper(org.openxmlformats.schemas.spreadsheetml.x2006.main.CTWorksheet)">ColumnHelper</A></B>(org.openxmlformats.schemas.spreadsheetml.x2006.main.CTWorksheet&nbsp;worksheet)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+</TABLE>
+&nbsp;
+<!-- ========== METHOD SUMMARY =========== -->
+
+<A NAME="method_summary"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+<B>Method Summary</B></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;org.openxmlformats.schemas.spreadsheetml.x2006.main.CTCols</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../org/apache/poi/xssf/usermodel/helpers/ColumnHelper.html#addCleanColIntoCols(org.openxmlformats.schemas.spreadsheetml.x2006.main.CTCols, org.openxmlformats.schemas.spreadsheetml.x2006.main.CTCol)">addCleanColIntoCols</A></B>(org.openxmlformats.schemas.spreadsheetml.x2006.main.CTCols&nbsp;cols,
+                    org.openxmlformats.schemas.spreadsheetml.x2006.main.CTCol&nbsp;col)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../org/apache/poi/xssf/usermodel/helpers/ColumnHelper.html#cleanColumns()">cleanColumns</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;org.openxmlformats.schemas.spreadsheetml.x2006.main.CTCol</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../org/apache/poi/xssf/usermodel/helpers/ColumnHelper.html#cloneCol(org.openxmlformats.schemas.spreadsheetml.x2006.main.CTCols, org.openxmlformats.schemas.spreadsheetml.x2006.main.CTCol)">cloneCol</A></B>(org.openxmlformats.schemas.spreadsheetml.x2006.main.CTCols&nbsp;cols,
+         org.openxmlformats.schemas.spreadsheetml.x2006.main.CTCol&nbsp;col)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../org/apache/poi/xssf/usermodel/helpers/ColumnHelper.html#columnExists(org.openxmlformats.schemas.spreadsheetml.x2006.main.CTCols, long)">columnExists</A></B>(org.openxmlformats.schemas.spreadsheetml.x2006.main.CTCols&nbsp;cols,
+             long&nbsp;index)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Does the column at the given 0 based index exist
+  in the supplied list of column definitions?</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;int</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../org/apache/poi/xssf/usermodel/helpers/ColumnHelper.html#getColDefaultStyle(long)">getColDefaultStyle</A></B>(long&nbsp;index)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;org.openxmlformats.schemas.spreadsheetml.x2006.main.CTCol</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../org/apache/poi/xssf/usermodel/helpers/ColumnHelper.html#getColumn(long, boolean)">getColumn</A></B>(long&nbsp;index,
+          boolean&nbsp;splitColumns)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns the Column at the given 0 based index</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;org.openxmlformats.schemas.spreadsheetml.x2006.main.CTCol</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../org/apache/poi/xssf/usermodel/helpers/ColumnHelper.html#getColumn1Based(long, boolean)">getColumn1Based</A></B>(long&nbsp;index1,
+                boolean&nbsp;splitColumns)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns the Column at the given 1 based index.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;int</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../org/apache/poi/xssf/usermodel/helpers/ColumnHelper.html#getIndexOfColumn(org.openxmlformats.schemas.spreadsheetml.x2006.main.CTCols, org.openxmlformats.schemas.spreadsheetml.x2006.main.CTCol)">getIndexOfColumn</A></B>(org.openxmlformats.schemas.spreadsheetml.x2006.main.CTCols&nbsp;cols,
+                 org.openxmlformats.schemas.spreadsheetml.x2006.main.CTCol&nbsp;col)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>protected &nbsp;org.openxmlformats.schemas.spreadsheetml.x2006.main.CTCol</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../org/apache/poi/xssf/usermodel/helpers/ColumnHelper.html#getOrCreateColumn1Based(long, boolean)">getOrCreateColumn1Based</A></B>(long&nbsp;index1,
+                        boolean&nbsp;splitColumns)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Return the CTCol at the given (0 based) column index,
+  creating it if required.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../org/apache/poi/xssf/usermodel/helpers/ColumnHelper.html#setColBestFit(long, boolean)">setColBestFit</A></B>(long&nbsp;index,
+              boolean&nbsp;bestFit)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../org/apache/poi/xssf/usermodel/helpers/ColumnHelper.html#setColDefaultStyle(long, org.apache.poi.ss.usermodel.CellStyle)">setColDefaultStyle</A></B>(long&nbsp;index,
+                   <A HREF="../../../../../../org/apache/poi/ss/usermodel/CellStyle.html" title="interface in org.apache.poi.ss.usermodel">CellStyle</A>&nbsp;style)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../org/apache/poi/xssf/usermodel/helpers/ColumnHelper.html#setColDefaultStyle(long, int)">setColDefaultStyle</A></B>(long&nbsp;index,
+                   int&nbsp;styleId)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../org/apache/poi/xssf/usermodel/helpers/ColumnHelper.html#setColHidden(long, boolean)">setColHidden</A></B>(long&nbsp;index,
+             boolean&nbsp;hidden)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../org/apache/poi/xssf/usermodel/helpers/ColumnHelper.html#setColumnAttributes(org.openxmlformats.schemas.spreadsheetml.x2006.main.CTCol, org.openxmlformats.schemas.spreadsheetml.x2006.main.CTCol)">setColumnAttributes</A></B>(org.openxmlformats.schemas.spreadsheetml.x2006.main.CTCol&nbsp;fromCol,
+                    org.openxmlformats.schemas.spreadsheetml.x2006.main.CTCol&nbsp;toCol)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../org/apache/poi/xssf/usermodel/helpers/ColumnHelper.html#setColWidth(long, double)">setColWidth</A></B>(long&nbsp;index,
+            double&nbsp;width)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../org/apache/poi/xssf/usermodel/helpers/ColumnHelper.html#setCustomWidth(long, boolean)">setCustomWidth</A></B>(long&nbsp;index,
+               boolean&nbsp;bestFit)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../org/apache/poi/xssf/usermodel/helpers/ColumnHelper.html#sortColumns(org.openxmlformats.schemas.spreadsheetml.x2006.main.CTCols)">sortColumns</A></B>(org.openxmlformats.schemas.spreadsheetml.x2006.main.CTCols&nbsp;newCols)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+</TABLE>
+&nbsp;<A NAME="methods_inherited_from_class_java.lang.Object"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#EEEEFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left"><B>Methods inherited from class java.lang.Object</B></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE>clone, equals, finalize, getClass, hashCode, notify, notifyAll, toString, wait, wait, wait</CODE></TD>
+</TR>
+</TABLE>
+&nbsp;
+<P>
+
+<!-- ========= CONSTRUCTOR DETAIL ======== -->
+
+<A NAME="constructor_detail"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="1"><FONT SIZE="+2">
+<B>Constructor Detail</B></FONT></TH>
+</TR>
+</TABLE>
+
+<A NAME="ColumnHelper(org.openxmlformats.schemas.spreadsheetml.x2006.main.CTWorksheet)"><!-- --></A><H3>
+ColumnHelper</H3>
+<PRE>
+public <B>ColumnHelper</B>(org.openxmlformats.schemas.spreadsheetml.x2006.main.CTWorksheet&nbsp;worksheet)</PRE>
+<DL>
+</DL>
+
+<!-- ============ METHOD DETAIL ========== -->
+
+<A NAME="method_detail"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="1"><FONT SIZE="+2">
+<B>Method Detail</B></FONT></TH>
+</TR>
+</TABLE>
+
+<A NAME="cleanColumns()"><!-- --></A><H3>
+cleanColumns</H3>
+<PRE>
+public void <B>cleanColumns</B>()</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="sortColumns(org.openxmlformats.schemas.spreadsheetml.x2006.main.CTCols)"><!-- --></A><H3>
+sortColumns</H3>
+<PRE>
+public static void <B>sortColumns</B>(org.openxmlformats.schemas.spreadsheetml.x2006.main.CTCols&nbsp;newCols)</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="cloneCol(org.openxmlformats.schemas.spreadsheetml.x2006.main.CTCols, org.openxmlformats.schemas.spreadsheetml.x2006.main.CTCol)"><!-- --></A><H3>
+cloneCol</H3>
+<PRE>
+public org.openxmlformats.schemas.spreadsheetml.x2006.main.CTCol <B>cloneCol</B>(org.openxmlformats.schemas.spreadsheetml.x2006.main.CTCols&nbsp;cols,
+                                                                          org.openxmlformats.schemas.spreadsheetml.x2006.main.CTCol&nbsp;col)</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getColumn(long, boolean)"><!-- --></A><H3>
+getColumn</H3>
+<PRE>
+public org.openxmlformats.schemas.spreadsheetml.x2006.main.CTCol <B>getColumn</B>(long&nbsp;index,
+                                                                           boolean&nbsp;splitColumns)</PRE>
+<DL>
+<DD>Returns the Column at the given 0 based index
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getColumn1Based(long, boolean)"><!-- --></A><H3>
+getColumn1Based</H3>
+<PRE>
+public org.openxmlformats.schemas.spreadsheetml.x2006.main.CTCol <B>getColumn1Based</B>(long&nbsp;index1,
+                                                                                 boolean&nbsp;splitColumns)</PRE>
+<DL>
+<DD>Returns the Column at the given 1 based index.
+ POI default is 0 based, but the file stores
+  as 1 based.
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="addCleanColIntoCols(org.openxmlformats.schemas.spreadsheetml.x2006.main.CTCols, org.openxmlformats.schemas.spreadsheetml.x2006.main.CTCol)"><!-- --></A><H3>
+addCleanColIntoCols</H3>
+<PRE>
+public org.openxmlformats.schemas.spreadsheetml.x2006.main.CTCols <B>addCleanColIntoCols</B>(org.openxmlformats.schemas.spreadsheetml.x2006.main.CTCols&nbsp;cols,
+                                                                                      org.openxmlformats.schemas.spreadsheetml.x2006.main.CTCol&nbsp;col)</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="columnExists(org.openxmlformats.schemas.spreadsheetml.x2006.main.CTCols, long)"><!-- --></A><H3>
+columnExists</H3>
+<PRE>
+public boolean <B>columnExists</B>(org.openxmlformats.schemas.spreadsheetml.x2006.main.CTCols&nbsp;cols,
+                            long&nbsp;index)</PRE>
+<DL>
+<DD>Does the column at the given 0 based index exist
+  in the supplied list of column definitions?
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setColumnAttributes(org.openxmlformats.schemas.spreadsheetml.x2006.main.CTCol, org.openxmlformats.schemas.spreadsheetml.x2006.main.CTCol)"><!-- --></A><H3>
+setColumnAttributes</H3>
+<PRE>
+public void <B>setColumnAttributes</B>(org.openxmlformats.schemas.spreadsheetml.x2006.main.CTCol&nbsp;fromCol,
+                                org.openxmlformats.schemas.spreadsheetml.x2006.main.CTCol&nbsp;toCol)</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setColBestFit(long, boolean)"><!-- --></A><H3>
+setColBestFit</H3>
+<PRE>
+public void <B>setColBestFit</B>(long&nbsp;index,
+                          boolean&nbsp;bestFit)</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setCustomWidth(long, boolean)"><!-- --></A><H3>
+setCustomWidth</H3>
+<PRE>
+public void <B>setCustomWidth</B>(long&nbsp;index,
+                           boolean&nbsp;bestFit)</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setColWidth(long, double)"><!-- --></A><H3>
+setColWidth</H3>
+<PRE>
+public void <B>setColWidth</B>(long&nbsp;index,
+                        double&nbsp;width)</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setColHidden(long, boolean)"><!-- --></A><H3>
+setColHidden</H3>
+<PRE>
+public void <B>setColHidden</B>(long&nbsp;index,
+                         boolean&nbsp;hidden)</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getOrCreateColumn1Based(long, boolean)"><!-- --></A><H3>
+getOrCreateColumn1Based</H3>
+<PRE>
+protected org.openxmlformats.schemas.spreadsheetml.x2006.main.CTCol <B>getOrCreateColumn1Based</B>(long&nbsp;index1,
+                                                                                            boolean&nbsp;splitColumns)</PRE>
+<DL>
+<DD>Return the CTCol at the given (0 based) column index,
+  creating it if required.
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setColDefaultStyle(long, org.apache.poi.ss.usermodel.CellStyle)"><!-- --></A><H3>
+setColDefaultStyle</H3>
+<PRE>
+public void <B>setColDefaultStyle</B>(long&nbsp;index,
+                               <A HREF="../../../../../../org/apache/poi/ss/usermodel/CellStyle.html" title="interface in org.apache.poi.ss.usermodel">CellStyle</A>&nbsp;style)</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setColDefaultStyle(long, int)"><!-- --></A><H3>
+setColDefaultStyle</H3>
+<PRE>
+public void <B>setColDefaultStyle</B>(long&nbsp;index,
+                               int&nbsp;styleId)</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getColDefaultStyle(long)"><!-- --></A><H3>
+getColDefaultStyle</H3>
+<PRE>
+public int <B>getColDefaultStyle</B>(long&nbsp;index)</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getIndexOfColumn(org.openxmlformats.schemas.spreadsheetml.x2006.main.CTCols, org.openxmlformats.schemas.spreadsheetml.x2006.main.CTCol)"><!-- --></A><H3>
+getIndexOfColumn</H3>
+<PRE>
+public int <B>getIndexOfColumn</B>(org.openxmlformats.schemas.spreadsheetml.x2006.main.CTCols&nbsp;cols,
+                            org.openxmlformats.schemas.spreadsheetml.x2006.main.CTCol&nbsp;col)</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<!-- ========= END OF CLASS DATA ========= -->
+<HR>
+
+
+<!-- ======= START OF BOTTOM NAVBAR ====== -->
+<A NAME="navbar_bottom"><!-- --></A>
+<A HREF="#skip-navbar_bottom" title="Skip navigation links"></A>
+<TABLE BORDER="0" WIDTH="100%" CELLPADDING="1" CELLSPACING="0" SUMMARY="">
+<TR>
+<TD COLSPAN=2 BGCOLOR="#EEEEFF" CLASS="NavBarCell1">
+<A NAME="navbar_bottom_firstrow"><!-- --></A>
+<TABLE BORDER="0" CELLPADDING="0" CELLSPACING="3" SUMMARY="">
+  <TR ALIGN="center" VALIGN="top">
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../../overview-summary.html"><FONT CLASS="NavBarFont1"><B>Overview</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="package-summary.html"><FONT CLASS="NavBarFont1"><B>Package</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#FFFFFF" CLASS="NavBarCell1Rev"> &nbsp;<FONT CLASS="NavBarFont1Rev"><B>Class</B></FONT>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="class-use/ColumnHelper.html"><FONT CLASS="NavBarFont1"><B>Use</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="package-tree.html"><FONT CLASS="NavBarFont1"><B>Tree</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../../deprecated-list.html"><FONT CLASS="NavBarFont1"><B>Deprecated</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../../index-all.html"><FONT CLASS="NavBarFont1"><B>Index</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../../help-doc.html"><FONT CLASS="NavBarFont1"><B>Help</B></FONT></A>&nbsp;</TD>
+  </TR>
+</TABLE>
+</TD>
+<TD ALIGN="right" VALIGN="top" ROWSPAN=3><EM>
+</EM>
+</TD>
+</TR>
+
+<TR>
+<TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
+&nbsp;PREV CLASS&nbsp;
+&nbsp;<A HREF="../../../../../../org/apache/poi/xssf/usermodel/helpers/HeaderFooterHelper.html" title="class in org.apache.poi.xssf.usermodel.helpers"><B>NEXT CLASS</B></A></FONT></TD>
+<TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
+  <A HREF="../../../../../../index.html?org/apache/poi/xssf/usermodel/helpers/ColumnHelper.html" target="_top"><B>FRAMES</B></A>  &nbsp;
+&nbsp;<A HREF="ColumnHelper.html" target="_top"><B>NO FRAMES</B></A>  &nbsp;
+&nbsp;<SCRIPT type="text/javascript">
+  <!--
+  if(window==top) {
+    document.writeln('<A HREF="../../../../../../allclasses-noframe.html"><B>All Classes</B></A>');
+  }
+  //-->
+</SCRIPT>
+<NOSCRIPT>
+  <A HREF="../../../../../../allclasses-noframe.html"><B>All Classes</B></A>
+</NOSCRIPT>
+
+
+</FONT></TD>
+</TR>
+<TR>
+<TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
+  SUMMARY:&nbsp;NESTED&nbsp;|&nbsp;FIELD&nbsp;|&nbsp;<A HREF="#constructor_summary">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_summary">METHOD</A></FONT></TD>
+<TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
+DETAIL:&nbsp;FIELD&nbsp;|&nbsp;<A HREF="#constructor_detail">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_detail">METHOD</A></FONT></TD>
+</TR>
+</TABLE>
+<A NAME="skip-navbar_bottom"></A>
+<!-- ======== END OF BOTTOM NAVBAR ======= -->
+
+<HR>
+
+                <i>Copyright 2014 The Apache Software Foundation or
+        its licensors, as applicable.</i>
+            
+</BODY>
+</HTML>

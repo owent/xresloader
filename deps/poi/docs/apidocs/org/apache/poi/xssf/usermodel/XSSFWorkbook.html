@@ -1,0 +1,2684 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!--NewPage-->
+<HTML>
+<HEAD>
+<TITLE>
+XSSFWorkbook (POI API Documentation)
+</TITLE>
+
+<META NAME="keywords" CONTENT="org.apache.poi.xssf.usermodel.XSSFWorkbook class">
+
+<LINK REL ="stylesheet" TYPE="text/css" HREF="../../../../../stylesheet.css" TITLE="Style">
+
+<SCRIPT type="text/javascript">
+function windowTitle()
+{
+    parent.document.title="XSSFWorkbook (POI API Documentation)";
+}
+</SCRIPT>
+<NOSCRIPT>
+</NOSCRIPT>
+
+</HEAD>
+
+<BODY BGCOLOR="white" onload="windowTitle();">
+
+
+<!-- ========= START OF TOP NAVBAR ======= -->
+<A NAME="navbar_top"><!-- --></A>
+<A HREF="#skip-navbar_top" title="Skip navigation links"></A>
+<TABLE BORDER="0" WIDTH="100%" CELLPADDING="1" CELLSPACING="0" SUMMARY="">
+<TR>
+<TD COLSPAN=2 BGCOLOR="#EEEEFF" CLASS="NavBarCell1">
+<A NAME="navbar_top_firstrow"><!-- --></A>
+<TABLE BORDER="0" CELLPADDING="0" CELLSPACING="3" SUMMARY="">
+  <TR ALIGN="center" VALIGN="top">
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../overview-summary.html"><FONT CLASS="NavBarFont1"><B>Overview</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="package-summary.html"><FONT CLASS="NavBarFont1"><B>Package</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#FFFFFF" CLASS="NavBarCell1Rev"> &nbsp;<FONT CLASS="NavBarFont1Rev"><B>Class</B></FONT>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="class-use/XSSFWorkbook.html"><FONT CLASS="NavBarFont1"><B>Use</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="package-tree.html"><FONT CLASS="NavBarFont1"><B>Tree</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../deprecated-list.html"><FONT CLASS="NavBarFont1"><B>Deprecated</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../index-all.html"><FONT CLASS="NavBarFont1"><B>Index</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../help-doc.html"><FONT CLASS="NavBarFont1"><B>Help</B></FONT></A>&nbsp;</TD>
+  </TR>
+</TABLE>
+</TD>
+<TD ALIGN="right" VALIGN="top" ROWSPAN=3><EM>
+</EM>
+</TD>
+</TR>
+
+<TR>
+<TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
+&nbsp;<A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFVMLDrawing.html" title="class in org.apache.poi.xssf.usermodel"><B>PREV CLASS</B></A>&nbsp;
+&nbsp;NEXT CLASS</FONT></TD>
+<TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
+  <A HREF="../../../../../index.html?org/apache/poi/xssf/usermodel/XSSFWorkbook.html" target="_top"><B>FRAMES</B></A>  &nbsp;
+&nbsp;<A HREF="XSSFWorkbook.html" target="_top"><B>NO FRAMES</B></A>  &nbsp;
+&nbsp;<SCRIPT type="text/javascript">
+  <!--
+  if(window==top) {
+    document.writeln('<A HREF="../../../../../allclasses-noframe.html"><B>All Classes</B></A>');
+  }
+  //-->
+</SCRIPT>
+<NOSCRIPT>
+  <A HREF="../../../../../allclasses-noframe.html"><B>All Classes</B></A>
+</NOSCRIPT>
+
+
+</FONT></TD>
+</TR>
+<TR>
+<TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
+  SUMMARY:&nbsp;NESTED&nbsp;|&nbsp;<A HREF="#field_summary">FIELD</A>&nbsp;|&nbsp;<A HREF="#constructor_summary">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_summary">METHOD</A></FONT></TD>
+<TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
+DETAIL:&nbsp;<A HREF="#field_detail">FIELD</A>&nbsp;|&nbsp;<A HREF="#constructor_detail">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_detail">METHOD</A></FONT></TD>
+</TR>
+</TABLE>
+<A NAME="skip-navbar_top"></A>
+<!-- ========= END OF TOP NAVBAR ========= -->
+
+<HR>
+<!-- ======== START OF CLASS DATA ======== -->
+<H2>
+<FONT SIZE="-1">
+org.apache.poi.xssf.usermodel</FONT>
+<BR>
+Class XSSFWorkbook</H2>
+<PRE>
+java.lang.Object
+  <IMG SRC="../../../../../resources/inherit.gif" ALT="extended by "><A HREF="../../../../../org/apache/poi/POIXMLDocumentPart.html" title="class in org.apache.poi">org.apache.poi.POIXMLDocumentPart</A>
+      <IMG SRC="../../../../../resources/inherit.gif" ALT="extended by "><A HREF="../../../../../org/apache/poi/POIXMLDocument.html" title="class in org.apache.poi">org.apache.poi.POIXMLDocument</A>
+          <IMG SRC="../../../../../resources/inherit.gif" ALT="extended by "><B>org.apache.poi.xssf.usermodel.XSSFWorkbook</B>
+</PRE>
+<DL>
+<DT><B>All Implemented Interfaces:</B> <DD>java.lang.Iterable&lt;<A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFSheet.html" title="class in org.apache.poi.xssf.usermodel">XSSFSheet</A>&gt;, <A HREF="../../../../../org/apache/poi/ss/usermodel/Workbook.html" title="interface in org.apache.poi.ss.usermodel">Workbook</A></DD>
+</DL>
+<HR>
+<DL>
+<DT><PRE>public class <B>XSSFWorkbook</B><DT>extends <A HREF="../../../../../org/apache/poi/POIXMLDocument.html" title="class in org.apache.poi">POIXMLDocument</A><DT>implements <A HREF="../../../../../org/apache/poi/ss/usermodel/Workbook.html" title="interface in org.apache.poi.ss.usermodel">Workbook</A>, java.lang.Iterable&lt;<A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFSheet.html" title="class in org.apache.poi.xssf.usermodel">XSSFSheet</A>&gt;</DL>
+</PRE>
+
+<P>
+High level representation of a SpreadsheetML workbook.  This is the first object most users
+ will construct whether they are reading or writing a workbook.  It is also the
+ top level object for creating new sheets/etc.
+<P>
+
+<P>
+<HR>
+
+<P>
+<!-- =========== FIELD SUMMARY =========== -->
+
+<A NAME="field_summary"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+<B>Field Summary</B></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;float</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFWorkbook.html#DEFAULT_CHARACTER_WIDTH">DEFAULT_CHARACTER_WIDTH</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Width of one character of the default font in pixels.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;int</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFWorkbook.html#PICTURE_TYPE_BMP">PICTURE_TYPE_BMP</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;int</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFWorkbook.html#PICTURE_TYPE_EPS">PICTURE_TYPE_EPS</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;int</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFWorkbook.html#PICTURE_TYPE_GIF">PICTURE_TYPE_GIF</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Images formats supported by XSSF but not by HSSF</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;int</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFWorkbook.html#PICTURE_TYPE_TIFF">PICTURE_TYPE_TIFF</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;int</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFWorkbook.html#PICTURE_TYPE_WPG">PICTURE_TYPE_WPG</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+</TABLE>
+&nbsp;<A NAME="fields_inherited_from_class_org.apache.poi.POIXMLDocument"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#EEEEFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left"><B>Fields inherited from class org.apache.poi.<A HREF="../../../../../org/apache/poi/POIXMLDocument.html" title="class in org.apache.poi">POIXMLDocument</A></B></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><A HREF="../../../../../org/apache/poi/POIXMLDocument.html#DOCUMENT_CREATOR">DOCUMENT_CREATOR</A>, <A HREF="../../../../../org/apache/poi/POIXMLDocument.html#OLE_OBJECT_REL_TYPE">OLE_OBJECT_REL_TYPE</A>, <A HREF="../../../../../org/apache/poi/POIXMLDocument.html#PACK_OBJECT_REL_TYPE">PACK_OBJECT_REL_TYPE</A></CODE></TD>
+</TR>
+</TABLE>
+&nbsp;<A NAME="fields_inherited_from_class_org.apache.poi.POIXMLDocumentPart"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#EEEEFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left"><B>Fields inherited from class org.apache.poi.<A HREF="../../../../../org/apache/poi/POIXMLDocumentPart.html" title="class in org.apache.poi">POIXMLDocumentPart</A></B></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><A HREF="../../../../../org/apache/poi/POIXMLDocumentPart.html#DEFAULT_XML_OPTIONS">DEFAULT_XML_OPTIONS</A></CODE></TD>
+</TR>
+</TABLE>
+&nbsp;<A NAME="fields_inherited_from_class_org.apache.poi.ss.usermodel.Workbook"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#EEEEFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left"><B>Fields inherited from interface org.apache.poi.ss.usermodel.<A HREF="../../../../../org/apache/poi/ss/usermodel/Workbook.html" title="interface in org.apache.poi.ss.usermodel">Workbook</A></B></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><A HREF="../../../../../org/apache/poi/ss/usermodel/Workbook.html#PICTURE_TYPE_DIB">PICTURE_TYPE_DIB</A>, <A HREF="../../../../../org/apache/poi/ss/usermodel/Workbook.html#PICTURE_TYPE_EMF">PICTURE_TYPE_EMF</A>, <A HREF="../../../../../org/apache/poi/ss/usermodel/Workbook.html#PICTURE_TYPE_JPEG">PICTURE_TYPE_JPEG</A>, <A HREF="../../../../../org/apache/poi/ss/usermodel/Workbook.html#PICTURE_TYPE_PICT">PICTURE_TYPE_PICT</A>, <A HREF="../../../../../org/apache/poi/ss/usermodel/Workbook.html#PICTURE_TYPE_PNG">PICTURE_TYPE_PNG</A>, <A HREF="../../../../../org/apache/poi/ss/usermodel/Workbook.html#PICTURE_TYPE_WMF">PICTURE_TYPE_WMF</A>, <A HREF="../../../../../org/apache/poi/ss/usermodel/Workbook.html#SHEET_STATE_HIDDEN">SHEET_STATE_HIDDEN</A>, <A HREF="../../../../../org/apache/poi/ss/usermodel/Workbook.html#SHEET_STATE_VERY_HIDDEN">SHEET_STATE_VERY_HIDDEN</A>, <A HREF="../../../../../org/apache/poi/ss/usermodel/Workbook.html#SHEET_STATE_VISIBLE">SHEET_STATE_VISIBLE</A></CODE></TD>
+</TR>
+</TABLE>
+&nbsp;
+<!-- ======== CONSTRUCTOR SUMMARY ======== -->
+
+<A NAME="constructor_summary"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+<B>Constructor Summary</B></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFWorkbook.html#XSSFWorkbook()">XSSFWorkbook</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Create a new SpreadsheetML workbook.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFWorkbook.html#XSSFWorkbook(java.io.InputStream)">XSSFWorkbook</A></B>(java.io.InputStream&nbsp;is)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Constructs a XSSFWorkbook object, by buffering the whole stream into memory
+  and then opening an <A HREF="../../../../../org/apache/poi/openxml4j/opc/OPCPackage.html" title="class in org.apache.poi.openxml4j.opc"><CODE>OPCPackage</CODE></A> object for it.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFWorkbook.html#XSSFWorkbook(org.apache.poi.openxml4j.opc.OPCPackage)">XSSFWorkbook</A></B>(<A HREF="../../../../../org/apache/poi/openxml4j/opc/OPCPackage.html" title="class in org.apache.poi.openxml4j.opc">OPCPackage</A>&nbsp;pkg)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Constructs a XSSFWorkbook object given a OpenXML4J <code>Package</code> object,
+  see <a href="http://poi.apache.org/oxml4j/">http://poi.apache.org/oxml4j/</a>.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFWorkbook.html#XSSFWorkbook(java.lang.String)">XSSFWorkbook</A></B>(java.lang.String&nbsp;path)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;<I></I>&nbsp;</TD>
+</TR>
+</TABLE>
+&nbsp;
+<!-- ========== METHOD SUMMARY =========== -->
+
+<A NAME="method_summary"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+<B>Method Summary</B></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;int</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFWorkbook.html#addPicture(byte[], int)">addPicture</A></B>(byte[]&nbsp;pictureData,
+           int&nbsp;format)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Adds a picture to the workbook.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;int</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFWorkbook.html#addPicture(java.io.InputStream, int)">addPicture</A></B>(java.io.InputStream&nbsp;is,
+           int&nbsp;format)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Adds a picture to the workbook.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFWorkbook.html#addToolPack(org.apache.poi.ss.formula.udf.UDFFinder)">addToolPack</A></B>(<A HREF="../../../../../org/apache/poi/ss/formula/udf/UDFFinder.html" title="interface in org.apache.poi.ss.formula.udf">UDFFinder</A>&nbsp;toopack)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Register a new toolpack in this workbook.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFSheet.html" title="class in org.apache.poi.xssf.usermodel">XSSFSheet</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFWorkbook.html#cloneSheet(int)">cloneSheet</A></B>(int&nbsp;sheetNum)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Create an XSSFSheet from an existing sheet in the XSSFWorkbook.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>protected &nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFWorkbook.html#commit()">commit</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Save the content in the underlying package part.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFCellStyle.html" title="class in org.apache.poi.xssf.usermodel">XSSFCellStyle</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFWorkbook.html#createCellStyle()">createCellStyle</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Create a new XSSFCellStyle and add it to the workbook's style table</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFDataFormat.html" title="class in org.apache.poi.xssf.usermodel">XSSFDataFormat</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFWorkbook.html#createDataFormat()">createDataFormat</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns the instance of XSSFDataFormat for this workbook.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>protected &nbsp;<A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFDialogsheet.html" title="class in org.apache.poi.xssf.usermodel">XSSFDialogsheet</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFWorkbook.html#createDialogsheet(java.lang.String, org.openxmlformats.schemas.spreadsheetml.x2006.main.CTDialogsheet)">createDialogsheet</A></B>(java.lang.String&nbsp;sheetname,
+                  org.openxmlformats.schemas.spreadsheetml.x2006.main.CTDialogsheet&nbsp;dialogsheet)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFFont.html" title="class in org.apache.poi.xssf.usermodel">XSSFFont</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFWorkbook.html#createFont()">createFont</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Create a new Font and add it to the workbook's font table</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFName.html" title="class in org.apache.poi.xssf.usermodel">XSSFName</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFWorkbook.html#createName()">createName</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Creates a new (uninitialised) defined name in this workbook</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFSheet.html" title="class in org.apache.poi.xssf.usermodel">XSSFSheet</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFWorkbook.html#createSheet()">createSheet</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Create an XSSFSheet for this workbook, adds it to the sheets and returns
+ the high level representation.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFSheet.html" title="class in org.apache.poi.xssf.usermodel">XSSFSheet</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFWorkbook.html#createSheet(java.lang.String)">createSheet</A></B>(java.lang.String&nbsp;sheetname)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Create a new sheet for this Workbook and return the high level representation.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFFont.html" title="class in org.apache.poi.xssf.usermodel">XSSFFont</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFWorkbook.html#findFont(short, short, short, java.lang.String, boolean, boolean, short, byte)">findFont</A></B>(short&nbsp;boldWeight,
+         short&nbsp;color,
+         short&nbsp;fontHeight,
+         java.lang.String&nbsp;name,
+         boolean&nbsp;italic,
+         boolean&nbsp;strikeout,
+         short&nbsp;typeOffset,
+         byte&nbsp;underline)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Finds a font that matches the one with the supplied attributes</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;int</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFWorkbook.html#getActiveSheetIndex()">getActiveSheetIndex</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Convenience method to get the active sheet.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;java.util.List&lt;<A HREF="../../../../../org/apache/poi/openxml4j/opc/PackagePart.html" title="class in org.apache.poi.openxml4j.opc">PackagePart</A>&gt;</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFWorkbook.html#getAllEmbedds()">getAllEmbedds</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Get the document's embedded files.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;java.util.List&lt;<A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFPictureData.html" title="class in org.apache.poi.xssf.usermodel">XSSFPictureData</A>&gt;</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFWorkbook.html#getAllPictures()">getAllPictures</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gets all pictures from the Workbook.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../../../org/apache/poi/xssf/model/CalculationChain.html" title="class in org.apache.poi.xssf.model">CalculationChain</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFWorkbook.html#getCalculationChain()">getCalculationChain</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Return the CalculationChain object for this workbook</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFCellStyle.html" title="class in org.apache.poi.xssf.usermodel">XSSFCellStyle</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFWorkbook.html#getCellStyleAt(short)">getCellStyleAt</A></B>(short&nbsp;idx)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Get the cell style object at the given index</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFCreationHelper.html" title="class in org.apache.poi.xssf.usermodel">XSSFCreationHelper</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFWorkbook.html#getCreationHelper()">getCreationHelper</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns an object that handles instantiating concrete
+  classes of the various instances for XSSF.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;org.openxmlformats.schemas.spreadsheetml.x2006.main.CTWorkbook</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFWorkbook.html#getCTWorkbook()">getCTWorkbook</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Return the underlying XML bean</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;java.util.Collection&lt;<A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFMap.html" title="class in org.apache.poi.xssf.usermodel">XSSFMap</A>&gt;</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFWorkbook.html#getCustomXMLMappings()">getCustomXMLMappings</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;int</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFWorkbook.html#getFirstVisibleTab()">getFirstVisibleTab</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gets the first tab that is displayed in the list of tabs in excel.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFFont.html" title="class in org.apache.poi.xssf.usermodel">XSSFFont</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFWorkbook.html#getFontAt(short)">getFontAt</A></B>(short&nbsp;idx)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Get the font at the given index number</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFWorkbook.html#getForceFormulaRecalculation()">getForceFormulaRecalculation</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Whether Excel will be asked to recalculate all formulas when the  workbook is opened.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../../../org/apache/poi/xssf/model/MapInfo.html" title="class in org.apache.poi.xssf.model">MapInfo</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFWorkbook.html#getMapInfo()">getMapInfo</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../../../org/apache/poi/ss/usermodel/Row.MissingCellPolicy.html" title="class in org.apache.poi.ss.usermodel">Row.MissingCellPolicy</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFWorkbook.html#getMissingCellPolicy()">getMissingCellPolicy</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Retrieves the current policy on what to do when
+  getting missing or blank cells from a row.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFName.html" title="class in org.apache.poi.xssf.usermodel">XSSFName</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFWorkbook.html#getName(java.lang.String)">getName</A></B>(java.lang.String&nbsp;name)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFName.html" title="class in org.apache.poi.xssf.usermodel">XSSFName</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFWorkbook.html#getNameAt(int)">getNameAt</A></B>(int&nbsp;nameIndex)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;int</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFWorkbook.html#getNameIndex(java.lang.String)">getNameIndex</A></B>(java.lang.String&nbsp;name)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gets the named range index by his name
+ <i>Note:</i>Excel named ranges are case-insensitive and
+ this method performs a case-insensitive search.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;short</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFWorkbook.html#getNumberOfFonts()">getNumberOfFonts</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Get the number of fonts in the this workbook</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;int</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFWorkbook.html#getNumberOfNames()">getNumberOfNames</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Get the number of named ranges in the this workbook</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;int</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFWorkbook.html#getNumberOfSheets()">getNumberOfSheets</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Get the number of worksheets in the this workbook</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;short</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFWorkbook.html#getNumCellStyles()">getNumCellStyles</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Get the number of styles the workbook contains</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;java.lang.String</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFWorkbook.html#getPrintArea(int)">getPrintArea</A></B>(int&nbsp;sheetIndex)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Retrieves the reference for the printarea of the specified sheet, the sheet name is appended to the reference even if it was not specified.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../../../org/apache/poi/xssf/model/SharedStringsTable.html" title="class in org.apache.poi.xssf.model">SharedStringsTable</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFWorkbook.html#getSharedStringSource()">getSharedStringSource</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns SharedStringsTable - tha cache of string for this workbook</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFSheet.html" title="class in org.apache.poi.xssf.usermodel">XSSFSheet</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFWorkbook.html#getSheet(java.lang.String)">getSheet</A></B>(java.lang.String&nbsp;name)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Get sheet with the given name (case insensitive match)</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFSheet.html" title="class in org.apache.poi.xssf.usermodel">XSSFSheet</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFWorkbook.html#getSheetAt(int)">getSheetAt</A></B>(int&nbsp;index)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Get the XSSFSheet object at the given index.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;int</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFWorkbook.html#getSheetIndex(org.apache.poi.ss.usermodel.Sheet)">getSheetIndex</A></B>(<A HREF="../../../../../org/apache/poi/ss/usermodel/Sheet.html" title="interface in org.apache.poi.ss.usermodel">Sheet</A>&nbsp;sheet)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns the index of the given sheet</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;int</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFWorkbook.html#getSheetIndex(java.lang.String)">getSheetIndex</A></B>(java.lang.String&nbsp;name)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns the index of the sheet by his name (case insensitive match)</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;java.lang.String</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFWorkbook.html#getSheetName(int)">getSheetName</A></B>(int&nbsp;sheetIx)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Get the sheet name</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../../../org/apache/poi/xssf/model/StylesTable.html" title="class in org.apache.poi.xssf.model">StylesTable</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFWorkbook.html#getStylesSource()">getStylesSource</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Return a object representing a collection of shared objects used for styling content,
+ e.g.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../../../org/apache/poi/xssf/model/ThemesTable.html" title="class in org.apache.poi.xssf.model">ThemesTable</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFWorkbook.html#getTheme()">getTheme</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns the Theme of current workbook.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>protected &nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFWorkbook.html#isDate1904()">isDate1904</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gets a boolean value that indicates whether the date systems used in the workbook starts in 1904.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFWorkbook.html#isHidden()">isHidden</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFWorkbook.html#isMacroEnabled()">isMacroEnabled</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Are we a normal workbook (.xlsx), or a
+  macro enabled workbook (.xlsm)?</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFWorkbook.html#isRevisionLocked()">isRevisionLocked</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Specifies a boolean value that indicates whether the workbook is locked for revisions.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFWorkbook.html#isSheetHidden(int)">isSheetHidden</A></B>(int&nbsp;sheetIx)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Check whether a sheet is hidden.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFWorkbook.html#isSheetVeryHidden(int)">isSheetVeryHidden</A></B>(int&nbsp;sheetIx)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Check whether a sheet is very hidden.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFWorkbook.html#isStructureLocked()">isStructureLocked</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Specifies a boolean value that indicates whether structure of workbook is locked.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFWorkbook.html#isWindowsLocked()">isWindowsLocked</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Specifies a boolean value that indicates whether the windows that comprise the workbook are locked.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;java.util.Iterator&lt;<A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFSheet.html" title="class in org.apache.poi.xssf.usermodel">XSSFSheet</A>&gt;</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFWorkbook.html#iterator()">iterator</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Allows foreach loops:</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFWorkbook.html#lockRevision()">lockRevision</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Locks the workbook for revisions.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFWorkbook.html#lockStructure()">lockStructure</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Locks the structure of workbook.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFWorkbook.html#lockWindows()">lockWindows</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Locks the windows that comprise the workbook.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>protected static&nbsp;<A HREF="../../../../../org/apache/poi/openxml4j/opc/OPCPackage.html" title="class in org.apache.poi.openxml4j.opc">OPCPackage</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFWorkbook.html#newPackage()">newPackage</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Create a new SpreadsheetML package and setup the default minimal content</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>protected &nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFWorkbook.html#onDeleteFormula(org.apache.poi.xssf.usermodel.XSSFCell)">onDeleteFormula</A></B>(<A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFCell.html" title="class in org.apache.poi.xssf.usermodel">XSSFCell</A>&nbsp;cell)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Fired when a formula is deleted from this workbook,
+ for example when calling cell.setCellFormula(null)</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>protected &nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFWorkbook.html#onDocumentRead()">onDocumentRead</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Fired when a package part is read</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFWorkbook.html#removeName(int)">removeName</A></B>(int&nbsp;nameIndex)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Remove the defined name at the specified index</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFWorkbook.html#removeName(java.lang.String)">removeName</A></B>(java.lang.String&nbsp;name)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Remove a defined name by name</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFWorkbook.html#removePrintArea(int)">removePrintArea</A></B>(int&nbsp;sheetIndex)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Delete the printarea for the sheet specified</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFWorkbook.html#removeSheetAt(int)">removeSheetAt</A></B>(int&nbsp;index)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Removes sheet at the given index.<p/>
+
+ Care must be taken if the removed sheet is the currently active or only selected sheet in
+ the workbook.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFWorkbook.html#setActiveSheet(int)">setActiveSheet</A></B>(int&nbsp;index)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Convenience method to set the active sheet.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFWorkbook.html#setFirstVisibleTab(int)">setFirstVisibleTab</A></B>(int&nbsp;index)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sets the first tab that is displayed in the list of tabs in excel.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFWorkbook.html#setForceFormulaRecalculation(boolean)">setForceFormulaRecalculation</A></B>(boolean&nbsp;value)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Whether the application shall perform a full recalculation when the workbook is opened.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFWorkbook.html#setHidden(boolean)">setHidden</A></B>(boolean&nbsp;hiddenFlag)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFWorkbook.html#setMissingCellPolicy(org.apache.poi.ss.usermodel.Row.MissingCellPolicy)">setMissingCellPolicy</A></B>(<A HREF="../../../../../org/apache/poi/ss/usermodel/Row.MissingCellPolicy.html" title="class in org.apache.poi.ss.usermodel">Row.MissingCellPolicy</A>&nbsp;missingCellPolicy)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sets the policy on what to do when
+  getting missing or blank cells from a row.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFWorkbook.html#setPrintArea(int, int, int, int, int)">setPrintArea</A></B>(int&nbsp;sheetIndex,
+             int&nbsp;startColumn,
+             int&nbsp;endColumn,
+             int&nbsp;startRow,
+             int&nbsp;endRow)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;For the Convenience of Java Programmers maintaining pointers.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFWorkbook.html#setPrintArea(int, java.lang.String)">setPrintArea</A></B>(int&nbsp;sheetIndex,
+             java.lang.String&nbsp;reference)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sets the printarea for the sheet provided</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFWorkbook.html#setRepeatingRowsAndColumns(int, int, int, int, int)">setRepeatingRowsAndColumns</A></B>(int&nbsp;sheetIndex,
+                           int&nbsp;startColumn,
+                           int&nbsp;endColumn,
+                           int&nbsp;startRow,
+                           int&nbsp;endRow)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;<I>use <A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFSheet.html#setRepeatingRows(org.apache.poi.ss.util.CellRangeAddress)"><CODE>XSSFSheet.setRepeatingRows(CellRangeAddress)</CODE></A>
+        or <A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFSheet.html#setRepeatingColumns(org.apache.poi.ss.util.CellRangeAddress)"><CODE>XSSFSheet.setRepeatingColumns(CellRangeAddress)</CODE></A></I></TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFWorkbook.html#setSelectedTab(int)">setSelectedTab</A></B>(int&nbsp;index)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;We only set one sheet as selected for compatibility with HSSF.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFWorkbook.html#setSheetHidden(int, boolean)">setSheetHidden</A></B>(int&nbsp;sheetIx,
+               boolean&nbsp;hidden)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sets the visible state of this sheet.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFWorkbook.html#setSheetHidden(int, int)">setSheetHidden</A></B>(int&nbsp;sheetIx,
+               int&nbsp;state)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Hide or unhide a sheet.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFWorkbook.html#setSheetName(int, java.lang.String)">setSheetName</A></B>(int&nbsp;sheetIndex,
+             java.lang.String&nbsp;sheetname)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Set the sheet name.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFWorkbook.html#setSheetOrder(java.lang.String, int)">setSheetOrder</A></B>(java.lang.String&nbsp;sheetname,
+              int&nbsp;pos)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;sets the order of appearance for a given sheet.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFWorkbook.html#unLockRevision()">unLockRevision</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Unlocks the workbook for revisions.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFWorkbook.html#unLockStructure()">unLockStructure</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Unlocks the structure of workbook.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFWorkbook.html#unLockWindows()">unLockWindows</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Unlocks the windows that comprise the workbook.</TD>
+</TR>
+</TABLE>
+&nbsp;<A NAME="methods_inherited_from_class_org.apache.poi.POIXMLDocument"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#EEEEFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left"><B>Methods inherited from class org.apache.poi.<A HREF="../../../../../org/apache/poi/POIXMLDocument.html" title="class in org.apache.poi">POIXMLDocument</A></B></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><A HREF="../../../../../org/apache/poi/POIXMLDocument.html#getCorePart()">getCorePart</A>, <A HREF="../../../../../org/apache/poi/POIXMLDocument.html#getPackage()">getPackage</A>, <A HREF="../../../../../org/apache/poi/POIXMLDocument.html#getProperties()">getProperties</A>, <A HREF="../../../../../org/apache/poi/POIXMLDocument.html#getRelatedByType(java.lang.String)">getRelatedByType</A>, <A HREF="../../../../../org/apache/poi/POIXMLDocument.html#hasOOXMLHeader(java.io.InputStream)">hasOOXMLHeader</A>, <A HREF="../../../../../org/apache/poi/POIXMLDocument.html#load(org.apache.poi.POIXMLFactory)">load</A>, <A HREF="../../../../../org/apache/poi/POIXMLDocument.html#openPackage(java.lang.String)">openPackage</A>, <A HREF="../../../../../org/apache/poi/POIXMLDocument.html#write(java.io.OutputStream)">write</A></CODE></TD>
+</TR>
+</TABLE>
+&nbsp;<A NAME="methods_inherited_from_class_org.apache.poi.POIXMLDocumentPart"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#EEEEFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left"><B>Methods inherited from class org.apache.poi.<A HREF="../../../../../org/apache/poi/POIXMLDocumentPart.html" title="class in org.apache.poi">POIXMLDocumentPart</A></B></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><A HREF="../../../../../org/apache/poi/POIXMLDocumentPart.html#addRelation(java.lang.String, org.apache.poi.POIXMLDocumentPart)">addRelation</A>, <A HREF="../../../../../org/apache/poi/POIXMLDocumentPart.html#createRelationship(org.apache.poi.POIXMLRelation, org.apache.poi.POIXMLFactory)">createRelationship</A>, <A HREF="../../../../../org/apache/poi/POIXMLDocumentPart.html#createRelationship(org.apache.poi.POIXMLRelation, org.apache.poi.POIXMLFactory, int)">createRelationship</A>, <A HREF="../../../../../org/apache/poi/POIXMLDocumentPart.html#createRelationship(org.apache.poi.POIXMLRelation, org.apache.poi.POIXMLFactory, int, boolean)">createRelationship</A>, <A HREF="../../../../../org/apache/poi/POIXMLDocumentPart.html#getPackagePart()">getPackagePart</A>, <A HREF="../../../../../org/apache/poi/POIXMLDocumentPart.html#getPackageRelationship()">getPackageRelationship</A>, <A HREF="../../../../../org/apache/poi/POIXMLDocumentPart.html#getParent()">getParent</A>, <A HREF="../../../../../org/apache/poi/POIXMLDocumentPart.html#getRelationById(java.lang.String)">getRelationById</A>, <A HREF="../../../../../org/apache/poi/POIXMLDocumentPart.html#getRelationId(org.apache.poi.POIXMLDocumentPart)">getRelationId</A>, <A HREF="../../../../../org/apache/poi/POIXMLDocumentPart.html#getRelations()">getRelations</A>, <A HREF="../../../../../org/apache/poi/POIXMLDocumentPart.html#getTargetPart(org.apache.poi.openxml4j.opc.PackageRelationship)">getTargetPart</A>, <A HREF="../../../../../org/apache/poi/POIXMLDocumentPart.html#onDocumentCreate()">onDocumentCreate</A>, <A HREF="../../../../../org/apache/poi/POIXMLDocumentPart.html#onDocumentRemove()">onDocumentRemove</A>, <A HREF="../../../../../org/apache/poi/POIXMLDocumentPart.html#onSave(java.util.Set)">onSave</A>, <A HREF="../../../../../org/apache/poi/POIXMLDocumentPart.html#prepareForCommit()">prepareForCommit</A>, <A HREF="../../../../../org/apache/poi/POIXMLDocumentPart.html#read(org.apache.poi.POIXMLFactory, java.util.Map)">read</A>, <A HREF="../../../../../org/apache/poi/POIXMLDocumentPart.html#rebase(org.apache.poi.openxml4j.opc.OPCPackage)">rebase</A>, <A HREF="../../../../../org/apache/poi/POIXMLDocumentPart.html#removeRelation(org.apache.poi.POIXMLDocumentPart)">removeRelation</A>, <A HREF="../../../../../org/apache/poi/POIXMLDocumentPart.html#removeRelation(org.apache.poi.POIXMLDocumentPart, boolean)">removeRelation</A>, <A HREF="../../../../../org/apache/poi/POIXMLDocumentPart.html#toString()">toString</A></CODE></TD>
+</TR>
+</TABLE>
+&nbsp;<A NAME="methods_inherited_from_class_java.lang.Object"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#EEEEFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left"><B>Methods inherited from class java.lang.Object</B></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE>clone, equals, finalize, getClass, hashCode, notify, notifyAll, wait, wait, wait</CODE></TD>
+</TR>
+</TABLE>
+&nbsp;<A NAME="methods_inherited_from_class_org.apache.poi.ss.usermodel.Workbook"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#EEEEFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left"><B>Methods inherited from interface org.apache.poi.ss.usermodel.<A HREF="../../../../../org/apache/poi/ss/usermodel/Workbook.html" title="interface in org.apache.poi.ss.usermodel">Workbook</A></B></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><A HREF="../../../../../org/apache/poi/ss/usermodel/Workbook.html#write(java.io.OutputStream)">write</A></CODE></TD>
+</TR>
+</TABLE>
+&nbsp;
+<P>
+
+<!-- ============ FIELD DETAIL =========== -->
+
+<A NAME="field_detail"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="1"><FONT SIZE="+2">
+<B>Field Detail</B></FONT></TH>
+</TR>
+</TABLE>
+
+<A NAME="DEFAULT_CHARACTER_WIDTH"><!-- --></A><H3>
+DEFAULT_CHARACTER_WIDTH</H3>
+<PRE>
+public static final float <B>DEFAULT_CHARACTER_WIDTH</B></PRE>
+<DL>
+<DD>Width of one character of the default font in pixels. Same for Calibry and Arial.
+<P>
+<DL>
+<DT><B>See Also:</B><DD><A HREF="../../../../../constant-values.html#org.apache.poi.xssf.usermodel.XSSFWorkbook.DEFAULT_CHARACTER_WIDTH">Constant Field Values</A></DL>
+</DL>
+<HR>
+
+<A NAME="PICTURE_TYPE_GIF"><!-- --></A><H3>
+PICTURE_TYPE_GIF</H3>
+<PRE>
+public static final int <B>PICTURE_TYPE_GIF</B></PRE>
+<DL>
+<DD>Images formats supported by XSSF but not by HSSF
+<P>
+<DL>
+<DT><B>See Also:</B><DD><A HREF="../../../../../constant-values.html#org.apache.poi.xssf.usermodel.XSSFWorkbook.PICTURE_TYPE_GIF">Constant Field Values</A></DL>
+</DL>
+<HR>
+
+<A NAME="PICTURE_TYPE_TIFF"><!-- --></A><H3>
+PICTURE_TYPE_TIFF</H3>
+<PRE>
+public static final int <B>PICTURE_TYPE_TIFF</B></PRE>
+<DL>
+<DL>
+<DT><B>See Also:</B><DD><A HREF="../../../../../constant-values.html#org.apache.poi.xssf.usermodel.XSSFWorkbook.PICTURE_TYPE_TIFF">Constant Field Values</A></DL>
+</DL>
+<HR>
+
+<A NAME="PICTURE_TYPE_EPS"><!-- --></A><H3>
+PICTURE_TYPE_EPS</H3>
+<PRE>
+public static final int <B>PICTURE_TYPE_EPS</B></PRE>
+<DL>
+<DL>
+<DT><B>See Also:</B><DD><A HREF="../../../../../constant-values.html#org.apache.poi.xssf.usermodel.XSSFWorkbook.PICTURE_TYPE_EPS">Constant Field Values</A></DL>
+</DL>
+<HR>
+
+<A NAME="PICTURE_TYPE_BMP"><!-- --></A><H3>
+PICTURE_TYPE_BMP</H3>
+<PRE>
+public static final int <B>PICTURE_TYPE_BMP</B></PRE>
+<DL>
+<DL>
+<DT><B>See Also:</B><DD><A HREF="../../../../../constant-values.html#org.apache.poi.xssf.usermodel.XSSFWorkbook.PICTURE_TYPE_BMP">Constant Field Values</A></DL>
+</DL>
+<HR>
+
+<A NAME="PICTURE_TYPE_WPG"><!-- --></A><H3>
+PICTURE_TYPE_WPG</H3>
+<PRE>
+public static final int <B>PICTURE_TYPE_WPG</B></PRE>
+<DL>
+<DL>
+<DT><B>See Also:</B><DD><A HREF="../../../../../constant-values.html#org.apache.poi.xssf.usermodel.XSSFWorkbook.PICTURE_TYPE_WPG">Constant Field Values</A></DL>
+</DL>
+
+<!-- ========= CONSTRUCTOR DETAIL ======== -->
+
+<A NAME="constructor_detail"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="1"><FONT SIZE="+2">
+<B>Constructor Detail</B></FONT></TH>
+</TR>
+</TABLE>
+
+<A NAME="XSSFWorkbook()"><!-- --></A><H3>
+XSSFWorkbook</H3>
+<PRE>
+public <B>XSSFWorkbook</B>()</PRE>
+<DL>
+<DD>Create a new SpreadsheetML workbook.
+<P>
+</DL>
+<HR>
+
+<A NAME="XSSFWorkbook(org.apache.poi.openxml4j.opc.OPCPackage)"><!-- --></A><H3>
+XSSFWorkbook</H3>
+<PRE>
+public <B>XSSFWorkbook</B>(<A HREF="../../../../../org/apache/poi/openxml4j/opc/OPCPackage.html" title="class in org.apache.poi.openxml4j.opc">OPCPackage</A>&nbsp;pkg)
+             throws java.io.IOException</PRE>
+<DL>
+<DD>Constructs a XSSFWorkbook object given a OpenXML4J <code>Package</code> object,
+  see <a href="http://poi.apache.org/oxml4j/">http://poi.apache.org/oxml4j/</a>.
+ 
+ Once you have finished working with the Workbook, you should close the package
+ by calling pkg.close, to avoid leaving file handles open.
+ 
+ Creating a XSSFWorkbook from a file-backed OPC Package has a lower memory
+  footprint than an InputStream backed one.
+<P>
+<DL>
+<DT><B>Parameters:</B><DD><CODE>pkg</CODE> - the OpenXML4J <code>OPC Package</code> object.
+<DT><B>Throws:</B>
+<DD><CODE>java.io.IOException</CODE></DL>
+</DL>
+<HR>
+
+<A NAME="XSSFWorkbook(java.io.InputStream)"><!-- --></A><H3>
+XSSFWorkbook</H3>
+<PRE>
+public <B>XSSFWorkbook</B>(java.io.InputStream&nbsp;is)
+             throws java.io.IOException</PRE>
+<DL>
+<DD>Constructs a XSSFWorkbook object, by buffering the whole stream into memory
+  and then opening an <A HREF="../../../../../org/apache/poi/openxml4j/opc/OPCPackage.html" title="class in org.apache.poi.openxml4j.opc"><CODE>OPCPackage</CODE></A> object for it.
+ 
+ Using an <CODE>InputStream</CODE> requires more memory than using a File, so
+  if a <CODE>File</CODE> is available then you should instead do something like
+   <pre><code>
+       OPCPackage pkg = OPCPackage.open(path);
+       XSSFWorkbook wb = new XSSFWorkbook(pkg);
+       // work with the wb object
+       ......
+       pkg.close(); // gracefully closes the underlying zip file
+   </code></pre>
+<P>
+<DL>
+
+<DT><B>Throws:</B>
+<DD><CODE>java.io.IOException</CODE></DL>
+</DL>
+<HR>
+
+<A NAME="XSSFWorkbook(java.lang.String)"><!-- --></A><H3>
+XSSFWorkbook</H3>
+<PRE>
+<FONT SIZE="-1">@Deprecated
+</FONT>public <B>XSSFWorkbook</B>(java.lang.String&nbsp;path)
+             throws java.io.IOException</PRE>
+<DL>
+<DD><B>Deprecated.</B>&nbsp;<I></I>
+<P>
+<DD>Constructs a XSSFWorkbook object given a file name.
+
+ <p>
+  This constructor is deprecated since POI-3.8 because it does not close
+  the underlying .zip file stream. In short, there are two ways to open a OPC package:
+ </p>
+ <ol>
+     <li>
+      from file which leads to invoking java.util.zip.ZipFile(File file)
+      deep in POI internals.
+     </li>
+     <li>
+     from input stream in which case we first read everything into memory and
+     then pass the data to ZipInputStream.
+     </li>
+ <ol>
+ <p>    
+     It should be noted, that (2) uses quite a bit more memory than (1), which
+      doesn't need to hold the whole zip file in memory, and can take advantage
+      of native methods.
+ </p>
+ <p>
+   To construct a workbook from file use the
+   <A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFWorkbook.html#XSSFWorkbook(org.apache.poi.openxml4j.opc.OPCPackage)"><CODE>XSSFWorkbook(org.apache.poi.openxml4j.opc.OPCPackage)</CODE></A>  constructor:
+   <pre><code>
+       OPCPackage pkg = OPCPackage.open(path);
+       XSSFWorkbook wb = new XSSFWorkbook(pkg);
+       // work with the wb object
+       ......
+       pkg.close(); // gracefully closes the underlying zip file
+   </code></pre>     
+ </p>
+<P>
+<DL>
+<DT><B>Parameters:</B><DD><CODE>path</CODE> - the file name.
+<DT><B>Throws:</B>
+<DD><CODE>java.io.IOException</CODE></DL>
+</DL>
+
+<!-- ============ METHOD DETAIL ========== -->
+
+<A NAME="method_detail"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="1"><FONT SIZE="+2">
+<B>Method Detail</B></FONT></TH>
+</TR>
+</TABLE>
+
+<A NAME="onDocumentRead()"><!-- --></A><H3>
+onDocumentRead</H3>
+<PRE>
+protected void <B>onDocumentRead</B>()
+                       throws java.io.IOException</PRE>
+<DL>
+<DD><B>Description copied from class: <CODE><A HREF="../../../../../org/apache/poi/POIXMLDocumentPart.html#onDocumentRead()">POIXMLDocumentPart</A></CODE></B></DD>
+<DD>Fired when a package part is read
+<P>
+<DD><DL>
+<DT><B>Overrides:</B><DD><CODE><A HREF="../../../../../org/apache/poi/POIXMLDocumentPart.html#onDocumentRead()">onDocumentRead</A></CODE> in class <CODE><A HREF="../../../../../org/apache/poi/POIXMLDocumentPart.html" title="class in org.apache.poi">POIXMLDocumentPart</A></CODE></DL>
+</DD>
+<DD><DL>
+
+<DT><B>Throws:</B>
+<DD><CODE>java.io.IOException</CODE></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="newPackage()"><!-- --></A><H3>
+newPackage</H3>
+<PRE>
+protected static <A HREF="../../../../../org/apache/poi/openxml4j/opc/OPCPackage.html" title="class in org.apache.poi.openxml4j.opc">OPCPackage</A> <B>newPackage</B>()</PRE>
+<DL>
+<DD>Create a new SpreadsheetML package and setup the default minimal content
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getCTWorkbook()"><!-- --></A><H3>
+getCTWorkbook</H3>
+<PRE>
+<FONT SIZE="-1"><A HREF="../../../../../org/apache/poi/util/Internal.html" title="annotation in org.apache.poi.util">@Internal</A>
+</FONT>public org.openxmlformats.schemas.spreadsheetml.x2006.main.CTWorkbook <B>getCTWorkbook</B>()</PRE>
+<DL>
+<DD>Return the underlying XML bean
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+
+<DT><B>Returns:</B><DD>the underlying CTWorkbook bean</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="addPicture(byte[], int)"><!-- --></A><H3>
+addPicture</H3>
+<PRE>
+public int <B>addPicture</B>(byte[]&nbsp;pictureData,
+                      int&nbsp;format)</PRE>
+<DL>
+<DD>Adds a picture to the workbook.
+<P>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../../../../org/apache/poi/ss/usermodel/Workbook.html#addPicture(byte[], int)">addPicture</A></CODE> in interface <CODE><A HREF="../../../../../org/apache/poi/ss/usermodel/Workbook.html" title="interface in org.apache.poi.ss.usermodel">Workbook</A></CODE></DL>
+</DD>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>pictureData</CODE> - The bytes of the picture<DD><CODE>format</CODE> - The format of the picture.
+<DT><B>Returns:</B><DD>the index to this picture (0 based), the added picture can be obtained from <A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFWorkbook.html#getAllPictures()"><CODE>getAllPictures()</CODE></A> .<DT><B>See Also:</B><DD><A HREF="../../../../../org/apache/poi/ss/usermodel/Workbook.html#PICTURE_TYPE_EMF"><CODE>Workbook.PICTURE_TYPE_EMF</CODE></A>, 
+<A HREF="../../../../../org/apache/poi/ss/usermodel/Workbook.html#PICTURE_TYPE_WMF"><CODE>Workbook.PICTURE_TYPE_WMF</CODE></A>, 
+<A HREF="../../../../../org/apache/poi/ss/usermodel/Workbook.html#PICTURE_TYPE_PICT"><CODE>Workbook.PICTURE_TYPE_PICT</CODE></A>, 
+<A HREF="../../../../../org/apache/poi/ss/usermodel/Workbook.html#PICTURE_TYPE_JPEG"><CODE>Workbook.PICTURE_TYPE_JPEG</CODE></A>, 
+<A HREF="../../../../../org/apache/poi/ss/usermodel/Workbook.html#PICTURE_TYPE_PNG"><CODE>Workbook.PICTURE_TYPE_PNG</CODE></A>, 
+<A HREF="../../../../../org/apache/poi/ss/usermodel/Workbook.html#PICTURE_TYPE_DIB"><CODE>Workbook.PICTURE_TYPE_DIB</CODE></A>, 
+<A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFWorkbook.html#getAllPictures()"><CODE>getAllPictures()</CODE></A></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="addPicture(java.io.InputStream, int)"><!-- --></A><H3>
+addPicture</H3>
+<PRE>
+public int <B>addPicture</B>(java.io.InputStream&nbsp;is,
+                      int&nbsp;format)
+               throws java.io.IOException</PRE>
+<DL>
+<DD>Adds a picture to the workbook.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>is</CODE> - The sream to read image from<DD><CODE>format</CODE> - The format of the picture.
+<DT><B>Returns:</B><DD>the index to this picture (0 based), the added picture can be obtained from <A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFWorkbook.html#getAllPictures()"><CODE>getAllPictures()</CODE></A> .
+<DT><B>Throws:</B>
+<DD><CODE>java.io.IOException</CODE><DT><B>See Also:</B><DD><A HREF="../../../../../org/apache/poi/ss/usermodel/Workbook.html#PICTURE_TYPE_EMF"><CODE>Workbook.PICTURE_TYPE_EMF</CODE></A>, 
+<A HREF="../../../../../org/apache/poi/ss/usermodel/Workbook.html#PICTURE_TYPE_WMF"><CODE>Workbook.PICTURE_TYPE_WMF</CODE></A>, 
+<A HREF="../../../../../org/apache/poi/ss/usermodel/Workbook.html#PICTURE_TYPE_PICT"><CODE>Workbook.PICTURE_TYPE_PICT</CODE></A>, 
+<A HREF="../../../../../org/apache/poi/ss/usermodel/Workbook.html#PICTURE_TYPE_JPEG"><CODE>Workbook.PICTURE_TYPE_JPEG</CODE></A>, 
+<A HREF="../../../../../org/apache/poi/ss/usermodel/Workbook.html#PICTURE_TYPE_PNG"><CODE>Workbook.PICTURE_TYPE_PNG</CODE></A>, 
+<A HREF="../../../../../org/apache/poi/ss/usermodel/Workbook.html#PICTURE_TYPE_DIB"><CODE>Workbook.PICTURE_TYPE_DIB</CODE></A>, 
+<A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFWorkbook.html#getAllPictures()"><CODE>getAllPictures()</CODE></A></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="cloneSheet(int)"><!-- --></A><H3>
+cloneSheet</H3>
+<PRE>
+public <A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFSheet.html" title="class in org.apache.poi.xssf.usermodel">XSSFSheet</A> <B>cloneSheet</B>(int&nbsp;sheetNum)</PRE>
+<DL>
+<DD>Create an XSSFSheet from an existing sheet in the XSSFWorkbook.
+  The cloned sheet is a deep copy of the original.
+<P>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../../../../org/apache/poi/ss/usermodel/Workbook.html#cloneSheet(int)">cloneSheet</A></CODE> in interface <CODE><A HREF="../../../../../org/apache/poi/ss/usermodel/Workbook.html" title="interface in org.apache.poi.ss.usermodel">Workbook</A></CODE></DL>
+</DD>
+<DD><DL>
+
+<DT><B>Returns:</B><DD>XSSFSheet representing the cloned sheet.
+<DT><B>Throws:</B>
+<DD><CODE>java.lang.IllegalArgumentException</CODE> - if the sheet index in invalid
+<DD><CODE><A HREF="../../../../../org/apache/poi/POIXMLException.html" title="class in org.apache.poi">POIXMLException</A></CODE> - if there were errors when cloning</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="createCellStyle()"><!-- --></A><H3>
+createCellStyle</H3>
+<PRE>
+public <A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFCellStyle.html" title="class in org.apache.poi.xssf.usermodel">XSSFCellStyle</A> <B>createCellStyle</B>()</PRE>
+<DL>
+<DD>Create a new XSSFCellStyle and add it to the workbook's style table
+<P>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../../../../org/apache/poi/ss/usermodel/Workbook.html#createCellStyle()">createCellStyle</A></CODE> in interface <CODE><A HREF="../../../../../org/apache/poi/ss/usermodel/Workbook.html" title="interface in org.apache.poi.ss.usermodel">Workbook</A></CODE></DL>
+</DD>
+<DD><DL>
+
+<DT><B>Returns:</B><DD>the new XSSFCellStyle object</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="createDataFormat()"><!-- --></A><H3>
+createDataFormat</H3>
+<PRE>
+public <A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFDataFormat.html" title="class in org.apache.poi.xssf.usermodel">XSSFDataFormat</A> <B>createDataFormat</B>()</PRE>
+<DL>
+<DD>Returns the instance of XSSFDataFormat for this workbook.
+<P>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../../../../org/apache/poi/ss/usermodel/Workbook.html#createDataFormat()">createDataFormat</A></CODE> in interface <CODE><A HREF="../../../../../org/apache/poi/ss/usermodel/Workbook.html" title="interface in org.apache.poi.ss.usermodel">Workbook</A></CODE></DL>
+</DD>
+<DD><DL>
+
+<DT><B>Returns:</B><DD>the XSSFDataFormat object<DT><B>See Also:</B><DD><A HREF="../../../../../org/apache/poi/ss/usermodel/DataFormat.html" title="interface in org.apache.poi.ss.usermodel"><CODE>DataFormat</CODE></A></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="createFont()"><!-- --></A><H3>
+createFont</H3>
+<PRE>
+public <A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFFont.html" title="class in org.apache.poi.xssf.usermodel">XSSFFont</A> <B>createFont</B>()</PRE>
+<DL>
+<DD>Create a new Font and add it to the workbook's font table
+<P>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../../../../org/apache/poi/ss/usermodel/Workbook.html#createFont()">createFont</A></CODE> in interface <CODE><A HREF="../../../../../org/apache/poi/ss/usermodel/Workbook.html" title="interface in org.apache.poi.ss.usermodel">Workbook</A></CODE></DL>
+</DD>
+<DD><DL>
+
+<DT><B>Returns:</B><DD>new font object</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="createName()"><!-- --></A><H3>
+createName</H3>
+<PRE>
+public <A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFName.html" title="class in org.apache.poi.xssf.usermodel">XSSFName</A> <B>createName</B>()</PRE>
+<DL>
+<DD><B>Description copied from interface: <CODE><A HREF="../../../../../org/apache/poi/ss/usermodel/Workbook.html#createName()">Workbook</A></CODE></B></DD>
+<DD>Creates a new (uninitialised) defined name in this workbook
+<P>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../../../../org/apache/poi/ss/usermodel/Workbook.html#createName()">createName</A></CODE> in interface <CODE><A HREF="../../../../../org/apache/poi/ss/usermodel/Workbook.html" title="interface in org.apache.poi.ss.usermodel">Workbook</A></CODE></DL>
+</DD>
+<DD><DL>
+
+<DT><B>Returns:</B><DD>new defined name object</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="createSheet()"><!-- --></A><H3>
+createSheet</H3>
+<PRE>
+public <A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFSheet.html" title="class in org.apache.poi.xssf.usermodel">XSSFSheet</A> <B>createSheet</B>()</PRE>
+<DL>
+<DD>Create an XSSFSheet for this workbook, adds it to the sheets and returns
+ the high level representation.  Use this to create new sheets.
+<P>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../../../../org/apache/poi/ss/usermodel/Workbook.html#createSheet()">createSheet</A></CODE> in interface <CODE><A HREF="../../../../../org/apache/poi/ss/usermodel/Workbook.html" title="interface in org.apache.poi.ss.usermodel">Workbook</A></CODE></DL>
+</DD>
+<DD><DL>
+
+<DT><B>Returns:</B><DD>XSSFSheet representing the new sheet.</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="createSheet(java.lang.String)"><!-- --></A><H3>
+createSheet</H3>
+<PRE>
+public <A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFSheet.html" title="class in org.apache.poi.xssf.usermodel">XSSFSheet</A> <B>createSheet</B>(java.lang.String&nbsp;sheetname)</PRE>
+<DL>
+<DD>Create a new sheet for this Workbook and return the high level representation.
+ Use this to create new sheets.
+
+ <p>
+     Note that Excel allows sheet names up to 31 chars in length but other applications
+     (such as OpenOffice) allow more. Some versions of Excel crash with names longer than 31 chars,
+     others - truncate such names to 31 character.
+ </p>
+ <p>
+     POI's SpreadsheetAPI silently truncates the input argument to 31 characters.
+     Example:
+
+     <pre><code>
+     Sheet sheet = workbook.createSheet("My very long sheet name which is longer than 31 chars"); // will be truncated
+     assert 31 == sheet.getSheetName().length();
+     assert "My very long sheet name which i" == sheet.getSheetName();
+     </code></pre>
+ </p>
+
+ Except the 31-character constraint, Excel applies some other rules:
+ <p>
+ Sheet name MUST be unique in the workbook and MUST NOT contain the any of the following characters:
+ <ul>
+ <li> 0x0000 </li>
+ <li> 0x0003 </li>
+ <li> colon (:) </li>
+ <li> backslash (\) </li>
+ <li> asterisk (*) </li>
+ <li> question mark (?) </li>
+ <li> forward slash (/) </li>
+ <li> opening square bracket ([) </li>
+ <li> closing square bracket (]) </li>
+ </ul>
+ The string MUST NOT begin or end with the single quote (') character.
+ </p>
+
+ <p>
+ See <A HREF="../../../../../org/apache/poi/ss/util/WorkbookUtil.html#createSafeSheetName(java.lang.String)"><CODE>WorkbookUtil.createSafeSheetName(String nameProposal)</CODE></A>
+      for a safe way to create valid names
+ </p>
+<P>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../../../../org/apache/poi/ss/usermodel/Workbook.html#createSheet(java.lang.String)">createSheet</A></CODE> in interface <CODE><A HREF="../../../../../org/apache/poi/ss/usermodel/Workbook.html" title="interface in org.apache.poi.ss.usermodel">Workbook</A></CODE></DL>
+</DD>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>sheetname</CODE> - sheetname to set for the sheet.
+<DT><B>Returns:</B><DD>Sheet representing the new sheet.
+<DT><B>Throws:</B>
+<DD><CODE>java.lang.IllegalArgumentException</CODE> - if the name is null or invalid
+  or workbook already contains a sheet with this name<DT><B>See Also:</B><DD><A HREF="../../../../../org/apache/poi/ss/util/WorkbookUtil.html#createSafeSheetName(java.lang.String)"><CODE>WorkbookUtil.createSafeSheetName(String nameProposal)</CODE></A></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="createDialogsheet(java.lang.String, org.openxmlformats.schemas.spreadsheetml.x2006.main.CTDialogsheet)"><!-- --></A><H3>
+createDialogsheet</H3>
+<PRE>
+protected <A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFDialogsheet.html" title="class in org.apache.poi.xssf.usermodel">XSSFDialogsheet</A> <B>createDialogsheet</B>(java.lang.String&nbsp;sheetname,
+                                            org.openxmlformats.schemas.spreadsheetml.x2006.main.CTDialogsheet&nbsp;dialogsheet)</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="findFont(short, short, short, java.lang.String, boolean, boolean, short, byte)"><!-- --></A><H3>
+findFont</H3>
+<PRE>
+public <A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFFont.html" title="class in org.apache.poi.xssf.usermodel">XSSFFont</A> <B>findFont</B>(short&nbsp;boldWeight,
+                         short&nbsp;color,
+                         short&nbsp;fontHeight,
+                         java.lang.String&nbsp;name,
+                         boolean&nbsp;italic,
+                         boolean&nbsp;strikeout,
+                         short&nbsp;typeOffset,
+                         byte&nbsp;underline)</PRE>
+<DL>
+<DD>Finds a font that matches the one with the supplied attributes
+<P>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../../../../org/apache/poi/ss/usermodel/Workbook.html#findFont(short, short, short, java.lang.String, boolean, boolean, short, byte)">findFont</A></CODE> in interface <CODE><A HREF="../../../../../org/apache/poi/ss/usermodel/Workbook.html" title="interface in org.apache.poi.ss.usermodel">Workbook</A></CODE></DL>
+</DD>
+<DD><DL>
+
+<DT><B>Returns:</B><DD>the font with the matched attributes or <code>null</code></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getActiveSheetIndex()"><!-- --></A><H3>
+getActiveSheetIndex</H3>
+<PRE>
+public int <B>getActiveSheetIndex</B>()</PRE>
+<DL>
+<DD>Convenience method to get the active sheet.  The active sheet is is the sheet
+ which is currently displayed when the workbook is viewed in Excel.
+ 'Selected' sheet(s) is a distinct concept.
+<P>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../../../../org/apache/poi/ss/usermodel/Workbook.html#getActiveSheetIndex()">getActiveSheetIndex</A></CODE> in interface <CODE><A HREF="../../../../../org/apache/poi/ss/usermodel/Workbook.html" title="interface in org.apache.poi.ss.usermodel">Workbook</A></CODE></DL>
+</DD>
+<DD><DL>
+
+<DT><B>Returns:</B><DD>the index of the active sheet (0-based)</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getAllPictures()"><!-- --></A><H3>
+getAllPictures</H3>
+<PRE>
+public java.util.List&lt;<A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFPictureData.html" title="class in org.apache.poi.xssf.usermodel">XSSFPictureData</A>&gt; <B>getAllPictures</B>()</PRE>
+<DL>
+<DD>Gets all pictures from the Workbook.
+<P>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../../../../org/apache/poi/ss/usermodel/Workbook.html#getAllPictures()">getAllPictures</A></CODE> in interface <CODE><A HREF="../../../../../org/apache/poi/ss/usermodel/Workbook.html" title="interface in org.apache.poi.ss.usermodel">Workbook</A></CODE></DL>
+</DD>
+<DD><DL>
+
+<DT><B>Returns:</B><DD>the list of pictures (a list of <A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFPictureData.html" title="class in org.apache.poi.xssf.usermodel"><CODE>XSSFPictureData</CODE></A> objects.)<DT><B>See Also:</B><DD><A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFWorkbook.html#addPicture(byte[], int)"><CODE>addPicture(byte[], int)</CODE></A></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getCellStyleAt(short)"><!-- --></A><H3>
+getCellStyleAt</H3>
+<PRE>
+public <A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFCellStyle.html" title="class in org.apache.poi.xssf.usermodel">XSSFCellStyle</A> <B>getCellStyleAt</B>(short&nbsp;idx)</PRE>
+<DL>
+<DD>Get the cell style object at the given index
+<P>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../../../../org/apache/poi/ss/usermodel/Workbook.html#getCellStyleAt(short)">getCellStyleAt</A></CODE> in interface <CODE><A HREF="../../../../../org/apache/poi/ss/usermodel/Workbook.html" title="interface in org.apache.poi.ss.usermodel">Workbook</A></CODE></DL>
+</DD>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>idx</CODE> - index within the set of styles
+<DT><B>Returns:</B><DD>XSSFCellStyle object at the index</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getFontAt(short)"><!-- --></A><H3>
+getFontAt</H3>
+<PRE>
+public <A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFFont.html" title="class in org.apache.poi.xssf.usermodel">XSSFFont</A> <B>getFontAt</B>(short&nbsp;idx)</PRE>
+<DL>
+<DD>Get the font at the given index number
+<P>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../../../../org/apache/poi/ss/usermodel/Workbook.html#getFontAt(short)">getFontAt</A></CODE> in interface <CODE><A HREF="../../../../../org/apache/poi/ss/usermodel/Workbook.html" title="interface in org.apache.poi.ss.usermodel">Workbook</A></CODE></DL>
+</DD>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>idx</CODE> - index number
+<DT><B>Returns:</B><DD>XSSFFont at the index</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getName(java.lang.String)"><!-- --></A><H3>
+getName</H3>
+<PRE>
+public <A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFName.html" title="class in org.apache.poi.xssf.usermodel">XSSFName</A> <B>getName</B>(java.lang.String&nbsp;name)</PRE>
+<DL>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../../../../org/apache/poi/ss/usermodel/Workbook.html#getName(java.lang.String)">getName</A></CODE> in interface <CODE><A HREF="../../../../../org/apache/poi/ss/usermodel/Workbook.html" title="interface in org.apache.poi.ss.usermodel">Workbook</A></CODE></DL>
+</DD>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>name</CODE> - the name of the defined name
+<DT><B>Returns:</B><DD>the defined name with the specified name. <code>null</code> if not found.</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getNameAt(int)"><!-- --></A><H3>
+getNameAt</H3>
+<PRE>
+public <A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFName.html" title="class in org.apache.poi.xssf.usermodel">XSSFName</A> <B>getNameAt</B>(int&nbsp;nameIndex)</PRE>
+<DL>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../../../../org/apache/poi/ss/usermodel/Workbook.html#getNameAt(int)">getNameAt</A></CODE> in interface <CODE><A HREF="../../../../../org/apache/poi/ss/usermodel/Workbook.html" title="interface in org.apache.poi.ss.usermodel">Workbook</A></CODE></DL>
+</DD>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>nameIndex</CODE> - position of the named range (0-based)
+<DT><B>Returns:</B><DD>the defined name at the specified index</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getNameIndex(java.lang.String)"><!-- --></A><H3>
+getNameIndex</H3>
+<PRE>
+public int <B>getNameIndex</B>(java.lang.String&nbsp;name)</PRE>
+<DL>
+<DD>Gets the named range index by his name
+ <i>Note:</i>Excel named ranges are case-insensitive and
+ this method performs a case-insensitive search.
+<P>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../../../../org/apache/poi/ss/usermodel/Workbook.html#getNameIndex(java.lang.String)">getNameIndex</A></CODE> in interface <CODE><A HREF="../../../../../org/apache/poi/ss/usermodel/Workbook.html" title="interface in org.apache.poi.ss.usermodel">Workbook</A></CODE></DL>
+</DD>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>name</CODE> - named range name
+<DT><B>Returns:</B><DD>named range index</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getNumCellStyles()"><!-- --></A><H3>
+getNumCellStyles</H3>
+<PRE>
+public short <B>getNumCellStyles</B>()</PRE>
+<DL>
+<DD>Get the number of styles the workbook contains
+<P>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../../../../org/apache/poi/ss/usermodel/Workbook.html#getNumCellStyles()">getNumCellStyles</A></CODE> in interface <CODE><A HREF="../../../../../org/apache/poi/ss/usermodel/Workbook.html" title="interface in org.apache.poi.ss.usermodel">Workbook</A></CODE></DL>
+</DD>
+<DD><DL>
+
+<DT><B>Returns:</B><DD>count of cell styles</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getNumberOfFonts()"><!-- --></A><H3>
+getNumberOfFonts</H3>
+<PRE>
+public short <B>getNumberOfFonts</B>()</PRE>
+<DL>
+<DD>Get the number of fonts in the this workbook
+<P>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../../../../org/apache/poi/ss/usermodel/Workbook.html#getNumberOfFonts()">getNumberOfFonts</A></CODE> in interface <CODE><A HREF="../../../../../org/apache/poi/ss/usermodel/Workbook.html" title="interface in org.apache.poi.ss.usermodel">Workbook</A></CODE></DL>
+</DD>
+<DD><DL>
+
+<DT><B>Returns:</B><DD>number of fonts</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getNumberOfNames()"><!-- --></A><H3>
+getNumberOfNames</H3>
+<PRE>
+public int <B>getNumberOfNames</B>()</PRE>
+<DL>
+<DD>Get the number of named ranges in the this workbook
+<P>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../../../../org/apache/poi/ss/usermodel/Workbook.html#getNumberOfNames()">getNumberOfNames</A></CODE> in interface <CODE><A HREF="../../../../../org/apache/poi/ss/usermodel/Workbook.html" title="interface in org.apache.poi.ss.usermodel">Workbook</A></CODE></DL>
+</DD>
+<DD><DL>
+
+<DT><B>Returns:</B><DD>number of named ranges</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getNumberOfSheets()"><!-- --></A><H3>
+getNumberOfSheets</H3>
+<PRE>
+public int <B>getNumberOfSheets</B>()</PRE>
+<DL>
+<DD>Get the number of worksheets in the this workbook
+<P>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../../../../org/apache/poi/ss/usermodel/Workbook.html#getNumberOfSheets()">getNumberOfSheets</A></CODE> in interface <CODE><A HREF="../../../../../org/apache/poi/ss/usermodel/Workbook.html" title="interface in org.apache.poi.ss.usermodel">Workbook</A></CODE></DL>
+</DD>
+<DD><DL>
+
+<DT><B>Returns:</B><DD>number of worksheets</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getPrintArea(int)"><!-- --></A><H3>
+getPrintArea</H3>
+<PRE>
+public java.lang.String <B>getPrintArea</B>(int&nbsp;sheetIndex)</PRE>
+<DL>
+<DD>Retrieves the reference for the printarea of the specified sheet, the sheet name is appended to the reference even if it was not specified.
+<P>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../../../../org/apache/poi/ss/usermodel/Workbook.html#getPrintArea(int)">getPrintArea</A></CODE> in interface <CODE><A HREF="../../../../../org/apache/poi/ss/usermodel/Workbook.html" title="interface in org.apache.poi.ss.usermodel">Workbook</A></CODE></DL>
+</DD>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>sheetIndex</CODE> - Zero-based sheet index (0 Represents the first sheet to keep consistent with java)
+<DT><B>Returns:</B><DD>String Null if no print area has been defined</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getSheet(java.lang.String)"><!-- --></A><H3>
+getSheet</H3>
+<PRE>
+public <A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFSheet.html" title="class in org.apache.poi.xssf.usermodel">XSSFSheet</A> <B>getSheet</B>(java.lang.String&nbsp;name)</PRE>
+<DL>
+<DD>Get sheet with the given name (case insensitive match)
+<P>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../../../../org/apache/poi/ss/usermodel/Workbook.html#getSheet(java.lang.String)">getSheet</A></CODE> in interface <CODE><A HREF="../../../../../org/apache/poi/ss/usermodel/Workbook.html" title="interface in org.apache.poi.ss.usermodel">Workbook</A></CODE></DL>
+</DD>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>name</CODE> - of the sheet
+<DT><B>Returns:</B><DD>XSSFSheet with the name provided or <code>null</code> if it does not exist</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getSheetAt(int)"><!-- --></A><H3>
+getSheetAt</H3>
+<PRE>
+public <A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFSheet.html" title="class in org.apache.poi.xssf.usermodel">XSSFSheet</A> <B>getSheetAt</B>(int&nbsp;index)</PRE>
+<DL>
+<DD>Get the XSSFSheet object at the given index.
+<P>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../../../../org/apache/poi/ss/usermodel/Workbook.html#getSheetAt(int)">getSheetAt</A></CODE> in interface <CODE><A HREF="../../../../../org/apache/poi/ss/usermodel/Workbook.html" title="interface in org.apache.poi.ss.usermodel">Workbook</A></CODE></DL>
+</DD>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>index</CODE> - of the sheet number (0-based physical & logical)
+<DT><B>Returns:</B><DD>XSSFSheet at the provided index
+<DT><B>Throws:</B>
+<DD><CODE>java.lang.IllegalArgumentException</CODE> - if the index is out of range (index
+            &lt; 0 || index &gt;= getNumberOfSheets()).</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getSheetIndex(java.lang.String)"><!-- --></A><H3>
+getSheetIndex</H3>
+<PRE>
+public int <B>getSheetIndex</B>(java.lang.String&nbsp;name)</PRE>
+<DL>
+<DD>Returns the index of the sheet by his name (case insensitive match)
+<P>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../../../../org/apache/poi/ss/usermodel/Workbook.html#getSheetIndex(java.lang.String)">getSheetIndex</A></CODE> in interface <CODE><A HREF="../../../../../org/apache/poi/ss/usermodel/Workbook.html" title="interface in org.apache.poi.ss.usermodel">Workbook</A></CODE></DL>
+</DD>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>name</CODE> - the sheet name
+<DT><B>Returns:</B><DD>index of the sheet (0 based) or <tt>-1</tt if not found</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getSheetIndex(org.apache.poi.ss.usermodel.Sheet)"><!-- --></A><H3>
+getSheetIndex</H3>
+<PRE>
+public int <B>getSheetIndex</B>(<A HREF="../../../../../org/apache/poi/ss/usermodel/Sheet.html" title="interface in org.apache.poi.ss.usermodel">Sheet</A>&nbsp;sheet)</PRE>
+<DL>
+<DD>Returns the index of the given sheet
+<P>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../../../../org/apache/poi/ss/usermodel/Workbook.html#getSheetIndex(org.apache.poi.ss.usermodel.Sheet)">getSheetIndex</A></CODE> in interface <CODE><A HREF="../../../../../org/apache/poi/ss/usermodel/Workbook.html" title="interface in org.apache.poi.ss.usermodel">Workbook</A></CODE></DL>
+</DD>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>sheet</CODE> - the sheet to look up
+<DT><B>Returns:</B><DD>index of the sheet (0 based). <tt>-1</tt> if not found</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getSheetName(int)"><!-- --></A><H3>
+getSheetName</H3>
+<PRE>
+public java.lang.String <B>getSheetName</B>(int&nbsp;sheetIx)</PRE>
+<DL>
+<DD>Get the sheet name
+<P>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../../../../org/apache/poi/ss/usermodel/Workbook.html#getSheetName(int)">getSheetName</A></CODE> in interface <CODE><A HREF="../../../../../org/apache/poi/ss/usermodel/Workbook.html" title="interface in org.apache.poi.ss.usermodel">Workbook</A></CODE></DL>
+</DD>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>sheetIx</CODE> - Number
+<DT><B>Returns:</B><DD>Sheet name</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="iterator()"><!-- --></A><H3>
+iterator</H3>
+<PRE>
+public java.util.Iterator&lt;<A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFSheet.html" title="class in org.apache.poi.xssf.usermodel">XSSFSheet</A>&gt; <B>iterator</B>()</PRE>
+<DL>
+<DD>Allows foreach loops:
+ <pre><code>
+ XSSFWorkbook wb = new XSSFWorkbook(package);
+ for(XSSFSheet sheet : wb){
+
+ }
+ </code></pre>
+<P>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE>iterator</CODE> in interface <CODE>java.lang.Iterable&lt;<A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFSheet.html" title="class in org.apache.poi.xssf.usermodel">XSSFSheet</A>&gt;</CODE></DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="isMacroEnabled()"><!-- --></A><H3>
+isMacroEnabled</H3>
+<PRE>
+public boolean <B>isMacroEnabled</B>()</PRE>
+<DL>
+<DD>Are we a normal workbook (.xlsx), or a
+  macro enabled workbook (.xlsm)?
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="removeName(int)"><!-- --></A><H3>
+removeName</H3>
+<PRE>
+public void <B>removeName</B>(int&nbsp;nameIndex)</PRE>
+<DL>
+<DD><B>Description copied from interface: <CODE><A HREF="../../../../../org/apache/poi/ss/usermodel/Workbook.html#removeName(int)">Workbook</A></CODE></B></DD>
+<DD>Remove the defined name at the specified index
+<P>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../../../../org/apache/poi/ss/usermodel/Workbook.html#removeName(int)">removeName</A></CODE> in interface <CODE><A HREF="../../../../../org/apache/poi/ss/usermodel/Workbook.html" title="interface in org.apache.poi.ss.usermodel">Workbook</A></CODE></DL>
+</DD>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>nameIndex</CODE> - named range index (0 based)</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="removeName(java.lang.String)"><!-- --></A><H3>
+removeName</H3>
+<PRE>
+public void <B>removeName</B>(java.lang.String&nbsp;name)</PRE>
+<DL>
+<DD><B>Description copied from interface: <CODE><A HREF="../../../../../org/apache/poi/ss/usermodel/Workbook.html#removeName(java.lang.String)">Workbook</A></CODE></B></DD>
+<DD>Remove a defined name by name
+<P>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../../../../org/apache/poi/ss/usermodel/Workbook.html#removeName(java.lang.String)">removeName</A></CODE> in interface <CODE><A HREF="../../../../../org/apache/poi/ss/usermodel/Workbook.html" title="interface in org.apache.poi.ss.usermodel">Workbook</A></CODE></DL>
+</DD>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>name</CODE> - the name of the defined name</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="removePrintArea(int)"><!-- --></A><H3>
+removePrintArea</H3>
+<PRE>
+public void <B>removePrintArea</B>(int&nbsp;sheetIndex)</PRE>
+<DL>
+<DD>Delete the printarea for the sheet specified
+<P>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../../../../org/apache/poi/ss/usermodel/Workbook.html#removePrintArea(int)">removePrintArea</A></CODE> in interface <CODE><A HREF="../../../../../org/apache/poi/ss/usermodel/Workbook.html" title="interface in org.apache.poi.ss.usermodel">Workbook</A></CODE></DL>
+</DD>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>sheetIndex</CODE> - 0-based sheet index (0 = First Sheet)</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="removeSheetAt(int)"><!-- --></A><H3>
+removeSheetAt</H3>
+<PRE>
+public void <B>removeSheetAt</B>(int&nbsp;index)</PRE>
+<DL>
+<DD>Removes sheet at the given index.<p/>
+
+ Care must be taken if the removed sheet is the currently active or only selected sheet in
+ the workbook. There are a few situations when Excel must have a selection and/or active
+ sheet. (For example when printing - see Bug 40414).<br/>
+
+ This method makes sure that if the removed sheet was active, another sheet will become
+ active in its place.  Furthermore, if the removed sheet was the only selected sheet, another
+ sheet will become selected.  The newly active/selected sheet will have the same index, or
+ one less if the removed sheet was the last in the workbook.
+<P>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../../../../org/apache/poi/ss/usermodel/Workbook.html#removeSheetAt(int)">removeSheetAt</A></CODE> in interface <CODE><A HREF="../../../../../org/apache/poi/ss/usermodel/Workbook.html" title="interface in org.apache.poi.ss.usermodel">Workbook</A></CODE></DL>
+</DD>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>index</CODE> - of the sheet  (0-based)</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getMissingCellPolicy()"><!-- --></A><H3>
+getMissingCellPolicy</H3>
+<PRE>
+public <A HREF="../../../../../org/apache/poi/ss/usermodel/Row.MissingCellPolicy.html" title="class in org.apache.poi.ss.usermodel">Row.MissingCellPolicy</A> <B>getMissingCellPolicy</B>()</PRE>
+<DL>
+<DD>Retrieves the current policy on what to do when
+  getting missing or blank cells from a row.
+ The default is to return blank and null cells.
+  <A HREF="../../../../../org/apache/poi/ss/usermodel/Row.MissingCellPolicy.html" title="class in org.apache.poi.ss.usermodel"><CODE>Row.MissingCellPolicy</CODE></A>
+<P>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../../../../org/apache/poi/ss/usermodel/Workbook.html#getMissingCellPolicy()">getMissingCellPolicy</A></CODE> in interface <CODE><A HREF="../../../../../org/apache/poi/ss/usermodel/Workbook.html" title="interface in org.apache.poi.ss.usermodel">Workbook</A></CODE></DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setMissingCellPolicy(org.apache.poi.ss.usermodel.Row.MissingCellPolicy)"><!-- --></A><H3>
+setMissingCellPolicy</H3>
+<PRE>
+public void <B>setMissingCellPolicy</B>(<A HREF="../../../../../org/apache/poi/ss/usermodel/Row.MissingCellPolicy.html" title="class in org.apache.poi.ss.usermodel">Row.MissingCellPolicy</A>&nbsp;missingCellPolicy)</PRE>
+<DL>
+<DD>Sets the policy on what to do when
+  getting missing or blank cells from a row.
+ This will then apply to all calls to
+  <A HREF="../../../../../org/apache/poi/ss/usermodel/Row.html#getCell(int)"><CODE>Row.getCell(int)</CODE></A>}. See
+  <A HREF="../../../../../org/apache/poi/ss/usermodel/Row.MissingCellPolicy.html" title="class in org.apache.poi.ss.usermodel"><CODE>Row.MissingCellPolicy</CODE></A>
+<P>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../../../../org/apache/poi/ss/usermodel/Workbook.html#setMissingCellPolicy(org.apache.poi.ss.usermodel.Row.MissingCellPolicy)">setMissingCellPolicy</A></CODE> in interface <CODE><A HREF="../../../../../org/apache/poi/ss/usermodel/Workbook.html" title="interface in org.apache.poi.ss.usermodel">Workbook</A></CODE></DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setActiveSheet(int)"><!-- --></A><H3>
+setActiveSheet</H3>
+<PRE>
+public void <B>setActiveSheet</B>(int&nbsp;index)</PRE>
+<DL>
+<DD>Convenience method to set the active sheet.  The active sheet is is the sheet
+ which is currently displayed when the workbook is viewed in Excel.
+ 'Selected' sheet(s) is a distinct concept.
+<P>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../../../../org/apache/poi/ss/usermodel/Workbook.html#setActiveSheet(int)">setActiveSheet</A></CODE> in interface <CODE><A HREF="../../../../../org/apache/poi/ss/usermodel/Workbook.html" title="interface in org.apache.poi.ss.usermodel">Workbook</A></CODE></DL>
+</DD>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>index</CODE> - index of the active sheet (0-based)</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getFirstVisibleTab()"><!-- --></A><H3>
+getFirstVisibleTab</H3>
+<PRE>
+public int <B>getFirstVisibleTab</B>()</PRE>
+<DL>
+<DD>Gets the first tab that is displayed in the list of tabs in excel.
+<P>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../../../../org/apache/poi/ss/usermodel/Workbook.html#getFirstVisibleTab()">getFirstVisibleTab</A></CODE> in interface <CODE><A HREF="../../../../../org/apache/poi/ss/usermodel/Workbook.html" title="interface in org.apache.poi.ss.usermodel">Workbook</A></CODE></DL>
+</DD>
+<DD><DL>
+
+<DT><B>Returns:</B><DD>integer that contains the index to the active sheet in this book view.</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setFirstVisibleTab(int)"><!-- --></A><H3>
+setFirstVisibleTab</H3>
+<PRE>
+public void <B>setFirstVisibleTab</B>(int&nbsp;index)</PRE>
+<DL>
+<DD>Sets the first tab that is displayed in the list of tabs in excel.
+<P>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../../../../org/apache/poi/ss/usermodel/Workbook.html#setFirstVisibleTab(int)">setFirstVisibleTab</A></CODE> in interface <CODE><A HREF="../../../../../org/apache/poi/ss/usermodel/Workbook.html" title="interface in org.apache.poi.ss.usermodel">Workbook</A></CODE></DL>
+</DD>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>index</CODE> - integer that contains the index to the active sheet in this book view.</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setPrintArea(int, java.lang.String)"><!-- --></A><H3>
+setPrintArea</H3>
+<PRE>
+public void <B>setPrintArea</B>(int&nbsp;sheetIndex,
+                         java.lang.String&nbsp;reference)</PRE>
+<DL>
+<DD>Sets the printarea for the sheet provided
+ <p>
+ i.e. Reference = $A$1:$B$2
+<P>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../../../../org/apache/poi/ss/usermodel/Workbook.html#setPrintArea(int, java.lang.String)">setPrintArea</A></CODE> in interface <CODE><A HREF="../../../../../org/apache/poi/ss/usermodel/Workbook.html" title="interface in org.apache.poi.ss.usermodel">Workbook</A></CODE></DL>
+</DD>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>sheetIndex</CODE> - Zero-based sheet index (0 Represents the first sheet to keep consistent with java)<DD><CODE>reference</CODE> - Valid name Reference for the Print Area</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setPrintArea(int, int, int, int, int)"><!-- --></A><H3>
+setPrintArea</H3>
+<PRE>
+public void <B>setPrintArea</B>(int&nbsp;sheetIndex,
+                         int&nbsp;startColumn,
+                         int&nbsp;endColumn,
+                         int&nbsp;startRow,
+                         int&nbsp;endRow)</PRE>
+<DL>
+<DD>For the Convenience of Java Programmers maintaining pointers.
+<P>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../../../../org/apache/poi/ss/usermodel/Workbook.html#setPrintArea(int, int, int, int, int)">setPrintArea</A></CODE> in interface <CODE><A HREF="../../../../../org/apache/poi/ss/usermodel/Workbook.html" title="interface in org.apache.poi.ss.usermodel">Workbook</A></CODE></DL>
+</DD>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>sheetIndex</CODE> - Zero-based sheet index (0 = First Sheet)<DD><CODE>startColumn</CODE> - Column to begin printarea<DD><CODE>endColumn</CODE> - Column to end the printarea<DD><CODE>startRow</CODE> - Row to begin the printarea<DD><CODE>endRow</CODE> - Row to end the printarea<DT><B>See Also:</B><DD><A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFWorkbook.html#setPrintArea(int, java.lang.String)"><CODE>setPrintArea(int, String)</CODE></A></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setRepeatingRowsAndColumns(int, int, int, int, int)"><!-- --></A><H3>
+setRepeatingRowsAndColumns</H3>
+<PRE>
+public void <B>setRepeatingRowsAndColumns</B>(int&nbsp;sheetIndex,
+                                       int&nbsp;startColumn,
+                                       int&nbsp;endColumn,
+                                       int&nbsp;startRow,
+                                       int&nbsp;endRow)</PRE>
+<DL>
+<DD><B>Deprecated.</B>&nbsp;<I>use <A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFSheet.html#setRepeatingRows(org.apache.poi.ss.util.CellRangeAddress)"><CODE>XSSFSheet.setRepeatingRows(CellRangeAddress)</CODE></A>
+        or <A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFSheet.html#setRepeatingColumns(org.apache.poi.ss.util.CellRangeAddress)"><CODE>XSSFSheet.setRepeatingColumns(CellRangeAddress)</CODE></A></I>
+<P>
+<DD>Sets the repeating rows and columns for a sheet.
+ <p/>
+ To set just repeating columns:
+ <pre>
+  workbook.setRepeatingRowsAndColumns(0,0,1,-1,-1);
+ </pre>
+ To set just repeating rows:
+ <pre>
+  workbook.setRepeatingRowsAndColumns(0,-1,-1,0,4);
+ </pre>
+ To remove all repeating rows and columns for a sheet.
+ <pre>
+  workbook.setRepeatingRowsAndColumns(0,-1,-1,-1,-1);
+ </pre>
+<P>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../../../../org/apache/poi/ss/usermodel/Workbook.html#setRepeatingRowsAndColumns(int, int, int, int, int)">setRepeatingRowsAndColumns</A></CODE> in interface <CODE><A HREF="../../../../../org/apache/poi/ss/usermodel/Workbook.html" title="interface in org.apache.poi.ss.usermodel">Workbook</A></CODE></DL>
+</DD>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>sheetIndex</CODE> - 0 based index to sheet.<DD><CODE>startColumn</CODE> - 0 based start of repeating columns.<DD><CODE>endColumn</CODE> - 0 based end of repeating columns.<DD><CODE>startRow</CODE> - 0 based start of repeating rows.<DD><CODE>endRow</CODE> - 0 based end of repeating rows.</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setSelectedTab(int)"><!-- --></A><H3>
+setSelectedTab</H3>
+<PRE>
+public void <B>setSelectedTab</B>(int&nbsp;index)</PRE>
+<DL>
+<DD>We only set one sheet as selected for compatibility with HSSF.
+<P>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../../../../org/apache/poi/ss/usermodel/Workbook.html#setSelectedTab(int)">setSelectedTab</A></CODE> in interface <CODE><A HREF="../../../../../org/apache/poi/ss/usermodel/Workbook.html" title="interface in org.apache.poi.ss.usermodel">Workbook</A></CODE></DL>
+</DD>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>index</CODE> - the index of the sheet to select (0 based)<DT><B>See Also:</B><DD><A HREF="../../../../../org/apache/poi/ss/usermodel/Sheet.html#setSelected(boolean)"><CODE>Sheet.setSelected(boolean)</CODE></A></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setSheetName(int, java.lang.String)"><!-- --></A><H3>
+setSheetName</H3>
+<PRE>
+public void <B>setSheetName</B>(int&nbsp;sheetIndex,
+                         java.lang.String&nbsp;sheetname)</PRE>
+<DL>
+<DD>Set the sheet name.
+<P>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../../../../org/apache/poi/ss/usermodel/Workbook.html#setSheetName(int, java.lang.String)">setSheetName</A></CODE> in interface <CODE><A HREF="../../../../../org/apache/poi/ss/usermodel/Workbook.html" title="interface in org.apache.poi.ss.usermodel">Workbook</A></CODE></DL>
+</DD>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>sheetIndex</CODE> - sheet number (0 based)<DD><CODE>sheetname</CODE> - the new sheet name
+<DT><B>Throws:</B>
+<DD><CODE>java.lang.IllegalArgumentException</CODE> - if the name is null or invalid
+  or workbook already contains a sheet with this name<DT><B>See Also:</B><DD><A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFWorkbook.html#createSheet(java.lang.String)"><CODE>createSheet(String)</CODE></A>, 
+<A HREF="../../../../../org/apache/poi/ss/util/WorkbookUtil.html#createSafeSheetName(java.lang.String)"><CODE>WorkbookUtil.createSafeSheetName(String nameProposal)</CODE></A></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setSheetOrder(java.lang.String, int)"><!-- --></A><H3>
+setSheetOrder</H3>
+<PRE>
+public void <B>setSheetOrder</B>(java.lang.String&nbsp;sheetname,
+                          int&nbsp;pos)</PRE>
+<DL>
+<DD>sets the order of appearance for a given sheet.
+<P>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../../../../org/apache/poi/ss/usermodel/Workbook.html#setSheetOrder(java.lang.String, int)">setSheetOrder</A></CODE> in interface <CODE><A HREF="../../../../../org/apache/poi/ss/usermodel/Workbook.html" title="interface in org.apache.poi.ss.usermodel">Workbook</A></CODE></DL>
+</DD>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>sheetname</CODE> - the name of the sheet to reorder<DD><CODE>pos</CODE> - the position that we want to insert the sheet into (0 based)</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="commit()"><!-- --></A><H3>
+commit</H3>
+<PRE>
+protected void <B>commit</B>()
+               throws java.io.IOException</PRE>
+<DL>
+<DD><B>Description copied from class: <CODE><A HREF="../../../../../org/apache/poi/POIXMLDocumentPart.html#commit()">POIXMLDocumentPart</A></CODE></B></DD>
+<DD>Save the content in the underlying package part.
+ Default implementation is empty meaning that the package part is left unmodified.
+
+ Sub-classes should override and add logic to marshal the "model" into Ooxml4J.
+
+ For example, the code saving a generic XML entry may look as follows:
+ <pre><code>
+ protected void commit() throws IOException {
+   PackagePart part = getPackagePart();
+   OutputStream out = part.getOutputStream();
+   XmlObject bean = getXmlBean(); //the "model" which holds changes in memory
+   bean.save(out, DEFAULT_XML_OPTIONS);
+   out.close();
+ }
+  </code></pre>
+<P>
+<DD><DL>
+<DT><B>Overrides:</B><DD><CODE><A HREF="../../../../../org/apache/poi/POIXMLDocumentPart.html#commit()">commit</A></CODE> in class <CODE><A HREF="../../../../../org/apache/poi/POIXMLDocumentPart.html" title="class in org.apache.poi">POIXMLDocumentPart</A></CODE></DL>
+</DD>
+<DD><DL>
+
+<DT><B>Throws:</B>
+<DD><CODE>java.io.IOException</CODE></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getSharedStringSource()"><!-- --></A><H3>
+getSharedStringSource</H3>
+<PRE>
+<FONT SIZE="-1"><A HREF="../../../../../org/apache/poi/util/Internal.html" title="annotation in org.apache.poi.util">@Internal</A>
+</FONT>public <A HREF="../../../../../org/apache/poi/xssf/model/SharedStringsTable.html" title="class in org.apache.poi.xssf.model">SharedStringsTable</A> <B>getSharedStringSource</B>()</PRE>
+<DL>
+<DD>Returns SharedStringsTable - tha cache of string for this workbook
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+
+<DT><B>Returns:</B><DD>the shared string table</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getStylesSource()"><!-- --></A><H3>
+getStylesSource</H3>
+<PRE>
+public <A HREF="../../../../../org/apache/poi/xssf/model/StylesTable.html" title="class in org.apache.poi.xssf.model">StylesTable</A> <B>getStylesSource</B>()</PRE>
+<DL>
+<DD>Return a object representing a collection of shared objects used for styling content,
+ e.g. fonts, cell styles, colors, etc.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getTheme()"><!-- --></A><H3>
+getTheme</H3>
+<PRE>
+public <A HREF="../../../../../org/apache/poi/xssf/model/ThemesTable.html" title="class in org.apache.poi.xssf.model">ThemesTable</A> <B>getTheme</B>()</PRE>
+<DL>
+<DD>Returns the Theme of current workbook.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getCreationHelper()"><!-- --></A><H3>
+getCreationHelper</H3>
+<PRE>
+public <A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFCreationHelper.html" title="class in org.apache.poi.xssf.usermodel">XSSFCreationHelper</A> <B>getCreationHelper</B>()</PRE>
+<DL>
+<DD>Returns an object that handles instantiating concrete
+  classes of the various instances for XSSF.
+<P>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../../../../org/apache/poi/ss/usermodel/Workbook.html#getCreationHelper()">getCreationHelper</A></CODE> in interface <CODE><A HREF="../../../../../org/apache/poi/ss/usermodel/Workbook.html" title="interface in org.apache.poi.ss.usermodel">Workbook</A></CODE></DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="isDate1904()"><!-- --></A><H3>
+isDate1904</H3>
+<PRE>
+protected boolean <B>isDate1904</B>()</PRE>
+<DL>
+<DD>Gets a boolean value that indicates whether the date systems used in the workbook starts in 1904.
+ <p>
+ The default value is false, meaning that the workbook uses the 1900 date system,
+ where 1/1/1900 is the first day in the system..
+ </p>
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+
+<DT><B>Returns:</B><DD>true if the date systems used in the workbook starts in 1904</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getAllEmbedds()"><!-- --></A><H3>
+getAllEmbedds</H3>
+<PRE>
+public java.util.List&lt;<A HREF="../../../../../org/apache/poi/openxml4j/opc/PackagePart.html" title="class in org.apache.poi.openxml4j.opc">PackagePart</A>&gt; <B>getAllEmbedds</B>()
+                                          throws <A HREF="../../../../../org/apache/poi/openxml4j/exceptions/OpenXML4JException.html" title="class in org.apache.poi.openxml4j.exceptions">OpenXML4JException</A></PRE>
+<DL>
+<DD>Get the document's embedded files.
+<P>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../../../../org/apache/poi/POIXMLDocument.html#getAllEmbedds()">getAllEmbedds</A></CODE> in class <CODE><A HREF="../../../../../org/apache/poi/POIXMLDocument.html" title="class in org.apache.poi">POIXMLDocument</A></CODE></DL>
+</DD>
+<DD><DL>
+
+<DT><B>Throws:</B>
+<DD><CODE><A HREF="../../../../../org/apache/poi/openxml4j/exceptions/OpenXML4JException.html" title="class in org.apache.poi.openxml4j.exceptions">OpenXML4JException</A></CODE></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="isHidden()"><!-- --></A><H3>
+isHidden</H3>
+<PRE>
+public boolean <B>isHidden</B>()</PRE>
+<DL>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../../../../org/apache/poi/ss/usermodel/Workbook.html#isHidden()">isHidden</A></CODE> in interface <CODE><A HREF="../../../../../org/apache/poi/ss/usermodel/Workbook.html" title="interface in org.apache.poi.ss.usermodel">Workbook</A></CODE></DL>
+</DD>
+<DD><DL>
+
+<DT><B>Returns:</B><DD><code>false</code> if this workbook is not visible in the GUI</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setHidden(boolean)"><!-- --></A><H3>
+setHidden</H3>
+<PRE>
+public void <B>setHidden</B>(boolean&nbsp;hiddenFlag)</PRE>
+<DL>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../../../../org/apache/poi/ss/usermodel/Workbook.html#setHidden(boolean)">setHidden</A></CODE> in interface <CODE><A HREF="../../../../../org/apache/poi/ss/usermodel/Workbook.html" title="interface in org.apache.poi.ss.usermodel">Workbook</A></CODE></DL>
+</DD>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>hiddenFlag</CODE> - pass <code>false</code> to make the workbook visible in the GUI</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="isSheetHidden(int)"><!-- --></A><H3>
+isSheetHidden</H3>
+<PRE>
+public boolean <B>isSheetHidden</B>(int&nbsp;sheetIx)</PRE>
+<DL>
+<DD>Check whether a sheet is hidden.
+ <p>
+ Note that a sheet could instead be set to be very hidden, which is different
+  (<A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFWorkbook.html#isSheetVeryHidden(int)"><CODE>isSheetVeryHidden(int)</CODE></A>)
+ </p>
+<P>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../../../../org/apache/poi/ss/usermodel/Workbook.html#isSheetHidden(int)">isSheetHidden</A></CODE> in interface <CODE><A HREF="../../../../../org/apache/poi/ss/usermodel/Workbook.html" title="interface in org.apache.poi.ss.usermodel">Workbook</A></CODE></DL>
+</DD>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>sheetIx</CODE> - Number
+<DT><B>Returns:</B><DD><code>true</code> if sheet is hidden</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="isSheetVeryHidden(int)"><!-- --></A><H3>
+isSheetVeryHidden</H3>
+<PRE>
+public boolean <B>isSheetVeryHidden</B>(int&nbsp;sheetIx)</PRE>
+<DL>
+<DD>Check whether a sheet is very hidden.
+ <p>
+ This is different from the normal hidden status
+  (<A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFWorkbook.html#isSheetHidden(int)"><CODE>isSheetHidden(int)</CODE></A>)
+ </p>
+<P>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../../../../org/apache/poi/ss/usermodel/Workbook.html#isSheetVeryHidden(int)">isSheetVeryHidden</A></CODE> in interface <CODE><A HREF="../../../../../org/apache/poi/ss/usermodel/Workbook.html" title="interface in org.apache.poi.ss.usermodel">Workbook</A></CODE></DL>
+</DD>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>sheetIx</CODE> - sheet index to check
+<DT><B>Returns:</B><DD><code>true</code> if sheet is very hidden</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setSheetHidden(int, boolean)"><!-- --></A><H3>
+setSheetHidden</H3>
+<PRE>
+public void <B>setSheetHidden</B>(int&nbsp;sheetIx,
+                           boolean&nbsp;hidden)</PRE>
+<DL>
+<DD>Sets the visible state of this sheet.
+ <p>
+   Calling <code>setSheetHidden(sheetIndex, true)</code> is equivalent to
+   <code>setSheetHidden(sheetIndex, Workbook.SHEET_STATE_HIDDEN)</code>.
+ <br/>
+   Calling <code>setSheetHidden(sheetIndex, false)</code> is equivalent to
+   <code>setSheetHidden(sheetIndex, Workbook.SHEET_STATE_VISIBLE)</code>.
+ </p>
+<P>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../../../../org/apache/poi/ss/usermodel/Workbook.html#setSheetHidden(int, boolean)">setSheetHidden</A></CODE> in interface <CODE><A HREF="../../../../../org/apache/poi/ss/usermodel/Workbook.html" title="interface in org.apache.poi.ss.usermodel">Workbook</A></CODE></DL>
+</DD>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>sheetIx</CODE> - the 0-based index of the sheet<DD><CODE>hidden</CODE> - whether this sheet is hidden<DT><B>See Also:</B><DD><A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFWorkbook.html#setSheetHidden(int, int)"><CODE>setSheetHidden(int, int)</CODE></A></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setSheetHidden(int, int)"><!-- --></A><H3>
+setSheetHidden</H3>
+<PRE>
+public void <B>setSheetHidden</B>(int&nbsp;sheetIx,
+                           int&nbsp;state)</PRE>
+<DL>
+<DD>Hide or unhide a sheet.
+
+ <ul>
+  <li>0 - visible. </li>
+  <li>1 - hidden. </li>
+  <li>2 - very hidden.</li>
+ </ul>
+<P>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../../../../org/apache/poi/ss/usermodel/Workbook.html#setSheetHidden(int, int)">setSheetHidden</A></CODE> in interface <CODE><A HREF="../../../../../org/apache/poi/ss/usermodel/Workbook.html" title="interface in org.apache.poi.ss.usermodel">Workbook</A></CODE></DL>
+</DD>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>sheetIx</CODE> - the sheet index (0-based)<DD><CODE>state</CODE> - one of the following <code>Workbook</code> constants:
+        <code>Workbook.SHEET_STATE_VISIBLE</code>,
+        <code>Workbook.SHEET_STATE_HIDDEN</code>, or
+        <code>Workbook.SHEET_STATE_VERY_HIDDEN</code>.
+<DT><B>Throws:</B>
+<DD><CODE>java.lang.IllegalArgumentException</CODE> - if the supplied sheet index or state is invalid</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="onDeleteFormula(org.apache.poi.xssf.usermodel.XSSFCell)"><!-- --></A><H3>
+onDeleteFormula</H3>
+<PRE>
+protected void <B>onDeleteFormula</B>(<A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFCell.html" title="class in org.apache.poi.xssf.usermodel">XSSFCell</A>&nbsp;cell)</PRE>
+<DL>
+<DD>Fired when a formula is deleted from this workbook,
+ for example when calling cell.setCellFormula(null)
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+<DT><B>See Also:</B><DD><A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFCell.html#setCellFormula(java.lang.String)"><CODE>XSSFCell.setCellFormula(String)</CODE></A></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getCalculationChain()"><!-- --></A><H3>
+getCalculationChain</H3>
+<PRE>
+<FONT SIZE="-1"><A HREF="../../../../../org/apache/poi/util/Internal.html" title="annotation in org.apache.poi.util">@Internal</A>
+</FONT>public <A HREF="../../../../../org/apache/poi/xssf/model/CalculationChain.html" title="class in org.apache.poi.xssf.model">CalculationChain</A> <B>getCalculationChain</B>()</PRE>
+<DL>
+<DD>Return the CalculationChain object for this workbook
+ <p>
+   The calculation chain object specifies the order in which the cells in a workbook were last calculated
+ </p>
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+
+<DT><B>Returns:</B><DD>the <code>CalculationChain</code> object or <code>null</code> if not defined</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getCustomXMLMappings()"><!-- --></A><H3>
+getCustomXMLMappings</H3>
+<PRE>
+public java.util.Collection&lt;<A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFMap.html" title="class in org.apache.poi.xssf.usermodel">XSSFMap</A>&gt; <B>getCustomXMLMappings</B>()</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+
+<DT><B>Returns:</B><DD>a collection of custom XML mappings defined in this workbook</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getMapInfo()"><!-- --></A><H3>
+getMapInfo</H3>
+<PRE>
+<FONT SIZE="-1"><A HREF="../../../../../org/apache/poi/util/Internal.html" title="annotation in org.apache.poi.util">@Internal</A>
+</FONT>public <A HREF="../../../../../org/apache/poi/xssf/model/MapInfo.html" title="class in org.apache.poi.xssf.model">MapInfo</A> <B>getMapInfo</B>()</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+
+<DT><B>Returns:</B><DD>the helper class used to query the custom XML mapping defined in this workbook</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="isStructureLocked()"><!-- --></A><H3>
+isStructureLocked</H3>
+<PRE>
+public boolean <B>isStructureLocked</B>()</PRE>
+<DL>
+<DD>Specifies a boolean value that indicates whether structure of workbook is locked. <br/>
+ A value true indicates the structure of the workbook is locked. Worksheets in the workbook can't be moved,
+ deleted, hidden, unhidden, or renamed, and new worksheets can't be inserted.<br/>
+ A value of false indicates the structure of the workbook is not locked.<br/>
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+
+<DT><B>Returns:</B><DD>true if structure of workbook is locked</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="isWindowsLocked()"><!-- --></A><H3>
+isWindowsLocked</H3>
+<PRE>
+public boolean <B>isWindowsLocked</B>()</PRE>
+<DL>
+<DD>Specifies a boolean value that indicates whether the windows that comprise the workbook are locked. <br/>
+ A value of true indicates the workbook windows are locked. Windows are the same size and position each time the
+ workbook is opened.<br/>
+ A value of false indicates the workbook windows are not locked.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+
+<DT><B>Returns:</B><DD>true if windows that comprise the workbook are locked</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="isRevisionLocked()"><!-- --></A><H3>
+isRevisionLocked</H3>
+<PRE>
+public boolean <B>isRevisionLocked</B>()</PRE>
+<DL>
+<DD>Specifies a boolean value that indicates whether the workbook is locked for revisions.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+
+<DT><B>Returns:</B><DD>true if the workbook is locked for revisions.</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="lockStructure()"><!-- --></A><H3>
+lockStructure</H3>
+<PRE>
+public void <B>lockStructure</B>()</PRE>
+<DL>
+<DD>Locks the structure of workbook.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="unLockStructure()"><!-- --></A><H3>
+unLockStructure</H3>
+<PRE>
+public void <B>unLockStructure</B>()</PRE>
+<DL>
+<DD>Unlocks the structure of workbook.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="lockWindows()"><!-- --></A><H3>
+lockWindows</H3>
+<PRE>
+public void <B>lockWindows</B>()</PRE>
+<DL>
+<DD>Locks the windows that comprise the workbook.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="unLockWindows()"><!-- --></A><H3>
+unLockWindows</H3>
+<PRE>
+public void <B>unLockWindows</B>()</PRE>
+<DL>
+<DD>Unlocks the windows that comprise the workbook.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="lockRevision()"><!-- --></A><H3>
+lockRevision</H3>
+<PRE>
+public void <B>lockRevision</B>()</PRE>
+<DL>
+<DD>Locks the workbook for revisions.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="unLockRevision()"><!-- --></A><H3>
+unLockRevision</H3>
+<PRE>
+public void <B>unLockRevision</B>()</PRE>
+<DL>
+<DD>Unlocks the workbook for revisions.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="addToolPack(org.apache.poi.ss.formula.udf.UDFFinder)"><!-- --></A><H3>
+addToolPack</H3>
+<PRE>
+public void <B>addToolPack</B>(<A HREF="../../../../../org/apache/poi/ss/formula/udf/UDFFinder.html" title="interface in org.apache.poi.ss.formula.udf">UDFFinder</A>&nbsp;toopack)</PRE>
+<DL>
+<DD>Register a new toolpack in this workbook.
+<P>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../../../../org/apache/poi/ss/usermodel/Workbook.html#addToolPack(org.apache.poi.ss.formula.udf.UDFFinder)">addToolPack</A></CODE> in interface <CODE><A HREF="../../../../../org/apache/poi/ss/usermodel/Workbook.html" title="interface in org.apache.poi.ss.usermodel">Workbook</A></CODE></DL>
+</DD>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>toopack</CODE> - the toolpack to register</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setForceFormulaRecalculation(boolean)"><!-- --></A><H3>
+setForceFormulaRecalculation</H3>
+<PRE>
+public void <B>setForceFormulaRecalculation</B>(boolean&nbsp;value)</PRE>
+<DL>
+<DD>Whether the application shall perform a full recalculation when the workbook is opened.
+ <p>
+ Typically you want to force formula recalculation when you modify cell formulas or values
+ of a workbook previously created by Excel. When set to true, this flag will tell Excel
+ that it needs to recalculate all formulas in the workbook the next time the file is opened.
+ </p>
+ <p>
+ Note, that recalculation updates cached formula results and, thus, modifies the workbook.
+ Depending on the version, Excel may prompt you with "Do you want to save the changes in <em>filename</em>?"
+ on close.
+ </p>
+<P>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../../../../org/apache/poi/ss/usermodel/Workbook.html#setForceFormulaRecalculation(boolean)">setForceFormulaRecalculation</A></CODE> in interface <CODE><A HREF="../../../../../org/apache/poi/ss/usermodel/Workbook.html" title="interface in org.apache.poi.ss.usermodel">Workbook</A></CODE></DL>
+</DD>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>value</CODE> - true if the application will perform a full recalculation of
+ workbook values when the workbook is opened<DT><B>Since:</B></DT>
+  <DD>3.8</DD>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getForceFormulaRecalculation()"><!-- --></A><H3>
+getForceFormulaRecalculation</H3>
+<PRE>
+public boolean <B>getForceFormulaRecalculation</B>()</PRE>
+<DL>
+<DD>Whether Excel will be asked to recalculate all formulas when the  workbook is opened.
+<P>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../../../../org/apache/poi/ss/usermodel/Workbook.html#getForceFormulaRecalculation()">getForceFormulaRecalculation</A></CODE> in interface <CODE><A HREF="../../../../../org/apache/poi/ss/usermodel/Workbook.html" title="interface in org.apache.poi.ss.usermodel">Workbook</A></CODE></DL>
+</DD>
+<DD><DL>
+<DT><B>Since:</B></DT>
+  <DD>3.8</DD>
+</DL>
+</DD>
+</DL>
+<!-- ========= END OF CLASS DATA ========= -->
+<HR>
+
+
+<!-- ======= START OF BOTTOM NAVBAR ====== -->
+<A NAME="navbar_bottom"><!-- --></A>
+<A HREF="#skip-navbar_bottom" title="Skip navigation links"></A>
+<TABLE BORDER="0" WIDTH="100%" CELLPADDING="1" CELLSPACING="0" SUMMARY="">
+<TR>
+<TD COLSPAN=2 BGCOLOR="#EEEEFF" CLASS="NavBarCell1">
+<A NAME="navbar_bottom_firstrow"><!-- --></A>
+<TABLE BORDER="0" CELLPADDING="0" CELLSPACING="3" SUMMARY="">
+  <TR ALIGN="center" VALIGN="top">
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../overview-summary.html"><FONT CLASS="NavBarFont1"><B>Overview</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="package-summary.html"><FONT CLASS="NavBarFont1"><B>Package</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#FFFFFF" CLASS="NavBarCell1Rev"> &nbsp;<FONT CLASS="NavBarFont1Rev"><B>Class</B></FONT>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="class-use/XSSFWorkbook.html"><FONT CLASS="NavBarFont1"><B>Use</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="package-tree.html"><FONT CLASS="NavBarFont1"><B>Tree</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../deprecated-list.html"><FONT CLASS="NavBarFont1"><B>Deprecated</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../index-all.html"><FONT CLASS="NavBarFont1"><B>Index</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../help-doc.html"><FONT CLASS="NavBarFont1"><B>Help</B></FONT></A>&nbsp;</TD>
+  </TR>
+</TABLE>
+</TD>
+<TD ALIGN="right" VALIGN="top" ROWSPAN=3><EM>
+</EM>
+</TD>
+</TR>
+
+<TR>
+<TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
+&nbsp;<A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFVMLDrawing.html" title="class in org.apache.poi.xssf.usermodel"><B>PREV CLASS</B></A>&nbsp;
+&nbsp;NEXT CLASS</FONT></TD>
+<TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
+  <A HREF="../../../../../index.html?org/apache/poi/xssf/usermodel/XSSFWorkbook.html" target="_top"><B>FRAMES</B></A>  &nbsp;
+&nbsp;<A HREF="XSSFWorkbook.html" target="_top"><B>NO FRAMES</B></A>  &nbsp;
+&nbsp;<SCRIPT type="text/javascript">
+  <!--
+  if(window==top) {
+    document.writeln('<A HREF="../../../../../allclasses-noframe.html"><B>All Classes</B></A>');
+  }
+  //-->
+</SCRIPT>
+<NOSCRIPT>
+  <A HREF="../../../../../allclasses-noframe.html"><B>All Classes</B></A>
+</NOSCRIPT>
+
+
+</FONT></TD>
+</TR>
+<TR>
+<TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
+  SUMMARY:&nbsp;NESTED&nbsp;|&nbsp;<A HREF="#field_summary">FIELD</A>&nbsp;|&nbsp;<A HREF="#constructor_summary">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_summary">METHOD</A></FONT></TD>
+<TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
+DETAIL:&nbsp;<A HREF="#field_detail">FIELD</A>&nbsp;|&nbsp;<A HREF="#constructor_detail">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_detail">METHOD</A></FONT></TD>
+</TR>
+</TABLE>
+<A NAME="skip-navbar_bottom"></A>
+<!-- ======== END OF BOTTOM NAVBAR ======= -->
+
+<HR>
+
+                <i>Copyright 2014 The Apache Software Foundation or
+        its licensors, as applicable.</i>
+            
+</BODY>
+</HTML>

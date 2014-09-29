@@ -1,0 +1,796 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!--NewPage-->
+<HTML>
+<HEAD>
+<TITLE>
+ExcelToHtmlConverter (POI API Documentation)
+</TITLE>
+
+<META NAME="keywords" CONTENT="org.apache.poi.hssf.converter.ExcelToHtmlConverter class">
+
+<LINK REL ="stylesheet" TYPE="text/css" HREF="../../../../../stylesheet.css" TITLE="Style">
+
+<SCRIPT type="text/javascript">
+function windowTitle()
+{
+    parent.document.title="ExcelToHtmlConverter (POI API Documentation)";
+}
+</SCRIPT>
+<NOSCRIPT>
+</NOSCRIPT>
+
+</HEAD>
+
+<BODY BGCOLOR="white" onload="windowTitle();">
+
+
+<!-- ========= START OF TOP NAVBAR ======= -->
+<A NAME="navbar_top"><!-- --></A>
+<A HREF="#skip-navbar_top" title="Skip navigation links"></A>
+<TABLE BORDER="0" WIDTH="100%" CELLPADDING="1" CELLSPACING="0" SUMMARY="">
+<TR>
+<TD COLSPAN=2 BGCOLOR="#EEEEFF" CLASS="NavBarCell1">
+<A NAME="navbar_top_firstrow"><!-- --></A>
+<TABLE BORDER="0" CELLPADDING="0" CELLSPACING="3" SUMMARY="">
+  <TR ALIGN="center" VALIGN="top">
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../overview-summary.html"><FONT CLASS="NavBarFont1"><B>Overview</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="package-summary.html"><FONT CLASS="NavBarFont1"><B>Package</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#FFFFFF" CLASS="NavBarCell1Rev"> &nbsp;<FONT CLASS="NavBarFont1Rev"><B>Class</B></FONT>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="class-use/ExcelToHtmlConverter.html"><FONT CLASS="NavBarFont1"><B>Use</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="package-tree.html"><FONT CLASS="NavBarFont1"><B>Tree</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../deprecated-list.html"><FONT CLASS="NavBarFont1"><B>Deprecated</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../index-all.html"><FONT CLASS="NavBarFont1"><B>Index</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../help-doc.html"><FONT CLASS="NavBarFont1"><B>Help</B></FONT></A>&nbsp;</TD>
+  </TR>
+</TABLE>
+</TD>
+<TD ALIGN="right" VALIGN="top" ROWSPAN=3><EM>
+</EM>
+</TD>
+</TR>
+
+<TR>
+<TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
+&nbsp;<A HREF="../../../../../org/apache/poi/hssf/converter/ExcelToFoUtils.html" title="class in org.apache.poi.hssf.converter"><B>PREV CLASS</B></A>&nbsp;
+&nbsp;<A HREF="../../../../../org/apache/poi/hssf/converter/ExcelToHtmlUtils.html" title="class in org.apache.poi.hssf.converter"><B>NEXT CLASS</B></A></FONT></TD>
+<TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
+  <A HREF="../../../../../index.html?org/apache/poi/hssf/converter/ExcelToHtmlConverter.html" target="_top"><B>FRAMES</B></A>  &nbsp;
+&nbsp;<A HREF="ExcelToHtmlConverter.html" target="_top"><B>NO FRAMES</B></A>  &nbsp;
+&nbsp;<SCRIPT type="text/javascript">
+  <!--
+  if(window==top) {
+    document.writeln('<A HREF="../../../../../allclasses-noframe.html"><B>All Classes</B></A>');
+  }
+  //-->
+</SCRIPT>
+<NOSCRIPT>
+  <A HREF="../../../../../allclasses-noframe.html"><B>All Classes</B></A>
+</NOSCRIPT>
+
+
+</FONT></TD>
+</TR>
+<TR>
+<TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
+  SUMMARY:&nbsp;NESTED&nbsp;|&nbsp;<A HREF="#fields_inherited_from_class_org.apache.poi.hssf.converter.AbstractExcelConverter">FIELD</A>&nbsp;|&nbsp;<A HREF="#constructor_summary">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_summary">METHOD</A></FONT></TD>
+<TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
+DETAIL:&nbsp;FIELD&nbsp;|&nbsp;<A HREF="#constructor_detail">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_detail">METHOD</A></FONT></TD>
+</TR>
+</TABLE>
+<A NAME="skip-navbar_top"></A>
+<!-- ========= END OF TOP NAVBAR ========= -->
+
+<HR>
+<!-- ======== START OF CLASS DATA ======== -->
+<H2>
+<FONT SIZE="-1">
+org.apache.poi.hssf.converter</FONT>
+<BR>
+Class ExcelToHtmlConverter</H2>
+<PRE>
+java.lang.Object
+  <IMG SRC="../../../../../resources/inherit.gif" ALT="extended by "><A HREF="../../../../../org/apache/poi/hssf/converter/AbstractExcelConverter.html" title="class in org.apache.poi.hssf.converter">org.apache.poi.hssf.converter.AbstractExcelConverter</A>
+      <IMG SRC="../../../../../resources/inherit.gif" ALT="extended by "><B>org.apache.poi.hssf.converter.ExcelToHtmlConverter</B>
+</PRE>
+<HR>
+<DL>
+<DT><PRE><FONT SIZE="-1"><A HREF="../../../../../org/apache/poi/util/Beta.html" title="annotation in org.apache.poi.util">@Beta</A>
+</FONT>public class <B>ExcelToHtmlConverter</B><DT>extends <A HREF="../../../../../org/apache/poi/hssf/converter/AbstractExcelConverter.html" title="class in org.apache.poi.hssf.converter">AbstractExcelConverter</A></DL>
+</PRE>
+
+<P>
+Converts xls files (97-2007) to HTML file.
+<P>
+
+<P>
+<DL>
+<DT><B>Author:</B></DT>
+  <DD>Sergey Vladimirov (vlsergey {at} gmail {dot} com)</DD>
+</DL>
+<HR>
+
+<P>
+<!-- =========== FIELD SUMMARY =========== -->
+
+<A NAME="field_summary"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+<B>Field Summary</B></FONT></TH>
+</TR>
+</TABLE>
+&nbsp;<A NAME="fields_inherited_from_class_org.apache.poi.hssf.converter.AbstractExcelConverter"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#EEEEFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left"><B>Fields inherited from class org.apache.poi.hssf.converter.<A HREF="../../../../../org/apache/poi/hssf/converter/AbstractExcelConverter.html" title="class in org.apache.poi.hssf.converter">AbstractExcelConverter</A></B></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><A HREF="../../../../../org/apache/poi/hssf/converter/AbstractExcelConverter.html#_formatter">_formatter</A></CODE></TD>
+</TR>
+</TABLE>
+&nbsp;
+<!-- ======== CONSTRUCTOR SUMMARY ======== -->
+
+<A NAME="constructor_summary"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+<B>Constructor Summary</B></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hssf/converter/ExcelToHtmlConverter.html#ExcelToHtmlConverter(org.w3c.dom.Document)">ExcelToHtmlConverter</A></B>(org.w3c.dom.Document&nbsp;doc)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hssf/converter/ExcelToHtmlConverter.html#ExcelToHtmlConverter(org.apache.poi.hwpf.converter.HtmlDocumentFacade)">ExcelToHtmlConverter</A></B>(<A HREF="../../../../../org/apache/poi/hwpf/converter/HtmlDocumentFacade.html" title="class in org.apache.poi.hwpf.converter">HtmlDocumentFacade</A>&nbsp;htmlDocumentFacade)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+</TABLE>
+&nbsp;
+<!-- ========== METHOD SUMMARY =========== -->
+
+<A NAME="method_summary"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+<B>Method Summary</B></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>protected &nbsp;java.lang.String</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hssf/converter/ExcelToHtmlConverter.html#buildStyle(org.apache.poi.hssf.usermodel.HSSFWorkbook, org.apache.poi.hssf.usermodel.HSSFCellStyle)">buildStyle</A></B>(<A HREF="../../../../../org/apache/poi/hssf/usermodel/HSSFWorkbook.html" title="class in org.apache.poi.hssf.usermodel">HSSFWorkbook</A>&nbsp;workbook,
+           <A HREF="../../../../../org/apache/poi/hssf/usermodel/HSSFCellStyle.html" title="class in org.apache.poi.hssf.usermodel">HSSFCellStyle</A>&nbsp;cellStyle)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;java.lang.String</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hssf/converter/ExcelToHtmlConverter.html#getCssClassPrefixCell()">getCssClassPrefixCell</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;java.lang.String</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hssf/converter/ExcelToHtmlConverter.html#getCssClassPrefixDiv()">getCssClassPrefixDiv</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;java.lang.String</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hssf/converter/ExcelToHtmlConverter.html#getCssClassPrefixRow()">getCssClassPrefixRow</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;java.lang.String</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hssf/converter/ExcelToHtmlConverter.html#getCssClassPrefixTable()">getCssClassPrefixTable</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;org.w3c.dom.Document</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hssf/converter/ExcelToHtmlConverter.html#getDocument()">getDocument</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>protected &nbsp;java.lang.String</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hssf/converter/ExcelToHtmlConverter.html#getStyleClassName(org.apache.poi.hssf.usermodel.HSSFWorkbook, org.apache.poi.hssf.usermodel.HSSFCellStyle)">getStyleClassName</A></B>(<A HREF="../../../../../org/apache/poi/hssf/usermodel/HSSFWorkbook.html" title="class in org.apache.poi.hssf.usermodel">HSSFWorkbook</A>&nbsp;workbook,
+                  <A HREF="../../../../../org/apache/poi/hssf/usermodel/HSSFCellStyle.html" title="class in org.apache.poi.hssf.usermodel">HSSFCellStyle</A>&nbsp;cellStyle)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hssf/converter/ExcelToHtmlConverter.html#isUseDivsToSpan()">isUseDivsToSpan</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hssf/converter/ExcelToHtmlConverter.html#main(java.lang.String[])">main</A></B>(java.lang.String[]&nbsp;args)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Java main() interface to interact with <A HREF="../../../../../org/apache/poi/hssf/converter/ExcelToHtmlConverter.html" title="class in org.apache.poi.hssf.converter"><CODE>ExcelToHtmlConverter</CODE></A></TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;org.w3c.dom.Document</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hssf/converter/ExcelToHtmlConverter.html#process(java.io.File)">process</A></B>(java.io.File&nbsp;xlsFile)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Converts Excel file (97-2007) into HTML file.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>protected &nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hssf/converter/ExcelToHtmlConverter.html#processCell(org.apache.poi.hssf.usermodel.HSSFCell, org.w3c.dom.Element, int, int, float)">processCell</A></B>(<A HREF="../../../../../org/apache/poi/hssf/usermodel/HSSFCell.html" title="class in org.apache.poi.hssf.usermodel">HSSFCell</A>&nbsp;cell,
+            org.w3c.dom.Element&nbsp;tableCellElement,
+            int&nbsp;normalWidthPx,
+            int&nbsp;maxSpannedWidthPx,
+            float&nbsp;normalHeightPt)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>protected &nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hssf/converter/ExcelToHtmlConverter.html#processColumnHeaders(org.apache.poi.hssf.usermodel.HSSFSheet, int, org.w3c.dom.Element)">processColumnHeaders</A></B>(<A HREF="../../../../../org/apache/poi/hssf/usermodel/HSSFSheet.html" title="class in org.apache.poi.hssf.usermodel">HSSFSheet</A>&nbsp;sheet,
+                     int&nbsp;maxSheetColumns,
+                     org.w3c.dom.Element&nbsp;table)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>protected &nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hssf/converter/ExcelToHtmlConverter.html#processColumnWidths(org.apache.poi.hssf.usermodel.HSSFSheet, int, org.w3c.dom.Element)">processColumnWidths</A></B>(<A HREF="../../../../../org/apache/poi/hssf/usermodel/HSSFSheet.html" title="class in org.apache.poi.hssf.usermodel">HSSFSheet</A>&nbsp;sheet,
+                    int&nbsp;maxSheetColumns,
+                    org.w3c.dom.Element&nbsp;table)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Creates COLGROUP element with width specified for all columns.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>protected &nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hssf/converter/ExcelToHtmlConverter.html#processDocumentInformation(org.apache.poi.hpsf.SummaryInformation)">processDocumentInformation</A></B>(<A HREF="../../../../../org/apache/poi/hpsf/SummaryInformation.html" title="class in org.apache.poi.hpsf">SummaryInformation</A>&nbsp;summaryInformation)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>protected &nbsp;int</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hssf/converter/ExcelToHtmlConverter.html#processRow(org.apache.poi.ss.util.CellRangeAddress[][], org.apache.poi.hssf.usermodel.HSSFRow, org.w3c.dom.Element)">processRow</A></B>(<A HREF="../../../../../org/apache/poi/ss/util/CellRangeAddress.html" title="class in org.apache.poi.ss.util">CellRangeAddress</A>[][]&nbsp;mergedRanges,
+           <A HREF="../../../../../org/apache/poi/hssf/usermodel/HSSFRow.html" title="class in org.apache.poi.hssf.usermodel">HSSFRow</A>&nbsp;row,
+           org.w3c.dom.Element&nbsp;tableRowElement)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>protected &nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hssf/converter/ExcelToHtmlConverter.html#processRowNumber(org.apache.poi.hssf.usermodel.HSSFRow, org.w3c.dom.Element)">processRowNumber</A></B>(<A HREF="../../../../../org/apache/poi/hssf/usermodel/HSSFRow.html" title="class in org.apache.poi.hssf.usermodel">HSSFRow</A>&nbsp;row,
+                 org.w3c.dom.Element&nbsp;tableRowNumberCellElement)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>protected &nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hssf/converter/ExcelToHtmlConverter.html#processSheet(org.apache.poi.hssf.usermodel.HSSFSheet)">processSheet</A></B>(<A HREF="../../../../../org/apache/poi/hssf/usermodel/HSSFSheet.html" title="class in org.apache.poi.hssf.usermodel">HSSFSheet</A>&nbsp;sheet)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>protected &nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hssf/converter/ExcelToHtmlConverter.html#processSheetHeader(org.w3c.dom.Element, org.apache.poi.hssf.usermodel.HSSFSheet)">processSheetHeader</A></B>(org.w3c.dom.Element&nbsp;htmlBody,
+                   <A HREF="../../../../../org/apache/poi/hssf/usermodel/HSSFSheet.html" title="class in org.apache.poi.hssf.usermodel">HSSFSheet</A>&nbsp;sheet)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hssf/converter/ExcelToHtmlConverter.html#processWorkbook(org.apache.poi.hssf.usermodel.HSSFWorkbook)">processWorkbook</A></B>(<A HREF="../../../../../org/apache/poi/hssf/usermodel/HSSFWorkbook.html" title="class in org.apache.poi.hssf.usermodel">HSSFWorkbook</A>&nbsp;workbook)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hssf/converter/ExcelToHtmlConverter.html#setCssClassPrefixCell(java.lang.String)">setCssClassPrefixCell</A></B>(java.lang.String&nbsp;cssClassPrefixCell)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hssf/converter/ExcelToHtmlConverter.html#setCssClassPrefixDiv(java.lang.String)">setCssClassPrefixDiv</A></B>(java.lang.String&nbsp;cssClassPrefixDiv)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hssf/converter/ExcelToHtmlConverter.html#setCssClassPrefixRow(java.lang.String)">setCssClassPrefixRow</A></B>(java.lang.String&nbsp;cssClassPrefixRow)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hssf/converter/ExcelToHtmlConverter.html#setCssClassPrefixTable(java.lang.String)">setCssClassPrefixTable</A></B>(java.lang.String&nbsp;cssClassPrefixTable)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hssf/converter/ExcelToHtmlConverter.html#setUseDivsToSpan(boolean)">setUseDivsToSpan</A></B>(boolean&nbsp;useDivsToSpan)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Allows converter to wrap content into two additional DIVs with tricky
+ styles, so it will wrap across empty cells (like in Excel).</TD>
+</TR>
+</TABLE>
+&nbsp;<A NAME="methods_inherited_from_class_org.apache.poi.hssf.converter.AbstractExcelConverter"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#EEEEFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left"><B>Methods inherited from class org.apache.poi.hssf.converter.<A HREF="../../../../../org/apache/poi/hssf/converter/AbstractExcelConverter.html" title="class in org.apache.poi.hssf.converter">AbstractExcelConverter</A></B></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><A HREF="../../../../../org/apache/poi/hssf/converter/AbstractExcelConverter.html#getColumnName(int)">getColumnName</A>, <A HREF="../../../../../org/apache/poi/hssf/converter/AbstractExcelConverter.html#getColumnWidth(org.apache.poi.hssf.usermodel.HSSFSheet, int)">getColumnWidth</A>, <A HREF="../../../../../org/apache/poi/hssf/converter/AbstractExcelConverter.html#getDefaultColumnWidth(org.apache.poi.hssf.usermodel.HSSFSheet)">getDefaultColumnWidth</A>, <A HREF="../../../../../org/apache/poi/hssf/converter/AbstractExcelConverter.html#getFontReplacer()">getFontReplacer</A>, <A HREF="../../../../../org/apache/poi/hssf/converter/AbstractExcelConverter.html#getRowName(org.apache.poi.hssf.usermodel.HSSFRow)">getRowName</A>, <A HREF="../../../../../org/apache/poi/hssf/converter/AbstractExcelConverter.html#isOutputColumnHeaders()">isOutputColumnHeaders</A>, <A HREF="../../../../../org/apache/poi/hssf/converter/AbstractExcelConverter.html#isOutputHiddenColumns()">isOutputHiddenColumns</A>, <A HREF="../../../../../org/apache/poi/hssf/converter/AbstractExcelConverter.html#isOutputHiddenRows()">isOutputHiddenRows</A>, <A HREF="../../../../../org/apache/poi/hssf/converter/AbstractExcelConverter.html#isOutputLeadingSpacesAsNonBreaking()">isOutputLeadingSpacesAsNonBreaking</A>, <A HREF="../../../../../org/apache/poi/hssf/converter/AbstractExcelConverter.html#isOutputRowNumbers()">isOutputRowNumbers</A>, <A HREF="../../../../../org/apache/poi/hssf/converter/AbstractExcelConverter.html#isTextEmpty(org.apache.poi.hssf.usermodel.HSSFCell)">isTextEmpty</A>, <A HREF="../../../../../org/apache/poi/hssf/converter/AbstractExcelConverter.html#setFontReplacer(org.apache.poi.hwpf.converter.FontReplacer)">setFontReplacer</A>, <A HREF="../../../../../org/apache/poi/hssf/converter/AbstractExcelConverter.html#setOutputColumnHeaders(boolean)">setOutputColumnHeaders</A>, <A HREF="../../../../../org/apache/poi/hssf/converter/AbstractExcelConverter.html#setOutputHiddenColumns(boolean)">setOutputHiddenColumns</A>, <A HREF="../../../../../org/apache/poi/hssf/converter/AbstractExcelConverter.html#setOutputHiddenRows(boolean)">setOutputHiddenRows</A>, <A HREF="../../../../../org/apache/poi/hssf/converter/AbstractExcelConverter.html#setOutputLeadingSpacesAsNonBreaking(boolean)">setOutputLeadingSpacesAsNonBreaking</A>, <A HREF="../../../../../org/apache/poi/hssf/converter/AbstractExcelConverter.html#setOutputRowNumbers(boolean)">setOutputRowNumbers</A></CODE></TD>
+</TR>
+</TABLE>
+&nbsp;<A NAME="methods_inherited_from_class_java.lang.Object"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#EEEEFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left"><B>Methods inherited from class java.lang.Object</B></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE>clone, equals, finalize, getClass, hashCode, notify, notifyAll, toString, wait, wait, wait</CODE></TD>
+</TR>
+</TABLE>
+&nbsp;
+<P>
+
+<!-- ========= CONSTRUCTOR DETAIL ======== -->
+
+<A NAME="constructor_detail"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="1"><FONT SIZE="+2">
+<B>Constructor Detail</B></FONT></TH>
+</TR>
+</TABLE>
+
+<A NAME="ExcelToHtmlConverter(org.w3c.dom.Document)"><!-- --></A><H3>
+ExcelToHtmlConverter</H3>
+<PRE>
+public <B>ExcelToHtmlConverter</B>(org.w3c.dom.Document&nbsp;doc)</PRE>
+<DL>
+</DL>
+<HR>
+
+<A NAME="ExcelToHtmlConverter(org.apache.poi.hwpf.converter.HtmlDocumentFacade)"><!-- --></A><H3>
+ExcelToHtmlConverter</H3>
+<PRE>
+public <B>ExcelToHtmlConverter</B>(<A HREF="../../../../../org/apache/poi/hwpf/converter/HtmlDocumentFacade.html" title="class in org.apache.poi.hwpf.converter">HtmlDocumentFacade</A>&nbsp;htmlDocumentFacade)</PRE>
+<DL>
+</DL>
+
+<!-- ============ METHOD DETAIL ========== -->
+
+<A NAME="method_detail"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="1"><FONT SIZE="+2">
+<B>Method Detail</B></FONT></TH>
+</TR>
+</TABLE>
+
+<A NAME="main(java.lang.String[])"><!-- --></A><H3>
+main</H3>
+<PRE>
+public static void <B>main</B>(java.lang.String[]&nbsp;args)</PRE>
+<DL>
+<DD>Java main() interface to interact with <A HREF="../../../../../org/apache/poi/hssf/converter/ExcelToHtmlConverter.html" title="class in org.apache.poi.hssf.converter"><CODE>ExcelToHtmlConverter</CODE></A>
+ 
+ <p>
+ Usage: ExcelToHtmlConverter infile outfile
+ </p>
+ Where infile is an input .xls file ( Word 97-2007) which will be rendered
+ as HTML into outfile
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="process(java.io.File)"><!-- --></A><H3>
+process</H3>
+<PRE>
+public static org.w3c.dom.Document <B>process</B>(java.io.File&nbsp;xlsFile)
+                                    throws java.lang.Exception</PRE>
+<DL>
+<DD>Converts Excel file (97-2007) into HTML file.
+<P>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>xlsFile</CODE> - file to process
+<DT><B>Returns:</B><DD>DOM representation of result HTML
+<DT><B>Throws:</B>
+<DD><CODE>java.lang.Exception</CODE></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="buildStyle(org.apache.poi.hssf.usermodel.HSSFWorkbook, org.apache.poi.hssf.usermodel.HSSFCellStyle)"><!-- --></A><H3>
+buildStyle</H3>
+<PRE>
+protected java.lang.String <B>buildStyle</B>(<A HREF="../../../../../org/apache/poi/hssf/usermodel/HSSFWorkbook.html" title="class in org.apache.poi.hssf.usermodel">HSSFWorkbook</A>&nbsp;workbook,
+                                      <A HREF="../../../../../org/apache/poi/hssf/usermodel/HSSFCellStyle.html" title="class in org.apache.poi.hssf.usermodel">HSSFCellStyle</A>&nbsp;cellStyle)</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getCssClassPrefixCell()"><!-- --></A><H3>
+getCssClassPrefixCell</H3>
+<PRE>
+public java.lang.String <B>getCssClassPrefixCell</B>()</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getCssClassPrefixDiv()"><!-- --></A><H3>
+getCssClassPrefixDiv</H3>
+<PRE>
+public java.lang.String <B>getCssClassPrefixDiv</B>()</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getCssClassPrefixRow()"><!-- --></A><H3>
+getCssClassPrefixRow</H3>
+<PRE>
+public java.lang.String <B>getCssClassPrefixRow</B>()</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getCssClassPrefixTable()"><!-- --></A><H3>
+getCssClassPrefixTable</H3>
+<PRE>
+public java.lang.String <B>getCssClassPrefixTable</B>()</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getDocument()"><!-- --></A><H3>
+getDocument</H3>
+<PRE>
+public org.w3c.dom.Document <B>getDocument</B>()</PRE>
+<DL>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../../../../org/apache/poi/hssf/converter/AbstractExcelConverter.html#getDocument()">getDocument</A></CODE> in class <CODE><A HREF="../../../../../org/apache/poi/hssf/converter/AbstractExcelConverter.html" title="class in org.apache.poi.hssf.converter">AbstractExcelConverter</A></CODE></DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getStyleClassName(org.apache.poi.hssf.usermodel.HSSFWorkbook, org.apache.poi.hssf.usermodel.HSSFCellStyle)"><!-- --></A><H3>
+getStyleClassName</H3>
+<PRE>
+protected java.lang.String <B>getStyleClassName</B>(<A HREF="../../../../../org/apache/poi/hssf/usermodel/HSSFWorkbook.html" title="class in org.apache.poi.hssf.usermodel">HSSFWorkbook</A>&nbsp;workbook,
+                                             <A HREF="../../../../../org/apache/poi/hssf/usermodel/HSSFCellStyle.html" title="class in org.apache.poi.hssf.usermodel">HSSFCellStyle</A>&nbsp;cellStyle)</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="isUseDivsToSpan()"><!-- --></A><H3>
+isUseDivsToSpan</H3>
+<PRE>
+public boolean <B>isUseDivsToSpan</B>()</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="processCell(org.apache.poi.hssf.usermodel.HSSFCell, org.w3c.dom.Element, int, int, float)"><!-- --></A><H3>
+processCell</H3>
+<PRE>
+protected boolean <B>processCell</B>(<A HREF="../../../../../org/apache/poi/hssf/usermodel/HSSFCell.html" title="class in org.apache.poi.hssf.usermodel">HSSFCell</A>&nbsp;cell,
+                              org.w3c.dom.Element&nbsp;tableCellElement,
+                              int&nbsp;normalWidthPx,
+                              int&nbsp;maxSpannedWidthPx,
+                              float&nbsp;normalHeightPt)</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="processColumnHeaders(org.apache.poi.hssf.usermodel.HSSFSheet, int, org.w3c.dom.Element)"><!-- --></A><H3>
+processColumnHeaders</H3>
+<PRE>
+protected void <B>processColumnHeaders</B>(<A HREF="../../../../../org/apache/poi/hssf/usermodel/HSSFSheet.html" title="class in org.apache.poi.hssf.usermodel">HSSFSheet</A>&nbsp;sheet,
+                                    int&nbsp;maxSheetColumns,
+                                    org.w3c.dom.Element&nbsp;table)</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="processColumnWidths(org.apache.poi.hssf.usermodel.HSSFSheet, int, org.w3c.dom.Element)"><!-- --></A><H3>
+processColumnWidths</H3>
+<PRE>
+protected void <B>processColumnWidths</B>(<A HREF="../../../../../org/apache/poi/hssf/usermodel/HSSFSheet.html" title="class in org.apache.poi.hssf.usermodel">HSSFSheet</A>&nbsp;sheet,
+                                   int&nbsp;maxSheetColumns,
+                                   org.w3c.dom.Element&nbsp;table)</PRE>
+<DL>
+<DD>Creates COLGROUP element with width specified for all columns. (Except
+ first if <tt><A HREF="../../../../../org/apache/poi/hssf/converter/AbstractExcelConverter.html#isOutputRowNumbers()"><CODE>AbstractExcelConverter.isOutputRowNumbers()</CODE></A>==true</tt>)
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="processDocumentInformation(org.apache.poi.hpsf.SummaryInformation)"><!-- --></A><H3>
+processDocumentInformation</H3>
+<PRE>
+protected void <B>processDocumentInformation</B>(<A HREF="../../../../../org/apache/poi/hpsf/SummaryInformation.html" title="class in org.apache.poi.hpsf">SummaryInformation</A>&nbsp;summaryInformation)</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="processRow(org.apache.poi.ss.util.CellRangeAddress[][], org.apache.poi.hssf.usermodel.HSSFRow, org.w3c.dom.Element)"><!-- --></A><H3>
+processRow</H3>
+<PRE>
+protected int <B>processRow</B>(<A HREF="../../../../../org/apache/poi/ss/util/CellRangeAddress.html" title="class in org.apache.poi.ss.util">CellRangeAddress</A>[][]&nbsp;mergedRanges,
+                         <A HREF="../../../../../org/apache/poi/hssf/usermodel/HSSFRow.html" title="class in org.apache.poi.hssf.usermodel">HSSFRow</A>&nbsp;row,
+                         org.w3c.dom.Element&nbsp;tableRowElement)</PRE>
+<DL>
+<DD><DL>
+
+<DT><B>Returns:</B><DD>maximum 1-base index of column that were rendered, zero if none</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="processRowNumber(org.apache.poi.hssf.usermodel.HSSFRow, org.w3c.dom.Element)"><!-- --></A><H3>
+processRowNumber</H3>
+<PRE>
+protected void <B>processRowNumber</B>(<A HREF="../../../../../org/apache/poi/hssf/usermodel/HSSFRow.html" title="class in org.apache.poi.hssf.usermodel">HSSFRow</A>&nbsp;row,
+                                org.w3c.dom.Element&nbsp;tableRowNumberCellElement)</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="processSheet(org.apache.poi.hssf.usermodel.HSSFSheet)"><!-- --></A><H3>
+processSheet</H3>
+<PRE>
+protected void <B>processSheet</B>(<A HREF="../../../../../org/apache/poi/hssf/usermodel/HSSFSheet.html" title="class in org.apache.poi.hssf.usermodel">HSSFSheet</A>&nbsp;sheet)</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="processSheetHeader(org.w3c.dom.Element, org.apache.poi.hssf.usermodel.HSSFSheet)"><!-- --></A><H3>
+processSheetHeader</H3>
+<PRE>
+protected void <B>processSheetHeader</B>(org.w3c.dom.Element&nbsp;htmlBody,
+                                  <A HREF="../../../../../org/apache/poi/hssf/usermodel/HSSFSheet.html" title="class in org.apache.poi.hssf.usermodel">HSSFSheet</A>&nbsp;sheet)</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="processWorkbook(org.apache.poi.hssf.usermodel.HSSFWorkbook)"><!-- --></A><H3>
+processWorkbook</H3>
+<PRE>
+public void <B>processWorkbook</B>(<A HREF="../../../../../org/apache/poi/hssf/usermodel/HSSFWorkbook.html" title="class in org.apache.poi.hssf.usermodel">HSSFWorkbook</A>&nbsp;workbook)</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setCssClassPrefixCell(java.lang.String)"><!-- --></A><H3>
+setCssClassPrefixCell</H3>
+<PRE>
+public void <B>setCssClassPrefixCell</B>(java.lang.String&nbsp;cssClassPrefixCell)</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setCssClassPrefixDiv(java.lang.String)"><!-- --></A><H3>
+setCssClassPrefixDiv</H3>
+<PRE>
+public void <B>setCssClassPrefixDiv</B>(java.lang.String&nbsp;cssClassPrefixDiv)</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setCssClassPrefixRow(java.lang.String)"><!-- --></A><H3>
+setCssClassPrefixRow</H3>
+<PRE>
+public void <B>setCssClassPrefixRow</B>(java.lang.String&nbsp;cssClassPrefixRow)</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setCssClassPrefixTable(java.lang.String)"><!-- --></A><H3>
+setCssClassPrefixTable</H3>
+<PRE>
+public void <B>setCssClassPrefixTable</B>(java.lang.String&nbsp;cssClassPrefixTable)</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setUseDivsToSpan(boolean)"><!-- --></A><H3>
+setUseDivsToSpan</H3>
+<PRE>
+public void <B>setUseDivsToSpan</B>(boolean&nbsp;useDivsToSpan)</PRE>
+<DL>
+<DD>Allows converter to wrap content into two additional DIVs with tricky
+ styles, so it will wrap across empty cells (like in Excel).
+ <p>
+ <b>Warning:</b> after enabling this mode do not serialize result HTML
+ with INDENT=YES option, because line breaks will make additional
+ (unwanted) changes
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<!-- ========= END OF CLASS DATA ========= -->
+<HR>
+
+
+<!-- ======= START OF BOTTOM NAVBAR ====== -->
+<A NAME="navbar_bottom"><!-- --></A>
+<A HREF="#skip-navbar_bottom" title="Skip navigation links"></A>
+<TABLE BORDER="0" WIDTH="100%" CELLPADDING="1" CELLSPACING="0" SUMMARY="">
+<TR>
+<TD COLSPAN=2 BGCOLOR="#EEEEFF" CLASS="NavBarCell1">
+<A NAME="navbar_bottom_firstrow"><!-- --></A>
+<TABLE BORDER="0" CELLPADDING="0" CELLSPACING="3" SUMMARY="">
+  <TR ALIGN="center" VALIGN="top">
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../overview-summary.html"><FONT CLASS="NavBarFont1"><B>Overview</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="package-summary.html"><FONT CLASS="NavBarFont1"><B>Package</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#FFFFFF" CLASS="NavBarCell1Rev"> &nbsp;<FONT CLASS="NavBarFont1Rev"><B>Class</B></FONT>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="class-use/ExcelToHtmlConverter.html"><FONT CLASS="NavBarFont1"><B>Use</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="package-tree.html"><FONT CLASS="NavBarFont1"><B>Tree</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../deprecated-list.html"><FONT CLASS="NavBarFont1"><B>Deprecated</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../index-all.html"><FONT CLASS="NavBarFont1"><B>Index</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../help-doc.html"><FONT CLASS="NavBarFont1"><B>Help</B></FONT></A>&nbsp;</TD>
+  </TR>
+</TABLE>
+</TD>
+<TD ALIGN="right" VALIGN="top" ROWSPAN=3><EM>
+</EM>
+</TD>
+</TR>
+
+<TR>
+<TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
+&nbsp;<A HREF="../../../../../org/apache/poi/hssf/converter/ExcelToFoUtils.html" title="class in org.apache.poi.hssf.converter"><B>PREV CLASS</B></A>&nbsp;
+&nbsp;<A HREF="../../../../../org/apache/poi/hssf/converter/ExcelToHtmlUtils.html" title="class in org.apache.poi.hssf.converter"><B>NEXT CLASS</B></A></FONT></TD>
+<TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
+  <A HREF="../../../../../index.html?org/apache/poi/hssf/converter/ExcelToHtmlConverter.html" target="_top"><B>FRAMES</B></A>  &nbsp;
+&nbsp;<A HREF="ExcelToHtmlConverter.html" target="_top"><B>NO FRAMES</B></A>  &nbsp;
+&nbsp;<SCRIPT type="text/javascript">
+  <!--
+  if(window==top) {
+    document.writeln('<A HREF="../../../../../allclasses-noframe.html"><B>All Classes</B></A>');
+  }
+  //-->
+</SCRIPT>
+<NOSCRIPT>
+  <A HREF="../../../../../allclasses-noframe.html"><B>All Classes</B></A>
+</NOSCRIPT>
+
+
+</FONT></TD>
+</TR>
+<TR>
+<TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
+  SUMMARY:&nbsp;NESTED&nbsp;|&nbsp;<A HREF="#fields_inherited_from_class_org.apache.poi.hssf.converter.AbstractExcelConverter">FIELD</A>&nbsp;|&nbsp;<A HREF="#constructor_summary">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_summary">METHOD</A></FONT></TD>
+<TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
+DETAIL:&nbsp;FIELD&nbsp;|&nbsp;<A HREF="#constructor_detail">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_detail">METHOD</A></FONT></TD>
+</TR>
+</TABLE>
+<A NAME="skip-navbar_bottom"></A>
+<!-- ======== END OF BOTTOM NAVBAR ======= -->
+
+<HR>
+
+                <i>Copyright 2014 The Apache Software Foundation or
+        its licensors, as applicable.</i>
+            
+</BODY>
+</HTML>

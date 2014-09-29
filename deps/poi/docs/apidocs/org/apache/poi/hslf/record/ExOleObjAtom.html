@@ -1,0 +1,1150 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!--NewPage-->
+<HTML>
+<HEAD>
+<TITLE>
+ExOleObjAtom (POI API Documentation)
+</TITLE>
+
+<META NAME="keywords" CONTENT="org.apache.poi.hslf.record.ExOleObjAtom class">
+
+<LINK REL ="stylesheet" TYPE="text/css" HREF="../../../../../stylesheet.css" TITLE="Style">
+
+<SCRIPT type="text/javascript">
+function windowTitle()
+{
+    parent.document.title="ExOleObjAtom (POI API Documentation)";
+}
+</SCRIPT>
+<NOSCRIPT>
+</NOSCRIPT>
+
+</HEAD>
+
+<BODY BGCOLOR="white" onload="windowTitle();">
+
+
+<!-- ========= START OF TOP NAVBAR ======= -->
+<A NAME="navbar_top"><!-- --></A>
+<A HREF="#skip-navbar_top" title="Skip navigation links"></A>
+<TABLE BORDER="0" WIDTH="100%" CELLPADDING="1" CELLSPACING="0" SUMMARY="">
+<TR>
+<TD COLSPAN=2 BGCOLOR="#EEEEFF" CLASS="NavBarCell1">
+<A NAME="navbar_top_firstrow"><!-- --></A>
+<TABLE BORDER="0" CELLPADDING="0" CELLSPACING="3" SUMMARY="">
+  <TR ALIGN="center" VALIGN="top">
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../overview-summary.html"><FONT CLASS="NavBarFont1"><B>Overview</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="package-summary.html"><FONT CLASS="NavBarFont1"><B>Package</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#FFFFFF" CLASS="NavBarCell1Rev"> &nbsp;<FONT CLASS="NavBarFont1Rev"><B>Class</B></FONT>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="class-use/ExOleObjAtom.html"><FONT CLASS="NavBarFont1"><B>Use</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="package-tree.html"><FONT CLASS="NavBarFont1"><B>Tree</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../deprecated-list.html"><FONT CLASS="NavBarFont1"><B>Deprecated</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../index-all.html"><FONT CLASS="NavBarFont1"><B>Index</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../help-doc.html"><FONT CLASS="NavBarFont1"><B>Help</B></FONT></A>&nbsp;</TD>
+  </TR>
+</TABLE>
+</TD>
+<TD ALIGN="right" VALIGN="top" ROWSPAN=3><EM>
+</EM>
+</TD>
+</TR>
+
+<TR>
+<TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
+&nbsp;<A HREF="../../../../../org/apache/poi/hslf/record/ExObjListAtom.html" title="class in org.apache.poi.hslf.record"><B>PREV CLASS</B></A>&nbsp;
+&nbsp;<A HREF="../../../../../org/apache/poi/hslf/record/ExOleObjStg.html" title="class in org.apache.poi.hslf.record"><B>NEXT CLASS</B></A></FONT></TD>
+<TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
+  <A HREF="../../../../../index.html?org/apache/poi/hslf/record/ExOleObjAtom.html" target="_top"><B>FRAMES</B></A>  &nbsp;
+&nbsp;<A HREF="ExOleObjAtom.html" target="_top"><B>NO FRAMES</B></A>  &nbsp;
+&nbsp;<SCRIPT type="text/javascript">
+  <!--
+  if(window==top) {
+    document.writeln('<A HREF="../../../../../allclasses-noframe.html"><B>All Classes</B></A>');
+  }
+  //-->
+</SCRIPT>
+<NOSCRIPT>
+  <A HREF="../../../../../allclasses-noframe.html"><B>All Classes</B></A>
+</NOSCRIPT>
+
+
+</FONT></TD>
+</TR>
+<TR>
+<TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
+  SUMMARY:&nbsp;NESTED&nbsp;|&nbsp;<A HREF="#field_summary">FIELD</A>&nbsp;|&nbsp;<A HREF="#constructor_summary">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_summary">METHOD</A></FONT></TD>
+<TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
+DETAIL:&nbsp;<A HREF="#field_detail">FIELD</A>&nbsp;|&nbsp;<A HREF="#constructor_detail">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_detail">METHOD</A></FONT></TD>
+</TR>
+</TABLE>
+<A NAME="skip-navbar_top"></A>
+<!-- ========= END OF TOP NAVBAR ========= -->
+
+<HR>
+<!-- ======== START OF CLASS DATA ======== -->
+<H2>
+<FONT SIZE="-1">
+org.apache.poi.hslf.record</FONT>
+<BR>
+Class ExOleObjAtom</H2>
+<PRE>
+java.lang.Object
+  <IMG SRC="../../../../../resources/inherit.gif" ALT="extended by "><A HREF="../../../../../org/apache/poi/hslf/record/Record.html" title="class in org.apache.poi.hslf.record">org.apache.poi.hslf.record.Record</A>
+      <IMG SRC="../../../../../resources/inherit.gif" ALT="extended by "><A HREF="../../../../../org/apache/poi/hslf/record/RecordAtom.html" title="class in org.apache.poi.hslf.record">org.apache.poi.hslf.record.RecordAtom</A>
+          <IMG SRC="../../../../../resources/inherit.gif" ALT="extended by "><B>org.apache.poi.hslf.record.ExOleObjAtom</B>
+</PRE>
+<HR>
+<DL>
+<DT><PRE>public class <B>ExOleObjAtom</B><DT>extends <A HREF="../../../../../org/apache/poi/hslf/record/RecordAtom.html" title="class in org.apache.poi.hslf.record">RecordAtom</A></DL>
+</PRE>
+
+<P>
+Atom storing information for an OLE object.
+
+ <!--
+ offset   type    name         description
+
+ 0        uint4   drawAspect   Stores whether the object can be completely seen
+                               (value of 1), or if only the icon is visible (value of 4).
+
+ 4        sint4    type        Specifies whether the object is embedded or linked.
+                               0 - embedded
+                               1 - linked
+
+ 8        sint4    objID       Unique identifier for the OLE object
+
+ 2        sint4    subType     This specifies the type of ole object.
+                               0 - Default object
+                               1 - Microsoft Clipart Gallery
+                               2 - Microsoft Word table
+                               3 - Microsoft Excel
+                               4 - Microsoft Graph
+                               5 - Microsoft Organization Chart
+                               6 - Microsoft Equation Editor
+                               7 - Microsoft Wordart object
+                               8 - Sound
+                               9 - Image
+                               10 - PowerPoint presentation
+                               11 - PowerPoint slide
+                               12 - Microsoft Project
+                               13 - Microsoft Note-It Ole
+                               14 - Microsoft Excel chart
+                               15 - Media Player object
+
+ 16       sint4    objStgDataRef    Reference to persist object
+
+ 20       bool1    isBlank          Set if the object's image is blank
+           (note: KOffice has this as an int.)
+ -->
+<P>
+
+<P>
+<DL>
+<DT><B>Author:</B></DT>
+  <DD>Daniel Noll</DD>
+</DL>
+<HR>
+
+<P>
+<!-- =========== FIELD SUMMARY =========== -->
+
+<A NAME="field_summary"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+<B>Field Summary</B></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;int</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/record/ExOleObjAtom.html#DRAW_ASPECT_DOCPRINT">DRAW_ASPECT_DOCPRINT</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The object is displayed on the screen as though it were printed to a printer.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;int</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/record/ExOleObjAtom.html#DRAW_ASPECT_ICON">DRAW_ASPECT_ICON</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The object is displayed as an icon.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;int</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/record/ExOleObjAtom.html#DRAW_ASPECT_THUMBNAIL">DRAW_ASPECT_THUMBNAIL</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The object is displayed as a thumbnail image.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;int</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/record/ExOleObjAtom.html#DRAW_ASPECT_VISIBLE">DRAW_ASPECT_VISIBLE</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The object) is displayed as an embedded object inside of a container,</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;int</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/record/ExOleObjAtom.html#SUBTYPE_CLIPART_GALLERY">SUBTYPE_CLIPART_GALLERY</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;int</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/record/ExOleObjAtom.html#SUBTYPE_DEFAULT">SUBTYPE_DEFAULT</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;int</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/record/ExOleObjAtom.html#SUBTYPE_EQUATION">SUBTYPE_EQUATION</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;int</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/record/ExOleObjAtom.html#SUBTYPE_EXCEL">SUBTYPE_EXCEL</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;int</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/record/ExOleObjAtom.html#SUBTYPE_EXCEL_CHART">SUBTYPE_EXCEL_CHART</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;int</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/record/ExOleObjAtom.html#SUBTYPE_GRAPH">SUBTYPE_GRAPH</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;int</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/record/ExOleObjAtom.html#SUBTYPE_IMAGE">SUBTYPE_IMAGE</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;int</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/record/ExOleObjAtom.html#SUBTYPE_MEDIA_PLAYER">SUBTYPE_MEDIA_PLAYER</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;int</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/record/ExOleObjAtom.html#SUBTYPE_NOTEIT">SUBTYPE_NOTEIT</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;int</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/record/ExOleObjAtom.html#SUBTYPE_ORGANIZATION_CHART">SUBTYPE_ORGANIZATION_CHART</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;int</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/record/ExOleObjAtom.html#SUBTYPE_POWERPOINT_PRESENTATION">SUBTYPE_POWERPOINT_PRESENTATION</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;int</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/record/ExOleObjAtom.html#SUBTYPE_POWERPOINT_SLIDE">SUBTYPE_POWERPOINT_SLIDE</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;int</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/record/ExOleObjAtom.html#SUBTYPE_PROJECT">SUBTYPE_PROJECT</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;int</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/record/ExOleObjAtom.html#SUBTYPE_SOUND">SUBTYPE_SOUND</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;int</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/record/ExOleObjAtom.html#SUBTYPE_WORD_TABLE">SUBTYPE_WORD_TABLE</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;int</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/record/ExOleObjAtom.html#SUBTYPE_WORDART">SUBTYPE_WORDART</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;int</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/record/ExOleObjAtom.html#TYPE_CONTROL">TYPE_CONTROL</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The OLE object is an ActiveX control.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;int</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/record/ExOleObjAtom.html#TYPE_EMBEDDED">TYPE_EMBEDDED</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;An embedded OLE object; the object is serialized and saved within the file.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;int</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/record/ExOleObjAtom.html#TYPE_LINKED">TYPE_LINKED</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A linked OLE object; the object is saved outside of the file.</TD>
+</TR>
+</TABLE>
+&nbsp;<A NAME="fields_inherited_from_class_org.apache.poi.hslf.record.Record"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#EEEEFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left"><B>Fields inherited from class org.apache.poi.hslf.record.<A HREF="../../../../../org/apache/poi/hslf/record/Record.html" title="class in org.apache.poi.hslf.record">Record</A></B></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><A HREF="../../../../../org/apache/poi/hslf/record/Record.html#logger">logger</A></CODE></TD>
+</TR>
+</TABLE>
+&nbsp;
+<!-- ======== CONSTRUCTOR SUMMARY ======== -->
+
+<A NAME="constructor_summary"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+<B>Constructor Summary</B></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/record/ExOleObjAtom.html#ExOleObjAtom()">ExOleObjAtom</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Constructs a brand new link related atom record.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>protected </CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/record/ExOleObjAtom.html#ExOleObjAtom(byte[], int, int)">ExOleObjAtom</A></B>(byte[]&nbsp;source,
+             int&nbsp;start,
+             int&nbsp;len)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Constructs the link related atom record from its
+  source data.</TD>
+</TR>
+</TABLE>
+&nbsp;
+<!-- ========== METHOD SUMMARY =========== -->
+
+<A NAME="method_summary"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+<B>Method Summary</B></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;int</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/record/ExOleObjAtom.html#getDrawAspect()">getDrawAspect</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gets whether the object can be completely seen, or if only the
+ icon is visible.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/record/ExOleObjAtom.html#getIsBlank()">getIsBlank</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gets whether the object's image is blank.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;int</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/record/ExOleObjAtom.html#getObjID()">getObjID</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gets the unique identifier for the OLE object.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;int</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/record/ExOleObjAtom.html#getObjStgDataRef()">getObjStgDataRef</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gets the reference to the persistent object</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;int</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/record/ExOleObjAtom.html#getOptions()">getOptions</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gets misc options (the last four bytes in the atom).</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;long</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/record/ExOleObjAtom.html#getRecordType()">getRecordType</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns the type (held as a little endian in bytes 3 and 4)
+ that this class handles.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;int</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/record/ExOleObjAtom.html#getSubType()">getSubType</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gets the type of OLE object.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;int</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/record/ExOleObjAtom.html#getType()">getType</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gets whether the object is embedded or linked.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/record/ExOleObjAtom.html#setDrawAspect(int)">setDrawAspect</A></B>(int&nbsp;aspect)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sets whether the object can be completely seen, or if only the
+ icon is visible.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/record/ExOleObjAtom.html#setObjID(int)">setObjID</A></B>(int&nbsp;id)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sets the unique identifier for the OLE object.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/record/ExOleObjAtom.html#setObjStgDataRef(int)">setObjStgDataRef</A></B>(int&nbsp;ref)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sets the reference to the persistent object</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/record/ExOleObjAtom.html#setOptions(int)">setOptions</A></B>(int&nbsp;opts)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sets misc options (the last four bytes in the atom).</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/record/ExOleObjAtom.html#setSubType(int)">setSubType</A></B>(int&nbsp;type)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sets the type of OLE object.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/record/ExOleObjAtom.html#setType(int)">setType</A></B>(int&nbsp;type)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sets whether the object is embedded or linked.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;java.lang.String</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/record/ExOleObjAtom.html#toString()">toString</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/record/ExOleObjAtom.html#writeOut(java.io.OutputStream)">writeOut</A></B>(java.io.OutputStream&nbsp;out)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Have the contents printer out into an OutputStream, used when
+ writing a file back out to disk
+ (Normally, atom classes will keep their bytes around, but
+ non atom classes will just request the bytes from their
+ children, then chuck on their header and return)</TD>
+</TR>
+</TABLE>
+&nbsp;<A NAME="methods_inherited_from_class_org.apache.poi.hslf.record.RecordAtom"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#EEEEFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left"><B>Methods inherited from class org.apache.poi.hslf.record.<A HREF="../../../../../org/apache/poi/hslf/record/RecordAtom.html" title="class in org.apache.poi.hslf.record">RecordAtom</A></B></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><A HREF="../../../../../org/apache/poi/hslf/record/RecordAtom.html#getChildRecords()">getChildRecords</A>, <A HREF="../../../../../org/apache/poi/hslf/record/RecordAtom.html#isAnAtom()">isAnAtom</A></CODE></TD>
+</TR>
+</TABLE>
+&nbsp;<A NAME="methods_inherited_from_class_org.apache.poi.hslf.record.Record"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#EEEEFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left"><B>Methods inherited from class org.apache.poi.hslf.record.<A HREF="../../../../../org/apache/poi/hslf/record/Record.html" title="class in org.apache.poi.hslf.record">Record</A></B></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><A HREF="../../../../../org/apache/poi/hslf/record/Record.html#buildRecordAtOffset(byte[], int)">buildRecordAtOffset</A>, <A HREF="../../../../../org/apache/poi/hslf/record/Record.html#createRecordForType(long, byte[], int, int)">createRecordForType</A>, <A HREF="../../../../../org/apache/poi/hslf/record/Record.html#findChildRecords(byte[], int, int)">findChildRecords</A>, <A HREF="../../../../../org/apache/poi/hslf/record/Record.html#writeLittleEndian(int, java.io.OutputStream)">writeLittleEndian</A>, <A HREF="../../../../../org/apache/poi/hslf/record/Record.html#writeLittleEndian(short, java.io.OutputStream)">writeLittleEndian</A></CODE></TD>
+</TR>
+</TABLE>
+&nbsp;<A NAME="methods_inherited_from_class_java.lang.Object"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#EEEEFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left"><B>Methods inherited from class java.lang.Object</B></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE>clone, equals, finalize, getClass, hashCode, notify, notifyAll, wait, wait, wait</CODE></TD>
+</TR>
+</TABLE>
+&nbsp;
+<P>
+
+<!-- ============ FIELD DETAIL =========== -->
+
+<A NAME="field_detail"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="1"><FONT SIZE="+2">
+<B>Field Detail</B></FONT></TH>
+</TR>
+</TABLE>
+
+<A NAME="DRAW_ASPECT_VISIBLE"><!-- --></A><H3>
+DRAW_ASPECT_VISIBLE</H3>
+<PRE>
+public static final int <B>DRAW_ASPECT_VISIBLE</B></PRE>
+<DL>
+<DD>The object) is displayed as an embedded object inside of a container,
+<P>
+<DL>
+<DT><B>See Also:</B><DD><A HREF="../../../../../constant-values.html#org.apache.poi.hslf.record.ExOleObjAtom.DRAW_ASPECT_VISIBLE">Constant Field Values</A></DL>
+</DL>
+<HR>
+
+<A NAME="DRAW_ASPECT_THUMBNAIL"><!-- --></A><H3>
+DRAW_ASPECT_THUMBNAIL</H3>
+<PRE>
+public static final int <B>DRAW_ASPECT_THUMBNAIL</B></PRE>
+<DL>
+<DD>The object is displayed as a thumbnail image.
+<P>
+<DL>
+<DT><B>See Also:</B><DD><A HREF="../../../../../constant-values.html#org.apache.poi.hslf.record.ExOleObjAtom.DRAW_ASPECT_THUMBNAIL">Constant Field Values</A></DL>
+</DL>
+<HR>
+
+<A NAME="DRAW_ASPECT_ICON"><!-- --></A><H3>
+DRAW_ASPECT_ICON</H3>
+<PRE>
+public static final int <B>DRAW_ASPECT_ICON</B></PRE>
+<DL>
+<DD>The object is displayed as an icon.
+<P>
+<DL>
+<DT><B>See Also:</B><DD><A HREF="../../../../../constant-values.html#org.apache.poi.hslf.record.ExOleObjAtom.DRAW_ASPECT_ICON">Constant Field Values</A></DL>
+</DL>
+<HR>
+
+<A NAME="DRAW_ASPECT_DOCPRINT"><!-- --></A><H3>
+DRAW_ASPECT_DOCPRINT</H3>
+<PRE>
+public static final int <B>DRAW_ASPECT_DOCPRINT</B></PRE>
+<DL>
+<DD>The object is displayed on the screen as though it were printed to a printer.
+<P>
+<DL>
+<DT><B>See Also:</B><DD><A HREF="../../../../../constant-values.html#org.apache.poi.hslf.record.ExOleObjAtom.DRAW_ASPECT_DOCPRINT">Constant Field Values</A></DL>
+</DL>
+<HR>
+
+<A NAME="TYPE_EMBEDDED"><!-- --></A><H3>
+TYPE_EMBEDDED</H3>
+<PRE>
+public static final int <B>TYPE_EMBEDDED</B></PRE>
+<DL>
+<DD>An embedded OLE object; the object is serialized and saved within the file.
+<P>
+<DL>
+<DT><B>See Also:</B><DD><A HREF="../../../../../constant-values.html#org.apache.poi.hslf.record.ExOleObjAtom.TYPE_EMBEDDED">Constant Field Values</A></DL>
+</DL>
+<HR>
+
+<A NAME="TYPE_LINKED"><!-- --></A><H3>
+TYPE_LINKED</H3>
+<PRE>
+public static final int <B>TYPE_LINKED</B></PRE>
+<DL>
+<DD>A linked OLE object; the object is saved outside of the file.
+<P>
+<DL>
+<DT><B>See Also:</B><DD><A HREF="../../../../../constant-values.html#org.apache.poi.hslf.record.ExOleObjAtom.TYPE_LINKED">Constant Field Values</A></DL>
+</DL>
+<HR>
+
+<A NAME="TYPE_CONTROL"><!-- --></A><H3>
+TYPE_CONTROL</H3>
+<PRE>
+public static final int <B>TYPE_CONTROL</B></PRE>
+<DL>
+<DD>The OLE object is an ActiveX control.
+<P>
+<DL>
+<DT><B>See Also:</B><DD><A HREF="../../../../../constant-values.html#org.apache.poi.hslf.record.ExOleObjAtom.TYPE_CONTROL">Constant Field Values</A></DL>
+</DL>
+<HR>
+
+<A NAME="SUBTYPE_DEFAULT"><!-- --></A><H3>
+SUBTYPE_DEFAULT</H3>
+<PRE>
+public static final int <B>SUBTYPE_DEFAULT</B></PRE>
+<DL>
+<DL>
+<DT><B>See Also:</B><DD><A HREF="../../../../../constant-values.html#org.apache.poi.hslf.record.ExOleObjAtom.SUBTYPE_DEFAULT">Constant Field Values</A></DL>
+</DL>
+<HR>
+
+<A NAME="SUBTYPE_CLIPART_GALLERY"><!-- --></A><H3>
+SUBTYPE_CLIPART_GALLERY</H3>
+<PRE>
+public static final int <B>SUBTYPE_CLIPART_GALLERY</B></PRE>
+<DL>
+<DL>
+<DT><B>See Also:</B><DD><A HREF="../../../../../constant-values.html#org.apache.poi.hslf.record.ExOleObjAtom.SUBTYPE_CLIPART_GALLERY">Constant Field Values</A></DL>
+</DL>
+<HR>
+
+<A NAME="SUBTYPE_WORD_TABLE"><!-- --></A><H3>
+SUBTYPE_WORD_TABLE</H3>
+<PRE>
+public static final int <B>SUBTYPE_WORD_TABLE</B></PRE>
+<DL>
+<DL>
+<DT><B>See Also:</B><DD><A HREF="../../../../../constant-values.html#org.apache.poi.hslf.record.ExOleObjAtom.SUBTYPE_WORD_TABLE">Constant Field Values</A></DL>
+</DL>
+<HR>
+
+<A NAME="SUBTYPE_EXCEL"><!-- --></A><H3>
+SUBTYPE_EXCEL</H3>
+<PRE>
+public static final int <B>SUBTYPE_EXCEL</B></PRE>
+<DL>
+<DL>
+<DT><B>See Also:</B><DD><A HREF="../../../../../constant-values.html#org.apache.poi.hslf.record.ExOleObjAtom.SUBTYPE_EXCEL">Constant Field Values</A></DL>
+</DL>
+<HR>
+
+<A NAME="SUBTYPE_GRAPH"><!-- --></A><H3>
+SUBTYPE_GRAPH</H3>
+<PRE>
+public static final int <B>SUBTYPE_GRAPH</B></PRE>
+<DL>
+<DL>
+<DT><B>See Also:</B><DD><A HREF="../../../../../constant-values.html#org.apache.poi.hslf.record.ExOleObjAtom.SUBTYPE_GRAPH">Constant Field Values</A></DL>
+</DL>
+<HR>
+
+<A NAME="SUBTYPE_ORGANIZATION_CHART"><!-- --></A><H3>
+SUBTYPE_ORGANIZATION_CHART</H3>
+<PRE>
+public static final int <B>SUBTYPE_ORGANIZATION_CHART</B></PRE>
+<DL>
+<DL>
+<DT><B>See Also:</B><DD><A HREF="../../../../../constant-values.html#org.apache.poi.hslf.record.ExOleObjAtom.SUBTYPE_ORGANIZATION_CHART">Constant Field Values</A></DL>
+</DL>
+<HR>
+
+<A NAME="SUBTYPE_EQUATION"><!-- --></A><H3>
+SUBTYPE_EQUATION</H3>
+<PRE>
+public static final int <B>SUBTYPE_EQUATION</B></PRE>
+<DL>
+<DL>
+<DT><B>See Also:</B><DD><A HREF="../../../../../constant-values.html#org.apache.poi.hslf.record.ExOleObjAtom.SUBTYPE_EQUATION">Constant Field Values</A></DL>
+</DL>
+<HR>
+
+<A NAME="SUBTYPE_WORDART"><!-- --></A><H3>
+SUBTYPE_WORDART</H3>
+<PRE>
+public static final int <B>SUBTYPE_WORDART</B></PRE>
+<DL>
+<DL>
+<DT><B>See Also:</B><DD><A HREF="../../../../../constant-values.html#org.apache.poi.hslf.record.ExOleObjAtom.SUBTYPE_WORDART">Constant Field Values</A></DL>
+</DL>
+<HR>
+
+<A NAME="SUBTYPE_SOUND"><!-- --></A><H3>
+SUBTYPE_SOUND</H3>
+<PRE>
+public static final int <B>SUBTYPE_SOUND</B></PRE>
+<DL>
+<DL>
+<DT><B>See Also:</B><DD><A HREF="../../../../../constant-values.html#org.apache.poi.hslf.record.ExOleObjAtom.SUBTYPE_SOUND">Constant Field Values</A></DL>
+</DL>
+<HR>
+
+<A NAME="SUBTYPE_IMAGE"><!-- --></A><H3>
+SUBTYPE_IMAGE</H3>
+<PRE>
+public static final int <B>SUBTYPE_IMAGE</B></PRE>
+<DL>
+<DL>
+<DT><B>See Also:</B><DD><A HREF="../../../../../constant-values.html#org.apache.poi.hslf.record.ExOleObjAtom.SUBTYPE_IMAGE">Constant Field Values</A></DL>
+</DL>
+<HR>
+
+<A NAME="SUBTYPE_POWERPOINT_PRESENTATION"><!-- --></A><H3>
+SUBTYPE_POWERPOINT_PRESENTATION</H3>
+<PRE>
+public static final int <B>SUBTYPE_POWERPOINT_PRESENTATION</B></PRE>
+<DL>
+<DL>
+<DT><B>See Also:</B><DD><A HREF="../../../../../constant-values.html#org.apache.poi.hslf.record.ExOleObjAtom.SUBTYPE_POWERPOINT_PRESENTATION">Constant Field Values</A></DL>
+</DL>
+<HR>
+
+<A NAME="SUBTYPE_POWERPOINT_SLIDE"><!-- --></A><H3>
+SUBTYPE_POWERPOINT_SLIDE</H3>
+<PRE>
+public static final int <B>SUBTYPE_POWERPOINT_SLIDE</B></PRE>
+<DL>
+<DL>
+<DT><B>See Also:</B><DD><A HREF="../../../../../constant-values.html#org.apache.poi.hslf.record.ExOleObjAtom.SUBTYPE_POWERPOINT_SLIDE">Constant Field Values</A></DL>
+</DL>
+<HR>
+
+<A NAME="SUBTYPE_PROJECT"><!-- --></A><H3>
+SUBTYPE_PROJECT</H3>
+<PRE>
+public static final int <B>SUBTYPE_PROJECT</B></PRE>
+<DL>
+<DL>
+<DT><B>See Also:</B><DD><A HREF="../../../../../constant-values.html#org.apache.poi.hslf.record.ExOleObjAtom.SUBTYPE_PROJECT">Constant Field Values</A></DL>
+</DL>
+<HR>
+
+<A NAME="SUBTYPE_NOTEIT"><!-- --></A><H3>
+SUBTYPE_NOTEIT</H3>
+<PRE>
+public static final int <B>SUBTYPE_NOTEIT</B></PRE>
+<DL>
+<DL>
+<DT><B>See Also:</B><DD><A HREF="../../../../../constant-values.html#org.apache.poi.hslf.record.ExOleObjAtom.SUBTYPE_NOTEIT">Constant Field Values</A></DL>
+</DL>
+<HR>
+
+<A NAME="SUBTYPE_EXCEL_CHART"><!-- --></A><H3>
+SUBTYPE_EXCEL_CHART</H3>
+<PRE>
+public static final int <B>SUBTYPE_EXCEL_CHART</B></PRE>
+<DL>
+<DL>
+<DT><B>See Also:</B><DD><A HREF="../../../../../constant-values.html#org.apache.poi.hslf.record.ExOleObjAtom.SUBTYPE_EXCEL_CHART">Constant Field Values</A></DL>
+</DL>
+<HR>
+
+<A NAME="SUBTYPE_MEDIA_PLAYER"><!-- --></A><H3>
+SUBTYPE_MEDIA_PLAYER</H3>
+<PRE>
+public static final int <B>SUBTYPE_MEDIA_PLAYER</B></PRE>
+<DL>
+<DL>
+<DT><B>See Also:</B><DD><A HREF="../../../../../constant-values.html#org.apache.poi.hslf.record.ExOleObjAtom.SUBTYPE_MEDIA_PLAYER">Constant Field Values</A></DL>
+</DL>
+
+<!-- ========= CONSTRUCTOR DETAIL ======== -->
+
+<A NAME="constructor_detail"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="1"><FONT SIZE="+2">
+<B>Constructor Detail</B></FONT></TH>
+</TR>
+</TABLE>
+
+<A NAME="ExOleObjAtom()"><!-- --></A><H3>
+ExOleObjAtom</H3>
+<PRE>
+public <B>ExOleObjAtom</B>()</PRE>
+<DL>
+<DD>Constructs a brand new link related atom record.
+<P>
+</DL>
+<HR>
+
+<A NAME="ExOleObjAtom(byte[], int, int)"><!-- --></A><H3>
+ExOleObjAtom</H3>
+<PRE>
+protected <B>ExOleObjAtom</B>(byte[]&nbsp;source,
+                       int&nbsp;start,
+                       int&nbsp;len)</PRE>
+<DL>
+<DD>Constructs the link related atom record from its
+  source data.
+<P>
+<DL>
+<DT><B>Parameters:</B><DD><CODE>source</CODE> - the source data as a byte array.<DD><CODE>start</CODE> - the start offset into the byte array.<DD><CODE>len</CODE> - the length of the slice in the byte array.</DL>
+</DL>
+
+<!-- ============ METHOD DETAIL ========== -->
+
+<A NAME="method_detail"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="1"><FONT SIZE="+2">
+<B>Method Detail</B></FONT></TH>
+</TR>
+</TABLE>
+
+<A NAME="getDrawAspect()"><!-- --></A><H3>
+getDrawAspect</H3>
+<PRE>
+public int <B>getDrawAspect</B>()</PRE>
+<DL>
+<DD>Gets whether the object can be completely seen, or if only the
+ icon is visible.
+<P>
+<DD><DL>
+
+<DT><B>Returns:</B><DD>the draw aspect, one of the <code>DRAW_ASPECT_*</code> constants.</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setDrawAspect(int)"><!-- --></A><H3>
+setDrawAspect</H3>
+<PRE>
+public void <B>setDrawAspect</B>(int&nbsp;aspect)</PRE>
+<DL>
+<DD>Sets whether the object can be completely seen, or if only the
+ icon is visible.
+<P>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>aspect</CODE> - the draw aspect, one of the <code>DRAW_ASPECT_*</code> constants.</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getType()"><!-- --></A><H3>
+getType</H3>
+<PRE>
+public int <B>getType</B>()</PRE>
+<DL>
+<DD>Gets whether the object is embedded or linked.
+<P>
+<DD><DL>
+
+<DT><B>Returns:</B><DD>the type, one of the <code>TYPE_EMBEDDED_*</code> constants.</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setType(int)"><!-- --></A><H3>
+setType</H3>
+<PRE>
+public void <B>setType</B>(int&nbsp;type)</PRE>
+<DL>
+<DD>Sets whether the object is embedded or linked.
+<P>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>type</CODE> - the type, one of the <code>TYPE_EMBEDDED_*</code> constants.</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getObjID()"><!-- --></A><H3>
+getObjID</H3>
+<PRE>
+public int <B>getObjID</B>()</PRE>
+<DL>
+<DD>Gets the unique identifier for the OLE object.
+<P>
+<DD><DL>
+
+<DT><B>Returns:</B><DD>the object ID.</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setObjID(int)"><!-- --></A><H3>
+setObjID</H3>
+<PRE>
+public void <B>setObjID</B>(int&nbsp;id)</PRE>
+<DL>
+<DD>Sets the unique identifier for the OLE object.
+<P>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>id</CODE> - the object ID.</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getSubType()"><!-- --></A><H3>
+getSubType</H3>
+<PRE>
+public int <B>getSubType</B>()</PRE>
+<DL>
+<DD>Gets the type of OLE object.
+<P>
+<DD><DL>
+
+<DT><B>Returns:</B><DD>the sub-type, one of the <code>SUBTYPE_*</code> constants.</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setSubType(int)"><!-- --></A><H3>
+setSubType</H3>
+<PRE>
+public void <B>setSubType</B>(int&nbsp;type)</PRE>
+<DL>
+<DD>Sets the type of OLE object.
+<P>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>type</CODE> - the sub-type, one of the <code>SUBTYPE_*</code> constants.</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getObjStgDataRef()"><!-- --></A><H3>
+getObjStgDataRef</H3>
+<PRE>
+public int <B>getObjStgDataRef</B>()</PRE>
+<DL>
+<DD>Gets the reference to the persistent object
+<P>
+<DD><DL>
+
+<DT><B>Returns:</B><DD>the reference to the persistent object, corresponds with an
+         <code>ExOleObjStg</code> storage container.</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setObjStgDataRef(int)"><!-- --></A><H3>
+setObjStgDataRef</H3>
+<PRE>
+public void <B>setObjStgDataRef</B>(int&nbsp;ref)</PRE>
+<DL>
+<DD>Sets the reference to the persistent object
+<P>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>ref</CODE> - the reference to the persistent object, corresponds with an
+         <code>ExOleObjStg</code> storage container.</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getIsBlank()"><!-- --></A><H3>
+getIsBlank</H3>
+<PRE>
+public boolean <B>getIsBlank</B>()</PRE>
+<DL>
+<DD>Gets whether the object's image is blank.
+<P>
+<DD><DL>
+
+<DT><B>Returns:</B><DD><code>true</code> if the object's image is blank.</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getOptions()"><!-- --></A><H3>
+getOptions</H3>
+<PRE>
+public int <B>getOptions</B>()</PRE>
+<DL>
+<DD>Gets misc options (the last four bytes in the atom).
+<P>
+<DD><DL>
+
+<DT><B>Returns:</B><DD><code>true</code> if the object's image is blank.</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setOptions(int)"><!-- --></A><H3>
+setOptions</H3>
+<PRE>
+public void <B>setOptions</B>(int&nbsp;opts)</PRE>
+<DL>
+<DD>Sets misc options (the last four bytes in the atom).
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getRecordType()"><!-- --></A><H3>
+getRecordType</H3>
+<PRE>
+public long <B>getRecordType</B>()</PRE>
+<DL>
+<DD>Returns the type (held as a little endian in bytes 3 and 4)
+ that this class handles.
+<P>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../../../../org/apache/poi/hslf/record/Record.html#getRecordType()">getRecordType</A></CODE> in class <CODE><A HREF="../../../../../org/apache/poi/hslf/record/Record.html" title="class in org.apache.poi.hslf.record">Record</A></CODE></DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="writeOut(java.io.OutputStream)"><!-- --></A><H3>
+writeOut</H3>
+<PRE>
+public void <B>writeOut</B>(java.io.OutputStream&nbsp;out)
+              throws java.io.IOException</PRE>
+<DL>
+<DD>Have the contents printer out into an OutputStream, used when
+ writing a file back out to disk
+ (Normally, atom classes will keep their bytes around, but
+ non atom classes will just request the bytes from their
+ children, then chuck on their header and return)
+<P>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../../../../org/apache/poi/hslf/record/Record.html#writeOut(java.io.OutputStream)">writeOut</A></CODE> in class <CODE><A HREF="../../../../../org/apache/poi/hslf/record/Record.html" title="class in org.apache.poi.hslf.record">Record</A></CODE></DL>
+</DD>
+<DD><DL>
+
+<DT><B>Throws:</B>
+<DD><CODE>java.io.IOException</CODE></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="toString()"><!-- --></A><H3>
+toString</H3>
+<PRE>
+public java.lang.String <B>toString</B>()</PRE>
+<DL>
+<DD><DL>
+<DT><B>Overrides:</B><DD><CODE>toString</CODE> in class <CODE>java.lang.Object</CODE></DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<!-- ========= END OF CLASS DATA ========= -->
+<HR>
+
+
+<!-- ======= START OF BOTTOM NAVBAR ====== -->
+<A NAME="navbar_bottom"><!-- --></A>
+<A HREF="#skip-navbar_bottom" title="Skip navigation links"></A>
+<TABLE BORDER="0" WIDTH="100%" CELLPADDING="1" CELLSPACING="0" SUMMARY="">
+<TR>
+<TD COLSPAN=2 BGCOLOR="#EEEEFF" CLASS="NavBarCell1">
+<A NAME="navbar_bottom_firstrow"><!-- --></A>
+<TABLE BORDER="0" CELLPADDING="0" CELLSPACING="3" SUMMARY="">
+  <TR ALIGN="center" VALIGN="top">
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../overview-summary.html"><FONT CLASS="NavBarFont1"><B>Overview</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="package-summary.html"><FONT CLASS="NavBarFont1"><B>Package</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#FFFFFF" CLASS="NavBarCell1Rev"> &nbsp;<FONT CLASS="NavBarFont1Rev"><B>Class</B></FONT>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="class-use/ExOleObjAtom.html"><FONT CLASS="NavBarFont1"><B>Use</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="package-tree.html"><FONT CLASS="NavBarFont1"><B>Tree</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../deprecated-list.html"><FONT CLASS="NavBarFont1"><B>Deprecated</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../index-all.html"><FONT CLASS="NavBarFont1"><B>Index</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../help-doc.html"><FONT CLASS="NavBarFont1"><B>Help</B></FONT></A>&nbsp;</TD>
+  </TR>
+</TABLE>
+</TD>
+<TD ALIGN="right" VALIGN="top" ROWSPAN=3><EM>
+</EM>
+</TD>
+</TR>
+
+<TR>
+<TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
+&nbsp;<A HREF="../../../../../org/apache/poi/hslf/record/ExObjListAtom.html" title="class in org.apache.poi.hslf.record"><B>PREV CLASS</B></A>&nbsp;
+&nbsp;<A HREF="../../../../../org/apache/poi/hslf/record/ExOleObjStg.html" title="class in org.apache.poi.hslf.record"><B>NEXT CLASS</B></A></FONT></TD>
+<TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
+  <A HREF="../../../../../index.html?org/apache/poi/hslf/record/ExOleObjAtom.html" target="_top"><B>FRAMES</B></A>  &nbsp;
+&nbsp;<A HREF="ExOleObjAtom.html" target="_top"><B>NO FRAMES</B></A>  &nbsp;
+&nbsp;<SCRIPT type="text/javascript">
+  <!--
+  if(window==top) {
+    document.writeln('<A HREF="../../../../../allclasses-noframe.html"><B>All Classes</B></A>');
+  }
+  //-->
+</SCRIPT>
+<NOSCRIPT>
+  <A HREF="../../../../../allclasses-noframe.html"><B>All Classes</B></A>
+</NOSCRIPT>
+
+
+</FONT></TD>
+</TR>
+<TR>
+<TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
+  SUMMARY:&nbsp;NESTED&nbsp;|&nbsp;<A HREF="#field_summary">FIELD</A>&nbsp;|&nbsp;<A HREF="#constructor_summary">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_summary">METHOD</A></FONT></TD>
+<TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
+DETAIL:&nbsp;<A HREF="#field_detail">FIELD</A>&nbsp;|&nbsp;<A HREF="#constructor_detail">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_detail">METHOD</A></FONT></TD>
+</TR>
+</TABLE>
+<A NAME="skip-navbar_bottom"></A>
+<!-- ======== END OF BOTTOM NAVBAR ======= -->
+
+<HR>
+
+                <i>Copyright 2014 The Apache Software Foundation or
+        its licensors, as applicable.</i>
+            
+</BODY>
+</HTML>

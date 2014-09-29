@@ -1,0 +1,955 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!--NewPage-->
+<HTML>
+<HEAD>
+<TITLE>
+SlideShow (POI API Documentation)
+</TITLE>
+
+<META NAME="keywords" CONTENT="org.apache.poi.hslf.usermodel.SlideShow class">
+
+<LINK REL ="stylesheet" TYPE="text/css" HREF="../../../../../stylesheet.css" TITLE="Style">
+
+<SCRIPT type="text/javascript">
+function windowTitle()
+{
+    parent.document.title="SlideShow (POI API Documentation)";
+}
+</SCRIPT>
+<NOSCRIPT>
+</NOSCRIPT>
+
+</HEAD>
+
+<BODY BGCOLOR="white" onload="windowTitle();">
+
+
+<!-- ========= START OF TOP NAVBAR ======= -->
+<A NAME="navbar_top"><!-- --></A>
+<A HREF="#skip-navbar_top" title="Skip navigation links"></A>
+<TABLE BORDER="0" WIDTH="100%" CELLPADDING="1" CELLSPACING="0" SUMMARY="">
+<TR>
+<TD COLSPAN=2 BGCOLOR="#EEEEFF" CLASS="NavBarCell1">
+<A NAME="navbar_top_firstrow"><!-- --></A>
+<TABLE BORDER="0" CELLPADDING="0" CELLSPACING="3" SUMMARY="">
+  <TR ALIGN="center" VALIGN="top">
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../overview-summary.html"><FONT CLASS="NavBarFont1"><B>Overview</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="package-summary.html"><FONT CLASS="NavBarFont1"><B>Package</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#FFFFFF" CLASS="NavBarCell1Rev"> &nbsp;<FONT CLASS="NavBarFont1Rev"><B>Class</B></FONT>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="class-use/SlideShow.html"><FONT CLASS="NavBarFont1"><B>Use</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="package-tree.html"><FONT CLASS="NavBarFont1"><B>Tree</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../deprecated-list.html"><FONT CLASS="NavBarFont1"><B>Deprecated</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../index-all.html"><FONT CLASS="NavBarFont1"><B>Index</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../help-doc.html"><FONT CLASS="NavBarFont1"><B>Help</B></FONT></A>&nbsp;</TD>
+  </TR>
+</TABLE>
+</TD>
+<TD ALIGN="right" VALIGN="top" ROWSPAN=3><EM>
+</EM>
+</TD>
+</TR>
+
+<TR>
+<TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
+&nbsp;<A HREF="../../../../../org/apache/poi/hslf/usermodel/RichTextRun.html" title="class in org.apache.poi.hslf.usermodel"><B>PREV CLASS</B></A>&nbsp;
+&nbsp;<A HREF="../../../../../org/apache/poi/hslf/usermodel/SoundData.html" title="class in org.apache.poi.hslf.usermodel"><B>NEXT CLASS</B></A></FONT></TD>
+<TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
+  <A HREF="../../../../../index.html?org/apache/poi/hslf/usermodel/SlideShow.html" target="_top"><B>FRAMES</B></A>  &nbsp;
+&nbsp;<A HREF="SlideShow.html" target="_top"><B>NO FRAMES</B></A>  &nbsp;
+&nbsp;<SCRIPT type="text/javascript">
+  <!--
+  if(window==top) {
+    document.writeln('<A HREF="../../../../../allclasses-noframe.html"><B>All Classes</B></A>');
+  }
+  //-->
+</SCRIPT>
+<NOSCRIPT>
+  <A HREF="../../../../../allclasses-noframe.html"><B>All Classes</B></A>
+</NOSCRIPT>
+
+
+</FONT></TD>
+</TR>
+<TR>
+<TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
+  SUMMARY:&nbsp;NESTED&nbsp;|&nbsp;FIELD&nbsp;|&nbsp;<A HREF="#constructor_summary">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_summary">METHOD</A></FONT></TD>
+<TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
+DETAIL:&nbsp;FIELD&nbsp;|&nbsp;<A HREF="#constructor_detail">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_detail">METHOD</A></FONT></TD>
+</TR>
+</TABLE>
+<A NAME="skip-navbar_top"></A>
+<!-- ========= END OF TOP NAVBAR ========= -->
+
+<HR>
+<!-- ======== START OF CLASS DATA ======== -->
+<H2>
+<FONT SIZE="-1">
+org.apache.poi.hslf.usermodel</FONT>
+<BR>
+Class SlideShow</H2>
+<PRE>
+java.lang.Object
+  <IMG SRC="../../../../../resources/inherit.gif" ALT="extended by "><B>org.apache.poi.hslf.usermodel.SlideShow</B>
+</PRE>
+<HR>
+<DL>
+<DT><PRE>public final class <B>SlideShow</B><DT>extends java.lang.Object</DL>
+</PRE>
+
+<P>
+This class is a friendly wrapper on top of the more scary HSLFSlideShow.
+
+ TODO: - figure out how to match notes to their correct sheet (will involve
+ understanding DocSlideList and DocNotesList) - handle Slide creation cleaner
+<P>
+
+<P>
+<DL>
+<DT><B>Author:</B></DT>
+  <DD>Nick Burch, Yegor kozlov</DD>
+</DL>
+<HR>
+
+<P>
+
+<!-- ======== CONSTRUCTOR SUMMARY ======== -->
+
+<A NAME="constructor_summary"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+<B>Constructor Summary</B></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/usermodel/SlideShow.html#SlideShow()">SlideShow</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Constructs a new, empty, Powerpoint document.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/usermodel/SlideShow.html#SlideShow(org.apache.poi.hslf.HSLFSlideShow)">SlideShow</A></B>(<A HREF="../../../../../org/apache/poi/hslf/HSLFSlideShow.html" title="class in org.apache.poi.hslf">HSLFSlideShow</A>&nbsp;hslfSlideShow)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Constructs a Powerpoint document from the underlying
+ HSLFSlideShow object.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/usermodel/SlideShow.html#SlideShow(java.io.InputStream)">SlideShow</A></B>(java.io.InputStream&nbsp;inputStream)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Constructs a Powerpoint document from an input stream.</TD>
+</TR>
+</TABLE>
+&nbsp;
+<!-- ========== METHOD SUMMARY =========== -->
+
+<A NAME="method_summary"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+<B>Method Summary</B></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;int</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/usermodel/SlideShow.html#addControl(java.lang.String, java.lang.String)">addControl</A></B>(java.lang.String&nbsp;name,
+           java.lang.String&nbsp;progId)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Add a control in this presentation</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;int</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/usermodel/SlideShow.html#addEmbed(org.apache.poi.poifs.filesystem.POIFSFileSystem)">addEmbed</A></B>(<A HREF="../../../../../org/apache/poi/poifs/filesystem/POIFSFileSystem.html" title="class in org.apache.poi.poifs.filesystem">POIFSFileSystem</A>&nbsp;poiData)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Add a embedded object to this presentation</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;int</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/usermodel/SlideShow.html#addFont(org.apache.poi.hslf.model.PPFont)">addFont</A></B>(<A HREF="../../../../../org/apache/poi/hslf/model/PPFont.html" title="class in org.apache.poi.hslf.model">PPFont</A>&nbsp;font)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Add a font in this presentation</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;int</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/usermodel/SlideShow.html#addHyperlink(org.apache.poi.hslf.model.Hyperlink)">addHyperlink</A></B>(<A HREF="../../../../../org/apache/poi/hslf/model/Hyperlink.html" title="class in org.apache.poi.hslf.model">Hyperlink</A>&nbsp;link)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Add a hyperlink to this presentation</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;int</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/usermodel/SlideShow.html#addMovie(java.lang.String, int)">addMovie</A></B>(java.lang.String&nbsp;path,
+         int&nbsp;type)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Add a movie in this presentation</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>protected &nbsp;int</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/usermodel/SlideShow.html#addPersistentObject(org.apache.poi.hslf.record.PositionDependentRecord)">addPersistentObject</A></B>(<A HREF="../../../../../org/apache/poi/hslf/record/PositionDependentRecord.html" title="interface in org.apache.poi.hslf.record">PositionDependentRecord</A>&nbsp;slideRecord)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;int</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/usermodel/SlideShow.html#addPicture(byte[], int)">addPicture</A></B>(byte[]&nbsp;data,
+           int&nbsp;format)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Adds a picture to this presentation and returns the associated index.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;int</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/usermodel/SlideShow.html#addPicture(java.io.File, int)">addPicture</A></B>(java.io.File&nbsp;pict,
+           int&nbsp;format)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Adds a picture to this presentation and returns the associated index.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>protected &nbsp;int</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/usermodel/SlideShow.html#addToObjListAtom(org.apache.poi.hslf.record.RecordContainer)">addToObjListAtom</A></B>(<A HREF="../../../../../org/apache/poi/hslf/record/RecordContainer.html" title="class in org.apache.poi.hslf.record">RecordContainer</A>&nbsp;exObj)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../../../org/apache/poi/hslf/model/Slide.html" title="class in org.apache.poi.hslf.model">Slide</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/usermodel/SlideShow.html#createSlide()">createSlide</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Create a blank <code>Slide</code>.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../../../org/apache/poi/hslf/record/Document.html" title="class in org.apache.poi.hslf.record">Document</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/usermodel/SlideShow.html#getDocumentRecord()">getDocumentRecord</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Helper method for usermodel and model: Get the document record</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../../../org/apache/poi/hslf/usermodel/ObjectData.html" title="class in org.apache.poi.hslf.usermodel">ObjectData</A>[]</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/usermodel/SlideShow.html#getEmbeddedObjects()">getEmbeddedObjects</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns the data of all the embedded OLE object in the SlideShow</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../../../org/apache/poi/hslf/model/PPFont.html" title="class in org.apache.poi.hslf.model">PPFont</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/usermodel/SlideShow.html#getFont(int)">getFont</A></B>(int&nbsp;idx)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Get a font by index</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>protected &nbsp;<A HREF="../../../../../org/apache/poi/hslf/record/FontCollection.html" title="class in org.apache.poi.hslf.record">FontCollection</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/usermodel/SlideShow.html#getFontCollection()">getFontCollection</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Helper method for usermodel: Get the font collection</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../../../org/apache/poi/hslf/record/Record.html" title="class in org.apache.poi.hslf.record">Record</A>[]</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/usermodel/SlideShow.html#getMostRecentCoreRecords()">getMostRecentCoreRecords</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns an array of the most recent version of all the interesting
+ records</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../../../org/apache/poi/hslf/model/Notes.html" title="class in org.apache.poi.hslf.model">Notes</A>[]</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/usermodel/SlideShow.html#getNotes()">getNotes</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns an array of all the normal Notes found in the slideshow</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../../../org/apache/poi/hslf/model/HeadersFooters.html" title="class in org.apache.poi.hslf.model">HeadersFooters</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/usermodel/SlideShow.html#getNotesHeadersFooters()">getNotesHeadersFooters</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Return Header / Footer settings for notes</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;int</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/usermodel/SlideShow.html#getNumberOfFonts()">getNumberOfFonts</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;get the number of fonts in the presentation</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>protected static&nbsp;java.util.Map&lt;java.lang.String,<A HREF="../../../../../org/apache/poi/hpsf/ClassID.html" title="class in org.apache.poi.hpsf">ClassID</A>&gt;</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/usermodel/SlideShow.html#getOleMap()">getOleMap</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;java.awt.Dimension</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/usermodel/SlideShow.html#getPageSize()">getPageSize</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Return the current page size</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../../../org/apache/poi/hslf/usermodel/PictureData.html" title="class in org.apache.poi.hslf.usermodel">PictureData</A>[]</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/usermodel/SlideShow.html#getPictureData()">getPictureData</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns the data of all the pictures attached to the SlideShow</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../../../org/apache/poi/hslf/model/HeadersFooters.html" title="class in org.apache.poi.hslf.model">HeadersFooters</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/usermodel/SlideShow.html#getSlideHeadersFooters()">getSlideHeadersFooters</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Return Header / Footer settings for slides</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../../../org/apache/poi/hslf/model/Slide.html" title="class in org.apache.poi.hslf.model">Slide</A>[]</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/usermodel/SlideShow.html#getSlides()">getSlides</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns an array of all the normal Slides found in the slideshow</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../../../org/apache/poi/hslf/model/SlideMaster.html" title="class in org.apache.poi.hslf.model">SlideMaster</A>[]</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/usermodel/SlideShow.html#getSlidesMasters()">getSlidesMasters</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns an array of all the normal Slide Masters found in the slideshow</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../../../org/apache/poi/hslf/usermodel/SoundData.html" title="class in org.apache.poi.hslf.usermodel">SoundData</A>[]</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/usermodel/SlideShow.html#getSoundData()">getSoundData</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns the data of all the embedded sounds in the SlideShow</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../../../org/apache/poi/hslf/model/TitleMaster.html" title="class in org.apache.poi.hslf.model">TitleMaster</A>[]</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/usermodel/SlideShow.html#getTitleMasters()">getTitleMasters</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns an array of all the normal Title Masters found in the slideshow</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../../../org/apache/poi/hslf/model/Slide.html" title="class in org.apache.poi.hslf.model">Slide</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/usermodel/SlideShow.html#removeSlide(int)">removeSlide</A></B>(int&nbsp;index)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Removes the slide at the given index (0-based).</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/usermodel/SlideShow.html#reorderSlide(int, int)">reorderSlide</A></B>(int&nbsp;oldSlideNumber,
+             int&nbsp;newSlideNumber)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Re-orders a slide, to a new position.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/usermodel/SlideShow.html#setPageSize(java.awt.Dimension)">setPageSize</A></B>(java.awt.Dimension&nbsp;pgsize)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Change the current page size</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/usermodel/SlideShow.html#write(java.io.OutputStream)">write</A></B>(java.io.OutputStream&nbsp;out)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Writes out the slideshow file the is represented by an instance of this
+ class</TD>
+</TR>
+</TABLE>
+&nbsp;<A NAME="methods_inherited_from_class_java.lang.Object"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#EEEEFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left"><B>Methods inherited from class java.lang.Object</B></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE>clone, equals, finalize, getClass, hashCode, notify, notifyAll, toString, wait, wait, wait</CODE></TD>
+</TR>
+</TABLE>
+&nbsp;
+<P>
+
+<!-- ========= CONSTRUCTOR DETAIL ======== -->
+
+<A NAME="constructor_detail"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="1"><FONT SIZE="+2">
+<B>Constructor Detail</B></FONT></TH>
+</TR>
+</TABLE>
+
+<A NAME="SlideShow(org.apache.poi.hslf.HSLFSlideShow)"><!-- --></A><H3>
+SlideShow</H3>
+<PRE>
+public <B>SlideShow</B>(<A HREF="../../../../../org/apache/poi/hslf/HSLFSlideShow.html" title="class in org.apache.poi.hslf">HSLFSlideShow</A>&nbsp;hslfSlideShow)</PRE>
+<DL>
+<DD>Constructs a Powerpoint document from the underlying
+ HSLFSlideShow object. Finds the model stuff from this
+<P>
+<DL>
+<DT><B>Parameters:</B><DD><CODE>hslfSlideShow</CODE> - the HSLFSlideShow to base on</DL>
+</DL>
+<HR>
+
+<A NAME="SlideShow()"><!-- --></A><H3>
+SlideShow</H3>
+<PRE>
+public <B>SlideShow</B>()</PRE>
+<DL>
+<DD>Constructs a new, empty, Powerpoint document.
+<P>
+</DL>
+<HR>
+
+<A NAME="SlideShow(java.io.InputStream)"><!-- --></A><H3>
+SlideShow</H3>
+<PRE>
+public <B>SlideShow</B>(java.io.InputStream&nbsp;inputStream)
+          throws java.io.IOException</PRE>
+<DL>
+<DD>Constructs a Powerpoint document from an input stream.
+<P>
+<DL>
+
+<DT><B>Throws:</B>
+<DD><CODE>java.io.IOException</CODE></DL>
+</DL>
+
+<!-- ============ METHOD DETAIL ========== -->
+
+<A NAME="method_detail"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="1"><FONT SIZE="+2">
+<B>Method Detail</B></FONT></TH>
+</TR>
+</TABLE>
+
+<A NAME="write(java.io.OutputStream)"><!-- --></A><H3>
+write</H3>
+<PRE>
+public void <B>write</B>(java.io.OutputStream&nbsp;out)
+           throws java.io.IOException</PRE>
+<DL>
+<DD>Writes out the slideshow file the is represented by an instance of this
+ class
+<P>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>out</CODE> - The OutputStream to write to.
+<DT><B>Throws:</B>
+<DD><CODE>java.io.IOException</CODE> - If there is an unexpected IOException from the passed in
+             OutputStream</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getMostRecentCoreRecords()"><!-- --></A><H3>
+getMostRecentCoreRecords</H3>
+<PRE>
+public <A HREF="../../../../../org/apache/poi/hslf/record/Record.html" title="class in org.apache.poi.hslf.record">Record</A>[] <B>getMostRecentCoreRecords</B>()</PRE>
+<DL>
+<DD>Returns an array of the most recent version of all the interesting
+ records
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getSlides()"><!-- --></A><H3>
+getSlides</H3>
+<PRE>
+public <A HREF="../../../../../org/apache/poi/hslf/model/Slide.html" title="class in org.apache.poi.hslf.model">Slide</A>[] <B>getSlides</B>()</PRE>
+<DL>
+<DD>Returns an array of all the normal Slides found in the slideshow
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getNotes()"><!-- --></A><H3>
+getNotes</H3>
+<PRE>
+public <A HREF="../../../../../org/apache/poi/hslf/model/Notes.html" title="class in org.apache.poi.hslf.model">Notes</A>[] <B>getNotes</B>()</PRE>
+<DL>
+<DD>Returns an array of all the normal Notes found in the slideshow
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getSlidesMasters()"><!-- --></A><H3>
+getSlidesMasters</H3>
+<PRE>
+public <A HREF="../../../../../org/apache/poi/hslf/model/SlideMaster.html" title="class in org.apache.poi.hslf.model">SlideMaster</A>[] <B>getSlidesMasters</B>()</PRE>
+<DL>
+<DD>Returns an array of all the normal Slide Masters found in the slideshow
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getTitleMasters()"><!-- --></A><H3>
+getTitleMasters</H3>
+<PRE>
+public <A HREF="../../../../../org/apache/poi/hslf/model/TitleMaster.html" title="class in org.apache.poi.hslf.model">TitleMaster</A>[] <B>getTitleMasters</B>()</PRE>
+<DL>
+<DD>Returns an array of all the normal Title Masters found in the slideshow
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getPictureData()"><!-- --></A><H3>
+getPictureData</H3>
+<PRE>
+public <A HREF="../../../../../org/apache/poi/hslf/usermodel/PictureData.html" title="class in org.apache.poi.hslf.usermodel">PictureData</A>[] <B>getPictureData</B>()</PRE>
+<DL>
+<DD>Returns the data of all the pictures attached to the SlideShow
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getEmbeddedObjects()"><!-- --></A><H3>
+getEmbeddedObjects</H3>
+<PRE>
+public <A HREF="../../../../../org/apache/poi/hslf/usermodel/ObjectData.html" title="class in org.apache.poi.hslf.usermodel">ObjectData</A>[] <B>getEmbeddedObjects</B>()</PRE>
+<DL>
+<DD>Returns the data of all the embedded OLE object in the SlideShow
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getSoundData()"><!-- --></A><H3>
+getSoundData</H3>
+<PRE>
+public <A HREF="../../../../../org/apache/poi/hslf/usermodel/SoundData.html" title="class in org.apache.poi.hslf.usermodel">SoundData</A>[] <B>getSoundData</B>()</PRE>
+<DL>
+<DD>Returns the data of all the embedded sounds in the SlideShow
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getPageSize()"><!-- --></A><H3>
+getPageSize</H3>
+<PRE>
+public java.awt.Dimension <B>getPageSize</B>()</PRE>
+<DL>
+<DD>Return the current page size
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setPageSize(java.awt.Dimension)"><!-- --></A><H3>
+setPageSize</H3>
+<PRE>
+public void <B>setPageSize</B>(java.awt.Dimension&nbsp;pgsize)</PRE>
+<DL>
+<DD>Change the current page size
+<P>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>pgsize</CODE> - page size (in points)</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getFontCollection()"><!-- --></A><H3>
+getFontCollection</H3>
+<PRE>
+protected <A HREF="../../../../../org/apache/poi/hslf/record/FontCollection.html" title="class in org.apache.poi.hslf.record">FontCollection</A> <B>getFontCollection</B>()</PRE>
+<DL>
+<DD>Helper method for usermodel: Get the font collection
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getDocumentRecord()"><!-- --></A><H3>
+getDocumentRecord</H3>
+<PRE>
+public <A HREF="../../../../../org/apache/poi/hslf/record/Document.html" title="class in org.apache.poi.hslf.record">Document</A> <B>getDocumentRecord</B>()</PRE>
+<DL>
+<DD>Helper method for usermodel and model: Get the document record
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="reorderSlide(int, int)"><!-- --></A><H3>
+reorderSlide</H3>
+<PRE>
+public void <B>reorderSlide</B>(int&nbsp;oldSlideNumber,
+                         int&nbsp;newSlideNumber)</PRE>
+<DL>
+<DD>Re-orders a slide, to a new position.
+<P>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>oldSlideNumber</CODE> - The old slide number (1 based)<DD><CODE>newSlideNumber</CODE> - The new slide number (1 based)</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="removeSlide(int)"><!-- --></A><H3>
+removeSlide</H3>
+<PRE>
+public <A HREF="../../../../../org/apache/poi/hslf/model/Slide.html" title="class in org.apache.poi.hslf.model">Slide</A> <B>removeSlide</B>(int&nbsp;index)</PRE>
+<DL>
+<DD>Removes the slide at the given index (0-based).
+ <p>
+ Shifts any subsequent slides to the left (subtracts one from their slide
+ numbers).
+ </p>
+<P>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>index</CODE> - the index of the slide to remove (0-based)
+<DT><B>Returns:</B><DD>the slide that was removed from the slide show.</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="createSlide()"><!-- --></A><H3>
+createSlide</H3>
+<PRE>
+public <A HREF="../../../../../org/apache/poi/hslf/model/Slide.html" title="class in org.apache.poi.hslf.model">Slide</A> <B>createSlide</B>()</PRE>
+<DL>
+<DD>Create a blank <code>Slide</code>.
+<P>
+<DD><DL>
+
+<DT><B>Returns:</B><DD>the created <code>Slide</code></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="addPicture(byte[], int)"><!-- --></A><H3>
+addPicture</H3>
+<PRE>
+public int <B>addPicture</B>(byte[]&nbsp;data,
+                      int&nbsp;format)
+               throws java.io.IOException</PRE>
+<DL>
+<DD>Adds a picture to this presentation and returns the associated index.
+<P>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>data</CODE> - picture data<DD><CODE>format</CODE> - the format of the picture. One of constans defined in the
+            <code>Picture</code> class.
+<DT><B>Returns:</B><DD>the index to this picture (1 based).
+<DT><B>Throws:</B>
+<DD><CODE>java.io.IOException</CODE></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="addPicture(java.io.File, int)"><!-- --></A><H3>
+addPicture</H3>
+<PRE>
+public int <B>addPicture</B>(java.io.File&nbsp;pict,
+                      int&nbsp;format)
+               throws java.io.IOException</PRE>
+<DL>
+<DD>Adds a picture to this presentation and returns the associated index.
+<P>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>pict</CODE> - the file containing the image to add<DD><CODE>format</CODE> - the format of the picture. One of constans defined in the
+            <code>Picture</code> class.
+<DT><B>Returns:</B><DD>the index to this picture (1 based).
+<DT><B>Throws:</B>
+<DD><CODE>java.io.IOException</CODE></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="addFont(org.apache.poi.hslf.model.PPFont)"><!-- --></A><H3>
+addFont</H3>
+<PRE>
+public int <B>addFont</B>(<A HREF="../../../../../org/apache/poi/hslf/model/PPFont.html" title="class in org.apache.poi.hslf.model">PPFont</A>&nbsp;font)</PRE>
+<DL>
+<DD>Add a font in this presentation
+<P>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>font</CODE> - the font to add
+<DT><B>Returns:</B><DD>0-based index of the font</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getFont(int)"><!-- --></A><H3>
+getFont</H3>
+<PRE>
+public <A HREF="../../../../../org/apache/poi/hslf/model/PPFont.html" title="class in org.apache.poi.hslf.model">PPFont</A> <B>getFont</B>(int&nbsp;idx)</PRE>
+<DL>
+<DD>Get a font by index
+<P>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>idx</CODE> - 0-based index of the font
+<DT><B>Returns:</B><DD>of an instance of <code>PPFont</code> or <code>null</code> if not
+         found</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getNumberOfFonts()"><!-- --></A><H3>
+getNumberOfFonts</H3>
+<PRE>
+public int <B>getNumberOfFonts</B>()</PRE>
+<DL>
+<DD>get the number of fonts in the presentation
+<P>
+<DD><DL>
+
+<DT><B>Returns:</B><DD>number of fonts</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getSlideHeadersFooters()"><!-- --></A><H3>
+getSlideHeadersFooters</H3>
+<PRE>
+public <A HREF="../../../../../org/apache/poi/hslf/model/HeadersFooters.html" title="class in org.apache.poi.hslf.model">HeadersFooters</A> <B>getSlideHeadersFooters</B>()</PRE>
+<DL>
+<DD>Return Header / Footer settings for slides
+<P>
+<DD><DL>
+
+<DT><B>Returns:</B><DD>Header / Footer settings for slides</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getNotesHeadersFooters()"><!-- --></A><H3>
+getNotesHeadersFooters</H3>
+<PRE>
+public <A HREF="../../../../../org/apache/poi/hslf/model/HeadersFooters.html" title="class in org.apache.poi.hslf.model">HeadersFooters</A> <B>getNotesHeadersFooters</B>()</PRE>
+<DL>
+<DD>Return Header / Footer settings for notes
+<P>
+<DD><DL>
+
+<DT><B>Returns:</B><DD>Header / Footer settings for notes</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="addMovie(java.lang.String, int)"><!-- --></A><H3>
+addMovie</H3>
+<PRE>
+public int <B>addMovie</B>(java.lang.String&nbsp;path,
+                    int&nbsp;type)</PRE>
+<DL>
+<DD>Add a movie in this presentation
+<P>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>path</CODE> - the path or url to the movie
+<DT><B>Returns:</B><DD>0-based index of the movie</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="addControl(java.lang.String, java.lang.String)"><!-- --></A><H3>
+addControl</H3>
+<PRE>
+public int <B>addControl</B>(java.lang.String&nbsp;name,
+                      java.lang.String&nbsp;progId)</PRE>
+<DL>
+<DD>Add a control in this presentation
+<P>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>name</CODE> - name of the control, e.g. "Shockwave Flash Object"<DD><CODE>progId</CODE> - OLE Programmatic Identifier, e.g.
+            "ShockwaveFlash.ShockwaveFlash.9"
+<DT><B>Returns:</B><DD>0-based index of the control</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="addHyperlink(org.apache.poi.hslf.model.Hyperlink)"><!-- --></A><H3>
+addHyperlink</H3>
+<PRE>
+public int <B>addHyperlink</B>(<A HREF="../../../../../org/apache/poi/hslf/model/Hyperlink.html" title="class in org.apache.poi.hslf.model">Hyperlink</A>&nbsp;link)</PRE>
+<DL>
+<DD>Add a hyperlink to this presentation
+<P>
+<DD><DL>
+
+<DT><B>Returns:</B><DD>0-based index of the hyperlink</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="addEmbed(org.apache.poi.poifs.filesystem.POIFSFileSystem)"><!-- --></A><H3>
+addEmbed</H3>
+<PRE>
+public int <B>addEmbed</B>(<A HREF="../../../../../org/apache/poi/poifs/filesystem/POIFSFileSystem.html" title="class in org.apache.poi.poifs.filesystem">POIFSFileSystem</A>&nbsp;poiData)</PRE>
+<DL>
+<DD>Add a embedded object to this presentation
+<P>
+<DD><DL>
+
+<DT><B>Returns:</B><DD>0-based index of the embedded object</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="addToObjListAtom(org.apache.poi.hslf.record.RecordContainer)"><!-- --></A><H3>
+addToObjListAtom</H3>
+<PRE>
+protected int <B>addToObjListAtom</B>(<A HREF="../../../../../org/apache/poi/hslf/record/RecordContainer.html" title="class in org.apache.poi.hslf.record">RecordContainer</A>&nbsp;exObj)</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getOleMap()"><!-- --></A><H3>
+getOleMap</H3>
+<PRE>
+protected static java.util.Map&lt;java.lang.String,<A HREF="../../../../../org/apache/poi/hpsf/ClassID.html" title="class in org.apache.poi.hpsf">ClassID</A>&gt; <B>getOleMap</B>()</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="addPersistentObject(org.apache.poi.hslf.record.PositionDependentRecord)"><!-- --></A><H3>
+addPersistentObject</H3>
+<PRE>
+protected int <B>addPersistentObject</B>(<A HREF="../../../../../org/apache/poi/hslf/record/PositionDependentRecord.html" title="interface in org.apache.poi.hslf.record">PositionDependentRecord</A>&nbsp;slideRecord)</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<!-- ========= END OF CLASS DATA ========= -->
+<HR>
+
+
+<!-- ======= START OF BOTTOM NAVBAR ====== -->
+<A NAME="navbar_bottom"><!-- --></A>
+<A HREF="#skip-navbar_bottom" title="Skip navigation links"></A>
+<TABLE BORDER="0" WIDTH="100%" CELLPADDING="1" CELLSPACING="0" SUMMARY="">
+<TR>
+<TD COLSPAN=2 BGCOLOR="#EEEEFF" CLASS="NavBarCell1">
+<A NAME="navbar_bottom_firstrow"><!-- --></A>
+<TABLE BORDER="0" CELLPADDING="0" CELLSPACING="3" SUMMARY="">
+  <TR ALIGN="center" VALIGN="top">
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../overview-summary.html"><FONT CLASS="NavBarFont1"><B>Overview</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="package-summary.html"><FONT CLASS="NavBarFont1"><B>Package</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#FFFFFF" CLASS="NavBarCell1Rev"> &nbsp;<FONT CLASS="NavBarFont1Rev"><B>Class</B></FONT>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="class-use/SlideShow.html"><FONT CLASS="NavBarFont1"><B>Use</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="package-tree.html"><FONT CLASS="NavBarFont1"><B>Tree</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../deprecated-list.html"><FONT CLASS="NavBarFont1"><B>Deprecated</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../index-all.html"><FONT CLASS="NavBarFont1"><B>Index</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../help-doc.html"><FONT CLASS="NavBarFont1"><B>Help</B></FONT></A>&nbsp;</TD>
+  </TR>
+</TABLE>
+</TD>
+<TD ALIGN="right" VALIGN="top" ROWSPAN=3><EM>
+</EM>
+</TD>
+</TR>
+
+<TR>
+<TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
+&nbsp;<A HREF="../../../../../org/apache/poi/hslf/usermodel/RichTextRun.html" title="class in org.apache.poi.hslf.usermodel"><B>PREV CLASS</B></A>&nbsp;
+&nbsp;<A HREF="../../../../../org/apache/poi/hslf/usermodel/SoundData.html" title="class in org.apache.poi.hslf.usermodel"><B>NEXT CLASS</B></A></FONT></TD>
+<TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
+  <A HREF="../../../../../index.html?org/apache/poi/hslf/usermodel/SlideShow.html" target="_top"><B>FRAMES</B></A>  &nbsp;
+&nbsp;<A HREF="SlideShow.html" target="_top"><B>NO FRAMES</B></A>  &nbsp;
+&nbsp;<SCRIPT type="text/javascript">
+  <!--
+  if(window==top) {
+    document.writeln('<A HREF="../../../../../allclasses-noframe.html"><B>All Classes</B></A>');
+  }
+  //-->
+</SCRIPT>
+<NOSCRIPT>
+  <A HREF="../../../../../allclasses-noframe.html"><B>All Classes</B></A>
+</NOSCRIPT>
+
+
+</FONT></TD>
+</TR>
+<TR>
+<TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
+  SUMMARY:&nbsp;NESTED&nbsp;|&nbsp;FIELD&nbsp;|&nbsp;<A HREF="#constructor_summary">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_summary">METHOD</A></FONT></TD>
+<TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
+DETAIL:&nbsp;FIELD&nbsp;|&nbsp;<A HREF="#constructor_detail">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_detail">METHOD</A></FONT></TD>
+</TR>
+</TABLE>
+<A NAME="skip-navbar_bottom"></A>
+<!-- ======== END OF BOTTOM NAVBAR ======= -->
+
+<HR>
+
+                <i>Copyright 2014 The Apache Software Foundation or
+        its licensors, as applicable.</i>
+            
+</BODY>
+</HTML>

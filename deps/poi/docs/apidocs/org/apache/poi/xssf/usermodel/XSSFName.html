@@ -1,0 +1,953 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!--NewPage-->
+<HTML>
+<HEAD>
+<TITLE>
+XSSFName (POI API Documentation)
+</TITLE>
+
+<META NAME="keywords" CONTENT="org.apache.poi.xssf.usermodel.XSSFName class">
+
+<LINK REL ="stylesheet" TYPE="text/css" HREF="../../../../../stylesheet.css" TITLE="Style">
+
+<SCRIPT type="text/javascript">
+function windowTitle()
+{
+    parent.document.title="XSSFName (POI API Documentation)";
+}
+</SCRIPT>
+<NOSCRIPT>
+</NOSCRIPT>
+
+</HEAD>
+
+<BODY BGCOLOR="white" onload="windowTitle();">
+
+
+<!-- ========= START OF TOP NAVBAR ======= -->
+<A NAME="navbar_top"><!-- --></A>
+<A HREF="#skip-navbar_top" title="Skip navigation links"></A>
+<TABLE BORDER="0" WIDTH="100%" CELLPADDING="1" CELLSPACING="0" SUMMARY="">
+<TR>
+<TD COLSPAN=2 BGCOLOR="#EEEEFF" CLASS="NavBarCell1">
+<A NAME="navbar_top_firstrow"><!-- --></A>
+<TABLE BORDER="0" CELLPADDING="0" CELLSPACING="3" SUMMARY="">
+  <TR ALIGN="center" VALIGN="top">
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../overview-summary.html"><FONT CLASS="NavBarFont1"><B>Overview</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="package-summary.html"><FONT CLASS="NavBarFont1"><B>Package</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#FFFFFF" CLASS="NavBarCell1Rev"> &nbsp;<FONT CLASS="NavBarFont1Rev"><B>Class</B></FONT>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="class-use/XSSFName.html"><FONT CLASS="NavBarFont1"><B>Use</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="package-tree.html"><FONT CLASS="NavBarFont1"><B>Tree</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../deprecated-list.html"><FONT CLASS="NavBarFont1"><B>Deprecated</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../index-all.html"><FONT CLASS="NavBarFont1"><B>Index</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../help-doc.html"><FONT CLASS="NavBarFont1"><B>Help</B></FONT></A>&nbsp;</TD>
+  </TR>
+</TABLE>
+</TD>
+<TD ALIGN="right" VALIGN="top" ROWSPAN=3><EM>
+</EM>
+</TD>
+</TR>
+
+<TR>
+<TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
+&nbsp;<A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFMap.html" title="class in org.apache.poi.xssf.usermodel"><B>PREV CLASS</B></A>&nbsp;
+&nbsp;<A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFOddFooter.html" title="class in org.apache.poi.xssf.usermodel"><B>NEXT CLASS</B></A></FONT></TD>
+<TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
+  <A HREF="../../../../../index.html?org/apache/poi/xssf/usermodel/XSSFName.html" target="_top"><B>FRAMES</B></A>  &nbsp;
+&nbsp;<A HREF="XSSFName.html" target="_top"><B>NO FRAMES</B></A>  &nbsp;
+&nbsp;<SCRIPT type="text/javascript">
+  <!--
+  if(window==top) {
+    document.writeln('<A HREF="../../../../../allclasses-noframe.html"><B>All Classes</B></A>');
+  }
+  //-->
+</SCRIPT>
+<NOSCRIPT>
+  <A HREF="../../../../../allclasses-noframe.html"><B>All Classes</B></A>
+</NOSCRIPT>
+
+
+</FONT></TD>
+</TR>
+<TR>
+<TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
+  SUMMARY:&nbsp;NESTED&nbsp;|&nbsp;<A HREF="#field_summary">FIELD</A>&nbsp;|&nbsp;<A HREF="#constructor_summary">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_summary">METHOD</A></FONT></TD>
+<TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
+DETAIL:&nbsp;<A HREF="#field_detail">FIELD</A>&nbsp;|&nbsp;<A HREF="#constructor_detail">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_detail">METHOD</A></FONT></TD>
+</TR>
+</TABLE>
+<A NAME="skip-navbar_top"></A>
+<!-- ========= END OF TOP NAVBAR ========= -->
+
+<HR>
+<!-- ======== START OF CLASS DATA ======== -->
+<H2>
+<FONT SIZE="-1">
+org.apache.poi.xssf.usermodel</FONT>
+<BR>
+Class XSSFName</H2>
+<PRE>
+java.lang.Object
+  <IMG SRC="../../../../../resources/inherit.gif" ALT="extended by "><B>org.apache.poi.xssf.usermodel.XSSFName</B>
+</PRE>
+<DL>
+<DT><B>All Implemented Interfaces:</B> <DD><A HREF="../../../../../org/apache/poi/ss/usermodel/Name.html" title="interface in org.apache.poi.ss.usermodel">Name</A></DD>
+</DL>
+<HR>
+<DL>
+<DT><PRE>public final class <B>XSSFName</B><DT>extends java.lang.Object<DT>implements <A HREF="../../../../../org/apache/poi/ss/usermodel/Name.html" title="interface in org.apache.poi.ss.usermodel">Name</A></DL>
+</PRE>
+
+<P>
+Represents a defined named range in a SpreadsheetML workbook.
+ <p>
+ Defined names are descriptive text that is used to represents a cell, range of cells, formula, or constant value.
+ Use easy-to-understand names, such as Products, to refer to hard to understand ranges, such as <code>Sales!C20:C30</code>.
+ </p>
+ Example:
+ <pre><blockquote>
+   XSSFWorkbook wb = new XSSFWorkbook();
+   XSSFSheet sh = wb.createSheet("Sheet1");
+
+   //applies to the entire workbook
+   XSSFName name1 = wb.createName();
+   name1.setNameName("FMLA");
+   name1.setRefersToFormula("Sheet1!$B$3");
+
+   //applies to Sheet1
+   XSSFName name2 = wb.createName();
+   name2.setNameName("SheetLevelName");
+   name2.setComment("This name is scoped to Sheet1");
+   name2.setLocalSheetId(0);
+   name2.setRefersToFormula("Sheet1!$B$3");
+
+ </blockquote></pre>
+<P>
+
+<P>
+<DL>
+<DT><B>Author:</B></DT>
+  <DD>Nick Burch, Yegor Kozlov</DD>
+</DL>
+<HR>
+
+<P>
+<!-- =========== FIELD SUMMARY =========== -->
+
+<A NAME="field_summary"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+<B>Field Summary</B></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;java.lang.String</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFName.html#BUILTIN_CONSOLIDATE_AREA">BUILTIN_CONSOLIDATE_AREA</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A built-in defined name that refers to a consolidation area</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;java.lang.String</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFName.html#BUILTIN_CRITERIA">BUILTIN_CRITERIA</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A built-in defined name that refers to a range containing the criteria values
+ to be used in applying an advanced filter to a range of data</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;java.lang.String</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFName.html#BUILTIN_DATABASE">BUILTIN_DATABASE</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A built-in defined name that specified that the range specified is from a database data source</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;java.lang.String</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFName.html#BUILTIN_EXTRACT">BUILTIN_EXTRACT</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;this defined name refers to the range containing the filtered
+ output values resulting from applying an advanced filter criteria to a source
+ range</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;java.lang.String</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFName.html#BUILTIN_FILTER_DB">BUILTIN_FILTER_DB</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;?an be one of the following
+  this defined name refers to a range to which an advanced filter has been
+ applied.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;java.lang.String</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFName.html#BUILTIN_PRINT_AREA">BUILTIN_PRINT_AREA</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A built-in defined name that specifies the workbook's print area</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;java.lang.String</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFName.html#BUILTIN_PRINT_TITLE">BUILTIN_PRINT_TITLE</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A built-in defined name that specifies the row(s) or column(s) to repeat
+ at the top of each printed page.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;java.lang.String</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFName.html#BUILTIN_SHEET_TITLE">BUILTIN_SHEET_TITLE</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A built-in defined name that refers to a sheet title.</TD>
+</TR>
+</TABLE>
+&nbsp;
+<!-- ======== CONSTRUCTOR SUMMARY ======== -->
+
+<A NAME="constructor_summary"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+<B>Constructor Summary</B></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>protected </CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFName.html#XSSFName(org.openxmlformats.schemas.spreadsheetml.x2006.main.CTDefinedName, org.apache.poi.xssf.usermodel.XSSFWorkbook)">XSSFName</A></B>(org.openxmlformats.schemas.spreadsheetml.x2006.main.CTDefinedName&nbsp;name,
+         <A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFWorkbook.html" title="class in org.apache.poi.xssf.usermodel">XSSFWorkbook</A>&nbsp;workbook)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Creates an XSSFName object - called internally by XSSFWorkbook.</TD>
+</TR>
+</TABLE>
+&nbsp;
+<!-- ========== METHOD SUMMARY =========== -->
+
+<A NAME="method_summary"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+<B>Method Summary</B></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFName.html#equals(java.lang.Object)">equals</A></B>(java.lang.Object&nbsp;o)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Compares this name to the specified object.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;java.lang.String</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFName.html#getComment()">getComment</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns the comment the user provided when the name was created.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>protected &nbsp;org.openxmlformats.schemas.spreadsheetml.x2006.main.CTDefinedName</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFName.html#getCTName()">getCTName</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns the underlying named range object</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFName.html#getFunction()">getFunction</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Indicates that the defined name refers to a user-defined function.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;int</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFName.html#getFunctionGroupId()">getFunctionGroupId</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns the function group index if the defined name refers to a function.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;java.lang.String</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFName.html#getNameName()">getNameName</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns the name that will appear in the user interface for the defined name.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;java.lang.String</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFName.html#getRefersToFormula()">getRefersToFormula</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns the formula that the name is defined to refer to.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;int</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFName.html#getSheetIndex()">getSheetIndex</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns the sheet index this name applies to.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;java.lang.String</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFName.html#getSheetName()">getSheetName</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Get the sheets name which this named range is referenced to</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;int</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFName.html#hashCode()">hashCode</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFName.html#isDeleted()">isDeleted</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Checks if this name points to a cell that no longer exists</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFName.html#isFunctionName()">isFunctionName</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Is the name refers to a user-defined function ?</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFName.html#setComment(java.lang.String)">setComment</A></B>(java.lang.String&nbsp;comment)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Specifies the comment the user provided when the name was created.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFName.html#setFunction(boolean)">setFunction</A></B>(boolean&nbsp;value)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Indicates that the defined name refers to a user-defined function.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFName.html#setFunctionGroupId(int)">setFunctionGroupId</A></B>(int&nbsp;functionGroupId)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Specifies the function group index if the defined name refers to a function.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFName.html#setNameName(java.lang.String)">setNameName</A></B>(java.lang.String&nbsp;name)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sets the name that will appear in the user interface for the defined name.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFName.html#setRefersToFormula(java.lang.String)">setRefersToFormula</A></B>(java.lang.String&nbsp;formulaText)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sets the formula that the name is defined to refer to.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFName.html#setSheetIndex(int)">setSheetIndex</A></B>(int&nbsp;index)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Tell Excel that this name applies to the worksheet with the specified index instead of the entire workbook.</TD>
+</TR>
+</TABLE>
+&nbsp;<A NAME="methods_inherited_from_class_java.lang.Object"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#EEEEFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left"><B>Methods inherited from class java.lang.Object</B></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE>clone, finalize, getClass, notify, notifyAll, toString, wait, wait, wait</CODE></TD>
+</TR>
+</TABLE>
+&nbsp;
+<P>
+
+<!-- ============ FIELD DETAIL =========== -->
+
+<A NAME="field_detail"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="1"><FONT SIZE="+2">
+<B>Field Detail</B></FONT></TH>
+</TR>
+</TABLE>
+
+<A NAME="BUILTIN_PRINT_AREA"><!-- --></A><H3>
+BUILTIN_PRINT_AREA</H3>
+<PRE>
+public static final java.lang.String <B>BUILTIN_PRINT_AREA</B></PRE>
+<DL>
+<DD>A built-in defined name that specifies the workbook's print area
+<P>
+<DL>
+<DT><B>See Also:</B><DD><A HREF="../../../../../constant-values.html#org.apache.poi.xssf.usermodel.XSSFName.BUILTIN_PRINT_AREA">Constant Field Values</A></DL>
+</DL>
+<HR>
+
+<A NAME="BUILTIN_PRINT_TITLE"><!-- --></A><H3>
+BUILTIN_PRINT_TITLE</H3>
+<PRE>
+public static final java.lang.String <B>BUILTIN_PRINT_TITLE</B></PRE>
+<DL>
+<DD>A built-in defined name that specifies the row(s) or column(s) to repeat
+ at the top of each printed page.
+<P>
+<DL>
+<DT><B>See Also:</B><DD><A HREF="../../../../../constant-values.html#org.apache.poi.xssf.usermodel.XSSFName.BUILTIN_PRINT_TITLE">Constant Field Values</A></DL>
+</DL>
+<HR>
+
+<A NAME="BUILTIN_CRITERIA"><!-- --></A><H3>
+BUILTIN_CRITERIA</H3>
+<PRE>
+public static final java.lang.String <B>BUILTIN_CRITERIA</B></PRE>
+<DL>
+<DD>A built-in defined name that refers to a range containing the criteria values
+ to be used in applying an advanced filter to a range of data
+<P>
+<DL>
+<DT><B>See Also:</B><DD><A HREF="../../../../../constant-values.html#org.apache.poi.xssf.usermodel.XSSFName.BUILTIN_CRITERIA">Constant Field Values</A></DL>
+</DL>
+<HR>
+
+<A NAME="BUILTIN_EXTRACT"><!-- --></A><H3>
+BUILTIN_EXTRACT</H3>
+<PRE>
+public static final java.lang.String <B>BUILTIN_EXTRACT</B></PRE>
+<DL>
+<DD>this defined name refers to the range containing the filtered
+ output values resulting from applying an advanced filter criteria to a source
+ range
+<P>
+<DL>
+<DT><B>See Also:</B><DD><A HREF="../../../../../constant-values.html#org.apache.poi.xssf.usermodel.XSSFName.BUILTIN_EXTRACT">Constant Field Values</A></DL>
+</DL>
+<HR>
+
+<A NAME="BUILTIN_FILTER_DB"><!-- --></A><H3>
+BUILTIN_FILTER_DB</H3>
+<PRE>
+public static final java.lang.String <B>BUILTIN_FILTER_DB</B></PRE>
+<DL>
+<DD>?an be one of the following
+ <li> this defined name refers to a range to which an advanced filter has been
+ applied. This represents the source data range, unfiltered.
+ <li> This defined name refers to a range to which an AutoFilter has been
+ applied
+<P>
+<DL>
+<DT><B>See Also:</B><DD><A HREF="../../../../../constant-values.html#org.apache.poi.xssf.usermodel.XSSFName.BUILTIN_FILTER_DB">Constant Field Values</A></DL>
+</DL>
+<HR>
+
+<A NAME="BUILTIN_CONSOLIDATE_AREA"><!-- --></A><H3>
+BUILTIN_CONSOLIDATE_AREA</H3>
+<PRE>
+public static final java.lang.String <B>BUILTIN_CONSOLIDATE_AREA</B></PRE>
+<DL>
+<DD>A built-in defined name that refers to a consolidation area
+<P>
+<DL>
+<DT><B>See Also:</B><DD><A HREF="../../../../../constant-values.html#org.apache.poi.xssf.usermodel.XSSFName.BUILTIN_CONSOLIDATE_AREA">Constant Field Values</A></DL>
+</DL>
+<HR>
+
+<A NAME="BUILTIN_DATABASE"><!-- --></A><H3>
+BUILTIN_DATABASE</H3>
+<PRE>
+public static final java.lang.String <B>BUILTIN_DATABASE</B></PRE>
+<DL>
+<DD>A built-in defined name that specified that the range specified is from a database data source
+<P>
+<DL>
+<DT><B>See Also:</B><DD><A HREF="../../../../../constant-values.html#org.apache.poi.xssf.usermodel.XSSFName.BUILTIN_DATABASE">Constant Field Values</A></DL>
+</DL>
+<HR>
+
+<A NAME="BUILTIN_SHEET_TITLE"><!-- --></A><H3>
+BUILTIN_SHEET_TITLE</H3>
+<PRE>
+public static final java.lang.String <B>BUILTIN_SHEET_TITLE</B></PRE>
+<DL>
+<DD>A built-in defined name that refers to a sheet title.
+<P>
+<DL>
+<DT><B>See Also:</B><DD><A HREF="../../../../../constant-values.html#org.apache.poi.xssf.usermodel.XSSFName.BUILTIN_SHEET_TITLE">Constant Field Values</A></DL>
+</DL>
+
+<!-- ========= CONSTRUCTOR DETAIL ======== -->
+
+<A NAME="constructor_detail"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="1"><FONT SIZE="+2">
+<B>Constructor Detail</B></FONT></TH>
+</TR>
+</TABLE>
+
+<A NAME="XSSFName(org.openxmlformats.schemas.spreadsheetml.x2006.main.CTDefinedName, org.apache.poi.xssf.usermodel.XSSFWorkbook)"><!-- --></A><H3>
+XSSFName</H3>
+<PRE>
+protected <B>XSSFName</B>(org.openxmlformats.schemas.spreadsheetml.x2006.main.CTDefinedName&nbsp;name,
+                   <A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFWorkbook.html" title="class in org.apache.poi.xssf.usermodel">XSSFWorkbook</A>&nbsp;workbook)</PRE>
+<DL>
+<DD>Creates an XSSFName object - called internally by XSSFWorkbook.
+<P>
+<DL>
+<DT><B>Parameters:</B><DD><CODE>name</CODE> - - the xml bean that holds data represenring this defined name.<DD><CODE>workbook</CODE> - - the workbook object associated with the name<DT><B>See Also:</B><DD><A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFWorkbook.html#createName()"><CODE>XSSFWorkbook.createName()</CODE></A></DL>
+</DL>
+
+<!-- ============ METHOD DETAIL ========== -->
+
+<A NAME="method_detail"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="1"><FONT SIZE="+2">
+<B>Method Detail</B></FONT></TH>
+</TR>
+</TABLE>
+
+<A NAME="getCTName()"><!-- --></A><H3>
+getCTName</H3>
+<PRE>
+protected org.openxmlformats.schemas.spreadsheetml.x2006.main.CTDefinedName <B>getCTName</B>()</PRE>
+<DL>
+<DD>Returns the underlying named range object
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getNameName()"><!-- --></A><H3>
+getNameName</H3>
+<PRE>
+public java.lang.String <B>getNameName</B>()</PRE>
+<DL>
+<DD>Returns the name that will appear in the user interface for the defined name.
+<P>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../../../../org/apache/poi/ss/usermodel/Name.html#getNameName()">getNameName</A></CODE> in interface <CODE><A HREF="../../../../../org/apache/poi/ss/usermodel/Name.html" title="interface in org.apache.poi.ss.usermodel">Name</A></CODE></DL>
+</DD>
+<DD><DL>
+
+<DT><B>Returns:</B><DD>text name of this defined name</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setNameName(java.lang.String)"><!-- --></A><H3>
+setNameName</H3>
+<PRE>
+public void <B>setNameName</B>(java.lang.String&nbsp;name)</PRE>
+<DL>
+<DD>Sets the name that will appear in the user interface for the defined name.
+ Names must begin with a letter or underscore, not contain spaces and be unique across the workbook.
+
+ <p>
+ A name must always be unique within its scope. POI prevents you from defining a name that is not unique
+ within its scope. However you can use the same name in different scopes. Example:
+ <pre><blockquote>
+ //by default names are workbook-global
+ XSSFName name;
+ name = workbook.createName();
+ name.setNameName("sales_08");
+
+ name = workbook.createName();
+ name.setNameName("sales_08"); //will throw an exception: "The workbook already contains this name (case-insensitive)"
+
+ //create sheet-level name
+ name = workbook.createName();
+ name.setSheetIndex(0); //the scope of the name is the first sheet
+ name.setNameName("sales_08");  //ok
+
+ name = workbook.createName();
+ name.setSheetIndex(0);
+ name.setNameName("sales_08");  //will throw an exception: "The sheet already contains this name (case-insensitive)"
+
+ </blockquote></pre>
+ </p>
+<P>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../../../../org/apache/poi/ss/usermodel/Name.html#setNameName(java.lang.String)">setNameName</A></CODE> in interface <CODE><A HREF="../../../../../org/apache/poi/ss/usermodel/Name.html" title="interface in org.apache.poi.ss.usermodel">Name</A></CODE></DL>
+</DD>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>name</CODE> - name of this defined name
+<DT><B>Throws:</B>
+<DD><CODE>java.lang.IllegalArgumentException</CODE> - if the name is invalid or the workbook already contains this name (case-insensitive)</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getRefersToFormula()"><!-- --></A><H3>
+getRefersToFormula</H3>
+<PRE>
+public java.lang.String <B>getRefersToFormula</B>()</PRE>
+<DL>
+<DD><B>Description copied from interface: <CODE><A HREF="../../../../../org/apache/poi/ss/usermodel/Name.html#getRefersToFormula()">Name</A></CODE></B></DD>
+<DD>Returns the formula that the name is defined to refer to.
+<P>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../../../../org/apache/poi/ss/usermodel/Name.html#getRefersToFormula()">getRefersToFormula</A></CODE> in interface <CODE><A HREF="../../../../../org/apache/poi/ss/usermodel/Name.html" title="interface in org.apache.poi.ss.usermodel">Name</A></CODE></DL>
+</DD>
+<DD><DL>
+
+<DT><B>Returns:</B><DD>the reference for this name, <code>null</code> if it has not been set yet. Never empty string<DT><B>See Also:</B><DD><A HREF="../../../../../org/apache/poi/ss/usermodel/Name.html#setRefersToFormula(java.lang.String)"><CODE>Name.setRefersToFormula(String)</CODE></A></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setRefersToFormula(java.lang.String)"><!-- --></A><H3>
+setRefersToFormula</H3>
+<PRE>
+public void <B>setRefersToFormula</B>(java.lang.String&nbsp;formulaText)</PRE>
+<DL>
+<DD><B>Description copied from interface: <CODE><A HREF="../../../../../org/apache/poi/ss/usermodel/Name.html#setRefersToFormula(java.lang.String)">Name</A></CODE></B></DD>
+<DD>Sets the formula that the name is defined to refer to. The following are representative examples:
+
+ <ul>
+  <li><code>'My Sheet'!$A$3</code></li>
+  <li><code>8.3</code></li>
+  <li><code>HR!$A$1:$Z$345</code></li>
+  <li><code>SUM(Sheet1!A1,Sheet2!B2)</li>
+  <li><code>-PMT(Interest_Rate/12,Number_of_Payments,Loan_Amount)</li>
+ </ul>
+<P>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../../../../org/apache/poi/ss/usermodel/Name.html#setRefersToFormula(java.lang.String)">setRefersToFormula</A></CODE> in interface <CODE><A HREF="../../../../../org/apache/poi/ss/usermodel/Name.html" title="interface in org.apache.poi.ss.usermodel">Name</A></CODE></DL>
+</DD>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>formulaText</CODE> - the reference for this name</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="isDeleted()"><!-- --></A><H3>
+isDeleted</H3>
+<PRE>
+public boolean <B>isDeleted</B>()</PRE>
+<DL>
+<DD><B>Description copied from interface: <CODE><A HREF="../../../../../org/apache/poi/ss/usermodel/Name.html#isDeleted()">Name</A></CODE></B></DD>
+<DD>Checks if this name points to a cell that no longer exists
+<P>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../../../../org/apache/poi/ss/usermodel/Name.html#isDeleted()">isDeleted</A></CODE> in interface <CODE><A HREF="../../../../../org/apache/poi/ss/usermodel/Name.html" title="interface in org.apache.poi.ss.usermodel">Name</A></CODE></DL>
+</DD>
+<DD><DL>
+
+<DT><B>Returns:</B><DD><code>true</code> if the name refers to a deleted cell, <code>false</code> otherwise</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setSheetIndex(int)"><!-- --></A><H3>
+setSheetIndex</H3>
+<PRE>
+public void <B>setSheetIndex</B>(int&nbsp;index)</PRE>
+<DL>
+<DD>Tell Excel that this name applies to the worksheet with the specified index instead of the entire workbook.
+<P>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../../../../org/apache/poi/ss/usermodel/Name.html#setSheetIndex(int)">setSheetIndex</A></CODE> in interface <CODE><A HREF="../../../../../org/apache/poi/ss/usermodel/Name.html" title="interface in org.apache.poi.ss.usermodel">Name</A></CODE></DL>
+</DD>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>index</CODE> - the sheet index this name applies to, -1 unsets this property making the name workbook-global</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getSheetIndex()"><!-- --></A><H3>
+getSheetIndex</H3>
+<PRE>
+public int <B>getSheetIndex</B>()</PRE>
+<DL>
+<DD>Returns the sheet index this name applies to.
+<P>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../../../../org/apache/poi/ss/usermodel/Name.html#getSheetIndex()">getSheetIndex</A></CODE> in interface <CODE><A HREF="../../../../../org/apache/poi/ss/usermodel/Name.html" title="interface in org.apache.poi.ss.usermodel">Name</A></CODE></DL>
+</DD>
+<DD><DL>
+
+<DT><B>Returns:</B><DD>the sheet index this name applies to, -1 if this name applies to the entire workbook</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setFunction(boolean)"><!-- --></A><H3>
+setFunction</H3>
+<PRE>
+public void <B>setFunction</B>(boolean&nbsp;value)</PRE>
+<DL>
+<DD>Indicates that the defined name refers to a user-defined function.
+ This attribute is used when there is an add-in or other code project associated with the file.
+<P>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../../../../org/apache/poi/ss/usermodel/Name.html#setFunction(boolean)">setFunction</A></CODE> in interface <CODE><A HREF="../../../../../org/apache/poi/ss/usermodel/Name.html" title="interface in org.apache.poi.ss.usermodel">Name</A></CODE></DL>
+</DD>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>value</CODE> - <code>true</code> indicates the name refers to a function.</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getFunction()"><!-- --></A><H3>
+getFunction</H3>
+<PRE>
+public boolean <B>getFunction</B>()</PRE>
+<DL>
+<DD>Indicates that the defined name refers to a user-defined function.
+ This attribute is used when there is an add-in or other code project associated with the file.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+
+<DT><B>Returns:</B><DD><code>true</code> indicates the name refers to a function.</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setFunctionGroupId(int)"><!-- --></A><H3>
+setFunctionGroupId</H3>
+<PRE>
+public void <B>setFunctionGroupId</B>(int&nbsp;functionGroupId)</PRE>
+<DL>
+<DD>Specifies the function group index if the defined name refers to a function. The function
+ group defines the general category for the function. This attribute is used when there is
+ an add-in or other code project associated with the file.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>functionGroupId</CODE> - the function group index that defines the general category for the function</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getFunctionGroupId()"><!-- --></A><H3>
+getFunctionGroupId</H3>
+<PRE>
+public int <B>getFunctionGroupId</B>()</PRE>
+<DL>
+<DD>Returns the function group index if the defined name refers to a function. The function
+ group defines the general category for the function. This attribute is used when there is
+ an add-in or other code project associated with the file.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+
+<DT><B>Returns:</B><DD>the function group index that defines the general category for the function</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getSheetName()"><!-- --></A><H3>
+getSheetName</H3>
+<PRE>
+public java.lang.String <B>getSheetName</B>()</PRE>
+<DL>
+<DD>Get the sheets name which this named range is referenced to
+<P>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../../../../org/apache/poi/ss/usermodel/Name.html#getSheetName()">getSheetName</A></CODE> in interface <CODE><A HREF="../../../../../org/apache/poi/ss/usermodel/Name.html" title="interface in org.apache.poi.ss.usermodel">Name</A></CODE></DL>
+</DD>
+<DD><DL>
+
+<DT><B>Returns:</B><DD>sheet name, which this named range referred to.
+ Empty string if the referenced sheet name weas not found.</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="isFunctionName()"><!-- --></A><H3>
+isFunctionName</H3>
+<PRE>
+public boolean <B>isFunctionName</B>()</PRE>
+<DL>
+<DD>Is the name refers to a user-defined function ?
+<P>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../../../../org/apache/poi/ss/usermodel/Name.html#isFunctionName()">isFunctionName</A></CODE> in interface <CODE><A HREF="../../../../../org/apache/poi/ss/usermodel/Name.html" title="interface in org.apache.poi.ss.usermodel">Name</A></CODE></DL>
+</DD>
+<DD><DL>
+
+<DT><B>Returns:</B><DD><code>true</code> if this name refers to a user-defined function</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getComment()"><!-- --></A><H3>
+getComment</H3>
+<PRE>
+public java.lang.String <B>getComment</B>()</PRE>
+<DL>
+<DD>Returns the comment the user provided when the name was created.
+<P>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../../../../org/apache/poi/ss/usermodel/Name.html#getComment()">getComment</A></CODE> in interface <CODE><A HREF="../../../../../org/apache/poi/ss/usermodel/Name.html" title="interface in org.apache.poi.ss.usermodel">Name</A></CODE></DL>
+</DD>
+<DD><DL>
+
+<DT><B>Returns:</B><DD>the user comment for this named range</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setComment(java.lang.String)"><!-- --></A><H3>
+setComment</H3>
+<PRE>
+public void <B>setComment</B>(java.lang.String&nbsp;comment)</PRE>
+<DL>
+<DD>Specifies the comment the user provided when the name was created.
+<P>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../../../../org/apache/poi/ss/usermodel/Name.html#setComment(java.lang.String)">setComment</A></CODE> in interface <CODE><A HREF="../../../../../org/apache/poi/ss/usermodel/Name.html" title="interface in org.apache.poi.ss.usermodel">Name</A></CODE></DL>
+</DD>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>comment</CODE> - the user comment for this named range</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="hashCode()"><!-- --></A><H3>
+hashCode</H3>
+<PRE>
+public int <B>hashCode</B>()</PRE>
+<DL>
+<DD><DL>
+<DT><B>Overrides:</B><DD><CODE>hashCode</CODE> in class <CODE>java.lang.Object</CODE></DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="equals(java.lang.Object)"><!-- --></A><H3>
+equals</H3>
+<PRE>
+public boolean <B>equals</B>(java.lang.Object&nbsp;o)</PRE>
+<DL>
+<DD>Compares this name to the specified object.
+ The result is <code>true</code> if the argument is XSSFName and the
+ underlying CTDefinedName bean equals to the CTDefinedName representing this name
+<P>
+<DD><DL>
+<DT><B>Overrides:</B><DD><CODE>equals</CODE> in class <CODE>java.lang.Object</CODE></DL>
+</DD>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>o</CODE> - the object to compare this <code>XSSFName</code> against.
+<DT><B>Returns:</B><DD><code>true</code> if the <code>XSSFName </code>are equal;
+          <code>false</code> otherwise.</DL>
+</DD>
+</DL>
+<!-- ========= END OF CLASS DATA ========= -->
+<HR>
+
+
+<!-- ======= START OF BOTTOM NAVBAR ====== -->
+<A NAME="navbar_bottom"><!-- --></A>
+<A HREF="#skip-navbar_bottom" title="Skip navigation links"></A>
+<TABLE BORDER="0" WIDTH="100%" CELLPADDING="1" CELLSPACING="0" SUMMARY="">
+<TR>
+<TD COLSPAN=2 BGCOLOR="#EEEEFF" CLASS="NavBarCell1">
+<A NAME="navbar_bottom_firstrow"><!-- --></A>
+<TABLE BORDER="0" CELLPADDING="0" CELLSPACING="3" SUMMARY="">
+  <TR ALIGN="center" VALIGN="top">
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../overview-summary.html"><FONT CLASS="NavBarFont1"><B>Overview</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="package-summary.html"><FONT CLASS="NavBarFont1"><B>Package</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#FFFFFF" CLASS="NavBarCell1Rev"> &nbsp;<FONT CLASS="NavBarFont1Rev"><B>Class</B></FONT>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="class-use/XSSFName.html"><FONT CLASS="NavBarFont1"><B>Use</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="package-tree.html"><FONT CLASS="NavBarFont1"><B>Tree</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../deprecated-list.html"><FONT CLASS="NavBarFont1"><B>Deprecated</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../index-all.html"><FONT CLASS="NavBarFont1"><B>Index</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../help-doc.html"><FONT CLASS="NavBarFont1"><B>Help</B></FONT></A>&nbsp;</TD>
+  </TR>
+</TABLE>
+</TD>
+<TD ALIGN="right" VALIGN="top" ROWSPAN=3><EM>
+</EM>
+</TD>
+</TR>
+
+<TR>
+<TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
+&nbsp;<A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFMap.html" title="class in org.apache.poi.xssf.usermodel"><B>PREV CLASS</B></A>&nbsp;
+&nbsp;<A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFOddFooter.html" title="class in org.apache.poi.xssf.usermodel"><B>NEXT CLASS</B></A></FONT></TD>
+<TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
+  <A HREF="../../../../../index.html?org/apache/poi/xssf/usermodel/XSSFName.html" target="_top"><B>FRAMES</B></A>  &nbsp;
+&nbsp;<A HREF="XSSFName.html" target="_top"><B>NO FRAMES</B></A>  &nbsp;
+&nbsp;<SCRIPT type="text/javascript">
+  <!--
+  if(window==top) {
+    document.writeln('<A HREF="../../../../../allclasses-noframe.html"><B>All Classes</B></A>');
+  }
+  //-->
+</SCRIPT>
+<NOSCRIPT>
+  <A HREF="../../../../../allclasses-noframe.html"><B>All Classes</B></A>
+</NOSCRIPT>
+
+
+</FONT></TD>
+</TR>
+<TR>
+<TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
+  SUMMARY:&nbsp;NESTED&nbsp;|&nbsp;<A HREF="#field_summary">FIELD</A>&nbsp;|&nbsp;<A HREF="#constructor_summary">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_summary">METHOD</A></FONT></TD>
+<TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
+DETAIL:&nbsp;<A HREF="#field_detail">FIELD</A>&nbsp;|&nbsp;<A HREF="#constructor_detail">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_detail">METHOD</A></FONT></TD>
+</TR>
+</TABLE>
+<A NAME="skip-navbar_bottom"></A>
+<!-- ======== END OF BOTTOM NAVBAR ======= -->
+
+<HR>
+
+                <i>Copyright 2014 The Apache Software Foundation or
+        its licensors, as applicable.</i>
+            
+</BODY>
+</HTML>

@@ -1,0 +1,520 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!--NewPage-->
+<HTML>
+<HEAD>
+<TITLE>
+ZipPackage (POI API Documentation)
+</TITLE>
+
+<META NAME="keywords" CONTENT="org.apache.poi.openxml4j.opc.ZipPackage class">
+
+<LINK REL ="stylesheet" TYPE="text/css" HREF="../../../../../stylesheet.css" TITLE="Style">
+
+<SCRIPT type="text/javascript">
+function windowTitle()
+{
+    parent.document.title="ZipPackage (POI API Documentation)";
+}
+</SCRIPT>
+<NOSCRIPT>
+</NOSCRIPT>
+
+</HEAD>
+
+<BODY BGCOLOR="white" onload="windowTitle();">
+
+
+<!-- ========= START OF TOP NAVBAR ======= -->
+<A NAME="navbar_top"><!-- --></A>
+<A HREF="#skip-navbar_top" title="Skip navigation links"></A>
+<TABLE BORDER="0" WIDTH="100%" CELLPADDING="1" CELLSPACING="0" SUMMARY="">
+<TR>
+<TD COLSPAN=2 BGCOLOR="#EEEEFF" CLASS="NavBarCell1">
+<A NAME="navbar_top_firstrow"><!-- --></A>
+<TABLE BORDER="0" CELLPADDING="0" CELLSPACING="3" SUMMARY="">
+  <TR ALIGN="center" VALIGN="top">
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../overview-summary.html"><FONT CLASS="NavBarFont1"><B>Overview</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="package-summary.html"><FONT CLASS="NavBarFont1"><B>Package</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#FFFFFF" CLASS="NavBarCell1Rev"> &nbsp;<FONT CLASS="NavBarFont1Rev"><B>Class</B></FONT>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="class-use/ZipPackage.html"><FONT CLASS="NavBarFont1"><B>Use</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="package-tree.html"><FONT CLASS="NavBarFont1"><B>Tree</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../deprecated-list.html"><FONT CLASS="NavBarFont1"><B>Deprecated</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../index-all.html"><FONT CLASS="NavBarFont1"><B>Index</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../help-doc.html"><FONT CLASS="NavBarFont1"><B>Help</B></FONT></A>&nbsp;</TD>
+  </TR>
+</TABLE>
+</TD>
+<TD ALIGN="right" VALIGN="top" ROWSPAN=3><EM>
+</EM>
+</TD>
+</TR>
+
+<TR>
+<TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
+&nbsp;<A HREF="../../../../../org/apache/poi/openxml4j/opc/TargetMode.html" title="enum in org.apache.poi.openxml4j.opc"><B>PREV CLASS</B></A>&nbsp;
+&nbsp;<A HREF="../../../../../org/apache/poi/openxml4j/opc/ZipPackagePart.html" title="class in org.apache.poi.openxml4j.opc"><B>NEXT CLASS</B></A></FONT></TD>
+<TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
+  <A HREF="../../../../../index.html?org/apache/poi/openxml4j/opc/ZipPackage.html" target="_top"><B>FRAMES</B></A>  &nbsp;
+&nbsp;<A HREF="ZipPackage.html" target="_top"><B>NO FRAMES</B></A>  &nbsp;
+&nbsp;<SCRIPT type="text/javascript">
+  <!--
+  if(window==top) {
+    document.writeln('<A HREF="../../../../../allclasses-noframe.html"><B>All Classes</B></A>');
+  }
+  //-->
+</SCRIPT>
+<NOSCRIPT>
+  <A HREF="../../../../../allclasses-noframe.html"><B>All Classes</B></A>
+</NOSCRIPT>
+
+
+</FONT></TD>
+</TR>
+<TR>
+<TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
+  SUMMARY:&nbsp;NESTED&nbsp;|&nbsp;<A HREF="#fields_inherited_from_class_org.apache.poi.openxml4j.opc.OPCPackage">FIELD</A>&nbsp;|&nbsp;<A HREF="#constructor_summary">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_summary">METHOD</A></FONT></TD>
+<TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
+DETAIL:&nbsp;FIELD&nbsp;|&nbsp;<A HREF="#constructor_detail">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_detail">METHOD</A></FONT></TD>
+</TR>
+</TABLE>
+<A NAME="skip-navbar_top"></A>
+<!-- ========= END OF TOP NAVBAR ========= -->
+
+<HR>
+<!-- ======== START OF CLASS DATA ======== -->
+<H2>
+<FONT SIZE="-1">
+org.apache.poi.openxml4j.opc</FONT>
+<BR>
+Class ZipPackage</H2>
+<PRE>
+java.lang.Object
+  <IMG SRC="../../../../../resources/inherit.gif" ALT="extended by "><A HREF="../../../../../org/apache/poi/openxml4j/opc/OPCPackage.html" title="class in org.apache.poi.openxml4j.opc">org.apache.poi.openxml4j.opc.OPCPackage</A>
+      <IMG SRC="../../../../../resources/inherit.gif" ALT="extended by "><A HREF="../../../../../org/apache/poi/openxml4j/opc/Package.html" title="class in org.apache.poi.openxml4j.opc">org.apache.poi.openxml4j.opc.Package</A>
+          <IMG SRC="../../../../../resources/inherit.gif" ALT="extended by "><B>org.apache.poi.openxml4j.opc.ZipPackage</B>
+</PRE>
+<DL>
+<DT><B>All Implemented Interfaces:</B> <DD>java.io.Closeable, <A HREF="../../../../../org/apache/poi/openxml4j/opc/RelationshipSource.html" title="interface in org.apache.poi.openxml4j.opc">RelationshipSource</A></DD>
+</DL>
+<HR>
+<DL>
+<DT><PRE>public final class <B>ZipPackage</B><DT>extends <A HREF="../../../../../org/apache/poi/openxml4j/opc/Package.html" title="class in org.apache.poi.openxml4j.opc">Package</A></DL>
+</PRE>
+
+<P>
+Physical zip package.
+<P>
+
+<P>
+<HR>
+
+<P>
+<!-- =========== FIELD SUMMARY =========== -->
+
+<A NAME="field_summary"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+<B>Field Summary</B></FONT></TH>
+</TR>
+</TABLE>
+&nbsp;<A NAME="fields_inherited_from_class_org.apache.poi.openxml4j.opc.OPCPackage"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#EEEEFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left"><B>Fields inherited from class org.apache.poi.openxml4j.opc.<A HREF="../../../../../org/apache/poi/openxml4j/opc/OPCPackage.html" title="class in org.apache.poi.openxml4j.opc">OPCPackage</A></B></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><A HREF="../../../../../org/apache/poi/openxml4j/opc/OPCPackage.html#contentTypeManager">contentTypeManager</A>, <A HREF="../../../../../org/apache/poi/openxml4j/opc/OPCPackage.html#defaultPackageAccess">defaultPackageAccess</A>, <A HREF="../../../../../org/apache/poi/openxml4j/opc/OPCPackage.html#defaultPartMarshaller">defaultPartMarshaller</A>, <A HREF="../../../../../org/apache/poi/openxml4j/opc/OPCPackage.html#isDirty">isDirty</A>, <A HREF="../../../../../org/apache/poi/openxml4j/opc/OPCPackage.html#originalPackagePath">originalPackagePath</A>, <A HREF="../../../../../org/apache/poi/openxml4j/opc/OPCPackage.html#output">output</A>, <A HREF="../../../../../org/apache/poi/openxml4j/opc/OPCPackage.html#packageProperties">packageProperties</A>, <A HREF="../../../../../org/apache/poi/openxml4j/opc/OPCPackage.html#partList">partList</A>, <A HREF="../../../../../org/apache/poi/openxml4j/opc/OPCPackage.html#partMarshallers">partMarshallers</A>, <A HREF="../../../../../org/apache/poi/openxml4j/opc/OPCPackage.html#partUnmarshallers">partUnmarshallers</A>, <A HREF="../../../../../org/apache/poi/openxml4j/opc/OPCPackage.html#relationships">relationships</A></CODE></TD>
+</TR>
+</TABLE>
+&nbsp;
+<!-- ======== CONSTRUCTOR SUMMARY ======== -->
+
+<A NAME="constructor_summary"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+<B>Constructor Summary</B></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/openxml4j/opc/ZipPackage.html#ZipPackage()">ZipPackage</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Constructor.</TD>
+</TR>
+</TABLE>
+&nbsp;
+<!-- ========== METHOD SUMMARY =========== -->
+
+<A NAME="method_summary"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+<B>Method Summary</B></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>protected &nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/openxml4j/opc/ZipPackage.html#closeImpl()">closeImpl</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Close and save the package.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>protected &nbsp;<A HREF="../../../../../org/apache/poi/openxml4j/opc/PackagePart.html" title="class in org.apache.poi.openxml4j.opc">PackagePart</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/openxml4j/opc/ZipPackage.html#createPartImpl(org.apache.poi.openxml4j.opc.PackagePartName, java.lang.String, boolean)">createPartImpl</A></B>(<A HREF="../../../../../org/apache/poi/openxml4j/opc/PackagePartName.html" title="class in org.apache.poi.openxml4j.opc">PackagePartName</A>&nbsp;partName,
+               java.lang.String&nbsp;contentType,
+               boolean&nbsp;loadRelationships)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Create a new MemoryPackagePart from the specified URI and content type
+
+
+ aram partName The part URI.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>protected &nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/openxml4j/opc/ZipPackage.html#flushImpl()">flushImpl</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Flush the package.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>protected &nbsp;<A HREF="../../../../../org/apache/poi/openxml4j/opc/PackagePart.html" title="class in org.apache.poi.openxml4j.opc">PackagePart</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/openxml4j/opc/ZipPackage.html#getPartImpl(org.apache.poi.openxml4j.opc.PackagePartName)">getPartImpl</A></B>(<A HREF="../../../../../org/apache/poi/openxml4j/opc/PackagePartName.html" title="class in org.apache.poi.openxml4j.opc">PackagePartName</A>&nbsp;partName)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Implement the getPart() method to retrieve a part from its URI in the
+ current package</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>protected &nbsp;<A HREF="../../../../../org/apache/poi/openxml4j/opc/PackagePart.html" title="class in org.apache.poi.openxml4j.opc">PackagePart</A>[]</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/openxml4j/opc/ZipPackage.html#getPartsImpl()">getPartsImpl</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Retrieves the parts from this package.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../../../org/apache/poi/openxml4j/util/ZipEntrySource.html" title="interface in org.apache.poi.openxml4j.util">ZipEntrySource</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/openxml4j/opc/ZipPackage.html#getZipArchive()">getZipArchive</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Get the zip archive</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>protected &nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/openxml4j/opc/ZipPackage.html#removePartImpl(org.apache.poi.openxml4j.opc.PackagePartName)">removePartImpl</A></B>(<A HREF="../../../../../org/apache/poi/openxml4j/opc/PackagePartName.html" title="class in org.apache.poi.openxml4j.opc">PackagePartName</A>&nbsp;partName)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Delete a part from the package</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>protected &nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/openxml4j/opc/ZipPackage.html#revertImpl()">revertImpl</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Close the package without saving the document.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/openxml4j/opc/ZipPackage.html#saveImpl(java.io.OutputStream)">saveImpl</A></B>(java.io.OutputStream&nbsp;outputStream)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Save this package into the specified stream</TD>
+</TR>
+</TABLE>
+&nbsp;<A NAME="methods_inherited_from_class_org.apache.poi.openxml4j.opc.Package"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#EEEEFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left"><B>Methods inherited from class org.apache.poi.openxml4j.opc.<A HREF="../../../../../org/apache/poi/openxml4j/opc/Package.html" title="class in org.apache.poi.openxml4j.opc">Package</A></B></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><A HREF="../../../../../org/apache/poi/openxml4j/opc/Package.html#create(java.io.File)">create</A>, <A HREF="../../../../../org/apache/poi/openxml4j/opc/Package.html#create(java.io.OutputStream)">create</A>, <A HREF="../../../../../org/apache/poi/openxml4j/opc/Package.html#create(java.lang.String)">create</A>, <A HREF="../../../../../org/apache/poi/openxml4j/opc/Package.html#open(java.io.InputStream)">open</A>, <A HREF="../../../../../org/apache/poi/openxml4j/opc/Package.html#open(java.lang.String)">open</A>, <A HREF="../../../../../org/apache/poi/openxml4j/opc/Package.html#open(java.lang.String, org.apache.poi.openxml4j.opc.PackageAccess)">open</A>, <A HREF="../../../../../org/apache/poi/openxml4j/opc/Package.html#openOrCreate(java.io.File)">openOrCreate</A></CODE></TD>
+</TR>
+</TABLE>
+&nbsp;<A NAME="methods_inherited_from_class_org.apache.poi.openxml4j.opc.OPCPackage"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#EEEEFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left"><B>Methods inherited from class org.apache.poi.openxml4j.opc.<A HREF="../../../../../org/apache/poi/openxml4j/opc/OPCPackage.html" title="class in org.apache.poi.openxml4j.opc">OPCPackage</A></B></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><A HREF="../../../../../org/apache/poi/openxml4j/opc/OPCPackage.html#addExternalRelationship(java.lang.String, java.lang.String)">addExternalRelationship</A>, <A HREF="../../../../../org/apache/poi/openxml4j/opc/OPCPackage.html#addExternalRelationship(java.lang.String, java.lang.String, java.lang.String)">addExternalRelationship</A>, <A HREF="../../../../../org/apache/poi/openxml4j/opc/OPCPackage.html#addMarshaller(java.lang.String, org.apache.poi.openxml4j.opc.internal.PartMarshaller)">addMarshaller</A>, <A HREF="../../../../../org/apache/poi/openxml4j/opc/OPCPackage.html#addPackagePart(org.apache.poi.openxml4j.opc.PackagePart)">addPackagePart</A>, <A HREF="../../../../../org/apache/poi/openxml4j/opc/OPCPackage.html#addRelationship(org.apache.poi.openxml4j.opc.PackagePartName, org.apache.poi.openxml4j.opc.TargetMode, java.lang.String)">addRelationship</A>, <A HREF="../../../../../org/apache/poi/openxml4j/opc/OPCPackage.html#addRelationship(org.apache.poi.openxml4j.opc.PackagePartName, org.apache.poi.openxml4j.opc.TargetMode, java.lang.String, java.lang.String)">addRelationship</A>, <A HREF="../../../../../org/apache/poi/openxml4j/opc/OPCPackage.html#addThumbnail(java.lang.String)">addThumbnail</A>, <A HREF="../../../../../org/apache/poi/openxml4j/opc/OPCPackage.html#addUnmarshaller(java.lang.String, org.apache.poi.openxml4j.opc.internal.PartUnmarshaller)">addUnmarshaller</A>, <A HREF="../../../../../org/apache/poi/openxml4j/opc/OPCPackage.html#clearRelationships()">clearRelationships</A>, <A HREF="../../../../../org/apache/poi/openxml4j/opc/OPCPackage.html#close()">close</A>, <A HREF="../../../../../org/apache/poi/openxml4j/opc/OPCPackage.html#containPart(org.apache.poi.openxml4j.opc.PackagePartName)">containPart</A>, <A HREF="../../../../../org/apache/poi/openxml4j/opc/OPCPackage.html#createPart(org.apache.poi.openxml4j.opc.PackagePartName, java.lang.String)">createPart</A>, <A HREF="../../../../../org/apache/poi/openxml4j/opc/OPCPackage.html#createPart(org.apache.poi.openxml4j.opc.PackagePartName, java.lang.String, java.io.ByteArrayOutputStream)">createPart</A>, <A HREF="../../../../../org/apache/poi/openxml4j/opc/OPCPackage.html#deletePart(org.apache.poi.openxml4j.opc.PackagePartName)">deletePart</A>, <A HREF="../../../../../org/apache/poi/openxml4j/opc/OPCPackage.html#deletePartRecursive(org.apache.poi.openxml4j.opc.PackagePartName)">deletePartRecursive</A>, <A HREF="../../../../../org/apache/poi/openxml4j/opc/OPCPackage.html#ensureRelationships()">ensureRelationships</A>, <A HREF="../../../../../org/apache/poi/openxml4j/opc/OPCPackage.html#flush()">flush</A>, <A HREF="../../../../../org/apache/poi/openxml4j/opc/OPCPackage.html#getPackageAccess()">getPackageAccess</A>, <A HREF="../../../../../org/apache/poi/openxml4j/opc/OPCPackage.html#getPackageProperties()">getPackageProperties</A>, <A HREF="../../../../../org/apache/poi/openxml4j/opc/OPCPackage.html#getPart(org.apache.poi.openxml4j.opc.PackagePartName)">getPart</A>, <A HREF="../../../../../org/apache/poi/openxml4j/opc/OPCPackage.html#getPart(org.apache.poi.openxml4j.opc.PackageRelationship)">getPart</A>, <A HREF="../../../../../org/apache/poi/openxml4j/opc/OPCPackage.html#getParts()">getParts</A>, <A HREF="../../../../../org/apache/poi/openxml4j/opc/OPCPackage.html#getPartsByContentType(java.lang.String)">getPartsByContentType</A>, <A HREF="../../../../../org/apache/poi/openxml4j/opc/OPCPackage.html#getPartsByName(java.util.regex.Pattern)">getPartsByName</A>, <A HREF="../../../../../org/apache/poi/openxml4j/opc/OPCPackage.html#getPartsByRelationshipType(java.lang.String)">getPartsByRelationshipType</A>, <A HREF="../../../../../org/apache/poi/openxml4j/opc/OPCPackage.html#getRelationship(java.lang.String)">getRelationship</A>, <A HREF="../../../../../org/apache/poi/openxml4j/opc/OPCPackage.html#getRelationships()">getRelationships</A>, <A HREF="../../../../../org/apache/poi/openxml4j/opc/OPCPackage.html#getRelationshipsByType(java.lang.String)">getRelationshipsByType</A>, <A HREF="../../../../../org/apache/poi/openxml4j/opc/OPCPackage.html#hasRelationships()">hasRelationships</A>, <A HREF="../../../../../org/apache/poi/openxml4j/opc/OPCPackage.html#isRelationshipExists(org.apache.poi.openxml4j.opc.PackageRelationship)">isRelationshipExists</A>, <A HREF="../../../../../org/apache/poi/openxml4j/opc/OPCPackage.html#open(java.io.File)">open</A>, <A HREF="../../../../../org/apache/poi/openxml4j/opc/OPCPackage.html#open(java.io.File, org.apache.poi.openxml4j.opc.PackageAccess)">open</A>, <A HREF="../../../../../org/apache/poi/openxml4j/opc/OPCPackage.html#removeMarshaller(java.lang.String)">removeMarshaller</A>, <A HREF="../../../../../org/apache/poi/openxml4j/opc/OPCPackage.html#removePart(org.apache.poi.openxml4j.opc.PackagePart)">removePart</A>, <A HREF="../../../../../org/apache/poi/openxml4j/opc/OPCPackage.html#removePart(org.apache.poi.openxml4j.opc.PackagePartName)">removePart</A>, <A HREF="../../../../../org/apache/poi/openxml4j/opc/OPCPackage.html#removePartRecursive(org.apache.poi.openxml4j.opc.PackagePartName)">removePartRecursive</A>, <A HREF="../../../../../org/apache/poi/openxml4j/opc/OPCPackage.html#removeRelationship(java.lang.String)">removeRelationship</A>, <A HREF="../../../../../org/apache/poi/openxml4j/opc/OPCPackage.html#removeUnmarshaller(java.lang.String)">removeUnmarshaller</A>, <A HREF="../../../../../org/apache/poi/openxml4j/opc/OPCPackage.html#replaceContentType(java.lang.String, java.lang.String)">replaceContentType</A>, <A HREF="../../../../../org/apache/poi/openxml4j/opc/OPCPackage.html#revert()">revert</A>, <A HREF="../../../../../org/apache/poi/openxml4j/opc/OPCPackage.html#save(java.io.File)">save</A>, <A HREF="../../../../../org/apache/poi/openxml4j/opc/OPCPackage.html#save(java.io.OutputStream)">save</A>, <A HREF="../../../../../org/apache/poi/openxml4j/opc/OPCPackage.html#validatePackage(org.apache.poi.openxml4j.opc.OPCPackage)">validatePackage</A></CODE></TD>
+</TR>
+</TABLE>
+&nbsp;<A NAME="methods_inherited_from_class_java.lang.Object"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#EEEEFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left"><B>Methods inherited from class java.lang.Object</B></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE>clone, equals, finalize, getClass, hashCode, notify, notifyAll, toString, wait, wait, wait</CODE></TD>
+</TR>
+</TABLE>
+&nbsp;
+<P>
+
+<!-- ========= CONSTRUCTOR DETAIL ======== -->
+
+<A NAME="constructor_detail"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="1"><FONT SIZE="+2">
+<B>Constructor Detail</B></FONT></TH>
+</TR>
+</TABLE>
+
+<A NAME="ZipPackage()"><!-- --></A><H3>
+ZipPackage</H3>
+<PRE>
+public <B>ZipPackage</B>()</PRE>
+<DL>
+<DD>Constructor. Creates a new, empty ZipPackage.
+<P>
+</DL>
+
+<!-- ============ METHOD DETAIL ========== -->
+
+<A NAME="method_detail"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="1"><FONT SIZE="+2">
+<B>Method Detail</B></FONT></TH>
+</TR>
+</TABLE>
+
+<A NAME="getPartsImpl()"><!-- --></A><H3>
+getPartsImpl</H3>
+<PRE>
+protected <A HREF="../../../../../org/apache/poi/openxml4j/opc/PackagePart.html" title="class in org.apache.poi.openxml4j.opc">PackagePart</A>[] <B>getPartsImpl</B>()
+                              throws <A HREF="../../../../../org/apache/poi/openxml4j/exceptions/InvalidFormatException.html" title="class in org.apache.poi.openxml4j.exceptions">InvalidFormatException</A></PRE>
+<DL>
+<DD>Retrieves the parts from this package. We assume that the package has not
+ been yet inspect to retrieve all the parts, this method will open the
+ archive and look for all parts contain inside it. If the package part
+ list is not empty, it will be emptied.
+<P>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../../../../org/apache/poi/openxml4j/opc/OPCPackage.html#getPartsImpl()">getPartsImpl</A></CODE> in class <CODE><A HREF="../../../../../org/apache/poi/openxml4j/opc/OPCPackage.html" title="class in org.apache.poi.openxml4j.opc">OPCPackage</A></CODE></DL>
+</DD>
+<DD><DL>
+
+<DT><B>Returns:</B><DD>All parts contain in this package.
+<DT><B>Throws:</B>
+<DD><CODE><A HREF="../../../../../org/apache/poi/openxml4j/exceptions/InvalidFormatException.html" title="class in org.apache.poi.openxml4j.exceptions">InvalidFormatException</A></CODE> - Throws if the package is not valid.</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="createPartImpl(org.apache.poi.openxml4j.opc.PackagePartName, java.lang.String, boolean)"><!-- --></A><H3>
+createPartImpl</H3>
+<PRE>
+protected <A HREF="../../../../../org/apache/poi/openxml4j/opc/PackagePart.html" title="class in org.apache.poi.openxml4j.opc">PackagePart</A> <B>createPartImpl</B>(<A HREF="../../../../../org/apache/poi/openxml4j/opc/PackagePartName.html" title="class in org.apache.poi.openxml4j.opc">PackagePartName</A>&nbsp;partName,
+                                     java.lang.String&nbsp;contentType,
+                                     boolean&nbsp;loadRelationships)</PRE>
+<DL>
+<DD>Create a new MemoryPackagePart from the specified URI and content type
+
+
+ aram partName The part URI.
+<P>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../../../../org/apache/poi/openxml4j/opc/OPCPackage.html#createPartImpl(org.apache.poi.openxml4j.opc.PackagePartName, java.lang.String, boolean)">createPartImpl</A></CODE> in class <CODE><A HREF="../../../../../org/apache/poi/openxml4j/opc/OPCPackage.html" title="class in org.apache.poi.openxml4j.opc">OPCPackage</A></CODE></DL>
+</DD>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>contentType</CODE> - The part content type.<DD><CODE>partName</CODE> - URI of the part to create.
+<DT><B>Returns:</B><DD>The newly created zip package part, else <b>null</b>.</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="removePartImpl(org.apache.poi.openxml4j.opc.PackagePartName)"><!-- --></A><H3>
+removePartImpl</H3>
+<PRE>
+protected void <B>removePartImpl</B>(<A HREF="../../../../../org/apache/poi/openxml4j/opc/PackagePartName.html" title="class in org.apache.poi.openxml4j.opc">PackagePartName</A>&nbsp;partName)</PRE>
+<DL>
+<DD>Delete a part from the package
+<P>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../../../../org/apache/poi/openxml4j/opc/OPCPackage.html#removePartImpl(org.apache.poi.openxml4j.opc.PackagePartName)">removePartImpl</A></CODE> in class <CODE><A HREF="../../../../../org/apache/poi/openxml4j/opc/OPCPackage.html" title="class in org.apache.poi.openxml4j.opc">OPCPackage</A></CODE></DL>
+</DD>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>partName</CODE> - The URI of the part to delete.
+<DT><B>Throws:</B>
+<DD><CODE>java.lang.IllegalArgumentException</CODE> - Throws if the part URI is nulll or invalid.</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="flushImpl()"><!-- --></A><H3>
+flushImpl</H3>
+<PRE>
+protected void <B>flushImpl</B>()</PRE>
+<DL>
+<DD>Flush the package. Do nothing.
+<P>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../../../../org/apache/poi/openxml4j/opc/OPCPackage.html#flushImpl()">flushImpl</A></CODE> in class <CODE><A HREF="../../../../../org/apache/poi/openxml4j/opc/OPCPackage.html" title="class in org.apache.poi.openxml4j.opc">OPCPackage</A></CODE></DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="closeImpl()"><!-- --></A><H3>
+closeImpl</H3>
+<PRE>
+protected void <B>closeImpl</B>()
+                  throws java.io.IOException</PRE>
+<DL>
+<DD>Close and save the package.
+<P>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../../../../org/apache/poi/openxml4j/opc/OPCPackage.html#closeImpl()">closeImpl</A></CODE> in class <CODE><A HREF="../../../../../org/apache/poi/openxml4j/opc/OPCPackage.html" title="class in org.apache.poi.openxml4j.opc">OPCPackage</A></CODE></DL>
+</DD>
+<DD><DL>
+
+<DT><B>Throws:</B>
+<DD><CODE>java.io.IOException</CODE><DT><B>See Also:</B><DD><A HREF="../../../../../org/apache/poi/openxml4j/opc/OPCPackage.html#close()"><CODE>OPCPackage.close()</CODE></A></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="revertImpl()"><!-- --></A><H3>
+revertImpl</H3>
+<PRE>
+protected void <B>revertImpl</B>()</PRE>
+<DL>
+<DD>Close the package without saving the document. Discard all the changes
+ made to this package.
+<P>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../../../../org/apache/poi/openxml4j/opc/OPCPackage.html#revertImpl()">revertImpl</A></CODE> in class <CODE><A HREF="../../../../../org/apache/poi/openxml4j/opc/OPCPackage.html" title="class in org.apache.poi.openxml4j.opc">OPCPackage</A></CODE></DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getPartImpl(org.apache.poi.openxml4j.opc.PackagePartName)"><!-- --></A><H3>
+getPartImpl</H3>
+<PRE>
+protected <A HREF="../../../../../org/apache/poi/openxml4j/opc/PackagePart.html" title="class in org.apache.poi.openxml4j.opc">PackagePart</A> <B>getPartImpl</B>(<A HREF="../../../../../org/apache/poi/openxml4j/opc/PackagePartName.html" title="class in org.apache.poi.openxml4j.opc">PackagePartName</A>&nbsp;partName)</PRE>
+<DL>
+<DD>Implement the getPart() method to retrieve a part from its URI in the
+ current package
+<P>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../../../../org/apache/poi/openxml4j/opc/OPCPackage.html#getPartImpl(org.apache.poi.openxml4j.opc.PackagePartName)">getPartImpl</A></CODE> in class <CODE><A HREF="../../../../../org/apache/poi/openxml4j/opc/OPCPackage.html" title="class in org.apache.poi.openxml4j.opc">OPCPackage</A></CODE></DL>
+</DD>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>partName</CODE> - The URI of the part to retrieve.
+<DT><B>Returns:</B><DD>The package part located by the specified URI, else <b>null</b>.<DT><B>See Also:</B><DD><A HREF="../../../../../org/apache/poi/openxml4j/opc/OPCPackage.html#getPart(org.apache.poi.openxml4j.opc.PackageRelationship)"><CODE>OPCPackage.getPart(PackageRelationship)</CODE></A></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="saveImpl(java.io.OutputStream)"><!-- --></A><H3>
+saveImpl</H3>
+<PRE>
+public void <B>saveImpl</B>(java.io.OutputStream&nbsp;outputStream)</PRE>
+<DL>
+<DD>Save this package into the specified stream
+<P>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../../../../org/apache/poi/openxml4j/opc/OPCPackage.html#saveImpl(java.io.OutputStream)">saveImpl</A></CODE> in class <CODE><A HREF="../../../../../org/apache/poi/openxml4j/opc/OPCPackage.html" title="class in org.apache.poi.openxml4j.opc">OPCPackage</A></CODE></DL>
+</DD>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>outputStream</CODE> - The stream use to save this package.<DT><B>See Also:</B><DD><A HREF="../../../../../org/apache/poi/openxml4j/opc/OPCPackage.html#save(java.io.OutputStream)"><CODE>OPCPackage.save(OutputStream)</CODE></A></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getZipArchive()"><!-- --></A><H3>
+getZipArchive</H3>
+<PRE>
+public <A HREF="../../../../../org/apache/poi/openxml4j/util/ZipEntrySource.html" title="interface in org.apache.poi.openxml4j.util">ZipEntrySource</A> <B>getZipArchive</B>()</PRE>
+<DL>
+<DD>Get the zip archive
+<P>
+<DD><DL>
+
+<DT><B>Returns:</B><DD>The zip archive.</DL>
+</DD>
+</DL>
+<!-- ========= END OF CLASS DATA ========= -->
+<HR>
+
+
+<!-- ======= START OF BOTTOM NAVBAR ====== -->
+<A NAME="navbar_bottom"><!-- --></A>
+<A HREF="#skip-navbar_bottom" title="Skip navigation links"></A>
+<TABLE BORDER="0" WIDTH="100%" CELLPADDING="1" CELLSPACING="0" SUMMARY="">
+<TR>
+<TD COLSPAN=2 BGCOLOR="#EEEEFF" CLASS="NavBarCell1">
+<A NAME="navbar_bottom_firstrow"><!-- --></A>
+<TABLE BORDER="0" CELLPADDING="0" CELLSPACING="3" SUMMARY="">
+  <TR ALIGN="center" VALIGN="top">
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../overview-summary.html"><FONT CLASS="NavBarFont1"><B>Overview</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="package-summary.html"><FONT CLASS="NavBarFont1"><B>Package</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#FFFFFF" CLASS="NavBarCell1Rev"> &nbsp;<FONT CLASS="NavBarFont1Rev"><B>Class</B></FONT>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="class-use/ZipPackage.html"><FONT CLASS="NavBarFont1"><B>Use</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="package-tree.html"><FONT CLASS="NavBarFont1"><B>Tree</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../deprecated-list.html"><FONT CLASS="NavBarFont1"><B>Deprecated</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../index-all.html"><FONT CLASS="NavBarFont1"><B>Index</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../help-doc.html"><FONT CLASS="NavBarFont1"><B>Help</B></FONT></A>&nbsp;</TD>
+  </TR>
+</TABLE>
+</TD>
+<TD ALIGN="right" VALIGN="top" ROWSPAN=3><EM>
+</EM>
+</TD>
+</TR>
+
+<TR>
+<TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
+&nbsp;<A HREF="../../../../../org/apache/poi/openxml4j/opc/TargetMode.html" title="enum in org.apache.poi.openxml4j.opc"><B>PREV CLASS</B></A>&nbsp;
+&nbsp;<A HREF="../../../../../org/apache/poi/openxml4j/opc/ZipPackagePart.html" title="class in org.apache.poi.openxml4j.opc"><B>NEXT CLASS</B></A></FONT></TD>
+<TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
+  <A HREF="../../../../../index.html?org/apache/poi/openxml4j/opc/ZipPackage.html" target="_top"><B>FRAMES</B></A>  &nbsp;
+&nbsp;<A HREF="ZipPackage.html" target="_top"><B>NO FRAMES</B></A>  &nbsp;
+&nbsp;<SCRIPT type="text/javascript">
+  <!--
+  if(window==top) {
+    document.writeln('<A HREF="../../../../../allclasses-noframe.html"><B>All Classes</B></A>');
+  }
+  //-->
+</SCRIPT>
+<NOSCRIPT>
+  <A HREF="../../../../../allclasses-noframe.html"><B>All Classes</B></A>
+</NOSCRIPT>
+
+
+</FONT></TD>
+</TR>
+<TR>
+<TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
+  SUMMARY:&nbsp;NESTED&nbsp;|&nbsp;<A HREF="#fields_inherited_from_class_org.apache.poi.openxml4j.opc.OPCPackage">FIELD</A>&nbsp;|&nbsp;<A HREF="#constructor_summary">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_summary">METHOD</A></FONT></TD>
+<TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
+DETAIL:&nbsp;FIELD&nbsp;|&nbsp;<A HREF="#constructor_detail">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_detail">METHOD</A></FONT></TD>
+</TR>
+</TABLE>
+<A NAME="skip-navbar_bottom"></A>
+<!-- ======== END OF BOTTOM NAVBAR ======= -->
+
+<HR>
+
+                <i>Copyright 2014 The Apache Software Foundation or
+        its licensors, as applicable.</i>
+            
+</BODY>
+</HTML>

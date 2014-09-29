@@ -1,0 +1,483 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!--NewPage-->
+<HTML>
+<HEAD>
+<TITLE>
+AutoShape (POI API Documentation)
+</TITLE>
+
+<META NAME="keywords" CONTENT="org.apache.poi.hslf.model.AutoShape class">
+
+<LINK REL ="stylesheet" TYPE="text/css" HREF="../../../../../stylesheet.css" TITLE="Style">
+
+<SCRIPT type="text/javascript">
+function windowTitle()
+{
+    parent.document.title="AutoShape (POI API Documentation)";
+}
+</SCRIPT>
+<NOSCRIPT>
+</NOSCRIPT>
+
+</HEAD>
+
+<BODY BGCOLOR="white" onload="windowTitle();">
+
+
+<!-- ========= START OF TOP NAVBAR ======= -->
+<A NAME="navbar_top"><!-- --></A>
+<A HREF="#skip-navbar_top" title="Skip navigation links"></A>
+<TABLE BORDER="0" WIDTH="100%" CELLPADDING="1" CELLSPACING="0" SUMMARY="">
+<TR>
+<TD COLSPAN=2 BGCOLOR="#EEEEFF" CLASS="NavBarCell1">
+<A NAME="navbar_top_firstrow"><!-- --></A>
+<TABLE BORDER="0" CELLPADDING="0" CELLSPACING="3" SUMMARY="">
+  <TR ALIGN="center" VALIGN="top">
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../overview-summary.html"><FONT CLASS="NavBarFont1"><B>Overview</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="package-summary.html"><FONT CLASS="NavBarFont1"><B>Package</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#FFFFFF" CLASS="NavBarCell1Rev"> &nbsp;<FONT CLASS="NavBarFont1Rev"><B>Class</B></FONT>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="class-use/AutoShape.html"><FONT CLASS="NavBarFont1"><B>Use</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="package-tree.html"><FONT CLASS="NavBarFont1"><B>Tree</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../deprecated-list.html"><FONT CLASS="NavBarFont1"><B>Deprecated</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../index-all.html"><FONT CLASS="NavBarFont1"><B>Index</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../help-doc.html"><FONT CLASS="NavBarFont1"><B>Help</B></FONT></A>&nbsp;</TD>
+  </TR>
+</TABLE>
+</TD>
+<TD ALIGN="right" VALIGN="top" ROWSPAN=3><EM>
+</EM>
+</TD>
+</TR>
+
+<TR>
+<TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
+&nbsp;<A HREF="../../../../../org/apache/poi/hslf/model/ActiveXShape.html" title="class in org.apache.poi.hslf.model"><B>PREV CLASS</B></A>&nbsp;
+&nbsp;<A HREF="../../../../../org/apache/poi/hslf/model/AutoShapes.html" title="class in org.apache.poi.hslf.model"><B>NEXT CLASS</B></A></FONT></TD>
+<TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
+  <A HREF="../../../../../index.html?org/apache/poi/hslf/model/AutoShape.html" target="_top"><B>FRAMES</B></A>  &nbsp;
+&nbsp;<A HREF="AutoShape.html" target="_top"><B>NO FRAMES</B></A>  &nbsp;
+&nbsp;<SCRIPT type="text/javascript">
+  <!--
+  if(window==top) {
+    document.writeln('<A HREF="../../../../../allclasses-noframe.html"><B>All Classes</B></A>');
+  }
+  //-->
+</SCRIPT>
+<NOSCRIPT>
+  <A HREF="../../../../../allclasses-noframe.html"><B>All Classes</B></A>
+</NOSCRIPT>
+
+
+</FONT></TD>
+</TR>
+<TR>
+<TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
+  SUMMARY:&nbsp;NESTED&nbsp;|&nbsp;<A HREF="#fields_inherited_from_class_org.apache.poi.hslf.model.TextShape">FIELD</A>&nbsp;|&nbsp;<A HREF="#constructor_summary">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_summary">METHOD</A></FONT></TD>
+<TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
+DETAIL:&nbsp;FIELD&nbsp;|&nbsp;<A HREF="#constructor_detail">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_detail">METHOD</A></FONT></TD>
+</TR>
+</TABLE>
+<A NAME="skip-navbar_top"></A>
+<!-- ========= END OF TOP NAVBAR ========= -->
+
+<HR>
+<!-- ======== START OF CLASS DATA ======== -->
+<H2>
+<FONT SIZE="-1">
+org.apache.poi.hslf.model</FONT>
+<BR>
+Class AutoShape</H2>
+<PRE>
+java.lang.Object
+  <IMG SRC="../../../../../resources/inherit.gif" ALT="extended by "><A HREF="../../../../../org/apache/poi/hslf/model/Shape.html" title="class in org.apache.poi.hslf.model">org.apache.poi.hslf.model.Shape</A>
+      <IMG SRC="../../../../../resources/inherit.gif" ALT="extended by "><A HREF="../../../../../org/apache/poi/hslf/model/SimpleShape.html" title="class in org.apache.poi.hslf.model">org.apache.poi.hslf.model.SimpleShape</A>
+          <IMG SRC="../../../../../resources/inherit.gif" ALT="extended by "><A HREF="../../../../../org/apache/poi/hslf/model/TextShape.html" title="class in org.apache.poi.hslf.model">org.apache.poi.hslf.model.TextShape</A>
+              <IMG SRC="../../../../../resources/inherit.gif" ALT="extended by "><B>org.apache.poi.hslf.model.AutoShape</B>
+</PRE>
+<DL>
+<DT><B>Direct Known Subclasses:</B> <DD><A HREF="../../../../../org/apache/poi/hslf/model/Freeform.html" title="class in org.apache.poi.hslf.model">Freeform</A>, <A HREF="../../../../../org/apache/poi/hslf/model/Polygon.html" title="class in org.apache.poi.hslf.model">Polygon</A></DD>
+</DL>
+<HR>
+<DL>
+<DT><PRE>public class <B>AutoShape</B><DT>extends <A HREF="../../../../../org/apache/poi/hslf/model/TextShape.html" title="class in org.apache.poi.hslf.model">TextShape</A></DL>
+</PRE>
+
+<P>
+Represents an AutoShape.
+ <p>
+ AutoShapes are drawing objects with a particular shape that may be customized through smart resizing and adjustments.
+ See <A HREF="../../../../../org/apache/poi/hslf/model/ShapeTypes.html" title="class in org.apache.poi.hslf.model"><CODE>ShapeTypes</CODE></A>
+ </p>
+<P>
+
+<P>
+<DL>
+<DT><B>Author:</B></DT>
+  <DD>Yegor Kozlov</DD>
+</DL>
+<HR>
+
+<P>
+<!-- =========== FIELD SUMMARY =========== -->
+
+<A NAME="field_summary"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+<B>Field Summary</B></FONT></TH>
+</TR>
+</TABLE>
+&nbsp;<A NAME="fields_inherited_from_class_org.apache.poi.hslf.model.TextShape"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#EEEEFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left"><B>Fields inherited from class org.apache.poi.hslf.model.<A HREF="../../../../../org/apache/poi/hslf/model/TextShape.html" title="class in org.apache.poi.hslf.model">TextShape</A></B></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><A HREF="../../../../../org/apache/poi/hslf/model/TextShape.html#_frc">_frc</A>, <A HREF="../../../../../org/apache/poi/hslf/model/TextShape.html#_txtbox">_txtbox</A>, <A HREF="../../../../../org/apache/poi/hslf/model/TextShape.html#_txtrun">_txtrun</A>, <A HREF="../../../../../org/apache/poi/hslf/model/TextShape.html#AlignCenter">AlignCenter</A>, <A HREF="../../../../../org/apache/poi/hslf/model/TextShape.html#AlignJustify">AlignJustify</A>, <A HREF="../../../../../org/apache/poi/hslf/model/TextShape.html#AlignLeft">AlignLeft</A>, <A HREF="../../../../../org/apache/poi/hslf/model/TextShape.html#AlignRight">AlignRight</A>, <A HREF="../../../../../org/apache/poi/hslf/model/TextShape.html#AnchorBottom">AnchorBottom</A>, <A HREF="../../../../../org/apache/poi/hslf/model/TextShape.html#AnchorBottomBaseline">AnchorBottomBaseline</A>, <A HREF="../../../../../org/apache/poi/hslf/model/TextShape.html#AnchorBottomCentered">AnchorBottomCentered</A>, <A HREF="../../../../../org/apache/poi/hslf/model/TextShape.html#AnchorBottomCenteredBaseline">AnchorBottomCenteredBaseline</A>, <A HREF="../../../../../org/apache/poi/hslf/model/TextShape.html#AnchorMiddle">AnchorMiddle</A>, <A HREF="../../../../../org/apache/poi/hslf/model/TextShape.html#AnchorMiddleCentered">AnchorMiddleCentered</A>, <A HREF="../../../../../org/apache/poi/hslf/model/TextShape.html#AnchorTop">AnchorTop</A>, <A HREF="../../../../../org/apache/poi/hslf/model/TextShape.html#AnchorTopBaseline">AnchorTopBaseline</A>, <A HREF="../../../../../org/apache/poi/hslf/model/TextShape.html#AnchorTopCentered">AnchorTopCentered</A>, <A HREF="../../../../../org/apache/poi/hslf/model/TextShape.html#AnchorTopCenteredBaseline">AnchorTopCenteredBaseline</A>, <A HREF="../../../../../org/apache/poi/hslf/model/TextShape.html#WrapByPoints">WrapByPoints</A>, <A HREF="../../../../../org/apache/poi/hslf/model/TextShape.html#WrapNone">WrapNone</A>, <A HREF="../../../../../org/apache/poi/hslf/model/TextShape.html#WrapSquare">WrapSquare</A>, <A HREF="../../../../../org/apache/poi/hslf/model/TextShape.html#WrapThrough">WrapThrough</A>, <A HREF="../../../../../org/apache/poi/hslf/model/TextShape.html#WrapTopBottom">WrapTopBottom</A></CODE></TD>
+</TR>
+</TABLE>
+&nbsp;<A NAME="fields_inherited_from_class_org.apache.poi.hslf.model.SimpleShape"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#EEEEFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left"><B>Fields inherited from class org.apache.poi.hslf.model.<A HREF="../../../../../org/apache/poi/hslf/model/SimpleShape.html" title="class in org.apache.poi.hslf.model">SimpleShape</A></B></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><A HREF="../../../../../org/apache/poi/hslf/model/SimpleShape.html#_clientData">_clientData</A>, <A HREF="../../../../../org/apache/poi/hslf/model/SimpleShape.html#_clientRecords">_clientRecords</A>, <A HREF="../../../../../org/apache/poi/hslf/model/SimpleShape.html#DEFAULT_LINE_WIDTH">DEFAULT_LINE_WIDTH</A></CODE></TD>
+</TR>
+</TABLE>
+&nbsp;<A NAME="fields_inherited_from_class_org.apache.poi.hslf.model.Shape"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#EEEEFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left"><B>Fields inherited from class org.apache.poi.hslf.model.<A HREF="../../../../../org/apache/poi/hslf/model/Shape.html" title="class in org.apache.poi.hslf.model">Shape</A></B></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><A HREF="../../../../../org/apache/poi/hslf/model/Shape.html#_escherContainer">_escherContainer</A>, <A HREF="../../../../../org/apache/poi/hslf/model/Shape.html#_fill">_fill</A>, <A HREF="../../../../../org/apache/poi/hslf/model/Shape.html#_parent">_parent</A>, <A HREF="../../../../../org/apache/poi/hslf/model/Shape.html#_sheet">_sheet</A>, <A HREF="../../../../../org/apache/poi/hslf/model/Shape.html#EMU_PER_CENTIMETER">EMU_PER_CENTIMETER</A>, <A HREF="../../../../../org/apache/poi/hslf/model/Shape.html#EMU_PER_INCH">EMU_PER_INCH</A>, <A HREF="../../../../../org/apache/poi/hslf/model/Shape.html#EMU_PER_POINT">EMU_PER_POINT</A>, <A HREF="../../../../../org/apache/poi/hslf/model/Shape.html#logger">logger</A>, <A HREF="../../../../../org/apache/poi/hslf/model/Shape.html#MASTER_DPI">MASTER_DPI</A>, <A HREF="../../../../../org/apache/poi/hslf/model/Shape.html#PIXEL_DPI">PIXEL_DPI</A>, <A HREF="../../../../../org/apache/poi/hslf/model/Shape.html#POINT_DPI">POINT_DPI</A></CODE></TD>
+</TR>
+</TABLE>
+&nbsp;
+<!-- ======== CONSTRUCTOR SUMMARY ======== -->
+
+<A NAME="constructor_summary"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+<B>Constructor Summary</B></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>protected </CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/model/AutoShape.html#AutoShape(org.apache.poi.ddf.EscherContainerRecord, org.apache.poi.hslf.model.Shape)">AutoShape</A></B>(<A HREF="../../../../../org/apache/poi/ddf/EscherContainerRecord.html" title="class in org.apache.poi.ddf">EscherContainerRecord</A>&nbsp;escherRecord,
+          <A HREF="../../../../../org/apache/poi/hslf/model/Shape.html" title="class in org.apache.poi.hslf.model">Shape</A>&nbsp;parent)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/model/AutoShape.html#AutoShape(int)">AutoShape</A></B>(int&nbsp;type)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/model/AutoShape.html#AutoShape(int, org.apache.poi.hslf.model.Shape)">AutoShape</A></B>(int&nbsp;type,
+          <A HREF="../../../../../org/apache/poi/hslf/model/Shape.html" title="class in org.apache.poi.hslf.model">Shape</A>&nbsp;parent)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+</TABLE>
+&nbsp;
+<!-- ========== METHOD SUMMARY =========== -->
+
+<A NAME="method_summary"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+<B>Method Summary</B></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>protected &nbsp;<A HREF="../../../../../org/apache/poi/ddf/EscherContainerRecord.html" title="class in org.apache.poi.ddf">EscherContainerRecord</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/model/AutoShape.html#createSpContainer(int, boolean)">createSpContainer</A></B>(int&nbsp;shapeType,
+                  boolean&nbsp;isChild)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;int</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/model/AutoShape.html#getAdjustmentValue(int)">getAdjustmentValue</A></B>(int&nbsp;idx)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gets adjust value which controls smart resizing of the auto-shape.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;java.awt.Shape</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/model/AutoShape.html#getOutline()">getOutline</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Return shape outline as a java.awt.Shape object</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/model/AutoShape.html#setAdjustmentValue(int, int)">setAdjustmentValue</A></B>(int&nbsp;idx,
+                   int&nbsp;val)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sets adjust value which controls smart resizing of the auto-shape.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>protected &nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/model/AutoShape.html#setDefaultTextProperties(org.apache.poi.hslf.model.TextRun)">setDefaultTextProperties</A></B>(<A HREF="../../../../../org/apache/poi/hslf/model/TextRun.html" title="class in org.apache.poi.hslf.model">TextRun</A>&nbsp;_txtrun)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Set default properties for the  TextRun.</TD>
+</TR>
+</TABLE>
+&nbsp;<A NAME="methods_inherited_from_class_org.apache.poi.hslf.model.TextShape"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#EEEEFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left"><B>Methods inherited from class org.apache.poi.hslf.model.<A HREF="../../../../../org/apache/poi/hslf/model/TextShape.html" title="class in org.apache.poi.hslf.model">TextShape</A></B></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><A HREF="../../../../../org/apache/poi/hslf/model/TextShape.html#afterInsert(org.apache.poi.hslf.model.Sheet)">afterInsert</A>, <A HREF="../../../../../org/apache/poi/hslf/model/TextShape.html#createTextRun()">createTextRun</A>, <A HREF="../../../../../org/apache/poi/hslf/model/TextShape.html#draw(java.awt.Graphics2D)">draw</A>, <A HREF="../../../../../org/apache/poi/hslf/model/TextShape.html#getEscherTextboxWrapper()">getEscherTextboxWrapper</A>, <A HREF="../../../../../org/apache/poi/hslf/model/TextShape.html#getHorizontalAlignment()">getHorizontalAlignment</A>, <A HREF="../../../../../org/apache/poi/hslf/model/TextShape.html#getMarginBottom()">getMarginBottom</A>, <A HREF="../../../../../org/apache/poi/hslf/model/TextShape.html#getMarginLeft()">getMarginLeft</A>, <A HREF="../../../../../org/apache/poi/hslf/model/TextShape.html#getMarginRight()">getMarginRight</A>, <A HREF="../../../../../org/apache/poi/hslf/model/TextShape.html#getMarginTop()">getMarginTop</A>, <A HREF="../../../../../org/apache/poi/hslf/model/TextShape.html#getPlaceholderAtom()">getPlaceholderAtom</A>, <A HREF="../../../../../org/apache/poi/hslf/model/TextShape.html#getText()">getText</A>, <A HREF="../../../../../org/apache/poi/hslf/model/TextShape.html#getTextId()">getTextId</A>, <A HREF="../../../../../org/apache/poi/hslf/model/TextShape.html#getTextRun()">getTextRun</A>, <A HREF="../../../../../org/apache/poi/hslf/model/TextShape.html#getVerticalAlignment()">getVerticalAlignment</A>, <A HREF="../../../../../org/apache/poi/hslf/model/TextShape.html#getWordWrap()">getWordWrap</A>, <A HREF="../../../../../org/apache/poi/hslf/model/TextShape.html#initTextRun()">initTextRun</A>, <A HREF="../../../../../org/apache/poi/hslf/model/TextShape.html#resizeToFitText()">resizeToFitText</A>, <A HREF="../../../../../org/apache/poi/hslf/model/TextShape.html#setHorizontalAlignment(int)">setHorizontalAlignment</A>, <A HREF="../../../../../org/apache/poi/hslf/model/TextShape.html#setHyperlink(int, int, int)">setHyperlink</A>, <A HREF="../../../../../org/apache/poi/hslf/model/TextShape.html#setMarginBottom(float)">setMarginBottom</A>, <A HREF="../../../../../org/apache/poi/hslf/model/TextShape.html#setMarginLeft(float)">setMarginLeft</A>, <A HREF="../../../../../org/apache/poi/hslf/model/TextShape.html#setMarginRight(float)">setMarginRight</A>, <A HREF="../../../../../org/apache/poi/hslf/model/TextShape.html#setMarginTop(float)">setMarginTop</A>, <A HREF="../../../../../org/apache/poi/hslf/model/TextShape.html#setSheet(org.apache.poi.hslf.model.Sheet)">setSheet</A>, <A HREF="../../../../../org/apache/poi/hslf/model/TextShape.html#setText(java.lang.String)">setText</A>, <A HREF="../../../../../org/apache/poi/hslf/model/TextShape.html#setTextId(int)">setTextId</A>, <A HREF="../../../../../org/apache/poi/hslf/model/TextShape.html#setVerticalAlignment(int)">setVerticalAlignment</A>, <A HREF="../../../../../org/apache/poi/hslf/model/TextShape.html#setWordWrap(int)">setWordWrap</A></CODE></TD>
+</TR>
+</TABLE>
+&nbsp;<A NAME="methods_inherited_from_class_org.apache.poi.hslf.model.SimpleShape"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#EEEEFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left"><B>Methods inherited from class org.apache.poi.hslf.model.<A HREF="../../../../../org/apache/poi/hslf/model/SimpleShape.html" title="class in org.apache.poi.hslf.model">SimpleShape</A></B></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><A HREF="../../../../../org/apache/poi/hslf/model/SimpleShape.html#createSpContainer(boolean)">createSpContainer</A>, <A HREF="../../../../../org/apache/poi/hslf/model/SimpleShape.html#getClientDataRecord(int)">getClientDataRecord</A>, <A HREF="../../../../../org/apache/poi/hslf/model/SimpleShape.html#getClientRecords()">getClientRecords</A>, <A HREF="../../../../../org/apache/poi/hslf/model/SimpleShape.html#getFillColor()">getFillColor</A>, <A HREF="../../../../../org/apache/poi/hslf/model/SimpleShape.html#getFlipHorizontal()">getFlipHorizontal</A>, <A HREF="../../../../../org/apache/poi/hslf/model/SimpleShape.html#getFlipVertical()">getFlipVertical</A>, <A HREF="../../../../../org/apache/poi/hslf/model/SimpleShape.html#getLineColor()">getLineColor</A>, <A HREF="../../../../../org/apache/poi/hslf/model/SimpleShape.html#getLineDashing()">getLineDashing</A>, <A HREF="../../../../../org/apache/poi/hslf/model/SimpleShape.html#getLineStyle()">getLineStyle</A>, <A HREF="../../../../../org/apache/poi/hslf/model/SimpleShape.html#getLineWidth()">getLineWidth</A>, <A HREF="../../../../../org/apache/poi/hslf/model/SimpleShape.html#getLogicalAnchor2D()">getLogicalAnchor2D</A>, <A HREF="../../../../../org/apache/poi/hslf/model/SimpleShape.html#getRotation()">getRotation</A>, <A HREF="../../../../../org/apache/poi/hslf/model/SimpleShape.html#setFillColor(java.awt.Color)">setFillColor</A>, <A HREF="../../../../../org/apache/poi/hslf/model/SimpleShape.html#setHyperlink(org.apache.poi.hslf.model.Hyperlink)">setHyperlink</A>, <A HREF="../../../../../org/apache/poi/hslf/model/SimpleShape.html#setLineColor(java.awt.Color)">setLineColor</A>, <A HREF="../../../../../org/apache/poi/hslf/model/SimpleShape.html#setLineDashing(int)">setLineDashing</A>, <A HREF="../../../../../org/apache/poi/hslf/model/SimpleShape.html#setLineStyle(int)">setLineStyle</A>, <A HREF="../../../../../org/apache/poi/hslf/model/SimpleShape.html#setLineWidth(double)">setLineWidth</A>, <A HREF="../../../../../org/apache/poi/hslf/model/SimpleShape.html#setRotation(int)">setRotation</A>, <A HREF="../../../../../org/apache/poi/hslf/model/SimpleShape.html#updateClientData()">updateClientData</A></CODE></TD>
+</TR>
+</TABLE>
+&nbsp;<A NAME="methods_inherited_from_class_org.apache.poi.hslf.model.Shape"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#EEEEFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left"><B>Methods inherited from class org.apache.poi.hslf.model.<A HREF="../../../../../org/apache/poi/hslf/model/Shape.html" title="class in org.apache.poi.hslf.model">Shape</A></B></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><A HREF="../../../../../org/apache/poi/hslf/model/Shape.html#getAnchor()">getAnchor</A>, <A HREF="../../../../../org/apache/poi/hslf/model/Shape.html#getAnchor2D()">getAnchor2D</A>, <A HREF="../../../../../org/apache/poi/hslf/model/Shape.html#getEscherChild(org.apache.poi.ddf.EscherContainerRecord, int)">getEscherChild</A>, <A HREF="../../../../../org/apache/poi/hslf/model/Shape.html#getEscherProperty(org.apache.poi.ddf.EscherOptRecord, int)">getEscherProperty</A>, <A HREF="../../../../../org/apache/poi/hslf/model/Shape.html#getEscherProperty(short)">getEscherProperty</A>, <A HREF="../../../../../org/apache/poi/hslf/model/Shape.html#getEscherProperty(short, int)">getEscherProperty</A>, <A HREF="../../../../../org/apache/poi/hslf/model/Shape.html#getFill()">getFill</A>, <A HREF="../../../../../org/apache/poi/hslf/model/Shape.html#getHyperlink()">getHyperlink</A>, <A HREF="../../../../../org/apache/poi/hslf/model/Shape.html#getParent()">getParent</A>, <A HREF="../../../../../org/apache/poi/hslf/model/Shape.html#getShapeId()">getShapeId</A>, <A HREF="../../../../../org/apache/poi/hslf/model/Shape.html#getShapeName()">getShapeName</A>, <A HREF="../../../../../org/apache/poi/hslf/model/Shape.html#getShapeType()">getShapeType</A>, <A HREF="../../../../../org/apache/poi/hslf/model/Shape.html#getSheet()">getSheet</A>, <A HREF="../../../../../org/apache/poi/hslf/model/Shape.html#getSpContainer()">getSpContainer</A>, <A HREF="../../../../../org/apache/poi/hslf/model/Shape.html#moveTo(float, float)">moveTo</A>, <A HREF="../../../../../org/apache/poi/hslf/model/Shape.html#setAnchor(java.awt.geom.Rectangle2D)">setAnchor</A>, <A HREF="../../../../../org/apache/poi/hslf/model/Shape.html#setEscherProperty(org.apache.poi.ddf.EscherOptRecord, short, int)">setEscherProperty</A>, <A HREF="../../../../../org/apache/poi/hslf/model/Shape.html#setEscherProperty(short, int)">setEscherProperty</A>, <A HREF="../../../../../org/apache/poi/hslf/model/Shape.html#setShapeId(int)">setShapeId</A>, <A HREF="../../../../../org/apache/poi/hslf/model/Shape.html#setShapeType(int)">setShapeType</A></CODE></TD>
+</TR>
+</TABLE>
+&nbsp;<A NAME="methods_inherited_from_class_java.lang.Object"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#EEEEFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left"><B>Methods inherited from class java.lang.Object</B></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE>clone, equals, finalize, getClass, hashCode, notify, notifyAll, toString, wait, wait, wait</CODE></TD>
+</TR>
+</TABLE>
+&nbsp;
+<P>
+
+<!-- ========= CONSTRUCTOR DETAIL ======== -->
+
+<A NAME="constructor_detail"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="1"><FONT SIZE="+2">
+<B>Constructor Detail</B></FONT></TH>
+</TR>
+</TABLE>
+
+<A NAME="AutoShape(org.apache.poi.ddf.EscherContainerRecord, org.apache.poi.hslf.model.Shape)"><!-- --></A><H3>
+AutoShape</H3>
+<PRE>
+protected <B>AutoShape</B>(<A HREF="../../../../../org/apache/poi/ddf/EscherContainerRecord.html" title="class in org.apache.poi.ddf">EscherContainerRecord</A>&nbsp;escherRecord,
+                    <A HREF="../../../../../org/apache/poi/hslf/model/Shape.html" title="class in org.apache.poi.hslf.model">Shape</A>&nbsp;parent)</PRE>
+<DL>
+</DL>
+<HR>
+
+<A NAME="AutoShape(int, org.apache.poi.hslf.model.Shape)"><!-- --></A><H3>
+AutoShape</H3>
+<PRE>
+public <B>AutoShape</B>(int&nbsp;type,
+                 <A HREF="../../../../../org/apache/poi/hslf/model/Shape.html" title="class in org.apache.poi.hslf.model">Shape</A>&nbsp;parent)</PRE>
+<DL>
+</DL>
+<HR>
+
+<A NAME="AutoShape(int)"><!-- --></A><H3>
+AutoShape</H3>
+<PRE>
+public <B>AutoShape</B>(int&nbsp;type)</PRE>
+<DL>
+</DL>
+
+<!-- ============ METHOD DETAIL ========== -->
+
+<A NAME="method_detail"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="1"><FONT SIZE="+2">
+<B>Method Detail</B></FONT></TH>
+</TR>
+</TABLE>
+
+<A NAME="createSpContainer(int, boolean)"><!-- --></A><H3>
+createSpContainer</H3>
+<PRE>
+protected <A HREF="../../../../../org/apache/poi/ddf/EscherContainerRecord.html" title="class in org.apache.poi.ddf">EscherContainerRecord</A> <B>createSpContainer</B>(int&nbsp;shapeType,
+                                                  boolean&nbsp;isChild)</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setDefaultTextProperties(org.apache.poi.hslf.model.TextRun)"><!-- --></A><H3>
+setDefaultTextProperties</H3>
+<PRE>
+protected void <B>setDefaultTextProperties</B>(<A HREF="../../../../../org/apache/poi/hslf/model/TextRun.html" title="class in org.apache.poi.hslf.model">TextRun</A>&nbsp;_txtrun)</PRE>
+<DL>
+<DD><B>Description copied from class: <CODE><A HREF="../../../../../org/apache/poi/hslf/model/TextShape.html#setDefaultTextProperties(org.apache.poi.hslf.model.TextRun)">TextShape</A></CODE></B></DD>
+<DD>Set default properties for the  TextRun.
+ Depending on the text and shape type the defaults are different:
+   TextBox: align=left, valign=top
+   AutoShape: align=center, valign=middle
+<P>
+<DD><DL>
+<DT><B>Overrides:</B><DD><CODE><A HREF="../../../../../org/apache/poi/hslf/model/TextShape.html#setDefaultTextProperties(org.apache.poi.hslf.model.TextRun)">setDefaultTextProperties</A></CODE> in class <CODE><A HREF="../../../../../org/apache/poi/hslf/model/TextShape.html" title="class in org.apache.poi.hslf.model">TextShape</A></CODE></DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getAdjustmentValue(int)"><!-- --></A><H3>
+getAdjustmentValue</H3>
+<PRE>
+public int <B>getAdjustmentValue</B>(int&nbsp;idx)</PRE>
+<DL>
+<DD>Gets adjust value which controls smart resizing of the auto-shape.
+
+ <p>
+ The adjustment values are given in shape coordinates:
+ the origin is at the top-left, positive-x is to the right, positive-y is down.
+ The region from (0,0) to (S,S) maps to the geometry box of the shape (S=21600 is a constant).
+ </p>
+<P>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>idx</CODE> - the adjust index in the [0, 9] range
+<DT><B>Returns:</B><DD>the adjustment value</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setAdjustmentValue(int, int)"><!-- --></A><H3>
+setAdjustmentValue</H3>
+<PRE>
+public void <B>setAdjustmentValue</B>(int&nbsp;idx,
+                               int&nbsp;val)</PRE>
+<DL>
+<DD>Sets adjust value which controls smart resizing of the auto-shape.
+
+ <p>
+ The adjustment values are given in shape coordinates:
+ the origin is at the top-left, positive-x is to the right, positive-y is down.
+ The region from (0,0) to (S,S) maps to the geometry box of the shape (S=21600 is a constant).
+ </p>
+<P>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>idx</CODE> - the adjust index in the [0, 9] range<DD><CODE>val</CODE> - the adjustment value</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getOutline()"><!-- --></A><H3>
+getOutline</H3>
+<PRE>
+public java.awt.Shape <B>getOutline</B>()</PRE>
+<DL>
+<DD><B>Description copied from class: <CODE><A HREF="../../../../../org/apache/poi/hslf/model/Shape.html#getOutline()">Shape</A></CODE></B></DD>
+<DD>Return shape outline as a java.awt.Shape object
+<P>
+<DD><DL>
+<DT><B>Overrides:</B><DD><CODE><A HREF="../../../../../org/apache/poi/hslf/model/Shape.html#getOutline()">getOutline</A></CODE> in class <CODE><A HREF="../../../../../org/apache/poi/hslf/model/Shape.html" title="class in org.apache.poi.hslf.model">Shape</A></CODE></DL>
+</DD>
+<DD><DL>
+
+<DT><B>Returns:</B><DD>the shape outline</DL>
+</DD>
+</DL>
+<!-- ========= END OF CLASS DATA ========= -->
+<HR>
+
+
+<!-- ======= START OF BOTTOM NAVBAR ====== -->
+<A NAME="navbar_bottom"><!-- --></A>
+<A HREF="#skip-navbar_bottom" title="Skip navigation links"></A>
+<TABLE BORDER="0" WIDTH="100%" CELLPADDING="1" CELLSPACING="0" SUMMARY="">
+<TR>
+<TD COLSPAN=2 BGCOLOR="#EEEEFF" CLASS="NavBarCell1">
+<A NAME="navbar_bottom_firstrow"><!-- --></A>
+<TABLE BORDER="0" CELLPADDING="0" CELLSPACING="3" SUMMARY="">
+  <TR ALIGN="center" VALIGN="top">
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../overview-summary.html"><FONT CLASS="NavBarFont1"><B>Overview</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="package-summary.html"><FONT CLASS="NavBarFont1"><B>Package</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#FFFFFF" CLASS="NavBarCell1Rev"> &nbsp;<FONT CLASS="NavBarFont1Rev"><B>Class</B></FONT>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="class-use/AutoShape.html"><FONT CLASS="NavBarFont1"><B>Use</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="package-tree.html"><FONT CLASS="NavBarFont1"><B>Tree</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../deprecated-list.html"><FONT CLASS="NavBarFont1"><B>Deprecated</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../index-all.html"><FONT CLASS="NavBarFont1"><B>Index</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../help-doc.html"><FONT CLASS="NavBarFont1"><B>Help</B></FONT></A>&nbsp;</TD>
+  </TR>
+</TABLE>
+</TD>
+<TD ALIGN="right" VALIGN="top" ROWSPAN=3><EM>
+</EM>
+</TD>
+</TR>
+
+<TR>
+<TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
+&nbsp;<A HREF="../../../../../org/apache/poi/hslf/model/ActiveXShape.html" title="class in org.apache.poi.hslf.model"><B>PREV CLASS</B></A>&nbsp;
+&nbsp;<A HREF="../../../../../org/apache/poi/hslf/model/AutoShapes.html" title="class in org.apache.poi.hslf.model"><B>NEXT CLASS</B></A></FONT></TD>
+<TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
+  <A HREF="../../../../../index.html?org/apache/poi/hslf/model/AutoShape.html" target="_top"><B>FRAMES</B></A>  &nbsp;
+&nbsp;<A HREF="AutoShape.html" target="_top"><B>NO FRAMES</B></A>  &nbsp;
+&nbsp;<SCRIPT type="text/javascript">
+  <!--
+  if(window==top) {
+    document.writeln('<A HREF="../../../../../allclasses-noframe.html"><B>All Classes</B></A>');
+  }
+  //-->
+</SCRIPT>
+<NOSCRIPT>
+  <A HREF="../../../../../allclasses-noframe.html"><B>All Classes</B></A>
+</NOSCRIPT>
+
+
+</FONT></TD>
+</TR>
+<TR>
+<TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
+  SUMMARY:&nbsp;NESTED&nbsp;|&nbsp;<A HREF="#fields_inherited_from_class_org.apache.poi.hslf.model.TextShape">FIELD</A>&nbsp;|&nbsp;<A HREF="#constructor_summary">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_summary">METHOD</A></FONT></TD>
+<TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
+DETAIL:&nbsp;FIELD&nbsp;|&nbsp;<A HREF="#constructor_detail">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_detail">METHOD</A></FONT></TD>
+</TR>
+</TABLE>
+<A NAME="skip-navbar_bottom"></A>
+<!-- ======== END OF BOTTOM NAVBAR ======= -->
+
+<HR>
+
+                <i>Copyright 2014 The Apache Software Foundation or
+        its licensors, as applicable.</i>
+            
+</BODY>
+</HTML>

@@ -1,0 +1,650 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!--NewPage-->
+<HTML>
+<HEAD>
+<TITLE>
+HeadersFooters (POI API Documentation)
+</TITLE>
+
+<META NAME="keywords" CONTENT="org.apache.poi.hslf.model.HeadersFooters class">
+
+<LINK REL ="stylesheet" TYPE="text/css" HREF="../../../../../stylesheet.css" TITLE="Style">
+
+<SCRIPT type="text/javascript">
+function windowTitle()
+{
+    parent.document.title="HeadersFooters (POI API Documentation)";
+}
+</SCRIPT>
+<NOSCRIPT>
+</NOSCRIPT>
+
+</HEAD>
+
+<BODY BGCOLOR="white" onload="windowTitle();">
+
+
+<!-- ========= START OF TOP NAVBAR ======= -->
+<A NAME="navbar_top"><!-- --></A>
+<A HREF="#skip-navbar_top" title="Skip navigation links"></A>
+<TABLE BORDER="0" WIDTH="100%" CELLPADDING="1" CELLSPACING="0" SUMMARY="">
+<TR>
+<TD COLSPAN=2 BGCOLOR="#EEEEFF" CLASS="NavBarCell1">
+<A NAME="navbar_top_firstrow"><!-- --></A>
+<TABLE BORDER="0" CELLPADDING="0" CELLSPACING="3" SUMMARY="">
+  <TR ALIGN="center" VALIGN="top">
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../overview-summary.html"><FONT CLASS="NavBarFont1"><B>Overview</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="package-summary.html"><FONT CLASS="NavBarFont1"><B>Package</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#FFFFFF" CLASS="NavBarCell1Rev"> &nbsp;<FONT CLASS="NavBarFont1Rev"><B>Class</B></FONT>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="class-use/HeadersFooters.html"><FONT CLASS="NavBarFont1"><B>Use</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="package-tree.html"><FONT CLASS="NavBarFont1"><B>Tree</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../deprecated-list.html"><FONT CLASS="NavBarFont1"><B>Deprecated</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../index-all.html"><FONT CLASS="NavBarFont1"><B>Index</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../help-doc.html"><FONT CLASS="NavBarFont1"><B>Help</B></FONT></A>&nbsp;</TD>
+  </TR>
+</TABLE>
+</TD>
+<TD ALIGN="right" VALIGN="top" ROWSPAN=3><EM>
+</EM>
+</TD>
+</TR>
+
+<TR>
+<TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
+&nbsp;<A HREF="../../../../../org/apache/poi/hslf/model/Freeform.html" title="class in org.apache.poi.hslf.model"><B>PREV CLASS</B></A>&nbsp;
+&nbsp;<A HREF="../../../../../org/apache/poi/hslf/model/Hyperlink.html" title="class in org.apache.poi.hslf.model"><B>NEXT CLASS</B></A></FONT></TD>
+<TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
+  <A HREF="../../../../../index.html?org/apache/poi/hslf/model/HeadersFooters.html" target="_top"><B>FRAMES</B></A>  &nbsp;
+&nbsp;<A HREF="HeadersFooters.html" target="_top"><B>NO FRAMES</B></A>  &nbsp;
+&nbsp;<SCRIPT type="text/javascript">
+  <!--
+  if(window==top) {
+    document.writeln('<A HREF="../../../../../allclasses-noframe.html"><B>All Classes</B></A>');
+  }
+  //-->
+</SCRIPT>
+<NOSCRIPT>
+  <A HREF="../../../../../allclasses-noframe.html"><B>All Classes</B></A>
+</NOSCRIPT>
+
+
+</FONT></TD>
+</TR>
+<TR>
+<TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
+  SUMMARY:&nbsp;NESTED&nbsp;|&nbsp;FIELD&nbsp;|&nbsp;<A HREF="#constructor_summary">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_summary">METHOD</A></FONT></TD>
+<TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
+DETAIL:&nbsp;FIELD&nbsp;|&nbsp;<A HREF="#constructor_detail">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_detail">METHOD</A></FONT></TD>
+</TR>
+</TABLE>
+<A NAME="skip-navbar_top"></A>
+<!-- ========= END OF TOP NAVBAR ========= -->
+
+<HR>
+<!-- ======== START OF CLASS DATA ======== -->
+<H2>
+<FONT SIZE="-1">
+org.apache.poi.hslf.model</FONT>
+<BR>
+Class HeadersFooters</H2>
+<PRE>
+java.lang.Object
+  <IMG SRC="../../../../../resources/inherit.gif" ALT="extended by "><B>org.apache.poi.hslf.model.HeadersFooters</B>
+</PRE>
+<HR>
+<DL>
+<DT><PRE>public final class <B>HeadersFooters</B><DT>extends java.lang.Object</DL>
+</PRE>
+
+<P>
+Header / Footer settings.
+
+ You can get these on slides, or across all notes
+<P>
+
+<P>
+<DL>
+<DT><B>Author:</B></DT>
+  <DD>Yegor Kozlov</DD>
+</DL>
+<HR>
+
+<P>
+
+<!-- ======== CONSTRUCTOR SUMMARY ======== -->
+
+<A NAME="constructor_summary"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+<B>Constructor Summary</B></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/model/HeadersFooters.html#HeadersFooters(org.apache.poi.hslf.record.HeadersFootersContainer, org.apache.poi.hslf.model.Sheet, boolean, boolean)">HeadersFooters</A></B>(<A HREF="../../../../../org/apache/poi/hslf/record/HeadersFootersContainer.html" title="class in org.apache.poi.hslf.record">HeadersFootersContainer</A>&nbsp;rec,
+               <A HREF="../../../../../org/apache/poi/hslf/model/Sheet.html" title="class in org.apache.poi.hslf.model">Sheet</A>&nbsp;sheet,
+               boolean&nbsp;newRecord,
+               boolean&nbsp;isPpt2007)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/model/HeadersFooters.html#HeadersFooters(org.apache.poi.hslf.record.HeadersFootersContainer, org.apache.poi.hslf.usermodel.SlideShow, boolean, boolean)">HeadersFooters</A></B>(<A HREF="../../../../../org/apache/poi/hslf/record/HeadersFootersContainer.html" title="class in org.apache.poi.hslf.record">HeadersFootersContainer</A>&nbsp;rec,
+               <A HREF="../../../../../org/apache/poi/hslf/usermodel/SlideShow.html" title="class in org.apache.poi.hslf.usermodel">SlideShow</A>&nbsp;ppt,
+               boolean&nbsp;newRecord,
+               boolean&nbsp;isPpt2007)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+</TABLE>
+&nbsp;
+<!-- ========== METHOD SUMMARY =========== -->
+
+<A NAME="method_summary"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+<B>Method Summary</B></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;int</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/model/HeadersFooters.html#getDateTimeFormat()">getDateTimeFormat</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;An integer that specifies the format ID to be used to style the datetime.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;java.lang.String</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/model/HeadersFooters.html#getDateTimeText()">getDateTimeText</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;This is the date that the user wants in the footers, instead of today's date.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;java.lang.String</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/model/HeadersFooters.html#getFooterText()">getFooterText</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Footer's text</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;java.lang.String</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/model/HeadersFooters.html#getHeaderText()">getHeaderText</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Headers's text</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/model/HeadersFooters.html#isDateTimeVisible()">isDateTimeVisible</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;whether the date is displayed in the footer.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/model/HeadersFooters.html#isFooterVisible()">isFooterVisible</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;whether the footer text is displayed.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/model/HeadersFooters.html#isHeaderVisible()">isHeaderVisible</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;whether the header text is displayed.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/model/HeadersFooters.html#isSlideNumberVisible()">isSlideNumberVisible</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;whether the slide number is displayed in the footer.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/model/HeadersFooters.html#isUserDateVisible()">isUserDateVisible</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;whether the custom user date is used instead of today's date.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/model/HeadersFooters.html#setDateTimeFormat(int)">setDateTimeFormat</A></B>(int&nbsp;formatId)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;An integer that specifies the format ID to be used to style the datetime.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/model/HeadersFooters.html#setDateTimeText(java.lang.String)">setDateTimeText</A></B>(java.lang.String&nbsp;text)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sets custom user date to be displayed instead of today's date.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/model/HeadersFooters.html#setDateTimeVisible(boolean)">setDateTimeVisible</A></B>(boolean&nbsp;flag)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;whether the date is displayed in the footer.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/model/HeadersFooters.html#setFootersText(java.lang.String)">setFootersText</A></B>(java.lang.String&nbsp;text)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sets footers's text</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/model/HeadersFooters.html#setFooterVisible(boolean)">setFooterVisible</A></B>(boolean&nbsp;flag)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;whether the footer text is displayed.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/model/HeadersFooters.html#setHeaderText(java.lang.String)">setHeaderText</A></B>(java.lang.String&nbsp;text)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sets headers's text</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/model/HeadersFooters.html#setHeaderVisible(boolean)">setHeaderVisible</A></B>(boolean&nbsp;flag)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;whether the header text is displayed.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/model/HeadersFooters.html#setSlideNumberVisible(boolean)">setSlideNumberVisible</A></B>(boolean&nbsp;flag)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;whether the slide number is displayed in the footer.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/model/HeadersFooters.html#setUserDateVisible(boolean)">setUserDateVisible</A></B>(boolean&nbsp;flag)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;whether the date is displayed in the footer.</TD>
+</TR>
+</TABLE>
+&nbsp;<A NAME="methods_inherited_from_class_java.lang.Object"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#EEEEFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left"><B>Methods inherited from class java.lang.Object</B></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE>clone, equals, finalize, getClass, hashCode, notify, notifyAll, toString, wait, wait, wait</CODE></TD>
+</TR>
+</TABLE>
+&nbsp;
+<P>
+
+<!-- ========= CONSTRUCTOR DETAIL ======== -->
+
+<A NAME="constructor_detail"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="1"><FONT SIZE="+2">
+<B>Constructor Detail</B></FONT></TH>
+</TR>
+</TABLE>
+
+<A NAME="HeadersFooters(org.apache.poi.hslf.record.HeadersFootersContainer, org.apache.poi.hslf.usermodel.SlideShow, boolean, boolean)"><!-- --></A><H3>
+HeadersFooters</H3>
+<PRE>
+public <B>HeadersFooters</B>(<A HREF="../../../../../org/apache/poi/hslf/record/HeadersFootersContainer.html" title="class in org.apache.poi.hslf.record">HeadersFootersContainer</A>&nbsp;rec,
+                      <A HREF="../../../../../org/apache/poi/hslf/usermodel/SlideShow.html" title="class in org.apache.poi.hslf.usermodel">SlideShow</A>&nbsp;ppt,
+                      boolean&nbsp;newRecord,
+                      boolean&nbsp;isPpt2007)</PRE>
+<DL>
+</DL>
+<HR>
+
+<A NAME="HeadersFooters(org.apache.poi.hslf.record.HeadersFootersContainer, org.apache.poi.hslf.model.Sheet, boolean, boolean)"><!-- --></A><H3>
+HeadersFooters</H3>
+<PRE>
+public <B>HeadersFooters</B>(<A HREF="../../../../../org/apache/poi/hslf/record/HeadersFootersContainer.html" title="class in org.apache.poi.hslf.record">HeadersFootersContainer</A>&nbsp;rec,
+                      <A HREF="../../../../../org/apache/poi/hslf/model/Sheet.html" title="class in org.apache.poi.hslf.model">Sheet</A>&nbsp;sheet,
+                      boolean&nbsp;newRecord,
+                      boolean&nbsp;isPpt2007)</PRE>
+<DL>
+</DL>
+
+<!-- ============ METHOD DETAIL ========== -->
+
+<A NAME="method_detail"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="1"><FONT SIZE="+2">
+<B>Method Detail</B></FONT></TH>
+</TR>
+</TABLE>
+
+<A NAME="getHeaderText()"><!-- --></A><H3>
+getHeaderText</H3>
+<PRE>
+public java.lang.String <B>getHeaderText</B>()</PRE>
+<DL>
+<DD>Headers's text
+<P>
+<DD><DL>
+
+<DT><B>Returns:</B><DD>Headers's text</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setHeaderText(java.lang.String)"><!-- --></A><H3>
+setHeaderText</H3>
+<PRE>
+public void <B>setHeaderText</B>(java.lang.String&nbsp;text)</PRE>
+<DL>
+<DD>Sets headers's text
+<P>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>text</CODE> - headers's text</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getFooterText()"><!-- --></A><H3>
+getFooterText</H3>
+<PRE>
+public java.lang.String <B>getFooterText</B>()</PRE>
+<DL>
+<DD>Footer's text
+<P>
+<DD><DL>
+
+<DT><B>Returns:</B><DD>Footer's text</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setFootersText(java.lang.String)"><!-- --></A><H3>
+setFootersText</H3>
+<PRE>
+public void <B>setFootersText</B>(java.lang.String&nbsp;text)</PRE>
+<DL>
+<DD>Sets footers's text
+<P>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>text</CODE> - footers's text</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getDateTimeText()"><!-- --></A><H3>
+getDateTimeText</H3>
+<PRE>
+public java.lang.String <B>getDateTimeText</B>()</PRE>
+<DL>
+<DD>This is the date that the user wants in the footers, instead of today's date.
+<P>
+<DD><DL>
+
+<DT><B>Returns:</B><DD>custom user date</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setDateTimeText(java.lang.String)"><!-- --></A><H3>
+setDateTimeText</H3>
+<PRE>
+public void <B>setDateTimeText</B>(java.lang.String&nbsp;text)</PRE>
+<DL>
+<DD>Sets custom user date to be displayed instead of today's date.
+<P>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>text</CODE> - custom user date</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="isFooterVisible()"><!-- --></A><H3>
+isFooterVisible</H3>
+<PRE>
+public boolean <B>isFooterVisible</B>()</PRE>
+<DL>
+<DD>whether the footer text is displayed.
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setFooterVisible(boolean)"><!-- --></A><H3>
+setFooterVisible</H3>
+<PRE>
+public void <B>setFooterVisible</B>(boolean&nbsp;flag)</PRE>
+<DL>
+<DD>whether the footer text is displayed.
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="isHeaderVisible()"><!-- --></A><H3>
+isHeaderVisible</H3>
+<PRE>
+public boolean <B>isHeaderVisible</B>()</PRE>
+<DL>
+<DD>whether the header text is displayed.
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setHeaderVisible(boolean)"><!-- --></A><H3>
+setHeaderVisible</H3>
+<PRE>
+public void <B>setHeaderVisible</B>(boolean&nbsp;flag)</PRE>
+<DL>
+<DD>whether the header text is displayed.
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="isDateTimeVisible()"><!-- --></A><H3>
+isDateTimeVisible</H3>
+<PRE>
+public boolean <B>isDateTimeVisible</B>()</PRE>
+<DL>
+<DD>whether the date is displayed in the footer.
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setDateTimeVisible(boolean)"><!-- --></A><H3>
+setDateTimeVisible</H3>
+<PRE>
+public void <B>setDateTimeVisible</B>(boolean&nbsp;flag)</PRE>
+<DL>
+<DD>whether the date is displayed in the footer.
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="isUserDateVisible()"><!-- --></A><H3>
+isUserDateVisible</H3>
+<PRE>
+public boolean <B>isUserDateVisible</B>()</PRE>
+<DL>
+<DD>whether the custom user date is used instead of today's date.
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setUserDateVisible(boolean)"><!-- --></A><H3>
+setUserDateVisible</H3>
+<PRE>
+public void <B>setUserDateVisible</B>(boolean&nbsp;flag)</PRE>
+<DL>
+<DD>whether the date is displayed in the footer.
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="isSlideNumberVisible()"><!-- --></A><H3>
+isSlideNumberVisible</H3>
+<PRE>
+public boolean <B>isSlideNumberVisible</B>()</PRE>
+<DL>
+<DD>whether the slide number is displayed in the footer.
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setSlideNumberVisible(boolean)"><!-- --></A><H3>
+setSlideNumberVisible</H3>
+<PRE>
+public void <B>setSlideNumberVisible</B>(boolean&nbsp;flag)</PRE>
+<DL>
+<DD>whether the slide number is displayed in the footer.
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getDateTimeFormat()"><!-- --></A><H3>
+getDateTimeFormat</H3>
+<PRE>
+public int <B>getDateTimeFormat</B>()</PRE>
+<DL>
+<DD>An integer that specifies the format ID to be used to style the datetime.
+<P>
+<DD><DL>
+
+<DT><B>Returns:</B><DD>an integer that specifies the format ID to be used to style the datetime.</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setDateTimeFormat(int)"><!-- --></A><H3>
+setDateTimeFormat</H3>
+<PRE>
+public void <B>setDateTimeFormat</B>(int&nbsp;formatId)</PRE>
+<DL>
+<DD>An integer that specifies the format ID to be used to style the datetime.
+<P>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>formatId</CODE> - an integer that specifies the format ID to be used to style the datetime.</DL>
+</DD>
+</DL>
+<!-- ========= END OF CLASS DATA ========= -->
+<HR>
+
+
+<!-- ======= START OF BOTTOM NAVBAR ====== -->
+<A NAME="navbar_bottom"><!-- --></A>
+<A HREF="#skip-navbar_bottom" title="Skip navigation links"></A>
+<TABLE BORDER="0" WIDTH="100%" CELLPADDING="1" CELLSPACING="0" SUMMARY="">
+<TR>
+<TD COLSPAN=2 BGCOLOR="#EEEEFF" CLASS="NavBarCell1">
+<A NAME="navbar_bottom_firstrow"><!-- --></A>
+<TABLE BORDER="0" CELLPADDING="0" CELLSPACING="3" SUMMARY="">
+  <TR ALIGN="center" VALIGN="top">
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../overview-summary.html"><FONT CLASS="NavBarFont1"><B>Overview</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="package-summary.html"><FONT CLASS="NavBarFont1"><B>Package</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#FFFFFF" CLASS="NavBarCell1Rev"> &nbsp;<FONT CLASS="NavBarFont1Rev"><B>Class</B></FONT>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="class-use/HeadersFooters.html"><FONT CLASS="NavBarFont1"><B>Use</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="package-tree.html"><FONT CLASS="NavBarFont1"><B>Tree</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../deprecated-list.html"><FONT CLASS="NavBarFont1"><B>Deprecated</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../index-all.html"><FONT CLASS="NavBarFont1"><B>Index</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../help-doc.html"><FONT CLASS="NavBarFont1"><B>Help</B></FONT></A>&nbsp;</TD>
+  </TR>
+</TABLE>
+</TD>
+<TD ALIGN="right" VALIGN="top" ROWSPAN=3><EM>
+</EM>
+</TD>
+</TR>
+
+<TR>
+<TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
+&nbsp;<A HREF="../../../../../org/apache/poi/hslf/model/Freeform.html" title="class in org.apache.poi.hslf.model"><B>PREV CLASS</B></A>&nbsp;
+&nbsp;<A HREF="../../../../../org/apache/poi/hslf/model/Hyperlink.html" title="class in org.apache.poi.hslf.model"><B>NEXT CLASS</B></A></FONT></TD>
+<TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
+  <A HREF="../../../../../index.html?org/apache/poi/hslf/model/HeadersFooters.html" target="_top"><B>FRAMES</B></A>  &nbsp;
+&nbsp;<A HREF="HeadersFooters.html" target="_top"><B>NO FRAMES</B></A>  &nbsp;
+&nbsp;<SCRIPT type="text/javascript">
+  <!--
+  if(window==top) {
+    document.writeln('<A HREF="../../../../../allclasses-noframe.html"><B>All Classes</B></A>');
+  }
+  //-->
+</SCRIPT>
+<NOSCRIPT>
+  <A HREF="../../../../../allclasses-noframe.html"><B>All Classes</B></A>
+</NOSCRIPT>
+
+
+</FONT></TD>
+</TR>
+<TR>
+<TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
+  SUMMARY:&nbsp;NESTED&nbsp;|&nbsp;FIELD&nbsp;|&nbsp;<A HREF="#constructor_summary">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_summary">METHOD</A></FONT></TD>
+<TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
+DETAIL:&nbsp;FIELD&nbsp;|&nbsp;<A HREF="#constructor_detail">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_detail">METHOD</A></FONT></TD>
+</TR>
+</TABLE>
+<A NAME="skip-navbar_bottom"></A>
+<!-- ======== END OF BOTTOM NAVBAR ======= -->
+
+<HR>
+
+                <i>Copyright 2014 The Apache Software Foundation or
+        its licensors, as applicable.</i>
+            
+</BODY>
+</HTML>

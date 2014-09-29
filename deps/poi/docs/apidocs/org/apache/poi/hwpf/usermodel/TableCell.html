@@ -1,0 +1,559 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!--NewPage-->
+<HTML>
+<HEAD>
+<TITLE>
+TableCell (POI API Documentation)
+</TITLE>
+
+<META NAME="keywords" CONTENT="org.apache.poi.hwpf.usermodel.TableCell class">
+
+<LINK REL ="stylesheet" TYPE="text/css" HREF="../../../../../stylesheet.css" TITLE="Style">
+
+<SCRIPT type="text/javascript">
+function windowTitle()
+{
+    parent.document.title="TableCell (POI API Documentation)";
+}
+</SCRIPT>
+<NOSCRIPT>
+</NOSCRIPT>
+
+</HEAD>
+
+<BODY BGCOLOR="white" onload="windowTitle();">
+
+
+<!-- ========= START OF TOP NAVBAR ======= -->
+<A NAME="navbar_top"><!-- --></A>
+<A HREF="#skip-navbar_top" title="Skip navigation links"></A>
+<TABLE BORDER="0" WIDTH="100%" CELLPADDING="1" CELLSPACING="0" SUMMARY="">
+<TR>
+<TD COLSPAN=2 BGCOLOR="#EEEEFF" CLASS="NavBarCell1">
+<A NAME="navbar_top_firstrow"><!-- --></A>
+<TABLE BORDER="0" CELLPADDING="0" CELLSPACING="3" SUMMARY="">
+  <TR ALIGN="center" VALIGN="top">
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../overview-summary.html"><FONT CLASS="NavBarFont1"><B>Overview</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="package-summary.html"><FONT CLASS="NavBarFont1"><B>Package</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#FFFFFF" CLASS="NavBarCell1Rev"> &nbsp;<FONT CLASS="NavBarFont1Rev"><B>Class</B></FONT>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="class-use/TableCell.html"><FONT CLASS="NavBarFont1"><B>Use</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="package-tree.html"><FONT CLASS="NavBarFont1"><B>Tree</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../deprecated-list.html"><FONT CLASS="NavBarFont1"><B>Deprecated</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../index-all.html"><FONT CLASS="NavBarFont1"><B>Index</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../help-doc.html"><FONT CLASS="NavBarFont1"><B>Help</B></FONT></A>&nbsp;</TD>
+  </TR>
+</TABLE>
+</TD>
+<TD ALIGN="right" VALIGN="top" ROWSPAN=3><EM>
+</EM>
+</TD>
+</TR>
+
+<TR>
+<TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
+&nbsp;<A HREF="../../../../../org/apache/poi/hwpf/usermodel/TableAutoformatLookSpecifier.html" title="class in org.apache.poi.hwpf.usermodel"><B>PREV CLASS</B></A>&nbsp;
+&nbsp;<A HREF="../../../../../org/apache/poi/hwpf/usermodel/TableCellDescriptor.html" title="class in org.apache.poi.hwpf.usermodel"><B>NEXT CLASS</B></A></FONT></TD>
+<TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
+  <A HREF="../../../../../index.html?org/apache/poi/hwpf/usermodel/TableCell.html" target="_top"><B>FRAMES</B></A>  &nbsp;
+&nbsp;<A HREF="TableCell.html" target="_top"><B>NO FRAMES</B></A>  &nbsp;
+&nbsp;<SCRIPT type="text/javascript">
+  <!--
+  if(window==top) {
+    document.writeln('<A HREF="../../../../../allclasses-noframe.html"><B>All Classes</B></A>');
+  }
+  //-->
+</SCRIPT>
+<NOSCRIPT>
+  <A HREF="../../../../../allclasses-noframe.html"><B>All Classes</B></A>
+</NOSCRIPT>
+
+
+</FONT></TD>
+</TR>
+<TR>
+<TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
+  SUMMARY:&nbsp;NESTED&nbsp;|&nbsp;<A HREF="#fields_inherited_from_class_org.apache.poi.hwpf.usermodel.Range">FIELD</A>&nbsp;|&nbsp;<A HREF="#constructor_summary">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_summary">METHOD</A></FONT></TD>
+<TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
+DETAIL:&nbsp;FIELD&nbsp;|&nbsp;<A HREF="#constructor_detail">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_detail">METHOD</A></FONT></TD>
+</TR>
+</TABLE>
+<A NAME="skip-navbar_top"></A>
+<!-- ========= END OF TOP NAVBAR ========= -->
+
+<HR>
+<!-- ======== START OF CLASS DATA ======== -->
+<H2>
+<FONT SIZE="-1">
+org.apache.poi.hwpf.usermodel</FONT>
+<BR>
+Class TableCell</H2>
+<PRE>
+java.lang.Object
+  <IMG SRC="../../../../../resources/inherit.gif" ALT="extended by "><A HREF="../../../../../org/apache/poi/hwpf/usermodel/Range.html" title="class in org.apache.poi.hwpf.usermodel">org.apache.poi.hwpf.usermodel.Range</A>
+      <IMG SRC="../../../../../resources/inherit.gif" ALT="extended by "><B>org.apache.poi.hwpf.usermodel.TableCell</B>
+</PRE>
+<HR>
+<DL>
+<DT><PRE>public final class <B>TableCell</B><DT>extends <A HREF="../../../../../org/apache/poi/hwpf/usermodel/Range.html" title="class in org.apache.poi.hwpf.usermodel">Range</A></DL>
+</PRE>
+
+<P>
+<HR>
+
+<P>
+<!-- =========== FIELD SUMMARY =========== -->
+
+<A NAME="field_summary"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+<B>Field Summary</B></FONT></TH>
+</TR>
+</TABLE>
+&nbsp;<A NAME="fields_inherited_from_class_org.apache.poi.hwpf.usermodel.Range"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#EEEEFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left"><B>Fields inherited from class org.apache.poi.hwpf.usermodel.<A HREF="../../../../../org/apache/poi/hwpf/usermodel/Range.html" title="class in org.apache.poi.hwpf.usermodel">Range</A></B></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><A HREF="../../../../../org/apache/poi/hwpf/usermodel/Range.html#_characters">_characters</A>, <A HREF="../../../../../org/apache/poi/hwpf/usermodel/Range.html#_charEnd">_charEnd</A>, <A HREF="../../../../../org/apache/poi/hwpf/usermodel/Range.html#_charRangeFound">_charRangeFound</A>, <A HREF="../../../../../org/apache/poi/hwpf/usermodel/Range.html#_charStart">_charStart</A>, <A HREF="../../../../../org/apache/poi/hwpf/usermodel/Range.html#_doc">_doc</A>, <A HREF="../../../../../org/apache/poi/hwpf/usermodel/Range.html#_end">_end</A>, <A HREF="../../../../../org/apache/poi/hwpf/usermodel/Range.html#_paragraphs">_paragraphs</A>, <A HREF="../../../../../org/apache/poi/hwpf/usermodel/Range.html#_parEnd">_parEnd</A>, <A HREF="../../../../../org/apache/poi/hwpf/usermodel/Range.html#_parRangeFound">_parRangeFound</A>, <A HREF="../../../../../org/apache/poi/hwpf/usermodel/Range.html#_parStart">_parStart</A>, <A HREF="../../../../../org/apache/poi/hwpf/usermodel/Range.html#_sectionEnd">_sectionEnd</A>, <A HREF="../../../../../org/apache/poi/hwpf/usermodel/Range.html#_sections">_sections</A>, <A HREF="../../../../../org/apache/poi/hwpf/usermodel/Range.html#_sectionStart">_sectionStart</A>, <A HREF="../../../../../org/apache/poi/hwpf/usermodel/Range.html#_start">_start</A>, <A HREF="../../../../../org/apache/poi/hwpf/usermodel/Range.html#_text">_text</A>, <A HREF="../../../../../org/apache/poi/hwpf/usermodel/Range.html#TYPE_CHARACTER">TYPE_CHARACTER</A>, <A HREF="../../../../../org/apache/poi/hwpf/usermodel/Range.html#TYPE_LISTENTRY">TYPE_LISTENTRY</A>, <A HREF="../../../../../org/apache/poi/hwpf/usermodel/Range.html#TYPE_PARAGRAPH">TYPE_PARAGRAPH</A>, <A HREF="../../../../../org/apache/poi/hwpf/usermodel/Range.html#TYPE_SECTION">TYPE_SECTION</A>, <A HREF="../../../../../org/apache/poi/hwpf/usermodel/Range.html#TYPE_TABLE">TYPE_TABLE</A>, <A HREF="../../../../../org/apache/poi/hwpf/usermodel/Range.html#TYPE_TEXT">TYPE_TEXT</A>, <A HREF="../../../../../org/apache/poi/hwpf/usermodel/Range.html#TYPE_UNDEFINED">TYPE_UNDEFINED</A></CODE></TD>
+</TR>
+</TABLE>
+&nbsp;
+<!-- ======== CONSTRUCTOR SUMMARY ======== -->
+
+<A NAME="constructor_summary"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+<B>Constructor Summary</B></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/usermodel/TableCell.html#TableCell(int, int, org.apache.poi.hwpf.usermodel.TableRow, int, org.apache.poi.hwpf.usermodel.TableCellDescriptor, int, int)">TableCell</A></B>(int&nbsp;startIdxInclusive,
+          int&nbsp;endIdxExclusive,
+          <A HREF="../../../../../org/apache/poi/hwpf/usermodel/TableRow.html" title="class in org.apache.poi.hwpf.usermodel">TableRow</A>&nbsp;parent,
+          int&nbsp;levelNum,
+          <A HREF="../../../../../org/apache/poi/hwpf/usermodel/TableCellDescriptor.html" title="class in org.apache.poi.hwpf.usermodel">TableCellDescriptor</A>&nbsp;tcd,
+          int&nbsp;leftEdge,
+          int&nbsp;width)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+</TABLE>
+&nbsp;
+<!-- ========== METHOD SUMMARY =========== -->
+
+<A NAME="method_summary"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+<B>Method Summary</B></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../../../org/apache/poi/hwpf/usermodel/BorderCode.html" title="class in org.apache.poi.hwpf.usermodel">BorderCode</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/usermodel/TableCell.html#getBrcBottom()">getBrcBottom</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../../../org/apache/poi/hwpf/usermodel/BorderCode.html" title="class in org.apache.poi.hwpf.usermodel">BorderCode</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/usermodel/TableCell.html#getBrcLeft()">getBrcLeft</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../../../org/apache/poi/hwpf/usermodel/BorderCode.html" title="class in org.apache.poi.hwpf.usermodel">BorderCode</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/usermodel/TableCell.html#getBrcRight()">getBrcRight</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../../../org/apache/poi/hwpf/usermodel/BorderCode.html" title="class in org.apache.poi.hwpf.usermodel">BorderCode</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/usermodel/TableCell.html#getBrcTop()">getBrcTop</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../../../org/apache/poi/hwpf/usermodel/TableCellDescriptor.html" title="class in org.apache.poi.hwpf.usermodel">TableCellDescriptor</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/usermodel/TableCell.html#getDescriptor()">getDescriptor</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns the TableCellDescriptor for this cell.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;int</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/usermodel/TableCell.html#getLeftEdge()">getLeftEdge</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;byte</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/usermodel/TableCell.html#getVertAlign()">getVertAlign</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;int</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/usermodel/TableCell.html#getWidth()">getWidth</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/usermodel/TableCell.html#isBackward()">isBackward</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/usermodel/TableCell.html#isFirstMerged()">isFirstMerged</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/usermodel/TableCell.html#isFirstVerticallyMerged()">isFirstVerticallyMerged</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/usermodel/TableCell.html#isMerged()">isMerged</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/usermodel/TableCell.html#isRotateFont()">isRotateFont</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/usermodel/TableCell.html#isVertical()">isVertical</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/usermodel/TableCell.html#isVerticallyMerged()">isVerticallyMerged</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+</TABLE>
+&nbsp;<A NAME="methods_inherited_from_class_org.apache.poi.hwpf.usermodel.Range"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#EEEEFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left"><B>Methods inherited from class org.apache.poi.hwpf.usermodel.<A HREF="../../../../../org/apache/poi/hwpf/usermodel/Range.html" title="class in org.apache.poi.hwpf.usermodel">Range</A></B></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><A HREF="../../../../../org/apache/poi/hwpf/usermodel/Range.html#adjustFIB(int)">adjustFIB</A>, <A HREF="../../../../../org/apache/poi/hwpf/usermodel/Range.html#delete()">delete</A>, <A HREF="../../../../../org/apache/poi/hwpf/usermodel/Range.html#getCharacterRun(int)">getCharacterRun</A>, <A HREF="../../../../../org/apache/poi/hwpf/usermodel/Range.html#getDocument()">getDocument</A>, <A HREF="../../../../../org/apache/poi/hwpf/usermodel/Range.html#getEndOffset()">getEndOffset</A>, <A HREF="../../../../../org/apache/poi/hwpf/usermodel/Range.html#getParagraph(int)">getParagraph</A>, <A HREF="../../../../../org/apache/poi/hwpf/usermodel/Range.html#getSection(int)">getSection</A>, <A HREF="../../../../../org/apache/poi/hwpf/usermodel/Range.html#getStartOffset()">getStartOffset</A>, <A HREF="../../../../../org/apache/poi/hwpf/usermodel/Range.html#getTable(org.apache.poi.hwpf.usermodel.Paragraph)">getTable</A>, <A HREF="../../../../../org/apache/poi/hwpf/usermodel/Range.html#initAll()">initAll</A>, <A HREF="../../../../../org/apache/poi/hwpf/usermodel/Range.html#insertAfter(org.apache.poi.hwpf.usermodel.ParagraphProperties, int)">insertAfter</A>, <A HREF="../../../../../org/apache/poi/hwpf/usermodel/Range.html#insertAfter(org.apache.poi.hwpf.usermodel.ParagraphProperties, int, int, int)">insertAfter</A>, <A HREF="../../../../../org/apache/poi/hwpf/usermodel/Range.html#insertAfter(org.apache.poi.hwpf.usermodel.ParagraphProperties, int, java.lang.String)">insertAfter</A>, <A HREF="../../../../../org/apache/poi/hwpf/usermodel/Range.html#insertAfter(java.lang.String)">insertAfter</A>, <A HREF="../../../../../org/apache/poi/hwpf/usermodel/Range.html#insertAfter(java.lang.String, org.apache.poi.hwpf.usermodel.CharacterProperties)">insertAfter</A>, <A HREF="../../../../../org/apache/poi/hwpf/usermodel/Range.html#insertBefore(org.apache.poi.hwpf.usermodel.ParagraphProperties, int)">insertBefore</A>, <A HREF="../../../../../org/apache/poi/hwpf/usermodel/Range.html#insertBefore(org.apache.poi.hwpf.usermodel.ParagraphProperties, int, int, int)">insertBefore</A>, <A HREF="../../../../../org/apache/poi/hwpf/usermodel/Range.html#insertBefore(org.apache.poi.hwpf.usermodel.ParagraphProperties, int, java.lang.String)">insertBefore</A>, <A HREF="../../../../../org/apache/poi/hwpf/usermodel/Range.html#insertBefore(java.lang.String)">insertBefore</A>, <A HREF="../../../../../org/apache/poi/hwpf/usermodel/Range.html#insertBefore(java.lang.String, org.apache.poi.hwpf.usermodel.CharacterProperties)">insertBefore</A>, <A HREF="../../../../../org/apache/poi/hwpf/usermodel/Range.html#insertBefore(org.apache.poi.hwpf.usermodel.TableProperties, int)">insertBefore</A>, <A HREF="../../../../../org/apache/poi/hwpf/usermodel/Range.html#insertTableBefore(short, int)">insertTableBefore</A>, <A HREF="../../../../../org/apache/poi/hwpf/usermodel/Range.html#numCharacterRuns()">numCharacterRuns</A>, <A HREF="../../../../../org/apache/poi/hwpf/usermodel/Range.html#numParagraphs()">numParagraphs</A>, <A HREF="../../../../../org/apache/poi/hwpf/usermodel/Range.html#numSections()">numSections</A>, <A HREF="../../../../../org/apache/poi/hwpf/usermodel/Range.html#replaceText(java.lang.String, boolean)">replaceText</A>, <A HREF="../../../../../org/apache/poi/hwpf/usermodel/Range.html#replaceText(java.lang.String, java.lang.String)">replaceText</A>, <A HREF="../../../../../org/apache/poi/hwpf/usermodel/Range.html#replaceText(java.lang.String, java.lang.String, int)">replaceText</A>, <A HREF="../../../../../org/apache/poi/hwpf/usermodel/Range.html#reset()">reset</A>, <A HREF="../../../../../org/apache/poi/hwpf/usermodel/Range.html#sanityCheck()">sanityCheck</A>, <A HREF="../../../../../org/apache/poi/hwpf/usermodel/Range.html#stripFields(java.lang.String)">stripFields</A>, <A HREF="../../../../../org/apache/poi/hwpf/usermodel/Range.html#text()">text</A>, <A HREF="../../../../../org/apache/poi/hwpf/usermodel/Range.html#toString()">toString</A>, <A HREF="../../../../../org/apache/poi/hwpf/usermodel/Range.html#type()">type</A>, <A HREF="../../../../../org/apache/poi/hwpf/usermodel/Range.html#usesUnicode()">usesUnicode</A></CODE></TD>
+</TR>
+</TABLE>
+&nbsp;<A NAME="methods_inherited_from_class_java.lang.Object"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#EEEEFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left"><B>Methods inherited from class java.lang.Object</B></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE>clone, equals, finalize, getClass, hashCode, notify, notifyAll, wait, wait, wait</CODE></TD>
+</TR>
+</TABLE>
+&nbsp;
+<P>
+
+<!-- ========= CONSTRUCTOR DETAIL ======== -->
+
+<A NAME="constructor_detail"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="1"><FONT SIZE="+2">
+<B>Constructor Detail</B></FONT></TH>
+</TR>
+</TABLE>
+
+<A NAME="TableCell(int, int, org.apache.poi.hwpf.usermodel.TableRow, int, org.apache.poi.hwpf.usermodel.TableCellDescriptor, int, int)"><!-- --></A><H3>
+TableCell</H3>
+<PRE>
+public <B>TableCell</B>(int&nbsp;startIdxInclusive,
+                 int&nbsp;endIdxExclusive,
+                 <A HREF="../../../../../org/apache/poi/hwpf/usermodel/TableRow.html" title="class in org.apache.poi.hwpf.usermodel">TableRow</A>&nbsp;parent,
+                 int&nbsp;levelNum,
+                 <A HREF="../../../../../org/apache/poi/hwpf/usermodel/TableCellDescriptor.html" title="class in org.apache.poi.hwpf.usermodel">TableCellDescriptor</A>&nbsp;tcd,
+                 int&nbsp;leftEdge,
+                 int&nbsp;width)</PRE>
+<DL>
+</DL>
+
+<!-- ============ METHOD DETAIL ========== -->
+
+<A NAME="method_detail"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="1"><FONT SIZE="+2">
+<B>Method Detail</B></FONT></TH>
+</TR>
+</TABLE>
+
+<A NAME="isFirstMerged()"><!-- --></A><H3>
+isFirstMerged</H3>
+<PRE>
+public boolean <B>isFirstMerged</B>()</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="isMerged()"><!-- --></A><H3>
+isMerged</H3>
+<PRE>
+public boolean <B>isMerged</B>()</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="isVertical()"><!-- --></A><H3>
+isVertical</H3>
+<PRE>
+public boolean <B>isVertical</B>()</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="isBackward()"><!-- --></A><H3>
+isBackward</H3>
+<PRE>
+public boolean <B>isBackward</B>()</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="isRotateFont()"><!-- --></A><H3>
+isRotateFont</H3>
+<PRE>
+public boolean <B>isRotateFont</B>()</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="isVerticallyMerged()"><!-- --></A><H3>
+isVerticallyMerged</H3>
+<PRE>
+public boolean <B>isVerticallyMerged</B>()</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="isFirstVerticallyMerged()"><!-- --></A><H3>
+isFirstVerticallyMerged</H3>
+<PRE>
+public boolean <B>isFirstVerticallyMerged</B>()</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getVertAlign()"><!-- --></A><H3>
+getVertAlign</H3>
+<PRE>
+public byte <B>getVertAlign</B>()</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getBrcTop()"><!-- --></A><H3>
+getBrcTop</H3>
+<PRE>
+public <A HREF="../../../../../org/apache/poi/hwpf/usermodel/BorderCode.html" title="class in org.apache.poi.hwpf.usermodel">BorderCode</A> <B>getBrcTop</B>()</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getBrcBottom()"><!-- --></A><H3>
+getBrcBottom</H3>
+<PRE>
+public <A HREF="../../../../../org/apache/poi/hwpf/usermodel/BorderCode.html" title="class in org.apache.poi.hwpf.usermodel">BorderCode</A> <B>getBrcBottom</B>()</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getBrcLeft()"><!-- --></A><H3>
+getBrcLeft</H3>
+<PRE>
+public <A HREF="../../../../../org/apache/poi/hwpf/usermodel/BorderCode.html" title="class in org.apache.poi.hwpf.usermodel">BorderCode</A> <B>getBrcLeft</B>()</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getBrcRight()"><!-- --></A><H3>
+getBrcRight</H3>
+<PRE>
+public <A HREF="../../../../../org/apache/poi/hwpf/usermodel/BorderCode.html" title="class in org.apache.poi.hwpf.usermodel">BorderCode</A> <B>getBrcRight</B>()</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getLeftEdge()"><!-- --></A><H3>
+getLeftEdge</H3>
+<PRE>
+public int <B>getLeftEdge</B>()</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getWidth()"><!-- --></A><H3>
+getWidth</H3>
+<PRE>
+public int <B>getWidth</B>()</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getDescriptor()"><!-- --></A><H3>
+getDescriptor</H3>
+<PRE>
+public <A HREF="../../../../../org/apache/poi/hwpf/usermodel/TableCellDescriptor.html" title="class in org.apache.poi.hwpf.usermodel">TableCellDescriptor</A> <B>getDescriptor</B>()</PRE>
+<DL>
+<DD>Returns the TableCellDescriptor for this cell.
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<!-- ========= END OF CLASS DATA ========= -->
+<HR>
+
+
+<!-- ======= START OF BOTTOM NAVBAR ====== -->
+<A NAME="navbar_bottom"><!-- --></A>
+<A HREF="#skip-navbar_bottom" title="Skip navigation links"></A>
+<TABLE BORDER="0" WIDTH="100%" CELLPADDING="1" CELLSPACING="0" SUMMARY="">
+<TR>
+<TD COLSPAN=2 BGCOLOR="#EEEEFF" CLASS="NavBarCell1">
+<A NAME="navbar_bottom_firstrow"><!-- --></A>
+<TABLE BORDER="0" CELLPADDING="0" CELLSPACING="3" SUMMARY="">
+  <TR ALIGN="center" VALIGN="top">
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../overview-summary.html"><FONT CLASS="NavBarFont1"><B>Overview</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="package-summary.html"><FONT CLASS="NavBarFont1"><B>Package</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#FFFFFF" CLASS="NavBarCell1Rev"> &nbsp;<FONT CLASS="NavBarFont1Rev"><B>Class</B></FONT>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="class-use/TableCell.html"><FONT CLASS="NavBarFont1"><B>Use</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="package-tree.html"><FONT CLASS="NavBarFont1"><B>Tree</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../deprecated-list.html"><FONT CLASS="NavBarFont1"><B>Deprecated</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../index-all.html"><FONT CLASS="NavBarFont1"><B>Index</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../help-doc.html"><FONT CLASS="NavBarFont1"><B>Help</B></FONT></A>&nbsp;</TD>
+  </TR>
+</TABLE>
+</TD>
+<TD ALIGN="right" VALIGN="top" ROWSPAN=3><EM>
+</EM>
+</TD>
+</TR>
+
+<TR>
+<TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
+&nbsp;<A HREF="../../../../../org/apache/poi/hwpf/usermodel/TableAutoformatLookSpecifier.html" title="class in org.apache.poi.hwpf.usermodel"><B>PREV CLASS</B></A>&nbsp;
+&nbsp;<A HREF="../../../../../org/apache/poi/hwpf/usermodel/TableCellDescriptor.html" title="class in org.apache.poi.hwpf.usermodel"><B>NEXT CLASS</B></A></FONT></TD>
+<TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
+  <A HREF="../../../../../index.html?org/apache/poi/hwpf/usermodel/TableCell.html" target="_top"><B>FRAMES</B></A>  &nbsp;
+&nbsp;<A HREF="TableCell.html" target="_top"><B>NO FRAMES</B></A>  &nbsp;
+&nbsp;<SCRIPT type="text/javascript">
+  <!--
+  if(window==top) {
+    document.writeln('<A HREF="../../../../../allclasses-noframe.html"><B>All Classes</B></A>');
+  }
+  //-->
+</SCRIPT>
+<NOSCRIPT>
+  <A HREF="../../../../../allclasses-noframe.html"><B>All Classes</B></A>
+</NOSCRIPT>
+
+
+</FONT></TD>
+</TR>
+<TR>
+<TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
+  SUMMARY:&nbsp;NESTED&nbsp;|&nbsp;<A HREF="#fields_inherited_from_class_org.apache.poi.hwpf.usermodel.Range">FIELD</A>&nbsp;|&nbsp;<A HREF="#constructor_summary">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_summary">METHOD</A></FONT></TD>
+<TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
+DETAIL:&nbsp;FIELD&nbsp;|&nbsp;<A HREF="#constructor_detail">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_detail">METHOD</A></FONT></TD>
+</TR>
+</TABLE>
+<A NAME="skip-navbar_bottom"></A>
+<!-- ======== END OF BOTTOM NAVBAR ======= -->
+
+<HR>
+
+                <i>Copyright 2014 The Apache Software Foundation or
+        its licensors, as applicable.</i>
+            
+</BODY>
+</HTML>

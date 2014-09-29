@@ -1,0 +1,499 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!--NewPage-->
+<HTML>
+<HEAD>
+<TITLE>
+ConditionalFormattingRule (POI API Documentation)
+</TITLE>
+
+<META NAME="keywords" CONTENT="org.apache.poi.ss.usermodel.ConditionalFormattingRule interface">
+
+<LINK REL ="stylesheet" TYPE="text/css" HREF="../../../../../stylesheet.css" TITLE="Style">
+
+<SCRIPT type="text/javascript">
+function windowTitle()
+{
+    parent.document.title="ConditionalFormattingRule (POI API Documentation)";
+}
+</SCRIPT>
+<NOSCRIPT>
+</NOSCRIPT>
+
+</HEAD>
+
+<BODY BGCOLOR="white" onload="windowTitle();">
+
+
+<!-- ========= START OF TOP NAVBAR ======= -->
+<A NAME="navbar_top"><!-- --></A>
+<A HREF="#skip-navbar_top" title="Skip navigation links"></A>
+<TABLE BORDER="0" WIDTH="100%" CELLPADDING="1" CELLSPACING="0" SUMMARY="">
+<TR>
+<TD COLSPAN=2 BGCOLOR="#EEEEFF" CLASS="NavBarCell1">
+<A NAME="navbar_top_firstrow"><!-- --></A>
+<TABLE BORDER="0" CELLPADDING="0" CELLSPACING="3" SUMMARY="">
+  <TR ALIGN="center" VALIGN="top">
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../overview-summary.html"><FONT CLASS="NavBarFont1"><B>Overview</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="package-summary.html"><FONT CLASS="NavBarFont1"><B>Package</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#FFFFFF" CLASS="NavBarCell1Rev"> &nbsp;<FONT CLASS="NavBarFont1Rev"><B>Class</B></FONT>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="class-use/ConditionalFormattingRule.html"><FONT CLASS="NavBarFont1"><B>Use</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="package-tree.html"><FONT CLASS="NavBarFont1"><B>Tree</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../deprecated-list.html"><FONT CLASS="NavBarFont1"><B>Deprecated</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../index-all.html"><FONT CLASS="NavBarFont1"><B>Index</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../help-doc.html"><FONT CLASS="NavBarFont1"><B>Help</B></FONT></A>&nbsp;</TD>
+  </TR>
+</TABLE>
+</TD>
+<TD ALIGN="right" VALIGN="top" ROWSPAN=3><EM>
+</EM>
+</TD>
+</TR>
+
+<TR>
+<TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
+&nbsp;<A HREF="../../../../../org/apache/poi/ss/usermodel/ConditionalFormatting.html" title="interface in org.apache.poi.ss.usermodel"><B>PREV CLASS</B></A>&nbsp;
+&nbsp;<A HREF="../../../../../org/apache/poi/ss/usermodel/CreationHelper.html" title="interface in org.apache.poi.ss.usermodel"><B>NEXT CLASS</B></A></FONT></TD>
+<TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
+  <A HREF="../../../../../index.html?org/apache/poi/ss/usermodel/ConditionalFormattingRule.html" target="_top"><B>FRAMES</B></A>  &nbsp;
+&nbsp;<A HREF="ConditionalFormattingRule.html" target="_top"><B>NO FRAMES</B></A>  &nbsp;
+&nbsp;<SCRIPT type="text/javascript">
+  <!--
+  if(window==top) {
+    document.writeln('<A HREF="../../../../../allclasses-noframe.html"><B>All Classes</B></A>');
+  }
+  //-->
+</SCRIPT>
+<NOSCRIPT>
+  <A HREF="../../../../../allclasses-noframe.html"><B>All Classes</B></A>
+</NOSCRIPT>
+
+
+</FONT></TD>
+</TR>
+<TR>
+<TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
+  SUMMARY:&nbsp;NESTED&nbsp;|&nbsp;<A HREF="#field_summary">FIELD</A>&nbsp;|&nbsp;CONSTR&nbsp;|&nbsp;<A HREF="#method_summary">METHOD</A></FONT></TD>
+<TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
+DETAIL:&nbsp;<A HREF="#field_detail">FIELD</A>&nbsp;|&nbsp;CONSTR&nbsp;|&nbsp;<A HREF="#method_detail">METHOD</A></FONT></TD>
+</TR>
+</TABLE>
+<A NAME="skip-navbar_top"></A>
+<!-- ========= END OF TOP NAVBAR ========= -->
+
+<HR>
+<!-- ======== START OF CLASS DATA ======== -->
+<H2>
+<FONT SIZE="-1">
+org.apache.poi.ss.usermodel</FONT>
+<BR>
+Interface ConditionalFormattingRule</H2>
+<DL>
+<DT><B>All Known Implementing Classes:</B> <DD><A HREF="../../../../../org/apache/poi/hssf/usermodel/HSSFConditionalFormattingRule.html" title="class in org.apache.poi.hssf.usermodel">HSSFConditionalFormattingRule</A>, <A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFConditionalFormattingRule.html" title="class in org.apache.poi.xssf.usermodel">XSSFConditionalFormattingRule</A></DD>
+</DL>
+<HR>
+<DL>
+<DT><PRE>public interface <B>ConditionalFormattingRule</B></DL>
+</PRE>
+
+<P>
+Represents a description of a conditional formatting rule
+<P>
+
+<P>
+<DL>
+<DT><B>Author:</B></DT>
+  <DD>Dmitriy Kumshayev, Yegor Kozlov</DD>
+</DL>
+<HR>
+
+<P>
+<!-- =========== FIELD SUMMARY =========== -->
+
+<A NAME="field_summary"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+<B>Field Summary</B></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;byte</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/ss/usermodel/ConditionalFormattingRule.html#CONDITION_TYPE_CELL_VALUE_IS">CONDITION_TYPE_CELL_VALUE_IS</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;This conditional formatting rule compares a cell value
+ to a formula calculated result, using an operator</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;byte</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/ss/usermodel/ConditionalFormattingRule.html#CONDITION_TYPE_FORMULA">CONDITION_TYPE_FORMULA</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;This conditional formatting rule contains a formula to evaluate.</TD>
+</TR>
+</TABLE>
+&nbsp;
+<!-- ========== METHOD SUMMARY =========== -->
+
+<A NAME="method_summary"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+<B>Method Summary</B></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../../../org/apache/poi/ss/usermodel/BorderFormatting.html" title="interface in org.apache.poi.ss.usermodel">BorderFormatting</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/ss/usermodel/ConditionalFormattingRule.html#createBorderFormatting()">createBorderFormatting</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Create a new border formatting structure if it does not exist,
+ otherwise just return existing object.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../../../org/apache/poi/ss/usermodel/FontFormatting.html" title="interface in org.apache.poi.ss.usermodel">FontFormatting</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/ss/usermodel/ConditionalFormattingRule.html#createFontFormatting()">createFontFormatting</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Create a new font formatting structure if it does not exist,
+ otherwise just return existing object.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../../../org/apache/poi/ss/usermodel/PatternFormatting.html" title="interface in org.apache.poi.ss.usermodel">PatternFormatting</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/ss/usermodel/ConditionalFormattingRule.html#createPatternFormatting()">createPatternFormatting</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Create a new pattern formatting structure if it does not exist,
+ otherwise just return existing object.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../../../org/apache/poi/ss/usermodel/BorderFormatting.html" title="interface in org.apache.poi.ss.usermodel">BorderFormatting</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/ss/usermodel/ConditionalFormattingRule.html#getBorderFormatting()">getBorderFormatting</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;byte</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/ss/usermodel/ConditionalFormattingRule.html#getComparisonOperation()">getComparisonOperation</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The comparison function used when the type of conditional formatting is set to
+ <A HREF="../../../../../org/apache/poi/ss/usermodel/ConditionalFormattingRule.html#CONDITION_TYPE_CELL_VALUE_IS"><CODE>CONDITION_TYPE_CELL_VALUE_IS</CODE></A></TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;byte</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/ss/usermodel/ConditionalFormattingRule.html#getConditionType()">getConditionType</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Type of conditional formatting rule.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../../../org/apache/poi/ss/usermodel/FontFormatting.html" title="interface in org.apache.poi.ss.usermodel">FontFormatting</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/ss/usermodel/ConditionalFormattingRule.html#getFontFormatting()">getFontFormatting</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;java.lang.String</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/ss/usermodel/ConditionalFormattingRule.html#getFormula1()">getFormula1</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The formula used to evaluate the first operand for the conditional formatting rule.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;java.lang.String</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/ss/usermodel/ConditionalFormattingRule.html#getFormula2()">getFormula2</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The formula used to evaluate the second operand of the comparison when
+ comparison type is  <A HREF="../../../../../org/apache/poi/ss/usermodel/ConditionalFormattingRule.html#CONDITION_TYPE_CELL_VALUE_IS"><CODE>CONDITION_TYPE_CELL_VALUE_IS</CODE></A> and operator
+ is either <A HREF="../../../../../org/apache/poi/ss/usermodel/ComparisonOperator.html#BETWEEN"><CODE>ComparisonOperator.BETWEEN</CODE></A> or <A HREF="../../../../../org/apache/poi/ss/usermodel/ComparisonOperator.html#NOT_BETWEEN"><CODE>ComparisonOperator.NOT_BETWEEN</CODE></A></TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../../../org/apache/poi/ss/usermodel/PatternFormatting.html" title="interface in org.apache.poi.ss.usermodel">PatternFormatting</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/ss/usermodel/ConditionalFormattingRule.html#getPatternFormatting()">getPatternFormatting</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+</TABLE>
+&nbsp;
+<P>
+
+<!-- ============ FIELD DETAIL =========== -->
+
+<A NAME="field_detail"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="1"><FONT SIZE="+2">
+<B>Field Detail</B></FONT></TH>
+</TR>
+</TABLE>
+
+<A NAME="CONDITION_TYPE_CELL_VALUE_IS"><!-- --></A><H3>
+CONDITION_TYPE_CELL_VALUE_IS</H3>
+<PRE>
+static final byte <B>CONDITION_TYPE_CELL_VALUE_IS</B></PRE>
+<DL>
+<DD>This conditional formatting rule compares a cell value
+ to a formula calculated result, using an operator
+<P>
+<DL>
+<DT><B>See Also:</B><DD><A HREF="../../../../../constant-values.html#org.apache.poi.ss.usermodel.ConditionalFormattingRule.CONDITION_TYPE_CELL_VALUE_IS">Constant Field Values</A></DL>
+</DL>
+<HR>
+
+<A NAME="CONDITION_TYPE_FORMULA"><!-- --></A><H3>
+CONDITION_TYPE_FORMULA</H3>
+<PRE>
+static final byte <B>CONDITION_TYPE_FORMULA</B></PRE>
+<DL>
+<DD>This conditional formatting rule contains a formula to evaluate.
+  When the formula result is true, the cell is highlighted.
+<P>
+<DL>
+<DT><B>See Also:</B><DD><A HREF="../../../../../constant-values.html#org.apache.poi.ss.usermodel.ConditionalFormattingRule.CONDITION_TYPE_FORMULA">Constant Field Values</A></DL>
+</DL>
+
+<!-- ============ METHOD DETAIL ========== -->
+
+<A NAME="method_detail"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="1"><FONT SIZE="+2">
+<B>Method Detail</B></FONT></TH>
+</TR>
+</TABLE>
+
+<A NAME="createBorderFormatting()"><!-- --></A><H3>
+createBorderFormatting</H3>
+<PRE>
+<A HREF="../../../../../org/apache/poi/ss/usermodel/BorderFormatting.html" title="interface in org.apache.poi.ss.usermodel">BorderFormatting</A> <B>createBorderFormatting</B>()</PRE>
+<DL>
+<DD>Create a new border formatting structure if it does not exist,
+ otherwise just return existing object.
+<P>
+<DD><DL>
+
+<DT><B>Returns:</B><DD>- border formatting object, never returns <code>null</code>.</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getBorderFormatting()"><!-- --></A><H3>
+getBorderFormatting</H3>
+<PRE>
+<A HREF="../../../../../org/apache/poi/ss/usermodel/BorderFormatting.html" title="interface in org.apache.poi.ss.usermodel">BorderFormatting</A> <B>getBorderFormatting</B>()</PRE>
+<DL>
+<DD><DL>
+
+<DT><B>Returns:</B><DD>- border formatting object  if defined,  <code>null</code> otherwise</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="createFontFormatting()"><!-- --></A><H3>
+createFontFormatting</H3>
+<PRE>
+<A HREF="../../../../../org/apache/poi/ss/usermodel/FontFormatting.html" title="interface in org.apache.poi.ss.usermodel">FontFormatting</A> <B>createFontFormatting</B>()</PRE>
+<DL>
+<DD>Create a new font formatting structure if it does not exist,
+ otherwise just return existing object.
+<P>
+<DD><DL>
+
+<DT><B>Returns:</B><DD>- font formatting object, never returns <code>null</code>.</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getFontFormatting()"><!-- --></A><H3>
+getFontFormatting</H3>
+<PRE>
+<A HREF="../../../../../org/apache/poi/ss/usermodel/FontFormatting.html" title="interface in org.apache.poi.ss.usermodel">FontFormatting</A> <B>getFontFormatting</B>()</PRE>
+<DL>
+<DD><DL>
+
+<DT><B>Returns:</B><DD>- font formatting object  if defined,  <code>null</code> otherwise</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="createPatternFormatting()"><!-- --></A><H3>
+createPatternFormatting</H3>
+<PRE>
+<A HREF="../../../../../org/apache/poi/ss/usermodel/PatternFormatting.html" title="interface in org.apache.poi.ss.usermodel">PatternFormatting</A> <B>createPatternFormatting</B>()</PRE>
+<DL>
+<DD>Create a new pattern formatting structure if it does not exist,
+ otherwise just return existing object.
+<P>
+<DD><DL>
+
+<DT><B>Returns:</B><DD>- pattern formatting object, never returns <code>null</code>.</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getPatternFormatting()"><!-- --></A><H3>
+getPatternFormatting</H3>
+<PRE>
+<A HREF="../../../../../org/apache/poi/ss/usermodel/PatternFormatting.html" title="interface in org.apache.poi.ss.usermodel">PatternFormatting</A> <B>getPatternFormatting</B>()</PRE>
+<DL>
+<DD><DL>
+
+<DT><B>Returns:</B><DD>- pattern formatting object  if defined,  <code>null</code> otherwise</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getConditionType()"><!-- --></A><H3>
+getConditionType</H3>
+<PRE>
+byte <B>getConditionType</B>()</PRE>
+<DL>
+<DD>Type of conditional formatting rule.
+ <p>
+ MUST be either <A HREF="../../../../../org/apache/poi/ss/usermodel/ConditionalFormattingRule.html#CONDITION_TYPE_CELL_VALUE_IS"><CODE>CONDITION_TYPE_CELL_VALUE_IS</CODE></A> or  <A HREF="../../../../../org/apache/poi/ss/usermodel/ConditionalFormattingRule.html#CONDITION_TYPE_FORMULA"><CODE>CONDITION_TYPE_FORMULA</CODE></A>
+ </p>
+<P>
+<DD><DL>
+
+<DT><B>Returns:</B><DD>the type of condition</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getComparisonOperation()"><!-- --></A><H3>
+getComparisonOperation</H3>
+<PRE>
+byte <B>getComparisonOperation</B>()</PRE>
+<DL>
+<DD>The comparison function used when the type of conditional formatting is set to
+ <A HREF="../../../../../org/apache/poi/ss/usermodel/ConditionalFormattingRule.html#CONDITION_TYPE_CELL_VALUE_IS"><CODE>CONDITION_TYPE_CELL_VALUE_IS</CODE></A>
+ <p>
+     MUST be a constant from <A HREF="../../../../../org/apache/poi/ss/usermodel/ComparisonOperator.html" title="class in org.apache.poi.ss.usermodel"><CODE>ComparisonOperator</CODE></A>
+ </p>
+<P>
+<DD><DL>
+
+<DT><B>Returns:</B><DD>the conditional format operator</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getFormula1()"><!-- --></A><H3>
+getFormula1</H3>
+<PRE>
+java.lang.String <B>getFormula1</B>()</PRE>
+<DL>
+<DD>The formula used to evaluate the first operand for the conditional formatting rule.
+ <p>
+ If the condition type is <A HREF="../../../../../org/apache/poi/ss/usermodel/ConditionalFormattingRule.html#CONDITION_TYPE_CELL_VALUE_IS"><CODE>CONDITION_TYPE_CELL_VALUE_IS</CODE></A>,
+ this field is the first operand of the comparison.
+ If type is <A HREF="../../../../../org/apache/poi/ss/usermodel/ConditionalFormattingRule.html#CONDITION_TYPE_FORMULA"><CODE>CONDITION_TYPE_FORMULA</CODE></A>, this formula is used
+ to determine if the conditional formatting is applied.
+ </p>
+ <p>
+ If comparison type is <A HREF="../../../../../org/apache/poi/ss/usermodel/ConditionalFormattingRule.html#CONDITION_TYPE_FORMULA"><CODE>CONDITION_TYPE_FORMULA</CODE></A> the formula MUST be a Boolean function
+ </p>
+<P>
+<DD><DL>
+
+<DT><B>Returns:</B><DD>the first formula</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getFormula2()"><!-- --></A><H3>
+getFormula2</H3>
+<PRE>
+java.lang.String <B>getFormula2</B>()</PRE>
+<DL>
+<DD>The formula used to evaluate the second operand of the comparison when
+ comparison type is  <A HREF="../../../../../org/apache/poi/ss/usermodel/ConditionalFormattingRule.html#CONDITION_TYPE_CELL_VALUE_IS"><CODE>CONDITION_TYPE_CELL_VALUE_IS</CODE></A> and operator
+ is either <A HREF="../../../../../org/apache/poi/ss/usermodel/ComparisonOperator.html#BETWEEN"><CODE>ComparisonOperator.BETWEEN</CODE></A> or <A HREF="../../../../../org/apache/poi/ss/usermodel/ComparisonOperator.html#NOT_BETWEEN"><CODE>ComparisonOperator.NOT_BETWEEN</CODE></A>
+<P>
+<DD><DL>
+
+<DT><B>Returns:</B><DD>the second formula</DL>
+</DD>
+</DL>
+<!-- ========= END OF CLASS DATA ========= -->
+<HR>
+
+
+<!-- ======= START OF BOTTOM NAVBAR ====== -->
+<A NAME="navbar_bottom"><!-- --></A>
+<A HREF="#skip-navbar_bottom" title="Skip navigation links"></A>
+<TABLE BORDER="0" WIDTH="100%" CELLPADDING="1" CELLSPACING="0" SUMMARY="">
+<TR>
+<TD COLSPAN=2 BGCOLOR="#EEEEFF" CLASS="NavBarCell1">
+<A NAME="navbar_bottom_firstrow"><!-- --></A>
+<TABLE BORDER="0" CELLPADDING="0" CELLSPACING="3" SUMMARY="">
+  <TR ALIGN="center" VALIGN="top">
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../overview-summary.html"><FONT CLASS="NavBarFont1"><B>Overview</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="package-summary.html"><FONT CLASS="NavBarFont1"><B>Package</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#FFFFFF" CLASS="NavBarCell1Rev"> &nbsp;<FONT CLASS="NavBarFont1Rev"><B>Class</B></FONT>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="class-use/ConditionalFormattingRule.html"><FONT CLASS="NavBarFont1"><B>Use</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="package-tree.html"><FONT CLASS="NavBarFont1"><B>Tree</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../deprecated-list.html"><FONT CLASS="NavBarFont1"><B>Deprecated</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../index-all.html"><FONT CLASS="NavBarFont1"><B>Index</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../help-doc.html"><FONT CLASS="NavBarFont1"><B>Help</B></FONT></A>&nbsp;</TD>
+  </TR>
+</TABLE>
+</TD>
+<TD ALIGN="right" VALIGN="top" ROWSPAN=3><EM>
+</EM>
+</TD>
+</TR>
+
+<TR>
+<TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
+&nbsp;<A HREF="../../../../../org/apache/poi/ss/usermodel/ConditionalFormatting.html" title="interface in org.apache.poi.ss.usermodel"><B>PREV CLASS</B></A>&nbsp;
+&nbsp;<A HREF="../../../../../org/apache/poi/ss/usermodel/CreationHelper.html" title="interface in org.apache.poi.ss.usermodel"><B>NEXT CLASS</B></A></FONT></TD>
+<TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
+  <A HREF="../../../../../index.html?org/apache/poi/ss/usermodel/ConditionalFormattingRule.html" target="_top"><B>FRAMES</B></A>  &nbsp;
+&nbsp;<A HREF="ConditionalFormattingRule.html" target="_top"><B>NO FRAMES</B></A>  &nbsp;
+&nbsp;<SCRIPT type="text/javascript">
+  <!--
+  if(window==top) {
+    document.writeln('<A HREF="../../../../../allclasses-noframe.html"><B>All Classes</B></A>');
+  }
+  //-->
+</SCRIPT>
+<NOSCRIPT>
+  <A HREF="../../../../../allclasses-noframe.html"><B>All Classes</B></A>
+</NOSCRIPT>
+
+
+</FONT></TD>
+</TR>
+<TR>
+<TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
+  SUMMARY:&nbsp;NESTED&nbsp;|&nbsp;<A HREF="#field_summary">FIELD</A>&nbsp;|&nbsp;CONSTR&nbsp;|&nbsp;<A HREF="#method_summary">METHOD</A></FONT></TD>
+<TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
+DETAIL:&nbsp;<A HREF="#field_detail">FIELD</A>&nbsp;|&nbsp;CONSTR&nbsp;|&nbsp;<A HREF="#method_detail">METHOD</A></FONT></TD>
+</TR>
+</TABLE>
+<A NAME="skip-navbar_bottom"></A>
+<!-- ======== END OF BOTTOM NAVBAR ======= -->
+
+<HR>
+
+                <i>Copyright 2014 The Apache Software Foundation or
+        its licensors, as applicable.</i>
+            
+</BODY>
+</HTML>

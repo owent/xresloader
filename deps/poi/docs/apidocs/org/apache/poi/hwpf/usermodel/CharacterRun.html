@@ -1,0 +1,2820 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!--NewPage-->
+<HTML>
+<HEAD>
+<TITLE>
+CharacterRun (POI API Documentation)
+</TITLE>
+
+<META NAME="keywords" CONTENT="org.apache.poi.hwpf.usermodel.CharacterRun class">
+
+<LINK REL ="stylesheet" TYPE="text/css" HREF="../../../../../stylesheet.css" TITLE="Style">
+
+<SCRIPT type="text/javascript">
+function windowTitle()
+{
+    parent.document.title="CharacterRun (POI API Documentation)";
+}
+</SCRIPT>
+<NOSCRIPT>
+</NOSCRIPT>
+
+</HEAD>
+
+<BODY BGCOLOR="white" onload="windowTitle();">
+
+
+<!-- ========= START OF TOP NAVBAR ======= -->
+<A NAME="navbar_top"><!-- --></A>
+<A HREF="#skip-navbar_top" title="Skip navigation links"></A>
+<TABLE BORDER="0" WIDTH="100%" CELLPADDING="1" CELLSPACING="0" SUMMARY="">
+<TR>
+<TD COLSPAN=2 BGCOLOR="#EEEEFF" CLASS="NavBarCell1">
+<A NAME="navbar_top_firstrow"><!-- --></A>
+<TABLE BORDER="0" CELLPADDING="0" CELLSPACING="3" SUMMARY="">
+  <TR ALIGN="center" VALIGN="top">
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../overview-summary.html"><FONT CLASS="NavBarFont1"><B>Overview</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="package-summary.html"><FONT CLASS="NavBarFont1"><B>Package</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#FFFFFF" CLASS="NavBarCell1Rev"> &nbsp;<FONT CLASS="NavBarFont1Rev"><B>Class</B></FONT>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="class-use/CharacterRun.html"><FONT CLASS="NavBarFont1"><B>Use</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="package-tree.html"><FONT CLASS="NavBarFont1"><B>Tree</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../deprecated-list.html"><FONT CLASS="NavBarFont1"><B>Deprecated</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../index-all.html"><FONT CLASS="NavBarFont1"><B>Index</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../help-doc.html"><FONT CLASS="NavBarFont1"><B>Help</B></FONT></A>&nbsp;</TD>
+  </TR>
+</TABLE>
+</TD>
+<TD ALIGN="right" VALIGN="top" ROWSPAN=3><EM>
+</EM>
+</TD>
+</TR>
+
+<TR>
+<TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
+&nbsp;<A HREF="../../../../../org/apache/poi/hwpf/usermodel/CharacterProperties.html" title="class in org.apache.poi.hwpf.usermodel"><B>PREV CLASS</B></A>&nbsp;
+&nbsp;<A HREF="../../../../../org/apache/poi/hwpf/usermodel/DateAndTime.html" title="class in org.apache.poi.hwpf.usermodel"><B>NEXT CLASS</B></A></FONT></TD>
+<TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
+  <A HREF="../../../../../index.html?org/apache/poi/hwpf/usermodel/CharacterRun.html" target="_top"><B>FRAMES</B></A>  &nbsp;
+&nbsp;<A HREF="CharacterRun.html" target="_top"><B>NO FRAMES</B></A>  &nbsp;
+&nbsp;<SCRIPT type="text/javascript">
+  <!--
+  if(window==top) {
+    document.writeln('<A HREF="../../../../../allclasses-noframe.html"><B>All Classes</B></A>');
+  }
+  //-->
+</SCRIPT>
+<NOSCRIPT>
+  <A HREF="../../../../../allclasses-noframe.html"><B>All Classes</B></A>
+</NOSCRIPT>
+
+
+</FONT></TD>
+</TR>
+<TR>
+<TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
+  SUMMARY:&nbsp;NESTED&nbsp;|&nbsp;<A HREF="#field_summary">FIELD</A>&nbsp;|&nbsp;CONSTR&nbsp;|&nbsp;<A HREF="#method_summary">METHOD</A></FONT></TD>
+<TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
+DETAIL:&nbsp;<A HREF="#field_detail">FIELD</A>&nbsp;|&nbsp;CONSTR&nbsp;|&nbsp;<A HREF="#method_detail">METHOD</A></FONT></TD>
+</TR>
+</TABLE>
+<A NAME="skip-navbar_top"></A>
+<!-- ========= END OF TOP NAVBAR ========= -->
+
+<HR>
+<!-- ======== START OF CLASS DATA ======== -->
+<H2>
+<FONT SIZE="-1">
+org.apache.poi.hwpf.usermodel</FONT>
+<BR>
+Class CharacterRun</H2>
+<PRE>
+java.lang.Object
+  <IMG SRC="../../../../../resources/inherit.gif" ALT="extended by "><A HREF="../../../../../org/apache/poi/hwpf/usermodel/Range.html" title="class in org.apache.poi.hwpf.usermodel">org.apache.poi.hwpf.usermodel.Range</A>
+      <IMG SRC="../../../../../resources/inherit.gif" ALT="extended by "><B>org.apache.poi.hwpf.usermodel.CharacterRun</B>
+</PRE>
+<DL>
+<DT><B>All Implemented Interfaces:</B> <DD>java.lang.Cloneable</DD>
+</DL>
+<HR>
+<DL>
+<DT><PRE>public final class <B>CharacterRun</B><DT>extends <A HREF="../../../../../org/apache/poi/hwpf/usermodel/Range.html" title="class in org.apache.poi.hwpf.usermodel">Range</A><DT>implements java.lang.Cloneable</DL>
+</PRE>
+
+<P>
+This class represents a run of text that share common properties.
+<P>
+
+<P>
+<DL>
+<DT><B>Author:</B></DT>
+  <DD>Ryan Ackley</DD>
+</DL>
+<HR>
+
+<P>
+<!-- =========== FIELD SUMMARY =========== -->
+
+<A NAME="field_summary"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+<B>Field Summary</B></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;short</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/usermodel/CharacterRun.html#SPRM_BRC">SPRM_BRC</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;short</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/usermodel/CharacterRun.html#SPRM_CHARSCALE">SPRM_CHARSCALE</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;short</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/usermodel/CharacterRun.html#SPRM_CPG">SPRM_CPG</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;short</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/usermodel/CharacterRun.html#SPRM_DISPFLDRMARK">SPRM_DISPFLDRMARK</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;short</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/usermodel/CharacterRun.html#SPRM_DTTMRMARK">SPRM_DTTMRMARK</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;short</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/usermodel/CharacterRun.html#SPRM_DTTMRMARKDEL">SPRM_DTTMRMARKDEL</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;short</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/usermodel/CharacterRun.html#SPRM_DXASPACE">SPRM_DXASPACE</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;short</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/usermodel/CharacterRun.html#SPRM_FBOLD">SPRM_FBOLD</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;short</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/usermodel/CharacterRun.html#SPRM_FCAPS">SPRM_FCAPS</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;short</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/usermodel/CharacterRun.html#SPRM_FDATA">SPRM_FDATA</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;short</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/usermodel/CharacterRun.html#SPRM_FDSTRIKE">SPRM_FDSTRIKE</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;short</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/usermodel/CharacterRun.html#SPRM_FELID">SPRM_FELID</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;short</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/usermodel/CharacterRun.html#SPRM_FEMBOSS">SPRM_FEMBOSS</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;short</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/usermodel/CharacterRun.html#SPRM_FFLDVANISH">SPRM_FFLDVANISH</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;short</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/usermodel/CharacterRun.html#SPRM_FIMPRINT">SPRM_FIMPRINT</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;short</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/usermodel/CharacterRun.html#SPRM_FITALIC">SPRM_FITALIC</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;short</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/usermodel/CharacterRun.html#SPRM_FOBJ">SPRM_FOBJ</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;short</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/usermodel/CharacterRun.html#SPRM_FOLE2">SPRM_FOLE2</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;short</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/usermodel/CharacterRun.html#SPRM_FOUTLINE">SPRM_FOUTLINE</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;short</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/usermodel/CharacterRun.html#SPRM_FRMARK">SPRM_FRMARK</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;short</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/usermodel/CharacterRun.html#SPRM_FRMARKDEL">SPRM_FRMARKDEL</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;short</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/usermodel/CharacterRun.html#SPRM_FSHADOW">SPRM_FSHADOW</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;short</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/usermodel/CharacterRun.html#SPRM_FSMALLCAPS">SPRM_FSMALLCAPS</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;short</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/usermodel/CharacterRun.html#SPRM_FSPEC">SPRM_FSPEC</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;short</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/usermodel/CharacterRun.html#SPRM_FSTRIKE">SPRM_FSTRIKE</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;short</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/usermodel/CharacterRun.html#SPRM_FVANISH">SPRM_FVANISH</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;short</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/usermodel/CharacterRun.html#SPRM_HIGHLIGHT">SPRM_HIGHLIGHT</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;short</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/usermodel/CharacterRun.html#SPRM_HPS">SPRM_HPS</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;short</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/usermodel/CharacterRun.html#SPRM_HPSKERN">SPRM_HPSKERN</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;short</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/usermodel/CharacterRun.html#SPRM_HPSPOS">SPRM_HPSPOS</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;short</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/usermodel/CharacterRun.html#SPRM_IBSTRMARK">SPRM_IBSTRMARK</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;short</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/usermodel/CharacterRun.html#SPRM_IBSTRMARKDEL">SPRM_IBSTRMARKDEL</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;short</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/usermodel/CharacterRun.html#SPRM_ICO">SPRM_ICO</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;short</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/usermodel/CharacterRun.html#SPRM_IDCTHINT">SPRM_IDCTHINT</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;short</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/usermodel/CharacterRun.html#SPRM_IDSIRMARKDEL">SPRM_IDSIRMARKDEL</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;short</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/usermodel/CharacterRun.html#SPRM_ISS">SPRM_ISS</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;short</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/usermodel/CharacterRun.html#SPRM_ISTD">SPRM_ISTD</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;short</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/usermodel/CharacterRun.html#SPRM_KUL">SPRM_KUL</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;short</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/usermodel/CharacterRun.html#SPRM_LID">SPRM_LID</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;short</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/usermodel/CharacterRun.html#SPRM_NONFELID">SPRM_NONFELID</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;short</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/usermodel/CharacterRun.html#SPRM_OBJLOCATION">SPRM_OBJLOCATION</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;short</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/usermodel/CharacterRun.html#SPRM_PICLOCATION">SPRM_PICLOCATION</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;short</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/usermodel/CharacterRun.html#SPRM_PROPRMARK">SPRM_PROPRMARK</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;short</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/usermodel/CharacterRun.html#SPRM_RGFTCASCII">SPRM_RGFTCASCII</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;short</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/usermodel/CharacterRun.html#SPRM_RGFTCFAREAST">SPRM_RGFTCFAREAST</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;short</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/usermodel/CharacterRun.html#SPRM_RGFTCNOTFAREAST">SPRM_RGFTCNOTFAREAST</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;short</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/usermodel/CharacterRun.html#SPRM_SFXTEXT">SPRM_SFXTEXT</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;short</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/usermodel/CharacterRun.html#SPRM_SHD">SPRM_SHD</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;short</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/usermodel/CharacterRun.html#SPRM_SYMBOL">SPRM_SYMBOL</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;short</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/usermodel/CharacterRun.html#SPRM_YSRI">SPRM_YSRI</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+</TABLE>
+&nbsp;<A NAME="fields_inherited_from_class_org.apache.poi.hwpf.usermodel.Range"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#EEEEFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left"><B>Fields inherited from class org.apache.poi.hwpf.usermodel.<A HREF="../../../../../org/apache/poi/hwpf/usermodel/Range.html" title="class in org.apache.poi.hwpf.usermodel">Range</A></B></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><A HREF="../../../../../org/apache/poi/hwpf/usermodel/Range.html#_characters">_characters</A>, <A HREF="../../../../../org/apache/poi/hwpf/usermodel/Range.html#_charEnd">_charEnd</A>, <A HREF="../../../../../org/apache/poi/hwpf/usermodel/Range.html#_charRangeFound">_charRangeFound</A>, <A HREF="../../../../../org/apache/poi/hwpf/usermodel/Range.html#_charStart">_charStart</A>, <A HREF="../../../../../org/apache/poi/hwpf/usermodel/Range.html#_doc">_doc</A>, <A HREF="../../../../../org/apache/poi/hwpf/usermodel/Range.html#_end">_end</A>, <A HREF="../../../../../org/apache/poi/hwpf/usermodel/Range.html#_paragraphs">_paragraphs</A>, <A HREF="../../../../../org/apache/poi/hwpf/usermodel/Range.html#_parEnd">_parEnd</A>, <A HREF="../../../../../org/apache/poi/hwpf/usermodel/Range.html#_parRangeFound">_parRangeFound</A>, <A HREF="../../../../../org/apache/poi/hwpf/usermodel/Range.html#_parStart">_parStart</A>, <A HREF="../../../../../org/apache/poi/hwpf/usermodel/Range.html#_sectionEnd">_sectionEnd</A>, <A HREF="../../../../../org/apache/poi/hwpf/usermodel/Range.html#_sections">_sections</A>, <A HREF="../../../../../org/apache/poi/hwpf/usermodel/Range.html#_sectionStart">_sectionStart</A>, <A HREF="../../../../../org/apache/poi/hwpf/usermodel/Range.html#_start">_start</A>, <A HREF="../../../../../org/apache/poi/hwpf/usermodel/Range.html#_text">_text</A>, <A HREF="../../../../../org/apache/poi/hwpf/usermodel/Range.html#TYPE_CHARACTER">TYPE_CHARACTER</A>, <A HREF="../../../../../org/apache/poi/hwpf/usermodel/Range.html#TYPE_LISTENTRY">TYPE_LISTENTRY</A>, <A HREF="../../../../../org/apache/poi/hwpf/usermodel/Range.html#TYPE_PARAGRAPH">TYPE_PARAGRAPH</A>, <A HREF="../../../../../org/apache/poi/hwpf/usermodel/Range.html#TYPE_SECTION">TYPE_SECTION</A>, <A HREF="../../../../../org/apache/poi/hwpf/usermodel/Range.html#TYPE_TABLE">TYPE_TABLE</A>, <A HREF="../../../../../org/apache/poi/hwpf/usermodel/Range.html#TYPE_TEXT">TYPE_TEXT</A>, <A HREF="../../../../../org/apache/poi/hwpf/usermodel/Range.html#TYPE_UNDEFINED">TYPE_UNDEFINED</A></CODE></TD>
+</TR>
+</TABLE>
+&nbsp;
+<!-- ========== METHOD SUMMARY =========== -->
+
+<A NAME="method_summary"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+<B>Method Summary</B></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;java.lang.Object</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/usermodel/CharacterRun.html#clone()">clone</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Used to create a deep copy of this object.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../../../org/apache/poi/hwpf/usermodel/CharacterProperties.html" title="class in org.apache.poi.hwpf.usermodel">CharacterProperties</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/usermodel/CharacterRun.html#cloneProperties()">cloneProperties</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;<I>This method shall not be public and should not be called from
+             high-level code</I></TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../../../org/apache/poi/hwpf/usermodel/BorderCode.html" title="class in org.apache.poi.hwpf.usermodel">BorderCode</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/usermodel/CharacterRun.html#getBorder()">getBorder</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;int</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/usermodel/CharacterRun.html#getCharacterSpacing()">getCharacterSpacing</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;int</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/usermodel/CharacterRun.html#getColor()">getColor</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;java.lang.Integer</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/usermodel/CharacterRun.html#getDropDownListDefaultItemIndex()">getDropDownListDefaultItemIndex</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;java.lang.String[]</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/usermodel/CharacterRun.html#getDropDownListValues()">getDropDownListValues</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;java.lang.String</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/usermodel/CharacterRun.html#getFontName()">getFontName</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;int</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/usermodel/CharacterRun.html#getFontSize()">getFontSize</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;byte</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/usermodel/CharacterRun.html#getHighlightedColor()">getHighlightedColor</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;int</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/usermodel/CharacterRun.html#getIco24()">getIco24</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Get the ico24 field for the CHP record.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;int</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/usermodel/CharacterRun.html#getKerning()">getKerning</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;int</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/usermodel/CharacterRun.html#getLanguageCode()">getLanguageCode</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;int</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/usermodel/CharacterRun.html#getObjOffset()">getObjOffset</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;int</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/usermodel/CharacterRun.html#getPicOffset()">getPicOffset</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;short</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/usermodel/CharacterRun.html#getSubSuperScriptIndex()">getSubSuperScriptIndex</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;char</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/usermodel/CharacterRun.html#getSymbolCharacter()">getSymbolCharacter</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns the symbol character, if this is a symbol character run.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../../../org/apache/poi/hwpf/model/Ffn.html" title="class in org.apache.poi.hwpf.model">Ffn</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/usermodel/CharacterRun.html#getSymbolFont()">getSymbolFont</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns the symbol font, if this is a symbol character run.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;int</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/usermodel/CharacterRun.html#getUnderlineCode()">getUnderlineCode</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;int</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/usermodel/CharacterRun.html#getVerticalOffset()">getVerticalOffset</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/usermodel/CharacterRun.html#isBold()">isBold</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/usermodel/CharacterRun.html#isCapitalized()">isCapitalized</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/usermodel/CharacterRun.html#isData()">isData</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Does the picture offset represent picture
+  or binary data?
+ If it's set, then the picture offset refers to
+  a NilPICFAndBinData structure, otherwise to a
+  PICFAndOfficeArtData</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/usermodel/CharacterRun.html#isDoubleStrikeThrough()">isDoubleStrikeThrough</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/usermodel/CharacterRun.html#isEmbossed()">isEmbossed</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/usermodel/CharacterRun.html#isFldVanished()">isFldVanished</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/usermodel/CharacterRun.html#isHighlighted()">isHighlighted</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/usermodel/CharacterRun.html#isImprinted()">isImprinted</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/usermodel/CharacterRun.html#isItalic()">isItalic</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/usermodel/CharacterRun.html#isMarkedDeleted()">isMarkedDeleted</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/usermodel/CharacterRun.html#isMarkedInserted()">isMarkedInserted</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/usermodel/CharacterRun.html#isObj()">isObj</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/usermodel/CharacterRun.html#isOle2()">isOle2</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/usermodel/CharacterRun.html#isOutlined()">isOutlined</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/usermodel/CharacterRun.html#isShadowed()">isShadowed</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/usermodel/CharacterRun.html#isSmallCaps()">isSmallCaps</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/usermodel/CharacterRun.html#isSpecialCharacter()">isSpecialCharacter</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/usermodel/CharacterRun.html#isStrikeThrough()">isStrikeThrough</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/usermodel/CharacterRun.html#isSymbol()">isSymbol</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns true, if the CharacterRun is a special character run containing a symbol, otherwise false.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/usermodel/CharacterRun.html#isVanished()">isVanished</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/usermodel/CharacterRun.html#markDeleted(boolean)">markDeleted</A></B>(boolean&nbsp;mark)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/usermodel/CharacterRun.html#markInserted(boolean)">markInserted</A></B>(boolean&nbsp;mark)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/usermodel/CharacterRun.html#setBold(boolean)">setBold</A></B>(boolean&nbsp;bold)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/usermodel/CharacterRun.html#setCapitalized(boolean)">setCapitalized</A></B>(boolean&nbsp;caps)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/usermodel/CharacterRun.html#setCharacterSpacing(int)">setCharacterSpacing</A></B>(int&nbsp;twips)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/usermodel/CharacterRun.html#setColor(int)">setColor</A></B>(int&nbsp;color)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/usermodel/CharacterRun.html#setData(boolean)">setData</A></B>(boolean&nbsp;data)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/usermodel/CharacterRun.html#setDoubleStrikethrough(boolean)">setDoubleStrikethrough</A></B>(boolean&nbsp;dstrike)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/usermodel/CharacterRun.html#setEmbossed(boolean)">setEmbossed</A></B>(boolean&nbsp;emboss)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/usermodel/CharacterRun.html#setFldVanish(boolean)">setFldVanish</A></B>(boolean&nbsp;fldVanish)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/usermodel/CharacterRun.html#setFontSize(int)">setFontSize</A></B>(int&nbsp;halfPoints)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/usermodel/CharacterRun.html#setFtcAscii(int)">setFtcAscii</A></B>(int&nbsp;ftcAscii)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/usermodel/CharacterRun.html#setFtcFE(int)">setFtcFE</A></B>(int&nbsp;ftcFE)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/usermodel/CharacterRun.html#setFtcOther(int)">setFtcOther</A></B>(int&nbsp;ftcOther)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/usermodel/CharacterRun.html#setHighlighted(byte)">setHighlighted</A></B>(byte&nbsp;color)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/usermodel/CharacterRun.html#setIco24(int)">setIco24</A></B>(int&nbsp;colour24)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Set the ico24 field for the CHP record.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/usermodel/CharacterRun.html#setImprinted(boolean)">setImprinted</A></B>(boolean&nbsp;imprint)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/usermodel/CharacterRun.html#setItalic(boolean)">setItalic</A></B>(boolean&nbsp;italic)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/usermodel/CharacterRun.html#setKerning(int)">setKerning</A></B>(int&nbsp;kern)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/usermodel/CharacterRun.html#setObj(boolean)">setObj</A></B>(boolean&nbsp;obj)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/usermodel/CharacterRun.html#setObjOffset(int)">setObjOffset</A></B>(int&nbsp;obj)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/usermodel/CharacterRun.html#setOle2(boolean)">setOle2</A></B>(boolean&nbsp;ole)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/usermodel/CharacterRun.html#setOutline(boolean)">setOutline</A></B>(boolean&nbsp;outlined)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/usermodel/CharacterRun.html#setPicOffset(int)">setPicOffset</A></B>(int&nbsp;offset)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/usermodel/CharacterRun.html#setShadow(boolean)">setShadow</A></B>(boolean&nbsp;shadow)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/usermodel/CharacterRun.html#setSmallCaps(boolean)">setSmallCaps</A></B>(boolean&nbsp;smallCaps)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/usermodel/CharacterRun.html#setSpecialCharacter(boolean)">setSpecialCharacter</A></B>(boolean&nbsp;spec)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/usermodel/CharacterRun.html#setSubSuperScriptIndex(short)">setSubSuperScriptIndex</A></B>(short&nbsp;iss)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/usermodel/CharacterRun.html#setUnderlineCode(int)">setUnderlineCode</A></B>(int&nbsp;kul)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/usermodel/CharacterRun.html#setVanished(boolean)">setVanished</A></B>(boolean&nbsp;vanish)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/usermodel/CharacterRun.html#setVerticalOffset(int)">setVerticalOffset</A></B>(int&nbsp;hpsPos)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/usermodel/CharacterRun.html#strikeThrough(boolean)">strikeThrough</A></B>(boolean&nbsp;strike)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;java.lang.String</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/usermodel/CharacterRun.html#toString()">toString</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;int</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/usermodel/CharacterRun.html#type()">type</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Here for runtime type determination using a switch statement convenient.</TD>
+</TR>
+</TABLE>
+&nbsp;<A NAME="methods_inherited_from_class_org.apache.poi.hwpf.usermodel.Range"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#EEEEFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left"><B>Methods inherited from class org.apache.poi.hwpf.usermodel.<A HREF="../../../../../org/apache/poi/hwpf/usermodel/Range.html" title="class in org.apache.poi.hwpf.usermodel">Range</A></B></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><A HREF="../../../../../org/apache/poi/hwpf/usermodel/Range.html#adjustFIB(int)">adjustFIB</A>, <A HREF="../../../../../org/apache/poi/hwpf/usermodel/Range.html#delete()">delete</A>, <A HREF="../../../../../org/apache/poi/hwpf/usermodel/Range.html#getCharacterRun(int)">getCharacterRun</A>, <A HREF="../../../../../org/apache/poi/hwpf/usermodel/Range.html#getDocument()">getDocument</A>, <A HREF="../../../../../org/apache/poi/hwpf/usermodel/Range.html#getEndOffset()">getEndOffset</A>, <A HREF="../../../../../org/apache/poi/hwpf/usermodel/Range.html#getParagraph(int)">getParagraph</A>, <A HREF="../../../../../org/apache/poi/hwpf/usermodel/Range.html#getSection(int)">getSection</A>, <A HREF="../../../../../org/apache/poi/hwpf/usermodel/Range.html#getStartOffset()">getStartOffset</A>, <A HREF="../../../../../org/apache/poi/hwpf/usermodel/Range.html#getTable(org.apache.poi.hwpf.usermodel.Paragraph)">getTable</A>, <A HREF="../../../../../org/apache/poi/hwpf/usermodel/Range.html#initAll()">initAll</A>, <A HREF="../../../../../org/apache/poi/hwpf/usermodel/Range.html#insertAfter(org.apache.poi.hwpf.usermodel.ParagraphProperties, int)">insertAfter</A>, <A HREF="../../../../../org/apache/poi/hwpf/usermodel/Range.html#insertAfter(org.apache.poi.hwpf.usermodel.ParagraphProperties, int, int, int)">insertAfter</A>, <A HREF="../../../../../org/apache/poi/hwpf/usermodel/Range.html#insertAfter(org.apache.poi.hwpf.usermodel.ParagraphProperties, int, java.lang.String)">insertAfter</A>, <A HREF="../../../../../org/apache/poi/hwpf/usermodel/Range.html#insertAfter(java.lang.String)">insertAfter</A>, <A HREF="../../../../../org/apache/poi/hwpf/usermodel/Range.html#insertAfter(java.lang.String, org.apache.poi.hwpf.usermodel.CharacterProperties)">insertAfter</A>, <A HREF="../../../../../org/apache/poi/hwpf/usermodel/Range.html#insertBefore(org.apache.poi.hwpf.usermodel.ParagraphProperties, int)">insertBefore</A>, <A HREF="../../../../../org/apache/poi/hwpf/usermodel/Range.html#insertBefore(org.apache.poi.hwpf.usermodel.ParagraphProperties, int, int, int)">insertBefore</A>, <A HREF="../../../../../org/apache/poi/hwpf/usermodel/Range.html#insertBefore(org.apache.poi.hwpf.usermodel.ParagraphProperties, int, java.lang.String)">insertBefore</A>, <A HREF="../../../../../org/apache/poi/hwpf/usermodel/Range.html#insertBefore(java.lang.String)">insertBefore</A>, <A HREF="../../../../../org/apache/poi/hwpf/usermodel/Range.html#insertBefore(java.lang.String, org.apache.poi.hwpf.usermodel.CharacterProperties)">insertBefore</A>, <A HREF="../../../../../org/apache/poi/hwpf/usermodel/Range.html#insertBefore(org.apache.poi.hwpf.usermodel.TableProperties, int)">insertBefore</A>, <A HREF="../../../../../org/apache/poi/hwpf/usermodel/Range.html#insertTableBefore(short, int)">insertTableBefore</A>, <A HREF="../../../../../org/apache/poi/hwpf/usermodel/Range.html#numCharacterRuns()">numCharacterRuns</A>, <A HREF="../../../../../org/apache/poi/hwpf/usermodel/Range.html#numParagraphs()">numParagraphs</A>, <A HREF="../../../../../org/apache/poi/hwpf/usermodel/Range.html#numSections()">numSections</A>, <A HREF="../../../../../org/apache/poi/hwpf/usermodel/Range.html#replaceText(java.lang.String, boolean)">replaceText</A>, <A HREF="../../../../../org/apache/poi/hwpf/usermodel/Range.html#replaceText(java.lang.String, java.lang.String)">replaceText</A>, <A HREF="../../../../../org/apache/poi/hwpf/usermodel/Range.html#replaceText(java.lang.String, java.lang.String, int)">replaceText</A>, <A HREF="../../../../../org/apache/poi/hwpf/usermodel/Range.html#reset()">reset</A>, <A HREF="../../../../../org/apache/poi/hwpf/usermodel/Range.html#sanityCheck()">sanityCheck</A>, <A HREF="../../../../../org/apache/poi/hwpf/usermodel/Range.html#stripFields(java.lang.String)">stripFields</A>, <A HREF="../../../../../org/apache/poi/hwpf/usermodel/Range.html#text()">text</A>, <A HREF="../../../../../org/apache/poi/hwpf/usermodel/Range.html#usesUnicode()">usesUnicode</A></CODE></TD>
+</TR>
+</TABLE>
+&nbsp;<A NAME="methods_inherited_from_class_java.lang.Object"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#EEEEFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left"><B>Methods inherited from class java.lang.Object</B></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE>equals, finalize, getClass, hashCode, notify, notifyAll, wait, wait, wait</CODE></TD>
+</TR>
+</TABLE>
+&nbsp;
+<P>
+
+<!-- ============ FIELD DETAIL =========== -->
+
+<A NAME="field_detail"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="1"><FONT SIZE="+2">
+<B>Field Detail</B></FONT></TH>
+</TR>
+</TABLE>
+
+<A NAME="SPRM_FRMARKDEL"><!-- --></A><H3>
+SPRM_FRMARKDEL</H3>
+<PRE>
+public static final short <B>SPRM_FRMARKDEL</B></PRE>
+<DL>
+<DL>
+<DT><B>See Also:</B><DD><A HREF="../../../../../constant-values.html#org.apache.poi.hwpf.usermodel.CharacterRun.SPRM_FRMARKDEL">Constant Field Values</A></DL>
+</DL>
+<HR>
+
+<A NAME="SPRM_FRMARK"><!-- --></A><H3>
+SPRM_FRMARK</H3>
+<PRE>
+public static final short <B>SPRM_FRMARK</B></PRE>
+<DL>
+<DL>
+<DT><B>See Also:</B><DD><A HREF="../../../../../constant-values.html#org.apache.poi.hwpf.usermodel.CharacterRun.SPRM_FRMARK">Constant Field Values</A></DL>
+</DL>
+<HR>
+
+<A NAME="SPRM_FFLDVANISH"><!-- --></A><H3>
+SPRM_FFLDVANISH</H3>
+<PRE>
+public static final short <B>SPRM_FFLDVANISH</B></PRE>
+<DL>
+<DL>
+<DT><B>See Also:</B><DD><A HREF="../../../../../constant-values.html#org.apache.poi.hwpf.usermodel.CharacterRun.SPRM_FFLDVANISH">Constant Field Values</A></DL>
+</DL>
+<HR>
+
+<A NAME="SPRM_PICLOCATION"><!-- --></A><H3>
+SPRM_PICLOCATION</H3>
+<PRE>
+public static final short <B>SPRM_PICLOCATION</B></PRE>
+<DL>
+<DL>
+<DT><B>See Also:</B><DD><A HREF="../../../../../constant-values.html#org.apache.poi.hwpf.usermodel.CharacterRun.SPRM_PICLOCATION">Constant Field Values</A></DL>
+</DL>
+<HR>
+
+<A NAME="SPRM_IBSTRMARK"><!-- --></A><H3>
+SPRM_IBSTRMARK</H3>
+<PRE>
+public static final short <B>SPRM_IBSTRMARK</B></PRE>
+<DL>
+<DL>
+<DT><B>See Also:</B><DD><A HREF="../../../../../constant-values.html#org.apache.poi.hwpf.usermodel.CharacterRun.SPRM_IBSTRMARK">Constant Field Values</A></DL>
+</DL>
+<HR>
+
+<A NAME="SPRM_DTTMRMARK"><!-- --></A><H3>
+SPRM_DTTMRMARK</H3>
+<PRE>
+public static final short <B>SPRM_DTTMRMARK</B></PRE>
+<DL>
+<DL>
+<DT><B>See Also:</B><DD><A HREF="../../../../../constant-values.html#org.apache.poi.hwpf.usermodel.CharacterRun.SPRM_DTTMRMARK">Constant Field Values</A></DL>
+</DL>
+<HR>
+
+<A NAME="SPRM_FDATA"><!-- --></A><H3>
+SPRM_FDATA</H3>
+<PRE>
+public static final short <B>SPRM_FDATA</B></PRE>
+<DL>
+<DL>
+<DT><B>See Also:</B><DD><A HREF="../../../../../constant-values.html#org.apache.poi.hwpf.usermodel.CharacterRun.SPRM_FDATA">Constant Field Values</A></DL>
+</DL>
+<HR>
+
+<A NAME="SPRM_SYMBOL"><!-- --></A><H3>
+SPRM_SYMBOL</H3>
+<PRE>
+public static final short <B>SPRM_SYMBOL</B></PRE>
+<DL>
+<DL>
+<DT><B>See Also:</B><DD><A HREF="../../../../../constant-values.html#org.apache.poi.hwpf.usermodel.CharacterRun.SPRM_SYMBOL">Constant Field Values</A></DL>
+</DL>
+<HR>
+
+<A NAME="SPRM_FOLE2"><!-- --></A><H3>
+SPRM_FOLE2</H3>
+<PRE>
+public static final short <B>SPRM_FOLE2</B></PRE>
+<DL>
+<DL>
+<DT><B>See Also:</B><DD><A HREF="../../../../../constant-values.html#org.apache.poi.hwpf.usermodel.CharacterRun.SPRM_FOLE2">Constant Field Values</A></DL>
+</DL>
+<HR>
+
+<A NAME="SPRM_HIGHLIGHT"><!-- --></A><H3>
+SPRM_HIGHLIGHT</H3>
+<PRE>
+public static final short <B>SPRM_HIGHLIGHT</B></PRE>
+<DL>
+<DL>
+<DT><B>See Also:</B><DD><A HREF="../../../../../constant-values.html#org.apache.poi.hwpf.usermodel.CharacterRun.SPRM_HIGHLIGHT">Constant Field Values</A></DL>
+</DL>
+<HR>
+
+<A NAME="SPRM_OBJLOCATION"><!-- --></A><H3>
+SPRM_OBJLOCATION</H3>
+<PRE>
+public static final short <B>SPRM_OBJLOCATION</B></PRE>
+<DL>
+<DL>
+<DT><B>See Also:</B><DD><A HREF="../../../../../constant-values.html#org.apache.poi.hwpf.usermodel.CharacterRun.SPRM_OBJLOCATION">Constant Field Values</A></DL>
+</DL>
+<HR>
+
+<A NAME="SPRM_ISTD"><!-- --></A><H3>
+SPRM_ISTD</H3>
+<PRE>
+public static final short <B>SPRM_ISTD</B></PRE>
+<DL>
+<DL>
+<DT><B>See Also:</B><DD><A HREF="../../../../../constant-values.html#org.apache.poi.hwpf.usermodel.CharacterRun.SPRM_ISTD">Constant Field Values</A></DL>
+</DL>
+<HR>
+
+<A NAME="SPRM_FBOLD"><!-- --></A><H3>
+SPRM_FBOLD</H3>
+<PRE>
+public static final short <B>SPRM_FBOLD</B></PRE>
+<DL>
+<DL>
+<DT><B>See Also:</B><DD><A HREF="../../../../../constant-values.html#org.apache.poi.hwpf.usermodel.CharacterRun.SPRM_FBOLD">Constant Field Values</A></DL>
+</DL>
+<HR>
+
+<A NAME="SPRM_FITALIC"><!-- --></A><H3>
+SPRM_FITALIC</H3>
+<PRE>
+public static final short <B>SPRM_FITALIC</B></PRE>
+<DL>
+<DL>
+<DT><B>See Also:</B><DD><A HREF="../../../../../constant-values.html#org.apache.poi.hwpf.usermodel.CharacterRun.SPRM_FITALIC">Constant Field Values</A></DL>
+</DL>
+<HR>
+
+<A NAME="SPRM_FSTRIKE"><!-- --></A><H3>
+SPRM_FSTRIKE</H3>
+<PRE>
+public static final short <B>SPRM_FSTRIKE</B></PRE>
+<DL>
+<DL>
+<DT><B>See Also:</B><DD><A HREF="../../../../../constant-values.html#org.apache.poi.hwpf.usermodel.CharacterRun.SPRM_FSTRIKE">Constant Field Values</A></DL>
+</DL>
+<HR>
+
+<A NAME="SPRM_FOUTLINE"><!-- --></A><H3>
+SPRM_FOUTLINE</H3>
+<PRE>
+public static final short <B>SPRM_FOUTLINE</B></PRE>
+<DL>
+<DL>
+<DT><B>See Also:</B><DD><A HREF="../../../../../constant-values.html#org.apache.poi.hwpf.usermodel.CharacterRun.SPRM_FOUTLINE">Constant Field Values</A></DL>
+</DL>
+<HR>
+
+<A NAME="SPRM_FSHADOW"><!-- --></A><H3>
+SPRM_FSHADOW</H3>
+<PRE>
+public static final short <B>SPRM_FSHADOW</B></PRE>
+<DL>
+<DL>
+<DT><B>See Also:</B><DD><A HREF="../../../../../constant-values.html#org.apache.poi.hwpf.usermodel.CharacterRun.SPRM_FSHADOW">Constant Field Values</A></DL>
+</DL>
+<HR>
+
+<A NAME="SPRM_FSMALLCAPS"><!-- --></A><H3>
+SPRM_FSMALLCAPS</H3>
+<PRE>
+public static final short <B>SPRM_FSMALLCAPS</B></PRE>
+<DL>
+<DL>
+<DT><B>See Also:</B><DD><A HREF="../../../../../constant-values.html#org.apache.poi.hwpf.usermodel.CharacterRun.SPRM_FSMALLCAPS">Constant Field Values</A></DL>
+</DL>
+<HR>
+
+<A NAME="SPRM_FCAPS"><!-- --></A><H3>
+SPRM_FCAPS</H3>
+<PRE>
+public static final short <B>SPRM_FCAPS</B></PRE>
+<DL>
+<DL>
+<DT><B>See Also:</B><DD><A HREF="../../../../../constant-values.html#org.apache.poi.hwpf.usermodel.CharacterRun.SPRM_FCAPS">Constant Field Values</A></DL>
+</DL>
+<HR>
+
+<A NAME="SPRM_FVANISH"><!-- --></A><H3>
+SPRM_FVANISH</H3>
+<PRE>
+public static final short <B>SPRM_FVANISH</B></PRE>
+<DL>
+<DL>
+<DT><B>See Also:</B><DD><A HREF="../../../../../constant-values.html#org.apache.poi.hwpf.usermodel.CharacterRun.SPRM_FVANISH">Constant Field Values</A></DL>
+</DL>
+<HR>
+
+<A NAME="SPRM_KUL"><!-- --></A><H3>
+SPRM_KUL</H3>
+<PRE>
+public static final short <B>SPRM_KUL</B></PRE>
+<DL>
+<DL>
+<DT><B>See Also:</B><DD><A HREF="../../../../../constant-values.html#org.apache.poi.hwpf.usermodel.CharacterRun.SPRM_KUL">Constant Field Values</A></DL>
+</DL>
+<HR>
+
+<A NAME="SPRM_DXASPACE"><!-- --></A><H3>
+SPRM_DXASPACE</H3>
+<PRE>
+public static final short <B>SPRM_DXASPACE</B></PRE>
+<DL>
+<DL>
+<DT><B>See Also:</B><DD><A HREF="../../../../../constant-values.html#org.apache.poi.hwpf.usermodel.CharacterRun.SPRM_DXASPACE">Constant Field Values</A></DL>
+</DL>
+<HR>
+
+<A NAME="SPRM_LID"><!-- --></A><H3>
+SPRM_LID</H3>
+<PRE>
+public static final short <B>SPRM_LID</B></PRE>
+<DL>
+<DL>
+<DT><B>See Also:</B><DD><A HREF="../../../../../constant-values.html#org.apache.poi.hwpf.usermodel.CharacterRun.SPRM_LID">Constant Field Values</A></DL>
+</DL>
+<HR>
+
+<A NAME="SPRM_ICO"><!-- --></A><H3>
+SPRM_ICO</H3>
+<PRE>
+public static final short <B>SPRM_ICO</B></PRE>
+<DL>
+<DL>
+<DT><B>See Also:</B><DD><A HREF="../../../../../constant-values.html#org.apache.poi.hwpf.usermodel.CharacterRun.SPRM_ICO">Constant Field Values</A></DL>
+</DL>
+<HR>
+
+<A NAME="SPRM_HPS"><!-- --></A><H3>
+SPRM_HPS</H3>
+<PRE>
+public static final short <B>SPRM_HPS</B></PRE>
+<DL>
+<DL>
+<DT><B>See Also:</B><DD><A HREF="../../../../../constant-values.html#org.apache.poi.hwpf.usermodel.CharacterRun.SPRM_HPS">Constant Field Values</A></DL>
+</DL>
+<HR>
+
+<A NAME="SPRM_HPSPOS"><!-- --></A><H3>
+SPRM_HPSPOS</H3>
+<PRE>
+public static final short <B>SPRM_HPSPOS</B></PRE>
+<DL>
+<DL>
+<DT><B>See Also:</B><DD><A HREF="../../../../../constant-values.html#org.apache.poi.hwpf.usermodel.CharacterRun.SPRM_HPSPOS">Constant Field Values</A></DL>
+</DL>
+<HR>
+
+<A NAME="SPRM_ISS"><!-- --></A><H3>
+SPRM_ISS</H3>
+<PRE>
+public static final short <B>SPRM_ISS</B></PRE>
+<DL>
+<DL>
+<DT><B>See Also:</B><DD><A HREF="../../../../../constant-values.html#org.apache.poi.hwpf.usermodel.CharacterRun.SPRM_ISS">Constant Field Values</A></DL>
+</DL>
+<HR>
+
+<A NAME="SPRM_HPSKERN"><!-- --></A><H3>
+SPRM_HPSKERN</H3>
+<PRE>
+public static final short <B>SPRM_HPSKERN</B></PRE>
+<DL>
+<DL>
+<DT><B>See Also:</B><DD><A HREF="../../../../../constant-values.html#org.apache.poi.hwpf.usermodel.CharacterRun.SPRM_HPSKERN">Constant Field Values</A></DL>
+</DL>
+<HR>
+
+<A NAME="SPRM_YSRI"><!-- --></A><H3>
+SPRM_YSRI</H3>
+<PRE>
+public static final short <B>SPRM_YSRI</B></PRE>
+<DL>
+<DL>
+<DT><B>See Also:</B><DD><A HREF="../../../../../constant-values.html#org.apache.poi.hwpf.usermodel.CharacterRun.SPRM_YSRI">Constant Field Values</A></DL>
+</DL>
+<HR>
+
+<A NAME="SPRM_RGFTCASCII"><!-- --></A><H3>
+SPRM_RGFTCASCII</H3>
+<PRE>
+public static final short <B>SPRM_RGFTCASCII</B></PRE>
+<DL>
+<DL>
+<DT><B>See Also:</B><DD><A HREF="../../../../../constant-values.html#org.apache.poi.hwpf.usermodel.CharacterRun.SPRM_RGFTCASCII">Constant Field Values</A></DL>
+</DL>
+<HR>
+
+<A NAME="SPRM_RGFTCFAREAST"><!-- --></A><H3>
+SPRM_RGFTCFAREAST</H3>
+<PRE>
+public static final short <B>SPRM_RGFTCFAREAST</B></PRE>
+<DL>
+<DL>
+<DT><B>See Also:</B><DD><A HREF="../../../../../constant-values.html#org.apache.poi.hwpf.usermodel.CharacterRun.SPRM_RGFTCFAREAST">Constant Field Values</A></DL>
+</DL>
+<HR>
+
+<A NAME="SPRM_RGFTCNOTFAREAST"><!-- --></A><H3>
+SPRM_RGFTCNOTFAREAST</H3>
+<PRE>
+public static final short <B>SPRM_RGFTCNOTFAREAST</B></PRE>
+<DL>
+<DL>
+<DT><B>See Also:</B><DD><A HREF="../../../../../constant-values.html#org.apache.poi.hwpf.usermodel.CharacterRun.SPRM_RGFTCNOTFAREAST">Constant Field Values</A></DL>
+</DL>
+<HR>
+
+<A NAME="SPRM_CHARSCALE"><!-- --></A><H3>
+SPRM_CHARSCALE</H3>
+<PRE>
+public static final short <B>SPRM_CHARSCALE</B></PRE>
+<DL>
+<DL>
+<DT><B>See Also:</B><DD><A HREF="../../../../../constant-values.html#org.apache.poi.hwpf.usermodel.CharacterRun.SPRM_CHARSCALE">Constant Field Values</A></DL>
+</DL>
+<HR>
+
+<A NAME="SPRM_FDSTRIKE"><!-- --></A><H3>
+SPRM_FDSTRIKE</H3>
+<PRE>
+public static final short <B>SPRM_FDSTRIKE</B></PRE>
+<DL>
+<DL>
+<DT><B>See Also:</B><DD><A HREF="../../../../../constant-values.html#org.apache.poi.hwpf.usermodel.CharacterRun.SPRM_FDSTRIKE">Constant Field Values</A></DL>
+</DL>
+<HR>
+
+<A NAME="SPRM_FIMPRINT"><!-- --></A><H3>
+SPRM_FIMPRINT</H3>
+<PRE>
+public static final short <B>SPRM_FIMPRINT</B></PRE>
+<DL>
+<DL>
+<DT><B>See Also:</B><DD><A HREF="../../../../../constant-values.html#org.apache.poi.hwpf.usermodel.CharacterRun.SPRM_FIMPRINT">Constant Field Values</A></DL>
+</DL>
+<HR>
+
+<A NAME="SPRM_FSPEC"><!-- --></A><H3>
+SPRM_FSPEC</H3>
+<PRE>
+public static final short <B>SPRM_FSPEC</B></PRE>
+<DL>
+<DL>
+<DT><B>See Also:</B><DD><A HREF="../../../../../constant-values.html#org.apache.poi.hwpf.usermodel.CharacterRun.SPRM_FSPEC">Constant Field Values</A></DL>
+</DL>
+<HR>
+
+<A NAME="SPRM_FOBJ"><!-- --></A><H3>
+SPRM_FOBJ</H3>
+<PRE>
+public static final short <B>SPRM_FOBJ</B></PRE>
+<DL>
+<DL>
+<DT><B>See Also:</B><DD><A HREF="../../../../../constant-values.html#org.apache.poi.hwpf.usermodel.CharacterRun.SPRM_FOBJ">Constant Field Values</A></DL>
+</DL>
+<HR>
+
+<A NAME="SPRM_PROPRMARK"><!-- --></A><H3>
+SPRM_PROPRMARK</H3>
+<PRE>
+public static final short <B>SPRM_PROPRMARK</B></PRE>
+<DL>
+<DL>
+<DT><B>See Also:</B><DD><A HREF="../../../../../constant-values.html#org.apache.poi.hwpf.usermodel.CharacterRun.SPRM_PROPRMARK">Constant Field Values</A></DL>
+</DL>
+<HR>
+
+<A NAME="SPRM_FEMBOSS"><!-- --></A><H3>
+SPRM_FEMBOSS</H3>
+<PRE>
+public static final short <B>SPRM_FEMBOSS</B></PRE>
+<DL>
+<DL>
+<DT><B>See Also:</B><DD><A HREF="../../../../../constant-values.html#org.apache.poi.hwpf.usermodel.CharacterRun.SPRM_FEMBOSS">Constant Field Values</A></DL>
+</DL>
+<HR>
+
+<A NAME="SPRM_SFXTEXT"><!-- --></A><H3>
+SPRM_SFXTEXT</H3>
+<PRE>
+public static final short <B>SPRM_SFXTEXT</B></PRE>
+<DL>
+<DL>
+<DT><B>See Also:</B><DD><A HREF="../../../../../constant-values.html#org.apache.poi.hwpf.usermodel.CharacterRun.SPRM_SFXTEXT">Constant Field Values</A></DL>
+</DL>
+<HR>
+
+<A NAME="SPRM_DISPFLDRMARK"><!-- --></A><H3>
+SPRM_DISPFLDRMARK</H3>
+<PRE>
+public static final short <B>SPRM_DISPFLDRMARK</B></PRE>
+<DL>
+<DL>
+<DT><B>See Also:</B><DD><A HREF="../../../../../constant-values.html#org.apache.poi.hwpf.usermodel.CharacterRun.SPRM_DISPFLDRMARK">Constant Field Values</A></DL>
+</DL>
+<HR>
+
+<A NAME="SPRM_IBSTRMARKDEL"><!-- --></A><H3>
+SPRM_IBSTRMARKDEL</H3>
+<PRE>
+public static final short <B>SPRM_IBSTRMARKDEL</B></PRE>
+<DL>
+<DL>
+<DT><B>See Also:</B><DD><A HREF="../../../../../constant-values.html#org.apache.poi.hwpf.usermodel.CharacterRun.SPRM_IBSTRMARKDEL">Constant Field Values</A></DL>
+</DL>
+<HR>
+
+<A NAME="SPRM_DTTMRMARKDEL"><!-- --></A><H3>
+SPRM_DTTMRMARKDEL</H3>
+<PRE>
+public static final short <B>SPRM_DTTMRMARKDEL</B></PRE>
+<DL>
+<DL>
+<DT><B>See Also:</B><DD><A HREF="../../../../../constant-values.html#org.apache.poi.hwpf.usermodel.CharacterRun.SPRM_DTTMRMARKDEL">Constant Field Values</A></DL>
+</DL>
+<HR>
+
+<A NAME="SPRM_BRC"><!-- --></A><H3>
+SPRM_BRC</H3>
+<PRE>
+public static final short <B>SPRM_BRC</B></PRE>
+<DL>
+<DL>
+<DT><B>See Also:</B><DD><A HREF="../../../../../constant-values.html#org.apache.poi.hwpf.usermodel.CharacterRun.SPRM_BRC">Constant Field Values</A></DL>
+</DL>
+<HR>
+
+<A NAME="SPRM_SHD"><!-- --></A><H3>
+SPRM_SHD</H3>
+<PRE>
+public static final short <B>SPRM_SHD</B></PRE>
+<DL>
+<DL>
+<DT><B>See Also:</B><DD><A HREF="../../../../../constant-values.html#org.apache.poi.hwpf.usermodel.CharacterRun.SPRM_SHD">Constant Field Values</A></DL>
+</DL>
+<HR>
+
+<A NAME="SPRM_IDSIRMARKDEL"><!-- --></A><H3>
+SPRM_IDSIRMARKDEL</H3>
+<PRE>
+public static final short <B>SPRM_IDSIRMARKDEL</B></PRE>
+<DL>
+<DL>
+<DT><B>See Also:</B><DD><A HREF="../../../../../constant-values.html#org.apache.poi.hwpf.usermodel.CharacterRun.SPRM_IDSIRMARKDEL">Constant Field Values</A></DL>
+</DL>
+<HR>
+
+<A NAME="SPRM_CPG"><!-- --></A><H3>
+SPRM_CPG</H3>
+<PRE>
+public static final short <B>SPRM_CPG</B></PRE>
+<DL>
+<DL>
+<DT><B>See Also:</B><DD><A HREF="../../../../../constant-values.html#org.apache.poi.hwpf.usermodel.CharacterRun.SPRM_CPG">Constant Field Values</A></DL>
+</DL>
+<HR>
+
+<A NAME="SPRM_NONFELID"><!-- --></A><H3>
+SPRM_NONFELID</H3>
+<PRE>
+public static final short <B>SPRM_NONFELID</B></PRE>
+<DL>
+<DL>
+<DT><B>See Also:</B><DD><A HREF="../../../../../constant-values.html#org.apache.poi.hwpf.usermodel.CharacterRun.SPRM_NONFELID">Constant Field Values</A></DL>
+</DL>
+<HR>
+
+<A NAME="SPRM_FELID"><!-- --></A><H3>
+SPRM_FELID</H3>
+<PRE>
+public static final short <B>SPRM_FELID</B></PRE>
+<DL>
+<DL>
+<DT><B>See Also:</B><DD><A HREF="../../../../../constant-values.html#org.apache.poi.hwpf.usermodel.CharacterRun.SPRM_FELID">Constant Field Values</A></DL>
+</DL>
+<HR>
+
+<A NAME="SPRM_IDCTHINT"><!-- --></A><H3>
+SPRM_IDCTHINT</H3>
+<PRE>
+public static final short <B>SPRM_IDCTHINT</B></PRE>
+<DL>
+<DL>
+<DT><B>See Also:</B><DD><A HREF="../../../../../constant-values.html#org.apache.poi.hwpf.usermodel.CharacterRun.SPRM_IDCTHINT">Constant Field Values</A></DL>
+</DL>
+
+<!-- ============ METHOD DETAIL ========== -->
+
+<A NAME="method_detail"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="1"><FONT SIZE="+2">
+<B>Method Detail</B></FONT></TH>
+</TR>
+</TABLE>
+
+<A NAME="type()"><!-- --></A><H3>
+type</H3>
+<PRE>
+public int <B>type</B>()</PRE>
+<DL>
+<DD>Here for runtime type determination using a switch statement convenient.
+<P>
+<DD><DL>
+<DT><B>Overrides:</B><DD><CODE><A HREF="../../../../../org/apache/poi/hwpf/usermodel/Range.html#type()">type</A></CODE> in class <CODE><A HREF="../../../../../org/apache/poi/hwpf/usermodel/Range.html" title="class in org.apache.poi.hwpf.usermodel">Range</A></CODE></DL>
+</DD>
+<DD><DL>
+
+<DT><B>Returns:</B><DD>TYPE_CHARACTER</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="isMarkedDeleted()"><!-- --></A><H3>
+isMarkedDeleted</H3>
+<PRE>
+public boolean <B>isMarkedDeleted</B>()</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="markDeleted(boolean)"><!-- --></A><H3>
+markDeleted</H3>
+<PRE>
+public void <B>markDeleted</B>(boolean&nbsp;mark)</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="isBold()"><!-- --></A><H3>
+isBold</H3>
+<PRE>
+public boolean <B>isBold</B>()</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setBold(boolean)"><!-- --></A><H3>
+setBold</H3>
+<PRE>
+public void <B>setBold</B>(boolean&nbsp;bold)</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="isItalic()"><!-- --></A><H3>
+isItalic</H3>
+<PRE>
+public boolean <B>isItalic</B>()</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setItalic(boolean)"><!-- --></A><H3>
+setItalic</H3>
+<PRE>
+public void <B>setItalic</B>(boolean&nbsp;italic)</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="isOutlined()"><!-- --></A><H3>
+isOutlined</H3>
+<PRE>
+public boolean <B>isOutlined</B>()</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setOutline(boolean)"><!-- --></A><H3>
+setOutline</H3>
+<PRE>
+public void <B>setOutline</B>(boolean&nbsp;outlined)</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="isFldVanished()"><!-- --></A><H3>
+isFldVanished</H3>
+<PRE>
+public boolean <B>isFldVanished</B>()</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setFldVanish(boolean)"><!-- --></A><H3>
+setFldVanish</H3>
+<PRE>
+public void <B>setFldVanish</B>(boolean&nbsp;fldVanish)</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="isSmallCaps()"><!-- --></A><H3>
+isSmallCaps</H3>
+<PRE>
+public boolean <B>isSmallCaps</B>()</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setSmallCaps(boolean)"><!-- --></A><H3>
+setSmallCaps</H3>
+<PRE>
+public void <B>setSmallCaps</B>(boolean&nbsp;smallCaps)</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="isCapitalized()"><!-- --></A><H3>
+isCapitalized</H3>
+<PRE>
+public boolean <B>isCapitalized</B>()</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setCapitalized(boolean)"><!-- --></A><H3>
+setCapitalized</H3>
+<PRE>
+public void <B>setCapitalized</B>(boolean&nbsp;caps)</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="isVanished()"><!-- --></A><H3>
+isVanished</H3>
+<PRE>
+public boolean <B>isVanished</B>()</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setVanished(boolean)"><!-- --></A><H3>
+setVanished</H3>
+<PRE>
+public void <B>setVanished</B>(boolean&nbsp;vanish)</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="isMarkedInserted()"><!-- --></A><H3>
+isMarkedInserted</H3>
+<PRE>
+public boolean <B>isMarkedInserted</B>()</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="markInserted(boolean)"><!-- --></A><H3>
+markInserted</H3>
+<PRE>
+public void <B>markInserted</B>(boolean&nbsp;mark)</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="isStrikeThrough()"><!-- --></A><H3>
+isStrikeThrough</H3>
+<PRE>
+public boolean <B>isStrikeThrough</B>()</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="strikeThrough(boolean)"><!-- --></A><H3>
+strikeThrough</H3>
+<PRE>
+public void <B>strikeThrough</B>(boolean&nbsp;strike)</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="isShadowed()"><!-- --></A><H3>
+isShadowed</H3>
+<PRE>
+public boolean <B>isShadowed</B>()</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setShadow(boolean)"><!-- --></A><H3>
+setShadow</H3>
+<PRE>
+public void <B>setShadow</B>(boolean&nbsp;shadow)</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="isEmbossed()"><!-- --></A><H3>
+isEmbossed</H3>
+<PRE>
+public boolean <B>isEmbossed</B>()</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setEmbossed(boolean)"><!-- --></A><H3>
+setEmbossed</H3>
+<PRE>
+public void <B>setEmbossed</B>(boolean&nbsp;emboss)</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="isImprinted()"><!-- --></A><H3>
+isImprinted</H3>
+<PRE>
+public boolean <B>isImprinted</B>()</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setImprinted(boolean)"><!-- --></A><H3>
+setImprinted</H3>
+<PRE>
+public void <B>setImprinted</B>(boolean&nbsp;imprint)</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="isDoubleStrikeThrough()"><!-- --></A><H3>
+isDoubleStrikeThrough</H3>
+<PRE>
+public boolean <B>isDoubleStrikeThrough</B>()</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setDoubleStrikethrough(boolean)"><!-- --></A><H3>
+setDoubleStrikethrough</H3>
+<PRE>
+public void <B>setDoubleStrikethrough</B>(boolean&nbsp;dstrike)</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setFtcAscii(int)"><!-- --></A><H3>
+setFtcAscii</H3>
+<PRE>
+public void <B>setFtcAscii</B>(int&nbsp;ftcAscii)</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setFtcFE(int)"><!-- --></A><H3>
+setFtcFE</H3>
+<PRE>
+public void <B>setFtcFE</B>(int&nbsp;ftcFE)</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setFtcOther(int)"><!-- --></A><H3>
+setFtcOther</H3>
+<PRE>
+public void <B>setFtcOther</B>(int&nbsp;ftcOther)</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getFontSize()"><!-- --></A><H3>
+getFontSize</H3>
+<PRE>
+public int <B>getFontSize</B>()</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setFontSize(int)"><!-- --></A><H3>
+setFontSize</H3>
+<PRE>
+public void <B>setFontSize</B>(int&nbsp;halfPoints)</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getCharacterSpacing()"><!-- --></A><H3>
+getCharacterSpacing</H3>
+<PRE>
+public int <B>getCharacterSpacing</B>()</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setCharacterSpacing(int)"><!-- --></A><H3>
+setCharacterSpacing</H3>
+<PRE>
+public void <B>setCharacterSpacing</B>(int&nbsp;twips)</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getSubSuperScriptIndex()"><!-- --></A><H3>
+getSubSuperScriptIndex</H3>
+<PRE>
+public short <B>getSubSuperScriptIndex</B>()</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setSubSuperScriptIndex(short)"><!-- --></A><H3>
+setSubSuperScriptIndex</H3>
+<PRE>
+public void <B>setSubSuperScriptIndex</B>(short&nbsp;iss)</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getUnderlineCode()"><!-- --></A><H3>
+getUnderlineCode</H3>
+<PRE>
+public int <B>getUnderlineCode</B>()</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setUnderlineCode(int)"><!-- --></A><H3>
+setUnderlineCode</H3>
+<PRE>
+public void <B>setUnderlineCode</B>(int&nbsp;kul)</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getColor()"><!-- --></A><H3>
+getColor</H3>
+<PRE>
+public int <B>getColor</B>()</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setColor(int)"><!-- --></A><H3>
+setColor</H3>
+<PRE>
+public void <B>setColor</B>(int&nbsp;color)</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getVerticalOffset()"><!-- --></A><H3>
+getVerticalOffset</H3>
+<PRE>
+public int <B>getVerticalOffset</B>()</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setVerticalOffset(int)"><!-- --></A><H3>
+setVerticalOffset</H3>
+<PRE>
+public void <B>setVerticalOffset</B>(int&nbsp;hpsPos)</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getKerning()"><!-- --></A><H3>
+getKerning</H3>
+<PRE>
+public int <B>getKerning</B>()</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setKerning(int)"><!-- --></A><H3>
+setKerning</H3>
+<PRE>
+public void <B>setKerning</B>(int&nbsp;kern)</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="isHighlighted()"><!-- --></A><H3>
+isHighlighted</H3>
+<PRE>
+public boolean <B>isHighlighted</B>()</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getHighlightedColor()"><!-- --></A><H3>
+getHighlightedColor</H3>
+<PRE>
+public byte <B>getHighlightedColor</B>()</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setHighlighted(byte)"><!-- --></A><H3>
+setHighlighted</H3>
+<PRE>
+public void <B>setHighlighted</B>(byte&nbsp;color)</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getFontName()"><!-- --></A><H3>
+getFontName</H3>
+<PRE>
+public java.lang.String <B>getFontName</B>()</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="isSpecialCharacter()"><!-- --></A><H3>
+isSpecialCharacter</H3>
+<PRE>
+public boolean <B>isSpecialCharacter</B>()</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setSpecialCharacter(boolean)"><!-- --></A><H3>
+setSpecialCharacter</H3>
+<PRE>
+public void <B>setSpecialCharacter</B>(boolean&nbsp;spec)</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="isObj()"><!-- --></A><H3>
+isObj</H3>
+<PRE>
+public boolean <B>isObj</B>()</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setObj(boolean)"><!-- --></A><H3>
+setObj</H3>
+<PRE>
+public void <B>setObj</B>(boolean&nbsp;obj)</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getPicOffset()"><!-- --></A><H3>
+getPicOffset</H3>
+<PRE>
+public int <B>getPicOffset</B>()</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setPicOffset(int)"><!-- --></A><H3>
+setPicOffset</H3>
+<PRE>
+public void <B>setPicOffset</B>(int&nbsp;offset)</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="isData()"><!-- --></A><H3>
+isData</H3>
+<PRE>
+public boolean <B>isData</B>()</PRE>
+<DL>
+<DD>Does the picture offset represent picture
+  or binary data?
+ If it's set, then the picture offset refers to
+  a NilPICFAndBinData structure, otherwise to a
+  PICFAndOfficeArtData
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setData(boolean)"><!-- --></A><H3>
+setData</H3>
+<PRE>
+public void <B>setData</B>(boolean&nbsp;data)</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="isOle2()"><!-- --></A><H3>
+isOle2</H3>
+<PRE>
+public boolean <B>isOle2</B>()</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setOle2(boolean)"><!-- --></A><H3>
+setOle2</H3>
+<PRE>
+public void <B>setOle2</B>(boolean&nbsp;ole)</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getObjOffset()"><!-- --></A><H3>
+getObjOffset</H3>
+<PRE>
+public int <B>getObjOffset</B>()</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setObjOffset(int)"><!-- --></A><H3>
+setObjOffset</H3>
+<PRE>
+public void <B>setObjOffset</B>(int&nbsp;obj)</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getIco24()"><!-- --></A><H3>
+getIco24</H3>
+<PRE>
+public int <B>getIco24</B>()</PRE>
+<DL>
+<DD>Get the ico24 field for the CHP record.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setIco24(int)"><!-- --></A><H3>
+setIco24</H3>
+<PRE>
+public void <B>setIco24</B>(int&nbsp;colour24)</PRE>
+<DL>
+<DD>Set the ico24 field for the CHP record.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="cloneProperties()"><!-- --></A><H3>
+cloneProperties</H3>
+<PRE>
+<FONT SIZE="-1">@Deprecated
+</FONT>public <A HREF="../../../../../org/apache/poi/hwpf/usermodel/CharacterProperties.html" title="class in org.apache.poi.hwpf.usermodel">CharacterProperties</A> <B>cloneProperties</B>()</PRE>
+<DL>
+<DD><B>Deprecated.</B>&nbsp;<I>This method shall not be public and should not be called from
+             high-level code</I>
+<P>
+<DD>clone the CharacterProperties object associated with this characterRun so
+ that you can apply it to another CharacterRun
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="clone()"><!-- --></A><H3>
+clone</H3>
+<PRE>
+public java.lang.Object <B>clone</B>()
+                       throws java.lang.CloneNotSupportedException</PRE>
+<DL>
+<DD>Used to create a deep copy of this object.
+<P>
+<DD><DL>
+<DT><B>Overrides:</B><DD><CODE>clone</CODE> in class <CODE>java.lang.Object</CODE></DL>
+</DD>
+<DD><DL>
+
+<DT><B>Returns:</B><DD>A deep copy.
+<DT><B>Throws:</B>
+<DD><CODE>java.lang.CloneNotSupportedException</CODE> - never</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="isSymbol()"><!-- --></A><H3>
+isSymbol</H3>
+<PRE>
+public boolean <B>isSymbol</B>()</PRE>
+<DL>
+<DD>Returns true, if the CharacterRun is a special character run containing a symbol, otherwise false.
+
+ <p>In case of a symbol, the <A HREF="../../../../../org/apache/poi/hwpf/usermodel/Range.html#text()"><CODE>Range.text()</CODE></A> method always returns a single character 0x0028, but word actually stores
+ the character in a different field. Use <A HREF="../../../../../org/apache/poi/hwpf/usermodel/CharacterRun.html#getSymbolCharacter()"><CODE>getSymbolCharacter()</CODE></A> to get that character and <A HREF="../../../../../org/apache/poi/hwpf/usermodel/CharacterRun.html#getSymbolFont()"><CODE>getSymbolFont()</CODE></A>
+ to determine its font.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getSymbolCharacter()"><!-- --></A><H3>
+getSymbolCharacter</H3>
+<PRE>
+public char <B>getSymbolCharacter</B>()</PRE>
+<DL>
+<DD>Returns the symbol character, if this is a symbol character run.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+
+<DT><B>Throws:</B>
+<DD><CODE>java.lang.IllegalStateException</CODE> - If this is not a symbol character run: call <A HREF="../../../../../org/apache/poi/hwpf/usermodel/CharacterRun.html#isSymbol()"><CODE>isSymbol()</CODE></A> first.<DT><B>See Also:</B><DD><A HREF="../../../../../org/apache/poi/hwpf/usermodel/CharacterRun.html#isSymbol()"><CODE>isSymbol()</CODE></A></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getSymbolFont()"><!-- --></A><H3>
+getSymbolFont</H3>
+<PRE>
+public <A HREF="../../../../../org/apache/poi/hwpf/model/Ffn.html" title="class in org.apache.poi.hwpf.model">Ffn</A> <B>getSymbolFont</B>()</PRE>
+<DL>
+<DD>Returns the symbol font, if this is a symbol character run. Might return null, if the font index is not found in the font table.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+
+<DT><B>Throws:</B>
+<DD><CODE>java.lang.IllegalStateException</CODE> - If this is not a symbol character run: call <A HREF="../../../../../org/apache/poi/hwpf/usermodel/CharacterRun.html#isSymbol()"><CODE>isSymbol()</CODE></A> first.<DT><B>See Also:</B><DD><A HREF="../../../../../org/apache/poi/hwpf/usermodel/CharacterRun.html#isSymbol()"><CODE>isSymbol()</CODE></A></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getBorder()"><!-- --></A><H3>
+getBorder</H3>
+<PRE>
+public <A HREF="../../../../../org/apache/poi/hwpf/usermodel/BorderCode.html" title="class in org.apache.poi.hwpf.usermodel">BorderCode</A> <B>getBorder</B>()</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getLanguageCode()"><!-- --></A><H3>
+getLanguageCode</H3>
+<PRE>
+public int <B>getLanguageCode</B>()</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="toString()"><!-- --></A><H3>
+toString</H3>
+<PRE>
+public java.lang.String <B>toString</B>()</PRE>
+<DL>
+<DD><DL>
+<DT><B>Overrides:</B><DD><CODE><A HREF="../../../../../org/apache/poi/hwpf/usermodel/Range.html#toString()">toString</A></CODE> in class <CODE><A HREF="../../../../../org/apache/poi/hwpf/usermodel/Range.html" title="class in org.apache.poi.hwpf.usermodel">Range</A></CODE></DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getDropDownListValues()"><!-- --></A><H3>
+getDropDownListValues</H3>
+<PRE>
+public java.lang.String[] <B>getDropDownListValues</B>()</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getDropDownListDefaultItemIndex()"><!-- --></A><H3>
+getDropDownListDefaultItemIndex</H3>
+<PRE>
+public java.lang.Integer <B>getDropDownListDefaultItemIndex</B>()</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<!-- ========= END OF CLASS DATA ========= -->
+<HR>
+
+
+<!-- ======= START OF BOTTOM NAVBAR ====== -->
+<A NAME="navbar_bottom"><!-- --></A>
+<A HREF="#skip-navbar_bottom" title="Skip navigation links"></A>
+<TABLE BORDER="0" WIDTH="100%" CELLPADDING="1" CELLSPACING="0" SUMMARY="">
+<TR>
+<TD COLSPAN=2 BGCOLOR="#EEEEFF" CLASS="NavBarCell1">
+<A NAME="navbar_bottom_firstrow"><!-- --></A>
+<TABLE BORDER="0" CELLPADDING="0" CELLSPACING="3" SUMMARY="">
+  <TR ALIGN="center" VALIGN="top">
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../overview-summary.html"><FONT CLASS="NavBarFont1"><B>Overview</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="package-summary.html"><FONT CLASS="NavBarFont1"><B>Package</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#FFFFFF" CLASS="NavBarCell1Rev"> &nbsp;<FONT CLASS="NavBarFont1Rev"><B>Class</B></FONT>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="class-use/CharacterRun.html"><FONT CLASS="NavBarFont1"><B>Use</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="package-tree.html"><FONT CLASS="NavBarFont1"><B>Tree</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../deprecated-list.html"><FONT CLASS="NavBarFont1"><B>Deprecated</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../index-all.html"><FONT CLASS="NavBarFont1"><B>Index</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../help-doc.html"><FONT CLASS="NavBarFont1"><B>Help</B></FONT></A>&nbsp;</TD>
+  </TR>
+</TABLE>
+</TD>
+<TD ALIGN="right" VALIGN="top" ROWSPAN=3><EM>
+</EM>
+</TD>
+</TR>
+
+<TR>
+<TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
+&nbsp;<A HREF="../../../../../org/apache/poi/hwpf/usermodel/CharacterProperties.html" title="class in org.apache.poi.hwpf.usermodel"><B>PREV CLASS</B></A>&nbsp;
+&nbsp;<A HREF="../../../../../org/apache/poi/hwpf/usermodel/DateAndTime.html" title="class in org.apache.poi.hwpf.usermodel"><B>NEXT CLASS</B></A></FONT></TD>
+<TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
+  <A HREF="../../../../../index.html?org/apache/poi/hwpf/usermodel/CharacterRun.html" target="_top"><B>FRAMES</B></A>  &nbsp;
+&nbsp;<A HREF="CharacterRun.html" target="_top"><B>NO FRAMES</B></A>  &nbsp;
+&nbsp;<SCRIPT type="text/javascript">
+  <!--
+  if(window==top) {
+    document.writeln('<A HREF="../../../../../allclasses-noframe.html"><B>All Classes</B></A>');
+  }
+  //-->
+</SCRIPT>
+<NOSCRIPT>
+  <A HREF="../../../../../allclasses-noframe.html"><B>All Classes</B></A>
+</NOSCRIPT>
+
+
+</FONT></TD>
+</TR>
+<TR>
+<TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
+  SUMMARY:&nbsp;NESTED&nbsp;|&nbsp;<A HREF="#field_summary">FIELD</A>&nbsp;|&nbsp;CONSTR&nbsp;|&nbsp;<A HREF="#method_summary">METHOD</A></FONT></TD>
+<TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
+DETAIL:&nbsp;<A HREF="#field_detail">FIELD</A>&nbsp;|&nbsp;CONSTR&nbsp;|&nbsp;<A HREF="#method_detail">METHOD</A></FONT></TD>
+</TR>
+</TABLE>
+<A NAME="skip-navbar_bottom"></A>
+<!-- ======== END OF BOTTOM NAVBAR ======= -->
+
+<HR>
+
+                <i>Copyright 2014 The Apache Software Foundation or
+        its licensors, as applicable.</i>
+            
+</BODY>
+</HTML>

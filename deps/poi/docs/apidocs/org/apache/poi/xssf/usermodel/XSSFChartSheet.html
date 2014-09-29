@@ -1,0 +1,449 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!--NewPage-->
+<HTML>
+<HEAD>
+<TITLE>
+XSSFChartSheet (POI API Documentation)
+</TITLE>
+
+<META NAME="keywords" CONTENT="org.apache.poi.xssf.usermodel.XSSFChartSheet class">
+
+<LINK REL ="stylesheet" TYPE="text/css" HREF="../../../../../stylesheet.css" TITLE="Style">
+
+<SCRIPT type="text/javascript">
+function windowTitle()
+{
+    parent.document.title="XSSFChartSheet (POI API Documentation)";
+}
+</SCRIPT>
+<NOSCRIPT>
+</NOSCRIPT>
+
+</HEAD>
+
+<BODY BGCOLOR="white" onload="windowTitle();">
+
+
+<!-- ========= START OF TOP NAVBAR ======= -->
+<A NAME="navbar_top"><!-- --></A>
+<A HREF="#skip-navbar_top" title="Skip navigation links"></A>
+<TABLE BORDER="0" WIDTH="100%" CELLPADDING="1" CELLSPACING="0" SUMMARY="">
+<TR>
+<TD COLSPAN=2 BGCOLOR="#EEEEFF" CLASS="NavBarCell1">
+<A NAME="navbar_top_firstrow"><!-- --></A>
+<TABLE BORDER="0" CELLPADDING="0" CELLSPACING="3" SUMMARY="">
+  <TR ALIGN="center" VALIGN="top">
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../overview-summary.html"><FONT CLASS="NavBarFont1"><B>Overview</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="package-summary.html"><FONT CLASS="NavBarFont1"><B>Package</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#FFFFFF" CLASS="NavBarCell1Rev"> &nbsp;<FONT CLASS="NavBarFont1Rev"><B>Class</B></FONT>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="class-use/XSSFChartSheet.html"><FONT CLASS="NavBarFont1"><B>Use</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="package-tree.html"><FONT CLASS="NavBarFont1"><B>Tree</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../deprecated-list.html"><FONT CLASS="NavBarFont1"><B>Deprecated</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../index-all.html"><FONT CLASS="NavBarFont1"><B>Index</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../help-doc.html"><FONT CLASS="NavBarFont1"><B>Help</B></FONT></A>&nbsp;</TD>
+  </TR>
+</TABLE>
+</TD>
+<TD ALIGN="right" VALIGN="top" ROWSPAN=3><EM>
+</EM>
+</TD>
+</TR>
+
+<TR>
+<TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
+&nbsp;<A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFChart.html" title="class in org.apache.poi.xssf.usermodel"><B>PREV CLASS</B></A>&nbsp;
+&nbsp;<A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFChildAnchor.html" title="class in org.apache.poi.xssf.usermodel"><B>NEXT CLASS</B></A></FONT></TD>
+<TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
+  <A HREF="../../../../../index.html?org/apache/poi/xssf/usermodel/XSSFChartSheet.html" target="_top"><B>FRAMES</B></A>  &nbsp;
+&nbsp;<A HREF="XSSFChartSheet.html" target="_top"><B>NO FRAMES</B></A>  &nbsp;
+&nbsp;<SCRIPT type="text/javascript">
+  <!--
+  if(window==top) {
+    document.writeln('<A HREF="../../../../../allclasses-noframe.html"><B>All Classes</B></A>');
+  }
+  //-->
+</SCRIPT>
+<NOSCRIPT>
+  <A HREF="../../../../../allclasses-noframe.html"><B>All Classes</B></A>
+</NOSCRIPT>
+
+
+</FONT></TD>
+</TR>
+<TR>
+<TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
+  SUMMARY:&nbsp;NESTED&nbsp;|&nbsp;<A HREF="#field_summary">FIELD</A>&nbsp;|&nbsp;<A HREF="#constructor_summary">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_summary">METHOD</A></FONT></TD>
+<TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
+DETAIL:&nbsp;<A HREF="#field_detail">FIELD</A>&nbsp;|&nbsp;<A HREF="#constructor_detail">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_detail">METHOD</A></FONT></TD>
+</TR>
+</TABLE>
+<A NAME="skip-navbar_top"></A>
+<!-- ========= END OF TOP NAVBAR ========= -->
+
+<HR>
+<!-- ======== START OF CLASS DATA ======== -->
+<H2>
+<FONT SIZE="-1">
+org.apache.poi.xssf.usermodel</FONT>
+<BR>
+Class XSSFChartSheet</H2>
+<PRE>
+java.lang.Object
+  <IMG SRC="../../../../../resources/inherit.gif" ALT="extended by "><A HREF="../../../../../org/apache/poi/POIXMLDocumentPart.html" title="class in org.apache.poi">org.apache.poi.POIXMLDocumentPart</A>
+      <IMG SRC="../../../../../resources/inherit.gif" ALT="extended by "><A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFSheet.html" title="class in org.apache.poi.xssf.usermodel">org.apache.poi.xssf.usermodel.XSSFSheet</A>
+          <IMG SRC="../../../../../resources/inherit.gif" ALT="extended by "><B>org.apache.poi.xssf.usermodel.XSSFChartSheet</B>
+</PRE>
+<DL>
+<DT><B>All Implemented Interfaces:</B> <DD>java.lang.Iterable&lt;<A HREF="../../../../../org/apache/poi/ss/usermodel/Row.html" title="interface in org.apache.poi.ss.usermodel">Row</A>&gt;, <A HREF="../../../../../org/apache/poi/ss/usermodel/Sheet.html" title="interface in org.apache.poi.ss.usermodel">Sheet</A></DD>
+</DL>
+<HR>
+<DL>
+<DT><PRE>public class <B>XSSFChartSheet</B><DT>extends <A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFSheet.html" title="class in org.apache.poi.xssf.usermodel">XSSFSheet</A></DL>
+</PRE>
+
+<P>
+High level representation of Sheet Parts that are of type 'chartsheet'.
+ <p>
+  Chart sheet is a special kind of Sheet that contains only chart and no data.
+ </p>
+<P>
+
+<P>
+<DL>
+<DT><B>Author:</B></DT>
+  <DD>Yegor Kozlov</DD>
+</DL>
+<HR>
+
+<P>
+<!-- =========== FIELD SUMMARY =========== -->
+
+<A NAME="field_summary"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+<B>Field Summary</B></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>protected &nbsp;org.openxmlformats.schemas.spreadsheetml.x2006.main.CTChartsheet</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFChartSheet.html#chartsheet">chartsheet</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+</TABLE>
+&nbsp;<A NAME="fields_inherited_from_class_org.apache.poi.xssf.usermodel.XSSFSheet"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#EEEEFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left"><B>Fields inherited from class org.apache.poi.xssf.usermodel.<A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFSheet.html" title="class in org.apache.poi.xssf.usermodel">XSSFSheet</A></B></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFSheet.html#sheet">sheet</A>, <A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFSheet.html#worksheet">worksheet</A></CODE></TD>
+</TR>
+</TABLE>
+&nbsp;<A NAME="fields_inherited_from_class_org.apache.poi.POIXMLDocumentPart"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#EEEEFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left"><B>Fields inherited from class org.apache.poi.<A HREF="../../../../../org/apache/poi/POIXMLDocumentPart.html" title="class in org.apache.poi">POIXMLDocumentPart</A></B></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><A HREF="../../../../../org/apache/poi/POIXMLDocumentPart.html#DEFAULT_XML_OPTIONS">DEFAULT_XML_OPTIONS</A></CODE></TD>
+</TR>
+</TABLE>
+&nbsp;<A NAME="fields_inherited_from_class_org.apache.poi.ss.usermodel.Sheet"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#EEEEFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left"><B>Fields inherited from interface org.apache.poi.ss.usermodel.<A HREF="../../../../../org/apache/poi/ss/usermodel/Sheet.html" title="interface in org.apache.poi.ss.usermodel">Sheet</A></B></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><A HREF="../../../../../org/apache/poi/ss/usermodel/Sheet.html#BottomMargin">BottomMargin</A>, <A HREF="../../../../../org/apache/poi/ss/usermodel/Sheet.html#FooterMargin">FooterMargin</A>, <A HREF="../../../../../org/apache/poi/ss/usermodel/Sheet.html#HeaderMargin">HeaderMargin</A>, <A HREF="../../../../../org/apache/poi/ss/usermodel/Sheet.html#LeftMargin">LeftMargin</A>, <A HREF="../../../../../org/apache/poi/ss/usermodel/Sheet.html#PANE_LOWER_LEFT">PANE_LOWER_LEFT</A>, <A HREF="../../../../../org/apache/poi/ss/usermodel/Sheet.html#PANE_LOWER_RIGHT">PANE_LOWER_RIGHT</A>, <A HREF="../../../../../org/apache/poi/ss/usermodel/Sheet.html#PANE_UPPER_LEFT">PANE_UPPER_LEFT</A>, <A HREF="../../../../../org/apache/poi/ss/usermodel/Sheet.html#PANE_UPPER_RIGHT">PANE_UPPER_RIGHT</A>, <A HREF="../../../../../org/apache/poi/ss/usermodel/Sheet.html#RightMargin">RightMargin</A>, <A HREF="../../../../../org/apache/poi/ss/usermodel/Sheet.html#TopMargin">TopMargin</A></CODE></TD>
+</TR>
+</TABLE>
+&nbsp;
+<!-- ======== CONSTRUCTOR SUMMARY ======== -->
+
+<A NAME="constructor_summary"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+<B>Constructor Summary</B></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>protected </CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFChartSheet.html#XSSFChartSheet(org.apache.poi.openxml4j.opc.PackagePart, org.apache.poi.openxml4j.opc.PackageRelationship)">XSSFChartSheet</A></B>(<A HREF="../../../../../org/apache/poi/openxml4j/opc/PackagePart.html" title="class in org.apache.poi.openxml4j.opc">PackagePart</A>&nbsp;part,
+               <A HREF="../../../../../org/apache/poi/openxml4j/opc/PackageRelationship.html" title="class in org.apache.poi.openxml4j.opc">PackageRelationship</A>&nbsp;rel)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+</TABLE>
+&nbsp;
+<!-- ========== METHOD SUMMARY =========== -->
+
+<A NAME="method_summary"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+<B>Method Summary</B></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;org.openxmlformats.schemas.spreadsheetml.x2006.main.CTChartsheet</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFChartSheet.html#getCTChartsheet()">getCTChartsheet</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Provide access to the CTChartsheet bean holding this sheet's data</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>protected &nbsp;org.openxmlformats.schemas.spreadsheetml.x2006.main.CTDrawing</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFChartSheet.html#getCTDrawing()">getCTDrawing</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>protected &nbsp;org.openxmlformats.schemas.spreadsheetml.x2006.main.CTLegacyDrawing</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFChartSheet.html#getCTLegacyDrawing()">getCTLegacyDrawing</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>protected &nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFChartSheet.html#read(java.io.InputStream)">read</A></B>(java.io.InputStream&nbsp;is)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>protected &nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFChartSheet.html#write(java.io.OutputStream)">write</A></B>(java.io.OutputStream&nbsp;out)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+</TABLE>
+&nbsp;<A NAME="methods_inherited_from_class_org.apache.poi.xssf.usermodel.XSSFSheet"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#EEEEFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left"><B>Methods inherited from class org.apache.poi.xssf.usermodel.<A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFSheet.html" title="class in org.apache.poi.xssf.usermodel">XSSFSheet</A></B></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFSheet.html#addHyperlink(org.apache.poi.xssf.usermodel.XSSFHyperlink)">addHyperlink</A>, <A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFSheet.html#addMergedRegion(org.apache.poi.ss.util.CellRangeAddress)">addMergedRegion</A>, <A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFSheet.html#addValidationData(org.apache.poi.ss.usermodel.DataValidation)">addValidationData</A>, <A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFSheet.html#autoSizeColumn(int)">autoSizeColumn</A>, <A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFSheet.html#autoSizeColumn(int, boolean)">autoSizeColumn</A>, <A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFSheet.html#commit()">commit</A>, <A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFSheet.html#createComment()">createComment</A>, <A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFSheet.html#createDrawingPatriarch()">createDrawingPatriarch</A>, <A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFSheet.html#createFreezePane(int, int)">createFreezePane</A>, <A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFSheet.html#createFreezePane(int, int, int, int)">createFreezePane</A>, <A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFSheet.html#createRow(int)">createRow</A>, <A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFSheet.html#createSplitPane(int, int, int, int, int)">createSplitPane</A>, <A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFSheet.html#createTable()">createTable</A>, <A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFSheet.html#disableLocking()">disableLocking</A>, <A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFSheet.html#enableLocking()">enableLocking</A>, <A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFSheet.html#findEndOfRowOutlineGroup(int)">findEndOfRowOutlineGroup</A>, <A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFSheet.html#getActiveCell()">getActiveCell</A>, <A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFSheet.html#getAutobreaks()">getAutobreaks</A>, <A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFSheet.html#getCellComment(int, int)">getCellComment</A>, <A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFSheet.html#getColumnBreaks()">getColumnBreaks</A>, <A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFSheet.html#getColumnHelper()">getColumnHelper</A>, <A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFSheet.html#getColumnStyle(int)">getColumnStyle</A>, <A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFSheet.html#getColumnWidth(int)">getColumnWidth</A>, <A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFSheet.html#getCommentsTable(boolean)">getCommentsTable</A>, <A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFSheet.html#getCTWorksheet()">getCTWorksheet</A>, <A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFSheet.html#getDataValidationHelper()">getDataValidationHelper</A>, <A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFSheet.html#getDataValidations()">getDataValidations</A>, <A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFSheet.html#getDefaultColumnWidth()">getDefaultColumnWidth</A>, <A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFSheet.html#getDefaultRowHeight()">getDefaultRowHeight</A>, <A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFSheet.html#getDefaultRowHeightInPoints()">getDefaultRowHeightInPoints</A>, <A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFSheet.html#getDisplayGuts()">getDisplayGuts</A>, <A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFSheet.html#getEvenFooter()">getEvenFooter</A>, <A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFSheet.html#getEvenHeader()">getEvenHeader</A>, <A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFSheet.html#getFirstFooter()">getFirstFooter</A>, <A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFSheet.html#getFirstHeader()">getFirstHeader</A>, <A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFSheet.html#getFirstRowNum()">getFirstRowNum</A>, <A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFSheet.html#getFitToPage()">getFitToPage</A>, <A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFSheet.html#getFooter()">getFooter</A>, <A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFSheet.html#getForceFormulaRecalculation()">getForceFormulaRecalculation</A>, <A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFSheet.html#getHeader()">getHeader</A>, <A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFSheet.html#getHorizontallyCenter()">getHorizontallyCenter</A>, <A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFSheet.html#getHyperlink(int, int)">getHyperlink</A>, <A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFSheet.html#getLastRowNum()">getLastRowNum</A>, <A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFSheet.html#getLeftCol()">getLeftCol</A>, <A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFSheet.html#getMargin(short)">getMargin</A>, <A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFSheet.html#getMergedRegion(int)">getMergedRegion</A>, <A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFSheet.html#getNumberOfComments()">getNumberOfComments</A>, <A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFSheet.html#getNumHyperlinks()">getNumHyperlinks</A>, <A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFSheet.html#getNumMergedRegions()">getNumMergedRegions</A>, <A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFSheet.html#getOddFooter()">getOddFooter</A>, <A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFSheet.html#getOddHeader()">getOddHeader</A>, <A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFSheet.html#getPaneInformation()">getPaneInformation</A>, <A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFSheet.html#getPhysicalNumberOfRows()">getPhysicalNumberOfRows</A>, <A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFSheet.html#getPrintSetup()">getPrintSetup</A>, <A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFSheet.html#getProtect()">getProtect</A>, <A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFSheet.html#getRepeatingColumns()">getRepeatingColumns</A>, <A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFSheet.html#getRepeatingRows()">getRepeatingRows</A>, <A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFSheet.html#getRow(int)">getRow</A>, <A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFSheet.html#getRowBreaks()">getRowBreaks</A>, <A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFSheet.html#getRowSumsBelow()">getRowSumsBelow</A>, <A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFSheet.html#getRowSumsRight()">getRowSumsRight</A>, <A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFSheet.html#getScenarioProtect()">getScenarioProtect</A>, <A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFSheet.html#getSharedFormula(int)">getSharedFormula</A>, <A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFSheet.html#getSheetConditionalFormatting()">getSheetConditionalFormatting</A>, <A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFSheet.html#getSheetName()">getSheetName</A>, <A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFSheet.html#getTables()">getTables</A>, <A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFSheet.html#getTopRow()">getTopRow</A>, <A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFSheet.html#getVerticallyCenter()">getVerticallyCenter</A>, <A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFSheet.html#getVMLDrawing(boolean)">getVMLDrawing</A>, <A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFSheet.html#getWorkbook()">getWorkbook</A>, <A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFSheet.html#groupColumn(int, int)">groupColumn</A>, <A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFSheet.html#groupRow(int, int)">groupRow</A>, <A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFSheet.html#hasComments()">hasComments</A>, <A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFSheet.html#isAutoFilterLocked()">isAutoFilterLocked</A>, <A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFSheet.html#isColumnBroken(int)">isColumnBroken</A>, <A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFSheet.html#isColumnHidden(int)">isColumnHidden</A>, <A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFSheet.html#isDeleteColumnsLocked()">isDeleteColumnsLocked</A>, <A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFSheet.html#isDeleteRowsLocked()">isDeleteRowsLocked</A>, <A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFSheet.html#isDisplayFormulas()">isDisplayFormulas</A>, <A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFSheet.html#isDisplayGridlines()">isDisplayGridlines</A>, <A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFSheet.html#isDisplayRowColHeadings()">isDisplayRowColHeadings</A>, <A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFSheet.html#isDisplayZeros()">isDisplayZeros</A>, <A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFSheet.html#isFormatCellsLocked()">isFormatCellsLocked</A>, <A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFSheet.html#isFormatColumnsLocked()">isFormatColumnsLocked</A>, <A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFSheet.html#isFormatRowsLocked()">isFormatRowsLocked</A>, <A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFSheet.html#isInsertColumnsLocked()">isInsertColumnsLocked</A>, <A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFSheet.html#isInsertHyperlinksLocked()">isInsertHyperlinksLocked</A>, <A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFSheet.html#isInsertRowsLocked()">isInsertRowsLocked</A>, <A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFSheet.html#isObjectsLocked()">isObjectsLocked</A>, <A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFSheet.html#isPivotTablesLocked()">isPivotTablesLocked</A>, <A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFSheet.html#isPrintGridlines()">isPrintGridlines</A>, <A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFSheet.html#isRightToLeft()">isRightToLeft</A>, <A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFSheet.html#isRowBroken(int)">isRowBroken</A>, <A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFSheet.html#isScenariosLocked()">isScenariosLocked</A>, <A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFSheet.html#isSelected()">isSelected</A>, <A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFSheet.html#isSelectLockedCellsLocked()">isSelectLockedCellsLocked</A>, <A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFSheet.html#isSelectUnlockedCellsLocked()">isSelectUnlockedCellsLocked</A>, <A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFSheet.html#isSheetLocked()">isSheetLocked</A>, <A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFSheet.html#isSortLocked()">isSortLocked</A>, <A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFSheet.html#iterator()">iterator</A>, <A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFSheet.html#lockAutoFilter()">lockAutoFilter</A>, <A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFSheet.html#lockDeleteColumns()">lockDeleteColumns</A>, <A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFSheet.html#lockDeleteRows()">lockDeleteRows</A>, <A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFSheet.html#lockFormatCells()">lockFormatCells</A>, <A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFSheet.html#lockFormatColumns()">lockFormatColumns</A>, <A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFSheet.html#lockFormatRows()">lockFormatRows</A>, <A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFSheet.html#lockInsertColumns()">lockInsertColumns</A>, <A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFSheet.html#lockInsertHyperlinks()">lockInsertHyperlinks</A>, <A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFSheet.html#lockInsertRows()">lockInsertRows</A>, <A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFSheet.html#lockObjects()">lockObjects</A>, <A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFSheet.html#lockPivotTables()">lockPivotTables</A>, <A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFSheet.html#lockScenarios()">lockScenarios</A>, <A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFSheet.html#lockSelectLockedCells()">lockSelectLockedCells</A>, <A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFSheet.html#lockSelectUnlockedCells()">lockSelectUnlockedCells</A>, <A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFSheet.html#lockSort()">lockSort</A>, <A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFSheet.html#onDocumentCreate()">onDocumentCreate</A>, <A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFSheet.html#onDocumentRead()">onDocumentRead</A>, <A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFSheet.html#protectSheet(java.lang.String)">protectSheet</A>, <A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFSheet.html#removeArrayFormula(org.apache.poi.ss.usermodel.Cell)">removeArrayFormula</A>, <A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFSheet.html#removeColumnBreak(int)">removeColumnBreak</A>, <A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFSheet.html#removeMergedRegion(int)">removeMergedRegion</A>, <A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFSheet.html#removeRow(org.apache.poi.ss.usermodel.Row)">removeRow</A>, <A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFSheet.html#removeRowBreak(int)">removeRowBreak</A>, <A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFSheet.html#rowIterator()">rowIterator</A>, <A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFSheet.html#setActiveCell(java.lang.String)">setActiveCell</A>, <A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFSheet.html#setArrayFormula(java.lang.String, org.apache.poi.ss.util.CellRangeAddress)">setArrayFormula</A>, <A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFSheet.html#setAutobreaks(boolean)">setAutobreaks</A>, <A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFSheet.html#setAutoFilter(org.apache.poi.ss.util.CellRangeAddress)">setAutoFilter</A>, <A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFSheet.html#setCellComment(java.lang.String, org.apache.poi.xssf.usermodel.XSSFComment)">setCellComment</A>, <A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFSheet.html#setColumnBreak(int)">setColumnBreak</A>, <A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFSheet.html#setColumnGroupCollapsed(int, boolean)">setColumnGroupCollapsed</A>, <A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFSheet.html#setColumnHidden(int, boolean)">setColumnHidden</A>, <A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFSheet.html#setColumnWidth(int, int)">setColumnWidth</A>, <A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFSheet.html#setDefaultColumnStyle(int, org.apache.poi.ss.usermodel.CellStyle)">setDefaultColumnStyle</A>, <A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFSheet.html#setDefaultColumnWidth(int)">setDefaultColumnWidth</A>, <A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFSheet.html#setDefaultRowHeight(short)">setDefaultRowHeight</A>, <A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFSheet.html#setDefaultRowHeightInPoints(float)">setDefaultRowHeightInPoints</A>, <A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFSheet.html#setDisplayFormulas(boolean)">setDisplayFormulas</A>, <A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFSheet.html#setDisplayGridlines(boolean)">setDisplayGridlines</A>, <A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFSheet.html#setDisplayGuts(boolean)">setDisplayGuts</A>, <A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFSheet.html#setDisplayRowColHeadings(boolean)">setDisplayRowColHeadings</A>, <A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFSheet.html#setDisplayZeros(boolean)">setDisplayZeros</A>, <A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFSheet.html#setFitToPage(boolean)">setFitToPage</A>, <A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFSheet.html#setForceFormulaRecalculation(boolean)">setForceFormulaRecalculation</A>, <A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFSheet.html#setHorizontallyCenter(boolean)">setHorizontallyCenter</A>, <A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFSheet.html#setMargin(short, double)">setMargin</A>, <A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFSheet.html#setPrintGridlines(boolean)">setPrintGridlines</A>, <A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFSheet.html#setRepeatingColumns(org.apache.poi.ss.util.CellRangeAddress)">setRepeatingColumns</A>, <A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFSheet.html#setRepeatingRows(org.apache.poi.ss.util.CellRangeAddress)">setRepeatingRows</A>, <A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFSheet.html#setRightToLeft(boolean)">setRightToLeft</A>, <A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFSheet.html#setRowBreak(int)">setRowBreak</A>, <A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFSheet.html#setRowGroupCollapsed(int, boolean)">setRowGroupCollapsed</A>, <A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFSheet.html#setRowSumsBelow(boolean)">setRowSumsBelow</A>, <A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFSheet.html#setRowSumsRight(boolean)">setRowSumsRight</A>, <A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFSheet.html#setSelected(boolean)">setSelected</A>, <A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFSheet.html#setTabColor(int)">setTabColor</A>, <A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFSheet.html#setVerticallyCenter(boolean)">setVerticallyCenter</A>, <A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFSheet.html#setZoom(int)">setZoom</A>, <A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFSheet.html#setZoom(int, int)">setZoom</A>, <A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFSheet.html#shiftRows(int, int, int)">shiftRows</A>, <A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFSheet.html#shiftRows(int, int, int, boolean, boolean)">shiftRows</A>, <A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFSheet.html#showInPane(int, int)">showInPane</A>, <A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFSheet.html#showInPane(short, short)">showInPane</A>, <A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFSheet.html#ungroupColumn(int, int)">ungroupColumn</A>, <A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFSheet.html#ungroupRow(int, int)">ungroupRow</A></CODE></TD>
+</TR>
+</TABLE>
+&nbsp;<A NAME="methods_inherited_from_class_org.apache.poi.POIXMLDocumentPart"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#EEEEFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left"><B>Methods inherited from class org.apache.poi.<A HREF="../../../../../org/apache/poi/POIXMLDocumentPart.html" title="class in org.apache.poi">POIXMLDocumentPart</A></B></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><A HREF="../../../../../org/apache/poi/POIXMLDocumentPart.html#addRelation(java.lang.String, org.apache.poi.POIXMLDocumentPart)">addRelation</A>, <A HREF="../../../../../org/apache/poi/POIXMLDocumentPart.html#createRelationship(org.apache.poi.POIXMLRelation, org.apache.poi.POIXMLFactory)">createRelationship</A>, <A HREF="../../../../../org/apache/poi/POIXMLDocumentPart.html#createRelationship(org.apache.poi.POIXMLRelation, org.apache.poi.POIXMLFactory, int)">createRelationship</A>, <A HREF="../../../../../org/apache/poi/POIXMLDocumentPart.html#createRelationship(org.apache.poi.POIXMLRelation, org.apache.poi.POIXMLFactory, int, boolean)">createRelationship</A>, <A HREF="../../../../../org/apache/poi/POIXMLDocumentPart.html#getPackagePart()">getPackagePart</A>, <A HREF="../../../../../org/apache/poi/POIXMLDocumentPart.html#getPackageRelationship()">getPackageRelationship</A>, <A HREF="../../../../../org/apache/poi/POIXMLDocumentPart.html#getParent()">getParent</A>, <A HREF="../../../../../org/apache/poi/POIXMLDocumentPart.html#getRelationById(java.lang.String)">getRelationById</A>, <A HREF="../../../../../org/apache/poi/POIXMLDocumentPart.html#getRelationId(org.apache.poi.POIXMLDocumentPart)">getRelationId</A>, <A HREF="../../../../../org/apache/poi/POIXMLDocumentPart.html#getRelations()">getRelations</A>, <A HREF="../../../../../org/apache/poi/POIXMLDocumentPart.html#getTargetPart(org.apache.poi.openxml4j.opc.PackageRelationship)">getTargetPart</A>, <A HREF="../../../../../org/apache/poi/POIXMLDocumentPart.html#onDocumentRemove()">onDocumentRemove</A>, <A HREF="../../../../../org/apache/poi/POIXMLDocumentPart.html#onSave(java.util.Set)">onSave</A>, <A HREF="../../../../../org/apache/poi/POIXMLDocumentPart.html#prepareForCommit()">prepareForCommit</A>, <A HREF="../../../../../org/apache/poi/POIXMLDocumentPart.html#read(org.apache.poi.POIXMLFactory, java.util.Map)">read</A>, <A HREF="../../../../../org/apache/poi/POIXMLDocumentPart.html#rebase(org.apache.poi.openxml4j.opc.OPCPackage)">rebase</A>, <A HREF="../../../../../org/apache/poi/POIXMLDocumentPart.html#removeRelation(org.apache.poi.POIXMLDocumentPart)">removeRelation</A>, <A HREF="../../../../../org/apache/poi/POIXMLDocumentPart.html#removeRelation(org.apache.poi.POIXMLDocumentPart, boolean)">removeRelation</A>, <A HREF="../../../../../org/apache/poi/POIXMLDocumentPart.html#toString()">toString</A></CODE></TD>
+</TR>
+</TABLE>
+&nbsp;<A NAME="methods_inherited_from_class_java.lang.Object"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#EEEEFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left"><B>Methods inherited from class java.lang.Object</B></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE>clone, equals, finalize, getClass, hashCode, notify, notifyAll, wait, wait, wait</CODE></TD>
+</TR>
+</TABLE>
+&nbsp;
+<P>
+
+<!-- ============ FIELD DETAIL =========== -->
+
+<A NAME="field_detail"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="1"><FONT SIZE="+2">
+<B>Field Detail</B></FONT></TH>
+</TR>
+</TABLE>
+
+<A NAME="chartsheet"><!-- --></A><H3>
+chartsheet</H3>
+<PRE>
+protected org.openxmlformats.schemas.spreadsheetml.x2006.main.CTChartsheet <B>chartsheet</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+
+<!-- ========= CONSTRUCTOR DETAIL ======== -->
+
+<A NAME="constructor_detail"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="1"><FONT SIZE="+2">
+<B>Constructor Detail</B></FONT></TH>
+</TR>
+</TABLE>
+
+<A NAME="XSSFChartSheet(org.apache.poi.openxml4j.opc.PackagePart, org.apache.poi.openxml4j.opc.PackageRelationship)"><!-- --></A><H3>
+XSSFChartSheet</H3>
+<PRE>
+protected <B>XSSFChartSheet</B>(<A HREF="../../../../../org/apache/poi/openxml4j/opc/PackagePart.html" title="class in org.apache.poi.openxml4j.opc">PackagePart</A>&nbsp;part,
+                         <A HREF="../../../../../org/apache/poi/openxml4j/opc/PackageRelationship.html" title="class in org.apache.poi.openxml4j.opc">PackageRelationship</A>&nbsp;rel)</PRE>
+<DL>
+</DL>
+
+<!-- ============ METHOD DETAIL ========== -->
+
+<A NAME="method_detail"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="1"><FONT SIZE="+2">
+<B>Method Detail</B></FONT></TH>
+</TR>
+</TABLE>
+
+<A NAME="read(java.io.InputStream)"><!-- --></A><H3>
+read</H3>
+<PRE>
+protected void <B>read</B>(java.io.InputStream&nbsp;is)
+             throws java.io.IOException</PRE>
+<DL>
+<DD><DL>
+<DT><B>Overrides:</B><DD><CODE><A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFSheet.html#read(java.io.InputStream)">read</A></CODE> in class <CODE><A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFSheet.html" title="class in org.apache.poi.xssf.usermodel">XSSFSheet</A></CODE></DL>
+</DD>
+<DD><DL>
+
+<DT><B>Throws:</B>
+<DD><CODE>java.io.IOException</CODE></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getCTChartsheet()"><!-- --></A><H3>
+getCTChartsheet</H3>
+<PRE>
+public org.openxmlformats.schemas.spreadsheetml.x2006.main.CTChartsheet <B>getCTChartsheet</B>()</PRE>
+<DL>
+<DD>Provide access to the CTChartsheet bean holding this sheet's data
+<P>
+<DD><DL>
+
+<DT><B>Returns:</B><DD>the CTChartsheet bean holding this sheet's data</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getCTDrawing()"><!-- --></A><H3>
+getCTDrawing</H3>
+<PRE>
+protected org.openxmlformats.schemas.spreadsheetml.x2006.main.CTDrawing <B>getCTDrawing</B>()</PRE>
+<DL>
+<DD><DL>
+<DT><B>Overrides:</B><DD><CODE><A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFSheet.html#getCTDrawing()">getCTDrawing</A></CODE> in class <CODE><A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFSheet.html" title="class in org.apache.poi.xssf.usermodel">XSSFSheet</A></CODE></DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getCTLegacyDrawing()"><!-- --></A><H3>
+getCTLegacyDrawing</H3>
+<PRE>
+protected org.openxmlformats.schemas.spreadsheetml.x2006.main.CTLegacyDrawing <B>getCTLegacyDrawing</B>()</PRE>
+<DL>
+<DD><DL>
+<DT><B>Overrides:</B><DD><CODE><A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFSheet.html#getCTLegacyDrawing()">getCTLegacyDrawing</A></CODE> in class <CODE><A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFSheet.html" title="class in org.apache.poi.xssf.usermodel">XSSFSheet</A></CODE></DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="write(java.io.OutputStream)"><!-- --></A><H3>
+write</H3>
+<PRE>
+protected void <B>write</B>(java.io.OutputStream&nbsp;out)
+              throws java.io.IOException</PRE>
+<DL>
+<DD><DL>
+<DT><B>Overrides:</B><DD><CODE><A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFSheet.html#write(java.io.OutputStream)">write</A></CODE> in class <CODE><A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFSheet.html" title="class in org.apache.poi.xssf.usermodel">XSSFSheet</A></CODE></DL>
+</DD>
+<DD><DL>
+
+<DT><B>Throws:</B>
+<DD><CODE>java.io.IOException</CODE></DL>
+</DD>
+</DL>
+<!-- ========= END OF CLASS DATA ========= -->
+<HR>
+
+
+<!-- ======= START OF BOTTOM NAVBAR ====== -->
+<A NAME="navbar_bottom"><!-- --></A>
+<A HREF="#skip-navbar_bottom" title="Skip navigation links"></A>
+<TABLE BORDER="0" WIDTH="100%" CELLPADDING="1" CELLSPACING="0" SUMMARY="">
+<TR>
+<TD COLSPAN=2 BGCOLOR="#EEEEFF" CLASS="NavBarCell1">
+<A NAME="navbar_bottom_firstrow"><!-- --></A>
+<TABLE BORDER="0" CELLPADDING="0" CELLSPACING="3" SUMMARY="">
+  <TR ALIGN="center" VALIGN="top">
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../overview-summary.html"><FONT CLASS="NavBarFont1"><B>Overview</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="package-summary.html"><FONT CLASS="NavBarFont1"><B>Package</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#FFFFFF" CLASS="NavBarCell1Rev"> &nbsp;<FONT CLASS="NavBarFont1Rev"><B>Class</B></FONT>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="class-use/XSSFChartSheet.html"><FONT CLASS="NavBarFont1"><B>Use</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="package-tree.html"><FONT CLASS="NavBarFont1"><B>Tree</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../deprecated-list.html"><FONT CLASS="NavBarFont1"><B>Deprecated</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../index-all.html"><FONT CLASS="NavBarFont1"><B>Index</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../help-doc.html"><FONT CLASS="NavBarFont1"><B>Help</B></FONT></A>&nbsp;</TD>
+  </TR>
+</TABLE>
+</TD>
+<TD ALIGN="right" VALIGN="top" ROWSPAN=3><EM>
+</EM>
+</TD>
+</TR>
+
+<TR>
+<TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
+&nbsp;<A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFChart.html" title="class in org.apache.poi.xssf.usermodel"><B>PREV CLASS</B></A>&nbsp;
+&nbsp;<A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFChildAnchor.html" title="class in org.apache.poi.xssf.usermodel"><B>NEXT CLASS</B></A></FONT></TD>
+<TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
+  <A HREF="../../../../../index.html?org/apache/poi/xssf/usermodel/XSSFChartSheet.html" target="_top"><B>FRAMES</B></A>  &nbsp;
+&nbsp;<A HREF="XSSFChartSheet.html" target="_top"><B>NO FRAMES</B></A>  &nbsp;
+&nbsp;<SCRIPT type="text/javascript">
+  <!--
+  if(window==top) {
+    document.writeln('<A HREF="../../../../../allclasses-noframe.html"><B>All Classes</B></A>');
+  }
+  //-->
+</SCRIPT>
+<NOSCRIPT>
+  <A HREF="../../../../../allclasses-noframe.html"><B>All Classes</B></A>
+</NOSCRIPT>
+
+
+</FONT></TD>
+</TR>
+<TR>
+<TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
+  SUMMARY:&nbsp;NESTED&nbsp;|&nbsp;<A HREF="#field_summary">FIELD</A>&nbsp;|&nbsp;<A HREF="#constructor_summary">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_summary">METHOD</A></FONT></TD>
+<TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
+DETAIL:&nbsp;<A HREF="#field_detail">FIELD</A>&nbsp;|&nbsp;<A HREF="#constructor_detail">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_detail">METHOD</A></FONT></TD>
+</TR>
+</TABLE>
+<A NAME="skip-navbar_bottom"></A>
+<!-- ======== END OF BOTTOM NAVBAR ======= -->
+
+<HR>
+
+                <i>Copyright 2014 The Apache Software Foundation or
+        its licensors, as applicable.</i>
+            
+</BODY>
+</HTML>

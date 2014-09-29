@@ -1,0 +1,333 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!--NewPage-->
+<HTML>
+<HEAD>
+<TITLE>
+PICF (POI API Documentation)
+</TITLE>
+
+<META NAME="keywords" CONTENT="org.apache.poi.hwpf.model.PICF class">
+
+<LINK REL ="stylesheet" TYPE="text/css" HREF="../../../../../stylesheet.css" TITLE="Style">
+
+<SCRIPT type="text/javascript">
+function windowTitle()
+{
+    parent.document.title="PICF (POI API Documentation)";
+}
+</SCRIPT>
+<NOSCRIPT>
+</NOSCRIPT>
+
+</HEAD>
+
+<BODY BGCOLOR="white" onload="windowTitle();">
+
+
+<!-- ========= START OF TOP NAVBAR ======= -->
+<A NAME="navbar_top"><!-- --></A>
+<A HREF="#skip-navbar_top" title="Skip navigation links"></A>
+<TABLE BORDER="0" WIDTH="100%" CELLPADDING="1" CELLSPACING="0" SUMMARY="">
+<TR>
+<TD COLSPAN=2 BGCOLOR="#EEEEFF" CLASS="NavBarCell1">
+<A NAME="navbar_top_firstrow"><!-- --></A>
+<TABLE BORDER="0" CELLPADDING="0" CELLSPACING="3" SUMMARY="">
+  <TR ALIGN="center" VALIGN="top">
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../overview-summary.html"><FONT CLASS="NavBarFont1"><B>Overview</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="package-summary.html"><FONT CLASS="NavBarFont1"><B>Package</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#FFFFFF" CLASS="NavBarCell1Rev"> &nbsp;<FONT CLASS="NavBarFont1Rev"><B>Class</B></FONT>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="class-use/PICF.html"><FONT CLASS="NavBarFont1"><B>Use</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="package-tree.html"><FONT CLASS="NavBarFont1"><B>Tree</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../deprecated-list.html"><FONT CLASS="NavBarFont1"><B>Deprecated</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../index-all.html"><FONT CLASS="NavBarFont1"><B>Index</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../help-doc.html"><FONT CLASS="NavBarFont1"><B>Help</B></FONT></A>&nbsp;</TD>
+  </TR>
+</TABLE>
+</TD>
+<TD ALIGN="right" VALIGN="top" ROWSPAN=3><EM>
+</EM>
+</TD>
+</TR>
+
+<TR>
+<TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
+&nbsp;<A HREF="../../../../../org/apache/poi/hwpf/model/ParagraphHeight.html" title="class in org.apache.poi.hwpf.model"><B>PREV CLASS</B></A>&nbsp;
+&nbsp;<A HREF="../../../../../org/apache/poi/hwpf/model/PICFAndOfficeArtData.html" title="class in org.apache.poi.hwpf.model"><B>NEXT CLASS</B></A></FONT></TD>
+<TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
+  <A HREF="../../../../../index.html?org/apache/poi/hwpf/model/PICF.html" target="_top"><B>FRAMES</B></A>  &nbsp;
+&nbsp;<A HREF="PICF.html" target="_top"><B>NO FRAMES</B></A>  &nbsp;
+&nbsp;<SCRIPT type="text/javascript">
+  <!--
+  if(window==top) {
+    document.writeln('<A HREF="../../../../../allclasses-noframe.html"><B>All Classes</B></A>');
+  }
+  //-->
+</SCRIPT>
+<NOSCRIPT>
+  <A HREF="../../../../../allclasses-noframe.html"><B>All Classes</B></A>
+</NOSCRIPT>
+
+
+</FONT></TD>
+</TR>
+<TR>
+<TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
+  SUMMARY:&nbsp;NESTED&nbsp;|&nbsp;<A HREF="#fields_inherited_from_class_org.apache.poi.hwpf.model.types.PICFAbstractType">FIELD</A>&nbsp;|&nbsp;<A HREF="#constructor_summary">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_summary">METHOD</A></FONT></TD>
+<TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
+DETAIL:&nbsp;FIELD&nbsp;|&nbsp;<A HREF="#constructor_detail">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_detail">METHOD</A></FONT></TD>
+</TR>
+</TABLE>
+<A NAME="skip-navbar_top"></A>
+<!-- ========= END OF TOP NAVBAR ========= -->
+
+<HR>
+<!-- ======== START OF CLASS DATA ======== -->
+<H2>
+<FONT SIZE="-1">
+org.apache.poi.hwpf.model</FONT>
+<BR>
+Class PICF</H2>
+<PRE>
+java.lang.Object
+  <IMG SRC="../../../../../resources/inherit.gif" ALT="extended by "><A HREF="../../../../../org/apache/poi/hwpf/model/types/PICFAbstractType.html" title="class in org.apache.poi.hwpf.model.types">org.apache.poi.hwpf.model.types.PICFAbstractType</A>
+      <IMG SRC="../../../../../resources/inherit.gif" ALT="extended by "><B>org.apache.poi.hwpf.model.PICF</B>
+</PRE>
+<HR>
+<DL>
+<DT><PRE><FONT SIZE="-1"><A HREF="../../../../../org/apache/poi/util/Internal.html" title="annotation in org.apache.poi.util">@Internal</A>
+</FONT>public class <B>PICF</B><DT>extends <A HREF="../../../../../org/apache/poi/hwpf/model/types/PICFAbstractType.html" title="class in org.apache.poi.hwpf.model.types">PICFAbstractType</A></DL>
+</PRE>
+
+<P>
+The PICF structure specifies the type of a picture, as well as the size of
+ the picture and information about its border.
+ <p>
+ Class and fields descriptions are quoted from Microsoft Office Word 97-2007
+ Binary File Format and [MS-DOC] - v20110608 Word (.doc) Binary File Format
+<P>
+
+<P>
+<DL>
+<DT><B>Author:</B></DT>
+  <DD>Sergey Vladimirov (vlsergey {at} gmail {dot} com)</DD>
+</DL>
+<HR>
+
+<P>
+<!-- =========== FIELD SUMMARY =========== -->
+
+<A NAME="field_summary"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+<B>Field Summary</B></FONT></TH>
+</TR>
+</TABLE>
+&nbsp;<A NAME="fields_inherited_from_class_org.apache.poi.hwpf.model.types.PICFAbstractType"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#EEEEFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left"><B>Fields inherited from class org.apache.poi.hwpf.model.types.<A HREF="../../../../../org/apache/poi/hwpf/model/types/PICFAbstractType.html" title="class in org.apache.poi.hwpf.model.types">PICFAbstractType</A></B></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><A HREF="../../../../../org/apache/poi/hwpf/model/types/PICFAbstractType.html#field_1_lcb">field_1_lcb</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/PICFAbstractType.html#field_10_padding2">field_10_padding2</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/PICFAbstractType.html#field_11_dxaGoal">field_11_dxaGoal</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/PICFAbstractType.html#field_12_dyaGoal">field_12_dyaGoal</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/PICFAbstractType.html#field_13_mx">field_13_mx</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/PICFAbstractType.html#field_14_my">field_14_my</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/PICFAbstractType.html#field_15_dxaReserved1">field_15_dxaReserved1</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/PICFAbstractType.html#field_16_dyaReserved1">field_16_dyaReserved1</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/PICFAbstractType.html#field_17_dxaReserved2">field_17_dxaReserved2</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/PICFAbstractType.html#field_18_dyaReserved2">field_18_dyaReserved2</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/PICFAbstractType.html#field_19_fReserved">field_19_fReserved</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/PICFAbstractType.html#field_2_cbHeader">field_2_cbHeader</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/PICFAbstractType.html#field_20_bpp">field_20_bpp</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/PICFAbstractType.html#field_21_brcTop80">field_21_brcTop80</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/PICFAbstractType.html#field_22_brcLeft80">field_22_brcLeft80</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/PICFAbstractType.html#field_23_brcBottom80">field_23_brcBottom80</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/PICFAbstractType.html#field_24_brcRight80">field_24_brcRight80</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/PICFAbstractType.html#field_25_dxaReserved3">field_25_dxaReserved3</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/PICFAbstractType.html#field_26_dyaReserved3">field_26_dyaReserved3</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/PICFAbstractType.html#field_27_cProps">field_27_cProps</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/PICFAbstractType.html#field_3_mm">field_3_mm</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/PICFAbstractType.html#field_4_xExt">field_4_xExt</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/PICFAbstractType.html#field_5_yExt">field_5_yExt</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/PICFAbstractType.html#field_6_swHMF">field_6_swHMF</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/PICFAbstractType.html#field_7_grf">field_7_grf</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/PICFAbstractType.html#field_8_padding">field_8_padding</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/PICFAbstractType.html#field_9_mmPM">field_9_mmPM</A></CODE></TD>
+</TR>
+</TABLE>
+&nbsp;
+<!-- ======== CONSTRUCTOR SUMMARY ======== -->
+
+<A NAME="constructor_summary"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+<B>Constructor Summary</B></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/model/PICF.html#PICF()">PICF</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/model/PICF.html#PICF(byte[], int)">PICF</A></B>(byte[]&nbsp;std,
+     int&nbsp;offset)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+</TABLE>
+&nbsp;
+<!-- ========== METHOD SUMMARY =========== -->
+
+<A NAME="method_summary"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+<B>Method Summary</B></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/model/PICF.html#equals(java.lang.Object)">equals</A></B>(java.lang.Object&nbsp;obj)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;int</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/model/PICF.html#hashCode()">hashCode</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+</TABLE>
+&nbsp;<A NAME="methods_inherited_from_class_org.apache.poi.hwpf.model.types.PICFAbstractType"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#EEEEFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left"><B>Methods inherited from class org.apache.poi.hwpf.model.types.<A HREF="../../../../../org/apache/poi/hwpf/model/types/PICFAbstractType.html" title="class in org.apache.poi.hwpf.model.types">PICFAbstractType</A></B></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><A HREF="../../../../../org/apache/poi/hwpf/model/types/PICFAbstractType.html#fillFields(byte[], int)">fillFields</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/PICFAbstractType.html#getBpp()">getBpp</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/PICFAbstractType.html#getBrcBottom80()">getBrcBottom80</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/PICFAbstractType.html#getBrcLeft80()">getBrcLeft80</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/PICFAbstractType.html#getBrcRight80()">getBrcRight80</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/PICFAbstractType.html#getBrcTop80()">getBrcTop80</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/PICFAbstractType.html#getCbHeader()">getCbHeader</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/PICFAbstractType.html#getCProps()">getCProps</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/PICFAbstractType.html#getDxaGoal()">getDxaGoal</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/PICFAbstractType.html#getDxaReserved1()">getDxaReserved1</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/PICFAbstractType.html#getDxaReserved2()">getDxaReserved2</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/PICFAbstractType.html#getDxaReserved3()">getDxaReserved3</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/PICFAbstractType.html#getDyaGoal()">getDyaGoal</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/PICFAbstractType.html#getDyaReserved1()">getDyaReserved1</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/PICFAbstractType.html#getDyaReserved2()">getDyaReserved2</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/PICFAbstractType.html#getDyaReserved3()">getDyaReserved3</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/PICFAbstractType.html#getFReserved()">getFReserved</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/PICFAbstractType.html#getGrf()">getGrf</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/PICFAbstractType.html#getLcb()">getLcb</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/PICFAbstractType.html#getMm()">getMm</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/PICFAbstractType.html#getMmPM()">getMmPM</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/PICFAbstractType.html#getMx()">getMx</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/PICFAbstractType.html#getMy()">getMy</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/PICFAbstractType.html#getPadding()">getPadding</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/PICFAbstractType.html#getPadding2()">getPadding2</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/PICFAbstractType.html#getSize()">getSize</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/PICFAbstractType.html#getSwHMF()">getSwHMF</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/PICFAbstractType.html#getXExt()">getXExt</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/PICFAbstractType.html#getYExt()">getYExt</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/PICFAbstractType.html#serialize()">serialize</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/PICFAbstractType.html#serialize(byte[], int)">serialize</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/PICFAbstractType.html#setBpp(byte)">setBpp</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/PICFAbstractType.html#setBrcBottom80(byte[])">setBrcBottom80</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/PICFAbstractType.html#setBrcLeft80(byte[])">setBrcLeft80</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/PICFAbstractType.html#setBrcRight80(byte[])">setBrcRight80</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/PICFAbstractType.html#setBrcTop80(byte[])">setBrcTop80</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/PICFAbstractType.html#setCbHeader(int)">setCbHeader</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/PICFAbstractType.html#setCProps(short)">setCProps</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/PICFAbstractType.html#setDxaGoal(short)">setDxaGoal</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/PICFAbstractType.html#setDxaReserved1(short)">setDxaReserved1</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/PICFAbstractType.html#setDxaReserved2(short)">setDxaReserved2</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/PICFAbstractType.html#setDxaReserved3(short)">setDxaReserved3</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/PICFAbstractType.html#setDyaGoal(short)">setDyaGoal</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/PICFAbstractType.html#setDyaReserved1(short)">setDyaReserved1</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/PICFAbstractType.html#setDyaReserved2(short)">setDyaReserved2</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/PICFAbstractType.html#setDyaReserved3(short)">setDyaReserved3</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/PICFAbstractType.html#setFReserved(byte)">setFReserved</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/PICFAbstractType.html#setGrf(int)">setGrf</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/PICFAbstractType.html#setLcb(int)">setLcb</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/PICFAbstractType.html#setMm(short)">setMm</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/PICFAbstractType.html#setMmPM(int)">setMmPM</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/PICFAbstractType.html#setMx(int)">setMx</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/PICFAbstractType.html#setMy(int)">setMy</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/PICFAbstractType.html#setPadding(int)">setPadding</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/PICFAbstractType.html#setPadding2(int)">setPadding2</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/PICFAbstractType.html#setSwHMF(short)">setSwHMF</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/PICFAbstractType.html#setXExt(short)">setXExt</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/PICFAbstractType.html#setYExt(short)">setYExt</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/PICFAbstractType.html#toString()">toString</A></CODE></TD>
+</TR>
+</TABLE>
+&nbsp;<A NAME="methods_inherited_from_class_java.lang.Object"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#EEEEFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left"><B>Methods inherited from class java.lang.Object</B></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE>clone, finalize, getClass, notify, notifyAll, wait, wait, wait</CODE></TD>
+</TR>
+</TABLE>
+&nbsp;
+<P>
+
+<!-- ========= CONSTRUCTOR DETAIL ======== -->
+
+<A NAME="constructor_detail"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="1"><FONT SIZE="+2">
+<B>Constructor Detail</B></FONT></TH>
+</TR>
+</TABLE>
+
+<A NAME="PICF()"><!-- --></A><H3>
+PICF</H3>
+<PRE>
+public <B>PICF</B>()</PRE>
+<DL>
+</DL>
+<HR>
+
+<A NAME="PICF(byte[], int)"><!-- --></A><H3>
+PICF</H3>
+<PRE>
+public <B>PICF</B>(byte[]&nbsp;std,
+            int&nbsp;offset)</PRE>
+<DL>
+</DL>
+
+<!-- ============ METHOD DETAIL ========== -->
+
+<A NAME="method_detail"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="1"><FONT SIZE="+2">
+<B>Method Detail</B></FONT></TH>
+</TR>
+</TABLE>
+
+<A NAME="equals(java.lang.Object)"><!-- --></A><H3>
+equals</H3>
+<PRE>
+public boolean <B>equals</B>(java.lang.Object&nbsp;obj)</PRE>
+<DL>
+<DD><DL>
+<DT><B>Overrides:</B><DD><CODE>equals</CODE> in class <CODE>java.lang.Object</CODE></DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="hashCode()"><!-- --></A><H3>
+hashCode</H3>
+<PRE>
+public int <B>hashCode</B>()</PRE>
+<DL>
+<DD><DL>
+<DT><B>Overrides:</B><DD><CODE>hashCode</CODE> in class <CODE>java.lang.Object</CODE></DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<!-- ========= END OF CLASS DATA ========= -->
+<HR>
+
+
+<!-- ======= START OF BOTTOM NAVBAR ====== -->
+<A NAME="navbar_bottom"><!-- --></A>
+<A HREF="#skip-navbar_bottom" title="Skip navigation links"></A>
+<TABLE BORDER="0" WIDTH="100%" CELLPADDING="1" CELLSPACING="0" SUMMARY="">
+<TR>
+<TD COLSPAN=2 BGCOLOR="#EEEEFF" CLASS="NavBarCell1">
+<A NAME="navbar_bottom_firstrow"><!-- --></A>
+<TABLE BORDER="0" CELLPADDING="0" CELLSPACING="3" SUMMARY="">
+  <TR ALIGN="center" VALIGN="top">
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../overview-summary.html"><FONT CLASS="NavBarFont1"><B>Overview</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="package-summary.html"><FONT CLASS="NavBarFont1"><B>Package</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#FFFFFF" CLASS="NavBarCell1Rev"> &nbsp;<FONT CLASS="NavBarFont1Rev"><B>Class</B></FONT>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="class-use/PICF.html"><FONT CLASS="NavBarFont1"><B>Use</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="package-tree.html"><FONT CLASS="NavBarFont1"><B>Tree</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../deprecated-list.html"><FONT CLASS="NavBarFont1"><B>Deprecated</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../index-all.html"><FONT CLASS="NavBarFont1"><B>Index</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../help-doc.html"><FONT CLASS="NavBarFont1"><B>Help</B></FONT></A>&nbsp;</TD>
+  </TR>
+</TABLE>
+</TD>
+<TD ALIGN="right" VALIGN="top" ROWSPAN=3><EM>
+</EM>
+</TD>
+</TR>
+
+<TR>
+<TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
+&nbsp;<A HREF="../../../../../org/apache/poi/hwpf/model/ParagraphHeight.html" title="class in org.apache.poi.hwpf.model"><B>PREV CLASS</B></A>&nbsp;
+&nbsp;<A HREF="../../../../../org/apache/poi/hwpf/model/PICFAndOfficeArtData.html" title="class in org.apache.poi.hwpf.model"><B>NEXT CLASS</B></A></FONT></TD>
+<TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
+  <A HREF="../../../../../index.html?org/apache/poi/hwpf/model/PICF.html" target="_top"><B>FRAMES</B></A>  &nbsp;
+&nbsp;<A HREF="PICF.html" target="_top"><B>NO FRAMES</B></A>  &nbsp;
+&nbsp;<SCRIPT type="text/javascript">
+  <!--
+  if(window==top) {
+    document.writeln('<A HREF="../../../../../allclasses-noframe.html"><B>All Classes</B></A>');
+  }
+  //-->
+</SCRIPT>
+<NOSCRIPT>
+  <A HREF="../../../../../allclasses-noframe.html"><B>All Classes</B></A>
+</NOSCRIPT>
+
+
+</FONT></TD>
+</TR>
+<TR>
+<TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
+  SUMMARY:&nbsp;NESTED&nbsp;|&nbsp;<A HREF="#fields_inherited_from_class_org.apache.poi.hwpf.model.types.PICFAbstractType">FIELD</A>&nbsp;|&nbsp;<A HREF="#constructor_summary">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_summary">METHOD</A></FONT></TD>
+<TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
+DETAIL:&nbsp;FIELD&nbsp;|&nbsp;<A HREF="#constructor_detail">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_detail">METHOD</A></FONT></TD>
+</TR>
+</TABLE>
+<A NAME="skip-navbar_bottom"></A>
+<!-- ======== END OF BOTTOM NAVBAR ======= -->
+
+<HR>
+
+                <i>Copyright 2014 The Apache Software Foundation or
+        its licensors, as applicable.</i>
+            
+</BODY>
+</HTML>

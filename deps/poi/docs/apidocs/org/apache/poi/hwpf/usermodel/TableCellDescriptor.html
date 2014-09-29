@@ -1,0 +1,387 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!--NewPage-->
+<HTML>
+<HEAD>
+<TITLE>
+TableCellDescriptor (POI API Documentation)
+</TITLE>
+
+<META NAME="keywords" CONTENT="org.apache.poi.hwpf.usermodel.TableCellDescriptor class">
+
+<LINK REL ="stylesheet" TYPE="text/css" HREF="../../../../../stylesheet.css" TITLE="Style">
+
+<SCRIPT type="text/javascript">
+function windowTitle()
+{
+    parent.document.title="TableCellDescriptor (POI API Documentation)";
+}
+</SCRIPT>
+<NOSCRIPT>
+</NOSCRIPT>
+
+</HEAD>
+
+<BODY BGCOLOR="white" onload="windowTitle();">
+
+
+<!-- ========= START OF TOP NAVBAR ======= -->
+<A NAME="navbar_top"><!-- --></A>
+<A HREF="#skip-navbar_top" title="Skip navigation links"></A>
+<TABLE BORDER="0" WIDTH="100%" CELLPADDING="1" CELLSPACING="0" SUMMARY="">
+<TR>
+<TD COLSPAN=2 BGCOLOR="#EEEEFF" CLASS="NavBarCell1">
+<A NAME="navbar_top_firstrow"><!-- --></A>
+<TABLE BORDER="0" CELLPADDING="0" CELLSPACING="3" SUMMARY="">
+  <TR ALIGN="center" VALIGN="top">
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../overview-summary.html"><FONT CLASS="NavBarFont1"><B>Overview</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="package-summary.html"><FONT CLASS="NavBarFont1"><B>Package</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#FFFFFF" CLASS="NavBarCell1Rev"> &nbsp;<FONT CLASS="NavBarFont1Rev"><B>Class</B></FONT>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="class-use/TableCellDescriptor.html"><FONT CLASS="NavBarFont1"><B>Use</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="package-tree.html"><FONT CLASS="NavBarFont1"><B>Tree</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../deprecated-list.html"><FONT CLASS="NavBarFont1"><B>Deprecated</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../index-all.html"><FONT CLASS="NavBarFont1"><B>Index</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../help-doc.html"><FONT CLASS="NavBarFont1"><B>Help</B></FONT></A>&nbsp;</TD>
+  </TR>
+</TABLE>
+</TD>
+<TD ALIGN="right" VALIGN="top" ROWSPAN=3><EM>
+</EM>
+</TD>
+</TR>
+
+<TR>
+<TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
+&nbsp;<A HREF="../../../../../org/apache/poi/hwpf/usermodel/TableCell.html" title="class in org.apache.poi.hwpf.usermodel"><B>PREV CLASS</B></A>&nbsp;
+&nbsp;<A HREF="../../../../../org/apache/poi/hwpf/usermodel/TableIterator.html" title="class in org.apache.poi.hwpf.usermodel"><B>NEXT CLASS</B></A></FONT></TD>
+<TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
+  <A HREF="../../../../../index.html?org/apache/poi/hwpf/usermodel/TableCellDescriptor.html" target="_top"><B>FRAMES</B></A>  &nbsp;
+&nbsp;<A HREF="TableCellDescriptor.html" target="_top"><B>NO FRAMES</B></A>  &nbsp;
+&nbsp;<SCRIPT type="text/javascript">
+  <!--
+  if(window==top) {
+    document.writeln('<A HREF="../../../../../allclasses-noframe.html"><B>All Classes</B></A>');
+  }
+  //-->
+</SCRIPT>
+<NOSCRIPT>
+  <A HREF="../../../../../allclasses-noframe.html"><B>All Classes</B></A>
+</NOSCRIPT>
+
+
+</FONT></TD>
+</TR>
+<TR>
+<TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
+  SUMMARY:&nbsp;NESTED&nbsp;|&nbsp;<A HREF="#field_summary">FIELD</A>&nbsp;|&nbsp;<A HREF="#constructor_summary">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_summary">METHOD</A></FONT></TD>
+<TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
+DETAIL:&nbsp;<A HREF="#field_detail">FIELD</A>&nbsp;|&nbsp;<A HREF="#constructor_detail">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_detail">METHOD</A></FONT></TD>
+</TR>
+</TABLE>
+<A NAME="skip-navbar_top"></A>
+<!-- ========= END OF TOP NAVBAR ========= -->
+
+<HR>
+<!-- ======== START OF CLASS DATA ======== -->
+<H2>
+<FONT SIZE="-1">
+org.apache.poi.hwpf.usermodel</FONT>
+<BR>
+Class TableCellDescriptor</H2>
+<PRE>
+java.lang.Object
+  <IMG SRC="../../../../../resources/inherit.gif" ALT="extended by "><A HREF="../../../../../org/apache/poi/hwpf/model/types/TCAbstractType.html" title="class in org.apache.poi.hwpf.model.types">org.apache.poi.hwpf.model.types.TCAbstractType</A>
+      <IMG SRC="../../../../../resources/inherit.gif" ALT="extended by "><B>org.apache.poi.hwpf.usermodel.TableCellDescriptor</B>
+</PRE>
+<DL>
+<DT><B>All Implemented Interfaces:</B> <DD>java.lang.Cloneable</DD>
+</DL>
+<HR>
+<DL>
+<DT><PRE>public final class <B>TableCellDescriptor</B><DT>extends <A HREF="../../../../../org/apache/poi/hwpf/model/types/TCAbstractType.html" title="class in org.apache.poi.hwpf.model.types">TCAbstractType</A><DT>implements java.lang.Cloneable</DL>
+</PRE>
+
+<P>
+<HR>
+
+<P>
+<!-- =========== FIELD SUMMARY =========== -->
+
+<A NAME="field_summary"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+<B>Field Summary</B></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;int</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/usermodel/TableCellDescriptor.html#SIZE">SIZE</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+</TABLE>
+&nbsp;<A NAME="fields_inherited_from_class_org.apache.poi.hwpf.model.types.TCAbstractType"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#EEEEFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left"><B>Fields inherited from class org.apache.poi.hwpf.model.types.<A HREF="../../../../../org/apache/poi/hwpf/model/types/TCAbstractType.html" title="class in org.apache.poi.hwpf.model.types">TCAbstractType</A></B></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><A HREF="../../../../../org/apache/poi/hwpf/model/types/TCAbstractType.html#field_1_rgf">field_1_rgf</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/TCAbstractType.html#field_10_ftsCellPaddingBottom">field_10_ftsCellPaddingBottom</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/TCAbstractType.html#field_11_ftsCellPaddingRight">field_11_ftsCellPaddingRight</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/TCAbstractType.html#field_12_wCellSpacingLeft">field_12_wCellSpacingLeft</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/TCAbstractType.html#field_13_wCellSpacingTop">field_13_wCellSpacingTop</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/TCAbstractType.html#field_14_wCellSpacingBottom">field_14_wCellSpacingBottom</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/TCAbstractType.html#field_15_wCellSpacingRight">field_15_wCellSpacingRight</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/TCAbstractType.html#field_16_ftsCellSpacingLeft">field_16_ftsCellSpacingLeft</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/TCAbstractType.html#field_17_ftsCellSpacingTop">field_17_ftsCellSpacingTop</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/TCAbstractType.html#field_18_ftsCellSpacingBottom">field_18_ftsCellSpacingBottom</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/TCAbstractType.html#field_19_ftsCellSpacingRight">field_19_ftsCellSpacingRight</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/TCAbstractType.html#field_2_wWidth">field_2_wWidth</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/TCAbstractType.html#field_20_brcTop">field_20_brcTop</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/TCAbstractType.html#field_21_brcLeft">field_21_brcLeft</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/TCAbstractType.html#field_22_brcBottom">field_22_brcBottom</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/TCAbstractType.html#field_23_brcRight">field_23_brcRight</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/TCAbstractType.html#field_3_shd">field_3_shd</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/TCAbstractType.html#field_4_wCellPaddingLeft">field_4_wCellPaddingLeft</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/TCAbstractType.html#field_5_wCellPaddingTop">field_5_wCellPaddingTop</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/TCAbstractType.html#field_6_wCellPaddingBottom">field_6_wCellPaddingBottom</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/TCAbstractType.html#field_7_wCellPaddingRight">field_7_wCellPaddingRight</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/TCAbstractType.html#field_8_ftsCellPaddingLeft">field_8_ftsCellPaddingLeft</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/TCAbstractType.html#field_9_ftsCellPaddingTop">field_9_ftsCellPaddingTop</A></CODE></TD>
+</TR>
+</TABLE>
+&nbsp;
+<!-- ======== CONSTRUCTOR SUMMARY ======== -->
+
+<A NAME="constructor_summary"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+<B>Constructor Summary</B></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/usermodel/TableCellDescriptor.html#TableCellDescriptor()">TableCellDescriptor</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+</TABLE>
+&nbsp;
+<!-- ========== METHOD SUMMARY =========== -->
+
+<A NAME="method_summary"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+<B>Method Summary</B></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;java.lang.Object</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/usermodel/TableCellDescriptor.html#clone()">clone</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;<A HREF="../../../../../org/apache/poi/hwpf/usermodel/TableCellDescriptor.html" title="class in org.apache.poi.hwpf.usermodel">TableCellDescriptor</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/usermodel/TableCellDescriptor.html#convertBytesToTC(byte[], int)">convertBytesToTC</A></B>(byte[]&nbsp;buf,
+                 int&nbsp;offset)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>protected &nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/usermodel/TableCellDescriptor.html#fillFields(byte[], int)">fillFields</A></B>(byte[]&nbsp;data,
+           int&nbsp;offset)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/usermodel/TableCellDescriptor.html#serialize(byte[], int)">serialize</A></B>(byte[]&nbsp;data,
+          int&nbsp;offset)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+</TABLE>
+&nbsp;<A NAME="methods_inherited_from_class_org.apache.poi.hwpf.model.types.TCAbstractType"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#EEEEFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left"><B>Methods inherited from class org.apache.poi.hwpf.model.types.<A HREF="../../../../../org/apache/poi/hwpf/model/types/TCAbstractType.html" title="class in org.apache.poi.hwpf.model.types">TCAbstractType</A></B></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><A HREF="../../../../../org/apache/poi/hwpf/model/types/TCAbstractType.html#getBrcBottom()">getBrcBottom</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/TCAbstractType.html#getBrcLeft()">getBrcLeft</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/TCAbstractType.html#getBrcRight()">getBrcRight</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/TCAbstractType.html#getBrcTop()">getBrcTop</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/TCAbstractType.html#getFtsCellPaddingBottom()">getFtsCellPaddingBottom</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/TCAbstractType.html#getFtsCellPaddingLeft()">getFtsCellPaddingLeft</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/TCAbstractType.html#getFtsCellPaddingRight()">getFtsCellPaddingRight</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/TCAbstractType.html#getFtsCellPaddingTop()">getFtsCellPaddingTop</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/TCAbstractType.html#getFtsCellSpacingBottom()">getFtsCellSpacingBottom</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/TCAbstractType.html#getFtsCellSpacingLeft()">getFtsCellSpacingLeft</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/TCAbstractType.html#getFtsCellSpacingRight()">getFtsCellSpacingRight</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/TCAbstractType.html#getFtsCellSpacingTop()">getFtsCellSpacingTop</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/TCAbstractType.html#getFtsWidth()">getFtsWidth</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/TCAbstractType.html#getFUnused()">getFUnused</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/TCAbstractType.html#getRgf()">getRgf</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/TCAbstractType.html#getShd()">getShd</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/TCAbstractType.html#getVertAlign()">getVertAlign</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/TCAbstractType.html#getWCellPaddingBottom()">getWCellPaddingBottom</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/TCAbstractType.html#getWCellPaddingLeft()">getWCellPaddingLeft</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/TCAbstractType.html#getWCellPaddingRight()">getWCellPaddingRight</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/TCAbstractType.html#getWCellPaddingTop()">getWCellPaddingTop</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/TCAbstractType.html#getWCellSpacingBottom()">getWCellSpacingBottom</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/TCAbstractType.html#getWCellSpacingLeft()">getWCellSpacingLeft</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/TCAbstractType.html#getWCellSpacingRight()">getWCellSpacingRight</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/TCAbstractType.html#getWCellSpacingTop()">getWCellSpacingTop</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/TCAbstractType.html#getWWidth()">getWWidth</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/TCAbstractType.html#isFBackward()">isFBackward</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/TCAbstractType.html#isFFirstMerged()">isFFirstMerged</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/TCAbstractType.html#isFFitText()">isFFitText</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/TCAbstractType.html#isFMerged()">isFMerged</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/TCAbstractType.html#isFNoWrap()">isFNoWrap</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/TCAbstractType.html#isFRotateFont()">isFRotateFont</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/TCAbstractType.html#isFVertical()">isFVertical</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/TCAbstractType.html#isFVertMerge()">isFVertMerge</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/TCAbstractType.html#isFVertRestart()">isFVertRestart</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/TCAbstractType.html#setBrcBottom(org.apache.poi.hwpf.usermodel.BorderCode)">setBrcBottom</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/TCAbstractType.html#setBrcLeft(org.apache.poi.hwpf.usermodel.BorderCode)">setBrcLeft</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/TCAbstractType.html#setBrcRight(org.apache.poi.hwpf.usermodel.BorderCode)">setBrcRight</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/TCAbstractType.html#setBrcTop(org.apache.poi.hwpf.usermodel.BorderCode)">setBrcTop</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/TCAbstractType.html#setFBackward(boolean)">setFBackward</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/TCAbstractType.html#setFFirstMerged(boolean)">setFFirstMerged</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/TCAbstractType.html#setFFitText(boolean)">setFFitText</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/TCAbstractType.html#setFMerged(boolean)">setFMerged</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/TCAbstractType.html#setFNoWrap(boolean)">setFNoWrap</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/TCAbstractType.html#setFRotateFont(boolean)">setFRotateFont</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/TCAbstractType.html#setFtsCellPaddingBottom(byte)">setFtsCellPaddingBottom</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/TCAbstractType.html#setFtsCellPaddingLeft(byte)">setFtsCellPaddingLeft</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/TCAbstractType.html#setFtsCellPaddingRight(byte)">setFtsCellPaddingRight</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/TCAbstractType.html#setFtsCellPaddingTop(byte)">setFtsCellPaddingTop</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/TCAbstractType.html#setFtsCellSpacingBottom(byte)">setFtsCellSpacingBottom</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/TCAbstractType.html#setFtsCellSpacingLeft(byte)">setFtsCellSpacingLeft</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/TCAbstractType.html#setFtsCellSpacingRight(byte)">setFtsCellSpacingRight</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/TCAbstractType.html#setFtsCellSpacingTop(byte)">setFtsCellSpacingTop</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/TCAbstractType.html#setFtsWidth(byte)">setFtsWidth</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/TCAbstractType.html#setFUnused(byte)">setFUnused</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/TCAbstractType.html#setFVertical(boolean)">setFVertical</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/TCAbstractType.html#setFVertMerge(boolean)">setFVertMerge</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/TCAbstractType.html#setFVertRestart(boolean)">setFVertRestart</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/TCAbstractType.html#setRgf(short)">setRgf</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/TCAbstractType.html#setShd(org.apache.poi.hwpf.usermodel.ShadingDescriptor)">setShd</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/TCAbstractType.html#setVertAlign(byte)">setVertAlign</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/TCAbstractType.html#setWCellPaddingBottom(short)">setWCellPaddingBottom</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/TCAbstractType.html#setWCellPaddingLeft(short)">setWCellPaddingLeft</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/TCAbstractType.html#setWCellPaddingRight(short)">setWCellPaddingRight</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/TCAbstractType.html#setWCellPaddingTop(short)">setWCellPaddingTop</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/TCAbstractType.html#setWCellSpacingBottom(short)">setWCellSpacingBottom</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/TCAbstractType.html#setWCellSpacingLeft(short)">setWCellSpacingLeft</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/TCAbstractType.html#setWCellSpacingRight(short)">setWCellSpacingRight</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/TCAbstractType.html#setWCellSpacingTop(short)">setWCellSpacingTop</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/TCAbstractType.html#setWWidth(short)">setWWidth</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/TCAbstractType.html#toString()">toString</A></CODE></TD>
+</TR>
+</TABLE>
+&nbsp;<A NAME="methods_inherited_from_class_java.lang.Object"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#EEEEFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left"><B>Methods inherited from class java.lang.Object</B></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE>equals, finalize, getClass, hashCode, notify, notifyAll, wait, wait, wait</CODE></TD>
+</TR>
+</TABLE>
+&nbsp;
+<P>
+
+<!-- ============ FIELD DETAIL =========== -->
+
+<A NAME="field_detail"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="1"><FONT SIZE="+2">
+<B>Field Detail</B></FONT></TH>
+</TR>
+</TABLE>
+
+<A NAME="SIZE"><!-- --></A><H3>
+SIZE</H3>
+<PRE>
+public static final int <B>SIZE</B></PRE>
+<DL>
+<DL>
+<DT><B>See Also:</B><DD><A HREF="../../../../../constant-values.html#org.apache.poi.hwpf.usermodel.TableCellDescriptor.SIZE">Constant Field Values</A></DL>
+</DL>
+
+<!-- ========= CONSTRUCTOR DETAIL ======== -->
+
+<A NAME="constructor_detail"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="1"><FONT SIZE="+2">
+<B>Constructor Detail</B></FONT></TH>
+</TR>
+</TABLE>
+
+<A NAME="TableCellDescriptor()"><!-- --></A><H3>
+TableCellDescriptor</H3>
+<PRE>
+public <B>TableCellDescriptor</B>()</PRE>
+<DL>
+</DL>
+
+<!-- ============ METHOD DETAIL ========== -->
+
+<A NAME="method_detail"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="1"><FONT SIZE="+2">
+<B>Method Detail</B></FONT></TH>
+</TR>
+</TABLE>
+
+<A NAME="fillFields(byte[], int)"><!-- --></A><H3>
+fillFields</H3>
+<PRE>
+protected void <B>fillFields</B>(byte[]&nbsp;data,
+                          int&nbsp;offset)</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="serialize(byte[], int)"><!-- --></A><H3>
+serialize</H3>
+<PRE>
+public void <B>serialize</B>(byte[]&nbsp;data,
+                      int&nbsp;offset)</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="clone()"><!-- --></A><H3>
+clone</H3>
+<PRE>
+public java.lang.Object <B>clone</B>()
+                       throws java.lang.CloneNotSupportedException</PRE>
+<DL>
+<DD><DL>
+<DT><B>Overrides:</B><DD><CODE>clone</CODE> in class <CODE>java.lang.Object</CODE></DL>
+</DD>
+<DD><DL>
+
+<DT><B>Throws:</B>
+<DD><CODE>java.lang.CloneNotSupportedException</CODE></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="convertBytesToTC(byte[], int)"><!-- --></A><H3>
+convertBytesToTC</H3>
+<PRE>
+public static <A HREF="../../../../../org/apache/poi/hwpf/usermodel/TableCellDescriptor.html" title="class in org.apache.poi.hwpf.usermodel">TableCellDescriptor</A> <B>convertBytesToTC</B>(byte[]&nbsp;buf,
+                                                   int&nbsp;offset)</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<!-- ========= END OF CLASS DATA ========= -->
+<HR>
+
+
+<!-- ======= START OF BOTTOM NAVBAR ====== -->
+<A NAME="navbar_bottom"><!-- --></A>
+<A HREF="#skip-navbar_bottom" title="Skip navigation links"></A>
+<TABLE BORDER="0" WIDTH="100%" CELLPADDING="1" CELLSPACING="0" SUMMARY="">
+<TR>
+<TD COLSPAN=2 BGCOLOR="#EEEEFF" CLASS="NavBarCell1">
+<A NAME="navbar_bottom_firstrow"><!-- --></A>
+<TABLE BORDER="0" CELLPADDING="0" CELLSPACING="3" SUMMARY="">
+  <TR ALIGN="center" VALIGN="top">
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../overview-summary.html"><FONT CLASS="NavBarFont1"><B>Overview</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="package-summary.html"><FONT CLASS="NavBarFont1"><B>Package</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#FFFFFF" CLASS="NavBarCell1Rev"> &nbsp;<FONT CLASS="NavBarFont1Rev"><B>Class</B></FONT>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="class-use/TableCellDescriptor.html"><FONT CLASS="NavBarFont1"><B>Use</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="package-tree.html"><FONT CLASS="NavBarFont1"><B>Tree</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../deprecated-list.html"><FONT CLASS="NavBarFont1"><B>Deprecated</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../index-all.html"><FONT CLASS="NavBarFont1"><B>Index</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../help-doc.html"><FONT CLASS="NavBarFont1"><B>Help</B></FONT></A>&nbsp;</TD>
+  </TR>
+</TABLE>
+</TD>
+<TD ALIGN="right" VALIGN="top" ROWSPAN=3><EM>
+</EM>
+</TD>
+</TR>
+
+<TR>
+<TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
+&nbsp;<A HREF="../../../../../org/apache/poi/hwpf/usermodel/TableCell.html" title="class in org.apache.poi.hwpf.usermodel"><B>PREV CLASS</B></A>&nbsp;
+&nbsp;<A HREF="../../../../../org/apache/poi/hwpf/usermodel/TableIterator.html" title="class in org.apache.poi.hwpf.usermodel"><B>NEXT CLASS</B></A></FONT></TD>
+<TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
+  <A HREF="../../../../../index.html?org/apache/poi/hwpf/usermodel/TableCellDescriptor.html" target="_top"><B>FRAMES</B></A>  &nbsp;
+&nbsp;<A HREF="TableCellDescriptor.html" target="_top"><B>NO FRAMES</B></A>  &nbsp;
+&nbsp;<SCRIPT type="text/javascript">
+  <!--
+  if(window==top) {
+    document.writeln('<A HREF="../../../../../allclasses-noframe.html"><B>All Classes</B></A>');
+  }
+  //-->
+</SCRIPT>
+<NOSCRIPT>
+  <A HREF="../../../../../allclasses-noframe.html"><B>All Classes</B></A>
+</NOSCRIPT>
+
+
+</FONT></TD>
+</TR>
+<TR>
+<TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
+  SUMMARY:&nbsp;NESTED&nbsp;|&nbsp;<A HREF="#field_summary">FIELD</A>&nbsp;|&nbsp;<A HREF="#constructor_summary">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_summary">METHOD</A></FONT></TD>
+<TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
+DETAIL:&nbsp;<A HREF="#field_detail">FIELD</A>&nbsp;|&nbsp;<A HREF="#constructor_detail">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_detail">METHOD</A></FONT></TD>
+</TR>
+</TABLE>
+<A NAME="skip-navbar_bottom"></A>
+<!-- ======== END OF BOTTOM NAVBAR ======= -->
+
+<HR>
+
+                <i>Copyright 2014 The Apache Software Foundation or
+        its licensors, as applicable.</i>
+            
+</BODY>
+</HTML>

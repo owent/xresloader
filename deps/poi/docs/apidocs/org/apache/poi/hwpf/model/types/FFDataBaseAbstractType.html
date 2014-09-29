@@ -1,0 +1,1267 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!--NewPage-->
+<HTML>
+<HEAD>
+<TITLE>
+FFDataBaseAbstractType (POI API Documentation)
+</TITLE>
+
+<META NAME="keywords" CONTENT="org.apache.poi.hwpf.model.types.FFDataBaseAbstractType class">
+
+<LINK REL ="stylesheet" TYPE="text/css" HREF="../../../../../../stylesheet.css" TITLE="Style">
+
+<SCRIPT type="text/javascript">
+function windowTitle()
+{
+    parent.document.title="FFDataBaseAbstractType (POI API Documentation)";
+}
+</SCRIPT>
+<NOSCRIPT>
+</NOSCRIPT>
+
+</HEAD>
+
+<BODY BGCOLOR="white" onload="windowTitle();">
+
+
+<!-- ========= START OF TOP NAVBAR ======= -->
+<A NAME="navbar_top"><!-- --></A>
+<A HREF="#skip-navbar_top" title="Skip navigation links"></A>
+<TABLE BORDER="0" WIDTH="100%" CELLPADDING="1" CELLSPACING="0" SUMMARY="">
+<TR>
+<TD COLSPAN=2 BGCOLOR="#EEEEFF" CLASS="NavBarCell1">
+<A NAME="navbar_top_firstrow"><!-- --></A>
+<TABLE BORDER="0" CELLPADDING="0" CELLSPACING="3" SUMMARY="">
+  <TR ALIGN="center" VALIGN="top">
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../../overview-summary.html"><FONT CLASS="NavBarFont1"><B>Overview</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="package-summary.html"><FONT CLASS="NavBarFont1"><B>Package</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#FFFFFF" CLASS="NavBarCell1Rev"> &nbsp;<FONT CLASS="NavBarFont1Rev"><B>Class</B></FONT>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="class-use/FFDataBaseAbstractType.html"><FONT CLASS="NavBarFont1"><B>Use</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="package-tree.html"><FONT CLASS="NavBarFont1"><B>Tree</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../../deprecated-list.html"><FONT CLASS="NavBarFont1"><B>Deprecated</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../../index-all.html"><FONT CLASS="NavBarFont1"><B>Index</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../../help-doc.html"><FONT CLASS="NavBarFont1"><B>Help</B></FONT></A>&nbsp;</TD>
+  </TR>
+</TABLE>
+</TD>
+<TD ALIGN="right" VALIGN="top" ROWSPAN=3><EM>
+</EM>
+</TD>
+</TR>
+
+<TR>
+<TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
+&nbsp;<A HREF="../../../../../../org/apache/poi/hwpf/model/types/DOPAbstractType.html" title="class in org.apache.poi.hwpf.model.types"><B>PREV CLASS</B></A>&nbsp;
+&nbsp;<A HREF="../../../../../../org/apache/poi/hwpf/model/types/FibBaseAbstractType.html" title="class in org.apache.poi.hwpf.model.types"><B>NEXT CLASS</B></A></FONT></TD>
+<TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
+  <A HREF="../../../../../../index.html?org/apache/poi/hwpf/model/types/FFDataBaseAbstractType.html" target="_top"><B>FRAMES</B></A>  &nbsp;
+&nbsp;<A HREF="FFDataBaseAbstractType.html" target="_top"><B>NO FRAMES</B></A>  &nbsp;
+&nbsp;<SCRIPT type="text/javascript">
+  <!--
+  if(window==top) {
+    document.writeln('<A HREF="../../../../../../allclasses-noframe.html"><B>All Classes</B></A>');
+  }
+  //-->
+</SCRIPT>
+<NOSCRIPT>
+  <A HREF="../../../../../../allclasses-noframe.html"><B>All Classes</B></A>
+</NOSCRIPT>
+
+
+</FONT></TD>
+</TR>
+<TR>
+<TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
+  SUMMARY:&nbsp;NESTED&nbsp;|&nbsp;<A HREF="#field_summary">FIELD</A>&nbsp;|&nbsp;<A HREF="#constructor_summary">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_summary">METHOD</A></FONT></TD>
+<TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
+DETAIL:&nbsp;<A HREF="#field_detail">FIELD</A>&nbsp;|&nbsp;<A HREF="#constructor_detail">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_detail">METHOD</A></FONT></TD>
+</TR>
+</TABLE>
+<A NAME="skip-navbar_top"></A>
+<!-- ========= END OF TOP NAVBAR ========= -->
+
+<HR>
+<!-- ======== START OF CLASS DATA ======== -->
+<H2>
+<FONT SIZE="-1">
+org.apache.poi.hwpf.model.types</FONT>
+<BR>
+Class FFDataBaseAbstractType</H2>
+<PRE>
+java.lang.Object
+  <IMG SRC="../../../../../../resources/inherit.gif" ALT="extended by "><B>org.apache.poi.hwpf.model.types.FFDataBaseAbstractType</B>
+</PRE>
+<DL>
+<DT><B>Direct Known Subclasses:</B> <DD><A HREF="../../../../../../org/apache/poi/hwpf/model/FFDataBase.html" title="class in org.apache.poi.hwpf.model">FFDataBase</A></DD>
+</DL>
+<HR>
+<DL>
+<DT><PRE><FONT SIZE="-1"><A HREF="../../../../../../org/apache/poi/util/Internal.html" title="annotation in org.apache.poi.util">@Internal</A>
+</FONT>public abstract class <B>FFDataBaseAbstractType</B><DT>extends java.lang.Object</DL>
+</PRE>
+
+<P>
+The FFData structure specifies form field data for a text
+        box, check box, or drop-down list box. <p>Class and fields
+        descriptions are quoted from [MS-DOC] -- v20121003 Word (.doc) Binary
+        File Format; Copyright (c) 2012 Microsoft Corporation; Release:
+        October 8, 2012
+
+ <p>
+ NOTE: This source is automatically generated please do not modify this file.  Either subclass or
+       remove the record in src/types/definitions.
+ <p>
+ This class is internal. It content or properties may change without notice 
+ due to changes in our knowledge of internal Microsoft Word binary structures.
+<P>
+
+<P>
+<DL>
+<DT><B>Author:</B></DT>
+  <DD>Sergey Vladimirov; according to [MS-DOC] -- v20121003 Word
+        (.doc) Binary File Format; Copyright (c) 2012 Microsoft Corporation;
+        Release: October 8, 2012</DD>
+</DL>
+<HR>
+
+<P>
+<!-- =========== FIELD SUMMARY =========== -->
+
+<A NAME="field_summary"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+<B>Field Summary</B></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>protected &nbsp;long</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../org/apache/poi/hwpf/model/types/FFDataBaseAbstractType.html#field_1_version">field_1_version</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>protected &nbsp;short</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../org/apache/poi/hwpf/model/types/FFDataBaseAbstractType.html#field_2_bits">field_2_bits</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>protected &nbsp;int</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../org/apache/poi/hwpf/model/types/FFDataBaseAbstractType.html#field_3_cch">field_3_cch</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>protected &nbsp;int</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../org/apache/poi/hwpf/model/types/FFDataBaseAbstractType.html#field_4_hps">field_4_hps</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;byte</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../org/apache/poi/hwpf/model/types/FFDataBaseAbstractType.html#ITYPE_CHCK">ITYPE_CHCK</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Specifies that the form field is a checkbox.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;byte</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../org/apache/poi/hwpf/model/types/FFDataBaseAbstractType.html#ITYPE_DROP">ITYPE_DROP</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Specifies that the form field is a dropdown list box.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;byte</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../org/apache/poi/hwpf/model/types/FFDataBaseAbstractType.html#ITYPE_TEXT">ITYPE_TEXT</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Specifies that the form field is a textbox.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>protected static&nbsp;byte</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../org/apache/poi/hwpf/model/types/FFDataBaseAbstractType.html#ITYPETXT_CALC">ITYPETXT_CALC</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Specifies that the textbox value is calculated from an expression.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;byte</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../org/apache/poi/hwpf/model/types/FFDataBaseAbstractType.html#ITYPETXT_CURDATE">ITYPETXT_CURDATE</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Specifies that the textbox value is the current date.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;byte</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../org/apache/poi/hwpf/model/types/FFDataBaseAbstractType.html#ITYPETXT_CURTIME">ITYPETXT_CURTIME</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Specifies that the textbox value is the current time.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;byte</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../org/apache/poi/hwpf/model/types/FFDataBaseAbstractType.html#ITYPETXT_DATE">ITYPETXT_DATE</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Specifies that the textbox value is a date or time.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;byte</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../org/apache/poi/hwpf/model/types/FFDataBaseAbstractType.html#ITYPETXT_NUM">ITYPETXT_NUM</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Specifies that the textbox value is a number.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;byte</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../org/apache/poi/hwpf/model/types/FFDataBaseAbstractType.html#ITYPETXT_REG">ITYPETXT_REG</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Specifies that the textbox value is regular text.</TD>
+</TR>
+</TABLE>
+&nbsp;
+<!-- ======== CONSTRUCTOR SUMMARY ======== -->
+
+<A NAME="constructor_summary"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+<B>Constructor Summary</B></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>protected </CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../org/apache/poi/hwpf/model/types/FFDataBaseAbstractType.html#FFDataBaseAbstractType()">FFDataBaseAbstractType</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+</TABLE>
+&nbsp;
+<!-- ========== METHOD SUMMARY =========== -->
+
+<A NAME="method_summary"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+<B>Method Summary</B></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../org/apache/poi/hwpf/model/types/FFDataBaseAbstractType.html#equals(java.lang.Object)">equals</A></B>(java.lang.Object&nbsp;obj)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>protected &nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../org/apache/poi/hwpf/model/types/FFDataBaseAbstractType.html#fillFields(byte[], int)">fillFields</A></B>(byte[]&nbsp;data,
+           int&nbsp;offset)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;short</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../org/apache/poi/hwpf/model/types/FFDataBaseAbstractType.html#getBits()">getBits</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;An FFDataBits that specifies the type and state of this form field.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;int</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../org/apache/poi/hwpf/model/types/FFDataBaseAbstractType.html#getCch()">getCch</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;An unsigned integer that specifies the maximum length, in characters, of the value of the textbox.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;int</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../org/apache/poi/hwpf/model/types/FFDataBaseAbstractType.html#getHps()">getHps</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;An unsigned integer.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;byte</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../org/apache/poi/hwpf/model/types/FFDataBaseAbstractType.html#getIRes()">getIRes</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;An unsigned integer.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;byte</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../org/apache/poi/hwpf/model/types/FFDataBaseAbstractType.html#getIType()">getIType</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;An unsigned integer that specifies the type of the form field.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;byte</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../org/apache/poi/hwpf/model/types/FFDataBaseAbstractType.html#getITypeTxt()">getITypeTxt</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;An unsigned integer that specifies the type of the textbox.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;int</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../org/apache/poi/hwpf/model/types/FFDataBaseAbstractType.html#getSize()">getSize</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Size of record</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;long</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../org/apache/poi/hwpf/model/types/FFDataBaseAbstractType.html#getVersion()">getVersion</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;An unsigned integer that MUST be 0xFFFFFFFF.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;int</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../org/apache/poi/hwpf/model/types/FFDataBaseAbstractType.html#hashCode()">hashCode</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../org/apache/poi/hwpf/model/types/FFDataBaseAbstractType.html#isFHasListBox()">isFHasListBox</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A bit that specifies that the form field has a list box.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../org/apache/poi/hwpf/model/types/FFDataBaseAbstractType.html#isFOwnHelp()">isFOwnHelp</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A bit that specifies whether the form field has custom help text in FFData.xstzHelpText.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../org/apache/poi/hwpf/model/types/FFDataBaseAbstractType.html#isFOwnStat()">isFOwnStat</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A bit that specifies whether the form field has custom status bar text in FFData.xstzStatText.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../org/apache/poi/hwpf/model/types/FFDataBaseAbstractType.html#isFProt()">isFProt</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A bit that specifies whether the form field is protected and its value cannot be changed.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../org/apache/poi/hwpf/model/types/FFDataBaseAbstractType.html#isFRecalc()">isFRecalc</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A bit that specifies whether the value of the field is automatically calculated after the field is modified.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../org/apache/poi/hwpf/model/types/FFDataBaseAbstractType.html#isISize()">isISize</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A bit that specifies whether the size of a checkbox is automatically determined by the text size where the checkbox is located.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;byte[]</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../org/apache/poi/hwpf/model/types/FFDataBaseAbstractType.html#serialize()">serialize</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../org/apache/poi/hwpf/model/types/FFDataBaseAbstractType.html#serialize(byte[], int)">serialize</A></B>(byte[]&nbsp;data,
+          int&nbsp;offset)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../org/apache/poi/hwpf/model/types/FFDataBaseAbstractType.html#setBits(short)">setBits</A></B>(short&nbsp;field_2_bits)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;An FFDataBits that specifies the type and state of this form field.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../org/apache/poi/hwpf/model/types/FFDataBaseAbstractType.html#setCch(int)">setCch</A></B>(int&nbsp;field_3_cch)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;An unsigned integer that specifies the maximum length, in characters, of the value of the textbox.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../org/apache/poi/hwpf/model/types/FFDataBaseAbstractType.html#setFHasListBox(boolean)">setFHasListBox</A></B>(boolean&nbsp;value)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sets the fHasListBox field value.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../org/apache/poi/hwpf/model/types/FFDataBaseAbstractType.html#setFOwnHelp(boolean)">setFOwnHelp</A></B>(boolean&nbsp;value)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sets the fOwnHelp field value.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../org/apache/poi/hwpf/model/types/FFDataBaseAbstractType.html#setFOwnStat(boolean)">setFOwnStat</A></B>(boolean&nbsp;value)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sets the fOwnStat field value.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../org/apache/poi/hwpf/model/types/FFDataBaseAbstractType.html#setFProt(boolean)">setFProt</A></B>(boolean&nbsp;value)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sets the fProt field value.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../org/apache/poi/hwpf/model/types/FFDataBaseAbstractType.html#setFRecalc(boolean)">setFRecalc</A></B>(boolean&nbsp;value)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sets the fRecalc field value.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../org/apache/poi/hwpf/model/types/FFDataBaseAbstractType.html#setHps(int)">setHps</A></B>(int&nbsp;field_4_hps)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;An unsigned integer.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../org/apache/poi/hwpf/model/types/FFDataBaseAbstractType.html#setIRes(byte)">setIRes</A></B>(byte&nbsp;value)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sets the iRes field value.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../org/apache/poi/hwpf/model/types/FFDataBaseAbstractType.html#setISize(boolean)">setISize</A></B>(boolean&nbsp;value)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sets the iSize field value.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../org/apache/poi/hwpf/model/types/FFDataBaseAbstractType.html#setIType(byte)">setIType</A></B>(byte&nbsp;value)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sets the iType field value.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../org/apache/poi/hwpf/model/types/FFDataBaseAbstractType.html#setITypeTxt(byte)">setITypeTxt</A></B>(byte&nbsp;value)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sets the iTypeTxt field value.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../org/apache/poi/hwpf/model/types/FFDataBaseAbstractType.html#setVersion(long)">setVersion</A></B>(long&nbsp;field_1_version)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;An unsigned integer that MUST be 0xFFFFFFFF.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;java.lang.String</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../org/apache/poi/hwpf/model/types/FFDataBaseAbstractType.html#toString()">toString</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+</TABLE>
+&nbsp;<A NAME="methods_inherited_from_class_java.lang.Object"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#EEEEFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left"><B>Methods inherited from class java.lang.Object</B></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE>clone, finalize, getClass, notify, notifyAll, wait, wait, wait</CODE></TD>
+</TR>
+</TABLE>
+&nbsp;
+<P>
+
+<!-- ============ FIELD DETAIL =========== -->
+
+<A NAME="field_detail"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="1"><FONT SIZE="+2">
+<B>Field Detail</B></FONT></TH>
+</TR>
+</TABLE>
+
+<A NAME="field_1_version"><!-- --></A><H3>
+field_1_version</H3>
+<PRE>
+protected long <B>field_1_version</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="field_2_bits"><!-- --></A><H3>
+field_2_bits</H3>
+<PRE>
+protected short <B>field_2_bits</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="ITYPE_TEXT"><!-- --></A><H3>
+ITYPE_TEXT</H3>
+<PRE>
+public static final byte <B>ITYPE_TEXT</B></PRE>
+<DL>
+<DD>Specifies that the form field is a textbox.
+<P>
+<DL>
+<DT><B>See Also:</B><DD><A HREF="../../../../../../constant-values.html#org.apache.poi.hwpf.model.types.FFDataBaseAbstractType.ITYPE_TEXT">Constant Field Values</A></DL>
+</DL>
+<HR>
+
+<A NAME="ITYPE_CHCK"><!-- --></A><H3>
+ITYPE_CHCK</H3>
+<PRE>
+public static final byte <B>ITYPE_CHCK</B></PRE>
+<DL>
+<DD>Specifies that the form field is a checkbox.
+<P>
+<DL>
+<DT><B>See Also:</B><DD><A HREF="../../../../../../constant-values.html#org.apache.poi.hwpf.model.types.FFDataBaseAbstractType.ITYPE_CHCK">Constant Field Values</A></DL>
+</DL>
+<HR>
+
+<A NAME="ITYPE_DROP"><!-- --></A><H3>
+ITYPE_DROP</H3>
+<PRE>
+public static final byte <B>ITYPE_DROP</B></PRE>
+<DL>
+<DD>Specifies that the form field is a dropdown list box.
+<P>
+<DL>
+<DT><B>See Also:</B><DD><A HREF="../../../../../../constant-values.html#org.apache.poi.hwpf.model.types.FFDataBaseAbstractType.ITYPE_DROP">Constant Field Values</A></DL>
+</DL>
+<HR>
+
+<A NAME="ITYPETXT_REG"><!-- --></A><H3>
+ITYPETXT_REG</H3>
+<PRE>
+public static final byte <B>ITYPETXT_REG</B></PRE>
+<DL>
+<DD>Specifies that the textbox value is regular text.
+<P>
+<DL>
+<DT><B>See Also:</B><DD><A HREF="../../../../../../constant-values.html#org.apache.poi.hwpf.model.types.FFDataBaseAbstractType.ITYPETXT_REG">Constant Field Values</A></DL>
+</DL>
+<HR>
+
+<A NAME="ITYPETXT_NUM"><!-- --></A><H3>
+ITYPETXT_NUM</H3>
+<PRE>
+public static final byte <B>ITYPETXT_NUM</B></PRE>
+<DL>
+<DD>Specifies that the textbox value is a number.
+<P>
+<DL>
+<DT><B>See Also:</B><DD><A HREF="../../../../../../constant-values.html#org.apache.poi.hwpf.model.types.FFDataBaseAbstractType.ITYPETXT_NUM">Constant Field Values</A></DL>
+</DL>
+<HR>
+
+<A NAME="ITYPETXT_DATE"><!-- --></A><H3>
+ITYPETXT_DATE</H3>
+<PRE>
+public static final byte <B>ITYPETXT_DATE</B></PRE>
+<DL>
+<DD>Specifies that the textbox value is a date or time.
+<P>
+<DL>
+<DT><B>See Also:</B><DD><A HREF="../../../../../../constant-values.html#org.apache.poi.hwpf.model.types.FFDataBaseAbstractType.ITYPETXT_DATE">Constant Field Values</A></DL>
+</DL>
+<HR>
+
+<A NAME="ITYPETXT_CURDATE"><!-- --></A><H3>
+ITYPETXT_CURDATE</H3>
+<PRE>
+public static final byte <B>ITYPETXT_CURDATE</B></PRE>
+<DL>
+<DD>Specifies that the textbox value is the current date.
+<P>
+<DL>
+<DT><B>See Also:</B><DD><A HREF="../../../../../../constant-values.html#org.apache.poi.hwpf.model.types.FFDataBaseAbstractType.ITYPETXT_CURDATE">Constant Field Values</A></DL>
+</DL>
+<HR>
+
+<A NAME="ITYPETXT_CURTIME"><!-- --></A><H3>
+ITYPETXT_CURTIME</H3>
+<PRE>
+public static final byte <B>ITYPETXT_CURTIME</B></PRE>
+<DL>
+<DD>Specifies that the textbox value is the current time.
+<P>
+<DL>
+<DT><B>See Also:</B><DD><A HREF="../../../../../../constant-values.html#org.apache.poi.hwpf.model.types.FFDataBaseAbstractType.ITYPETXT_CURTIME">Constant Field Values</A></DL>
+</DL>
+<HR>
+
+<A NAME="ITYPETXT_CALC"><!-- --></A><H3>
+ITYPETXT_CALC</H3>
+<PRE>
+protected static final byte <B>ITYPETXT_CALC</B></PRE>
+<DL>
+<DD>Specifies that the textbox value is calculated from an expression. The expression is given by FFData.xstzTextDef.
+<P>
+<DL>
+<DT><B>See Also:</B><DD><A HREF="../../../../../../constant-values.html#org.apache.poi.hwpf.model.types.FFDataBaseAbstractType.ITYPETXT_CALC">Constant Field Values</A></DL>
+</DL>
+<HR>
+
+<A NAME="field_3_cch"><!-- --></A><H3>
+field_3_cch</H3>
+<PRE>
+protected int <B>field_3_cch</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="field_4_hps"><!-- --></A><H3>
+field_4_hps</H3>
+<PRE>
+protected int <B>field_4_hps</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+
+<!-- ========= CONSTRUCTOR DETAIL ======== -->
+
+<A NAME="constructor_detail"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="1"><FONT SIZE="+2">
+<B>Constructor Detail</B></FONT></TH>
+</TR>
+</TABLE>
+
+<A NAME="FFDataBaseAbstractType()"><!-- --></A><H3>
+FFDataBaseAbstractType</H3>
+<PRE>
+protected <B>FFDataBaseAbstractType</B>()</PRE>
+<DL>
+</DL>
+
+<!-- ============ METHOD DETAIL ========== -->
+
+<A NAME="method_detail"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="1"><FONT SIZE="+2">
+<B>Method Detail</B></FONT></TH>
+</TR>
+</TABLE>
+
+<A NAME="fillFields(byte[], int)"><!-- --></A><H3>
+fillFields</H3>
+<PRE>
+protected void <B>fillFields</B>(byte[]&nbsp;data,
+                          int&nbsp;offset)</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="serialize(byte[], int)"><!-- --></A><H3>
+serialize</H3>
+<PRE>
+public void <B>serialize</B>(byte[]&nbsp;data,
+                      int&nbsp;offset)</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="serialize()"><!-- --></A><H3>
+serialize</H3>
+<PRE>
+public byte[] <B>serialize</B>()</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getSize()"><!-- --></A><H3>
+getSize</H3>
+<PRE>
+public static int <B>getSize</B>()</PRE>
+<DL>
+<DD>Size of record
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="equals(java.lang.Object)"><!-- --></A><H3>
+equals</H3>
+<PRE>
+public boolean <B>equals</B>(java.lang.Object&nbsp;obj)</PRE>
+<DL>
+<DD><DL>
+<DT><B>Overrides:</B><DD><CODE>equals</CODE> in class <CODE>java.lang.Object</CODE></DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="hashCode()"><!-- --></A><H3>
+hashCode</H3>
+<PRE>
+public int <B>hashCode</B>()</PRE>
+<DL>
+<DD><DL>
+<DT><B>Overrides:</B><DD><CODE>hashCode</CODE> in class <CODE>java.lang.Object</CODE></DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="toString()"><!-- --></A><H3>
+toString</H3>
+<PRE>
+public java.lang.String <B>toString</B>()</PRE>
+<DL>
+<DD><DL>
+<DT><B>Overrides:</B><DD><CODE>toString</CODE> in class <CODE>java.lang.Object</CODE></DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getVersion()"><!-- --></A><H3>
+getVersion</H3>
+<PRE>
+<FONT SIZE="-1"><A HREF="../../../../../../org/apache/poi/util/Internal.html" title="annotation in org.apache.poi.util">@Internal</A>
+</FONT>public long <B>getVersion</B>()</PRE>
+<DL>
+<DD>An unsigned integer that MUST be 0xFFFFFFFF.
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setVersion(long)"><!-- --></A><H3>
+setVersion</H3>
+<PRE>
+<FONT SIZE="-1"><A HREF="../../../../../../org/apache/poi/util/Internal.html" title="annotation in org.apache.poi.util">@Internal</A>
+</FONT>public void <B>setVersion</B>(long&nbsp;field_1_version)</PRE>
+<DL>
+<DD>An unsigned integer that MUST be 0xFFFFFFFF.
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getBits()"><!-- --></A><H3>
+getBits</H3>
+<PRE>
+<FONT SIZE="-1"><A HREF="../../../../../../org/apache/poi/util/Internal.html" title="annotation in org.apache.poi.util">@Internal</A>
+</FONT>public short <B>getBits</B>()</PRE>
+<DL>
+<DD>An FFDataBits that specifies the type and state of this form field.
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setBits(short)"><!-- --></A><H3>
+setBits</H3>
+<PRE>
+<FONT SIZE="-1"><A HREF="../../../../../../org/apache/poi/util/Internal.html" title="annotation in org.apache.poi.util">@Internal</A>
+</FONT>public void <B>setBits</B>(short&nbsp;field_2_bits)</PRE>
+<DL>
+<DD>An FFDataBits that specifies the type and state of this form field.
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getCch()"><!-- --></A><H3>
+getCch</H3>
+<PRE>
+<FONT SIZE="-1"><A HREF="../../../../../../org/apache/poi/util/Internal.html" title="annotation in org.apache.poi.util">@Internal</A>
+</FONT>public int <B>getCch</B>()</PRE>
+<DL>
+<DD>An unsigned integer that specifies the maximum length, in characters, of the value of the textbox. This value MUST NOT exceed 32767. A value of 0 means there is no maximum length of the value of the textbox. If bits.iType is not iTypeText (0), this value MUST be 0..
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setCch(int)"><!-- --></A><H3>
+setCch</H3>
+<PRE>
+<FONT SIZE="-1"><A HREF="../../../../../../org/apache/poi/util/Internal.html" title="annotation in org.apache.poi.util">@Internal</A>
+</FONT>public void <B>setCch</B>(int&nbsp;field_3_cch)</PRE>
+<DL>
+<DD>An unsigned integer that specifies the maximum length, in characters, of the value of the textbox. This value MUST NOT exceed 32767. A value of 0 means there is no maximum length of the value of the textbox. If bits.iType is not iTypeText (0), this value MUST be 0..
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getHps()"><!-- --></A><H3>
+getHps</H3>
+<PRE>
+<FONT SIZE="-1"><A HREF="../../../../../../org/apache/poi/util/Internal.html" title="annotation in org.apache.poi.util">@Internal</A>
+</FONT>public int <B>getHps</B>()</PRE>
+<DL>
+<DD>An unsigned integer. If bits.iType is iTypeChck (1), hps specifies the size, in half-points, of the checkbox and MUST be between 2 and 3168, inclusive. If bits.iType is not iTypeChck (1), hps is undefined and MUST be ignored..
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setHps(int)"><!-- --></A><H3>
+setHps</H3>
+<PRE>
+<FONT SIZE="-1"><A HREF="../../../../../../org/apache/poi/util/Internal.html" title="annotation in org.apache.poi.util">@Internal</A>
+</FONT>public void <B>setHps</B>(int&nbsp;field_4_hps)</PRE>
+<DL>
+<DD>An unsigned integer. If bits.iType is iTypeChck (1), hps specifies the size, in half-points, of the checkbox and MUST be between 2 and 3168, inclusive. If bits.iType is not iTypeChck (1), hps is undefined and MUST be ignored..
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setIType(byte)"><!-- --></A><H3>
+setIType</H3>
+<PRE>
+<FONT SIZE="-1"><A HREF="../../../../../../org/apache/poi/util/Internal.html" title="annotation in org.apache.poi.util">@Internal</A>
+</FONT>public void <B>setIType</B>(byte&nbsp;value)</PRE>
+<DL>
+<DD>Sets the iType field value.
+ An unsigned integer that specifies the type of the form field.
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getIType()"><!-- --></A><H3>
+getIType</H3>
+<PRE>
+<FONT SIZE="-1"><A HREF="../../../../../../org/apache/poi/util/Internal.html" title="annotation in org.apache.poi.util">@Internal</A>
+</FONT>public byte <B>getIType</B>()</PRE>
+<DL>
+<DD>An unsigned integer that specifies the type of the form field.
+<P>
+<DD><DL>
+
+<DT><B>Returns:</B><DD>the iType field value.</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setIRes(byte)"><!-- --></A><H3>
+setIRes</H3>
+<PRE>
+<FONT SIZE="-1"><A HREF="../../../../../../org/apache/poi/util/Internal.html" title="annotation in org.apache.poi.util">@Internal</A>
+</FONT>public void <B>setIRes</B>(byte&nbsp;value)</PRE>
+<DL>
+<DD>Sets the iRes field value.
+ An unsigned integer. If iType is iTypeText (0), then iRes MUST be 0. If iType is iTypeChck (1), iRes specifies the state of the checkbox and MUST be 0 (unchecked), 1 (checked), or 25 (undefined). Undefined checkboxes are treated as unchecked. If iType is iTypeDrop (2), iRes specifies the current selected list box item. A value of 25 specifies the selection is undefined. Otherwise, iRes is a zero-based index into FFData.hsttbDropList.
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getIRes()"><!-- --></A><H3>
+getIRes</H3>
+<PRE>
+<FONT SIZE="-1"><A HREF="../../../../../../org/apache/poi/util/Internal.html" title="annotation in org.apache.poi.util">@Internal</A>
+</FONT>public byte <B>getIRes</B>()</PRE>
+<DL>
+<DD>An unsigned integer. If iType is iTypeText (0), then iRes MUST be 0. If iType is iTypeChck (1), iRes specifies the state of the checkbox and MUST be 0 (unchecked), 1 (checked), or 25 (undefined). Undefined checkboxes are treated as unchecked. If iType is iTypeDrop (2), iRes specifies the current selected list box item. A value of 25 specifies the selection is undefined. Otherwise, iRes is a zero-based index into FFData.hsttbDropList.
+<P>
+<DD><DL>
+
+<DT><B>Returns:</B><DD>the iRes field value.</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setFOwnHelp(boolean)"><!-- --></A><H3>
+setFOwnHelp</H3>
+<PRE>
+<FONT SIZE="-1"><A HREF="../../../../../../org/apache/poi/util/Internal.html" title="annotation in org.apache.poi.util">@Internal</A>
+</FONT>public void <B>setFOwnHelp</B>(boolean&nbsp;value)</PRE>
+<DL>
+<DD>Sets the fOwnHelp field value.
+ A bit that specifies whether the form field has custom help text in FFData.xstzHelpText. If fOwnHelp is 0, FFData.xstzHelpText contains an empty or auto-generated string.
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="isFOwnHelp()"><!-- --></A><H3>
+isFOwnHelp</H3>
+<PRE>
+<FONT SIZE="-1"><A HREF="../../../../../../org/apache/poi/util/Internal.html" title="annotation in org.apache.poi.util">@Internal</A>
+</FONT>public boolean <B>isFOwnHelp</B>()</PRE>
+<DL>
+<DD>A bit that specifies whether the form field has custom help text in FFData.xstzHelpText. If fOwnHelp is 0, FFData.xstzHelpText contains an empty or auto-generated string.
+<P>
+<DD><DL>
+
+<DT><B>Returns:</B><DD>the fOwnHelp field value.</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setFOwnStat(boolean)"><!-- --></A><H3>
+setFOwnStat</H3>
+<PRE>
+<FONT SIZE="-1"><A HREF="../../../../../../org/apache/poi/util/Internal.html" title="annotation in org.apache.poi.util">@Internal</A>
+</FONT>public void <B>setFOwnStat</B>(boolean&nbsp;value)</PRE>
+<DL>
+<DD>Sets the fOwnStat field value.
+ A bit that specifies whether the form field has custom status bar text in FFData.xstzStatText. If fOwnStat is 0, FFData.xstzStatText contains an empty or auto-generated string.
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="isFOwnStat()"><!-- --></A><H3>
+isFOwnStat</H3>
+<PRE>
+<FONT SIZE="-1"><A HREF="../../../../../../org/apache/poi/util/Internal.html" title="annotation in org.apache.poi.util">@Internal</A>
+</FONT>public boolean <B>isFOwnStat</B>()</PRE>
+<DL>
+<DD>A bit that specifies whether the form field has custom status bar text in FFData.xstzStatText. If fOwnStat is 0, FFData.xstzStatText contains an empty or auto-generated string.
+<P>
+<DD><DL>
+
+<DT><B>Returns:</B><DD>the fOwnStat field value.</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setFProt(boolean)"><!-- --></A><H3>
+setFProt</H3>
+<PRE>
+<FONT SIZE="-1"><A HREF="../../../../../../org/apache/poi/util/Internal.html" title="annotation in org.apache.poi.util">@Internal</A>
+</FONT>public void <B>setFProt</B>(boolean&nbsp;value)</PRE>
+<DL>
+<DD>Sets the fProt field value.
+ A bit that specifies whether the form field is protected and its value cannot be changed.
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="isFProt()"><!-- --></A><H3>
+isFProt</H3>
+<PRE>
+<FONT SIZE="-1"><A HREF="../../../../../../org/apache/poi/util/Internal.html" title="annotation in org.apache.poi.util">@Internal</A>
+</FONT>public boolean <B>isFProt</B>()</PRE>
+<DL>
+<DD>A bit that specifies whether the form field is protected and its value cannot be changed.
+<P>
+<DD><DL>
+
+<DT><B>Returns:</B><DD>the fProt field value.</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setISize(boolean)"><!-- --></A><H3>
+setISize</H3>
+<PRE>
+<FONT SIZE="-1"><A HREF="../../../../../../org/apache/poi/util/Internal.html" title="annotation in org.apache.poi.util">@Internal</A>
+</FONT>public void <B>setISize</B>(boolean&nbsp;value)</PRE>
+<DL>
+<DD>Sets the iSize field value.
+ A bit that specifies whether the size of a checkbox is automatically determined by the text size where the checkbox is located. This value MUST be 0 if iType is not iTypeChck (1).
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="isISize()"><!-- --></A><H3>
+isISize</H3>
+<PRE>
+<FONT SIZE="-1"><A HREF="../../../../../../org/apache/poi/util/Internal.html" title="annotation in org.apache.poi.util">@Internal</A>
+</FONT>public boolean <B>isISize</B>()</PRE>
+<DL>
+<DD>A bit that specifies whether the size of a checkbox is automatically determined by the text size where the checkbox is located. This value MUST be 0 if iType is not iTypeChck (1).
+<P>
+<DD><DL>
+
+<DT><B>Returns:</B><DD>the iSize field value.</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setITypeTxt(byte)"><!-- --></A><H3>
+setITypeTxt</H3>
+<PRE>
+<FONT SIZE="-1"><A HREF="../../../../../../org/apache/poi/util/Internal.html" title="annotation in org.apache.poi.util">@Internal</A>
+</FONT>public void <B>setITypeTxt</B>(byte&nbsp;value)</PRE>
+<DL>
+<DD>Sets the iTypeTxt field value.
+ An unsigned integer that specifies the type of the textbox. If iType is not iTypeText (0), iTypeTxt MUST be 0 and MUST be ignored.
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getITypeTxt()"><!-- --></A><H3>
+getITypeTxt</H3>
+<PRE>
+<FONT SIZE="-1"><A HREF="../../../../../../org/apache/poi/util/Internal.html" title="annotation in org.apache.poi.util">@Internal</A>
+</FONT>public byte <B>getITypeTxt</B>()</PRE>
+<DL>
+<DD>An unsigned integer that specifies the type of the textbox. If iType is not iTypeText (0), iTypeTxt MUST be 0 and MUST be ignored.
+<P>
+<DD><DL>
+
+<DT><B>Returns:</B><DD>the iTypeTxt field value.</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setFRecalc(boolean)"><!-- --></A><H3>
+setFRecalc</H3>
+<PRE>
+<FONT SIZE="-1"><A HREF="../../../../../../org/apache/poi/util/Internal.html" title="annotation in org.apache.poi.util">@Internal</A>
+</FONT>public void <B>setFRecalc</B>(boolean&nbsp;value)</PRE>
+<DL>
+<DD>Sets the fRecalc field value.
+ A bit that specifies whether the value of the field is automatically calculated after the field is modified.
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="isFRecalc()"><!-- --></A><H3>
+isFRecalc</H3>
+<PRE>
+<FONT SIZE="-1"><A HREF="../../../../../../org/apache/poi/util/Internal.html" title="annotation in org.apache.poi.util">@Internal</A>
+</FONT>public boolean <B>isFRecalc</B>()</PRE>
+<DL>
+<DD>A bit that specifies whether the value of the field is automatically calculated after the field is modified.
+<P>
+<DD><DL>
+
+<DT><B>Returns:</B><DD>the fRecalc field value.</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setFHasListBox(boolean)"><!-- --></A><H3>
+setFHasListBox</H3>
+<PRE>
+<FONT SIZE="-1"><A HREF="../../../../../../org/apache/poi/util/Internal.html" title="annotation in org.apache.poi.util">@Internal</A>
+</FONT>public void <B>setFHasListBox</B>(boolean&nbsp;value)</PRE>
+<DL>
+<DD>Sets the fHasListBox field value.
+ A bit that specifies that the form field has a list box. This value MUST be 1 if iType is iTypeDrop (2). Otherwise, this value MUST be 0.
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="isFHasListBox()"><!-- --></A><H3>
+isFHasListBox</H3>
+<PRE>
+<FONT SIZE="-1"><A HREF="../../../../../../org/apache/poi/util/Internal.html" title="annotation in org.apache.poi.util">@Internal</A>
+</FONT>public boolean <B>isFHasListBox</B>()</PRE>
+<DL>
+<DD>A bit that specifies that the form field has a list box. This value MUST be 1 if iType is iTypeDrop (2). Otherwise, this value MUST be 0.
+<P>
+<DD><DL>
+
+<DT><B>Returns:</B><DD>the fHasListBox field value.</DL>
+</DD>
+</DL>
+<!-- ========= END OF CLASS DATA ========= -->
+<HR>
+
+
+<!-- ======= START OF BOTTOM NAVBAR ====== -->
+<A NAME="navbar_bottom"><!-- --></A>
+<A HREF="#skip-navbar_bottom" title="Skip navigation links"></A>
+<TABLE BORDER="0" WIDTH="100%" CELLPADDING="1" CELLSPACING="0" SUMMARY="">
+<TR>
+<TD COLSPAN=2 BGCOLOR="#EEEEFF" CLASS="NavBarCell1">
+<A NAME="navbar_bottom_firstrow"><!-- --></A>
+<TABLE BORDER="0" CELLPADDING="0" CELLSPACING="3" SUMMARY="">
+  <TR ALIGN="center" VALIGN="top">
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../../overview-summary.html"><FONT CLASS="NavBarFont1"><B>Overview</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="package-summary.html"><FONT CLASS="NavBarFont1"><B>Package</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#FFFFFF" CLASS="NavBarCell1Rev"> &nbsp;<FONT CLASS="NavBarFont1Rev"><B>Class</B></FONT>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="class-use/FFDataBaseAbstractType.html"><FONT CLASS="NavBarFont1"><B>Use</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="package-tree.html"><FONT CLASS="NavBarFont1"><B>Tree</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../../deprecated-list.html"><FONT CLASS="NavBarFont1"><B>Deprecated</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../../index-all.html"><FONT CLASS="NavBarFont1"><B>Index</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../../help-doc.html"><FONT CLASS="NavBarFont1"><B>Help</B></FONT></A>&nbsp;</TD>
+  </TR>
+</TABLE>
+</TD>
+<TD ALIGN="right" VALIGN="top" ROWSPAN=3><EM>
+</EM>
+</TD>
+</TR>
+
+<TR>
+<TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
+&nbsp;<A HREF="../../../../../../org/apache/poi/hwpf/model/types/DOPAbstractType.html" title="class in org.apache.poi.hwpf.model.types"><B>PREV CLASS</B></A>&nbsp;
+&nbsp;<A HREF="../../../../../../org/apache/poi/hwpf/model/types/FibBaseAbstractType.html" title="class in org.apache.poi.hwpf.model.types"><B>NEXT CLASS</B></A></FONT></TD>
+<TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
+  <A HREF="../../../../../../index.html?org/apache/poi/hwpf/model/types/FFDataBaseAbstractType.html" target="_top"><B>FRAMES</B></A>  &nbsp;
+&nbsp;<A HREF="FFDataBaseAbstractType.html" target="_top"><B>NO FRAMES</B></A>  &nbsp;
+&nbsp;<SCRIPT type="text/javascript">
+  <!--
+  if(window==top) {
+    document.writeln('<A HREF="../../../../../../allclasses-noframe.html"><B>All Classes</B></A>');
+  }
+  //-->
+</SCRIPT>
+<NOSCRIPT>
+  <A HREF="../../../../../../allclasses-noframe.html"><B>All Classes</B></A>
+</NOSCRIPT>
+
+
+</FONT></TD>
+</TR>
+<TR>
+<TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
+  SUMMARY:&nbsp;NESTED&nbsp;|&nbsp;<A HREF="#field_summary">FIELD</A>&nbsp;|&nbsp;<A HREF="#constructor_summary">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_summary">METHOD</A></FONT></TD>
+<TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
+DETAIL:&nbsp;<A HREF="#field_detail">FIELD</A>&nbsp;|&nbsp;<A HREF="#constructor_detail">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_detail">METHOD</A></FONT></TD>
+</TR>
+</TABLE>
+<A NAME="skip-navbar_bottom"></A>
+<!-- ======== END OF BOTTOM NAVBAR ======= -->
+
+<HR>
+
+                <i>Copyright 2014 The Apache Software Foundation or
+        its licensors, as applicable.</i>
+            
+</BODY>
+</HTML>

@@ -1,0 +1,1021 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!--NewPage-->
+<HTML>
+<HEAD>
+<TITLE>
+XSSFRow (POI API Documentation)
+</TITLE>
+
+<META NAME="keywords" CONTENT="org.apache.poi.xssf.usermodel.XSSFRow class">
+
+<LINK REL ="stylesheet" TYPE="text/css" HREF="../../../../../stylesheet.css" TITLE="Style">
+
+<SCRIPT type="text/javascript">
+function windowTitle()
+{
+    parent.document.title="XSSFRow (POI API Documentation)";
+}
+</SCRIPT>
+<NOSCRIPT>
+</NOSCRIPT>
+
+</HEAD>
+
+<BODY BGCOLOR="white" onload="windowTitle();">
+
+
+<!-- ========= START OF TOP NAVBAR ======= -->
+<A NAME="navbar_top"><!-- --></A>
+<A HREF="#skip-navbar_top" title="Skip navigation links"></A>
+<TABLE BORDER="0" WIDTH="100%" CELLPADDING="1" CELLSPACING="0" SUMMARY="">
+<TR>
+<TD COLSPAN=2 BGCOLOR="#EEEEFF" CLASS="NavBarCell1">
+<A NAME="navbar_top_firstrow"><!-- --></A>
+<TABLE BORDER="0" CELLPADDING="0" CELLSPACING="3" SUMMARY="">
+  <TR ALIGN="center" VALIGN="top">
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../overview-summary.html"><FONT CLASS="NavBarFont1"><B>Overview</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="package-summary.html"><FONT CLASS="NavBarFont1"><B>Package</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#FFFFFF" CLASS="NavBarCell1Rev"> &nbsp;<FONT CLASS="NavBarFont1Rev"><B>Class</B></FONT>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="class-use/XSSFRow.html"><FONT CLASS="NavBarFont1"><B>Use</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="package-tree.html"><FONT CLASS="NavBarFont1"><B>Tree</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../deprecated-list.html"><FONT CLASS="NavBarFont1"><B>Deprecated</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../index-all.html"><FONT CLASS="NavBarFont1"><B>Index</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../help-doc.html"><FONT CLASS="NavBarFont1"><B>Help</B></FONT></A>&nbsp;</TD>
+  </TR>
+</TABLE>
+</TD>
+<TD ALIGN="right" VALIGN="top" ROWSPAN=3><EM>
+</EM>
+</TD>
+</TR>
+
+<TR>
+<TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
+&nbsp;<A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFRichTextString.html" title="class in org.apache.poi.xssf.usermodel"><B>PREV CLASS</B></A>&nbsp;
+&nbsp;<A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFShape.html" title="class in org.apache.poi.xssf.usermodel"><B>NEXT CLASS</B></A></FONT></TD>
+<TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
+  <A HREF="../../../../../index.html?org/apache/poi/xssf/usermodel/XSSFRow.html" target="_top"><B>FRAMES</B></A>  &nbsp;
+&nbsp;<A HREF="XSSFRow.html" target="_top"><B>NO FRAMES</B></A>  &nbsp;
+&nbsp;<SCRIPT type="text/javascript">
+  <!--
+  if(window==top) {
+    document.writeln('<A HREF="../../../../../allclasses-noframe.html"><B>All Classes</B></A>');
+  }
+  //-->
+</SCRIPT>
+<NOSCRIPT>
+  <A HREF="../../../../../allclasses-noframe.html"><B>All Classes</B></A>
+</NOSCRIPT>
+
+
+</FONT></TD>
+</TR>
+<TR>
+<TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
+  SUMMARY:&nbsp;NESTED&nbsp;|&nbsp;FIELD&nbsp;|&nbsp;<A HREF="#constructor_summary">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_summary">METHOD</A></FONT></TD>
+<TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
+DETAIL:&nbsp;FIELD&nbsp;|&nbsp;<A HREF="#constructor_detail">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_detail">METHOD</A></FONT></TD>
+</TR>
+</TABLE>
+<A NAME="skip-navbar_top"></A>
+<!-- ========= END OF TOP NAVBAR ========= -->
+
+<HR>
+<!-- ======== START OF CLASS DATA ======== -->
+<H2>
+<FONT SIZE="-1">
+org.apache.poi.xssf.usermodel</FONT>
+<BR>
+Class XSSFRow</H2>
+<PRE>
+java.lang.Object
+  <IMG SRC="../../../../../resources/inherit.gif" ALT="extended by "><B>org.apache.poi.xssf.usermodel.XSSFRow</B>
+</PRE>
+<DL>
+<DT><B>All Implemented Interfaces:</B> <DD>java.lang.Comparable&lt;<A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFRow.html" title="class in org.apache.poi.xssf.usermodel">XSSFRow</A>&gt;, java.lang.Iterable&lt;<A HREF="../../../../../org/apache/poi/ss/usermodel/Cell.html" title="interface in org.apache.poi.ss.usermodel">Cell</A>&gt;, <A HREF="../../../../../org/apache/poi/ss/usermodel/Row.html" title="interface in org.apache.poi.ss.usermodel">Row</A></DD>
+</DL>
+<HR>
+<DL>
+<DT><PRE>public class <B>XSSFRow</B><DT>extends java.lang.Object<DT>implements <A HREF="../../../../../org/apache/poi/ss/usermodel/Row.html" title="interface in org.apache.poi.ss.usermodel">Row</A>, java.lang.Comparable&lt;<A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFRow.html" title="class in org.apache.poi.xssf.usermodel">XSSFRow</A>&gt;</DL>
+</PRE>
+
+<P>
+High level representation of a row of a spreadsheet.
+<P>
+
+<P>
+<HR>
+
+<P>
+<!-- ======== NESTED CLASS SUMMARY ======== -->
+
+<A NAME="nested_class_summary"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+<B>Nested Class Summary</B></FONT></TH>
+</TR>
+</TABLE>
+&nbsp;<A NAME="nested_classes_inherited_from_class_org.apache.poi.ss.usermodel.Row"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#EEEEFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left"><B>Nested classes/interfaces inherited from interface org.apache.poi.ss.usermodel.<A HREF="../../../../../org/apache/poi/ss/usermodel/Row.html" title="interface in org.apache.poi.ss.usermodel">Row</A></B></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><A HREF="../../../../../org/apache/poi/ss/usermodel/Row.MissingCellPolicy.html" title="class in org.apache.poi.ss.usermodel">Row.MissingCellPolicy</A></CODE></TD>
+</TR>
+</TABLE>
+&nbsp;
+<!-- =========== FIELD SUMMARY =========== -->
+
+<A NAME="field_summary"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+<B>Field Summary</B></FONT></TH>
+</TR>
+</TABLE>
+&nbsp;<A NAME="fields_inherited_from_class_org.apache.poi.ss.usermodel.Row"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#EEEEFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left"><B>Fields inherited from interface org.apache.poi.ss.usermodel.<A HREF="../../../../../org/apache/poi/ss/usermodel/Row.html" title="interface in org.apache.poi.ss.usermodel">Row</A></B></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><A HREF="../../../../../org/apache/poi/ss/usermodel/Row.html#CREATE_NULL_AS_BLANK">CREATE_NULL_AS_BLANK</A>, <A HREF="../../../../../org/apache/poi/ss/usermodel/Row.html#RETURN_BLANK_AS_NULL">RETURN_BLANK_AS_NULL</A>, <A HREF="../../../../../org/apache/poi/ss/usermodel/Row.html#RETURN_NULL_AND_BLANK">RETURN_NULL_AND_BLANK</A></CODE></TD>
+</TR>
+</TABLE>
+&nbsp;
+<!-- ======== CONSTRUCTOR SUMMARY ======== -->
+
+<A NAME="constructor_summary"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+<B>Constructor Summary</B></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>protected </CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFRow.html#XSSFRow(org.openxmlformats.schemas.spreadsheetml.x2006.main.CTRow, org.apache.poi.xssf.usermodel.XSSFSheet)">XSSFRow</A></B>(org.openxmlformats.schemas.spreadsheetml.x2006.main.CTRow&nbsp;row,
+        <A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFSheet.html" title="class in org.apache.poi.xssf.usermodel">XSSFSheet</A>&nbsp;sheet)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Construct a XSSFRow.</TD>
+</TR>
+</TABLE>
+&nbsp;
+<!-- ========== METHOD SUMMARY =========== -->
+
+<A NAME="method_summary"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+<B>Method Summary</B></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;java.util.Iterator&lt;<A HREF="../../../../../org/apache/poi/ss/usermodel/Cell.html" title="interface in org.apache.poi.ss.usermodel">Cell</A>&gt;</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFRow.html#cellIterator()">cellIterator</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Cell iterator over the physically defined cells:
+ </TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;int</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFRow.html#compareTo(org.apache.poi.xssf.usermodel.XSSFRow)">compareTo</A></B>(<A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFRow.html" title="class in org.apache.poi.xssf.usermodel">XSSFRow</A>&nbsp;row)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Compares two <code>XSSFRow</code> objects.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFCell.html" title="class in org.apache.poi.xssf.usermodel">XSSFCell</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFRow.html#createCell(int)">createCell</A></B>(int&nbsp;columnIndex)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Use this to create new cells within the row and return it.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFCell.html" title="class in org.apache.poi.xssf.usermodel">XSSFCell</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFRow.html#createCell(int, int)">createCell</A></B>(int&nbsp;columnIndex,
+           int&nbsp;type)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Use this to create new cells within the row and return it.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFCell.html" title="class in org.apache.poi.xssf.usermodel">XSSFCell</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFRow.html#getCell(int)">getCell</A></B>(int&nbsp;cellnum)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns the cell at the given (0 based) index,
+  with the <A HREF="../../../../../org/apache/poi/ss/usermodel/Row.MissingCellPolicy.html" title="class in org.apache.poi.ss.usermodel"><CODE>Row.MissingCellPolicy</CODE></A> from the parent Workbook.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFCell.html" title="class in org.apache.poi.xssf.usermodel">XSSFCell</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFRow.html#getCell(int, org.apache.poi.ss.usermodel.Row.MissingCellPolicy)">getCell</A></B>(int&nbsp;cellnum,
+        <A HREF="../../../../../org/apache/poi/ss/usermodel/Row.MissingCellPolicy.html" title="class in org.apache.poi.ss.usermodel">Row.MissingCellPolicy</A>&nbsp;policy)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns the cell at the given (0 based) index, with the specified <A HREF="../../../../../org/apache/poi/ss/usermodel/Row.MissingCellPolicy.html" title="class in org.apache.poi.ss.usermodel"><CODE>Row.MissingCellPolicy</CODE></A></TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;org.openxmlformats.schemas.spreadsheetml.x2006.main.CTRow</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFRow.html#getCTRow()">getCTRow</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns the underlying CTRow xml bean containing all cell definitions in this row</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;short</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFRow.html#getFirstCellNum()">getFirstCellNum</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Get the number of the first cell contained in this row.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;short</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFRow.html#getHeight()">getHeight</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Get the row's height measured in twips (1/20th of a point).</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;float</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFRow.html#getHeightInPoints()">getHeightInPoints</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns row height measured in point size.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;short</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFRow.html#getLastCellNum()">getLastCellNum</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gets the index of the last cell contained in this row <b>PLUS ONE</b>.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;int</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFRow.html#getPhysicalNumberOfCells()">getPhysicalNumberOfCells</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gets the number of defined cells (NOT number of cells in the actual row!).</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;int</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFRow.html#getRowNum()">getRowNum</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Get row number this row represents</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFCellStyle.html" title="class in org.apache.poi.xssf.usermodel">XSSFCellStyle</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFRow.html#getRowStyle()">getRowStyle</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns the whole-row cell style.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFSheet.html" title="class in org.apache.poi.xssf.usermodel">XSSFSheet</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFRow.html#getSheet()">getSheet</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns the XSSFSheet this row belongs to</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFRow.html#getZeroHeight()">getZeroHeight</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Get whether or not to display this row with 0 height</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFRow.html#isFormatted()">isFormatted</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Is this row formatted? Most aren't, but some rows
+  do have whole-row styles.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;java.util.Iterator&lt;<A HREF="../../../../../org/apache/poi/ss/usermodel/Cell.html" title="interface in org.apache.poi.ss.usermodel">Cell</A>&gt;</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFRow.html#iterator()">iterator</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Alias for <A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFRow.html#cellIterator()"><CODE>cellIterator()</CODE></A> to allow  foreach loops:
+ </TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>protected &nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFRow.html#onDocumentWrite()">onDocumentWrite</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Fired when the document is written to an output stream.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFRow.html#removeCell(org.apache.poi.ss.usermodel.Cell)">removeCell</A></B>(<A HREF="../../../../../org/apache/poi/ss/usermodel/Cell.html" title="interface in org.apache.poi.ss.usermodel">Cell</A>&nbsp;cell)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Remove the Cell from this row.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFRow.html#setHeight(short)">setHeight</A></B>(short&nbsp;height)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Set the height in "twips" or  1/20th of a point.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFRow.html#setHeightInPoints(float)">setHeightInPoints</A></B>(float&nbsp;height)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Set the row's height in points.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFRow.html#setRowNum(int)">setRowNum</A></B>(int&nbsp;rowIndex)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Set the row number of this row.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFRow.html#setRowStyle(org.apache.poi.ss.usermodel.CellStyle)">setRowStyle</A></B>(<A HREF="../../../../../org/apache/poi/ss/usermodel/CellStyle.html" title="interface in org.apache.poi.ss.usermodel">CellStyle</A>&nbsp;style)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Applies a whole-row cell styling to the row.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFRow.html#setZeroHeight(boolean)">setZeroHeight</A></B>(boolean&nbsp;height)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Set whether or not to display this row with 0 height</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>protected &nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFRow.html#shift(int)">shift</A></B>(int&nbsp;n)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;update cell references when shifting rows</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;java.lang.String</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFRow.html#toString()">toString</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+</TABLE>
+&nbsp;<A NAME="methods_inherited_from_class_java.lang.Object"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#EEEEFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left"><B>Methods inherited from class java.lang.Object</B></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE>clone, equals, finalize, getClass, hashCode, notify, notifyAll, wait, wait, wait</CODE></TD>
+</TR>
+</TABLE>
+&nbsp;
+<P>
+
+<!-- ========= CONSTRUCTOR DETAIL ======== -->
+
+<A NAME="constructor_detail"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="1"><FONT SIZE="+2">
+<B>Constructor Detail</B></FONT></TH>
+</TR>
+</TABLE>
+
+<A NAME="XSSFRow(org.openxmlformats.schemas.spreadsheetml.x2006.main.CTRow, org.apache.poi.xssf.usermodel.XSSFSheet)"><!-- --></A><H3>
+XSSFRow</H3>
+<PRE>
+protected <B>XSSFRow</B>(org.openxmlformats.schemas.spreadsheetml.x2006.main.CTRow&nbsp;row,
+                  <A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFSheet.html" title="class in org.apache.poi.xssf.usermodel">XSSFSheet</A>&nbsp;sheet)</PRE>
+<DL>
+<DD>Construct a XSSFRow.
+<P>
+<DL>
+<DT><B>Parameters:</B><DD><CODE>row</CODE> - the xml bean containing all cell definitions for this row.<DD><CODE>sheet</CODE> - the parent sheet.</DL>
+</DL>
+
+<!-- ============ METHOD DETAIL ========== -->
+
+<A NAME="method_detail"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="1"><FONT SIZE="+2">
+<B>Method Detail</B></FONT></TH>
+</TR>
+</TABLE>
+
+<A NAME="getSheet()"><!-- --></A><H3>
+getSheet</H3>
+<PRE>
+public <A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFSheet.html" title="class in org.apache.poi.xssf.usermodel">XSSFSheet</A> <B>getSheet</B>()</PRE>
+<DL>
+<DD>Returns the XSSFSheet this row belongs to
+<P>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../../../../org/apache/poi/ss/usermodel/Row.html#getSheet()">getSheet</A></CODE> in interface <CODE><A HREF="../../../../../org/apache/poi/ss/usermodel/Row.html" title="interface in org.apache.poi.ss.usermodel">Row</A></CODE></DL>
+</DD>
+<DD><DL>
+
+<DT><B>Returns:</B><DD>the XSSFSheet that owns this row</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="cellIterator()"><!-- --></A><H3>
+cellIterator</H3>
+<PRE>
+public java.util.Iterator&lt;<A HREF="../../../../../org/apache/poi/ss/usermodel/Cell.html" title="interface in org.apache.poi.ss.usermodel">Cell</A>&gt; <B>cellIterator</B>()</PRE>
+<DL>
+<DD>Cell iterator over the physically defined cells:
+ <blockquote><pre>
+ for (Iterator<Cell> it = row.cellIterator(); it.hasNext(); ) {
+     Cell cell = it.next();
+     ...
+ }
+ </pre></blockquote>
+<P>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../../../../org/apache/poi/ss/usermodel/Row.html#cellIterator()">cellIterator</A></CODE> in interface <CODE><A HREF="../../../../../org/apache/poi/ss/usermodel/Row.html" title="interface in org.apache.poi.ss.usermodel">Row</A></CODE></DL>
+</DD>
+<DD><DL>
+
+<DT><B>Returns:</B><DD>an iterator over cells in this row.</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="iterator()"><!-- --></A><H3>
+iterator</H3>
+<PRE>
+public java.util.Iterator&lt;<A HREF="../../../../../org/apache/poi/ss/usermodel/Cell.html" title="interface in org.apache.poi.ss.usermodel">Cell</A>&gt; <B>iterator</B>()</PRE>
+<DL>
+<DD>Alias for <A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFRow.html#cellIterator()"><CODE>cellIterator()</CODE></A> to allow  foreach loops:
+ <blockquote><pre>
+ for(Cell cell : row){
+     ...
+ }
+ </pre></blockquote>
+<P>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE>iterator</CODE> in interface <CODE>java.lang.Iterable&lt;<A HREF="../../../../../org/apache/poi/ss/usermodel/Cell.html" title="interface in org.apache.poi.ss.usermodel">Cell</A>&gt;</CODE></DL>
+</DD>
+<DD><DL>
+
+<DT><B>Returns:</B><DD>an iterator over cells in this row.</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="compareTo(org.apache.poi.xssf.usermodel.XSSFRow)"><!-- --></A><H3>
+compareTo</H3>
+<PRE>
+public int <B>compareTo</B>(<A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFRow.html" title="class in org.apache.poi.xssf.usermodel">XSSFRow</A>&nbsp;row)</PRE>
+<DL>
+<DD>Compares two <code>XSSFRow</code> objects.  Two rows are equal if they belong to the same worksheet and
+ their row indexes are equal.
+<P>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE>compareTo</CODE> in interface <CODE>java.lang.Comparable&lt;<A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFRow.html" title="class in org.apache.poi.xssf.usermodel">XSSFRow</A>&gt;</CODE></DL>
+</DD>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>row</CODE> - the <code>XSSFRow</code> to be compared.
+<DT><B>Returns:</B><DD>the value <code>0</code> if the row number of this <code>XSSFRow</code> is
+                equal to the row number of the argument <code>XSSFRow</code>; a value less than
+                <code>0</code> if the row number of this this <code>XSSFRow</code> is numerically less
+                than the row number of the argument <code>XSSFRow</code>; and a value greater
+                than <code>0</code> if the row number of this this <code>XSSFRow</code> is numerically
+                 greater than the row number of the argument <code>XSSFRow</code>.
+<DT><B>Throws:</B>
+<DD><CODE>java.lang.IllegalArgumentException</CODE> - if the argument row belongs to a different worksheet</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="createCell(int)"><!-- --></A><H3>
+createCell</H3>
+<PRE>
+public <A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFCell.html" title="class in org.apache.poi.xssf.usermodel">XSSFCell</A> <B>createCell</B>(int&nbsp;columnIndex)</PRE>
+<DL>
+<DD>Use this to create new cells within the row and return it.
+ <p>
+ The cell that is returned is a <A HREF="../../../../../org/apache/poi/ss/usermodel/Cell.html#CELL_TYPE_BLANK"><CODE>Cell.CELL_TYPE_BLANK</CODE></A>. The type can be changed
+ either through calling <code>setCellValue</code> or <code>setCellType</code>.
+ </p>
+<P>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../../../../org/apache/poi/ss/usermodel/Row.html#createCell(int)">createCell</A></CODE> in interface <CODE><A HREF="../../../../../org/apache/poi/ss/usermodel/Row.html" title="interface in org.apache.poi.ss.usermodel">Row</A></CODE></DL>
+</DD>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>columnIndex</CODE> - - the column number this cell represents
+<DT><B>Returns:</B><DD>Cell a high level representation of the created cell.
+<DT><B>Throws:</B>
+<DD><CODE>java.lang.IllegalArgumentException</CODE> - if columnIndex < 0 or greater than 16384,
+   the maximum number of columns supported by the SpreadsheetML format (.xlsx)</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="createCell(int, int)"><!-- --></A><H3>
+createCell</H3>
+<PRE>
+public <A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFCell.html" title="class in org.apache.poi.xssf.usermodel">XSSFCell</A> <B>createCell</B>(int&nbsp;columnIndex,
+                           int&nbsp;type)</PRE>
+<DL>
+<DD>Use this to create new cells within the row and return it.
+<P>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../../../../org/apache/poi/ss/usermodel/Row.html#createCell(int, int)">createCell</A></CODE> in interface <CODE><A HREF="../../../../../org/apache/poi/ss/usermodel/Row.html" title="interface in org.apache.poi.ss.usermodel">Row</A></CODE></DL>
+</DD>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>columnIndex</CODE> - - the column number this cell represents<DD><CODE>type</CODE> - - the cell's data type
+<DT><B>Returns:</B><DD>XSSFCell a high level representation of the created cell.
+<DT><B>Throws:</B>
+<DD><CODE>java.lang.IllegalArgumentException</CODE> - if the specified cell type is invalid, columnIndex < 0
+   or greater than 16384, the maximum number of columns supported by the SpreadsheetML format (.xlsx)<DT><B>See Also:</B><DD><A HREF="../../../../../org/apache/poi/ss/usermodel/Cell.html#CELL_TYPE_BLANK"><CODE>Cell.CELL_TYPE_BLANK</CODE></A>, 
+<A HREF="../../../../../org/apache/poi/ss/usermodel/Cell.html#CELL_TYPE_BOOLEAN"><CODE>Cell.CELL_TYPE_BOOLEAN</CODE></A>, 
+<A HREF="../../../../../org/apache/poi/ss/usermodel/Cell.html#CELL_TYPE_ERROR"><CODE>Cell.CELL_TYPE_ERROR</CODE></A>, 
+<A HREF="../../../../../org/apache/poi/ss/usermodel/Cell.html#CELL_TYPE_FORMULA"><CODE>Cell.CELL_TYPE_FORMULA</CODE></A>, 
+<A HREF="../../../../../org/apache/poi/ss/usermodel/Cell.html#CELL_TYPE_NUMERIC"><CODE>Cell.CELL_TYPE_NUMERIC</CODE></A>, 
+<A HREF="../../../../../org/apache/poi/ss/usermodel/Cell.html#CELL_TYPE_STRING"><CODE>Cell.CELL_TYPE_STRING</CODE></A></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getCell(int)"><!-- --></A><H3>
+getCell</H3>
+<PRE>
+public <A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFCell.html" title="class in org.apache.poi.xssf.usermodel">XSSFCell</A> <B>getCell</B>(int&nbsp;cellnum)</PRE>
+<DL>
+<DD>Returns the cell at the given (0 based) index,
+  with the <A HREF="../../../../../org/apache/poi/ss/usermodel/Row.MissingCellPolicy.html" title="class in org.apache.poi.ss.usermodel"><CODE>Row.MissingCellPolicy</CODE></A> from the parent Workbook.
+<P>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../../../../org/apache/poi/ss/usermodel/Row.html#getCell(int)">getCell</A></CODE> in interface <CODE><A HREF="../../../../../org/apache/poi/ss/usermodel/Row.html" title="interface in org.apache.poi.ss.usermodel">Row</A></CODE></DL>
+</DD>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>cellnum</CODE> - 0 based column number
+<DT><B>Returns:</B><DD>the cell at the given (0 based) index<DT><B>See Also:</B><DD><A HREF="../../../../../org/apache/poi/ss/usermodel/Row.html#getCell(int, org.apache.poi.ss.usermodel.Row.MissingCellPolicy)"><CODE>Row.getCell(int, org.apache.poi.ss.usermodel.Row.MissingCellPolicy)</CODE></A></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getCell(int, org.apache.poi.ss.usermodel.Row.MissingCellPolicy)"><!-- --></A><H3>
+getCell</H3>
+<PRE>
+public <A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFCell.html" title="class in org.apache.poi.xssf.usermodel">XSSFCell</A> <B>getCell</B>(int&nbsp;cellnum,
+                        <A HREF="../../../../../org/apache/poi/ss/usermodel/Row.MissingCellPolicy.html" title="class in org.apache.poi.ss.usermodel">Row.MissingCellPolicy</A>&nbsp;policy)</PRE>
+<DL>
+<DD>Returns the cell at the given (0 based) index, with the specified <A HREF="../../../../../org/apache/poi/ss/usermodel/Row.MissingCellPolicy.html" title="class in org.apache.poi.ss.usermodel"><CODE>Row.MissingCellPolicy</CODE></A>
+<P>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../../../../org/apache/poi/ss/usermodel/Row.html#getCell(int, org.apache.poi.ss.usermodel.Row.MissingCellPolicy)">getCell</A></CODE> in interface <CODE><A HREF="../../../../../org/apache/poi/ss/usermodel/Row.html" title="interface in org.apache.poi.ss.usermodel">Row</A></CODE></DL>
+</DD>
+<DD><DL>
+
+<DT><B>Returns:</B><DD>the cell at the given (0 based) index
+<DT><B>Throws:</B>
+<DD><CODE>java.lang.IllegalArgumentException</CODE> - if cellnum < 0 or the specified MissingCellPolicy is invalid<DT><B>See Also:</B><DD><A HREF="../../../../../org/apache/poi/ss/usermodel/Row.html#RETURN_NULL_AND_BLANK"><CODE>Row.RETURN_NULL_AND_BLANK</CODE></A>, 
+<A HREF="../../../../../org/apache/poi/ss/usermodel/Row.html#RETURN_BLANK_AS_NULL"><CODE>Row.RETURN_BLANK_AS_NULL</CODE></A>, 
+<A HREF="../../../../../org/apache/poi/ss/usermodel/Row.html#CREATE_NULL_AS_BLANK"><CODE>Row.CREATE_NULL_AS_BLANK</CODE></A></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getFirstCellNum()"><!-- --></A><H3>
+getFirstCellNum</H3>
+<PRE>
+public short <B>getFirstCellNum</B>()</PRE>
+<DL>
+<DD>Get the number of the first cell contained in this row.
+<P>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../../../../org/apache/poi/ss/usermodel/Row.html#getFirstCellNum()">getFirstCellNum</A></CODE> in interface <CODE><A HREF="../../../../../org/apache/poi/ss/usermodel/Row.html" title="interface in org.apache.poi.ss.usermodel">Row</A></CODE></DL>
+</DD>
+<DD><DL>
+
+<DT><B>Returns:</B><DD>short representing the first logical cell in the row,
+  or -1 if the row does not contain any cells.</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getLastCellNum()"><!-- --></A><H3>
+getLastCellNum</H3>
+<PRE>
+public short <B>getLastCellNum</B>()</PRE>
+<DL>
+<DD>Gets the index of the last cell contained in this row <b>PLUS ONE</b>. The result also
+ happens to be the 1-based column number of the last cell.  This value can be used as a
+ standard upper bound when iterating over cells:
+ <pre>
+ short minColIx = row.getFirstCellNum();
+ short maxColIx = row.getLastCellNum();
+ for(short colIx=minColIx; colIx&lt;maxColIx; colIx++) {
+   XSSFCell cell = row.getCell(colIx);
+   if(cell == null) {
+     continue;
+   }
+   //... do something with cell
+ }
+ </pre>
+<P>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../../../../org/apache/poi/ss/usermodel/Row.html#getLastCellNum()">getLastCellNum</A></CODE> in interface <CODE><A HREF="../../../../../org/apache/poi/ss/usermodel/Row.html" title="interface in org.apache.poi.ss.usermodel">Row</A></CODE></DL>
+</DD>
+<DD><DL>
+
+<DT><B>Returns:</B><DD>short representing the last logical cell in the row <b>PLUS ONE</b>,
+   or -1 if the row does not contain any cells.</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getHeight()"><!-- --></A><H3>
+getHeight</H3>
+<PRE>
+public short <B>getHeight</B>()</PRE>
+<DL>
+<DD>Get the row's height measured in twips (1/20th of a point). If the height is not set, the default worksheet value is returned,
+ See <A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFSheet.html#getDefaultRowHeightInPoints()"><CODE>XSSFSheet.getDefaultRowHeightInPoints()</CODE></A>
+<P>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../../../../org/apache/poi/ss/usermodel/Row.html#getHeight()">getHeight</A></CODE> in interface <CODE><A HREF="../../../../../org/apache/poi/ss/usermodel/Row.html" title="interface in org.apache.poi.ss.usermodel">Row</A></CODE></DL>
+</DD>
+<DD><DL>
+
+<DT><B>Returns:</B><DD>row height measured in twips (1/20th of a point)</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getHeightInPoints()"><!-- --></A><H3>
+getHeightInPoints</H3>
+<PRE>
+public float <B>getHeightInPoints</B>()</PRE>
+<DL>
+<DD>Returns row height measured in point size. If the height is not set, the default worksheet value is returned,
+ See <A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFSheet.html#getDefaultRowHeightInPoints()"><CODE>XSSFSheet.getDefaultRowHeightInPoints()</CODE></A>
+<P>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../../../../org/apache/poi/ss/usermodel/Row.html#getHeightInPoints()">getHeightInPoints</A></CODE> in interface <CODE><A HREF="../../../../../org/apache/poi/ss/usermodel/Row.html" title="interface in org.apache.poi.ss.usermodel">Row</A></CODE></DL>
+</DD>
+<DD><DL>
+
+<DT><B>Returns:</B><DD>row height measured in point size<DT><B>See Also:</B><DD><A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFSheet.html#getDefaultRowHeightInPoints()"><CODE>XSSFSheet.getDefaultRowHeightInPoints()</CODE></A></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setHeight(short)"><!-- --></A><H3>
+setHeight</H3>
+<PRE>
+public void <B>setHeight</B>(short&nbsp;height)</PRE>
+<DL>
+<DD>Set the height in "twips" or  1/20th of a point.
+<P>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../../../../org/apache/poi/ss/usermodel/Row.html#setHeight(short)">setHeight</A></CODE> in interface <CODE><A HREF="../../../../../org/apache/poi/ss/usermodel/Row.html" title="interface in org.apache.poi.ss.usermodel">Row</A></CODE></DL>
+</DD>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>height</CODE> - the height in "twips" or  1/20th of a point. <code>-1</code>  resets to the default height</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setHeightInPoints(float)"><!-- --></A><H3>
+setHeightInPoints</H3>
+<PRE>
+public void <B>setHeightInPoints</B>(float&nbsp;height)</PRE>
+<DL>
+<DD>Set the row's height in points.
+<P>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../../../../org/apache/poi/ss/usermodel/Row.html#setHeightInPoints(float)">setHeightInPoints</A></CODE> in interface <CODE><A HREF="../../../../../org/apache/poi/ss/usermodel/Row.html" title="interface in org.apache.poi.ss.usermodel">Row</A></CODE></DL>
+</DD>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>height</CODE> - the height in points. <code>-1</code>  resets to the default height</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getPhysicalNumberOfCells()"><!-- --></A><H3>
+getPhysicalNumberOfCells</H3>
+<PRE>
+public int <B>getPhysicalNumberOfCells</B>()</PRE>
+<DL>
+<DD>Gets the number of defined cells (NOT number of cells in the actual row!).
+ That is to say if only columns 0,4,5 have values then there would be 3.
+<P>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../../../../org/apache/poi/ss/usermodel/Row.html#getPhysicalNumberOfCells()">getPhysicalNumberOfCells</A></CODE> in interface <CODE><A HREF="../../../../../org/apache/poi/ss/usermodel/Row.html" title="interface in org.apache.poi.ss.usermodel">Row</A></CODE></DL>
+</DD>
+<DD><DL>
+
+<DT><B>Returns:</B><DD>int representing the number of defined cells in the row.</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getRowNum()"><!-- --></A><H3>
+getRowNum</H3>
+<PRE>
+public int <B>getRowNum</B>()</PRE>
+<DL>
+<DD>Get row number this row represents
+<P>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../../../../org/apache/poi/ss/usermodel/Row.html#getRowNum()">getRowNum</A></CODE> in interface <CODE><A HREF="../../../../../org/apache/poi/ss/usermodel/Row.html" title="interface in org.apache.poi.ss.usermodel">Row</A></CODE></DL>
+</DD>
+<DD><DL>
+
+<DT><B>Returns:</B><DD>the row number (0 based)</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setRowNum(int)"><!-- --></A><H3>
+setRowNum</H3>
+<PRE>
+public void <B>setRowNum</B>(int&nbsp;rowIndex)</PRE>
+<DL>
+<DD>Set the row number of this row.
+<P>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../../../../org/apache/poi/ss/usermodel/Row.html#setRowNum(int)">setRowNum</A></CODE> in interface <CODE><A HREF="../../../../../org/apache/poi/ss/usermodel/Row.html" title="interface in org.apache.poi.ss.usermodel">Row</A></CODE></DL>
+</DD>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>rowIndex</CODE> - the row number (0-based)
+<DT><B>Throws:</B>
+<DD><CODE>java.lang.IllegalArgumentException</CODE> - if rowNum < 0 or greater than 1048575</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getZeroHeight()"><!-- --></A><H3>
+getZeroHeight</H3>
+<PRE>
+public boolean <B>getZeroHeight</B>()</PRE>
+<DL>
+<DD>Get whether or not to display this row with 0 height
+<P>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../../../../org/apache/poi/ss/usermodel/Row.html#getZeroHeight()">getZeroHeight</A></CODE> in interface <CODE><A HREF="../../../../../org/apache/poi/ss/usermodel/Row.html" title="interface in org.apache.poi.ss.usermodel">Row</A></CODE></DL>
+</DD>
+<DD><DL>
+
+<DT><B>Returns:</B><DD>- height is zero or not.</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setZeroHeight(boolean)"><!-- --></A><H3>
+setZeroHeight</H3>
+<PRE>
+public void <B>setZeroHeight</B>(boolean&nbsp;height)</PRE>
+<DL>
+<DD>Set whether or not to display this row with 0 height
+<P>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../../../../org/apache/poi/ss/usermodel/Row.html#setZeroHeight(boolean)">setZeroHeight</A></CODE> in interface <CODE><A HREF="../../../../../org/apache/poi/ss/usermodel/Row.html" title="interface in org.apache.poi.ss.usermodel">Row</A></CODE></DL>
+</DD>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>height</CODE> - height is zero or not.</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="isFormatted()"><!-- --></A><H3>
+isFormatted</H3>
+<PRE>
+public boolean <B>isFormatted</B>()</PRE>
+<DL>
+<DD>Is this row formatted? Most aren't, but some rows
+  do have whole-row styles. For those that do, you
+  can get the formatting from <A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFRow.html#getRowStyle()"><CODE>getRowStyle()</CODE></A>
+<P>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../../../../org/apache/poi/ss/usermodel/Row.html#isFormatted()">isFormatted</A></CODE> in interface <CODE><A HREF="../../../../../org/apache/poi/ss/usermodel/Row.html" title="interface in org.apache.poi.ss.usermodel">Row</A></CODE></DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getRowStyle()"><!-- --></A><H3>
+getRowStyle</H3>
+<PRE>
+public <A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFCellStyle.html" title="class in org.apache.poi.xssf.usermodel">XSSFCellStyle</A> <B>getRowStyle</B>()</PRE>
+<DL>
+<DD>Returns the whole-row cell style. Most rows won't
+  have one of these, so will return null. Call
+  <A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFRow.html#isFormatted()"><CODE>isFormatted()</CODE></A> to check first.
+<P>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../../../../org/apache/poi/ss/usermodel/Row.html#getRowStyle()">getRowStyle</A></CODE> in interface <CODE><A HREF="../../../../../org/apache/poi/ss/usermodel/Row.html" title="interface in org.apache.poi.ss.usermodel">Row</A></CODE></DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setRowStyle(org.apache.poi.ss.usermodel.CellStyle)"><!-- --></A><H3>
+setRowStyle</H3>
+<PRE>
+public void <B>setRowStyle</B>(<A HREF="../../../../../org/apache/poi/ss/usermodel/CellStyle.html" title="interface in org.apache.poi.ss.usermodel">CellStyle</A>&nbsp;style)</PRE>
+<DL>
+<DD>Applies a whole-row cell styling to the row.
+ If the value is null then the style information is removed,
+  causing the cell to used the default workbook style.
+<P>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../../../../org/apache/poi/ss/usermodel/Row.html#setRowStyle(org.apache.poi.ss.usermodel.CellStyle)">setRowStyle</A></CODE> in interface <CODE><A HREF="../../../../../org/apache/poi/ss/usermodel/Row.html" title="interface in org.apache.poi.ss.usermodel">Row</A></CODE></DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="removeCell(org.apache.poi.ss.usermodel.Cell)"><!-- --></A><H3>
+removeCell</H3>
+<PRE>
+public void <B>removeCell</B>(<A HREF="../../../../../org/apache/poi/ss/usermodel/Cell.html" title="interface in org.apache.poi.ss.usermodel">Cell</A>&nbsp;cell)</PRE>
+<DL>
+<DD>Remove the Cell from this row.
+<P>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../../../../org/apache/poi/ss/usermodel/Row.html#removeCell(org.apache.poi.ss.usermodel.Cell)">removeCell</A></CODE> in interface <CODE><A HREF="../../../../../org/apache/poi/ss/usermodel/Row.html" title="interface in org.apache.poi.ss.usermodel">Row</A></CODE></DL>
+</DD>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>cell</CODE> - the cell to remove</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getCTRow()"><!-- --></A><H3>
+getCTRow</H3>
+<PRE>
+<FONT SIZE="-1"><A HREF="../../../../../org/apache/poi/util/Internal.html" title="annotation in org.apache.poi.util">@Internal</A>
+</FONT>public org.openxmlformats.schemas.spreadsheetml.x2006.main.CTRow <B>getCTRow</B>()</PRE>
+<DL>
+<DD>Returns the underlying CTRow xml bean containing all cell definitions in this row
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+
+<DT><B>Returns:</B><DD>the underlying CTRow xml bean</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="onDocumentWrite()"><!-- --></A><H3>
+onDocumentWrite</H3>
+<PRE>
+protected void <B>onDocumentWrite</B>()</PRE>
+<DL>
+<DD>Fired when the document is written to an output stream.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+<DT><B>See Also:</B><DD><A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFSheet.html#write(java.io.OutputStream)"><CODE>()</CODE></A></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="toString()"><!-- --></A><H3>
+toString</H3>
+<PRE>
+public java.lang.String <B>toString</B>()</PRE>
+<DL>
+<DD><DL>
+<DT><B>Overrides:</B><DD><CODE>toString</CODE> in class <CODE>java.lang.Object</CODE></DL>
+</DD>
+<DD><DL>
+
+<DT><B>Returns:</B><DD>formatted xml representation of this row</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="shift(int)"><!-- --></A><H3>
+shift</H3>
+<PRE>
+protected void <B>shift</B>(int&nbsp;n)</PRE>
+<DL>
+<DD>update cell references when shifting rows
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>n</CODE> - the number of rows to move</DL>
+</DD>
+</DL>
+<!-- ========= END OF CLASS DATA ========= -->
+<HR>
+
+
+<!-- ======= START OF BOTTOM NAVBAR ====== -->
+<A NAME="navbar_bottom"><!-- --></A>
+<A HREF="#skip-navbar_bottom" title="Skip navigation links"></A>
+<TABLE BORDER="0" WIDTH="100%" CELLPADDING="1" CELLSPACING="0" SUMMARY="">
+<TR>
+<TD COLSPAN=2 BGCOLOR="#EEEEFF" CLASS="NavBarCell1">
+<A NAME="navbar_bottom_firstrow"><!-- --></A>
+<TABLE BORDER="0" CELLPADDING="0" CELLSPACING="3" SUMMARY="">
+  <TR ALIGN="center" VALIGN="top">
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../overview-summary.html"><FONT CLASS="NavBarFont1"><B>Overview</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="package-summary.html"><FONT CLASS="NavBarFont1"><B>Package</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#FFFFFF" CLASS="NavBarCell1Rev"> &nbsp;<FONT CLASS="NavBarFont1Rev"><B>Class</B></FONT>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="class-use/XSSFRow.html"><FONT CLASS="NavBarFont1"><B>Use</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="package-tree.html"><FONT CLASS="NavBarFont1"><B>Tree</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../deprecated-list.html"><FONT CLASS="NavBarFont1"><B>Deprecated</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../index-all.html"><FONT CLASS="NavBarFont1"><B>Index</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../help-doc.html"><FONT CLASS="NavBarFont1"><B>Help</B></FONT></A>&nbsp;</TD>
+  </TR>
+</TABLE>
+</TD>
+<TD ALIGN="right" VALIGN="top" ROWSPAN=3><EM>
+</EM>
+</TD>
+</TR>
+
+<TR>
+<TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
+&nbsp;<A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFRichTextString.html" title="class in org.apache.poi.xssf.usermodel"><B>PREV CLASS</B></A>&nbsp;
+&nbsp;<A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFShape.html" title="class in org.apache.poi.xssf.usermodel"><B>NEXT CLASS</B></A></FONT></TD>
+<TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
+  <A HREF="../../../../../index.html?org/apache/poi/xssf/usermodel/XSSFRow.html" target="_top"><B>FRAMES</B></A>  &nbsp;
+&nbsp;<A HREF="XSSFRow.html" target="_top"><B>NO FRAMES</B></A>  &nbsp;
+&nbsp;<SCRIPT type="text/javascript">
+  <!--
+  if(window==top) {
+    document.writeln('<A HREF="../../../../../allclasses-noframe.html"><B>All Classes</B></A>');
+  }
+  //-->
+</SCRIPT>
+<NOSCRIPT>
+  <A HREF="../../../../../allclasses-noframe.html"><B>All Classes</B></A>
+</NOSCRIPT>
+
+
+</FONT></TD>
+</TR>
+<TR>
+<TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
+  SUMMARY:&nbsp;NESTED&nbsp;|&nbsp;FIELD&nbsp;|&nbsp;<A HREF="#constructor_summary">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_summary">METHOD</A></FONT></TD>
+<TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
+DETAIL:&nbsp;FIELD&nbsp;|&nbsp;<A HREF="#constructor_detail">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_detail">METHOD</A></FONT></TD>
+</TR>
+</TABLE>
+<A NAME="skip-navbar_bottom"></A>
+<!-- ======== END OF BOTTOM NAVBAR ======= -->
+
+<HR>
+
+                <i>Copyright 2014 The Apache Software Foundation or
+        its licensors, as applicable.</i>
+            
+</BODY>
+</HTML>

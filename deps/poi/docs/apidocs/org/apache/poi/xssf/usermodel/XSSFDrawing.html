@@ -1,0 +1,777 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!--NewPage-->
+<HTML>
+<HEAD>
+<TITLE>
+XSSFDrawing (POI API Documentation)
+</TITLE>
+
+<META NAME="keywords" CONTENT="org.apache.poi.xssf.usermodel.XSSFDrawing class">
+
+<LINK REL ="stylesheet" TYPE="text/css" HREF="../../../../../stylesheet.css" TITLE="Style">
+
+<SCRIPT type="text/javascript">
+function windowTitle()
+{
+    parent.document.title="XSSFDrawing (POI API Documentation)";
+}
+</SCRIPT>
+<NOSCRIPT>
+</NOSCRIPT>
+
+</HEAD>
+
+<BODY BGCOLOR="white" onload="windowTitle();">
+
+
+<!-- ========= START OF TOP NAVBAR ======= -->
+<A NAME="navbar_top"><!-- --></A>
+<A HREF="#skip-navbar_top" title="Skip navigation links"></A>
+<TABLE BORDER="0" WIDTH="100%" CELLPADDING="1" CELLSPACING="0" SUMMARY="">
+<TR>
+<TD COLSPAN=2 BGCOLOR="#EEEEFF" CLASS="NavBarCell1">
+<A NAME="navbar_top_firstrow"><!-- --></A>
+<TABLE BORDER="0" CELLPADDING="0" CELLSPACING="3" SUMMARY="">
+  <TR ALIGN="center" VALIGN="top">
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../overview-summary.html"><FONT CLASS="NavBarFont1"><B>Overview</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="package-summary.html"><FONT CLASS="NavBarFont1"><B>Package</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#FFFFFF" CLASS="NavBarCell1Rev"> &nbsp;<FONT CLASS="NavBarFont1Rev"><B>Class</B></FONT>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="class-use/XSSFDrawing.html"><FONT CLASS="NavBarFont1"><B>Use</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="package-tree.html"><FONT CLASS="NavBarFont1"><B>Tree</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../deprecated-list.html"><FONT CLASS="NavBarFont1"><B>Deprecated</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../index-all.html"><FONT CLASS="NavBarFont1"><B>Index</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../help-doc.html"><FONT CLASS="NavBarFont1"><B>Help</B></FONT></A>&nbsp;</TD>
+  </TR>
+</TABLE>
+</TD>
+<TD ALIGN="right" VALIGN="top" ROWSPAN=3><EM>
+</EM>
+</TD>
+</TR>
+
+<TR>
+<TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
+&nbsp;<A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFDialogsheet.html" title="class in org.apache.poi.xssf.usermodel"><B>PREV CLASS</B></A>&nbsp;
+&nbsp;<A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFEvaluationWorkbook.html" title="class in org.apache.poi.xssf.usermodel"><B>NEXT CLASS</B></A></FONT></TD>
+<TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
+  <A HREF="../../../../../index.html?org/apache/poi/xssf/usermodel/XSSFDrawing.html" target="_top"><B>FRAMES</B></A>  &nbsp;
+&nbsp;<A HREF="XSSFDrawing.html" target="_top"><B>NO FRAMES</B></A>  &nbsp;
+&nbsp;<SCRIPT type="text/javascript">
+  <!--
+  if(window==top) {
+    document.writeln('<A HREF="../../../../../allclasses-noframe.html"><B>All Classes</B></A>');
+  }
+  //-->
+</SCRIPT>
+<NOSCRIPT>
+  <A HREF="../../../../../allclasses-noframe.html"><B>All Classes</B></A>
+</NOSCRIPT>
+
+
+</FONT></TD>
+</TR>
+<TR>
+<TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
+  SUMMARY:&nbsp;NESTED&nbsp;|&nbsp;<A HREF="#field_summary">FIELD</A>&nbsp;|&nbsp;<A HREF="#constructor_summary">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_summary">METHOD</A></FONT></TD>
+<TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
+DETAIL:&nbsp;<A HREF="#field_detail">FIELD</A>&nbsp;|&nbsp;<A HREF="#constructor_detail">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_detail">METHOD</A></FONT></TD>
+</TR>
+</TABLE>
+<A NAME="skip-navbar_top"></A>
+<!-- ========= END OF TOP NAVBAR ========= -->
+
+<HR>
+<!-- ======== START OF CLASS DATA ======== -->
+<H2>
+<FONT SIZE="-1">
+org.apache.poi.xssf.usermodel</FONT>
+<BR>
+Class XSSFDrawing</H2>
+<PRE>
+java.lang.Object
+  <IMG SRC="../../../../../resources/inherit.gif" ALT="extended by "><A HREF="../../../../../org/apache/poi/POIXMLDocumentPart.html" title="class in org.apache.poi">org.apache.poi.POIXMLDocumentPart</A>
+      <IMG SRC="../../../../../resources/inherit.gif" ALT="extended by "><B>org.apache.poi.xssf.usermodel.XSSFDrawing</B>
+</PRE>
+<DL>
+<DT><B>All Implemented Interfaces:</B> <DD><A HREF="../../../../../org/apache/poi/ss/usermodel/Drawing.html" title="interface in org.apache.poi.ss.usermodel">Drawing</A></DD>
+</DL>
+<HR>
+<DL>
+<DT><PRE>public final class <B>XSSFDrawing</B><DT>extends <A HREF="../../../../../org/apache/poi/POIXMLDocumentPart.html" title="class in org.apache.poi">POIXMLDocumentPart</A><DT>implements <A HREF="../../../../../org/apache/poi/ss/usermodel/Drawing.html" title="interface in org.apache.poi.ss.usermodel">Drawing</A></DL>
+</PRE>
+
+<P>
+Represents a SpreadsheetML drawing
+<P>
+
+<P>
+<DL>
+<DT><B>Author:</B></DT>
+  <DD>Yegor Kozlov</DD>
+</DL>
+<HR>
+
+<P>
+<!-- =========== FIELD SUMMARY =========== -->
+
+<A NAME="field_summary"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+<B>Field Summary</B></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>protected static&nbsp;java.lang.String</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFDrawing.html#NAMESPACE_A">NAMESPACE_A</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>protected static&nbsp;java.lang.String</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFDrawing.html#NAMESPACE_C">NAMESPACE_C</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+</TABLE>
+&nbsp;<A NAME="fields_inherited_from_class_org.apache.poi.POIXMLDocumentPart"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#EEEEFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left"><B>Fields inherited from class org.apache.poi.<A HREF="../../../../../org/apache/poi/POIXMLDocumentPart.html" title="class in org.apache.poi">POIXMLDocumentPart</A></B></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><A HREF="../../../../../org/apache/poi/POIXMLDocumentPart.html#DEFAULT_XML_OPTIONS">DEFAULT_XML_OPTIONS</A></CODE></TD>
+</TR>
+</TABLE>
+&nbsp;
+<!-- ======== CONSTRUCTOR SUMMARY ======== -->
+
+<A NAME="constructor_summary"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+<B>Constructor Summary</B></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>protected </CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFDrawing.html#XSSFDrawing()">XSSFDrawing</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Create a new SpreadsheetML drawing</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFDrawing.html#XSSFDrawing(org.apache.poi.openxml4j.opc.PackagePart, org.apache.poi.openxml4j.opc.PackageRelationship)">XSSFDrawing</A></B>(<A HREF="../../../../../org/apache/poi/openxml4j/opc/PackagePart.html" title="class in org.apache.poi.openxml4j.opc">PackagePart</A>&nbsp;part,
+            <A HREF="../../../../../org/apache/poi/openxml4j/opc/PackageRelationship.html" title="class in org.apache.poi.openxml4j.opc">PackageRelationship</A>&nbsp;rel)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Construct a SpreadsheetML drawing from a package part</TD>
+</TR>
+</TABLE>
+&nbsp;
+<!-- ========== METHOD SUMMARY =========== -->
+
+<A NAME="method_summary"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+<B>Method Summary</B></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>protected &nbsp;<A HREF="../../../../../org/apache/poi/openxml4j/opc/PackageRelationship.html" title="class in org.apache.poi.openxml4j.opc">PackageRelationship</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFDrawing.html#addPictureReference(int)">addPictureReference</A></B>(int&nbsp;pictureIndex)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Add the indexed picture to this drawing relations</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>protected &nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFDrawing.html#commit()">commit</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Save the content in the underlying package part.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFClientAnchor.html" title="class in org.apache.poi.xssf.usermodel">XSSFClientAnchor</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFDrawing.html#createAnchor(int, int, int, int, int, int, int, int)">createAnchor</A></B>(int&nbsp;dx1,
+             int&nbsp;dy1,
+             int&nbsp;dx2,
+             int&nbsp;dy2,
+             int&nbsp;col1,
+             int&nbsp;row1,
+             int&nbsp;col2,
+             int&nbsp;row2)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Creates a new client anchor and sets the top-left and bottom-right
+ coordinates of the anchor.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFComment.html" title="class in org.apache.poi.xssf.usermodel">XSSFComment</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFDrawing.html#createCellComment(org.apache.poi.ss.usermodel.ClientAnchor)">createCellComment</A></B>(<A HREF="../../../../../org/apache/poi/ss/usermodel/ClientAnchor.html" title="interface in org.apache.poi.ss.usermodel">ClientAnchor</A>&nbsp;anchor)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Creates a comment.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFChart.html" title="class in org.apache.poi.xssf.usermodel">XSSFChart</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFDrawing.html#createChart(org.apache.poi.ss.usermodel.ClientAnchor)">createChart</A></B>(<A HREF="../../../../../org/apache/poi/ss/usermodel/ClientAnchor.html" title="interface in org.apache.poi.ss.usermodel">ClientAnchor</A>&nbsp;anchor)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Creates a chart.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFChart.html" title="class in org.apache.poi.xssf.usermodel">XSSFChart</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFDrawing.html#createChart(org.apache.poi.xssf.usermodel.XSSFClientAnchor)">createChart</A></B>(<A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFClientAnchor.html" title="class in org.apache.poi.xssf.usermodel">XSSFClientAnchor</A>&nbsp;anchor)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Creates a chart.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFConnector.html" title="class in org.apache.poi.xssf.usermodel">XSSFConnector</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFDrawing.html#createConnector(org.apache.poi.xssf.usermodel.XSSFClientAnchor)">createConnector</A></B>(<A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFClientAnchor.html" title="class in org.apache.poi.xssf.usermodel">XSSFClientAnchor</A>&nbsp;anchor)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Creates a simple shape.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFShapeGroup.html" title="class in org.apache.poi.xssf.usermodel">XSSFShapeGroup</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFDrawing.html#createGroup(org.apache.poi.xssf.usermodel.XSSFClientAnchor)">createGroup</A></B>(<A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFClientAnchor.html" title="class in org.apache.poi.xssf.usermodel">XSSFClientAnchor</A>&nbsp;anchor)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Creates a simple shape.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFPicture.html" title="class in org.apache.poi.xssf.usermodel">XSSFPicture</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFDrawing.html#createPicture(org.apache.poi.ss.usermodel.ClientAnchor, int)">createPicture</A></B>(<A HREF="../../../../../org/apache/poi/ss/usermodel/ClientAnchor.html" title="interface in org.apache.poi.ss.usermodel">ClientAnchor</A>&nbsp;anchor,
+              int&nbsp;pictureIndex)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Creates a picture.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFPicture.html" title="class in org.apache.poi.xssf.usermodel">XSSFPicture</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFDrawing.html#createPicture(org.apache.poi.xssf.usermodel.XSSFClientAnchor, int)">createPicture</A></B>(<A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFClientAnchor.html" title="class in org.apache.poi.xssf.usermodel">XSSFClientAnchor</A>&nbsp;anchor,
+              int&nbsp;pictureIndex)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Creates a picture.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFSimpleShape.html" title="class in org.apache.poi.xssf.usermodel">XSSFSimpleShape</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFDrawing.html#createSimpleShape(org.apache.poi.xssf.usermodel.XSSFClientAnchor)">createSimpleShape</A></B>(<A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFClientAnchor.html" title="class in org.apache.poi.xssf.usermodel">XSSFClientAnchor</A>&nbsp;anchor)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Creates a simple shape.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFTextBox.html" title="class in org.apache.poi.xssf.usermodel">XSSFTextBox</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFDrawing.html#createTextbox(org.apache.poi.xssf.usermodel.XSSFClientAnchor)">createTextbox</A></B>(<A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFClientAnchor.html" title="class in org.apache.poi.xssf.usermodel">XSSFClientAnchor</A>&nbsp;anchor)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Constructs a textbox under the drawing.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;java.util.List&lt;<A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFChart.html" title="class in org.apache.poi.xssf.usermodel">XSSFChart</A>&gt;</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFDrawing.html#getCharts()">getCharts</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns all charts in this drawing.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;org.openxmlformats.schemas.drawingml.x2006.spreadsheetDrawing.CTDrawing</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFDrawing.html#getCTDrawing()">getCTDrawing</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Return the underlying CTDrawing bean, the root element of the SpreadsheetML Drawing part.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;java.util.List&lt;<A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFShape.html" title="class in org.apache.poi.xssf.usermodel">XSSFShape</A>&gt;</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFDrawing.html#getShapes()">getShapes</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+</TABLE>
+&nbsp;<A NAME="methods_inherited_from_class_org.apache.poi.POIXMLDocumentPart"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#EEEEFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left"><B>Methods inherited from class org.apache.poi.<A HREF="../../../../../org/apache/poi/POIXMLDocumentPart.html" title="class in org.apache.poi">POIXMLDocumentPart</A></B></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><A HREF="../../../../../org/apache/poi/POIXMLDocumentPart.html#addRelation(java.lang.String, org.apache.poi.POIXMLDocumentPart)">addRelation</A>, <A HREF="../../../../../org/apache/poi/POIXMLDocumentPart.html#createRelationship(org.apache.poi.POIXMLRelation, org.apache.poi.POIXMLFactory)">createRelationship</A>, <A HREF="../../../../../org/apache/poi/POIXMLDocumentPart.html#createRelationship(org.apache.poi.POIXMLRelation, org.apache.poi.POIXMLFactory, int)">createRelationship</A>, <A HREF="../../../../../org/apache/poi/POIXMLDocumentPart.html#createRelationship(org.apache.poi.POIXMLRelation, org.apache.poi.POIXMLFactory, int, boolean)">createRelationship</A>, <A HREF="../../../../../org/apache/poi/POIXMLDocumentPart.html#getPackagePart()">getPackagePart</A>, <A HREF="../../../../../org/apache/poi/POIXMLDocumentPart.html#getPackageRelationship()">getPackageRelationship</A>, <A HREF="../../../../../org/apache/poi/POIXMLDocumentPart.html#getParent()">getParent</A>, <A HREF="../../../../../org/apache/poi/POIXMLDocumentPart.html#getRelationById(java.lang.String)">getRelationById</A>, <A HREF="../../../../../org/apache/poi/POIXMLDocumentPart.html#getRelationId(org.apache.poi.POIXMLDocumentPart)">getRelationId</A>, <A HREF="../../../../../org/apache/poi/POIXMLDocumentPart.html#getRelations()">getRelations</A>, <A HREF="../../../../../org/apache/poi/POIXMLDocumentPart.html#getTargetPart(org.apache.poi.openxml4j.opc.PackageRelationship)">getTargetPart</A>, <A HREF="../../../../../org/apache/poi/POIXMLDocumentPart.html#onDocumentCreate()">onDocumentCreate</A>, <A HREF="../../../../../org/apache/poi/POIXMLDocumentPart.html#onDocumentRead()">onDocumentRead</A>, <A HREF="../../../../../org/apache/poi/POIXMLDocumentPart.html#onDocumentRemove()">onDocumentRemove</A>, <A HREF="../../../../../org/apache/poi/POIXMLDocumentPart.html#onSave(java.util.Set)">onSave</A>, <A HREF="../../../../../org/apache/poi/POIXMLDocumentPart.html#prepareForCommit()">prepareForCommit</A>, <A HREF="../../../../../org/apache/poi/POIXMLDocumentPart.html#read(org.apache.poi.POIXMLFactory, java.util.Map)">read</A>, <A HREF="../../../../../org/apache/poi/POIXMLDocumentPart.html#rebase(org.apache.poi.openxml4j.opc.OPCPackage)">rebase</A>, <A HREF="../../../../../org/apache/poi/POIXMLDocumentPart.html#removeRelation(org.apache.poi.POIXMLDocumentPart)">removeRelation</A>, <A HREF="../../../../../org/apache/poi/POIXMLDocumentPart.html#removeRelation(org.apache.poi.POIXMLDocumentPart, boolean)">removeRelation</A>, <A HREF="../../../../../org/apache/poi/POIXMLDocumentPart.html#toString()">toString</A></CODE></TD>
+</TR>
+</TABLE>
+&nbsp;<A NAME="methods_inherited_from_class_java.lang.Object"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#EEEEFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left"><B>Methods inherited from class java.lang.Object</B></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE>clone, equals, finalize, getClass, hashCode, notify, notifyAll, wait, wait, wait</CODE></TD>
+</TR>
+</TABLE>
+&nbsp;
+<P>
+
+<!-- ============ FIELD DETAIL =========== -->
+
+<A NAME="field_detail"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="1"><FONT SIZE="+2">
+<B>Field Detail</B></FONT></TH>
+</TR>
+</TABLE>
+
+<A NAME="NAMESPACE_A"><!-- --></A><H3>
+NAMESPACE_A</H3>
+<PRE>
+protected static final java.lang.String <B>NAMESPACE_A</B></PRE>
+<DL>
+<DL>
+<DT><B>See Also:</B><DD><A HREF="../../../../../constant-values.html#org.apache.poi.xssf.usermodel.XSSFDrawing.NAMESPACE_A">Constant Field Values</A></DL>
+</DL>
+<HR>
+
+<A NAME="NAMESPACE_C"><!-- --></A><H3>
+NAMESPACE_C</H3>
+<PRE>
+protected static final java.lang.String <B>NAMESPACE_C</B></PRE>
+<DL>
+<DL>
+<DT><B>See Also:</B><DD><A HREF="../../../../../constant-values.html#org.apache.poi.xssf.usermodel.XSSFDrawing.NAMESPACE_C">Constant Field Values</A></DL>
+</DL>
+
+<!-- ========= CONSTRUCTOR DETAIL ======== -->
+
+<A NAME="constructor_detail"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="1"><FONT SIZE="+2">
+<B>Constructor Detail</B></FONT></TH>
+</TR>
+</TABLE>
+
+<A NAME="XSSFDrawing()"><!-- --></A><H3>
+XSSFDrawing</H3>
+<PRE>
+protected <B>XSSFDrawing</B>()</PRE>
+<DL>
+<DD>Create a new SpreadsheetML drawing
+<P>
+<DL>
+<DT><B>See Also:</B><DD><A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFSheet.html#createDrawingPatriarch()"><CODE>XSSFSheet.createDrawingPatriarch()</CODE></A></DL>
+</DL>
+<HR>
+
+<A NAME="XSSFDrawing(org.apache.poi.openxml4j.opc.PackagePart, org.apache.poi.openxml4j.opc.PackageRelationship)"><!-- --></A><H3>
+XSSFDrawing</H3>
+<PRE>
+public <B>XSSFDrawing</B>(<A HREF="../../../../../org/apache/poi/openxml4j/opc/PackagePart.html" title="class in org.apache.poi.openxml4j.opc">PackagePart</A>&nbsp;part,
+                   <A HREF="../../../../../org/apache/poi/openxml4j/opc/PackageRelationship.html" title="class in org.apache.poi.openxml4j.opc">PackageRelationship</A>&nbsp;rel)
+            throws java.io.IOException,
+                   org.apache.xmlbeans.XmlException</PRE>
+<DL>
+<DD>Construct a SpreadsheetML drawing from a package part
+<P>
+<DL>
+<DT><B>Parameters:</B><DD><CODE>part</CODE> - the package part holding the drawing data,
+ the content type must be <code>application/vnd.openxmlformats-officedocument.drawing+xml</code><DD><CODE>rel</CODE> - the package relationship holding this drawing,
+ the relationship type must be http://schemas.openxmlformats.org/officeDocument/2006/relationships/drawing
+<DT><B>Throws:</B>
+<DD><CODE>java.io.IOException</CODE>
+<DD><CODE>org.apache.xmlbeans.XmlException</CODE></DL>
+</DL>
+
+<!-- ============ METHOD DETAIL ========== -->
+
+<A NAME="method_detail"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="1"><FONT SIZE="+2">
+<B>Method Detail</B></FONT></TH>
+</TR>
+</TABLE>
+
+<A NAME="getCTDrawing()"><!-- --></A><H3>
+getCTDrawing</H3>
+<PRE>
+<FONT SIZE="-1"><A HREF="../../../../../org/apache/poi/util/Internal.html" title="annotation in org.apache.poi.util">@Internal</A>
+</FONT>public org.openxmlformats.schemas.drawingml.x2006.spreadsheetDrawing.CTDrawing <B>getCTDrawing</B>()</PRE>
+<DL>
+<DD>Return the underlying CTDrawing bean, the root element of the SpreadsheetML Drawing part.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+
+<DT><B>Returns:</B><DD>the underlying CTDrawing bean</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="commit()"><!-- --></A><H3>
+commit</H3>
+<PRE>
+protected void <B>commit</B>()
+               throws java.io.IOException</PRE>
+<DL>
+<DD><B>Description copied from class: <CODE><A HREF="../../../../../org/apache/poi/POIXMLDocumentPart.html#commit()">POIXMLDocumentPart</A></CODE></B></DD>
+<DD>Save the content in the underlying package part.
+ Default implementation is empty meaning that the package part is left unmodified.
+
+ Sub-classes should override and add logic to marshal the "model" into Ooxml4J.
+
+ For example, the code saving a generic XML entry may look as follows:
+ <pre><code>
+ protected void commit() throws IOException {
+   PackagePart part = getPackagePart();
+   OutputStream out = part.getOutputStream();
+   XmlObject bean = getXmlBean(); //the "model" which holds changes in memory
+   bean.save(out, DEFAULT_XML_OPTIONS);
+   out.close();
+ }
+  </code></pre>
+<P>
+<DD><DL>
+<DT><B>Overrides:</B><DD><CODE><A HREF="../../../../../org/apache/poi/POIXMLDocumentPart.html#commit()">commit</A></CODE> in class <CODE><A HREF="../../../../../org/apache/poi/POIXMLDocumentPart.html" title="class in org.apache.poi">POIXMLDocumentPart</A></CODE></DL>
+</DD>
+<DD><DL>
+
+<DT><B>Throws:</B>
+<DD><CODE>java.io.IOException</CODE></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="createAnchor(int, int, int, int, int, int, int, int)"><!-- --></A><H3>
+createAnchor</H3>
+<PRE>
+public <A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFClientAnchor.html" title="class in org.apache.poi.xssf.usermodel">XSSFClientAnchor</A> <B>createAnchor</B>(int&nbsp;dx1,
+                                     int&nbsp;dy1,
+                                     int&nbsp;dx2,
+                                     int&nbsp;dy2,
+                                     int&nbsp;col1,
+                                     int&nbsp;row1,
+                                     int&nbsp;col2,
+                                     int&nbsp;row2)</PRE>
+<DL>
+<DD><B>Description copied from interface: <CODE><A HREF="../../../../../org/apache/poi/ss/usermodel/Drawing.html#createAnchor(int, int, int, int, int, int, int, int)">Drawing</A></CODE></B></DD>
+<DD>Creates a new client anchor and sets the top-left and bottom-right
+ coordinates of the anchor.
+<P>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../../../../org/apache/poi/ss/usermodel/Drawing.html#createAnchor(int, int, int, int, int, int, int, int)">createAnchor</A></CODE> in interface <CODE><A HREF="../../../../../org/apache/poi/ss/usermodel/Drawing.html" title="interface in org.apache.poi.ss.usermodel">Drawing</A></CODE></DL>
+</DD>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>dx1</CODE> - the x coordinate in EMU within the first cell.<DD><CODE>dy1</CODE> - the y coordinate in EMU within the first cell.<DD><CODE>dx2</CODE> - the x coordinate in EMU within the second cell.<DD><CODE>dy2</CODE> - the y coordinate in EMU within the second cell.<DD><CODE>col1</CODE> - the column (0 based) of the first cell.<DD><CODE>row1</CODE> - the row (0 based) of the first cell.<DD><CODE>col2</CODE> - the column (0 based) of the second cell.<DD><CODE>row2</CODE> - the row (0 based) of the second cell.
+<DT><B>Returns:</B><DD>the newly created client anchor</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="createTextbox(org.apache.poi.xssf.usermodel.XSSFClientAnchor)"><!-- --></A><H3>
+createTextbox</H3>
+<PRE>
+public <A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFTextBox.html" title="class in org.apache.poi.xssf.usermodel">XSSFTextBox</A> <B>createTextbox</B>(<A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFClientAnchor.html" title="class in org.apache.poi.xssf.usermodel">XSSFClientAnchor</A>&nbsp;anchor)</PRE>
+<DL>
+<DD>Constructs a textbox under the drawing.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>anchor</CODE> - the client anchor describes how this group is attached
+                  to the sheet.
+<DT><B>Returns:</B><DD>the newly created textbox.</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="createPicture(org.apache.poi.xssf.usermodel.XSSFClientAnchor, int)"><!-- --></A><H3>
+createPicture</H3>
+<PRE>
+public <A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFPicture.html" title="class in org.apache.poi.xssf.usermodel">XSSFPicture</A> <B>createPicture</B>(<A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFClientAnchor.html" title="class in org.apache.poi.xssf.usermodel">XSSFClientAnchor</A>&nbsp;anchor,
+                                 int&nbsp;pictureIndex)</PRE>
+<DL>
+<DD>Creates a picture.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>anchor</CODE> - the client anchor describes how this picture is attached to the sheet.<DD><CODE>pictureIndex</CODE> - the index of the picture in the workbook collection of pictures,
+   <A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFWorkbook.html#getAllPictures()"><CODE>XSSFWorkbook.getAllPictures()</CODE></A> .
+<DT><B>Returns:</B><DD>the newly created picture shape.</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="createPicture(org.apache.poi.ss.usermodel.ClientAnchor, int)"><!-- --></A><H3>
+createPicture</H3>
+<PRE>
+public <A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFPicture.html" title="class in org.apache.poi.xssf.usermodel">XSSFPicture</A> <B>createPicture</B>(<A HREF="../../../../../org/apache/poi/ss/usermodel/ClientAnchor.html" title="interface in org.apache.poi.ss.usermodel">ClientAnchor</A>&nbsp;anchor,
+                                 int&nbsp;pictureIndex)</PRE>
+<DL>
+<DD><B>Description copied from interface: <CODE><A HREF="../../../../../org/apache/poi/ss/usermodel/Drawing.html#createPicture(org.apache.poi.ss.usermodel.ClientAnchor, int)">Drawing</A></CODE></B></DD>
+<DD>Creates a picture.
+<P>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../../../../org/apache/poi/ss/usermodel/Drawing.html#createPicture(org.apache.poi.ss.usermodel.ClientAnchor, int)">createPicture</A></CODE> in interface <CODE><A HREF="../../../../../org/apache/poi/ss/usermodel/Drawing.html" title="interface in org.apache.poi.ss.usermodel">Drawing</A></CODE></DL>
+</DD>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>anchor</CODE> - the client anchor describes how this picture is
+                     attached to the sheet.<DD><CODE>pictureIndex</CODE> - the index of the picture in the workbook collection
+                     of pictures.
+<DT><B>Returns:</B><DD>the newly created picture.</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="createChart(org.apache.poi.xssf.usermodel.XSSFClientAnchor)"><!-- --></A><H3>
+createChart</H3>
+<PRE>
+public <A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFChart.html" title="class in org.apache.poi.xssf.usermodel">XSSFChart</A> <B>createChart</B>(<A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFClientAnchor.html" title="class in org.apache.poi.xssf.usermodel">XSSFClientAnchor</A>&nbsp;anchor)</PRE>
+<DL>
+<DD>Creates a chart.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>anchor</CODE> - the client anchor describes how this chart is attached to
+               the sheet.
+<DT><B>Returns:</B><DD>the newly created chart<DT><B>See Also:</B><DD><A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFDrawing.html#createChart(org.apache.poi.ss.usermodel.ClientAnchor)"><CODE>createChart(ClientAnchor)</CODE></A></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="createChart(org.apache.poi.ss.usermodel.ClientAnchor)"><!-- --></A><H3>
+createChart</H3>
+<PRE>
+public <A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFChart.html" title="class in org.apache.poi.xssf.usermodel">XSSFChart</A> <B>createChart</B>(<A HREF="../../../../../org/apache/poi/ss/usermodel/ClientAnchor.html" title="interface in org.apache.poi.ss.usermodel">ClientAnchor</A>&nbsp;anchor)</PRE>
+<DL>
+<DD><B>Description copied from interface: <CODE><A HREF="../../../../../org/apache/poi/ss/usermodel/Drawing.html#createChart(org.apache.poi.ss.usermodel.ClientAnchor)">Drawing</A></CODE></B></DD>
+<DD>Creates a chart.
+<P>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../../../../org/apache/poi/ss/usermodel/Drawing.html#createChart(org.apache.poi.ss.usermodel.ClientAnchor)">createChart</A></CODE> in interface <CODE><A HREF="../../../../../org/apache/poi/ss/usermodel/Drawing.html" title="interface in org.apache.poi.ss.usermodel">Drawing</A></CODE></DL>
+</DD>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>anchor</CODE> - the client anchor describes how this chart is attached to
+               the sheet.
+<DT><B>Returns:</B><DD>the newly created chart</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="addPictureReference(int)"><!-- --></A><H3>
+addPictureReference</H3>
+<PRE>
+protected <A HREF="../../../../../org/apache/poi/openxml4j/opc/PackageRelationship.html" title="class in org.apache.poi.openxml4j.opc">PackageRelationship</A> <B>addPictureReference</B>(int&nbsp;pictureIndex)</PRE>
+<DL>
+<DD>Add the indexed picture to this drawing relations
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>pictureIndex</CODE> - the index of the picture in the workbook collection of pictures,
+   <A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFWorkbook.html#getAllPictures()"><CODE>XSSFWorkbook.getAllPictures()</CODE></A> .</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="createSimpleShape(org.apache.poi.xssf.usermodel.XSSFClientAnchor)"><!-- --></A><H3>
+createSimpleShape</H3>
+<PRE>
+public <A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFSimpleShape.html" title="class in org.apache.poi.xssf.usermodel">XSSFSimpleShape</A> <B>createSimpleShape</B>(<A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFClientAnchor.html" title="class in org.apache.poi.xssf.usermodel">XSSFClientAnchor</A>&nbsp;anchor)</PRE>
+<DL>
+<DD>Creates a simple shape.  This includes such shapes as lines, rectangles,
+ and ovals.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>anchor</CODE> - the client anchor describes how this group is attached
+                  to the sheet.
+<DT><B>Returns:</B><DD>the newly created shape.</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="createConnector(org.apache.poi.xssf.usermodel.XSSFClientAnchor)"><!-- --></A><H3>
+createConnector</H3>
+<PRE>
+public <A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFConnector.html" title="class in org.apache.poi.xssf.usermodel">XSSFConnector</A> <B>createConnector</B>(<A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFClientAnchor.html" title="class in org.apache.poi.xssf.usermodel">XSSFClientAnchor</A>&nbsp;anchor)</PRE>
+<DL>
+<DD>Creates a simple shape.  This includes such shapes as lines, rectangles,
+ and ovals.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>anchor</CODE> - the client anchor describes how this group is attached
+                  to the sheet.
+<DT><B>Returns:</B><DD>the newly created shape.</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="createGroup(org.apache.poi.xssf.usermodel.XSSFClientAnchor)"><!-- --></A><H3>
+createGroup</H3>
+<PRE>
+public <A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFShapeGroup.html" title="class in org.apache.poi.xssf.usermodel">XSSFShapeGroup</A> <B>createGroup</B>(<A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFClientAnchor.html" title="class in org.apache.poi.xssf.usermodel">XSSFClientAnchor</A>&nbsp;anchor)</PRE>
+<DL>
+<DD>Creates a simple shape.  This includes such shapes as lines, rectangles,
+ and ovals.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>anchor</CODE> - the client anchor describes how this group is attached
+                  to the sheet.
+<DT><B>Returns:</B><DD>the newly created shape.</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="createCellComment(org.apache.poi.ss.usermodel.ClientAnchor)"><!-- --></A><H3>
+createCellComment</H3>
+<PRE>
+public <A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFComment.html" title="class in org.apache.poi.xssf.usermodel">XSSFComment</A> <B>createCellComment</B>(<A HREF="../../../../../org/apache/poi/ss/usermodel/ClientAnchor.html" title="interface in org.apache.poi.ss.usermodel">ClientAnchor</A>&nbsp;anchor)</PRE>
+<DL>
+<DD>Creates a comment.
+<P>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../../../../org/apache/poi/ss/usermodel/Drawing.html#createCellComment(org.apache.poi.ss.usermodel.ClientAnchor)">createCellComment</A></CODE> in interface <CODE><A HREF="../../../../../org/apache/poi/ss/usermodel/Drawing.html" title="interface in org.apache.poi.ss.usermodel">Drawing</A></CODE></DL>
+</DD>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>anchor</CODE> - the client anchor describes how this comment is attached
+               to the sheet.
+<DT><B>Returns:</B><DD>the newly created comment.</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getCharts()"><!-- --></A><H3>
+getCharts</H3>
+<PRE>
+public java.util.List&lt;<A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFChart.html" title="class in org.apache.poi.xssf.usermodel">XSSFChart</A>&gt; <B>getCharts</B>()</PRE>
+<DL>
+<DD>Returns all charts in this drawing.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getShapes()"><!-- --></A><H3>
+getShapes</H3>
+<PRE>
+public java.util.List&lt;<A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFShape.html" title="class in org.apache.poi.xssf.usermodel">XSSFShape</A>&gt; <B>getShapes</B>()</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+
+<DT><B>Returns:</B><DD>list of shapes in this drawing</DL>
+</DD>
+</DL>
+<!-- ========= END OF CLASS DATA ========= -->
+<HR>
+
+
+<!-- ======= START OF BOTTOM NAVBAR ====== -->
+<A NAME="navbar_bottom"><!-- --></A>
+<A HREF="#skip-navbar_bottom" title="Skip navigation links"></A>
+<TABLE BORDER="0" WIDTH="100%" CELLPADDING="1" CELLSPACING="0" SUMMARY="">
+<TR>
+<TD COLSPAN=2 BGCOLOR="#EEEEFF" CLASS="NavBarCell1">
+<A NAME="navbar_bottom_firstrow"><!-- --></A>
+<TABLE BORDER="0" CELLPADDING="0" CELLSPACING="3" SUMMARY="">
+  <TR ALIGN="center" VALIGN="top">
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../overview-summary.html"><FONT CLASS="NavBarFont1"><B>Overview</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="package-summary.html"><FONT CLASS="NavBarFont1"><B>Package</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#FFFFFF" CLASS="NavBarCell1Rev"> &nbsp;<FONT CLASS="NavBarFont1Rev"><B>Class</B></FONT>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="class-use/XSSFDrawing.html"><FONT CLASS="NavBarFont1"><B>Use</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="package-tree.html"><FONT CLASS="NavBarFont1"><B>Tree</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../deprecated-list.html"><FONT CLASS="NavBarFont1"><B>Deprecated</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../index-all.html"><FONT CLASS="NavBarFont1"><B>Index</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../help-doc.html"><FONT CLASS="NavBarFont1"><B>Help</B></FONT></A>&nbsp;</TD>
+  </TR>
+</TABLE>
+</TD>
+<TD ALIGN="right" VALIGN="top" ROWSPAN=3><EM>
+</EM>
+</TD>
+</TR>
+
+<TR>
+<TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
+&nbsp;<A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFDialogsheet.html" title="class in org.apache.poi.xssf.usermodel"><B>PREV CLASS</B></A>&nbsp;
+&nbsp;<A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFEvaluationWorkbook.html" title="class in org.apache.poi.xssf.usermodel"><B>NEXT CLASS</B></A></FONT></TD>
+<TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
+  <A HREF="../../../../../index.html?org/apache/poi/xssf/usermodel/XSSFDrawing.html" target="_top"><B>FRAMES</B></A>  &nbsp;
+&nbsp;<A HREF="XSSFDrawing.html" target="_top"><B>NO FRAMES</B></A>  &nbsp;
+&nbsp;<SCRIPT type="text/javascript">
+  <!--
+  if(window==top) {
+    document.writeln('<A HREF="../../../../../allclasses-noframe.html"><B>All Classes</B></A>');
+  }
+  //-->
+</SCRIPT>
+<NOSCRIPT>
+  <A HREF="../../../../../allclasses-noframe.html"><B>All Classes</B></A>
+</NOSCRIPT>
+
+
+</FONT></TD>
+</TR>
+<TR>
+<TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
+  SUMMARY:&nbsp;NESTED&nbsp;|&nbsp;<A HREF="#field_summary">FIELD</A>&nbsp;|&nbsp;<A HREF="#constructor_summary">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_summary">METHOD</A></FONT></TD>
+<TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
+DETAIL:&nbsp;<A HREF="#field_detail">FIELD</A>&nbsp;|&nbsp;<A HREF="#constructor_detail">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_detail">METHOD</A></FONT></TD>
+</TR>
+</TABLE>
+<A NAME="skip-navbar_bottom"></A>
+<!-- ======== END OF BOTTOM NAVBAR ======= -->
+
+<HR>
+
+                <i>Copyright 2014 The Apache Software Foundation or
+        its licensors, as applicable.</i>
+            
+</BODY>
+</HTML>

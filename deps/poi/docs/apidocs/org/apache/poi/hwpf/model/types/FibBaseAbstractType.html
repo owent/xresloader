@@ -1,0 +1,2141 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!--NewPage-->
+<HTML>
+<HEAD>
+<TITLE>
+FibBaseAbstractType (POI API Documentation)
+</TITLE>
+
+<META NAME="keywords" CONTENT="org.apache.poi.hwpf.model.types.FibBaseAbstractType class">
+
+<LINK REL ="stylesheet" TYPE="text/css" HREF="../../../../../../stylesheet.css" TITLE="Style">
+
+<SCRIPT type="text/javascript">
+function windowTitle()
+{
+    parent.document.title="FibBaseAbstractType (POI API Documentation)";
+}
+</SCRIPT>
+<NOSCRIPT>
+</NOSCRIPT>
+
+</HEAD>
+
+<BODY BGCOLOR="white" onload="windowTitle();">
+
+
+<!-- ========= START OF TOP NAVBAR ======= -->
+<A NAME="navbar_top"><!-- --></A>
+<A HREF="#skip-navbar_top" title="Skip navigation links"></A>
+<TABLE BORDER="0" WIDTH="100%" CELLPADDING="1" CELLSPACING="0" SUMMARY="">
+<TR>
+<TD COLSPAN=2 BGCOLOR="#EEEEFF" CLASS="NavBarCell1">
+<A NAME="navbar_top_firstrow"><!-- --></A>
+<TABLE BORDER="0" CELLPADDING="0" CELLSPACING="3" SUMMARY="">
+  <TR ALIGN="center" VALIGN="top">
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../../overview-summary.html"><FONT CLASS="NavBarFont1"><B>Overview</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="package-summary.html"><FONT CLASS="NavBarFont1"><B>Package</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#FFFFFF" CLASS="NavBarCell1Rev"> &nbsp;<FONT CLASS="NavBarFont1Rev"><B>Class</B></FONT>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="class-use/FibBaseAbstractType.html"><FONT CLASS="NavBarFont1"><B>Use</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="package-tree.html"><FONT CLASS="NavBarFont1"><B>Tree</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../../deprecated-list.html"><FONT CLASS="NavBarFont1"><B>Deprecated</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../../index-all.html"><FONT CLASS="NavBarFont1"><B>Index</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../../help-doc.html"><FONT CLASS="NavBarFont1"><B>Help</B></FONT></A>&nbsp;</TD>
+  </TR>
+</TABLE>
+</TD>
+<TD ALIGN="right" VALIGN="top" ROWSPAN=3><EM>
+</EM>
+</TD>
+</TR>
+
+<TR>
+<TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
+&nbsp;<A HREF="../../../../../../org/apache/poi/hwpf/model/types/FFDataBaseAbstractType.html" title="class in org.apache.poi.hwpf.model.types"><B>PREV CLASS</B></A>&nbsp;
+&nbsp;<A HREF="../../../../../../org/apache/poi/hwpf/model/types/FibRgLw95AbstractType.html" title="class in org.apache.poi.hwpf.model.types"><B>NEXT CLASS</B></A></FONT></TD>
+<TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
+  <A HREF="../../../../../../index.html?org/apache/poi/hwpf/model/types/FibBaseAbstractType.html" target="_top"><B>FRAMES</B></A>  &nbsp;
+&nbsp;<A HREF="FibBaseAbstractType.html" target="_top"><B>NO FRAMES</B></A>  &nbsp;
+&nbsp;<SCRIPT type="text/javascript">
+  <!--
+  if(window==top) {
+    document.writeln('<A HREF="../../../../../../allclasses-noframe.html"><B>All Classes</B></A>');
+  }
+  //-->
+</SCRIPT>
+<NOSCRIPT>
+  <A HREF="../../../../../../allclasses-noframe.html"><B>All Classes</B></A>
+</NOSCRIPT>
+
+
+</FONT></TD>
+</TR>
+<TR>
+<TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
+  SUMMARY:&nbsp;NESTED&nbsp;|&nbsp;<A HREF="#field_summary">FIELD</A>&nbsp;|&nbsp;<A HREF="#constructor_summary">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_summary">METHOD</A></FONT></TD>
+<TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
+DETAIL:&nbsp;<A HREF="#field_detail">FIELD</A>&nbsp;|&nbsp;<A HREF="#constructor_detail">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_detail">METHOD</A></FONT></TD>
+</TR>
+</TABLE>
+<A NAME="skip-navbar_top"></A>
+<!-- ========= END OF TOP NAVBAR ========= -->
+
+<HR>
+<!-- ======== START OF CLASS DATA ======== -->
+<H2>
+<FONT SIZE="-1">
+org.apache.poi.hwpf.model.types</FONT>
+<BR>
+Class FibBaseAbstractType</H2>
+<PRE>
+java.lang.Object
+  <IMG SRC="../../../../../../resources/inherit.gif" ALT="extended by "><B>org.apache.poi.hwpf.model.types.FibBaseAbstractType</B>
+</PRE>
+<DL>
+<DT><B>Direct Known Subclasses:</B> <DD><A HREF="../../../../../../org/apache/poi/hwpf/model/FibBase.html" title="class in org.apache.poi.hwpf.model">FibBase</A></DD>
+</DL>
+<HR>
+<DL>
+<DT><PRE><FONT SIZE="-1"><A HREF="../../../../../../org/apache/poi/util/Internal.html" title="annotation in org.apache.poi.util">@Internal</A>
+</FONT>public abstract class <B>FibBaseAbstractType</B><DT>extends java.lang.Object</DL>
+</PRE>
+
+<P>
+Base part of the File information Block (FibBase). Holds the core part of the FIB,
+        from the first 32 bytes. <p>Class and fields descriptions are quoted from Microsoft
+        Office Word 97-2007 Binary File Format and [MS-DOC] - v20110608 Word (.doc) Binary File
+        Format
+
+ <p>
+ NOTE: This source is automatically generated please do not modify this file.  Either subclass or
+       remove the record in src/types/definitions.
+ <p>
+ This class is internal. It content or properties may change without notice 
+ due to changes in our knowledge of internal Microsoft Word binary structures.
+<P>
+
+<P>
+<DL>
+<DT><B>Author:</B></DT>
+  <DD>Andrew C. Oliver; Sergey Vladimirov; according to Microsoft Office Word 97-2007 Binary
+        File Format Specification [*.doc] and [MS-DOC] - v20110608 Word (.doc) Binary File Format</DD>
+</DL>
+<HR>
+
+<P>
+<!-- =========== FIELD SUMMARY =========== -->
+
+<A NAME="field_summary"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+<B>Field Summary</B></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>protected &nbsp;int</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../org/apache/poi/hwpf/model/types/FibBaseAbstractType.html#field_1_wIdent">field_1_wIdent</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>protected &nbsp;byte</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../org/apache/poi/hwpf/model/types/FibBaseAbstractType.html#field_10_flags2">field_10_flags2</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>protected &nbsp;short</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../org/apache/poi/hwpf/model/types/FibBaseAbstractType.html#field_11_Chs">field_11_Chs</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>protected &nbsp;short</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../org/apache/poi/hwpf/model/types/FibBaseAbstractType.html#field_12_chsTables">field_12_chsTables</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>protected &nbsp;int</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../org/apache/poi/hwpf/model/types/FibBaseAbstractType.html#field_13_fcMin">field_13_fcMin</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>protected &nbsp;int</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../org/apache/poi/hwpf/model/types/FibBaseAbstractType.html#field_14_fcMac">field_14_fcMac</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>protected &nbsp;int</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../org/apache/poi/hwpf/model/types/FibBaseAbstractType.html#field_2_nFib">field_2_nFib</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>protected &nbsp;int</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../org/apache/poi/hwpf/model/types/FibBaseAbstractType.html#field_3_unused">field_3_unused</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>protected &nbsp;int</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../org/apache/poi/hwpf/model/types/FibBaseAbstractType.html#field_4_lid">field_4_lid</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>protected &nbsp;int</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../org/apache/poi/hwpf/model/types/FibBaseAbstractType.html#field_5_pnNext">field_5_pnNext</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>protected &nbsp;short</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../org/apache/poi/hwpf/model/types/FibBaseAbstractType.html#field_6_flags1">field_6_flags1</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>protected &nbsp;int</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../org/apache/poi/hwpf/model/types/FibBaseAbstractType.html#field_7_nFibBack">field_7_nFibBack</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>protected &nbsp;int</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../org/apache/poi/hwpf/model/types/FibBaseAbstractType.html#field_8_lKey">field_8_lKey</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>protected &nbsp;byte</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../org/apache/poi/hwpf/model/types/FibBaseAbstractType.html#field_9_envr">field_9_envr</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;</TD>
+</TR>
+</TABLE>
+&nbsp;
+<!-- ======== CONSTRUCTOR SUMMARY ======== -->
+
+<A NAME="constructor_summary"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+<B>Constructor Summary</B></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>protected </CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../org/apache/poi/hwpf/model/types/FibBaseAbstractType.html#FibBaseAbstractType()">FibBaseAbstractType</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+</TABLE>
+&nbsp;
+<!-- ========== METHOD SUMMARY =========== -->
+
+<A NAME="method_summary"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+<B>Method Summary</B></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>protected &nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../org/apache/poi/hwpf/model/types/FibBaseAbstractType.html#fillFields(byte[], int)">fillFields</A></B>(byte[]&nbsp;data,
+           int&nbsp;offset)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;short</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../org/apache/poi/hwpf/model/types/FibBaseAbstractType.html#getChs()">getChs</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;This value MUST be 0 and MUST be ignored.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;short</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../org/apache/poi/hwpf/model/types/FibBaseAbstractType.html#getChsTables()">getChsTables</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;This value MUST be 0 and MUST be ignored.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;byte</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../org/apache/poi/hwpf/model/types/FibBaseAbstractType.html#getCQuickSaves()">getCQuickSaves</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;An unsigned integer.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;byte</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../org/apache/poi/hwpf/model/types/FibBaseAbstractType.html#getEnvr()">getEnvr</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;This value MUST be 0, and MUST be ignored.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;int</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../org/apache/poi/hwpf/model/types/FibBaseAbstractType.html#getFcMac()">getFcMac</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;This value is undefined and MUST be ignored.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;int</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../org/apache/poi/hwpf/model/types/FibBaseAbstractType.html#getFcMin()">getFcMin</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;This value is undefined and MUST be ignored.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;short</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../org/apache/poi/hwpf/model/types/FibBaseAbstractType.html#getFlags1()">getFlags1</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Get the flags1 field for the FibBase record.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;byte</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../org/apache/poi/hwpf/model/types/FibBaseAbstractType.html#getFlags2()">getFlags2</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Get the flags2 field for the FibBase record.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;byte</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../org/apache/poi/hwpf/model/types/FibBaseAbstractType.html#getFSpare0()">getFSpare0</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;<I>This field should not be used according to specification</I></TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;int</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../org/apache/poi/hwpf/model/types/FibBaseAbstractType.html#getLid()">getLid</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A LID that specifies the install language of the application that is producing the document.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;int</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../org/apache/poi/hwpf/model/types/FibBaseAbstractType.html#getLKey()">getLKey</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;If fEncryption is 1 and fObfuscation is 1, this value specifies the XOR obfuscation password verifier.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;int</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../org/apache/poi/hwpf/model/types/FibBaseAbstractType.html#getNFib()">getNFib</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;An unsigned integer that specifies the version number of the file format used.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;int</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../org/apache/poi/hwpf/model/types/FibBaseAbstractType.html#getNFibBack()">getNFibBack</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;This value SHOULD be 0x00BF.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;int</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../org/apache/poi/hwpf/model/types/FibBaseAbstractType.html#getPnNext()">getPnNext</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;An unsigned integer that specifies the offset in the WordDocument stream of the FIB for the document which contains all the AutoText items.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;int</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../org/apache/poi/hwpf/model/types/FibBaseAbstractType.html#getSize()">getSize</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Size of record</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;int</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../org/apache/poi/hwpf/model/types/FibBaseAbstractType.html#getUnused()">getUnused</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;This value is undefined and MUST be ignored.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;int</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../org/apache/poi/hwpf/model/types/FibBaseAbstractType.html#getWIdent()">getWIdent</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;An unsigned integer that specifies that this is a Word Binary File.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../org/apache/poi/hwpf/model/types/FibBaseAbstractType.html#isFComplex()">isFComplex</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Specifies that the last save operation that was performed on this document was an incremental save operation</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../org/apache/poi/hwpf/model/types/FibBaseAbstractType.html#isFDot()">isFDot</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Specifies whether this is a document template</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../org/apache/poi/hwpf/model/types/FibBaseAbstractType.html#isFEmptySpecial()">isFEmptySpecial</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;<I>This field should not be used according to specification</I></TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../org/apache/poi/hwpf/model/types/FibBaseAbstractType.html#isFEncrypted()">isFEncrypted</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Specifies whether the document is encrypted or obfuscated as specified in Encryption and Obfuscation</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../org/apache/poi/hwpf/model/types/FibBaseAbstractType.html#isFExtChar()">isFExtChar</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;This value MUST be 1</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../org/apache/poi/hwpf/model/types/FibBaseAbstractType.html#isFFarEast()">isFFarEast</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Specifies whether the installation language of the application that created the document was an East Asian language</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../org/apache/poi/hwpf/model/types/FibBaseAbstractType.html#isFGlsy()">isFGlsy</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Specifies whether this is a document that contains only AutoText items</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../org/apache/poi/hwpf/model/types/FibBaseAbstractType.html#isFHasPic()">isFHasPic</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;When set to 0, there SHOULD be no pictures in the document</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../org/apache/poi/hwpf/model/types/FibBaseAbstractType.html#isFLoadOverride()">isFLoadOverride</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Specifies whether to override the language information and font that are specified in the paragraph style at istd 0 (the normal style) with the defaults that are appropriate for the installation language of the application</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../org/apache/poi/hwpf/model/types/FibBaseAbstractType.html#isFLoadOverridePage()">isFLoadOverridePage</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Specifies whether to override the section properties for page size, orientation, and margins with the defaults that are appropriate for the installation language of the application</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../org/apache/poi/hwpf/model/types/FibBaseAbstractType.html#isFMac()">isFMac</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;<I>This field should not be used according to specification</I></TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../org/apache/poi/hwpf/model/types/FibBaseAbstractType.html#isFObfuscated()">isFObfuscated</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;If fEncrypted is 1, this bit specifies whether the document is obfuscated by using XOR obfuscation; otherwise, this bit MUST be ignored</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../org/apache/poi/hwpf/model/types/FibBaseAbstractType.html#isFReadOnlyRecommended()">isFReadOnlyRecommended</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Specifies whether the document author recommended that the document be opened in read-only mode</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../org/apache/poi/hwpf/model/types/FibBaseAbstractType.html#isFWhichTblStm()">isFWhichTblStm</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Specifies the Table stream to which the FIB refers.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../org/apache/poi/hwpf/model/types/FibBaseAbstractType.html#isFWriteReservation()">isFWriteReservation</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Specifies whether the document has a write-reservation password</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../org/apache/poi/hwpf/model/types/FibBaseAbstractType.html#isReserved1()">isReserved1</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;<I>This field should not be used according to specification</I></TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../org/apache/poi/hwpf/model/types/FibBaseAbstractType.html#isReserved2()">isReserved2</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;<I>This field should not be used according to specification</I></TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;byte[]</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../org/apache/poi/hwpf/model/types/FibBaseAbstractType.html#serialize()">serialize</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../org/apache/poi/hwpf/model/types/FibBaseAbstractType.html#serialize(byte[], int)">serialize</A></B>(byte[]&nbsp;data,
+          int&nbsp;offset)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../org/apache/poi/hwpf/model/types/FibBaseAbstractType.html#setChs(short)">setChs</A></B>(short&nbsp;field_11_Chs)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;This value MUST be 0 and MUST be ignored.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../org/apache/poi/hwpf/model/types/FibBaseAbstractType.html#setChsTables(short)">setChsTables</A></B>(short&nbsp;field_12_chsTables)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;This value MUST be 0 and MUST be ignored.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../org/apache/poi/hwpf/model/types/FibBaseAbstractType.html#setCQuickSaves(byte)">setCQuickSaves</A></B>(byte&nbsp;value)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sets the cQuickSaves field value.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../org/apache/poi/hwpf/model/types/FibBaseAbstractType.html#setEnvr(byte)">setEnvr</A></B>(byte&nbsp;field_9_envr)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;This value MUST be 0, and MUST be ignored.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../org/apache/poi/hwpf/model/types/FibBaseAbstractType.html#setFcMac(int)">setFcMac</A></B>(int&nbsp;field_14_fcMac)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;This value is undefined and MUST be ignored.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../org/apache/poi/hwpf/model/types/FibBaseAbstractType.html#setFcMin(int)">setFcMin</A></B>(int&nbsp;field_13_fcMin)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;This value is undefined and MUST be ignored.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../org/apache/poi/hwpf/model/types/FibBaseAbstractType.html#setFComplex(boolean)">setFComplex</A></B>(boolean&nbsp;value)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sets the fComplex field value.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../org/apache/poi/hwpf/model/types/FibBaseAbstractType.html#setFDot(boolean)">setFDot</A></B>(boolean&nbsp;value)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sets the fDot field value.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../org/apache/poi/hwpf/model/types/FibBaseAbstractType.html#setFEmptySpecial(boolean)">setFEmptySpecial</A></B>(boolean&nbsp;value)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sets the fEmptySpecial field value.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../org/apache/poi/hwpf/model/types/FibBaseAbstractType.html#setFEncrypted(boolean)">setFEncrypted</A></B>(boolean&nbsp;value)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sets the fEncrypted field value.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../org/apache/poi/hwpf/model/types/FibBaseAbstractType.html#setFExtChar(boolean)">setFExtChar</A></B>(boolean&nbsp;value)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sets the fExtChar field value.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../org/apache/poi/hwpf/model/types/FibBaseAbstractType.html#setFFarEast(boolean)">setFFarEast</A></B>(boolean&nbsp;value)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sets the fFarEast field value.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../org/apache/poi/hwpf/model/types/FibBaseAbstractType.html#setFGlsy(boolean)">setFGlsy</A></B>(boolean&nbsp;value)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sets the fGlsy field value.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../org/apache/poi/hwpf/model/types/FibBaseAbstractType.html#setFHasPic(boolean)">setFHasPic</A></B>(boolean&nbsp;value)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sets the fHasPic field value.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../org/apache/poi/hwpf/model/types/FibBaseAbstractType.html#setFlags1(short)">setFlags1</A></B>(short&nbsp;field_6_flags1)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Set the flags1 field for the FibBase record.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../org/apache/poi/hwpf/model/types/FibBaseAbstractType.html#setFlags2(byte)">setFlags2</A></B>(byte&nbsp;field_10_flags2)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Set the flags2 field for the FibBase record.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../org/apache/poi/hwpf/model/types/FibBaseAbstractType.html#setFLoadOverride(boolean)">setFLoadOverride</A></B>(boolean&nbsp;value)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sets the fLoadOverride field value.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../org/apache/poi/hwpf/model/types/FibBaseAbstractType.html#setFLoadOverridePage(boolean)">setFLoadOverridePage</A></B>(boolean&nbsp;value)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sets the fLoadOverridePage field value.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../org/apache/poi/hwpf/model/types/FibBaseAbstractType.html#setFMac(boolean)">setFMac</A></B>(boolean&nbsp;value)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sets the fMac field value.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../org/apache/poi/hwpf/model/types/FibBaseAbstractType.html#setFObfuscated(boolean)">setFObfuscated</A></B>(boolean&nbsp;value)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sets the fObfuscated field value.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../org/apache/poi/hwpf/model/types/FibBaseAbstractType.html#setFReadOnlyRecommended(boolean)">setFReadOnlyRecommended</A></B>(boolean&nbsp;value)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sets the fReadOnlyRecommended field value.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../org/apache/poi/hwpf/model/types/FibBaseAbstractType.html#setFSpare0(byte)">setFSpare0</A></B>(byte&nbsp;value)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sets the fSpare0 field value.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../org/apache/poi/hwpf/model/types/FibBaseAbstractType.html#setFWhichTblStm(boolean)">setFWhichTblStm</A></B>(boolean&nbsp;value)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sets the fWhichTblStm field value.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../org/apache/poi/hwpf/model/types/FibBaseAbstractType.html#setFWriteReservation(boolean)">setFWriteReservation</A></B>(boolean&nbsp;value)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sets the fWriteReservation field value.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../org/apache/poi/hwpf/model/types/FibBaseAbstractType.html#setLid(int)">setLid</A></B>(int&nbsp;field_4_lid)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A LID that specifies the install language of the application that is producing the document.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../org/apache/poi/hwpf/model/types/FibBaseAbstractType.html#setLKey(int)">setLKey</A></B>(int&nbsp;field_8_lKey)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;If fEncryption is 1 and fObfuscation is 1, this value specifies the XOR obfuscation password verifier.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../org/apache/poi/hwpf/model/types/FibBaseAbstractType.html#setNFib(int)">setNFib</A></B>(int&nbsp;field_2_nFib)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;An unsigned integer that specifies the version number of the file format used.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../org/apache/poi/hwpf/model/types/FibBaseAbstractType.html#setNFibBack(int)">setNFibBack</A></B>(int&nbsp;field_7_nFibBack)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;This value SHOULD be 0x00BF.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../org/apache/poi/hwpf/model/types/FibBaseAbstractType.html#setPnNext(int)">setPnNext</A></B>(int&nbsp;field_5_pnNext)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;An unsigned integer that specifies the offset in the WordDocument stream of the FIB for the document which contains all the AutoText items.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../org/apache/poi/hwpf/model/types/FibBaseAbstractType.html#setReserved1(boolean)">setReserved1</A></B>(boolean&nbsp;value)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sets the reserved1 field value.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../org/apache/poi/hwpf/model/types/FibBaseAbstractType.html#setReserved2(boolean)">setReserved2</A></B>(boolean&nbsp;value)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sets the reserved2 field value.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../org/apache/poi/hwpf/model/types/FibBaseAbstractType.html#setUnused(int)">setUnused</A></B>(int&nbsp;field_3_unused)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;This value is undefined and MUST be ignored.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../org/apache/poi/hwpf/model/types/FibBaseAbstractType.html#setWIdent(int)">setWIdent</A></B>(int&nbsp;field_1_wIdent)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;An unsigned integer that specifies that this is a Word Binary File.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;java.lang.String</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../org/apache/poi/hwpf/model/types/FibBaseAbstractType.html#toString()">toString</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+</TABLE>
+&nbsp;<A NAME="methods_inherited_from_class_java.lang.Object"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#EEEEFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left"><B>Methods inherited from class java.lang.Object</B></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE>clone, equals, finalize, getClass, hashCode, notify, notifyAll, wait, wait, wait</CODE></TD>
+</TR>
+</TABLE>
+&nbsp;
+<P>
+
+<!-- ============ FIELD DETAIL =========== -->
+
+<A NAME="field_detail"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="1"><FONT SIZE="+2">
+<B>Field Detail</B></FONT></TH>
+</TR>
+</TABLE>
+
+<A NAME="field_1_wIdent"><!-- --></A><H3>
+field_1_wIdent</H3>
+<PRE>
+protected int <B>field_1_wIdent</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="field_2_nFib"><!-- --></A><H3>
+field_2_nFib</H3>
+<PRE>
+protected int <B>field_2_nFib</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="field_3_unused"><!-- --></A><H3>
+field_3_unused</H3>
+<PRE>
+protected int <B>field_3_unused</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="field_4_lid"><!-- --></A><H3>
+field_4_lid</H3>
+<PRE>
+protected int <B>field_4_lid</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="field_5_pnNext"><!-- --></A><H3>
+field_5_pnNext</H3>
+<PRE>
+protected int <B>field_5_pnNext</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="field_6_flags1"><!-- --></A><H3>
+field_6_flags1</H3>
+<PRE>
+protected short <B>field_6_flags1</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="field_7_nFibBack"><!-- --></A><H3>
+field_7_nFibBack</H3>
+<PRE>
+protected int <B>field_7_nFibBack</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="field_8_lKey"><!-- --></A><H3>
+field_8_lKey</H3>
+<PRE>
+protected int <B>field_8_lKey</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="field_9_envr"><!-- --></A><H3>
+field_9_envr</H3>
+<PRE>
+<FONT SIZE="-1">@Deprecated
+</FONT>protected byte <B>field_9_envr</B></PRE>
+<DL>
+<DD><B>Deprecated.</B>&nbsp;<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="field_10_flags2"><!-- --></A><H3>
+field_10_flags2</H3>
+<PRE>
+protected byte <B>field_10_flags2</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="field_11_Chs"><!-- --></A><H3>
+field_11_Chs</H3>
+<PRE>
+<FONT SIZE="-1">@Deprecated
+</FONT>protected short <B>field_11_Chs</B></PRE>
+<DL>
+<DD><B>Deprecated.</B>&nbsp;<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="field_12_chsTables"><!-- --></A><H3>
+field_12_chsTables</H3>
+<PRE>
+<FONT SIZE="-1">@Deprecated
+</FONT>protected short <B>field_12_chsTables</B></PRE>
+<DL>
+<DD><B>Deprecated.</B>&nbsp;<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="field_13_fcMin"><!-- --></A><H3>
+field_13_fcMin</H3>
+<PRE>
+<FONT SIZE="-1">@Deprecated
+</FONT>protected int <B>field_13_fcMin</B></PRE>
+<DL>
+<DD><B>Deprecated.</B>&nbsp;<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="field_14_fcMac"><!-- --></A><H3>
+field_14_fcMac</H3>
+<PRE>
+<FONT SIZE="-1">@Deprecated
+</FONT>protected int <B>field_14_fcMac</B></PRE>
+<DL>
+<DD><B>Deprecated.</B>&nbsp;<DL>
+</DL>
+</DL>
+
+<!-- ========= CONSTRUCTOR DETAIL ======== -->
+
+<A NAME="constructor_detail"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="1"><FONT SIZE="+2">
+<B>Constructor Detail</B></FONT></TH>
+</TR>
+</TABLE>
+
+<A NAME="FibBaseAbstractType()"><!-- --></A><H3>
+FibBaseAbstractType</H3>
+<PRE>
+protected <B>FibBaseAbstractType</B>()</PRE>
+<DL>
+</DL>
+
+<!-- ============ METHOD DETAIL ========== -->
+
+<A NAME="method_detail"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="1"><FONT SIZE="+2">
+<B>Method Detail</B></FONT></TH>
+</TR>
+</TABLE>
+
+<A NAME="fillFields(byte[], int)"><!-- --></A><H3>
+fillFields</H3>
+<PRE>
+protected void <B>fillFields</B>(byte[]&nbsp;data,
+                          int&nbsp;offset)</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="serialize(byte[], int)"><!-- --></A><H3>
+serialize</H3>
+<PRE>
+public void <B>serialize</B>(byte[]&nbsp;data,
+                      int&nbsp;offset)</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="serialize()"><!-- --></A><H3>
+serialize</H3>
+<PRE>
+public byte[] <B>serialize</B>()</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getSize()"><!-- --></A><H3>
+getSize</H3>
+<PRE>
+public static int <B>getSize</B>()</PRE>
+<DL>
+<DD>Size of record
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="toString()"><!-- --></A><H3>
+toString</H3>
+<PRE>
+public java.lang.String <B>toString</B>()</PRE>
+<DL>
+<DD><DL>
+<DT><B>Overrides:</B><DD><CODE>toString</CODE> in class <CODE>java.lang.Object</CODE></DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getWIdent()"><!-- --></A><H3>
+getWIdent</H3>
+<PRE>
+<FONT SIZE="-1"><A HREF="../../../../../../org/apache/poi/util/Internal.html" title="annotation in org.apache.poi.util">@Internal</A>
+</FONT>public int <B>getWIdent</B>()</PRE>
+<DL>
+<DD>An unsigned integer that specifies that this is a Word Binary File. This value MUST be 0xA5EC.
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setWIdent(int)"><!-- --></A><H3>
+setWIdent</H3>
+<PRE>
+<FONT SIZE="-1"><A HREF="../../../../../../org/apache/poi/util/Internal.html" title="annotation in org.apache.poi.util">@Internal</A>
+</FONT>public void <B>setWIdent</B>(int&nbsp;field_1_wIdent)</PRE>
+<DL>
+<DD>An unsigned integer that specifies that this is a Word Binary File. This value MUST be 0xA5EC.
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getNFib()"><!-- --></A><H3>
+getNFib</H3>
+<PRE>
+<FONT SIZE="-1"><A HREF="../../../../../../org/apache/poi/util/Internal.html" title="annotation in org.apache.poi.util">@Internal</A>
+</FONT>public int <B>getNFib</B>()</PRE>
+<DL>
+<DD>An unsigned integer that specifies the version number of the file format used. Superseded by FibRgCswNew.nFibNew if it is present. This value SHOULD be 0x00C1.
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setNFib(int)"><!-- --></A><H3>
+setNFib</H3>
+<PRE>
+<FONT SIZE="-1"><A HREF="../../../../../../org/apache/poi/util/Internal.html" title="annotation in org.apache.poi.util">@Internal</A>
+</FONT>public void <B>setNFib</B>(int&nbsp;field_2_nFib)</PRE>
+<DL>
+<DD>An unsigned integer that specifies the version number of the file format used. Superseded by FibRgCswNew.nFibNew if it is present. This value SHOULD be 0x00C1.
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getUnused()"><!-- --></A><H3>
+getUnused</H3>
+<PRE>
+<FONT SIZE="-1"><A HREF="../../../../../../org/apache/poi/util/Internal.html" title="annotation in org.apache.poi.util">@Internal</A>
+</FONT>public int <B>getUnused</B>()</PRE>
+<DL>
+<DD>This value is undefined and MUST be ignored.
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setUnused(int)"><!-- --></A><H3>
+setUnused</H3>
+<PRE>
+<FONT SIZE="-1"><A HREF="../../../../../../org/apache/poi/util/Internal.html" title="annotation in org.apache.poi.util">@Internal</A>
+</FONT>public void <B>setUnused</B>(int&nbsp;field_3_unused)</PRE>
+<DL>
+<DD>This value is undefined and MUST be ignored.
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getLid()"><!-- --></A><H3>
+getLid</H3>
+<PRE>
+<FONT SIZE="-1"><A HREF="../../../../../../org/apache/poi/util/Internal.html" title="annotation in org.apache.poi.util">@Internal</A>
+</FONT>public int <B>getLid</B>()</PRE>
+<DL>
+<DD>A LID that specifies the install language of the application that is producing the document. If nFib is 0x00D9 or greater, then any East Asian install lid or any install lid with a base language of Spanish, German or French MUST be recorded as lidAmerican. If the nFib is 0x0101 or greater, then any install lid with a base language of Vietnamese, Thai, or Hindi MUST be recorded as lidAmerican..
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setLid(int)"><!-- --></A><H3>
+setLid</H3>
+<PRE>
+<FONT SIZE="-1"><A HREF="../../../../../../org/apache/poi/util/Internal.html" title="annotation in org.apache.poi.util">@Internal</A>
+</FONT>public void <B>setLid</B>(int&nbsp;field_4_lid)</PRE>
+<DL>
+<DD>A LID that specifies the install language of the application that is producing the document. If nFib is 0x00D9 or greater, then any East Asian install lid or any install lid with a base language of Spanish, German or French MUST be recorded as lidAmerican. If the nFib is 0x0101 or greater, then any install lid with a base language of Vietnamese, Thai, or Hindi MUST be recorded as lidAmerican..
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getPnNext()"><!-- --></A><H3>
+getPnNext</H3>
+<PRE>
+<FONT SIZE="-1"><A HREF="../../../../../../org/apache/poi/util/Internal.html" title="annotation in org.apache.poi.util">@Internal</A>
+</FONT>public int <B>getPnNext</B>()</PRE>
+<DL>
+<DD>An unsigned integer that specifies the offset in the WordDocument stream of the FIB for the document which contains all the AutoText items.
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setPnNext(int)"><!-- --></A><H3>
+setPnNext</H3>
+<PRE>
+<FONT SIZE="-1"><A HREF="../../../../../../org/apache/poi/util/Internal.html" title="annotation in org.apache.poi.util">@Internal</A>
+</FONT>public void <B>setPnNext</B>(int&nbsp;field_5_pnNext)</PRE>
+<DL>
+<DD>An unsigned integer that specifies the offset in the WordDocument stream of the FIB for the document which contains all the AutoText items.
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getFlags1()"><!-- --></A><H3>
+getFlags1</H3>
+<PRE>
+<FONT SIZE="-1"><A HREF="../../../../../../org/apache/poi/util/Internal.html" title="annotation in org.apache.poi.util">@Internal</A>
+</FONT>public short <B>getFlags1</B>()</PRE>
+<DL>
+<DD>Get the flags1 field for the FibBase record.
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setFlags1(short)"><!-- --></A><H3>
+setFlags1</H3>
+<PRE>
+<FONT SIZE="-1"><A HREF="../../../../../../org/apache/poi/util/Internal.html" title="annotation in org.apache.poi.util">@Internal</A>
+</FONT>public void <B>setFlags1</B>(short&nbsp;field_6_flags1)</PRE>
+<DL>
+<DD>Set the flags1 field for the FibBase record.
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getNFibBack()"><!-- --></A><H3>
+getNFibBack</H3>
+<PRE>
+<FONT SIZE="-1"><A HREF="../../../../../../org/apache/poi/util/Internal.html" title="annotation in org.apache.poi.util">@Internal</A>
+</FONT>public int <B>getNFibBack</B>()</PRE>
+<DL>
+<DD>This value SHOULD be 0x00BF. This value MUST be 0x00BF or 0x00C1.
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setNFibBack(int)"><!-- --></A><H3>
+setNFibBack</H3>
+<PRE>
+<FONT SIZE="-1"><A HREF="../../../../../../org/apache/poi/util/Internal.html" title="annotation in org.apache.poi.util">@Internal</A>
+</FONT>public void <B>setNFibBack</B>(int&nbsp;field_7_nFibBack)</PRE>
+<DL>
+<DD>This value SHOULD be 0x00BF. This value MUST be 0x00BF or 0x00C1.
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getLKey()"><!-- --></A><H3>
+getLKey</H3>
+<PRE>
+<FONT SIZE="-1"><A HREF="../../../../../../org/apache/poi/util/Internal.html" title="annotation in org.apache.poi.util">@Internal</A>
+</FONT>public int <B>getLKey</B>()</PRE>
+<DL>
+<DD>If fEncryption is 1 and fObfuscation is 1, this value specifies the XOR obfuscation password verifier. If fEncryption is 1 and fObfuscation is 0, this value specifies the size of the EncryptionHeader that is stored at the beginning of the Table stream as described in Encryption and Obfuscation. Otherwise, this value MUST be 0.
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setLKey(int)"><!-- --></A><H3>
+setLKey</H3>
+<PRE>
+<FONT SIZE="-1"><A HREF="../../../../../../org/apache/poi/util/Internal.html" title="annotation in org.apache.poi.util">@Internal</A>
+</FONT>public void <B>setLKey</B>(int&nbsp;field_8_lKey)</PRE>
+<DL>
+<DD>If fEncryption is 1 and fObfuscation is 1, this value specifies the XOR obfuscation password verifier. If fEncryption is 1 and fObfuscation is 0, this value specifies the size of the EncryptionHeader that is stored at the beginning of the Table stream as described in Encryption and Obfuscation. Otherwise, this value MUST be 0.
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getEnvr()"><!-- --></A><H3>
+getEnvr</H3>
+<PRE>
+<FONT SIZE="-1"><A HREF="../../../../../../org/apache/poi/util/Internal.html" title="annotation in org.apache.poi.util">@Internal</A>
+</FONT>public byte <B>getEnvr</B>()</PRE>
+<DL>
+<DD>This value MUST be 0, and MUST be ignored.
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setEnvr(byte)"><!-- --></A><H3>
+setEnvr</H3>
+<PRE>
+<FONT SIZE="-1"><A HREF="../../../../../../org/apache/poi/util/Internal.html" title="annotation in org.apache.poi.util">@Internal</A>
+</FONT>public void <B>setEnvr</B>(byte&nbsp;field_9_envr)</PRE>
+<DL>
+<DD>This value MUST be 0, and MUST be ignored.
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getFlags2()"><!-- --></A><H3>
+getFlags2</H3>
+<PRE>
+<FONT SIZE="-1"><A HREF="../../../../../../org/apache/poi/util/Internal.html" title="annotation in org.apache.poi.util">@Internal</A>
+</FONT>public byte <B>getFlags2</B>()</PRE>
+<DL>
+<DD>Get the flags2 field for the FibBase record.
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setFlags2(byte)"><!-- --></A><H3>
+setFlags2</H3>
+<PRE>
+<FONT SIZE="-1"><A HREF="../../../../../../org/apache/poi/util/Internal.html" title="annotation in org.apache.poi.util">@Internal</A>
+</FONT>public void <B>setFlags2</B>(byte&nbsp;field_10_flags2)</PRE>
+<DL>
+<DD>Set the flags2 field for the FibBase record.
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getChs()"><!-- --></A><H3>
+getChs</H3>
+<PRE>
+<FONT SIZE="-1"><A HREF="../../../../../../org/apache/poi/util/Internal.html" title="annotation in org.apache.poi.util">@Internal</A>
+</FONT>public short <B>getChs</B>()</PRE>
+<DL>
+<DD>This value MUST be 0 and MUST be ignored.
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setChs(short)"><!-- --></A><H3>
+setChs</H3>
+<PRE>
+<FONT SIZE="-1"><A HREF="../../../../../../org/apache/poi/util/Internal.html" title="annotation in org.apache.poi.util">@Internal</A>
+</FONT>public void <B>setChs</B>(short&nbsp;field_11_Chs)</PRE>
+<DL>
+<DD>This value MUST be 0 and MUST be ignored.
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getChsTables()"><!-- --></A><H3>
+getChsTables</H3>
+<PRE>
+<FONT SIZE="-1"><A HREF="../../../../../../org/apache/poi/util/Internal.html" title="annotation in org.apache.poi.util">@Internal</A>
+</FONT>public short <B>getChsTables</B>()</PRE>
+<DL>
+<DD>This value MUST be 0 and MUST be ignored.
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setChsTables(short)"><!-- --></A><H3>
+setChsTables</H3>
+<PRE>
+<FONT SIZE="-1"><A HREF="../../../../../../org/apache/poi/util/Internal.html" title="annotation in org.apache.poi.util">@Internal</A>
+</FONT>public void <B>setChsTables</B>(short&nbsp;field_12_chsTables)</PRE>
+<DL>
+<DD>This value MUST be 0 and MUST be ignored.
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getFcMin()"><!-- --></A><H3>
+getFcMin</H3>
+<PRE>
+<FONT SIZE="-1"><A HREF="../../../../../../org/apache/poi/util/Internal.html" title="annotation in org.apache.poi.util">@Internal</A>
+</FONT>public int <B>getFcMin</B>()</PRE>
+<DL>
+<DD>This value is undefined and MUST be ignored.
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setFcMin(int)"><!-- --></A><H3>
+setFcMin</H3>
+<PRE>
+<FONT SIZE="-1"><A HREF="../../../../../../org/apache/poi/util/Internal.html" title="annotation in org.apache.poi.util">@Internal</A>
+</FONT>public void <B>setFcMin</B>(int&nbsp;field_13_fcMin)</PRE>
+<DL>
+<DD>This value is undefined and MUST be ignored.
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getFcMac()"><!-- --></A><H3>
+getFcMac</H3>
+<PRE>
+<FONT SIZE="-1"><A HREF="../../../../../../org/apache/poi/util/Internal.html" title="annotation in org.apache.poi.util">@Internal</A>
+</FONT>public int <B>getFcMac</B>()</PRE>
+<DL>
+<DD>This value is undefined and MUST be ignored.
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setFcMac(int)"><!-- --></A><H3>
+setFcMac</H3>
+<PRE>
+<FONT SIZE="-1"><A HREF="../../../../../../org/apache/poi/util/Internal.html" title="annotation in org.apache.poi.util">@Internal</A>
+</FONT>public void <B>setFcMac</B>(int&nbsp;field_14_fcMac)</PRE>
+<DL>
+<DD>This value is undefined and MUST be ignored.
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setFDot(boolean)"><!-- --></A><H3>
+setFDot</H3>
+<PRE>
+<FONT SIZE="-1"><A HREF="../../../../../../org/apache/poi/util/Internal.html" title="annotation in org.apache.poi.util">@Internal</A>
+</FONT>public void <B>setFDot</B>(boolean&nbsp;value)</PRE>
+<DL>
+<DD>Sets the fDot field value.
+ Specifies whether this is a document template
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="isFDot()"><!-- --></A><H3>
+isFDot</H3>
+<PRE>
+<FONT SIZE="-1"><A HREF="../../../../../../org/apache/poi/util/Internal.html" title="annotation in org.apache.poi.util">@Internal</A>
+</FONT>public boolean <B>isFDot</B>()</PRE>
+<DL>
+<DD>Specifies whether this is a document template
+<P>
+<DD><DL>
+
+<DT><B>Returns:</B><DD>the fDot field value.</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setFGlsy(boolean)"><!-- --></A><H3>
+setFGlsy</H3>
+<PRE>
+<FONT SIZE="-1"><A HREF="../../../../../../org/apache/poi/util/Internal.html" title="annotation in org.apache.poi.util">@Internal</A>
+</FONT>public void <B>setFGlsy</B>(boolean&nbsp;value)</PRE>
+<DL>
+<DD>Sets the fGlsy field value.
+ Specifies whether this is a document that contains only AutoText items
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="isFGlsy()"><!-- --></A><H3>
+isFGlsy</H3>
+<PRE>
+<FONT SIZE="-1"><A HREF="../../../../../../org/apache/poi/util/Internal.html" title="annotation in org.apache.poi.util">@Internal</A>
+</FONT>public boolean <B>isFGlsy</B>()</PRE>
+<DL>
+<DD>Specifies whether this is a document that contains only AutoText items
+<P>
+<DD><DL>
+
+<DT><B>Returns:</B><DD>the fGlsy field value.</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setFComplex(boolean)"><!-- --></A><H3>
+setFComplex</H3>
+<PRE>
+<FONT SIZE="-1"><A HREF="../../../../../../org/apache/poi/util/Internal.html" title="annotation in org.apache.poi.util">@Internal</A>
+</FONT>public void <B>setFComplex</B>(boolean&nbsp;value)</PRE>
+<DL>
+<DD>Sets the fComplex field value.
+ Specifies that the last save operation that was performed on this document was an incremental save operation
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="isFComplex()"><!-- --></A><H3>
+isFComplex</H3>
+<PRE>
+<FONT SIZE="-1"><A HREF="../../../../../../org/apache/poi/util/Internal.html" title="annotation in org.apache.poi.util">@Internal</A>
+</FONT>public boolean <B>isFComplex</B>()</PRE>
+<DL>
+<DD>Specifies that the last save operation that was performed on this document was an incremental save operation
+<P>
+<DD><DL>
+
+<DT><B>Returns:</B><DD>the fComplex field value.</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setFHasPic(boolean)"><!-- --></A><H3>
+setFHasPic</H3>
+<PRE>
+<FONT SIZE="-1"><A HREF="../../../../../../org/apache/poi/util/Internal.html" title="annotation in org.apache.poi.util">@Internal</A>
+</FONT>public void <B>setFHasPic</B>(boolean&nbsp;value)</PRE>
+<DL>
+<DD>Sets the fHasPic field value.
+ When set to 0, there SHOULD be no pictures in the document
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="isFHasPic()"><!-- --></A><H3>
+isFHasPic</H3>
+<PRE>
+<FONT SIZE="-1"><A HREF="../../../../../../org/apache/poi/util/Internal.html" title="annotation in org.apache.poi.util">@Internal</A>
+</FONT>public boolean <B>isFHasPic</B>()</PRE>
+<DL>
+<DD>When set to 0, there SHOULD be no pictures in the document
+<P>
+<DD><DL>
+
+<DT><B>Returns:</B><DD>the fHasPic field value.</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setCQuickSaves(byte)"><!-- --></A><H3>
+setCQuickSaves</H3>
+<PRE>
+<FONT SIZE="-1"><A HREF="../../../../../../org/apache/poi/util/Internal.html" title="annotation in org.apache.poi.util">@Internal</A>
+</FONT>public void <B>setCQuickSaves</B>(byte&nbsp;value)</PRE>
+<DL>
+<DD>Sets the cQuickSaves field value.
+ An unsigned integer. If nFib is less than 0x00D9, then cQuickSaves specifies the number of consecutive times this document was incrementally saved. If nFib is 0x00D9 or greater, then cQuickSaves MUST be 0xF
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getCQuickSaves()"><!-- --></A><H3>
+getCQuickSaves</H3>
+<PRE>
+<FONT SIZE="-1"><A HREF="../../../../../../org/apache/poi/util/Internal.html" title="annotation in org.apache.poi.util">@Internal</A>
+</FONT>public byte <B>getCQuickSaves</B>()</PRE>
+<DL>
+<DD>An unsigned integer. If nFib is less than 0x00D9, then cQuickSaves specifies the number of consecutive times this document was incrementally saved. If nFib is 0x00D9 or greater, then cQuickSaves MUST be 0xF
+<P>
+<DD><DL>
+
+<DT><B>Returns:</B><DD>the cQuickSaves field value.</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setFEncrypted(boolean)"><!-- --></A><H3>
+setFEncrypted</H3>
+<PRE>
+<FONT SIZE="-1"><A HREF="../../../../../../org/apache/poi/util/Internal.html" title="annotation in org.apache.poi.util">@Internal</A>
+</FONT>public void <B>setFEncrypted</B>(boolean&nbsp;value)</PRE>
+<DL>
+<DD>Sets the fEncrypted field value.
+ Specifies whether the document is encrypted or obfuscated as specified in Encryption and Obfuscation
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="isFEncrypted()"><!-- --></A><H3>
+isFEncrypted</H3>
+<PRE>
+<FONT SIZE="-1"><A HREF="../../../../../../org/apache/poi/util/Internal.html" title="annotation in org.apache.poi.util">@Internal</A>
+</FONT>public boolean <B>isFEncrypted</B>()</PRE>
+<DL>
+<DD>Specifies whether the document is encrypted or obfuscated as specified in Encryption and Obfuscation
+<P>
+<DD><DL>
+
+<DT><B>Returns:</B><DD>the fEncrypted field value.</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setFWhichTblStm(boolean)"><!-- --></A><H3>
+setFWhichTblStm</H3>
+<PRE>
+<FONT SIZE="-1"><A HREF="../../../../../../org/apache/poi/util/Internal.html" title="annotation in org.apache.poi.util">@Internal</A>
+</FONT>public void <B>setFWhichTblStm</B>(boolean&nbsp;value)</PRE>
+<DL>
+<DD>Sets the fWhichTblStm field value.
+ Specifies the Table stream to which the FIB refers. When this value is set to 1, use 1Table; when this value is set to 0, use 0Table.
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="isFWhichTblStm()"><!-- --></A><H3>
+isFWhichTblStm</H3>
+<PRE>
+<FONT SIZE="-1"><A HREF="../../../../../../org/apache/poi/util/Internal.html" title="annotation in org.apache.poi.util">@Internal</A>
+</FONT>public boolean <B>isFWhichTblStm</B>()</PRE>
+<DL>
+<DD>Specifies the Table stream to which the FIB refers. When this value is set to 1, use 1Table; when this value is set to 0, use 0Table.
+<P>
+<DD><DL>
+
+<DT><B>Returns:</B><DD>the fWhichTblStm field value.</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setFReadOnlyRecommended(boolean)"><!-- --></A><H3>
+setFReadOnlyRecommended</H3>
+<PRE>
+<FONT SIZE="-1"><A HREF="../../../../../../org/apache/poi/util/Internal.html" title="annotation in org.apache.poi.util">@Internal</A>
+</FONT>public void <B>setFReadOnlyRecommended</B>(boolean&nbsp;value)</PRE>
+<DL>
+<DD>Sets the fReadOnlyRecommended field value.
+ Specifies whether the document author recommended that the document be opened in read-only mode
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="isFReadOnlyRecommended()"><!-- --></A><H3>
+isFReadOnlyRecommended</H3>
+<PRE>
+<FONT SIZE="-1"><A HREF="../../../../../../org/apache/poi/util/Internal.html" title="annotation in org.apache.poi.util">@Internal</A>
+</FONT>public boolean <B>isFReadOnlyRecommended</B>()</PRE>
+<DL>
+<DD>Specifies whether the document author recommended that the document be opened in read-only mode
+<P>
+<DD><DL>
+
+<DT><B>Returns:</B><DD>the fReadOnlyRecommended field value.</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setFWriteReservation(boolean)"><!-- --></A><H3>
+setFWriteReservation</H3>
+<PRE>
+<FONT SIZE="-1"><A HREF="../../../../../../org/apache/poi/util/Internal.html" title="annotation in org.apache.poi.util">@Internal</A>
+</FONT>public void <B>setFWriteReservation</B>(boolean&nbsp;value)</PRE>
+<DL>
+<DD>Sets the fWriteReservation field value.
+ Specifies whether the document has a write-reservation password
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="isFWriteReservation()"><!-- --></A><H3>
+isFWriteReservation</H3>
+<PRE>
+<FONT SIZE="-1"><A HREF="../../../../../../org/apache/poi/util/Internal.html" title="annotation in org.apache.poi.util">@Internal</A>
+</FONT>public boolean <B>isFWriteReservation</B>()</PRE>
+<DL>
+<DD>Specifies whether the document has a write-reservation password
+<P>
+<DD><DL>
+
+<DT><B>Returns:</B><DD>the fWriteReservation field value.</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setFExtChar(boolean)"><!-- --></A><H3>
+setFExtChar</H3>
+<PRE>
+<FONT SIZE="-1"><A HREF="../../../../../../org/apache/poi/util/Internal.html" title="annotation in org.apache.poi.util">@Internal</A>
+</FONT>public void <B>setFExtChar</B>(boolean&nbsp;value)</PRE>
+<DL>
+<DD>Sets the fExtChar field value.
+ This value MUST be 1
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="isFExtChar()"><!-- --></A><H3>
+isFExtChar</H3>
+<PRE>
+<FONT SIZE="-1"><A HREF="../../../../../../org/apache/poi/util/Internal.html" title="annotation in org.apache.poi.util">@Internal</A>
+</FONT>public boolean <B>isFExtChar</B>()</PRE>
+<DL>
+<DD>This value MUST be 1
+<P>
+<DD><DL>
+
+<DT><B>Returns:</B><DD>the fExtChar field value.</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setFLoadOverride(boolean)"><!-- --></A><H3>
+setFLoadOverride</H3>
+<PRE>
+<FONT SIZE="-1"><A HREF="../../../../../../org/apache/poi/util/Internal.html" title="annotation in org.apache.poi.util">@Internal</A>
+</FONT>public void <B>setFLoadOverride</B>(boolean&nbsp;value)</PRE>
+<DL>
+<DD>Sets the fLoadOverride field value.
+ Specifies whether to override the language information and font that are specified in the paragraph style at istd 0 (the normal style) with the defaults that are appropriate for the installation language of the application
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="isFLoadOverride()"><!-- --></A><H3>
+isFLoadOverride</H3>
+<PRE>
+<FONT SIZE="-1"><A HREF="../../../../../../org/apache/poi/util/Internal.html" title="annotation in org.apache.poi.util">@Internal</A>
+</FONT>public boolean <B>isFLoadOverride</B>()</PRE>
+<DL>
+<DD>Specifies whether to override the language information and font that are specified in the paragraph style at istd 0 (the normal style) with the defaults that are appropriate for the installation language of the application
+<P>
+<DD><DL>
+
+<DT><B>Returns:</B><DD>the fLoadOverride field value.</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setFFarEast(boolean)"><!-- --></A><H3>
+setFFarEast</H3>
+<PRE>
+<FONT SIZE="-1"><A HREF="../../../../../../org/apache/poi/util/Internal.html" title="annotation in org.apache.poi.util">@Internal</A>
+</FONT>public void <B>setFFarEast</B>(boolean&nbsp;value)</PRE>
+<DL>
+<DD>Sets the fFarEast field value.
+ Specifies whether the installation language of the application that created the document was an East Asian language
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="isFFarEast()"><!-- --></A><H3>
+isFFarEast</H3>
+<PRE>
+<FONT SIZE="-1"><A HREF="../../../../../../org/apache/poi/util/Internal.html" title="annotation in org.apache.poi.util">@Internal</A>
+</FONT>public boolean <B>isFFarEast</B>()</PRE>
+<DL>
+<DD>Specifies whether the installation language of the application that created the document was an East Asian language
+<P>
+<DD><DL>
+
+<DT><B>Returns:</B><DD>the fFarEast field value.</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setFObfuscated(boolean)"><!-- --></A><H3>
+setFObfuscated</H3>
+<PRE>
+<FONT SIZE="-1"><A HREF="../../../../../../org/apache/poi/util/Internal.html" title="annotation in org.apache.poi.util">@Internal</A>
+</FONT>public void <B>setFObfuscated</B>(boolean&nbsp;value)</PRE>
+<DL>
+<DD>Sets the fObfuscated field value.
+ If fEncrypted is 1, this bit specifies whether the document is obfuscated by using XOR obfuscation; otherwise, this bit MUST be ignored
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="isFObfuscated()"><!-- --></A><H3>
+isFObfuscated</H3>
+<PRE>
+<FONT SIZE="-1"><A HREF="../../../../../../org/apache/poi/util/Internal.html" title="annotation in org.apache.poi.util">@Internal</A>
+</FONT>public boolean <B>isFObfuscated</B>()</PRE>
+<DL>
+<DD>If fEncrypted is 1, this bit specifies whether the document is obfuscated by using XOR obfuscation; otherwise, this bit MUST be ignored
+<P>
+<DD><DL>
+
+<DT><B>Returns:</B><DD>the fObfuscated field value.</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setFMac(boolean)"><!-- --></A><H3>
+setFMac</H3>
+<PRE>
+<FONT SIZE="-1"><A HREF="../../../../../../org/apache/poi/util/Internal.html" title="annotation in org.apache.poi.util">@Internal</A>
+</FONT>public void <B>setFMac</B>(boolean&nbsp;value)</PRE>
+<DL>
+<DD>Sets the fMac field value.
+ This value MUST be 0, and MUST be ignored
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="isFMac()"><!-- --></A><H3>
+isFMac</H3>
+<PRE>
+<FONT SIZE="-1"><A HREF="../../../../../../org/apache/poi/util/Internal.html" title="annotation in org.apache.poi.util">@Internal</A>
+@Deprecated
+</FONT>public boolean <B>isFMac</B>()</PRE>
+<DL>
+<DD><B>Deprecated.</B>&nbsp;<I>This field should not be used according to specification</I>
+<P>
+<DD>This value MUST be 0, and MUST be ignored
+<P>
+<DD><DL>
+
+<DT><B>Returns:</B><DD>the fMac field value.</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setFEmptySpecial(boolean)"><!-- --></A><H3>
+setFEmptySpecial</H3>
+<PRE>
+<FONT SIZE="-1"><A HREF="../../../../../../org/apache/poi/util/Internal.html" title="annotation in org.apache.poi.util">@Internal</A>
+</FONT>public void <B>setFEmptySpecial</B>(boolean&nbsp;value)</PRE>
+<DL>
+<DD>Sets the fEmptySpecial field value.
+ This value SHOULD be 0 and SHOULD be ignored
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="isFEmptySpecial()"><!-- --></A><H3>
+isFEmptySpecial</H3>
+<PRE>
+<FONT SIZE="-1"><A HREF="../../../../../../org/apache/poi/util/Internal.html" title="annotation in org.apache.poi.util">@Internal</A>
+@Deprecated
+</FONT>public boolean <B>isFEmptySpecial</B>()</PRE>
+<DL>
+<DD><B>Deprecated.</B>&nbsp;<I>This field should not be used according to specification</I>
+<P>
+<DD>This value SHOULD be 0 and SHOULD be ignored
+<P>
+<DD><DL>
+
+<DT><B>Returns:</B><DD>the fEmptySpecial field value.</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setFLoadOverridePage(boolean)"><!-- --></A><H3>
+setFLoadOverridePage</H3>
+<PRE>
+<FONT SIZE="-1"><A HREF="../../../../../../org/apache/poi/util/Internal.html" title="annotation in org.apache.poi.util">@Internal</A>
+</FONT>public void <B>setFLoadOverridePage</B>(boolean&nbsp;value)</PRE>
+<DL>
+<DD>Sets the fLoadOverridePage field value.
+ Specifies whether to override the section properties for page size, orientation, and margins with the defaults that are appropriate for the installation language of the application
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="isFLoadOverridePage()"><!-- --></A><H3>
+isFLoadOverridePage</H3>
+<PRE>
+<FONT SIZE="-1"><A HREF="../../../../../../org/apache/poi/util/Internal.html" title="annotation in org.apache.poi.util">@Internal</A>
+</FONT>public boolean <B>isFLoadOverridePage</B>()</PRE>
+<DL>
+<DD>Specifies whether to override the section properties for page size, orientation, and margins with the defaults that are appropriate for the installation language of the application
+<P>
+<DD><DL>
+
+<DT><B>Returns:</B><DD>the fLoadOverridePage field value.</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setReserved1(boolean)"><!-- --></A><H3>
+setReserved1</H3>
+<PRE>
+<FONT SIZE="-1"><A HREF="../../../../../../org/apache/poi/util/Internal.html" title="annotation in org.apache.poi.util">@Internal</A>
+</FONT>public void <B>setReserved1</B>(boolean&nbsp;value)</PRE>
+<DL>
+<DD>Sets the reserved1 field value.
+ This value is undefined and MUST be ignored
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="isReserved1()"><!-- --></A><H3>
+isReserved1</H3>
+<PRE>
+<FONT SIZE="-1"><A HREF="../../../../../../org/apache/poi/util/Internal.html" title="annotation in org.apache.poi.util">@Internal</A>
+@Deprecated
+</FONT>public boolean <B>isReserved1</B>()</PRE>
+<DL>
+<DD><B>Deprecated.</B>&nbsp;<I>This field should not be used according to specification</I>
+<P>
+<DD>This value is undefined and MUST be ignored
+<P>
+<DD><DL>
+
+<DT><B>Returns:</B><DD>the reserved1 field value.</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setReserved2(boolean)"><!-- --></A><H3>
+setReserved2</H3>
+<PRE>
+<FONT SIZE="-1"><A HREF="../../../../../../org/apache/poi/util/Internal.html" title="annotation in org.apache.poi.util">@Internal</A>
+</FONT>public void <B>setReserved2</B>(boolean&nbsp;value)</PRE>
+<DL>
+<DD>Sets the reserved2 field value.
+ This value is undefined and MUST be ignored
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="isReserved2()"><!-- --></A><H3>
+isReserved2</H3>
+<PRE>
+<FONT SIZE="-1"><A HREF="../../../../../../org/apache/poi/util/Internal.html" title="annotation in org.apache.poi.util">@Internal</A>
+@Deprecated
+</FONT>public boolean <B>isReserved2</B>()</PRE>
+<DL>
+<DD><B>Deprecated.</B>&nbsp;<I>This field should not be used according to specification</I>
+<P>
+<DD>This value is undefined and MUST be ignored
+<P>
+<DD><DL>
+
+<DT><B>Returns:</B><DD>the reserved2 field value.</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setFSpare0(byte)"><!-- --></A><H3>
+setFSpare0</H3>
+<PRE>
+<FONT SIZE="-1"><A HREF="../../../../../../org/apache/poi/util/Internal.html" title="annotation in org.apache.poi.util">@Internal</A>
+</FONT>public void <B>setFSpare0</B>(byte&nbsp;value)</PRE>
+<DL>
+<DD>Sets the fSpare0 field value.
+ This value is undefined and MUST be ignored
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getFSpare0()"><!-- --></A><H3>
+getFSpare0</H3>
+<PRE>
+<FONT SIZE="-1"><A HREF="../../../../../../org/apache/poi/util/Internal.html" title="annotation in org.apache.poi.util">@Internal</A>
+@Deprecated
+</FONT>public byte <B>getFSpare0</B>()</PRE>
+<DL>
+<DD><B>Deprecated.</B>&nbsp;<I>This field should not be used according to specification</I>
+<P>
+<DD>This value is undefined and MUST be ignored
+<P>
+<DD><DL>
+
+<DT><B>Returns:</B><DD>the fSpare0 field value.</DL>
+</DD>
+</DL>
+<!-- ========= END OF CLASS DATA ========= -->
+<HR>
+
+
+<!-- ======= START OF BOTTOM NAVBAR ====== -->
+<A NAME="navbar_bottom"><!-- --></A>
+<A HREF="#skip-navbar_bottom" title="Skip navigation links"></A>
+<TABLE BORDER="0" WIDTH="100%" CELLPADDING="1" CELLSPACING="0" SUMMARY="">
+<TR>
+<TD COLSPAN=2 BGCOLOR="#EEEEFF" CLASS="NavBarCell1">
+<A NAME="navbar_bottom_firstrow"><!-- --></A>
+<TABLE BORDER="0" CELLPADDING="0" CELLSPACING="3" SUMMARY="">
+  <TR ALIGN="center" VALIGN="top">
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../../overview-summary.html"><FONT CLASS="NavBarFont1"><B>Overview</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="package-summary.html"><FONT CLASS="NavBarFont1"><B>Package</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#FFFFFF" CLASS="NavBarCell1Rev"> &nbsp;<FONT CLASS="NavBarFont1Rev"><B>Class</B></FONT>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="class-use/FibBaseAbstractType.html"><FONT CLASS="NavBarFont1"><B>Use</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="package-tree.html"><FONT CLASS="NavBarFont1"><B>Tree</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../../deprecated-list.html"><FONT CLASS="NavBarFont1"><B>Deprecated</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../../index-all.html"><FONT CLASS="NavBarFont1"><B>Index</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../../help-doc.html"><FONT CLASS="NavBarFont1"><B>Help</B></FONT></A>&nbsp;</TD>
+  </TR>
+</TABLE>
+</TD>
+<TD ALIGN="right" VALIGN="top" ROWSPAN=3><EM>
+</EM>
+</TD>
+</TR>
+
+<TR>
+<TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
+&nbsp;<A HREF="../../../../../../org/apache/poi/hwpf/model/types/FFDataBaseAbstractType.html" title="class in org.apache.poi.hwpf.model.types"><B>PREV CLASS</B></A>&nbsp;
+&nbsp;<A HREF="../../../../../../org/apache/poi/hwpf/model/types/FibRgLw95AbstractType.html" title="class in org.apache.poi.hwpf.model.types"><B>NEXT CLASS</B></A></FONT></TD>
+<TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
+  <A HREF="../../../../../../index.html?org/apache/poi/hwpf/model/types/FibBaseAbstractType.html" target="_top"><B>FRAMES</B></A>  &nbsp;
+&nbsp;<A HREF="FibBaseAbstractType.html" target="_top"><B>NO FRAMES</B></A>  &nbsp;
+&nbsp;<SCRIPT type="text/javascript">
+  <!--
+  if(window==top) {
+    document.writeln('<A HREF="../../../../../../allclasses-noframe.html"><B>All Classes</B></A>');
+  }
+  //-->
+</SCRIPT>
+<NOSCRIPT>
+  <A HREF="../../../../../../allclasses-noframe.html"><B>All Classes</B></A>
+</NOSCRIPT>
+
+
+</FONT></TD>
+</TR>
+<TR>
+<TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
+  SUMMARY:&nbsp;NESTED&nbsp;|&nbsp;<A HREF="#field_summary">FIELD</A>&nbsp;|&nbsp;<A HREF="#constructor_summary">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_summary">METHOD</A></FONT></TD>
+<TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
+DETAIL:&nbsp;<A HREF="#field_detail">FIELD</A>&nbsp;|&nbsp;<A HREF="#constructor_detail">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_detail">METHOD</A></FONT></TD>
+</TR>
+</TABLE>
+<A NAME="skip-navbar_bottom"></A>
+<!-- ======== END OF BOTTOM NAVBAR ======= -->
+
+<HR>
+
+                <i>Copyright 2014 The Apache Software Foundation or
+        its licensors, as applicable.</i>
+            
+</BODY>
+</HTML>

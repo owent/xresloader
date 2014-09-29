@@ -1,0 +1,1343 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!--NewPage-->
+<HTML>
+<HEAD>
+<TITLE>
+Uses of Package org.apache.poi.poifs.filesystem (POI API Documentation)
+</TITLE>
+
+
+<LINK REL ="stylesheet" TYPE="text/css" HREF="../../../../../stylesheet.css" TITLE="Style">
+
+<SCRIPT type="text/javascript">
+function windowTitle()
+{
+    parent.document.title="Uses of Package org.apache.poi.poifs.filesystem (POI API Documentation)";
+}
+</SCRIPT>
+<NOSCRIPT>
+</NOSCRIPT>
+
+</HEAD>
+
+<BODY BGCOLOR="white" onload="windowTitle();">
+
+
+<!-- ========= START OF TOP NAVBAR ======= -->
+<A NAME="navbar_top"><!-- --></A>
+<A HREF="#skip-navbar_top" title="Skip navigation links"></A>
+<TABLE BORDER="0" WIDTH="100%" CELLPADDING="1" CELLSPACING="0" SUMMARY="">
+<TR>
+<TD COLSPAN=2 BGCOLOR="#EEEEFF" CLASS="NavBarCell1">
+<A NAME="navbar_top_firstrow"><!-- --></A>
+<TABLE BORDER="0" CELLPADDING="0" CELLSPACING="3" SUMMARY="">
+  <TR ALIGN="center" VALIGN="top">
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../overview-summary.html"><FONT CLASS="NavBarFont1"><B>Overview</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="package-summary.html"><FONT CLASS="NavBarFont1"><B>Package</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <FONT CLASS="NavBarFont1">Class</FONT>&nbsp;</TD>
+  <TD BGCOLOR="#FFFFFF" CLASS="NavBarCell1Rev"> &nbsp;<FONT CLASS="NavBarFont1Rev"><B>Use</B></FONT>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="package-tree.html"><FONT CLASS="NavBarFont1"><B>Tree</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../deprecated-list.html"><FONT CLASS="NavBarFont1"><B>Deprecated</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../index-all.html"><FONT CLASS="NavBarFont1"><B>Index</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../help-doc.html"><FONT CLASS="NavBarFont1"><B>Help</B></FONT></A>&nbsp;</TD>
+  </TR>
+</TABLE>
+</TD>
+<TD ALIGN="right" VALIGN="top" ROWSPAN=3><EM>
+</EM>
+</TD>
+</TR>
+
+<TR>
+<TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
+&nbsp;PREV&nbsp;
+&nbsp;NEXT</FONT></TD>
+<TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
+  <A HREF="../../../../../index.html?org/apache/poi/poifs/filesystem/package-use.html" target="_top"><B>FRAMES</B></A>  &nbsp;
+&nbsp;<A HREF="package-use.html" target="_top"><B>NO FRAMES</B></A>  &nbsp;
+&nbsp;<SCRIPT type="text/javascript">
+  <!--
+  if(window==top) {
+    document.writeln('<A HREF="../../../../../allclasses-noframe.html"><B>All Classes</B></A>');
+  }
+  //-->
+</SCRIPT>
+<NOSCRIPT>
+  <A HREF="../../../../../allclasses-noframe.html"><B>All Classes</B></A>
+</NOSCRIPT>
+
+
+</FONT></TD>
+</TR>
+</TABLE>
+<A NAME="skip-navbar_top"></A>
+<!-- ========= END OF TOP NAVBAR ========= -->
+
+<HR>
+<CENTER>
+<H2>
+<B>Uses of Package<br>org.apache.poi.poifs.filesystem</B></H2>
+</CENTER>
+
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+Packages that use <A HREF="../../../../../org/apache/poi/poifs/filesystem/package-summary.html">org.apache.poi.poifs.filesystem</A></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><A HREF="#org.apache.poi"><B>org.apache.poi</B></A></TD>
+<TD>&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><A HREF="#org.apache.poi.extractor"><B>org.apache.poi.extractor</B></A></TD>
+<TD>&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><A HREF="#org.apache.poi.hdgf"><B>org.apache.poi.hdgf</B></A></TD>
+<TD>&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><A HREF="#org.apache.poi.hdgf.extractor"><B>org.apache.poi.hdgf.extractor</B></A></TD>
+<TD>&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><A HREF="#org.apache.poi.hpbf"><B>org.apache.poi.hpbf</B></A></TD>
+<TD>&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><A HREF="#org.apache.poi.hpbf.dev"><B>org.apache.poi.hpbf.dev</B></A></TD>
+<TD>&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><A HREF="#org.apache.poi.hpbf.extractor"><B>org.apache.poi.hpbf.extractor</B></A></TD>
+<TD>&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><A HREF="#org.apache.poi.hpbf.model"><B>org.apache.poi.hpbf.model</B></A></TD>
+<TD>&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><A HREF="#org.apache.poi.hpsf"><B>org.apache.poi.hpsf</B></A></TD>
+<TD><div>&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><A HREF="#org.apache.poi.hpsf.extractor"><B>org.apache.poi.hpsf.extractor</B></A></TD>
+<TD>&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><A HREF="#org.apache.poi.hslf"><B>org.apache.poi.hslf</B></A></TD>
+<TD>&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><A HREF="#org.apache.poi.hslf.dev"><B>org.apache.poi.hslf.dev</B></A></TD>
+<TD>&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><A HREF="#org.apache.poi.hslf.extractor"><B>org.apache.poi.hslf.extractor</B></A></TD>
+<TD>&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><A HREF="#org.apache.poi.hslf.record"><B>org.apache.poi.hslf.record</B></A></TD>
+<TD>&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><A HREF="#org.apache.poi.hslf.usermodel"><B>org.apache.poi.hslf.usermodel</B></A></TD>
+<TD>&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><A HREF="#org.apache.poi.hsmf"><B>org.apache.poi.hsmf</B></A></TD>
+<TD>&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><A HREF="#org.apache.poi.hsmf.datatypes"><B>org.apache.poi.hsmf.datatypes</B></A></TD>
+<TD>&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><A HREF="#org.apache.poi.hsmf.dev"><B>org.apache.poi.hsmf.dev</B></A></TD>
+<TD>&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><A HREF="#org.apache.poi.hsmf.extractor"><B>org.apache.poi.hsmf.extractor</B></A></TD>
+<TD>&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><A HREF="#org.apache.poi.hsmf.parsers"><B>org.apache.poi.hsmf.parsers</B></A></TD>
+<TD>&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><A HREF="#org.apache.poi.hssf.eventusermodel"><B>org.apache.poi.hssf.eventusermodel</B></A></TD>
+<TD>HSSF eventmodel Package provides an event-based API for reading HSSF files.&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><A HREF="#org.apache.poi.hssf.extractor"><B>org.apache.poi.hssf.extractor</B></A></TD>
+<TD>&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><A HREF="#org.apache.poi.hssf.usermodel"><B>org.apache.poi.hssf.usermodel</B></A></TD>
+<TD>usermodel package maps HSSF low level strutures to familiar workbook/sheet model&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><A HREF="#org.apache.poi.hwpf"><B>org.apache.poi.hwpf</B></A></TD>
+<TD>&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><A HREF="#org.apache.poi.hwpf.converter"><B>org.apache.poi.hwpf.converter</B></A></TD>
+<TD>&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><A HREF="#org.apache.poi.hwpf.extractor"><B>org.apache.poi.hwpf.extractor</B></A></TD>
+<TD>&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><A HREF="#org.apache.poi.hwpf.usermodel"><B>org.apache.poi.hwpf.usermodel</B></A></TD>
+<TD>&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><A HREF="#org.apache.poi.poifs.crypt"><B>org.apache.poi.poifs.crypt</B></A></TD>
+<TD>Implementation of the <a href="http://msdn.microsoft.com/en-us/library/dd952186(v=office.12).aspx">ECMA-376 Document Encryption</a>&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><A HREF="#org.apache.poi.poifs.crypt.agile"><B>org.apache.poi.poifs.crypt.agile</B></A></TD>
+<TD>&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><A HREF="#org.apache.poi.poifs.crypt.standard"><B>org.apache.poi.poifs.crypt.standard</B></A></TD>
+<TD>&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><A HREF="#org.apache.poi.poifs.dev"><B>org.apache.poi.poifs.dev</B></A></TD>
+<TD>DEV package serves two purposes.&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><A HREF="#org.apache.poi.poifs.eventfilesystem"><B>org.apache.poi.poifs.eventfilesystem</B></A></TD>
+<TD>The eventfilesystem is an efficient method for reading OLE 2 CDF files.&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><A HREF="#org.apache.poi.poifs.filesystem"><B>org.apache.poi.poifs.filesystem</B></A></TD>
+<TD>filesystem package maps OLE 2 Compound document files to a more familiar filesystem interface.&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><A HREF="#org.apache.poi.poifs.property"><B>org.apache.poi.poifs.property</B></A></TD>
+<TD>property package contains high and low level Property structures for POIFS.&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><A HREF="#org.apache.poi.poifs.storage"><B>org.apache.poi.poifs.storage</B></A></TD>
+<TD>storage package contains low level binary structures for POIFS's implementation of the OLE 2
+Compound Document Format.&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><A HREF="#org.apache.poi.ss.usermodel"><B>org.apache.poi.ss.usermodel</B></A></TD>
+<TD>&nbsp;&nbsp;</TD>
+</TR>
+</TABLE>
+&nbsp;
+<P>
+<A NAME="org.apache.poi"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+Classes in <A HREF="../../../../../org/apache/poi/poifs/filesystem/package-summary.html">org.apache.poi.poifs.filesystem</A> used by <A HREF="../../../../../org/apache/poi/package-summary.html">org.apache.poi</A></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><B><A HREF="../../../../../org/apache/poi/poifs/filesystem/class-use/DirectoryEntry.html#org.apache.poi"><B>DirectoryEntry</B></A></B>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;This interface defines methods specific to Directory objects
+ managed by a Filesystem instance.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><B><A HREF="../../../../../org/apache/poi/poifs/filesystem/class-use/DirectoryNode.html#org.apache.poi"><B>DirectoryNode</B></A></B>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Simple implementation of DirectoryEntry</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><B><A HREF="../../../../../org/apache/poi/poifs/filesystem/class-use/Entry.html#org.apache.poi"><B>Entry</B></A></B>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;This interface provides access to an object managed by a Filesystem
+ instance.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><B><A HREF="../../../../../org/apache/poi/poifs/filesystem/class-use/NPOIFSFileSystem.html#org.apache.poi"><B>NPOIFSFileSystem</B></A></B>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;This is the main class of the POIFS system; it manages the entire
+ life cycle of the filesystem.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><B><A HREF="../../../../../org/apache/poi/poifs/filesystem/class-use/POIFSFileSystem.html#org.apache.poi"><B>POIFSFileSystem</B></A></B>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;This is the main class of the POIFS system; it manages the entire
+ life cycle of the filesystem.</TD>
+</TR>
+</TABLE>
+&nbsp;
+<P>
+<A NAME="org.apache.poi.extractor"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+Classes in <A HREF="../../../../../org/apache/poi/poifs/filesystem/package-summary.html">org.apache.poi.poifs.filesystem</A> used by <A HREF="../../../../../org/apache/poi/extractor/package-summary.html">org.apache.poi.extractor</A></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><B><A HREF="../../../../../org/apache/poi/poifs/filesystem/class-use/DirectoryNode.html#org.apache.poi.extractor"><B>DirectoryNode</B></A></B>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Simple implementation of DirectoryEntry</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><B><A HREF="../../../../../org/apache/poi/poifs/filesystem/class-use/POIFSFileSystem.html#org.apache.poi.extractor"><B>POIFSFileSystem</B></A></B>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;This is the main class of the POIFS system; it manages the entire
+ life cycle of the filesystem.</TD>
+</TR>
+</TABLE>
+&nbsp;
+<P>
+<A NAME="org.apache.poi.hdgf"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+Classes in <A HREF="../../../../../org/apache/poi/poifs/filesystem/package-summary.html">org.apache.poi.poifs.filesystem</A> used by <A HREF="../../../../../org/apache/poi/hdgf/package-summary.html">org.apache.poi.hdgf</A></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><B><A HREF="../../../../../org/apache/poi/poifs/filesystem/class-use/DirectoryNode.html#org.apache.poi.hdgf"><B>DirectoryNode</B></A></B>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Simple implementation of DirectoryEntry</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><B><A HREF="../../../../../org/apache/poi/poifs/filesystem/class-use/NPOIFSFileSystem.html#org.apache.poi.hdgf"><B>NPOIFSFileSystem</B></A></B>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;This is the main class of the POIFS system; it manages the entire
+ life cycle of the filesystem.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><B><A HREF="../../../../../org/apache/poi/poifs/filesystem/class-use/POIFSFileSystem.html#org.apache.poi.hdgf"><B>POIFSFileSystem</B></A></B>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;This is the main class of the POIFS system; it manages the entire
+ life cycle of the filesystem.</TD>
+</TR>
+</TABLE>
+&nbsp;
+<P>
+<A NAME="org.apache.poi.hdgf.extractor"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+Classes in <A HREF="../../../../../org/apache/poi/poifs/filesystem/package-summary.html">org.apache.poi.poifs.filesystem</A> used by <A HREF="../../../../../org/apache/poi/hdgf/extractor/package-summary.html">org.apache.poi.hdgf.extractor</A></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><B><A HREF="../../../../../org/apache/poi/poifs/filesystem/class-use/DirectoryNode.html#org.apache.poi.hdgf.extractor"><B>DirectoryNode</B></A></B>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Simple implementation of DirectoryEntry</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><B><A HREF="../../../../../org/apache/poi/poifs/filesystem/class-use/NPOIFSFileSystem.html#org.apache.poi.hdgf.extractor"><B>NPOIFSFileSystem</B></A></B>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;This is the main class of the POIFS system; it manages the entire
+ life cycle of the filesystem.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><B><A HREF="../../../../../org/apache/poi/poifs/filesystem/class-use/POIFSFileSystem.html#org.apache.poi.hdgf.extractor"><B>POIFSFileSystem</B></A></B>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;This is the main class of the POIFS system; it manages the entire
+ life cycle of the filesystem.</TD>
+</TR>
+</TABLE>
+&nbsp;
+<P>
+<A NAME="org.apache.poi.hpbf"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+Classes in <A HREF="../../../../../org/apache/poi/poifs/filesystem/package-summary.html">org.apache.poi.poifs.filesystem</A> used by <A HREF="../../../../../org/apache/poi/hpbf/package-summary.html">org.apache.poi.hpbf</A></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><B><A HREF="../../../../../org/apache/poi/poifs/filesystem/class-use/DirectoryNode.html#org.apache.poi.hpbf"><B>DirectoryNode</B></A></B>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Simple implementation of DirectoryEntry</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><B><A HREF="../../../../../org/apache/poi/poifs/filesystem/class-use/NPOIFSFileSystem.html#org.apache.poi.hpbf"><B>NPOIFSFileSystem</B></A></B>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;This is the main class of the POIFS system; it manages the entire
+ life cycle of the filesystem.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><B><A HREF="../../../../../org/apache/poi/poifs/filesystem/class-use/POIFSFileSystem.html#org.apache.poi.hpbf"><B>POIFSFileSystem</B></A></B>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;This is the main class of the POIFS system; it manages the entire
+ life cycle of the filesystem.</TD>
+</TR>
+</TABLE>
+&nbsp;
+<P>
+<A NAME="org.apache.poi.hpbf.dev"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+Classes in <A HREF="../../../../../org/apache/poi/poifs/filesystem/package-summary.html">org.apache.poi.poifs.filesystem</A> used by <A HREF="../../../../../org/apache/poi/hpbf/dev/package-summary.html">org.apache.poi.hpbf.dev</A></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><B><A HREF="../../../../../org/apache/poi/poifs/filesystem/class-use/DirectoryNode.html#org.apache.poi.hpbf.dev"><B>DirectoryNode</B></A></B>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Simple implementation of DirectoryEntry</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><B><A HREF="../../../../../org/apache/poi/poifs/filesystem/class-use/POIFSFileSystem.html#org.apache.poi.hpbf.dev"><B>POIFSFileSystem</B></A></B>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;This is the main class of the POIFS system; it manages the entire
+ life cycle of the filesystem.</TD>
+</TR>
+</TABLE>
+&nbsp;
+<P>
+<A NAME="org.apache.poi.hpbf.extractor"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+Classes in <A HREF="../../../../../org/apache/poi/poifs/filesystem/package-summary.html">org.apache.poi.poifs.filesystem</A> used by <A HREF="../../../../../org/apache/poi/hpbf/extractor/package-summary.html">org.apache.poi.hpbf.extractor</A></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><B><A HREF="../../../../../org/apache/poi/poifs/filesystem/class-use/DirectoryNode.html#org.apache.poi.hpbf.extractor"><B>DirectoryNode</B></A></B>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Simple implementation of DirectoryEntry</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><B><A HREF="../../../../../org/apache/poi/poifs/filesystem/class-use/NPOIFSFileSystem.html#org.apache.poi.hpbf.extractor"><B>NPOIFSFileSystem</B></A></B>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;This is the main class of the POIFS system; it manages the entire
+ life cycle of the filesystem.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><B><A HREF="../../../../../org/apache/poi/poifs/filesystem/class-use/POIFSFileSystem.html#org.apache.poi.hpbf.extractor"><B>POIFSFileSystem</B></A></B>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;This is the main class of the POIFS system; it manages the entire
+ life cycle of the filesystem.</TD>
+</TR>
+</TABLE>
+&nbsp;
+<P>
+<A NAME="org.apache.poi.hpbf.model"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+Classes in <A HREF="../../../../../org/apache/poi/poifs/filesystem/package-summary.html">org.apache.poi.poifs.filesystem</A> used by <A HREF="../../../../../org/apache/poi/hpbf/model/package-summary.html">org.apache.poi.hpbf.model</A></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><B><A HREF="../../../../../org/apache/poi/poifs/filesystem/class-use/DirectoryNode.html#org.apache.poi.hpbf.model"><B>DirectoryNode</B></A></B>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Simple implementation of DirectoryEntry</TD>
+</TR>
+</TABLE>
+&nbsp;
+<P>
+<A NAME="org.apache.poi.hpsf"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+Classes in <A HREF="../../../../../org/apache/poi/poifs/filesystem/package-summary.html">org.apache.poi.poifs.filesystem</A> used by <A HREF="../../../../../org/apache/poi/hpsf/package-summary.html">org.apache.poi.hpsf</A></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><B><A HREF="../../../../../org/apache/poi/poifs/filesystem/class-use/DirectoryEntry.html#org.apache.poi.hpsf"><B>DirectoryEntry</B></A></B>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;This interface defines methods specific to Directory objects
+ managed by a Filesystem instance.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><B><A HREF="../../../../../org/apache/poi/poifs/filesystem/class-use/NPOIFSFileSystem.html#org.apache.poi.hpsf"><B>NPOIFSFileSystem</B></A></B>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;This is the main class of the POIFS system; it manages the entire
+ life cycle of the filesystem.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><B><A HREF="../../../../../org/apache/poi/poifs/filesystem/class-use/POIFSFileSystem.html#org.apache.poi.hpsf"><B>POIFSFileSystem</B></A></B>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;This is the main class of the POIFS system; it manages the entire
+ life cycle of the filesystem.</TD>
+</TR>
+</TABLE>
+&nbsp;
+<P>
+<A NAME="org.apache.poi.hpsf.extractor"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+Classes in <A HREF="../../../../../org/apache/poi/poifs/filesystem/package-summary.html">org.apache.poi.poifs.filesystem</A> used by <A HREF="../../../../../org/apache/poi/hpsf/extractor/package-summary.html">org.apache.poi.hpsf.extractor</A></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><B><A HREF="../../../../../org/apache/poi/poifs/filesystem/class-use/NPOIFSFileSystem.html#org.apache.poi.hpsf.extractor"><B>NPOIFSFileSystem</B></A></B>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;This is the main class of the POIFS system; it manages the entire
+ life cycle of the filesystem.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><B><A HREF="../../../../../org/apache/poi/poifs/filesystem/class-use/POIFSFileSystem.html#org.apache.poi.hpsf.extractor"><B>POIFSFileSystem</B></A></B>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;This is the main class of the POIFS system; it manages the entire
+ life cycle of the filesystem.</TD>
+</TR>
+</TABLE>
+&nbsp;
+<P>
+<A NAME="org.apache.poi.hslf"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+Classes in <A HREF="../../../../../org/apache/poi/poifs/filesystem/package-summary.html">org.apache.poi.poifs.filesystem</A> used by <A HREF="../../../../../org/apache/poi/hslf/package-summary.html">org.apache.poi.hslf</A></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><B><A HREF="../../../../../org/apache/poi/poifs/filesystem/class-use/DirectoryNode.html#org.apache.poi.hslf"><B>DirectoryNode</B></A></B>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Simple implementation of DirectoryEntry</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><B><A HREF="../../../../../org/apache/poi/poifs/filesystem/class-use/NPOIFSFileSystem.html#org.apache.poi.hslf"><B>NPOIFSFileSystem</B></A></B>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;This is the main class of the POIFS system; it manages the entire
+ life cycle of the filesystem.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><B><A HREF="../../../../../org/apache/poi/poifs/filesystem/class-use/POIFSFileSystem.html#org.apache.poi.hslf"><B>POIFSFileSystem</B></A></B>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;This is the main class of the POIFS system; it manages the entire
+ life cycle of the filesystem.</TD>
+</TR>
+</TABLE>
+&nbsp;
+<P>
+<A NAME="org.apache.poi.hslf.dev"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+Classes in <A HREF="../../../../../org/apache/poi/poifs/filesystem/package-summary.html">org.apache.poi.poifs.filesystem</A> used by <A HREF="../../../../../org/apache/poi/hslf/dev/package-summary.html">org.apache.poi.hslf.dev</A></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><B><A HREF="../../../../../org/apache/poi/poifs/filesystem/class-use/POIFSFileSystem.html#org.apache.poi.hslf.dev"><B>POIFSFileSystem</B></A></B>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;This is the main class of the POIFS system; it manages the entire
+ life cycle of the filesystem.</TD>
+</TR>
+</TABLE>
+&nbsp;
+<P>
+<A NAME="org.apache.poi.hslf.extractor"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+Classes in <A HREF="../../../../../org/apache/poi/poifs/filesystem/package-summary.html">org.apache.poi.poifs.filesystem</A> used by <A HREF="../../../../../org/apache/poi/hslf/extractor/package-summary.html">org.apache.poi.hslf.extractor</A></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><B><A HREF="../../../../../org/apache/poi/poifs/filesystem/class-use/DirectoryNode.html#org.apache.poi.hslf.extractor"><B>DirectoryNode</B></A></B>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Simple implementation of DirectoryEntry</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><B><A HREF="../../../../../org/apache/poi/poifs/filesystem/class-use/NPOIFSFileSystem.html#org.apache.poi.hslf.extractor"><B>NPOIFSFileSystem</B></A></B>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;This is the main class of the POIFS system; it manages the entire
+ life cycle of the filesystem.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><B><A HREF="../../../../../org/apache/poi/poifs/filesystem/class-use/POIFSFileSystem.html#org.apache.poi.hslf.extractor"><B>POIFSFileSystem</B></A></B>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;This is the main class of the POIFS system; it manages the entire
+ life cycle of the filesystem.</TD>
+</TR>
+</TABLE>
+&nbsp;
+<P>
+<A NAME="org.apache.poi.hslf.record"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+Classes in <A HREF="../../../../../org/apache/poi/poifs/filesystem/package-summary.html">org.apache.poi.poifs.filesystem</A> used by <A HREF="../../../../../org/apache/poi/hslf/record/package-summary.html">org.apache.poi.hslf.record</A></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><B><A HREF="../../../../../org/apache/poi/poifs/filesystem/class-use/DirectoryNode.html#org.apache.poi.hslf.record"><B>DirectoryNode</B></A></B>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Simple implementation of DirectoryEntry</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><B><A HREF="../../../../../org/apache/poi/poifs/filesystem/class-use/POIFSFileSystem.html#org.apache.poi.hslf.record"><B>POIFSFileSystem</B></A></B>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;This is the main class of the POIFS system; it manages the entire
+ life cycle of the filesystem.</TD>
+</TR>
+</TABLE>
+&nbsp;
+<P>
+<A NAME="org.apache.poi.hslf.usermodel"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+Classes in <A HREF="../../../../../org/apache/poi/poifs/filesystem/package-summary.html">org.apache.poi.poifs.filesystem</A> used by <A HREF="../../../../../org/apache/poi/hslf/usermodel/package-summary.html">org.apache.poi.hslf.usermodel</A></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><B><A HREF="../../../../../org/apache/poi/poifs/filesystem/class-use/POIFSFileSystem.html#org.apache.poi.hslf.usermodel"><B>POIFSFileSystem</B></A></B>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;This is the main class of the POIFS system; it manages the entire
+ life cycle of the filesystem.</TD>
+</TR>
+</TABLE>
+&nbsp;
+<P>
+<A NAME="org.apache.poi.hsmf"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+Classes in <A HREF="../../../../../org/apache/poi/poifs/filesystem/package-summary.html">org.apache.poi.poifs.filesystem</A> used by <A HREF="../../../../../org/apache/poi/hsmf/package-summary.html">org.apache.poi.hsmf</A></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><B><A HREF="../../../../../org/apache/poi/poifs/filesystem/class-use/DirectoryNode.html#org.apache.poi.hsmf"><B>DirectoryNode</B></A></B>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Simple implementation of DirectoryEntry</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><B><A HREF="../../../../../org/apache/poi/poifs/filesystem/class-use/NPOIFSFileSystem.html#org.apache.poi.hsmf"><B>NPOIFSFileSystem</B></A></B>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;This is the main class of the POIFS system; it manages the entire
+ life cycle of the filesystem.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><B><A HREF="../../../../../org/apache/poi/poifs/filesystem/class-use/POIFSFileSystem.html#org.apache.poi.hsmf"><B>POIFSFileSystem</B></A></B>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;This is the main class of the POIFS system; it manages the entire
+ life cycle of the filesystem.</TD>
+</TR>
+</TABLE>
+&nbsp;
+<P>
+<A NAME="org.apache.poi.hsmf.datatypes"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+Classes in <A HREF="../../../../../org/apache/poi/poifs/filesystem/package-summary.html">org.apache.poi.poifs.filesystem</A> used by <A HREF="../../../../../org/apache/poi/hsmf/datatypes/package-summary.html">org.apache.poi.hsmf.datatypes</A></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><B><A HREF="../../../../../org/apache/poi/poifs/filesystem/class-use/DirectoryNode.html#org.apache.poi.hsmf.datatypes"><B>DirectoryNode</B></A></B>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Simple implementation of DirectoryEntry</TD>
+</TR>
+</TABLE>
+&nbsp;
+<P>
+<A NAME="org.apache.poi.hsmf.dev"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+Classes in <A HREF="../../../../../org/apache/poi/poifs/filesystem/package-summary.html">org.apache.poi.poifs.filesystem</A> used by <A HREF="../../../../../org/apache/poi/hsmf/dev/package-summary.html">org.apache.poi.hsmf.dev</A></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><B><A HREF="../../../../../org/apache/poi/poifs/filesystem/class-use/POIFSFileSystem.html#org.apache.poi.hsmf.dev"><B>POIFSFileSystem</B></A></B>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;This is the main class of the POIFS system; it manages the entire
+ life cycle of the filesystem.</TD>
+</TR>
+</TABLE>
+&nbsp;
+<P>
+<A NAME="org.apache.poi.hsmf.extractor"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+Classes in <A HREF="../../../../../org/apache/poi/poifs/filesystem/package-summary.html">org.apache.poi.poifs.filesystem</A> used by <A HREF="../../../../../org/apache/poi/hsmf/extractor/package-summary.html">org.apache.poi.hsmf.extractor</A></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><B><A HREF="../../../../../org/apache/poi/poifs/filesystem/class-use/DirectoryNode.html#org.apache.poi.hsmf.extractor"><B>DirectoryNode</B></A></B>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Simple implementation of DirectoryEntry</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><B><A HREF="../../../../../org/apache/poi/poifs/filesystem/class-use/NPOIFSFileSystem.html#org.apache.poi.hsmf.extractor"><B>NPOIFSFileSystem</B></A></B>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;This is the main class of the POIFS system; it manages the entire
+ life cycle of the filesystem.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><B><A HREF="../../../../../org/apache/poi/poifs/filesystem/class-use/POIFSFileSystem.html#org.apache.poi.hsmf.extractor"><B>POIFSFileSystem</B></A></B>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;This is the main class of the POIFS system; it manages the entire
+ life cycle of the filesystem.</TD>
+</TR>
+</TABLE>
+&nbsp;
+<P>
+<A NAME="org.apache.poi.hsmf.parsers"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+Classes in <A HREF="../../../../../org/apache/poi/poifs/filesystem/package-summary.html">org.apache.poi.poifs.filesystem</A> used by <A HREF="../../../../../org/apache/poi/hsmf/parsers/package-summary.html">org.apache.poi.hsmf.parsers</A></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><B><A HREF="../../../../../org/apache/poi/poifs/filesystem/class-use/DirectoryNode.html#org.apache.poi.hsmf.parsers"><B>DirectoryNode</B></A></B>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Simple implementation of DirectoryEntry</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><B><A HREF="../../../../../org/apache/poi/poifs/filesystem/class-use/Entry.html#org.apache.poi.hsmf.parsers"><B>Entry</B></A></B>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;This interface provides access to an object managed by a Filesystem
+ instance.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><B><A HREF="../../../../../org/apache/poi/poifs/filesystem/class-use/POIFSFileSystem.html#org.apache.poi.hsmf.parsers"><B>POIFSFileSystem</B></A></B>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;This is the main class of the POIFS system; it manages the entire
+ life cycle of the filesystem.</TD>
+</TR>
+</TABLE>
+&nbsp;
+<P>
+<A NAME="org.apache.poi.hssf.eventusermodel"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+Classes in <A HREF="../../../../../org/apache/poi/poifs/filesystem/package-summary.html">org.apache.poi.poifs.filesystem</A> used by <A HREF="../../../../../org/apache/poi/hssf/eventusermodel/package-summary.html">org.apache.poi.hssf.eventusermodel</A></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><B><A HREF="../../../../../org/apache/poi/poifs/filesystem/class-use/DirectoryNode.html#org.apache.poi.hssf.eventusermodel"><B>DirectoryNode</B></A></B>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Simple implementation of DirectoryEntry</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><B><A HREF="../../../../../org/apache/poi/poifs/filesystem/class-use/POIFSFileSystem.html#org.apache.poi.hssf.eventusermodel"><B>POIFSFileSystem</B></A></B>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;This is the main class of the POIFS system; it manages the entire
+ life cycle of the filesystem.</TD>
+</TR>
+</TABLE>
+&nbsp;
+<P>
+<A NAME="org.apache.poi.hssf.extractor"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+Classes in <A HREF="../../../../../org/apache/poi/poifs/filesystem/package-summary.html">org.apache.poi.poifs.filesystem</A> used by <A HREF="../../../../../org/apache/poi/hssf/extractor/package-summary.html">org.apache.poi.hssf.extractor</A></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><B><A HREF="../../../../../org/apache/poi/poifs/filesystem/class-use/DirectoryNode.html#org.apache.poi.hssf.extractor"><B>DirectoryNode</B></A></B>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Simple implementation of DirectoryEntry</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><B><A HREF="../../../../../org/apache/poi/poifs/filesystem/class-use/POIFSFileSystem.html#org.apache.poi.hssf.extractor"><B>POIFSFileSystem</B></A></B>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;This is the main class of the POIFS system; it manages the entire
+ life cycle of the filesystem.</TD>
+</TR>
+</TABLE>
+&nbsp;
+<P>
+<A NAME="org.apache.poi.hssf.usermodel"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+Classes in <A HREF="../../../../../org/apache/poi/poifs/filesystem/package-summary.html">org.apache.poi.poifs.filesystem</A> used by <A HREF="../../../../../org/apache/poi/hssf/usermodel/package-summary.html">org.apache.poi.hssf.usermodel</A></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><B><A HREF="../../../../../org/apache/poi/poifs/filesystem/class-use/DirectoryEntry.html#org.apache.poi.hssf.usermodel"><B>DirectoryEntry</B></A></B>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;This interface defines methods specific to Directory objects
+ managed by a Filesystem instance.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><B><A HREF="../../../../../org/apache/poi/poifs/filesystem/class-use/DirectoryNode.html#org.apache.poi.hssf.usermodel"><B>DirectoryNode</B></A></B>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Simple implementation of DirectoryEntry</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><B><A HREF="../../../../../org/apache/poi/poifs/filesystem/class-use/POIFSFileSystem.html#org.apache.poi.hssf.usermodel"><B>POIFSFileSystem</B></A></B>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;This is the main class of the POIFS system; it manages the entire
+ life cycle of the filesystem.</TD>
+</TR>
+</TABLE>
+&nbsp;
+<P>
+<A NAME="org.apache.poi.hwpf"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+Classes in <A HREF="../../../../../org/apache/poi/poifs/filesystem/package-summary.html">org.apache.poi.poifs.filesystem</A> used by <A HREF="../../../../../org/apache/poi/hwpf/package-summary.html">org.apache.poi.hwpf</A></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><B><A HREF="../../../../../org/apache/poi/poifs/filesystem/class-use/DirectoryNode.html#org.apache.poi.hwpf"><B>DirectoryNode</B></A></B>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Simple implementation of DirectoryEntry</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><B><A HREF="../../../../../org/apache/poi/poifs/filesystem/class-use/POIFSFileSystem.html#org.apache.poi.hwpf"><B>POIFSFileSystem</B></A></B>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;This is the main class of the POIFS system; it manages the entire
+ life cycle of the filesystem.</TD>
+</TR>
+</TABLE>
+&nbsp;
+<P>
+<A NAME="org.apache.poi.hwpf.converter"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+Classes in <A HREF="../../../../../org/apache/poi/poifs/filesystem/package-summary.html">org.apache.poi.poifs.filesystem</A> used by <A HREF="../../../../../org/apache/poi/hwpf/converter/package-summary.html">org.apache.poi.hwpf.converter</A></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><B><A HREF="../../../../../org/apache/poi/poifs/filesystem/class-use/DirectoryNode.html#org.apache.poi.hwpf.converter"><B>DirectoryNode</B></A></B>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Simple implementation of DirectoryEntry</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><B><A HREF="../../../../../org/apache/poi/poifs/filesystem/class-use/Entry.html#org.apache.poi.hwpf.converter"><B>Entry</B></A></B>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;This interface provides access to an object managed by a Filesystem
+ instance.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><B><A HREF="../../../../../org/apache/poi/poifs/filesystem/class-use/POIFSFileSystem.html#org.apache.poi.hwpf.converter"><B>POIFSFileSystem</B></A></B>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;This is the main class of the POIFS system; it manages the entire
+ life cycle of the filesystem.</TD>
+</TR>
+</TABLE>
+&nbsp;
+<P>
+<A NAME="org.apache.poi.hwpf.extractor"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+Classes in <A HREF="../../../../../org/apache/poi/poifs/filesystem/package-summary.html">org.apache.poi.poifs.filesystem</A> used by <A HREF="../../../../../org/apache/poi/hwpf/extractor/package-summary.html">org.apache.poi.hwpf.extractor</A></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><B><A HREF="../../../../../org/apache/poi/poifs/filesystem/class-use/DirectoryNode.html#org.apache.poi.hwpf.extractor"><B>DirectoryNode</B></A></B>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Simple implementation of DirectoryEntry</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><B><A HREF="../../../../../org/apache/poi/poifs/filesystem/class-use/POIFSFileSystem.html#org.apache.poi.hwpf.extractor"><B>POIFSFileSystem</B></A></B>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;This is the main class of the POIFS system; it manages the entire
+ life cycle of the filesystem.</TD>
+</TR>
+</TABLE>
+&nbsp;
+<P>
+<A NAME="org.apache.poi.hwpf.usermodel"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+Classes in <A HREF="../../../../../org/apache/poi/poifs/filesystem/package-summary.html">org.apache.poi.poifs.filesystem</A> used by <A HREF="../../../../../org/apache/poi/hwpf/usermodel/package-summary.html">org.apache.poi.hwpf.usermodel</A></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><B><A HREF="../../../../../org/apache/poi/poifs/filesystem/class-use/DirectoryEntry.html#org.apache.poi.hwpf.usermodel"><B>DirectoryEntry</B></A></B>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;This interface defines methods specific to Directory objects
+ managed by a Filesystem instance.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><B><A HREF="../../../../../org/apache/poi/poifs/filesystem/class-use/Entry.html#org.apache.poi.hwpf.usermodel"><B>Entry</B></A></B>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;This interface provides access to an object managed by a Filesystem
+ instance.</TD>
+</TR>
+</TABLE>
+&nbsp;
+<P>
+<A NAME="org.apache.poi.poifs.crypt"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+Classes in <A HREF="../../../../../org/apache/poi/poifs/filesystem/package-summary.html">org.apache.poi.poifs.filesystem</A> used by <A HREF="../../../../../org/apache/poi/poifs/crypt/package-summary.html">org.apache.poi.poifs.crypt</A></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><B><A HREF="../../../../../org/apache/poi/poifs/filesystem/class-use/DirectoryEntry.html#org.apache.poi.poifs.crypt"><B>DirectoryEntry</B></A></B>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;This interface defines methods specific to Directory objects
+ managed by a Filesystem instance.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><B><A HREF="../../../../../org/apache/poi/poifs/filesystem/class-use/DirectoryNode.html#org.apache.poi.poifs.crypt"><B>DirectoryNode</B></A></B>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Simple implementation of DirectoryEntry</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><B><A HREF="../../../../../org/apache/poi/poifs/filesystem/class-use/DocumentEntry.html#org.apache.poi.poifs.crypt"><B>DocumentEntry</B></A></B>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;This interface defines methods specific to Document objects
+ managed by a Filesystem instance.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><B><A HREF="../../../../../org/apache/poi/poifs/filesystem/class-use/DocumentInputStream.html#org.apache.poi.poifs.crypt"><B>DocumentInputStream</B></A></B>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;This class provides methods to read a DocumentEntry managed by a
+  <A HREF="../../../../../org/apache/poi/poifs/filesystem/POIFSFileSystem.html" title="class in org.apache.poi.poifs.filesystem"><CODE>POIFSFileSystem</CODE></A> or <A HREF="../../../../../org/apache/poi/poifs/filesystem/NPOIFSFileSystem.html" title="class in org.apache.poi.poifs.filesystem"><CODE>NPOIFSFileSystem</CODE></A> instance.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><B><A HREF="../../../../../org/apache/poi/poifs/filesystem/class-use/NPOIFSFileSystem.html#org.apache.poi.poifs.crypt"><B>NPOIFSFileSystem</B></A></B>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;This is the main class of the POIFS system; it manages the entire
+ life cycle of the filesystem.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><B><A HREF="../../../../../org/apache/poi/poifs/filesystem/class-use/POIFSFileSystem.html#org.apache.poi.poifs.crypt"><B>POIFSFileSystem</B></A></B>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;This is the main class of the POIFS system; it manages the entire
+ life cycle of the filesystem.</TD>
+</TR>
+</TABLE>
+&nbsp;
+<P>
+<A NAME="org.apache.poi.poifs.crypt.agile"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+Classes in <A HREF="../../../../../org/apache/poi/poifs/filesystem/package-summary.html">org.apache.poi.poifs.filesystem</A> used by <A HREF="../../../../../org/apache/poi/poifs/crypt/agile/package-summary.html">org.apache.poi.poifs.crypt.agile</A></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><B><A HREF="../../../../../org/apache/poi/poifs/filesystem/class-use/DirectoryNode.html#org.apache.poi.poifs.crypt.agile"><B>DirectoryNode</B></A></B>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Simple implementation of DirectoryEntry</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><B><A HREF="../../../../../org/apache/poi/poifs/filesystem/class-use/DocumentInputStream.html#org.apache.poi.poifs.crypt.agile"><B>DocumentInputStream</B></A></B>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;This class provides methods to read a DocumentEntry managed by a
+  <A HREF="../../../../../org/apache/poi/poifs/filesystem/POIFSFileSystem.html" title="class in org.apache.poi.poifs.filesystem"><CODE>POIFSFileSystem</CODE></A> or <A HREF="../../../../../org/apache/poi/poifs/filesystem/NPOIFSFileSystem.html" title="class in org.apache.poi.poifs.filesystem"><CODE>NPOIFSFileSystem</CODE></A> instance.</TD>
+</TR>
+</TABLE>
+&nbsp;
+<P>
+<A NAME="org.apache.poi.poifs.crypt.standard"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+Classes in <A HREF="../../../../../org/apache/poi/poifs/filesystem/package-summary.html">org.apache.poi.poifs.filesystem</A> used by <A HREF="../../../../../org/apache/poi/poifs/crypt/standard/package-summary.html">org.apache.poi.poifs.crypt.standard</A></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><B><A HREF="../../../../../org/apache/poi/poifs/filesystem/class-use/DirectoryNode.html#org.apache.poi.poifs.crypt.standard"><B>DirectoryNode</B></A></B>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Simple implementation of DirectoryEntry</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><B><A HREF="../../../../../org/apache/poi/poifs/filesystem/class-use/DocumentInputStream.html#org.apache.poi.poifs.crypt.standard"><B>DocumentInputStream</B></A></B>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;This class provides methods to read a DocumentEntry managed by a
+  <A HREF="../../../../../org/apache/poi/poifs/filesystem/POIFSFileSystem.html" title="class in org.apache.poi.poifs.filesystem"><CODE>POIFSFileSystem</CODE></A> or <A HREF="../../../../../org/apache/poi/poifs/filesystem/NPOIFSFileSystem.html" title="class in org.apache.poi.poifs.filesystem"><CODE>NPOIFSFileSystem</CODE></A> instance.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><B><A HREF="../../../../../org/apache/poi/poifs/filesystem/class-use/POIFSWriterEvent.html#org.apache.poi.poifs.crypt.standard"><B>POIFSWriterEvent</B></A></B>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Class POIFSWriterEvent</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><B><A HREF="../../../../../org/apache/poi/poifs/filesystem/class-use/POIFSWriterListener.html#org.apache.poi.poifs.crypt.standard"><B>POIFSWriterListener</B></A></B>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Interface POIFSWriterListener</TD>
+</TR>
+</TABLE>
+&nbsp;
+<P>
+<A NAME="org.apache.poi.poifs.dev"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+Classes in <A HREF="../../../../../org/apache/poi/poifs/filesystem/package-summary.html">org.apache.poi.poifs.filesystem</A> used by <A HREF="../../../../../org/apache/poi/poifs/dev/package-summary.html">org.apache.poi.poifs.dev</A></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><B><A HREF="../../../../../org/apache/poi/poifs/filesystem/class-use/DirectoryEntry.html#org.apache.poi.poifs.dev"><B>DirectoryEntry</B></A></B>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;This interface defines methods specific to Directory objects
+ managed by a Filesystem instance.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><B><A HREF="../../../../../org/apache/poi/poifs/filesystem/class-use/DirectoryNode.html#org.apache.poi.poifs.dev"><B>DirectoryNode</B></A></B>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Simple implementation of DirectoryEntry</TD>
+</TR>
+</TABLE>
+&nbsp;
+<P>
+<A NAME="org.apache.poi.poifs.eventfilesystem"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+Classes in <A HREF="../../../../../org/apache/poi/poifs/filesystem/package-summary.html">org.apache.poi.poifs.filesystem</A> used by <A HREF="../../../../../org/apache/poi/poifs/eventfilesystem/package-summary.html">org.apache.poi.poifs.eventfilesystem</A></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><B><A HREF="../../../../../org/apache/poi/poifs/filesystem/class-use/DocumentInputStream.html#org.apache.poi.poifs.eventfilesystem"><B>DocumentInputStream</B></A></B>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;This class provides methods to read a DocumentEntry managed by a
+  <A HREF="../../../../../org/apache/poi/poifs/filesystem/POIFSFileSystem.html" title="class in org.apache.poi.poifs.filesystem"><CODE>POIFSFileSystem</CODE></A> or <A HREF="../../../../../org/apache/poi/poifs/filesystem/NPOIFSFileSystem.html" title="class in org.apache.poi.poifs.filesystem"><CODE>NPOIFSFileSystem</CODE></A> instance.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><B><A HREF="../../../../../org/apache/poi/poifs/filesystem/class-use/POIFSDocumentPath.html#org.apache.poi.poifs.eventfilesystem"><B>POIFSDocumentPath</B></A></B>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Class POIFSDocumentPath</TD>
+</TR>
+</TABLE>
+&nbsp;
+<P>
+<A NAME="org.apache.poi.poifs.filesystem"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+Classes in <A HREF="../../../../../org/apache/poi/poifs/filesystem/package-summary.html">org.apache.poi.poifs.filesystem</A> used by <A HREF="../../../../../org/apache/poi/poifs/filesystem/package-summary.html">org.apache.poi.poifs.filesystem</A></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><B><A HREF="../../../../../org/apache/poi/poifs/filesystem/class-use/BATManaged.html#org.apache.poi.poifs.filesystem"><B>BATManaged</B></A></B>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;This interface defines behaviors for objects managed by the Block
+ Allocation Table (BAT).</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><B><A HREF="../../../../../org/apache/poi/poifs/filesystem/class-use/BlockStore.html#org.apache.poi.poifs.filesystem"><B>BlockStore</B></A></B>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;This abstract class describes a way to read, store, chain
+  and free a series of blocks (be they Big or Small ones)</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><B><A HREF="../../../../../org/apache/poi/poifs/filesystem/class-use/BlockStore.ChainLoopDetector.html#org.apache.poi.poifs.filesystem"><B>BlockStore.ChainLoopDetector</B></A></B>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Used to detect if a chain has a loop in it, so
+  we can bail out with an error rather than
+  spinning away for ever...</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><B><A HREF="../../../../../org/apache/poi/poifs/filesystem/class-use/DirectoryEntry.html#org.apache.poi.poifs.filesystem"><B>DirectoryEntry</B></A></B>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;This interface defines methods specific to Directory objects
+ managed by a Filesystem instance.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><B><A HREF="../../../../../org/apache/poi/poifs/filesystem/class-use/DirectoryNode.html#org.apache.poi.poifs.filesystem"><B>DirectoryNode</B></A></B>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Simple implementation of DirectoryEntry</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><B><A HREF="../../../../../org/apache/poi/poifs/filesystem/class-use/DocumentEntry.html#org.apache.poi.poifs.filesystem"><B>DocumentEntry</B></A></B>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;This interface defines methods specific to Document objects
+ managed by a Filesystem instance.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><B><A HREF="../../../../../org/apache/poi/poifs/filesystem/class-use/DocumentInputStream.html#org.apache.poi.poifs.filesystem"><B>DocumentInputStream</B></A></B>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;This class provides methods to read a DocumentEntry managed by a
+  <A HREF="../../../../../org/apache/poi/poifs/filesystem/POIFSFileSystem.html" title="class in org.apache.poi.poifs.filesystem"><CODE>POIFSFileSystem</CODE></A> or <A HREF="../../../../../org/apache/poi/poifs/filesystem/NPOIFSFileSystem.html" title="class in org.apache.poi.poifs.filesystem"><CODE>NPOIFSFileSystem</CODE></A> instance.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><B><A HREF="../../../../../org/apache/poi/poifs/filesystem/class-use/DocumentOutputStream.html#org.apache.poi.poifs.filesystem"><B>DocumentOutputStream</B></A></B>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;This class provides a wrapper over an OutputStream so that Document
+ writers can't accidently go over their size limits</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><B><A HREF="../../../../../org/apache/poi/poifs/filesystem/class-use/Entry.html#org.apache.poi.poifs.filesystem"><B>Entry</B></A></B>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;This interface provides access to an object managed by a Filesystem
+ instance.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><B><A HREF="../../../../../org/apache/poi/poifs/filesystem/class-use/EntryNode.html#org.apache.poi.poifs.filesystem"><B>EntryNode</B></A></B>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Abstract implementation of Entry
+
+ Extending classes should override isDocument() or isDirectory(), as
+ appropriate
+
+ Extending classes must override isDeleteOK()</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><B><A HREF="../../../../../org/apache/poi/poifs/filesystem/class-use/FilteringDirectoryNode.html#org.apache.poi.poifs.filesystem"><B>FilteringDirectoryNode</B></A></B>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A DirectoryEntry filter, which exposes another
+  DirectoryEntry less certain parts.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><B><A HREF="../../../../../org/apache/poi/poifs/filesystem/class-use/NPOIFSDocument.html#org.apache.poi.poifs.filesystem"><B>NPOIFSDocument</B></A></B>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;This class manages a document in the NIO POIFS filesystem.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><B><A HREF="../../../../../org/apache/poi/poifs/filesystem/class-use/NPOIFSFileSystem.html#org.apache.poi.poifs.filesystem"><B>NPOIFSFileSystem</B></A></B>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;This is the main class of the POIFS system; it manages the entire
+ life cycle of the filesystem.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><B><A HREF="../../../../../org/apache/poi/poifs/filesystem/class-use/NPOIFSMiniStore.html#org.apache.poi.poifs.filesystem"><B>NPOIFSMiniStore</B></A></B>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;This class handles the MiniStream (small block store)
+  in the NIO case for <A HREF="../../../../../org/apache/poi/poifs/filesystem/NPOIFSFileSystem.html" title="class in org.apache.poi.poifs.filesystem"><CODE>NPOIFSFileSystem</CODE></A></TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><B><A HREF="../../../../../org/apache/poi/poifs/filesystem/class-use/Ole10Native.html#org.apache.poi.poifs.filesystem"><B>Ole10Native</B></A></B>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Represents an Ole10Native record which is wrapped around certain binary
+ files being embedded in OLE2 documents.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><B><A HREF="../../../../../org/apache/poi/poifs/filesystem/class-use/Ole10NativeException.html#org.apache.poi.poifs.filesystem"><B>Ole10NativeException</B></A></B>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><B><A HREF="../../../../../org/apache/poi/poifs/filesystem/class-use/POIFSDocument.html#org.apache.poi.poifs.filesystem"><B>POIFSDocument</B></A></B>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;This class manages a document in the POIFS filesystem.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><B><A HREF="../../../../../org/apache/poi/poifs/filesystem/class-use/POIFSDocumentPath.html#org.apache.poi.poifs.filesystem"><B>POIFSDocumentPath</B></A></B>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Class POIFSDocumentPath</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><B><A HREF="../../../../../org/apache/poi/poifs/filesystem/class-use/POIFSFileSystem.html#org.apache.poi.poifs.filesystem"><B>POIFSFileSystem</B></A></B>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;This is the main class of the POIFS system; it manages the entire
+ life cycle of the filesystem.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><B><A HREF="../../../../../org/apache/poi/poifs/filesystem/class-use/POIFSWriterEvent.html#org.apache.poi.poifs.filesystem"><B>POIFSWriterEvent</B></A></B>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Class POIFSWriterEvent</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><B><A HREF="../../../../../org/apache/poi/poifs/filesystem/class-use/POIFSWriterListener.html#org.apache.poi.poifs.filesystem"><B>POIFSWriterListener</B></A></B>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Interface POIFSWriterListener</TD>
+</TR>
+</TABLE>
+&nbsp;
+<P>
+<A NAME="org.apache.poi.poifs.property"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+Classes in <A HREF="../../../../../org/apache/poi/poifs/filesystem/package-summary.html">org.apache.poi.poifs.filesystem</A> used by <A HREF="../../../../../org/apache/poi/poifs/property/package-summary.html">org.apache.poi.poifs.property</A></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><B><A HREF="../../../../../org/apache/poi/poifs/filesystem/class-use/BATManaged.html#org.apache.poi.poifs.property"><B>BATManaged</B></A></B>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;This interface defines behaviors for objects managed by the Block
+ Allocation Table (BAT).</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><B><A HREF="../../../../../org/apache/poi/poifs/filesystem/class-use/NPOIFSFileSystem.html#org.apache.poi.poifs.property"><B>NPOIFSFileSystem</B></A></B>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;This is the main class of the POIFS system; it manages the entire
+ life cycle of the filesystem.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><B><A HREF="../../../../../org/apache/poi/poifs/filesystem/class-use/NPOIFSStream.html#org.apache.poi.poifs.property"><B>NPOIFSStream</B></A></B>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;This handles reading and writing a stream within a
+  <A HREF="../../../../../org/apache/poi/poifs/filesystem/NPOIFSFileSystem.html" title="class in org.apache.poi.poifs.filesystem"><CODE>NPOIFSFileSystem</CODE></A>.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><B><A HREF="../../../../../org/apache/poi/poifs/filesystem/class-use/POIFSDocument.html#org.apache.poi.poifs.property"><B>POIFSDocument</B></A></B>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;This class manages a document in the POIFS filesystem.</TD>
+</TR>
+</TABLE>
+&nbsp;
+<P>
+<A NAME="org.apache.poi.poifs.storage"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+Classes in <A HREF="../../../../../org/apache/poi/poifs/filesystem/package-summary.html">org.apache.poi.poifs.filesystem</A> used by <A HREF="../../../../../org/apache/poi/poifs/storage/package-summary.html">org.apache.poi.poifs.storage</A></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><B><A HREF="../../../../../org/apache/poi/poifs/filesystem/class-use/BATManaged.html#org.apache.poi.poifs.storage"><B>BATManaged</B></A></B>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;This interface defines behaviors for objects managed by the Block
+ Allocation Table (BAT).</TD>
+</TR>
+</TABLE>
+&nbsp;
+<P>
+<A NAME="org.apache.poi.ss.usermodel"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+Classes in <A HREF="../../../../../org/apache/poi/poifs/filesystem/package-summary.html">org.apache.poi.poifs.filesystem</A> used by <A HREF="../../../../../org/apache/poi/ss/usermodel/package-summary.html">org.apache.poi.ss.usermodel</A></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><B><A HREF="../../../../../org/apache/poi/poifs/filesystem/class-use/NPOIFSFileSystem.html#org.apache.poi.ss.usermodel"><B>NPOIFSFileSystem</B></A></B>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;This is the main class of the POIFS system; it manages the entire
+ life cycle of the filesystem.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><B><A HREF="../../../../../org/apache/poi/poifs/filesystem/class-use/POIFSFileSystem.html#org.apache.poi.ss.usermodel"><B>POIFSFileSystem</B></A></B>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;This is the main class of the POIFS system; it manages the entire
+ life cycle of the filesystem.</TD>
+</TR>
+</TABLE>
+&nbsp;
+<P>
+<HR>
+
+
+<!-- ======= START OF BOTTOM NAVBAR ====== -->
+<A NAME="navbar_bottom"><!-- --></A>
+<A HREF="#skip-navbar_bottom" title="Skip navigation links"></A>
+<TABLE BORDER="0" WIDTH="100%" CELLPADDING="1" CELLSPACING="0" SUMMARY="">
+<TR>
+<TD COLSPAN=2 BGCOLOR="#EEEEFF" CLASS="NavBarCell1">
+<A NAME="navbar_bottom_firstrow"><!-- --></A>
+<TABLE BORDER="0" CELLPADDING="0" CELLSPACING="3" SUMMARY="">
+  <TR ALIGN="center" VALIGN="top">
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../overview-summary.html"><FONT CLASS="NavBarFont1"><B>Overview</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="package-summary.html"><FONT CLASS="NavBarFont1"><B>Package</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <FONT CLASS="NavBarFont1">Class</FONT>&nbsp;</TD>
+  <TD BGCOLOR="#FFFFFF" CLASS="NavBarCell1Rev"> &nbsp;<FONT CLASS="NavBarFont1Rev"><B>Use</B></FONT>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="package-tree.html"><FONT CLASS="NavBarFont1"><B>Tree</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../deprecated-list.html"><FONT CLASS="NavBarFont1"><B>Deprecated</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../index-all.html"><FONT CLASS="NavBarFont1"><B>Index</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../help-doc.html"><FONT CLASS="NavBarFont1"><B>Help</B></FONT></A>&nbsp;</TD>
+  </TR>
+</TABLE>
+</TD>
+<TD ALIGN="right" VALIGN="top" ROWSPAN=3><EM>
+</EM>
+</TD>
+</TR>
+
+<TR>
+<TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
+&nbsp;PREV&nbsp;
+&nbsp;NEXT</FONT></TD>
+<TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
+  <A HREF="../../../../../index.html?org/apache/poi/poifs/filesystem/package-use.html" target="_top"><B>FRAMES</B></A>  &nbsp;
+&nbsp;<A HREF="package-use.html" target="_top"><B>NO FRAMES</B></A>  &nbsp;
+&nbsp;<SCRIPT type="text/javascript">
+  <!--
+  if(window==top) {
+    document.writeln('<A HREF="../../../../../allclasses-noframe.html"><B>All Classes</B></A>');
+  }
+  //-->
+</SCRIPT>
+<NOSCRIPT>
+  <A HREF="../../../../../allclasses-noframe.html"><B>All Classes</B></A>
+</NOSCRIPT>
+
+
+</FONT></TD>
+</TR>
+</TABLE>
+<A NAME="skip-navbar_bottom"></A>
+<!-- ======== END OF BOTTOM NAVBAR ======= -->
+
+<HR>
+
+                <i>Copyright 2014 The Apache Software Foundation or
+        its licensors, as applicable.</i>
+            
+</BODY>
+</HTML>

@@ -1,0 +1,1313 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!--NewPage-->
+<HTML>
+<HEAD>
+<TITLE>
+XWPFTable (POI API Documentation)
+</TITLE>
+
+<META NAME="keywords" CONTENT="org.apache.poi.xwpf.usermodel.XWPFTable class">
+
+<LINK REL ="stylesheet" TYPE="text/css" HREF="../../../../../stylesheet.css" TITLE="Style">
+
+<SCRIPT type="text/javascript">
+function windowTitle()
+{
+    parent.document.title="XWPFTable (POI API Documentation)";
+}
+</SCRIPT>
+<NOSCRIPT>
+</NOSCRIPT>
+
+</HEAD>
+
+<BODY BGCOLOR="white" onload="windowTitle();">
+
+
+<!-- ========= START OF TOP NAVBAR ======= -->
+<A NAME="navbar_top"><!-- --></A>
+<A HREF="#skip-navbar_top" title="Skip navigation links"></A>
+<TABLE BORDER="0" WIDTH="100%" CELLPADDING="1" CELLSPACING="0" SUMMARY="">
+<TR>
+<TD COLSPAN=2 BGCOLOR="#EEEEFF" CLASS="NavBarCell1">
+<A NAME="navbar_top_firstrow"><!-- --></A>
+<TABLE BORDER="0" CELLPADDING="0" CELLSPACING="3" SUMMARY="">
+  <TR ALIGN="center" VALIGN="top">
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../overview-summary.html"><FONT CLASS="NavBarFont1"><B>Overview</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="package-summary.html"><FONT CLASS="NavBarFont1"><B>Package</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#FFFFFF" CLASS="NavBarCell1Rev"> &nbsp;<FONT CLASS="NavBarFont1Rev"><B>Class</B></FONT>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="class-use/XWPFTable.html"><FONT CLASS="NavBarFont1"><B>Use</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="package-tree.html"><FONT CLASS="NavBarFont1"><B>Tree</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../deprecated-list.html"><FONT CLASS="NavBarFont1"><B>Deprecated</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../index-all.html"><FONT CLASS="NavBarFont1"><B>Index</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../help-doc.html"><FONT CLASS="NavBarFont1"><B>Help</B></FONT></A>&nbsp;</TD>
+  </TR>
+</TABLE>
+</TD>
+<TD ALIGN="right" VALIGN="top" ROWSPAN=3><EM>
+</EM>
+</TD>
+</TR>
+
+<TR>
+<TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
+&nbsp;<A HREF="../../../../../org/apache/poi/xwpf/usermodel/XWPFStyles.html" title="class in org.apache.poi.xwpf.usermodel"><B>PREV CLASS</B></A>&nbsp;
+&nbsp;<A HREF="../../../../../org/apache/poi/xwpf/usermodel/XWPFTable.XWPFBorderType.html" title="enum in org.apache.poi.xwpf.usermodel"><B>NEXT CLASS</B></A></FONT></TD>
+<TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
+  <A HREF="../../../../../index.html?org/apache/poi/xwpf/usermodel/XWPFTable.html" target="_top"><B>FRAMES</B></A>  &nbsp;
+&nbsp;<A HREF="XWPFTable.html" target="_top"><B>NO FRAMES</B></A>  &nbsp;
+&nbsp;<SCRIPT type="text/javascript">
+  <!--
+  if(window==top) {
+    document.writeln('<A HREF="../../../../../allclasses-noframe.html"><B>All Classes</B></A>');
+  }
+  //-->
+</SCRIPT>
+<NOSCRIPT>
+  <A HREF="../../../../../allclasses-noframe.html"><B>All Classes</B></A>
+</NOSCRIPT>
+
+
+</FONT></TD>
+</TR>
+<TR>
+<TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
+  SUMMARY:&nbsp;<A HREF="#nested_class_summary">NESTED</A>&nbsp;|&nbsp;<A HREF="#field_summary">FIELD</A>&nbsp;|&nbsp;<A HREF="#constructor_summary">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_summary">METHOD</A></FONT></TD>
+<TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
+DETAIL:&nbsp;<A HREF="#field_detail">FIELD</A>&nbsp;|&nbsp;<A HREF="#constructor_detail">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_detail">METHOD</A></FONT></TD>
+</TR>
+</TABLE>
+<A NAME="skip-navbar_top"></A>
+<!-- ========= END OF TOP NAVBAR ========= -->
+
+<HR>
+<!-- ======== START OF CLASS DATA ======== -->
+<H2>
+<FONT SIZE="-1">
+org.apache.poi.xwpf.usermodel</FONT>
+<BR>
+Class XWPFTable</H2>
+<PRE>
+java.lang.Object
+  <IMG SRC="../../../../../resources/inherit.gif" ALT="extended by "><B>org.apache.poi.xwpf.usermodel.XWPFTable</B>
+</PRE>
+<DL>
+<DT><B>All Implemented Interfaces:</B> <DD><A HREF="../../../../../org/apache/poi/xwpf/usermodel/IBodyElement.html" title="interface in org.apache.poi.xwpf.usermodel">IBodyElement</A>, <A HREF="../../../../../org/apache/poi/xwpf/usermodel/ISDTContents.html" title="interface in org.apache.poi.xwpf.usermodel">ISDTContents</A></DD>
+</DL>
+<HR>
+<DL>
+<DT><PRE>public class <B>XWPFTable</B><DT>extends java.lang.Object<DT>implements <A HREF="../../../../../org/apache/poi/xwpf/usermodel/IBodyElement.html" title="interface in org.apache.poi.xwpf.usermodel">IBodyElement</A>, <A HREF="../../../../../org/apache/poi/xwpf/usermodel/ISDTContents.html" title="interface in org.apache.poi.xwpf.usermodel">ISDTContents</A></DL>
+</PRE>
+
+<P>
+<p>Sketch of XWPFTable class. Only table's text is being hold.</p>
+ <p>Specifies the contents of a table present in the document. A table is a set
+ of paragraphs (and other block-level content) arranged in rows and columns.</p>
+<P>
+
+<P>
+<HR>
+
+<P>
+<!-- ======== NESTED CLASS SUMMARY ======== -->
+
+<A NAME="nested_class_summary"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+<B>Nested Class Summary</B></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;class</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xwpf/usermodel/XWPFTable.XWPFBorderType.html" title="enum in org.apache.poi.xwpf.usermodel">XWPFTable.XWPFBorderType</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+</TABLE>
+&nbsp;<!-- =========== FIELD SUMMARY =========== -->
+
+<A NAME="field_summary"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+<B>Field Summary</B></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>protected &nbsp;<A HREF="../../../../../org/apache/poi/xwpf/usermodel/IBody.html" title="interface in org.apache.poi.xwpf.usermodel">IBody</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xwpf/usermodel/XWPFTable.html#part">part</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>protected &nbsp;java.util.List&lt;java.lang.String&gt;</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xwpf/usermodel/XWPFTable.html#styleIDs">styleIDs</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>protected &nbsp;java.util.List&lt;<A HREF="../../../../../org/apache/poi/xwpf/usermodel/XWPFTableRow.html" title="class in org.apache.poi.xwpf.usermodel">XWPFTableRow</A>&gt;</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xwpf/usermodel/XWPFTable.html#tableRows">tableRows</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>protected &nbsp;java.lang.StringBuffer</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xwpf/usermodel/XWPFTable.html#text">text</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+</TABLE>
+&nbsp;
+<!-- ======== CONSTRUCTOR SUMMARY ======== -->
+
+<A NAME="constructor_summary"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+<B>Constructor Summary</B></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xwpf/usermodel/XWPFTable.html#XWPFTable(org.openxmlformats.schemas.wordprocessingml.x2006.main.CTTbl, org.apache.poi.xwpf.usermodel.IBody)">XWPFTable</A></B>(org.openxmlformats.schemas.wordprocessingml.x2006.main.CTTbl&nbsp;table,
+          <A HREF="../../../../../org/apache/poi/xwpf/usermodel/IBody.html" title="interface in org.apache.poi.xwpf.usermodel">IBody</A>&nbsp;part)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xwpf/usermodel/XWPFTable.html#XWPFTable(org.openxmlformats.schemas.wordprocessingml.x2006.main.CTTbl, org.apache.poi.xwpf.usermodel.IBody, int, int)">XWPFTable</A></B>(org.openxmlformats.schemas.wordprocessingml.x2006.main.CTTbl&nbsp;table,
+          <A HREF="../../../../../org/apache/poi/xwpf/usermodel/IBody.html" title="interface in org.apache.poi.xwpf.usermodel">IBody</A>&nbsp;part,
+          int&nbsp;row,
+          int&nbsp;col)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+</TABLE>
+&nbsp;
+<!-- ========== METHOD SUMMARY =========== -->
+
+<A NAME="method_summary"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+<B>Method Summary</B></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xwpf/usermodel/XWPFTable.html#addNewCol()">addNewCol</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;add a new column for each row in this table</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xwpf/usermodel/XWPFTable.html#addNewRowBetween(int, int)">addNewRowBetween</A></B>(int&nbsp;start,
+                 int&nbsp;end)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xwpf/usermodel/XWPFTable.html#addRow(org.apache.poi.xwpf.usermodel.XWPFTableRow)">addRow</A></B>(<A HREF="../../../../../org/apache/poi/xwpf/usermodel/XWPFTableRow.html" title="class in org.apache.poi.xwpf.usermodel">XWPFTableRow</A>&nbsp;row)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;add a new Row to the table</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xwpf/usermodel/XWPFTable.html#addRow(org.apache.poi.xwpf.usermodel.XWPFTableRow, int)">addRow</A></B>(<A HREF="../../../../../org/apache/poi/xwpf/usermodel/XWPFTableRow.html" title="class in org.apache.poi.xwpf.usermodel">XWPFTableRow</A>&nbsp;row,
+       int&nbsp;pos)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;add a new Row to the table
+ at position pos</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../../../org/apache/poi/xwpf/usermodel/XWPFTableRow.html" title="class in org.apache.poi.xwpf.usermodel">XWPFTableRow</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xwpf/usermodel/XWPFTable.html#createRow()">createRow</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;create a new XWPFTableRow object with as many cells as the number of columns defined in that moment</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../../../org/apache/poi/xwpf/usermodel/IBody.html" title="interface in org.apache.poi.xwpf.usermodel">IBody</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xwpf/usermodel/XWPFTable.html#getBody()">getBody</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;int</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xwpf/usermodel/XWPFTable.html#getCellMarginBottom()">getCellMarginBottom</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;int</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xwpf/usermodel/XWPFTable.html#getCellMarginLeft()">getCellMarginLeft</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;int</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xwpf/usermodel/XWPFTable.html#getCellMarginRight()">getCellMarginRight</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;int</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xwpf/usermodel/XWPFTable.html#getCellMarginTop()">getCellMarginTop</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;int</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xwpf/usermodel/XWPFTable.html#getColBandSize()">getColBandSize</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;org.openxmlformats.schemas.wordprocessingml.x2006.main.CTTbl</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xwpf/usermodel/XWPFTable.html#getCTTbl()">getCTTbl</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../../../org/apache/poi/xwpf/usermodel/BodyElementType.html" title="enum in org.apache.poi.xwpf.usermodel">BodyElementType</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xwpf/usermodel/XWPFTable.html#getElementType()">getElementType</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;returns the type of the BodyElement Table</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;java.lang.String</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xwpf/usermodel/XWPFTable.html#getInsideHBorderColor()">getInsideHBorderColor</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;int</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xwpf/usermodel/XWPFTable.html#getInsideHBorderSize()">getInsideHBorderSize</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;int</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xwpf/usermodel/XWPFTable.html#getInsideHBorderSpace()">getInsideHBorderSpace</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../../../org/apache/poi/xwpf/usermodel/XWPFTable.XWPFBorderType.html" title="enum in org.apache.poi.xwpf.usermodel">XWPFTable.XWPFBorderType</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xwpf/usermodel/XWPFTable.html#getInsideHBorderType()">getInsideHBorderType</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;java.lang.String</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xwpf/usermodel/XWPFTable.html#getInsideVBorderColor()">getInsideVBorderColor</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;int</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xwpf/usermodel/XWPFTable.html#getInsideVBorderSize()">getInsideVBorderSize</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;int</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xwpf/usermodel/XWPFTable.html#getInsideVBorderSpace()">getInsideVBorderSpace</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../../../org/apache/poi/xwpf/usermodel/XWPFTable.XWPFBorderType.html" title="enum in org.apache.poi.xwpf.usermodel">XWPFTable.XWPFBorderType</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xwpf/usermodel/XWPFTable.html#getInsideVBorderType()">getInsideVBorderType</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;int</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xwpf/usermodel/XWPFTable.html#getNumberOfRows()">getNumberOfRows</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../../../org/apache/poi/POIXMLDocumentPart.html" title="class in org.apache.poi">POIXMLDocumentPart</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xwpf/usermodel/XWPFTable.html#getPart()">getPart</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;returns the part of the bodyElement</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../../../org/apache/poi/xwpf/usermodel/BodyType.html" title="enum in org.apache.poi.xwpf.usermodel">BodyType</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xwpf/usermodel/XWPFTable.html#getPartType()">getPartType</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;returns the partType of the bodyPart which owns the bodyElement</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../../../org/apache/poi/xwpf/usermodel/XWPFTableRow.html" title="class in org.apache.poi.xwpf.usermodel">XWPFTableRow</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xwpf/usermodel/XWPFTable.html#getRow(org.openxmlformats.schemas.wordprocessingml.x2006.main.CTRow)">getRow</A></B>(org.openxmlformats.schemas.wordprocessingml.x2006.main.CTRow&nbsp;row)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;returns the XWPFRow which belongs to the CTRow row
+ if this row is not existing in the table null will be returned</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../../../org/apache/poi/xwpf/usermodel/XWPFTableRow.html" title="class in org.apache.poi.xwpf.usermodel">XWPFTableRow</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xwpf/usermodel/XWPFTable.html#getRow(int)">getRow</A></B>(int&nbsp;pos)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;int</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xwpf/usermodel/XWPFTable.html#getRowBandSize()">getRowBandSize</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;java.util.List&lt;<A HREF="../../../../../org/apache/poi/xwpf/usermodel/XWPFTableRow.html" title="class in org.apache.poi.xwpf.usermodel">XWPFTableRow</A>&gt;</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xwpf/usermodel/XWPFTable.html#getRows()">getRows</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;java.lang.String</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xwpf/usermodel/XWPFTable.html#getStyleID()">getStyleID</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;get the StyleID of the table</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;java.lang.String</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xwpf/usermodel/XWPFTable.html#getText()">getText</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;int</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xwpf/usermodel/XWPFTable.html#getWidth()">getWidth</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../../../org/apache/poi/xwpf/usermodel/XWPFTableRow.html" title="class in org.apache.poi.xwpf.usermodel">XWPFTableRow</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xwpf/usermodel/XWPFTable.html#insertNewTableRow(int)">insertNewTableRow</A></B>(int&nbsp;pos)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;inserts a new tablerow</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xwpf/usermodel/XWPFTable.html#removeRow(int)">removeRow</A></B>(int&nbsp;pos)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Remove a row at position pos from the table</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xwpf/usermodel/XWPFTable.html#setCellMargins(int, int, int, int)">setCellMargins</A></B>(int&nbsp;top,
+               int&nbsp;left,
+               int&nbsp;bottom,
+               int&nbsp;right)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xwpf/usermodel/XWPFTable.html#setColBandSize(int)">setColBandSize</A></B>(int&nbsp;size)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xwpf/usermodel/XWPFTable.html#setInsideHBorder(org.apache.poi.xwpf.usermodel.XWPFTable.XWPFBorderType, int, int, java.lang.String)">setInsideHBorder</A></B>(<A HREF="../../../../../org/apache/poi/xwpf/usermodel/XWPFTable.XWPFBorderType.html" title="enum in org.apache.poi.xwpf.usermodel">XWPFTable.XWPFBorderType</A>&nbsp;type,
+                 int&nbsp;size,
+                 int&nbsp;space,
+                 java.lang.String&nbsp;rgbColor)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xwpf/usermodel/XWPFTable.html#setInsideVBorder(org.apache.poi.xwpf.usermodel.XWPFTable.XWPFBorderType, int, int, java.lang.String)">setInsideVBorder</A></B>(<A HREF="../../../../../org/apache/poi/xwpf/usermodel/XWPFTable.XWPFBorderType.html" title="enum in org.apache.poi.xwpf.usermodel">XWPFTable.XWPFBorderType</A>&nbsp;type,
+                 int&nbsp;size,
+                 int&nbsp;space,
+                 java.lang.String&nbsp;rgbColor)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xwpf/usermodel/XWPFTable.html#setRowBandSize(int)">setRowBandSize</A></B>(int&nbsp;size)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xwpf/usermodel/XWPFTable.html#setStyleID(java.lang.String)">setStyleID</A></B>(java.lang.String&nbsp;styleName)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Set the table style.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xwpf/usermodel/XWPFTable.html#setWidth(int)">setWidth</A></B>(int&nbsp;width)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+</TABLE>
+&nbsp;<A NAME="methods_inherited_from_class_java.lang.Object"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#EEEEFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left"><B>Methods inherited from class java.lang.Object</B></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE>clone, equals, finalize, getClass, hashCode, notify, notifyAll, toString, wait, wait, wait</CODE></TD>
+</TR>
+</TABLE>
+&nbsp;
+<P>
+
+<!-- ============ FIELD DETAIL =========== -->
+
+<A NAME="field_detail"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="1"><FONT SIZE="+2">
+<B>Field Detail</B></FONT></TH>
+</TR>
+</TABLE>
+
+<A NAME="text"><!-- --></A><H3>
+text</H3>
+<PRE>
+protected java.lang.StringBuffer <B>text</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="tableRows"><!-- --></A><H3>
+tableRows</H3>
+<PRE>
+protected java.util.List&lt;<A HREF="../../../../../org/apache/poi/xwpf/usermodel/XWPFTableRow.html" title="class in org.apache.poi.xwpf.usermodel">XWPFTableRow</A>&gt; <B>tableRows</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="styleIDs"><!-- --></A><H3>
+styleIDs</H3>
+<PRE>
+protected java.util.List&lt;java.lang.String&gt; <B>styleIDs</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="part"><!-- --></A><H3>
+part</H3>
+<PRE>
+protected <A HREF="../../../../../org/apache/poi/xwpf/usermodel/IBody.html" title="interface in org.apache.poi.xwpf.usermodel">IBody</A> <B>part</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+
+<!-- ========= CONSTRUCTOR DETAIL ======== -->
+
+<A NAME="constructor_detail"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="1"><FONT SIZE="+2">
+<B>Constructor Detail</B></FONT></TH>
+</TR>
+</TABLE>
+
+<A NAME="XWPFTable(org.openxmlformats.schemas.wordprocessingml.x2006.main.CTTbl, org.apache.poi.xwpf.usermodel.IBody, int, int)"><!-- --></A><H3>
+XWPFTable</H3>
+<PRE>
+public <B>XWPFTable</B>(org.openxmlformats.schemas.wordprocessingml.x2006.main.CTTbl&nbsp;table,
+                 <A HREF="../../../../../org/apache/poi/xwpf/usermodel/IBody.html" title="interface in org.apache.poi.xwpf.usermodel">IBody</A>&nbsp;part,
+                 int&nbsp;row,
+                 int&nbsp;col)</PRE>
+<DL>
+</DL>
+<HR>
+
+<A NAME="XWPFTable(org.openxmlformats.schemas.wordprocessingml.x2006.main.CTTbl, org.apache.poi.xwpf.usermodel.IBody)"><!-- --></A><H3>
+XWPFTable</H3>
+<PRE>
+public <B>XWPFTable</B>(org.openxmlformats.schemas.wordprocessingml.x2006.main.CTTbl&nbsp;table,
+                 <A HREF="../../../../../org/apache/poi/xwpf/usermodel/IBody.html" title="interface in org.apache.poi.xwpf.usermodel">IBody</A>&nbsp;part)</PRE>
+<DL>
+</DL>
+
+<!-- ============ METHOD DETAIL ========== -->
+
+<A NAME="method_detail"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="1"><FONT SIZE="+2">
+<B>Method Detail</B></FONT></TH>
+</TR>
+</TABLE>
+
+<A NAME="getCTTbl()"><!-- --></A><H3>
+getCTTbl</H3>
+<PRE>
+<FONT SIZE="-1"><A HREF="../../../../../org/apache/poi/util/Internal.html" title="annotation in org.apache.poi.util">@Internal</A>
+</FONT>public org.openxmlformats.schemas.wordprocessingml.x2006.main.CTTbl <B>getCTTbl</B>()</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+
+<DT><B>Returns:</B><DD>ctTbl object</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getText()"><!-- --></A><H3>
+getText</H3>
+<PRE>
+public java.lang.String <B>getText</B>()</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+
+<DT><B>Returns:</B><DD>text</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="addNewRowBetween(int, int)"><!-- --></A><H3>
+addNewRowBetween</H3>
+<PRE>
+public void <B>addNewRowBetween</B>(int&nbsp;start,
+                             int&nbsp;end)</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="addNewCol()"><!-- --></A><H3>
+addNewCol</H3>
+<PRE>
+public void <B>addNewCol</B>()</PRE>
+<DL>
+<DD>add a new column for each row in this table
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="createRow()"><!-- --></A><H3>
+createRow</H3>
+<PRE>
+public <A HREF="../../../../../org/apache/poi/xwpf/usermodel/XWPFTableRow.html" title="class in org.apache.poi.xwpf.usermodel">XWPFTableRow</A> <B>createRow</B>()</PRE>
+<DL>
+<DD>create a new XWPFTableRow object with as many cells as the number of columns defined in that moment
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+
+<DT><B>Returns:</B><DD>tableRow</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getRow(int)"><!-- --></A><H3>
+getRow</H3>
+<PRE>
+public <A HREF="../../../../../org/apache/poi/xwpf/usermodel/XWPFTableRow.html" title="class in org.apache.poi.xwpf.usermodel">XWPFTableRow</A> <B>getRow</B>(int&nbsp;pos)</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>pos</CODE> - - index of the row
+<DT><B>Returns:</B><DD>the row at the position specified or null if no rows is defined or if the position is greather than the max size of rows array</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setWidth(int)"><!-- --></A><H3>
+setWidth</H3>
+<PRE>
+public void <B>setWidth</B>(int&nbsp;width)</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>width</CODE> - </DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getWidth()"><!-- --></A><H3>
+getWidth</H3>
+<PRE>
+public int <B>getWidth</B>()</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+
+<DT><B>Returns:</B><DD>width value</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getNumberOfRows()"><!-- --></A><H3>
+getNumberOfRows</H3>
+<PRE>
+public int <B>getNumberOfRows</B>()</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+
+<DT><B>Returns:</B><DD>number of rows in table</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getStyleID()"><!-- --></A><H3>
+getStyleID</H3>
+<PRE>
+public java.lang.String <B>getStyleID</B>()</PRE>
+<DL>
+<DD>get the StyleID of the table
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+
+<DT><B>Returns:</B><DD>style-ID of the table</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setStyleID(java.lang.String)"><!-- --></A><H3>
+setStyleID</H3>
+<PRE>
+public void <B>setStyleID</B>(java.lang.String&nbsp;styleName)</PRE>
+<DL>
+<DD>Set the table style. If the style is not defined in the document, MS Word
+ will set the table style to "Normal".
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>styleName</CODE> - - the style name to apply to this table</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getInsideHBorderType()"><!-- --></A><H3>
+getInsideHBorderType</H3>
+<PRE>
+public <A HREF="../../../../../org/apache/poi/xwpf/usermodel/XWPFTable.XWPFBorderType.html" title="enum in org.apache.poi.xwpf.usermodel">XWPFTable.XWPFBorderType</A> <B>getInsideHBorderType</B>()</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getInsideHBorderSize()"><!-- --></A><H3>
+getInsideHBorderSize</H3>
+<PRE>
+public int <B>getInsideHBorderSize</B>()</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getInsideHBorderSpace()"><!-- --></A><H3>
+getInsideHBorderSpace</H3>
+<PRE>
+public int <B>getInsideHBorderSpace</B>()</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getInsideHBorderColor()"><!-- --></A><H3>
+getInsideHBorderColor</H3>
+<PRE>
+public java.lang.String <B>getInsideHBorderColor</B>()</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getInsideVBorderType()"><!-- --></A><H3>
+getInsideVBorderType</H3>
+<PRE>
+public <A HREF="../../../../../org/apache/poi/xwpf/usermodel/XWPFTable.XWPFBorderType.html" title="enum in org.apache.poi.xwpf.usermodel">XWPFTable.XWPFBorderType</A> <B>getInsideVBorderType</B>()</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getInsideVBorderSize()"><!-- --></A><H3>
+getInsideVBorderSize</H3>
+<PRE>
+public int <B>getInsideVBorderSize</B>()</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getInsideVBorderSpace()"><!-- --></A><H3>
+getInsideVBorderSpace</H3>
+<PRE>
+public int <B>getInsideVBorderSpace</B>()</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getInsideVBorderColor()"><!-- --></A><H3>
+getInsideVBorderColor</H3>
+<PRE>
+public java.lang.String <B>getInsideVBorderColor</B>()</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getRowBandSize()"><!-- --></A><H3>
+getRowBandSize</H3>
+<PRE>
+public int <B>getRowBandSize</B>()</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setRowBandSize(int)"><!-- --></A><H3>
+setRowBandSize</H3>
+<PRE>
+public void <B>setRowBandSize</B>(int&nbsp;size)</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getColBandSize()"><!-- --></A><H3>
+getColBandSize</H3>
+<PRE>
+public int <B>getColBandSize</B>()</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setColBandSize(int)"><!-- --></A><H3>
+setColBandSize</H3>
+<PRE>
+public void <B>setColBandSize</B>(int&nbsp;size)</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setInsideHBorder(org.apache.poi.xwpf.usermodel.XWPFTable.XWPFBorderType, int, int, java.lang.String)"><!-- --></A><H3>
+setInsideHBorder</H3>
+<PRE>
+public void <B>setInsideHBorder</B>(<A HREF="../../../../../org/apache/poi/xwpf/usermodel/XWPFTable.XWPFBorderType.html" title="enum in org.apache.poi.xwpf.usermodel">XWPFTable.XWPFBorderType</A>&nbsp;type,
+                             int&nbsp;size,
+                             int&nbsp;space,
+                             java.lang.String&nbsp;rgbColor)</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setInsideVBorder(org.apache.poi.xwpf.usermodel.XWPFTable.XWPFBorderType, int, int, java.lang.String)"><!-- --></A><H3>
+setInsideVBorder</H3>
+<PRE>
+public void <B>setInsideVBorder</B>(<A HREF="../../../../../org/apache/poi/xwpf/usermodel/XWPFTable.XWPFBorderType.html" title="enum in org.apache.poi.xwpf.usermodel">XWPFTable.XWPFBorderType</A>&nbsp;type,
+                             int&nbsp;size,
+                             int&nbsp;space,
+                             java.lang.String&nbsp;rgbColor)</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getCellMarginTop()"><!-- --></A><H3>
+getCellMarginTop</H3>
+<PRE>
+public int <B>getCellMarginTop</B>()</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getCellMarginLeft()"><!-- --></A><H3>
+getCellMarginLeft</H3>
+<PRE>
+public int <B>getCellMarginLeft</B>()</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getCellMarginBottom()"><!-- --></A><H3>
+getCellMarginBottom</H3>
+<PRE>
+public int <B>getCellMarginBottom</B>()</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getCellMarginRight()"><!-- --></A><H3>
+getCellMarginRight</H3>
+<PRE>
+public int <B>getCellMarginRight</B>()</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setCellMargins(int, int, int, int)"><!-- --></A><H3>
+setCellMargins</H3>
+<PRE>
+public void <B>setCellMargins</B>(int&nbsp;top,
+                           int&nbsp;left,
+                           int&nbsp;bottom,
+                           int&nbsp;right)</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="addRow(org.apache.poi.xwpf.usermodel.XWPFTableRow)"><!-- --></A><H3>
+addRow</H3>
+<PRE>
+public void <B>addRow</B>(<A HREF="../../../../../org/apache/poi/xwpf/usermodel/XWPFTableRow.html" title="class in org.apache.poi.xwpf.usermodel">XWPFTableRow</A>&nbsp;row)</PRE>
+<DL>
+<DD>add a new Row to the table
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>row</CODE> - the row which should be added</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="addRow(org.apache.poi.xwpf.usermodel.XWPFTableRow, int)"><!-- --></A><H3>
+addRow</H3>
+<PRE>
+public boolean <B>addRow</B>(<A HREF="../../../../../org/apache/poi/xwpf/usermodel/XWPFTableRow.html" title="class in org.apache.poi.xwpf.usermodel">XWPFTableRow</A>&nbsp;row,
+                      int&nbsp;pos)</PRE>
+<DL>
+<DD>add a new Row to the table
+ at position pos
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>row</CODE> - the row which should be added</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="insertNewTableRow(int)"><!-- --></A><H3>
+insertNewTableRow</H3>
+<PRE>
+public <A HREF="../../../../../org/apache/poi/xwpf/usermodel/XWPFTableRow.html" title="class in org.apache.poi.xwpf.usermodel">XWPFTableRow</A> <B>insertNewTableRow</B>(int&nbsp;pos)</PRE>
+<DL>
+<DD>inserts a new tablerow
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>pos</CODE> - 
+<DT><B>Returns:</B><DD>the inserted row</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="removeRow(int)"><!-- --></A><H3>
+removeRow</H3>
+<PRE>
+public boolean <B>removeRow</B>(int&nbsp;pos)
+                  throws java.lang.IndexOutOfBoundsException</PRE>
+<DL>
+<DD>Remove a row at position pos from the table
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>pos</CODE> - position the Row in the Table
+<DT><B>Throws:</B>
+<DD><CODE>java.lang.IndexOutOfBoundsException</CODE></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getRows()"><!-- --></A><H3>
+getRows</H3>
+<PRE>
+public java.util.List&lt;<A HREF="../../../../../org/apache/poi/xwpf/usermodel/XWPFTableRow.html" title="class in org.apache.poi.xwpf.usermodel">XWPFTableRow</A>&gt; <B>getRows</B>()</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getElementType()"><!-- --></A><H3>
+getElementType</H3>
+<PRE>
+public <A HREF="../../../../../org/apache/poi/xwpf/usermodel/BodyElementType.html" title="enum in org.apache.poi.xwpf.usermodel">BodyElementType</A> <B>getElementType</B>()</PRE>
+<DL>
+<DD>returns the type of the BodyElement Table
+<P>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../../../../org/apache/poi/xwpf/usermodel/IBodyElement.html#getElementType()">getElementType</A></CODE> in interface <CODE><A HREF="../../../../../org/apache/poi/xwpf/usermodel/IBodyElement.html" title="interface in org.apache.poi.xwpf.usermodel">IBodyElement</A></CODE></DL>
+</DD>
+<DD><DL>
+<DT><B>See Also:</B><DD><A HREF="../../../../../org/apache/poi/xwpf/usermodel/IBodyElement.html#getElementType()"><CODE>IBodyElement.getElementType()</CODE></A></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getBody()"><!-- --></A><H3>
+getBody</H3>
+<PRE>
+public <A HREF="../../../../../org/apache/poi/xwpf/usermodel/IBody.html" title="interface in org.apache.poi.xwpf.usermodel">IBody</A> <B>getBody</B>()</PRE>
+<DL>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../../../../org/apache/poi/xwpf/usermodel/IBodyElement.html#getBody()">getBody</A></CODE> in interface <CODE><A HREF="../../../../../org/apache/poi/xwpf/usermodel/IBodyElement.html" title="interface in org.apache.poi.xwpf.usermodel">IBodyElement</A></CODE></DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getPart()"><!-- --></A><H3>
+getPart</H3>
+<PRE>
+public <A HREF="../../../../../org/apache/poi/POIXMLDocumentPart.html" title="class in org.apache.poi">POIXMLDocumentPart</A> <B>getPart</B>()</PRE>
+<DL>
+<DD>returns the part of the bodyElement
+<P>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../../../../org/apache/poi/xwpf/usermodel/IBodyElement.html#getPart()">getPart</A></CODE> in interface <CODE><A HREF="../../../../../org/apache/poi/xwpf/usermodel/IBodyElement.html" title="interface in org.apache.poi.xwpf.usermodel">IBodyElement</A></CODE></DL>
+</DD>
+<DD><DL>
+<DT><B>See Also:</B><DD><A HREF="../../../../../org/apache/poi/xwpf/usermodel/IBody.html#getPart()"><CODE>IBody.getPart()</CODE></A></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getPartType()"><!-- --></A><H3>
+getPartType</H3>
+<PRE>
+public <A HREF="../../../../../org/apache/poi/xwpf/usermodel/BodyType.html" title="enum in org.apache.poi.xwpf.usermodel">BodyType</A> <B>getPartType</B>()</PRE>
+<DL>
+<DD>returns the partType of the bodyPart which owns the bodyElement
+<P>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../../../../org/apache/poi/xwpf/usermodel/IBodyElement.html#getPartType()">getPartType</A></CODE> in interface <CODE><A HREF="../../../../../org/apache/poi/xwpf/usermodel/IBodyElement.html" title="interface in org.apache.poi.xwpf.usermodel">IBodyElement</A></CODE></DL>
+</DD>
+<DD><DL>
+<DT><B>See Also:</B><DD><A HREF="../../../../../org/apache/poi/xwpf/usermodel/IBody.html#getPartType()"><CODE>IBody.getPartType()</CODE></A></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getRow(org.openxmlformats.schemas.wordprocessingml.x2006.main.CTRow)"><!-- --></A><H3>
+getRow</H3>
+<PRE>
+public <A HREF="../../../../../org/apache/poi/xwpf/usermodel/XWPFTableRow.html" title="class in org.apache.poi.xwpf.usermodel">XWPFTableRow</A> <B>getRow</B>(org.openxmlformats.schemas.wordprocessingml.x2006.main.CTRow&nbsp;row)</PRE>
+<DL>
+<DD>returns the XWPFRow which belongs to the CTRow row
+ if this row is not existing in the table null will be returned
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<!-- ========= END OF CLASS DATA ========= -->
+<HR>
+
+
+<!-- ======= START OF BOTTOM NAVBAR ====== -->
+<A NAME="navbar_bottom"><!-- --></A>
+<A HREF="#skip-navbar_bottom" title="Skip navigation links"></A>
+<TABLE BORDER="0" WIDTH="100%" CELLPADDING="1" CELLSPACING="0" SUMMARY="">
+<TR>
+<TD COLSPAN=2 BGCOLOR="#EEEEFF" CLASS="NavBarCell1">
+<A NAME="navbar_bottom_firstrow"><!-- --></A>
+<TABLE BORDER="0" CELLPADDING="0" CELLSPACING="3" SUMMARY="">
+  <TR ALIGN="center" VALIGN="top">
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../overview-summary.html"><FONT CLASS="NavBarFont1"><B>Overview</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="package-summary.html"><FONT CLASS="NavBarFont1"><B>Package</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#FFFFFF" CLASS="NavBarCell1Rev"> &nbsp;<FONT CLASS="NavBarFont1Rev"><B>Class</B></FONT>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="class-use/XWPFTable.html"><FONT CLASS="NavBarFont1"><B>Use</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="package-tree.html"><FONT CLASS="NavBarFont1"><B>Tree</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../deprecated-list.html"><FONT CLASS="NavBarFont1"><B>Deprecated</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../index-all.html"><FONT CLASS="NavBarFont1"><B>Index</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../help-doc.html"><FONT CLASS="NavBarFont1"><B>Help</B></FONT></A>&nbsp;</TD>
+  </TR>
+</TABLE>
+</TD>
+<TD ALIGN="right" VALIGN="top" ROWSPAN=3><EM>
+</EM>
+</TD>
+</TR>
+
+<TR>
+<TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
+&nbsp;<A HREF="../../../../../org/apache/poi/xwpf/usermodel/XWPFStyles.html" title="class in org.apache.poi.xwpf.usermodel"><B>PREV CLASS</B></A>&nbsp;
+&nbsp;<A HREF="../../../../../org/apache/poi/xwpf/usermodel/XWPFTable.XWPFBorderType.html" title="enum in org.apache.poi.xwpf.usermodel"><B>NEXT CLASS</B></A></FONT></TD>
+<TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
+  <A HREF="../../../../../index.html?org/apache/poi/xwpf/usermodel/XWPFTable.html" target="_top"><B>FRAMES</B></A>  &nbsp;
+&nbsp;<A HREF="XWPFTable.html" target="_top"><B>NO FRAMES</B></A>  &nbsp;
+&nbsp;<SCRIPT type="text/javascript">
+  <!--
+  if(window==top) {
+    document.writeln('<A HREF="../../../../../allclasses-noframe.html"><B>All Classes</B></A>');
+  }
+  //-->
+</SCRIPT>
+<NOSCRIPT>
+  <A HREF="../../../../../allclasses-noframe.html"><B>All Classes</B></A>
+</NOSCRIPT>
+
+
+</FONT></TD>
+</TR>
+<TR>
+<TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
+  SUMMARY:&nbsp;<A HREF="#nested_class_summary">NESTED</A>&nbsp;|&nbsp;<A HREF="#field_summary">FIELD</A>&nbsp;|&nbsp;<A HREF="#constructor_summary">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_summary">METHOD</A></FONT></TD>
+<TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
+DETAIL:&nbsp;<A HREF="#field_detail">FIELD</A>&nbsp;|&nbsp;<A HREF="#constructor_detail">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_detail">METHOD</A></FONT></TD>
+</TR>
+</TABLE>
+<A NAME="skip-navbar_bottom"></A>
+<!-- ======== END OF BOTTOM NAVBAR ======= -->
+
+<HR>
+
+                <i>Copyright 2014 The Apache Software Foundation or
+        its licensors, as applicable.</i>
+            
+</BODY>
+</HTML>

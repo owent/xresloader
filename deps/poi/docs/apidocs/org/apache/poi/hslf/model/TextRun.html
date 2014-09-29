@@ -1,0 +1,1020 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!--NewPage-->
+<HTML>
+<HEAD>
+<TITLE>
+TextRun (POI API Documentation)
+</TITLE>
+
+<META NAME="keywords" CONTENT="org.apache.poi.hslf.model.TextRun class">
+
+<LINK REL ="stylesheet" TYPE="text/css" HREF="../../../../../stylesheet.css" TITLE="Style">
+
+<SCRIPT type="text/javascript">
+function windowTitle()
+{
+    parent.document.title="TextRun (POI API Documentation)";
+}
+</SCRIPT>
+<NOSCRIPT>
+</NOSCRIPT>
+
+</HEAD>
+
+<BODY BGCOLOR="white" onload="windowTitle();">
+
+
+<!-- ========= START OF TOP NAVBAR ======= -->
+<A NAME="navbar_top"><!-- --></A>
+<A HREF="#skip-navbar_top" title="Skip navigation links"></A>
+<TABLE BORDER="0" WIDTH="100%" CELLPADDING="1" CELLSPACING="0" SUMMARY="">
+<TR>
+<TD COLSPAN=2 BGCOLOR="#EEEEFF" CLASS="NavBarCell1">
+<A NAME="navbar_top_firstrow"><!-- --></A>
+<TABLE BORDER="0" CELLPADDING="0" CELLSPACING="3" SUMMARY="">
+  <TR ALIGN="center" VALIGN="top">
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../overview-summary.html"><FONT CLASS="NavBarFont1"><B>Overview</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="package-summary.html"><FONT CLASS="NavBarFont1"><B>Package</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#FFFFFF" CLASS="NavBarCell1Rev"> &nbsp;<FONT CLASS="NavBarFont1Rev"><B>Class</B></FONT>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="class-use/TextRun.html"><FONT CLASS="NavBarFont1"><B>Use</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="package-tree.html"><FONT CLASS="NavBarFont1"><B>Tree</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../deprecated-list.html"><FONT CLASS="NavBarFont1"><B>Deprecated</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../index-all.html"><FONT CLASS="NavBarFont1"><B>Index</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../help-doc.html"><FONT CLASS="NavBarFont1"><B>Help</B></FONT></A>&nbsp;</TD>
+  </TR>
+</TABLE>
+</TD>
+<TD ALIGN="right" VALIGN="top" ROWSPAN=3><EM>
+</EM>
+</TD>
+</TR>
+
+<TR>
+<TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
+&nbsp;<A HREF="../../../../../org/apache/poi/hslf/model/TextPainter.TextElement.html" title="class in org.apache.poi.hslf.model"><B>PREV CLASS</B></A>&nbsp;
+&nbsp;<A HREF="../../../../../org/apache/poi/hslf/model/TextShape.html" title="class in org.apache.poi.hslf.model"><B>NEXT CLASS</B></A></FONT></TD>
+<TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
+  <A HREF="../../../../../index.html?org/apache/poi/hslf/model/TextRun.html" target="_top"><B>FRAMES</B></A>  &nbsp;
+&nbsp;<A HREF="TextRun.html" target="_top"><B>NO FRAMES</B></A>  &nbsp;
+&nbsp;<SCRIPT type="text/javascript">
+  <!--
+  if(window==top) {
+    document.writeln('<A HREF="../../../../../allclasses-noframe.html"><B>All Classes</B></A>');
+  }
+  //-->
+</SCRIPT>
+<NOSCRIPT>
+  <A HREF="../../../../../allclasses-noframe.html"><B>All Classes</B></A>
+</NOSCRIPT>
+
+
+</FONT></TD>
+</TR>
+<TR>
+<TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
+  SUMMARY:&nbsp;NESTED&nbsp;|&nbsp;<A HREF="#field_summary">FIELD</A>&nbsp;|&nbsp;<A HREF="#constructor_summary">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_summary">METHOD</A></FONT></TD>
+<TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
+DETAIL:&nbsp;<A HREF="#field_detail">FIELD</A>&nbsp;|&nbsp;<A HREF="#constructor_detail">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_detail">METHOD</A></FONT></TD>
+</TR>
+</TABLE>
+<A NAME="skip-navbar_top"></A>
+<!-- ========= END OF TOP NAVBAR ========= -->
+
+<HR>
+<!-- ======== START OF CLASS DATA ======== -->
+<H2>
+<FONT SIZE="-1">
+org.apache.poi.hslf.model</FONT>
+<BR>
+Class TextRun</H2>
+<PRE>
+java.lang.Object
+  <IMG SRC="../../../../../resources/inherit.gif" ALT="extended by "><B>org.apache.poi.hslf.model.TextRun</B>
+</PRE>
+<HR>
+<DL>
+<DT><PRE>public final class <B>TextRun</B><DT>extends java.lang.Object</DL>
+</PRE>
+
+<P>
+This class represents a run of text in a powerpoint document. That
+  run could be text on a sheet, or text in a note.
+  It is only a very basic class for now
+<P>
+
+<P>
+<DL>
+<DT><B>Author:</B></DT>
+  <DD>Nick Burch</DD>
+</DL>
+<HR>
+
+<P>
+<!-- =========== FIELD SUMMARY =========== -->
+
+<A NAME="field_summary"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+<B>Field Summary</B></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>protected &nbsp;<A HREF="../../../../../org/apache/poi/hslf/record/TextBytesAtom.html" title="class in org.apache.poi.hslf.record">TextBytesAtom</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/model/TextRun.html#_byteAtom">_byteAtom</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>protected &nbsp;<A HREF="../../../../../org/apache/poi/hslf/record/TextCharsAtom.html" title="class in org.apache.poi.hslf.record">TextCharsAtom</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/model/TextRun.html#_charAtom">_charAtom</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>protected &nbsp;<A HREF="../../../../../org/apache/poi/hslf/record/TextHeaderAtom.html" title="class in org.apache.poi.hslf.record">TextHeaderAtom</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/model/TextRun.html#_headerAtom">_headerAtom</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>protected &nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/model/TextRun.html#_isUnicode">_isUnicode</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>protected &nbsp;<A HREF="../../../../../org/apache/poi/hslf/record/Record.html" title="class in org.apache.poi.hslf.record">Record</A>[]</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/model/TextRun.html#_records">_records</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;all text run records that follow TextHeaderAtom.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>protected &nbsp;<A HREF="../../../../../org/apache/poi/hslf/usermodel/RichTextRun.html" title="class in org.apache.poi.hslf.usermodel">RichTextRun</A>[]</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/model/TextRun.html#_rtRuns">_rtRuns</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>protected &nbsp;<A HREF="../../../../../org/apache/poi/hslf/record/TextRulerAtom.html" title="class in org.apache.poi.hslf.record">TextRulerAtom</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/model/TextRun.html#_ruler">_ruler</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>protected &nbsp;<A HREF="../../../../../org/apache/poi/hslf/record/StyleTextPropAtom.html" title="class in org.apache.poi.hslf.record">StyleTextPropAtom</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/model/TextRun.html#_styleAtom">_styleAtom</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+</TABLE>
+&nbsp;
+<!-- ======== CONSTRUCTOR SUMMARY ======== -->
+
+<A NAME="constructor_summary"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+<B>Constructor Summary</B></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/model/TextRun.html#TextRun(org.apache.poi.hslf.record.TextHeaderAtom, org.apache.poi.hslf.record.TextBytesAtom, org.apache.poi.hslf.record.StyleTextPropAtom)">TextRun</A></B>(<A HREF="../../../../../org/apache/poi/hslf/record/TextHeaderAtom.html" title="class in org.apache.poi.hslf.record">TextHeaderAtom</A>&nbsp;tha,
+        <A HREF="../../../../../org/apache/poi/hslf/record/TextBytesAtom.html" title="class in org.apache.poi.hslf.record">TextBytesAtom</A>&nbsp;tba,
+        <A HREF="../../../../../org/apache/poi/hslf/record/StyleTextPropAtom.html" title="class in org.apache.poi.hslf.record">StyleTextPropAtom</A>&nbsp;sta)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Constructs a Text Run from a Ascii text block</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/model/TextRun.html#TextRun(org.apache.poi.hslf.record.TextHeaderAtom, org.apache.poi.hslf.record.TextCharsAtom, org.apache.poi.hslf.record.StyleTextPropAtom)">TextRun</A></B>(<A HREF="../../../../../org/apache/poi/hslf/record/TextHeaderAtom.html" title="class in org.apache.poi.hslf.record">TextHeaderAtom</A>&nbsp;tha,
+        <A HREF="../../../../../org/apache/poi/hslf/record/TextCharsAtom.html" title="class in org.apache.poi.hslf.record">TextCharsAtom</A>&nbsp;tca,
+        <A HREF="../../../../../org/apache/poi/hslf/record/StyleTextPropAtom.html" title="class in org.apache.poi.hslf.record">StyleTextPropAtom</A>&nbsp;sta)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Constructs a Text Run from a Unicode text block</TD>
+</TR>
+</TABLE>
+&nbsp;
+<!-- ========== METHOD SUMMARY =========== -->
+
+<A NAME="method_summary"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+<B>Method Summary</B></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../../../org/apache/poi/hslf/usermodel/RichTextRun.html" title="class in org.apache.poi.hslf.usermodel">RichTextRun</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/model/TextRun.html#appendText(java.lang.String)">appendText</A></B>(java.lang.String&nbsp;s)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Adds the supplied text onto the end of the TextRun,
+  creating a new RichTextRun (returned) for it to
+  sit in.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/model/TextRun.html#buildRichTextRuns(java.util.LinkedList, java.util.LinkedList, java.lang.String)">buildRichTextRuns</A></B>(java.util.LinkedList&lt;<A HREF="../../../../../org/apache/poi/hslf/model/textproperties/TextPropCollection.html" title="class in org.apache.poi.hslf.model.textproperties">TextPropCollection</A>&gt;&nbsp;pStyles,
+                  java.util.LinkedList&lt;<A HREF="../../../../../org/apache/poi/hslf/model/textproperties/TextPropCollection.html" title="class in org.apache.poi.hslf.model.textproperties">TextPropCollection</A>&gt;&nbsp;cStyles,
+                  java.lang.String&nbsp;runRawText)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/model/TextRun.html#changeTextInRichTextRun(org.apache.poi.hslf.usermodel.RichTextRun, java.lang.String)">changeTextInRichTextRun</A></B>(<A HREF="../../../../../org/apache/poi/hslf/usermodel/RichTextRun.html" title="class in org.apache.poi.hslf.usermodel">RichTextRun</A>&nbsp;run,
+                        java.lang.String&nbsp;s)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Handles an update to the text stored in one of the Rich Text Runs</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../../../org/apache/poi/hslf/record/TextRulerAtom.html" title="class in org.apache.poi.hslf.record">TextRulerAtom</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/model/TextRun.html#createTextRuler()">createTextRuler</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/model/TextRun.html#ensureStyleAtomPresent()">ensureStyleAtomPresent</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Ensure a StyleTextPropAtom is present for this run,
+  by adding if required.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../../../org/apache/poi/hslf/model/Hyperlink.html" title="class in org.apache.poi.hslf.model">Hyperlink</A>[]</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/model/TextRun.html#getHyperlinks()">getHyperlinks</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns the array of all hyperlinks in this text run</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>protected &nbsp;int</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/model/TextRun.html#getIndex()">getIndex</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;java.lang.String</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/model/TextRun.html#getRawText()">getRawText</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns the raw text content of the run.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../../../org/apache/poi/hslf/record/Record.html" title="class in org.apache.poi.hslf.record">Record</A>[]</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/model/TextRun.html#getRecords()">getRecords</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns records that make up this text run</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../../../org/apache/poi/hslf/usermodel/RichTextRun.html" title="class in org.apache.poi.hslf.usermodel">RichTextRun</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/model/TextRun.html#getRichTextRunAt(int)">getRichTextRunAt</A></B>(int&nbsp;pos)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Fetch RichTextRun at a given position</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../../../org/apache/poi/hslf/usermodel/RichTextRun.html" title="class in org.apache.poi.hslf.usermodel">RichTextRun</A>[]</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/model/TextRun.html#getRichTextRuns()">getRichTextRuns</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Fetch the rich text runs (runs of text with the same styling) that
+  are contained within this block of text</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;int</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/model/TextRun.html#getRunType()">getRunType</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns the type of the text, from the TextHeaderAtom.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>protected &nbsp;int</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/model/TextRun.html#getShapeId()">getShapeId</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../../../org/apache/poi/hslf/model/Sheet.html" title="class in org.apache.poi.hslf.model">Sheet</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/model/TextRun.html#getSheet()">getSheet</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../../../org/apache/poi/hslf/record/StyleTextProp9Atom.html" title="class in org.apache.poi.hslf.record">StyleTextProp9Atom</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/model/TextRun.html#getStyleTextProp9Atom()">getStyleTextProp9Atom</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Numbered List info</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../../../org/apache/poi/hslf/record/StyleTextPropAtom.html" title="class in org.apache.poi.hslf.record">StyleTextPropAtom</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/model/TextRun.html#getStyleTextPropAtom()">getStyleTextPropAtom</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Characters covered</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;java.lang.String</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/model/TextRun.html#getText()">getText</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns the text content of the run, which has been made safe
+ for printing and other use.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../../../org/apache/poi/hslf/record/TextRulerAtom.html" title="class in org.apache.poi.hslf.record">TextRulerAtom</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/model/TextRun.html#getTextRuler()">getTextRuler</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;java.lang.String</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/model/TextRun.html#normalize(java.lang.String)">normalize</A></B>(java.lang.String&nbsp;s)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns a new string with line breaks converted into internal ppt representation</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>protected &nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/model/TextRun.html#setIndex(int)">setIndex</A></B>(int&nbsp;id)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/model/TextRun.html#setRawText(java.lang.String)">setRawText</A></B>(java.lang.String&nbsp;s)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Changes the text, and sets it all to have the same styling
+  as the the first character has.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/model/TextRun.html#setRunType(int)">setRunType</A></B>(int&nbsp;type)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Changes the type of the text.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>protected &nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/model/TextRun.html#setShapeId(int)">setShapeId</A></B>(int&nbsp;id)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/model/TextRun.html#setSheet(org.apache.poi.hslf.model.Sheet)">setSheet</A></B>(<A HREF="../../../../../org/apache/poi/hslf/model/Sheet.html" title="class in org.apache.poi.hslf.model">Sheet</A>&nbsp;sheet)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/model/TextRun.html#setStyleTextProp9Atom(org.apache.poi.hslf.record.StyleTextProp9Atom)">setStyleTextProp9Atom</A></B>(<A HREF="../../../../../org/apache/poi/hslf/record/StyleTextProp9Atom.html" title="class in org.apache.poi.hslf.record">StyleTextProp9Atom</A>&nbsp;styleTextProp9Atom)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Numbered List info</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/model/TextRun.html#setText(java.lang.String)">setText</A></B>(java.lang.String&nbsp;s)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Changes the text.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/model/TextRun.html#supplySlideShow(org.apache.poi.hslf.usermodel.SlideShow)">supplySlideShow</A></B>(<A HREF="../../../../../org/apache/poi/hslf/usermodel/SlideShow.html" title="class in org.apache.poi.hslf.usermodel">SlideShow</A>&nbsp;ss)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Supply the SlideShow we belong to.</TD>
+</TR>
+</TABLE>
+&nbsp;<A NAME="methods_inherited_from_class_java.lang.Object"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#EEEEFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left"><B>Methods inherited from class java.lang.Object</B></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE>clone, equals, finalize, getClass, hashCode, notify, notifyAll, toString, wait, wait, wait</CODE></TD>
+</TR>
+</TABLE>
+&nbsp;
+<P>
+
+<!-- ============ FIELD DETAIL =========== -->
+
+<A NAME="field_detail"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="1"><FONT SIZE="+2">
+<B>Field Detail</B></FONT></TH>
+</TR>
+</TABLE>
+
+<A NAME="_headerAtom"><!-- --></A><H3>
+_headerAtom</H3>
+<PRE>
+protected <A HREF="../../../../../org/apache/poi/hslf/record/TextHeaderAtom.html" title="class in org.apache.poi.hslf.record">TextHeaderAtom</A> <B>_headerAtom</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="_byteAtom"><!-- --></A><H3>
+_byteAtom</H3>
+<PRE>
+protected <A HREF="../../../../../org/apache/poi/hslf/record/TextBytesAtom.html" title="class in org.apache.poi.hslf.record">TextBytesAtom</A> <B>_byteAtom</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="_charAtom"><!-- --></A><H3>
+_charAtom</H3>
+<PRE>
+protected <A HREF="../../../../../org/apache/poi/hslf/record/TextCharsAtom.html" title="class in org.apache.poi.hslf.record">TextCharsAtom</A> <B>_charAtom</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="_styleAtom"><!-- --></A><H3>
+_styleAtom</H3>
+<PRE>
+protected <A HREF="../../../../../org/apache/poi/hslf/record/StyleTextPropAtom.html" title="class in org.apache.poi.hslf.record">StyleTextPropAtom</A> <B>_styleAtom</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="_ruler"><!-- --></A><H3>
+_ruler</H3>
+<PRE>
+protected <A HREF="../../../../../org/apache/poi/hslf/record/TextRulerAtom.html" title="class in org.apache.poi.hslf.record">TextRulerAtom</A> <B>_ruler</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="_isUnicode"><!-- --></A><H3>
+_isUnicode</H3>
+<PRE>
+protected boolean <B>_isUnicode</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="_rtRuns"><!-- --></A><H3>
+_rtRuns</H3>
+<PRE>
+protected <A HREF="../../../../../org/apache/poi/hslf/usermodel/RichTextRun.html" title="class in org.apache.poi.hslf.usermodel">RichTextRun</A>[] <B>_rtRuns</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="_records"><!-- --></A><H3>
+_records</H3>
+<PRE>
+protected <A HREF="../../../../../org/apache/poi/hslf/record/Record.html" title="class in org.apache.poi.hslf.record">Record</A>[] <B>_records</B></PRE>
+<DL>
+<DD>all text run records that follow TextHeaderAtom.
+ (there can be misc InteractiveInfo, TxInteractiveInfo and other records)
+<P>
+<DL>
+</DL>
+</DL>
+
+<!-- ========= CONSTRUCTOR DETAIL ======== -->
+
+<A NAME="constructor_detail"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="1"><FONT SIZE="+2">
+<B>Constructor Detail</B></FONT></TH>
+</TR>
+</TABLE>
+
+<A NAME="TextRun(org.apache.poi.hslf.record.TextHeaderAtom, org.apache.poi.hslf.record.TextCharsAtom, org.apache.poi.hslf.record.StyleTextPropAtom)"><!-- --></A><H3>
+TextRun</H3>
+<PRE>
+public <B>TextRun</B>(<A HREF="../../../../../org/apache/poi/hslf/record/TextHeaderAtom.html" title="class in org.apache.poi.hslf.record">TextHeaderAtom</A>&nbsp;tha,
+               <A HREF="../../../../../org/apache/poi/hslf/record/TextCharsAtom.html" title="class in org.apache.poi.hslf.record">TextCharsAtom</A>&nbsp;tca,
+               <A HREF="../../../../../org/apache/poi/hslf/record/StyleTextPropAtom.html" title="class in org.apache.poi.hslf.record">StyleTextPropAtom</A>&nbsp;sta)</PRE>
+<DL>
+<DD>Constructs a Text Run from a Unicode text block
+<P>
+<DL>
+<DT><B>Parameters:</B><DD><CODE>tha</CODE> - the TextHeaderAtom that defines what's what<DD><CODE>tca</CODE> - the TextCharsAtom containing the text<DD><CODE>sta</CODE> - the StyleTextPropAtom which defines the character stylings</DL>
+</DL>
+<HR>
+
+<A NAME="TextRun(org.apache.poi.hslf.record.TextHeaderAtom, org.apache.poi.hslf.record.TextBytesAtom, org.apache.poi.hslf.record.StyleTextPropAtom)"><!-- --></A><H3>
+TextRun</H3>
+<PRE>
+public <B>TextRun</B>(<A HREF="../../../../../org/apache/poi/hslf/record/TextHeaderAtom.html" title="class in org.apache.poi.hslf.record">TextHeaderAtom</A>&nbsp;tha,
+               <A HREF="../../../../../org/apache/poi/hslf/record/TextBytesAtom.html" title="class in org.apache.poi.hslf.record">TextBytesAtom</A>&nbsp;tba,
+               <A HREF="../../../../../org/apache/poi/hslf/record/StyleTextPropAtom.html" title="class in org.apache.poi.hslf.record">StyleTextPropAtom</A>&nbsp;sta)</PRE>
+<DL>
+<DD>Constructs a Text Run from a Ascii text block
+<P>
+<DL>
+<DT><B>Parameters:</B><DD><CODE>tha</CODE> - the TextHeaderAtom that defines what's what<DD><CODE>tba</CODE> - the TextBytesAtom containing the text<DD><CODE>sta</CODE> - the StyleTextPropAtom which defines the character stylings</DL>
+</DL>
+
+<!-- ============ METHOD DETAIL ========== -->
+
+<A NAME="method_detail"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="1"><FONT SIZE="+2">
+<B>Method Detail</B></FONT></TH>
+</TR>
+</TABLE>
+
+<A NAME="buildRichTextRuns(java.util.LinkedList, java.util.LinkedList, java.lang.String)"><!-- --></A><H3>
+buildRichTextRuns</H3>
+<PRE>
+public void <B>buildRichTextRuns</B>(java.util.LinkedList&lt;<A HREF="../../../../../org/apache/poi/hslf/model/textproperties/TextPropCollection.html" title="class in org.apache.poi.hslf.model.textproperties">TextPropCollection</A>&gt;&nbsp;pStyles,
+                              java.util.LinkedList&lt;<A HREF="../../../../../org/apache/poi/hslf/model/textproperties/TextPropCollection.html" title="class in org.apache.poi.hslf.model.textproperties">TextPropCollection</A>&gt;&nbsp;cStyles,
+                              java.lang.String&nbsp;runRawText)</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="appendText(java.lang.String)"><!-- --></A><H3>
+appendText</H3>
+<PRE>
+public <A HREF="../../../../../org/apache/poi/hslf/usermodel/RichTextRun.html" title="class in org.apache.poi.hslf.usermodel">RichTextRun</A> <B>appendText</B>(java.lang.String&nbsp;s)</PRE>
+<DL>
+<DD>Adds the supplied text onto the end of the TextRun,
+  creating a new RichTextRun (returned) for it to
+  sit in.
+ In many cases, before calling this, you'll want to add
+  a newline onto the end of your last RichTextRun
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="changeTextInRichTextRun(org.apache.poi.hslf.usermodel.RichTextRun, java.lang.String)"><!-- --></A><H3>
+changeTextInRichTextRun</H3>
+<PRE>
+public void <B>changeTextInRichTextRun</B>(<A HREF="../../../../../org/apache/poi/hslf/usermodel/RichTextRun.html" title="class in org.apache.poi.hslf.usermodel">RichTextRun</A>&nbsp;run,
+                                    java.lang.String&nbsp;s)</PRE>
+<DL>
+<DD>Handles an update to the text stored in one of the Rich Text Runs
+<P>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>run</CODE> - <DD><CODE>s</CODE> - </DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setRawText(java.lang.String)"><!-- --></A><H3>
+setRawText</H3>
+<PRE>
+public void <B>setRawText</B>(java.lang.String&nbsp;s)</PRE>
+<DL>
+<DD>Changes the text, and sets it all to have the same styling
+  as the the first character has.
+ If you care about styling, do setText on a RichTextRun instead
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setText(java.lang.String)"><!-- --></A><H3>
+setText</H3>
+<PRE>
+public void <B>setText</B>(java.lang.String&nbsp;s)</PRE>
+<DL>
+<DD>Changes the text.
+ Converts '\r' into '\n'
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="ensureStyleAtomPresent()"><!-- --></A><H3>
+ensureStyleAtomPresent</H3>
+<PRE>
+public void <B>ensureStyleAtomPresent</B>()</PRE>
+<DL>
+<DD>Ensure a StyleTextPropAtom is present for this run,
+  by adding if required. Normally for internal TextRun use.
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getText()"><!-- --></A><H3>
+getText</H3>
+<PRE>
+public java.lang.String <B>getText</B>()</PRE>
+<DL>
+<DD>Returns the text content of the run, which has been made safe
+ for printing and other use.
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getRawText()"><!-- --></A><H3>
+getRawText</H3>
+<PRE>
+public java.lang.String <B>getRawText</B>()</PRE>
+<DL>
+<DD>Returns the raw text content of the run. This hasn't had any
+  changes applied to it, and so is probably unlikely to print
+  out nicely.
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getRichTextRuns()"><!-- --></A><H3>
+getRichTextRuns</H3>
+<PRE>
+public <A HREF="../../../../../org/apache/poi/hslf/usermodel/RichTextRun.html" title="class in org.apache.poi.hslf.usermodel">RichTextRun</A>[] <B>getRichTextRuns</B>()</PRE>
+<DL>
+<DD>Fetch the rich text runs (runs of text with the same styling) that
+  are contained within this block of text
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getRunType()"><!-- --></A><H3>
+getRunType</H3>
+<PRE>
+public int <B>getRunType</B>()</PRE>
+<DL>
+<DD>Returns the type of the text, from the TextHeaderAtom.
+ Possible values can be seen from TextHeaderAtom
+<P>
+<DD><DL>
+<DT><B>See Also:</B><DD><A HREF="../../../../../org/apache/poi/hslf/record/TextHeaderAtom.html" title="class in org.apache.poi.hslf.record"><CODE>TextHeaderAtom</CODE></A></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setRunType(int)"><!-- --></A><H3>
+setRunType</H3>
+<PRE>
+public void <B>setRunType</B>(int&nbsp;type)</PRE>
+<DL>
+<DD>Changes the type of the text. Values should be taken
+  from TextHeaderAtom. No checking is done to ensure you
+  set this to a valid value!
+<P>
+<DD><DL>
+<DT><B>See Also:</B><DD><A HREF="../../../../../org/apache/poi/hslf/record/TextHeaderAtom.html" title="class in org.apache.poi.hslf.record"><CODE>TextHeaderAtom</CODE></A></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="supplySlideShow(org.apache.poi.hslf.usermodel.SlideShow)"><!-- --></A><H3>
+supplySlideShow</H3>
+<PRE>
+public void <B>supplySlideShow</B>(<A HREF="../../../../../org/apache/poi/hslf/usermodel/SlideShow.html" title="class in org.apache.poi.hslf.usermodel">SlideShow</A>&nbsp;ss)</PRE>
+<DL>
+<DD>Supply the SlideShow we belong to.
+ Also passes it on to our child RichTextRuns
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setSheet(org.apache.poi.hslf.model.Sheet)"><!-- --></A><H3>
+setSheet</H3>
+<PRE>
+public void <B>setSheet</B>(<A HREF="../../../../../org/apache/poi/hslf/model/Sheet.html" title="class in org.apache.poi.hslf.model">Sheet</A>&nbsp;sheet)</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getSheet()"><!-- --></A><H3>
+getSheet</H3>
+<PRE>
+public <A HREF="../../../../../org/apache/poi/hslf/model/Sheet.html" title="class in org.apache.poi.hslf.model">Sheet</A> <B>getSheet</B>()</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getShapeId()"><!-- --></A><H3>
+getShapeId</H3>
+<PRE>
+protected int <B>getShapeId</B>()</PRE>
+<DL>
+<DD><DL>
+
+<DT><B>Returns:</B><DD>Shape ID</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setShapeId(int)"><!-- --></A><H3>
+setShapeId</H3>
+<PRE>
+protected void <B>setShapeId</B>(int&nbsp;id)</PRE>
+<DL>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>id</CODE> - Shape ID</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getIndex()"><!-- --></A><H3>
+getIndex</H3>
+<PRE>
+protected int <B>getIndex</B>()</PRE>
+<DL>
+<DD><DL>
+
+<DT><B>Returns:</B><DD>0-based index of the text run in the SLWT container</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setIndex(int)"><!-- --></A><H3>
+setIndex</H3>
+<PRE>
+protected void <B>setIndex</B>(int&nbsp;id)</PRE>
+<DL>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>id</CODE> - 0-based index of the text run in the SLWT container</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getHyperlinks()"><!-- --></A><H3>
+getHyperlinks</H3>
+<PRE>
+public <A HREF="../../../../../org/apache/poi/hslf/model/Hyperlink.html" title="class in org.apache.poi.hslf.model">Hyperlink</A>[] <B>getHyperlinks</B>()</PRE>
+<DL>
+<DD>Returns the array of all hyperlinks in this text run
+<P>
+<DD><DL>
+
+<DT><B>Returns:</B><DD>the array of all hyperlinks in this text run
+ or <code>null</code> if not found.</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getRichTextRunAt(int)"><!-- --></A><H3>
+getRichTextRunAt</H3>
+<PRE>
+public <A HREF="../../../../../org/apache/poi/hslf/usermodel/RichTextRun.html" title="class in org.apache.poi.hslf.usermodel">RichTextRun</A> <B>getRichTextRunAt</B>(int&nbsp;pos)</PRE>
+<DL>
+<DD>Fetch RichTextRun at a given position
+<P>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>pos</CODE> - 0-based index in the text
+<DT><B>Returns:</B><DD>RichTextRun or null if not found</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getTextRuler()"><!-- --></A><H3>
+getTextRuler</H3>
+<PRE>
+public <A HREF="../../../../../org/apache/poi/hslf/record/TextRulerAtom.html" title="class in org.apache.poi.hslf.record">TextRulerAtom</A> <B>getTextRuler</B>()</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="createTextRuler()"><!-- --></A><H3>
+createTextRuler</H3>
+<PRE>
+public <A HREF="../../../../../org/apache/poi/hslf/record/TextRulerAtom.html" title="class in org.apache.poi.hslf.record">TextRulerAtom</A> <B>createTextRuler</B>()</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="normalize(java.lang.String)"><!-- --></A><H3>
+normalize</H3>
+<PRE>
+public java.lang.String <B>normalize</B>(java.lang.String&nbsp;s)</PRE>
+<DL>
+<DD>Returns a new string with line breaks converted into internal ppt representation
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getRecords()"><!-- --></A><H3>
+getRecords</H3>
+<PRE>
+public <A HREF="../../../../../org/apache/poi/hslf/record/Record.html" title="class in org.apache.poi.hslf.record">Record</A>[] <B>getRecords</B>()</PRE>
+<DL>
+<DD>Returns records that make up this text run
+<P>
+<DD><DL>
+
+<DT><B>Returns:</B><DD>text run records</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setStyleTextProp9Atom(org.apache.poi.hslf.record.StyleTextProp9Atom)"><!-- --></A><H3>
+setStyleTextProp9Atom</H3>
+<PRE>
+public void <B>setStyleTextProp9Atom</B>(<A HREF="../../../../../org/apache/poi/hslf/record/StyleTextProp9Atom.html" title="class in org.apache.poi.hslf.record">StyleTextProp9Atom</A>&nbsp;styleTextProp9Atom)</PRE>
+<DL>
+<DD>Numbered List info
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getStyleTextProp9Atom()"><!-- --></A><H3>
+getStyleTextProp9Atom</H3>
+<PRE>
+public <A HREF="../../../../../org/apache/poi/hslf/record/StyleTextProp9Atom.html" title="class in org.apache.poi.hslf.record">StyleTextProp9Atom</A> <B>getStyleTextProp9Atom</B>()</PRE>
+<DL>
+<DD>Numbered List info
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getStyleTextPropAtom()"><!-- --></A><H3>
+getStyleTextPropAtom</H3>
+<PRE>
+public <A HREF="../../../../../org/apache/poi/hslf/record/StyleTextPropAtom.html" title="class in org.apache.poi.hslf.record">StyleTextPropAtom</A> <B>getStyleTextPropAtom</B>()</PRE>
+<DL>
+<DD>Characters covered
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<!-- ========= END OF CLASS DATA ========= -->
+<HR>
+
+
+<!-- ======= START OF BOTTOM NAVBAR ====== -->
+<A NAME="navbar_bottom"><!-- --></A>
+<A HREF="#skip-navbar_bottom" title="Skip navigation links"></A>
+<TABLE BORDER="0" WIDTH="100%" CELLPADDING="1" CELLSPACING="0" SUMMARY="">
+<TR>
+<TD COLSPAN=2 BGCOLOR="#EEEEFF" CLASS="NavBarCell1">
+<A NAME="navbar_bottom_firstrow"><!-- --></A>
+<TABLE BORDER="0" CELLPADDING="0" CELLSPACING="3" SUMMARY="">
+  <TR ALIGN="center" VALIGN="top">
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../overview-summary.html"><FONT CLASS="NavBarFont1"><B>Overview</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="package-summary.html"><FONT CLASS="NavBarFont1"><B>Package</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#FFFFFF" CLASS="NavBarCell1Rev"> &nbsp;<FONT CLASS="NavBarFont1Rev"><B>Class</B></FONT>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="class-use/TextRun.html"><FONT CLASS="NavBarFont1"><B>Use</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="package-tree.html"><FONT CLASS="NavBarFont1"><B>Tree</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../deprecated-list.html"><FONT CLASS="NavBarFont1"><B>Deprecated</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../index-all.html"><FONT CLASS="NavBarFont1"><B>Index</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../help-doc.html"><FONT CLASS="NavBarFont1"><B>Help</B></FONT></A>&nbsp;</TD>
+  </TR>
+</TABLE>
+</TD>
+<TD ALIGN="right" VALIGN="top" ROWSPAN=3><EM>
+</EM>
+</TD>
+</TR>
+
+<TR>
+<TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
+&nbsp;<A HREF="../../../../../org/apache/poi/hslf/model/TextPainter.TextElement.html" title="class in org.apache.poi.hslf.model"><B>PREV CLASS</B></A>&nbsp;
+&nbsp;<A HREF="../../../../../org/apache/poi/hslf/model/TextShape.html" title="class in org.apache.poi.hslf.model"><B>NEXT CLASS</B></A></FONT></TD>
+<TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
+  <A HREF="../../../../../index.html?org/apache/poi/hslf/model/TextRun.html" target="_top"><B>FRAMES</B></A>  &nbsp;
+&nbsp;<A HREF="TextRun.html" target="_top"><B>NO FRAMES</B></A>  &nbsp;
+&nbsp;<SCRIPT type="text/javascript">
+  <!--
+  if(window==top) {
+    document.writeln('<A HREF="../../../../../allclasses-noframe.html"><B>All Classes</B></A>');
+  }
+  //-->
+</SCRIPT>
+<NOSCRIPT>
+  <A HREF="../../../../../allclasses-noframe.html"><B>All Classes</B></A>
+</NOSCRIPT>
+
+
+</FONT></TD>
+</TR>
+<TR>
+<TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
+  SUMMARY:&nbsp;NESTED&nbsp;|&nbsp;<A HREF="#field_summary">FIELD</A>&nbsp;|&nbsp;<A HREF="#constructor_summary">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_summary">METHOD</A></FONT></TD>
+<TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
+DETAIL:&nbsp;<A HREF="#field_detail">FIELD</A>&nbsp;|&nbsp;<A HREF="#constructor_detail">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_detail">METHOD</A></FONT></TD>
+</TR>
+</TABLE>
+<A NAME="skip-navbar_bottom"></A>
+<!-- ======== END OF BOTTOM NAVBAR ======= -->
+
+<HR>
+
+                <i>Copyright 2014 The Apache Software Foundation or
+        its licensors, as applicable.</i>
+            
+</BODY>
+</HTML>

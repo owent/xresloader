@@ -1,0 +1,642 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!--NewPage-->
+<HTML>
+<HEAD>
+<TITLE>
+PowerPointExtractor (POI API Documentation)
+</TITLE>
+
+<META NAME="keywords" CONTENT="org.apache.poi.hslf.extractor.PowerPointExtractor class">
+
+<LINK REL ="stylesheet" TYPE="text/css" HREF="../../../../../stylesheet.css" TITLE="Style">
+
+<SCRIPT type="text/javascript">
+function windowTitle()
+{
+    parent.document.title="PowerPointExtractor (POI API Documentation)";
+}
+</SCRIPT>
+<NOSCRIPT>
+</NOSCRIPT>
+
+</HEAD>
+
+<BODY BGCOLOR="white" onload="windowTitle();">
+
+
+<!-- ========= START OF TOP NAVBAR ======= -->
+<A NAME="navbar_top"><!-- --></A>
+<A HREF="#skip-navbar_top" title="Skip navigation links"></A>
+<TABLE BORDER="0" WIDTH="100%" CELLPADDING="1" CELLSPACING="0" SUMMARY="">
+<TR>
+<TD COLSPAN=2 BGCOLOR="#EEEEFF" CLASS="NavBarCell1">
+<A NAME="navbar_top_firstrow"><!-- --></A>
+<TABLE BORDER="0" CELLPADDING="0" CELLSPACING="3" SUMMARY="">
+  <TR ALIGN="center" VALIGN="top">
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../overview-summary.html"><FONT CLASS="NavBarFont1"><B>Overview</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="package-summary.html"><FONT CLASS="NavBarFont1"><B>Package</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#FFFFFF" CLASS="NavBarCell1Rev"> &nbsp;<FONT CLASS="NavBarFont1Rev"><B>Class</B></FONT>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="class-use/PowerPointExtractor.html"><FONT CLASS="NavBarFont1"><B>Use</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="package-tree.html"><FONT CLASS="NavBarFont1"><B>Tree</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../deprecated-list.html"><FONT CLASS="NavBarFont1"><B>Deprecated</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../index-all.html"><FONT CLASS="NavBarFont1"><B>Index</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../help-doc.html"><FONT CLASS="NavBarFont1"><B>Help</B></FONT></A>&nbsp;</TD>
+  </TR>
+</TABLE>
+</TD>
+<TD ALIGN="right" VALIGN="top" ROWSPAN=3><EM>
+</EM>
+</TD>
+</TR>
+
+<TR>
+<TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
+&nbsp;<A HREF="../../../../../org/apache/poi/hslf/extractor/ImageExtractor.html" title="class in org.apache.poi.hslf.extractor"><B>PREV CLASS</B></A>&nbsp;
+&nbsp;<A HREF="../../../../../org/apache/poi/hslf/extractor/QuickButCruddyTextExtractor.html" title="class in org.apache.poi.hslf.extractor"><B>NEXT CLASS</B></A></FONT></TD>
+<TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
+  <A HREF="../../../../../index.html?org/apache/poi/hslf/extractor/PowerPointExtractor.html" target="_top"><B>FRAMES</B></A>  &nbsp;
+&nbsp;<A HREF="PowerPointExtractor.html" target="_top"><B>NO FRAMES</B></A>  &nbsp;
+&nbsp;<SCRIPT type="text/javascript">
+  <!--
+  if(window==top) {
+    document.writeln('<A HREF="../../../../../allclasses-noframe.html"><B>All Classes</B></A>');
+  }
+  //-->
+</SCRIPT>
+<NOSCRIPT>
+  <A HREF="../../../../../allclasses-noframe.html"><B>All Classes</B></A>
+</NOSCRIPT>
+
+
+</FONT></TD>
+</TR>
+<TR>
+<TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
+  SUMMARY:&nbsp;NESTED&nbsp;|&nbsp;<A HREF="#fields_inherited_from_class_org.apache.poi.POITextExtractor">FIELD</A>&nbsp;|&nbsp;<A HREF="#constructor_summary">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_summary">METHOD</A></FONT></TD>
+<TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
+DETAIL:&nbsp;FIELD&nbsp;|&nbsp;<A HREF="#constructor_detail">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_detail">METHOD</A></FONT></TD>
+</TR>
+</TABLE>
+<A NAME="skip-navbar_top"></A>
+<!-- ========= END OF TOP NAVBAR ========= -->
+
+<HR>
+<!-- ======== START OF CLASS DATA ======== -->
+<H2>
+<FONT SIZE="-1">
+org.apache.poi.hslf.extractor</FONT>
+<BR>
+Class PowerPointExtractor</H2>
+<PRE>
+java.lang.Object
+  <IMG SRC="../../../../../resources/inherit.gif" ALT="extended by "><A HREF="../../../../../org/apache/poi/POITextExtractor.html" title="class in org.apache.poi">org.apache.poi.POITextExtractor</A>
+      <IMG SRC="../../../../../resources/inherit.gif" ALT="extended by "><A HREF="../../../../../org/apache/poi/POIOLE2TextExtractor.html" title="class in org.apache.poi">org.apache.poi.POIOLE2TextExtractor</A>
+          <IMG SRC="../../../../../resources/inherit.gif" ALT="extended by "><B>org.apache.poi.hslf.extractor.PowerPointExtractor</B>
+</PRE>
+<DL>
+<DT><B>All Implemented Interfaces:</B> <DD>java.io.Closeable</DD>
+</DL>
+<HR>
+<DL>
+<DT><PRE>public final class <B>PowerPointExtractor</B><DT>extends <A HREF="../../../../../org/apache/poi/POIOLE2TextExtractor.html" title="class in org.apache.poi">POIOLE2TextExtractor</A></DL>
+</PRE>
+
+<P>
+This class can be used to extract text from a PowerPoint file. Can optionally
+ also get the notes from one.
+<P>
+
+<P>
+<DL>
+<DT><B>Author:</B></DT>
+  <DD>Nick Burch</DD>
+</DL>
+<HR>
+
+<P>
+<!-- =========== FIELD SUMMARY =========== -->
+
+<A NAME="field_summary"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+<B>Field Summary</B></FONT></TH>
+</TR>
+</TABLE>
+&nbsp;<A NAME="fields_inherited_from_class_org.apache.poi.POITextExtractor"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#EEEEFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left"><B>Fields inherited from class org.apache.poi.<A HREF="../../../../../org/apache/poi/POITextExtractor.html" title="class in org.apache.poi">POITextExtractor</A></B></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><A HREF="../../../../../org/apache/poi/POITextExtractor.html#document">document</A></CODE></TD>
+</TR>
+</TABLE>
+&nbsp;
+<!-- ======== CONSTRUCTOR SUMMARY ======== -->
+
+<A NAME="constructor_summary"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+<B>Constructor Summary</B></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/extractor/PowerPointExtractor.html#PowerPointExtractor(org.apache.poi.poifs.filesystem.DirectoryNode)">PowerPointExtractor</A></B>(<A HREF="../../../../../org/apache/poi/poifs/filesystem/DirectoryNode.html" title="class in org.apache.poi.poifs.filesystem">DirectoryNode</A>&nbsp;dir)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Creates a PowerPointExtractor, from a specific place
+  inside an open NPOIFSFileSystem</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/extractor/PowerPointExtractor.html#PowerPointExtractor(org.apache.poi.poifs.filesystem.DirectoryNode, org.apache.poi.poifs.filesystem.POIFSFileSystem)">PowerPointExtractor</A></B>(<A HREF="../../../../../org/apache/poi/poifs/filesystem/DirectoryNode.html" title="class in org.apache.poi.poifs.filesystem">DirectoryNode</A>&nbsp;dir,
+                    <A HREF="../../../../../org/apache/poi/poifs/filesystem/POIFSFileSystem.html" title="class in org.apache.poi.poifs.filesystem">POIFSFileSystem</A>&nbsp;fs)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;<I>Use <A HREF="../../../../../org/apache/poi/hslf/extractor/PowerPointExtractor.html#PowerPointExtractor(org.apache.poi.poifs.filesystem.DirectoryNode)"><CODE>PowerPointExtractor(DirectoryNode)</CODE></A> instead</I></TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/extractor/PowerPointExtractor.html#PowerPointExtractor(org.apache.poi.hslf.HSLFSlideShow)">PowerPointExtractor</A></B>(<A HREF="../../../../../org/apache/poi/hslf/HSLFSlideShow.html" title="class in org.apache.poi.hslf">HSLFSlideShow</A>&nbsp;ss)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Creates a PowerPointExtractor, from a HSLFSlideShow</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/extractor/PowerPointExtractor.html#PowerPointExtractor(java.io.InputStream)">PowerPointExtractor</A></B>(java.io.InputStream&nbsp;iStream)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Creates a PowerPointExtractor, from an Input Stream</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/extractor/PowerPointExtractor.html#PowerPointExtractor(org.apache.poi.poifs.filesystem.NPOIFSFileSystem)">PowerPointExtractor</A></B>(<A HREF="../../../../../org/apache/poi/poifs/filesystem/NPOIFSFileSystem.html" title="class in org.apache.poi.poifs.filesystem">NPOIFSFileSystem</A>&nbsp;fs)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Creates a PowerPointExtractor, from an open NPOIFSFileSystem</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/extractor/PowerPointExtractor.html#PowerPointExtractor(org.apache.poi.poifs.filesystem.POIFSFileSystem)">PowerPointExtractor</A></B>(<A HREF="../../../../../org/apache/poi/poifs/filesystem/POIFSFileSystem.html" title="class in org.apache.poi.poifs.filesystem">POIFSFileSystem</A>&nbsp;fs)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Creates a PowerPointExtractor, from an open POIFSFileSystem</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/extractor/PowerPointExtractor.html#PowerPointExtractor(java.lang.String)">PowerPointExtractor</A></B>(java.lang.String&nbsp;fileName)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Creates a PowerPointExtractor, from a file</TD>
+</TR>
+</TABLE>
+&nbsp;
+<!-- ========== METHOD SUMMARY =========== -->
+
+<A NAME="method_summary"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+<B>Method Summary</B></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;java.lang.String</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/extractor/PowerPointExtractor.html#getNotes()">getNotes</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Fetches all the notes text from the slideshow, but not the slide text</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;java.util.List&lt;<A HREF="../../../../../org/apache/poi/hslf/model/OLEShape.html" title="class in org.apache.poi.hslf.model">OLEShape</A>&gt;</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/extractor/PowerPointExtractor.html#getOLEShapes()">getOLEShapes</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;java.lang.String</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/extractor/PowerPointExtractor.html#getText()">getText</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Fetches all the slide text from the slideshow, but not the notes, unless
+ you've called setSlidesByDefault() and setNotesByDefault() to change this</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;java.lang.String</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/extractor/PowerPointExtractor.html#getText(boolean, boolean)">getText</A></B>(boolean&nbsp;getSlideText,
+        boolean&nbsp;getNoteText)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Fetches text from the slideshow, be it slide text or note text.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;java.lang.String</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/extractor/PowerPointExtractor.html#getText(boolean, boolean, boolean, boolean)">getText</A></B>(boolean&nbsp;getSlideText,
+        boolean&nbsp;getNoteText,
+        boolean&nbsp;getCommentText,
+        boolean&nbsp;getMasterText)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/extractor/PowerPointExtractor.html#main(java.lang.String[])">main</A></B>(java.lang.String[]&nbsp;args)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Basic extractor.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/extractor/PowerPointExtractor.html#setCommentsByDefault(boolean)">setCommentsByDefault</A></B>(boolean&nbsp;commentsByDefault)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Should a call to getText() return comments text? Default is no</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/extractor/PowerPointExtractor.html#setMasterByDefault(boolean)">setMasterByDefault</A></B>(boolean&nbsp;masterByDefault)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Should a call to getText() return text from master? Default is no</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/extractor/PowerPointExtractor.html#setNotesByDefault(boolean)">setNotesByDefault</A></B>(boolean&nbsp;notesByDefault)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Should a call to getText() return notes text? Default is no</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/extractor/PowerPointExtractor.html#setSlidesByDefault(boolean)">setSlidesByDefault</A></B>(boolean&nbsp;slidesByDefault)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Should a call to getText() return slide text? Default is yes</TD>
+</TR>
+</TABLE>
+&nbsp;<A NAME="methods_inherited_from_class_org.apache.poi.POIOLE2TextExtractor"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#EEEEFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left"><B>Methods inherited from class org.apache.poi.<A HREF="../../../../../org/apache/poi/POIOLE2TextExtractor.html" title="class in org.apache.poi">POIOLE2TextExtractor</A></B></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><A HREF="../../../../../org/apache/poi/POIOLE2TextExtractor.html#getDocSummaryInformation()">getDocSummaryInformation</A>, <A HREF="../../../../../org/apache/poi/POIOLE2TextExtractor.html#getFileSystem()">getFileSystem</A>, <A HREF="../../../../../org/apache/poi/POIOLE2TextExtractor.html#getMetadataTextExtractor()">getMetadataTextExtractor</A>, <A HREF="../../../../../org/apache/poi/POIOLE2TextExtractor.html#getRoot()">getRoot</A>, <A HREF="../../../../../org/apache/poi/POIOLE2TextExtractor.html#getSummaryInformation()">getSummaryInformation</A></CODE></TD>
+</TR>
+</TABLE>
+&nbsp;<A NAME="methods_inherited_from_class_org.apache.poi.POITextExtractor"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#EEEEFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left"><B>Methods inherited from class org.apache.poi.<A HREF="../../../../../org/apache/poi/POITextExtractor.html" title="class in org.apache.poi">POITextExtractor</A></B></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><A HREF="../../../../../org/apache/poi/POITextExtractor.html#close()">close</A></CODE></TD>
+</TR>
+</TABLE>
+&nbsp;<A NAME="methods_inherited_from_class_java.lang.Object"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#EEEEFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left"><B>Methods inherited from class java.lang.Object</B></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE>clone, equals, finalize, getClass, hashCode, notify, notifyAll, toString, wait, wait, wait</CODE></TD>
+</TR>
+</TABLE>
+&nbsp;
+<P>
+
+<!-- ========= CONSTRUCTOR DETAIL ======== -->
+
+<A NAME="constructor_detail"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="1"><FONT SIZE="+2">
+<B>Constructor Detail</B></FONT></TH>
+</TR>
+</TABLE>
+
+<A NAME="PowerPointExtractor(java.lang.String)"><!-- --></A><H3>
+PowerPointExtractor</H3>
+<PRE>
+public <B>PowerPointExtractor</B>(java.lang.String&nbsp;fileName)
+                    throws java.io.IOException</PRE>
+<DL>
+<DD>Creates a PowerPointExtractor, from a file
+<P>
+<DL>
+<DT><B>Parameters:</B><DD><CODE>fileName</CODE> - The name of the file to extract from
+<DT><B>Throws:</B>
+<DD><CODE>java.io.IOException</CODE></DL>
+</DL>
+<HR>
+
+<A NAME="PowerPointExtractor(java.io.InputStream)"><!-- --></A><H3>
+PowerPointExtractor</H3>
+<PRE>
+public <B>PowerPointExtractor</B>(java.io.InputStream&nbsp;iStream)
+                    throws java.io.IOException</PRE>
+<DL>
+<DD>Creates a PowerPointExtractor, from an Input Stream
+<P>
+<DL>
+<DT><B>Parameters:</B><DD><CODE>iStream</CODE> - The input stream containing the PowerPoint document
+<DT><B>Throws:</B>
+<DD><CODE>java.io.IOException</CODE></DL>
+</DL>
+<HR>
+
+<A NAME="PowerPointExtractor(org.apache.poi.poifs.filesystem.POIFSFileSystem)"><!-- --></A><H3>
+PowerPointExtractor</H3>
+<PRE>
+public <B>PowerPointExtractor</B>(<A HREF="../../../../../org/apache/poi/poifs/filesystem/POIFSFileSystem.html" title="class in org.apache.poi.poifs.filesystem">POIFSFileSystem</A>&nbsp;fs)
+                    throws java.io.IOException</PRE>
+<DL>
+<DD>Creates a PowerPointExtractor, from an open POIFSFileSystem
+<P>
+<DL>
+<DT><B>Parameters:</B><DD><CODE>fs</CODE> - the POIFSFileSystem containing the PowerPoint document
+<DT><B>Throws:</B>
+<DD><CODE>java.io.IOException</CODE></DL>
+</DL>
+<HR>
+
+<A NAME="PowerPointExtractor(org.apache.poi.poifs.filesystem.NPOIFSFileSystem)"><!-- --></A><H3>
+PowerPointExtractor</H3>
+<PRE>
+public <B>PowerPointExtractor</B>(<A HREF="../../../../../org/apache/poi/poifs/filesystem/NPOIFSFileSystem.html" title="class in org.apache.poi.poifs.filesystem">NPOIFSFileSystem</A>&nbsp;fs)
+                    throws java.io.IOException</PRE>
+<DL>
+<DD>Creates a PowerPointExtractor, from an open NPOIFSFileSystem
+<P>
+<DL>
+<DT><B>Parameters:</B><DD><CODE>fs</CODE> - the NPOIFSFileSystem containing the PowerPoint document
+<DT><B>Throws:</B>
+<DD><CODE>java.io.IOException</CODE></DL>
+</DL>
+<HR>
+
+<A NAME="PowerPointExtractor(org.apache.poi.poifs.filesystem.DirectoryNode)"><!-- --></A><H3>
+PowerPointExtractor</H3>
+<PRE>
+public <B>PowerPointExtractor</B>(<A HREF="../../../../../org/apache/poi/poifs/filesystem/DirectoryNode.html" title="class in org.apache.poi.poifs.filesystem">DirectoryNode</A>&nbsp;dir)
+                    throws java.io.IOException</PRE>
+<DL>
+<DD>Creates a PowerPointExtractor, from a specific place
+  inside an open NPOIFSFileSystem
+<P>
+<DL>
+<DT><B>Parameters:</B><DD><CODE>dir</CODE> - the POIFS Directory containing the PowerPoint document
+<DT><B>Throws:</B>
+<DD><CODE>java.io.IOException</CODE></DL>
+</DL>
+<HR>
+
+<A NAME="PowerPointExtractor(org.apache.poi.poifs.filesystem.DirectoryNode, org.apache.poi.poifs.filesystem.POIFSFileSystem)"><!-- --></A><H3>
+PowerPointExtractor</H3>
+<PRE>
+<FONT SIZE="-1">@Deprecated
+</FONT>public <B>PowerPointExtractor</B>(<A HREF="../../../../../org/apache/poi/poifs/filesystem/DirectoryNode.html" title="class in org.apache.poi.poifs.filesystem">DirectoryNode</A>&nbsp;dir,
+                                      <A HREF="../../../../../org/apache/poi/poifs/filesystem/POIFSFileSystem.html" title="class in org.apache.poi.poifs.filesystem">POIFSFileSystem</A>&nbsp;fs)
+                    throws java.io.IOException</PRE>
+<DL>
+<DD><B>Deprecated.</B>&nbsp;<I>Use <A HREF="../../../../../org/apache/poi/hslf/extractor/PowerPointExtractor.html#PowerPointExtractor(org.apache.poi.poifs.filesystem.DirectoryNode)"><CODE>PowerPointExtractor(DirectoryNode)</CODE></A> instead</I>
+<P>
+<DL>
+
+<DT><B>Throws:</B>
+<DD><CODE>java.io.IOException</CODE></DL>
+</DL>
+<HR>
+
+<A NAME="PowerPointExtractor(org.apache.poi.hslf.HSLFSlideShow)"><!-- --></A><H3>
+PowerPointExtractor</H3>
+<PRE>
+public <B>PowerPointExtractor</B>(<A HREF="../../../../../org/apache/poi/hslf/HSLFSlideShow.html" title="class in org.apache.poi.hslf">HSLFSlideShow</A>&nbsp;ss)</PRE>
+<DL>
+<DD>Creates a PowerPointExtractor, from a HSLFSlideShow
+<P>
+<DL>
+<DT><B>Parameters:</B><DD><CODE>ss</CODE> - the HSLFSlideShow to extract text from</DL>
+</DL>
+
+<!-- ============ METHOD DETAIL ========== -->
+
+<A NAME="method_detail"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="1"><FONT SIZE="+2">
+<B>Method Detail</B></FONT></TH>
+</TR>
+</TABLE>
+
+<A NAME="main(java.lang.String[])"><!-- --></A><H3>
+main</H3>
+<PRE>
+public static void <B>main</B>(java.lang.String[]&nbsp;args)
+                 throws java.io.IOException</PRE>
+<DL>
+<DD>Basic extractor. Returns all the text, and optionally all the notes
+<P>
+<DD><DL>
+
+<DT><B>Throws:</B>
+<DD><CODE>java.io.IOException</CODE></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setSlidesByDefault(boolean)"><!-- --></A><H3>
+setSlidesByDefault</H3>
+<PRE>
+public void <B>setSlidesByDefault</B>(boolean&nbsp;slidesByDefault)</PRE>
+<DL>
+<DD>Should a call to getText() return slide text? Default is yes
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setNotesByDefault(boolean)"><!-- --></A><H3>
+setNotesByDefault</H3>
+<PRE>
+public void <B>setNotesByDefault</B>(boolean&nbsp;notesByDefault)</PRE>
+<DL>
+<DD>Should a call to getText() return notes text? Default is no
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setCommentsByDefault(boolean)"><!-- --></A><H3>
+setCommentsByDefault</H3>
+<PRE>
+public void <B>setCommentsByDefault</B>(boolean&nbsp;commentsByDefault)</PRE>
+<DL>
+<DD>Should a call to getText() return comments text? Default is no
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setMasterByDefault(boolean)"><!-- --></A><H3>
+setMasterByDefault</H3>
+<PRE>
+public void <B>setMasterByDefault</B>(boolean&nbsp;masterByDefault)</PRE>
+<DL>
+<DD>Should a call to getText() return text from master? Default is no
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getText()"><!-- --></A><H3>
+getText</H3>
+<PRE>
+public java.lang.String <B>getText</B>()</PRE>
+<DL>
+<DD>Fetches all the slide text from the slideshow, but not the notes, unless
+ you've called setSlidesByDefault() and setNotesByDefault() to change this
+<P>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../../../../org/apache/poi/POITextExtractor.html#getText()">getText</A></CODE> in class <CODE><A HREF="../../../../../org/apache/poi/POITextExtractor.html" title="class in org.apache.poi">POITextExtractor</A></CODE></DL>
+</DD>
+<DD><DL>
+
+<DT><B>Returns:</B><DD>All the text from the document</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getNotes()"><!-- --></A><H3>
+getNotes</H3>
+<PRE>
+public java.lang.String <B>getNotes</B>()</PRE>
+<DL>
+<DD>Fetches all the notes text from the slideshow, but not the slide text
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getOLEShapes()"><!-- --></A><H3>
+getOLEShapes</H3>
+<PRE>
+public java.util.List&lt;<A HREF="../../../../../org/apache/poi/hslf/model/OLEShape.html" title="class in org.apache.poi.hslf.model">OLEShape</A>&gt; <B>getOLEShapes</B>()</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getText(boolean, boolean)"><!-- --></A><H3>
+getText</H3>
+<PRE>
+public java.lang.String <B>getText</B>(boolean&nbsp;getSlideText,
+                                boolean&nbsp;getNoteText)</PRE>
+<DL>
+<DD>Fetches text from the slideshow, be it slide text or note text. Because
+ the final block of text in a TextRun normally have their last \n
+ stripped, we add it back
+<P>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>getSlideText</CODE> - fetch slide text<DD><CODE>getNoteText</CODE> - fetch note text</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getText(boolean, boolean, boolean, boolean)"><!-- --></A><H3>
+getText</H3>
+<PRE>
+public java.lang.String <B>getText</B>(boolean&nbsp;getSlideText,
+                                boolean&nbsp;getNoteText,
+                                boolean&nbsp;getCommentText,
+                                boolean&nbsp;getMasterText)</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<!-- ========= END OF CLASS DATA ========= -->
+<HR>
+
+
+<!-- ======= START OF BOTTOM NAVBAR ====== -->
+<A NAME="navbar_bottom"><!-- --></A>
+<A HREF="#skip-navbar_bottom" title="Skip navigation links"></A>
+<TABLE BORDER="0" WIDTH="100%" CELLPADDING="1" CELLSPACING="0" SUMMARY="">
+<TR>
+<TD COLSPAN=2 BGCOLOR="#EEEEFF" CLASS="NavBarCell1">
+<A NAME="navbar_bottom_firstrow"><!-- --></A>
+<TABLE BORDER="0" CELLPADDING="0" CELLSPACING="3" SUMMARY="">
+  <TR ALIGN="center" VALIGN="top">
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../overview-summary.html"><FONT CLASS="NavBarFont1"><B>Overview</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="package-summary.html"><FONT CLASS="NavBarFont1"><B>Package</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#FFFFFF" CLASS="NavBarCell1Rev"> &nbsp;<FONT CLASS="NavBarFont1Rev"><B>Class</B></FONT>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="class-use/PowerPointExtractor.html"><FONT CLASS="NavBarFont1"><B>Use</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="package-tree.html"><FONT CLASS="NavBarFont1"><B>Tree</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../deprecated-list.html"><FONT CLASS="NavBarFont1"><B>Deprecated</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../index-all.html"><FONT CLASS="NavBarFont1"><B>Index</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../help-doc.html"><FONT CLASS="NavBarFont1"><B>Help</B></FONT></A>&nbsp;</TD>
+  </TR>
+</TABLE>
+</TD>
+<TD ALIGN="right" VALIGN="top" ROWSPAN=3><EM>
+</EM>
+</TD>
+</TR>
+
+<TR>
+<TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
+&nbsp;<A HREF="../../../../../org/apache/poi/hslf/extractor/ImageExtractor.html" title="class in org.apache.poi.hslf.extractor"><B>PREV CLASS</B></A>&nbsp;
+&nbsp;<A HREF="../../../../../org/apache/poi/hslf/extractor/QuickButCruddyTextExtractor.html" title="class in org.apache.poi.hslf.extractor"><B>NEXT CLASS</B></A></FONT></TD>
+<TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
+  <A HREF="../../../../../index.html?org/apache/poi/hslf/extractor/PowerPointExtractor.html" target="_top"><B>FRAMES</B></A>  &nbsp;
+&nbsp;<A HREF="PowerPointExtractor.html" target="_top"><B>NO FRAMES</B></A>  &nbsp;
+&nbsp;<SCRIPT type="text/javascript">
+  <!--
+  if(window==top) {
+    document.writeln('<A HREF="../../../../../allclasses-noframe.html"><B>All Classes</B></A>');
+  }
+  //-->
+</SCRIPT>
+<NOSCRIPT>
+  <A HREF="../../../../../allclasses-noframe.html"><B>All Classes</B></A>
+</NOSCRIPT>
+
+
+</FONT></TD>
+</TR>
+<TR>
+<TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
+  SUMMARY:&nbsp;NESTED&nbsp;|&nbsp;<A HREF="#fields_inherited_from_class_org.apache.poi.POITextExtractor">FIELD</A>&nbsp;|&nbsp;<A HREF="#constructor_summary">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_summary">METHOD</A></FONT></TD>
+<TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
+DETAIL:&nbsp;FIELD&nbsp;|&nbsp;<A HREF="#constructor_detail">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_detail">METHOD</A></FONT></TD>
+</TR>
+</TABLE>
+<A NAME="skip-navbar_bottom"></A>
+<!-- ======== END OF BOTTOM NAVBAR ======= -->
+
+<HR>
+
+                <i>Copyright 2014 The Apache Software Foundation or
+        its licensors, as applicable.</i>
+            
+</BODY>
+</HTML>

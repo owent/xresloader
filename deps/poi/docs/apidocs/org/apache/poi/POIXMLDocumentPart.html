@@ -1,0 +1,907 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!--NewPage-->
+<HTML>
+<HEAD>
+<TITLE>
+POIXMLDocumentPart (POI API Documentation)
+</TITLE>
+
+<META NAME="keywords" CONTENT="org.apache.poi.POIXMLDocumentPart class">
+
+<LINK REL ="stylesheet" TYPE="text/css" HREF="../../../stylesheet.css" TITLE="Style">
+
+<SCRIPT type="text/javascript">
+function windowTitle()
+{
+    parent.document.title="POIXMLDocumentPart (POI API Documentation)";
+}
+</SCRIPT>
+<NOSCRIPT>
+</NOSCRIPT>
+
+</HEAD>
+
+<BODY BGCOLOR="white" onload="windowTitle();">
+
+
+<!-- ========= START OF TOP NAVBAR ======= -->
+<A NAME="navbar_top"><!-- --></A>
+<A HREF="#skip-navbar_top" title="Skip navigation links"></A>
+<TABLE BORDER="0" WIDTH="100%" CELLPADDING="1" CELLSPACING="0" SUMMARY="">
+<TR>
+<TD COLSPAN=2 BGCOLOR="#EEEEFF" CLASS="NavBarCell1">
+<A NAME="navbar_top_firstrow"><!-- --></A>
+<TABLE BORDER="0" CELLPADDING="0" CELLSPACING="3" SUMMARY="">
+  <TR ALIGN="center" VALIGN="top">
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../overview-summary.html"><FONT CLASS="NavBarFont1"><B>Overview</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="package-summary.html"><FONT CLASS="NavBarFont1"><B>Package</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#FFFFFF" CLASS="NavBarCell1Rev"> &nbsp;<FONT CLASS="NavBarFont1Rev"><B>Class</B></FONT>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="class-use/POIXMLDocumentPart.html"><FONT CLASS="NavBarFont1"><B>Use</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="package-tree.html"><FONT CLASS="NavBarFont1"><B>Tree</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../deprecated-list.html"><FONT CLASS="NavBarFont1"><B>Deprecated</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../index-all.html"><FONT CLASS="NavBarFont1"><B>Index</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../help-doc.html"><FONT CLASS="NavBarFont1"><B>Help</B></FONT></A>&nbsp;</TD>
+  </TR>
+</TABLE>
+</TD>
+<TD ALIGN="right" VALIGN="top" ROWSPAN=3><EM>
+</EM>
+</TD>
+</TR>
+
+<TR>
+<TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
+&nbsp;<A HREF="../../../org/apache/poi/POIXMLDocument.html" title="class in org.apache.poi"><B>PREV CLASS</B></A>&nbsp;
+&nbsp;<A HREF="../../../org/apache/poi/POIXMLException.html" title="class in org.apache.poi"><B>NEXT CLASS</B></A></FONT></TD>
+<TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
+  <A HREF="../../../index.html?org/apache/poi/POIXMLDocumentPart.html" target="_top"><B>FRAMES</B></A>  &nbsp;
+&nbsp;<A HREF="POIXMLDocumentPart.html" target="_top"><B>NO FRAMES</B></A>  &nbsp;
+&nbsp;<SCRIPT type="text/javascript">
+  <!--
+  if(window==top) {
+    document.writeln('<A HREF="../../../allclasses-noframe.html"><B>All Classes</B></A>');
+  }
+  //-->
+</SCRIPT>
+<NOSCRIPT>
+  <A HREF="../../../allclasses-noframe.html"><B>All Classes</B></A>
+</NOSCRIPT>
+
+
+</FONT></TD>
+</TR>
+<TR>
+<TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
+  SUMMARY:&nbsp;NESTED&nbsp;|&nbsp;<A HREF="#field_summary">FIELD</A>&nbsp;|&nbsp;<A HREF="#constructor_summary">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_summary">METHOD</A></FONT></TD>
+<TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
+DETAIL:&nbsp;<A HREF="#field_detail">FIELD</A>&nbsp;|&nbsp;<A HREF="#constructor_detail">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_detail">METHOD</A></FONT></TD>
+</TR>
+</TABLE>
+<A NAME="skip-navbar_top"></A>
+<!-- ========= END OF TOP NAVBAR ========= -->
+
+<HR>
+<!-- ======== START OF CLASS DATA ======== -->
+<H2>
+<FONT SIZE="-1">
+org.apache.poi</FONT>
+<BR>
+Class POIXMLDocumentPart</H2>
+<PRE>
+java.lang.Object
+  <IMG SRC="../../../resources/inherit.gif" ALT="extended by "><B>org.apache.poi.POIXMLDocumentPart</B>
+</PRE>
+<DL>
+<DT><B>Direct Known Subclasses:</B> <DD><A HREF="../../../org/apache/poi/xssf/model/CalculationChain.html" title="class in org.apache.poi.xssf.model">CalculationChain</A>, <A HREF="../../../org/apache/poi/xssf/model/CommentsTable.html" title="class in org.apache.poi.xssf.model">CommentsTable</A>, <A HREF="../../../org/apache/poi/xssf/model/MapInfo.html" title="class in org.apache.poi.xssf.model">MapInfo</A>, <A HREF="../../../org/apache/poi/POIXMLDocument.html" title="class in org.apache.poi">POIXMLDocument</A>, <A HREF="../../../org/apache/poi/xssf/model/SharedStringsTable.html" title="class in org.apache.poi.xssf.model">SharedStringsTable</A>, <A HREF="../../../org/apache/poi/xssf/model/SingleXmlCells.html" title="class in org.apache.poi.xssf.model">SingleXmlCells</A>, <A HREF="../../../org/apache/poi/xssf/model/StylesTable.html" title="class in org.apache.poi.xssf.model">StylesTable</A>, <A HREF="../../../org/apache/poi/xssf/model/ThemesTable.html" title="class in org.apache.poi.xssf.model">ThemesTable</A>, <A HREF="../../../org/apache/poi/xslf/usermodel/XSLFChart.html" title="class in org.apache.poi.xslf.usermodel">XSLFChart</A>, <A HREF="../../../org/apache/poi/xslf/usermodel/XSLFCommentAuthors.html" title="class in org.apache.poi.xslf.usermodel">XSLFCommentAuthors</A>, <A HREF="../../../org/apache/poi/xslf/usermodel/XSLFComments.html" title="class in org.apache.poi.xslf.usermodel">XSLFComments</A>, <A HREF="../../../org/apache/poi/xslf/usermodel/XSLFPictureData.html" title="class in org.apache.poi.xslf.usermodel">XSLFPictureData</A>, <A HREF="../../../org/apache/poi/xslf/usermodel/XSLFSheet.html" title="class in org.apache.poi.xslf.usermodel">XSLFSheet</A>, <A HREF="../../../org/apache/poi/xslf/usermodel/XSLFTableStyles.html" title="class in org.apache.poi.xslf.usermodel">XSLFTableStyles</A>, <A HREF="../../../org/apache/poi/xslf/usermodel/XSLFTheme.html" title="class in org.apache.poi.xslf.usermodel">XSLFTheme</A>, <A HREF="../../../org/apache/poi/xssf/usermodel/XSSFChart.html" title="class in org.apache.poi.xssf.usermodel">XSSFChart</A>, <A HREF="../../../org/apache/poi/xssf/usermodel/XSSFDrawing.html" title="class in org.apache.poi.xssf.usermodel">XSSFDrawing</A>, <A HREF="../../../org/apache/poi/xssf/usermodel/XSSFPictureData.html" title="class in org.apache.poi.xssf.usermodel">XSSFPictureData</A>, <A HREF="../../../org/apache/poi/xssf/usermodel/XSSFSheet.html" title="class in org.apache.poi.xssf.usermodel">XSSFSheet</A>, <A HREF="../../../org/apache/poi/xssf/usermodel/XSSFTable.html" title="class in org.apache.poi.xssf.usermodel">XSSFTable</A>, <A HREF="../../../org/apache/poi/xssf/usermodel/XSSFVMLDrawing.html" title="class in org.apache.poi.xssf.usermodel">XSSFVMLDrawing</A>, <A HREF="../../../org/apache/poi/xwpf/usermodel/XWPFFootnotes.html" title="class in org.apache.poi.xwpf.usermodel">XWPFFootnotes</A>, <A HREF="../../../org/apache/poi/xwpf/usermodel/XWPFHeaderFooter.html" title="class in org.apache.poi.xwpf.usermodel">XWPFHeaderFooter</A>, <A HREF="../../../org/apache/poi/xwpf/usermodel/XWPFNumbering.html" title="class in org.apache.poi.xwpf.usermodel">XWPFNumbering</A>, <A HREF="../../../org/apache/poi/xwpf/usermodel/XWPFPictureData.html" title="class in org.apache.poi.xwpf.usermodel">XWPFPictureData</A>, <A HREF="../../../org/apache/poi/xwpf/usermodel/XWPFSettings.html" title="class in org.apache.poi.xwpf.usermodel">XWPFSettings</A>, <A HREF="../../../org/apache/poi/xwpf/usermodel/XWPFStyles.html" title="class in org.apache.poi.xwpf.usermodel">XWPFStyles</A></DD>
+</DL>
+<HR>
+<DL>
+<DT><PRE>public class <B>POIXMLDocumentPart</B><DT>extends java.lang.Object</DL>
+</PRE>
+
+<P>
+Represents an entry of a OOXML package.
+
+ <p>
+ Each POIXMLDocumentPart keeps a reference to the underlying a <A HREF="../../../org/apache/poi/openxml4j/opc/PackagePart.html" title="class in org.apache.poi.openxml4j.opc"><CODE>PackagePart</CODE></A>.
+ </p>
+<P>
+
+<P>
+<DL>
+<DT><B>Author:</B></DT>
+  <DD>Yegor Kozlov</DD>
+</DL>
+<HR>
+
+<P>
+<!-- =========== FIELD SUMMARY =========== -->
+
+<A NAME="field_summary"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+<B>Field Summary</B></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;org.apache.xmlbeans.XmlOptions</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../org/apache/poi/POIXMLDocumentPart.html#DEFAULT_XML_OPTIONS">DEFAULT_XML_OPTIONS</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+</TABLE>
+&nbsp;
+<!-- ======== CONSTRUCTOR SUMMARY ======== -->
+
+<A NAME="constructor_summary"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+<B>Constructor Summary</B></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><B><A HREF="../../../org/apache/poi/POIXMLDocumentPart.html#POIXMLDocumentPart()">POIXMLDocumentPart</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Creates new POIXMLDocumentPart   - called by client code to create new parts from scratch.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><B><A HREF="../../../org/apache/poi/POIXMLDocumentPart.html#POIXMLDocumentPart(org.apache.poi.openxml4j.opc.OPCPackage)">POIXMLDocumentPart</A></B>(<A HREF="../../../org/apache/poi/openxml4j/opc/OPCPackage.html" title="class in org.apache.poi.openxml4j.opc">OPCPackage</A>&nbsp;pkg)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Construct POIXMLDocumentPart representing a "core document" package part.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><B><A HREF="../../../org/apache/poi/POIXMLDocumentPart.html#POIXMLDocumentPart(org.apache.poi.openxml4j.opc.PackagePart, org.apache.poi.openxml4j.opc.PackageRelationship)">POIXMLDocumentPart</A></B>(<A HREF="../../../org/apache/poi/openxml4j/opc/PackagePart.html" title="class in org.apache.poi.openxml4j.opc">PackagePart</A>&nbsp;part,
+                   <A HREF="../../../org/apache/poi/openxml4j/opc/PackageRelationship.html" title="class in org.apache.poi.openxml4j.opc">PackageRelationship</A>&nbsp;rel)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Creates an POIXMLDocumentPart representing the given package part and relationship.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><B><A HREF="../../../org/apache/poi/POIXMLDocumentPart.html#POIXMLDocumentPart(org.apache.poi.POIXMLDocumentPart, org.apache.poi.openxml4j.opc.PackagePart, org.apache.poi.openxml4j.opc.PackageRelationship)">POIXMLDocumentPart</A></B>(<A HREF="../../../org/apache/poi/POIXMLDocumentPart.html" title="class in org.apache.poi">POIXMLDocumentPart</A>&nbsp;parent,
+                   <A HREF="../../../org/apache/poi/openxml4j/opc/PackagePart.html" title="class in org.apache.poi.openxml4j.opc">PackagePart</A>&nbsp;part,
+                   <A HREF="../../../org/apache/poi/openxml4j/opc/PackageRelationship.html" title="class in org.apache.poi.openxml4j.opc">PackageRelationship</A>&nbsp;rel)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Creates an POIXMLDocumentPart representing the given package part, relationship and parent
+ Called by <A HREF="../../../org/apache/poi/POIXMLDocumentPart.html#read(org.apache.poi.POIXMLFactory, java.util.Map)"><CODE>read(POIXMLFactory, java.util.Map)</CODE></A> when reading in an exisiting file.</TD>
+</TR>
+</TABLE>
+&nbsp;
+<!-- ========== METHOD SUMMARY =========== -->
+
+<A NAME="method_summary"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+<B>Method Summary</B></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../org/apache/poi/POIXMLDocumentPart.html#addRelation(java.lang.String, org.apache.poi.POIXMLDocumentPart)">addRelation</A></B>(java.lang.String&nbsp;id,
+            <A HREF="../../../org/apache/poi/POIXMLDocumentPart.html" title="class in org.apache.poi">POIXMLDocumentPart</A>&nbsp;part)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Add a new child POIXMLDocumentPart</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>protected &nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../org/apache/poi/POIXMLDocumentPart.html#commit()">commit</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Save the content in the underlying package part.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../org/apache/poi/POIXMLDocumentPart.html" title="class in org.apache.poi">POIXMLDocumentPart</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../org/apache/poi/POIXMLDocumentPart.html#createRelationship(org.apache.poi.POIXMLRelation, org.apache.poi.POIXMLFactory)">createRelationship</A></B>(<A HREF="../../../org/apache/poi/POIXMLRelation.html" title="class in org.apache.poi">POIXMLRelation</A>&nbsp;descriptor,
+                   <A HREF="../../../org/apache/poi/POIXMLFactory.html" title="class in org.apache.poi">POIXMLFactory</A>&nbsp;factory)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Create a new child POIXMLDocumentPart</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../org/apache/poi/POIXMLDocumentPart.html" title="class in org.apache.poi">POIXMLDocumentPart</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../org/apache/poi/POIXMLDocumentPart.html#createRelationship(org.apache.poi.POIXMLRelation, org.apache.poi.POIXMLFactory, int)">createRelationship</A></B>(<A HREF="../../../org/apache/poi/POIXMLRelation.html" title="class in org.apache.poi">POIXMLRelation</A>&nbsp;descriptor,
+                   <A HREF="../../../org/apache/poi/POIXMLFactory.html" title="class in org.apache.poi">POIXMLFactory</A>&nbsp;factory,
+                   int&nbsp;idx)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>protected &nbsp;<A HREF="../../../org/apache/poi/POIXMLDocumentPart.html" title="class in org.apache.poi">POIXMLDocumentPart</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../org/apache/poi/POIXMLDocumentPart.html#createRelationship(org.apache.poi.POIXMLRelation, org.apache.poi.POIXMLFactory, int, boolean)">createRelationship</A></B>(<A HREF="../../../org/apache/poi/POIXMLRelation.html" title="class in org.apache.poi">POIXMLRelation</A>&nbsp;descriptor,
+                   <A HREF="../../../org/apache/poi/POIXMLFactory.html" title="class in org.apache.poi">POIXMLFactory</A>&nbsp;factory,
+                   int&nbsp;idx,
+                   boolean&nbsp;noRelation)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Create a new child POIXMLDocumentPart</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../org/apache/poi/openxml4j/opc/PackagePart.html" title="class in org.apache.poi.openxml4j.opc">PackagePart</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../org/apache/poi/POIXMLDocumentPart.html#getPackagePart()">getPackagePart</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Provides access to the underlying PackagePart</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../org/apache/poi/openxml4j/opc/PackageRelationship.html" title="class in org.apache.poi.openxml4j.opc">PackageRelationship</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../org/apache/poi/POIXMLDocumentPart.html#getPackageRelationship()">getPackageRelationship</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Provides access to the PackageRelationship that identifies this POIXMLDocumentPart</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../org/apache/poi/POIXMLDocumentPart.html" title="class in org.apache.poi">POIXMLDocumentPart</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../org/apache/poi/POIXMLDocumentPart.html#getParent()">getParent</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns the parent POIXMLDocumentPart.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../org/apache/poi/POIXMLDocumentPart.html" title="class in org.apache.poi">POIXMLDocumentPart</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../org/apache/poi/POIXMLDocumentPart.html#getRelationById(java.lang.String)">getRelationById</A></B>(java.lang.String&nbsp;id)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns the target <A HREF="../../../org/apache/poi/POIXMLDocumentPart.html" title="class in org.apache.poi"><CODE>POIXMLDocumentPart</CODE></A>, where a
+ <A HREF="../../../org/apache/poi/openxml4j/opc/PackageRelationship.html" title="class in org.apache.poi.openxml4j.opc"><CODE>PackageRelationship</CODE></A> is set from the <A HREF="../../../org/apache/poi/openxml4j/opc/PackagePart.html" title="class in org.apache.poi.openxml4j.opc"><CODE>PackagePart</CODE></A> of this
+ <A HREF="../../../org/apache/poi/POIXMLDocumentPart.html" title="class in org.apache.poi"><CODE>POIXMLDocumentPart</CODE></A> to the <A HREF="../../../org/apache/poi/openxml4j/opc/PackagePart.html" title="class in org.apache.poi.openxml4j.opc"><CODE>PackagePart</CODE></A> of the target
+ <A HREF="../../../org/apache/poi/POIXMLDocumentPart.html" title="class in org.apache.poi"><CODE>POIXMLDocumentPart</CODE></A> with a <A HREF="../../../org/apache/poi/openxml4j/opc/PackageRelationship.html#getId()"><CODE>PackageRelationship.getId()</CODE></A>
+ matching the given parameter value.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;java.lang.String</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../org/apache/poi/POIXMLDocumentPart.html#getRelationId(org.apache.poi.POIXMLDocumentPart)">getRelationId</A></B>(<A HREF="../../../org/apache/poi/POIXMLDocumentPart.html" title="class in org.apache.poi">POIXMLDocumentPart</A>&nbsp;part)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns the <A HREF="../../../org/apache/poi/openxml4j/opc/PackageRelationship.html#getId()"><CODE>PackageRelationship.getId()</CODE></A> of the
+ <A HREF="../../../org/apache/poi/openxml4j/opc/PackageRelationship.html" title="class in org.apache.poi.openxml4j.opc"><CODE>PackageRelationship</CODE></A>, that sources from the <A HREF="../../../org/apache/poi/openxml4j/opc/PackagePart.html" title="class in org.apache.poi.openxml4j.opc"><CODE>PackagePart</CODE></A> of
+ this <A HREF="../../../org/apache/poi/POIXMLDocumentPart.html" title="class in org.apache.poi"><CODE>POIXMLDocumentPart</CODE></A> to the <A HREF="../../../org/apache/poi/openxml4j/opc/PackagePart.html" title="class in org.apache.poi.openxml4j.opc"><CODE>PackagePart</CODE></A> of the given
+ parameter value.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;java.util.List&lt;<A HREF="../../../org/apache/poi/POIXMLDocumentPart.html" title="class in org.apache.poi">POIXMLDocumentPart</A>&gt;</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../org/apache/poi/POIXMLDocumentPart.html#getRelations()">getRelations</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns the list of child relations for this POIXMLDocumentPart</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>protected &nbsp;<A HREF="../../../org/apache/poi/openxml4j/opc/PackagePart.html" title="class in org.apache.poi.openxml4j.opc">PackagePart</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../org/apache/poi/POIXMLDocumentPart.html#getTargetPart(org.apache.poi.openxml4j.opc.PackageRelationship)">getTargetPart</A></B>(<A HREF="../../../org/apache/poi/openxml4j/opc/PackageRelationship.html" title="class in org.apache.poi.openxml4j.opc">PackageRelationship</A>&nbsp;rel)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Get the PackagePart that is the target of a relationship from this Part.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>protected &nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../org/apache/poi/POIXMLDocumentPart.html#onDocumentCreate()">onDocumentCreate</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Fired when a new package part is created</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>protected &nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../org/apache/poi/POIXMLDocumentPart.html#onDocumentRead()">onDocumentRead</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Fired when a package part is read</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>protected &nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../org/apache/poi/POIXMLDocumentPart.html#onDocumentRemove()">onDocumentRemove</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Fired when a package part is about to be removed from the package</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>protected &nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../org/apache/poi/POIXMLDocumentPart.html#onSave(java.util.Set)">onSave</A></B>(java.util.Set&lt;<A HREF="../../../org/apache/poi/openxml4j/opc/PackagePart.html" title="class in org.apache.poi.openxml4j.opc">PackagePart</A>&gt;&nbsp;alreadySaved)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Save changes in the underlying OOXML package.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>protected &nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../org/apache/poi/POIXMLDocumentPart.html#prepareForCommit()">prepareForCommit</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Ensure that a memory based package part does not have lingering data from previous 
+ commit() calls.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>protected &nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../org/apache/poi/POIXMLDocumentPart.html#read(org.apache.poi.POIXMLFactory, java.util.Map)">read</A></B>(<A HREF="../../../org/apache/poi/POIXMLFactory.html" title="class in org.apache.poi">POIXMLFactory</A>&nbsp;factory,
+     java.util.Map&lt;<A HREF="../../../org/apache/poi/openxml4j/opc/PackagePart.html" title="class in org.apache.poi.openxml4j.opc">PackagePart</A>,<A HREF="../../../org/apache/poi/POIXMLDocumentPart.html" title="class in org.apache.poi">POIXMLDocumentPart</A>&gt;&nbsp;context)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Iterate through the underlying PackagePart and create child POIXMLFactory instances
+ using the specified factory</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>protected &nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../org/apache/poi/POIXMLDocumentPart.html#rebase(org.apache.poi.openxml4j.opc.OPCPackage)">rebase</A></B>(<A HREF="../../../org/apache/poi/openxml4j/opc/OPCPackage.html" title="class in org.apache.poi.openxml4j.opc">OPCPackage</A>&nbsp;pkg)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;When you open something like a theme, call this to
+  re-base the XML Document onto the core child of the
+  current core document</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>protected &nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../org/apache/poi/POIXMLDocumentPart.html#removeRelation(org.apache.poi.POIXMLDocumentPart)">removeRelation</A></B>(<A HREF="../../../org/apache/poi/POIXMLDocumentPart.html" title="class in org.apache.poi">POIXMLDocumentPart</A>&nbsp;part)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Remove the relation to the specified part in this package and remove the
+ part, if it is no longer needed.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>protected &nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../org/apache/poi/POIXMLDocumentPart.html#removeRelation(org.apache.poi.POIXMLDocumentPart, boolean)">removeRelation</A></B>(<A HREF="../../../org/apache/poi/POIXMLDocumentPart.html" title="class in org.apache.poi">POIXMLDocumentPart</A>&nbsp;part,
+               boolean&nbsp;removeUnusedParts)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Remove the relation to the specified part in this package and remove the
+ part, if it is no longer needed and flag is set to true.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;java.lang.String</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../org/apache/poi/POIXMLDocumentPart.html#toString()">toString</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+</TABLE>
+&nbsp;<A NAME="methods_inherited_from_class_java.lang.Object"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#EEEEFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left"><B>Methods inherited from class java.lang.Object</B></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE>clone, equals, finalize, getClass, hashCode, notify, notifyAll, wait, wait, wait</CODE></TD>
+</TR>
+</TABLE>
+&nbsp;
+<P>
+
+<!-- ============ FIELD DETAIL =========== -->
+
+<A NAME="field_detail"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="1"><FONT SIZE="+2">
+<B>Field Detail</B></FONT></TH>
+</TR>
+</TABLE>
+
+<A NAME="DEFAULT_XML_OPTIONS"><!-- --></A><H3>
+DEFAULT_XML_OPTIONS</H3>
+<PRE>
+public static final org.apache.xmlbeans.XmlOptions <B>DEFAULT_XML_OPTIONS</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+
+<!-- ========= CONSTRUCTOR DETAIL ======== -->
+
+<A NAME="constructor_detail"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="1"><FONT SIZE="+2">
+<B>Constructor Detail</B></FONT></TH>
+</TR>
+</TABLE>
+
+<A NAME="POIXMLDocumentPart(org.apache.poi.openxml4j.opc.OPCPackage)"><!-- --></A><H3>
+POIXMLDocumentPart</H3>
+<PRE>
+public <B>POIXMLDocumentPart</B>(<A HREF="../../../org/apache/poi/openxml4j/opc/OPCPackage.html" title="class in org.apache.poi.openxml4j.opc">OPCPackage</A>&nbsp;pkg)</PRE>
+<DL>
+<DD>Construct POIXMLDocumentPart representing a "core document" package part.
+<P>
+</DL>
+<HR>
+
+<A NAME="POIXMLDocumentPart()"><!-- --></A><H3>
+POIXMLDocumentPart</H3>
+<PRE>
+public <B>POIXMLDocumentPart</B>()</PRE>
+<DL>
+<DD>Creates new POIXMLDocumentPart   - called by client code to create new parts from scratch.
+<P>
+<DL>
+<DT><B>See Also:</B><DD><A HREF="../../../org/apache/poi/POIXMLDocumentPart.html#createRelationship(org.apache.poi.POIXMLRelation, org.apache.poi.POIXMLFactory, int, boolean)"><CODE>createRelationship(POIXMLRelation, POIXMLFactory, int, boolean)</CODE></A></DL>
+</DL>
+<HR>
+
+<A NAME="POIXMLDocumentPart(org.apache.poi.openxml4j.opc.PackagePart, org.apache.poi.openxml4j.opc.PackageRelationship)"><!-- --></A><H3>
+POIXMLDocumentPart</H3>
+<PRE>
+public <B>POIXMLDocumentPart</B>(<A HREF="../../../org/apache/poi/openxml4j/opc/PackagePart.html" title="class in org.apache.poi.openxml4j.opc">PackagePart</A>&nbsp;part,
+                          <A HREF="../../../org/apache/poi/openxml4j/opc/PackageRelationship.html" title="class in org.apache.poi.openxml4j.opc">PackageRelationship</A>&nbsp;rel)</PRE>
+<DL>
+<DD>Creates an POIXMLDocumentPart representing the given package part and relationship.
+ Called by <A HREF="../../../org/apache/poi/POIXMLDocumentPart.html#read(org.apache.poi.POIXMLFactory, java.util.Map)"><CODE>read(POIXMLFactory, java.util.Map)</CODE></A> when reading in an exisiting file.
+<P>
+<DL>
+<DT><B>Parameters:</B><DD><CODE>part</CODE> - - The package part that holds xml data represenring this sheet.<DD><CODE>rel</CODE> - - the relationship of the given package part<DT><B>See Also:</B><DD><A HREF="../../../org/apache/poi/POIXMLDocumentPart.html#read(org.apache.poi.POIXMLFactory, java.util.Map)"><CODE>read(POIXMLFactory, java.util.Map)</CODE></A></DL>
+</DL>
+<HR>
+
+<A NAME="POIXMLDocumentPart(org.apache.poi.POIXMLDocumentPart, org.apache.poi.openxml4j.opc.PackagePart, org.apache.poi.openxml4j.opc.PackageRelationship)"><!-- --></A><H3>
+POIXMLDocumentPart</H3>
+<PRE>
+public <B>POIXMLDocumentPart</B>(<A HREF="../../../org/apache/poi/POIXMLDocumentPart.html" title="class in org.apache.poi">POIXMLDocumentPart</A>&nbsp;parent,
+                          <A HREF="../../../org/apache/poi/openxml4j/opc/PackagePart.html" title="class in org.apache.poi.openxml4j.opc">PackagePart</A>&nbsp;part,
+                          <A HREF="../../../org/apache/poi/openxml4j/opc/PackageRelationship.html" title="class in org.apache.poi.openxml4j.opc">PackageRelationship</A>&nbsp;rel)</PRE>
+<DL>
+<DD>Creates an POIXMLDocumentPart representing the given package part, relationship and parent
+ Called by <A HREF="../../../org/apache/poi/POIXMLDocumentPart.html#read(org.apache.poi.POIXMLFactory, java.util.Map)"><CODE>read(POIXMLFactory, java.util.Map)</CODE></A> when reading in an exisiting file.
+<P>
+<DL>
+<DT><B>Parameters:</B><DD><CODE>parent</CODE> - - Parent part<DD><CODE>part</CODE> - - The package part that holds xml data represenring this sheet.<DD><CODE>rel</CODE> - - the relationship of the given package part<DT><B>See Also:</B><DD><A HREF="../../../org/apache/poi/POIXMLDocumentPart.html#read(org.apache.poi.POIXMLFactory, java.util.Map)"><CODE>read(POIXMLFactory, java.util.Map)</CODE></A></DL>
+</DL>
+
+<!-- ============ METHOD DETAIL ========== -->
+
+<A NAME="method_detail"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="1"><FONT SIZE="+2">
+<B>Method Detail</B></FONT></TH>
+</TR>
+</TABLE>
+
+<A NAME="rebase(org.apache.poi.openxml4j.opc.OPCPackage)"><!-- --></A><H3>
+rebase</H3>
+<PRE>
+protected final void <B>rebase</B>(<A HREF="../../../org/apache/poi/openxml4j/opc/OPCPackage.html" title="class in org.apache.poi.openxml4j.opc">OPCPackage</A>&nbsp;pkg)
+                     throws <A HREF="../../../org/apache/poi/openxml4j/exceptions/InvalidFormatException.html" title="class in org.apache.poi.openxml4j.exceptions">InvalidFormatException</A></PRE>
+<DL>
+<DD>When you open something like a theme, call this to
+  re-base the XML Document onto the core child of the
+  current core document
+<P>
+<DD><DL>
+
+<DT><B>Throws:</B>
+<DD><CODE><A HREF="../../../org/apache/poi/openxml4j/exceptions/InvalidFormatException.html" title="class in org.apache.poi.openxml4j.exceptions">InvalidFormatException</A></CODE></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getPackagePart()"><!-- --></A><H3>
+getPackagePart</H3>
+<PRE>
+public final <A HREF="../../../org/apache/poi/openxml4j/opc/PackagePart.html" title="class in org.apache.poi.openxml4j.opc">PackagePart</A> <B>getPackagePart</B>()</PRE>
+<DL>
+<DD>Provides access to the underlying PackagePart
+<P>
+<DD><DL>
+
+<DT><B>Returns:</B><DD>the underlying PackagePart</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getPackageRelationship()"><!-- --></A><H3>
+getPackageRelationship</H3>
+<PRE>
+public final <A HREF="../../../org/apache/poi/openxml4j/opc/PackageRelationship.html" title="class in org.apache.poi.openxml4j.opc">PackageRelationship</A> <B>getPackageRelationship</B>()</PRE>
+<DL>
+<DD>Provides access to the PackageRelationship that identifies this POIXMLDocumentPart
+<P>
+<DD><DL>
+
+<DT><B>Returns:</B><DD>the PackageRelationship that identifies this POIXMLDocumentPart</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getRelations()"><!-- --></A><H3>
+getRelations</H3>
+<PRE>
+public final java.util.List&lt;<A HREF="../../../org/apache/poi/POIXMLDocumentPart.html" title="class in org.apache.poi">POIXMLDocumentPart</A>&gt; <B>getRelations</B>()</PRE>
+<DL>
+<DD>Returns the list of child relations for this POIXMLDocumentPart
+<P>
+<DD><DL>
+
+<DT><B>Returns:</B><DD>child relations</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getRelationById(java.lang.String)"><!-- --></A><H3>
+getRelationById</H3>
+<PRE>
+public final <A HREF="../../../org/apache/poi/POIXMLDocumentPart.html" title="class in org.apache.poi">POIXMLDocumentPart</A> <B>getRelationById</B>(java.lang.String&nbsp;id)</PRE>
+<DL>
+<DD>Returns the target <A HREF="../../../org/apache/poi/POIXMLDocumentPart.html" title="class in org.apache.poi"><CODE>POIXMLDocumentPart</CODE></A>, where a
+ <A HREF="../../../org/apache/poi/openxml4j/opc/PackageRelationship.html" title="class in org.apache.poi.openxml4j.opc"><CODE>PackageRelationship</CODE></A> is set from the <A HREF="../../../org/apache/poi/openxml4j/opc/PackagePart.html" title="class in org.apache.poi.openxml4j.opc"><CODE>PackagePart</CODE></A> of this
+ <A HREF="../../../org/apache/poi/POIXMLDocumentPart.html" title="class in org.apache.poi"><CODE>POIXMLDocumentPart</CODE></A> to the <A HREF="../../../org/apache/poi/openxml4j/opc/PackagePart.html" title="class in org.apache.poi.openxml4j.opc"><CODE>PackagePart</CODE></A> of the target
+ <A HREF="../../../org/apache/poi/POIXMLDocumentPart.html" title="class in org.apache.poi"><CODE>POIXMLDocumentPart</CODE></A> with a <A HREF="../../../org/apache/poi/openxml4j/opc/PackageRelationship.html#getId()"><CODE>PackageRelationship.getId()</CODE></A>
+ matching the given parameter value.
+<P>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>id</CODE> - The relation id to look for
+<DT><B>Returns:</B><DD>the target part of the relation, or null, if none exists</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getRelationId(org.apache.poi.POIXMLDocumentPart)"><!-- --></A><H3>
+getRelationId</H3>
+<PRE>
+public final java.lang.String <B>getRelationId</B>(<A HREF="../../../org/apache/poi/POIXMLDocumentPart.html" title="class in org.apache.poi">POIXMLDocumentPart</A>&nbsp;part)</PRE>
+<DL>
+<DD>Returns the <A HREF="../../../org/apache/poi/openxml4j/opc/PackageRelationship.html#getId()"><CODE>PackageRelationship.getId()</CODE></A> of the
+ <A HREF="../../../org/apache/poi/openxml4j/opc/PackageRelationship.html" title="class in org.apache.poi.openxml4j.opc"><CODE>PackageRelationship</CODE></A>, that sources from the <A HREF="../../../org/apache/poi/openxml4j/opc/PackagePart.html" title="class in org.apache.poi.openxml4j.opc"><CODE>PackagePart</CODE></A> of
+ this <A HREF="../../../org/apache/poi/POIXMLDocumentPart.html" title="class in org.apache.poi"><CODE>POIXMLDocumentPart</CODE></A> to the <A HREF="../../../org/apache/poi/openxml4j/opc/PackagePart.html" title="class in org.apache.poi.openxml4j.opc"><CODE>PackagePart</CODE></A> of the given
+ parameter value.
+<P>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>part</CODE> - The <A HREF="../../../org/apache/poi/POIXMLDocumentPart.html" title="class in org.apache.poi"><CODE>POIXMLDocumentPart</CODE></A> for which the according
+            relation-id shall be found.
+<DT><B>Returns:</B><DD>The value of the <A HREF="../../../org/apache/poi/openxml4j/opc/PackageRelationship.html#getId()"><CODE>PackageRelationship.getId()</CODE></A> or null, if
+         parts are not related.</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="addRelation(java.lang.String, org.apache.poi.POIXMLDocumentPart)"><!-- --></A><H3>
+addRelation</H3>
+<PRE>
+public final void <B>addRelation</B>(java.lang.String&nbsp;id,
+                              <A HREF="../../../org/apache/poi/POIXMLDocumentPart.html" title="class in org.apache.poi">POIXMLDocumentPart</A>&nbsp;part)</PRE>
+<DL>
+<DD>Add a new child POIXMLDocumentPart
+<P>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>part</CODE> - the child to add</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="removeRelation(org.apache.poi.POIXMLDocumentPart)"><!-- --></A><H3>
+removeRelation</H3>
+<PRE>
+protected final void <B>removeRelation</B>(<A HREF="../../../org/apache/poi/POIXMLDocumentPart.html" title="class in org.apache.poi">POIXMLDocumentPart</A>&nbsp;part)</PRE>
+<DL>
+<DD>Remove the relation to the specified part in this package and remove the
+ part, if it is no longer needed.
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="removeRelation(org.apache.poi.POIXMLDocumentPart, boolean)"><!-- --></A><H3>
+removeRelation</H3>
+<PRE>
+protected final boolean <B>removeRelation</B>(<A HREF="../../../org/apache/poi/POIXMLDocumentPart.html" title="class in org.apache.poi">POIXMLDocumentPart</A>&nbsp;part,
+                                       boolean&nbsp;removeUnusedParts)</PRE>
+<DL>
+<DD>Remove the relation to the specified part in this package and remove the
+ part, if it is no longer needed and flag is set to true.
+<P>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>part</CODE> - The related part, to which the relation shall be removed.<DD><CODE>removeUnusedParts</CODE> - true, if the part shall be removed from the package if not
+            needed any longer.</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getParent()"><!-- --></A><H3>
+getParent</H3>
+<PRE>
+public final <A HREF="../../../org/apache/poi/POIXMLDocumentPart.html" title="class in org.apache.poi">POIXMLDocumentPart</A> <B>getParent</B>()</PRE>
+<DL>
+<DD>Returns the parent POIXMLDocumentPart. All parts except root have not-null parent.
+<P>
+<DD><DL>
+
+<DT><B>Returns:</B><DD>the parent POIXMLDocumentPart or <code>null</code> for the root element.</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="toString()"><!-- --></A><H3>
+toString</H3>
+<PRE>
+public java.lang.String <B>toString</B>()</PRE>
+<DL>
+<DD><DL>
+<DT><B>Overrides:</B><DD><CODE>toString</CODE> in class <CODE>java.lang.Object</CODE></DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="commit()"><!-- --></A><H3>
+commit</H3>
+<PRE>
+protected void <B>commit</B>()
+               throws java.io.IOException</PRE>
+<DL>
+<DD>Save the content in the underlying package part.
+ Default implementation is empty meaning that the package part is left unmodified.
+
+ Sub-classes should override and add logic to marshal the "model" into Ooxml4J.
+
+ For example, the code saving a generic XML entry may look as follows:
+ <pre><code>
+ protected void commit() throws IOException {
+   PackagePart part = getPackagePart();
+   OutputStream out = part.getOutputStream();
+   XmlObject bean = getXmlBean(); //the "model" which holds changes in memory
+   bean.save(out, DEFAULT_XML_OPTIONS);
+   out.close();
+ }
+  </code></pre>
+<P>
+<DD><DL>
+
+<DT><B>Throws:</B>
+<DD><CODE>java.io.IOException</CODE></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="onSave(java.util.Set)"><!-- --></A><H3>
+onSave</H3>
+<PRE>
+protected final void <B>onSave</B>(java.util.Set&lt;<A HREF="../../../org/apache/poi/openxml4j/opc/PackagePart.html" title="class in org.apache.poi.openxml4j.opc">PackagePart</A>&gt;&nbsp;alreadySaved)
+                     throws java.io.IOException</PRE>
+<DL>
+<DD>Save changes in the underlying OOXML package.
+ Recursively fires <A HREF="../../../org/apache/poi/POIXMLDocumentPart.html#commit()"><CODE>commit()</CODE></A> for each package part
+<P>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>alreadySaved</CODE> - context set containing already visited nodes
+<DT><B>Throws:</B>
+<DD><CODE>java.io.IOException</CODE></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="prepareForCommit()"><!-- --></A><H3>
+prepareForCommit</H3>
+<PRE>
+protected void <B>prepareForCommit</B>()</PRE>
+<DL>
+<DD>Ensure that a memory based package part does not have lingering data from previous 
+ commit() calls. 
+ 
+ Note: This is overwritten for some objects, as *PictureData seem to store the actual content 
+ in the part directly without keeping a copy like all others therefore we need to handle them differently.
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="createRelationship(org.apache.poi.POIXMLRelation, org.apache.poi.POIXMLFactory)"><!-- --></A><H3>
+createRelationship</H3>
+<PRE>
+public final <A HREF="../../../org/apache/poi/POIXMLDocumentPart.html" title="class in org.apache.poi">POIXMLDocumentPart</A> <B>createRelationship</B>(<A HREF="../../../org/apache/poi/POIXMLRelation.html" title="class in org.apache.poi">POIXMLRelation</A>&nbsp;descriptor,
+                                                   <A HREF="../../../org/apache/poi/POIXMLFactory.html" title="class in org.apache.poi">POIXMLFactory</A>&nbsp;factory)</PRE>
+<DL>
+<DD>Create a new child POIXMLDocumentPart
+<P>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>descriptor</CODE> - the part descriptor<DD><CODE>factory</CODE> - the factory that will create an instance of the requested relation
+<DT><B>Returns:</B><DD>the created child POIXMLDocumentPart</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="createRelationship(org.apache.poi.POIXMLRelation, org.apache.poi.POIXMLFactory, int)"><!-- --></A><H3>
+createRelationship</H3>
+<PRE>
+public final <A HREF="../../../org/apache/poi/POIXMLDocumentPart.html" title="class in org.apache.poi">POIXMLDocumentPart</A> <B>createRelationship</B>(<A HREF="../../../org/apache/poi/POIXMLRelation.html" title="class in org.apache.poi">POIXMLRelation</A>&nbsp;descriptor,
+                                                   <A HREF="../../../org/apache/poi/POIXMLFactory.html" title="class in org.apache.poi">POIXMLFactory</A>&nbsp;factory,
+                                                   int&nbsp;idx)</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="createRelationship(org.apache.poi.POIXMLRelation, org.apache.poi.POIXMLFactory, int, boolean)"><!-- --></A><H3>
+createRelationship</H3>
+<PRE>
+protected final <A HREF="../../../org/apache/poi/POIXMLDocumentPart.html" title="class in org.apache.poi">POIXMLDocumentPart</A> <B>createRelationship</B>(<A HREF="../../../org/apache/poi/POIXMLRelation.html" title="class in org.apache.poi">POIXMLRelation</A>&nbsp;descriptor,
+                                                      <A HREF="../../../org/apache/poi/POIXMLFactory.html" title="class in org.apache.poi">POIXMLFactory</A>&nbsp;factory,
+                                                      int&nbsp;idx,
+                                                      boolean&nbsp;noRelation)</PRE>
+<DL>
+<DD>Create a new child POIXMLDocumentPart
+<P>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>descriptor</CODE> - the part descriptor<DD><CODE>factory</CODE> - the factory that will create an instance of the requested relation<DD><CODE>idx</CODE> - part number<DD><CODE>noRelation</CODE> - if true, then no relationship is added.
+<DT><B>Returns:</B><DD>the created child POIXMLDocumentPart</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="read(org.apache.poi.POIXMLFactory, java.util.Map)"><!-- --></A><H3>
+read</H3>
+<PRE>
+protected void <B>read</B>(<A HREF="../../../org/apache/poi/POIXMLFactory.html" title="class in org.apache.poi">POIXMLFactory</A>&nbsp;factory,
+                    java.util.Map&lt;<A HREF="../../../org/apache/poi/openxml4j/opc/PackagePart.html" title="class in org.apache.poi.openxml4j.opc">PackagePart</A>,<A HREF="../../../org/apache/poi/POIXMLDocumentPart.html" title="class in org.apache.poi">POIXMLDocumentPart</A>&gt;&nbsp;context)
+             throws <A HREF="../../../org/apache/poi/openxml4j/exceptions/OpenXML4JException.html" title="class in org.apache.poi.openxml4j.exceptions">OpenXML4JException</A></PRE>
+<DL>
+<DD>Iterate through the underlying PackagePart and create child POIXMLFactory instances
+ using the specified factory
+<P>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>factory</CODE> - the factory object that creates POIXMLFactory instances<DD><CODE>context</CODE> - context map containing already visited noted keyed by targetURI
+<DT><B>Throws:</B>
+<DD><CODE><A HREF="../../../org/apache/poi/openxml4j/exceptions/OpenXML4JException.html" title="class in org.apache.poi.openxml4j.exceptions">OpenXML4JException</A></CODE></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getTargetPart(org.apache.poi.openxml4j.opc.PackageRelationship)"><!-- --></A><H3>
+getTargetPart</H3>
+<PRE>
+protected <A HREF="../../../org/apache/poi/openxml4j/opc/PackagePart.html" title="class in org.apache.poi.openxml4j.opc">PackagePart</A> <B>getTargetPart</B>(<A HREF="../../../org/apache/poi/openxml4j/opc/PackageRelationship.html" title="class in org.apache.poi.openxml4j.opc">PackageRelationship</A>&nbsp;rel)
+                             throws <A HREF="../../../org/apache/poi/openxml4j/exceptions/InvalidFormatException.html" title="class in org.apache.poi.openxml4j.exceptions">InvalidFormatException</A></PRE>
+<DL>
+<DD>Get the PackagePart that is the target of a relationship from this Part.
+<P>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>rel</CODE> - The relationship
+<DT><B>Returns:</B><DD>The target part
+<DT><B>Throws:</B>
+<DD><CODE><A HREF="../../../org/apache/poi/openxml4j/exceptions/InvalidFormatException.html" title="class in org.apache.poi.openxml4j.exceptions">InvalidFormatException</A></CODE></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="onDocumentCreate()"><!-- --></A><H3>
+onDocumentCreate</H3>
+<PRE>
+protected void <B>onDocumentCreate</B>()
+                         throws java.io.IOException</PRE>
+<DL>
+<DD>Fired when a new package part is created
+<P>
+<DD><DL>
+
+<DT><B>Throws:</B>
+<DD><CODE>java.io.IOException</CODE></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="onDocumentRead()"><!-- --></A><H3>
+onDocumentRead</H3>
+<PRE>
+protected void <B>onDocumentRead</B>()
+                       throws java.io.IOException</PRE>
+<DL>
+<DD>Fired when a package part is read
+<P>
+<DD><DL>
+
+<DT><B>Throws:</B>
+<DD><CODE>java.io.IOException</CODE></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="onDocumentRemove()"><!-- --></A><H3>
+onDocumentRemove</H3>
+<PRE>
+protected void <B>onDocumentRemove</B>()
+                         throws java.io.IOException</PRE>
+<DL>
+<DD>Fired when a package part is about to be removed from the package
+<P>
+<DD><DL>
+
+<DT><B>Throws:</B>
+<DD><CODE>java.io.IOException</CODE></DL>
+</DD>
+</DL>
+<!-- ========= END OF CLASS DATA ========= -->
+<HR>
+
+
+<!-- ======= START OF BOTTOM NAVBAR ====== -->
+<A NAME="navbar_bottom"><!-- --></A>
+<A HREF="#skip-navbar_bottom" title="Skip navigation links"></A>
+<TABLE BORDER="0" WIDTH="100%" CELLPADDING="1" CELLSPACING="0" SUMMARY="">
+<TR>
+<TD COLSPAN=2 BGCOLOR="#EEEEFF" CLASS="NavBarCell1">
+<A NAME="navbar_bottom_firstrow"><!-- --></A>
+<TABLE BORDER="0" CELLPADDING="0" CELLSPACING="3" SUMMARY="">
+  <TR ALIGN="center" VALIGN="top">
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../overview-summary.html"><FONT CLASS="NavBarFont1"><B>Overview</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="package-summary.html"><FONT CLASS="NavBarFont1"><B>Package</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#FFFFFF" CLASS="NavBarCell1Rev"> &nbsp;<FONT CLASS="NavBarFont1Rev"><B>Class</B></FONT>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="class-use/POIXMLDocumentPart.html"><FONT CLASS="NavBarFont1"><B>Use</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="package-tree.html"><FONT CLASS="NavBarFont1"><B>Tree</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../deprecated-list.html"><FONT CLASS="NavBarFont1"><B>Deprecated</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../index-all.html"><FONT CLASS="NavBarFont1"><B>Index</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../help-doc.html"><FONT CLASS="NavBarFont1"><B>Help</B></FONT></A>&nbsp;</TD>
+  </TR>
+</TABLE>
+</TD>
+<TD ALIGN="right" VALIGN="top" ROWSPAN=3><EM>
+</EM>
+</TD>
+</TR>
+
+<TR>
+<TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
+&nbsp;<A HREF="../../../org/apache/poi/POIXMLDocument.html" title="class in org.apache.poi"><B>PREV CLASS</B></A>&nbsp;
+&nbsp;<A HREF="../../../org/apache/poi/POIXMLException.html" title="class in org.apache.poi"><B>NEXT CLASS</B></A></FONT></TD>
+<TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
+  <A HREF="../../../index.html?org/apache/poi/POIXMLDocumentPart.html" target="_top"><B>FRAMES</B></A>  &nbsp;
+&nbsp;<A HREF="POIXMLDocumentPart.html" target="_top"><B>NO FRAMES</B></A>  &nbsp;
+&nbsp;<SCRIPT type="text/javascript">
+  <!--
+  if(window==top) {
+    document.writeln('<A HREF="../../../allclasses-noframe.html"><B>All Classes</B></A>');
+  }
+  //-->
+</SCRIPT>
+<NOSCRIPT>
+  <A HREF="../../../allclasses-noframe.html"><B>All Classes</B></A>
+</NOSCRIPT>
+
+
+</FONT></TD>
+</TR>
+<TR>
+<TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
+  SUMMARY:&nbsp;NESTED&nbsp;|&nbsp;<A HREF="#field_summary">FIELD</A>&nbsp;|&nbsp;<A HREF="#constructor_summary">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_summary">METHOD</A></FONT></TD>
+<TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
+DETAIL:&nbsp;<A HREF="#field_detail">FIELD</A>&nbsp;|&nbsp;<A HREF="#constructor_detail">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_detail">METHOD</A></FONT></TD>
+</TR>
+</TABLE>
+<A NAME="skip-navbar_bottom"></A>
+<!-- ======== END OF BOTTOM NAVBAR ======= -->
+
+<HR>
+
+                <i>Copyright 2014 The Apache Software Foundation or
+        its licensors, as applicable.</i>
+            
+</BODY>
+</HTML>

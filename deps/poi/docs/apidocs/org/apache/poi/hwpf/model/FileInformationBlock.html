@@ -1,0 +1,3256 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!--NewPage-->
+<HTML>
+<HEAD>
+<TITLE>
+FileInformationBlock (POI API Documentation)
+</TITLE>
+
+<META NAME="keywords" CONTENT="org.apache.poi.hwpf.model.FileInformationBlock class">
+
+<LINK REL ="stylesheet" TYPE="text/css" HREF="../../../../../stylesheet.css" TITLE="Style">
+
+<SCRIPT type="text/javascript">
+function windowTitle()
+{
+    parent.document.title="FileInformationBlock (POI API Documentation)";
+}
+</SCRIPT>
+<NOSCRIPT>
+</NOSCRIPT>
+
+</HEAD>
+
+<BODY BGCOLOR="white" onload="windowTitle();">
+
+
+<!-- ========= START OF TOP NAVBAR ======= -->
+<A NAME="navbar_top"><!-- --></A>
+<A HREF="#skip-navbar_top" title="Skip navigation links"></A>
+<TABLE BORDER="0" WIDTH="100%" CELLPADDING="1" CELLSPACING="0" SUMMARY="">
+<TR>
+<TD COLSPAN=2 BGCOLOR="#EEEEFF" CLASS="NavBarCell1">
+<A NAME="navbar_top_firstrow"><!-- --></A>
+<TABLE BORDER="0" CELLPADDING="0" CELLSPACING="3" SUMMARY="">
+  <TR ALIGN="center" VALIGN="top">
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../overview-summary.html"><FONT CLASS="NavBarFont1"><B>Overview</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="package-summary.html"><FONT CLASS="NavBarFont1"><B>Package</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#FFFFFF" CLASS="NavBarCell1Rev"> &nbsp;<FONT CLASS="NavBarFont1Rev"><B>Class</B></FONT>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="class-use/FileInformationBlock.html"><FONT CLASS="NavBarFont1"><B>Use</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="package-tree.html"><FONT CLASS="NavBarFont1"><B>Tree</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../deprecated-list.html"><FONT CLASS="NavBarFont1"><B>Deprecated</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../index-all.html"><FONT CLASS="NavBarFont1"><B>Index</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../help-doc.html"><FONT CLASS="NavBarFont1"><B>Help</B></FONT></A>&nbsp;</TD>
+  </TR>
+</TABLE>
+</TD>
+<TD ALIGN="right" VALIGN="top" ROWSPAN=3><EM>
+</EM>
+</TD>
+</TR>
+
+<TR>
+<TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
+&nbsp;<A HREF="../../../../../org/apache/poi/hwpf/model/FieldsTables.html" title="class in org.apache.poi.hwpf.model"><B>PREV CLASS</B></A>&nbsp;
+&nbsp;<A HREF="../../../../../org/apache/poi/hwpf/model/FontTable.html" title="class in org.apache.poi.hwpf.model"><B>NEXT CLASS</B></A></FONT></TD>
+<TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
+  <A HREF="../../../../../index.html?org/apache/poi/hwpf/model/FileInformationBlock.html" target="_top"><B>FRAMES</B></A>  &nbsp;
+&nbsp;<A HREF="FileInformationBlock.html" target="_top"><B>NO FRAMES</B></A>  &nbsp;
+&nbsp;<SCRIPT type="text/javascript">
+  <!--
+  if(window==top) {
+    document.writeln('<A HREF="../../../../../allclasses-noframe.html"><B>All Classes</B></A>');
+  }
+  //-->
+</SCRIPT>
+<NOSCRIPT>
+  <A HREF="../../../../../allclasses-noframe.html"><B>All Classes</B></A>
+</NOSCRIPT>
+
+
+</FONT></TD>
+</TR>
+<TR>
+<TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
+  SUMMARY:&nbsp;NESTED&nbsp;|&nbsp;<A HREF="#field_summary">FIELD</A>&nbsp;|&nbsp;<A HREF="#constructor_summary">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_summary">METHOD</A></FONT></TD>
+<TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
+DETAIL:&nbsp;<A HREF="#field_detail">FIELD</A>&nbsp;|&nbsp;<A HREF="#constructor_detail">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_detail">METHOD</A></FONT></TD>
+</TR>
+</TABLE>
+<A NAME="skip-navbar_top"></A>
+<!-- ========= END OF TOP NAVBAR ========= -->
+
+<HR>
+<!-- ======== START OF CLASS DATA ======== -->
+<H2>
+<FONT SIZE="-1">
+org.apache.poi.hwpf.model</FONT>
+<BR>
+Class FileInformationBlock</H2>
+<PRE>
+java.lang.Object
+  <IMG SRC="../../../../../resources/inherit.gif" ALT="extended by "><B>org.apache.poi.hwpf.model.FileInformationBlock</B>
+</PRE>
+<DL>
+<DT><B>All Implemented Interfaces:</B> <DD>java.lang.Cloneable</DD>
+</DL>
+<HR>
+<DL>
+<DT><PRE><FONT SIZE="-1"><A HREF="../../../../../org/apache/poi/util/Internal.html" title="annotation in org.apache.poi.util">@Internal</A>
+</FONT>public final class <B>FileInformationBlock</B><DT>extends java.lang.Object<DT>implements java.lang.Cloneable</DL>
+</PRE>
+
+<P>
+<p>The File Information Block (FIB). Holds pointers
+  to various bits of the file, and lots of flags which
+  specify properties of the document.<p>
+ <ul>
+ <li>The <A HREF="../../../../../org/apache/poi/hwpf/model/FibBase.html" title="class in org.apache.poi.hwpf.model"><CODE>FibBase</CODE></A> class, holds the first 32 bytes.</li>
+ <li>The next part, the fibRgW / FibRgW97, is handled by the <A HREF="../../../../../org/apache/poi/hwpf/model/FibRgW97.html" title="class in org.apache.poi.hwpf.model"><CODE>FibRgW97</CODE></A>.</li>
+ <li>The next part, the fibRgLw / FibRgLw97, is handled by the <A HREF="../../../../../org/apache/poi/hwpf/model/FibRgLw97.html" title="class in org.apache.poi.hwpf.model"><CODE>FibRgLw97</CODE></A>.</li>
+ <li>Finally, the rest of the fields are handled by the <A HREF="../../../../../org/apache/poi/hwpf/model/FIBFieldHandler.html" title="class in org.apache.poi.hwpf.model"><CODE>FIBFieldHandler</CODE></A>.</li>
+ </ul>
+<P>
+
+<P>
+<HR>
+
+<P>
+<!-- =========== FIELD SUMMARY =========== -->
+
+<A NAME="field_summary"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+<B>Field Summary</B></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;<A HREF="../../../../../org/apache/poi/util/POILogger.html" title="class in org.apache.poi.util">POILogger</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/model/FileInformationBlock.html#logger">logger</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+</TABLE>
+&nbsp;
+<!-- ======== CONSTRUCTOR SUMMARY ======== -->
+
+<A NAME="constructor_summary"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+<B>Constructor Summary</B></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/model/FileInformationBlock.html#FileInformationBlock(byte[])">FileInformationBlock</A></B>(byte[]&nbsp;mainDocument)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Creates a new instance of FileInformationBlock</TD>
+</TR>
+</TABLE>
+&nbsp;
+<!-- ========== METHOD SUMMARY =========== -->
+
+<A NAME="method_summary"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+<B>Method Summary</B></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/model/FileInformationBlock.html#clearOffsetsSizes()">clearOffsetsSizes</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/model/FileInformationBlock.html#fillVariableFields(byte[], byte[])">fillVariableFields</A></B>(byte[]&nbsp;mainDocument,
+                   byte[]&nbsp;tableStream)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;int</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/model/FileInformationBlock.html#getCbMac()">getCbMac</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;How many bytes of the main stream contain real data.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;int</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/model/FileInformationBlock.html#getFcClx()">getFcClx</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;int</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/model/FileInformationBlock.html#getFcDggInfo()">getFcDggInfo</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;int</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/model/FileInformationBlock.html#getFcDop()">getFcDop</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;int</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/model/FileInformationBlock.html#getFcPlcfbkf()">getFcPlcfbkf</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;int</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/model/FileInformationBlock.html#getFcPlcfbkl()">getFcPlcfbkl</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;int</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/model/FileInformationBlock.html#getFcPlcfbteChpx()">getFcPlcfbteChpx</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;int</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/model/FileInformationBlock.html#getFcPlcfbtePapx()">getFcPlcfbtePapx</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;int</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/model/FileInformationBlock.html#getFcPlcffldAtn()">getFcPlcffldAtn</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;int</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/model/FileInformationBlock.html#getFcPlcffldEdn()">getFcPlcffldEdn</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;int</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/model/FileInformationBlock.html#getFcPlcffldFtn()">getFcPlcffldFtn</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;int</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/model/FileInformationBlock.html#getFcPlcffldHdr()">getFcPlcffldHdr</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;int</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/model/FileInformationBlock.html#getFcPlcffldHdrtxbx()">getFcPlcffldHdrtxbx</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;int</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/model/FileInformationBlock.html#getFcPlcffldMom()">getFcPlcffldMom</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;int</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/model/FileInformationBlock.html#getFcPlcffldTxbx()">getFcPlcffldTxbx</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;int</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/model/FileInformationBlock.html#getFcPlcfLst()">getFcPlcfLst</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;int</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/model/FileInformationBlock.html#getFcPlcfsed()">getFcPlcfsed</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;int</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/model/FileInformationBlock.html#getFcPlcspaMom()">getFcPlcspaMom</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;int</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/model/FileInformationBlock.html#getFcPlfLfo()">getFcPlfLfo</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;An unsigned integer that specifies an offset in the Table Stream.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;int</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/model/FileInformationBlock.html#getFcPlfLst()">getFcPlfLst</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;An unsigned integer that specifies an offset in the Table Stream.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;int</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/model/FileInformationBlock.html#getFcStshf()">getFcStshf</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;int</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/model/FileInformationBlock.html#getFcSttbfbkmk()">getFcSttbfbkmk</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;int</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/model/FileInformationBlock.html#getFcSttbfffn()">getFcSttbfffn</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;int</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/model/FileInformationBlock.html#getFcSttbfRMark()">getFcSttbfRMark</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;int</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/model/FileInformationBlock.html#getFcSttbSavedBy()">getFcSttbSavedBy</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../../../org/apache/poi/hwpf/model/FibBase.html" title="class in org.apache.poi.hwpf.model">FibBase</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/model/FileInformationBlock.html#getFibBase()">getFibBase</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;int</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/model/FileInformationBlock.html#getFieldsPlcfLength(org.apache.poi.hwpf.model.FieldsDocumentPart)">getFieldsPlcfLength</A></B>(<A HREF="../../../../../org/apache/poi/hwpf/model/FieldsDocumentPart.html" title="enum in org.apache.poi.hwpf.model">FieldsDocumentPart</A>&nbsp;part)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;int</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/model/FileInformationBlock.html#getFieldsPlcfOffset(org.apache.poi.hwpf.model.FieldsDocumentPart)">getFieldsPlcfOffset</A></B>(<A HREF="../../../../../org/apache/poi/hwpf/model/FieldsDocumentPart.html" title="enum in org.apache.poi.hwpf.model">FieldsDocumentPart</A>&nbsp;part)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;int</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/model/FileInformationBlock.html#getFSPAPlcfLength(org.apache.poi.hwpf.model.FSPADocumentPart)">getFSPAPlcfLength</A></B>(<A HREF="../../../../../org/apache/poi/hwpf/model/FSPADocumentPart.html" title="enum in org.apache.poi.hwpf.model">FSPADocumentPart</A>&nbsp;part)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;int</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/model/FileInformationBlock.html#getFSPAPlcfOffset(org.apache.poi.hwpf.model.FSPADocumentPart)">getFSPAPlcfOffset</A></B>(<A HREF="../../../../../org/apache/poi/hwpf/model/FSPADocumentPart.html" title="enum in org.apache.poi.hwpf.model">FSPADocumentPart</A>&nbsp;part)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;int</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/model/FileInformationBlock.html#getLcbClx()">getLcbClx</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;int</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/model/FileInformationBlock.html#getLcbDggInfo()">getLcbDggInfo</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;int</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/model/FileInformationBlock.html#getLcbDop()">getLcbDop</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;int</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/model/FileInformationBlock.html#getLcbPlcfbkf()">getLcbPlcfbkf</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;int</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/model/FileInformationBlock.html#getLcbPlcfbkl()">getLcbPlcfbkl</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;int</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/model/FileInformationBlock.html#getLcbPlcfbteChpx()">getLcbPlcfbteChpx</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;int</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/model/FileInformationBlock.html#getLcbPlcfbtePapx()">getLcbPlcfbtePapx</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;int</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/model/FileInformationBlock.html#getLcbPlcffldAtn()">getLcbPlcffldAtn</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;int</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/model/FileInformationBlock.html#getLcbPlcffldEdn()">getLcbPlcffldEdn</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;int</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/model/FileInformationBlock.html#getLcbPlcffldFtn()">getLcbPlcffldFtn</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;int</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/model/FileInformationBlock.html#getLcbPlcffldHdr()">getLcbPlcffldHdr</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;int</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/model/FileInformationBlock.html#getLcbPlcffldHdrtxbx()">getLcbPlcffldHdrtxbx</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;int</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/model/FileInformationBlock.html#getLcbPlcffldMom()">getLcbPlcffldMom</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;int</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/model/FileInformationBlock.html#getLcbPlcffldTxbx()">getLcbPlcffldTxbx</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;int</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/model/FileInformationBlock.html#getLcbPlcfLst()">getLcbPlcfLst</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;int</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/model/FileInformationBlock.html#getLcbPlcfsed()">getLcbPlcfsed</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;int</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/model/FileInformationBlock.html#getLcbPlcspaMom()">getLcbPlcspaMom</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;int</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/model/FileInformationBlock.html#getLcbPlfLfo()">getLcbPlfLfo</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;int</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/model/FileInformationBlock.html#getLcbPlfLst()">getLcbPlfLst</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;int</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/model/FileInformationBlock.html#getLcbStshf()">getLcbStshf</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;int</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/model/FileInformationBlock.html#getLcbSttbfbkmk()">getLcbSttbfbkmk</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;int</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/model/FileInformationBlock.html#getLcbSttbfffn()">getLcbSttbfffn</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;int</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/model/FileInformationBlock.html#getLcbSttbfRMark()">getLcbSttbfRMark</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;int</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/model/FileInformationBlock.html#getLcbSttbSavedBy()">getLcbSttbSavedBy</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;int</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/model/FileInformationBlock.html#getModifiedHigh()">getModifiedHigh</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;int</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/model/FileInformationBlock.html#getModifiedLow()">getModifiedLow</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;int</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/model/FileInformationBlock.html#getNFib()">getNFib</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;int</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/model/FileInformationBlock.html#getNotesDescriptorsOffset(org.apache.poi.hwpf.model.NoteType)">getNotesDescriptorsOffset</A></B>(<A HREF="../../../../../org/apache/poi/hwpf/model/NoteType.html" title="enum in org.apache.poi.hwpf.model">NoteType</A>&nbsp;noteType)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;int</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/model/FileInformationBlock.html#getNotesDescriptorsSize(org.apache.poi.hwpf.model.NoteType)">getNotesDescriptorsSize</A></B>(<A HREF="../../../../../org/apache/poi/hwpf/model/NoteType.html" title="enum in org.apache.poi.hwpf.model">NoteType</A>&nbsp;noteType)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;int</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/model/FileInformationBlock.html#getNotesTextPositionsOffset(org.apache.poi.hwpf.model.NoteType)">getNotesTextPositionsOffset</A></B>(<A HREF="../../../../../org/apache/poi/hwpf/model/NoteType.html" title="enum in org.apache.poi.hwpf.model">NoteType</A>&nbsp;noteType)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;int</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/model/FileInformationBlock.html#getNotesTextPositionsSize(org.apache.poi.hwpf.model.NoteType)">getNotesTextPositionsSize</A></B>(<A HREF="../../../../../org/apache/poi/hwpf/model/NoteType.html" title="enum in org.apache.poi.hwpf.model">NoteType</A>&nbsp;noteType)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;int</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/model/FileInformationBlock.html#getPlcfHddOffset()">getPlcfHddOffset</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Return the offset to the PlcfHdd, in the table stream,
+ i.e.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;int</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/model/FileInformationBlock.html#getPlcfHddSize()">getPlcfHddSize</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Return the size of the PlcfHdd, in the table stream,
+ i.e.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;int</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/model/FileInformationBlock.html#getSize()">getSize</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;int</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/model/FileInformationBlock.html#getSubdocumentTextStreamLength(org.apache.poi.hwpf.model.SubdocumentType)">getSubdocumentTextStreamLength</A></B>(<A HREF="../../../../../org/apache/poi/hwpf/model/SubdocumentType.html" title="enum in org.apache.poi.hwpf.model">SubdocumentType</A>&nbsp;type)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/model/FileInformationBlock.html#setCbMac(int)">setCbMac</A></B>(int&nbsp;cbMac)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Updates the count of the number of bytes in the
+ main stream which contain real data</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/model/FileInformationBlock.html#setFcClx(int)">setFcClx</A></B>(int&nbsp;fcClx)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/model/FileInformationBlock.html#setFcDop(int)">setFcDop</A></B>(int&nbsp;fcDop)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/model/FileInformationBlock.html#setFcPlcfbkf(int)">setFcPlcfbkf</A></B>(int&nbsp;offset)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/model/FileInformationBlock.html#setFcPlcfbkl(int)">setFcPlcfbkl</A></B>(int&nbsp;offset)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/model/FileInformationBlock.html#setFcPlcfbteChpx(int)">setFcPlcfbteChpx</A></B>(int&nbsp;fcPlcfBteChpx)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/model/FileInformationBlock.html#setFcPlcfbtePapx(int)">setFcPlcfbtePapx</A></B>(int&nbsp;fcPlcfBtePapx)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/model/FileInformationBlock.html#setFcPlcffldAtn(int)">setFcPlcffldAtn</A></B>(int&nbsp;offset)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/model/FileInformationBlock.html#setFcPlcffldEdn(int)">setFcPlcffldEdn</A></B>(int&nbsp;offset)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/model/FileInformationBlock.html#setFcPlcffldFtn(int)">setFcPlcffldFtn</A></B>(int&nbsp;offset)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/model/FileInformationBlock.html#setFcPlcffldHdr(int)">setFcPlcffldHdr</A></B>(int&nbsp;offset)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/model/FileInformationBlock.html#setFcPlcffldHdrtxbx(int)">setFcPlcffldHdrtxbx</A></B>(int&nbsp;offset)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/model/FileInformationBlock.html#setFcPlcffldMom(int)">setFcPlcffldMom</A></B>(int&nbsp;offset)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/model/FileInformationBlock.html#setFcPlcffldTxbx(int)">setFcPlcffldTxbx</A></B>(int&nbsp;offset)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/model/FileInformationBlock.html#setFcPlcfLst(int)">setFcPlcfLst</A></B>(int&nbsp;fcPlcfLst)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/model/FileInformationBlock.html#setFcPlcfsed(int)">setFcPlcfsed</A></B>(int&nbsp;fcPlcfSed)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/model/FileInformationBlock.html#setFcPlfLfo(int)">setFcPlfLfo</A></B>(int&nbsp;fcPlfLfo)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/model/FileInformationBlock.html#setFcPlfLst(int)">setFcPlfLst</A></B>(int&nbsp;fcPlfLst)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/model/FileInformationBlock.html#setFcStshf(int)">setFcStshf</A></B>(int&nbsp;fcStshf)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/model/FileInformationBlock.html#setFcSttbfbkmk(int)">setFcSttbfbkmk</A></B>(int&nbsp;offset)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/model/FileInformationBlock.html#setFcSttbfffn(int)">setFcSttbfffn</A></B>(int&nbsp;fcSttbFffn)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/model/FileInformationBlock.html#setFcSttbfRMark(int)">setFcSttbfRMark</A></B>(int&nbsp;fcSttbfRMark)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/model/FileInformationBlock.html#setFcSttbSavedBy(int)">setFcSttbSavedBy</A></B>(int&nbsp;fcSttbSavedBy)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/model/FileInformationBlock.html#setFieldsPlcfLength(org.apache.poi.hwpf.model.FieldsDocumentPart, int)">setFieldsPlcfLength</A></B>(<A HREF="../../../../../org/apache/poi/hwpf/model/FieldsDocumentPart.html" title="enum in org.apache.poi.hwpf.model">FieldsDocumentPart</A>&nbsp;part,
+                    int&nbsp;length)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/model/FileInformationBlock.html#setFieldsPlcfOffset(org.apache.poi.hwpf.model.FieldsDocumentPart, int)">setFieldsPlcfOffset</A></B>(<A HREF="../../../../../org/apache/poi/hwpf/model/FieldsDocumentPart.html" title="enum in org.apache.poi.hwpf.model">FieldsDocumentPart</A>&nbsp;part,
+                    int&nbsp;offset)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/model/FileInformationBlock.html#setFSPAPlcfLength(org.apache.poi.hwpf.model.FSPADocumentPart, int)">setFSPAPlcfLength</A></B>(<A HREF="../../../../../org/apache/poi/hwpf/model/FSPADocumentPart.html" title="enum in org.apache.poi.hwpf.model">FSPADocumentPart</A>&nbsp;part,
+                  int&nbsp;length)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/model/FileInformationBlock.html#setFSPAPlcfOffset(org.apache.poi.hwpf.model.FSPADocumentPart, int)">setFSPAPlcfOffset</A></B>(<A HREF="../../../../../org/apache/poi/hwpf/model/FSPADocumentPart.html" title="enum in org.apache.poi.hwpf.model">FSPADocumentPart</A>&nbsp;part,
+                  int&nbsp;offset)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/model/FileInformationBlock.html#setLcbClx(int)">setLcbClx</A></B>(int&nbsp;lcbClx)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/model/FileInformationBlock.html#setLcbDop(int)">setLcbDop</A></B>(int&nbsp;lcbDop)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/model/FileInformationBlock.html#setLcbPlcfbkf(int)">setLcbPlcfbkf</A></B>(int&nbsp;length)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/model/FileInformationBlock.html#setLcbPlcfbkl(int)">setLcbPlcfbkl</A></B>(int&nbsp;length)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/model/FileInformationBlock.html#setLcbPlcfbteChpx(int)">setLcbPlcfbteChpx</A></B>(int&nbsp;lcbPlcfBteChpx)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/model/FileInformationBlock.html#setLcbPlcfbtePapx(int)">setLcbPlcfbtePapx</A></B>(int&nbsp;lcbPlcfBtePapx)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/model/FileInformationBlock.html#setLcbPlcffldAtn(int)">setLcbPlcffldAtn</A></B>(int&nbsp;size)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/model/FileInformationBlock.html#setLcbPlcffldEdn(int)">setLcbPlcffldEdn</A></B>(int&nbsp;size)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/model/FileInformationBlock.html#setLcbPlcffldFtn(int)">setLcbPlcffldFtn</A></B>(int&nbsp;size)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/model/FileInformationBlock.html#setLcbPlcffldHdr(int)">setLcbPlcffldHdr</A></B>(int&nbsp;size)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/model/FileInformationBlock.html#setLcbPlcffldHdrtxbx(int)">setLcbPlcffldHdrtxbx</A></B>(int&nbsp;size)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/model/FileInformationBlock.html#setLcbPlcffldMom(int)">setLcbPlcffldMom</A></B>(int&nbsp;size)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/model/FileInformationBlock.html#setLcbPlcffldTxbx(int)">setLcbPlcffldTxbx</A></B>(int&nbsp;size)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/model/FileInformationBlock.html#setLcbPlcfLst(int)">setLcbPlcfLst</A></B>(int&nbsp;lcbPlcfLst)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/model/FileInformationBlock.html#setLcbPlcfsed(int)">setLcbPlcfsed</A></B>(int&nbsp;lcbPlcfSed)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/model/FileInformationBlock.html#setLcbPlfLfo(int)">setLcbPlfLfo</A></B>(int&nbsp;lcbPlfLfo)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/model/FileInformationBlock.html#setLcbPlfLst(int)">setLcbPlfLst</A></B>(int&nbsp;lcbPlfLst)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/model/FileInformationBlock.html#setLcbStshf(int)">setLcbStshf</A></B>(int&nbsp;lcbStshf)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/model/FileInformationBlock.html#setLcbSttbfbkmk(int)">setLcbSttbfbkmk</A></B>(int&nbsp;length)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/model/FileInformationBlock.html#setLcbSttbfffn(int)">setLcbSttbfffn</A></B>(int&nbsp;lcbSttbFffn)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/model/FileInformationBlock.html#setLcbSttbfRMark(int)">setLcbSttbfRMark</A></B>(int&nbsp;lcbSttbfRMark)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/model/FileInformationBlock.html#setLcbSttbSavedBy(int)">setLcbSttbSavedBy</A></B>(int&nbsp;fcSttbSavedBy)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/model/FileInformationBlock.html#setModifiedHigh(int)">setModifiedHigh</A></B>(int&nbsp;modifiedHigh)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/model/FileInformationBlock.html#setModifiedLow(int)">setModifiedLow</A></B>(int&nbsp;modifiedLow)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/model/FileInformationBlock.html#setNotesDescriptorsOffset(org.apache.poi.hwpf.model.NoteType, int)">setNotesDescriptorsOffset</A></B>(<A HREF="../../../../../org/apache/poi/hwpf/model/NoteType.html" title="enum in org.apache.poi.hwpf.model">NoteType</A>&nbsp;noteType,
+                          int&nbsp;offset)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/model/FileInformationBlock.html#setNotesDescriptorsSize(org.apache.poi.hwpf.model.NoteType, int)">setNotesDescriptorsSize</A></B>(<A HREF="../../../../../org/apache/poi/hwpf/model/NoteType.html" title="enum in org.apache.poi.hwpf.model">NoteType</A>&nbsp;noteType,
+                        int&nbsp;offset)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/model/FileInformationBlock.html#setNotesTextPositionsOffset(org.apache.poi.hwpf.model.NoteType, int)">setNotesTextPositionsOffset</A></B>(<A HREF="../../../../../org/apache/poi/hwpf/model/NoteType.html" title="enum in org.apache.poi.hwpf.model">NoteType</A>&nbsp;noteType,
+                            int&nbsp;offset)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/model/FileInformationBlock.html#setNotesTextPositionsSize(org.apache.poi.hwpf.model.NoteType, int)">setNotesTextPositionsSize</A></B>(<A HREF="../../../../../org/apache/poi/hwpf/model/NoteType.html" title="enum in org.apache.poi.hwpf.model">NoteType</A>&nbsp;noteType,
+                          int&nbsp;offset)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/model/FileInformationBlock.html#setPlcfHddOffset(int)">setPlcfHddOffset</A></B>(int&nbsp;fcPlcfHdd)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/model/FileInformationBlock.html#setPlcfHddSize(int)">setPlcfHddSize</A></B>(int&nbsp;lcbPlcfHdd)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/model/FileInformationBlock.html#setSubdocumentTextStreamLength(org.apache.poi.hwpf.model.SubdocumentType, int)">setSubdocumentTextStreamLength</A></B>(<A HREF="../../../../../org/apache/poi/hwpf/model/SubdocumentType.html" title="enum in org.apache.poi.hwpf.model">SubdocumentType</A>&nbsp;type,
+                               int&nbsp;length)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;java.lang.String</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/model/FileInformationBlock.html#toString()">toString</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/model/FileInformationBlock.html#writeTo(byte[], org.apache.poi.hwpf.model.io.HWPFOutputStream)">writeTo</A></B>(byte[]&nbsp;mainStream,
+        <A HREF="../../../../../org/apache/poi/hwpf/model/io/HWPFOutputStream.html" title="class in org.apache.poi.hwpf.model.io">HWPFOutputStream</A>&nbsp;tableStream)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+</TABLE>
+&nbsp;<A NAME="methods_inherited_from_class_java.lang.Object"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#EEEEFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left"><B>Methods inherited from class java.lang.Object</B></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE>clone, equals, finalize, getClass, hashCode, notify, notifyAll, wait, wait, wait</CODE></TD>
+</TR>
+</TABLE>
+&nbsp;
+<P>
+
+<!-- ============ FIELD DETAIL =========== -->
+
+<A NAME="field_detail"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="1"><FONT SIZE="+2">
+<B>Field Detail</B></FONT></TH>
+</TR>
+</TABLE>
+
+<A NAME="logger"><!-- --></A><H3>
+logger</H3>
+<PRE>
+public static final <A HREF="../../../../../org/apache/poi/util/POILogger.html" title="class in org.apache.poi.util">POILogger</A> <B>logger</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+
+<!-- ========= CONSTRUCTOR DETAIL ======== -->
+
+<A NAME="constructor_detail"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="1"><FONT SIZE="+2">
+<B>Constructor Detail</B></FONT></TH>
+</TR>
+</TABLE>
+
+<A NAME="FileInformationBlock(byte[])"><!-- --></A><H3>
+FileInformationBlock</H3>
+<PRE>
+public <B>FileInformationBlock</B>(byte[]&nbsp;mainDocument)</PRE>
+<DL>
+<DD>Creates a new instance of FileInformationBlock
+<P>
+</DL>
+
+<!-- ============ METHOD DETAIL ========== -->
+
+<A NAME="method_detail"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="1"><FONT SIZE="+2">
+<B>Method Detail</B></FONT></TH>
+</TR>
+</TABLE>
+
+<A NAME="fillVariableFields(byte[], byte[])"><!-- --></A><H3>
+fillVariableFields</H3>
+<PRE>
+public void <B>fillVariableFields</B>(byte[]&nbsp;mainDocument,
+                               byte[]&nbsp;tableStream)</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="toString()"><!-- --></A><H3>
+toString</H3>
+<PRE>
+public java.lang.String <B>toString</B>()</PRE>
+<DL>
+<DD><DL>
+<DT><B>Overrides:</B><DD><CODE>toString</CODE> in class <CODE>java.lang.Object</CODE></DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getNFib()"><!-- --></A><H3>
+getNFib</H3>
+<PRE>
+public int <B>getNFib</B>()</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getFcDop()"><!-- --></A><H3>
+getFcDop</H3>
+<PRE>
+public int <B>getFcDop</B>()</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setFcDop(int)"><!-- --></A><H3>
+setFcDop</H3>
+<PRE>
+public void <B>setFcDop</B>(int&nbsp;fcDop)</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getLcbDop()"><!-- --></A><H3>
+getLcbDop</H3>
+<PRE>
+public int <B>getLcbDop</B>()</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setLcbDop(int)"><!-- --></A><H3>
+setLcbDop</H3>
+<PRE>
+public void <B>setLcbDop</B>(int&nbsp;lcbDop)</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getFcStshf()"><!-- --></A><H3>
+getFcStshf</H3>
+<PRE>
+public int <B>getFcStshf</B>()</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getLcbStshf()"><!-- --></A><H3>
+getLcbStshf</H3>
+<PRE>
+public int <B>getLcbStshf</B>()</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setFcStshf(int)"><!-- --></A><H3>
+setFcStshf</H3>
+<PRE>
+public void <B>setFcStshf</B>(int&nbsp;fcStshf)</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setLcbStshf(int)"><!-- --></A><H3>
+setLcbStshf</H3>
+<PRE>
+public void <B>setLcbStshf</B>(int&nbsp;lcbStshf)</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getFcClx()"><!-- --></A><H3>
+getFcClx</H3>
+<PRE>
+public int <B>getFcClx</B>()</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getLcbClx()"><!-- --></A><H3>
+getLcbClx</H3>
+<PRE>
+public int <B>getLcbClx</B>()</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setFcClx(int)"><!-- --></A><H3>
+setFcClx</H3>
+<PRE>
+public void <B>setFcClx</B>(int&nbsp;fcClx)</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setLcbClx(int)"><!-- --></A><H3>
+setLcbClx</H3>
+<PRE>
+public void <B>setLcbClx</B>(int&nbsp;lcbClx)</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getFcPlcfbteChpx()"><!-- --></A><H3>
+getFcPlcfbteChpx</H3>
+<PRE>
+public int <B>getFcPlcfbteChpx</B>()</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getLcbPlcfbteChpx()"><!-- --></A><H3>
+getLcbPlcfbteChpx</H3>
+<PRE>
+public int <B>getLcbPlcfbteChpx</B>()</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setFcPlcfbteChpx(int)"><!-- --></A><H3>
+setFcPlcfbteChpx</H3>
+<PRE>
+public void <B>setFcPlcfbteChpx</B>(int&nbsp;fcPlcfBteChpx)</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setLcbPlcfbteChpx(int)"><!-- --></A><H3>
+setLcbPlcfbteChpx</H3>
+<PRE>
+public void <B>setLcbPlcfbteChpx</B>(int&nbsp;lcbPlcfBteChpx)</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getFcPlcfbtePapx()"><!-- --></A><H3>
+getFcPlcfbtePapx</H3>
+<PRE>
+public int <B>getFcPlcfbtePapx</B>()</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getLcbPlcfbtePapx()"><!-- --></A><H3>
+getLcbPlcfbtePapx</H3>
+<PRE>
+public int <B>getLcbPlcfbtePapx</B>()</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setFcPlcfbtePapx(int)"><!-- --></A><H3>
+setFcPlcfbtePapx</H3>
+<PRE>
+public void <B>setFcPlcfbtePapx</B>(int&nbsp;fcPlcfBtePapx)</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setLcbPlcfbtePapx(int)"><!-- --></A><H3>
+setLcbPlcfbtePapx</H3>
+<PRE>
+public void <B>setLcbPlcfbtePapx</B>(int&nbsp;lcbPlcfBtePapx)</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getFcPlcfsed()"><!-- --></A><H3>
+getFcPlcfsed</H3>
+<PRE>
+public int <B>getFcPlcfsed</B>()</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getLcbPlcfsed()"><!-- --></A><H3>
+getLcbPlcfsed</H3>
+<PRE>
+public int <B>getLcbPlcfsed</B>()</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setFcPlcfsed(int)"><!-- --></A><H3>
+setFcPlcfsed</H3>
+<PRE>
+public void <B>setFcPlcfsed</B>(int&nbsp;fcPlcfSed)</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setLcbPlcfsed(int)"><!-- --></A><H3>
+setLcbPlcfsed</H3>
+<PRE>
+public void <B>setLcbPlcfsed</B>(int&nbsp;lcbPlcfSed)</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getFcPlcfLst()"><!-- --></A><H3>
+getFcPlcfLst</H3>
+<PRE>
+<FONT SIZE="-1">@Deprecated
+</FONT>public int <B>getFcPlcfLst</B>()</PRE>
+<DL>
+<DD><B>Deprecated.</B>&nbsp;
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getFcPlfLst()"><!-- --></A><H3>
+getFcPlfLst</H3>
+<PRE>
+public int <B>getFcPlfLst</B>()</PRE>
+<DL>
+<DD>An unsigned integer that specifies an offset in the Table Stream. A
+ PlfLst that contains list formatting information begins at this offset.
+ An array of LVLs is appended to the PlfLst. lcbPlfLst does not account
+ for the array of LVLs. The size of the array of LVLs is specified by the
+ LSTFs in PlfLst. For each LSTF whose fSimpleList is set to 0x1, there is
+ one LVL in the array of LVLs that specifies the level formatting of the
+ single level in the list which corresponds to the LSTF. And, for each
+ LSTF whose fSimpleList is set to 0x0, there are 9 LVLs in the array of
+ LVLs that specify the level formatting of the respective levels in the
+ list which corresponds to the LSTF. This array of LVLs is in the same
+ respective order as the LSTFs in PlfLst. If lcbPlfLst is 0, fcPlfLst is
+ undefined and MUST be ignored.
+ <p>
+ Quote from
+ "[MS-DOC] -- v20110315, Word (.doc) Binary File Format; page 76 / 621"
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getLcbPlcfLst()"><!-- --></A><H3>
+getLcbPlcfLst</H3>
+<PRE>
+<FONT SIZE="-1">@Deprecated
+</FONT>public int <B>getLcbPlcfLst</B>()</PRE>
+<DL>
+<DD><B>Deprecated.</B>&nbsp;
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getLcbPlfLst()"><!-- --></A><H3>
+getLcbPlfLst</H3>
+<PRE>
+public int <B>getLcbPlfLst</B>()</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setFcPlcfLst(int)"><!-- --></A><H3>
+setFcPlcfLst</H3>
+<PRE>
+<FONT SIZE="-1">@Deprecated
+</FONT>public void <B>setFcPlcfLst</B>(int&nbsp;fcPlcfLst)</PRE>
+<DL>
+<DD><B>Deprecated.</B>&nbsp;
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setFcPlfLst(int)"><!-- --></A><H3>
+setFcPlfLst</H3>
+<PRE>
+public void <B>setFcPlfLst</B>(int&nbsp;fcPlfLst)</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setLcbPlcfLst(int)"><!-- --></A><H3>
+setLcbPlcfLst</H3>
+<PRE>
+<FONT SIZE="-1">@Deprecated
+</FONT>public void <B>setLcbPlcfLst</B>(int&nbsp;lcbPlcfLst)</PRE>
+<DL>
+<DD><B>Deprecated.</B>&nbsp;
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setLcbPlfLst(int)"><!-- --></A><H3>
+setLcbPlfLst</H3>
+<PRE>
+public void <B>setLcbPlfLst</B>(int&nbsp;lcbPlfLst)</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getFcPlfLfo()"><!-- --></A><H3>
+getFcPlfLfo</H3>
+<PRE>
+public int <B>getFcPlfLfo</B>()</PRE>
+<DL>
+<DD>An unsigned integer that specifies an offset in the Table Stream. A
+ PlfLfo that contains list formatting override information begins at this
+ offset. If lcbPlfLfo is zero, fcPlfLfo is undefined and MUST be ignored.
+ <p>
+ Quote from
+ "[MS-DOC] -- v20110315, Word (.doc) Binary File Format; page 76 / 621"
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getLcbPlfLfo()"><!-- --></A><H3>
+getLcbPlfLfo</H3>
+<PRE>
+public int <B>getLcbPlfLfo</B>()</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getFcSttbfbkmk()"><!-- --></A><H3>
+getFcSttbfbkmk</H3>
+<PRE>
+public int <B>getFcSttbfbkmk</B>()</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+
+<DT><B>Returns:</B><DD>Offset in table stream of the STTBF that records bookmark names
+         in the main document</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setFcSttbfbkmk(int)"><!-- --></A><H3>
+setFcSttbfbkmk</H3>
+<PRE>
+public void <B>setFcSttbfbkmk</B>(int&nbsp;offset)</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getLcbSttbfbkmk()"><!-- --></A><H3>
+getLcbSttbfbkmk</H3>
+<PRE>
+public int <B>getLcbSttbfbkmk</B>()</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+
+<DT><B>Returns:</B><DD>Count of bytes in Sttbfbkmk</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setLcbSttbfbkmk(int)"><!-- --></A><H3>
+setLcbSttbfbkmk</H3>
+<PRE>
+public void <B>setLcbSttbfbkmk</B>(int&nbsp;length)</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getFcPlcfbkf()"><!-- --></A><H3>
+getFcPlcfbkf</H3>
+<PRE>
+public int <B>getFcPlcfbkf</B>()</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+
+<DT><B>Returns:</B><DD>Offset in table stream of the PLCF that records the beginning CP
+         offsets of bookmarks in the main document. See BKF structure
+         definition.</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setFcPlcfbkf(int)"><!-- --></A><H3>
+setFcPlcfbkf</H3>
+<PRE>
+public void <B>setFcPlcfbkf</B>(int&nbsp;offset)</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getLcbPlcfbkf()"><!-- --></A><H3>
+getLcbPlcfbkf</H3>
+<PRE>
+public int <B>getLcbPlcfbkf</B>()</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+
+<DT><B>Returns:</B><DD>Count of bytes in Plcfbkf</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setLcbPlcfbkf(int)"><!-- --></A><H3>
+setLcbPlcfbkf</H3>
+<PRE>
+public void <B>setLcbPlcfbkf</B>(int&nbsp;length)</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getFcPlcfbkl()"><!-- --></A><H3>
+getFcPlcfbkl</H3>
+<PRE>
+public int <B>getFcPlcfbkl</B>()</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+
+<DT><B>Returns:</B><DD>Offset in table stream of the PLCF that records the ending CP
+         offsets of bookmarks recorded in the main document. No structure
+         is stored in this PLCF.</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setFcPlcfbkl(int)"><!-- --></A><H3>
+setFcPlcfbkl</H3>
+<PRE>
+public void <B>setFcPlcfbkl</B>(int&nbsp;offset)</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getLcbPlcfbkl()"><!-- --></A><H3>
+getLcbPlcfbkl</H3>
+<PRE>
+public int <B>getLcbPlcfbkl</B>()</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+
+<DT><B>Returns:</B><DD>Count of bytes in Plcfbkl</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setLcbPlcfbkl(int)"><!-- --></A><H3>
+setLcbPlcfbkl</H3>
+<PRE>
+public void <B>setLcbPlcfbkl</B>(int&nbsp;length)</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setFcPlfLfo(int)"><!-- --></A><H3>
+setFcPlfLfo</H3>
+<PRE>
+public void <B>setFcPlfLfo</B>(int&nbsp;fcPlfLfo)</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setLcbPlfLfo(int)"><!-- --></A><H3>
+setLcbPlfLfo</H3>
+<PRE>
+public void <B>setLcbPlfLfo</B>(int&nbsp;lcbPlfLfo)</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getFcSttbfffn()"><!-- --></A><H3>
+getFcSttbfffn</H3>
+<PRE>
+public int <B>getFcSttbfffn</B>()</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getLcbSttbfffn()"><!-- --></A><H3>
+getLcbSttbfffn</H3>
+<PRE>
+public int <B>getLcbSttbfffn</B>()</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setFcSttbfffn(int)"><!-- --></A><H3>
+setFcSttbfffn</H3>
+<PRE>
+public void <B>setFcSttbfffn</B>(int&nbsp;fcSttbFffn)</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setLcbSttbfffn(int)"><!-- --></A><H3>
+setLcbSttbfffn</H3>
+<PRE>
+public void <B>setLcbSttbfffn</B>(int&nbsp;lcbSttbFffn)</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getFcSttbfRMark()"><!-- --></A><H3>
+getFcSttbfRMark</H3>
+<PRE>
+public int <B>getFcSttbfRMark</B>()</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getLcbSttbfRMark()"><!-- --></A><H3>
+getLcbSttbfRMark</H3>
+<PRE>
+public int <B>getLcbSttbfRMark</B>()</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setFcSttbfRMark(int)"><!-- --></A><H3>
+setFcSttbfRMark</H3>
+<PRE>
+public void <B>setFcSttbfRMark</B>(int&nbsp;fcSttbfRMark)</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setLcbSttbfRMark(int)"><!-- --></A><H3>
+setLcbSttbfRMark</H3>
+<PRE>
+public void <B>setLcbSttbfRMark</B>(int&nbsp;lcbSttbfRMark)</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getPlcfHddOffset()"><!-- --></A><H3>
+getPlcfHddOffset</H3>
+<PRE>
+public int <B>getPlcfHddOffset</B>()</PRE>
+<DL>
+<DD>Return the offset to the PlcfHdd, in the table stream,
+ i.e. fcPlcfHdd
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getPlcfHddSize()"><!-- --></A><H3>
+getPlcfHddSize</H3>
+<PRE>
+public int <B>getPlcfHddSize</B>()</PRE>
+<DL>
+<DD>Return the size of the PlcfHdd, in the table stream,
+ i.e. lcbPlcfHdd
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setPlcfHddOffset(int)"><!-- --></A><H3>
+setPlcfHddOffset</H3>
+<PRE>
+public void <B>setPlcfHddOffset</B>(int&nbsp;fcPlcfHdd)</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setPlcfHddSize(int)"><!-- --></A><H3>
+setPlcfHddSize</H3>
+<PRE>
+public void <B>setPlcfHddSize</B>(int&nbsp;lcbPlcfHdd)</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getFcSttbSavedBy()"><!-- --></A><H3>
+getFcSttbSavedBy</H3>
+<PRE>
+public int <B>getFcSttbSavedBy</B>()</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getLcbSttbSavedBy()"><!-- --></A><H3>
+getLcbSttbSavedBy</H3>
+<PRE>
+public int <B>getLcbSttbSavedBy</B>()</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setFcSttbSavedBy(int)"><!-- --></A><H3>
+setFcSttbSavedBy</H3>
+<PRE>
+public void <B>setFcSttbSavedBy</B>(int&nbsp;fcSttbSavedBy)</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setLcbSttbSavedBy(int)"><!-- --></A><H3>
+setLcbSttbSavedBy</H3>
+<PRE>
+public void <B>setLcbSttbSavedBy</B>(int&nbsp;fcSttbSavedBy)</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getModifiedLow()"><!-- --></A><H3>
+getModifiedLow</H3>
+<PRE>
+public int <B>getModifiedLow</B>()</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getModifiedHigh()"><!-- --></A><H3>
+getModifiedHigh</H3>
+<PRE>
+public int <B>getModifiedHigh</B>()</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setModifiedLow(int)"><!-- --></A><H3>
+setModifiedLow</H3>
+<PRE>
+public void <B>setModifiedLow</B>(int&nbsp;modifiedLow)</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setModifiedHigh(int)"><!-- --></A><H3>
+setModifiedHigh</H3>
+<PRE>
+public void <B>setModifiedHigh</B>(int&nbsp;modifiedHigh)</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getCbMac()"><!-- --></A><H3>
+getCbMac</H3>
+<PRE>
+public int <B>getCbMac</B>()</PRE>
+<DL>
+<DD>How many bytes of the main stream contain real data.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setCbMac(int)"><!-- --></A><H3>
+setCbMac</H3>
+<PRE>
+public void <B>setCbMac</B>(int&nbsp;cbMac)</PRE>
+<DL>
+<DD>Updates the count of the number of bytes in the
+ main stream which contain real data
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getSubdocumentTextStreamLength(org.apache.poi.hwpf.model.SubdocumentType)"><!-- --></A><H3>
+getSubdocumentTextStreamLength</H3>
+<PRE>
+public int <B>getSubdocumentTextStreamLength</B>(<A HREF="../../../../../org/apache/poi/hwpf/model/SubdocumentType.html" title="enum in org.apache.poi.hwpf.model">SubdocumentType</A>&nbsp;type)</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+
+<DT><B>Returns:</B><DD>length of specified subdocument text stream in characters</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setSubdocumentTextStreamLength(org.apache.poi.hwpf.model.SubdocumentType, int)"><!-- --></A><H3>
+setSubdocumentTextStreamLength</H3>
+<PRE>
+public void <B>setSubdocumentTextStreamLength</B>(<A HREF="../../../../../org/apache/poi/hwpf/model/SubdocumentType.html" title="enum in org.apache.poi.hwpf.model">SubdocumentType</A>&nbsp;type,
+                                           int&nbsp;length)</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="clearOffsetsSizes()"><!-- --></A><H3>
+clearOffsetsSizes</H3>
+<PRE>
+public void <B>clearOffsetsSizes</B>()</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getFieldsPlcfOffset(org.apache.poi.hwpf.model.FieldsDocumentPart)"><!-- --></A><H3>
+getFieldsPlcfOffset</H3>
+<PRE>
+public int <B>getFieldsPlcfOffset</B>(<A HREF="../../../../../org/apache/poi/hwpf/model/FieldsDocumentPart.html" title="enum in org.apache.poi.hwpf.model">FieldsDocumentPart</A>&nbsp;part)</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getFieldsPlcfLength(org.apache.poi.hwpf.model.FieldsDocumentPart)"><!-- --></A><H3>
+getFieldsPlcfLength</H3>
+<PRE>
+public int <B>getFieldsPlcfLength</B>(<A HREF="../../../../../org/apache/poi/hwpf/model/FieldsDocumentPart.html" title="enum in org.apache.poi.hwpf.model">FieldsDocumentPart</A>&nbsp;part)</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setFieldsPlcfOffset(org.apache.poi.hwpf.model.FieldsDocumentPart, int)"><!-- --></A><H3>
+setFieldsPlcfOffset</H3>
+<PRE>
+public void <B>setFieldsPlcfOffset</B>(<A HREF="../../../../../org/apache/poi/hwpf/model/FieldsDocumentPart.html" title="enum in org.apache.poi.hwpf.model">FieldsDocumentPart</A>&nbsp;part,
+                                int&nbsp;offset)</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setFieldsPlcfLength(org.apache.poi.hwpf.model.FieldsDocumentPart, int)"><!-- --></A><H3>
+setFieldsPlcfLength</H3>
+<PRE>
+public void <B>setFieldsPlcfLength</B>(<A HREF="../../../../../org/apache/poi/hwpf/model/FieldsDocumentPart.html" title="enum in org.apache.poi.hwpf.model">FieldsDocumentPart</A>&nbsp;part,
+                                int&nbsp;length)</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getFcPlcffldAtn()"><!-- --></A><H3>
+getFcPlcffldAtn</H3>
+<PRE>
+<FONT SIZE="-1">@Deprecated
+</FONT>public int <B>getFcPlcffldAtn</B>()</PRE>
+<DL>
+<DD><B>Deprecated.</B>&nbsp;
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getLcbPlcffldAtn()"><!-- --></A><H3>
+getLcbPlcffldAtn</H3>
+<PRE>
+<FONT SIZE="-1">@Deprecated
+</FONT>public int <B>getLcbPlcffldAtn</B>()</PRE>
+<DL>
+<DD><B>Deprecated.</B>&nbsp;
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setFcPlcffldAtn(int)"><!-- --></A><H3>
+setFcPlcffldAtn</H3>
+<PRE>
+<FONT SIZE="-1">@Deprecated
+</FONT>public void <B>setFcPlcffldAtn</B>(int&nbsp;offset)</PRE>
+<DL>
+<DD><B>Deprecated.</B>&nbsp;
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setLcbPlcffldAtn(int)"><!-- --></A><H3>
+setLcbPlcffldAtn</H3>
+<PRE>
+<FONT SIZE="-1">@Deprecated
+</FONT>public void <B>setLcbPlcffldAtn</B>(int&nbsp;size)</PRE>
+<DL>
+<DD><B>Deprecated.</B>&nbsp;
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getFcPlcffldEdn()"><!-- --></A><H3>
+getFcPlcffldEdn</H3>
+<PRE>
+<FONT SIZE="-1">@Deprecated
+</FONT>public int <B>getFcPlcffldEdn</B>()</PRE>
+<DL>
+<DD><B>Deprecated.</B>&nbsp;
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getLcbPlcffldEdn()"><!-- --></A><H3>
+getLcbPlcffldEdn</H3>
+<PRE>
+<FONT SIZE="-1">@Deprecated
+</FONT>public int <B>getLcbPlcffldEdn</B>()</PRE>
+<DL>
+<DD><B>Deprecated.</B>&nbsp;
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setFcPlcffldEdn(int)"><!-- --></A><H3>
+setFcPlcffldEdn</H3>
+<PRE>
+<FONT SIZE="-1">@Deprecated
+</FONT>public void <B>setFcPlcffldEdn</B>(int&nbsp;offset)</PRE>
+<DL>
+<DD><B>Deprecated.</B>&nbsp;
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setLcbPlcffldEdn(int)"><!-- --></A><H3>
+setLcbPlcffldEdn</H3>
+<PRE>
+<FONT SIZE="-1">@Deprecated
+</FONT>public void <B>setLcbPlcffldEdn</B>(int&nbsp;size)</PRE>
+<DL>
+<DD><B>Deprecated.</B>&nbsp;
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getFcPlcffldFtn()"><!-- --></A><H3>
+getFcPlcffldFtn</H3>
+<PRE>
+<FONT SIZE="-1">@Deprecated
+</FONT>public int <B>getFcPlcffldFtn</B>()</PRE>
+<DL>
+<DD><B>Deprecated.</B>&nbsp;
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getLcbPlcffldFtn()"><!-- --></A><H3>
+getLcbPlcffldFtn</H3>
+<PRE>
+<FONT SIZE="-1">@Deprecated
+</FONT>public int <B>getLcbPlcffldFtn</B>()</PRE>
+<DL>
+<DD><B>Deprecated.</B>&nbsp;
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setFcPlcffldFtn(int)"><!-- --></A><H3>
+setFcPlcffldFtn</H3>
+<PRE>
+<FONT SIZE="-1">@Deprecated
+</FONT>public void <B>setFcPlcffldFtn</B>(int&nbsp;offset)</PRE>
+<DL>
+<DD><B>Deprecated.</B>&nbsp;
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setLcbPlcffldFtn(int)"><!-- --></A><H3>
+setLcbPlcffldFtn</H3>
+<PRE>
+<FONT SIZE="-1">@Deprecated
+</FONT>public void <B>setLcbPlcffldFtn</B>(int&nbsp;size)</PRE>
+<DL>
+<DD><B>Deprecated.</B>&nbsp;
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getFcPlcffldHdr()"><!-- --></A><H3>
+getFcPlcffldHdr</H3>
+<PRE>
+<FONT SIZE="-1">@Deprecated
+</FONT>public int <B>getFcPlcffldHdr</B>()</PRE>
+<DL>
+<DD><B>Deprecated.</B>&nbsp;
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getLcbPlcffldHdr()"><!-- --></A><H3>
+getLcbPlcffldHdr</H3>
+<PRE>
+<FONT SIZE="-1">@Deprecated
+</FONT>public int <B>getLcbPlcffldHdr</B>()</PRE>
+<DL>
+<DD><B>Deprecated.</B>&nbsp;
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setFcPlcffldHdr(int)"><!-- --></A><H3>
+setFcPlcffldHdr</H3>
+<PRE>
+<FONT SIZE="-1">@Deprecated
+</FONT>public void <B>setFcPlcffldHdr</B>(int&nbsp;offset)</PRE>
+<DL>
+<DD><B>Deprecated.</B>&nbsp;
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setLcbPlcffldHdr(int)"><!-- --></A><H3>
+setLcbPlcffldHdr</H3>
+<PRE>
+<FONT SIZE="-1">@Deprecated
+</FONT>public void <B>setLcbPlcffldHdr</B>(int&nbsp;size)</PRE>
+<DL>
+<DD><B>Deprecated.</B>&nbsp;
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getFcPlcffldHdrtxbx()"><!-- --></A><H3>
+getFcPlcffldHdrtxbx</H3>
+<PRE>
+<FONT SIZE="-1">@Deprecated
+</FONT>public int <B>getFcPlcffldHdrtxbx</B>()</PRE>
+<DL>
+<DD><B>Deprecated.</B>&nbsp;
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getLcbPlcffldHdrtxbx()"><!-- --></A><H3>
+getLcbPlcffldHdrtxbx</H3>
+<PRE>
+<FONT SIZE="-1">@Deprecated
+</FONT>public int <B>getLcbPlcffldHdrtxbx</B>()</PRE>
+<DL>
+<DD><B>Deprecated.</B>&nbsp;
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setFcPlcffldHdrtxbx(int)"><!-- --></A><H3>
+setFcPlcffldHdrtxbx</H3>
+<PRE>
+<FONT SIZE="-1">@Deprecated
+</FONT>public void <B>setFcPlcffldHdrtxbx</B>(int&nbsp;offset)</PRE>
+<DL>
+<DD><B>Deprecated.</B>&nbsp;
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setLcbPlcffldHdrtxbx(int)"><!-- --></A><H3>
+setLcbPlcffldHdrtxbx</H3>
+<PRE>
+<FONT SIZE="-1">@Deprecated
+</FONT>public void <B>setLcbPlcffldHdrtxbx</B>(int&nbsp;size)</PRE>
+<DL>
+<DD><B>Deprecated.</B>&nbsp;
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getFcPlcffldMom()"><!-- --></A><H3>
+getFcPlcffldMom</H3>
+<PRE>
+<FONT SIZE="-1">@Deprecated
+</FONT>public int <B>getFcPlcffldMom</B>()</PRE>
+<DL>
+<DD><B>Deprecated.</B>&nbsp;
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getLcbPlcffldMom()"><!-- --></A><H3>
+getLcbPlcffldMom</H3>
+<PRE>
+<FONT SIZE="-1">@Deprecated
+</FONT>public int <B>getLcbPlcffldMom</B>()</PRE>
+<DL>
+<DD><B>Deprecated.</B>&nbsp;
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setFcPlcffldMom(int)"><!-- --></A><H3>
+setFcPlcffldMom</H3>
+<PRE>
+<FONT SIZE="-1">@Deprecated
+</FONT>public void <B>setFcPlcffldMom</B>(int&nbsp;offset)</PRE>
+<DL>
+<DD><B>Deprecated.</B>&nbsp;
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setLcbPlcffldMom(int)"><!-- --></A><H3>
+setLcbPlcffldMom</H3>
+<PRE>
+<FONT SIZE="-1">@Deprecated
+</FONT>public void <B>setLcbPlcffldMom</B>(int&nbsp;size)</PRE>
+<DL>
+<DD><B>Deprecated.</B>&nbsp;
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getFcPlcffldTxbx()"><!-- --></A><H3>
+getFcPlcffldTxbx</H3>
+<PRE>
+<FONT SIZE="-1">@Deprecated
+</FONT>public int <B>getFcPlcffldTxbx</B>()</PRE>
+<DL>
+<DD><B>Deprecated.</B>&nbsp;
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getLcbPlcffldTxbx()"><!-- --></A><H3>
+getLcbPlcffldTxbx</H3>
+<PRE>
+<FONT SIZE="-1">@Deprecated
+</FONT>public int <B>getLcbPlcffldTxbx</B>()</PRE>
+<DL>
+<DD><B>Deprecated.</B>&nbsp;
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setFcPlcffldTxbx(int)"><!-- --></A><H3>
+setFcPlcffldTxbx</H3>
+<PRE>
+<FONT SIZE="-1">@Deprecated
+</FONT>public void <B>setFcPlcffldTxbx</B>(int&nbsp;offset)</PRE>
+<DL>
+<DD><B>Deprecated.</B>&nbsp;
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setLcbPlcffldTxbx(int)"><!-- --></A><H3>
+setLcbPlcffldTxbx</H3>
+<PRE>
+<FONT SIZE="-1">@Deprecated
+</FONT>public void <B>setLcbPlcffldTxbx</B>(int&nbsp;size)</PRE>
+<DL>
+<DD><B>Deprecated.</B>&nbsp;
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getFSPAPlcfOffset(org.apache.poi.hwpf.model.FSPADocumentPart)"><!-- --></A><H3>
+getFSPAPlcfOffset</H3>
+<PRE>
+public int <B>getFSPAPlcfOffset</B>(<A HREF="../../../../../org/apache/poi/hwpf/model/FSPADocumentPart.html" title="enum in org.apache.poi.hwpf.model">FSPADocumentPart</A>&nbsp;part)</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getFSPAPlcfLength(org.apache.poi.hwpf.model.FSPADocumentPart)"><!-- --></A><H3>
+getFSPAPlcfLength</H3>
+<PRE>
+public int <B>getFSPAPlcfLength</B>(<A HREF="../../../../../org/apache/poi/hwpf/model/FSPADocumentPart.html" title="enum in org.apache.poi.hwpf.model">FSPADocumentPart</A>&nbsp;part)</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setFSPAPlcfOffset(org.apache.poi.hwpf.model.FSPADocumentPart, int)"><!-- --></A><H3>
+setFSPAPlcfOffset</H3>
+<PRE>
+public void <B>setFSPAPlcfOffset</B>(<A HREF="../../../../../org/apache/poi/hwpf/model/FSPADocumentPart.html" title="enum in org.apache.poi.hwpf.model">FSPADocumentPart</A>&nbsp;part,
+                              int&nbsp;offset)</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setFSPAPlcfLength(org.apache.poi.hwpf.model.FSPADocumentPart, int)"><!-- --></A><H3>
+setFSPAPlcfLength</H3>
+<PRE>
+public void <B>setFSPAPlcfLength</B>(<A HREF="../../../../../org/apache/poi/hwpf/model/FSPADocumentPart.html" title="enum in org.apache.poi.hwpf.model">FSPADocumentPart</A>&nbsp;part,
+                              int&nbsp;length)</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getFcPlcspaMom()"><!-- --></A><H3>
+getFcPlcspaMom</H3>
+<PRE>
+<FONT SIZE="-1">@Deprecated
+</FONT>public int <B>getFcPlcspaMom</B>()</PRE>
+<DL>
+<DD><B>Deprecated.</B>&nbsp;
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getLcbPlcspaMom()"><!-- --></A><H3>
+getLcbPlcspaMom</H3>
+<PRE>
+<FONT SIZE="-1">@Deprecated
+</FONT>public int <B>getLcbPlcspaMom</B>()</PRE>
+<DL>
+<DD><B>Deprecated.</B>&nbsp;
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getFcDggInfo()"><!-- --></A><H3>
+getFcDggInfo</H3>
+<PRE>
+public int <B>getFcDggInfo</B>()</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getLcbDggInfo()"><!-- --></A><H3>
+getLcbDggInfo</H3>
+<PRE>
+public int <B>getLcbDggInfo</B>()</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getNotesDescriptorsOffset(org.apache.poi.hwpf.model.NoteType)"><!-- --></A><H3>
+getNotesDescriptorsOffset</H3>
+<PRE>
+public int <B>getNotesDescriptorsOffset</B>(<A HREF="../../../../../org/apache/poi/hwpf/model/NoteType.html" title="enum in org.apache.poi.hwpf.model">NoteType</A>&nbsp;noteType)</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setNotesDescriptorsOffset(org.apache.poi.hwpf.model.NoteType, int)"><!-- --></A><H3>
+setNotesDescriptorsOffset</H3>
+<PRE>
+public void <B>setNotesDescriptorsOffset</B>(<A HREF="../../../../../org/apache/poi/hwpf/model/NoteType.html" title="enum in org.apache.poi.hwpf.model">NoteType</A>&nbsp;noteType,
+                                      int&nbsp;offset)</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getNotesDescriptorsSize(org.apache.poi.hwpf.model.NoteType)"><!-- --></A><H3>
+getNotesDescriptorsSize</H3>
+<PRE>
+public int <B>getNotesDescriptorsSize</B>(<A HREF="../../../../../org/apache/poi/hwpf/model/NoteType.html" title="enum in org.apache.poi.hwpf.model">NoteType</A>&nbsp;noteType)</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setNotesDescriptorsSize(org.apache.poi.hwpf.model.NoteType, int)"><!-- --></A><H3>
+setNotesDescriptorsSize</H3>
+<PRE>
+public void <B>setNotesDescriptorsSize</B>(<A HREF="../../../../../org/apache/poi/hwpf/model/NoteType.html" title="enum in org.apache.poi.hwpf.model">NoteType</A>&nbsp;noteType,
+                                    int&nbsp;offset)</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getNotesTextPositionsOffset(org.apache.poi.hwpf.model.NoteType)"><!-- --></A><H3>
+getNotesTextPositionsOffset</H3>
+<PRE>
+public int <B>getNotesTextPositionsOffset</B>(<A HREF="../../../../../org/apache/poi/hwpf/model/NoteType.html" title="enum in org.apache.poi.hwpf.model">NoteType</A>&nbsp;noteType)</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setNotesTextPositionsOffset(org.apache.poi.hwpf.model.NoteType, int)"><!-- --></A><H3>
+setNotesTextPositionsOffset</H3>
+<PRE>
+public void <B>setNotesTextPositionsOffset</B>(<A HREF="../../../../../org/apache/poi/hwpf/model/NoteType.html" title="enum in org.apache.poi.hwpf.model">NoteType</A>&nbsp;noteType,
+                                        int&nbsp;offset)</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getNotesTextPositionsSize(org.apache.poi.hwpf.model.NoteType)"><!-- --></A><H3>
+getNotesTextPositionsSize</H3>
+<PRE>
+public int <B>getNotesTextPositionsSize</B>(<A HREF="../../../../../org/apache/poi/hwpf/model/NoteType.html" title="enum in org.apache.poi.hwpf.model">NoteType</A>&nbsp;noteType)</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setNotesTextPositionsSize(org.apache.poi.hwpf.model.NoteType, int)"><!-- --></A><H3>
+setNotesTextPositionsSize</H3>
+<PRE>
+public void <B>setNotesTextPositionsSize</B>(<A HREF="../../../../../org/apache/poi/hwpf/model/NoteType.html" title="enum in org.apache.poi.hwpf.model">NoteType</A>&nbsp;noteType,
+                                      int&nbsp;offset)</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="writeTo(byte[], org.apache.poi.hwpf.model.io.HWPFOutputStream)"><!-- --></A><H3>
+writeTo</H3>
+<PRE>
+public void <B>writeTo</B>(byte[]&nbsp;mainStream,
+                    <A HREF="../../../../../org/apache/poi/hwpf/model/io/HWPFOutputStream.html" title="class in org.apache.poi.hwpf.model.io">HWPFOutputStream</A>&nbsp;tableStream)
+             throws java.io.IOException</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+
+<DT><B>Throws:</B>
+<DD><CODE>java.io.IOException</CODE></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getSize()"><!-- --></A><H3>
+getSize</H3>
+<PRE>
+public int <B>getSize</B>()</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getFibBase()"><!-- --></A><H3>
+getFibBase</H3>
+<PRE>
+public <A HREF="../../../../../org/apache/poi/hwpf/model/FibBase.html" title="class in org.apache.poi.hwpf.model">FibBase</A> <B>getFibBase</B>()</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<!-- ========= END OF CLASS DATA ========= -->
+<HR>
+
+
+<!-- ======= START OF BOTTOM NAVBAR ====== -->
+<A NAME="navbar_bottom"><!-- --></A>
+<A HREF="#skip-navbar_bottom" title="Skip navigation links"></A>
+<TABLE BORDER="0" WIDTH="100%" CELLPADDING="1" CELLSPACING="0" SUMMARY="">
+<TR>
+<TD COLSPAN=2 BGCOLOR="#EEEEFF" CLASS="NavBarCell1">
+<A NAME="navbar_bottom_firstrow"><!-- --></A>
+<TABLE BORDER="0" CELLPADDING="0" CELLSPACING="3" SUMMARY="">
+  <TR ALIGN="center" VALIGN="top">
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../overview-summary.html"><FONT CLASS="NavBarFont1"><B>Overview</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="package-summary.html"><FONT CLASS="NavBarFont1"><B>Package</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#FFFFFF" CLASS="NavBarCell1Rev"> &nbsp;<FONT CLASS="NavBarFont1Rev"><B>Class</B></FONT>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="class-use/FileInformationBlock.html"><FONT CLASS="NavBarFont1"><B>Use</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="package-tree.html"><FONT CLASS="NavBarFont1"><B>Tree</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../deprecated-list.html"><FONT CLASS="NavBarFont1"><B>Deprecated</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../index-all.html"><FONT CLASS="NavBarFont1"><B>Index</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../help-doc.html"><FONT CLASS="NavBarFont1"><B>Help</B></FONT></A>&nbsp;</TD>
+  </TR>
+</TABLE>
+</TD>
+<TD ALIGN="right" VALIGN="top" ROWSPAN=3><EM>
+</EM>
+</TD>
+</TR>
+
+<TR>
+<TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
+&nbsp;<A HREF="../../../../../org/apache/poi/hwpf/model/FieldsTables.html" title="class in org.apache.poi.hwpf.model"><B>PREV CLASS</B></A>&nbsp;
+&nbsp;<A HREF="../../../../../org/apache/poi/hwpf/model/FontTable.html" title="class in org.apache.poi.hwpf.model"><B>NEXT CLASS</B></A></FONT></TD>
+<TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
+  <A HREF="../../../../../index.html?org/apache/poi/hwpf/model/FileInformationBlock.html" target="_top"><B>FRAMES</B></A>  &nbsp;
+&nbsp;<A HREF="FileInformationBlock.html" target="_top"><B>NO FRAMES</B></A>  &nbsp;
+&nbsp;<SCRIPT type="text/javascript">
+  <!--
+  if(window==top) {
+    document.writeln('<A HREF="../../../../../allclasses-noframe.html"><B>All Classes</B></A>');
+  }
+  //-->
+</SCRIPT>
+<NOSCRIPT>
+  <A HREF="../../../../../allclasses-noframe.html"><B>All Classes</B></A>
+</NOSCRIPT>
+
+
+</FONT></TD>
+</TR>
+<TR>
+<TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
+  SUMMARY:&nbsp;NESTED&nbsp;|&nbsp;<A HREF="#field_summary">FIELD</A>&nbsp;|&nbsp;<A HREF="#constructor_summary">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_summary">METHOD</A></FONT></TD>
+<TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
+DETAIL:&nbsp;<A HREF="#field_detail">FIELD</A>&nbsp;|&nbsp;<A HREF="#constructor_detail">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_detail">METHOD</A></FONT></TD>
+</TR>
+</TABLE>
+<A NAME="skip-navbar_bottom"></A>
+<!-- ======== END OF BOTTOM NAVBAR ======= -->
+
+<HR>
+
+                <i>Copyright 2014 The Apache Software Foundation or
+        its licensors, as applicable.</i>
+            
+</BODY>
+</HTML>

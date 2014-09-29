@@ -1,0 +1,782 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!--NewPage-->
+<HTML>
+<HEAD>
+<TITLE>
+XWPFFootnote (POI API Documentation)
+</TITLE>
+
+<META NAME="keywords" CONTENT="org.apache.poi.xwpf.usermodel.XWPFFootnote class">
+
+<LINK REL ="stylesheet" TYPE="text/css" HREF="../../../../../stylesheet.css" TITLE="Style">
+
+<SCRIPT type="text/javascript">
+function windowTitle()
+{
+    parent.document.title="XWPFFootnote (POI API Documentation)";
+}
+</SCRIPT>
+<NOSCRIPT>
+</NOSCRIPT>
+
+</HEAD>
+
+<BODY BGCOLOR="white" onload="windowTitle();">
+
+
+<!-- ========= START OF TOP NAVBAR ======= -->
+<A NAME="navbar_top"><!-- --></A>
+<A HREF="#skip-navbar_top" title="Skip navigation links"></A>
+<TABLE BORDER="0" WIDTH="100%" CELLPADDING="1" CELLSPACING="0" SUMMARY="">
+<TR>
+<TD COLSPAN=2 BGCOLOR="#EEEEFF" CLASS="NavBarCell1">
+<A NAME="navbar_top_firstrow"><!-- --></A>
+<TABLE BORDER="0" CELLPADDING="0" CELLSPACING="3" SUMMARY="">
+  <TR ALIGN="center" VALIGN="top">
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../overview-summary.html"><FONT CLASS="NavBarFont1"><B>Overview</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="package-summary.html"><FONT CLASS="NavBarFont1"><B>Package</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#FFFFFF" CLASS="NavBarCell1Rev"> &nbsp;<FONT CLASS="NavBarFont1Rev"><B>Class</B></FONT>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="class-use/XWPFFootnote.html"><FONT CLASS="NavBarFont1"><B>Use</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="package-tree.html"><FONT CLASS="NavBarFont1"><B>Tree</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../deprecated-list.html"><FONT CLASS="NavBarFont1"><B>Deprecated</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../index-all.html"><FONT CLASS="NavBarFont1"><B>Index</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../help-doc.html"><FONT CLASS="NavBarFont1"><B>Help</B></FONT></A>&nbsp;</TD>
+  </TR>
+</TABLE>
+</TD>
+<TD ALIGN="right" VALIGN="top" ROWSPAN=3><EM>
+</EM>
+</TD>
+</TR>
+
+<TR>
+<TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
+&nbsp;<A HREF="../../../../../org/apache/poi/xwpf/usermodel/XWPFFooter.html" title="class in org.apache.poi.xwpf.usermodel"><B>PREV CLASS</B></A>&nbsp;
+&nbsp;<A HREF="../../../../../org/apache/poi/xwpf/usermodel/XWPFFootnotes.html" title="class in org.apache.poi.xwpf.usermodel"><B>NEXT CLASS</B></A></FONT></TD>
+<TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
+  <A HREF="../../../../../index.html?org/apache/poi/xwpf/usermodel/XWPFFootnote.html" target="_top"><B>FRAMES</B></A>  &nbsp;
+&nbsp;<A HREF="XWPFFootnote.html" target="_top"><B>NO FRAMES</B></A>  &nbsp;
+&nbsp;<SCRIPT type="text/javascript">
+  <!--
+  if(window==top) {
+    document.writeln('<A HREF="../../../../../allclasses-noframe.html"><B>All Classes</B></A>');
+  }
+  //-->
+</SCRIPT>
+<NOSCRIPT>
+  <A HREF="../../../../../allclasses-noframe.html"><B>All Classes</B></A>
+</NOSCRIPT>
+
+
+</FONT></TD>
+</TR>
+<TR>
+<TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
+  SUMMARY:&nbsp;NESTED&nbsp;|&nbsp;FIELD&nbsp;|&nbsp;<A HREF="#constructor_summary">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_summary">METHOD</A></FONT></TD>
+<TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
+DETAIL:&nbsp;FIELD&nbsp;|&nbsp;<A HREF="#constructor_detail">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_detail">METHOD</A></FONT></TD>
+</TR>
+</TABLE>
+<A NAME="skip-navbar_top"></A>
+<!-- ========= END OF TOP NAVBAR ========= -->
+
+<HR>
+<!-- ======== START OF CLASS DATA ======== -->
+<H2>
+<FONT SIZE="-1">
+org.apache.poi.xwpf.usermodel</FONT>
+<BR>
+Class XWPFFootnote</H2>
+<PRE>
+java.lang.Object
+  <IMG SRC="../../../../../resources/inherit.gif" ALT="extended by "><B>org.apache.poi.xwpf.usermodel.XWPFFootnote</B>
+</PRE>
+<DL>
+<DT><B>All Implemented Interfaces:</B> <DD>java.lang.Iterable&lt;<A HREF="../../../../../org/apache/poi/xwpf/usermodel/XWPFParagraph.html" title="class in org.apache.poi.xwpf.usermodel">XWPFParagraph</A>&gt;, <A HREF="../../../../../org/apache/poi/xwpf/usermodel/IBody.html" title="interface in org.apache.poi.xwpf.usermodel">IBody</A></DD>
+</DL>
+<HR>
+<DL>
+<DT><PRE>public class <B>XWPFFootnote</B><DT>extends java.lang.Object<DT>implements java.lang.Iterable&lt;<A HREF="../../../../../org/apache/poi/xwpf/usermodel/XWPFParagraph.html" title="class in org.apache.poi.xwpf.usermodel">XWPFParagraph</A>&gt;, <A HREF="../../../../../org/apache/poi/xwpf/usermodel/IBody.html" title="interface in org.apache.poi.xwpf.usermodel">IBody</A></DL>
+</PRE>
+
+<P>
+<HR>
+
+<P>
+
+<!-- ======== CONSTRUCTOR SUMMARY ======== -->
+
+<A NAME="constructor_summary"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+<B>Constructor Summary</B></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xwpf/usermodel/XWPFFootnote.html#XWPFFootnote(org.openxmlformats.schemas.wordprocessingml.x2006.main.CTFtnEdn, org.apache.poi.xwpf.usermodel.XWPFFootnotes)">XWPFFootnote</A></B>(org.openxmlformats.schemas.wordprocessingml.x2006.main.CTFtnEdn&nbsp;note,
+             <A HREF="../../../../../org/apache/poi/xwpf/usermodel/XWPFFootnotes.html" title="class in org.apache.poi.xwpf.usermodel">XWPFFootnotes</A>&nbsp;xFootnotes)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xwpf/usermodel/XWPFFootnote.html#XWPFFootnote(org.apache.poi.xwpf.usermodel.XWPFDocument, org.openxmlformats.schemas.wordprocessingml.x2006.main.CTFtnEdn)">XWPFFootnote</A></B>(<A HREF="../../../../../org/apache/poi/xwpf/usermodel/XWPFDocument.html" title="class in org.apache.poi.xwpf.usermodel">XWPFDocument</A>&nbsp;document,
+             org.openxmlformats.schemas.wordprocessingml.x2006.main.CTFtnEdn&nbsp;body)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+</TABLE>
+&nbsp;
+<!-- ========== METHOD SUMMARY =========== -->
+
+<A NAME="method_summary"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+<B>Method Summary</B></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../../../org/apache/poi/xwpf/usermodel/XWPFParagraph.html" title="class in org.apache.poi.xwpf.usermodel">XWPFParagraph</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xwpf/usermodel/XWPFFootnote.html#addNewParagraph(org.openxmlformats.schemas.wordprocessingml.x2006.main.CTP)">addNewParagraph</A></B>(org.openxmlformats.schemas.wordprocessingml.x2006.main.CTP&nbsp;paragraph)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;add a new paragraph to the end of the footnote</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../../../org/apache/poi/xwpf/usermodel/XWPFTable.html" title="class in org.apache.poi.xwpf.usermodel">XWPFTable</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xwpf/usermodel/XWPFFootnote.html#addNewTbl(org.openxmlformats.schemas.wordprocessingml.x2006.main.CTTbl)">addNewTbl</A></B>(org.openxmlformats.schemas.wordprocessingml.x2006.main.CTTbl&nbsp;table)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;add a new table to the end of the footnote</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;java.util.List&lt;<A HREF="../../../../../org/apache/poi/xwpf/usermodel/IBodyElement.html" title="interface in org.apache.poi.xwpf.usermodel">IBodyElement</A>&gt;</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xwpf/usermodel/XWPFFootnote.html#getBodyElements()">getBodyElements</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns an Iterator with paragraphs and tables, 
+  in the order that they occur in the text.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;org.openxmlformats.schemas.wordprocessingml.x2006.main.CTFtnEdn</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xwpf/usermodel/XWPFFootnote.html#getCTFtnEdn()">getCTFtnEdn</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../../../org/apache/poi/POIXMLDocumentPart.html" title="class in org.apache.poi">POIXMLDocumentPart</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xwpf/usermodel/XWPFFootnote.html#getOwner()">getOwner</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../../../org/apache/poi/xwpf/usermodel/XWPFParagraph.html" title="class in org.apache.poi.xwpf.usermodel">XWPFParagraph</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xwpf/usermodel/XWPFFootnote.html#getParagraph(org.openxmlformats.schemas.wordprocessingml.x2006.main.CTP)">getParagraph</A></B>(org.openxmlformats.schemas.wordprocessingml.x2006.main.CTP&nbsp;p)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if there is a corresponding <A HREF="../../../../../org/apache/poi/xwpf/usermodel/XWPFParagraph.html" title="class in org.apache.poi.xwpf.usermodel"><CODE>XWPFParagraph</CODE></A> of the parameter ctTable in the paragraphList of this header or footer
+ the method will return this paragraph
+ if there is no corresponding <A HREF="../../../../../org/apache/poi/xwpf/usermodel/XWPFParagraph.html" title="class in org.apache.poi.xwpf.usermodel"><CODE>XWPFParagraph</CODE></A> the method will return null</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../../../org/apache/poi/xwpf/usermodel/XWPFParagraph.html" title="class in org.apache.poi.xwpf.usermodel">XWPFParagraph</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xwpf/usermodel/XWPFFootnote.html#getParagraphArray(int)">getParagraphArray</A></B>(int&nbsp;pos)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns the paragraph that holds
+  the text of the header or footer.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;java.util.List&lt;<A HREF="../../../../../org/apache/poi/xwpf/usermodel/XWPFParagraph.html" title="class in org.apache.poi.xwpf.usermodel">XWPFParagraph</A>&gt;</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xwpf/usermodel/XWPFFootnote.html#getParagraphs()">getParagraphs</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns the paragraph(s) that holds
+  the text of the header or footer.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../../../org/apache/poi/POIXMLDocumentPart.html" title="class in org.apache.poi">POIXMLDocumentPart</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xwpf/usermodel/XWPFFootnote.html#getPart()">getPart</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;returns the Part, to which the body belongs, which you need for adding relationship to other parts</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../../../org/apache/poi/xwpf/usermodel/BodyType.html" title="enum in org.apache.poi.xwpf.usermodel">BodyType</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xwpf/usermodel/XWPFFootnote.html#getPartType()">getPartType</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;get the PartType of the body</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;java.util.List&lt;<A HREF="../../../../../org/apache/poi/xwpf/usermodel/XWPFPictureData.html" title="class in org.apache.poi.xwpf.usermodel">XWPFPictureData</A>&gt;</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xwpf/usermodel/XWPFFootnote.html#getPictures()">getPictures</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../../../org/apache/poi/xwpf/usermodel/XWPFTable.html" title="class in org.apache.poi.xwpf.usermodel">XWPFTable</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xwpf/usermodel/XWPFFootnote.html#getTable(org.openxmlformats.schemas.wordprocessingml.x2006.main.CTTbl)">getTable</A></B>(org.openxmlformats.schemas.wordprocessingml.x2006.main.CTTbl&nbsp;ctTable)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if there is a corresponding <A HREF="../../../../../org/apache/poi/xwpf/usermodel/XWPFTable.html" title="class in org.apache.poi.xwpf.usermodel"><CODE>XWPFTable</CODE></A> of the parameter ctTable in the tableList of this header
+ the method will return this table
+ if there is no corresponding <A HREF="../../../../../org/apache/poi/xwpf/usermodel/XWPFTable.html" title="class in org.apache.poi.xwpf.usermodel"><CODE>XWPFTable</CODE></A> the method will return null</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../../../org/apache/poi/xwpf/usermodel/XWPFTable.html" title="class in org.apache.poi.xwpf.usermodel">XWPFTable</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xwpf/usermodel/XWPFFootnote.html#getTableArray(int)">getTableArray</A></B>(int&nbsp;pos)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns the table at position pos</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../../../org/apache/poi/xwpf/usermodel/XWPFTableCell.html" title="class in org.apache.poi.xwpf.usermodel">XWPFTableCell</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xwpf/usermodel/XWPFFootnote.html#getTableCell(org.openxmlformats.schemas.wordprocessingml.x2006.main.CTTc)">getTableCell</A></B>(org.openxmlformats.schemas.wordprocessingml.x2006.main.CTTc&nbsp;cell)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;get the TableCell which belongs to the TableCell</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;java.util.List&lt;<A HREF="../../../../../org/apache/poi/xwpf/usermodel/XWPFTable.html" title="class in org.apache.poi.xwpf.usermodel">XWPFTable</A>&gt;</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xwpf/usermodel/XWPFFootnote.html#getTables()">getTables</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Return the table(s) that holds the text
+  of the IBodyPart, for complex cases
+  where a paragraph isn't used.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../../../org/apache/poi/xwpf/usermodel/XWPFDocument.html" title="class in org.apache.poi.xwpf.usermodel">XWPFDocument</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xwpf/usermodel/XWPFFootnote.html#getXWPFDocument()">getXWPFDocument</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Return XWPFDocument</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../../../org/apache/poi/xwpf/usermodel/XWPFParagraph.html" title="class in org.apache.poi.xwpf.usermodel">XWPFParagraph</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xwpf/usermodel/XWPFFootnote.html#insertNewParagraph(org.apache.xmlbeans.XmlCursor)">insertNewParagraph</A></B>(org.apache.xmlbeans.XmlCursor&nbsp;cursor)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;add a new paragraph at position of the cursor</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../../../org/apache/poi/xwpf/usermodel/XWPFTable.html" title="class in org.apache.poi.xwpf.usermodel">XWPFTable</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xwpf/usermodel/XWPFFootnote.html#insertNewTbl(org.apache.xmlbeans.XmlCursor)">insertNewTbl</A></B>(org.apache.xmlbeans.XmlCursor&nbsp;cursor)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;inserts a new Table at the cursor position.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xwpf/usermodel/XWPFFootnote.html#insertTable(int, org.apache.poi.xwpf.usermodel.XWPFTable)">insertTable</A></B>(int&nbsp;pos,
+            <A HREF="../../../../../org/apache/poi/xwpf/usermodel/XWPFTable.html" title="class in org.apache.poi.xwpf.usermodel">XWPFTable</A>&nbsp;table)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;inserts an existing XWPFTable to the arrays bodyElements and tables</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;java.util.Iterator&lt;<A HREF="../../../../../org/apache/poi/xwpf/usermodel/XWPFParagraph.html" title="class in org.apache.poi.xwpf.usermodel">XWPFParagraph</A>&gt;</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xwpf/usermodel/XWPFFootnote.html#iterator()">iterator</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xwpf/usermodel/XWPFFootnote.html#setCTFtnEdn(org.openxmlformats.schemas.wordprocessingml.x2006.main.CTFtnEdn)">setCTFtnEdn</A></B>(org.openxmlformats.schemas.wordprocessingml.x2006.main.CTFtnEdn&nbsp;footnote)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+</TABLE>
+&nbsp;<A NAME="methods_inherited_from_class_java.lang.Object"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#EEEEFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left"><B>Methods inherited from class java.lang.Object</B></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE>clone, equals, finalize, getClass, hashCode, notify, notifyAll, toString, wait, wait, wait</CODE></TD>
+</TR>
+</TABLE>
+&nbsp;
+<P>
+
+<!-- ========= CONSTRUCTOR DETAIL ======== -->
+
+<A NAME="constructor_detail"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="1"><FONT SIZE="+2">
+<B>Constructor Detail</B></FONT></TH>
+</TR>
+</TABLE>
+
+<A NAME="XWPFFootnote(org.openxmlformats.schemas.wordprocessingml.x2006.main.CTFtnEdn, org.apache.poi.xwpf.usermodel.XWPFFootnotes)"><!-- --></A><H3>
+XWPFFootnote</H3>
+<PRE>
+public <B>XWPFFootnote</B>(org.openxmlformats.schemas.wordprocessingml.x2006.main.CTFtnEdn&nbsp;note,
+                    <A HREF="../../../../../org/apache/poi/xwpf/usermodel/XWPFFootnotes.html" title="class in org.apache.poi.xwpf.usermodel">XWPFFootnotes</A>&nbsp;xFootnotes)</PRE>
+<DL>
+</DL>
+<HR>
+
+<A NAME="XWPFFootnote(org.apache.poi.xwpf.usermodel.XWPFDocument, org.openxmlformats.schemas.wordprocessingml.x2006.main.CTFtnEdn)"><!-- --></A><H3>
+XWPFFootnote</H3>
+<PRE>
+public <B>XWPFFootnote</B>(<A HREF="../../../../../org/apache/poi/xwpf/usermodel/XWPFDocument.html" title="class in org.apache.poi.xwpf.usermodel">XWPFDocument</A>&nbsp;document,
+                    org.openxmlformats.schemas.wordprocessingml.x2006.main.CTFtnEdn&nbsp;body)</PRE>
+<DL>
+</DL>
+
+<!-- ============ METHOD DETAIL ========== -->
+
+<A NAME="method_detail"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="1"><FONT SIZE="+2">
+<B>Method Detail</B></FONT></TH>
+</TR>
+</TABLE>
+
+<A NAME="getParagraphs()"><!-- --></A><H3>
+getParagraphs</H3>
+<PRE>
+public java.util.List&lt;<A HREF="../../../../../org/apache/poi/xwpf/usermodel/XWPFParagraph.html" title="class in org.apache.poi.xwpf.usermodel">XWPFParagraph</A>&gt; <B>getParagraphs</B>()</PRE>
+<DL>
+<DD><B>Description copied from interface: <CODE><A HREF="../../../../../org/apache/poi/xwpf/usermodel/IBody.html#getParagraphs()">IBody</A></CODE></B></DD>
+<DD>Returns the paragraph(s) that holds
+  the text of the header or footer.
+<P>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../../../../org/apache/poi/xwpf/usermodel/IBody.html#getParagraphs()">getParagraphs</A></CODE> in interface <CODE><A HREF="../../../../../org/apache/poi/xwpf/usermodel/IBody.html" title="interface in org.apache.poi.xwpf.usermodel">IBody</A></CODE></DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="iterator()"><!-- --></A><H3>
+iterator</H3>
+<PRE>
+public java.util.Iterator&lt;<A HREF="../../../../../org/apache/poi/xwpf/usermodel/XWPFParagraph.html" title="class in org.apache.poi.xwpf.usermodel">XWPFParagraph</A>&gt; <B>iterator</B>()</PRE>
+<DL>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE>iterator</CODE> in interface <CODE>java.lang.Iterable&lt;<A HREF="../../../../../org/apache/poi/xwpf/usermodel/XWPFParagraph.html" title="class in org.apache.poi.xwpf.usermodel">XWPFParagraph</A>&gt;</CODE></DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getTables()"><!-- --></A><H3>
+getTables</H3>
+<PRE>
+public java.util.List&lt;<A HREF="../../../../../org/apache/poi/xwpf/usermodel/XWPFTable.html" title="class in org.apache.poi.xwpf.usermodel">XWPFTable</A>&gt; <B>getTables</B>()</PRE>
+<DL>
+<DD><B>Description copied from interface: <CODE><A HREF="../../../../../org/apache/poi/xwpf/usermodel/IBody.html#getTables()">IBody</A></CODE></B></DD>
+<DD>Return the table(s) that holds the text
+  of the IBodyPart, for complex cases
+  where a paragraph isn't used.
+<P>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../../../../org/apache/poi/xwpf/usermodel/IBody.html#getTables()">getTables</A></CODE> in interface <CODE><A HREF="../../../../../org/apache/poi/xwpf/usermodel/IBody.html" title="interface in org.apache.poi.xwpf.usermodel">IBody</A></CODE></DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getPictures()"><!-- --></A><H3>
+getPictures</H3>
+<PRE>
+public java.util.List&lt;<A HREF="../../../../../org/apache/poi/xwpf/usermodel/XWPFPictureData.html" title="class in org.apache.poi.xwpf.usermodel">XWPFPictureData</A>&gt; <B>getPictures</B>()</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getBodyElements()"><!-- --></A><H3>
+getBodyElements</H3>
+<PRE>
+public java.util.List&lt;<A HREF="../../../../../org/apache/poi/xwpf/usermodel/IBodyElement.html" title="interface in org.apache.poi.xwpf.usermodel">IBodyElement</A>&gt; <B>getBodyElements</B>()</PRE>
+<DL>
+<DD><B>Description copied from interface: <CODE><A HREF="../../../../../org/apache/poi/xwpf/usermodel/IBody.html#getBodyElements()">IBody</A></CODE></B></DD>
+<DD>Returns an Iterator with paragraphs and tables, 
+  in the order that they occur in the text.
+<P>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../../../../org/apache/poi/xwpf/usermodel/IBody.html#getBodyElements()">getBodyElements</A></CODE> in interface <CODE><A HREF="../../../../../org/apache/poi/xwpf/usermodel/IBody.html" title="interface in org.apache.poi.xwpf.usermodel">IBody</A></CODE></DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getCTFtnEdn()"><!-- --></A><H3>
+getCTFtnEdn</H3>
+<PRE>
+public org.openxmlformats.schemas.wordprocessingml.x2006.main.CTFtnEdn <B>getCTFtnEdn</B>()</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setCTFtnEdn(org.openxmlformats.schemas.wordprocessingml.x2006.main.CTFtnEdn)"><!-- --></A><H3>
+setCTFtnEdn</H3>
+<PRE>
+public void <B>setCTFtnEdn</B>(org.openxmlformats.schemas.wordprocessingml.x2006.main.CTFtnEdn&nbsp;footnote)</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getTableArray(int)"><!-- --></A><H3>
+getTableArray</H3>
+<PRE>
+public <A HREF="../../../../../org/apache/poi/xwpf/usermodel/XWPFTable.html" title="class in org.apache.poi.xwpf.usermodel">XWPFTable</A> <B>getTableArray</B>(int&nbsp;pos)</PRE>
+<DL>
+<DD><B>Description copied from interface: <CODE><A HREF="../../../../../org/apache/poi/xwpf/usermodel/IBody.html#getTableArray(int)">IBody</A></CODE></B></DD>
+<DD>Returns the table at position pos
+<P>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../../../../org/apache/poi/xwpf/usermodel/IBody.html#getTableArray(int)">getTableArray</A></CODE> in interface <CODE><A HREF="../../../../../org/apache/poi/xwpf/usermodel/IBody.html" title="interface in org.apache.poi.xwpf.usermodel">IBody</A></CODE></DL>
+</DD>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>pos</CODE> - in table array
+<DT><B>Returns:</B><DD>The table at position pos<DT><B>See Also:</B><DD><A HREF="../../../../../org/apache/poi/xwpf/usermodel/IBody.html#getTableArray(int)"><CODE>IBody.getTableArray(int)</CODE></A></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="insertTable(int, org.apache.poi.xwpf.usermodel.XWPFTable)"><!-- --></A><H3>
+insertTable</H3>
+<PRE>
+public void <B>insertTable</B>(int&nbsp;pos,
+                        <A HREF="../../../../../org/apache/poi/xwpf/usermodel/XWPFTable.html" title="class in org.apache.poi.xwpf.usermodel">XWPFTable</A>&nbsp;table)</PRE>
+<DL>
+<DD>inserts an existing XWPFTable to the arrays bodyElements and tables
+<P>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../../../../org/apache/poi/xwpf/usermodel/IBody.html#insertTable(int, org.apache.poi.xwpf.usermodel.XWPFTable)">insertTable</A></CODE> in interface <CODE><A HREF="../../../../../org/apache/poi/xwpf/usermodel/IBody.html" title="interface in org.apache.poi.xwpf.usermodel">IBody</A></CODE></DL>
+</DD>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>pos</CODE> - <DD><CODE>table</CODE> - <DT><B>See Also:</B><DD><A HREF="../../../../../org/apache/poi/xwpf/usermodel/IBody.html#insertTable(int, org.apache.poi.xwpf.usermodel.XWPFTable)"><CODE>IBody.insertTable(int pos, XWPFTable table)</CODE></A></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getTable(org.openxmlformats.schemas.wordprocessingml.x2006.main.CTTbl)"><!-- --></A><H3>
+getTable</H3>
+<PRE>
+public <A HREF="../../../../../org/apache/poi/xwpf/usermodel/XWPFTable.html" title="class in org.apache.poi.xwpf.usermodel">XWPFTable</A> <B>getTable</B>(org.openxmlformats.schemas.wordprocessingml.x2006.main.CTTbl&nbsp;ctTable)</PRE>
+<DL>
+<DD>if there is a corresponding <A HREF="../../../../../org/apache/poi/xwpf/usermodel/XWPFTable.html" title="class in org.apache.poi.xwpf.usermodel"><CODE>XWPFTable</CODE></A> of the parameter ctTable in the tableList of this header
+ the method will return this table
+ if there is no corresponding <A HREF="../../../../../org/apache/poi/xwpf/usermodel/XWPFTable.html" title="class in org.apache.poi.xwpf.usermodel"><CODE>XWPFTable</CODE></A> the method will return null
+<P>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../../../../org/apache/poi/xwpf/usermodel/IBody.html#getTable(org.openxmlformats.schemas.wordprocessingml.x2006.main.CTTbl)">getTable</A></CODE> in interface <CODE><A HREF="../../../../../org/apache/poi/xwpf/usermodel/IBody.html" title="interface in org.apache.poi.xwpf.usermodel">IBody</A></CODE></DL>
+</DD>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>ctTable</CODE> - <DT><B>See Also:</B><DD><A HREF="../../../../../org/apache/poi/xwpf/usermodel/IBody.html#getTable(org.openxmlformats.schemas.wordprocessingml.x2006.main.CTTbl)"><CODE>IBody.getTable(CTTbl ctTable)</CODE></A></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getParagraph(org.openxmlformats.schemas.wordprocessingml.x2006.main.CTP)"><!-- --></A><H3>
+getParagraph</H3>
+<PRE>
+public <A HREF="../../../../../org/apache/poi/xwpf/usermodel/XWPFParagraph.html" title="class in org.apache.poi.xwpf.usermodel">XWPFParagraph</A> <B>getParagraph</B>(org.openxmlformats.schemas.wordprocessingml.x2006.main.CTP&nbsp;p)</PRE>
+<DL>
+<DD>if there is a corresponding <A HREF="../../../../../org/apache/poi/xwpf/usermodel/XWPFParagraph.html" title="class in org.apache.poi.xwpf.usermodel"><CODE>XWPFParagraph</CODE></A> of the parameter ctTable in the paragraphList of this header or footer
+ the method will return this paragraph
+ if there is no corresponding <A HREF="../../../../../org/apache/poi/xwpf/usermodel/XWPFParagraph.html" title="class in org.apache.poi.xwpf.usermodel"><CODE>XWPFParagraph</CODE></A> the method will return null
+<P>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../../../../org/apache/poi/xwpf/usermodel/IBody.html#getParagraph(org.openxmlformats.schemas.wordprocessingml.x2006.main.CTP)">getParagraph</A></CODE> in interface <CODE><A HREF="../../../../../org/apache/poi/xwpf/usermodel/IBody.html" title="interface in org.apache.poi.xwpf.usermodel">IBody</A></CODE></DL>
+</DD>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>p</CODE> - is instance of CTP and is searching for an XWPFParagraph
+<DT><B>Returns:</B><DD>null if there is no XWPFParagraph with an corresponding CTPparagraph in the paragraphList of this header or footer
+                   XWPFParagraph with the correspondig CTP p<DT><B>See Also:</B><DD><A HREF="../../../../../org/apache/poi/xwpf/usermodel/IBody.html#getParagraph(org.openxmlformats.schemas.wordprocessingml.x2006.main.CTP)"><CODE>IBody.getParagraph(CTP p)</CODE></A></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getParagraphArray(int)"><!-- --></A><H3>
+getParagraphArray</H3>
+<PRE>
+public <A HREF="../../../../../org/apache/poi/xwpf/usermodel/XWPFParagraph.html" title="class in org.apache.poi.xwpf.usermodel">XWPFParagraph</A> <B>getParagraphArray</B>(int&nbsp;pos)</PRE>
+<DL>
+<DD>Returns the paragraph that holds
+  the text of the header or footer.
+<P>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../../../../org/apache/poi/xwpf/usermodel/IBody.html#getParagraphArray(int)">getParagraphArray</A></CODE> in interface <CODE><A HREF="../../../../../org/apache/poi/xwpf/usermodel/IBody.html" title="interface in org.apache.poi.xwpf.usermodel">IBody</A></CODE></DL>
+</DD>
+<DD><DL>
+<DT><B>See Also:</B><DD><A HREF="../../../../../org/apache/poi/xwpf/usermodel/IBody.html#getParagraphArray(int)"><CODE>IBody.getParagraphArray(int pos)</CODE></A></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getTableCell(org.openxmlformats.schemas.wordprocessingml.x2006.main.CTTc)"><!-- --></A><H3>
+getTableCell</H3>
+<PRE>
+public <A HREF="../../../../../org/apache/poi/xwpf/usermodel/XWPFTableCell.html" title="class in org.apache.poi.xwpf.usermodel">XWPFTableCell</A> <B>getTableCell</B>(org.openxmlformats.schemas.wordprocessingml.x2006.main.CTTc&nbsp;cell)</PRE>
+<DL>
+<DD>get the TableCell which belongs to the TableCell
+<P>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../../../../org/apache/poi/xwpf/usermodel/IBody.html#getTableCell(org.openxmlformats.schemas.wordprocessingml.x2006.main.CTTc)">getTableCell</A></CODE> in interface <CODE><A HREF="../../../../../org/apache/poi/xwpf/usermodel/IBody.html" title="interface in org.apache.poi.xwpf.usermodel">IBody</A></CODE></DL>
+</DD>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>cell</CODE> - <DT><B>See Also:</B><DD><A HREF="../../../../../org/apache/poi/xwpf/usermodel/IBody.html#getTableCell(org.openxmlformats.schemas.wordprocessingml.x2006.main.CTTc)"><CODE>IBody.getTableCell(CTTc cell)</CODE></A></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getOwner()"><!-- --></A><H3>
+getOwner</H3>
+<PRE>
+public <A HREF="../../../../../org/apache/poi/POIXMLDocumentPart.html" title="class in org.apache.poi">POIXMLDocumentPart</A> <B>getOwner</B>()</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="insertNewTbl(org.apache.xmlbeans.XmlCursor)"><!-- --></A><H3>
+insertNewTbl</H3>
+<PRE>
+public <A HREF="../../../../../org/apache/poi/xwpf/usermodel/XWPFTable.html" title="class in org.apache.poi.xwpf.usermodel">XWPFTable</A> <B>insertNewTbl</B>(org.apache.xmlbeans.XmlCursor&nbsp;cursor)</PRE>
+<DL>
+<DD><B>Description copied from interface: <CODE><A HREF="../../../../../org/apache/poi/xwpf/usermodel/IBody.html#insertNewTbl(org.apache.xmlbeans.XmlCursor)">IBody</A></CODE></B></DD>
+<DD>inserts a new Table at the cursor position.
+<P>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../../../../org/apache/poi/xwpf/usermodel/IBody.html#insertNewTbl(org.apache.xmlbeans.XmlCursor)">insertNewTbl</A></CODE> in interface <CODE><A HREF="../../../../../org/apache/poi/xwpf/usermodel/IBody.html" title="interface in org.apache.poi.xwpf.usermodel">IBody</A></CODE></DL>
+</DD>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>cursor</CODE> - 
+<DT><B>Returns:</B><DD>the inserted table<DT><B>See Also:</B><DD><A HREF="../../../../../org/apache/poi/xwpf/usermodel/IBody.html#insertNewTbl(org.apache.xmlbeans.XmlCursor)"><CODE>IBody.insertNewTbl(XmlCursor cursor)</CODE></A></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="insertNewParagraph(org.apache.xmlbeans.XmlCursor)"><!-- --></A><H3>
+insertNewParagraph</H3>
+<PRE>
+public <A HREF="../../../../../org/apache/poi/xwpf/usermodel/XWPFParagraph.html" title="class in org.apache.poi.xwpf.usermodel">XWPFParagraph</A> <B>insertNewParagraph</B>(org.apache.xmlbeans.XmlCursor&nbsp;cursor)</PRE>
+<DL>
+<DD>add a new paragraph at position of the cursor
+<P>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../../../../org/apache/poi/xwpf/usermodel/IBody.html#insertNewParagraph(org.apache.xmlbeans.XmlCursor)">insertNewParagraph</A></CODE> in interface <CODE><A HREF="../../../../../org/apache/poi/xwpf/usermodel/IBody.html" title="interface in org.apache.poi.xwpf.usermodel">IBody</A></CODE></DL>
+</DD>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>cursor</CODE> - 
+<DT><B>Returns:</B><DD>the inserted paragraph<DT><B>See Also:</B><DD><A HREF="../../../../../org/apache/poi/xwpf/usermodel/IBody.html#insertNewParagraph(org.apache.xmlbeans.XmlCursor)"><CODE>IBody.insertNewParagraph(XmlCursor cursor)</CODE></A></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="addNewTbl(org.openxmlformats.schemas.wordprocessingml.x2006.main.CTTbl)"><!-- --></A><H3>
+addNewTbl</H3>
+<PRE>
+public <A HREF="../../../../../org/apache/poi/xwpf/usermodel/XWPFTable.html" title="class in org.apache.poi.xwpf.usermodel">XWPFTable</A> <B>addNewTbl</B>(org.openxmlformats.schemas.wordprocessingml.x2006.main.CTTbl&nbsp;table)</PRE>
+<DL>
+<DD>add a new table to the end of the footnote
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>table</CODE> - 
+<DT><B>Returns:</B><DD>the added XWPFTable</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="addNewParagraph(org.openxmlformats.schemas.wordprocessingml.x2006.main.CTP)"><!-- --></A><H3>
+addNewParagraph</H3>
+<PRE>
+public <A HREF="../../../../../org/apache/poi/xwpf/usermodel/XWPFParagraph.html" title="class in org.apache.poi.xwpf.usermodel">XWPFParagraph</A> <B>addNewParagraph</B>(org.openxmlformats.schemas.wordprocessingml.x2006.main.CTP&nbsp;paragraph)</PRE>
+<DL>
+<DD>add a new paragraph to the end of the footnote
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>paragraph</CODE> - 
+<DT><B>Returns:</B><DD>the added XWPFParagraph</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getXWPFDocument()"><!-- --></A><H3>
+getXWPFDocument</H3>
+<PRE>
+public <A HREF="../../../../../org/apache/poi/xwpf/usermodel/XWPFDocument.html" title="class in org.apache.poi.xwpf.usermodel">XWPFDocument</A> <B>getXWPFDocument</B>()</PRE>
+<DL>
+<DD><B>Description copied from interface: <CODE><A HREF="../../../../../org/apache/poi/xwpf/usermodel/IBody.html#getXWPFDocument()">IBody</A></CODE></B></DD>
+<DD>Return XWPFDocument
+<P>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../../../../org/apache/poi/xwpf/usermodel/IBody.html#getXWPFDocument()">getXWPFDocument</A></CODE> in interface <CODE><A HREF="../../../../../org/apache/poi/xwpf/usermodel/IBody.html" title="interface in org.apache.poi.xwpf.usermodel">IBody</A></CODE></DL>
+</DD>
+<DD><DL>
+<DT><B>See Also:</B><DD><A HREF="../../../../../org/apache/poi/xwpf/usermodel/IBody.html#getXWPFDocument()"><CODE>IBody.getXWPFDocument()</CODE></A></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getPart()"><!-- --></A><H3>
+getPart</H3>
+<PRE>
+public <A HREF="../../../../../org/apache/poi/POIXMLDocumentPart.html" title="class in org.apache.poi">POIXMLDocumentPart</A> <B>getPart</B>()</PRE>
+<DL>
+<DD>returns the Part, to which the body belongs, which you need for adding relationship to other parts
+<P>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../../../../org/apache/poi/xwpf/usermodel/IBody.html#getPart()">getPart</A></CODE> in interface <CODE><A HREF="../../../../../org/apache/poi/xwpf/usermodel/IBody.html" title="interface in org.apache.poi.xwpf.usermodel">IBody</A></CODE></DL>
+</DD>
+<DD><DL>
+
+<DT><B>Returns:</B><DD>the Part, to which the body belongs<DT><B>See Also:</B><DD><A HREF="../../../../../org/apache/poi/xwpf/usermodel/IBody.html#getPart()"><CODE>IBody.getPart()</CODE></A></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getPartType()"><!-- --></A><H3>
+getPartType</H3>
+<PRE>
+public <A HREF="../../../../../org/apache/poi/xwpf/usermodel/BodyType.html" title="enum in org.apache.poi.xwpf.usermodel">BodyType</A> <B>getPartType</B>()</PRE>
+<DL>
+<DD>get the PartType of the body
+<P>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../../../../org/apache/poi/xwpf/usermodel/IBody.html#getPartType()">getPartType</A></CODE> in interface <CODE><A HREF="../../../../../org/apache/poi/xwpf/usermodel/IBody.html" title="interface in org.apache.poi.xwpf.usermodel">IBody</A></CODE></DL>
+</DD>
+<DD><DL>
+
+<DT><B>Returns:</B><DD>the PartType of the body<DT><B>See Also:</B><DD><A HREF="../../../../../org/apache/poi/xwpf/usermodel/IBody.html#getPartType()"><CODE>IBody.getPartType()</CODE></A></DL>
+</DD>
+</DL>
+<!-- ========= END OF CLASS DATA ========= -->
+<HR>
+
+
+<!-- ======= START OF BOTTOM NAVBAR ====== -->
+<A NAME="navbar_bottom"><!-- --></A>
+<A HREF="#skip-navbar_bottom" title="Skip navigation links"></A>
+<TABLE BORDER="0" WIDTH="100%" CELLPADDING="1" CELLSPACING="0" SUMMARY="">
+<TR>
+<TD COLSPAN=2 BGCOLOR="#EEEEFF" CLASS="NavBarCell1">
+<A NAME="navbar_bottom_firstrow"><!-- --></A>
+<TABLE BORDER="0" CELLPADDING="0" CELLSPACING="3" SUMMARY="">
+  <TR ALIGN="center" VALIGN="top">
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../overview-summary.html"><FONT CLASS="NavBarFont1"><B>Overview</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="package-summary.html"><FONT CLASS="NavBarFont1"><B>Package</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#FFFFFF" CLASS="NavBarCell1Rev"> &nbsp;<FONT CLASS="NavBarFont1Rev"><B>Class</B></FONT>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="class-use/XWPFFootnote.html"><FONT CLASS="NavBarFont1"><B>Use</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="package-tree.html"><FONT CLASS="NavBarFont1"><B>Tree</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../deprecated-list.html"><FONT CLASS="NavBarFont1"><B>Deprecated</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../index-all.html"><FONT CLASS="NavBarFont1"><B>Index</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../help-doc.html"><FONT CLASS="NavBarFont1"><B>Help</B></FONT></A>&nbsp;</TD>
+  </TR>
+</TABLE>
+</TD>
+<TD ALIGN="right" VALIGN="top" ROWSPAN=3><EM>
+</EM>
+</TD>
+</TR>
+
+<TR>
+<TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
+&nbsp;<A HREF="../../../../../org/apache/poi/xwpf/usermodel/XWPFFooter.html" title="class in org.apache.poi.xwpf.usermodel"><B>PREV CLASS</B></A>&nbsp;
+&nbsp;<A HREF="../../../../../org/apache/poi/xwpf/usermodel/XWPFFootnotes.html" title="class in org.apache.poi.xwpf.usermodel"><B>NEXT CLASS</B></A></FONT></TD>
+<TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
+  <A HREF="../../../../../index.html?org/apache/poi/xwpf/usermodel/XWPFFootnote.html" target="_top"><B>FRAMES</B></A>  &nbsp;
+&nbsp;<A HREF="XWPFFootnote.html" target="_top"><B>NO FRAMES</B></A>  &nbsp;
+&nbsp;<SCRIPT type="text/javascript">
+  <!--
+  if(window==top) {
+    document.writeln('<A HREF="../../../../../allclasses-noframe.html"><B>All Classes</B></A>');
+  }
+  //-->
+</SCRIPT>
+<NOSCRIPT>
+  <A HREF="../../../../../allclasses-noframe.html"><B>All Classes</B></A>
+</NOSCRIPT>
+
+
+</FONT></TD>
+</TR>
+<TR>
+<TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
+  SUMMARY:&nbsp;NESTED&nbsp;|&nbsp;FIELD&nbsp;|&nbsp;<A HREF="#constructor_summary">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_summary">METHOD</A></FONT></TD>
+<TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
+DETAIL:&nbsp;FIELD&nbsp;|&nbsp;<A HREF="#constructor_detail">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_detail">METHOD</A></FONT></TD>
+</TR>
+</TABLE>
+<A NAME="skip-navbar_bottom"></A>
+<!-- ======== END OF BOTTOM NAVBAR ======= -->
+
+<HR>
+
+                <i>Copyright 2014 The Apache Software Foundation or
+        its licensors, as applicable.</i>
+            
+</BODY>
+</HTML>

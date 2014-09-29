@@ -1,0 +1,419 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!--NewPage-->
+<HTML>
+<HEAD>
+<TITLE>
+HSSFCellUtil (POI API Documentation)
+</TITLE>
+
+<META NAME="keywords" CONTENT="org.apache.poi.hssf.util.HSSFCellUtil class">
+
+<LINK REL ="stylesheet" TYPE="text/css" HREF="../../../../../stylesheet.css" TITLE="Style">
+
+<SCRIPT type="text/javascript">
+function windowTitle()
+{
+    parent.document.title="HSSFCellUtil (POI API Documentation)";
+}
+</SCRIPT>
+<NOSCRIPT>
+</NOSCRIPT>
+
+</HEAD>
+
+<BODY BGCOLOR="white" onload="windowTitle();">
+
+
+<!-- ========= START OF TOP NAVBAR ======= -->
+<A NAME="navbar_top"><!-- --></A>
+<A HREF="#skip-navbar_top" title="Skip navigation links"></A>
+<TABLE BORDER="0" WIDTH="100%" CELLPADDING="1" CELLSPACING="0" SUMMARY="">
+<TR>
+<TD COLSPAN=2 BGCOLOR="#EEEEFF" CLASS="NavBarCell1">
+<A NAME="navbar_top_firstrow"><!-- --></A>
+<TABLE BORDER="0" CELLPADDING="0" CELLSPACING="3" SUMMARY="">
+  <TR ALIGN="center" VALIGN="top">
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../overview-summary.html"><FONT CLASS="NavBarFont1"><B>Overview</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="package-summary.html"><FONT CLASS="NavBarFont1"><B>Package</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#FFFFFF" CLASS="NavBarCell1Rev"> &nbsp;<FONT CLASS="NavBarFont1Rev"><B>Class</B></FONT>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="class-use/HSSFCellUtil.html"><FONT CLASS="NavBarFont1"><B>Use</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="package-tree.html"><FONT CLASS="NavBarFont1"><B>Tree</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../deprecated-list.html"><FONT CLASS="NavBarFont1"><B>Deprecated</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../index-all.html"><FONT CLASS="NavBarFont1"><B>Index</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../help-doc.html"><FONT CLASS="NavBarFont1"><B>Help</B></FONT></A>&nbsp;</TD>
+  </TR>
+</TABLE>
+</TD>
+<TD ALIGN="right" VALIGN="top" ROWSPAN=3><EM>
+</EM>
+</TD>
+</TR>
+
+<TR>
+<TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
+&nbsp;<A HREF="../../../../../org/apache/poi/hssf/util/CellReference.html" title="class in org.apache.poi.hssf.util"><B>PREV CLASS</B></A>&nbsp;
+&nbsp;<A HREF="../../../../../org/apache/poi/hssf/util/HSSFColor.html" title="class in org.apache.poi.hssf.util"><B>NEXT CLASS</B></A></FONT></TD>
+<TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
+  <A HREF="../../../../../index.html?org/apache/poi/hssf/util/HSSFCellUtil.html" target="_top"><B>FRAMES</B></A>  &nbsp;
+&nbsp;<A HREF="HSSFCellUtil.html" target="_top"><B>NO FRAMES</B></A>  &nbsp;
+&nbsp;<SCRIPT type="text/javascript">
+  <!--
+  if(window==top) {
+    document.writeln('<A HREF="../../../../../allclasses-noframe.html"><B>All Classes</B></A>');
+  }
+  //-->
+</SCRIPT>
+<NOSCRIPT>
+  <A HREF="../../../../../allclasses-noframe.html"><B>All Classes</B></A>
+</NOSCRIPT>
+
+
+</FONT></TD>
+</TR>
+<TR>
+<TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
+  SUMMARY:&nbsp;NESTED&nbsp;|&nbsp;FIELD&nbsp;|&nbsp;CONSTR&nbsp;|&nbsp;<A HREF="#method_summary">METHOD</A></FONT></TD>
+<TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
+DETAIL:&nbsp;FIELD&nbsp;|&nbsp;CONSTR&nbsp;|&nbsp;<A HREF="#method_detail">METHOD</A></FONT></TD>
+</TR>
+</TABLE>
+<A NAME="skip-navbar_top"></A>
+<!-- ========= END OF TOP NAVBAR ========= -->
+
+<HR>
+<!-- ======== START OF CLASS DATA ======== -->
+<H2>
+<FONT SIZE="-1">
+org.apache.poi.hssf.util</FONT>
+<BR>
+Class HSSFCellUtil</H2>
+<PRE>
+java.lang.Object
+  <IMG SRC="../../../../../resources/inherit.gif" ALT="extended by "><B>org.apache.poi.hssf.util.HSSFCellUtil</B>
+</PRE>
+<HR>
+<DL>
+<DT><PRE>public final class <B>HSSFCellUtil</B><DT>extends java.lang.Object</DL>
+</PRE>
+
+<P>
+Various utility functions that make working with a cells and rows easier.  The various
+ methods that deal with style's allow you to create your HSSFCellStyles as you need them.
+ When you apply a style change to a cell, the code will attempt to see if a style already
+ exists that meets your needs.  If not, then it will create a new style.  This is to prevent
+ creating too many styles.  there is an upper limit in Excel on the number of styles that
+ can be supported.
+<P>
+
+<P>
+<HR>
+
+<P>
+
+<!-- ========== METHOD SUMMARY =========== -->
+
+<A NAME="method_summary"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+<B>Method Summary</B></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;<A HREF="../../../../../org/apache/poi/hssf/usermodel/HSSFCell.html" title="class in org.apache.poi.hssf.usermodel">HSSFCell</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hssf/util/HSSFCellUtil.html#createCell(org.apache.poi.hssf.usermodel.HSSFRow, int, java.lang.String)">createCell</A></B>(<A HREF="../../../../../org/apache/poi/hssf/usermodel/HSSFRow.html" title="class in org.apache.poi.hssf.usermodel">HSSFRow</A>&nbsp;row,
+           int&nbsp;column,
+           java.lang.String&nbsp;value)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Create a cell, and give it a value.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;<A HREF="../../../../../org/apache/poi/hssf/usermodel/HSSFCell.html" title="class in org.apache.poi.hssf.usermodel">HSSFCell</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hssf/util/HSSFCellUtil.html#createCell(org.apache.poi.hssf.usermodel.HSSFRow, int, java.lang.String, org.apache.poi.hssf.usermodel.HSSFCellStyle)">createCell</A></B>(<A HREF="../../../../../org/apache/poi/hssf/usermodel/HSSFRow.html" title="class in org.apache.poi.hssf.usermodel">HSSFRow</A>&nbsp;row,
+           int&nbsp;column,
+           java.lang.String&nbsp;value,
+           <A HREF="../../../../../org/apache/poi/hssf/usermodel/HSSFCellStyle.html" title="class in org.apache.poi.hssf.usermodel">HSSFCellStyle</A>&nbsp;style)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Creates a cell, gives it a value, and applies a style if provided</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;<A HREF="../../../../../org/apache/poi/hssf/usermodel/HSSFCell.html" title="class in org.apache.poi.hssf.usermodel">HSSFCell</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hssf/util/HSSFCellUtil.html#getCell(org.apache.poi.hssf.usermodel.HSSFRow, int)">getCell</A></B>(<A HREF="../../../../../org/apache/poi/hssf/usermodel/HSSFRow.html" title="class in org.apache.poi.hssf.usermodel">HSSFRow</A>&nbsp;row,
+        int&nbsp;columnIndex)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Get a specific cell from a row.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;<A HREF="../../../../../org/apache/poi/hssf/usermodel/HSSFRow.html" title="class in org.apache.poi.hssf.usermodel">HSSFRow</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hssf/util/HSSFCellUtil.html#getRow(int, org.apache.poi.hssf.usermodel.HSSFSheet)">getRow</A></B>(int&nbsp;rowIndex,
+       <A HREF="../../../../../org/apache/poi/hssf/usermodel/HSSFSheet.html" title="class in org.apache.poi.hssf.usermodel">HSSFSheet</A>&nbsp;sheet)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Get a row from the spreadsheet, and create it if it doesn't exist.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hssf/util/HSSFCellUtil.html#setAlignment(org.apache.poi.hssf.usermodel.HSSFCell, org.apache.poi.hssf.usermodel.HSSFWorkbook, short)">setAlignment</A></B>(<A HREF="../../../../../org/apache/poi/hssf/usermodel/HSSFCell.html" title="class in org.apache.poi.hssf.usermodel">HSSFCell</A>&nbsp;cell,
+             <A HREF="../../../../../org/apache/poi/hssf/usermodel/HSSFWorkbook.html" title="class in org.apache.poi.hssf.usermodel">HSSFWorkbook</A>&nbsp;workbook,
+             short&nbsp;align)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Take a cell, and align it.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hssf/util/HSSFCellUtil.html#setCellStyleProperty(org.apache.poi.hssf.usermodel.HSSFCell, org.apache.poi.hssf.usermodel.HSSFWorkbook, java.lang.String, java.lang.Object)">setCellStyleProperty</A></B>(<A HREF="../../../../../org/apache/poi/hssf/usermodel/HSSFCell.html" title="class in org.apache.poi.hssf.usermodel">HSSFCell</A>&nbsp;cell,
+                     <A HREF="../../../../../org/apache/poi/hssf/usermodel/HSSFWorkbook.html" title="class in org.apache.poi.hssf.usermodel">HSSFWorkbook</A>&nbsp;workbook,
+                     java.lang.String&nbsp;propertyName,
+                     java.lang.Object&nbsp;propertyValue)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;This method attempt to find an already existing HSSFCellStyle that matches
+  what you want the style to be.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hssf/util/HSSFCellUtil.html#setFont(org.apache.poi.hssf.usermodel.HSSFCell, org.apache.poi.hssf.usermodel.HSSFWorkbook, org.apache.poi.hssf.usermodel.HSSFFont)">setFont</A></B>(<A HREF="../../../../../org/apache/poi/hssf/usermodel/HSSFCell.html" title="class in org.apache.poi.hssf.usermodel">HSSFCell</A>&nbsp;cell,
+        <A HREF="../../../../../org/apache/poi/hssf/usermodel/HSSFWorkbook.html" title="class in org.apache.poi.hssf.usermodel">HSSFWorkbook</A>&nbsp;workbook,
+        <A HREF="../../../../../org/apache/poi/hssf/usermodel/HSSFFont.html" title="class in org.apache.poi.hssf.usermodel">HSSFFont</A>&nbsp;font)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Take a cell, and apply a font to it</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;<A HREF="../../../../../org/apache/poi/hssf/usermodel/HSSFCell.html" title="class in org.apache.poi.hssf.usermodel">HSSFCell</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hssf/util/HSSFCellUtil.html#translateUnicodeValues(org.apache.poi.hssf.usermodel.HSSFCell)">translateUnicodeValues</A></B>(<A HREF="../../../../../org/apache/poi/hssf/usermodel/HSSFCell.html" title="class in org.apache.poi.hssf.usermodel">HSSFCell</A>&nbsp;cell)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Looks for text in the cell that should be unicode, like &alpha; and provides the
+  unicode version of it.</TD>
+</TR>
+</TABLE>
+&nbsp;<A NAME="methods_inherited_from_class_java.lang.Object"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#EEEEFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left"><B>Methods inherited from class java.lang.Object</B></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE>clone, equals, finalize, getClass, hashCode, notify, notifyAll, toString, wait, wait, wait</CODE></TD>
+</TR>
+</TABLE>
+&nbsp;
+<P>
+
+<!-- ============ METHOD DETAIL ========== -->
+
+<A NAME="method_detail"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="1"><FONT SIZE="+2">
+<B>Method Detail</B></FONT></TH>
+</TR>
+</TABLE>
+
+<A NAME="getRow(int, org.apache.poi.hssf.usermodel.HSSFSheet)"><!-- --></A><H3>
+getRow</H3>
+<PRE>
+public static <A HREF="../../../../../org/apache/poi/hssf/usermodel/HSSFRow.html" title="class in org.apache.poi.hssf.usermodel">HSSFRow</A> <B>getRow</B>(int&nbsp;rowIndex,
+                             <A HREF="../../../../../org/apache/poi/hssf/usermodel/HSSFSheet.html" title="class in org.apache.poi.hssf.usermodel">HSSFSheet</A>&nbsp;sheet)</PRE>
+<DL>
+<DD>Get a row from the spreadsheet, and create it if it doesn't exist.
+<P>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>rowIndex</CODE> - The 0 based row number<DD><CODE>sheet</CODE> - The sheet that the row is part of.
+<DT><B>Returns:</B><DD>The row indicated by the rowCounter</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getCell(org.apache.poi.hssf.usermodel.HSSFRow, int)"><!-- --></A><H3>
+getCell</H3>
+<PRE>
+public static <A HREF="../../../../../org/apache/poi/hssf/usermodel/HSSFCell.html" title="class in org.apache.poi.hssf.usermodel">HSSFCell</A> <B>getCell</B>(<A HREF="../../../../../org/apache/poi/hssf/usermodel/HSSFRow.html" title="class in org.apache.poi.hssf.usermodel">HSSFRow</A>&nbsp;row,
+                               int&nbsp;columnIndex)</PRE>
+<DL>
+<DD>Get a specific cell from a row. If the cell doesn't exist,
+  then create it.
+<P>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>row</CODE> - The row that the cell is part of<DD><CODE>columnIndex</CODE> - The column index that the cell is in.
+<DT><B>Returns:</B><DD>The cell indicated by the column.</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="createCell(org.apache.poi.hssf.usermodel.HSSFRow, int, java.lang.String, org.apache.poi.hssf.usermodel.HSSFCellStyle)"><!-- --></A><H3>
+createCell</H3>
+<PRE>
+public static <A HREF="../../../../../org/apache/poi/hssf/usermodel/HSSFCell.html" title="class in org.apache.poi.hssf.usermodel">HSSFCell</A> <B>createCell</B>(<A HREF="../../../../../org/apache/poi/hssf/usermodel/HSSFRow.html" title="class in org.apache.poi.hssf.usermodel">HSSFRow</A>&nbsp;row,
+                                  int&nbsp;column,
+                                  java.lang.String&nbsp;value,
+                                  <A HREF="../../../../../org/apache/poi/hssf/usermodel/HSSFCellStyle.html" title="class in org.apache.poi.hssf.usermodel">HSSFCellStyle</A>&nbsp;style)</PRE>
+<DL>
+<DD>Creates a cell, gives it a value, and applies a style if provided
+<P>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>row</CODE> - the row to create the cell in<DD><CODE>column</CODE> - the column index to create the cell in<DD><CODE>value</CODE> - The value of the cell<DD><CODE>style</CODE> - If the style is not null, then set
+<DT><B>Returns:</B><DD>A new HSSFCell</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="createCell(org.apache.poi.hssf.usermodel.HSSFRow, int, java.lang.String)"><!-- --></A><H3>
+createCell</H3>
+<PRE>
+public static <A HREF="../../../../../org/apache/poi/hssf/usermodel/HSSFCell.html" title="class in org.apache.poi.hssf.usermodel">HSSFCell</A> <B>createCell</B>(<A HREF="../../../../../org/apache/poi/hssf/usermodel/HSSFRow.html" title="class in org.apache.poi.hssf.usermodel">HSSFRow</A>&nbsp;row,
+                                  int&nbsp;column,
+                                  java.lang.String&nbsp;value)</PRE>
+<DL>
+<DD>Create a cell, and give it a value.
+<P>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>row</CODE> - the row to create the cell in<DD><CODE>column</CODE> - the column index to create the cell in<DD><CODE>value</CODE> - The value of the cell
+<DT><B>Returns:</B><DD>A new HSSFCell.</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setAlignment(org.apache.poi.hssf.usermodel.HSSFCell, org.apache.poi.hssf.usermodel.HSSFWorkbook, short)"><!-- --></A><H3>
+setAlignment</H3>
+<PRE>
+public static void <B>setAlignment</B>(<A HREF="../../../../../org/apache/poi/hssf/usermodel/HSSFCell.html" title="class in org.apache.poi.hssf.usermodel">HSSFCell</A>&nbsp;cell,
+                                <A HREF="../../../../../org/apache/poi/hssf/usermodel/HSSFWorkbook.html" title="class in org.apache.poi.hssf.usermodel">HSSFWorkbook</A>&nbsp;workbook,
+                                short&nbsp;align)</PRE>
+<DL>
+<DD>Take a cell, and align it.
+<P>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>cell</CODE> - the cell to set the alignment for<DD><CODE>workbook</CODE> - The workbook that is being worked with.<DD><CODE>align</CODE> - the column alignment to use.<DT><B>See Also:</B><DD><A HREF="../../../../../org/apache/poi/hssf/usermodel/HSSFCellStyle.html" title="class in org.apache.poi.hssf.usermodel"><CODE>for alignment options</CODE></A></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setFont(org.apache.poi.hssf.usermodel.HSSFCell, org.apache.poi.hssf.usermodel.HSSFWorkbook, org.apache.poi.hssf.usermodel.HSSFFont)"><!-- --></A><H3>
+setFont</H3>
+<PRE>
+public static void <B>setFont</B>(<A HREF="../../../../../org/apache/poi/hssf/usermodel/HSSFCell.html" title="class in org.apache.poi.hssf.usermodel">HSSFCell</A>&nbsp;cell,
+                           <A HREF="../../../../../org/apache/poi/hssf/usermodel/HSSFWorkbook.html" title="class in org.apache.poi.hssf.usermodel">HSSFWorkbook</A>&nbsp;workbook,
+                           <A HREF="../../../../../org/apache/poi/hssf/usermodel/HSSFFont.html" title="class in org.apache.poi.hssf.usermodel">HSSFFont</A>&nbsp;font)</PRE>
+<DL>
+<DD>Take a cell, and apply a font to it
+<P>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>cell</CODE> - the cell to set the alignment for<DD><CODE>workbook</CODE> - The workbook that is being worked with.<DD><CODE>font</CODE> - The HSSFFont that you want to set...</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setCellStyleProperty(org.apache.poi.hssf.usermodel.HSSFCell, org.apache.poi.hssf.usermodel.HSSFWorkbook, java.lang.String, java.lang.Object)"><!-- --></A><H3>
+setCellStyleProperty</H3>
+<PRE>
+public static void <B>setCellStyleProperty</B>(<A HREF="../../../../../org/apache/poi/hssf/usermodel/HSSFCell.html" title="class in org.apache.poi.hssf.usermodel">HSSFCell</A>&nbsp;cell,
+                                        <A HREF="../../../../../org/apache/poi/hssf/usermodel/HSSFWorkbook.html" title="class in org.apache.poi.hssf.usermodel">HSSFWorkbook</A>&nbsp;workbook,
+                                        java.lang.String&nbsp;propertyName,
+                                        java.lang.Object&nbsp;propertyValue)</PRE>
+<DL>
+<DD>This method attempt to find an already existing HSSFCellStyle that matches
+  what you want the style to be. If it does not find the style, then it
+  creates a new one. If it does create a new one, then it applies the
+  propertyName and propertyValue to the style. This is necessary because
+  Excel has an upper limit on the number of Styles that it supports.
+<P>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>workbook</CODE> - The workbook that is being worked with.<DD><CODE>propertyName</CODE> - The name of the property that is to be
+      changed.<DD><CODE>propertyValue</CODE> - The value of the property that is to be
+      changed.<DD><CODE>cell</CODE> - The cell that needs it's style changes</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="translateUnicodeValues(org.apache.poi.hssf.usermodel.HSSFCell)"><!-- --></A><H3>
+translateUnicodeValues</H3>
+<PRE>
+public static <A HREF="../../../../../org/apache/poi/hssf/usermodel/HSSFCell.html" title="class in org.apache.poi.hssf.usermodel">HSSFCell</A> <B>translateUnicodeValues</B>(<A HREF="../../../../../org/apache/poi/hssf/usermodel/HSSFCell.html" title="class in org.apache.poi.hssf.usermodel">HSSFCell</A>&nbsp;cell)</PRE>
+<DL>
+<DD>Looks for text in the cell that should be unicode, like &alpha; and provides the
+  unicode version of it.
+<P>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>cell</CODE> - The cell to check for unicode values
+<DT><B>Returns:</B><DD>translated to unicode</DL>
+</DD>
+</DL>
+<!-- ========= END OF CLASS DATA ========= -->
+<HR>
+
+
+<!-- ======= START OF BOTTOM NAVBAR ====== -->
+<A NAME="navbar_bottom"><!-- --></A>
+<A HREF="#skip-navbar_bottom" title="Skip navigation links"></A>
+<TABLE BORDER="0" WIDTH="100%" CELLPADDING="1" CELLSPACING="0" SUMMARY="">
+<TR>
+<TD COLSPAN=2 BGCOLOR="#EEEEFF" CLASS="NavBarCell1">
+<A NAME="navbar_bottom_firstrow"><!-- --></A>
+<TABLE BORDER="0" CELLPADDING="0" CELLSPACING="3" SUMMARY="">
+  <TR ALIGN="center" VALIGN="top">
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../overview-summary.html"><FONT CLASS="NavBarFont1"><B>Overview</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="package-summary.html"><FONT CLASS="NavBarFont1"><B>Package</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#FFFFFF" CLASS="NavBarCell1Rev"> &nbsp;<FONT CLASS="NavBarFont1Rev"><B>Class</B></FONT>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="class-use/HSSFCellUtil.html"><FONT CLASS="NavBarFont1"><B>Use</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="package-tree.html"><FONT CLASS="NavBarFont1"><B>Tree</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../deprecated-list.html"><FONT CLASS="NavBarFont1"><B>Deprecated</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../index-all.html"><FONT CLASS="NavBarFont1"><B>Index</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../help-doc.html"><FONT CLASS="NavBarFont1"><B>Help</B></FONT></A>&nbsp;</TD>
+  </TR>
+</TABLE>
+</TD>
+<TD ALIGN="right" VALIGN="top" ROWSPAN=3><EM>
+</EM>
+</TD>
+</TR>
+
+<TR>
+<TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
+&nbsp;<A HREF="../../../../../org/apache/poi/hssf/util/CellReference.html" title="class in org.apache.poi.hssf.util"><B>PREV CLASS</B></A>&nbsp;
+&nbsp;<A HREF="../../../../../org/apache/poi/hssf/util/HSSFColor.html" title="class in org.apache.poi.hssf.util"><B>NEXT CLASS</B></A></FONT></TD>
+<TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
+  <A HREF="../../../../../index.html?org/apache/poi/hssf/util/HSSFCellUtil.html" target="_top"><B>FRAMES</B></A>  &nbsp;
+&nbsp;<A HREF="HSSFCellUtil.html" target="_top"><B>NO FRAMES</B></A>  &nbsp;
+&nbsp;<SCRIPT type="text/javascript">
+  <!--
+  if(window==top) {
+    document.writeln('<A HREF="../../../../../allclasses-noframe.html"><B>All Classes</B></A>');
+  }
+  //-->
+</SCRIPT>
+<NOSCRIPT>
+  <A HREF="../../../../../allclasses-noframe.html"><B>All Classes</B></A>
+</NOSCRIPT>
+
+
+</FONT></TD>
+</TR>
+<TR>
+<TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
+  SUMMARY:&nbsp;NESTED&nbsp;|&nbsp;FIELD&nbsp;|&nbsp;CONSTR&nbsp;|&nbsp;<A HREF="#method_summary">METHOD</A></FONT></TD>
+<TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
+DETAIL:&nbsp;FIELD&nbsp;|&nbsp;CONSTR&nbsp;|&nbsp;<A HREF="#method_detail">METHOD</A></FONT></TD>
+</TR>
+</TABLE>
+<A NAME="skip-navbar_bottom"></A>
+<!-- ======== END OF BOTTOM NAVBAR ======= -->
+
+<HR>
+
+                <i>Copyright 2014 The Apache Software Foundation or
+        its licensors, as applicable.</i>
+            
+</BODY>
+</HTML>

@@ -1,0 +1,502 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!--NewPage-->
+<HTML>
+<HEAD>
+<TITLE>
+WordToHtmlUtils (POI API Documentation)
+</TITLE>
+
+<META NAME="keywords" CONTENT="org.apache.poi.hwpf.converter.WordToHtmlUtils class">
+
+<LINK REL ="stylesheet" TYPE="text/css" HREF="../../../../../stylesheet.css" TITLE="Style">
+
+<SCRIPT type="text/javascript">
+function windowTitle()
+{
+    parent.document.title="WordToHtmlUtils (POI API Documentation)";
+}
+</SCRIPT>
+<NOSCRIPT>
+</NOSCRIPT>
+
+</HEAD>
+
+<BODY BGCOLOR="white" onload="windowTitle();">
+
+
+<!-- ========= START OF TOP NAVBAR ======= -->
+<A NAME="navbar_top"><!-- --></A>
+<A HREF="#skip-navbar_top" title="Skip navigation links"></A>
+<TABLE BORDER="0" WIDTH="100%" CELLPADDING="1" CELLSPACING="0" SUMMARY="">
+<TR>
+<TD COLSPAN=2 BGCOLOR="#EEEEFF" CLASS="NavBarCell1">
+<A NAME="navbar_top_firstrow"><!-- --></A>
+<TABLE BORDER="0" CELLPADDING="0" CELLSPACING="3" SUMMARY="">
+  <TR ALIGN="center" VALIGN="top">
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../overview-summary.html"><FONT CLASS="NavBarFont1"><B>Overview</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="package-summary.html"><FONT CLASS="NavBarFont1"><B>Package</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#FFFFFF" CLASS="NavBarCell1Rev"> &nbsp;<FONT CLASS="NavBarFont1Rev"><B>Class</B></FONT>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="class-use/WordToHtmlUtils.html"><FONT CLASS="NavBarFont1"><B>Use</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="package-tree.html"><FONT CLASS="NavBarFont1"><B>Tree</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../deprecated-list.html"><FONT CLASS="NavBarFont1"><B>Deprecated</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../index-all.html"><FONT CLASS="NavBarFont1"><B>Index</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../help-doc.html"><FONT CLASS="NavBarFont1"><B>Help</B></FONT></A>&nbsp;</TD>
+  </TR>
+</TABLE>
+</TD>
+<TD ALIGN="right" VALIGN="top" ROWSPAN=3><EM>
+</EM>
+</TD>
+</TR>
+
+<TR>
+<TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
+&nbsp;<A HREF="../../../../../org/apache/poi/hwpf/converter/WordToHtmlConverter.html" title="class in org.apache.poi.hwpf.converter"><B>PREV CLASS</B></A>&nbsp;
+&nbsp;<A HREF="../../../../../org/apache/poi/hwpf/converter/WordToTextConverter.html" title="class in org.apache.poi.hwpf.converter"><B>NEXT CLASS</B></A></FONT></TD>
+<TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
+  <A HREF="../../../../../index.html?org/apache/poi/hwpf/converter/WordToHtmlUtils.html" target="_top"><B>FRAMES</B></A>  &nbsp;
+&nbsp;<A HREF="WordToHtmlUtils.html" target="_top"><B>NO FRAMES</B></A>  &nbsp;
+&nbsp;<SCRIPT type="text/javascript">
+  <!--
+  if(window==top) {
+    document.writeln('<A HREF="../../../../../allclasses-noframe.html"><B>All Classes</B></A>');
+  }
+  //-->
+</SCRIPT>
+<NOSCRIPT>
+  <A HREF="../../../../../allclasses-noframe.html"><B>All Classes</B></A>
+</NOSCRIPT>
+
+
+</FONT></TD>
+</TR>
+<TR>
+<TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
+  SUMMARY:&nbsp;<A HREF="#nested_classes_inherited_from_class_org.apache.poi.hwpf.converter.AbstractWordUtils">NESTED</A>&nbsp;|&nbsp;<A HREF="#fields_inherited_from_class_org.apache.poi.hwpf.converter.AbstractWordUtils">FIELD</A>&nbsp;|&nbsp;<A HREF="#constructor_summary">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_summary">METHOD</A></FONT></TD>
+<TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
+DETAIL:&nbsp;FIELD&nbsp;|&nbsp;<A HREF="#constructor_detail">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_detail">METHOD</A></FONT></TD>
+</TR>
+</TABLE>
+<A NAME="skip-navbar_top"></A>
+<!-- ========= END OF TOP NAVBAR ========= -->
+
+<HR>
+<!-- ======== START OF CLASS DATA ======== -->
+<H2>
+<FONT SIZE="-1">
+org.apache.poi.hwpf.converter</FONT>
+<BR>
+Class WordToHtmlUtils</H2>
+<PRE>
+java.lang.Object
+  <IMG SRC="../../../../../resources/inherit.gif" ALT="extended by "><A HREF="../../../../../org/apache/poi/hwpf/converter/AbstractWordUtils.html" title="class in org.apache.poi.hwpf.converter">org.apache.poi.hwpf.converter.AbstractWordUtils</A>
+      <IMG SRC="../../../../../resources/inherit.gif" ALT="extended by "><B>org.apache.poi.hwpf.converter.WordToHtmlUtils</B>
+</PRE>
+<HR>
+<DL>
+<DT><PRE><FONT SIZE="-1"><A HREF="../../../../../org/apache/poi/util/Beta.html" title="annotation in org.apache.poi.util">@Beta</A>
+</FONT>public class <B>WordToHtmlUtils</B><DT>extends <A HREF="../../../../../org/apache/poi/hwpf/converter/AbstractWordUtils.html" title="class in org.apache.poi.hwpf.converter">AbstractWordUtils</A></DL>
+</PRE>
+
+<P>
+<HR>
+
+<P>
+<!-- ======== NESTED CLASS SUMMARY ======== -->
+
+<A NAME="nested_class_summary"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+<B>Nested Class Summary</B></FONT></TH>
+</TR>
+</TABLE>
+&nbsp;<A NAME="nested_classes_inherited_from_class_org.apache.poi.hwpf.converter.AbstractWordUtils"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#EEEEFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left"><B>Nested classes/interfaces inherited from class org.apache.poi.hwpf.converter.<A HREF="../../../../../org/apache/poi/hwpf/converter/AbstractWordUtils.html" title="class in org.apache.poi.hwpf.converter">AbstractWordUtils</A></B></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><A HREF="../../../../../org/apache/poi/hwpf/converter/AbstractWordUtils.NumberingState.html" title="class in org.apache.poi.hwpf.converter">AbstractWordUtils.NumberingState</A></CODE></TD>
+</TR>
+</TABLE>
+&nbsp;
+<!-- =========== FIELD SUMMARY =========== -->
+
+<A NAME="field_summary"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+<B>Field Summary</B></FONT></TH>
+</TR>
+</TABLE>
+&nbsp;<A NAME="fields_inherited_from_class_org.apache.poi.hwpf.converter.AbstractWordUtils"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#EEEEFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left"><B>Fields inherited from class org.apache.poi.hwpf.converter.<A HREF="../../../../../org/apache/poi/hwpf/converter/AbstractWordUtils.html" title="class in org.apache.poi.hwpf.converter">AbstractWordUtils</A></B></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><A HREF="../../../../../org/apache/poi/hwpf/converter/AbstractWordUtils.html#TWIPS_PER_INCH">TWIPS_PER_INCH</A>, <A HREF="../../../../../org/apache/poi/hwpf/converter/AbstractWordUtils.html#TWIPS_PER_PT">TWIPS_PER_PT</A></CODE></TD>
+</TR>
+</TABLE>
+&nbsp;
+<!-- ======== CONSTRUCTOR SUMMARY ======== -->
+
+<A NAME="constructor_summary"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+<B>Constructor Summary</B></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/converter/WordToHtmlUtils.html#WordToHtmlUtils()">WordToHtmlUtils</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+</TABLE>
+&nbsp;
+<!-- ========== METHOD SUMMARY =========== -->
+
+<A NAME="method_summary"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+<B>Method Summary</B></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/converter/WordToHtmlUtils.html#addBold(boolean, java.lang.StringBuilder)">addBold</A></B>(boolean&nbsp;bold,
+        java.lang.StringBuilder&nbsp;style)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/converter/WordToHtmlUtils.html#addBorder(org.apache.poi.hwpf.usermodel.BorderCode, java.lang.String, java.lang.StringBuilder)">addBorder</A></B>(<A HREF="../../../../../org/apache/poi/hwpf/usermodel/BorderCode.html" title="class in org.apache.poi.hwpf.usermodel">BorderCode</A>&nbsp;borderCode,
+          java.lang.String&nbsp;where,
+          java.lang.StringBuilder&nbsp;style)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/converter/WordToHtmlUtils.html#addCharactersProperties(org.apache.poi.hwpf.usermodel.CharacterRun, java.lang.StringBuilder)">addCharactersProperties</A></B>(<A HREF="../../../../../org/apache/poi/hwpf/usermodel/CharacterRun.html" title="class in org.apache.poi.hwpf.usermodel">CharacterRun</A>&nbsp;characterRun,
+                        java.lang.StringBuilder&nbsp;style)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/converter/WordToHtmlUtils.html#addFontFamily(java.lang.String, java.lang.StringBuilder)">addFontFamily</A></B>(java.lang.String&nbsp;fontFamily,
+              java.lang.StringBuilder&nbsp;style)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/converter/WordToHtmlUtils.html#addFontSize(int, java.lang.StringBuilder)">addFontSize</A></B>(int&nbsp;fontSize,
+            java.lang.StringBuilder&nbsp;style)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/converter/WordToHtmlUtils.html#addIndent(org.apache.poi.hwpf.usermodel.Paragraph, java.lang.StringBuilder)">addIndent</A></B>(<A HREF="../../../../../org/apache/poi/hwpf/usermodel/Paragraph.html" title="class in org.apache.poi.hwpf.usermodel">Paragraph</A>&nbsp;paragraph,
+          java.lang.StringBuilder&nbsp;style)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/converter/WordToHtmlUtils.html#addJustification(org.apache.poi.hwpf.usermodel.Paragraph, java.lang.StringBuilder)">addJustification</A></B>(<A HREF="../../../../../org/apache/poi/hwpf/usermodel/Paragraph.html" title="class in org.apache.poi.hwpf.usermodel">Paragraph</A>&nbsp;paragraph,
+                 java.lang.StringBuilder&nbsp;style)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/converter/WordToHtmlUtils.html#addParagraphProperties(org.apache.poi.hwpf.usermodel.Paragraph, java.lang.StringBuilder)">addParagraphProperties</A></B>(<A HREF="../../../../../org/apache/poi/hwpf/usermodel/Paragraph.html" title="class in org.apache.poi.hwpf.usermodel">Paragraph</A>&nbsp;paragraph,
+                       java.lang.StringBuilder&nbsp;style)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/converter/WordToHtmlUtils.html#addTableCellProperties(org.apache.poi.hwpf.usermodel.TableRow, org.apache.poi.hwpf.usermodel.TableCell, boolean, boolean, boolean, boolean, java.lang.StringBuilder)">addTableCellProperties</A></B>(<A HREF="../../../../../org/apache/poi/hwpf/usermodel/TableRow.html" title="class in org.apache.poi.hwpf.usermodel">TableRow</A>&nbsp;tableRow,
+                       <A HREF="../../../../../org/apache/poi/hwpf/usermodel/TableCell.html" title="class in org.apache.poi.hwpf.usermodel">TableCell</A>&nbsp;tableCell,
+                       boolean&nbsp;toppest,
+                       boolean&nbsp;bottomest,
+                       boolean&nbsp;leftest,
+                       boolean&nbsp;rightest,
+                       java.lang.StringBuilder&nbsp;style)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/converter/WordToHtmlUtils.html#addTableRowProperties(org.apache.poi.hwpf.usermodel.TableRow, java.lang.StringBuilder)">addTableRowProperties</A></B>(<A HREF="../../../../../org/apache/poi/hwpf/usermodel/TableRow.html" title="class in org.apache.poi.hwpf.usermodel">TableRow</A>&nbsp;tableRow,
+                      java.lang.StringBuilder&nbsp;style)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+</TABLE>
+&nbsp;<A NAME="methods_inherited_from_class_org.apache.poi.hwpf.converter.AbstractWordUtils"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#EEEEFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left"><B>Methods inherited from class org.apache.poi.hwpf.converter.<A HREF="../../../../../org/apache/poi/hwpf/converter/AbstractWordUtils.html" title="class in org.apache.poi.hwpf.converter">AbstractWordUtils</A></B></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><A HREF="../../../../../org/apache/poi/hwpf/converter/AbstractWordUtils.html#getBorderType(org.apache.poi.hwpf.usermodel.BorderCode)">getBorderType</A>, <A HREF="../../../../../org/apache/poi/hwpf/converter/AbstractWordUtils.html#getBorderWidth(org.apache.poi.hwpf.usermodel.BorderCode)">getBorderWidth</A>, <A HREF="../../../../../org/apache/poi/hwpf/converter/AbstractWordUtils.html#getBulletText(org.apache.poi.hwpf.converter.AbstractWordUtils.NumberingState, org.apache.poi.hwpf.usermodel.HWPFList, char)">getBulletText</A>, <A HREF="../../../../../org/apache/poi/hwpf/converter/AbstractWordUtils.html#getColor(int)">getColor</A>, <A HREF="../../../../../org/apache/poi/hwpf/converter/AbstractWordUtils.html#getColor24(int)">getColor24</A>, <A HREF="../../../../../org/apache/poi/hwpf/converter/AbstractWordUtils.html#getJustification(int)">getJustification</A>, <A HREF="../../../../../org/apache/poi/hwpf/converter/AbstractWordUtils.html#getLanguage(int)">getLanguage</A>, <A HREF="../../../../../org/apache/poi/hwpf/converter/AbstractWordUtils.html#getListItemNumberLabel(int, int)">getListItemNumberLabel</A>, <A HREF="../../../../../org/apache/poi/hwpf/converter/AbstractWordUtils.html#getOpacity(int)">getOpacity</A>, <A HREF="../../../../../org/apache/poi/hwpf/converter/AbstractWordUtils.html#loadDoc(org.apache.poi.poifs.filesystem.DirectoryNode)">loadDoc</A>, <A HREF="../../../../../org/apache/poi/hwpf/converter/AbstractWordUtils.html#loadDoc(java.io.File)">loadDoc</A>, <A HREF="../../../../../org/apache/poi/hwpf/converter/AbstractWordUtils.html#loadDoc(java.io.InputStream)">loadDoc</A>, <A HREF="../../../../../org/apache/poi/hwpf/converter/AbstractWordUtils.html#loadDoc(org.apache.poi.poifs.filesystem.POIFSFileSystem)">loadDoc</A></CODE></TD>
+</TR>
+</TABLE>
+&nbsp;<A NAME="methods_inherited_from_class_java.lang.Object"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#EEEEFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left"><B>Methods inherited from class java.lang.Object</B></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE>clone, equals, finalize, getClass, hashCode, notify, notifyAll, toString, wait, wait, wait</CODE></TD>
+</TR>
+</TABLE>
+&nbsp;
+<P>
+
+<!-- ========= CONSTRUCTOR DETAIL ======== -->
+
+<A NAME="constructor_detail"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="1"><FONT SIZE="+2">
+<B>Constructor Detail</B></FONT></TH>
+</TR>
+</TABLE>
+
+<A NAME="WordToHtmlUtils()"><!-- --></A><H3>
+WordToHtmlUtils</H3>
+<PRE>
+public <B>WordToHtmlUtils</B>()</PRE>
+<DL>
+</DL>
+
+<!-- ============ METHOD DETAIL ========== -->
+
+<A NAME="method_detail"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="1"><FONT SIZE="+2">
+<B>Method Detail</B></FONT></TH>
+</TR>
+</TABLE>
+
+<A NAME="addBold(boolean, java.lang.StringBuilder)"><!-- --></A><H3>
+addBold</H3>
+<PRE>
+public static void <B>addBold</B>(boolean&nbsp;bold,
+                           java.lang.StringBuilder&nbsp;style)</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="addBorder(org.apache.poi.hwpf.usermodel.BorderCode, java.lang.String, java.lang.StringBuilder)"><!-- --></A><H3>
+addBorder</H3>
+<PRE>
+public static void <B>addBorder</B>(<A HREF="../../../../../org/apache/poi/hwpf/usermodel/BorderCode.html" title="class in org.apache.poi.hwpf.usermodel">BorderCode</A>&nbsp;borderCode,
+                             java.lang.String&nbsp;where,
+                             java.lang.StringBuilder&nbsp;style)</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="addCharactersProperties(org.apache.poi.hwpf.usermodel.CharacterRun, java.lang.StringBuilder)"><!-- --></A><H3>
+addCharactersProperties</H3>
+<PRE>
+public static void <B>addCharactersProperties</B>(<A HREF="../../../../../org/apache/poi/hwpf/usermodel/CharacterRun.html" title="class in org.apache.poi.hwpf.usermodel">CharacterRun</A>&nbsp;characterRun,
+                                           java.lang.StringBuilder&nbsp;style)</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="addFontFamily(java.lang.String, java.lang.StringBuilder)"><!-- --></A><H3>
+addFontFamily</H3>
+<PRE>
+public static void <B>addFontFamily</B>(java.lang.String&nbsp;fontFamily,
+                                 java.lang.StringBuilder&nbsp;style)</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="addFontSize(int, java.lang.StringBuilder)"><!-- --></A><H3>
+addFontSize</H3>
+<PRE>
+public static void <B>addFontSize</B>(int&nbsp;fontSize,
+                               java.lang.StringBuilder&nbsp;style)</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="addIndent(org.apache.poi.hwpf.usermodel.Paragraph, java.lang.StringBuilder)"><!-- --></A><H3>
+addIndent</H3>
+<PRE>
+public static void <B>addIndent</B>(<A HREF="../../../../../org/apache/poi/hwpf/usermodel/Paragraph.html" title="class in org.apache.poi.hwpf.usermodel">Paragraph</A>&nbsp;paragraph,
+                             java.lang.StringBuilder&nbsp;style)</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="addJustification(org.apache.poi.hwpf.usermodel.Paragraph, java.lang.StringBuilder)"><!-- --></A><H3>
+addJustification</H3>
+<PRE>
+public static void <B>addJustification</B>(<A HREF="../../../../../org/apache/poi/hwpf/usermodel/Paragraph.html" title="class in org.apache.poi.hwpf.usermodel">Paragraph</A>&nbsp;paragraph,
+                                    java.lang.StringBuilder&nbsp;style)</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="addParagraphProperties(org.apache.poi.hwpf.usermodel.Paragraph, java.lang.StringBuilder)"><!-- --></A><H3>
+addParagraphProperties</H3>
+<PRE>
+public static void <B>addParagraphProperties</B>(<A HREF="../../../../../org/apache/poi/hwpf/usermodel/Paragraph.html" title="class in org.apache.poi.hwpf.usermodel">Paragraph</A>&nbsp;paragraph,
+                                          java.lang.StringBuilder&nbsp;style)</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="addTableCellProperties(org.apache.poi.hwpf.usermodel.TableRow, org.apache.poi.hwpf.usermodel.TableCell, boolean, boolean, boolean, boolean, java.lang.StringBuilder)"><!-- --></A><H3>
+addTableCellProperties</H3>
+<PRE>
+public static void <B>addTableCellProperties</B>(<A HREF="../../../../../org/apache/poi/hwpf/usermodel/TableRow.html" title="class in org.apache.poi.hwpf.usermodel">TableRow</A>&nbsp;tableRow,
+                                          <A HREF="../../../../../org/apache/poi/hwpf/usermodel/TableCell.html" title="class in org.apache.poi.hwpf.usermodel">TableCell</A>&nbsp;tableCell,
+                                          boolean&nbsp;toppest,
+                                          boolean&nbsp;bottomest,
+                                          boolean&nbsp;leftest,
+                                          boolean&nbsp;rightest,
+                                          java.lang.StringBuilder&nbsp;style)</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="addTableRowProperties(org.apache.poi.hwpf.usermodel.TableRow, java.lang.StringBuilder)"><!-- --></A><H3>
+addTableRowProperties</H3>
+<PRE>
+public static void <B>addTableRowProperties</B>(<A HREF="../../../../../org/apache/poi/hwpf/usermodel/TableRow.html" title="class in org.apache.poi.hwpf.usermodel">TableRow</A>&nbsp;tableRow,
+                                         java.lang.StringBuilder&nbsp;style)</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<!-- ========= END OF CLASS DATA ========= -->
+<HR>
+
+
+<!-- ======= START OF BOTTOM NAVBAR ====== -->
+<A NAME="navbar_bottom"><!-- --></A>
+<A HREF="#skip-navbar_bottom" title="Skip navigation links"></A>
+<TABLE BORDER="0" WIDTH="100%" CELLPADDING="1" CELLSPACING="0" SUMMARY="">
+<TR>
+<TD COLSPAN=2 BGCOLOR="#EEEEFF" CLASS="NavBarCell1">
+<A NAME="navbar_bottom_firstrow"><!-- --></A>
+<TABLE BORDER="0" CELLPADDING="0" CELLSPACING="3" SUMMARY="">
+  <TR ALIGN="center" VALIGN="top">
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../overview-summary.html"><FONT CLASS="NavBarFont1"><B>Overview</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="package-summary.html"><FONT CLASS="NavBarFont1"><B>Package</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#FFFFFF" CLASS="NavBarCell1Rev"> &nbsp;<FONT CLASS="NavBarFont1Rev"><B>Class</B></FONT>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="class-use/WordToHtmlUtils.html"><FONT CLASS="NavBarFont1"><B>Use</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="package-tree.html"><FONT CLASS="NavBarFont1"><B>Tree</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../deprecated-list.html"><FONT CLASS="NavBarFont1"><B>Deprecated</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../index-all.html"><FONT CLASS="NavBarFont1"><B>Index</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../help-doc.html"><FONT CLASS="NavBarFont1"><B>Help</B></FONT></A>&nbsp;</TD>
+  </TR>
+</TABLE>
+</TD>
+<TD ALIGN="right" VALIGN="top" ROWSPAN=3><EM>
+</EM>
+</TD>
+</TR>
+
+<TR>
+<TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
+&nbsp;<A HREF="../../../../../org/apache/poi/hwpf/converter/WordToHtmlConverter.html" title="class in org.apache.poi.hwpf.converter"><B>PREV CLASS</B></A>&nbsp;
+&nbsp;<A HREF="../../../../../org/apache/poi/hwpf/converter/WordToTextConverter.html" title="class in org.apache.poi.hwpf.converter"><B>NEXT CLASS</B></A></FONT></TD>
+<TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
+  <A HREF="../../../../../index.html?org/apache/poi/hwpf/converter/WordToHtmlUtils.html" target="_top"><B>FRAMES</B></A>  &nbsp;
+&nbsp;<A HREF="WordToHtmlUtils.html" target="_top"><B>NO FRAMES</B></A>  &nbsp;
+&nbsp;<SCRIPT type="text/javascript">
+  <!--
+  if(window==top) {
+    document.writeln('<A HREF="../../../../../allclasses-noframe.html"><B>All Classes</B></A>');
+  }
+  //-->
+</SCRIPT>
+<NOSCRIPT>
+  <A HREF="../../../../../allclasses-noframe.html"><B>All Classes</B></A>
+</NOSCRIPT>
+
+
+</FONT></TD>
+</TR>
+<TR>
+<TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
+  SUMMARY:&nbsp;<A HREF="#nested_classes_inherited_from_class_org.apache.poi.hwpf.converter.AbstractWordUtils">NESTED</A>&nbsp;|&nbsp;<A HREF="#fields_inherited_from_class_org.apache.poi.hwpf.converter.AbstractWordUtils">FIELD</A>&nbsp;|&nbsp;<A HREF="#constructor_summary">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_summary">METHOD</A></FONT></TD>
+<TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
+DETAIL:&nbsp;FIELD&nbsp;|&nbsp;<A HREF="#constructor_detail">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_detail">METHOD</A></FONT></TD>
+</TR>
+</TABLE>
+<A NAME="skip-navbar_bottom"></A>
+<!-- ======== END OF BOTTOM NAVBAR ======= -->
+
+<HR>
+
+                <i>Copyright 2014 The Apache Software Foundation or
+        its licensors, as applicable.</i>
+            
+</BODY>
+</HTML>

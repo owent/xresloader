@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE rss PUBLIC "-//Netscape Communications//DTD RSS 0.91//EN" "http://my.netscape.com/publish/formats/rss-0.91.dtd">
+<rss version="0.91"><channel><title>POI Changes</title><link>http://poi.apache.org//changes.html</link><description>POI Changes</description><language>en-us</language><item><title> fix</title><link>http://poi.apache.org//changes.html</link><description> fix
+              by 
+              poi-developers
+              :
+              54764 - On supported XML parser versions (Xerces or JVM built-in, XMLBeans 2.6), enforce sensible limits on entity expansion in OOXML files, and ensure that subsequent normal files still pass fine (CVE-2014-3574)</description></item><item><title> fix</title><link>http://poi.apache.org//changes.html</link><description> fix
+              by 
+              poi-developers
+              :
+              56164 - Tidy up the OPC SAX setup code with a new common Helper, preventing external entity expansion (CVE-2014-3529)</description></item></channel></rss>

@@ -1,0 +1,335 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!--NewPage-->
+<HTML>
+<HEAD>
+<TITLE>
+FibBase (POI API Documentation)
+</TITLE>
+
+<META NAME="keywords" CONTENT="org.apache.poi.hwpf.model.FibBase class">
+
+<LINK REL ="stylesheet" TYPE="text/css" HREF="../../../../../stylesheet.css" TITLE="Style">
+
+<SCRIPT type="text/javascript">
+function windowTitle()
+{
+    parent.document.title="FibBase (POI API Documentation)";
+}
+</SCRIPT>
+<NOSCRIPT>
+</NOSCRIPT>
+
+</HEAD>
+
+<BODY BGCOLOR="white" onload="windowTitle();">
+
+
+<!-- ========= START OF TOP NAVBAR ======= -->
+<A NAME="navbar_top"><!-- --></A>
+<A HREF="#skip-navbar_top" title="Skip navigation links"></A>
+<TABLE BORDER="0" WIDTH="100%" CELLPADDING="1" CELLSPACING="0" SUMMARY="">
+<TR>
+<TD COLSPAN=2 BGCOLOR="#EEEEFF" CLASS="NavBarCell1">
+<A NAME="navbar_top_firstrow"><!-- --></A>
+<TABLE BORDER="0" CELLPADDING="0" CELLSPACING="3" SUMMARY="">
+  <TR ALIGN="center" VALIGN="top">
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../overview-summary.html"><FONT CLASS="NavBarFont1"><B>Overview</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="package-summary.html"><FONT CLASS="NavBarFont1"><B>Package</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#FFFFFF" CLASS="NavBarCell1Rev"> &nbsp;<FONT CLASS="NavBarFont1Rev"><B>Class</B></FONT>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="class-use/FibBase.html"><FONT CLASS="NavBarFont1"><B>Use</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="package-tree.html"><FONT CLASS="NavBarFont1"><B>Tree</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../deprecated-list.html"><FONT CLASS="NavBarFont1"><B>Deprecated</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../index-all.html"><FONT CLASS="NavBarFont1"><B>Index</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../help-doc.html"><FONT CLASS="NavBarFont1"><B>Help</B></FONT></A>&nbsp;</TD>
+  </TR>
+</TABLE>
+</TD>
+<TD ALIGN="right" VALIGN="top" ROWSPAN=3><EM>
+</EM>
+</TD>
+</TR>
+
+<TR>
+<TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
+&nbsp;<A HREF="../../../../../org/apache/poi/hwpf/model/Ffn.html" title="class in org.apache.poi.hwpf.model"><B>PREV CLASS</B></A>&nbsp;
+&nbsp;<A HREF="../../../../../org/apache/poi/hwpf/model/FIBFieldHandler.html" title="class in org.apache.poi.hwpf.model"><B>NEXT CLASS</B></A></FONT></TD>
+<TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
+  <A HREF="../../../../../index.html?org/apache/poi/hwpf/model/FibBase.html" target="_top"><B>FRAMES</B></A>  &nbsp;
+&nbsp;<A HREF="FibBase.html" target="_top"><B>NO FRAMES</B></A>  &nbsp;
+&nbsp;<SCRIPT type="text/javascript">
+  <!--
+  if(window==top) {
+    document.writeln('<A HREF="../../../../../allclasses-noframe.html"><B>All Classes</B></A>');
+  }
+  //-->
+</SCRIPT>
+<NOSCRIPT>
+  <A HREF="../../../../../allclasses-noframe.html"><B>All Classes</B></A>
+</NOSCRIPT>
+
+
+</FONT></TD>
+</TR>
+<TR>
+<TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
+  SUMMARY:&nbsp;NESTED&nbsp;|&nbsp;<A HREF="#fields_inherited_from_class_org.apache.poi.hwpf.model.types.FibBaseAbstractType">FIELD</A>&nbsp;|&nbsp;<A HREF="#constructor_summary">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_summary">METHOD</A></FONT></TD>
+<TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
+DETAIL:&nbsp;FIELD&nbsp;|&nbsp;<A HREF="#constructor_detail">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_detail">METHOD</A></FONT></TD>
+</TR>
+</TABLE>
+<A NAME="skip-navbar_top"></A>
+<!-- ========= END OF TOP NAVBAR ========= -->
+
+<HR>
+<!-- ======== START OF CLASS DATA ======== -->
+<H2>
+<FONT SIZE="-1">
+org.apache.poi.hwpf.model</FONT>
+<BR>
+Class FibBase</H2>
+<PRE>
+java.lang.Object
+  <IMG SRC="../../../../../resources/inherit.gif" ALT="extended by "><A HREF="../../../../../org/apache/poi/hwpf/model/types/FibBaseAbstractType.html" title="class in org.apache.poi.hwpf.model.types">org.apache.poi.hwpf.model.types.FibBaseAbstractType</A>
+      <IMG SRC="../../../../../resources/inherit.gif" ALT="extended by "><B>org.apache.poi.hwpf.model.FibBase</B>
+</PRE>
+<HR>
+<DL>
+<DT><PRE><FONT SIZE="-1"><A HREF="../../../../../org/apache/poi/util/Internal.html" title="annotation in org.apache.poi.util">@Internal</A>
+</FONT>public class <B>FibBase</B><DT>extends <A HREF="../../../../../org/apache/poi/hwpf/model/types/FibBaseAbstractType.html" title="class in org.apache.poi.hwpf.model.types">FibBaseAbstractType</A></DL>
+</PRE>
+
+<P>
+Base part of the File information Block (FibBase). Holds the core part of the
+ FIB, from the first 32 bytes.
+ <p>
+ Class and fields descriptions are quoted from Microsoft Office Word 97-2007
+ Binary File Format and [MS-DOC] - v20110608 Word (.doc) Binary File Format.
+<P>
+
+<P>
+<DL>
+<DT><B>Author:</B></DT>
+  <DD>Andrew C. Oliver; Sergey Vladimirov; according to Microsoft Office
+         Word 97-2007 Binary File Format Specification [*.doc] and [MS-DOC] -
+         v20110608 Word (.doc) Binary File Format</DD>
+</DL>
+<HR>
+
+<P>
+<!-- =========== FIELD SUMMARY =========== -->
+
+<A NAME="field_summary"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+<B>Field Summary</B></FONT></TH>
+</TR>
+</TABLE>
+&nbsp;<A NAME="fields_inherited_from_class_org.apache.poi.hwpf.model.types.FibBaseAbstractType"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#EEEEFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left"><B>Fields inherited from class org.apache.poi.hwpf.model.types.<A HREF="../../../../../org/apache/poi/hwpf/model/types/FibBaseAbstractType.html" title="class in org.apache.poi.hwpf.model.types">FibBaseAbstractType</A></B></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><A HREF="../../../../../org/apache/poi/hwpf/model/types/FibBaseAbstractType.html#field_1_wIdent">field_1_wIdent</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/FibBaseAbstractType.html#field_10_flags2">field_10_flags2</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/FibBaseAbstractType.html#field_11_Chs">field_11_Chs</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/FibBaseAbstractType.html#field_12_chsTables">field_12_chsTables</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/FibBaseAbstractType.html#field_13_fcMin">field_13_fcMin</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/FibBaseAbstractType.html#field_14_fcMac">field_14_fcMac</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/FibBaseAbstractType.html#field_2_nFib">field_2_nFib</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/FibBaseAbstractType.html#field_3_unused">field_3_unused</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/FibBaseAbstractType.html#field_4_lid">field_4_lid</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/FibBaseAbstractType.html#field_5_pnNext">field_5_pnNext</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/FibBaseAbstractType.html#field_6_flags1">field_6_flags1</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/FibBaseAbstractType.html#field_7_nFibBack">field_7_nFibBack</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/FibBaseAbstractType.html#field_8_lKey">field_8_lKey</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/FibBaseAbstractType.html#field_9_envr">field_9_envr</A></CODE></TD>
+</TR>
+</TABLE>
+&nbsp;
+<!-- ======== CONSTRUCTOR SUMMARY ======== -->
+
+<A NAME="constructor_summary"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+<B>Constructor Summary</B></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/model/FibBase.html#FibBase()">FibBase</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/model/FibBase.html#FibBase(byte[], int)">FibBase</A></B>(byte[]&nbsp;std,
+        int&nbsp;offset)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+</TABLE>
+&nbsp;
+<!-- ========== METHOD SUMMARY =========== -->
+
+<A NAME="method_summary"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+<B>Method Summary</B></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/model/FibBase.html#equals(java.lang.Object)">equals</A></B>(java.lang.Object&nbsp;obj)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;int</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/model/FibBase.html#hashCode()">hashCode</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+</TABLE>
+&nbsp;<A NAME="methods_inherited_from_class_org.apache.poi.hwpf.model.types.FibBaseAbstractType"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#EEEEFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left"><B>Methods inherited from class org.apache.poi.hwpf.model.types.<A HREF="../../../../../org/apache/poi/hwpf/model/types/FibBaseAbstractType.html" title="class in org.apache.poi.hwpf.model.types">FibBaseAbstractType</A></B></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><A HREF="../../../../../org/apache/poi/hwpf/model/types/FibBaseAbstractType.html#fillFields(byte[], int)">fillFields</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/FibBaseAbstractType.html#getChs()">getChs</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/FibBaseAbstractType.html#getChsTables()">getChsTables</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/FibBaseAbstractType.html#getCQuickSaves()">getCQuickSaves</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/FibBaseAbstractType.html#getEnvr()">getEnvr</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/FibBaseAbstractType.html#getFcMac()">getFcMac</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/FibBaseAbstractType.html#getFcMin()">getFcMin</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/FibBaseAbstractType.html#getFlags1()">getFlags1</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/FibBaseAbstractType.html#getFlags2()">getFlags2</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/FibBaseAbstractType.html#getFSpare0()">getFSpare0</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/FibBaseAbstractType.html#getLid()">getLid</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/FibBaseAbstractType.html#getLKey()">getLKey</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/FibBaseAbstractType.html#getNFib()">getNFib</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/FibBaseAbstractType.html#getNFibBack()">getNFibBack</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/FibBaseAbstractType.html#getPnNext()">getPnNext</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/FibBaseAbstractType.html#getSize()">getSize</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/FibBaseAbstractType.html#getUnused()">getUnused</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/FibBaseAbstractType.html#getWIdent()">getWIdent</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/FibBaseAbstractType.html#isFComplex()">isFComplex</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/FibBaseAbstractType.html#isFDot()">isFDot</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/FibBaseAbstractType.html#isFEmptySpecial()">isFEmptySpecial</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/FibBaseAbstractType.html#isFEncrypted()">isFEncrypted</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/FibBaseAbstractType.html#isFExtChar()">isFExtChar</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/FibBaseAbstractType.html#isFFarEast()">isFFarEast</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/FibBaseAbstractType.html#isFGlsy()">isFGlsy</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/FibBaseAbstractType.html#isFHasPic()">isFHasPic</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/FibBaseAbstractType.html#isFLoadOverride()">isFLoadOverride</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/FibBaseAbstractType.html#isFLoadOverridePage()">isFLoadOverridePage</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/FibBaseAbstractType.html#isFMac()">isFMac</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/FibBaseAbstractType.html#isFObfuscated()">isFObfuscated</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/FibBaseAbstractType.html#isFReadOnlyRecommended()">isFReadOnlyRecommended</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/FibBaseAbstractType.html#isFWhichTblStm()">isFWhichTblStm</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/FibBaseAbstractType.html#isFWriteReservation()">isFWriteReservation</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/FibBaseAbstractType.html#isReserved1()">isReserved1</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/FibBaseAbstractType.html#isReserved2()">isReserved2</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/FibBaseAbstractType.html#serialize()">serialize</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/FibBaseAbstractType.html#serialize(byte[], int)">serialize</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/FibBaseAbstractType.html#setChs(short)">setChs</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/FibBaseAbstractType.html#setChsTables(short)">setChsTables</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/FibBaseAbstractType.html#setCQuickSaves(byte)">setCQuickSaves</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/FibBaseAbstractType.html#setEnvr(byte)">setEnvr</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/FibBaseAbstractType.html#setFcMac(int)">setFcMac</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/FibBaseAbstractType.html#setFcMin(int)">setFcMin</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/FibBaseAbstractType.html#setFComplex(boolean)">setFComplex</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/FibBaseAbstractType.html#setFDot(boolean)">setFDot</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/FibBaseAbstractType.html#setFEmptySpecial(boolean)">setFEmptySpecial</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/FibBaseAbstractType.html#setFEncrypted(boolean)">setFEncrypted</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/FibBaseAbstractType.html#setFExtChar(boolean)">setFExtChar</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/FibBaseAbstractType.html#setFFarEast(boolean)">setFFarEast</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/FibBaseAbstractType.html#setFGlsy(boolean)">setFGlsy</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/FibBaseAbstractType.html#setFHasPic(boolean)">setFHasPic</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/FibBaseAbstractType.html#setFlags1(short)">setFlags1</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/FibBaseAbstractType.html#setFlags2(byte)">setFlags2</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/FibBaseAbstractType.html#setFLoadOverride(boolean)">setFLoadOverride</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/FibBaseAbstractType.html#setFLoadOverridePage(boolean)">setFLoadOverridePage</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/FibBaseAbstractType.html#setFMac(boolean)">setFMac</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/FibBaseAbstractType.html#setFObfuscated(boolean)">setFObfuscated</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/FibBaseAbstractType.html#setFReadOnlyRecommended(boolean)">setFReadOnlyRecommended</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/FibBaseAbstractType.html#setFSpare0(byte)">setFSpare0</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/FibBaseAbstractType.html#setFWhichTblStm(boolean)">setFWhichTblStm</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/FibBaseAbstractType.html#setFWriteReservation(boolean)">setFWriteReservation</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/FibBaseAbstractType.html#setLid(int)">setLid</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/FibBaseAbstractType.html#setLKey(int)">setLKey</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/FibBaseAbstractType.html#setNFib(int)">setNFib</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/FibBaseAbstractType.html#setNFibBack(int)">setNFibBack</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/FibBaseAbstractType.html#setPnNext(int)">setPnNext</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/FibBaseAbstractType.html#setReserved1(boolean)">setReserved1</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/FibBaseAbstractType.html#setReserved2(boolean)">setReserved2</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/FibBaseAbstractType.html#setUnused(int)">setUnused</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/FibBaseAbstractType.html#setWIdent(int)">setWIdent</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/FibBaseAbstractType.html#toString()">toString</A></CODE></TD>
+</TR>
+</TABLE>
+&nbsp;<A NAME="methods_inherited_from_class_java.lang.Object"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#EEEEFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left"><B>Methods inherited from class java.lang.Object</B></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE>clone, finalize, getClass, notify, notifyAll, wait, wait, wait</CODE></TD>
+</TR>
+</TABLE>
+&nbsp;
+<P>
+
+<!-- ========= CONSTRUCTOR DETAIL ======== -->
+
+<A NAME="constructor_detail"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="1"><FONT SIZE="+2">
+<B>Constructor Detail</B></FONT></TH>
+</TR>
+</TABLE>
+
+<A NAME="FibBase()"><!-- --></A><H3>
+FibBase</H3>
+<PRE>
+public <B>FibBase</B>()</PRE>
+<DL>
+</DL>
+<HR>
+
+<A NAME="FibBase(byte[], int)"><!-- --></A><H3>
+FibBase</H3>
+<PRE>
+public <B>FibBase</B>(byte[]&nbsp;std,
+               int&nbsp;offset)</PRE>
+<DL>
+</DL>
+
+<!-- ============ METHOD DETAIL ========== -->
+
+<A NAME="method_detail"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="1"><FONT SIZE="+2">
+<B>Method Detail</B></FONT></TH>
+</TR>
+</TABLE>
+
+<A NAME="equals(java.lang.Object)"><!-- --></A><H3>
+equals</H3>
+<PRE>
+public boolean <B>equals</B>(java.lang.Object&nbsp;obj)</PRE>
+<DL>
+<DD><DL>
+<DT><B>Overrides:</B><DD><CODE>equals</CODE> in class <CODE>java.lang.Object</CODE></DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="hashCode()"><!-- --></A><H3>
+hashCode</H3>
+<PRE>
+public int <B>hashCode</B>()</PRE>
+<DL>
+<DD><DL>
+<DT><B>Overrides:</B><DD><CODE>hashCode</CODE> in class <CODE>java.lang.Object</CODE></DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<!-- ========= END OF CLASS DATA ========= -->
+<HR>
+
+
+<!-- ======= START OF BOTTOM NAVBAR ====== -->
+<A NAME="navbar_bottom"><!-- --></A>
+<A HREF="#skip-navbar_bottom" title="Skip navigation links"></A>
+<TABLE BORDER="0" WIDTH="100%" CELLPADDING="1" CELLSPACING="0" SUMMARY="">
+<TR>
+<TD COLSPAN=2 BGCOLOR="#EEEEFF" CLASS="NavBarCell1">
+<A NAME="navbar_bottom_firstrow"><!-- --></A>
+<TABLE BORDER="0" CELLPADDING="0" CELLSPACING="3" SUMMARY="">
+  <TR ALIGN="center" VALIGN="top">
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../overview-summary.html"><FONT CLASS="NavBarFont1"><B>Overview</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="package-summary.html"><FONT CLASS="NavBarFont1"><B>Package</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#FFFFFF" CLASS="NavBarCell1Rev"> &nbsp;<FONT CLASS="NavBarFont1Rev"><B>Class</B></FONT>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="class-use/FibBase.html"><FONT CLASS="NavBarFont1"><B>Use</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="package-tree.html"><FONT CLASS="NavBarFont1"><B>Tree</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../deprecated-list.html"><FONT CLASS="NavBarFont1"><B>Deprecated</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../index-all.html"><FONT CLASS="NavBarFont1"><B>Index</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../help-doc.html"><FONT CLASS="NavBarFont1"><B>Help</B></FONT></A>&nbsp;</TD>
+  </TR>
+</TABLE>
+</TD>
+<TD ALIGN="right" VALIGN="top" ROWSPAN=3><EM>
+</EM>
+</TD>
+</TR>
+
+<TR>
+<TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
+&nbsp;<A HREF="../../../../../org/apache/poi/hwpf/model/Ffn.html" title="class in org.apache.poi.hwpf.model"><B>PREV CLASS</B></A>&nbsp;
+&nbsp;<A HREF="../../../../../org/apache/poi/hwpf/model/FIBFieldHandler.html" title="class in org.apache.poi.hwpf.model"><B>NEXT CLASS</B></A></FONT></TD>
+<TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
+  <A HREF="../../../../../index.html?org/apache/poi/hwpf/model/FibBase.html" target="_top"><B>FRAMES</B></A>  &nbsp;
+&nbsp;<A HREF="FibBase.html" target="_top"><B>NO FRAMES</B></A>  &nbsp;
+&nbsp;<SCRIPT type="text/javascript">
+  <!--
+  if(window==top) {
+    document.writeln('<A HREF="../../../../../allclasses-noframe.html"><B>All Classes</B></A>');
+  }
+  //-->
+</SCRIPT>
+<NOSCRIPT>
+  <A HREF="../../../../../allclasses-noframe.html"><B>All Classes</B></A>
+</NOSCRIPT>
+
+
+</FONT></TD>
+</TR>
+<TR>
+<TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
+  SUMMARY:&nbsp;NESTED&nbsp;|&nbsp;<A HREF="#fields_inherited_from_class_org.apache.poi.hwpf.model.types.FibBaseAbstractType">FIELD</A>&nbsp;|&nbsp;<A HREF="#constructor_summary">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_summary">METHOD</A></FONT></TD>
+<TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
+DETAIL:&nbsp;FIELD&nbsp;|&nbsp;<A HREF="#constructor_detail">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_detail">METHOD</A></FONT></TD>
+</TR>
+</TABLE>
+<A NAME="skip-navbar_bottom"></A>
+<!-- ======== END OF BOTTOM NAVBAR ======= -->
+
+<HR>
+
+                <i>Copyright 2014 The Apache Software Foundation or
+        its licensors, as applicable.</i>
+            
+</BODY>
+</HTML>

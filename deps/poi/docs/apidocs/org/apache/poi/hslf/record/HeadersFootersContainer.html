@@ -1,0 +1,652 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!--NewPage-->
+<HTML>
+<HEAD>
+<TITLE>
+HeadersFootersContainer (POI API Documentation)
+</TITLE>
+
+<META NAME="keywords" CONTENT="org.apache.poi.hslf.record.HeadersFootersContainer class">
+
+<LINK REL ="stylesheet" TYPE="text/css" HREF="../../../../../stylesheet.css" TITLE="Style">
+
+<SCRIPT type="text/javascript">
+function windowTitle()
+{
+    parent.document.title="HeadersFootersContainer (POI API Documentation)";
+}
+</SCRIPT>
+<NOSCRIPT>
+</NOSCRIPT>
+
+</HEAD>
+
+<BODY BGCOLOR="white" onload="windowTitle();">
+
+
+<!-- ========= START OF TOP NAVBAR ======= -->
+<A NAME="navbar_top"><!-- --></A>
+<A HREF="#skip-navbar_top" title="Skip navigation links"></A>
+<TABLE BORDER="0" WIDTH="100%" CELLPADDING="1" CELLSPACING="0" SUMMARY="">
+<TR>
+<TD COLSPAN=2 BGCOLOR="#EEEEFF" CLASS="NavBarCell1">
+<A NAME="navbar_top_firstrow"><!-- --></A>
+<TABLE BORDER="0" CELLPADDING="0" CELLSPACING="3" SUMMARY="">
+  <TR ALIGN="center" VALIGN="top">
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../overview-summary.html"><FONT CLASS="NavBarFont1"><B>Overview</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="package-summary.html"><FONT CLASS="NavBarFont1"><B>Package</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#FFFFFF" CLASS="NavBarCell1Rev"> &nbsp;<FONT CLASS="NavBarFont1Rev"><B>Class</B></FONT>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="class-use/HeadersFootersContainer.html"><FONT CLASS="NavBarFont1"><B>Use</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="package-tree.html"><FONT CLASS="NavBarFont1"><B>Tree</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../deprecated-list.html"><FONT CLASS="NavBarFont1"><B>Deprecated</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../index-all.html"><FONT CLASS="NavBarFont1"><B>Index</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../help-doc.html"><FONT CLASS="NavBarFont1"><B>Help</B></FONT></A>&nbsp;</TD>
+  </TR>
+</TABLE>
+</TD>
+<TD ALIGN="right" VALIGN="top" ROWSPAN=3><EM>
+</EM>
+</TD>
+</TR>
+
+<TR>
+<TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
+&nbsp;<A HREF="../../../../../org/apache/poi/hslf/record/HeadersFootersAtom.html" title="class in org.apache.poi.hslf.record"><B>PREV CLASS</B></A>&nbsp;
+&nbsp;<A HREF="../../../../../org/apache/poi/hslf/record/InteractiveInfo.html" title="class in org.apache.poi.hslf.record"><B>NEXT CLASS</B></A></FONT></TD>
+<TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
+  <A HREF="../../../../../index.html?org/apache/poi/hslf/record/HeadersFootersContainer.html" target="_top"><B>FRAMES</B></A>  &nbsp;
+&nbsp;<A HREF="HeadersFootersContainer.html" target="_top"><B>NO FRAMES</B></A>  &nbsp;
+&nbsp;<SCRIPT type="text/javascript">
+  <!--
+  if(window==top) {
+    document.writeln('<A HREF="../../../../../allclasses-noframe.html"><B>All Classes</B></A>');
+  }
+  //-->
+</SCRIPT>
+<NOSCRIPT>
+  <A HREF="../../../../../allclasses-noframe.html"><B>All Classes</B></A>
+</NOSCRIPT>
+
+
+</FONT></TD>
+</TR>
+<TR>
+<TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
+  SUMMARY:&nbsp;NESTED&nbsp;|&nbsp;<A HREF="#field_summary">FIELD</A>&nbsp;|&nbsp;<A HREF="#constructor_summary">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_summary">METHOD</A></FONT></TD>
+<TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
+DETAIL:&nbsp;<A HREF="#field_detail">FIELD</A>&nbsp;|&nbsp;<A HREF="#constructor_detail">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_detail">METHOD</A></FONT></TD>
+</TR>
+</TABLE>
+<A NAME="skip-navbar_top"></A>
+<!-- ========= END OF TOP NAVBAR ========= -->
+
+<HR>
+<!-- ======== START OF CLASS DATA ======== -->
+<H2>
+<FONT SIZE="-1">
+org.apache.poi.hslf.record</FONT>
+<BR>
+Class HeadersFootersContainer</H2>
+<PRE>
+java.lang.Object
+  <IMG SRC="../../../../../resources/inherit.gif" ALT="extended by "><A HREF="../../../../../org/apache/poi/hslf/record/Record.html" title="class in org.apache.poi.hslf.record">org.apache.poi.hslf.record.Record</A>
+      <IMG SRC="../../../../../resources/inherit.gif" ALT="extended by "><A HREF="../../../../../org/apache/poi/hslf/record/RecordContainer.html" title="class in org.apache.poi.hslf.record">org.apache.poi.hslf.record.RecordContainer</A>
+          <IMG SRC="../../../../../resources/inherit.gif" ALT="extended by "><B>org.apache.poi.hslf.record.HeadersFootersContainer</B>
+</PRE>
+<HR>
+<DL>
+<DT><PRE>public final class <B>HeadersFootersContainer</B><DT>extends <A HREF="../../../../../org/apache/poi/hslf/record/RecordContainer.html" title="class in org.apache.poi.hslf.record">RecordContainer</A></DL>
+</PRE>
+
+<P>
+A container record that specifies information about the footers on a presentation slide.
+ <p>
+ It contains:<br>
+ <li> 1. <A HREF="../../../../../org/apache/poi/hslf/record/HeadersFootersAtom.html" title="class in org.apache.poi.hslf.record"><CODE>HeadersFootersAtom</CODE></A>
+ <li> 2. <A HREF="../../../../../org/apache/poi/hslf/record/CString.html" title="class in org.apache.poi.hslf.record"><CODE>CString</CODE></A>, Instance UserDate (0), optional: Stores the user's date.
+    This is the date that the user wants in the footers, instead of today's date.
+ <li> 3. <A HREF="../../../../../org/apache/poi/hslf/record/CString.html" title="class in org.apache.poi.hslf.record"><CODE>CString</CODE></A>, Instance Header (1), optional: Stores the Header's contents.
+ <li> 4. <A HREF="../../../../../org/apache/poi/hslf/record/CString.html" title="class in org.apache.poi.hslf.record"><CODE>CString</CODE></A>, Instance Footer (2), optional: Stores the Footer's contents.
+ </p>
+<P>
+
+<P>
+<DL>
+<DT><B>Author:</B></DT>
+  <DD>Yegor Kozlov</DD>
+</DL>
+<HR>
+
+<P>
+<!-- =========== FIELD SUMMARY =========== -->
+
+<A NAME="field_summary"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+<B>Field Summary</B></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;int</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/record/HeadersFootersContainer.html#FOOTERATOM">FOOTERATOM</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;int</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/record/HeadersFootersContainer.html#HEADERATOM">HEADERATOM</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;short</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/record/HeadersFootersContainer.html#NotesHeadersFootersContainer">NotesHeadersFootersContainer</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"instance" field in the record header indicating that this HeadersFootersContaine
+   is applied for notes and handouts</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;short</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/record/HeadersFootersContainer.html#SlideHeadersFootersContainer">SlideHeadersFootersContainer</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"instance" field in the record header indicating that this HeadersFootersContaine
+  is applied for slides</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;int</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/record/HeadersFootersContainer.html#USERDATEATOM">USERDATEATOM</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+</TABLE>
+&nbsp;<A NAME="fields_inherited_from_class_org.apache.poi.hslf.record.RecordContainer"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#EEEEFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left"><B>Fields inherited from class org.apache.poi.hslf.record.<A HREF="../../../../../org/apache/poi/hslf/record/RecordContainer.html" title="class in org.apache.poi.hslf.record">RecordContainer</A></B></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><A HREF="../../../../../org/apache/poi/hslf/record/RecordContainer.html#_children">_children</A></CODE></TD>
+</TR>
+</TABLE>
+&nbsp;<A NAME="fields_inherited_from_class_org.apache.poi.hslf.record.Record"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#EEEEFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left"><B>Fields inherited from class org.apache.poi.hslf.record.<A HREF="../../../../../org/apache/poi/hslf/record/Record.html" title="class in org.apache.poi.hslf.record">Record</A></B></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><A HREF="../../../../../org/apache/poi/hslf/record/Record.html#logger">logger</A></CODE></TD>
+</TR>
+</TABLE>
+&nbsp;
+<!-- ======== CONSTRUCTOR SUMMARY ======== -->
+
+<A NAME="constructor_summary"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+<B>Constructor Summary</B></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>protected </CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/record/HeadersFootersContainer.html#HeadersFootersContainer(byte[], int, int)">HeadersFootersContainer</A></B>(byte[]&nbsp;source,
+                        int&nbsp;start,
+                        int&nbsp;len)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/record/HeadersFootersContainer.html#HeadersFootersContainer(short)">HeadersFootersContainer</A></B>(short&nbsp;options)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+</TABLE>
+&nbsp;
+<!-- ========== METHOD SUMMARY =========== -->
+
+<A NAME="method_summary"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+<B>Method Summary</B></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../../../org/apache/poi/hslf/record/CString.html" title="class in org.apache.poi.hslf.record">CString</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/record/HeadersFootersContainer.html#addFooterAtom()">addFooterAtom</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Insert a <A HREF="../../../../../org/apache/poi/hslf/record/CString.html" title="class in org.apache.poi.hslf.record"><CODE>CString</CODE></A> record that stores the user's date.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../../../org/apache/poi/hslf/record/CString.html" title="class in org.apache.poi.hslf.record">CString</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/record/HeadersFootersContainer.html#addHeaderAtom()">addHeaderAtom</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Insert a <A HREF="../../../../../org/apache/poi/hslf/record/CString.html" title="class in org.apache.poi.hslf.record"><CODE>CString</CODE></A> record that stores the user's date.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../../../org/apache/poi/hslf/record/CString.html" title="class in org.apache.poi.hslf.record">CString</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/record/HeadersFootersContainer.html#addUserDateAtom()">addUserDateAtom</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Insert a <A HREF="../../../../../org/apache/poi/hslf/record/CString.html" title="class in org.apache.poi.hslf.record"><CODE>CString</CODE></A> record that stores the user's date.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../../../org/apache/poi/hslf/record/CString.html" title="class in org.apache.poi.hslf.record">CString</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/record/HeadersFootersContainer.html#getFooterAtom()">getFooterAtom</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A <A HREF="../../../../../org/apache/poi/hslf/record/CString.html" title="class in org.apache.poi.hslf.record"><CODE>CString</CODE></A> record that stores the Footers's contents.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../../../org/apache/poi/hslf/record/CString.html" title="class in org.apache.poi.hslf.record">CString</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/record/HeadersFootersContainer.html#getHeaderAtom()">getHeaderAtom</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A <A HREF="../../../../../org/apache/poi/hslf/record/CString.html" title="class in org.apache.poi.hslf.record"><CODE>CString</CODE></A> record that stores the Header's contents.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../../../org/apache/poi/hslf/record/HeadersFootersAtom.html" title="class in org.apache.poi.hslf.record">HeadersFootersAtom</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/record/HeadersFootersContainer.html#getHeadersFootersAtom()">getHeadersFootersAtom</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;HeadersFootersAtom stores the basic information of the header and footer structure.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;int</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/record/HeadersFootersContainer.html#getOptions()">getOptions</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Must be either <A HREF="../../../../../org/apache/poi/hslf/record/HeadersFootersContainer.html#SlideHeadersFootersContainer"><CODE>SlideHeadersFootersContainer</CODE></A> or <A HREF="../../../../../org/apache/poi/hslf/record/HeadersFootersContainer.html#NotesHeadersFootersContainer"><CODE>NotesHeadersFootersContainer</CODE></A></TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;long</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/record/HeadersFootersContainer.html#getRecordType()">getRecordType</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Return the type, which is <code><A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.html#HeadersFooters"><CODE>RecordTypes.HeadersFooters</CODE></A></code></TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../../../org/apache/poi/hslf/record/CString.html" title="class in org.apache.poi.hslf.record">CString</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/record/HeadersFootersContainer.html#getUserDateAtom()">getUserDateAtom</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A <A HREF="../../../../../org/apache/poi/hslf/record/CString.html" title="class in org.apache.poi.hslf.record"><CODE>CString</CODE></A> record that stores the user's date.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/record/HeadersFootersContainer.html#writeOut(java.io.OutputStream)">writeOut</A></B>(java.io.OutputStream&nbsp;out)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Write the contents of the record back, so it can be written to disk</TD>
+</TR>
+</TABLE>
+&nbsp;<A NAME="methods_inherited_from_class_org.apache.poi.hslf.record.RecordContainer"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#EEEEFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left"><B>Methods inherited from class org.apache.poi.hslf.record.<A HREF="../../../../../org/apache/poi/hslf/record/RecordContainer.html" title="class in org.apache.poi.hslf.record">RecordContainer</A></B></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><A HREF="../../../../../org/apache/poi/hslf/record/RecordContainer.html#addChildAfter(org.apache.poi.hslf.record.Record, org.apache.poi.hslf.record.Record)">addChildAfter</A>, <A HREF="../../../../../org/apache/poi/hslf/record/RecordContainer.html#addChildBefore(org.apache.poi.hslf.record.Record, org.apache.poi.hslf.record.Record)">addChildBefore</A>, <A HREF="../../../../../org/apache/poi/hslf/record/RecordContainer.html#appendChildRecord(org.apache.poi.hslf.record.Record)">appendChildRecord</A>, <A HREF="../../../../../org/apache/poi/hslf/record/RecordContainer.html#findFirstOfType(long)">findFirstOfType</A>, <A HREF="../../../../../org/apache/poi/hslf/record/RecordContainer.html#getChildRecords()">getChildRecords</A>, <A HREF="../../../../../org/apache/poi/hslf/record/RecordContainer.html#handleParentAwareRecords(org.apache.poi.hslf.record.RecordContainer)">handleParentAwareRecords</A>, <A HREF="../../../../../org/apache/poi/hslf/record/RecordContainer.html#isAnAtom()">isAnAtom</A>, <A HREF="../../../../../org/apache/poi/hslf/record/RecordContainer.html#moveChildBefore(org.apache.poi.hslf.record.Record, org.apache.poi.hslf.record.Record)">moveChildBefore</A>, <A HREF="../../../../../org/apache/poi/hslf/record/RecordContainer.html#moveChildrenAfter(org.apache.poi.hslf.record.Record, int, org.apache.poi.hslf.record.Record)">moveChildrenAfter</A>, <A HREF="../../../../../org/apache/poi/hslf/record/RecordContainer.html#moveChildrenBefore(org.apache.poi.hslf.record.Record, int, org.apache.poi.hslf.record.Record)">moveChildrenBefore</A>, <A HREF="../../../../../org/apache/poi/hslf/record/RecordContainer.html#removeChild(org.apache.poi.hslf.record.Record)">removeChild</A>, <A HREF="../../../../../org/apache/poi/hslf/record/RecordContainer.html#setChildRecord(org.apache.poi.hslf.record.Record[])">setChildRecord</A>, <A HREF="../../../../../org/apache/poi/hslf/record/RecordContainer.html#writeOut(byte, byte, long, org.apache.poi.hslf.record.Record[], java.io.OutputStream)">writeOut</A></CODE></TD>
+</TR>
+</TABLE>
+&nbsp;<A NAME="methods_inherited_from_class_org.apache.poi.hslf.record.Record"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#EEEEFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left"><B>Methods inherited from class org.apache.poi.hslf.record.<A HREF="../../../../../org/apache/poi/hslf/record/Record.html" title="class in org.apache.poi.hslf.record">Record</A></B></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><A HREF="../../../../../org/apache/poi/hslf/record/Record.html#buildRecordAtOffset(byte[], int)">buildRecordAtOffset</A>, <A HREF="../../../../../org/apache/poi/hslf/record/Record.html#createRecordForType(long, byte[], int, int)">createRecordForType</A>, <A HREF="../../../../../org/apache/poi/hslf/record/Record.html#findChildRecords(byte[], int, int)">findChildRecords</A>, <A HREF="../../../../../org/apache/poi/hslf/record/Record.html#writeLittleEndian(int, java.io.OutputStream)">writeLittleEndian</A>, <A HREF="../../../../../org/apache/poi/hslf/record/Record.html#writeLittleEndian(short, java.io.OutputStream)">writeLittleEndian</A></CODE></TD>
+</TR>
+</TABLE>
+&nbsp;<A NAME="methods_inherited_from_class_java.lang.Object"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#EEEEFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left"><B>Methods inherited from class java.lang.Object</B></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE>clone, equals, finalize, getClass, hashCode, notify, notifyAll, toString, wait, wait, wait</CODE></TD>
+</TR>
+</TABLE>
+&nbsp;
+<P>
+
+<!-- ============ FIELD DETAIL =========== -->
+
+<A NAME="field_detail"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="1"><FONT SIZE="+2">
+<B>Field Detail</B></FONT></TH>
+</TR>
+</TABLE>
+
+<A NAME="SlideHeadersFootersContainer"><!-- --></A><H3>
+SlideHeadersFootersContainer</H3>
+<PRE>
+public static final short <B>SlideHeadersFootersContainer</B></PRE>
+<DL>
+<DD>"instance" field in the record header indicating that this HeadersFootersContaine
+  is applied for slides
+<P>
+<DL>
+<DT><B>See Also:</B><DD><A HREF="../../../../../constant-values.html#org.apache.poi.hslf.record.HeadersFootersContainer.SlideHeadersFootersContainer">Constant Field Values</A></DL>
+</DL>
+<HR>
+
+<A NAME="NotesHeadersFootersContainer"><!-- --></A><H3>
+NotesHeadersFootersContainer</H3>
+<PRE>
+public static final short <B>NotesHeadersFootersContainer</B></PRE>
+<DL>
+<DD>"instance" field in the record header indicating that this HeadersFootersContaine
+   is applied for notes and handouts
+<P>
+<DL>
+<DT><B>See Also:</B><DD><A HREF="../../../../../constant-values.html#org.apache.poi.hslf.record.HeadersFootersContainer.NotesHeadersFootersContainer">Constant Field Values</A></DL>
+</DL>
+<HR>
+
+<A NAME="USERDATEATOM"><!-- --></A><H3>
+USERDATEATOM</H3>
+<PRE>
+public static final int <B>USERDATEATOM</B></PRE>
+<DL>
+<DL>
+<DT><B>See Also:</B><DD><A HREF="../../../../../constant-values.html#org.apache.poi.hslf.record.HeadersFootersContainer.USERDATEATOM">Constant Field Values</A></DL>
+</DL>
+<HR>
+
+<A NAME="HEADERATOM"><!-- --></A><H3>
+HEADERATOM</H3>
+<PRE>
+public static final int <B>HEADERATOM</B></PRE>
+<DL>
+<DL>
+<DT><B>See Also:</B><DD><A HREF="../../../../../constant-values.html#org.apache.poi.hslf.record.HeadersFootersContainer.HEADERATOM">Constant Field Values</A></DL>
+</DL>
+<HR>
+
+<A NAME="FOOTERATOM"><!-- --></A><H3>
+FOOTERATOM</H3>
+<PRE>
+public static final int <B>FOOTERATOM</B></PRE>
+<DL>
+<DL>
+<DT><B>See Also:</B><DD><A HREF="../../../../../constant-values.html#org.apache.poi.hslf.record.HeadersFootersContainer.FOOTERATOM">Constant Field Values</A></DL>
+</DL>
+
+<!-- ========= CONSTRUCTOR DETAIL ======== -->
+
+<A NAME="constructor_detail"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="1"><FONT SIZE="+2">
+<B>Constructor Detail</B></FONT></TH>
+</TR>
+</TABLE>
+
+<A NAME="HeadersFootersContainer(byte[], int, int)"><!-- --></A><H3>
+HeadersFootersContainer</H3>
+<PRE>
+protected <B>HeadersFootersContainer</B>(byte[]&nbsp;source,
+                                  int&nbsp;start,
+                                  int&nbsp;len)</PRE>
+<DL>
+</DL>
+<HR>
+
+<A NAME="HeadersFootersContainer(short)"><!-- --></A><H3>
+HeadersFootersContainer</H3>
+<PRE>
+public <B>HeadersFootersContainer</B>(short&nbsp;options)</PRE>
+<DL>
+</DL>
+
+<!-- ============ METHOD DETAIL ========== -->
+
+<A NAME="method_detail"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="1"><FONT SIZE="+2">
+<B>Method Detail</B></FONT></TH>
+</TR>
+</TABLE>
+
+<A NAME="getRecordType()"><!-- --></A><H3>
+getRecordType</H3>
+<PRE>
+public long <B>getRecordType</B>()</PRE>
+<DL>
+<DD>Return the type, which is <code><A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.html#HeadersFooters"><CODE>RecordTypes.HeadersFooters</CODE></A></code>
+<P>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../../../../org/apache/poi/hslf/record/Record.html#getRecordType()">getRecordType</A></CODE> in class <CODE><A HREF="../../../../../org/apache/poi/hslf/record/Record.html" title="class in org.apache.poi.hslf.record">Record</A></CODE></DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getOptions()"><!-- --></A><H3>
+getOptions</H3>
+<PRE>
+public int <B>getOptions</B>()</PRE>
+<DL>
+<DD>Must be either <A HREF="../../../../../org/apache/poi/hslf/record/HeadersFootersContainer.html#SlideHeadersFootersContainer"><CODE>SlideHeadersFootersContainer</CODE></A> or <A HREF="../../../../../org/apache/poi/hslf/record/HeadersFootersContainer.html#NotesHeadersFootersContainer"><CODE>NotesHeadersFootersContainer</CODE></A>
+<P>
+<DD><DL>
+
+<DT><B>Returns:</B><DD>"instance" field in the record header</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="writeOut(java.io.OutputStream)"><!-- --></A><H3>
+writeOut</H3>
+<PRE>
+public void <B>writeOut</B>(java.io.OutputStream&nbsp;out)
+              throws java.io.IOException</PRE>
+<DL>
+<DD>Write the contents of the record back, so it can be written to disk
+<P>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../../../../org/apache/poi/hslf/record/Record.html#writeOut(java.io.OutputStream)">writeOut</A></CODE> in class <CODE><A HREF="../../../../../org/apache/poi/hslf/record/Record.html" title="class in org.apache.poi.hslf.record">Record</A></CODE></DL>
+</DD>
+<DD><DL>
+
+<DT><B>Throws:</B>
+<DD><CODE>java.io.IOException</CODE></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getHeadersFootersAtom()"><!-- --></A><H3>
+getHeadersFootersAtom</H3>
+<PRE>
+public <A HREF="../../../../../org/apache/poi/hslf/record/HeadersFootersAtom.html" title="class in org.apache.poi.hslf.record">HeadersFootersAtom</A> <B>getHeadersFootersAtom</B>()</PRE>
+<DL>
+<DD>HeadersFootersAtom stores the basic information of the header and footer structure.
+<P>
+<DD><DL>
+
+<DT><B>Returns:</B><DD><code>HeadersFootersAtom</code></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getUserDateAtom()"><!-- --></A><H3>
+getUserDateAtom</H3>
+<PRE>
+public <A HREF="../../../../../org/apache/poi/hslf/record/CString.html" title="class in org.apache.poi.hslf.record">CString</A> <B>getUserDateAtom</B>()</PRE>
+<DL>
+<DD>A <A HREF="../../../../../org/apache/poi/hslf/record/CString.html" title="class in org.apache.poi.hslf.record"><CODE>CString</CODE></A> record that stores the user's date.
+ <p>This is the date that the user wants in the footers, instead of today's date.</p>
+<P>
+<DD><DL>
+
+<DT><B>Returns:</B><DD>A <A HREF="../../../../../org/apache/poi/hslf/record/CString.html" title="class in org.apache.poi.hslf.record"><CODE>CString</CODE></A> record that stores the user's date or <code>null</code></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getHeaderAtom()"><!-- --></A><H3>
+getHeaderAtom</H3>
+<PRE>
+public <A HREF="../../../../../org/apache/poi/hslf/record/CString.html" title="class in org.apache.poi.hslf.record">CString</A> <B>getHeaderAtom</B>()</PRE>
+<DL>
+<DD>A <A HREF="../../../../../org/apache/poi/hslf/record/CString.html" title="class in org.apache.poi.hslf.record"><CODE>CString</CODE></A> record that stores the Header's contents.
+<P>
+<DD><DL>
+
+<DT><B>Returns:</B><DD>A <A HREF="../../../../../org/apache/poi/hslf/record/CString.html" title="class in org.apache.poi.hslf.record"><CODE>CString</CODE></A> record that stores the Header's contents or <code>null</code></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getFooterAtom()"><!-- --></A><H3>
+getFooterAtom</H3>
+<PRE>
+public <A HREF="../../../../../org/apache/poi/hslf/record/CString.html" title="class in org.apache.poi.hslf.record">CString</A> <B>getFooterAtom</B>()</PRE>
+<DL>
+<DD>A <A HREF="../../../../../org/apache/poi/hslf/record/CString.html" title="class in org.apache.poi.hslf.record"><CODE>CString</CODE></A> record that stores the Footers's contents.
+<P>
+<DD><DL>
+
+<DT><B>Returns:</B><DD>A <A HREF="../../../../../org/apache/poi/hslf/record/CString.html" title="class in org.apache.poi.hslf.record"><CODE>CString</CODE></A> record that stores the Footers's contents or <code>null</code></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="addUserDateAtom()"><!-- --></A><H3>
+addUserDateAtom</H3>
+<PRE>
+public <A HREF="../../../../../org/apache/poi/hslf/record/CString.html" title="class in org.apache.poi.hslf.record">CString</A> <B>addUserDateAtom</B>()</PRE>
+<DL>
+<DD>Insert a <A HREF="../../../../../org/apache/poi/hslf/record/CString.html" title="class in org.apache.poi.hslf.record"><CODE>CString</CODE></A> record that stores the user's date.
+<P>
+<DD><DL>
+
+<DT><B>Returns:</B><DD>the created <A HREF="../../../../../org/apache/poi/hslf/record/CString.html" title="class in org.apache.poi.hslf.record"><CODE>CString</CODE></A> record that stores the user's date.</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="addHeaderAtom()"><!-- --></A><H3>
+addHeaderAtom</H3>
+<PRE>
+public <A HREF="../../../../../org/apache/poi/hslf/record/CString.html" title="class in org.apache.poi.hslf.record">CString</A> <B>addHeaderAtom</B>()</PRE>
+<DL>
+<DD>Insert a <A HREF="../../../../../org/apache/poi/hslf/record/CString.html" title="class in org.apache.poi.hslf.record"><CODE>CString</CODE></A> record that stores the user's date.
+<P>
+<DD><DL>
+
+<DT><B>Returns:</B><DD>the created <A HREF="../../../../../org/apache/poi/hslf/record/CString.html" title="class in org.apache.poi.hslf.record"><CODE>CString</CODE></A> record that stores the user's date.</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="addFooterAtom()"><!-- --></A><H3>
+addFooterAtom</H3>
+<PRE>
+public <A HREF="../../../../../org/apache/poi/hslf/record/CString.html" title="class in org.apache.poi.hslf.record">CString</A> <B>addFooterAtom</B>()</PRE>
+<DL>
+<DD>Insert a <A HREF="../../../../../org/apache/poi/hslf/record/CString.html" title="class in org.apache.poi.hslf.record"><CODE>CString</CODE></A> record that stores the user's date.
+<P>
+<DD><DL>
+
+<DT><B>Returns:</B><DD>the created <A HREF="../../../../../org/apache/poi/hslf/record/CString.html" title="class in org.apache.poi.hslf.record"><CODE>CString</CODE></A> record that stores the user's date.</DL>
+</DD>
+</DL>
+<!-- ========= END OF CLASS DATA ========= -->
+<HR>
+
+
+<!-- ======= START OF BOTTOM NAVBAR ====== -->
+<A NAME="navbar_bottom"><!-- --></A>
+<A HREF="#skip-navbar_bottom" title="Skip navigation links"></A>
+<TABLE BORDER="0" WIDTH="100%" CELLPADDING="1" CELLSPACING="0" SUMMARY="">
+<TR>
+<TD COLSPAN=2 BGCOLOR="#EEEEFF" CLASS="NavBarCell1">
+<A NAME="navbar_bottom_firstrow"><!-- --></A>
+<TABLE BORDER="0" CELLPADDING="0" CELLSPACING="3" SUMMARY="">
+  <TR ALIGN="center" VALIGN="top">
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../overview-summary.html"><FONT CLASS="NavBarFont1"><B>Overview</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="package-summary.html"><FONT CLASS="NavBarFont1"><B>Package</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#FFFFFF" CLASS="NavBarCell1Rev"> &nbsp;<FONT CLASS="NavBarFont1Rev"><B>Class</B></FONT>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="class-use/HeadersFootersContainer.html"><FONT CLASS="NavBarFont1"><B>Use</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="package-tree.html"><FONT CLASS="NavBarFont1"><B>Tree</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../deprecated-list.html"><FONT CLASS="NavBarFont1"><B>Deprecated</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../index-all.html"><FONT CLASS="NavBarFont1"><B>Index</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../help-doc.html"><FONT CLASS="NavBarFont1"><B>Help</B></FONT></A>&nbsp;</TD>
+  </TR>
+</TABLE>
+</TD>
+<TD ALIGN="right" VALIGN="top" ROWSPAN=3><EM>
+</EM>
+</TD>
+</TR>
+
+<TR>
+<TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
+&nbsp;<A HREF="../../../../../org/apache/poi/hslf/record/HeadersFootersAtom.html" title="class in org.apache.poi.hslf.record"><B>PREV CLASS</B></A>&nbsp;
+&nbsp;<A HREF="../../../../../org/apache/poi/hslf/record/InteractiveInfo.html" title="class in org.apache.poi.hslf.record"><B>NEXT CLASS</B></A></FONT></TD>
+<TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
+  <A HREF="../../../../../index.html?org/apache/poi/hslf/record/HeadersFootersContainer.html" target="_top"><B>FRAMES</B></A>  &nbsp;
+&nbsp;<A HREF="HeadersFootersContainer.html" target="_top"><B>NO FRAMES</B></A>  &nbsp;
+&nbsp;<SCRIPT type="text/javascript">
+  <!--
+  if(window==top) {
+    document.writeln('<A HREF="../../../../../allclasses-noframe.html"><B>All Classes</B></A>');
+  }
+  //-->
+</SCRIPT>
+<NOSCRIPT>
+  <A HREF="../../../../../allclasses-noframe.html"><B>All Classes</B></A>
+</NOSCRIPT>
+
+
+</FONT></TD>
+</TR>
+<TR>
+<TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
+  SUMMARY:&nbsp;NESTED&nbsp;|&nbsp;<A HREF="#field_summary">FIELD</A>&nbsp;|&nbsp;<A HREF="#constructor_summary">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_summary">METHOD</A></FONT></TD>
+<TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
+DETAIL:&nbsp;<A HREF="#field_detail">FIELD</A>&nbsp;|&nbsp;<A HREF="#constructor_detail">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_detail">METHOD</A></FONT></TD>
+</TR>
+</TABLE>
+<A NAME="skip-navbar_bottom"></A>
+<!-- ======== END OF BOTTOM NAVBAR ======= -->
+
+<HR>
+
+                <i>Copyright 2014 The Apache Software Foundation or
+        its licensors, as applicable.</i>
+            
+</BODY>
+</HTML>

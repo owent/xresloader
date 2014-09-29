@@ -1,0 +1,1554 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!--NewPage-->
+<HTML>
+<HEAD>
+<TITLE>
+TNEFProperty (POI API Documentation)
+</TITLE>
+
+<META NAME="keywords" CONTENT="org.apache.poi.hmef.attribute.TNEFProperty class">
+
+<LINK REL ="stylesheet" TYPE="text/css" HREF="../../../../../stylesheet.css" TITLE="Style">
+
+<SCRIPT type="text/javascript">
+function windowTitle()
+{
+    parent.document.title="TNEFProperty (POI API Documentation)";
+}
+</SCRIPT>
+<NOSCRIPT>
+</NOSCRIPT>
+
+</HEAD>
+
+<BODY BGCOLOR="white" onload="windowTitle();">
+
+
+<!-- ========= START OF TOP NAVBAR ======= -->
+<A NAME="navbar_top"><!-- --></A>
+<A HREF="#skip-navbar_top" title="Skip navigation links"></A>
+<TABLE BORDER="0" WIDTH="100%" CELLPADDING="1" CELLSPACING="0" SUMMARY="">
+<TR>
+<TD COLSPAN=2 BGCOLOR="#EEEEFF" CLASS="NavBarCell1">
+<A NAME="navbar_top_firstrow"><!-- --></A>
+<TABLE BORDER="0" CELLPADDING="0" CELLSPACING="3" SUMMARY="">
+  <TR ALIGN="center" VALIGN="top">
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../overview-summary.html"><FONT CLASS="NavBarFont1"><B>Overview</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="package-summary.html"><FONT CLASS="NavBarFont1"><B>Package</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#FFFFFF" CLASS="NavBarCell1Rev"> &nbsp;<FONT CLASS="NavBarFont1Rev"><B>Class</B></FONT>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="class-use/TNEFProperty.html"><FONT CLASS="NavBarFont1"><B>Use</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="package-tree.html"><FONT CLASS="NavBarFont1"><B>Tree</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../deprecated-list.html"><FONT CLASS="NavBarFont1"><B>Deprecated</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../index-all.html"><FONT CLASS="NavBarFont1"><B>Index</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../help-doc.html"><FONT CLASS="NavBarFont1"><B>Help</B></FONT></A>&nbsp;</TD>
+  </TR>
+</TABLE>
+</TD>
+<TD ALIGN="right" VALIGN="top" ROWSPAN=3><EM>
+</EM>
+</TD>
+</TR>
+
+<TR>
+<TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
+&nbsp;<A HREF="../../../../../org/apache/poi/hmef/attribute/TNEFMAPIAttribute.html" title="class in org.apache.poi.hmef.attribute"><B>PREV CLASS</B></A>&nbsp;
+&nbsp;<A HREF="../../../../../org/apache/poi/hmef/attribute/TNEFStringAttribute.html" title="class in org.apache.poi.hmef.attribute"><B>NEXT CLASS</B></A></FONT></TD>
+<TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
+  <A HREF="../../../../../index.html?org/apache/poi/hmef/attribute/TNEFProperty.html" target="_top"><B>FRAMES</B></A>  &nbsp;
+&nbsp;<A HREF="TNEFProperty.html" target="_top"><B>NO FRAMES</B></A>  &nbsp;
+&nbsp;<SCRIPT type="text/javascript">
+  <!--
+  if(window==top) {
+    document.writeln('<A HREF="../../../../../allclasses-noframe.html"><B>All Classes</B></A>');
+  }
+  //-->
+</SCRIPT>
+<NOSCRIPT>
+  <A HREF="../../../../../allclasses-noframe.html"><B>All Classes</B></A>
+</NOSCRIPT>
+
+
+</FONT></TD>
+</TR>
+<TR>
+<TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
+  SUMMARY:&nbsp;NESTED&nbsp;|&nbsp;<A HREF="#field_summary">FIELD</A>&nbsp;|&nbsp;CONSTR&nbsp;|&nbsp;<A HREF="#method_summary">METHOD</A></FONT></TD>
+<TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
+DETAIL:&nbsp;<A HREF="#field_detail">FIELD</A>&nbsp;|&nbsp;CONSTR&nbsp;|&nbsp;<A HREF="#method_detail">METHOD</A></FONT></TD>
+</TR>
+</TABLE>
+<A NAME="skip-navbar_top"></A>
+<!-- ========= END OF TOP NAVBAR ========= -->
+
+<HR>
+<!-- ======== START OF CLASS DATA ======== -->
+<H2>
+<FONT SIZE="-1">
+org.apache.poi.hmef.attribute</FONT>
+<BR>
+Class TNEFProperty</H2>
+<PRE>
+java.lang.Object
+  <IMG SRC="../../../../../resources/inherit.gif" ALT="extended by "><B>org.apache.poi.hmef.attribute.TNEFProperty</B>
+</PRE>
+<HR>
+<DL>
+<DT><PRE>public final class <B>TNEFProperty</B><DT>extends java.lang.Object</DL>
+</PRE>
+
+<P>
+Holds the list of TNEF Attributes, and allows lookup
+  by friendly name, ID and MAPI Property Name.
+  
+ Note - the types and IDs differ from standard Outlook/MAPI
+  ones, so we can't just re-use the HSMF ones.
+<P>
+
+<P>
+<HR>
+
+<P>
+<!-- =========== FIELD SUMMARY =========== -->
+
+<A NAME="field_summary"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+<B>Field Summary</B></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;int</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hmef/attribute/TNEFProperty.html#id">id</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The TNEF Property ID</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;<A HREF="../../../../../org/apache/poi/hmef/attribute/TNEFProperty.html" title="class in org.apache.poi.hmef.attribute">TNEFProperty</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hmef/attribute/TNEFProperty.html#ID_AIDOWNER">ID_AIDOWNER</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;<A HREF="../../../../../org/apache/poi/hmef/attribute/TNEFProperty.html" title="class in org.apache.poi.hmef.attribute">TNEFProperty</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hmef/attribute/TNEFProperty.html#ID_ATTACHCREATEDATE">ID_ATTACHCREATEDATE</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;<A HREF="../../../../../org/apache/poi/hmef/attribute/TNEFProperty.html" title="class in org.apache.poi.hmef.attribute">TNEFProperty</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hmef/attribute/TNEFProperty.html#ID_ATTACHDATA">ID_ATTACHDATA</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;<A HREF="../../../../../org/apache/poi/hmef/attribute/TNEFProperty.html" title="class in org.apache.poi.hmef.attribute">TNEFProperty</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hmef/attribute/TNEFProperty.html#ID_ATTACHMENT">ID_ATTACHMENT</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;<A HREF="../../../../../org/apache/poi/hmef/attribute/TNEFProperty.html" title="class in org.apache.poi.hmef.attribute">TNEFProperty</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hmef/attribute/TNEFProperty.html#ID_ATTACHMETAFILE">ID_ATTACHMETAFILE</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;<A HREF="../../../../../org/apache/poi/hmef/attribute/TNEFProperty.html" title="class in org.apache.poi.hmef.attribute">TNEFProperty</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hmef/attribute/TNEFProperty.html#ID_ATTACHMODIFYDATE">ID_ATTACHMODIFYDATE</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;<A HREF="../../../../../org/apache/poi/hmef/attribute/TNEFProperty.html" title="class in org.apache.poi.hmef.attribute">TNEFProperty</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hmef/attribute/TNEFProperty.html#ID_ATTACHRENDERDATA">ID_ATTACHRENDERDATA</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;<A HREF="../../../../../org/apache/poi/hmef/attribute/TNEFProperty.html" title="class in org.apache.poi.hmef.attribute">TNEFProperty</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hmef/attribute/TNEFProperty.html#ID_ATTACHTITLE">ID_ATTACHTITLE</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;<A HREF="../../../../../org/apache/poi/hmef/attribute/TNEFProperty.html" title="class in org.apache.poi.hmef.attribute">TNEFProperty</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hmef/attribute/TNEFProperty.html#ID_ATTACHTRANSPORTFILENAME">ID_ATTACHTRANSPORTFILENAME</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;<A HREF="../../../../../org/apache/poi/hmef/attribute/TNEFProperty.html" title="class in org.apache.poi.hmef.attribute">TNEFProperty</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hmef/attribute/TNEFProperty.html#ID_BODY">ID_BODY</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;<A HREF="../../../../../org/apache/poi/hmef/attribute/TNEFProperty.html" title="class in org.apache.poi.hmef.attribute">TNEFProperty</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hmef/attribute/TNEFProperty.html#ID_CONVERSATIONID">ID_CONVERSATIONID</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;<A HREF="../../../../../org/apache/poi/hmef/attribute/TNEFProperty.html" title="class in org.apache.poi.hmef.attribute">TNEFProperty</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hmef/attribute/TNEFProperty.html#ID_DATEEND">ID_DATEEND</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;<A HREF="../../../../../org/apache/poi/hmef/attribute/TNEFProperty.html" title="class in org.apache.poi.hmef.attribute">TNEFProperty</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hmef/attribute/TNEFProperty.html#ID_DATEMODIFIED">ID_DATEMODIFIED</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;<A HREF="../../../../../org/apache/poi/hmef/attribute/TNEFProperty.html" title="class in org.apache.poi.hmef.attribute">TNEFProperty</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hmef/attribute/TNEFProperty.html#ID_DATERECEIVED">ID_DATERECEIVED</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;<A HREF="../../../../../org/apache/poi/hmef/attribute/TNEFProperty.html" title="class in org.apache.poi.hmef.attribute">TNEFProperty</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hmef/attribute/TNEFProperty.html#ID_DATESENT">ID_DATESENT</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;<A HREF="../../../../../org/apache/poi/hmef/attribute/TNEFProperty.html" title="class in org.apache.poi.hmef.attribute">TNEFProperty</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hmef/attribute/TNEFProperty.html#ID_DATESTART">ID_DATESTART</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;<A HREF="../../../../../org/apache/poi/hmef/attribute/TNEFProperty.html" title="class in org.apache.poi.hmef.attribute">TNEFProperty</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hmef/attribute/TNEFProperty.html#ID_DELEGATE">ID_DELEGATE</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;<A HREF="../../../../../org/apache/poi/hmef/attribute/TNEFProperty.html" title="class in org.apache.poi.hmef.attribute">TNEFProperty</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hmef/attribute/TNEFProperty.html#ID_FROM">ID_FROM</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;<A HREF="../../../../../org/apache/poi/hmef/attribute/TNEFProperty.html" title="class in org.apache.poi.hmef.attribute">TNEFProperty</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hmef/attribute/TNEFProperty.html#ID_MAPIPROPERTIES">ID_MAPIPROPERTIES</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;<A HREF="../../../../../org/apache/poi/hmef/attribute/TNEFProperty.html" title="class in org.apache.poi.hmef.attribute">TNEFProperty</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hmef/attribute/TNEFProperty.html#ID_MESSAGECLASS">ID_MESSAGECLASS</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;<A HREF="../../../../../org/apache/poi/hmef/attribute/TNEFProperty.html" title="class in org.apache.poi.hmef.attribute">TNEFProperty</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hmef/attribute/TNEFProperty.html#ID_MESSAGEID">ID_MESSAGEID</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;<A HREF="../../../../../org/apache/poi/hmef/attribute/TNEFProperty.html" title="class in org.apache.poi.hmef.attribute">TNEFProperty</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hmef/attribute/TNEFProperty.html#ID_MESSAGESTATUS">ID_MESSAGESTATUS</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;<A HREF="../../../../../org/apache/poi/hmef/attribute/TNEFProperty.html" title="class in org.apache.poi.hmef.attribute">TNEFProperty</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hmef/attribute/TNEFProperty.html#ID_NULL">ID_NULL</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;<A HREF="../../../../../org/apache/poi/hmef/attribute/TNEFProperty.html" title="class in org.apache.poi.hmef.attribute">TNEFProperty</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hmef/attribute/TNEFProperty.html#ID_OEMCODEPAGE">ID_OEMCODEPAGE</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;<A HREF="../../../../../org/apache/poi/hmef/attribute/TNEFProperty.html" title="class in org.apache.poi.hmef.attribute">TNEFProperty</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hmef/attribute/TNEFProperty.html#ID_ORIGINALMESSAGECLASS">ID_ORIGINALMESSAGECLASS</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;<A HREF="../../../../../org/apache/poi/hmef/attribute/TNEFProperty.html" title="class in org.apache.poi.hmef.attribute">TNEFProperty</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hmef/attribute/TNEFProperty.html#ID_OWNER">ID_OWNER</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;<A HREF="../../../../../org/apache/poi/hmef/attribute/TNEFProperty.html" title="class in org.apache.poi.hmef.attribute">TNEFProperty</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hmef/attribute/TNEFProperty.html#ID_PARENTID">ID_PARENTID</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;<A HREF="../../../../../org/apache/poi/hmef/attribute/TNEFProperty.html" title="class in org.apache.poi.hmef.attribute">TNEFProperty</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hmef/attribute/TNEFProperty.html#ID_PRIORITY">ID_PRIORITY</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;<A HREF="../../../../../org/apache/poi/hmef/attribute/TNEFProperty.html" title="class in org.apache.poi.hmef.attribute">TNEFProperty</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hmef/attribute/TNEFProperty.html#ID_RECIPIENTTABLE">ID_RECIPIENTTABLE</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;<A HREF="../../../../../org/apache/poi/hmef/attribute/TNEFProperty.html" title="class in org.apache.poi.hmef.attribute">TNEFProperty</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hmef/attribute/TNEFProperty.html#ID_REQUESTRESPONSE">ID_REQUESTRESPONSE</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;<A HREF="../../../../../org/apache/poi/hmef/attribute/TNEFProperty.html" title="class in org.apache.poi.hmef.attribute">TNEFProperty</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hmef/attribute/TNEFProperty.html#ID_SENTFOR">ID_SENTFOR</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;<A HREF="../../../../../org/apache/poi/hmef/attribute/TNEFProperty.html" title="class in org.apache.poi.hmef.attribute">TNEFProperty</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hmef/attribute/TNEFProperty.html#ID_SUBJECT">ID_SUBJECT</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;<A HREF="../../../../../org/apache/poi/hmef/attribute/TNEFProperty.html" title="class in org.apache.poi.hmef.attribute">TNEFProperty</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hmef/attribute/TNEFProperty.html#ID_TNEFVERSION">ID_TNEFVERSION</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;<A HREF="../../../../../org/apache/poi/hmef/attribute/TNEFProperty.html" title="class in org.apache.poi.hmef.attribute">TNEFProperty</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hmef/attribute/TNEFProperty.html#ID_UNKNOWN">ID_UNKNOWN</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;int</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hmef/attribute/TNEFProperty.html#LEVEL_ATTACHMENT">LEVEL_ATTACHMENT</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;int</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hmef/attribute/TNEFProperty.html#LEVEL_END_OF_FILE">LEVEL_END_OF_FILE</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;int</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hmef/attribute/TNEFProperty.html#LEVEL_MESSAGE">LEVEL_MESSAGE</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;java.lang.String</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hmef/attribute/TNEFProperty.html#mapiProperty">mapiProperty</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Equivalent MAPI Property</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;java.lang.String</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hmef/attribute/TNEFProperty.html#name">name</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Property Name</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;int</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hmef/attribute/TNEFProperty.html#PTYPE_APPTIME">PTYPE_APPTIME</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;AppTime - application time value</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;int</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hmef/attribute/TNEFProperty.html#PTYPE_BINARY">PTYPE_BINARY</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Binary - counted byte array</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;int</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hmef/attribute/TNEFProperty.html#PTYPE_BOOLEAN">PTYPE_BOOLEAN</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Boolean - 16-bit Boolean value.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;int</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hmef/attribute/TNEFProperty.html#PTYPE_CLASSID">PTYPE_CLASSID</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ClassId - OLE GUID</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;int</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hmef/attribute/TNEFProperty.html#PTYPE_CURRENCY">PTYPE_CURRENCY</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Currency - signed 64-bit integer that represents a base ten decimal with four digits to the right of the decimal point</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;int</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hmef/attribute/TNEFProperty.html#PTYPE_DOUBLE">PTYPE_DOUBLE</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Double - floating point double</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;int</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hmef/attribute/TNEFProperty.html#PTYPE_ERROR">PTYPE_ERROR</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Error - 32-bit error value</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;int</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hmef/attribute/TNEFProperty.html#PTYPE_I2">PTYPE_I2</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;I2 - signed 16-bit value</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;int</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hmef/attribute/TNEFProperty.html#PTYPE_I8">PTYPE_I8</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;I8 - 8-byte signed integer</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;int</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hmef/attribute/TNEFProperty.html#PTYPE_LONG">PTYPE_LONG</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Long - signed 32-bit value</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;int</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hmef/attribute/TNEFProperty.html#PTYPE_MULTIVALUED">PTYPE_MULTIVALUED</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;MultiValued - Value part contains multiple values</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;int</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hmef/attribute/TNEFProperty.html#PTYPE_NULL">PTYPE_NULL</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Null - NULL property value</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;int</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hmef/attribute/TNEFProperty.html#PTYPE_OBJECT">PTYPE_OBJECT</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Object - embedded object in a property</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;int</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hmef/attribute/TNEFProperty.html#PTYPE_R4">PTYPE_R4</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;R4 - 4-byte floating point value</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;int</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hmef/attribute/TNEFProperty.html#PTYPE_STRING8">PTYPE_STRING8</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;String8 - null-terminated 8-bit character string</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;int</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hmef/attribute/TNEFProperty.html#PTYPE_SYSTIME">PTYPE_SYSTIME</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;SysTime - FILETIME 64-bit integer specifying the number of 100ns periods since Jan 1, 1601</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;int</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hmef/attribute/TNEFProperty.html#PTYPE_UNICODE">PTYPE_UNICODE</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Unicode - null-terminated Unicode string</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;int</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hmef/attribute/TNEFProperty.html#PTYPE_UNSPECIFIED">PTYPE_UNSPECIFIED</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Unspecified</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;int</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hmef/attribute/TNEFProperty.html#TYPE_BYTE">TYPE_BYTE</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;int</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hmef/attribute/TNEFProperty.html#TYPE_DATE">TYPE_DATE</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;int</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hmef/attribute/TNEFProperty.html#TYPE_DWORD">TYPE_DWORD</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;int</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hmef/attribute/TNEFProperty.html#TYPE_LONG">TYPE_LONG</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;int</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hmef/attribute/TNEFProperty.html#TYPE_MAX">TYPE_MAX</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;int</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hmef/attribute/TNEFProperty.html#TYPE_SHORT">TYPE_SHORT</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;int</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hmef/attribute/TNEFProperty.html#TYPE_STRING">TYPE_STRING</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;int</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hmef/attribute/TNEFProperty.html#TYPE_TEXT">TYPE_TEXT</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;int</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hmef/attribute/TNEFProperty.html#TYPE_TRIPLES">TYPE_TRIPLES</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;int</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hmef/attribute/TNEFProperty.html#TYPE_WORD">TYPE_WORD</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;int</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hmef/attribute/TNEFProperty.html#usualType">usualType</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Usual Type</TD>
+</TR>
+</TABLE>
+&nbsp;
+<!-- ========== METHOD SUMMARY =========== -->
+
+<A NAME="method_summary"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+<B>Method Summary</B></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;<A HREF="../../../../../org/apache/poi/hmef/attribute/TNEFProperty.html" title="class in org.apache.poi.hmef.attribute">TNEFProperty</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hmef/attribute/TNEFProperty.html#getBest(int, int)">getBest</A></B>(int&nbsp;id,
+        int&nbsp;type)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;java.lang.String</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hmef/attribute/TNEFProperty.html#toString()">toString</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+</TABLE>
+&nbsp;<A NAME="methods_inherited_from_class_java.lang.Object"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#EEEEFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left"><B>Methods inherited from class java.lang.Object</B></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE>clone, equals, finalize, getClass, hashCode, notify, notifyAll, wait, wait, wait</CODE></TD>
+</TR>
+</TABLE>
+&nbsp;
+<P>
+
+<!-- ============ FIELD DETAIL =========== -->
+
+<A NAME="field_detail"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="1"><FONT SIZE="+2">
+<B>Field Detail</B></FONT></TH>
+</TR>
+</TABLE>
+
+<A NAME="TYPE_TRIPLES"><!-- --></A><H3>
+TYPE_TRIPLES</H3>
+<PRE>
+public static final int <B>TYPE_TRIPLES</B></PRE>
+<DL>
+<DL>
+<DT><B>See Also:</B><DD><A HREF="../../../../../constant-values.html#org.apache.poi.hmef.attribute.TNEFProperty.TYPE_TRIPLES">Constant Field Values</A></DL>
+</DL>
+<HR>
+
+<A NAME="TYPE_STRING"><!-- --></A><H3>
+TYPE_STRING</H3>
+<PRE>
+public static final int <B>TYPE_STRING</B></PRE>
+<DL>
+<DL>
+<DT><B>See Also:</B><DD><A HREF="../../../../../constant-values.html#org.apache.poi.hmef.attribute.TNEFProperty.TYPE_STRING">Constant Field Values</A></DL>
+</DL>
+<HR>
+
+<A NAME="TYPE_TEXT"><!-- --></A><H3>
+TYPE_TEXT</H3>
+<PRE>
+public static final int <B>TYPE_TEXT</B></PRE>
+<DL>
+<DL>
+<DT><B>See Also:</B><DD><A HREF="../../../../../constant-values.html#org.apache.poi.hmef.attribute.TNEFProperty.TYPE_TEXT">Constant Field Values</A></DL>
+</DL>
+<HR>
+
+<A NAME="TYPE_DATE"><!-- --></A><H3>
+TYPE_DATE</H3>
+<PRE>
+public static final int <B>TYPE_DATE</B></PRE>
+<DL>
+<DL>
+<DT><B>See Also:</B><DD><A HREF="../../../../../constant-values.html#org.apache.poi.hmef.attribute.TNEFProperty.TYPE_DATE">Constant Field Values</A></DL>
+</DL>
+<HR>
+
+<A NAME="TYPE_SHORT"><!-- --></A><H3>
+TYPE_SHORT</H3>
+<PRE>
+public static final int <B>TYPE_SHORT</B></PRE>
+<DL>
+<DL>
+<DT><B>See Also:</B><DD><A HREF="../../../../../constant-values.html#org.apache.poi.hmef.attribute.TNEFProperty.TYPE_SHORT">Constant Field Values</A></DL>
+</DL>
+<HR>
+
+<A NAME="TYPE_LONG"><!-- --></A><H3>
+TYPE_LONG</H3>
+<PRE>
+public static final int <B>TYPE_LONG</B></PRE>
+<DL>
+<DL>
+<DT><B>See Also:</B><DD><A HREF="../../../../../constant-values.html#org.apache.poi.hmef.attribute.TNEFProperty.TYPE_LONG">Constant Field Values</A></DL>
+</DL>
+<HR>
+
+<A NAME="TYPE_BYTE"><!-- --></A><H3>
+TYPE_BYTE</H3>
+<PRE>
+public static final int <B>TYPE_BYTE</B></PRE>
+<DL>
+<DL>
+<DT><B>See Also:</B><DD><A HREF="../../../../../constant-values.html#org.apache.poi.hmef.attribute.TNEFProperty.TYPE_BYTE">Constant Field Values</A></DL>
+</DL>
+<HR>
+
+<A NAME="TYPE_WORD"><!-- --></A><H3>
+TYPE_WORD</H3>
+<PRE>
+public static final int <B>TYPE_WORD</B></PRE>
+<DL>
+<DL>
+<DT><B>See Also:</B><DD><A HREF="../../../../../constant-values.html#org.apache.poi.hmef.attribute.TNEFProperty.TYPE_WORD">Constant Field Values</A></DL>
+</DL>
+<HR>
+
+<A NAME="TYPE_DWORD"><!-- --></A><H3>
+TYPE_DWORD</H3>
+<PRE>
+public static final int <B>TYPE_DWORD</B></PRE>
+<DL>
+<DL>
+<DT><B>See Also:</B><DD><A HREF="../../../../../constant-values.html#org.apache.poi.hmef.attribute.TNEFProperty.TYPE_DWORD">Constant Field Values</A></DL>
+</DL>
+<HR>
+
+<A NAME="TYPE_MAX"><!-- --></A><H3>
+TYPE_MAX</H3>
+<PRE>
+public static final int <B>TYPE_MAX</B></PRE>
+<DL>
+<DL>
+<DT><B>See Also:</B><DD><A HREF="../../../../../constant-values.html#org.apache.poi.hmef.attribute.TNEFProperty.TYPE_MAX">Constant Field Values</A></DL>
+</DL>
+<HR>
+
+<A NAME="PTYPE_APPTIME"><!-- --></A><H3>
+PTYPE_APPTIME</H3>
+<PRE>
+public static final int <B>PTYPE_APPTIME</B></PRE>
+<DL>
+<DD>AppTime - application time value
+<P>
+<DL>
+<DT><B>See Also:</B><DD><A HREF="../../../../../constant-values.html#org.apache.poi.hmef.attribute.TNEFProperty.PTYPE_APPTIME">Constant Field Values</A></DL>
+</DL>
+<HR>
+
+<A NAME="PTYPE_BINARY"><!-- --></A><H3>
+PTYPE_BINARY</H3>
+<PRE>
+public static final int <B>PTYPE_BINARY</B></PRE>
+<DL>
+<DD>Binary - counted byte array
+<P>
+<DL>
+<DT><B>See Also:</B><DD><A HREF="../../../../../constant-values.html#org.apache.poi.hmef.attribute.TNEFProperty.PTYPE_BINARY">Constant Field Values</A></DL>
+</DL>
+<HR>
+
+<A NAME="PTYPE_BOOLEAN"><!-- --></A><H3>
+PTYPE_BOOLEAN</H3>
+<PRE>
+public static final int <B>PTYPE_BOOLEAN</B></PRE>
+<DL>
+<DD>Boolean - 16-bit Boolean value. '0' is false. Non-zero is true
+<P>
+<DL>
+<DT><B>See Also:</B><DD><A HREF="../../../../../constant-values.html#org.apache.poi.hmef.attribute.TNEFProperty.PTYPE_BOOLEAN">Constant Field Values</A></DL>
+</DL>
+<HR>
+
+<A NAME="PTYPE_CLASSID"><!-- --></A><H3>
+PTYPE_CLASSID</H3>
+<PRE>
+public static final int <B>PTYPE_CLASSID</B></PRE>
+<DL>
+<DD>ClassId - OLE GUID
+<P>
+<DL>
+<DT><B>See Also:</B><DD><A HREF="../../../../../constant-values.html#org.apache.poi.hmef.attribute.TNEFProperty.PTYPE_CLASSID">Constant Field Values</A></DL>
+</DL>
+<HR>
+
+<A NAME="PTYPE_CURRENCY"><!-- --></A><H3>
+PTYPE_CURRENCY</H3>
+<PRE>
+public static final int <B>PTYPE_CURRENCY</B></PRE>
+<DL>
+<DD>Currency - signed 64-bit integer that represents a base ten decimal with four digits to the right of the decimal point
+<P>
+<DL>
+<DT><B>See Also:</B><DD><A HREF="../../../../../constant-values.html#org.apache.poi.hmef.attribute.TNEFProperty.PTYPE_CURRENCY">Constant Field Values</A></DL>
+</DL>
+<HR>
+
+<A NAME="PTYPE_DOUBLE"><!-- --></A><H3>
+PTYPE_DOUBLE</H3>
+<PRE>
+public static final int <B>PTYPE_DOUBLE</B></PRE>
+<DL>
+<DD>Double - floating point double
+<P>
+<DL>
+<DT><B>See Also:</B><DD><A HREF="../../../../../constant-values.html#org.apache.poi.hmef.attribute.TNEFProperty.PTYPE_DOUBLE">Constant Field Values</A></DL>
+</DL>
+<HR>
+
+<A NAME="PTYPE_ERROR"><!-- --></A><H3>
+PTYPE_ERROR</H3>
+<PRE>
+public static final int <B>PTYPE_ERROR</B></PRE>
+<DL>
+<DD>Error - 32-bit error value
+<P>
+<DL>
+<DT><B>See Also:</B><DD><A HREF="../../../../../constant-values.html#org.apache.poi.hmef.attribute.TNEFProperty.PTYPE_ERROR">Constant Field Values</A></DL>
+</DL>
+<HR>
+
+<A NAME="PTYPE_I2"><!-- --></A><H3>
+PTYPE_I2</H3>
+<PRE>
+public static final int <B>PTYPE_I2</B></PRE>
+<DL>
+<DD>I2 - signed 16-bit value
+<P>
+<DL>
+<DT><B>See Also:</B><DD><A HREF="../../../../../constant-values.html#org.apache.poi.hmef.attribute.TNEFProperty.PTYPE_I2">Constant Field Values</A></DL>
+</DL>
+<HR>
+
+<A NAME="PTYPE_I8"><!-- --></A><H3>
+PTYPE_I8</H3>
+<PRE>
+public static final int <B>PTYPE_I8</B></PRE>
+<DL>
+<DD>I8 - 8-byte signed integer
+<P>
+<DL>
+<DT><B>See Also:</B><DD><A HREF="../../../../../constant-values.html#org.apache.poi.hmef.attribute.TNEFProperty.PTYPE_I8">Constant Field Values</A></DL>
+</DL>
+<HR>
+
+<A NAME="PTYPE_LONG"><!-- --></A><H3>
+PTYPE_LONG</H3>
+<PRE>
+public static final int <B>PTYPE_LONG</B></PRE>
+<DL>
+<DD>Long - signed 32-bit value
+<P>
+<DL>
+<DT><B>See Also:</B><DD><A HREF="../../../../../constant-values.html#org.apache.poi.hmef.attribute.TNEFProperty.PTYPE_LONG">Constant Field Values</A></DL>
+</DL>
+<HR>
+
+<A NAME="PTYPE_MULTIVALUED"><!-- --></A><H3>
+PTYPE_MULTIVALUED</H3>
+<PRE>
+public static final int <B>PTYPE_MULTIVALUED</B></PRE>
+<DL>
+<DD>MultiValued - Value part contains multiple values
+<P>
+<DL>
+<DT><B>See Also:</B><DD><A HREF="../../../../../constant-values.html#org.apache.poi.hmef.attribute.TNEFProperty.PTYPE_MULTIVALUED">Constant Field Values</A></DL>
+</DL>
+<HR>
+
+<A NAME="PTYPE_NULL"><!-- --></A><H3>
+PTYPE_NULL</H3>
+<PRE>
+public static final int <B>PTYPE_NULL</B></PRE>
+<DL>
+<DD>Null - NULL property value
+<P>
+<DL>
+<DT><B>See Also:</B><DD><A HREF="../../../../../constant-values.html#org.apache.poi.hmef.attribute.TNEFProperty.PTYPE_NULL">Constant Field Values</A></DL>
+</DL>
+<HR>
+
+<A NAME="PTYPE_OBJECT"><!-- --></A><H3>
+PTYPE_OBJECT</H3>
+<PRE>
+public static final int <B>PTYPE_OBJECT</B></PRE>
+<DL>
+<DD>Object - embedded object in a property
+<P>
+<DL>
+<DT><B>See Also:</B><DD><A HREF="../../../../../constant-values.html#org.apache.poi.hmef.attribute.TNEFProperty.PTYPE_OBJECT">Constant Field Values</A></DL>
+</DL>
+<HR>
+
+<A NAME="PTYPE_R4"><!-- --></A><H3>
+PTYPE_R4</H3>
+<PRE>
+public static final int <B>PTYPE_R4</B></PRE>
+<DL>
+<DD>R4 - 4-byte floating point value
+<P>
+<DL>
+<DT><B>See Also:</B><DD><A HREF="../../../../../constant-values.html#org.apache.poi.hmef.attribute.TNEFProperty.PTYPE_R4">Constant Field Values</A></DL>
+</DL>
+<HR>
+
+<A NAME="PTYPE_STRING8"><!-- --></A><H3>
+PTYPE_STRING8</H3>
+<PRE>
+public static final int <B>PTYPE_STRING8</B></PRE>
+<DL>
+<DD>String8 - null-terminated 8-bit character string
+<P>
+<DL>
+<DT><B>See Also:</B><DD><A HREF="../../../../../constant-values.html#org.apache.poi.hmef.attribute.TNEFProperty.PTYPE_STRING8">Constant Field Values</A></DL>
+</DL>
+<HR>
+
+<A NAME="PTYPE_SYSTIME"><!-- --></A><H3>
+PTYPE_SYSTIME</H3>
+<PRE>
+public static final int <B>PTYPE_SYSTIME</B></PRE>
+<DL>
+<DD>SysTime - FILETIME 64-bit integer specifying the number of 100ns periods since Jan 1, 1601
+<P>
+<DL>
+<DT><B>See Also:</B><DD><A HREF="../../../../../constant-values.html#org.apache.poi.hmef.attribute.TNEFProperty.PTYPE_SYSTIME">Constant Field Values</A></DL>
+</DL>
+<HR>
+
+<A NAME="PTYPE_UNICODE"><!-- --></A><H3>
+PTYPE_UNICODE</H3>
+<PRE>
+public static final int <B>PTYPE_UNICODE</B></PRE>
+<DL>
+<DD>Unicode - null-terminated Unicode string
+<P>
+<DL>
+<DT><B>See Also:</B><DD><A HREF="../../../../../constant-values.html#org.apache.poi.hmef.attribute.TNEFProperty.PTYPE_UNICODE">Constant Field Values</A></DL>
+</DL>
+<HR>
+
+<A NAME="PTYPE_UNSPECIFIED"><!-- --></A><H3>
+PTYPE_UNSPECIFIED</H3>
+<PRE>
+public static final int <B>PTYPE_UNSPECIFIED</B></PRE>
+<DL>
+<DD>Unspecified
+<P>
+<DL>
+<DT><B>See Also:</B><DD><A HREF="../../../../../constant-values.html#org.apache.poi.hmef.attribute.TNEFProperty.PTYPE_UNSPECIFIED">Constant Field Values</A></DL>
+</DL>
+<HR>
+
+<A NAME="LEVEL_MESSAGE"><!-- --></A><H3>
+LEVEL_MESSAGE</H3>
+<PRE>
+public static final int <B>LEVEL_MESSAGE</B></PRE>
+<DL>
+<DL>
+<DT><B>See Also:</B><DD><A HREF="../../../../../constant-values.html#org.apache.poi.hmef.attribute.TNEFProperty.LEVEL_MESSAGE">Constant Field Values</A></DL>
+</DL>
+<HR>
+
+<A NAME="LEVEL_ATTACHMENT"><!-- --></A><H3>
+LEVEL_ATTACHMENT</H3>
+<PRE>
+public static final int <B>LEVEL_ATTACHMENT</B></PRE>
+<DL>
+<DL>
+<DT><B>See Also:</B><DD><A HREF="../../../../../constant-values.html#org.apache.poi.hmef.attribute.TNEFProperty.LEVEL_ATTACHMENT">Constant Field Values</A></DL>
+</DL>
+<HR>
+
+<A NAME="LEVEL_END_OF_FILE"><!-- --></A><H3>
+LEVEL_END_OF_FILE</H3>
+<PRE>
+public static final int <B>LEVEL_END_OF_FILE</B></PRE>
+<DL>
+<DL>
+<DT><B>See Also:</B><DD><A HREF="../../../../../constant-values.html#org.apache.poi.hmef.attribute.TNEFProperty.LEVEL_END_OF_FILE">Constant Field Values</A></DL>
+</DL>
+<HR>
+
+<A NAME="ID_AIDOWNER"><!-- --></A><H3>
+ID_AIDOWNER</H3>
+<PRE>
+public static final <A HREF="../../../../../org/apache/poi/hmef/attribute/TNEFProperty.html" title="class in org.apache.poi.hmef.attribute">TNEFProperty</A> <B>ID_AIDOWNER</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="ID_ATTACHCREATEDATE"><!-- --></A><H3>
+ID_ATTACHCREATEDATE</H3>
+<PRE>
+public static final <A HREF="../../../../../org/apache/poi/hmef/attribute/TNEFProperty.html" title="class in org.apache.poi.hmef.attribute">TNEFProperty</A> <B>ID_ATTACHCREATEDATE</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="ID_ATTACHDATA"><!-- --></A><H3>
+ID_ATTACHDATA</H3>
+<PRE>
+public static final <A HREF="../../../../../org/apache/poi/hmef/attribute/TNEFProperty.html" title="class in org.apache.poi.hmef.attribute">TNEFProperty</A> <B>ID_ATTACHDATA</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="ID_ATTACHMENT"><!-- --></A><H3>
+ID_ATTACHMENT</H3>
+<PRE>
+public static final <A HREF="../../../../../org/apache/poi/hmef/attribute/TNEFProperty.html" title="class in org.apache.poi.hmef.attribute">TNEFProperty</A> <B>ID_ATTACHMENT</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="ID_ATTACHMETAFILE"><!-- --></A><H3>
+ID_ATTACHMETAFILE</H3>
+<PRE>
+public static final <A HREF="../../../../../org/apache/poi/hmef/attribute/TNEFProperty.html" title="class in org.apache.poi.hmef.attribute">TNEFProperty</A> <B>ID_ATTACHMETAFILE</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="ID_ATTACHMODIFYDATE"><!-- --></A><H3>
+ID_ATTACHMODIFYDATE</H3>
+<PRE>
+public static final <A HREF="../../../../../org/apache/poi/hmef/attribute/TNEFProperty.html" title="class in org.apache.poi.hmef.attribute">TNEFProperty</A> <B>ID_ATTACHMODIFYDATE</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="ID_ATTACHRENDERDATA"><!-- --></A><H3>
+ID_ATTACHRENDERDATA</H3>
+<PRE>
+public static final <A HREF="../../../../../org/apache/poi/hmef/attribute/TNEFProperty.html" title="class in org.apache.poi.hmef.attribute">TNEFProperty</A> <B>ID_ATTACHRENDERDATA</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="ID_ATTACHTITLE"><!-- --></A><H3>
+ID_ATTACHTITLE</H3>
+<PRE>
+public static final <A HREF="../../../../../org/apache/poi/hmef/attribute/TNEFProperty.html" title="class in org.apache.poi.hmef.attribute">TNEFProperty</A> <B>ID_ATTACHTITLE</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="ID_ATTACHTRANSPORTFILENAME"><!-- --></A><H3>
+ID_ATTACHTRANSPORTFILENAME</H3>
+<PRE>
+public static final <A HREF="../../../../../org/apache/poi/hmef/attribute/TNEFProperty.html" title="class in org.apache.poi.hmef.attribute">TNEFProperty</A> <B>ID_ATTACHTRANSPORTFILENAME</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="ID_BODY"><!-- --></A><H3>
+ID_BODY</H3>
+<PRE>
+public static final <A HREF="../../../../../org/apache/poi/hmef/attribute/TNEFProperty.html" title="class in org.apache.poi.hmef.attribute">TNEFProperty</A> <B>ID_BODY</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="ID_CONVERSATIONID"><!-- --></A><H3>
+ID_CONVERSATIONID</H3>
+<PRE>
+public static final <A HREF="../../../../../org/apache/poi/hmef/attribute/TNEFProperty.html" title="class in org.apache.poi.hmef.attribute">TNEFProperty</A> <B>ID_CONVERSATIONID</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="ID_DATEEND"><!-- --></A><H3>
+ID_DATEEND</H3>
+<PRE>
+public static final <A HREF="../../../../../org/apache/poi/hmef/attribute/TNEFProperty.html" title="class in org.apache.poi.hmef.attribute">TNEFProperty</A> <B>ID_DATEEND</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="ID_DATEMODIFIED"><!-- --></A><H3>
+ID_DATEMODIFIED</H3>
+<PRE>
+public static final <A HREF="../../../../../org/apache/poi/hmef/attribute/TNEFProperty.html" title="class in org.apache.poi.hmef.attribute">TNEFProperty</A> <B>ID_DATEMODIFIED</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="ID_DATERECEIVED"><!-- --></A><H3>
+ID_DATERECEIVED</H3>
+<PRE>
+public static final <A HREF="../../../../../org/apache/poi/hmef/attribute/TNEFProperty.html" title="class in org.apache.poi.hmef.attribute">TNEFProperty</A> <B>ID_DATERECEIVED</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="ID_DATESENT"><!-- --></A><H3>
+ID_DATESENT</H3>
+<PRE>
+public static final <A HREF="../../../../../org/apache/poi/hmef/attribute/TNEFProperty.html" title="class in org.apache.poi.hmef.attribute">TNEFProperty</A> <B>ID_DATESENT</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="ID_DATESTART"><!-- --></A><H3>
+ID_DATESTART</H3>
+<PRE>
+public static final <A HREF="../../../../../org/apache/poi/hmef/attribute/TNEFProperty.html" title="class in org.apache.poi.hmef.attribute">TNEFProperty</A> <B>ID_DATESTART</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="ID_DELEGATE"><!-- --></A><H3>
+ID_DELEGATE</H3>
+<PRE>
+public static final <A HREF="../../../../../org/apache/poi/hmef/attribute/TNEFProperty.html" title="class in org.apache.poi.hmef.attribute">TNEFProperty</A> <B>ID_DELEGATE</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="ID_FROM"><!-- --></A><H3>
+ID_FROM</H3>
+<PRE>
+public static final <A HREF="../../../../../org/apache/poi/hmef/attribute/TNEFProperty.html" title="class in org.apache.poi.hmef.attribute">TNEFProperty</A> <B>ID_FROM</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="ID_MAPIPROPERTIES"><!-- --></A><H3>
+ID_MAPIPROPERTIES</H3>
+<PRE>
+public static final <A HREF="../../../../../org/apache/poi/hmef/attribute/TNEFProperty.html" title="class in org.apache.poi.hmef.attribute">TNEFProperty</A> <B>ID_MAPIPROPERTIES</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="ID_MESSAGECLASS"><!-- --></A><H3>
+ID_MESSAGECLASS</H3>
+<PRE>
+public static final <A HREF="../../../../../org/apache/poi/hmef/attribute/TNEFProperty.html" title="class in org.apache.poi.hmef.attribute">TNEFProperty</A> <B>ID_MESSAGECLASS</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="ID_MESSAGEID"><!-- --></A><H3>
+ID_MESSAGEID</H3>
+<PRE>
+public static final <A HREF="../../../../../org/apache/poi/hmef/attribute/TNEFProperty.html" title="class in org.apache.poi.hmef.attribute">TNEFProperty</A> <B>ID_MESSAGEID</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="ID_MESSAGESTATUS"><!-- --></A><H3>
+ID_MESSAGESTATUS</H3>
+<PRE>
+public static final <A HREF="../../../../../org/apache/poi/hmef/attribute/TNEFProperty.html" title="class in org.apache.poi.hmef.attribute">TNEFProperty</A> <B>ID_MESSAGESTATUS</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="ID_NULL"><!-- --></A><H3>
+ID_NULL</H3>
+<PRE>
+public static final <A HREF="../../../../../org/apache/poi/hmef/attribute/TNEFProperty.html" title="class in org.apache.poi.hmef.attribute">TNEFProperty</A> <B>ID_NULL</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="ID_OEMCODEPAGE"><!-- --></A><H3>
+ID_OEMCODEPAGE</H3>
+<PRE>
+public static final <A HREF="../../../../../org/apache/poi/hmef/attribute/TNEFProperty.html" title="class in org.apache.poi.hmef.attribute">TNEFProperty</A> <B>ID_OEMCODEPAGE</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="ID_ORIGINALMESSAGECLASS"><!-- --></A><H3>
+ID_ORIGINALMESSAGECLASS</H3>
+<PRE>
+public static final <A HREF="../../../../../org/apache/poi/hmef/attribute/TNEFProperty.html" title="class in org.apache.poi.hmef.attribute">TNEFProperty</A> <B>ID_ORIGINALMESSAGECLASS</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="ID_OWNER"><!-- --></A><H3>
+ID_OWNER</H3>
+<PRE>
+public static final <A HREF="../../../../../org/apache/poi/hmef/attribute/TNEFProperty.html" title="class in org.apache.poi.hmef.attribute">TNEFProperty</A> <B>ID_OWNER</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="ID_PARENTID"><!-- --></A><H3>
+ID_PARENTID</H3>
+<PRE>
+public static final <A HREF="../../../../../org/apache/poi/hmef/attribute/TNEFProperty.html" title="class in org.apache.poi.hmef.attribute">TNEFProperty</A> <B>ID_PARENTID</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="ID_PRIORITY"><!-- --></A><H3>
+ID_PRIORITY</H3>
+<PRE>
+public static final <A HREF="../../../../../org/apache/poi/hmef/attribute/TNEFProperty.html" title="class in org.apache.poi.hmef.attribute">TNEFProperty</A> <B>ID_PRIORITY</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="ID_RECIPIENTTABLE"><!-- --></A><H3>
+ID_RECIPIENTTABLE</H3>
+<PRE>
+public static final <A HREF="../../../../../org/apache/poi/hmef/attribute/TNEFProperty.html" title="class in org.apache.poi.hmef.attribute">TNEFProperty</A> <B>ID_RECIPIENTTABLE</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="ID_REQUESTRESPONSE"><!-- --></A><H3>
+ID_REQUESTRESPONSE</H3>
+<PRE>
+public static final <A HREF="../../../../../org/apache/poi/hmef/attribute/TNEFProperty.html" title="class in org.apache.poi.hmef.attribute">TNEFProperty</A> <B>ID_REQUESTRESPONSE</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="ID_SENTFOR"><!-- --></A><H3>
+ID_SENTFOR</H3>
+<PRE>
+public static final <A HREF="../../../../../org/apache/poi/hmef/attribute/TNEFProperty.html" title="class in org.apache.poi.hmef.attribute">TNEFProperty</A> <B>ID_SENTFOR</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="ID_SUBJECT"><!-- --></A><H3>
+ID_SUBJECT</H3>
+<PRE>
+public static final <A HREF="../../../../../org/apache/poi/hmef/attribute/TNEFProperty.html" title="class in org.apache.poi.hmef.attribute">TNEFProperty</A> <B>ID_SUBJECT</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="ID_TNEFVERSION"><!-- --></A><H3>
+ID_TNEFVERSION</H3>
+<PRE>
+public static final <A HREF="../../../../../org/apache/poi/hmef/attribute/TNEFProperty.html" title="class in org.apache.poi.hmef.attribute">TNEFProperty</A> <B>ID_TNEFVERSION</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="ID_UNKNOWN"><!-- --></A><H3>
+ID_UNKNOWN</H3>
+<PRE>
+public static final <A HREF="../../../../../org/apache/poi/hmef/attribute/TNEFProperty.html" title="class in org.apache.poi.hmef.attribute">TNEFProperty</A> <B>ID_UNKNOWN</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="id"><!-- --></A><H3>
+id</H3>
+<PRE>
+public final int <B>id</B></PRE>
+<DL>
+<DD>The TNEF Property ID
+<P>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="usualType"><!-- --></A><H3>
+usualType</H3>
+<PRE>
+public final int <B>usualType</B></PRE>
+<DL>
+<DD>Usual Type
+<P>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="name"><!-- --></A><H3>
+name</H3>
+<PRE>
+public final java.lang.String <B>name</B></PRE>
+<DL>
+<DD>Property Name
+<P>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="mapiProperty"><!-- --></A><H3>
+mapiProperty</H3>
+<PRE>
+public final java.lang.String <B>mapiProperty</B></PRE>
+<DL>
+<DD>Equivalent MAPI Property
+<P>
+<DL>
+</DL>
+</DL>
+
+<!-- ============ METHOD DETAIL ========== -->
+
+<A NAME="method_detail"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="1"><FONT SIZE="+2">
+<B>Method Detail</B></FONT></TH>
+</TR>
+</TABLE>
+
+<A NAME="getBest(int, int)"><!-- --></A><H3>
+getBest</H3>
+<PRE>
+public static <A HREF="../../../../../org/apache/poi/hmef/attribute/TNEFProperty.html" title="class in org.apache.poi.hmef.attribute">TNEFProperty</A> <B>getBest</B>(int&nbsp;id,
+                                   int&nbsp;type)</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="toString()"><!-- --></A><H3>
+toString</H3>
+<PRE>
+public java.lang.String <B>toString</B>()</PRE>
+<DL>
+<DD><DL>
+<DT><B>Overrides:</B><DD><CODE>toString</CODE> in class <CODE>java.lang.Object</CODE></DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<!-- ========= END OF CLASS DATA ========= -->
+<HR>
+
+
+<!-- ======= START OF BOTTOM NAVBAR ====== -->
+<A NAME="navbar_bottom"><!-- --></A>
+<A HREF="#skip-navbar_bottom" title="Skip navigation links"></A>
+<TABLE BORDER="0" WIDTH="100%" CELLPADDING="1" CELLSPACING="0" SUMMARY="">
+<TR>
+<TD COLSPAN=2 BGCOLOR="#EEEEFF" CLASS="NavBarCell1">
+<A NAME="navbar_bottom_firstrow"><!-- --></A>
+<TABLE BORDER="0" CELLPADDING="0" CELLSPACING="3" SUMMARY="">
+  <TR ALIGN="center" VALIGN="top">
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../overview-summary.html"><FONT CLASS="NavBarFont1"><B>Overview</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="package-summary.html"><FONT CLASS="NavBarFont1"><B>Package</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#FFFFFF" CLASS="NavBarCell1Rev"> &nbsp;<FONT CLASS="NavBarFont1Rev"><B>Class</B></FONT>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="class-use/TNEFProperty.html"><FONT CLASS="NavBarFont1"><B>Use</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="package-tree.html"><FONT CLASS="NavBarFont1"><B>Tree</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../deprecated-list.html"><FONT CLASS="NavBarFont1"><B>Deprecated</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../index-all.html"><FONT CLASS="NavBarFont1"><B>Index</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../help-doc.html"><FONT CLASS="NavBarFont1"><B>Help</B></FONT></A>&nbsp;</TD>
+  </TR>
+</TABLE>
+</TD>
+<TD ALIGN="right" VALIGN="top" ROWSPAN=3><EM>
+</EM>
+</TD>
+</TR>
+
+<TR>
+<TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
+&nbsp;<A HREF="../../../../../org/apache/poi/hmef/attribute/TNEFMAPIAttribute.html" title="class in org.apache.poi.hmef.attribute"><B>PREV CLASS</B></A>&nbsp;
+&nbsp;<A HREF="../../../../../org/apache/poi/hmef/attribute/TNEFStringAttribute.html" title="class in org.apache.poi.hmef.attribute"><B>NEXT CLASS</B></A></FONT></TD>
+<TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
+  <A HREF="../../../../../index.html?org/apache/poi/hmef/attribute/TNEFProperty.html" target="_top"><B>FRAMES</B></A>  &nbsp;
+&nbsp;<A HREF="TNEFProperty.html" target="_top"><B>NO FRAMES</B></A>  &nbsp;
+&nbsp;<SCRIPT type="text/javascript">
+  <!--
+  if(window==top) {
+    document.writeln('<A HREF="../../../../../allclasses-noframe.html"><B>All Classes</B></A>');
+  }
+  //-->
+</SCRIPT>
+<NOSCRIPT>
+  <A HREF="../../../../../allclasses-noframe.html"><B>All Classes</B></A>
+</NOSCRIPT>
+
+
+</FONT></TD>
+</TR>
+<TR>
+<TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
+  SUMMARY:&nbsp;NESTED&nbsp;|&nbsp;<A HREF="#field_summary">FIELD</A>&nbsp;|&nbsp;CONSTR&nbsp;|&nbsp;<A HREF="#method_summary">METHOD</A></FONT></TD>
+<TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
+DETAIL:&nbsp;<A HREF="#field_detail">FIELD</A>&nbsp;|&nbsp;CONSTR&nbsp;|&nbsp;<A HREF="#method_detail">METHOD</A></FONT></TD>
+</TR>
+</TABLE>
+<A NAME="skip-navbar_bottom"></A>
+<!-- ======== END OF BOTTOM NAVBAR ======= -->
+
+<HR>
+
+                <i>Copyright 2014 The Apache Software Foundation or
+        its licensors, as applicable.</i>
+            
+</BODY>
+</HTML>

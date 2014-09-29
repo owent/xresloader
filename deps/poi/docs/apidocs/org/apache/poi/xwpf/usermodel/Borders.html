@@ -1,0 +1,3553 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!--NewPage-->
+<HTML>
+<HEAD>
+<TITLE>
+Borders (POI API Documentation)
+</TITLE>
+
+<META NAME="keywords" CONTENT="org.apache.poi.xwpf.usermodel.Borders class">
+
+<LINK REL ="stylesheet" TYPE="text/css" HREF="../../../../../stylesheet.css" TITLE="Style">
+
+<SCRIPT type="text/javascript">
+function windowTitle()
+{
+    parent.document.title="Borders (POI API Documentation)";
+}
+</SCRIPT>
+<NOSCRIPT>
+</NOSCRIPT>
+
+</HEAD>
+
+<BODY BGCOLOR="white" onload="windowTitle();">
+
+
+<!-- ========= START OF TOP NAVBAR ======= -->
+<A NAME="navbar_top"><!-- --></A>
+<A HREF="#skip-navbar_top" title="Skip navigation links"></A>
+<TABLE BORDER="0" WIDTH="100%" CELLPADDING="1" CELLSPACING="0" SUMMARY="">
+<TR>
+<TD COLSPAN=2 BGCOLOR="#EEEEFF" CLASS="NavBarCell1">
+<A NAME="navbar_top_firstrow"><!-- --></A>
+<TABLE BORDER="0" CELLPADDING="0" CELLSPACING="3" SUMMARY="">
+  <TR ALIGN="center" VALIGN="top">
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../overview-summary.html"><FONT CLASS="NavBarFont1"><B>Overview</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="package-summary.html"><FONT CLASS="NavBarFont1"><B>Package</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#FFFFFF" CLASS="NavBarCell1Rev"> &nbsp;<FONT CLASS="NavBarFont1Rev"><B>Class</B></FONT>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="class-use/Borders.html"><FONT CLASS="NavBarFont1"><B>Use</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="package-tree.html"><FONT CLASS="NavBarFont1"><B>Tree</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../deprecated-list.html"><FONT CLASS="NavBarFont1"><B>Deprecated</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../index-all.html"><FONT CLASS="NavBarFont1"><B>Index</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../help-doc.html"><FONT CLASS="NavBarFont1"><B>Help</B></FONT></A>&nbsp;</TD>
+  </TR>
+</TABLE>
+</TD>
+<TD ALIGN="right" VALIGN="top" ROWSPAN=3><EM>
+</EM>
+</TD>
+</TR>
+
+<TR>
+<TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
+&nbsp;<A HREF="../../../../../org/apache/poi/xwpf/usermodel/BodyType.html" title="enum in org.apache.poi.xwpf.usermodel"><B>PREV CLASS</B></A>&nbsp;
+&nbsp;<A HREF="../../../../../org/apache/poi/xwpf/usermodel/BreakClear.html" title="enum in org.apache.poi.xwpf.usermodel"><B>NEXT CLASS</B></A></FONT></TD>
+<TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
+  <A HREF="../../../../../index.html?org/apache/poi/xwpf/usermodel/Borders.html" target="_top"><B>FRAMES</B></A>  &nbsp;
+&nbsp;<A HREF="Borders.html" target="_top"><B>NO FRAMES</B></A>  &nbsp;
+&nbsp;<SCRIPT type="text/javascript">
+  <!--
+  if(window==top) {
+    document.writeln('<A HREF="../../../../../allclasses-noframe.html"><B>All Classes</B></A>');
+  }
+  //-->
+</SCRIPT>
+<NOSCRIPT>
+  <A HREF="../../../../../allclasses-noframe.html"><B>All Classes</B></A>
+</NOSCRIPT>
+
+
+</FONT></TD>
+</TR>
+<TR>
+<TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
+  SUMMARY:&nbsp;NESTED&nbsp;|&nbsp;<A HREF="#enum_constant_summary">ENUM CONSTANTS</A>&nbsp;|&nbsp;FIELD&nbsp;|&nbsp;<A HREF="#method_summary">METHOD</A></FONT></TD>
+<TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
+DETAIL:&nbsp;<A HREF="#enum_constant_detail">ENUM CONSTANTS</A>&nbsp;|&nbsp;FIELD&nbsp;|&nbsp;<A HREF="#method_detail">METHOD</A></FONT></TD>
+</TR>
+</TABLE>
+<A NAME="skip-navbar_top"></A>
+<!-- ========= END OF TOP NAVBAR ========= -->
+
+<HR>
+<!-- ======== START OF CLASS DATA ======== -->
+<H2>
+<FONT SIZE="-1">
+org.apache.poi.xwpf.usermodel</FONT>
+<BR>
+Enum Borders</H2>
+<PRE>
+java.lang.Object
+  <IMG SRC="../../../../../resources/inherit.gif" ALT="extended by ">java.lang.Enum&lt;<A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html" title="enum in org.apache.poi.xwpf.usermodel">Borders</A>&gt;
+      <IMG SRC="../../../../../resources/inherit.gif" ALT="extended by "><B>org.apache.poi.xwpf.usermodel.Borders</B>
+</PRE>
+<DL>
+<DT><B>All Implemented Interfaces:</B> <DD>java.io.Serializable, java.lang.Comparable&lt;<A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html" title="enum in org.apache.poi.xwpf.usermodel">Borders</A>&gt;</DD>
+</DL>
+<HR>
+<DL>
+<DT><PRE>public enum <B>Borders</B><DT>extends java.lang.Enum&lt;<A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html" title="enum in org.apache.poi.xwpf.usermodel">Borders</A>&gt;</DL>
+</PRE>
+
+<P>
+Specifies all types of borders which can be specified for WordprocessingML
+ objects which have a border. Borders can be separated into two types:
+ <ul>
+ <li> Line borders: which specify a pattern to be used when drawing a line around the
+ specified object.
+ </li>
+ <li> Art borders: which specify a repeated image to be used
+ when drawing a border around the specified object. Line borders may be
+ specified on any object which allows a border, however, art borders may only
+ be used as a border at the page level - the borders under the pgBorders
+ element
+</li>
+ </ul>
+<P>
+
+<P>
+<DL>
+<DT><B>Author:</B></DT>
+  <DD>Gisella Bronzetti</DD>
+</DL>
+<HR>
+
+<P>
+<!-- =========== ENUM CONSTANT SUMMARY =========== -->
+
+<A NAME="enum_constant_summary"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+<B>Enum Constant Summary</B></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html#APPLES">APPLES</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Specifies an art border consisting of a repeated image of an apple</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html#ARCHED_SCALLOPS">ARCHED_SCALLOPS</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Specifies an art border consisting of a repeated image of a shell pattern</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html#BABY_PACIFIER">BABY_PACIFIER</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Specifies an art border consisting of a repeated image of a baby pacifier</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html#BABY_RATTLE">BABY_RATTLE</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Specifies an art border consisting of a repeated image of a baby rattle</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html#BALLOONS_3_COLORS">BALLOONS_3_COLORS</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Specifies an art border consisting of a repeated image of a set of
+ balloons</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html#BALLOONS_HOT_AIR">BALLOONS_HOT_AIR</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Specifies an art border consisting of a repeated image of a hot air
+ balloon</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html#BASIC_BLACK_DASHES">BASIC_BLACK_DASHES</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Specifies an art border consisting of a repeating image of a black and
+ white background.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html#BASIC_BLACK_DOTS">BASIC_BLACK_DOTS</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Specifies an art border consisting of a repeating image of a black dot on
+ a white background.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html#BASIC_BLACK_SQUARES">BASIC_BLACK_SQUARES</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Specifies an art border consisting of a repeating image of a black and
+ white background</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html#BASIC_THIN_LINES">BASIC_THIN_LINES</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Specifies an art border consisting of a repeating image of a black and
+ white background.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html#BASIC_WHITE_DASHES">BASIC_WHITE_DASHES</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Specifies an art border consisting of a repeating image of a black and
+ white background.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html#BASIC_WHITE_DOTS">BASIC_WHITE_DOTS</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Specifies an art border consisting of a repeating image of a white dot on
+ a black background.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html#BASIC_WHITE_SQUARES">BASIC_WHITE_SQUARES</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Specifies an art border consisting of a repeating image of a black and
+ white background.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html#BASIC_WIDE_INLINE">BASIC_WIDE_INLINE</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Specifies an art border consisting of a repeating image of a black and
+ white background.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html#BASIC_WIDE_MIDLINE">BASIC_WIDE_MIDLINE</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Specifies an art border consisting of a repeating image of a black and
+ white background</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html#BASIC_WIDE_OUTLINE">BASIC_WIDE_OUTLINE</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Specifies an art border consisting of a repeating image of a black and
+ white background</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html#BATS">BATS</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Specifies an art border consisting of a repeated image of bats</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html#BIRDS">BIRDS</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Specifies an art border consisting of repeating images of birds</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html#BIRDS_FLIGHT">BIRDS_FLIGHT</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Specifies an art border consisting of a repeated image of birds flying</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html#CABINS">CABINS</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Specifies an art border consisting of a repeated image of a cabin</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html#CAKE_SLICE">CAKE_SLICE</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Specifies an art border consisting of a repeated image of a piece of cake</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html#CANDY_CORN">CANDY_CORN</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Specifies an art border consisting of a repeated image of candy corn</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html#CELTIC_KNOTWORK">CELTIC_KNOTWORK</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Specifies an art border consisting of a repeated image of a knot work
+ pattern</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html#CERTIFICATE_BANNER">CERTIFICATE_BANNER</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Specifies an art border consisting of a banner.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html#CHAIN_LINK">CHAIN_LINK</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Specifies an art border consisting of a repeating image of a chain link
+ pattern.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html#CHAMPAGNE_BOTTLE">CHAMPAGNE_BOTTLE</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Specifies an art border consisting of a repeated image of a champagne
+ bottle</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html#CHECKED_BAR_BLACK">CHECKED_BAR_BLACK</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Specifies an art border consisting of repeating images of a compass</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html#CHECKED_BAR_COLOR">CHECKED_BAR_COLOR</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Specifies an art border consisting of a repeating image of a colored
+ pattern.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html#CHECKERED">CHECKERED</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Specifies an art border consisting of a repeated image of a checkerboard</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html#CHRISTMAS_TREE">CHRISTMAS_TREE</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Specifies an art border consisting of a repeated image of a Christmas
+ tree</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html#CIRCLES_LINES">CIRCLES_LINES</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Specifies an art border consisting of repeating images of lines and
+ circles</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html#CIRCLES_RECTANGLES">CIRCLES_RECTANGLES</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Specifies an art border consisting of a repeated image of a rectangular
+ pattern</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html#CLASSICAL_WAVE">CLASSICAL_WAVE</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Specifies an art border consisting of a repeated image of a wave</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html#CLOCKS">CLOCKS</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Specifies an art border consisting of a repeated image of a clock</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html#COMPASS">COMPASS</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Specifies an art border consisting of repeating images of a compass</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html#CONFETTI">CONFETTI</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Specifies an art border consisting of a repeated image of confetti</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html#CONFETTI_GRAYS">CONFETTI_GRAYS</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Specifies an art border consisting of a repeated image of confetti</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html#CONFETTI_OUTLINE">CONFETTI_OUTLINE</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Specifies an art border consisting of a repeated image of confetti</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html#CONFETTI_STREAMERS">CONFETTI_STREAMERS</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Specifies an art border consisting of a repeated image of confetti
+ streamers</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html#CONFETTI_WHITE">CONFETTI_WHITE</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Specifies an art border consisting of a repeated image of confetti</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html#CORNER_TRIANGLES">CORNER_TRIANGLES</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Specifies an art border consisting of a repeated image</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html#COUPON_CUTOUT_DASHES">COUPON_CUTOUT_DASHES</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Specifies an art border consisting of a dashed line</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html#COUPON_CUTOUT_DOTS">COUPON_CUTOUT_DOTS</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Specifies an art border consisting of a dotted line</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html#CRAZY_MAZE">CRAZY_MAZE</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Specifies an art border consisting of a repeated image of a maze-like
+ pattern</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html#CREATURES_BUTTERFLY">CREATURES_BUTTERFLY</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Specifies an art border consisting of a repeated image of a butterfly</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html#CREATURES_FISH">CREATURES_FISH</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Specifies an art border consisting of a repeated image of a fish</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html#CREATURES_INSECTS">CREATURES_INSECTS</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Specifies an art border consisting of repeating images of insects.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html#CREATURES_LADY_BUG">CREATURES_LADY_BUG</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Specifies an art border consisting of a repeated image of a ladybug</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html#CROSS_STITCH">CROSS_STITCH</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Specifies an art border consisting of repeating images of a cross-stitch
+ pattern</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html#CUP">CUP</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Specifies an art border consisting of a repeated image of Cupid</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html#DASH_DOT_STROKED">DASH_DOT_STROKED</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html#DASH_SMALL_GAP">DASH_SMALL_GAP</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html#DASHED">DASHED</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html#DECO_ARCH">DECO_ARCH</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html#DECO_ARCH_COLOR">DECO_ARCH_COLOR</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html#DECO_BLOCKS">DECO_BLOCKS</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html#DIAMONDS_GRAY">DIAMONDS_GRAY</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html#DOT_DASH">DOT_DASH</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html#DOT_DOT_DASH">DOT_DOT_DASH</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html#DOTTED">DOTTED</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html#DOUBLE">DOUBLE</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html#DOUBLE_D">DOUBLE_D</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html#DOUBLE_DIAMONDS">DOUBLE_DIAMONDS</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html#DOUBLE_WAVE">DOUBLE_WAVE</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html#EARTH_1">EARTH_1</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html#EARTH_2">EARTH_2</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html#ECLIPSING_SQUARES_1">ECLIPSING_SQUARES_1</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html#ECLIPSING_SQUARES_2">ECLIPSING_SQUARES_2</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html#EGGS_BLACK">EGGS_BLACK</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html#FANS">FANS</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html#FILM">FILM</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html#FIRECRACKERS">FIRECRACKERS</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html#FLOWERS_BLOCK_PRINT">FLOWERS_BLOCK_PRINT</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html#FLOWERS_DAISIES">FLOWERS_DAISIES</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html#FLOWERS_MODERN_1">FLOWERS_MODERN_1</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html#FLOWERS_MODERN_2">FLOWERS_MODERN_2</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html#FLOWERS_PANSY">FLOWERS_PANSY</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html#FLOWERS_RED_ROSE">FLOWERS_RED_ROSE</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html#FLOWERS_ROSES">FLOWERS_ROSES</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html#FLOWERS_TEACUP">FLOWERS_TEACUP</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html#FLOWERS_TINY">FLOWERS_TINY</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html#GEMS">GEMS</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html#GINGERBREAD_MAN">GINGERBREAD_MAN</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html#GRADIENT">GRADIENT</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html#HANDMADE_1">HANDMADE_1</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html#HANDMADE_2">HANDMADE_2</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html#HEART_BALLOON">HEART_BALLOON</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html#HEART_GRAY">HEART_GRAY</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html#HEARTS">HEARTS</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html#HEEBIE_JEEBIES">HEEBIE_JEEBIES</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html#HOLLY">HOLLY</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html#HOUSE_FUNKY">HOUSE_FUNKY</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html#HYPNOTIC">HYPNOTIC</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html#ICE_CREAM_CONES">ICE_CREAM_CONES</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html#INSET">INSET</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html#LIGHT_BULB">LIGHT_BULB</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html#LIGHTNING_1">LIGHTNING_1</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html#LIGHTNING_2">LIGHTNING_2</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html#MAP_PINS">MAP_PINS</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html#MAPLE_LEAF">MAPLE_LEAF</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html#MAPLE_MUFFINS">MAPLE_MUFFINS</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html#MARQUEE">MARQUEE</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html#MARQUEE_TOOTHED">MARQUEE_TOOTHED</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html#MOONS">MOONS</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html#MOSAIC">MOSAIC</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html#MUSIC_NOTES">MUSIC_NOTES</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html#NIL">NIL</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html#NONE">NONE</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html#NORTHWEST">NORTHWEST</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html#OUTSET">OUTSET</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html#OVALS">OVALS</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html#PACKAGES">PACKAGES</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html#PALMS_BLACK">PALMS_BLACK</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html#PALMS_COLOR">PALMS_COLOR</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html#PAPER_CLIPS">PAPER_CLIPS</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html#PAPYRUS">PAPYRUS</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html#PARTY_FAVOR">PARTY_FAVOR</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html#PARTY_GLASS">PARTY_GLASS</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html#PENCILS">PENCILS</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html#PEOPLE">PEOPLE</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html#PEOPLE_HATS">PEOPLE_HATS</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html#PEOPLE_WAVING">PEOPLE_WAVING</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html#POINSETTIAS">POINSETTIAS</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html#POSTAGE_STAMP">POSTAGE_STAMP</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html#PUMPKIN_1">PUMPKIN_1</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html#PUSH_PIN_NOTE_1">PUSH_PIN_NOTE_1</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html#PUSH_PIN_NOTE_2">PUSH_PIN_NOTE_2</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html#PYRAMIDS">PYRAMIDS</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html#PYRAMIDS_ABOVE">PYRAMIDS_ABOVE</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html#QUADRANTS">QUADRANTS</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html#RINGS">RINGS</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html#SAFARI">SAFARI</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html#SAWTOOTH">SAWTOOTH</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html#SAWTOOTH_GRAY">SAWTOOTH_GRAY</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html#SCARED_CAT">SCARED_CAT</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html#SEATTLE">SEATTLE</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html#SHADOWED_SQUARES">SHADOWED_SQUARES</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html#SHARKS_TEETH">SHARKS_TEETH</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html#SHOREBIRD_TRACKS">SHOREBIRD_TRACKS</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html#SINGLE">SINGLE</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Specifies a line border consisting of a single line around the parent
+ object.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html#SKYROCKET">SKYROCKET</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html#SNOWFLAKE_FANCY">SNOWFLAKE_FANCY</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html#SNOWFLAKES">SNOWFLAKES</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html#SOMBRERO">SOMBRERO</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html#SOUTHWEST">SOUTHWEST</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html#STARS">STARS</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html#STARS_3_D">STARS_3_D</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html#STARS_BLACK">STARS_BLACK</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html#STARS_SHADOWED">STARS_SHADOWED</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html#STARS_TOP">STARS_TOP</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html#SUN">SUN</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html#SWIRLIGIG">SWIRLIGIG</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html#THICK">THICK</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html#THICK_THIN_LARGE_GAP">THICK_THIN_LARGE_GAP</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html#THICK_THIN_MEDIUM_GAP">THICK_THIN_MEDIUM_GAP</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html#THICK_THIN_SMALL_GAP">THICK_THIN_SMALL_GAP</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html#THIN_THICK_LARGE_GAP">THIN_THICK_LARGE_GAP</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html#THIN_THICK_MEDIUM_GAP">THIN_THICK_MEDIUM_GAP</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html#THIN_THICK_SMALL_GAP">THIN_THICK_SMALL_GAP</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html#THIN_THICK_THIN_LARGE_GAP">THIN_THICK_THIN_LARGE_GAP</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html#THIN_THICK_THIN_MEDIUM_GAP">THIN_THICK_THIN_MEDIUM_GAP</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html#THIN_THICK_THIN_SMALL_GAP">THIN_THICK_THIN_SMALL_GAP</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html#THREE_D_EMBOSS">THREE_D_EMBOSS</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html#THREE_D_ENGRAVE">THREE_D_ENGRAVE</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html#TORN_PAPER">TORN_PAPER</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html#TORN_PAPER_BLACK">TORN_PAPER_BLACK</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html#TREES">TREES</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html#TRIANGLE_PARTY">TRIANGLE_PARTY</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html#TRIANGLES">TRIANGLES</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html#TRIBAL_1">TRIBAL_1</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html#TRIBAL_2">TRIBAL_2</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html#TRIBAL_3">TRIBAL_3</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html#TRIBAL_4">TRIBAL_4</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html#TRIBAL_5">TRIBAL_5</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html#TRIBAL_6">TRIBAL_6</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html#TRIPLE">TRIPLE</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html#TWISTED_LINES_1">TWISTED_LINES_1</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html#TWISTED_LINES_2">TWISTED_LINES_2</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html#VINE">VINE</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html#WAVE">WAVE</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html#WAVELINE">WAVELINE</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html#WEAVING_ANGLES">WEAVING_ANGLES</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html#WEAVING_BRAID">WEAVING_BRAID</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html#WEAVING_RIBBON">WEAVING_RIBBON</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html#WEAVING_STRIPS">WEAVING_STRIPS</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html#WHITE_FLOWERS">WHITE_FLOWERS</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html#WOODWORK">WOODWORK</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html#X_ILLUSIONS">X_ILLUSIONS</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html#ZANY_TRIANGLES">ZANY_TRIANGLES</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html#ZIG_ZAG">ZIG_ZAG</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html#ZIG_ZAG_STITCH">ZIG_ZAG_STITCH</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+</TABLE>
+&nbsp;
+<!-- ========== METHOD SUMMARY =========== -->
+
+<A NAME="method_summary"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+<B>Method Summary</B></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;int</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html#getValue()">getValue</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;<A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html" title="enum in org.apache.poi.xwpf.usermodel">Borders</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html#valueOf(int)">valueOf</A></B>(int&nbsp;type)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;<A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html" title="enum in org.apache.poi.xwpf.usermodel">Borders</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html#valueOf(java.lang.String)">valueOf</A></B>(java.lang.String&nbsp;name)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns the enum constant of this type with the specified name.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;<A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html" title="enum in org.apache.poi.xwpf.usermodel">Borders</A>[]</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html#values()">values</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns an array containing the constants of this enum type, in
+the order they're declared.</TD>
+</TR>
+</TABLE>
+&nbsp;<A NAME="methods_inherited_from_class_java.lang.Enum"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#EEEEFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left"><B>Methods inherited from class java.lang.Enum</B></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE>clone, compareTo, equals, getDeclaringClass, hashCode, name, ordinal, toString, valueOf</CODE></TD>
+</TR>
+</TABLE>
+&nbsp;<A NAME="methods_inherited_from_class_java.lang.Object"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#EEEEFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left"><B>Methods inherited from class java.lang.Object</B></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE>finalize, getClass, notify, notifyAll, wait, wait, wait</CODE></TD>
+</TR>
+</TABLE>
+&nbsp;
+<P>
+
+<!-- ============ ENUM CONSTANT DETAIL =========== -->
+
+<A NAME="enum_constant_detail"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="1"><FONT SIZE="+2">
+<B>Enum Constant Detail</B></FONT></TH>
+</TR>
+</TABLE>
+
+<A NAME="NIL"><!-- --></A><H3>
+NIL</H3>
+<PRE>
+public static final <A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html" title="enum in org.apache.poi.xwpf.usermodel">Borders</A> <B>NIL</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="NONE"><!-- --></A><H3>
+NONE</H3>
+<PRE>
+public static final <A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html" title="enum in org.apache.poi.xwpf.usermodel">Borders</A> <B>NONE</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="SINGLE"><!-- --></A><H3>
+SINGLE</H3>
+<PRE>
+public static final <A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html" title="enum in org.apache.poi.xwpf.usermodel">Borders</A> <B>SINGLE</B></PRE>
+<DL>
+<DD>Specifies a line border consisting of a single line around the parent
+ object.
+<P>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="THICK"><!-- --></A><H3>
+THICK</H3>
+<PRE>
+public static final <A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html" title="enum in org.apache.poi.xwpf.usermodel">Borders</A> <B>THICK</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="DOUBLE"><!-- --></A><H3>
+DOUBLE</H3>
+<PRE>
+public static final <A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html" title="enum in org.apache.poi.xwpf.usermodel">Borders</A> <B>DOUBLE</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="DOTTED"><!-- --></A><H3>
+DOTTED</H3>
+<PRE>
+public static final <A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html" title="enum in org.apache.poi.xwpf.usermodel">Borders</A> <B>DOTTED</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="DASHED"><!-- --></A><H3>
+DASHED</H3>
+<PRE>
+public static final <A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html" title="enum in org.apache.poi.xwpf.usermodel">Borders</A> <B>DASHED</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="DOT_DASH"><!-- --></A><H3>
+DOT_DASH</H3>
+<PRE>
+public static final <A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html" title="enum in org.apache.poi.xwpf.usermodel">Borders</A> <B>DOT_DASH</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="DOT_DOT_DASH"><!-- --></A><H3>
+DOT_DOT_DASH</H3>
+<PRE>
+public static final <A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html" title="enum in org.apache.poi.xwpf.usermodel">Borders</A> <B>DOT_DOT_DASH</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="TRIPLE"><!-- --></A><H3>
+TRIPLE</H3>
+<PRE>
+public static final <A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html" title="enum in org.apache.poi.xwpf.usermodel">Borders</A> <B>TRIPLE</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="THIN_THICK_SMALL_GAP"><!-- --></A><H3>
+THIN_THICK_SMALL_GAP</H3>
+<PRE>
+public static final <A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html" title="enum in org.apache.poi.xwpf.usermodel">Borders</A> <B>THIN_THICK_SMALL_GAP</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="THICK_THIN_SMALL_GAP"><!-- --></A><H3>
+THICK_THIN_SMALL_GAP</H3>
+<PRE>
+public static final <A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html" title="enum in org.apache.poi.xwpf.usermodel">Borders</A> <B>THICK_THIN_SMALL_GAP</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="THIN_THICK_THIN_SMALL_GAP"><!-- --></A><H3>
+THIN_THICK_THIN_SMALL_GAP</H3>
+<PRE>
+public static final <A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html" title="enum in org.apache.poi.xwpf.usermodel">Borders</A> <B>THIN_THICK_THIN_SMALL_GAP</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="THIN_THICK_MEDIUM_GAP"><!-- --></A><H3>
+THIN_THICK_MEDIUM_GAP</H3>
+<PRE>
+public static final <A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html" title="enum in org.apache.poi.xwpf.usermodel">Borders</A> <B>THIN_THICK_MEDIUM_GAP</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="THICK_THIN_MEDIUM_GAP"><!-- --></A><H3>
+THICK_THIN_MEDIUM_GAP</H3>
+<PRE>
+public static final <A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html" title="enum in org.apache.poi.xwpf.usermodel">Borders</A> <B>THICK_THIN_MEDIUM_GAP</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="THIN_THICK_THIN_MEDIUM_GAP"><!-- --></A><H3>
+THIN_THICK_THIN_MEDIUM_GAP</H3>
+<PRE>
+public static final <A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html" title="enum in org.apache.poi.xwpf.usermodel">Borders</A> <B>THIN_THICK_THIN_MEDIUM_GAP</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="THIN_THICK_LARGE_GAP"><!-- --></A><H3>
+THIN_THICK_LARGE_GAP</H3>
+<PRE>
+public static final <A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html" title="enum in org.apache.poi.xwpf.usermodel">Borders</A> <B>THIN_THICK_LARGE_GAP</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="THICK_THIN_LARGE_GAP"><!-- --></A><H3>
+THICK_THIN_LARGE_GAP</H3>
+<PRE>
+public static final <A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html" title="enum in org.apache.poi.xwpf.usermodel">Borders</A> <B>THICK_THIN_LARGE_GAP</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="THIN_THICK_THIN_LARGE_GAP"><!-- --></A><H3>
+THIN_THICK_THIN_LARGE_GAP</H3>
+<PRE>
+public static final <A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html" title="enum in org.apache.poi.xwpf.usermodel">Borders</A> <B>THIN_THICK_THIN_LARGE_GAP</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="WAVE"><!-- --></A><H3>
+WAVE</H3>
+<PRE>
+public static final <A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html" title="enum in org.apache.poi.xwpf.usermodel">Borders</A> <B>WAVE</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="DOUBLE_WAVE"><!-- --></A><H3>
+DOUBLE_WAVE</H3>
+<PRE>
+public static final <A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html" title="enum in org.apache.poi.xwpf.usermodel">Borders</A> <B>DOUBLE_WAVE</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="DASH_SMALL_GAP"><!-- --></A><H3>
+DASH_SMALL_GAP</H3>
+<PRE>
+public static final <A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html" title="enum in org.apache.poi.xwpf.usermodel">Borders</A> <B>DASH_SMALL_GAP</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="DASH_DOT_STROKED"><!-- --></A><H3>
+DASH_DOT_STROKED</H3>
+<PRE>
+public static final <A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html" title="enum in org.apache.poi.xwpf.usermodel">Borders</A> <B>DASH_DOT_STROKED</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="THREE_D_EMBOSS"><!-- --></A><H3>
+THREE_D_EMBOSS</H3>
+<PRE>
+public static final <A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html" title="enum in org.apache.poi.xwpf.usermodel">Borders</A> <B>THREE_D_EMBOSS</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="THREE_D_ENGRAVE"><!-- --></A><H3>
+THREE_D_ENGRAVE</H3>
+<PRE>
+public static final <A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html" title="enum in org.apache.poi.xwpf.usermodel">Borders</A> <B>THREE_D_ENGRAVE</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="OUTSET"><!-- --></A><H3>
+OUTSET</H3>
+<PRE>
+public static final <A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html" title="enum in org.apache.poi.xwpf.usermodel">Borders</A> <B>OUTSET</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="INSET"><!-- --></A><H3>
+INSET</H3>
+<PRE>
+public static final <A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html" title="enum in org.apache.poi.xwpf.usermodel">Borders</A> <B>INSET</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="APPLES"><!-- --></A><H3>
+APPLES</H3>
+<PRE>
+public static final <A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html" title="enum in org.apache.poi.xwpf.usermodel">Borders</A> <B>APPLES</B></PRE>
+<DL>
+<DD>Specifies an art border consisting of a repeated image of an apple
+<P>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="ARCHED_SCALLOPS"><!-- --></A><H3>
+ARCHED_SCALLOPS</H3>
+<PRE>
+public static final <A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html" title="enum in org.apache.poi.xwpf.usermodel">Borders</A> <B>ARCHED_SCALLOPS</B></PRE>
+<DL>
+<DD>Specifies an art border consisting of a repeated image of a shell pattern
+<P>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="BABY_PACIFIER"><!-- --></A><H3>
+BABY_PACIFIER</H3>
+<PRE>
+public static final <A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html" title="enum in org.apache.poi.xwpf.usermodel">Borders</A> <B>BABY_PACIFIER</B></PRE>
+<DL>
+<DD>Specifies an art border consisting of a repeated image of a baby pacifier
+<P>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="BABY_RATTLE"><!-- --></A><H3>
+BABY_RATTLE</H3>
+<PRE>
+public static final <A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html" title="enum in org.apache.poi.xwpf.usermodel">Borders</A> <B>BABY_RATTLE</B></PRE>
+<DL>
+<DD>Specifies an art border consisting of a repeated image of a baby rattle
+<P>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="BALLOONS_3_COLORS"><!-- --></A><H3>
+BALLOONS_3_COLORS</H3>
+<PRE>
+public static final <A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html" title="enum in org.apache.poi.xwpf.usermodel">Borders</A> <B>BALLOONS_3_COLORS</B></PRE>
+<DL>
+<DD>Specifies an art border consisting of a repeated image of a set of
+ balloons
+<P>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="BALLOONS_HOT_AIR"><!-- --></A><H3>
+BALLOONS_HOT_AIR</H3>
+<PRE>
+public static final <A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html" title="enum in org.apache.poi.xwpf.usermodel">Borders</A> <B>BALLOONS_HOT_AIR</B></PRE>
+<DL>
+<DD>Specifies an art border consisting of a repeated image of a hot air
+ balloon
+<P>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="BASIC_BLACK_DASHES"><!-- --></A><H3>
+BASIC_BLACK_DASHES</H3>
+<PRE>
+public static final <A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html" title="enum in org.apache.poi.xwpf.usermodel">Borders</A> <B>BASIC_BLACK_DASHES</B></PRE>
+<DL>
+<DD>Specifies an art border consisting of a repeating image of a black and
+ white background.
+<P>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="BASIC_BLACK_DOTS"><!-- --></A><H3>
+BASIC_BLACK_DOTS</H3>
+<PRE>
+public static final <A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html" title="enum in org.apache.poi.xwpf.usermodel">Borders</A> <B>BASIC_BLACK_DOTS</B></PRE>
+<DL>
+<DD>Specifies an art border consisting of a repeating image of a black dot on
+ a white background.
+<P>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="BASIC_BLACK_SQUARES"><!-- --></A><H3>
+BASIC_BLACK_SQUARES</H3>
+<PRE>
+public static final <A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html" title="enum in org.apache.poi.xwpf.usermodel">Borders</A> <B>BASIC_BLACK_SQUARES</B></PRE>
+<DL>
+<DD>Specifies an art border consisting of a repeating image of a black and
+ white background
+<P>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="BASIC_THIN_LINES"><!-- --></A><H3>
+BASIC_THIN_LINES</H3>
+<PRE>
+public static final <A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html" title="enum in org.apache.poi.xwpf.usermodel">Borders</A> <B>BASIC_THIN_LINES</B></PRE>
+<DL>
+<DD>Specifies an art border consisting of a repeating image of a black and
+ white background.
+<P>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="BASIC_WHITE_DASHES"><!-- --></A><H3>
+BASIC_WHITE_DASHES</H3>
+<PRE>
+public static final <A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html" title="enum in org.apache.poi.xwpf.usermodel">Borders</A> <B>BASIC_WHITE_DASHES</B></PRE>
+<DL>
+<DD>Specifies an art border consisting of a repeating image of a black and
+ white background.
+<P>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="BASIC_WHITE_DOTS"><!-- --></A><H3>
+BASIC_WHITE_DOTS</H3>
+<PRE>
+public static final <A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html" title="enum in org.apache.poi.xwpf.usermodel">Borders</A> <B>BASIC_WHITE_DOTS</B></PRE>
+<DL>
+<DD>Specifies an art border consisting of a repeating image of a white dot on
+ a black background.
+<P>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="BASIC_WHITE_SQUARES"><!-- --></A><H3>
+BASIC_WHITE_SQUARES</H3>
+<PRE>
+public static final <A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html" title="enum in org.apache.poi.xwpf.usermodel">Borders</A> <B>BASIC_WHITE_SQUARES</B></PRE>
+<DL>
+<DD>Specifies an art border consisting of a repeating image of a black and
+ white background.
+<P>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="BASIC_WIDE_INLINE"><!-- --></A><H3>
+BASIC_WIDE_INLINE</H3>
+<PRE>
+public static final <A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html" title="enum in org.apache.poi.xwpf.usermodel">Borders</A> <B>BASIC_WIDE_INLINE</B></PRE>
+<DL>
+<DD>Specifies an art border consisting of a repeating image of a black and
+ white background.
+<P>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="BASIC_WIDE_MIDLINE"><!-- --></A><H3>
+BASIC_WIDE_MIDLINE</H3>
+<PRE>
+public static final <A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html" title="enum in org.apache.poi.xwpf.usermodel">Borders</A> <B>BASIC_WIDE_MIDLINE</B></PRE>
+<DL>
+<DD>Specifies an art border consisting of a repeating image of a black and
+ white background
+<P>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="BASIC_WIDE_OUTLINE"><!-- --></A><H3>
+BASIC_WIDE_OUTLINE</H3>
+<PRE>
+public static final <A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html" title="enum in org.apache.poi.xwpf.usermodel">Borders</A> <B>BASIC_WIDE_OUTLINE</B></PRE>
+<DL>
+<DD>Specifies an art border consisting of a repeating image of a black and
+ white background
+<P>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="BATS"><!-- --></A><H3>
+BATS</H3>
+<PRE>
+public static final <A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html" title="enum in org.apache.poi.xwpf.usermodel">Borders</A> <B>BATS</B></PRE>
+<DL>
+<DD>Specifies an art border consisting of a repeated image of bats
+<P>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="BIRDS"><!-- --></A><H3>
+BIRDS</H3>
+<PRE>
+public static final <A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html" title="enum in org.apache.poi.xwpf.usermodel">Borders</A> <B>BIRDS</B></PRE>
+<DL>
+<DD>Specifies an art border consisting of repeating images of birds
+<P>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="BIRDS_FLIGHT"><!-- --></A><H3>
+BIRDS_FLIGHT</H3>
+<PRE>
+public static final <A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html" title="enum in org.apache.poi.xwpf.usermodel">Borders</A> <B>BIRDS_FLIGHT</B></PRE>
+<DL>
+<DD>Specifies an art border consisting of a repeated image of birds flying
+<P>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="CABINS"><!-- --></A><H3>
+CABINS</H3>
+<PRE>
+public static final <A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html" title="enum in org.apache.poi.xwpf.usermodel">Borders</A> <B>CABINS</B></PRE>
+<DL>
+<DD>Specifies an art border consisting of a repeated image of a cabin
+<P>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="CAKE_SLICE"><!-- --></A><H3>
+CAKE_SLICE</H3>
+<PRE>
+public static final <A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html" title="enum in org.apache.poi.xwpf.usermodel">Borders</A> <B>CAKE_SLICE</B></PRE>
+<DL>
+<DD>Specifies an art border consisting of a repeated image of a piece of cake
+<P>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="CANDY_CORN"><!-- --></A><H3>
+CANDY_CORN</H3>
+<PRE>
+public static final <A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html" title="enum in org.apache.poi.xwpf.usermodel">Borders</A> <B>CANDY_CORN</B></PRE>
+<DL>
+<DD>Specifies an art border consisting of a repeated image of candy corn
+<P>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="CELTIC_KNOTWORK"><!-- --></A><H3>
+CELTIC_KNOTWORK</H3>
+<PRE>
+public static final <A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html" title="enum in org.apache.poi.xwpf.usermodel">Borders</A> <B>CELTIC_KNOTWORK</B></PRE>
+<DL>
+<DD>Specifies an art border consisting of a repeated image of a knot work
+ pattern
+<P>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="CERTIFICATE_BANNER"><!-- --></A><H3>
+CERTIFICATE_BANNER</H3>
+<PRE>
+public static final <A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html" title="enum in org.apache.poi.xwpf.usermodel">Borders</A> <B>CERTIFICATE_BANNER</B></PRE>
+<DL>
+<DD>Specifies an art border consisting of a banner.
+ <p>
+ If the border is on the left or right, no border is displayed.
+ </p>
+<P>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="CHAIN_LINK"><!-- --></A><H3>
+CHAIN_LINK</H3>
+<PRE>
+public static final <A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html" title="enum in org.apache.poi.xwpf.usermodel">Borders</A> <B>CHAIN_LINK</B></PRE>
+<DL>
+<DD>Specifies an art border consisting of a repeating image of a chain link
+ pattern.
+<P>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="CHAMPAGNE_BOTTLE"><!-- --></A><H3>
+CHAMPAGNE_BOTTLE</H3>
+<PRE>
+public static final <A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html" title="enum in org.apache.poi.xwpf.usermodel">Borders</A> <B>CHAMPAGNE_BOTTLE</B></PRE>
+<DL>
+<DD>Specifies an art border consisting of a repeated image of a champagne
+ bottle
+<P>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="CHECKED_BAR_BLACK"><!-- --></A><H3>
+CHECKED_BAR_BLACK</H3>
+<PRE>
+public static final <A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html" title="enum in org.apache.poi.xwpf.usermodel">Borders</A> <B>CHECKED_BAR_BLACK</B></PRE>
+<DL>
+<DD>Specifies an art border consisting of repeating images of a compass
+<P>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="CHECKED_BAR_COLOR"><!-- --></A><H3>
+CHECKED_BAR_COLOR</H3>
+<PRE>
+public static final <A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html" title="enum in org.apache.poi.xwpf.usermodel">Borders</A> <B>CHECKED_BAR_COLOR</B></PRE>
+<DL>
+<DD>Specifies an art border consisting of a repeating image of a colored
+ pattern.
+<P>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="CHECKERED"><!-- --></A><H3>
+CHECKERED</H3>
+<PRE>
+public static final <A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html" title="enum in org.apache.poi.xwpf.usermodel">Borders</A> <B>CHECKERED</B></PRE>
+<DL>
+<DD>Specifies an art border consisting of a repeated image of a checkerboard
+<P>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="CHRISTMAS_TREE"><!-- --></A><H3>
+CHRISTMAS_TREE</H3>
+<PRE>
+public static final <A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html" title="enum in org.apache.poi.xwpf.usermodel">Borders</A> <B>CHRISTMAS_TREE</B></PRE>
+<DL>
+<DD>Specifies an art border consisting of a repeated image of a Christmas
+ tree
+<P>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="CIRCLES_LINES"><!-- --></A><H3>
+CIRCLES_LINES</H3>
+<PRE>
+public static final <A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html" title="enum in org.apache.poi.xwpf.usermodel">Borders</A> <B>CIRCLES_LINES</B></PRE>
+<DL>
+<DD>Specifies an art border consisting of repeating images of lines and
+ circles
+<P>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="CIRCLES_RECTANGLES"><!-- --></A><H3>
+CIRCLES_RECTANGLES</H3>
+<PRE>
+public static final <A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html" title="enum in org.apache.poi.xwpf.usermodel">Borders</A> <B>CIRCLES_RECTANGLES</B></PRE>
+<DL>
+<DD>Specifies an art border consisting of a repeated image of a rectangular
+ pattern
+<P>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="CLASSICAL_WAVE"><!-- --></A><H3>
+CLASSICAL_WAVE</H3>
+<PRE>
+public static final <A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html" title="enum in org.apache.poi.xwpf.usermodel">Borders</A> <B>CLASSICAL_WAVE</B></PRE>
+<DL>
+<DD>Specifies an art border consisting of a repeated image of a wave
+<P>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="CLOCKS"><!-- --></A><H3>
+CLOCKS</H3>
+<PRE>
+public static final <A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html" title="enum in org.apache.poi.xwpf.usermodel">Borders</A> <B>CLOCKS</B></PRE>
+<DL>
+<DD>Specifies an art border consisting of a repeated image of a clock
+<P>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="COMPASS"><!-- --></A><H3>
+COMPASS</H3>
+<PRE>
+public static final <A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html" title="enum in org.apache.poi.xwpf.usermodel">Borders</A> <B>COMPASS</B></PRE>
+<DL>
+<DD>Specifies an art border consisting of repeating images of a compass
+<P>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="CONFETTI"><!-- --></A><H3>
+CONFETTI</H3>
+<PRE>
+public static final <A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html" title="enum in org.apache.poi.xwpf.usermodel">Borders</A> <B>CONFETTI</B></PRE>
+<DL>
+<DD>Specifies an art border consisting of a repeated image of confetti
+<P>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="CONFETTI_GRAYS"><!-- --></A><H3>
+CONFETTI_GRAYS</H3>
+<PRE>
+public static final <A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html" title="enum in org.apache.poi.xwpf.usermodel">Borders</A> <B>CONFETTI_GRAYS</B></PRE>
+<DL>
+<DD>Specifies an art border consisting of a repeated image of confetti
+<P>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="CONFETTI_OUTLINE"><!-- --></A><H3>
+CONFETTI_OUTLINE</H3>
+<PRE>
+public static final <A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html" title="enum in org.apache.poi.xwpf.usermodel">Borders</A> <B>CONFETTI_OUTLINE</B></PRE>
+<DL>
+<DD>Specifies an art border consisting of a repeated image of confetti
+<P>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="CONFETTI_STREAMERS"><!-- --></A><H3>
+CONFETTI_STREAMERS</H3>
+<PRE>
+public static final <A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html" title="enum in org.apache.poi.xwpf.usermodel">Borders</A> <B>CONFETTI_STREAMERS</B></PRE>
+<DL>
+<DD>Specifies an art border consisting of a repeated image of confetti
+ streamers
+<P>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="CONFETTI_WHITE"><!-- --></A><H3>
+CONFETTI_WHITE</H3>
+<PRE>
+public static final <A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html" title="enum in org.apache.poi.xwpf.usermodel">Borders</A> <B>CONFETTI_WHITE</B></PRE>
+<DL>
+<DD>Specifies an art border consisting of a repeated image of confetti
+<P>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="CORNER_TRIANGLES"><!-- --></A><H3>
+CORNER_TRIANGLES</H3>
+<PRE>
+public static final <A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html" title="enum in org.apache.poi.xwpf.usermodel">Borders</A> <B>CORNER_TRIANGLES</B></PRE>
+<DL>
+<DD>Specifies an art border consisting of a repeated image
+<P>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="COUPON_CUTOUT_DASHES"><!-- --></A><H3>
+COUPON_CUTOUT_DASHES</H3>
+<PRE>
+public static final <A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html" title="enum in org.apache.poi.xwpf.usermodel">Borders</A> <B>COUPON_CUTOUT_DASHES</B></PRE>
+<DL>
+<DD>Specifies an art border consisting of a dashed line
+<P>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="COUPON_CUTOUT_DOTS"><!-- --></A><H3>
+COUPON_CUTOUT_DOTS</H3>
+<PRE>
+public static final <A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html" title="enum in org.apache.poi.xwpf.usermodel">Borders</A> <B>COUPON_CUTOUT_DOTS</B></PRE>
+<DL>
+<DD>Specifies an art border consisting of a dotted line
+<P>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="CRAZY_MAZE"><!-- --></A><H3>
+CRAZY_MAZE</H3>
+<PRE>
+public static final <A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html" title="enum in org.apache.poi.xwpf.usermodel">Borders</A> <B>CRAZY_MAZE</B></PRE>
+<DL>
+<DD>Specifies an art border consisting of a repeated image of a maze-like
+ pattern
+<P>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="CREATURES_BUTTERFLY"><!-- --></A><H3>
+CREATURES_BUTTERFLY</H3>
+<PRE>
+public static final <A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html" title="enum in org.apache.poi.xwpf.usermodel">Borders</A> <B>CREATURES_BUTTERFLY</B></PRE>
+<DL>
+<DD>Specifies an art border consisting of a repeated image of a butterfly
+<P>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="CREATURES_FISH"><!-- --></A><H3>
+CREATURES_FISH</H3>
+<PRE>
+public static final <A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html" title="enum in org.apache.poi.xwpf.usermodel">Borders</A> <B>CREATURES_FISH</B></PRE>
+<DL>
+<DD>Specifies an art border consisting of a repeated image of a fish
+<P>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="CREATURES_INSECTS"><!-- --></A><H3>
+CREATURES_INSECTS</H3>
+<PRE>
+public static final <A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html" title="enum in org.apache.poi.xwpf.usermodel">Borders</A> <B>CREATURES_INSECTS</B></PRE>
+<DL>
+<DD>Specifies an art border consisting of repeating images of insects.
+<P>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="CREATURES_LADY_BUG"><!-- --></A><H3>
+CREATURES_LADY_BUG</H3>
+<PRE>
+public static final <A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html" title="enum in org.apache.poi.xwpf.usermodel">Borders</A> <B>CREATURES_LADY_BUG</B></PRE>
+<DL>
+<DD>Specifies an art border consisting of a repeated image of a ladybug
+<P>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="CROSS_STITCH"><!-- --></A><H3>
+CROSS_STITCH</H3>
+<PRE>
+public static final <A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html" title="enum in org.apache.poi.xwpf.usermodel">Borders</A> <B>CROSS_STITCH</B></PRE>
+<DL>
+<DD>Specifies an art border consisting of repeating images of a cross-stitch
+ pattern
+<P>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="CUP"><!-- --></A><H3>
+CUP</H3>
+<PRE>
+public static final <A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html" title="enum in org.apache.poi.xwpf.usermodel">Borders</A> <B>CUP</B></PRE>
+<DL>
+<DD>Specifies an art border consisting of a repeated image of Cupid
+<P>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="DECO_ARCH"><!-- --></A><H3>
+DECO_ARCH</H3>
+<PRE>
+public static final <A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html" title="enum in org.apache.poi.xwpf.usermodel">Borders</A> <B>DECO_ARCH</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="DECO_ARCH_COLOR"><!-- --></A><H3>
+DECO_ARCH_COLOR</H3>
+<PRE>
+public static final <A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html" title="enum in org.apache.poi.xwpf.usermodel">Borders</A> <B>DECO_ARCH_COLOR</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="DECO_BLOCKS"><!-- --></A><H3>
+DECO_BLOCKS</H3>
+<PRE>
+public static final <A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html" title="enum in org.apache.poi.xwpf.usermodel">Borders</A> <B>DECO_BLOCKS</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="DIAMONDS_GRAY"><!-- --></A><H3>
+DIAMONDS_GRAY</H3>
+<PRE>
+public static final <A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html" title="enum in org.apache.poi.xwpf.usermodel">Borders</A> <B>DIAMONDS_GRAY</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="DOUBLE_D"><!-- --></A><H3>
+DOUBLE_D</H3>
+<PRE>
+public static final <A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html" title="enum in org.apache.poi.xwpf.usermodel">Borders</A> <B>DOUBLE_D</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="DOUBLE_DIAMONDS"><!-- --></A><H3>
+DOUBLE_DIAMONDS</H3>
+<PRE>
+public static final <A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html" title="enum in org.apache.poi.xwpf.usermodel">Borders</A> <B>DOUBLE_DIAMONDS</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="EARTH_1"><!-- --></A><H3>
+EARTH_1</H3>
+<PRE>
+public static final <A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html" title="enum in org.apache.poi.xwpf.usermodel">Borders</A> <B>EARTH_1</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="EARTH_2"><!-- --></A><H3>
+EARTH_2</H3>
+<PRE>
+public static final <A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html" title="enum in org.apache.poi.xwpf.usermodel">Borders</A> <B>EARTH_2</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="ECLIPSING_SQUARES_1"><!-- --></A><H3>
+ECLIPSING_SQUARES_1</H3>
+<PRE>
+public static final <A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html" title="enum in org.apache.poi.xwpf.usermodel">Borders</A> <B>ECLIPSING_SQUARES_1</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="ECLIPSING_SQUARES_2"><!-- --></A><H3>
+ECLIPSING_SQUARES_2</H3>
+<PRE>
+public static final <A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html" title="enum in org.apache.poi.xwpf.usermodel">Borders</A> <B>ECLIPSING_SQUARES_2</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="EGGS_BLACK"><!-- --></A><H3>
+EGGS_BLACK</H3>
+<PRE>
+public static final <A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html" title="enum in org.apache.poi.xwpf.usermodel">Borders</A> <B>EGGS_BLACK</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="FANS"><!-- --></A><H3>
+FANS</H3>
+<PRE>
+public static final <A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html" title="enum in org.apache.poi.xwpf.usermodel">Borders</A> <B>FANS</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="FILM"><!-- --></A><H3>
+FILM</H3>
+<PRE>
+public static final <A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html" title="enum in org.apache.poi.xwpf.usermodel">Borders</A> <B>FILM</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="FIRECRACKERS"><!-- --></A><H3>
+FIRECRACKERS</H3>
+<PRE>
+public static final <A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html" title="enum in org.apache.poi.xwpf.usermodel">Borders</A> <B>FIRECRACKERS</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="FLOWERS_BLOCK_PRINT"><!-- --></A><H3>
+FLOWERS_BLOCK_PRINT</H3>
+<PRE>
+public static final <A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html" title="enum in org.apache.poi.xwpf.usermodel">Borders</A> <B>FLOWERS_BLOCK_PRINT</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="FLOWERS_DAISIES"><!-- --></A><H3>
+FLOWERS_DAISIES</H3>
+<PRE>
+public static final <A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html" title="enum in org.apache.poi.xwpf.usermodel">Borders</A> <B>FLOWERS_DAISIES</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="FLOWERS_MODERN_1"><!-- --></A><H3>
+FLOWERS_MODERN_1</H3>
+<PRE>
+public static final <A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html" title="enum in org.apache.poi.xwpf.usermodel">Borders</A> <B>FLOWERS_MODERN_1</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="FLOWERS_MODERN_2"><!-- --></A><H3>
+FLOWERS_MODERN_2</H3>
+<PRE>
+public static final <A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html" title="enum in org.apache.poi.xwpf.usermodel">Borders</A> <B>FLOWERS_MODERN_2</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="FLOWERS_PANSY"><!-- --></A><H3>
+FLOWERS_PANSY</H3>
+<PRE>
+public static final <A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html" title="enum in org.apache.poi.xwpf.usermodel">Borders</A> <B>FLOWERS_PANSY</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="FLOWERS_RED_ROSE"><!-- --></A><H3>
+FLOWERS_RED_ROSE</H3>
+<PRE>
+public static final <A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html" title="enum in org.apache.poi.xwpf.usermodel">Borders</A> <B>FLOWERS_RED_ROSE</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="FLOWERS_ROSES"><!-- --></A><H3>
+FLOWERS_ROSES</H3>
+<PRE>
+public static final <A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html" title="enum in org.apache.poi.xwpf.usermodel">Borders</A> <B>FLOWERS_ROSES</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="FLOWERS_TEACUP"><!-- --></A><H3>
+FLOWERS_TEACUP</H3>
+<PRE>
+public static final <A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html" title="enum in org.apache.poi.xwpf.usermodel">Borders</A> <B>FLOWERS_TEACUP</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="FLOWERS_TINY"><!-- --></A><H3>
+FLOWERS_TINY</H3>
+<PRE>
+public static final <A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html" title="enum in org.apache.poi.xwpf.usermodel">Borders</A> <B>FLOWERS_TINY</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="GEMS"><!-- --></A><H3>
+GEMS</H3>
+<PRE>
+public static final <A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html" title="enum in org.apache.poi.xwpf.usermodel">Borders</A> <B>GEMS</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="GINGERBREAD_MAN"><!-- --></A><H3>
+GINGERBREAD_MAN</H3>
+<PRE>
+public static final <A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html" title="enum in org.apache.poi.xwpf.usermodel">Borders</A> <B>GINGERBREAD_MAN</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="GRADIENT"><!-- --></A><H3>
+GRADIENT</H3>
+<PRE>
+public static final <A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html" title="enum in org.apache.poi.xwpf.usermodel">Borders</A> <B>GRADIENT</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="HANDMADE_1"><!-- --></A><H3>
+HANDMADE_1</H3>
+<PRE>
+public static final <A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html" title="enum in org.apache.poi.xwpf.usermodel">Borders</A> <B>HANDMADE_1</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="HANDMADE_2"><!-- --></A><H3>
+HANDMADE_2</H3>
+<PRE>
+public static final <A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html" title="enum in org.apache.poi.xwpf.usermodel">Borders</A> <B>HANDMADE_2</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="HEART_BALLOON"><!-- --></A><H3>
+HEART_BALLOON</H3>
+<PRE>
+public static final <A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html" title="enum in org.apache.poi.xwpf.usermodel">Borders</A> <B>HEART_BALLOON</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="HEART_GRAY"><!-- --></A><H3>
+HEART_GRAY</H3>
+<PRE>
+public static final <A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html" title="enum in org.apache.poi.xwpf.usermodel">Borders</A> <B>HEART_GRAY</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="HEARTS"><!-- --></A><H3>
+HEARTS</H3>
+<PRE>
+public static final <A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html" title="enum in org.apache.poi.xwpf.usermodel">Borders</A> <B>HEARTS</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="HEEBIE_JEEBIES"><!-- --></A><H3>
+HEEBIE_JEEBIES</H3>
+<PRE>
+public static final <A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html" title="enum in org.apache.poi.xwpf.usermodel">Borders</A> <B>HEEBIE_JEEBIES</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="HOLLY"><!-- --></A><H3>
+HOLLY</H3>
+<PRE>
+public static final <A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html" title="enum in org.apache.poi.xwpf.usermodel">Borders</A> <B>HOLLY</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="HOUSE_FUNKY"><!-- --></A><H3>
+HOUSE_FUNKY</H3>
+<PRE>
+public static final <A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html" title="enum in org.apache.poi.xwpf.usermodel">Borders</A> <B>HOUSE_FUNKY</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="HYPNOTIC"><!-- --></A><H3>
+HYPNOTIC</H3>
+<PRE>
+public static final <A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html" title="enum in org.apache.poi.xwpf.usermodel">Borders</A> <B>HYPNOTIC</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="ICE_CREAM_CONES"><!-- --></A><H3>
+ICE_CREAM_CONES</H3>
+<PRE>
+public static final <A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html" title="enum in org.apache.poi.xwpf.usermodel">Borders</A> <B>ICE_CREAM_CONES</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="LIGHT_BULB"><!-- --></A><H3>
+LIGHT_BULB</H3>
+<PRE>
+public static final <A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html" title="enum in org.apache.poi.xwpf.usermodel">Borders</A> <B>LIGHT_BULB</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="LIGHTNING_1"><!-- --></A><H3>
+LIGHTNING_1</H3>
+<PRE>
+public static final <A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html" title="enum in org.apache.poi.xwpf.usermodel">Borders</A> <B>LIGHTNING_1</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="LIGHTNING_2"><!-- --></A><H3>
+LIGHTNING_2</H3>
+<PRE>
+public static final <A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html" title="enum in org.apache.poi.xwpf.usermodel">Borders</A> <B>LIGHTNING_2</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="MAP_PINS"><!-- --></A><H3>
+MAP_PINS</H3>
+<PRE>
+public static final <A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html" title="enum in org.apache.poi.xwpf.usermodel">Borders</A> <B>MAP_PINS</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="MAPLE_LEAF"><!-- --></A><H3>
+MAPLE_LEAF</H3>
+<PRE>
+public static final <A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html" title="enum in org.apache.poi.xwpf.usermodel">Borders</A> <B>MAPLE_LEAF</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="MAPLE_MUFFINS"><!-- --></A><H3>
+MAPLE_MUFFINS</H3>
+<PRE>
+public static final <A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html" title="enum in org.apache.poi.xwpf.usermodel">Borders</A> <B>MAPLE_MUFFINS</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="MARQUEE"><!-- --></A><H3>
+MARQUEE</H3>
+<PRE>
+public static final <A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html" title="enum in org.apache.poi.xwpf.usermodel">Borders</A> <B>MARQUEE</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="MARQUEE_TOOTHED"><!-- --></A><H3>
+MARQUEE_TOOTHED</H3>
+<PRE>
+public static final <A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html" title="enum in org.apache.poi.xwpf.usermodel">Borders</A> <B>MARQUEE_TOOTHED</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="MOONS"><!-- --></A><H3>
+MOONS</H3>
+<PRE>
+public static final <A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html" title="enum in org.apache.poi.xwpf.usermodel">Borders</A> <B>MOONS</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="MOSAIC"><!-- --></A><H3>
+MOSAIC</H3>
+<PRE>
+public static final <A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html" title="enum in org.apache.poi.xwpf.usermodel">Borders</A> <B>MOSAIC</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="MUSIC_NOTES"><!-- --></A><H3>
+MUSIC_NOTES</H3>
+<PRE>
+public static final <A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html" title="enum in org.apache.poi.xwpf.usermodel">Borders</A> <B>MUSIC_NOTES</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="NORTHWEST"><!-- --></A><H3>
+NORTHWEST</H3>
+<PRE>
+public static final <A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html" title="enum in org.apache.poi.xwpf.usermodel">Borders</A> <B>NORTHWEST</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="OVALS"><!-- --></A><H3>
+OVALS</H3>
+<PRE>
+public static final <A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html" title="enum in org.apache.poi.xwpf.usermodel">Borders</A> <B>OVALS</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="PACKAGES"><!-- --></A><H3>
+PACKAGES</H3>
+<PRE>
+public static final <A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html" title="enum in org.apache.poi.xwpf.usermodel">Borders</A> <B>PACKAGES</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="PALMS_BLACK"><!-- --></A><H3>
+PALMS_BLACK</H3>
+<PRE>
+public static final <A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html" title="enum in org.apache.poi.xwpf.usermodel">Borders</A> <B>PALMS_BLACK</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="PALMS_COLOR"><!-- --></A><H3>
+PALMS_COLOR</H3>
+<PRE>
+public static final <A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html" title="enum in org.apache.poi.xwpf.usermodel">Borders</A> <B>PALMS_COLOR</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="PAPER_CLIPS"><!-- --></A><H3>
+PAPER_CLIPS</H3>
+<PRE>
+public static final <A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html" title="enum in org.apache.poi.xwpf.usermodel">Borders</A> <B>PAPER_CLIPS</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="PAPYRUS"><!-- --></A><H3>
+PAPYRUS</H3>
+<PRE>
+public static final <A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html" title="enum in org.apache.poi.xwpf.usermodel">Borders</A> <B>PAPYRUS</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="PARTY_FAVOR"><!-- --></A><H3>
+PARTY_FAVOR</H3>
+<PRE>
+public static final <A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html" title="enum in org.apache.poi.xwpf.usermodel">Borders</A> <B>PARTY_FAVOR</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="PARTY_GLASS"><!-- --></A><H3>
+PARTY_GLASS</H3>
+<PRE>
+public static final <A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html" title="enum in org.apache.poi.xwpf.usermodel">Borders</A> <B>PARTY_GLASS</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="PENCILS"><!-- --></A><H3>
+PENCILS</H3>
+<PRE>
+public static final <A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html" title="enum in org.apache.poi.xwpf.usermodel">Borders</A> <B>PENCILS</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="PEOPLE"><!-- --></A><H3>
+PEOPLE</H3>
+<PRE>
+public static final <A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html" title="enum in org.apache.poi.xwpf.usermodel">Borders</A> <B>PEOPLE</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="PEOPLE_WAVING"><!-- --></A><H3>
+PEOPLE_WAVING</H3>
+<PRE>
+public static final <A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html" title="enum in org.apache.poi.xwpf.usermodel">Borders</A> <B>PEOPLE_WAVING</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="PEOPLE_HATS"><!-- --></A><H3>
+PEOPLE_HATS</H3>
+<PRE>
+public static final <A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html" title="enum in org.apache.poi.xwpf.usermodel">Borders</A> <B>PEOPLE_HATS</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="POINSETTIAS"><!-- --></A><H3>
+POINSETTIAS</H3>
+<PRE>
+public static final <A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html" title="enum in org.apache.poi.xwpf.usermodel">Borders</A> <B>POINSETTIAS</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="POSTAGE_STAMP"><!-- --></A><H3>
+POSTAGE_STAMP</H3>
+<PRE>
+public static final <A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html" title="enum in org.apache.poi.xwpf.usermodel">Borders</A> <B>POSTAGE_STAMP</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="PUMPKIN_1"><!-- --></A><H3>
+PUMPKIN_1</H3>
+<PRE>
+public static final <A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html" title="enum in org.apache.poi.xwpf.usermodel">Borders</A> <B>PUMPKIN_1</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="PUSH_PIN_NOTE_2"><!-- --></A><H3>
+PUSH_PIN_NOTE_2</H3>
+<PRE>
+public static final <A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html" title="enum in org.apache.poi.xwpf.usermodel">Borders</A> <B>PUSH_PIN_NOTE_2</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="PUSH_PIN_NOTE_1"><!-- --></A><H3>
+PUSH_PIN_NOTE_1</H3>
+<PRE>
+public static final <A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html" title="enum in org.apache.poi.xwpf.usermodel">Borders</A> <B>PUSH_PIN_NOTE_1</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="PYRAMIDS"><!-- --></A><H3>
+PYRAMIDS</H3>
+<PRE>
+public static final <A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html" title="enum in org.apache.poi.xwpf.usermodel">Borders</A> <B>PYRAMIDS</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="PYRAMIDS_ABOVE"><!-- --></A><H3>
+PYRAMIDS_ABOVE</H3>
+<PRE>
+public static final <A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html" title="enum in org.apache.poi.xwpf.usermodel">Borders</A> <B>PYRAMIDS_ABOVE</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="QUADRANTS"><!-- --></A><H3>
+QUADRANTS</H3>
+<PRE>
+public static final <A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html" title="enum in org.apache.poi.xwpf.usermodel">Borders</A> <B>QUADRANTS</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="RINGS"><!-- --></A><H3>
+RINGS</H3>
+<PRE>
+public static final <A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html" title="enum in org.apache.poi.xwpf.usermodel">Borders</A> <B>RINGS</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="SAFARI"><!-- --></A><H3>
+SAFARI</H3>
+<PRE>
+public static final <A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html" title="enum in org.apache.poi.xwpf.usermodel">Borders</A> <B>SAFARI</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="SAWTOOTH"><!-- --></A><H3>
+SAWTOOTH</H3>
+<PRE>
+public static final <A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html" title="enum in org.apache.poi.xwpf.usermodel">Borders</A> <B>SAWTOOTH</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="SAWTOOTH_GRAY"><!-- --></A><H3>
+SAWTOOTH_GRAY</H3>
+<PRE>
+public static final <A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html" title="enum in org.apache.poi.xwpf.usermodel">Borders</A> <B>SAWTOOTH_GRAY</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="SCARED_CAT"><!-- --></A><H3>
+SCARED_CAT</H3>
+<PRE>
+public static final <A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html" title="enum in org.apache.poi.xwpf.usermodel">Borders</A> <B>SCARED_CAT</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="SEATTLE"><!-- --></A><H3>
+SEATTLE</H3>
+<PRE>
+public static final <A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html" title="enum in org.apache.poi.xwpf.usermodel">Borders</A> <B>SEATTLE</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="SHADOWED_SQUARES"><!-- --></A><H3>
+SHADOWED_SQUARES</H3>
+<PRE>
+public static final <A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html" title="enum in org.apache.poi.xwpf.usermodel">Borders</A> <B>SHADOWED_SQUARES</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="SHARKS_TEETH"><!-- --></A><H3>
+SHARKS_TEETH</H3>
+<PRE>
+public static final <A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html" title="enum in org.apache.poi.xwpf.usermodel">Borders</A> <B>SHARKS_TEETH</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="SHOREBIRD_TRACKS"><!-- --></A><H3>
+SHOREBIRD_TRACKS</H3>
+<PRE>
+public static final <A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html" title="enum in org.apache.poi.xwpf.usermodel">Borders</A> <B>SHOREBIRD_TRACKS</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="SKYROCKET"><!-- --></A><H3>
+SKYROCKET</H3>
+<PRE>
+public static final <A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html" title="enum in org.apache.poi.xwpf.usermodel">Borders</A> <B>SKYROCKET</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="SNOWFLAKE_FANCY"><!-- --></A><H3>
+SNOWFLAKE_FANCY</H3>
+<PRE>
+public static final <A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html" title="enum in org.apache.poi.xwpf.usermodel">Borders</A> <B>SNOWFLAKE_FANCY</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="SNOWFLAKES"><!-- --></A><H3>
+SNOWFLAKES</H3>
+<PRE>
+public static final <A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html" title="enum in org.apache.poi.xwpf.usermodel">Borders</A> <B>SNOWFLAKES</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="SOMBRERO"><!-- --></A><H3>
+SOMBRERO</H3>
+<PRE>
+public static final <A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html" title="enum in org.apache.poi.xwpf.usermodel">Borders</A> <B>SOMBRERO</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="SOUTHWEST"><!-- --></A><H3>
+SOUTHWEST</H3>
+<PRE>
+public static final <A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html" title="enum in org.apache.poi.xwpf.usermodel">Borders</A> <B>SOUTHWEST</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="STARS"><!-- --></A><H3>
+STARS</H3>
+<PRE>
+public static final <A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html" title="enum in org.apache.poi.xwpf.usermodel">Borders</A> <B>STARS</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="STARS_TOP"><!-- --></A><H3>
+STARS_TOP</H3>
+<PRE>
+public static final <A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html" title="enum in org.apache.poi.xwpf.usermodel">Borders</A> <B>STARS_TOP</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="STARS_3_D"><!-- --></A><H3>
+STARS_3_D</H3>
+<PRE>
+public static final <A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html" title="enum in org.apache.poi.xwpf.usermodel">Borders</A> <B>STARS_3_D</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="STARS_BLACK"><!-- --></A><H3>
+STARS_BLACK</H3>
+<PRE>
+public static final <A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html" title="enum in org.apache.poi.xwpf.usermodel">Borders</A> <B>STARS_BLACK</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="STARS_SHADOWED"><!-- --></A><H3>
+STARS_SHADOWED</H3>
+<PRE>
+public static final <A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html" title="enum in org.apache.poi.xwpf.usermodel">Borders</A> <B>STARS_SHADOWED</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="SUN"><!-- --></A><H3>
+SUN</H3>
+<PRE>
+public static final <A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html" title="enum in org.apache.poi.xwpf.usermodel">Borders</A> <B>SUN</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="SWIRLIGIG"><!-- --></A><H3>
+SWIRLIGIG</H3>
+<PRE>
+public static final <A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html" title="enum in org.apache.poi.xwpf.usermodel">Borders</A> <B>SWIRLIGIG</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="TORN_PAPER"><!-- --></A><H3>
+TORN_PAPER</H3>
+<PRE>
+public static final <A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html" title="enum in org.apache.poi.xwpf.usermodel">Borders</A> <B>TORN_PAPER</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="TORN_PAPER_BLACK"><!-- --></A><H3>
+TORN_PAPER_BLACK</H3>
+<PRE>
+public static final <A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html" title="enum in org.apache.poi.xwpf.usermodel">Borders</A> <B>TORN_PAPER_BLACK</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="TREES"><!-- --></A><H3>
+TREES</H3>
+<PRE>
+public static final <A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html" title="enum in org.apache.poi.xwpf.usermodel">Borders</A> <B>TREES</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="TRIANGLE_PARTY"><!-- --></A><H3>
+TRIANGLE_PARTY</H3>
+<PRE>
+public static final <A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html" title="enum in org.apache.poi.xwpf.usermodel">Borders</A> <B>TRIANGLE_PARTY</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="TRIANGLES"><!-- --></A><H3>
+TRIANGLES</H3>
+<PRE>
+public static final <A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html" title="enum in org.apache.poi.xwpf.usermodel">Borders</A> <B>TRIANGLES</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="TRIBAL_1"><!-- --></A><H3>
+TRIBAL_1</H3>
+<PRE>
+public static final <A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html" title="enum in org.apache.poi.xwpf.usermodel">Borders</A> <B>TRIBAL_1</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="TRIBAL_2"><!-- --></A><H3>
+TRIBAL_2</H3>
+<PRE>
+public static final <A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html" title="enum in org.apache.poi.xwpf.usermodel">Borders</A> <B>TRIBAL_2</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="TRIBAL_3"><!-- --></A><H3>
+TRIBAL_3</H3>
+<PRE>
+public static final <A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html" title="enum in org.apache.poi.xwpf.usermodel">Borders</A> <B>TRIBAL_3</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="TRIBAL_4"><!-- --></A><H3>
+TRIBAL_4</H3>
+<PRE>
+public static final <A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html" title="enum in org.apache.poi.xwpf.usermodel">Borders</A> <B>TRIBAL_4</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="TRIBAL_5"><!-- --></A><H3>
+TRIBAL_5</H3>
+<PRE>
+public static final <A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html" title="enum in org.apache.poi.xwpf.usermodel">Borders</A> <B>TRIBAL_5</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="TRIBAL_6"><!-- --></A><H3>
+TRIBAL_6</H3>
+<PRE>
+public static final <A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html" title="enum in org.apache.poi.xwpf.usermodel">Borders</A> <B>TRIBAL_6</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="TWISTED_LINES_1"><!-- --></A><H3>
+TWISTED_LINES_1</H3>
+<PRE>
+public static final <A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html" title="enum in org.apache.poi.xwpf.usermodel">Borders</A> <B>TWISTED_LINES_1</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="TWISTED_LINES_2"><!-- --></A><H3>
+TWISTED_LINES_2</H3>
+<PRE>
+public static final <A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html" title="enum in org.apache.poi.xwpf.usermodel">Borders</A> <B>TWISTED_LINES_2</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="VINE"><!-- --></A><H3>
+VINE</H3>
+<PRE>
+public static final <A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html" title="enum in org.apache.poi.xwpf.usermodel">Borders</A> <B>VINE</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="WAVELINE"><!-- --></A><H3>
+WAVELINE</H3>
+<PRE>
+public static final <A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html" title="enum in org.apache.poi.xwpf.usermodel">Borders</A> <B>WAVELINE</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="WEAVING_ANGLES"><!-- --></A><H3>
+WEAVING_ANGLES</H3>
+<PRE>
+public static final <A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html" title="enum in org.apache.poi.xwpf.usermodel">Borders</A> <B>WEAVING_ANGLES</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="WEAVING_BRAID"><!-- --></A><H3>
+WEAVING_BRAID</H3>
+<PRE>
+public static final <A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html" title="enum in org.apache.poi.xwpf.usermodel">Borders</A> <B>WEAVING_BRAID</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="WEAVING_RIBBON"><!-- --></A><H3>
+WEAVING_RIBBON</H3>
+<PRE>
+public static final <A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html" title="enum in org.apache.poi.xwpf.usermodel">Borders</A> <B>WEAVING_RIBBON</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="WEAVING_STRIPS"><!-- --></A><H3>
+WEAVING_STRIPS</H3>
+<PRE>
+public static final <A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html" title="enum in org.apache.poi.xwpf.usermodel">Borders</A> <B>WEAVING_STRIPS</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="WHITE_FLOWERS"><!-- --></A><H3>
+WHITE_FLOWERS</H3>
+<PRE>
+public static final <A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html" title="enum in org.apache.poi.xwpf.usermodel">Borders</A> <B>WHITE_FLOWERS</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="WOODWORK"><!-- --></A><H3>
+WOODWORK</H3>
+<PRE>
+public static final <A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html" title="enum in org.apache.poi.xwpf.usermodel">Borders</A> <B>WOODWORK</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="X_ILLUSIONS"><!-- --></A><H3>
+X_ILLUSIONS</H3>
+<PRE>
+public static final <A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html" title="enum in org.apache.poi.xwpf.usermodel">Borders</A> <B>X_ILLUSIONS</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="ZANY_TRIANGLES"><!-- --></A><H3>
+ZANY_TRIANGLES</H3>
+<PRE>
+public static final <A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html" title="enum in org.apache.poi.xwpf.usermodel">Borders</A> <B>ZANY_TRIANGLES</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="ZIG_ZAG"><!-- --></A><H3>
+ZIG_ZAG</H3>
+<PRE>
+public static final <A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html" title="enum in org.apache.poi.xwpf.usermodel">Borders</A> <B>ZIG_ZAG</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="ZIG_ZAG_STITCH"><!-- --></A><H3>
+ZIG_ZAG_STITCH</H3>
+<PRE>
+public static final <A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html" title="enum in org.apache.poi.xwpf.usermodel">Borders</A> <B>ZIG_ZAG_STITCH</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+
+<!-- ============ METHOD DETAIL ========== -->
+
+<A NAME="method_detail"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="1"><FONT SIZE="+2">
+<B>Method Detail</B></FONT></TH>
+</TR>
+</TABLE>
+
+<A NAME="values()"><!-- --></A><H3>
+values</H3>
+<PRE>
+public static final <A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html" title="enum in org.apache.poi.xwpf.usermodel">Borders</A>[] <B>values</B>()</PRE>
+<DL>
+<DD>Returns an array containing the constants of this enum type, in
+the order they're declared.  This method may be used to iterate
+over the constants as follows:
+<pre>
+for(Borders c : Borders.values())
+        System.out.println(c);
+</pre>
+<P>
+<DD><DL>
+
+<DT><B>Returns:</B><DD>an array containing the constants of this enum type, in
+the order they're declared</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="valueOf(java.lang.String)"><!-- --></A><H3>
+valueOf</H3>
+<PRE>
+public static <A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html" title="enum in org.apache.poi.xwpf.usermodel">Borders</A> <B>valueOf</B>(java.lang.String&nbsp;name)</PRE>
+<DL>
+<DD>Returns the enum constant of this type with the specified name.
+The string must match <I>exactly</I> an identifier used to declare an
+enum constant in this type.  (Extraneous whitespace characters are 
+not permitted.)
+<P>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>name</CODE> - the name of the enum constant to be returned.
+<DT><B>Returns:</B><DD>the enum constant with the specified name
+<DT><B>Throws:</B>
+<DD><CODE>java.lang.IllegalArgumentException</CODE> - if this enum type has no constant
+with the specified name</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getValue()"><!-- --></A><H3>
+getValue</H3>
+<PRE>
+public int <B>getValue</B>()</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="valueOf(int)"><!-- --></A><H3>
+valueOf</H3>
+<PRE>
+public static <A HREF="../../../../../org/apache/poi/xwpf/usermodel/Borders.html" title="enum in org.apache.poi.xwpf.usermodel">Borders</A> <B>valueOf</B>(int&nbsp;type)</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<!-- ========= END OF CLASS DATA ========= -->
+<HR>
+
+
+<!-- ======= START OF BOTTOM NAVBAR ====== -->
+<A NAME="navbar_bottom"><!-- --></A>
+<A HREF="#skip-navbar_bottom" title="Skip navigation links"></A>
+<TABLE BORDER="0" WIDTH="100%" CELLPADDING="1" CELLSPACING="0" SUMMARY="">
+<TR>
+<TD COLSPAN=2 BGCOLOR="#EEEEFF" CLASS="NavBarCell1">
+<A NAME="navbar_bottom_firstrow"><!-- --></A>
+<TABLE BORDER="0" CELLPADDING="0" CELLSPACING="3" SUMMARY="">
+  <TR ALIGN="center" VALIGN="top">
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../overview-summary.html"><FONT CLASS="NavBarFont1"><B>Overview</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="package-summary.html"><FONT CLASS="NavBarFont1"><B>Package</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#FFFFFF" CLASS="NavBarCell1Rev"> &nbsp;<FONT CLASS="NavBarFont1Rev"><B>Class</B></FONT>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="class-use/Borders.html"><FONT CLASS="NavBarFont1"><B>Use</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="package-tree.html"><FONT CLASS="NavBarFont1"><B>Tree</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../deprecated-list.html"><FONT CLASS="NavBarFont1"><B>Deprecated</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../index-all.html"><FONT CLASS="NavBarFont1"><B>Index</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../help-doc.html"><FONT CLASS="NavBarFont1"><B>Help</B></FONT></A>&nbsp;</TD>
+  </TR>
+</TABLE>
+</TD>
+<TD ALIGN="right" VALIGN="top" ROWSPAN=3><EM>
+</EM>
+</TD>
+</TR>
+
+<TR>
+<TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
+&nbsp;<A HREF="../../../../../org/apache/poi/xwpf/usermodel/BodyType.html" title="enum in org.apache.poi.xwpf.usermodel"><B>PREV CLASS</B></A>&nbsp;
+&nbsp;<A HREF="../../../../../org/apache/poi/xwpf/usermodel/BreakClear.html" title="enum in org.apache.poi.xwpf.usermodel"><B>NEXT CLASS</B></A></FONT></TD>
+<TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
+  <A HREF="../../../../../index.html?org/apache/poi/xwpf/usermodel/Borders.html" target="_top"><B>FRAMES</B></A>  &nbsp;
+&nbsp;<A HREF="Borders.html" target="_top"><B>NO FRAMES</B></A>  &nbsp;
+&nbsp;<SCRIPT type="text/javascript">
+  <!--
+  if(window==top) {
+    document.writeln('<A HREF="../../../../../allclasses-noframe.html"><B>All Classes</B></A>');
+  }
+  //-->
+</SCRIPT>
+<NOSCRIPT>
+  <A HREF="../../../../../allclasses-noframe.html"><B>All Classes</B></A>
+</NOSCRIPT>
+
+
+</FONT></TD>
+</TR>
+<TR>
+<TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
+  SUMMARY:&nbsp;NESTED&nbsp;|&nbsp;<A HREF="#enum_constant_summary">ENUM CONSTANTS</A>&nbsp;|&nbsp;FIELD&nbsp;|&nbsp;<A HREF="#method_summary">METHOD</A></FONT></TD>
+<TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
+DETAIL:&nbsp;<A HREF="#enum_constant_detail">ENUM CONSTANTS</A>&nbsp;|&nbsp;FIELD&nbsp;|&nbsp;<A HREF="#method_detail">METHOD</A></FONT></TD>
+</TR>
+</TABLE>
+<A NAME="skip-navbar_bottom"></A>
+<!-- ======== END OF BOTTOM NAVBAR ======= -->
+
+<HR>
+
+                <i>Copyright 2014 The Apache Software Foundation or
+        its licensors, as applicable.</i>
+            
+</BODY>
+</HTML>

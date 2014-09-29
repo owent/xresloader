@@ -1,0 +1,548 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!--NewPage-->
+<HTML>
+<HEAD>
+<TITLE>
+XSSFValueAxis (POI API Documentation)
+</TITLE>
+
+<META NAME="keywords" CONTENT="org.apache.poi.xssf.usermodel.charts.XSSFValueAxis class">
+
+<LINK REL ="stylesheet" TYPE="text/css" HREF="../../../../../../stylesheet.css" TITLE="Style">
+
+<SCRIPT type="text/javascript">
+function windowTitle()
+{
+    parent.document.title="XSSFValueAxis (POI API Documentation)";
+}
+</SCRIPT>
+<NOSCRIPT>
+</NOSCRIPT>
+
+</HEAD>
+
+<BODY BGCOLOR="white" onload="windowTitle();">
+
+
+<!-- ========= START OF TOP NAVBAR ======= -->
+<A NAME="navbar_top"><!-- --></A>
+<A HREF="#skip-navbar_top" title="Skip navigation links"></A>
+<TABLE BORDER="0" WIDTH="100%" CELLPADDING="1" CELLSPACING="0" SUMMARY="">
+<TR>
+<TD COLSPAN=2 BGCOLOR="#EEEEFF" CLASS="NavBarCell1">
+<A NAME="navbar_top_firstrow"><!-- --></A>
+<TABLE BORDER="0" CELLPADDING="0" CELLSPACING="3" SUMMARY="">
+  <TR ALIGN="center" VALIGN="top">
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../../overview-summary.html"><FONT CLASS="NavBarFont1"><B>Overview</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="package-summary.html"><FONT CLASS="NavBarFont1"><B>Package</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#FFFFFF" CLASS="NavBarCell1Rev"> &nbsp;<FONT CLASS="NavBarFont1Rev"><B>Class</B></FONT>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="class-use/XSSFValueAxis.html"><FONT CLASS="NavBarFont1"><B>Use</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="package-tree.html"><FONT CLASS="NavBarFont1"><B>Tree</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../../deprecated-list.html"><FONT CLASS="NavBarFont1"><B>Deprecated</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../../index-all.html"><FONT CLASS="NavBarFont1"><B>Index</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../../help-doc.html"><FONT CLASS="NavBarFont1"><B>Help</B></FONT></A>&nbsp;</TD>
+  </TR>
+</TABLE>
+</TD>
+<TD ALIGN="right" VALIGN="top" ROWSPAN=3><EM>
+</EM>
+</TD>
+</TR>
+
+<TR>
+<TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
+&nbsp;<A HREF="../../../../../../org/apache/poi/xssf/usermodel/charts/XSSFScatterChartData.html" title="class in org.apache.poi.xssf.usermodel.charts"><B>PREV CLASS</B></A>&nbsp;
+&nbsp;NEXT CLASS</FONT></TD>
+<TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
+  <A HREF="../../../../../../index.html?org/apache/poi/xssf/usermodel/charts/XSSFValueAxis.html" target="_top"><B>FRAMES</B></A>  &nbsp;
+&nbsp;<A HREF="XSSFValueAxis.html" target="_top"><B>NO FRAMES</B></A>  &nbsp;
+&nbsp;<SCRIPT type="text/javascript">
+  <!--
+  if(window==top) {
+    document.writeln('<A HREF="../../../../../../allclasses-noframe.html"><B>All Classes</B></A>');
+  }
+  //-->
+</SCRIPT>
+<NOSCRIPT>
+  <A HREF="../../../../../../allclasses-noframe.html"><B>All Classes</B></A>
+</NOSCRIPT>
+
+
+</FONT></TD>
+</TR>
+<TR>
+<TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
+  SUMMARY:&nbsp;NESTED&nbsp;|&nbsp;<A HREF="#fields_inherited_from_class_org.apache.poi.xssf.usermodel.charts.XSSFChartAxis">FIELD</A>&nbsp;|&nbsp;<A HREF="#constructor_summary">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_summary">METHOD</A></FONT></TD>
+<TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
+DETAIL:&nbsp;FIELD&nbsp;|&nbsp;<A HREF="#constructor_detail">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_detail">METHOD</A></FONT></TD>
+</TR>
+</TABLE>
+<A NAME="skip-navbar_top"></A>
+<!-- ========= END OF TOP NAVBAR ========= -->
+
+<HR>
+<!-- ======== START OF CLASS DATA ======== -->
+<H2>
+<FONT SIZE="-1">
+org.apache.poi.xssf.usermodel.charts</FONT>
+<BR>
+Class XSSFValueAxis</H2>
+<PRE>
+java.lang.Object
+  <IMG SRC="../../../../../../resources/inherit.gif" ALT="extended by "><A HREF="../../../../../../org/apache/poi/xssf/usermodel/charts/XSSFChartAxis.html" title="class in org.apache.poi.xssf.usermodel.charts">org.apache.poi.xssf.usermodel.charts.XSSFChartAxis</A>
+      <IMG SRC="../../../../../../resources/inherit.gif" ALT="extended by "><B>org.apache.poi.xssf.usermodel.charts.XSSFValueAxis</B>
+</PRE>
+<DL>
+<DT><B>All Implemented Interfaces:</B> <DD><A HREF="../../../../../../org/apache/poi/ss/usermodel/charts/ChartAxis.html" title="interface in org.apache.poi.ss.usermodel.charts">ChartAxis</A>, <A HREF="../../../../../../org/apache/poi/ss/usermodel/charts/ValueAxis.html" title="interface in org.apache.poi.ss.usermodel.charts">ValueAxis</A></DD>
+</DL>
+<HR>
+<DL>
+<DT><PRE><FONT SIZE="-1"><A HREF="../../../../../../org/apache/poi/util/Beta.html" title="annotation in org.apache.poi.util">@Beta</A>
+</FONT>public class <B>XSSFValueAxis</B><DT>extends <A HREF="../../../../../../org/apache/poi/xssf/usermodel/charts/XSSFChartAxis.html" title="class in org.apache.poi.xssf.usermodel.charts">XSSFChartAxis</A><DT>implements <A HREF="../../../../../../org/apache/poi/ss/usermodel/charts/ValueAxis.html" title="interface in org.apache.poi.ss.usermodel.charts">ValueAxis</A></DL>
+</PRE>
+
+<P>
+Value axis type.
+<P>
+
+<P>
+<DL>
+<DT><B>Author:</B></DT>
+  <DD>Roman Kashitsyn</DD>
+</DL>
+<HR>
+
+<P>
+<!-- =========== FIELD SUMMARY =========== -->
+
+<A NAME="field_summary"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+<B>Field Summary</B></FONT></TH>
+</TR>
+</TABLE>
+&nbsp;<A NAME="fields_inherited_from_class_org.apache.poi.xssf.usermodel.charts.XSSFChartAxis"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#EEEEFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left"><B>Fields inherited from class org.apache.poi.xssf.usermodel.charts.<A HREF="../../../../../../org/apache/poi/xssf/usermodel/charts/XSSFChartAxis.html" title="class in org.apache.poi.xssf.usermodel.charts">XSSFChartAxis</A></B></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><A HREF="../../../../../../org/apache/poi/xssf/usermodel/charts/XSSFChartAxis.html#chart">chart</A></CODE></TD>
+</TR>
+</TABLE>
+&nbsp;
+<!-- ======== CONSTRUCTOR SUMMARY ======== -->
+
+<A NAME="constructor_summary"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+<B>Constructor Summary</B></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><B><A HREF="../../../../../../org/apache/poi/xssf/usermodel/charts/XSSFValueAxis.html#XSSFValueAxis(org.apache.poi.xssf.usermodel.XSSFChart, org.openxmlformats.schemas.drawingml.x2006.chart.CTValAx)">XSSFValueAxis</A></B>(<A HREF="../../../../../../org/apache/poi/xssf/usermodel/XSSFChart.html" title="class in org.apache.poi.xssf.usermodel">XSSFChart</A>&nbsp;chart,
+              org.openxmlformats.schemas.drawingml.x2006.chart.CTValAx&nbsp;ctValAx)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><B><A HREF="../../../../../../org/apache/poi/xssf/usermodel/charts/XSSFValueAxis.html#XSSFValueAxis(org.apache.poi.xssf.usermodel.XSSFChart, long, org.apache.poi.ss.usermodel.charts.AxisPosition)">XSSFValueAxis</A></B>(<A HREF="../../../../../../org/apache/poi/xssf/usermodel/XSSFChart.html" title="class in org.apache.poi.xssf.usermodel">XSSFChart</A>&nbsp;chart,
+              long&nbsp;id,
+              <A HREF="../../../../../../org/apache/poi/ss/usermodel/charts/AxisPosition.html" title="enum in org.apache.poi.ss.usermodel.charts">AxisPosition</A>&nbsp;pos)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+</TABLE>
+&nbsp;
+<!-- ========== METHOD SUMMARY =========== -->
+
+<A NAME="method_summary"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+<B>Method Summary</B></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../org/apache/poi/xssf/usermodel/charts/XSSFValueAxis.html#crossAxis(org.apache.poi.ss.usermodel.charts.ChartAxis)">crossAxis</A></B>(<A HREF="../../../../../../org/apache/poi/ss/usermodel/charts/ChartAxis.html" title="interface in org.apache.poi.ss.usermodel.charts">ChartAxis</A>&nbsp;axis)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Declare this axis cross another axis.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../../../../org/apache/poi/ss/usermodel/charts/AxisCrossBetween.html" title="enum in org.apache.poi.ss.usermodel.charts">AxisCrossBetween</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../org/apache/poi/xssf/usermodel/charts/XSSFValueAxis.html#getCrossBetween()">getCrossBetween</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>protected &nbsp;org.openxmlformats.schemas.drawingml.x2006.chart.CTAxPos</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../org/apache/poi/xssf/usermodel/charts/XSSFValueAxis.html#getCTAxPos()">getCTAxPos</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>protected &nbsp;org.openxmlformats.schemas.drawingml.x2006.chart.CTCrosses</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../org/apache/poi/xssf/usermodel/charts/XSSFValueAxis.html#getCTCrosses()">getCTCrosses</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>protected &nbsp;org.openxmlformats.schemas.drawingml.x2006.chart.CTNumFmt</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../org/apache/poi/xssf/usermodel/charts/XSSFValueAxis.html#getCTNumFmt()">getCTNumFmt</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>protected &nbsp;org.openxmlformats.schemas.drawingml.x2006.chart.CTScaling</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../org/apache/poi/xssf/usermodel/charts/XSSFValueAxis.html#getCTScaling()">getCTScaling</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>protected &nbsp;org.openxmlformats.schemas.drawingml.x2006.chart.CTBoolean</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../org/apache/poi/xssf/usermodel/charts/XSSFValueAxis.html#getDelete()">getDelete</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;long</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../org/apache/poi/xssf/usermodel/charts/XSSFValueAxis.html#getId()">getId</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>protected &nbsp;org.openxmlformats.schemas.drawingml.x2006.chart.CTTickMark</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../org/apache/poi/xssf/usermodel/charts/XSSFValueAxis.html#getMajorCTTickMark()">getMajorCTTickMark</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>protected &nbsp;org.openxmlformats.schemas.drawingml.x2006.chart.CTTickMark</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../org/apache/poi/xssf/usermodel/charts/XSSFValueAxis.html#getMinorCTTickMark()">getMinorCTTickMark</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../org/apache/poi/xssf/usermodel/charts/XSSFValueAxis.html#setCrossBetween(org.apache.poi.ss.usermodel.charts.AxisCrossBetween)">setCrossBetween</A></B>(<A HREF="../../../../../../org/apache/poi/ss/usermodel/charts/AxisCrossBetween.html" title="enum in org.apache.poi.ss.usermodel.charts">AxisCrossBetween</A>&nbsp;crossBetween)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+</TABLE>
+&nbsp;<A NAME="methods_inherited_from_class_org.apache.poi.xssf.usermodel.charts.XSSFChartAxis"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#EEEEFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left"><B>Methods inherited from class org.apache.poi.xssf.usermodel.charts.<A HREF="../../../../../../org/apache/poi/xssf/usermodel/charts/XSSFChartAxis.html" title="class in org.apache.poi.xssf.usermodel.charts">XSSFChartAxis</A></B></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><A HREF="../../../../../../org/apache/poi/xssf/usermodel/charts/XSSFChartAxis.html#getCrosses()">getCrosses</A>, <A HREF="../../../../../../org/apache/poi/xssf/usermodel/charts/XSSFChartAxis.html#getLogBase()">getLogBase</A>, <A HREF="../../../../../../org/apache/poi/xssf/usermodel/charts/XSSFChartAxis.html#getMajorTickMark()">getMajorTickMark</A>, <A HREF="../../../../../../org/apache/poi/xssf/usermodel/charts/XSSFChartAxis.html#getMaximum()">getMaximum</A>, <A HREF="../../../../../../org/apache/poi/xssf/usermodel/charts/XSSFChartAxis.html#getMinimum()">getMinimum</A>, <A HREF="../../../../../../org/apache/poi/xssf/usermodel/charts/XSSFChartAxis.html#getMinorTickMark()">getMinorTickMark</A>, <A HREF="../../../../../../org/apache/poi/xssf/usermodel/charts/XSSFChartAxis.html#getNumberFormat()">getNumberFormat</A>, <A HREF="../../../../../../org/apache/poi/xssf/usermodel/charts/XSSFChartAxis.html#getOrientation()">getOrientation</A>, <A HREF="../../../../../../org/apache/poi/xssf/usermodel/charts/XSSFChartAxis.html#getPosition()">getPosition</A>, <A HREF="../../../../../../org/apache/poi/xssf/usermodel/charts/XSSFChartAxis.html#isSetLogBase()">isSetLogBase</A>, <A HREF="../../../../../../org/apache/poi/xssf/usermodel/charts/XSSFChartAxis.html#isSetMaximum()">isSetMaximum</A>, <A HREF="../../../../../../org/apache/poi/xssf/usermodel/charts/XSSFChartAxis.html#isSetMinimum()">isSetMinimum</A>, <A HREF="../../../../../../org/apache/poi/xssf/usermodel/charts/XSSFChartAxis.html#isVisible()">isVisible</A>, <A HREF="../../../../../../org/apache/poi/xssf/usermodel/charts/XSSFChartAxis.html#setCrosses(org.apache.poi.ss.usermodel.charts.AxisCrosses)">setCrosses</A>, <A HREF="../../../../../../org/apache/poi/xssf/usermodel/charts/XSSFChartAxis.html#setLogBase(double)">setLogBase</A>, <A HREF="../../../../../../org/apache/poi/xssf/usermodel/charts/XSSFChartAxis.html#setMajorTickMark(org.apache.poi.ss.usermodel.charts.AxisTickMark)">setMajorTickMark</A>, <A HREF="../../../../../../org/apache/poi/xssf/usermodel/charts/XSSFChartAxis.html#setMaximum(double)">setMaximum</A>, <A HREF="../../../../../../org/apache/poi/xssf/usermodel/charts/XSSFChartAxis.html#setMinimum(double)">setMinimum</A>, <A HREF="../../../../../../org/apache/poi/xssf/usermodel/charts/XSSFChartAxis.html#setMinorTickMark(org.apache.poi.ss.usermodel.charts.AxisTickMark)">setMinorTickMark</A>, <A HREF="../../../../../../org/apache/poi/xssf/usermodel/charts/XSSFChartAxis.html#setNumberFormat(java.lang.String)">setNumberFormat</A>, <A HREF="../../../../../../org/apache/poi/xssf/usermodel/charts/XSSFChartAxis.html#setOrientation(org.apache.poi.ss.usermodel.charts.AxisOrientation)">setOrientation</A>, <A HREF="../../../../../../org/apache/poi/xssf/usermodel/charts/XSSFChartAxis.html#setPosition(org.apache.poi.ss.usermodel.charts.AxisPosition)">setPosition</A>, <A HREF="../../../../../../org/apache/poi/xssf/usermodel/charts/XSSFChartAxis.html#setVisible(boolean)">setVisible</A></CODE></TD>
+</TR>
+</TABLE>
+&nbsp;<A NAME="methods_inherited_from_class_java.lang.Object"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#EEEEFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left"><B>Methods inherited from class java.lang.Object</B></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE>clone, equals, finalize, getClass, hashCode, notify, notifyAll, toString, wait, wait, wait</CODE></TD>
+</TR>
+</TABLE>
+&nbsp;<A NAME="methods_inherited_from_class_org.apache.poi.ss.usermodel.charts.ChartAxis"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#EEEEFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left"><B>Methods inherited from interface org.apache.poi.ss.usermodel.charts.<A HREF="../../../../../../org/apache/poi/ss/usermodel/charts/ChartAxis.html" title="interface in org.apache.poi.ss.usermodel.charts">ChartAxis</A></B></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><A HREF="../../../../../../org/apache/poi/ss/usermodel/charts/ChartAxis.html#getCrosses()">getCrosses</A>, <A HREF="../../../../../../org/apache/poi/ss/usermodel/charts/ChartAxis.html#getLogBase()">getLogBase</A>, <A HREF="../../../../../../org/apache/poi/ss/usermodel/charts/ChartAxis.html#getMajorTickMark()">getMajorTickMark</A>, <A HREF="../../../../../../org/apache/poi/ss/usermodel/charts/ChartAxis.html#getMaximum()">getMaximum</A>, <A HREF="../../../../../../org/apache/poi/ss/usermodel/charts/ChartAxis.html#getMinimum()">getMinimum</A>, <A HREF="../../../../../../org/apache/poi/ss/usermodel/charts/ChartAxis.html#getMinorTickMark()">getMinorTickMark</A>, <A HREF="../../../../../../org/apache/poi/ss/usermodel/charts/ChartAxis.html#getNumberFormat()">getNumberFormat</A>, <A HREF="../../../../../../org/apache/poi/ss/usermodel/charts/ChartAxis.html#getOrientation()">getOrientation</A>, <A HREF="../../../../../../org/apache/poi/ss/usermodel/charts/ChartAxis.html#getPosition()">getPosition</A>, <A HREF="../../../../../../org/apache/poi/ss/usermodel/charts/ChartAxis.html#isSetLogBase()">isSetLogBase</A>, <A HREF="../../../../../../org/apache/poi/ss/usermodel/charts/ChartAxis.html#isSetMaximum()">isSetMaximum</A>, <A HREF="../../../../../../org/apache/poi/ss/usermodel/charts/ChartAxis.html#isSetMinimum()">isSetMinimum</A>, <A HREF="../../../../../../org/apache/poi/ss/usermodel/charts/ChartAxis.html#isVisible()">isVisible</A>, <A HREF="../../../../../../org/apache/poi/ss/usermodel/charts/ChartAxis.html#setCrosses(org.apache.poi.ss.usermodel.charts.AxisCrosses)">setCrosses</A>, <A HREF="../../../../../../org/apache/poi/ss/usermodel/charts/ChartAxis.html#setLogBase(double)">setLogBase</A>, <A HREF="../../../../../../org/apache/poi/ss/usermodel/charts/ChartAxis.html#setMajorTickMark(org.apache.poi.ss.usermodel.charts.AxisTickMark)">setMajorTickMark</A>, <A HREF="../../../../../../org/apache/poi/ss/usermodel/charts/ChartAxis.html#setMaximum(double)">setMaximum</A>, <A HREF="../../../../../../org/apache/poi/ss/usermodel/charts/ChartAxis.html#setMinimum(double)">setMinimum</A>, <A HREF="../../../../../../org/apache/poi/ss/usermodel/charts/ChartAxis.html#setMinorTickMark(org.apache.poi.ss.usermodel.charts.AxisTickMark)">setMinorTickMark</A>, <A HREF="../../../../../../org/apache/poi/ss/usermodel/charts/ChartAxis.html#setNumberFormat(java.lang.String)">setNumberFormat</A>, <A HREF="../../../../../../org/apache/poi/ss/usermodel/charts/ChartAxis.html#setOrientation(org.apache.poi.ss.usermodel.charts.AxisOrientation)">setOrientation</A>, <A HREF="../../../../../../org/apache/poi/ss/usermodel/charts/ChartAxis.html#setPosition(org.apache.poi.ss.usermodel.charts.AxisPosition)">setPosition</A>, <A HREF="../../../../../../org/apache/poi/ss/usermodel/charts/ChartAxis.html#setVisible(boolean)">setVisible</A></CODE></TD>
+</TR>
+</TABLE>
+&nbsp;
+<P>
+
+<!-- ========= CONSTRUCTOR DETAIL ======== -->
+
+<A NAME="constructor_detail"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="1"><FONT SIZE="+2">
+<B>Constructor Detail</B></FONT></TH>
+</TR>
+</TABLE>
+
+<A NAME="XSSFValueAxis(org.apache.poi.xssf.usermodel.XSSFChart, long, org.apache.poi.ss.usermodel.charts.AxisPosition)"><!-- --></A><H3>
+XSSFValueAxis</H3>
+<PRE>
+public <B>XSSFValueAxis</B>(<A HREF="../../../../../../org/apache/poi/xssf/usermodel/XSSFChart.html" title="class in org.apache.poi.xssf.usermodel">XSSFChart</A>&nbsp;chart,
+                     long&nbsp;id,
+                     <A HREF="../../../../../../org/apache/poi/ss/usermodel/charts/AxisPosition.html" title="enum in org.apache.poi.ss.usermodel.charts">AxisPosition</A>&nbsp;pos)</PRE>
+<DL>
+</DL>
+<HR>
+
+<A NAME="XSSFValueAxis(org.apache.poi.xssf.usermodel.XSSFChart, org.openxmlformats.schemas.drawingml.x2006.chart.CTValAx)"><!-- --></A><H3>
+XSSFValueAxis</H3>
+<PRE>
+public <B>XSSFValueAxis</B>(<A HREF="../../../../../../org/apache/poi/xssf/usermodel/XSSFChart.html" title="class in org.apache.poi.xssf.usermodel">XSSFChart</A>&nbsp;chart,
+                     org.openxmlformats.schemas.drawingml.x2006.chart.CTValAx&nbsp;ctValAx)</PRE>
+<DL>
+</DL>
+
+<!-- ============ METHOD DETAIL ========== -->
+
+<A NAME="method_detail"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="1"><FONT SIZE="+2">
+<B>Method Detail</B></FONT></TH>
+</TR>
+</TABLE>
+
+<A NAME="getId()"><!-- --></A><H3>
+getId</H3>
+<PRE>
+public long <B>getId</B>()</PRE>
+<DL>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../../../../../org/apache/poi/ss/usermodel/charts/ChartAxis.html#getId()">getId</A></CODE> in interface <CODE><A HREF="../../../../../../org/apache/poi/ss/usermodel/charts/ChartAxis.html" title="interface in org.apache.poi.ss.usermodel.charts">ChartAxis</A></CODE></DL>
+</DD>
+<DD><DL>
+
+<DT><B>Returns:</B><DD>axis id</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setCrossBetween(org.apache.poi.ss.usermodel.charts.AxisCrossBetween)"><!-- --></A><H3>
+setCrossBetween</H3>
+<PRE>
+public void <B>setCrossBetween</B>(<A HREF="../../../../../../org/apache/poi/ss/usermodel/charts/AxisCrossBetween.html" title="enum in org.apache.poi.ss.usermodel.charts">AxisCrossBetween</A>&nbsp;crossBetween)</PRE>
+<DL>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../../../../../org/apache/poi/ss/usermodel/charts/ValueAxis.html#setCrossBetween(org.apache.poi.ss.usermodel.charts.AxisCrossBetween)">setCrossBetween</A></CODE> in interface <CODE><A HREF="../../../../../../org/apache/poi/ss/usermodel/charts/ValueAxis.html" title="interface in org.apache.poi.ss.usermodel.charts">ValueAxis</A></CODE></DL>
+</DD>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>crossBetween</CODE> - cross between type</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getCrossBetween()"><!-- --></A><H3>
+getCrossBetween</H3>
+<PRE>
+public <A HREF="../../../../../../org/apache/poi/ss/usermodel/charts/AxisCrossBetween.html" title="enum in org.apache.poi.ss.usermodel.charts">AxisCrossBetween</A> <B>getCrossBetween</B>()</PRE>
+<DL>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../../../../../org/apache/poi/ss/usermodel/charts/ValueAxis.html#getCrossBetween()">getCrossBetween</A></CODE> in interface <CODE><A HREF="../../../../../../org/apache/poi/ss/usermodel/charts/ValueAxis.html" title="interface in org.apache.poi.ss.usermodel.charts">ValueAxis</A></CODE></DL>
+</DD>
+<DD><DL>
+
+<DT><B>Returns:</B><DD>cross between type</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getCTAxPos()"><!-- --></A><H3>
+getCTAxPos</H3>
+<PRE>
+protected org.openxmlformats.schemas.drawingml.x2006.chart.CTAxPos <B>getCTAxPos</B>()</PRE>
+<DL>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../../../../../org/apache/poi/xssf/usermodel/charts/XSSFChartAxis.html#getCTAxPos()">getCTAxPos</A></CODE> in class <CODE><A HREF="../../../../../../org/apache/poi/xssf/usermodel/charts/XSSFChartAxis.html" title="class in org.apache.poi.xssf.usermodel.charts">XSSFChartAxis</A></CODE></DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getCTNumFmt()"><!-- --></A><H3>
+getCTNumFmt</H3>
+<PRE>
+protected org.openxmlformats.schemas.drawingml.x2006.chart.CTNumFmt <B>getCTNumFmt</B>()</PRE>
+<DL>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../../../../../org/apache/poi/xssf/usermodel/charts/XSSFChartAxis.html#getCTNumFmt()">getCTNumFmt</A></CODE> in class <CODE><A HREF="../../../../../../org/apache/poi/xssf/usermodel/charts/XSSFChartAxis.html" title="class in org.apache.poi.xssf.usermodel.charts">XSSFChartAxis</A></CODE></DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getCTScaling()"><!-- --></A><H3>
+getCTScaling</H3>
+<PRE>
+protected org.openxmlformats.schemas.drawingml.x2006.chart.CTScaling <B>getCTScaling</B>()</PRE>
+<DL>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../../../../../org/apache/poi/xssf/usermodel/charts/XSSFChartAxis.html#getCTScaling()">getCTScaling</A></CODE> in class <CODE><A HREF="../../../../../../org/apache/poi/xssf/usermodel/charts/XSSFChartAxis.html" title="class in org.apache.poi.xssf.usermodel.charts">XSSFChartAxis</A></CODE></DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getCTCrosses()"><!-- --></A><H3>
+getCTCrosses</H3>
+<PRE>
+protected org.openxmlformats.schemas.drawingml.x2006.chart.CTCrosses <B>getCTCrosses</B>()</PRE>
+<DL>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../../../../../org/apache/poi/xssf/usermodel/charts/XSSFChartAxis.html#getCTCrosses()">getCTCrosses</A></CODE> in class <CODE><A HREF="../../../../../../org/apache/poi/xssf/usermodel/charts/XSSFChartAxis.html" title="class in org.apache.poi.xssf.usermodel.charts">XSSFChartAxis</A></CODE></DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getDelete()"><!-- --></A><H3>
+getDelete</H3>
+<PRE>
+protected org.openxmlformats.schemas.drawingml.x2006.chart.CTBoolean <B>getDelete</B>()</PRE>
+<DL>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../../../../../org/apache/poi/xssf/usermodel/charts/XSSFChartAxis.html#getDelete()">getDelete</A></CODE> in class <CODE><A HREF="../../../../../../org/apache/poi/xssf/usermodel/charts/XSSFChartAxis.html" title="class in org.apache.poi.xssf.usermodel.charts">XSSFChartAxis</A></CODE></DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getMajorCTTickMark()"><!-- --></A><H3>
+getMajorCTTickMark</H3>
+<PRE>
+protected org.openxmlformats.schemas.drawingml.x2006.chart.CTTickMark <B>getMajorCTTickMark</B>()</PRE>
+<DL>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../../../../../org/apache/poi/xssf/usermodel/charts/XSSFChartAxis.html#getMajorCTTickMark()">getMajorCTTickMark</A></CODE> in class <CODE><A HREF="../../../../../../org/apache/poi/xssf/usermodel/charts/XSSFChartAxis.html" title="class in org.apache.poi.xssf.usermodel.charts">XSSFChartAxis</A></CODE></DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getMinorCTTickMark()"><!-- --></A><H3>
+getMinorCTTickMark</H3>
+<PRE>
+protected org.openxmlformats.schemas.drawingml.x2006.chart.CTTickMark <B>getMinorCTTickMark</B>()</PRE>
+<DL>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../../../../../org/apache/poi/xssf/usermodel/charts/XSSFChartAxis.html#getMinorCTTickMark()">getMinorCTTickMark</A></CODE> in class <CODE><A HREF="../../../../../../org/apache/poi/xssf/usermodel/charts/XSSFChartAxis.html" title="class in org.apache.poi.xssf.usermodel.charts">XSSFChartAxis</A></CODE></DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="crossAxis(org.apache.poi.ss.usermodel.charts.ChartAxis)"><!-- --></A><H3>
+crossAxis</H3>
+<PRE>
+public void <B>crossAxis</B>(<A HREF="../../../../../../org/apache/poi/ss/usermodel/charts/ChartAxis.html" title="interface in org.apache.poi.ss.usermodel.charts">ChartAxis</A>&nbsp;axis)</PRE>
+<DL>
+<DD><B>Description copied from interface: <CODE><A HREF="../../../../../../org/apache/poi/ss/usermodel/charts/ChartAxis.html#crossAxis(org.apache.poi.ss.usermodel.charts.ChartAxis)">ChartAxis</A></CODE></B></DD>
+<DD>Declare this axis cross another axis.
+<P>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../../../../../org/apache/poi/ss/usermodel/charts/ChartAxis.html#crossAxis(org.apache.poi.ss.usermodel.charts.ChartAxis)">crossAxis</A></CODE> in interface <CODE><A HREF="../../../../../../org/apache/poi/ss/usermodel/charts/ChartAxis.html" title="interface in org.apache.poi.ss.usermodel.charts">ChartAxis</A></CODE></DL>
+</DD>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>axis</CODE> - that this axis should cross</DL>
+</DD>
+</DL>
+<!-- ========= END OF CLASS DATA ========= -->
+<HR>
+
+
+<!-- ======= START OF BOTTOM NAVBAR ====== -->
+<A NAME="navbar_bottom"><!-- --></A>
+<A HREF="#skip-navbar_bottom" title="Skip navigation links"></A>
+<TABLE BORDER="0" WIDTH="100%" CELLPADDING="1" CELLSPACING="0" SUMMARY="">
+<TR>
+<TD COLSPAN=2 BGCOLOR="#EEEEFF" CLASS="NavBarCell1">
+<A NAME="navbar_bottom_firstrow"><!-- --></A>
+<TABLE BORDER="0" CELLPADDING="0" CELLSPACING="3" SUMMARY="">
+  <TR ALIGN="center" VALIGN="top">
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../../overview-summary.html"><FONT CLASS="NavBarFont1"><B>Overview</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="package-summary.html"><FONT CLASS="NavBarFont1"><B>Package</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#FFFFFF" CLASS="NavBarCell1Rev"> &nbsp;<FONT CLASS="NavBarFont1Rev"><B>Class</B></FONT>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="class-use/XSSFValueAxis.html"><FONT CLASS="NavBarFont1"><B>Use</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="package-tree.html"><FONT CLASS="NavBarFont1"><B>Tree</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../../deprecated-list.html"><FONT CLASS="NavBarFont1"><B>Deprecated</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../../index-all.html"><FONT CLASS="NavBarFont1"><B>Index</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../../help-doc.html"><FONT CLASS="NavBarFont1"><B>Help</B></FONT></A>&nbsp;</TD>
+  </TR>
+</TABLE>
+</TD>
+<TD ALIGN="right" VALIGN="top" ROWSPAN=3><EM>
+</EM>
+</TD>
+</TR>
+
+<TR>
+<TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
+&nbsp;<A HREF="../../../../../../org/apache/poi/xssf/usermodel/charts/XSSFScatterChartData.html" title="class in org.apache.poi.xssf.usermodel.charts"><B>PREV CLASS</B></A>&nbsp;
+&nbsp;NEXT CLASS</FONT></TD>
+<TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
+  <A HREF="../../../../../../index.html?org/apache/poi/xssf/usermodel/charts/XSSFValueAxis.html" target="_top"><B>FRAMES</B></A>  &nbsp;
+&nbsp;<A HREF="XSSFValueAxis.html" target="_top"><B>NO FRAMES</B></A>  &nbsp;
+&nbsp;<SCRIPT type="text/javascript">
+  <!--
+  if(window==top) {
+    document.writeln('<A HREF="../../../../../../allclasses-noframe.html"><B>All Classes</B></A>');
+  }
+  //-->
+</SCRIPT>
+<NOSCRIPT>
+  <A HREF="../../../../../../allclasses-noframe.html"><B>All Classes</B></A>
+</NOSCRIPT>
+
+
+</FONT></TD>
+</TR>
+<TR>
+<TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
+  SUMMARY:&nbsp;NESTED&nbsp;|&nbsp;<A HREF="#fields_inherited_from_class_org.apache.poi.xssf.usermodel.charts.XSSFChartAxis">FIELD</A>&nbsp;|&nbsp;<A HREF="#constructor_summary">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_summary">METHOD</A></FONT></TD>
+<TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
+DETAIL:&nbsp;FIELD&nbsp;|&nbsp;<A HREF="#constructor_detail">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_detail">METHOD</A></FONT></TD>
+</TR>
+</TABLE>
+<A NAME="skip-navbar_bottom"></A>
+<!-- ======== END OF BOTTOM NAVBAR ======= -->
+
+<HR>
+
+                <i>Copyright 2014 The Apache Software Foundation or
+        its licensors, as applicable.</i>
+            
+</BODY>
+</HTML>

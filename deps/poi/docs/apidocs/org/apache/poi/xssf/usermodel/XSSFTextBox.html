@@ -1,0 +1,276 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!--NewPage-->
+<HTML>
+<HEAD>
+<TITLE>
+XSSFTextBox (POI API Documentation)
+</TITLE>
+
+<META NAME="keywords" CONTENT="org.apache.poi.xssf.usermodel.XSSFTextBox class">
+
+<LINK REL ="stylesheet" TYPE="text/css" HREF="../../../../../stylesheet.css" TITLE="Style">
+
+<SCRIPT type="text/javascript">
+function windowTitle()
+{
+    parent.document.title="XSSFTextBox (POI API Documentation)";
+}
+</SCRIPT>
+<NOSCRIPT>
+</NOSCRIPT>
+
+</HEAD>
+
+<BODY BGCOLOR="white" onload="windowTitle();">
+
+
+<!-- ========= START OF TOP NAVBAR ======= -->
+<A NAME="navbar_top"><!-- --></A>
+<A HREF="#skip-navbar_top" title="Skip navigation links"></A>
+<TABLE BORDER="0" WIDTH="100%" CELLPADDING="1" CELLSPACING="0" SUMMARY="">
+<TR>
+<TD COLSPAN=2 BGCOLOR="#EEEEFF" CLASS="NavBarCell1">
+<A NAME="navbar_top_firstrow"><!-- --></A>
+<TABLE BORDER="0" CELLPADDING="0" CELLSPACING="3" SUMMARY="">
+  <TR ALIGN="center" VALIGN="top">
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../overview-summary.html"><FONT CLASS="NavBarFont1"><B>Overview</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="package-summary.html"><FONT CLASS="NavBarFont1"><B>Package</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#FFFFFF" CLASS="NavBarCell1Rev"> &nbsp;<FONT CLASS="NavBarFont1Rev"><B>Class</B></FONT>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="class-use/XSSFTextBox.html"><FONT CLASS="NavBarFont1"><B>Use</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="package-tree.html"><FONT CLASS="NavBarFont1"><B>Tree</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../deprecated-list.html"><FONT CLASS="NavBarFont1"><B>Deprecated</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../index-all.html"><FONT CLASS="NavBarFont1"><B>Index</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../help-doc.html"><FONT CLASS="NavBarFont1"><B>Help</B></FONT></A>&nbsp;</TD>
+  </TR>
+</TABLE>
+</TD>
+<TD ALIGN="right" VALIGN="top" ROWSPAN=3><EM>
+</EM>
+</TD>
+</TR>
+
+<TR>
+<TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
+&nbsp;<A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFTable.html" title="class in org.apache.poi.xssf.usermodel"><B>PREV CLASS</B></A>&nbsp;
+&nbsp;<A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFTextParagraph.html" title="class in org.apache.poi.xssf.usermodel"><B>NEXT CLASS</B></A></FONT></TD>
+<TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
+  <A HREF="../../../../../index.html?org/apache/poi/xssf/usermodel/XSSFTextBox.html" target="_top"><B>FRAMES</B></A>  &nbsp;
+&nbsp;<A HREF="XSSFTextBox.html" target="_top"><B>NO FRAMES</B></A>  &nbsp;
+&nbsp;<SCRIPT type="text/javascript">
+  <!--
+  if(window==top) {
+    document.writeln('<A HREF="../../../../../allclasses-noframe.html"><B>All Classes</B></A>');
+  }
+  //-->
+</SCRIPT>
+<NOSCRIPT>
+  <A HREF="../../../../../allclasses-noframe.html"><B>All Classes</B></A>
+</NOSCRIPT>
+
+
+</FONT></TD>
+</TR>
+<TR>
+<TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
+  SUMMARY:&nbsp;NESTED&nbsp;|&nbsp;<A HREF="#fields_inherited_from_class_org.apache.poi.xssf.usermodel.XSSFShape">FIELD</A>&nbsp;|&nbsp;<A HREF="#constructor_summary">CONSTR</A>&nbsp;|&nbsp;<A HREF="#methods_inherited_from_class_org.apache.poi.xssf.usermodel.XSSFSimpleShape">METHOD</A></FONT></TD>
+<TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
+DETAIL:&nbsp;FIELD&nbsp;|&nbsp;<A HREF="#constructor_detail">CONSTR</A>&nbsp;|&nbsp;METHOD</FONT></TD>
+</TR>
+</TABLE>
+<A NAME="skip-navbar_top"></A>
+<!-- ========= END OF TOP NAVBAR ========= -->
+
+<HR>
+<!-- ======== START OF CLASS DATA ======== -->
+<H2>
+<FONT SIZE="-1">
+org.apache.poi.xssf.usermodel</FONT>
+<BR>
+Class XSSFTextBox</H2>
+<PRE>
+java.lang.Object
+  <IMG SRC="../../../../../resources/inherit.gif" ALT="extended by "><A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFShape.html" title="class in org.apache.poi.xssf.usermodel">org.apache.poi.xssf.usermodel.XSSFShape</A>
+      <IMG SRC="../../../../../resources/inherit.gif" ALT="extended by "><A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFSimpleShape.html" title="class in org.apache.poi.xssf.usermodel">org.apache.poi.xssf.usermodel.XSSFSimpleShape</A>
+          <IMG SRC="../../../../../resources/inherit.gif" ALT="extended by "><B>org.apache.poi.xssf.usermodel.XSSFTextBox</B>
+</PRE>
+<DL>
+<DT><B>All Implemented Interfaces:</B> <DD>java.lang.Iterable&lt;<A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFTextParagraph.html" title="class in org.apache.poi.xssf.usermodel">XSSFTextParagraph</A>&gt;</DD>
+</DL>
+<HR>
+<DL>
+<DT><PRE>public final class <B>XSSFTextBox</B><DT>extends <A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFSimpleShape.html" title="class in org.apache.poi.xssf.usermodel">XSSFSimpleShape</A></DL>
+</PRE>
+
+<P>
+Represents a text box in a SpreadsheetML drawing.
+<P>
+
+<P>
+<DL>
+<DT><B>Author:</B></DT>
+  <DD>Yegor Kozlov</DD>
+</DL>
+<HR>
+
+<P>
+<!-- =========== FIELD SUMMARY =========== -->
+
+<A NAME="field_summary"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+<B>Field Summary</B></FONT></TH>
+</TR>
+</TABLE>
+&nbsp;<A NAME="fields_inherited_from_class_org.apache.poi.xssf.usermodel.XSSFShape"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#EEEEFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left"><B>Fields inherited from class org.apache.poi.xssf.usermodel.<A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFShape.html" title="class in org.apache.poi.xssf.usermodel">XSSFShape</A></B></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFShape.html#anchor">anchor</A>, <A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFShape.html#drawing">drawing</A>, <A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFShape.html#EMU_PER_PIXEL">EMU_PER_PIXEL</A>, <A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFShape.html#EMU_PER_POINT">EMU_PER_POINT</A>, <A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFShape.html#parent">parent</A>, <A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFShape.html#PIXEL_DPI">PIXEL_DPI</A>, <A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFShape.html#POINT_DPI">POINT_DPI</A></CODE></TD>
+</TR>
+</TABLE>
+&nbsp;
+<!-- ======== CONSTRUCTOR SUMMARY ======== -->
+
+<A NAME="constructor_summary"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+<B>Constructor Summary</B></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>protected </CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFTextBox.html#XSSFTextBox(org.apache.poi.xssf.usermodel.XSSFDrawing, org.openxmlformats.schemas.drawingml.x2006.spreadsheetDrawing.CTShape)">XSSFTextBox</A></B>(<A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFDrawing.html" title="class in org.apache.poi.xssf.usermodel">XSSFDrawing</A>&nbsp;drawing,
+            org.openxmlformats.schemas.drawingml.x2006.spreadsheetDrawing.CTShape&nbsp;ctShape)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+</TABLE>
+&nbsp;
+<!-- ========== METHOD SUMMARY =========== -->
+
+<A NAME="method_summary"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+<B>Method Summary</B></FONT></TH>
+</TR>
+</TABLE>
+&nbsp;<A NAME="methods_inherited_from_class_org.apache.poi.xssf.usermodel.XSSFSimpleShape"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#EEEEFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left"><B>Methods inherited from class org.apache.poi.xssf.usermodel.<A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFSimpleShape.html" title="class in org.apache.poi.xssf.usermodel">XSSFSimpleShape</A></B></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFSimpleShape.html#addNewTextParagraph()">addNewTextParagraph</A>, <A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFSimpleShape.html#addNewTextParagraph(java.lang.String)">addNewTextParagraph</A>, <A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFSimpleShape.html#addNewTextParagraph(org.apache.poi.xssf.usermodel.XSSFRichTextString)">addNewTextParagraph</A>, <A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFSimpleShape.html#clearText()">clearText</A>, <A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFSimpleShape.html#getBottomInset()">getBottomInset</A>, <A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFSimpleShape.html#getCTShape()">getCTShape</A>, <A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFSimpleShape.html#getLeftInset()">getLeftInset</A>, <A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFSimpleShape.html#getRightInset()">getRightInset</A>, <A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFSimpleShape.html#getShapeProperties()">getShapeProperties</A>, <A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFSimpleShape.html#getShapeType()">getShapeType</A>, <A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFSimpleShape.html#getText()">getText</A>, <A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFSimpleShape.html#getTextAutofit()">getTextAutofit</A>, <A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFSimpleShape.html#getTextDirection()">getTextDirection</A>, <A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFSimpleShape.html#getTextHorizontalOverflow()">getTextHorizontalOverflow</A>, <A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFSimpleShape.html#getTextParagraphs()">getTextParagraphs</A>, <A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFSimpleShape.html#getTextVerticalOverflow()">getTextVerticalOverflow</A>, <A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFSimpleShape.html#getTopInset()">getTopInset</A>, <A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFSimpleShape.html#getVerticalAlignment()">getVerticalAlignment</A>, <A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFSimpleShape.html#getWordWrap()">getWordWrap</A>, <A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFSimpleShape.html#iterator()">iterator</A>, <A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFSimpleShape.html#prototype()">prototype</A>, <A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFSimpleShape.html#setBottomInset(double)">setBottomInset</A>, <A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFSimpleShape.html#setLeftInset(double)">setLeftInset</A>, <A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFSimpleShape.html#setRightInset(double)">setRightInset</A>, <A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFSimpleShape.html#setShapeType(int)">setShapeType</A>, <A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFSimpleShape.html#setText(java.lang.String)">setText</A>, <A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFSimpleShape.html#setText(org.apache.poi.xssf.usermodel.XSSFRichTextString)">setText</A>, <A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFSimpleShape.html#setTextAutofit(org.apache.poi.xssf.usermodel.TextAutofit)">setTextAutofit</A>, <A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFSimpleShape.html#setTextDirection(org.apache.poi.xssf.usermodel.TextDirection)">setTextDirection</A>, <A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFSimpleShape.html#setTextHorizontalOverflow(org.apache.poi.xssf.usermodel.TextHorizontalOverflow)">setTextHorizontalOverflow</A>, <A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFSimpleShape.html#setTextVerticalOverflow(org.apache.poi.xssf.usermodel.TextVerticalOverflow)">setTextVerticalOverflow</A>, <A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFSimpleShape.html#setTopInset(double)">setTopInset</A>, <A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFSimpleShape.html#setVerticalAlignment(org.apache.poi.ss.usermodel.VerticalAlignment)">setVerticalAlignment</A>, <A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFSimpleShape.html#setWordWrap(boolean)">setWordWrap</A></CODE></TD>
+</TR>
+</TABLE>
+&nbsp;<A NAME="methods_inherited_from_class_org.apache.poi.xssf.usermodel.XSSFShape"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#EEEEFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left"><B>Methods inherited from class org.apache.poi.xssf.usermodel.<A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFShape.html" title="class in org.apache.poi.xssf.usermodel">XSSFShape</A></B></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFShape.html#getAnchor()">getAnchor</A>, <A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFShape.html#getDrawing()">getDrawing</A>, <A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFShape.html#getParent()">getParent</A>, <A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFShape.html#isNoFill()">isNoFill</A>, <A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFShape.html#setFillColor(int, int, int)">setFillColor</A>, <A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFShape.html#setLineStyle(int)">setLineStyle</A>, <A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFShape.html#setLineStyleColor(int, int, int)">setLineStyleColor</A>, <A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFShape.html#setLineWidth(double)">setLineWidth</A>, <A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFShape.html#setNoFill(boolean)">setNoFill</A></CODE></TD>
+</TR>
+</TABLE>
+&nbsp;<A NAME="methods_inherited_from_class_java.lang.Object"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#EEEEFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left"><B>Methods inherited from class java.lang.Object</B></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE>clone, equals, finalize, getClass, hashCode, notify, notifyAll, toString, wait, wait, wait</CODE></TD>
+</TR>
+</TABLE>
+&nbsp;
+<P>
+
+<!-- ========= CONSTRUCTOR DETAIL ======== -->
+
+<A NAME="constructor_detail"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="1"><FONT SIZE="+2">
+<B>Constructor Detail</B></FONT></TH>
+</TR>
+</TABLE>
+
+<A NAME="XSSFTextBox(org.apache.poi.xssf.usermodel.XSSFDrawing, org.openxmlformats.schemas.drawingml.x2006.spreadsheetDrawing.CTShape)"><!-- --></A><H3>
+XSSFTextBox</H3>
+<PRE>
+protected <B>XSSFTextBox</B>(<A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFDrawing.html" title="class in org.apache.poi.xssf.usermodel">XSSFDrawing</A>&nbsp;drawing,
+                      org.openxmlformats.schemas.drawingml.x2006.spreadsheetDrawing.CTShape&nbsp;ctShape)</PRE>
+<DL>
+</DL>
+<!-- ========= END OF CLASS DATA ========= -->
+<HR>
+
+
+<!-- ======= START OF BOTTOM NAVBAR ====== -->
+<A NAME="navbar_bottom"><!-- --></A>
+<A HREF="#skip-navbar_bottom" title="Skip navigation links"></A>
+<TABLE BORDER="0" WIDTH="100%" CELLPADDING="1" CELLSPACING="0" SUMMARY="">
+<TR>
+<TD COLSPAN=2 BGCOLOR="#EEEEFF" CLASS="NavBarCell1">
+<A NAME="navbar_bottom_firstrow"><!-- --></A>
+<TABLE BORDER="0" CELLPADDING="0" CELLSPACING="3" SUMMARY="">
+  <TR ALIGN="center" VALIGN="top">
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../overview-summary.html"><FONT CLASS="NavBarFont1"><B>Overview</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="package-summary.html"><FONT CLASS="NavBarFont1"><B>Package</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#FFFFFF" CLASS="NavBarCell1Rev"> &nbsp;<FONT CLASS="NavBarFont1Rev"><B>Class</B></FONT>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="class-use/XSSFTextBox.html"><FONT CLASS="NavBarFont1"><B>Use</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="package-tree.html"><FONT CLASS="NavBarFont1"><B>Tree</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../deprecated-list.html"><FONT CLASS="NavBarFont1"><B>Deprecated</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../index-all.html"><FONT CLASS="NavBarFont1"><B>Index</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../help-doc.html"><FONT CLASS="NavBarFont1"><B>Help</B></FONT></A>&nbsp;</TD>
+  </TR>
+</TABLE>
+</TD>
+<TD ALIGN="right" VALIGN="top" ROWSPAN=3><EM>
+</EM>
+</TD>
+</TR>
+
+<TR>
+<TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
+&nbsp;<A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFTable.html" title="class in org.apache.poi.xssf.usermodel"><B>PREV CLASS</B></A>&nbsp;
+&nbsp;<A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFTextParagraph.html" title="class in org.apache.poi.xssf.usermodel"><B>NEXT CLASS</B></A></FONT></TD>
+<TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
+  <A HREF="../../../../../index.html?org/apache/poi/xssf/usermodel/XSSFTextBox.html" target="_top"><B>FRAMES</B></A>  &nbsp;
+&nbsp;<A HREF="XSSFTextBox.html" target="_top"><B>NO FRAMES</B></A>  &nbsp;
+&nbsp;<SCRIPT type="text/javascript">
+  <!--
+  if(window==top) {
+    document.writeln('<A HREF="../../../../../allclasses-noframe.html"><B>All Classes</B></A>');
+  }
+  //-->
+</SCRIPT>
+<NOSCRIPT>
+  <A HREF="../../../../../allclasses-noframe.html"><B>All Classes</B></A>
+</NOSCRIPT>
+
+
+</FONT></TD>
+</TR>
+<TR>
+<TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
+  SUMMARY:&nbsp;NESTED&nbsp;|&nbsp;<A HREF="#fields_inherited_from_class_org.apache.poi.xssf.usermodel.XSSFShape">FIELD</A>&nbsp;|&nbsp;<A HREF="#constructor_summary">CONSTR</A>&nbsp;|&nbsp;<A HREF="#methods_inherited_from_class_org.apache.poi.xssf.usermodel.XSSFSimpleShape">METHOD</A></FONT></TD>
+<TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
+DETAIL:&nbsp;FIELD&nbsp;|&nbsp;<A HREF="#constructor_detail">CONSTR</A>&nbsp;|&nbsp;METHOD</FONT></TD>
+</TR>
+</TABLE>
+<A NAME="skip-navbar_bottom"></A>
+<!-- ======== END OF BOTTOM NAVBAR ======= -->
+
+<HR>
+
+                <i>Copyright 2014 The Apache Software Foundation or
+        its licensors, as applicable.</i>
+            
+</BODY>
+</HTML>

@@ -1,0 +1,782 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!--NewPage-->
+<HTML>
+<HEAD>
+<TITLE>
+Sheet (POI API Documentation)
+</TITLE>
+
+<META NAME="keywords" CONTENT="org.apache.poi.hslf.model.Sheet class">
+
+<LINK REL ="stylesheet" TYPE="text/css" HREF="../../../../../stylesheet.css" TITLE="Style">
+
+<SCRIPT type="text/javascript">
+function windowTitle()
+{
+    parent.document.title="Sheet (POI API Documentation)";
+}
+</SCRIPT>
+<NOSCRIPT>
+</NOSCRIPT>
+
+</HEAD>
+
+<BODY BGCOLOR="white" onload="windowTitle();">
+
+
+<!-- ========= START OF TOP NAVBAR ======= -->
+<A NAME="navbar_top"><!-- --></A>
+<A HREF="#skip-navbar_top" title="Skip navigation links"></A>
+<TABLE BORDER="0" WIDTH="100%" CELLPADDING="1" CELLSPACING="0" SUMMARY="">
+<TR>
+<TD COLSPAN=2 BGCOLOR="#EEEEFF" CLASS="NavBarCell1">
+<A NAME="navbar_top_firstrow"><!-- --></A>
+<TABLE BORDER="0" CELLPADDING="0" CELLSPACING="3" SUMMARY="">
+  <TR ALIGN="center" VALIGN="top">
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../overview-summary.html"><FONT CLASS="NavBarFont1"><B>Overview</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="package-summary.html"><FONT CLASS="NavBarFont1"><B>Package</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#FFFFFF" CLASS="NavBarCell1Rev"> &nbsp;<FONT CLASS="NavBarFont1Rev"><B>Class</B></FONT>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="class-use/Sheet.html"><FONT CLASS="NavBarFont1"><B>Use</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="package-tree.html"><FONT CLASS="NavBarFont1"><B>Tree</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../deprecated-list.html"><FONT CLASS="NavBarFont1"><B>Deprecated</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../index-all.html"><FONT CLASS="NavBarFont1"><B>Index</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../help-doc.html"><FONT CLASS="NavBarFont1"><B>Help</B></FONT></A>&nbsp;</TD>
+  </TR>
+</TABLE>
+</TD>
+<TD ALIGN="right" VALIGN="top" ROWSPAN=3><EM>
+</EM>
+</TD>
+</TR>
+
+<TR>
+<TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
+&nbsp;<A HREF="../../../../../org/apache/poi/hslf/model/ShapeTypes.html" title="class in org.apache.poi.hslf.model"><B>PREV CLASS</B></A>&nbsp;
+&nbsp;<A HREF="../../../../../org/apache/poi/hslf/model/SimpleShape.html" title="class in org.apache.poi.hslf.model"><B>NEXT CLASS</B></A></FONT></TD>
+<TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
+  <A HREF="../../../../../index.html?org/apache/poi/hslf/model/Sheet.html" target="_top"><B>FRAMES</B></A>  &nbsp;
+&nbsp;<A HREF="Sheet.html" target="_top"><B>NO FRAMES</B></A>  &nbsp;
+&nbsp;<SCRIPT type="text/javascript">
+  <!--
+  if(window==top) {
+    document.writeln('<A HREF="../../../../../allclasses-noframe.html"><B>All Classes</B></A>');
+  }
+  //-->
+</SCRIPT>
+<NOSCRIPT>
+  <A HREF="../../../../../allclasses-noframe.html"><B>All Classes</B></A>
+</NOSCRIPT>
+
+
+</FONT></TD>
+</TR>
+<TR>
+<TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
+  SUMMARY:&nbsp;NESTED&nbsp;|&nbsp;FIELD&nbsp;|&nbsp;<A HREF="#constructor_summary">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_summary">METHOD</A></FONT></TD>
+<TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
+DETAIL:&nbsp;FIELD&nbsp;|&nbsp;<A HREF="#constructor_detail">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_detail">METHOD</A></FONT></TD>
+</TR>
+</TABLE>
+<A NAME="skip-navbar_top"></A>
+<!-- ========= END OF TOP NAVBAR ========= -->
+
+<HR>
+<!-- ======== START OF CLASS DATA ======== -->
+<H2>
+<FONT SIZE="-1">
+org.apache.poi.hslf.model</FONT>
+<BR>
+Class Sheet</H2>
+<PRE>
+java.lang.Object
+  <IMG SRC="../../../../../resources/inherit.gif" ALT="extended by "><B>org.apache.poi.hslf.model.Sheet</B>
+</PRE>
+<DL>
+<DT><B>Direct Known Subclasses:</B> <DD><A HREF="../../../../../org/apache/poi/hslf/model/MasterSheet.html" title="class in org.apache.poi.hslf.model">MasterSheet</A>, <A HREF="../../../../../org/apache/poi/hslf/model/Notes.html" title="class in org.apache.poi.hslf.model">Notes</A>, <A HREF="../../../../../org/apache/poi/hslf/model/Slide.html" title="class in org.apache.poi.hslf.model">Slide</A></DD>
+</DL>
+<HR>
+<DL>
+<DT><PRE>public abstract class <B>Sheet</B><DT>extends java.lang.Object</DL>
+</PRE>
+
+<P>
+This class defines the common format of "Sheets" in a powerpoint
+ document. Such sheets could be Slides, Notes, Master etc
+<P>
+
+<P>
+<DL>
+<DT><B>Author:</B></DT>
+  <DD>Nick Burch, Yegor Kozlov</DD>
+</DL>
+<HR>
+
+<P>
+
+<!-- ======== CONSTRUCTOR SUMMARY ======== -->
+
+<A NAME="constructor_summary"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+<B>Constructor Summary</B></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/model/Sheet.html#Sheet(org.apache.poi.hslf.record.SheetContainer, int)">Sheet</A></B>(<A HREF="../../../../../org/apache/poi/hslf/record/SheetContainer.html" title="class in org.apache.poi.hslf.record">SheetContainer</A>&nbsp;container,
+      int&nbsp;sheetNo)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+</TABLE>
+&nbsp;
+<!-- ========== METHOD SUMMARY =========== -->
+
+<A NAME="method_summary"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+<B>Method Summary</B></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;int</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/model/Sheet.html#_getSheetNumber()">_getSheetNumber</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns the (internal, SlideIdentifier based) sheet number, as used
+ to reference this sheet from other records.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;int</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/model/Sheet.html#_getSheetRefId()">_getSheetRefId</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns the (internal, RefID based) sheet number, as used
+ to in PersistPtr stuff.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/model/Sheet.html#addShape(org.apache.poi.hslf.model.Shape)">addShape</A></B>(<A HREF="../../../../../org/apache/poi/hslf/model/Shape.html" title="class in org.apache.poi.hslf.model">Shape</A>&nbsp;shape)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Add a new Shape to this Slide</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;int</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/model/Sheet.html#allocateShapeId()">allocateShapeId</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Allocates new shape id for the new drawing group id.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/model/Sheet.html#draw(java.awt.Graphics2D)">draw</A></B>(java.awt.Graphics2D&nbsp;graphics)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>protected static&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/model/Sheet.html#findTextRuns(org.apache.poi.hslf.record.EscherTextboxWrapper, java.util.List)">findTextRuns</A></B>(<A HREF="../../../../../org/apache/poi/hslf/record/EscherTextboxWrapper.html" title="class in org.apache.poi.hslf.record">EscherTextboxWrapper</A>&nbsp;wrapper,
+             java.util.List&lt;<A HREF="../../../../../org/apache/poi/hslf/model/TextRun.html" title="class in org.apache.poi.hslf.model">TextRun</A>&gt;&nbsp;found)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Scans through the supplied record array, looking for
+ a TextHeaderAtom followed by one of a TextBytesAtom or
+ a TextCharsAtom.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;<A HREF="../../../../../org/apache/poi/hslf/model/TextRun.html" title="class in org.apache.poi.hslf.model">TextRun</A>[]</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/model/Sheet.html#findTextRuns(org.apache.poi.hslf.record.PPDrawing)">findTextRuns</A></B>(<A HREF="../../../../../org/apache/poi/hslf/record/PPDrawing.html" title="class in org.apache.poi.hslf.record">PPDrawing</A>&nbsp;ppdrawing)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;For a given PPDrawing, grab all the TextRuns</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>protected static&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/model/Sheet.html#findTextRuns(org.apache.poi.hslf.record.Record[], java.util.List)">findTextRuns</A></B>(<A HREF="../../../../../org/apache/poi/hslf/record/Record.html" title="class in org.apache.poi.hslf.record">Record</A>[]&nbsp;records,
+             java.util.List&lt;<A HREF="../../../../../org/apache/poi/hslf/model/TextRun.html" title="class in org.apache.poi.hslf.model">TextRun</A>&gt;&nbsp;found)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Scans through the supplied record array, looking for
+ a TextHeaderAtom followed by one of a TextBytesAtom or
+ a TextCharsAtom.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>protected static&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/model/Sheet.html#findTextRuns(org.apache.poi.hslf.record.Record[], java.util.List, org.apache.poi.hslf.record.StyleTextProp9Atom)">findTextRuns</A></B>(<A HREF="../../../../../org/apache/poi/hslf/record/Record.html" title="class in org.apache.poi.hslf.record">Record</A>[]&nbsp;records,
+             java.util.List&lt;<A HREF="../../../../../org/apache/poi/hslf/model/TextRun.html" title="class in org.apache.poi.hslf.model">TextRun</A>&gt;&nbsp;found,
+             <A HREF="../../../../../org/apache/poi/hslf/record/StyleTextProp9Atom.html" title="class in org.apache.poi.hslf.record">StyleTextProp9Atom</A>&nbsp;styleTextProp9Atom)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Scans through the supplied record array, looking for
+ a TextHeaderAtom followed by one of a TextBytesAtom or
+ a TextCharsAtom.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../../../org/apache/poi/hslf/model/Background.html" title="class in org.apache.poi.hslf.model">Background</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/model/Sheet.html#getBackground()">getBackground</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns the background shape for this sheet.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../../../org/apache/poi/hslf/record/ColorSchemeAtom.html" title="class in org.apache.poi.hslf.record">ColorSchemeAtom</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/model/Sheet.html#getColorScheme()">getColorScheme</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Color scheme for this sheet.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>abstract &nbsp;<A HREF="../../../../../org/apache/poi/hslf/model/MasterSheet.html" title="class in org.apache.poi.hslf.model">MasterSheet</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/model/Sheet.html#getMasterSheet()">getMasterSheet</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Return the master sheet .</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../../../org/apache/poi/hslf/model/TextShape.html" title="class in org.apache.poi.hslf.model">TextShape</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/model/Sheet.html#getPlaceholder(int)">getPlaceholder</A></B>(int&nbsp;type)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Search text placeholer by its type</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../../../org/apache/poi/hslf/model/TextShape.html" title="class in org.apache.poi.hslf.model">TextShape</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/model/Sheet.html#getPlaceholderByTextType(int)">getPlaceholderByTextType</A></B>(int&nbsp;type)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Return placeholder by text type</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>protected &nbsp;<A HREF="../../../../../org/apache/poi/hslf/record/PPDrawing.html" title="class in org.apache.poi.hslf.record">PPDrawing</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/model/Sheet.html#getPPDrawing()">getPPDrawing</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Fetch the PPDrawing from the underlying record</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;java.lang.String</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/model/Sheet.html#getProgrammableTag()">getProgrammableTag</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Return programmable tag associated with this sheet, e.g.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../../../org/apache/poi/hslf/model/Shape.html" title="class in org.apache.poi.hslf.model">Shape</A>[]</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/model/Sheet.html#getShapes()">getShapes</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns all shapes contained in this Sheet</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../../../org/apache/poi/hslf/record/SheetContainer.html" title="class in org.apache.poi.hslf.record">SheetContainer</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/model/Sheet.html#getSheetContainer()">getSheetContainer</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Return record container for this sheet</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../../../org/apache/poi/hslf/usermodel/SlideShow.html" title="class in org.apache.poi.hslf.usermodel">SlideShow</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/model/Sheet.html#getSlideShow()">getSlideShow</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Fetch the SlideShow we're attached to</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>abstract &nbsp;<A HREF="../../../../../org/apache/poi/hslf/model/TextRun.html" title="class in org.apache.poi.hslf.model">TextRun</A>[]</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/model/Sheet.html#getTextRuns()">getTextRuns</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns an array of all the TextRuns in the sheet.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>protected &nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/model/Sheet.html#onAddTextShape(org.apache.poi.hslf.model.TextShape)">onAddTextShape</A></B>(<A HREF="../../../../../org/apache/poi/hslf/model/TextShape.html" title="class in org.apache.poi.hslf.model">TextShape</A>&nbsp;shape)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Subclasses should call this method and update the array of text runs
+ when a text shape is added</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/model/Sheet.html#onCreate()">onCreate</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Called by SlideShow ater a new sheet is created</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/model/Sheet.html#removeShape(org.apache.poi.hslf.model.Shape)">removeShape</A></B>(<A HREF="../../../../../org/apache/poi/hslf/model/Shape.html" title="class in org.apache.poi.hslf.model">Shape</A>&nbsp;shape)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Removes the specified shape from this sheet.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/model/Sheet.html#setSlideShow(org.apache.poi.hslf.usermodel.SlideShow)">setSlideShow</A></B>(<A HREF="../../../../../org/apache/poi/hslf/usermodel/SlideShow.html" title="class in org.apache.poi.hslf.usermodel">SlideShow</A>&nbsp;ss)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Set the SlideShow we're attached to.</TD>
+</TR>
+</TABLE>
+&nbsp;<A NAME="methods_inherited_from_class_java.lang.Object"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#EEEEFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left"><B>Methods inherited from class java.lang.Object</B></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE>clone, equals, finalize, getClass, hashCode, notify, notifyAll, toString, wait, wait, wait</CODE></TD>
+</TR>
+</TABLE>
+&nbsp;
+<P>
+
+<!-- ========= CONSTRUCTOR DETAIL ======== -->
+
+<A NAME="constructor_detail"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="1"><FONT SIZE="+2">
+<B>Constructor Detail</B></FONT></TH>
+</TR>
+</TABLE>
+
+<A NAME="Sheet(org.apache.poi.hslf.record.SheetContainer, int)"><!-- --></A><H3>
+Sheet</H3>
+<PRE>
+public <B>Sheet</B>(<A HREF="../../../../../org/apache/poi/hslf/record/SheetContainer.html" title="class in org.apache.poi.hslf.record">SheetContainer</A>&nbsp;container,
+             int&nbsp;sheetNo)</PRE>
+<DL>
+</DL>
+
+<!-- ============ METHOD DETAIL ========== -->
+
+<A NAME="method_detail"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="1"><FONT SIZE="+2">
+<B>Method Detail</B></FONT></TH>
+</TR>
+</TABLE>
+
+<A NAME="getTextRuns()"><!-- --></A><H3>
+getTextRuns</H3>
+<PRE>
+public abstract <A HREF="../../../../../org/apache/poi/hslf/model/TextRun.html" title="class in org.apache.poi.hslf.model">TextRun</A>[] <B>getTextRuns</B>()</PRE>
+<DL>
+<DD>Returns an array of all the TextRuns in the sheet.
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="_getSheetRefId()"><!-- --></A><H3>
+_getSheetRefId</H3>
+<PRE>
+public int <B>_getSheetRefId</B>()</PRE>
+<DL>
+<DD>Returns the (internal, RefID based) sheet number, as used
+ to in PersistPtr stuff.
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="_getSheetNumber()"><!-- --></A><H3>
+_getSheetNumber</H3>
+<PRE>
+public int <B>_getSheetNumber</B>()</PRE>
+<DL>
+<DD>Returns the (internal, SlideIdentifier based) sheet number, as used
+ to reference this sheet from other records.
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getPPDrawing()"><!-- --></A><H3>
+getPPDrawing</H3>
+<PRE>
+protected <A HREF="../../../../../org/apache/poi/hslf/record/PPDrawing.html" title="class in org.apache.poi.hslf.record">PPDrawing</A> <B>getPPDrawing</B>()</PRE>
+<DL>
+<DD>Fetch the PPDrawing from the underlying record
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getSlideShow()"><!-- --></A><H3>
+getSlideShow</H3>
+<PRE>
+public <A HREF="../../../../../org/apache/poi/hslf/usermodel/SlideShow.html" title="class in org.apache.poi.hslf.usermodel">SlideShow</A> <B>getSlideShow</B>()</PRE>
+<DL>
+<DD>Fetch the SlideShow we're attached to
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getSheetContainer()"><!-- --></A><H3>
+getSheetContainer</H3>
+<PRE>
+public <A HREF="../../../../../org/apache/poi/hslf/record/SheetContainer.html" title="class in org.apache.poi.hslf.record">SheetContainer</A> <B>getSheetContainer</B>()</PRE>
+<DL>
+<DD>Return record container for this sheet
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setSlideShow(org.apache.poi.hslf.usermodel.SlideShow)"><!-- --></A><H3>
+setSlideShow</H3>
+<PRE>
+public void <B>setSlideShow</B>(<A HREF="../../../../../org/apache/poi/hslf/usermodel/SlideShow.html" title="class in org.apache.poi.hslf.usermodel">SlideShow</A>&nbsp;ss)</PRE>
+<DL>
+<DD>Set the SlideShow we're attached to.
+ Also passes it on to our child RichTextRuns
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="findTextRuns(org.apache.poi.hslf.record.PPDrawing)"><!-- --></A><H3>
+findTextRuns</H3>
+<PRE>
+public static <A HREF="../../../../../org/apache/poi/hslf/model/TextRun.html" title="class in org.apache.poi.hslf.model">TextRun</A>[] <B>findTextRuns</B>(<A HREF="../../../../../org/apache/poi/hslf/record/PPDrawing.html" title="class in org.apache.poi.hslf.record">PPDrawing</A>&nbsp;ppdrawing)</PRE>
+<DL>
+<DD>For a given PPDrawing, grab all the TextRuns
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="findTextRuns(org.apache.poi.hslf.record.Record[], java.util.List)"><!-- --></A><H3>
+findTextRuns</H3>
+<PRE>
+protected static void <B>findTextRuns</B>(<A HREF="../../../../../org/apache/poi/hslf/record/Record.html" title="class in org.apache.poi.hslf.record">Record</A>[]&nbsp;records,
+                                   java.util.List&lt;<A HREF="../../../../../org/apache/poi/hslf/model/TextRun.html" title="class in org.apache.poi.hslf.model">TextRun</A>&gt;&nbsp;found)</PRE>
+<DL>
+<DD>Scans through the supplied record array, looking for
+ a TextHeaderAtom followed by one of a TextBytesAtom or
+ a TextCharsAtom. Builds up TextRuns from these
+<P>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>records</CODE> - the records to build from<DD><CODE>found</CODE> - vector to add any found to</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="findTextRuns(org.apache.poi.hslf.record.EscherTextboxWrapper, java.util.List)"><!-- --></A><H3>
+findTextRuns</H3>
+<PRE>
+protected static void <B>findTextRuns</B>(<A HREF="../../../../../org/apache/poi/hslf/record/EscherTextboxWrapper.html" title="class in org.apache.poi.hslf.record">EscherTextboxWrapper</A>&nbsp;wrapper,
+                                   java.util.List&lt;<A HREF="../../../../../org/apache/poi/hslf/model/TextRun.html" title="class in org.apache.poi.hslf.model">TextRun</A>&gt;&nbsp;found)</PRE>
+<DL>
+<DD>Scans through the supplied record array, looking for
+ a TextHeaderAtom followed by one of a TextBytesAtom or
+ a TextCharsAtom. Builds up TextRuns from these
+<P>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>wrapper</CODE> - an EscherTextboxWrapper<DD><CODE>found</CODE> - vector to add any found to</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="findTextRuns(org.apache.poi.hslf.record.Record[], java.util.List, org.apache.poi.hslf.record.StyleTextProp9Atom)"><!-- --></A><H3>
+findTextRuns</H3>
+<PRE>
+protected static void <B>findTextRuns</B>(<A HREF="../../../../../org/apache/poi/hslf/record/Record.html" title="class in org.apache.poi.hslf.record">Record</A>[]&nbsp;records,
+                                   java.util.List&lt;<A HREF="../../../../../org/apache/poi/hslf/model/TextRun.html" title="class in org.apache.poi.hslf.model">TextRun</A>&gt;&nbsp;found,
+                                   <A HREF="../../../../../org/apache/poi/hslf/record/StyleTextProp9Atom.html" title="class in org.apache.poi.hslf.record">StyleTextProp9Atom</A>&nbsp;styleTextProp9Atom)</PRE>
+<DL>
+<DD>Scans through the supplied record array, looking for
+ a TextHeaderAtom followed by one of a TextBytesAtom or
+ a TextCharsAtom. Builds up TextRuns from these
+<P>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>records</CODE> - the records to build from<DD><CODE>found</CODE> - vector to add any found to<DD><CODE>styleTextProp9Atom</CODE> - a StyleTextProp9Atom with numbered lists info</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getShapes()"><!-- --></A><H3>
+getShapes</H3>
+<PRE>
+public <A HREF="../../../../../org/apache/poi/hslf/model/Shape.html" title="class in org.apache.poi.hslf.model">Shape</A>[] <B>getShapes</B>()</PRE>
+<DL>
+<DD>Returns all shapes contained in this Sheet
+<P>
+<DD><DL>
+
+<DT><B>Returns:</B><DD>all shapes contained in this Sheet (Slide or Notes)</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="addShape(org.apache.poi.hslf.model.Shape)"><!-- --></A><H3>
+addShape</H3>
+<PRE>
+public void <B>addShape</B>(<A HREF="../../../../../org/apache/poi/hslf/model/Shape.html" title="class in org.apache.poi.hslf.model">Shape</A>&nbsp;shape)</PRE>
+<DL>
+<DD>Add a new Shape to this Slide
+<P>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>shape</CODE> - - the Shape to add</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="allocateShapeId()"><!-- --></A><H3>
+allocateShapeId</H3>
+<PRE>
+public int <B>allocateShapeId</B>()</PRE>
+<DL>
+<DD>Allocates new shape id for the new drawing group id.
+<P>
+<DD><DL>
+
+<DT><B>Returns:</B><DD>a new shape id.</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="removeShape(org.apache.poi.hslf.model.Shape)"><!-- --></A><H3>
+removeShape</H3>
+<PRE>
+public boolean <B>removeShape</B>(<A HREF="../../../../../org/apache/poi/hslf/model/Shape.html" title="class in org.apache.poi.hslf.model">Shape</A>&nbsp;shape)</PRE>
+<DL>
+<DD>Removes the specified shape from this sheet.
+<P>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>shape</CODE> - shape to be removed from this sheet, if present.
+<DT><B>Returns:</B><DD><tt>true</tt> if the shape was deleted.</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="onCreate()"><!-- --></A><H3>
+onCreate</H3>
+<PRE>
+public void <B>onCreate</B>()</PRE>
+<DL>
+<DD>Called by SlideShow ater a new sheet is created
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getMasterSheet()"><!-- --></A><H3>
+getMasterSheet</H3>
+<PRE>
+public abstract <A HREF="../../../../../org/apache/poi/hslf/model/MasterSheet.html" title="class in org.apache.poi.hslf.model">MasterSheet</A> <B>getMasterSheet</B>()</PRE>
+<DL>
+<DD>Return the master sheet .
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getColorScheme()"><!-- --></A><H3>
+getColorScheme</H3>
+<PRE>
+public <A HREF="../../../../../org/apache/poi/hslf/record/ColorSchemeAtom.html" title="class in org.apache.poi.hslf.record">ColorSchemeAtom</A> <B>getColorScheme</B>()</PRE>
+<DL>
+<DD>Color scheme for this sheet.
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getBackground()"><!-- --></A><H3>
+getBackground</H3>
+<PRE>
+public <A HREF="../../../../../org/apache/poi/hslf/model/Background.html" title="class in org.apache.poi.hslf.model">Background</A> <B>getBackground</B>()</PRE>
+<DL>
+<DD>Returns the background shape for this sheet.
+<P>
+<DD><DL>
+
+<DT><B>Returns:</B><DD>the background shape for this sheet.</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="draw(java.awt.Graphics2D)"><!-- --></A><H3>
+draw</H3>
+<PRE>
+public void <B>draw</B>(java.awt.Graphics2D&nbsp;graphics)</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="onAddTextShape(org.apache.poi.hslf.model.TextShape)"><!-- --></A><H3>
+onAddTextShape</H3>
+<PRE>
+protected void <B>onAddTextShape</B>(<A HREF="../../../../../org/apache/poi/hslf/model/TextShape.html" title="class in org.apache.poi.hslf.model">TextShape</A>&nbsp;shape)</PRE>
+<DL>
+<DD>Subclasses should call this method and update the array of text runs
+ when a text shape is added
+<P>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>shape</CODE> - </DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getPlaceholderByTextType(int)"><!-- --></A><H3>
+getPlaceholderByTextType</H3>
+<PRE>
+public <A HREF="../../../../../org/apache/poi/hslf/model/TextShape.html" title="class in org.apache.poi.hslf.model">TextShape</A> <B>getPlaceholderByTextType</B>(int&nbsp;type)</PRE>
+<DL>
+<DD>Return placeholder by text type
+<P>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>type</CODE> - type of text, See <A HREF="../../../../../org/apache/poi/hslf/record/TextHeaderAtom.html" title="class in org.apache.poi.hslf.record"><CODE>TextHeaderAtom</CODE></A>
+<DT><B>Returns:</B><DD><code>TextShape</code> or <code>null</code></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getPlaceholder(int)"><!-- --></A><H3>
+getPlaceholder</H3>
+<PRE>
+public <A HREF="../../../../../org/apache/poi/hslf/model/TextShape.html" title="class in org.apache.poi.hslf.model">TextShape</A> <B>getPlaceholder</B>(int&nbsp;type)</PRE>
+<DL>
+<DD>Search text placeholer by its type
+<P>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>type</CODE> - type of placeholder to search. See <A HREF="../../../../../org/apache/poi/hslf/record/OEPlaceholderAtom.html" title="class in org.apache.poi.hslf.record"><CODE>OEPlaceholderAtom</CODE></A>
+<DT><B>Returns:</B><DD><code>TextShape</code> or <code>null</code></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getProgrammableTag()"><!-- --></A><H3>
+getProgrammableTag</H3>
+<PRE>
+public java.lang.String <B>getProgrammableTag</B>()</PRE>
+<DL>
+<DD>Return programmable tag associated with this sheet, e.g. <code>___PPT12</code>.
+<P>
+<DD><DL>
+
+<DT><B>Returns:</B><DD>programmable tag associated with this sheet.</DL>
+</DD>
+</DL>
+<!-- ========= END OF CLASS DATA ========= -->
+<HR>
+
+
+<!-- ======= START OF BOTTOM NAVBAR ====== -->
+<A NAME="navbar_bottom"><!-- --></A>
+<A HREF="#skip-navbar_bottom" title="Skip navigation links"></A>
+<TABLE BORDER="0" WIDTH="100%" CELLPADDING="1" CELLSPACING="0" SUMMARY="">
+<TR>
+<TD COLSPAN=2 BGCOLOR="#EEEEFF" CLASS="NavBarCell1">
+<A NAME="navbar_bottom_firstrow"><!-- --></A>
+<TABLE BORDER="0" CELLPADDING="0" CELLSPACING="3" SUMMARY="">
+  <TR ALIGN="center" VALIGN="top">
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../overview-summary.html"><FONT CLASS="NavBarFont1"><B>Overview</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="package-summary.html"><FONT CLASS="NavBarFont1"><B>Package</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#FFFFFF" CLASS="NavBarCell1Rev"> &nbsp;<FONT CLASS="NavBarFont1Rev"><B>Class</B></FONT>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="class-use/Sheet.html"><FONT CLASS="NavBarFont1"><B>Use</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="package-tree.html"><FONT CLASS="NavBarFont1"><B>Tree</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../deprecated-list.html"><FONT CLASS="NavBarFont1"><B>Deprecated</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../index-all.html"><FONT CLASS="NavBarFont1"><B>Index</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../help-doc.html"><FONT CLASS="NavBarFont1"><B>Help</B></FONT></A>&nbsp;</TD>
+  </TR>
+</TABLE>
+</TD>
+<TD ALIGN="right" VALIGN="top" ROWSPAN=3><EM>
+</EM>
+</TD>
+</TR>
+
+<TR>
+<TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
+&nbsp;<A HREF="../../../../../org/apache/poi/hslf/model/ShapeTypes.html" title="class in org.apache.poi.hslf.model"><B>PREV CLASS</B></A>&nbsp;
+&nbsp;<A HREF="../../../../../org/apache/poi/hslf/model/SimpleShape.html" title="class in org.apache.poi.hslf.model"><B>NEXT CLASS</B></A></FONT></TD>
+<TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
+  <A HREF="../../../../../index.html?org/apache/poi/hslf/model/Sheet.html" target="_top"><B>FRAMES</B></A>  &nbsp;
+&nbsp;<A HREF="Sheet.html" target="_top"><B>NO FRAMES</B></A>  &nbsp;
+&nbsp;<SCRIPT type="text/javascript">
+  <!--
+  if(window==top) {
+    document.writeln('<A HREF="../../../../../allclasses-noframe.html"><B>All Classes</B></A>');
+  }
+  //-->
+</SCRIPT>
+<NOSCRIPT>
+  <A HREF="../../../../../allclasses-noframe.html"><B>All Classes</B></A>
+</NOSCRIPT>
+
+
+</FONT></TD>
+</TR>
+<TR>
+<TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
+  SUMMARY:&nbsp;NESTED&nbsp;|&nbsp;FIELD&nbsp;|&nbsp;<A HREF="#constructor_summary">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_summary">METHOD</A></FONT></TD>
+<TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
+DETAIL:&nbsp;FIELD&nbsp;|&nbsp;<A HREF="#constructor_detail">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_detail">METHOD</A></FONT></TD>
+</TR>
+</TABLE>
+<A NAME="skip-navbar_bottom"></A>
+<!-- ======== END OF BOTTOM NAVBAR ======= -->
+
+<HR>
+
+                <i>Copyright 2014 The Apache Software Foundation or
+        its licensors, as applicable.</i>
+            
+</BODY>
+</HTML>

@@ -1,0 +1,656 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!--NewPage-->
+<HTML>
+<HEAD>
+<TITLE>
+XSSFHeaderFooter (POI API Documentation)
+</TITLE>
+
+<META NAME="keywords" CONTENT="org.apache.poi.xssf.usermodel.extensions.XSSFHeaderFooter class">
+
+<LINK REL ="stylesheet" TYPE="text/css" HREF="../../../../../../stylesheet.css" TITLE="Style">
+
+<SCRIPT type="text/javascript">
+function windowTitle()
+{
+    parent.document.title="XSSFHeaderFooter (POI API Documentation)";
+}
+</SCRIPT>
+<NOSCRIPT>
+</NOSCRIPT>
+
+</HEAD>
+
+<BODY BGCOLOR="white" onload="windowTitle();">
+
+
+<!-- ========= START OF TOP NAVBAR ======= -->
+<A NAME="navbar_top"><!-- --></A>
+<A HREF="#skip-navbar_top" title="Skip navigation links"></A>
+<TABLE BORDER="0" WIDTH="100%" CELLPADDING="1" CELLSPACING="0" SUMMARY="">
+<TR>
+<TD COLSPAN=2 BGCOLOR="#EEEEFF" CLASS="NavBarCell1">
+<A NAME="navbar_top_firstrow"><!-- --></A>
+<TABLE BORDER="0" CELLPADDING="0" CELLSPACING="3" SUMMARY="">
+  <TR ALIGN="center" VALIGN="top">
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../../overview-summary.html"><FONT CLASS="NavBarFont1"><B>Overview</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="package-summary.html"><FONT CLASS="NavBarFont1"><B>Package</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#FFFFFF" CLASS="NavBarCell1Rev"> &nbsp;<FONT CLASS="NavBarFont1Rev"><B>Class</B></FONT>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="class-use/XSSFHeaderFooter.html"><FONT CLASS="NavBarFont1"><B>Use</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="package-tree.html"><FONT CLASS="NavBarFont1"><B>Tree</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../../deprecated-list.html"><FONT CLASS="NavBarFont1"><B>Deprecated</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../../index-all.html"><FONT CLASS="NavBarFont1"><B>Index</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../../help-doc.html"><FONT CLASS="NavBarFont1"><B>Help</B></FONT></A>&nbsp;</TD>
+  </TR>
+</TABLE>
+</TD>
+<TD ALIGN="right" VALIGN="top" ROWSPAN=3><EM>
+</EM>
+</TD>
+</TR>
+
+<TR>
+<TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
+&nbsp;<A HREF="../../../../../../org/apache/poi/xssf/usermodel/extensions/XSSFCellFill.html" title="class in org.apache.poi.xssf.usermodel.extensions"><B>PREV CLASS</B></A>&nbsp;
+&nbsp;NEXT CLASS</FONT></TD>
+<TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
+  <A HREF="../../../../../../index.html?org/apache/poi/xssf/usermodel/extensions/XSSFHeaderFooter.html" target="_top"><B>FRAMES</B></A>  &nbsp;
+&nbsp;<A HREF="XSSFHeaderFooter.html" target="_top"><B>NO FRAMES</B></A>  &nbsp;
+&nbsp;<SCRIPT type="text/javascript">
+  <!--
+  if(window==top) {
+    document.writeln('<A HREF="../../../../../../allclasses-noframe.html"><B>All Classes</B></A>');
+  }
+  //-->
+</SCRIPT>
+<NOSCRIPT>
+  <A HREF="../../../../../../allclasses-noframe.html"><B>All Classes</B></A>
+</NOSCRIPT>
+
+
+</FONT></TD>
+</TR>
+<TR>
+<TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
+  SUMMARY:&nbsp;NESTED&nbsp;|&nbsp;FIELD&nbsp;|&nbsp;<A HREF="#constructor_summary">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_summary">METHOD</A></FONT></TD>
+<TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
+DETAIL:&nbsp;FIELD&nbsp;|&nbsp;<A HREF="#constructor_detail">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_detail">METHOD</A></FONT></TD>
+</TR>
+</TABLE>
+<A NAME="skip-navbar_top"></A>
+<!-- ========= END OF TOP NAVBAR ========= -->
+
+<HR>
+<!-- ======== START OF CLASS DATA ======== -->
+<H2>
+<FONT SIZE="-1">
+org.apache.poi.xssf.usermodel.extensions</FONT>
+<BR>
+Class XSSFHeaderFooter</H2>
+<PRE>
+java.lang.Object
+  <IMG SRC="../../../../../../resources/inherit.gif" ALT="extended by "><B>org.apache.poi.xssf.usermodel.extensions.XSSFHeaderFooter</B>
+</PRE>
+<DL>
+<DT><B>All Implemented Interfaces:</B> <DD><A HREF="../../../../../../org/apache/poi/ss/usermodel/HeaderFooter.html" title="interface in org.apache.poi.ss.usermodel">HeaderFooter</A></DD>
+</DL>
+<DL>
+<DT><B>Direct Known Subclasses:</B> <DD><A HREF="../../../../../../org/apache/poi/xssf/usermodel/XSSFEvenFooter.html" title="class in org.apache.poi.xssf.usermodel">XSSFEvenFooter</A>, <A HREF="../../../../../../org/apache/poi/xssf/usermodel/XSSFEvenHeader.html" title="class in org.apache.poi.xssf.usermodel">XSSFEvenHeader</A>, <A HREF="../../../../../../org/apache/poi/xssf/usermodel/XSSFFirstFooter.html" title="class in org.apache.poi.xssf.usermodel">XSSFFirstFooter</A>, <A HREF="../../../../../../org/apache/poi/xssf/usermodel/XSSFFirstHeader.html" title="class in org.apache.poi.xssf.usermodel">XSSFFirstHeader</A>, <A HREF="../../../../../../org/apache/poi/xssf/usermodel/XSSFOddFooter.html" title="class in org.apache.poi.xssf.usermodel">XSSFOddFooter</A>, <A HREF="../../../../../../org/apache/poi/xssf/usermodel/XSSFOddHeader.html" title="class in org.apache.poi.xssf.usermodel">XSSFOddHeader</A></DD>
+</DL>
+<HR>
+<DL>
+<DT><PRE>public abstract class <B>XSSFHeaderFooter</B><DT>extends java.lang.Object<DT>implements <A HREF="../../../../../../org/apache/poi/ss/usermodel/HeaderFooter.html" title="interface in org.apache.poi.ss.usermodel">HeaderFooter</A></DL>
+</PRE>
+
+<P>
+Parent class of all XSSF headers and footers.
+
+ For a list of all the different fields that can be placed into a header or
+ footer, such as page number, bold, underline etc, see the follow formatting
+ syntax
+
+<b> Header/Footer Formatting Syntax</b>
+<p>
+ There are a number of formatting codes that can be written inline with the
+ actual header / footer text, which affect the formatting in the header or
+ footer.
+</p>
+
+ This example shows the text "Center Bold Header" on the first line (center
+ section), and the date on the second line (center section). &CCenter
+ &"-,Bold"Bold &"-,Regular"Header_x000A_&D
+
+ <b>General Rules:</b> There is no required order in which these codes must
+ appear. The first occurrence of the following codes turns the formatting ON,
+ the second occurrence turns it OFF again:
+
+ <dl>
+ <dt>&L</dt>
+ <dd>code for "left section" (there are three header / footer locations,
+ "left", "center", and "right"). When two or more occurrences of this section
+ marker exist, the contents from all markers are concatenated, in the order of
+ appearance, and placed into the left section.</dd>
+ <dt>&P</dt>
+ <dd>code for "current page #"</dd>
+ <dt>&N</dt>
+ <dd>code for "total pages"</dd>
+ <dt>&font size</dt>
+ <dd>code for "text font size", where font size is a font size in points.</dd>
+ <dt>&K</dt>
+ <dd>code for "text font color" RGB Color is specified as RRGGBB Theme Color
+ is specifed as TTSNN where TT is the theme color Id, S is either "+" or "-"
+ of the tint/shade value, NN is the tint/shade value.</dd>
+ <dt>&S</dt>
+ <dd>code for "text strikethrough" on / off</dd>
+ <dt>&X</dt>
+ <dd>code for "text super script" on / off</dd>
+ <dt>&Y</dt>
+ <dd>code for "text subscript" on / off</dd>
+ <dt>&C</dt>
+ <dd>code for "center section". When two or more occurrences of this section
+ marker exist, the contents from all markers are concatenated, in the order of
+ appearance, and placed into the center section. SpreadsheetML Reference
+ Material - Worksheets 1966</dd>
+ <dt>&D</dt>
+ <dd>code for "date"</dd>
+ <dt>&T</dt>
+ <dd>code for "time"</dd>
+ <dt>&G</dt>
+ <dd>code for "picture as background"</dd>
+ <dt>&U</dt>
+ <dd>code for "text single underline"</dd>
+ <dt>&E</dt>
+ <dd>code for "double underline"</dd>
+ <dt>&R</dt>
+ <dd>code for "right section". When two or more occurrences of this section
+ marker exist, the contents from all markers are concatenated, in the order of
+ appearance, and placed into the right section.</dd>
+ <dt>&Z</dt>
+ <dd>code for "this workbook's file path"</dd>
+ <dt>&F</dt>
+ <dd>code for "this workbook's file name"</dd>
+ <dt>&A</dt>
+ <dd>code for "sheet tab name"</dd>
+ <dt>&+</dt>
+ <dd>code for add to page #.</dd>
+ <dt>&-</dt>
+ <dd>code for subtract from page #.</dd>
+ <dt>&"font name,font type" - code for "text font name" and "text font type",
+ where font name and font type are strings specifying the name and type of the
+ font, separated by a comma. When a hyphen appears in font name, it means
+ "none specified". Both of font name and font type can be localized
+ values.</dd>
+ <dt>&"-,Bold"</dt>
+ <dd>code for "bold font style"</dd>
+ <dt>&B</dt>
+ <dd>also means "bold font style"</dd>
+ <dt>&"-,Regular"</dt>
+ <dd>code for "regular font style"</dd>
+ <dt>&"-,Italic"</dt>
+ <dd>code for "italic font style"</dd>
+ <dt>&I</dt>
+ <dd>also means "italic font style"</dd>
+ <dt>&"-,Bold Italic"</dt>
+ <dd>code for "bold italic font style"</dd>
+ <dt>&O</dt>
+ <dd>code for "outline style"</dd>
+ <dt>&H</dt>
+ <dd>code for "shadow style"</dd>
+ </dl>
+<P>
+
+<P>
+<HR>
+
+<P>
+
+<!-- ======== CONSTRUCTOR SUMMARY ======== -->
+
+<A NAME="constructor_summary"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+<B>Constructor Summary</B></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><B><A HREF="../../../../../../org/apache/poi/xssf/usermodel/extensions/XSSFHeaderFooter.html#XSSFHeaderFooter(org.openxmlformats.schemas.spreadsheetml.x2006.main.CTHeaderFooter)">XSSFHeaderFooter</A></B>(org.openxmlformats.schemas.spreadsheetml.x2006.main.CTHeaderFooter&nbsp;headerFooter)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Create an instance of XSSFHeaderFooter from the supplied XML bean</TD>
+</TR>
+</TABLE>
+&nbsp;
+<!-- ========== METHOD SUMMARY =========== -->
+
+<A NAME="method_summary"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+<B>Method Summary</B></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../org/apache/poi/xssf/usermodel/extensions/XSSFHeaderFooter.html#areFieldsStripped()">areFieldsStripped</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Are fields currently being stripped from the text that this
+ <A HREF="../../../../../../org/apache/poi/xssf/usermodel/extensions/XSSFHeaderFooter.html" title="class in org.apache.poi.xssf.usermodel.extensions"><CODE>XSSFHeaderFooter</CODE></A> returns? Default is false, but can be changed</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;java.lang.String</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../org/apache/poi/xssf/usermodel/extensions/XSSFHeaderFooter.html#getCenter()">getCenter</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;get the text representing the center part of this element</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;org.openxmlformats.schemas.spreadsheetml.x2006.main.CTHeaderFooter</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../org/apache/poi/xssf/usermodel/extensions/XSSFHeaderFooter.html#getHeaderFooter()">getHeaderFooter</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns the underlying CTHeaderFooter xml bean</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;java.lang.String</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../org/apache/poi/xssf/usermodel/extensions/XSSFHeaderFooter.html#getLeft()">getLeft</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;get the text representing the left part of this element</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;java.lang.String</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../org/apache/poi/xssf/usermodel/extensions/XSSFHeaderFooter.html#getRight()">getRight</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;get the text representing the right part of this element</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>abstract &nbsp;java.lang.String</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../org/apache/poi/xssf/usermodel/extensions/XSSFHeaderFooter.html#getText()">getText</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;java.lang.String</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../org/apache/poi/xssf/usermodel/extensions/XSSFHeaderFooter.html#getValue()">getValue</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../org/apache/poi/xssf/usermodel/extensions/XSSFHeaderFooter.html#setAreFieldsStripped(boolean)">setAreFieldsStripped</A></B>(boolean&nbsp;stripFields)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Should fields (eg macros) be stripped from the text that this class
+ returns? Default is not to strip.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../org/apache/poi/xssf/usermodel/extensions/XSSFHeaderFooter.html#setCenter(java.lang.String)">setCenter</A></B>(java.lang.String&nbsp;newCenter)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;set a centered string value for this element</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../org/apache/poi/xssf/usermodel/extensions/XSSFHeaderFooter.html#setLeft(java.lang.String)">setLeft</A></B>(java.lang.String&nbsp;newLeft)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;set a left string value for this element</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../org/apache/poi/xssf/usermodel/extensions/XSSFHeaderFooter.html#setRight(java.lang.String)">setRight</A></B>(java.lang.String&nbsp;newRight)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;set a right string value for this element</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>protected abstract &nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../org/apache/poi/xssf/usermodel/extensions/XSSFHeaderFooter.html#setText(java.lang.String)">setText</A></B>(java.lang.String&nbsp;text)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;java.lang.String</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../org/apache/poi/xssf/usermodel/extensions/XSSFHeaderFooter.html#stripFields(java.lang.String)">stripFields</A></B>(java.lang.String&nbsp;text)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Removes any fields (eg macros, page markers etc) from the string.</TD>
+</TR>
+</TABLE>
+&nbsp;<A NAME="methods_inherited_from_class_java.lang.Object"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#EEEEFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left"><B>Methods inherited from class java.lang.Object</B></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE>clone, equals, finalize, getClass, hashCode, notify, notifyAll, toString, wait, wait, wait</CODE></TD>
+</TR>
+</TABLE>
+&nbsp;
+<P>
+
+<!-- ========= CONSTRUCTOR DETAIL ======== -->
+
+<A NAME="constructor_detail"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="1"><FONT SIZE="+2">
+<B>Constructor Detail</B></FONT></TH>
+</TR>
+</TABLE>
+
+<A NAME="XSSFHeaderFooter(org.openxmlformats.schemas.spreadsheetml.x2006.main.CTHeaderFooter)"><!-- --></A><H3>
+XSSFHeaderFooter</H3>
+<PRE>
+public <B>XSSFHeaderFooter</B>(org.openxmlformats.schemas.spreadsheetml.x2006.main.CTHeaderFooter&nbsp;headerFooter)</PRE>
+<DL>
+<DD>Create an instance of XSSFHeaderFooter from the supplied XML bean
+<P>
+<DL>
+<DT><B>Parameters:</B><DD><CODE>headerFooter</CODE> - </DL>
+</DL>
+
+<!-- ============ METHOD DETAIL ========== -->
+
+<A NAME="method_detail"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="1"><FONT SIZE="+2">
+<B>Method Detail</B></FONT></TH>
+</TR>
+</TABLE>
+
+<A NAME="getHeaderFooter()"><!-- --></A><H3>
+getHeaderFooter</H3>
+<PRE>
+<FONT SIZE="-1"><A HREF="../../../../../../org/apache/poi/util/Internal.html" title="annotation in org.apache.poi.util">@Internal</A>
+</FONT>public org.openxmlformats.schemas.spreadsheetml.x2006.main.CTHeaderFooter <B>getHeaderFooter</B>()</PRE>
+<DL>
+<DD>Returns the underlying CTHeaderFooter xml bean
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+
+<DT><B>Returns:</B><DD>the underlying CTHeaderFooter xml bean</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getValue()"><!-- --></A><H3>
+getValue</H3>
+<PRE>
+public java.lang.String <B>getValue</B>()</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="areFieldsStripped()"><!-- --></A><H3>
+areFieldsStripped</H3>
+<PRE>
+public boolean <B>areFieldsStripped</B>()</PRE>
+<DL>
+<DD>Are fields currently being stripped from the text that this
+ <A HREF="../../../../../../org/apache/poi/xssf/usermodel/extensions/XSSFHeaderFooter.html" title="class in org.apache.poi.xssf.usermodel.extensions"><CODE>XSSFHeaderFooter</CODE></A> returns? Default is false, but can be changed
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setAreFieldsStripped(boolean)"><!-- --></A><H3>
+setAreFieldsStripped</H3>
+<PRE>
+public void <B>setAreFieldsStripped</B>(boolean&nbsp;stripFields)</PRE>
+<DL>
+<DD>Should fields (eg macros) be stripped from the text that this class
+ returns? Default is not to strip.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>stripFields</CODE> - </DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="stripFields(java.lang.String)"><!-- --></A><H3>
+stripFields</H3>
+<PRE>
+public static java.lang.String <B>stripFields</B>(java.lang.String&nbsp;text)</PRE>
+<DL>
+<DD>Removes any fields (eg macros, page markers etc) from the string.
+ Normally used to make some text suitable for showing to humans, and the
+ resultant text should not normally be saved back into the document!
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getText()"><!-- --></A><H3>
+getText</H3>
+<PRE>
+public abstract java.lang.String <B>getText</B>()</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setText(java.lang.String)"><!-- --></A><H3>
+setText</H3>
+<PRE>
+protected abstract void <B>setText</B>(java.lang.String&nbsp;text)</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getCenter()"><!-- --></A><H3>
+getCenter</H3>
+<PRE>
+public java.lang.String <B>getCenter</B>()</PRE>
+<DL>
+<DD>get the text representing the center part of this element
+<P>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../../../../../org/apache/poi/ss/usermodel/HeaderFooter.html#getCenter()">getCenter</A></CODE> in interface <CODE><A HREF="../../../../../../org/apache/poi/ss/usermodel/HeaderFooter.html" title="interface in org.apache.poi.ss.usermodel">HeaderFooter</A></CODE></DL>
+</DD>
+<DD><DL>
+
+<DT><B>Returns:</B><DD>The string representing the center.</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getLeft()"><!-- --></A><H3>
+getLeft</H3>
+<PRE>
+public java.lang.String <B>getLeft</B>()</PRE>
+<DL>
+<DD>get the text representing the left part of this element
+<P>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../../../../../org/apache/poi/ss/usermodel/HeaderFooter.html#getLeft()">getLeft</A></CODE> in interface <CODE><A HREF="../../../../../../org/apache/poi/ss/usermodel/HeaderFooter.html" title="interface in org.apache.poi.ss.usermodel">HeaderFooter</A></CODE></DL>
+</DD>
+<DD><DL>
+
+<DT><B>Returns:</B><DD>The string representing the left side.</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getRight()"><!-- --></A><H3>
+getRight</H3>
+<PRE>
+public java.lang.String <B>getRight</B>()</PRE>
+<DL>
+<DD>get the text representing the right part of this element
+<P>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../../../../../org/apache/poi/ss/usermodel/HeaderFooter.html#getRight()">getRight</A></CODE> in interface <CODE><A HREF="../../../../../../org/apache/poi/ss/usermodel/HeaderFooter.html" title="interface in org.apache.poi.ss.usermodel">HeaderFooter</A></CODE></DL>
+</DD>
+<DD><DL>
+
+<DT><B>Returns:</B><DD>The string representing the right side.</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setCenter(java.lang.String)"><!-- --></A><H3>
+setCenter</H3>
+<PRE>
+public void <B>setCenter</B>(java.lang.String&nbsp;newCenter)</PRE>
+<DL>
+<DD>set a centered string value for this element
+<P>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../../../../../org/apache/poi/ss/usermodel/HeaderFooter.html#setCenter(java.lang.String)">setCenter</A></CODE> in interface <CODE><A HREF="../../../../../../org/apache/poi/ss/usermodel/HeaderFooter.html" title="interface in org.apache.poi.ss.usermodel">HeaderFooter</A></CODE></DL>
+</DD>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>newCenter</CODE> - The string to set as the center.</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setLeft(java.lang.String)"><!-- --></A><H3>
+setLeft</H3>
+<PRE>
+public void <B>setLeft</B>(java.lang.String&nbsp;newLeft)</PRE>
+<DL>
+<DD>set a left string value for this element
+<P>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../../../../../org/apache/poi/ss/usermodel/HeaderFooter.html#setLeft(java.lang.String)">setLeft</A></CODE> in interface <CODE><A HREF="../../../../../../org/apache/poi/ss/usermodel/HeaderFooter.html" title="interface in org.apache.poi.ss.usermodel">HeaderFooter</A></CODE></DL>
+</DD>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>newLeft</CODE> - The string to set as the left side.</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setRight(java.lang.String)"><!-- --></A><H3>
+setRight</H3>
+<PRE>
+public void <B>setRight</B>(java.lang.String&nbsp;newRight)</PRE>
+<DL>
+<DD>set a right string value for this element
+<P>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../../../../../org/apache/poi/ss/usermodel/HeaderFooter.html#setRight(java.lang.String)">setRight</A></CODE> in interface <CODE><A HREF="../../../../../../org/apache/poi/ss/usermodel/HeaderFooter.html" title="interface in org.apache.poi.ss.usermodel">HeaderFooter</A></CODE></DL>
+</DD>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>newRight</CODE> - The string to set as the right side.</DL>
+</DD>
+</DL>
+<!-- ========= END OF CLASS DATA ========= -->
+<HR>
+
+
+<!-- ======= START OF BOTTOM NAVBAR ====== -->
+<A NAME="navbar_bottom"><!-- --></A>
+<A HREF="#skip-navbar_bottom" title="Skip navigation links"></A>
+<TABLE BORDER="0" WIDTH="100%" CELLPADDING="1" CELLSPACING="0" SUMMARY="">
+<TR>
+<TD COLSPAN=2 BGCOLOR="#EEEEFF" CLASS="NavBarCell1">
+<A NAME="navbar_bottom_firstrow"><!-- --></A>
+<TABLE BORDER="0" CELLPADDING="0" CELLSPACING="3" SUMMARY="">
+  <TR ALIGN="center" VALIGN="top">
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../../overview-summary.html"><FONT CLASS="NavBarFont1"><B>Overview</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="package-summary.html"><FONT CLASS="NavBarFont1"><B>Package</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#FFFFFF" CLASS="NavBarCell1Rev"> &nbsp;<FONT CLASS="NavBarFont1Rev"><B>Class</B></FONT>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="class-use/XSSFHeaderFooter.html"><FONT CLASS="NavBarFont1"><B>Use</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="package-tree.html"><FONT CLASS="NavBarFont1"><B>Tree</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../../deprecated-list.html"><FONT CLASS="NavBarFont1"><B>Deprecated</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../../index-all.html"><FONT CLASS="NavBarFont1"><B>Index</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../../help-doc.html"><FONT CLASS="NavBarFont1"><B>Help</B></FONT></A>&nbsp;</TD>
+  </TR>
+</TABLE>
+</TD>
+<TD ALIGN="right" VALIGN="top" ROWSPAN=3><EM>
+</EM>
+</TD>
+</TR>
+
+<TR>
+<TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
+&nbsp;<A HREF="../../../../../../org/apache/poi/xssf/usermodel/extensions/XSSFCellFill.html" title="class in org.apache.poi.xssf.usermodel.extensions"><B>PREV CLASS</B></A>&nbsp;
+&nbsp;NEXT CLASS</FONT></TD>
+<TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
+  <A HREF="../../../../../../index.html?org/apache/poi/xssf/usermodel/extensions/XSSFHeaderFooter.html" target="_top"><B>FRAMES</B></A>  &nbsp;
+&nbsp;<A HREF="XSSFHeaderFooter.html" target="_top"><B>NO FRAMES</B></A>  &nbsp;
+&nbsp;<SCRIPT type="text/javascript">
+  <!--
+  if(window==top) {
+    document.writeln('<A HREF="../../../../../../allclasses-noframe.html"><B>All Classes</B></A>');
+  }
+  //-->
+</SCRIPT>
+<NOSCRIPT>
+  <A HREF="../../../../../../allclasses-noframe.html"><B>All Classes</B></A>
+</NOSCRIPT>
+
+
+</FONT></TD>
+</TR>
+<TR>
+<TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
+  SUMMARY:&nbsp;NESTED&nbsp;|&nbsp;FIELD&nbsp;|&nbsp;<A HREF="#constructor_summary">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_summary">METHOD</A></FONT></TD>
+<TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
+DETAIL:&nbsp;FIELD&nbsp;|&nbsp;<A HREF="#constructor_detail">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_detail">METHOD</A></FONT></TD>
+</TR>
+</TABLE>
+<A NAME="skip-navbar_bottom"></A>
+<!-- ======== END OF BOTTOM NAVBAR ======= -->
+
+<HR>
+
+                <i>Copyright 2014 The Apache Software Foundation or
+        its licensors, as applicable.</i>
+            
+</BODY>
+</HTML>

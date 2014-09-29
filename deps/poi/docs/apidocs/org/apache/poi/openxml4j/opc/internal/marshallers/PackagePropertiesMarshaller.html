@@ -1,0 +1,584 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!--NewPage-->
+<HTML>
+<HEAD>
+<TITLE>
+PackagePropertiesMarshaller (POI API Documentation)
+</TITLE>
+
+<META NAME="keywords" CONTENT="org.apache.poi.openxml4j.opc.internal.marshallers.PackagePropertiesMarshaller class">
+
+<LINK REL ="stylesheet" TYPE="text/css" HREF="../../../../../../../stylesheet.css" TITLE="Style">
+
+<SCRIPT type="text/javascript">
+function windowTitle()
+{
+    parent.document.title="PackagePropertiesMarshaller (POI API Documentation)";
+}
+</SCRIPT>
+<NOSCRIPT>
+</NOSCRIPT>
+
+</HEAD>
+
+<BODY BGCOLOR="white" onload="windowTitle();">
+
+
+<!-- ========= START OF TOP NAVBAR ======= -->
+<A NAME="navbar_top"><!-- --></A>
+<A HREF="#skip-navbar_top" title="Skip navigation links"></A>
+<TABLE BORDER="0" WIDTH="100%" CELLPADDING="1" CELLSPACING="0" SUMMARY="">
+<TR>
+<TD COLSPAN=2 BGCOLOR="#EEEEFF" CLASS="NavBarCell1">
+<A NAME="navbar_top_firstrow"><!-- --></A>
+<TABLE BORDER="0" CELLPADDING="0" CELLSPACING="3" SUMMARY="">
+  <TR ALIGN="center" VALIGN="top">
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../../../overview-summary.html"><FONT CLASS="NavBarFont1"><B>Overview</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="package-summary.html"><FONT CLASS="NavBarFont1"><B>Package</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#FFFFFF" CLASS="NavBarCell1Rev"> &nbsp;<FONT CLASS="NavBarFont1Rev"><B>Class</B></FONT>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="class-use/PackagePropertiesMarshaller.html"><FONT CLASS="NavBarFont1"><B>Use</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="package-tree.html"><FONT CLASS="NavBarFont1"><B>Tree</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../../../deprecated-list.html"><FONT CLASS="NavBarFont1"><B>Deprecated</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../../../index-all.html"><FONT CLASS="NavBarFont1"><B>Index</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../../../help-doc.html"><FONT CLASS="NavBarFont1"><B>Help</B></FONT></A>&nbsp;</TD>
+  </TR>
+</TABLE>
+</TD>
+<TD ALIGN="right" VALIGN="top" ROWSPAN=3><EM>
+</EM>
+</TD>
+</TR>
+
+<TR>
+<TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
+&nbsp;<A HREF="../../../../../../../org/apache/poi/openxml4j/opc/internal/marshallers/DefaultMarshaller.html" title="class in org.apache.poi.openxml4j.opc.internal.marshallers"><B>PREV CLASS</B></A>&nbsp;
+&nbsp;<A HREF="../../../../../../../org/apache/poi/openxml4j/opc/internal/marshallers/ZipPackagePropertiesMarshaller.html" title="class in org.apache.poi.openxml4j.opc.internal.marshallers"><B>NEXT CLASS</B></A></FONT></TD>
+<TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
+  <A HREF="../../../../../../../index.html?org/apache/poi/openxml4j/opc/internal/marshallers/PackagePropertiesMarshaller.html" target="_top"><B>FRAMES</B></A>  &nbsp;
+&nbsp;<A HREF="PackagePropertiesMarshaller.html" target="_top"><B>NO FRAMES</B></A>  &nbsp;
+&nbsp;<SCRIPT type="text/javascript">
+  <!--
+  if(window==top) {
+    document.writeln('<A HREF="../../../../../../../allclasses-noframe.html"><B>All Classes</B></A>');
+  }
+  //-->
+</SCRIPT>
+<NOSCRIPT>
+  <A HREF="../../../../../../../allclasses-noframe.html"><B>All Classes</B></A>
+</NOSCRIPT>
+
+
+</FONT></TD>
+</TR>
+<TR>
+<TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
+  SUMMARY:&nbsp;NESTED&nbsp;|&nbsp;<A HREF="#field_summary">FIELD</A>&nbsp;|&nbsp;<A HREF="#constructor_summary">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_summary">METHOD</A></FONT></TD>
+<TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
+DETAIL:&nbsp;<A HREF="#field_detail">FIELD</A>&nbsp;|&nbsp;<A HREF="#constructor_detail">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_detail">METHOD</A></FONT></TD>
+</TR>
+</TABLE>
+<A NAME="skip-navbar_top"></A>
+<!-- ========= END OF TOP NAVBAR ========= -->
+
+<HR>
+<!-- ======== START OF CLASS DATA ======== -->
+<H2>
+<FONT SIZE="-1">
+org.apache.poi.openxml4j.opc.internal.marshallers</FONT>
+<BR>
+Class PackagePropertiesMarshaller</H2>
+<PRE>
+java.lang.Object
+  <IMG SRC="../../../../../../../resources/inherit.gif" ALT="extended by "><B>org.apache.poi.openxml4j.opc.internal.marshallers.PackagePropertiesMarshaller</B>
+</PRE>
+<DL>
+<DT><B>All Implemented Interfaces:</B> <DD><A HREF="../../../../../../../org/apache/poi/openxml4j/opc/internal/PartMarshaller.html" title="interface in org.apache.poi.openxml4j.opc.internal">PartMarshaller</A></DD>
+</DL>
+<DL>
+<DT><B>Direct Known Subclasses:</B> <DD><A HREF="../../../../../../../org/apache/poi/openxml4j/opc/internal/marshallers/ZipPackagePropertiesMarshaller.html" title="class in org.apache.poi.openxml4j.opc.internal.marshallers">ZipPackagePropertiesMarshaller</A></DD>
+</DL>
+<HR>
+<DL>
+<DT><PRE>public class <B>PackagePropertiesMarshaller</B><DT>extends java.lang.Object<DT>implements <A HREF="../../../../../../../org/apache/poi/openxml4j/opc/internal/PartMarshaller.html" title="interface in org.apache.poi.openxml4j.opc.internal">PartMarshaller</A></DL>
+</PRE>
+
+<P>
+Package properties marshaller.
+<P>
+
+<P>
+<DL>
+<DT><B>Author:</B></DT>
+  <DD>CDubet, Julien Chable</DD>
+</DL>
+<HR>
+
+<P>
+<!-- =========== FIELD SUMMARY =========== -->
+
+<A NAME="field_summary"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+<B>Field Summary</B></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>protected static&nbsp;java.lang.String</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../../org/apache/poi/openxml4j/opc/internal/marshallers/PackagePropertiesMarshaller.html#KEYWORD_CATEGORY">KEYWORD_CATEGORY</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>protected static&nbsp;java.lang.String</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../../org/apache/poi/openxml4j/opc/internal/marshallers/PackagePropertiesMarshaller.html#KEYWORD_CONTENT_STATUS">KEYWORD_CONTENT_STATUS</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>protected static&nbsp;java.lang.String</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../../org/apache/poi/openxml4j/opc/internal/marshallers/PackagePropertiesMarshaller.html#KEYWORD_CONTENT_TYPE">KEYWORD_CONTENT_TYPE</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>protected static&nbsp;java.lang.String</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../../org/apache/poi/openxml4j/opc/internal/marshallers/PackagePropertiesMarshaller.html#KEYWORD_CREATED">KEYWORD_CREATED</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>protected static&nbsp;java.lang.String</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../../org/apache/poi/openxml4j/opc/internal/marshallers/PackagePropertiesMarshaller.html#KEYWORD_CREATOR">KEYWORD_CREATOR</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>protected static&nbsp;java.lang.String</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../../org/apache/poi/openxml4j/opc/internal/marshallers/PackagePropertiesMarshaller.html#KEYWORD_DESCRIPTION">KEYWORD_DESCRIPTION</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>protected static&nbsp;java.lang.String</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../../org/apache/poi/openxml4j/opc/internal/marshallers/PackagePropertiesMarshaller.html#KEYWORD_IDENTIFIER">KEYWORD_IDENTIFIER</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>protected static&nbsp;java.lang.String</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../../org/apache/poi/openxml4j/opc/internal/marshallers/PackagePropertiesMarshaller.html#KEYWORD_KEYWORDS">KEYWORD_KEYWORDS</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>protected static&nbsp;java.lang.String</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../../org/apache/poi/openxml4j/opc/internal/marshallers/PackagePropertiesMarshaller.html#KEYWORD_LANGUAGE">KEYWORD_LANGUAGE</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>protected static&nbsp;java.lang.String</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../../org/apache/poi/openxml4j/opc/internal/marshallers/PackagePropertiesMarshaller.html#KEYWORD_LAST_MODIFIED_BY">KEYWORD_LAST_MODIFIED_BY</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>protected static&nbsp;java.lang.String</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../../org/apache/poi/openxml4j/opc/internal/marshallers/PackagePropertiesMarshaller.html#KEYWORD_LAST_PRINTED">KEYWORD_LAST_PRINTED</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>protected static&nbsp;java.lang.String</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../../org/apache/poi/openxml4j/opc/internal/marshallers/PackagePropertiesMarshaller.html#KEYWORD_MODIFIED">KEYWORD_MODIFIED</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>protected static&nbsp;java.lang.String</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../../org/apache/poi/openxml4j/opc/internal/marshallers/PackagePropertiesMarshaller.html#KEYWORD_REVISION">KEYWORD_REVISION</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>protected static&nbsp;java.lang.String</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../../org/apache/poi/openxml4j/opc/internal/marshallers/PackagePropertiesMarshaller.html#KEYWORD_SUBJECT">KEYWORD_SUBJECT</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>protected static&nbsp;java.lang.String</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../../org/apache/poi/openxml4j/opc/internal/marshallers/PackagePropertiesMarshaller.html#KEYWORD_TITLE">KEYWORD_TITLE</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>protected static&nbsp;java.lang.String</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../../org/apache/poi/openxml4j/opc/internal/marshallers/PackagePropertiesMarshaller.html#KEYWORD_VERSION">KEYWORD_VERSION</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+</TABLE>
+&nbsp;
+<!-- ======== CONSTRUCTOR SUMMARY ======== -->
+
+<A NAME="constructor_summary"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+<B>Constructor Summary</B></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><B><A HREF="../../../../../../../org/apache/poi/openxml4j/opc/internal/marshallers/PackagePropertiesMarshaller.html#PackagePropertiesMarshaller()">PackagePropertiesMarshaller</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+</TABLE>
+&nbsp;
+<!-- ========== METHOD SUMMARY =========== -->
+
+<A NAME="method_summary"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+<B>Method Summary</B></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../../org/apache/poi/openxml4j/opc/internal/marshallers/PackagePropertiesMarshaller.html#marshall(org.apache.poi.openxml4j.opc.PackagePart, java.io.OutputStream)">marshall</A></B>(<A HREF="../../../../../../../org/apache/poi/openxml4j/opc/PackagePart.html" title="class in org.apache.poi.openxml4j.opc">PackagePart</A>&nbsp;part,
+         java.io.OutputStream&nbsp;out)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Marshall package core properties to an XML document.</TD>
+</TR>
+</TABLE>
+&nbsp;<A NAME="methods_inherited_from_class_java.lang.Object"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#EEEEFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left"><B>Methods inherited from class java.lang.Object</B></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE>clone, equals, finalize, getClass, hashCode, notify, notifyAll, toString, wait, wait, wait</CODE></TD>
+</TR>
+</TABLE>
+&nbsp;
+<P>
+
+<!-- ============ FIELD DETAIL =========== -->
+
+<A NAME="field_detail"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="1"><FONT SIZE="+2">
+<B>Field Detail</B></FONT></TH>
+</TR>
+</TABLE>
+
+<A NAME="KEYWORD_CATEGORY"><!-- --></A><H3>
+KEYWORD_CATEGORY</H3>
+<PRE>
+protected static final java.lang.String <B>KEYWORD_CATEGORY</B></PRE>
+<DL>
+<DL>
+<DT><B>See Also:</B><DD><A HREF="../../../../../../../constant-values.html#org.apache.poi.openxml4j.opc.internal.marshallers.PackagePropertiesMarshaller.KEYWORD_CATEGORY">Constant Field Values</A></DL>
+</DL>
+<HR>
+
+<A NAME="KEYWORD_CONTENT_STATUS"><!-- --></A><H3>
+KEYWORD_CONTENT_STATUS</H3>
+<PRE>
+protected static final java.lang.String <B>KEYWORD_CONTENT_STATUS</B></PRE>
+<DL>
+<DL>
+<DT><B>See Also:</B><DD><A HREF="../../../../../../../constant-values.html#org.apache.poi.openxml4j.opc.internal.marshallers.PackagePropertiesMarshaller.KEYWORD_CONTENT_STATUS">Constant Field Values</A></DL>
+</DL>
+<HR>
+
+<A NAME="KEYWORD_CONTENT_TYPE"><!-- --></A><H3>
+KEYWORD_CONTENT_TYPE</H3>
+<PRE>
+protected static final java.lang.String <B>KEYWORD_CONTENT_TYPE</B></PRE>
+<DL>
+<DL>
+<DT><B>See Also:</B><DD><A HREF="../../../../../../../constant-values.html#org.apache.poi.openxml4j.opc.internal.marshallers.PackagePropertiesMarshaller.KEYWORD_CONTENT_TYPE">Constant Field Values</A></DL>
+</DL>
+<HR>
+
+<A NAME="KEYWORD_CREATED"><!-- --></A><H3>
+KEYWORD_CREATED</H3>
+<PRE>
+protected static final java.lang.String <B>KEYWORD_CREATED</B></PRE>
+<DL>
+<DL>
+<DT><B>See Also:</B><DD><A HREF="../../../../../../../constant-values.html#org.apache.poi.openxml4j.opc.internal.marshallers.PackagePropertiesMarshaller.KEYWORD_CREATED">Constant Field Values</A></DL>
+</DL>
+<HR>
+
+<A NAME="KEYWORD_CREATOR"><!-- --></A><H3>
+KEYWORD_CREATOR</H3>
+<PRE>
+protected static final java.lang.String <B>KEYWORD_CREATOR</B></PRE>
+<DL>
+<DL>
+<DT><B>See Also:</B><DD><A HREF="../../../../../../../constant-values.html#org.apache.poi.openxml4j.opc.internal.marshallers.PackagePropertiesMarshaller.KEYWORD_CREATOR">Constant Field Values</A></DL>
+</DL>
+<HR>
+
+<A NAME="KEYWORD_DESCRIPTION"><!-- --></A><H3>
+KEYWORD_DESCRIPTION</H3>
+<PRE>
+protected static final java.lang.String <B>KEYWORD_DESCRIPTION</B></PRE>
+<DL>
+<DL>
+<DT><B>See Also:</B><DD><A HREF="../../../../../../../constant-values.html#org.apache.poi.openxml4j.opc.internal.marshallers.PackagePropertiesMarshaller.KEYWORD_DESCRIPTION">Constant Field Values</A></DL>
+</DL>
+<HR>
+
+<A NAME="KEYWORD_IDENTIFIER"><!-- --></A><H3>
+KEYWORD_IDENTIFIER</H3>
+<PRE>
+protected static final java.lang.String <B>KEYWORD_IDENTIFIER</B></PRE>
+<DL>
+<DL>
+<DT><B>See Also:</B><DD><A HREF="../../../../../../../constant-values.html#org.apache.poi.openxml4j.opc.internal.marshallers.PackagePropertiesMarshaller.KEYWORD_IDENTIFIER">Constant Field Values</A></DL>
+</DL>
+<HR>
+
+<A NAME="KEYWORD_KEYWORDS"><!-- --></A><H3>
+KEYWORD_KEYWORDS</H3>
+<PRE>
+protected static final java.lang.String <B>KEYWORD_KEYWORDS</B></PRE>
+<DL>
+<DL>
+<DT><B>See Also:</B><DD><A HREF="../../../../../../../constant-values.html#org.apache.poi.openxml4j.opc.internal.marshallers.PackagePropertiesMarshaller.KEYWORD_KEYWORDS">Constant Field Values</A></DL>
+</DL>
+<HR>
+
+<A NAME="KEYWORD_LANGUAGE"><!-- --></A><H3>
+KEYWORD_LANGUAGE</H3>
+<PRE>
+protected static final java.lang.String <B>KEYWORD_LANGUAGE</B></PRE>
+<DL>
+<DL>
+<DT><B>See Also:</B><DD><A HREF="../../../../../../../constant-values.html#org.apache.poi.openxml4j.opc.internal.marshallers.PackagePropertiesMarshaller.KEYWORD_LANGUAGE">Constant Field Values</A></DL>
+</DL>
+<HR>
+
+<A NAME="KEYWORD_LAST_MODIFIED_BY"><!-- --></A><H3>
+KEYWORD_LAST_MODIFIED_BY</H3>
+<PRE>
+protected static final java.lang.String <B>KEYWORD_LAST_MODIFIED_BY</B></PRE>
+<DL>
+<DL>
+<DT><B>See Also:</B><DD><A HREF="../../../../../../../constant-values.html#org.apache.poi.openxml4j.opc.internal.marshallers.PackagePropertiesMarshaller.KEYWORD_LAST_MODIFIED_BY">Constant Field Values</A></DL>
+</DL>
+<HR>
+
+<A NAME="KEYWORD_LAST_PRINTED"><!-- --></A><H3>
+KEYWORD_LAST_PRINTED</H3>
+<PRE>
+protected static final java.lang.String <B>KEYWORD_LAST_PRINTED</B></PRE>
+<DL>
+<DL>
+<DT><B>See Also:</B><DD><A HREF="../../../../../../../constant-values.html#org.apache.poi.openxml4j.opc.internal.marshallers.PackagePropertiesMarshaller.KEYWORD_LAST_PRINTED">Constant Field Values</A></DL>
+</DL>
+<HR>
+
+<A NAME="KEYWORD_MODIFIED"><!-- --></A><H3>
+KEYWORD_MODIFIED</H3>
+<PRE>
+protected static final java.lang.String <B>KEYWORD_MODIFIED</B></PRE>
+<DL>
+<DL>
+<DT><B>See Also:</B><DD><A HREF="../../../../../../../constant-values.html#org.apache.poi.openxml4j.opc.internal.marshallers.PackagePropertiesMarshaller.KEYWORD_MODIFIED">Constant Field Values</A></DL>
+</DL>
+<HR>
+
+<A NAME="KEYWORD_REVISION"><!-- --></A><H3>
+KEYWORD_REVISION</H3>
+<PRE>
+protected static final java.lang.String <B>KEYWORD_REVISION</B></PRE>
+<DL>
+<DL>
+<DT><B>See Also:</B><DD><A HREF="../../../../../../../constant-values.html#org.apache.poi.openxml4j.opc.internal.marshallers.PackagePropertiesMarshaller.KEYWORD_REVISION">Constant Field Values</A></DL>
+</DL>
+<HR>
+
+<A NAME="KEYWORD_SUBJECT"><!-- --></A><H3>
+KEYWORD_SUBJECT</H3>
+<PRE>
+protected static final java.lang.String <B>KEYWORD_SUBJECT</B></PRE>
+<DL>
+<DL>
+<DT><B>See Also:</B><DD><A HREF="../../../../../../../constant-values.html#org.apache.poi.openxml4j.opc.internal.marshallers.PackagePropertiesMarshaller.KEYWORD_SUBJECT">Constant Field Values</A></DL>
+</DL>
+<HR>
+
+<A NAME="KEYWORD_TITLE"><!-- --></A><H3>
+KEYWORD_TITLE</H3>
+<PRE>
+protected static final java.lang.String <B>KEYWORD_TITLE</B></PRE>
+<DL>
+<DL>
+<DT><B>See Also:</B><DD><A HREF="../../../../../../../constant-values.html#org.apache.poi.openxml4j.opc.internal.marshallers.PackagePropertiesMarshaller.KEYWORD_TITLE">Constant Field Values</A></DL>
+</DL>
+<HR>
+
+<A NAME="KEYWORD_VERSION"><!-- --></A><H3>
+KEYWORD_VERSION</H3>
+<PRE>
+protected static final java.lang.String <B>KEYWORD_VERSION</B></PRE>
+<DL>
+<DL>
+<DT><B>See Also:</B><DD><A HREF="../../../../../../../constant-values.html#org.apache.poi.openxml4j.opc.internal.marshallers.PackagePropertiesMarshaller.KEYWORD_VERSION">Constant Field Values</A></DL>
+</DL>
+
+<!-- ========= CONSTRUCTOR DETAIL ======== -->
+
+<A NAME="constructor_detail"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="1"><FONT SIZE="+2">
+<B>Constructor Detail</B></FONT></TH>
+</TR>
+</TABLE>
+
+<A NAME="PackagePropertiesMarshaller()"><!-- --></A><H3>
+PackagePropertiesMarshaller</H3>
+<PRE>
+public <B>PackagePropertiesMarshaller</B>()</PRE>
+<DL>
+</DL>
+
+<!-- ============ METHOD DETAIL ========== -->
+
+<A NAME="method_detail"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="1"><FONT SIZE="+2">
+<B>Method Detail</B></FONT></TH>
+</TR>
+</TABLE>
+
+<A NAME="marshall(org.apache.poi.openxml4j.opc.PackagePart, java.io.OutputStream)"><!-- --></A><H3>
+marshall</H3>
+<PRE>
+public boolean <B>marshall</B>(<A HREF="../../../../../../../org/apache/poi/openxml4j/opc/PackagePart.html" title="class in org.apache.poi.openxml4j.opc">PackagePart</A>&nbsp;part,
+                        java.io.OutputStream&nbsp;out)
+                 throws <A HREF="../../../../../../../org/apache/poi/openxml4j/exceptions/OpenXML4JException.html" title="class in org.apache.poi.openxml4j.exceptions">OpenXML4JException</A></PRE>
+<DL>
+<DD>Marshall package core properties to an XML document. Always return
+ <code>true</code>.
+<P>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../../../../../../org/apache/poi/openxml4j/opc/internal/PartMarshaller.html#marshall(org.apache.poi.openxml4j.opc.PackagePart, java.io.OutputStream)">marshall</A></CODE> in interface <CODE><A HREF="../../../../../../../org/apache/poi/openxml4j/opc/internal/PartMarshaller.html" title="interface in org.apache.poi.openxml4j.opc.internal">PartMarshaller</A></CODE></DL>
+</DD>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>part</CODE> - Part to marshall.<DD><CODE>out</CODE> - The output stream into which the part will be marshall.
+<DT><B>Returns:</B><DD><b>false</b> if any marshall error occurs, else <b>true</b>
+<DT><B>Throws:</B>
+<DD><CODE><A HREF="../../../../../../../org/apache/poi/openxml4j/exceptions/OpenXML4JException.html" title="class in org.apache.poi.openxml4j.exceptions">OpenXML4JException</A></CODE> - Throws only if any other exceptions are thrown by inner
+             methods.</DL>
+</DD>
+</DL>
+<!-- ========= END OF CLASS DATA ========= -->
+<HR>
+
+
+<!-- ======= START OF BOTTOM NAVBAR ====== -->
+<A NAME="navbar_bottom"><!-- --></A>
+<A HREF="#skip-navbar_bottom" title="Skip navigation links"></A>
+<TABLE BORDER="0" WIDTH="100%" CELLPADDING="1" CELLSPACING="0" SUMMARY="">
+<TR>
+<TD COLSPAN=2 BGCOLOR="#EEEEFF" CLASS="NavBarCell1">
+<A NAME="navbar_bottom_firstrow"><!-- --></A>
+<TABLE BORDER="0" CELLPADDING="0" CELLSPACING="3" SUMMARY="">
+  <TR ALIGN="center" VALIGN="top">
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../../../overview-summary.html"><FONT CLASS="NavBarFont1"><B>Overview</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="package-summary.html"><FONT CLASS="NavBarFont1"><B>Package</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#FFFFFF" CLASS="NavBarCell1Rev"> &nbsp;<FONT CLASS="NavBarFont1Rev"><B>Class</B></FONT>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="class-use/PackagePropertiesMarshaller.html"><FONT CLASS="NavBarFont1"><B>Use</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="package-tree.html"><FONT CLASS="NavBarFont1"><B>Tree</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../../../deprecated-list.html"><FONT CLASS="NavBarFont1"><B>Deprecated</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../../../index-all.html"><FONT CLASS="NavBarFont1"><B>Index</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../../../help-doc.html"><FONT CLASS="NavBarFont1"><B>Help</B></FONT></A>&nbsp;</TD>
+  </TR>
+</TABLE>
+</TD>
+<TD ALIGN="right" VALIGN="top" ROWSPAN=3><EM>
+</EM>
+</TD>
+</TR>
+
+<TR>
+<TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
+&nbsp;<A HREF="../../../../../../../org/apache/poi/openxml4j/opc/internal/marshallers/DefaultMarshaller.html" title="class in org.apache.poi.openxml4j.opc.internal.marshallers"><B>PREV CLASS</B></A>&nbsp;
+&nbsp;<A HREF="../../../../../../../org/apache/poi/openxml4j/opc/internal/marshallers/ZipPackagePropertiesMarshaller.html" title="class in org.apache.poi.openxml4j.opc.internal.marshallers"><B>NEXT CLASS</B></A></FONT></TD>
+<TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
+  <A HREF="../../../../../../../index.html?org/apache/poi/openxml4j/opc/internal/marshallers/PackagePropertiesMarshaller.html" target="_top"><B>FRAMES</B></A>  &nbsp;
+&nbsp;<A HREF="PackagePropertiesMarshaller.html" target="_top"><B>NO FRAMES</B></A>  &nbsp;
+&nbsp;<SCRIPT type="text/javascript">
+  <!--
+  if(window==top) {
+    document.writeln('<A HREF="../../../../../../../allclasses-noframe.html"><B>All Classes</B></A>');
+  }
+  //-->
+</SCRIPT>
+<NOSCRIPT>
+  <A HREF="../../../../../../../allclasses-noframe.html"><B>All Classes</B></A>
+</NOSCRIPT>
+
+
+</FONT></TD>
+</TR>
+<TR>
+<TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
+  SUMMARY:&nbsp;NESTED&nbsp;|&nbsp;<A HREF="#field_summary">FIELD</A>&nbsp;|&nbsp;<A HREF="#constructor_summary">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_summary">METHOD</A></FONT></TD>
+<TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
+DETAIL:&nbsp;<A HREF="#field_detail">FIELD</A>&nbsp;|&nbsp;<A HREF="#constructor_detail">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_detail">METHOD</A></FONT></TD>
+</TR>
+</TABLE>
+<A NAME="skip-navbar_bottom"></A>
+<!-- ======== END OF BOTTOM NAVBAR ======= -->
+
+<HR>
+
+                <i>Copyright 2014 The Apache Software Foundation or
+        its licensors, as applicable.</i>
+            
+</BODY>
+</HTML>

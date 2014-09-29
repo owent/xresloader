@@ -1,0 +1,1041 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!--NewPage-->
+<HTML>
+<HEAD>
+<TITLE>
+PackagingURIHelper (POI API Documentation)
+</TITLE>
+
+<META NAME="keywords" CONTENT="org.apache.poi.openxml4j.opc.PackagingURIHelper class">
+
+<LINK REL ="stylesheet" TYPE="text/css" HREF="../../../../../stylesheet.css" TITLE="Style">
+
+<SCRIPT type="text/javascript">
+function windowTitle()
+{
+    parent.document.title="PackagingURIHelper (POI API Documentation)";
+}
+</SCRIPT>
+<NOSCRIPT>
+</NOSCRIPT>
+
+</HEAD>
+
+<BODY BGCOLOR="white" onload="windowTitle();">
+
+
+<!-- ========= START OF TOP NAVBAR ======= -->
+<A NAME="navbar_top"><!-- --></A>
+<A HREF="#skip-navbar_top" title="Skip navigation links"></A>
+<TABLE BORDER="0" WIDTH="100%" CELLPADDING="1" CELLSPACING="0" SUMMARY="">
+<TR>
+<TD COLSPAN=2 BGCOLOR="#EEEEFF" CLASS="NavBarCell1">
+<A NAME="navbar_top_firstrow"><!-- --></A>
+<TABLE BORDER="0" CELLPADDING="0" CELLSPACING="3" SUMMARY="">
+  <TR ALIGN="center" VALIGN="top">
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../overview-summary.html"><FONT CLASS="NavBarFont1"><B>Overview</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="package-summary.html"><FONT CLASS="NavBarFont1"><B>Package</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#FFFFFF" CLASS="NavBarCell1Rev"> &nbsp;<FONT CLASS="NavBarFont1Rev"><B>Class</B></FONT>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="class-use/PackagingURIHelper.html"><FONT CLASS="NavBarFont1"><B>Use</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="package-tree.html"><FONT CLASS="NavBarFont1"><B>Tree</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../deprecated-list.html"><FONT CLASS="NavBarFont1"><B>Deprecated</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../index-all.html"><FONT CLASS="NavBarFont1"><B>Index</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../help-doc.html"><FONT CLASS="NavBarFont1"><B>Help</B></FONT></A>&nbsp;</TD>
+  </TR>
+</TABLE>
+</TD>
+<TD ALIGN="right" VALIGN="top" ROWSPAN=3><EM>
+</EM>
+</TD>
+</TR>
+
+<TR>
+<TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
+&nbsp;<A HREF="../../../../../org/apache/poi/openxml4j/opc/PackageRelationshipTypes.html" title="interface in org.apache.poi.openxml4j.opc"><B>PREV CLASS</B></A>&nbsp;
+&nbsp;<A HREF="../../../../../org/apache/poi/openxml4j/opc/RelationshipSource.html" title="interface in org.apache.poi.openxml4j.opc"><B>NEXT CLASS</B></A></FONT></TD>
+<TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
+  <A HREF="../../../../../index.html?org/apache/poi/openxml4j/opc/PackagingURIHelper.html" target="_top"><B>FRAMES</B></A>  &nbsp;
+&nbsp;<A HREF="PackagingURIHelper.html" target="_top"><B>NO FRAMES</B></A>  &nbsp;
+&nbsp;<SCRIPT type="text/javascript">
+  <!--
+  if(window==top) {
+    document.writeln('<A HREF="../../../../../allclasses-noframe.html"><B>All Classes</B></A>');
+  }
+  //-->
+</SCRIPT>
+<NOSCRIPT>
+  <A HREF="../../../../../allclasses-noframe.html"><B>All Classes</B></A>
+</NOSCRIPT>
+
+
+</FONT></TD>
+</TR>
+<TR>
+<TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
+  SUMMARY:&nbsp;NESTED&nbsp;|&nbsp;<A HREF="#field_summary">FIELD</A>&nbsp;|&nbsp;<A HREF="#constructor_summary">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_summary">METHOD</A></FONT></TD>
+<TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
+DETAIL:&nbsp;<A HREF="#field_detail">FIELD</A>&nbsp;|&nbsp;<A HREF="#constructor_detail">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_detail">METHOD</A></FONT></TD>
+</TR>
+</TABLE>
+<A NAME="skip-navbar_top"></A>
+<!-- ========= END OF TOP NAVBAR ========= -->
+
+<HR>
+<!-- ======== START OF CLASS DATA ======== -->
+<H2>
+<FONT SIZE="-1">
+org.apache.poi.openxml4j.opc</FONT>
+<BR>
+Class PackagingURIHelper</H2>
+<PRE>
+java.lang.Object
+  <IMG SRC="../../../../../resources/inherit.gif" ALT="extended by "><B>org.apache.poi.openxml4j.opc.PackagingURIHelper</B>
+</PRE>
+<HR>
+<DL>
+<DT><PRE>public final class <B>PackagingURIHelper</B><DT>extends java.lang.Object</DL>
+</PRE>
+
+<P>
+Helper for part and pack URI.
+<P>
+
+<P>
+<DL>
+<DT><B>Version:</B></DT>
+  <DD>0.1</DD>
+<DT><B>Author:</B></DT>
+  <DD>Julien Chable, CDubet, Kim Ung</DD>
+</DL>
+<HR>
+
+<P>
+<!-- =========== FIELD SUMMARY =========== -->
+
+<A NAME="field_summary"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+<B>Field Summary</B></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;<A HREF="../../../../../org/apache/poi/openxml4j/opc/PackagePartName.html" title="class in org.apache.poi.openxml4j.opc">PackagePartName</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/openxml4j/opc/PackagingURIHelper.html#CORE_PROPERTIES_PART_NAME">CORE_PROPERTIES_PART_NAME</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Core properties partname.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;java.net.URI</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/openxml4j/opc/PackagingURIHelper.html#CORE_PROPERTIES_URI">CORE_PROPERTIES_URI</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Core properties part URI.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;char</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/openxml4j/opc/PackagingURIHelper.html#FORWARD_SLASH_CHAR">FORWARD_SLASH_CHAR</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Forward slash URI separator.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;java.lang.String</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/openxml4j/opc/PackagingURIHelper.html#FORWARD_SLASH_STRING">FORWARD_SLASH_STRING</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Forward slash URI separator.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;java.lang.String</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/openxml4j/opc/PackagingURIHelper.html#PACKAGE_CORE_PROPERTIES_NAME">PACKAGE_CORE_PROPERTIES_NAME</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Core package properties art name.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;java.lang.String</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/openxml4j/opc/PackagingURIHelper.html#PACKAGE_PROPERTIES_SEGMENT_NAME">PACKAGE_PROPERTIES_SEGMENT_NAME</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Segment name of the package properties folder.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;<A HREF="../../../../../org/apache/poi/openxml4j/opc/PackagePartName.html" title="class in org.apache.poi.openxml4j.opc">PackagePartName</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/openxml4j/opc/PackagingURIHelper.html#PACKAGE_RELATIONSHIPS_ROOT_PART_NAME">PACKAGE_RELATIONSHIPS_ROOT_PART_NAME</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Package relationships part name.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;java.net.URI</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/openxml4j/opc/PackagingURIHelper.html#PACKAGE_RELATIONSHIPS_ROOT_URI">PACKAGE_RELATIONSHIPS_ROOT_URI</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Package relationships part URI</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;<A HREF="../../../../../org/apache/poi/openxml4j/opc/PackagePartName.html" title="class in org.apache.poi.openxml4j.opc">PackagePartName</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/openxml4j/opc/PackagingURIHelper.html#PACKAGE_ROOT_PART_NAME">PACKAGE_ROOT_PART_NAME</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Root package part name.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;java.net.URI</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/openxml4j/opc/PackagingURIHelper.html#PACKAGE_ROOT_URI">PACKAGE_ROOT_URI</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Root package URI.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;java.lang.String</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/openxml4j/opc/PackagingURIHelper.html#RELATIONSHIP_PART_EXTENSION_NAME">RELATIONSHIP_PART_EXTENSION_NAME</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Extension name of a relationship part.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;java.lang.String</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/openxml4j/opc/PackagingURIHelper.html#RELATIONSHIP_PART_SEGMENT_NAME">RELATIONSHIP_PART_SEGMENT_NAME</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Segment name of a relationship part.</TD>
+</TR>
+</TABLE>
+&nbsp;
+<!-- ======== CONSTRUCTOR SUMMARY ======== -->
+
+<A NAME="constructor_summary"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+<B>Constructor Summary</B></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/openxml4j/opc/PackagingURIHelper.html#PackagingURIHelper()">PackagingURIHelper</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+</TABLE>
+&nbsp;
+<!-- ========== METHOD SUMMARY =========== -->
+
+<A NAME="method_summary"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+<B>Method Summary</B></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;java.lang.String</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/openxml4j/opc/PackagingURIHelper.html#combine(java.lang.String, java.lang.String)">combine</A></B>(java.lang.String&nbsp;prefix,
+        java.lang.String&nbsp;suffix)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Combine a string URI with a prefix and a suffix.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;java.net.URI</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/openxml4j/opc/PackagingURIHelper.html#combine(java.net.URI, java.net.URI)">combine</A></B>(java.net.URI&nbsp;prefix,
+        java.net.URI&nbsp;suffix)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Combine two URIs.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;<A HREF="../../../../../org/apache/poi/openxml4j/opc/PackagePartName.html" title="class in org.apache.poi.openxml4j.opc">PackagePartName</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/openxml4j/opc/PackagingURIHelper.html#createPartName(java.lang.String)">createPartName</A></B>(java.lang.String&nbsp;partName)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Create an OPC compliant part name.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;<A HREF="../../../../../org/apache/poi/openxml4j/opc/PackagePartName.html" title="class in org.apache.poi.openxml4j.opc">PackagePartName</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/openxml4j/opc/PackagingURIHelper.html#createPartName(java.lang.String, org.apache.poi.openxml4j.opc.PackagePart)">createPartName</A></B>(java.lang.String&nbsp;partName,
+               <A HREF="../../../../../org/apache/poi/openxml4j/opc/PackagePart.html" title="class in org.apache.poi.openxml4j.opc">PackagePart</A>&nbsp;relativePart)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Create an OPC compliant part name by resolving it using a base part.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;<A HREF="../../../../../org/apache/poi/openxml4j/opc/PackagePartName.html" title="class in org.apache.poi.openxml4j.opc">PackagePartName</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/openxml4j/opc/PackagingURIHelper.html#createPartName(java.net.URI)">createPartName</A></B>(java.net.URI&nbsp;partUri)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Create an OPC compliant part name by throwing an exception if the URI is
+ not valid.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;<A HREF="../../../../../org/apache/poi/openxml4j/opc/PackagePartName.html" title="class in org.apache.poi.openxml4j.opc">PackagePartName</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/openxml4j/opc/PackagingURIHelper.html#createPartName(java.net.URI, org.apache.poi.openxml4j.opc.PackagePart)">createPartName</A></B>(java.net.URI&nbsp;partName,
+               <A HREF="../../../../../org/apache/poi/openxml4j/opc/PackagePart.html" title="class in org.apache.poi.openxml4j.opc">PackagePart</A>&nbsp;relativePart)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Create an OPC compliant part name by resolving it using a base part.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;java.lang.String</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/openxml4j/opc/PackagingURIHelper.html#decodeURI(java.net.URI)">decodeURI</A></B>(java.net.URI&nbsp;uri)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Decode a URI by converting all percent encoded character into a String
+ character.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;java.lang.String</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/openxml4j/opc/PackagingURIHelper.html#encode(java.lang.String)">encode</A></B>(java.lang.String&nbsp;s)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;percent-encode white spaces and characters above 0x80.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;java.lang.String</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/openxml4j/opc/PackagingURIHelper.html#getFilename(java.net.URI)">getFilename</A></B>(java.net.URI&nbsp;uri)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Get file name from the specified URI.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;java.lang.String</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/openxml4j/opc/PackagingURIHelper.html#getFilenameWithoutExtension(java.net.URI)">getFilenameWithoutExtension</A></B>(java.net.URI&nbsp;uri)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Get the file name without the trailing extension.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;java.net.URI</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/openxml4j/opc/PackagingURIHelper.html#getPackageRootUri()">getPackageRootUri</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gets the URI for the package root.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;java.net.URI</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/openxml4j/opc/PackagingURIHelper.html#getPath(java.net.URI)">getPath</A></B>(java.net.URI&nbsp;uri)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Get the directory path from the specified URI.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;<A HREF="../../../../../org/apache/poi/openxml4j/opc/PackagePartName.html" title="class in org.apache.poi.openxml4j.opc">PackagePartName</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/openxml4j/opc/PackagingURIHelper.html#getRelationshipPartName(org.apache.poi.openxml4j.opc.PackagePartName)">getRelationshipPartName</A></B>(<A HREF="../../../../../org/apache/poi/openxml4j/opc/PackagePartName.html" title="class in org.apache.poi.openxml4j.opc">PackagePartName</A>&nbsp;partName)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Build a part name where the relationship should be stored ((ex
+ /word/document.xml -> /word/_rels/document.xml.rels)</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;java.net.URI</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/openxml4j/opc/PackagingURIHelper.html#getSourcePartUriFromRelationshipPartUri(java.net.URI)">getSourcePartUriFromRelationshipPartUri</A></B>(java.net.URI&nbsp;relationshipPartUri)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Get the source part URI from a specified relationships part.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;java.net.URI</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/openxml4j/opc/PackagingURIHelper.html#getURIFromPath(java.lang.String)">getURIFromPath</A></B>(java.lang.String&nbsp;path)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Get URI from a string path.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/openxml4j/opc/PackagingURIHelper.html#isRelationshipPartURI(java.net.URI)">isRelationshipPartURI</A></B>(java.net.URI&nbsp;partUri)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Know if the specified URI is a relationship part name.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/openxml4j/opc/PackagingURIHelper.html#isValidPartName(java.net.URI)">isValidPartName</A></B>(java.net.URI&nbsp;partUri)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Validate a part URI by returning a boolean.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;java.net.URI</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/openxml4j/opc/PackagingURIHelper.html#relativizeURI(java.net.URI, java.net.URI)">relativizeURI</A></B>(java.net.URI&nbsp;sourceURI,
+              java.net.URI&nbsp;targetURI)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Fully relativize the source part URI against the target part URI.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;java.net.URI</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/openxml4j/opc/PackagingURIHelper.html#relativizeURI(java.net.URI, java.net.URI, boolean)">relativizeURI</A></B>(java.net.URI&nbsp;sourceURI,
+              java.net.URI&nbsp;targetURI,
+              boolean&nbsp;msCompatible)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Fully relativize the source part URI against the target part URI.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;java.net.URI</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/openxml4j/opc/PackagingURIHelper.html#resolvePartUri(java.net.URI, java.net.URI)">resolvePartUri</A></B>(java.net.URI&nbsp;sourcePartUri,
+               java.net.URI&nbsp;targetUri)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Resolve a source uri against a target.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;java.net.URI</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/openxml4j/opc/PackagingURIHelper.html#toURI(java.lang.String)">toURI</A></B>(java.lang.String&nbsp;value)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Convert a string to <CODE>URI</CODE>
+
+ If  part name is not a valid URI, it is resolved as follows:</TD>
+</TR>
+</TABLE>
+&nbsp;<A NAME="methods_inherited_from_class_java.lang.Object"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#EEEEFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left"><B>Methods inherited from class java.lang.Object</B></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE>clone, equals, finalize, getClass, hashCode, notify, notifyAll, toString, wait, wait, wait</CODE></TD>
+</TR>
+</TABLE>
+&nbsp;
+<P>
+
+<!-- ============ FIELD DETAIL =========== -->
+
+<A NAME="field_detail"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="1"><FONT SIZE="+2">
+<B>Field Detail</B></FONT></TH>
+</TR>
+</TABLE>
+
+<A NAME="RELATIONSHIP_PART_EXTENSION_NAME"><!-- --></A><H3>
+RELATIONSHIP_PART_EXTENSION_NAME</H3>
+<PRE>
+public static final java.lang.String <B>RELATIONSHIP_PART_EXTENSION_NAME</B></PRE>
+<DL>
+<DD>Extension name of a relationship part.
+<P>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="RELATIONSHIP_PART_SEGMENT_NAME"><!-- --></A><H3>
+RELATIONSHIP_PART_SEGMENT_NAME</H3>
+<PRE>
+public static final java.lang.String <B>RELATIONSHIP_PART_SEGMENT_NAME</B></PRE>
+<DL>
+<DD>Segment name of a relationship part.
+<P>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="PACKAGE_PROPERTIES_SEGMENT_NAME"><!-- --></A><H3>
+PACKAGE_PROPERTIES_SEGMENT_NAME</H3>
+<PRE>
+public static final java.lang.String <B>PACKAGE_PROPERTIES_SEGMENT_NAME</B></PRE>
+<DL>
+<DD>Segment name of the package properties folder.
+<P>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="PACKAGE_CORE_PROPERTIES_NAME"><!-- --></A><H3>
+PACKAGE_CORE_PROPERTIES_NAME</H3>
+<PRE>
+public static final java.lang.String <B>PACKAGE_CORE_PROPERTIES_NAME</B></PRE>
+<DL>
+<DD>Core package properties art name.
+<P>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="FORWARD_SLASH_CHAR"><!-- --></A><H3>
+FORWARD_SLASH_CHAR</H3>
+<PRE>
+public static final char <B>FORWARD_SLASH_CHAR</B></PRE>
+<DL>
+<DD>Forward slash URI separator.
+<P>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="FORWARD_SLASH_STRING"><!-- --></A><H3>
+FORWARD_SLASH_STRING</H3>
+<PRE>
+public static final java.lang.String <B>FORWARD_SLASH_STRING</B></PRE>
+<DL>
+<DD>Forward slash URI separator.
+<P>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="PACKAGE_RELATIONSHIPS_ROOT_URI"><!-- --></A><H3>
+PACKAGE_RELATIONSHIPS_ROOT_URI</H3>
+<PRE>
+public static final java.net.URI <B>PACKAGE_RELATIONSHIPS_ROOT_URI</B></PRE>
+<DL>
+<DD>Package relationships part URI
+<P>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="PACKAGE_RELATIONSHIPS_ROOT_PART_NAME"><!-- --></A><H3>
+PACKAGE_RELATIONSHIPS_ROOT_PART_NAME</H3>
+<PRE>
+public static final <A HREF="../../../../../org/apache/poi/openxml4j/opc/PackagePartName.html" title="class in org.apache.poi.openxml4j.opc">PackagePartName</A> <B>PACKAGE_RELATIONSHIPS_ROOT_PART_NAME</B></PRE>
+<DL>
+<DD>Package relationships part name.
+<P>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="CORE_PROPERTIES_URI"><!-- --></A><H3>
+CORE_PROPERTIES_URI</H3>
+<PRE>
+public static final java.net.URI <B>CORE_PROPERTIES_URI</B></PRE>
+<DL>
+<DD>Core properties part URI.
+<P>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="CORE_PROPERTIES_PART_NAME"><!-- --></A><H3>
+CORE_PROPERTIES_PART_NAME</H3>
+<PRE>
+public static final <A HREF="../../../../../org/apache/poi/openxml4j/opc/PackagePartName.html" title="class in org.apache.poi.openxml4j.opc">PackagePartName</A> <B>CORE_PROPERTIES_PART_NAME</B></PRE>
+<DL>
+<DD>Core properties partname.
+<P>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="PACKAGE_ROOT_URI"><!-- --></A><H3>
+PACKAGE_ROOT_URI</H3>
+<PRE>
+public static final java.net.URI <B>PACKAGE_ROOT_URI</B></PRE>
+<DL>
+<DD>Root package URI.
+<P>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="PACKAGE_ROOT_PART_NAME"><!-- --></A><H3>
+PACKAGE_ROOT_PART_NAME</H3>
+<PRE>
+public static final <A HREF="../../../../../org/apache/poi/openxml4j/opc/PackagePartName.html" title="class in org.apache.poi.openxml4j.opc">PackagePartName</A> <B>PACKAGE_ROOT_PART_NAME</B></PRE>
+<DL>
+<DD>Root package part name.
+<P>
+<DL>
+</DL>
+</DL>
+
+<!-- ========= CONSTRUCTOR DETAIL ======== -->
+
+<A NAME="constructor_detail"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="1"><FONT SIZE="+2">
+<B>Constructor Detail</B></FONT></TH>
+</TR>
+</TABLE>
+
+<A NAME="PackagingURIHelper()"><!-- --></A><H3>
+PackagingURIHelper</H3>
+<PRE>
+public <B>PackagingURIHelper</B>()</PRE>
+<DL>
+</DL>
+
+<!-- ============ METHOD DETAIL ========== -->
+
+<A NAME="method_detail"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="1"><FONT SIZE="+2">
+<B>Method Detail</B></FONT></TH>
+</TR>
+</TABLE>
+
+<A NAME="getPackageRootUri()"><!-- --></A><H3>
+getPackageRootUri</H3>
+<PRE>
+public static java.net.URI <B>getPackageRootUri</B>()</PRE>
+<DL>
+<DD>Gets the URI for the package root.
+<P>
+<DD><DL>
+
+<DT><B>Returns:</B><DD>URI of the package root.</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="isRelationshipPartURI(java.net.URI)"><!-- --></A><H3>
+isRelationshipPartURI</H3>
+<PRE>
+public static boolean <B>isRelationshipPartURI</B>(java.net.URI&nbsp;partUri)</PRE>
+<DL>
+<DD>Know if the specified URI is a relationship part name.
+<P>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>partUri</CODE> - URI to check.
+<DT><B>Returns:</B><DD><i>true</i> if the URI <i>false</i>.</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getFilename(java.net.URI)"><!-- --></A><H3>
+getFilename</H3>
+<PRE>
+public static java.lang.String <B>getFilename</B>(java.net.URI&nbsp;uri)</PRE>
+<DL>
+<DD>Get file name from the specified URI.
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getFilenameWithoutExtension(java.net.URI)"><!-- --></A><H3>
+getFilenameWithoutExtension</H3>
+<PRE>
+public static java.lang.String <B>getFilenameWithoutExtension</B>(java.net.URI&nbsp;uri)</PRE>
+<DL>
+<DD>Get the file name without the trailing extension.
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getPath(java.net.URI)"><!-- --></A><H3>
+getPath</H3>
+<PRE>
+public static java.net.URI <B>getPath</B>(java.net.URI&nbsp;uri)</PRE>
+<DL>
+<DD>Get the directory path from the specified URI.
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="combine(java.net.URI, java.net.URI)"><!-- --></A><H3>
+combine</H3>
+<PRE>
+public static java.net.URI <B>combine</B>(java.net.URI&nbsp;prefix,
+                                   java.net.URI&nbsp;suffix)</PRE>
+<DL>
+<DD>Combine two URIs.
+<P>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>prefix</CODE> - the prefix URI<DD><CODE>suffix</CODE> - the suffix URI
+<DT><B>Returns:</B><DD>the combined URI</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="combine(java.lang.String, java.lang.String)"><!-- --></A><H3>
+combine</H3>
+<PRE>
+public static java.lang.String <B>combine</B>(java.lang.String&nbsp;prefix,
+                                       java.lang.String&nbsp;suffix)</PRE>
+<DL>
+<DD>Combine a string URI with a prefix and a suffix.
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="relativizeURI(java.net.URI, java.net.URI, boolean)"><!-- --></A><H3>
+relativizeURI</H3>
+<PRE>
+public static java.net.URI <B>relativizeURI</B>(java.net.URI&nbsp;sourceURI,
+                                         java.net.URI&nbsp;targetURI,
+                                         boolean&nbsp;msCompatible)</PRE>
+<DL>
+<DD>Fully relativize the source part URI against the target part URI.
+<P>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>sourceURI</CODE> - The source part URI.<DD><CODE>targetURI</CODE> - The target part URI.<DD><CODE>msCompatible</CODE> - if true then remove leading slash from the relativized URI.
+         This flag violates [M1.4]: A part name shall start with a forward slash ('/') character, but
+         allows generating URIs compatible with MS Office and OpenOffice.
+<DT><B>Returns:</B><DD>A fully relativize part name URI ('word/media/image1.gif',
+         '/word/document.xml' => 'media/image1.gif') else
+         <code>null</code>.</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="relativizeURI(java.net.URI, java.net.URI)"><!-- --></A><H3>
+relativizeURI</H3>
+<PRE>
+public static java.net.URI <B>relativizeURI</B>(java.net.URI&nbsp;sourceURI,
+                                         java.net.URI&nbsp;targetURI)</PRE>
+<DL>
+<DD>Fully relativize the source part URI against the target part URI.
+<P>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>sourceURI</CODE> - The source part URI.<DD><CODE>targetURI</CODE> - The target part URI.
+<DT><B>Returns:</B><DD>A fully relativize part name URI ('word/media/image1.gif',
+         '/word/document.xml' => 'media/image1.gif') else
+         <code>null</code>.</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="resolvePartUri(java.net.URI, java.net.URI)"><!-- --></A><H3>
+resolvePartUri</H3>
+<PRE>
+public static java.net.URI <B>resolvePartUri</B>(java.net.URI&nbsp;sourcePartUri,
+                                          java.net.URI&nbsp;targetUri)</PRE>
+<DL>
+<DD>Resolve a source uri against a target.
+<P>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>sourcePartUri</CODE> - The source URI.<DD><CODE>targetUri</CODE> - The target URI.
+<DT><B>Returns:</B><DD>The resolved URI.</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getURIFromPath(java.lang.String)"><!-- --></A><H3>
+getURIFromPath</H3>
+<PRE>
+public static java.net.URI <B>getURIFromPath</B>(java.lang.String&nbsp;path)</PRE>
+<DL>
+<DD>Get URI from a string path.
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getSourcePartUriFromRelationshipPartUri(java.net.URI)"><!-- --></A><H3>
+getSourcePartUriFromRelationshipPartUri</H3>
+<PRE>
+public static java.net.URI <B>getSourcePartUriFromRelationshipPartUri</B>(java.net.URI&nbsp;relationshipPartUri)</PRE>
+<DL>
+<DD>Get the source part URI from a specified relationships part.
+<P>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>relationshipPartUri</CODE> - The relationship part use to retrieve the source part.
+<DT><B>Returns:</B><DD>The source part URI from the specified relationships part.</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="createPartName(java.net.URI)"><!-- --></A><H3>
+createPartName</H3>
+<PRE>
+public static <A HREF="../../../../../org/apache/poi/openxml4j/opc/PackagePartName.html" title="class in org.apache.poi.openxml4j.opc">PackagePartName</A> <B>createPartName</B>(java.net.URI&nbsp;partUri)
+                                      throws <A HREF="../../../../../org/apache/poi/openxml4j/exceptions/InvalidFormatException.html" title="class in org.apache.poi.openxml4j.exceptions">InvalidFormatException</A></PRE>
+<DL>
+<DD>Create an OPC compliant part name by throwing an exception if the URI is
+ not valid.
+<P>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>partUri</CODE> - The part name URI to validate.
+<DT><B>Returns:</B><DD>A valid part name object, else <code>null</code>.
+<DT><B>Throws:</B>
+<DD><CODE><A HREF="../../../../../org/apache/poi/openxml4j/exceptions/InvalidFormatException.html" title="class in org.apache.poi.openxml4j.exceptions">InvalidFormatException</A></CODE> - Throws if the specified URI is not OPC compliant.</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="createPartName(java.lang.String)"><!-- --></A><H3>
+createPartName</H3>
+<PRE>
+public static <A HREF="../../../../../org/apache/poi/openxml4j/opc/PackagePartName.html" title="class in org.apache.poi.openxml4j.opc">PackagePartName</A> <B>createPartName</B>(java.lang.String&nbsp;partName)
+                                      throws <A HREF="../../../../../org/apache/poi/openxml4j/exceptions/InvalidFormatException.html" title="class in org.apache.poi.openxml4j.exceptions">InvalidFormatException</A></PRE>
+<DL>
+<DD>Create an OPC compliant part name.
+<P>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>partName</CODE> - The part name to validate.
+<DT><B>Returns:</B><DD>The correspondant part name if valid, else <code>null</code>.
+<DT><B>Throws:</B>
+<DD><CODE><A HREF="../../../../../org/apache/poi/openxml4j/exceptions/InvalidFormatException.html" title="class in org.apache.poi.openxml4j.exceptions">InvalidFormatException</A></CODE> - Throws if the specified part name is not OPC compliant.<DT><B>See Also:</B><DD><A HREF="../../../../../org/apache/poi/openxml4j/opc/PackagingURIHelper.html#createPartName(java.net.URI)"><CODE>createPartName(URI)</CODE></A></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="createPartName(java.lang.String, org.apache.poi.openxml4j.opc.PackagePart)"><!-- --></A><H3>
+createPartName</H3>
+<PRE>
+public static <A HREF="../../../../../org/apache/poi/openxml4j/opc/PackagePartName.html" title="class in org.apache.poi.openxml4j.opc">PackagePartName</A> <B>createPartName</B>(java.lang.String&nbsp;partName,
+                                             <A HREF="../../../../../org/apache/poi/openxml4j/opc/PackagePart.html" title="class in org.apache.poi.openxml4j.opc">PackagePart</A>&nbsp;relativePart)
+                                      throws <A HREF="../../../../../org/apache/poi/openxml4j/exceptions/InvalidFormatException.html" title="class in org.apache.poi.openxml4j.exceptions">InvalidFormatException</A></PRE>
+<DL>
+<DD>Create an OPC compliant part name by resolving it using a base part.
+<P>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>partName</CODE> - The part name to validate.<DD><CODE>relativePart</CODE> - The relative base part.
+<DT><B>Returns:</B><DD>The correspondant part name if valid, else <code>null</code>.
+<DT><B>Throws:</B>
+<DD><CODE><A HREF="../../../../../org/apache/poi/openxml4j/exceptions/InvalidFormatException.html" title="class in org.apache.poi.openxml4j.exceptions">InvalidFormatException</A></CODE> - Throws if the specified part name is not OPC compliant.<DT><B>See Also:</B><DD><A HREF="../../../../../org/apache/poi/openxml4j/opc/PackagingURIHelper.html#createPartName(java.net.URI)"><CODE>createPartName(URI)</CODE></A></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="createPartName(java.net.URI, org.apache.poi.openxml4j.opc.PackagePart)"><!-- --></A><H3>
+createPartName</H3>
+<PRE>
+public static <A HREF="../../../../../org/apache/poi/openxml4j/opc/PackagePartName.html" title="class in org.apache.poi.openxml4j.opc">PackagePartName</A> <B>createPartName</B>(java.net.URI&nbsp;partName,
+                                             <A HREF="../../../../../org/apache/poi/openxml4j/opc/PackagePart.html" title="class in org.apache.poi.openxml4j.opc">PackagePart</A>&nbsp;relativePart)
+                                      throws <A HREF="../../../../../org/apache/poi/openxml4j/exceptions/InvalidFormatException.html" title="class in org.apache.poi.openxml4j.exceptions">InvalidFormatException</A></PRE>
+<DL>
+<DD>Create an OPC compliant part name by resolving it using a base part.
+<P>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>partName</CODE> - The part name URI to validate.<DD><CODE>relativePart</CODE> - The relative base part.
+<DT><B>Returns:</B><DD>The correspondant part name if valid, else <code>null</code>.
+<DT><B>Throws:</B>
+<DD><CODE><A HREF="../../../../../org/apache/poi/openxml4j/exceptions/InvalidFormatException.html" title="class in org.apache.poi.openxml4j.exceptions">InvalidFormatException</A></CODE> - Throws if the specified part name is not OPC compliant.<DT><B>See Also:</B><DD><A HREF="../../../../../org/apache/poi/openxml4j/opc/PackagingURIHelper.html#createPartName(java.net.URI)"><CODE>createPartName(URI)</CODE></A></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="isValidPartName(java.net.URI)"><!-- --></A><H3>
+isValidPartName</H3>
+<PRE>
+public static boolean <B>isValidPartName</B>(java.net.URI&nbsp;partUri)</PRE>
+<DL>
+<DD>Validate a part URI by returning a boolean.
+ ([M1.1],[M1.3],[M1.4],[M1.5],[M1.6])
+
+ (OPC Specifications 8.1.1 Part names) :
+
+ Part Name Syntax
+
+ The part name grammar is defined as follows:
+
+ <i>part_name = 1*( "/" segment )
+
+ segment = 1*( pchar )</i>
+
+
+ (pchar is defined in RFC 3986)
+<P>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>partUri</CODE> - The URI to validate.
+<DT><B>Returns:</B><DD><b>true</b> if the URI is valid to the OPC Specifications, else
+         <b>false</b><DT><B>See Also:</B><DD><A HREF="../../../../../org/apache/poi/openxml4j/opc/PackagingURIHelper.html#createPartName(java.net.URI)"><CODE>createPartName(URI)</CODE></A></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="decodeURI(java.net.URI)"><!-- --></A><H3>
+decodeURI</H3>
+<PRE>
+public static java.lang.String <B>decodeURI</B>(java.net.URI&nbsp;uri)</PRE>
+<DL>
+<DD>Decode a URI by converting all percent encoded character into a String
+ character.
+<P>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>uri</CODE> - The URI to decode.
+<DT><B>Returns:</B><DD>The specified URI in a String with converted percent encoded
+         characters.</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getRelationshipPartName(org.apache.poi.openxml4j.opc.PackagePartName)"><!-- --></A><H3>
+getRelationshipPartName</H3>
+<PRE>
+public static <A HREF="../../../../../org/apache/poi/openxml4j/opc/PackagePartName.html" title="class in org.apache.poi.openxml4j.opc">PackagePartName</A> <B>getRelationshipPartName</B>(<A HREF="../../../../../org/apache/poi/openxml4j/opc/PackagePartName.html" title="class in org.apache.poi.openxml4j.opc">PackagePartName</A>&nbsp;partName)</PRE>
+<DL>
+<DD>Build a part name where the relationship should be stored ((ex
+ /word/document.xml -> /word/_rels/document.xml.rels)
+<P>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>partName</CODE> - Source part URI
+<DT><B>Returns:</B><DD>the full path (as URI) of the relation file
+<DT><B>Throws:</B>
+<DD><CODE><A HREF="../../../../../org/apache/poi/openxml4j/exceptions/InvalidOperationException.html" title="class in org.apache.poi.openxml4j.exceptions">InvalidOperationException</A></CODE> - Throws if the specified URI is a relationshp part.</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="toURI(java.lang.String)"><!-- --></A><H3>
+toURI</H3>
+<PRE>
+public static java.net.URI <B>toURI</B>(java.lang.String&nbsp;value)
+                          throws java.net.URISyntaxException</PRE>
+<DL>
+<DD>Convert a string to <CODE>URI</CODE>
+
+ If  part name is not a valid URI, it is resolved as follows:
+ <p>
+ 1. Percent-encode each open bracket ([) and close bracket (]).</li>
+ 2. Percent-encode each percent (%) character that is not followed by a hexadecimal notation of an octet value.</li>
+ 3. Un-percent-encode each percent-encoded unreserved character.
+ 4. Un-percent-encode each forward slash (/) and back slash (\).
+ 5. Convert all back slashes to forward slashes.
+ 6. If present in a segment containing non-dot (?.?) characters, remove trailing dot (?.?) characters from each segment.
+ 7. Replace each occurrence of multiple consecutive forward slashes (/) with a single forward slash.
+ 8. If a single trailing forward slash (/) is present, remove that trailing forward slash.
+ 9. Remove complete segments that consist of three or more dots.
+ 10. Resolve the relative reference against the base URI of the part holding the Unicode string, as it is defined
+ in ?5.2 of RFC 3986. The path component of the resulting absolute URI is the part name.
+</p>
+<P>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>value</CODE> - the string to be parsed into a URI
+<DT><B>Returns:</B><DD>the resolved part name that should be OK to construct a URI
+
+ TODO YK: for now this method does only (5). Finish the rest.
+<DT><B>Throws:</B>
+<DD><CODE>java.net.URISyntaxException</CODE></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="encode(java.lang.String)"><!-- --></A><H3>
+encode</H3>
+<PRE>
+public static java.lang.String <B>encode</B>(java.lang.String&nbsp;s)</PRE>
+<DL>
+<DD>percent-encode white spaces and characters above 0x80.
+ <p>
+   Examples:
+   'Apache POI' --> 'Apache%20POI'
+   'ApacheАPOI' --> 'Apache%04%10POI'
+<P>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>s</CODE> - the string to encode
+<DT><B>Returns:</B><DD>the encoded string</DL>
+</DD>
+</DL>
+<!-- ========= END OF CLASS DATA ========= -->
+<HR>
+
+
+<!-- ======= START OF BOTTOM NAVBAR ====== -->
+<A NAME="navbar_bottom"><!-- --></A>
+<A HREF="#skip-navbar_bottom" title="Skip navigation links"></A>
+<TABLE BORDER="0" WIDTH="100%" CELLPADDING="1" CELLSPACING="0" SUMMARY="">
+<TR>
+<TD COLSPAN=2 BGCOLOR="#EEEEFF" CLASS="NavBarCell1">
+<A NAME="navbar_bottom_firstrow"><!-- --></A>
+<TABLE BORDER="0" CELLPADDING="0" CELLSPACING="3" SUMMARY="">
+  <TR ALIGN="center" VALIGN="top">
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../overview-summary.html"><FONT CLASS="NavBarFont1"><B>Overview</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="package-summary.html"><FONT CLASS="NavBarFont1"><B>Package</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#FFFFFF" CLASS="NavBarCell1Rev"> &nbsp;<FONT CLASS="NavBarFont1Rev"><B>Class</B></FONT>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="class-use/PackagingURIHelper.html"><FONT CLASS="NavBarFont1"><B>Use</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="package-tree.html"><FONT CLASS="NavBarFont1"><B>Tree</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../deprecated-list.html"><FONT CLASS="NavBarFont1"><B>Deprecated</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../index-all.html"><FONT CLASS="NavBarFont1"><B>Index</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../help-doc.html"><FONT CLASS="NavBarFont1"><B>Help</B></FONT></A>&nbsp;</TD>
+  </TR>
+</TABLE>
+</TD>
+<TD ALIGN="right" VALIGN="top" ROWSPAN=3><EM>
+</EM>
+</TD>
+</TR>
+
+<TR>
+<TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
+&nbsp;<A HREF="../../../../../org/apache/poi/openxml4j/opc/PackageRelationshipTypes.html" title="interface in org.apache.poi.openxml4j.opc"><B>PREV CLASS</B></A>&nbsp;
+&nbsp;<A HREF="../../../../../org/apache/poi/openxml4j/opc/RelationshipSource.html" title="interface in org.apache.poi.openxml4j.opc"><B>NEXT CLASS</B></A></FONT></TD>
+<TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
+  <A HREF="../../../../../index.html?org/apache/poi/openxml4j/opc/PackagingURIHelper.html" target="_top"><B>FRAMES</B></A>  &nbsp;
+&nbsp;<A HREF="PackagingURIHelper.html" target="_top"><B>NO FRAMES</B></A>  &nbsp;
+&nbsp;<SCRIPT type="text/javascript">
+  <!--
+  if(window==top) {
+    document.writeln('<A HREF="../../../../../allclasses-noframe.html"><B>All Classes</B></A>');
+  }
+  //-->
+</SCRIPT>
+<NOSCRIPT>
+  <A HREF="../../../../../allclasses-noframe.html"><B>All Classes</B></A>
+</NOSCRIPT>
+
+
+</FONT></TD>
+</TR>
+<TR>
+<TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
+  SUMMARY:&nbsp;NESTED&nbsp;|&nbsp;<A HREF="#field_summary">FIELD</A>&nbsp;|&nbsp;<A HREF="#constructor_summary">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_summary">METHOD</A></FONT></TD>
+<TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
+DETAIL:&nbsp;<A HREF="#field_detail">FIELD</A>&nbsp;|&nbsp;<A HREF="#constructor_detail">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_detail">METHOD</A></FONT></TD>
+</TR>
+</TABLE>
+<A NAME="skip-navbar_bottom"></A>
+<!-- ======== END OF BOTTOM NAVBAR ======= -->
+
+<HR>
+
+                <i>Copyright 2014 The Apache Software Foundation or
+        its licensors, as applicable.</i>
+            
+</BODY>
+</HTML>

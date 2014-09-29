@@ -1,0 +1,1427 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!--NewPage-->
+<HTML>
+<HEAD>
+<TITLE>
+XSSFFont (POI API Documentation)
+</TITLE>
+
+<META NAME="keywords" CONTENT="org.apache.poi.xssf.usermodel.XSSFFont class">
+
+<LINK REL ="stylesheet" TYPE="text/css" HREF="../../../../../stylesheet.css" TITLE="Style">
+
+<SCRIPT type="text/javascript">
+function windowTitle()
+{
+    parent.document.title="XSSFFont (POI API Documentation)";
+}
+</SCRIPT>
+<NOSCRIPT>
+</NOSCRIPT>
+
+</HEAD>
+
+<BODY BGCOLOR="white" onload="windowTitle();">
+
+
+<!-- ========= START OF TOP NAVBAR ======= -->
+<A NAME="navbar_top"><!-- --></A>
+<A HREF="#skip-navbar_top" title="Skip navigation links"></A>
+<TABLE BORDER="0" WIDTH="100%" CELLPADDING="1" CELLSPACING="0" SUMMARY="">
+<TR>
+<TD COLSPAN=2 BGCOLOR="#EEEEFF" CLASS="NavBarCell1">
+<A NAME="navbar_top_firstrow"><!-- --></A>
+<TABLE BORDER="0" CELLPADDING="0" CELLSPACING="3" SUMMARY="">
+  <TR ALIGN="center" VALIGN="top">
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../overview-summary.html"><FONT CLASS="NavBarFont1"><B>Overview</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="package-summary.html"><FONT CLASS="NavBarFont1"><B>Package</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#FFFFFF" CLASS="NavBarCell1Rev"> &nbsp;<FONT CLASS="NavBarFont1Rev"><B>Class</B></FONT>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="class-use/XSSFFont.html"><FONT CLASS="NavBarFont1"><B>Use</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="package-tree.html"><FONT CLASS="NavBarFont1"><B>Tree</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../deprecated-list.html"><FONT CLASS="NavBarFont1"><B>Deprecated</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../index-all.html"><FONT CLASS="NavBarFont1"><B>Index</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../help-doc.html"><FONT CLASS="NavBarFont1"><B>Help</B></FONT></A>&nbsp;</TD>
+  </TR>
+</TABLE>
+</TD>
+<TD ALIGN="right" VALIGN="top" ROWSPAN=3><EM>
+</EM>
+</TD>
+</TR>
+
+<TR>
+<TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
+&nbsp;<A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFFirstHeader.html" title="class in org.apache.poi.xssf.usermodel"><B>PREV CLASS</B></A>&nbsp;
+&nbsp;<A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFFontFormatting.html" title="class in org.apache.poi.xssf.usermodel"><B>NEXT CLASS</B></A></FONT></TD>
+<TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
+  <A HREF="../../../../../index.html?org/apache/poi/xssf/usermodel/XSSFFont.html" target="_top"><B>FRAMES</B></A>  &nbsp;
+&nbsp;<A HREF="XSSFFont.html" target="_top"><B>NO FRAMES</B></A>  &nbsp;
+&nbsp;<SCRIPT type="text/javascript">
+  <!--
+  if(window==top) {
+    document.writeln('<A HREF="../../../../../allclasses-noframe.html"><B>All Classes</B></A>');
+  }
+  //-->
+</SCRIPT>
+<NOSCRIPT>
+  <A HREF="../../../../../allclasses-noframe.html"><B>All Classes</B></A>
+</NOSCRIPT>
+
+
+</FONT></TD>
+</TR>
+<TR>
+<TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
+  SUMMARY:&nbsp;NESTED&nbsp;|&nbsp;<A HREF="#field_summary">FIELD</A>&nbsp;|&nbsp;<A HREF="#constructor_summary">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_summary">METHOD</A></FONT></TD>
+<TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
+DETAIL:&nbsp;<A HREF="#field_detail">FIELD</A>&nbsp;|&nbsp;<A HREF="#constructor_detail">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_detail">METHOD</A></FONT></TD>
+</TR>
+</TABLE>
+<A NAME="skip-navbar_top"></A>
+<!-- ========= END OF TOP NAVBAR ========= -->
+
+<HR>
+<!-- ======== START OF CLASS DATA ======== -->
+<H2>
+<FONT SIZE="-1">
+org.apache.poi.xssf.usermodel</FONT>
+<BR>
+Class XSSFFont</H2>
+<PRE>
+java.lang.Object
+  <IMG SRC="../../../../../resources/inherit.gif" ALT="extended by "><B>org.apache.poi.xssf.usermodel.XSSFFont</B>
+</PRE>
+<DL>
+<DT><B>All Implemented Interfaces:</B> <DD><A HREF="../../../../../org/apache/poi/ss/usermodel/Font.html" title="interface in org.apache.poi.ss.usermodel">Font</A></DD>
+</DL>
+<HR>
+<DL>
+<DT><PRE>public class <B>XSSFFont</B><DT>extends java.lang.Object<DT>implements <A HREF="../../../../../org/apache/poi/ss/usermodel/Font.html" title="interface in org.apache.poi.ss.usermodel">Font</A></DL>
+</PRE>
+
+<P>
+Represents a font used in a workbook.
+<P>
+
+<P>
+<DL>
+<DT><B>Author:</B></DT>
+  <DD>Gisella Bronzetti</DD>
+</DL>
+<HR>
+
+<P>
+<!-- =========== FIELD SUMMARY =========== -->
+
+<A NAME="field_summary"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+<B>Field Summary</B></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;short</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFFont.html#DEFAULT_FONT_COLOR">DEFAULT_FONT_COLOR</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Default font color is black</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;java.lang.String</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFFont.html#DEFAULT_FONT_NAME">DEFAULT_FONT_NAME</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;By default, Microsoft Office Excel 2007 uses the Calibry font in font size 11</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;short</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFFont.html#DEFAULT_FONT_SIZE">DEFAULT_FONT_SIZE</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;By default, Microsoft Office Excel 2007 uses the Calibry font in font size 11</TD>
+</TR>
+</TABLE>
+&nbsp;<A NAME="fields_inherited_from_class_org.apache.poi.ss.usermodel.Font"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#EEEEFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left"><B>Fields inherited from interface org.apache.poi.ss.usermodel.<A HREF="../../../../../org/apache/poi/ss/usermodel/Font.html" title="interface in org.apache.poi.ss.usermodel">Font</A></B></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><A HREF="../../../../../org/apache/poi/ss/usermodel/Font.html#ANSI_CHARSET">ANSI_CHARSET</A>, <A HREF="../../../../../org/apache/poi/ss/usermodel/Font.html#BOLDWEIGHT_BOLD">BOLDWEIGHT_BOLD</A>, <A HREF="../../../../../org/apache/poi/ss/usermodel/Font.html#BOLDWEIGHT_NORMAL">BOLDWEIGHT_NORMAL</A>, <A HREF="../../../../../org/apache/poi/ss/usermodel/Font.html#COLOR_NORMAL">COLOR_NORMAL</A>, <A HREF="../../../../../org/apache/poi/ss/usermodel/Font.html#COLOR_RED">COLOR_RED</A>, <A HREF="../../../../../org/apache/poi/ss/usermodel/Font.html#DEFAULT_CHARSET">DEFAULT_CHARSET</A>, <A HREF="../../../../../org/apache/poi/ss/usermodel/Font.html#SS_NONE">SS_NONE</A>, <A HREF="../../../../../org/apache/poi/ss/usermodel/Font.html#SS_SUB">SS_SUB</A>, <A HREF="../../../../../org/apache/poi/ss/usermodel/Font.html#SS_SUPER">SS_SUPER</A>, <A HREF="../../../../../org/apache/poi/ss/usermodel/Font.html#SYMBOL_CHARSET">SYMBOL_CHARSET</A>, <A HREF="../../../../../org/apache/poi/ss/usermodel/Font.html#U_DOUBLE">U_DOUBLE</A>, <A HREF="../../../../../org/apache/poi/ss/usermodel/Font.html#U_DOUBLE_ACCOUNTING">U_DOUBLE_ACCOUNTING</A>, <A HREF="../../../../../org/apache/poi/ss/usermodel/Font.html#U_NONE">U_NONE</A>, <A HREF="../../../../../org/apache/poi/ss/usermodel/Font.html#U_SINGLE">U_SINGLE</A>, <A HREF="../../../../../org/apache/poi/ss/usermodel/Font.html#U_SINGLE_ACCOUNTING">U_SINGLE_ACCOUNTING</A></CODE></TD>
+</TR>
+</TABLE>
+&nbsp;
+<!-- ======== CONSTRUCTOR SUMMARY ======== -->
+
+<A NAME="constructor_summary"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+<B>Constructor Summary</B></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>protected </CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFFont.html#XSSFFont()">XSSFFont</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Create a new XSSFont.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFFont.html#XSSFFont(org.openxmlformats.schemas.spreadsheetml.x2006.main.CTFont)">XSSFFont</A></B>(org.openxmlformats.schemas.spreadsheetml.x2006.main.CTFont&nbsp;font)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Create a new XSSFFont</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFFont.html#XSSFFont(org.openxmlformats.schemas.spreadsheetml.x2006.main.CTFont, int)">XSSFFont</A></B>(org.openxmlformats.schemas.spreadsheetml.x2006.main.CTFont&nbsp;font,
+         int&nbsp;index)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+</TABLE>
+&nbsp;
+<!-- ========== METHOD SUMMARY =========== -->
+
+<A NAME="method_summary"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+<B>Method Summary</B></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFFont.html#equals(java.lang.Object)">equals</A></B>(java.lang.Object&nbsp;o)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFFont.html#getBold()">getBold</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;get a boolean value for the boldness to use.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;short</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFFont.html#getBoldweight()">getBoldweight</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;get the boldness to use</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;int</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFFont.html#getCharSet()">getCharSet</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;get character-set to use.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;short</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFFont.html#getColor()">getColor</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;get the indexed color value for the font
+ References a color defined in IndexedColors.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;org.openxmlformats.schemas.spreadsheetml.x2006.main.CTFont</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFFont.html#getCTFont()">getCTFont</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;get the underlying CTFont font</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;int</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFFont.html#getFamily()">getFamily</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;get the font family to use.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;short</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFFont.html#getFontHeight()">getFontHeight</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;get the font height in point.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;short</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFFont.html#getFontHeightInPoints()">getFontHeightInPoints</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;get the font height</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;java.lang.String</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFFont.html#getFontName()">getFontName</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;get the name of the font (i.e.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;short</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFFont.html#getIndex()">getIndex</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;get the index within the XSSFWorkbook (sequence within the collection of Font objects)</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFFont.html#getItalic()">getItalic</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;get a boolean value that specify whether to use italics or not</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../../../org/apache/poi/ss/usermodel/FontScheme.html" title="enum in org.apache.poi.ss.usermodel">FontScheme</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFFont.html#getScheme()">getScheme</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;get the font scheme property.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFFont.html#getStrikeout()">getStrikeout</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;get a boolean value that specify whether to use a strikeout horizontal line through the text or not</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;short</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFFont.html#getThemeColor()">getThemeColor</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;get the color value for the font
+ References a color defined in theme.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;short</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFFont.html#getTypeOffset()">getTypeOffset</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;get normal,super or subscript.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;byte</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFFont.html#getUnderline()">getUnderline</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;get type of text underlining to use</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFColor.html" title="class in org.apache.poi.xssf.usermodel">XSSFColor</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFFont.html#getXSSFColor()">getXSSFColor</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;get the color value for the font
+ References a color defined as  Standard Alpha Red Green Blue color value (ARGB).</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;int</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFFont.html#hashCode()">hashCode</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;long</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFFont.html#registerTo(org.apache.poi.xssf.model.StylesTable)">registerTo</A></B>(<A HREF="../../../../../org/apache/poi/xssf/model/StylesTable.html" title="class in org.apache.poi.xssf.model">StylesTable</A>&nbsp;styles)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Perform a registration of ourselves 
+  to the style table</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFFont.html#setBold(boolean)">setBold</A></B>(boolean&nbsp;bold)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;set a boolean value for the boldness to use.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFFont.html#setBoldweight(short)">setBoldweight</A></B>(short&nbsp;boldweight)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFFont.html#setCharSet(byte)">setCharSet</A></B>(byte&nbsp;charset)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;set character-set to use.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFFont.html#setCharSet(org.apache.poi.ss.usermodel.FontCharset)">setCharSet</A></B>(<A HREF="../../../../../org/apache/poi/ss/usermodel/FontCharset.html" title="enum in org.apache.poi.ss.usermodel">FontCharset</A>&nbsp;charSet)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;set character-set to use.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFFont.html#setCharSet(int)">setCharSet</A></B>(int&nbsp;charset)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;set character-set to use.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFFont.html#setColor(short)">setColor</A></B>(short&nbsp;color)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;set the indexed color for the font</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFFont.html#setColor(org.apache.poi.xssf.usermodel.XSSFColor)">setColor</A></B>(<A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFColor.html" title="class in org.apache.poi.xssf.usermodel">XSSFColor</A>&nbsp;color)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;set the color for the font in Standard Alpha Red Green Blue color value</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFFont.html#setFamily(org.apache.poi.ss.usermodel.FontFamily)">setFamily</A></B>(<A HREF="../../../../../org/apache/poi/ss/usermodel/FontFamily.html" title="enum in org.apache.poi.ss.usermodel">FontFamily</A>&nbsp;family)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;set an enumeration representing the font family this font belongs to.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFFont.html#setFamily(int)">setFamily</A></B>(int&nbsp;value)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Set the font family this font belongs to.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFFont.html#setFontHeight(double)">setFontHeight</A></B>(double&nbsp;height)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;set the font height in points.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFFont.html#setFontHeight(short)">setFontHeight</A></B>(short&nbsp;height)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;set the font height in points.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFFont.html#setFontHeightInPoints(short)">setFontHeightInPoints</A></B>(short&nbsp;height)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;set the font height in points.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFFont.html#setFontName(java.lang.String)">setFontName</A></B>(java.lang.String&nbsp;name)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;set the name for the font (i.e.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFFont.html#setItalic(boolean)">setItalic</A></B>(boolean&nbsp;italic)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;set a boolean value for the property specifying whether to use italics or not
+ If omitted, the default value is true.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFFont.html#setScheme(org.apache.poi.ss.usermodel.FontScheme)">setScheme</A></B>(<A HREF="../../../../../org/apache/poi/ss/usermodel/FontScheme.html" title="enum in org.apache.poi.ss.usermodel">FontScheme</A>&nbsp;scheme)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;set font scheme property</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFFont.html#setStrikeout(boolean)">setStrikeout</A></B>(boolean&nbsp;strikeout)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;set a boolean value for the property specifying whether to use a strikeout horizontal line through the text or not
+ If omitted, the default value is true.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFFont.html#setThemeColor(short)">setThemeColor</A></B>(short&nbsp;theme)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;set the theme color for the font to use</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFFont.html#setThemesTable(org.apache.poi.xssf.model.ThemesTable)">setThemesTable</A></B>(<A HREF="../../../../../org/apache/poi/xssf/model/ThemesTable.html" title="class in org.apache.poi.xssf.model">ThemesTable</A>&nbsp;themes)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Records the Themes Table that is associated with
+  the current font, used when looking up theme
+  based colours and properties.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFFont.html#setTypeOffset(short)">setTypeOffset</A></B>(short&nbsp;offset)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;set normal,super or subscript, that representing the vertical-alignment setting.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFFont.html#setUnderline(byte)">setUnderline</A></B>(byte&nbsp;underline)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;set the style of underlining that is used.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFFont.html#setUnderline(org.apache.poi.ss.usermodel.FontUnderline)">setUnderline</A></B>(<A HREF="../../../../../org/apache/poi/ss/usermodel/FontUnderline.html" title="enum in org.apache.poi.ss.usermodel">FontUnderline</A>&nbsp;underline)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;set an enumeration representing the style of underlining that is used.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;java.lang.String</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFFont.html#toString()">toString</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+</TABLE>
+&nbsp;<A NAME="methods_inherited_from_class_java.lang.Object"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#EEEEFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left"><B>Methods inherited from class java.lang.Object</B></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE>clone, finalize, getClass, notify, notifyAll, wait, wait, wait</CODE></TD>
+</TR>
+</TABLE>
+&nbsp;
+<P>
+
+<!-- ============ FIELD DETAIL =========== -->
+
+<A NAME="field_detail"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="1"><FONT SIZE="+2">
+<B>Field Detail</B></FONT></TH>
+</TR>
+</TABLE>
+
+<A NAME="DEFAULT_FONT_NAME"><!-- --></A><H3>
+DEFAULT_FONT_NAME</H3>
+<PRE>
+public static final java.lang.String <B>DEFAULT_FONT_NAME</B></PRE>
+<DL>
+<DD>By default, Microsoft Office Excel 2007 uses the Calibry font in font size 11
+<P>
+<DL>
+<DT><B>See Also:</B><DD><A HREF="../../../../../constant-values.html#org.apache.poi.xssf.usermodel.XSSFFont.DEFAULT_FONT_NAME">Constant Field Values</A></DL>
+</DL>
+<HR>
+
+<A NAME="DEFAULT_FONT_SIZE"><!-- --></A><H3>
+DEFAULT_FONT_SIZE</H3>
+<PRE>
+public static final short <B>DEFAULT_FONT_SIZE</B></PRE>
+<DL>
+<DD>By default, Microsoft Office Excel 2007 uses the Calibry font in font size 11
+<P>
+<DL>
+<DT><B>See Also:</B><DD><A HREF="../../../../../constant-values.html#org.apache.poi.xssf.usermodel.XSSFFont.DEFAULT_FONT_SIZE">Constant Field Values</A></DL>
+</DL>
+<HR>
+
+<A NAME="DEFAULT_FONT_COLOR"><!-- --></A><H3>
+DEFAULT_FONT_COLOR</H3>
+<PRE>
+public static final short <B>DEFAULT_FONT_COLOR</B></PRE>
+<DL>
+<DD>Default font color is black
+<P>
+<DL>
+<DT><B>See Also:</B><DD><A HREF="../../../../../org/apache/poi/ss/usermodel/IndexedColors.html#BLACK"><CODE>IndexedColors.BLACK</CODE></A></DL>
+</DL>
+
+<!-- ========= CONSTRUCTOR DETAIL ======== -->
+
+<A NAME="constructor_detail"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="1"><FONT SIZE="+2">
+<B>Constructor Detail</B></FONT></TH>
+</TR>
+</TABLE>
+
+<A NAME="XSSFFont(org.openxmlformats.schemas.spreadsheetml.x2006.main.CTFont)"><!-- --></A><H3>
+XSSFFont</H3>
+<PRE>
+public <B>XSSFFont</B>(org.openxmlformats.schemas.spreadsheetml.x2006.main.CTFont&nbsp;font)</PRE>
+<DL>
+<DD>Create a new XSSFFont
+<P>
+<DL>
+<DT><B>Parameters:</B><DD><CODE>font</CODE> - the underlying CTFont bean</DL>
+</DL>
+<HR>
+
+<A NAME="XSSFFont(org.openxmlformats.schemas.spreadsheetml.x2006.main.CTFont, int)"><!-- --></A><H3>
+XSSFFont</H3>
+<PRE>
+public <B>XSSFFont</B>(org.openxmlformats.schemas.spreadsheetml.x2006.main.CTFont&nbsp;font,
+                int&nbsp;index)</PRE>
+<DL>
+</DL>
+<HR>
+
+<A NAME="XSSFFont()"><!-- --></A><H3>
+XSSFFont</H3>
+<PRE>
+protected <B>XSSFFont</B>()</PRE>
+<DL>
+<DD>Create a new XSSFont. This method is protected to be used only by XSSFWorkbook
+<P>
+</DL>
+
+<!-- ============ METHOD DETAIL ========== -->
+
+<A NAME="method_detail"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="1"><FONT SIZE="+2">
+<B>Method Detail</B></FONT></TH>
+</TR>
+</TABLE>
+
+<A NAME="getCTFont()"><!-- --></A><H3>
+getCTFont</H3>
+<PRE>
+<FONT SIZE="-1"><A HREF="../../../../../org/apache/poi/util/Internal.html" title="annotation in org.apache.poi.util">@Internal</A>
+</FONT>public org.openxmlformats.schemas.spreadsheetml.x2006.main.CTFont <B>getCTFont</B>()</PRE>
+<DL>
+<DD>get the underlying CTFont font
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getBold()"><!-- --></A><H3>
+getBold</H3>
+<PRE>
+public boolean <B>getBold</B>()</PRE>
+<DL>
+<DD>get a boolean value for the boldness to use.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+
+<DT><B>Returns:</B><DD>boolean - bold</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getCharSet()"><!-- --></A><H3>
+getCharSet</H3>
+<PRE>
+public int <B>getCharSet</B>()</PRE>
+<DL>
+<DD>get character-set to use.
+<P>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../../../../org/apache/poi/ss/usermodel/Font.html#getCharSet()">getCharSet</A></CODE> in interface <CODE><A HREF="../../../../../org/apache/poi/ss/usermodel/Font.html" title="interface in org.apache.poi.ss.usermodel">Font</A></CODE></DL>
+</DD>
+<DD><DL>
+
+<DT><B>Returns:</B><DD>int - character-set (0-255)<DT><B>See Also:</B><DD><A HREF="../../../../../org/apache/poi/ss/usermodel/FontCharset.html" title="enum in org.apache.poi.ss.usermodel"><CODE>FontCharset</CODE></A></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getColor()"><!-- --></A><H3>
+getColor</H3>
+<PRE>
+public short <B>getColor</B>()</PRE>
+<DL>
+<DD>get the indexed color value for the font
+ References a color defined in IndexedColors.
+<P>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../../../../org/apache/poi/ss/usermodel/Font.html#getColor()">getColor</A></CODE> in interface <CODE><A HREF="../../../../../org/apache/poi/ss/usermodel/Font.html" title="interface in org.apache.poi.ss.usermodel">Font</A></CODE></DL>
+</DD>
+<DD><DL>
+
+<DT><B>Returns:</B><DD>short - indexed color to use<DT><B>See Also:</B><DD><A HREF="../../../../../org/apache/poi/ss/usermodel/IndexedColors.html" title="enum in org.apache.poi.ss.usermodel"><CODE>IndexedColors</CODE></A></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getXSSFColor()"><!-- --></A><H3>
+getXSSFColor</H3>
+<PRE>
+public <A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFColor.html" title="class in org.apache.poi.xssf.usermodel">XSSFColor</A> <B>getXSSFColor</B>()</PRE>
+<DL>
+<DD>get the color value for the font
+ References a color defined as  Standard Alpha Red Green Blue color value (ARGB).
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+
+<DT><B>Returns:</B><DD>XSSFColor - rgb color to use</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getThemeColor()"><!-- --></A><H3>
+getThemeColor</H3>
+<PRE>
+public short <B>getThemeColor</B>()</PRE>
+<DL>
+<DD>get the color value for the font
+ References a color defined in theme.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+
+<DT><B>Returns:</B><DD>short - theme defined to use</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getFontHeight()"><!-- --></A><H3>
+getFontHeight</H3>
+<PRE>
+public short <B>getFontHeight</B>()</PRE>
+<DL>
+<DD>get the font height in point.
+<P>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../../../../org/apache/poi/ss/usermodel/Font.html#getFontHeight()">getFontHeight</A></CODE> in interface <CODE><A HREF="../../../../../org/apache/poi/ss/usermodel/Font.html" title="interface in org.apache.poi.ss.usermodel">Font</A></CODE></DL>
+</DD>
+<DD><DL>
+
+<DT><B>Returns:</B><DD>short - height in point<DT><B>See Also:</B><DD><A HREF="../../../../../org/apache/poi/ss/usermodel/Font.html#getFontHeightInPoints()"><CODE>Font.getFontHeightInPoints()</CODE></A></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getFontHeightInPoints()"><!-- --></A><H3>
+getFontHeightInPoints</H3>
+<PRE>
+public short <B>getFontHeightInPoints</B>()</PRE>
+<DL>
+<DD><B>Description copied from interface: <CODE><A HREF="../../../../../org/apache/poi/ss/usermodel/Font.html#getFontHeightInPoints()">Font</A></CODE></B></DD>
+<DD>get the font height
+<P>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../../../../org/apache/poi/ss/usermodel/Font.html#getFontHeightInPoints()">getFontHeightInPoints</A></CODE> in interface <CODE><A HREF="../../../../../org/apache/poi/ss/usermodel/Font.html" title="interface in org.apache.poi.ss.usermodel">Font</A></CODE></DL>
+</DD>
+<DD><DL>
+
+<DT><B>Returns:</B><DD>short - height in the familiar unit of measure - points<DT><B>See Also:</B><DD><A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFFont.html#getFontHeight()"><CODE>getFontHeight()</CODE></A></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getFontName()"><!-- --></A><H3>
+getFontName</H3>
+<PRE>
+public java.lang.String <B>getFontName</B>()</PRE>
+<DL>
+<DD>get the name of the font (i.e. Arial)
+<P>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../../../../org/apache/poi/ss/usermodel/Font.html#getFontName()">getFontName</A></CODE> in interface <CODE><A HREF="../../../../../org/apache/poi/ss/usermodel/Font.html" title="interface in org.apache.poi.ss.usermodel">Font</A></CODE></DL>
+</DD>
+<DD><DL>
+
+<DT><B>Returns:</B><DD>String - a string representing the name of the font to use</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getItalic()"><!-- --></A><H3>
+getItalic</H3>
+<PRE>
+public boolean <B>getItalic</B>()</PRE>
+<DL>
+<DD>get a boolean value that specify whether to use italics or not
+<P>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../../../../org/apache/poi/ss/usermodel/Font.html#getItalic()">getItalic</A></CODE> in interface <CODE><A HREF="../../../../../org/apache/poi/ss/usermodel/Font.html" title="interface in org.apache.poi.ss.usermodel">Font</A></CODE></DL>
+</DD>
+<DD><DL>
+
+<DT><B>Returns:</B><DD>boolean - value for italic</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getStrikeout()"><!-- --></A><H3>
+getStrikeout</H3>
+<PRE>
+public boolean <B>getStrikeout</B>()</PRE>
+<DL>
+<DD>get a boolean value that specify whether to use a strikeout horizontal line through the text or not
+<P>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../../../../org/apache/poi/ss/usermodel/Font.html#getStrikeout()">getStrikeout</A></CODE> in interface <CODE><A HREF="../../../../../org/apache/poi/ss/usermodel/Font.html" title="interface in org.apache.poi.ss.usermodel">Font</A></CODE></DL>
+</DD>
+<DD><DL>
+
+<DT><B>Returns:</B><DD>boolean - value for strikeout</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getTypeOffset()"><!-- --></A><H3>
+getTypeOffset</H3>
+<PRE>
+public short <B>getTypeOffset</B>()</PRE>
+<DL>
+<DD>get normal,super or subscript.
+<P>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../../../../org/apache/poi/ss/usermodel/Font.html#getTypeOffset()">getTypeOffset</A></CODE> in interface <CODE><A HREF="../../../../../org/apache/poi/ss/usermodel/Font.html" title="interface in org.apache.poi.ss.usermodel">Font</A></CODE></DL>
+</DD>
+<DD><DL>
+
+<DT><B>Returns:</B><DD>short - offset type to use (none,super,sub)<DT><B>See Also:</B><DD><A HREF="../../../../../org/apache/poi/ss/usermodel/Font.html#SS_NONE"><CODE>Font.SS_NONE</CODE></A>, 
+<A HREF="../../../../../org/apache/poi/ss/usermodel/Font.html#SS_SUPER"><CODE>Font.SS_SUPER</CODE></A>, 
+<A HREF="../../../../../org/apache/poi/ss/usermodel/Font.html#SS_SUB"><CODE>Font.SS_SUB</CODE></A></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getUnderline()"><!-- --></A><H3>
+getUnderline</H3>
+<PRE>
+public byte <B>getUnderline</B>()</PRE>
+<DL>
+<DD>get type of text underlining to use
+<P>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../../../../org/apache/poi/ss/usermodel/Font.html#getUnderline()">getUnderline</A></CODE> in interface <CODE><A HREF="../../../../../org/apache/poi/ss/usermodel/Font.html" title="interface in org.apache.poi.ss.usermodel">Font</A></CODE></DL>
+</DD>
+<DD><DL>
+
+<DT><B>Returns:</B><DD>byte - underlining type<DT><B>See Also:</B><DD><A HREF="../../../../../org/apache/poi/ss/usermodel/FontUnderline.html" title="enum in org.apache.poi.ss.usermodel"><CODE>FontUnderline</CODE></A></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setBold(boolean)"><!-- --></A><H3>
+setBold</H3>
+<PRE>
+public void <B>setBold</B>(boolean&nbsp;bold)</PRE>
+<DL>
+<DD>set a boolean value for the boldness to use. If omitted, the default value is true.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>bold</CODE> - - boldness to use</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setBoldweight(short)"><!-- --></A><H3>
+setBoldweight</H3>
+<PRE>
+public void <B>setBoldweight</B>(short&nbsp;boldweight)</PRE>
+<DL>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../../../../org/apache/poi/ss/usermodel/Font.html#setBoldweight(short)">setBoldweight</A></CODE> in interface <CODE><A HREF="../../../../../org/apache/poi/ss/usermodel/Font.html" title="interface in org.apache.poi.ss.usermodel">Font</A></CODE></DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getBoldweight()"><!-- --></A><H3>
+getBoldweight</H3>
+<PRE>
+public short <B>getBoldweight</B>()</PRE>
+<DL>
+<DD>get the boldness to use
+<P>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../../../../org/apache/poi/ss/usermodel/Font.html#getBoldweight()">getBoldweight</A></CODE> in interface <CODE><A HREF="../../../../../org/apache/poi/ss/usermodel/Font.html" title="interface in org.apache.poi.ss.usermodel">Font</A></CODE></DL>
+</DD>
+<DD><DL>
+
+<DT><B>Returns:</B><DD>boldweight<DT><B>See Also:</B><DD><A HREF="../../../../../org/apache/poi/ss/usermodel/Font.html#BOLDWEIGHT_NORMAL"><CODE>Font.BOLDWEIGHT_NORMAL</CODE></A>, 
+<A HREF="../../../../../org/apache/poi/ss/usermodel/Font.html#BOLDWEIGHT_BOLD"><CODE>Font.BOLDWEIGHT_BOLD</CODE></A></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setCharSet(byte)"><!-- --></A><H3>
+setCharSet</H3>
+<PRE>
+public void <B>setCharSet</B>(byte&nbsp;charset)</PRE>
+<DL>
+<DD>set character-set to use.
+<P>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../../../../org/apache/poi/ss/usermodel/Font.html#setCharSet(byte)">setCharSet</A></CODE> in interface <CODE><A HREF="../../../../../org/apache/poi/ss/usermodel/Font.html" title="interface in org.apache.poi.ss.usermodel">Font</A></CODE></DL>
+</DD>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>charset</CODE> - - charset<DT><B>See Also:</B><DD><A HREF="../../../../../org/apache/poi/ss/usermodel/FontCharset.html" title="enum in org.apache.poi.ss.usermodel"><CODE>FontCharset</CODE></A></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setCharSet(int)"><!-- --></A><H3>
+setCharSet</H3>
+<PRE>
+public void <B>setCharSet</B>(int&nbsp;charset)</PRE>
+<DL>
+<DD>set character-set to use.
+<P>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../../../../org/apache/poi/ss/usermodel/Font.html#setCharSet(int)">setCharSet</A></CODE> in interface <CODE><A HREF="../../../../../org/apache/poi/ss/usermodel/Font.html" title="interface in org.apache.poi.ss.usermodel">Font</A></CODE></DL>
+</DD>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>charset</CODE> - - charset<DT><B>See Also:</B><DD><A HREF="../../../../../org/apache/poi/ss/usermodel/FontCharset.html" title="enum in org.apache.poi.ss.usermodel"><CODE>FontCharset</CODE></A></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setCharSet(org.apache.poi.ss.usermodel.FontCharset)"><!-- --></A><H3>
+setCharSet</H3>
+<PRE>
+public void <B>setCharSet</B>(<A HREF="../../../../../org/apache/poi/ss/usermodel/FontCharset.html" title="enum in org.apache.poi.ss.usermodel">FontCharset</A>&nbsp;charSet)</PRE>
+<DL>
+<DD>set character-set to use.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>charSet</CODE> - </DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setColor(short)"><!-- --></A><H3>
+setColor</H3>
+<PRE>
+public void <B>setColor</B>(short&nbsp;color)</PRE>
+<DL>
+<DD>set the indexed color for the font
+<P>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../../../../org/apache/poi/ss/usermodel/Font.html#setColor(short)">setColor</A></CODE> in interface <CODE><A HREF="../../../../../org/apache/poi/ss/usermodel/Font.html" title="interface in org.apache.poi.ss.usermodel">Font</A></CODE></DL>
+</DD>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>color</CODE> - - color to use<DT><B>See Also:</B><DD><A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFFont.html#DEFAULT_FONT_COLOR"><CODE>- Note: default font color</CODE></A>, 
+<A HREF="../../../../../org/apache/poi/ss/usermodel/IndexedColors.html" title="enum in org.apache.poi.ss.usermodel"><CODE>IndexedColors</CODE></A></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setColor(org.apache.poi.xssf.usermodel.XSSFColor)"><!-- --></A><H3>
+setColor</H3>
+<PRE>
+public void <B>setColor</B>(<A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFColor.html" title="class in org.apache.poi.xssf.usermodel">XSSFColor</A>&nbsp;color)</PRE>
+<DL>
+<DD>set the color for the font in Standard Alpha Red Green Blue color value
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>color</CODE> - - color to use</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setFontHeight(short)"><!-- --></A><H3>
+setFontHeight</H3>
+<PRE>
+public void <B>setFontHeight</B>(short&nbsp;height)</PRE>
+<DL>
+<DD>set the font height in points.
+<P>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../../../../org/apache/poi/ss/usermodel/Font.html#setFontHeight(short)">setFontHeight</A></CODE> in interface <CODE><A HREF="../../../../../org/apache/poi/ss/usermodel/Font.html" title="interface in org.apache.poi.ss.usermodel">Font</A></CODE></DL>
+</DD>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>height</CODE> - - height in points<DT><B>See Also:</B><DD><A HREF="../../../../../org/apache/poi/ss/usermodel/Font.html#setFontHeightInPoints(short)"><CODE>Font.setFontHeightInPoints(short)</CODE></A></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setFontHeight(double)"><!-- --></A><H3>
+setFontHeight</H3>
+<PRE>
+public void <B>setFontHeight</B>(double&nbsp;height)</PRE>
+<DL>
+<DD>set the font height in points.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>height</CODE> - - height in points</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setFontHeightInPoints(short)"><!-- --></A><H3>
+setFontHeightInPoints</H3>
+<PRE>
+public void <B>setFontHeightInPoints</B>(short&nbsp;height)</PRE>
+<DL>
+<DD>set the font height in points.
+<P>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../../../../org/apache/poi/ss/usermodel/Font.html#setFontHeightInPoints(short)">setFontHeightInPoints</A></CODE> in interface <CODE><A HREF="../../../../../org/apache/poi/ss/usermodel/Font.html" title="interface in org.apache.poi.ss.usermodel">Font</A></CODE></DL>
+</DD>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>height</CODE> - height in the familiar unit of measure - points<DT><B>See Also:</B><DD><A HREF="../../../../../org/apache/poi/ss/usermodel/Font.html#setFontHeight(short)"><CODE>Font.setFontHeight(short)</CODE></A></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setThemeColor(short)"><!-- --></A><H3>
+setThemeColor</H3>
+<PRE>
+public void <B>setThemeColor</B>(short&nbsp;theme)</PRE>
+<DL>
+<DD>set the theme color for the font to use
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>theme</CODE> - - theme color to use</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setFontName(java.lang.String)"><!-- --></A><H3>
+setFontName</H3>
+<PRE>
+public void <B>setFontName</B>(java.lang.String&nbsp;name)</PRE>
+<DL>
+<DD>set the name for the font (i.e. Arial).
+ If the font doesn't exist (because it isn't installed on the system),
+ or the charset is invalid for that font, then another font should
+ be substituted.
+ The string length for this attribute shall be 0 to 31 characters.
+ Default font name is Calibri.
+<P>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../../../../org/apache/poi/ss/usermodel/Font.html#setFontName(java.lang.String)">setFontName</A></CODE> in interface <CODE><A HREF="../../../../../org/apache/poi/ss/usermodel/Font.html" title="interface in org.apache.poi.ss.usermodel">Font</A></CODE></DL>
+</DD>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>name</CODE> - - value representing the name of the font to use<DT><B>See Also:</B><DD><A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFFont.html#DEFAULT_FONT_NAME"><CODE>DEFAULT_FONT_NAME</CODE></A></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setItalic(boolean)"><!-- --></A><H3>
+setItalic</H3>
+<PRE>
+public void <B>setItalic</B>(boolean&nbsp;italic)</PRE>
+<DL>
+<DD>set a boolean value for the property specifying whether to use italics or not
+ If omitted, the default value is true.
+<P>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../../../../org/apache/poi/ss/usermodel/Font.html#setItalic(boolean)">setItalic</A></CODE> in interface <CODE><A HREF="../../../../../org/apache/poi/ss/usermodel/Font.html" title="interface in org.apache.poi.ss.usermodel">Font</A></CODE></DL>
+</DD>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>italic</CODE> - - value for italics or not</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setStrikeout(boolean)"><!-- --></A><H3>
+setStrikeout</H3>
+<PRE>
+public void <B>setStrikeout</B>(boolean&nbsp;strikeout)</PRE>
+<DL>
+<DD>set a boolean value for the property specifying whether to use a strikeout horizontal line through the text or not
+ If omitted, the default value is true.
+<P>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../../../../org/apache/poi/ss/usermodel/Font.html#setStrikeout(boolean)">setStrikeout</A></CODE> in interface <CODE><A HREF="../../../../../org/apache/poi/ss/usermodel/Font.html" title="interface in org.apache.poi.ss.usermodel">Font</A></CODE></DL>
+</DD>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>strikeout</CODE> - - value for strikeout or not</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setTypeOffset(short)"><!-- --></A><H3>
+setTypeOffset</H3>
+<PRE>
+public void <B>setTypeOffset</B>(short&nbsp;offset)</PRE>
+<DL>
+<DD>set normal,super or subscript, that representing the vertical-alignment setting.
+ Setting this to either subscript or superscript shall make the font size smaller if a
+ smaller font size is available.
+<P>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../../../../org/apache/poi/ss/usermodel/Font.html#setTypeOffset(short)">setTypeOffset</A></CODE> in interface <CODE><A HREF="../../../../../org/apache/poi/ss/usermodel/Font.html" title="interface in org.apache.poi.ss.usermodel">Font</A></CODE></DL>
+</DD>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>offset</CODE> - - offset type to use (none,super,sub)<DT><B>See Also:</B><DD><A HREF="../../../../../org/apache/poi/ss/usermodel/Font.html#SS_NONE"><CODE>Font.SS_NONE</CODE></A>, 
+<A HREF="../../../../../org/apache/poi/ss/usermodel/Font.html#SS_SUPER"><CODE>Font.SS_SUPER</CODE></A>, 
+<A HREF="../../../../../org/apache/poi/ss/usermodel/Font.html#SS_SUB"><CODE>Font.SS_SUB</CODE></A></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setUnderline(byte)"><!-- --></A><H3>
+setUnderline</H3>
+<PRE>
+public void <B>setUnderline</B>(byte&nbsp;underline)</PRE>
+<DL>
+<DD>set the style of underlining that is used.
+ The none style is equivalent to not using underlining at all.
+<P>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../../../../org/apache/poi/ss/usermodel/Font.html#setUnderline(byte)">setUnderline</A></CODE> in interface <CODE><A HREF="../../../../../org/apache/poi/ss/usermodel/Font.html" title="interface in org.apache.poi.ss.usermodel">Font</A></CODE></DL>
+</DD>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>underline</CODE> - - underline type to use<DT><B>See Also:</B><DD><A HREF="../../../../../org/apache/poi/ss/usermodel/FontUnderline.html" title="enum in org.apache.poi.ss.usermodel"><CODE>FontUnderline</CODE></A></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setUnderline(org.apache.poi.ss.usermodel.FontUnderline)"><!-- --></A><H3>
+setUnderline</H3>
+<PRE>
+public void <B>setUnderline</B>(<A HREF="../../../../../org/apache/poi/ss/usermodel/FontUnderline.html" title="enum in org.apache.poi.ss.usermodel">FontUnderline</A>&nbsp;underline)</PRE>
+<DL>
+<DD>set an enumeration representing the style of underlining that is used.
+ The none style is equivalent to not using underlining at all.
+ The possible values for this attribute are defined by the FontUnderline
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>underline</CODE> - - FontUnderline enum value</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="toString()"><!-- --></A><H3>
+toString</H3>
+<PRE>
+public java.lang.String <B>toString</B>()</PRE>
+<DL>
+<DD><DL>
+<DT><B>Overrides:</B><DD><CODE>toString</CODE> in class <CODE>java.lang.Object</CODE></DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="registerTo(org.apache.poi.xssf.model.StylesTable)"><!-- --></A><H3>
+registerTo</H3>
+<PRE>
+public long <B>registerTo</B>(<A HREF="../../../../../org/apache/poi/xssf/model/StylesTable.html" title="class in org.apache.poi.xssf.model">StylesTable</A>&nbsp;styles)</PRE>
+<DL>
+<DD>Perform a registration of ourselves 
+  to the style table
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setThemesTable(org.apache.poi.xssf.model.ThemesTable)"><!-- --></A><H3>
+setThemesTable</H3>
+<PRE>
+public void <B>setThemesTable</B>(<A HREF="../../../../../org/apache/poi/xssf/model/ThemesTable.html" title="class in org.apache.poi.xssf.model">ThemesTable</A>&nbsp;themes)</PRE>
+<DL>
+<DD>Records the Themes Table that is associated with
+  the current font, used when looking up theme
+  based colours and properties.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getScheme()"><!-- --></A><H3>
+getScheme</H3>
+<PRE>
+public <A HREF="../../../../../org/apache/poi/ss/usermodel/FontScheme.html" title="enum in org.apache.poi.ss.usermodel">FontScheme</A> <B>getScheme</B>()</PRE>
+<DL>
+<DD>get the font scheme property.
+ is used only in StylesTable to create the default instance of font
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+
+<DT><B>Returns:</B><DD>FontScheme<DT><B>See Also:</B><DD><A HREF="../../../../../org/apache/poi/xssf/model/StylesTable.html#createDefaultFont()"><CODE>StylesTable.createDefaultFont()</CODE></A></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setScheme(org.apache.poi.ss.usermodel.FontScheme)"><!-- --></A><H3>
+setScheme</H3>
+<PRE>
+public void <B>setScheme</B>(<A HREF="../../../../../org/apache/poi/ss/usermodel/FontScheme.html" title="enum in org.apache.poi.ss.usermodel">FontScheme</A>&nbsp;scheme)</PRE>
+<DL>
+<DD>set font scheme property
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>scheme</CODE> - - FontScheme enum value<DT><B>See Also:</B><DD><A HREF="../../../../../org/apache/poi/ss/usermodel/FontScheme.html" title="enum in org.apache.poi.ss.usermodel"><CODE>FontScheme</CODE></A></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getFamily()"><!-- --></A><H3>
+getFamily</H3>
+<PRE>
+public int <B>getFamily</B>()</PRE>
+<DL>
+<DD>get the font family to use.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+
+<DT><B>Returns:</B><DD>the font family to use<DT><B>See Also:</B><DD><A HREF="../../../../../org/apache/poi/ss/usermodel/FontFamily.html" title="enum in org.apache.poi.ss.usermodel"><CODE>FontFamily</CODE></A></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setFamily(int)"><!-- --></A><H3>
+setFamily</H3>
+<PRE>
+public void <B>setFamily</B>(int&nbsp;value)</PRE>
+<DL>
+<DD>Set the font family this font belongs to.
+ A font family is a set of fonts having common stroke width and serif characteristics.
+ The font name overrides when there are conflicting values.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>value</CODE> - - font family<DT><B>See Also:</B><DD><A HREF="../../../../../org/apache/poi/ss/usermodel/FontFamily.html" title="enum in org.apache.poi.ss.usermodel"><CODE>FontFamily</CODE></A></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setFamily(org.apache.poi.ss.usermodel.FontFamily)"><!-- --></A><H3>
+setFamily</H3>
+<PRE>
+public void <B>setFamily</B>(<A HREF="../../../../../org/apache/poi/ss/usermodel/FontFamily.html" title="enum in org.apache.poi.ss.usermodel">FontFamily</A>&nbsp;family)</PRE>
+<DL>
+<DD>set an enumeration representing the font family this font belongs to.
+ A font family is a set of fonts having common stroke width and serif characteristics.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>family</CODE> - font family</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getIndex()"><!-- --></A><H3>
+getIndex</H3>
+<PRE>
+public short <B>getIndex</B>()</PRE>
+<DL>
+<DD>get the index within the XSSFWorkbook (sequence within the collection of Font objects)
+<P>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../../../../org/apache/poi/ss/usermodel/Font.html#getIndex()">getIndex</A></CODE> in interface <CODE><A HREF="../../../../../org/apache/poi/ss/usermodel/Font.html" title="interface in org.apache.poi.ss.usermodel">Font</A></CODE></DL>
+</DD>
+<DD><DL>
+
+<DT><B>Returns:</B><DD>unique index number of the underlying record this Font represents (probably you don't care
+  unless you're comparing which one is which)</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="hashCode()"><!-- --></A><H3>
+hashCode</H3>
+<PRE>
+public int <B>hashCode</B>()</PRE>
+<DL>
+<DD><DL>
+<DT><B>Overrides:</B><DD><CODE>hashCode</CODE> in class <CODE>java.lang.Object</CODE></DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="equals(java.lang.Object)"><!-- --></A><H3>
+equals</H3>
+<PRE>
+public boolean <B>equals</B>(java.lang.Object&nbsp;o)</PRE>
+<DL>
+<DD><DL>
+<DT><B>Overrides:</B><DD><CODE>equals</CODE> in class <CODE>java.lang.Object</CODE></DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<!-- ========= END OF CLASS DATA ========= -->
+<HR>
+
+
+<!-- ======= START OF BOTTOM NAVBAR ====== -->
+<A NAME="navbar_bottom"><!-- --></A>
+<A HREF="#skip-navbar_bottom" title="Skip navigation links"></A>
+<TABLE BORDER="0" WIDTH="100%" CELLPADDING="1" CELLSPACING="0" SUMMARY="">
+<TR>
+<TD COLSPAN=2 BGCOLOR="#EEEEFF" CLASS="NavBarCell1">
+<A NAME="navbar_bottom_firstrow"><!-- --></A>
+<TABLE BORDER="0" CELLPADDING="0" CELLSPACING="3" SUMMARY="">
+  <TR ALIGN="center" VALIGN="top">
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../overview-summary.html"><FONT CLASS="NavBarFont1"><B>Overview</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="package-summary.html"><FONT CLASS="NavBarFont1"><B>Package</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#FFFFFF" CLASS="NavBarCell1Rev"> &nbsp;<FONT CLASS="NavBarFont1Rev"><B>Class</B></FONT>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="class-use/XSSFFont.html"><FONT CLASS="NavBarFont1"><B>Use</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="package-tree.html"><FONT CLASS="NavBarFont1"><B>Tree</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../deprecated-list.html"><FONT CLASS="NavBarFont1"><B>Deprecated</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../index-all.html"><FONT CLASS="NavBarFont1"><B>Index</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../help-doc.html"><FONT CLASS="NavBarFont1"><B>Help</B></FONT></A>&nbsp;</TD>
+  </TR>
+</TABLE>
+</TD>
+<TD ALIGN="right" VALIGN="top" ROWSPAN=3><EM>
+</EM>
+</TD>
+</TR>
+
+<TR>
+<TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
+&nbsp;<A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFFirstHeader.html" title="class in org.apache.poi.xssf.usermodel"><B>PREV CLASS</B></A>&nbsp;
+&nbsp;<A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFFontFormatting.html" title="class in org.apache.poi.xssf.usermodel"><B>NEXT CLASS</B></A></FONT></TD>
+<TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
+  <A HREF="../../../../../index.html?org/apache/poi/xssf/usermodel/XSSFFont.html" target="_top"><B>FRAMES</B></A>  &nbsp;
+&nbsp;<A HREF="XSSFFont.html" target="_top"><B>NO FRAMES</B></A>  &nbsp;
+&nbsp;<SCRIPT type="text/javascript">
+  <!--
+  if(window==top) {
+    document.writeln('<A HREF="../../../../../allclasses-noframe.html"><B>All Classes</B></A>');
+  }
+  //-->
+</SCRIPT>
+<NOSCRIPT>
+  <A HREF="../../../../../allclasses-noframe.html"><B>All Classes</B></A>
+</NOSCRIPT>
+
+
+</FONT></TD>
+</TR>
+<TR>
+<TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
+  SUMMARY:&nbsp;NESTED&nbsp;|&nbsp;<A HREF="#field_summary">FIELD</A>&nbsp;|&nbsp;<A HREF="#constructor_summary">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_summary">METHOD</A></FONT></TD>
+<TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
+DETAIL:&nbsp;<A HREF="#field_detail">FIELD</A>&nbsp;|&nbsp;<A HREF="#constructor_detail">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_detail">METHOD</A></FONT></TD>
+</TR>
+</TABLE>
+<A NAME="skip-navbar_bottom"></A>
+<!-- ======== END OF BOTTOM NAVBAR ======= -->
+
+<HR>
+
+                <i>Copyright 2014 The Apache Software Foundation or
+        its licensors, as applicable.</i>
+            
+</BODY>
+</HTML>

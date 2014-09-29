@@ -1,0 +1,2234 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!--NewPage-->
+<HTML>
+<HEAD>
+<TITLE>
+CharacterProperties (POI API Documentation)
+</TITLE>
+
+<META NAME="keywords" CONTENT="org.apache.poi.hwpf.usermodel.CharacterProperties class">
+
+<LINK REL ="stylesheet" TYPE="text/css" HREF="../../../../../stylesheet.css" TITLE="Style">
+
+<SCRIPT type="text/javascript">
+function windowTitle()
+{
+    parent.document.title="CharacterProperties (POI API Documentation)";
+}
+</SCRIPT>
+<NOSCRIPT>
+</NOSCRIPT>
+
+</HEAD>
+
+<BODY BGCOLOR="white" onload="windowTitle();">
+
+
+<!-- ========= START OF TOP NAVBAR ======= -->
+<A NAME="navbar_top"><!-- --></A>
+<A HREF="#skip-navbar_top" title="Skip navigation links"></A>
+<TABLE BORDER="0" WIDTH="100%" CELLPADDING="1" CELLSPACING="0" SUMMARY="">
+<TR>
+<TD COLSPAN=2 BGCOLOR="#EEEEFF" CLASS="NavBarCell1">
+<A NAME="navbar_top_firstrow"><!-- --></A>
+<TABLE BORDER="0" CELLPADDING="0" CELLSPACING="3" SUMMARY="">
+  <TR ALIGN="center" VALIGN="top">
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../overview-summary.html"><FONT CLASS="NavBarFont1"><B>Overview</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="package-summary.html"><FONT CLASS="NavBarFont1"><B>Package</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#FFFFFF" CLASS="NavBarCell1Rev"> &nbsp;<FONT CLASS="NavBarFont1Rev"><B>Class</B></FONT>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="class-use/CharacterProperties.html"><FONT CLASS="NavBarFont1"><B>Use</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="package-tree.html"><FONT CLASS="NavBarFont1"><B>Tree</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../deprecated-list.html"><FONT CLASS="NavBarFont1"><B>Deprecated</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../index-all.html"><FONT CLASS="NavBarFont1"><B>Index</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../help-doc.html"><FONT CLASS="NavBarFont1"><B>Help</B></FONT></A>&nbsp;</TD>
+  </TR>
+</TABLE>
+</TD>
+<TD ALIGN="right" VALIGN="top" ROWSPAN=3><EM>
+</EM>
+</TD>
+</TR>
+
+<TR>
+<TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
+&nbsp;<A HREF="../../../../../org/apache/poi/hwpf/usermodel/BorderCode.html" title="class in org.apache.poi.hwpf.usermodel"><B>PREV CLASS</B></A>&nbsp;
+&nbsp;<A HREF="../../../../../org/apache/poi/hwpf/usermodel/CharacterRun.html" title="class in org.apache.poi.hwpf.usermodel"><B>NEXT CLASS</B></A></FONT></TD>
+<TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
+  <A HREF="../../../../../index.html?org/apache/poi/hwpf/usermodel/CharacterProperties.html" target="_top"><B>FRAMES</B></A>  &nbsp;
+&nbsp;<A HREF="CharacterProperties.html" target="_top"><B>NO FRAMES</B></A>  &nbsp;
+&nbsp;<SCRIPT type="text/javascript">
+  <!--
+  if(window==top) {
+    document.writeln('<A HREF="../../../../../allclasses-noframe.html"><B>All Classes</B></A>');
+  }
+  //-->
+</SCRIPT>
+<NOSCRIPT>
+  <A HREF="../../../../../allclasses-noframe.html"><B>All Classes</B></A>
+</NOSCRIPT>
+
+
+</FONT></TD>
+</TR>
+<TR>
+<TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
+  SUMMARY:&nbsp;NESTED&nbsp;|&nbsp;<A HREF="#field_summary">FIELD</A>&nbsp;|&nbsp;<A HREF="#constructor_summary">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_summary">METHOD</A></FONT></TD>
+<TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
+DETAIL:&nbsp;<A HREF="#field_detail">FIELD</A>&nbsp;|&nbsp;<A HREF="#constructor_detail">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_detail">METHOD</A></FONT></TD>
+</TR>
+</TABLE>
+<A NAME="skip-navbar_top"></A>
+<!-- ========= END OF TOP NAVBAR ========= -->
+
+<HR>
+<!-- ======== START OF CLASS DATA ======== -->
+<H2>
+<FONT SIZE="-1">
+org.apache.poi.hwpf.usermodel</FONT>
+<BR>
+Class CharacterProperties</H2>
+<PRE>
+java.lang.Object
+  <IMG SRC="../../../../../resources/inherit.gif" ALT="extended by "><A HREF="../../../../../org/apache/poi/hwpf/model/types/CHPAbstractType.html" title="class in org.apache.poi.hwpf.model.types">org.apache.poi.hwpf.model.types.CHPAbstractType</A>
+      <IMG SRC="../../../../../resources/inherit.gif" ALT="extended by "><B>org.apache.poi.hwpf.usermodel.CharacterProperties</B>
+</PRE>
+<DL>
+<DT><B>All Implemented Interfaces:</B> <DD>java.lang.Cloneable</DD>
+</DL>
+<HR>
+<DL>
+<DT><PRE>public final class <B>CharacterProperties</B><DT>extends <A HREF="../../../../../org/apache/poi/hwpf/model/types/CHPAbstractType.html" title="class in org.apache.poi.hwpf.model.types">CHPAbstractType</A><DT>implements java.lang.Cloneable</DL>
+</PRE>
+
+<P>
+<DL>
+<DT><B>Author:</B></DT>
+  <DD>Ryan Ackley</DD>
+</DL>
+<HR>
+
+<P>
+<!-- =========== FIELD SUMMARY =========== -->
+
+<A NAME="field_summary"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+<B>Field Summary</B></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;short</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/usermodel/CharacterProperties.html#SPRM_BRC">SPRM_BRC</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;short</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/usermodel/CharacterProperties.html#SPRM_CCV">SPRM_CCV</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;change chp.cv</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;short</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/usermodel/CharacterProperties.html#SPRM_CHARSCALE">SPRM_CHARSCALE</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;short</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/usermodel/CharacterProperties.html#SPRM_CPG">SPRM_CPG</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;short</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/usermodel/CharacterProperties.html#SPRM_DISPFLDRMARK">SPRM_DISPFLDRMARK</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;short</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/usermodel/CharacterProperties.html#SPRM_DTTMRMARK">SPRM_DTTMRMARK</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;short</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/usermodel/CharacterProperties.html#SPRM_DTTMRMARKDEL">SPRM_DTTMRMARKDEL</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;short</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/usermodel/CharacterProperties.html#SPRM_DXASPACE">SPRM_DXASPACE</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;short</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/usermodel/CharacterProperties.html#SPRM_FBOLD">SPRM_FBOLD</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;short</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/usermodel/CharacterProperties.html#SPRM_FCAPS">SPRM_FCAPS</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;short</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/usermodel/CharacterProperties.html#SPRM_FDATA">SPRM_FDATA</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;short</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/usermodel/CharacterProperties.html#SPRM_FDSTRIKE">SPRM_FDSTRIKE</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;short</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/usermodel/CharacterProperties.html#SPRM_FELID">SPRM_FELID</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;short</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/usermodel/CharacterProperties.html#SPRM_FEMBOSS">SPRM_FEMBOSS</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;short</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/usermodel/CharacterProperties.html#SPRM_FFLDVANISH">SPRM_FFLDVANISH</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;short</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/usermodel/CharacterProperties.html#SPRM_FIMPRINT">SPRM_FIMPRINT</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;short</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/usermodel/CharacterProperties.html#SPRM_FITALIC">SPRM_FITALIC</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;short</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/usermodel/CharacterProperties.html#SPRM_FOBJ">SPRM_FOBJ</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;short</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/usermodel/CharacterProperties.html#SPRM_FOLE2">SPRM_FOLE2</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;short</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/usermodel/CharacterProperties.html#SPRM_FOUTLINE">SPRM_FOUTLINE</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;short</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/usermodel/CharacterProperties.html#SPRM_FRMARK">SPRM_FRMARK</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;short</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/usermodel/CharacterProperties.html#SPRM_FRMARKDEL">SPRM_FRMARKDEL</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;short</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/usermodel/CharacterProperties.html#SPRM_FSHADOW">SPRM_FSHADOW</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;short</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/usermodel/CharacterProperties.html#SPRM_FSMALLCAPS">SPRM_FSMALLCAPS</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;short</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/usermodel/CharacterProperties.html#SPRM_FSPEC">SPRM_FSPEC</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;short</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/usermodel/CharacterProperties.html#SPRM_FSTRIKE">SPRM_FSTRIKE</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;short</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/usermodel/CharacterProperties.html#SPRM_FVANISH">SPRM_FVANISH</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;short</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/usermodel/CharacterProperties.html#SPRM_HIGHLIGHT">SPRM_HIGHLIGHT</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;short</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/usermodel/CharacterProperties.html#SPRM_HPS">SPRM_HPS</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;short</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/usermodel/CharacterProperties.html#SPRM_HPSKERN">SPRM_HPSKERN</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;short</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/usermodel/CharacterProperties.html#SPRM_HPSPOS">SPRM_HPSPOS</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;short</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/usermodel/CharacterProperties.html#SPRM_IBSTRMARK">SPRM_IBSTRMARK</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;short</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/usermodel/CharacterProperties.html#SPRM_IBSTRMARKDEL">SPRM_IBSTRMARKDEL</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;short</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/usermodel/CharacterProperties.html#SPRM_ICO">SPRM_ICO</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;short</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/usermodel/CharacterProperties.html#SPRM_IDCTHINT">SPRM_IDCTHINT</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;short</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/usermodel/CharacterProperties.html#SPRM_IDSIRMARKDEL">SPRM_IDSIRMARKDEL</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;short</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/usermodel/CharacterProperties.html#SPRM_ISS">SPRM_ISS</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;short</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/usermodel/CharacterProperties.html#SPRM_ISTD">SPRM_ISTD</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;short</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/usermodel/CharacterProperties.html#SPRM_KUL">SPRM_KUL</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;short</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/usermodel/CharacterProperties.html#SPRM_LID">SPRM_LID</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;short</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/usermodel/CharacterProperties.html#SPRM_NONFELID">SPRM_NONFELID</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;short</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/usermodel/CharacterProperties.html#SPRM_OBJLOCATION">SPRM_OBJLOCATION</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;short</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/usermodel/CharacterProperties.html#SPRM_PICLOCATION">SPRM_PICLOCATION</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;short</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/usermodel/CharacterProperties.html#SPRM_PROPRMARK">SPRM_PROPRMARK</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;short</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/usermodel/CharacterProperties.html#SPRM_RGFTCASCII">SPRM_RGFTCASCII</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;short</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/usermodel/CharacterProperties.html#SPRM_RGFTCFAREAST">SPRM_RGFTCFAREAST</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;short</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/usermodel/CharacterProperties.html#SPRM_RGFTCNOTFAREAST">SPRM_RGFTCNOTFAREAST</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;short</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/usermodel/CharacterProperties.html#SPRM_SFXTEXT">SPRM_SFXTEXT</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;short</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/usermodel/CharacterProperties.html#SPRM_SHD">SPRM_SHD</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;short</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/usermodel/CharacterProperties.html#SPRM_SYMBOL">SPRM_SYMBOL</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;short</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/usermodel/CharacterProperties.html#SPRM_YSRI">SPRM_YSRI</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+</TABLE>
+&nbsp;<A NAME="fields_inherited_from_class_org.apache.poi.hwpf.model.types.CHPAbstractType"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#EEEEFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left"><B>Fields inherited from class org.apache.poi.hwpf.model.types.<A HREF="../../../../../org/apache/poi/hwpf/model/types/CHPAbstractType.html" title="class in org.apache.poi.hwpf.model.types">CHPAbstractType</A></B></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><A HREF="../../../../../org/apache/poi/hwpf/model/types/CHPAbstractType.html#field_1_grpfChp">field_1_grpfChp</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/CHPAbstractType.html#field_10_pctCharWidth">field_10_pctCharWidth</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/CHPAbstractType.html#field_11_lidDefault">field_11_lidDefault</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/CHPAbstractType.html#field_12_lidFE">field_12_lidFE</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/CHPAbstractType.html#field_13_kcd">field_13_kcd</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/CHPAbstractType.html#field_14_fUndetermine">field_14_fUndetermine</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/CHPAbstractType.html#field_15_iss">field_15_iss</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/CHPAbstractType.html#field_16_fSpecSymbol">field_16_fSpecSymbol</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/CHPAbstractType.html#field_17_idct">field_17_idct</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/CHPAbstractType.html#field_18_idctHint">field_18_idctHint</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/CHPAbstractType.html#field_19_kul">field_19_kul</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/CHPAbstractType.html#field_2_hps">field_2_hps</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/CHPAbstractType.html#field_20_hresi">field_20_hresi</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/CHPAbstractType.html#field_21_hpsKern">field_21_hpsKern</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/CHPAbstractType.html#field_22_hpsPos">field_22_hpsPos</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/CHPAbstractType.html#field_23_shd">field_23_shd</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/CHPAbstractType.html#field_24_brc">field_24_brc</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/CHPAbstractType.html#field_25_ibstRMark">field_25_ibstRMark</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/CHPAbstractType.html#field_26_sfxtText">field_26_sfxtText</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/CHPAbstractType.html#field_27_fDblBdr">field_27_fDblBdr</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/CHPAbstractType.html#field_28_fBorderWS">field_28_fBorderWS</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/CHPAbstractType.html#field_29_ufel">field_29_ufel</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/CHPAbstractType.html#field_3_ftcAscii">field_3_ftcAscii</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/CHPAbstractType.html#field_30_copt">field_30_copt</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/CHPAbstractType.html#field_31_hpsAsci">field_31_hpsAsci</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/CHPAbstractType.html#field_32_hpsFE">field_32_hpsFE</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/CHPAbstractType.html#field_33_hpsBi">field_33_hpsBi</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/CHPAbstractType.html#field_34_ftcSym">field_34_ftcSym</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/CHPAbstractType.html#field_35_xchSym">field_35_xchSym</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/CHPAbstractType.html#field_36_fcPic">field_36_fcPic</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/CHPAbstractType.html#field_37_fcObj">field_37_fcObj</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/CHPAbstractType.html#field_38_lTagObj">field_38_lTagObj</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/CHPAbstractType.html#field_39_fcData">field_39_fcData</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/CHPAbstractType.html#field_4_ftcFE">field_4_ftcFE</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/CHPAbstractType.html#field_40_hresiOld">field_40_hresiOld</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/CHPAbstractType.html#field_41_ibstRMarkDel">field_41_ibstRMarkDel</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/CHPAbstractType.html#field_42_dttmRMark">field_42_dttmRMark</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/CHPAbstractType.html#field_43_dttmRMarkDel">field_43_dttmRMarkDel</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/CHPAbstractType.html#field_44_istd">field_44_istd</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/CHPAbstractType.html#field_45_idslRMReason">field_45_idslRMReason</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/CHPAbstractType.html#field_46_idslReasonDel">field_46_idslReasonDel</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/CHPAbstractType.html#field_47_cpg">field_47_cpg</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/CHPAbstractType.html#field_48_Highlight">field_48_Highlight</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/CHPAbstractType.html#field_49_CharsetFlags">field_49_CharsetFlags</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/CHPAbstractType.html#field_5_ftcOther">field_5_ftcOther</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/CHPAbstractType.html#field_50_chse">field_50_chse</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/CHPAbstractType.html#field_51_fPropRMark">field_51_fPropRMark</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/CHPAbstractType.html#field_52_ibstPropRMark">field_52_ibstPropRMark</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/CHPAbstractType.html#field_53_dttmPropRMark">field_53_dttmPropRMark</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/CHPAbstractType.html#field_54_fConflictOrig">field_54_fConflictOrig</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/CHPAbstractType.html#field_55_fConflictOtherDel">field_55_fConflictOtherDel</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/CHPAbstractType.html#field_56_wConflict">field_56_wConflict</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/CHPAbstractType.html#field_57_IbstConflict">field_57_IbstConflict</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/CHPAbstractType.html#field_58_dttmConflict">field_58_dttmConflict</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/CHPAbstractType.html#field_59_fDispFldRMark">field_59_fDispFldRMark</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/CHPAbstractType.html#field_6_ftcBi">field_6_ftcBi</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/CHPAbstractType.html#field_60_ibstDispFldRMark">field_60_ibstDispFldRMark</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/CHPAbstractType.html#field_61_dttmDispFldRMark">field_61_dttmDispFldRMark</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/CHPAbstractType.html#field_62_xstDispFldRMark">field_62_xstDispFldRMark</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/CHPAbstractType.html#field_63_fcObjp">field_63_fcObjp</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/CHPAbstractType.html#field_64_lbrCRJ">field_64_lbrCRJ</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/CHPAbstractType.html#field_65_fSpecVanish">field_65_fSpecVanish</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/CHPAbstractType.html#field_66_fHasOldProps">field_66_fHasOldProps</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/CHPAbstractType.html#field_67_fSdtVanish">field_67_fSdtVanish</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/CHPAbstractType.html#field_68_wCharScale">field_68_wCharScale</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/CHPAbstractType.html#field_7_dxaSpace">field_7_dxaSpace</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/CHPAbstractType.html#field_8_cv">field_8_cv</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/CHPAbstractType.html#field_9_ico">field_9_ico</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/CHPAbstractType.html#ISS_NONE">ISS_NONE</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/CHPAbstractType.html#ISS_SUBSCRIPTED">ISS_SUBSCRIPTED</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/CHPAbstractType.html#ISS_SUPERSCRIPTED">ISS_SUPERSCRIPTED</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/CHPAbstractType.html#KCD_CIRCLE">KCD_CIRCLE</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/CHPAbstractType.html#KCD_COMMA">KCD_COMMA</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/CHPAbstractType.html#KCD_DOT">KCD_DOT</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/CHPAbstractType.html#KCD_NON">KCD_NON</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/CHPAbstractType.html#KCD_UNDER_DOT">KCD_UNDER_DOT</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/CHPAbstractType.html#KUL_BY_WORD">KUL_BY_WORD</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/CHPAbstractType.html#KUL_DASH">KUL_DASH</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/CHPAbstractType.html#KUL_DASH_LONG">KUL_DASH_LONG</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/CHPAbstractType.html#KUL_DASH_LONG_HEAVY">KUL_DASH_LONG_HEAVY</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/CHPAbstractType.html#KUL_DASHED_HEAVY">KUL_DASHED_HEAVY</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/CHPAbstractType.html#KUL_DOT">KUL_DOT</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/CHPAbstractType.html#KUL_DOT_DASH">KUL_DOT_DASH</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/CHPAbstractType.html#KUL_DOT_DASH_HEAVY">KUL_DOT_DASH_HEAVY</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/CHPAbstractType.html#KUL_DOT_DOT_DASH">KUL_DOT_DOT_DASH</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/CHPAbstractType.html#KUL_DOT_DOT_DASH_HEAVY">KUL_DOT_DOT_DASH_HEAVY</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/CHPAbstractType.html#KUL_DOTTED">KUL_DOTTED</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/CHPAbstractType.html#KUL_DOTTED_HEAVY">KUL_DOTTED_HEAVY</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/CHPAbstractType.html#KUL_DOUBLE">KUL_DOUBLE</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/CHPAbstractType.html#KUL_HIDDEN">KUL_HIDDEN</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/CHPAbstractType.html#KUL_NONE">KUL_NONE</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/CHPAbstractType.html#KUL_SINGLE">KUL_SINGLE</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/CHPAbstractType.html#KUL_THICK">KUL_THICK</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/CHPAbstractType.html#KUL_WAVE">KUL_WAVE</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/CHPAbstractType.html#KUL_WAVE_DOUBLE">KUL_WAVE_DOUBLE</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/CHPAbstractType.html#KUL_WAVE_HEAVY">KUL_WAVE_HEAVY</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/CHPAbstractType.html#LBRCRJ_BOTH">LBRCRJ_BOTH</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/CHPAbstractType.html#LBRCRJ_LEFT">LBRCRJ_LEFT</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/CHPAbstractType.html#LBRCRJ_NONE">LBRCRJ_NONE</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/CHPAbstractType.html#LBRCRJ_RIGHT">LBRCRJ_RIGHT</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/CHPAbstractType.html#SFXTTEXT_BACKGROUND_BLINK">SFXTTEXT_BACKGROUND_BLINK</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/CHPAbstractType.html#SFXTTEXT_LAS_VEGAS_LIGHTS">SFXTTEXT_LAS_VEGAS_LIGHTS</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/CHPAbstractType.html#SFXTTEXT_MARCHING_ANTS">SFXTTEXT_MARCHING_ANTS</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/CHPAbstractType.html#SFXTTEXT_MARCHING_RED_ANTS">SFXTTEXT_MARCHING_RED_ANTS</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/CHPAbstractType.html#SFXTTEXT_NO">SFXTTEXT_NO</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/CHPAbstractType.html#SFXTTEXT_SHIMMER">SFXTTEXT_SHIMMER</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/CHPAbstractType.html#SFXTTEXT_SPARKLE_TEXT">SFXTTEXT_SPARKLE_TEXT</A></CODE></TD>
+</TR>
+</TABLE>
+&nbsp;
+<!-- ======== CONSTRUCTOR SUMMARY ======== -->
+
+<A NAME="constructor_summary"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+<B>Constructor Summary</B></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/usermodel/CharacterProperties.html#CharacterProperties()">CharacterProperties</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+</TABLE>
+&nbsp;
+<!-- ========== METHOD SUMMARY =========== -->
+
+<A NAME="method_summary"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+<B>Method Summary</B></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../../../org/apache/poi/hwpf/usermodel/CharacterProperties.html" title="class in org.apache.poi.hwpf.usermodel">CharacterProperties</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/usermodel/CharacterProperties.html#clone()">clone</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;int</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/usermodel/CharacterProperties.html#getCharacterSpacing()">getCharacterSpacing</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;int</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/usermodel/CharacterProperties.html#getColor()">getColor</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;int</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/usermodel/CharacterProperties.html#getFontSize()">getFontSize</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;int</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/usermodel/CharacterProperties.html#getIco24()">getIco24</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Get the ico24 field for the CHP record.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;int</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/usermodel/CharacterProperties.html#getKerning()">getKerning</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;short</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/usermodel/CharacterProperties.html#getSubSuperScriptIndex()">getSubSuperScriptIndex</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;int</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/usermodel/CharacterProperties.html#getUnderlineCode()">getUnderlineCode</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;int</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/usermodel/CharacterProperties.html#getVerticalOffset()">getVerticalOffset</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/usermodel/CharacterProperties.html#isBold()">isBold</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/usermodel/CharacterProperties.html#isCapitalized()">isCapitalized</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/usermodel/CharacterProperties.html#isDoubleStrikeThrough()">isDoubleStrikeThrough</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/usermodel/CharacterProperties.html#isEmbossed()">isEmbossed</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/usermodel/CharacterProperties.html#isFldVanished()">isFldVanished</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/usermodel/CharacterProperties.html#isHighlighted()">isHighlighted</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/usermodel/CharacterProperties.html#isImprinted()">isImprinted</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/usermodel/CharacterProperties.html#isItalic()">isItalic</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/usermodel/CharacterProperties.html#isMarkedDeleted()">isMarkedDeleted</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/usermodel/CharacterProperties.html#isMarkedInserted()">isMarkedInserted</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/usermodel/CharacterProperties.html#isOutlined()">isOutlined</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/usermodel/CharacterProperties.html#isShadowed()">isShadowed</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/usermodel/CharacterProperties.html#isSmallCaps()">isSmallCaps</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/usermodel/CharacterProperties.html#isStrikeThrough()">isStrikeThrough</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/usermodel/CharacterProperties.html#isVanished()">isVanished</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/usermodel/CharacterProperties.html#markDeleted(boolean)">markDeleted</A></B>(boolean&nbsp;mark)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/usermodel/CharacterProperties.html#markInserted(boolean)">markInserted</A></B>(boolean&nbsp;mark)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/usermodel/CharacterProperties.html#setBold(boolean)">setBold</A></B>(boolean&nbsp;bold)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/usermodel/CharacterProperties.html#setCapitalized(boolean)">setCapitalized</A></B>(boolean&nbsp;caps)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/usermodel/CharacterProperties.html#setCharacterSpacing(int)">setCharacterSpacing</A></B>(int&nbsp;twips)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/usermodel/CharacterProperties.html#setColor(int)">setColor</A></B>(int&nbsp;color)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/usermodel/CharacterProperties.html#setDoubleStrikeThrough(boolean)">setDoubleStrikeThrough</A></B>(boolean&nbsp;dstrike)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/usermodel/CharacterProperties.html#setEmbossed(boolean)">setEmbossed</A></B>(boolean&nbsp;emboss)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/usermodel/CharacterProperties.html#setFldVanish(boolean)">setFldVanish</A></B>(boolean&nbsp;fldVanish)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/usermodel/CharacterProperties.html#setFontSize(int)">setFontSize</A></B>(int&nbsp;halfPoints)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/usermodel/CharacterProperties.html#setHighlighted(byte)">setHighlighted</A></B>(byte&nbsp;color)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/usermodel/CharacterProperties.html#setIco24(int)">setIco24</A></B>(int&nbsp;colour24)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Set the ico24 field for the CHP record.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/usermodel/CharacterProperties.html#setImprinted(boolean)">setImprinted</A></B>(boolean&nbsp;imprint)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/usermodel/CharacterProperties.html#setItalic(boolean)">setItalic</A></B>(boolean&nbsp;italic)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/usermodel/CharacterProperties.html#setKerning(int)">setKerning</A></B>(int&nbsp;kern)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/usermodel/CharacterProperties.html#setOutline(boolean)">setOutline</A></B>(boolean&nbsp;outlined)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/usermodel/CharacterProperties.html#setShadow(boolean)">setShadow</A></B>(boolean&nbsp;shadow)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/usermodel/CharacterProperties.html#setSmallCaps(boolean)">setSmallCaps</A></B>(boolean&nbsp;smallCaps)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/usermodel/CharacterProperties.html#setSubSuperScriptIndex(short)">setSubSuperScriptIndex</A></B>(short&nbsp;iss)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/usermodel/CharacterProperties.html#setUnderlineCode(int)">setUnderlineCode</A></B>(int&nbsp;kul)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/usermodel/CharacterProperties.html#setVanished(boolean)">setVanished</A></B>(boolean&nbsp;vanish)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/usermodel/CharacterProperties.html#setVerticalOffset(int)">setVerticalOffset</A></B>(int&nbsp;hpsPos)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/usermodel/CharacterProperties.html#strikeThrough(boolean)">strikeThrough</A></B>(boolean&nbsp;strike)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+</TABLE>
+&nbsp;<A NAME="methods_inherited_from_class_org.apache.poi.hwpf.model.types.CHPAbstractType"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#EEEEFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left"><B>Methods inherited from class org.apache.poi.hwpf.model.types.<A HREF="../../../../../org/apache/poi/hwpf/model/types/CHPAbstractType.html" title="class in org.apache.poi.hwpf.model.types">CHPAbstractType</A></B></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><A HREF="../../../../../org/apache/poi/hwpf/model/types/CHPAbstractType.html#equals(java.lang.Object)">equals</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/CHPAbstractType.html#getBrc()">getBrc</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/CHPAbstractType.html#getCharsetFlags()">getCharsetFlags</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/CHPAbstractType.html#getChse()">getChse</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/CHPAbstractType.html#getCopt()">getCopt</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/CHPAbstractType.html#getCpg()">getCpg</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/CHPAbstractType.html#getCv()">getCv</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/CHPAbstractType.html#getDttmConflict()">getDttmConflict</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/CHPAbstractType.html#getDttmDispFldRMark()">getDttmDispFldRMark</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/CHPAbstractType.html#getDttmPropRMark()">getDttmPropRMark</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/CHPAbstractType.html#getDttmRMark()">getDttmRMark</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/CHPAbstractType.html#getDttmRMarkDel()">getDttmRMarkDel</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/CHPAbstractType.html#getDxaSpace()">getDxaSpace</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/CHPAbstractType.html#getFBorderWS()">getFBorderWS</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/CHPAbstractType.html#getFcData()">getFcData</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/CHPAbstractType.html#getFcObj()">getFcObj</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/CHPAbstractType.html#getFcObjp()">getFcObjp</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/CHPAbstractType.html#getFConflictOrig()">getFConflictOrig</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/CHPAbstractType.html#getFConflictOtherDel()">getFConflictOtherDel</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/CHPAbstractType.html#getFcPic()">getFcPic</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/CHPAbstractType.html#getFDblBdr()">getFDblBdr</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/CHPAbstractType.html#getFDispFldRMark()">getFDispFldRMark</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/CHPAbstractType.html#getFHasOldProps()">getFHasOldProps</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/CHPAbstractType.html#getFPropRMark()">getFPropRMark</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/CHPAbstractType.html#getFSdtVanish()">getFSdtVanish</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/CHPAbstractType.html#getFSpecSymbol()">getFSpecSymbol</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/CHPAbstractType.html#getFSpecVanish()">getFSpecVanish</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/CHPAbstractType.html#getFtcAscii()">getFtcAscii</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/CHPAbstractType.html#getFtcBi()">getFtcBi</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/CHPAbstractType.html#getFtcFE()">getFtcFE</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/CHPAbstractType.html#getFtcOther()">getFtcOther</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/CHPAbstractType.html#getFtcSym()">getFtcSym</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/CHPAbstractType.html#getFUndetermine()">getFUndetermine</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/CHPAbstractType.html#getGrpfChp()">getGrpfChp</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/CHPAbstractType.html#getHighlight()">getHighlight</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/CHPAbstractType.html#getHps()">getHps</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/CHPAbstractType.html#getHpsAsci()">getHpsAsci</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/CHPAbstractType.html#getHpsBi()">getHpsBi</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/CHPAbstractType.html#getHpsFE()">getHpsFE</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/CHPAbstractType.html#getHpsKern()">getHpsKern</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/CHPAbstractType.html#getHpsPos()">getHpsPos</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/CHPAbstractType.html#getHresi()">getHresi</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/CHPAbstractType.html#getHresiOld()">getHresiOld</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/CHPAbstractType.html#getIbstConflict()">getIbstConflict</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/CHPAbstractType.html#getIbstDispFldRMark()">getIbstDispFldRMark</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/CHPAbstractType.html#getIbstPropRMark()">getIbstPropRMark</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/CHPAbstractType.html#getIbstRMark()">getIbstRMark</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/CHPAbstractType.html#getIbstRMarkDel()">getIbstRMarkDel</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/CHPAbstractType.html#getIco()">getIco</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/CHPAbstractType.html#getIcoHighlight()">getIcoHighlight</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/CHPAbstractType.html#getIdct()">getIdct</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/CHPAbstractType.html#getIdctHint()">getIdctHint</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/CHPAbstractType.html#getIdslReasonDel()">getIdslReasonDel</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/CHPAbstractType.html#getIdslRMReason()">getIdslRMReason</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/CHPAbstractType.html#getIss()">getIss</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/CHPAbstractType.html#getIstd()">getIstd</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/CHPAbstractType.html#getItypFELayout()">getItypFELayout</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/CHPAbstractType.html#getIWarichuBracket()">getIWarichuBracket</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/CHPAbstractType.html#getKcd()">getKcd</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/CHPAbstractType.html#getKul()">getKul</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/CHPAbstractType.html#getLbrCRJ()">getLbrCRJ</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/CHPAbstractType.html#getLidDefault()">getLidDefault</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/CHPAbstractType.html#getLidFE()">getLidFE</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/CHPAbstractType.html#getLTagObj()">getLTagObj</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/CHPAbstractType.html#getPctCharWidth()">getPctCharWidth</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/CHPAbstractType.html#getSfxtText()">getSfxtText</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/CHPAbstractType.html#getShd()">getShd</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/CHPAbstractType.html#getSpare()">getSpare</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/CHPAbstractType.html#getUfel()">getUfel</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/CHPAbstractType.html#getWCharScale()">getWCharScale</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/CHPAbstractType.html#getWConflict()">getWConflict</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/CHPAbstractType.html#getXchSym()">getXchSym</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/CHPAbstractType.html#getXstDispFldRMark()">getXstDispFldRMark</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/CHPAbstractType.html#hashCode()">hashCode</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/CHPAbstractType.html#isFBiDi()">isFBiDi</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/CHPAbstractType.html#isFBold()">isFBold</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/CHPAbstractType.html#isFBoldBi()">isFBoldBi</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/CHPAbstractType.html#isFBoldOther()">isFBoldOther</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/CHPAbstractType.html#isFCalc()">isFCalc</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/CHPAbstractType.html#isFCaps()">isFCaps</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/CHPAbstractType.html#isFCellFitText()">isFCellFitText</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/CHPAbstractType.html#isFChsDiff()">isFChsDiff</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/CHPAbstractType.html#isFComplexScripts()">isFComplexScripts</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/CHPAbstractType.html#isFData()">isFData</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/CHPAbstractType.html#isFDStrike()">isFDStrike</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/CHPAbstractType.html#isFEmboss()">isFEmboss</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/CHPAbstractType.html#isFFitText()">isFFitText</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/CHPAbstractType.html#isFFldVanish()">isFFldVanish</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/CHPAbstractType.html#isFFmtLineProp()">isFFmtLineProp</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/CHPAbstractType.html#isFHighlight()">isFHighlight</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/CHPAbstractType.html#isFIcoBi()">isFIcoBi</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/CHPAbstractType.html#isFImprint()">isFImprint</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/CHPAbstractType.html#isFItalic()">isFItalic</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/CHPAbstractType.html#isFItalicBi()">isFItalicBi</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/CHPAbstractType.html#isFItalicOther()">isFItalicOther</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/CHPAbstractType.html#isFKumimoji()">isFKumimoji</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/CHPAbstractType.html#isFLowerCase()">isFLowerCase</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/CHPAbstractType.html#isFLSFitText()">isFLSFitText</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/CHPAbstractType.html#isFMacChs()">isFMacChs</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/CHPAbstractType.html#isFNonGlyph()">isFNonGlyph</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/CHPAbstractType.html#isFNoProof()">isFNoProof</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/CHPAbstractType.html#isFObj()">isFObj</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/CHPAbstractType.html#isFOle2()">isFOle2</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/CHPAbstractType.html#isFOutline()">isFOutline</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/CHPAbstractType.html#isFRMark()">isFRMark</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/CHPAbstractType.html#isFRMarkDel()">isFRMarkDel</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/CHPAbstractType.html#isFRuby()">isFRuby</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/CHPAbstractType.html#isFShadow()">isFShadow</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/CHPAbstractType.html#isFSmallCaps()">isFSmallCaps</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/CHPAbstractType.html#isFSpec()">isFSpec</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/CHPAbstractType.html#isFStrike()">isFStrike</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/CHPAbstractType.html#isFTNY()">isFTNY</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/CHPAbstractType.html#isFTNYCompress()">isFTNYCompress</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/CHPAbstractType.html#isFTNYFetchTxm()">isFTNYFetchTxm</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/CHPAbstractType.html#isFUsePgsuSettings()">isFUsePgsuSettings</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/CHPAbstractType.html#isFVanish()">isFVanish</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/CHPAbstractType.html#isFWarichu()">isFWarichu</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/CHPAbstractType.html#isFWarichuNoOpenBracket()">isFWarichuNoOpenBracket</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/CHPAbstractType.html#isFWebHidden()">isFWebHidden</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/CHPAbstractType.html#isUnused()">isUnused</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/CHPAbstractType.html#setBrc(org.apache.poi.hwpf.usermodel.BorderCode)">setBrc</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/CHPAbstractType.html#setCharsetFlags(short)">setCharsetFlags</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/CHPAbstractType.html#setChse(short)">setChse</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/CHPAbstractType.html#setCopt(byte)">setCopt</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/CHPAbstractType.html#setCpg(int)">setCpg</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/CHPAbstractType.html#setCv(org.apache.poi.hwpf.model.Colorref)">setCv</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/CHPAbstractType.html#setDttmConflict(org.apache.poi.hwpf.usermodel.DateAndTime)">setDttmConflict</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/CHPAbstractType.html#setDttmDispFldRMark(org.apache.poi.hwpf.usermodel.DateAndTime)">setDttmDispFldRMark</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/CHPAbstractType.html#setDttmPropRMark(org.apache.poi.hwpf.usermodel.DateAndTime)">setDttmPropRMark</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/CHPAbstractType.html#setDttmRMark(org.apache.poi.hwpf.usermodel.DateAndTime)">setDttmRMark</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/CHPAbstractType.html#setDttmRMarkDel(org.apache.poi.hwpf.usermodel.DateAndTime)">setDttmRMarkDel</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/CHPAbstractType.html#setDxaSpace(int)">setDxaSpace</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/CHPAbstractType.html#setFBiDi(boolean)">setFBiDi</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/CHPAbstractType.html#setFBold(boolean)">setFBold</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/CHPAbstractType.html#setFBoldBi(boolean)">setFBoldBi</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/CHPAbstractType.html#setFBoldOther(boolean)">setFBoldOther</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/CHPAbstractType.html#setFBorderWS(boolean)">setFBorderWS</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/CHPAbstractType.html#setFCalc(boolean)">setFCalc</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/CHPAbstractType.html#setFCaps(boolean)">setFCaps</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/CHPAbstractType.html#setFcData(int)">setFcData</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/CHPAbstractType.html#setFCellFitText(boolean)">setFCellFitText</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/CHPAbstractType.html#setFChsDiff(boolean)">setFChsDiff</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/CHPAbstractType.html#setFcObj(int)">setFcObj</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/CHPAbstractType.html#setFcObjp(int)">setFcObjp</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/CHPAbstractType.html#setFComplexScripts(boolean)">setFComplexScripts</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/CHPAbstractType.html#setFConflictOrig(boolean)">setFConflictOrig</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/CHPAbstractType.html#setFConflictOtherDel(boolean)">setFConflictOtherDel</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/CHPAbstractType.html#setFcPic(int)">setFcPic</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/CHPAbstractType.html#setFData(boolean)">setFData</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/CHPAbstractType.html#setFDblBdr(boolean)">setFDblBdr</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/CHPAbstractType.html#setFDispFldRMark(boolean)">setFDispFldRMark</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/CHPAbstractType.html#setFDStrike(boolean)">setFDStrike</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/CHPAbstractType.html#setFEmboss(boolean)">setFEmboss</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/CHPAbstractType.html#setFFitText(boolean)">setFFitText</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/CHPAbstractType.html#setFFldVanish(boolean)">setFFldVanish</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/CHPAbstractType.html#setFFmtLineProp(boolean)">setFFmtLineProp</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/CHPAbstractType.html#setFHasOldProps(boolean)">setFHasOldProps</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/CHPAbstractType.html#setFHighlight(boolean)">setFHighlight</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/CHPAbstractType.html#setFIcoBi(boolean)">setFIcoBi</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/CHPAbstractType.html#setFImprint(boolean)">setFImprint</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/CHPAbstractType.html#setFItalic(boolean)">setFItalic</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/CHPAbstractType.html#setFItalicBi(boolean)">setFItalicBi</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/CHPAbstractType.html#setFItalicOther(boolean)">setFItalicOther</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/CHPAbstractType.html#setFKumimoji(boolean)">setFKumimoji</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/CHPAbstractType.html#setFLowerCase(boolean)">setFLowerCase</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/CHPAbstractType.html#setFLSFitText(boolean)">setFLSFitText</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/CHPAbstractType.html#setFMacChs(boolean)">setFMacChs</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/CHPAbstractType.html#setFNonGlyph(boolean)">setFNonGlyph</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/CHPAbstractType.html#setFNoProof(boolean)">setFNoProof</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/CHPAbstractType.html#setFObj(boolean)">setFObj</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/CHPAbstractType.html#setFOle2(boolean)">setFOle2</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/CHPAbstractType.html#setFOutline(boolean)">setFOutline</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/CHPAbstractType.html#setFPropRMark(boolean)">setFPropRMark</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/CHPAbstractType.html#setFRMark(boolean)">setFRMark</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/CHPAbstractType.html#setFRMarkDel(boolean)">setFRMarkDel</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/CHPAbstractType.html#setFRuby(boolean)">setFRuby</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/CHPAbstractType.html#setFSdtVanish(boolean)">setFSdtVanish</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/CHPAbstractType.html#setFShadow(boolean)">setFShadow</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/CHPAbstractType.html#setFSmallCaps(boolean)">setFSmallCaps</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/CHPAbstractType.html#setFSpec(boolean)">setFSpec</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/CHPAbstractType.html#setFSpecSymbol(boolean)">setFSpecSymbol</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/CHPAbstractType.html#setFSpecVanish(boolean)">setFSpecVanish</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/CHPAbstractType.html#setFStrike(boolean)">setFStrike</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/CHPAbstractType.html#setFtcAscii(int)">setFtcAscii</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/CHPAbstractType.html#setFtcBi(int)">setFtcBi</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/CHPAbstractType.html#setFtcFE(int)">setFtcFE</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/CHPAbstractType.html#setFtcOther(int)">setFtcOther</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/CHPAbstractType.html#setFtcSym(int)">setFtcSym</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/CHPAbstractType.html#setFTNY(boolean)">setFTNY</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/CHPAbstractType.html#setFTNYCompress(boolean)">setFTNYCompress</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/CHPAbstractType.html#setFTNYFetchTxm(boolean)">setFTNYFetchTxm</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/CHPAbstractType.html#setFUndetermine(boolean)">setFUndetermine</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/CHPAbstractType.html#setFUsePgsuSettings(boolean)">setFUsePgsuSettings</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/CHPAbstractType.html#setFVanish(boolean)">setFVanish</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/CHPAbstractType.html#setFWarichu(boolean)">setFWarichu</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/CHPAbstractType.html#setFWarichuNoOpenBracket(boolean)">setFWarichuNoOpenBracket</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/CHPAbstractType.html#setFWebHidden(boolean)">setFWebHidden</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/CHPAbstractType.html#setGrpfChp(int)">setGrpfChp</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/CHPAbstractType.html#setHighlight(short)">setHighlight</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/CHPAbstractType.html#setHps(int)">setHps</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/CHPAbstractType.html#setHpsAsci(int)">setHpsAsci</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/CHPAbstractType.html#setHpsBi(int)">setHpsBi</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/CHPAbstractType.html#setHpsFE(int)">setHpsFE</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/CHPAbstractType.html#setHpsKern(int)">setHpsKern</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/CHPAbstractType.html#setHpsPos(short)">setHpsPos</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/CHPAbstractType.html#setHresi(org.apache.poi.hwpf.model.Hyphenation)">setHresi</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/CHPAbstractType.html#setHresiOld(org.apache.poi.hwpf.model.Hyphenation)">setHresiOld</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/CHPAbstractType.html#setIbstConflict(int)">setIbstConflict</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/CHPAbstractType.html#setIbstDispFldRMark(int)">setIbstDispFldRMark</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/CHPAbstractType.html#setIbstPropRMark(int)">setIbstPropRMark</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/CHPAbstractType.html#setIbstRMark(int)">setIbstRMark</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/CHPAbstractType.html#setIbstRMarkDel(int)">setIbstRMarkDel</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/CHPAbstractType.html#setIco(byte)">setIco</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/CHPAbstractType.html#setIcoHighlight(byte)">setIcoHighlight</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/CHPAbstractType.html#setIdct(byte)">setIdct</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/CHPAbstractType.html#setIdctHint(byte)">setIdctHint</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/CHPAbstractType.html#setIdslReasonDel(int)">setIdslReasonDel</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/CHPAbstractType.html#setIdslRMReason(int)">setIdslRMReason</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/CHPAbstractType.html#setIss(byte)">setIss</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/CHPAbstractType.html#setIstd(int)">setIstd</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/CHPAbstractType.html#setItypFELayout(short)">setItypFELayout</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/CHPAbstractType.html#setIWarichuBracket(byte)">setIWarichuBracket</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/CHPAbstractType.html#setKcd(byte)">setKcd</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/CHPAbstractType.html#setKul(byte)">setKul</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/CHPAbstractType.html#setLbrCRJ(byte)">setLbrCRJ</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/CHPAbstractType.html#setLidDefault(int)">setLidDefault</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/CHPAbstractType.html#setLidFE(int)">setLidFE</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/CHPAbstractType.html#setLTagObj(int)">setLTagObj</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/CHPAbstractType.html#setPctCharWidth(int)">setPctCharWidth</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/CHPAbstractType.html#setSfxtText(byte)">setSfxtText</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/CHPAbstractType.html#setShd(org.apache.poi.hwpf.usermodel.ShadingDescriptor)">setShd</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/CHPAbstractType.html#setSpare(byte)">setSpare</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/CHPAbstractType.html#setUfel(short)">setUfel</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/CHPAbstractType.html#setUnused(boolean)">setUnused</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/CHPAbstractType.html#setWCharScale(int)">setWCharScale</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/CHPAbstractType.html#setWConflict(int)">setWConflict</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/CHPAbstractType.html#setXchSym(int)">setXchSym</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/CHPAbstractType.html#setXstDispFldRMark(byte[])">setXstDispFldRMark</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/CHPAbstractType.html#toString()">toString</A></CODE></TD>
+</TR>
+</TABLE>
+&nbsp;<A NAME="methods_inherited_from_class_java.lang.Object"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#EEEEFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left"><B>Methods inherited from class java.lang.Object</B></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE>finalize, getClass, notify, notifyAll, wait, wait, wait</CODE></TD>
+</TR>
+</TABLE>
+&nbsp;
+<P>
+
+<!-- ============ FIELD DETAIL =========== -->
+
+<A NAME="field_detail"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="1"><FONT SIZE="+2">
+<B>Field Detail</B></FONT></TH>
+</TR>
+</TABLE>
+
+<A NAME="SPRM_FRMARKDEL"><!-- --></A><H3>
+SPRM_FRMARKDEL</H3>
+<PRE>
+public static final short <B>SPRM_FRMARKDEL</B></PRE>
+<DL>
+<DL>
+<DT><B>See Also:</B><DD><A HREF="../../../../../constant-values.html#org.apache.poi.hwpf.usermodel.CharacterProperties.SPRM_FRMARKDEL">Constant Field Values</A></DL>
+</DL>
+<HR>
+
+<A NAME="SPRM_FRMARK"><!-- --></A><H3>
+SPRM_FRMARK</H3>
+<PRE>
+public static final short <B>SPRM_FRMARK</B></PRE>
+<DL>
+<DL>
+<DT><B>See Also:</B><DD><A HREF="../../../../../constant-values.html#org.apache.poi.hwpf.usermodel.CharacterProperties.SPRM_FRMARK">Constant Field Values</A></DL>
+</DL>
+<HR>
+
+<A NAME="SPRM_FFLDVANISH"><!-- --></A><H3>
+SPRM_FFLDVANISH</H3>
+<PRE>
+public static final short <B>SPRM_FFLDVANISH</B></PRE>
+<DL>
+<DL>
+<DT><B>See Also:</B><DD><A HREF="../../../../../constant-values.html#org.apache.poi.hwpf.usermodel.CharacterProperties.SPRM_FFLDVANISH">Constant Field Values</A></DL>
+</DL>
+<HR>
+
+<A NAME="SPRM_PICLOCATION"><!-- --></A><H3>
+SPRM_PICLOCATION</H3>
+<PRE>
+public static final short <B>SPRM_PICLOCATION</B></PRE>
+<DL>
+<DL>
+<DT><B>See Also:</B><DD><A HREF="../../../../../constant-values.html#org.apache.poi.hwpf.usermodel.CharacterProperties.SPRM_PICLOCATION">Constant Field Values</A></DL>
+</DL>
+<HR>
+
+<A NAME="SPRM_IBSTRMARK"><!-- --></A><H3>
+SPRM_IBSTRMARK</H3>
+<PRE>
+public static final short <B>SPRM_IBSTRMARK</B></PRE>
+<DL>
+<DL>
+<DT><B>See Also:</B><DD><A HREF="../../../../../constant-values.html#org.apache.poi.hwpf.usermodel.CharacterProperties.SPRM_IBSTRMARK">Constant Field Values</A></DL>
+</DL>
+<HR>
+
+<A NAME="SPRM_DTTMRMARK"><!-- --></A><H3>
+SPRM_DTTMRMARK</H3>
+<PRE>
+public static final short <B>SPRM_DTTMRMARK</B></PRE>
+<DL>
+<DL>
+<DT><B>See Also:</B><DD><A HREF="../../../../../constant-values.html#org.apache.poi.hwpf.usermodel.CharacterProperties.SPRM_DTTMRMARK">Constant Field Values</A></DL>
+</DL>
+<HR>
+
+<A NAME="SPRM_FDATA"><!-- --></A><H3>
+SPRM_FDATA</H3>
+<PRE>
+public static final short <B>SPRM_FDATA</B></PRE>
+<DL>
+<DL>
+<DT><B>See Also:</B><DD><A HREF="../../../../../constant-values.html#org.apache.poi.hwpf.usermodel.CharacterProperties.SPRM_FDATA">Constant Field Values</A></DL>
+</DL>
+<HR>
+
+<A NAME="SPRM_SYMBOL"><!-- --></A><H3>
+SPRM_SYMBOL</H3>
+<PRE>
+public static final short <B>SPRM_SYMBOL</B></PRE>
+<DL>
+<DL>
+<DT><B>See Also:</B><DD><A HREF="../../../../../constant-values.html#org.apache.poi.hwpf.usermodel.CharacterProperties.SPRM_SYMBOL">Constant Field Values</A></DL>
+</DL>
+<HR>
+
+<A NAME="SPRM_FOLE2"><!-- --></A><H3>
+SPRM_FOLE2</H3>
+<PRE>
+public static final short <B>SPRM_FOLE2</B></PRE>
+<DL>
+<DL>
+<DT><B>See Also:</B><DD><A HREF="../../../../../constant-values.html#org.apache.poi.hwpf.usermodel.CharacterProperties.SPRM_FOLE2">Constant Field Values</A></DL>
+</DL>
+<HR>
+
+<A NAME="SPRM_HIGHLIGHT"><!-- --></A><H3>
+SPRM_HIGHLIGHT</H3>
+<PRE>
+public static final short <B>SPRM_HIGHLIGHT</B></PRE>
+<DL>
+<DL>
+<DT><B>See Also:</B><DD><A HREF="../../../../../constant-values.html#org.apache.poi.hwpf.usermodel.CharacterProperties.SPRM_HIGHLIGHT">Constant Field Values</A></DL>
+</DL>
+<HR>
+
+<A NAME="SPRM_OBJLOCATION"><!-- --></A><H3>
+SPRM_OBJLOCATION</H3>
+<PRE>
+public static final short <B>SPRM_OBJLOCATION</B></PRE>
+<DL>
+<DL>
+<DT><B>See Also:</B><DD><A HREF="../../../../../constant-values.html#org.apache.poi.hwpf.usermodel.CharacterProperties.SPRM_OBJLOCATION">Constant Field Values</A></DL>
+</DL>
+<HR>
+
+<A NAME="SPRM_ISTD"><!-- --></A><H3>
+SPRM_ISTD</H3>
+<PRE>
+public static final short <B>SPRM_ISTD</B></PRE>
+<DL>
+<DL>
+<DT><B>See Also:</B><DD><A HREF="../../../../../constant-values.html#org.apache.poi.hwpf.usermodel.CharacterProperties.SPRM_ISTD">Constant Field Values</A></DL>
+</DL>
+<HR>
+
+<A NAME="SPRM_FBOLD"><!-- --></A><H3>
+SPRM_FBOLD</H3>
+<PRE>
+public static final short <B>SPRM_FBOLD</B></PRE>
+<DL>
+<DL>
+<DT><B>See Also:</B><DD><A HREF="../../../../../constant-values.html#org.apache.poi.hwpf.usermodel.CharacterProperties.SPRM_FBOLD">Constant Field Values</A></DL>
+</DL>
+<HR>
+
+<A NAME="SPRM_FITALIC"><!-- --></A><H3>
+SPRM_FITALIC</H3>
+<PRE>
+public static final short <B>SPRM_FITALIC</B></PRE>
+<DL>
+<DL>
+<DT><B>See Also:</B><DD><A HREF="../../../../../constant-values.html#org.apache.poi.hwpf.usermodel.CharacterProperties.SPRM_FITALIC">Constant Field Values</A></DL>
+</DL>
+<HR>
+
+<A NAME="SPRM_FSTRIKE"><!-- --></A><H3>
+SPRM_FSTRIKE</H3>
+<PRE>
+public static final short <B>SPRM_FSTRIKE</B></PRE>
+<DL>
+<DL>
+<DT><B>See Also:</B><DD><A HREF="../../../../../constant-values.html#org.apache.poi.hwpf.usermodel.CharacterProperties.SPRM_FSTRIKE">Constant Field Values</A></DL>
+</DL>
+<HR>
+
+<A NAME="SPRM_FOUTLINE"><!-- --></A><H3>
+SPRM_FOUTLINE</H3>
+<PRE>
+public static final short <B>SPRM_FOUTLINE</B></PRE>
+<DL>
+<DL>
+<DT><B>See Also:</B><DD><A HREF="../../../../../constant-values.html#org.apache.poi.hwpf.usermodel.CharacterProperties.SPRM_FOUTLINE">Constant Field Values</A></DL>
+</DL>
+<HR>
+
+<A NAME="SPRM_FSHADOW"><!-- --></A><H3>
+SPRM_FSHADOW</H3>
+<PRE>
+public static final short <B>SPRM_FSHADOW</B></PRE>
+<DL>
+<DL>
+<DT><B>See Also:</B><DD><A HREF="../../../../../constant-values.html#org.apache.poi.hwpf.usermodel.CharacterProperties.SPRM_FSHADOW">Constant Field Values</A></DL>
+</DL>
+<HR>
+
+<A NAME="SPRM_FSMALLCAPS"><!-- --></A><H3>
+SPRM_FSMALLCAPS</H3>
+<PRE>
+public static final short <B>SPRM_FSMALLCAPS</B></PRE>
+<DL>
+<DL>
+<DT><B>See Also:</B><DD><A HREF="../../../../../constant-values.html#org.apache.poi.hwpf.usermodel.CharacterProperties.SPRM_FSMALLCAPS">Constant Field Values</A></DL>
+</DL>
+<HR>
+
+<A NAME="SPRM_FCAPS"><!-- --></A><H3>
+SPRM_FCAPS</H3>
+<PRE>
+public static final short <B>SPRM_FCAPS</B></PRE>
+<DL>
+<DL>
+<DT><B>See Also:</B><DD><A HREF="../../../../../constant-values.html#org.apache.poi.hwpf.usermodel.CharacterProperties.SPRM_FCAPS">Constant Field Values</A></DL>
+</DL>
+<HR>
+
+<A NAME="SPRM_FVANISH"><!-- --></A><H3>
+SPRM_FVANISH</H3>
+<PRE>
+public static final short <B>SPRM_FVANISH</B></PRE>
+<DL>
+<DL>
+<DT><B>See Also:</B><DD><A HREF="../../../../../constant-values.html#org.apache.poi.hwpf.usermodel.CharacterProperties.SPRM_FVANISH">Constant Field Values</A></DL>
+</DL>
+<HR>
+
+<A NAME="SPRM_KUL"><!-- --></A><H3>
+SPRM_KUL</H3>
+<PRE>
+public static final short <B>SPRM_KUL</B></PRE>
+<DL>
+<DL>
+<DT><B>See Also:</B><DD><A HREF="../../../../../constant-values.html#org.apache.poi.hwpf.usermodel.CharacterProperties.SPRM_KUL">Constant Field Values</A></DL>
+</DL>
+<HR>
+
+<A NAME="SPRM_DXASPACE"><!-- --></A><H3>
+SPRM_DXASPACE</H3>
+<PRE>
+public static final short <B>SPRM_DXASPACE</B></PRE>
+<DL>
+<DL>
+<DT><B>See Also:</B><DD><A HREF="../../../../../constant-values.html#org.apache.poi.hwpf.usermodel.CharacterProperties.SPRM_DXASPACE">Constant Field Values</A></DL>
+</DL>
+<HR>
+
+<A NAME="SPRM_LID"><!-- --></A><H3>
+SPRM_LID</H3>
+<PRE>
+public static final short <B>SPRM_LID</B></PRE>
+<DL>
+<DL>
+<DT><B>See Also:</B><DD><A HREF="../../../../../constant-values.html#org.apache.poi.hwpf.usermodel.CharacterProperties.SPRM_LID">Constant Field Values</A></DL>
+</DL>
+<HR>
+
+<A NAME="SPRM_ICO"><!-- --></A><H3>
+SPRM_ICO</H3>
+<PRE>
+public static final short <B>SPRM_ICO</B></PRE>
+<DL>
+<DL>
+<DT><B>See Also:</B><DD><A HREF="../../../../../constant-values.html#org.apache.poi.hwpf.usermodel.CharacterProperties.SPRM_ICO">Constant Field Values</A></DL>
+</DL>
+<HR>
+
+<A NAME="SPRM_HPS"><!-- --></A><H3>
+SPRM_HPS</H3>
+<PRE>
+public static final short <B>SPRM_HPS</B></PRE>
+<DL>
+<DL>
+<DT><B>See Also:</B><DD><A HREF="../../../../../constant-values.html#org.apache.poi.hwpf.usermodel.CharacterProperties.SPRM_HPS">Constant Field Values</A></DL>
+</DL>
+<HR>
+
+<A NAME="SPRM_HPSPOS"><!-- --></A><H3>
+SPRM_HPSPOS</H3>
+<PRE>
+public static final short <B>SPRM_HPSPOS</B></PRE>
+<DL>
+<DL>
+<DT><B>See Also:</B><DD><A HREF="../../../../../constant-values.html#org.apache.poi.hwpf.usermodel.CharacterProperties.SPRM_HPSPOS">Constant Field Values</A></DL>
+</DL>
+<HR>
+
+<A NAME="SPRM_ISS"><!-- --></A><H3>
+SPRM_ISS</H3>
+<PRE>
+public static final short <B>SPRM_ISS</B></PRE>
+<DL>
+<DL>
+<DT><B>See Also:</B><DD><A HREF="../../../../../constant-values.html#org.apache.poi.hwpf.usermodel.CharacterProperties.SPRM_ISS">Constant Field Values</A></DL>
+</DL>
+<HR>
+
+<A NAME="SPRM_HPSKERN"><!-- --></A><H3>
+SPRM_HPSKERN</H3>
+<PRE>
+public static final short <B>SPRM_HPSKERN</B></PRE>
+<DL>
+<DL>
+<DT><B>See Also:</B><DD><A HREF="../../../../../constant-values.html#org.apache.poi.hwpf.usermodel.CharacterProperties.SPRM_HPSKERN">Constant Field Values</A></DL>
+</DL>
+<HR>
+
+<A NAME="SPRM_YSRI"><!-- --></A><H3>
+SPRM_YSRI</H3>
+<PRE>
+public static final short <B>SPRM_YSRI</B></PRE>
+<DL>
+<DL>
+<DT><B>See Also:</B><DD><A HREF="../../../../../constant-values.html#org.apache.poi.hwpf.usermodel.CharacterProperties.SPRM_YSRI">Constant Field Values</A></DL>
+</DL>
+<HR>
+
+<A NAME="SPRM_RGFTCASCII"><!-- --></A><H3>
+SPRM_RGFTCASCII</H3>
+<PRE>
+public static final short <B>SPRM_RGFTCASCII</B></PRE>
+<DL>
+<DL>
+<DT><B>See Also:</B><DD><A HREF="../../../../../constant-values.html#org.apache.poi.hwpf.usermodel.CharacterProperties.SPRM_RGFTCASCII">Constant Field Values</A></DL>
+</DL>
+<HR>
+
+<A NAME="SPRM_RGFTCFAREAST"><!-- --></A><H3>
+SPRM_RGFTCFAREAST</H3>
+<PRE>
+public static final short <B>SPRM_RGFTCFAREAST</B></PRE>
+<DL>
+<DL>
+<DT><B>See Also:</B><DD><A HREF="../../../../../constant-values.html#org.apache.poi.hwpf.usermodel.CharacterProperties.SPRM_RGFTCFAREAST">Constant Field Values</A></DL>
+</DL>
+<HR>
+
+<A NAME="SPRM_RGFTCNOTFAREAST"><!-- --></A><H3>
+SPRM_RGFTCNOTFAREAST</H3>
+<PRE>
+public static final short <B>SPRM_RGFTCNOTFAREAST</B></PRE>
+<DL>
+<DL>
+<DT><B>See Also:</B><DD><A HREF="../../../../../constant-values.html#org.apache.poi.hwpf.usermodel.CharacterProperties.SPRM_RGFTCNOTFAREAST">Constant Field Values</A></DL>
+</DL>
+<HR>
+
+<A NAME="SPRM_CHARSCALE"><!-- --></A><H3>
+SPRM_CHARSCALE</H3>
+<PRE>
+public static final short <B>SPRM_CHARSCALE</B></PRE>
+<DL>
+<DL>
+<DT><B>See Also:</B><DD><A HREF="../../../../../constant-values.html#org.apache.poi.hwpf.usermodel.CharacterProperties.SPRM_CHARSCALE">Constant Field Values</A></DL>
+</DL>
+<HR>
+
+<A NAME="SPRM_FDSTRIKE"><!-- --></A><H3>
+SPRM_FDSTRIKE</H3>
+<PRE>
+public static final short <B>SPRM_FDSTRIKE</B></PRE>
+<DL>
+<DL>
+<DT><B>See Also:</B><DD><A HREF="../../../../../constant-values.html#org.apache.poi.hwpf.usermodel.CharacterProperties.SPRM_FDSTRIKE">Constant Field Values</A></DL>
+</DL>
+<HR>
+
+<A NAME="SPRM_FIMPRINT"><!-- --></A><H3>
+SPRM_FIMPRINT</H3>
+<PRE>
+public static final short <B>SPRM_FIMPRINT</B></PRE>
+<DL>
+<DL>
+<DT><B>See Also:</B><DD><A HREF="../../../../../constant-values.html#org.apache.poi.hwpf.usermodel.CharacterProperties.SPRM_FIMPRINT">Constant Field Values</A></DL>
+</DL>
+<HR>
+
+<A NAME="SPRM_FSPEC"><!-- --></A><H3>
+SPRM_FSPEC</H3>
+<PRE>
+public static final short <B>SPRM_FSPEC</B></PRE>
+<DL>
+<DL>
+<DT><B>See Also:</B><DD><A HREF="../../../../../constant-values.html#org.apache.poi.hwpf.usermodel.CharacterProperties.SPRM_FSPEC">Constant Field Values</A></DL>
+</DL>
+<HR>
+
+<A NAME="SPRM_FOBJ"><!-- --></A><H3>
+SPRM_FOBJ</H3>
+<PRE>
+public static final short <B>SPRM_FOBJ</B></PRE>
+<DL>
+<DL>
+<DT><B>See Also:</B><DD><A HREF="../../../../../constant-values.html#org.apache.poi.hwpf.usermodel.CharacterProperties.SPRM_FOBJ">Constant Field Values</A></DL>
+</DL>
+<HR>
+
+<A NAME="SPRM_PROPRMARK"><!-- --></A><H3>
+SPRM_PROPRMARK</H3>
+<PRE>
+public static final short <B>SPRM_PROPRMARK</B></PRE>
+<DL>
+<DL>
+<DT><B>See Also:</B><DD><A HREF="../../../../../constant-values.html#org.apache.poi.hwpf.usermodel.CharacterProperties.SPRM_PROPRMARK">Constant Field Values</A></DL>
+</DL>
+<HR>
+
+<A NAME="SPRM_FEMBOSS"><!-- --></A><H3>
+SPRM_FEMBOSS</H3>
+<PRE>
+public static final short <B>SPRM_FEMBOSS</B></PRE>
+<DL>
+<DL>
+<DT><B>See Also:</B><DD><A HREF="../../../../../constant-values.html#org.apache.poi.hwpf.usermodel.CharacterProperties.SPRM_FEMBOSS">Constant Field Values</A></DL>
+</DL>
+<HR>
+
+<A NAME="SPRM_SFXTEXT"><!-- --></A><H3>
+SPRM_SFXTEXT</H3>
+<PRE>
+public static final short <B>SPRM_SFXTEXT</B></PRE>
+<DL>
+<DL>
+<DT><B>See Also:</B><DD><A HREF="../../../../../constant-values.html#org.apache.poi.hwpf.usermodel.CharacterProperties.SPRM_SFXTEXT">Constant Field Values</A></DL>
+</DL>
+<HR>
+
+<A NAME="SPRM_DISPFLDRMARK"><!-- --></A><H3>
+SPRM_DISPFLDRMARK</H3>
+<PRE>
+public static final short <B>SPRM_DISPFLDRMARK</B></PRE>
+<DL>
+<DL>
+<DT><B>See Also:</B><DD><A HREF="../../../../../constant-values.html#org.apache.poi.hwpf.usermodel.CharacterProperties.SPRM_DISPFLDRMARK">Constant Field Values</A></DL>
+</DL>
+<HR>
+
+<A NAME="SPRM_IBSTRMARKDEL"><!-- --></A><H3>
+SPRM_IBSTRMARKDEL</H3>
+<PRE>
+public static final short <B>SPRM_IBSTRMARKDEL</B></PRE>
+<DL>
+<DL>
+<DT><B>See Also:</B><DD><A HREF="../../../../../constant-values.html#org.apache.poi.hwpf.usermodel.CharacterProperties.SPRM_IBSTRMARKDEL">Constant Field Values</A></DL>
+</DL>
+<HR>
+
+<A NAME="SPRM_DTTMRMARKDEL"><!-- --></A><H3>
+SPRM_DTTMRMARKDEL</H3>
+<PRE>
+public static final short <B>SPRM_DTTMRMARKDEL</B></PRE>
+<DL>
+<DL>
+<DT><B>See Also:</B><DD><A HREF="../../../../../constant-values.html#org.apache.poi.hwpf.usermodel.CharacterProperties.SPRM_DTTMRMARKDEL">Constant Field Values</A></DL>
+</DL>
+<HR>
+
+<A NAME="SPRM_BRC"><!-- --></A><H3>
+SPRM_BRC</H3>
+<PRE>
+public static final short <B>SPRM_BRC</B></PRE>
+<DL>
+<DL>
+<DT><B>See Also:</B><DD><A HREF="../../../../../constant-values.html#org.apache.poi.hwpf.usermodel.CharacterProperties.SPRM_BRC">Constant Field Values</A></DL>
+</DL>
+<HR>
+
+<A NAME="SPRM_SHD"><!-- --></A><H3>
+SPRM_SHD</H3>
+<PRE>
+public static final short <B>SPRM_SHD</B></PRE>
+<DL>
+<DL>
+<DT><B>See Also:</B><DD><A HREF="../../../../../constant-values.html#org.apache.poi.hwpf.usermodel.CharacterProperties.SPRM_SHD">Constant Field Values</A></DL>
+</DL>
+<HR>
+
+<A NAME="SPRM_IDSIRMARKDEL"><!-- --></A><H3>
+SPRM_IDSIRMARKDEL</H3>
+<PRE>
+public static final short <B>SPRM_IDSIRMARKDEL</B></PRE>
+<DL>
+<DL>
+<DT><B>See Also:</B><DD><A HREF="../../../../../constant-values.html#org.apache.poi.hwpf.usermodel.CharacterProperties.SPRM_IDSIRMARKDEL">Constant Field Values</A></DL>
+</DL>
+<HR>
+
+<A NAME="SPRM_CPG"><!-- --></A><H3>
+SPRM_CPG</H3>
+<PRE>
+public static final short <B>SPRM_CPG</B></PRE>
+<DL>
+<DL>
+<DT><B>See Also:</B><DD><A HREF="../../../../../constant-values.html#org.apache.poi.hwpf.usermodel.CharacterProperties.SPRM_CPG">Constant Field Values</A></DL>
+</DL>
+<HR>
+
+<A NAME="SPRM_NONFELID"><!-- --></A><H3>
+SPRM_NONFELID</H3>
+<PRE>
+public static final short <B>SPRM_NONFELID</B></PRE>
+<DL>
+<DL>
+<DT><B>See Also:</B><DD><A HREF="../../../../../constant-values.html#org.apache.poi.hwpf.usermodel.CharacterProperties.SPRM_NONFELID">Constant Field Values</A></DL>
+</DL>
+<HR>
+
+<A NAME="SPRM_FELID"><!-- --></A><H3>
+SPRM_FELID</H3>
+<PRE>
+public static final short <B>SPRM_FELID</B></PRE>
+<DL>
+<DL>
+<DT><B>See Also:</B><DD><A HREF="../../../../../constant-values.html#org.apache.poi.hwpf.usermodel.CharacterProperties.SPRM_FELID">Constant Field Values</A></DL>
+</DL>
+<HR>
+
+<A NAME="SPRM_IDCTHINT"><!-- --></A><H3>
+SPRM_IDCTHINT</H3>
+<PRE>
+public static final short <B>SPRM_IDCTHINT</B></PRE>
+<DL>
+<DL>
+<DT><B>See Also:</B><DD><A HREF="../../../../../constant-values.html#org.apache.poi.hwpf.usermodel.CharacterProperties.SPRM_IDCTHINT">Constant Field Values</A></DL>
+</DL>
+<HR>
+
+<A NAME="SPRM_CCV"><!-- --></A><H3>
+SPRM_CCV</H3>
+<PRE>
+public static final short <B>SPRM_CCV</B></PRE>
+<DL>
+<DD>change chp.cv
+<P>
+<DL>
+<DT><B>See Also:</B><DD><A HREF="../../../../../constant-values.html#org.apache.poi.hwpf.usermodel.CharacterProperties.SPRM_CCV">Constant Field Values</A></DL>
+</DL>
+
+<!-- ========= CONSTRUCTOR DETAIL ======== -->
+
+<A NAME="constructor_detail"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="1"><FONT SIZE="+2">
+<B>Constructor Detail</B></FONT></TH>
+</TR>
+</TABLE>
+
+<A NAME="CharacterProperties()"><!-- --></A><H3>
+CharacterProperties</H3>
+<PRE>
+public <B>CharacterProperties</B>()</PRE>
+<DL>
+</DL>
+
+<!-- ============ METHOD DETAIL ========== -->
+
+<A NAME="method_detail"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="1"><FONT SIZE="+2">
+<B>Method Detail</B></FONT></TH>
+</TR>
+</TABLE>
+
+<A NAME="isMarkedDeleted()"><!-- --></A><H3>
+isMarkedDeleted</H3>
+<PRE>
+public boolean <B>isMarkedDeleted</B>()</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="markDeleted(boolean)"><!-- --></A><H3>
+markDeleted</H3>
+<PRE>
+public void <B>markDeleted</B>(boolean&nbsp;mark)</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="isBold()"><!-- --></A><H3>
+isBold</H3>
+<PRE>
+public boolean <B>isBold</B>()</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setBold(boolean)"><!-- --></A><H3>
+setBold</H3>
+<PRE>
+public void <B>setBold</B>(boolean&nbsp;bold)</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="isItalic()"><!-- --></A><H3>
+isItalic</H3>
+<PRE>
+public boolean <B>isItalic</B>()</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setItalic(boolean)"><!-- --></A><H3>
+setItalic</H3>
+<PRE>
+public void <B>setItalic</B>(boolean&nbsp;italic)</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="isOutlined()"><!-- --></A><H3>
+isOutlined</H3>
+<PRE>
+public boolean <B>isOutlined</B>()</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setOutline(boolean)"><!-- --></A><H3>
+setOutline</H3>
+<PRE>
+public void <B>setOutline</B>(boolean&nbsp;outlined)</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="isFldVanished()"><!-- --></A><H3>
+isFldVanished</H3>
+<PRE>
+public boolean <B>isFldVanished</B>()</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setFldVanish(boolean)"><!-- --></A><H3>
+setFldVanish</H3>
+<PRE>
+public void <B>setFldVanish</B>(boolean&nbsp;fldVanish)</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="isSmallCaps()"><!-- --></A><H3>
+isSmallCaps</H3>
+<PRE>
+public boolean <B>isSmallCaps</B>()</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setSmallCaps(boolean)"><!-- --></A><H3>
+setSmallCaps</H3>
+<PRE>
+public void <B>setSmallCaps</B>(boolean&nbsp;smallCaps)</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="isCapitalized()"><!-- --></A><H3>
+isCapitalized</H3>
+<PRE>
+public boolean <B>isCapitalized</B>()</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setCapitalized(boolean)"><!-- --></A><H3>
+setCapitalized</H3>
+<PRE>
+public void <B>setCapitalized</B>(boolean&nbsp;caps)</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="isVanished()"><!-- --></A><H3>
+isVanished</H3>
+<PRE>
+public boolean <B>isVanished</B>()</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setVanished(boolean)"><!-- --></A><H3>
+setVanished</H3>
+<PRE>
+public void <B>setVanished</B>(boolean&nbsp;vanish)</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="isMarkedInserted()"><!-- --></A><H3>
+isMarkedInserted</H3>
+<PRE>
+public boolean <B>isMarkedInserted</B>()</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="markInserted(boolean)"><!-- --></A><H3>
+markInserted</H3>
+<PRE>
+public void <B>markInserted</B>(boolean&nbsp;mark)</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="isStrikeThrough()"><!-- --></A><H3>
+isStrikeThrough</H3>
+<PRE>
+public boolean <B>isStrikeThrough</B>()</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="strikeThrough(boolean)"><!-- --></A><H3>
+strikeThrough</H3>
+<PRE>
+public void <B>strikeThrough</B>(boolean&nbsp;strike)</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="isShadowed()"><!-- --></A><H3>
+isShadowed</H3>
+<PRE>
+public boolean <B>isShadowed</B>()</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setShadow(boolean)"><!-- --></A><H3>
+setShadow</H3>
+<PRE>
+public void <B>setShadow</B>(boolean&nbsp;shadow)</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="isEmbossed()"><!-- --></A><H3>
+isEmbossed</H3>
+<PRE>
+public boolean <B>isEmbossed</B>()</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setEmbossed(boolean)"><!-- --></A><H3>
+setEmbossed</H3>
+<PRE>
+public void <B>setEmbossed</B>(boolean&nbsp;emboss)</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="isImprinted()"><!-- --></A><H3>
+isImprinted</H3>
+<PRE>
+public boolean <B>isImprinted</B>()</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setImprinted(boolean)"><!-- --></A><H3>
+setImprinted</H3>
+<PRE>
+public void <B>setImprinted</B>(boolean&nbsp;imprint)</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="isDoubleStrikeThrough()"><!-- --></A><H3>
+isDoubleStrikeThrough</H3>
+<PRE>
+public boolean <B>isDoubleStrikeThrough</B>()</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setDoubleStrikeThrough(boolean)"><!-- --></A><H3>
+setDoubleStrikeThrough</H3>
+<PRE>
+public void <B>setDoubleStrikeThrough</B>(boolean&nbsp;dstrike)</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getFontSize()"><!-- --></A><H3>
+getFontSize</H3>
+<PRE>
+public int <B>getFontSize</B>()</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setFontSize(int)"><!-- --></A><H3>
+setFontSize</H3>
+<PRE>
+public void <B>setFontSize</B>(int&nbsp;halfPoints)</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getCharacterSpacing()"><!-- --></A><H3>
+getCharacterSpacing</H3>
+<PRE>
+public int <B>getCharacterSpacing</B>()</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setCharacterSpacing(int)"><!-- --></A><H3>
+setCharacterSpacing</H3>
+<PRE>
+public void <B>setCharacterSpacing</B>(int&nbsp;twips)</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getSubSuperScriptIndex()"><!-- --></A><H3>
+getSubSuperScriptIndex</H3>
+<PRE>
+public short <B>getSubSuperScriptIndex</B>()</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setSubSuperScriptIndex(short)"><!-- --></A><H3>
+setSubSuperScriptIndex</H3>
+<PRE>
+public void <B>setSubSuperScriptIndex</B>(short&nbsp;iss)</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getUnderlineCode()"><!-- --></A><H3>
+getUnderlineCode</H3>
+<PRE>
+public int <B>getUnderlineCode</B>()</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setUnderlineCode(int)"><!-- --></A><H3>
+setUnderlineCode</H3>
+<PRE>
+public void <B>setUnderlineCode</B>(int&nbsp;kul)</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getColor()"><!-- --></A><H3>
+getColor</H3>
+<PRE>
+public int <B>getColor</B>()</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setColor(int)"><!-- --></A><H3>
+setColor</H3>
+<PRE>
+public void <B>setColor</B>(int&nbsp;color)</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getVerticalOffset()"><!-- --></A><H3>
+getVerticalOffset</H3>
+<PRE>
+public int <B>getVerticalOffset</B>()</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setVerticalOffset(int)"><!-- --></A><H3>
+setVerticalOffset</H3>
+<PRE>
+public void <B>setVerticalOffset</B>(int&nbsp;hpsPos)</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getKerning()"><!-- --></A><H3>
+getKerning</H3>
+<PRE>
+public int <B>getKerning</B>()</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setKerning(int)"><!-- --></A><H3>
+setKerning</H3>
+<PRE>
+public void <B>setKerning</B>(int&nbsp;kern)</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="isHighlighted()"><!-- --></A><H3>
+isHighlighted</H3>
+<PRE>
+public boolean <B>isHighlighted</B>()</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setHighlighted(byte)"><!-- --></A><H3>
+setHighlighted</H3>
+<PRE>
+public void <B>setHighlighted</B>(byte&nbsp;color)</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getIco24()"><!-- --></A><H3>
+getIco24</H3>
+<PRE>
+public int <B>getIco24</B>()</PRE>
+<DL>
+<DD>Get the ico24 field for the CHP record.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setIco24(int)"><!-- --></A><H3>
+setIco24</H3>
+<PRE>
+public void <B>setIco24</B>(int&nbsp;colour24)</PRE>
+<DL>
+<DD>Set the ico24 field for the CHP record.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="clone()"><!-- --></A><H3>
+clone</H3>
+<PRE>
+public <A HREF="../../../../../org/apache/poi/hwpf/usermodel/CharacterProperties.html" title="class in org.apache.poi.hwpf.usermodel">CharacterProperties</A> <B>clone</B>()</PRE>
+<DL>
+<DD><DL>
+<DT><B>Overrides:</B><DD><CODE>clone</CODE> in class <CODE>java.lang.Object</CODE></DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<!-- ========= END OF CLASS DATA ========= -->
+<HR>
+
+
+<!-- ======= START OF BOTTOM NAVBAR ====== -->
+<A NAME="navbar_bottom"><!-- --></A>
+<A HREF="#skip-navbar_bottom" title="Skip navigation links"></A>
+<TABLE BORDER="0" WIDTH="100%" CELLPADDING="1" CELLSPACING="0" SUMMARY="">
+<TR>
+<TD COLSPAN=2 BGCOLOR="#EEEEFF" CLASS="NavBarCell1">
+<A NAME="navbar_bottom_firstrow"><!-- --></A>
+<TABLE BORDER="0" CELLPADDING="0" CELLSPACING="3" SUMMARY="">
+  <TR ALIGN="center" VALIGN="top">
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../overview-summary.html"><FONT CLASS="NavBarFont1"><B>Overview</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="package-summary.html"><FONT CLASS="NavBarFont1"><B>Package</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#FFFFFF" CLASS="NavBarCell1Rev"> &nbsp;<FONT CLASS="NavBarFont1Rev"><B>Class</B></FONT>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="class-use/CharacterProperties.html"><FONT CLASS="NavBarFont1"><B>Use</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="package-tree.html"><FONT CLASS="NavBarFont1"><B>Tree</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../deprecated-list.html"><FONT CLASS="NavBarFont1"><B>Deprecated</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../index-all.html"><FONT CLASS="NavBarFont1"><B>Index</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../help-doc.html"><FONT CLASS="NavBarFont1"><B>Help</B></FONT></A>&nbsp;</TD>
+  </TR>
+</TABLE>
+</TD>
+<TD ALIGN="right" VALIGN="top" ROWSPAN=3><EM>
+</EM>
+</TD>
+</TR>
+
+<TR>
+<TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
+&nbsp;<A HREF="../../../../../org/apache/poi/hwpf/usermodel/BorderCode.html" title="class in org.apache.poi.hwpf.usermodel"><B>PREV CLASS</B></A>&nbsp;
+&nbsp;<A HREF="../../../../../org/apache/poi/hwpf/usermodel/CharacterRun.html" title="class in org.apache.poi.hwpf.usermodel"><B>NEXT CLASS</B></A></FONT></TD>
+<TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
+  <A HREF="../../../../../index.html?org/apache/poi/hwpf/usermodel/CharacterProperties.html" target="_top"><B>FRAMES</B></A>  &nbsp;
+&nbsp;<A HREF="CharacterProperties.html" target="_top"><B>NO FRAMES</B></A>  &nbsp;
+&nbsp;<SCRIPT type="text/javascript">
+  <!--
+  if(window==top) {
+    document.writeln('<A HREF="../../../../../allclasses-noframe.html"><B>All Classes</B></A>');
+  }
+  //-->
+</SCRIPT>
+<NOSCRIPT>
+  <A HREF="../../../../../allclasses-noframe.html"><B>All Classes</B></A>
+</NOSCRIPT>
+
+
+</FONT></TD>
+</TR>
+<TR>
+<TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
+  SUMMARY:&nbsp;NESTED&nbsp;|&nbsp;<A HREF="#field_summary">FIELD</A>&nbsp;|&nbsp;<A HREF="#constructor_summary">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_summary">METHOD</A></FONT></TD>
+<TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
+DETAIL:&nbsp;<A HREF="#field_detail">FIELD</A>&nbsp;|&nbsp;<A HREF="#constructor_detail">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_detail">METHOD</A></FONT></TD>
+</TR>
+</TABLE>
+<A NAME="skip-navbar_bottom"></A>
+<!-- ======== END OF BOTTOM NAVBAR ======= -->
+
+<HR>
+
+                <i>Copyright 2014 The Apache Software Foundation or
+        its licensors, as applicable.</i>
+            
+</BODY>
+</HTML>

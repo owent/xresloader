@@ -1,0 +1,1316 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!--NewPage-->
+<HTML>
+<HEAD>
+<TITLE>
+XWPFRun (POI API Documentation)
+</TITLE>
+
+<META NAME="keywords" CONTENT="org.apache.poi.xwpf.usermodel.XWPFRun class">
+
+<LINK REL ="stylesheet" TYPE="text/css" HREF="../../../../../stylesheet.css" TITLE="Style">
+
+<SCRIPT type="text/javascript">
+function windowTitle()
+{
+    parent.document.title="XWPFRun (POI API Documentation)";
+}
+</SCRIPT>
+<NOSCRIPT>
+</NOSCRIPT>
+
+</HEAD>
+
+<BODY BGCOLOR="white" onload="windowTitle();">
+
+
+<!-- ========= START OF TOP NAVBAR ======= -->
+<A NAME="navbar_top"><!-- --></A>
+<A HREF="#skip-navbar_top" title="Skip navigation links"></A>
+<TABLE BORDER="0" WIDTH="100%" CELLPADDING="1" CELLSPACING="0" SUMMARY="">
+<TR>
+<TD COLSPAN=2 BGCOLOR="#EEEEFF" CLASS="NavBarCell1">
+<A NAME="navbar_top_firstrow"><!-- --></A>
+<TABLE BORDER="0" CELLPADDING="0" CELLSPACING="3" SUMMARY="">
+  <TR ALIGN="center" VALIGN="top">
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../overview-summary.html"><FONT CLASS="NavBarFont1"><B>Overview</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="package-summary.html"><FONT CLASS="NavBarFont1"><B>Package</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#FFFFFF" CLASS="NavBarCell1Rev"> &nbsp;<FONT CLASS="NavBarFont1Rev"><B>Class</B></FONT>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="class-use/XWPFRun.html"><FONT CLASS="NavBarFont1"><B>Use</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="package-tree.html"><FONT CLASS="NavBarFont1"><B>Tree</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../deprecated-list.html"><FONT CLASS="NavBarFont1"><B>Deprecated</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../index-all.html"><FONT CLASS="NavBarFont1"><B>Index</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../help-doc.html"><FONT CLASS="NavBarFont1"><B>Help</B></FONT></A>&nbsp;</TD>
+  </TR>
+</TABLE>
+</TD>
+<TD ALIGN="right" VALIGN="top" ROWSPAN=3><EM>
+</EM>
+</TD>
+</TR>
+
+<TR>
+<TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
+&nbsp;<A HREF="../../../../../org/apache/poi/xwpf/usermodel/XWPFRelation.html" title="class in org.apache.poi.xwpf.usermodel"><B>PREV CLASS</B></A>&nbsp;
+&nbsp;<A HREF="../../../../../org/apache/poi/xwpf/usermodel/XWPFSDT.html" title="class in org.apache.poi.xwpf.usermodel"><B>NEXT CLASS</B></A></FONT></TD>
+<TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
+  <A HREF="../../../../../index.html?org/apache/poi/xwpf/usermodel/XWPFRun.html" target="_top"><B>FRAMES</B></A>  &nbsp;
+&nbsp;<A HREF="XWPFRun.html" target="_top"><B>NO FRAMES</B></A>  &nbsp;
+&nbsp;<SCRIPT type="text/javascript">
+  <!--
+  if(window==top) {
+    document.writeln('<A HREF="../../../../../allclasses-noframe.html"><B>All Classes</B></A>');
+  }
+  //-->
+</SCRIPT>
+<NOSCRIPT>
+  <A HREF="../../../../../allclasses-noframe.html"><B>All Classes</B></A>
+</NOSCRIPT>
+
+
+</FONT></TD>
+</TR>
+<TR>
+<TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
+  SUMMARY:&nbsp;NESTED&nbsp;|&nbsp;FIELD&nbsp;|&nbsp;<A HREF="#constructor_summary">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_summary">METHOD</A></FONT></TD>
+<TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
+DETAIL:&nbsp;FIELD&nbsp;|&nbsp;<A HREF="#constructor_detail">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_detail">METHOD</A></FONT></TD>
+</TR>
+</TABLE>
+<A NAME="skip-navbar_top"></A>
+<!-- ========= END OF TOP NAVBAR ========= -->
+
+<HR>
+<!-- ======== START OF CLASS DATA ======== -->
+<H2>
+<FONT SIZE="-1">
+org.apache.poi.xwpf.usermodel</FONT>
+<BR>
+Class XWPFRun</H2>
+<PRE>
+java.lang.Object
+  <IMG SRC="../../../../../resources/inherit.gif" ALT="extended by "><B>org.apache.poi.xwpf.usermodel.XWPFRun</B>
+</PRE>
+<DL>
+<DT><B>All Implemented Interfaces:</B> <DD><A HREF="../../../../../org/apache/poi/xwpf/usermodel/IRunElement.html" title="interface in org.apache.poi.xwpf.usermodel">IRunElement</A>, <A HREF="../../../../../org/apache/poi/xwpf/usermodel/ISDTContents.html" title="interface in org.apache.poi.xwpf.usermodel">ISDTContents</A></DD>
+</DL>
+<DL>
+<DT><B>Direct Known Subclasses:</B> <DD><A HREF="../../../../../org/apache/poi/xwpf/usermodel/XWPFHyperlinkRun.html" title="class in org.apache.poi.xwpf.usermodel">XWPFHyperlinkRun</A></DD>
+</DL>
+<HR>
+<DL>
+<DT><PRE>public class <B>XWPFRun</B><DT>extends java.lang.Object<DT>implements <A HREF="../../../../../org/apache/poi/xwpf/usermodel/ISDTContents.html" title="interface in org.apache.poi.xwpf.usermodel">ISDTContents</A>, <A HREF="../../../../../org/apache/poi/xwpf/usermodel/IRunElement.html" title="interface in org.apache.poi.xwpf.usermodel">IRunElement</A></DL>
+</PRE>
+
+<P>
+XWPFRun object defines a region of text with a common set of properties
+<P>
+
+<P>
+<HR>
+
+<P>
+
+<!-- ======== CONSTRUCTOR SUMMARY ======== -->
+
+<A NAME="constructor_summary"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+<B>Constructor Summary</B></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xwpf/usermodel/XWPFRun.html#XWPFRun(org.openxmlformats.schemas.wordprocessingml.x2006.main.CTR, org.apache.poi.xwpf.usermodel.IRunBody)">XWPFRun</A></B>(org.openxmlformats.schemas.wordprocessingml.x2006.main.CTR&nbsp;r,
+        <A HREF="../../../../../org/apache/poi/xwpf/usermodel/IRunBody.html" title="interface in org.apache.poi.xwpf.usermodel">IRunBody</A>&nbsp;p)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xwpf/usermodel/XWPFRun.html#XWPFRun(org.openxmlformats.schemas.wordprocessingml.x2006.main.CTR, org.apache.poi.xwpf.usermodel.XWPFParagraph)">XWPFRun</A></B>(org.openxmlformats.schemas.wordprocessingml.x2006.main.CTR&nbsp;r,
+        <A HREF="../../../../../org/apache/poi/xwpf/usermodel/XWPFParagraph.html" title="class in org.apache.poi.xwpf.usermodel">XWPFParagraph</A>&nbsp;p)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;<I>Use <A HREF="../../../../../org/apache/poi/xwpf/usermodel/XWPFRun.html#XWPFRun(org.openxmlformats.schemas.wordprocessingml.x2006.main.CTR, org.apache.poi.xwpf.usermodel.IRunBody)"><CODE>XWPFRun(CTR, IRunBody)</CODE></A></I></TD>
+</TR>
+</TABLE>
+&nbsp;
+<!-- ========== METHOD SUMMARY =========== -->
+
+<A NAME="method_summary"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+<B>Method Summary</B></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xwpf/usermodel/XWPFRun.html#addBreak()">addBreak</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Specifies that a break shall be placed at the current location in the run
+ content.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xwpf/usermodel/XWPFRun.html#addBreak(org.apache.poi.xwpf.usermodel.BreakClear)">addBreak</A></B>(<A HREF="../../../../../org/apache/poi/xwpf/usermodel/BreakClear.html" title="enum in org.apache.poi.xwpf.usermodel">BreakClear</A>&nbsp;clear)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Specifies that a break shall be placed at the current location in the run
+ content.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xwpf/usermodel/XWPFRun.html#addBreak(org.apache.poi.xwpf.usermodel.BreakType)">addBreak</A></B>(<A HREF="../../../../../org/apache/poi/xwpf/usermodel/BreakType.html" title="enum in org.apache.poi.xwpf.usermodel">BreakType</A>&nbsp;type)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Specifies that a break shall be placed at the current location in the run
+ content.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xwpf/usermodel/XWPFRun.html#addCarriageReturn()">addCarriageReturn</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Specifies that a carriage return shall be placed at the
+ current location in the run content.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../../../org/apache/poi/xwpf/usermodel/XWPFPicture.html" title="class in org.apache.poi.xwpf.usermodel">XWPFPicture</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xwpf/usermodel/XWPFRun.html#addPicture(java.io.InputStream, int, java.lang.String, int, int)">addPicture</A></B>(java.io.InputStream&nbsp;pictureData,
+           int&nbsp;pictureType,
+           java.lang.String&nbsp;filename,
+           int&nbsp;width,
+           int&nbsp;height)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Adds a picture to the run.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;java.lang.String</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xwpf/usermodel/XWPFRun.html#getColor()">getColor</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Get text color.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;org.openxmlformats.schemas.wordprocessingml.x2006.main.CTR</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xwpf/usermodel/XWPFRun.html#getCTR()">getCTR</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Get the currently used CTR object</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../../../org/apache/poi/xwpf/usermodel/XWPFDocument.html" title="class in org.apache.poi.xwpf.usermodel">XWPFDocument</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xwpf/usermodel/XWPFRun.html#getDocument()">getDocument</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;java.util.List&lt;<A HREF="../../../../../org/apache/poi/xwpf/usermodel/XWPFPicture.html" title="class in org.apache.poi.xwpf.usermodel">XWPFPicture</A>&gt;</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xwpf/usermodel/XWPFRun.html#getEmbeddedPictures()">getEmbeddedPictures</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns the embedded pictures of the run.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;java.lang.String</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xwpf/usermodel/XWPFRun.html#getFontFamily()">getFontFamily</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Specifies the fonts which shall be used to display the text contents of
+ this run.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;int</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xwpf/usermodel/XWPFRun.html#getFontSize()">getFontSize</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Specifies the font size which shall be applied to all non complex script
+ characters in the contents of this run when displayed.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../../../org/apache/poi/xwpf/usermodel/XWPFParagraph.html" title="class in org.apache.poi.xwpf.usermodel">XWPFParagraph</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xwpf/usermodel/XWPFRun.html#getParagraph()">getParagraph</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;<I>use <A HREF="../../../../../org/apache/poi/xwpf/usermodel/XWPFRun.html#getParent()"><CODE>getParent()</CODE></A> instead</I></TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../../../org/apache/poi/xwpf/usermodel/IRunBody.html" title="interface in org.apache.poi.xwpf.usermodel">IRunBody</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xwpf/usermodel/XWPFRun.html#getParent()">getParent</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Get the currently referenced paragraph/SDT object</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;java.lang.String</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xwpf/usermodel/XWPFRun.html#getPictureText()">getPictureText</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns text embedded in pictures</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../../../org/apache/poi/xwpf/usermodel/VerticalAlign.html" title="enum in org.apache.poi.xwpf.usermodel">VerticalAlign</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xwpf/usermodel/XWPFRun.html#getSubscript()">getSubscript</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Specifies the alignment which shall be applied to the contents of this
+ run in relation to the default appearance of the run's text.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;java.lang.String</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xwpf/usermodel/XWPFRun.html#getText(int)">getText</A></B>(int&nbsp;pos)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Return the string content of this text run</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;int</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xwpf/usermodel/XWPFRun.html#getTextPosition()">getTextPosition</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;This element specifies the amount by which text shall be raised or
+ lowered for this run in relation to the default baseline of the
+ surrounding non-positioned text.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../../../org/apache/poi/xwpf/usermodel/UnderlinePatterns.html" title="enum in org.apache.poi.xwpf.usermodel">UnderlinePatterns</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xwpf/usermodel/XWPFRun.html#getUnderline()">getUnderline</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Specifies that the contents of this run should be displayed along with an
+ underline appearing directly below the character heigh</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xwpf/usermodel/XWPFRun.html#isBold()">isBold</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Whether the bold property shall be applied to all non-complex script
+ characters in the contents of this run when displayed in a document</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xwpf/usermodel/XWPFRun.html#isItalic()">isItalic</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Whether the italic property should be applied to all non-complex script
+ characters in the contents of this run when displayed in a document.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xwpf/usermodel/XWPFRun.html#isStrike()">isStrike</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Specifies that the contents of this run shall be displayed with a single
+ horizontal line through the center of the line.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xwpf/usermodel/XWPFRun.html#removeBreak()">removeBreak</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xwpf/usermodel/XWPFRun.html#removeCarriageReturn()">removeCarriageReturn</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xwpf/usermodel/XWPFRun.html#setBold(boolean)">setBold</A></B>(boolean&nbsp;value)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Whether the bold property shall be applied to all non-complex script
+ characters in the contents of this run when displayed in a document.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xwpf/usermodel/XWPFRun.html#setColor(java.lang.String)">setColor</A></B>(java.lang.String&nbsp;rgbStr)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Set text color.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xwpf/usermodel/XWPFRun.html#setFontFamily(java.lang.String)">setFontFamily</A></B>(java.lang.String&nbsp;fontFamily)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Specifies the fonts which shall be used to display the text contents of
+ this run.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xwpf/usermodel/XWPFRun.html#setFontSize(int)">setFontSize</A></B>(int&nbsp;size)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Specifies the font size which shall be applied to all non complex script
+ characters in the contents of this run when displayed.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xwpf/usermodel/XWPFRun.html#setItalic(boolean)">setItalic</A></B>(boolean&nbsp;value)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Whether the bold property shall be applied to all non-complex script
+ characters in the contents of this run when displayed in a document
+ <p/>
+ <p/>
+ This formatting property is a toggle property, which specifies that its
+ behavior differs between its use within a style definition and its use as
+ direct formatting.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xwpf/usermodel/XWPFRun.html#setStrike(boolean)">setStrike</A></B>(boolean&nbsp;value)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Specifies that the contents of this run shall be displayed with a single
+ horizontal line through the center of the line.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xwpf/usermodel/XWPFRun.html#setSubscript(org.apache.poi.xwpf.usermodel.VerticalAlign)">setSubscript</A></B>(<A HREF="../../../../../org/apache/poi/xwpf/usermodel/VerticalAlign.html" title="enum in org.apache.poi.xwpf.usermodel">VerticalAlign</A>&nbsp;valign)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Specifies the alignment which shall be applied to the contents of this
+ run in relation to the default appearance of the run's text.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xwpf/usermodel/XWPFRun.html#setText(java.lang.String)">setText</A></B>(java.lang.String&nbsp;value)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sets the text of this text run</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xwpf/usermodel/XWPFRun.html#setText(java.lang.String, int)">setText</A></B>(java.lang.String&nbsp;value,
+        int&nbsp;pos)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sets the text of this text run in the</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xwpf/usermodel/XWPFRun.html#setTextPosition(int)">setTextPosition</A></B>(int&nbsp;val)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;This element specifies the amount by which text shall be raised or
+ lowered for this run in relation to the default baseline of the
+ surrounding non-positioned text.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xwpf/usermodel/XWPFRun.html#setUnderline(org.apache.poi.xwpf.usermodel.UnderlinePatterns)">setUnderline</A></B>(<A HREF="../../../../../org/apache/poi/xwpf/usermodel/UnderlinePatterns.html" title="enum in org.apache.poi.xwpf.usermodel">UnderlinePatterns</A>&nbsp;value)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Specifies that the contents of this run should be displayed along with an
+ underline appearing directly below the character heigh
+ <p/>
+ <p/>
+ If this element is not present, the default value is to leave the
+ formatting applied at previous level in the style hierarchy.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;java.lang.String</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/xwpf/usermodel/XWPFRun.html#toString()">toString</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns the string version of the text, with tabs and
+  carriage returns in place of their xml equivalents.</TD>
+</TR>
+</TABLE>
+&nbsp;<A NAME="methods_inherited_from_class_java.lang.Object"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#EEEEFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left"><B>Methods inherited from class java.lang.Object</B></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE>clone, equals, finalize, getClass, hashCode, notify, notifyAll, wait, wait, wait</CODE></TD>
+</TR>
+</TABLE>
+&nbsp;
+<P>
+
+<!-- ========= CONSTRUCTOR DETAIL ======== -->
+
+<A NAME="constructor_detail"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="1"><FONT SIZE="+2">
+<B>Constructor Detail</B></FONT></TH>
+</TR>
+</TABLE>
+
+<A NAME="XWPFRun(org.openxmlformats.schemas.wordprocessingml.x2006.main.CTR, org.apache.poi.xwpf.usermodel.IRunBody)"><!-- --></A><H3>
+XWPFRun</H3>
+<PRE>
+public <B>XWPFRun</B>(org.openxmlformats.schemas.wordprocessingml.x2006.main.CTR&nbsp;r,
+               <A HREF="../../../../../org/apache/poi/xwpf/usermodel/IRunBody.html" title="interface in org.apache.poi.xwpf.usermodel">IRunBody</A>&nbsp;p)</PRE>
+<DL>
+<DL>
+<DT><B>Parameters:</B><DD><CODE>r</CODE> - the CTR bean which holds the run attributes<DD><CODE>p</CODE> - the parent paragraph</DL>
+</DL>
+<HR>
+
+<A NAME="XWPFRun(org.openxmlformats.schemas.wordprocessingml.x2006.main.CTR, org.apache.poi.xwpf.usermodel.XWPFParagraph)"><!-- --></A><H3>
+XWPFRun</H3>
+<PRE>
+public <B>XWPFRun</B>(org.openxmlformats.schemas.wordprocessingml.x2006.main.CTR&nbsp;r,
+               <A HREF="../../../../../org/apache/poi/xwpf/usermodel/XWPFParagraph.html" title="class in org.apache.poi.xwpf.usermodel">XWPFParagraph</A>&nbsp;p)</PRE>
+<DL>
+<DD><B>Deprecated.</B>&nbsp;<I>Use <A HREF="../../../../../org/apache/poi/xwpf/usermodel/XWPFRun.html#XWPFRun(org.openxmlformats.schemas.wordprocessingml.x2006.main.CTR, org.apache.poi.xwpf.usermodel.IRunBody)"><CODE>XWPFRun(CTR, IRunBody)</CODE></A></I>
+<P>
+</DL>
+
+<!-- ============ METHOD DETAIL ========== -->
+
+<A NAME="method_detail"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="1"><FONT SIZE="+2">
+<B>Method Detail</B></FONT></TH>
+</TR>
+</TABLE>
+
+<A NAME="getCTR()"><!-- --></A><H3>
+getCTR</H3>
+<PRE>
+<FONT SIZE="-1"><A HREF="../../../../../org/apache/poi/util/Internal.html" title="annotation in org.apache.poi.util">@Internal</A>
+</FONT>public org.openxmlformats.schemas.wordprocessingml.x2006.main.CTR <B>getCTR</B>()</PRE>
+<DL>
+<DD>Get the currently used CTR object
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+
+<DT><B>Returns:</B><DD>ctr object</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getParent()"><!-- --></A><H3>
+getParent</H3>
+<PRE>
+public <A HREF="../../../../../org/apache/poi/xwpf/usermodel/IRunBody.html" title="interface in org.apache.poi.xwpf.usermodel">IRunBody</A> <B>getParent</B>()</PRE>
+<DL>
+<DD>Get the currently referenced paragraph/SDT object
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+
+<DT><B>Returns:</B><DD>current parent</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getParagraph()"><!-- --></A><H3>
+getParagraph</H3>
+<PRE>
+public <A HREF="../../../../../org/apache/poi/xwpf/usermodel/XWPFParagraph.html" title="class in org.apache.poi.xwpf.usermodel">XWPFParagraph</A> <B>getParagraph</B>()</PRE>
+<DL>
+<DD><B>Deprecated.</B>&nbsp;<I>use <A HREF="../../../../../org/apache/poi/xwpf/usermodel/XWPFRun.html#getParent()"><CODE>getParent()</CODE></A> instead</I>
+<P>
+<DD>Get the currently referenced paragraph, or null if a SDT object
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getDocument()"><!-- --></A><H3>
+getDocument</H3>
+<PRE>
+public <A HREF="../../../../../org/apache/poi/xwpf/usermodel/XWPFDocument.html" title="class in org.apache.poi.xwpf.usermodel">XWPFDocument</A> <B>getDocument</B>()</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+
+<DT><B>Returns:</B><DD>The <A HREF="../../../../../org/apache/poi/xwpf/usermodel/XWPFDocument.html" title="class in org.apache.poi.xwpf.usermodel"><CODE>XWPFDocument</CODE></A> instance, this run belongs to, or
+         <code>null</code> if parent structure (paragraph > document) is not properly set.</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="isBold()"><!-- --></A><H3>
+isBold</H3>
+<PRE>
+public boolean <B>isBold</B>()</PRE>
+<DL>
+<DD>Whether the bold property shall be applied to all non-complex script
+ characters in the contents of this run when displayed in a document
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+
+<DT><B>Returns:</B><DD><code>true</code> if the bold property is applied</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setBold(boolean)"><!-- --></A><H3>
+setBold</H3>
+<PRE>
+public void <B>setBold</B>(boolean&nbsp;value)</PRE>
+<DL>
+<DD>Whether the bold property shall be applied to all non-complex script
+ characters in the contents of this run when displayed in a document. 
+ <p>
+ This formatting property is a toggle property, which specifies that its
+ behavior differs between its use within a style definition and its use as
+ direct formatting. When used as part of a style definition, setting this
+ property shall toggle the current state of that property as specified up
+ to this point in the hierarchy (i.e. applied to not applied, and vice
+ versa). Setting it to <code>false</code> (or an equivalent) shall
+ result in the current setting remaining unchanged. However, when used as
+ direct formatting, setting this property to true or false shall set the
+ absolute state of the resulting property.
+ </p>
+ <p>
+ If this element is not present, the default value is to leave the
+ formatting applied at previous level in the style hierarchy. If this
+ element is never applied in the style hierarchy, then bold shall not be
+ applied to non-complex script characters.
+ </p>
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>value</CODE> - <code>true</code> if the bold property is applied to
+              this run</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getColor()"><!-- --></A><H3>
+getColor</H3>
+<PRE>
+public java.lang.String <B>getColor</B>()</PRE>
+<DL>
+<DD>Get text color. The returned value is a string in the hex form "RRGGBB".
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setColor(java.lang.String)"><!-- --></A><H3>
+setColor</H3>
+<PRE>
+public void <B>setColor</B>(java.lang.String&nbsp;rgbStr)</PRE>
+<DL>
+<DD>Set text color.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>rgbStr</CODE> - - the desired color, in the hex form "RRGGBB".</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getText(int)"><!-- --></A><H3>
+getText</H3>
+<PRE>
+public java.lang.String <B>getText</B>(int&nbsp;pos)</PRE>
+<DL>
+<DD>Return the string content of this text run
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+
+<DT><B>Returns:</B><DD>the text of this text run or <code>null</code> if not set</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getPictureText()"><!-- --></A><H3>
+getPictureText</H3>
+<PRE>
+public java.lang.String <B>getPictureText</B>()</PRE>
+<DL>
+<DD>Returns text embedded in pictures
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setText(java.lang.String)"><!-- --></A><H3>
+setText</H3>
+<PRE>
+public void <B>setText</B>(java.lang.String&nbsp;value)</PRE>
+<DL>
+<DD>Sets the text of this text run
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>value</CODE> - the literal text which shall be displayed in the document</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setText(java.lang.String, int)"><!-- --></A><H3>
+setText</H3>
+<PRE>
+public void <B>setText</B>(java.lang.String&nbsp;value,
+                    int&nbsp;pos)</PRE>
+<DL>
+<DD>Sets the text of this text run in the
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>value</CODE> - the literal text which shall be displayed in the document<DD><CODE>pos</CODE> - - position in the text array (NB: 0 based)</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="isItalic()"><!-- --></A><H3>
+isItalic</H3>
+<PRE>
+public boolean <B>isItalic</B>()</PRE>
+<DL>
+<DD>Whether the italic property should be applied to all non-complex script
+ characters in the contents of this run when displayed in a document.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+
+<DT><B>Returns:</B><DD><code>true</code> if the italic property is applied</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setItalic(boolean)"><!-- --></A><H3>
+setItalic</H3>
+<PRE>
+public void <B>setItalic</B>(boolean&nbsp;value)</PRE>
+<DL>
+<DD>Whether the bold property shall be applied to all non-complex script
+ characters in the contents of this run when displayed in a document
+ <p/>
+ <p/>
+ This formatting property is a toggle property, which specifies that its
+ behavior differs between its use within a style definition and its use as
+ direct formatting. When used as part of a style definition, setting this
+ property shall toggle the current state of that property as specified up
+ to this point in the hierarchy (i.e. applied to not applied, and vice
+ versa). Setting it to <code>false</code> (or an equivalent) shall
+ result in the current setting remaining unchanged. However, when used as
+ direct formatting, setting this property to true or false shall set the
+ absolute state of the resulting property.
+ </p>
+ <p/>
+ If this element is not present, the default value is to leave the
+ formatting applied at previous level in the style hierarchy. If this
+ element is never applied in the style hierarchy, then bold shall not be
+ applied to non-complex script characters.
+ </p>
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>value</CODE> - <code>true</code> if the italic property is applied to
+              this run</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getUnderline()"><!-- --></A><H3>
+getUnderline</H3>
+<PRE>
+public <A HREF="../../../../../org/apache/poi/xwpf/usermodel/UnderlinePatterns.html" title="enum in org.apache.poi.xwpf.usermodel">UnderlinePatterns</A> <B>getUnderline</B>()</PRE>
+<DL>
+<DD>Specifies that the contents of this run should be displayed along with an
+ underline appearing directly below the character heigh
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+
+<DT><B>Returns:</B><DD>the Underline pattern applyed to this run<DT><B>See Also:</B><DD><A HREF="../../../../../org/apache/poi/xwpf/usermodel/UnderlinePatterns.html" title="enum in org.apache.poi.xwpf.usermodel"><CODE>UnderlinePatterns</CODE></A></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setUnderline(org.apache.poi.xwpf.usermodel.UnderlinePatterns)"><!-- --></A><H3>
+setUnderline</H3>
+<PRE>
+public void <B>setUnderline</B>(<A HREF="../../../../../org/apache/poi/xwpf/usermodel/UnderlinePatterns.html" title="enum in org.apache.poi.xwpf.usermodel">UnderlinePatterns</A>&nbsp;value)</PRE>
+<DL>
+<DD>Specifies that the contents of this run should be displayed along with an
+ underline appearing directly below the character heigh
+ <p/>
+ <p/>
+ If this element is not present, the default value is to leave the
+ formatting applied at previous level in the style hierarchy. If this
+ element is never applied in the style hierarchy, then an underline shall
+ not be applied to the contents of this run.
+ </p>
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>value</CODE> - -
+              underline type<DT><B>See Also:</B><DD><A HREF="../../../../../org/apache/poi/xwpf/usermodel/UnderlinePatterns.html" title="enum in org.apache.poi.xwpf.usermodel"><CODE>: all possible patterns that could be applied</CODE></A></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="isStrike()"><!-- --></A><H3>
+isStrike</H3>
+<PRE>
+public boolean <B>isStrike</B>()</PRE>
+<DL>
+<DD>Specifies that the contents of this run shall be displayed with a single
+ horizontal line through the center of the line.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+
+<DT><B>Returns:</B><DD><code>true</code> if the strike property is applied</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setStrike(boolean)"><!-- --></A><H3>
+setStrike</H3>
+<PRE>
+public void <B>setStrike</B>(boolean&nbsp;value)</PRE>
+<DL>
+<DD>Specifies that the contents of this run shall be displayed with a single
+ horizontal line through the center of the line.
+ <p/>
+ This formatting property is a toggle property, which specifies that its
+ behavior differs between its use within a style definition and its use as
+ direct formatting. When used as part of a style definition, setting this
+ property shall toggle the current state of that property as specified up
+ to this point in the hierarchy (i.e. applied to not applied, and vice
+ versa). Setting it to false (or an equivalent) shall result in the
+ current setting remaining unchanged. However, when used as direct
+ formatting, setting this property to true or false shall set the absolute
+ state of the resulting property.
+ </p>
+ <p/>
+ If this element is not present, the default value is to leave the
+ formatting applied at previous level in the style hierarchy. If this
+ element is never applied in the style hierarchy, then strikethrough shall
+ not be applied to the contents of this run.
+ </p>
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>value</CODE> - <code>true</code> if the strike property is applied to
+              this run</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getSubscript()"><!-- --></A><H3>
+getSubscript</H3>
+<PRE>
+public <A HREF="../../../../../org/apache/poi/xwpf/usermodel/VerticalAlign.html" title="enum in org.apache.poi.xwpf.usermodel">VerticalAlign</A> <B>getSubscript</B>()</PRE>
+<DL>
+<DD>Specifies the alignment which shall be applied to the contents of this
+ run in relation to the default appearance of the run's text.
+ This allows the text to be repositioned as subscript or superscript without
+ altering the font size of the run properties.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+
+<DT><B>Returns:</B><DD>VerticalAlign<DT><B>See Also:</B><DD><A HREF="../../../../../org/apache/poi/xwpf/usermodel/VerticalAlign.html" title="enum in org.apache.poi.xwpf.usermodel"><CODE>all possible value that could be applyed to this run</CODE></A></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setSubscript(org.apache.poi.xwpf.usermodel.VerticalAlign)"><!-- --></A><H3>
+setSubscript</H3>
+<PRE>
+public void <B>setSubscript</B>(<A HREF="../../../../../org/apache/poi/xwpf/usermodel/VerticalAlign.html" title="enum in org.apache.poi.xwpf.usermodel">VerticalAlign</A>&nbsp;valign)</PRE>
+<DL>
+<DD>Specifies the alignment which shall be applied to the contents of this
+ run in relation to the default appearance of the run's text. This allows
+ the text to be repositioned as subscript or superscript without altering
+ the font size of the run properties.
+ <p/>
+ If this element is not present, the default value is to leave the
+ formatting applied at previous level in the style hierarchy. If this
+ element is never applied in the style hierarchy, then the text shall not
+ be subscript or superscript relative to the default baseline location for
+ the contents of this run.
+ </p>
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>valign</CODE> - <DT><B>See Also:</B><DD><A HREF="../../../../../org/apache/poi/xwpf/usermodel/VerticalAlign.html" title="enum in org.apache.poi.xwpf.usermodel"><CODE>VerticalAlign</CODE></A></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getFontFamily()"><!-- --></A><H3>
+getFontFamily</H3>
+<PRE>
+public java.lang.String <B>getFontFamily</B>()</PRE>
+<DL>
+<DD>Specifies the fonts which shall be used to display the text contents of
+ this run. Specifies a font which shall be used to format all characters
+ in the ASCII range (0 - 127) within the parent run
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+
+<DT><B>Returns:</B><DD>a string representing the font family</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setFontFamily(java.lang.String)"><!-- --></A><H3>
+setFontFamily</H3>
+<PRE>
+public void <B>setFontFamily</B>(java.lang.String&nbsp;fontFamily)</PRE>
+<DL>
+<DD>Specifies the fonts which shall be used to display the text contents of
+ this run. Specifies a font which shall be used to format all characters
+ in the ASCII range (0 - 127) within the parent run
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>fontFamily</CODE> - </DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getFontSize()"><!-- --></A><H3>
+getFontSize</H3>
+<PRE>
+public int <B>getFontSize</B>()</PRE>
+<DL>
+<DD>Specifies the font size which shall be applied to all non complex script
+ characters in the contents of this run when displayed.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+
+<DT><B>Returns:</B><DD>value representing the font size</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setFontSize(int)"><!-- --></A><H3>
+setFontSize</H3>
+<PRE>
+public void <B>setFontSize</B>(int&nbsp;size)</PRE>
+<DL>
+<DD>Specifies the font size which shall be applied to all non complex script
+ characters in the contents of this run when displayed.
+ <p/>
+ If this element is not present, the default value is to leave the value
+ applied at previous level in the style hierarchy. If this element is
+ never applied in the style hierarchy, then any appropriate font size may
+ be used for non complex script characters.
+ </p>
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>size</CODE> - </DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getTextPosition()"><!-- --></A><H3>
+getTextPosition</H3>
+<PRE>
+public int <B>getTextPosition</B>()</PRE>
+<DL>
+<DD>This element specifies the amount by which text shall be raised or
+ lowered for this run in relation to the default baseline of the
+ surrounding non-positioned text. This allows the text to be repositioned
+ without altering the font size of the contents.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+
+<DT><B>Returns:</B><DD>a big integer representing the amount of text shall be "moved"</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setTextPosition(int)"><!-- --></A><H3>
+setTextPosition</H3>
+<PRE>
+public void <B>setTextPosition</B>(int&nbsp;val)</PRE>
+<DL>
+<DD>This element specifies the amount by which text shall be raised or
+ lowered for this run in relation to the default baseline of the
+ surrounding non-positioned text. This allows the text to be repositioned
+ without altering the font size of the contents.
+ <p/>
+ If the val attribute is positive, then the parent run shall be raised
+ above the baseline of the surrounding text by the specified number of
+ half-points. If the val attribute is negative, then the parent run shall
+ be lowered below the baseline of the surrounding text by the specified
+ number of half-points.
+ </p>
+ <p/>
+ If this element is not present, the default value is to leave the
+ formatting applied at previous level in the style hierarchy. If this
+ element is never applied in the style hierarchy, then the text shall not
+ be raised or lowered relative to the default baseline location for the
+ contents of this run.
+ </p>
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>val</CODE> - </DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="removeBreak()"><!-- --></A><H3>
+removeBreak</H3>
+<PRE>
+public void <B>removeBreak</B>()</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="addBreak()"><!-- --></A><H3>
+addBreak</H3>
+<PRE>
+public void <B>addBreak</B>()</PRE>
+<DL>
+<DD>Specifies that a break shall be placed at the current location in the run
+ content. 
+ A break is a special character which is used to override the
+ normal line breaking that would be performed based on the normal layout
+ of the document's contents.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+<DT><B>See Also:</B><DD><A HREF="../../../../../org/apache/poi/xwpf/usermodel/XWPFRun.html#addCarriageReturn()"><CODE>addCarriageReturn()</CODE></A></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="addBreak(org.apache.poi.xwpf.usermodel.BreakType)"><!-- --></A><H3>
+addBreak</H3>
+<PRE>
+public void <B>addBreak</B>(<A HREF="../../../../../org/apache/poi/xwpf/usermodel/BreakType.html" title="enum in org.apache.poi.xwpf.usermodel">BreakType</A>&nbsp;type)</PRE>
+<DL>
+<DD>Specifies that a break shall be placed at the current location in the run
+ content.
+ A break is a special character which is used to override the
+ normal line breaking that would be performed based on the normal layout
+ of the document's contents.
+ <p>
+ The behavior of this break character (the
+ location where text shall be restarted after this break) shall be
+ determined by its type values.
+ </p>
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+<DT><B>See Also:</B><DD><A HREF="../../../../../org/apache/poi/xwpf/usermodel/BreakType.html" title="enum in org.apache.poi.xwpf.usermodel"><CODE>BreakType</CODE></A></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="addBreak(org.apache.poi.xwpf.usermodel.BreakClear)"><!-- --></A><H3>
+addBreak</H3>
+<PRE>
+public void <B>addBreak</B>(<A HREF="../../../../../org/apache/poi/xwpf/usermodel/BreakClear.html" title="enum in org.apache.poi.xwpf.usermodel">BreakClear</A>&nbsp;clear)</PRE>
+<DL>
+<DD>Specifies that a break shall be placed at the current location in the run
+ content. A break is a special character which is used to override the
+ normal line breaking that would be performed based on the normal layout
+ of the document's contents.
+ <p>
+ The behavior of this break character (the
+ location where text shall be restarted after this break) shall be
+ determined by its type (in this case is BreakType.TEXT_WRAPPING as default) and clear attribute values.
+ </p>
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+<DT><B>See Also:</B><DD><A HREF="../../../../../org/apache/poi/xwpf/usermodel/BreakClear.html" title="enum in org.apache.poi.xwpf.usermodel"><CODE>BreakClear</CODE></A></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="addCarriageReturn()"><!-- --></A><H3>
+addCarriageReturn</H3>
+<PRE>
+public void <B>addCarriageReturn</B>()</PRE>
+<DL>
+<DD>Specifies that a carriage return shall be placed at the
+ current location in the run content.
+ A carriage return is used to end the current line of text in
+ Wordprocess.
+ The behavior of a carriage return in run content shall be
+ identical to a break character with null type and clear attributes, which
+ shall end the current line and find the next available line on which to
+ continue.
+ The carriage return character forced the following text to be
+ restarted on the next available line in the document.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="removeCarriageReturn()"><!-- --></A><H3>
+removeCarriageReturn</H3>
+<PRE>
+public void <B>removeCarriageReturn</B>()</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="addPicture(java.io.InputStream, int, java.lang.String, int, int)"><!-- --></A><H3>
+addPicture</H3>
+<PRE>
+public <A HREF="../../../../../org/apache/poi/xwpf/usermodel/XWPFPicture.html" title="class in org.apache.poi.xwpf.usermodel">XWPFPicture</A> <B>addPicture</B>(java.io.InputStream&nbsp;pictureData,
+                              int&nbsp;pictureType,
+                              java.lang.String&nbsp;filename,
+                              int&nbsp;width,
+                              int&nbsp;height)
+                       throws <A HREF="../../../../../org/apache/poi/openxml4j/exceptions/InvalidFormatException.html" title="class in org.apache.poi.openxml4j.exceptions">InvalidFormatException</A>,
+                              java.io.IOException</PRE>
+<DL>
+<DD>Adds a picture to the run. This method handles
+  attaching the picture data to the overall file.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>pictureData</CODE> - The raw picture data<DD><CODE>pictureType</CODE> - The type of the picture, eg <A HREF="../../../../../org/apache/poi/xwpf/usermodel/Document.html#PICTURE_TYPE_JPEG"><CODE>Document.PICTURE_TYPE_JPEG</CODE></A><DD><CODE>width</CODE> - width in EMUs. To convert to / from points use <A HREF="../../../../../org/apache/poi/util/Units.html" title="class in org.apache.poi.util"><CODE>Units</CODE></A><DD><CODE>height</CODE> - height in EMUs. To convert to / from points use <A HREF="../../../../../org/apache/poi/util/Units.html" title="class in org.apache.poi.util"><CODE>Units</CODE></A>
+<DT><B>Throws:</B>
+<DD><CODE><A HREF="../../../../../org/apache/poi/openxml4j/exceptions/InvalidFormatException.html" title="class in org.apache.poi.openxml4j.exceptions">InvalidFormatException</A></CODE>
+<DD><CODE>java.io.IOException</CODE><DT><B>See Also:</B><DD><A HREF="../../../../../org/apache/poi/xwpf/usermodel/Document.html#PICTURE_TYPE_EMF"><CODE>Document.PICTURE_TYPE_EMF</CODE></A>, 
+<A HREF="../../../../../org/apache/poi/xwpf/usermodel/Document.html#PICTURE_TYPE_WMF"><CODE>Document.PICTURE_TYPE_WMF</CODE></A>, 
+<A HREF="../../../../../org/apache/poi/xwpf/usermodel/Document.html#PICTURE_TYPE_PICT"><CODE>Document.PICTURE_TYPE_PICT</CODE></A>, 
+<A HREF="../../../../../org/apache/poi/xwpf/usermodel/Document.html#PICTURE_TYPE_JPEG"><CODE>Document.PICTURE_TYPE_JPEG</CODE></A>, 
+<A HREF="../../../../../org/apache/poi/xwpf/usermodel/Document.html#PICTURE_TYPE_PNG"><CODE>Document.PICTURE_TYPE_PNG</CODE></A>, 
+<A HREF="../../../../../org/apache/poi/xwpf/usermodel/Document.html#PICTURE_TYPE_DIB"><CODE>Document.PICTURE_TYPE_DIB</CODE></A></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getEmbeddedPictures()"><!-- --></A><H3>
+getEmbeddedPictures</H3>
+<PRE>
+public java.util.List&lt;<A HREF="../../../../../org/apache/poi/xwpf/usermodel/XWPFPicture.html" title="class in org.apache.poi.xwpf.usermodel">XWPFPicture</A>&gt; <B>getEmbeddedPictures</B>()</PRE>
+<DL>
+<DD>Returns the embedded pictures of the run. These
+  are pictures which reference an external, 
+  embedded picture image such as a .png or .jpg
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="toString()"><!-- --></A><H3>
+toString</H3>
+<PRE>
+public java.lang.String <B>toString</B>()</PRE>
+<DL>
+<DD>Returns the string version of the text, with tabs and
+  carriage returns in place of their xml equivalents.
+<P>
+<DD><DL>
+<DT><B>Overrides:</B><DD><CODE>toString</CODE> in class <CODE>java.lang.Object</CODE></DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<!-- ========= END OF CLASS DATA ========= -->
+<HR>
+
+
+<!-- ======= START OF BOTTOM NAVBAR ====== -->
+<A NAME="navbar_bottom"><!-- --></A>
+<A HREF="#skip-navbar_bottom" title="Skip navigation links"></A>
+<TABLE BORDER="0" WIDTH="100%" CELLPADDING="1" CELLSPACING="0" SUMMARY="">
+<TR>
+<TD COLSPAN=2 BGCOLOR="#EEEEFF" CLASS="NavBarCell1">
+<A NAME="navbar_bottom_firstrow"><!-- --></A>
+<TABLE BORDER="0" CELLPADDING="0" CELLSPACING="3" SUMMARY="">
+  <TR ALIGN="center" VALIGN="top">
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../overview-summary.html"><FONT CLASS="NavBarFont1"><B>Overview</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="package-summary.html"><FONT CLASS="NavBarFont1"><B>Package</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#FFFFFF" CLASS="NavBarCell1Rev"> &nbsp;<FONT CLASS="NavBarFont1Rev"><B>Class</B></FONT>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="class-use/XWPFRun.html"><FONT CLASS="NavBarFont1"><B>Use</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="package-tree.html"><FONT CLASS="NavBarFont1"><B>Tree</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../deprecated-list.html"><FONT CLASS="NavBarFont1"><B>Deprecated</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../index-all.html"><FONT CLASS="NavBarFont1"><B>Index</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../help-doc.html"><FONT CLASS="NavBarFont1"><B>Help</B></FONT></A>&nbsp;</TD>
+  </TR>
+</TABLE>
+</TD>
+<TD ALIGN="right" VALIGN="top" ROWSPAN=3><EM>
+</EM>
+</TD>
+</TR>
+
+<TR>
+<TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
+&nbsp;<A HREF="../../../../../org/apache/poi/xwpf/usermodel/XWPFRelation.html" title="class in org.apache.poi.xwpf.usermodel"><B>PREV CLASS</B></A>&nbsp;
+&nbsp;<A HREF="../../../../../org/apache/poi/xwpf/usermodel/XWPFSDT.html" title="class in org.apache.poi.xwpf.usermodel"><B>NEXT CLASS</B></A></FONT></TD>
+<TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
+  <A HREF="../../../../../index.html?org/apache/poi/xwpf/usermodel/XWPFRun.html" target="_top"><B>FRAMES</B></A>  &nbsp;
+&nbsp;<A HREF="XWPFRun.html" target="_top"><B>NO FRAMES</B></A>  &nbsp;
+&nbsp;<SCRIPT type="text/javascript">
+  <!--
+  if(window==top) {
+    document.writeln('<A HREF="../../../../../allclasses-noframe.html"><B>All Classes</B></A>');
+  }
+  //-->
+</SCRIPT>
+<NOSCRIPT>
+  <A HREF="../../../../../allclasses-noframe.html"><B>All Classes</B></A>
+</NOSCRIPT>
+
+
+</FONT></TD>
+</TR>
+<TR>
+<TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
+  SUMMARY:&nbsp;NESTED&nbsp;|&nbsp;FIELD&nbsp;|&nbsp;<A HREF="#constructor_summary">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_summary">METHOD</A></FONT></TD>
+<TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
+DETAIL:&nbsp;FIELD&nbsp;|&nbsp;<A HREF="#constructor_detail">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_detail">METHOD</A></FONT></TD>
+</TR>
+</TABLE>
+<A NAME="skip-navbar_bottom"></A>
+<!-- ======== END OF BOTTOM NAVBAR ======= -->
+
+<HR>
+
+                <i>Copyright 2014 The Apache Software Foundation or
+        its licensors, as applicable.</i>
+            
+</BODY>
+</HTML>

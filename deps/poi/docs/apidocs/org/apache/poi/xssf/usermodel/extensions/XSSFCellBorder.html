@@ -1,0 +1,474 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!--NewPage-->
+<HTML>
+<HEAD>
+<TITLE>
+XSSFCellBorder (POI API Documentation)
+</TITLE>
+
+<META NAME="keywords" CONTENT="org.apache.poi.xssf.usermodel.extensions.XSSFCellBorder class">
+
+<LINK REL ="stylesheet" TYPE="text/css" HREF="../../../../../../stylesheet.css" TITLE="Style">
+
+<SCRIPT type="text/javascript">
+function windowTitle()
+{
+    parent.document.title="XSSFCellBorder (POI API Documentation)";
+}
+</SCRIPT>
+<NOSCRIPT>
+</NOSCRIPT>
+
+</HEAD>
+
+<BODY BGCOLOR="white" onload="windowTitle();">
+
+
+<!-- ========= START OF TOP NAVBAR ======= -->
+<A NAME="navbar_top"><!-- --></A>
+<A HREF="#skip-navbar_top" title="Skip navigation links"></A>
+<TABLE BORDER="0" WIDTH="100%" CELLPADDING="1" CELLSPACING="0" SUMMARY="">
+<TR>
+<TD COLSPAN=2 BGCOLOR="#EEEEFF" CLASS="NavBarCell1">
+<A NAME="navbar_top_firstrow"><!-- --></A>
+<TABLE BORDER="0" CELLPADDING="0" CELLSPACING="3" SUMMARY="">
+  <TR ALIGN="center" VALIGN="top">
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../../overview-summary.html"><FONT CLASS="NavBarFont1"><B>Overview</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="package-summary.html"><FONT CLASS="NavBarFont1"><B>Package</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#FFFFFF" CLASS="NavBarCell1Rev"> &nbsp;<FONT CLASS="NavBarFont1Rev"><B>Class</B></FONT>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="class-use/XSSFCellBorder.html"><FONT CLASS="NavBarFont1"><B>Use</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="package-tree.html"><FONT CLASS="NavBarFont1"><B>Tree</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../../deprecated-list.html"><FONT CLASS="NavBarFont1"><B>Deprecated</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../../index-all.html"><FONT CLASS="NavBarFont1"><B>Index</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../../help-doc.html"><FONT CLASS="NavBarFont1"><B>Help</B></FONT></A>&nbsp;</TD>
+  </TR>
+</TABLE>
+</TD>
+<TD ALIGN="right" VALIGN="top" ROWSPAN=3><EM>
+</EM>
+</TD>
+</TR>
+
+<TR>
+<TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
+&nbsp;<A HREF="../../../../../../org/apache/poi/xssf/usermodel/extensions/XSSFCellAlignment.html" title="class in org.apache.poi.xssf.usermodel.extensions"><B>PREV CLASS</B></A>&nbsp;
+&nbsp;<A HREF="../../../../../../org/apache/poi/xssf/usermodel/extensions/XSSFCellBorder.BorderSide.html" title="enum in org.apache.poi.xssf.usermodel.extensions"><B>NEXT CLASS</B></A></FONT></TD>
+<TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
+  <A HREF="../../../../../../index.html?org/apache/poi/xssf/usermodel/extensions/XSSFCellBorder.html" target="_top"><B>FRAMES</B></A>  &nbsp;
+&nbsp;<A HREF="XSSFCellBorder.html" target="_top"><B>NO FRAMES</B></A>  &nbsp;
+&nbsp;<SCRIPT type="text/javascript">
+  <!--
+  if(window==top) {
+    document.writeln('<A HREF="../../../../../../allclasses-noframe.html"><B>All Classes</B></A>');
+  }
+  //-->
+</SCRIPT>
+<NOSCRIPT>
+  <A HREF="../../../../../../allclasses-noframe.html"><B>All Classes</B></A>
+</NOSCRIPT>
+
+
+</FONT></TD>
+</TR>
+<TR>
+<TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
+  SUMMARY:&nbsp;<A HREF="#nested_class_summary">NESTED</A>&nbsp;|&nbsp;FIELD&nbsp;|&nbsp;<A HREF="#constructor_summary">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_summary">METHOD</A></FONT></TD>
+<TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
+DETAIL:&nbsp;FIELD&nbsp;|&nbsp;<A HREF="#constructor_detail">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_detail">METHOD</A></FONT></TD>
+</TR>
+</TABLE>
+<A NAME="skip-navbar_top"></A>
+<!-- ========= END OF TOP NAVBAR ========= -->
+
+<HR>
+<!-- ======== START OF CLASS DATA ======== -->
+<H2>
+<FONT SIZE="-1">
+org.apache.poi.xssf.usermodel.extensions</FONT>
+<BR>
+Class XSSFCellBorder</H2>
+<PRE>
+java.lang.Object
+  <IMG SRC="../../../../../../resources/inherit.gif" ALT="extended by "><B>org.apache.poi.xssf.usermodel.extensions.XSSFCellBorder</B>
+</PRE>
+<HR>
+<DL>
+<DT><PRE>public class <B>XSSFCellBorder</B><DT>extends java.lang.Object</DL>
+</PRE>
+
+<P>
+This element contains border formatting information, specifying border definition formats (left, right, top, bottom, diagonal)
+ for cells in the workbook.
+ Color is optional.
+<P>
+
+<P>
+<HR>
+
+<P>
+<!-- ======== NESTED CLASS SUMMARY ======== -->
+
+<A NAME="nested_class_summary"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+<B>Nested Class Summary</B></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;class</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../org/apache/poi/xssf/usermodel/extensions/XSSFCellBorder.BorderSide.html" title="enum in org.apache.poi.xssf.usermodel.extensions">XSSFCellBorder.BorderSide</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The enumeration value indicating the side being used for a cell border.</TD>
+</TR>
+</TABLE>
+&nbsp;
+<!-- ======== CONSTRUCTOR SUMMARY ======== -->
+
+<A NAME="constructor_summary"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+<B>Constructor Summary</B></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><B><A HREF="../../../../../../org/apache/poi/xssf/usermodel/extensions/XSSFCellBorder.html#XSSFCellBorder()">XSSFCellBorder</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Creates a new, empty Cell Border.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><B><A HREF="../../../../../../org/apache/poi/xssf/usermodel/extensions/XSSFCellBorder.html#XSSFCellBorder(org.openxmlformats.schemas.spreadsheetml.x2006.main.CTBorder)">XSSFCellBorder</A></B>(org.openxmlformats.schemas.spreadsheetml.x2006.main.CTBorder&nbsp;border)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Creates a Cell Border from the supplied XML definition</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><B><A HREF="../../../../../../org/apache/poi/xssf/usermodel/extensions/XSSFCellBorder.html#XSSFCellBorder(org.openxmlformats.schemas.spreadsheetml.x2006.main.CTBorder, org.apache.poi.xssf.model.ThemesTable)">XSSFCellBorder</A></B>(org.openxmlformats.schemas.spreadsheetml.x2006.main.CTBorder&nbsp;border,
+               <A HREF="../../../../../../org/apache/poi/xssf/model/ThemesTable.html" title="class in org.apache.poi.xssf.model">ThemesTable</A>&nbsp;theme)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Creates a Cell Border from the supplied XML definition</TD>
+</TR>
+</TABLE>
+&nbsp;
+<!-- ========== METHOD SUMMARY =========== -->
+
+<A NAME="method_summary"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+<B>Method Summary</B></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../org/apache/poi/xssf/usermodel/extensions/XSSFCellBorder.html#equals(java.lang.Object)">equals</A></B>(java.lang.Object&nbsp;o)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../../../../org/apache/poi/xssf/usermodel/XSSFColor.html" title="class in org.apache.poi.xssf.usermodel">XSSFColor</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../org/apache/poi/xssf/usermodel/extensions/XSSFCellBorder.html#getBorderColor(org.apache.poi.xssf.usermodel.extensions.XSSFCellBorder.BorderSide)">getBorderColor</A></B>(<A HREF="../../../../../../org/apache/poi/xssf/usermodel/extensions/XSSFCellBorder.BorderSide.html" title="enum in org.apache.poi.xssf.usermodel.extensions">XSSFCellBorder.BorderSide</A>&nbsp;side)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Get the color to use for the selected border</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../../../../org/apache/poi/ss/usermodel/BorderStyle.html" title="enum in org.apache.poi.ss.usermodel">BorderStyle</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../org/apache/poi/xssf/usermodel/extensions/XSSFCellBorder.html#getBorderStyle(org.apache.poi.xssf.usermodel.extensions.XSSFCellBorder.BorderSide)">getBorderStyle</A></B>(<A HREF="../../../../../../org/apache/poi/xssf/usermodel/extensions/XSSFCellBorder.BorderSide.html" title="enum in org.apache.poi.xssf.usermodel.extensions">XSSFCellBorder.BorderSide</A>&nbsp;side)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Get the type of border to use for the selected border</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;org.openxmlformats.schemas.spreadsheetml.x2006.main.CTBorder</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../org/apache/poi/xssf/usermodel/extensions/XSSFCellBorder.html#getCTBorder()">getCTBorder</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns the underlying XML bean.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;int</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../org/apache/poi/xssf/usermodel/extensions/XSSFCellBorder.html#hashCode()">hashCode</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../org/apache/poi/xssf/usermodel/extensions/XSSFCellBorder.html#setBorderColor(org.apache.poi.xssf.usermodel.extensions.XSSFCellBorder.BorderSide, org.apache.poi.xssf.usermodel.XSSFColor)">setBorderColor</A></B>(<A HREF="../../../../../../org/apache/poi/xssf/usermodel/extensions/XSSFCellBorder.BorderSide.html" title="enum in org.apache.poi.xssf.usermodel.extensions">XSSFCellBorder.BorderSide</A>&nbsp;side,
+               <A HREF="../../../../../../org/apache/poi/xssf/usermodel/XSSFColor.html" title="class in org.apache.poi.xssf.usermodel">XSSFColor</A>&nbsp;color)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Set the color to use for the selected border</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../org/apache/poi/xssf/usermodel/extensions/XSSFCellBorder.html#setBorderStyle(org.apache.poi.xssf.usermodel.extensions.XSSFCellBorder.BorderSide, org.apache.poi.ss.usermodel.BorderStyle)">setBorderStyle</A></B>(<A HREF="../../../../../../org/apache/poi/xssf/usermodel/extensions/XSSFCellBorder.BorderSide.html" title="enum in org.apache.poi.xssf.usermodel.extensions">XSSFCellBorder.BorderSide</A>&nbsp;side,
+               <A HREF="../../../../../../org/apache/poi/ss/usermodel/BorderStyle.html" title="enum in org.apache.poi.ss.usermodel">BorderStyle</A>&nbsp;style)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Set the type of border to use for the selected border</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../org/apache/poi/xssf/usermodel/extensions/XSSFCellBorder.html#setThemesTable(org.apache.poi.xssf.model.ThemesTable)">setThemesTable</A></B>(<A HREF="../../../../../../org/apache/poi/xssf/model/ThemesTable.html" title="class in org.apache.poi.xssf.model">ThemesTable</A>&nbsp;themes)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Records the Themes Table that is associated with
+  the current font, used when looking up theme
+  based colours and properties.</TD>
+</TR>
+</TABLE>
+&nbsp;<A NAME="methods_inherited_from_class_java.lang.Object"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#EEEEFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left"><B>Methods inherited from class java.lang.Object</B></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE>clone, finalize, getClass, notify, notifyAll, toString, wait, wait, wait</CODE></TD>
+</TR>
+</TABLE>
+&nbsp;
+<P>
+
+<!-- ========= CONSTRUCTOR DETAIL ======== -->
+
+<A NAME="constructor_detail"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="1"><FONT SIZE="+2">
+<B>Constructor Detail</B></FONT></TH>
+</TR>
+</TABLE>
+
+<A NAME="XSSFCellBorder(org.openxmlformats.schemas.spreadsheetml.x2006.main.CTBorder, org.apache.poi.xssf.model.ThemesTable)"><!-- --></A><H3>
+XSSFCellBorder</H3>
+<PRE>
+public <B>XSSFCellBorder</B>(org.openxmlformats.schemas.spreadsheetml.x2006.main.CTBorder&nbsp;border,
+                      <A HREF="../../../../../../org/apache/poi/xssf/model/ThemesTable.html" title="class in org.apache.poi.xssf.model">ThemesTable</A>&nbsp;theme)</PRE>
+<DL>
+<DD>Creates a Cell Border from the supplied XML definition
+<P>
+</DL>
+<HR>
+
+<A NAME="XSSFCellBorder(org.openxmlformats.schemas.spreadsheetml.x2006.main.CTBorder)"><!-- --></A><H3>
+XSSFCellBorder</H3>
+<PRE>
+public <B>XSSFCellBorder</B>(org.openxmlformats.schemas.spreadsheetml.x2006.main.CTBorder&nbsp;border)</PRE>
+<DL>
+<DD>Creates a Cell Border from the supplied XML definition
+<P>
+</DL>
+<HR>
+
+<A NAME="XSSFCellBorder()"><!-- --></A><H3>
+XSSFCellBorder</H3>
+<PRE>
+public <B>XSSFCellBorder</B>()</PRE>
+<DL>
+<DD>Creates a new, empty Cell Border.
+ You need to attach this to the Styles Table
+<P>
+</DL>
+
+<!-- ============ METHOD DETAIL ========== -->
+
+<A NAME="method_detail"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="1"><FONT SIZE="+2">
+<B>Method Detail</B></FONT></TH>
+</TR>
+</TABLE>
+
+<A NAME="setThemesTable(org.apache.poi.xssf.model.ThemesTable)"><!-- --></A><H3>
+setThemesTable</H3>
+<PRE>
+public void <B>setThemesTable</B>(<A HREF="../../../../../../org/apache/poi/xssf/model/ThemesTable.html" title="class in org.apache.poi.xssf.model">ThemesTable</A>&nbsp;themes)</PRE>
+<DL>
+<DD>Records the Themes Table that is associated with
+  the current font, used when looking up theme
+  based colours and properties.
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getCTBorder()"><!-- --></A><H3>
+getCTBorder</H3>
+<PRE>
+<FONT SIZE="-1"><A HREF="../../../../../../org/apache/poi/util/Internal.html" title="annotation in org.apache.poi.util">@Internal</A>
+</FONT>public org.openxmlformats.schemas.spreadsheetml.x2006.main.CTBorder <B>getCTBorder</B>()</PRE>
+<DL>
+<DD>Returns the underlying XML bean.
+<P>
+<DD><DL>
+
+<DT><B>Returns:</B><DD>CTBorder</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getBorderStyle(org.apache.poi.xssf.usermodel.extensions.XSSFCellBorder.BorderSide)"><!-- --></A><H3>
+getBorderStyle</H3>
+<PRE>
+public <A HREF="../../../../../../org/apache/poi/ss/usermodel/BorderStyle.html" title="enum in org.apache.poi.ss.usermodel">BorderStyle</A> <B>getBorderStyle</B>(<A HREF="../../../../../../org/apache/poi/xssf/usermodel/extensions/XSSFCellBorder.BorderSide.html" title="enum in org.apache.poi.xssf.usermodel.extensions">XSSFCellBorder.BorderSide</A>&nbsp;side)</PRE>
+<DL>
+<DD>Get the type of border to use for the selected border
+<P>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>side</CODE> - -  - where to apply the color definition
+<DT><B>Returns:</B><DD>borderstyle - the type of border to use. default value is NONE if border style is not set.<DT><B>See Also:</B><DD><A HREF="../../../../../../org/apache/poi/ss/usermodel/BorderStyle.html" title="enum in org.apache.poi.ss.usermodel"><CODE>BorderStyle</CODE></A></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setBorderStyle(org.apache.poi.xssf.usermodel.extensions.XSSFCellBorder.BorderSide, org.apache.poi.ss.usermodel.BorderStyle)"><!-- --></A><H3>
+setBorderStyle</H3>
+<PRE>
+public void <B>setBorderStyle</B>(<A HREF="../../../../../../org/apache/poi/xssf/usermodel/extensions/XSSFCellBorder.BorderSide.html" title="enum in org.apache.poi.xssf.usermodel.extensions">XSSFCellBorder.BorderSide</A>&nbsp;side,
+                           <A HREF="../../../../../../org/apache/poi/ss/usermodel/BorderStyle.html" title="enum in org.apache.poi.ss.usermodel">BorderStyle</A>&nbsp;style)</PRE>
+<DL>
+<DD>Set the type of border to use for the selected border
+<P>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>side</CODE> - -  - where to apply the color definition<DD><CODE>style</CODE> - - border style<DT><B>See Also:</B><DD><A HREF="../../../../../../org/apache/poi/ss/usermodel/BorderStyle.html" title="enum in org.apache.poi.ss.usermodel"><CODE>BorderStyle</CODE></A></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getBorderColor(org.apache.poi.xssf.usermodel.extensions.XSSFCellBorder.BorderSide)"><!-- --></A><H3>
+getBorderColor</H3>
+<PRE>
+public <A HREF="../../../../../../org/apache/poi/xssf/usermodel/XSSFColor.html" title="class in org.apache.poi.xssf.usermodel">XSSFColor</A> <B>getBorderColor</B>(<A HREF="../../../../../../org/apache/poi/xssf/usermodel/extensions/XSSFCellBorder.BorderSide.html" title="enum in org.apache.poi.xssf.usermodel.extensions">XSSFCellBorder.BorderSide</A>&nbsp;side)</PRE>
+<DL>
+<DD>Get the color to use for the selected border
+<P>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>side</CODE> - - where to apply the color definition
+<DT><B>Returns:</B><DD>color - color to use as XSSFColor. null if color is not set</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setBorderColor(org.apache.poi.xssf.usermodel.extensions.XSSFCellBorder.BorderSide, org.apache.poi.xssf.usermodel.XSSFColor)"><!-- --></A><H3>
+setBorderColor</H3>
+<PRE>
+public void <B>setBorderColor</B>(<A HREF="../../../../../../org/apache/poi/xssf/usermodel/extensions/XSSFCellBorder.BorderSide.html" title="enum in org.apache.poi.xssf.usermodel.extensions">XSSFCellBorder.BorderSide</A>&nbsp;side,
+                           <A HREF="../../../../../../org/apache/poi/xssf/usermodel/XSSFColor.html" title="class in org.apache.poi.xssf.usermodel">XSSFColor</A>&nbsp;color)</PRE>
+<DL>
+<DD>Set the color to use for the selected border
+<P>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>side</CODE> - - where to apply the color definition<DD><CODE>color</CODE> - - the color to use</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="hashCode()"><!-- --></A><H3>
+hashCode</H3>
+<PRE>
+public int <B>hashCode</B>()</PRE>
+<DL>
+<DD><DL>
+<DT><B>Overrides:</B><DD><CODE>hashCode</CODE> in class <CODE>java.lang.Object</CODE></DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="equals(java.lang.Object)"><!-- --></A><H3>
+equals</H3>
+<PRE>
+public boolean <B>equals</B>(java.lang.Object&nbsp;o)</PRE>
+<DL>
+<DD><DL>
+<DT><B>Overrides:</B><DD><CODE>equals</CODE> in class <CODE>java.lang.Object</CODE></DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<!-- ========= END OF CLASS DATA ========= -->
+<HR>
+
+
+<!-- ======= START OF BOTTOM NAVBAR ====== -->
+<A NAME="navbar_bottom"><!-- --></A>
+<A HREF="#skip-navbar_bottom" title="Skip navigation links"></A>
+<TABLE BORDER="0" WIDTH="100%" CELLPADDING="1" CELLSPACING="0" SUMMARY="">
+<TR>
+<TD COLSPAN=2 BGCOLOR="#EEEEFF" CLASS="NavBarCell1">
+<A NAME="navbar_bottom_firstrow"><!-- --></A>
+<TABLE BORDER="0" CELLPADDING="0" CELLSPACING="3" SUMMARY="">
+  <TR ALIGN="center" VALIGN="top">
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../../overview-summary.html"><FONT CLASS="NavBarFont1"><B>Overview</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="package-summary.html"><FONT CLASS="NavBarFont1"><B>Package</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#FFFFFF" CLASS="NavBarCell1Rev"> &nbsp;<FONT CLASS="NavBarFont1Rev"><B>Class</B></FONT>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="class-use/XSSFCellBorder.html"><FONT CLASS="NavBarFont1"><B>Use</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="package-tree.html"><FONT CLASS="NavBarFont1"><B>Tree</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../../deprecated-list.html"><FONT CLASS="NavBarFont1"><B>Deprecated</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../../index-all.html"><FONT CLASS="NavBarFont1"><B>Index</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../../help-doc.html"><FONT CLASS="NavBarFont1"><B>Help</B></FONT></A>&nbsp;</TD>
+  </TR>
+</TABLE>
+</TD>
+<TD ALIGN="right" VALIGN="top" ROWSPAN=3><EM>
+</EM>
+</TD>
+</TR>
+
+<TR>
+<TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
+&nbsp;<A HREF="../../../../../../org/apache/poi/xssf/usermodel/extensions/XSSFCellAlignment.html" title="class in org.apache.poi.xssf.usermodel.extensions"><B>PREV CLASS</B></A>&nbsp;
+&nbsp;<A HREF="../../../../../../org/apache/poi/xssf/usermodel/extensions/XSSFCellBorder.BorderSide.html" title="enum in org.apache.poi.xssf.usermodel.extensions"><B>NEXT CLASS</B></A></FONT></TD>
+<TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
+  <A HREF="../../../../../../index.html?org/apache/poi/xssf/usermodel/extensions/XSSFCellBorder.html" target="_top"><B>FRAMES</B></A>  &nbsp;
+&nbsp;<A HREF="XSSFCellBorder.html" target="_top"><B>NO FRAMES</B></A>  &nbsp;
+&nbsp;<SCRIPT type="text/javascript">
+  <!--
+  if(window==top) {
+    document.writeln('<A HREF="../../../../../../allclasses-noframe.html"><B>All Classes</B></A>');
+  }
+  //-->
+</SCRIPT>
+<NOSCRIPT>
+  <A HREF="../../../../../../allclasses-noframe.html"><B>All Classes</B></A>
+</NOSCRIPT>
+
+
+</FONT></TD>
+</TR>
+<TR>
+<TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
+  SUMMARY:&nbsp;<A HREF="#nested_class_summary">NESTED</A>&nbsp;|&nbsp;FIELD&nbsp;|&nbsp;<A HREF="#constructor_summary">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_summary">METHOD</A></FONT></TD>
+<TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
+DETAIL:&nbsp;FIELD&nbsp;|&nbsp;<A HREF="#constructor_detail">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_detail">METHOD</A></FONT></TD>
+</TR>
+</TABLE>
+<A NAME="skip-navbar_bottom"></A>
+<!-- ======== END OF BOTTOM NAVBAR ======= -->
+
+<HR>
+
+                <i>Copyright 2014 The Apache Software Foundation or
+        its licensors, as applicable.</i>
+            
+</BODY>
+</HTML>

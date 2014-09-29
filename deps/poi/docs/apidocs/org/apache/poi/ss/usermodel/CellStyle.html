@@ -1,0 +1,2271 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!--NewPage-->
+<HTML>
+<HEAD>
+<TITLE>
+CellStyle (POI API Documentation)
+</TITLE>
+
+<META NAME="keywords" CONTENT="org.apache.poi.ss.usermodel.CellStyle interface">
+
+<LINK REL ="stylesheet" TYPE="text/css" HREF="../../../../../stylesheet.css" TITLE="Style">
+
+<SCRIPT type="text/javascript">
+function windowTitle()
+{
+    parent.document.title="CellStyle (POI API Documentation)";
+}
+</SCRIPT>
+<NOSCRIPT>
+</NOSCRIPT>
+
+</HEAD>
+
+<BODY BGCOLOR="white" onload="windowTitle();">
+
+
+<!-- ========= START OF TOP NAVBAR ======= -->
+<A NAME="navbar_top"><!-- --></A>
+<A HREF="#skip-navbar_top" title="Skip navigation links"></A>
+<TABLE BORDER="0" WIDTH="100%" CELLPADDING="1" CELLSPACING="0" SUMMARY="">
+<TR>
+<TD COLSPAN=2 BGCOLOR="#EEEEFF" CLASS="NavBarCell1">
+<A NAME="navbar_top_firstrow"><!-- --></A>
+<TABLE BORDER="0" CELLPADDING="0" CELLSPACING="3" SUMMARY="">
+  <TR ALIGN="center" VALIGN="top">
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../overview-summary.html"><FONT CLASS="NavBarFont1"><B>Overview</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="package-summary.html"><FONT CLASS="NavBarFont1"><B>Package</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#FFFFFF" CLASS="NavBarCell1Rev"> &nbsp;<FONT CLASS="NavBarFont1Rev"><B>Class</B></FONT>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="class-use/CellStyle.html"><FONT CLASS="NavBarFont1"><B>Use</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="package-tree.html"><FONT CLASS="NavBarFont1"><B>Tree</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../deprecated-list.html"><FONT CLASS="NavBarFont1"><B>Deprecated</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../index-all.html"><FONT CLASS="NavBarFont1"><B>Index</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../help-doc.html"><FONT CLASS="NavBarFont1"><B>Help</B></FONT></A>&nbsp;</TD>
+  </TR>
+</TABLE>
+</TD>
+<TD ALIGN="right" VALIGN="top" ROWSPAN=3><EM>
+</EM>
+</TD>
+</TR>
+
+<TR>
+<TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
+&nbsp;<A HREF="../../../../../org/apache/poi/ss/usermodel/CellRange.html" title="interface in org.apache.poi.ss.usermodel"><B>PREV CLASS</B></A>&nbsp;
+&nbsp;<A HREF="../../../../../org/apache/poi/ss/usermodel/CellValue.html" title="class in org.apache.poi.ss.usermodel"><B>NEXT CLASS</B></A></FONT></TD>
+<TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
+  <A HREF="../../../../../index.html?org/apache/poi/ss/usermodel/CellStyle.html" target="_top"><B>FRAMES</B></A>  &nbsp;
+&nbsp;<A HREF="CellStyle.html" target="_top"><B>NO FRAMES</B></A>  &nbsp;
+&nbsp;<SCRIPT type="text/javascript">
+  <!--
+  if(window==top) {
+    document.writeln('<A HREF="../../../../../allclasses-noframe.html"><B>All Classes</B></A>');
+  }
+  //-->
+</SCRIPT>
+<NOSCRIPT>
+  <A HREF="../../../../../allclasses-noframe.html"><B>All Classes</B></A>
+</NOSCRIPT>
+
+
+</FONT></TD>
+</TR>
+<TR>
+<TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
+  SUMMARY:&nbsp;NESTED&nbsp;|&nbsp;<A HREF="#field_summary">FIELD</A>&nbsp;|&nbsp;CONSTR&nbsp;|&nbsp;<A HREF="#method_summary">METHOD</A></FONT></TD>
+<TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
+DETAIL:&nbsp;<A HREF="#field_detail">FIELD</A>&nbsp;|&nbsp;CONSTR&nbsp;|&nbsp;<A HREF="#method_detail">METHOD</A></FONT></TD>
+</TR>
+</TABLE>
+<A NAME="skip-navbar_top"></A>
+<!-- ========= END OF TOP NAVBAR ========= -->
+
+<HR>
+<!-- ======== START OF CLASS DATA ======== -->
+<H2>
+<FONT SIZE="-1">
+org.apache.poi.ss.usermodel</FONT>
+<BR>
+Interface CellStyle</H2>
+<DL>
+<DT><B>All Known Implementing Classes:</B> <DD><A HREF="../../../../../org/apache/poi/hssf/usermodel/HSSFCellStyle.html" title="class in org.apache.poi.hssf.usermodel">HSSFCellStyle</A>, <A HREF="../../../../../org/apache/poi/xssf/usermodel/XSSFCellStyle.html" title="class in org.apache.poi.xssf.usermodel">XSSFCellStyle</A></DD>
+</DL>
+<HR>
+<DL>
+<DT><PRE>public interface <B>CellStyle</B></DL>
+</PRE>
+
+<P>
+<HR>
+
+<P>
+<!-- =========== FIELD SUMMARY =========== -->
+
+<A NAME="field_summary"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+<B>Field Summary</B></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;short</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/ss/usermodel/CellStyle.html#ALIGN_CENTER">ALIGN_CENTER</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;center horizontal alignment</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;short</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/ss/usermodel/CellStyle.html#ALIGN_CENTER_SELECTION">ALIGN_CENTER_SELECTION</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;center-selection? horizontal alignment</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;short</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/ss/usermodel/CellStyle.html#ALIGN_FILL">ALIGN_FILL</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;fill? horizontal alignment</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;short</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/ss/usermodel/CellStyle.html#ALIGN_GENERAL">ALIGN_GENERAL</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;general (normal) horizontal alignment</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;short</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/ss/usermodel/CellStyle.html#ALIGN_JUSTIFY">ALIGN_JUSTIFY</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;justified horizontal alignment</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;short</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/ss/usermodel/CellStyle.html#ALIGN_LEFT">ALIGN_LEFT</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;left-justified horizontal alignment</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;short</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/ss/usermodel/CellStyle.html#ALIGN_RIGHT">ALIGN_RIGHT</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;right-justified horizontal alignment</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;short</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/ss/usermodel/CellStyle.html#ALT_BARS">ALT_BARS</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Wide dots</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;short</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/ss/usermodel/CellStyle.html#BIG_SPOTS">BIG_SPOTS</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Large spots</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;short</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/ss/usermodel/CellStyle.html#BORDER_DASH_DOT">BORDER_DASH_DOT</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;dash-dot border</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;short</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/ss/usermodel/CellStyle.html#BORDER_DASH_DOT_DOT">BORDER_DASH_DOT_DOT</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;dash-dot-dot border</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;short</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/ss/usermodel/CellStyle.html#BORDER_DASHED">BORDER_DASHED</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;dash border</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;short</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/ss/usermodel/CellStyle.html#BORDER_DOTTED">BORDER_DOTTED</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;hair-line border</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;short</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/ss/usermodel/CellStyle.html#BORDER_DOUBLE">BORDER_DOUBLE</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;double-line border</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;short</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/ss/usermodel/CellStyle.html#BORDER_HAIR">BORDER_HAIR</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;dot border</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;short</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/ss/usermodel/CellStyle.html#BORDER_MEDIUM">BORDER_MEDIUM</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Medium border</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;short</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/ss/usermodel/CellStyle.html#BORDER_MEDIUM_DASH_DOT">BORDER_MEDIUM_DASH_DOT</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;medium dash-dot border</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;short</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/ss/usermodel/CellStyle.html#BORDER_MEDIUM_DASH_DOT_DOT">BORDER_MEDIUM_DASH_DOT_DOT</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;medium dash-dot-dot border</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;short</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/ss/usermodel/CellStyle.html#BORDER_MEDIUM_DASHED">BORDER_MEDIUM_DASHED</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Medium dashed border</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;short</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/ss/usermodel/CellStyle.html#BORDER_NONE">BORDER_NONE</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;No border</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;short</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/ss/usermodel/CellStyle.html#BORDER_SLANTED_DASH_DOT">BORDER_SLANTED_DASH_DOT</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;slanted dash-dot border</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;short</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/ss/usermodel/CellStyle.html#BORDER_THICK">BORDER_THICK</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Thick border</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;short</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/ss/usermodel/CellStyle.html#BORDER_THIN">BORDER_THIN</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Thin border</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;short</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/ss/usermodel/CellStyle.html#BRICKS">BRICKS</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Brick-like layout</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;short</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/ss/usermodel/CellStyle.html#DIAMONDS">DIAMONDS</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Diamonds</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;short</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/ss/usermodel/CellStyle.html#FINE_DOTS">FINE_DOTS</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Small fine dots</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;short</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/ss/usermodel/CellStyle.html#LEAST_DOTS">LEAST_DOTS</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Least Dots</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;short</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/ss/usermodel/CellStyle.html#LESS_DOTS">LESS_DOTS</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Less Dots</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;short</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/ss/usermodel/CellStyle.html#NO_FILL">NO_FILL</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;No background</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;short</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/ss/usermodel/CellStyle.html#SOLID_FOREGROUND">SOLID_FOREGROUND</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Solidly filled</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;short</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/ss/usermodel/CellStyle.html#SPARSE_DOTS">SPARSE_DOTS</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sparse dots</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;short</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/ss/usermodel/CellStyle.html#SQUARES">SQUARES</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Squares</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;short</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/ss/usermodel/CellStyle.html#THICK_BACKWARD_DIAG">THICK_BACKWARD_DIAG</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Thick backward facing diagonals</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;short</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/ss/usermodel/CellStyle.html#THICK_FORWARD_DIAG">THICK_FORWARD_DIAG</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Thick forward facing diagonals</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;short</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/ss/usermodel/CellStyle.html#THICK_HORZ_BANDS">THICK_HORZ_BANDS</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Thick horizontal bands</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;short</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/ss/usermodel/CellStyle.html#THICK_VERT_BANDS">THICK_VERT_BANDS</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Thick vertical bands</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;short</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/ss/usermodel/CellStyle.html#THIN_BACKWARD_DIAG">THIN_BACKWARD_DIAG</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Thin backward diagonal</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;short</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/ss/usermodel/CellStyle.html#THIN_FORWARD_DIAG">THIN_FORWARD_DIAG</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Thin forward diagonal</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;short</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/ss/usermodel/CellStyle.html#THIN_HORZ_BANDS">THIN_HORZ_BANDS</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Thin horizontal bands</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;short</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/ss/usermodel/CellStyle.html#THIN_VERT_BANDS">THIN_VERT_BANDS</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Thin vertical bands</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;short</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/ss/usermodel/CellStyle.html#VERTICAL_BOTTOM">VERTICAL_BOTTOM</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;bottom-aligned vertical alignment</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;short</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/ss/usermodel/CellStyle.html#VERTICAL_CENTER">VERTICAL_CENTER</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;center-aligned vertical alignment</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;short</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/ss/usermodel/CellStyle.html#VERTICAL_JUSTIFY">VERTICAL_JUSTIFY</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;vertically justified vertical alignment</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;short</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/ss/usermodel/CellStyle.html#VERTICAL_TOP">VERTICAL_TOP</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;top-aligned vertical alignment</TD>
+</TR>
+</TABLE>
+&nbsp;
+<!-- ========== METHOD SUMMARY =========== -->
+
+<A NAME="method_summary"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+<B>Method Summary</B></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/ss/usermodel/CellStyle.html#cloneStyleFrom(org.apache.poi.ss.usermodel.CellStyle)">cloneStyleFrom</A></B>(<A HREF="../../../../../org/apache/poi/ss/usermodel/CellStyle.html" title="interface in org.apache.poi.ss.usermodel">CellStyle</A>&nbsp;source)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Clones all the style information from another
+  CellStyle, onto this one.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;short</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/ss/usermodel/CellStyle.html#getAlignment()">getAlignment</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;get the type of horizontal alignment for the cell</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;short</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/ss/usermodel/CellStyle.html#getBorderBottom()">getBorderBottom</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;get the type of border to use for the bottom border of the cell</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;short</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/ss/usermodel/CellStyle.html#getBorderLeft()">getBorderLeft</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;get the type of border to use for the left border of the cell</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;short</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/ss/usermodel/CellStyle.html#getBorderRight()">getBorderRight</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;get the type of border to use for the right border of the cell</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;short</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/ss/usermodel/CellStyle.html#getBorderTop()">getBorderTop</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;get the type of border to use for the top border of the cell</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;short</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/ss/usermodel/CellStyle.html#getBottomBorderColor()">getBottomBorderColor</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;get the color to use for the left border</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;short</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/ss/usermodel/CellStyle.html#getDataFormat()">getDataFormat</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;get the index of the format</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;java.lang.String</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/ss/usermodel/CellStyle.html#getDataFormatString()">getDataFormatString</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Get the format string</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;short</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/ss/usermodel/CellStyle.html#getFillBackgroundColor()">getFillBackgroundColor</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;get the background fill color, if the fill
+  is defined with an indexed color.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../../../org/apache/poi/ss/usermodel/Color.html" title="interface in org.apache.poi.ss.usermodel">Color</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/ss/usermodel/CellStyle.html#getFillBackgroundColorColor()">getFillBackgroundColorColor</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gets the color object representing the current
+  background fill, resolving indexes using
+  the supplied workbook.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;short</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/ss/usermodel/CellStyle.html#getFillForegroundColor()">getFillForegroundColor</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;get the foreground fill color, if the fill  
+  is defined with an indexed color.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../../../org/apache/poi/ss/usermodel/Color.html" title="interface in org.apache.poi.ss.usermodel">Color</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/ss/usermodel/CellStyle.html#getFillForegroundColorColor()">getFillForegroundColorColor</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gets the color object representing the current
+  foreground fill, resolving indexes using
+  the supplied workbook.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;short</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/ss/usermodel/CellStyle.html#getFillPattern()">getFillPattern</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;get the fill pattern (??) - set to 1 to fill with foreground color</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;short</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/ss/usermodel/CellStyle.html#getFontIndex()">getFontIndex</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;gets the index of the font for this style</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/ss/usermodel/CellStyle.html#getHidden()">getHidden</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;get whether the cell's using this style are to be hidden</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;short</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/ss/usermodel/CellStyle.html#getIndention()">getIndention</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;get the number of spaces to indent the text in the cell</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;short</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/ss/usermodel/CellStyle.html#getIndex()">getIndex</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;get the index within the Workbook (sequence within the collection of ExtnededFormat objects)</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;short</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/ss/usermodel/CellStyle.html#getLeftBorderColor()">getLeftBorderColor</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;get the color to use for the left border</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/ss/usermodel/CellStyle.html#getLocked()">getLocked</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;get whether the cell's using this style are to be locked</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;short</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/ss/usermodel/CellStyle.html#getRightBorderColor()">getRightBorderColor</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;get the color to use for the left border</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;short</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/ss/usermodel/CellStyle.html#getRotation()">getRotation</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;get the degree of rotation for the text in the cell</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/ss/usermodel/CellStyle.html#getShrinkToFit()">getShrinkToFit</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Should the Cell be auto-sized by Excel to shrink
+  it to fit if this text is too long?</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;short</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/ss/usermodel/CellStyle.html#getTopBorderColor()">getTopBorderColor</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;get the color to use for the top border</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;short</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/ss/usermodel/CellStyle.html#getVerticalAlignment()">getVerticalAlignment</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;get the type of vertical alignment for the cell</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/ss/usermodel/CellStyle.html#getWrapText()">getWrapText</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;get whether the text should be wrapped</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/ss/usermodel/CellStyle.html#setAlignment(short)">setAlignment</A></B>(short&nbsp;align)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;set the type of horizontal alignment for the cell</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/ss/usermodel/CellStyle.html#setBorderBottom(short)">setBorderBottom</A></B>(short&nbsp;border)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;set the type of border to use for the bottom border of the cell</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/ss/usermodel/CellStyle.html#setBorderLeft(short)">setBorderLeft</A></B>(short&nbsp;border)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;set the type of border to use for the left border of the cell</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/ss/usermodel/CellStyle.html#setBorderRight(short)">setBorderRight</A></B>(short&nbsp;border)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;set the type of border to use for the right border of the cell</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/ss/usermodel/CellStyle.html#setBorderTop(short)">setBorderTop</A></B>(short&nbsp;border)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;set the type of border to use for the top border of the cell</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/ss/usermodel/CellStyle.html#setBottomBorderColor(short)">setBottomBorderColor</A></B>(short&nbsp;color)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;set the color to use for the bottom border</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/ss/usermodel/CellStyle.html#setDataFormat(short)">setDataFormat</A></B>(short&nbsp;fmt)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;set the data format (must be a valid format)</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/ss/usermodel/CellStyle.html#setFillBackgroundColor(short)">setFillBackgroundColor</A></B>(short&nbsp;bg)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;set the background fill color.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/ss/usermodel/CellStyle.html#setFillForegroundColor(short)">setFillForegroundColor</A></B>(short&nbsp;bg)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;set the foreground fill color
+ <i>Note: Ensure Foreground color is set prior to background color.</i></TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/ss/usermodel/CellStyle.html#setFillPattern(short)">setFillPattern</A></B>(short&nbsp;fp)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;setting to one fills the cell with the foreground color...</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/ss/usermodel/CellStyle.html#setFont(org.apache.poi.ss.usermodel.Font)">setFont</A></B>(<A HREF="../../../../../org/apache/poi/ss/usermodel/Font.html" title="interface in org.apache.poi.ss.usermodel">Font</A>&nbsp;font)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;set the font for this style</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/ss/usermodel/CellStyle.html#setHidden(boolean)">setHidden</A></B>(boolean&nbsp;hidden)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;set the cell's using this style to be hidden</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/ss/usermodel/CellStyle.html#setIndention(short)">setIndention</A></B>(short&nbsp;indent)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;set the number of spaces to indent the text in the cell</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/ss/usermodel/CellStyle.html#setLeftBorderColor(short)">setLeftBorderColor</A></B>(short&nbsp;color)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;set the color to use for the left border</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/ss/usermodel/CellStyle.html#setLocked(boolean)">setLocked</A></B>(boolean&nbsp;locked)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;set the cell's using this style to be locked</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/ss/usermodel/CellStyle.html#setRightBorderColor(short)">setRightBorderColor</A></B>(short&nbsp;color)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;set the color to use for the right border</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/ss/usermodel/CellStyle.html#setRotation(short)">setRotation</A></B>(short&nbsp;rotation)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;set the degree of rotation for the text in the cell</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/ss/usermodel/CellStyle.html#setShrinkToFit(boolean)">setShrinkToFit</A></B>(boolean&nbsp;shrinkToFit)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Controls if the Cell should be auto-sized
+  to shrink to fit if the text is too long</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/ss/usermodel/CellStyle.html#setTopBorderColor(short)">setTopBorderColor</A></B>(short&nbsp;color)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;set the color to use for the top border</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/ss/usermodel/CellStyle.html#setVerticalAlignment(short)">setVerticalAlignment</A></B>(short&nbsp;align)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;set the type of vertical alignment for the cell</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/ss/usermodel/CellStyle.html#setWrapText(boolean)">setWrapText</A></B>(boolean&nbsp;wrapped)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Set whether the text should be wrapped.</TD>
+</TR>
+</TABLE>
+&nbsp;
+<P>
+
+<!-- ============ FIELD DETAIL =========== -->
+
+<A NAME="field_detail"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="1"><FONT SIZE="+2">
+<B>Field Detail</B></FONT></TH>
+</TR>
+</TABLE>
+
+<A NAME="ALIGN_GENERAL"><!-- --></A><H3>
+ALIGN_GENERAL</H3>
+<PRE>
+static final short <B>ALIGN_GENERAL</B></PRE>
+<DL>
+<DD>general (normal) horizontal alignment
+<P>
+<DL>
+<DT><B>See Also:</B><DD><A HREF="../../../../../constant-values.html#org.apache.poi.ss.usermodel.CellStyle.ALIGN_GENERAL">Constant Field Values</A></DL>
+</DL>
+<HR>
+
+<A NAME="ALIGN_LEFT"><!-- --></A><H3>
+ALIGN_LEFT</H3>
+<PRE>
+static final short <B>ALIGN_LEFT</B></PRE>
+<DL>
+<DD>left-justified horizontal alignment
+<P>
+<DL>
+<DT><B>See Also:</B><DD><A HREF="../../../../../constant-values.html#org.apache.poi.ss.usermodel.CellStyle.ALIGN_LEFT">Constant Field Values</A></DL>
+</DL>
+<HR>
+
+<A NAME="ALIGN_CENTER"><!-- --></A><H3>
+ALIGN_CENTER</H3>
+<PRE>
+static final short <B>ALIGN_CENTER</B></PRE>
+<DL>
+<DD>center horizontal alignment
+<P>
+<DL>
+<DT><B>See Also:</B><DD><A HREF="../../../../../constant-values.html#org.apache.poi.ss.usermodel.CellStyle.ALIGN_CENTER">Constant Field Values</A></DL>
+</DL>
+<HR>
+
+<A NAME="ALIGN_RIGHT"><!-- --></A><H3>
+ALIGN_RIGHT</H3>
+<PRE>
+static final short <B>ALIGN_RIGHT</B></PRE>
+<DL>
+<DD>right-justified horizontal alignment
+<P>
+<DL>
+<DT><B>See Also:</B><DD><A HREF="../../../../../constant-values.html#org.apache.poi.ss.usermodel.CellStyle.ALIGN_RIGHT">Constant Field Values</A></DL>
+</DL>
+<HR>
+
+<A NAME="ALIGN_FILL"><!-- --></A><H3>
+ALIGN_FILL</H3>
+<PRE>
+static final short <B>ALIGN_FILL</B></PRE>
+<DL>
+<DD>fill? horizontal alignment
+<P>
+<DL>
+<DT><B>See Also:</B><DD><A HREF="../../../../../constant-values.html#org.apache.poi.ss.usermodel.CellStyle.ALIGN_FILL">Constant Field Values</A></DL>
+</DL>
+<HR>
+
+<A NAME="ALIGN_JUSTIFY"><!-- --></A><H3>
+ALIGN_JUSTIFY</H3>
+<PRE>
+static final short <B>ALIGN_JUSTIFY</B></PRE>
+<DL>
+<DD>justified horizontal alignment
+<P>
+<DL>
+<DT><B>See Also:</B><DD><A HREF="../../../../../constant-values.html#org.apache.poi.ss.usermodel.CellStyle.ALIGN_JUSTIFY">Constant Field Values</A></DL>
+</DL>
+<HR>
+
+<A NAME="ALIGN_CENTER_SELECTION"><!-- --></A><H3>
+ALIGN_CENTER_SELECTION</H3>
+<PRE>
+static final short <B>ALIGN_CENTER_SELECTION</B></PRE>
+<DL>
+<DD>center-selection? horizontal alignment
+<P>
+<DL>
+<DT><B>See Also:</B><DD><A HREF="../../../../../constant-values.html#org.apache.poi.ss.usermodel.CellStyle.ALIGN_CENTER_SELECTION">Constant Field Values</A></DL>
+</DL>
+<HR>
+
+<A NAME="VERTICAL_TOP"><!-- --></A><H3>
+VERTICAL_TOP</H3>
+<PRE>
+static final short <B>VERTICAL_TOP</B></PRE>
+<DL>
+<DD>top-aligned vertical alignment
+<P>
+<DL>
+<DT><B>See Also:</B><DD><A HREF="../../../../../constant-values.html#org.apache.poi.ss.usermodel.CellStyle.VERTICAL_TOP">Constant Field Values</A></DL>
+</DL>
+<HR>
+
+<A NAME="VERTICAL_CENTER"><!-- --></A><H3>
+VERTICAL_CENTER</H3>
+<PRE>
+static final short <B>VERTICAL_CENTER</B></PRE>
+<DL>
+<DD>center-aligned vertical alignment
+<P>
+<DL>
+<DT><B>See Also:</B><DD><A HREF="../../../../../constant-values.html#org.apache.poi.ss.usermodel.CellStyle.VERTICAL_CENTER">Constant Field Values</A></DL>
+</DL>
+<HR>
+
+<A NAME="VERTICAL_BOTTOM"><!-- --></A><H3>
+VERTICAL_BOTTOM</H3>
+<PRE>
+static final short <B>VERTICAL_BOTTOM</B></PRE>
+<DL>
+<DD>bottom-aligned vertical alignment
+<P>
+<DL>
+<DT><B>See Also:</B><DD><A HREF="../../../../../constant-values.html#org.apache.poi.ss.usermodel.CellStyle.VERTICAL_BOTTOM">Constant Field Values</A></DL>
+</DL>
+<HR>
+
+<A NAME="VERTICAL_JUSTIFY"><!-- --></A><H3>
+VERTICAL_JUSTIFY</H3>
+<PRE>
+static final short <B>VERTICAL_JUSTIFY</B></PRE>
+<DL>
+<DD>vertically justified vertical alignment
+<P>
+<DL>
+<DT><B>See Also:</B><DD><A HREF="../../../../../constant-values.html#org.apache.poi.ss.usermodel.CellStyle.VERTICAL_JUSTIFY">Constant Field Values</A></DL>
+</DL>
+<HR>
+
+<A NAME="BORDER_NONE"><!-- --></A><H3>
+BORDER_NONE</H3>
+<PRE>
+static final short <B>BORDER_NONE</B></PRE>
+<DL>
+<DD>No border
+<P>
+<DL>
+<DT><B>See Also:</B><DD><A HREF="../../../../../constant-values.html#org.apache.poi.ss.usermodel.CellStyle.BORDER_NONE">Constant Field Values</A></DL>
+</DL>
+<HR>
+
+<A NAME="BORDER_THIN"><!-- --></A><H3>
+BORDER_THIN</H3>
+<PRE>
+static final short <B>BORDER_THIN</B></PRE>
+<DL>
+<DD>Thin border
+<P>
+<DL>
+<DT><B>See Also:</B><DD><A HREF="../../../../../constant-values.html#org.apache.poi.ss.usermodel.CellStyle.BORDER_THIN">Constant Field Values</A></DL>
+</DL>
+<HR>
+
+<A NAME="BORDER_MEDIUM"><!-- --></A><H3>
+BORDER_MEDIUM</H3>
+<PRE>
+static final short <B>BORDER_MEDIUM</B></PRE>
+<DL>
+<DD>Medium border
+<P>
+<DL>
+<DT><B>See Also:</B><DD><A HREF="../../../../../constant-values.html#org.apache.poi.ss.usermodel.CellStyle.BORDER_MEDIUM">Constant Field Values</A></DL>
+</DL>
+<HR>
+
+<A NAME="BORDER_DASHED"><!-- --></A><H3>
+BORDER_DASHED</H3>
+<PRE>
+static final short <B>BORDER_DASHED</B></PRE>
+<DL>
+<DD>dash border
+<P>
+<DL>
+<DT><B>See Also:</B><DD><A HREF="../../../../../constant-values.html#org.apache.poi.ss.usermodel.CellStyle.BORDER_DASHED">Constant Field Values</A></DL>
+</DL>
+<HR>
+
+<A NAME="BORDER_HAIR"><!-- --></A><H3>
+BORDER_HAIR</H3>
+<PRE>
+static final short <B>BORDER_HAIR</B></PRE>
+<DL>
+<DD>dot border
+<P>
+<DL>
+<DT><B>See Also:</B><DD><A HREF="../../../../../constant-values.html#org.apache.poi.ss.usermodel.CellStyle.BORDER_HAIR">Constant Field Values</A></DL>
+</DL>
+<HR>
+
+<A NAME="BORDER_THICK"><!-- --></A><H3>
+BORDER_THICK</H3>
+<PRE>
+static final short <B>BORDER_THICK</B></PRE>
+<DL>
+<DD>Thick border
+<P>
+<DL>
+<DT><B>See Also:</B><DD><A HREF="../../../../../constant-values.html#org.apache.poi.ss.usermodel.CellStyle.BORDER_THICK">Constant Field Values</A></DL>
+</DL>
+<HR>
+
+<A NAME="BORDER_DOUBLE"><!-- --></A><H3>
+BORDER_DOUBLE</H3>
+<PRE>
+static final short <B>BORDER_DOUBLE</B></PRE>
+<DL>
+<DD>double-line border
+<P>
+<DL>
+<DT><B>See Also:</B><DD><A HREF="../../../../../constant-values.html#org.apache.poi.ss.usermodel.CellStyle.BORDER_DOUBLE">Constant Field Values</A></DL>
+</DL>
+<HR>
+
+<A NAME="BORDER_DOTTED"><!-- --></A><H3>
+BORDER_DOTTED</H3>
+<PRE>
+static final short <B>BORDER_DOTTED</B></PRE>
+<DL>
+<DD>hair-line border
+<P>
+<DL>
+<DT><B>See Also:</B><DD><A HREF="../../../../../constant-values.html#org.apache.poi.ss.usermodel.CellStyle.BORDER_DOTTED">Constant Field Values</A></DL>
+</DL>
+<HR>
+
+<A NAME="BORDER_MEDIUM_DASHED"><!-- --></A><H3>
+BORDER_MEDIUM_DASHED</H3>
+<PRE>
+static final short <B>BORDER_MEDIUM_DASHED</B></PRE>
+<DL>
+<DD>Medium dashed border
+<P>
+<DL>
+<DT><B>See Also:</B><DD><A HREF="../../../../../constant-values.html#org.apache.poi.ss.usermodel.CellStyle.BORDER_MEDIUM_DASHED">Constant Field Values</A></DL>
+</DL>
+<HR>
+
+<A NAME="BORDER_DASH_DOT"><!-- --></A><H3>
+BORDER_DASH_DOT</H3>
+<PRE>
+static final short <B>BORDER_DASH_DOT</B></PRE>
+<DL>
+<DD>dash-dot border
+<P>
+<DL>
+<DT><B>See Also:</B><DD><A HREF="../../../../../constant-values.html#org.apache.poi.ss.usermodel.CellStyle.BORDER_DASH_DOT">Constant Field Values</A></DL>
+</DL>
+<HR>
+
+<A NAME="BORDER_MEDIUM_DASH_DOT"><!-- --></A><H3>
+BORDER_MEDIUM_DASH_DOT</H3>
+<PRE>
+static final short <B>BORDER_MEDIUM_DASH_DOT</B></PRE>
+<DL>
+<DD>medium dash-dot border
+<P>
+<DL>
+<DT><B>See Also:</B><DD><A HREF="../../../../../constant-values.html#org.apache.poi.ss.usermodel.CellStyle.BORDER_MEDIUM_DASH_DOT">Constant Field Values</A></DL>
+</DL>
+<HR>
+
+<A NAME="BORDER_DASH_DOT_DOT"><!-- --></A><H3>
+BORDER_DASH_DOT_DOT</H3>
+<PRE>
+static final short <B>BORDER_DASH_DOT_DOT</B></PRE>
+<DL>
+<DD>dash-dot-dot border
+<P>
+<DL>
+<DT><B>See Also:</B><DD><A HREF="../../../../../constant-values.html#org.apache.poi.ss.usermodel.CellStyle.BORDER_DASH_DOT_DOT">Constant Field Values</A></DL>
+</DL>
+<HR>
+
+<A NAME="BORDER_MEDIUM_DASH_DOT_DOT"><!-- --></A><H3>
+BORDER_MEDIUM_DASH_DOT_DOT</H3>
+<PRE>
+static final short <B>BORDER_MEDIUM_DASH_DOT_DOT</B></PRE>
+<DL>
+<DD>medium dash-dot-dot border
+<P>
+<DL>
+<DT><B>See Also:</B><DD><A HREF="../../../../../constant-values.html#org.apache.poi.ss.usermodel.CellStyle.BORDER_MEDIUM_DASH_DOT_DOT">Constant Field Values</A></DL>
+</DL>
+<HR>
+
+<A NAME="BORDER_SLANTED_DASH_DOT"><!-- --></A><H3>
+BORDER_SLANTED_DASH_DOT</H3>
+<PRE>
+static final short <B>BORDER_SLANTED_DASH_DOT</B></PRE>
+<DL>
+<DD>slanted dash-dot border
+<P>
+<DL>
+<DT><B>See Also:</B><DD><A HREF="../../../../../constant-values.html#org.apache.poi.ss.usermodel.CellStyle.BORDER_SLANTED_DASH_DOT">Constant Field Values</A></DL>
+</DL>
+<HR>
+
+<A NAME="NO_FILL"><!-- --></A><H3>
+NO_FILL</H3>
+<PRE>
+static final short <B>NO_FILL</B></PRE>
+<DL>
+<DD>No background
+<P>
+<DL>
+<DT><B>See Also:</B><DD><A HREF="../../../../../constant-values.html#org.apache.poi.ss.usermodel.CellStyle.NO_FILL">Constant Field Values</A></DL>
+</DL>
+<HR>
+
+<A NAME="SOLID_FOREGROUND"><!-- --></A><H3>
+SOLID_FOREGROUND</H3>
+<PRE>
+static final short <B>SOLID_FOREGROUND</B></PRE>
+<DL>
+<DD>Solidly filled
+<P>
+<DL>
+<DT><B>See Also:</B><DD><A HREF="../../../../../constant-values.html#org.apache.poi.ss.usermodel.CellStyle.SOLID_FOREGROUND">Constant Field Values</A></DL>
+</DL>
+<HR>
+
+<A NAME="FINE_DOTS"><!-- --></A><H3>
+FINE_DOTS</H3>
+<PRE>
+static final short <B>FINE_DOTS</B></PRE>
+<DL>
+<DD>Small fine dots
+<P>
+<DL>
+<DT><B>See Also:</B><DD><A HREF="../../../../../constant-values.html#org.apache.poi.ss.usermodel.CellStyle.FINE_DOTS">Constant Field Values</A></DL>
+</DL>
+<HR>
+
+<A NAME="ALT_BARS"><!-- --></A><H3>
+ALT_BARS</H3>
+<PRE>
+static final short <B>ALT_BARS</B></PRE>
+<DL>
+<DD>Wide dots
+<P>
+<DL>
+<DT><B>See Also:</B><DD><A HREF="../../../../../constant-values.html#org.apache.poi.ss.usermodel.CellStyle.ALT_BARS">Constant Field Values</A></DL>
+</DL>
+<HR>
+
+<A NAME="SPARSE_DOTS"><!-- --></A><H3>
+SPARSE_DOTS</H3>
+<PRE>
+static final short <B>SPARSE_DOTS</B></PRE>
+<DL>
+<DD>Sparse dots
+<P>
+<DL>
+<DT><B>See Also:</B><DD><A HREF="../../../../../constant-values.html#org.apache.poi.ss.usermodel.CellStyle.SPARSE_DOTS">Constant Field Values</A></DL>
+</DL>
+<HR>
+
+<A NAME="THICK_HORZ_BANDS"><!-- --></A><H3>
+THICK_HORZ_BANDS</H3>
+<PRE>
+static final short <B>THICK_HORZ_BANDS</B></PRE>
+<DL>
+<DD>Thick horizontal bands
+<P>
+<DL>
+<DT><B>See Also:</B><DD><A HREF="../../../../../constant-values.html#org.apache.poi.ss.usermodel.CellStyle.THICK_HORZ_BANDS">Constant Field Values</A></DL>
+</DL>
+<HR>
+
+<A NAME="THICK_VERT_BANDS"><!-- --></A><H3>
+THICK_VERT_BANDS</H3>
+<PRE>
+static final short <B>THICK_VERT_BANDS</B></PRE>
+<DL>
+<DD>Thick vertical bands
+<P>
+<DL>
+<DT><B>See Also:</B><DD><A HREF="../../../../../constant-values.html#org.apache.poi.ss.usermodel.CellStyle.THICK_VERT_BANDS">Constant Field Values</A></DL>
+</DL>
+<HR>
+
+<A NAME="THICK_BACKWARD_DIAG"><!-- --></A><H3>
+THICK_BACKWARD_DIAG</H3>
+<PRE>
+static final short <B>THICK_BACKWARD_DIAG</B></PRE>
+<DL>
+<DD>Thick backward facing diagonals
+<P>
+<DL>
+<DT><B>See Also:</B><DD><A HREF="../../../../../constant-values.html#org.apache.poi.ss.usermodel.CellStyle.THICK_BACKWARD_DIAG">Constant Field Values</A></DL>
+</DL>
+<HR>
+
+<A NAME="THICK_FORWARD_DIAG"><!-- --></A><H3>
+THICK_FORWARD_DIAG</H3>
+<PRE>
+static final short <B>THICK_FORWARD_DIAG</B></PRE>
+<DL>
+<DD>Thick forward facing diagonals
+<P>
+<DL>
+<DT><B>See Also:</B><DD><A HREF="../../../../../constant-values.html#org.apache.poi.ss.usermodel.CellStyle.THICK_FORWARD_DIAG">Constant Field Values</A></DL>
+</DL>
+<HR>
+
+<A NAME="BIG_SPOTS"><!-- --></A><H3>
+BIG_SPOTS</H3>
+<PRE>
+static final short <B>BIG_SPOTS</B></PRE>
+<DL>
+<DD>Large spots
+<P>
+<DL>
+<DT><B>See Also:</B><DD><A HREF="../../../../../constant-values.html#org.apache.poi.ss.usermodel.CellStyle.BIG_SPOTS">Constant Field Values</A></DL>
+</DL>
+<HR>
+
+<A NAME="BRICKS"><!-- --></A><H3>
+BRICKS</H3>
+<PRE>
+static final short <B>BRICKS</B></PRE>
+<DL>
+<DD>Brick-like layout
+<P>
+<DL>
+<DT><B>See Also:</B><DD><A HREF="../../../../../constant-values.html#org.apache.poi.ss.usermodel.CellStyle.BRICKS">Constant Field Values</A></DL>
+</DL>
+<HR>
+
+<A NAME="THIN_HORZ_BANDS"><!-- --></A><H3>
+THIN_HORZ_BANDS</H3>
+<PRE>
+static final short <B>THIN_HORZ_BANDS</B></PRE>
+<DL>
+<DD>Thin horizontal bands
+<P>
+<DL>
+<DT><B>See Also:</B><DD><A HREF="../../../../../constant-values.html#org.apache.poi.ss.usermodel.CellStyle.THIN_HORZ_BANDS">Constant Field Values</A></DL>
+</DL>
+<HR>
+
+<A NAME="THIN_VERT_BANDS"><!-- --></A><H3>
+THIN_VERT_BANDS</H3>
+<PRE>
+static final short <B>THIN_VERT_BANDS</B></PRE>
+<DL>
+<DD>Thin vertical bands
+<P>
+<DL>
+<DT><B>See Also:</B><DD><A HREF="../../../../../constant-values.html#org.apache.poi.ss.usermodel.CellStyle.THIN_VERT_BANDS">Constant Field Values</A></DL>
+</DL>
+<HR>
+
+<A NAME="THIN_BACKWARD_DIAG"><!-- --></A><H3>
+THIN_BACKWARD_DIAG</H3>
+<PRE>
+static final short <B>THIN_BACKWARD_DIAG</B></PRE>
+<DL>
+<DD>Thin backward diagonal
+<P>
+<DL>
+<DT><B>See Also:</B><DD><A HREF="../../../../../constant-values.html#org.apache.poi.ss.usermodel.CellStyle.THIN_BACKWARD_DIAG">Constant Field Values</A></DL>
+</DL>
+<HR>
+
+<A NAME="THIN_FORWARD_DIAG"><!-- --></A><H3>
+THIN_FORWARD_DIAG</H3>
+<PRE>
+static final short <B>THIN_FORWARD_DIAG</B></PRE>
+<DL>
+<DD>Thin forward diagonal
+<P>
+<DL>
+<DT><B>See Also:</B><DD><A HREF="../../../../../constant-values.html#org.apache.poi.ss.usermodel.CellStyle.THIN_FORWARD_DIAG">Constant Field Values</A></DL>
+</DL>
+<HR>
+
+<A NAME="SQUARES"><!-- --></A><H3>
+SQUARES</H3>
+<PRE>
+static final short <B>SQUARES</B></PRE>
+<DL>
+<DD>Squares
+<P>
+<DL>
+<DT><B>See Also:</B><DD><A HREF="../../../../../constant-values.html#org.apache.poi.ss.usermodel.CellStyle.SQUARES">Constant Field Values</A></DL>
+</DL>
+<HR>
+
+<A NAME="DIAMONDS"><!-- --></A><H3>
+DIAMONDS</H3>
+<PRE>
+static final short <B>DIAMONDS</B></PRE>
+<DL>
+<DD>Diamonds
+<P>
+<DL>
+<DT><B>See Also:</B><DD><A HREF="../../../../../constant-values.html#org.apache.poi.ss.usermodel.CellStyle.DIAMONDS">Constant Field Values</A></DL>
+</DL>
+<HR>
+
+<A NAME="LESS_DOTS"><!-- --></A><H3>
+LESS_DOTS</H3>
+<PRE>
+static final short <B>LESS_DOTS</B></PRE>
+<DL>
+<DD>Less Dots
+<P>
+<DL>
+<DT><B>See Also:</B><DD><A HREF="../../../../../constant-values.html#org.apache.poi.ss.usermodel.CellStyle.LESS_DOTS">Constant Field Values</A></DL>
+</DL>
+<HR>
+
+<A NAME="LEAST_DOTS"><!-- --></A><H3>
+LEAST_DOTS</H3>
+<PRE>
+static final short <B>LEAST_DOTS</B></PRE>
+<DL>
+<DD>Least Dots
+<P>
+<DL>
+<DT><B>See Also:</B><DD><A HREF="../../../../../constant-values.html#org.apache.poi.ss.usermodel.CellStyle.LEAST_DOTS">Constant Field Values</A></DL>
+</DL>
+
+<!-- ============ METHOD DETAIL ========== -->
+
+<A NAME="method_detail"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="1"><FONT SIZE="+2">
+<B>Method Detail</B></FONT></TH>
+</TR>
+</TABLE>
+
+<A NAME="getIndex()"><!-- --></A><H3>
+getIndex</H3>
+<PRE>
+short <B>getIndex</B>()</PRE>
+<DL>
+<DD>get the index within the Workbook (sequence within the collection of ExtnededFormat objects)
+<P>
+<DD><DL>
+
+<DT><B>Returns:</B><DD>unique index number of the underlying record this style represents (probably you don't care
+  unless you're comparing which one is which)</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setDataFormat(short)"><!-- --></A><H3>
+setDataFormat</H3>
+<PRE>
+void <B>setDataFormat</B>(short&nbsp;fmt)</PRE>
+<DL>
+<DD>set the data format (must be a valid format)
+<P>
+<DD><DL>
+<DT><B>See Also:</B><DD><A HREF="../../../../../org/apache/poi/ss/usermodel/DataFormat.html" title="interface in org.apache.poi.ss.usermodel"><CODE>DataFormat</CODE></A></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getDataFormat()"><!-- --></A><H3>
+getDataFormat</H3>
+<PRE>
+short <B>getDataFormat</B>()</PRE>
+<DL>
+<DD>get the index of the format
+<P>
+<DD><DL>
+<DT><B>See Also:</B><DD><A HREF="../../../../../org/apache/poi/ss/usermodel/DataFormat.html" title="interface in org.apache.poi.ss.usermodel"><CODE>DataFormat</CODE></A></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getDataFormatString()"><!-- --></A><H3>
+getDataFormatString</H3>
+<PRE>
+java.lang.String <B>getDataFormatString</B>()</PRE>
+<DL>
+<DD>Get the format string
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setFont(org.apache.poi.ss.usermodel.Font)"><!-- --></A><H3>
+setFont</H3>
+<PRE>
+void <B>setFont</B>(<A HREF="../../../../../org/apache/poi/ss/usermodel/Font.html" title="interface in org.apache.poi.ss.usermodel">Font</A>&nbsp;font)</PRE>
+<DL>
+<DD>set the font for this style
+<P>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>font</CODE> - a font object created or retreived from the Workbook object<DT><B>See Also:</B><DD><A HREF="../../../../../org/apache/poi/ss/usermodel/Workbook.html#createFont()"><CODE>Workbook.createFont()</CODE></A>, 
+<A HREF="../../../../../org/apache/poi/ss/usermodel/Workbook.html#getFontAt(short)"><CODE>Workbook.getFontAt(short)</CODE></A></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getFontIndex()"><!-- --></A><H3>
+getFontIndex</H3>
+<PRE>
+short <B>getFontIndex</B>()</PRE>
+<DL>
+<DD>gets the index of the font for this style
+<P>
+<DD><DL>
+<DT><B>See Also:</B><DD><A HREF="../../../../../org/apache/poi/ss/usermodel/Workbook.html#getFontAt(short)"><CODE>Workbook.getFontAt(short)</CODE></A></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setHidden(boolean)"><!-- --></A><H3>
+setHidden</H3>
+<PRE>
+void <B>setHidden</B>(boolean&nbsp;hidden)</PRE>
+<DL>
+<DD>set the cell's using this style to be hidden
+<P>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>hidden</CODE> - - whether the cell using this style should be hidden</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getHidden()"><!-- --></A><H3>
+getHidden</H3>
+<PRE>
+boolean <B>getHidden</B>()</PRE>
+<DL>
+<DD>get whether the cell's using this style are to be hidden
+<P>
+<DD><DL>
+
+<DT><B>Returns:</B><DD>hidden - whether the cell using this style should be hidden</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setLocked(boolean)"><!-- --></A><H3>
+setLocked</H3>
+<PRE>
+void <B>setLocked</B>(boolean&nbsp;locked)</PRE>
+<DL>
+<DD>set the cell's using this style to be locked
+<P>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>locked</CODE> - - whether the cell using this style should be locked</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getLocked()"><!-- --></A><H3>
+getLocked</H3>
+<PRE>
+boolean <B>getLocked</B>()</PRE>
+<DL>
+<DD>get whether the cell's using this style are to be locked
+<P>
+<DD><DL>
+
+<DT><B>Returns:</B><DD>hidden - whether the cell using this style should be locked</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setAlignment(short)"><!-- --></A><H3>
+setAlignment</H3>
+<PRE>
+void <B>setAlignment</B>(short&nbsp;align)</PRE>
+<DL>
+<DD>set the type of horizontal alignment for the cell
+<P>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>align</CODE> - - the type of alignment<DT><B>See Also:</B><DD><A HREF="../../../../../org/apache/poi/ss/usermodel/CellStyle.html#ALIGN_GENERAL"><CODE>ALIGN_GENERAL</CODE></A>, 
+<A HREF="../../../../../org/apache/poi/ss/usermodel/CellStyle.html#ALIGN_LEFT"><CODE>ALIGN_LEFT</CODE></A>, 
+<A HREF="../../../../../org/apache/poi/ss/usermodel/CellStyle.html#ALIGN_CENTER"><CODE>ALIGN_CENTER</CODE></A>, 
+<A HREF="../../../../../org/apache/poi/ss/usermodel/CellStyle.html#ALIGN_RIGHT"><CODE>ALIGN_RIGHT</CODE></A>, 
+<A HREF="../../../../../org/apache/poi/ss/usermodel/CellStyle.html#ALIGN_FILL"><CODE>ALIGN_FILL</CODE></A>, 
+<A HREF="../../../../../org/apache/poi/ss/usermodel/CellStyle.html#ALIGN_JUSTIFY"><CODE>ALIGN_JUSTIFY</CODE></A>, 
+<A HREF="../../../../../org/apache/poi/ss/usermodel/CellStyle.html#ALIGN_CENTER_SELECTION"><CODE>ALIGN_CENTER_SELECTION</CODE></A></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getAlignment()"><!-- --></A><H3>
+getAlignment</H3>
+<PRE>
+short <B>getAlignment</B>()</PRE>
+<DL>
+<DD>get the type of horizontal alignment for the cell
+<P>
+<DD><DL>
+
+<DT><B>Returns:</B><DD>align - the type of alignment<DT><B>See Also:</B><DD><A HREF="../../../../../org/apache/poi/ss/usermodel/CellStyle.html#ALIGN_GENERAL"><CODE>ALIGN_GENERAL</CODE></A>, 
+<A HREF="../../../../../org/apache/poi/ss/usermodel/CellStyle.html#ALIGN_LEFT"><CODE>ALIGN_LEFT</CODE></A>, 
+<A HREF="../../../../../org/apache/poi/ss/usermodel/CellStyle.html#ALIGN_CENTER"><CODE>ALIGN_CENTER</CODE></A>, 
+<A HREF="../../../../../org/apache/poi/ss/usermodel/CellStyle.html#ALIGN_RIGHT"><CODE>ALIGN_RIGHT</CODE></A>, 
+<A HREF="../../../../../org/apache/poi/ss/usermodel/CellStyle.html#ALIGN_FILL"><CODE>ALIGN_FILL</CODE></A>, 
+<A HREF="../../../../../org/apache/poi/ss/usermodel/CellStyle.html#ALIGN_JUSTIFY"><CODE>ALIGN_JUSTIFY</CODE></A>, 
+<A HREF="../../../../../org/apache/poi/ss/usermodel/CellStyle.html#ALIGN_CENTER_SELECTION"><CODE>ALIGN_CENTER_SELECTION</CODE></A></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setWrapText(boolean)"><!-- --></A><H3>
+setWrapText</H3>
+<PRE>
+void <B>setWrapText</B>(boolean&nbsp;wrapped)</PRE>
+<DL>
+<DD>Set whether the text should be wrapped.
+ Setting this flag to <code>true</code> make all content visible
+ whithin a cell by displaying it on multiple lines
+<P>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>wrapped</CODE> - wrap text or not</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getWrapText()"><!-- --></A><H3>
+getWrapText</H3>
+<PRE>
+boolean <B>getWrapText</B>()</PRE>
+<DL>
+<DD>get whether the text should be wrapped
+<P>
+<DD><DL>
+
+<DT><B>Returns:</B><DD>wrap text or not</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setVerticalAlignment(short)"><!-- --></A><H3>
+setVerticalAlignment</H3>
+<PRE>
+void <B>setVerticalAlignment</B>(short&nbsp;align)</PRE>
+<DL>
+<DD>set the type of vertical alignment for the cell
+<P>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>align</CODE> - the type of alignment<DT><B>See Also:</B><DD><A HREF="../../../../../org/apache/poi/ss/usermodel/CellStyle.html#VERTICAL_TOP"><CODE>VERTICAL_TOP</CODE></A>, 
+<A HREF="../../../../../org/apache/poi/ss/usermodel/CellStyle.html#VERTICAL_CENTER"><CODE>VERTICAL_CENTER</CODE></A>, 
+<A HREF="../../../../../org/apache/poi/ss/usermodel/CellStyle.html#VERTICAL_BOTTOM"><CODE>VERTICAL_BOTTOM</CODE></A>, 
+<A HREF="../../../../../org/apache/poi/ss/usermodel/CellStyle.html#VERTICAL_JUSTIFY"><CODE>VERTICAL_JUSTIFY</CODE></A></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getVerticalAlignment()"><!-- --></A><H3>
+getVerticalAlignment</H3>
+<PRE>
+short <B>getVerticalAlignment</B>()</PRE>
+<DL>
+<DD>get the type of vertical alignment for the cell
+<P>
+<DD><DL>
+
+<DT><B>Returns:</B><DD>align the type of alignment<DT><B>See Also:</B><DD><A HREF="../../../../../org/apache/poi/ss/usermodel/CellStyle.html#VERTICAL_TOP"><CODE>VERTICAL_TOP</CODE></A>, 
+<A HREF="../../../../../org/apache/poi/ss/usermodel/CellStyle.html#VERTICAL_CENTER"><CODE>VERTICAL_CENTER</CODE></A>, 
+<A HREF="../../../../../org/apache/poi/ss/usermodel/CellStyle.html#VERTICAL_BOTTOM"><CODE>VERTICAL_BOTTOM</CODE></A>, 
+<A HREF="../../../../../org/apache/poi/ss/usermodel/CellStyle.html#VERTICAL_JUSTIFY"><CODE>VERTICAL_JUSTIFY</CODE></A></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setRotation(short)"><!-- --></A><H3>
+setRotation</H3>
+<PRE>
+void <B>setRotation</B>(short&nbsp;rotation)</PRE>
+<DL>
+<DD>set the degree of rotation for the text in the cell
+<P>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>rotation</CODE> - degrees (between -90 and 90 degrees)</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getRotation()"><!-- --></A><H3>
+getRotation</H3>
+<PRE>
+short <B>getRotation</B>()</PRE>
+<DL>
+<DD>get the degree of rotation for the text in the cell
+<P>
+<DD><DL>
+
+<DT><B>Returns:</B><DD>rotation degrees (between -90 and 90 degrees)</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setIndention(short)"><!-- --></A><H3>
+setIndention</H3>
+<PRE>
+void <B>setIndention</B>(short&nbsp;indent)</PRE>
+<DL>
+<DD>set the number of spaces to indent the text in the cell
+<P>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>indent</CODE> - - number of spaces</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getIndention()"><!-- --></A><H3>
+getIndention</H3>
+<PRE>
+short <B>getIndention</B>()</PRE>
+<DL>
+<DD>get the number of spaces to indent the text in the cell
+<P>
+<DD><DL>
+
+<DT><B>Returns:</B><DD>indent - number of spaces</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setBorderLeft(short)"><!-- --></A><H3>
+setBorderLeft</H3>
+<PRE>
+void <B>setBorderLeft</B>(short&nbsp;border)</PRE>
+<DL>
+<DD>set the type of border to use for the left border of the cell
+<P>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>border</CODE> - type<DT><B>See Also:</B><DD><A HREF="../../../../../org/apache/poi/ss/usermodel/CellStyle.html#BORDER_NONE"><CODE>BORDER_NONE</CODE></A>, 
+<A HREF="../../../../../org/apache/poi/ss/usermodel/CellStyle.html#BORDER_THIN"><CODE>BORDER_THIN</CODE></A>, 
+<A HREF="../../../../../org/apache/poi/ss/usermodel/CellStyle.html#BORDER_MEDIUM"><CODE>BORDER_MEDIUM</CODE></A>, 
+<A HREF="../../../../../org/apache/poi/ss/usermodel/CellStyle.html#BORDER_DASHED"><CODE>BORDER_DASHED</CODE></A>, 
+<A HREF="../../../../../org/apache/poi/ss/usermodel/CellStyle.html#BORDER_DOTTED"><CODE>BORDER_DOTTED</CODE></A>, 
+<A HREF="../../../../../org/apache/poi/ss/usermodel/CellStyle.html#BORDER_THICK"><CODE>BORDER_THICK</CODE></A>, 
+<A HREF="../../../../../org/apache/poi/ss/usermodel/CellStyle.html#BORDER_DOUBLE"><CODE>BORDER_DOUBLE</CODE></A>, 
+<A HREF="../../../../../org/apache/poi/ss/usermodel/CellStyle.html#BORDER_HAIR"><CODE>BORDER_HAIR</CODE></A>, 
+<A HREF="../../../../../org/apache/poi/ss/usermodel/CellStyle.html#BORDER_MEDIUM_DASHED"><CODE>BORDER_MEDIUM_DASHED</CODE></A>, 
+<A HREF="../../../../../org/apache/poi/ss/usermodel/CellStyle.html#BORDER_DASH_DOT"><CODE>BORDER_DASH_DOT</CODE></A>, 
+<A HREF="../../../../../org/apache/poi/ss/usermodel/CellStyle.html#BORDER_MEDIUM_DASH_DOT"><CODE>BORDER_MEDIUM_DASH_DOT</CODE></A>, 
+<A HREF="../../../../../org/apache/poi/ss/usermodel/CellStyle.html#BORDER_DASH_DOT_DOT"><CODE>BORDER_DASH_DOT_DOT</CODE></A>, 
+<A HREF="../../../../../org/apache/poi/ss/usermodel/CellStyle.html#BORDER_MEDIUM_DASH_DOT_DOT"><CODE>BORDER_MEDIUM_DASH_DOT_DOT</CODE></A>, 
+<A HREF="../../../../../org/apache/poi/ss/usermodel/CellStyle.html#BORDER_SLANTED_DASH_DOT"><CODE>BORDER_SLANTED_DASH_DOT</CODE></A></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getBorderLeft()"><!-- --></A><H3>
+getBorderLeft</H3>
+<PRE>
+short <B>getBorderLeft</B>()</PRE>
+<DL>
+<DD>get the type of border to use for the left border of the cell
+<P>
+<DD><DL>
+
+<DT><B>Returns:</B><DD>border type<DT><B>See Also:</B><DD><A HREF="../../../../../org/apache/poi/ss/usermodel/CellStyle.html#BORDER_NONE"><CODE>BORDER_NONE</CODE></A>, 
+<A HREF="../../../../../org/apache/poi/ss/usermodel/CellStyle.html#BORDER_THIN"><CODE>BORDER_THIN</CODE></A>, 
+<A HREF="../../../../../org/apache/poi/ss/usermodel/CellStyle.html#BORDER_MEDIUM"><CODE>BORDER_MEDIUM</CODE></A>, 
+<A HREF="../../../../../org/apache/poi/ss/usermodel/CellStyle.html#BORDER_DASHED"><CODE>BORDER_DASHED</CODE></A>, 
+<A HREF="../../../../../org/apache/poi/ss/usermodel/CellStyle.html#BORDER_DOTTED"><CODE>BORDER_DOTTED</CODE></A>, 
+<A HREF="../../../../../org/apache/poi/ss/usermodel/CellStyle.html#BORDER_THICK"><CODE>BORDER_THICK</CODE></A>, 
+<A HREF="../../../../../org/apache/poi/ss/usermodel/CellStyle.html#BORDER_DOUBLE"><CODE>BORDER_DOUBLE</CODE></A>, 
+<A HREF="../../../../../org/apache/poi/ss/usermodel/CellStyle.html#BORDER_HAIR"><CODE>BORDER_HAIR</CODE></A>, 
+<A HREF="../../../../../org/apache/poi/ss/usermodel/CellStyle.html#BORDER_MEDIUM_DASHED"><CODE>BORDER_MEDIUM_DASHED</CODE></A>, 
+<A HREF="../../../../../org/apache/poi/ss/usermodel/CellStyle.html#BORDER_DASH_DOT"><CODE>BORDER_DASH_DOT</CODE></A>, 
+<A HREF="../../../../../org/apache/poi/ss/usermodel/CellStyle.html#BORDER_MEDIUM_DASH_DOT"><CODE>BORDER_MEDIUM_DASH_DOT</CODE></A>, 
+<A HREF="../../../../../org/apache/poi/ss/usermodel/CellStyle.html#BORDER_DASH_DOT_DOT"><CODE>BORDER_DASH_DOT_DOT</CODE></A>, 
+<A HREF="../../../../../org/apache/poi/ss/usermodel/CellStyle.html#BORDER_MEDIUM_DASH_DOT_DOT"><CODE>BORDER_MEDIUM_DASH_DOT_DOT</CODE></A>, 
+<A HREF="../../../../../org/apache/poi/ss/usermodel/CellStyle.html#BORDER_SLANTED_DASH_DOT"><CODE>BORDER_SLANTED_DASH_DOT</CODE></A></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setBorderRight(short)"><!-- --></A><H3>
+setBorderRight</H3>
+<PRE>
+void <B>setBorderRight</B>(short&nbsp;border)</PRE>
+<DL>
+<DD>set the type of border to use for the right border of the cell
+<P>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>border</CODE> - type<DT><B>See Also:</B><DD><A HREF="../../../../../org/apache/poi/ss/usermodel/CellStyle.html#BORDER_NONE"><CODE>BORDER_NONE</CODE></A>, 
+<A HREF="../../../../../org/apache/poi/ss/usermodel/CellStyle.html#BORDER_THIN"><CODE>BORDER_THIN</CODE></A>, 
+<A HREF="../../../../../org/apache/poi/ss/usermodel/CellStyle.html#BORDER_MEDIUM"><CODE>BORDER_MEDIUM</CODE></A>, 
+<A HREF="../../../../../org/apache/poi/ss/usermodel/CellStyle.html#BORDER_DASHED"><CODE>BORDER_DASHED</CODE></A>, 
+<A HREF="../../../../../org/apache/poi/ss/usermodel/CellStyle.html#BORDER_DOTTED"><CODE>BORDER_DOTTED</CODE></A>, 
+<A HREF="../../../../../org/apache/poi/ss/usermodel/CellStyle.html#BORDER_THICK"><CODE>BORDER_THICK</CODE></A>, 
+<A HREF="../../../../../org/apache/poi/ss/usermodel/CellStyle.html#BORDER_DOUBLE"><CODE>BORDER_DOUBLE</CODE></A>, 
+<A HREF="../../../../../org/apache/poi/ss/usermodel/CellStyle.html#BORDER_HAIR"><CODE>BORDER_HAIR</CODE></A>, 
+<A HREF="../../../../../org/apache/poi/ss/usermodel/CellStyle.html#BORDER_MEDIUM_DASHED"><CODE>BORDER_MEDIUM_DASHED</CODE></A>, 
+<A HREF="../../../../../org/apache/poi/ss/usermodel/CellStyle.html#BORDER_DASH_DOT"><CODE>BORDER_DASH_DOT</CODE></A>, 
+<A HREF="../../../../../org/apache/poi/ss/usermodel/CellStyle.html#BORDER_MEDIUM_DASH_DOT"><CODE>BORDER_MEDIUM_DASH_DOT</CODE></A>, 
+<A HREF="../../../../../org/apache/poi/ss/usermodel/CellStyle.html#BORDER_DASH_DOT_DOT"><CODE>BORDER_DASH_DOT_DOT</CODE></A>, 
+<A HREF="../../../../../org/apache/poi/ss/usermodel/CellStyle.html#BORDER_MEDIUM_DASH_DOT_DOT"><CODE>BORDER_MEDIUM_DASH_DOT_DOT</CODE></A>, 
+<A HREF="../../../../../org/apache/poi/ss/usermodel/CellStyle.html#BORDER_SLANTED_DASH_DOT"><CODE>BORDER_SLANTED_DASH_DOT</CODE></A></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getBorderRight()"><!-- --></A><H3>
+getBorderRight</H3>
+<PRE>
+short <B>getBorderRight</B>()</PRE>
+<DL>
+<DD>get the type of border to use for the right border of the cell
+<P>
+<DD><DL>
+
+<DT><B>Returns:</B><DD>border type<DT><B>See Also:</B><DD><A HREF="../../../../../org/apache/poi/ss/usermodel/CellStyle.html#BORDER_NONE"><CODE>BORDER_NONE</CODE></A>, 
+<A HREF="../../../../../org/apache/poi/ss/usermodel/CellStyle.html#BORDER_THIN"><CODE>BORDER_THIN</CODE></A>, 
+<A HREF="../../../../../org/apache/poi/ss/usermodel/CellStyle.html#BORDER_MEDIUM"><CODE>BORDER_MEDIUM</CODE></A>, 
+<A HREF="../../../../../org/apache/poi/ss/usermodel/CellStyle.html#BORDER_DASHED"><CODE>BORDER_DASHED</CODE></A>, 
+<A HREF="../../../../../org/apache/poi/ss/usermodel/CellStyle.html#BORDER_DOTTED"><CODE>BORDER_DOTTED</CODE></A>, 
+<A HREF="../../../../../org/apache/poi/ss/usermodel/CellStyle.html#BORDER_THICK"><CODE>BORDER_THICK</CODE></A>, 
+<A HREF="../../../../../org/apache/poi/ss/usermodel/CellStyle.html#BORDER_DOUBLE"><CODE>BORDER_DOUBLE</CODE></A>, 
+<A HREF="../../../../../org/apache/poi/ss/usermodel/CellStyle.html#BORDER_HAIR"><CODE>BORDER_HAIR</CODE></A>, 
+<A HREF="../../../../../org/apache/poi/ss/usermodel/CellStyle.html#BORDER_MEDIUM_DASHED"><CODE>BORDER_MEDIUM_DASHED</CODE></A>, 
+<A HREF="../../../../../org/apache/poi/ss/usermodel/CellStyle.html#BORDER_DASH_DOT"><CODE>BORDER_DASH_DOT</CODE></A>, 
+<A HREF="../../../../../org/apache/poi/ss/usermodel/CellStyle.html#BORDER_MEDIUM_DASH_DOT"><CODE>BORDER_MEDIUM_DASH_DOT</CODE></A>, 
+<A HREF="../../../../../org/apache/poi/ss/usermodel/CellStyle.html#BORDER_DASH_DOT_DOT"><CODE>BORDER_DASH_DOT_DOT</CODE></A>, 
+<A HREF="../../../../../org/apache/poi/ss/usermodel/CellStyle.html#BORDER_MEDIUM_DASH_DOT_DOT"><CODE>BORDER_MEDIUM_DASH_DOT_DOT</CODE></A>, 
+<A HREF="../../../../../org/apache/poi/ss/usermodel/CellStyle.html#BORDER_SLANTED_DASH_DOT"><CODE>BORDER_SLANTED_DASH_DOT</CODE></A></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setBorderTop(short)"><!-- --></A><H3>
+setBorderTop</H3>
+<PRE>
+void <B>setBorderTop</B>(short&nbsp;border)</PRE>
+<DL>
+<DD>set the type of border to use for the top border of the cell
+<P>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>border</CODE> - type<DT><B>See Also:</B><DD><A HREF="../../../../../org/apache/poi/ss/usermodel/CellStyle.html#BORDER_NONE"><CODE>BORDER_NONE</CODE></A>, 
+<A HREF="../../../../../org/apache/poi/ss/usermodel/CellStyle.html#BORDER_THIN"><CODE>BORDER_THIN</CODE></A>, 
+<A HREF="../../../../../org/apache/poi/ss/usermodel/CellStyle.html#BORDER_MEDIUM"><CODE>BORDER_MEDIUM</CODE></A>, 
+<A HREF="../../../../../org/apache/poi/ss/usermodel/CellStyle.html#BORDER_DASHED"><CODE>BORDER_DASHED</CODE></A>, 
+<A HREF="../../../../../org/apache/poi/ss/usermodel/CellStyle.html#BORDER_DOTTED"><CODE>BORDER_DOTTED</CODE></A>, 
+<A HREF="../../../../../org/apache/poi/ss/usermodel/CellStyle.html#BORDER_THICK"><CODE>BORDER_THICK</CODE></A>, 
+<A HREF="../../../../../org/apache/poi/ss/usermodel/CellStyle.html#BORDER_DOUBLE"><CODE>BORDER_DOUBLE</CODE></A>, 
+<A HREF="../../../../../org/apache/poi/ss/usermodel/CellStyle.html#BORDER_HAIR"><CODE>BORDER_HAIR</CODE></A>, 
+<A HREF="../../../../../org/apache/poi/ss/usermodel/CellStyle.html#BORDER_MEDIUM_DASHED"><CODE>BORDER_MEDIUM_DASHED</CODE></A>, 
+<A HREF="../../../../../org/apache/poi/ss/usermodel/CellStyle.html#BORDER_DASH_DOT"><CODE>BORDER_DASH_DOT</CODE></A>, 
+<A HREF="../../../../../org/apache/poi/ss/usermodel/CellStyle.html#BORDER_MEDIUM_DASH_DOT"><CODE>BORDER_MEDIUM_DASH_DOT</CODE></A>, 
+<A HREF="../../../../../org/apache/poi/ss/usermodel/CellStyle.html#BORDER_DASH_DOT_DOT"><CODE>BORDER_DASH_DOT_DOT</CODE></A>, 
+<A HREF="../../../../../org/apache/poi/ss/usermodel/CellStyle.html#BORDER_MEDIUM_DASH_DOT_DOT"><CODE>BORDER_MEDIUM_DASH_DOT_DOT</CODE></A>, 
+<A HREF="../../../../../org/apache/poi/ss/usermodel/CellStyle.html#BORDER_SLANTED_DASH_DOT"><CODE>BORDER_SLANTED_DASH_DOT</CODE></A></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getBorderTop()"><!-- --></A><H3>
+getBorderTop</H3>
+<PRE>
+short <B>getBorderTop</B>()</PRE>
+<DL>
+<DD>get the type of border to use for the top border of the cell
+<P>
+<DD><DL>
+
+<DT><B>Returns:</B><DD>border type<DT><B>See Also:</B><DD><A HREF="../../../../../org/apache/poi/ss/usermodel/CellStyle.html#BORDER_NONE"><CODE>BORDER_NONE</CODE></A>, 
+<A HREF="../../../../../org/apache/poi/ss/usermodel/CellStyle.html#BORDER_THIN"><CODE>BORDER_THIN</CODE></A>, 
+<A HREF="../../../../../org/apache/poi/ss/usermodel/CellStyle.html#BORDER_MEDIUM"><CODE>BORDER_MEDIUM</CODE></A>, 
+<A HREF="../../../../../org/apache/poi/ss/usermodel/CellStyle.html#BORDER_DASHED"><CODE>BORDER_DASHED</CODE></A>, 
+<A HREF="../../../../../org/apache/poi/ss/usermodel/CellStyle.html#BORDER_DOTTED"><CODE>BORDER_DOTTED</CODE></A>, 
+<A HREF="../../../../../org/apache/poi/ss/usermodel/CellStyle.html#BORDER_THICK"><CODE>BORDER_THICK</CODE></A>, 
+<A HREF="../../../../../org/apache/poi/ss/usermodel/CellStyle.html#BORDER_DOUBLE"><CODE>BORDER_DOUBLE</CODE></A>, 
+<A HREF="../../../../../org/apache/poi/ss/usermodel/CellStyle.html#BORDER_HAIR"><CODE>BORDER_HAIR</CODE></A>, 
+<A HREF="../../../../../org/apache/poi/ss/usermodel/CellStyle.html#BORDER_MEDIUM_DASHED"><CODE>BORDER_MEDIUM_DASHED</CODE></A>, 
+<A HREF="../../../../../org/apache/poi/ss/usermodel/CellStyle.html#BORDER_DASH_DOT"><CODE>BORDER_DASH_DOT</CODE></A>, 
+<A HREF="../../../../../org/apache/poi/ss/usermodel/CellStyle.html#BORDER_MEDIUM_DASH_DOT"><CODE>BORDER_MEDIUM_DASH_DOT</CODE></A>, 
+<A HREF="../../../../../org/apache/poi/ss/usermodel/CellStyle.html#BORDER_DASH_DOT_DOT"><CODE>BORDER_DASH_DOT_DOT</CODE></A>, 
+<A HREF="../../../../../org/apache/poi/ss/usermodel/CellStyle.html#BORDER_MEDIUM_DASH_DOT_DOT"><CODE>BORDER_MEDIUM_DASH_DOT_DOT</CODE></A>, 
+<A HREF="../../../../../org/apache/poi/ss/usermodel/CellStyle.html#BORDER_SLANTED_DASH_DOT"><CODE>BORDER_SLANTED_DASH_DOT</CODE></A></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setBorderBottom(short)"><!-- --></A><H3>
+setBorderBottom</H3>
+<PRE>
+void <B>setBorderBottom</B>(short&nbsp;border)</PRE>
+<DL>
+<DD>set the type of border to use for the bottom border of the cell
+<P>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>border</CODE> - type<DT><B>See Also:</B><DD><A HREF="../../../../../org/apache/poi/ss/usermodel/CellStyle.html#BORDER_NONE"><CODE>BORDER_NONE</CODE></A>, 
+<A HREF="../../../../../org/apache/poi/ss/usermodel/CellStyle.html#BORDER_THIN"><CODE>BORDER_THIN</CODE></A>, 
+<A HREF="../../../../../org/apache/poi/ss/usermodel/CellStyle.html#BORDER_MEDIUM"><CODE>BORDER_MEDIUM</CODE></A>, 
+<A HREF="../../../../../org/apache/poi/ss/usermodel/CellStyle.html#BORDER_DASHED"><CODE>BORDER_DASHED</CODE></A>, 
+<A HREF="../../../../../org/apache/poi/ss/usermodel/CellStyle.html#BORDER_DOTTED"><CODE>BORDER_DOTTED</CODE></A>, 
+<A HREF="../../../../../org/apache/poi/ss/usermodel/CellStyle.html#BORDER_THICK"><CODE>BORDER_THICK</CODE></A>, 
+<A HREF="../../../../../org/apache/poi/ss/usermodel/CellStyle.html#BORDER_DOUBLE"><CODE>BORDER_DOUBLE</CODE></A>, 
+<A HREF="../../../../../org/apache/poi/ss/usermodel/CellStyle.html#BORDER_HAIR"><CODE>BORDER_HAIR</CODE></A>, 
+<A HREF="../../../../../org/apache/poi/ss/usermodel/CellStyle.html#BORDER_MEDIUM_DASHED"><CODE>BORDER_MEDIUM_DASHED</CODE></A>, 
+<A HREF="../../../../../org/apache/poi/ss/usermodel/CellStyle.html#BORDER_DASH_DOT"><CODE>BORDER_DASH_DOT</CODE></A>, 
+<A HREF="../../../../../org/apache/poi/ss/usermodel/CellStyle.html#BORDER_MEDIUM_DASH_DOT"><CODE>BORDER_MEDIUM_DASH_DOT</CODE></A>, 
+<A HREF="../../../../../org/apache/poi/ss/usermodel/CellStyle.html#BORDER_DASH_DOT_DOT"><CODE>BORDER_DASH_DOT_DOT</CODE></A>, 
+<A HREF="../../../../../org/apache/poi/ss/usermodel/CellStyle.html#BORDER_MEDIUM_DASH_DOT_DOT"><CODE>BORDER_MEDIUM_DASH_DOT_DOT</CODE></A>, 
+<A HREF="../../../../../org/apache/poi/ss/usermodel/CellStyle.html#BORDER_SLANTED_DASH_DOT"><CODE>BORDER_SLANTED_DASH_DOT</CODE></A></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getBorderBottom()"><!-- --></A><H3>
+getBorderBottom</H3>
+<PRE>
+short <B>getBorderBottom</B>()</PRE>
+<DL>
+<DD>get the type of border to use for the bottom border of the cell
+<P>
+<DD><DL>
+
+<DT><B>Returns:</B><DD>border type<DT><B>See Also:</B><DD><A HREF="../../../../../org/apache/poi/ss/usermodel/CellStyle.html#BORDER_NONE"><CODE>BORDER_NONE</CODE></A>, 
+<A HREF="../../../../../org/apache/poi/ss/usermodel/CellStyle.html#BORDER_THIN"><CODE>BORDER_THIN</CODE></A>, 
+<A HREF="../../../../../org/apache/poi/ss/usermodel/CellStyle.html#BORDER_MEDIUM"><CODE>BORDER_MEDIUM</CODE></A>, 
+<A HREF="../../../../../org/apache/poi/ss/usermodel/CellStyle.html#BORDER_DASHED"><CODE>BORDER_DASHED</CODE></A>, 
+<A HREF="../../../../../org/apache/poi/ss/usermodel/CellStyle.html#BORDER_DOTTED"><CODE>BORDER_DOTTED</CODE></A>, 
+<A HREF="../../../../../org/apache/poi/ss/usermodel/CellStyle.html#BORDER_THICK"><CODE>BORDER_THICK</CODE></A>, 
+<A HREF="../../../../../org/apache/poi/ss/usermodel/CellStyle.html#BORDER_DOUBLE"><CODE>BORDER_DOUBLE</CODE></A>, 
+<A HREF="../../../../../org/apache/poi/ss/usermodel/CellStyle.html#BORDER_HAIR"><CODE>BORDER_HAIR</CODE></A>, 
+<A HREF="../../../../../org/apache/poi/ss/usermodel/CellStyle.html#BORDER_MEDIUM_DASHED"><CODE>BORDER_MEDIUM_DASHED</CODE></A>, 
+<A HREF="../../../../../org/apache/poi/ss/usermodel/CellStyle.html#BORDER_DASH_DOT"><CODE>BORDER_DASH_DOT</CODE></A>, 
+<A HREF="../../../../../org/apache/poi/ss/usermodel/CellStyle.html#BORDER_MEDIUM_DASH_DOT"><CODE>BORDER_MEDIUM_DASH_DOT</CODE></A>, 
+<A HREF="../../../../../org/apache/poi/ss/usermodel/CellStyle.html#BORDER_DASH_DOT_DOT"><CODE>BORDER_DASH_DOT_DOT</CODE></A>, 
+<A HREF="../../../../../org/apache/poi/ss/usermodel/CellStyle.html#BORDER_MEDIUM_DASH_DOT_DOT"><CODE>BORDER_MEDIUM_DASH_DOT_DOT</CODE></A>, 
+<A HREF="../../../../../org/apache/poi/ss/usermodel/CellStyle.html#BORDER_SLANTED_DASH_DOT"><CODE>BORDER_SLANTED_DASH_DOT</CODE></A></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setLeftBorderColor(short)"><!-- --></A><H3>
+setLeftBorderColor</H3>
+<PRE>
+void <B>setLeftBorderColor</B>(short&nbsp;color)</PRE>
+<DL>
+<DD>set the color to use for the left border
+<P>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>color</CODE> - The index of the color definition</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getLeftBorderColor()"><!-- --></A><H3>
+getLeftBorderColor</H3>
+<PRE>
+short <B>getLeftBorderColor</B>()</PRE>
+<DL>
+<DD>get the color to use for the left border
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setRightBorderColor(short)"><!-- --></A><H3>
+setRightBorderColor</H3>
+<PRE>
+void <B>setRightBorderColor</B>(short&nbsp;color)</PRE>
+<DL>
+<DD>set the color to use for the right border
+<P>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>color</CODE> - The index of the color definition</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getRightBorderColor()"><!-- --></A><H3>
+getRightBorderColor</H3>
+<PRE>
+short <B>getRightBorderColor</B>()</PRE>
+<DL>
+<DD>get the color to use for the left border
+<P>
+<DD><DL>
+
+<DT><B>Returns:</B><DD>the index of the color definition</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setTopBorderColor(short)"><!-- --></A><H3>
+setTopBorderColor</H3>
+<PRE>
+void <B>setTopBorderColor</B>(short&nbsp;color)</PRE>
+<DL>
+<DD>set the color to use for the top border
+<P>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>color</CODE> - The index of the color definition</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getTopBorderColor()"><!-- --></A><H3>
+getTopBorderColor</H3>
+<PRE>
+short <B>getTopBorderColor</B>()</PRE>
+<DL>
+<DD>get the color to use for the top border
+<P>
+<DD><DL>
+
+<DT><B>Returns:</B><DD>hhe index of the color definition</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setBottomBorderColor(short)"><!-- --></A><H3>
+setBottomBorderColor</H3>
+<PRE>
+void <B>setBottomBorderColor</B>(short&nbsp;color)</PRE>
+<DL>
+<DD>set the color to use for the bottom border
+<P>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>color</CODE> - The index of the color definition</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getBottomBorderColor()"><!-- --></A><H3>
+getBottomBorderColor</H3>
+<PRE>
+short <B>getBottomBorderColor</B>()</PRE>
+<DL>
+<DD>get the color to use for the left border
+<P>
+<DD><DL>
+
+<DT><B>Returns:</B><DD>the index of the color definition</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setFillPattern(short)"><!-- --></A><H3>
+setFillPattern</H3>
+<PRE>
+void <B>setFillPattern</B>(short&nbsp;fp)</PRE>
+<DL>
+<DD>setting to one fills the cell with the foreground color... No idea about
+ other values
+<P>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>fp</CODE> - fill pattern (set to 1 to fill w/foreground color)<DT><B>See Also:</B><DD><A HREF="../../../../../org/apache/poi/ss/usermodel/CellStyle.html#NO_FILL"><CODE>NO_FILL</CODE></A>, 
+<A HREF="../../../../../org/apache/poi/ss/usermodel/CellStyle.html#SOLID_FOREGROUND"><CODE>SOLID_FOREGROUND</CODE></A>, 
+<A HREF="../../../../../org/apache/poi/ss/usermodel/CellStyle.html#FINE_DOTS"><CODE>FINE_DOTS</CODE></A>, 
+<A HREF="../../../../../org/apache/poi/ss/usermodel/CellStyle.html#ALT_BARS"><CODE>ALT_BARS</CODE></A>, 
+<A HREF="../../../../../org/apache/poi/ss/usermodel/CellStyle.html#SPARSE_DOTS"><CODE>SPARSE_DOTS</CODE></A>, 
+<A HREF="../../../../../org/apache/poi/ss/usermodel/CellStyle.html#THICK_HORZ_BANDS"><CODE>THICK_HORZ_BANDS</CODE></A>, 
+<A HREF="../../../../../org/apache/poi/ss/usermodel/CellStyle.html#THICK_VERT_BANDS"><CODE>THICK_VERT_BANDS</CODE></A>, 
+<A HREF="../../../../../org/apache/poi/ss/usermodel/CellStyle.html#THICK_BACKWARD_DIAG"><CODE>THICK_BACKWARD_DIAG</CODE></A>, 
+<A HREF="../../../../../org/apache/poi/ss/usermodel/CellStyle.html#THICK_FORWARD_DIAG"><CODE>THICK_FORWARD_DIAG</CODE></A>, 
+<A HREF="../../../../../org/apache/poi/ss/usermodel/CellStyle.html#BIG_SPOTS"><CODE>BIG_SPOTS</CODE></A>, 
+<A HREF="../../../../../org/apache/poi/ss/usermodel/CellStyle.html#BRICKS"><CODE>BRICKS</CODE></A>, 
+<A HREF="../../../../../org/apache/poi/ss/usermodel/CellStyle.html#THIN_HORZ_BANDS"><CODE>THIN_HORZ_BANDS</CODE></A>, 
+<A HREF="../../../../../org/apache/poi/ss/usermodel/CellStyle.html#THIN_VERT_BANDS"><CODE>THIN_VERT_BANDS</CODE></A>, 
+<A HREF="../../../../../org/apache/poi/ss/usermodel/CellStyle.html#THIN_BACKWARD_DIAG"><CODE>THIN_BACKWARD_DIAG</CODE></A>, 
+<A HREF="../../../../../org/apache/poi/ss/usermodel/CellStyle.html#THIN_FORWARD_DIAG"><CODE>THIN_FORWARD_DIAG</CODE></A>, 
+<A HREF="../../../../../org/apache/poi/ss/usermodel/CellStyle.html#SQUARES"><CODE>SQUARES</CODE></A>, 
+<A HREF="../../../../../org/apache/poi/ss/usermodel/CellStyle.html#DIAMONDS"><CODE>DIAMONDS</CODE></A></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getFillPattern()"><!-- --></A><H3>
+getFillPattern</H3>
+<PRE>
+short <B>getFillPattern</B>()</PRE>
+<DL>
+<DD>get the fill pattern (??) - set to 1 to fill with foreground color
+<P>
+<DD><DL>
+
+<DT><B>Returns:</B><DD>fill pattern</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setFillBackgroundColor(short)"><!-- --></A><H3>
+setFillBackgroundColor</H3>
+<PRE>
+void <B>setFillBackgroundColor</B>(short&nbsp;bg)</PRE>
+<DL>
+<DD>set the background fill color.
+<P>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>bg</CODE> - color</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getFillBackgroundColor()"><!-- --></A><H3>
+getFillBackgroundColor</H3>
+<PRE>
+short <B>getFillBackgroundColor</B>()</PRE>
+<DL>
+<DD>get the background fill color, if the fill
+  is defined with an indexed color.
+<P>
+<DD><DL>
+
+<DT><B>Returns:</B><DD>fill color index, or 0 if not indexed (XSSF only)</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getFillBackgroundColorColor()"><!-- --></A><H3>
+getFillBackgroundColorColor</H3>
+<PRE>
+<A HREF="../../../../../org/apache/poi/ss/usermodel/Color.html" title="interface in org.apache.poi.ss.usermodel">Color</A> <B>getFillBackgroundColorColor</B>()</PRE>
+<DL>
+<DD>Gets the color object representing the current
+  background fill, resolving indexes using
+  the supplied workbook.
+ This will work for both indexed and rgb
+  defined colors.
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setFillForegroundColor(short)"><!-- --></A><H3>
+setFillForegroundColor</H3>
+<PRE>
+void <B>setFillForegroundColor</B>(short&nbsp;bg)</PRE>
+<DL>
+<DD>set the foreground fill color
+ <i>Note: Ensure Foreground color is set prior to background color.</i>
+<P>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>bg</CODE> - color</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getFillForegroundColor()"><!-- --></A><H3>
+getFillForegroundColor</H3>
+<PRE>
+short <B>getFillForegroundColor</B>()</PRE>
+<DL>
+<DD>get the foreground fill color, if the fill  
+  is defined with an indexed color.
+<P>
+<DD><DL>
+
+<DT><B>Returns:</B><DD>fill color, or 0 if not indexed (XSSF only)</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getFillForegroundColorColor()"><!-- --></A><H3>
+getFillForegroundColorColor</H3>
+<PRE>
+<A HREF="../../../../../org/apache/poi/ss/usermodel/Color.html" title="interface in org.apache.poi.ss.usermodel">Color</A> <B>getFillForegroundColorColor</B>()</PRE>
+<DL>
+<DD>Gets the color object representing the current
+  foreground fill, resolving indexes using
+  the supplied workbook.
+ This will work for both indexed and rgb
+  defined colors.
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="cloneStyleFrom(org.apache.poi.ss.usermodel.CellStyle)"><!-- --></A><H3>
+cloneStyleFrom</H3>
+<PRE>
+void <B>cloneStyleFrom</B>(<A HREF="../../../../../org/apache/poi/ss/usermodel/CellStyle.html" title="interface in org.apache.poi.ss.usermodel">CellStyle</A>&nbsp;source)</PRE>
+<DL>
+<DD>Clones all the style information from another
+  CellStyle, onto this one. This 
+  CellStyle will then have all the same
+  properties as the source, but the two may
+  be edited independently.
+ Any stylings on this CellStyle will be lost! 
+  
+ The source CellStyle could be from another
+  Workbook if you like. This allows you to
+  copy styles from one Workbook to another.
+
+ However, both of the CellStyles will need
+  to be of the same type (HSSFCellStyle or
+  XSSFCellStyle)
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setShrinkToFit(boolean)"><!-- --></A><H3>
+setShrinkToFit</H3>
+<PRE>
+void <B>setShrinkToFit</B>(boolean&nbsp;shrinkToFit)</PRE>
+<DL>
+<DD>Controls if the Cell should be auto-sized
+  to shrink to fit if the text is too long
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getShrinkToFit()"><!-- --></A><H3>
+getShrinkToFit</H3>
+<PRE>
+boolean <B>getShrinkToFit</B>()</PRE>
+<DL>
+<DD>Should the Cell be auto-sized by Excel to shrink
+  it to fit if this text is too long?
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<!-- ========= END OF CLASS DATA ========= -->
+<HR>
+
+
+<!-- ======= START OF BOTTOM NAVBAR ====== -->
+<A NAME="navbar_bottom"><!-- --></A>
+<A HREF="#skip-navbar_bottom" title="Skip navigation links"></A>
+<TABLE BORDER="0" WIDTH="100%" CELLPADDING="1" CELLSPACING="0" SUMMARY="">
+<TR>
+<TD COLSPAN=2 BGCOLOR="#EEEEFF" CLASS="NavBarCell1">
+<A NAME="navbar_bottom_firstrow"><!-- --></A>
+<TABLE BORDER="0" CELLPADDING="0" CELLSPACING="3" SUMMARY="">
+  <TR ALIGN="center" VALIGN="top">
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../overview-summary.html"><FONT CLASS="NavBarFont1"><B>Overview</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="package-summary.html"><FONT CLASS="NavBarFont1"><B>Package</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#FFFFFF" CLASS="NavBarCell1Rev"> &nbsp;<FONT CLASS="NavBarFont1Rev"><B>Class</B></FONT>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="class-use/CellStyle.html"><FONT CLASS="NavBarFont1"><B>Use</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="package-tree.html"><FONT CLASS="NavBarFont1"><B>Tree</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../deprecated-list.html"><FONT CLASS="NavBarFont1"><B>Deprecated</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../index-all.html"><FONT CLASS="NavBarFont1"><B>Index</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../help-doc.html"><FONT CLASS="NavBarFont1"><B>Help</B></FONT></A>&nbsp;</TD>
+  </TR>
+</TABLE>
+</TD>
+<TD ALIGN="right" VALIGN="top" ROWSPAN=3><EM>
+</EM>
+</TD>
+</TR>
+
+<TR>
+<TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
+&nbsp;<A HREF="../../../../../org/apache/poi/ss/usermodel/CellRange.html" title="interface in org.apache.poi.ss.usermodel"><B>PREV CLASS</B></A>&nbsp;
+&nbsp;<A HREF="../../../../../org/apache/poi/ss/usermodel/CellValue.html" title="class in org.apache.poi.ss.usermodel"><B>NEXT CLASS</B></A></FONT></TD>
+<TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
+  <A HREF="../../../../../index.html?org/apache/poi/ss/usermodel/CellStyle.html" target="_top"><B>FRAMES</B></A>  &nbsp;
+&nbsp;<A HREF="CellStyle.html" target="_top"><B>NO FRAMES</B></A>  &nbsp;
+&nbsp;<SCRIPT type="text/javascript">
+  <!--
+  if(window==top) {
+    document.writeln('<A HREF="../../../../../allclasses-noframe.html"><B>All Classes</B></A>');
+  }
+  //-->
+</SCRIPT>
+<NOSCRIPT>
+  <A HREF="../../../../../allclasses-noframe.html"><B>All Classes</B></A>
+</NOSCRIPT>
+
+
+</FONT></TD>
+</TR>
+<TR>
+<TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
+  SUMMARY:&nbsp;NESTED&nbsp;|&nbsp;<A HREF="#field_summary">FIELD</A>&nbsp;|&nbsp;CONSTR&nbsp;|&nbsp;<A HREF="#method_summary">METHOD</A></FONT></TD>
+<TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
+DETAIL:&nbsp;<A HREF="#field_detail">FIELD</A>&nbsp;|&nbsp;CONSTR&nbsp;|&nbsp;<A HREF="#method_detail">METHOD</A></FONT></TD>
+</TR>
+</TABLE>
+<A NAME="skip-navbar_bottom"></A>
+<!-- ======== END OF BOTTOM NAVBAR ======= -->
+
+<HR>
+
+                <i>Copyright 2014 The Apache Software Foundation or
+        its licensors, as applicable.</i>
+            
+</BODY>
+</HTML>

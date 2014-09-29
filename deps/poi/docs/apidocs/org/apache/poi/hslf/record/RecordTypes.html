@@ -1,0 +1,3386 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!--NewPage-->
+<HTML>
+<HEAD>
+<TITLE>
+RecordTypes (POI API Documentation)
+</TITLE>
+
+<META NAME="keywords" CONTENT="org.apache.poi.hslf.record.RecordTypes class">
+
+<LINK REL ="stylesheet" TYPE="text/css" HREF="../../../../../stylesheet.css" TITLE="Style">
+
+<SCRIPT type="text/javascript">
+function windowTitle()
+{
+    parent.document.title="RecordTypes (POI API Documentation)";
+}
+</SCRIPT>
+<NOSCRIPT>
+</NOSCRIPT>
+
+</HEAD>
+
+<BODY BGCOLOR="white" onload="windowTitle();">
+
+
+<!-- ========= START OF TOP NAVBAR ======= -->
+<A NAME="navbar_top"><!-- --></A>
+<A HREF="#skip-navbar_top" title="Skip navigation links"></A>
+<TABLE BORDER="0" WIDTH="100%" CELLPADDING="1" CELLSPACING="0" SUMMARY="">
+<TR>
+<TD COLSPAN=2 BGCOLOR="#EEEEFF" CLASS="NavBarCell1">
+<A NAME="navbar_top_firstrow"><!-- --></A>
+<TABLE BORDER="0" CELLPADDING="0" CELLSPACING="3" SUMMARY="">
+  <TR ALIGN="center" VALIGN="top">
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../overview-summary.html"><FONT CLASS="NavBarFont1"><B>Overview</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="package-summary.html"><FONT CLASS="NavBarFont1"><B>Package</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#FFFFFF" CLASS="NavBarCell1Rev"> &nbsp;<FONT CLASS="NavBarFont1Rev"><B>Class</B></FONT>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="class-use/RecordTypes.html"><FONT CLASS="NavBarFont1"><B>Use</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="package-tree.html"><FONT CLASS="NavBarFont1"><B>Tree</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../deprecated-list.html"><FONT CLASS="NavBarFont1"><B>Deprecated</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../index-all.html"><FONT CLASS="NavBarFont1"><B>Index</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../help-doc.html"><FONT CLASS="NavBarFont1"><B>Help</B></FONT></A>&nbsp;</TD>
+  </TR>
+</TABLE>
+</TD>
+<TD ALIGN="right" VALIGN="top" ROWSPAN=3><EM>
+</EM>
+</TD>
+</TR>
+
+<TR>
+<TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
+&nbsp;<A HREF="../../../../../org/apache/poi/hslf/record/RecordContainer.html" title="class in org.apache.poi.hslf.record"><B>PREV CLASS</B></A>&nbsp;
+&nbsp;<A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.Type.html" title="class in org.apache.poi.hslf.record"><B>NEXT CLASS</B></A></FONT></TD>
+<TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
+  <A HREF="../../../../../index.html?org/apache/poi/hslf/record/RecordTypes.html" target="_top"><B>FRAMES</B></A>  &nbsp;
+&nbsp;<A HREF="RecordTypes.html" target="_top"><B>NO FRAMES</B></A>  &nbsp;
+&nbsp;<SCRIPT type="text/javascript">
+  <!--
+  if(window==top) {
+    document.writeln('<A HREF="../../../../../allclasses-noframe.html"><B>All Classes</B></A>');
+  }
+  //-->
+</SCRIPT>
+<NOSCRIPT>
+  <A HREF="../../../../../allclasses-noframe.html"><B>All Classes</B></A>
+</NOSCRIPT>
+
+
+</FONT></TD>
+</TR>
+<TR>
+<TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
+  SUMMARY:&nbsp;<A HREF="#nested_class_summary">NESTED</A>&nbsp;|&nbsp;<A HREF="#field_summary">FIELD</A>&nbsp;|&nbsp;<A HREF="#constructor_summary">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_summary">METHOD</A></FONT></TD>
+<TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
+DETAIL:&nbsp;<A HREF="#field_detail">FIELD</A>&nbsp;|&nbsp;<A HREF="#constructor_detail">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_detail">METHOD</A></FONT></TD>
+</TR>
+</TABLE>
+<A NAME="skip-navbar_top"></A>
+<!-- ========= END OF TOP NAVBAR ========= -->
+
+<HR>
+<!-- ======== START OF CLASS DATA ======== -->
+<H2>
+<FONT SIZE="-1">
+org.apache.poi.hslf.record</FONT>
+<BR>
+Class RecordTypes</H2>
+<PRE>
+java.lang.Object
+  <IMG SRC="../../../../../resources/inherit.gif" ALT="extended by "><B>org.apache.poi.hslf.record.RecordTypes</B>
+</PRE>
+<HR>
+<DL>
+<DT><PRE>public final class <B>RecordTypes</B><DT>extends java.lang.Object</DL>
+</PRE>
+
+<P>
+List of all known record types in a PowerPoint document, and the
+  classes that handle them.
+ There are two categories of records:
+ <li> PowerPoint records: 0 <= info <= 10002 (will carry class info)
+ <li> Escher records: info >= 0xF000 (handled by DDF, so no class info)
+<P>
+
+<P>
+<DL>
+<DT><B>Author:</B></DT>
+  <DD>Yegor Kozlov, Nick Burch</DD>
+</DL>
+<HR>
+
+<P>
+<!-- ======== NESTED CLASS SUMMARY ======== -->
+
+<A NAME="nested_class_summary"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+<B>Nested Class Summary</B></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;class</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.Type.html" title="class in org.apache.poi.hslf.record">RecordTypes.Type</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Wrapper for the details of a PowerPoint or Escher record type.</TD>
+</TR>
+</TABLE>
+&nbsp;<!-- =========== FIELD SUMMARY =========== -->
+
+<A NAME="field_summary"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+<B>Field Summary</B></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;<A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.Type.html" title="class in org.apache.poi.hslf.record">RecordTypes.Type</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.html#AnimationInfo">AnimationInfo</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;<A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.Type.html" title="class in org.apache.poi.hslf.record">RecordTypes.Type</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.html#AnimationInfoAtom">AnimationInfoAtom</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;<A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.Type.html" title="class in org.apache.poi.hslf.record">RecordTypes.Type</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.html#BaseTextPropAtom">BaseTextPropAtom</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;<A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.Type.html" title="class in org.apache.poi.hslf.record">RecordTypes.Type</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.html#BinaryTagData">BinaryTagData</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;<A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.Type.html" title="class in org.apache.poi.hslf.record">RecordTypes.Type</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.html#BookmarkCollection">BookmarkCollection</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;<A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.Type.html" title="class in org.apache.poi.hslf.record">RecordTypes.Type</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.html#BookmarkEntityAtom">BookmarkEntityAtom</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;<A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.Type.html" title="class in org.apache.poi.hslf.record">RecordTypes.Type</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.html#BookmarkSeedAtom">BookmarkSeedAtom</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;<A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.Type.html" title="class in org.apache.poi.hslf.record">RecordTypes.Type</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.html#CharFormatAtom">CharFormatAtom</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;<A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.Type.html" title="class in org.apache.poi.hslf.record">RecordTypes.Type</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.html#ColorSchemeAtom">ColorSchemeAtom</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;<A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.Type.html" title="class in org.apache.poi.hslf.record">RecordTypes.Type</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.html#Comment2000">Comment2000</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;<A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.Type.html" title="class in org.apache.poi.hslf.record">RecordTypes.Type</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.html#Comment2000Atom">Comment2000Atom</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;<A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.Type.html" title="class in org.apache.poi.hslf.record">RecordTypes.Type</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.html#Comment2000Summary">Comment2000Summary</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;<A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.Type.html" title="class in org.apache.poi.hslf.record">RecordTypes.Type</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.html#Comment2000SummaryAtom">Comment2000SummaryAtom</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;<A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.Type.html" title="class in org.apache.poi.hslf.record">RecordTypes.Type</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.html#CompositeMasterId">CompositeMasterId</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;<A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.Type.html" title="class in org.apache.poi.hslf.record">RecordTypes.Type</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.html#CString">CString</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;<A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.Type.html" title="class in org.apache.poi.hslf.record">RecordTypes.Type</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.html#CurrentUserAtom">CurrentUserAtom</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;<A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.Type.html" title="class in org.apache.poi.hslf.record">RecordTypes.Type</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.html#DateTimeMCAtom">DateTimeMCAtom</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;<A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.Type.html" title="class in org.apache.poi.hslf.record">RecordTypes.Type</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.html#DefaultRulerAtom">DefaultRulerAtom</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;<A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.Type.html" title="class in org.apache.poi.hslf.record">RecordTypes.Type</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.html#DocRoutingSlip">DocRoutingSlip</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;<A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.Type.html" title="class in org.apache.poi.hslf.record">RecordTypes.Type</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.html#Document">Document</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;<A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.Type.html" title="class in org.apache.poi.hslf.record">RecordTypes.Type</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.html#DocumentAtom">DocumentAtom</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;<A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.Type.html" title="class in org.apache.poi.hslf.record">RecordTypes.Type</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.html#DocumentEncryptionAtom">DocumentEncryptionAtom</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;<A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.Type.html" title="class in org.apache.poi.hslf.record">RecordTypes.Type</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.html#EndDocument">EndDocument</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;<A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.Type.html" title="class in org.apache.poi.hslf.record">RecordTypes.Type</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.html#Environment">Environment</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;int</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.html#EscherAlignRule">EscherAlignRule</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;int</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.html#EscherAnchor">EscherAnchor</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;int</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.html#EscherArcRule">EscherArcRule</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;int</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.html#EscherBlip_END">EscherBlip_END</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;int</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.html#EscherBlip_START">EscherBlip_START</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;int</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.html#EscherBSE">EscherBSE</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;int</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.html#EscherBStoreContainer">EscherBStoreContainer</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;int</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.html#EscherCalloutRule">EscherCalloutRule</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;int</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.html#EscherChildAnchor">EscherChildAnchor</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;int</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.html#EscherClientAnchor">EscherClientAnchor</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;int</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.html#EscherClientData">EscherClientData</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;int</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.html#EscherClientRule">EscherClientRule</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;int</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.html#EscherClientTextbox">EscherClientTextbox</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;int</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.html#EscherCLSID">EscherCLSID</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;int</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.html#EscherColorMRU">EscherColorMRU</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;int</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.html#EscherColorScheme">EscherColorScheme</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;int</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.html#EscherConnectorRule">EscherConnectorRule</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;int</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.html#EscherDeletedPspl">EscherDeletedPspl</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;int</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.html#EscherDg">EscherDg</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;int</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.html#EscherDgContainer">EscherDgContainer</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;int</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.html#EscherDgg">EscherDgg</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;int</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.html#EscherDggContainer">EscherDggContainer</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;int</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.html#EscherOleObject">EscherOleObject</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;int</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.html#EscherOPT">EscherOPT</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;int</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.html#EscherRegroupItems">EscherRegroupItems</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;int</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.html#EscherSelection">EscherSelection</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;int</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.html#EscherSolverContainer">EscherSolverContainer</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;int</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.html#EscherSp">EscherSp</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;int</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.html#EscherSpContainer">EscherSpContainer</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;int</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.html#EscherSpgr">EscherSpgr</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;int</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.html#EscherSpgrContainer">EscherSpgrContainer</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;int</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.html#EscherSplitMenuColors">EscherSplitMenuColors</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;int</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.html#EscherTextbox">EscherTextbox</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;int</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.html#EscherUserDefined">EscherUserDefined</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;<A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.Type.html" title="class in org.apache.poi.hslf.record">RecordTypes.Type</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.html#ExAviMovie">ExAviMovie</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;<A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.Type.html" title="class in org.apache.poi.hslf.record">RecordTypes.Type</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.html#ExCDAudio">ExCDAudio</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;<A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.Type.html" title="class in org.apache.poi.hslf.record">RecordTypes.Type</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.html#ExCDAudioAtom">ExCDAudioAtom</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;<A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.Type.html" title="class in org.apache.poi.hslf.record">RecordTypes.Type</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.html#ExControl">ExControl</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;<A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.Type.html" title="class in org.apache.poi.hslf.record">RecordTypes.Type</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.html#ExControlAtom">ExControlAtom</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;<A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.Type.html" title="class in org.apache.poi.hslf.record">RecordTypes.Type</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.html#ExEmbed">ExEmbed</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;<A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.Type.html" title="class in org.apache.poi.hslf.record">RecordTypes.Type</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.html#ExEmbedAtom">ExEmbedAtom</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;<A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.Type.html" title="class in org.apache.poi.hslf.record">RecordTypes.Type</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.html#ExHyperlink">ExHyperlink</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;<A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.Type.html" title="class in org.apache.poi.hslf.record">RecordTypes.Type</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.html#ExHyperlinkAtom">ExHyperlinkAtom</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;<A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.Type.html" title="class in org.apache.poi.hslf.record">RecordTypes.Type</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.html#ExLink">ExLink</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;<A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.Type.html" title="class in org.apache.poi.hslf.record">RecordTypes.Type</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.html#ExLinkAtom">ExLinkAtom</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;<A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.Type.html" title="class in org.apache.poi.hslf.record">RecordTypes.Type</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.html#ExMCIMovie">ExMCIMovie</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;<A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.Type.html" title="class in org.apache.poi.hslf.record">RecordTypes.Type</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.html#ExMediaAtom">ExMediaAtom</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;<A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.Type.html" title="class in org.apache.poi.hslf.record">RecordTypes.Type</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.html#ExMIDIAudio">ExMIDIAudio</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;<A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.Type.html" title="class in org.apache.poi.hslf.record">RecordTypes.Type</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.html#ExObjList">ExObjList</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;<A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.Type.html" title="class in org.apache.poi.hslf.record">RecordTypes.Type</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.html#ExObjListAtom">ExObjListAtom</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;<A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.Type.html" title="class in org.apache.poi.hslf.record">RecordTypes.Type</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.html#ExObjRefAtom">ExObjRefAtom</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;<A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.Type.html" title="class in org.apache.poi.hslf.record">RecordTypes.Type</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.html#ExOleObjAtom">ExOleObjAtom</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;<A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.Type.html" title="class in org.apache.poi.hslf.record">RecordTypes.Type</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.html#ExOleObjStg">ExOleObjStg</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;<A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.Type.html" title="class in org.apache.poi.hslf.record">RecordTypes.Type</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.html#ExQuickTimeMovie">ExQuickTimeMovie</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;<A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.Type.html" title="class in org.apache.poi.hslf.record">RecordTypes.Type</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.html#ExQuickTimeMovieData">ExQuickTimeMovieData</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;<A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.Type.html" title="class in org.apache.poi.hslf.record">RecordTypes.Type</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.html#ExVideoContainer">ExVideoContainer</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;<A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.Type.html" title="class in org.apache.poi.hslf.record">RecordTypes.Type</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.html#ExWAVAudioEmbedded">ExWAVAudioEmbedded</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;<A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.Type.html" title="class in org.apache.poi.hslf.record">RecordTypes.Type</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.html#ExWAVAudioEmbeddedAtom">ExWAVAudioEmbeddedAtom</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;<A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.Type.html" title="class in org.apache.poi.hslf.record">RecordTypes.Type</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.html#ExWAVAudioLink">ExWAVAudioLink</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;<A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.Type.html" title="class in org.apache.poi.hslf.record">RecordTypes.Type</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.html#FontCollection">FontCollection</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;<A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.Type.html" title="class in org.apache.poi.hslf.record">RecordTypes.Type</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.html#FontEmbeddedData">FontEmbeddedData</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;<A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.Type.html" title="class in org.apache.poi.hslf.record">RecordTypes.Type</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.html#FontEntityAtom">FontEntityAtom</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;<A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.Type.html" title="class in org.apache.poi.hslf.record">RecordTypes.Type</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.html#FooterMCAtom">FooterMCAtom</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;<A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.Type.html" title="class in org.apache.poi.hslf.record">RecordTypes.Type</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.html#GenericDateMCAtom">GenericDateMCAtom</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;<A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.Type.html" title="class in org.apache.poi.hslf.record">RecordTypes.Type</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.html#GPopublicintAtom">GPopublicintAtom</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;<A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.Type.html" title="class in org.apache.poi.hslf.record">RecordTypes.Type</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.html#GRatioAtom">GRatioAtom</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;<A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.Type.html" title="class in org.apache.poi.hslf.record">RecordTypes.Type</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.html#GRColorAtom">GRColorAtom</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;<A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.Type.html" title="class in org.apache.poi.hslf.record">RecordTypes.Type</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.html#GScalingAtom">GScalingAtom</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;<A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.Type.html" title="class in org.apache.poi.hslf.record">RecordTypes.Type</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.html#GuideAtom">GuideAtom</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;<A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.Type.html" title="class in org.apache.poi.hslf.record">RecordTypes.Type</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.html#HandOut">HandOut</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;<A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.Type.html" title="class in org.apache.poi.hslf.record">RecordTypes.Type</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.html#HeadersFooters">HeadersFooters</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;<A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.Type.html" title="class in org.apache.poi.hslf.record">RecordTypes.Type</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.html#HeadersFootersAtom">HeadersFootersAtom</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;<A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.Type.html" title="class in org.apache.poi.hslf.record">RecordTypes.Type</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.html#InteractiveInfo">InteractiveInfo</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;<A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.Type.html" title="class in org.apache.poi.hslf.record">RecordTypes.Type</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.html#InteractiveInfoAtom">InteractiveInfoAtom</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;<A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.Type.html" title="class in org.apache.poi.hslf.record">RecordTypes.Type</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.html#List">List</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;<A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.Type.html" title="class in org.apache.poi.hslf.record">RecordTypes.Type</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.html#MainMaster">MainMaster</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;<A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.Type.html" title="class in org.apache.poi.hslf.record">RecordTypes.Type</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.html#MetaFile">MetaFile</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;<A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.Type.html" title="class in org.apache.poi.hslf.record">RecordTypes.Type</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.html#NamedShow">NamedShow</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;<A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.Type.html" title="class in org.apache.poi.hslf.record">RecordTypes.Type</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.html#NamedShows">NamedShows</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;<A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.Type.html" title="class in org.apache.poi.hslf.record">RecordTypes.Type</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.html#NamedShowSlides">NamedShowSlides</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;<A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.Type.html" title="class in org.apache.poi.hslf.record">RecordTypes.Type</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.html#Notes">Notes</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;<A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.Type.html" title="class in org.apache.poi.hslf.record">RecordTypes.Type</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.html#NotesAtom">NotesAtom</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;<A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.Type.html" title="class in org.apache.poi.hslf.record">RecordTypes.Type</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.html#OEPlaceholderAtom">OEPlaceholderAtom</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;<A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.Type.html" title="class in org.apache.poi.hslf.record">RecordTypes.Type</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.html#OEShapeAtom">OEShapeAtom</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;<A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.Type.html" title="class in org.apache.poi.hslf.record">RecordTypes.Type</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.html#OriginalMainMasterId">OriginalMainMasterId</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;<A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.Type.html" title="class in org.apache.poi.hslf.record">RecordTypes.Type</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.html#OutlineTextRefAtom">OutlineTextRefAtom</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;<A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.Type.html" title="class in org.apache.poi.hslf.record">RecordTypes.Type</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.html#OutlineViewInfo">OutlineViewInfo</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;<A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.Type.html" title="class in org.apache.poi.hslf.record">RecordTypes.Type</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.html#ParaFormatAtom">ParaFormatAtom</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;<A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.Type.html" title="class in org.apache.poi.hslf.record">RecordTypes.Type</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.html#PersistPtrFullBlock">PersistPtrFullBlock</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;<A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.Type.html" title="class in org.apache.poi.hslf.record">RecordTypes.Type</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.html#PersistPtrIncrementalBlock">PersistPtrIncrementalBlock</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;<A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.Type.html" title="class in org.apache.poi.hslf.record">RecordTypes.Type</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.html#PPDrawing">PPDrawing</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;<A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.Type.html" title="class in org.apache.poi.hslf.record">RecordTypes.Type</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.html#PPDrawingGroup">PPDrawingGroup</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;<A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.Type.html" title="class in org.apache.poi.hslf.record">RecordTypes.Type</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.html#ProgBinaryTag">ProgBinaryTag</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;<A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.Type.html" title="class in org.apache.poi.hslf.record">RecordTypes.Type</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.html#ProgStringTag">ProgStringTag</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;<A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.Type.html" title="class in org.apache.poi.hslf.record">RecordTypes.Type</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.html#ProgTags">ProgTags</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;<A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.Type.html" title="class in org.apache.poi.hslf.record">RecordTypes.Type</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.html#PrpublicintOptions">PrpublicintOptions</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;<A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.Type.html" title="class in org.apache.poi.hslf.record">RecordTypes.Type</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.html#RecolorInfoAtom">RecolorInfoAtom</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;<A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.Type.html" title="class in org.apache.poi.hslf.record">RecordTypes.Type</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.html#RoundTripContentMasterId">RoundTripContentMasterId</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;<A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.Type.html" title="class in org.apache.poi.hslf.record">RecordTypes.Type</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.html#RoundTripContentMasterInfo12">RoundTripContentMasterInfo12</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;<A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.Type.html" title="class in org.apache.poi.hslf.record">RecordTypes.Type</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.html#RoundTripCustomTableStyles12">RoundTripCustomTableStyles12</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;<A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.Type.html" title="class in org.apache.poi.hslf.record">RecordTypes.Type</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.html#RoundTripHFPlaceholder12">RoundTripHFPlaceholder12</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;<A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.Type.html" title="class in org.apache.poi.hslf.record">RecordTypes.Type</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.html#RoundTripNotesMasterTextStyles12">RoundTripNotesMasterTextStyles12</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;<A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.Type.html" title="class in org.apache.poi.hslf.record">RecordTypes.Type</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.html#RoundTripOArtTextStyles12">RoundTripOArtTextStyles12</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;<A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.Type.html" title="class in org.apache.poi.hslf.record">RecordTypes.Type</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.html#RoundTripShapeCheckSumForCustomLayouts12">RoundTripShapeCheckSumForCustomLayouts12</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;<A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.Type.html" title="class in org.apache.poi.hslf.record">RecordTypes.Type</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.html#RoundTripShapeId12">RoundTripShapeId12</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;<A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.Type.html" title="class in org.apache.poi.hslf.record">RecordTypes.Type</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.html#RTFDateTimeMCAtom">RTFDateTimeMCAtom</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;<A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.Type.html" title="class in org.apache.poi.hslf.record">RecordTypes.Type</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.html#SheetProperties">SheetProperties</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;<A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.Type.html" title="class in org.apache.poi.hslf.record">RecordTypes.Type</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.html#Slide">Slide</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;<A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.Type.html" title="class in org.apache.poi.hslf.record">RecordTypes.Type</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.html#SlideAtom">SlideAtom</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;<A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.Type.html" title="class in org.apache.poi.hslf.record">RecordTypes.Type</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.html#SlideListWithText">SlideListWithText</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;<A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.Type.html" title="class in org.apache.poi.hslf.record">RecordTypes.Type</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.html#SlideNumberMCAtom">SlideNumberMCAtom</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;<A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.Type.html" title="class in org.apache.poi.hslf.record">RecordTypes.Type</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.html#SlidePersistAtom">SlidePersistAtom</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;<A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.Type.html" title="class in org.apache.poi.hslf.record">RecordTypes.Type</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.html#SlideViewInfo">SlideViewInfo</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;<A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.Type.html" title="class in org.apache.poi.hslf.record">RecordTypes.Type</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.html#SlideViewInfoAtom">SlideViewInfoAtom</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;<A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.Type.html" title="class in org.apache.poi.hslf.record">RecordTypes.Type</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.html#SorterViewInfo">SorterViewInfo</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;<A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.Type.html" title="class in org.apache.poi.hslf.record">RecordTypes.Type</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.html#Sound">Sound</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;<A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.Type.html" title="class in org.apache.poi.hslf.record">RecordTypes.Type</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.html#SoundCollAtom">SoundCollAtom</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;<A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.Type.html" title="class in org.apache.poi.hslf.record">RecordTypes.Type</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.html#SoundCollection">SoundCollection</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;<A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.Type.html" title="class in org.apache.poi.hslf.record">RecordTypes.Type</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.html#SoundData">SoundData</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;<A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.Type.html" title="class in org.apache.poi.hslf.record">RecordTypes.Type</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.html#SrKinsoku">SrKinsoku</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;<A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.Type.html" title="class in org.apache.poi.hslf.record">RecordTypes.Type</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.html#SrKinsokuAtom">SrKinsokuAtom</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;<A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.Type.html" title="class in org.apache.poi.hslf.record">RecordTypes.Type</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.html#SSDocInfoAtom">SSDocInfoAtom</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;<A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.Type.html" title="class in org.apache.poi.hslf.record">RecordTypes.Type</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.html#SSlideLayoutAtom">SSlideLayoutAtom</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;<A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.Type.html" title="class in org.apache.poi.hslf.record">RecordTypes.Type</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.html#SSSlideInfoAtom">SSSlideInfoAtom</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;<A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.Type.html" title="class in org.apache.poi.hslf.record">RecordTypes.Type</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.html#StyleTextProp9Atom">StyleTextProp9Atom</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;<A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.Type.html" title="class in org.apache.poi.hslf.record">RecordTypes.Type</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.html#StyleTextPropAtom">StyleTextPropAtom</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;<A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.Type.html" title="class in org.apache.poi.hslf.record">RecordTypes.Type</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.html#Summary">Summary</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;<A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.Type.html" title="class in org.apache.poi.hslf.record">RecordTypes.Type</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.html#TextBookmarkAtom">TextBookmarkAtom</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;<A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.Type.html" title="class in org.apache.poi.hslf.record">RecordTypes.Type</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.html#TextBytesAtom">TextBytesAtom</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;<A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.Type.html" title="class in org.apache.poi.hslf.record">RecordTypes.Type</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.html#TextCharsAtom">TextCharsAtom</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;<A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.Type.html" title="class in org.apache.poi.hslf.record">RecordTypes.Type</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.html#TextHeaderAtom">TextHeaderAtom</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;<A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.Type.html" title="class in org.apache.poi.hslf.record">RecordTypes.Type</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.html#TextRulerAtom">TextRulerAtom</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;<A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.Type.html" title="class in org.apache.poi.hslf.record">RecordTypes.Type</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.html#TextSpecInfoAtom">TextSpecInfoAtom</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;<A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.Type.html" title="class in org.apache.poi.hslf.record">RecordTypes.Type</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.html#TxCFStyleAtom">TxCFStyleAtom</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;<A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.Type.html" title="class in org.apache.poi.hslf.record">RecordTypes.Type</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.html#TxInteractiveInfoAtom">TxInteractiveInfoAtom</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;<A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.Type.html" title="class in org.apache.poi.hslf.record">RecordTypes.Type</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.html#TxMasterStyleAtom">TxMasterStyleAtom</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;<A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.Type.html" title="class in org.apache.poi.hslf.record">RecordTypes.Type</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.html#TxPFStyleAtom">TxPFStyleAtom</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;<A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.Type.html" title="class in org.apache.poi.hslf.record">RecordTypes.Type</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.html#TxSIStyleAtom">TxSIStyleAtom</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;java.util.HashMap&lt;java.lang.Integer,java.lang.Class&lt;? extends <A HREF="../../../../../org/apache/poi/hslf/record/Record.html" title="class in org.apache.poi.hslf.record">Record</A>&gt;&gt;</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.html#typeToClass">typeToClass</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;java.util.HashMap&lt;java.lang.Integer,java.lang.String&gt;</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.html#typeToName">typeToName</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;<A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.Type.html" title="class in org.apache.poi.hslf.record">RecordTypes.Type</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.html#Unknown">Unknown</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;<A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.Type.html" title="class in org.apache.poi.hslf.record">RecordTypes.Type</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.html#UserEditAtom">UserEditAtom</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;<A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.Type.html" title="class in org.apache.poi.hslf.record">RecordTypes.Type</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.html#VBAInfo">VBAInfo</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;<A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.Type.html" title="class in org.apache.poi.hslf.record">RecordTypes.Type</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.html#VBAInfoAtom">VBAInfoAtom</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;<A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.Type.html" title="class in org.apache.poi.hslf.record">RecordTypes.Type</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.html#ViewInfo">ViewInfo</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;<A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.Type.html" title="class in org.apache.poi.hslf.record">RecordTypes.Type</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.html#ViewInfoAtom">ViewInfoAtom</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+</TABLE>
+&nbsp;
+<!-- ======== CONSTRUCTOR SUMMARY ======== -->
+
+<A NAME="constructor_summary"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+<B>Constructor Summary</B></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.html#RecordTypes()">RecordTypes</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+</TABLE>
+&nbsp;
+<!-- ========== METHOD SUMMARY =========== -->
+
+<A NAME="method_summary"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+<B>Method Summary</B></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;java.lang.Class&lt;? extends <A HREF="../../../../../org/apache/poi/hslf/record/Record.html" title="class in org.apache.poi.hslf.record">Record</A>&gt;</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.html#recordHandlingClass(int)">recordHandlingClass</A></B>(int&nbsp;type)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns the class handling a record by its type.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;java.lang.String</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.html#recordName(int)">recordName</A></B>(int&nbsp;type)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns name of the record by its type</TD>
+</TR>
+</TABLE>
+&nbsp;<A NAME="methods_inherited_from_class_java.lang.Object"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#EEEEFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left"><B>Methods inherited from class java.lang.Object</B></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE>clone, equals, finalize, getClass, hashCode, notify, notifyAll, toString, wait, wait, wait</CODE></TD>
+</TR>
+</TABLE>
+&nbsp;
+<P>
+
+<!-- ============ FIELD DETAIL =========== -->
+
+<A NAME="field_detail"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="1"><FONT SIZE="+2">
+<B>Field Detail</B></FONT></TH>
+</TR>
+</TABLE>
+
+<A NAME="typeToName"><!-- --></A><H3>
+typeToName</H3>
+<PRE>
+public static java.util.HashMap&lt;java.lang.Integer,java.lang.String&gt; <B>typeToName</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="typeToClass"><!-- --></A><H3>
+typeToClass</H3>
+<PRE>
+public static java.util.HashMap&lt;java.lang.Integer,java.lang.Class&lt;? extends <A HREF="../../../../../org/apache/poi/hslf/record/Record.html" title="class in org.apache.poi.hslf.record">Record</A>&gt;&gt; <B>typeToClass</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="Unknown"><!-- --></A><H3>
+Unknown</H3>
+<PRE>
+public static final <A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.Type.html" title="class in org.apache.poi.hslf.record">RecordTypes.Type</A> <B>Unknown</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="Document"><!-- --></A><H3>
+Document</H3>
+<PRE>
+public static final <A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.Type.html" title="class in org.apache.poi.hslf.record">RecordTypes.Type</A> <B>Document</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="DocumentAtom"><!-- --></A><H3>
+DocumentAtom</H3>
+<PRE>
+public static final <A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.Type.html" title="class in org.apache.poi.hslf.record">RecordTypes.Type</A> <B>DocumentAtom</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="EndDocument"><!-- --></A><H3>
+EndDocument</H3>
+<PRE>
+public static final <A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.Type.html" title="class in org.apache.poi.hslf.record">RecordTypes.Type</A> <B>EndDocument</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="Slide"><!-- --></A><H3>
+Slide</H3>
+<PRE>
+public static final <A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.Type.html" title="class in org.apache.poi.hslf.record">RecordTypes.Type</A> <B>Slide</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="SlideAtom"><!-- --></A><H3>
+SlideAtom</H3>
+<PRE>
+public static final <A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.Type.html" title="class in org.apache.poi.hslf.record">RecordTypes.Type</A> <B>SlideAtom</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="Notes"><!-- --></A><H3>
+Notes</H3>
+<PRE>
+public static final <A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.Type.html" title="class in org.apache.poi.hslf.record">RecordTypes.Type</A> <B>Notes</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="NotesAtom"><!-- --></A><H3>
+NotesAtom</H3>
+<PRE>
+public static final <A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.Type.html" title="class in org.apache.poi.hslf.record">RecordTypes.Type</A> <B>NotesAtom</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="Environment"><!-- --></A><H3>
+Environment</H3>
+<PRE>
+public static final <A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.Type.html" title="class in org.apache.poi.hslf.record">RecordTypes.Type</A> <B>Environment</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="SlidePersistAtom"><!-- --></A><H3>
+SlidePersistAtom</H3>
+<PRE>
+public static final <A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.Type.html" title="class in org.apache.poi.hslf.record">RecordTypes.Type</A> <B>SlidePersistAtom</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="SSlideLayoutAtom"><!-- --></A><H3>
+SSlideLayoutAtom</H3>
+<PRE>
+public static final <A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.Type.html" title="class in org.apache.poi.hslf.record">RecordTypes.Type</A> <B>SSlideLayoutAtom</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="MainMaster"><!-- --></A><H3>
+MainMaster</H3>
+<PRE>
+public static final <A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.Type.html" title="class in org.apache.poi.hslf.record">RecordTypes.Type</A> <B>MainMaster</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="SSSlideInfoAtom"><!-- --></A><H3>
+SSSlideInfoAtom</H3>
+<PRE>
+public static final <A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.Type.html" title="class in org.apache.poi.hslf.record">RecordTypes.Type</A> <B>SSSlideInfoAtom</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="SlideViewInfo"><!-- --></A><H3>
+SlideViewInfo</H3>
+<PRE>
+public static final <A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.Type.html" title="class in org.apache.poi.hslf.record">RecordTypes.Type</A> <B>SlideViewInfo</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="GuideAtom"><!-- --></A><H3>
+GuideAtom</H3>
+<PRE>
+public static final <A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.Type.html" title="class in org.apache.poi.hslf.record">RecordTypes.Type</A> <B>GuideAtom</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="ViewInfo"><!-- --></A><H3>
+ViewInfo</H3>
+<PRE>
+public static final <A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.Type.html" title="class in org.apache.poi.hslf.record">RecordTypes.Type</A> <B>ViewInfo</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="ViewInfoAtom"><!-- --></A><H3>
+ViewInfoAtom</H3>
+<PRE>
+public static final <A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.Type.html" title="class in org.apache.poi.hslf.record">RecordTypes.Type</A> <B>ViewInfoAtom</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="SlideViewInfoAtom"><!-- --></A><H3>
+SlideViewInfoAtom</H3>
+<PRE>
+public static final <A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.Type.html" title="class in org.apache.poi.hslf.record">RecordTypes.Type</A> <B>SlideViewInfoAtom</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="VBAInfo"><!-- --></A><H3>
+VBAInfo</H3>
+<PRE>
+public static final <A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.Type.html" title="class in org.apache.poi.hslf.record">RecordTypes.Type</A> <B>VBAInfo</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="VBAInfoAtom"><!-- --></A><H3>
+VBAInfoAtom</H3>
+<PRE>
+public static final <A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.Type.html" title="class in org.apache.poi.hslf.record">RecordTypes.Type</A> <B>VBAInfoAtom</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="SSDocInfoAtom"><!-- --></A><H3>
+SSDocInfoAtom</H3>
+<PRE>
+public static final <A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.Type.html" title="class in org.apache.poi.hslf.record">RecordTypes.Type</A> <B>SSDocInfoAtom</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="Summary"><!-- --></A><H3>
+Summary</H3>
+<PRE>
+public static final <A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.Type.html" title="class in org.apache.poi.hslf.record">RecordTypes.Type</A> <B>Summary</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="DocRoutingSlip"><!-- --></A><H3>
+DocRoutingSlip</H3>
+<PRE>
+public static final <A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.Type.html" title="class in org.apache.poi.hslf.record">RecordTypes.Type</A> <B>DocRoutingSlip</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="OutlineViewInfo"><!-- --></A><H3>
+OutlineViewInfo</H3>
+<PRE>
+public static final <A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.Type.html" title="class in org.apache.poi.hslf.record">RecordTypes.Type</A> <B>OutlineViewInfo</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="SorterViewInfo"><!-- --></A><H3>
+SorterViewInfo</H3>
+<PRE>
+public static final <A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.Type.html" title="class in org.apache.poi.hslf.record">RecordTypes.Type</A> <B>SorterViewInfo</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="ExObjList"><!-- --></A><H3>
+ExObjList</H3>
+<PRE>
+public static final <A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.Type.html" title="class in org.apache.poi.hslf.record">RecordTypes.Type</A> <B>ExObjList</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="ExObjListAtom"><!-- --></A><H3>
+ExObjListAtom</H3>
+<PRE>
+public static final <A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.Type.html" title="class in org.apache.poi.hslf.record">RecordTypes.Type</A> <B>ExObjListAtom</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="PPDrawingGroup"><!-- --></A><H3>
+PPDrawingGroup</H3>
+<PRE>
+public static final <A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.Type.html" title="class in org.apache.poi.hslf.record">RecordTypes.Type</A> <B>PPDrawingGroup</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="PPDrawing"><!-- --></A><H3>
+PPDrawing</H3>
+<PRE>
+public static final <A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.Type.html" title="class in org.apache.poi.hslf.record">RecordTypes.Type</A> <B>PPDrawing</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="NamedShows"><!-- --></A><H3>
+NamedShows</H3>
+<PRE>
+public static final <A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.Type.html" title="class in org.apache.poi.hslf.record">RecordTypes.Type</A> <B>NamedShows</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="NamedShow"><!-- --></A><H3>
+NamedShow</H3>
+<PRE>
+public static final <A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.Type.html" title="class in org.apache.poi.hslf.record">RecordTypes.Type</A> <B>NamedShow</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="NamedShowSlides"><!-- --></A><H3>
+NamedShowSlides</H3>
+<PRE>
+public static final <A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.Type.html" title="class in org.apache.poi.hslf.record">RecordTypes.Type</A> <B>NamedShowSlides</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="SheetProperties"><!-- --></A><H3>
+SheetProperties</H3>
+<PRE>
+public static final <A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.Type.html" title="class in org.apache.poi.hslf.record">RecordTypes.Type</A> <B>SheetProperties</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="List"><!-- --></A><H3>
+List</H3>
+<PRE>
+public static final <A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.Type.html" title="class in org.apache.poi.hslf.record">RecordTypes.Type</A> <B>List</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="FontCollection"><!-- --></A><H3>
+FontCollection</H3>
+<PRE>
+public static final <A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.Type.html" title="class in org.apache.poi.hslf.record">RecordTypes.Type</A> <B>FontCollection</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="BookmarkCollection"><!-- --></A><H3>
+BookmarkCollection</H3>
+<PRE>
+public static final <A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.Type.html" title="class in org.apache.poi.hslf.record">RecordTypes.Type</A> <B>BookmarkCollection</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="SoundCollection"><!-- --></A><H3>
+SoundCollection</H3>
+<PRE>
+public static final <A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.Type.html" title="class in org.apache.poi.hslf.record">RecordTypes.Type</A> <B>SoundCollection</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="SoundCollAtom"><!-- --></A><H3>
+SoundCollAtom</H3>
+<PRE>
+public static final <A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.Type.html" title="class in org.apache.poi.hslf.record">RecordTypes.Type</A> <B>SoundCollAtom</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="Sound"><!-- --></A><H3>
+Sound</H3>
+<PRE>
+public static final <A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.Type.html" title="class in org.apache.poi.hslf.record">RecordTypes.Type</A> <B>Sound</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="SoundData"><!-- --></A><H3>
+SoundData</H3>
+<PRE>
+public static final <A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.Type.html" title="class in org.apache.poi.hslf.record">RecordTypes.Type</A> <B>SoundData</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="BookmarkSeedAtom"><!-- --></A><H3>
+BookmarkSeedAtom</H3>
+<PRE>
+public static final <A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.Type.html" title="class in org.apache.poi.hslf.record">RecordTypes.Type</A> <B>BookmarkSeedAtom</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="ColorSchemeAtom"><!-- --></A><H3>
+ColorSchemeAtom</H3>
+<PRE>
+public static final <A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.Type.html" title="class in org.apache.poi.hslf.record">RecordTypes.Type</A> <B>ColorSchemeAtom</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="ExObjRefAtom"><!-- --></A><H3>
+ExObjRefAtom</H3>
+<PRE>
+public static final <A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.Type.html" title="class in org.apache.poi.hslf.record">RecordTypes.Type</A> <B>ExObjRefAtom</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="OEShapeAtom"><!-- --></A><H3>
+OEShapeAtom</H3>
+<PRE>
+public static final <A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.Type.html" title="class in org.apache.poi.hslf.record">RecordTypes.Type</A> <B>OEShapeAtom</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="OEPlaceholderAtom"><!-- --></A><H3>
+OEPlaceholderAtom</H3>
+<PRE>
+public static final <A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.Type.html" title="class in org.apache.poi.hslf.record">RecordTypes.Type</A> <B>OEPlaceholderAtom</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="GPopublicintAtom"><!-- --></A><H3>
+GPopublicintAtom</H3>
+<PRE>
+public static final <A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.Type.html" title="class in org.apache.poi.hslf.record">RecordTypes.Type</A> <B>GPopublicintAtom</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="GRatioAtom"><!-- --></A><H3>
+GRatioAtom</H3>
+<PRE>
+public static final <A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.Type.html" title="class in org.apache.poi.hslf.record">RecordTypes.Type</A> <B>GRatioAtom</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="OutlineTextRefAtom"><!-- --></A><H3>
+OutlineTextRefAtom</H3>
+<PRE>
+public static final <A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.Type.html" title="class in org.apache.poi.hslf.record">RecordTypes.Type</A> <B>OutlineTextRefAtom</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="TextHeaderAtom"><!-- --></A><H3>
+TextHeaderAtom</H3>
+<PRE>
+public static final <A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.Type.html" title="class in org.apache.poi.hslf.record">RecordTypes.Type</A> <B>TextHeaderAtom</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="TextCharsAtom"><!-- --></A><H3>
+TextCharsAtom</H3>
+<PRE>
+public static final <A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.Type.html" title="class in org.apache.poi.hslf.record">RecordTypes.Type</A> <B>TextCharsAtom</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="StyleTextPropAtom"><!-- --></A><H3>
+StyleTextPropAtom</H3>
+<PRE>
+public static final <A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.Type.html" title="class in org.apache.poi.hslf.record">RecordTypes.Type</A> <B>StyleTextPropAtom</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="BaseTextPropAtom"><!-- --></A><H3>
+BaseTextPropAtom</H3>
+<PRE>
+public static final <A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.Type.html" title="class in org.apache.poi.hslf.record">RecordTypes.Type</A> <B>BaseTextPropAtom</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="TxMasterStyleAtom"><!-- --></A><H3>
+TxMasterStyleAtom</H3>
+<PRE>
+public static final <A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.Type.html" title="class in org.apache.poi.hslf.record">RecordTypes.Type</A> <B>TxMasterStyleAtom</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="TxCFStyleAtom"><!-- --></A><H3>
+TxCFStyleAtom</H3>
+<PRE>
+public static final <A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.Type.html" title="class in org.apache.poi.hslf.record">RecordTypes.Type</A> <B>TxCFStyleAtom</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="TxPFStyleAtom"><!-- --></A><H3>
+TxPFStyleAtom</H3>
+<PRE>
+public static final <A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.Type.html" title="class in org.apache.poi.hslf.record">RecordTypes.Type</A> <B>TxPFStyleAtom</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="TextRulerAtom"><!-- --></A><H3>
+TextRulerAtom</H3>
+<PRE>
+public static final <A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.Type.html" title="class in org.apache.poi.hslf.record">RecordTypes.Type</A> <B>TextRulerAtom</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="TextBookmarkAtom"><!-- --></A><H3>
+TextBookmarkAtom</H3>
+<PRE>
+public static final <A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.Type.html" title="class in org.apache.poi.hslf.record">RecordTypes.Type</A> <B>TextBookmarkAtom</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="TextBytesAtom"><!-- --></A><H3>
+TextBytesAtom</H3>
+<PRE>
+public static final <A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.Type.html" title="class in org.apache.poi.hslf.record">RecordTypes.Type</A> <B>TextBytesAtom</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="TxSIStyleAtom"><!-- --></A><H3>
+TxSIStyleAtom</H3>
+<PRE>
+public static final <A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.Type.html" title="class in org.apache.poi.hslf.record">RecordTypes.Type</A> <B>TxSIStyleAtom</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="TextSpecInfoAtom"><!-- --></A><H3>
+TextSpecInfoAtom</H3>
+<PRE>
+public static final <A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.Type.html" title="class in org.apache.poi.hslf.record">RecordTypes.Type</A> <B>TextSpecInfoAtom</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="DefaultRulerAtom"><!-- --></A><H3>
+DefaultRulerAtom</H3>
+<PRE>
+public static final <A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.Type.html" title="class in org.apache.poi.hslf.record">RecordTypes.Type</A> <B>DefaultRulerAtom</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="StyleTextProp9Atom"><!-- --></A><H3>
+StyleTextProp9Atom</H3>
+<PRE>
+public static final <A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.Type.html" title="class in org.apache.poi.hslf.record">RecordTypes.Type</A> <B>StyleTextProp9Atom</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="FontEntityAtom"><!-- --></A><H3>
+FontEntityAtom</H3>
+<PRE>
+public static final <A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.Type.html" title="class in org.apache.poi.hslf.record">RecordTypes.Type</A> <B>FontEntityAtom</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="FontEmbeddedData"><!-- --></A><H3>
+FontEmbeddedData</H3>
+<PRE>
+public static final <A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.Type.html" title="class in org.apache.poi.hslf.record">RecordTypes.Type</A> <B>FontEmbeddedData</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="CString"><!-- --></A><H3>
+CString</H3>
+<PRE>
+public static final <A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.Type.html" title="class in org.apache.poi.hslf.record">RecordTypes.Type</A> <B>CString</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="MetaFile"><!-- --></A><H3>
+MetaFile</H3>
+<PRE>
+public static final <A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.Type.html" title="class in org.apache.poi.hslf.record">RecordTypes.Type</A> <B>MetaFile</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="ExOleObjAtom"><!-- --></A><H3>
+ExOleObjAtom</H3>
+<PRE>
+public static final <A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.Type.html" title="class in org.apache.poi.hslf.record">RecordTypes.Type</A> <B>ExOleObjAtom</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="SrKinsoku"><!-- --></A><H3>
+SrKinsoku</H3>
+<PRE>
+public static final <A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.Type.html" title="class in org.apache.poi.hslf.record">RecordTypes.Type</A> <B>SrKinsoku</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="HandOut"><!-- --></A><H3>
+HandOut</H3>
+<PRE>
+public static final <A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.Type.html" title="class in org.apache.poi.hslf.record">RecordTypes.Type</A> <B>HandOut</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="ExEmbed"><!-- --></A><H3>
+ExEmbed</H3>
+<PRE>
+public static final <A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.Type.html" title="class in org.apache.poi.hslf.record">RecordTypes.Type</A> <B>ExEmbed</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="ExEmbedAtom"><!-- --></A><H3>
+ExEmbedAtom</H3>
+<PRE>
+public static final <A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.Type.html" title="class in org.apache.poi.hslf.record">RecordTypes.Type</A> <B>ExEmbedAtom</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="ExLink"><!-- --></A><H3>
+ExLink</H3>
+<PRE>
+public static final <A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.Type.html" title="class in org.apache.poi.hslf.record">RecordTypes.Type</A> <B>ExLink</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="BookmarkEntityAtom"><!-- --></A><H3>
+BookmarkEntityAtom</H3>
+<PRE>
+public static final <A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.Type.html" title="class in org.apache.poi.hslf.record">RecordTypes.Type</A> <B>BookmarkEntityAtom</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="ExLinkAtom"><!-- --></A><H3>
+ExLinkAtom</H3>
+<PRE>
+public static final <A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.Type.html" title="class in org.apache.poi.hslf.record">RecordTypes.Type</A> <B>ExLinkAtom</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="SrKinsokuAtom"><!-- --></A><H3>
+SrKinsokuAtom</H3>
+<PRE>
+public static final <A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.Type.html" title="class in org.apache.poi.hslf.record">RecordTypes.Type</A> <B>SrKinsokuAtom</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="ExHyperlinkAtom"><!-- --></A><H3>
+ExHyperlinkAtom</H3>
+<PRE>
+public static final <A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.Type.html" title="class in org.apache.poi.hslf.record">RecordTypes.Type</A> <B>ExHyperlinkAtom</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="ExHyperlink"><!-- --></A><H3>
+ExHyperlink</H3>
+<PRE>
+public static final <A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.Type.html" title="class in org.apache.poi.hslf.record">RecordTypes.Type</A> <B>ExHyperlink</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="SlideNumberMCAtom"><!-- --></A><H3>
+SlideNumberMCAtom</H3>
+<PRE>
+public static final <A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.Type.html" title="class in org.apache.poi.hslf.record">RecordTypes.Type</A> <B>SlideNumberMCAtom</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="HeadersFooters"><!-- --></A><H3>
+HeadersFooters</H3>
+<PRE>
+public static final <A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.Type.html" title="class in org.apache.poi.hslf.record">RecordTypes.Type</A> <B>HeadersFooters</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="HeadersFootersAtom"><!-- --></A><H3>
+HeadersFootersAtom</H3>
+<PRE>
+public static final <A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.Type.html" title="class in org.apache.poi.hslf.record">RecordTypes.Type</A> <B>HeadersFootersAtom</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="TxInteractiveInfoAtom"><!-- --></A><H3>
+TxInteractiveInfoAtom</H3>
+<PRE>
+public static final <A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.Type.html" title="class in org.apache.poi.hslf.record">RecordTypes.Type</A> <B>TxInteractiveInfoAtom</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="CharFormatAtom"><!-- --></A><H3>
+CharFormatAtom</H3>
+<PRE>
+public static final <A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.Type.html" title="class in org.apache.poi.hslf.record">RecordTypes.Type</A> <B>CharFormatAtom</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="ParaFormatAtom"><!-- --></A><H3>
+ParaFormatAtom</H3>
+<PRE>
+public static final <A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.Type.html" title="class in org.apache.poi.hslf.record">RecordTypes.Type</A> <B>ParaFormatAtom</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="RecolorInfoAtom"><!-- --></A><H3>
+RecolorInfoAtom</H3>
+<PRE>
+public static final <A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.Type.html" title="class in org.apache.poi.hslf.record">RecordTypes.Type</A> <B>RecolorInfoAtom</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="ExQuickTimeMovie"><!-- --></A><H3>
+ExQuickTimeMovie</H3>
+<PRE>
+public static final <A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.Type.html" title="class in org.apache.poi.hslf.record">RecordTypes.Type</A> <B>ExQuickTimeMovie</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="ExQuickTimeMovieData"><!-- --></A><H3>
+ExQuickTimeMovieData</H3>
+<PRE>
+public static final <A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.Type.html" title="class in org.apache.poi.hslf.record">RecordTypes.Type</A> <B>ExQuickTimeMovieData</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="ExControl"><!-- --></A><H3>
+ExControl</H3>
+<PRE>
+public static final <A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.Type.html" title="class in org.apache.poi.hslf.record">RecordTypes.Type</A> <B>ExControl</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="SlideListWithText"><!-- --></A><H3>
+SlideListWithText</H3>
+<PRE>
+public static final <A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.Type.html" title="class in org.apache.poi.hslf.record">RecordTypes.Type</A> <B>SlideListWithText</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="InteractiveInfo"><!-- --></A><H3>
+InteractiveInfo</H3>
+<PRE>
+public static final <A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.Type.html" title="class in org.apache.poi.hslf.record">RecordTypes.Type</A> <B>InteractiveInfo</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="InteractiveInfoAtom"><!-- --></A><H3>
+InteractiveInfoAtom</H3>
+<PRE>
+public static final <A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.Type.html" title="class in org.apache.poi.hslf.record">RecordTypes.Type</A> <B>InteractiveInfoAtom</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="UserEditAtom"><!-- --></A><H3>
+UserEditAtom</H3>
+<PRE>
+public static final <A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.Type.html" title="class in org.apache.poi.hslf.record">RecordTypes.Type</A> <B>UserEditAtom</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="CurrentUserAtom"><!-- --></A><H3>
+CurrentUserAtom</H3>
+<PRE>
+public static final <A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.Type.html" title="class in org.apache.poi.hslf.record">RecordTypes.Type</A> <B>CurrentUserAtom</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="DateTimeMCAtom"><!-- --></A><H3>
+DateTimeMCAtom</H3>
+<PRE>
+public static final <A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.Type.html" title="class in org.apache.poi.hslf.record">RecordTypes.Type</A> <B>DateTimeMCAtom</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="GenericDateMCAtom"><!-- --></A><H3>
+GenericDateMCAtom</H3>
+<PRE>
+public static final <A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.Type.html" title="class in org.apache.poi.hslf.record">RecordTypes.Type</A> <B>GenericDateMCAtom</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="FooterMCAtom"><!-- --></A><H3>
+FooterMCAtom</H3>
+<PRE>
+public static final <A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.Type.html" title="class in org.apache.poi.hslf.record">RecordTypes.Type</A> <B>FooterMCAtom</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="ExControlAtom"><!-- --></A><H3>
+ExControlAtom</H3>
+<PRE>
+public static final <A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.Type.html" title="class in org.apache.poi.hslf.record">RecordTypes.Type</A> <B>ExControlAtom</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="ExMediaAtom"><!-- --></A><H3>
+ExMediaAtom</H3>
+<PRE>
+public static final <A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.Type.html" title="class in org.apache.poi.hslf.record">RecordTypes.Type</A> <B>ExMediaAtom</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="ExVideoContainer"><!-- --></A><H3>
+ExVideoContainer</H3>
+<PRE>
+public static final <A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.Type.html" title="class in org.apache.poi.hslf.record">RecordTypes.Type</A> <B>ExVideoContainer</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="ExAviMovie"><!-- --></A><H3>
+ExAviMovie</H3>
+<PRE>
+public static final <A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.Type.html" title="class in org.apache.poi.hslf.record">RecordTypes.Type</A> <B>ExAviMovie</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="ExMCIMovie"><!-- --></A><H3>
+ExMCIMovie</H3>
+<PRE>
+public static final <A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.Type.html" title="class in org.apache.poi.hslf.record">RecordTypes.Type</A> <B>ExMCIMovie</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="ExMIDIAudio"><!-- --></A><H3>
+ExMIDIAudio</H3>
+<PRE>
+public static final <A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.Type.html" title="class in org.apache.poi.hslf.record">RecordTypes.Type</A> <B>ExMIDIAudio</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="ExCDAudio"><!-- --></A><H3>
+ExCDAudio</H3>
+<PRE>
+public static final <A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.Type.html" title="class in org.apache.poi.hslf.record">RecordTypes.Type</A> <B>ExCDAudio</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="ExWAVAudioEmbedded"><!-- --></A><H3>
+ExWAVAudioEmbedded</H3>
+<PRE>
+public static final <A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.Type.html" title="class in org.apache.poi.hslf.record">RecordTypes.Type</A> <B>ExWAVAudioEmbedded</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="ExWAVAudioLink"><!-- --></A><H3>
+ExWAVAudioLink</H3>
+<PRE>
+public static final <A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.Type.html" title="class in org.apache.poi.hslf.record">RecordTypes.Type</A> <B>ExWAVAudioLink</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="ExOleObjStg"><!-- --></A><H3>
+ExOleObjStg</H3>
+<PRE>
+public static final <A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.Type.html" title="class in org.apache.poi.hslf.record">RecordTypes.Type</A> <B>ExOleObjStg</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="ExCDAudioAtom"><!-- --></A><H3>
+ExCDAudioAtom</H3>
+<PRE>
+public static final <A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.Type.html" title="class in org.apache.poi.hslf.record">RecordTypes.Type</A> <B>ExCDAudioAtom</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="ExWAVAudioEmbeddedAtom"><!-- --></A><H3>
+ExWAVAudioEmbeddedAtom</H3>
+<PRE>
+public static final <A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.Type.html" title="class in org.apache.poi.hslf.record">RecordTypes.Type</A> <B>ExWAVAudioEmbeddedAtom</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="AnimationInfo"><!-- --></A><H3>
+AnimationInfo</H3>
+<PRE>
+public static final <A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.Type.html" title="class in org.apache.poi.hslf.record">RecordTypes.Type</A> <B>AnimationInfo</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="AnimationInfoAtom"><!-- --></A><H3>
+AnimationInfoAtom</H3>
+<PRE>
+public static final <A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.Type.html" title="class in org.apache.poi.hslf.record">RecordTypes.Type</A> <B>AnimationInfoAtom</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="RTFDateTimeMCAtom"><!-- --></A><H3>
+RTFDateTimeMCAtom</H3>
+<PRE>
+public static final <A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.Type.html" title="class in org.apache.poi.hslf.record">RecordTypes.Type</A> <B>RTFDateTimeMCAtom</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="ProgTags"><!-- --></A><H3>
+ProgTags</H3>
+<PRE>
+public static final <A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.Type.html" title="class in org.apache.poi.hslf.record">RecordTypes.Type</A> <B>ProgTags</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="ProgStringTag"><!-- --></A><H3>
+ProgStringTag</H3>
+<PRE>
+public static final <A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.Type.html" title="class in org.apache.poi.hslf.record">RecordTypes.Type</A> <B>ProgStringTag</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="ProgBinaryTag"><!-- --></A><H3>
+ProgBinaryTag</H3>
+<PRE>
+public static final <A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.Type.html" title="class in org.apache.poi.hslf.record">RecordTypes.Type</A> <B>ProgBinaryTag</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="BinaryTagData"><!-- --></A><H3>
+BinaryTagData</H3>
+<PRE>
+public static final <A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.Type.html" title="class in org.apache.poi.hslf.record">RecordTypes.Type</A> <B>BinaryTagData</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="PrpublicintOptions"><!-- --></A><H3>
+PrpublicintOptions</H3>
+<PRE>
+public static final <A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.Type.html" title="class in org.apache.poi.hslf.record">RecordTypes.Type</A> <B>PrpublicintOptions</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="PersistPtrFullBlock"><!-- --></A><H3>
+PersistPtrFullBlock</H3>
+<PRE>
+public static final <A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.Type.html" title="class in org.apache.poi.hslf.record">RecordTypes.Type</A> <B>PersistPtrFullBlock</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="PersistPtrIncrementalBlock"><!-- --></A><H3>
+PersistPtrIncrementalBlock</H3>
+<PRE>
+public static final <A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.Type.html" title="class in org.apache.poi.hslf.record">RecordTypes.Type</A> <B>PersistPtrIncrementalBlock</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="GScalingAtom"><!-- --></A><H3>
+GScalingAtom</H3>
+<PRE>
+public static final <A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.Type.html" title="class in org.apache.poi.hslf.record">RecordTypes.Type</A> <B>GScalingAtom</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="GRColorAtom"><!-- --></A><H3>
+GRColorAtom</H3>
+<PRE>
+public static final <A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.Type.html" title="class in org.apache.poi.hslf.record">RecordTypes.Type</A> <B>GRColorAtom</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="Comment2000"><!-- --></A><H3>
+Comment2000</H3>
+<PRE>
+public static final <A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.Type.html" title="class in org.apache.poi.hslf.record">RecordTypes.Type</A> <B>Comment2000</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="Comment2000Atom"><!-- --></A><H3>
+Comment2000Atom</H3>
+<PRE>
+public static final <A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.Type.html" title="class in org.apache.poi.hslf.record">RecordTypes.Type</A> <B>Comment2000Atom</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="Comment2000Summary"><!-- --></A><H3>
+Comment2000Summary</H3>
+<PRE>
+public static final <A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.Type.html" title="class in org.apache.poi.hslf.record">RecordTypes.Type</A> <B>Comment2000Summary</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="Comment2000SummaryAtom"><!-- --></A><H3>
+Comment2000SummaryAtom</H3>
+<PRE>
+public static final <A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.Type.html" title="class in org.apache.poi.hslf.record">RecordTypes.Type</A> <B>Comment2000SummaryAtom</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="DocumentEncryptionAtom"><!-- --></A><H3>
+DocumentEncryptionAtom</H3>
+<PRE>
+public static final <A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.Type.html" title="class in org.apache.poi.hslf.record">RecordTypes.Type</A> <B>DocumentEncryptionAtom</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="OriginalMainMasterId"><!-- --></A><H3>
+OriginalMainMasterId</H3>
+<PRE>
+public static final <A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.Type.html" title="class in org.apache.poi.hslf.record">RecordTypes.Type</A> <B>OriginalMainMasterId</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="CompositeMasterId"><!-- --></A><H3>
+CompositeMasterId</H3>
+<PRE>
+public static final <A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.Type.html" title="class in org.apache.poi.hslf.record">RecordTypes.Type</A> <B>CompositeMasterId</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="RoundTripContentMasterInfo12"><!-- --></A><H3>
+RoundTripContentMasterInfo12</H3>
+<PRE>
+public static final <A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.Type.html" title="class in org.apache.poi.hslf.record">RecordTypes.Type</A> <B>RoundTripContentMasterInfo12</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="RoundTripShapeId12"><!-- --></A><H3>
+RoundTripShapeId12</H3>
+<PRE>
+public static final <A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.Type.html" title="class in org.apache.poi.hslf.record">RecordTypes.Type</A> <B>RoundTripShapeId12</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="RoundTripHFPlaceholder12"><!-- --></A><H3>
+RoundTripHFPlaceholder12</H3>
+<PRE>
+public static final <A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.Type.html" title="class in org.apache.poi.hslf.record">RecordTypes.Type</A> <B>RoundTripHFPlaceholder12</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="RoundTripContentMasterId"><!-- --></A><H3>
+RoundTripContentMasterId</H3>
+<PRE>
+public static final <A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.Type.html" title="class in org.apache.poi.hslf.record">RecordTypes.Type</A> <B>RoundTripContentMasterId</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="RoundTripOArtTextStyles12"><!-- --></A><H3>
+RoundTripOArtTextStyles12</H3>
+<PRE>
+public static final <A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.Type.html" title="class in org.apache.poi.hslf.record">RecordTypes.Type</A> <B>RoundTripOArtTextStyles12</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="RoundTripShapeCheckSumForCustomLayouts12"><!-- --></A><H3>
+RoundTripShapeCheckSumForCustomLayouts12</H3>
+<PRE>
+public static final <A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.Type.html" title="class in org.apache.poi.hslf.record">RecordTypes.Type</A> <B>RoundTripShapeCheckSumForCustomLayouts12</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="RoundTripNotesMasterTextStyles12"><!-- --></A><H3>
+RoundTripNotesMasterTextStyles12</H3>
+<PRE>
+public static final <A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.Type.html" title="class in org.apache.poi.hslf.record">RecordTypes.Type</A> <B>RoundTripNotesMasterTextStyles12</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="RoundTripCustomTableStyles12"><!-- --></A><H3>
+RoundTripCustomTableStyles12</H3>
+<PRE>
+public static final <A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.Type.html" title="class in org.apache.poi.hslf.record">RecordTypes.Type</A> <B>RoundTripCustomTableStyles12</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="EscherDggContainer"><!-- --></A><H3>
+EscherDggContainer</H3>
+<PRE>
+public static final int <B>EscherDggContainer</B></PRE>
+<DL>
+<DL>
+<DT><B>See Also:</B><DD><A HREF="../../../../../constant-values.html#org.apache.poi.hslf.record.RecordTypes.EscherDggContainer">Constant Field Values</A></DL>
+</DL>
+<HR>
+
+<A NAME="EscherDgg"><!-- --></A><H3>
+EscherDgg</H3>
+<PRE>
+public static final int <B>EscherDgg</B></PRE>
+<DL>
+<DL>
+<DT><B>See Also:</B><DD><A HREF="../../../../../constant-values.html#org.apache.poi.hslf.record.RecordTypes.EscherDgg">Constant Field Values</A></DL>
+</DL>
+<HR>
+
+<A NAME="EscherCLSID"><!-- --></A><H3>
+EscherCLSID</H3>
+<PRE>
+public static final int <B>EscherCLSID</B></PRE>
+<DL>
+<DL>
+<DT><B>See Also:</B><DD><A HREF="../../../../../constant-values.html#org.apache.poi.hslf.record.RecordTypes.EscherCLSID">Constant Field Values</A></DL>
+</DL>
+<HR>
+
+<A NAME="EscherOPT"><!-- --></A><H3>
+EscherOPT</H3>
+<PRE>
+public static final int <B>EscherOPT</B></PRE>
+<DL>
+<DL>
+<DT><B>See Also:</B><DD><A HREF="../../../../../constant-values.html#org.apache.poi.hslf.record.RecordTypes.EscherOPT">Constant Field Values</A></DL>
+</DL>
+<HR>
+
+<A NAME="EscherBStoreContainer"><!-- --></A><H3>
+EscherBStoreContainer</H3>
+<PRE>
+public static final int <B>EscherBStoreContainer</B></PRE>
+<DL>
+<DL>
+<DT><B>See Also:</B><DD><A HREF="../../../../../constant-values.html#org.apache.poi.hslf.record.RecordTypes.EscherBStoreContainer">Constant Field Values</A></DL>
+</DL>
+<HR>
+
+<A NAME="EscherBSE"><!-- --></A><H3>
+EscherBSE</H3>
+<PRE>
+public static final int <B>EscherBSE</B></PRE>
+<DL>
+<DL>
+<DT><B>See Also:</B><DD><A HREF="../../../../../constant-values.html#org.apache.poi.hslf.record.RecordTypes.EscherBSE">Constant Field Values</A></DL>
+</DL>
+<HR>
+
+<A NAME="EscherBlip_START"><!-- --></A><H3>
+EscherBlip_START</H3>
+<PRE>
+public static final int <B>EscherBlip_START</B></PRE>
+<DL>
+<DL>
+<DT><B>See Also:</B><DD><A HREF="../../../../../constant-values.html#org.apache.poi.hslf.record.RecordTypes.EscherBlip_START">Constant Field Values</A></DL>
+</DL>
+<HR>
+
+<A NAME="EscherBlip_END"><!-- --></A><H3>
+EscherBlip_END</H3>
+<PRE>
+public static final int <B>EscherBlip_END</B></PRE>
+<DL>
+<DL>
+<DT><B>See Also:</B><DD><A HREF="../../../../../constant-values.html#org.apache.poi.hslf.record.RecordTypes.EscherBlip_END">Constant Field Values</A></DL>
+</DL>
+<HR>
+
+<A NAME="EscherDgContainer"><!-- --></A><H3>
+EscherDgContainer</H3>
+<PRE>
+public static final int <B>EscherDgContainer</B></PRE>
+<DL>
+<DL>
+<DT><B>See Also:</B><DD><A HREF="../../../../../constant-values.html#org.apache.poi.hslf.record.RecordTypes.EscherDgContainer">Constant Field Values</A></DL>
+</DL>
+<HR>
+
+<A NAME="EscherDg"><!-- --></A><H3>
+EscherDg</H3>
+<PRE>
+public static final int <B>EscherDg</B></PRE>
+<DL>
+<DL>
+<DT><B>See Also:</B><DD><A HREF="../../../../../constant-values.html#org.apache.poi.hslf.record.RecordTypes.EscherDg">Constant Field Values</A></DL>
+</DL>
+<HR>
+
+<A NAME="EscherRegroupItems"><!-- --></A><H3>
+EscherRegroupItems</H3>
+<PRE>
+public static final int <B>EscherRegroupItems</B></PRE>
+<DL>
+<DL>
+<DT><B>See Also:</B><DD><A HREF="../../../../../constant-values.html#org.apache.poi.hslf.record.RecordTypes.EscherRegroupItems">Constant Field Values</A></DL>
+</DL>
+<HR>
+
+<A NAME="EscherColorScheme"><!-- --></A><H3>
+EscherColorScheme</H3>
+<PRE>
+public static final int <B>EscherColorScheme</B></PRE>
+<DL>
+<DL>
+<DT><B>See Also:</B><DD><A HREF="../../../../../constant-values.html#org.apache.poi.hslf.record.RecordTypes.EscherColorScheme">Constant Field Values</A></DL>
+</DL>
+<HR>
+
+<A NAME="EscherSpgrContainer"><!-- --></A><H3>
+EscherSpgrContainer</H3>
+<PRE>
+public static final int <B>EscherSpgrContainer</B></PRE>
+<DL>
+<DL>
+<DT><B>See Also:</B><DD><A HREF="../../../../../constant-values.html#org.apache.poi.hslf.record.RecordTypes.EscherSpgrContainer">Constant Field Values</A></DL>
+</DL>
+<HR>
+
+<A NAME="EscherSpContainer"><!-- --></A><H3>
+EscherSpContainer</H3>
+<PRE>
+public static final int <B>EscherSpContainer</B></PRE>
+<DL>
+<DL>
+<DT><B>See Also:</B><DD><A HREF="../../../../../constant-values.html#org.apache.poi.hslf.record.RecordTypes.EscherSpContainer">Constant Field Values</A></DL>
+</DL>
+<HR>
+
+<A NAME="EscherSpgr"><!-- --></A><H3>
+EscherSpgr</H3>
+<PRE>
+public static final int <B>EscherSpgr</B></PRE>
+<DL>
+<DL>
+<DT><B>See Also:</B><DD><A HREF="../../../../../constant-values.html#org.apache.poi.hslf.record.RecordTypes.EscherSpgr">Constant Field Values</A></DL>
+</DL>
+<HR>
+
+<A NAME="EscherSp"><!-- --></A><H3>
+EscherSp</H3>
+<PRE>
+public static final int <B>EscherSp</B></PRE>
+<DL>
+<DL>
+<DT><B>See Also:</B><DD><A HREF="../../../../../constant-values.html#org.apache.poi.hslf.record.RecordTypes.EscherSp">Constant Field Values</A></DL>
+</DL>
+<HR>
+
+<A NAME="EscherTextbox"><!-- --></A><H3>
+EscherTextbox</H3>
+<PRE>
+public static final int <B>EscherTextbox</B></PRE>
+<DL>
+<DL>
+<DT><B>See Also:</B><DD><A HREF="../../../../../constant-values.html#org.apache.poi.hslf.record.RecordTypes.EscherTextbox">Constant Field Values</A></DL>
+</DL>
+<HR>
+
+<A NAME="EscherClientTextbox"><!-- --></A><H3>
+EscherClientTextbox</H3>
+<PRE>
+public static final int <B>EscherClientTextbox</B></PRE>
+<DL>
+<DL>
+<DT><B>See Also:</B><DD><A HREF="../../../../../constant-values.html#org.apache.poi.hslf.record.RecordTypes.EscherClientTextbox">Constant Field Values</A></DL>
+</DL>
+<HR>
+
+<A NAME="EscherAnchor"><!-- --></A><H3>
+EscherAnchor</H3>
+<PRE>
+public static final int <B>EscherAnchor</B></PRE>
+<DL>
+<DL>
+<DT><B>See Also:</B><DD><A HREF="../../../../../constant-values.html#org.apache.poi.hslf.record.RecordTypes.EscherAnchor">Constant Field Values</A></DL>
+</DL>
+<HR>
+
+<A NAME="EscherChildAnchor"><!-- --></A><H3>
+EscherChildAnchor</H3>
+<PRE>
+public static final int <B>EscherChildAnchor</B></PRE>
+<DL>
+<DL>
+<DT><B>See Also:</B><DD><A HREF="../../../../../constant-values.html#org.apache.poi.hslf.record.RecordTypes.EscherChildAnchor">Constant Field Values</A></DL>
+</DL>
+<HR>
+
+<A NAME="EscherClientAnchor"><!-- --></A><H3>
+EscherClientAnchor</H3>
+<PRE>
+public static final int <B>EscherClientAnchor</B></PRE>
+<DL>
+<DL>
+<DT><B>See Also:</B><DD><A HREF="../../../../../constant-values.html#org.apache.poi.hslf.record.RecordTypes.EscherClientAnchor">Constant Field Values</A></DL>
+</DL>
+<HR>
+
+<A NAME="EscherClientData"><!-- --></A><H3>
+EscherClientData</H3>
+<PRE>
+public static final int <B>EscherClientData</B></PRE>
+<DL>
+<DL>
+<DT><B>See Also:</B><DD><A HREF="../../../../../constant-values.html#org.apache.poi.hslf.record.RecordTypes.EscherClientData">Constant Field Values</A></DL>
+</DL>
+<HR>
+
+<A NAME="EscherSolverContainer"><!-- --></A><H3>
+EscherSolverContainer</H3>
+<PRE>
+public static final int <B>EscherSolverContainer</B></PRE>
+<DL>
+<DL>
+<DT><B>See Also:</B><DD><A HREF="../../../../../constant-values.html#org.apache.poi.hslf.record.RecordTypes.EscherSolverContainer">Constant Field Values</A></DL>
+</DL>
+<HR>
+
+<A NAME="EscherConnectorRule"><!-- --></A><H3>
+EscherConnectorRule</H3>
+<PRE>
+public static final int <B>EscherConnectorRule</B></PRE>
+<DL>
+<DL>
+<DT><B>See Also:</B><DD><A HREF="../../../../../constant-values.html#org.apache.poi.hslf.record.RecordTypes.EscherConnectorRule">Constant Field Values</A></DL>
+</DL>
+<HR>
+
+<A NAME="EscherAlignRule"><!-- --></A><H3>
+EscherAlignRule</H3>
+<PRE>
+public static final int <B>EscherAlignRule</B></PRE>
+<DL>
+<DL>
+<DT><B>See Also:</B><DD><A HREF="../../../../../constant-values.html#org.apache.poi.hslf.record.RecordTypes.EscherAlignRule">Constant Field Values</A></DL>
+</DL>
+<HR>
+
+<A NAME="EscherArcRule"><!-- --></A><H3>
+EscherArcRule</H3>
+<PRE>
+public static final int <B>EscherArcRule</B></PRE>
+<DL>
+<DL>
+<DT><B>See Also:</B><DD><A HREF="../../../../../constant-values.html#org.apache.poi.hslf.record.RecordTypes.EscherArcRule">Constant Field Values</A></DL>
+</DL>
+<HR>
+
+<A NAME="EscherClientRule"><!-- --></A><H3>
+EscherClientRule</H3>
+<PRE>
+public static final int <B>EscherClientRule</B></PRE>
+<DL>
+<DL>
+<DT><B>See Also:</B><DD><A HREF="../../../../../constant-values.html#org.apache.poi.hslf.record.RecordTypes.EscherClientRule">Constant Field Values</A></DL>
+</DL>
+<HR>
+
+<A NAME="EscherCalloutRule"><!-- --></A><H3>
+EscherCalloutRule</H3>
+<PRE>
+public static final int <B>EscherCalloutRule</B></PRE>
+<DL>
+<DL>
+<DT><B>See Also:</B><DD><A HREF="../../../../../constant-values.html#org.apache.poi.hslf.record.RecordTypes.EscherCalloutRule">Constant Field Values</A></DL>
+</DL>
+<HR>
+
+<A NAME="EscherSelection"><!-- --></A><H3>
+EscherSelection</H3>
+<PRE>
+public static final int <B>EscherSelection</B></PRE>
+<DL>
+<DL>
+<DT><B>See Also:</B><DD><A HREF="../../../../../constant-values.html#org.apache.poi.hslf.record.RecordTypes.EscherSelection">Constant Field Values</A></DL>
+</DL>
+<HR>
+
+<A NAME="EscherColorMRU"><!-- --></A><H3>
+EscherColorMRU</H3>
+<PRE>
+public static final int <B>EscherColorMRU</B></PRE>
+<DL>
+<DL>
+<DT><B>See Also:</B><DD><A HREF="../../../../../constant-values.html#org.apache.poi.hslf.record.RecordTypes.EscherColorMRU">Constant Field Values</A></DL>
+</DL>
+<HR>
+
+<A NAME="EscherDeletedPspl"><!-- --></A><H3>
+EscherDeletedPspl</H3>
+<PRE>
+public static final int <B>EscherDeletedPspl</B></PRE>
+<DL>
+<DL>
+<DT><B>See Also:</B><DD><A HREF="../../../../../constant-values.html#org.apache.poi.hslf.record.RecordTypes.EscherDeletedPspl">Constant Field Values</A></DL>
+</DL>
+<HR>
+
+<A NAME="EscherSplitMenuColors"><!-- --></A><H3>
+EscherSplitMenuColors</H3>
+<PRE>
+public static final int <B>EscherSplitMenuColors</B></PRE>
+<DL>
+<DL>
+<DT><B>See Also:</B><DD><A HREF="../../../../../constant-values.html#org.apache.poi.hslf.record.RecordTypes.EscherSplitMenuColors">Constant Field Values</A></DL>
+</DL>
+<HR>
+
+<A NAME="EscherOleObject"><!-- --></A><H3>
+EscherOleObject</H3>
+<PRE>
+public static final int <B>EscherOleObject</B></PRE>
+<DL>
+<DL>
+<DT><B>See Also:</B><DD><A HREF="../../../../../constant-values.html#org.apache.poi.hslf.record.RecordTypes.EscherOleObject">Constant Field Values</A></DL>
+</DL>
+<HR>
+
+<A NAME="EscherUserDefined"><!-- --></A><H3>
+EscherUserDefined</H3>
+<PRE>
+public static final int <B>EscherUserDefined</B></PRE>
+<DL>
+<DL>
+<DT><B>See Also:</B><DD><A HREF="../../../../../constant-values.html#org.apache.poi.hslf.record.RecordTypes.EscherUserDefined">Constant Field Values</A></DL>
+</DL>
+
+<!-- ========= CONSTRUCTOR DETAIL ======== -->
+
+<A NAME="constructor_detail"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="1"><FONT SIZE="+2">
+<B>Constructor Detail</B></FONT></TH>
+</TR>
+</TABLE>
+
+<A NAME="RecordTypes()"><!-- --></A><H3>
+RecordTypes</H3>
+<PRE>
+public <B>RecordTypes</B>()</PRE>
+<DL>
+</DL>
+
+<!-- ============ METHOD DETAIL ========== -->
+
+<A NAME="method_detail"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="1"><FONT SIZE="+2">
+<B>Method Detail</B></FONT></TH>
+</TR>
+</TABLE>
+
+<A NAME="recordName(int)"><!-- --></A><H3>
+recordName</H3>
+<PRE>
+public static java.lang.String <B>recordName</B>(int&nbsp;type)</PRE>
+<DL>
+<DD>Returns name of the record by its type
+<P>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>type</CODE> - section of the record header
+<DT><B>Returns:</B><DD>name of the record</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="recordHandlingClass(int)"><!-- --></A><H3>
+recordHandlingClass</H3>
+<PRE>
+public static java.lang.Class&lt;? extends <A HREF="../../../../../org/apache/poi/hslf/record/Record.html" title="class in org.apache.poi.hslf.record">Record</A>&gt; <B>recordHandlingClass</B>(int&nbsp;type)</PRE>
+<DL>
+<DD>Returns the class handling a record by its type.
+ If given an un-handled PowerPoint record, will return a dummy
+  placeholder class. If given an unknown PowerPoint record, or
+  and Escher record, will return null.
+<P>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>type</CODE> - section of the record header
+<DT><B>Returns:</B><DD>class to handle the record, or null if an unknown (eg Escher) record</DL>
+</DD>
+</DL>
+<!-- ========= END OF CLASS DATA ========= -->
+<HR>
+
+
+<!-- ======= START OF BOTTOM NAVBAR ====== -->
+<A NAME="navbar_bottom"><!-- --></A>
+<A HREF="#skip-navbar_bottom" title="Skip navigation links"></A>
+<TABLE BORDER="0" WIDTH="100%" CELLPADDING="1" CELLSPACING="0" SUMMARY="">
+<TR>
+<TD COLSPAN=2 BGCOLOR="#EEEEFF" CLASS="NavBarCell1">
+<A NAME="navbar_bottom_firstrow"><!-- --></A>
+<TABLE BORDER="0" CELLPADDING="0" CELLSPACING="3" SUMMARY="">
+  <TR ALIGN="center" VALIGN="top">
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../overview-summary.html"><FONT CLASS="NavBarFont1"><B>Overview</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="package-summary.html"><FONT CLASS="NavBarFont1"><B>Package</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#FFFFFF" CLASS="NavBarCell1Rev"> &nbsp;<FONT CLASS="NavBarFont1Rev"><B>Class</B></FONT>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="class-use/RecordTypes.html"><FONT CLASS="NavBarFont1"><B>Use</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="package-tree.html"><FONT CLASS="NavBarFont1"><B>Tree</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../deprecated-list.html"><FONT CLASS="NavBarFont1"><B>Deprecated</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../index-all.html"><FONT CLASS="NavBarFont1"><B>Index</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../help-doc.html"><FONT CLASS="NavBarFont1"><B>Help</B></FONT></A>&nbsp;</TD>
+  </TR>
+</TABLE>
+</TD>
+<TD ALIGN="right" VALIGN="top" ROWSPAN=3><EM>
+</EM>
+</TD>
+</TR>
+
+<TR>
+<TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
+&nbsp;<A HREF="../../../../../org/apache/poi/hslf/record/RecordContainer.html" title="class in org.apache.poi.hslf.record"><B>PREV CLASS</B></A>&nbsp;
+&nbsp;<A HREF="../../../../../org/apache/poi/hslf/record/RecordTypes.Type.html" title="class in org.apache.poi.hslf.record"><B>NEXT CLASS</B></A></FONT></TD>
+<TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
+  <A HREF="../../../../../index.html?org/apache/poi/hslf/record/RecordTypes.html" target="_top"><B>FRAMES</B></A>  &nbsp;
+&nbsp;<A HREF="RecordTypes.html" target="_top"><B>NO FRAMES</B></A>  &nbsp;
+&nbsp;<SCRIPT type="text/javascript">
+  <!--
+  if(window==top) {
+    document.writeln('<A HREF="../../../../../allclasses-noframe.html"><B>All Classes</B></A>');
+  }
+  //-->
+</SCRIPT>
+<NOSCRIPT>
+  <A HREF="../../../../../allclasses-noframe.html"><B>All Classes</B></A>
+</NOSCRIPT>
+
+
+</FONT></TD>
+</TR>
+<TR>
+<TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
+  SUMMARY:&nbsp;<A HREF="#nested_class_summary">NESTED</A>&nbsp;|&nbsp;<A HREF="#field_summary">FIELD</A>&nbsp;|&nbsp;<A HREF="#constructor_summary">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_summary">METHOD</A></FONT></TD>
+<TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
+DETAIL:&nbsp;<A HREF="#field_detail">FIELD</A>&nbsp;|&nbsp;<A HREF="#constructor_detail">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_detail">METHOD</A></FONT></TD>
+</TR>
+</TABLE>
+<A NAME="skip-navbar_bottom"></A>
+<!-- ======== END OF BOTTOM NAVBAR ======= -->
+
+<HR>
+
+                <i>Copyright 2014 The Apache Software Foundation or
+        its licensors, as applicable.</i>
+            
+</BODY>
+</HTML>

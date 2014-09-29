@@ -1,0 +1,1425 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!--NewPage-->
+<HTML>
+<HEAD>
+<TITLE>
+HWPFDocument (POI API Documentation)
+</TITLE>
+
+<META NAME="keywords" CONTENT="org.apache.poi.hwpf.HWPFDocument class">
+
+<LINK REL ="stylesheet" TYPE="text/css" HREF="../../../../stylesheet.css" TITLE="Style">
+
+<SCRIPT type="text/javascript">
+function windowTitle()
+{
+    parent.document.title="HWPFDocument (POI API Documentation)";
+}
+</SCRIPT>
+<NOSCRIPT>
+</NOSCRIPT>
+
+</HEAD>
+
+<BODY BGCOLOR="white" onload="windowTitle();">
+
+
+<!-- ========= START OF TOP NAVBAR ======= -->
+<A NAME="navbar_top"><!-- --></A>
+<A HREF="#skip-navbar_top" title="Skip navigation links"></A>
+<TABLE BORDER="0" WIDTH="100%" CELLPADDING="1" CELLSPACING="0" SUMMARY="">
+<TR>
+<TD COLSPAN=2 BGCOLOR="#EEEEFF" CLASS="NavBarCell1">
+<A NAME="navbar_top_firstrow"><!-- --></A>
+<TABLE BORDER="0" CELLPADDING="0" CELLSPACING="3" SUMMARY="">
+  <TR ALIGN="center" VALIGN="top">
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../overview-summary.html"><FONT CLASS="NavBarFont1"><B>Overview</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="package-summary.html"><FONT CLASS="NavBarFont1"><B>Package</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#FFFFFF" CLASS="NavBarCell1Rev"> &nbsp;<FONT CLASS="NavBarFont1Rev"><B>Class</B></FONT>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="class-use/HWPFDocument.html"><FONT CLASS="NavBarFont1"><B>Use</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="package-tree.html"><FONT CLASS="NavBarFont1"><B>Tree</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../deprecated-list.html"><FONT CLASS="NavBarFont1"><B>Deprecated</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../index-all.html"><FONT CLASS="NavBarFont1"><B>Index</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../help-doc.html"><FONT CLASS="NavBarFont1"><B>Help</B></FONT></A>&nbsp;</TD>
+  </TR>
+</TABLE>
+</TD>
+<TD ALIGN="right" VALIGN="top" ROWSPAN=3><EM>
+</EM>
+</TD>
+</TR>
+
+<TR>
+<TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
+&nbsp;PREV CLASS&nbsp;
+&nbsp;<A HREF="../../../../org/apache/poi/hwpf/HWPFDocumentCore.html" title="class in org.apache.poi.hwpf"><B>NEXT CLASS</B></A></FONT></TD>
+<TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
+  <A HREF="../../../../index.html?org/apache/poi/hwpf/HWPFDocument.html" target="_top"><B>FRAMES</B></A>  &nbsp;
+&nbsp;<A HREF="HWPFDocument.html" target="_top"><B>NO FRAMES</B></A>  &nbsp;
+&nbsp;<SCRIPT type="text/javascript">
+  <!--
+  if(window==top) {
+    document.writeln('<A HREF="../../../../allclasses-noframe.html"><B>All Classes</B></A>');
+  }
+  //-->
+</SCRIPT>
+<NOSCRIPT>
+  <A HREF="../../../../allclasses-noframe.html"><B>All Classes</B></A>
+</NOSCRIPT>
+
+
+</FONT></TD>
+</TR>
+<TR>
+<TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
+  SUMMARY:&nbsp;NESTED&nbsp;|&nbsp;<A HREF="#field_summary">FIELD</A>&nbsp;|&nbsp;<A HREF="#constructor_summary">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_summary">METHOD</A></FONT></TD>
+<TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
+DETAIL:&nbsp;<A HREF="#field_detail">FIELD</A>&nbsp;|&nbsp;<A HREF="#constructor_detail">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_detail">METHOD</A></FONT></TD>
+</TR>
+</TABLE>
+<A NAME="skip-navbar_top"></A>
+<!-- ========= END OF TOP NAVBAR ========= -->
+
+<HR>
+<!-- ======== START OF CLASS DATA ======== -->
+<H2>
+<FONT SIZE="-1">
+org.apache.poi.hwpf</FONT>
+<BR>
+Class HWPFDocument</H2>
+<PRE>
+java.lang.Object
+  <IMG SRC="../../../../resources/inherit.gif" ALT="extended by "><A HREF="../../../../org/apache/poi/POIDocument.html" title="class in org.apache.poi">org.apache.poi.POIDocument</A>
+      <IMG SRC="../../../../resources/inherit.gif" ALT="extended by "><A HREF="../../../../org/apache/poi/hwpf/HWPFDocumentCore.html" title="class in org.apache.poi.hwpf">org.apache.poi.hwpf.HWPFDocumentCore</A>
+          <IMG SRC="../../../../resources/inherit.gif" ALT="extended by "><B>org.apache.poi.hwpf.HWPFDocument</B>
+</PRE>
+<HR>
+<DL>
+<DT><PRE>public final class <B>HWPFDocument</B><DT>extends <A HREF="../../../../org/apache/poi/hwpf/HWPFDocumentCore.html" title="class in org.apache.poi.hwpf">HWPFDocumentCore</A></DL>
+</PRE>
+
+<P>
+This class acts as the bucket that we throw all of the Word data structures
+ into.
+<P>
+
+<P>
+<DL>
+<DT><B>Author:</B></DT>
+  <DD>Ryan Ackley</DD>
+</DL>
+<HR>
+
+<P>
+<!-- =========== FIELD SUMMARY =========== -->
+
+<A NAME="field_summary"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+<B>Field Summary</B></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>protected &nbsp;<A HREF="../../../../org/apache/poi/hwpf/usermodel/Bookmarks.html" title="interface in org.apache.poi.hwpf.usermodel">Bookmarks</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../org/apache/poi/hwpf/HWPFDocument.html#_bookmarks">_bookmarks</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Holds the bookmarks</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>protected &nbsp;<A HREF="../../../../org/apache/poi/hwpf/model/BookmarksTables.html" title="class in org.apache.poi.hwpf.model">BookmarksTables</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../org/apache/poi/hwpf/HWPFDocument.html#_bookmarksTables">_bookmarksTables</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Holds the bookmarks tables</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>protected &nbsp;<A HREF="../../../../org/apache/poi/hwpf/model/ComplexFileTable.html" title="class in org.apache.poi.hwpf.model">ComplexFileTable</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../org/apache/poi/hwpf/HWPFDocument.html#_cft">_cft</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Contains text of the document wrapped in a obfuscated Word data
+ structure</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>protected &nbsp;byte[]</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../org/apache/poi/hwpf/HWPFDocument.html#_dataStream">_dataStream</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;data stream buffer</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>protected &nbsp;<A HREF="../../../../org/apache/poi/hwpf/model/DocumentProperties.html" title="class in org.apache.poi.hwpf.model">DocumentProperties</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../org/apache/poi/hwpf/HWPFDocument.html#_dop">_dop</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Document wide Properties</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>protected &nbsp;<A HREF="../../../../org/apache/poi/hwpf/usermodel/Notes.html" title="interface in org.apache.poi.hwpf.usermodel">Notes</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../org/apache/poi/hwpf/HWPFDocument.html#_endnotes">_endnotes</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Holds the footnotes</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>protected &nbsp;<A HREF="../../../../org/apache/poi/hwpf/model/NotesTables.html" title="class in org.apache.poi.hwpf.model">NotesTables</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../org/apache/poi/hwpf/HWPFDocument.html#_endnotesTables">_endnotesTables</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Holds the ending notes tables</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>protected &nbsp;<A HREF="../../../../org/apache/poi/hwpf/model/EscherRecordHolder.html" title="class in org.apache.poi.hwpf.model">EscherRecordHolder</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../org/apache/poi/hwpf/HWPFDocument.html#_escherRecordHolder">_escherRecordHolder</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Escher Drawing Group information</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>protected &nbsp;<A HREF="../../../../org/apache/poi/hwpf/usermodel/Fields.html" title="interface in org.apache.poi.hwpf.usermodel">Fields</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../org/apache/poi/hwpf/HWPFDocument.html#_fields">_fields</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Holds the fields</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>protected &nbsp;<A HREF="../../../../org/apache/poi/hwpf/model/FieldsTables.html" title="class in org.apache.poi.hwpf.model">FieldsTables</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../org/apache/poi/hwpf/HWPFDocument.html#_fieldsTables">_fieldsTables</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Holds the fields PLCFs</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>protected &nbsp;<A HREF="../../../../org/apache/poi/hwpf/usermodel/Notes.html" title="interface in org.apache.poi.hwpf.usermodel">Notes</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../org/apache/poi/hwpf/HWPFDocument.html#_footnotes">_footnotes</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Holds the footnotes</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>protected &nbsp;<A HREF="../../../../org/apache/poi/hwpf/model/NotesTables.html" title="class in org.apache.poi.hwpf.model">NotesTables</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../org/apache/poi/hwpf/HWPFDocument.html#_footnotesTables">_footnotesTables</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Holds the footnotes tables</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>protected &nbsp;<A HREF="../../../../org/apache/poi/hwpf/model/ShapesTable.html" title="class in org.apache.poi.hwpf.model">ShapesTable</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../org/apache/poi/hwpf/HWPFDocument.html#_officeArts">_officeArts</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>protected &nbsp;<A HREF="../../../../org/apache/poi/hwpf/usermodel/OfficeDrawingsImpl.html" title="class in org.apache.poi.hwpf.usermodel">OfficeDrawingsImpl</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../org/apache/poi/hwpf/HWPFDocument.html#_officeDrawingsHeaders">_officeDrawingsHeaders</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Holds Office Art objects</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>protected &nbsp;<A HREF="../../../../org/apache/poi/hwpf/usermodel/OfficeDrawingsImpl.html" title="class in org.apache.poi.hwpf.usermodel">OfficeDrawingsImpl</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../org/apache/poi/hwpf/HWPFDocument.html#_officeDrawingsMain">_officeDrawingsMain</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Holds Office Art objects</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>protected &nbsp;<A HREF="../../../../org/apache/poi/hwpf/model/PicturesTable.html" title="class in org.apache.poi.hwpf.model">PicturesTable</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../org/apache/poi/hwpf/HWPFDocument.html#_pictures">_pictures</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Holds pictures table</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>protected &nbsp;<A HREF="../../../../org/apache/poi/hwpf/model/RevisionMarkAuthorTable.html" title="class in org.apache.poi.hwpf.model">RevisionMarkAuthorTable</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../org/apache/poi/hwpf/HWPFDocument.html#_rmat">_rmat</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Holds the revision mark authors for this document.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>protected &nbsp;<A HREF="../../../../org/apache/poi/hwpf/model/SavedByTable.html" title="class in org.apache.poi.hwpf.model">SavedByTable</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../org/apache/poi/hwpf/HWPFDocument.html#_sbt">_sbt</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Holds the save history for this document.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>protected &nbsp;byte[]</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../org/apache/poi/hwpf/HWPFDocument.html#_tableStream">_tableStream</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;table stream buffer</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>protected &nbsp;java.lang.StringBuilder</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../org/apache/poi/hwpf/HWPFDocument.html#_text">_text</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Contains text buffer linked directly to single-piece document text piece</TD>
+</TR>
+</TABLE>
+&nbsp;<A NAME="fields_inherited_from_class_org.apache.poi.hwpf.HWPFDocumentCore"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#EEEEFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left"><B>Fields inherited from class org.apache.poi.hwpf.<A HREF="../../../../org/apache/poi/hwpf/HWPFDocumentCore.html" title="class in org.apache.poi.hwpf">HWPFDocumentCore</A></B></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><A HREF="../../../../org/apache/poi/hwpf/HWPFDocumentCore.html#_cbt">_cbt</A>, <A HREF="../../../../org/apache/poi/hwpf/HWPFDocumentCore.html#_fib">_fib</A>, <A HREF="../../../../org/apache/poi/hwpf/HWPFDocumentCore.html#_ft">_ft</A>, <A HREF="../../../../org/apache/poi/hwpf/HWPFDocumentCore.html#_lt">_lt</A>, <A HREF="../../../../org/apache/poi/hwpf/HWPFDocumentCore.html#_mainStream">_mainStream</A>, <A HREF="../../../../org/apache/poi/hwpf/HWPFDocumentCore.html#_objectPool">_objectPool</A>, <A HREF="../../../../org/apache/poi/hwpf/HWPFDocumentCore.html#_pbt">_pbt</A>, <A HREF="../../../../org/apache/poi/hwpf/HWPFDocumentCore.html#_ss">_ss</A>, <A HREF="../../../../org/apache/poi/hwpf/HWPFDocumentCore.html#_st">_st</A>, <A HREF="../../../../org/apache/poi/hwpf/HWPFDocumentCore.html#STREAM_OBJECT_POOL">STREAM_OBJECT_POOL</A>, <A HREF="../../../../org/apache/poi/hwpf/HWPFDocumentCore.html#STREAM_WORD_DOCUMENT">STREAM_WORD_DOCUMENT</A></CODE></TD>
+</TR>
+</TABLE>
+&nbsp;<A NAME="fields_inherited_from_class_org.apache.poi.POIDocument"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#EEEEFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left"><B>Fields inherited from class org.apache.poi.<A HREF="../../../../org/apache/poi/POIDocument.html" title="class in org.apache.poi">POIDocument</A></B></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><A HREF="../../../../org/apache/poi/POIDocument.html#directory">directory</A></CODE></TD>
+</TR>
+</TABLE>
+&nbsp;
+<!-- ======== CONSTRUCTOR SUMMARY ======== -->
+
+<A NAME="constructor_summary"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+<B>Constructor Summary</B></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>protected </CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../org/apache/poi/hwpf/HWPFDocument.html#HWPFDocument()">HWPFDocument</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../org/apache/poi/hwpf/HWPFDocument.html#HWPFDocument(org.apache.poi.poifs.filesystem.DirectoryNode)">HWPFDocument</A></B>(<A HREF="../../../../org/apache/poi/poifs/filesystem/DirectoryNode.html" title="class in org.apache.poi.poifs.filesystem">DirectoryNode</A>&nbsp;directory)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;This constructor loads a Word document from a specific point
+  in a POIFSFileSystem, probably not the default.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../org/apache/poi/hwpf/HWPFDocument.html#HWPFDocument(org.apache.poi.poifs.filesystem.DirectoryNode, org.apache.poi.poifs.filesystem.POIFSFileSystem)">HWPFDocument</A></B>(<A HREF="../../../../org/apache/poi/poifs/filesystem/DirectoryNode.html" title="class in org.apache.poi.poifs.filesystem">DirectoryNode</A>&nbsp;directory,
+             <A HREF="../../../../org/apache/poi/poifs/filesystem/POIFSFileSystem.html" title="class in org.apache.poi.poifs.filesystem">POIFSFileSystem</A>&nbsp;pfilesystem)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;<I>Use <A HREF="../../../../org/apache/poi/hwpf/HWPFDocument.html#HWPFDocument(org.apache.poi.poifs.filesystem.DirectoryNode)"><CODE>HWPFDocument(DirectoryNode)</CODE></A> instead</I></TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../org/apache/poi/hwpf/HWPFDocument.html#HWPFDocument(java.io.InputStream)">HWPFDocument</A></B>(java.io.InputStream&nbsp;istream)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;This constructor loads a Word document from an InputStream.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../org/apache/poi/hwpf/HWPFDocument.html#HWPFDocument(org.apache.poi.poifs.filesystem.POIFSFileSystem)">HWPFDocument</A></B>(<A HREF="../../../../org/apache/poi/poifs/filesystem/POIFSFileSystem.html" title="class in org.apache.poi.poifs.filesystem">POIFSFileSystem</A>&nbsp;pfilesystem)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;This constructor loads a Word document from a POIFSFileSystem</TD>
+</TR>
+</TABLE>
+&nbsp;
+<!-- ========== METHOD SUMMARY =========== -->
+
+<A NAME="method_summary"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+<B>Method Summary</B></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;int</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../org/apache/poi/hwpf/HWPFDocument.html#characterLength()">characterLength</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns the character length of a document.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../org/apache/poi/hwpf/HWPFDocument.html#delete(int, int)">delete</A></B>(int&nbsp;start,
+       int&nbsp;length)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../../org/apache/poi/hwpf/usermodel/Bookmarks.html" title="interface in org.apache.poi.hwpf.usermodel">Bookmarks</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../org/apache/poi/hwpf/HWPFDocument.html#getBookmarks()">getBookmarks</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../../org/apache/poi/hwpf/usermodel/Range.html" title="class in org.apache.poi.hwpf.usermodel">Range</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../org/apache/poi/hwpf/HWPFDocument.html#getCommentsRange()">getCommentsRange</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns the <A HREF="../../../../org/apache/poi/hwpf/usermodel/Range.html" title="class in org.apache.poi.hwpf.usermodel"><CODE>Range</CODE></A> which covers all annotations.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;byte[]</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../org/apache/poi/hwpf/HWPFDocument.html#getDataStream()">getDataStream</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../../org/apache/poi/hwpf/model/DocumentProperties.html" title="class in org.apache.poi.hwpf.model">DocumentProperties</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../org/apache/poi/hwpf/HWPFDocument.html#getDocProperties()">getDocProperties</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../../org/apache/poi/hwpf/usermodel/Range.html" title="class in org.apache.poi.hwpf.usermodel">Range</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../org/apache/poi/hwpf/HWPFDocument.html#getEndnoteRange()">getEndnoteRange</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns the <A HREF="../../../../org/apache/poi/hwpf/usermodel/Range.html" title="class in org.apache.poi.hwpf.usermodel"><CODE>Range</CODE></A> which covers all endnotes.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../../org/apache/poi/hwpf/usermodel/Notes.html" title="interface in org.apache.poi.hwpf.usermodel">Notes</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../org/apache/poi/hwpf/HWPFDocument.html#getEndnotes()">getEndnotes</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../../org/apache/poi/hwpf/model/EscherRecordHolder.html" title="class in org.apache.poi.hwpf.model">EscherRecordHolder</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../org/apache/poi/hwpf/HWPFDocument.html#getEscherRecordHolder()">getEscherRecordHolder</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../../org/apache/poi/hwpf/usermodel/Fields.html" title="interface in org.apache.poi.hwpf.usermodel">Fields</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../org/apache/poi/hwpf/HWPFDocument.html#getFields()">getFields</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns user-friendly interface to access document <A HREF="../../../../org/apache/poi/hwpf/usermodel/Field.html" title="interface in org.apache.poi.hwpf.usermodel"><CODE>Field</CODE></A>s</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../../org/apache/poi/hwpf/model/FieldsTables.html" title="class in org.apache.poi.hwpf.model">FieldsTables</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../org/apache/poi/hwpf/HWPFDocument.html#getFieldsTables()">getFieldsTables</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;<I></I>&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../../org/apache/poi/hwpf/usermodel/Range.html" title="class in org.apache.poi.hwpf.usermodel">Range</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../org/apache/poi/hwpf/HWPFDocument.html#getFootnoteRange()">getFootnoteRange</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns the <A HREF="../../../../org/apache/poi/hwpf/usermodel/Range.html" title="class in org.apache.poi.hwpf.usermodel"><CODE>Range</CODE></A> which covers all the Footnotes.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../../org/apache/poi/hwpf/usermodel/Notes.html" title="interface in org.apache.poi.hwpf.usermodel">Notes</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../org/apache/poi/hwpf/HWPFDocument.html#getFootnotes()">getFootnotes</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../../org/apache/poi/hwpf/usermodel/Range.html" title="class in org.apache.poi.hwpf.usermodel">Range</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../org/apache/poi/hwpf/HWPFDocument.html#getHeaderStoryRange()">getHeaderStoryRange</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns the range which covers all "Header Stories".</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../../org/apache/poi/hwpf/usermodel/Range.html" title="class in org.apache.poi.hwpf.usermodel">Range</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../org/apache/poi/hwpf/HWPFDocument.html#getMainTextboxRange()">getMainTextboxRange</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns the <A HREF="../../../../org/apache/poi/hwpf/usermodel/Range.html" title="class in org.apache.poi.hwpf.usermodel"><CODE>Range</CODE></A> which covers all textboxes.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../../org/apache/poi/hwpf/usermodel/OfficeDrawings.html" title="interface in org.apache.poi.hwpf.usermodel">OfficeDrawings</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../org/apache/poi/hwpf/HWPFDocument.html#getOfficeDrawingsHeaders()">getOfficeDrawingsHeaders</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../../org/apache/poi/hwpf/usermodel/OfficeDrawings.html" title="interface in org.apache.poi.hwpf.usermodel">OfficeDrawings</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../org/apache/poi/hwpf/HWPFDocument.html#getOfficeDrawingsMain()">getOfficeDrawingsMain</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../../org/apache/poi/hwpf/usermodel/Range.html" title="class in org.apache.poi.hwpf.usermodel">Range</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../org/apache/poi/hwpf/HWPFDocument.html#getOverallRange()">getOverallRange</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns the range that covers all text in the file, including main text,
+ footnotes, headers and comments</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../../org/apache/poi/hwpf/model/PicturesTable.html" title="class in org.apache.poi.hwpf.model">PicturesTable</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../org/apache/poi/hwpf/HWPFDocument.html#getPicturesTable()">getPicturesTable</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../../org/apache/poi/hwpf/usermodel/Range.html" title="class in org.apache.poi.hwpf.usermodel">Range</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../org/apache/poi/hwpf/HWPFDocument.html#getRange()">getRange</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns the range which covers the whole of the document, but excludes
+ any headers and footers.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../../org/apache/poi/hwpf/model/RevisionMarkAuthorTable.html" title="class in org.apache.poi.hwpf.model">RevisionMarkAuthorTable</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../org/apache/poi/hwpf/HWPFDocument.html#getRevisionMarkAuthorTable()">getRevisionMarkAuthorTable</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gets a reference to the revision mark author table, which holds the revision mark authors for the document.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../../org/apache/poi/hwpf/model/SavedByTable.html" title="class in org.apache.poi.hwpf.model">SavedByTable</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../org/apache/poi/hwpf/HWPFDocument.html#getSavedByTable()">getSavedByTable</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gets a reference to the saved -by table, which holds the save history for the document.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../../org/apache/poi/hwpf/model/ShapesTable.html" title="class in org.apache.poi.hwpf.model">ShapesTable</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../org/apache/poi/hwpf/HWPFDocument.html#getShapesTable()">getShapesTable</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;<I>use <A HREF="../../../../org/apache/poi/hwpf/HWPFDocument.html#getOfficeDrawingsMain()"><CODE>getOfficeDrawingsMain()</CODE></A> instead</I></TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;byte[]</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../org/apache/poi/hwpf/HWPFDocument.html#getTableStream()">getTableStream</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;java.lang.StringBuilder</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../org/apache/poi/hwpf/HWPFDocument.html#getText()">getText</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Internal method to access document text</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../../org/apache/poi/hwpf/model/TextPieceTable.html" title="class in org.apache.poi.hwpf.model">TextPieceTable</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../org/apache/poi/hwpf/HWPFDocument.html#getTextTable()">getTextTable</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;int</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../org/apache/poi/hwpf/HWPFDocument.html#registerList(org.apache.poi.hwpf.usermodel.HWPFList)">registerList</A></B>(<A HREF="../../../../org/apache/poi/hwpf/usermodel/HWPFList.html" title="class in org.apache.poi.hwpf.usermodel">HWPFList</A>&nbsp;list)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../org/apache/poi/hwpf/HWPFDocument.html#write(java.io.OutputStream)">write</A></B>(java.io.OutputStream&nbsp;out)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Writes out the word file that is represented by an instance of this class.</TD>
+</TR>
+</TABLE>
+&nbsp;<A NAME="methods_inherited_from_class_org.apache.poi.hwpf.HWPFDocumentCore"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#EEEEFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left"><B>Methods inherited from class org.apache.poi.hwpf.<A HREF="../../../../org/apache/poi/hwpf/HWPFDocumentCore.html" title="class in org.apache.poi.hwpf">HWPFDocumentCore</A></B></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><A HREF="../../../../org/apache/poi/hwpf/HWPFDocumentCore.html#getCharacterTable()">getCharacterTable</A>, <A HREF="../../../../org/apache/poi/hwpf/HWPFDocumentCore.html#getDocumentText()">getDocumentText</A>, <A HREF="../../../../org/apache/poi/hwpf/HWPFDocumentCore.html#getFileInformationBlock()">getFileInformationBlock</A>, <A HREF="../../../../org/apache/poi/hwpf/HWPFDocumentCore.html#getFontTable()">getFontTable</A>, <A HREF="../../../../org/apache/poi/hwpf/HWPFDocumentCore.html#getListTables()">getListTables</A>, <A HREF="../../../../org/apache/poi/hwpf/HWPFDocumentCore.html#getObjectsPool()">getObjectsPool</A>, <A HREF="../../../../org/apache/poi/hwpf/HWPFDocumentCore.html#getParagraphTable()">getParagraphTable</A>, <A HREF="../../../../org/apache/poi/hwpf/HWPFDocumentCore.html#getSectionTable()">getSectionTable</A>, <A HREF="../../../../org/apache/poi/hwpf/HWPFDocumentCore.html#getStyleSheet()">getStyleSheet</A>, <A HREF="../../../../org/apache/poi/hwpf/HWPFDocumentCore.html#verifyAndBuildPOIFS(java.io.InputStream)">verifyAndBuildPOIFS</A></CODE></TD>
+</TR>
+</TABLE>
+&nbsp;<A NAME="methods_inherited_from_class_org.apache.poi.POIDocument"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#EEEEFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left"><B>Methods inherited from class org.apache.poi.<A HREF="../../../../org/apache/poi/POIDocument.html" title="class in org.apache.poi">POIDocument</A></B></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><A HREF="../../../../org/apache/poi/POIDocument.html#copyNodeRecursively(org.apache.poi.poifs.filesystem.Entry, org.apache.poi.poifs.filesystem.DirectoryEntry)">copyNodeRecursively</A>, <A HREF="../../../../org/apache/poi/POIDocument.html#copyNodes(org.apache.poi.poifs.filesystem.DirectoryNode, org.apache.poi.poifs.filesystem.DirectoryNode, java.util.List)">copyNodes</A>, <A HREF="../../../../org/apache/poi/POIDocument.html#copyNodes(org.apache.poi.poifs.filesystem.POIFSFileSystem, org.apache.poi.poifs.filesystem.POIFSFileSystem, java.util.List)">copyNodes</A>, <A HREF="../../../../org/apache/poi/POIDocument.html#createInformationProperties()">createInformationProperties</A>, <A HREF="../../../../org/apache/poi/POIDocument.html#getDocumentSummaryInformation()">getDocumentSummaryInformation</A>, <A HREF="../../../../org/apache/poi/POIDocument.html#getPropertySet(java.lang.String)">getPropertySet</A>, <A HREF="../../../../org/apache/poi/POIDocument.html#getSummaryInformation()">getSummaryInformation</A>, <A HREF="../../../../org/apache/poi/POIDocument.html#readProperties()">readProperties</A>, <A HREF="../../../../org/apache/poi/POIDocument.html#writeProperties(org.apache.poi.poifs.filesystem.POIFSFileSystem)">writeProperties</A>, <A HREF="../../../../org/apache/poi/POIDocument.html#writeProperties(org.apache.poi.poifs.filesystem.POIFSFileSystem, java.util.List)">writeProperties</A>, <A HREF="../../../../org/apache/poi/POIDocument.html#writePropertySet(java.lang.String, org.apache.poi.hpsf.PropertySet, org.apache.poi.poifs.filesystem.POIFSFileSystem)">writePropertySet</A></CODE></TD>
+</TR>
+</TABLE>
+&nbsp;<A NAME="methods_inherited_from_class_java.lang.Object"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#EEEEFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left"><B>Methods inherited from class java.lang.Object</B></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE>clone, equals, finalize, getClass, hashCode, notify, notifyAll, toString, wait, wait, wait</CODE></TD>
+</TR>
+</TABLE>
+&nbsp;
+<P>
+
+<!-- ============ FIELD DETAIL =========== -->
+
+<A NAME="field_detail"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="1"><FONT SIZE="+2">
+<B>Field Detail</B></FONT></TH>
+</TR>
+</TABLE>
+
+<A NAME="_tableStream"><!-- --></A><H3>
+_tableStream</H3>
+<PRE>
+protected byte[] <B>_tableStream</B></PRE>
+<DL>
+<DD>table stream buffer
+<P>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="_dataStream"><!-- --></A><H3>
+_dataStream</H3>
+<PRE>
+protected byte[] <B>_dataStream</B></PRE>
+<DL>
+<DD>data stream buffer
+<P>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="_dop"><!-- --></A><H3>
+_dop</H3>
+<PRE>
+protected <A HREF="../../../../org/apache/poi/hwpf/model/DocumentProperties.html" title="class in org.apache.poi.hwpf.model">DocumentProperties</A> <B>_dop</B></PRE>
+<DL>
+<DD>Document wide Properties
+<P>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="_cft"><!-- --></A><H3>
+_cft</H3>
+<PRE>
+protected <A HREF="../../../../org/apache/poi/hwpf/model/ComplexFileTable.html" title="class in org.apache.poi.hwpf.model">ComplexFileTable</A> <B>_cft</B></PRE>
+<DL>
+<DD>Contains text of the document wrapped in a obfuscated Word data
+ structure
+<P>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="_text"><!-- --></A><H3>
+_text</H3>
+<PRE>
+protected java.lang.StringBuilder <B>_text</B></PRE>
+<DL>
+<DD>Contains text buffer linked directly to single-piece document text piece
+<P>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="_sbt"><!-- --></A><H3>
+_sbt</H3>
+<PRE>
+protected <A HREF="../../../../org/apache/poi/hwpf/model/SavedByTable.html" title="class in org.apache.poi.hwpf.model">SavedByTable</A> <B>_sbt</B></PRE>
+<DL>
+<DD>Holds the save history for this document.
+<P>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="_rmat"><!-- --></A><H3>
+_rmat</H3>
+<PRE>
+protected <A HREF="../../../../org/apache/poi/hwpf/model/RevisionMarkAuthorTable.html" title="class in org.apache.poi.hwpf.model">RevisionMarkAuthorTable</A> <B>_rmat</B></PRE>
+<DL>
+<DD>Holds the revision mark authors for this document.
+<P>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="_escherRecordHolder"><!-- --></A><H3>
+_escherRecordHolder</H3>
+<PRE>
+protected <A HREF="../../../../org/apache/poi/hwpf/model/EscherRecordHolder.html" title="class in org.apache.poi.hwpf.model">EscherRecordHolder</A> <B>_escherRecordHolder</B></PRE>
+<DL>
+<DD>Escher Drawing Group information
+<P>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="_pictures"><!-- --></A><H3>
+_pictures</H3>
+<PRE>
+protected <A HREF="../../../../org/apache/poi/hwpf/model/PicturesTable.html" title="class in org.apache.poi.hwpf.model">PicturesTable</A> <B>_pictures</B></PRE>
+<DL>
+<DD>Holds pictures table
+<P>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="_officeArts"><!-- --></A><H3>
+_officeArts</H3>
+<PRE>
+<FONT SIZE="-1">@Deprecated
+</FONT>protected <A HREF="../../../../org/apache/poi/hwpf/model/ShapesTable.html" title="class in org.apache.poi.hwpf.model">ShapesTable</A> <B>_officeArts</B></PRE>
+<DL>
+<DD><B>Deprecated.</B>&nbsp;<DD>Holds Office Art objects
+<P>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="_officeDrawingsHeaders"><!-- --></A><H3>
+_officeDrawingsHeaders</H3>
+<PRE>
+protected <A HREF="../../../../org/apache/poi/hwpf/usermodel/OfficeDrawingsImpl.html" title="class in org.apache.poi.hwpf.usermodel">OfficeDrawingsImpl</A> <B>_officeDrawingsHeaders</B></PRE>
+<DL>
+<DD>Holds Office Art objects
+<P>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="_officeDrawingsMain"><!-- --></A><H3>
+_officeDrawingsMain</H3>
+<PRE>
+protected <A HREF="../../../../org/apache/poi/hwpf/usermodel/OfficeDrawingsImpl.html" title="class in org.apache.poi.hwpf.usermodel">OfficeDrawingsImpl</A> <B>_officeDrawingsMain</B></PRE>
+<DL>
+<DD>Holds Office Art objects
+<P>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="_bookmarksTables"><!-- --></A><H3>
+_bookmarksTables</H3>
+<PRE>
+protected <A HREF="../../../../org/apache/poi/hwpf/model/BookmarksTables.html" title="class in org.apache.poi.hwpf.model">BookmarksTables</A> <B>_bookmarksTables</B></PRE>
+<DL>
+<DD>Holds the bookmarks tables
+<P>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="_bookmarks"><!-- --></A><H3>
+_bookmarks</H3>
+<PRE>
+protected <A HREF="../../../../org/apache/poi/hwpf/usermodel/Bookmarks.html" title="interface in org.apache.poi.hwpf.usermodel">Bookmarks</A> <B>_bookmarks</B></PRE>
+<DL>
+<DD>Holds the bookmarks
+<P>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="_endnotesTables"><!-- --></A><H3>
+_endnotesTables</H3>
+<PRE>
+protected <A HREF="../../../../org/apache/poi/hwpf/model/NotesTables.html" title="class in org.apache.poi.hwpf.model">NotesTables</A> <B>_endnotesTables</B></PRE>
+<DL>
+<DD>Holds the ending notes tables
+<P>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="_endnotes"><!-- --></A><H3>
+_endnotes</H3>
+<PRE>
+protected <A HREF="../../../../org/apache/poi/hwpf/usermodel/Notes.html" title="interface in org.apache.poi.hwpf.usermodel">Notes</A> <B>_endnotes</B></PRE>
+<DL>
+<DD>Holds the footnotes
+<P>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="_footnotesTables"><!-- --></A><H3>
+_footnotesTables</H3>
+<PRE>
+protected <A HREF="../../../../org/apache/poi/hwpf/model/NotesTables.html" title="class in org.apache.poi.hwpf.model">NotesTables</A> <B>_footnotesTables</B></PRE>
+<DL>
+<DD>Holds the footnotes tables
+<P>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="_footnotes"><!-- --></A><H3>
+_footnotes</H3>
+<PRE>
+protected <A HREF="../../../../org/apache/poi/hwpf/usermodel/Notes.html" title="interface in org.apache.poi.hwpf.usermodel">Notes</A> <B>_footnotes</B></PRE>
+<DL>
+<DD>Holds the footnotes
+<P>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="_fieldsTables"><!-- --></A><H3>
+_fieldsTables</H3>
+<PRE>
+protected <A HREF="../../../../org/apache/poi/hwpf/model/FieldsTables.html" title="class in org.apache.poi.hwpf.model">FieldsTables</A> <B>_fieldsTables</B></PRE>
+<DL>
+<DD>Holds the fields PLCFs
+<P>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="_fields"><!-- --></A><H3>
+_fields</H3>
+<PRE>
+protected <A HREF="../../../../org/apache/poi/hwpf/usermodel/Fields.html" title="interface in org.apache.poi.hwpf.usermodel">Fields</A> <B>_fields</B></PRE>
+<DL>
+<DD>Holds the fields
+<P>
+<DL>
+</DL>
+</DL>
+
+<!-- ========= CONSTRUCTOR DETAIL ======== -->
+
+<A NAME="constructor_detail"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="1"><FONT SIZE="+2">
+<B>Constructor Detail</B></FONT></TH>
+</TR>
+</TABLE>
+
+<A NAME="HWPFDocument()"><!-- --></A><H3>
+HWPFDocument</H3>
+<PRE>
+protected <B>HWPFDocument</B>()</PRE>
+<DL>
+</DL>
+<HR>
+
+<A NAME="HWPFDocument(java.io.InputStream)"><!-- --></A><H3>
+HWPFDocument</H3>
+<PRE>
+public <B>HWPFDocument</B>(java.io.InputStream&nbsp;istream)
+             throws java.io.IOException</PRE>
+<DL>
+<DD>This constructor loads a Word document from an InputStream.
+<P>
+<DL>
+<DT><B>Parameters:</B><DD><CODE>istream</CODE> - The InputStream that contains the Word document.
+<DT><B>Throws:</B>
+<DD><CODE>java.io.IOException</CODE> - If there is an unexpected IOException from the passed
+         in InputStream.</DL>
+</DL>
+<HR>
+
+<A NAME="HWPFDocument(org.apache.poi.poifs.filesystem.POIFSFileSystem)"><!-- --></A><H3>
+HWPFDocument</H3>
+<PRE>
+public <B>HWPFDocument</B>(<A HREF="../../../../org/apache/poi/poifs/filesystem/POIFSFileSystem.html" title="class in org.apache.poi.poifs.filesystem">POIFSFileSystem</A>&nbsp;pfilesystem)
+             throws java.io.IOException</PRE>
+<DL>
+<DD>This constructor loads a Word document from a POIFSFileSystem
+<P>
+<DL>
+<DT><B>Parameters:</B><DD><CODE>pfilesystem</CODE> - The POIFSFileSystem that contains the Word document.
+<DT><B>Throws:</B>
+<DD><CODE>java.io.IOException</CODE> - If there is an unexpected IOException from the passed
+         in POIFSFileSystem.</DL>
+</DL>
+<HR>
+
+<A NAME="HWPFDocument(org.apache.poi.poifs.filesystem.DirectoryNode, org.apache.poi.poifs.filesystem.POIFSFileSystem)"><!-- --></A><H3>
+HWPFDocument</H3>
+<PRE>
+<FONT SIZE="-1">@Deprecated
+</FONT>public <B>HWPFDocument</B>(<A HREF="../../../../org/apache/poi/poifs/filesystem/DirectoryNode.html" title="class in org.apache.poi.poifs.filesystem">DirectoryNode</A>&nbsp;directory,
+                               <A HREF="../../../../org/apache/poi/poifs/filesystem/POIFSFileSystem.html" title="class in org.apache.poi.poifs.filesystem">POIFSFileSystem</A>&nbsp;pfilesystem)
+             throws java.io.IOException</PRE>
+<DL>
+<DD><B>Deprecated.</B>&nbsp;<I>Use <A HREF="../../../../org/apache/poi/hwpf/HWPFDocument.html#HWPFDocument(org.apache.poi.poifs.filesystem.DirectoryNode)"><CODE>HWPFDocument(DirectoryNode)</CODE></A> instead</I>
+<P>
+<DD>This constructor loads a Word document from a specific point
+  in a POIFSFileSystem, probably not the default.
+ Used typically to open embedded documents.
+<P>
+<DL>
+<DT><B>Parameters:</B><DD><CODE>pfilesystem</CODE> - The POIFSFileSystem that contains the Word document.
+<DT><B>Throws:</B>
+<DD><CODE>java.io.IOException</CODE> - If there is an unexpected IOException from the passed
+         in POIFSFileSystem.</DL>
+</DL>
+<HR>
+
+<A NAME="HWPFDocument(org.apache.poi.poifs.filesystem.DirectoryNode)"><!-- --></A><H3>
+HWPFDocument</H3>
+<PRE>
+public <B>HWPFDocument</B>(<A HREF="../../../../org/apache/poi/poifs/filesystem/DirectoryNode.html" title="class in org.apache.poi.poifs.filesystem">DirectoryNode</A>&nbsp;directory)
+             throws java.io.IOException</PRE>
+<DL>
+<DD>This constructor loads a Word document from a specific point
+  in a POIFSFileSystem, probably not the default.
+ Used typically to open embeded documents.
+<P>
+<DL>
+<DT><B>Parameters:</B><DD><CODE>directory</CODE> - The DirectoryNode that contains the Word document.
+<DT><B>Throws:</B>
+<DD><CODE>java.io.IOException</CODE> - If there is an unexpected IOException from the passed
+         in POIFSFileSystem.</DL>
+</DL>
+
+<!-- ============ METHOD DETAIL ========== -->
+
+<A NAME="method_detail"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="1"><FONT SIZE="+2">
+<B>Method Detail</B></FONT></TH>
+</TR>
+</TABLE>
+
+<A NAME="getTextTable()"><!-- --></A><H3>
+getTextTable</H3>
+<PRE>
+<FONT SIZE="-1"><A HREF="../../../../org/apache/poi/util/Internal.html" title="annotation in org.apache.poi.util">@Internal</A>
+</FONT>public <A HREF="../../../../org/apache/poi/hwpf/model/TextPieceTable.html" title="class in org.apache.poi.hwpf.model">TextPieceTable</A> <B>getTextTable</B>()</PRE>
+<DL>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../../../org/apache/poi/hwpf/HWPFDocumentCore.html#getTextTable()">getTextTable</A></CODE> in class <CODE><A HREF="../../../../org/apache/poi/hwpf/HWPFDocumentCore.html" title="class in org.apache.poi.hwpf">HWPFDocumentCore</A></CODE></DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getText()"><!-- --></A><H3>
+getText</H3>
+<PRE>
+<FONT SIZE="-1"><A HREF="../../../../org/apache/poi/util/Internal.html" title="annotation in org.apache.poi.util">@Internal</A>
+</FONT>public java.lang.StringBuilder <B>getText</B>()</PRE>
+<DL>
+<DD><B>Description copied from class: <CODE><A HREF="../../../../org/apache/poi/hwpf/HWPFDocumentCore.html#getText()">HWPFDocumentCore</A></CODE></B></DD>
+<DD>Internal method to access document text
+<P>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../../../org/apache/poi/hwpf/HWPFDocumentCore.html#getText()">getText</A></CODE> in class <CODE><A HREF="../../../../org/apache/poi/hwpf/HWPFDocumentCore.html" title="class in org.apache.poi.hwpf">HWPFDocumentCore</A></CODE></DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getDocProperties()"><!-- --></A><H3>
+getDocProperties</H3>
+<PRE>
+public <A HREF="../../../../org/apache/poi/hwpf/model/DocumentProperties.html" title="class in org.apache.poi.hwpf.model">DocumentProperties</A> <B>getDocProperties</B>()</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getOverallRange()"><!-- --></A><H3>
+getOverallRange</H3>
+<PRE>
+public <A HREF="../../../../org/apache/poi/hwpf/usermodel/Range.html" title="class in org.apache.poi.hwpf.usermodel">Range</A> <B>getOverallRange</B>()</PRE>
+<DL>
+<DD><B>Description copied from class: <CODE><A HREF="../../../../org/apache/poi/hwpf/HWPFDocumentCore.html#getOverallRange()">HWPFDocumentCore</A></CODE></B></DD>
+<DD>Returns the range that covers all text in the file, including main text,
+ footnotes, headers and comments
+<P>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../../../org/apache/poi/hwpf/HWPFDocumentCore.html#getOverallRange()">getOverallRange</A></CODE> in class <CODE><A HREF="../../../../org/apache/poi/hwpf/HWPFDocumentCore.html" title="class in org.apache.poi.hwpf">HWPFDocumentCore</A></CODE></DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getRange()"><!-- --></A><H3>
+getRange</H3>
+<PRE>
+public <A HREF="../../../../org/apache/poi/hwpf/usermodel/Range.html" title="class in org.apache.poi.hwpf.usermodel">Range</A> <B>getRange</B>()</PRE>
+<DL>
+<DD>Returns the range which covers the whole of the document, but excludes
+ any headers and footers.
+<P>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../../../org/apache/poi/hwpf/HWPFDocumentCore.html#getRange()">getRange</A></CODE> in class <CODE><A HREF="../../../../org/apache/poi/hwpf/HWPFDocumentCore.html" title="class in org.apache.poi.hwpf">HWPFDocumentCore</A></CODE></DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getFootnoteRange()"><!-- --></A><H3>
+getFootnoteRange</H3>
+<PRE>
+public <A HREF="../../../../org/apache/poi/hwpf/usermodel/Range.html" title="class in org.apache.poi.hwpf.usermodel">Range</A> <B>getFootnoteRange</B>()</PRE>
+<DL>
+<DD>Returns the <A HREF="../../../../org/apache/poi/hwpf/usermodel/Range.html" title="class in org.apache.poi.hwpf.usermodel"><CODE>Range</CODE></A> which covers all the Footnotes.
+<P>
+<DD><DL>
+
+<DT><B>Returns:</B><DD>the <A HREF="../../../../org/apache/poi/hwpf/usermodel/Range.html" title="class in org.apache.poi.hwpf.usermodel"><CODE>Range</CODE></A> which covers all the Footnotes.</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getEndnoteRange()"><!-- --></A><H3>
+getEndnoteRange</H3>
+<PRE>
+public <A HREF="../../../../org/apache/poi/hwpf/usermodel/Range.html" title="class in org.apache.poi.hwpf.usermodel">Range</A> <B>getEndnoteRange</B>()</PRE>
+<DL>
+<DD>Returns the <A HREF="../../../../org/apache/poi/hwpf/usermodel/Range.html" title="class in org.apache.poi.hwpf.usermodel"><CODE>Range</CODE></A> which covers all endnotes.
+<P>
+<DD><DL>
+
+<DT><B>Returns:</B><DD>the <A HREF="../../../../org/apache/poi/hwpf/usermodel/Range.html" title="class in org.apache.poi.hwpf.usermodel"><CODE>Range</CODE></A> which covers all endnotes.</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getCommentsRange()"><!-- --></A><H3>
+getCommentsRange</H3>
+<PRE>
+public <A HREF="../../../../org/apache/poi/hwpf/usermodel/Range.html" title="class in org.apache.poi.hwpf.usermodel">Range</A> <B>getCommentsRange</B>()</PRE>
+<DL>
+<DD>Returns the <A HREF="../../../../org/apache/poi/hwpf/usermodel/Range.html" title="class in org.apache.poi.hwpf.usermodel"><CODE>Range</CODE></A> which covers all annotations.
+<P>
+<DD><DL>
+
+<DT><B>Returns:</B><DD>the <A HREF="../../../../org/apache/poi/hwpf/usermodel/Range.html" title="class in org.apache.poi.hwpf.usermodel"><CODE>Range</CODE></A> which covers all annotations.</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getMainTextboxRange()"><!-- --></A><H3>
+getMainTextboxRange</H3>
+<PRE>
+public <A HREF="../../../../org/apache/poi/hwpf/usermodel/Range.html" title="class in org.apache.poi.hwpf.usermodel">Range</A> <B>getMainTextboxRange</B>()</PRE>
+<DL>
+<DD>Returns the <A HREF="../../../../org/apache/poi/hwpf/usermodel/Range.html" title="class in org.apache.poi.hwpf.usermodel"><CODE>Range</CODE></A> which covers all textboxes.
+<P>
+<DD><DL>
+
+<DT><B>Returns:</B><DD>the <A HREF="../../../../org/apache/poi/hwpf/usermodel/Range.html" title="class in org.apache.poi.hwpf.usermodel"><CODE>Range</CODE></A> which covers all textboxes.</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getHeaderStoryRange()"><!-- --></A><H3>
+getHeaderStoryRange</H3>
+<PRE>
+public <A HREF="../../../../org/apache/poi/hwpf/usermodel/Range.html" title="class in org.apache.poi.hwpf.usermodel">Range</A> <B>getHeaderStoryRange</B>()</PRE>
+<DL>
+<DD>Returns the range which covers all "Header Stories".
+ A header story contains a header, footer, end note
+  separators and footnote separators.
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="characterLength()"><!-- --></A><H3>
+characterLength</H3>
+<PRE>
+public int <B>characterLength</B>()</PRE>
+<DL>
+<DD>Returns the character length of a document.
+<P>
+<DD><DL>
+
+<DT><B>Returns:</B><DD>the character length of a document</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getSavedByTable()"><!-- --></A><H3>
+getSavedByTable</H3>
+<PRE>
+<FONT SIZE="-1"><A HREF="../../../../org/apache/poi/util/Internal.html" title="annotation in org.apache.poi.util">@Internal</A>
+</FONT>public <A HREF="../../../../org/apache/poi/hwpf/model/SavedByTable.html" title="class in org.apache.poi.hwpf.model">SavedByTable</A> <B>getSavedByTable</B>()</PRE>
+<DL>
+<DD>Gets a reference to the saved -by table, which holds the save history for the document.
+<P>
+<DD><DL>
+
+<DT><B>Returns:</B><DD>the saved-by table.</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getRevisionMarkAuthorTable()"><!-- --></A><H3>
+getRevisionMarkAuthorTable</H3>
+<PRE>
+<FONT SIZE="-1"><A HREF="../../../../org/apache/poi/util/Internal.html" title="annotation in org.apache.poi.util">@Internal</A>
+</FONT>public <A HREF="../../../../org/apache/poi/hwpf/model/RevisionMarkAuthorTable.html" title="class in org.apache.poi.hwpf.model">RevisionMarkAuthorTable</A> <B>getRevisionMarkAuthorTable</B>()</PRE>
+<DL>
+<DD>Gets a reference to the revision mark author table, which holds the revision mark authors for the document.
+<P>
+<DD><DL>
+
+<DT><B>Returns:</B><DD>the saved-by table.</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getPicturesTable()"><!-- --></A><H3>
+getPicturesTable</H3>
+<PRE>
+public <A HREF="../../../../org/apache/poi/hwpf/model/PicturesTable.html" title="class in org.apache.poi.hwpf.model">PicturesTable</A> <B>getPicturesTable</B>()</PRE>
+<DL>
+<DD><DL>
+
+<DT><B>Returns:</B><DD>PicturesTable object, that is able to extract images from this document</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getEscherRecordHolder()"><!-- --></A><H3>
+getEscherRecordHolder</H3>
+<PRE>
+<FONT SIZE="-1"><A HREF="../../../../org/apache/poi/util/Internal.html" title="annotation in org.apache.poi.util">@Internal</A>
+</FONT>public <A HREF="../../../../org/apache/poi/hwpf/model/EscherRecordHolder.html" title="class in org.apache.poi.hwpf.model">EscherRecordHolder</A> <B>getEscherRecordHolder</B>()</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getShapesTable()"><!-- --></A><H3>
+getShapesTable</H3>
+<PRE>
+<FONT SIZE="-1">@Deprecated
+<A HREF="../../../../org/apache/poi/util/Internal.html" title="annotation in org.apache.poi.util">@Internal</A>
+</FONT>public <A HREF="../../../../org/apache/poi/hwpf/model/ShapesTable.html" title="class in org.apache.poi.hwpf.model">ShapesTable</A> <B>getShapesTable</B>()</PRE>
+<DL>
+<DD><B>Deprecated.</B>&nbsp;<I>use <A HREF="../../../../org/apache/poi/hwpf/HWPFDocument.html#getOfficeDrawingsMain()"><CODE>getOfficeDrawingsMain()</CODE></A> instead</I>
+<P>
+<DD><DL>
+
+<DT><B>Returns:</B><DD>ShapesTable object, that is able to extract office are shapes
+         from this document</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getOfficeDrawingsHeaders()"><!-- --></A><H3>
+getOfficeDrawingsHeaders</H3>
+<PRE>
+public <A HREF="../../../../org/apache/poi/hwpf/usermodel/OfficeDrawings.html" title="interface in org.apache.poi.hwpf.usermodel">OfficeDrawings</A> <B>getOfficeDrawingsHeaders</B>()</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getOfficeDrawingsMain()"><!-- --></A><H3>
+getOfficeDrawingsMain</H3>
+<PRE>
+public <A HREF="../../../../org/apache/poi/hwpf/usermodel/OfficeDrawings.html" title="interface in org.apache.poi.hwpf.usermodel">OfficeDrawings</A> <B>getOfficeDrawingsMain</B>()</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getBookmarks()"><!-- --></A><H3>
+getBookmarks</H3>
+<PRE>
+public <A HREF="../../../../org/apache/poi/hwpf/usermodel/Bookmarks.html" title="interface in org.apache.poi.hwpf.usermodel">Bookmarks</A> <B>getBookmarks</B>()</PRE>
+<DL>
+<DD><DL>
+
+<DT><B>Returns:</B><DD>user-friendly interface to access document bookmarks</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getEndnotes()"><!-- --></A><H3>
+getEndnotes</H3>
+<PRE>
+public <A HREF="../../../../org/apache/poi/hwpf/usermodel/Notes.html" title="interface in org.apache.poi.hwpf.usermodel">Notes</A> <B>getEndnotes</B>()</PRE>
+<DL>
+<DD><DL>
+
+<DT><B>Returns:</B><DD>user-friendly interface to access document endnotes</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getFootnotes()"><!-- --></A><H3>
+getFootnotes</H3>
+<PRE>
+public <A HREF="../../../../org/apache/poi/hwpf/usermodel/Notes.html" title="interface in org.apache.poi.hwpf.usermodel">Notes</A> <B>getFootnotes</B>()</PRE>
+<DL>
+<DD><DL>
+
+<DT><B>Returns:</B><DD>user-friendly interface to access document footnotes</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getFieldsTables()"><!-- --></A><H3>
+getFieldsTables</H3>
+<PRE>
+<FONT SIZE="-1">@Deprecated
+<A HREF="../../../../org/apache/poi/util/Internal.html" title="annotation in org.apache.poi.util">@Internal</A>
+</FONT>public <A HREF="../../../../org/apache/poi/hwpf/model/FieldsTables.html" title="class in org.apache.poi.hwpf.model">FieldsTables</A> <B>getFieldsTables</B>()</PRE>
+<DL>
+<DD><B>Deprecated.</B>&nbsp;<I></I>
+<P>
+<DD><DL>
+
+<DT><B>Returns:</B><DD>FieldsTables object, that is able to extract fields descriptors from this document</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getFields()"><!-- --></A><H3>
+getFields</H3>
+<PRE>
+public <A HREF="../../../../org/apache/poi/hwpf/usermodel/Fields.html" title="interface in org.apache.poi.hwpf.usermodel">Fields</A> <B>getFields</B>()</PRE>
+<DL>
+<DD>Returns user-friendly interface to access document <A HREF="../../../../org/apache/poi/hwpf/usermodel/Field.html" title="interface in org.apache.poi.hwpf.usermodel"><CODE>Field</CODE></A>s
+<P>
+<DD><DL>
+
+<DT><B>Returns:</B><DD>user-friendly interface to access document <A HREF="../../../../org/apache/poi/hwpf/usermodel/Field.html" title="interface in org.apache.poi.hwpf.usermodel"><CODE>Field</CODE></A>s</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="write(java.io.OutputStream)"><!-- --></A><H3>
+write</H3>
+<PRE>
+public void <B>write</B>(java.io.OutputStream&nbsp;out)
+           throws java.io.IOException</PRE>
+<DL>
+<DD>Writes out the word file that is represented by an instance of this class.
+<P>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../../../org/apache/poi/POIDocument.html#write(java.io.OutputStream)">write</A></CODE> in class <CODE><A HREF="../../../../org/apache/poi/POIDocument.html" title="class in org.apache.poi">POIDocument</A></CODE></DL>
+</DD>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>out</CODE> - The OutputStream to write to.
+<DT><B>Throws:</B>
+<DD><CODE>java.io.IOException</CODE> - If there is an unexpected IOException from the passed
+         in OutputStream.</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getDataStream()"><!-- --></A><H3>
+getDataStream</H3>
+<PRE>
+<FONT SIZE="-1"><A HREF="../../../../org/apache/poi/util/Internal.html" title="annotation in org.apache.poi.util">@Internal</A>
+</FONT>public byte[] <B>getDataStream</B>()</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getTableStream()"><!-- --></A><H3>
+getTableStream</H3>
+<PRE>
+<FONT SIZE="-1"><A HREF="../../../../org/apache/poi/util/Internal.html" title="annotation in org.apache.poi.util">@Internal</A>
+</FONT>public byte[] <B>getTableStream</B>()</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="registerList(org.apache.poi.hwpf.usermodel.HWPFList)"><!-- --></A><H3>
+registerList</H3>
+<PRE>
+public int <B>registerList</B>(<A HREF="../../../../org/apache/poi/hwpf/usermodel/HWPFList.html" title="class in org.apache.poi.hwpf.usermodel">HWPFList</A>&nbsp;list)</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="delete(int, int)"><!-- --></A><H3>
+delete</H3>
+<PRE>
+public void <B>delete</B>(int&nbsp;start,
+                   int&nbsp;length)</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<!-- ========= END OF CLASS DATA ========= -->
+<HR>
+
+
+<!-- ======= START OF BOTTOM NAVBAR ====== -->
+<A NAME="navbar_bottom"><!-- --></A>
+<A HREF="#skip-navbar_bottom" title="Skip navigation links"></A>
+<TABLE BORDER="0" WIDTH="100%" CELLPADDING="1" CELLSPACING="0" SUMMARY="">
+<TR>
+<TD COLSPAN=2 BGCOLOR="#EEEEFF" CLASS="NavBarCell1">
+<A NAME="navbar_bottom_firstrow"><!-- --></A>
+<TABLE BORDER="0" CELLPADDING="0" CELLSPACING="3" SUMMARY="">
+  <TR ALIGN="center" VALIGN="top">
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../overview-summary.html"><FONT CLASS="NavBarFont1"><B>Overview</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="package-summary.html"><FONT CLASS="NavBarFont1"><B>Package</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#FFFFFF" CLASS="NavBarCell1Rev"> &nbsp;<FONT CLASS="NavBarFont1Rev"><B>Class</B></FONT>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="class-use/HWPFDocument.html"><FONT CLASS="NavBarFont1"><B>Use</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="package-tree.html"><FONT CLASS="NavBarFont1"><B>Tree</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../deprecated-list.html"><FONT CLASS="NavBarFont1"><B>Deprecated</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../index-all.html"><FONT CLASS="NavBarFont1"><B>Index</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../help-doc.html"><FONT CLASS="NavBarFont1"><B>Help</B></FONT></A>&nbsp;</TD>
+  </TR>
+</TABLE>
+</TD>
+<TD ALIGN="right" VALIGN="top" ROWSPAN=3><EM>
+</EM>
+</TD>
+</TR>
+
+<TR>
+<TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
+&nbsp;PREV CLASS&nbsp;
+&nbsp;<A HREF="../../../../org/apache/poi/hwpf/HWPFDocumentCore.html" title="class in org.apache.poi.hwpf"><B>NEXT CLASS</B></A></FONT></TD>
+<TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
+  <A HREF="../../../../index.html?org/apache/poi/hwpf/HWPFDocument.html" target="_top"><B>FRAMES</B></A>  &nbsp;
+&nbsp;<A HREF="HWPFDocument.html" target="_top"><B>NO FRAMES</B></A>  &nbsp;
+&nbsp;<SCRIPT type="text/javascript">
+  <!--
+  if(window==top) {
+    document.writeln('<A HREF="../../../../allclasses-noframe.html"><B>All Classes</B></A>');
+  }
+  //-->
+</SCRIPT>
+<NOSCRIPT>
+  <A HREF="../../../../allclasses-noframe.html"><B>All Classes</B></A>
+</NOSCRIPT>
+
+
+</FONT></TD>
+</TR>
+<TR>
+<TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
+  SUMMARY:&nbsp;NESTED&nbsp;|&nbsp;<A HREF="#field_summary">FIELD</A>&nbsp;|&nbsp;<A HREF="#constructor_summary">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_summary">METHOD</A></FONT></TD>
+<TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
+DETAIL:&nbsp;<A HREF="#field_detail">FIELD</A>&nbsp;|&nbsp;<A HREF="#constructor_detail">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_detail">METHOD</A></FONT></TD>
+</TR>
+</TABLE>
+<A NAME="skip-navbar_bottom"></A>
+<!-- ======== END OF BOTTOM NAVBAR ======= -->
+
+<HR>
+
+                <i>Copyright 2014 The Apache Software Foundation or
+        its licensors, as applicable.</i>
+            
+</BODY>
+</HTML>

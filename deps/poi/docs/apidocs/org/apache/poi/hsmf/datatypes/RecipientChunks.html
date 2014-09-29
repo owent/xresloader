@@ -1,0 +1,741 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!--NewPage-->
+<HTML>
+<HEAD>
+<TITLE>
+RecipientChunks (POI API Documentation)
+</TITLE>
+
+<META NAME="keywords" CONTENT="org.apache.poi.hsmf.datatypes.RecipientChunks class">
+
+<LINK REL ="stylesheet" TYPE="text/css" HREF="../../../../../stylesheet.css" TITLE="Style">
+
+<SCRIPT type="text/javascript">
+function windowTitle()
+{
+    parent.document.title="RecipientChunks (POI API Documentation)";
+}
+</SCRIPT>
+<NOSCRIPT>
+</NOSCRIPT>
+
+</HEAD>
+
+<BODY BGCOLOR="white" onload="windowTitle();">
+
+
+<!-- ========= START OF TOP NAVBAR ======= -->
+<A NAME="navbar_top"><!-- --></A>
+<A HREF="#skip-navbar_top" title="Skip navigation links"></A>
+<TABLE BORDER="0" WIDTH="100%" CELLPADDING="1" CELLSPACING="0" SUMMARY="">
+<TR>
+<TD COLSPAN=2 BGCOLOR="#EEEEFF" CLASS="NavBarCell1">
+<A NAME="navbar_top_firstrow"><!-- --></A>
+<TABLE BORDER="0" CELLPADDING="0" CELLSPACING="3" SUMMARY="">
+  <TR ALIGN="center" VALIGN="top">
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../overview-summary.html"><FONT CLASS="NavBarFont1"><B>Overview</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="package-summary.html"><FONT CLASS="NavBarFont1"><B>Package</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#FFFFFF" CLASS="NavBarCell1Rev"> &nbsp;<FONT CLASS="NavBarFont1Rev"><B>Class</B></FONT>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="class-use/RecipientChunks.html"><FONT CLASS="NavBarFont1"><B>Use</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="package-tree.html"><FONT CLASS="NavBarFont1"><B>Tree</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../deprecated-list.html"><FONT CLASS="NavBarFont1"><B>Deprecated</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../index-all.html"><FONT CLASS="NavBarFont1"><B>Index</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../help-doc.html"><FONT CLASS="NavBarFont1"><B>Help</B></FONT></A>&nbsp;</TD>
+  </TR>
+</TABLE>
+</TD>
+<TD ALIGN="right" VALIGN="top" ROWSPAN=3><EM>
+</EM>
+</TD>
+</TR>
+
+<TR>
+<TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
+&nbsp;<A HREF="../../../../../org/apache/poi/hsmf/datatypes/PropertyValue.TimePropertyValue.html" title="class in org.apache.poi.hsmf.datatypes"><B>PREV CLASS</B></A>&nbsp;
+&nbsp;<A HREF="../../../../../org/apache/poi/hsmf/datatypes/RecipientChunks.RecipientChunksSorter.html" title="class in org.apache.poi.hsmf.datatypes"><B>NEXT CLASS</B></A></FONT></TD>
+<TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
+  <A HREF="../../../../../index.html?org/apache/poi/hsmf/datatypes/RecipientChunks.html" target="_top"><B>FRAMES</B></A>  &nbsp;
+&nbsp;<A HREF="RecipientChunks.html" target="_top"><B>NO FRAMES</B></A>  &nbsp;
+&nbsp;<SCRIPT type="text/javascript">
+  <!--
+  if(window==top) {
+    document.writeln('<A HREF="../../../../../allclasses-noframe.html"><B>All Classes</B></A>');
+  }
+  //-->
+</SCRIPT>
+<NOSCRIPT>
+  <A HREF="../../../../../allclasses-noframe.html"><B>All Classes</B></A>
+</NOSCRIPT>
+
+
+</FONT></TD>
+</TR>
+<TR>
+<TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
+  SUMMARY:&nbsp;<A HREF="#nested_class_summary">NESTED</A>&nbsp;|&nbsp;<A HREF="#field_summary">FIELD</A>&nbsp;|&nbsp;<A HREF="#constructor_summary">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_summary">METHOD</A></FONT></TD>
+<TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
+DETAIL:&nbsp;<A HREF="#field_detail">FIELD</A>&nbsp;|&nbsp;<A HREF="#constructor_detail">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_detail">METHOD</A></FONT></TD>
+</TR>
+</TABLE>
+<A NAME="skip-navbar_top"></A>
+<!-- ========= END OF TOP NAVBAR ========= -->
+
+<HR>
+<!-- ======== START OF CLASS DATA ======== -->
+<H2>
+<FONT SIZE="-1">
+org.apache.poi.hsmf.datatypes</FONT>
+<BR>
+Class RecipientChunks</H2>
+<PRE>
+java.lang.Object
+  <IMG SRC="../../../../../resources/inherit.gif" ALT="extended by "><B>org.apache.poi.hsmf.datatypes.RecipientChunks</B>
+</PRE>
+<DL>
+<DT><B>All Implemented Interfaces:</B> <DD><A HREF="../../../../../org/apache/poi/hsmf/datatypes/ChunkGroup.html" title="interface in org.apache.poi.hsmf.datatypes">ChunkGroup</A>, <A HREF="../../../../../org/apache/poi/hsmf/datatypes/ChunkGroupWithProperties.html" title="interface in org.apache.poi.hsmf.datatypes">ChunkGroupWithProperties</A></DD>
+</DL>
+<HR>
+<DL>
+<DT><PRE>public final class <B>RecipientChunks</B><DT>extends java.lang.Object<DT>implements <A HREF="../../../../../org/apache/poi/hsmf/datatypes/ChunkGroupWithProperties.html" title="interface in org.apache.poi.hsmf.datatypes">ChunkGroupWithProperties</A></DL>
+</PRE>
+
+<P>
+Collection of convenience chunks for the
+  Recip(ient) part of an outlook file.
+ 
+ If a message has multiple recipients, there will be
+  several of these.
+<P>
+
+<P>
+<HR>
+
+<P>
+<!-- ======== NESTED CLASS SUMMARY ======== -->
+
+<A NAME="nested_class_summary"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+<B>Nested Class Summary</B></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;class</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hsmf/datatypes/RecipientChunks.RecipientChunksSorter.html" title="class in org.apache.poi.hsmf.datatypes">RecipientChunks.RecipientChunksSorter</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Orders by the recipient number.</TD>
+</TR>
+</TABLE>
+&nbsp;<!-- =========== FIELD SUMMARY =========== -->
+
+<A NAME="field_summary"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+<B>Field Summary</B></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;<A HREF="../../../../../org/apache/poi/hsmf/datatypes/MAPIProperty.html" title="class in org.apache.poi.hsmf.datatypes">MAPIProperty</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hsmf/datatypes/RecipientChunks.html#DELIVERY_TYPE">DELIVERY_TYPE</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../../../org/apache/poi/hsmf/datatypes/StringChunk.html" title="class in org.apache.poi.hsmf.datatypes">StringChunk</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hsmf/datatypes/RecipientChunks.html#deliveryTypeChunk">deliveryTypeChunk</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Normally EX or SMTP.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;java.lang.String</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hsmf/datatypes/RecipientChunks.html#PREFIX">PREFIX</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;<A HREF="../../../../../org/apache/poi/hsmf/datatypes/MAPIProperty.html" title="class in org.apache.poi.hsmf.datatypes">MAPIProperty</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hsmf/datatypes/RecipientChunks.html#RECIPIENT_DISPLAY_NAME">RECIPIENT_DISPLAY_NAME</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;<A HREF="../../../../../org/apache/poi/hsmf/datatypes/MAPIProperty.html" title="class in org.apache.poi.hsmf.datatypes">MAPIProperty</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hsmf/datatypes/RecipientChunks.html#RECIPIENT_EMAIL_ADDRESS">RECIPIENT_EMAIL_ADDRESS</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;<A HREF="../../../../../org/apache/poi/hsmf/datatypes/MAPIProperty.html" title="class in org.apache.poi.hsmf.datatypes">MAPIProperty</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hsmf/datatypes/RecipientChunks.html#RECIPIENT_NAME">RECIPIENT_NAME</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;<A HREF="../../../../../org/apache/poi/hsmf/datatypes/MAPIProperty.html" title="class in org.apache.poi.hsmf.datatypes">MAPIProperty</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hsmf/datatypes/RecipientChunks.html#RECIPIENT_SEARCH">RECIPIENT_SEARCH</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;<A HREF="../../../../../org/apache/poi/hsmf/datatypes/MAPIProperty.html" title="class in org.apache.poi.hsmf.datatypes">MAPIProperty</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hsmf/datatypes/RecipientChunks.html#RECIPIENT_SMTP_ADDRESS">RECIPIENT_SMTP_ADDRESS</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../../../org/apache/poi/hsmf/datatypes/StringChunk.html" title="class in org.apache.poi.hsmf.datatypes">StringChunk</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hsmf/datatypes/RecipientChunks.html#recipientDisplayNameChunk">recipientDisplayNameChunk</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The display name of the recipient.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../../../org/apache/poi/hsmf/datatypes/StringChunk.html" title="class in org.apache.poi.hsmf.datatypes">StringChunk</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hsmf/datatypes/RecipientChunks.html#recipientEmailChunk">recipientEmailChunk</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The email address of the recipient, which
+  could be in SMTP or SEARCH format, but
+  isn't always present...</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../../../org/apache/poi/hsmf/datatypes/StringChunk.html" title="class in org.apache.poi.hsmf.datatypes">StringChunk</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hsmf/datatypes/RecipientChunks.html#recipientNameChunk">recipientNameChunk</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The "name", which could be their name if an
+  internal person, or their email address
+  if an external person</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;int</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hsmf/datatypes/RecipientChunks.html#recipientNumber">recipientNumber</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Our 0 based position in the list of recipients</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../../../org/apache/poi/hsmf/datatypes/ByteChunk.html" title="class in org.apache.poi.hsmf.datatypes">ByteChunk</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hsmf/datatypes/RecipientChunks.html#recipientSearchChunk">recipientSearchChunk</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;TODO</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../../../org/apache/poi/hsmf/datatypes/StringChunk.html" title="class in org.apache.poi.hsmf.datatypes">StringChunk</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hsmf/datatypes/RecipientChunks.html#recipientSMTPChunk">recipientSMTPChunk</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The smtp destination email address of
+  the recipient, but isn't always present...</TD>
+</TR>
+</TABLE>
+&nbsp;
+<!-- ======== CONSTRUCTOR SUMMARY ======== -->
+
+<A NAME="constructor_summary"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+<B>Constructor Summary</B></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hsmf/datatypes/RecipientChunks.html#RecipientChunks(java.lang.String)">RecipientChunks</A></B>(java.lang.String&nbsp;name)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+</TABLE>
+&nbsp;
+<!-- ========== METHOD SUMMARY =========== -->
+
+<A NAME="method_summary"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+<B>Method Summary</B></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hsmf/datatypes/RecipientChunks.html#chunksComplete()">chunksComplete</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Called by the parser when all chunks have been found.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../../../org/apache/poi/hsmf/datatypes/Chunk.html" title="class in org.apache.poi.hsmf.datatypes">Chunk</A>[]</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hsmf/datatypes/RecipientChunks.html#getAll()">getAll</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../../../org/apache/poi/hsmf/datatypes/Chunk.html" title="class in org.apache.poi.hsmf.datatypes">Chunk</A>[]</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hsmf/datatypes/RecipientChunks.html#getChunks()">getChunks</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns the chunks that make up the group.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;java.util.Map&lt;<A HREF="../../../../../org/apache/poi/hsmf/datatypes/MAPIProperty.html" title="class in org.apache.poi.hsmf.datatypes">MAPIProperty</A>,java.util.List&lt;<A HREF="../../../../../org/apache/poi/hsmf/datatypes/PropertyValue.html" title="class in org.apache.poi.hsmf.datatypes">PropertyValue</A>&gt;&gt;</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hsmf/datatypes/RecipientChunks.html#getProperties()">getProperties</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns all the Properties contained in the Chunk, along
+  with their Values.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;java.lang.String</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hsmf/datatypes/RecipientChunks.html#getRecipientEmailAddress()">getRecipientEmailAddress</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Tries to find their email address, in
+  whichever chunk holds it given the
+  delivery type.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;java.lang.String</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hsmf/datatypes/RecipientChunks.html#getRecipientName()">getRecipientName</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Tries to find their name,
+  in whichever chunk holds it.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hsmf/datatypes/RecipientChunks.html#record(org.apache.poi.hsmf.datatypes.Chunk)">record</A></B>(<A HREF="../../../../../org/apache/poi/hsmf/datatypes/Chunk.html" title="class in org.apache.poi.hsmf.datatypes">Chunk</A>&nbsp;chunk)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Called by the parser whenever a chunk is found.</TD>
+</TR>
+</TABLE>
+&nbsp;<A NAME="methods_inherited_from_class_java.lang.Object"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#EEEEFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left"><B>Methods inherited from class java.lang.Object</B></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE>clone, equals, finalize, getClass, hashCode, notify, notifyAll, toString, wait, wait, wait</CODE></TD>
+</TR>
+</TABLE>
+&nbsp;
+<P>
+
+<!-- ============ FIELD DETAIL =========== -->
+
+<A NAME="field_detail"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="1"><FONT SIZE="+2">
+<B>Field Detail</B></FONT></TH>
+</TR>
+</TABLE>
+
+<A NAME="PREFIX"><!-- --></A><H3>
+PREFIX</H3>
+<PRE>
+public static final java.lang.String <B>PREFIX</B></PRE>
+<DL>
+<DL>
+<DT><B>See Also:</B><DD><A HREF="../../../../../constant-values.html#org.apache.poi.hsmf.datatypes.RecipientChunks.PREFIX">Constant Field Values</A></DL>
+</DL>
+<HR>
+
+<A NAME="RECIPIENT_NAME"><!-- --></A><H3>
+RECIPIENT_NAME</H3>
+<PRE>
+public static final <A HREF="../../../../../org/apache/poi/hsmf/datatypes/MAPIProperty.html" title="class in org.apache.poi.hsmf.datatypes">MAPIProperty</A> <B>RECIPIENT_NAME</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="DELIVERY_TYPE"><!-- --></A><H3>
+DELIVERY_TYPE</H3>
+<PRE>
+public static final <A HREF="../../../../../org/apache/poi/hsmf/datatypes/MAPIProperty.html" title="class in org.apache.poi.hsmf.datatypes">MAPIProperty</A> <B>DELIVERY_TYPE</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="RECIPIENT_EMAIL_ADDRESS"><!-- --></A><H3>
+RECIPIENT_EMAIL_ADDRESS</H3>
+<PRE>
+public static final <A HREF="../../../../../org/apache/poi/hsmf/datatypes/MAPIProperty.html" title="class in org.apache.poi.hsmf.datatypes">MAPIProperty</A> <B>RECIPIENT_EMAIL_ADDRESS</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="RECIPIENT_SEARCH"><!-- --></A><H3>
+RECIPIENT_SEARCH</H3>
+<PRE>
+public static final <A HREF="../../../../../org/apache/poi/hsmf/datatypes/MAPIProperty.html" title="class in org.apache.poi.hsmf.datatypes">MAPIProperty</A> <B>RECIPIENT_SEARCH</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="RECIPIENT_SMTP_ADDRESS"><!-- --></A><H3>
+RECIPIENT_SMTP_ADDRESS</H3>
+<PRE>
+public static final <A HREF="../../../../../org/apache/poi/hsmf/datatypes/MAPIProperty.html" title="class in org.apache.poi.hsmf.datatypes">MAPIProperty</A> <B>RECIPIENT_SMTP_ADDRESS</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="RECIPIENT_DISPLAY_NAME"><!-- --></A><H3>
+RECIPIENT_DISPLAY_NAME</H3>
+<PRE>
+public static final <A HREF="../../../../../org/apache/poi/hsmf/datatypes/MAPIProperty.html" title="class in org.apache.poi.hsmf.datatypes">MAPIProperty</A> <B>RECIPIENT_DISPLAY_NAME</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="recipientNumber"><!-- --></A><H3>
+recipientNumber</H3>
+<PRE>
+public int <B>recipientNumber</B></PRE>
+<DL>
+<DD>Our 0 based position in the list of recipients
+<P>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="recipientSearchChunk"><!-- --></A><H3>
+recipientSearchChunk</H3>
+<PRE>
+public <A HREF="../../../../../org/apache/poi/hsmf/datatypes/ByteChunk.html" title="class in org.apache.poi.hsmf.datatypes">ByteChunk</A> <B>recipientSearchChunk</B></PRE>
+<DL>
+<DD>TODO
+<P>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="recipientNameChunk"><!-- --></A><H3>
+recipientNameChunk</H3>
+<PRE>
+public <A HREF="../../../../../org/apache/poi/hsmf/datatypes/StringChunk.html" title="class in org.apache.poi.hsmf.datatypes">StringChunk</A> <B>recipientNameChunk</B></PRE>
+<DL>
+<DD>The "name", which could be their name if an
+  internal person, or their email address
+  if an external person
+<P>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="recipientEmailChunk"><!-- --></A><H3>
+recipientEmailChunk</H3>
+<PRE>
+public <A HREF="../../../../../org/apache/poi/hsmf/datatypes/StringChunk.html" title="class in org.apache.poi.hsmf.datatypes">StringChunk</A> <B>recipientEmailChunk</B></PRE>
+<DL>
+<DD>The email address of the recipient, which
+  could be in SMTP or SEARCH format, but
+  isn't always present...
+<P>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="recipientSMTPChunk"><!-- --></A><H3>
+recipientSMTPChunk</H3>
+<PRE>
+public <A HREF="../../../../../org/apache/poi/hsmf/datatypes/StringChunk.html" title="class in org.apache.poi.hsmf.datatypes">StringChunk</A> <B>recipientSMTPChunk</B></PRE>
+<DL>
+<DD>The smtp destination email address of
+  the recipient, but isn't always present...
+<P>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="deliveryTypeChunk"><!-- --></A><H3>
+deliveryTypeChunk</H3>
+<PRE>
+public <A HREF="../../../../../org/apache/poi/hsmf/datatypes/StringChunk.html" title="class in org.apache.poi.hsmf.datatypes">StringChunk</A> <B>deliveryTypeChunk</B></PRE>
+<DL>
+<DD>Normally EX or SMTP. Will generally affect
+  where the email address ends up.
+<P>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="recipientDisplayNameChunk"><!-- --></A><H3>
+recipientDisplayNameChunk</H3>
+<PRE>
+public <A HREF="../../../../../org/apache/poi/hsmf/datatypes/StringChunk.html" title="class in org.apache.poi.hsmf.datatypes">StringChunk</A> <B>recipientDisplayNameChunk</B></PRE>
+<DL>
+<DD>The display name of the recipient.
+ Normally seems to hold the same value
+  as in recipientNameChunk
+<P>
+<DL>
+</DL>
+</DL>
+
+<!-- ========= CONSTRUCTOR DETAIL ======== -->
+
+<A NAME="constructor_detail"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="1"><FONT SIZE="+2">
+<B>Constructor Detail</B></FONT></TH>
+</TR>
+</TABLE>
+
+<A NAME="RecipientChunks(java.lang.String)"><!-- --></A><H3>
+RecipientChunks</H3>
+<PRE>
+public <B>RecipientChunks</B>(java.lang.String&nbsp;name)</PRE>
+<DL>
+</DL>
+
+<!-- ============ METHOD DETAIL ========== -->
+
+<A NAME="method_detail"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="1"><FONT SIZE="+2">
+<B>Method Detail</B></FONT></TH>
+</TR>
+</TABLE>
+
+<A NAME="getRecipientName()"><!-- --></A><H3>
+getRecipientName</H3>
+<PRE>
+public java.lang.String <B>getRecipientName</B>()</PRE>
+<DL>
+<DD>Tries to find their name,
+  in whichever chunk holds it.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getRecipientEmailAddress()"><!-- --></A><H3>
+getRecipientEmailAddress</H3>
+<PRE>
+public java.lang.String <B>getRecipientEmailAddress</B>()</PRE>
+<DL>
+<DD>Tries to find their email address, in
+  whichever chunk holds it given the
+  delivery type.
+<P>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getProperties()"><!-- --></A><H3>
+getProperties</H3>
+<PRE>
+public java.util.Map&lt;<A HREF="../../../../../org/apache/poi/hsmf/datatypes/MAPIProperty.html" title="class in org.apache.poi.hsmf.datatypes">MAPIProperty</A>,java.util.List&lt;<A HREF="../../../../../org/apache/poi/hsmf/datatypes/PropertyValue.html" title="class in org.apache.poi.hsmf.datatypes">PropertyValue</A>&gt;&gt; <B>getProperties</B>()</PRE>
+<DL>
+<DD><B>Description copied from interface: <CODE><A HREF="../../../../../org/apache/poi/hsmf/datatypes/ChunkGroupWithProperties.html#getProperties()">ChunkGroupWithProperties</A></CODE></B></DD>
+<DD>Returns all the Properties contained in the Chunk, along
+  with their Values.
+ Normally, each property will have one value, sometimes
+  none, and rarely multiple (normally for Unknown etc).
+ For fixed sized properties, the value can be fetched 
+  straight from the <A HREF="../../../../../org/apache/poi/hsmf/datatypes/PropertyValue.html" title="class in org.apache.poi.hsmf.datatypes"><CODE>PropertyValue</CODE></A>. For variable
+  sized properties, you'll need to go via the chunk.
+<P>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../../../../org/apache/poi/hsmf/datatypes/ChunkGroupWithProperties.html#getProperties()">getProperties</A></CODE> in interface <CODE><A HREF="../../../../../org/apache/poi/hsmf/datatypes/ChunkGroupWithProperties.html" title="interface in org.apache.poi.hsmf.datatypes">ChunkGroupWithProperties</A></CODE></DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getAll()"><!-- --></A><H3>
+getAll</H3>
+<PRE>
+public <A HREF="../../../../../org/apache/poi/hsmf/datatypes/Chunk.html" title="class in org.apache.poi.hsmf.datatypes">Chunk</A>[] <B>getAll</B>()</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getChunks()"><!-- --></A><H3>
+getChunks</H3>
+<PRE>
+public <A HREF="../../../../../org/apache/poi/hsmf/datatypes/Chunk.html" title="class in org.apache.poi.hsmf.datatypes">Chunk</A>[] <B>getChunks</B>()</PRE>
+<DL>
+<DD><B>Description copied from interface: <CODE><A HREF="../../../../../org/apache/poi/hsmf/datatypes/ChunkGroup.html#getChunks()">ChunkGroup</A></CODE></B></DD>
+<DD>Returns the chunks that make up the group.
+ Should certainly contain all the interesting Chunks,
+  but needn't always contain all of the Chunks.
+<P>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../../../../org/apache/poi/hsmf/datatypes/ChunkGroup.html#getChunks()">getChunks</A></CODE> in interface <CODE><A HREF="../../../../../org/apache/poi/hsmf/datatypes/ChunkGroup.html" title="interface in org.apache.poi.hsmf.datatypes">ChunkGroup</A></CODE></DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="record(org.apache.poi.hsmf.datatypes.Chunk)"><!-- --></A><H3>
+record</H3>
+<PRE>
+public void <B>record</B>(<A HREF="../../../../../org/apache/poi/hsmf/datatypes/Chunk.html" title="class in org.apache.poi.hsmf.datatypes">Chunk</A>&nbsp;chunk)</PRE>
+<DL>
+<DD>Called by the parser whenever a chunk is found.
+<P>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../../../../org/apache/poi/hsmf/datatypes/ChunkGroup.html#record(org.apache.poi.hsmf.datatypes.Chunk)">record</A></CODE> in interface <CODE><A HREF="../../../../../org/apache/poi/hsmf/datatypes/ChunkGroup.html" title="interface in org.apache.poi.hsmf.datatypes">ChunkGroup</A></CODE></DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="chunksComplete()"><!-- --></A><H3>
+chunksComplete</H3>
+<PRE>
+public void <B>chunksComplete</B>()</PRE>
+<DL>
+<DD><B>Description copied from interface: <CODE><A HREF="../../../../../org/apache/poi/hsmf/datatypes/ChunkGroup.html#chunksComplete()">ChunkGroup</A></CODE></B></DD>
+<DD>Called by the parser when all chunks have been found.
+<P>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../../../../org/apache/poi/hsmf/datatypes/ChunkGroup.html#chunksComplete()">chunksComplete</A></CODE> in interface <CODE><A HREF="../../../../../org/apache/poi/hsmf/datatypes/ChunkGroup.html" title="interface in org.apache.poi.hsmf.datatypes">ChunkGroup</A></CODE></DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<!-- ========= END OF CLASS DATA ========= -->
+<HR>
+
+
+<!-- ======= START OF BOTTOM NAVBAR ====== -->
+<A NAME="navbar_bottom"><!-- --></A>
+<A HREF="#skip-navbar_bottom" title="Skip navigation links"></A>
+<TABLE BORDER="0" WIDTH="100%" CELLPADDING="1" CELLSPACING="0" SUMMARY="">
+<TR>
+<TD COLSPAN=2 BGCOLOR="#EEEEFF" CLASS="NavBarCell1">
+<A NAME="navbar_bottom_firstrow"><!-- --></A>
+<TABLE BORDER="0" CELLPADDING="0" CELLSPACING="3" SUMMARY="">
+  <TR ALIGN="center" VALIGN="top">
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../overview-summary.html"><FONT CLASS="NavBarFont1"><B>Overview</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="package-summary.html"><FONT CLASS="NavBarFont1"><B>Package</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#FFFFFF" CLASS="NavBarCell1Rev"> &nbsp;<FONT CLASS="NavBarFont1Rev"><B>Class</B></FONT>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="class-use/RecipientChunks.html"><FONT CLASS="NavBarFont1"><B>Use</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="package-tree.html"><FONT CLASS="NavBarFont1"><B>Tree</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../deprecated-list.html"><FONT CLASS="NavBarFont1"><B>Deprecated</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../index-all.html"><FONT CLASS="NavBarFont1"><B>Index</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../help-doc.html"><FONT CLASS="NavBarFont1"><B>Help</B></FONT></A>&nbsp;</TD>
+  </TR>
+</TABLE>
+</TD>
+<TD ALIGN="right" VALIGN="top" ROWSPAN=3><EM>
+</EM>
+</TD>
+</TR>
+
+<TR>
+<TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
+&nbsp;<A HREF="../../../../../org/apache/poi/hsmf/datatypes/PropertyValue.TimePropertyValue.html" title="class in org.apache.poi.hsmf.datatypes"><B>PREV CLASS</B></A>&nbsp;
+&nbsp;<A HREF="../../../../../org/apache/poi/hsmf/datatypes/RecipientChunks.RecipientChunksSorter.html" title="class in org.apache.poi.hsmf.datatypes"><B>NEXT CLASS</B></A></FONT></TD>
+<TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
+  <A HREF="../../../../../index.html?org/apache/poi/hsmf/datatypes/RecipientChunks.html" target="_top"><B>FRAMES</B></A>  &nbsp;
+&nbsp;<A HREF="RecipientChunks.html" target="_top"><B>NO FRAMES</B></A>  &nbsp;
+&nbsp;<SCRIPT type="text/javascript">
+  <!--
+  if(window==top) {
+    document.writeln('<A HREF="../../../../../allclasses-noframe.html"><B>All Classes</B></A>');
+  }
+  //-->
+</SCRIPT>
+<NOSCRIPT>
+  <A HREF="../../../../../allclasses-noframe.html"><B>All Classes</B></A>
+</NOSCRIPT>
+
+
+</FONT></TD>
+</TR>
+<TR>
+<TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
+  SUMMARY:&nbsp;<A HREF="#nested_class_summary">NESTED</A>&nbsp;|&nbsp;<A HREF="#field_summary">FIELD</A>&nbsp;|&nbsp;<A HREF="#constructor_summary">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_summary">METHOD</A></FONT></TD>
+<TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
+DETAIL:&nbsp;<A HREF="#field_detail">FIELD</A>&nbsp;|&nbsp;<A HREF="#constructor_detail">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_detail">METHOD</A></FONT></TD>
+</TR>
+</TABLE>
+<A NAME="skip-navbar_bottom"></A>
+<!-- ======== END OF BOTTOM NAVBAR ======= -->
+
+<HR>
+
+                <i>Copyright 2014 The Apache Software Foundation or
+        its licensors, as applicable.</i>
+            
+</BODY>
+</HTML>

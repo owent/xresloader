@@ -1,0 +1,1454 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!--NewPage-->
+<HTML>
+<HEAD>
+<TITLE>
+ParagraphProperties (POI API Documentation)
+</TITLE>
+
+<META NAME="keywords" CONTENT="org.apache.poi.hwpf.usermodel.ParagraphProperties class">
+
+<LINK REL ="stylesheet" TYPE="text/css" HREF="../../../../../stylesheet.css" TITLE="Style">
+
+<SCRIPT type="text/javascript">
+function windowTitle()
+{
+    parent.document.title="ParagraphProperties (POI API Documentation)";
+}
+</SCRIPT>
+<NOSCRIPT>
+</NOSCRIPT>
+
+</HEAD>
+
+<BODY BGCOLOR="white" onload="windowTitle();">
+
+
+<!-- ========= START OF TOP NAVBAR ======= -->
+<A NAME="navbar_top"><!-- --></A>
+<A HREF="#skip-navbar_top" title="Skip navigation links"></A>
+<TABLE BORDER="0" WIDTH="100%" CELLPADDING="1" CELLSPACING="0" SUMMARY="">
+<TR>
+<TD COLSPAN=2 BGCOLOR="#EEEEFF" CLASS="NavBarCell1">
+<A NAME="navbar_top_firstrow"><!-- --></A>
+<TABLE BORDER="0" CELLPADDING="0" CELLSPACING="3" SUMMARY="">
+  <TR ALIGN="center" VALIGN="top">
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../overview-summary.html"><FONT CLASS="NavBarFont1"><B>Overview</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="package-summary.html"><FONT CLASS="NavBarFont1"><B>Package</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#FFFFFF" CLASS="NavBarCell1Rev"> &nbsp;<FONT CLASS="NavBarFont1Rev"><B>Class</B></FONT>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="class-use/ParagraphProperties.html"><FONT CLASS="NavBarFont1"><B>Use</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="package-tree.html"><FONT CLASS="NavBarFont1"><B>Tree</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../deprecated-list.html"><FONT CLASS="NavBarFont1"><B>Deprecated</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../index-all.html"><FONT CLASS="NavBarFont1"><B>Index</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../help-doc.html"><FONT CLASS="NavBarFont1"><B>Help</B></FONT></A>&nbsp;</TD>
+  </TR>
+</TABLE>
+</TD>
+<TD ALIGN="right" VALIGN="top" ROWSPAN=3><EM>
+</EM>
+</TD>
+</TR>
+
+<TR>
+<TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
+&nbsp;<A HREF="../../../../../org/apache/poi/hwpf/usermodel/Paragraph.html" title="class in org.apache.poi.hwpf.usermodel"><B>PREV CLASS</B></A>&nbsp;
+&nbsp;<A HREF="../../../../../org/apache/poi/hwpf/usermodel/Picture.html" title="class in org.apache.poi.hwpf.usermodel"><B>NEXT CLASS</B></A></FONT></TD>
+<TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
+  <A HREF="../../../../../index.html?org/apache/poi/hwpf/usermodel/ParagraphProperties.html" target="_top"><B>FRAMES</B></A>  &nbsp;
+&nbsp;<A HREF="ParagraphProperties.html" target="_top"><B>NO FRAMES</B></A>  &nbsp;
+&nbsp;<SCRIPT type="text/javascript">
+  <!--
+  if(window==top) {
+    document.writeln('<A HREF="../../../../../allclasses-noframe.html"><B>All Classes</B></A>');
+  }
+  //-->
+</SCRIPT>
+<NOSCRIPT>
+  <A HREF="../../../../../allclasses-noframe.html"><B>All Classes</B></A>
+</NOSCRIPT>
+
+
+</FONT></TD>
+</TR>
+<TR>
+<TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
+  SUMMARY:&nbsp;NESTED&nbsp;|&nbsp;<A HREF="#fields_inherited_from_class_org.apache.poi.hwpf.model.types.PAPAbstractType">FIELD</A>&nbsp;|&nbsp;<A HREF="#constructor_summary">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_summary">METHOD</A></FONT></TD>
+<TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
+DETAIL:&nbsp;FIELD&nbsp;|&nbsp;<A HREF="#constructor_detail">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_detail">METHOD</A></FONT></TD>
+</TR>
+</TABLE>
+<A NAME="skip-navbar_top"></A>
+<!-- ========= END OF TOP NAVBAR ========= -->
+
+<HR>
+<!-- ======== START OF CLASS DATA ======== -->
+<H2>
+<FONT SIZE="-1">
+org.apache.poi.hwpf.usermodel</FONT>
+<BR>
+Class ParagraphProperties</H2>
+<PRE>
+java.lang.Object
+  <IMG SRC="../../../../../resources/inherit.gif" ALT="extended by "><A HREF="../../../../../org/apache/poi/hwpf/model/types/PAPAbstractType.html" title="class in org.apache.poi.hwpf.model.types">org.apache.poi.hwpf.model.types.PAPAbstractType</A>
+      <IMG SRC="../../../../../resources/inherit.gif" ALT="extended by "><B>org.apache.poi.hwpf.usermodel.ParagraphProperties</B>
+</PRE>
+<DL>
+<DT><B>All Implemented Interfaces:</B> <DD>java.lang.Cloneable</DD>
+</DL>
+<HR>
+<DL>
+<DT><PRE>public final class <B>ParagraphProperties</B><DT>extends <A HREF="../../../../../org/apache/poi/hwpf/model/types/PAPAbstractType.html" title="class in org.apache.poi.hwpf.model.types">PAPAbstractType</A><DT>implements java.lang.Cloneable</DL>
+</PRE>
+
+<P>
+<HR>
+
+<P>
+<!-- =========== FIELD SUMMARY =========== -->
+
+<A NAME="field_summary"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+<B>Field Summary</B></FONT></TH>
+</TR>
+</TABLE>
+&nbsp;<A NAME="fields_inherited_from_class_org.apache.poi.hwpf.model.types.PAPAbstractType"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#EEEEFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left"><B>Fields inherited from class org.apache.poi.hwpf.model.types.<A HREF="../../../../../org/apache/poi/hwpf/model/types/PAPAbstractType.html" title="class in org.apache.poi.hwpf.model.types">PAPAbstractType</A></B></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><A HREF="../../../../../org/apache/poi/hwpf/model/types/PAPAbstractType.html#BRCL_DOUBLE">BRCL_DOUBLE</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/PAPAbstractType.html#BRCL_SHADOW">BRCL_SHADOW</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/PAPAbstractType.html#BRCL_SINGLE">BRCL_SINGLE</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/PAPAbstractType.html#BRCL_THICK">BRCL_THICK</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/PAPAbstractType.html#BRCP_BAR_TO_LEFT_OF_PARAGRAPH">BRCP_BAR_TO_LEFT_OF_PARAGRAPH</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/PAPAbstractType.html#BRCP_BORDER_ABOVE">BRCP_BORDER_ABOVE</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/PAPAbstractType.html#BRCP_BORDER_BELOW">BRCP_BORDER_BELOW</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/PAPAbstractType.html#BRCP_BOX_AROUND">BRCP_BOX_AROUND</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/PAPAbstractType.html#BRCP_NONE">BRCP_NONE</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/PAPAbstractType.html#field_1_istd">field_1_istd</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/PAPAbstractType.html#field_10_fNoLnn">field_10_fNoLnn</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/PAPAbstractType.html#field_11_lspd">field_11_lspd</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/PAPAbstractType.html#field_12_dyaBefore">field_12_dyaBefore</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/PAPAbstractType.html#field_13_dyaAfter">field_13_dyaAfter</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/PAPAbstractType.html#field_14_fInTable">field_14_fInTable</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/PAPAbstractType.html#field_15_finTableW97">field_15_finTableW97</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/PAPAbstractType.html#field_16_fTtp">field_16_fTtp</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/PAPAbstractType.html#field_17_dxaAbs">field_17_dxaAbs</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/PAPAbstractType.html#field_18_dyaAbs">field_18_dyaAbs</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/PAPAbstractType.html#field_19_dxaWidth">field_19_dxaWidth</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/PAPAbstractType.html#field_2_fSideBySide">field_2_fSideBySide</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/PAPAbstractType.html#field_20_fBrLnAbove">field_20_fBrLnAbove</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/PAPAbstractType.html#field_21_fBrLnBelow">field_21_fBrLnBelow</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/PAPAbstractType.html#field_22_pcVert">field_22_pcVert</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/PAPAbstractType.html#field_23_pcHorz">field_23_pcHorz</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/PAPAbstractType.html#field_24_wr">field_24_wr</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/PAPAbstractType.html#field_25_fNoAutoHyph">field_25_fNoAutoHyph</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/PAPAbstractType.html#field_26_dyaHeight">field_26_dyaHeight</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/PAPAbstractType.html#field_27_fMinHeight">field_27_fMinHeight</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/PAPAbstractType.html#field_28_dcs">field_28_dcs</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/PAPAbstractType.html#field_29_dyaFromText">field_29_dyaFromText</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/PAPAbstractType.html#field_3_fKeep">field_3_fKeep</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/PAPAbstractType.html#field_30_dxaFromText">field_30_dxaFromText</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/PAPAbstractType.html#field_31_fLocked">field_31_fLocked</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/PAPAbstractType.html#field_32_fWidowControl">field_32_fWidowControl</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/PAPAbstractType.html#field_33_fKinsoku">field_33_fKinsoku</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/PAPAbstractType.html#field_34_fWordWrap">field_34_fWordWrap</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/PAPAbstractType.html#field_35_fOverflowPunct">field_35_fOverflowPunct</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/PAPAbstractType.html#field_36_fTopLinePunct">field_36_fTopLinePunct</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/PAPAbstractType.html#field_37_fAutoSpaceDE">field_37_fAutoSpaceDE</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/PAPAbstractType.html#field_38_fAutoSpaceDN">field_38_fAutoSpaceDN</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/PAPAbstractType.html#field_39_wAlignFont">field_39_wAlignFont</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/PAPAbstractType.html#field_4_fKeepFollow">field_4_fKeepFollow</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/PAPAbstractType.html#field_40_fontAlign">field_40_fontAlign</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/PAPAbstractType.html#field_41_lvl">field_41_lvl</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/PAPAbstractType.html#field_42_fBiDi">field_42_fBiDi</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/PAPAbstractType.html#field_43_fNumRMIns">field_43_fNumRMIns</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/PAPAbstractType.html#field_44_fCrLf">field_44_fCrLf</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/PAPAbstractType.html#field_45_fUsePgsuSettings">field_45_fUsePgsuSettings</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/PAPAbstractType.html#field_46_fAdjustRight">field_46_fAdjustRight</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/PAPAbstractType.html#field_47_itap">field_47_itap</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/PAPAbstractType.html#field_48_fInnerTableCell">field_48_fInnerTableCell</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/PAPAbstractType.html#field_49_fOpenTch">field_49_fOpenTch</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/PAPAbstractType.html#field_5_fPageBreakBefore">field_5_fPageBreakBefore</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/PAPAbstractType.html#field_50_fTtpEmbedded">field_50_fTtpEmbedded</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/PAPAbstractType.html#field_51_dxcRight">field_51_dxcRight</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/PAPAbstractType.html#field_52_dxcLeft">field_52_dxcLeft</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/PAPAbstractType.html#field_53_dxcLeft1">field_53_dxcLeft1</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/PAPAbstractType.html#field_54_fDyaBeforeAuto">field_54_fDyaBeforeAuto</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/PAPAbstractType.html#field_55_fDyaAfterAuto">field_55_fDyaAfterAuto</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/PAPAbstractType.html#field_56_dxaRight">field_56_dxaRight</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/PAPAbstractType.html#field_57_dxaLeft">field_57_dxaLeft</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/PAPAbstractType.html#field_58_dxaLeft1">field_58_dxaLeft1</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/PAPAbstractType.html#field_59_jc">field_59_jc</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/PAPAbstractType.html#field_6_brcl">field_6_brcl</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/PAPAbstractType.html#field_60_brcTop">field_60_brcTop</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/PAPAbstractType.html#field_61_brcLeft">field_61_brcLeft</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/PAPAbstractType.html#field_62_brcBottom">field_62_brcBottom</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/PAPAbstractType.html#field_63_brcRight">field_63_brcRight</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/PAPAbstractType.html#field_64_brcBetween">field_64_brcBetween</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/PAPAbstractType.html#field_65_brcBar">field_65_brcBar</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/PAPAbstractType.html#field_66_shd">field_66_shd</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/PAPAbstractType.html#field_67_anld">field_67_anld</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/PAPAbstractType.html#field_68_phe">field_68_phe</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/PAPAbstractType.html#field_69_fPropRMark">field_69_fPropRMark</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/PAPAbstractType.html#field_7_brcp">field_7_brcp</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/PAPAbstractType.html#field_70_ibstPropRMark">field_70_ibstPropRMark</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/PAPAbstractType.html#field_71_dttmPropRMark">field_71_dttmPropRMark</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/PAPAbstractType.html#field_72_itbdMac">field_72_itbdMac</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/PAPAbstractType.html#field_73_rgdxaTab">field_73_rgdxaTab</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/PAPAbstractType.html#field_74_rgtbd">field_74_rgtbd</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/PAPAbstractType.html#field_75_numrm">field_75_numrm</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/PAPAbstractType.html#field_76_ptap">field_76_ptap</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/PAPAbstractType.html#field_77_fNoAllowOverlap">field_77_fNoAllowOverlap</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/PAPAbstractType.html#field_78_ipgp">field_78_ipgp</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/PAPAbstractType.html#field_79_rsid">field_79_rsid</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/PAPAbstractType.html#field_8_ilvl">field_8_ilvl</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/PAPAbstractType.html#field_9_ilfo">field_9_ilfo</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/PAPAbstractType.html#FMINHEIGHT_AT_LEAST">FMINHEIGHT_AT_LEAST</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/PAPAbstractType.html#FMINHEIGHT_EXACT">FMINHEIGHT_EXACT</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/PAPAbstractType.html#WALIGNFONT_AUTO">WALIGNFONT_AUTO</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/PAPAbstractType.html#WALIGNFONT_CENTERED">WALIGNFONT_CENTERED</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/PAPAbstractType.html#WALIGNFONT_HANGING">WALIGNFONT_HANGING</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/PAPAbstractType.html#WALIGNFONT_ROMAN">WALIGNFONT_ROMAN</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/PAPAbstractType.html#WALIGNFONT_VARIABLE">WALIGNFONT_VARIABLE</A></CODE></TD>
+</TR>
+</TABLE>
+&nbsp;
+<!-- ======== CONSTRUCTOR SUMMARY ======== -->
+
+<A NAME="constructor_summary"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+<B>Constructor Summary</B></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/usermodel/ParagraphProperties.html#ParagraphProperties()">ParagraphProperties</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+</TABLE>
+&nbsp;
+<!-- ========== METHOD SUMMARY =========== -->
+
+<A NAME="method_summary"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+<B>Method Summary</B></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;java.lang.Object</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/usermodel/ParagraphProperties.html#clone()">clone</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../../../org/apache/poi/hwpf/usermodel/BorderCode.html" title="class in org.apache.poi.hwpf.usermodel">BorderCode</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/usermodel/ParagraphProperties.html#getBarBorder()">getBarBorder</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../../../org/apache/poi/hwpf/usermodel/BorderCode.html" title="class in org.apache.poi.hwpf.usermodel">BorderCode</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/usermodel/ParagraphProperties.html#getBottomBorder()">getBottomBorder</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../../../org/apache/poi/hwpf/usermodel/DropCapSpecifier.html" title="class in org.apache.poi.hwpf.usermodel">DropCapSpecifier</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/usermodel/ParagraphProperties.html#getDropCap()">getDropCap</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;int</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/usermodel/ParagraphProperties.html#getFirstLineIndent()">getFirstLineIndent</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;int</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/usermodel/ParagraphProperties.html#getFontAlignment()">getFontAlignment</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;int</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/usermodel/ParagraphProperties.html#getIndentFromLeft()">getIndentFromLeft</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;int</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/usermodel/ParagraphProperties.html#getIndentFromRight()">getIndentFromRight</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;int</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/usermodel/ParagraphProperties.html#getJustification()">getJustification</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../../../org/apache/poi/hwpf/usermodel/BorderCode.html" title="class in org.apache.poi.hwpf.usermodel">BorderCode</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/usermodel/ParagraphProperties.html#getLeftBorder()">getLeftBorder</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../../../org/apache/poi/hwpf/usermodel/LineSpacingDescriptor.html" title="class in org.apache.poi.hwpf.usermodel">LineSpacingDescriptor</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/usermodel/ParagraphProperties.html#getLineSpacing()">getLineSpacing</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../../../org/apache/poi/hwpf/usermodel/BorderCode.html" title="class in org.apache.poi.hwpf.usermodel">BorderCode</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/usermodel/ParagraphProperties.html#getRightBorder()">getRightBorder</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../../../org/apache/poi/hwpf/usermodel/ShadingDescriptor.html" title="class in org.apache.poi.hwpf.usermodel">ShadingDescriptor</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/usermodel/ParagraphProperties.html#getShading()">getShading</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;int</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/usermodel/ParagraphProperties.html#getSpacingAfter()">getSpacingAfter</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;int</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/usermodel/ParagraphProperties.html#getSpacingBefore()">getSpacingBefore</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../../../org/apache/poi/hwpf/usermodel/BorderCode.html" title="class in org.apache.poi.hwpf.usermodel">BorderCode</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/usermodel/ParagraphProperties.html#getTopBorder()">getTopBorder</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/usermodel/ParagraphProperties.html#isAutoHyphenated()">isAutoHyphenated</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/usermodel/ParagraphProperties.html#isBackward()">isBackward</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/usermodel/ParagraphProperties.html#isKinsoku()">isKinsoku</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/usermodel/ParagraphProperties.html#isLineNotNumbered()">isLineNotNumbered</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/usermodel/ParagraphProperties.html#isSideBySide()">isSideBySide</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/usermodel/ParagraphProperties.html#isVertical()">isVertical</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/usermodel/ParagraphProperties.html#isWidowControlled()">isWidowControlled</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/usermodel/ParagraphProperties.html#isWordWrapped()">isWordWrapped</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/usermodel/ParagraphProperties.html#keepOnPage()">keepOnPage</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/usermodel/ParagraphProperties.html#keepWithNext()">keepWithNext</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/usermodel/ParagraphProperties.html#pageBreakBefore()">pageBreakBefore</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/usermodel/ParagraphProperties.html#setAutoHyphenated(boolean)">setAutoHyphenated</A></B>(boolean&nbsp;auto)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/usermodel/ParagraphProperties.html#setBackward(boolean)">setBackward</A></B>(boolean&nbsp;bward)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/usermodel/ParagraphProperties.html#setBarBorder(org.apache.poi.hwpf.usermodel.BorderCode)">setBarBorder</A></B>(<A HREF="../../../../../org/apache/poi/hwpf/usermodel/BorderCode.html" title="class in org.apache.poi.hwpf.usermodel">BorderCode</A>&nbsp;bar)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/usermodel/ParagraphProperties.html#setBottomBorder(org.apache.poi.hwpf.usermodel.BorderCode)">setBottomBorder</A></B>(<A HREF="../../../../../org/apache/poi/hwpf/usermodel/BorderCode.html" title="class in org.apache.poi.hwpf.usermodel">BorderCode</A>&nbsp;bottom)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/usermodel/ParagraphProperties.html#setDropCap(org.apache.poi.hwpf.usermodel.DropCapSpecifier)">setDropCap</A></B>(<A HREF="../../../../../org/apache/poi/hwpf/usermodel/DropCapSpecifier.html" title="class in org.apache.poi.hwpf.usermodel">DropCapSpecifier</A>&nbsp;dcs)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/usermodel/ParagraphProperties.html#setFirstLineIndent(int)">setFirstLineIndent</A></B>(int&nbsp;first)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/usermodel/ParagraphProperties.html#setFontAlignment(int)">setFontAlignment</A></B>(int&nbsp;align)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/usermodel/ParagraphProperties.html#setIndentFromLeft(int)">setIndentFromLeft</A></B>(int&nbsp;dxaLeft)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/usermodel/ParagraphProperties.html#setIndentFromRight(int)">setIndentFromRight</A></B>(int&nbsp;dxaRight)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/usermodel/ParagraphProperties.html#setJustification(byte)">setJustification</A></B>(byte&nbsp;jc)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/usermodel/ParagraphProperties.html#setJustificationLogical(byte)">setJustificationLogical</A></B>(byte&nbsp;jc)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/usermodel/ParagraphProperties.html#setKeepOnPage(boolean)">setKeepOnPage</A></B>(boolean&nbsp;fKeep)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/usermodel/ParagraphProperties.html#setKeepWithNext(boolean)">setKeepWithNext</A></B>(boolean&nbsp;fKeepFollow)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/usermodel/ParagraphProperties.html#setKinsoku(boolean)">setKinsoku</A></B>(boolean&nbsp;kinsoku)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/usermodel/ParagraphProperties.html#setLeftBorder(org.apache.poi.hwpf.usermodel.BorderCode)">setLeftBorder</A></B>(<A HREF="../../../../../org/apache/poi/hwpf/usermodel/BorderCode.html" title="class in org.apache.poi.hwpf.usermodel">BorderCode</A>&nbsp;left)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/usermodel/ParagraphProperties.html#setLineNotNumbered(boolean)">setLineNotNumbered</A></B>(boolean&nbsp;fNoLnn)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/usermodel/ParagraphProperties.html#setLineSpacing(org.apache.poi.hwpf.usermodel.LineSpacingDescriptor)">setLineSpacing</A></B>(<A HREF="../../../../../org/apache/poi/hwpf/usermodel/LineSpacingDescriptor.html" title="class in org.apache.poi.hwpf.usermodel">LineSpacingDescriptor</A>&nbsp;lspd)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/usermodel/ParagraphProperties.html#setPageBreakBefore(boolean)">setPageBreakBefore</A></B>(boolean&nbsp;fPageBreak)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/usermodel/ParagraphProperties.html#setRightBorder(org.apache.poi.hwpf.usermodel.BorderCode)">setRightBorder</A></B>(<A HREF="../../../../../org/apache/poi/hwpf/usermodel/BorderCode.html" title="class in org.apache.poi.hwpf.usermodel">BorderCode</A>&nbsp;right)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/usermodel/ParagraphProperties.html#setShading(org.apache.poi.hwpf.usermodel.ShadingDescriptor)">setShading</A></B>(<A HREF="../../../../../org/apache/poi/hwpf/usermodel/ShadingDescriptor.html" title="class in org.apache.poi.hwpf.usermodel">ShadingDescriptor</A>&nbsp;shd)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/usermodel/ParagraphProperties.html#setSideBySide(boolean)">setSideBySide</A></B>(boolean&nbsp;fSideBySide)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/usermodel/ParagraphProperties.html#setSpacingAfter(int)">setSpacingAfter</A></B>(int&nbsp;after)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/usermodel/ParagraphProperties.html#setSpacingBefore(int)">setSpacingBefore</A></B>(int&nbsp;before)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/usermodel/ParagraphProperties.html#setTopBorder(org.apache.poi.hwpf.usermodel.BorderCode)">setTopBorder</A></B>(<A HREF="../../../../../org/apache/poi/hwpf/usermodel/BorderCode.html" title="class in org.apache.poi.hwpf.usermodel">BorderCode</A>&nbsp;top)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/usermodel/ParagraphProperties.html#setVertical(boolean)">setVertical</A></B>(boolean&nbsp;vertical)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/usermodel/ParagraphProperties.html#setWidowControl(boolean)">setWidowControl</A></B>(boolean&nbsp;widowControl)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/usermodel/ParagraphProperties.html#setWordWrapped(boolean)">setWordWrapped</A></B>(boolean&nbsp;wrap)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+</TABLE>
+&nbsp;<A NAME="methods_inherited_from_class_org.apache.poi.hwpf.model.types.PAPAbstractType"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#EEEEFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left"><B>Methods inherited from class org.apache.poi.hwpf.model.types.<A HREF="../../../../../org/apache/poi/hwpf/model/types/PAPAbstractType.html" title="class in org.apache.poi.hwpf.model.types">PAPAbstractType</A></B></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><A HREF="../../../../../org/apache/poi/hwpf/model/types/PAPAbstractType.html#getAnld()">getAnld</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/PAPAbstractType.html#getBrcBar()">getBrcBar</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/PAPAbstractType.html#getBrcBetween()">getBrcBetween</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/PAPAbstractType.html#getBrcBottom()">getBrcBottom</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/PAPAbstractType.html#getBrcl()">getBrcl</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/PAPAbstractType.html#getBrcLeft()">getBrcLeft</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/PAPAbstractType.html#getBrcp()">getBrcp</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/PAPAbstractType.html#getBrcRight()">getBrcRight</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/PAPAbstractType.html#getBrcTop()">getBrcTop</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/PAPAbstractType.html#getDcs()">getDcs</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/PAPAbstractType.html#getDttmPropRMark()">getDttmPropRMark</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/PAPAbstractType.html#getDxaAbs()">getDxaAbs</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/PAPAbstractType.html#getDxaFromText()">getDxaFromText</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/PAPAbstractType.html#getDxaLeft()">getDxaLeft</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/PAPAbstractType.html#getDxaLeft1()">getDxaLeft1</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/PAPAbstractType.html#getDxaRight()">getDxaRight</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/PAPAbstractType.html#getDxaWidth()">getDxaWidth</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/PAPAbstractType.html#getDxcLeft()">getDxcLeft</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/PAPAbstractType.html#getDxcLeft1()">getDxcLeft1</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/PAPAbstractType.html#getDxcRight()">getDxcRight</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/PAPAbstractType.html#getDyaAbs()">getDyaAbs</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/PAPAbstractType.html#getDyaAfter()">getDyaAfter</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/PAPAbstractType.html#getDyaBefore()">getDyaBefore</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/PAPAbstractType.html#getDyaFromText()">getDyaFromText</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/PAPAbstractType.html#getDyaHeight()">getDyaHeight</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/PAPAbstractType.html#getFAdjustRight()">getFAdjustRight</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/PAPAbstractType.html#getFAutoSpaceDE()">getFAutoSpaceDE</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/PAPAbstractType.html#getFAutoSpaceDN()">getFAutoSpaceDN</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/PAPAbstractType.html#getFBiDi()">getFBiDi</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/PAPAbstractType.html#getFBrLnAbove()">getFBrLnAbove</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/PAPAbstractType.html#getFBrLnBelow()">getFBrLnBelow</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/PAPAbstractType.html#getFCrLf()">getFCrLf</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/PAPAbstractType.html#getFDyaAfterAuto()">getFDyaAfterAuto</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/PAPAbstractType.html#getFDyaBeforeAuto()">getFDyaBeforeAuto</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/PAPAbstractType.html#getFInnerTableCell()">getFInnerTableCell</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/PAPAbstractType.html#getFInTable()">getFInTable</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/PAPAbstractType.html#getFinTableW97()">getFinTableW97</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/PAPAbstractType.html#getFKeep()">getFKeep</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/PAPAbstractType.html#getFKeepFollow()">getFKeepFollow</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/PAPAbstractType.html#getFKinsoku()">getFKinsoku</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/PAPAbstractType.html#getFLocked()">getFLocked</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/PAPAbstractType.html#getFMinHeight()">getFMinHeight</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/PAPAbstractType.html#getFNoAllowOverlap()">getFNoAllowOverlap</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/PAPAbstractType.html#getFNoAutoHyph()">getFNoAutoHyph</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/PAPAbstractType.html#getFNoLnn()">getFNoLnn</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/PAPAbstractType.html#getFNumRMIns()">getFNumRMIns</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/PAPAbstractType.html#getFontAlign()">getFontAlign</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/PAPAbstractType.html#getFOpenTch()">getFOpenTch</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/PAPAbstractType.html#getFOverflowPunct()">getFOverflowPunct</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/PAPAbstractType.html#getFPageBreakBefore()">getFPageBreakBefore</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/PAPAbstractType.html#getFPropRMark()">getFPropRMark</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/PAPAbstractType.html#getFSideBySide()">getFSideBySide</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/PAPAbstractType.html#getFTopLinePunct()">getFTopLinePunct</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/PAPAbstractType.html#getFTtp()">getFTtp</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/PAPAbstractType.html#getFTtpEmbedded()">getFTtpEmbedded</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/PAPAbstractType.html#getFUsePgsuSettings()">getFUsePgsuSettings</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/PAPAbstractType.html#getFWidowControl()">getFWidowControl</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/PAPAbstractType.html#getFWordWrap()">getFWordWrap</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/PAPAbstractType.html#getIbstPropRMark()">getIbstPropRMark</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/PAPAbstractType.html#getIlfo()">getIlfo</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/PAPAbstractType.html#getIlvl()">getIlvl</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/PAPAbstractType.html#getIpgp()">getIpgp</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/PAPAbstractType.html#getIstd()">getIstd</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/PAPAbstractType.html#getItap()">getItap</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/PAPAbstractType.html#getItbdMac()">getItbdMac</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/PAPAbstractType.html#getJc()">getJc</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/PAPAbstractType.html#getLspd()">getLspd</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/PAPAbstractType.html#getLvl()">getLvl</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/PAPAbstractType.html#getNumrm()">getNumrm</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/PAPAbstractType.html#getPcHorz()">getPcHorz</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/PAPAbstractType.html#getPcVert()">getPcVert</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/PAPAbstractType.html#getPhe()">getPhe</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/PAPAbstractType.html#getPtap()">getPtap</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/PAPAbstractType.html#getRgdxaTab()">getRgdxaTab</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/PAPAbstractType.html#getRgtbd()">getRgtbd</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/PAPAbstractType.html#getRsid()">getRsid</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/PAPAbstractType.html#getShd()">getShd</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/PAPAbstractType.html#getWAlignFont()">getWAlignFont</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/PAPAbstractType.html#getWr()">getWr</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/PAPAbstractType.html#isFBackward()">isFBackward</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/PAPAbstractType.html#isFRotateFont()">isFRotateFont</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/PAPAbstractType.html#isFVertical()">isFVertical</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/PAPAbstractType.html#setAnld(byte[])">setAnld</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/PAPAbstractType.html#setBrcBar(org.apache.poi.hwpf.usermodel.BorderCode)">setBrcBar</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/PAPAbstractType.html#setBrcBetween(org.apache.poi.hwpf.usermodel.BorderCode)">setBrcBetween</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/PAPAbstractType.html#setBrcBottom(org.apache.poi.hwpf.usermodel.BorderCode)">setBrcBottom</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/PAPAbstractType.html#setBrcl(byte)">setBrcl</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/PAPAbstractType.html#setBrcLeft(org.apache.poi.hwpf.usermodel.BorderCode)">setBrcLeft</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/PAPAbstractType.html#setBrcp(byte)">setBrcp</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/PAPAbstractType.html#setBrcRight(org.apache.poi.hwpf.usermodel.BorderCode)">setBrcRight</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/PAPAbstractType.html#setBrcTop(org.apache.poi.hwpf.usermodel.BorderCode)">setBrcTop</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/PAPAbstractType.html#setDcs(org.apache.poi.hwpf.usermodel.DropCapSpecifier)">setDcs</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/PAPAbstractType.html#setDttmPropRMark(org.apache.poi.hwpf.usermodel.DateAndTime)">setDttmPropRMark</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/PAPAbstractType.html#setDxaAbs(int)">setDxaAbs</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/PAPAbstractType.html#setDxaFromText(int)">setDxaFromText</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/PAPAbstractType.html#setDxaLeft(int)">setDxaLeft</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/PAPAbstractType.html#setDxaLeft1(int)">setDxaLeft1</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/PAPAbstractType.html#setDxaRight(int)">setDxaRight</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/PAPAbstractType.html#setDxaWidth(int)">setDxaWidth</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/PAPAbstractType.html#setDxcLeft(short)">setDxcLeft</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/PAPAbstractType.html#setDxcLeft1(short)">setDxcLeft1</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/PAPAbstractType.html#setDxcRight(short)">setDxcRight</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/PAPAbstractType.html#setDyaAbs(int)">setDyaAbs</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/PAPAbstractType.html#setDyaAfter(int)">setDyaAfter</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/PAPAbstractType.html#setDyaBefore(int)">setDyaBefore</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/PAPAbstractType.html#setDyaFromText(int)">setDyaFromText</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/PAPAbstractType.html#setDyaHeight(int)">setDyaHeight</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/PAPAbstractType.html#setFAdjustRight(boolean)">setFAdjustRight</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/PAPAbstractType.html#setFAutoSpaceDE(boolean)">setFAutoSpaceDE</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/PAPAbstractType.html#setFAutoSpaceDN(boolean)">setFAutoSpaceDN</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/PAPAbstractType.html#setFBackward(boolean)">setFBackward</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/PAPAbstractType.html#setFBiDi(boolean)">setFBiDi</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/PAPAbstractType.html#setFBrLnAbove(boolean)">setFBrLnAbove</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/PAPAbstractType.html#setFBrLnBelow(boolean)">setFBrLnBelow</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/PAPAbstractType.html#setFCrLf(boolean)">setFCrLf</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/PAPAbstractType.html#setFDyaAfterAuto(boolean)">setFDyaAfterAuto</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/PAPAbstractType.html#setFDyaBeforeAuto(boolean)">setFDyaBeforeAuto</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/PAPAbstractType.html#setFInnerTableCell(boolean)">setFInnerTableCell</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/PAPAbstractType.html#setFInTable(boolean)">setFInTable</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/PAPAbstractType.html#setFinTableW97(boolean)">setFinTableW97</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/PAPAbstractType.html#setFKeep(boolean)">setFKeep</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/PAPAbstractType.html#setFKeepFollow(boolean)">setFKeepFollow</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/PAPAbstractType.html#setFKinsoku(boolean)">setFKinsoku</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/PAPAbstractType.html#setFLocked(boolean)">setFLocked</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/PAPAbstractType.html#setFMinHeight(boolean)">setFMinHeight</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/PAPAbstractType.html#setFNoAllowOverlap(boolean)">setFNoAllowOverlap</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/PAPAbstractType.html#setFNoAutoHyph(boolean)">setFNoAutoHyph</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/PAPAbstractType.html#setFNoLnn(boolean)">setFNoLnn</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/PAPAbstractType.html#setFNumRMIns(boolean)">setFNumRMIns</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/PAPAbstractType.html#setFontAlign(short)">setFontAlign</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/PAPAbstractType.html#setFOpenTch(boolean)">setFOpenTch</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/PAPAbstractType.html#setFOverflowPunct(boolean)">setFOverflowPunct</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/PAPAbstractType.html#setFPageBreakBefore(boolean)">setFPageBreakBefore</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/PAPAbstractType.html#setFPropRMark(boolean)">setFPropRMark</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/PAPAbstractType.html#setFRotateFont(boolean)">setFRotateFont</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/PAPAbstractType.html#setFSideBySide(boolean)">setFSideBySide</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/PAPAbstractType.html#setFTopLinePunct(boolean)">setFTopLinePunct</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/PAPAbstractType.html#setFTtp(boolean)">setFTtp</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/PAPAbstractType.html#setFTtpEmbedded(boolean)">setFTtpEmbedded</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/PAPAbstractType.html#setFUsePgsuSettings(boolean)">setFUsePgsuSettings</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/PAPAbstractType.html#setFVertical(boolean)">setFVertical</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/PAPAbstractType.html#setFWidowControl(boolean)">setFWidowControl</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/PAPAbstractType.html#setFWordWrap(boolean)">setFWordWrap</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/PAPAbstractType.html#setIbstPropRMark(int)">setIbstPropRMark</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/PAPAbstractType.html#setIlfo(int)">setIlfo</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/PAPAbstractType.html#setIlvl(byte)">setIlvl</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/PAPAbstractType.html#setIpgp(long)">setIpgp</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/PAPAbstractType.html#setIstd(int)">setIstd</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/PAPAbstractType.html#setItap(int)">setItap</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/PAPAbstractType.html#setItbdMac(int)">setItbdMac</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/PAPAbstractType.html#setJc(byte)">setJc</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/PAPAbstractType.html#setLspd(org.apache.poi.hwpf.usermodel.LineSpacingDescriptor)">setLspd</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/PAPAbstractType.html#setLvl(byte)">setLvl</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/PAPAbstractType.html#setNumrm(byte[])">setNumrm</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/PAPAbstractType.html#setPcHorz(byte)">setPcHorz</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/PAPAbstractType.html#setPcVert(byte)">setPcVert</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/PAPAbstractType.html#setPhe(byte[])">setPhe</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/PAPAbstractType.html#setPtap(byte[])">setPtap</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/PAPAbstractType.html#setRgdxaTab(int[])">setRgdxaTab</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/PAPAbstractType.html#setRgtbd(org.apache.poi.hwpf.model.TabDescriptor[])">setRgtbd</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/PAPAbstractType.html#setRsid(long)">setRsid</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/PAPAbstractType.html#setShd(org.apache.poi.hwpf.usermodel.ShadingDescriptor)">setShd</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/PAPAbstractType.html#setWAlignFont(int)">setWAlignFont</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/PAPAbstractType.html#setWr(byte)">setWr</A>, <A HREF="../../../../../org/apache/poi/hwpf/model/types/PAPAbstractType.html#toString()">toString</A></CODE></TD>
+</TR>
+</TABLE>
+&nbsp;<A NAME="methods_inherited_from_class_java.lang.Object"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#EEEEFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left"><B>Methods inherited from class java.lang.Object</B></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE>equals, finalize, getClass, hashCode, notify, notifyAll, wait, wait, wait</CODE></TD>
+</TR>
+</TABLE>
+&nbsp;
+<P>
+
+<!-- ========= CONSTRUCTOR DETAIL ======== -->
+
+<A NAME="constructor_detail"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="1"><FONT SIZE="+2">
+<B>Constructor Detail</B></FONT></TH>
+</TR>
+</TABLE>
+
+<A NAME="ParagraphProperties()"><!-- --></A><H3>
+ParagraphProperties</H3>
+<PRE>
+public <B>ParagraphProperties</B>()</PRE>
+<DL>
+</DL>
+
+<!-- ============ METHOD DETAIL ========== -->
+
+<A NAME="method_detail"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="1"><FONT SIZE="+2">
+<B>Method Detail</B></FONT></TH>
+</TR>
+</TABLE>
+
+<A NAME="clone()"><!-- --></A><H3>
+clone</H3>
+<PRE>
+public java.lang.Object <B>clone</B>()
+                       throws java.lang.CloneNotSupportedException</PRE>
+<DL>
+<DD><DL>
+<DT><B>Overrides:</B><DD><CODE>clone</CODE> in class <CODE>java.lang.Object</CODE></DL>
+</DD>
+<DD><DL>
+
+<DT><B>Throws:</B>
+<DD><CODE>java.lang.CloneNotSupportedException</CODE></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getBarBorder()"><!-- --></A><H3>
+getBarBorder</H3>
+<PRE>
+public <A HREF="../../../../../org/apache/poi/hwpf/usermodel/BorderCode.html" title="class in org.apache.poi.hwpf.usermodel">BorderCode</A> <B>getBarBorder</B>()</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getBottomBorder()"><!-- --></A><H3>
+getBottomBorder</H3>
+<PRE>
+public <A HREF="../../../../../org/apache/poi/hwpf/usermodel/BorderCode.html" title="class in org.apache.poi.hwpf.usermodel">BorderCode</A> <B>getBottomBorder</B>()</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getDropCap()"><!-- --></A><H3>
+getDropCap</H3>
+<PRE>
+public <A HREF="../../../../../org/apache/poi/hwpf/usermodel/DropCapSpecifier.html" title="class in org.apache.poi.hwpf.usermodel">DropCapSpecifier</A> <B>getDropCap</B>()</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getFirstLineIndent()"><!-- --></A><H3>
+getFirstLineIndent</H3>
+<PRE>
+public int <B>getFirstLineIndent</B>()</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getFontAlignment()"><!-- --></A><H3>
+getFontAlignment</H3>
+<PRE>
+public int <B>getFontAlignment</B>()</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getIndentFromLeft()"><!-- --></A><H3>
+getIndentFromLeft</H3>
+<PRE>
+public int <B>getIndentFromLeft</B>()</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getIndentFromRight()"><!-- --></A><H3>
+getIndentFromRight</H3>
+<PRE>
+public int <B>getIndentFromRight</B>()</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getJustification()"><!-- --></A><H3>
+getJustification</H3>
+<PRE>
+public int <B>getJustification</B>()</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getLeftBorder()"><!-- --></A><H3>
+getLeftBorder</H3>
+<PRE>
+public <A HREF="../../../../../org/apache/poi/hwpf/usermodel/BorderCode.html" title="class in org.apache.poi.hwpf.usermodel">BorderCode</A> <B>getLeftBorder</B>()</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getLineSpacing()"><!-- --></A><H3>
+getLineSpacing</H3>
+<PRE>
+public <A HREF="../../../../../org/apache/poi/hwpf/usermodel/LineSpacingDescriptor.html" title="class in org.apache.poi.hwpf.usermodel">LineSpacingDescriptor</A> <B>getLineSpacing</B>()</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getRightBorder()"><!-- --></A><H3>
+getRightBorder</H3>
+<PRE>
+public <A HREF="../../../../../org/apache/poi/hwpf/usermodel/BorderCode.html" title="class in org.apache.poi.hwpf.usermodel">BorderCode</A> <B>getRightBorder</B>()</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getShading()"><!-- --></A><H3>
+getShading</H3>
+<PRE>
+public <A HREF="../../../../../org/apache/poi/hwpf/usermodel/ShadingDescriptor.html" title="class in org.apache.poi.hwpf.usermodel">ShadingDescriptor</A> <B>getShading</B>()</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getSpacingAfter()"><!-- --></A><H3>
+getSpacingAfter</H3>
+<PRE>
+public int <B>getSpacingAfter</B>()</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getSpacingBefore()"><!-- --></A><H3>
+getSpacingBefore</H3>
+<PRE>
+public int <B>getSpacingBefore</B>()</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getTopBorder()"><!-- --></A><H3>
+getTopBorder</H3>
+<PRE>
+public <A HREF="../../../../../org/apache/poi/hwpf/usermodel/BorderCode.html" title="class in org.apache.poi.hwpf.usermodel">BorderCode</A> <B>getTopBorder</B>()</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="isAutoHyphenated()"><!-- --></A><H3>
+isAutoHyphenated</H3>
+<PRE>
+public boolean <B>isAutoHyphenated</B>()</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="isBackward()"><!-- --></A><H3>
+isBackward</H3>
+<PRE>
+public boolean <B>isBackward</B>()</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="isKinsoku()"><!-- --></A><H3>
+isKinsoku</H3>
+<PRE>
+public boolean <B>isKinsoku</B>()</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="isLineNotNumbered()"><!-- --></A><H3>
+isLineNotNumbered</H3>
+<PRE>
+public boolean <B>isLineNotNumbered</B>()</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="isSideBySide()"><!-- --></A><H3>
+isSideBySide</H3>
+<PRE>
+public boolean <B>isSideBySide</B>()</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="isVertical()"><!-- --></A><H3>
+isVertical</H3>
+<PRE>
+public boolean <B>isVertical</B>()</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="isWidowControlled()"><!-- --></A><H3>
+isWidowControlled</H3>
+<PRE>
+public boolean <B>isWidowControlled</B>()</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="isWordWrapped()"><!-- --></A><H3>
+isWordWrapped</H3>
+<PRE>
+public boolean <B>isWordWrapped</B>()</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="keepOnPage()"><!-- --></A><H3>
+keepOnPage</H3>
+<PRE>
+public boolean <B>keepOnPage</B>()</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="keepWithNext()"><!-- --></A><H3>
+keepWithNext</H3>
+<PRE>
+public boolean <B>keepWithNext</B>()</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="pageBreakBefore()"><!-- --></A><H3>
+pageBreakBefore</H3>
+<PRE>
+public boolean <B>pageBreakBefore</B>()</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setAutoHyphenated(boolean)"><!-- --></A><H3>
+setAutoHyphenated</H3>
+<PRE>
+public void <B>setAutoHyphenated</B>(boolean&nbsp;auto)</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setBackward(boolean)"><!-- --></A><H3>
+setBackward</H3>
+<PRE>
+public void <B>setBackward</B>(boolean&nbsp;bward)</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setBarBorder(org.apache.poi.hwpf.usermodel.BorderCode)"><!-- --></A><H3>
+setBarBorder</H3>
+<PRE>
+public void <B>setBarBorder</B>(<A HREF="../../../../../org/apache/poi/hwpf/usermodel/BorderCode.html" title="class in org.apache.poi.hwpf.usermodel">BorderCode</A>&nbsp;bar)</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setBottomBorder(org.apache.poi.hwpf.usermodel.BorderCode)"><!-- --></A><H3>
+setBottomBorder</H3>
+<PRE>
+public void <B>setBottomBorder</B>(<A HREF="../../../../../org/apache/poi/hwpf/usermodel/BorderCode.html" title="class in org.apache.poi.hwpf.usermodel">BorderCode</A>&nbsp;bottom)</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setDropCap(org.apache.poi.hwpf.usermodel.DropCapSpecifier)"><!-- --></A><H3>
+setDropCap</H3>
+<PRE>
+public void <B>setDropCap</B>(<A HREF="../../../../../org/apache/poi/hwpf/usermodel/DropCapSpecifier.html" title="class in org.apache.poi.hwpf.usermodel">DropCapSpecifier</A>&nbsp;dcs)</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setFirstLineIndent(int)"><!-- --></A><H3>
+setFirstLineIndent</H3>
+<PRE>
+public void <B>setFirstLineIndent</B>(int&nbsp;first)</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setFontAlignment(int)"><!-- --></A><H3>
+setFontAlignment</H3>
+<PRE>
+public void <B>setFontAlignment</B>(int&nbsp;align)</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setIndentFromLeft(int)"><!-- --></A><H3>
+setIndentFromLeft</H3>
+<PRE>
+public void <B>setIndentFromLeft</B>(int&nbsp;dxaLeft)</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setIndentFromRight(int)"><!-- --></A><H3>
+setIndentFromRight</H3>
+<PRE>
+public void <B>setIndentFromRight</B>(int&nbsp;dxaRight)</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setJustification(byte)"><!-- --></A><H3>
+setJustification</H3>
+<PRE>
+public void <B>setJustification</B>(byte&nbsp;jc)</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setJustificationLogical(byte)"><!-- --></A><H3>
+setJustificationLogical</H3>
+<PRE>
+public void <B>setJustificationLogical</B>(byte&nbsp;jc)</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setKeepOnPage(boolean)"><!-- --></A><H3>
+setKeepOnPage</H3>
+<PRE>
+public void <B>setKeepOnPage</B>(boolean&nbsp;fKeep)</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setKeepWithNext(boolean)"><!-- --></A><H3>
+setKeepWithNext</H3>
+<PRE>
+public void <B>setKeepWithNext</B>(boolean&nbsp;fKeepFollow)</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setKinsoku(boolean)"><!-- --></A><H3>
+setKinsoku</H3>
+<PRE>
+public void <B>setKinsoku</B>(boolean&nbsp;kinsoku)</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setLeftBorder(org.apache.poi.hwpf.usermodel.BorderCode)"><!-- --></A><H3>
+setLeftBorder</H3>
+<PRE>
+public void <B>setLeftBorder</B>(<A HREF="../../../../../org/apache/poi/hwpf/usermodel/BorderCode.html" title="class in org.apache.poi.hwpf.usermodel">BorderCode</A>&nbsp;left)</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setLineNotNumbered(boolean)"><!-- --></A><H3>
+setLineNotNumbered</H3>
+<PRE>
+public void <B>setLineNotNumbered</B>(boolean&nbsp;fNoLnn)</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setLineSpacing(org.apache.poi.hwpf.usermodel.LineSpacingDescriptor)"><!-- --></A><H3>
+setLineSpacing</H3>
+<PRE>
+public void <B>setLineSpacing</B>(<A HREF="../../../../../org/apache/poi/hwpf/usermodel/LineSpacingDescriptor.html" title="class in org.apache.poi.hwpf.usermodel">LineSpacingDescriptor</A>&nbsp;lspd)</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setPageBreakBefore(boolean)"><!-- --></A><H3>
+setPageBreakBefore</H3>
+<PRE>
+public void <B>setPageBreakBefore</B>(boolean&nbsp;fPageBreak)</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setRightBorder(org.apache.poi.hwpf.usermodel.BorderCode)"><!-- --></A><H3>
+setRightBorder</H3>
+<PRE>
+public void <B>setRightBorder</B>(<A HREF="../../../../../org/apache/poi/hwpf/usermodel/BorderCode.html" title="class in org.apache.poi.hwpf.usermodel">BorderCode</A>&nbsp;right)</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setShading(org.apache.poi.hwpf.usermodel.ShadingDescriptor)"><!-- --></A><H3>
+setShading</H3>
+<PRE>
+public void <B>setShading</B>(<A HREF="../../../../../org/apache/poi/hwpf/usermodel/ShadingDescriptor.html" title="class in org.apache.poi.hwpf.usermodel">ShadingDescriptor</A>&nbsp;shd)</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setSideBySide(boolean)"><!-- --></A><H3>
+setSideBySide</H3>
+<PRE>
+public void <B>setSideBySide</B>(boolean&nbsp;fSideBySide)</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setSpacingAfter(int)"><!-- --></A><H3>
+setSpacingAfter</H3>
+<PRE>
+public void <B>setSpacingAfter</B>(int&nbsp;after)</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setSpacingBefore(int)"><!-- --></A><H3>
+setSpacingBefore</H3>
+<PRE>
+public void <B>setSpacingBefore</B>(int&nbsp;before)</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setTopBorder(org.apache.poi.hwpf.usermodel.BorderCode)"><!-- --></A><H3>
+setTopBorder</H3>
+<PRE>
+public void <B>setTopBorder</B>(<A HREF="../../../../../org/apache/poi/hwpf/usermodel/BorderCode.html" title="class in org.apache.poi.hwpf.usermodel">BorderCode</A>&nbsp;top)</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setVertical(boolean)"><!-- --></A><H3>
+setVertical</H3>
+<PRE>
+public void <B>setVertical</B>(boolean&nbsp;vertical)</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setWidowControl(boolean)"><!-- --></A><H3>
+setWidowControl</H3>
+<PRE>
+public void <B>setWidowControl</B>(boolean&nbsp;widowControl)</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setWordWrapped(boolean)"><!-- --></A><H3>
+setWordWrapped</H3>
+<PRE>
+public void <B>setWordWrapped</B>(boolean&nbsp;wrap)</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<!-- ========= END OF CLASS DATA ========= -->
+<HR>
+
+
+<!-- ======= START OF BOTTOM NAVBAR ====== -->
+<A NAME="navbar_bottom"><!-- --></A>
+<A HREF="#skip-navbar_bottom" title="Skip navigation links"></A>
+<TABLE BORDER="0" WIDTH="100%" CELLPADDING="1" CELLSPACING="0" SUMMARY="">
+<TR>
+<TD COLSPAN=2 BGCOLOR="#EEEEFF" CLASS="NavBarCell1">
+<A NAME="navbar_bottom_firstrow"><!-- --></A>
+<TABLE BORDER="0" CELLPADDING="0" CELLSPACING="3" SUMMARY="">
+  <TR ALIGN="center" VALIGN="top">
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../overview-summary.html"><FONT CLASS="NavBarFont1"><B>Overview</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="package-summary.html"><FONT CLASS="NavBarFont1"><B>Package</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#FFFFFF" CLASS="NavBarCell1Rev"> &nbsp;<FONT CLASS="NavBarFont1Rev"><B>Class</B></FONT>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="class-use/ParagraphProperties.html"><FONT CLASS="NavBarFont1"><B>Use</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="package-tree.html"><FONT CLASS="NavBarFont1"><B>Tree</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../deprecated-list.html"><FONT CLASS="NavBarFont1"><B>Deprecated</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../index-all.html"><FONT CLASS="NavBarFont1"><B>Index</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../help-doc.html"><FONT CLASS="NavBarFont1"><B>Help</B></FONT></A>&nbsp;</TD>
+  </TR>
+</TABLE>
+</TD>
+<TD ALIGN="right" VALIGN="top" ROWSPAN=3><EM>
+</EM>
+</TD>
+</TR>
+
+<TR>
+<TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
+&nbsp;<A HREF="../../../../../org/apache/poi/hwpf/usermodel/Paragraph.html" title="class in org.apache.poi.hwpf.usermodel"><B>PREV CLASS</B></A>&nbsp;
+&nbsp;<A HREF="../../../../../org/apache/poi/hwpf/usermodel/Picture.html" title="class in org.apache.poi.hwpf.usermodel"><B>NEXT CLASS</B></A></FONT></TD>
+<TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
+  <A HREF="../../../../../index.html?org/apache/poi/hwpf/usermodel/ParagraphProperties.html" target="_top"><B>FRAMES</B></A>  &nbsp;
+&nbsp;<A HREF="ParagraphProperties.html" target="_top"><B>NO FRAMES</B></A>  &nbsp;
+&nbsp;<SCRIPT type="text/javascript">
+  <!--
+  if(window==top) {
+    document.writeln('<A HREF="../../../../../allclasses-noframe.html"><B>All Classes</B></A>');
+  }
+  //-->
+</SCRIPT>
+<NOSCRIPT>
+  <A HREF="../../../../../allclasses-noframe.html"><B>All Classes</B></A>
+</NOSCRIPT>
+
+
+</FONT></TD>
+</TR>
+<TR>
+<TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
+  SUMMARY:&nbsp;NESTED&nbsp;|&nbsp;<A HREF="#fields_inherited_from_class_org.apache.poi.hwpf.model.types.PAPAbstractType">FIELD</A>&nbsp;|&nbsp;<A HREF="#constructor_summary">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_summary">METHOD</A></FONT></TD>
+<TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
+DETAIL:&nbsp;FIELD&nbsp;|&nbsp;<A HREF="#constructor_detail">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_detail">METHOD</A></FONT></TD>
+</TR>
+</TABLE>
+<A NAME="skip-navbar_bottom"></A>
+<!-- ======== END OF BOTTOM NAVBAR ======= -->
+
+<HR>
+
+                <i>Copyright 2014 The Apache Software Foundation or
+        its licensors, as applicable.</i>
+            
+</BODY>
+</HTML>

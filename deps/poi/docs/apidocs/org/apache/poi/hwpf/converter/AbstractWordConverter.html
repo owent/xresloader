@@ -1,0 +1,1203 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!--NewPage-->
+<HTML>
+<HEAD>
+<TITLE>
+AbstractWordConverter (POI API Documentation)
+</TITLE>
+
+<META NAME="keywords" CONTENT="org.apache.poi.hwpf.converter.AbstractWordConverter class">
+
+<LINK REL ="stylesheet" TYPE="text/css" HREF="../../../../../stylesheet.css" TITLE="Style">
+
+<SCRIPT type="text/javascript">
+function windowTitle()
+{
+    parent.document.title="AbstractWordConverter (POI API Documentation)";
+}
+</SCRIPT>
+<NOSCRIPT>
+</NOSCRIPT>
+
+</HEAD>
+
+<BODY BGCOLOR="white" onload="windowTitle();">
+
+
+<!-- ========= START OF TOP NAVBAR ======= -->
+<A NAME="navbar_top"><!-- --></A>
+<A HREF="#skip-navbar_top" title="Skip navigation links"></A>
+<TABLE BORDER="0" WIDTH="100%" CELLPADDING="1" CELLSPACING="0" SUMMARY="">
+<TR>
+<TD COLSPAN=2 BGCOLOR="#EEEEFF" CLASS="NavBarCell1">
+<A NAME="navbar_top_firstrow"><!-- --></A>
+<TABLE BORDER="0" CELLPADDING="0" CELLSPACING="3" SUMMARY="">
+  <TR ALIGN="center" VALIGN="top">
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../overview-summary.html"><FONT CLASS="NavBarFont1"><B>Overview</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="package-summary.html"><FONT CLASS="NavBarFont1"><B>Package</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#FFFFFF" CLASS="NavBarCell1Rev"> &nbsp;<FONT CLASS="NavBarFont1Rev"><B>Class</B></FONT>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="class-use/AbstractWordConverter.html"><FONT CLASS="NavBarFont1"><B>Use</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="package-tree.html"><FONT CLASS="NavBarFont1"><B>Tree</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../deprecated-list.html"><FONT CLASS="NavBarFont1"><B>Deprecated</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../index-all.html"><FONT CLASS="NavBarFont1"><B>Index</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../help-doc.html"><FONT CLASS="NavBarFont1"><B>Help</B></FONT></A>&nbsp;</TD>
+  </TR>
+</TABLE>
+</TD>
+<TD ALIGN="right" VALIGN="top" ROWSPAN=3><EM>
+</EM>
+</TD>
+</TR>
+
+<TR>
+<TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
+&nbsp;PREV CLASS&nbsp;
+&nbsp;<A HREF="../../../../../org/apache/poi/hwpf/converter/AbstractWordUtils.html" title="class in org.apache.poi.hwpf.converter"><B>NEXT CLASS</B></A></FONT></TD>
+<TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
+  <A HREF="../../../../../index.html?org/apache/poi/hwpf/converter/AbstractWordConverter.html" target="_top"><B>FRAMES</B></A>  &nbsp;
+&nbsp;<A HREF="AbstractWordConverter.html" target="_top"><B>NO FRAMES</B></A>  &nbsp;
+&nbsp;<SCRIPT type="text/javascript">
+  <!--
+  if(window==top) {
+    document.writeln('<A HREF="../../../../../allclasses-noframe.html"><B>All Classes</B></A>');
+  }
+  //-->
+</SCRIPT>
+<NOSCRIPT>
+  <A HREF="../../../../../allclasses-noframe.html"><B>All Classes</B></A>
+</NOSCRIPT>
+
+
+</FONT></TD>
+</TR>
+<TR>
+<TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
+  SUMMARY:&nbsp;NESTED&nbsp;|&nbsp;<A HREF="#field_summary">FIELD</A>&nbsp;|&nbsp;<A HREF="#constructor_summary">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_summary">METHOD</A></FONT></TD>
+<TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
+DETAIL:&nbsp;<A HREF="#field_detail">FIELD</A>&nbsp;|&nbsp;<A HREF="#constructor_detail">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_detail">METHOD</A></FONT></TD>
+</TR>
+</TABLE>
+<A NAME="skip-navbar_top"></A>
+<!-- ========= END OF TOP NAVBAR ========= -->
+
+<HR>
+<!-- ======== START OF CLASS DATA ======== -->
+<H2>
+<FONT SIZE="-1">
+org.apache.poi.hwpf.converter</FONT>
+<BR>
+Class AbstractWordConverter</H2>
+<PRE>
+java.lang.Object
+  <IMG SRC="../../../../../resources/inherit.gif" ALT="extended by "><B>org.apache.poi.hwpf.converter.AbstractWordConverter</B>
+</PRE>
+<DL>
+<DT><B>Direct Known Subclasses:</B> <DD><A HREF="../../../../../org/apache/poi/hwpf/converter/WordToFoConverter.html" title="class in org.apache.poi.hwpf.converter">WordToFoConverter</A>, <A HREF="../../../../../org/apache/poi/hwpf/converter/WordToHtmlConverter.html" title="class in org.apache.poi.hwpf.converter">WordToHtmlConverter</A>, <A HREF="../../../../../org/apache/poi/hwpf/converter/WordToTextConverter.html" title="class in org.apache.poi.hwpf.converter">WordToTextConverter</A></DD>
+</DL>
+<HR>
+<DL>
+<DT><PRE><FONT SIZE="-1"><A HREF="../../../../../org/apache/poi/util/Beta.html" title="annotation in org.apache.poi.util">@Beta</A>
+</FONT>public abstract class <B>AbstractWordConverter</B><DT>extends java.lang.Object</DL>
+</PRE>
+
+<P>
+<HR>
+
+<P>
+<!-- =========== FIELD SUMMARY =========== -->
+
+<A NAME="field_summary"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+<B>Field Summary</B></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>protected static&nbsp;char</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/converter/AbstractWordConverter.html#UNICODECHAR_NO_BREAK_SPACE">UNICODECHAR_NO_BREAK_SPACE</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>protected static&nbsp;char</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/converter/AbstractWordConverter.html#UNICODECHAR_NONBREAKING_HYPHEN">UNICODECHAR_NONBREAKING_HYPHEN</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>protected static&nbsp;char</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/converter/AbstractWordConverter.html#UNICODECHAR_ZERO_WIDTH_SPACE">UNICODECHAR_ZERO_WIDTH_SPACE</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+</TABLE>
+&nbsp;
+<!-- ======== CONSTRUCTOR SUMMARY ======== -->
+
+<A NAME="constructor_summary"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+<B>Constructor Summary</B></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/converter/AbstractWordConverter.html#AbstractWordConverter()">AbstractWordConverter</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+</TABLE>
+&nbsp;
+<!-- ========== METHOD SUMMARY =========== -->
+
+<A NAME="method_summary"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+<B>Method Summary</B></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>protected &nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/converter/AbstractWordConverter.html#afterProcess()">afterProcess</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Special actions that need to be called after processing complete, like
+ updating stylesheets or building document notes list.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>protected &nbsp;<A HREF="../../../../../org/apache/poi/hwpf/converter/FontReplacer.Triplet.html" title="class in org.apache.poi.hwpf.converter">FontReplacer.Triplet</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/converter/AbstractWordConverter.html#getCharacterRunTriplet(org.apache.poi.hwpf.usermodel.CharacterRun)">getCharacterRunTriplet</A></B>(<A HREF="../../../../../org/apache/poi/hwpf/usermodel/CharacterRun.html" title="class in org.apache.poi.hwpf.usermodel">CharacterRun</A>&nbsp;characterRun)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>abstract &nbsp;org.w3c.dom.Document</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/converter/AbstractWordConverter.html#getDocument()">getDocument</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../../../org/apache/poi/hwpf/converter/FontReplacer.html" title="interface in org.apache.poi.hwpf.converter">FontReplacer</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/converter/AbstractWordConverter.html#getFontReplacer()">getFontReplacer</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>protected &nbsp;int</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/converter/AbstractWordConverter.html#getNumberColumnsSpanned(int[], int, org.apache.poi.hwpf.usermodel.TableCell)">getNumberColumnsSpanned</A></B>(int[]&nbsp;tableCellEdges,
+                        int&nbsp;currentEdgeIndex,
+                        <A HREF="../../../../../org/apache/poi/hwpf/usermodel/TableCell.html" title="class in org.apache.poi.hwpf.usermodel">TableCell</A>&nbsp;tableCell)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>protected &nbsp;int</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/converter/AbstractWordConverter.html#getNumberRowsSpanned(org.apache.poi.hwpf.usermodel.Table, int[], int, int, org.apache.poi.hwpf.usermodel.TableCell)">getNumberRowsSpanned</A></B>(<A HREF="../../../../../org/apache/poi/hwpf/usermodel/Table.html" title="class in org.apache.poi.hwpf.usermodel">Table</A>&nbsp;table,
+                     int[]&nbsp;tableCellEdges,
+                     int&nbsp;currentRowIndex,
+                     int&nbsp;currentColumnIndex,
+                     <A HREF="../../../../../org/apache/poi/hwpf/usermodel/TableCell.html" title="class in org.apache.poi.hwpf.usermodel">TableCell</A>&nbsp;tableCell)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../../../org/apache/poi/hwpf/converter/PicturesManager.html" title="interface in org.apache.poi.hwpf.converter">PicturesManager</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/converter/AbstractWordConverter.html#getPicturesManager()">getPicturesManager</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>protected abstract &nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/converter/AbstractWordConverter.html#outputCharacters(org.w3c.dom.Element, org.apache.poi.hwpf.usermodel.CharacterRun, java.lang.String)">outputCharacters</A></B>(org.w3c.dom.Element&nbsp;block,
+                 <A HREF="../../../../../org/apache/poi/hwpf/usermodel/CharacterRun.html" title="class in org.apache.poi.hwpf.usermodel">CharacterRun</A>&nbsp;characterRun,
+                 java.lang.String&nbsp;text)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>protected abstract &nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/converter/AbstractWordConverter.html#processBookmarks(org.apache.poi.hwpf.HWPFDocumentCore, org.w3c.dom.Element, org.apache.poi.hwpf.usermodel.Range, int, java.util.List)">processBookmarks</A></B>(<A HREF="../../../../../org/apache/poi/hwpf/HWPFDocumentCore.html" title="class in org.apache.poi.hwpf">HWPFDocumentCore</A>&nbsp;wordDocument,
+                 org.w3c.dom.Element&nbsp;currentBlock,
+                 <A HREF="../../../../../org/apache/poi/hwpf/usermodel/Range.html" title="class in org.apache.poi.hwpf.usermodel">Range</A>&nbsp;range,
+                 int&nbsp;currentTableLevel,
+                 java.util.List&lt;<A HREF="../../../../../org/apache/poi/hwpf/usermodel/Bookmark.html" title="interface in org.apache.poi.hwpf.usermodel">Bookmark</A>&gt;&nbsp;rangeBookmarks)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Wrap range into bookmark(s) and process it.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>protected &nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/converter/AbstractWordConverter.html#processCharacters(org.apache.poi.hwpf.HWPFDocumentCore, int, org.apache.poi.hwpf.usermodel.Range, org.w3c.dom.Element)">processCharacters</A></B>(<A HREF="../../../../../org/apache/poi/hwpf/HWPFDocumentCore.html" title="class in org.apache.poi.hwpf">HWPFDocumentCore</A>&nbsp;wordDocument,
+                  int&nbsp;currentTableLevel,
+                  <A HREF="../../../../../org/apache/poi/hwpf/usermodel/Range.html" title="class in org.apache.poi.hwpf.usermodel">Range</A>&nbsp;range,
+                  org.w3c.dom.Element&nbsp;block)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>protected &nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/converter/AbstractWordConverter.html#processDeadField(org.apache.poi.hwpf.HWPFDocumentCore, org.w3c.dom.Element, org.apache.poi.hwpf.usermodel.Range, int, int, int, int)">processDeadField</A></B>(<A HREF="../../../../../org/apache/poi/hwpf/HWPFDocumentCore.html" title="class in org.apache.poi.hwpf">HWPFDocumentCore</A>&nbsp;wordDocument,
+                 org.w3c.dom.Element&nbsp;currentBlock,
+                 <A HREF="../../../../../org/apache/poi/hwpf/usermodel/Range.html" title="class in org.apache.poi.hwpf.usermodel">Range</A>&nbsp;range,
+                 int&nbsp;currentTableLevel,
+                 int&nbsp;beginMark,
+                 int&nbsp;separatorMark,
+                 int&nbsp;endMark)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/converter/AbstractWordConverter.html#processDocument(org.apache.poi.hwpf.HWPFDocumentCore)">processDocument</A></B>(<A HREF="../../../../../org/apache/poi/hwpf/HWPFDocumentCore.html" title="class in org.apache.poi.hwpf">HWPFDocumentCore</A>&nbsp;wordDocument)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>protected abstract &nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/converter/AbstractWordConverter.html#processDocumentInformation(org.apache.poi.hpsf.SummaryInformation)">processDocumentInformation</A></B>(<A HREF="../../../../../org/apache/poi/hpsf/SummaryInformation.html" title="class in org.apache.poi.hpsf">SummaryInformation</A>&nbsp;summaryInformation)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>protected &nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/converter/AbstractWordConverter.html#processDocumentPart(org.apache.poi.hwpf.HWPFDocumentCore, org.apache.poi.hwpf.usermodel.Range)">processDocumentPart</A></B>(<A HREF="../../../../../org/apache/poi/hwpf/HWPFDocumentCore.html" title="class in org.apache.poi.hwpf">HWPFDocumentCore</A>&nbsp;wordDocument,
+                    <A HREF="../../../../../org/apache/poi/hwpf/usermodel/Range.html" title="class in org.apache.poi.hwpf.usermodel">Range</A>&nbsp;range)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>protected &nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/converter/AbstractWordConverter.html#processDrawnObject(org.apache.poi.hwpf.HWPFDocument, org.apache.poi.hwpf.usermodel.CharacterRun, org.w3c.dom.Element)">processDrawnObject</A></B>(<A HREF="../../../../../org/apache/poi/hwpf/HWPFDocument.html" title="class in org.apache.poi.hwpf">HWPFDocument</A>&nbsp;doc,
+                   <A HREF="../../../../../org/apache/poi/hwpf/usermodel/CharacterRun.html" title="class in org.apache.poi.hwpf.usermodel">CharacterRun</A>&nbsp;characterRun,
+                   org.w3c.dom.Element&nbsp;block)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>protected abstract &nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/converter/AbstractWordConverter.html#processDrawnObject(org.apache.poi.hwpf.HWPFDocument, org.apache.poi.hwpf.usermodel.CharacterRun, org.apache.poi.hwpf.usermodel.OfficeDrawing, java.lang.String, org.w3c.dom.Element)">processDrawnObject</A></B>(<A HREF="../../../../../org/apache/poi/hwpf/HWPFDocument.html" title="class in org.apache.poi.hwpf">HWPFDocument</A>&nbsp;doc,
+                   <A HREF="../../../../../org/apache/poi/hwpf/usermodel/CharacterRun.html" title="class in org.apache.poi.hwpf.usermodel">CharacterRun</A>&nbsp;characterRun,
+                   <A HREF="../../../../../org/apache/poi/hwpf/usermodel/OfficeDrawing.html" title="interface in org.apache.poi.hwpf.usermodel">OfficeDrawing</A>&nbsp;officeDrawing,
+                   java.lang.String&nbsp;path,
+                   org.w3c.dom.Element&nbsp;block)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>protected &nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/converter/AbstractWordConverter.html#processDropDownList(org.w3c.dom.Element, org.apache.poi.hwpf.usermodel.CharacterRun, java.lang.String[], int)">processDropDownList</A></B>(org.w3c.dom.Element&nbsp;block,
+                    <A HREF="../../../../../org/apache/poi/hwpf/usermodel/CharacterRun.html" title="class in org.apache.poi.hwpf.usermodel">CharacterRun</A>&nbsp;characterRun,
+                    java.lang.String[]&nbsp;values,
+                    int&nbsp;defaultIndex)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>protected abstract &nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/converter/AbstractWordConverter.html#processEndnoteAutonumbered(org.apache.poi.hwpf.HWPFDocument, int, org.w3c.dom.Element, org.apache.poi.hwpf.usermodel.Range)">processEndnoteAutonumbered</A></B>(<A HREF="../../../../../org/apache/poi/hwpf/HWPFDocument.html" title="class in org.apache.poi.hwpf">HWPFDocument</A>&nbsp;wordDocument,
+                           int&nbsp;noteIndex,
+                           org.w3c.dom.Element&nbsp;block,
+                           <A HREF="../../../../../org/apache/poi/hwpf/usermodel/Range.html" title="class in org.apache.poi.hwpf.usermodel">Range</A>&nbsp;endnoteTextRange)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>protected &nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/converter/AbstractWordConverter.html#processField(org.apache.poi.hwpf.HWPFDocument, org.apache.poi.hwpf.usermodel.Range, int, org.apache.poi.hwpf.usermodel.Field, org.w3c.dom.Element)">processField</A></B>(<A HREF="../../../../../org/apache/poi/hwpf/HWPFDocument.html" title="class in org.apache.poi.hwpf">HWPFDocument</A>&nbsp;wordDocument,
+             <A HREF="../../../../../org/apache/poi/hwpf/usermodel/Range.html" title="class in org.apache.poi.hwpf.usermodel">Range</A>&nbsp;parentRange,
+             int&nbsp;currentTableLevel,
+             <A HREF="../../../../../org/apache/poi/hwpf/usermodel/Field.html" title="interface in org.apache.poi.hwpf.usermodel">Field</A>&nbsp;field,
+             org.w3c.dom.Element&nbsp;currentBlock)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>protected abstract &nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/converter/AbstractWordConverter.html#processFootnoteAutonumbered(org.apache.poi.hwpf.HWPFDocument, int, org.w3c.dom.Element, org.apache.poi.hwpf.usermodel.Range)">processFootnoteAutonumbered</A></B>(<A HREF="../../../../../org/apache/poi/hwpf/HWPFDocument.html" title="class in org.apache.poi.hwpf">HWPFDocument</A>&nbsp;wordDocument,
+                            int&nbsp;noteIndex,
+                            org.w3c.dom.Element&nbsp;block,
+                            <A HREF="../../../../../org/apache/poi/hwpf/usermodel/Range.html" title="class in org.apache.poi.hwpf.usermodel">Range</A>&nbsp;footnoteTextRange)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>protected abstract &nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/converter/AbstractWordConverter.html#processHyperlink(org.apache.poi.hwpf.HWPFDocumentCore, org.w3c.dom.Element, org.apache.poi.hwpf.usermodel.Range, int, java.lang.String)">processHyperlink</A></B>(<A HREF="../../../../../org/apache/poi/hwpf/HWPFDocumentCore.html" title="class in org.apache.poi.hwpf">HWPFDocumentCore</A>&nbsp;wordDocument,
+                 org.w3c.dom.Element&nbsp;currentBlock,
+                 <A HREF="../../../../../org/apache/poi/hwpf/usermodel/Range.html" title="class in org.apache.poi.hwpf.usermodel">Range</A>&nbsp;textRange,
+                 int&nbsp;currentTableLevel,
+                 java.lang.String&nbsp;hyperlink)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>protected &nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/converter/AbstractWordConverter.html#processImage(org.w3c.dom.Element, boolean, org.apache.poi.hwpf.usermodel.Picture)">processImage</A></B>(org.w3c.dom.Element&nbsp;currentBlock,
+             boolean&nbsp;inlined,
+             <A HREF="../../../../../org/apache/poi/hwpf/usermodel/Picture.html" title="class in org.apache.poi.hwpf.usermodel">Picture</A>&nbsp;picture)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>protected abstract &nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/converter/AbstractWordConverter.html#processImage(org.w3c.dom.Element, boolean, org.apache.poi.hwpf.usermodel.Picture, java.lang.String)">processImage</A></B>(org.w3c.dom.Element&nbsp;currentBlock,
+             boolean&nbsp;inlined,
+             <A HREF="../../../../../org/apache/poi/hwpf/usermodel/Picture.html" title="class in org.apache.poi.hwpf.usermodel">Picture</A>&nbsp;picture,
+             java.lang.String&nbsp;url)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>protected abstract &nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/converter/AbstractWordConverter.html#processImageWithoutPicturesManager(org.w3c.dom.Element, boolean, org.apache.poi.hwpf.usermodel.Picture)">processImageWithoutPicturesManager</A></B>(org.w3c.dom.Element&nbsp;currentBlock,
+                                   boolean&nbsp;inlined,
+                                   <A HREF="../../../../../org/apache/poi/hwpf/usermodel/Picture.html" title="class in org.apache.poi.hwpf.usermodel">Picture</A>&nbsp;picture)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>protected abstract &nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/converter/AbstractWordConverter.html#processLineBreak(org.w3c.dom.Element, org.apache.poi.hwpf.usermodel.CharacterRun)">processLineBreak</A></B>(org.w3c.dom.Element&nbsp;block,
+                 <A HREF="../../../../../org/apache/poi/hwpf/usermodel/CharacterRun.html" title="class in org.apache.poi.hwpf.usermodel">CharacterRun</A>&nbsp;characterRun)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>protected &nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/converter/AbstractWordConverter.html#processNoteAnchor(org.apache.poi.hwpf.HWPFDocument, org.apache.poi.hwpf.usermodel.CharacterRun, org.w3c.dom.Element)">processNoteAnchor</A></B>(<A HREF="../../../../../org/apache/poi/hwpf/HWPFDocument.html" title="class in org.apache.poi.hwpf">HWPFDocument</A>&nbsp;doc,
+                  <A HREF="../../../../../org/apache/poi/hwpf/usermodel/CharacterRun.html" title="class in org.apache.poi.hwpf.usermodel">CharacterRun</A>&nbsp;characterRun,
+                  org.w3c.dom.Element&nbsp;block)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>protected &nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/converter/AbstractWordConverter.html#processOle2(org.apache.poi.hwpf.HWPFDocument, org.w3c.dom.Element, org.apache.poi.poifs.filesystem.Entry)">processOle2</A></B>(<A HREF="../../../../../org/apache/poi/hwpf/HWPFDocument.html" title="class in org.apache.poi.hwpf">HWPFDocument</A>&nbsp;wordDocument,
+            org.w3c.dom.Element&nbsp;block,
+            <A HREF="../../../../../org/apache/poi/poifs/filesystem/Entry.html" title="interface in org.apache.poi.poifs.filesystem">Entry</A>&nbsp;entry)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>protected abstract &nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/converter/AbstractWordConverter.html#processPageBreak(org.apache.poi.hwpf.HWPFDocumentCore, org.w3c.dom.Element)">processPageBreak</A></B>(<A HREF="../../../../../org/apache/poi/hwpf/HWPFDocumentCore.html" title="class in org.apache.poi.hwpf">HWPFDocumentCore</A>&nbsp;wordDocument,
+                 org.w3c.dom.Element&nbsp;flow)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>protected abstract &nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/converter/AbstractWordConverter.html#processPageref(org.apache.poi.hwpf.HWPFDocumentCore, org.w3c.dom.Element, org.apache.poi.hwpf.usermodel.Range, int, java.lang.String)">processPageref</A></B>(<A HREF="../../../../../org/apache/poi/hwpf/HWPFDocumentCore.html" title="class in org.apache.poi.hwpf">HWPFDocumentCore</A>&nbsp;wordDocument,
+               org.w3c.dom.Element&nbsp;currentBlock,
+               <A HREF="../../../../../org/apache/poi/hwpf/usermodel/Range.html" title="class in org.apache.poi.hwpf.usermodel">Range</A>&nbsp;textRange,
+               int&nbsp;currentTableLevel,
+               java.lang.String&nbsp;pageref)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>protected abstract &nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/converter/AbstractWordConverter.html#processParagraph(org.apache.poi.hwpf.HWPFDocumentCore, org.w3c.dom.Element, int, org.apache.poi.hwpf.usermodel.Paragraph, java.lang.String)">processParagraph</A></B>(<A HREF="../../../../../org/apache/poi/hwpf/HWPFDocumentCore.html" title="class in org.apache.poi.hwpf">HWPFDocumentCore</A>&nbsp;wordDocument,
+                 org.w3c.dom.Element&nbsp;parentElement,
+                 int&nbsp;currentTableLevel,
+                 <A HREF="../../../../../org/apache/poi/hwpf/usermodel/Paragraph.html" title="class in org.apache.poi.hwpf.usermodel">Paragraph</A>&nbsp;paragraph,
+                 java.lang.String&nbsp;bulletText)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>protected &nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/converter/AbstractWordConverter.html#processParagraphes(org.apache.poi.hwpf.HWPFDocumentCore, org.w3c.dom.Element, org.apache.poi.hwpf.usermodel.Range, int)">processParagraphes</A></B>(<A HREF="../../../../../org/apache/poi/hwpf/HWPFDocumentCore.html" title="class in org.apache.poi.hwpf">HWPFDocumentCore</A>&nbsp;wordDocument,
+                   org.w3c.dom.Element&nbsp;flow,
+                   <A HREF="../../../../../org/apache/poi/hwpf/usermodel/Range.html" title="class in org.apache.poi.hwpf.usermodel">Range</A>&nbsp;range,
+                   int&nbsp;currentTableLevel)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>protected abstract &nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/converter/AbstractWordConverter.html#processSection(org.apache.poi.hwpf.HWPFDocumentCore, org.apache.poi.hwpf.usermodel.Section, int)">processSection</A></B>(<A HREF="../../../../../org/apache/poi/hwpf/HWPFDocumentCore.html" title="class in org.apache.poi.hwpf">HWPFDocumentCore</A>&nbsp;wordDocument,
+               <A HREF="../../../../../org/apache/poi/hwpf/usermodel/Section.html" title="class in org.apache.poi.hwpf.usermodel">Section</A>&nbsp;section,
+               int&nbsp;s)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>protected &nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/converter/AbstractWordConverter.html#processSingleSection(org.apache.poi.hwpf.HWPFDocumentCore, org.apache.poi.hwpf.usermodel.Section)">processSingleSection</A></B>(<A HREF="../../../../../org/apache/poi/hwpf/HWPFDocumentCore.html" title="class in org.apache.poi.hwpf">HWPFDocumentCore</A>&nbsp;wordDocument,
+                     <A HREF="../../../../../org/apache/poi/hwpf/usermodel/Section.html" title="class in org.apache.poi.hwpf.usermodel">Section</A>&nbsp;section)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>protected &nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/converter/AbstractWordConverter.html#processSymbol(org.apache.poi.hwpf.HWPFDocument, org.apache.poi.hwpf.usermodel.CharacterRun, org.w3c.dom.Element)">processSymbol</A></B>(<A HREF="../../../../../org/apache/poi/hwpf/HWPFDocument.html" title="class in org.apache.poi.hwpf">HWPFDocument</A>&nbsp;doc,
+              <A HREF="../../../../../org/apache/poi/hwpf/usermodel/CharacterRun.html" title="class in org.apache.poi.hwpf.usermodel">CharacterRun</A>&nbsp;characterRun,
+              org.w3c.dom.Element&nbsp;block)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>protected abstract &nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/converter/AbstractWordConverter.html#processTable(org.apache.poi.hwpf.HWPFDocumentCore, org.w3c.dom.Element, org.apache.poi.hwpf.usermodel.Table)">processTable</A></B>(<A HREF="../../../../../org/apache/poi/hwpf/HWPFDocumentCore.html" title="class in org.apache.poi.hwpf">HWPFDocumentCore</A>&nbsp;wordDocument,
+             org.w3c.dom.Element&nbsp;flow,
+             <A HREF="../../../../../org/apache/poi/hwpf/usermodel/Table.html" title="class in org.apache.poi.hwpf.usermodel">Table</A>&nbsp;table)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/converter/AbstractWordConverter.html#setFontReplacer(org.apache.poi.hwpf.converter.FontReplacer)">setFontReplacer</A></B>(<A HREF="../../../../../org/apache/poi/hwpf/converter/FontReplacer.html" title="interface in org.apache.poi.hwpf.converter">FontReplacer</A>&nbsp;fontReplacer)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/converter/AbstractWordConverter.html#setPicturesManager(org.apache.poi.hwpf.converter.PicturesManager)">setPicturesManager</A></B>(<A HREF="../../../../../org/apache/poi/hwpf/converter/PicturesManager.html" title="interface in org.apache.poi.hwpf.converter">PicturesManager</A>&nbsp;fileManager)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>protected &nbsp;int</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/converter/AbstractWordConverter.html#tryDeadField(org.apache.poi.hwpf.HWPFDocumentCore, org.apache.poi.hwpf.usermodel.Range, int, int, org.w3c.dom.Element)">tryDeadField</A></B>(<A HREF="../../../../../org/apache/poi/hwpf/HWPFDocumentCore.html" title="class in org.apache.poi.hwpf">HWPFDocumentCore</A>&nbsp;wordDocument,
+             <A HREF="../../../../../org/apache/poi/hwpf/usermodel/Range.html" title="class in org.apache.poi.hwpf.usermodel">Range</A>&nbsp;range,
+             int&nbsp;currentTableLevel,
+             int&nbsp;beginMark,
+             org.w3c.dom.Element&nbsp;currentBlock)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+</TABLE>
+&nbsp;<A NAME="methods_inherited_from_class_java.lang.Object"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#EEEEFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left"><B>Methods inherited from class java.lang.Object</B></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE>clone, equals, finalize, getClass, hashCode, notify, notifyAll, toString, wait, wait, wait</CODE></TD>
+</TR>
+</TABLE>
+&nbsp;
+<P>
+
+<!-- ============ FIELD DETAIL =========== -->
+
+<A NAME="field_detail"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="1"><FONT SIZE="+2">
+<B>Field Detail</B></FONT></TH>
+</TR>
+</TABLE>
+
+<A NAME="UNICODECHAR_NO_BREAK_SPACE"><!-- --></A><H3>
+UNICODECHAR_NO_BREAK_SPACE</H3>
+<PRE>
+protected static final char <B>UNICODECHAR_NO_BREAK_SPACE</B></PRE>
+<DL>
+<DL>
+<DT><B>See Also:</B><DD><A HREF="../../../../../constant-values.html#org.apache.poi.hwpf.converter.AbstractWordConverter.UNICODECHAR_NO_BREAK_SPACE">Constant Field Values</A></DL>
+</DL>
+<HR>
+
+<A NAME="UNICODECHAR_NONBREAKING_HYPHEN"><!-- --></A><H3>
+UNICODECHAR_NONBREAKING_HYPHEN</H3>
+<PRE>
+protected static final char <B>UNICODECHAR_NONBREAKING_HYPHEN</B></PRE>
+<DL>
+<DL>
+<DT><B>See Also:</B><DD><A HREF="../../../../../constant-values.html#org.apache.poi.hwpf.converter.AbstractWordConverter.UNICODECHAR_NONBREAKING_HYPHEN">Constant Field Values</A></DL>
+</DL>
+<HR>
+
+<A NAME="UNICODECHAR_ZERO_WIDTH_SPACE"><!-- --></A><H3>
+UNICODECHAR_ZERO_WIDTH_SPACE</H3>
+<PRE>
+protected static final char <B>UNICODECHAR_ZERO_WIDTH_SPACE</B></PRE>
+<DL>
+<DL>
+<DT><B>See Also:</B><DD><A HREF="../../../../../constant-values.html#org.apache.poi.hwpf.converter.AbstractWordConverter.UNICODECHAR_ZERO_WIDTH_SPACE">Constant Field Values</A></DL>
+</DL>
+
+<!-- ========= CONSTRUCTOR DETAIL ======== -->
+
+<A NAME="constructor_detail"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="1"><FONT SIZE="+2">
+<B>Constructor Detail</B></FONT></TH>
+</TR>
+</TABLE>
+
+<A NAME="AbstractWordConverter()"><!-- --></A><H3>
+AbstractWordConverter</H3>
+<PRE>
+public <B>AbstractWordConverter</B>()</PRE>
+<DL>
+</DL>
+
+<!-- ============ METHOD DETAIL ========== -->
+
+<A NAME="method_detail"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="1"><FONT SIZE="+2">
+<B>Method Detail</B></FONT></TH>
+</TR>
+</TABLE>
+
+<A NAME="afterProcess()"><!-- --></A><H3>
+afterProcess</H3>
+<PRE>
+protected void <B>afterProcess</B>()</PRE>
+<DL>
+<DD>Special actions that need to be called after processing complete, like
+ updating stylesheets or building document notes list. Usually they are
+ called once, but it's okay to call them several times.
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getCharacterRunTriplet(org.apache.poi.hwpf.usermodel.CharacterRun)"><!-- --></A><H3>
+getCharacterRunTriplet</H3>
+<PRE>
+protected <A HREF="../../../../../org/apache/poi/hwpf/converter/FontReplacer.Triplet.html" title="class in org.apache.poi.hwpf.converter">FontReplacer.Triplet</A> <B>getCharacterRunTriplet</B>(<A HREF="../../../../../org/apache/poi/hwpf/usermodel/CharacterRun.html" title="class in org.apache.poi.hwpf.usermodel">CharacterRun</A>&nbsp;characterRun)</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getDocument()"><!-- --></A><H3>
+getDocument</H3>
+<PRE>
+public abstract org.w3c.dom.Document <B>getDocument</B>()</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getFontReplacer()"><!-- --></A><H3>
+getFontReplacer</H3>
+<PRE>
+public <A HREF="../../../../../org/apache/poi/hwpf/converter/FontReplacer.html" title="interface in org.apache.poi.hwpf.converter">FontReplacer</A> <B>getFontReplacer</B>()</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getNumberColumnsSpanned(int[], int, org.apache.poi.hwpf.usermodel.TableCell)"><!-- --></A><H3>
+getNumberColumnsSpanned</H3>
+<PRE>
+protected int <B>getNumberColumnsSpanned</B>(int[]&nbsp;tableCellEdges,
+                                      int&nbsp;currentEdgeIndex,
+                                      <A HREF="../../../../../org/apache/poi/hwpf/usermodel/TableCell.html" title="class in org.apache.poi.hwpf.usermodel">TableCell</A>&nbsp;tableCell)</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getNumberRowsSpanned(org.apache.poi.hwpf.usermodel.Table, int[], int, int, org.apache.poi.hwpf.usermodel.TableCell)"><!-- --></A><H3>
+getNumberRowsSpanned</H3>
+<PRE>
+protected int <B>getNumberRowsSpanned</B>(<A HREF="../../../../../org/apache/poi/hwpf/usermodel/Table.html" title="class in org.apache.poi.hwpf.usermodel">Table</A>&nbsp;table,
+                                   int[]&nbsp;tableCellEdges,
+                                   int&nbsp;currentRowIndex,
+                                   int&nbsp;currentColumnIndex,
+                                   <A HREF="../../../../../org/apache/poi/hwpf/usermodel/TableCell.html" title="class in org.apache.poi.hwpf.usermodel">TableCell</A>&nbsp;tableCell)</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getPicturesManager()"><!-- --></A><H3>
+getPicturesManager</H3>
+<PRE>
+public <A HREF="../../../../../org/apache/poi/hwpf/converter/PicturesManager.html" title="interface in org.apache.poi.hwpf.converter">PicturesManager</A> <B>getPicturesManager</B>()</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="outputCharacters(org.w3c.dom.Element, org.apache.poi.hwpf.usermodel.CharacterRun, java.lang.String)"><!-- --></A><H3>
+outputCharacters</H3>
+<PRE>
+protected abstract void <B>outputCharacters</B>(org.w3c.dom.Element&nbsp;block,
+                                         <A HREF="../../../../../org/apache/poi/hwpf/usermodel/CharacterRun.html" title="class in org.apache.poi.hwpf.usermodel">CharacterRun</A>&nbsp;characterRun,
+                                         java.lang.String&nbsp;text)</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="processBookmarks(org.apache.poi.hwpf.HWPFDocumentCore, org.w3c.dom.Element, org.apache.poi.hwpf.usermodel.Range, int, java.util.List)"><!-- --></A><H3>
+processBookmarks</H3>
+<PRE>
+protected abstract void <B>processBookmarks</B>(<A HREF="../../../../../org/apache/poi/hwpf/HWPFDocumentCore.html" title="class in org.apache.poi.hwpf">HWPFDocumentCore</A>&nbsp;wordDocument,
+                                         org.w3c.dom.Element&nbsp;currentBlock,
+                                         <A HREF="../../../../../org/apache/poi/hwpf/usermodel/Range.html" title="class in org.apache.poi.hwpf.usermodel">Range</A>&nbsp;range,
+                                         int&nbsp;currentTableLevel,
+                                         java.util.List&lt;<A HREF="../../../../../org/apache/poi/hwpf/usermodel/Bookmark.html" title="interface in org.apache.poi.hwpf.usermodel">Bookmark</A>&gt;&nbsp;rangeBookmarks)</PRE>
+<DL>
+<DD>Wrap range into bookmark(s) and process it. All bookmarks have starts
+ equal to range start and ends equal to range end. Usually it's only one
+ bookmark.
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="processCharacters(org.apache.poi.hwpf.HWPFDocumentCore, int, org.apache.poi.hwpf.usermodel.Range, org.w3c.dom.Element)"><!-- --></A><H3>
+processCharacters</H3>
+<PRE>
+protected boolean <B>processCharacters</B>(<A HREF="../../../../../org/apache/poi/hwpf/HWPFDocumentCore.html" title="class in org.apache.poi.hwpf">HWPFDocumentCore</A>&nbsp;wordDocument,
+                                    int&nbsp;currentTableLevel,
+                                    <A HREF="../../../../../org/apache/poi/hwpf/usermodel/Range.html" title="class in org.apache.poi.hwpf.usermodel">Range</A>&nbsp;range,
+                                    org.w3c.dom.Element&nbsp;block)</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="processDeadField(org.apache.poi.hwpf.HWPFDocumentCore, org.w3c.dom.Element, org.apache.poi.hwpf.usermodel.Range, int, int, int, int)"><!-- --></A><H3>
+processDeadField</H3>
+<PRE>
+protected void <B>processDeadField</B>(<A HREF="../../../../../org/apache/poi/hwpf/HWPFDocumentCore.html" title="class in org.apache.poi.hwpf">HWPFDocumentCore</A>&nbsp;wordDocument,
+                                org.w3c.dom.Element&nbsp;currentBlock,
+                                <A HREF="../../../../../org/apache/poi/hwpf/usermodel/Range.html" title="class in org.apache.poi.hwpf.usermodel">Range</A>&nbsp;range,
+                                int&nbsp;currentTableLevel,
+                                int&nbsp;beginMark,
+                                int&nbsp;separatorMark,
+                                int&nbsp;endMark)</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="processDocument(org.apache.poi.hwpf.HWPFDocumentCore)"><!-- --></A><H3>
+processDocument</H3>
+<PRE>
+public void <B>processDocument</B>(<A HREF="../../../../../org/apache/poi/hwpf/HWPFDocumentCore.html" title="class in org.apache.poi.hwpf">HWPFDocumentCore</A>&nbsp;wordDocument)</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="processDocumentInformation(org.apache.poi.hpsf.SummaryInformation)"><!-- --></A><H3>
+processDocumentInformation</H3>
+<PRE>
+protected abstract void <B>processDocumentInformation</B>(<A HREF="../../../../../org/apache/poi/hpsf/SummaryInformation.html" title="class in org.apache.poi.hpsf">SummaryInformation</A>&nbsp;summaryInformation)</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="processDocumentPart(org.apache.poi.hwpf.HWPFDocumentCore, org.apache.poi.hwpf.usermodel.Range)"><!-- --></A><H3>
+processDocumentPart</H3>
+<PRE>
+protected void <B>processDocumentPart</B>(<A HREF="../../../../../org/apache/poi/hwpf/HWPFDocumentCore.html" title="class in org.apache.poi.hwpf">HWPFDocumentCore</A>&nbsp;wordDocument,
+                                   <A HREF="../../../../../org/apache/poi/hwpf/usermodel/Range.html" title="class in org.apache.poi.hwpf.usermodel">Range</A>&nbsp;range)</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="processDrawnObject(org.apache.poi.hwpf.HWPFDocument, org.apache.poi.hwpf.usermodel.CharacterRun, org.w3c.dom.Element)"><!-- --></A><H3>
+processDrawnObject</H3>
+<PRE>
+protected void <B>processDrawnObject</B>(<A HREF="../../../../../org/apache/poi/hwpf/HWPFDocument.html" title="class in org.apache.poi.hwpf">HWPFDocument</A>&nbsp;doc,
+                                  <A HREF="../../../../../org/apache/poi/hwpf/usermodel/CharacterRun.html" title="class in org.apache.poi.hwpf.usermodel">CharacterRun</A>&nbsp;characterRun,
+                                  org.w3c.dom.Element&nbsp;block)</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="processDrawnObject(org.apache.poi.hwpf.HWPFDocument, org.apache.poi.hwpf.usermodel.CharacterRun, org.apache.poi.hwpf.usermodel.OfficeDrawing, java.lang.String, org.w3c.dom.Element)"><!-- --></A><H3>
+processDrawnObject</H3>
+<PRE>
+protected abstract void <B>processDrawnObject</B>(<A HREF="../../../../../org/apache/poi/hwpf/HWPFDocument.html" title="class in org.apache.poi.hwpf">HWPFDocument</A>&nbsp;doc,
+                                           <A HREF="../../../../../org/apache/poi/hwpf/usermodel/CharacterRun.html" title="class in org.apache.poi.hwpf.usermodel">CharacterRun</A>&nbsp;characterRun,
+                                           <A HREF="../../../../../org/apache/poi/hwpf/usermodel/OfficeDrawing.html" title="interface in org.apache.poi.hwpf.usermodel">OfficeDrawing</A>&nbsp;officeDrawing,
+                                           java.lang.String&nbsp;path,
+                                           org.w3c.dom.Element&nbsp;block)</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="processDropDownList(org.w3c.dom.Element, org.apache.poi.hwpf.usermodel.CharacterRun, java.lang.String[], int)"><!-- --></A><H3>
+processDropDownList</H3>
+<PRE>
+protected void <B>processDropDownList</B>(org.w3c.dom.Element&nbsp;block,
+                                   <A HREF="../../../../../org/apache/poi/hwpf/usermodel/CharacterRun.html" title="class in org.apache.poi.hwpf.usermodel">CharacterRun</A>&nbsp;characterRun,
+                                   java.lang.String[]&nbsp;values,
+                                   int&nbsp;defaultIndex)</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="processEndnoteAutonumbered(org.apache.poi.hwpf.HWPFDocument, int, org.w3c.dom.Element, org.apache.poi.hwpf.usermodel.Range)"><!-- --></A><H3>
+processEndnoteAutonumbered</H3>
+<PRE>
+protected abstract void <B>processEndnoteAutonumbered</B>(<A HREF="../../../../../org/apache/poi/hwpf/HWPFDocument.html" title="class in org.apache.poi.hwpf">HWPFDocument</A>&nbsp;wordDocument,
+                                                   int&nbsp;noteIndex,
+                                                   org.w3c.dom.Element&nbsp;block,
+                                                   <A HREF="../../../../../org/apache/poi/hwpf/usermodel/Range.html" title="class in org.apache.poi.hwpf.usermodel">Range</A>&nbsp;endnoteTextRange)</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="processField(org.apache.poi.hwpf.HWPFDocument, org.apache.poi.hwpf.usermodel.Range, int, org.apache.poi.hwpf.usermodel.Field, org.w3c.dom.Element)"><!-- --></A><H3>
+processField</H3>
+<PRE>
+protected void <B>processField</B>(<A HREF="../../../../../org/apache/poi/hwpf/HWPFDocument.html" title="class in org.apache.poi.hwpf">HWPFDocument</A>&nbsp;wordDocument,
+                            <A HREF="../../../../../org/apache/poi/hwpf/usermodel/Range.html" title="class in org.apache.poi.hwpf.usermodel">Range</A>&nbsp;parentRange,
+                            int&nbsp;currentTableLevel,
+                            <A HREF="../../../../../org/apache/poi/hwpf/usermodel/Field.html" title="interface in org.apache.poi.hwpf.usermodel">Field</A>&nbsp;field,
+                            org.w3c.dom.Element&nbsp;currentBlock)</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="processFootnoteAutonumbered(org.apache.poi.hwpf.HWPFDocument, int, org.w3c.dom.Element, org.apache.poi.hwpf.usermodel.Range)"><!-- --></A><H3>
+processFootnoteAutonumbered</H3>
+<PRE>
+protected abstract void <B>processFootnoteAutonumbered</B>(<A HREF="../../../../../org/apache/poi/hwpf/HWPFDocument.html" title="class in org.apache.poi.hwpf">HWPFDocument</A>&nbsp;wordDocument,
+                                                    int&nbsp;noteIndex,
+                                                    org.w3c.dom.Element&nbsp;block,
+                                                    <A HREF="../../../../../org/apache/poi/hwpf/usermodel/Range.html" title="class in org.apache.poi.hwpf.usermodel">Range</A>&nbsp;footnoteTextRange)</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="processHyperlink(org.apache.poi.hwpf.HWPFDocumentCore, org.w3c.dom.Element, org.apache.poi.hwpf.usermodel.Range, int, java.lang.String)"><!-- --></A><H3>
+processHyperlink</H3>
+<PRE>
+protected abstract void <B>processHyperlink</B>(<A HREF="../../../../../org/apache/poi/hwpf/HWPFDocumentCore.html" title="class in org.apache.poi.hwpf">HWPFDocumentCore</A>&nbsp;wordDocument,
+                                         org.w3c.dom.Element&nbsp;currentBlock,
+                                         <A HREF="../../../../../org/apache/poi/hwpf/usermodel/Range.html" title="class in org.apache.poi.hwpf.usermodel">Range</A>&nbsp;textRange,
+                                         int&nbsp;currentTableLevel,
+                                         java.lang.String&nbsp;hyperlink)</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="processImage(org.w3c.dom.Element, boolean, org.apache.poi.hwpf.usermodel.Picture)"><!-- --></A><H3>
+processImage</H3>
+<PRE>
+protected void <B>processImage</B>(org.w3c.dom.Element&nbsp;currentBlock,
+                            boolean&nbsp;inlined,
+                            <A HREF="../../../../../org/apache/poi/hwpf/usermodel/Picture.html" title="class in org.apache.poi.hwpf.usermodel">Picture</A>&nbsp;picture)</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="processImage(org.w3c.dom.Element, boolean, org.apache.poi.hwpf.usermodel.Picture, java.lang.String)"><!-- --></A><H3>
+processImage</H3>
+<PRE>
+protected abstract void <B>processImage</B>(org.w3c.dom.Element&nbsp;currentBlock,
+                                     boolean&nbsp;inlined,
+                                     <A HREF="../../../../../org/apache/poi/hwpf/usermodel/Picture.html" title="class in org.apache.poi.hwpf.usermodel">Picture</A>&nbsp;picture,
+                                     java.lang.String&nbsp;url)</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="processImageWithoutPicturesManager(org.w3c.dom.Element, boolean, org.apache.poi.hwpf.usermodel.Picture)"><!-- --></A><H3>
+processImageWithoutPicturesManager</H3>
+<PRE>
+<FONT SIZE="-1"><A HREF="../../../../../org/apache/poi/util/Internal.html" title="annotation in org.apache.poi.util">@Internal</A>
+</FONT>protected abstract void <B>processImageWithoutPicturesManager</B>(org.w3c.dom.Element&nbsp;currentBlock,
+                                                                    boolean&nbsp;inlined,
+                                                                    <A HREF="../../../../../org/apache/poi/hwpf/usermodel/Picture.html" title="class in org.apache.poi.hwpf.usermodel">Picture</A>&nbsp;picture)</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="processLineBreak(org.w3c.dom.Element, org.apache.poi.hwpf.usermodel.CharacterRun)"><!-- --></A><H3>
+processLineBreak</H3>
+<PRE>
+protected abstract void <B>processLineBreak</B>(org.w3c.dom.Element&nbsp;block,
+                                         <A HREF="../../../../../org/apache/poi/hwpf/usermodel/CharacterRun.html" title="class in org.apache.poi.hwpf.usermodel">CharacterRun</A>&nbsp;characterRun)</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="processNoteAnchor(org.apache.poi.hwpf.HWPFDocument, org.apache.poi.hwpf.usermodel.CharacterRun, org.w3c.dom.Element)"><!-- --></A><H3>
+processNoteAnchor</H3>
+<PRE>
+protected void <B>processNoteAnchor</B>(<A HREF="../../../../../org/apache/poi/hwpf/HWPFDocument.html" title="class in org.apache.poi.hwpf">HWPFDocument</A>&nbsp;doc,
+                                 <A HREF="../../../../../org/apache/poi/hwpf/usermodel/CharacterRun.html" title="class in org.apache.poi.hwpf.usermodel">CharacterRun</A>&nbsp;characterRun,
+                                 org.w3c.dom.Element&nbsp;block)</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="processOle2(org.apache.poi.hwpf.HWPFDocument, org.w3c.dom.Element, org.apache.poi.poifs.filesystem.Entry)"><!-- --></A><H3>
+processOle2</H3>
+<PRE>
+protected boolean <B>processOle2</B>(<A HREF="../../../../../org/apache/poi/hwpf/HWPFDocument.html" title="class in org.apache.poi.hwpf">HWPFDocument</A>&nbsp;wordDocument,
+                              org.w3c.dom.Element&nbsp;block,
+                              <A HREF="../../../../../org/apache/poi/poifs/filesystem/Entry.html" title="interface in org.apache.poi.poifs.filesystem">Entry</A>&nbsp;entry)
+                       throws java.lang.Exception</PRE>
+<DL>
+<DD><DL>
+
+<DT><B>Throws:</B>
+<DD><CODE>java.lang.Exception</CODE></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="processPageBreak(org.apache.poi.hwpf.HWPFDocumentCore, org.w3c.dom.Element)"><!-- --></A><H3>
+processPageBreak</H3>
+<PRE>
+protected abstract void <B>processPageBreak</B>(<A HREF="../../../../../org/apache/poi/hwpf/HWPFDocumentCore.html" title="class in org.apache.poi.hwpf">HWPFDocumentCore</A>&nbsp;wordDocument,
+                                         org.w3c.dom.Element&nbsp;flow)</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="processPageref(org.apache.poi.hwpf.HWPFDocumentCore, org.w3c.dom.Element, org.apache.poi.hwpf.usermodel.Range, int, java.lang.String)"><!-- --></A><H3>
+processPageref</H3>
+<PRE>
+protected abstract void <B>processPageref</B>(<A HREF="../../../../../org/apache/poi/hwpf/HWPFDocumentCore.html" title="class in org.apache.poi.hwpf">HWPFDocumentCore</A>&nbsp;wordDocument,
+                                       org.w3c.dom.Element&nbsp;currentBlock,
+                                       <A HREF="../../../../../org/apache/poi/hwpf/usermodel/Range.html" title="class in org.apache.poi.hwpf.usermodel">Range</A>&nbsp;textRange,
+                                       int&nbsp;currentTableLevel,
+                                       java.lang.String&nbsp;pageref)</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="processParagraph(org.apache.poi.hwpf.HWPFDocumentCore, org.w3c.dom.Element, int, org.apache.poi.hwpf.usermodel.Paragraph, java.lang.String)"><!-- --></A><H3>
+processParagraph</H3>
+<PRE>
+protected abstract void <B>processParagraph</B>(<A HREF="../../../../../org/apache/poi/hwpf/HWPFDocumentCore.html" title="class in org.apache.poi.hwpf">HWPFDocumentCore</A>&nbsp;wordDocument,
+                                         org.w3c.dom.Element&nbsp;parentElement,
+                                         int&nbsp;currentTableLevel,
+                                         <A HREF="../../../../../org/apache/poi/hwpf/usermodel/Paragraph.html" title="class in org.apache.poi.hwpf.usermodel">Paragraph</A>&nbsp;paragraph,
+                                         java.lang.String&nbsp;bulletText)</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="processParagraphes(org.apache.poi.hwpf.HWPFDocumentCore, org.w3c.dom.Element, org.apache.poi.hwpf.usermodel.Range, int)"><!-- --></A><H3>
+processParagraphes</H3>
+<PRE>
+protected void <B>processParagraphes</B>(<A HREF="../../../../../org/apache/poi/hwpf/HWPFDocumentCore.html" title="class in org.apache.poi.hwpf">HWPFDocumentCore</A>&nbsp;wordDocument,
+                                  org.w3c.dom.Element&nbsp;flow,
+                                  <A HREF="../../../../../org/apache/poi/hwpf/usermodel/Range.html" title="class in org.apache.poi.hwpf.usermodel">Range</A>&nbsp;range,
+                                  int&nbsp;currentTableLevel)</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="processSection(org.apache.poi.hwpf.HWPFDocumentCore, org.apache.poi.hwpf.usermodel.Section, int)"><!-- --></A><H3>
+processSection</H3>
+<PRE>
+protected abstract void <B>processSection</B>(<A HREF="../../../../../org/apache/poi/hwpf/HWPFDocumentCore.html" title="class in org.apache.poi.hwpf">HWPFDocumentCore</A>&nbsp;wordDocument,
+                                       <A HREF="../../../../../org/apache/poi/hwpf/usermodel/Section.html" title="class in org.apache.poi.hwpf.usermodel">Section</A>&nbsp;section,
+                                       int&nbsp;s)</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="processSingleSection(org.apache.poi.hwpf.HWPFDocumentCore, org.apache.poi.hwpf.usermodel.Section)"><!-- --></A><H3>
+processSingleSection</H3>
+<PRE>
+protected void <B>processSingleSection</B>(<A HREF="../../../../../org/apache/poi/hwpf/HWPFDocumentCore.html" title="class in org.apache.poi.hwpf">HWPFDocumentCore</A>&nbsp;wordDocument,
+                                    <A HREF="../../../../../org/apache/poi/hwpf/usermodel/Section.html" title="class in org.apache.poi.hwpf.usermodel">Section</A>&nbsp;section)</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="processSymbol(org.apache.poi.hwpf.HWPFDocument, org.apache.poi.hwpf.usermodel.CharacterRun, org.w3c.dom.Element)"><!-- --></A><H3>
+processSymbol</H3>
+<PRE>
+protected void <B>processSymbol</B>(<A HREF="../../../../../org/apache/poi/hwpf/HWPFDocument.html" title="class in org.apache.poi.hwpf">HWPFDocument</A>&nbsp;doc,
+                             <A HREF="../../../../../org/apache/poi/hwpf/usermodel/CharacterRun.html" title="class in org.apache.poi.hwpf.usermodel">CharacterRun</A>&nbsp;characterRun,
+                             org.w3c.dom.Element&nbsp;block)</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="processTable(org.apache.poi.hwpf.HWPFDocumentCore, org.w3c.dom.Element, org.apache.poi.hwpf.usermodel.Table)"><!-- --></A><H3>
+processTable</H3>
+<PRE>
+protected abstract void <B>processTable</B>(<A HREF="../../../../../org/apache/poi/hwpf/HWPFDocumentCore.html" title="class in org.apache.poi.hwpf">HWPFDocumentCore</A>&nbsp;wordDocument,
+                                     org.w3c.dom.Element&nbsp;flow,
+                                     <A HREF="../../../../../org/apache/poi/hwpf/usermodel/Table.html" title="class in org.apache.poi.hwpf.usermodel">Table</A>&nbsp;table)</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setFontReplacer(org.apache.poi.hwpf.converter.FontReplacer)"><!-- --></A><H3>
+setFontReplacer</H3>
+<PRE>
+public void <B>setFontReplacer</B>(<A HREF="../../../../../org/apache/poi/hwpf/converter/FontReplacer.html" title="interface in org.apache.poi.hwpf.converter">FontReplacer</A>&nbsp;fontReplacer)</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setPicturesManager(org.apache.poi.hwpf.converter.PicturesManager)"><!-- --></A><H3>
+setPicturesManager</H3>
+<PRE>
+public void <B>setPicturesManager</B>(<A HREF="../../../../../org/apache/poi/hwpf/converter/PicturesManager.html" title="interface in org.apache.poi.hwpf.converter">PicturesManager</A>&nbsp;fileManager)</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="tryDeadField(org.apache.poi.hwpf.HWPFDocumentCore, org.apache.poi.hwpf.usermodel.Range, int, int, org.w3c.dom.Element)"><!-- --></A><H3>
+tryDeadField</H3>
+<PRE>
+protected int <B>tryDeadField</B>(<A HREF="../../../../../org/apache/poi/hwpf/HWPFDocumentCore.html" title="class in org.apache.poi.hwpf">HWPFDocumentCore</A>&nbsp;wordDocument,
+                           <A HREF="../../../../../org/apache/poi/hwpf/usermodel/Range.html" title="class in org.apache.poi.hwpf.usermodel">Range</A>&nbsp;range,
+                           int&nbsp;currentTableLevel,
+                           int&nbsp;beginMark,
+                           org.w3c.dom.Element&nbsp;currentBlock)</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<!-- ========= END OF CLASS DATA ========= -->
+<HR>
+
+
+<!-- ======= START OF BOTTOM NAVBAR ====== -->
+<A NAME="navbar_bottom"><!-- --></A>
+<A HREF="#skip-navbar_bottom" title="Skip navigation links"></A>
+<TABLE BORDER="0" WIDTH="100%" CELLPADDING="1" CELLSPACING="0" SUMMARY="">
+<TR>
+<TD COLSPAN=2 BGCOLOR="#EEEEFF" CLASS="NavBarCell1">
+<A NAME="navbar_bottom_firstrow"><!-- --></A>
+<TABLE BORDER="0" CELLPADDING="0" CELLSPACING="3" SUMMARY="">
+  <TR ALIGN="center" VALIGN="top">
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../overview-summary.html"><FONT CLASS="NavBarFont1"><B>Overview</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="package-summary.html"><FONT CLASS="NavBarFont1"><B>Package</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#FFFFFF" CLASS="NavBarCell1Rev"> &nbsp;<FONT CLASS="NavBarFont1Rev"><B>Class</B></FONT>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="class-use/AbstractWordConverter.html"><FONT CLASS="NavBarFont1"><B>Use</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="package-tree.html"><FONT CLASS="NavBarFont1"><B>Tree</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../deprecated-list.html"><FONT CLASS="NavBarFont1"><B>Deprecated</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../index-all.html"><FONT CLASS="NavBarFont1"><B>Index</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../help-doc.html"><FONT CLASS="NavBarFont1"><B>Help</B></FONT></A>&nbsp;</TD>
+  </TR>
+</TABLE>
+</TD>
+<TD ALIGN="right" VALIGN="top" ROWSPAN=3><EM>
+</EM>
+</TD>
+</TR>
+
+<TR>
+<TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
+&nbsp;PREV CLASS&nbsp;
+&nbsp;<A HREF="../../../../../org/apache/poi/hwpf/converter/AbstractWordUtils.html" title="class in org.apache.poi.hwpf.converter"><B>NEXT CLASS</B></A></FONT></TD>
+<TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
+  <A HREF="../../../../../index.html?org/apache/poi/hwpf/converter/AbstractWordConverter.html" target="_top"><B>FRAMES</B></A>  &nbsp;
+&nbsp;<A HREF="AbstractWordConverter.html" target="_top"><B>NO FRAMES</B></A>  &nbsp;
+&nbsp;<SCRIPT type="text/javascript">
+  <!--
+  if(window==top) {
+    document.writeln('<A HREF="../../../../../allclasses-noframe.html"><B>All Classes</B></A>');
+  }
+  //-->
+</SCRIPT>
+<NOSCRIPT>
+  <A HREF="../../../../../allclasses-noframe.html"><B>All Classes</B></A>
+</NOSCRIPT>
+
+
+</FONT></TD>
+</TR>
+<TR>
+<TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
+  SUMMARY:&nbsp;NESTED&nbsp;|&nbsp;<A HREF="#field_summary">FIELD</A>&nbsp;|&nbsp;<A HREF="#constructor_summary">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_summary">METHOD</A></FONT></TD>
+<TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
+DETAIL:&nbsp;<A HREF="#field_detail">FIELD</A>&nbsp;|&nbsp;<A HREF="#constructor_detail">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_detail">METHOD</A></FONT></TD>
+</TR>
+</TABLE>
+<A NAME="skip-navbar_bottom"></A>
+<!-- ======== END OF BOTTOM NAVBAR ======= -->
+
+<HR>
+
+                <i>Copyright 2014 The Apache Software Foundation or
+        its licensors, as applicable.</i>
+            
+</BODY>
+</HTML>

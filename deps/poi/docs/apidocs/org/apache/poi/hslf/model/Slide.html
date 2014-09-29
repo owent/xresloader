@@ -1,0 +1,921 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!--NewPage-->
+<HTML>
+<HEAD>
+<TITLE>
+Slide (POI API Documentation)
+</TITLE>
+
+<META NAME="keywords" CONTENT="org.apache.poi.hslf.model.Slide class">
+
+<LINK REL ="stylesheet" TYPE="text/css" HREF="../../../../../stylesheet.css" TITLE="Style">
+
+<SCRIPT type="text/javascript">
+function windowTitle()
+{
+    parent.document.title="Slide (POI API Documentation)";
+}
+</SCRIPT>
+<NOSCRIPT>
+</NOSCRIPT>
+
+</HEAD>
+
+<BODY BGCOLOR="white" onload="windowTitle();">
+
+
+<!-- ========= START OF TOP NAVBAR ======= -->
+<A NAME="navbar_top"><!-- --></A>
+<A HREF="#skip-navbar_top" title="Skip navigation links"></A>
+<TABLE BORDER="0" WIDTH="100%" CELLPADDING="1" CELLSPACING="0" SUMMARY="">
+<TR>
+<TD COLSPAN=2 BGCOLOR="#EEEEFF" CLASS="NavBarCell1">
+<A NAME="navbar_top_firstrow"><!-- --></A>
+<TABLE BORDER="0" CELLPADDING="0" CELLSPACING="3" SUMMARY="">
+  <TR ALIGN="center" VALIGN="top">
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../overview-summary.html"><FONT CLASS="NavBarFont1"><B>Overview</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="package-summary.html"><FONT CLASS="NavBarFont1"><B>Package</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#FFFFFF" CLASS="NavBarCell1Rev"> &nbsp;<FONT CLASS="NavBarFont1Rev"><B>Class</B></FONT>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="class-use/Slide.html"><FONT CLASS="NavBarFont1"><B>Use</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="package-tree.html"><FONT CLASS="NavBarFont1"><B>Tree</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../deprecated-list.html"><FONT CLASS="NavBarFont1"><B>Deprecated</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../index-all.html"><FONT CLASS="NavBarFont1"><B>Index</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../help-doc.html"><FONT CLASS="NavBarFont1"><B>Help</B></FONT></A>&nbsp;</TD>
+  </TR>
+</TABLE>
+</TD>
+<TD ALIGN="right" VALIGN="top" ROWSPAN=3><EM>
+</EM>
+</TD>
+</TR>
+
+<TR>
+<TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
+&nbsp;<A HREF="../../../../../org/apache/poi/hslf/model/SimpleShape.html" title="class in org.apache.poi.hslf.model"><B>PREV CLASS</B></A>&nbsp;
+&nbsp;<A HREF="../../../../../org/apache/poi/hslf/model/SlideMaster.html" title="class in org.apache.poi.hslf.model"><B>NEXT CLASS</B></A></FONT></TD>
+<TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
+  <A HREF="../../../../../index.html?org/apache/poi/hslf/model/Slide.html" target="_top"><B>FRAMES</B></A>  &nbsp;
+&nbsp;<A HREF="Slide.html" target="_top"><B>NO FRAMES</B></A>  &nbsp;
+&nbsp;<SCRIPT type="text/javascript">
+  <!--
+  if(window==top) {
+    document.writeln('<A HREF="../../../../../allclasses-noframe.html"><B>All Classes</B></A>');
+  }
+  //-->
+</SCRIPT>
+<NOSCRIPT>
+  <A HREF="../../../../../allclasses-noframe.html"><B>All Classes</B></A>
+</NOSCRIPT>
+
+
+</FONT></TD>
+</TR>
+<TR>
+<TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
+  SUMMARY:&nbsp;NESTED&nbsp;|&nbsp;FIELD&nbsp;|&nbsp;<A HREF="#constructor_summary">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_summary">METHOD</A></FONT></TD>
+<TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
+DETAIL:&nbsp;FIELD&nbsp;|&nbsp;<A HREF="#constructor_detail">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_detail">METHOD</A></FONT></TD>
+</TR>
+</TABLE>
+<A NAME="skip-navbar_top"></A>
+<!-- ========= END OF TOP NAVBAR ========= -->
+
+<HR>
+<!-- ======== START OF CLASS DATA ======== -->
+<H2>
+<FONT SIZE="-1">
+org.apache.poi.hslf.model</FONT>
+<BR>
+Class Slide</H2>
+<PRE>
+java.lang.Object
+  <IMG SRC="../../../../../resources/inherit.gif" ALT="extended by "><A HREF="../../../../../org/apache/poi/hslf/model/Sheet.html" title="class in org.apache.poi.hslf.model">org.apache.poi.hslf.model.Sheet</A>
+      <IMG SRC="../../../../../resources/inherit.gif" ALT="extended by "><B>org.apache.poi.hslf.model.Slide</B>
+</PRE>
+<HR>
+<DL>
+<DT><PRE>public final class <B>Slide</B><DT>extends <A HREF="../../../../../org/apache/poi/hslf/model/Sheet.html" title="class in org.apache.poi.hslf.model">Sheet</A></DL>
+</PRE>
+
+<P>
+This class represents a slide in a PowerPoint Document. It allows
+  access to the text within, and the layout. For now, it only does
+  the text side of things though
+<P>
+
+<P>
+<DL>
+<DT><B>Author:</B></DT>
+  <DD>Nick Burch, Yegor Kozlov</DD>
+</DL>
+<HR>
+
+<P>
+
+<!-- ======== CONSTRUCTOR SUMMARY ======== -->
+
+<A NAME="constructor_summary"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+<B>Constructor Summary</B></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/model/Slide.html#Slide(int, int, int)">Slide</A></B>(int&nbsp;sheetNumber,
+      int&nbsp;sheetRefId,
+      int&nbsp;slideNumber)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Create a new Slide instance</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/model/Slide.html#Slide(org.apache.poi.hslf.record.Slide, org.apache.poi.hslf.model.Notes, org.apache.poi.hslf.record.SlideListWithText.SlideAtomsSet, int, int)">Slide</A></B>(<A HREF="../../../../../org/apache/poi/hslf/record/Slide.html" title="class in org.apache.poi.hslf.record">Slide</A>&nbsp;slide,
+      <A HREF="../../../../../org/apache/poi/hslf/model/Notes.html" title="class in org.apache.poi.hslf.model">Notes</A>&nbsp;notes,
+      <A HREF="../../../../../org/apache/poi/hslf/record/SlideListWithText.SlideAtomsSet.html" title="class in org.apache.poi.hslf.record">SlideListWithText.SlideAtomsSet</A>&nbsp;atomSet,
+      int&nbsp;slideIdentifier,
+      int&nbsp;slideNumber)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Constructs a Slide from the Slide record, and the SlideAtomsSet
+  containing the text.</TD>
+</TR>
+</TABLE>
+&nbsp;
+<!-- ========== METHOD SUMMARY =========== -->
+
+<A NAME="method_summary"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+<B>Method Summary</B></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../../../org/apache/poi/hslf/model/TextBox.html" title="class in org.apache.poi.hslf.model">TextBox</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/model/Slide.html#addTitle()">addTitle</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Create a <code>TextBox</code> object that represents the slide's title.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/model/Slide.html#draw(java.awt.Graphics2D)">draw</A></B>(java.awt.Graphics2D&nbsp;graphics)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../../../org/apache/poi/hslf/model/Background.html" title="class in org.apache.poi.hslf.model">Background</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/model/Slide.html#getBackground()">getBackground</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Background for this slide.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../../../org/apache/poi/hslf/record/ColorSchemeAtom.html" title="class in org.apache.poi.hslf.record">ColorSchemeAtom</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/model/Slide.html#getColorScheme()">getColorScheme</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Color scheme for this slide.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../../../org/apache/poi/hslf/model/Comment.html" title="class in org.apache.poi.hslf.model">Comment</A>[]</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/model/Slide.html#getComments()">getComments</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Get the comment(s) for this slide.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/model/Slide.html#getFollowMasterBackground()">getFollowMasterBackground</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Whether this slide follows master sheet background</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/model/Slide.html#getFollowMasterObjects()">getFollowMasterObjects</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Whether this slide draws master sheet objects</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/model/Slide.html#getFollowMasterScheme()">getFollowMasterScheme</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Whether this slide follows master color scheme</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../../../org/apache/poi/hslf/model/HeadersFooters.html" title="class in org.apache.poi.hslf.model">HeadersFooters</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/model/Slide.html#getHeadersFooters()">getHeadersFooters</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Header / Footer settings for this slide.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/model/Slide.html#getHidden()">getHidden</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../../../org/apache/poi/hslf/model/MasterSheet.html" title="class in org.apache.poi.hslf.model">MasterSheet</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/model/Slide.html#getMasterSheet()">getMasterSheet</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns master sheet associated with this slide.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../../../org/apache/poi/hslf/model/Notes.html" title="class in org.apache.poi.hslf.model">Notes</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/model/Slide.html#getNotesSheet()">getNotesSheet</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns the Notes Sheet for this slide, or null if there isn't one</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../../../org/apache/poi/hslf/record/StyleTextProp9Atom.html" title="class in org.apache.poi.hslf.record">StyleTextProp9Atom</A>[]</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/model/Slide.html#getNumberedListInfo()">getNumberedListInfo</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;This will return an atom per TextBox, so if the page has two text boxes the method should return two atoms.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>protected &nbsp;<A HREF="../../../../../org/apache/poi/hslf/record/SlideListWithText.SlideAtomsSet.html" title="class in org.apache.poi.hslf.record">SlideListWithText.SlideAtomsSet</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/model/Slide.html#getSlideAtomsSet()">getSlideAtomsSet</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;int</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/model/Slide.html#getSlideNumber()">getSlideNumber</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns the (public facing) page number of this slide</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../../../org/apache/poi/hslf/record/Slide.html" title="class in org.apache.poi.hslf.record">Slide</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/model/Slide.html#getSlideRecord()">getSlideRecord</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns the underlying slide record</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../../../org/apache/poi/hslf/record/EscherTextboxWrapper.html" title="class in org.apache.poi.hslf.record">EscherTextboxWrapper</A>[]</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/model/Slide.html#getTextboxWrappers()">getTextboxWrappers</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../../../org/apache/poi/hslf/model/TextRun.html" title="class in org.apache.poi.hslf.model">TextRun</A>[]</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/model/Slide.html#getTextRuns()">getTextRuns</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns an array of all the TextRuns found</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;java.lang.String</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/model/Slide.html#getTitle()">getTitle</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Return title of this slide or <code>null</code> if the slide does not have title.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>protected &nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/model/Slide.html#onAddTextShape(org.apache.poi.hslf.model.TextShape)">onAddTextShape</A></B>(<A HREF="../../../../../org/apache/poi/hslf/model/TextShape.html" title="class in org.apache.poi.hslf.model">TextShape</A>&nbsp;shape)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Subclasses should call this method and update the array of text runs
+ when a text shape is added</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/model/Slide.html#onCreate()">onCreate</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Called by SlideShow ater a new slide is created.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/model/Slide.html#setFollowMasterBackground(boolean)">setFollowMasterBackground</A></B>(boolean&nbsp;flag)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sets whether this slide follows master background</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/model/Slide.html#setFollowMasterObjects(boolean)">setFollowMasterObjects</A></B>(boolean&nbsp;flag)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sets whether this slide draws master sheet objects</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/model/Slide.html#setFollowMasterScheme(boolean)">setFollowMasterScheme</A></B>(boolean&nbsp;flag)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sets whether this slide draws master color scheme</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/model/Slide.html#setHidden(boolean)">setHidden</A></B>(boolean&nbsp;hidden)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/model/Slide.html#setMasterSheet(org.apache.poi.hslf.model.MasterSheet)">setMasterSheet</A></B>(<A HREF="../../../../../org/apache/poi/hslf/model/MasterSheet.html" title="class in org.apache.poi.hslf.model">MasterSheet</A>&nbsp;master)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Change Master of this slide.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/model/Slide.html#setNotes(org.apache.poi.hslf.model.Notes)">setNotes</A></B>(<A HREF="../../../../../org/apache/poi/hslf/model/Notes.html" title="class in org.apache.poi.hslf.model">Notes</A>&nbsp;notes)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sets the Notes that are associated with this.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/model/Slide.html#setSlideNumber(int)">setSlideNumber</A></B>(int&nbsp;newSlideNumber)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Changes the Slide's (external facing) page number.</TD>
+</TR>
+</TABLE>
+&nbsp;<A NAME="methods_inherited_from_class_org.apache.poi.hslf.model.Sheet"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#EEEEFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left"><B>Methods inherited from class org.apache.poi.hslf.model.<A HREF="../../../../../org/apache/poi/hslf/model/Sheet.html" title="class in org.apache.poi.hslf.model">Sheet</A></B></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><A HREF="../../../../../org/apache/poi/hslf/model/Sheet.html#_getSheetNumber()">_getSheetNumber</A>, <A HREF="../../../../../org/apache/poi/hslf/model/Sheet.html#_getSheetRefId()">_getSheetRefId</A>, <A HREF="../../../../../org/apache/poi/hslf/model/Sheet.html#addShape(org.apache.poi.hslf.model.Shape)">addShape</A>, <A HREF="../../../../../org/apache/poi/hslf/model/Sheet.html#allocateShapeId()">allocateShapeId</A>, <A HREF="../../../../../org/apache/poi/hslf/model/Sheet.html#findTextRuns(org.apache.poi.hslf.record.EscherTextboxWrapper, java.util.List)">findTextRuns</A>, <A HREF="../../../../../org/apache/poi/hslf/model/Sheet.html#findTextRuns(org.apache.poi.hslf.record.PPDrawing)">findTextRuns</A>, <A HREF="../../../../../org/apache/poi/hslf/model/Sheet.html#findTextRuns(org.apache.poi.hslf.record.Record[], java.util.List)">findTextRuns</A>, <A HREF="../../../../../org/apache/poi/hslf/model/Sheet.html#findTextRuns(org.apache.poi.hslf.record.Record[], java.util.List, org.apache.poi.hslf.record.StyleTextProp9Atom)">findTextRuns</A>, <A HREF="../../../../../org/apache/poi/hslf/model/Sheet.html#getPlaceholder(int)">getPlaceholder</A>, <A HREF="../../../../../org/apache/poi/hslf/model/Sheet.html#getPlaceholderByTextType(int)">getPlaceholderByTextType</A>, <A HREF="../../../../../org/apache/poi/hslf/model/Sheet.html#getPPDrawing()">getPPDrawing</A>, <A HREF="../../../../../org/apache/poi/hslf/model/Sheet.html#getProgrammableTag()">getProgrammableTag</A>, <A HREF="../../../../../org/apache/poi/hslf/model/Sheet.html#getShapes()">getShapes</A>, <A HREF="../../../../../org/apache/poi/hslf/model/Sheet.html#getSheetContainer()">getSheetContainer</A>, <A HREF="../../../../../org/apache/poi/hslf/model/Sheet.html#getSlideShow()">getSlideShow</A>, <A HREF="../../../../../org/apache/poi/hslf/model/Sheet.html#removeShape(org.apache.poi.hslf.model.Shape)">removeShape</A>, <A HREF="../../../../../org/apache/poi/hslf/model/Sheet.html#setSlideShow(org.apache.poi.hslf.usermodel.SlideShow)">setSlideShow</A></CODE></TD>
+</TR>
+</TABLE>
+&nbsp;<A NAME="methods_inherited_from_class_java.lang.Object"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#EEEEFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left"><B>Methods inherited from class java.lang.Object</B></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE>clone, equals, finalize, getClass, hashCode, notify, notifyAll, toString, wait, wait, wait</CODE></TD>
+</TR>
+</TABLE>
+&nbsp;
+<P>
+
+<!-- ========= CONSTRUCTOR DETAIL ======== -->
+
+<A NAME="constructor_detail"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="1"><FONT SIZE="+2">
+<B>Constructor Detail</B></FONT></TH>
+</TR>
+</TABLE>
+
+<A NAME="Slide(org.apache.poi.hslf.record.Slide, org.apache.poi.hslf.model.Notes, org.apache.poi.hslf.record.SlideListWithText.SlideAtomsSet, int, int)"><!-- --></A><H3>
+Slide</H3>
+<PRE>
+public <B>Slide</B>(<A HREF="../../../../../org/apache/poi/hslf/record/Slide.html" title="class in org.apache.poi.hslf.record">Slide</A>&nbsp;slide,
+             <A HREF="../../../../../org/apache/poi/hslf/model/Notes.html" title="class in org.apache.poi.hslf.model">Notes</A>&nbsp;notes,
+             <A HREF="../../../../../org/apache/poi/hslf/record/SlideListWithText.SlideAtomsSet.html" title="class in org.apache.poi.hslf.record">SlideListWithText.SlideAtomsSet</A>&nbsp;atomSet,
+             int&nbsp;slideIdentifier,
+             int&nbsp;slideNumber)</PRE>
+<DL>
+<DD>Constructs a Slide from the Slide record, and the SlideAtomsSet
+  containing the text.
+ Initializes TextRuns, to provide easier access to the text
+<P>
+<DL>
+<DT><B>Parameters:</B><DD><CODE>slide</CODE> - the Slide record we're based on<DD><CODE>notes</CODE> - the Notes sheet attached to us<DD><CODE>atomSet</CODE> - the SlideAtomsSet to get the text from</DL>
+</DL>
+<HR>
+
+<A NAME="Slide(int, int, int)"><!-- --></A><H3>
+Slide</H3>
+<PRE>
+public <B>Slide</B>(int&nbsp;sheetNumber,
+             int&nbsp;sheetRefId,
+             int&nbsp;slideNumber)</PRE>
+<DL>
+<DD>Create a new Slide instance
+<P>
+<DL>
+<DT><B>Parameters:</B><DD><CODE>sheetNumber</CODE> - The internal number of the sheet, as used by PersistPtrHolder<DD><CODE>slideNumber</CODE> - The user facing number of the sheet</DL>
+</DL>
+
+<!-- ============ METHOD DETAIL ========== -->
+
+<A NAME="method_detail"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="1"><FONT SIZE="+2">
+<B>Method Detail</B></FONT></TH>
+</TR>
+</TABLE>
+
+<A NAME="setNotes(org.apache.poi.hslf.model.Notes)"><!-- --></A><H3>
+setNotes</H3>
+<PRE>
+public void <B>setNotes</B>(<A HREF="../../../../../org/apache/poi/hslf/model/Notes.html" title="class in org.apache.poi.hslf.model">Notes</A>&nbsp;notes)</PRE>
+<DL>
+<DD>Sets the Notes that are associated with this. Updates the
+  references in the records to point to the new ID
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setSlideNumber(int)"><!-- --></A><H3>
+setSlideNumber</H3>
+<PRE>
+public void <B>setSlideNumber</B>(int&nbsp;newSlideNumber)</PRE>
+<DL>
+<DD>Changes the Slide's (external facing) page number.
+<P>
+<DD><DL>
+<DT><B>See Also:</B><DD><A HREF="../../../../../org/apache/poi/hslf/usermodel/SlideShow.html#reorderSlide(int, int)"><CODE>SlideShow.reorderSlide(int, int)</CODE></A></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="onCreate()"><!-- --></A><H3>
+onCreate</H3>
+<PRE>
+public void <B>onCreate</B>()</PRE>
+<DL>
+<DD>Called by SlideShow ater a new slide is created.
+ <p>
+ For Slide we need to do the following:
+  <li> set id of the drawing group.
+  <li> set shapeId for the container descriptor and background
+ </p>
+<P>
+<DD><DL>
+<DT><B>Overrides:</B><DD><CODE><A HREF="../../../../../org/apache/poi/hslf/model/Sheet.html#onCreate()">onCreate</A></CODE> in class <CODE><A HREF="../../../../../org/apache/poi/hslf/model/Sheet.html" title="class in org.apache.poi.hslf.model">Sheet</A></CODE></DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="addTitle()"><!-- --></A><H3>
+addTitle</H3>
+<PRE>
+public <A HREF="../../../../../org/apache/poi/hslf/model/TextBox.html" title="class in org.apache.poi.hslf.model">TextBox</A> <B>addTitle</B>()</PRE>
+<DL>
+<DD>Create a <code>TextBox</code> object that represents the slide's title.
+<P>
+<DD><DL>
+
+<DT><B>Returns:</B><DD><code>TextBox</code> object that represents the slide's title.</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getTitle()"><!-- --></A><H3>
+getTitle</H3>
+<PRE>
+public java.lang.String <B>getTitle</B>()</PRE>
+<DL>
+<DD>Return title of this slide or <code>null</code> if the slide does not have title.
+ <p>
+ The title is a run of text of type <code>TextHeaderAtom.CENTER_TITLE_TYPE</code> or
+ <code>TextHeaderAtom.TITLE_TYPE</code>
+ </p>
+<P>
+<DD><DL>
+
+<DT><B>Returns:</B><DD>title of this slide<DT><B>See Also:</B><DD><A HREF="../../../../../org/apache/poi/hslf/record/TextHeaderAtom.html" title="class in org.apache.poi.hslf.record"><CODE>TextHeaderAtom</CODE></A></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getTextRuns()"><!-- --></A><H3>
+getTextRuns</H3>
+<PRE>
+public <A HREF="../../../../../org/apache/poi/hslf/model/TextRun.html" title="class in org.apache.poi.hslf.model">TextRun</A>[] <B>getTextRuns</B>()</PRE>
+<DL>
+<DD>Returns an array of all the TextRuns found
+<P>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../../../../org/apache/poi/hslf/model/Sheet.html#getTextRuns()">getTextRuns</A></CODE> in class <CODE><A HREF="../../../../../org/apache/poi/hslf/model/Sheet.html" title="class in org.apache.poi.hslf.model">Sheet</A></CODE></DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getSlideNumber()"><!-- --></A><H3>
+getSlideNumber</H3>
+<PRE>
+public int <B>getSlideNumber</B>()</PRE>
+<DL>
+<DD>Returns the (public facing) page number of this slide
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getSlideRecord()"><!-- --></A><H3>
+getSlideRecord</H3>
+<PRE>
+public <A HREF="../../../../../org/apache/poi/hslf/record/Slide.html" title="class in org.apache.poi.hslf.record">Slide</A> <B>getSlideRecord</B>()</PRE>
+<DL>
+<DD>Returns the underlying slide record
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getNotesSheet()"><!-- --></A><H3>
+getNotesSheet</H3>
+<PRE>
+public <A HREF="../../../../../org/apache/poi/hslf/model/Notes.html" title="class in org.apache.poi.hslf.model">Notes</A> <B>getNotesSheet</B>()</PRE>
+<DL>
+<DD>Returns the Notes Sheet for this slide, or null if there isn't one
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getSlideAtomsSet()"><!-- --></A><H3>
+getSlideAtomsSet</H3>
+<PRE>
+protected <A HREF="../../../../../org/apache/poi/hslf/record/SlideListWithText.SlideAtomsSet.html" title="class in org.apache.poi.hslf.record">SlideListWithText.SlideAtomsSet</A> <B>getSlideAtomsSet</B>()</PRE>
+<DL>
+<DD><DL>
+
+<DT><B>Returns:</B><DD>set of records inside <code>SlideListWithtext</code> container
+  which hold text data for this slide (typically for placeholders).</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getMasterSheet()"><!-- --></A><H3>
+getMasterSheet</H3>
+<PRE>
+public <A HREF="../../../../../org/apache/poi/hslf/model/MasterSheet.html" title="class in org.apache.poi.hslf.model">MasterSheet</A> <B>getMasterSheet</B>()</PRE>
+<DL>
+<DD>Returns master sheet associated with this slide.
+ It can be either SlideMaster or TitleMaster objects.
+<P>
+<DD><DL>
+<DT><B>Specified by:</B><DD><CODE><A HREF="../../../../../org/apache/poi/hslf/model/Sheet.html#getMasterSheet()">getMasterSheet</A></CODE> in class <CODE><A HREF="../../../../../org/apache/poi/hslf/model/Sheet.html" title="class in org.apache.poi.hslf.model">Sheet</A></CODE></DL>
+</DD>
+<DD><DL>
+
+<DT><B>Returns:</B><DD>the master sheet associated with this slide.</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setMasterSheet(org.apache.poi.hslf.model.MasterSheet)"><!-- --></A><H3>
+setMasterSheet</H3>
+<PRE>
+public void <B>setMasterSheet</B>(<A HREF="../../../../../org/apache/poi/hslf/model/MasterSheet.html" title="class in org.apache.poi.hslf.model">MasterSheet</A>&nbsp;master)</PRE>
+<DL>
+<DD>Change Master of this slide.
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setFollowMasterBackground(boolean)"><!-- --></A><H3>
+setFollowMasterBackground</H3>
+<PRE>
+public void <B>setFollowMasterBackground</B>(boolean&nbsp;flag)</PRE>
+<DL>
+<DD>Sets whether this slide follows master background
+<P>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>flag</CODE> - <code>true</code> if the slide follows master,
+ <code>false</code> otherwise</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getFollowMasterBackground()"><!-- --></A><H3>
+getFollowMasterBackground</H3>
+<PRE>
+public boolean <B>getFollowMasterBackground</B>()</PRE>
+<DL>
+<DD>Whether this slide follows master sheet background
+<P>
+<DD><DL>
+
+<DT><B>Returns:</B><DD><code>true</code> if the slide follows master background,
+ <code>false</code> otherwise</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setFollowMasterObjects(boolean)"><!-- --></A><H3>
+setFollowMasterObjects</H3>
+<PRE>
+public void <B>setFollowMasterObjects</B>(boolean&nbsp;flag)</PRE>
+<DL>
+<DD>Sets whether this slide draws master sheet objects
+<P>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>flag</CODE> - <code>true</code> if the slide draws master sheet objects,
+ <code>false</code> otherwise</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getFollowMasterScheme()"><!-- --></A><H3>
+getFollowMasterScheme</H3>
+<PRE>
+public boolean <B>getFollowMasterScheme</B>()</PRE>
+<DL>
+<DD>Whether this slide follows master color scheme
+<P>
+<DD><DL>
+
+<DT><B>Returns:</B><DD><code>true</code> if the slide follows master color scheme,
+ <code>false</code> otherwise</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setFollowMasterScheme(boolean)"><!-- --></A><H3>
+setFollowMasterScheme</H3>
+<PRE>
+public void <B>setFollowMasterScheme</B>(boolean&nbsp;flag)</PRE>
+<DL>
+<DD>Sets whether this slide draws master color scheme
+<P>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>flag</CODE> - <code>true</code> if the slide draws master color scheme,
+ <code>false</code> otherwise</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getFollowMasterObjects()"><!-- --></A><H3>
+getFollowMasterObjects</H3>
+<PRE>
+public boolean <B>getFollowMasterObjects</B>()</PRE>
+<DL>
+<DD>Whether this slide draws master sheet objects
+<P>
+<DD><DL>
+
+<DT><B>Returns:</B><DD><code>true</code> if the slide draws master sheet objects,
+ <code>false</code> otherwise</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getBackground()"><!-- --></A><H3>
+getBackground</H3>
+<PRE>
+public <A HREF="../../../../../org/apache/poi/hslf/model/Background.html" title="class in org.apache.poi.hslf.model">Background</A> <B>getBackground</B>()</PRE>
+<DL>
+<DD>Background for this slide.
+<P>
+<DD><DL>
+<DT><B>Overrides:</B><DD><CODE><A HREF="../../../../../org/apache/poi/hslf/model/Sheet.html#getBackground()">getBackground</A></CODE> in class <CODE><A HREF="../../../../../org/apache/poi/hslf/model/Sheet.html" title="class in org.apache.poi.hslf.model">Sheet</A></CODE></DL>
+</DD>
+<DD><DL>
+
+<DT><B>Returns:</B><DD>the background shape for this sheet.</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getColorScheme()"><!-- --></A><H3>
+getColorScheme</H3>
+<PRE>
+public <A HREF="../../../../../org/apache/poi/hslf/record/ColorSchemeAtom.html" title="class in org.apache.poi.hslf.record">ColorSchemeAtom</A> <B>getColorScheme</B>()</PRE>
+<DL>
+<DD>Color scheme for this slide.
+<P>
+<DD><DL>
+<DT><B>Overrides:</B><DD><CODE><A HREF="../../../../../org/apache/poi/hslf/model/Sheet.html#getColorScheme()">getColorScheme</A></CODE> in class <CODE><A HREF="../../../../../org/apache/poi/hslf/model/Sheet.html" title="class in org.apache.poi.hslf.model">Sheet</A></CODE></DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getComments()"><!-- --></A><H3>
+getComments</H3>
+<PRE>
+public <A HREF="../../../../../org/apache/poi/hslf/model/Comment.html" title="class in org.apache.poi.hslf.model">Comment</A>[] <B>getComments</B>()</PRE>
+<DL>
+<DD>Get the comment(s) for this slide.
+ Note - for now, only works on PPT 2000 and
+  PPT 2003 files. Doesn't work for PPT 97
+  ones, as they do their comments oddly.
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="draw(java.awt.Graphics2D)"><!-- --></A><H3>
+draw</H3>
+<PRE>
+public void <B>draw</B>(java.awt.Graphics2D&nbsp;graphics)</PRE>
+<DL>
+<DD><DL>
+<DT><B>Overrides:</B><DD><CODE><A HREF="../../../../../org/apache/poi/hslf/model/Sheet.html#draw(java.awt.Graphics2D)">draw</A></CODE> in class <CODE><A HREF="../../../../../org/apache/poi/hslf/model/Sheet.html" title="class in org.apache.poi.hslf.model">Sheet</A></CODE></DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getHeadersFooters()"><!-- --></A><H3>
+getHeadersFooters</H3>
+<PRE>
+public <A HREF="../../../../../org/apache/poi/hslf/model/HeadersFooters.html" title="class in org.apache.poi.hslf.model">HeadersFooters</A> <B>getHeadersFooters</B>()</PRE>
+<DL>
+<DD>Header / Footer settings for this slide.
+<P>
+<DD><DL>
+
+<DT><B>Returns:</B><DD>Header / Footer settings for this slide</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="onAddTextShape(org.apache.poi.hslf.model.TextShape)"><!-- --></A><H3>
+onAddTextShape</H3>
+<PRE>
+protected void <B>onAddTextShape</B>(<A HREF="../../../../../org/apache/poi/hslf/model/TextShape.html" title="class in org.apache.poi.hslf.model">TextShape</A>&nbsp;shape)</PRE>
+<DL>
+<DD><B>Description copied from class: <CODE><A HREF="../../../../../org/apache/poi/hslf/model/Sheet.html#onAddTextShape(org.apache.poi.hslf.model.TextShape)">Sheet</A></CODE></B></DD>
+<DD>Subclasses should call this method and update the array of text runs
+ when a text shape is added
+<P>
+<DD><DL>
+<DT><B>Overrides:</B><DD><CODE><A HREF="../../../../../org/apache/poi/hslf/model/Sheet.html#onAddTextShape(org.apache.poi.hslf.model.TextShape)">onAddTextShape</A></CODE> in class <CODE><A HREF="../../../../../org/apache/poi/hslf/model/Sheet.html" title="class in org.apache.poi.hslf.model">Sheet</A></CODE></DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getNumberedListInfo()"><!-- --></A><H3>
+getNumberedListInfo</H3>
+<PRE>
+public <A HREF="../../../../../org/apache/poi/hslf/record/StyleTextProp9Atom.html" title="class in org.apache.poi.hslf.record">StyleTextProp9Atom</A>[] <B>getNumberedListInfo</B>()</PRE>
+<DL>
+<DD>This will return an atom per TextBox, so if the page has two text boxes the method should return two atoms.
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getTextboxWrappers()"><!-- --></A><H3>
+getTextboxWrappers</H3>
+<PRE>
+public <A HREF="../../../../../org/apache/poi/hslf/record/EscherTextboxWrapper.html" title="class in org.apache.poi.hslf.record">EscherTextboxWrapper</A>[] <B>getTextboxWrappers</B>()</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setHidden(boolean)"><!-- --></A><H3>
+setHidden</H3>
+<PRE>
+public void <B>setHidden</B>(boolean&nbsp;hidden)</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getHidden()"><!-- --></A><H3>
+getHidden</H3>
+<PRE>
+public boolean <B>getHidden</B>()</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<!-- ========= END OF CLASS DATA ========= -->
+<HR>
+
+
+<!-- ======= START OF BOTTOM NAVBAR ====== -->
+<A NAME="navbar_bottom"><!-- --></A>
+<A HREF="#skip-navbar_bottom" title="Skip navigation links"></A>
+<TABLE BORDER="0" WIDTH="100%" CELLPADDING="1" CELLSPACING="0" SUMMARY="">
+<TR>
+<TD COLSPAN=2 BGCOLOR="#EEEEFF" CLASS="NavBarCell1">
+<A NAME="navbar_bottom_firstrow"><!-- --></A>
+<TABLE BORDER="0" CELLPADDING="0" CELLSPACING="3" SUMMARY="">
+  <TR ALIGN="center" VALIGN="top">
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../overview-summary.html"><FONT CLASS="NavBarFont1"><B>Overview</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="package-summary.html"><FONT CLASS="NavBarFont1"><B>Package</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#FFFFFF" CLASS="NavBarCell1Rev"> &nbsp;<FONT CLASS="NavBarFont1Rev"><B>Class</B></FONT>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="class-use/Slide.html"><FONT CLASS="NavBarFont1"><B>Use</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="package-tree.html"><FONT CLASS="NavBarFont1"><B>Tree</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../deprecated-list.html"><FONT CLASS="NavBarFont1"><B>Deprecated</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../index-all.html"><FONT CLASS="NavBarFont1"><B>Index</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../help-doc.html"><FONT CLASS="NavBarFont1"><B>Help</B></FONT></A>&nbsp;</TD>
+  </TR>
+</TABLE>
+</TD>
+<TD ALIGN="right" VALIGN="top" ROWSPAN=3><EM>
+</EM>
+</TD>
+</TR>
+
+<TR>
+<TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
+&nbsp;<A HREF="../../../../../org/apache/poi/hslf/model/SimpleShape.html" title="class in org.apache.poi.hslf.model"><B>PREV CLASS</B></A>&nbsp;
+&nbsp;<A HREF="../../../../../org/apache/poi/hslf/model/SlideMaster.html" title="class in org.apache.poi.hslf.model"><B>NEXT CLASS</B></A></FONT></TD>
+<TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
+  <A HREF="../../../../../index.html?org/apache/poi/hslf/model/Slide.html" target="_top"><B>FRAMES</B></A>  &nbsp;
+&nbsp;<A HREF="Slide.html" target="_top"><B>NO FRAMES</B></A>  &nbsp;
+&nbsp;<SCRIPT type="text/javascript">
+  <!--
+  if(window==top) {
+    document.writeln('<A HREF="../../../../../allclasses-noframe.html"><B>All Classes</B></A>');
+  }
+  //-->
+</SCRIPT>
+<NOSCRIPT>
+  <A HREF="../../../../../allclasses-noframe.html"><B>All Classes</B></A>
+</NOSCRIPT>
+
+
+</FONT></TD>
+</TR>
+<TR>
+<TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
+  SUMMARY:&nbsp;NESTED&nbsp;|&nbsp;FIELD&nbsp;|&nbsp;<A HREF="#constructor_summary">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_summary">METHOD</A></FONT></TD>
+<TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
+DETAIL:&nbsp;FIELD&nbsp;|&nbsp;<A HREF="#constructor_detail">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_detail">METHOD</A></FONT></TD>
+</TR>
+</TABLE>
+<A NAME="skip-navbar_bottom"></A>
+<!-- ======== END OF BOTTOM NAVBAR ======= -->
+
+<HR>
+
+                <i>Copyright 2014 The Apache Software Foundation or
+        its licensors, as applicable.</i>
+            
+</BODY>
+</HTML>

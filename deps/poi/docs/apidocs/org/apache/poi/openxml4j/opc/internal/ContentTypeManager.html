@@ -1,0 +1,592 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!--NewPage-->
+<HTML>
+<HEAD>
+<TITLE>
+ContentTypeManager (POI API Documentation)
+</TITLE>
+
+<META NAME="keywords" CONTENT="org.apache.poi.openxml4j.opc.internal.ContentTypeManager class">
+
+<LINK REL ="stylesheet" TYPE="text/css" HREF="../../../../../../stylesheet.css" TITLE="Style">
+
+<SCRIPT type="text/javascript">
+function windowTitle()
+{
+    parent.document.title="ContentTypeManager (POI API Documentation)";
+}
+</SCRIPT>
+<NOSCRIPT>
+</NOSCRIPT>
+
+</HEAD>
+
+<BODY BGCOLOR="white" onload="windowTitle();">
+
+
+<!-- ========= START OF TOP NAVBAR ======= -->
+<A NAME="navbar_top"><!-- --></A>
+<A HREF="#skip-navbar_top" title="Skip navigation links"></A>
+<TABLE BORDER="0" WIDTH="100%" CELLPADDING="1" CELLSPACING="0" SUMMARY="">
+<TR>
+<TD COLSPAN=2 BGCOLOR="#EEEEFF" CLASS="NavBarCell1">
+<A NAME="navbar_top_firstrow"><!-- --></A>
+<TABLE BORDER="0" CELLPADDING="0" CELLSPACING="3" SUMMARY="">
+  <TR ALIGN="center" VALIGN="top">
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../../overview-summary.html"><FONT CLASS="NavBarFont1"><B>Overview</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="package-summary.html"><FONT CLASS="NavBarFont1"><B>Package</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#FFFFFF" CLASS="NavBarCell1Rev"> &nbsp;<FONT CLASS="NavBarFont1Rev"><B>Class</B></FONT>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="class-use/ContentTypeManager.html"><FONT CLASS="NavBarFont1"><B>Use</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="package-tree.html"><FONT CLASS="NavBarFont1"><B>Tree</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../../deprecated-list.html"><FONT CLASS="NavBarFont1"><B>Deprecated</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../../index-all.html"><FONT CLASS="NavBarFont1"><B>Index</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../../help-doc.html"><FONT CLASS="NavBarFont1"><B>Help</B></FONT></A>&nbsp;</TD>
+  </TR>
+</TABLE>
+</TD>
+<TD ALIGN="right" VALIGN="top" ROWSPAN=3><EM>
+</EM>
+</TD>
+</TR>
+
+<TR>
+<TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
+&nbsp;<A HREF="../../../../../../org/apache/poi/openxml4j/opc/internal/ContentType.html" title="class in org.apache.poi.openxml4j.opc.internal"><B>PREV CLASS</B></A>&nbsp;
+&nbsp;<A HREF="../../../../../../org/apache/poi/openxml4j/opc/internal/FileHelper.html" title="class in org.apache.poi.openxml4j.opc.internal"><B>NEXT CLASS</B></A></FONT></TD>
+<TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
+  <A HREF="../../../../../../index.html?org/apache/poi/openxml4j/opc/internal/ContentTypeManager.html" target="_top"><B>FRAMES</B></A>  &nbsp;
+&nbsp;<A HREF="ContentTypeManager.html" target="_top"><B>NO FRAMES</B></A>  &nbsp;
+&nbsp;<SCRIPT type="text/javascript">
+  <!--
+  if(window==top) {
+    document.writeln('<A HREF="../../../../../../allclasses-noframe.html"><B>All Classes</B></A>');
+  }
+  //-->
+</SCRIPT>
+<NOSCRIPT>
+  <A HREF="../../../../../../allclasses-noframe.html"><B>All Classes</B></A>
+</NOSCRIPT>
+
+
+</FONT></TD>
+</TR>
+<TR>
+<TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
+  SUMMARY:&nbsp;NESTED&nbsp;|&nbsp;<A HREF="#field_summary">FIELD</A>&nbsp;|&nbsp;<A HREF="#constructor_summary">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_summary">METHOD</A></FONT></TD>
+<TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
+DETAIL:&nbsp;<A HREF="#field_detail">FIELD</A>&nbsp;|&nbsp;<A HREF="#constructor_detail">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_detail">METHOD</A></FONT></TD>
+</TR>
+</TABLE>
+<A NAME="skip-navbar_top"></A>
+<!-- ========= END OF TOP NAVBAR ========= -->
+
+<HR>
+<!-- ======== START OF CLASS DATA ======== -->
+<H2>
+<FONT SIZE="-1">
+org.apache.poi.openxml4j.opc.internal</FONT>
+<BR>
+Class ContentTypeManager</H2>
+<PRE>
+java.lang.Object
+  <IMG SRC="../../../../../../resources/inherit.gif" ALT="extended by "><B>org.apache.poi.openxml4j.opc.internal.ContentTypeManager</B>
+</PRE>
+<DL>
+<DT><B>Direct Known Subclasses:</B> <DD><A HREF="../../../../../../org/apache/poi/openxml4j/opc/internal/ZipContentTypeManager.html" title="class in org.apache.poi.openxml4j.opc.internal">ZipContentTypeManager</A></DD>
+</DL>
+<HR>
+<DL>
+<DT><PRE>public abstract class <B>ContentTypeManager</B><DT>extends java.lang.Object</DL>
+</PRE>
+
+<P>
+Manage package content types ([Content_Types].xml part).
+<P>
+
+<P>
+<DL>
+<DT><B>Author:</B></DT>
+  <DD>Julien Chable</DD>
+</DL>
+<HR>
+
+<P>
+<!-- =========== FIELD SUMMARY =========== -->
+
+<A NAME="field_summary"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+<B>Field Summary</B></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>protected &nbsp;<A HREF="../../../../../../org/apache/poi/openxml4j/opc/OPCPackage.html" title="class in org.apache.poi.openxml4j.opc">OPCPackage</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../org/apache/poi/openxml4j/opc/internal/ContentTypeManager.html#container">container</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Reference to the package using this content type manager.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;java.lang.String</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../org/apache/poi/openxml4j/opc/internal/ContentTypeManager.html#CONTENT_TYPES_PART_NAME">CONTENT_TYPES_PART_NAME</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Content type part name.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;java.lang.String</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../org/apache/poi/openxml4j/opc/internal/ContentTypeManager.html#TYPES_NAMESPACE_URI">TYPES_NAMESPACE_URI</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Content type namespace</TD>
+</TR>
+</TABLE>
+&nbsp;
+<!-- ======== CONSTRUCTOR SUMMARY ======== -->
+
+<A NAME="constructor_summary"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+<B>Constructor Summary</B></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><B><A HREF="../../../../../../org/apache/poi/openxml4j/opc/internal/ContentTypeManager.html#ContentTypeManager(java.io.InputStream, org.apache.poi.openxml4j.opc.OPCPackage)">ContentTypeManager</A></B>(java.io.InputStream&nbsp;in,
+                   <A HREF="../../../../../../org/apache/poi/openxml4j/opc/OPCPackage.html" title="class in org.apache.poi.openxml4j.opc">OPCPackage</A>&nbsp;pkg)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Constructor.</TD>
+</TR>
+</TABLE>
+&nbsp;
+<!-- ========== METHOD SUMMARY =========== -->
+
+<A NAME="method_summary"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+<B>Method Summary</B></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../org/apache/poi/openxml4j/opc/internal/ContentTypeManager.html#addContentType(org.apache.poi.openxml4j.opc.PackagePartName, java.lang.String)">addContentType</A></B>(<A HREF="../../../../../../org/apache/poi/openxml4j/opc/PackagePartName.html" title="class in org.apache.poi.openxml4j.opc">PackagePartName</A>&nbsp;partName,
+               java.lang.String&nbsp;contentType)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Build association extention-> content type (will be stored in
+ [Content_Types].xml) for example ContentType="image/png" Extension="png"</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../org/apache/poi/openxml4j/opc/internal/ContentTypeManager.html#clearAll()">clearAll</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Clear all content types.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../org/apache/poi/openxml4j/opc/internal/ContentTypeManager.html#clearOverrideContentTypes()">clearOverrideContentTypes</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Clear all override content types.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;java.lang.String</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../org/apache/poi/openxml4j/opc/internal/ContentTypeManager.html#getContentType(org.apache.poi.openxml4j.opc.PackagePartName)">getContentType</A></B>(<A HREF="../../../../../../org/apache/poi/openxml4j/opc/PackagePartName.html" title="class in org.apache.poi.openxml4j.opc">PackagePartName</A>&nbsp;partName)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Get the content type for the specified part, if any.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../org/apache/poi/openxml4j/opc/internal/ContentTypeManager.html#isContentTypeRegister(java.lang.String)">isContentTypeRegister</A></B>(java.lang.String&nbsp;contentType)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Check if the specified content type is already register.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../org/apache/poi/openxml4j/opc/internal/ContentTypeManager.html#removeContentType(org.apache.poi.openxml4j.opc.PackagePartName)">removeContentType</A></B>(<A HREF="../../../../../../org/apache/poi/openxml4j/opc/PackagePartName.html" title="class in org.apache.poi.openxml4j.opc">PackagePartName</A>&nbsp;partName)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+ Delete a content type based on the specified part name.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../org/apache/poi/openxml4j/opc/internal/ContentTypeManager.html#save(java.io.OutputStream)">save</A></B>(java.io.OutputStream&nbsp;outStream)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Save the contents type part.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>abstract &nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../org/apache/poi/openxml4j/opc/internal/ContentTypeManager.html#saveImpl(org.dom4j.Document, java.io.OutputStream)">saveImpl</A></B>(org.dom4j.Document&nbsp;content,
+         java.io.OutputStream&nbsp;out)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Specific implementation of the save method.</TD>
+</TR>
+</TABLE>
+&nbsp;<A NAME="methods_inherited_from_class_java.lang.Object"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#EEEEFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left"><B>Methods inherited from class java.lang.Object</B></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE>clone, equals, finalize, getClass, hashCode, notify, notifyAll, toString, wait, wait, wait</CODE></TD>
+</TR>
+</TABLE>
+&nbsp;
+<P>
+
+<!-- ============ FIELD DETAIL =========== -->
+
+<A NAME="field_detail"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="1"><FONT SIZE="+2">
+<B>Field Detail</B></FONT></TH>
+</TR>
+</TABLE>
+
+<A NAME="CONTENT_TYPES_PART_NAME"><!-- --></A><H3>
+CONTENT_TYPES_PART_NAME</H3>
+<PRE>
+public static final java.lang.String <B>CONTENT_TYPES_PART_NAME</B></PRE>
+<DL>
+<DD>Content type part name.
+<P>
+<DL>
+<DT><B>See Also:</B><DD><A HREF="../../../../../../constant-values.html#org.apache.poi.openxml4j.opc.internal.ContentTypeManager.CONTENT_TYPES_PART_NAME">Constant Field Values</A></DL>
+</DL>
+<HR>
+
+<A NAME="TYPES_NAMESPACE_URI"><!-- --></A><H3>
+TYPES_NAMESPACE_URI</H3>
+<PRE>
+public static final java.lang.String <B>TYPES_NAMESPACE_URI</B></PRE>
+<DL>
+<DD>Content type namespace
+<P>
+<DL>
+<DT><B>See Also:</B><DD><A HREF="../../../../../../constant-values.html#org.apache.poi.openxml4j.opc.internal.ContentTypeManager.TYPES_NAMESPACE_URI">Constant Field Values</A></DL>
+</DL>
+<HR>
+
+<A NAME="container"><!-- --></A><H3>
+container</H3>
+<PRE>
+protected <A HREF="../../../../../../org/apache/poi/openxml4j/opc/OPCPackage.html" title="class in org.apache.poi.openxml4j.opc">OPCPackage</A> <B>container</B></PRE>
+<DL>
+<DD>Reference to the package using this content type manager.
+<P>
+<DL>
+</DL>
+</DL>
+
+<!-- ========= CONSTRUCTOR DETAIL ======== -->
+
+<A NAME="constructor_detail"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="1"><FONT SIZE="+2">
+<B>Constructor Detail</B></FONT></TH>
+</TR>
+</TABLE>
+
+<A NAME="ContentTypeManager(java.io.InputStream, org.apache.poi.openxml4j.opc.OPCPackage)"><!-- --></A><H3>
+ContentTypeManager</H3>
+<PRE>
+public <B>ContentTypeManager</B>(java.io.InputStream&nbsp;in,
+                          <A HREF="../../../../../../org/apache/poi/openxml4j/opc/OPCPackage.html" title="class in org.apache.poi.openxml4j.opc">OPCPackage</A>&nbsp;pkg)
+                   throws <A HREF="../../../../../../org/apache/poi/openxml4j/exceptions/InvalidFormatException.html" title="class in org.apache.poi.openxml4j.exceptions">InvalidFormatException</A></PRE>
+<DL>
+<DD>Constructor. Parses the content of the specified input stream.
+<P>
+<DL>
+<DT><B>Parameters:</B><DD><CODE>in</CODE> - If different of <i>null</i> then the content types part is
+            retrieve and parse.
+<DT><B>Throws:</B>
+<DD><CODE><A HREF="../../../../../../org/apache/poi/openxml4j/exceptions/InvalidFormatException.html" title="class in org.apache.poi.openxml4j.exceptions">InvalidFormatException</A></CODE> - If the content types part content is not valid.</DL>
+</DL>
+
+<!-- ============ METHOD DETAIL ========== -->
+
+<A NAME="method_detail"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="1"><FONT SIZE="+2">
+<B>Method Detail</B></FONT></TH>
+</TR>
+</TABLE>
+
+<A NAME="addContentType(org.apache.poi.openxml4j.opc.PackagePartName, java.lang.String)"><!-- --></A><H3>
+addContentType</H3>
+<PRE>
+public void <B>addContentType</B>(<A HREF="../../../../../../org/apache/poi/openxml4j/opc/PackagePartName.html" title="class in org.apache.poi.openxml4j.opc">PackagePartName</A>&nbsp;partName,
+                           java.lang.String&nbsp;contentType)</PRE>
+<DL>
+<DD>Build association extention-> content type (will be stored in
+ [Content_Types].xml) for example ContentType="image/png" Extension="png"
+ <p>
+ [M2.8]: When adding a new part to a package, the package implementer
+ shall ensure that a content type for that part is specified in the
+ Content Types stream; the package implementer shall perform the steps
+ described in &#167;9.1.2.3:
+ </p><p>
+ 1. Get the extension from the part name by taking the substring to the
+ right of the rightmost occurrence of the dot character (.) from the
+ rightmost segment.
+ </p><p>
+ 2. If a part name has no extension, a corresponding Override element
+ shall be added to the Content Types stream.
+ </p><p>
+ 3. Compare the resulting extension with the values specified for the
+ Extension attributes of the Default elements in the Content Types stream.
+ The comparison shall be case-insensitive ASCII.
+ </p><p>
+ 4. If there is a Default element with a matching Extension attribute,
+ then the content type of the new part shall be compared with the value of
+ the ContentType attribute. The comparison might be case-sensitive and
+ include every character regardless of the role it plays in the
+ content-type grammar of RFC 2616, or it might follow the grammar of RFC
+ 2616.
+ </p><p>
+ a. If the content types match, no further action is required.
+ </p><p>
+ b. If the content types do not match, a new Override element shall be
+ added to the Content Types stream. .
+ </p><p>
+ 5. If there is no Default element with a matching Extension attribute, a
+ new Default element or Override element shall be added to the Content
+ Types stream.
+ </p>
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="removeContentType(org.apache.poi.openxml4j.opc.PackagePartName)"><!-- --></A><H3>
+removeContentType</H3>
+<PRE>
+public void <B>removeContentType</B>(<A HREF="../../../../../../org/apache/poi/openxml4j/opc/PackagePartName.html" title="class in org.apache.poi.openxml4j.opc">PackagePartName</A>&nbsp;partName)
+                       throws <A HREF="../../../../../../org/apache/poi/openxml4j/exceptions/InvalidOperationException.html" title="class in org.apache.poi.openxml4j.exceptions">InvalidOperationException</A></PRE>
+<DL>
+<DD><p>
+ Delete a content type based on the specified part name. If the specified
+ part name is register with an override content type, then this content
+ type is remove, else the content type is remove in the default content
+ type list if it exists and if no part is associated with it yet.
+ </p><p>
+ Check rule M2.4: The package implementer shall require that the Content
+ Types stream contain one of the following for every part in the package:
+ One matching Default element One matching Override element Both a
+ matching Default element and a matching Override element, in which case
+ the Override element takes precedence.
+ </p>
+<P>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>partName</CODE> - The part URI associated with the override content type to
+            delete.
+<DT><B>Throws:</B>
+<DD><CODE><A HREF="../../../../../../org/apache/poi/openxml4j/exceptions/InvalidOperationException.html" title="class in org.apache.poi.openxml4j.exceptions">InvalidOperationException</A></CODE> - Throws if</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="isContentTypeRegister(java.lang.String)"><!-- --></A><H3>
+isContentTypeRegister</H3>
+<PRE>
+public boolean <B>isContentTypeRegister</B>(java.lang.String&nbsp;contentType)</PRE>
+<DL>
+<DD>Check if the specified content type is already register.
+<P>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>contentType</CODE> - The content type to check.
+<DT><B>Returns:</B><DD><code>true</code> if the specified content type is already
+         register, then <code>false</code>.</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getContentType(org.apache.poi.openxml4j.opc.PackagePartName)"><!-- --></A><H3>
+getContentType</H3>
+<PRE>
+public java.lang.String <B>getContentType</B>(<A HREF="../../../../../../org/apache/poi/openxml4j/opc/PackagePartName.html" title="class in org.apache.poi.openxml4j.opc">PackagePartName</A>&nbsp;partName)</PRE>
+<DL>
+<DD>Get the content type for the specified part, if any.
+ <p>
+ Rule [M2.9]: To get the content type of a part, the package implementer
+ shall perform the steps described in &#167;9.1.2.4:
+ </p><p>
+ 1. Compare the part name with the values specified for the PartName
+ attribute of the Override elements. The comparison shall be
+ case-insensitive ASCII.
+ </p><p>
+ 2. If there is an Override element with a matching PartName attribute,
+ return the value of its ContentType attribute. No further action is
+ required.
+ </p><p>
+ 3. If there is no Override element with a matching PartName attribute,
+ then a. Get the extension from the part name by taking the substring to
+ the right of the rightmost occurrence of the dot character (.) from the
+ rightmost segment. b. Check the Default elements of the Content Types
+ stream, comparing the extension with the value of the Extension
+ attribute. The comparison shall be case-insensitive ASCII.
+ </p><p>
+ 4. If there is a Default element with a matching Extension attribute,
+ return the value of its ContentType attribute. No further action is
+ required.
+ </p><p>
+ 5. If neither Override nor Default elements with matching attributes are
+ found for the specified part name, the implementation shall not map this
+ part name to a part.
+ </p>
+<P>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>partName</CODE> - The URI part to check.
+<DT><B>Returns:</B><DD>The content type associated with the URI (in case of an override
+         content type) or the extension (in case of default content type),
+         else <code>null</code>.
+<DT><B>Throws:</B>
+<DD><CODE><A HREF="../../../../../../org/apache/poi/openxml4j/exceptions/OpenXML4JRuntimeException.html" title="class in org.apache.poi.openxml4j.exceptions">OpenXML4JRuntimeException</A></CODE> - Throws if the content type manager is not able to find the
+                content from an existing part.</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="clearAll()"><!-- --></A><H3>
+clearAll</H3>
+<PRE>
+public void <B>clearAll</B>()</PRE>
+<DL>
+<DD>Clear all content types.
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="clearOverrideContentTypes()"><!-- --></A><H3>
+clearOverrideContentTypes</H3>
+<PRE>
+public void <B>clearOverrideContentTypes</B>()</PRE>
+<DL>
+<DD>Clear all override content types.
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="save(java.io.OutputStream)"><!-- --></A><H3>
+save</H3>
+<PRE>
+public boolean <B>save</B>(java.io.OutputStream&nbsp;outStream)</PRE>
+<DL>
+<DD>Save the contents type part.
+<P>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>outStream</CODE> - The output stream use to save the XML content of the content
+            types part.
+<DT><B>Returns:</B><DD><b>true</b> if the operation success, else <b>false</b>.</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="saveImpl(org.dom4j.Document, java.io.OutputStream)"><!-- --></A><H3>
+saveImpl</H3>
+<PRE>
+public abstract boolean <B>saveImpl</B>(org.dom4j.Document&nbsp;content,
+                                 java.io.OutputStream&nbsp;out)</PRE>
+<DL>
+<DD>Specific implementation of the save method. Call by the save() method,
+ call before exiting.
+<P>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>out</CODE> - The output stream use to write the content type XML.</DL>
+</DD>
+</DL>
+<!-- ========= END OF CLASS DATA ========= -->
+<HR>
+
+
+<!-- ======= START OF BOTTOM NAVBAR ====== -->
+<A NAME="navbar_bottom"><!-- --></A>
+<A HREF="#skip-navbar_bottom" title="Skip navigation links"></A>
+<TABLE BORDER="0" WIDTH="100%" CELLPADDING="1" CELLSPACING="0" SUMMARY="">
+<TR>
+<TD COLSPAN=2 BGCOLOR="#EEEEFF" CLASS="NavBarCell1">
+<A NAME="navbar_bottom_firstrow"><!-- --></A>
+<TABLE BORDER="0" CELLPADDING="0" CELLSPACING="3" SUMMARY="">
+  <TR ALIGN="center" VALIGN="top">
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../../overview-summary.html"><FONT CLASS="NavBarFont1"><B>Overview</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="package-summary.html"><FONT CLASS="NavBarFont1"><B>Package</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#FFFFFF" CLASS="NavBarCell1Rev"> &nbsp;<FONT CLASS="NavBarFont1Rev"><B>Class</B></FONT>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="class-use/ContentTypeManager.html"><FONT CLASS="NavBarFont1"><B>Use</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="package-tree.html"><FONT CLASS="NavBarFont1"><B>Tree</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../../deprecated-list.html"><FONT CLASS="NavBarFont1"><B>Deprecated</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../../index-all.html"><FONT CLASS="NavBarFont1"><B>Index</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../../help-doc.html"><FONT CLASS="NavBarFont1"><B>Help</B></FONT></A>&nbsp;</TD>
+  </TR>
+</TABLE>
+</TD>
+<TD ALIGN="right" VALIGN="top" ROWSPAN=3><EM>
+</EM>
+</TD>
+</TR>
+
+<TR>
+<TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
+&nbsp;<A HREF="../../../../../../org/apache/poi/openxml4j/opc/internal/ContentType.html" title="class in org.apache.poi.openxml4j.opc.internal"><B>PREV CLASS</B></A>&nbsp;
+&nbsp;<A HREF="../../../../../../org/apache/poi/openxml4j/opc/internal/FileHelper.html" title="class in org.apache.poi.openxml4j.opc.internal"><B>NEXT CLASS</B></A></FONT></TD>
+<TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
+  <A HREF="../../../../../../index.html?org/apache/poi/openxml4j/opc/internal/ContentTypeManager.html" target="_top"><B>FRAMES</B></A>  &nbsp;
+&nbsp;<A HREF="ContentTypeManager.html" target="_top"><B>NO FRAMES</B></A>  &nbsp;
+&nbsp;<SCRIPT type="text/javascript">
+  <!--
+  if(window==top) {
+    document.writeln('<A HREF="../../../../../../allclasses-noframe.html"><B>All Classes</B></A>');
+  }
+  //-->
+</SCRIPT>
+<NOSCRIPT>
+  <A HREF="../../../../../../allclasses-noframe.html"><B>All Classes</B></A>
+</NOSCRIPT>
+
+
+</FONT></TD>
+</TR>
+<TR>
+<TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
+  SUMMARY:&nbsp;NESTED&nbsp;|&nbsp;<A HREF="#field_summary">FIELD</A>&nbsp;|&nbsp;<A HREF="#constructor_summary">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_summary">METHOD</A></FONT></TD>
+<TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
+DETAIL:&nbsp;<A HREF="#field_detail">FIELD</A>&nbsp;|&nbsp;<A HREF="#constructor_detail">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_detail">METHOD</A></FONT></TD>
+</TR>
+</TABLE>
+<A NAME="skip-navbar_bottom"></A>
+<!-- ======== END OF BOTTOM NAVBAR ======= -->
+
+<HR>
+
+                <i>Copyright 2014 The Apache Software Foundation or
+        its licensors, as applicable.</i>
+            
+</BODY>
+</HTML>

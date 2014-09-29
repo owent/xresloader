@@ -1,0 +1,1624 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!--NewPage-->
+<HTML>
+<HEAD>
+<TITLE>
+Range (POI API Documentation)
+</TITLE>
+
+<META NAME="keywords" CONTENT="org.apache.poi.hwpf.usermodel.Range class">
+
+<LINK REL ="stylesheet" TYPE="text/css" HREF="../../../../../stylesheet.css" TITLE="Style">
+
+<SCRIPT type="text/javascript">
+function windowTitle()
+{
+    parent.document.title="Range (POI API Documentation)";
+}
+</SCRIPT>
+<NOSCRIPT>
+</NOSCRIPT>
+
+</HEAD>
+
+<BODY BGCOLOR="white" onload="windowTitle();">
+
+
+<!-- ========= START OF TOP NAVBAR ======= -->
+<A NAME="navbar_top"><!-- --></A>
+<A HREF="#skip-navbar_top" title="Skip navigation links"></A>
+<TABLE BORDER="0" WIDTH="100%" CELLPADDING="1" CELLSPACING="0" SUMMARY="">
+<TR>
+<TD COLSPAN=2 BGCOLOR="#EEEEFF" CLASS="NavBarCell1">
+<A NAME="navbar_top_firstrow"><!-- --></A>
+<TABLE BORDER="0" CELLPADDING="0" CELLSPACING="3" SUMMARY="">
+  <TR ALIGN="center" VALIGN="top">
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../overview-summary.html"><FONT CLASS="NavBarFont1"><B>Overview</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="package-summary.html"><FONT CLASS="NavBarFont1"><B>Package</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#FFFFFF" CLASS="NavBarCell1Rev"> &nbsp;<FONT CLASS="NavBarFont1Rev"><B>Class</B></FONT>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="class-use/Range.html"><FONT CLASS="NavBarFont1"><B>Use</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="package-tree.html"><FONT CLASS="NavBarFont1"><B>Tree</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../deprecated-list.html"><FONT CLASS="NavBarFont1"><B>Deprecated</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../index-all.html"><FONT CLASS="NavBarFont1"><B>Index</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../help-doc.html"><FONT CLASS="NavBarFont1"><B>Help</B></FONT></A>&nbsp;</TD>
+  </TR>
+</TABLE>
+</TD>
+<TD ALIGN="right" VALIGN="top" ROWSPAN=3><EM>
+</EM>
+</TD>
+</TR>
+
+<TR>
+<TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
+&nbsp;<A HREF="../../../../../org/apache/poi/hwpf/usermodel/PictureType.html" title="enum in org.apache.poi.hwpf.usermodel"><B>PREV CLASS</B></A>&nbsp;
+&nbsp;<A HREF="../../../../../org/apache/poi/hwpf/usermodel/Section.html" title="class in org.apache.poi.hwpf.usermodel"><B>NEXT CLASS</B></A></FONT></TD>
+<TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
+  <A HREF="../../../../../index.html?org/apache/poi/hwpf/usermodel/Range.html" target="_top"><B>FRAMES</B></A>  &nbsp;
+&nbsp;<A HREF="Range.html" target="_top"><B>NO FRAMES</B></A>  &nbsp;
+&nbsp;<SCRIPT type="text/javascript">
+  <!--
+  if(window==top) {
+    document.writeln('<A HREF="../../../../../allclasses-noframe.html"><B>All Classes</B></A>');
+  }
+  //-->
+</SCRIPT>
+<NOSCRIPT>
+  <A HREF="../../../../../allclasses-noframe.html"><B>All Classes</B></A>
+</NOSCRIPT>
+
+
+</FONT></TD>
+</TR>
+<TR>
+<TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
+  SUMMARY:&nbsp;NESTED&nbsp;|&nbsp;<A HREF="#field_summary">FIELD</A>&nbsp;|&nbsp;<A HREF="#constructor_summary">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_summary">METHOD</A></FONT></TD>
+<TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
+DETAIL:&nbsp;<A HREF="#field_detail">FIELD</A>&nbsp;|&nbsp;<A HREF="#constructor_detail">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_detail">METHOD</A></FONT></TD>
+</TR>
+</TABLE>
+<A NAME="skip-navbar_top"></A>
+<!-- ========= END OF TOP NAVBAR ========= -->
+
+<HR>
+<!-- ======== START OF CLASS DATA ======== -->
+<H2>
+<FONT SIZE="-1">
+org.apache.poi.hwpf.usermodel</FONT>
+<BR>
+Class Range</H2>
+<PRE>
+java.lang.Object
+  <IMG SRC="../../../../../resources/inherit.gif" ALT="extended by "><B>org.apache.poi.hwpf.usermodel.Range</B>
+</PRE>
+<DL>
+<DT><B>Direct Known Subclasses:</B> <DD><A HREF="../../../../../org/apache/poi/hwpf/usermodel/CharacterRun.html" title="class in org.apache.poi.hwpf.usermodel">CharacterRun</A>, <A HREF="../../../../../org/apache/poi/hwpf/usermodel/DocumentPosition.html" title="class in org.apache.poi.hwpf.usermodel">DocumentPosition</A>, <A HREF="../../../../../org/apache/poi/hwpf/usermodel/Paragraph.html" title="class in org.apache.poi.hwpf.usermodel">Paragraph</A>, <A HREF="../../../../../org/apache/poi/hwpf/usermodel/Section.html" title="class in org.apache.poi.hwpf.usermodel">Section</A>, <A HREF="../../../../../org/apache/poi/hwpf/usermodel/Table.html" title="class in org.apache.poi.hwpf.usermodel">Table</A>, <A HREF="../../../../../org/apache/poi/hwpf/usermodel/TableCell.html" title="class in org.apache.poi.hwpf.usermodel">TableCell</A>, <A HREF="../../../../../org/apache/poi/hwpf/usermodel/TableRow.html" title="class in org.apache.poi.hwpf.usermodel">TableRow</A></DD>
+</DL>
+<HR>
+<DL>
+<DT><PRE>public class <B>Range</B><DT>extends java.lang.Object</DL>
+</PRE>
+
+<P>
+This class is the central class of the HWPF object model. All properties that
+ apply to a range of characters in a Word document extend this class.
+
+ It is possible to insert text and/or properties at the beginning or end of a
+ range.
+
+ Ranges are only valid if there hasn't been an insert in a prior Range since
+ the Range's creation. Once an element (text, paragraph, etc.) has been
+ inserted into a Range, subsequent Ranges become unstable.
+<P>
+
+<P>
+<DL>
+<DT><B>Author:</B></DT>
+  <DD>Ryan Ackley</DD>
+</DL>
+<HR>
+
+<P>
+<!-- =========== FIELD SUMMARY =========== -->
+
+<A NAME="field_summary"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+<B>Field Summary</B></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>protected &nbsp;java.util.List&lt;<A HREF="../../../../../org/apache/poi/hwpf/model/CHPX.html" title="class in org.apache.poi.hwpf.model">CHPX</A>&gt;</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/usermodel/Range.html#_characters">_characters</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;All CharacterRuns that belong to the document this Range belongs to.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>protected &nbsp;int</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/usermodel/Range.html#_charEnd">_charEnd</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The end index in the characterRuns list for this Range.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>protected &nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/usermodel/Range.html#_charRangeFound">_charRangeFound</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Have we loaded the characterRun indexes yet.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>protected &nbsp;int</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/usermodel/Range.html#_charStart">_charStart</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The start index in the characterRuns list for this Range</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>protected &nbsp;<A HREF="../../../../../org/apache/poi/hwpf/HWPFDocumentCore.html" title="class in org.apache.poi.hwpf">HWPFDocumentCore</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/usermodel/Range.html#_doc">_doc</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The document this range blongs to.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>protected &nbsp;int</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/usermodel/Range.html#_end">_end</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The ending character offset of this range.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>protected &nbsp;java.util.List&lt;<A HREF="../../../../../org/apache/poi/hwpf/model/PAPX.html" title="class in org.apache.poi.hwpf.model">PAPX</A>&gt;</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/usermodel/Range.html#_paragraphs">_paragraphs</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;All paragraphs that belong to the document this Range belongs to.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>protected &nbsp;int</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/usermodel/Range.html#_parEnd">_parEnd</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The end index in the paragraphs list for this Range, exclusive</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>protected &nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/usermodel/Range.html#_parRangeFound">_parRangeFound</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Have we loaded the paragraph indexes yet.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>protected &nbsp;int</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/usermodel/Range.html#_parStart">_parStart</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The start index in the paragraphs list for this Range, inclusive</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>protected &nbsp;int</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/usermodel/Range.html#_sectionEnd">_sectionEnd</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The end index in the sections list for this Range.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>protected &nbsp;java.util.List&lt;<A HREF="../../../../../org/apache/poi/hwpf/model/SEPX.html" title="class in org.apache.poi.hwpf.model">SEPX</A>&gt;</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/usermodel/Range.html#_sections">_sections</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;All sections that belong to the document this Range belongs to.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>protected &nbsp;int</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/usermodel/Range.html#_sectionStart">_sectionStart</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The start index in the sections list for this Range</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>protected &nbsp;int</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/usermodel/Range.html#_start">_start</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The starting character offset of this range.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>protected &nbsp;java.lang.StringBuilder</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/usermodel/Range.html#_text">_text</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;int</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/usermodel/Range.html#TYPE_CHARACTER">TYPE_CHARACTER</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;int</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/usermodel/Range.html#TYPE_LISTENTRY">TYPE_LISTENTRY</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;int</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/usermodel/Range.html#TYPE_PARAGRAPH">TYPE_PARAGRAPH</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;int</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/usermodel/Range.html#TYPE_SECTION">TYPE_SECTION</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;int</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/usermodel/Range.html#TYPE_TABLE">TYPE_TABLE</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;int</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/usermodel/Range.html#TYPE_TEXT">TYPE_TEXT</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;int</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/usermodel/Range.html#TYPE_UNDEFINED">TYPE_UNDEFINED</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;</TD>
+</TR>
+</TABLE>
+&nbsp;
+<!-- ======== CONSTRUCTOR SUMMARY ======== -->
+
+<A NAME="constructor_summary"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+<B>Constructor Summary</B></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/usermodel/Range.html#Range(int, int, org.apache.poi.hwpf.HWPFDocumentCore)">Range</A></B>(int&nbsp;start,
+      int&nbsp;end,
+      <A HREF="../../../../../org/apache/poi/hwpf/HWPFDocumentCore.html" title="class in org.apache.poi.hwpf">HWPFDocumentCore</A>&nbsp;doc)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Used to construct a Range from a document.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>protected </CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/usermodel/Range.html#Range(int, int, int, org.apache.poi.hwpf.usermodel.Range)">Range</A></B>(int&nbsp;startIdx,
+      int&nbsp;endIdx,
+      int&nbsp;idxType,
+      <A HREF="../../../../../org/apache/poi/hwpf/usermodel/Range.html" title="class in org.apache.poi.hwpf.usermodel">Range</A>&nbsp;parent)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>protected </CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/usermodel/Range.html#Range(int, int, org.apache.poi.hwpf.usermodel.Range)">Range</A></B>(int&nbsp;start,
+      int&nbsp;end,
+      <A HREF="../../../../../org/apache/poi/hwpf/usermodel/Range.html" title="class in org.apache.poi.hwpf.usermodel">Range</A>&nbsp;parent)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Used to create Ranges that are children of other Ranges.</TD>
+</TR>
+</TABLE>
+&nbsp;
+<!-- ========== METHOD SUMMARY =========== -->
+
+<A NAME="method_summary"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+<B>Method Summary</B></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>protected &nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/usermodel/Range.html#adjustFIB(int)">adjustFIB</A></B>(int&nbsp;adjustment)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Adjust the value of the various FIB character count fields, eg
+ <code>FIB.CCPText</code> after an insert or a delete...</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/usermodel/Range.html#delete()">delete</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../../../org/apache/poi/hwpf/usermodel/CharacterRun.html" title="class in org.apache.poi.hwpf.usermodel">CharacterRun</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/usermodel/Range.html#getCharacterRun(int)">getCharacterRun</A></B>(int&nbsp;index)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gets the character run at index.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>protected &nbsp;<A HREF="../../../../../org/apache/poi/hwpf/HWPFDocumentCore.html" title="class in org.apache.poi.hwpf">HWPFDocumentCore</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/usermodel/Range.html#getDocument()">getDocument</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;int</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/usermodel/Range.html#getEndOffset()">getEndOffset</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../../../org/apache/poi/hwpf/usermodel/Paragraph.html" title="class in org.apache.poi.hwpf.usermodel">Paragraph</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/usermodel/Range.html#getParagraph(int)">getParagraph</A></B>(int&nbsp;index)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gets the paragraph at index.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../../../org/apache/poi/hwpf/usermodel/Section.html" title="class in org.apache.poi.hwpf.usermodel">Section</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/usermodel/Range.html#getSection(int)">getSection</A></B>(int&nbsp;index)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gets the section at index.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;int</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/usermodel/Range.html#getStartOffset()">getStartOffset</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../../../org/apache/poi/hwpf/usermodel/Table.html" title="class in org.apache.poi.hwpf.usermodel">Table</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/usermodel/Range.html#getTable(org.apache.poi.hwpf.usermodel.Paragraph)">getTable</A></B>(<A HREF="../../../../../org/apache/poi/hwpf/usermodel/Paragraph.html" title="class in org.apache.poi.hwpf.usermodel">Paragraph</A>&nbsp;paragraph)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gets the table that starts with paragraph.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>protected &nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/usermodel/Range.html#initAll()">initAll</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;loads all of the list indexes.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../../../org/apache/poi/hwpf/usermodel/Paragraph.html" title="class in org.apache.poi.hwpf.usermodel">Paragraph</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/usermodel/Range.html#insertAfter(org.apache.poi.hwpf.usermodel.ParagraphProperties, int)">insertAfter</A></B>(<A HREF="../../../../../org/apache/poi/hwpf/usermodel/ParagraphProperties.html" title="class in org.apache.poi.hwpf.usermodel">ParagraphProperties</A>&nbsp;props,
+            int&nbsp;styleIndex)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;<I>Use code shall not work with <A HREF="../../../../../org/apache/poi/hwpf/usermodel/ParagraphProperties.html" title="class in org.apache.poi.hwpf.usermodel"><CODE>ParagraphProperties</CODE></A></I></TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../../../org/apache/poi/hwpf/usermodel/ListEntry.html" title="class in org.apache.poi.hwpf.usermodel">ListEntry</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/usermodel/Range.html#insertAfter(org.apache.poi.hwpf.usermodel.ParagraphProperties, int, int, int)">insertAfter</A></B>(<A HREF="../../../../../org/apache/poi/hwpf/usermodel/ParagraphProperties.html" title="class in org.apache.poi.hwpf.usermodel">ParagraphProperties</A>&nbsp;props,
+            int&nbsp;listID,
+            int&nbsp;level,
+            int&nbsp;styleIndex)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;<I>Use code shall not work with <A HREF="../../../../../org/apache/poi/hwpf/usermodel/ParagraphProperties.html" title="class in org.apache.poi.hwpf.usermodel"><CODE>ParagraphProperties</CODE></A></I></TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>protected &nbsp;<A HREF="../../../../../org/apache/poi/hwpf/usermodel/Paragraph.html" title="class in org.apache.poi.hwpf.usermodel">Paragraph</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/usermodel/Range.html#insertAfter(org.apache.poi.hwpf.usermodel.ParagraphProperties, int, java.lang.String)">insertAfter</A></B>(<A HREF="../../../../../org/apache/poi/hwpf/usermodel/ParagraphProperties.html" title="class in org.apache.poi.hwpf.usermodel">ParagraphProperties</A>&nbsp;props,
+            int&nbsp;styleIndex,
+            java.lang.String&nbsp;text)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;<I>Use code shall not work with <A HREF="../../../../../org/apache/poi/hwpf/usermodel/ParagraphProperties.html" title="class in org.apache.poi.hwpf.usermodel"><CODE>ParagraphProperties</CODE></A></I></TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../../../org/apache/poi/hwpf/usermodel/CharacterRun.html" title="class in org.apache.poi.hwpf.usermodel">CharacterRun</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/usermodel/Range.html#insertAfter(java.lang.String)">insertAfter</A></B>(java.lang.String&nbsp;text)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Inserts text onto the end of this range</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../../../org/apache/poi/hwpf/usermodel/CharacterRun.html" title="class in org.apache.poi.hwpf.usermodel">CharacterRun</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/usermodel/Range.html#insertAfter(java.lang.String, org.apache.poi.hwpf.usermodel.CharacterProperties)">insertAfter</A></B>(java.lang.String&nbsp;text,
+            <A HREF="../../../../../org/apache/poi/hwpf/usermodel/CharacterProperties.html" title="class in org.apache.poi.hwpf.usermodel">CharacterProperties</A>&nbsp;props)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;<I>User code should not work with <A HREF="../../../../../org/apache/poi/hwpf/usermodel/CharacterProperties.html" title="class in org.apache.poi.hwpf.usermodel"><CODE>CharacterProperties</CODE></A></I></TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../../../org/apache/poi/hwpf/usermodel/Paragraph.html" title="class in org.apache.poi.hwpf.usermodel">Paragraph</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/usermodel/Range.html#insertBefore(org.apache.poi.hwpf.usermodel.ParagraphProperties, int)">insertBefore</A></B>(<A HREF="../../../../../org/apache/poi/hwpf/usermodel/ParagraphProperties.html" title="class in org.apache.poi.hwpf.usermodel">ParagraphProperties</A>&nbsp;props,
+             int&nbsp;styleIndex)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;<I>Use code shall not work with <A HREF="../../../../../org/apache/poi/hwpf/usermodel/ParagraphProperties.html" title="class in org.apache.poi.hwpf.usermodel"><CODE>ParagraphProperties</CODE></A></I></TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../../../org/apache/poi/hwpf/usermodel/ListEntry.html" title="class in org.apache.poi.hwpf.usermodel">ListEntry</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/usermodel/Range.html#insertBefore(org.apache.poi.hwpf.usermodel.ParagraphProperties, int, int, int)">insertBefore</A></B>(<A HREF="../../../../../org/apache/poi/hwpf/usermodel/ParagraphProperties.html" title="class in org.apache.poi.hwpf.usermodel">ParagraphProperties</A>&nbsp;props,
+             int&nbsp;listID,
+             int&nbsp;level,
+             int&nbsp;styleIndex)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;<I>Use code shall not work with <A HREF="../../../../../org/apache/poi/hwpf/usermodel/ParagraphProperties.html" title="class in org.apache.poi.hwpf.usermodel"><CODE>ParagraphProperties</CODE></A></I></TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>protected &nbsp;<A HREF="../../../../../org/apache/poi/hwpf/usermodel/Paragraph.html" title="class in org.apache.poi.hwpf.usermodel">Paragraph</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/usermodel/Range.html#insertBefore(org.apache.poi.hwpf.usermodel.ParagraphProperties, int, java.lang.String)">insertBefore</A></B>(<A HREF="../../../../../org/apache/poi/hwpf/usermodel/ParagraphProperties.html" title="class in org.apache.poi.hwpf.usermodel">ParagraphProperties</A>&nbsp;props,
+             int&nbsp;styleIndex,
+             java.lang.String&nbsp;text)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;<I>Use code shall not work with <A HREF="../../../../../org/apache/poi/hwpf/usermodel/ParagraphProperties.html" title="class in org.apache.poi.hwpf.usermodel"><CODE>ParagraphProperties</CODE></A></I></TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../../../org/apache/poi/hwpf/usermodel/CharacterRun.html" title="class in org.apache.poi.hwpf.usermodel">CharacterRun</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/usermodel/Range.html#insertBefore(java.lang.String)">insertBefore</A></B>(java.lang.String&nbsp;text)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Inserts text into the front of this range.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../../../org/apache/poi/hwpf/usermodel/CharacterRun.html" title="class in org.apache.poi.hwpf.usermodel">CharacterRun</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/usermodel/Range.html#insertBefore(java.lang.String, org.apache.poi.hwpf.usermodel.CharacterProperties)">insertBefore</A></B>(java.lang.String&nbsp;text,
+             <A HREF="../../../../../org/apache/poi/hwpf/usermodel/CharacterProperties.html" title="class in org.apache.poi.hwpf.usermodel">CharacterProperties</A>&nbsp;props)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;<I>User code should not work with <A HREF="../../../../../org/apache/poi/hwpf/usermodel/CharacterProperties.html" title="class in org.apache.poi.hwpf.usermodel"><CODE>CharacterProperties</CODE></A></I></TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../../../org/apache/poi/hwpf/usermodel/Table.html" title="class in org.apache.poi.hwpf.usermodel">Table</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/usermodel/Range.html#insertBefore(org.apache.poi.hwpf.usermodel.TableProperties, int)">insertBefore</A></B>(<A HREF="../../../../../org/apache/poi/hwpf/usermodel/TableProperties.html" title="class in org.apache.poi.hwpf.usermodel">TableProperties</A>&nbsp;props,
+             int&nbsp;rows)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;<I>Use code shall not work with <A HREF="../../../../../org/apache/poi/hwpf/usermodel/TableProperties.html" title="class in org.apache.poi.hwpf.usermodel"><CODE>TableProperties</CODE></A>. Use
+             <A HREF="../../../../../org/apache/poi/hwpf/usermodel/Range.html#insertTableBefore(short, int)"><CODE>insertTableBefore(short, int)</CODE></A> instead</I></TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../../../org/apache/poi/hwpf/usermodel/Table.html" title="class in org.apache.poi.hwpf.usermodel">Table</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/usermodel/Range.html#insertTableBefore(short, int)">insertTableBefore</A></B>(short&nbsp;columns,
+                  int&nbsp;rows)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Inserts a simple table into the beginning of this range.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;int</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/usermodel/Range.html#numCharacterRuns()">numCharacterRuns</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;int</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/usermodel/Range.html#numParagraphs()">numParagraphs</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Used to get the number of paragraphs in a range.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;int</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/usermodel/Range.html#numSections()">numSections</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Used to get the number of sections in a range.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/usermodel/Range.html#replaceText(java.lang.String, boolean)">replaceText</A></B>(java.lang.String&nbsp;newText,
+            boolean&nbsp;addAfter)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Replace range text with new one, adding it to the range and deleting
+ original text from document</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/usermodel/Range.html#replaceText(java.lang.String, java.lang.String)">replaceText</A></B>(java.lang.String&nbsp;pPlaceHolder,
+            java.lang.String&nbsp;pValue)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Replace (all instances of) a piece of text with another...</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/usermodel/Range.html#replaceText(java.lang.String, java.lang.String, int)">replaceText</A></B>(java.lang.String&nbsp;pPlaceHolder,
+            java.lang.String&nbsp;pValue,
+            int&nbsp;pOffset)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Replace (one instance of) a piece of text with another...</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>protected &nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/usermodel/Range.html#reset()">reset</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;resets the list indexes.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/usermodel/Range.html#sanityCheck()">sanityCheck</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Method for debug purposes.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>static&nbsp;java.lang.String</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/usermodel/Range.html#stripFields(java.lang.String)">stripFields</A></B>(java.lang.String&nbsp;text)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Removes any fields (eg macros, page markers etc) from the string.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;java.lang.String</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/usermodel/Range.html#text()">text</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gets the text that this Range contains.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;java.lang.String</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/usermodel/Range.html#toString()">toString</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;int</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/usermodel/Range.html#type()">type</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hwpf/usermodel/Range.html#usesUnicode()">usesUnicode</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<B>Deprecated.</B>&nbsp;<I>Range is not linked to any text piece anymore, so to check if
+             unicode is used please access <A HREF="../../../../../org/apache/poi/hwpf/model/TextPieceTable.html" title="class in org.apache.poi.hwpf.model"><CODE>TextPieceTable</CODE></A> during
+             document load time</I></TD>
+</TR>
+</TABLE>
+&nbsp;<A NAME="methods_inherited_from_class_java.lang.Object"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#EEEEFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left"><B>Methods inherited from class java.lang.Object</B></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE>clone, equals, finalize, getClass, hashCode, notify, notifyAll, wait, wait, wait</CODE></TD>
+</TR>
+</TABLE>
+&nbsp;
+<P>
+
+<!-- ============ FIELD DETAIL =========== -->
+
+<A NAME="field_detail"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="1"><FONT SIZE="+2">
+<B>Field Detail</B></FONT></TH>
+</TR>
+</TABLE>
+
+<A NAME="TYPE_PARAGRAPH"><!-- --></A><H3>
+TYPE_PARAGRAPH</H3>
+<PRE>
+<FONT SIZE="-1">@Deprecated
+</FONT>public static final int <B>TYPE_PARAGRAPH</B></PRE>
+<DL>
+<DD><B>Deprecated.</B>&nbsp;<DL>
+<DT><B>See Also:</B><DD><A HREF="../../../../../constant-values.html#org.apache.poi.hwpf.usermodel.Range.TYPE_PARAGRAPH">Constant Field Values</A></DL>
+</DL>
+<HR>
+
+<A NAME="TYPE_CHARACTER"><!-- --></A><H3>
+TYPE_CHARACTER</H3>
+<PRE>
+<FONT SIZE="-1">@Deprecated
+</FONT>public static final int <B>TYPE_CHARACTER</B></PRE>
+<DL>
+<DD><B>Deprecated.</B>&nbsp;<DL>
+<DT><B>See Also:</B><DD><A HREF="../../../../../constant-values.html#org.apache.poi.hwpf.usermodel.Range.TYPE_CHARACTER">Constant Field Values</A></DL>
+</DL>
+<HR>
+
+<A NAME="TYPE_SECTION"><!-- --></A><H3>
+TYPE_SECTION</H3>
+<PRE>
+<FONT SIZE="-1">@Deprecated
+</FONT>public static final int <B>TYPE_SECTION</B></PRE>
+<DL>
+<DD><B>Deprecated.</B>&nbsp;<DL>
+<DT><B>See Also:</B><DD><A HREF="../../../../../constant-values.html#org.apache.poi.hwpf.usermodel.Range.TYPE_SECTION">Constant Field Values</A></DL>
+</DL>
+<HR>
+
+<A NAME="TYPE_TEXT"><!-- --></A><H3>
+TYPE_TEXT</H3>
+<PRE>
+<FONT SIZE="-1">@Deprecated
+</FONT>public static final int <B>TYPE_TEXT</B></PRE>
+<DL>
+<DD><B>Deprecated.</B>&nbsp;<DL>
+<DT><B>See Also:</B><DD><A HREF="../../../../../constant-values.html#org.apache.poi.hwpf.usermodel.Range.TYPE_TEXT">Constant Field Values</A></DL>
+</DL>
+<HR>
+
+<A NAME="TYPE_LISTENTRY"><!-- --></A><H3>
+TYPE_LISTENTRY</H3>
+<PRE>
+<FONT SIZE="-1">@Deprecated
+</FONT>public static final int <B>TYPE_LISTENTRY</B></PRE>
+<DL>
+<DD><B>Deprecated.</B>&nbsp;<DL>
+<DT><B>See Also:</B><DD><A HREF="../../../../../constant-values.html#org.apache.poi.hwpf.usermodel.Range.TYPE_LISTENTRY">Constant Field Values</A></DL>
+</DL>
+<HR>
+
+<A NAME="TYPE_TABLE"><!-- --></A><H3>
+TYPE_TABLE</H3>
+<PRE>
+<FONT SIZE="-1">@Deprecated
+</FONT>public static final int <B>TYPE_TABLE</B></PRE>
+<DL>
+<DD><B>Deprecated.</B>&nbsp;<DL>
+<DT><B>See Also:</B><DD><A HREF="../../../../../constant-values.html#org.apache.poi.hwpf.usermodel.Range.TYPE_TABLE">Constant Field Values</A></DL>
+</DL>
+<HR>
+
+<A NAME="TYPE_UNDEFINED"><!-- --></A><H3>
+TYPE_UNDEFINED</H3>
+<PRE>
+<FONT SIZE="-1">@Deprecated
+</FONT>public static final int <B>TYPE_UNDEFINED</B></PRE>
+<DL>
+<DD><B>Deprecated.</B>&nbsp;<DL>
+<DT><B>See Also:</B><DD><A HREF="../../../../../constant-values.html#org.apache.poi.hwpf.usermodel.Range.TYPE_UNDEFINED">Constant Field Values</A></DL>
+</DL>
+<HR>
+
+<A NAME="_start"><!-- --></A><H3>
+_start</H3>
+<PRE>
+protected int <B>_start</B></PRE>
+<DL>
+<DD>The starting character offset of this range.
+<P>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="_end"><!-- --></A><H3>
+_end</H3>
+<PRE>
+protected int <B>_end</B></PRE>
+<DL>
+<DD>The ending character offset of this range.
+<P>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="_doc"><!-- --></A><H3>
+_doc</H3>
+<PRE>
+protected <A HREF="../../../../../org/apache/poi/hwpf/HWPFDocumentCore.html" title="class in org.apache.poi.hwpf">HWPFDocumentCore</A> <B>_doc</B></PRE>
+<DL>
+<DD>The document this range blongs to.
+<P>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="_sections"><!-- --></A><H3>
+_sections</H3>
+<PRE>
+protected java.util.List&lt;<A HREF="../../../../../org/apache/poi/hwpf/model/SEPX.html" title="class in org.apache.poi.hwpf.model">SEPX</A>&gt; <B>_sections</B></PRE>
+<DL>
+<DD>All sections that belong to the document this Range belongs to.
+<P>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="_sectionStart"><!-- --></A><H3>
+_sectionStart</H3>
+<PRE>
+protected int <B>_sectionStart</B></PRE>
+<DL>
+<DD>The start index in the sections list for this Range
+<P>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="_sectionEnd"><!-- --></A><H3>
+_sectionEnd</H3>
+<PRE>
+protected int <B>_sectionEnd</B></PRE>
+<DL>
+<DD>The end index in the sections list for this Range.
+<P>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="_parRangeFound"><!-- --></A><H3>
+_parRangeFound</H3>
+<PRE>
+protected boolean <B>_parRangeFound</B></PRE>
+<DL>
+<DD>Have we loaded the paragraph indexes yet.
+<P>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="_paragraphs"><!-- --></A><H3>
+_paragraphs</H3>
+<PRE>
+protected java.util.List&lt;<A HREF="../../../../../org/apache/poi/hwpf/model/PAPX.html" title="class in org.apache.poi.hwpf.model">PAPX</A>&gt; <B>_paragraphs</B></PRE>
+<DL>
+<DD>All paragraphs that belong to the document this Range belongs to.
+<P>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="_parStart"><!-- --></A><H3>
+_parStart</H3>
+<PRE>
+protected int <B>_parStart</B></PRE>
+<DL>
+<DD>The start index in the paragraphs list for this Range, inclusive
+<P>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="_parEnd"><!-- --></A><H3>
+_parEnd</H3>
+<PRE>
+protected int <B>_parEnd</B></PRE>
+<DL>
+<DD>The end index in the paragraphs list for this Range, exclusive
+<P>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="_charRangeFound"><!-- --></A><H3>
+_charRangeFound</H3>
+<PRE>
+protected boolean <B>_charRangeFound</B></PRE>
+<DL>
+<DD>Have we loaded the characterRun indexes yet.
+<P>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="_characters"><!-- --></A><H3>
+_characters</H3>
+<PRE>
+protected java.util.List&lt;<A HREF="../../../../../org/apache/poi/hwpf/model/CHPX.html" title="class in org.apache.poi.hwpf.model">CHPX</A>&gt; <B>_characters</B></PRE>
+<DL>
+<DD>All CharacterRuns that belong to the document this Range belongs to.
+<P>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="_charStart"><!-- --></A><H3>
+_charStart</H3>
+<PRE>
+protected int <B>_charStart</B></PRE>
+<DL>
+<DD>The start index in the characterRuns list for this Range
+<P>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="_charEnd"><!-- --></A><H3>
+_charEnd</H3>
+<PRE>
+protected int <B>_charEnd</B></PRE>
+<DL>
+<DD>The end index in the characterRuns list for this Range.
+<P>
+<DL>
+</DL>
+</DL>
+<HR>
+
+<A NAME="_text"><!-- --></A><H3>
+_text</H3>
+<PRE>
+protected java.lang.StringBuilder <B>_text</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+
+<!-- ========= CONSTRUCTOR DETAIL ======== -->
+
+<A NAME="constructor_detail"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="1"><FONT SIZE="+2">
+<B>Constructor Detail</B></FONT></TH>
+</TR>
+</TABLE>
+
+<A NAME="Range(int, int, org.apache.poi.hwpf.HWPFDocumentCore)"><!-- --></A><H3>
+Range</H3>
+<PRE>
+public <B>Range</B>(int&nbsp;start,
+             int&nbsp;end,
+             <A HREF="../../../../../org/apache/poi/hwpf/HWPFDocumentCore.html" title="class in org.apache.poi.hwpf">HWPFDocumentCore</A>&nbsp;doc)</PRE>
+<DL>
+<DD>Used to construct a Range from a document. This is generally used to
+ create a Range that spans the whole document, or at least one whole part
+ of the document (eg main text, header, comment)
+<P>
+<DL>
+<DT><B>Parameters:</B><DD><CODE>start</CODE> - Starting character offset of the range.<DD><CODE>end</CODE> - Ending character offset of the range.<DD><CODE>doc</CODE> - The HWPFDocument the range is based on.</DL>
+</DL>
+<HR>
+
+<A NAME="Range(int, int, org.apache.poi.hwpf.usermodel.Range)"><!-- --></A><H3>
+Range</H3>
+<PRE>
+protected <B>Range</B>(int&nbsp;start,
+                int&nbsp;end,
+                <A HREF="../../../../../org/apache/poi/hwpf/usermodel/Range.html" title="class in org.apache.poi.hwpf.usermodel">Range</A>&nbsp;parent)</PRE>
+<DL>
+<DD>Used to create Ranges that are children of other Ranges.
+<P>
+<DL>
+<DT><B>Parameters:</B><DD><CODE>start</CODE> - Starting character offset of the range.<DD><CODE>end</CODE> - Ending character offset of the range.<DD><CODE>parent</CODE> - The parent this range belongs to.</DL>
+</DL>
+<HR>
+
+<A NAME="Range(int, int, int, org.apache.poi.hwpf.usermodel.Range)"><!-- --></A><H3>
+Range</H3>
+<PRE>
+<FONT SIZE="-1">@Deprecated
+</FONT>protected <B>Range</B>(int&nbsp;startIdx,
+                           int&nbsp;endIdx,
+                           int&nbsp;idxType,
+                           <A HREF="../../../../../org/apache/poi/hwpf/usermodel/Range.html" title="class in org.apache.poi.hwpf.usermodel">Range</A>&nbsp;parent)</PRE>
+<DL>
+<DD><B>Deprecated.</B>&nbsp;
+<P>
+<DD>Constructor used to build a Range from indexes in one of its internal
+ lists.
+<P>
+<DL>
+<DT><B>Parameters:</B><DD><CODE>startIdx</CODE> - The starting index in the list, inclusive<DD><CODE>endIdx</CODE> - The ending index in the list, exclusive<DD><CODE>idxType</CODE> - The list type.<DD><CODE>parent</CODE> - The parent Range this range belongs to.</DL>
+</DL>
+
+<!-- ============ METHOD DETAIL ========== -->
+
+<A NAME="method_detail"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="1"><FONT SIZE="+2">
+<B>Method Detail</B></FONT></TH>
+</TR>
+</TABLE>
+
+<A NAME="usesUnicode()"><!-- --></A><H3>
+usesUnicode</H3>
+<PRE>
+<FONT SIZE="-1">@Deprecated
+</FONT>public boolean <B>usesUnicode</B>()</PRE>
+<DL>
+<DD><B>Deprecated.</B>&nbsp;<I>Range is not linked to any text piece anymore, so to check if
+             unicode is used please access <A HREF="../../../../../org/apache/poi/hwpf/model/TextPieceTable.html" title="class in org.apache.poi.hwpf.model"><CODE>TextPieceTable</CODE></A> during
+             document load time</I>
+<P>
+<DD><DL>
+
+<DT><B>Returns:</B><DD>always return true</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="text()"><!-- --></A><H3>
+text</H3>
+<PRE>
+public java.lang.String <B>text</B>()</PRE>
+<DL>
+<DD>Gets the text that this Range contains.
+<P>
+<DD><DL>
+
+<DT><B>Returns:</B><DD>The text for this range.</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="stripFields(java.lang.String)"><!-- --></A><H3>
+stripFields</H3>
+<PRE>
+public static java.lang.String <B>stripFields</B>(java.lang.String&nbsp;text)</PRE>
+<DL>
+<DD>Removes any fields (eg macros, page markers etc) from the string.
+ Normally used to make some text suitable for showing to humans, and the
+ resultant text should not normally be saved back into the document!
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="numSections()"><!-- --></A><H3>
+numSections</H3>
+<PRE>
+public int <B>numSections</B>()</PRE>
+<DL>
+<DD>Used to get the number of sections in a range. If this range is smaller
+ than a section, it will return 1 for its containing section.
+<P>
+<DD><DL>
+
+<DT><B>Returns:</B><DD>The number of sections in this range.</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="numParagraphs()"><!-- --></A><H3>
+numParagraphs</H3>
+<PRE>
+public int <B>numParagraphs</B>()</PRE>
+<DL>
+<DD>Used to get the number of paragraphs in a range. If this range is smaller
+ than a paragraph, it will return 1 for its containing paragraph.
+<P>
+<DD><DL>
+
+<DT><B>Returns:</B><DD>The number of paragraphs in this range.</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="numCharacterRuns()"><!-- --></A><H3>
+numCharacterRuns</H3>
+<PRE>
+public int <B>numCharacterRuns</B>()</PRE>
+<DL>
+<DD><DL>
+
+<DT><B>Returns:</B><DD>The number of characterRuns in this range.</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="insertBefore(java.lang.String)"><!-- --></A><H3>
+insertBefore</H3>
+<PRE>
+public <A HREF="../../../../../org/apache/poi/hwpf/usermodel/CharacterRun.html" title="class in org.apache.poi.hwpf.usermodel">CharacterRun</A> <B>insertBefore</B>(java.lang.String&nbsp;text)</PRE>
+<DL>
+<DD>Inserts text into the front of this range.
+<P>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>text</CODE> - The text to insert
+<DT><B>Returns:</B><DD>The character run that text was inserted into.</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="insertAfter(java.lang.String)"><!-- --></A><H3>
+insertAfter</H3>
+<PRE>
+public <A HREF="../../../../../org/apache/poi/hwpf/usermodel/CharacterRun.html" title="class in org.apache.poi.hwpf.usermodel">CharacterRun</A> <B>insertAfter</B>(java.lang.String&nbsp;text)</PRE>
+<DL>
+<DD>Inserts text onto the end of this range
+<P>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>text</CODE> - The text to insert
+<DT><B>Returns:</B><DD>The character run the text was inserted into.</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="insertBefore(java.lang.String, org.apache.poi.hwpf.usermodel.CharacterProperties)"><!-- --></A><H3>
+insertBefore</H3>
+<PRE>
+<FONT SIZE="-1">@Deprecated
+</FONT>public <A HREF="../../../../../org/apache/poi/hwpf/usermodel/CharacterRun.html" title="class in org.apache.poi.hwpf.usermodel">CharacterRun</A> <B>insertBefore</B>(java.lang.String&nbsp;text,
+                                            <A HREF="../../../../../org/apache/poi/hwpf/usermodel/CharacterProperties.html" title="class in org.apache.poi.hwpf.usermodel">CharacterProperties</A>&nbsp;props)</PRE>
+<DL>
+<DD><B>Deprecated.</B>&nbsp;<I>User code should not work with <A HREF="../../../../../org/apache/poi/hwpf/usermodel/CharacterProperties.html" title="class in org.apache.poi.hwpf.usermodel"><CODE>CharacterProperties</CODE></A></I>
+<P>
+<DD>Inserts text into the front of this range and it gives that text the
+ CharacterProperties specified in props.
+<P>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>text</CODE> - The text to insert.<DD><CODE>props</CODE> - The CharacterProperties to give the text.
+<DT><B>Returns:</B><DD>A new CharacterRun that has the given text and properties and is
+         n ow a part of the document.</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="insertAfter(java.lang.String, org.apache.poi.hwpf.usermodel.CharacterProperties)"><!-- --></A><H3>
+insertAfter</H3>
+<PRE>
+<FONT SIZE="-1">@Deprecated
+</FONT>public <A HREF="../../../../../org/apache/poi/hwpf/usermodel/CharacterRun.html" title="class in org.apache.poi.hwpf.usermodel">CharacterRun</A> <B>insertAfter</B>(java.lang.String&nbsp;text,
+                                           <A HREF="../../../../../org/apache/poi/hwpf/usermodel/CharacterProperties.html" title="class in org.apache.poi.hwpf.usermodel">CharacterProperties</A>&nbsp;props)</PRE>
+<DL>
+<DD><B>Deprecated.</B>&nbsp;<I>User code should not work with <A HREF="../../../../../org/apache/poi/hwpf/usermodel/CharacterProperties.html" title="class in org.apache.poi.hwpf.usermodel"><CODE>CharacterProperties</CODE></A></I>
+<P>
+<DD>Inserts text onto the end of this range and gives that text the
+ CharacterProperties specified in props.
+<P>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>text</CODE> - The text to insert.<DD><CODE>props</CODE> - The CharacterProperties to give the text.
+<DT><B>Returns:</B><DD>A new CharacterRun that has the given text and properties and is
+         n ow a part of the document.</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="insertBefore(org.apache.poi.hwpf.usermodel.ParagraphProperties, int)"><!-- --></A><H3>
+insertBefore</H3>
+<PRE>
+<FONT SIZE="-1">@Deprecated
+</FONT>public <A HREF="../../../../../org/apache/poi/hwpf/usermodel/Paragraph.html" title="class in org.apache.poi.hwpf.usermodel">Paragraph</A> <B>insertBefore</B>(<A HREF="../../../../../org/apache/poi/hwpf/usermodel/ParagraphProperties.html" title="class in org.apache.poi.hwpf.usermodel">ParagraphProperties</A>&nbsp;props,
+                                         int&nbsp;styleIndex)</PRE>
+<DL>
+<DD><B>Deprecated.</B>&nbsp;<I>Use code shall not work with <A HREF="../../../../../org/apache/poi/hwpf/usermodel/ParagraphProperties.html" title="class in org.apache.poi.hwpf.usermodel"><CODE>ParagraphProperties</CODE></A></I>
+<P>
+<DD>Inserts and empty paragraph into the front of this range.
+<P>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>props</CODE> - The properties that the new paragraph will have.<DD><CODE>styleIndex</CODE> - The index into the stylesheet for the new paragraph.
+<DT><B>Returns:</B><DD>The newly inserted paragraph.</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="insertBefore(org.apache.poi.hwpf.usermodel.ParagraphProperties, int, java.lang.String)"><!-- --></A><H3>
+insertBefore</H3>
+<PRE>
+<FONT SIZE="-1">@Deprecated
+</FONT>protected <A HREF="../../../../../org/apache/poi/hwpf/usermodel/Paragraph.html" title="class in org.apache.poi.hwpf.usermodel">Paragraph</A> <B>insertBefore</B>(<A HREF="../../../../../org/apache/poi/hwpf/usermodel/ParagraphProperties.html" title="class in org.apache.poi.hwpf.usermodel">ParagraphProperties</A>&nbsp;props,
+                                            int&nbsp;styleIndex,
+                                            java.lang.String&nbsp;text)</PRE>
+<DL>
+<DD><B>Deprecated.</B>&nbsp;<I>Use code shall not work with <A HREF="../../../../../org/apache/poi/hwpf/usermodel/ParagraphProperties.html" title="class in org.apache.poi.hwpf.usermodel"><CODE>ParagraphProperties</CODE></A></I>
+<P>
+<DD>Inserts a paragraph into the front of this range. The paragraph will
+ contain one character run that has the default properties for the
+ paragraph's style.
+
+ It is necessary for the text to end with the character '\r'
+<P>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>props</CODE> - The paragraph's properties.<DD><CODE>styleIndex</CODE> - The index of the paragraph's style in the style sheet.<DD><CODE>text</CODE> - The text to insert.
+<DT><B>Returns:</B><DD>A newly inserted paragraph.</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="insertAfter(org.apache.poi.hwpf.usermodel.ParagraphProperties, int)"><!-- --></A><H3>
+insertAfter</H3>
+<PRE>
+<FONT SIZE="-1">@Deprecated
+</FONT>public <A HREF="../../../../../org/apache/poi/hwpf/usermodel/Paragraph.html" title="class in org.apache.poi.hwpf.usermodel">Paragraph</A> <B>insertAfter</B>(<A HREF="../../../../../org/apache/poi/hwpf/usermodel/ParagraphProperties.html" title="class in org.apache.poi.hwpf.usermodel">ParagraphProperties</A>&nbsp;props,
+                                        int&nbsp;styleIndex)</PRE>
+<DL>
+<DD><B>Deprecated.</B>&nbsp;<I>Use code shall not work with <A HREF="../../../../../org/apache/poi/hwpf/usermodel/ParagraphProperties.html" title="class in org.apache.poi.hwpf.usermodel"><CODE>ParagraphProperties</CODE></A></I>
+<P>
+<DD>Inserts and empty paragraph into the end of this range.
+<P>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>props</CODE> - The properties that the new paragraph will have.<DD><CODE>styleIndex</CODE> - The index into the stylesheet for the new paragraph.
+<DT><B>Returns:</B><DD>The newly inserted paragraph.</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="insertAfter(org.apache.poi.hwpf.usermodel.ParagraphProperties, int, java.lang.String)"><!-- --></A><H3>
+insertAfter</H3>
+<PRE>
+<FONT SIZE="-1">@Deprecated
+</FONT>protected <A HREF="../../../../../org/apache/poi/hwpf/usermodel/Paragraph.html" title="class in org.apache.poi.hwpf.usermodel">Paragraph</A> <B>insertAfter</B>(<A HREF="../../../../../org/apache/poi/hwpf/usermodel/ParagraphProperties.html" title="class in org.apache.poi.hwpf.usermodel">ParagraphProperties</A>&nbsp;props,
+                                           int&nbsp;styleIndex,
+                                           java.lang.String&nbsp;text)</PRE>
+<DL>
+<DD><B>Deprecated.</B>&nbsp;<I>Use code shall not work with <A HREF="../../../../../org/apache/poi/hwpf/usermodel/ParagraphProperties.html" title="class in org.apache.poi.hwpf.usermodel"><CODE>ParagraphProperties</CODE></A></I>
+<P>
+<DD>Inserts a paragraph into the end of this range. The paragraph will
+ contain one character run that has the default properties for the
+ paragraph's style.
+
+ It is necessary for the text to end with the character '\r'
+<P>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>props</CODE> - The paragraph's properties.<DD><CODE>styleIndex</CODE> - The index of the paragraph's style in the style sheet.<DD><CODE>text</CODE> - The text to insert.
+<DT><B>Returns:</B><DD>A newly inserted paragraph.</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="delete()"><!-- --></A><H3>
+delete</H3>
+<PRE>
+public void <B>delete</B>()</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="insertBefore(org.apache.poi.hwpf.usermodel.TableProperties, int)"><!-- --></A><H3>
+insertBefore</H3>
+<PRE>
+<FONT SIZE="-1">@Deprecated
+</FONT>public <A HREF="../../../../../org/apache/poi/hwpf/usermodel/Table.html" title="class in org.apache.poi.hwpf.usermodel">Table</A> <B>insertBefore</B>(<A HREF="../../../../../org/apache/poi/hwpf/usermodel/TableProperties.html" title="class in org.apache.poi.hwpf.usermodel">TableProperties</A>&nbsp;props,
+                                     int&nbsp;rows)</PRE>
+<DL>
+<DD><B>Deprecated.</B>&nbsp;<I>Use code shall not work with <A HREF="../../../../../org/apache/poi/hwpf/usermodel/TableProperties.html" title="class in org.apache.poi.hwpf.usermodel"><CODE>TableProperties</CODE></A>. Use
+             <A HREF="../../../../../org/apache/poi/hwpf/usermodel/Range.html#insertTableBefore(short, int)"><CODE>insertTableBefore(short, int)</CODE></A> instead</I>
+<P>
+<DD>Inserts a simple table into the beginning of this range. The number of
+ columns is determined by the TableProperties passed into this function.
+<P>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>props</CODE> - The table properties for the table.<DD><CODE>rows</CODE> - The number of rows.
+<DT><B>Returns:</B><DD>The empty Table that is now part of the document.</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="insertTableBefore(short, int)"><!-- --></A><H3>
+insertTableBefore</H3>
+<PRE>
+public <A HREF="../../../../../org/apache/poi/hwpf/usermodel/Table.html" title="class in org.apache.poi.hwpf.usermodel">Table</A> <B>insertTableBefore</B>(short&nbsp;columns,
+                               int&nbsp;rows)</PRE>
+<DL>
+<DD>Inserts a simple table into the beginning of this range.
+<P>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>columns</CODE> - The number of columns<DD><CODE>rows</CODE> - The number of rows.
+<DT><B>Returns:</B><DD>The empty Table that is now part of the document.</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="insertBefore(org.apache.poi.hwpf.usermodel.ParagraphProperties, int, int, int)"><!-- --></A><H3>
+insertBefore</H3>
+<PRE>
+<FONT SIZE="-1">@Deprecated
+</FONT>public <A HREF="../../../../../org/apache/poi/hwpf/usermodel/ListEntry.html" title="class in org.apache.poi.hwpf.usermodel">ListEntry</A> <B>insertBefore</B>(<A HREF="../../../../../org/apache/poi/hwpf/usermodel/ParagraphProperties.html" title="class in org.apache.poi.hwpf.usermodel">ParagraphProperties</A>&nbsp;props,
+                                         int&nbsp;listID,
+                                         int&nbsp;level,
+                                         int&nbsp;styleIndex)</PRE>
+<DL>
+<DD><B>Deprecated.</B>&nbsp;<I>Use code shall not work with <A HREF="../../../../../org/apache/poi/hwpf/usermodel/ParagraphProperties.html" title="class in org.apache.poi.hwpf.usermodel"><CODE>ParagraphProperties</CODE></A></I>
+<P>
+<DD>Inserts a list into the beginning of this range.
+<P>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>props</CODE> - The properties of the list entry. All list entries are
+            paragraphs.<DD><CODE>listID</CODE> - The id of the list that contains the properties.<DD><CODE>level</CODE> - The indentation level of the list.<DD><CODE>styleIndex</CODE> - The base style's index in the stylesheet.
+<DT><B>Returns:</B><DD>The empty ListEntry that is now part of the document.</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="insertAfter(org.apache.poi.hwpf.usermodel.ParagraphProperties, int, int, int)"><!-- --></A><H3>
+insertAfter</H3>
+<PRE>
+<FONT SIZE="-1">@Deprecated
+</FONT>public <A HREF="../../../../../org/apache/poi/hwpf/usermodel/ListEntry.html" title="class in org.apache.poi.hwpf.usermodel">ListEntry</A> <B>insertAfter</B>(<A HREF="../../../../../org/apache/poi/hwpf/usermodel/ParagraphProperties.html" title="class in org.apache.poi.hwpf.usermodel">ParagraphProperties</A>&nbsp;props,
+                                        int&nbsp;listID,
+                                        int&nbsp;level,
+                                        int&nbsp;styleIndex)</PRE>
+<DL>
+<DD><B>Deprecated.</B>&nbsp;<I>Use code shall not work with <A HREF="../../../../../org/apache/poi/hwpf/usermodel/ParagraphProperties.html" title="class in org.apache.poi.hwpf.usermodel"><CODE>ParagraphProperties</CODE></A></I>
+<P>
+<DD>Inserts a list into the beginning of this range.
+<P>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>props</CODE> - The properties of the list entry. All list entries are
+            paragraphs.<DD><CODE>listID</CODE> - The id of the list that contains the properties.<DD><CODE>level</CODE> - The indentation level of the list.<DD><CODE>styleIndex</CODE> - The base style's index in the stylesheet.
+<DT><B>Returns:</B><DD>The empty ListEntry that is now part of the document.</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="replaceText(java.lang.String, boolean)"><!-- --></A><H3>
+replaceText</H3>
+<PRE>
+public void <B>replaceText</B>(java.lang.String&nbsp;newText,
+                        boolean&nbsp;addAfter)</PRE>
+<DL>
+<DD>Replace range text with new one, adding it to the range and deleting
+ original text from document
+<P>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>newText</CODE> - The text to be replaced with<DD><CODE>addAfter</CODE> - if <tt>true</tt> the text will be added at the end of current
+            range, otherwise to the beginning</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="replaceText(java.lang.String, java.lang.String, int)"><!-- --></A><H3>
+replaceText</H3>
+<PRE>
+<FONT SIZE="-1"><A HREF="../../../../../org/apache/poi/util/Internal.html" title="annotation in org.apache.poi.util">@Internal</A>
+</FONT>public void <B>replaceText</B>(java.lang.String&nbsp;pPlaceHolder,
+                                 java.lang.String&nbsp;pValue,
+                                 int&nbsp;pOffset)</PRE>
+<DL>
+<DD>Replace (one instance of) a piece of text with another...
+<P>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>pPlaceHolder</CODE> - The text to be replaced (e.g., "${organization}")<DD><CODE>pValue</CODE> - The replacement text (e.g., "Apache Software Foundation")<DD><CODE>pOffset</CODE> - The offset or index where the text to be replaced begins
+            (relative to/within this <code>Range</code>)</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="replaceText(java.lang.String, java.lang.String)"><!-- --></A><H3>
+replaceText</H3>
+<PRE>
+public void <B>replaceText</B>(java.lang.String&nbsp;pPlaceHolder,
+                        java.lang.String&nbsp;pValue)</PRE>
+<DL>
+<DD>Replace (all instances of) a piece of text with another...
+<P>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>pPlaceHolder</CODE> - The text to be replaced (e.g., "${organization}")<DD><CODE>pValue</CODE> - The replacement text (e.g., "Apache Software Foundation")</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getCharacterRun(int)"><!-- --></A><H3>
+getCharacterRun</H3>
+<PRE>
+public <A HREF="../../../../../org/apache/poi/hwpf/usermodel/CharacterRun.html" title="class in org.apache.poi.hwpf.usermodel">CharacterRun</A> <B>getCharacterRun</B>(int&nbsp;index)</PRE>
+<DL>
+<DD>Gets the character run at index. The index is relative to this range.
+<P>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>index</CODE> - The index of the character run to get.
+<DT><B>Returns:</B><DD>The character run at the specified index in this range.</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getSection(int)"><!-- --></A><H3>
+getSection</H3>
+<PRE>
+public <A HREF="../../../../../org/apache/poi/hwpf/usermodel/Section.html" title="class in org.apache.poi.hwpf.usermodel">Section</A> <B>getSection</B>(int&nbsp;index)</PRE>
+<DL>
+<DD>Gets the section at index. The index is relative to this range.
+<P>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>index</CODE> - The index of the section to get.
+<DT><B>Returns:</B><DD>The section at the specified index in this range.</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getParagraph(int)"><!-- --></A><H3>
+getParagraph</H3>
+<PRE>
+public <A HREF="../../../../../org/apache/poi/hwpf/usermodel/Paragraph.html" title="class in org.apache.poi.hwpf.usermodel">Paragraph</A> <B>getParagraph</B>(int&nbsp;index)</PRE>
+<DL>
+<DD>Gets the paragraph at index. The index is relative to this range.
+<P>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>index</CODE> - The index of the paragraph to get.
+<DT><B>Returns:</B><DD>The paragraph at the specified index in this range.</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="type()"><!-- --></A><H3>
+type</H3>
+<PRE>
+<FONT SIZE="-1">@Deprecated
+</FONT>public int <B>type</B>()</PRE>
+<DL>
+<DD><B>Deprecated.</B>&nbsp;
+<P>
+<DD>This method is used to determine the type. Handy for switch statements
+ compared to the instanceof operator.
+<P>
+<DD><DL>
+
+<DT><B>Returns:</B><DD>A TYPE constant.</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getTable(org.apache.poi.hwpf.usermodel.Paragraph)"><!-- --></A><H3>
+getTable</H3>
+<PRE>
+public <A HREF="../../../../../org/apache/poi/hwpf/usermodel/Table.html" title="class in org.apache.poi.hwpf.usermodel">Table</A> <B>getTable</B>(<A HREF="../../../../../org/apache/poi/hwpf/usermodel/Paragraph.html" title="class in org.apache.poi.hwpf.usermodel">Paragraph</A>&nbsp;paragraph)</PRE>
+<DL>
+<DD>Gets the table that starts with paragraph. In a Word file, a table
+ consists of a group of paragraphs with certain flags set.
+<P>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>paragraph</CODE> - The paragraph that is the first paragraph in the table.
+<DT><B>Returns:</B><DD>The table that starts with paragraph</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="initAll()"><!-- --></A><H3>
+initAll</H3>
+<PRE>
+protected void <B>initAll</B>()</PRE>
+<DL>
+<DD>loads all of the list indexes.
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="reset()"><!-- --></A><H3>
+reset</H3>
+<PRE>
+protected void <B>reset</B>()</PRE>
+<DL>
+<DD>resets the list indexes.
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="adjustFIB(int)"><!-- --></A><H3>
+adjustFIB</H3>
+<PRE>
+protected void <B>adjustFIB</B>(int&nbsp;adjustment)</PRE>
+<DL>
+<DD>Adjust the value of the various FIB character count fields, eg
+ <code>FIB.CCPText</code> after an insert or a delete...
+ 
+ Works on all CCP fields from this range onwards
+<P>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>adjustment</CODE> - The (signed) value that should be added to the FIB CCP fields</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getStartOffset()"><!-- --></A><H3>
+getStartOffset</H3>
+<PRE>
+public int <B>getStartOffset</B>()</PRE>
+<DL>
+<DD><DL>
+
+<DT><B>Returns:</B><DD>Starting character offset of the range</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getEndOffset()"><!-- --></A><H3>
+getEndOffset</H3>
+<PRE>
+public int <B>getEndOffset</B>()</PRE>
+<DL>
+<DD><DL>
+
+<DT><B>Returns:</B><DD>The ending character offset of this range</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getDocument()"><!-- --></A><H3>
+getDocument</H3>
+<PRE>
+protected <A HREF="../../../../../org/apache/poi/hwpf/HWPFDocumentCore.html" title="class in org.apache.poi.hwpf">HWPFDocumentCore</A> <B>getDocument</B>()</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="toString()"><!-- --></A><H3>
+toString</H3>
+<PRE>
+public java.lang.String <B>toString</B>()</PRE>
+<DL>
+<DD><DL>
+<DT><B>Overrides:</B><DD><CODE>toString</CODE> in class <CODE>java.lang.Object</CODE></DL>
+</DD>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="sanityCheck()"><!-- --></A><H3>
+sanityCheck</H3>
+<PRE>
+public boolean <B>sanityCheck</B>()</PRE>
+<DL>
+<DD>Method for debug purposes. Checks that all resolved elements are inside
+ of current range.
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<!-- ========= END OF CLASS DATA ========= -->
+<HR>
+
+
+<!-- ======= START OF BOTTOM NAVBAR ====== -->
+<A NAME="navbar_bottom"><!-- --></A>
+<A HREF="#skip-navbar_bottom" title="Skip navigation links"></A>
+<TABLE BORDER="0" WIDTH="100%" CELLPADDING="1" CELLSPACING="0" SUMMARY="">
+<TR>
+<TD COLSPAN=2 BGCOLOR="#EEEEFF" CLASS="NavBarCell1">
+<A NAME="navbar_bottom_firstrow"><!-- --></A>
+<TABLE BORDER="0" CELLPADDING="0" CELLSPACING="3" SUMMARY="">
+  <TR ALIGN="center" VALIGN="top">
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../overview-summary.html"><FONT CLASS="NavBarFont1"><B>Overview</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="package-summary.html"><FONT CLASS="NavBarFont1"><B>Package</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#FFFFFF" CLASS="NavBarCell1Rev"> &nbsp;<FONT CLASS="NavBarFont1Rev"><B>Class</B></FONT>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="class-use/Range.html"><FONT CLASS="NavBarFont1"><B>Use</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="package-tree.html"><FONT CLASS="NavBarFont1"><B>Tree</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../deprecated-list.html"><FONT CLASS="NavBarFont1"><B>Deprecated</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../index-all.html"><FONT CLASS="NavBarFont1"><B>Index</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../help-doc.html"><FONT CLASS="NavBarFont1"><B>Help</B></FONT></A>&nbsp;</TD>
+  </TR>
+</TABLE>
+</TD>
+<TD ALIGN="right" VALIGN="top" ROWSPAN=3><EM>
+</EM>
+</TD>
+</TR>
+
+<TR>
+<TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
+&nbsp;<A HREF="../../../../../org/apache/poi/hwpf/usermodel/PictureType.html" title="enum in org.apache.poi.hwpf.usermodel"><B>PREV CLASS</B></A>&nbsp;
+&nbsp;<A HREF="../../../../../org/apache/poi/hwpf/usermodel/Section.html" title="class in org.apache.poi.hwpf.usermodel"><B>NEXT CLASS</B></A></FONT></TD>
+<TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
+  <A HREF="../../../../../index.html?org/apache/poi/hwpf/usermodel/Range.html" target="_top"><B>FRAMES</B></A>  &nbsp;
+&nbsp;<A HREF="Range.html" target="_top"><B>NO FRAMES</B></A>  &nbsp;
+&nbsp;<SCRIPT type="text/javascript">
+  <!--
+  if(window==top) {
+    document.writeln('<A HREF="../../../../../allclasses-noframe.html"><B>All Classes</B></A>');
+  }
+  //-->
+</SCRIPT>
+<NOSCRIPT>
+  <A HREF="../../../../../allclasses-noframe.html"><B>All Classes</B></A>
+</NOSCRIPT>
+
+
+</FONT></TD>
+</TR>
+<TR>
+<TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
+  SUMMARY:&nbsp;NESTED&nbsp;|&nbsp;<A HREF="#field_summary">FIELD</A>&nbsp;|&nbsp;<A HREF="#constructor_summary">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_summary">METHOD</A></FONT></TD>
+<TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
+DETAIL:&nbsp;<A HREF="#field_detail">FIELD</A>&nbsp;|&nbsp;<A HREF="#constructor_detail">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_detail">METHOD</A></FONT></TD>
+</TR>
+</TABLE>
+<A NAME="skip-navbar_bottom"></A>
+<!-- ======== END OF BOTTOM NAVBAR ======= -->
+
+<HR>
+
+                <i>Copyright 2014 The Apache Software Foundation or
+        its licensors, as applicable.</i>
+            
+</BODY>
+</HTML>

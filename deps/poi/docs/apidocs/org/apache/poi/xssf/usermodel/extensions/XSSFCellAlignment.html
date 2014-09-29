@@ -1,0 +1,537 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!--NewPage-->
+<HTML>
+<HEAD>
+<TITLE>
+XSSFCellAlignment (POI API Documentation)
+</TITLE>
+
+<META NAME="keywords" CONTENT="org.apache.poi.xssf.usermodel.extensions.XSSFCellAlignment class">
+
+<LINK REL ="stylesheet" TYPE="text/css" HREF="../../../../../../stylesheet.css" TITLE="Style">
+
+<SCRIPT type="text/javascript">
+function windowTitle()
+{
+    parent.document.title="XSSFCellAlignment (POI API Documentation)";
+}
+</SCRIPT>
+<NOSCRIPT>
+</NOSCRIPT>
+
+</HEAD>
+
+<BODY BGCOLOR="white" onload="windowTitle();">
+
+
+<!-- ========= START OF TOP NAVBAR ======= -->
+<A NAME="navbar_top"><!-- --></A>
+<A HREF="#skip-navbar_top" title="Skip navigation links"></A>
+<TABLE BORDER="0" WIDTH="100%" CELLPADDING="1" CELLSPACING="0" SUMMARY="">
+<TR>
+<TD COLSPAN=2 BGCOLOR="#EEEEFF" CLASS="NavBarCell1">
+<A NAME="navbar_top_firstrow"><!-- --></A>
+<TABLE BORDER="0" CELLPADDING="0" CELLSPACING="3" SUMMARY="">
+  <TR ALIGN="center" VALIGN="top">
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../../overview-summary.html"><FONT CLASS="NavBarFont1"><B>Overview</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="package-summary.html"><FONT CLASS="NavBarFont1"><B>Package</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#FFFFFF" CLASS="NavBarCell1Rev"> &nbsp;<FONT CLASS="NavBarFont1Rev"><B>Class</B></FONT>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="class-use/XSSFCellAlignment.html"><FONT CLASS="NavBarFont1"><B>Use</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="package-tree.html"><FONT CLASS="NavBarFont1"><B>Tree</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../../deprecated-list.html"><FONT CLASS="NavBarFont1"><B>Deprecated</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../../index-all.html"><FONT CLASS="NavBarFont1"><B>Index</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../../help-doc.html"><FONT CLASS="NavBarFont1"><B>Help</B></FONT></A>&nbsp;</TD>
+  </TR>
+</TABLE>
+</TD>
+<TD ALIGN="right" VALIGN="top" ROWSPAN=3><EM>
+</EM>
+</TD>
+</TR>
+
+<TR>
+<TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
+&nbsp;PREV CLASS&nbsp;
+&nbsp;<A HREF="../../../../../../org/apache/poi/xssf/usermodel/extensions/XSSFCellBorder.html" title="class in org.apache.poi.xssf.usermodel.extensions"><B>NEXT CLASS</B></A></FONT></TD>
+<TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
+  <A HREF="../../../../../../index.html?org/apache/poi/xssf/usermodel/extensions/XSSFCellAlignment.html" target="_top"><B>FRAMES</B></A>  &nbsp;
+&nbsp;<A HREF="XSSFCellAlignment.html" target="_top"><B>NO FRAMES</B></A>  &nbsp;
+&nbsp;<SCRIPT type="text/javascript">
+  <!--
+  if(window==top) {
+    document.writeln('<A HREF="../../../../../../allclasses-noframe.html"><B>All Classes</B></A>');
+  }
+  //-->
+</SCRIPT>
+<NOSCRIPT>
+  <A HREF="../../../../../../allclasses-noframe.html"><B>All Classes</B></A>
+</NOSCRIPT>
+
+
+</FONT></TD>
+</TR>
+<TR>
+<TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
+  SUMMARY:&nbsp;NESTED&nbsp;|&nbsp;FIELD&nbsp;|&nbsp;<A HREF="#constructor_summary">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_summary">METHOD</A></FONT></TD>
+<TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
+DETAIL:&nbsp;FIELD&nbsp;|&nbsp;<A HREF="#constructor_detail">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_detail">METHOD</A></FONT></TD>
+</TR>
+</TABLE>
+<A NAME="skip-navbar_top"></A>
+<!-- ========= END OF TOP NAVBAR ========= -->
+
+<HR>
+<!-- ======== START OF CLASS DATA ======== -->
+<H2>
+<FONT SIZE="-1">
+org.apache.poi.xssf.usermodel.extensions</FONT>
+<BR>
+Class XSSFCellAlignment</H2>
+<PRE>
+java.lang.Object
+  <IMG SRC="../../../../../../resources/inherit.gif" ALT="extended by "><B>org.apache.poi.xssf.usermodel.extensions.XSSFCellAlignment</B>
+</PRE>
+<HR>
+<DL>
+<DT><PRE>public class <B>XSSFCellAlignment</B><DT>extends java.lang.Object</DL>
+</PRE>
+
+<P>
+Cell settings available in the Format/Alignment tab
+<P>
+
+<P>
+<HR>
+
+<P>
+
+<!-- ======== CONSTRUCTOR SUMMARY ======== -->
+
+<A NAME="constructor_summary"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+<B>Constructor Summary</B></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><B><A HREF="../../../../../../org/apache/poi/xssf/usermodel/extensions/XSSFCellAlignment.html#XSSFCellAlignment(org.openxmlformats.schemas.spreadsheetml.x2006.main.CTCellAlignment)">XSSFCellAlignment</A></B>(org.openxmlformats.schemas.spreadsheetml.x2006.main.CTCellAlignment&nbsp;cellAlignment)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Creates a Cell Alignment from the supplied XML definition</TD>
+</TR>
+</TABLE>
+&nbsp;
+<!-- ========== METHOD SUMMARY =========== -->
+
+<A NAME="method_summary"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+<B>Method Summary</B></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;org.openxmlformats.schemas.spreadsheetml.x2006.main.CTCellAlignment</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../org/apache/poi/xssf/usermodel/extensions/XSSFCellAlignment.html#getCTCellAlignment()">getCTCellAlignment</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Access to low-level data</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../../../../org/apache/poi/ss/usermodel/HorizontalAlignment.html" title="enum in org.apache.poi.ss.usermodel">HorizontalAlignment</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../org/apache/poi/xssf/usermodel/extensions/XSSFCellAlignment.html#getHorizontal()">getHorizontal</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Get the type of horizontal alignment for the cell</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;long</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../org/apache/poi/xssf/usermodel/extensions/XSSFCellAlignment.html#getIndent()">getIndent</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Get the number of spaces to indent the text in the cell</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../org/apache/poi/xssf/usermodel/extensions/XSSFCellAlignment.html#getShrinkToFit()">getShrinkToFit</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;long</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../org/apache/poi/xssf/usermodel/extensions/XSSFCellAlignment.html#getTextRotation()">getTextRotation</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Get the degree of rotation for the text in the cell
+ <p/>
+ Expressed in degrees.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../../../../org/apache/poi/ss/usermodel/VerticalAlignment.html" title="enum in org.apache.poi.ss.usermodel">VerticalAlignment</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../org/apache/poi/xssf/usermodel/extensions/XSSFCellAlignment.html#getVertical()">getVertical</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Get the type of vertical alignment for the cell</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../org/apache/poi/xssf/usermodel/extensions/XSSFCellAlignment.html#getWrapText()">getWrapText</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Whether the text should be wrapped</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../org/apache/poi/xssf/usermodel/extensions/XSSFCellAlignment.html#setHorizontal(org.apache.poi.ss.usermodel.HorizontalAlignment)">setHorizontal</A></B>(<A HREF="../../../../../../org/apache/poi/ss/usermodel/HorizontalAlignment.html" title="enum in org.apache.poi.ss.usermodel">HorizontalAlignment</A>&nbsp;align)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Set the type of horizontal alignment for the cell</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../org/apache/poi/xssf/usermodel/extensions/XSSFCellAlignment.html#setIndent(long)">setIndent</A></B>(long&nbsp;indent)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Set the number of spaces to indent the text in the cell</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../org/apache/poi/xssf/usermodel/extensions/XSSFCellAlignment.html#setShrinkToFit(boolean)">setShrinkToFit</A></B>(boolean&nbsp;shrink)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../org/apache/poi/xssf/usermodel/extensions/XSSFCellAlignment.html#setTextRotation(long)">setTextRotation</A></B>(long&nbsp;rotation)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Set the degree of rotation for the text in the cell
+ <p/>
+ Expressed in degrees.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../org/apache/poi/xssf/usermodel/extensions/XSSFCellAlignment.html#setVertical(org.apache.poi.ss.usermodel.VerticalAlignment)">setVertical</A></B>(<A HREF="../../../../../../org/apache/poi/ss/usermodel/VerticalAlignment.html" title="enum in org.apache.poi.ss.usermodel">VerticalAlignment</A>&nbsp;align)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Set the type of vertical alignment for the cell</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../../org/apache/poi/xssf/usermodel/extensions/XSSFCellAlignment.html#setWrapText(boolean)">setWrapText</A></B>(boolean&nbsp;wrapped)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Set whether the text should be wrapped</TD>
+</TR>
+</TABLE>
+&nbsp;<A NAME="methods_inherited_from_class_java.lang.Object"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#EEEEFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left"><B>Methods inherited from class java.lang.Object</B></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE>clone, equals, finalize, getClass, hashCode, notify, notifyAll, toString, wait, wait, wait</CODE></TD>
+</TR>
+</TABLE>
+&nbsp;
+<P>
+
+<!-- ========= CONSTRUCTOR DETAIL ======== -->
+
+<A NAME="constructor_detail"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="1"><FONT SIZE="+2">
+<B>Constructor Detail</B></FONT></TH>
+</TR>
+</TABLE>
+
+<A NAME="XSSFCellAlignment(org.openxmlformats.schemas.spreadsheetml.x2006.main.CTCellAlignment)"><!-- --></A><H3>
+XSSFCellAlignment</H3>
+<PRE>
+public <B>XSSFCellAlignment</B>(org.openxmlformats.schemas.spreadsheetml.x2006.main.CTCellAlignment&nbsp;cellAlignment)</PRE>
+<DL>
+<DD>Creates a Cell Alignment from the supplied XML definition
+<P>
+<DL>
+<DT><B>Parameters:</B><DD><CODE>cellAlignment</CODE> - </DL>
+</DL>
+
+<!-- ============ METHOD DETAIL ========== -->
+
+<A NAME="method_detail"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="1"><FONT SIZE="+2">
+<B>Method Detail</B></FONT></TH>
+</TR>
+</TABLE>
+
+<A NAME="getVertical()"><!-- --></A><H3>
+getVertical</H3>
+<PRE>
+public <A HREF="../../../../../../org/apache/poi/ss/usermodel/VerticalAlignment.html" title="enum in org.apache.poi.ss.usermodel">VerticalAlignment</A> <B>getVertical</B>()</PRE>
+<DL>
+<DD>Get the type of vertical alignment for the cell
+<P>
+<DD><DL>
+
+<DT><B>Returns:</B><DD>the type of aligment<DT><B>See Also:</B><DD><A HREF="../../../../../../org/apache/poi/ss/usermodel/VerticalAlignment.html" title="enum in org.apache.poi.ss.usermodel"><CODE>VerticalAlignment</CODE></A></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setVertical(org.apache.poi.ss.usermodel.VerticalAlignment)"><!-- --></A><H3>
+setVertical</H3>
+<PRE>
+public void <B>setVertical</B>(<A HREF="../../../../../../org/apache/poi/ss/usermodel/VerticalAlignment.html" title="enum in org.apache.poi.ss.usermodel">VerticalAlignment</A>&nbsp;align)</PRE>
+<DL>
+<DD>Set the type of vertical alignment for the cell
+<P>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>align</CODE> - - the type of alignment<DT><B>See Also:</B><DD><A HREF="../../../../../../org/apache/poi/ss/usermodel/VerticalAlignment.html" title="enum in org.apache.poi.ss.usermodel"><CODE>VerticalAlignment</CODE></A></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getHorizontal()"><!-- --></A><H3>
+getHorizontal</H3>
+<PRE>
+public <A HREF="../../../../../../org/apache/poi/ss/usermodel/HorizontalAlignment.html" title="enum in org.apache.poi.ss.usermodel">HorizontalAlignment</A> <B>getHorizontal</B>()</PRE>
+<DL>
+<DD>Get the type of horizontal alignment for the cell
+<P>
+<DD><DL>
+
+<DT><B>Returns:</B><DD>the type of aligment<DT><B>See Also:</B><DD><A HREF="../../../../../../org/apache/poi/ss/usermodel/HorizontalAlignment.html" title="enum in org.apache.poi.ss.usermodel"><CODE>HorizontalAlignment</CODE></A></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setHorizontal(org.apache.poi.ss.usermodel.HorizontalAlignment)"><!-- --></A><H3>
+setHorizontal</H3>
+<PRE>
+public void <B>setHorizontal</B>(<A HREF="../../../../../../org/apache/poi/ss/usermodel/HorizontalAlignment.html" title="enum in org.apache.poi.ss.usermodel">HorizontalAlignment</A>&nbsp;align)</PRE>
+<DL>
+<DD>Set the type of horizontal alignment for the cell
+<P>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>align</CODE> - - the type of alignment<DT><B>See Also:</B><DD><A HREF="../../../../../../org/apache/poi/ss/usermodel/HorizontalAlignment.html" title="enum in org.apache.poi.ss.usermodel"><CODE>HorizontalAlignment</CODE></A></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getIndent()"><!-- --></A><H3>
+getIndent</H3>
+<PRE>
+public long <B>getIndent</B>()</PRE>
+<DL>
+<DD>Get the number of spaces to indent the text in the cell
+<P>
+<DD><DL>
+
+<DT><B>Returns:</B><DD>indent - number of spaces</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setIndent(long)"><!-- --></A><H3>
+setIndent</H3>
+<PRE>
+public void <B>setIndent</B>(long&nbsp;indent)</PRE>
+<DL>
+<DD>Set the number of spaces to indent the text in the cell
+<P>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>indent</CODE> - - number of spaces</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getTextRotation()"><!-- --></A><H3>
+getTextRotation</H3>
+<PRE>
+public long <B>getTextRotation</B>()</PRE>
+<DL>
+<DD>Get the degree of rotation for the text in the cell
+ <p/>
+ Expressed in degrees. Values range from 0 to 180. The first letter of
+ the text is considered the center-point of the arc.
+ <br/>
+ For 0 - 90, the value represents degrees above horizon. For 91-180 the degrees below the
+ horizon is calculated as:
+ <br/>
+ <code>[degrees below horizon] = 90 - textRotation.</code>
+ </p>
+<P>
+<DD><DL>
+
+<DT><B>Returns:</B><DD>rotation degrees (between 0 and 180 degrees)</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setTextRotation(long)"><!-- --></A><H3>
+setTextRotation</H3>
+<PRE>
+public void <B>setTextRotation</B>(long&nbsp;rotation)</PRE>
+<DL>
+<DD>Set the degree of rotation for the text in the cell
+ <p/>
+ Expressed in degrees. Values range from 0 to 180. The first letter of
+ the text is considered the center-point of the arc.
+ <br/>
+ For 0 - 90, the value represents degrees above horizon. For 91-180 the degrees below the
+ horizon is calculated as:
+ <br/>
+ <code>[degrees below horizon] = 90 - textRotation.</code>
+ </p>
+<P>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>rotation</CODE> - - the rotation degrees (between 0 and 180 degrees)</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getWrapText()"><!-- --></A><H3>
+getWrapText</H3>
+<PRE>
+public boolean <B>getWrapText</B>()</PRE>
+<DL>
+<DD>Whether the text should be wrapped
+<P>
+<DD><DL>
+
+<DT><B>Returns:</B><DD>a boolean value indicating if the text in a cell should be line-wrapped within the cell.</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setWrapText(boolean)"><!-- --></A><H3>
+setWrapText</H3>
+<PRE>
+public void <B>setWrapText</B>(boolean&nbsp;wrapped)</PRE>
+<DL>
+<DD>Set whether the text should be wrapped
+<P>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>wrapped</CODE> - a boolean value indicating if the text in a cell should be line-wrapped within the cell.</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getShrinkToFit()"><!-- --></A><H3>
+getShrinkToFit</H3>
+<PRE>
+public boolean <B>getShrinkToFit</B>()</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setShrinkToFit(boolean)"><!-- --></A><H3>
+setShrinkToFit</H3>
+<PRE>
+public void <B>setShrinkToFit</B>(boolean&nbsp;shrink)</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getCTCellAlignment()"><!-- --></A><H3>
+getCTCellAlignment</H3>
+<PRE>
+<FONT SIZE="-1"><A HREF="../../../../../../org/apache/poi/util/Internal.html" title="annotation in org.apache.poi.util">@Internal</A>
+</FONT>public org.openxmlformats.schemas.spreadsheetml.x2006.main.CTCellAlignment <B>getCTCellAlignment</B>()</PRE>
+<DL>
+<DD>Access to low-level data
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<!-- ========= END OF CLASS DATA ========= -->
+<HR>
+
+
+<!-- ======= START OF BOTTOM NAVBAR ====== -->
+<A NAME="navbar_bottom"><!-- --></A>
+<A HREF="#skip-navbar_bottom" title="Skip navigation links"></A>
+<TABLE BORDER="0" WIDTH="100%" CELLPADDING="1" CELLSPACING="0" SUMMARY="">
+<TR>
+<TD COLSPAN=2 BGCOLOR="#EEEEFF" CLASS="NavBarCell1">
+<A NAME="navbar_bottom_firstrow"><!-- --></A>
+<TABLE BORDER="0" CELLPADDING="0" CELLSPACING="3" SUMMARY="">
+  <TR ALIGN="center" VALIGN="top">
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../../overview-summary.html"><FONT CLASS="NavBarFont1"><B>Overview</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="package-summary.html"><FONT CLASS="NavBarFont1"><B>Package</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#FFFFFF" CLASS="NavBarCell1Rev"> &nbsp;<FONT CLASS="NavBarFont1Rev"><B>Class</B></FONT>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="class-use/XSSFCellAlignment.html"><FONT CLASS="NavBarFont1"><B>Use</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="package-tree.html"><FONT CLASS="NavBarFont1"><B>Tree</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../../deprecated-list.html"><FONT CLASS="NavBarFont1"><B>Deprecated</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../../index-all.html"><FONT CLASS="NavBarFont1"><B>Index</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../../help-doc.html"><FONT CLASS="NavBarFont1"><B>Help</B></FONT></A>&nbsp;</TD>
+  </TR>
+</TABLE>
+</TD>
+<TD ALIGN="right" VALIGN="top" ROWSPAN=3><EM>
+</EM>
+</TD>
+</TR>
+
+<TR>
+<TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
+&nbsp;PREV CLASS&nbsp;
+&nbsp;<A HREF="../../../../../../org/apache/poi/xssf/usermodel/extensions/XSSFCellBorder.html" title="class in org.apache.poi.xssf.usermodel.extensions"><B>NEXT CLASS</B></A></FONT></TD>
+<TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
+  <A HREF="../../../../../../index.html?org/apache/poi/xssf/usermodel/extensions/XSSFCellAlignment.html" target="_top"><B>FRAMES</B></A>  &nbsp;
+&nbsp;<A HREF="XSSFCellAlignment.html" target="_top"><B>NO FRAMES</B></A>  &nbsp;
+&nbsp;<SCRIPT type="text/javascript">
+  <!--
+  if(window==top) {
+    document.writeln('<A HREF="../../../../../../allclasses-noframe.html"><B>All Classes</B></A>');
+  }
+  //-->
+</SCRIPT>
+<NOSCRIPT>
+  <A HREF="../../../../../../allclasses-noframe.html"><B>All Classes</B></A>
+</NOSCRIPT>
+
+
+</FONT></TD>
+</TR>
+<TR>
+<TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
+  SUMMARY:&nbsp;NESTED&nbsp;|&nbsp;FIELD&nbsp;|&nbsp;<A HREF="#constructor_summary">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_summary">METHOD</A></FONT></TD>
+<TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
+DETAIL:&nbsp;FIELD&nbsp;|&nbsp;<A HREF="#constructor_detail">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_detail">METHOD</A></FONT></TD>
+</TR>
+</TABLE>
+<A NAME="skip-navbar_bottom"></A>
+<!-- ======== END OF BOTTOM NAVBAR ======= -->
+
+<HR>
+
+                <i>Copyright 2014 The Apache Software Foundation or
+        its licensors, as applicable.</i>
+            
+</BODY>
+</HTML>

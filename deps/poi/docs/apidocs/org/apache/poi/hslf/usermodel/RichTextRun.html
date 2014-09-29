@@ -1,0 +1,1726 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!--NewPage-->
+<HTML>
+<HEAD>
+<TITLE>
+RichTextRun (POI API Documentation)
+</TITLE>
+
+<META NAME="keywords" CONTENT="org.apache.poi.hslf.usermodel.RichTextRun class">
+
+<LINK REL ="stylesheet" TYPE="text/css" HREF="../../../../../stylesheet.css" TITLE="Style">
+
+<SCRIPT type="text/javascript">
+function windowTitle()
+{
+    parent.document.title="RichTextRun (POI API Documentation)";
+}
+</SCRIPT>
+<NOSCRIPT>
+</NOSCRIPT>
+
+</HEAD>
+
+<BODY BGCOLOR="white" onload="windowTitle();">
+
+
+<!-- ========= START OF TOP NAVBAR ======= -->
+<A NAME="navbar_top"><!-- --></A>
+<A HREF="#skip-navbar_top" title="Skip navigation links"></A>
+<TABLE BORDER="0" WIDTH="100%" CELLPADDING="1" CELLSPACING="0" SUMMARY="">
+<TR>
+<TD COLSPAN=2 BGCOLOR="#EEEEFF" CLASS="NavBarCell1">
+<A NAME="navbar_top_firstrow"><!-- --></A>
+<TABLE BORDER="0" CELLPADDING="0" CELLSPACING="3" SUMMARY="">
+  <TR ALIGN="center" VALIGN="top">
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../overview-summary.html"><FONT CLASS="NavBarFont1"><B>Overview</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="package-summary.html"><FONT CLASS="NavBarFont1"><B>Package</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#FFFFFF" CLASS="NavBarCell1Rev"> &nbsp;<FONT CLASS="NavBarFont1Rev"><B>Class</B></FONT>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="class-use/RichTextRun.html"><FONT CLASS="NavBarFont1"><B>Use</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="package-tree.html"><FONT CLASS="NavBarFont1"><B>Tree</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../deprecated-list.html"><FONT CLASS="NavBarFont1"><B>Deprecated</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../index-all.html"><FONT CLASS="NavBarFont1"><B>Index</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../help-doc.html"><FONT CLASS="NavBarFont1"><B>Help</B></FONT></A>&nbsp;</TD>
+  </TR>
+</TABLE>
+</TD>
+<TD ALIGN="right" VALIGN="top" ROWSPAN=3><EM>
+</EM>
+</TD>
+</TR>
+
+<TR>
+<TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
+&nbsp;<A HREF="../../../../../org/apache/poi/hslf/usermodel/PictureData.html" title="class in org.apache.poi.hslf.usermodel"><B>PREV CLASS</B></A>&nbsp;
+&nbsp;<A HREF="../../../../../org/apache/poi/hslf/usermodel/SlideShow.html" title="class in org.apache.poi.hslf.usermodel"><B>NEXT CLASS</B></A></FONT></TD>
+<TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
+  <A HREF="../../../../../index.html?org/apache/poi/hslf/usermodel/RichTextRun.html" target="_top"><B>FRAMES</B></A>  &nbsp;
+&nbsp;<A HREF="RichTextRun.html" target="_top"><B>NO FRAMES</B></A>  &nbsp;
+&nbsp;<SCRIPT type="text/javascript">
+  <!--
+  if(window==top) {
+    document.writeln('<A HREF="../../../../../allclasses-noframe.html"><B>All Classes</B></A>');
+  }
+  //-->
+</SCRIPT>
+<NOSCRIPT>
+  <A HREF="../../../../../allclasses-noframe.html"><B>All Classes</B></A>
+</NOSCRIPT>
+
+
+</FONT></TD>
+</TR>
+<TR>
+<TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
+  SUMMARY:&nbsp;NESTED&nbsp;|&nbsp;<A HREF="#field_summary">FIELD</A>&nbsp;|&nbsp;<A HREF="#constructor_summary">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_summary">METHOD</A></FONT></TD>
+<TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
+DETAIL:&nbsp;<A HREF="#field_detail">FIELD</A>&nbsp;|&nbsp;<A HREF="#constructor_detail">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_detail">METHOD</A></FONT></TD>
+</TR>
+</TABLE>
+<A NAME="skip-navbar_top"></A>
+<!-- ========= END OF TOP NAVBAR ========= -->
+
+<HR>
+<!-- ======== START OF CLASS DATA ======== -->
+<H2>
+<FONT SIZE="-1">
+org.apache.poi.hslf.usermodel</FONT>
+<BR>
+Class RichTextRun</H2>
+<PRE>
+java.lang.Object
+  <IMG SRC="../../../../../resources/inherit.gif" ALT="extended by "><B>org.apache.poi.hslf.usermodel.RichTextRun</B>
+</PRE>
+<HR>
+<DL>
+<DT><PRE>public final class <B>RichTextRun</B><DT>extends java.lang.Object</DL>
+</PRE>
+
+<P>
+Represents a run of text, all with the same style
+<P>
+
+<P>
+<HR>
+
+<P>
+<!-- =========== FIELD SUMMARY =========== -->
+
+<A NAME="field_summary"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+<B>Field Summary</B></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>protected &nbsp;<A HREF="../../../../../org/apache/poi/util/POILogger.html" title="class in org.apache.poi.util">POILogger</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/usermodel/RichTextRun.html#logger">logger</A></B></CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+</TABLE>
+&nbsp;
+<!-- ======== CONSTRUCTOR SUMMARY ======== -->
+
+<A NAME="constructor_summary"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+<B>Constructor Summary</B></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/usermodel/RichTextRun.html#RichTextRun(org.apache.poi.hslf.model.TextRun, int, int)">RichTextRun</A></B>(<A HREF="../../../../../org/apache/poi/hslf/model/TextRun.html" title="class in org.apache.poi.hslf.model">TextRun</A>&nbsp;parent,
+            int&nbsp;startAt,
+            int&nbsp;len)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Create a new wrapper around a (currently not)
+  rich text string</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/usermodel/RichTextRun.html#RichTextRun(org.apache.poi.hslf.model.TextRun, int, int, org.apache.poi.hslf.model.textproperties.TextPropCollection, org.apache.poi.hslf.model.textproperties.TextPropCollection, boolean, boolean)">RichTextRun</A></B>(<A HREF="../../../../../org/apache/poi/hslf/model/TextRun.html" title="class in org.apache.poi.hslf.model">TextRun</A>&nbsp;parent,
+            int&nbsp;startAt,
+            int&nbsp;len,
+            <A HREF="../../../../../org/apache/poi/hslf/model/textproperties/TextPropCollection.html" title="class in org.apache.poi.hslf.model.textproperties">TextPropCollection</A>&nbsp;pStyle,
+            <A HREF="../../../../../org/apache/poi/hslf/model/textproperties/TextPropCollection.html" title="class in org.apache.poi.hslf.model.textproperties">TextPropCollection</A>&nbsp;cStyle,
+            boolean&nbsp;pShared,
+            boolean&nbsp;cShared)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Create a new wrapper around a rich text string</TD>
+</TR>
+</TABLE>
+&nbsp;
+<!-- ========== METHOD SUMMARY =========== -->
+
+<A NAME="method_summary"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="2"><FONT SIZE="+2">
+<B>Method Summary</B></FONT></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../../../org/apache/poi/hslf/model/textproperties/TextPropCollection.html" title="class in org.apache.poi.hslf.model.textproperties">TextPropCollection</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/usermodel/RichTextRun.html#_getRawCharacterStyle()">_getRawCharacterStyle</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Internal Use Only - get the underlying character style collection.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;<A HREF="../../../../../org/apache/poi/hslf/model/textproperties/TextPropCollection.html" title="class in org.apache.poi.hslf.model.textproperties">TextPropCollection</A></CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/usermodel/RichTextRun.html#_getRawParagraphStyle()">_getRawParagraphStyle</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Internal Use Only - get the underlying paragraph style collection.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/usermodel/RichTextRun.html#_isCharacterStyleShared()">_isCharacterStyleShared</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Internal Use Only - are the Character styles shared?</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/usermodel/RichTextRun.html#_isParagraphStyleShared()">_isParagraphStyleShared</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Internal Use Only - are the Paragraph styles shared?</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;int</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/usermodel/RichTextRun.html#getAlignment()">getAlignment</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns the type of horizontal alignment for the text.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;char</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/usermodel/RichTextRun.html#getBulletChar()">getBulletChar</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns the bullet character</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;java.awt.Color</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/usermodel/RichTextRun.html#getBulletColor()">getBulletColor</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns the bullet color</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;int</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/usermodel/RichTextRun.html#getBulletFont()">getBulletFont</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns the bullet font</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;int</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/usermodel/RichTextRun.html#getBulletOffset()">getBulletOffset</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns the bullet offset</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;int</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/usermodel/RichTextRun.html#getBulletSize()">getBulletSize</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns the bullet size</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;int</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/usermodel/RichTextRun.html#getEndIndex()">getEndIndex</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The ending index, exclusive.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;java.awt.Color</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/usermodel/RichTextRun.html#getFontColor()">getFontColor</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;int</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/usermodel/RichTextRun.html#getFontIndex()">getFontIndex</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gets the font index</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;java.lang.String</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/usermodel/RichTextRun.html#getFontName()">getFontName</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gets the font name</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;int</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/usermodel/RichTextRun.html#getFontSize()">getFontSize</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gets the font size</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;int</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/usermodel/RichTextRun.html#getIndentLevel()">getIndentLevel</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;int</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/usermodel/RichTextRun.html#getLength()">getLength</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Get the length of the text</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;int</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/usermodel/RichTextRun.html#getLineSpacing()">getLineSpacing</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns the line spacing</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;java.lang.String</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/usermodel/RichTextRun.html#getRawText()">getRawText</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Fetch the text, in raw storage form</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;int</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/usermodel/RichTextRun.html#getSpaceAfter()">getSpaceAfter</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns spacing after a paragraph</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;int</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/usermodel/RichTextRun.html#getSpaceBefore()">getSpaceBefore</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns spacing before a paragraph</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;int</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/usermodel/RichTextRun.html#getStartIndex()">getStartIndex</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The beginning index, inclusive.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;int</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/usermodel/RichTextRun.html#getSuperscript()">getSuperscript</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gets the subscript/superscript option</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;java.lang.String</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/usermodel/RichTextRun.html#getText()">getText</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Fetch the text, in output suitable form</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;int</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/usermodel/RichTextRun.html#getTextOffset()">getTextOffset</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns the text offset</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/usermodel/RichTextRun.html#isBold()">isBold</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Is the text bold?</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/usermodel/RichTextRun.html#isBullet()">isBullet</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns whether this rich text run has bullets</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/usermodel/RichTextRun.html#isBulletHard()">isBulletHard</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Returns whether this rich text run has bullets</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/usermodel/RichTextRun.html#isEmbossed()">isEmbossed</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Is this text embossed?</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/usermodel/RichTextRun.html#isItalic()">isItalic</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Is the text italic?</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/usermodel/RichTextRun.html#isShadowed()">isShadowed</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Does the text have a shadow?</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/usermodel/RichTextRun.html#isStrikethrough()">isStrikethrough</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gets the strikethrough flag</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;boolean</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/usermodel/RichTextRun.html#isUnderlined()">isUnderlined</A></B>()</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Is the text underlined?</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/usermodel/RichTextRun.html#setAlignment(int)">setAlignment</A></B>(int&nbsp;align)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sets the type of horizontal alignment for the text.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/usermodel/RichTextRun.html#setBold(boolean)">setBold</A></B>(boolean&nbsp;bold)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Is the text bold?</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/usermodel/RichTextRun.html#setBullet(boolean)">setBullet</A></B>(boolean&nbsp;flag)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sets whether this rich text run has bullets</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/usermodel/RichTextRun.html#setBulletChar(char)">setBulletChar</A></B>(char&nbsp;c)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sets the bullet character</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/usermodel/RichTextRun.html#setBulletColor(java.awt.Color)">setBulletColor</A></B>(java.awt.Color&nbsp;color)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sets the bullet color</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/usermodel/RichTextRun.html#setBulletFont(int)">setBulletFont</A></B>(int&nbsp;idx)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sets the bullet font</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/usermodel/RichTextRun.html#setBulletOffset(int)">setBulletOffset</A></B>(int&nbsp;offset)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sets the bullet offset</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/usermodel/RichTextRun.html#setBulletSize(int)">setBulletSize</A></B>(int&nbsp;size)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sets the bullet size</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/usermodel/RichTextRun.html#setCharTextPropVal(java.lang.String, int)">setCharTextPropVal</A></B>(java.lang.String&nbsp;propName,
+                   int&nbsp;val)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sets the value of the given Paragraph TextProp, add if required</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/usermodel/RichTextRun.html#setEmbossed(boolean)">setEmbossed</A></B>(boolean&nbsp;flag)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Is this text embossed?</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/usermodel/RichTextRun.html#setFlag(boolean, int, boolean)">setFlag</A></B>(boolean&nbsp;isCharacter,
+        int&nbsp;index,
+        boolean&nbsp;value)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/usermodel/RichTextRun.html#setFontColor(java.awt.Color)">setFontColor</A></B>(java.awt.Color&nbsp;color)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sets color of the text, as a java.awt.Color</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/usermodel/RichTextRun.html#setFontColor(int)">setFontColor</A></B>(int&nbsp;bgr)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sets color of the text, as a int bgr.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/usermodel/RichTextRun.html#setFontIndex(int)">setFontIndex</A></B>(int&nbsp;idx)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sets the font index</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/usermodel/RichTextRun.html#setFontName(java.lang.String)">setFontName</A></B>(java.lang.String&nbsp;fontName)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sets the font name to use</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/usermodel/RichTextRun.html#setFontSize(int)">setFontSize</A></B>(int&nbsp;fontSize)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sets the font size</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/usermodel/RichTextRun.html#setIndentLevel(int)">setIndentLevel</A></B>(int&nbsp;level)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sets indentation level</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/usermodel/RichTextRun.html#setItalic(boolean)">setItalic</A></B>(boolean&nbsp;italic)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Is the text italic?</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/usermodel/RichTextRun.html#setLineSpacing(int)">setLineSpacing</A></B>(int&nbsp;val)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sets the line spacing.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/usermodel/RichTextRun.html#setParaTextPropVal(java.lang.String, int)">setParaTextPropVal</A></B>(java.lang.String&nbsp;propName,
+                   int&nbsp;val)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sets the value of the given Character TextProp, add if required</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/usermodel/RichTextRun.html#setRawText(java.lang.String)">setRawText</A></B>(java.lang.String&nbsp;text)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Change the text</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/usermodel/RichTextRun.html#setShadowed(boolean)">setShadowed</A></B>(boolean&nbsp;flag)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Does the text have a shadow?</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/usermodel/RichTextRun.html#setSpaceAfter(int)">setSpaceAfter</A></B>(int&nbsp;val)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sets spacing after a paragraph.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/usermodel/RichTextRun.html#setSpaceBefore(int)">setSpaceBefore</A></B>(int&nbsp;val)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sets spacing before a paragraph.</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/usermodel/RichTextRun.html#setStrikethrough(boolean)">setStrikethrough</A></B>(boolean&nbsp;flag)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sets the strikethrough flag</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/usermodel/RichTextRun.html#setSuperscript(int)">setSuperscript</A></B>(int&nbsp;val)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sets the subscript/superscript option</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/usermodel/RichTextRun.html#setText(java.lang.String)">setText</A></B>(java.lang.String&nbsp;text)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Change the text</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/usermodel/RichTextRun.html#setTextOffset(int)">setTextOffset</A></B>(int&nbsp;offset)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sets the text offset</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/usermodel/RichTextRun.html#setUnderlined(boolean)">setUnderlined</A></B>(boolean&nbsp;underlined)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Is the text underlined?</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/usermodel/RichTextRun.html#supplySlideShow(org.apache.poi.hslf.usermodel.SlideShow)">supplySlideShow</A></B>(<A HREF="../../../../../org/apache/poi/hslf/usermodel/SlideShow.html" title="class in org.apache.poi.hslf.usermodel">SlideShow</A>&nbsp;ss)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Supply the SlideShow we belong to</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/usermodel/RichTextRun.html#supplyTextProps(org.apache.poi.hslf.model.textproperties.TextPropCollection, org.apache.poi.hslf.model.textproperties.TextPropCollection, boolean, boolean)">supplyTextProps</A></B>(<A HREF="../../../../../org/apache/poi/hslf/model/textproperties/TextPropCollection.html" title="class in org.apache.poi.hslf.model.textproperties">TextPropCollection</A>&nbsp;pStyle,
+                <A HREF="../../../../../org/apache/poi/hslf/model/textproperties/TextPropCollection.html" title="class in org.apache.poi.hslf.model.textproperties">TextPropCollection</A>&nbsp;cStyle,
+                boolean&nbsp;pShared,
+                boolean&nbsp;cShared)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Supply (normally default) textprops, and if they're shared,
+  when a run gets them</TD>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD ALIGN="right" VALIGN="top" WIDTH="1%"><FONT SIZE="-1">
+<CODE>&nbsp;void</CODE></FONT></TD>
+<TD><CODE><B><A HREF="../../../../../org/apache/poi/hslf/usermodel/RichTextRun.html#updateStartPosition(int)">updateStartPosition</A></B>(int&nbsp;startAt)</CODE>
+
+<BR>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Tells the RichTextRun its new position in the parent TextRun</TD>
+</TR>
+</TABLE>
+&nbsp;<A NAME="methods_inherited_from_class_java.lang.Object"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#EEEEFF" CLASS="TableSubHeadingColor">
+<TH ALIGN="left"><B>Methods inherited from class java.lang.Object</B></TH>
+</TR>
+<TR BGCOLOR="white" CLASS="TableRowColor">
+<TD><CODE>clone, equals, finalize, getClass, hashCode, notify, notifyAll, toString, wait, wait, wait</CODE></TD>
+</TR>
+</TABLE>
+&nbsp;
+<P>
+
+<!-- ============ FIELD DETAIL =========== -->
+
+<A NAME="field_detail"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="1"><FONT SIZE="+2">
+<B>Field Detail</B></FONT></TH>
+</TR>
+</TABLE>
+
+<A NAME="logger"><!-- --></A><H3>
+logger</H3>
+<PRE>
+protected <A HREF="../../../../../org/apache/poi/util/POILogger.html" title="class in org.apache.poi.util">POILogger</A> <B>logger</B></PRE>
+<DL>
+<DL>
+</DL>
+</DL>
+
+<!-- ========= CONSTRUCTOR DETAIL ======== -->
+
+<A NAME="constructor_detail"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="1"><FONT SIZE="+2">
+<B>Constructor Detail</B></FONT></TH>
+</TR>
+</TABLE>
+
+<A NAME="RichTextRun(org.apache.poi.hslf.model.TextRun, int, int)"><!-- --></A><H3>
+RichTextRun</H3>
+<PRE>
+public <B>RichTextRun</B>(<A HREF="../../../../../org/apache/poi/hslf/model/TextRun.html" title="class in org.apache.poi.hslf.model">TextRun</A>&nbsp;parent,
+                   int&nbsp;startAt,
+                   int&nbsp;len)</PRE>
+<DL>
+<DD>Create a new wrapper around a (currently not)
+  rich text string
+<P>
+<DL>
+<DT><B>Parameters:</B><DD><CODE>parent</CODE> - <DD><CODE>startAt</CODE> - <DD><CODE>len</CODE> - </DL>
+</DL>
+<HR>
+
+<A NAME="RichTextRun(org.apache.poi.hslf.model.TextRun, int, int, org.apache.poi.hslf.model.textproperties.TextPropCollection, org.apache.poi.hslf.model.textproperties.TextPropCollection, boolean, boolean)"><!-- --></A><H3>
+RichTextRun</H3>
+<PRE>
+public <B>RichTextRun</B>(<A HREF="../../../../../org/apache/poi/hslf/model/TextRun.html" title="class in org.apache.poi.hslf.model">TextRun</A>&nbsp;parent,
+                   int&nbsp;startAt,
+                   int&nbsp;len,
+                   <A HREF="../../../../../org/apache/poi/hslf/model/textproperties/TextPropCollection.html" title="class in org.apache.poi.hslf.model.textproperties">TextPropCollection</A>&nbsp;pStyle,
+                   <A HREF="../../../../../org/apache/poi/hslf/model/textproperties/TextPropCollection.html" title="class in org.apache.poi.hslf.model.textproperties">TextPropCollection</A>&nbsp;cStyle,
+                   boolean&nbsp;pShared,
+                   boolean&nbsp;cShared)</PRE>
+<DL>
+<DD>Create a new wrapper around a rich text string
+<P>
+<DL>
+<DT><B>Parameters:</B><DD><CODE>parent</CODE> - The parent TextRun<DD><CODE>startAt</CODE> - The start position of this run<DD><CODE>len</CODE> - The length of this run<DD><CODE>pStyle</CODE> - The paragraph style property collection<DD><CODE>cStyle</CODE> - The character style property collection<DD><CODE>pShared</CODE> - The paragraph styles are shared with other runs<DD><CODE>cShared</CODE> - The character styles are shared with other runs</DL>
+</DL>
+
+<!-- ============ METHOD DETAIL ========== -->
+
+<A NAME="method_detail"><!-- --></A>
+<TABLE BORDER="1" WIDTH="100%" CELLPADDING="3" CELLSPACING="0" SUMMARY="">
+<TR BGCOLOR="#CCCCFF" CLASS="TableHeadingColor">
+<TH ALIGN="left" COLSPAN="1"><FONT SIZE="+2">
+<B>Method Detail</B></FONT></TH>
+</TR>
+</TABLE>
+
+<A NAME="supplyTextProps(org.apache.poi.hslf.model.textproperties.TextPropCollection, org.apache.poi.hslf.model.textproperties.TextPropCollection, boolean, boolean)"><!-- --></A><H3>
+supplyTextProps</H3>
+<PRE>
+public void <B>supplyTextProps</B>(<A HREF="../../../../../org/apache/poi/hslf/model/textproperties/TextPropCollection.html" title="class in org.apache.poi.hslf.model.textproperties">TextPropCollection</A>&nbsp;pStyle,
+                            <A HREF="../../../../../org/apache/poi/hslf/model/textproperties/TextPropCollection.html" title="class in org.apache.poi.hslf.model.textproperties">TextPropCollection</A>&nbsp;cStyle,
+                            boolean&nbsp;pShared,
+                            boolean&nbsp;cShared)</PRE>
+<DL>
+<DD>Supply (normally default) textprops, and if they're shared,
+  when a run gets them
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="supplySlideShow(org.apache.poi.hslf.usermodel.SlideShow)"><!-- --></A><H3>
+supplySlideShow</H3>
+<PRE>
+public void <B>supplySlideShow</B>(<A HREF="../../../../../org/apache/poi/hslf/usermodel/SlideShow.html" title="class in org.apache.poi.hslf.usermodel">SlideShow</A>&nbsp;ss)</PRE>
+<DL>
+<DD>Supply the SlideShow we belong to
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getLength()"><!-- --></A><H3>
+getLength</H3>
+<PRE>
+public int <B>getLength</B>()</PRE>
+<DL>
+<DD>Get the length of the text
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getStartIndex()"><!-- --></A><H3>
+getStartIndex</H3>
+<PRE>
+public int <B>getStartIndex</B>()</PRE>
+<DL>
+<DD>The beginning index, inclusive.
+<P>
+<DD><DL>
+
+<DT><B>Returns:</B><DD>the beginning index, inclusive.</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getEndIndex()"><!-- --></A><H3>
+getEndIndex</H3>
+<PRE>
+public int <B>getEndIndex</B>()</PRE>
+<DL>
+<DD>The ending index, exclusive.
+<P>
+<DD><DL>
+
+<DT><B>Returns:</B><DD>the ending index, exclusive.</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getText()"><!-- --></A><H3>
+getText</H3>
+<PRE>
+public java.lang.String <B>getText</B>()</PRE>
+<DL>
+<DD>Fetch the text, in output suitable form
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getRawText()"><!-- --></A><H3>
+getRawText</H3>
+<PRE>
+public java.lang.String <B>getRawText</B>()</PRE>
+<DL>
+<DD>Fetch the text, in raw storage form
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setText(java.lang.String)"><!-- --></A><H3>
+setText</H3>
+<PRE>
+public void <B>setText</B>(java.lang.String&nbsp;text)</PRE>
+<DL>
+<DD>Change the text
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setRawText(java.lang.String)"><!-- --></A><H3>
+setRawText</H3>
+<PRE>
+public void <B>setRawText</B>(java.lang.String&nbsp;text)</PRE>
+<DL>
+<DD>Change the text
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="updateStartPosition(int)"><!-- --></A><H3>
+updateStartPosition</H3>
+<PRE>
+public void <B>updateStartPosition</B>(int&nbsp;startAt)</PRE>
+<DL>
+<DD>Tells the RichTextRun its new position in the parent TextRun
+<P>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>startAt</CODE> - </DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setFlag(boolean, int, boolean)"><!-- --></A><H3>
+setFlag</H3>
+<PRE>
+public void <B>setFlag</B>(boolean&nbsp;isCharacter,
+                    int&nbsp;index,
+                    boolean&nbsp;value)</PRE>
+<DL>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setParaTextPropVal(java.lang.String, int)"><!-- --></A><H3>
+setParaTextPropVal</H3>
+<PRE>
+public void <B>setParaTextPropVal</B>(java.lang.String&nbsp;propName,
+                               int&nbsp;val)</PRE>
+<DL>
+<DD>Sets the value of the given Character TextProp, add if required
+<P>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>propName</CODE> - The name of the Character TextProp<DD><CODE>val</CODE> - The value to set for the TextProp</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setCharTextPropVal(java.lang.String, int)"><!-- --></A><H3>
+setCharTextPropVal</H3>
+<PRE>
+public void <B>setCharTextPropVal</B>(java.lang.String&nbsp;propName,
+                               int&nbsp;val)</PRE>
+<DL>
+<DD>Sets the value of the given Paragraph TextProp, add if required
+<P>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>propName</CODE> - The name of the Paragraph TextProp<DD><CODE>val</CODE> - The value to set for the TextProp</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="isBold()"><!-- --></A><H3>
+isBold</H3>
+<PRE>
+public boolean <B>isBold</B>()</PRE>
+<DL>
+<DD>Is the text bold?
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setBold(boolean)"><!-- --></A><H3>
+setBold</H3>
+<PRE>
+public void <B>setBold</B>(boolean&nbsp;bold)</PRE>
+<DL>
+<DD>Is the text bold?
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="isItalic()"><!-- --></A><H3>
+isItalic</H3>
+<PRE>
+public boolean <B>isItalic</B>()</PRE>
+<DL>
+<DD>Is the text italic?
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setItalic(boolean)"><!-- --></A><H3>
+setItalic</H3>
+<PRE>
+public void <B>setItalic</B>(boolean&nbsp;italic)</PRE>
+<DL>
+<DD>Is the text italic?
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="isUnderlined()"><!-- --></A><H3>
+isUnderlined</H3>
+<PRE>
+public boolean <B>isUnderlined</B>()</PRE>
+<DL>
+<DD>Is the text underlined?
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setUnderlined(boolean)"><!-- --></A><H3>
+setUnderlined</H3>
+<PRE>
+public void <B>setUnderlined</B>(boolean&nbsp;underlined)</PRE>
+<DL>
+<DD>Is the text underlined?
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="isShadowed()"><!-- --></A><H3>
+isShadowed</H3>
+<PRE>
+public boolean <B>isShadowed</B>()</PRE>
+<DL>
+<DD>Does the text have a shadow?
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setShadowed(boolean)"><!-- --></A><H3>
+setShadowed</H3>
+<PRE>
+public void <B>setShadowed</B>(boolean&nbsp;flag)</PRE>
+<DL>
+<DD>Does the text have a shadow?
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="isEmbossed()"><!-- --></A><H3>
+isEmbossed</H3>
+<PRE>
+public boolean <B>isEmbossed</B>()</PRE>
+<DL>
+<DD>Is this text embossed?
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setEmbossed(boolean)"><!-- --></A><H3>
+setEmbossed</H3>
+<PRE>
+public void <B>setEmbossed</B>(boolean&nbsp;flag)</PRE>
+<DL>
+<DD>Is this text embossed?
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="isStrikethrough()"><!-- --></A><H3>
+isStrikethrough</H3>
+<PRE>
+public boolean <B>isStrikethrough</B>()</PRE>
+<DL>
+<DD>Gets the strikethrough flag
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setStrikethrough(boolean)"><!-- --></A><H3>
+setStrikethrough</H3>
+<PRE>
+public void <B>setStrikethrough</B>(boolean&nbsp;flag)</PRE>
+<DL>
+<DD>Sets the strikethrough flag
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getSuperscript()"><!-- --></A><H3>
+getSuperscript</H3>
+<PRE>
+public int <B>getSuperscript</B>()</PRE>
+<DL>
+<DD>Gets the subscript/superscript option
+<P>
+<DD><DL>
+
+<DT><B>Returns:</B><DD>the percentage of the font size. If the value is positive, it is superscript, otherwise it is subscript</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setSuperscript(int)"><!-- --></A><H3>
+setSuperscript</H3>
+<PRE>
+public void <B>setSuperscript</B>(int&nbsp;val)</PRE>
+<DL>
+<DD>Sets the subscript/superscript option
+<P>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>val</CODE> - the percentage of the font size. If the value is positive, it is superscript, otherwise it is subscript</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getFontSize()"><!-- --></A><H3>
+getFontSize</H3>
+<PRE>
+public int <B>getFontSize</B>()</PRE>
+<DL>
+<DD>Gets the font size
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setFontSize(int)"><!-- --></A><H3>
+setFontSize</H3>
+<PRE>
+public void <B>setFontSize</B>(int&nbsp;fontSize)</PRE>
+<DL>
+<DD>Sets the font size
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getFontIndex()"><!-- --></A><H3>
+getFontIndex</H3>
+<PRE>
+public int <B>getFontIndex</B>()</PRE>
+<DL>
+<DD>Gets the font index
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setFontIndex(int)"><!-- --></A><H3>
+setFontIndex</H3>
+<PRE>
+public void <B>setFontIndex</B>(int&nbsp;idx)</PRE>
+<DL>
+<DD>Sets the font index
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setFontName(java.lang.String)"><!-- --></A><H3>
+setFontName</H3>
+<PRE>
+public void <B>setFontName</B>(java.lang.String&nbsp;fontName)</PRE>
+<DL>
+<DD>Sets the font name to use
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getFontName()"><!-- --></A><H3>
+getFontName</H3>
+<PRE>
+public java.lang.String <B>getFontName</B>()</PRE>
+<DL>
+<DD>Gets the font name
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getFontColor()"><!-- --></A><H3>
+getFontColor</H3>
+<PRE>
+public java.awt.Color <B>getFontColor</B>()</PRE>
+<DL>
+<DD><DL>
+
+<DT><B>Returns:</B><DD>font color as RGB value<DT><B>See Also:</B><DD><CODE>Color</CODE></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setFontColor(int)"><!-- --></A><H3>
+setFontColor</H3>
+<PRE>
+public void <B>setFontColor</B>(int&nbsp;bgr)</PRE>
+<DL>
+<DD>Sets color of the text, as a int bgr.
+ (PowerPoint stores as BlueGreenRed, not the more
+  usual RedGreenBlue)
+<P>
+<DD><DL>
+<DT><B>See Also:</B><DD><CODE>Color</CODE></DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setFontColor(java.awt.Color)"><!-- --></A><H3>
+setFontColor</H3>
+<PRE>
+public void <B>setFontColor</B>(java.awt.Color&nbsp;color)</PRE>
+<DL>
+<DD>Sets color of the text, as a java.awt.Color
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setAlignment(int)"><!-- --></A><H3>
+setAlignment</H3>
+<PRE>
+public void <B>setAlignment</B>(int&nbsp;align)</PRE>
+<DL>
+<DD>Sets the type of horizontal alignment for the text.
+ One of the <code>Align*</code> constants defined in the <code>TextBox</code> class.
+<P>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>align</CODE> - - the type of alignment</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getAlignment()"><!-- --></A><H3>
+getAlignment</H3>
+<PRE>
+public int <B>getAlignment</B>()</PRE>
+<DL>
+<DD>Returns the type of horizontal alignment for the text.
+ One of the <code>Align*</code> constants defined in the <code>TextBox</class> class.
+<P>
+<DD><DL>
+
+<DT><B>Returns:</B><DD>the type of alignment</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getIndentLevel()"><!-- --></A><H3>
+getIndentLevel</H3>
+<PRE>
+public int <B>getIndentLevel</B>()</PRE>
+<DL>
+<DD><DL>
+
+<DT><B>Returns:</B><DD>indentation level</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setIndentLevel(int)"><!-- --></A><H3>
+setIndentLevel</H3>
+<PRE>
+public void <B>setIndentLevel</B>(int&nbsp;level)</PRE>
+<DL>
+<DD>Sets indentation level
+<P>
+<DD><DL>
+<DT><B>Parameters:</B><DD><CODE>level</CODE> - indentation level. Must be in the range [0, 4]</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setBullet(boolean)"><!-- --></A><H3>
+setBullet</H3>
+<PRE>
+public void <B>setBullet</B>(boolean&nbsp;flag)</PRE>
+<DL>
+<DD>Sets whether this rich text run has bullets
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="isBullet()"><!-- --></A><H3>
+isBullet</H3>
+<PRE>
+public boolean <B>isBullet</B>()</PRE>
+<DL>
+<DD>Returns whether this rich text run has bullets
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="isBulletHard()"><!-- --></A><H3>
+isBulletHard</H3>
+<PRE>
+public boolean <B>isBulletHard</B>()</PRE>
+<DL>
+<DD>Returns whether this rich text run has bullets
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setBulletChar(char)"><!-- --></A><H3>
+setBulletChar</H3>
+<PRE>
+public void <B>setBulletChar</B>(char&nbsp;c)</PRE>
+<DL>
+<DD>Sets the bullet character
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getBulletChar()"><!-- --></A><H3>
+getBulletChar</H3>
+<PRE>
+public char <B>getBulletChar</B>()</PRE>
+<DL>
+<DD>Returns the bullet character
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setBulletOffset(int)"><!-- --></A><H3>
+setBulletOffset</H3>
+<PRE>
+public void <B>setBulletOffset</B>(int&nbsp;offset)</PRE>
+<DL>
+<DD>Sets the bullet offset
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getBulletOffset()"><!-- --></A><H3>
+getBulletOffset</H3>
+<PRE>
+public int <B>getBulletOffset</B>()</PRE>
+<DL>
+<DD>Returns the bullet offset
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setTextOffset(int)"><!-- --></A><H3>
+setTextOffset</H3>
+<PRE>
+public void <B>setTextOffset</B>(int&nbsp;offset)</PRE>
+<DL>
+<DD>Sets the text offset
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getTextOffset()"><!-- --></A><H3>
+getTextOffset</H3>
+<PRE>
+public int <B>getTextOffset</B>()</PRE>
+<DL>
+<DD>Returns the text offset
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setBulletSize(int)"><!-- --></A><H3>
+setBulletSize</H3>
+<PRE>
+public void <B>setBulletSize</B>(int&nbsp;size)</PRE>
+<DL>
+<DD>Sets the bullet size
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getBulletSize()"><!-- --></A><H3>
+getBulletSize</H3>
+<PRE>
+public int <B>getBulletSize</B>()</PRE>
+<DL>
+<DD>Returns the bullet size
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setBulletColor(java.awt.Color)"><!-- --></A><H3>
+setBulletColor</H3>
+<PRE>
+public void <B>setBulletColor</B>(java.awt.Color&nbsp;color)</PRE>
+<DL>
+<DD>Sets the bullet color
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getBulletColor()"><!-- --></A><H3>
+getBulletColor</H3>
+<PRE>
+public java.awt.Color <B>getBulletColor</B>()</PRE>
+<DL>
+<DD>Returns the bullet color
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setBulletFont(int)"><!-- --></A><H3>
+setBulletFont</H3>
+<PRE>
+public void <B>setBulletFont</B>(int&nbsp;idx)</PRE>
+<DL>
+<DD>Sets the bullet font
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getBulletFont()"><!-- --></A><H3>
+getBulletFont</H3>
+<PRE>
+public int <B>getBulletFont</B>()</PRE>
+<DL>
+<DD>Returns the bullet font
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setLineSpacing(int)"><!-- --></A><H3>
+setLineSpacing</H3>
+<PRE>
+public void <B>setLineSpacing</B>(int&nbsp;val)</PRE>
+<DL>
+<DD>Sets the line spacing.
+ <p>
+ If linespacing >= 0, then linespacing is a percentage of normal line height.
+ If linespacing < 0, the absolute value of linespacing is the spacing in master coordinates.
+ </p>
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getLineSpacing()"><!-- --></A><H3>
+getLineSpacing</H3>
+<PRE>
+public int <B>getLineSpacing</B>()</PRE>
+<DL>
+<DD>Returns the line spacing
+ <p>
+ If linespacing >= 0, then linespacing is a percentage of normal line height.
+ If linespacing < 0, the absolute value of linespacing is the spacing in master coordinates.
+ </p>
+<P>
+<DD><DL>
+
+<DT><B>Returns:</B><DD>the spacing between lines</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setSpaceBefore(int)"><!-- --></A><H3>
+setSpaceBefore</H3>
+<PRE>
+public void <B>setSpaceBefore</B>(int&nbsp;val)</PRE>
+<DL>
+<DD>Sets spacing before a paragraph.
+ <p>
+ If spacebefore >= 0, then spacebefore is a percentage of normal line height.
+ If spacebefore < 0, the absolute value of spacebefore is the spacing in master coordinates.
+ </p>
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getSpaceBefore()"><!-- --></A><H3>
+getSpaceBefore</H3>
+<PRE>
+public int <B>getSpaceBefore</B>()</PRE>
+<DL>
+<DD>Returns spacing before a paragraph
+ <p>
+ If spacebefore >= 0, then spacebefore is a percentage of normal line height.
+ If spacebefore < 0, the absolute value of spacebefore is the spacing in master coordinates.
+ </p>
+<P>
+<DD><DL>
+
+<DT><B>Returns:</B><DD>the spacing before a paragraph</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="setSpaceAfter(int)"><!-- --></A><H3>
+setSpaceAfter</H3>
+<PRE>
+public void <B>setSpaceAfter</B>(int&nbsp;val)</PRE>
+<DL>
+<DD>Sets spacing after a paragraph.
+ <p>
+ If spaceafter >= 0, then spaceafter is a percentage of normal line height.
+ If spaceafter < 0, the absolute value of spaceafter is the spacing in master coordinates.
+ </p>
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="getSpaceAfter()"><!-- --></A><H3>
+getSpaceAfter</H3>
+<PRE>
+public int <B>getSpaceAfter</B>()</PRE>
+<DL>
+<DD>Returns spacing after a paragraph
+ <p>
+ If spaceafter >= 0, then spaceafter is a percentage of normal line height.
+ If spaceafter < 0, the absolute value of spaceafter is the spacing in master coordinates.
+ </p>
+<P>
+<DD><DL>
+
+<DT><B>Returns:</B><DD>the spacing before a paragraph</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="_getRawParagraphStyle()"><!-- --></A><H3>
+_getRawParagraphStyle</H3>
+<PRE>
+public <A HREF="../../../../../org/apache/poi/hslf/model/textproperties/TextPropCollection.html" title="class in org.apache.poi.hslf.model.textproperties">TextPropCollection</A> <B>_getRawParagraphStyle</B>()</PRE>
+<DL>
+<DD>Internal Use Only - get the underlying paragraph style collection.
+ For normal use, use the friendly setters and getters
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="_getRawCharacterStyle()"><!-- --></A><H3>
+_getRawCharacterStyle</H3>
+<PRE>
+public <A HREF="../../../../../org/apache/poi/hslf/model/textproperties/TextPropCollection.html" title="class in org.apache.poi.hslf.model.textproperties">TextPropCollection</A> <B>_getRawCharacterStyle</B>()</PRE>
+<DL>
+<DD>Internal Use Only - get the underlying character style collection.
+ For normal use, use the friendly setters and getters
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="_isParagraphStyleShared()"><!-- --></A><H3>
+_isParagraphStyleShared</H3>
+<PRE>
+public boolean <B>_isParagraphStyleShared</B>()</PRE>
+<DL>
+<DD>Internal Use Only - are the Paragraph styles shared?
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<HR>
+
+<A NAME="_isCharacterStyleShared()"><!-- --></A><H3>
+_isCharacterStyleShared</H3>
+<PRE>
+public boolean <B>_isCharacterStyleShared</B>()</PRE>
+<DL>
+<DD>Internal Use Only - are the Character styles shared?
+<P>
+<DD><DL>
+</DL>
+</DD>
+</DL>
+<!-- ========= END OF CLASS DATA ========= -->
+<HR>
+
+
+<!-- ======= START OF BOTTOM NAVBAR ====== -->
+<A NAME="navbar_bottom"><!-- --></A>
+<A HREF="#skip-navbar_bottom" title="Skip navigation links"></A>
+<TABLE BORDER="0" WIDTH="100%" CELLPADDING="1" CELLSPACING="0" SUMMARY="">
+<TR>
+<TD COLSPAN=2 BGCOLOR="#EEEEFF" CLASS="NavBarCell1">
+<A NAME="navbar_bottom_firstrow"><!-- --></A>
+<TABLE BORDER="0" CELLPADDING="0" CELLSPACING="3" SUMMARY="">
+  <TR ALIGN="center" VALIGN="top">
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../overview-summary.html"><FONT CLASS="NavBarFont1"><B>Overview</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="package-summary.html"><FONT CLASS="NavBarFont1"><B>Package</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#FFFFFF" CLASS="NavBarCell1Rev"> &nbsp;<FONT CLASS="NavBarFont1Rev"><B>Class</B></FONT>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="class-use/RichTextRun.html"><FONT CLASS="NavBarFont1"><B>Use</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="package-tree.html"><FONT CLASS="NavBarFont1"><B>Tree</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../deprecated-list.html"><FONT CLASS="NavBarFont1"><B>Deprecated</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../index-all.html"><FONT CLASS="NavBarFont1"><B>Index</B></FONT></A>&nbsp;</TD>
+  <TD BGCOLOR="#EEEEFF" CLASS="NavBarCell1">    <A HREF="../../../../../help-doc.html"><FONT CLASS="NavBarFont1"><B>Help</B></FONT></A>&nbsp;</TD>
+  </TR>
+</TABLE>
+</TD>
+<TD ALIGN="right" VALIGN="top" ROWSPAN=3><EM>
+</EM>
+</TD>
+</TR>
+
+<TR>
+<TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
+&nbsp;<A HREF="../../../../../org/apache/poi/hslf/usermodel/PictureData.html" title="class in org.apache.poi.hslf.usermodel"><B>PREV CLASS</B></A>&nbsp;
+&nbsp;<A HREF="../../../../../org/apache/poi/hslf/usermodel/SlideShow.html" title="class in org.apache.poi.hslf.usermodel"><B>NEXT CLASS</B></A></FONT></TD>
+<TD BGCOLOR="white" CLASS="NavBarCell2"><FONT SIZE="-2">
+  <A HREF="../../../../../index.html?org/apache/poi/hslf/usermodel/RichTextRun.html" target="_top"><B>FRAMES</B></A>  &nbsp;
+&nbsp;<A HREF="RichTextRun.html" target="_top"><B>NO FRAMES</B></A>  &nbsp;
+&nbsp;<SCRIPT type="text/javascript">
+  <!--
+  if(window==top) {
+    document.writeln('<A HREF="../../../../../allclasses-noframe.html"><B>All Classes</B></A>');
+  }
+  //-->
+</SCRIPT>
+<NOSCRIPT>
+  <A HREF="../../../../../allclasses-noframe.html"><B>All Classes</B></A>
+</NOSCRIPT>
+
+
+</FONT></TD>
+</TR>
+<TR>
+<TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
+  SUMMARY:&nbsp;NESTED&nbsp;|&nbsp;<A HREF="#field_summary">FIELD</A>&nbsp;|&nbsp;<A HREF="#constructor_summary">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_summary">METHOD</A></FONT></TD>
+<TD VALIGN="top" CLASS="NavBarCell3"><FONT SIZE="-2">
+DETAIL:&nbsp;<A HREF="#field_detail">FIELD</A>&nbsp;|&nbsp;<A HREF="#constructor_detail">CONSTR</A>&nbsp;|&nbsp;<A HREF="#method_detail">METHOD</A></FONT></TD>
+</TR>
+</TABLE>
+<A NAME="skip-navbar_bottom"></A>
+<!-- ======== END OF BOTTOM NAVBAR ======= -->
+
+<HR>
+
+                <i>Copyright 2014 The Apache Software Foundation or
+        its licensors, as applicable.</i>
+            
+</BODY>
+</HTML>

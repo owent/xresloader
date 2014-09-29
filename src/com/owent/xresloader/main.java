@@ -16,6 +16,10 @@ public class main {
 		// 
 		System.out.println("Hello world!");
 
+		int ret = ProgramOptions.getInstance().init(args);
+		if (ret < 0)
+			System.exit(ret);
+		
 	}
 
 }

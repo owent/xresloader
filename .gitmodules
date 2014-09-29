@@ -1,0 +1,9 @@
+[submodule "3rd/poi"]
+	path = 3rd/poi
+	url = http://git.apache.org/poi.git
+[submodule "3rd/protobuf"]
+	path = 3rd/protobuf
+	url = https://github.com/google/protobuf
+[submodule "3rd/java-getopt"]
+	path = 3rd/java-getopt
+	url = https://github.com/arenn/java-getopt

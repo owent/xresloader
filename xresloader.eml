@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component inheritJdk="true">
+	<exclude-output/>
+	<contentEntry url="file://$MODULE_DIR$"/>
+	<lib name="poi-3.10.1-20140818.jar" scope="COMPILE">
+		<relative-module-cls project-related="jar://$PROJECT_DIR$/deps/poi/poi-3.10.1-20140818.jar!/"/>
+	</lib>
+	<lib name="java-getopt-1.0.14.jar" scope="COMPILE">
+		<relative-module-cls project-related="jar://$PROJECT_DIR$/deps/java-getopt/java-getopt-1.0.14.jar!/"/>
+	</lib>
+</component>

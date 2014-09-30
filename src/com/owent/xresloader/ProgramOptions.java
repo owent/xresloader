@@ -9,15 +9,16 @@ import gnu.getopt.*;
 
 public class ProgramOptions {
 
-	public enum OutputType { BIN, LUA, JSON, XML};
+	public enum FileType { BIN, LUA, JSON, XML, INI, EXCEL};
 	public enum Protocol { PROTOBUF, CAPNPROTO, FLATBUFFER};
 	
-	public OutputType outType;
+	public FileType outType;
 	public Protocol protocol;
 	public String protocolFile = ""; 
 	public String outputDirectory = "";
 	public String dataSourceDirectory = "";
 	public String dataSourceFile = "";
+    public FileType dataSourceType;
 	public List<String> dataSourceMetas = null;
 	
 	/**
@@ -26,11 +27,12 @@ public class ProgramOptions {
 	private static ProgramOptions instance = null;
 	private ProgramOptions() {
 		dataSourceMetas = new LinkedList<String>();
-		outType = OutputType.BIN;
+		outType = FileType.BIN;
 		protocol = Protocol.PROTOBUF;
 		
 		outputDirectory = System.getProperty("user.dir");
 		dataSourceDirectory = outputDirectory;
+        dataSourceType = FileType.EXCEL;
 	}
 
 	public static ProgramOptions getInstance() {
@@ -42,13 +44,10 @@ public class ProgramOptions {
 
 	
 	public int init(String[] args) {
-		String[] argv = new String[args.length - 1];
-		for (int i = 1 ; i < args.length - 1; ++ i)
-			argv[i - 1] = args[i];
-		
 		StringBuffer sb =  new StringBuffer();
-		
-		Getopt g = new Getopt("", argv, "ht:p:f:o:d:s:m", //
+		String script = System.getProperty("user.scripts");
+
+		Getopt g = new Getopt("", args, "ht:p:f:o:d:s:m", //
 			new LongOpt[]{
 				new LongOpt("help", 		LongOpt.NO_ARGUMENT, null, 'h'),
 				new LongOpt("output-type", 	LongOpt.REQUIRED_ARGUMENT, sb, 't'),
@@ -66,22 +65,106 @@ public class ProgramOptions {
 		while ((c = g.getopt()) != -1) {
 			char cc = (char) c;
 		    switch (c) {
-		    case 'h':
-		    case 1:
-		    	System.out.println("Usage: java -jar " + args[0] + " [options]");
-		    	System.out.println("-h, --help              help");
-		    	System.out.println("-t, --output-type       output type(bin)");
-		    	System.out.println("-p, --proto             protocol(protobuf)");
-		    	System.out.println("-f, --proto-file        protocol description file");
-		    	System.out.println("-o, --output-dir        output directory");
-		    	System.out.println("-d, --data-src-dir      data source directory");
-		    	System.out.println("-s, --src-file          data source file");
-		    	System.out.println("-m, --src-meta          data description meta");
-		    	System.exit(0);
-		    	break;
-		    	
+		    case 'h': {
+                System.out.println("Usage: java -jar " + script + " [options]");
+                System.out.println("-h, --help              help");
+                System.out.println("-t, --output-type       output type(bin)");
+                System.out.println("-p, --proto             protocol(protobuf)");
+                System.out.println("-f, --proto-file        protocol description file");
+                System.out.println("-o, --output-dir        output directory");
+                System.out.println("-d, --data-src-dir      data source directory");
+                System.out.println("-s, --src-file          data source file");
+                System.out.println("-m, --src-meta          data description meta");
+                System.exit(0);
+                break;
+            }
+            case 't': {
+                String val = g.getOptarg();
+                if (val.equalsIgnoreCase("bin")) {
+                    outType = FileType.BIN;
+
+                //} else if (val.equalsIgnoreCase("lua")){
+                //} else if (val.equalsIgnoreCase("json")){
+                //} else if (val.equalsIgnoreCase("xml")){
+                } else {
+                    System.err.println("[ERROR] invalid output type " + sb.toString());
+                    return -1;
+                }
+                break;
+            }
+
+            case 'p': {
+                String val = g.getOptarg();
+                if (val.equalsIgnoreCase("protobuf")) {
+                    protocol = Protocol.PROTOBUF;
+
+                    //} else if (val.equalsIgnoreCase("capnproto")){
+                    //} else if (val.equalsIgnoreCase("flatbuffer")){
+                } else {
+                    System.err.println("[ERROR] invalid protocol type " + sb.toString());
+                    return -2;
+                }
+
+                break;
+            }
+
+            case 'f': {
+                protocolFile = g.getOptarg();
+                break;
+            }
+
+            case 'o': {
+                outputDirectory = g.getOptarg();
+                break;
+            }
+
+            case 'd': {
+                dataSourceDirectory = g.getOptarg();
+                break;
+            }
+
+            case 's': {
+                dataSourceFile = g.getOptarg();
+                String[] suffixs = dataSourceFile.split(".");
+
+                String name_suffix = suffixs.length > 0? suffixs[suffixs.length - 1]: null;
+                if (null != name_suffix && (
+                        name_suffix.equalsIgnoreCase("xls") ||
+                        name_suffix.equalsIgnoreCase("xlsx") ||
+                        name_suffix.equalsIgnoreCase("cvs") ||
+                        name_suffix.equalsIgnoreCase("xlsm") ||
+                        name_suffix.equalsIgnoreCase("ods")
+                )) {
+                    dataSourceType = FileType.EXCEL;
+
+//                } else if (null != name_suffix && (
+//                        name_suffix.equalsIgnoreCase("ini") ||
+//                        name_suffix.equalsIgnoreCase("cfg") ||
+//                        name_suffix.equalsIgnoreCase("conf")
+//                )) {
+//                    dataSourceType = FileType.INI;
+//                } else if (null != name_suffix && name_suffix.equalsIgnoreCase("json")) {
+//                    dataSourceType = FileType.JSON;
+//                } else if (null != name_suffix && name_suffix.equalsIgnoreCase("lua")) {
+//                    dataSourceType = FileType.LUA;
+//                } else if (null != name_suffix && name_suffix.equalsIgnoreCase("xml")) {
+//                    dataSourceType = FileType.XML;
+                }
+
+                break;
+            }
+
+            case 'm': {
+                dataSourceMetas.add(g.getOptarg());
+                break;
+            }
+
+            case 0:
+                break;
+
 		    default:
-		    	System.out.println("[WARN] Unknown option " + g.toString());
+		    	System.out.println("[WARN] Unknown option " + g.getOptarg());
+                break;
 		    }
 		}
 		

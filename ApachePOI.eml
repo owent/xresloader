@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component inheritJdk="true">
+	<exclude-output/>
+	<contentEntry url="file://$MODULE_DIR$/3rd/poi"/>
+	<lib name="ooxml-schemas-1.1.jar" scope="COMPILE">
+		<srcroot url="file://ooxml-lib/ooxml-schemas-src-1.1.jar"/>
+	</lib>
+	<lib name="ooxml-encryption-1.1.jar" scope="COMPILE">
+		<srcroot url="file://ooxml-lib/ooxml-encryption-src-1.1.jar"/>
+	</lib>
+</component>

@@ -1,0 +1,8 @@
+
+message role_cfg {
+    required uint32 id = 1;
+    required uint32 unlock_level = 2;
+    required uint32 cost_type = 3;
+    required int32 cost_value = 4;
+    required string name = 5;
+}

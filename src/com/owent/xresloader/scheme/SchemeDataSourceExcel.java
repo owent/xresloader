@@ -1,14 +1,10 @@
-package com.owent.xresloader;
+package com.owent.xresloader.scheme;
 
-import org.apache.poi.hssf.usermodel.HSSFWorkbook;
-import org.apache.poi.ss.usermodel.Cell;
+import com.owent.xresloader.ProgramOptions;
+import com.owent.xresloader.engine.ExcelEngine;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
-import org.apache.poi.xssf.usermodel.XSSFWorkbook;
-
-import java.io.FileInputStream;
-import java.io.IOException;
 
 
 /**
@@ -16,41 +12,22 @@ import java.io.IOException;
  */
 public final class SchemeDataSourceExcel  implements SchemeDataSourceImpl {
 
+    private Workbook currentWorkbook = null;
+
     public int load() {
 
-        try {
-            String file_path = ProgramOptions.getInstance().dataSourceFile;
-            FileInputStream is = new FileInputStream(file_path);
-            if(null == is) {
-                System.err.println("[ERROR] open file \"" + ProgramOptions.getInstance().dataSourceFile + "\" failed");
-                return -21;
-            }
-            //POIFSFileSystem scheme_file = new POIFSFileSystem(is);
-
-            Workbook wb = null;
-            // 类型枚举，以后能支持 ods等非微软格式？
-            if (file_path.endsWith(".xls"))
-                wb = new HSSFWorkbook(is);
-            else
-                wb = new XSSFWorkbook(is);
-
-            for(String sn : ProgramOptions.getInstance().dataSourceMetas) {
-                if (false == load_scheme(wb, sn)) {
-                    System.err.println("[ERROR] convert scheme \"" + sn + "\" failed");
-                } else {
-                    System.out.println("[INFO] convert scheme \"" + sn + "\" success");
-                }
-            }
-
-        } catch (IOException e) {
-            e.printStackTrace();
-            return -1;
+        String file_path = ProgramOptions.getInstance().dataSourceFile;
+        currentWorkbook = ExcelEngine.openWorkbook(file_path);
+        if(null == currentWorkbook) {
+            System.err.println("[ERROR] open file \"" + ProgramOptions.getInstance().dataSourceFile + "\" failed");
+            return -21;
         }
 
         return 0;
     }
 
-    public boolean load_scheme(Workbook wb, String sheet_name) {
+    public boolean load_scheme(String sheet_name) {
+        Workbook wb = currentWorkbook;
         Sheet table = wb.getSheet(sheet_name);
         if (null == table) {
             System.err.println("[ERROR] excel sheet \"" + sheet_name + "\" not found");
@@ -110,22 +87,22 @@ public final class SchemeDataSourceExcel  implements SchemeDataSourceImpl {
                 SchemeConf.getInstance().setDateSourceFile(cell2str(row, data_col[0]));
                 SchemeConf.getInstance().setDateSourceTable(cell2str(row, data_col[1]));
             } else if (key.equalsIgnoreCase("DataRect")) {
-                SchemeConf.getInstance().setDateRectRow(cell2int(row,data_col[0]));
-                SchemeConf.getInstance().setDateRectCol(cell2int(row,data_col[1]));
+                SchemeConf.getInstance().setDateRectRow(cell2int(row, data_col[0]));
+                SchemeConf.getInstance().setDateRectCol(cell2int(row, data_col[1]));
             } else if (key.equalsIgnoreCase("MacroSource")) {
-                SchemeConf.getInstance().setMacroSourceFile(cell2str(row,data_col[0]));
+                SchemeConf.getInstance().setMacroSourceFile(cell2str(row, data_col[0]));
                 SchemeConf.getInstance().setMacroSourceTable(cell2str(row, data_col[1]));
             } else if (key.equalsIgnoreCase("MacroRect")) {
-                SchemeConf.getInstance().setMacroRectRow(cell2int(row,data_col[0]));
-                SchemeConf.getInstance().setMacroRectCol(cell2int(row,data_col[1]));
+                SchemeConf.getInstance().setMacroRectRow(cell2int(row, data_col[0]));
+                SchemeConf.getInstance().setMacroRectCol(cell2int(row, data_col[1]));
             }
             // 字段映射配置
             else if (key.equalsIgnoreCase("ProtoName")) {
-                SchemeConf.getInstance().setProtoName(cell2str(row,data_col[0]));
+                SchemeConf.getInstance().setProtoName(cell2str(row, data_col[0]));
             } else if (key.equalsIgnoreCase("OutputFile")) {
-                SchemeConf.getInstance().setOutputFile(cell2str(row,data_col[0]));
+                SchemeConf.getInstance().setOutputFile(cell2str(row, data_col[0]));
             } else if (key.equalsIgnoreCase("KeyRow")) {
-                SchemeConf.getInstance().getKey().setRow(cell2int(row,data_col[0]));
+                SchemeConf.getInstance().getKey().setRow(cell2int(row, data_col[0]));
             } else if (key.equalsIgnoreCase("KeyCase")) {
                 String letter_case = cell2str(row, data_col[0]);
                 if (letter_case.equals("大写")) {
@@ -136,20 +113,20 @@ public final class SchemeDataSourceExcel  implements SchemeDataSourceImpl {
                     SchemeConf.getInstance().getKey().setLetterCase(SchemeKeyConf.KeyCase.NONE);
                 }
             } else if (key.equalsIgnoreCase("KeyWordSplit")) {
-                SchemeConf.getInstance().getKey().setWordSplit(cell2str(row,data_col[0]));
+                SchemeConf.getInstance().getKey().setWordSplit(cell2str(row, data_col[0]));
             } else if (key.equalsIgnoreCase("KeyPrefix")) {
-                SchemeConf.getInstance().getKey().setPrefix(cell2str(row,data_col[0]));
+                SchemeConf.getInstance().getKey().setPrefix(cell2str(row, data_col[0]));
             } else if (key.equalsIgnoreCase("KeySuffix")) {
-                SchemeConf.getInstance().getKey().setSuffix(cell2str(row,data_col[0]));
+                SchemeConf.getInstance().getKey().setSuffix(cell2str(row, data_col[0]));
             } else if (key.equalsIgnoreCase("KeyTypePrefix")) {
-                String v = cell2str(row,data_col[0]);
+                String v = cell2str(row, data_col[0]);
                 if (v.equals("是") || v.equalsIgnoreCase("Yes") || v.equalsIgnoreCase("True") || v.equalsIgnoreCase("1")) {
                     SchemeConf.getInstance().getKey().setEnableTypeSuffix(true);
                 } else {
                     SchemeConf.getInstance().getKey().setEnableTypeSuffix(false);
                 }
             } else if (key.equalsIgnoreCase("Encoding")) {
-                SchemeConf.getInstance().getKey().setEncoding(cell2str(row,data_col[0]));
+                SchemeConf.getInstance().getKey().setEncoding(cell2str(row, data_col[0]));
             }
         }
 
@@ -157,20 +134,10 @@ public final class SchemeDataSourceExcel  implements SchemeDataSourceImpl {
     }
 
     private String cell2str(Row row, int col) {
-        Cell c = row.getCell(col);
-        if (null == c)
-            return "";
-
-        String v = row.getCell(col).getStringCellValue();
-        if (null == v)
-            return "";
-        return v.trim();
+        return ExcelEngine.cell2str(row, col);
     }
 
     private int cell2int(Row row, int col) {
-        Cell c = row.getCell(col);
-        if (null == c)
-            return 0;
-        return (int)c.getNumericCellValue();
+        return ExcelEngine.cell2int(row, col);
     }
 }

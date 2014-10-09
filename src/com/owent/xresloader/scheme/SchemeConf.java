@@ -1,4 +1,6 @@
-package com.owent.xresloader;
+package com.owent.xresloader.scheme;
+
+import com.owent.xresloader.ProgramOptions;
 
 /**
  * Created by owentou on 2014/9/30.
@@ -176,6 +178,10 @@ public class SchemeConf {
     private String protoName;
     private String outputFile;
     private SchemeKeyConf key;
+
+    public SchemeDataSourceImpl getScheme() {
+        return scheme;
+    }
 
     private SchemeDataSourceImpl scheme;
 

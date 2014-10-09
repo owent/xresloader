@@ -1,4 +1,4 @@
-package com.owent.xresloader;
+package com.owent.xresloader.scheme;
 
 /**
  * Created by owentou on 2014/9/30.

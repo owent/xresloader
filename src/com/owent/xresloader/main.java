@@ -20,6 +20,8 @@ public class main {
         ret = SchemeConf.getInstance().initScheme();
         if (ret < 0)
             System.exit(ret);
+
+        // 读入数据表 & 协议编译
 	}
 
 }

@@ -101,7 +101,7 @@ public class SchemeKeyConf {
      *
      * @return Value for property 'enableTypeSuffix'.
      */
-    public String getEnableTypeSuffix() {
+    public boolean getEnableTypeSuffix() {
         return enableTypeSuffix;
     }
 
@@ -110,7 +110,7 @@ public class SchemeKeyConf {
      *
      * @param enableTypeSuffix Value to set for property 'enableTypeSuffix'.
      */
-    public void setEnableTypeSuffix(String enableTypeSuffix) {
+    public void setEnableTypeSuffix(boolean enableTypeSuffix) {
         this.enableTypeSuffix = enableTypeSuffix;
     }
 
@@ -137,6 +137,6 @@ public class SchemeKeyConf {
     private String wordSplit;
     private String prefix;
     private String suffix;
-    private String enableTypeSuffix;
+    private boolean enableTypeSuffix;
     private String encoding;
 }

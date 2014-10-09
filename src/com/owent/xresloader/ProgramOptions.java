@@ -1,11 +1,10 @@
 package com.owent.xresloader;
 
+import gnu.getopt.Getopt;
+import gnu.getopt.LongOpt;
+
 import java.util.LinkedList;
 import java.util.List;
-
-import com.sun.org.apache.xalan.internal.xsltc.cmdline.getopt.GetOpt;
-
-import gnu.getopt.*;
 
 public class ProgramOptions {
 
@@ -47,24 +46,28 @@ public class ProgramOptions {
 		StringBuffer sb =  new StringBuffer();
 		String script = System.getProperty("user.scripts");
 
-		Getopt g = new Getopt("", args, "ht:p:f:o:d:s:m", //
-			new LongOpt[]{
-				new LongOpt("help", 		LongOpt.NO_ARGUMENT, null, 'h'),
-				new LongOpt("output-type", 	LongOpt.REQUIRED_ARGUMENT, sb, 't'),
-				new LongOpt("proto", 		LongOpt.REQUIRED_ARGUMENT, sb, 'p'),
-				new LongOpt("proto-file", 	LongOpt.REQUIRED_ARGUMENT, sb, 'f'),
-				new LongOpt("output-dir", 	LongOpt.REQUIRED_ARGUMENT, sb, 'o'),
-				new LongOpt("data-src-dir", LongOpt.REQUIRED_ARGUMENT, sb, 'd'),
-				new LongOpt("src-file", 	LongOpt.REQUIRED_ARGUMENT, sb, 's'),
-				new LongOpt("src-meta", 	LongOpt.REQUIRED_ARGUMENT, sb, 'm')
-			}
-		);
+        LongOpt[] long_opts = new LongOpt[]{
+                new LongOpt("help", 		LongOpt.NO_ARGUMENT, null, 'h'),
+                new LongOpt("output-type", 	LongOpt.REQUIRED_ARGUMENT, sb, 't'),
+                new LongOpt("proto", 		LongOpt.REQUIRED_ARGUMENT, sb, 'p'),
+                new LongOpt("proto-file", 	LongOpt.REQUIRED_ARGUMENT, sb, 'f'),
+                new LongOpt("output-dir", 	LongOpt.REQUIRED_ARGUMENT, sb, 'o'),
+                new LongOpt("data-src-dir", LongOpt.REQUIRED_ARGUMENT, sb, 'd'),
+                new LongOpt("src-file", 	LongOpt.REQUIRED_ARGUMENT, sb, 's'),
+                new LongOpt("src-meta", 	LongOpt.REQUIRED_ARGUMENT, sb, 'm')
+        };
+
+		Getopt g = new Getopt("", args, "ht:p:f:o:d:s:m:", long_opts);
 		g.setOpterr(false);
 		
 		int c;
 		while ((c = g.getopt()) != -1) {
+
 			char cc = (char) c;
-		    switch (c) {
+            if (0 == c) {
+                cc = (char)long_opts[g.getLongind()].getVal();
+            }
+		    switch (cc) {
 		    case 'h': {
                 System.out.println("Usage: java -jar " + script + " [options]");
                 System.out.println("-h, --help              help");
@@ -159,15 +162,12 @@ public class ProgramOptions {
                 break;
             }
 
-            case 0:
-                break;
-
 		    default:
 		    	System.out.println("[WARN] Unknown option " + g.getOptarg());
                 break;
 		    }
 		}
 		
-		return c;
+		return 0;
 	}
 }

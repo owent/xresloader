@@ -1,30 +1,9 @@
 package com.owent.xresloader;
 
-import jdk.nashorn.internal.objects.annotations.Getter;
-import jdk.nashorn.internal.objects.annotations.Setter;
-
 /**
  * Created by owentou on 2014/9/30.
  */
 public class SchemeConf {
-
-    /**
-     * Getter for property 'dateSource'.
-     *
-     * @return Value for property 'dateSource'.
-     */
-    public String getDateSource() {
-        return dateSource;
-    }
-
-    /**
-     * Setter for property 'dateSource'.
-     *
-     * @param dateSource Value to set for property 'dateSource'.
-     */
-    public void setDateSource(String dateSource) {
-        this.dateSource = dateSource;
-    }
 
     /**
      * Getter for property 'dateRectRow'.
@@ -60,24 +39,6 @@ public class SchemeConf {
      */
     public void setDateRectCol(int dateRectCol) {
         this.dateRectCol = dateRectCol;
-    }
-
-    /**
-     * Getter for property 'macroSource'.
-     *
-     * @return Value for property 'macroSource'.
-     */
-    public String getMacroSource() {
-        return macroSource;
-    }
-
-    /**
-     * Setter for property 'macroSource'.
-     *
-     * @param macroSource Value to set for property 'macroSource'.
-     */
-    public void setMacroSource(String macroSource) {
-        this.macroSource = macroSource;
     }
 
     /**
@@ -170,10 +131,44 @@ public class SchemeConf {
         this.key = key;
     }
 
-    private String dateSource;
+    public String getDateSourceTable() {
+        return dateSourceTable;
+    }
+
+    public void setDateSourceTable(String dateSourceTable) {
+        this.dateSourceTable = dateSourceTable;
+    }
+
+    public String getDateSourceFile() {
+        return dateSourceFile;
+    }
+
+    public void setDateSourceFile(String dateSourceFile) {
+        this.dateSourceFile = dateSourceFile;
+    }
+
+    public String getMacroSourceTable() {
+        return macroSourceTable;
+    }
+
+    public void setMacroSourceTable(String macroSourceTable) {
+        this.macroSourceTable = macroSourceTable;
+    }
+
+    public String getMacroSourceFile() {
+        return macroSourceFile;
+    }
+
+    public void setMacroSourceFile(String macroSourceFile) {
+        this.macroSourceFile = macroSourceFile;
+    }
+
+    private String dateSourceFile;
+    private String dateSourceTable;
     private int dateRectRow;
     private int dateRectCol;
-    private String macroSource;
+    private String macroSourceFile;
+    private String macroSourceTable;
     private int macroRectRow;
     private int macroRectCol;
 

@@ -8,4 +8,10 @@
 	<lib name="java-getopt-1.0.14.jar" scope="COMPILE">
 		<relative-module-cls project-related="jar://$PROJECT_DIR$/deps/java-getopt/java-getopt-1.0.14.jar!/"/>
 	</lib>
+	<lib name="poi-ooxml-3.10.1-20140818.jar" scope="COMPILE">
+		<relative-module-cls project-related="jar://$PROJECT_DIR$/deps/poi/poi-ooxml-3.10.1-20140818.jar!/"/>
+	</lib>
+	<lib name="poi-ooxml-schemas-3.10.1-20140818.jar" scope="COMPILE">
+		<relative-module-cls project-related="jar://$PROJECT_DIR$/deps/poi/poi-ooxml-schemas-3.10.1-20140818.jar!/"/>
+	</lib>
 </component>

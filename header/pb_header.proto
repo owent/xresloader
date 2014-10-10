@@ -1,0 +1,8 @@
+package com.owent.xrexloader.pb;
+
+message xresloader_header {
+    required string xres_ver = 1;
+    required string data_ver = 2;
+    required uint32 count = 3;
+	required string hash_code = 4;
+}

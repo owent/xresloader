@@ -1,0 +1,5 @@
+
+message dep2_cfg {
+    required uint32 id = 1;
+    required string level = 2;
+}

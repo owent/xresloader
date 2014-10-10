@@ -3,9 +3,15 @@
  */
 package com.owent.xresloader;
 
+import com.owent.xresloader.data.dst.DataDstImpl;
+import com.owent.xresloader.data.dst.DataDstLua;
+import com.owent.xresloader.data.dst.DataDstPb;
 import com.owent.xresloader.data.src.DataSrcExcel;
 import com.owent.xresloader.data.src.DataSrcImpl;
 import com.owent.xresloader.scheme.SchemeConf;
+
+import java.io.FileOutputStream;
+import java.io.OutputStream;
 
 /**
  * @author owentou
@@ -31,8 +37,6 @@ public class main {
             if (false == SchemeConf.getInstance().getScheme().load_scheme(sn)) {
                 System.err.println("[ERROR] convert scheme \"" + sn + "\" failed");
                 continue;
-            } else {
-                System.out.println("[INFO] convert scheme \"" + sn + "\" success");
             }
 
             // 2. 数据工作簿
@@ -49,6 +53,50 @@ public class main {
             }
 
             // 3. 协议描述文件
+            DataDstImpl protoDesc = null;
+            switch(ProgramOptions.getInstance().protocol){
+                case PROTOBUF:
+                    protoDesc = new DataDstPb();
+                    break;
+                default:
+                    System.err.println("[ERROR] protocol type \"" + ProgramOptions.getInstance().protocol.toString() + "\" invalid");
+                    break;
+            }
+
+            if (null == protoDesc)
+                continue;
+            if (false == protoDesc.init()) {
+                System.err.println("[ERROR] protocol desc \"" + ProgramOptions.getInstance().protocol.toString() + "\" init failed");
+                continue;
+            }
+
+            // 4. 输出类型
+            DataDstImpl outDesc = null;
+            switch(ProgramOptions.getInstance().outType){
+                case BIN:
+                    outDesc = protoDesc;
+                    break;
+                case LUA:
+                    outDesc = new DataDstLua();
+                    outDesc = outDesc.init()? outDesc: null;
+                    break;
+                default:
+                    System.err.println("[ERROR] output type \"" + ProgramOptions.getInstance().outType.toString() + "\" invalid");
+                    break;
+            }
+            if (null == outDesc)
+                continue;
+
+            try {
+                OutputStream fos = new FileOutputStream(SchemeConf.getInstance().getOutputFile(), false);
+                byte[] data = outDesc.compile(protoDesc);
+                fos.write(data);
+            } catch (java.io.IOException e) {
+                System.err.println("[ERROR] write data to file \"" + SchemeConf.getInstance().getOutputFile() + "\" failed");
+                continue;
+            }
+
+            System.out.println("[INFO] convert scheme \"" + sn + "\" success");
         }
 	}
 

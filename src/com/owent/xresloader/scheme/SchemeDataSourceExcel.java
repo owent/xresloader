@@ -134,10 +134,10 @@ public final class SchemeDataSourceExcel  implements SchemeDataSourceImpl {
     }
 
     private String cell2str(Row row, int col) {
-        return ExcelEngine.cell2str(row, col);
+        return ExcelEngine.cell2s(row, col);
     }
 
     private int cell2int(Row row, int col) {
-        return ExcelEngine.cell2int(row, col);
+        return ExcelEngine.cell2i(row, col).intValue();
     }
 }

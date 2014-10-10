@@ -55,8 +55,8 @@ public class ExcelEngine {
      * @param col 列号
      * @return
      */
-    static public String cell2str(Row row, int col) {
-        return cell2str(row, col, null);
+    static public String cell2s(Row row, int col) {
+        return cell2s(row, col, null);
     }
 
     /**
@@ -66,7 +66,7 @@ public class ExcelEngine {
      * @param evalor 公式管理器
      * @return
      */
-    static public String cell2str(Row row, int col, FormulaEvaluator evalor) {
+    static public String cell2s(Row row, int col, FormulaEvaluator evalor) {
         if (null == row)
             return "";
 
@@ -101,8 +101,8 @@ public class ExcelEngine {
      * @param col 列号
      * @return
      */
-    static public int cell2int(Row row, int col) {
-        return cell2int(row, col, null);
+    static public Long cell2i(Row row, int col) {
+        return cell2i(row, col, null);
     }
 
     /**
@@ -112,32 +112,32 @@ public class ExcelEngine {
      * @param evalor 公式管理器
      * @return
      */
-    static public int cell2int(Row row, int col, FormulaEvaluator evalor) {
+    static public Long cell2i(Row row, int col, FormulaEvaluator evalor) {
         if (null == row)
-            return 0;
+            return 0L;
 
         Cell c = row.getCell(col);
         if (null == c)
-            return 0;
+            return 0L;
 
         if (null != evalor && Cell.CELL_TYPE_FORMULA == c.getCellType())
             evalor.evaluateInCell(c);
 
         switch (c.getCellType()){
             case Cell.CELL_TYPE_BLANK:
-                return 0;
+                return 0L;
             case Cell.CELL_TYPE_BOOLEAN:
-                return c.getBooleanCellValue()? 1: 0;
+                return c.getBooleanCellValue()? 1L: 0L;
             case Cell.CELL_TYPE_ERROR:
-                return 0;
+                return 0L;
             case Cell.CELL_TYPE_FORMULA:
-                return 0;
+                return 0L;
             case Cell.CELL_TYPE_NUMERIC:
-                return (int)c.getNumericCellValue();
+                return (long)c.getNumericCellValue();
             case Cell.CELL_TYPE_STRING:
-                return Integer.parseInt(c.getStringCellValue().trim());
+                return Long.parseLong(c.getStringCellValue().trim());
             default:
-                return 0;
+                return 0L;
         }
     }
 
@@ -147,7 +147,7 @@ public class ExcelEngine {
      * @param col 列号
      * @return
      */
-    static public double cell2d(Row row, int col) {
+    static public Double cell2d(Row row, int col) {
         return cell2d(row, col, null);
     }
 
@@ -158,7 +158,7 @@ public class ExcelEngine {
      * @param evalor 公式管理器
      * @return
      */
-    static public double cell2d(Row row, int col, FormulaEvaluator evalor) {
+    static public Double cell2d(Row row, int col, FormulaEvaluator evalor) {
         if (null == row)
             return 0.0;
 
@@ -193,7 +193,7 @@ public class ExcelEngine {
      * @param col 列号
      * @return
      */
-    static public boolean cell2b(Row row, int col) {
+    static public Boolean cell2b(Row row, int col) {
         return cell2b(row, col, null);
     }
 
@@ -204,7 +204,7 @@ public class ExcelEngine {
      * @param evalor 公式管理器
      * @return
      */
-    static public boolean cell2b(Row row, int col, FormulaEvaluator evalor) {
+    static public Boolean cell2b(Row row, int col, FormulaEvaluator evalor) {
         if (null == row)
             return false;
 

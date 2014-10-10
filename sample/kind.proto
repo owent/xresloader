@@ -1,3 +1,4 @@
+import "dependency.proto";
 
 message role_cfg {
     required uint32 id = 1;
@@ -5,4 +6,5 @@ message role_cfg {
     required uint32 cost_type = 3;
     required int32 cost_value = 4;
     required string name = 5;
+	required dep_cfg dep_test = 10;
 }

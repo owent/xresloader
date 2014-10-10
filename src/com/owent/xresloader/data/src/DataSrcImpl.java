@@ -3,7 +3,7 @@ package com.owent.xresloader.data.src;
 /**
  * Created by owentou on 2014/10/9.
  */
-public class DataSrcImpl {
+public abstract class DataSrcImpl {
     private static DataSrcImpl ourInstance = null;
 
     public static DataSrcImpl create(Class clazz) {
@@ -18,6 +18,10 @@ public class DataSrcImpl {
         return ourInstance = null;
     }
 
+    public static DataSrcImpl getOurInstance() {
+        return ourInstance;
+    }
+
     protected DataSrcImpl() {
     }
 
@@ -29,15 +33,19 @@ public class DataSrcImpl {
         return false;
     }
 
-    public String getString(int col) {
-        return "";
+    public <T> T getValue(String ident, Class<T> clazz) {
+        T ret = null;
+        try {
+            ret = clazz.newInstance();
+        } catch (InstantiationException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        }
+        return ret;
     }
 
-    public int getInt(int col) {
-        return 0;
-    }
-
-    public double getDouble(int col) {
+    public int getRecordNumber() {
         return 0;
     }
 }

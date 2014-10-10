@@ -1,0 +1,7 @@
+import "dep_level2.proto";
+
+message dep_cfg {
+    required uint32 id = 1;
+    required string name = 2;
+	optional dep2_cfg dep2 = 3;
+}

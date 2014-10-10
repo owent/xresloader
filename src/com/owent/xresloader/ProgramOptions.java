@@ -85,8 +85,8 @@ public class ProgramOptions {
                 String val = g.getOptarg();
                 if (val.equalsIgnoreCase("bin")) {
                     outType = FileType.BIN;
-
-                //} else if (val.equalsIgnoreCase("lua")){
+                } else if (val.equalsIgnoreCase("lua")){
+                    outType = FileType.LUA;
                 //} else if (val.equalsIgnoreCase("json")){
                 //} else if (val.equalsIgnoreCase("xml")){
                 } else {
@@ -170,4 +170,8 @@ public class ProgramOptions {
 		
 		return 0;
 	}
+
+    public String getVersion() {
+        return "1.0.0.0";
+    }
 }

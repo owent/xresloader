@@ -6,5 +6,6 @@
 	<classpathentry kind="lib" path="deps/java-getopt/java-getopt-1.0.14.jar"/>
 	<classpathentry kind="lib" path="deps/poi/poi-ooxml-3.10.1-20140818.jar"/>
 	<classpathentry kind="lib" path="deps/poi/poi-ooxml-schemas-3.10.1-20140818.jar"/>
+	<classpathentry kind="lib" path="deps/protobuf-java/protobuf-java-2.6.0.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

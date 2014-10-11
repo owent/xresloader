@@ -8,8 +8,45 @@ import java.util.HashMap;
 public class DataDstWriterNode {
     private int listCount = 0; // 0 代表非List
     private HashMap<String, DataDstWriterNode> children = null;
-
+    private JavaType type = JavaType.OBJECT;
     public DataDstWriterNode() {
+    }
+
+    static public String makeChildPath(String prefix, String child_name, int list_index) {
+        if (list_index >= 0)
+            return prefix.isEmpty() ?
+                    String.format("%s[%d]", child_name, list_index) :
+                    String.format("%s.%s[%d]", prefix, child_name, list_index);
+
+        return makeChildPath(prefix, child_name);
+    }
+
+    static public String makeChildPath(String prefix, String child_name) {
+        return prefix.isEmpty() ? child_name : String.format("%s.%s", prefix, child_name);
+    }
+
+    static public String makeNodeName(String _name, int list_index) {
+        if (list_index >= 0)
+            return String.format("%s[%d]", _name, list_index);
+
+        return makeNodeName(_name);
+    }
+
+    static public String makeNodeName(String _name) {
+        return _name;
+    }
+
+    public JavaType getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        JavaType t = JavaType.valueOf(type);
+        this.type = null == t ? JavaType.OBJECT : t;
+    }
+
+    public void setType(JavaType type) {
+        this.type = type;
     }
 
     public boolean isList() {
@@ -25,10 +62,10 @@ public class DataDstWriterNode {
     }
 
     public boolean isLeaf() {
-        return null == children || children.isEmpty();
+        return JavaType.OBJECT != type;
     }
 
-    private HashMap<String, DataDstWriterNode> getChildren() {
+    public HashMap<String, DataDstWriterNode> getChildren() {
         if (null == children)
             children = new HashMap<String, DataDstWriterNode>();
         return children;
@@ -38,7 +75,7 @@ public class DataDstWriterNode {
         if (!getChildren().containsKey(child_name))
             return null;
 
-        if(isList())
+        if (isList())
             return String.format("%s[%d].%s", prefix, list_index, child_name);
 
         return getChildPath(prefix, child_name);
@@ -48,35 +85,12 @@ public class DataDstWriterNode {
         if (!getChildren().containsKey(child_name))
             return null;
 
-        return prefix.isEmpty()? child_name: String.format("%s.%s", prefix, child_name);
+        return prefix.isEmpty() ? child_name : String.format("%s.%s", prefix, child_name);
     }
 
     public void addChild(String child_name, DataDstWriterNode node) {
         getChildren().put(child_name, node);
     }
 
-
-    static public String makeChildPath(String prefix, String child_name, int list_index) {
-        if(list_index >= 0)
-            return prefix.isEmpty()?
-                    String.format("%s[%d]", child_name, list_index):
-                    String.format("%s.%s[%d]", prefix, child_name, list_index);
-
-        return makeChildPath(prefix, child_name);
-    }
-
-    static public String makeChildPath(String prefix, String child_name) {
-        return prefix.isEmpty()?child_name: String.format("%s.%s", prefix, child_name);
-    }
-
-    static public String makeNodeName(String _name, int list_index) {
-        if(list_index >= 0)
-            return String.format("%s[%d]", _name, list_index);
-
-        return makeNodeName(_name);
-    }
-
-    static public String makeNodeName(String _name) {
-        return _name;
-    }
+    public enum JavaType {INT, LONG, FLOAT, DOUBLE, BOOLEAN, STRING, BYTE_STRING, ENUM, OBJECT}
 }

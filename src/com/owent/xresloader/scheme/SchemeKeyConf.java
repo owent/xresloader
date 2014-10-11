@@ -6,7 +6,17 @@ import java.util.regex.Pattern;
  * Created by owentou on 2014/9/30.
  */
 public class SchemeKeyConf {
-    public enum KeyCase {NONE, UPPER, LOWER};
+    private int row;
+
+    ;
+    private KeyCase letterCase;
+    private String wordSplit;
+    private String prefix;
+    private String suffix;
+    private Pattern keyWordRegex = null;
+    private Pattern keyWordRegexRemoveRule = null;
+    private Pattern keyWordRegexPrefixRule = null;
+    private String encoding;
 
     /**
      * Getter for property 'row'.
@@ -142,14 +152,5 @@ public class SchemeKeyConf {
     public void setEncoding(String encoding) {
         this.encoding = encoding;
     }
-
-    private int row;
-    private KeyCase letterCase;
-    private String wordSplit;
-    private String prefix;
-    private String suffix;
-    private Pattern keyWordRegex = null;
-    private Pattern keyWordRegexRemoveRule = null;
-    private Pattern keyWordRegexPrefixRule = null;
-    private String encoding;
+    public enum KeyCase {NONE, UPPER, LOWER}
 }

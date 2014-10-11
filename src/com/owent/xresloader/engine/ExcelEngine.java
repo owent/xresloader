@@ -1,10 +1,12 @@
 package com.owent.xresloader.engine;
 
+import com.owent.xresloader.data.src.DataSrcImpl;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 import java.io.FileInputStream;
+import java.util.HashMap;
 
 /**
  * Created by owentou on 2014/10/9.
@@ -13,6 +15,7 @@ public class ExcelEngine {
 
     /**
      * 打开Excel文件
+     *
      * @param file_path 文件路径
      * @return Excel Workbook对象
      */
@@ -37,7 +40,8 @@ public class ExcelEngine {
 
     /**
      * 打开工作簿
-     * @param file_path Excel文件
+     *
+     * @param file_path  Excel文件
      * @param sheet_name 表名
      * @return Sheet对象
      */
@@ -49,8 +53,20 @@ public class ExcelEngine {
         return wb.getSheet(sheet_name);
     }
 
+    static public String tryMacro(String m) {
+        if (null == DataSrcImpl.getOurInstance())
+            return m;
+
+        HashMap<String, String> hm = DataSrcImpl.getOurInstance().getMacros();
+        if (null == hm)
+            return m;
+
+        return hm.getOrDefault(m, m);
+    }
+
     /**
      * 单元格数据转换（String）
+     *
      * @param row 行
      * @param col 列号
      * @return
@@ -61,8 +77,9 @@ public class ExcelEngine {
 
     /**
      * 单元格数据转换（String）
-     * @param row 行
-     * @param col 列号
+     *
+     * @param row    行
+     * @param col    列号
      * @param evalor 公式管理器
      * @return
      */
@@ -77,7 +94,7 @@ public class ExcelEngine {
         if (null != evalor && Cell.CELL_TYPE_FORMULA == c.getCellType())
             evalor.evaluateInCell(c);
 
-        switch (c.getCellType()){
+        switch (c.getCellType()) {
             case Cell.CELL_TYPE_BLANK:
                 return "";
             case Cell.CELL_TYPE_BOOLEAN:
@@ -89,7 +106,7 @@ public class ExcelEngine {
             case Cell.CELL_TYPE_NUMERIC:
                 return String.valueOf(c.getNumericCellValue());
             case Cell.CELL_TYPE_STRING:
-                return c.getStringCellValue().trim();
+                return tryMacro(c.getStringCellValue().trim());
             default:
                 return "";
         }
@@ -97,6 +114,7 @@ public class ExcelEngine {
 
     /**
      * 单元格数据转换（Integer）
+     *
      * @param row 行
      * @param col 列号
      * @return
@@ -107,8 +125,9 @@ public class ExcelEngine {
 
     /**
      * 单元格数据转换（Integer）
-     * @param row 行
-     * @param col 列号
+     *
+     * @param row    行
+     * @param col    列号
      * @param evalor 公式管理器
      * @return
      */
@@ -123,19 +142,19 @@ public class ExcelEngine {
         if (null != evalor && Cell.CELL_TYPE_FORMULA == c.getCellType())
             evalor.evaluateInCell(c);
 
-        switch (c.getCellType()){
+        switch (c.getCellType()) {
             case Cell.CELL_TYPE_BLANK:
                 return 0L;
             case Cell.CELL_TYPE_BOOLEAN:
-                return c.getBooleanCellValue()? 1L: 0L;
+                return c.getBooleanCellValue() ? 1L : 0L;
             case Cell.CELL_TYPE_ERROR:
                 return 0L;
             case Cell.CELL_TYPE_FORMULA:
                 return 0L;
             case Cell.CELL_TYPE_NUMERIC:
-                return (long)c.getNumericCellValue();
+                return Math.round(c.getNumericCellValue());
             case Cell.CELL_TYPE_STRING:
-                return Long.parseLong(c.getStringCellValue().trim());
+                return Math.round((double) Double.valueOf(tryMacro(c.getStringCellValue().trim())));
             default:
                 return 0L;
         }
@@ -143,6 +162,7 @@ public class ExcelEngine {
 
     /**
      * 单元格数据转换（Double）
+     *
      * @param row 行
      * @param col 列号
      * @return
@@ -153,8 +173,9 @@ public class ExcelEngine {
 
     /**
      * 单元格数据转换（Double）
-     * @param row 行
-     * @param col 列号
+     *
+     * @param row    行
+     * @param col    列号
      * @param evalor 公式管理器
      * @return
      */
@@ -169,11 +190,11 @@ public class ExcelEngine {
         if (null != evalor && Cell.CELL_TYPE_FORMULA == c.getCellType())
             evalor.evaluateInCell(c);
 
-        switch (c.getCellType()){
+        switch (c.getCellType()) {
             case Cell.CELL_TYPE_BLANK:
                 return 0.0;
             case Cell.CELL_TYPE_BOOLEAN:
-                return c.getBooleanCellValue()? 1.0: 0.0;
+                return c.getBooleanCellValue() ? 1.0 : 0.0;
             case Cell.CELL_TYPE_ERROR:
                 return 0.0;
             case Cell.CELL_TYPE_FORMULA:
@@ -181,7 +202,7 @@ public class ExcelEngine {
             case Cell.CELL_TYPE_NUMERIC:
                 return c.getNumericCellValue();
             case Cell.CELL_TYPE_STRING:
-                return Double.parseDouble(c.getStringCellValue().trim());
+                return Double.valueOf(tryMacro(c.getStringCellValue().trim()));
             default:
                 return 0.0;
         }
@@ -189,6 +210,7 @@ public class ExcelEngine {
 
     /**
      * 单元格数据转换（boolean）
+     *
      * @param row 行
      * @param col 列号
      * @return
@@ -199,8 +221,9 @@ public class ExcelEngine {
 
     /**
      * 单元格数据转换（boolean）
-     * @param row 行
-     * @param col 列号
+     *
+     * @param row    行
+     * @param col    列号
      * @param evalor 公式管理器
      * @return
      */
@@ -215,7 +238,7 @@ public class ExcelEngine {
         if (null != evalor && Cell.CELL_TYPE_FORMULA == c.getCellType())
             evalor.evaluateInCell(c);
 
-        switch (c.getCellType()){
+        switch (c.getCellType()) {
             case Cell.CELL_TYPE_BLANK:
                 return false;
             case Cell.CELL_TYPE_BOOLEAN:
@@ -227,7 +250,7 @@ public class ExcelEngine {
             case Cell.CELL_TYPE_NUMERIC:
                 return c.getNumericCellValue() != 0;
             case Cell.CELL_TYPE_STRING:
-                return !c.getStringCellValue().trim().isEmpty() && c.getStringCellValue().trim() != "0";
+                return !c.getStringCellValue().trim().isEmpty() && tryMacro(c.getStringCellValue().trim()) != "0";
             default:
                 return false;
         }

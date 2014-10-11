@@ -21,13 +21,14 @@ public class DataSrcExcel extends DataSrcImpl {
     private Row currentRow = null;
     private int currentIndex;
 
-    public DataSrcExcel(){
+    public DataSrcExcel() {
         super();
 
         macros = new HashMap<String, String>();
         nameMap = new HashMap<String, Integer>();
     }
 
+    @Override
     public int init() {
         int ret = init_macros();
         if (ret < 0)
@@ -38,13 +39,14 @@ public class DataSrcExcel extends DataSrcImpl {
 
     /**
      * 初始化macros提花规则，先全部转为字符串，有需要后续在使用的时候再转
+     *
      * @return
      */
     private int init_macros() {
         macros.clear();
 
         SchemeConf scfg = SchemeConf.getInstance();
-        if(scfg.getMacroSourceFile().isEmpty() || scfg.getMacroSourceTable().isEmpty())
+        if (scfg.getMacroSourceFile().isEmpty() || scfg.getMacroSourceTable().isEmpty())
             return 0;
 
         Sheet tb = ExcelEngine.openSheet(scfg.getMacroSourceFile(), scfg.getMacroSourceTable());
@@ -55,7 +57,7 @@ public class DataSrcExcel extends DataSrcImpl {
         FormulaEvaluator evalor = tb.getWorkbook().getCreationHelper().createFormulaEvaluator();
 
         int row_num = tb.getLastRowNum() + 1;
-        for(int i = scfg.getMacroRectRow() - 1; i < row_num; ++ i) {
+        for (int i = scfg.getMacroRectRow() - 1; i < row_num; ++i) {
             Row row = tb.getRow(i);
             String key = ExcelEngine.cell2s(row, scfg.getDateRectCol() - 1);
             String val = ExcelEngine.cell2s(row, scfg.getDateRectCol(), evalor);
@@ -69,7 +71,7 @@ public class DataSrcExcel extends DataSrcImpl {
 
     private int init_sheet() {
         SchemeConf scfg = SchemeConf.getInstance();
-        if(scfg.getDateSourceFile().isEmpty() || scfg.getDateSourceTable().isEmpty()) {
+        if (scfg.getDateSourceFile().isEmpty() || scfg.getDateSourceTable().isEmpty()) {
             System.err.println("[ERROR] convert failed without data source file or table");
             return -51;
         }
@@ -89,7 +91,7 @@ public class DataSrcExcel extends DataSrcImpl {
             System.err.println("[ERROR] get description name row failed");
             return -53;
         }
-        for(int i = scfg.getDateRectCol() - 1; i < row.getLastCellNum() + 1; ++ i) {
+        for (int i = scfg.getDateRectCol() - 1; i < row.getLastCellNum() + 1; ++i) {
             String k = ExcelEngine.cell2s(row, i, currentSheetFormula);
             nameMap.put(IdentifyEngine.n2i(k), i);
         }
@@ -99,41 +101,36 @@ public class DataSrcExcel extends DataSrcImpl {
         return 0;
     }
 
+    @Override
     public boolean next() {
         if (currentIndex > currentSheet.getLastRowNum())
             return false;
 
         currentRow = currentSheet.getRow(currentIndex);
-        ++ currentIndex;
+        ++currentIndex;
 
         return null != currentRow;
     }
 
-    public <T> T getValue(String ident, Class<T> clazz) {
-        T ret = null;
-        try {
-            ret = clazz.newInstance();
-            int index = nameMap.getOrDefault(ident, -1);
-            if (index < 0)
-                return ret;
+    @Override
+    public <T> T getValue(String ident, T ret) {
+        int index = nameMap.getOrDefault(ident, -1);
+        if (index < 0)
+            return ret;
 
-            if (ret instanceof Integer || ret instanceof Long || ret instanceof Short || ret instanceof Character) {
-                ret = ((T) ExcelEngine.cell2i(currentRow, index, currentSheetFormula));
-            } else if (ret instanceof Float || ret instanceof Double) {
-                ret = ((T)ExcelEngine.cell2d(currentRow, index, currentSheetFormula));
-            } else if (ret instanceof Boolean) {
-                ret = ((T)ExcelEngine.cell2b(currentRow, index, currentSheetFormula));
-            } else {
-                ret = ((T)ExcelEngine.cell2s(currentRow, index, currentSheetFormula));
-            }
-        } catch (InstantiationException e) {
-            e.printStackTrace();
-        } catch (IllegalAccessException e) {
-            e.printStackTrace();
+        if (ret instanceof Integer || ret instanceof Long || ret instanceof Short || ret instanceof Character) {
+            ret = (T) ExcelEngine.cell2i(currentRow, index, currentSheetFormula);
+        } else if (ret instanceof Float || ret instanceof Double) {
+            ret = (T) ExcelEngine.cell2d(currentRow, index, currentSheetFormula);
+        } else if (ret instanceof Boolean) {
+            ret = (T) ExcelEngine.cell2b(currentRow, index, currentSheetFormula);
+        } else {
+            ret = (T) ExcelEngine.cell2s(currentRow, index, currentSheetFormula);
         }
         return ret;
     }
 
+    @Override
     public int getRecordNumber() {
         if (null == currentSheet)
             return 0;
@@ -141,7 +138,13 @@ public class DataSrcExcel extends DataSrcImpl {
         return currentSheet.getLastRowNum() - SchemeConf.getInstance().getDateRectRow() + 2;
     }
 
+    @Override
     public boolean checkName(String _name) {
         return nameMap.containsKey(_name);
+    }
+
+    @Override
+    public HashMap<String, String> getMacros() {
+        return macros;
     }
 }

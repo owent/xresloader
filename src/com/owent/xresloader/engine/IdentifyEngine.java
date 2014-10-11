@@ -12,13 +12,14 @@ public class IdentifyEngine {
 
     /**
      * 把配置名称转换成标识符
+     *
      * @param _name 配置名称
      * @return
      */
     static public String n2i(String _name) {
         String[] segs = _name.trim().split("\\.");
 
-        for(int i = 0; i < segs.length; ++ i) {
+        for (int i = 0; i < segs.length; ++i) {
             segs[i] = make_word(segs[i]);
         }
 
@@ -45,9 +46,9 @@ public class IdentifyEngine {
         // 分词
         LinkedList<String> words = new LinkedList<String>();
         String this_word = "";
-        for(char c: ident.toCharArray()) {
-            if(cfg.getKeyWordRegex().matcher(String.valueOf(c)).matches()) {
-                if(!this_word.isEmpty()) {
+        for (char c : ident.toCharArray()) {
+            if (cfg.getKeyWordRegex().matcher(String.valueOf(c)).matches()) {
+                if (!this_word.isEmpty()) {
                     if (SchemeKeyConf.KeyCase.LOWER == cfg.getLetterCase())
                         this_word = this_word.toLowerCase();
                     else if (SchemeKeyConf.KeyCase.UPPER == cfg.getLetterCase())
@@ -56,7 +57,7 @@ public class IdentifyEngine {
                     words.add(this_word);
                 }
 
-                if(null != cfg.getKeyWordRegexRemoveRule() && !cfg.getKeyWordRegexRemoveRule().matcher(String.valueOf(c)).matches())
+                if (null != cfg.getKeyWordRegexRemoveRule() && !cfg.getKeyWordRegexRemoveRule().matcher(String.valueOf(c)).matches())
                     this_word = String.valueOf(c);
                 else
                     this_word = "";
@@ -66,7 +67,7 @@ public class IdentifyEngine {
         }
 
         // 最后一个词
-        if(!this_word.isEmpty()) {
+        if (!this_word.isEmpty()) {
             if (SchemeKeyConf.KeyCase.LOWER == cfg.getLetterCase())
                 this_word = this_word.toLowerCase();
             else if (SchemeKeyConf.KeyCase.UPPER == cfg.getLetterCase())

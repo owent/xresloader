@@ -22,6 +22,7 @@ public class DataDstPb extends DataDstImpl {
     private HashMap<String, DescriptorProtos.FileDescriptorProto> descp_map = new HashMap<String, DescriptorProtos.FileDescriptorProto>();
     private Descriptors.Descriptor currentMsgDesc = null;
 
+    @Override
     public boolean init() {
         desc_map.clear();
         descp_map.clear();
@@ -32,13 +33,13 @@ public class DataDstPb extends DataDstImpl {
             DescriptorProtos.FileDescriptorSet fds = DescriptorProtos.FileDescriptorSet.parseFrom(fis);
 
             DescriptorProtos.FileDescriptorProto selected_fdp = null;
-            for(DescriptorProtos.FileDescriptorProto fdp: fds.getFileList()) {
+            for (DescriptorProtos.FileDescriptorProto fdp : fds.getFileList()) {
                 descp_map.put(fdp.getName(), fdp);
 
                 if (null != selected_fdp)
                     continue;
-                for(DescriptorProtos.DescriptorProto dp: fdp.getMessageTypeList()) {
-                    if(dp.getName().equals(SchemeConf.getInstance().getProtoName())) {
+                for (DescriptorProtos.DescriptorProto dp : fdp.getMessageTypeList()) {
+                    if (dp.getName().equals(SchemeConf.getInstance().getProtoName())) {
                         selected_fdp = fdp;
                         break;
                     }
@@ -62,6 +63,7 @@ public class DataDstPb extends DataDstImpl {
     }
 
 
+    @Override
     public final DataDstWriterNode compile() {
         DataDstWriterNode ret = new DataDstWriterNode();
         if (test(ret, currentMsgDesc, new LinkedList<String>()))
@@ -70,6 +72,7 @@ public class DataDstPb extends DataDstImpl {
         return null;
     }
 
+    @Override
     public final byte[] build(DataDstWriterNode desc) {
         PbHeader.xresloader_header.Builder header = PbHeader.xresloader_header.getDefaultInstance().toBuilder();
         header.setXresVer(ProgramOptions.getInstance().getVersion());
@@ -80,13 +83,13 @@ public class DataDstPb extends DataDstImpl {
 
     private Descriptors.FileDescriptor build_fd(String fdn) {
         Descriptors.FileDescriptor ret = desc_map.getOrDefault(fdn, null);
-        if(null != ret)
+        if (null != ret)
             return ret;
 
         DescriptorProtos.FileDescriptorProto fdp = descp_map.get(fdn);
         try {
             Descriptors.FileDescriptor[] deps = get_deps(fdp);
-            if(null == deps) {
+            if (null == deps) {
                 System.err.println("[ERROR] build protocol \"" + fdn + "\" failed(dependency build failed).");
                 return null;
             }
@@ -105,7 +108,7 @@ public class DataDstPb extends DataDstImpl {
 
     private Descriptors.FileDescriptor[] get_deps(DescriptorProtos.FileDescriptorProto fdp) {
         Descriptors.FileDescriptor[] ret = new Descriptors.FileDescriptor[fdp.getDependencyCount()];
-        for(int i = 0; i < ret.length; ++ i) {
+        for (int i = 0; i < ret.length; ++i) {
             ret[i] = build_fd(fdp.getDependency(i));
             if (null == ret[i])
                 return null;
@@ -117,8 +120,9 @@ public class DataDstPb extends DataDstImpl {
 
     /**
      * 测试并生成数据结构
-     * @param node 待填充的节点
-     * @param desc protobuf 结构描述信息
+     *
+     * @param node      待填充的节点
+     * @param desc      protobuf 结构描述信息
      * @param name_list 当前命名列表
      * @return 查找到对应的数据源映射关系并非空则返回true，否则返回false
      */
@@ -129,8 +133,8 @@ public class DataDstPb extends DataDstImpl {
 
         DataSrcImpl data_src = DataSrcImpl.getOurInstance();
 
-        for(Descriptors.FieldDescriptor fd: desc.getFields()) {
-            switch(fd.getJavaType()) {
+        for (Descriptors.FieldDescriptor fd : desc.getFields()) {
+            switch (fd.getJavaType()) {
                 // 标准类型直接检测节点
                 case INT:
                 case LONG:
@@ -143,7 +147,7 @@ public class DataDstPb extends DataDstImpl {
                     // list 类型
                     if (fd.isRepeated()) {
                         int count = 0;
-                        for(;;++count) {
+                        for (; ; ++count) {
                             String real_name = DataDstWriterNode.makeChildPath(prefix, fd.getName(), count);
                             if (!data_src.checkName(real_name))
                                 break;
@@ -151,6 +155,7 @@ public class DataDstPb extends DataDstImpl {
 
                         DataDstWriterNode c = new DataDstWriterNode();
                         c.setListCount(count);
+                        c.setType(fd.getJavaType().toString());
                         node.addChild(fd.getName(), c);
                         has_data = has_data || count > 0;
                     } else {
@@ -158,10 +163,11 @@ public class DataDstPb extends DataDstImpl {
                         String real_name = DataDstWriterNode.makeChildPath(prefix, fd.getName());
                         if (data_src.checkName(real_name)) {
                             DataDstWriterNode c = new DataDstWriterNode();
+                            c.setType(fd.getJavaType().toString());
                             node.addChild(fd.getName(), c);
                             has_data = true;
 
-                        } else if (fd.isRequired()){
+                        } else if (fd.isRequired()) {
                             System.err.println("[ERROR] required field \"" + real_name + "\" not found");
                             ret = false;
                         }
@@ -176,7 +182,7 @@ public class DataDstPb extends DataDstImpl {
                         DataDstWriterNode c = new DataDstWriterNode();
 
                         name_list.addLast("");
-                        for(;;++count) {
+                        for (; ; ++count) {
                             name_list.removeLast();
                             name_list.addLast(DataDstWriterNode.makeNodeName(fd.getName(), count));
                             if (!test(c, fd.getMessageType(), name_list))
@@ -193,7 +199,7 @@ public class DataDstPb extends DataDstImpl {
                         if (test(c, fd.getMessageType(), name_list)) {
                             node.addChild(fd.getName(), c);
                             has_data = true;
-                        } else if (fd.isRequired()){
+                        } else if (fd.isRequired()) {
                             System.err.println("[ERROR] required field \"" + fd.getName() + "\" not found");
                             ret = false;
                         }

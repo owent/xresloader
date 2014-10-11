@@ -1,5 +1,5 @@
 /**
- * 
+ *
  */
 package com.owent.xresloader;
 
@@ -16,24 +16,23 @@ import java.io.OutputStream;
 
 /**
  * @author owentou
- *
  */
 public class main {
 
-	/**
-	 * @param args
-	 */
-	public static void main(String[] args) {
-		int ret = ProgramOptions.getInstance().init(args);
-		if (ret < 0)
-			System.exit(ret);
+    /**
+     * @param args
+     */
+    public static void main(String[] args) {
+        int ret = ProgramOptions.getInstance().init(args);
+        if (ret < 0)
+            System.exit(ret);
 
         ret = SchemeConf.getInstance().initScheme();
         if (ret < 0)
             System.exit(ret);
 
         // 读入数据表 & 协议编译
-        for(String sn : ProgramOptions.getInstance().dataSourceMetas) {
+        for (String sn : ProgramOptions.getInstance().dataSourceMetas) {
             // 1. 描述信息
             if (false == SchemeConf.getInstance().getScheme().load_scheme(sn)) {
                 System.err.println("[ERROR] convert scheme \"" + sn + "\" failed");
@@ -55,7 +54,7 @@ public class main {
 
             // 3. 协议描述文件
             DataDstImpl protoDesc = null;
-            switch(ProgramOptions.getInstance().protocol){
+            switch (ProgramOptions.getInstance().protocol) {
                 case PROTOBUF:
                     protoDesc = new DataDstPb();
                     break;
@@ -79,13 +78,13 @@ public class main {
 
             // 4. 输出类型
             DataDstImpl outDesc = null;
-            switch(ProgramOptions.getInstance().outType){
+            switch (ProgramOptions.getInstance().outType) {
                 case BIN:
                     outDesc = protoDesc;
                     break;
                 case LUA:
                     outDesc = new DataDstLua();
-                    outDesc = outDesc.init()? outDesc: null;
+                    outDesc = outDesc.init() ? outDesc : null;
                     break;
                 default:
                     System.err.println("[ERROR] output type \"" + ProgramOptions.getInstance().outType.toString() + "\" invalid");
@@ -105,6 +104,6 @@ public class main {
 
             System.out.println("[INFO] convert scheme \"" + sn + "\" success");
         }
-	}
+    }
 
 }

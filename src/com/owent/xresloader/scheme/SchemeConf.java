@@ -8,6 +8,34 @@ import com.owent.xresloader.ProgramOptions;
 public class SchemeConf {
 
     /**
+     * 单例
+     */
+    private static SchemeConf instance = null;
+    private String dateSourceFile;
+    private String dateSourceTable;
+    private int dateRectRow;
+    private int dateRectCol;
+    private String macroSourceFile;
+    private String macroSourceTable;
+    private int macroRectRow;
+    private int macroRectCol;
+    private String protoName;
+    private String outputFile;
+    private SchemeKeyConf key;
+    private SchemeDataSourceImpl scheme;
+
+    private SchemeConf() {
+        key = new SchemeKeyConf();
+    }
+
+    public static SchemeConf getInstance() {
+        if (instance == null) {
+            instance = new SchemeConf();
+        }
+        return instance;
+    }
+
+    /**
      * Getter for property 'dateRectRow'.
      *
      * @return Value for property 'dateRectRow'.
@@ -165,25 +193,9 @@ public class SchemeConf {
         this.macroSourceFile = macroSourceFile;
     }
 
-    private String dateSourceFile;
-    private String dateSourceTable;
-    private int dateRectRow;
-    private int dateRectCol;
-    private String macroSourceFile;
-    private String macroSourceTable;
-    private int macroRectRow;
-    private int macroRectCol;
-
-
-    private String protoName;
-    private String outputFile;
-    private SchemeKeyConf key;
-
     public SchemeDataSourceImpl getScheme() {
         return scheme;
     }
-
-    private SchemeDataSourceImpl scheme;
 
     public int initScheme() {
         if (ProgramOptions.FileType.EXCEL == ProgramOptions.getInstance().dataSourceType) {
@@ -194,20 +206,5 @@ public class SchemeConf {
         }
 
         return scheme.load();
-    }
-
-    /**
-     * 单例
-     */
-    private static SchemeConf instance = null;
-    private SchemeConf() {
-        key = new SchemeKeyConf();
-    }
-
-    public static SchemeConf getInstance() {
-        if (instance == null) {
-            instance = new SchemeConf();
-        }
-        return instance;
     }
 }

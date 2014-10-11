@@ -118,13 +118,10 @@ public final class SchemeDataSourceExcel  implements SchemeDataSourceImpl {
                 SchemeConf.getInstance().getKey().setPrefix(cell2str(row, data_col[0]));
             } else if (key.equalsIgnoreCase("KeySuffix")) {
                 SchemeConf.getInstance().getKey().setSuffix(cell2str(row, data_col[0]));
-            } else if (key.equalsIgnoreCase("KeyTypePrefix")) {
-                String v = cell2str(row, data_col[0]);
-                if (v.equals("是") || v.equalsIgnoreCase("Yes") || v.equalsIgnoreCase("True") || v.equalsIgnoreCase("1")) {
-                    SchemeConf.getInstance().getKey().setEnableTypeSuffix(true);
-                } else {
-                    SchemeConf.getInstance().getKey().setEnableTypeSuffix(false);
-                }
+            } else if (key.equalsIgnoreCase("KeyWordRegex")) {
+                SchemeConf.getInstance().getKey().buildKeyWordRegex(cell2str(row, data_col[0]));
+                SchemeConf.getInstance().getKey().buildKeyWordRegexRemoveRule(cell2str(row, data_col[1]));
+                SchemeConf.getInstance().getKey().buildKeyWordRegexPrefixRule(cell2str(row, data_col[2]));
             } else if (key.equalsIgnoreCase("Encoding")) {
                 SchemeConf.getInstance().getKey().setEncoding(cell2str(row, data_col[0]));
             }

@@ -6,6 +6,7 @@ package com.owent.xresloader;
 import com.owent.xresloader.data.dst.DataDstImpl;
 import com.owent.xresloader.data.dst.DataDstLua;
 import com.owent.xresloader.data.dst.DataDstPb;
+import com.owent.xresloader.data.dst.DataDstWriterNode;
 import com.owent.xresloader.data.src.DataSrcExcel;
 import com.owent.xresloader.data.src.DataSrcImpl;
 import com.owent.xresloader.scheme.SchemeConf;
@@ -70,6 +71,12 @@ public class main {
                 continue;
             }
 
+            DataDstWriterNode dataDesc = protoDesc.compile();
+            if (null == dataDesc) {
+                System.err.println("[ERROR] compile protocol desc \"" + ProgramOptions.getInstance().protocol.toString() + "\" failed");
+                continue;
+            }
+
             // 4. 输出类型
             DataDstImpl outDesc = null;
             switch(ProgramOptions.getInstance().outType){
@@ -89,7 +96,7 @@ public class main {
 
             try {
                 OutputStream fos = new FileOutputStream(SchemeConf.getInstance().getOutputFile(), false);
-                byte[] data = outDesc.compile(protoDesc);
+                byte[] data = outDesc.build(dataDesc);
                 fos.write(data);
             } catch (java.io.IOException e) {
                 System.err.println("[ERROR] write data to file \"" + SchemeConf.getInstance().getOutputFile() + "\" failed");

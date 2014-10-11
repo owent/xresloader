@@ -13,7 +13,7 @@ public class DataDstLua extends DataDstImpl {
         return true;
     }
 
-    public byte[] compile(DataDstImpl desc) {
+    public final byte[] build(DataDstWriterNode desc) {
         StringBuffer sb = new StringBuffer();
 
         sb.append("return {\n");
@@ -30,5 +30,10 @@ public class DataDstLua extends DataDstImpl {
         sb.append("}\n");
 
         return sb.toString().getBytes();
+    }
+
+
+    public final DataDstWriterNode compile() {
+        return null;
     }
 }

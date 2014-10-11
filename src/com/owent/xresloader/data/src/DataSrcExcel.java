@@ -140,4 +140,8 @@ public class DataSrcExcel extends DataSrcImpl {
 
         return currentSheet.getLastRowNum() - SchemeConf.getInstance().getDateRectRow() + 2;
     }
+
+    public boolean checkName(String _name) {
+        return nameMap.containsKey(_name);
+    }
 }

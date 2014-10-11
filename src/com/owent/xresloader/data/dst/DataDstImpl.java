@@ -8,7 +8,9 @@ public abstract class DataDstImpl {
         return false;
     }
 
-    public byte[] compile(DataDstImpl desc) {
-        return new byte[0];
+    public DataDstWriterNode compile() {
+        return null;
     }
+
+    public byte[] build(DataDstWriterNode desc) {return new byte[0];}
 }

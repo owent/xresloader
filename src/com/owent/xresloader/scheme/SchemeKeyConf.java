@@ -1,5 +1,7 @@
 package com.owent.xresloader.scheme;
 
+import java.util.regex.Pattern;
+
 /**
  * Created by owentou on 2014/9/30.
  */
@@ -96,22 +98,31 @@ public class SchemeKeyConf {
         this.suffix = suffix;
     }
 
-    /**
-     * Getter for property 'enableTypeSuffix'.
-     *
-     * @return Value for property 'enableTypeSuffix'.
-     */
-    public boolean getEnableTypeSuffix() {
-        return enableTypeSuffix;
+    public Pattern getKeyWordRegex() {
+        return keyWordRegex;
     }
 
-    /**
-     * Setter for property 'enableTypeSuffix'.
-     *
-     * @param enableTypeSuffix Value to set for property 'enableTypeSuffix'.
-     */
-    public void setEnableTypeSuffix(boolean enableTypeSuffix) {
-        this.enableTypeSuffix = enableTypeSuffix;
+    public void buildKeyWordRegex(String s) {
+        if (!s.isEmpty())
+            keyWordRegex = Pattern.compile(s);
+    }
+
+    public Pattern getKeyWordRegexRemoveRule() {
+        return keyWordRegexRemoveRule;
+    }
+
+    public void buildKeyWordRegexRemoveRule(String s) {
+        if (!s.isEmpty())
+            keyWordRegexRemoveRule = Pattern.compile(s);
+    }
+
+    public Pattern getKeyWordRegexPrefixRule() {
+        return keyWordRegexPrefixRule;
+    }
+
+    public void buildKeyWordRegexPrefixRule(String s) {
+        if (!s.isEmpty())
+            keyWordRegexPrefixRule = Pattern.compile(s);
     }
 
     /**
@@ -137,6 +148,8 @@ public class SchemeKeyConf {
     private String wordSplit;
     private String prefix;
     private String suffix;
-    private boolean enableTypeSuffix;
+    private Pattern keyWordRegex = null;
+    private Pattern keyWordRegexRemoveRule = null;
+    private Pattern keyWordRegexPrefixRule = null;
     private String encoding;
 }

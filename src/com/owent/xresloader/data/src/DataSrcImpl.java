@@ -48,4 +48,6 @@ public abstract class DataSrcImpl {
     public int getRecordNumber() {
         return 0;
     }
+
+    public boolean checkName(String _name) { return false; }
 }

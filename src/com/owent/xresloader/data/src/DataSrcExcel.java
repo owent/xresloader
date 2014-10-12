@@ -96,7 +96,7 @@ public class DataSrcExcel extends DataSrcImpl {
             nameMap.put(IdentifyEngine.n2i(k), i);
         }
 
-        currentIndex = scfg.getDateRectRow();
+        currentIndex = scfg.getDateRectRow() - 1;
 
         return 0;
     }

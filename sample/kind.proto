@@ -7,4 +7,6 @@ message role_cfg {
     required int32 cost_value = 4;
     required string name = 5;
 	required dep_cfg dep_test = 10;
+	
+	repeated string test_array = 11;
 }

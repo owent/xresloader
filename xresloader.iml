@@ -4,6 +4,9 @@
     <facet type="Python" name="Python">
       <configuration sdkName="" />
     </facet>
+    <facet type="protobuf" name="Protobuf Facet">
+      <configuration />
+    </facet>
   </component>
 </module>
 

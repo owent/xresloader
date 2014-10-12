@@ -4,6 +4,7 @@ import com.owent.xresloader.ProgramOptions;
 import com.owent.xresloader.data.src.DataSrcImpl;
 import com.owent.xresloader.scheme.SchemeConf;
 
+import java.nio.charset.Charset;
 import java.util.Map;
 
 /**
@@ -38,7 +39,7 @@ public class DataDstLua extends DataDstImpl {
         sb.append("    }\n");
         sb.append("}\n");
 
-        return sb.toString().getBytes();
+        return sb.toString().getBytes(Charset.forName(SchemeConf.getInstance().getKey().getEncoding()));
     }
 
     @Override
@@ -54,12 +55,11 @@ public class DataDstLua extends DataDstImpl {
                 sb.append(indent);
                 sb.append(_name + " = {\n");
 
-                indent += "    ";
                 for (int i = 0; i < c.getValue().getListCount(); ++i) {
                     String new_prefix = DataDstWriterNode.makeChildPath(prefix, c.getKey(), i);
-                    writeOneData(sb, c.getValue(), indent, new_prefix, "");
+                    writeOneData(sb, c.getValue(), indent + "    ", new_prefix, "");
                 }
-                sb.append(indent.substring(4));
+                sb.append(indent);
                 sb.append("},\n");
             } else {
                 String new_prefix = DataDstWriterNode.makeChildPath(prefix, c.getKey());

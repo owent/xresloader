@@ -1,14 +1,7 @@
 
-b
-dependency.protodep_level2.proto"<
-dep_cfg
+²
 
-id (
-name (	
-dep2 (2	.dep2_cfg
-
-
-kind.protodependency.proto"}
+kind.protodependency.proto"‘
 role_cfg
 
 id (
@@ -18,7 +11,16 @@ kind.protodependency.proto"}
 cost_value (
 name (	
 dep_test
- (2.dep_cfg
+ (2.dep_cfg
+
+test_array (	
+b
+dependency.protodep_level2.proto"<
+dep_cfg
+
+id (
+name (	
+dep2 (2	.dep2_cfg
 9
 dep_level2.proto"%
 dep2_cfg

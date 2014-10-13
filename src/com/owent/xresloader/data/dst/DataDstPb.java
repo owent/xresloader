@@ -2,17 +2,20 @@ package com.owent.xresloader.data.dst;
 
 import com.google.protobuf.DescriptorProtos;
 import com.google.protobuf.Descriptors;
+import com.google.protobuf.DynamicMessage;
 import com.owent.xresloader.ProgramOptions;
 import com.owent.xresloader.data.src.DataSrcImpl;
 import com.owent.xresloader.scheme.SchemeConf;
 import com.owent.xrexloader.pb.PbHeader;
+import org.apache.commons.codec.binary.Hex;
 
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.InputStream;
+import java.io.*;
+import java.nio.charset.Charset;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.HashMap;
 import java.util.LinkedList;
+import java.util.Map;
 
 /**
  * Created by owentou on 2014/10/10.
@@ -47,7 +50,7 @@ public class DataDstPb extends DataDstImpl {
             }
 
             Descriptors.FileDescriptor fd = build_fd(selected_fdp.getName());
-            currentMsgDesc = fd.findMessageTypeByName("role_cfg");
+            currentMsgDesc = fd.findMessageTypeByName(SchemeConf.getInstance().getProtoName());
 
         } catch (FileNotFoundException e) {
             e.printStackTrace();
@@ -74,11 +77,41 @@ public class DataDstPb extends DataDstImpl {
 
     @Override
     public final byte[] build(DataDstWriterNode desc) {
+        // 初始化header
         PbHeader.xresloader_header.Builder header = PbHeader.xresloader_header.getDefaultInstance().toBuilder();
         header.setXresVer(ProgramOptions.getInstance().getVersion());
         header.setDataVer(ProgramOptions.getInstance().getVersion());
+        header.setCount(DataSrcImpl.getOurInstance().getRecordNumber());
 
-        return new byte[0];
+        // 数据
+        ByteArrayOutputStream body_writer = new ByteArrayOutputStream();
+        int count = 0;
+        while (DataSrcImpl.getOurInstance().next()) {
+            if (convData(body_writer, desc))
+                ++ count;
+        }
+        header.setCount(count);
+
+        try {
+            MessageDigest md5 = MessageDigest.getInstance("MD5");
+            md5.update(body_writer.toByteArray());
+            header.setHashCode("md5:" + Hex.encodeHexString(md5.digest()));
+        } catch (NoSuchAlgorithmException e) {
+            System.err.println("[ERROR] failed to find md5 algorithm.");
+            header.setHashCode("");
+        }
+
+        // 写出
+        ByteArrayOutputStream writer = new ByteArrayOutputStream();
+        try {
+            header.build().writeTo(writer);
+            body_writer.writeTo(writer);
+        } catch (IOException e) {
+            e.printStackTrace();
+            System.err.println("[ERROR] try to serialize protobuf header failed." + e.toString());
+            System.err.println("[ERROR] " + header.build().getInitializationErrorString());
+        }
+        return writer.toByteArray();
     }
 
     private Descriptors.FileDescriptor build_fd(String fdn) {
@@ -215,5 +248,89 @@ public class DataDstPb extends DataDstImpl {
         }
 
         return ret && has_data;
+    }
+
+
+    private boolean convData(OutputStream writer, DataDstWriterNode desc) {
+        DynamicMessage.Builder root = DynamicMessage.newBuilder(currentMsgDesc);
+
+        writeData(root, desc, currentMsgDesc, "");
+        try {
+            root.build().writeTo(writer);
+        } catch (IOException e) {
+            System.err.println("[ERROR] serialize failed." + root.getInitializationErrorString());
+            return false;
+        }
+        return true;
+    }
+
+
+    private void writeData(DynamicMessage.Builder builder, DataDstWriterNode desc, Descriptors.Descriptor proto_desc, String prefix) {
+        for (Map.Entry<String, DataDstWriterNode> c : desc.getChildren().entrySet()) {
+            String _name = DataDstWriterNode.makeNodeName(c.getKey());
+
+            Descriptors.FieldDescriptor fd = proto_desc.findFieldByName(_name);
+            if (null == fd) {
+                System.err.println("[WARNING] child name " + c.getKey() + " not found in protobuf description " + proto_desc.getFullName());
+                continue;
+            }
+
+            if (c.getValue().isList() && fd.isRepeated()) {
+                for (int i = 0; i < c.getValue().getListCount(); ++i) {
+                    String new_prefix = DataDstWriterNode.makeChildPath(prefix, c.getKey(), i);
+                    Object ele = writeOneData(c.getValue(), fd, new_prefix);
+                    if (null != ele)
+                        builder.addRepeatedField(fd, ele);
+                }
+            } else {
+                String new_prefix = DataDstWriterNode.makeChildPath(prefix, c.getKey());
+                Object ele = writeOneData(c.getValue(), fd, new_prefix);
+                if (null != ele)
+                    builder.setField(fd, ele);
+            }
+
+        }
+    }
+
+    private Object writeOneData(DataDstWriterNode desc, Descriptors.FieldDescriptor fd, String prefix) {
+        String encoding = SchemeConf.getInstance().getKey().getEncoding();
+
+        switch (fd.getJavaType()) {
+            case INT:
+                return new Integer(DataSrcImpl.getOurInstance().getValue(prefix, new Integer(0)).toString());
+
+            case LONG:
+                return DataSrcImpl.getOurInstance().getValue(prefix, new Long(0)).longValue();
+
+            case FLOAT:
+                return new Float(DataSrcImpl.getOurInstance().getValue(prefix, new Float(0)).toString());
+
+            case DOUBLE:
+                return DataSrcImpl.getOurInstance().getValue(prefix, new Double(0)).doubleValue();
+
+            case BOOLEAN:
+                return DataSrcImpl.getOurInstance().getValue(prefix, Boolean.FALSE);
+
+            case STRING:
+                return DataSrcImpl.getOurInstance().getValue(prefix, "");
+
+            case BYTE_STRING:
+                return com.google.protobuf.ByteString.copyFrom(
+                    (null == encoding || encoding.isEmpty())?
+                        DataSrcImpl.getOurInstance().getValue(prefix, "").getBytes():
+                        DataSrcImpl.getOurInstance().getValue(prefix, "").getBytes(Charset.forName(encoding))
+                );
+
+            case ENUM:
+                return fd.getEnumType().findValueByName(DataSrcImpl.getOurInstance().getValue(prefix, "")).getNumber();
+
+            case MESSAGE:
+                DynamicMessage.Builder node = DynamicMessage.newBuilder(fd.getMessageType());
+                writeData(node, desc, fd.getMessageType(), prefix);
+                return node.build();
+
+            default:
+                return null;
+        }
     }
 }

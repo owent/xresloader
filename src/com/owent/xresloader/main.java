@@ -13,6 +13,7 @@ import com.owent.xresloader.scheme.SchemeConf;
 
 import java.io.FileOutputStream;
 import java.io.OutputStream;
+import java.nio.charset.Charset;
 
 /**
  * @author owentou
@@ -102,7 +103,7 @@ public class main {
                 continue;
             }
 
-            System.out.println("[INFO] convert scheme \"" + sn + "\" success");
+            System.out.println("[INFO] convert scheme \"" + sn + "\" success.(default charset: " + Charset.defaultCharset().toString() + ")");
         }
     }
 

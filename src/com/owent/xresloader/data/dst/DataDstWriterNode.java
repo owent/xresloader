@@ -92,5 +92,9 @@ public class DataDstWriterNode {
         getChildren().put(child_name, node);
     }
 
+    public boolean hasChild(String child_name) {
+        return children.containsKey(child_name);
+    }
+
     public enum JavaType {INT, LONG, FLOAT, DOUBLE, BOOLEAN, STRING, BYTE_STRING, ENUM, OBJECT}
 }

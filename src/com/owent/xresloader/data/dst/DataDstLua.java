@@ -3,6 +3,7 @@ package com.owent.xresloader.data.dst;
 import com.owent.xresloader.ProgramOptions;
 import com.owent.xresloader.data.src.DataSrcImpl;
 import com.owent.xresloader.scheme.SchemeConf;
+import org.apache.commons.codec.binary.Hex;
 
 import java.nio.charset.Charset;
 import java.util.Map;
@@ -39,11 +40,16 @@ public class DataDstLua extends DataDstImpl {
         sb.append("    }\n");
         sb.append("}\n");
 
-        return sb.toString().getBytes(Charset.forName(SchemeConf.getInstance().getKey().getEncoding()));
+        // 带编码的输出
+        String encoding = SchemeConf.getInstance().getKey().getEncoding();
+        if (null == encoding || encoding.isEmpty())
+            return sb.toString().getBytes();
+        return sb.toString().getBytes(Charset.forName(encoding));
     }
 
     @Override
     public final DataDstWriterNode compile() {
+        System.err.println("[ERROR] lua can not be protocol description.");
         return null;
     }
 
@@ -90,12 +96,22 @@ public class DataDstLua extends DataDstImpl {
                 break;
 
             case STRING:
-            case BYTE_STRING:
                 sb.append("\"");
                 sb.append(
-                        DataSrcImpl.getOurInstance().getValue(prefix, "")
-                                .replaceAll("\"", "\\\"")
-                                .replaceAll("\\\\", "\\\\")
+                    DataSrcImpl.getOurInstance().getValue(prefix, "")
+                        .replaceAll("\"", "\\\"")
+                        .replaceAll("\\\\", "\\\\")
+                );
+                sb.append("\"");
+                break;
+
+            case BYTE_STRING:
+                sb.append("\"");
+
+                sb.append(
+                    Hex.encodeHexString(
+                        DataSrcImpl.getOurInstance().getValue(prefix, "").getBytes()
+                    )
                 );
                 sb.append("\"");
                 break;

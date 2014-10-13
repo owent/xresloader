@@ -112,16 +112,25 @@ public class DataSrcExcel extends DataSrcImpl {
         return null != currentRow;
     }
 
+
     @Override
     public <T> T getValue(String ident, T ret) {
         int index = nameMap.getOrDefault(ident, -1);
         if (index < 0)
             return ret;
 
-        if (ret instanceof Integer || ret instanceof Long || ret instanceof Short || ret instanceof Character) {
+        if (ret instanceof Integer) {
+            ret = (T) Integer.valueOf(ExcelEngine.cell2i(currentRow, index, currentSheetFormula).toString());
+        } else if (ret instanceof Long) {
             ret = (T) ExcelEngine.cell2i(currentRow, index, currentSheetFormula);
-        } else if (ret instanceof Float || ret instanceof Double) {
+        } else if (ret instanceof Short) {
+            ret = (T) Short.valueOf(ExcelEngine.cell2i(currentRow, index, currentSheetFormula).toString());
+        } else if (ret instanceof Character) {
+            ret = (T) Character.valueOf(ExcelEngine.cell2i(currentRow, index, currentSheetFormula).toString().charAt(0));
+        } else if (ret instanceof Double) {
             ret = (T) ExcelEngine.cell2d(currentRow, index, currentSheetFormula);
+        } else if (ret instanceof Float) {
+            ret = (T) Float.valueOf(ExcelEngine.cell2d(currentRow, index, currentSheetFormula).toString());
         } else if (ret instanceof Boolean) {
             ret = (T) ExcelEngine.cell2b(currentRow, index, currentSheetFormula);
         } else {

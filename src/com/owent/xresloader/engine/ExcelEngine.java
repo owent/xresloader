@@ -6,12 +6,18 @@ import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 import java.io.FileInputStream;
+import java.text.SimpleDateFormat;
 import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.regex.Pattern;
 
 /**
  * Created by owentou on 2014/10/9.
  */
 public class ExcelEngine {
+    static private Pattern checkDate = Pattern.compile("[/\\-\\.]");
+    static private Pattern checkTime = Pattern.compile(":");
+
 
     /**
      * 打开Excel文件
@@ -104,6 +110,46 @@ public class ExcelEngine {
             case Cell.CELL_TYPE_FORMULA:
                 return c.getCellFormula();
             case Cell.CELL_TYPE_NUMERIC:
+
+                if(DateUtil.isCellDateFormatted(c)) {
+                    // 参照POI DateUtil.isADateFormat函数，去除无效字符
+                    String fs = c.getCellStyle().getDataFormatString()
+                        .replaceAll("\\\\-","-")
+                        .replaceAll("\\\\,",",")
+                        .replaceAll("\\\\\\.",".")
+                        .replaceAll("\\\\ "," ")
+                        .replaceAll("AM/PM","")
+                        .replaceAll("\\[[^]]*\\]", "");
+
+                    // 默认格式
+                    int idx = fs.indexOf(";@");
+                    if (idx > 0 && idx < fs.length()) {
+                        // 包含年月日
+                        LinkedList<String> rfs = new LinkedList<String>();
+
+
+                        if (checkDate.matcher(fs).find())
+                            rfs.addLast("yyyy-MM-dd");
+
+                        if (checkTime.matcher(fs).find())
+                            rfs.addLast("HH:mm:ss");
+
+                        if (rfs.isEmpty())
+                            fs = "yyyy-MM-dd HH-mm-ss";
+                        else
+                            fs = String.join(" ", rfs);
+
+                    } else {
+                        idx = fs.indexOf(";");
+                        if(idx > 0 && idx < fs.length() - 1 ) {
+                            fs = fs.substring(0, idx);
+                        }
+                    }
+
+
+                    SimpleDateFormat df = new SimpleDateFormat(fs);
+                    return df.format(c.getDateCellValue()).trim();
+                }
                 return String.valueOf(c.getNumericCellValue());
             case Cell.CELL_TYPE_STRING:
                 return tryMacro(c.getStringCellValue().trim());
@@ -154,7 +200,7 @@ public class ExcelEngine {
             case Cell.CELL_TYPE_NUMERIC:
                 return Math.round(c.getNumericCellValue());
             case Cell.CELL_TYPE_STRING:
-                return Math.round((double) Double.valueOf(tryMacro(c.getStringCellValue().trim())));
+                return Math.round(Double.valueOf(tryMacro(c.getStringCellValue().trim())));
             default:
                 return 0L;
         }

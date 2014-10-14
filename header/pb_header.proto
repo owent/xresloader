@@ -6,3 +6,8 @@ message xresloader_header {
     required uint32 count = 3;
 	required string hash_code = 4;
 }
+
+message xresloader_datablocks {
+	required xresloader_header header = 1;
+	repeated bytes data_block = 2;
+}

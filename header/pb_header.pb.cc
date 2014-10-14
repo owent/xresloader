@@ -26,6 +26,9 @@ namespace {
 const ::google::protobuf::Descriptor* xresloader_header_descriptor_ = NULL;
 const ::google::protobuf::internal::GeneratedMessageReflection*
   xresloader_header_reflection_ = NULL;
+const ::google::protobuf::Descriptor* xresloader_datablocks_descriptor_ = NULL;
+const ::google::protobuf::internal::GeneratedMessageReflection*
+  xresloader_datablocks_reflection_ = NULL;
 
 }  // namespace
 
@@ -54,6 +57,22 @@ void protobuf_AssignDesc_pb_5fheader_2eproto() {
       ::google::protobuf::DescriptorPool::generated_pool(),
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(xresloader_header));
+  xresloader_datablocks_descriptor_ = file->message_type(1);
+  static const int xresloader_datablocks_offsets_[2] = {
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(xresloader_datablocks, header_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(xresloader_datablocks, data_block_),
+  };
+  xresloader_datablocks_reflection_ =
+    new ::google::protobuf::internal::GeneratedMessageReflection(
+      xresloader_datablocks_descriptor_,
+      xresloader_datablocks::default_instance_,
+      xresloader_datablocks_offsets_,
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(xresloader_datablocks, _has_bits_[0]),
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(xresloader_datablocks, _unknown_fields_),
+      -1,
+      ::google::protobuf::DescriptorPool::generated_pool(),
+      ::google::protobuf::MessageFactory::generated_factory(),
+      sizeof(xresloader_datablocks));
 }
 
 namespace {
@@ -68,6 +87,8 @@ void protobuf_RegisterTypes(const ::std::string&) {
   protobuf_AssignDescriptorsOnce();
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
     xresloader_header_descriptor_, &xresloader_header::default_instance());
+  ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
+    xresloader_datablocks_descriptor_, &xresloader_datablocks::default_instance());
 }
 
 }  // namespace
@@ -75,6 +96,8 @@ void protobuf_RegisterTypes(const ::std::string&) {
 void protobuf_ShutdownFile_pb_5fheader_2eproto() {
   delete xresloader_header::default_instance_;
   delete xresloader_header_reflection_;
+  delete xresloader_datablocks::default_instance_;
+  delete xresloader_datablocks_reflection_;
 }
 
 void protobuf_AddDesc_pb_5fheader_2eproto() {
@@ -87,11 +110,15 @@ void protobuf_AddDesc_pb_5fheader_2eproto() {
     "\n\017pb_header.proto\022\027com.owent.xrexloader."
     "pb\"Y\n\021xresloader_header\022\020\n\010xres_ver\030\001 \002("
     "\t\022\020\n\010data_ver\030\002 \002(\t\022\r\n\005count\030\003 \002(\r\022\021\n\tha"
-    "sh_code\030\004 \002(\t", 133);
+    "sh_code\030\004 \002(\t\"g\n\025xresloader_datablocks\022:"
+    "\n\006header\030\001 \002(\0132*.com.owent.xrexloader.pb"
+    ".xresloader_header\022\022\n\ndata_block\030\002 \003(\014", 238);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "pb_header.proto", &protobuf_RegisterTypes);
   xresloader_header::default_instance_ = new xresloader_header();
+  xresloader_datablocks::default_instance_ = new xresloader_datablocks();
   xresloader_header::default_instance_->InitAsDefaultInstance();
+  xresloader_datablocks::default_instance_->InitAsDefaultInstance();
   ::google::protobuf::internal::OnShutdown(&protobuf_ShutdownFile_pb_5fheader_2eproto);
 }
 
@@ -501,6 +528,275 @@ void xresloader_header::Swap(xresloader_header* other) {
   ::google::protobuf::Metadata metadata;
   metadata.descriptor = xresloader_header_descriptor_;
   metadata.reflection = xresloader_header_reflection_;
+  return metadata;
+}
+
+
+// ===================================================================
+
+#ifndef _MSC_VER
+const int xresloader_datablocks::kHeaderFieldNumber;
+const int xresloader_datablocks::kDataBlockFieldNumber;
+#endif  // !_MSC_VER
+
+xresloader_datablocks::xresloader_datablocks()
+  : ::google::protobuf::Message() {
+  SharedCtor();
+  // @@protoc_insertion_point(constructor:com.owent.xrexloader.pb.xresloader_datablocks)
+}
+
+void xresloader_datablocks::InitAsDefaultInstance() {
+  header_ = const_cast< ::com::owent::xrexloader::pb::xresloader_header*>(&::com::owent::xrexloader::pb::xresloader_header::default_instance());
+}
+
+xresloader_datablocks::xresloader_datablocks(const xresloader_datablocks& from)
+  : ::google::protobuf::Message() {
+  SharedCtor();
+  MergeFrom(from);
+  // @@protoc_insertion_point(copy_constructor:com.owent.xrexloader.pb.xresloader_datablocks)
+}
+
+void xresloader_datablocks::SharedCtor() {
+  ::google::protobuf::internal::GetEmptyString();
+  _cached_size_ = 0;
+  header_ = NULL;
+  ::memset(_has_bits_, 0, sizeof(_has_bits_));
+}
+
+xresloader_datablocks::~xresloader_datablocks() {
+  // @@protoc_insertion_point(destructor:com.owent.xrexloader.pb.xresloader_datablocks)
+  SharedDtor();
+}
+
+void xresloader_datablocks::SharedDtor() {
+  if (this != default_instance_) {
+    delete header_;
+  }
+}
+
+void xresloader_datablocks::SetCachedSize(int size) const {
+  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+  _cached_size_ = size;
+  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+}
+const ::google::protobuf::Descriptor* xresloader_datablocks::descriptor() {
+  protobuf_AssignDescriptorsOnce();
+  return xresloader_datablocks_descriptor_;
+}
+
+const xresloader_datablocks& xresloader_datablocks::default_instance() {
+  if (default_instance_ == NULL) protobuf_AddDesc_pb_5fheader_2eproto();
+  return *default_instance_;
+}
+
+xresloader_datablocks* xresloader_datablocks::default_instance_ = NULL;
+
+xresloader_datablocks* xresloader_datablocks::New() const {
+  return new xresloader_datablocks;
+}
+
+void xresloader_datablocks::Clear() {
+  if (has_header()) {
+    if (header_ != NULL) header_->::com::owent::xrexloader::pb::xresloader_header::Clear();
+  }
+  data_block_.Clear();
+  ::memset(_has_bits_, 0, sizeof(_has_bits_));
+  mutable_unknown_fields()->Clear();
+}
+
+bool xresloader_datablocks::MergePartialFromCodedStream(
+    ::google::protobuf::io::CodedInputStream* input) {
+#define DO_(EXPRESSION) if (!(EXPRESSION)) goto failure
+  ::google::protobuf::uint32 tag;
+  // @@protoc_insertion_point(parse_start:com.owent.xrexloader.pb.xresloader_datablocks)
+  for (;;) {
+    ::std::pair< ::google::protobuf::uint32, bool> p = input->ReadTagWithCutoff(127);
+    tag = p.first;
+    if (!p.second) goto handle_unusual;
+    switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
+      // required .com.owent.xrexloader.pb.xresloader_header header = 1;
+      case 1: {
+        if (tag == 10) {
+          DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
+               input, mutable_header()));
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectTag(18)) goto parse_data_block;
+        break;
+      }
+
+      // repeated bytes data_block = 2;
+      case 2: {
+        if (tag == 18) {
+         parse_data_block:
+          DO_(::google::protobuf::internal::WireFormatLite::ReadBytes(
+                input, this->add_data_block()));
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectTag(18)) goto parse_data_block;
+        if (input->ExpectAtEnd()) goto success;
+        break;
+      }
+
+      default: {
+      handle_unusual:
+        if (tag == 0 ||
+            ::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_END_GROUP) {
+          goto success;
+        }
+        DO_(::google::protobuf::internal::WireFormat::SkipField(
+              input, tag, mutable_unknown_fields()));
+        break;
+      }
+    }
+  }
+success:
+  // @@protoc_insertion_point(parse_success:com.owent.xrexloader.pb.xresloader_datablocks)
+  return true;
+failure:
+  // @@protoc_insertion_point(parse_failure:com.owent.xrexloader.pb.xresloader_datablocks)
+  return false;
+#undef DO_
+}
+
+void xresloader_datablocks::SerializeWithCachedSizes(
+    ::google::protobuf::io::CodedOutputStream* output) const {
+  // @@protoc_insertion_point(serialize_start:com.owent.xrexloader.pb.xresloader_datablocks)
+  // required .com.owent.xrexloader.pb.xresloader_header header = 1;
+  if (has_header()) {
+    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
+      1, this->header(), output);
+  }
+
+  // repeated bytes data_block = 2;
+  for (int i = 0; i < this->data_block_size(); i++) {
+    ::google::protobuf::internal::WireFormatLite::WriteBytes(
+      2, this->data_block(i), output);
+  }
+
+  if (!unknown_fields().empty()) {
+    ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
+        unknown_fields(), output);
+  }
+  // @@protoc_insertion_point(serialize_end:com.owent.xrexloader.pb.xresloader_datablocks)
+}
+
+::google::protobuf::uint8* xresloader_datablocks::SerializeWithCachedSizesToArray(
+    ::google::protobuf::uint8* target) const {
+  // @@protoc_insertion_point(serialize_to_array_start:com.owent.xrexloader.pb.xresloader_datablocks)
+  // required .com.owent.xrexloader.pb.xresloader_header header = 1;
+  if (has_header()) {
+    target = ::google::protobuf::internal::WireFormatLite::
+      WriteMessageNoVirtualToArray(
+        1, this->header(), target);
+  }
+
+  // repeated bytes data_block = 2;
+  for (int i = 0; i < this->data_block_size(); i++) {
+    target = ::google::protobuf::internal::WireFormatLite::
+      WriteBytesToArray(2, this->data_block(i), target);
+  }
+
+  if (!unknown_fields().empty()) {
+    target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
+        unknown_fields(), target);
+  }
+  // @@protoc_insertion_point(serialize_to_array_end:com.owent.xrexloader.pb.xresloader_datablocks)
+  return target;
+}
+
+int xresloader_datablocks::ByteSize() const {
+  int total_size = 0;
+
+  if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
+    // required .com.owent.xrexloader.pb.xresloader_header header = 1;
+    if (has_header()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
+          this->header());
+    }
+
+  }
+  // repeated bytes data_block = 2;
+  total_size += 1 * this->data_block_size();
+  for (int i = 0; i < this->data_block_size(); i++) {
+    total_size += ::google::protobuf::internal::WireFormatLite::BytesSize(
+      this->data_block(i));
+  }
+
+  if (!unknown_fields().empty()) {
+    total_size +=
+      ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
+        unknown_fields());
+  }
+  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+  _cached_size_ = total_size;
+  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+  return total_size;
+}
+
+void xresloader_datablocks::MergeFrom(const ::google::protobuf::Message& from) {
+  GOOGLE_CHECK_NE(&from, this);
+  const xresloader_datablocks* source =
+    ::google::protobuf::internal::dynamic_cast_if_available<const xresloader_datablocks*>(
+      &from);
+  if (source == NULL) {
+    ::google::protobuf::internal::ReflectionOps::Merge(from, this);
+  } else {
+    MergeFrom(*source);
+  }
+}
+
+void xresloader_datablocks::MergeFrom(const xresloader_datablocks& from) {
+  GOOGLE_CHECK_NE(&from, this);
+  data_block_.MergeFrom(from.data_block_);
+  if (from._has_bits_[0 / 32] & (0xffu << (0 % 32))) {
+    if (from.has_header()) {
+      mutable_header()->::com::owent::xrexloader::pb::xresloader_header::MergeFrom(from.header());
+    }
+  }
+  mutable_unknown_fields()->MergeFrom(from.unknown_fields());
+}
+
+void xresloader_datablocks::CopyFrom(const ::google::protobuf::Message& from) {
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+void xresloader_datablocks::CopyFrom(const xresloader_datablocks& from) {
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+bool xresloader_datablocks::IsInitialized() const {
+  if ((_has_bits_[0] & 0x00000001) != 0x00000001) return false;
+
+  if (has_header()) {
+    if (!this->header().IsInitialized()) return false;
+  }
+  return true;
+}
+
+void xresloader_datablocks::Swap(xresloader_datablocks* other) {
+  if (other != this) {
+    std::swap(header_, other->header_);
+    data_block_.Swap(&other->data_block_);
+    std::swap(_has_bits_[0], other->_has_bits_[0]);
+    _unknown_fields_.Swap(&other->_unknown_fields_);
+    std::swap(_cached_size_, other->_cached_size_);
+  }
+}
+
+::google::protobuf::Metadata xresloader_datablocks::GetMetadata() const {
+  protobuf_AssignDescriptorsOnce();
+  ::google::protobuf::Metadata metadata;
+  metadata.descriptor = xresloader_datablocks_descriptor_;
+  metadata.reflection = xresloader_datablocks_reflection_;
   return metadata;
 }
 

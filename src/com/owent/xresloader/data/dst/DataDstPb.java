@@ -1,5 +1,6 @@
 package com.owent.xresloader.data.dst;
 
+import com.google.protobuf.ByteString;
 import com.google.protobuf.DescriptorProtos;
 import com.google.protobuf.Descriptors;
 import com.google.protobuf.DynamicMessage;
@@ -78,23 +79,26 @@ public class DataDstPb extends DataDstImpl {
     @Override
     public final byte[] build(DataDstWriterNode desc) {
         // 初始化header
-        PbHeader.xresloader_header.Builder header = PbHeader.xresloader_header.getDefaultInstance().toBuilder();
+        PbHeader.xresloader_datablocks.Builder blocks = PbHeader.xresloader_datablocks.newBuilder();
+        PbHeader.xresloader_header.Builder header = blocks.getHeaderBuilder();
         header.setXresVer(ProgramOptions.getInstance().getVersion());
         header.setDataVer(ProgramOptions.getInstance().getVersion());
-        header.setCount(DataSrcImpl.getOurInstance().getRecordNumber());
+        header.setHashCode("");
 
         // 数据
-        ByteArrayOutputStream body_writer = new ByteArrayOutputStream();
         int count = 0;
         while (DataSrcImpl.getOurInstance().next()) {
-            if (convData(body_writer, desc))
-                ++ count;
+            ByteString data = convData(desc);
+            if (null != data && !data.isEmpty()) {
+                ++count;
+                blocks.addDataBlock(data);
+            }
         }
         header.setCount(count);
 
         try {
             MessageDigest md5 = MessageDigest.getInstance("MD5");
-            md5.update(body_writer.toByteArray());
+            md5.update(blocks.build().toByteArray());
             header.setHashCode("md5:" + Hex.encodeHexString(md5.digest()));
         } catch (NoSuchAlgorithmException e) {
             System.err.println("[ERROR] failed to find md5 algorithm.");
@@ -104,8 +108,9 @@ public class DataDstPb extends DataDstImpl {
         // 写出
         ByteArrayOutputStream writer = new ByteArrayOutputStream();
         try {
-            header.build().writeTo(writer);
-            body_writer.writeTo(writer);
+
+            PbHeader.xresloader_header builtHeader = header.build();
+            blocks.build().writeTo(writer);
         } catch (IOException e) {
             e.printStackTrace();
             System.err.println("[ERROR] try to serialize protobuf header failed." + e.toString());
@@ -251,17 +256,16 @@ public class DataDstPb extends DataDstImpl {
     }
 
 
-    private boolean convData(OutputStream writer, DataDstWriterNode desc) {
+    private ByteString convData(DataDstWriterNode desc) {
         DynamicMessage.Builder root = DynamicMessage.newBuilder(currentMsgDesc);
 
         writeData(root, desc, currentMsgDesc, "");
         try {
-            root.build().writeTo(writer);
-        } catch (IOException e) {
+            return root.build().toByteString();
+        } catch (Exception e) {
             System.err.println("[ERROR] serialize failed." + root.getInitializationErrorString());
-            return false;
+            return null;
         }
-        return true;
     }
 
 
@@ -271,7 +275,8 @@ public class DataDstPb extends DataDstImpl {
 
             Descriptors.FieldDescriptor fd = proto_desc.findFieldByName(_name);
             if (null == fd) {
-                System.err.println("[WARNING] child name " + c.getKey() + " not found in protobuf description " + proto_desc.getFullName());
+                // System.err.println("[WARNING] child name " + c.getKey() + " not found in protobuf description " + proto_desc.getFullName());
+                // 不需要提示，如果从其他方式解包协议描述的时候可能有可选字段丢失的
                 continue;
             }
 

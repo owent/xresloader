@@ -70,7 +70,7 @@ public class ProgramOptions {
                 case 'h': {
                     System.out.println("Usage: java -jar " + script + " [options]");
                     System.out.println("-h, --help              help");
-                    System.out.println("-t, --output-type       output type(bin)");
+                    System.out.println("-t, --output-type       output type(bin,lua)");
                     System.out.println("-p, --proto             protocol(protobuf)");
                     System.out.println("-f, --proto-file        protocol description file");
                     System.out.println("-o, --output-dir        output directory");

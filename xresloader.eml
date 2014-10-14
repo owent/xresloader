@@ -21,13 +21,13 @@
 		<relative-module-cls project-related="jar://$PROJECT_DIR$/deps/commons-codec/commons-codec-1.9.jar!/"/>
 		<relative-module-javadoc project-related="jar://$PROJECT_DIR$/deps/commons-codec/commons-codec-1.9-javadoc.jar!/"/>
 	</lib>
-	<lib name="E:\Projs\Custom\xresloader\deps\poi\ooxml-lib\xmlbeans-2.6.0.jar" scope="COMPILE">
+	<lib name="xmlbeans-2.6.0.jar" scope="COMPILE">
 		<relative-module-cls project-related="jar://$PROJECT_DIR$/deps/poi/ooxml-lib/xmlbeans-2.6.0.jar!/"/>
 	</lib>
-	<lib name="E:\Projs\Custom\xresloader\deps\poi\ooxml-lib\stax-api-1.0.1.jar" scope="COMPILE">
+	<lib name="stax-api-1.0.1.jar" scope="COMPILE">
 		<relative-module-cls project-related="jar://$PROJECT_DIR$/deps/poi/ooxml-lib/stax-api-1.0.1.jar!/"/>
 	</lib>
-	<lib name="E:\Projs\Custom\xresloader\deps\poi\ooxml-lib\dom4j-1.6.1.jar" scope="COMPILE">
+	<lib name="dom4j-1.6.1.jar" scope="COMPILE">
 		<relative-module-cls project-related="jar://$PROJECT_DIR$/deps/poi/ooxml-lib/dom4j-1.6.1.jar!/"/>
 	</lib>
 </component>

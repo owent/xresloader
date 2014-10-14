@@ -18,7 +18,7 @@ _sym_db = _symbol_database.Default()
 DESCRIPTOR = _descriptor.FileDescriptor(
   name='pb_header.proto',
   package='com.owent.xrexloader.pb',
-  serialized_pb=_b('\n\x0fpb_header.proto\x12\x17\x63om.owent.xrexloader.pb\"Y\n\x11xresloader_header\x12\x10\n\x08xres_ver\x18\x01 \x02(\t\x12\x10\n\x08\x64\x61ta_ver\x18\x02 \x02(\t\x12\r\n\x05\x63ount\x18\x03 \x02(\r\x12\x11\n\thash_code\x18\x04 \x02(\t')
+  serialized_pb=_b('\n\x0fpb_header.proto\x12\x17\x63om.owent.xrexloader.pb\"Y\n\x11xresloader_header\x12\x10\n\x08xres_ver\x18\x01 \x02(\t\x12\x10\n\x08\x64\x61ta_ver\x18\x02 \x02(\t\x12\r\n\x05\x63ount\x18\x03 \x02(\r\x12\x11\n\thash_code\x18\x04 \x02(\t\"g\n\x15xresloader_datablocks\x12:\n\x06header\x18\x01 \x02(\x0b\x32*.com.owent.xrexloader.pb.xresloader_header\x12\x12\n\ndata_block\x18\x02 \x03(\x0c')
 )
 _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
@@ -75,7 +75,46 @@ _XRESLOADER_HEADER = _descriptor.Descriptor(
   serialized_end=133,
 )
 
+
+_XRESLOADER_DATABLOCKS = _descriptor.Descriptor(
+  name='xresloader_datablocks',
+  full_name='com.owent.xrexloader.pb.xresloader_datablocks',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='header', full_name='com.owent.xrexloader.pb.xresloader_datablocks.header', index=0,
+      number=1, type=11, cpp_type=10, label=2,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='data_block', full_name='com.owent.xrexloader.pb.xresloader_datablocks.data_block', index=1,
+      number=2, type=12, cpp_type=9, label=3,
+      has_default_value=False, default_value=[],
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=135,
+  serialized_end=238,
+)
+
+_XRESLOADER_DATABLOCKS.fields_by_name['header'].message_type = _XRESLOADER_HEADER
 DESCRIPTOR.message_types_by_name['xresloader_header'] = _XRESLOADER_HEADER
+DESCRIPTOR.message_types_by_name['xresloader_datablocks'] = _XRESLOADER_DATABLOCKS
 
 xresloader_header = _reflection.GeneratedProtocolMessageType('xresloader_header', (_message.Message,), dict(
   DESCRIPTOR = _XRESLOADER_HEADER,
@@ -83,6 +122,13 @@ xresloader_header = _reflection.GeneratedProtocolMessageType('xresloader_header'
   # @@protoc_insertion_point(class_scope:com.owent.xrexloader.pb.xresloader_header)
   ))
 _sym_db.RegisterMessage(xresloader_header)
+
+xresloader_datablocks = _reflection.GeneratedProtocolMessageType('xresloader_datablocks', (_message.Message,), dict(
+  DESCRIPTOR = _XRESLOADER_DATABLOCKS,
+  __module__ = 'pb_header_pb2'
+  # @@protoc_insertion_point(class_scope:com.owent.xrexloader.pb.xresloader_datablocks)
+  ))
+_sym_db.RegisterMessage(xresloader_datablocks)
 
 
 # @@protoc_insertion_point(module_scope)

@@ -103,7 +103,7 @@ public class main {
                 continue;
             }
 
-            System.out.println("[INFO] convert scheme \"" + sn + "\" success.(default charset: " + Charset.defaultCharset().toString() + ")");
+            System.out.println("[INFO] convert scheme \"" + sn + "\"  to \"" + SchemeConf.getInstance().getOutputFile() + "\" success.(default charset: " + Charset.defaultCharset().toString() + ")");
         }
     }
 

@@ -37,6 +37,7 @@ void protobuf_AssignDesc_pb_5fheader_2eproto();
 void protobuf_ShutdownFile_pb_5fheader_2eproto();
 
 class xresloader_header;
+class xresloader_datablocks;
 
 // ===================================================================
 
@@ -161,6 +162,104 @@ class xresloader_header : public ::google::protobuf::Message {
 
   void InitAsDefaultInstance();
   static xresloader_header* default_instance_;
+};
+// -------------------------------------------------------------------
+
+class xresloader_datablocks : public ::google::protobuf::Message {
+ public:
+  xresloader_datablocks();
+  virtual ~xresloader_datablocks();
+
+  xresloader_datablocks(const xresloader_datablocks& from);
+
+  inline xresloader_datablocks& operator=(const xresloader_datablocks& from) {
+    CopyFrom(from);
+    return *this;
+  }
+
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+    return _unknown_fields_;
+  }
+
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+    return &_unknown_fields_;
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const xresloader_datablocks& default_instance();
+
+  void Swap(xresloader_datablocks* other);
+
+  // implements Message ----------------------------------------------
+
+  xresloader_datablocks* New() const;
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
+  void CopyFrom(const xresloader_datablocks& from);
+  void MergeFrom(const xresloader_datablocks& from);
+  void Clear();
+  bool IsInitialized() const;
+
+  int ByteSize() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  public:
+  ::google::protobuf::Metadata GetMetadata() const;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // required .com.owent.xrexloader.pb.xresloader_header header = 1;
+  inline bool has_header() const;
+  inline void clear_header();
+  static const int kHeaderFieldNumber = 1;
+  inline const ::com::owent::xrexloader::pb::xresloader_header& header() const;
+  inline ::com::owent::xrexloader::pb::xresloader_header* mutable_header();
+  inline ::com::owent::xrexloader::pb::xresloader_header* release_header();
+  inline void set_allocated_header(::com::owent::xrexloader::pb::xresloader_header* header);
+
+  // repeated bytes data_block = 2;
+  inline int data_block_size() const;
+  inline void clear_data_block();
+  static const int kDataBlockFieldNumber = 2;
+  inline const ::std::string& data_block(int index) const;
+  inline ::std::string* mutable_data_block(int index);
+  inline void set_data_block(int index, const ::std::string& value);
+  inline void set_data_block(int index, const char* value);
+  inline void set_data_block(int index, const void* value, size_t size);
+  inline ::std::string* add_data_block();
+  inline void add_data_block(const ::std::string& value);
+  inline void add_data_block(const char* value);
+  inline void add_data_block(const void* value, size_t size);
+  inline const ::google::protobuf::RepeatedPtrField< ::std::string>& data_block() const;
+  inline ::google::protobuf::RepeatedPtrField< ::std::string>* mutable_data_block();
+
+  // @@protoc_insertion_point(class_scope:com.owent.xrexloader.pb.xresloader_datablocks)
+ private:
+  inline void set_has_header();
+  inline void clear_has_header();
+
+  ::google::protobuf::UnknownFieldSet _unknown_fields_;
+
+  ::google::protobuf::uint32 _has_bits_[1];
+  mutable int _cached_size_;
+  ::com::owent::xrexloader::pb::xresloader_header* header_;
+  ::google::protobuf::RepeatedPtrField< ::std::string> data_block_;
+  friend void  protobuf_AddDesc_pb_5fheader_2eproto();
+  friend void protobuf_AssignDesc_pb_5fheader_2eproto();
+  friend void protobuf_ShutdownFile_pb_5fheader_2eproto();
+
+  void InitAsDefaultInstance();
+  static xresloader_datablocks* default_instance_;
 };
 // ===================================================================
 
@@ -419,6 +518,105 @@ inline void xresloader_header::set_allocated_hash_code(::std::string* hash_code)
     hash_code_ = const_cast< ::std::string*>(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   }
   // @@protoc_insertion_point(field_set_allocated:com.owent.xrexloader.pb.xresloader_header.hash_code)
+}
+
+// -------------------------------------------------------------------
+
+// xresloader_datablocks
+
+// required .com.owent.xrexloader.pb.xresloader_header header = 1;
+inline bool xresloader_datablocks::has_header() const {
+  return (_has_bits_[0] & 0x00000001u) != 0;
+}
+inline void xresloader_datablocks::set_has_header() {
+  _has_bits_[0] |= 0x00000001u;
+}
+inline void xresloader_datablocks::clear_has_header() {
+  _has_bits_[0] &= ~0x00000001u;
+}
+inline void xresloader_datablocks::clear_header() {
+  if (header_ != NULL) header_->::com::owent::xrexloader::pb::xresloader_header::Clear();
+  clear_has_header();
+}
+inline const ::com::owent::xrexloader::pb::xresloader_header& xresloader_datablocks::header() const {
+  // @@protoc_insertion_point(field_get:com.owent.xrexloader.pb.xresloader_datablocks.header)
+  return header_ != NULL ? *header_ : *default_instance_->header_;
+}
+inline ::com::owent::xrexloader::pb::xresloader_header* xresloader_datablocks::mutable_header() {
+  set_has_header();
+  if (header_ == NULL) header_ = new ::com::owent::xrexloader::pb::xresloader_header;
+  // @@protoc_insertion_point(field_mutable:com.owent.xrexloader.pb.xresloader_datablocks.header)
+  return header_;
+}
+inline ::com::owent::xrexloader::pb::xresloader_header* xresloader_datablocks::release_header() {
+  clear_has_header();
+  ::com::owent::xrexloader::pb::xresloader_header* temp = header_;
+  header_ = NULL;
+  return temp;
+}
+inline void xresloader_datablocks::set_allocated_header(::com::owent::xrexloader::pb::xresloader_header* header) {
+  delete header_;
+  header_ = header;
+  if (header) {
+    set_has_header();
+  } else {
+    clear_has_header();
+  }
+  // @@protoc_insertion_point(field_set_allocated:com.owent.xrexloader.pb.xresloader_datablocks.header)
+}
+
+// repeated bytes data_block = 2;
+inline int xresloader_datablocks::data_block_size() const {
+  return data_block_.size();
+}
+inline void xresloader_datablocks::clear_data_block() {
+  data_block_.Clear();
+}
+inline const ::std::string& xresloader_datablocks::data_block(int index) const {
+  // @@protoc_insertion_point(field_get:com.owent.xrexloader.pb.xresloader_datablocks.data_block)
+  return data_block_.Get(index);
+}
+inline ::std::string* xresloader_datablocks::mutable_data_block(int index) {
+  // @@protoc_insertion_point(field_mutable:com.owent.xrexloader.pb.xresloader_datablocks.data_block)
+  return data_block_.Mutable(index);
+}
+inline void xresloader_datablocks::set_data_block(int index, const ::std::string& value) {
+  // @@protoc_insertion_point(field_set:com.owent.xrexloader.pb.xresloader_datablocks.data_block)
+  data_block_.Mutable(index)->assign(value);
+}
+inline void xresloader_datablocks::set_data_block(int index, const char* value) {
+  data_block_.Mutable(index)->assign(value);
+  // @@protoc_insertion_point(field_set_char:com.owent.xrexloader.pb.xresloader_datablocks.data_block)
+}
+inline void xresloader_datablocks::set_data_block(int index, const void* value, size_t size) {
+  data_block_.Mutable(index)->assign(
+    reinterpret_cast<const char*>(value), size);
+  // @@protoc_insertion_point(field_set_pointer:com.owent.xrexloader.pb.xresloader_datablocks.data_block)
+}
+inline ::std::string* xresloader_datablocks::add_data_block() {
+  return data_block_.Add();
+}
+inline void xresloader_datablocks::add_data_block(const ::std::string& value) {
+  data_block_.Add()->assign(value);
+  // @@protoc_insertion_point(field_add:com.owent.xrexloader.pb.xresloader_datablocks.data_block)
+}
+inline void xresloader_datablocks::add_data_block(const char* value) {
+  data_block_.Add()->assign(value);
+  // @@protoc_insertion_point(field_add_char:com.owent.xrexloader.pb.xresloader_datablocks.data_block)
+}
+inline void xresloader_datablocks::add_data_block(const void* value, size_t size) {
+  data_block_.Add()->assign(reinterpret_cast<const char*>(value), size);
+  // @@protoc_insertion_point(field_add_pointer:com.owent.xrexloader.pb.xresloader_datablocks.data_block)
+}
+inline const ::google::protobuf::RepeatedPtrField< ::std::string>&
+xresloader_datablocks::data_block() const {
+  // @@protoc_insertion_point(field_list:com.owent.xrexloader.pb.xresloader_datablocks.data_block)
+  return data_block_;
+}
+inline ::google::protobuf::RepeatedPtrField< ::std::string>*
+xresloader_datablocks::mutable_data_block() {
+  // @@protoc_insertion_point(field_mutable_list:com.owent.xrexloader.pb.xresloader_datablocks.data_block)
+  return &data_block_;
 }
 
 

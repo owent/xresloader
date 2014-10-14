@@ -6,7 +6,9 @@ import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
+import java.io.File;
 import java.io.FileInputStream;
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.HashMap;
 import java.util.LinkedList;
@@ -19,6 +21,7 @@ public class ExcelEngine {
     static private Pattern checkDate = Pattern.compile("[/\\-\\.]");
     static private Pattern checkTime = Pattern.compile(":");
 
+    static private HashMap<String, Workbook> openedWorkbooks = new HashMap<String, Workbook>();
 
     /**
      * 打开Excel文件
@@ -27,10 +30,19 @@ public class ExcelEngine {
      * @return Excel Workbook对象
      */
     static public Workbook openWorkbook(String file_path) {
-        Workbook ret = null;
         if(!IdentifyEngine.isAbsPath(file_path)) {
             file_path = ProgramOptions.getInstance().dataSourceDirectory + '/' + file_path;
         }
+
+        try {
+            file_path = new File(file_path).getCanonicalPath();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        Workbook ret = openedWorkbooks.get(file_path);
+        if (null != ret)
+            return ret;
 
         FileInputStream is = null;
         try {
@@ -46,6 +58,7 @@ public class ExcelEngine {
             e.printStackTrace();
         }
 
+        openedWorkbooks.put(file_path, ret);
         return ret;
     }
 

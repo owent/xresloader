@@ -1,5 +1,6 @@
 package com.owent.xresloader.engine;
 
+import com.owent.xresloader.ProgramOptions;
 import com.owent.xresloader.data.src.DataSrcImpl;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.*;
@@ -27,6 +28,10 @@ public class ExcelEngine {
      */
     static public Workbook openWorkbook(String file_path) {
         Workbook ret = null;
+        if(!IdentifyEngine.isAbsPath(file_path)) {
+            file_path = ProgramOptions.getInstance().dataSourceDirectory + '/' + file_path;
+        }
+
         FileInputStream is = null;
         try {
             is = new FileInputStream(file_path);

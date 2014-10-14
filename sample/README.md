@@ -1,11 +1,11 @@
-xresloaderÊ¾ÀıËµÃ÷:
+xresloaderç¤ºä¾‹è¯´æ˜:
 ======
-1. *.proto ÎÄ¼ş¶¼ÊÇprotobuf¸ñÊ½µÄĞ­ÒéÃèÊöÎÄ¼ş
-2. protoc.exe ÊÇprotobufµÄwindows°æ±¾protoc¹¤¾ß
-3. read_kind_sample.cpp ÊÇ¶ÁÈ¡Ê¾Àı´úÂë
-4. *.xlsx ÎÄ¼şÊÇ±£´æÅäÖÃÊı¾İºÍÉú³É¹æÔòÃèÊöµÄExcelÎÄ¼ş
-5. role_cfg.bin ÎÄ¼şÊÇ´ò°üExcelÊı¾İÖ®ºóµÄ¶ş½øÖÆÎÄ¼ş
-6. role_cfg.lua ÎÄ¼şÊÇ´ò°üExcelÊı¾İÖ®ºóµÄÉú³ÉµÄluaÎÄ¼ş
-7. Êı¾İ¶ÁÈ¡ÒÀÀµ../header/pb_header.protoÀïµÄÊı¾İÃèÊö
-8. protobufµÄÊı¾İÉú³É¹æÔòÊÇ×îÍâ²ãÒ»¸öxresloader_datablocks½á¹¹£¬ÀïÃæÊÇheaderºÍ´ò°üºóµÄÊı¾İ¼¯£¬Ã¿Ò»¸ödata_blockÌõÄ¿ÊÇÒ»¸öÊı¾İÏî¡£headerÄÚµÄĞ£ÑéÂëÊÇxresloader_header.hash_codeÎª¿Õ×Ö·û´®Ê±µÄĞ£ÑéÂë
-9. ½âÂëÊ±ĞèÒªÒÀÀµprotobufºÍpb_header
+1. *.proto æ–‡ä»¶éƒ½æ˜¯protobufæ ¼å¼çš„åè®®æè¿°æ–‡ä»¶
+2. protoc.exe æ˜¯protobufçš„windowsç‰ˆæœ¬protocå·¥å…·
+3. read_kind_sample.cpp æ˜¯è¯»å–ç¤ºä¾‹ä»£ç 
+4. *.xlsx æ–‡ä»¶æ˜¯ä¿å­˜é…ç½®æ•°æ®å’Œç”Ÿæˆè§„åˆ™æè¿°çš„Excelæ–‡ä»¶
+5. role_cfg.bin æ–‡ä»¶æ˜¯æ‰“åŒ…Excelæ•°æ®ä¹‹åçš„äºŒè¿›åˆ¶æ–‡ä»¶(å‚è€ƒå‘½ä»¤: java -jar xresloader.jar -t bin -p protobuf -f kind.pb -s èµ„æºè½¬æ¢ç¤ºä¾‹.xlsx -m scheme)
+6. role_cfg.lua æ–‡ä»¶æ˜¯æ‰“åŒ…Excelæ•°æ®ä¹‹åçš„ç”Ÿæˆçš„luaæ–‡ä»¶(å‚è€ƒå‘½ä»¤: java -jar xresloader.jar -t lua -p protobuf -f kind.pb -s èµ„æºè½¬æ¢ç¤ºä¾‹.xlsx -m scheme && mv role_cfg.bin role_cfg.lua)
+7. æ•°æ®è¯»å–ä¾èµ–../header/pb_header.protoé‡Œçš„æ•°æ®æè¿°
+8. protobufçš„æ•°æ®ç”Ÿæˆè§„åˆ™æ˜¯æœ€å¤–å±‚ä¸€ä¸ªxresloader_datablocksç»“æ„ï¼Œé‡Œé¢æ˜¯headerå’Œæ‰“åŒ…åçš„æ•°æ®é›†ï¼Œæ¯ä¸€ä¸ªdata_blockæ¡ç›®æ˜¯ä¸€ä¸ªæ•°æ®é¡¹ã€‚headerå†…çš„æ ¡éªŒç æ˜¯xresloader_header.hash_codeä¸ºç©ºå­—ç¬¦ä¸²æ—¶çš„æ ¡éªŒç 
+9. è§£ç æ—¶éœ€è¦ä¾èµ–protobufå’Œpb_header

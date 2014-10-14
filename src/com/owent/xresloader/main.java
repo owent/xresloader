@@ -9,6 +9,7 @@ import com.owent.xresloader.data.dst.DataDstPb;
 import com.owent.xresloader.data.dst.DataDstWriterNode;
 import com.owent.xresloader.data.src.DataSrcExcel;
 import com.owent.xresloader.data.src.DataSrcImpl;
+import com.owent.xresloader.engine.IdentifyEngine;
 import com.owent.xresloader.scheme.SchemeConf;
 
 import java.io.FileOutputStream;
@@ -95,6 +96,9 @@ public class main {
                 continue;
 
             try {
+                String filePath = SchemeConf.getInstance().getOutputFile();
+                if(!IdentifyEngine.isAbsPath(filePath))
+                    filePath = ProgramOptions.getInstance().outputDirectory + '/' + filePath;
                 OutputStream fos = new FileOutputStream(SchemeConf.getInstance().getOutputFile(), false);
                 byte[] data = outDesc.build(dataDesc);
                 fos.write(data);

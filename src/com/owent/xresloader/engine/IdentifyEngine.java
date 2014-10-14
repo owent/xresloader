@@ -79,4 +79,13 @@ public class IdentifyEngine {
         // 加前后缀，加分词符
         return cfg.getPrefix() + String.join(cfg.getWordSplit(), words) + cfg.getSuffix();
     }
+
+    static public boolean isAbsPath(String path) {
+        path = path.trim();
+        if(path.charAt(0) == '/' || (path.length() > 1 && path.charAt(1) == ':' && Character.isLetter(path.charAt(0)))) {
+            return true;
+        }
+
+        return false;
+    }
 }

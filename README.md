@@ -3,8 +3,6 @@ xresloader
 
 快速实现一个简单暴力功能强大的导表工具
 
-[使用示例见sample](sample)
-
 
 工具命令行参数
 ======
@@ -12,8 +10,8 @@ xresloader
 
 |          参数选项           |         描述        |                   说明                     |
 |-----------------------------|---------------------|--------------------------------------------|
-|-t --output-type             | 输出类型            | bin（默认值）,lua,json,xml                 |
-|-p --proto                   | 协议描述类型        | protobuf(默认值),capnproto,flatbuffer      |
+|-t --output-type             | 输出类型            | bin（默认值）,lua,json(暂未实现),xml(暂未实现)                 |
+|-p --proto                   | 协议描述类型        | protobuf(默认值),capnproto(暂未实现),flatbuffer(暂未实现)      |
 |-f --proto-file              | 协议描述文件        |                                            |
 |-o --output-dir              | 输出目录            | 默认为当前目录                             |
 |-d --data-src-dir            | 数据源根目录        | 默认为当前目录                             |

@@ -1,4 +1,4 @@
-package com.owent.xrexloader.pb;
+package com.owent.xresloader.pb;
 
 message xresloader_header {
     required string xres_ver = 1;

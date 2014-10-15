@@ -28,7 +28,7 @@
 
 namespace com {
 namespace owent {
-namespace xrexloader {
+namespace xresloader {
 namespace pb {
 
 // Internal implementation detail -- do not call these.
@@ -137,7 +137,7 @@ class xresloader_header : public ::google::protobuf::Message {
   inline ::std::string* release_hash_code();
   inline void set_allocated_hash_code(::std::string* hash_code);
 
-  // @@protoc_insertion_point(class_scope:com.owent.xrexloader.pb.xresloader_header)
+  // @@protoc_insertion_point(class_scope:com.owent.xresloader.pb.xresloader_header)
  private:
   inline void set_has_xres_ver();
   inline void clear_has_xres_ver();
@@ -218,14 +218,14 @@ class xresloader_datablocks : public ::google::protobuf::Message {
 
   // accessors -------------------------------------------------------
 
-  // required .com.owent.xrexloader.pb.xresloader_header header = 1;
+  // required .com.owent.xresloader.pb.xresloader_header header = 1;
   inline bool has_header() const;
   inline void clear_header();
   static const int kHeaderFieldNumber = 1;
-  inline const ::com::owent::xrexloader::pb::xresloader_header& header() const;
-  inline ::com::owent::xrexloader::pb::xresloader_header* mutable_header();
-  inline ::com::owent::xrexloader::pb::xresloader_header* release_header();
-  inline void set_allocated_header(::com::owent::xrexloader::pb::xresloader_header* header);
+  inline const ::com::owent::xresloader::pb::xresloader_header& header() const;
+  inline ::com::owent::xresloader::pb::xresloader_header* mutable_header();
+  inline ::com::owent::xresloader::pb::xresloader_header* release_header();
+  inline void set_allocated_header(::com::owent::xresloader::pb::xresloader_header* header);
 
   // repeated bytes data_block = 2;
   inline int data_block_size() const;
@@ -243,7 +243,7 @@ class xresloader_datablocks : public ::google::protobuf::Message {
   inline const ::google::protobuf::RepeatedPtrField< ::std::string>& data_block() const;
   inline ::google::protobuf::RepeatedPtrField< ::std::string>* mutable_data_block();
 
-  // @@protoc_insertion_point(class_scope:com.owent.xrexloader.pb.xresloader_datablocks)
+  // @@protoc_insertion_point(class_scope:com.owent.xresloader.pb.xresloader_datablocks)
  private:
   inline void set_has_header();
   inline void clear_has_header();
@@ -252,7 +252,7 @@ class xresloader_datablocks : public ::google::protobuf::Message {
 
   ::google::protobuf::uint32 _has_bits_[1];
   mutable int _cached_size_;
-  ::com::owent::xrexloader::pb::xresloader_header* header_;
+  ::com::owent::xresloader::pb::xresloader_header* header_;
   ::google::protobuf::RepeatedPtrField< ::std::string> data_block_;
   friend void  protobuf_AddDesc_pb_5fheader_2eproto();
   friend void protobuf_AssignDesc_pb_5fheader_2eproto();
@@ -285,7 +285,7 @@ inline void xresloader_header::clear_xres_ver() {
   clear_has_xres_ver();
 }
 inline const ::std::string& xresloader_header::xres_ver() const {
-  // @@protoc_insertion_point(field_get:com.owent.xrexloader.pb.xresloader_header.xres_ver)
+  // @@protoc_insertion_point(field_get:com.owent.xresloader.pb.xresloader_header.xres_ver)
   return *xres_ver_;
 }
 inline void xresloader_header::set_xres_ver(const ::std::string& value) {
@@ -294,7 +294,7 @@ inline void xresloader_header::set_xres_ver(const ::std::string& value) {
     xres_ver_ = new ::std::string;
   }
   xres_ver_->assign(value);
-  // @@protoc_insertion_point(field_set:com.owent.xrexloader.pb.xresloader_header.xres_ver)
+  // @@protoc_insertion_point(field_set:com.owent.xresloader.pb.xresloader_header.xres_ver)
 }
 inline void xresloader_header::set_xres_ver(const char* value) {
   set_has_xres_ver();
@@ -302,7 +302,7 @@ inline void xresloader_header::set_xres_ver(const char* value) {
     xres_ver_ = new ::std::string;
   }
   xres_ver_->assign(value);
-  // @@protoc_insertion_point(field_set_char:com.owent.xrexloader.pb.xresloader_header.xres_ver)
+  // @@protoc_insertion_point(field_set_char:com.owent.xresloader.pb.xresloader_header.xres_ver)
 }
 inline void xresloader_header::set_xres_ver(const char* value, size_t size) {
   set_has_xres_ver();
@@ -310,14 +310,14 @@ inline void xresloader_header::set_xres_ver(const char* value, size_t size) {
     xres_ver_ = new ::std::string;
   }
   xres_ver_->assign(reinterpret_cast<const char*>(value), size);
-  // @@protoc_insertion_point(field_set_pointer:com.owent.xrexloader.pb.xresloader_header.xres_ver)
+  // @@protoc_insertion_point(field_set_pointer:com.owent.xresloader.pb.xresloader_header.xres_ver)
 }
 inline ::std::string* xresloader_header::mutable_xres_ver() {
   set_has_xres_ver();
   if (xres_ver_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
     xres_ver_ = new ::std::string;
   }
-  // @@protoc_insertion_point(field_mutable:com.owent.xrexloader.pb.xresloader_header.xres_ver)
+  // @@protoc_insertion_point(field_mutable:com.owent.xresloader.pb.xresloader_header.xres_ver)
   return xres_ver_;
 }
 inline ::std::string* xresloader_header::release_xres_ver() {
@@ -341,7 +341,7 @@ inline void xresloader_header::set_allocated_xres_ver(::std::string* xres_ver) {
     clear_has_xres_ver();
     xres_ver_ = const_cast< ::std::string*>(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   }
-  // @@protoc_insertion_point(field_set_allocated:com.owent.xrexloader.pb.xresloader_header.xres_ver)
+  // @@protoc_insertion_point(field_set_allocated:com.owent.xresloader.pb.xresloader_header.xres_ver)
 }
 
 // required string data_ver = 2;
@@ -361,7 +361,7 @@ inline void xresloader_header::clear_data_ver() {
   clear_has_data_ver();
 }
 inline const ::std::string& xresloader_header::data_ver() const {
-  // @@protoc_insertion_point(field_get:com.owent.xrexloader.pb.xresloader_header.data_ver)
+  // @@protoc_insertion_point(field_get:com.owent.xresloader.pb.xresloader_header.data_ver)
   return *data_ver_;
 }
 inline void xresloader_header::set_data_ver(const ::std::string& value) {
@@ -370,7 +370,7 @@ inline void xresloader_header::set_data_ver(const ::std::string& value) {
     data_ver_ = new ::std::string;
   }
   data_ver_->assign(value);
-  // @@protoc_insertion_point(field_set:com.owent.xrexloader.pb.xresloader_header.data_ver)
+  // @@protoc_insertion_point(field_set:com.owent.xresloader.pb.xresloader_header.data_ver)
 }
 inline void xresloader_header::set_data_ver(const char* value) {
   set_has_data_ver();
@@ -378,7 +378,7 @@ inline void xresloader_header::set_data_ver(const char* value) {
     data_ver_ = new ::std::string;
   }
   data_ver_->assign(value);
-  // @@protoc_insertion_point(field_set_char:com.owent.xrexloader.pb.xresloader_header.data_ver)
+  // @@protoc_insertion_point(field_set_char:com.owent.xresloader.pb.xresloader_header.data_ver)
 }
 inline void xresloader_header::set_data_ver(const char* value, size_t size) {
   set_has_data_ver();
@@ -386,14 +386,14 @@ inline void xresloader_header::set_data_ver(const char* value, size_t size) {
     data_ver_ = new ::std::string;
   }
   data_ver_->assign(reinterpret_cast<const char*>(value), size);
-  // @@protoc_insertion_point(field_set_pointer:com.owent.xrexloader.pb.xresloader_header.data_ver)
+  // @@protoc_insertion_point(field_set_pointer:com.owent.xresloader.pb.xresloader_header.data_ver)
 }
 inline ::std::string* xresloader_header::mutable_data_ver() {
   set_has_data_ver();
   if (data_ver_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
     data_ver_ = new ::std::string;
   }
-  // @@protoc_insertion_point(field_mutable:com.owent.xrexloader.pb.xresloader_header.data_ver)
+  // @@protoc_insertion_point(field_mutable:com.owent.xresloader.pb.xresloader_header.data_ver)
   return data_ver_;
 }
 inline ::std::string* xresloader_header::release_data_ver() {
@@ -417,7 +417,7 @@ inline void xresloader_header::set_allocated_data_ver(::std::string* data_ver) {
     clear_has_data_ver();
     data_ver_ = const_cast< ::std::string*>(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   }
-  // @@protoc_insertion_point(field_set_allocated:com.owent.xrexloader.pb.xresloader_header.data_ver)
+  // @@protoc_insertion_point(field_set_allocated:com.owent.xresloader.pb.xresloader_header.data_ver)
 }
 
 // required uint32 count = 3;
@@ -435,13 +435,13 @@ inline void xresloader_header::clear_count() {
   clear_has_count();
 }
 inline ::google::protobuf::uint32 xresloader_header::count() const {
-  // @@protoc_insertion_point(field_get:com.owent.xrexloader.pb.xresloader_header.count)
+  // @@protoc_insertion_point(field_get:com.owent.xresloader.pb.xresloader_header.count)
   return count_;
 }
 inline void xresloader_header::set_count(::google::protobuf::uint32 value) {
   set_has_count();
   count_ = value;
-  // @@protoc_insertion_point(field_set:com.owent.xrexloader.pb.xresloader_header.count)
+  // @@protoc_insertion_point(field_set:com.owent.xresloader.pb.xresloader_header.count)
 }
 
 // required string hash_code = 4;
@@ -461,7 +461,7 @@ inline void xresloader_header::clear_hash_code() {
   clear_has_hash_code();
 }
 inline const ::std::string& xresloader_header::hash_code() const {
-  // @@protoc_insertion_point(field_get:com.owent.xrexloader.pb.xresloader_header.hash_code)
+  // @@protoc_insertion_point(field_get:com.owent.xresloader.pb.xresloader_header.hash_code)
   return *hash_code_;
 }
 inline void xresloader_header::set_hash_code(const ::std::string& value) {
@@ -470,7 +470,7 @@ inline void xresloader_header::set_hash_code(const ::std::string& value) {
     hash_code_ = new ::std::string;
   }
   hash_code_->assign(value);
-  // @@protoc_insertion_point(field_set:com.owent.xrexloader.pb.xresloader_header.hash_code)
+  // @@protoc_insertion_point(field_set:com.owent.xresloader.pb.xresloader_header.hash_code)
 }
 inline void xresloader_header::set_hash_code(const char* value) {
   set_has_hash_code();
@@ -478,7 +478,7 @@ inline void xresloader_header::set_hash_code(const char* value) {
     hash_code_ = new ::std::string;
   }
   hash_code_->assign(value);
-  // @@protoc_insertion_point(field_set_char:com.owent.xrexloader.pb.xresloader_header.hash_code)
+  // @@protoc_insertion_point(field_set_char:com.owent.xresloader.pb.xresloader_header.hash_code)
 }
 inline void xresloader_header::set_hash_code(const char* value, size_t size) {
   set_has_hash_code();
@@ -486,14 +486,14 @@ inline void xresloader_header::set_hash_code(const char* value, size_t size) {
     hash_code_ = new ::std::string;
   }
   hash_code_->assign(reinterpret_cast<const char*>(value), size);
-  // @@protoc_insertion_point(field_set_pointer:com.owent.xrexloader.pb.xresloader_header.hash_code)
+  // @@protoc_insertion_point(field_set_pointer:com.owent.xresloader.pb.xresloader_header.hash_code)
 }
 inline ::std::string* xresloader_header::mutable_hash_code() {
   set_has_hash_code();
   if (hash_code_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
     hash_code_ = new ::std::string;
   }
-  // @@protoc_insertion_point(field_mutable:com.owent.xrexloader.pb.xresloader_header.hash_code)
+  // @@protoc_insertion_point(field_mutable:com.owent.xresloader.pb.xresloader_header.hash_code)
   return hash_code_;
 }
 inline ::std::string* xresloader_header::release_hash_code() {
@@ -517,14 +517,14 @@ inline void xresloader_header::set_allocated_hash_code(::std::string* hash_code)
     clear_has_hash_code();
     hash_code_ = const_cast< ::std::string*>(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   }
-  // @@protoc_insertion_point(field_set_allocated:com.owent.xrexloader.pb.xresloader_header.hash_code)
+  // @@protoc_insertion_point(field_set_allocated:com.owent.xresloader.pb.xresloader_header.hash_code)
 }
 
 // -------------------------------------------------------------------
 
 // xresloader_datablocks
 
-// required .com.owent.xrexloader.pb.xresloader_header header = 1;
+// required .com.owent.xresloader.pb.xresloader_header header = 1;
 inline bool xresloader_datablocks::has_header() const {
   return (_has_bits_[0] & 0x00000001u) != 0;
 }
@@ -535,26 +535,26 @@ inline void xresloader_datablocks::clear_has_header() {
   _has_bits_[0] &= ~0x00000001u;
 }
 inline void xresloader_datablocks::clear_header() {
-  if (header_ != NULL) header_->::com::owent::xrexloader::pb::xresloader_header::Clear();
+  if (header_ != NULL) header_->::com::owent::xresloader::pb::xresloader_header::Clear();
   clear_has_header();
 }
-inline const ::com::owent::xrexloader::pb::xresloader_header& xresloader_datablocks::header() const {
-  // @@protoc_insertion_point(field_get:com.owent.xrexloader.pb.xresloader_datablocks.header)
+inline const ::com::owent::xresloader::pb::xresloader_header& xresloader_datablocks::header() const {
+  // @@protoc_insertion_point(field_get:com.owent.xresloader.pb.xresloader_datablocks.header)
   return header_ != NULL ? *header_ : *default_instance_->header_;
 }
-inline ::com::owent::xrexloader::pb::xresloader_header* xresloader_datablocks::mutable_header() {
+inline ::com::owent::xresloader::pb::xresloader_header* xresloader_datablocks::mutable_header() {
   set_has_header();
-  if (header_ == NULL) header_ = new ::com::owent::xrexloader::pb::xresloader_header;
-  // @@protoc_insertion_point(field_mutable:com.owent.xrexloader.pb.xresloader_datablocks.header)
+  if (header_ == NULL) header_ = new ::com::owent::xresloader::pb::xresloader_header;
+  // @@protoc_insertion_point(field_mutable:com.owent.xresloader.pb.xresloader_datablocks.header)
   return header_;
 }
-inline ::com::owent::xrexloader::pb::xresloader_header* xresloader_datablocks::release_header() {
+inline ::com::owent::xresloader::pb::xresloader_header* xresloader_datablocks::release_header() {
   clear_has_header();
-  ::com::owent::xrexloader::pb::xresloader_header* temp = header_;
+  ::com::owent::xresloader::pb::xresloader_header* temp = header_;
   header_ = NULL;
   return temp;
 }
-inline void xresloader_datablocks::set_allocated_header(::com::owent::xrexloader::pb::xresloader_header* header) {
+inline void xresloader_datablocks::set_allocated_header(::com::owent::xresloader::pb::xresloader_header* header) {
   delete header_;
   header_ = header;
   if (header) {
@@ -562,7 +562,7 @@ inline void xresloader_datablocks::set_allocated_header(::com::owent::xrexloader
   } else {
     clear_has_header();
   }
-  // @@protoc_insertion_point(field_set_allocated:com.owent.xrexloader.pb.xresloader_datablocks.header)
+  // @@protoc_insertion_point(field_set_allocated:com.owent.xresloader.pb.xresloader_datablocks.header)
 }
 
 // repeated bytes data_block = 2;
@@ -573,49 +573,49 @@ inline void xresloader_datablocks::clear_data_block() {
   data_block_.Clear();
 }
 inline const ::std::string& xresloader_datablocks::data_block(int index) const {
-  // @@protoc_insertion_point(field_get:com.owent.xrexloader.pb.xresloader_datablocks.data_block)
+  // @@protoc_insertion_point(field_get:com.owent.xresloader.pb.xresloader_datablocks.data_block)
   return data_block_.Get(index);
 }
 inline ::std::string* xresloader_datablocks::mutable_data_block(int index) {
-  // @@protoc_insertion_point(field_mutable:com.owent.xrexloader.pb.xresloader_datablocks.data_block)
+  // @@protoc_insertion_point(field_mutable:com.owent.xresloader.pb.xresloader_datablocks.data_block)
   return data_block_.Mutable(index);
 }
 inline void xresloader_datablocks::set_data_block(int index, const ::std::string& value) {
-  // @@protoc_insertion_point(field_set:com.owent.xrexloader.pb.xresloader_datablocks.data_block)
+  // @@protoc_insertion_point(field_set:com.owent.xresloader.pb.xresloader_datablocks.data_block)
   data_block_.Mutable(index)->assign(value);
 }
 inline void xresloader_datablocks::set_data_block(int index, const char* value) {
   data_block_.Mutable(index)->assign(value);
-  // @@protoc_insertion_point(field_set_char:com.owent.xrexloader.pb.xresloader_datablocks.data_block)
+  // @@protoc_insertion_point(field_set_char:com.owent.xresloader.pb.xresloader_datablocks.data_block)
 }
 inline void xresloader_datablocks::set_data_block(int index, const void* value, size_t size) {
   data_block_.Mutable(index)->assign(
     reinterpret_cast<const char*>(value), size);
-  // @@protoc_insertion_point(field_set_pointer:com.owent.xrexloader.pb.xresloader_datablocks.data_block)
+  // @@protoc_insertion_point(field_set_pointer:com.owent.xresloader.pb.xresloader_datablocks.data_block)
 }
 inline ::std::string* xresloader_datablocks::add_data_block() {
   return data_block_.Add();
 }
 inline void xresloader_datablocks::add_data_block(const ::std::string& value) {
   data_block_.Add()->assign(value);
-  // @@protoc_insertion_point(field_add:com.owent.xrexloader.pb.xresloader_datablocks.data_block)
+  // @@protoc_insertion_point(field_add:com.owent.xresloader.pb.xresloader_datablocks.data_block)
 }
 inline void xresloader_datablocks::add_data_block(const char* value) {
   data_block_.Add()->assign(value);
-  // @@protoc_insertion_point(field_add_char:com.owent.xrexloader.pb.xresloader_datablocks.data_block)
+  // @@protoc_insertion_point(field_add_char:com.owent.xresloader.pb.xresloader_datablocks.data_block)
 }
 inline void xresloader_datablocks::add_data_block(const void* value, size_t size) {
   data_block_.Add()->assign(reinterpret_cast<const char*>(value), size);
-  // @@protoc_insertion_point(field_add_pointer:com.owent.xrexloader.pb.xresloader_datablocks.data_block)
+  // @@protoc_insertion_point(field_add_pointer:com.owent.xresloader.pb.xresloader_datablocks.data_block)
 }
 inline const ::google::protobuf::RepeatedPtrField< ::std::string>&
 xresloader_datablocks::data_block() const {
-  // @@protoc_insertion_point(field_list:com.owent.xrexloader.pb.xresloader_datablocks.data_block)
+  // @@protoc_insertion_point(field_list:com.owent.xresloader.pb.xresloader_datablocks.data_block)
   return data_block_;
 }
 inline ::google::protobuf::RepeatedPtrField< ::std::string>*
 xresloader_datablocks::mutable_data_block() {
-  // @@protoc_insertion_point(field_mutable_list:com.owent.xrexloader.pb.xresloader_datablocks.data_block)
+  // @@protoc_insertion_point(field_mutable_list:com.owent.xresloader.pb.xresloader_datablocks.data_block)
   return &data_block_;
 }
 
@@ -623,7 +623,7 @@ xresloader_datablocks::mutable_data_block() {
 // @@protoc_insertion_point(namespace_scope)
 
 }  // namespace pb
-}  // namespace xrexloader
+}  // namespace xresloader
 }  // namespace owent
 }  // namespace com
 

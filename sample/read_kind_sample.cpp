@@ -6,8 +6,8 @@
 #include "pb_header.pb.h"
 
 
-using com::owent::xrexloader::pb::xresloader_header;
-using com::owent::xrexloader::pb::xresloader_datablocks;
+using com::owent::xresloader::pb::xresloader_header;
+using com::owent::xresloader::pb::xresloader_datablocks;
 
 int main(int argc, char* argv[]) {
     std::fstream f;

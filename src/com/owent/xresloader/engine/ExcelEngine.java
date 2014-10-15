@@ -3,6 +3,7 @@ package com.owent.xresloader.engine;
 import com.owent.xresloader.ProgramOptions;
 import com.owent.xresloader.data.src.DataSrcImpl;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+import org.apache.poi.ss.extractor.ExcelExtractor;
 import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
@@ -21,7 +22,24 @@ public class ExcelEngine {
     static private Pattern checkDate = Pattern.compile("[/\\-\\.]");
     static private Pattern checkTime = Pattern.compile(":");
 
+    /**
+     * 开启的workbook缓存，减少打开和分析文件的耗时
+     */
     static private HashMap<String, Workbook> openedWorkbooks = new HashMap<String, Workbook>();
+
+    /**
+     * 日期格式列缓存，XSSF在获取Style时性能极其低下，缓存一下有助于提升性能
+     * 导致的副作用就是只接受第一个数据行的日期格式
+     */
+    //static private HashMap<Integer, SimpleDateFormat> dateTypeStyle = new HashMap<Integer, SimpleDateFormat>();
+
+
+    /**
+     * 清空缓存
+     */
+    static public void clearAllCache() {
+        //dateTypeStyle.clear();
+    }
 
     /**
      * 打开Excel文件
@@ -30,6 +48,9 @@ public class ExcelEngine {
      * @return Excel Workbook对象
      */
     static public Workbook openWorkbook(String file_path) {
+        // 无论打开什么Excel文件，都要情况缓存
+        clearAllCache();
+
         if(!IdentifyEngine.isAbsPath(file_path)) {
             file_path = ProgramOptions.getInstance().dataSourceDirectory + '/' + file_path;
         }
@@ -48,12 +69,17 @@ public class ExcelEngine {
         try {
             is = new FileInputStream(file_path);
 
+            ExcelExtractor extractor = null;
             // 类型枚举，以后能支持 ods等非微软格式？
-            if (file_path.endsWith(".xls"))
+            if (file_path.endsWith(".xls")) {
                 ret = new HSSFWorkbook(is);
-            else
+                extractor = new org.apache.poi.hssf.extractor.ExcelExtractor((HSSFWorkbook)ret);
+            } else {
                 ret = new XSSFWorkbook(is);
+                extractor = new org.apache.poi.xssf.extractor.XSSFExcelExtractor((XSSFWorkbook)ret);
+            }
 
+            extractor.setFormulasNotResults(false);
         } catch (java.io.IOException e) {
             e.printStackTrace();
         }
@@ -115,20 +141,21 @@ public class ExcelEngine {
         if (null == c)
             return "";
 
+        CellValue cv = null;
         if (null != evalor && Cell.CELL_TYPE_FORMULA == c.getCellType())
-            evalor.evaluateInCell(c);
+            cv = evalor.evaluate(c);
 
-        switch (c.getCellType()) {
+        int type = (null == cv)? c.getCellType(): cv.getCellType();
+        switch (type) {
             case Cell.CELL_TYPE_BLANK:
                 return "";
             case Cell.CELL_TYPE_BOOLEAN:
-                return String.valueOf(c.getBooleanCellValue());
+                return String.valueOf((null == cv)? c.getBooleanCellValue(): cv.getBooleanValue());
             case Cell.CELL_TYPE_ERROR:
-                return String.valueOf(c.getErrorCellValue());
+                return String.valueOf((null == cv)? c.getErrorCellValue(): cv.getErrorValue());
             case Cell.CELL_TYPE_FORMULA:
-                return c.getCellFormula();
+                return (null == cv)? c.getCellFormula(): "";
             case Cell.CELL_TYPE_NUMERIC:
-
                 if(DateUtil.isCellDateFormatted(c)) {
                     // 参照POI DateUtil.isADateFormat函数，去除无效字符
                     String fs = c.getCellStyle().getDataFormatString()
@@ -168,9 +195,10 @@ public class ExcelEngine {
                     SimpleDateFormat df = new SimpleDateFormat(fs);
                     return df.format(c.getDateCellValue()).trim();
                 }
-                return String.valueOf(c.getNumericCellValue());
+
+                return String.valueOf((null == cv)? c.getNumericCellValue(): cv.getNumberValue());
             case Cell.CELL_TYPE_STRING:
-                return tryMacro(c.getStringCellValue().trim());
+                return tryMacro((null == cv)? c.getStringCellValue().trim(): cv.getStringValue());
             default:
                 return "";
         }
@@ -203,10 +231,12 @@ public class ExcelEngine {
         if (null == c)
             return 0L;
 
+        CellValue cv = null;
         if (null != evalor && Cell.CELL_TYPE_FORMULA == c.getCellType())
-            evalor.evaluateInCell(c);
+            cv = evalor.evaluate(c);
 
-        switch (c.getCellType()) {
+        int type = (null == cv)? c.getCellType(): cv.getCellType();
+        switch (type) {
             case Cell.CELL_TYPE_BLANK:
                 return 0L;
             case Cell.CELL_TYPE_BOOLEAN:
@@ -251,10 +281,12 @@ public class ExcelEngine {
         if (null == c)
             return 0.0;
 
+        CellValue cv = null;
         if (null != evalor && Cell.CELL_TYPE_FORMULA == c.getCellType())
-            evalor.evaluateInCell(c);
+            cv = evalor.evaluate(c);
 
-        switch (c.getCellType()) {
+        int type = (null == cv)? c.getCellType(): cv.getCellType();
+        switch (type) {
             case Cell.CELL_TYPE_BLANK:
                 return 0.0;
             case Cell.CELL_TYPE_BOOLEAN:
@@ -299,10 +331,12 @@ public class ExcelEngine {
         if (null == c)
             return false;
 
+        CellValue cv = null;
         if (null != evalor && Cell.CELL_TYPE_FORMULA == c.getCellType())
-            evalor.evaluateInCell(c);
+            cv = evalor.evaluate(c);
 
-        switch (c.getCellType()) {
+        int type = (null == cv)? c.getCellType(): cv.getCellType();
+        switch (type) {
             case Cell.CELL_TYPE_BLANK:
                 return false;
             case Cell.CELL_TYPE_BOOLEAN:

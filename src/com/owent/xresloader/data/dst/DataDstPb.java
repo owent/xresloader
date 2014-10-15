@@ -7,7 +7,7 @@ import com.google.protobuf.DynamicMessage;
 import com.owent.xresloader.ProgramOptions;
 import com.owent.xresloader.data.src.DataSrcImpl;
 import com.owent.xresloader.scheme.SchemeConf;
-import com.owent.xrexloader.pb.PbHeader;
+import com.owent.xresloader.pb.PbHeader;
 import org.apache.commons.codec.binary.Hex;
 
 import java.io.*;

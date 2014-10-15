@@ -1,0 +1,17 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="xresloader:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/xresloader_jar</output-path>
+    <root id="archive" name="xresloader.jar">
+      <element id="module-output" name="xresloader" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/deps/poi/poi-3.10.1-20140818.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/deps/poi/ooxml-lib/xmlbeans-2.6.0.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/deps/poi/poi-ooxml-3.10.1-20140818.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/deps/java-getopt/java-getopt-1.0.14.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/deps/protobuf-java/protobuf-java-2.6.0.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/deps/commons-codec/commons-codec-1.9.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/deps/poi/poi-ooxml-schemas-3.10.1-20140818.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/deps/poi/ooxml-lib/dom4j-1.6.1.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/deps/poi/ooxml-lib/stax-api-1.0.1.jar" path-in-jar="/" />
+    </root>
+  </artifact>
+</component>

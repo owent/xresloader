@@ -2,23 +2,27 @@ package com.owent.xresloader.scheme;
 
 import com.owent.xresloader.ProgramOptions;
 
+import java.util.ArrayList;
+import java.util.LinkedList;
+
 /**
  * Created by owentou on 2014/9/30.
  */
 public class SchemeConf {
 
+    public class DataInfo {
+        public String file_path;
+        public String table_name;
+        public int data_row;
+        public int data_col;
+    }
+
     /**
      * 单例
      */
     private static SchemeConf instance = null;
-    private String dateSourceFile;
-    private String dateSourceTable;
-    private int dateRectRow;
-    private int dateRectCol;
-    private String macroSourceFile;
-    private String macroSourceTable;
-    private int macroRectRow;
-    private int macroRectCol;
+    private LinkedList<DataInfo> dateSource = new LinkedList<DataInfo>();
+    private LinkedList<DataInfo> macroSource = new LinkedList<DataInfo>();
     private String protoName;
     private String outputFile;
     private SchemeKeyConf key;
@@ -36,75 +40,113 @@ public class SchemeConf {
     }
 
     /**
-     * Getter for property 'dateRectRow'.
+     * Getter for property 'dateSource'.
      *
-     * @return Value for property 'dateRectRow'.
+     * @return Value for property 'dateSource'.
      */
-    public int getDateRectRow() {
-        return dateRectRow;
+    public LinkedList<DataInfo> getDataSource() {
+        return dateSource;
     }
 
     /**
-     * Setter for property 'dateRectRow'.
-     *
-     * @param dateRectRow Value to set for property 'dateRectRow'.
+     * 添加配置数据源
+     * @param file_path 文件路径
+     * @param table_name 表名
+     * @param row 行号
+     * @param col 列号
      */
-    public void setDateRectRow(int dateRectRow) {
-        this.dateRectRow = dateRectRow;
+    public void addDataSource(String file_path, String table_name, int row, int col) {
+        DataInfo data = new DataInfo();
+        data.file_path = file_path;
+        data.table_name = table_name;
+        data.data_row = row;
+        data.data_col = col;
+
+        dateSource.add(data);
     }
 
     /**
-     * Getter for property 'dateRectCol'.
-     *
-     * @return Value for property 'dateRectCol'.
+     * 添加配置数据源
+     * @param file_path 文件路径
+     * @param table_name 表名
+     * @param position 行号,列号
      */
-    public int getDateRectCol() {
-        return dateRectCol;
+    public void addDataSource(String file_path, String table_name, String position) {
+        int row = 2;
+        int col = 1;
+
+        String[] group = position.split("[^\\d]");
+        ArrayList<String> valid_group = new ArrayList<String>();
+        for(String n: group) {
+            if (false == n.isEmpty()) {
+                valid_group.add(n);
+            }
+        }
+
+        if (valid_group.size() >= 1) {
+            row = Integer.parseInt(valid_group.get(0));
+        }
+
+        if (valid_group.size() >= 2) {
+            col = Integer.parseInt(valid_group.get(1));
+        }
+
+        addDataSource(file_path, table_name, row, col);
     }
 
     /**
-     * Setter for property 'dateRectCol'.
+     * Getter for property 'macroSource'.
      *
-     * @param dateRectCol Value to set for property 'dateRectCol'.
+     * @return Value for property 'macroSource'.
      */
-    public void setDateRectCol(int dateRectCol) {
-        this.dateRectCol = dateRectCol;
+    public LinkedList<DataInfo> getMacroSource() {
+        return macroSource;
     }
 
     /**
-     * Getter for property 'macroRectRow'.
-     *
-     * @return Value for property 'macroRectRow'.
+     * 添加宏数据源
+     * @param file_path 文件路径
+     * @param table_name 表名
+     * @param row 行号
+     * @param col 列号
      */
-    public int getMacroRectRow() {
-        return macroRectRow;
+    public void addMacroSource(String file_path, String table_name, int row, int col) {
+        DataInfo data = new DataInfo();
+        data.file_path = file_path;
+        data.table_name = table_name;
+        data.data_row = row;
+        data.data_col = col;
+
+        macroSource.add(data);
     }
 
     /**
-     * Setter for property 'macroRectRow'.
-     *
-     * @param macroRectRow Value to set for property 'macroRectRow'.
+     * 添加宏数据源
+     * @param file_path 文件路径
+     * @param table_name 表名
+     * @param position 行号,列号
      */
-    public void setMacroRectRow(int macroRectRow) {
-        this.macroRectRow = macroRectRow;
-    }
+    public void addMacroSource(String file_path, String table_name, String position) {
+        int row = 2;
+        int col = 1;
 
-    /**
-     * Getter for property 'macroRectCol'.
-     *
-     * @return Value for property 'macroRectCol'.
-     */
-    public int getMacroRectCol() {
-        return macroRectCol;
-    }
+        String[] group = position.split("[^\\d]");
+        ArrayList<String> valid_group = new ArrayList<String>();
+        for(String n: group) {
+            if (false == n.isEmpty()) {
+                valid_group.add(n);
+            }
+        }
 
-    /**
-     * Setter for property 'macroRectCol'.
-     *
-     * @param macroRectCol Value to set for property 'macroRectCol'.
-     */
-    public void setMacroRectCol(int macroRectCol) {
-        this.macroRectCol = macroRectCol;
+        if (valid_group.size() >= 1) {
+            row = Integer.parseInt(valid_group.get(0));
+        }
+
+        if (valid_group.size() >= 2) {
+            col = Integer.parseInt(valid_group.get(1));
+        }
+
+        addMacroSource(file_path, table_name, row, col);
     }
 
     /**
@@ -159,38 +201,6 @@ public class SchemeConf {
      */
     public void setKey(SchemeKeyConf key) {
         this.key = key;
-    }
-
-    public String getDateSourceTable() {
-        return dateSourceTable;
-    }
-
-    public void setDateSourceTable(String dateSourceTable) {
-        this.dateSourceTable = dateSourceTable;
-    }
-
-    public String getDateSourceFile() {
-        return dateSourceFile;
-    }
-
-    public void setDateSourceFile(String dateSourceFile) {
-        this.dateSourceFile = dateSourceFile;
-    }
-
-    public String getMacroSourceTable() {
-        return macroSourceTable;
-    }
-
-    public void setMacroSourceTable(String macroSourceTable) {
-        this.macroSourceTable = macroSourceTable;
-    }
-
-    public String getMacroSourceFile() {
-        return macroSourceFile;
-    }
-
-    public void setMacroSourceFile(String macroSourceFile) {
-        this.macroSourceFile = macroSourceFile;
     }
 
     public SchemeDataSourceImpl getScheme() {

@@ -1,5 +1,18 @@
 
-²
+9
+dep_level2.proto"%
+dep2_cfg
+
+id (
+level (	
+b
+dependency.protodep_level2.proto"<
+dep_cfg
+
+id (
+name (	
+dep2 (2	.dep2_cfg
+›
 
 kind.protodependency.proto"‘
 role_cfg
@@ -13,17 +26,12 @@ cost_value (
 dep_test
  (2.dep_cfg
 
-test_array (	
-b
-dependency.protodep_level2.proto"<
-dep_cfg
-
-id (
-name (	
-dep2 (2	.dep2_cfg
-9
-dep_level2.proto"%
-dep2_cfg
+test_array (	"g
+role_upgrade_cfg
 
 id (
-level (	
+level (
+	cost_type (
+
+cost_value (
+	score_add (

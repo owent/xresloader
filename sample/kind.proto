@@ -10,3 +10,11 @@ message role_cfg {
 	
 	repeated string test_array = 11;
 }
+
+message role_upgrade_cfg {
+    required uint32 id = 1;
+    required uint32 level = 2;
+    required uint32 cost_type = 3;
+    required int32 cost_value = 4;
+	required int32 score_add = 5;
+}

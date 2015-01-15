@@ -1,7 +1,7 @@
 return {
     [1] = {
-        xrex_ver = "1.0.0.0",
-        data_ver = "1.0.0.0",
+        xrex_ver = "1.1.0.0",
+        data_ver = "1.1.0.0",
         count = 6,
         hash_code = "lua data has no hash code"
     },

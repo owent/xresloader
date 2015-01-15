@@ -53,10 +53,11 @@ public class ProgramOptions {
                 new LongOpt("output-dir", LongOpt.REQUIRED_ARGUMENT, sb, 'o'),
                 new LongOpt("data-src-dir", LongOpt.REQUIRED_ARGUMENT, sb, 'd'),
                 new LongOpt("src-file", LongOpt.REQUIRED_ARGUMENT, sb, 's'),
-                new LongOpt("src-meta", LongOpt.REQUIRED_ARGUMENT, sb, 'm')
+                new LongOpt("src-meta", LongOpt.REQUIRED_ARGUMENT, sb, 'm'),
+                new LongOpt("version", LongOpt.NO_ARGUMENT, sb, 'v')
         };
 
-        Getopt g = new Getopt("", args, "ht:p:f:o:d:s:m:", long_opts);
+        Getopt g = new Getopt("", args, "ht:p:f:o:d:s:m:v", long_opts);
         g.setOpterr(false);
 
         int c;
@@ -77,6 +78,7 @@ public class ProgramOptions {
                     System.out.println("-d, --data-src-dir      data source directory");
                     System.out.println("-s, --src-file          data source file");
                     System.out.println("-m, --src-meta          data description meta");
+                    System.out.println("-v, --version           print version");
                     System.exit(0);
                     break;
                 }
@@ -161,6 +163,12 @@ public class ProgramOptions {
                     break;
                 }
 
+                case 'v': {
+                    System.out.println(getVersion());
+                    System.exit(0);
+                    break;
+                }
+
                 default:
                     System.out.println("[WARN] Unknown option " + g.getOptarg());
                     break;
@@ -171,7 +179,7 @@ public class ProgramOptions {
     }
 
     public String getVersion() {
-        return "1.0.0.0";
+        return "1.1.0.0";
     }
 
 

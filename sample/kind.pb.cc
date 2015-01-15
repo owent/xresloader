@@ -21,6 +21,9 @@ namespace {
 const ::google::protobuf::Descriptor* role_cfg_descriptor_ = NULL;
 const ::google::protobuf::internal::GeneratedMessageReflection*
   role_cfg_reflection_ = NULL;
+const ::google::protobuf::Descriptor* role_upgrade_cfg_descriptor_ = NULL;
+const ::google::protobuf::internal::GeneratedMessageReflection*
+  role_upgrade_cfg_reflection_ = NULL;
 
 }  // namespace
 
@@ -52,6 +55,25 @@ void protobuf_AssignDesc_kind_2eproto() {
       ::google::protobuf::DescriptorPool::generated_pool(),
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(role_cfg));
+  role_upgrade_cfg_descriptor_ = file->message_type(1);
+  static const int role_upgrade_cfg_offsets_[5] = {
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(role_upgrade_cfg, id_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(role_upgrade_cfg, level_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(role_upgrade_cfg, cost_type_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(role_upgrade_cfg, cost_value_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(role_upgrade_cfg, score_add_),
+  };
+  role_upgrade_cfg_reflection_ =
+    new ::google::protobuf::internal::GeneratedMessageReflection(
+      role_upgrade_cfg_descriptor_,
+      role_upgrade_cfg::default_instance_,
+      role_upgrade_cfg_offsets_,
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(role_upgrade_cfg, _has_bits_[0]),
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(role_upgrade_cfg, _unknown_fields_),
+      -1,
+      ::google::protobuf::DescriptorPool::generated_pool(),
+      ::google::protobuf::MessageFactory::generated_factory(),
+      sizeof(role_upgrade_cfg));
 }
 
 namespace {
@@ -66,6 +88,8 @@ void protobuf_RegisterTypes(const ::std::string&) {
   protobuf_AssignDescriptorsOnce();
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
     role_cfg_descriptor_, &role_cfg::default_instance());
+  ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
+    role_upgrade_cfg_descriptor_, &role_upgrade_cfg::default_instance());
 }
 
 }  // namespace
@@ -73,6 +97,8 @@ void protobuf_RegisterTypes(const ::std::string&) {
 void protobuf_ShutdownFile_kind_2eproto() {
   delete role_cfg::default_instance_;
   delete role_cfg_reflection_;
+  delete role_upgrade_cfg::default_instance_;
+  delete role_upgrade_cfg_reflection_;
 }
 
 void protobuf_AddDesc_kind_2eproto() {
@@ -87,11 +113,16 @@ void protobuf_AddDesc_kind_2eproto() {
     "cfg\022\n\n\002id\030\001 \002(\r\022\024\n\014unlock_level\030\002 \002(\r\022\021\n"
     "\tcost_type\030\003 \002(\r\022\022\n\ncost_value\030\004 \002(\005\022\014\n\004"
     "name\030\005 \002(\t\022\032\n\010dep_test\030\n \002(\0132\010.dep_cfg\022\022"
-    "\n\ntest_array\030\013 \003(\t", 178);
+    "\n\ntest_array\030\013 \003(\t\"g\n\020role_upgrade_cfg\022\n"
+    "\n\002id\030\001 \002(\r\022\r\n\005level\030\002 \002(\r\022\021\n\tcost_type\030\003"
+    " \002(\r\022\022\n\ncost_value\030\004 \002(\005\022\021\n\tscore_add\030\005 "
+    "\002(\005", 283);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "kind.proto", &protobuf_RegisterTypes);
   role_cfg::default_instance_ = new role_cfg();
+  role_upgrade_cfg::default_instance_ = new role_upgrade_cfg();
   role_cfg::default_instance_->InitAsDefaultInstance();
+  role_upgrade_cfg::default_instance_->InitAsDefaultInstance();
   ::google::protobuf::internal::OnShutdown(&protobuf_ShutdownFile_kind_2eproto);
 }
 
@@ -608,6 +639,397 @@ void role_cfg::Swap(role_cfg* other) {
   ::google::protobuf::Metadata metadata;
   metadata.descriptor = role_cfg_descriptor_;
   metadata.reflection = role_cfg_reflection_;
+  return metadata;
+}
+
+
+// ===================================================================
+
+#ifndef _MSC_VER
+const int role_upgrade_cfg::kIdFieldNumber;
+const int role_upgrade_cfg::kLevelFieldNumber;
+const int role_upgrade_cfg::kCostTypeFieldNumber;
+const int role_upgrade_cfg::kCostValueFieldNumber;
+const int role_upgrade_cfg::kScoreAddFieldNumber;
+#endif  // !_MSC_VER
+
+role_upgrade_cfg::role_upgrade_cfg()
+  : ::google::protobuf::Message() {
+  SharedCtor();
+  // @@protoc_insertion_point(constructor:role_upgrade_cfg)
+}
+
+void role_upgrade_cfg::InitAsDefaultInstance() {
+}
+
+role_upgrade_cfg::role_upgrade_cfg(const role_upgrade_cfg& from)
+  : ::google::protobuf::Message() {
+  SharedCtor();
+  MergeFrom(from);
+  // @@protoc_insertion_point(copy_constructor:role_upgrade_cfg)
+}
+
+void role_upgrade_cfg::SharedCtor() {
+  _cached_size_ = 0;
+  id_ = 0u;
+  level_ = 0u;
+  cost_type_ = 0u;
+  cost_value_ = 0;
+  score_add_ = 0;
+  ::memset(_has_bits_, 0, sizeof(_has_bits_));
+}
+
+role_upgrade_cfg::~role_upgrade_cfg() {
+  // @@protoc_insertion_point(destructor:role_upgrade_cfg)
+  SharedDtor();
+}
+
+void role_upgrade_cfg::SharedDtor() {
+  if (this != default_instance_) {
+  }
+}
+
+void role_upgrade_cfg::SetCachedSize(int size) const {
+  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+  _cached_size_ = size;
+  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+}
+const ::google::protobuf::Descriptor* role_upgrade_cfg::descriptor() {
+  protobuf_AssignDescriptorsOnce();
+  return role_upgrade_cfg_descriptor_;
+}
+
+const role_upgrade_cfg& role_upgrade_cfg::default_instance() {
+  if (default_instance_ == NULL) protobuf_AddDesc_kind_2eproto();
+  return *default_instance_;
+}
+
+role_upgrade_cfg* role_upgrade_cfg::default_instance_ = NULL;
+
+role_upgrade_cfg* role_upgrade_cfg::New() const {
+  return new role_upgrade_cfg;
+}
+
+void role_upgrade_cfg::Clear() {
+#define OFFSET_OF_FIELD_(f) (reinterpret_cast<char*>(      \
+  &reinterpret_cast<role_upgrade_cfg*>(16)->f) - \
+   reinterpret_cast<char*>(16))
+
+#define ZR_(first, last) do {                              \
+    size_t f = OFFSET_OF_FIELD_(first);                    \
+    size_t n = OFFSET_OF_FIELD_(last) - f + sizeof(last);  \
+    ::memset(&first, 0, n);                                \
+  } while (0)
+
+  if (_has_bits_[0 / 32] & 31) {
+    ZR_(id_, score_add_);
+  }
+
+#undef OFFSET_OF_FIELD_
+#undef ZR_
+
+  ::memset(_has_bits_, 0, sizeof(_has_bits_));
+  mutable_unknown_fields()->Clear();
+}
+
+bool role_upgrade_cfg::MergePartialFromCodedStream(
+    ::google::protobuf::io::CodedInputStream* input) {
+#define DO_(EXPRESSION) if (!(EXPRESSION)) goto failure
+  ::google::protobuf::uint32 tag;
+  // @@protoc_insertion_point(parse_start:role_upgrade_cfg)
+  for (;;) {
+    ::std::pair< ::google::protobuf::uint32, bool> p = input->ReadTagWithCutoff(127);
+    tag = p.first;
+    if (!p.second) goto handle_unusual;
+    switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
+      // required uint32 id = 1;
+      case 1: {
+        if (tag == 8) {
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   ::google::protobuf::uint32, ::google::protobuf::internal::WireFormatLite::TYPE_UINT32>(
+                 input, &id_)));
+          set_has_id();
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectTag(16)) goto parse_level;
+        break;
+      }
+
+      // required uint32 level = 2;
+      case 2: {
+        if (tag == 16) {
+         parse_level:
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   ::google::protobuf::uint32, ::google::protobuf::internal::WireFormatLite::TYPE_UINT32>(
+                 input, &level_)));
+          set_has_level();
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectTag(24)) goto parse_cost_type;
+        break;
+      }
+
+      // required uint32 cost_type = 3;
+      case 3: {
+        if (tag == 24) {
+         parse_cost_type:
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   ::google::protobuf::uint32, ::google::protobuf::internal::WireFormatLite::TYPE_UINT32>(
+                 input, &cost_type_)));
+          set_has_cost_type();
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectTag(32)) goto parse_cost_value;
+        break;
+      }
+
+      // required int32 cost_value = 4;
+      case 4: {
+        if (tag == 32) {
+         parse_cost_value:
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
+                 input, &cost_value_)));
+          set_has_cost_value();
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectTag(40)) goto parse_score_add;
+        break;
+      }
+
+      // required int32 score_add = 5;
+      case 5: {
+        if (tag == 40) {
+         parse_score_add:
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
+                 input, &score_add_)));
+          set_has_score_add();
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectAtEnd()) goto success;
+        break;
+      }
+
+      default: {
+      handle_unusual:
+        if (tag == 0 ||
+            ::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_END_GROUP) {
+          goto success;
+        }
+        DO_(::google::protobuf::internal::WireFormat::SkipField(
+              input, tag, mutable_unknown_fields()));
+        break;
+      }
+    }
+  }
+success:
+  // @@protoc_insertion_point(parse_success:role_upgrade_cfg)
+  return true;
+failure:
+  // @@protoc_insertion_point(parse_failure:role_upgrade_cfg)
+  return false;
+#undef DO_
+}
+
+void role_upgrade_cfg::SerializeWithCachedSizes(
+    ::google::protobuf::io::CodedOutputStream* output) const {
+  // @@protoc_insertion_point(serialize_start:role_upgrade_cfg)
+  // required uint32 id = 1;
+  if (has_id()) {
+    ::google::protobuf::internal::WireFormatLite::WriteUInt32(1, this->id(), output);
+  }
+
+  // required uint32 level = 2;
+  if (has_level()) {
+    ::google::protobuf::internal::WireFormatLite::WriteUInt32(2, this->level(), output);
+  }
+
+  // required uint32 cost_type = 3;
+  if (has_cost_type()) {
+    ::google::protobuf::internal::WireFormatLite::WriteUInt32(3, this->cost_type(), output);
+  }
+
+  // required int32 cost_value = 4;
+  if (has_cost_value()) {
+    ::google::protobuf::internal::WireFormatLite::WriteInt32(4, this->cost_value(), output);
+  }
+
+  // required int32 score_add = 5;
+  if (has_score_add()) {
+    ::google::protobuf::internal::WireFormatLite::WriteInt32(5, this->score_add(), output);
+  }
+
+  if (!unknown_fields().empty()) {
+    ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
+        unknown_fields(), output);
+  }
+  // @@protoc_insertion_point(serialize_end:role_upgrade_cfg)
+}
+
+::google::protobuf::uint8* role_upgrade_cfg::SerializeWithCachedSizesToArray(
+    ::google::protobuf::uint8* target) const {
+  // @@protoc_insertion_point(serialize_to_array_start:role_upgrade_cfg)
+  // required uint32 id = 1;
+  if (has_id()) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteUInt32ToArray(1, this->id(), target);
+  }
+
+  // required uint32 level = 2;
+  if (has_level()) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteUInt32ToArray(2, this->level(), target);
+  }
+
+  // required uint32 cost_type = 3;
+  if (has_cost_type()) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteUInt32ToArray(3, this->cost_type(), target);
+  }
+
+  // required int32 cost_value = 4;
+  if (has_cost_value()) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(4, this->cost_value(), target);
+  }
+
+  // required int32 score_add = 5;
+  if (has_score_add()) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(5, this->score_add(), target);
+  }
+
+  if (!unknown_fields().empty()) {
+    target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
+        unknown_fields(), target);
+  }
+  // @@protoc_insertion_point(serialize_to_array_end:role_upgrade_cfg)
+  return target;
+}
+
+int role_upgrade_cfg::ByteSize() const {
+  int total_size = 0;
+
+  if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
+    // required uint32 id = 1;
+    if (has_id()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::UInt32Size(
+          this->id());
+    }
+
+    // required uint32 level = 2;
+    if (has_level()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::UInt32Size(
+          this->level());
+    }
+
+    // required uint32 cost_type = 3;
+    if (has_cost_type()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::UInt32Size(
+          this->cost_type());
+    }
+
+    // required int32 cost_value = 4;
+    if (has_cost_value()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::Int32Size(
+          this->cost_value());
+    }
+
+    // required int32 score_add = 5;
+    if (has_score_add()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::Int32Size(
+          this->score_add());
+    }
+
+  }
+  if (!unknown_fields().empty()) {
+    total_size +=
+      ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
+        unknown_fields());
+  }
+  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+  _cached_size_ = total_size;
+  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+  return total_size;
+}
+
+void role_upgrade_cfg::MergeFrom(const ::google::protobuf::Message& from) {
+  GOOGLE_CHECK_NE(&from, this);
+  const role_upgrade_cfg* source =
+    ::google::protobuf::internal::dynamic_cast_if_available<const role_upgrade_cfg*>(
+      &from);
+  if (source == NULL) {
+    ::google::protobuf::internal::ReflectionOps::Merge(from, this);
+  } else {
+    MergeFrom(*source);
+  }
+}
+
+void role_upgrade_cfg::MergeFrom(const role_upgrade_cfg& from) {
+  GOOGLE_CHECK_NE(&from, this);
+  if (from._has_bits_[0 / 32] & (0xffu << (0 % 32))) {
+    if (from.has_id()) {
+      set_id(from.id());
+    }
+    if (from.has_level()) {
+      set_level(from.level());
+    }
+    if (from.has_cost_type()) {
+      set_cost_type(from.cost_type());
+    }
+    if (from.has_cost_value()) {
+      set_cost_value(from.cost_value());
+    }
+    if (from.has_score_add()) {
+      set_score_add(from.score_add());
+    }
+  }
+  mutable_unknown_fields()->MergeFrom(from.unknown_fields());
+}
+
+void role_upgrade_cfg::CopyFrom(const ::google::protobuf::Message& from) {
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+void role_upgrade_cfg::CopyFrom(const role_upgrade_cfg& from) {
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+bool role_upgrade_cfg::IsInitialized() const {
+  if ((_has_bits_[0] & 0x0000001f) != 0x0000001f) return false;
+
+  return true;
+}
+
+void role_upgrade_cfg::Swap(role_upgrade_cfg* other) {
+  if (other != this) {
+    std::swap(id_, other->id_);
+    std::swap(level_, other->level_);
+    std::swap(cost_type_, other->cost_type_);
+    std::swap(cost_value_, other->cost_value_);
+    std::swap(score_add_, other->score_add_);
+    std::swap(_has_bits_[0], other->_has_bits_[0]);
+    _unknown_fields_.Swap(&other->_unknown_fields_);
+    std::swap(_cached_size_, other->_cached_size_);
+  }
+}
+
+::google::protobuf::Metadata role_upgrade_cfg::GetMetadata() const {
+  protobuf_AssignDescriptorsOnce();
+  ::google::protobuf::Metadata metadata;
+  metadata.descriptor = role_upgrade_cfg_descriptor_;
+  metadata.reflection = role_upgrade_cfg_reflection_;
   return metadata;
 }
 

@@ -84,18 +84,19 @@ public final class SchemeDataSourceExcel implements SchemeDataSourceImpl {
             String key = cell2str(row, key_col);
             // 基础配置
             if (key.equalsIgnoreCase("DataSource")) {
-                SchemeConf.getInstance().setDateSourceFile(cell2str(row, data_col[0]));
-                SchemeConf.getInstance().setDateSourceTable(cell2str(row, data_col[1]));
-            } else if (key.equalsIgnoreCase("DataRect")) {
-                SchemeConf.getInstance().setDateRectRow(cell2int(row, data_col[0]));
-                SchemeConf.getInstance().setDateRectCol(cell2int(row, data_col[1]));
+                SchemeConf.getInstance().addDataSource(
+                    cell2str(row, data_col[0]),
+                    cell2str(row, data_col[1]),
+                    cell2str(row, data_col[2])
+                );
             } else if (key.equalsIgnoreCase("MacroSource")) {
-                SchemeConf.getInstance().setMacroSourceFile(cell2str(row, data_col[0]));
-                SchemeConf.getInstance().setMacroSourceTable(cell2str(row, data_col[1]));
-            } else if (key.equalsIgnoreCase("MacroRect")) {
-                SchemeConf.getInstance().setMacroRectRow(cell2int(row, data_col[0]));
-                SchemeConf.getInstance().setMacroRectCol(cell2int(row, data_col[1]));
+                SchemeConf.getInstance().addMacroSource(
+                    cell2str(row, data_col[0]),
+                    cell2str(row, data_col[1]),
+                    cell2str(row, data_col[2])
+                );
             }
+
             // 字段映射配置
             else if (key.equalsIgnoreCase("ProtoName")) {
                 SchemeConf.getInstance().setProtoName(cell2str(row, data_col[0]));

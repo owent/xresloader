@@ -17,6 +17,7 @@ xresloader
 |-d --data-src-dir            | 数据源根目录        | 默认为当前目录                             |
 |-s --src-file                | 数据源描述文件      |                                            |
 |-m --src-meta                | 数据源描述表        | 可多个                                     |
+|-v --version                 | 打印版本号          |                                            |
                 
                 
 协议类型
@@ -54,3 +55,6 @@ xresloader
 |Encoding      | 编码转换                                         | UTF-8                      |              |              |注：Google的protobuf库的代码里写死了UTF-8(2.6.1版本)，故而该选项对Protobuf无效|
 
 
+使用注意事项
+======
+1. Excel里编辑过的单元格即便删除了也会留下不可见的样式配置，这时候会导致转出的数据有空行。可以通过在Excel里删除行解决

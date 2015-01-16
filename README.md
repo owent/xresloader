@@ -18,6 +18,7 @@ xresloader
 |-s --src-file                | 数据源描述文件      |                                            |
 |-m --src-meta                | 数据源描述表        | 可多个                                     |
 |-v --version                 | 打印版本号          |                                            |
+|-n --rename                  | 重命名输出文件名    | 正则表达式 （如：/(?i)\\.bin$/\\.lua/）            |
                 
                 
 协议类型

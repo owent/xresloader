@@ -11,8 +11,8 @@ import java.util.LinkedList;
 public class SchemeConf {
 
     public class DataInfo {
-        public String file_path;
-        public String table_name;
+        public String file_path = new String();
+        public String table_name = new String();
         public int data_row;
         public int data_col;
     }
@@ -173,6 +173,11 @@ public class SchemeConf {
      * @return Value for property 'outputFile'.
      */
     public String getOutputFile() {
+        ProgramOptions.RenameRule rename_rule = ProgramOptions.getInstance().renameRule;
+        if (null != rename_rule) {
+            return rename_rule.match.matcher(outputFile).replaceAll(rename_rule.replace);
+        }
+
         return outputFile;
     }
 

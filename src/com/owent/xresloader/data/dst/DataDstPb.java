@@ -54,11 +54,9 @@ public class DataDstPb extends DataDstImpl {
             currentMsgDesc = fd.findMessageTypeByName(SchemeConf.getInstance().getProtoName());
 
         } catch (FileNotFoundException e) {
-            e.printStackTrace();
             System.err.println("[ERROR] read protocol file \"" + ProgramOptions.getInstance().protocolFile + "\" failed." + e.toString());
             return false;
         } catch (IOException e) {
-            e.printStackTrace();
             System.err.println("[ERROR] parse protocol file \"" + ProgramOptions.getInstance().protocolFile + "\" failed." + e.toString());
             return false;
         }

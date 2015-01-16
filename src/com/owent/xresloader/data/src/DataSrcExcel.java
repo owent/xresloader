@@ -63,7 +63,7 @@ public class DataSrcExcel extends DataSrcImpl {
 
             if (file_path.isEmpty() || src.table_name.isEmpty() || src.data_col <= 0 || src.data_row <= 0) {
                 System.err.println(
-                    String.format("[WARNING] macro source \"%1\" (%2:%3，%4) ignored.", src.file_path, src.table_name, src.data_row, src.data_col)
+                    String.format("[WARNING] macro source \"%s\" (%s:%d，%d) ignored.", src.file_path, src.table_name, src.data_row, src.data_col)
                 );
                 continue;
             }
@@ -71,7 +71,7 @@ public class DataSrcExcel extends DataSrcImpl {
             Sheet tb = ExcelEngine.openSheet(file_path, src.table_name);
             if (null == tb) {
                 System.err.println(
-                    String.format("[WARNING] open macro source \"%1\" or table %2.", src.file_path, src.table_name)
+                    String.format("[WARNING] open macro source \"%s\" or table %s.", src.file_path, src.table_name)
                 );
                 continue;
             }
@@ -86,7 +86,7 @@ public class DataSrcExcel extends DataSrcImpl {
                 if (!key.isEmpty() && !val.isEmpty()) {
                     if (macros.containsKey(key)) {
                         System.err.println(
-                            String.format("[WARNING] macro key \"%1\" is used more than once.", key)
+                            String.format("[WARNING] macro key \"%s\" is used more than once.", key)
                         );
                     }
                     macros.put(key, val);
@@ -113,7 +113,7 @@ public class DataSrcExcel extends DataSrcImpl {
 
             if (file_path.isEmpty() || src.table_name.isEmpty() || src.data_col <= 0 || src.data_row <= 0) {
                 System.err.println(
-                    String.format("[ERROR] data source \"%1\" (%2:%3，%4) ignored.", src.file_path, src.table_name, src.data_row, src.data_col)
+                    String.format("[ERROR] data source \"%s\" (%s:%d，%d) ignored.", src.file_path, src.table_name, src.data_row, src.data_col)
                 );
                 continue;
             }
@@ -121,7 +121,7 @@ public class DataSrcExcel extends DataSrcImpl {
             Sheet tb = ExcelEngine.openSheet(file_path, src.table_name);
             if (null == tb) {
                 System.err.println(
-                    String.format("[WARNING] open data source \"%1\" or table %2.", src.file_path, src.table_name)
+                    String.format("[WARNING] open data source \"%s\" or table %s.", src.file_path, src.table_name)
                 );
                 continue;
             }

@@ -5,18 +5,24 @@ import gnu.getopt.LongOpt;
 
 import java.util.LinkedList;
 import java.util.List;
+import java.util.regex.Pattern;
+import java.util.regex.Matcher;
+import java.util.regex.PatternSyntaxException;
 
 public class ProgramOptions {
+
+    public class RenameRule {
+        public Pattern match;
+        public String replace;
+    }
 
     /**
      * 单例
      */
     private static ProgramOptions instance = null;
 
-    ;
     public FileType outType;
 
-    ;
     public Protocol protocol;
     public String protocolFile = "";
     public String outputDirectory = "";
@@ -24,6 +30,8 @@ public class ProgramOptions {
     public String dataSourceFile = "";
     public FileType dataSourceType;
     public List<String> dataSourceMetas = null;
+    public RenameRule renameRule = null;
+
     private ProgramOptions() {
         dataSourceMetas = new LinkedList<String>();
         outType = FileType.BIN;
@@ -54,10 +62,11 @@ public class ProgramOptions {
                 new LongOpt("data-src-dir", LongOpt.REQUIRED_ARGUMENT, sb, 'd'),
                 new LongOpt("src-file", LongOpt.REQUIRED_ARGUMENT, sb, 's'),
                 new LongOpt("src-meta", LongOpt.REQUIRED_ARGUMENT, sb, 'm'),
-                new LongOpt("version", LongOpt.NO_ARGUMENT, sb, 'v')
+                new LongOpt("version", LongOpt.NO_ARGUMENT, sb, 'v'),
+                new LongOpt("rename", LongOpt.REQUIRED_ARGUMENT, sb, 'n')
         };
 
-        Getopt g = new Getopt("", args, "ht:p:f:o:d:s:m:v", long_opts);
+        Getopt g = new Getopt("", args, "ht:p:f:o:d:s:m:vn:", long_opts);
         g.setOpterr(false);
 
         int c;
@@ -79,6 +88,7 @@ public class ProgramOptions {
                     System.out.println("-s, --src-file          data source file");
                     System.out.println("-m, --src-meta          data description meta");
                     System.out.println("-v, --version           print version");
+                    System.out.println("-n, --rename            rename output file name(regex), sample: /(?i)\\.bin$/\\.lua/");
                     System.exit(0);
                     break;
                 }
@@ -169,9 +179,47 @@ public class ProgramOptions {
                     break;
                 }
 
-                default:
+                case 'n': {
+                    String rule_string = g.getOptarg();
+                    rule_string = rule_string.trim();
+                    if (rule_string.isEmpty()) {
+                        System.err.println(String.format("[ERROR] Invalid rename rule %s", rule_string));
+                        break;
+                    }
+
+                    String[] groups = rule_string.split(rule_string.substring(0, 1));
+                    int start_index = 0;
+                    for (; start_index < groups.length; ++ start_index) {
+                        if (groups[start_index].isEmpty())
+                            continue;
+
+                        break;
+                    }
+
+                    if (groups.length < start_index + 2) {
+                        System.err.println(String.format("[ERROR] Invalid rename rule %s", rule_string));
+                        break;
+                    }
+
+                    Pattern match_rule = null;
+                    try {
+                        match_rule = Pattern.compile(groups[start_index]);
+                    } catch (PatternSyntaxException e) {
+                        System.err.println(String.format("[ERROR] Invalid rename regex rule %s", groups[start_index]));
+                        break;
+                    }
+
+                    renameRule = new RenameRule();
+                    renameRule.match = match_rule;
+                    renameRule.replace = groups[start_index + 1];
+
+                    break;
+                }
+
+                default: {
                     System.out.println("[WARN] Unknown option " + g.getOptarg());
                     break;
+                }
             }
         }
 
@@ -179,7 +227,7 @@ public class ProgramOptions {
     }
 
     public String getVersion() {
-        return "1.1.0.0";
+        return "0.1.1.1";
     }
 
 

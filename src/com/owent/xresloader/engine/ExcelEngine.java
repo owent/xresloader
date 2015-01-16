@@ -56,10 +56,16 @@ public class ExcelEngine {
         }
 
         try {
-            file_path = new File(file_path).getCanonicalPath();
+            File file_check = new File(file_path);
+            file_path = file_check.getCanonicalPath();
+            if (false == file_check.exists()) {
+                return null;
+            }
+            file_path = file_check.getCanonicalPath();
         } catch (IOException e) {
             e.printStackTrace();
         }
+
 
         Workbook ret = openedWorkbooks.get(file_path);
         if (null != ret)

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<module type="JAVA_MODULE" version="4">
+<module org.jetbrains.idea.maven.project.MavenProjectsManager.isMavenModule="true" type="JAVA_MODULE" version="4">
   <component name="EclipseModuleManager">
     <libelement value="jar://$MODULE_DIR$/deps/poi/poi-3.10.1-20140818.jar!/" />
     <libelement value="jar://$MODULE_DIR$/deps/java-getopt/java-getopt-1.0.14.jar!/" />
@@ -14,88 +14,21 @@
       <src_folder value="file://$MODULE_DIR$/src" expected_position="0" />
     </src_description>
   </component>
-  <component name="FacetManager">
-    <facet type="Python" name="Python">
-      <configuration sdkName="" />
-    </facet>
-  </component>
-  <component name="NewModuleRootManager" inherit-compiler-output="false">
-    <output url="file://$MODULE_DIR$/bin" />
-    <exclude-output />
+  <component name="NewModuleRootManager" inherit-compiler-output="true">
+    <output url="file://$MODULE_DIR$/target/classes" />
+    <output-test url="file://$MODULE_DIR$/target/test-classes" />
     <content url="file://$MODULE_DIR$">
-      <sourceFolder url="file://$MODULE_DIR$/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/main/java" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/main/resources" type="java-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/src/test/java" isTestSource="true" />
+      <excludeFolder url="file://$MODULE_DIR$/target" />
     </content>
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="inheritedJdk" />
+    <orderEntry type="jdk" jdkName="1.8" jdkType="JavaSDK" />
     <orderEntry type="module-library">
-      <library name="poi-3.10.1-20140818.jar">
+      <library>
         <CLASSES>
-          <root url="jar://$MODULE_DIR$/deps/poi/poi-3.10.1-20140818.jar!/" />
-        </CLASSES>
-        <JAVADOC />
-        <SOURCES />
-      </library>
-    </orderEntry>
-    <orderEntry type="module-library">
-      <library name="java-getopt-1.0.14.jar">
-        <CLASSES>
-          <root url="jar://$MODULE_DIR$/deps/java-getopt/java-getopt-1.0.14.jar!/" />
-        </CLASSES>
-        <JAVADOC />
-        <SOURCES />
-      </library>
-    </orderEntry>
-    <orderEntry type="module-library">
-      <library name="poi-ooxml-3.10.1-20140818.jar">
-        <CLASSES>
-          <root url="jar://$MODULE_DIR$/deps/poi/poi-ooxml-3.10.1-20140818.jar!/" />
-        </CLASSES>
-        <JAVADOC />
-        <SOURCES />
-      </library>
-    </orderEntry>
-    <orderEntry type="module-library">
-      <library name="poi-ooxml-schemas-3.10.1-20140818.jar">
-        <CLASSES>
-          <root url="jar://$MODULE_DIR$/deps/poi/poi-ooxml-schemas-3.10.1-20140818.jar!/" />
-        </CLASSES>
-        <JAVADOC />
-        <SOURCES />
-      </library>
-    </orderEntry>
-    <orderEntry type="module-library">
-      <library name="commons-codec-1.9.jar">
-        <CLASSES>
-          <root url="jar://$MODULE_DIR$/deps/commons-codec/commons-codec-1.9.jar!/" />
-        </CLASSES>
-        <JAVADOC>
-          <root url="jar://$MODULE_DIR$/deps/commons-codec/commons-codec-1.9-javadoc.jar!/" />
-        </JAVADOC>
-        <SOURCES />
-      </library>
-    </orderEntry>
-    <orderEntry type="module-library">
-      <library name="xmlbeans-2.6.0.jar">
-        <CLASSES>
-          <root url="jar://$MODULE_DIR$/deps/poi/ooxml-lib/xmlbeans-2.6.0.jar!/" />
-        </CLASSES>
-        <JAVADOC />
-        <SOURCES />
-      </library>
-    </orderEntry>
-    <orderEntry type="module-library">
-      <library name="stax-api-1.0.1.jar">
-        <CLASSES>
-          <root url="jar://$MODULE_DIR$/deps/poi/ooxml-lib/stax-api-1.0.1.jar!/" />
-        </CLASSES>
-        <JAVADOC />
-        <SOURCES />
-      </library>
-    </orderEntry>
-    <orderEntry type="module-library">
-      <library name="dom4j-1.6.1.jar">
-        <CLASSES>
-          <root url="jar://$MODULE_DIR$/deps/poi/ooxml-lib/dom4j-1.6.1.jar!/" />
+          <root url="jar://$MODULE_DIR$/deps/protobuf-java/protobuf-java-2.6.1.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />
@@ -104,10 +37,77 @@
     <orderEntry type="module-library">
       <library>
         <CLASSES>
-          <root url="jar://$MODULE_DIR$/deps/protobuf-java/protobuf-java-2.6.1.jar!/" />
+          <root url="jar://$MODULE_DIR$/deps/poi/poi-3.11-20141221.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library>
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/deps/poi/poi-ooxml-3.11-20141221.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library>
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/deps/poi/poi-ooxml-schemas-3.11-20141221.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library>
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/deps/poi/poi-scratchpad-3.11-20141221.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library>
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/deps/poi/poi-excelant-3.11-20141221.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library>
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/deps/commons-codec/commons-codec-1.10.jar!/" />
+        </CLASSES>
+        <JAVADOC>
+          <root url="jar://$MODULE_DIR$/deps/commons-codec/commons-codec-1.10-javadoc.jar!/" />
+        </JAVADOC>
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library>
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/deps/poi/ooxml-lib/xmlbeans-2.6.0.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library>
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/deps/java-getopt/java-getopt-1.0.14.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES>
+          <root url="jar://$MODULE_DIR$/deps/java-getopt/java-getopt-1.0.14.jar!/" />
+        </SOURCES>
       </library>
     </orderEntry>
   </component>

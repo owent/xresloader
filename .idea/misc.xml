@@ -68,6 +68,10 @@
   <component name="EntryPointsManager">
     <entry_points version="2.0" />
   </component>
+  <component name="FrameworkDetectionExcludesConfiguration">
+    <type id="protobuf" />
+    <type id="Python" />
+  </component>
   <component name="IdProvider" IDEtalkID="8BDE7BB34E080D9A1F3D03FE2380411C" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="false">
     <OptionsSetting value="true" id="Add" />

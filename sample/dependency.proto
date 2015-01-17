@@ -1,3 +1,5 @@
+option optimize_for = LITE_RUNTIME;
+
 import "dep_level2.proto";
 
 message dep_cfg {

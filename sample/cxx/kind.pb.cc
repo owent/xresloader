@@ -10,115 +10,27 @@
 #include <google/protobuf/stubs/once.h>
 #include <google/protobuf/io/coded_stream.h>
 #include <google/protobuf/wire_format_lite_inl.h>
-#include <google/protobuf/descriptor.h>
-#include <google/protobuf/generated_message_reflection.h>
-#include <google/protobuf/reflection_ops.h>
-#include <google/protobuf/wire_format.h>
+#include <google/protobuf/io/zero_copy_stream_impl_lite.h>
 // @@protoc_insertion_point(includes)
-
-namespace {
-
-const ::google::protobuf::Descriptor* role_cfg_descriptor_ = NULL;
-const ::google::protobuf::internal::GeneratedMessageReflection*
-  role_cfg_reflection_ = NULL;
-const ::google::protobuf::Descriptor* role_upgrade_cfg_descriptor_ = NULL;
-const ::google::protobuf::internal::GeneratedMessageReflection*
-  role_upgrade_cfg_reflection_ = NULL;
-
-}  // namespace
-
-
-void protobuf_AssignDesc_kind_2eproto() {
-  protobuf_AddDesc_kind_2eproto();
-  const ::google::protobuf::FileDescriptor* file =
-    ::google::protobuf::DescriptorPool::generated_pool()->FindFileByName(
-      "kind.proto");
-  GOOGLE_CHECK(file != NULL);
-  role_cfg_descriptor_ = file->message_type(0);
-  static const int role_cfg_offsets_[7] = {
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(role_cfg, id_),
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(role_cfg, unlock_level_),
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(role_cfg, cost_type_),
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(role_cfg, cost_value_),
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(role_cfg, name_),
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(role_cfg, dep_test_),
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(role_cfg, test_array_),
-  };
-  role_cfg_reflection_ =
-    new ::google::protobuf::internal::GeneratedMessageReflection(
-      role_cfg_descriptor_,
-      role_cfg::default_instance_,
-      role_cfg_offsets_,
-      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(role_cfg, _has_bits_[0]),
-      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(role_cfg, _unknown_fields_),
-      -1,
-      ::google::protobuf::DescriptorPool::generated_pool(),
-      ::google::protobuf::MessageFactory::generated_factory(),
-      sizeof(role_cfg));
-  role_upgrade_cfg_descriptor_ = file->message_type(1);
-  static const int role_upgrade_cfg_offsets_[5] = {
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(role_upgrade_cfg, id_),
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(role_upgrade_cfg, level_),
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(role_upgrade_cfg, cost_type_),
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(role_upgrade_cfg, cost_value_),
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(role_upgrade_cfg, score_add_),
-  };
-  role_upgrade_cfg_reflection_ =
-    new ::google::protobuf::internal::GeneratedMessageReflection(
-      role_upgrade_cfg_descriptor_,
-      role_upgrade_cfg::default_instance_,
-      role_upgrade_cfg_offsets_,
-      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(role_upgrade_cfg, _has_bits_[0]),
-      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(role_upgrade_cfg, _unknown_fields_),
-      -1,
-      ::google::protobuf::DescriptorPool::generated_pool(),
-      ::google::protobuf::MessageFactory::generated_factory(),
-      sizeof(role_upgrade_cfg));
-}
-
-namespace {
-
-GOOGLE_PROTOBUF_DECLARE_ONCE(protobuf_AssignDescriptors_once_);
-inline void protobuf_AssignDescriptorsOnce() {
-  ::google::protobuf::GoogleOnceInit(&protobuf_AssignDescriptors_once_,
-                 &protobuf_AssignDesc_kind_2eproto);
-}
-
-void protobuf_RegisterTypes(const ::std::string&) {
-  protobuf_AssignDescriptorsOnce();
-  ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
-    role_cfg_descriptor_, &role_cfg::default_instance());
-  ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
-    role_upgrade_cfg_descriptor_, &role_upgrade_cfg::default_instance());
-}
-
-}  // namespace
 
 void protobuf_ShutdownFile_kind_2eproto() {
   delete role_cfg::default_instance_;
-  delete role_cfg_reflection_;
   delete role_upgrade_cfg::default_instance_;
-  delete role_upgrade_cfg_reflection_;
 }
 
+#ifdef GOOGLE_PROTOBUF_NO_STATIC_INITIALIZER
+void protobuf_AddDesc_kind_2eproto_impl() {
+  GOOGLE_PROTOBUF_VERIFY_VERSION;
+
+#else
 void protobuf_AddDesc_kind_2eproto() {
   static bool already_here = false;
   if (already_here) return;
   already_here = true;
   GOOGLE_PROTOBUF_VERIFY_VERSION;
 
+#endif
   ::protobuf_AddDesc_dependency_2eproto();
-  ::google::protobuf::DescriptorPool::InternalAddGeneratedFile(
-    "\n\nkind.proto\032\020dependency.proto\"\221\001\n\010role_"
-    "cfg\022\n\n\002id\030\001 \002(\r\022\024\n\014unlock_level\030\002 \002(\r\022\021\n"
-    "\tcost_type\030\003 \002(\r\022\022\n\ncost_value\030\004 \002(\005\022\014\n\004"
-    "name\030\005 \002(\t\022\032\n\010dep_test\030\n \002(\0132\010.dep_cfg\022\022"
-    "\n\ntest_array\030\013 \003(\t\"g\n\020role_upgrade_cfg\022\n"
-    "\n\002id\030\001 \002(\r\022\r\n\005level\030\002 \002(\r\022\021\n\tcost_type\030\003"
-    " \002(\r\022\022\n\ncost_value\030\004 \002(\005\022\021\n\tscore_add\030\005 "
-    "\002(\005", 283);
-  ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
-    "kind.proto", &protobuf_RegisterTypes);
   role_cfg::default_instance_ = new role_cfg();
   role_upgrade_cfg::default_instance_ = new role_upgrade_cfg();
   role_cfg::default_instance_->InitAsDefaultInstance();
@@ -126,12 +38,20 @@ void protobuf_AddDesc_kind_2eproto() {
   ::google::protobuf::internal::OnShutdown(&protobuf_ShutdownFile_kind_2eproto);
 }
 
+#ifdef GOOGLE_PROTOBUF_NO_STATIC_INITIALIZER
+GOOGLE_PROTOBUF_DECLARE_ONCE(protobuf_AddDesc_kind_2eproto_once_);
+void protobuf_AddDesc_kind_2eproto() {
+  ::google::protobuf::GoogleOnceInit(&protobuf_AddDesc_kind_2eproto_once_,
+                 &protobuf_AddDesc_kind_2eproto_impl);
+}
+#else
 // Force AddDescriptors() to be called at static initialization time.
 struct StaticDescriptorInitializer_kind_2eproto {
   StaticDescriptorInitializer_kind_2eproto() {
     protobuf_AddDesc_kind_2eproto();
   }
 } static_descriptor_initializer_kind_2eproto_;
+#endif
 
 // ===================================================================
 
@@ -146,17 +66,22 @@ const int role_cfg::kTestArrayFieldNumber;
 #endif  // !_MSC_VER
 
 role_cfg::role_cfg()
-  : ::google::protobuf::Message() {
+  : ::google::protobuf::MessageLite() {
   SharedCtor();
   // @@protoc_insertion_point(constructor:role_cfg)
 }
 
 void role_cfg::InitAsDefaultInstance() {
+#ifdef GOOGLE_PROTOBUF_NO_STATIC_INITIALIZER
+  dep_test_ = const_cast< ::dep_cfg*>(
+      ::dep_cfg::internal_default_instance());
+#else
   dep_test_ = const_cast< ::dep_cfg*>(&::dep_cfg::default_instance());
+#endif
 }
 
 role_cfg::role_cfg(const role_cfg& from)
-  : ::google::protobuf::Message() {
+  : ::google::protobuf::MessageLite() {
   SharedCtor();
   MergeFrom(from);
   // @@protoc_insertion_point(copy_constructor:role_cfg)
@@ -183,7 +108,11 @@ void role_cfg::SharedDtor() {
   if (name_ != &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
     delete name_;
   }
+  #ifdef GOOGLE_PROTOBUF_NO_STATIC_INITIALIZER
+  if (this != &default_instance()) {
+  #else
   if (this != default_instance_) {
+  #endif
     delete dep_test_;
   }
 }
@@ -193,13 +122,12 @@ void role_cfg::SetCachedSize(int size) const {
   _cached_size_ = size;
   GOOGLE_SAFE_CONCURRENT_WRITES_END();
 }
-const ::google::protobuf::Descriptor* role_cfg::descriptor() {
-  protobuf_AssignDescriptorsOnce();
-  return role_cfg_descriptor_;
-}
-
 const role_cfg& role_cfg::default_instance() {
+#ifdef GOOGLE_PROTOBUF_NO_STATIC_INITIALIZER
+  protobuf_AddDesc_kind_2eproto();
+#else
   if (default_instance_ == NULL) protobuf_AddDesc_kind_2eproto();
+#endif
   return *default_instance_;
 }
 
@@ -237,13 +165,17 @@ void role_cfg::Clear() {
 
   test_array_.Clear();
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
-  mutable_unknown_fields()->Clear();
+  mutable_unknown_fields()->clear();
 }
 
 bool role_cfg::MergePartialFromCodedStream(
     ::google::protobuf::io::CodedInputStream* input) {
 #define DO_(EXPRESSION) if (!(EXPRESSION)) goto failure
   ::google::protobuf::uint32 tag;
+  ::google::protobuf::io::StringOutputStream unknown_fields_string(
+      mutable_unknown_fields());
+  ::google::protobuf::io::CodedOutputStream unknown_fields_stream(
+      &unknown_fields_string);
   // @@protoc_insertion_point(parse_start:role_cfg)
   for (;;) {
     ::std::pair< ::google::protobuf::uint32, bool> p = input->ReadTagWithCutoff(127);
@@ -315,10 +247,6 @@ bool role_cfg::MergePartialFromCodedStream(
          parse_name:
           DO_(::google::protobuf::internal::WireFormatLite::ReadString(
                 input, this->mutable_name()));
-          ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
-            this->name().data(), this->name().length(),
-            ::google::protobuf::internal::WireFormat::PARSE,
-            "name");
         } else {
           goto handle_unusual;
         }
@@ -345,11 +273,6 @@ bool role_cfg::MergePartialFromCodedStream(
          parse_test_array:
           DO_(::google::protobuf::internal::WireFormatLite::ReadString(
                 input, this->add_test_array()));
-          ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
-            this->test_array(this->test_array_size() - 1).data(),
-            this->test_array(this->test_array_size() - 1).length(),
-            ::google::protobuf::internal::WireFormat::PARSE,
-            "test_array");
         } else {
           goto handle_unusual;
         }
@@ -365,8 +288,8 @@ bool role_cfg::MergePartialFromCodedStream(
             ::google::protobuf::internal::WireFormatLite::WIRETYPE_END_GROUP) {
           goto success;
         }
-        DO_(::google::protobuf::internal::WireFormat::SkipField(
-              input, tag, mutable_unknown_fields()));
+        DO_(::google::protobuf::internal::WireFormatLite::SkipField(
+            input, tag, &unknown_fields_stream));
         break;
       }
     }
@@ -405,94 +328,25 @@ void role_cfg::SerializeWithCachedSizes(
 
   // required string name = 5;
   if (has_name()) {
-    ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
-      this->name().data(), this->name().length(),
-      ::google::protobuf::internal::WireFormat::SERIALIZE,
-      "name");
     ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
       5, this->name(), output);
   }
 
   // required .dep_cfg dep_test = 10;
   if (has_dep_test()) {
-    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
+    ::google::protobuf::internal::WireFormatLite::WriteMessage(
       10, this->dep_test(), output);
   }
 
   // repeated string test_array = 11;
   for (int i = 0; i < this->test_array_size(); i++) {
-  ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
-    this->test_array(i).data(), this->test_array(i).length(),
-    ::google::protobuf::internal::WireFormat::SERIALIZE,
-    "test_array");
     ::google::protobuf::internal::WireFormatLite::WriteString(
       11, this->test_array(i), output);
   }
 
-  if (!unknown_fields().empty()) {
-    ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
-        unknown_fields(), output);
-  }
+  output->WriteRaw(unknown_fields().data(),
+                   unknown_fields().size());
   // @@protoc_insertion_point(serialize_end:role_cfg)
-}
-
-::google::protobuf::uint8* role_cfg::SerializeWithCachedSizesToArray(
-    ::google::protobuf::uint8* target) const {
-  // @@protoc_insertion_point(serialize_to_array_start:role_cfg)
-  // required uint32 id = 1;
-  if (has_id()) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteUInt32ToArray(1, this->id(), target);
-  }
-
-  // required uint32 unlock_level = 2;
-  if (has_unlock_level()) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteUInt32ToArray(2, this->unlock_level(), target);
-  }
-
-  // required uint32 cost_type = 3;
-  if (has_cost_type()) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteUInt32ToArray(3, this->cost_type(), target);
-  }
-
-  // required int32 cost_value = 4;
-  if (has_cost_value()) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(4, this->cost_value(), target);
-  }
-
-  // required string name = 5;
-  if (has_name()) {
-    ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
-      this->name().data(), this->name().length(),
-      ::google::protobuf::internal::WireFormat::SERIALIZE,
-      "name");
-    target =
-      ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
-        5, this->name(), target);
-  }
-
-  // required .dep_cfg dep_test = 10;
-  if (has_dep_test()) {
-    target = ::google::protobuf::internal::WireFormatLite::
-      WriteMessageNoVirtualToArray(
-        10, this->dep_test(), target);
-  }
-
-  // repeated string test_array = 11;
-  for (int i = 0; i < this->test_array_size(); i++) {
-    ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
-      this->test_array(i).data(), this->test_array(i).length(),
-      ::google::protobuf::internal::WireFormat::SERIALIZE,
-      "test_array");
-    target = ::google::protobuf::internal::WireFormatLite::
-      WriteStringToArray(11, this->test_array(i), target);
-  }
-
-  if (!unknown_fields().empty()) {
-    target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
-        unknown_fields(), target);
-  }
-  // @@protoc_insertion_point(serialize_to_array_end:role_cfg)
-  return target;
 }
 
 int role_cfg::ByteSize() const {
@@ -549,27 +403,17 @@ int role_cfg::ByteSize() const {
       this->test_array(i));
   }
 
-  if (!unknown_fields().empty()) {
-    total_size +=
-      ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
-        unknown_fields());
-  }
+  total_size += unknown_fields().size();
+
   GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
   _cached_size_ = total_size;
   GOOGLE_SAFE_CONCURRENT_WRITES_END();
   return total_size;
 }
 
-void role_cfg::MergeFrom(const ::google::protobuf::Message& from) {
-  GOOGLE_CHECK_NE(&from, this);
-  const role_cfg* source =
-    ::google::protobuf::internal::dynamic_cast_if_available<const role_cfg*>(
-      &from);
-  if (source == NULL) {
-    ::google::protobuf::internal::ReflectionOps::Merge(from, this);
-  } else {
-    MergeFrom(*source);
-  }
+void role_cfg::CheckTypeAndMergeFrom(
+    const ::google::protobuf::MessageLite& from) {
+  MergeFrom(*::google::protobuf::down_cast<const role_cfg*>(&from));
 }
 
 void role_cfg::MergeFrom(const role_cfg& from) {
@@ -595,13 +439,7 @@ void role_cfg::MergeFrom(const role_cfg& from) {
       mutable_dep_test()->::dep_cfg::MergeFrom(from.dep_test());
     }
   }
-  mutable_unknown_fields()->MergeFrom(from.unknown_fields());
-}
-
-void role_cfg::CopyFrom(const ::google::protobuf::Message& from) {
-  if (&from == this) return;
-  Clear();
-  MergeFrom(from);
+  mutable_unknown_fields()->append(from.unknown_fields());
 }
 
 void role_cfg::CopyFrom(const role_cfg& from) {
@@ -629,17 +467,13 @@ void role_cfg::Swap(role_cfg* other) {
     std::swap(dep_test_, other->dep_test_);
     test_array_.Swap(&other->test_array_);
     std::swap(_has_bits_[0], other->_has_bits_[0]);
-    _unknown_fields_.Swap(&other->_unknown_fields_);
+    _unknown_fields_.swap(other->_unknown_fields_);
     std::swap(_cached_size_, other->_cached_size_);
   }
 }
 
-::google::protobuf::Metadata role_cfg::GetMetadata() const {
-  protobuf_AssignDescriptorsOnce();
-  ::google::protobuf::Metadata metadata;
-  metadata.descriptor = role_cfg_descriptor_;
-  metadata.reflection = role_cfg_reflection_;
-  return metadata;
+::std::string role_cfg::GetTypeName() const {
+  return "role_cfg";
 }
 
 
@@ -654,7 +488,7 @@ const int role_upgrade_cfg::kScoreAddFieldNumber;
 #endif  // !_MSC_VER
 
 role_upgrade_cfg::role_upgrade_cfg()
-  : ::google::protobuf::Message() {
+  : ::google::protobuf::MessageLite() {
   SharedCtor();
   // @@protoc_insertion_point(constructor:role_upgrade_cfg)
 }
@@ -663,7 +497,7 @@ void role_upgrade_cfg::InitAsDefaultInstance() {
 }
 
 role_upgrade_cfg::role_upgrade_cfg(const role_upgrade_cfg& from)
-  : ::google::protobuf::Message() {
+  : ::google::protobuf::MessageLite() {
   SharedCtor();
   MergeFrom(from);
   // @@protoc_insertion_point(copy_constructor:role_upgrade_cfg)
@@ -685,7 +519,11 @@ role_upgrade_cfg::~role_upgrade_cfg() {
 }
 
 void role_upgrade_cfg::SharedDtor() {
+  #ifdef GOOGLE_PROTOBUF_NO_STATIC_INITIALIZER
+  if (this != &default_instance()) {
+  #else
   if (this != default_instance_) {
+  #endif
   }
 }
 
@@ -694,13 +532,12 @@ void role_upgrade_cfg::SetCachedSize(int size) const {
   _cached_size_ = size;
   GOOGLE_SAFE_CONCURRENT_WRITES_END();
 }
-const ::google::protobuf::Descriptor* role_upgrade_cfg::descriptor() {
-  protobuf_AssignDescriptorsOnce();
-  return role_upgrade_cfg_descriptor_;
-}
-
 const role_upgrade_cfg& role_upgrade_cfg::default_instance() {
+#ifdef GOOGLE_PROTOBUF_NO_STATIC_INITIALIZER
+  protobuf_AddDesc_kind_2eproto();
+#else
   if (default_instance_ == NULL) protobuf_AddDesc_kind_2eproto();
+#endif
   return *default_instance_;
 }
 
@@ -729,13 +566,17 @@ void role_upgrade_cfg::Clear() {
 #undef ZR_
 
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
-  mutable_unknown_fields()->Clear();
+  mutable_unknown_fields()->clear();
 }
 
 bool role_upgrade_cfg::MergePartialFromCodedStream(
     ::google::protobuf::io::CodedInputStream* input) {
 #define DO_(EXPRESSION) if (!(EXPRESSION)) goto failure
   ::google::protobuf::uint32 tag;
+  ::google::protobuf::io::StringOutputStream unknown_fields_string(
+      mutable_unknown_fields());
+  ::google::protobuf::io::CodedOutputStream unknown_fields_stream(
+      &unknown_fields_string);
   // @@protoc_insertion_point(parse_start:role_upgrade_cfg)
   for (;;) {
     ::std::pair< ::google::protobuf::uint32, bool> p = input->ReadTagWithCutoff(127);
@@ -823,8 +664,8 @@ bool role_upgrade_cfg::MergePartialFromCodedStream(
             ::google::protobuf::internal::WireFormatLite::WIRETYPE_END_GROUP) {
           goto success;
         }
-        DO_(::google::protobuf::internal::WireFormat::SkipField(
-              input, tag, mutable_unknown_fields()));
+        DO_(::google::protobuf::internal::WireFormatLite::SkipField(
+            input, tag, &unknown_fields_stream));
         break;
       }
     }
@@ -866,47 +707,9 @@ void role_upgrade_cfg::SerializeWithCachedSizes(
     ::google::protobuf::internal::WireFormatLite::WriteInt32(5, this->score_add(), output);
   }
 
-  if (!unknown_fields().empty()) {
-    ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
-        unknown_fields(), output);
-  }
+  output->WriteRaw(unknown_fields().data(),
+                   unknown_fields().size());
   // @@protoc_insertion_point(serialize_end:role_upgrade_cfg)
-}
-
-::google::protobuf::uint8* role_upgrade_cfg::SerializeWithCachedSizesToArray(
-    ::google::protobuf::uint8* target) const {
-  // @@protoc_insertion_point(serialize_to_array_start:role_upgrade_cfg)
-  // required uint32 id = 1;
-  if (has_id()) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteUInt32ToArray(1, this->id(), target);
-  }
-
-  // required uint32 level = 2;
-  if (has_level()) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteUInt32ToArray(2, this->level(), target);
-  }
-
-  // required uint32 cost_type = 3;
-  if (has_cost_type()) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteUInt32ToArray(3, this->cost_type(), target);
-  }
-
-  // required int32 cost_value = 4;
-  if (has_cost_value()) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(4, this->cost_value(), target);
-  }
-
-  // required int32 score_add = 5;
-  if (has_score_add()) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(5, this->score_add(), target);
-  }
-
-  if (!unknown_fields().empty()) {
-    target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
-        unknown_fields(), target);
-  }
-  // @@protoc_insertion_point(serialize_to_array_end:role_upgrade_cfg)
-  return target;
 }
 
 int role_upgrade_cfg::ByteSize() const {
@@ -949,27 +752,17 @@ int role_upgrade_cfg::ByteSize() const {
     }
 
   }
-  if (!unknown_fields().empty()) {
-    total_size +=
-      ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
-        unknown_fields());
-  }
+  total_size += unknown_fields().size();
+
   GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
   _cached_size_ = total_size;
   GOOGLE_SAFE_CONCURRENT_WRITES_END();
   return total_size;
 }
 
-void role_upgrade_cfg::MergeFrom(const ::google::protobuf::Message& from) {
-  GOOGLE_CHECK_NE(&from, this);
-  const role_upgrade_cfg* source =
-    ::google::protobuf::internal::dynamic_cast_if_available<const role_upgrade_cfg*>(
-      &from);
-  if (source == NULL) {
-    ::google::protobuf::internal::ReflectionOps::Merge(from, this);
-  } else {
-    MergeFrom(*source);
-  }
+void role_upgrade_cfg::CheckTypeAndMergeFrom(
+    const ::google::protobuf::MessageLite& from) {
+  MergeFrom(*::google::protobuf::down_cast<const role_upgrade_cfg*>(&from));
 }
 
 void role_upgrade_cfg::MergeFrom(const role_upgrade_cfg& from) {
@@ -991,13 +784,7 @@ void role_upgrade_cfg::MergeFrom(const role_upgrade_cfg& from) {
       set_score_add(from.score_add());
     }
   }
-  mutable_unknown_fields()->MergeFrom(from.unknown_fields());
-}
-
-void role_upgrade_cfg::CopyFrom(const ::google::protobuf::Message& from) {
-  if (&from == this) return;
-  Clear();
-  MergeFrom(from);
+  mutable_unknown_fields()->append(from.unknown_fields());
 }
 
 void role_upgrade_cfg::CopyFrom(const role_upgrade_cfg& from) {
@@ -1020,17 +807,13 @@ void role_upgrade_cfg::Swap(role_upgrade_cfg* other) {
     std::swap(cost_value_, other->cost_value_);
     std::swap(score_add_, other->score_add_);
     std::swap(_has_bits_[0], other->_has_bits_[0]);
-    _unknown_fields_.Swap(&other->_unknown_fields_);
+    _unknown_fields_.swap(other->_unknown_fields_);
     std::swap(_cached_size_, other->_cached_size_);
   }
 }
 
-::google::protobuf::Metadata role_upgrade_cfg::GetMetadata() const {
-  protobuf_AssignDescriptorsOnce();
-  ::google::protobuf::Metadata metadata;
-  metadata.descriptor = role_upgrade_cfg_descriptor_;
-  metadata.reflection = role_upgrade_cfg_reflection_;
-  return metadata;
+::std::string role_upgrade_cfg::GetTypeName() const {
+  return "role_upgrade_cfg";
 }
 
 

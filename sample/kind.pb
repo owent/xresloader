@@ -1,18 +1,18 @@
 
-9
-dep_level2.proto"%
-dep2_cfg
-
-id (
-level (	
-b
+f
 dependency.protodep_level2.proto"<
 dep_cfg
 
 id (
 name (	
-dep2 (2	.dep2_cfg
-›
+dep2 (2	.dep2_cfgBH
+=
+dep_level2.proto"%
+dep2_cfg
+
+id (
+level (	BH
+Ÿ
 
 kind.protodependency.proto"‘
 role_cfg
@@ -34,4 +34,4 @@ test_array (	"g
 	cost_type (
 
 cost_value (
-	score_add (
+	score_add (BH

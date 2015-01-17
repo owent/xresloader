@@ -20,10 +20,9 @@
 #endif
 
 #include <google/protobuf/generated_message_util.h>
-#include <google/protobuf/message.h>
+#include <google/protobuf/message_lite.h>
 #include <google/protobuf/repeated_field.h>
 #include <google/protobuf/extension_set.h>
-#include <google/protobuf/unknown_field_set.h>
 // @@protoc_insertion_point(includes)
 
 namespace com {
@@ -41,7 +40,7 @@ class xresloader_datablocks;
 
 // ===================================================================
 
-class xresloader_header : public ::google::protobuf::Message {
+class xresloader_header : public ::google::protobuf::MessageLite {
  public:
   xresloader_header();
   virtual ~xresloader_header();
@@ -53,24 +52,32 @@ class xresloader_header : public ::google::protobuf::Message {
     return *this;
   }
 
-  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+  inline const ::std::string& unknown_fields() const {
     return _unknown_fields_;
   }
 
-  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+  inline ::std::string* mutable_unknown_fields() {
     return &_unknown_fields_;
   }
 
-  static const ::google::protobuf::Descriptor* descriptor();
   static const xresloader_header& default_instance();
+
+  #ifdef GOOGLE_PROTOBUF_NO_STATIC_INITIALIZER
+  // Returns the internal default instance pointer. This function can
+  // return NULL thus should not be used by the user. This is intended
+  // for Protobuf internal code. Please use default_instance() declared
+  // above instead.
+  static inline const xresloader_header* internal_default_instance() {
+    return default_instance_;
+  }
+  #endif
 
   void Swap(xresloader_header* other);
 
   // implements Message ----------------------------------------------
 
   xresloader_header* New() const;
-  void CopyFrom(const ::google::protobuf::Message& from);
-  void MergeFrom(const ::google::protobuf::Message& from);
+  void CheckTypeAndMergeFrom(const ::google::protobuf::MessageLite& from);
   void CopyFrom(const xresloader_header& from);
   void MergeFrom(const xresloader_header& from);
   void Clear();
@@ -81,14 +88,14 @@ class xresloader_header : public ::google::protobuf::Message {
       ::google::protobuf::io::CodedInputStream* input);
   void SerializeWithCachedSizes(
       ::google::protobuf::io::CodedOutputStream* output) const;
-  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
+  void DiscardUnknownFields();
   int GetCachedSize() const { return _cached_size_; }
   private:
   void SharedCtor();
   void SharedDtor();
   void SetCachedSize(int size) const;
   public:
-  ::google::protobuf::Metadata GetMetadata() const;
+  ::std::string GetTypeName() const;
 
   // nested types ----------------------------------------------------
 
@@ -148,7 +155,7 @@ class xresloader_header : public ::google::protobuf::Message {
   inline void set_has_hash_code();
   inline void clear_has_hash_code();
 
-  ::google::protobuf::UnknownFieldSet _unknown_fields_;
+  ::std::string _unknown_fields_;
 
   ::google::protobuf::uint32 _has_bits_[1];
   mutable int _cached_size_;
@@ -156,7 +163,11 @@ class xresloader_header : public ::google::protobuf::Message {
   ::std::string* data_ver_;
   ::std::string* hash_code_;
   ::google::protobuf::uint32 count_;
+  #ifdef GOOGLE_PROTOBUF_NO_STATIC_INITIALIZER
+  friend void  protobuf_AddDesc_pb_5fheader_2eproto_impl();
+  #else
   friend void  protobuf_AddDesc_pb_5fheader_2eproto();
+  #endif
   friend void protobuf_AssignDesc_pb_5fheader_2eproto();
   friend void protobuf_ShutdownFile_pb_5fheader_2eproto();
 
@@ -165,7 +176,7 @@ class xresloader_header : public ::google::protobuf::Message {
 };
 // -------------------------------------------------------------------
 
-class xresloader_datablocks : public ::google::protobuf::Message {
+class xresloader_datablocks : public ::google::protobuf::MessageLite {
  public:
   xresloader_datablocks();
   virtual ~xresloader_datablocks();
@@ -177,24 +188,32 @@ class xresloader_datablocks : public ::google::protobuf::Message {
     return *this;
   }
 
-  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+  inline const ::std::string& unknown_fields() const {
     return _unknown_fields_;
   }
 
-  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+  inline ::std::string* mutable_unknown_fields() {
     return &_unknown_fields_;
   }
 
-  static const ::google::protobuf::Descriptor* descriptor();
   static const xresloader_datablocks& default_instance();
+
+  #ifdef GOOGLE_PROTOBUF_NO_STATIC_INITIALIZER
+  // Returns the internal default instance pointer. This function can
+  // return NULL thus should not be used by the user. This is intended
+  // for Protobuf internal code. Please use default_instance() declared
+  // above instead.
+  static inline const xresloader_datablocks* internal_default_instance() {
+    return default_instance_;
+  }
+  #endif
 
   void Swap(xresloader_datablocks* other);
 
   // implements Message ----------------------------------------------
 
   xresloader_datablocks* New() const;
-  void CopyFrom(const ::google::protobuf::Message& from);
-  void MergeFrom(const ::google::protobuf::Message& from);
+  void CheckTypeAndMergeFrom(const ::google::protobuf::MessageLite& from);
   void CopyFrom(const xresloader_datablocks& from);
   void MergeFrom(const xresloader_datablocks& from);
   void Clear();
@@ -205,14 +224,14 @@ class xresloader_datablocks : public ::google::protobuf::Message {
       ::google::protobuf::io::CodedInputStream* input);
   void SerializeWithCachedSizes(
       ::google::protobuf::io::CodedOutputStream* output) const;
-  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
+  void DiscardUnknownFields();
   int GetCachedSize() const { return _cached_size_; }
   private:
   void SharedCtor();
   void SharedDtor();
   void SetCachedSize(int size) const;
   public:
-  ::google::protobuf::Metadata GetMetadata() const;
+  ::std::string GetTypeName() const;
 
   // nested types ----------------------------------------------------
 
@@ -248,13 +267,17 @@ class xresloader_datablocks : public ::google::protobuf::Message {
   inline void set_has_header();
   inline void clear_has_header();
 
-  ::google::protobuf::UnknownFieldSet _unknown_fields_;
+  ::std::string _unknown_fields_;
 
   ::google::protobuf::uint32 _has_bits_[1];
   mutable int _cached_size_;
   ::com::owent::xresloader::pb::xresloader_header* header_;
   ::google::protobuf::RepeatedPtrField< ::std::string> data_block_;
+  #ifdef GOOGLE_PROTOBUF_NO_STATIC_INITIALIZER
+  friend void  protobuf_AddDesc_pb_5fheader_2eproto_impl();
+  #else
   friend void  protobuf_AddDesc_pb_5fheader_2eproto();
+  #endif
   friend void protobuf_AssignDesc_pb_5fheader_2eproto();
   friend void protobuf_ShutdownFile_pb_5fheader_2eproto();
 
@@ -540,7 +563,11 @@ inline void xresloader_datablocks::clear_header() {
 }
 inline const ::com::owent::xresloader::pb::xresloader_header& xresloader_datablocks::header() const {
   // @@protoc_insertion_point(field_get:com.owent.xresloader.pb.xresloader_datablocks.header)
+#ifdef GOOGLE_PROTOBUF_NO_STATIC_INITIALIZER
+  return header_ != NULL ? *header_ : *default_instance().header_;
+#else
   return header_ != NULL ? *header_ : *default_instance_->header_;
+#endif
 }
 inline ::com::owent::xresloader::pb::xresloader_header* xresloader_datablocks::mutable_header() {
   set_has_header();
@@ -626,15 +653,6 @@ xresloader_datablocks::mutable_data_block() {
 }  // namespace xresloader
 }  // namespace owent
 }  // namespace com
-
-#ifndef SWIG
-namespace google {
-namespace protobuf {
-
-
-}  // namespace google
-}  // namespace protobuf
-#endif  // SWIG
 
 // @@protoc_insertion_point(global_scope)
 

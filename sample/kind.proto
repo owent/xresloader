@@ -1,3 +1,5 @@
+option optimize_for = LITE_RUNTIME;
+
 import "dependency.proto";
 
 message role_cfg {

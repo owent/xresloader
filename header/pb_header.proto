@@ -1,3 +1,5 @@
+option optimize_for = LITE_RUNTIME;
+
 package com.owent.xresloader.pb;
 
 message xresloader_header {

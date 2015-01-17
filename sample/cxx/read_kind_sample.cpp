@@ -3,44 +3,38 @@
 #include <fstream>
 
 #include "kind.pb.h"
-#include "pb_header.pb.h"
-
-
-using com::owent::xresloader::pb::xresloader_header;
-using com::owent::xresloader::pb::xresloader_datablocks;
+#include "libresloader.h"
 
 int main(int argc, char* argv[]) {
-    std::fstream f;
-    f.open(argv[1], std::ios::in | std::ios::binary);
-    if (!f.is_open()) {
-        std::cerr << "open file" << argv[1] << "] failed" << std::endl;
-        return 0;
-    }
 
-    xresloader_datablocks blocks;
-    if (false == blocks.ParseFromIstream(&f)) {
-        std::cerr << "Parse data blocks failed: " << blocks.InitializationErrorString() << std::endl;
-        return 0;
-    }
-    const xresloader_header& header = blocks.header();
-    std::cout << header.DebugString() << std::endl;
+    // key - value
+    {
+        typedef xresloader::conf_manager_kv<role_cfg, uint32_t> kind_upg_cfg_t;
+        kind_upg_cfg_t upg_mgr;
+        upg_mgr.set_key_handle([](kind_upg_cfg_t::value_type p) {
+            return std::make_tuple<uint32_t>(p->id());
+        });
 
-    int count = blocks.data_block_size();
-    role_cfg* roles = new role_cfg [count];
-    if (header.count() != count) {
-        std::cerr << "Parse data blocks count not match.(expect: " << header.count()<< ", real: "<< count<< ")"<< std::endl;
-    }
+        upg_mgr.load_file("../role_cfg.bin");
 
-    for (int i = 0; i < count; ++i) {
-        if (false == roles[i].ParseFromString(blocks.data_block(i))) {
-            std::cerr << "Parse role_cfg["<< i<< "] failed: "<< roles[i].InitializationErrorString() << std::endl;
-            break;
-        }
-        
-        std::cout << roles[i].DebugString() << std::endl;
+        kind_upg_cfg_t::value_type data1 = upg_mgr.get(10002);
+        printf("role id: %u, unlock level: %u, name %s, dep_test.name: %s\n", data1->id(), data1->unlock_level(), data1->name().c_str(), data1->dep_test().name().c_str());
     }
 
 
-    delete [] roles;
+    // key - list
+    {
+        typedef xresloader::conf_manager_kl<role_cfg, uint32_t> kind_upg_cfg_t;
+        kind_upg_cfg_t upg_mgr;
+        upg_mgr.set_key_handle([](kind_upg_cfg_t::value_type p) {
+            return std::make_tuple<uint32_t>(p->id());
+        });
+
+        upg_mgr.load_file("../role_cfg.bin");
+
+        kind_upg_cfg_t::value_type data1 = upg_mgr.get(10003, 0);
+        printf("role id: %u, unlock level: %u, name %s, dep_test.name: %s\n", data1->id(), data1->unlock_level(), data1->name().c_str(), data1->dep_test().name().c_str());
+    }
+
     return 0;
 }

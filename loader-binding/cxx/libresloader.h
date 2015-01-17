@@ -4,55 +4,235 @@
 #include <iostream>
 #include <fstream>
 #include <tuple>
+#include <vector>
 #include <memory>
+#include <functional>
 #include <string>
 
 #include "pb_header.pb.h"
 
 namespace xresloader {
 
+    namespace details {
+        template<typename TItem, typename... TKey>
+        class conf_manager_base {
+        public:
+            typedef std::tuple<TKey...> key_type;
+            typedef std::shared_ptr<TItem> value_type;
+            typedef com::owent::xresloader::pb::xresloader_datablocks proto_type;
+
+            typedef std::function<key_type(value_type)> func_type;
+
+        public:
+            inline const proto_type& get_root() const { return root_; }
+
+            void set_key_handle(func_type fn) { func_ = fn; };
+
+            bool load(const void* buff, size_t len) {
+                bool res = root_.ParseFromArray(buff, static_cast<int>(len));
+                if (false == res) {
+                    std::cerr << "parse config data block failed." << std::endl <<
+                        root_.InitializationErrorString() << std::endl;
+                    return res;
+                }
+
+                return build();
+            }
+
+            bool load_file(const std::string& file_path) {
+                std::fstream fin;
+                fin.open(file_path.c_str(), std::ios::in | std::ios::binary);
+                if (false == fin.is_open()) {
+                    std::cerr << "open file " << file_path << "failed " << std::endl;
+                    return false;
+                }
+
+                fin.seekg(0, std::ios::end);
+                size_t len = static_cast<size_t>(fin.tellg());
+
+                fin.seekg(0, std::ios::beg);
+
+                char* buffer = new char[len];
+                fin.read(buffer, len);
+
+                bool ret = load(buffer, len);
+
+                delete[] buffer;
+
+                return ret;
+            }
+
+            const std::string& get_data_version() const {
+                return data_version_;
+            }
+
+            const std::string& get_xresloader_version() const {
+                return xresloader_version_;
+            }
+        protected:
+            virtual ~conf_manager_base() {}
+
+            virtual bool filter(const key_type& key, value_type val) = 0;
+
+        private:
+            bool build() {
+                // TODO ¼ì²éÐ£ÑéÂë
+                xresloader_version_ = root_.mutable_header()->xres_ver();
+                data_version_ = root_.mutable_header()->data_ver();
+
+
+                int len = root_.data_block_size();
+                for (int i = 0; i < len; ++i) {
+                    const std::string data_block = root_.data_block(i);
+                    value_type p = value_type(new TItem());
+                    if (false == p->ParseFromArray(data_block.data(), static_cast<int>(data_block.size()))) {
+                        std::cerr << "parse config data block failed." << std::endl <<
+                            p->InitializationErrorString() << std::endl;
+
+                        continue;
+                    }
+
+                    key_type key;
+                    if (func_) {
+                        key = func_(p);
+                    }
+
+                    filter(key, p);
+                }
+
+
+                root_.Clear();
+                return true;
+            }
+
+        private:
+            proto_type root_;
+            func_type func_;
+            std::string xresloader_version_;
+            std::string data_version_;
+        };
+
+    }
+
     template<typename TItem, typename... TKey>
-    class conf_manager_kv {
+    class conf_manager_kv : public details::conf_manager_base<TItem, TKey...> {
     public:
-        typedef std::tuple<TKey...> key_type;
-        typedef std::shared_ptr<TItem> value_type;
-        typedef com::owent::xresloader::pb::xresloader_datablocks proto_type;
+        typedef details::conf_manager_base<TItem, TKey...> base_type;
+        typedef typename base_type::key_type key_type;
+        typedef typename base_type::value_type value_type;
+        typedef typename base_type::proto_type proto_type;
+
+        typedef typename base_type::func_type func_type;
+
+    protected:
+        virtual bool filter(const key_type& key, value_type val) {
+            if (data_.end() != data_.find(key)) {
+                std::cerr << "[WARN] key appear more than once will be covered" << std::endl;
+            }
+
+            data_[key] = val;
+            return true;
+        }
 
     public:
-        inline const proto_type& get_root() const { return root_; }
 
         void clear() {
             data_.clear();
         }
 
-        bool load(const void* buff, size_t len) {
-            root_.clear_data_block();
-            root_.clear_header();
-
-            return root_;
+        size_t size() const {
+            return data_.size();
         }
 
-        bool load_file(const std::string& file_path) {
-            std::fstream fin;
-            fin.open(file_path.c_str(), std::ios::in | std::ios::binary);
-            if (false == fin.is_open()) {
-                return false;
+        value_type get(key_type k) const {
+            auto iter = data_.find(k);
+            if (data_.end() == iter) {
+                return value_type();
             }
 
-            root_.clear_data_block();
-            root_.clear_header();
-            if (false == root_.ParseFromIstream(fin)) {
-                return false;
-            }
+            return iter->second;
+        }
 
-            return build();
+        value_type get(TKey... keys) const {
+            return get(std::forward_as_tuple(keys...));
+        }
+
+        void foreach(std::function<value_type> fn) const {
+            for (auto iter = data_.begin(); iter != data_.end(); ++ iter) {
+                fn(iter->second);
+            }
         }
 
     private:
-        bool build();
-
-    private:
-        proto_type root_;
         std::map<key_type, value_type> data_;
+    };
+
+    template<typename TItem, typename... TKey>
+    class conf_manager_kl : public details::conf_manager_base<TItem, TKey...> {
+    public:
+        typedef details::conf_manager_base<TItem, TKey...> base_type;
+        typedef typename base_type::key_type key_type;
+        typedef typename base_type::value_type value_type;
+        typedef typename std::vector<value_type> list_type;
+        typedef typename base_type::proto_type proto_type;
+
+        typedef typename base_type::func_type func_type;
+
+    protected:
+        virtual bool filter(const key_type& key, value_type val) {
+            data_[key].push_back(val);
+            return true;
+        }
+
+    public:
+
+        void clear() {
+            data_.clear();
+        }
+
+        size_t size() const {
+            return data_.size();
+        }
+
+        const list_type* get_list(key_type k) const {
+            auto iter = data_.find(k);
+            if (data_.end() == iter) {
+                return nullptr;
+            }
+
+            return &iter->second;
+        }
+
+        const list_type* get_list(TKey... keys) const {
+            return get(std::forward_as_tuple(keys...));
+        }
+
+        value_type get(key_type k, size_t index) const {
+            const list_type* ls = get_list(k);
+            if (nullptr == ls) {
+                return value_type();
+            }
+
+            if (index >= ls->size()) {
+                return value_type();
+            }
+
+            return (*ls)[index];
+        }
+
+        value_type get(TKey... keys, size_t index) const {
+            return get(std::forward_as_tuple(keys...), index);
+        }
+
+        void foreach(std::function<value_type> fn) const {
+            for (auto iter = data_.begin(); iter != data_.end(); ++iter) {
+                for (auto item = iter->second.begin(); item != iter->second.end(); ++item) {
+                    fn(*item);
+                }
+            }
+        }
+
+    private:
+        std::map<key_type, list_type> data_;
     };
 }

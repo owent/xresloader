@@ -68,7 +68,7 @@ public class DataDstPb extends DataDstImpl {
     @Override
     public final DataDstWriterNode compile() {
         DataDstWriterNode ret = new DataDstWriterNode();
-        if (test(ret, currentMsgDesc, new LinkedList<String>()))
+        if (test(ret, currentMsgDesc, new LinkedList<String>(), false))
             return ret;
 
         return null;
@@ -162,7 +162,7 @@ public class DataDstPb extends DataDstImpl {
      * @param name_list 当前命名列表
      * @return 查找到对应的数据源映射关系并非空则返回true，否则返回false
      */
-    private boolean test(DataDstWriterNode node, Descriptors.Descriptor desc, LinkedList<String> name_list) {
+    private boolean test(DataDstWriterNode node, Descriptors.Descriptor desc, LinkedList<String> name_list, boolean is_list) {
         String prefix = String.join(".", name_list);
         boolean ret = true;
         boolean has_data = false;
@@ -204,7 +204,10 @@ public class DataDstPb extends DataDstImpl {
                             has_data = true;
 
                         } else if (fd.isRequired()) {
-                            System.err.println("[ERROR] required field \"" + real_name + "\" not found");
+                            // 非测试list长度的模式下才输出错误
+                            if (false == is_list) {
+                                System.err.println("[ERROR] required field \"" + real_name + "\" not found");
+                            }
                             ret = false;
                         }
                     }
@@ -221,7 +224,7 @@ public class DataDstPb extends DataDstImpl {
                         for (; ; ++count) {
                             name_list.removeLast();
                             name_list.addLast(DataDstWriterNode.makeNodeName(fd.getName(), count));
-                            if (!test(c, fd.getMessageType(), name_list))
+                            if (!test(c, fd.getMessageType(), name_list, true))
                                 break;
                         }
                         name_list.removeLast();
@@ -232,11 +235,14 @@ public class DataDstPb extends DataDstImpl {
                     } else {
                         DataDstWriterNode c = new DataDstWriterNode();
                         name_list.addLast(DataDstWriterNode.makeNodeName(fd.getName()));
-                        if (test(c, fd.getMessageType(), name_list)) {
+                        if (test(c, fd.getMessageType(), name_list, is_list)) {
                             node.addChild(fd.getName(), c);
                             has_data = true;
                         } else if (fd.isRequired()) {
-                            System.err.println("[ERROR] required field \"" + fd.getName() + "\" not found");
+                            // 非测试list长度的模式下才输出错误
+                            if (false == is_list) {
+                                System.err.println("[ERROR] required field \"" + fd.getName() + "\" not found");
+                            }
                             ret = false;
                         }
                         name_list.removeLast();
@@ -324,8 +330,22 @@ public class DataDstPb extends DataDstImpl {
                         DataSrcImpl.getOurInstance().getValue(prefix, "").getBytes(Charset.forName(encoding))
                 );
 
-            case ENUM:
-                return fd.getEnumType().findValueByName(DataSrcImpl.getOurInstance().getValue(prefix, "")).getNumber();
+            case ENUM: {
+                Descriptors.EnumValueDescriptor enum_val = fd.getEnumType().findValueByNumber(DataSrcImpl.getOurInstance().getValue(prefix, new Integer(0)));
+                if (null != enum_val) {
+                    return enum_val;
+                }
+
+                enum_val = fd.getEnumType().findValueByName(DataSrcImpl.getOurInstance().getValue(prefix, ""));
+
+                if (null != enum_val) {
+                    return enum_val;
+                }
+
+                System.err.println("[ERROR] serialize failed. " + prefix + " data error.");
+
+                return null;
+            }
 
             case MESSAGE:
                 DynamicMessage.Builder node = DynamicMessage.newBuilder(fd.getMessageType());

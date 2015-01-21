@@ -50,6 +50,10 @@ public class DataDstPb extends DataDstImpl {
                 }
             }
 
+            if (null == selected_fdp) {
+                System.err.println(String.format("[ERROR] proto message name \"%s\" not found.", SchemeConf.getInstance().getProtoName()));
+                return false;
+            }
             Descriptors.FileDescriptor fd = build_fd(selected_fdp.getName());
             currentMsgDesc = fd.findMessageTypeByName(SchemeConf.getInstance().getProtoName());
 

@@ -34,6 +34,7 @@ public class main {
             System.exit(ret);
 
         // 读入数据表 & 协议编译
+        int success_count = 0;
         for (String sn : ProgramOptions.getInstance().dataSourceMetas) {
             // 1. 描述信息
             if (false == SchemeConf.getInstance().getScheme().load_scheme(sn)) {
@@ -107,8 +108,17 @@ public class main {
                 continue;
             }
 
-            System.out.println("[INFO] convert scheme \"" + sn + "\" to \"" + SchemeConf.getInstance().getOutputFile() + "\" success.(charset: " + SchemeConf.getInstance().getKey().getEncoding() + ")");
+            System.out.println(String.format(
+                "[INFO] convert scheme \"%s\" to \"%s\" success.(charset: %s)",
+                sn,
+                SchemeConf.getInstance().getOutputFile(),
+                SchemeConf.getInstance().getKey().getEncoding()
+            ));
+            ++ success_count;
         }
+
+        // 退出码为失败的任务个数，用以外部捕获转换失败
+        System.exit(success_count - ProgramOptions.getInstance().dataSourceMetas.size());
     }
 
 }

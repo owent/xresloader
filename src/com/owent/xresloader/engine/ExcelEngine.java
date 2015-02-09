@@ -354,7 +354,8 @@ public class ExcelEngine {
             case Cell.CELL_TYPE_NUMERIC:
                 return c.getNumericCellValue() != 0;
             case Cell.CELL_TYPE_STRING:
-                return !c.getStringCellValue().trim().isEmpty() && tryMacro(c.getStringCellValue().trim()) != "0";
+                String item = tryMacro(c.getStringCellValue().trim()).toLowerCase();
+                return !item.isEmpty() && !item.equals("0") && !item.equals("0.0") && !item.equals("false") && !item.equals("no");
             default:
                 return false;
         }

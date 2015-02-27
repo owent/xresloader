@@ -74,17 +74,7 @@ function pbc_config_manager:set_list(l)
     self.__list_path = l
 end
 
-function pbc_config_manager:load_buffer(path, buffers, kv_fn)
-    local msg, error_text = pbc.decode("com.owent.xresloader.pb.xresloader_datablocks", buffers)
-    if false == msg then
-        log_error('decode buffer failed, path=%s: %s', tostring(path), error_text)
-        return false
-    end
-
-    return self:load_datablocks(path, msg, kv_fn)
-end
-
-function pbc_config_manager:load_datablocks(path, data_blocks, kv_fn)
+function pbc_config_manager:load_datablocks(path, data_blocks, data_collector_fn, kv_fn)
     pbc_config_manager.__data[path] = pbc_config_manager.__data[path] or conf_set.new({__data = {}})
     local cfg = pbc_config_manager.__data[path]
 
@@ -109,15 +99,50 @@ function pbc_config_manager:load_datablocks(path, data_blocks, kv_fn)
         end
 
         local rk = { kv_fn(ck, rv) }
-        if cfg:get_by_table(rk) then
-            log_warn('config [%s] already has key %s, old record will be covered', path, table.concat(rk, ', '))
-        end
-
-        table.insert(rk, rv)
-        cfg:set_by_table(rk)
+        data_collector_fn(cfg, rk, rv)
     end
 
     return true
+end
+
+function pbc_config_manager:load_buffer_kv(path, buffers, kv_fn)
+    local msg, error_text = pbc.decode("com.owent.xresloader.pb.xresloader_datablocks", buffers)
+    if false == msg then
+        log_error('decode buffer failed, path=%s: %s', tostring(path), error_text)
+        return false
+    end
+
+    return self:load_datablocks(path, msg,
+    function(cfg, rk, rv)
+            if cfg:get_by_table(rk) then
+                log_warn('config [%s] already has key %s, old record will be covered', path, table.concat(rk, ', '))
+            end
+
+            table.insert(rk, rv)
+            cfg:set_by_table(rk)
+        end, kv_fn
+    )
+end
+
+function pbc_config_manager:load_buffer_kl(path, buffers, kv_fn)
+    local msg, error_text = pbc.decode("com.owent.xresloader.pb.xresloader_datablocks", buffers)
+    if false == msg then
+        log_error('decode buffer failed, path=%s: %s', tostring(path), error_text)
+        return false
+    end
+
+    return self:load_datablocks(path, msg,
+        function(cfg, rk, rv)
+            local ls = cfg:get_by_table(rk)
+            if ls then
+                table.insert(ls, rv)
+            else
+                ls = { rv }
+                table.insert(rk, ls)
+                cfg:set_by_table(rk)
+            end
+        end, kv_fn
+    )
 end
 
 function pbc_config_manager:set_readonly()

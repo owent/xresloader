@@ -1,10 +1,8 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-  
 
-import sys
-import os, platform
-import shutil, re, string
-import xml.dom.minidom as xml_dom
+import os
+import string
 
 work_dir = os.getcwd();
 script_dir = os.path.dirname(os.path.realpath(__file__))

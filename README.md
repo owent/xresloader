@@ -10,7 +10,7 @@ xresloader
 
 |          参数选项           |         描述        |                   说明                     |
 |-----------------------------|---------------------|--------------------------------------------|
-|-t --output-type             | 输出类型            | bin（默认值）,lua,json(暂未实现),xml(暂未实现)                 |
+|-t --output-type             | 输出类型            | bin（默认值）,lua,msgpack,json(暂未实现),xml(暂未实现)                 |
 |-p --proto                   | 协议描述类型        | protobuf(默认值),capnproto(暂未实现),flatbuffer(暂未实现)      |
 |-f --proto-file              | 协议描述文件        |                                            |
 |-o --output-dir              | 输出目录            | 默认为当前目录                             |
@@ -18,7 +18,9 @@ xresloader
 |-s --src-file                | 数据源描述文件      |                                            |
 |-m --src-meta                | 数据源描述表        | 可多个                                     |
 |-v --version                 | 打印版本号          |                                            |
-|-n --rename                  | 重命名输出文件名    | 正则表达式 （如：/(?i)\\.bin$/\\.lua/）            |
+|-n --rename                  | 重命名输出文件名    | 正则表达式 （如：/(?i)\\.bin$/\\.lua/）    |
+|--enable-excel-formular      | 开启Excel公式支持   | 默认开启，使用公式会大幅减慢转表速度       |
+|--disable-excel-formular     | 关闭Excel公式支持   | 关闭公式会大幅加快转表速度                 |
                 
                 
 协议类型

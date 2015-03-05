@@ -105,10 +105,10 @@ public final class SchemeDataSourceExcel implements SchemeDataSourceImpl {
             } else if (key.equalsIgnoreCase("KeyRow")) {
                 SchemeConf.getInstance().getKey().setRow(cell2int(row, data_col[0]));
             } else if (key.equalsIgnoreCase("KeyCase")) {
-                String letter_case = cell2str(row, data_col[0]);
-                if (letter_case.equals("大写")) {
+                String letter_case = cell2str(row, data_col[0]).toLowerCase();
+                if (letter_case.equals("大写") || letter_case.equals("upper")) {
                     SchemeConf.getInstance().getKey().setLetterCase(SchemeKeyConf.KeyCase.UPPER);
-                } else if (letter_case.equals("小写")) {
+                } else if (letter_case.equals("小写") || letter_case.equals("lower")) {
                     SchemeConf.getInstance().getKey().setLetterCase(SchemeKeyConf.KeyCase.LOWER);
                 } else {
                     SchemeConf.getInstance().getKey().setLetterCase(SchemeKeyConf.KeyCase.NONE);

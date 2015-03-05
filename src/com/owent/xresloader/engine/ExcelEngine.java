@@ -148,8 +148,12 @@ public class ExcelEngine {
             return "";
 
         CellValue cv = null;
-        if (null != evalor && Cell.CELL_TYPE_FORMULA == c.getCellType())
-            cv = evalor.evaluate(c);
+        if (Cell.CELL_TYPE_FORMULA == c.getCellType()) {
+            if (null != evalor)
+                cv = evalor.evaluate(c);
+            else
+                return c.toString();
+        }
 
         int type = (null == cv)? c.getCellType(): cv.getCellType();
         switch (type) {
@@ -238,8 +242,12 @@ public class ExcelEngine {
             return 0L;
 
         CellValue cv = null;
-        if (null != evalor && Cell.CELL_TYPE_FORMULA == c.getCellType())
-            cv = evalor.evaluate(c);
+        if (Cell.CELL_TYPE_FORMULA == c.getCellType()) {
+            if (null != evalor)
+                cv = evalor.evaluate(c);
+            else
+                return 0L;
+        }
 
         int type = (null == cv)? c.getCellType(): cv.getCellType();
         switch (type) {
@@ -288,8 +296,12 @@ public class ExcelEngine {
             return 0.0;
 
         CellValue cv = null;
-        if (null != evalor && Cell.CELL_TYPE_FORMULA == c.getCellType())
-            cv = evalor.evaluate(c);
+        if (Cell.CELL_TYPE_FORMULA == c.getCellType()) {
+            if (null != evalor)
+                cv = evalor.evaluate(c);
+            else
+                return 0.0;
+        }
 
         int type = (null == cv)? c.getCellType(): cv.getCellType();
         switch (type) {
@@ -338,8 +350,12 @@ public class ExcelEngine {
             return false;
 
         CellValue cv = null;
-        if (null != evalor && Cell.CELL_TYPE_FORMULA == c.getCellType())
-            cv = evalor.evaluate(c);
+        if (Cell.CELL_TYPE_FORMULA == c.getCellType()) {
+            if (null != evalor)
+                cv = evalor.evaluate(c);
+            else
+                return true;
+        }
 
         int type = (null == cv)? c.getCellType(): cv.getCellType();
         switch (type) {

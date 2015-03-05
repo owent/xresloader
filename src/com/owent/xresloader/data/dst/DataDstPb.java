@@ -6,8 +6,8 @@ import com.google.protobuf.Descriptors;
 import com.google.protobuf.DynamicMessage;
 import com.owent.xresloader.ProgramOptions;
 import com.owent.xresloader.data.src.DataSrcImpl;
-import com.owent.xresloader.scheme.SchemeConf;
 import com.owent.xresloader.pb.PbHeader;
+import com.owent.xresloader.scheme.SchemeConf;
 import org.apache.commons.codec.binary.Hex;
 
 import java.io.*;
@@ -87,6 +87,15 @@ public class DataDstPb extends DataDstImpl {
         header.setDataVer(ProgramOptions.getInstance().getVersion());
         header.setHashCode("");
 
+        // 校验码
+        MessageDigest md5 = null ;
+        try {
+            MessageDigest.getInstance("MD5");
+        } catch (NoSuchAlgorithmException e) {
+            System.err.println("[ERROR] failed to find md5 algorithm.");
+            header.setHashCode("");
+        }
+
         // 数据
         int count = 0;
         while (DataSrcImpl.getOurInstance().next()) {
@@ -95,22 +104,19 @@ public class DataDstPb extends DataDstImpl {
                 ++count;
                 blocks.addDataBlock(data);
             }
+
+            if (null != md5) {
+                md5.update(data.toByteArray());
+            }
         }
         header.setCount(count);
-
-        try {
-            MessageDigest md5 = MessageDigest.getInstance("MD5");
-            md5.update(blocks.build().toByteArray());
+        if (null != md5) {
             header.setHashCode("md5:" + Hex.encodeHexString(md5.digest()));
-        } catch (NoSuchAlgorithmException e) {
-            System.err.println("[ERROR] failed to find md5 algorithm.");
-            header.setHashCode("");
         }
 
         // 写出
         ByteArrayOutputStream writer = new ByteArrayOutputStream();
         try {
-
             PbHeader.xresloader_header builtHeader = header.build();
             blocks.build().writeTo(writer);
         } catch (IOException e) {

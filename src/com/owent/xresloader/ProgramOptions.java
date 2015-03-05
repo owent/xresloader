@@ -6,7 +6,6 @@ import gnu.getopt.LongOpt;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.regex.Pattern;
-import java.util.regex.Matcher;
 import java.util.regex.PatternSyntaxException;
 
 public class ProgramOptions {
@@ -31,6 +30,7 @@ public class ProgramOptions {
     public FileType dataSourceType;
     public List<String> dataSourceMetas = null;
     public RenameRule renameRule = null;
+    public boolean enableFormular = true;
 
     private ProgramOptions() {
         dataSourceMetas = new LinkedList<String>();
@@ -63,7 +63,9 @@ public class ProgramOptions {
                 new LongOpt("src-file", LongOpt.REQUIRED_ARGUMENT, sb, 's'),
                 new LongOpt("src-meta", LongOpt.REQUIRED_ARGUMENT, sb, 'm'),
                 new LongOpt("version", LongOpt.NO_ARGUMENT, sb, 'v'),
-                new LongOpt("rename", LongOpt.REQUIRED_ARGUMENT, sb, 'n')
+                new LongOpt("rename", LongOpt.REQUIRED_ARGUMENT, sb, 'n'),
+                new LongOpt("disable-excel-formular", LongOpt.NO_ARGUMENT, null, 0),
+                new LongOpt("enable-excel-formular", LongOpt.NO_ARGUMENT, null, 0)
         };
 
         Getopt g = new Getopt("", args, "ht:p:f:o:d:s:m:vn:", long_opts);
@@ -78,17 +80,20 @@ public class ProgramOptions {
             }
             switch (cc) {
                 case 'h': {
-                    System.out.println("Usage: java -jar " + script + " [options]");
-                    System.out.println("-h, --help              help");
-                    System.out.println("-t, --output-type       output type(bin,lua)");
-                    System.out.println("-p, --proto             protocol(protobuf)");
-                    System.out.println("-f, --proto-file        protocol description file");
-                    System.out.println("-o, --output-dir        output directory");
-                    System.out.println("-d, --data-src-dir      data source directory");
-                    System.out.println("-s, --src-file          data source file");
-                    System.out.println("-m, --src-meta          data description meta");
-                    System.out.println("-v, --version           print version");
-                    System.out.println("-n, --rename            rename output file name(regex), sample: /(?i)\\.bin$/\\.lua/");
+                    System.out.println("Usage: java -jar " + script + " [options...]");
+                    System.out.println("-h, --help                  help");
+                    System.out.println("-t, --output-type           output type(bin, lua, msgpack)");
+                    System.out.println("-p, --proto                 protocol(protobuf)");
+                    System.out.println("-f, --proto-file            protocol description file");
+                    System.out.println("-o, --output-dir            output directory");
+                    System.out.println("-d, --data-src-dir          data source directory");
+                    System.out.println("-s, --src-file              data source file");
+                    System.out.println("-m, --src-meta              data description meta");
+                    System.out.println("-v, --version               print version");
+                    System.out.println("-n, --rename                rename output file name(regex), sample: /(?i)\\.bin$/\\.lua/");
+                    System.out.println("Control options:");
+                    System.out.println("--disable-excel-formular    disable formular in excel. will be faster when convert data.");
+                    System.out.println("--enable-excel-formular     disable formular in excel. will be slower when convert data.");
                     System.exit(0);
                     break;
                 }
@@ -98,6 +103,8 @@ public class ProgramOptions {
                         outType = FileType.BIN;
                     } else if (val.equalsIgnoreCase("lua")) {
                         outType = FileType.LUA;
+                    } else if (val.equalsIgnoreCase("msgpack")){
+                        outType = FileType.MSGPACK;
                         //} else if (val.equalsIgnoreCase("json")){
                         //} else if (val.equalsIgnoreCase("xml")){
                     } else {
@@ -217,7 +224,20 @@ public class ProgramOptions {
                 }
 
                 default: {
-                    System.out.println("[WARN] Unknown option " + g.getOptarg());
+                    int lindex = g.getLongind();
+                    if (lindex >= 0 && lindex < long_opts.length) {
+                        String long_opt_name = long_opts[lindex].getName();
+                        if (long_opt_name.equals("disable-excel-formular")) {
+                            enableFormular = false;
+                        } else if (long_opt_name.equals("enable-excel-formular")) {
+                            enableFormular = true;
+                        } else {
+                            System.out.println(String.format("[WARN] Unknown option %s", long_opt_name));
+                        }
+                    } else {
+                        System.out.println(String.format("[WARN] Unknown option %d", g.getOptarg()));
+                    }
+
                     break;
                 }
             }
@@ -227,11 +247,11 @@ public class ProgramOptions {
     }
 
     public String getVersion() {
-        return "0.1.1.1";
+        return "0.1.2.0";
     }
 
 
-    public enum FileType {BIN, LUA, JSON, XML, INI, EXCEL}
+    public enum FileType {BIN, LUA, MSGPACK, JSON, XML, INI, EXCEL}
 
     public enum Protocol {PROTOBUF, CAPNPROTO, FLATBUFFER}
 }

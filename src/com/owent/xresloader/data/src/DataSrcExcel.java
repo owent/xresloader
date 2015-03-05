@@ -1,5 +1,6 @@
 package com.owent.xresloader.data.src;
 
+import com.owent.xresloader.ProgramOptions;
 import com.owent.xresloader.engine.ExcelEngine;
 import com.owent.xresloader.engine.IdentifyEngine;
 import com.owent.xresloader.scheme.SchemeConf;
@@ -126,7 +127,11 @@ public class DataSrcExcel extends DataSrcImpl {
                 continue;
             }
 
-            FormulaEvaluator formula = tb.getWorkbook().getCreationHelper().createFormulaEvaluator();
+            // 公式支持
+            FormulaEvaluator formula = null;
+            if (ProgramOptions.getInstance().enableFormular) {
+                formula = tb.getWorkbook().getCreationHelper().createFormulaEvaluator();
+            }
 
             // 根据第一个表建立名称关系表
             if (nameMap.isEmpty()) {

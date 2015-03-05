@@ -3,10 +3,7 @@
  */
 package com.owent.xresloader;
 
-import com.owent.xresloader.data.dst.DataDstImpl;
-import com.owent.xresloader.data.dst.DataDstLua;
-import com.owent.xresloader.data.dst.DataDstPb;
-import com.owent.xresloader.data.dst.DataDstWriterNode;
+import com.owent.xresloader.data.dst.*;
 import com.owent.xresloader.data.src.DataSrcExcel;
 import com.owent.xresloader.data.src.DataSrcImpl;
 import com.owent.xresloader.engine.IdentifyEngine;
@@ -14,7 +11,6 @@ import com.owent.xresloader.scheme.SchemeConf;
 
 import java.io.FileOutputStream;
 import java.io.OutputStream;
-import java.nio.charset.Charset;
 
 /**
  * @author owentou
@@ -87,6 +83,10 @@ public class main {
                     break;
                 case LUA:
                     outDesc = new DataDstLua();
+                    outDesc = outDesc.init() ? outDesc : null;
+                    break;
+                case MSGPACK:
+                    outDesc = new DataDstMsgPack();
                     outDesc = outDesc.init() ? outDesc : null;
                     break;
                 default:

@@ -12,5 +12,7 @@
     <orderEntry type="library" exported="" name="commons-codec" level="project" />
     <orderEntry type="library" exported="" name="java-getopt" level="project" />
     <orderEntry type="library" exported="" name="protobuf-java-2.6.1" level="project" />
+    <orderEntry type="library" exported="" name="msgpack-0.6.11" level="project" />
+    <orderEntry type="library" exported="" name="javassist-3.19.0-GA" level="project" />
   </component>
 </module>

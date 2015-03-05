@@ -88,7 +88,7 @@ function pbc_config_manager:load_datablocks(path, data_blocks, data_collector_fn
         -- log_debug('config content %s', string.gsub(cv, '.', function(x) return string.format('%02X', string.byte(x)) end) )
         local rv, error_text = pbc.decode(path, cv)
 
-        if false == msg then
+        if false == rv then
             log_error('decode config item failed, path=%s: %s', tostring(path), error_text)
             return false
         end

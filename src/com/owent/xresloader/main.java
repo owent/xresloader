@@ -100,7 +100,7 @@ public class main {
                 String filePath = SchemeConf.getInstance().getOutputFile();
                 if(!IdentifyEngine.isAbsPath(filePath))
                     filePath = ProgramOptions.getInstance().outputDirectory + '/' + filePath;
-                OutputStream fos = new FileOutputStream(SchemeConf.getInstance().getOutputFile(), false);
+                OutputStream fos = new FileOutputStream(filePath, false);
                 byte[] data = outDesc.build(dataDesc);
                 fos.write(data);
             } catch (java.io.IOException e) {

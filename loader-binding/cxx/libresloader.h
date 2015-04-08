@@ -1,13 +1,16 @@
-#pragma once
+ï»¿#pragma once
 
 #include <cstddef>
 #include <iostream>
 #include <fstream>
 #include <tuple>
 #include <vector>
+#include <list>
 #include <memory>
 #include <functional>
+#include <algorithm>
 #include <string>
+#include <map>
 
 #include "pb_header.pb.h"
 
@@ -22,6 +25,7 @@ namespace xresloader {
             typedef com::owent::xresloader::pb::xresloader_datablocks proto_type;
 
             typedef std::function<key_type(value_type)> func_type;
+            typedef std::function<bool(const value_type&)> filter_func_type;
 
         public:
             inline const proto_type& get_root() const { return root_; }
@@ -69,14 +73,23 @@ namespace xresloader {
             const std::string& get_xresloader_version() const {
                 return xresloader_version_;
             }
+
+            void add_filter(filter_func_type fn) {
+                if (fn) {
+                    filter_list_.push_back(fn);
+                }
+            }
+
         protected:
             virtual ~conf_manager_base() {}
 
             virtual bool filter(const key_type& key, value_type val) = 0;
 
+            virtual void on_loaded() {};
+
         private:
             bool build() {
-                // TODO ¼ì²éÐ£ÑéÂë
+                // TODO æ£€æŸ¥æ ¡éªŒç 
                 xresloader_version_ = root_.mutable_header()->xres_ver();
                 data_version_ = root_.mutable_header()->data_ver();
 
@@ -92,6 +105,19 @@ namespace xresloader {
                         continue;
                     }
 
+                    bool is_pass = false;
+                    for (filter_func_type& filter_fn : filter_list_) {
+                        if (false == filter_fn(p)) {
+                            is_pass = true;
+                            break;
+                        }
+                    }
+
+                    // è¿‡æ»¤å™¨
+                    if (is_pass) {
+                        continue;
+                    }
+
                     key_type key;
                     if (func_) {
                         key = func_(p);
@@ -100,7 +126,7 @@ namespace xresloader {
                     filter(key, p);
                 }
 
-
+                on_loaded();
                 root_.Clear();
                 return true;
             }
@@ -110,6 +136,7 @@ namespace xresloader {
             func_type func_;
             std::string xresloader_version_;
             std::string data_version_;
+            std::list<filter_func_type> filter_list_;
         };
 
     }
@@ -123,6 +150,7 @@ namespace xresloader {
         typedef typename base_type::proto_type proto_type;
 
         typedef typename base_type::func_type func_type;
+        typedef typename base_type::filter_func_type filter_func_type;
 
     protected:
         virtual bool filter(const key_type& key, value_type val) {
@@ -157,7 +185,7 @@ namespace xresloader {
             return get(std::forward_as_tuple(keys...));
         }
 
-        void foreach(std::function<value_type> fn) const {
+        void foreach(std::function<void (const value_type&)> fn) const {
             for (auto iter = data_.begin(); iter != data_.end(); ++ iter) {
                 fn(iter->second);
             }
@@ -177,12 +205,23 @@ namespace xresloader {
         typedef typename base_type::proto_type proto_type;
 
         typedef typename base_type::func_type func_type;
+        typedef typename base_type::filter_func_type filter_func_type;
+        typedef std::function<bool(const value_type&, const value_type&)> sort_func_type;
 
     protected:
         virtual bool filter(const key_type& key, value_type val) {
             data_[key].push_back(val);
             return true;
         }
+
+        virtual void on_loaded() {
+            if (sort_func_) {
+                typename std::map<key_type, list_type>::iterator iter = data_.begin();
+                for (; data_.end() != iter; ++iter) {
+                    std::sort(iter->second.begin(), iter->second.end(), sort_func_);
+                }
+            }
+        };
 
     public:
 
@@ -204,7 +243,7 @@ namespace xresloader {
         }
 
         const list_type* get_list(TKey... keys) const {
-            return get(std::forward_as_tuple(keys...));
+            return get_list(std::forward_as_tuple(keys...));
         }
 
         value_type get(key_type k, size_t index) const {
@@ -224,7 +263,7 @@ namespace xresloader {
             return get(std::forward_as_tuple(keys...), index);
         }
 
-        void foreach(std::function<value_type> fn) const {
+        void foreach(std::function<void (const value_type&)> fn) const {
             for (auto iter = data_.begin(); iter != data_.end(); ++iter) {
                 for (auto item = iter->second.begin(); item != iter->second.end(); ++item) {
                     fn(*item);
@@ -232,7 +271,11 @@ namespace xresloader {
             }
         }
 
+        void set_sort_rule(sort_func_type fn) {
+            sort_func_ = fn;
+        }
     private:
         std::map<key_type, list_type> data_;
+        sort_func_type sort_func_;
     };
 }

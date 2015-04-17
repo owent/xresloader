@@ -190,7 +190,7 @@ public class ExcelEngine {
                             rfs.addLast("HH:mm:ss");
 
                         if (rfs.isEmpty())
-                            fs = "yyyy-MM-dd HH-mm-ss";
+                            fs = "yyyy-MM-dd HH:mm:ss";
                         else
                             fs = String.join(" ", rfs);
 
@@ -260,6 +260,9 @@ public class ExcelEngine {
             case Cell.CELL_TYPE_FORMULA:
                 return 0L;
             case Cell.CELL_TYPE_NUMERIC:
+                if(DateUtil.isCellDateFormatted(c)) {
+                    return c.getDateCellValue().getTime() / 1000;
+                }
                 return Math.round(c.getNumericCellValue());
             case Cell.CELL_TYPE_STRING:
                 return Math.round(Double.valueOf(tryMacro(c.getStringCellValue().trim())));
@@ -314,6 +317,9 @@ public class ExcelEngine {
             case Cell.CELL_TYPE_FORMULA:
                 return 0.0;
             case Cell.CELL_TYPE_NUMERIC:
+                if(DateUtil.isCellDateFormatted(c)) {
+                    return (double)c.getDateCellValue().getTime() / 1000;
+                }
                 return c.getNumericCellValue();
             case Cell.CELL_TYPE_STRING:
                 return Double.valueOf(tryMacro(c.getStringCellValue().trim()));

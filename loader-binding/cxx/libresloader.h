@@ -10,13 +10,78 @@
 #include <functional>
 #include <algorithm>
 #include <string>
+#include <type_traits>
 #include <map>
+
+#if defined(__cplusplus) && __cplusplus >= 201103L
+    #include <unordered_map>
+    #include <tuple>
+#endif
 
 #include "pb_header.pb.h"
 
 namespace xresloader {
 
     namespace details {
+#if defined(__cplusplus) && __cplusplus >= 201103L
+
+        // Implementing some of the C++14 features in C++11
+        template <size_t... I> class index_sequence {};
+
+        template <size_t N, size_t... I>
+        struct make_index_sequence
+            : public make_index_sequence<N-1, N-1, I...>
+        {};
+        template <size_t... I>
+        struct make_index_sequence<0, I...>
+            : public index_sequence<I...>
+        {};
+
+
+        // hash dector
+        template<typename Ty, typename... TTP>
+        struct conf_hash_dector;
+
+
+        template<typename... TTP>
+        struct conf_hash_dector<std::tuple<TTP...> > {
+
+            typedef std::tuple<TTP...> tpl_t;
+
+            struct hash_fn {
+
+                template<size_t I>
+                static size_t make_ele_hash(size_t &res, const tpl_t& tpl) {
+                    std::hash<typename std::tuple_element<I, tpl_t>::type> h;
+                    res ^= h(std::get<I>(tpl));
+                    return res;
+                }
+
+                template<size_t... I>
+                static void make_tpl_hash(size_t &res, const tpl_t& tpl, index_sequence<I...>) {
+                    std::make_tuple(make_ele_hash<I>(res, tpl)...);
+                }
+
+                size_t operator()(const tpl_t& tpl) const {
+                    size_t ret = 0;
+                    make_tpl_hash(ret, tpl, make_index_sequence<sizeof...(TTP)>());
+                    return ret;
+                }
+            };
+
+            typedef hash_fn type;
+        };
+
+        template<typename Ty, typename... TTP>
+        struct conf_hash_dector {
+            typedef std::hash<Ty> type;
+        };
+
+#endif
+
+        /**
+         * @brief 配置集合管理器基类
+         */
         template<typename TItem, typename... TKey>
         class conf_manager_base {
         public:
@@ -81,18 +146,24 @@ namespace xresloader {
             }
 
         protected:
+            conf_manager_base(): data_count_(0) {}
             virtual ~conf_manager_base() {}
 
             virtual bool filter(const key_type& key, value_type val) = 0;
 
+            virtual void on_load() {};
             virtual void on_loaded() {};
+
+            inline size_t get_header_count() const { return data_count_; }
 
         private:
             bool build() {
                 // TODO 检查校验码
                 xresloader_version_ = root_.mutable_header()->xres_ver();
                 data_version_ = root_.mutable_header()->data_ver();
+                data_count_ = root_.mutable_header()->count();
 
+                on_load();
 
                 int len = root_.data_block_size();
                 for (int i = 0; i < len; ++i) {
@@ -136,11 +207,43 @@ namespace xresloader {
             func_type func_;
             std::string xresloader_version_;
             std::string data_version_;
+            size_t data_count_;
             std::list<filter_func_type> filter_list_;
         };
 
+
+        template<typename... TKey>
+        class conf_manager_index_key_base {
+        public:
+            typedef  std::function<size_t(const std::tuple<TKey...>&)> index_key_fn_t;
+
+        public:
+            void set_index_key_handle(index_key_fn_t fn) { fn_ = fn; }
+
+            const index_key_fn_t& get_index_key_handle() const { return fn_; }
+            index_key_fn_t& get_index_key_handle() { return fn_; }
+
+        private:
+            index_key_fn_t fn_;
+        };
+
+        template<typename... TKey>
+        class conf_manager_index_key_auto : public conf_manager_index_key_base<TKey...> {
+        public:
+            conf_manager_index_key_auto() {
+                conf_manager_index_key_base<TKey...>::set_index_key_handle(unwrapper);
+            }
+        private:
+            static size_t unwrapper(const std::tuple<TKey...>& tpl) {
+                return static_cast<size_t>(std::get<0>(tpl));
+            }
+        };
     }
 
+    /**
+     * @brief key-value 型配置集合管理器
+     * @note c++11完全支持得模式下会使用hash map来管理数据
+     */
     template<typename TItem, typename... TKey>
     class conf_manager_kv : public details::conf_manager_base<TItem, TKey...> {
     public:
@@ -192,9 +295,18 @@ namespace xresloader {
         }
 
     private:
-        std::map<key_type, value_type> data_;
+#if defined(__cplusplus) && __cplusplus >= 201103L
+        typedef std::unordered_map<key_type, value_type, typename details::conf_hash_dector<key_type>::type > data_map_t;
+#else
+        typedef std::map<key_type, value_type> data_map_t;
+#endif
+        data_map_t data_;
     };
 
+    /**
+     * @brief key-list 型配置集合管理器
+     * @note c++11完全支持得模式下会使用hash map来管理数据
+     */
     template<typename TItem, typename... TKey>
     class conf_manager_kl : public details::conf_manager_base<TItem, TKey...> {
     public:
@@ -216,7 +328,7 @@ namespace xresloader {
 
         virtual void on_loaded() {
             if (sort_func_) {
-                typename std::map<key_type, list_type>::iterator iter = data_.begin();
+                typename data_map_t::iterator iter = data_.begin();
                 for (; data_.end() != iter; ++iter) {
                     std::sort(iter->second.begin(), iter->second.end(), sort_func_);
                 }
@@ -274,8 +386,147 @@ namespace xresloader {
         void set_sort_rule(sort_func_type fn) {
             sort_func_ = fn;
         }
-    private:
-        std::map<key_type, list_type> data_;
+
+    protected:
+#if defined(__cplusplus) && __cplusplus >= 201103L
+        typedef std::unordered_map<key_type, list_type, typename details::conf_hash_dector<key_type>::type> data_map_t;
+#else
+        typedef std::map<key_type, list_type> data_map_t;
+#endif
+        data_map_t data_;
         sort_func_type sort_func_;
+    };
+
+    /**
+     * @brief index-value 型配置集合管理器
+     */
+    template<typename TItem, typename... TKey>
+    class conf_manager_iv :
+        public details::conf_manager_base<TItem, TKey...>,
+        public std::conditional<
+            1 == sizeof...(TKey) && std::is_integral<
+                typename std::tuple_element<0, std::tuple<TKey...> >::type
+            >::value,
+            details::conf_manager_index_key_auto<TKey...>,
+            details::conf_manager_index_key_base<TKey...>
+        >::type {
+    public:
+        typedef details::conf_manager_base<TItem, TKey...> base_type;
+        typedef typename std::conditional<
+            1 == sizeof...(TKey) && std::is_integral<
+                typename std::tuple_element<0, std::tuple<TKey...> >::type
+            >::value,
+            details::conf_manager_index_key_auto<TKey...>,
+            details::conf_manager_index_key_base<TKey...>
+        >::type index_base_type;
+
+        typedef typename base_type::key_type key_type;
+        typedef typename base_type::value_type value_type;
+        typedef typename base_type::proto_type proto_type;
+
+        typedef typename base_type::func_type func_type;
+        typedef typename base_type::filter_func_type filter_func_type;
+
+    protected:
+        virtual bool filter(const key_type& key, value_type val) {
+            size_t index = index_base_type::get_index_key_handle()(key);
+
+            if (data_.size() <= index) {
+                data_.resize(index + 1);
+            }
+            if (data_[index]) {
+                std::cerr << "[WARN] key "<< index<< " appear more than once will be covered" << std::endl;
+            }
+
+            data_[index] = val;
+            return true;
+        }
+
+        virtual void on_load() {
+            reserve(base_type::get_header_count());
+        };
+
+    public:
+
+        void clear() {
+            data_.clear();
+        }
+
+        size_t size() const {
+            return data_.size();
+        }
+
+        void reserve(size_t s) {
+            data_.reserve(s);
+        }
+
+        size_t capacity() const {
+            return data_.capacity();
+        }
+
+        value_type get(key_type k) const {
+            size_t index = index_base_type::get_index_key_handle()(k);
+            if (index >= data_.size()) {
+                return value_type();
+            }
+
+            return data_[index];
+        }
+
+        value_type get(TKey... keys) const {
+            return get(std::forward_as_tuple(keys...));
+        }
+
+        void foreach(std::function<void (const value_type&)> fn) const {
+            for (size_t i = 0; i < data_.size(); ++ i) {
+                fn(data_[i]);
+            }
+        }
+
+    private:
+        typedef std::vector<value_type> data_vec_t;
+        data_vec_t data_;
+    };
+
+    /**
+     * @brief key-index-list 型配置集合管理器
+     * @note c++11完全支持得模式下会使用hash map来管理数据
+     */
+    template<typename TItem, typename... TKey>
+    class conf_manager_kil : public conf_manager_kl<TItem, TKey...> {
+    public:
+        typedef conf_manager_kl<TItem, TKey...> base_type;
+       
+        typedef typename base_type::key_type key_type;
+        typedef typename base_type::value_type value_type;
+        typedef typename base_type::list_type list_type;
+        typedef typename base_type::proto_type proto_type;
+
+        typedef typename base_type::func_type func_type;
+        typedef typename base_type::filter_func_type filter_func_type;
+        typedef typename base_type::sort_func_type sort_func_type;
+        typedef std::function<size_t(const value_type&)> index_key_fn_t;;
+
+    protected:
+        virtual bool filter(const key_type& key, value_type val) {
+            list_type& ls = base_type::data_[key];
+            size_t index = index_fn_(val);
+            if (ls.size() <= index) {
+                ls.resize(index + 1);
+            }
+
+            if (ls[index]) {
+                std::cerr << "[WARN] key with index="<< index<< " appear more than once will be covered" << std::endl;
+            }
+
+            ls[index] = val;
+            return true;
+        }
+
+    public:
+        inline void set_index_handle(index_key_fn_t fn) { index_fn_ = fn; }
+
+    private:
+        index_key_fn_t index_fn_;
     };
 }

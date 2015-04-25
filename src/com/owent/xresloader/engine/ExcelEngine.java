@@ -264,8 +264,13 @@ public class ExcelEngine {
                     return c.getDateCellValue().getTime() / 1000;
                 }
                 return Math.round(c.getNumericCellValue());
-            case Cell.CELL_TYPE_STRING:
-                return Math.round(Double.valueOf(tryMacro(c.getStringCellValue().trim())));
+            case Cell.CELL_TYPE_STRING: {
+                String val = c.getStringCellValue().trim();
+                if (val.isEmpty()) {
+                    return 0L;
+                }
+                return Math.round(Double.valueOf(tryMacro(val)));
+            }
             default:
                 return 0L;
         }
@@ -321,8 +326,13 @@ public class ExcelEngine {
                     return (double)c.getDateCellValue().getTime() / 1000;
                 }
                 return c.getNumericCellValue();
-            case Cell.CELL_TYPE_STRING:
-                return Double.valueOf(tryMacro(c.getStringCellValue().trim()));
+            case Cell.CELL_TYPE_STRING: {
+                String val = c.getStringCellValue().trim();
+                if (val.isEmpty()) {
+                    return 0.0;
+                }
+                return Double.valueOf(tryMacro(val));
+            }
             default:
                 return 0.0;
         }

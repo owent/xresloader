@@ -6,11 +6,13 @@ import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 
+import java.util.ArrayList;
+
 
 /**
  * Created by owentou on 2014/9/30.
  */
-public final class SchemeDataSourceExcel implements SchemeDataSourceImpl {
+public final class SchemeDataSourceExcel extends SchemeDataSourceBase {
 
     private Workbook currentWorkbook = null;
 
@@ -82,50 +84,12 @@ public final class SchemeDataSourceExcel implements SchemeDataSourceImpl {
                 continue;
 
             String key = cell2str(row, key_col);
-            // 基础配置
-            if (key.equalsIgnoreCase("DataSource")) {
-                SchemeConf.getInstance().addDataSource(
-                    cell2str(row, data_col[0]),
-                    cell2str(row, data_col[1]),
-                    cell2str(row, data_col[2])
-                );
-            } else if (key.equalsIgnoreCase("MacroSource")) {
-                SchemeConf.getInstance().addMacroSource(
-                    cell2str(row, data_col[0]),
-                    cell2str(row, data_col[1]),
-                    cell2str(row, data_col[2])
-                );
-            }
+            ArrayList<String> datas = new ArrayList<String>();
+            datas.add(cell2str(row, data_col[0]));
+            datas.add(cell2str(row, data_col[1]));
+            datas.add(cell2str(row, data_col[2]));
 
-            // 字段映射配置
-            else if (key.equalsIgnoreCase("ProtoName")) {
-                SchemeConf.getInstance().setProtoName(cell2str(row, data_col[0]));
-            } else if (key.equalsIgnoreCase("OutputFile")) {
-                SchemeConf.getInstance().setOutputFile(cell2str(row, data_col[0]));
-            } else if (key.equalsIgnoreCase("KeyRow")) {
-                SchemeConf.getInstance().getKey().setRow(cell2int(row, data_col[0]));
-            } else if (key.equalsIgnoreCase("KeyCase")) {
-                String letter_case = cell2str(row, data_col[0]).toLowerCase();
-                if (letter_case.equals("大写") || letter_case.equals("upper")) {
-                    SchemeConf.getInstance().getKey().setLetterCase(SchemeKeyConf.KeyCase.UPPER);
-                } else if (letter_case.equals("小写") || letter_case.equals("lower")) {
-                    SchemeConf.getInstance().getKey().setLetterCase(SchemeKeyConf.KeyCase.LOWER);
-                } else {
-                    SchemeConf.getInstance().getKey().setLetterCase(SchemeKeyConf.KeyCase.NONE);
-                }
-            } else if (key.equalsIgnoreCase("KeyWordSplit")) {
-                SchemeConf.getInstance().getKey().setWordSplit(cell2str(row, data_col[0]));
-            } else if (key.equalsIgnoreCase("KeyPrefix")) {
-                SchemeConf.getInstance().getKey().setPrefix(cell2str(row, data_col[0]));
-            } else if (key.equalsIgnoreCase("KeySuffix")) {
-                SchemeConf.getInstance().getKey().setSuffix(cell2str(row, data_col[0]));
-            } else if (key.equalsIgnoreCase("KeyWordRegex")) {
-                SchemeConf.getInstance().getKey().buildKeyWordRegex(cell2str(row, data_col[0]));
-                SchemeConf.getInstance().getKey().buildKeyWordRegexRemoveRule(cell2str(row, data_col[1]));
-                SchemeConf.getInstance().getKey().buildKeyWordRegexPrefixRule(cell2str(row, data_col[2]));
-            } else if (key.equalsIgnoreCase("Encoding")) {
-                SchemeConf.getInstance().getKey().setEncoding(cell2str(row, data_col[0]));
-            }
+            set_scheme(key, datas);
         }
 
         return true;

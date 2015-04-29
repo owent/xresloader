@@ -215,6 +215,8 @@ public class SchemeConf {
     public int initScheme() {
         if (ProgramOptions.FileType.EXCEL == ProgramOptions.getInstance().dataSourceType) {
             scheme = new SchemeDataSourceExcel();
+        } else if (ProgramOptions.FileType.INI == ProgramOptions.getInstance().dataSourceType) {
+            scheme = new SchemeDataSourceConf();
         } else {
             System.err.println("[ERROR] data source file type error.");
             return -11;

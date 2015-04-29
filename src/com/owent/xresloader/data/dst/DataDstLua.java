@@ -117,7 +117,7 @@ public class DataDstLua extends DataDstImpl {
                 break;
 
             case ENUM:
-                sb.append(DataSrcImpl.getOurInstance().getValue(prefix, ""));
+                sb.append(DataSrcImpl.getOurInstance().getValue(prefix, "nil"));
                 break;
 
             case OBJECT:
@@ -129,6 +129,7 @@ public class DataDstLua extends DataDstImpl {
                 break;
 
             default:
+                sb.append("nil");
                 break;
         }
 

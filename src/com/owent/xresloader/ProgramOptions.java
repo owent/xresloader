@@ -3,6 +3,7 @@ package com.owent.xresloader;
 import gnu.getopt.Getopt;
 import gnu.getopt.LongOpt;
 
+import java.io.FileDescriptor;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.regex.Pattern;
@@ -82,12 +83,12 @@ public class ProgramOptions {
                 case 'h': {
                     System.out.println("Usage: java -jar " + script + " [options...]");
                     System.out.println("-h, --help                  help");
-                    System.out.println("-t, --output-type           output type(bin, lua, msgpack)");
+                    System.out.println("-t, --output-type           output type(bin, lua, msgpack, json)");
                     System.out.println("-p, --proto                 protocol(protobuf)");
                     System.out.println("-f, --proto-file            protocol description file");
                     System.out.println("-o, --output-dir            output directory");
                     System.out.println("-d, --data-src-dir          data source directory");
-                    System.out.println("-s, --src-file              data source file");
+                    System.out.println("-s, --src-file              data source file(.xls, .xlsx, .cvs, .xlsm, .ods, .ini, .cfg, .conf)");
                     System.out.println("-m, --src-meta              data description meta");
                     System.out.println("-v, --version               print version");
                     System.out.println("-n, --rename                rename output file name(regex), sample: /(?i)\\.bin$/\\.lua/");
@@ -105,7 +106,8 @@ public class ProgramOptions {
                         outType = FileType.LUA;
                     } else if (val.equalsIgnoreCase("msgpack")){
                         outType = FileType.MSGPACK;
-                        //} else if (val.equalsIgnoreCase("json")){
+                    } else if (val.equalsIgnoreCase("json")){
+                        outType = FileType.JSON;
                         //} else if (val.equalsIgnoreCase("xml")){
                     } else {
                         System.err.println("[ERROR] invalid output type " + sb.toString());
@@ -146,9 +148,9 @@ public class ProgramOptions {
 
                 case 's': {
                     dataSourceFile = g.getOptarg();
-                    String[] suffixs = dataSourceFile.split(".");
+                    int dot_index = dataSourceFile.lastIndexOf('.');
 
-                    String name_suffix = suffixs.length > 0 ? suffixs[suffixs.length - 1] : null;
+                    String name_suffix = dot_index >= 0 && dot_index < dataSourceFile.length() - 1? dataSourceFile.substring(dot_index + 1) : null;
                     if (null != name_suffix && (
                             name_suffix.equalsIgnoreCase("xls") ||
                                     name_suffix.equalsIgnoreCase("xlsx") ||
@@ -158,12 +160,12 @@ public class ProgramOptions {
                     )) {
                         dataSourceType = FileType.EXCEL;
 
-//                } else if (null != name_suffix && (
-//                        name_suffix.equalsIgnoreCase("ini") ||
-//                        name_suffix.equalsIgnoreCase("cfg") ||
-//                        name_suffix.equalsIgnoreCase("conf")
-//                )) {
-//                    dataSourceType = FileType.INI;
+                    } else if (null != name_suffix && (
+                            name_suffix.equalsIgnoreCase("ini") ||
+                            name_suffix.equalsIgnoreCase("cfg") ||
+                            name_suffix.equalsIgnoreCase("conf")
+                    )) {
+                        dataSourceType = FileType.INI;
 //                } else if (null != name_suffix && name_suffix.equalsIgnoreCase("json")) {
 //                    dataSourceType = FileType.JSON;
 //                } else if (null != name_suffix && name_suffix.equalsIgnoreCase("lua")) {
@@ -247,7 +249,7 @@ public class ProgramOptions {
     }
 
     public String getVersion() {
-        return "0.1.2.1";
+        return "0.1.3.0";
     }
 
 

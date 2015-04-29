@@ -14,5 +14,7 @@
     <orderEntry type="library" exported="" name="protobuf-java-2.6.1" level="project" />
     <orderEntry type="library" exported="" name="msgpack-0.6.11" level="project" />
     <orderEntry type="library" exported="" name="javassist-3.19.0-GA" level="project" />
+    <orderEntry type="library" exported="" name="json-20141113" level="project" />
+    <orderEntry type="library" exported="" name="ini4j-0.5.4" level="project" />
   </component>
 </module>

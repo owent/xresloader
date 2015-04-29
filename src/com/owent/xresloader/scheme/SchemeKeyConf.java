@@ -8,11 +8,10 @@ import java.util.regex.Pattern;
 public class SchemeKeyConf {
     private int row;
 
-    ;
-    private KeyCase letterCase;
-    private String wordSplit;
-    private String prefix;
-    private String suffix;
+    private KeyCase letterCase = KeyCase.NONE;
+    private String wordSplit = "_";
+    private String prefix = "";
+    private String suffix = "";
     private Pattern keyWordRegex = null;
     private Pattern keyWordRegexRemoveRule = null;
     private Pattern keyWordRegexPrefixRule = null;

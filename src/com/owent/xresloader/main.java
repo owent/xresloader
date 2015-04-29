@@ -32,6 +32,10 @@ public class main {
         // 读入数据表 & 协议编译
         int success_count = 0;
         for (String sn : ProgramOptions.getInstance().dataSourceMetas) {
+            // 0. 清理
+            SchemeConf.getInstance().getMacroSource().clear();
+            SchemeConf.getInstance().getDataSource().clear();
+
             // 1. 描述信息
             if (false == SchemeConf.getInstance().getScheme().load_scheme(sn)) {
                 System.err.println("[ERROR] convert scheme \"" + sn + "\" failed");
@@ -87,6 +91,10 @@ public class main {
                     break;
                 case MSGPACK:
                     outDesc = new DataDstMsgPack();
+                    outDesc = outDesc.init() ? outDesc : null;
+                    break;
+                case JSON:
+                    outDesc = new DataDstJson();
                     outDesc = outDesc.init() ? outDesc : null;
                     break;
                 default:

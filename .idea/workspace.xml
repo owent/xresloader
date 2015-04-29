@@ -7,18 +7,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="08f57cb9-7d74-4acf-97ab-f864ab1e1616" name="Default" comment="">
-      <change type="DELETED" beforePath="D:\projs\github\xresloader\.idea\libraries\java_getopt_1_0_14.xml" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/3rd/java-getopt" afterPath="$PROJECT_DIR$/3rd/java-getopt" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/owent/xresloader/data/dst/DataDstLua.java" afterPath="$PROJECT_DIR$/src/com/owent/xresloader/data/dst/DataDstLua.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/owent/xresloader/data/dst/DataDstMsgPack.java" afterPath="$PROJECT_DIR$/src/com/owent/xresloader/data/dst/DataDstMsgPack.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/owent/xresloader/ProgramOptions.java" afterPath="$PROJECT_DIR$/src/com/owent/xresloader/ProgramOptions.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/README.md" afterPath="$PROJECT_DIR$/README.md" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/owent/xresloader/scheme/SchemeConf.java" afterPath="$PROJECT_DIR$/src/com/owent/xresloader/scheme/SchemeConf.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/owent/xresloader/scheme/SchemeDataSourceExcel.java" afterPath="$PROJECT_DIR$/src/com/owent/xresloader/scheme/SchemeDataSourceExcel.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/owent/xresloader/scheme/SchemeKeyConf.java" afterPath="$PROJECT_DIR$/src/com/owent/xresloader/scheme/SchemeKeyConf.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/owent/xresloader/main.java" afterPath="$PROJECT_DIR$/src/com/owent/xresloader/main.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/xresloader.iml" afterPath="$PROJECT_DIR$/xresloader.iml" />
     </list>
     <ignored path="xresloader.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -717,12 +707,12 @@
       <workItem from="1430102006998" duration="19000" />
       <workItem from="1430107788040" duration="13000" />
       <workItem from="1430113962490" duration="278000" />
-      <workItem from="1430273886097" duration="11414000" />
+      <workItem from="1430273886097" duration="11610000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="48123000" />
+    <option name="totallyTimeSpent" value="48319000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="1" y="2" width="1918" height="1037" extended-state="0" />

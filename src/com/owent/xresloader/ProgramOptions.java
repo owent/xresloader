@@ -249,7 +249,7 @@ public class ProgramOptions {
     }
 
     public String getVersion() {
-        return "0.1.3.0";
+        return "0.1.3.1";
     }
 
 

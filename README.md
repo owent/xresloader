@@ -8,6 +8,25 @@ xresloader
 ======
 执行方式    java -jar xresloader.jar [参数...]
 
+比如：（生成源和结果在sample目录下）
+
+```bash
+# Excel=>二进制（按协议） 
+java -jar xresloader.jar -t bin -p protobuf -f kind.pb -s 资源转换示例.xlsx -m scheme_kind
+
+# Excel=>Lua，并重命名输出文件 
+java -jar xresloader.jar -t lua -p lua -f kind.pb -s 资源转换示例.xlsx -m scheme_kind -n "/(?i)\.bin$/\.lua/"
+
+# Excel=>MsgPack二进制，并重命名输出文件 
+java -jar xresloader.jar -t lua -p msgpack -f kind.pb -s 资源转换示例.xlsx -m scheme_kind -n "/(?i)\.bin$/\.msgpack.bin/"
+
+# 输出文件重命名+输出json格式+多次转表（多个-m参数）
+java -jar xresloader.jar -t json -p protobuf -f kind.pb  -n "/(?i)\.bin$/\.json/" -s 资源转换示例.xlsx -m scheme_kind -m scheme_upgrade
+```
+
+可用参数列表
+------
+
 |          参数选项           |         描述        |                   说明                     |
 |-----------------------------|---------------------|--------------------------------------------|
 |-t --output-type             | 输出类型            | bin（默认值）,lua,msgpack,json,xml(暂未实现)                 |
@@ -27,7 +46,7 @@ xresloader
 ------
 1. **protobuf** （已实现）
 2. **capnproto**    （暂未支持）
-3. **flatbuffer**   （暂未支持）
+3. **flatbuffer**   （计划中）
                 
                 
 数据源描述文件说明(根据后缀判断类型有不同读取方式)
@@ -44,7 +63,7 @@ xresloader
 ======
 |     字段     |                        简介                      |           主配置           |     次配置   |   补充配置   |     说明     |
 |--------------|--------------------------------------------------|----------------------------|--------------|--------------|--------------|
-|DataSource    | 配置数据源(文件路径,表名)                        |    ./资源转换示例.xlsx     | kind         |  3,1         |   **必须**   |
+|DataSource    | 配置数据源(文件路径,表名)                        |  ./资源转换示例.xlsx       | kind         |  3,1         |   **必须**，可多个。多个则表示把多个Excel表数据合并再生成配置输出，这意味着这多个Excel表的描述Key的顺序和个数必须相同   |
 |MacroSource   | 元数据数据源(文件路径,表名)                      |  ./资源转换示例.xlsx       | macro        |  2,1         |    *可选*    |
 |编程接口配置  |
 |ProtoName     | 协议描述名称                                     |   role_cfg                 |              |              |   **必须**   |

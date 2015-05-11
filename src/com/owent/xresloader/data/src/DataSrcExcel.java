@@ -82,15 +82,15 @@ public class DataSrcExcel extends DataSrcImpl {
             int row_num = tb.getLastRowNum() + 1;
             for (int i = src.data_row - 1; i < row_num; ++i) {
                 Row row = tb.getRow(i);
-                String key = ExcelEngine.cell2s(row, src.data_col - 1);
-                String val = ExcelEngine.cell2s(row, src.data_col, evalor);
-                if (!key.isEmpty() && !val.isEmpty()) {
+                DataContainer<String> key = ExcelEngine.cell2s(row, src.data_col - 1);
+                DataContainer<String> val = ExcelEngine.cell2s(row, src.data_col, evalor);
+                if (key.valid && val.valid && !key.get().isEmpty() && !val.get().isEmpty()) {
                     if (macros.containsKey(key)) {
                         System.err.println(
                             String.format("[WARNING] macro key \"%s\" is used more than once.", key)
                         );
                     }
-                    macros.put(key, val);
+                    macros.put(key.get(), val.get());
                 }
             }
         }
@@ -142,8 +142,8 @@ public class DataSrcExcel extends DataSrcImpl {
                     return -53;
                 }
                 for (int i = src.data_col - 1; i < row.getLastCellNum() + 1; ++i) {
-                    String k = ExcelEngine.cell2s(row, i, formula);
-                    nameMap.put(IdentifyEngine.n2i(k), i);
+                    DataContainer<String> k = ExcelEngine.cell2s(row, i, formula);
+                    nameMap.put(IdentifyEngine.n2i(k.get()), i);
                 }
             }
 
@@ -190,28 +190,52 @@ public class DataSrcExcel extends DataSrcImpl {
 
 
     @Override
-    public <T> T getValue(String ident, T ret) {
+    public <T> DataContainer<T> getValue(String ident, T ret_default) {
+        DataContainer<T> ret = new DataContainer<T>();
+        ret.value = ret_default;
+
         int index = nameMap.getOrDefault(ident, -1);
         if (index < 0)
             return ret;
 
-        if (ret instanceof Integer) {
-            ret = (T) Integer.valueOf(ExcelEngine.cell2i(current.current_row, index, current.formula).toString());
-        } else if (ret instanceof Long) {
-            ret = (T) ExcelEngine.cell2i(current.current_row, index, current.formula);
-        } else if (ret instanceof Short) {
-            ret = (T) Short.valueOf(ExcelEngine.cell2i(current.current_row, index, current.formula).toString());
-        } else if (ret instanceof Character) {
-            ret = (T) Character.valueOf(ExcelEngine.cell2i(current.current_row, index, current.formula).toString().charAt(0));
-        } else if (ret instanceof Double) {
-            ret = (T) ExcelEngine.cell2d(current.current_row, index, current.formula);
-        } else if (ret instanceof Float) {
-            ret = (T) Float.valueOf(ExcelEngine.cell2d(current.current_row, index, current.formula).toString());
-        } else if (ret instanceof Boolean) {
-            ret = (T) ExcelEngine.cell2b(current.current_row, index, current.formula);
+        if (ret_default instanceof Integer) {
+            DataContainer<Long> dt = ExcelEngine.cell2i(current.current_row, index, current.formula);
+            ret.valid = dt.valid;
+            ret.value = (T)Integer.valueOf(dt.value.intValue());
+            return ret;
+        } else if (ret_default instanceof Long) {
+            DataContainer<Long> dt = ExcelEngine.cell2i(current.current_row, index, current.formula);
+            ret.valid = dt.valid;
+            ret.value = (T)Long.valueOf(dt.value.longValue());
+            return ret;
+        } else if (ret_default instanceof Short) {
+            DataContainer<Long> dt = ExcelEngine.cell2i(current.current_row, index, current.formula);
+            ret.valid = dt.valid;
+            ret.value = (T)Short.valueOf(dt.value.shortValue());
+            return ret;
+        } else if (ret_default instanceof Byte) {
+            DataContainer<Long> dt = ExcelEngine.cell2i(current.current_row, index, current.formula);
+            ret.valid = dt.valid;
+            ret.value = (T)Byte.valueOf(dt.value.byteValue());
+            return ret;
+        } else if (ret_default instanceof Double) {
+            DataContainer<Double> dt = ExcelEngine.cell2d(current.current_row, index, current.formula);
+            ret.valid = dt.valid;
+            ret.value = (T)Double.valueOf(dt.value.doubleValue());
+            return ret;
+        } else if (ret_default instanceof Float) {
+            DataContainer<Double> dt = ExcelEngine.cell2d(current.current_row, index, current.formula);
+            ret.valid = dt.valid;
+            ret.value = (T)Float.valueOf(dt.value.floatValue());
+            return ret;
+        } else if (ret_default instanceof Boolean) {
+            ret = (DataContainer<T>) ExcelEngine.cell2b(current.current_row, index, current.formula);
+        } else if (ret_default instanceof String) {
+            ret = (DataContainer<T>) ExcelEngine.cell2s(current.current_row, index, current.formula);
         } else {
-            ret = (T) ExcelEngine.cell2s(current.current_row, index, current.formula);
+            System.err.println("[ERROR] default value not supported");
         }
+
         return ret;
     }
 

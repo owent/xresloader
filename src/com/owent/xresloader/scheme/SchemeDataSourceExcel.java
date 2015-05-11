@@ -96,10 +96,10 @@ public final class SchemeDataSourceExcel extends SchemeDataSourceBase {
     }
 
     private String cell2str(Row row, int col) {
-        return ExcelEngine.cell2s(row, col);
+        return ExcelEngine.cell2s(row, col).get();
     }
 
     private int cell2int(Row row, int col) {
-        return ExcelEngine.cell2i(row, col).intValue();
+        return ExcelEngine.cell2i(row, col).get().intValue();
     }
 }

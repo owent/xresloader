@@ -1,5 +1,7 @@
 package com.owent.xresloader.engine;
 
+import com.owent.xresloader.data.src.DataContainer;
+
 import com.owent.xresloader.ProgramOptions;
 import com.owent.xresloader.data.src.DataSrcImpl;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
@@ -127,7 +129,7 @@ public class ExcelEngine {
      * @param col 列号
      * @return
      */
-    static public String cell2s(Row row, int col) {
+    static public DataContainer<String> cell2s(Row row, int col) {
         return cell2s(row, col, null);
     }
 
@@ -139,32 +141,39 @@ public class ExcelEngine {
      * @param evalor 公式管理器
      * @return
      */
-    static public String cell2s(Row row, int col, FormulaEvaluator evalor) {
-        if (null == row)
-            return "";
+    static public DataContainer<String> cell2s(Row row, int col, FormulaEvaluator evalor) {
+        DataContainer<String> ret = new DataContainer<String>();
+        ret.setDefault("");
+
+        if (null == row) {
+            return ret;
+        }
 
         Cell c = row.getCell(col);
-        if (null == c)
-            return "";
+        if (null == c) {
+            return ret;
+        }
 
         CellValue cv = null;
         if (Cell.CELL_TYPE_FORMULA == c.getCellType()) {
             if (null != evalor)
                 cv = evalor.evaluate(c);
-            else
-                return c.toString();
+            else {
+                ret.set(c.toString());
+                return ret;
+            }
         }
 
         int type = (null == cv)? c.getCellType(): cv.getCellType();
         switch (type) {
             case Cell.CELL_TYPE_BLANK:
-                return "";
+                return ret;
             case Cell.CELL_TYPE_BOOLEAN:
-                return String.valueOf((null == cv)? c.getBooleanCellValue(): cv.getBooleanValue());
+                return ret.set(String.valueOf((null == cv) ? c.getBooleanCellValue() : cv.getBooleanValue()));
             case Cell.CELL_TYPE_ERROR:
-                return String.valueOf((null == cv)? c.getErrorCellValue(): cv.getErrorValue());
+                return ret.set(String.valueOf((null == cv) ? c.getErrorCellValue() : cv.getErrorValue()));
             case Cell.CELL_TYPE_FORMULA:
-                return (null == cv)? c.getCellFormula(): "";
+                return (null == cv)? ret.set(c.getCellFormula()): ret;
             case Cell.CELL_TYPE_NUMERIC:
                 if(DateUtil.isCellDateFormatted(c)) {
                     // 参照POI DateUtil.isADateFormat函数，去除无效字符
@@ -203,14 +212,14 @@ public class ExcelEngine {
 
 
                     SimpleDateFormat df = new SimpleDateFormat(fs);
-                    return df.format(c.getDateCellValue()).trim();
+                    return ret.set(df.format(c.getDateCellValue()).trim());
                 }
 
-                return String.valueOf((null == cv)? c.getNumericCellValue(): cv.getNumberValue());
+                return ret.set(String.valueOf((null == cv) ? c.getNumericCellValue() : cv.getNumberValue()));
             case Cell.CELL_TYPE_STRING:
-                return tryMacro((null == cv)? c.getStringCellValue().trim(): cv.getStringValue());
+                return ret.set(tryMacro((null == cv) ? c.getStringCellValue().trim() : cv.getStringValue()));
             default:
-                return "";
+                return ret;
         }
     }
 
@@ -221,7 +230,7 @@ public class ExcelEngine {
      * @param col 列号
      * @return
      */
-    static public Long cell2i(Row row, int col) {
+    static public DataContainer<Long> cell2i(Row row, int col) {
         return cell2i(row, col, null);
     }
 
@@ -233,46 +242,49 @@ public class ExcelEngine {
      * @param evalor 公式管理器
      * @return
      */
-    static public Long cell2i(Row row, int col, FormulaEvaluator evalor) {
+    static public DataContainer<Long> cell2i(Row row, int col, FormulaEvaluator evalor) {
+        DataContainer<Long> ret = new DataContainer<Long>();
+        ret.setDefault(0L);
+
         if (null == row)
-            return 0L;
+            return ret;
 
         Cell c = row.getCell(col);
         if (null == c)
-            return 0L;
+            return ret;
 
         CellValue cv = null;
         if (Cell.CELL_TYPE_FORMULA == c.getCellType()) {
             if (null != evalor)
                 cv = evalor.evaluate(c);
             else
-                return 0L;
+                return ret;
         }
 
         int type = (null == cv)? c.getCellType(): cv.getCellType();
         switch (type) {
             case Cell.CELL_TYPE_BLANK:
-                return 0L;
+                return ret;
             case Cell.CELL_TYPE_BOOLEAN:
-                return c.getBooleanCellValue() ? 1L : 0L;
+                return ret.set(c.getBooleanCellValue() ? 1L : 0L);
             case Cell.CELL_TYPE_ERROR:
-                return 0L;
+                return ret;
             case Cell.CELL_TYPE_FORMULA:
-                return 0L;
+                return ret;
             case Cell.CELL_TYPE_NUMERIC:
                 if(DateUtil.isCellDateFormatted(c)) {
-                    return c.getDateCellValue().getTime() / 1000;
+                    return ret.set(c.getDateCellValue().getTime() / 1000);
                 }
-                return Math.round(c.getNumericCellValue());
+                return ret.set(Math.round(c.getNumericCellValue()));
             case Cell.CELL_TYPE_STRING: {
                 String val = c.getStringCellValue().trim();
                 if (val.isEmpty()) {
-                    return 0L;
+                    return ret;
                 }
-                return Math.round(Double.valueOf(tryMacro(val)));
+                return ret.set(Math.round(Double.valueOf(tryMacro(val))));
             }
             default:
-                return 0L;
+                return ret;
         }
     }
 
@@ -283,7 +295,7 @@ public class ExcelEngine {
      * @param col 列号
      * @return
      */
-    static public Double cell2d(Row row, int col) {
+    static public DataContainer<Double> cell2d(Row row, int col) {
         return cell2d(row, col, null);
     }
 
@@ -295,46 +307,49 @@ public class ExcelEngine {
      * @param evalor 公式管理器
      * @return
      */
-    static public Double cell2d(Row row, int col, FormulaEvaluator evalor) {
+    static public DataContainer<Double> cell2d(Row row, int col, FormulaEvaluator evalor) {
+        DataContainer<Double> ret = new DataContainer<Double>();
+        ret.setDefault(0.0);
+
         if (null == row)
-            return 0.0;
+            return ret;
 
         Cell c = row.getCell(col);
         if (null == c)
-            return 0.0;
+            return ret;
 
         CellValue cv = null;
         if (Cell.CELL_TYPE_FORMULA == c.getCellType()) {
             if (null != evalor)
                 cv = evalor.evaluate(c);
             else
-                return 0.0;
+                return ret;
         }
 
         int type = (null == cv)? c.getCellType(): cv.getCellType();
         switch (type) {
             case Cell.CELL_TYPE_BLANK:
-                return 0.0;
+                return ret;
             case Cell.CELL_TYPE_BOOLEAN:
-                return c.getBooleanCellValue() ? 1.0 : 0.0;
+                return ret.set(c.getBooleanCellValue() ? 1.0 : 0.0);
             case Cell.CELL_TYPE_ERROR:
-                return 0.0;
+                return ret;
             case Cell.CELL_TYPE_FORMULA:
-                return 0.0;
+                return ret;
             case Cell.CELL_TYPE_NUMERIC:
                 if(DateUtil.isCellDateFormatted(c)) {
-                    return (double)c.getDateCellValue().getTime() / 1000;
+                    return ret.set((double) c.getDateCellValue().getTime() / 1000);
                 }
-                return c.getNumericCellValue();
+                return ret.set(c.getNumericCellValue());
             case Cell.CELL_TYPE_STRING: {
                 String val = c.getStringCellValue().trim();
                 if (val.isEmpty()) {
-                    return 0.0;
+                    return ret;
                 }
-                return Double.valueOf(tryMacro(val));
+                return ret.set(Double.valueOf(tryMacro(val)));
             }
             default:
-                return 0.0;
+                return ret;
         }
     }
 
@@ -345,7 +360,7 @@ public class ExcelEngine {
      * @param col 列号
      * @return
      */
-    static public Boolean cell2b(Row row, int col) {
+    static public DataContainer<Boolean> cell2b(Row row, int col) {
         return cell2b(row, col, null);
     }
 
@@ -357,39 +372,46 @@ public class ExcelEngine {
      * @param evalor 公式管理器
      * @return
      */
-    static public Boolean cell2b(Row row, int col, FormulaEvaluator evalor) {
+    static public DataContainer<Boolean> cell2b(Row row, int col, FormulaEvaluator evalor) {
+        DataContainer<Boolean> ret = new DataContainer<Boolean>();
+        ret.setDefault(false);
+
         if (null == row)
-            return false;
+            return ret;
 
         Cell c = row.getCell(col);
         if (null == c)
-            return false;
+            return ret;
 
         CellValue cv = null;
         if (Cell.CELL_TYPE_FORMULA == c.getCellType()) {
             if (null != evalor)
                 cv = evalor.evaluate(c);
             else
-                return true;
+                return ret.set(true);
         }
 
         int type = (null == cv)? c.getCellType(): cv.getCellType();
         switch (type) {
             case Cell.CELL_TYPE_BLANK:
-                return false;
+                return ret;
             case Cell.CELL_TYPE_BOOLEAN:
-                return c.getBooleanCellValue();
+                return ret.set(c.getBooleanCellValue());
             case Cell.CELL_TYPE_ERROR:
-                return false;
+                return ret;
             case Cell.CELL_TYPE_FORMULA:
-                return false;
+                return ret;
             case Cell.CELL_TYPE_NUMERIC:
-                return c.getNumericCellValue() != 0;
+                return ret.set(c.getNumericCellValue() != 0);
             case Cell.CELL_TYPE_STRING:
                 String item = tryMacro(c.getStringCellValue().trim()).toLowerCase();
-                return !item.isEmpty() && !item.equals("0") && !item.equals("0.0") && !item.equals("false") && !item.equals("no");
+                if (item.isEmpty()) {
+                    return ret;
+                }
+
+                return ret.set(!item.equals("0") && !item.equals("0.0") && !item.equals("false") && !item.equals("no") && !item.equals("disable"));
             default:
-                return false;
+                return ret;
         }
     }
 }

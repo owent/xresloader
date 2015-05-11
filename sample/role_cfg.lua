@@ -1,7 +1,7 @@
 return {
     [1] = {
-        xrex_ver = "1.1.0.0",
-        data_ver = "1.1.0.0",
+        xrex_ver = "0.2.0.1",
+        data_ver = "0.2.0.1",
         count = 6,
         hash_code = "lua data has no hash code"
     },
@@ -72,7 +72,6 @@ return {
             test_array = {
                 "angel",
                 "莫瑞茨",
-                "机器人",
             },
             name = "莫瑞茨",
             dep_test =  {
@@ -92,7 +91,6 @@ return {
             test_array = {
                 "laopo",
                 "爱丽丝",
-                "公主",
             },
             name = "爱丽丝",
             dep_test =  {
@@ -112,7 +110,6 @@ return {
             test_array = {
                 "keai",
                 "都玛西亚",
-                "骑士",
             },
             name = "都玛西亚",
             dep_test =  {

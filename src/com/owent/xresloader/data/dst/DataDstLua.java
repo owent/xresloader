@@ -1,6 +1,7 @@
 package com.owent.xresloader.data.dst;
 
 import com.owent.xresloader.ProgramOptions;
+import com.owent.xresloader.data.src.DataContainer;
 import com.owent.xresloader.data.src.DataSrcImpl;
 import com.owent.xresloader.scheme.SchemeConf;
 import org.apache.commons.codec.binary.Hex;
@@ -54,7 +55,10 @@ public class DataDstLua extends DataDstImpl {
     }
 
 
-    private void writeData(StringBuffer sb, DataDstWriterNode desc, String indent, String prefix) {
+    private boolean writeData(StringBuffer sb, DataDstWriterNode desc, String indent, String prefix) {
+        boolean ret = false;
+        int  old_len = sb.length();
+
         for (Map.Entry<String, DataDstWriterNode> c : desc.getChildren().entrySet()) {
             String _name = DataDstWriterNode.makeNodeName(c.getKey());
             if (c.getValue().isList()) {
@@ -63,76 +67,113 @@ public class DataDstLua extends DataDstImpl {
 
                 for (int i = 0; i < c.getValue().getListCount(); ++i) {
                     String new_prefix = DataDstWriterNode.makeChildPath(prefix, c.getKey(), i);
-                    writeOneData(sb, c.getValue(), indent + "    ", new_prefix, "");
+                    int bak_len = sb.length();
+                    if(writeOneData(sb, c.getValue(), indent + "    ", new_prefix, "")) {
+                        ret = true;
+                    } else if(false == ProgramOptions.getInstance().enbleEmptyList) {
+                        sb.setLength(bak_len);
+                    }
                 }
                 sb.append(indent);
                 sb.append("},\n");
             } else {
                 String new_prefix = DataDstWriterNode.makeChildPath(prefix, c.getKey());
-                writeOneData(sb, c.getValue(), indent, new_prefix, DataDstWriterNode.makeNodeName(c.getKey()));
+                if(writeOneData(sb, c.getValue(), indent, new_prefix, DataDstWriterNode.makeNodeName(c.getKey()))) {
+                    ret = true;
+                }
             }
 
         }
+
+        if (false == ret) {
+            sb.setLength(old_len);
+        }
+        return ret;
     }
 
-    private void writeOneData(StringBuffer sb, DataDstWriterNode desc, String indent, String prefix, String _name) {
+    private boolean writeOneData(StringBuffer sb, DataDstWriterNode desc, String indent, String prefix, String _name) {
+        boolean ret = false;
+
         sb.append(indent);
         if (!_name.isEmpty())
             sb.append(_name + " = ");
 
         switch (desc.getType()) {
             case INT:
-            case LONG:
-                sb.append(DataSrcImpl.getOurInstance().getValue(prefix, new Long(0)));
+            case LONG: {
+                DataContainer<Long> res = DataSrcImpl.getOurInstance().getValue(prefix, new Long(0));
+                ret = res.valid;
+                sb.append(res.get());
                 break;
+            }
 
             case FLOAT:
-            case DOUBLE:
-                sb.append(DataSrcImpl.getOurInstance().getValue(prefix, new Double(0)));
+            case DOUBLE: {
+                DataContainer<Double> res = DataSrcImpl.getOurInstance().getValue(prefix, new Double(0));
+                ret = res.valid;
+                sb.append(res.get());
                 break;
+            }
 
-            case BOOLEAN:
-                sb.append(DataSrcImpl.getOurInstance().getValue(prefix, Boolean.FALSE).toString());
+            case BOOLEAN: {
+                DataContainer<Boolean> res = DataSrcImpl.getOurInstance().getValue(prefix, Boolean.FALSE);
+                ret = res.valid;
+                sb.append(res.get().toString());
                 break;
+            }
 
-            case STRING:
+            case STRING: {
+                DataContainer<String> res = DataSrcImpl.getOurInstance().getValue(prefix, "");
+                ret = res.valid;
+
                 sb.append("\"");
-                sb.append(
-                    DataSrcImpl.getOurInstance().getValue(prefix, "")
-                        .replaceAll("\"", "\\\"")
-                        .replaceAll("\\\\", "\\\\")
+                sb.append(res.get()
+                    .replaceAll("\"", "\\\"")
+                    .replaceAll("\\\\", "\\\\")
                 );
                 sb.append("\"");
                 break;
+            }
 
-            case BYTE_STRING:
+            case BYTE_STRING: {
+                DataContainer<String> res = DataSrcImpl.getOurInstance().getValue(prefix, "");
+                ret = res.valid;
+
                 sb.append("\"");
 
                 sb.append(
                     Hex.encodeHexString(
-                        DataSrcImpl.getOurInstance().getValue(prefix, "").getBytes()
+                        res.get().getBytes()
                     )
                 );
                 sb.append("\"");
                 break;
+            }
 
-            case ENUM:
-                sb.append(DataSrcImpl.getOurInstance().getValue(prefix, new Long(0)));
+            case ENUM: {
+                DataContainer<Long> res = DataSrcImpl.getOurInstance().getValue(prefix, new Long(0));
+                ret = res.valid;
+                sb.append(res.get());
                 break;
+            }
 
-            case OBJECT:
+            case OBJECT: {
                 sb.append(" {\n");
-                writeData(sb, desc, indent + "    ", prefix);
+                ret = writeData(sb, desc, indent + "    ", prefix);
                 sb.append(indent);
                 sb.append("}");
 
                 break;
+            }
 
-            default:
+            default: {
                 sb.append("nil");
                 break;
+            }
         }
 
         sb.append(",\n");
+
+        return ret;
     }
 }

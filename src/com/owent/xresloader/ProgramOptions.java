@@ -32,6 +32,7 @@ public class ProgramOptions {
     public List<String> dataSourceMetas = null;
     public RenameRule renameRule = null;
     public boolean enableFormular = true;
+    public boolean enbleEmptyList = false;
 
     private ProgramOptions() {
         dataSourceMetas = new LinkedList<String>();
@@ -66,7 +67,9 @@ public class ProgramOptions {
                 new LongOpt("version", LongOpt.NO_ARGUMENT, sb, 'v'),
                 new LongOpt("rename", LongOpt.REQUIRED_ARGUMENT, sb, 'n'),
                 new LongOpt("disable-excel-formular", LongOpt.NO_ARGUMENT, null, 0),
-                new LongOpt("enable-excel-formular", LongOpt.NO_ARGUMENT, null, 0)
+                new LongOpt("enable-excel-formular", LongOpt.NO_ARGUMENT, null, 0),
+                new LongOpt("disable-empty-list", LongOpt.NO_ARGUMENT, null, 0),
+                new LongOpt("enable-empty-list", LongOpt.NO_ARGUMENT, null, 0)
         };
 
         Getopt g = new Getopt("", args, "ht:p:f:o:d:s:m:vn:", long_opts);
@@ -94,7 +97,9 @@ public class ProgramOptions {
                     System.out.println("-n, --rename                rename output file name(regex), sample: /(?i)\\.bin$/\\.lua/");
                     System.out.println("Control options:");
                     System.out.println("--disable-excel-formular    disable formular in excel. will be faster when convert data.");
-                    System.out.println("--enable-excel-formular     disable formular in excel. will be slower when convert data.");
+                    System.out.println("--enable-excel-formular     [default] enable formular in excel. will be slower when convert data.");
+                    System.out.println("--disable-empty-list        [default] remove empty elements in a list or repeated field.");
+                    System.out.println("--enable-empty-list         keep empty elements in a list or repeated field with default value.");
                     System.exit(0);
                     break;
                 }
@@ -233,6 +238,10 @@ public class ProgramOptions {
                             enableFormular = false;
                         } else if (long_opt_name.equals("enable-excel-formular")) {
                             enableFormular = true;
+                        } else if (long_opt_name.equals("disable-empty-list")) {
+                            enbleEmptyList = false;
+                        } else if (long_opt_name.equals("enable-empty-list")) {
+                            enbleEmptyList = true;
                         } else {
                             System.out.println(String.format("[WARN] Unknown option %s", long_opt_name));
                         }
@@ -249,7 +258,7 @@ public class ProgramOptions {
     }
 
     public String getVersion() {
-        return "0.1.3.1";
+        return "0.2.0.1";
     }
 
 

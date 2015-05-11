@@ -1,9 +1,11 @@
 package com.owent.xresloader.data.dst;
 
 import com.owent.xresloader.ProgramOptions;
+import com.owent.xresloader.data.src.DataContainer;
 import com.owent.xresloader.data.src.DataSrcImpl;
 import com.owent.xresloader.scheme.SchemeConf;
 
+import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -13,6 +15,16 @@ import java.util.Map;
  * Created by owentou on 2015/04/29.
  */
 public abstract class DataDstJava extends DataDstImpl {
+    private class DataEntry {
+        public boolean valid =  false;
+        public Object value = null;
+
+        public <T> void set(DataContainer<T> v) {
+            valid = v.valid;
+            value = v.value;
+        }
+    }
+
     public class DataDstObject {
         public HashMap<String, Object> header = new HashMap<String, Object>();
         public HashMap<String, List<Object> > body = new HashMap<String, List<Object>>();
@@ -30,14 +42,16 @@ public abstract class DataDstJava extends DataDstImpl {
         ret.body.put(SchemeConf.getInstance().getProtoName(), item_list);
 
         while (DataSrcImpl.getOurInstance().next()) {
-            item_list.add(writeData(desc, ""));
+            item_list.add(writeData(desc, "").value);
         }
 
         return ret;
     }
 
-    private Object writeData(DataDstWriterNode desc, String prefix) {
-        HashMap<String, Object> ret = new HashMap<String, Object>();
+    private DataEntry writeData(DataDstWriterNode desc, String prefix) {
+        DataEntry ret = new DataEntry();
+        HashMap<String, Object> ret_val = new HashMap<String, Object>();
+        ret.value = ret_val;
         for (Map.Entry<String, DataDstWriterNode> c : desc.getChildren().entrySet()) {
             String _name = DataDstWriterNode.makeNodeName(c.getKey());
             if (c.getValue().isList()) {
@@ -45,13 +59,24 @@ public abstract class DataDstJava extends DataDstImpl {
 
                 for (int i = 0; i < c.getValue().getListCount(); ++i) {
                     String new_prefix = DataDstWriterNode.makeChildPath(prefix, c.getKey(), i);
-                    item_list.add(writeOneData(c.getValue(), new_prefix));
+                    DataEntry ele = writeOneData(c.getValue(), new_prefix);
+                    if (null != ele && (ele.valid || ProgramOptions.getInstance().enbleEmptyList)) {
+                        item_list.add(ele.value);
+                        ret.valid = ret.valid || ele.valid;
+                    }
+
                 }
 
-                ret.put(_name, item_list);
+                if(!item_list.isEmpty()) {
+                    ret_val.put(_name, item_list);
+                }
             } else {
                 String new_prefix = DataDstWriterNode.makeChildPath(prefix, c.getKey());
-                ret.put(_name, writeOneData(c.getValue(), new_prefix));
+                DataEntry ele = writeOneData(c.getValue(), new_prefix);
+                if (null != ele && ele.valid) {
+                    ret_val.put(_name, ele.value);
+                    ret.valid = true;
+                }
             }
 
         }
@@ -59,33 +84,58 @@ public abstract class DataDstJava extends DataDstImpl {
         return ret;
     }
 
-    private Object writeOneData(DataDstWriterNode desc, String prefix) {
+    private DataEntry writeOneData(DataDstWriterNode desc, String prefix) {
+        String encoding = SchemeConf.getInstance().getKey().getEncoding();
+        DataEntry ret = new DataEntry();
+
         switch (desc.getType()) {
             case INT:
-            case LONG:
-                return DataSrcImpl.getOurInstance().getValue(prefix, new Long(0));
+            case LONG: {
+                ret.set(DataSrcImpl.getOurInstance().getValue(prefix, new Long(0)));
+                break;
+            }
 
             case FLOAT:
-            case DOUBLE:
-                return DataSrcImpl.getOurInstance().getValue(prefix, new Double(0));
+            case DOUBLE:{
+                ret.set(DataSrcImpl.getOurInstance().getValue(prefix, new Double(0)));
+                break;
+            }
 
-            case BOOLEAN:
-                return DataSrcImpl.getOurInstance().getValue(prefix, Boolean.FALSE);
+            case BOOLEAN:{
+                ret.set(DataSrcImpl.getOurInstance().getValue(prefix, Boolean.FALSE));
+                break;
+            }
 
-            case STRING:
-                return DataSrcImpl.getOurInstance().getValue(prefix, "");
+            case STRING:{
+                ret.set(DataSrcImpl.getOurInstance().getValue(prefix, ""));
+                break;
+            }
 
-            case BYTE_STRING:
-                return DataSrcImpl.getOurInstance().getValue(prefix, "").getBytes();
+            case BYTE_STRING: {
+                DataContainer<String> res = DataSrcImpl.getOurInstance().getValue(prefix, "");
+                ret.valid = res.valid;
+                if (null == encoding || encoding.isEmpty()) {
+                    ret.value = com.google.protobuf.ByteString.copyFrom(res.value.getBytes());
+                } else {
+                    ret.value = com.google.protobuf.ByteString.copyFrom(res.value.getBytes(Charset.forName(encoding)));
+                }
+                break;
+            }
 
-            case ENUM:
-                return DataSrcImpl.getOurInstance().getValue(prefix, new Long(0));
+            case ENUM: {
+                ret.set(DataSrcImpl.getOurInstance().getValue(prefix, new Long(0)));
+                break;
+            }
 
-            case OBJECT:
-                return writeData(desc, prefix);
+            case OBJECT: {
+                ret = writeData(desc, prefix);
+                break;
+            }
 
             default:
-                return null;
+                break;
         }
+
+        return ret;
     }
 }

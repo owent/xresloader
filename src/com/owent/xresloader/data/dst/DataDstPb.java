@@ -5,6 +5,7 @@ import com.google.protobuf.DescriptorProtos;
 import com.google.protobuf.Descriptors;
 import com.google.protobuf.DynamicMessage;
 import com.owent.xresloader.ProgramOptions;
+import com.owent.xresloader.data.src.DataContainer;
 import com.owent.xresloader.data.src.DataSrcImpl;
 import com.owent.xresloader.pb.PbHeader;
 import com.owent.xresloader.scheme.SchemeConf;
@@ -25,6 +26,16 @@ public class DataDstPb extends DataDstImpl {
     private HashMap<String, Descriptors.FileDescriptor> desc_map = new HashMap<String, Descriptors.FileDescriptor>();
     private HashMap<String, DescriptorProtos.FileDescriptorProto> descp_map = new HashMap<String, DescriptorProtos.FileDescriptorProto>();
     private Descriptors.Descriptor currentMsgDesc = null;
+
+    private class DataEntry {
+        public boolean valid =  false;
+        public Object value = null;
+
+        public <T> void set(DataContainer<T> v) {
+            valid = v.valid;
+            value = v.value;
+        }
+    }
 
     @Override
     public boolean init() {
@@ -283,7 +294,9 @@ public class DataDstPb extends DataDstImpl {
     }
 
 
-    private void writeData(DynamicMessage.Builder builder, DataDstWriterNode desc, Descriptors.Descriptor proto_desc, String prefix) {
+    private boolean writeData(DynamicMessage.Builder builder, DataDstWriterNode desc, Descriptors.Descriptor proto_desc, String prefix) {
+        boolean ret = false;
+
         for (Map.Entry<String, DataDstWriterNode> c : desc.getChildren().entrySet()) {
             String _name = DataDstWriterNode.makeNodeName(c.getKey());
 
@@ -297,73 +310,105 @@ public class DataDstPb extends DataDstImpl {
             if (c.getValue().isList() && fd.isRepeated()) {
                 for (int i = 0; i < c.getValue().getListCount(); ++i) {
                     String new_prefix = DataDstWriterNode.makeChildPath(prefix, c.getKey(), i);
-                    Object ele = writeOneData(c.getValue(), fd, new_prefix);
-                    if (null != ele)
-                        builder.addRepeatedField(fd, ele);
+                    DataEntry ele = writeOneData(c.getValue(), fd, new_prefix);
+                    if (null != ele && (ele.valid || ProgramOptions.getInstance().enbleEmptyList)) {
+                        builder.addRepeatedField(fd, ele.value);
+                        ret = ret || ele.valid;
+                    }
                 }
             } else {
                 String new_prefix = DataDstWriterNode.makeChildPath(prefix, c.getKey());
-                Object ele = writeOneData(c.getValue(), fd, new_prefix);
-                if (null != ele)
-                    builder.setField(fd, ele);
+                DataEntry ele = writeOneData(c.getValue(), fd, new_prefix);
+                if (null != ele && (ele.valid || fd.isRequired())) {
+                    builder.setField(fd, ele.value);
+                    ret = ret || ele.valid;
+                }
             }
 
         }
+
+        return ret;
     }
 
-    private Object writeOneData(DataDstWriterNode desc, Descriptors.FieldDescriptor fd, String prefix) {
+    private DataEntry writeOneData(DataDstWriterNode desc, Descriptors.FieldDescriptor fd, String prefix) {
         String encoding = SchemeConf.getInstance().getKey().getEncoding();
+        DataEntry ret = new DataEntry();
 
         switch (fd.getJavaType()) {
-            case INT:
-                return new Integer(DataSrcImpl.getOurInstance().getValue(prefix, new Integer(0)).toString());
+            case INT: {
+                ret.set(DataSrcImpl.getOurInstance().getValue(prefix, new Integer(0)));
+                break;
+            }
 
-            case LONG:
-                return DataSrcImpl.getOurInstance().getValue(prefix, new Long(0)).longValue();
+            case LONG:{
+                ret.set(DataSrcImpl.getOurInstance().getValue(prefix, new Long(0)));
+                break;
+            }
 
-            case FLOAT:
-                return new Float(DataSrcImpl.getOurInstance().getValue(prefix, new Float(0)).toString());
+            case FLOAT:{
+                ret.set(DataSrcImpl.getOurInstance().getValue(prefix, new Float(0)));
+                break;
+            }
 
-            case DOUBLE:
-                return DataSrcImpl.getOurInstance().getValue(prefix, new Double(0)).doubleValue();
+            case DOUBLE:{
+                ret.set(DataSrcImpl.getOurInstance().getValue(prefix, new Double(0)));
+                break;
+            }
 
-            case BOOLEAN:
-                return DataSrcImpl.getOurInstance().getValue(prefix, Boolean.FALSE);
+            case BOOLEAN:{
+                ret.set(DataSrcImpl.getOurInstance().getValue(prefix, Boolean.FALSE));
+                break;
+            }
 
-            case STRING:
-                return DataSrcImpl.getOurInstance().getValue(prefix, "");
+            case STRING: {
+                ret.set(DataSrcImpl.getOurInstance().getValue(prefix, ""));
+                break;
+            }
 
-            case BYTE_STRING:
-                return com.google.protobuf.ByteString.copyFrom(
-                    (null == encoding || encoding.isEmpty())?
-                        DataSrcImpl.getOurInstance().getValue(prefix, "").getBytes():
-                        DataSrcImpl.getOurInstance().getValue(prefix, "").getBytes(Charset.forName(encoding))
-                );
-
+            case BYTE_STRING: {
+                DataContainer<String> res = DataSrcImpl.getOurInstance().getValue(prefix, "");
+                ret.valid = res.valid;
+                if (null == encoding || encoding.isEmpty()) {
+                    ret.value = com.google.protobuf.ByteString.copyFrom(res.value.getBytes());
+                } else {
+                    ret.value = com.google.protobuf.ByteString.copyFrom(res.value.getBytes(Charset.forName(encoding)));
+                }
+                break;
+            }
             case ENUM: {
-                Descriptors.EnumValueDescriptor enum_val = fd.getEnumType().findValueByNumber(DataSrcImpl.getOurInstance().getValue(prefix, new Integer(0)));
+                DataContainer<Integer> res1 = DataSrcImpl.getOurInstance().getValue(prefix, new Integer(0));
+                ret.valid = res1.valid;
+
+                Descriptors.EnumValueDescriptor enum_val = fd.getEnumType().findValueByNumber(res1.value);
                 if (null != enum_val) {
-                    return enum_val;
+                    ret.value = enum_val;
+                    return ret;
                 }
 
-                enum_val = fd.getEnumType().findValueByName(DataSrcImpl.getOurInstance().getValue(prefix, ""));
+                DataContainer<String> res2 = DataSrcImpl.getOurInstance().getValue(prefix, "");
+                ret.valid = res2.valid;
+                enum_val = fd.getEnumType().findValueByName(res2.value);
 
                 if (null != enum_val) {
-                    return enum_val;
+                    ret.value = enum_val;
+                    return ret;
                 }
 
                 System.err.println("[ERROR] serialize failed. " + prefix + " data error.");
-
-                return null;
+                break;
             }
 
-            case MESSAGE:
+            case MESSAGE: {
                 DynamicMessage.Builder node = DynamicMessage.newBuilder(fd.getMessageType());
-                writeData(node, desc, fd.getMessageType(), prefix);
-                return node.build();
+                ret.valid = writeData(node, desc, fd.getMessageType(), prefix);
+                ret.value = node.build();
+                break;
+            }
 
             default:
-                return null;
+                break;
         }
+
+        return ret;
     }
 }

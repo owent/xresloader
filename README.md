@@ -27,21 +27,23 @@ java -jar xresloader.jar -t json -p protobuf -f kind.pb  -n "/(?i)\.bin$/\.json/
 可用参数列表
 ------
 
-|          参数选项           |         描述        |                   说明                     |
-|-----------------------------|---------------------|--------------------------------------------|
-|-t --output-type             | 输出类型            | bin（默认值）,lua,msgpack,json,xml(暂未实现)                 |
-|-p --proto                   | 协议描述类型        | protobuf(默认值),capnproto(暂未实现),flatbuffer(暂未实现)      |
-|-f --proto-file              | 协议描述文件        |                                            |
-|-o --output-dir              | 输出目录            | 默认为当前目录                             |
-|-d --data-src-dir            | 数据源根目录        | 默认为当前目录                             |
-|-s --src-file                | 数据源描述文件      | 后缀可以是 .xls, .xlsx, .cvs, .xlsm, .ods, .ini, .cfg, .conf |
-|-m --src-meta                | 数据源描述表        | 可多个                                     |
-|-v --version                 | 打印版本号          |                                            |
-|-n --rename                  | 重命名输出文件名    | 正则表达式 （如：/(?i)\\.bin$/\\.lua/）    |
-|--enable-excel-formular      | 开启Excel公式支持   | 默认开启，使用公式会大幅减慢转表速度       |
-|--disable-excel-formular     | 关闭Excel公式支持   | 关闭公式会大幅加快转表速度                 |
-                
-                
+|          参数选项           |         描述        |                   说明                                                    |
+|-----------------------------|---------------------|---------------------------------------------------------------------------|
+|-t --output-type             | 输出类型            | bin（默认值）,lua,msgpack,json,xml(暂未实现)                              |
+|-p --proto                   | 协议描述类型        | protobuf(默认值),capnproto(暂未实现),flatbuffer(暂未实现)                 |
+|-f --proto-file              | 协议描述文件        |                                                                           |
+|-o --output-dir              | 输出目录            | 默认为当前目录                                                            |
+|-d --data-src-dir            | 数据源根目录        | 默认为当前目录                                                            |
+|-s --src-file                | 数据源描述文件      | 后缀可以是 .xls, .xlsx, .cvs, .xlsm, .ods, .ini, .cfg, .conf              |
+|-m --src-meta                | 数据源描述表        | 可多个                                                                    |
+|-v --version                 | 打印版本号          |                                                                           |
+|-n --rename                  | 重命名输出文件名    | 正则表达式 （如：/(?i)\\.bin$/\\.lua/）                                   |
+|--enable-excel-formular      | 开启Excel公式支持   | 默认开启，使用公式会大幅减慢转表速度                                      |
+|--disable-excel-formular     | 关闭Excel公式支持   | 关闭公式会大幅加快转表速度                                                |
+|--disable-empty-list         | 禁止空列表项        | 默认开启，禁止空列表项，自动删除Excel中的未填充数据，不会转出到输出文件中 |
+|--enable-empty-list          | 开启空列表项        | 开启空列表项，未填充数据将使用默认的空值来填充，并转出到输出文件中        |                
+
+ 
 协议类型
 ------
 1. **protobuf** （已实现）

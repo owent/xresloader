@@ -6,7 +6,7 @@ xresloader
 编译和打包
 ======
 
-使用[apache ant](http://ant.apache.org/)
+方法一: 使用[apache ant](http://ant.apache.org/)
 ------
 
 ```bash
@@ -17,7 +17,7 @@ ant -f xresloader.xml artifact.xresloader:jar
 ant -f xresloader.xml build.all.artifacts
 ```
 
-手动构建
+方法二: 手动构建
 ------
 
 1. 导入deps目录中的所有jar包

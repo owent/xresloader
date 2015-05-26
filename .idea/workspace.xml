@@ -7,13 +7,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="08f57cb9-7d74-4acf-97ab-f864ab1e1616" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/owent/xresloader/data/src/DataContainer.java" afterPath="$PROJECT_DIR$/src/com/owent/xresloader/data/src/DataContainer.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/owent/xresloader/ProgramOptions.java" afterPath="$PROJECT_DIR$/src/com/owent/xresloader/ProgramOptions.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/README.md" afterPath="$PROJECT_DIR$/README.md" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/encodings.xml" afterPath="$PROJECT_DIR$/.idea/encodings.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/xresloader.properties" afterPath="$PROJECT_DIR$/xresloader.properties" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/xresloader.xml" afterPath="$PROJECT_DIR$/xresloader.xml" />
     </list>
     <ignored path="xresloader.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -42,8 +36,8 @@
             <state />
           </provider>
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-0.6473988">
-              <caret line="79" column="42" selection-start-line="79" selection-start-column="42" selection-end-line="79" selection-end-column="42" />
+            <state vertical-scroll-proportion="-1.2624277">
+              <caret line="48" column="0" selection-start-line="48" selection-start-column="0" selection-end-line="48" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -87,8 +81,8 @@
         <option value="$PROJECT_DIR$/src/com/owent/xresloader/data/dst/DataDstLua.java" />
         <option value="$PROJECT_DIR$/src/com/google/flatbuffers/FlatBufferBuilder.java" />
         <option value="$PROJECT_DIR$/src/com/owent/xresloader/data/src/DataContainer.java" />
-        <option value="$PROJECT_DIR$/README.md" />
         <option value="$PROJECT_DIR$/src/com/owent/xresloader/ProgramOptions.java" />
+        <option value="$PROJECT_DIR$/README.md" />
       </list>
     </option>
   </component>
@@ -594,12 +588,12 @@
       <workItem from="1431350334212" duration="985000" />
       <workItem from="1431752996987" duration="20000" />
       <workItem from="1432641258558" duration="82000" />
-      <workItem from="1432641360865" duration="6636000" />
+      <workItem from="1432641360865" duration="7312000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="75207000" />
+    <option name="totallyTimeSpent" value="75883000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="1912" y="-8" width="1936" height="1056" extended-state="6" />
@@ -1031,8 +1025,8 @@
         <state />
       </provider>
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-0.6473988">
-          <caret line="79" column="42" selection-start-line="79" selection-start-column="42" selection-end-line="79" selection-end-column="42" />
+        <state vertical-scroll-proportion="-1.2624277">
+          <caret line="48" column="0" selection-start-line="48" selection-start-column="0" selection-end-line="48" selection-end-column="0" />
           <folding />
         </state>
       </provider>

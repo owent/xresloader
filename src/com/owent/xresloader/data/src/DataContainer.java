@@ -1,7 +1,7 @@
 package com.owent.xresloader.data.src;
 
 /**
- * Created by Å·ÎÄèº on 2015/5/11.
+ * Created by æ¬§æ–‡éŸ¬ on 2015/5/11.
  */
 public class DataContainer<T> {
     public boolean valid = false;
@@ -18,7 +18,7 @@ public class DataContainer<T> {
     public DataContainer<T> set(T v) {
         value = v;
 
-        // ¿Õ×Ö·û´®Ò²ÈÏÎªÊÇÎ´ÅäÖÃÏî
+        // ç©ºå­—ç¬¦ä¸²ä¹Ÿè®¤ä¸ºæ˜¯æœªé…ç½®é¡¹
         if (v instanceof String) {
             valid = false == ((String) v).isEmpty();
         } else {

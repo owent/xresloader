@@ -3,6 +3,26 @@ xresloader
 
 快速实现一个简单暴力功能强大的导表工具
 
+编译和打包
+======
+
+使用[apache ant](http://ant.apache.org/)
+------
+
+```bash
+# 执行
+ant -f xresloader.xml artifact.xresloader:jar
+
+# 或执行
+ant -f xresloader.xml build.all.artifacts
+```
+
+手动构建
+------
+
+1. 导入deps目录中的所有jar包
+2. 编译并打包header和src目录下的所有java源代码
+3. 打包时使用src/META-INF/MANIFEST.MF作为清单文件即可
 
 工具命令行参数
 ======
@@ -46,9 +66,9 @@ java -jar xresloader.jar -t json -p protobuf -f kind.pb  -n "/(?i)\.bin$/\.json/
  
 协议类型
 ------
-1. **protobuf** （已实现）
-2. **capnproto**    （暂未支持）
-3. **flatbuffer**   （计划中）
+1. **protobuf**     （已实现）
+2. **capnproto**    （暂未支持:目前capnproto还没有提供java下通过反射打解包数据的方法，暂时放弃支持）
+3. **flatbuffer**   （暂未支持:目前flatbuffers还没有提供java下通过反射打解包数据的方法，暂时放弃支持）
                 
                 
 数据源描述文件说明(根据后缀判断类型有不同读取方式)
@@ -58,7 +78,7 @@ java -jar xresloader.jar -t json -p protobuf -f kind.pb  -n "/(?i)\.bin$/\.json/
 |         .xls,.xlsx          | 视作Excel文件，数据源描述表为Excel内的Sheet名称                                |已实现, 非微软格式尚未测试    |
 |     .ini,.conf,.cfg         | 视作ini文件，数据源描述表为ini内的Section名称                                  |已实现                    |
 |          .json              | 视作json文件，数据源描述表为json内的第一层子节点名称                              |(暂未支持)                 |
-|          .xml               | 视作json文件，数据源描述表为xml内的根节点下的子节点TagName，并且只取第一个           |(暂未支持)                 |
+|          .xml               | 视作xml文件，数据源描述表为xml内的根节点下的子节点TagName，并且只取第一个            |(暂未支持)                 |
 
 
 数据源描述表配置项及示例
@@ -78,6 +98,49 @@ java -jar xresloader.jar -t json -p protobuf -f kind.pb  -n "/(?i)\.bin$/\.json/
 |KeyWordRegex  | 分词规则(判断规则,移除分词符号规则,前缀过滤规则) | [A-Z_\$ \t\r\n]            | [_\$ \t\r\n] | [a-zA-Z_\$]  | 正则表达式*(可选)*|
 |Encoding      | 编码转换                                         | UTF-8                      |              |              |注：Google的protobuf库的代码里写死了UTF-8(2.6.1版本)，故而该选项对Protobuf的二进制输出无效|
 
+
+输出格式说明
+======
+|          输出格式参数         |                                  输出格式说明                                                                       |           说明                                 |
+|-----------------------------|------------------------------------------------------------------------------------------------------------------|------------------------------------------------|
+|           bin               | 基于协议的二进制文件,不同的协议类型(-p参数)输出的二进制不一样,一般是header+body,body中有转出的数据列表, 协议格式见header文件夹      | 已实现(protobuf)                                 |
+|           lua               | 转出为格式化的lua文件(易读), 一般格式为 return {\[1\] = 转表头信息, \[协议结构名称\] = {数据列表} }                          | 已实现(参见[sample](sample/role_cfg.lua)          |
+|          msgpack            | 转出为使用[MsgPack](http://msgpack.org/)打包的二进制文件,内含的第一个message是转表头信息，后面紧跟数据，可以用任何支持得客户端解包  | 已实现(参见[sample](sample/role_cfg.msgpack.bin) |
+|           json              | 转出为紧缩的json文件，一般格式为 \[ {转表头信息}, {协议结构名称 : \[ 转出的数据 \] } \]                                      | 已实现(参见[sample](sample/role_cfg.json)        |
+|           xml               | 转出为紧缩的xml文件                                                                                                  | (暂未实现)                                      |
+
+关于加载导出的数据
+======
+
+转出的数据都采用header+data_block的形式。本工具并不规定怎么读取转表导出的数据，开发者可以按照转出的数据规则自由操作。
+
+但是为了使用方便，在[loader-binding](loader-binding)里提供了几种基本的读表方式。
+
+protobuf协议
+------
+1. 如果你使用官方的protobuf或protobuf-lite，可以使用[loader-binding/cxx](loader-binding/cxx)来加载配置
+> sample 参见: [sample/cxx/read_kind_sample.cpp](sample/cxx/read_kind_sample.cpp)
+
+2. 如果你使用云峰的[pbc](https://github.com/cloudwu/pbc)，可以使用[loader-binding/pbc](loader-binding/pbc)来加载配置
+> 这个加载器会依赖 [https://github.com/owent-utils/lua/tree/master/src](https://github.com/owent-utils/lua/tree/master/src) 里的部分内容。
+> 
+> 需要使用pbc先加载[header/pb_header.pb](header/pb_header.pb)文件
+> 
+> pbc_config_manager:load_buffer_kv(协议名, 二进制, function(序号, 转出的lua table) return key的值 end) -- 读取key-value型数据接口
+> 
+> pbc_config_manager:load_buffer_kl(协议名, 二进制, function(序号, 转出的lua table) return key的值 end) -- 读取key-list型数据接口
+
+其他输出格式
+------
+1. **lua**格式输出可以按[loader-binding/lua](loader-binding/lua)的说明读取。
+> 这个加载器会依赖 [https://github.com/owent-utils/lua/tree/master/src](https://github.com/owent-utils/lua/tree/master/src) 里的部分内容。
+> 
+> conf_manager:load_kv(require的路径, function(序号, 转出的lua table) return key的值 end) -- 读取key-value型数据接口
+> 
+> conf_manager:load_kl(require的路径, function(序号, 转出的lua table) return key的值 end) -- 读取key-list型数据接口
+
+2. [MsgPack](http://msgpack.org/)的读取的语言和工具很多，任意工具都能比较简单地读出数据，故而不再提供读取工具
+3. **Json**的读取的语言和工具很多，任意工具都能比较简单地读出数据，故而不再提供读取工具
 
 使用注意事项
 ======

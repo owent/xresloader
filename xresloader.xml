@@ -26,6 +26,7 @@
     <exclude name="**/.git/**"/>
     <exclude name="**/.hg/**"/>
     <exclude name="**/.svn/**"/>
+    <exclude name="**/.tox/**"/>
     <exclude name="**/CVS/**"/>
     <exclude name="**/RCS/**"/>
     <exclude name="**/SCCS/**"/>
@@ -55,41 +56,6 @@
     <exclude name="**/?*.kt"/>
     <exclude name="**/?*.clj"/>
   </patternset>
-  
-  <!-- JDK definitions -->
-  
-  <property name="jdk.bin.1.8" value="${jdk.home.1.8}/bin"/>
-  <path id="jdk.classpath.1.8">
-    <fileset dir="${jdk.home.1.8}">
-      <include name="jre/lib/charsets.jar"/>
-      <include name="jre/lib/deploy.jar"/>
-      <include name="jre/lib/javaws.jar"/>
-      <include name="jre/lib/jce.jar"/>
-      <include name="jre/lib/jfr.jar"/>
-      <include name="jre/lib/jfxswt.jar"/>
-      <include name="jre/lib/jsse.jar"/>
-      <include name="jre/lib/management-agent.jar"/>
-      <include name="jre/lib/plugin.jar"/>
-      <include name="jre/lib/resources.jar"/>
-      <include name="jre/lib/rt.jar"/>
-      <include name="jre/lib/ext/access-bridge-64.jar"/>
-      <include name="jre/lib/ext/cldrdata.jar"/>
-      <include name="jre/lib/ext/dnsns.jar"/>
-      <include name="jre/lib/ext/jaccess.jar"/>
-      <include name="jre/lib/ext/jfxrt.jar"/>
-      <include name="jre/lib/ext/localedata.jar"/>
-      <include name="jre/lib/ext/nashorn.jar"/>
-      <include name="jre/lib/ext/sunec.jar"/>
-      <include name="jre/lib/ext/sunjce_provider.jar"/>
-      <include name="jre/lib/ext/sunmscapi.jar"/>
-      <include name="jre/lib/ext/sunpkcs11.jar"/>
-      <include name="jre/lib/ext/zipfs.jar"/>
-    </fileset>
-  </path>
-  
-  <property name="project.jdk.home" value="${jdk.home.1.8}"/>
-  <property name="project.jdk.bin" value="${jdk.bin.1.8}"/>
-  <property name="project.jdk.classpath" value="jdk.classpath.1.8"/>
   
   
   <!-- Project Libraries -->
@@ -135,18 +101,6 @@
   
   
   <!-- Global Libraries -->
-  <!-- Register Custom Compiler Taskdefs -->
-  <property name="javac2.home" value="${idea.home}/lib"/>
-  <path id="javac2.classpath">
-    <pathelement location="${javac2.home}/javac2.jar"/>
-    <pathelement location="${javac2.home}/jdom.jar"/>
-    <pathelement location="${javac2.home}/asm-all.jar"/>
-    <pathelement location="${javac2.home}/jgoodies-forms.jar"/>
-  </path>
-  <target name="register.custom.compilers">
-    <taskdef name="javac2" classname="com.intellij.ant.Javac2" classpathref="javac2.classpath"/>
-    <taskdef name="instrumentIdeaExtensions" classname="com.intellij.ant.InstrumentIdeaExtensions" classpathref="javac2.classpath"/>
-  </target>
   
   <!-- Modules -->
   
@@ -156,11 +110,8 @@
   <dirname property="module.xresloader.basedir" file="${ant.file}"/>
   
   
-  <property name="module.jdk.home.xresloader" value="${project.jdk.home}"/>
-  <property name="module.jdk.bin.xresloader" value="${project.jdk.bin}"/>
-  <property name="module.jdk.classpath.xresloader" value="${project.jdk.classpath}"/>
   
-  <property name="compiler.args.xresloader" value="-encoding GBK -source 1.6 ${compiler.args}"/>
+  <property name="compiler.args.xresloader" value="-encoding UTF-8 -source 1.6 ${compiler.args}"/>
   
   <property name="xresloader.output.dir" value="${module.xresloader.basedir}/out/production/xresloader"/>
   <property name="xresloader.testoutput.dir" value="${module.xresloader.basedir}/out/test/xresloader"/>
@@ -170,7 +121,6 @@
   </path>
   
   <path id="xresloader.module.production.classpath">
-    <path refid="${module.jdk.classpath.xresloader}"/>
     <path refid="library.poi.classpath"/>
     <path refid="library.commons-codec.classpath"/>
     <path refid="library.java-getopt.classpath"/>
@@ -194,7 +144,6 @@
   </path>
   
   <path id="xresloader.module.classpath">
-    <path refid="${module.jdk.classpath.xresloader}"/>
     <pathelement location="${xresloader.output.dir}"/>
     <path refid="library.poi.classpath"/>
     <path refid="library.commons-codec.classpath"/>
@@ -238,15 +187,15 @@
   
   <target name="compile.module.xresloader" depends="compile.module.xresloader.production,compile.module.xresloader.tests" description="Compile module xresloader"/>
   
-  <target name="compile.module.xresloader.production" depends="register.custom.compilers" description="Compile module xresloader; production classes">
+  <target name="compile.module.xresloader.production" description="Compile module xresloader; production classes">
     <mkdir dir="${xresloader.output.dir}"/>
-    <javac2 destdir="${xresloader.output.dir}" debug="${compiler.debug}" nowarn="${compiler.generate.no.warnings}" memorymaximumsize="${compiler.max.memory}" fork="true" executable="${module.jdk.bin.xresloader}/javac">
+    <javac destdir="${xresloader.output.dir}" debug="${compiler.debug}" nowarn="${compiler.generate.no.warnings}" memorymaximumsize="${compiler.max.memory}" fork="true">
       <compilerarg line="${compiler.args.xresloader}"/>
       <bootclasspath refid="xresloader.module.bootclasspath"/>
       <classpath refid="xresloader.module.production.classpath"/>
       <src refid="xresloader.module.sourcepath"/>
       <patternset refid="excluded.from.compilation.xresloader"/>
-    </javac2>
+    </javac>
     
     <copy todir="${xresloader.output.dir}">
       <fileset dir="${module.xresloader.basedir}/src">
@@ -260,7 +209,7 @@
     </copy>
   </target>
   
-  <target name="compile.module.xresloader.tests" depends="register.custom.compilers,compile.module.xresloader.production" description="compile module xresloader; test classes" unless="skip.tests"/>
+  <target name="compile.module.xresloader.tests" depends="compile.module.xresloader.production" description="compile module xresloader; test classes" unless="skip.tests"/>
   
   <target name="clean.module.xresloader" description="cleanup module">
     <delete dir="${xresloader.output.dir}"/>

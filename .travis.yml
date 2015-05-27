@@ -1,0 +1,26 @@
+language: java
+
+jdk:
+  - oraclejdk8
+
+script: ant -f xresloader.xml build.modules
+
+install: ant -f xresloader.xml all
+
+branches:
+  only:
+    - master
+
+notifications:
+  email: false
+  irc:
+    template:
+      - "%{repository}/%{branch} (%{commit} - %{author}): %{build_url}: %{message}"
+
+env:
+  - LANG="zh_CN.UTF-8"
+
+os:
+  - linux
+  - osx
+

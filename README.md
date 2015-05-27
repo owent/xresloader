@@ -15,6 +15,9 @@ ant -f xresloader.xml artifact.xresloader:jar
 
 # 或执行
 ant -f xresloader.xml build.all.artifacts
+
+# 或执行
+ant -f xresloader.xml all
 ```
 
 方法二: 手动构建

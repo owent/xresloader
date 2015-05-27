@@ -3,6 +3,11 @@ xresloader
 
 快速实现一个简单暴力功能强大的导表工具
 
+构建环境     | Linux (Oracle JDK 8) |
+-------------|----------------------|
+当前构建状态 | [![Build Status](https://travis-ci.org/xresloader/xresloader.svg?branch=master)](https://travis-ci.org/xresloader/xresloader) |
+
+
 编译和打包
 ======
 

@@ -1,9 +1,0 @@
-<component name="libraryTable">
-  <library name="javassist-3.19.0-GA">
-    <CLASSES>
-      <root url="jar://$PROJECT_DIR$/deps/msgpack/javassist-3.19.0-GA.jar!/" />
-    </CLASSES>
-    <JAVADOC />
-    <SOURCES />
-  </library>
-</component>

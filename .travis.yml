@@ -3,9 +3,9 @@ language: java
 jdk:
   - oraclejdk8
 
-script: ant -f xresloader.xml build.modules
+script: mvn compile
 
-install: ant -f xresloader.xml all
+install: mvn package
 
 branches:
   only:

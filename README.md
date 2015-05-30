@@ -11,26 +11,46 @@ xresloader
 编译和打包
 ======
 
-方法一: 使用[apache ant](http://ant.apache.org/)
-------
++ 本项目使用[apache maven](https://maven.apache.org/)管理包依赖和打包构建流程。
 
 ```bash
-# 执行
-ant -f xresloader.xml artifact.xresloader:jar
-
-# 或执行
-ant -f xresloader.xml build.all.artifacts
-
-# 或执行
-ant -f xresloader.xml all
+# 编译
+mvn compile
+# 打包
+mvn package
 ```
 
-方法二: 手动构建
+以上命令会自动下载依赖文件、包和插件。
+
+编译完成后，输出的结果默认会放在 ***target*** 目录下。
+
+更新依赖包
 ------
 
-1. 导入deps目录中的所有jar包
-2. 编译并打包header和src目录下的所有java源代码
-3. 打包时使用src/META-INF/MANIFEST.MF作为清单文件即可
+需要更新依赖包版本只要修改pom.xml并修改版本号即可。
+
+依赖包和插件的组名、包名和版本可以在以下仓库内找到:
+
++ 官方maven仓库: http://mvnrepository.com/
++ oschina镜像仓库: http://maven.oschina.net
+
+更换maven仓库
+------
+由于国内访问官方maven仓库的速度比较慢，所以可以尝试使用oschina提供的maven仓库镜像。具体设置方法请参照 http://maven.oschina.net/help.html
+
+设置完maven配置之后，可以用如下命令编译打包
+
+```bash
+# 编译
+mvn -s [settings.xml路径] compile
+# 打包
+mvn -s [settings.xml路径] package
+```
+
+其他maven功能
+------
+参见： https://maven.apache.org/
+
 
 工具命令行参数
 ======

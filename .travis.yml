@@ -2,10 +2,16 @@ language: java
 
 jdk:
   - oraclejdk8
+  - oraclejdk7
+  - openjdk7
 
-script: mvn compile
+cache:
+  directories:
+    - $HOME/.m2
 
-install: mvn package
+install: mvn install -DskipTests=true
+    
+script: mvn package
 
 branches:
   only:

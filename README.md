@@ -12,6 +12,7 @@ xresloader
 ======
 
 + 本项目使用[apache maven](https://maven.apache.org/)管理包依赖和打包构建流程。
++ JDK 需要1.8或以上版本
 
 ```bash
 # 编译

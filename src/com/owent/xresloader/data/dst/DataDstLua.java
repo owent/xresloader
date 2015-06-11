@@ -33,9 +33,15 @@ public class DataDstLua extends DataDstImpl {
         sb.append("    " + SchemeConf.getInstance().getProtoName() + " = {\n");
 
         while (DataSrcImpl.getOurInstance().next()) {
+            int old_len = sb.length();
             sb.append("        {\n");
-            writeData(sb, desc, "            ", "");
+            boolean res = writeData(sb, desc, "            ", "");
             sb.append("        },\n");
+
+            // 过滤空数据项
+            if (false == res) {
+                sb.setLength(old_len);
+            }
         }
 
         sb.append("    }\n");

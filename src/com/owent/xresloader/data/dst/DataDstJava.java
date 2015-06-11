@@ -42,7 +42,10 @@ public abstract class DataDstJava extends DataDstImpl {
         ret.body.put(SchemeConf.getInstance().getProtoName(), item_list);
 
         while (DataSrcImpl.getOurInstance().next()) {
-            item_list.add(writeData(desc, "").value);
+            DataEntry conv_data = writeData(desc, "");
+            if (conv_data.valid) {
+                item_list.add(conv_data.value);
+            }
         }
 
         return ret;

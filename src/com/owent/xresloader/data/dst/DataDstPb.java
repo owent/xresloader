@@ -114,10 +114,10 @@ public class DataDstPb extends DataDstImpl {
             if (null != data && !data.isEmpty()) {
                 ++count;
                 blocks.addDataBlock(data);
-            }
 
-            if (null != md5) {
-                md5.update(data.toByteArray());
+                if (null != md5) {
+                    md5.update(data.toByteArray());
+                }
             }
         }
         header.setCount(count);
@@ -284,7 +284,12 @@ public class DataDstPb extends DataDstImpl {
     private ByteString convData(DataDstWriterNode desc) {
         DynamicMessage.Builder root = DynamicMessage.newBuilder(currentMsgDesc);
 
-        writeData(root, desc, currentMsgDesc, "");
+        boolean valid_data = writeData(root, desc, currentMsgDesc, "");
+        // 过滤空项
+        if(!valid_data) {
+            return null;
+        }
+
         try {
             return root.build().toByteString();
         } catch (Exception e) {

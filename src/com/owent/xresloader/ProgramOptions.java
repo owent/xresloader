@@ -33,6 +33,7 @@ public class ProgramOptions {
     public RenameRule renameRule = null;
     public boolean enableFormular = true;
     public boolean enbleEmptyList = false;
+    public int prettyIndent = 0;
 
     private ProgramOptions() {
         dataSourceMetas = new LinkedList<String>();
@@ -66,6 +67,7 @@ public class ProgramOptions {
                 new LongOpt("src-meta", LongOpt.REQUIRED_ARGUMENT, sb, 'm'),
                 new LongOpt("version", LongOpt.NO_ARGUMENT, sb, 'v'),
                 new LongOpt("rename", LongOpt.REQUIRED_ARGUMENT, sb, 'n'),
+                new LongOpt("pretty", LongOpt.REQUIRED_ARGUMENT, sb, 0),
                 new LongOpt("disable-excel-formular", LongOpt.NO_ARGUMENT, null, 0),
                 new LongOpt("enable-excel-formular", LongOpt.NO_ARGUMENT, null, 0),
                 new LongOpt("disable-empty-list", LongOpt.NO_ARGUMENT, null, 0),
@@ -85,21 +87,22 @@ public class ProgramOptions {
             switch (cc) {
                 case 'h': {
                     System.out.println("Usage: java -jar " + script + " [options...]");
-                    System.out.println("-h, --help                  help");
-                    System.out.println("-t, --output-type           output type(bin, lua, msgpack, json)");
-                    System.out.println("-p, --proto                 protocol(protobuf)");
-                    System.out.println("-f, --proto-file            protocol description file");
-                    System.out.println("-o, --output-dir            output directory");
-                    System.out.println("-d, --data-src-dir          data source directory");
-                    System.out.println("-s, --src-file              data source file(.xls, .xlsx, .cvs, .xlsm, .ods, .ini, .cfg, .conf)");
-                    System.out.println("-m, --src-meta              data description meta");
-                    System.out.println("-v, --version               print version");
-                    System.out.println("-n, --rename                rename output file name(regex), sample: /(?i)\\.bin$/\\.lua/");
+                    System.out.println("-h, --help                              show this help message and exit");
+                    System.out.println("-t, --output-type <type>                output type(bin, lua, msgpack, json, xml)");
+                    System.out.println("-p, --proto <protocol type name>        protocol(protobuf)");
+                    System.out.println("-f, --proto-file <file name>            protocol description file");
+                    System.out.println("-o, --output-dir <output directory>     output directory");
+                    System.out.println("-d, --data-src-dir <source directory>   data source directory(where to find excel specified by meta) ");
+                    System.out.println("-s, --src-file <meta file name>         data source file(.xls, .xlsx, .cvs, .xlsm, .ods, .ini, .cfg, .conf, .json)");
+                    System.out.println("-m, --src-meta <meta name>              data description meta");
+                    System.out.println("-v, --version                           print version and exit");
+                    System.out.println("-n, --rename <pattern>                  rename output file name(regex), sample: /(?i)\\.bin$/\\.lua/");
+                    System.out.println("--pretty <ident length>                 set pretty output and set ident length when output type supported.(disable pretty output by set to 0)");
                     System.out.println("Control options:");
-                    System.out.println("--disable-excel-formular    disable formular in excel. will be faster when convert data.");
-                    System.out.println("--enable-excel-formular     [default] enable formular in excel. will be slower when convert data.");
-                    System.out.println("--disable-empty-list        [default] remove empty elements in a list or repeated field.");
-                    System.out.println("--enable-empty-list         keep empty elements in a list or repeated field with default value.");
+                    System.out.println("--disable-excel-formular                disable formular in excel. will be faster when convert data.");
+                    System.out.println("--enable-excel-formular                 [default] enable formular in excel. will be slower when convert data.");
+                    System.out.println("--disable-empty-list                    [default] remove empty elements in a list or repeated field.");
+                    System.out.println("--enable-empty-list                     keep empty elements in a list or repeated field with default value.");
                     System.exit(0);
                     break;
                 }
@@ -113,7 +116,8 @@ public class ProgramOptions {
                         outType = FileType.MSGPACK;
                     } else if (val.equalsIgnoreCase("json")){
                         outType = FileType.JSON;
-                        //} else if (val.equalsIgnoreCase("xml")){
+                    } else if (val.equalsIgnoreCase("xml")){
+                        outType = FileType.XML;
                     } else {
                         System.err.println("[ERROR] invalid output type " + sb.toString());
                         return -1;
@@ -171,8 +175,8 @@ public class ProgramOptions {
                             name_suffix.equalsIgnoreCase("conf")
                     )) {
                         dataSourceType = FileType.INI;
-//                } else if (null != name_suffix && name_suffix.equalsIgnoreCase("json")) {
-//                    dataSourceType = FileType.JSON;
+                  } else if (null != name_suffix && name_suffix.equalsIgnoreCase("json")) {
+                      dataSourceType = FileType.JSON;
 //                } else if (null != name_suffix && name_suffix.equalsIgnoreCase("lua")) {
 //                    dataSourceType = FileType.LUA;
 //                } else if (null != name_suffix && name_suffix.equalsIgnoreCase("xml")) {
@@ -234,7 +238,13 @@ public class ProgramOptions {
                     int lindex = g.getLongind();
                     if (lindex >= 0 && lindex < long_opts.length) {
                         String long_opt_name = long_opts[lindex].getName();
-                        if (long_opt_name.equals("disable-excel-formular")) {
+                        if (long_opt_name.equals("pretty")) {
+                            if(null != g.getOptarg()) {
+                                prettyIndent = Integer.parseInt(g.getOptarg());
+                            } else {
+                                prettyIndent = 0;
+                            }
+                        } else if (long_opt_name.equals("disable-excel-formular")) {
                             enableFormular = false;
                         } else if (long_opt_name.equals("enable-excel-formular")) {
                             enableFormular = true;
@@ -258,7 +268,7 @@ public class ProgramOptions {
     }
 
     public String getVersion() {
-        return "1.0.0.1";
+        return "1.0.1.0";
     }
 
 

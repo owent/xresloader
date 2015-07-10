@@ -38,7 +38,7 @@ public class main {
 
             // 1. 描述信息
             if (false == SchemeConf.getInstance().getScheme().load_scheme(sn)) {
-                System.err.println("[ERROR] convert scheme \"" + sn + "\" failed");
+                System.err.println(String.format("[ERROR] convert scheme \"%s\" failed", sn));
                 continue;
             }
 
@@ -46,12 +46,12 @@ public class main {
             Class ds_clazz = DataSrcExcel.class;
             DataSrcImpl ds = DataSrcImpl.create(ds_clazz);
             if (null == ds) {
-                System.err.println("[ERROR] create data source class \"" + ds_clazz.getName() + "\" failed");
+                System.err.println(String.format("[ERROR] create data source class \"%s\" failed", ds_clazz.getName()));
                 continue;
             }
             ret = ds.init();
             if (ret < 0) {
-                System.err.println("[ERROR] init data source class \"" + ds_clazz.getName() + "\" failed");
+                System.err.println(String.format("[ERROR] init data source class \"%s\" failed", ds_clazz.getName()));
                 continue;
             }
 
@@ -62,20 +62,20 @@ public class main {
                     protoDesc = new DataDstPb();
                     break;
                 default:
-                    System.err.println("[ERROR] protocol type \"" + ProgramOptions.getInstance().protocol.toString() + "\" invalid");
+                    System.err.println(String.format("[ERROR] protocol type \"%s\" invalid", ProgramOptions.getInstance().protocol.toString()));
                     break;
             }
 
             if (null == protoDesc)
                 continue;
             if (false == protoDesc.init()) {
-                System.err.println("[ERROR] protocol desc \"" + ProgramOptions.getInstance().protocol.toString() + "\" init failed");
+                System.err.println(String.format("[ERROR] protocol desc \"%s\" init failed", ProgramOptions.getInstance().protocol.toString()));
                 continue;
             }
 
             DataDstWriterNode dataDesc = protoDesc.compile();
             if (null == dataDesc) {
-                System.err.println("[ERROR] compile protocol desc \"" + ProgramOptions.getInstance().protocol.toString() + "\" failed");
+                System.err.println(String.format("[ERROR] compile protocol desc \"%s\" failed", ProgramOptions.getInstance().protocol.toString()));
                 continue;
             }
 
@@ -97,8 +97,12 @@ public class main {
                     outDesc = new DataDstJson();
                     outDesc = outDesc.init() ? outDesc : null;
                     break;
+                case XML:
+                    outDesc = new DataDstXml();
+                    outDesc = outDesc.init() ? outDesc : null;
+                    break;
                 default:
-                    System.err.println("[ERROR] output type \"" + ProgramOptions.getInstance().outType.toString() + "\" invalid");
+                    System.err.println(String.format("[ERROR] output type \"%s\" invalid", ProgramOptions.getInstance().outType.toString()));
                     break;
             }
             if (null == outDesc)
@@ -110,9 +114,12 @@ public class main {
                     filePath = ProgramOptions.getInstance().outputDirectory + '/' + filePath;
                 OutputStream fos = new FileOutputStream(filePath, false);
                 byte[] data = outDesc.build(dataDesc);
-                fos.write(data);
+
+                if (null != data) {
+                    fos.write(data);
+                }
             } catch (java.io.IOException e) {
-                System.err.println("[ERROR] write data to file \"" + SchemeConf.getInstance().getOutputFile() + "\" failed");
+                System.err.println(String.format("[ERROR] write data to file \"%s\" failed", SchemeConf.getInstance().getOutputFile()));
                 continue;
             }
 

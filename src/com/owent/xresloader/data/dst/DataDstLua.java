@@ -5,14 +5,20 @@ import com.owent.xresloader.data.src.DataContainer;
 import com.owent.xresloader.data.src.DataSrcImpl;
 import com.owent.xresloader.scheme.SchemeConf;
 import org.apache.commons.codec.binary.Hex;
+import org.json.*;
 
+import java.io.StringBufferInputStream;
+import java.io.StringWriter;
 import java.nio.charset.Charset;
+import java.util.List;
 import java.util.Map;
 
 /**
  * Created by owentou on 2014/10/10.
  */
-public class DataDstLua extends DataDstImpl {
+public class DataDstLua extends DataDstJava {
+    private String endl = "\n";
+    private String ident = "    ";
 
     @Override
     public boolean init() {
@@ -21,31 +27,39 @@ public class DataDstLua extends DataDstImpl {
 
     @Override
     public final byte[] build(DataDstWriterNode desc) {
-        StringBuffer sb = new StringBuffer();
+        if (ProgramOptions.getInstance().prettyIndent <= 0) {
+            endl = " ";
+            ident = "";
+        } else {
+            endl = System.getProperty("line.separator", "\n");
 
-        sb.append("return {\n");
-        sb.append("    [1] = {\n");
-        sb.append("        xrex_ver = \"" + ProgramOptions.getInstance().getVersion() + "\",\n");
-        sb.append("        data_ver = \"" + ProgramOptions.getInstance().getVersion() + "\",\n");
-        sb.append("        count = " + DataSrcImpl.getOurInstance().getRecordNumber() + ",\n");
-        sb.append("        hash_code = \"lua data has no hash code\"\n");
-        sb.append("    },\n");
-        sb.append("    " + SchemeConf.getInstance().getProtoName() + " = {\n");
-
-        while (DataSrcImpl.getOurInstance().next()) {
-            int old_len = sb.length();
-            sb.append("        {\n");
-            boolean res = writeData(sb, desc, "            ", "");
-            sb.append("        },\n");
-
-            // 过滤空数据项
-            if (false == res) {
-                sb.setLength(old_len);
+            ident = "";
+            for (int i = 0; i < ProgramOptions.getInstance().prettyIndent; ++ i) {
+                ident += " ";
             }
         }
 
-        sb.append("    }\n");
-        sb.append("}\n");
+        DataDstJava.DataDstObject data_obj = build_data(desc);
+        StringBuffer sb = new StringBuffer();
+
+        sb.append("return {").append(endl);
+
+        // header
+        sb.append(ident).append("[1] = ");
+        writeData(sb, data_obj.header, 1);
+        sb.append(",").append(endl);
+
+        // body
+        for(Map.Entry<String, List<Object> > item: data_obj.body.entrySet()) {
+            writeIdent(sb, 1);
+            sb.append(item.getKey()).append(" = ");
+
+            writeData(sb, item.getValue(), 1);
+            sb.append(",").append(endl);
+        }
+
+
+        sb.append("}");
 
         // 带编码的输出
         String encoding = SchemeConf.getInstance().getKey().getEncoding();
@@ -60,126 +74,74 @@ public class DataDstLua extends DataDstImpl {
         return null;
     }
 
-
-    private boolean writeData(StringBuffer sb, DataDstWriterNode desc, String indent, String prefix) {
-        boolean ret = false;
-        int  old_len = sb.length();
-
-        for (Map.Entry<String, DataDstWriterNode> c : desc.getChildren().entrySet()) {
-            String _name = DataDstWriterNode.makeNodeName(c.getKey());
-            if (c.getValue().isList()) {
-                sb.append(indent);
-                sb.append(_name + " = {\n");
-
-                for (int i = 0; i < c.getValue().getListCount(); ++i) {
-                    String new_prefix = DataDstWriterNode.makeChildPath(prefix, c.getKey(), i);
-                    int bak_len = sb.length();
-                    if(writeOneData(sb, c.getValue(), indent + "    ", new_prefix, "")) {
-                        ret = true;
-                    } else if(false == ProgramOptions.getInstance().enbleEmptyList) {
-                        sb.setLength(bak_len);
-                    }
-                }
-                sb.append(indent);
-                sb.append("},\n");
-            } else {
-                String new_prefix = DataDstWriterNode.makeChildPath(prefix, c.getKey());
-                if(writeOneData(sb, c.getValue(), indent, new_prefix, DataDstWriterNode.makeNodeName(c.getKey()))) {
-                    ret = true;
-                }
-            }
-
+    private void writeIdent(StringBuffer sb, int ident_num) {
+        for(; ident_num > 0; -- ident_num) {
+            sb.append(ident);
         }
-
-        if (false == ret) {
-            sb.setLength(old_len);
-        }
-        return ret;
     }
 
-    private boolean writeOneData(StringBuffer sb, DataDstWriterNode desc, String indent, String prefix, String _name) {
-        boolean ret = false;
-
-        sb.append(indent);
-        if (!_name.isEmpty())
-            sb.append(_name + " = ");
-
-        switch (desc.getType()) {
-            case INT:
-            case LONG: {
-                DataContainer<Long> res = DataSrcImpl.getOurInstance().getValue(prefix, new Long(0));
-                ret = res.valid;
-                sb.append(res.get());
-                break;
-            }
-
-            case FLOAT:
-            case DOUBLE: {
-                DataContainer<Double> res = DataSrcImpl.getOurInstance().getValue(prefix, new Double(0));
-                ret = res.valid;
-                sb.append(res.get());
-                break;
-            }
-
-            case BOOLEAN: {
-                DataContainer<Boolean> res = DataSrcImpl.getOurInstance().getValue(prefix, Boolean.FALSE);
-                ret = res.valid;
-                sb.append(res.get().toString());
-                break;
-            }
-
-            case STRING: {
-                DataContainer<String> res = DataSrcImpl.getOurInstance().getValue(prefix, "");
-                ret = res.valid;
-
-                sb.append("\"");
-                sb.append(res.get()
-                    .replaceAll("\"", "\\\"")
-                    .replaceAll("\\\\", "\\\\")
-                );
-                sb.append("\"");
-                break;
-            }
-
-            case BYTE_STRING: {
-                DataContainer<String> res = DataSrcImpl.getOurInstance().getValue(prefix, "");
-                ret = res.valid;
-
-                sb.append("\"");
-
-                sb.append(
-                    Hex.encodeHexString(
-                        res.get().getBytes()
-                    )
-                );
-                sb.append("\"");
-                break;
-            }
-
-            case ENUM: {
-                DataContainer<Long> res = DataSrcImpl.getOurInstance().getValue(prefix, new Long(0));
-                ret = res.valid;
-                sb.append(res.get());
-                break;
-            }
-
-            case OBJECT: {
-                sb.append(" {\n");
-                ret = writeData(sb, desc, indent + "    ", prefix);
-                sb.append(indent);
-                sb.append("}");
-
-                break;
-            }
-
-            default: {
-                sb.append("nil");
-                break;
-            }
+    private void writeData(StringBuffer sb, Object data, int ident_num) {
+        // null
+        if (null == data) {
+            sb.append("nil");
+            return;
         }
 
-        sb.append(",\n");
+        // 数字
+        // 枚举值已被转为Java Long，会在这里执行
+        if (data instanceof Number) {
+            sb.append(data.toString());
+            return;
+        }
 
-        return ret;
+        // 布尔
+        if (data instanceof Boolean) {
+            sb.append(((Boolean) data)? "true": "false");
+            return;
+        }
+
+        // 字符串&二进制
+        if (data instanceof String) {
+            // 利用json的字符串格式，和lua一样的没必要再引入一个库
+            sb.append(JSONObject.quote((String)data));
+            return;
+        }
+
+        // 列表
+        if (data instanceof List) {
+            List<Object> ls = (List<Object>)data;
+            sb.append("{").append(endl);
+
+            for(Object obj: ls) {
+                writeIdent(sb, ident_num + 1);
+                writeData(sb, obj, ident_num + 1);
+                sb.append(",").append(endl);
+            }
+
+            writeIdent(sb, ident_num);
+            sb.append("}");
+            return;
+        }
+
+        // Hashmap
+        if (data instanceof Map) {
+            Map<String, Object> mp = (Map<String, Object>)data;
+            sb.append("{").append(endl);
+
+            for(Map.Entry<String, Object> item: mp.entrySet()) {
+                writeIdent(sb, ident_num + 1);
+                sb.append(item.getKey()).append(" = ");
+
+                writeData(sb, item.getValue(), ident_num + 1);
+                sb.append(",").append(endl);
+            }
+
+            writeIdent(sb, ident_num);
+            sb.append("}");
+            return;
+        }
+
+        System.out.println(String.format("[ERROR] rewrite %s as nil, should not called here.", data.toString()));
+        sb.append("nil");
     }
 }

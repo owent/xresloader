@@ -6,7 +6,7 @@
 
     <groupId>com.owent.xresloader</groupId>
     <artifactId>xresloader</artifactId>
-    <version>1.0.0.1</version>
+    <version>1.0.1.0</version>
     <packaging>jar</packaging>
     <name>xresloader</name>
 
@@ -130,5 +130,13 @@
             <version>3.12</version>
             <type>jar</type>
         </dependency>
+
+        <dependency>
+            <groupId>dom4j</groupId>
+            <artifactId>dom4j</artifactId>
+            <version>1.6.1</version>
+            <type>jar</type>
+        </dependency>
+
     </dependencies>
 </project>

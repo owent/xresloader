@@ -27,50 +27,7 @@ mvn package
 
 更新依赖包
 ------
-
-需要更新依赖包版本只要修改[pom.xml](pom.xml)并修改版本号即可。
-
-依赖包和插件的组名、包名和版本可以在以下仓库内找到:
-
-+ 中心maven仓库: [http://search.maven.org/](http://search.maven.org/#browse)
-+ oschina镜像仓库: http://maven.oschina.net
-+ *或到下面列举的仓库列表中查找*
-
-更换maven仓库
-------
-由于国内访问官方maven仓库的速度比较慢，所以可以尝试使用oschina提供的maven仓库镜像
-
-+ 具体设置方法请参照 http://maven.oschina.net/help.html
-+ 简易安装方法是直接下载 http://maven.oschina.net/static/xml/settings.xml 并修改里面的 **localRepository** 选项，配置成你的环境中的本地缓存地址
-
-设置完maven配置之后，可以用如下命令编译打包
-
-```bash
-# 编译
-mvn -s [settings.xml路径] compile
-# 打包
-mvn -s [settings.xml路径] package
-```
-
-### 其他仓库地址
-#### 公有仓库地址：
-1. **[http://search.maven.org/](http://search.maven.org/#browse)**
-2. **http://mvnrepository.com/**
-3. **http://maven.oschina.net**
-5. http://mirrors.ibiblio.org/maven2/
-6. http://repository.jboss.com/maven2/
-7. http://repository.sonatype.org/content/groups/public/
-8. http://mirrors.ibiblio.org/pub/mirrors/maven2/org/acegisecurity/
-
-#### 私有仓库地址：
-1. http://repository.codehaus.org/
-2. http://snapshots.repository.codehaus.org/
-3. http://people.apache.org/repo/m2-snapshot-repository
-4. http://people.apache.org/repo/m2-incubating-repository/
-
-其他maven功能
-------
-参见： https://maven.apache.org/
+编译和打包见 [doc/INSTALL.md](安装说明\(doc/INSTALL.md\))
 
 
 工具命令行参数
@@ -84,13 +41,22 @@ mvn -s [settings.xml路径] package
 java -jar xresloader.jar -t bin -p protobuf -f kind.pb -s 资源转换示例.xlsx -m scheme_kind
 
 # Excel=>Lua，并重命名输出文件 
-java -jar xresloader.jar -t lua -p lua -f kind.pb -s 资源转换示例.xlsx -m scheme_kind -n "/(?i)\.bin$/\.lua/"
+java -jar xresloader.jar -t lua -p protobuf -f kind.pb --pretty 4 -s 资源转换示例.xlsx -m scheme_kind -n "/(?i)\.bin$/\.lua/"
 
 # Excel=>MsgPack二进制，并重命名输出文件 
-java -jar xresloader.jar -t lua -p msgpack -f kind.pb -s 资源转换示例.xlsx -m scheme_kind -n "/(?i)\.bin$/\.msgpack.bin/"
+java -jar xresloader.jar -t msgpack -p protobuf -f kind.pb -s 资源转换示例.xlsx -m scheme_kind -n "/(?i)\.bin$/\.msgpack.bin/"
 
 # 输出文件重命名+输出json格式+多次转表（多个-m参数）
-java -jar xresloader.jar -t json -p protobuf -f kind.pb  -n "/(?i)\.bin$/\.json/" -s 资源转换示例.xlsx -m scheme_kind -m scheme_upgrade
+java -jar xresloader.jar -t json -p protobuf -f kind.pb -n "/(?i)\.bin$/\.json/" -s 资源转换示例.xlsx -m scheme_kind -m scheme_upgrade
+
+# Excel=>Xml，并重命名输出文件 
+java -jar xresloader.jar -t xml -p protobuf -f kind.pb -s 资源转换示例.xlsx -m scheme_kind -n "/(?i)\.bin$/\.xml/"
+
+# Excel=>Xml，数据源是ini文件, 并重命名输出文件 
+java -jar xresloader.jar -t xml -p protobuf -f kind.pb --pretty 2 -s 资源转换示例.scheme.ini -m scheme_kind -n "/(?i)\.bin$/\.xml/"
+
+# Excel=>Xml，数据源是json文件, 并重命名输出文件 
+java -jar xresloader.jar -t xml -p protobuf -f kind.pb -s 资源转换示例.scheme.json -m scheme_kind -n "/(?i)\.bin$/\.xml/"
 ```
 
 可用参数列表
@@ -98,15 +64,16 @@ java -jar xresloader.jar -t json -p protobuf -f kind.pb  -n "/(?i)\.bin$/\.json/
 
 |          参数选项           |         描述        |                   说明                                                    |
 |-----------------------------|---------------------|---------------------------------------------------------------------------|
-|-t --output-type             | 输出类型            | bin（默认值）,lua,msgpack,json,xml(暂未实现)                              |
+|-t --output-type             | 输出类型            | bin（默认值）,lua,msgpack,json,xml                                     |
 |-p --proto                   | 协议描述类型        | protobuf(默认值),capnproto(暂未实现),flatbuffer(暂未实现)                 |
 |-f --proto-file              | 协议描述文件        |                                                                           |
 |-o --output-dir              | 输出目录            | 默认为当前目录                                                            |
 |-d --data-src-dir            | 数据源根目录        | 默认为当前目录                                                            |
-|-s --src-file                | 数据源描述文件      | 后缀可以是 .xls, .xlsx, .cvs, .xlsm, .ods, .ini, .cfg, .conf              |
+|-s --src-file                | 数据源描述文件      | 后缀可以是 .xls, .xlsx, .cvs, .xlsm, .ods, .ini, .cfg, .conf, .json        |
 |-m --src-meta                | 数据源描述表        | 可多个                                                                    |
 |-v --version                 | 打印版本号          |                                                                           |
 |-n --rename                  | 重命名输出文件名    | 正则表达式 （如：/(?i)\\.bin$/\\.lua/）                                   |
+|--pretty                     | 格式化输出         | 参数为整数，0代表关闭美化输出功能，大于0表示格式化时的缩进量                      |
 |--enable-excel-formular      | 开启Excel公式支持   | 默认开启，使用公式会大幅减慢转表速度                                      |
 |--disable-excel-formular     | 关闭Excel公式支持   | 关闭公式会大幅加快转表速度                                                |
 |--disable-empty-list         | 禁止空列表项        | 默认开启，禁止空列表项，自动删除Excel中的未填充数据，不会转出到输出文件中 |
@@ -123,40 +90,43 @@ java -jar xresloader.jar -t json -p protobuf -f kind.pb  -n "/(?i)\.bin$/\.json/
 数据源描述文件说明(根据后缀判断类型有不同读取方式)
 ------
 |     数据源描述文件后缀      |                                  数据源描述表                                  |           说明           |
-|-----------------------------|--------------------------------------------------------------------------|--------------------------|
-|         .xls,.xlsx          | 视作Excel文件，数据源描述表为Excel内的Sheet名称                                |已实现, 非微软格式尚未测试    |
-|     .ini,.conf,.cfg         | 视作ini文件，数据源描述表为ini内的Section名称                                  |已实现                    |
-|          .json              | 视作json文件，数据源描述表为json内的第一层子节点名称                              |(暂未支持)                 |
-|          .xml               | 视作xml文件，数据源描述表为xml内的根节点下的子节点TagName，并且只取第一个            |(暂未支持)                 |
+|-----------------------------|--------------------------------------------------------------------------------|--------------------------|
+|         .xls,.xlsx          | 视作Excel文件，数据源描述表为Excel内的Sheet名称                                |已实现, 非微软格式尚未测试|
+|     .ini,.conf,.cfg         | 视作ini文件，数据源描述表为ini内的Section名称                                  |已实现(不支持自动合表)   |
+|          .json              | 视作json文件，数据源描述表为json内的第一层子节点名称                              |已实现(必须是UTF-8编码,不支持自动合表)   |
+|          .xml               | 视作xml文件，数据源描述表为xml内的根节点下的子节点TagName，并且只取第一个            |(暂未支持)                |
 
 
 数据源描述表配置项及示例
 ======
-|     字段     |                        简介                      |           主配置           |     次配置   |   补充配置   |     说明     |
-|--------------|--------------------------------------------------|----------------------------|--------------|--------------|--------------|
-|DataSource    | 配置数据源(文件路径,表名)                        |  ./资源转换示例.xlsx       | kind         |  3,1         |   **必须**，可多个。多个则表示把多个Excel表数据合并再生成配置输出，这意味着这多个Excel表的描述Key的顺序和个数必须相同   |
-|MacroSource   | 元数据数据源(文件路径,表名)                      |  ./资源转换示例.xlsx       | macro        |  2,1         |    *可选*    |
+|     字段     |                        简介                                                            |           主配置           |     次配置   |   补充配置   |     说明     |
+|--------------|----------------------------------------------------------------------------------------|----------------------------|--------------|--------------|--------------|
+|DataSource    | 配置数据源(主配置:文件路径,次配置:表名,补充配置:起始行号，列号)                        |  ./资源转换示例.xlsx       | kind         |  3,1         |   **必须**，可多个。多个则表示把多个Excel表数据合并再生成配置输出，这意味着这多个Excel表的描述Key的顺序和个数必须相同   |
+|MacroSource   | 元数据数据源(主配置:文件路径,次配置:表名,补充配置:起始行号，列号)                      |  ./资源转换示例.xlsx       | macro        |  2,1         |    *可选*    |
 |编程接口配置  |
-|ProtoName     | 协议描述名称                                     |   role_cfg                 |              |              |   **必须**   |
-|OutputFile    | 输出文件                                         |   role_cfg.bin             |              |              |   **必须**   |
-|KeyRow        | 字段名描述行                                     |  2                         |              |              |   **必须**   |
-|KeyCase       | 字段名大小写                                     | 小写                       |              |              |大写/小写/不变|
-|KeyWordSplit  | 字段名分词字符                                   | _                          |              |              |    *可选*    |
-|KeyPrefix     | 字段名固定前缀                                   |                            |              |              |    *可选*    |
-|KeySuffix     | 字段名固定后缀                                   |                            |              |              |    *可选*    |
-|KeyWordRegex  | 分词规则(判断规则,移除分词符号规则,前缀过滤规则) | [A-Z_\$ \t\r\n]            | [_\$ \t\r\n] | [a-zA-Z_\$]  | 正则表达式*(可选)*|
-|Encoding      | 编码转换                                         | UTF-8                      |              |              |注：Google的protobuf库的代码里写死了UTF-8(2.6.1版本)，故而该选项对Protobuf的二进制输出无效|
+|ProtoName     | 协议描述名称                                                                           |   role_cfg                 |              |              |   **必须**   |
+|OutputFile    | 输出文件                                                                               |   role_cfg.bin             |              |              |   **必须**   |
+|KeyRow        | 字段名描述行                                                                           |  2                         |              |              |   **必须**   |
+|KeyCase       | 字段名大小写                                                                           | 小写                       |              |              |大写/小写/不变|
+|KeyWordSplit  | 字段名分词字符                                                                         | _                          |              |              |    *可选*    |
+|KeyPrefix     | 字段名固定前缀                                                                         |                            |              |              |    *可选*    |
+|KeySuffix     | 字段名固定后缀                                                                         |                            |              |              |    *可选*    |
+|KeyWordRegex  | 分词规则(判断规则,移除分词符号规则,前缀过滤规则)                                       | [A-Z_\$ \t\r\n]            | [_\$ \t\r\n] | [a-zA-Z_\$]  | 正则表达式*(可选)*|
+|Encoding      | 编码转换                                                                               | UTF-8                      |              |              |注：Google的protobuf库的代码里写死了UTF-8(2.6.1版本)，故而该选项对Protobuf的二进制输出无效|
 
 
 输出格式说明
 ======
-|          输出格式参数         |                                  输出格式说明                                                                       |           说明                                 |
-|-----------------------------|------------------------------------------------------------------------------------------------------------------|------------------------------------------------|
-|           bin               | 基于协议的二进制文件,不同的协议类型(-p参数)输出的二进制不一样,一般是header+body,body中有转出的数据列表, 协议格式见header文件夹      | 已实现(protobuf)                                 |
-|           lua               | 转出为格式化的lua文件(易读), 一般格式为 return {\[1\] = 转表头信息, \[协议结构名称\] = {数据列表} }                          | 已实现(参见[sample](sample/role_cfg.lua)          |
-|          msgpack            | 转出为使用[MsgPack](http://msgpack.org/)打包的二进制文件,内含的第一个message是转表头信息，后面紧跟数据，可以用任何支持得客户端解包  | 已实现(参见[sample](sample/role_cfg.msgpack.bin) |
-|           json              | 转出为紧缩的json文件，一般格式为 \[ {转表头信息}, {协议结构名称 : \[ 转出的数据 \] } \]                                      | 已实现(参见[sample](sample/role_cfg.json)        |
-|           xml               | 转出为紧缩的xml文件                                                                                                  | (暂未实现)                                      |
+|          输出格式参数       |                                  输出格式说明                                                                                       |           说明                                    |
+|-----------------------------|-------------------------------------------------------------------------------------------------------------------------------------|---------------------------------------------------|
+|           bin               | 基于协议的二进制文件,不同的协议类型(-p参数)输出的二进制不一样,一般是header+body,body中有转出的数据列表, 协议格式见header文件夹      | 示例见 [sample](sample/role_cfg.bin) (protobuf)                |
+|           lua               | 转出为格式化的lua文件(易读), 一般格式为 return {\[1\] = 转表头信息, \[协议结构名称\] = {数据列表} }                                 | 示例见[sample](sample/role_cfg.lua)          |
+|          msgpack            | 转出为使用[MsgPack](http://msgpack.org/)打包的二进制文件,内含的第一个message是转表头信息，后面紧跟数据，可以用任何支持得客户端解包  | 示例见[sample](sample/role_cfg.msgpack.bin)  |
+|           json              | 转出为json文件,一般格式为 \[ {转表头信息}, {协议结构名称 : \[ 转出的数据 \] } \]                                             | 示例见[sample](sample/role_cfg.json)         |
+|           xml               | 转出为xml文件,一般格式为&lt;root&gt;&lt;header&gt;转表头信息&lt;/header&gt;&lt;body&gt;&lt;协议结构名称&gt;数据内容&lt;/协议结构名称&gt;&lt;/body&gt;&lt;/root&gt; | 示例见[sample](sample/role_cfg.xml)  |
+
+
+**注意：** Xml输出格式中，列表元素的结构是*&lt;配置名称&gt;&lt;item&gt;数据1&lt;/item&gt;&lt;item&gt;数据2&lt;/item&gt;...&lt;/配置名称&gt;* 里层结构固定tagName为item。目的是方便通过xpath查找（保证和父节点不重名）
 
 关于加载导出的数据
 ======
@@ -190,6 +160,7 @@ protobuf协议
 
 2. [MsgPack](http://msgpack.org/)的读取的语言和工具很多，任意工具都能比较简单地读出数据，故而不再提供读取工具
 3. **Json**的读取的语言和工具很多，任意工具都能比较简单地读出数据，故而不再提供读取工具
+3. **Xml**的读取的语言和工具很多，任意工具都能比较简单地读出数据，故而不再提供读取工具
 
 使用注意事项
 ======

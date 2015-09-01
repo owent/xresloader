@@ -72,7 +72,7 @@ public class DataSrcExcel extends DataSrcImpl {
             Sheet tb = ExcelEngine.openSheet(file_path, src.table_name);
             if (null == tb) {
                 System.err.println(
-                    String.format("[WARNING] open macro source \"%s\" or table %s.", src.file_path, src.table_name)
+                    String.format("[WARNING] open macro source \"%s\" or table %s failed.", src.file_path, src.table_name)
                 );
                 continue;
             }

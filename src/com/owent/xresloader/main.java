@@ -11,27 +11,31 @@ import com.owent.xresloader.scheme.SchemeConf;
 
 import java.io.FileOutputStream;
 import java.io.OutputStream;
-
+import java.util.LinkedList;
+import java.util.Scanner;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+import java.util.regex.PatternSyntaxException;
 /**
  * @author owentou
  */
 public class main {
 
-    /**
-     * @param args
-     */
-    public static void main(String[] args) {
+
+    private static int build_group(String[] args) {
         int ret = ProgramOptions.getInstance().init(args);
-        if (ret < 0)
-            System.exit(ret);
+        if (ret != 0)
+            return 0;
 
         ret = SchemeConf.getInstance().initScheme();
         if (ret < 0)
-            System.exit(ret);
+            return 0;
 
         // 读入数据表 & 协议编译
         int success_count = 0;
-        for (String sn : ProgramOptions.getInstance().dataSourceMetas) {
+        for (int i = 0; i < ProgramOptions.getInstance().dataSourceMetas.length; ++ i) {
+            String sn = ProgramOptions.getInstance().dataSourceMetas[i];
+
             // 0. 清理
             SchemeConf.getInstance().getMacroSource().clear();
             SchemeConf.getInstance().getDataSource().clear();
@@ -108,6 +112,13 @@ public class main {
             if (null == outDesc)
                 continue;
 
+            System.out.println(String.format(
+                "[INFO] convert scheme \"%s\" to \"%s\" started ...",
+                sn,
+                SchemeConf.getInstance().getOutputFile(),
+                SchemeConf.getInstance().getKey().getEncoding()
+            ));
+
             try {
                 String filePath = SchemeConf.getInstance().getOutputFile();
                 if(!IdentifyEngine.isAbsPath(filePath))
@@ -132,8 +143,61 @@ public class main {
             ++ success_count;
         }
 
+        return success_count - ProgramOptions.getInstance().dataSourceMetas.length;
+    }
+
+
+    // 因为所有的参数除了特定名字外都是文件或目录的路径，而跨平台的路径是不能包含双引号的，所以为了简单起见，就不需要“的转义功能了
+    private static Pattern pick_args_rule = Pattern.compile("('[^']*')|(\"[^\"]*\")|(\\S+)", Pattern.MULTILINE | Pattern.CASE_INSENSITIVE);
+    private static String[] pick_stdin_args(Scanner jin) {
+        String[] ret = null;
+
+        if (jin.hasNextLine()) {
+            Matcher rem = pick_args_rule.matcher(jin.nextLine());
+
+            LinkedList<String> res = new LinkedList<String>();
+            while(rem.find()) {
+                String item = rem.group();
+                if (item.charAt(0) == '"' && item.charAt(item.length() - 1) == '"') {
+                    item = item.substring(1, item.length() - 1);
+                    // 如果需要转义功能的话
+                } else if (item.charAt(0) == '\'' && item.charAt(item.length() - 1) == '\'') {
+                    item = item.substring(1, item.length() - 1);
+                }
+
+                res.add(item);
+            }
+
+
+            ret = new String[res.size()];
+            for(int i = 0; !res.isEmpty(); ++ i, res.removeFirst()) {
+                ret[i] = res.getFirst();
+            }
+        }
+
+        return ret;
+    }
+
+    /**
+     * @param args
+     */
+    public static void main(String[] args) {
+        // 先尝试根据传入参数转表
+        int ret_code = build_group(args);
+
+        // 再尝试使用标准输入来批量转表
+        if (ProgramOptions.getInstance().enableStdin) {
+            String[] stdin_args = null;
+            Scanner jin = new Scanner(System.in);
+            while (null != (stdin_args = pick_stdin_args(jin))) {
+                if (stdin_args.length > 0) {
+                    ret_code += build_group(stdin_args);
+                }
+            }
+        }
+
         // 退出码为失败的任务个数，用以外部捕获转换失败
-        System.exit(success_count - ProgramOptions.getInstance().dataSourceMetas.size());
+        System.exit(ret_code);
     }
 
 }

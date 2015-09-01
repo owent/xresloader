@@ -50,7 +50,7 @@ public class ExcelEngine {
      * @return Excel Workbook对象
      */
     static public Workbook openWorkbook(String file_path) {
-        // 无论打开什么Excel文件，都要情况缓存
+        // 无论打开什么Excel文件，都要清空缓存
         clearAllCache();
 
         if(!IdentifyEngine.isAbsPath(file_path)) {

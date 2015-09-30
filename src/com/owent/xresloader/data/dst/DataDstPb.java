@@ -16,15 +16,14 @@ import java.nio.charset.Charset;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.Map;
 
 /**
- * Created by owentou on 2014/10/10.
+ * Created by owent on 2014/10/10.
  */
 public class DataDstPb extends DataDstImpl {
-    private HashMap<String, Descriptors.FileDescriptor> desc_map = new HashMap<String, Descriptors.FileDescriptor>();
-    private HashMap<String, DescriptorProtos.FileDescriptorProto> descp_map = new HashMap<String, DescriptorProtos.FileDescriptorProto>();
     private Descriptors.Descriptor currentMsgDesc = null;
 
     private class DataEntry {
@@ -37,45 +36,105 @@ public class DataDstPb extends DataDstImpl {
         }
     }
 
-    @Override
-    public boolean init() {
-        desc_map.clear();
-        descp_map.clear();
+    /***
+     * protobuf 的描述信息生成是按文件的，所以要缓存并先生成依赖，再生成需要的文件描述数据
+     */
+    static private class PbInfoSet {
+        public HashMap<String, Descriptors.FileDescriptor> desc_map = new HashMap<String, Descriptors.FileDescriptor>();
+        public HashMap<String, DescriptorProtos.FileDescriptorProto> descp_map = new HashMap<String, DescriptorProtos.FileDescriptorProto>();
+        public HashMap<String, String> proto_fd_map = new HashMap<String, String>();
+        public String file_path = "";
 
-        try {
-            InputStream fis = new FileInputStream(ProgramOptions.getInstance().protocolFile);
 
-            DescriptorProtos.FileDescriptorSet fds = DescriptorProtos.FileDescriptorSet.parseFrom(fis);
+        public Iterator<HashMap.Entry<String, DescriptorProtos.FileDescriptorProto>> descp_iter = null;
+        public Iterator<DescriptorProtos.DescriptorProto> desc_iter = null;
+        public String iter_file_name = "";
+        public PbInfoSet(){}
+    }
 
-            DescriptorProtos.FileDescriptorProto selected_fdp = null;
-            for (DescriptorProtos.FileDescriptorProto fdp : fds.getFileList()) {
-                descp_map.put(fdp.getName(), fdp);
+    static private PbInfoSet last_pb_data = null;
+    static Descriptors.Descriptor build_pb_file(String file_path, String proto_name) {
+        // 尽可能缓存已加载好的数据，防止重复加载
+        if (null == last_pb_data || file_path != last_pb_data.file_path) {
+            PbInfoSet new_pb_info = new PbInfoSet();
+            new_pb_info.file_path = file_path;
+            // 开始载入描述文件
 
-                if (null != selected_fdp)
-                    continue;
-                for (DescriptorProtos.DescriptorProto dp : fdp.getMessageTypeList()) {
-                    if (dp.getName().equals(SchemeConf.getInstance().getProtoName())) {
-                        selected_fdp = fdp;
+            try {
+                // 文件描述集读取
+                InputStream fis = new FileInputStream(file_path);
+                DescriptorProtos.FileDescriptorSet fds = DescriptorProtos.FileDescriptorSet.parseFrom(fis);
+
+                // 保存文件名和文件描述Proto的关系
+                for (DescriptorProtos.FileDescriptorProto fdp : fds.getFileList()) {
+                    new_pb_info.descp_map.put(fdp.getName(), fdp);
+                }
+
+                new_pb_info.descp_iter = new_pb_info.descp_map.entrySet().iterator();
+            } catch (FileNotFoundException e) {
+                System.err.println(String.format("[ERROR] read protocol file \"%s\" failed. %s", ProgramOptions.getInstance().protocolFile, e.toString()));
+                return null;
+            } catch (IOException e) {
+                System.err.println(String.format("[ERROR] parse protocol file \"%s\" failed. %s", ProgramOptions.getInstance().protocolFile, e.toString()));
+                return null;
+            }
+
+            // 载入完成,swap
+            last_pb_data = new_pb_info;
+        }
+
+        // 缓存查不到，尝试走迭代器读取
+        while (null != last_pb_data && !last_pb_data.proto_fd_map.containsKey(proto_name)) {
+            boolean is_continue = true;
+
+            while(is_continue) {
+                if (null == last_pb_data.desc_iter) {
+                    if (null == last_pb_data.descp_iter || !last_pb_data.descp_iter.hasNext()) {
+                        is_continue = false;
                         break;
                     }
+
+                    HashMap.Entry<String, DescriptorProtos.FileDescriptorProto> iter_data = last_pb_data.descp_iter.next();
+                    last_pb_data.iter_file_name = iter_data.getKey();
+                    last_pb_data.desc_iter = iter_data.getValue().getMessageTypeList().iterator();
+                }
+
+                if (null == last_pb_data.desc_iter || !last_pb_data.desc_iter.hasNext()) {
+                    last_pb_data.desc_iter = null;
+                    continue;
+                }
+
+                DescriptorProtos.DescriptorProto dp = last_pb_data.desc_iter.next();
+                last_pb_data.proto_fd_map.put(dp.getName(), last_pb_data.iter_file_name);
+
+                // 找到则停止
+                if(proto_name.equals(dp.getName())) {
+                    is_continue = false;
+                    break;
                 }
             }
 
-            if (null == selected_fdp) {
-                System.err.println(String.format("[ERROR] proto message name \"%s\" not found.", SchemeConf.getInstance().getProtoName()));
-                return false;
-            }
-            Descriptors.FileDescriptor fd = build_fd(selected_fdp.getName());
-            currentMsgDesc = fd.findMessageTypeByName(SchemeConf.getInstance().getProtoName());
-
-        } catch (FileNotFoundException e) {
-            System.err.println("[ERROR] read protocol file \"" + ProgramOptions.getInstance().protocolFile + "\" failed." + e.toString());
-            return false;
-        } catch (IOException e) {
-            System.err.println("[ERROR] parse protocol file \"" + ProgramOptions.getInstance().protocolFile + "\" failed." + e.toString());
-            return false;
+            break;
         }
 
+        // 如果协议名称不存在与所有的文件描述中，直接退出
+        if (null == last_pb_data || !last_pb_data.proto_fd_map.containsKey(proto_name)) {
+            System.err.println(String.format("[ERROR] proto message name \"%s\" not found.", proto_name));
+            return null;
+        }
+
+        Descriptors.FileDescriptor fd = build_fd(last_pb_data.proto_fd_map.get(proto_name), last_pb_data);
+        if (null == fd) {
+            System.err.println(String.format("[ERROR] build  protocol \"%s\" failed.", proto_name));
+            return null;
+        }
+
+        return fd.findMessageTypeByName(SchemeConf.getInstance().getProtoName());
+    }
+
+    @Override
+    public boolean init() {
+        currentMsgDesc = build_pb_file(ProgramOptions.getInstance().protocolFile, SchemeConf.getInstance().getProtoName());
         return null != currentMsgDesc;
     }
 
@@ -132,41 +191,47 @@ public class DataDstPb extends DataDstImpl {
             blocks.build().writeTo(writer);
         } catch (IOException e) {
             e.printStackTrace();
-            System.err.println("[ERROR] try to serialize protobuf header failed." + e.toString());
-            System.err.println("[ERROR] " + header.build().getInitializationErrorString());
+            System.err.println(String.format("[ERROR] try to serialize protobuf header failed. %s", e.toString()));
+            System.err.println(String.format("[ERROR] %s", header.build().getInitializationErrorString()));
         }
         return writer.toByteArray();
     }
 
-    private Descriptors.FileDescriptor build_fd(String fdn) {
-        Descriptors.FileDescriptor ret = desc_map.getOrDefault(fdn, null);
+    /***
+     * 递归生成文件描述集
+     * @param fdn 文件名
+     * @param pb_info_set 数据来源和缓存目标
+     * @return 需要的文件描述集
+     */
+    static private Descriptors.FileDescriptor build_fd(String fdn, PbInfoSet pb_info_set) {
+        Descriptors.FileDescriptor ret = pb_info_set.desc_map.getOrDefault(fdn, null);
         if (null != ret)
             return ret;
 
-        DescriptorProtos.FileDescriptorProto fdp = descp_map.get(fdn);
+        DescriptorProtos.FileDescriptorProto fdp = pb_info_set.descp_map.get(fdn);
         try {
-            Descriptors.FileDescriptor[] deps = get_deps(fdp);
+            Descriptors.FileDescriptor[] deps = get_deps(fdp, pb_info_set);
             if (null == deps) {
-                System.err.println("[ERROR] build protocol \"" + fdn + "\" failed(dependency build failed).");
+                System.err.println(String.format("[ERROR] build protocol \"%s\" failed(dependency build failed).", fdn));
                 return null;
             }
 
             ret = Descriptors.FileDescriptor.buildFrom(fdp, deps);
-            desc_map.put(fdn, ret);
+            pb_info_set.desc_map.put(fdn, ret); // 缓存所有的描述集
 
         } catch (Descriptors.DescriptorValidationException e) {
             e.printStackTrace();
-            System.err.println("[ERROR] build protocol \"" + fdn + "\" failed." + e.toString());
+            System.err.println(String.format("[ERROR] build protocol \"%s\" failed. %s", fdn, e.toString()));
             return null;
         }
 
         return ret;
     }
 
-    private Descriptors.FileDescriptor[] get_deps(DescriptorProtos.FileDescriptorProto fdp) {
+    static private Descriptors.FileDescriptor[] get_deps(DescriptorProtos.FileDescriptorProto fdp, PbInfoSet pb_info_set) {
         Descriptors.FileDescriptor[] ret = new Descriptors.FileDescriptor[fdp.getDependencyCount()];
         for (int i = 0; i < ret.length; ++i) {
-            ret[i] = build_fd(fdp.getDependency(i));
+            ret[i] = build_fd(fdp.getDependency(i), pb_info_set);
             if (null == ret[i])
                 return null;
         }
@@ -227,7 +292,7 @@ public class DataDstPb extends DataDstImpl {
                         } else if (fd.isRequired()) {
                             // 非测试list长度的模式下才输出错误
                             if (false == is_list) {
-                                System.err.println("[ERROR] required field \"" + real_name + "\" not found");
+                                System.err.println(String.format("[ERROR] required field \"%s\" not found", real_name));
                             }
                             ret = false;
                         }
@@ -262,7 +327,7 @@ public class DataDstPb extends DataDstImpl {
                         } else if (fd.isRequired()) {
                             // 非测试list长度的模式下才输出错误
                             if (false == is_list) {
-                                System.err.println("[ERROR] required field \"" + fd.getName() + "\" not found");
+                                System.err.println(String.format("[ERROR] required field \"%s\" not found", fd.getName()));
                             }
                             ret = false;
                         }
@@ -293,7 +358,7 @@ public class DataDstPb extends DataDstImpl {
         try {
             return root.build().toByteString();
         } catch (Exception e) {
-            System.err.println("[ERROR] serialize failed." + root.getInitializationErrorString());
+            System.err.println(String.format("[ERROR] serialize failed. %s", root.getInitializationErrorString()));
             return null;
         }
     }
@@ -399,7 +464,7 @@ public class DataDstPb extends DataDstImpl {
                     return ret;
                 }
 
-                System.err.println("[ERROR] serialize failed. " + prefix + " data error.");
+                System.err.println(String.format("[ERROR] serialize failed. %s data error.", prefix));
                 break;
             }
 

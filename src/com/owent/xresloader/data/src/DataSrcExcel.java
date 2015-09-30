@@ -10,6 +10,7 @@ import org.apache.poi.ss.usermodel.Sheet;
 
 import java.util.HashMap;
 import java.util.LinkedList;
+import java.util.List;
 
 /**
  * Created by owentou on 2014/10/9.
@@ -33,7 +34,7 @@ public class DataSrcExcel extends DataSrcImpl {
     public DataSrcExcel() {
         super();
 
-        macros = new HashMap<String, String>();
+        macros = null;
         nameMap = new HashMap<String, Integer>();
     }
 
@@ -46,21 +47,37 @@ public class DataSrcExcel extends DataSrcImpl {
         return init_sheet();
     }
 
-    /**
-     * 初始化macros提花规则，先全部转为字符串，有需要后续在使用的时候再转
-     *
-     * @return
+    /***
+     * macro表cache
      */
-    private int init_macros() {
-        macros.clear();
+    static private class MacroCacheInfo {
+        /*** file_path:key->value ***/
+        private HashMap<String, HashMap<String, String> > cache = new HashMap<String, HashMap<String, String> >();
+        private HashMap<String, String> empty = new HashMap<String, String>(); // 空项特殊处理
+    };
+    static private MacroCacheInfo macro_cache = new MacroCacheInfo();
 
-        String file_path = "";
-        SchemeConf scfg = SchemeConf.getInstance();
+    /***
+     * 构建macro表cache，由于macro表大多数情况下都一样，所以
+     */
+    static HashMap<String, String> init_macro_with_cache(List<SchemeConf.DataInfo> src_list) {
+        LinkedList<HashMap<String, String> > data_filled = new LinkedList<HashMap<String, String> >();
+
         // 枚举所有macro表信息
-        for(SchemeConf.DataInfo src: scfg.getMacroSource()) {
+        for(SchemeConf.DataInfo src: src_list) {
+            String file_path = "";
             if (false == src.file_path.isEmpty()) {
                 file_path = src.file_path;
             }
+            String fp_name = file_path + "/" + src.table_name;
+
+            // 优先读缓存
+            HashMap<String, String> res = macro_cache.cache.getOrDefault(fp_name, null);
+            if (null != res) {
+                data_filled.add(res);
+                continue;
+            }
+            res = new HashMap<String, String>();
 
             if (file_path.isEmpty() || src.table_name.isEmpty() || src.data_col <= 0 || src.data_row <= 0) {
                 System.err.println(
@@ -85,15 +102,45 @@ public class DataSrcExcel extends DataSrcImpl {
                 DataContainer<String> key = ExcelEngine.cell2s(row, src.data_col - 1);
                 DataContainer<String> val = ExcelEngine.cell2s(row, src.data_col, evalor);
                 if (key.valid && val.valid && !key.get().isEmpty() && !val.get().isEmpty()) {
-                    if (macros.containsKey(key)) {
+                    if (res.containsKey(key)) {
                         System.err.println(
                             String.format("[WARNING] macro key \"%s\" is used more than once.", key)
                         );
                     }
-                    macros.put(key.get(), val.get());
+                    res.put(key.get(), val.get());
                 }
             }
+
+            macro_cache.cache.put(fp_name, res);
+            data_filled.add(res);
         }
+
+        // 空对象特殊处理
+        if (data_filled.isEmpty()) {
+            return macro_cache.empty;
+        }
+
+        // 只有一个macro项，则直接返回
+        if (1 == data_filled.size()) {
+            return data_filled.getFirst();
+        }
+
+        HashMap<String, String> ret = new HashMap<String, String>();
+        for(HashMap<String, String> copy_from: data_filled) {
+            ret.putAll(copy_from);
+        }
+
+        return ret;
+    }
+
+    /**
+     * 初始化macros提花规则，先全部转为字符串，有需要后续在使用的时候再转
+     *
+     * @return
+     */
+    private int init_macros() {
+        SchemeConf scfg = SchemeConf.getInstance();
+        macros = init_macro_with_cache(scfg.getMacroSource());
 
         return 0;
     }

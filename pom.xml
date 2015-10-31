@@ -6,7 +6,7 @@
 
     <groupId>com.owent.xresloader</groupId>
     <artifactId>xresloader</artifactId>
-    <version>1.0.2.1</version>
+    <version>1.0.3.0</version>
     <packaging>jar</packaging>
     <name>xresloader</name>
 
@@ -42,7 +42,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-shade-plugin</artifactId>
-                <version>2.3</version>
+                <version>2.4.1</version>
                 <executions>
                     <execution>
                         <phase>package</phase>
@@ -98,14 +98,14 @@
         <dependency>
             <groupId>org.msgpack</groupId>
             <artifactId>msgpack</artifactId>
-            <version>0.6.11</version>
+            <version>0.6.12</version>
             <type>jar</type>
         </dependency>
 
         <dependency>
             <groupId>org.json</groupId>
             <artifactId>json</artifactId>
-            <version>20141113</version>
+            <version>20150729</version>
             <type>jar</type>
         </dependency>
 
@@ -120,14 +120,14 @@
         <dependency>
             <groupId>org.apache.poi</groupId>
             <artifactId>poi-ooxml</artifactId>
-            <version>3.12</version>
+            <version>3.13</version>
             <type>jar</type>
         </dependency>
 
         <dependency>
             <groupId>org.apache.poi</groupId>
             <artifactId>poi</artifactId>
-            <version>3.12</version>
+            <version>3.13</version>
             <type>jar</type>
         </dependency>
 

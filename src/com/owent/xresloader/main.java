@@ -11,6 +11,7 @@ import com.owent.xresloader.scheme.SchemeConf;
 
 import java.io.FileOutputStream;
 import java.io.OutputStream;
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Scanner;
 import java.util.regex.Matcher;
@@ -21,6 +22,88 @@ import java.util.regex.PatternSyntaxException;
  */
 public class main {
 
+    private static DataDstImpl get_out_desc(DataDstImpl proto_desc) {
+        DataDstImpl outDesc = null;
+        switch (ProgramOptions.getInstance().outType) {
+            case BIN:
+                outDesc = proto_desc;
+                break;
+            case LUA:
+                outDesc = new DataDstLua();
+                outDesc = outDesc.init() ? outDesc : null;
+                break;
+            case MSGPACK:
+                outDesc = new DataDstMsgPack();
+                outDesc = outDesc.init() ? outDesc : null;
+                break;
+            case JSON:
+                outDesc = new DataDstJson();
+                outDesc = outDesc.init() ? outDesc : null;
+                break;
+            case XML:
+                outDesc = new DataDstXml();
+                outDesc = outDesc.init() ? outDesc : null;
+                break;
+            default:
+                System.err.println(String.format("[ERROR] output type \"%s\" invalid", ProgramOptions.getInstance().outType.toString()));
+                break;
+        }
+
+        return outDesc;
+    }
+
+    private static int print_const_data() {
+        // 1. 协议描述文件
+        DataDstImpl protoDesc = null;
+        switch (ProgramOptions.getInstance().protocol) {
+            case PROTOBUF:
+                protoDesc = new DataDstPb();
+                break;
+            default:
+                System.err.println(String.format("[ERROR] protocol type \"%s\" invalid", ProgramOptions.getInstance().protocol.toString()));
+                break;
+        }
+
+        if (null == protoDesc)
+            return 0;
+
+        DataDstImpl outDesc = get_out_desc(protoDesc);
+        if (null == outDesc)
+            return 0;
+
+        HashMap<String, Object> enum_data = protoDesc.buildConst();
+
+        if (null == enum_data) {
+            System.err.println(String.format("[ERROR] protocol desc \"%s\" init and build const values failed", ProgramOptions.getInstance().protocol.toString()));
+            return 0;
+        }
+
+        try {
+            String filePath = ProgramOptions.getInstance().constPrint;
+            if(!IdentifyEngine.isAbsPath(filePath))
+                filePath = ProgramOptions.getInstance().outputDirectory + '/' + filePath;
+            OutputStream fos = new FileOutputStream(filePath, false);
+            byte[] data = outDesc.dumpConst(enum_data);
+
+            if (null != data) {
+                fos.write(data);
+            } else {
+                System.err.println(String.format("[ERROR] write const data to file \"%s\" failed, output type invalid.", ProgramOptions.getInstance().constPrint));
+                return 0;
+            }
+        } catch (java.io.IOException e) {
+            System.err.println(String.format("[ERROR] write data to file \"%s\" failed", ProgramOptions.getInstance().constPrint));
+            return 0;
+        }
+
+        System.out.println(String.format(
+            "[INFO] write const data to \"%s\" success.(charset: %s)",
+            SchemeConf.getInstance().getOutputFile(),
+            SchemeConf.getInstance().getKey().getEncoding()
+        ));
+
+        return 1;
+    }
 
     private static int build_group(String[] args) {
         int ret = ProgramOptions.getInstance().init(args);
@@ -30,6 +113,11 @@ public class main {
         ret = SchemeConf.getInstance().initScheme();
         if (ret < 0)
             return 0;
+
+        // 特殊流程，常量打印
+        if (false == ProgramOptions.getInstance().constPrint.isEmpty()) {
+            return print_const_data();
+        }
 
         // 读入数据表 & 协议编译
         int success_count = 0;
@@ -84,31 +172,7 @@ public class main {
             }
 
             // 4. 输出类型
-            DataDstImpl outDesc = null;
-            switch (ProgramOptions.getInstance().outType) {
-                case BIN:
-                    outDesc = protoDesc;
-                    break;
-                case LUA:
-                    outDesc = new DataDstLua();
-                    outDesc = outDesc.init() ? outDesc : null;
-                    break;
-                case MSGPACK:
-                    outDesc = new DataDstMsgPack();
-                    outDesc = outDesc.init() ? outDesc : null;
-                    break;
-                case JSON:
-                    outDesc = new DataDstJson();
-                    outDesc = outDesc.init() ? outDesc : null;
-                    break;
-                case XML:
-                    outDesc = new DataDstXml();
-                    outDesc = outDesc.init() ? outDesc : null;
-                    break;
-                default:
-                    System.err.println(String.format("[ERROR] output type \"%s\" invalid", ProgramOptions.getInstance().outType.toString()));
-                    break;
-            }
+            DataDstImpl outDesc = get_out_desc(protoDesc);
             if (null == outDesc)
                 continue;
 

@@ -9,6 +9,7 @@ import org.dom4j.DocumentHelper;
 import org.dom4j.io.OutputFormat;
 import org.dom4j.io.XMLWriter;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.io.*;
@@ -27,7 +28,7 @@ public class DataDstXml extends DataDstJava {
         // pretty print
         OutputFormat of = null;
         if (ProgramOptions.getInstance().prettyIndent <= 0) {
-            of= OutputFormat.createCompactFormat();
+            of = OutputFormat.createCompactFormat();
         } else {
             of = OutputFormat.createPrettyPrint();
             of.setIndentSize(ProgramOptions.getInstance().prettyIndent);
@@ -144,4 +145,41 @@ public class DataDstXml extends DataDstJava {
 
         System.out.println(String.format("[ERROR] %s not support.", data.toString()));
     }
+
+    /**
+     * 转储常量数据
+     * @return 常量数据,不支持的时候返回空
+     */
+    public final byte[] dumpConst(HashMap<String, Object> data) {
+        // pretty print
+        OutputFormat of = null;
+        if (ProgramOptions.getInstance().prettyIndent <= 0) {
+            of= OutputFormat.createCompactFormat();
+        } else {
+            of = OutputFormat.createPrettyPrint();
+            of.setIndentSize(ProgramOptions.getInstance().prettyIndent);
+        }
+
+        // build xml tree
+        Document doc = DocumentHelper.createDocument();
+        String encoding = SchemeConf.getInstance().getKey().getEncoding();
+        if (null != encoding && false == encoding.isEmpty()) {
+            doc.setXMLEncoding(encoding);
+            of.setEncoding(encoding);
+        }
+
+        doc.setRootElement(DocumentHelper.createElement("const"));
+        writeData(doc.getRootElement(), data, "");
+
+        try {
+            ByteArrayOutputStream bos = new ByteArrayOutputStream();
+            XMLWriter writer = new XMLWriter(bos, of);
+            writer.write(doc);
+
+            return bos.toByteArray();
+        } catch(Exception e) {
+            System.err.println(String.format("[ERROR] write xml failed, %s", e.getMessage()));
+            return null;
+        }
+    };
 }

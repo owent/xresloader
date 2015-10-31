@@ -10,6 +10,7 @@ import org.json.*;
 import java.io.StringBufferInputStream;
 import java.io.StringWriter;
 import java.nio.charset.Charset;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -144,4 +145,12 @@ public class DataDstLua extends DataDstJava {
         System.out.println(String.format("[ERROR] rewrite %s as nil, should not called here.", data.toString()));
         sb.append("nil");
     }
+
+    /**
+     * 转储常量数据
+     * @return 常量数据,不支持的时候返回空
+     */
+    public final byte[] dumpConst(HashMap<String, Object> data) {
+        return null;
+    };
 }

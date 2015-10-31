@@ -38,6 +38,9 @@ public class ProgramOptions {
     public int prettyIndent = 0;
     public boolean enableStdin = false;
 
+    public String constPrint = "";
+    public boolean luaGlobal = false;
+
     private ProgramOptions() {
         dataSourceMetas = new String[]{};
         outType = FileType.BIN;
@@ -71,6 +74,8 @@ public class ProgramOptions {
         enbleEmptyList = false;
         prettyIndent = 0;
         enableStdin = false;
+        constPrint = "";
+        luaGlobal = false;
     }
 
     private static Options get_options_group() {
@@ -156,11 +161,20 @@ public class ProgramOptions {
                 .build()
         );
 
+        options.addOption(Option.builder("c")
+                .longOpt("const-print")
+                .desc("print all const data to file")
+                .hasArg()
+                .argName("OUTPUT FILE PATH")
+                .build()
+        );
+
         options.addOption(null, "disable-excel-formular", false, "disable formular in excel. will be faster when convert data.");
         options.addOption(null, "enable-excel-formular", false, "[default] enable formular in excel. will be slower when convert data.");
         options.addOption(null, "disable-empty-list", false, "[default] remove empty elements in a list or repeated field.");
         options.addOption(null, "enable-empty-list", false, "keep empty elements in a list or repeated field with default value.");
         options.addOption(null, "stdin", false, "enable read from stdin and convert more files.");
+        options.addOption(null, "lua-global", false, "add data to _G if in lua mode when print const data");
 
         return options;
     }
@@ -199,6 +213,12 @@ public class ProgramOptions {
 
         if (cmd.hasOption("stdin")) {
             enableStdin = true;
+        }
+
+        if (cmd.hasOption("disable-empty-list")) {
+            enbleEmptyList = false;
+        } else if(cmd.hasOption("enable-empty-list")) {
+            enbleEmptyList = true;
         }
 
         // target type
@@ -241,10 +261,17 @@ public class ProgramOptions {
             return 1;
         }
 
+        luaGlobal = cmd.hasOption("lua-global");
+
         // output dir
         outputDirectory = cmd.getOptionValue('o', ".");
         // data sorce dir
         dataSourceDirectory = cmd.getOptionValue('d', ".");
+
+        if (cmd.hasOption('c')) {
+            constPrint = cmd.getOptionValue('c');
+            return 0;
+        }
 
         // macro source file path
         if (cmd.hasOption('s')) {
@@ -280,9 +307,6 @@ public class ProgramOptions {
 
         // macro names
         dataSourceMetas = cmd.getOptionValues('m');
-        if (0 == dataSourceMetas.length) {
-            return 1;
-        }
 
         // rename rules
         if (cmd.hasOption('n')) {
@@ -341,7 +365,7 @@ public class ProgramOptions {
     }
 
     public String getVersion() {
-        return "1.0.2.1";
+        return "1.0.3.0";
     }
 
 

@@ -53,7 +53,7 @@ public class DataDstPb extends DataDstImpl {
     }
 
     static private PbInfoSet last_pb_data = null;
-    static Descriptors.Descriptor build_pb_file(String file_path, String proto_name) {
+    static PbInfoSet load_pb_file(String file_path) {
         // 尽可能缓存已加载好的数据，防止重复加载
         if (null == last_pb_data || file_path != last_pb_data.file_path) {
             PbInfoSet new_pb_info = new PbInfoSet();
@@ -81,6 +81,15 @@ public class DataDstPb extends DataDstImpl {
 
             // 载入完成,swap
             last_pb_data = new_pb_info;
+        }
+
+        return last_pb_data;
+    }
+
+    static Descriptors.Descriptor build_pb_file(String file_path, String proto_name) {
+        // 尽可能缓存已加载好的数据，防止重复加载
+        if (null == load_pb_file(file_path)) {
+            return null;
         }
 
         // 缓存查不到，尝试走迭代器读取
@@ -480,5 +489,77 @@ public class DataDstPb extends DataDstImpl {
         }
 
         return ret;
+    }
+
+    /**
+     * 生成常量数据
+     * @return 常量数据,不支持的时候返回空
+     */
+    public HashMap<String, Object> buildConst() {
+        if(null == load_pb_file(ProgramOptions.getInstance().protocolFile)) {
+            return null;
+        }
+
+        if (null == last_pb_data) {
+            return null;
+        }
+
+        HashMap<String, Object> ret = new HashMap<String, Object>();
+
+        for(HashMap.Entry<String, DescriptorProtos.FileDescriptorProto> fdp : last_pb_data.descp_map.entrySet()) {
+            String[] names = fdp.getValue().getPackage().split("\\.");
+            HashMap<String, Object> fd_root = ret;
+
+            if (null != names) {
+                for(String seg: names) {
+                    if(fd_root.containsKey(seg)) {
+                        Object node = fd_root.get(seg);
+                        if (node instanceof HashMap) {
+                            fd_root = (HashMap<String, Object>)node;
+                        } else {
+                            System.err.println(String.format("[ERROR] package name %s conflict(failed in %s).", fdp.getValue().getPackage(), seg));
+                            break;
+                        }
+                    } else {
+                        HashMap<String, Object> node = new HashMap<String, Object>();
+                        fd_root.put(seg, node);
+                        fd_root = node;
+                    }
+                }
+            }
+
+            for(DescriptorProtos.EnumDescriptorProto enum_desc : fdp.getValue().getEnumTypeList()) {
+                String seg = enum_desc.getName();
+                HashMap<String, Object> enum_root;
+                if(fd_root.containsKey(seg)) {
+                    Object node = fd_root.get(seg);
+                    if (node instanceof HashMap) {
+                        enum_root = (HashMap<String, Object>)node;
+                    } else {
+                        System.err.println(String.format("[ERROR] enum name %s.%s conflict.", fdp.getValue().getPackage(), seg));
+                        continue;
+                    }
+                } else {
+                    enum_root = new HashMap<String, Object>();
+                    fd_root.put(seg, enum_root);
+                }
+
+                // 写出所有常量值
+                for(DescriptorProtos.EnumValueDescriptorProto enum_val : enum_desc.getValueList()) {
+                    enum_root.put(enum_val.getName(), enum_val.getNumber());
+                }
+            }
+        }
+
+        return ret;
+    }
+
+    /**
+     * 转储常量数据
+     * @return 常量数据,不支持的时候返回空
+     */
+    public final byte[] dumpConst(HashMap<String, Object> data) {
+        // 暂不支持protobuf的常量输出
+        return null;
     }
 }

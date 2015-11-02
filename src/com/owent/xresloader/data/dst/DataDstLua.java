@@ -23,11 +23,6 @@ public class DataDstLua extends DataDstJava {
 
     @Override
     public boolean init() {
-        return true;
-    }
-
-    @Override
-    public final byte[] build(DataDstWriterNode desc) {
         if (ProgramOptions.getInstance().prettyIndent <= 0) {
             endl = " ";
             ident = "";
@@ -39,7 +34,11 @@ public class DataDstLua extends DataDstJava {
                 ident += " ";
             }
         }
+        return true;
+    }
 
+    @Override
+    public final byte[] build(DataDstWriterNode desc) {
         DataDstJava.DataDstObject data_obj = build_data(desc);
         StringBuffer sb = new StringBuffer();
 
@@ -151,6 +150,26 @@ public class DataDstLua extends DataDstJava {
      * @return 常量数据,不支持的时候返回空
      */
     public final byte[] dumpConst(HashMap<String, Object> data) {
-        return null;
+        init();
+
+        StringBuffer sb = new StringBuffer();
+        sb.append("local const_res = ");
+        writeData(sb, data, 0);
+        sb.append(endl).append(endl);
+
+        // 写入全局?
+        if (ProgramOptions.getInstance().luaGlobal) {
+            sb.append("for k, v in pairs(const_res) do").append(endl);
+            sb.append(ident).append("_G[k] = v").append(endl);
+            sb.append("end").append(endl).append(endl);
+        }
+
+        sb.append("return const_res").append(endl);
+
+        // 带编码的输出
+        String encoding = SchemeConf.getInstance().getKey().getEncoding();
+        if (null == encoding || encoding.isEmpty())
+            return sb.toString().getBytes();
+        return sb.toString().getBytes(Charset.forName(encoding));
     };
 }

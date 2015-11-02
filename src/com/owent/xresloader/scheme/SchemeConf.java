@@ -39,6 +39,16 @@ public class SchemeConf {
         return instance;
     }
 
+    public void reset() {
+        dateSource = new LinkedList<DataInfo>();
+        macroSource = new LinkedList<DataInfo>();
+        protoName = "";
+        outputFile = "";
+        key = new SchemeKeyConf();
+
+        scheme = null;
+    }
+
     /**
      * Getter for property 'dateSource'.
      *

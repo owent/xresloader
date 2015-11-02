@@ -98,7 +98,7 @@ public class main {
 
         System.out.println(String.format(
             "[INFO] write const data to \"%s\" success.(charset: %s)",
-            SchemeConf.getInstance().getOutputFile(),
+            ProgramOptions.getInstance().constPrint,
             SchemeConf.getInstance().getKey().getEncoding()
         ));
 
@@ -107,16 +107,20 @@ public class main {
 
     private static int build_group(String[] args) {
         int ret = ProgramOptions.getInstance().init(args);
-        if (ret != 0)
+        if (ret != 0) {
             return 0;
+        }
 
-        ret = SchemeConf.getInstance().initScheme();
-        if (ret < 0)
-            return 0;
+        SchemeConf.getInstance().reset();
 
         // 特殊流程，常量打印
         if (false == ProgramOptions.getInstance().constPrint.isEmpty()) {
             return print_const_data();
+        }
+
+        ret = SchemeConf.getInstance().initScheme();
+        if (ret < 0) {
+            return 0;
         }
 
         // 读入数据表 & 协议编译

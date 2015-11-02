@@ -507,8 +507,12 @@ public class DataDstPb extends DataDstImpl {
         HashMap<String, Object> ret = new HashMap<String, Object>();
 
         for(HashMap.Entry<String, DescriptorProtos.FileDescriptorProto> fdp : last_pb_data.descp_map.entrySet()) {
-            String[] names = fdp.getValue().getPackage().split("\\.");
+            String[] names = null;
             HashMap<String, Object> fd_root = ret;
+
+            if(false == fdp.getValue().getPackage().isEmpty()) {
+                names = fdp.getValue().getPackage().split("\\.");
+            }
 
             if (null != names) {
                 for(String seg: names) {
@@ -559,7 +563,26 @@ public class DataDstPb extends DataDstImpl {
      * @return 常量数据,不支持的时候返回空
      */
     public final byte[] dumpConst(HashMap<String, Object> data) {
-        // 暂不支持protobuf的常量输出
+        // protobuf的常量输出直接复制描述文件就好了
+        if(ProgramOptions.getInstance().protocolFile == ProgramOptions.getInstance().constPrint) {
+            return null;
+        }
+
+        try {
+            File f = new File(ProgramOptions.getInstance().protocolFile);
+
+            FileInputStream fin = new FileInputStream(ProgramOptions.getInstance().protocolFile);
+            byte[] all_buffer = new byte[(int)f.length()];
+            fin.read(all_buffer);
+
+            return all_buffer;
+        } catch (FileNotFoundException e) {
+            System.err.println(String.format("[ERROR] protocol file %s not found.", ProgramOptions.getInstance().protocolFile));
+        } catch (IOException e) {
+            System.err.println(String.format("[ERROR] read protocol file %s failed.", ProgramOptions.getInstance().protocolFile));
+            e.printStackTrace();
+        }
+
         return null;
     }
 }

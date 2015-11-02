@@ -45,7 +45,7 @@ public class DataDstXml extends DataDstJava {
             of.setEncoding(encoding);
         }
 
-        doc.setRootElement(DocumentHelper.createElement("root"));
+        doc.setRootElement(DocumentHelper.createElement(ProgramOptions.getInstance().xmlRootName));
 
         Element header = DocumentHelper.createElement("header");
         Element body = DocumentHelper.createElement("body");
@@ -168,7 +168,7 @@ public class DataDstXml extends DataDstJava {
             of.setEncoding(encoding);
         }
 
-        doc.setRootElement(DocumentHelper.createElement("const"));
+        doc.setRootElement(DocumentHelper.createElement(ProgramOptions.getInstance().xmlRootName));
         writeData(doc.getRootElement(), data, "");
 
         try {

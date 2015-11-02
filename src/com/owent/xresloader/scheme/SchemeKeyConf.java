@@ -15,7 +15,7 @@ public class SchemeKeyConf {
     private Pattern keyWordRegex = null;
     private Pattern keyWordRegexRemoveRule = null;
     private Pattern keyWordRegexPrefixRule = null;
-    private String encoding;
+    private String encoding = "utf-8";
 
     /**
      * Getter for property 'row'.

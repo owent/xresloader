@@ -56,6 +56,7 @@ echo "
 -t xml -p protobuf -f kind.pb -s 资源转换示例.xlsx -m scheme_kind -n '/(?i)\.bin$/\.xml/'
 -t xml -p protobuf -f kind.pb --pretty 2 -s 资源转换示例.scheme.ini -m scheme_kind -n '/(?i)\.bin$/\.xml/'
 -t xml -p protobuf -f kind.pb -s 资源转换示例.scheme.json -m scheme_kind -n '/(?i)\.bin$/\.xml/'
+-t lua -p protobuf -f kind.pb --pretty 2 -c kind_const.lua --lua-global
 " > params.txt && cat params.txt | java -client -jar xresloader.jar --stdin
 
 # 注意最后这个命令必须使用bash或sh，如果bash的编码是UTF-8在Windows下会因为编码错误而找不到文件，所以需要先把params.txt的编码转为GBK
@@ -76,12 +77,15 @@ echo "
 |-m --src-meta                | 数据源描述表        | 可多个                                                                                                     |
 |-v --version                 | 打印版本号          |                                                                                                            |
 |-n --rename                  | 重命名输出文件名    | 正则表达式 （如：/(?i)\\.bin$/\\.lua/）                                                                    |
+|-c --const-print             | 输出协议描述中的常量| 参数为字符串，表示输出的文件名                                                                             |
 |--pretty                     | 格式化输出          | 参数为整数，0代表关闭美化输出功能，大于0表示格式化时的缩进量                                               |
 |--enable-excel-formular      | 开启Excel公式支持   | 默认开启，使用公式会大幅减慢转表速度                                                                       |
 |--disable-excel-formular     | 关闭Excel公式支持   | 关闭公式会大幅加快转表速度                                                                                 |
 |--disable-empty-list         | 禁止空列表项        | 默认开启，禁止空列表项，自动删除Excel中的未填充数据，不会转出到输出文件中                                  |
 |--enable-empty-list          | 开启空列表项        | 开启空列表项，未填充数据将使用默认的空值来填充，并转出到输出文件中                                         |     
-|--stdin                      | 通过标准输入批量转表| 通过标准输入批量转表，参数可上面的一样,每行一项，字符串参数可以用单引号或双引号包裹，但是都不支持转义      |              
+|--stdin                      | 通过标准输入批量转表| 通过标准输入批量转表，参数可上面的一样,每行一项，字符串参数可以用单引号或双引号包裹，但是都不支持转义      |
+|--lua-global                 | lua输出写到全局表   | 输出协议描述中的常量到Lua脚本时，同时导入符号到全局表_G中（不会影响配置数据）                              |    
+|--xml-root                   | xml输出的根节点tag  | 输出格式为xml时的根节点的TagName                                                                           |    
 
  
 协议类型

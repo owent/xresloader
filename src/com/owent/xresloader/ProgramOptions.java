@@ -40,6 +40,7 @@ public class ProgramOptions {
 
     public String constPrint = "";
     public boolean luaGlobal = false;
+    public String xmlRootName = "root";
 
     private ProgramOptions() {
         dataSourceMetas = new String[]{};
@@ -76,6 +77,7 @@ public class ProgramOptions {
         enableStdin = false;
         constPrint = "";
         luaGlobal = false;
+        xmlRootName = "root";
     }
 
     private static Options get_options_group() {
@@ -166,6 +168,14 @@ public class ProgramOptions {
                 .desc("print all const data to file")
                 .hasArg()
                 .argName("OUTPUT FILE PATH")
+                .build()
+        );
+
+        options.addOption(Option.builder()
+                .longOpt("xml-root")
+                .desc("set xml root node name.(default: root)")
+                .hasArg()
+                .argName("ROOT NAME")
                 .build()
         );
 
@@ -262,12 +272,17 @@ public class ProgramOptions {
         }
 
         luaGlobal = cmd.hasOption("lua-global");
+        xmlRootName = cmd.getOptionValue("xml-root", xmlRootName);
 
         // output dir
         outputDirectory = cmd.getOptionValue('o', ".");
         // data sorce dir
         dataSourceDirectory = cmd.getOptionValue('d', ".");
 
+        // pretty print
+        prettyIndent = Integer.parseInt(cmd.getOptionValue("pretty", "0"));
+
+        // const print
         if (cmd.hasOption('c')) {
             constPrint = cmd.getOptionValue('c');
             return 0;
@@ -344,9 +359,6 @@ public class ProgramOptions {
                 renameRule.replace = groups[start_index + 1];
             } while(false);
         }
-
-        // pretty print
-        prettyIndent = Integer.parseInt(cmd.getOptionValue("pretty", "0"));
 
         // special functions
         if (cmd.hasOption("disable-excel-formular")) {

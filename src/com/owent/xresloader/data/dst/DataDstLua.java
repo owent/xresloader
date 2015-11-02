@@ -157,11 +157,21 @@ public class DataDstLua extends DataDstJava {
         writeData(sb, data, 0);
         sb.append(endl).append(endl);
 
-        // 写入全局?
+        // 写入全局,需要防止覆盖问题
         if (ProgramOptions.getInstance().luaGlobal) {
-            sb.append("for k, v in pairs(const_res) do").append(endl);
-            sb.append(ident).append("_G[k] = v").append(endl);
-            sb.append("end").append(endl).append(endl);
+            sb.append("local function extend(dst, src)").append(endl);
+            sb.append(ident).append("for k, v in pairs(src) do").append(endl);
+            sb.append(ident).append(ident).append("if not dst[k] or 'table' ~= type(v) then").append(endl);
+            sb.append(ident).append(ident).append(ident).append("dst[k] = src[k]").append(endl);
+            sb.append(ident).append(ident).append("else").append(endl);
+            sb.append(ident).append(ident).append(ident).append("if 'table' ~= type(dst[k]) then").append(endl);
+            sb.append(ident).append(ident).append(ident).append(ident).append("dst[k] = {}").append(endl);
+            sb.append(ident).append(ident).append(ident).append("end").append(endl);
+            sb.append(ident).append(ident).append(ident).append("extend(dst[k], src[k])").append(endl);
+            sb.append(ident).append(ident).append("end").append(endl);
+            sb.append(ident).append("end").append(endl);
+            sb.append("end").append(endl);
+            sb.append("extend(_G, const_res)").append(endl).append(endl);
         }
 
         sb.append("return const_res").append(endl);

@@ -13,8 +13,18 @@ local const_res = {
   },
 }
 
-for k, v in pairs(const_res) do
-  _G[k] = v
+local function extend(dst, src)
+  for k, v in pairs(src) do
+    if not dst[k] or 'table' ~= type(v) then
+      dst[k] = src[k]
+    else
+      if 'table' ~= type(dst[k]) then
+        dst[k] = {}
+      end
+      extend(dst[k], src[k])
+    end
+  end
 end
+extend(_G, const_res)
 
 return const_res

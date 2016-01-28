@@ -330,7 +330,7 @@ namespace xresloader {
             if (sort_func_) {
                 typename data_map_t::iterator iter = data_.begin();
                 for (; data_.end() != iter; ++iter) {
-                    std::sort(iter->second.begin(), iter->second.end(), sort_func_);
+                    std::stable_sort(iter->second.begin(), iter->second.end(), sort_func_);
                 }
             }
         };

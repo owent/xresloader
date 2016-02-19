@@ -65,17 +65,17 @@ public class main {
         }
 
         if (null == protoDesc)
-            return 0;
+            return 1;
 
         DataDstImpl outDesc = get_out_desc(protoDesc);
         if (null == outDesc)
-            return 0;
+            return 1;
 
         HashMap<String, Object> enum_data = protoDesc.buildConst();
 
         if (null == enum_data) {
             System.err.println(String.format("[ERROR] protocol desc \"%s\" init and build const values failed", ProgramOptions.getInstance().protocol.toString()));
-            return 0;
+            return 1;
         }
 
         try {
@@ -89,11 +89,11 @@ public class main {
                 fos.write(data);
             } else {
                 System.err.println(String.format("[ERROR] write const data to file \"%s\" failed, output type invalid.", ProgramOptions.getInstance().constPrint));
-                return 0;
+                return 1;
             }
         } catch (java.io.IOException e) {
             System.err.println(String.format("[ERROR] write data to file \"%s\" failed", ProgramOptions.getInstance().constPrint));
-            return 0;
+            return 1;
         }
 
         System.out.println(String.format(
@@ -102,13 +102,13 @@ public class main {
             SchemeConf.getInstance().getKey().getEncoding()
         ));
 
-        return 1;
+        return 0;
     }
 
     private static int build_group(String[] args) {
         int ret = ProgramOptions.getInstance().init(args);
         if (ret != 0) {
-            return 0;
+            return 1;
         }
 
         SchemeConf.getInstance().reset();
@@ -120,7 +120,7 @@ public class main {
 
         ret = SchemeConf.getInstance().initScheme();
         if (ret < 0) {
-            return 0;
+            return 1;
         }
 
         // 读入数据表 & 协议编译
@@ -211,7 +211,7 @@ public class main {
             ++ success_count;
         }
 
-        return success_count - ProgramOptions.getInstance().dataSourceMetas.length;
+        return ProgramOptions.getInstance().dataSourceMetas.length - success_count;
     }
 
 

@@ -109,8 +109,10 @@ public class main {
 
     private static int build_group(String[] args) {
         int ret = ProgramOptions.getInstance().init(args);
-        if (ret != 0) {
+        if (ret < 0) {
             return 1;
+        } else if (ret > 0) {
+            return 0;
         }
 
         SchemeConf.getInstance().reset();

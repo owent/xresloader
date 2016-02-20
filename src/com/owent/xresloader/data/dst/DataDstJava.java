@@ -1,6 +1,7 @@
 package com.owent.xresloader.data.dst;
 
 import com.owent.xresloader.ProgramOptions;
+import com.owent.xresloader.data.err.ConvException;
 import com.owent.xresloader.data.src.DataContainer;
 import com.owent.xresloader.data.src.DataSrcImpl;
 import com.owent.xresloader.scheme.SchemeConf;
@@ -30,7 +31,7 @@ public abstract class DataDstJava extends DataDstImpl {
         public HashMap<String, List<Object> > body = new HashMap<String, List<Object>>();
     }
 
-    protected DataDstObject build_data(DataDstWriterNode desc) {
+    protected DataDstObject build_data(DataDstWriterNode desc) throws ConvException {
         DataDstObject ret = new DataDstObject();
 
         ret.header.put("xrex_ver", ProgramOptions.getInstance().getVersion());
@@ -51,7 +52,7 @@ public abstract class DataDstJava extends DataDstImpl {
         return ret;
     }
 
-    private DataEntry writeData(DataDstWriterNode desc, String prefix) {
+    private DataEntry writeData(DataDstWriterNode desc, String prefix) throws ConvException {
         DataEntry ret = new DataEntry();
         HashMap<String, Object> ret_val = new HashMap<String, Object>();
         ret.value = ret_val;
@@ -87,7 +88,7 @@ public abstract class DataDstJava extends DataDstImpl {
         return ret;
     }
 
-    private DataEntry writeOneData(DataDstWriterNode desc, String prefix) {
+    private DataEntry writeOneData(DataDstWriterNode desc, String prefix) throws ConvException {
         String encoding = SchemeConf.getInstance().getKey().getEncoding();
         DataEntry ret = new DataEntry();
 

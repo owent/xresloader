@@ -5,6 +5,7 @@ import com.google.protobuf.DescriptorProtos;
 import com.google.protobuf.Descriptors;
 import com.google.protobuf.DynamicMessage;
 import com.owent.xresloader.ProgramOptions;
+import com.owent.xresloader.data.err.ConvException;
 import com.owent.xresloader.data.src.DataContainer;
 import com.owent.xresloader.data.src.DataSrcImpl;
 import com.owent.xresloader.pb.PbHeader;
@@ -158,7 +159,7 @@ public class DataDstPb extends DataDstImpl {
     }
 
     @Override
-    public final byte[] build(DataDstWriterNode desc) {
+    public final byte[] build(DataDstWriterNode desc) throws ConvException {
         // 初始化header
         PbHeader.xresloader_datablocks.Builder blocks = PbHeader.xresloader_datablocks.newBuilder();
         PbHeader.xresloader_header.Builder header = blocks.getHeaderBuilder();
@@ -355,7 +356,7 @@ public class DataDstPb extends DataDstImpl {
     }
 
 
-    private ByteString convData(DataDstWriterNode desc) {
+    private ByteString convData(DataDstWriterNode desc) throws ConvException {
         DynamicMessage.Builder root = DynamicMessage.newBuilder(currentMsgDesc);
 
         boolean valid_data = writeData(root, desc, currentMsgDesc, "");
@@ -373,7 +374,7 @@ public class DataDstPb extends DataDstImpl {
     }
 
 
-    private boolean writeData(DynamicMessage.Builder builder, DataDstWriterNode desc, Descriptors.Descriptor proto_desc, String prefix) {
+    private boolean writeData(DynamicMessage.Builder builder, DataDstWriterNode desc, Descriptors.Descriptor proto_desc, String prefix) throws ConvException {
         boolean ret = false;
 
         for (Map.Entry<String, DataDstWriterNode> c : desc.getChildren().entrySet()) {
@@ -409,7 +410,7 @@ public class DataDstPb extends DataDstImpl {
         return ret;
     }
 
-    private DataEntry writeOneData(DataDstWriterNode desc, Descriptors.FieldDescriptor fd, String prefix) {
+    private DataEntry writeOneData(DataDstWriterNode desc, Descriptors.FieldDescriptor fd, String prefix) throws ConvException {
         String encoding = SchemeConf.getInstance().getKey().getEncoding();
         DataEntry ret = new DataEntry();
 

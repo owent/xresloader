@@ -1,6 +1,7 @@
 package com.owent.xresloader.data.dst;
 
 import com.owent.xresloader.ProgramOptions;
+import com.owent.xresloader.data.err.ConvException;
 import com.owent.xresloader.scheme.SchemeConf;
 
 import org.dom4j.Document;
@@ -24,7 +25,7 @@ public class DataDstXml extends DataDstJava {
     }
 
     @Override
-    public final byte[] build(DataDstWriterNode desc) {
+    public final byte[] build(DataDstWriterNode desc) throws ConvException {
         // pretty print
         OutputFormat of = null;
         if (ProgramOptions.getInstance().prettyIndent <= 0) {

@@ -1,5 +1,6 @@
 package com.owent.xresloader.engine;
 
+import com.owent.xresloader.data.err.ConvException;
 import com.owent.xresloader.data.src.DataContainer;
 
 import com.owent.xresloader.ProgramOptions;
@@ -230,7 +231,7 @@ public class ExcelEngine {
      * @param col 列号
      * @return
      */
-    static public DataContainer<Long> cell2i(Row row, int col) {
+    static public DataContainer<Long> cell2i(Row row, int col) throws ConvException {
         return cell2i(row, col, null);
     }
 
@@ -242,7 +243,7 @@ public class ExcelEngine {
      * @param evalor 公式管理器
      * @return
      */
-    static public DataContainer<Long> cell2i(Row row, int col, FormulaEvaluator evalor) {
+    static public DataContainer<Long> cell2i(Row row, int col, FormulaEvaluator evalor) throws ConvException {
         DataContainer<Long> ret = new DataContainer<Long>();
         ret.setDefault(0L);
 
@@ -281,7 +282,13 @@ public class ExcelEngine {
                 if (val.isEmpty()) {
                     return ret;
                 }
-                return ret.set(Math.round(Double.valueOf(tryMacro(val))));
+                try {
+                    return ret.set(Math.round(Double.valueOf(tryMacro(val))));
+                } catch (java.lang.NumberFormatException e) {
+                    throw new ConvException(
+                        String.format("%s can not be converted to a integer", val)
+                    );
+                }
             }
             default:
                 return ret;
@@ -295,7 +302,7 @@ public class ExcelEngine {
      * @param col 列号
      * @return
      */
-    static public DataContainer<Double> cell2d(Row row, int col) {
+    static public DataContainer<Double> cell2d(Row row, int col) throws ConvException {
         return cell2d(row, col, null);
     }
 
@@ -307,7 +314,7 @@ public class ExcelEngine {
      * @param evalor 公式管理器
      * @return
      */
-    static public DataContainer<Double> cell2d(Row row, int col, FormulaEvaluator evalor) {
+    static public DataContainer<Double> cell2d(Row row, int col, FormulaEvaluator evalor) throws ConvException {
         DataContainer<Double> ret = new DataContainer<Double>();
         ret.setDefault(0.0);
 
@@ -346,7 +353,14 @@ public class ExcelEngine {
                 if (val.isEmpty()) {
                     return ret;
                 }
-                return ret.set(Double.valueOf(tryMacro(val)));
+
+                try {
+                    return ret.set(Double.valueOf(tryMacro(val)));
+                } catch (java.lang.NumberFormatException e) {
+                    throw new ConvException(
+                        String.format("%s can not be converted to a number", val)
+                    );
+                }
             }
             default:
                 return ret;

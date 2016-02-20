@@ -1,6 +1,7 @@
 package com.owent.xresloader.scheme;
 
 import com.owent.xresloader.ProgramOptions;
+import com.owent.xresloader.data.err.ConvException;
 import com.owent.xresloader.engine.ExcelEngine;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
@@ -99,7 +100,7 @@ public final class SchemeDataSourceExcel extends SchemeDataSourceBase {
         return ExcelEngine.cell2s(row, col).get();
     }
 
-    private int cell2int(Row row, int col) {
+    private int cell2int(Row row, int col) throws ConvException {
         return ExcelEngine.cell2i(row, col).get().intValue();
     }
 }

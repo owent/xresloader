@@ -1,5 +1,7 @@
 package com.owent.xresloader.data.src;
 
+import com.owent.xresloader.data.err.ConvException;
+
 import java.util.HashMap;
 
 /**
@@ -36,7 +38,7 @@ public abstract class DataSrcImpl {
         return false;
     }
 
-    public <T> DataContainer<T> getValue(String ident, T dv) {
+    public <T> DataContainer<T> getValue(String ident, T dv) throws ConvException {
         DataContainer<T> ret = new DataContainer<T>();
         ret.value = dv;
         return ret;

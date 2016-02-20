@@ -1,5 +1,6 @@
 package com.owent.xresloader.data.dst;
 
+import com.owent.xresloader.data.err.ConvException;
 import org.msgpack.MessagePack;
 import org.msgpack.packer.Packer;
 
@@ -28,7 +29,7 @@ public class DataDstMsgPack extends DataDstJava {
     }
 
     @Override
-    public final byte[] build(DataDstWriterNode desc) {
+    public final byte[] build(DataDstWriterNode desc) throws ConvException {
         ByteArrayOutputStream out = new ByteArrayOutputStream();
         Packer packer = msgpack.createPacker(out);
 

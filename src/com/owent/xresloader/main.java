@@ -22,6 +22,8 @@ import java.util.regex.PatternSyntaxException;
  */
 public class main {
 
+    static private String endl = "\n";
+
     private static DataDstImpl get_out_desc(DataDstImpl proto_desc) {
         DataDstImpl outDesc = null;
         switch (ProgramOptions.getInstance().outType) {
@@ -124,7 +126,7 @@ public class main {
         }
 
         // 读入数据表 & 协议编译
-        int success_count = 0;
+        int failed_count = 0;
         for (int i = 0; i < ProgramOptions.getInstance().dataSourceMetas.length; ++ i) {
             String sn = ProgramOptions.getInstance().dataSourceMetas[i];
 
@@ -189,7 +191,7 @@ public class main {
 
             try {
                 String filePath = SchemeConf.getInstance().getOutputFile();
-                if(!IdentifyEngine.isAbsPath(filePath))
+                if (!IdentifyEngine.isAbsPath(filePath))
                     filePath = ProgramOptions.getInstance().outputDirectory + '/' + filePath;
                 OutputStream fos = new FileOutputStream(filePath, false);
                 byte[] data = outDesc.build(dataDesc);
@@ -197,8 +199,16 @@ public class main {
                 if (null != data) {
                     fos.write(data);
                 }
+            } catch (com.owent.xresloader.data.err.ConvException e) {
+                System.err.println(String.format("[ERROR] convert data failed.%s  > %s%s  > %s",
+                    endl, String.join(" ", args),
+                    endl, e.getMessage()
+                ));
+                ++ failed_count;
+                continue;
             } catch (java.io.IOException e) {
                 System.err.println(String.format("[ERROR] write data to file \"%s\" failed", SchemeConf.getInstance().getOutputFile()));
+                ++ failed_count;
                 continue;
             }
 
@@ -208,10 +218,9 @@ public class main {
                 SchemeConf.getInstance().getOutputFile(),
                 SchemeConf.getInstance().getKey().getEncoding()
             ));
-            ++ success_count;
         }
 
-        return ProgramOptions.getInstance().dataSourceMetas.length - success_count;
+        return failed_count;
     }
 
 
@@ -250,6 +259,8 @@ public class main {
      * @param args
      */
     public static void main(String[] args) {
+        endl = System.getProperty("line.separator", "\n");
+
         // 先尝试根据传入参数转表
         int ret_code = build_group(args);
 

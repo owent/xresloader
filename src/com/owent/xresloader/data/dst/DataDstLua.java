@@ -1,6 +1,7 @@
 package com.owent.xresloader.data.dst;
 
 import com.owent.xresloader.ProgramOptions;
+import com.owent.xresloader.data.err.ConvException;
 import com.owent.xresloader.data.src.DataContainer;
 import com.owent.xresloader.data.src.DataSrcImpl;
 import com.owent.xresloader.scheme.SchemeConf;
@@ -38,7 +39,7 @@ public class DataDstLua extends DataDstJava {
     }
 
     @Override
-    public final byte[] build(DataDstWriterNode desc) {
+    public final byte[] build(DataDstWriterNode desc) throws ConvException {
         DataDstJava.DataDstObject data_obj = build_data(desc);
         StringBuffer sb = new StringBuffer();
 

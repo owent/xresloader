@@ -1,5 +1,7 @@
 package com.owent.xresloader.data.dst;
 
+import com.owent.xresloader.data.err.ConvException;
+
 import java.util.HashMap;
 
 /**
@@ -27,7 +29,7 @@ public abstract class DataDstImpl {
      * @param desc
      * @return
      */
-    public byte[] build(DataDstWriterNode desc) {
+    public byte[] build(DataDstWriterNode desc) throws ConvException {
         return new byte[0];
     }
 

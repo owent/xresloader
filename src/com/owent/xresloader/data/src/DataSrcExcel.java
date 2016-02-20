@@ -1,6 +1,7 @@
 package com.owent.xresloader.data.src;
 
 import com.owent.xresloader.ProgramOptions;
+import com.owent.xresloader.data.err.ConvException;
 import com.owent.xresloader.engine.ExcelEngine;
 import com.owent.xresloader.engine.IdentifyEngine;
 import com.owent.xresloader.scheme.SchemeConf;
@@ -248,7 +249,7 @@ public class DataSrcExcel extends DataSrcImpl {
 
 
     @Override
-    public <T> DataContainer<T> getValue(String ident, T ret_default) {
+    public <T> DataContainer<T> getValue(String ident, T ret_default) throws ConvException {
         DataContainer<T> ret = new DataContainer<T>();
         ret.value = ret_default;
 

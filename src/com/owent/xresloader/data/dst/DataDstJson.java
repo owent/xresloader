@@ -1,6 +1,7 @@
 package com.owent.xresloader.data.dst;
 
 import com.owent.xresloader.ProgramOptions;
+import com.owent.xresloader.data.err.ConvException;
 import com.owent.xresloader.scheme.SchemeConf;
 import org.json.*;
 
@@ -21,7 +22,7 @@ public class DataDstJson extends DataDstJava {
     }
 
     @Override
-    public final byte[] build(DataDstWriterNode desc) {
+    public final byte[] build(DataDstWriterNode desc) throws ConvException {
         JSONArray wrapper = new JSONArray();
         DataDstJava.DataDstObject data_obj = build_data(desc);
 

@@ -7,6 +7,7 @@
 2. 更新build-helper-maven-plugin到1.10
 3. 更新maven-shade-plugin到2.4.3
 4. 更新json到20160212
+5. 优化转换错误的一些错误提示
 
 1.0.3.0
 ------

@@ -212,27 +212,38 @@ public class DataSrcExcel extends DataSrcImpl {
 
     @Override
     public boolean next() {
-        // 当前行超出
-        if (null != current && current.next_index > current.last_row_number) {
-            current = null;
+        while(true) {
+            if (null != current) {
+                current.current_row = null;
+            }
+
+            // 当前行超出
+            if (null != current && current.next_index > current.last_row_number) {
+                current = null;
+            }
+
+            if (null == current && tables.isEmpty()) {
+                return false;
+            }
+
+            if (null == current) {
+                current = tables.removeFirst();
+            }
+
+            if (null == current) {
+                return false;
+            }
+
+            current.current_row = current.table.getRow(current.next_index);
+            ++current.next_index;
+
+            // 过滤空行
+            if (null != current.current_row) {
+                break;
+            }
         }
 
-        if (null == current && tables.isEmpty()) {
-            return false;
-        }
-
-        if (null == current) {
-            current = tables.removeFirst();
-        }
-
-        if (null == current) {
-            return false;
-        }
-
-        current.current_row = current.table.getRow(current.next_index);
-        ++current.next_index;
-
-        return null != current.current_row;
+        return null != current && null != current.current_row;
     }
 
 

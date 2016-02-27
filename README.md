@@ -8,6 +8,10 @@ xresloader
 当前构建状态 | [![Build Status](https://travis-ci.org/xresloader/xresloader.svg?branch=master)](https://travis-ci.org/xresloader/xresloader) |
 
 
+Gitter
+------
+[![Gitter](https://badges.gitter.im/xresloader/xresloader.svg)](https://gitter.im/xresloader/xresloader?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
+
 编译和打包
 ======
 

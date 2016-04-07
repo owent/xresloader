@@ -41,6 +41,7 @@ public class ProgramOptions {
     public String constPrint = "";
     public boolean luaGlobal = false;
     public String xmlRootName = "root";
+    public String javascriptExport = null;
 
     private ProgramOptions() {
         dataSourceMetas = new String[]{};
@@ -78,6 +79,7 @@ public class ProgramOptions {
         constPrint = "";
         luaGlobal = false;
         xmlRootName = "root";
+        javascriptExport = null;
     }
 
     private static Options get_options_group() {
@@ -91,7 +93,7 @@ public class ProgramOptions {
 
         options.addOption(Option.builder("t")
                 .longOpt("output-type")
-                .desc("output type(bin, lua, msgpack, json, xml)")
+                .desc("output type(bin, lua, msgpack, json, xml, javascript/js)")
                 .hasArg()
                 .argName("TYPE")
                 .build()
@@ -179,6 +181,14 @@ public class ProgramOptions {
                 .build()
         );
 
+        options.addOption(Option.builder()
+            .longOpt("javascript-export")
+            .desc("set javascript export mode(nodejs, amd or no)")
+            .hasArg()
+            .argName("EXPORT MODE")
+            .build()
+        );
+
         options.addOption(null, "disable-excel-formular", false, "disable formular in excel. will be faster when convert data.");
         options.addOption(null, "enable-excel-formular", false, "[default] enable formular in excel. will be slower when convert data.");
         options.addOption(null, "disable-empty-list", false, "[default] remove empty elements in a list or repeated field.");
@@ -244,6 +254,8 @@ public class ProgramOptions {
                 outType = FileType.JSON;
             } else if (val.equalsIgnoreCase("xml")){
                 outType = FileType.XML;
+            } else if (val.equalsIgnoreCase("js") || val.equalsIgnoreCase("javascript")) {
+                outType = FileType.JAVASCRIPT;
             } else {
                 System.err.println(String.format("[ERROR] [ERROR] invalid output type ", val));
                 return -1;
@@ -273,6 +285,7 @@ public class ProgramOptions {
 
         luaGlobal = cmd.hasOption("lua-global");
         xmlRootName = cmd.getOptionValue("xml-root", xmlRootName);
+        javascriptExport = cmd.getOptionValue("javascript-export", javascriptExport);
 
         // output dir
         outputDirectory = cmd.getOptionValue('o', ".");
@@ -377,11 +390,11 @@ public class ProgramOptions {
     }
 
     public String getVersion() {
-        return "1.0.4.0";
+        return "1.0.5.0";
     }
 
 
-    public enum FileType {BIN, LUA, MSGPACK, JSON, XML, INI, EXCEL}
+    public enum FileType {BIN, LUA, MSGPACK, JSON, XML, INI, EXCEL, JAVASCRIPT}
 
     public enum Protocol {PROTOBUF, CAPNPROTO, FLATBUFFER}
 }

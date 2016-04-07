@@ -72,7 +72,7 @@ echo "
 |          参数选项           |         描述        |                   说明                                                                                     |
 |-----------------------------|---------------------|------------------------------------------------------------------------------------------------------------|
 |-h --help                    | 帮助信息            | 显示帮助和支持的参数列表                                                                                   |
-|-t --output-type             | 输出类型            | bin（默认值）,lua,msgpack,json,xml                                                                         |
+|-t --output-type             | 输出类型            | bin（默认值）,lua,msgpack,json,xml,javascript,js                                                                         |
 |-p --proto                   | 协议描述类型        | protobuf(默认值),capnproto(暂未实现),flatbuffer(暂未实现)                                                  |
 |-f --proto-file              | 协议描述文件        |                                                                                                            |
 |-o --output-dir              | 输出目录            | 默认为当前目录                                                                                             |
@@ -89,7 +89,8 @@ echo "
 |--enable-empty-list          | 开启空列表项        | 开启空列表项，未填充数据将使用默认的空值来填充，并转出到输出文件中                                         |     
 |--stdin                      | 通过标准输入批量转表| 通过标准输入批量转表，参数可上面的一样,每行一项，字符串参数可以用单引号或双引号包裹，但是都不支持转义      |
 |--lua-global                 | lua输出写到全局表   | 输出协议描述中的常量到Lua脚本时，同时导入符号到全局表_G中（不会影响配置数据）                              |    
-|--xml-root                   | xml输出的根节点tag  | 输出格式为xml时的根节点的TagName                                                                           |    
+|--xml-root                   | xml输出的根节点tag  | 输出格式为xml时的根节点的TagName                                                                           |
+|--javascript-export          | 导出javascript数据的模式| 可选项(nodejs: 使用兼容nodejs的exports, amd: 使用兼容amd的define, 其他: 写入全局(window或global))
 
  
 协议类型

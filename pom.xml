@@ -6,7 +6,7 @@
 
     <groupId>com.owent.xresloader</groupId>
     <artifactId>xresloader</artifactId>
-    <version>1.0.4.0</version>
+    <version>1.0.5.0</version>
     <packaging>jar</packaging>
     <name>xresloader</name>
 
@@ -120,14 +120,14 @@
         <dependency>
             <groupId>org.apache.poi</groupId>
             <artifactId>poi-ooxml</artifactId>
-            <version>3.13</version>
+            <version>3.14</version>
             <type>jar</type>
         </dependency>
 
         <dependency>
             <groupId>org.apache.poi</groupId>
             <artifactId>poi</artifactId>
-            <version>3.13</version>
+            <version>3.14</version>
             <type>jar</type>
         </dependency>
 

@@ -46,6 +46,10 @@ public class main {
                 outDesc = new DataDstXml();
                 outDesc = outDesc.init() ? outDesc : null;
                 break;
+            case JAVASCRIPT:
+                outDesc = new DataDstJavascript();
+                outDesc = outDesc.init() ? outDesc : null;
+                break;
             default:
                 System.err.println(String.format("[ERROR] output type \"%s\" invalid", ProgramOptions.getInstance().outType.toString()));
                 break;

@@ -7,7 +7,7 @@ MessagePack配置读取
 
 ```
 {
-    xrex_ver: "版本号字符串",
+    xres_ver: "版本号字符串",
 	data_ver: "版本号字符串",
 	xrex_ver: 配置记录个数,
 	hash_code: "hash算法:hash值",

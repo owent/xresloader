@@ -34,7 +34,7 @@ public abstract class DataDstJava extends DataDstImpl {
     protected DataDstObject build_data(DataDstWriterNode desc) throws ConvException {
         DataDstObject ret = new DataDstObject();
 
-        ret.header.put("xrex_ver", ProgramOptions.getInstance().getVersion());
+        ret.header.put("xres_ver", ProgramOptions.getInstance().getVersion());
         ret.header.put("data_ver", ProgramOptions.getInstance().getVersion());
         ret.header.put("count", DataSrcImpl.getOurInstance().getRecordNumber());
         ret.header.put("hash_code", "no hash code");

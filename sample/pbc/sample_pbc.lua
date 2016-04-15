@@ -21,6 +21,8 @@ cfg:set_path_rule('%s')
 -- 下面这个接口是在执行reload的时候会重新require的路径，可以在这个文件里重新读取配置
 -- cfg:set_list('data.conf_list') -- cfg:reload() 会在清空配置数据后执行require('data.conf_list')
 
+
+-- 读取文件数据
 local cfg_file = io.open('../role_cfg.bin')
 local cfg_buffer = cfg_file:read('*a')
 cfg_file:close()

@@ -1,5 +1,8 @@
-pbcÅäÖÃ¶ÁÈ¡
+pbcé…ç½®è¯»å–
 ======
 
-> ÓÃÓÚ¶ÁÈ¡Êä³öÀàĞÍÎªbin£¬Ğ­ÒéÀàĞÍÎªprotobufÊ±µÄ×ª»»½á¹û
-> ĞèÒªÊ¹ÓÃ[ÔÆ·çµÄpbc](https://github.com/cloudwu/pbc)×÷protobuf½âÎöÆ÷
+> ç”¨äºè¯»å–è¾“å‡ºç±»å‹ä¸ºbinï¼Œåè®®ç±»å‹ä¸ºprotobufæ—¶çš„è½¬æ¢ç»“æœ
+> éœ€è¦ä½¿ç”¨[äº‘é£çš„pbc](https://github.com/cloudwu/pbc)ä½œprotobufè§£æå™¨
+
+è¯¦è§ https://github.com/owent-utils/lua çš„ [src/data](https://github.com/owent-utils/lua/tree/master/src/data) éƒ¨åˆ†
+ç¤ºä¾‹è§ [https://github.com/xresloader/xresloader/blob/master/sample/lua/sample_pbc.lua](../../sample/pbc)

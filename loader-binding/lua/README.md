@@ -1,8 +1,8 @@
-LuaÅäÖÃ¶ÁÈ¡
+Luaé…ç½®è¯»å–
 ======
 
-> ÓÃÓÚ¶ÁÈ¡Êä³öÀàĞÍÎªluaµÄ×ª»»½á¹û
+> ç”¨äºè¯»å–è¾“å‡ºç±»å‹ä¸ºluaçš„è½¬æ¢ç»“æœ
 
-Ïê¼û [https://github.com/owt5008137/OWenT-s-Utils/tree/Lua](https://github.com/owt5008137/OWenT-s-Utils/tree/Lua) µÄ [src/data](https://github.com/owt5008137/OWenT-s-Utils/tree/Lua/src/data) ²¿·Ö
-Ê¾Àı¼û [https://github.com/owt5008137/xresloader/tree/master/sample/lua](../../sample/lua)
+è¯¦è§ https://github.com/owent-utils/lua çš„ [src/data](https://github.com/owent-utils/lua/tree/master/src/data) éƒ¨åˆ†
+ç¤ºä¾‹è§ [https://github.com/xresloader/xresloader/blob/master/sample/lua/sample_lua.lua](../../sample/lua)
 

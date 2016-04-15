@@ -18,16 +18,16 @@ function conf_set:get_by_table(key)
     local len = #key
     local i = 1
     local ret = self.__data
-    
+
     while ret and i <= len do
         ret = ret[key[i]]
         i = i + 1
     end
-    
+
     return ret
 end
 
-function conf_set:get(...)   
+function conf_set:get(...)
     return self:get_by_table({...})
 end
 
@@ -50,7 +50,7 @@ function conf_set:set_by_table(args)
         ret = ret[args[i]]
         i = i + 1
     end
-    
+
     ret[args[len + 1]] = args[len + 2]
     return args[len + 2]
 end
@@ -74,9 +74,10 @@ function pbc_config_manager:set_list(l)
     self.__list_path = l
 end
 
-function pbc_config_manager:load_datablocks(path, data_blocks, data_collector_fn, kv_fn)
-    pbc_config_manager.__data[path] = pbc_config_manager.__data[path] or conf_set.new({__data = {}})
-    local cfg = pbc_config_manager.__data[path]
+function pbc_config_manager:load_datablocks(path, data_blocks, data_collector_fn, kv_fn, cfg_set_name)
+    cfg_set_name = cfg_set_name or path
+    pbc_config_manager.__data[cfg_set_name] = pbc_config_manager.__data[cfg_set_name] or conf_set.new({__data = {}})
+    local cfg = pbc_config_manager.__data[cfg_set_name]
 
     path = string.format(self.__path_rule, tostring(path))
 
@@ -105,7 +106,7 @@ function pbc_config_manager:load_datablocks(path, data_blocks, data_collector_fn
     return true
 end
 
-function pbc_config_manager:load_buffer_kv(path, buffers, kv_fn)
+function pbc_config_manager:load_buffer_kv(path, buffers, kv_fn, cfg_set_name)
     local msg, error_text = pbc.decode("com.owent.xresloader.pb.xresloader_datablocks", buffers)
     if false == msg then
         log_error('decode buffer failed, path=%s: %s', tostring(path), error_text)
@@ -113,18 +114,23 @@ function pbc_config_manager:load_buffer_kv(path, buffers, kv_fn)
     end
 
     return self:load_datablocks(path, msg,
-    function(cfg, rk, rv)
+        function(cfg, rk, rv)
             if cfg:get_by_table(rk) then
-                log_warn('config [%s] already has key %s, old record will be covered', path, table.concat(rk, ', '))
+                for i = 1, #rk, 1 do
+                    if 0 ~= rk[i] and "" ~= rk[i] and nil ~= rk[i] then
+                        log_warn('config [%s] already has key %s, old record will be covered', path, table.concat(rk, ', '))
+                        break
+                    end
+                end
             end
 
             table.insert(rk, rv)
             cfg:set_by_table(rk)
-        end, kv_fn
+        end, kv_fn, cfg_set_name
     )
 end
 
-function pbc_config_manager:load_buffer_kl(path, buffers, kv_fn)
+function pbc_config_manager:load_buffer_kl(path, buffers, kv_fn, cfg_set_name)
     local msg, error_text = pbc.decode("com.owent.xresloader.pb.xresloader_datablocks", buffers)
     if false == msg then
         log_error('decode buffer failed, path=%s: %s', tostring(path), error_text)
@@ -141,7 +147,7 @@ function pbc_config_manager:load_buffer_kl(path, buffers, kv_fn)
                 table.insert(rk, ls)
                 cfg:set_by_table(rk)
             end
-        end, kv_fn
+        end, kv_fn, cfg_set_name
     )
 end
 

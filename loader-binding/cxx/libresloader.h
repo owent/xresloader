@@ -1,4 +1,7 @@
-﻿#pragma once
+﻿#ifndef _LIBRESLOADER_RESLOADER_H_
+#define _LIBRESLOADER_RESLOADER_H_
+
+#pragma once
 
 #include <cstddef>
 #include <iostream>
@@ -21,7 +24,6 @@
 #include "pb_header.pb.h"
 
 namespace xresloader {
-
     namespace details {
 #if defined(__cplusplus) && __cplusplus >= 201103L
 
@@ -530,3 +532,5 @@ namespace xresloader {
         index_key_fn_t index_fn_;
     };
 }
+
+#endif

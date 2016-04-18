@@ -25,7 +25,7 @@
 EN_GCC_SCREEN_WIDTHð
 EN_GCC_SCREEN_HEIGHT€
 EN_GCC_CAMERA_OFFSETŒBH
-Ÿ
+•
 
 kind.protodependency.proto"‘
 role_cfg
@@ -47,4 +47,13 @@ test_array (	"g
 	cost_type (
 
 cost_value (
-	score_add (BH
+	score_add ("<
+
+arr_in_arr
+name (	
+int_arr (
+str_arr (	"6
+arr_in_arr_cfg
+
+id (
+arr (2.arr_in_arrBH

@@ -4,6 +4,7 @@ import com.owent.xresloader.ProgramOptions;
 import com.owent.xresloader.data.err.ConvException;
 import com.owent.xresloader.scheme.SchemeConf;
 
+import org.dom4j.Attribute;
 import org.dom4j.Document;
 import org.dom4j.Element;
 import org.dom4j.DocumentHelper;
@@ -114,19 +115,18 @@ public class DataDstXml extends DataDstJava {
 
         // 列表
         if (data instanceof List) {
-            Element list_ele = DocumentHelper.createElement(wrapper_name);
-
             List<Object> ls = (List<Object>)data;
 
+            int index = 0;
             for(Object obj: ls) {
-                Element item = DocumentHelper.createElement("item");
-                DocumentHelper.createAttribute(item, "for", wrapper_name);
+                Element list_ele = DocumentHelper.createElement(wrapper_name);
+                Attribute index_attr = DocumentHelper.createAttribute(list_ele, "for", String.valueOf(index));
+                list_ele.add(index_attr);
 
-                writeData(item, obj, wrapper_name);
-                list_ele.add(item);
+                writeData(list_ele, obj, wrapper_name);
+                sb.add(list_ele);
+                ++ index;
             }
-
-            sb.add(list_ele);
             return;
         }
 
@@ -135,10 +135,15 @@ public class DataDstXml extends DataDstJava {
             Map<String, Object> mp = (Map<String, Object>)data;
 
             for(Map.Entry<String, Object> item: mp.entrySet()) {
-                Element xml_item = DocumentHelper.createElement(item.getKey());
-                writeData(xml_item, item.getValue(), item.getKey());
+                // 数据会多一层，这里去除
+                if (item.getValue() instanceof List) {
+                    writeData(sb, item.getValue(), item.getKey());
+                } else {
+                    Element xml_item = DocumentHelper.createElement(item.getKey());
+                    writeData(xml_item, item.getValue(), item.getKey());
 
-                sb.add(xml_item);
+                    sb.add(xml_item);
+                }
             }
 
             return;

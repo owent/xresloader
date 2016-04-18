@@ -1,26 +1,39 @@
-MessagePackÅäÖÃ¶ÁÈ¡
+MessagePacké…ç½®è¯»å–
 ======
 
-> ÓÃÓÚ¶ÁÈ¡Êä³öÀàĞÍÎªmsgpackµÄ×ª»»½á¹û
+> ç”¨äºè¯»å–è¾“å‡ºç±»å‹ä¸ºmsgpackçš„è½¬æ¢ç»“æœ
 
-ÓÉÓÚ[MessagePack](http://msgpack.org/) Ö§³ÖµÄÓïÑÔºÜ¶à£¬²¢ÇÒ½Ó¿Ú²»Í³Ò»£¬ËùÒÔ²»Ìá¹©¶ÁÈ¡¿â¡£ËùÓĞ´ò°üµÄÊı¾İÀàËÆÏÂÃæµÄĞÎÊ½£º
+ç”±äº[MessagePack](http://msgpack.org/) æ”¯æŒçš„è¯­è¨€å¾ˆå¤šï¼Œå¹¶ä¸”æ¥å£ä¸ç»Ÿä¸€ï¼Œæ‰€ä»¥ä¸æä¾›è¯»å–åº“ã€‚æ‰€æœ‰æ‰“åŒ…çš„æ•°æ®ç±»ä¼¼ä¸‹é¢çš„å½¢å¼ï¼š
 
 ```
 {
-    xres_ver: "°æ±¾ºÅ×Ö·û´®",
-	data_ver: "°æ±¾ºÅ×Ö·û´®",
-	xrex_ver: ÅäÖÃ¼ÇÂ¼¸öÊı,
-	hash_code: "hashËã·¨:hashÖµ",
+    xres_ver: "ç‰ˆæœ¬å·å­—ç¬¦ä¸²",
+	data_ver: "ç‰ˆæœ¬å·å­—ç¬¦ä¸²",
+	count: é…ç½®è®°å½•ä¸ªæ•°,
+	hash_code: "hashç®—æ³•:hashå€¼",
 }
-ÅäÖÃĞ­ÒéÃû: [
-    {ÅäÖÃÄÚÈİ},
-	{ÅäÖÃÄÚÈİ},
-	{ÅäÖÃÄÚÈİ},
+é…ç½®åè®®å: [
+    {é…ç½®å†…å®¹},
+	{é…ç½®å†…å®¹},
+	{é…ç½®å†…å®¹},
 ]
 ```
 
 
-ÈçsampleµÄpython°æ±¾Êı¾İ¶ÁÈ¡´òÓ¡Ê¾Àı£º
+Sample - Python2è¯»å–ç¤ºä¾‹ï¼š
+------
+
+```bash
+# å®‰è£…pip,å·²å®‰è£…å¯è·³è¿‡
+wget -c --no-check-certificate "https://bootstrap.pypa.io/get-pip.py"
+python get-pip.py
+
+# å®‰è£…msgpackæ¨¡å—,å·²å®‰è£…å¯è·³è¿‡(ä»¥ä¸‹2é€‰1)
+pip install msgpack-python
+python -m pip install msgpack-python
+
+```
+
 ```python
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
@@ -29,7 +42,71 @@ import msgpack
 
 unpacker = msgpack.Unpacker(open('role_cfg.msgpack.bin'))
 
-for unpacked in unpacker:
-    print(unpacked)
+cfg_mgr = {}
 
+for unpacked in unpacker:
+    # dump raw data
+    print(unpacked)
+    # make index in cfg_mgr
+    for cfg_name in unpacked:
+        cfg_set = unpacked[cfg_name]
+        # header must be skiped
+        if list != type(cfg_set):
+            break
+        cfg_index_set = {}
+        for cfg_item in cfg_set:
+            # we assume id is the key
+            cfg_index_set[cfg_item['id']] = cfg_item
+        cfg_mgr[cfg_name] = cfg_index_set
+
+# dump cfg_mgr
+print(cfg_mgr)
+
+# get cfg item from role_cfg with key = 10001
+print(cfg_mgr['role_cfg'][10001])
+```
+
+
+Sample - Node.jsè¯»å–ç¤ºä¾‹ï¼š
+------
+
+```bash
+# å®‰è£…msgpackæ¨¡å—,å·²å®‰è£…å¯è·³è¿‡
+# å½“ç„¶ä¹Ÿå¯ä»¥ç”¨å¦ä¸€ä¸ªæ¨¡å— npm install msgpack5 --saveï¼Œä½†æ˜¯ä¸‹é¢çš„ä¾‹å­ä½¿ç”¨çš„æ˜¯msgpack-lite
+npm install --save msgpack-lite
+```
+
+```javascript
+var fs = require("fs");
+var msgpack = require("msgpack-lite");
+
+var readStream = fs.createReadStream("role_cfg.msgpack.bin");
+var decodeStream = msgpack.createDecodeStream();
+
+// show multiple objects decoded from stream
+var cfg_mgr = {};
+
+readStream.pipe(decodeStream).on("data", function(obj){
+    for(var cfg_name in obj) {
+        var cfg_set = obj[cfg_name];
+        // header must be skiped
+        if('object' != typeof(cfg_set)) {
+            break;
+        }
+        var cfg_index = {};
+        for (var key in cfg_set) {
+            var cfg_item = cfg_set[key];
+            // we assume id is the key
+            cfg_index[cfg_item.id || 0] = cfg_item
+        }
+        
+        cfg_mgr[cfg_name] = cfg_index;
+    }
+}).on("end", function() { // must run after read all data 
+    // dump cfg_mgr ( )
+    console.log(cfg_mgr)
+    
+    // get cfg item from role_cfg with key = 10001
+    console.log(cfg_mgr['role_cfg'][10001])
+});
 ```

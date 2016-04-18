@@ -22,5 +22,17 @@
     "KeyWordSplit": "_",
     "KeyWordRegex": ["[A-Z_\\$ \\t\\r\\n]", "[_\\$ \\t\\r\\n]", "[a-zA-Z_\\$]"],
     "Encoding": "UTF-8"
+  },
+  "scheme_arr_in_arr": {
+    "DataSource": ["资源转换示例.xlsx", "arr_in_arr", "3,1"],
+    "MacroSource": ["资源转换示例.xlsx", "macro", "3,1"],
+
+    "ProtoName": "arr_in_arr_cfg",
+    "OutputFile": "arr_in_arr_cfg.bin",
+    "KeyRow": 2,
+    "KeyCase": "小写",
+    "KeyWordSplit": "_",
+    "KeyWordRegex": ["[A-Z_\\$ \\t\\r\\n]", "[_\\$ \\t\\r\\n]", "[a-zA-Z_\\$]"],
+    "Encoding": "UTF-8"
   }
 }

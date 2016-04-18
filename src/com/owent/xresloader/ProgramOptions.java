@@ -42,6 +42,7 @@ public class ProgramOptions {
     public boolean luaGlobal = false;
     public String xmlRootName = "root";
     public String javascriptExport = null;
+    public String javascriptGlobalVar = "";
 
     private ProgramOptions() {
         dataSourceMetas = new String[]{};
@@ -80,6 +81,7 @@ public class ProgramOptions {
         luaGlobal = false;
         xmlRootName = "root";
         javascriptExport = null;
+        javascriptGlobalVar = "";
     }
 
     private static Options get_options_group() {
@@ -189,6 +191,14 @@ public class ProgramOptions {
             .build()
         );
 
+        options.addOption(Option.builder()
+            .longOpt("javascript-global")
+            .desc("set javascript export namespace of window or global")
+            .hasArg()
+            .argName("EXPORT MODE")
+            .build()
+        );
+
         options.addOption(null, "disable-excel-formular", false, "disable formular in excel. will be faster when convert data.");
         options.addOption(null, "enable-excel-formular", false, "[default] enable formular in excel. will be slower when convert data.");
         options.addOption(null, "disable-empty-list", false, "[default] remove empty elements in a list or repeated field.");
@@ -286,6 +296,7 @@ public class ProgramOptions {
         luaGlobal = cmd.hasOption("lua-global");
         xmlRootName = cmd.getOptionValue("xml-root", xmlRootName);
         javascriptExport = cmd.getOptionValue("javascript-export", javascriptExport);
+        javascriptGlobalVar = cmd.getOptionValue("javascript-global", javascriptGlobalVar);
 
         // output dir
         outputDirectory = cmd.getOptionValue('o', ".");
@@ -390,7 +401,7 @@ public class ProgramOptions {
     }
 
     public String getVersion() {
-        return "1.0.5.0";
+        return "1.0.6.0";
     }
 
 

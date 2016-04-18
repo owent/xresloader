@@ -92,8 +92,15 @@ public class DataDstWriterNode {
         getChildren().put(child_name, node);
     }
 
+    public DataDstWriterNode createChild(String child_name) {
+        if (hasChild(child_name)) {
+            return getChildren().get(child_name);
+        }
+        return new DataDstWriterNode();
+    }
+
     public boolean hasChild(String child_name) {
-        return children.containsKey(child_name);
+        return getChildren().containsKey(child_name);
     }
 
     public enum JavaType {INT, LONG, FLOAT, DOUBLE, BOOLEAN, STRING, BYTE_STRING, ENUM, OBJECT}

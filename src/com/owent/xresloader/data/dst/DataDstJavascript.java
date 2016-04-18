@@ -122,9 +122,35 @@ public class DataDstJavascript extends DataDstJava {
                     break;
                 }
                 default: {
-                    sb.append(String.format("(window || global).%s = ", item.getKey()));
-                    writeData(sb, item.getValue(), 0);
+                    sb.append(String.format("(function(){%s%svar %s = ", endl, ident, item.getKey()));
+                    writeData(sb, item.getValue(), 1);
                     sb.append(";").append(endl);
+
+                    // extend function
+                    sb.append(ident).append("var extend = function (dst, src) {").append(endl);
+                    sb.append(ident).append(ident).append("for (var k in src) {").append(endl);
+                    sb.append(ident).append(ident).append(ident).append("var v = src[k];").append(endl);
+                    sb.append(ident).append(ident).append(ident).append("if (undefined === dst[k] || 'object' != typeof(v)) {").append(endl);
+                    sb.append(ident).append(ident).append(ident).append(ident).append("dst[k] = v;").append(endl);
+                    sb.append(ident).append(ident).append(ident).append("} else {").append(endl);
+                    sb.append(ident).append(ident).append(ident).append(ident).append("if ('object' != typeof(dst[k])) {").append(endl);
+                    sb.append(ident).append(ident).append(ident).append(ident).append(ident).append("dst[k] = {};").append(endl);
+                    sb.append(ident).append(ident).append(ident).append(ident).append("}").append(endl);
+                    sb.append(ident).append(ident).append(ident).append(ident).append("extend(dst[k], v)").append(endl);
+                    sb.append(ident).append(ident).append(ident).append("}").append(endl);
+                    sb.append(ident).append(ident).append("}").append(endl);
+                    sb.append(ident).append("};").append(endl);
+
+                    if (ProgramOptions.getInstance().javascriptGlobalVar.isEmpty()) {
+                        sb.append(ident).append(String.format("try { extend(window, { %s : %s }); }", item.getKey(), item.getKey())).append(endl);
+                        sb.append(ident).append(String.format("catch(e) { extend(global, { %s : %s }); }", item.getKey(), item.getKey())).append(endl);
+                    } else {
+                        sb.append(ident).append(String.format("try { extend(window, { \"%s\" : { %s : %s } }); }",
+                            ProgramOptions.getInstance().javascriptGlobalVar, item.getKey(), item.getKey())).append(endl);
+                        sb.append(ident).append(String.format("catch(e) { extend(global, { \"%s\" : { %s : %s } }); }",
+                            ProgramOptions.getInstance().javascriptGlobalVar, item.getKey(), item.getKey())).append(endl);
+                    }
+                    sb.append("})();").append(endl);
                     break;
                 }
             }

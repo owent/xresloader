@@ -285,16 +285,24 @@ public class DataDstPb extends DataDstImpl {
                                 break;
                         }
 
-                        DataDstWriterNode c = new DataDstWriterNode();
-                        c.setListCount(count);
-                        c.setType(fd.getJavaType().toString());
-                        node.addChild(fd.getName(), c);
                         has_data = has_data || count > 0;
+
+                        if (has_data) {
+                            DataDstWriterNode c = node.createChild(fd.getName());
+
+                            if (count > c.getListCount()) {
+                                c.setListCount(count);
+                            }
+
+                            c.setType(fd.getJavaType().toString());
+
+                            node.addChild(fd.getName(), c);
+                        }
                     } else {
                         // 非 list 类型
                         String real_name = DataDstWriterNode.makeChildPath(prefix, fd.getName());
                         if (data_src.checkName(real_name)) {
-                            DataDstWriterNode c = new DataDstWriterNode();
+                            DataDstWriterNode c = node.createChild(fd.getName());
                             c.setType(fd.getJavaType().toString());
                             node.addChild(fd.getName(), c);
                             has_data = true;
@@ -314,7 +322,7 @@ public class DataDstPb extends DataDstImpl {
                 case MESSAGE:
                     if (fd.isRepeated()) {
                         int count = 0;
-                        DataDstWriterNode c = new DataDstWriterNode();
+                        DataDstWriterNode c = node.createChild(fd.getName());
 
                         name_list.addLast("");
                         for (; ; ++count) {
@@ -326,10 +334,15 @@ public class DataDstPb extends DataDstImpl {
                         name_list.removeLast();
                         has_data = has_data || count > 0;
 
-                        c.setListCount(count);
-                        node.addChild(fd.getName(), c);
+                        if (has_data) {
+                            if (count > c.getListCount()) {
+                                c.setListCount(count);
+                            }
+
+                            node.addChild(fd.getName(), c);
+                        }
                     } else {
-                        DataDstWriterNode c = new DataDstWriterNode();
+                        DataDstWriterNode c = node.createChild(fd.getName());
                         name_list.addLast(DataDstWriterNode.makeNodeName(fd.getName()));
                         if (test(c, fd.getMessageType(), name_list, is_list)) {
                             node.addChild(fd.getName(), c);

@@ -2,8 +2,12 @@ package com.owent.xresloader;
 
 
 import java.io.FileDescriptor;
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.URL;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Properties;
 import java.util.regex.Pattern;
 import java.util.regex.PatternSyntaxException;
 
@@ -22,6 +26,7 @@ public class ProgramOptions {
      */
     private static ProgramOptions instance = null;
     private static Options options = null;
+    private static String version = null;
 
     public FileType outType;
 
@@ -195,7 +200,7 @@ public class ProgramOptions {
             .longOpt("javascript-global")
             .desc("set javascript export namespace of window or global")
             .hasArg()
-            .argName("EXPORT MODE")
+            .argName("NAME")
             .build()
         );
 
@@ -401,7 +406,18 @@ public class ProgramOptions {
     }
 
     public String getVersion() {
-        return "1.0.6.0";
+        if (version == null) {
+            InputStream inCfg = getClass().getClassLoader().getResourceAsStream("application.properties");
+            Properties props = new Properties();
+            try {
+                props.load(inCfg);
+                version = props.getProperty("version");
+            } catch (IOException e) {
+                System.err.println(String.format("[ERROR] Get version failed.\n%s", e.toString()));
+                version = "Unknown";
+            }
+        }
+        return version;
     }
 
 

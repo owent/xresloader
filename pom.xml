@@ -15,6 +15,13 @@
     </properties>
 
     <build>
+        <resources>
+            <resource>
+                <directory>src/com/owent/xresloader/resource</directory>
+                <filtering>true</filtering>
+            </resource>
+        </resources>
+
         <sourceDirectory>src</sourceDirectory>
 
         <plugins>

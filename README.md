@@ -47,6 +47,9 @@ java -client -jar xresloader.jar -t bin -p protobuf -f kind.pb -s 资源转换�
 # Excel=>Lua，并重命名输出文件 
 java -client -jar xresloader.jar -t lua -p protobuf -f kind.pb --pretty 4 -s 资源转换示例.xlsx -m scheme_kind -n "/(?i)\.bin$/\.lua/"
 
+# Excel=>Javascript，并重命名输出文件， 并把数据都导入到全局变量sample
+java -client -jar xresloader.jar -t js -p protobuf -f kind.pb --pretty 2 -s 资源转换示例.xlsx -m scheme_kind -n "/(?i)\.bin$/\.js/" --javascript-global sample
+
 # Excel=>MsgPack二进制，并重命名输出文件 
 java -client -jar xresloader.jar -t msgpack -p protobuf -f kind.pb -s 资源转换示例.xlsx -m scheme_kind -n "/(?i)\.bin$/\.msgpack.bin/"
 

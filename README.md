@@ -132,6 +132,40 @@ echo "
 |Encoding      | 编码转换                                                                               | UTF-8                      |              |              |注：Google的protobuf库的代码里写死了UTF-8(2.6.1版本)，故而该选项对Protobuf的二进制输出无效|
 
 
+数据源描述的特别说明
+------
+
+比如在**资源转换示例.xlsx**中：
+
+1. DataSource指明配置从文件:资源转换示例.xlsx，表:kind，第3行第1列开始读数据
+2. MacroSource指明配置从文件:资源转换示例.xlsx，表:macro，第2行第1列开始读数据文本替换的搜索串，并第2列读替换目标
+3. ProtoName指明协议中的数据结构名称为role_cfg
+4. OutputFile指明输出的文件名
+5. KeyRow指明从文件:资源转换示例.xlsx，表:kind（DataSource指定）第2行找字段名称，并转换成协议中的字段名。填充数据到该字段。
+6. KeyCase指明从第2行的字段名称转换成协议中的字段名时要转换成小写(如果字段名和第2行的内容一致则填不变即可)
+7. KeyWordSplit指明从第2行的字段名称转换成协议中的字段名时分词符号是*_*。(如果字段名和第2行的内容一致则留空)
+8. KeyPrefix指明从第2行的字段名称转换成协议中的字段名后，字段名加固定前缀
+9. KeySuffix指明从第2行的字段名称转换成协议中的字段名后，字段名加固定后缀
+10. KeyWordRegex指明分词的判定规则，全部是正则表达式
+> + 主配置：[A-Z_\$ \t\r\n]是指，碰到大写字母、下划线、$符号、空格和打印符、换行符都认为是新单词
+> + 次配置：[_\$ \t\r\n]是指，碰到分词符号后下划线、$符号、空格和打印符、换行符时都要移除
+> + 补充配置：[a-zA-Z_\$]是指，第一次碰到字母、下划线、$符号后才开始认为是字段名，前面的都视为无效字符
+11. Encoding指明输出的字符串内容都是UTF-8编码。（目前最好只用UTF-8，因为protobuf里写死了UTF-8编码，其他编码不保证完全正常）
+
+上面的配置中，数据从第3行读取，Key从第2行读取。那么第一行可以用来写一些说明或描述性数据。
+
+以上6-10是都为了兼容某些情况下的名称和规范的适配问题。
+
+比如：资源转换示例.xlsx的kind表中，0CostType这一项
+
+1. KeyWordRegex的补充配置会过滤掉前缀0（不匹配[a-zA-Z_\$]），即CostType
+2. KeyWordRegex的主配置会在大写字母处做分词，次配置指明保留字母，即分割成Cost Type
+3. KeyCase指明转换成小写，即cost type
+4. KeyWordSplit指明分词符号是*_*，即cost_type
+5. 最后匹配到*kind.proto*中*role_cfg*的*cost_type*字段.
+
+如果不需要字段名转换，直接把KeyWordRegex的配置全部配成空即可。（注意这样大小写转换也不会执行）
+
 输出格式说明
 ======
 |          输出格式参数       |                                  输出格式说明                                                                                       |           说明                                    |
@@ -143,21 +177,30 @@ echo "
 |           xml               | 转出为xml文件,一般格式为&lt;root&gt;&lt;header&gt;转表头信息&lt;/header&gt;&lt;body&gt;&lt;协议结构名称&gt;数据内容&lt;/协议结构名称&gt;&lt;/body&gt;&lt;/root&gt; | 示例见[sample](sample/role_cfg.xml)  |
 
 
-**注意：** Xml输出格式中，列表元素的结构是*&lt;配置名称&gt;&lt;item&gt;数据1&lt;/item&gt;&lt;item&gt;数据2&lt;/item&gt;...&lt;/配置名称&gt;* 里层结构固定tagName为item。目的是方便通过xpath查找（保证和父节点不重名）
+**注意：** Xml输出格式中，列表元素的结构是*&lt;配置名称 for="0"&gt;数据1&lt;/配置名称&gt;&lt;配置名称 for="1"&gt;数据2...&lt;/配置名称&gt;* 属性字段for表示数组索引，目的是方便通过xpath查找。
 
 关于加载导出的数据
 ======
 
 转出的数据都采用header+data_block的形式。本工具并不规定怎么读取转表导出的数据，开发者可以按照转出的数据规则自由操作。
 
+> 建议项目中使用导出的协议二进制或者msgpack。协议二进制可以用任意语言加载protobuf或者其他类似工具（如：[pbc](https://github.com/cloudwu/pbc)）加载。
+> 
+> 而其他导出类型可以用于一些外部工具的集成，比如基于Web的GM工具，基于Lua的远程调试工具等等。
+
 但是为了使用方便，在[loader-binding](loader-binding)里提供了几种基本的读表方式。
 
 protobuf协议
 ------
-1. 如果你使用官方的protobuf或protobuf-lite，可以使用[loader-binding/cxx](loader-binding/cxx)来加载配置
++ protobuf的协议数据解包主要流程:
+> 1. 二进制文件使用[header/pb_header.proto](header/pb_header.proto)中的*xresloader_datablocks*结构解包
+> 2. xresloader_datablocks.data_block内保存的二进制使用指定的配置协议解包
+> 3. xresloader_datablocks.data_block的个数就是Excel转出的数据行数，注意包含空行
+
++ 如果你使用官方的protobuf或protobuf-lite，可以使用[loader-binding/cxx](loader-binding/cxx)来加载配置
 > sample 参见: [sample/cxx/read_kind_sample.cpp](sample/cxx/read_kind_sample.cpp)
 
-2. 如果你使用云峰的[pbc](https://github.com/cloudwu/pbc)，可以使用[loader-binding/pbc](loader-binding/pbc)来加载配置
++ 如果你使用云峰的[pbc](https://github.com/cloudwu/pbc)，可以使用[loader-binding/pbc](loader-binding/pbc)来加载配置
 > 这个加载器会依赖 [https://github.com/owent-utils/lua/tree/master/src](https://github.com/owent-utils/lua/tree/master/src) 里的部分内容。
 > 
 > 需要使用pbc先加载[header/pb_header.pb](header/pb_header.pb)文件
@@ -168,6 +211,11 @@ protobuf协议
 
 其他输出格式
 ------
+
+> **注意：所有导出非二进制的数据都是不带包名的（package），但是使用-c --const-print选项导出协议常量除外。因为数据加载一般有manager统一管理，而协议常量一般直接用于代码中。**
+> 
+> 导出的常量都很简单易懂，直接看生成的文件很容易理解，这里再做说明了。
+
 1. **lua**格式输出可以按[loader-binding/lua](loader-binding/lua)的说明读取。
 > 这个加载器会依赖 [https://github.com/owent-utils/lua/tree/master/src](https://github.com/owent-utils/lua/tree/master/src) 里的部分内容。
 > 
@@ -175,11 +223,13 @@ protobuf协议
 > 
 > conf_manager:load_kl(require的路径, function(序号, 转出的lua table) return key的值 end) -- 读取key-list型数据接口
 
-2. [MsgPack](http://msgpack.org/)的读取的语言和工具很多，任意工具都能比较简单地读出数据，故而不再提供读取工具
+2. [MsgPack](http://msgpack.org/)的读取的语言和工具很多，任意工具都能比较简单地读出数据，[loader-binding/msgpack](loader-binding/msgpack)里有一些读取示例(Python和Node.js)
 3. **Json**的读取的语言和工具很多，任意工具都能比较简单地读出数据，故而不再提供读取工具
-3. **Xml**的读取的语言和工具很多，任意工具都能比较简单地读出数据，故而不再提供读取工具
+4. **Xml**的读取的语言和工具很多，任意工具都能比较简单地读出数据，故而不再提供读取工具
+5. **Javascript**的读取的语言和工具很多，任意工具都能比较简单地读出数据，[loader-binding/msgpack](loader-binding/javascript)里有相关说明
 
 使用注意事项
 ======
 1. Excel里编辑过的单元格即便删除了也会留下不可见的样式配置，这时候会导致转出的数据有空行。可以通过在Excel里删除行解决
 2. Excel里的日期时间类型转成协议里整数时会转为Unix时间戳，但是Excel的时间是以1900年1月0号为基准的，这意味着如果时间格式是hh:mm:dd的话，49:30:01会被转为1900-1-2 1:31:01。时间戳会是一个很大的负数
+3. 介于上一条，不建议在Excel中使用时间类型

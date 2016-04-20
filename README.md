@@ -12,6 +12,10 @@ Gitter
 ------
 [![Gitter](https://badges.gitter.im/xresloader/xresloader.svg)](https://gitter.im/xresloader/xresloader?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
 
+License
+------
+[MIT License](LICENSE)
+
 编译和打包
 ======
 

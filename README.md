@@ -218,7 +218,7 @@ protobuf协议
 
 > **注意：所有导出非二进制的数据都是不带包名的（package），但是使用-c --const-print选项导出协议常量除外。因为数据加载一般有manager统一管理，而协议常量一般直接用于代码中。**
 > 
-> 导出的常量都很简单易懂，直接看生成的文件很容易理解，这里再做说明了。
+> 导出的常量都很简单易懂，直接看生成的文件很容易理解，这里不再额外作说明了。
 
 1. **lua**格式输出可以按[loader-binding/lua](loader-binding/lua)的说明读取。
 > 这个加载器会依赖 [https://github.com/owent-utils/lua/tree/master/src](https://github.com/owent-utils/lua/tree/master/src) 里的部分内容。
@@ -230,7 +230,7 @@ protobuf协议
 2. [MsgPack](http://msgpack.org/)的读取的语言和工具很多，任意工具都能比较简单地读出数据，[loader-binding/msgpack](loader-binding/msgpack)里有一些读取示例(Python和Node.js)
 3. **Json**的读取的语言和工具很多，任意工具都能比较简单地读出数据，故而不再提供读取工具
 4. **Xml**的读取的语言和工具很多，任意工具都能比较简单地读出数据，故而不再提供读取工具
-5. **Javascript**的读取的语言和工具很多，任意工具都能比较简单地读出数据，[loader-binding/msgpack](loader-binding/javascript)里有相关说明
+5. **Javascript**的读取的语言和工具很多，任意工具都能比较简单地读出数据，[loader-binding/javascript](loader-binding/javascript)里有相关说明
 
 使用注意事项
 ======

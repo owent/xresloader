@@ -50,7 +50,7 @@ public final class SchemeDataSourceExcel extends SchemeDataSourceBase {
             for (key_col = 0; key_col < col_num; ++key_col) {
                 String val = cell2str(row, key_col);
                 val = val.trim();
-                if (val.equals("字段")) {
+                if (val.equals("字段") || val.equalsIgnoreCase("header")) {
                     break;
                 }
             }
@@ -62,11 +62,11 @@ public final class SchemeDataSourceExcel extends SchemeDataSourceBase {
             for (int i = 0; i < col_num; ++i) {
                 String val = cell2str(row, i);
                 val = val.trim();
-                if (val.equals("主配置")) {
+                if (val.equals("主配置") || val.equalsIgnoreCase("major")) {
                     data_col[0] = i;
-                } else if (val.equals("次配置")) {
+                } else if (val.equals("次配置") || val.equalsIgnoreCase("minor")) {
                     data_col[1] = i;
-                } else if (val.equals("补充配置")) {
+                } else if (val.equals("补充配置") || val.equalsIgnoreCase("addition")) {
                     data_col[2] = i;
                 }
             }

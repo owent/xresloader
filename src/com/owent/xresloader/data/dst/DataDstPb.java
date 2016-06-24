@@ -412,7 +412,22 @@ public class DataDstPb extends DataDstImpl {
             } else {
                 String new_prefix = DataDstWriterNode.makeChildPath(prefix, c.getKey());
                 DataEntry ele = writeOneData(c.getValue(), fd, new_prefix);
+
                 if (null != ele && (ele.valid || fd.isRequired())) {
+                    // 资源存在时要判定转换列表类型
+                    if (c.getValue().isList() != fd.isRepeated()) {
+                        throw new ConvException(
+                            String.format(
+                                "excel data %s%s is %s list but protocol description \"%s\" is %s repeated",
+                                prefix.isEmpty()? prefix: prefix + ".",
+                                c.getKey(),
+                                c.getValue().isList()? "a": "not",
+                                fd.getFullName(),
+                                fd.isRepeated()? "": "not"
+                            )
+                        );
+                    }
+
                     builder.setField(fd, ele.value);
                     ret = ret || ele.valid;
                 }

@@ -78,14 +78,14 @@ public class DataDstXml extends DataDstJava {
 
             return bos.toByteArray();
         } catch(Exception e) {
-            System.err.println(String.format("[ERROR] write xml failed, %s", e.getMessage()));
+            ProgramOptions.getLoger().error("write xml failed, %s", e.getMessage());
             return null;
         }
     }
 
     @Override
     public final DataDstWriterNode compile() {
-        System.err.println("[ERROR] lua can not be protocol description.");
+        ProgramOptions.getLoger().error("lua can not be protocol description.");
         return null;
     }
 
@@ -150,7 +150,7 @@ public class DataDstXml extends DataDstJava {
             return;
         }
 
-        System.out.println(String.format("[ERROR] %s not support.", data.toString()));
+        ProgramOptions.getLoger().error("%s not support.", data.toString());
     }
 
     /**
@@ -187,7 +187,7 @@ public class DataDstXml extends DataDstJava {
 
             return bos.toByteArray();
         } catch(Exception e) {
-            System.err.println(String.format("[ERROR] write xml failed, %s", e.getMessage()));
+            ProgramOptions.getLoger().error("write xml failed, %s", e.getMessage());
             return null;
         }
     };

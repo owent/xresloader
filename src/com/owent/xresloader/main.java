@@ -17,6 +17,9 @@ import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.regex.PatternSyntaxException;
+
+import org.apache.logging.log4j.Logger;
+
 /**
  * @author owentou
  */
@@ -51,7 +54,7 @@ public class main {
                 outDesc = outDesc.init() ? outDesc : null;
                 break;
             default:
-                System.err.println(String.format("[ERROR] output type \"%s\" invalid", ProgramOptions.getInstance().outType.toString()));
+                ProgramOptions.getLoger().error("output type \"%s\" invalid", ProgramOptions.getInstance().outType.toString());
                 break;
         }
 
@@ -66,7 +69,7 @@ public class main {
                 protoDesc = new DataDstPb();
                 break;
             default:
-                System.err.println(String.format("[ERROR] protocol type \"%s\" invalid", ProgramOptions.getInstance().protocol.toString()));
+                ProgramOptions.getLoger().error("protocol type \"%s\" invalid", ProgramOptions.getInstance().protocol.toString());
                 break;
         }
 
@@ -80,7 +83,7 @@ public class main {
         HashMap<String, Object> enum_data = protoDesc.buildConst();
 
         if (null == enum_data) {
-            System.err.println(String.format("[ERROR] protocol desc \"%s\" init and build const values failed", ProgramOptions.getInstance().protocol.toString()));
+            ProgramOptions.getLoger().error("protocol desc \"%s\" init and build const values failed", ProgramOptions.getInstance().protocol.toString());
             return 1;
         }
 
@@ -94,19 +97,19 @@ public class main {
             if (null != data) {
                 fos.write(data);
             } else {
-                System.err.println(String.format("[ERROR] write const data to file \"%s\" failed, output type invalid.", ProgramOptions.getInstance().constPrint));
+                ProgramOptions.getLoger().error("write const data to file \"%s\" failed, output type invalid.", ProgramOptions.getInstance().constPrint);
                 return 1;
             }
         } catch (java.io.IOException e) {
-            System.err.println(String.format("[ERROR] write data to file \"%s\" failed", ProgramOptions.getInstance().constPrint));
+            ProgramOptions.getLoger().error("write data to file \"%s\" failed", ProgramOptions.getInstance().constPrint);
             return 1;
         }
 
-        System.out.println(String.format(
-            "[INFO] write const data to \"%s\" success.(charset: %s)",
+        ProgramOptions.getLoger().info(
+            "write const data to \"%s\" success.(charset: %s)",
             ProgramOptions.getInstance().constPrint,
             SchemeConf.getInstance().getKey().getEncoding()
-        ));
+        );
 
         return 0;
     }
@@ -142,7 +145,7 @@ public class main {
 
             // 1. 描述信息
             if (false == SchemeConf.getInstance().getScheme().load_scheme(sn)) {
-                System.err.println(String.format("[ERROR] convert scheme \"%s\" failed", sn));
+                ProgramOptions.getLoger().error("convert scheme \"%s\" failed", sn);
                 continue;
             }
 
@@ -150,12 +153,12 @@ public class main {
             Class ds_clazz = DataSrcExcel.class;
             DataSrcImpl ds = DataSrcImpl.create(ds_clazz);
             if (null == ds) {
-                System.err.println(String.format("[ERROR] create data source class \"%s\" failed", ds_clazz.getName()));
+                ProgramOptions.getLoger().error("create data source class \"%s\" failed", ds_clazz.getName());
                 continue;
             }
             ret = ds.init();
             if (ret < 0) {
-                System.err.println(String.format("[ERROR] init data source class \"%s\" failed", ds_clazz.getName()));
+                ProgramOptions.getLoger().error("init data source class \"%s\" failed", ds_clazz.getName());
                 continue;
             }
 
@@ -166,20 +169,20 @@ public class main {
                     protoDesc = new DataDstPb();
                     break;
                 default:
-                    System.err.println(String.format("[ERROR] protocol type \"%s\" invalid", ProgramOptions.getInstance().protocol.toString()));
+                    ProgramOptions.getLoger().error("protocol type \"%s\" invalid", ProgramOptions.getInstance().protocol.toString());
                     break;
             }
 
             if (null == protoDesc)
                 continue;
             if (false == protoDesc.init()) {
-                System.err.println(String.format("[ERROR] protocol desc \"%s\" init failed", ProgramOptions.getInstance().protocol.toString()));
+                ProgramOptions.getLoger().error("protocol desc \"%s\" init failed", ProgramOptions.getInstance().protocol.toString());
                 continue;
             }
 
             DataDstWriterNode dataDesc = protoDesc.compile();
             if (null == dataDesc) {
-                System.err.println(String.format("[ERROR] compile protocol desc \"%s\" failed", ProgramOptions.getInstance().protocol.toString()));
+                ProgramOptions.getLoger().error("compile protocol desc \"%s\" failed", ProgramOptions.getInstance().protocol.toString());
                 continue;
             }
 
@@ -188,12 +191,12 @@ public class main {
             if (null == outDesc)
                 continue;
 
-            System.out.println(String.format(
-                "[INFO] convert scheme \"%s\" to \"%s\" started ...",
+            ProgramOptions.getLoger().trace(
+                "convert scheme \"%s\" to \"%s\" started ...",
                 sn,
                 SchemeConf.getInstance().getOutputFile(),
                 SchemeConf.getInstance().getKey().getEncoding()
-            ));
+            );
 
             try {
                 String filePath = SchemeConf.getInstance().getOutputFile();
@@ -206,24 +209,24 @@ public class main {
                     fos.write(data);
                 }
             } catch (com.owent.xresloader.data.err.ConvException e) {
-                System.err.println(String.format("[ERROR] convert data failed.%s  > %s%s  > %s",
+                ProgramOptions.getLoger().error("convert data failed.%s  > %s%s  > %s",
                     endl, String.join(" ", args),
                     endl, e.getMessage()
-                ));
+                );
                 ++ failed_count;
                 continue;
             } catch (java.io.IOException e) {
-                System.err.println(String.format("[ERROR] write data to file \"%s\" failed", SchemeConf.getInstance().getOutputFile()));
+                ProgramOptions.getLoger().error("write data to file \"%s\" failed", SchemeConf.getInstance().getOutputFile());
                 ++ failed_count;
                 continue;
             }
 
-            System.out.println(String.format(
-                "[INFO] convert scheme \"%s\" to \"%s\" success.(charset: %s)",
+            ProgramOptions.getLoger().info(
+                "convert scheme \"%s\" to \"%s\" success.(charset: %s)",
                 sn,
                 SchemeConf.getInstance().getOutputFile(),
                 SchemeConf.getInstance().getKey().getEncoding()
-            ));
+            );
         }
 
         return failed_count;

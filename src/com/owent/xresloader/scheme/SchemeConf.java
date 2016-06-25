@@ -230,7 +230,7 @@ public class SchemeConf {
         } else if (ProgramOptions.FileType.JSON == ProgramOptions.getInstance().dataSourceType) {
             scheme = new SchemeDataSourceJson();
         } else {
-            System.err.println("[ERROR] data source file type error.");
+            ProgramOptions.getLoger().error("data source file type error.");
             return -11;
         }
 

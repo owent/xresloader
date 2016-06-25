@@ -35,7 +35,7 @@ public final class SchemeDataSourceConf extends SchemeDataSourceBase {
             current_file.read(fsi);
         } catch (IOException e) {
             e.printStackTrace();
-            System.out.println(String.format("[ERROR] open file %s failed", file_path));
+            ProgramOptions.getLoger().error("open file %s failed", file_path);
             return -21;
         }
 
@@ -48,9 +48,9 @@ public final class SchemeDataSourceConf extends SchemeDataSourceBase {
         try {
             datas = current_file.items(section_name);
         } catch (ConfigParser.NoSectionException e) {
-            System.out.println(String.format("[WARN] scheme section %s not found", section_name));
+            ProgramOptions.getLoger().warn("scheme section %s not found", section_name);
         } catch (ConfigParser.InterpolationMissingOptionException e) {
-            System.out.println(String.format("[WARN] read scheme error,%s", e.getMessage()));
+            ProgramOptions.getLoger().warn("read scheme error,%s", e.getMessage());
             e.printStackTrace();
         }
 

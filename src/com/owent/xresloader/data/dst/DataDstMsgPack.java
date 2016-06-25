@@ -1,5 +1,6 @@
 package com.owent.xresloader.data.dst;
 
+import com.owent.xresloader.ProgramOptions;
 import com.owent.xresloader.data.err.ConvException;
 import org.msgpack.MessagePack;
 import org.msgpack.packer.Packer;
@@ -20,7 +21,7 @@ public class DataDstMsgPack extends DataDstJava {
         try {
             msgpack = new MessagePack();
         } catch (Exception e) {
-            System.err.println(e.toString());
+            ProgramOptions.getLoger().error("%s", e.toString());
             e.printStackTrace();
             return false;
         }
@@ -39,7 +40,7 @@ public class DataDstMsgPack extends DataDstJava {
             packer.write(data_obj.header);
             packer.write(data_obj.body);
         } catch (IOException e) {
-            System.err.println("[ERROR] MessagePacker write failed.");
+            ProgramOptions.getLoger().error("MessagePacker write failed.");
             e.printStackTrace();
         }
         // 带编码的输出
@@ -51,7 +52,7 @@ public class DataDstMsgPack extends DataDstJava {
 
     @Override
     public final DataDstWriterNode compile() {
-        System.err.println("[ERROR] msgpack can not be protocol description.");
+        ProgramOptions.getLoger().error("msgpack can not be protocol description.");
         return null;
     }
 
@@ -66,7 +67,7 @@ public class DataDstMsgPack extends DataDstJava {
         try {
             packer.write(data);
         } catch (IOException e) {
-            System.err.println("[ERROR] MessagePacker write failed.");
+            ProgramOptions.getLoger().error("MessagePacker write failed.");
             e.printStackTrace();
         }
         // 带编码的输出

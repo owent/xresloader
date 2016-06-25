@@ -46,7 +46,7 @@ public final class SchemeDataSourceJson extends SchemeDataSourceBase {
             current_object = current_file.parse(new String(data, "utf-8"));
         } catch (Exception e) {
             e.printStackTrace();
-            System.out.println(String.format("[ERROR] open file %s failed", file_path));
+            ProgramOptions.getLoger().error("open file %s failed", file_path);
             return -21;
         }
 
@@ -55,19 +55,19 @@ public final class SchemeDataSourceJson extends SchemeDataSourceBase {
 
     public boolean load_scheme(String section_name) {
         if (null == current_object || false == (current_object instanceof Map)) {
-            System.out.println(String.format("[WARN] scheme file error"));
+            ProgramOptions.getLoger().warn("scheme file error");
             return false;
         }
 
         Map cmap = (Map)current_object;
         if (false == cmap.containsKey(section_name)) {
-            System.out.println(String.format("[WARN] scheme section %s not found", section_name));
+            ProgramOptions.getLoger().warn("scheme section %s not found", section_name);
             return false;
         }
 
         Object scheme_obj = cmap.get(section_name);
         if (false == (scheme_obj instanceof Map)) {
-            System.out.println(String.format("[WARN] scheme section %s data invalid", section_name));
+            ProgramOptions.getLoger().warn("scheme section %s data invalid", section_name);
             return false;
         }
 

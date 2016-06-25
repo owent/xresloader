@@ -40,7 +40,7 @@ public class DataDstJson extends DataDstJava {
 
     @Override
     public final DataDstWriterNode compile() {
-        System.err.println("[ERROR] json can not be protocol description.");
+        ProgramOptions.getLoger().error("json can not be protocol description.");
         return null;
     }
 

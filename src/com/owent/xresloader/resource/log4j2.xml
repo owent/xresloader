@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="OFF">
+    <Properties>
+        <Property name="filename">xresloader.run.log</Property>
+    </Properties>
+    <Appenders>
+        <Console name="ConsoleOut" target="SYSTEM_OUT">
+            <PatternLayout pattern="%highlight{[%-5level] %logger{36} - %msg%n}{INFO=Bright Green, DEBUG=Bright Cyan, TRACE=Bright White}" />
+            <Filters>
+                <ThresholdFilter level="WARN" onMatch="DENY" onMismatch="ACCEPT"/>
+            </Filters>
+        </Console>
+        <Console name="ConsoleErr" target="SYSTEM_ERR">
+            <PatternLayout pattern="%highlight{[%-5level] %logger{36} - %msg%n}{FATAL=Bright Magenta, ERROR=Bright Red, WARN=Bright Yellow}" />
+            <Filters>
+                <ThresholdFilter level="WARN" onMatch="ACCEPT" onMismatch="DENY"/>
+            </Filters>
+        </Console>
+        <File name="File" fileName="${filename}" append="false">
+            <PatternLayout>
+                <pattern>[%d{YYYY-MM-dd HH:mm:ss.SSS}]:[%-5level] %logger{36} - %msg%n</pattern>
+            </PatternLayout>
+        </File>
+    </Appenders>
+    <Loggers>
+        <Root level="trace">
+            <AppenderRef ref="ConsoleOut"/>
+            <AppenderRef ref="ConsoleErr"/>
+            <AppenderRef ref="File"/>
+        </Root>
+    </Loggers>
+</Configuration>

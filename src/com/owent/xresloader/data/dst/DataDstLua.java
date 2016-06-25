@@ -72,7 +72,7 @@ public class DataDstLua extends DataDstJava {
 
     @Override
     public final DataDstWriterNode compile() {
-        System.err.println("[ERROR] lua can not be protocol description.");
+        ProgramOptions.getLoger().error("lua can not be protocol description.");
         return null;
     }
 
@@ -143,7 +143,7 @@ public class DataDstLua extends DataDstJava {
             return;
         }
 
-        System.out.println(String.format("[ERROR] rewrite %s as nil, should not called here.", data.toString()));
+        ProgramOptions.getLoger().error("rewrite %s as nil, should not called here.", data.toString());
         sb.append("nil");
     }
 

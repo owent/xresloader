@@ -4,6 +4,8 @@
 1.0.6.1
 ------
 1. 修复excel里配置成list而协议不是repeated时的错误提示
+2. 使用[log4j2](http://logging.apache.org/log4j/2.x/)来输出日志
+3. 控制台输出颜色支持
 
 1.0.6.0
 ------

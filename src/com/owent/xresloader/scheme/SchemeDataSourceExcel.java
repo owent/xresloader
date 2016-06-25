@@ -22,7 +22,7 @@ public final class SchemeDataSourceExcel extends SchemeDataSourceBase {
         String file_path = ProgramOptions.getInstance().dataSourceFile;
         currentWorkbook = ExcelEngine.openWorkbook(file_path);
         if (null == currentWorkbook) {
-            System.err.println("[ERROR] open file \"" + ProgramOptions.getInstance().dataSourceFile + "\" failed");
+            ProgramOptions.getLoger().error("open file \"" + ProgramOptions.getInstance().dataSourceFile + "\" failed");
             return -21;
         }
 
@@ -33,7 +33,7 @@ public final class SchemeDataSourceExcel extends SchemeDataSourceBase {
         Workbook wb = currentWorkbook;
         Sheet table = wb.getSheet(sheet_name);
         if (null == table) {
-            System.err.println("[ERROR] excel sheet \"" + sheet_name + "\" not found");
+            ProgramOptions.getLoger().error("excel sheet \"" + sheet_name + "\" not found");
             return false;
         }
 
@@ -74,7 +74,7 @@ public final class SchemeDataSourceExcel extends SchemeDataSourceBase {
         }
 
         if (data_row >= row_num) {
-            System.err.println("[ERROR] scheme \"" + sheet_name + "\" has no valid header");
+            ProgramOptions.getLoger().error("scheme \"" + sheet_name + "\" has no valid header");
             return false;
         }
 

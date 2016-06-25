@@ -73,10 +73,10 @@ public class DataDstPb extends DataDstImpl {
 
                 new_pb_info.descp_iter = new_pb_info.descp_map.entrySet().iterator();
             } catch (FileNotFoundException e) {
-                System.err.println(String.format("[ERROR] read protocol file \"%s\" failed. %s", ProgramOptions.getInstance().protocolFile, e.toString()));
+                ProgramOptions.getLoger().error("read protocol file \"%s\" failed. %s", ProgramOptions.getInstance().protocolFile, e.toString());
                 return null;
             } catch (IOException e) {
-                System.err.println(String.format("[ERROR] parse protocol file \"%s\" failed. %s", ProgramOptions.getInstance().protocolFile, e.toString()));
+                ProgramOptions.getLoger().error("parse protocol file \"%s\" failed. %s", ProgramOptions.getInstance().protocolFile, e.toString());
                 return null;
             }
 
@@ -129,13 +129,13 @@ public class DataDstPb extends DataDstImpl {
 
         // 如果协议名称不存在与所有的文件描述中，直接退出
         if (null == last_pb_data || !last_pb_data.proto_fd_map.containsKey(proto_name)) {
-            System.err.println(String.format("[ERROR] proto message name \"%s\" not found.", proto_name));
+            ProgramOptions.getLoger().error("proto message name \"%s\" not found.", proto_name);
             return null;
         }
 
         Descriptors.FileDescriptor fd = build_fd(last_pb_data.proto_fd_map.get(proto_name), last_pb_data);
         if (null == fd) {
-            System.err.println(String.format("[ERROR] build  protocol \"%s\" failed.", proto_name));
+            ProgramOptions.getLoger().error("build  protocol \"%s\" failed.", proto_name);
             return null;
         }
 
@@ -172,7 +172,7 @@ public class DataDstPb extends DataDstImpl {
         try {
             MessageDigest.getInstance("MD5");
         } catch (NoSuchAlgorithmException e) {
-            System.err.println("[ERROR] failed to find md5 algorithm.");
+            ProgramOptions.getLoger().error("failed to find md5 algorithm.");
             header.setHashCode("");
         }
 
@@ -201,8 +201,8 @@ public class DataDstPb extends DataDstImpl {
             blocks.build().writeTo(writer);
         } catch (IOException e) {
             e.printStackTrace();
-            System.err.println(String.format("[ERROR] try to serialize protobuf header failed. %s", e.toString()));
-            System.err.println(String.format("[ERROR] %s", header.build().getInitializationErrorString()));
+            ProgramOptions.getLoger().error("try to serialize protobuf header failed. %s", e.toString());
+            ProgramOptions.getLoger().error("%s", header.build().getInitializationErrorString());
         }
         return writer.toByteArray();
     }
@@ -222,7 +222,7 @@ public class DataDstPb extends DataDstImpl {
         try {
             Descriptors.FileDescriptor[] deps = get_deps(fdp, pb_info_set);
             if (null == deps) {
-                System.err.println(String.format("[ERROR] build protocol \"%s\" failed(dependency build failed).", fdn));
+                ProgramOptions.getLoger().error("build protocol \"%s\" failed(dependency build failed).", fdn);
                 return null;
             }
 
@@ -231,7 +231,7 @@ public class DataDstPb extends DataDstImpl {
 
         } catch (Descriptors.DescriptorValidationException e) {
             e.printStackTrace();
-            System.err.println(String.format("[ERROR] build protocol \"%s\" failed. %s", fdn, e.toString()));
+            ProgramOptions.getLoger().error("build protocol \"%s\" failed. %s", fdn, e.toString());
             return null;
         }
 
@@ -310,7 +310,7 @@ public class DataDstPb extends DataDstImpl {
                         } else if (fd.isRequired()) {
                             // 非测试list长度的模式下才输出错误
                             if (false == is_list) {
-                                System.err.println(String.format("[ERROR] required field \"%s\" not found", real_name));
+                                ProgramOptions.getLoger().error("required field \"%s\" not found", real_name);
                             }
                             ret = false;
                         }
@@ -350,7 +350,7 @@ public class DataDstPb extends DataDstImpl {
                         } else if (fd.isRequired()) {
                             // 非测试list长度的模式下才输出错误
                             if (false == is_list) {
-                                System.err.println(String.format("[ERROR] required field \"%s\" not found", fd.getName()));
+                                ProgramOptions.getLoger().error("required field \"%s\" not found", fd.getName());
                             }
                             ret = false;
                         }
@@ -381,7 +381,7 @@ public class DataDstPb extends DataDstImpl {
         try {
             return root.build().toByteString();
         } catch (Exception e) {
-            System.err.println(String.format("[ERROR] serialize failed. %s", root.getInitializationErrorString()));
+            ProgramOptions.getLoger().error("serialize failed. %s", root.getInitializationErrorString());
             return null;
         }
     }
@@ -395,7 +395,6 @@ public class DataDstPb extends DataDstImpl {
 
             Descriptors.FieldDescriptor fd = proto_desc.findFieldByName(_name);
             if (null == fd) {
-                // System.err.println("[WARNING] child name " + c.getKey() + " not found in protobuf description " + proto_desc.getFullName());
                 // 不需要提示，如果从其他方式解包协议描述的时候可能有可选字段丢失的
                 continue;
             }
@@ -502,7 +501,7 @@ public class DataDstPb extends DataDstImpl {
                     return ret;
                 }
 
-                System.err.println(String.format("[ERROR] serialize failed. %s data error.", prefix));
+                ProgramOptions.getLoger().error("serialize failed. %s data error.", prefix);
                 break;
             }
 
@@ -550,7 +549,7 @@ public class DataDstPb extends DataDstImpl {
                         if (node instanceof HashMap) {
                             fd_root = (HashMap<String, Object>)node;
                         } else {
-                            System.err.println(String.format("[ERROR] package name %s conflict(failed in %s).", fdp.getValue().getPackage(), seg));
+                            ProgramOptions.getLoger().error("package name %s conflict(failed in %s).", fdp.getValue().getPackage(), seg);
                             break;
                         }
                     } else {
@@ -569,7 +568,7 @@ public class DataDstPb extends DataDstImpl {
                     if (node instanceof HashMap) {
                         enum_root = (HashMap<String, Object>)node;
                     } else {
-                        System.err.println(String.format("[ERROR] enum name %s.%s conflict.", fdp.getValue().getPackage(), seg));
+                        ProgramOptions.getLoger().error("enum name %s.%s conflict.", fdp.getValue().getPackage(), seg);
                         continue;
                     }
                 } else {
@@ -606,9 +605,9 @@ public class DataDstPb extends DataDstImpl {
 
             return all_buffer;
         } catch (FileNotFoundException e) {
-            System.err.println(String.format("[ERROR] protocol file %s not found.", ProgramOptions.getInstance().protocolFile));
+            ProgramOptions.getLoger().error("protocol file %s not found.", ProgramOptions.getInstance().protocolFile);
         } catch (IOException e) {
-            System.err.println(String.format("[ERROR] read protocol file %s failed.", ProgramOptions.getInstance().protocolFile));
+            ProgramOptions.getLoger().error("read protocol file %s failed.", ProgramOptions.getInstance().protocolFile);
             e.printStackTrace();
         }
 

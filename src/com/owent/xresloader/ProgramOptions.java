@@ -14,7 +14,13 @@ import java.util.regex.PatternSyntaxException;
 import org.apache.commons.cli.*;
 import org.ini4j.spi.OptionsBuilder;
 
+// Import log4j classes.
+import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+
 public class ProgramOptions {
+
+    private static Logger logger = null;
 
     public class RenameRule {
         public Pattern match;
@@ -226,7 +232,7 @@ public class ProgramOptions {
         }
         catch( ParseException exp ) {
             // oops, something went wrong
-            System.err.println(String.format("[ERROR] parsing failed.  reason: \"%s\" failed", exp.getMessage()));
+            ProgramOptions.getLoger().error("parsing failed.  reason: \"%s\" failed", exp.getMessage());
 
             String script = System.getProperty("java.class.path");
             HelpFormatter formatter = new HelpFormatter();
@@ -272,7 +278,7 @@ public class ProgramOptions {
             } else if (val.equalsIgnoreCase("js") || val.equalsIgnoreCase("javascript")) {
                 outType = FileType.JAVASCRIPT;
             } else {
-                System.err.println(String.format("[ERROR] [ERROR] invalid output type ", val));
+                ProgramOptions.getLoger().error("invalid output type ", val);
                 return -1;
             }
         }
@@ -287,7 +293,7 @@ public class ProgramOptions {
             } else if (val.equalsIgnoreCase("flatbuffer")){
                 protocol = Protocol.FLATBUFFER;
             } else {
-                System.err.println(String.format("[ERROR] [ERROR] invalid protocol type ", val));
+                ProgramOptions.getLoger().error("invalid protocol type ", val);
                 return -2;
             }
         }
@@ -358,7 +364,7 @@ public class ProgramOptions {
                 String rule_string = cmd.getOptionValue('n');
                 rule_string = rule_string.trim();
                 if (rule_string.isEmpty()) {
-                    System.err.println(String.format("[ERROR] Invalid rename rule %s", rule_string));
+                    ProgramOptions.getLoger().error("Invalid rename rule %s", rule_string);
                     break;
                 }
 
@@ -371,7 +377,7 @@ public class ProgramOptions {
                 }
 
                 if (groups.length < start_index + 2) {
-                    System.err.println(String.format("[ERROR] Invalid rename rule %s", rule_string));
+                    ProgramOptions.getLoger().error("Invalid rename rule %s", rule_string);
                     break;
                 }
 
@@ -379,7 +385,7 @@ public class ProgramOptions {
                 try {
                     match_rule = Pattern.compile(groups[start_index]);
                 } catch (PatternSyntaxException e) {
-                    System.err.println(String.format("[ERROR] Invalid rename regex rule %s", groups[start_index]));
+                    ProgramOptions.getLoger().error("Invalid rename regex rule %s", groups[start_index]);
                     break;
                 }
 
@@ -413,7 +419,7 @@ public class ProgramOptions {
                 props.load(inCfg);
                 version = props.getProperty("version");
             } catch (IOException e) {
-                System.err.println(String.format("[ERROR] Get version failed.\n%s", e.toString()));
+                ProgramOptions.getLoger().error("Get version failed.\n%s", e.toString());
                 version = "Unknown";
             }
         }
@@ -424,4 +430,24 @@ public class ProgramOptions {
     public enum FileType {BIN, LUA, MSGPACK, JSON, XML, INI, EXCEL, JAVASCRIPT}
 
     public enum Protocol {PROTOBUF, CAPNPROTO, FLATBUFFER}
+
+    static public Logger getLoger() {
+        if (null != logger) {
+            return logger;
+        }
+
+        String name = "xresloader";
+        InputStream inCfg = getInstance().getClass().getClassLoader().getResourceAsStream("application.properties");
+        Properties props = new Properties();
+
+        try {
+            props.load(inCfg);
+            name = props.getProperty("name");
+        } catch (IOException e) {
+            System.err.println(String.format("[ERROR] Get application name failed.\n%s", e.toString()));
+        }
+
+        logger = LogManager.getFormatterLogger(name);
+        return logger;
+    }
 }

@@ -81,17 +81,13 @@ public class DataSrcExcel extends DataSrcImpl {
             res = new HashMap<String, String>();
 
             if (file_path.isEmpty() || src.table_name.isEmpty() || src.data_col <= 0 || src.data_row <= 0) {
-                System.err.println(
-                    String.format("[WARNING] macro source \"%s\" (%s:%d，%d) ignored.", src.file_path, src.table_name, src.data_row, src.data_col)
-                );
+                ProgramOptions.getLoger().warn("macro source \"%s\" (%s:%d，%d) ignored.", src.file_path, src.table_name, src.data_row, src.data_col);
                 continue;
             }
 
             Sheet tb = ExcelEngine.openSheet(file_path, src.table_name);
             if (null == tb) {
-                System.err.println(
-                    String.format("[WARNING] open macro source \"%s\" or table %s failed.", src.file_path, src.table_name)
-                );
+                ProgramOptions.getLoger().warn("open macro source \"%s\" or table %s failed.", src.file_path, src.table_name);
                 continue;
             }
 
@@ -104,9 +100,7 @@ public class DataSrcExcel extends DataSrcImpl {
                 DataContainer<String> val = ExcelEngine.cell2s(row, src.data_col, evalor);
                 if (key.valid && val.valid && !key.get().isEmpty() && !val.get().isEmpty()) {
                     if (res.containsKey(key)) {
-                        System.err.println(
-                            String.format("[WARNING] macro key \"%s\" is used more than once.", key)
-                        );
+                        ProgramOptions.getLoger().warn("macro key \"%s\" is used more than once.", key);
                     }
                     res.put(key.get(), val.get());
                 }
@@ -161,17 +155,13 @@ public class DataSrcExcel extends DataSrcImpl {
             }
 
             if (file_path.isEmpty() || src.table_name.isEmpty() || src.data_col <= 0 || src.data_row <= 0) {
-                System.err.println(
-                    String.format("[ERROR] data source \"%s\" (%s:%d，%d) ignored.", src.file_path, src.table_name, src.data_row, src.data_col)
-                );
+                ProgramOptions.getLoger().error("data source \"%s\" (%s:%d，%d) ignored.", src.file_path, src.table_name, src.data_row, src.data_col);
                 continue;
             }
 
             Sheet tb = ExcelEngine.openSheet(file_path, src.table_name);
             if (null == tb) {
-                System.err.println(
-                    String.format("[WARNING] open data source \"%s\" or table %s.", src.file_path, src.table_name)
-                );
+                ProgramOptions.getLoger().error("open data source \"%s\" or table %s.", src.file_path, src.table_name);
                 continue;
             }
 
@@ -186,7 +176,7 @@ public class DataSrcExcel extends DataSrcImpl {
                 int key_row = scfg.getKey().getRow() - 1;
                 Row row = tb.getRow(key_row);
                 if (null == row) {
-                    System.err.println("[ERROR] get description name row failed");
+                    ProgramOptions.getLoger().error("get description name row failed");
                     return -53;
                 }
                 for (int i = src.data_col - 1; i < row.getLastCellNum() + 1; ++i) {
@@ -292,7 +282,7 @@ public class DataSrcExcel extends DataSrcImpl {
         } else if (ret_default instanceof String) {
             ret = (DataContainer<T>) ExcelEngine.cell2s(current.current_row, index, current.formula);
         } else {
-            System.err.println("[ERROR] default value not supported");
+            ProgramOptions.getLoger().error("default value not supported");
         }
 
         return ret;

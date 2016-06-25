@@ -1,5 +1,7 @@
 package com.owent.xresloader.scheme;
 
+import com.owent.xresloader.ProgramOptions;
+
 import java.util.ArrayList;
 import java.util.Map;
 
@@ -16,7 +18,7 @@ public abstract class SchemeDataSourceBase implements SchemeDataSourceImpl {
      */
     protected boolean set_scheme(Map<String, ArrayList<String> > scheme_datas) {
         if(null == scheme_datas) {
-            System.out.println("[ERROR] can not convert null scheme_datas");
+            ProgramOptions.getLoger().error("can not convert null scheme_datas");
             return false;
         }
 

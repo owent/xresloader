@@ -4,6 +4,7 @@ local const_res = {
   game_const_config = {
     EN_GCC_SCREEN_WIDTH = 1136,
     EN_GCC_SCREEN_HEIGHT = 640,
+    EN_GCC_UNKNOWN = 0,
     EN_GCC_CAMERA_OFFSET = 268,
     EN_GCC_FORMULAR_TYPE_MASK = 10,
     EN_GCC_LEVEL_LIMIT = 999,

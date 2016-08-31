@@ -1,16 +1,10 @@
 
-=
-dep_level2.proto"%
-dep2_cfg
-
-id (
-level (	BH
  
 dependency.protodep_level2.proto"<
 dep_cfg
 
-id (
-name (	
+id (
+name (	
 dep2 (2	.dep2_cfg*·
 game_const_config
 EN_GCC_PERCENT_BASEN
@@ -25,35 +19,41 @@
 EN_GCC_SCREEN_WIDTHð
 EN_GCC_SCREEN_HEIGHT€
 EN_GCC_CAMERA_OFFSETŒBH
+=
+dep_level2.proto"%
+dep2_cfg
+
+id (
+level (	BH
 •
 
 kind.protodependency.proto"‘
 role_cfg
 
-id (
-unlock_level (
-	cost_type (
+id (
+unlock_level (
+	cost_type (
 
-cost_value (
-name (	
+cost_value (
+name (	
 dep_test
- (2.dep_cfg
+ (2.dep_cfg
 
 test_array (	"g
 role_upgrade_cfg
 
-id (
-level (
-	cost_type (
+id (
+level (
+	cost_type (
 
-cost_value (
-	score_add ("<
+cost_value (
+	score_add ("<
 
 arr_in_arr
-name (	
+name (	
 int_arr (
 str_arr (	"6
 arr_in_arr_cfg
 
-id (
+id (
 arr (2.arr_in_arrBH

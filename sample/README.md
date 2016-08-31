@@ -1,3 +1,9 @@
+关于proto v2和proto v3
+======
+目前已经全部使用proto v3转换数据，而proto v3是没有**required**字段得。这意味着所有未填写得Excel内容将不会转出到二进制文件中，并且读取API将会获得默认值。
+
+另外，由于proto v3精简掉了proto v2得一些功能，而且我们得转表工具并没有使用proto v3得新功能，所以xresload得转换出得数据规范不会变化。也是这个原因，老版本得proto v2得代码仍然可以读取现在的proto v3转出的数据
+
 xresloader示例文件说明:
 ======
 

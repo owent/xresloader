@@ -1,0 +1,34 @@
+syntax = "proto2";
+option optimize_for = LITE_RUNTIME;
+
+import "dependency.proto";
+
+message role_cfg {
+  optional uint32 id = 1;
+  optional uint32 unlock_level = 2;
+  optional uint32 cost_type = 3;
+  optional int32 cost_value = 4;
+  optional string name = 5;
+  optional dep_cfg dep_test = 10;
+
+  repeated string test_array = 11;
+}
+
+message role_upgrade_cfg {
+  optional uint32 id = 1;
+  optional uint32 level = 2;
+  optional uint32 cost_type = 3;
+  optional int32 cost_value = 4;
+  optional int32 score_add = 5;
+}
+
+message arr_in_arr {
+  optional string name = 1;
+  repeated int32 int_arr = 2;
+  repeated string str_arr = 3;
+}
+
+message arr_in_arr_cfg {
+  optional uint32 id = 1;
+  repeated arr_in_arr arr = 2;
+}

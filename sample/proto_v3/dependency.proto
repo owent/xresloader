@@ -1,18 +1,18 @@
-option optimize_for = LITE_RUNTIME;
+syntax = "proto3";
 
 import "dep_level2.proto";
 
 message dep_cfg {
-    required uint32 id = 1;
-    required string name = 2;
-	optional dep2_cfg dep2 = 3;
+    uint32 id = 1;
+    string name = 2;
+	dep2_cfg dep2 = 3;
 }
 
 // 常量类型
 enum game_const_config
 {
     option allow_alias = true;
-    
+    EN_GCC_UNKNOWN              = 0;
     EN_GCC_PERCENT_BASE         = 10000;        
     EN_GCC_RANDOM_RANGE_UNIT    = 10;           
     EN_GCC_RESOURCE_MAX_LIMIT   = 9999999;      

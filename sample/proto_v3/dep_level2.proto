@@ -1,0 +1,6 @@
+syntax = "proto3";
+
+message dep2_cfg {
+    uint32 id = 1;
+    string level = 2;
+}

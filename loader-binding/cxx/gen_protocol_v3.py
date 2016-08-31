@@ -12,10 +12,10 @@ os.chdir(os.path.join('..', '..'));
 project_dir = os.getcwd();
 proto_dir = '"' + os.path.join(project_dir, 'header') + '"';
 
-proto_file = '"' + os.path.join(project_dir, 'header', 'pb_header.proto') + '"';
+proto_file = '"' + os.path.join(project_dir, 'header', 'pb_header_v3.proto') + '"';
 
 os.chdir(work_dir);
 
-cmd = ' '.join(['protoc', '-I', proto_dir, '--cpp_out', script_dir, proto_file])
+cmd = ' '.join(['protoc', '-I', proto_dir, '--cpp_out=lite:{0}'.format(script_dir), proto_file])
 print(cmd)
 os.system(cmd)

@@ -6,7 +6,7 @@
 
     <groupId>com.owent.xresloader</groupId>
     <artifactId>xresloader</artifactId>
-    <version>1.0.6.1</version>
+    <version>1.1.0.0</version>
     <packaging>jar</packaging>
     <name>xresloader</name>
 
@@ -125,7 +125,7 @@
         <dependency>
             <groupId>com.google.protobuf</groupId>
             <artifactId>protobuf-java</artifactId>
-            <version>2.6.1</version>
+            <version>3.0.0</version>
         </dependency>
 
         <!-- POI -->

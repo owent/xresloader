@@ -1,12 +1,12 @@
 
-ò
-pb_header.protocom.owent.xresloader.pb"Y
-xresloader_header
-xres_ver (	
-data_ver (	
-count (
-	hash_code (	"g
-xresloader_datablocks:
-header (2*.com.owent.xresloader.pb.xresloader_header
+¨
+pb_header.protocom.owent.xresloader.pb"|
+xresloader_header
+xres_ver (	RxresVer
+data_ver (	RdataVer
+count (Rcount
+	hash_code (	RhashCode"z
+xresloader_datablocksB
+header (2*.com.owent.xresloader.pb.xresloader_headerRheader
 
-data_block (BH
+data_block (R	dataBlockBH

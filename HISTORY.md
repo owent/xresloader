@@ -1,11 +1,14 @@
 更新记录：
 ==========
 
-DEVELOPING
+1.1.0.0
 ------
 1. 更新build-helper-maven-plugin到1.12
 2. 更新log4j到2.6.2
 3. 更新ini4j到20160810
+4. 更新支持protobuf 3.0
+5. sample和loader-binding自动适应proto v2和proto v3
+6. 同步更新sample代码，同时支持proto v2和proto v3
 
 1.0.6.1
 ------

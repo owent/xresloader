@@ -3,13 +3,13 @@ option optimize_for = LITE_RUNTIME;
 package com.owent.xresloader.pb;
 
 message xresloader_header {
-    required string xres_ver = 1;
-    required string data_ver = 2;
-    required uint32 count = 3;
-	required string hash_code = 4;
+  optional string xres_ver = 1;
+  optional string data_ver = 2;
+  required uint32 count = 3;
+  required string hash_code = 4;
 }
 
 message xresloader_datablocks {
-	required xresloader_header header = 1;
-	repeated bytes data_block = 2;
+  optional xresloader_header header = 1;
+  repeated bytes data_block = 2;
 }

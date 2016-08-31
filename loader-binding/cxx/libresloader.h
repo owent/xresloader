@@ -21,7 +21,14 @@
     #include <tuple>
 #endif
 
+#include <google/protobuf/stubs/common.h>
+
+#if GOOGLE_PROTOBUF_VERSION < 3000000
 #include "pb_header.pb.h"
+#else
+#include "pb_header_v3.pb.h"
+#endif
+
 
 namespace xresloader {
     namespace details {

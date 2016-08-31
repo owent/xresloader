@@ -1,0 +1,15 @@
+syntax = "proto3";
+
+package com.owent.xresloader.pb;
+
+message xresloader_header {
+  string xres_ver = 1;
+  string data_ver = 2;
+  uint32 count = 3;
+  string hash_code = 4;
+}
+
+message xresloader_datablocks {
+  xresloader_header header = 1;
+  repeated bytes data_block = 2;
+}

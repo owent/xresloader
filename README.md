@@ -42,33 +42,35 @@ mvn package
 ======
 执行方式    java -jar xresloader.jar [参数...]
 
-比如：（生成源和结果在sample目录下）
+比如：（生成源和结果在sample目录下, xresloader的路径为 ../target/xresloader-1.1.0.0.jar）
 
 ```bash
+cd sample;
+
 # Excel=>二进制（按协议） 
-java -client -jar xresloader.jar -t bin -p protobuf -f kind.pb -s 资源转换示例.xlsx -m scheme_kind
+java -client -jar ../target/xresloader-1.1.0.0.jar -t bin -p protobuf -f proto_v3/kind.pb -s 资源转换示例.xlsx -m scheme_kind -o proto_v3
 
 # Excel=>Lua，并重命名输出文件 
-java -client -jar xresloader.jar -t lua -p protobuf -f kind.pb --pretty 4 -s 资源转换示例.xlsx -m scheme_kind -n "/(?i)\.bin$/\.lua/"
+java -client -jar ../target/xresloader-1.1.0.0.jar -t lua -p protobuf -f proto_v3/kind.pb --pretty 4 -s 资源转换示例.xlsx -m scheme_kind -n "/(?i)\.bin$/\.lua/" -o proto_v3
 
 # Excel=>Javascript，并重命名输出文件， 并把数据都导入到全局变量sample
-java -client -jar xresloader.jar -t js -p protobuf -f kind.pb --pretty 2 -s 资源转换示例.xlsx -m scheme_kind -n "/(?i)\.bin$/\.js/" --javascript-global sample
+java -client -jar ../target/xresloader-1.1.0.0.jar -t js -p protobuf -f proto_v3/kind.pb --pretty 2 -s 资源转换示例.xlsx -m scheme_kind -n "/(?i)\.bin$/\.js/" --javascript-global sample -o proto_v3
 
 # Excel=>MsgPack二进制，并重命名输出文件 
-java -client -jar xresloader.jar -t msgpack -p protobuf -f kind.pb -s 资源转换示例.xlsx -m scheme_kind -n "/(?i)\.bin$/\.msgpack.bin/"
+java -client -jar ../target/xresloader-1.1.0.0.jar -t msgpack -p protobuf -f proto_v3/kind.pb -s 资源转换示例.xlsx -m scheme_kind -n "/(?i)\.bin$/\.msgpack.bin/" -o proto_v3
 
 # 输出文件重命名+输出json格式+多次转表（多个-m参数）
-java -client -jar xresloader.jar -t json -p protobuf -f kind.pb -n "/(?i)\.bin$/\.json/" -s 资源转换示例.xlsx -m scheme_kind -m scheme_upgrade
+java -client -jar ../target/xresloader-1.1.0.0.jar -t json -p protobuf -f proto_v3/kind.pb -n "/(?i)\.bin$/\.json/" -s 资源转换示例.xlsx -m scheme_kind -m scheme_upgrade -o proto_v3
 
 # Excel=>Xml，并重命名输出文件 
 # Excel=>Xml，数据源是ini文件, 并重命名输出文件 
 # Excel=>Xml，数据源是json文件, 并重命名输出文件 
 echo "
--t xml -p protobuf -f kind.pb -s 资源转换示例.xlsx -m scheme_kind -n '/(?i)\.bin$/\.xml/'
--t xml -p protobuf -f kind.pb --pretty 2 -s 资源转换示例.scheme.ini -m scheme_kind -n '/(?i)\.bin$/\.xml/'
--t xml -p protobuf -f kind.pb -s 资源转换示例.scheme.json -m scheme_kind -n '/(?i)\.bin$/\.xml/'
--t lua -p protobuf -f kind.pb --pretty 2 -c kind_const.lua --lua-global
-" > params.txt && cat params.txt | java -client -jar xresloader.jar --stdin
+-t xml -p protobuf -f proto_v3/kind.pb -s 资源转换示例.xlsx -m scheme_kind -n '/(?i)\.bin$/\.xml/' -o proto_v3
+-t xml -p protobuf -f proto_v3/kind.pb --pretty 2 -s 资源转换示例.scheme.ini -m scheme_kind -n '/(?i)\.bin$/\.xml/' -o proto_v3
+-t xml -p protobuf -f proto_v3/kind.pb -s 资源转换示例.scheme.json -m scheme_kind -n '/(?i)\.bin$/\.xml/' -o proto_v3
+-t lua -p protobuf -f proto_v3/kind.pb --pretty 2 -c kind_const.lua --lua-global -o proto_v3
+" > params.txt && cat params.txt | java -client -jar ../target/xresloader-1.1.0.0.jar --stdin
 
 # 注意最后这个命令必须使用bash或sh，如果bash的编码是UTF-8在Windows下会因为编码错误而找不到文件，所以需要先把params.txt的编码转为GBK
 ```

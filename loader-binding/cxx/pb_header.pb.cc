@@ -172,7 +172,7 @@ bool xresloader_header::MergePartialFromCodedStream(
     tag = p.first;
     if (!p.second) goto handle_unusual;
     switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
-      // required string xres_ver = 1;
+      // optional string xres_ver = 1;
       case 1: {
         if (tag == 10) {
           DO_(::google::protobuf::internal::WireFormatLite::ReadString(
@@ -184,7 +184,7 @@ bool xresloader_header::MergePartialFromCodedStream(
         break;
       }
 
-      // required string data_ver = 2;
+      // optional string data_ver = 2;
       case 2: {
         if (tag == 18) {
          parse_data_ver:
@@ -250,13 +250,13 @@ failure:
 void xresloader_header::SerializeWithCachedSizes(
     ::google::protobuf::io::CodedOutputStream* output) const {
   // @@protoc_insertion_point(serialize_start:com.owent.xresloader.pb.xresloader_header)
-  // required string xres_ver = 1;
+  // optional string xres_ver = 1;
   if (has_xres_ver()) {
     ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
       1, this->xres_ver(), output);
   }
 
-  // required string data_ver = 2;
+  // optional string data_ver = 2;
   if (has_data_ver()) {
     ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
       2, this->data_ver(), output);
@@ -282,14 +282,14 @@ int xresloader_header::ByteSize() const {
   int total_size = 0;
 
   if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
-    // required string xres_ver = 1;
+    // optional string xres_ver = 1;
     if (has_xres_ver()) {
       total_size += 1 +
         ::google::protobuf::internal::WireFormatLite::StringSize(
           this->xres_ver());
     }
 
-    // required string data_ver = 2;
+    // optional string data_ver = 2;
     if (has_data_ver()) {
       total_size += 1 +
         ::google::protobuf::internal::WireFormatLite::StringSize(
@@ -350,7 +350,7 @@ void xresloader_header::CopyFrom(const xresloader_header& from) {
 }
 
 bool xresloader_header::IsInitialized() const {
-  if ((_has_bits_[0] & 0x0000000f) != 0x0000000f) return false;
+  if ((_has_bits_[0] & 0x0000000c) != 0x0000000c) return false;
 
   return true;
 }
@@ -466,7 +466,7 @@ bool xresloader_datablocks::MergePartialFromCodedStream(
     tag = p.first;
     if (!p.second) goto handle_unusual;
     switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
-      // required .com.owent.xresloader.pb.xresloader_header header = 1;
+      // optional .com.owent.xresloader.pb.xresloader_header header = 1;
       case 1: {
         if (tag == 10) {
           DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
@@ -517,7 +517,7 @@ failure:
 void xresloader_datablocks::SerializeWithCachedSizes(
     ::google::protobuf::io::CodedOutputStream* output) const {
   // @@protoc_insertion_point(serialize_start:com.owent.xresloader.pb.xresloader_datablocks)
-  // required .com.owent.xresloader.pb.xresloader_header header = 1;
+  // optional .com.owent.xresloader.pb.xresloader_header header = 1;
   if (has_header()) {
     ::google::protobuf::internal::WireFormatLite::WriteMessage(
       1, this->header(), output);
@@ -538,7 +538,7 @@ int xresloader_datablocks::ByteSize() const {
   int total_size = 0;
 
   if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
-    // required .com.owent.xresloader.pb.xresloader_header header = 1;
+    // optional .com.owent.xresloader.pb.xresloader_header header = 1;
     if (has_header()) {
       total_size += 1 +
         ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
@@ -584,7 +584,6 @@ void xresloader_datablocks::CopyFrom(const xresloader_datablocks& from) {
 }
 
 bool xresloader_datablocks::IsInitialized() const {
-  if ((_has_bits_[0] & 0x00000001) != 0x00000001) return false;
 
   if (has_header()) {
     if (!this->header().IsInitialized()) return false;

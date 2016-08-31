@@ -8,7 +8,7 @@ import com.owent.xresloader.ProgramOptions;
 import com.owent.xresloader.data.err.ConvException;
 import com.owent.xresloader.data.src.DataContainer;
 import com.owent.xresloader.data.src.DataSrcImpl;
-import com.owent.xresloader.pb.PbHeader;
+import com.owent.xresloader.pb.PbHeaderV3;
 import com.owent.xresloader.scheme.SchemeConf;
 import org.apache.commons.codec.binary.Hex;
 
@@ -161,8 +161,8 @@ public class DataDstPb extends DataDstImpl {
     @Override
     public final byte[] build(DataDstWriterNode desc) throws ConvException {
         // 初始化header
-        PbHeader.xresloader_datablocks.Builder blocks = PbHeader.xresloader_datablocks.newBuilder();
-        PbHeader.xresloader_header.Builder header = blocks.getHeaderBuilder();
+        PbHeaderV3.xresloader_datablocks.Builder blocks = PbHeaderV3.xresloader_datablocks.newBuilder();
+        PbHeaderV3.xresloader_header.Builder header = blocks.getHeaderBuilder();
         header.setXresVer(ProgramOptions.getInstance().getVersion());
         header.setDataVer(ProgramOptions.getInstance().getVersion());
         header.setHashCode("");
@@ -170,7 +170,7 @@ public class DataDstPb extends DataDstImpl {
         // 校验码
         MessageDigest md5 = null ;
         try {
-            MessageDigest.getInstance("MD5");
+            md5 = MessageDigest.getInstance("MD5");
         } catch (NoSuchAlgorithmException e) {
             ProgramOptions.getLoger().error("failed to find md5 algorithm.");
             header.setHashCode("");
@@ -197,7 +197,7 @@ public class DataDstPb extends DataDstImpl {
         // 写出
         ByteArrayOutputStream writer = new ByteArrayOutputStream();
         try {
-            PbHeader.xresloader_header builtHeader = header.build();
+            PbHeaderV3.xresloader_header builtHeader = header.build();
             blocks.build().writeTo(writer);
         } catch (IOException e) {
             e.printStackTrace();

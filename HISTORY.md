@@ -1,6 +1,12 @@
 更新记录：
 ==========
 
+DEVELOPING
+------
+1. 更新build-helper-maven-plugin到1.12
+2. 更新log4j到2.6.2
+3. 更新ini4j到20160810
+
 1.0.6.1
 ------
 1. 修复excel里配置成list而协议不是repeated时的错误提示

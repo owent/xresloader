@@ -206,10 +206,12 @@ protobuf协议
 + 如果你使用官方的protobuf或protobuf-lite，可以使用[loader-binding/cxx](loader-binding/cxx)来加载配置
 > sample 参见: [sample/cxx/read_kind_sample.cpp](sample/cxx/read_kind_sample.cpp)
 
-+ 如果你使用云峰的[pbc](https://github.com/cloudwu/pbc)，可以使用[loader-binding/pbc](loader-binding/pbc)来加载配置
++ 如果你使用云风的[pbc](https://github.com/cloudwu/pbc)，可以使用[loader-binding/pbc](loader-binding/pbc)来加载配置
 > 这个加载器会依赖 [https://github.com/owent-utils/lua/tree/master/src](https://github.com/owent-utils/lua/tree/master/src) 里的部分内容。
 > 
 > 需要使用pbc先加载[header/pb_header.pb](header/pb_header.pb)文件
+> 
+> **proto v3请注意: pbc不支持[packed=true]属性。在proto v3中，所有的*repeated*整数都默认是[packed=true]，要使用pbc解码请注意这些field要显示申明为[packed=false]**
 > 
 > pbc_config_manager:load_buffer_kv(协议名, 二进制, function(序号, 转出的lua table) return key的值 end) -- 读取key-value型数据接口
 > 

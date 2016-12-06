@@ -218,7 +218,8 @@ public class ExcelEngine {
 
                 return ret.set(String.valueOf((null == cv) ? c.getNumericCellValue() : cv.getNumberValue()));
             case Cell.CELL_TYPE_STRING:
-                return ret.set(tryMacro((null == cv) ? c.getStringCellValue().trim() : cv.getStringValue()));
+                //return ret.set(tryMacro((null == cv) ? c.getStringCellValue().trim() : cv.getStringValue()));
+                return ret.set((null == cv) ? c.getStringCellValue().trim() : cv.getStringValue());
             default:
                 return ret;
         }

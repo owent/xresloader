@@ -17,19 +17,26 @@ public abstract class DataDstImpl {
     }
 
     /**
-     * 编译并缓存协议描述文件
-     * @return
+     * @return 协议处理器名字
      */
-    public DataDstWriterNode compile() {
+    public String name() {
+        return this.getClass().getTypeName();
+    }
+
+    /**
+     * 编译并返回协议映射关系
+     * @return 协议映射关系
+     */
+    public DataDstWriterNode compile() throws ConvException {
         return null;
     }
 
     /**
      * 生成数据
-     * @param desc
+     * @param compiler 生成输出结构的描述器
      * @return
      */
-    public byte[] build(DataDstWriterNode desc) throws ConvException {
+    public byte[] build(DataDstImpl compiler) throws ConvException {
         return new byte[0];
     }
 

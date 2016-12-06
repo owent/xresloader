@@ -34,7 +34,20 @@ public abstract class DataSrcImpl {
         return -41;
     }
 
-    public boolean next() {
+    /**
+     * @brief 获取下一个数据源
+     * @note 每次调用这个函数之后最好重做一次列名映射，否则可能数据不匹配
+     * @return 有待处理的数据表返回true
+     */
+    public boolean next_table() {
+        return false;
+    }
+
+    /**
+     * @brief 获取当前数据源的下一个数据项
+     * @return 有数据则返回true
+     */
+    public boolean next_row() {
         return false;
     }
 

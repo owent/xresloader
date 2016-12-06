@@ -21,10 +21,17 @@ public class DataDstJson extends DataDstJava {
        return true;
     }
 
+    /**
+     * @return 协议处理器名字
+     */
+    public String name() {
+        return "json";
+    }
+
     @Override
-    public final byte[] build(DataDstWriterNode desc) throws ConvException {
+    public final byte[] build(DataDstImpl compiler) throws ConvException {
         JSONArray wrapper = new JSONArray();
-        DataDstJava.DataDstObject data_obj = build_data(desc);
+        DataDstJava.DataDstObject data_obj = build_data(compiler);
 
         wrapper.put(data_obj.header);
         wrapper.put(data_obj.body);

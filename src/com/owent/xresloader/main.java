@@ -180,12 +180,6 @@ public class main {
                 continue;
             }
 
-            DataDstWriterNode dataDesc = protoDesc.compile();
-            if (null == dataDesc) {
-                ProgramOptions.getLoger().error("compile protocol desc \"%s\" failed", ProgramOptions.getInstance().protocol.toString());
-                continue;
-            }
-
             // 4. 输出类型
             DataDstImpl outDesc = get_out_desc(protoDesc);
             if (null == outDesc)
@@ -203,7 +197,7 @@ public class main {
                 if (!IdentifyEngine.isAbsPath(filePath))
                     filePath = ProgramOptions.getInstance().outputDirectory + '/' + filePath;
                 OutputStream fos = new FileOutputStream(filePath, false);
-                byte[] data = outDesc.build(dataDesc);
+                byte[] data = outDesc.build(protoDesc);
 
                 if (null != data) {
                     fos.write(data);

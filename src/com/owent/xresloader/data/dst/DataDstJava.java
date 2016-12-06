@@ -26,12 +26,19 @@ public abstract class DataDstJava extends DataDstImpl {
         }
     }
 
+    /**
+     * @return 协议处理器名字
+     */
+    public String name() {
+        return "java";
+    }
+
     public class DataDstObject {
         public HashMap<String, Object> header = new HashMap<String, Object>();
         public HashMap<String, List<Object> > body = new HashMap<String, List<Object>>();
     }
 
-    protected DataDstObject build_data(DataDstWriterNode desc) throws ConvException {
+    protected DataDstObject build_data(DataDstImpl compiler) throws ConvException {
         DataDstObject ret = new DataDstObject();
 
         ret.header.put("xres_ver", ProgramOptions.getInstance().getVersion());
@@ -42,10 +49,15 @@ public abstract class DataDstJava extends DataDstImpl {
         List<Object> item_list = new ArrayList<Object>();
         ret.body.put(SchemeConf.getInstance().getProtoName(), item_list);
 
-        while (DataSrcImpl.getOurInstance().next()) {
-            DataEntry conv_data = writeData(desc, "");
-            if (conv_data.valid) {
-                item_list.add(conv_data.value);
+        while (DataSrcImpl.getOurInstance().next_table()) {
+            // 生成描述集
+            DataDstWriterNode desc = compiler.compile();
+
+            while(DataSrcImpl.getOurInstance().next_row()) {
+                DataEntry conv_data = writeData(desc, "");
+                if (conv_data.valid) {
+                    item_list.add(conv_data.value);
+                }
             }
         }
 

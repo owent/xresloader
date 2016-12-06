@@ -148,18 +148,27 @@ public class DataDstPb extends DataDstImpl {
         return null != currentMsgDesc;
     }
 
-
-    @Override
-    public final DataDstWriterNode compile() {
-        DataDstWriterNode ret = new DataDstWriterNode();
-        if (test(ret, currentMsgDesc, new LinkedList<String>(), false))
-            return ret;
-
-        return null;
+    /**
+     * @return 协议处理器名字
+     */
+    public String name() {
+        return "protobuf";
     }
 
     @Override
-    public final byte[] build(DataDstWriterNode desc) throws ConvException {
+    public final DataDstWriterNode compile() throws ConvException {
+        DataDstWriterNode ret = new DataDstWriterNode();
+        if (test(ret, currentMsgDesc, new LinkedList<String>(), false)) {
+            return ret;
+        }
+
+        throw new ConvException(String.format(
+                "protocol %s compile mapping relationship failed", name()
+        ));
+    }
+
+    @Override
+    public final byte[] build(DataDstImpl compiler) throws ConvException {
         // 初始化header
         PbHeaderV3.xresloader_datablocks.Builder blocks = PbHeaderV3.xresloader_datablocks.newBuilder();
         PbHeaderV3.xresloader_header.Builder header = blocks.getHeaderBuilder();
@@ -178,14 +187,19 @@ public class DataDstPb extends DataDstImpl {
 
         // 数据
         int count = 0;
-        while (DataSrcImpl.getOurInstance().next()) {
-            ByteString data = convData(desc);
-            if (null != data && !data.isEmpty()) {
-                ++count;
-                blocks.addDataBlock(data);
+        while (DataSrcImpl.getOurInstance().next_table()) {
+            // 生成描述集
+            DataDstWriterNode desc = compiler.compile();
 
-                if (null != md5) {
-                    md5.update(data.toByteArray());
+            while(DataSrcImpl.getOurInstance().next_row()) {
+                ByteString data = convData(desc);
+                if (null != data && !data.isEmpty()) {
+                    ++count;
+                    blocks.addDataBlock(data);
+
+                    if (null != md5) {
+                        md5.update(data.toByteArray());
+                    }
                 }
             }
         }

@@ -29,12 +29,19 @@ public class DataDstMsgPack extends DataDstJava {
         return true;
     }
 
+    /**
+     * @return 协议处理器名字
+     */
+    public String name() {
+        return "msgpack";
+    }
+
     @Override
-    public final byte[] build(DataDstWriterNode desc) throws ConvException {
+    public final byte[] build(DataDstImpl compiler) throws ConvException {
         ByteArrayOutputStream out = new ByteArrayOutputStream();
         Packer packer = msgpack.createPacker(out);
 
-        DataDstJava.DataDstObject data_obj = build_data(desc);
+        DataDstJava.DataDstObject data_obj = build_data(compiler);
 
         try {
             packer.write(data_obj.header);

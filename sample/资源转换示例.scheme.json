@@ -12,7 +12,7 @@
     "Encoding": "UTF-8"
   },
   "scheme_upgrade": {
-    "DataSource": ["资源转换示例.xlsx", "upgrade_10001", "3,1"],
+    "DataSource": [["资源转换示例.xlsx", "upgrade_10001", "3,1"], ["资源转换示例.xlsx", "upgrade_10002", "3,1"]],
     "MacroSource": ["资源转换示例.xlsx", "macro", "3,1"],
 
     "ProtoName": "role_upgrade_cfg",

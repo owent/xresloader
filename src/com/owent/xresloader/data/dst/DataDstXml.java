@@ -25,8 +25,15 @@ public class DataDstXml extends DataDstJava {
         return true;
     }
 
+    /**
+     * @return 协议处理器名字
+     */
+    public String name() {
+        return "xml";
+    }
+
     @Override
-    public final byte[] build(DataDstWriterNode desc) throws ConvException {
+    public final byte[] build(DataDstImpl compiler) throws ConvException {
         // pretty print
         OutputFormat of = null;
         if (ProgramOptions.getInstance().prettyIndent <= 0) {
@@ -37,7 +44,7 @@ public class DataDstXml extends DataDstJava {
         }
 
         // build data
-        DataDstObject data_obj = build_data(desc);
+        DataDstObject data_obj = build_data(compiler);
 
         // build xml tree
         Document doc = DocumentHelper.createDocument();

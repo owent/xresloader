@@ -12,24 +12,6 @@ import java.util.Map;
 public abstract class SchemeDataSourceBase implements SchemeDataSourceImpl {
 
     /**
-     * 设置多项转表配置
-     * @param scheme_datas 配置数据
-     * @return 成功或失败
-     */
-    protected boolean set_scheme(Map<String, ArrayList<String> > scheme_datas) {
-        if(null == scheme_datas) {
-            ProgramOptions.getLoger().error("can not convert null scheme_datas");
-            return false;
-        }
-
-        for(Map.Entry<String, ArrayList<String> > d : scheme_datas.entrySet()) {
-            set_scheme(d.getKey(), d.getValue());
-        }
-
-        return true;
-    }
-
-    /**
      * 设置一项转表配置
      * @param key 配置Key
      * @param datas 配置Value

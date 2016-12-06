@@ -73,30 +73,38 @@ public final class SchemeDataSourceJson extends SchemeDataSourceBase {
 
         Map<Object, Object> scheme_map = (Map<Object, Object>)scheme_obj;
         for(Map.Entry item : scheme_map.entrySet()) {
-            ArrayList<String> datas = new ArrayList<String>();
-
-            if (item.getValue() instanceof List) {
-                int index = 0;
-
-                for(Object obj: (List)item.getValue()) {
-                    datas.add(obj.toString());
-                    ++ index;
-                }
-
-                for(; index < 3; ++ index) {
-                    datas.add("");
-                }
-            } else if (null != item.getValue()) {
-                datas.add(item.getValue().toString());
-                datas.add("");
-                datas.add("");
-            }
-
-            if (false == datas.isEmpty()) {
-                set_scheme(item.getKey().toString(), datas);
-            }
+            load_segment(item.getKey().toString(), item.getValue());
         }
 
         return true;
+    }
+
+    private void load_segment(String key, Object val) {
+        ArrayList<String> datas = new ArrayList<String>();
+
+        if (val instanceof List) {
+            int index = 0;
+
+            for(Object obj: (List)val) {
+                if (obj instanceof List) {
+                    load_segment(key, obj);
+                } else {
+                    datas.add(obj.toString());
+                    ++index;
+                }
+            }
+
+            if (0 != index) {
+                for (; index < 3; ++index) {
+                    datas.add("");
+                }
+                set_scheme(key, datas);
+            }
+        } else if (null != val) {
+            datas.add(val.toString());
+            datas.add("");
+            datas.add("");
+            set_scheme(key, datas);
+        }
     }
 }

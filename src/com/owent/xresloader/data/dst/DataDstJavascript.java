@@ -35,9 +35,16 @@ public class DataDstJavascript extends DataDstJava {
         return true;
     }
 
+    /**
+     * @return 协议处理器名字
+     */
+    public String name() {
+        return "javascript";
+    }
+
     @Override
-    public final byte[] build(DataDstWriterNode desc) throws ConvException {
-        DataDstObject data_obj = build_data(desc);
+    public final byte[] build(DataDstImpl compiler) throws ConvException {
+        DataDstObject data_obj = build_data(compiler);
         StringBuffer sb = new StringBuffer();
 
         HashMap<String, Object> conv_type = new HashMap<String, Object>();

@@ -1,7 +1,7 @@
 package com.owent.xresloader.scheme;
 
 import com.owent.xresloader.ProgramOptions;
-import org.ini4j.*;
+import org.ini4j.ConfigParser;
 
 import java.io.FileInputStream;
 import java.io.IOException;

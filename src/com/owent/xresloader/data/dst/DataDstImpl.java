@@ -33,10 +33,10 @@ public abstract class DataDstImpl {
 
     /**
      * 生成数据
-     * @param compiler 生成输出结构的描述器
+     * @param src 生成输出结构的描述器
      * @return
      */
-    public byte[] build(DataDstImpl compiler) throws ConvException {
+    public byte[] build(DataDstImpl src) throws ConvException {
         return new byte[0];
     }
 

@@ -1,6 +1,7 @@
 package com.owent.xresloader.data.src;
 
 import com.owent.xresloader.data.err.ConvException;
+import com.owent.xresloader.engine.IdentifyDescriptor;
 
 import java.util.HashMap;
 
@@ -51,7 +52,7 @@ public abstract class DataSrcImpl {
         return false;
     }
 
-    public <T> DataContainer<T> getValue(String ident, T dv) throws ConvException {
+    public <T> DataContainer<T> getValue(IdentifyDescriptor ident, T dv) throws ConvException {
         DataContainer<T> ret = new DataContainer<T>();
         ret.value = dv;
         return ret;
@@ -61,8 +62,8 @@ public abstract class DataSrcImpl {
         return 0;
     }
 
-    public boolean checkName(String _name) {
-        return false;
+    public IdentifyDescriptor getColumnByName(String _name) {
+        return null;
     }
 
     public HashMap<String, String> getMacros() {

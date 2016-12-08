@@ -3,9 +3,9 @@ package com.owent.xresloader.data.dst;
 import com.owent.xresloader.ProgramOptions;
 import com.owent.xresloader.data.err.ConvException;
 import com.owent.xresloader.scheme.SchemeConf;
-import org.json.*;
+import org.json.JSONArray;
+import org.json.JSONObject;
 
-import java.io.StringWriter;
 import java.nio.charset.Charset;
 import java.util.HashMap;
 

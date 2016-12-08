@@ -1,9 +1,6 @@
 package com.owent.xresloader.scheme;
 
-import com.owent.xresloader.ProgramOptions;
-
 import java.util.ArrayList;
-import java.util.Map;
 
 
 /**

@@ -11,8 +11,8 @@ import java.util.LinkedList;
 public class SchemeConf {
 
     public class DataInfo {
-        public String file_path = new String();
-        public String table_name = new String();
+        public String file_path = "";
+        public String table_name = "";
         public int data_row;
         public int data_col;
     }

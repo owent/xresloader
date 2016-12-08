@@ -3,18 +3,17 @@ package com.owent.xresloader.data.dst;
 import com.owent.xresloader.ProgramOptions;
 import com.owent.xresloader.data.err.ConvException;
 import com.owent.xresloader.scheme.SchemeConf;
-
 import org.dom4j.Attribute;
 import org.dom4j.Document;
-import org.dom4j.Element;
 import org.dom4j.DocumentHelper;
+import org.dom4j.Element;
 import org.dom4j.io.OutputFormat;
 import org.dom4j.io.XMLWriter;
 
+import java.io.ByteArrayOutputStream;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.io.*;
 
 /**
  * Created by owentou on 2014/10/10.

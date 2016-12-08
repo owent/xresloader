@@ -15,11 +15,16 @@ message role_cfg {
 }
 
 message role_upgrade_cfg {
-  optional uint32 id = 1;
-  optional uint32 level = 2;
-  optional uint32 cost_type = 3;
-  optional int32 cost_value = 4;
-  optional int32 score_add = 5;
+  optional uint32 Id = 1;
+  optional uint32 Level = 2;
+  optional uint32 CostType = 3;
+  optional int32 CostValue = 4;
+  optional int32 ScoreAdd = 5;
+}
+
+message test_msg_verifier {
+    optional uint32 test_id_1 = 10001;
+    optional uint32 test_id_2 = 10002;
 }
 
 message arr_in_arr {

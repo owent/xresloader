@@ -9,7 +9,7 @@ public class SchemeKeyConf {
     private int row;
 
     private KeyCase letterCase = KeyCase.NONE;
-    private String wordSplit = "_";
+    private String wordSplit = "";
     private String prefix = "";
     private String suffix = "";
     private Pattern keyWordRegex = null;

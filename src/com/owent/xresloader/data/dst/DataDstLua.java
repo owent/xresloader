@@ -2,14 +2,9 @@ package com.owent.xresloader.data.dst;
 
 import com.owent.xresloader.ProgramOptions;
 import com.owent.xresloader.data.err.ConvException;
-import com.owent.xresloader.data.src.DataContainer;
-import com.owent.xresloader.data.src.DataSrcImpl;
 import com.owent.xresloader.scheme.SchemeConf;
-import org.apache.commons.codec.binary.Hex;
-import org.json.*;
+import org.json.JSONObject;
 
-import java.io.StringBufferInputStream;
-import java.io.StringWriter;
 import java.nio.charset.Charset;
 import java.util.HashMap;
 import java.util.List;

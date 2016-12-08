@@ -1,22 +1,17 @@
 package com.owent.xresloader;
 
 
-import java.io.FileDescriptor;
+import org.apache.commons.cli.*;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import java.io.IOException;
 import java.io.InputStream;
-import java.net.URL;
-import java.util.LinkedList;
-import java.util.List;
 import java.util.Properties;
 import java.util.regex.Pattern;
 import java.util.regex.PatternSyntaxException;
 
-import org.apache.commons.cli.*;
-import org.ini4j.spi.OptionsBuilder;
-
 // Import log4j classes.
-import org.apache.logging.log4j.Logger;
-import org.apache.logging.log4j.LogManager;
 
 public class ProgramOptions {
 
@@ -62,7 +57,7 @@ public class ProgramOptions {
 
         outputDirectory = System.getProperty("user.dir");
         dataSourceDirectory = outputDirectory;
-        dataSourceType = FileType.EXCEL;
+        dataSourceType = FileType.BIN;
     }
 
     public static ProgramOptions getInstance() {
@@ -81,7 +76,7 @@ public class ProgramOptions {
         outputDirectory = "";
         dataSourceDirectory = "";
         dataSourceFile = "";
-        dataSourceType = FileType.EXCEL;
+        dataSourceType = FileType.BIN;
         dataSourceMetas = null;
         renameRule = null;
         enableFormular = true;
@@ -174,7 +169,7 @@ public class ProgramOptions {
                 .longOpt("pretty")
                 .desc("set pretty output and set ident length when output type supported.(disable pretty output by set to 0)")
                 .hasArg()
-                .argName("IDENT LENGTH")
+                .argName("INDENT LENGTH")
                 .build()
         );
 

@@ -1,15 +1,32 @@
 package com.owent.xresloader.data.dst;
 
+import com.owent.xresloader.engine.IdentifyDescriptor;
+
+import java.util.ArrayList;
 import java.util.HashMap;
 
 /**
  * Created by owentou on 2014/10/11.
  */
 public class DataDstWriterNode {
-    private int listCount = 0; // 0 代表非List
-    private HashMap<String, DataDstWriterNode> children = null;
-    private JavaType type = JavaType.OBJECT;
-    public DataDstWriterNode() {
+    public enum JAVA_TYPE {
+        INT, LONG, BOOLEAN, STRING, BYTES, FLOAT, DOUBLE, MESSAGE
+    }
+
+    public static class DataDstChildrenNode {
+        public boolean isList = false;
+        public Object fieldDescriptor = null;
+        public ArrayList<DataDstWriterNode> nodes = null;
+    }
+
+    private HashMap<String, DataDstChildrenNode> children = null;
+    private JAVA_TYPE type = JAVA_TYPE.INT;
+    public Object descriptor = null;
+    public IdentifyDescriptor identify = null;
+
+    public DataDstWriterNode(Object desc, JAVA_TYPE _type) {
+        descriptor = desc;
+        type = _type;
     }
 
     static public String makeChildPath(String prefix, String child_name, int list_index) {
@@ -36,72 +53,51 @@ public class DataDstWriterNode {
         return _name;
     }
 
-    public JavaType getType() {
-        return type;
-    }
-
-    public void setType(String type) {
-        JavaType t = JavaType.valueOf(type);
-        this.type = null == t ? JavaType.OBJECT : t;
-    }
-
-    public void setType(JavaType type) {
-        this.type = type;
-    }
-
-    public boolean isList() {
-        return listCount > 0;
-    }
-
-    public int getListCount() {
-        return listCount;
-    }
-
-    public void setListCount(int listCount) {
-        this.listCount = listCount;
-    }
-
-    public boolean isLeaf() {
-        return JavaType.OBJECT != type;
-    }
-
-    public HashMap<String, DataDstWriterNode> getChildren() {
+    public HashMap<String, DataDstChildrenNode> getChildren() {
         if (null == children)
-            children = new HashMap<String, DataDstWriterNode>();
+            children = new HashMap<String, DataDstChildrenNode>();
         return children;
     }
 
+    public JAVA_TYPE getType() { return type; }
+
     public String getChildPath(String prefix, int list_index, String child_name) {
-        if (!getChildren().containsKey(child_name))
+        DataDstChildrenNode res = getChildren().getOrDefault(child_name, null);
+        if (null == res)
             return null;
 
-        if (isList())
+        if (res.isList)
             return String.format("%s[%d].%s", prefix, list_index, child_name);
 
         return getChildPath(prefix, child_name);
     }
 
     public String getChildPath(String prefix, String child_name) {
-        if (!getChildren().containsKey(child_name))
-            return null;
-
         return prefix.isEmpty() ? child_name : String.format("%s.%s", prefix, child_name);
     }
 
-    public void addChild(String child_name, DataDstWriterNode node) {
-        getChildren().put(child_name, node);
-    }
-
-    public DataDstWriterNode createChild(String child_name) {
-        if (hasChild(child_name)) {
-            return getChildren().get(child_name);
+    public void addChild(String child_name, DataDstWriterNode node, Object _field_descriptor, boolean isList) {
+        DataDstChildrenNode res = getChildren().getOrDefault(child_name, null);
+        if (null == res) {
+            res = new DataDstChildrenNode();
+            getChildren().put(child_name, res);
+            res.isList = isList;
+            res.fieldDescriptor = _field_descriptor;
         }
-        return new DataDstWriterNode();
+
+        if (null == res.nodes) {
+            res.nodes = new ArrayList<DataDstWriterNode>();
+        }
+        res.nodes.add(node);
     }
 
-    public boolean hasChild(String child_name) {
-        return getChildren().containsKey(child_name);
+    /**
+     * 创建节点
+     * @param _descriptor 原始协议描述器
+     * @param _type Java映射类型
+     * @return 创建爱你的节点
+     */
+    static public DataDstWriterNode create(Object _descriptor, JAVA_TYPE _type) {
+        return new DataDstWriterNode(_descriptor,  _type);
     }
-
-    public enum JavaType {INT, LONG, FLOAT, DOUBLE, BOOLEAN, STRING, BYTE_STRING, ENUM, OBJECT}
 }

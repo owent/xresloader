@@ -8,6 +8,10 @@ import com.owent.xresloader.ProgramOptions;
 import com.owent.xresloader.data.err.ConvException;
 import com.owent.xresloader.data.src.DataContainer;
 import com.owent.xresloader.data.src.DataSrcImpl;
+import com.owent.xresloader.data.vfy.DataVerifyImpl;
+import com.owent.xresloader.data.vfy.DataVerifyPbEnum;
+import com.owent.xresloader.data.vfy.DataVerifyPbMsg;
+import com.owent.xresloader.engine.IdentifyDescriptor;
 import com.owent.xresloader.pb.PbHeaderV3;
 import com.owent.xresloader.scheme.SchemeConf;
 import org.apache.commons.codec.binary.Hex;
@@ -17,7 +21,7 @@ import java.nio.charset.Charset;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.HashMap;
-import java.util.Iterator;
+import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.Map;
 
@@ -27,124 +31,164 @@ import java.util.Map;
 public class DataDstPb extends DataDstImpl {
     private Descriptors.Descriptor currentMsgDesc = null;
 
-    private class DataEntry {
-        public boolean valid =  false;
-        public Object value = null;
-
-        public <T> void set(DataContainer<T> v) {
-            valid = v.valid;
-            value = v.value;
-        }
-    }
-
     /***
      * protobuf 的描述信息生成是按文件的，所以要缓存并先生成依赖，再生成需要的文件描述数据
      */
     static private class PbInfoSet {
-        public HashMap<String, Descriptors.FileDescriptor> desc_map = new HashMap<String, Descriptors.FileDescriptor>();
-        public HashMap<String, DescriptorProtos.FileDescriptorProto> descp_map = new HashMap<String, DescriptorProtos.FileDescriptorProto>();
-        public HashMap<String, String> proto_fd_map = new HashMap<String, String>();
-        public String file_path = "";
+        // =========================== pb 文件描述集 ==========================
+        /*** 已加载文件集合，用于文件读取去重(.pb文件) ***/
+        public HashSet<String> fileNames = new HashSet<String>();
+        /*** 描述信息-已加载文件描述集，用于文件描述去重(.proto文件) ***/
+        public HashMap<String, DescriptorProtos.FileDescriptorProto> files = new HashMap<String, DescriptorProtos.FileDescriptorProto>();
+        /*** 描述信息-消息描述集合 ***/
+        public HashMap<String, DescriptorProtos.DescriptorProto> messages = new HashMap<String, DescriptorProtos.DescriptorProto>();
+        /*** 描述信息-枚举描述集合 ***/
+        public HashMap<String, DescriptorProtos.EnumDescriptorProto> enums = new HashMap<String, DescriptorProtos.EnumDescriptorProto>();
 
+        // ========================== 配置描述集 ==========================
+        /*** 类型信息-文件描述器集合 ***/
+        public HashMap<String, Descriptors.FileDescriptor> file_descs = new HashMap<String, Descriptors.FileDescriptor>();
+        /*** 类型信息-Message描述器集合 ***/
+        public HashMap<String, Descriptors.Descriptor> message_descs = new HashMap<String, Descriptors.Descriptor>();
 
-        public Iterator<HashMap.Entry<String, DescriptorProtos.FileDescriptorProto>> descp_iter = null;
-        public Iterator<DescriptorProtos.DescriptorProto> desc_iter = null;
-        public String iter_file_name = "";
+        // ========================== 验证器 ==========================
+        HashMap<String, DataVerifyImpl> identifiers = new HashMap<String, DataVerifyImpl>();
         public PbInfoSet(){}
     }
 
-    static private PbInfoSet last_pb_data = null;
-    static PbInfoSet load_pb_file(String file_path) {
-        // 尽可能缓存已加载好的数据，防止重复加载
-        if (null == last_pb_data || file_path != last_pb_data.file_path) {
-            PbInfoSet new_pb_info = new PbInfoSet();
-            new_pb_info.file_path = file_path;
-            // 开始载入描述文件
-
-            try {
-                // 文件描述集读取
-                InputStream fis = new FileInputStream(file_path);
-                DescriptorProtos.FileDescriptorSet fds = DescriptorProtos.FileDescriptorSet.parseFrom(fis);
-
-                // 保存文件名和文件描述Proto的关系
-                for (DescriptorProtos.FileDescriptorProto fdp : fds.getFileList()) {
-                    new_pb_info.descp_map.put(fdp.getName(), fdp);
-                }
-
-                new_pb_info.descp_iter = new_pb_info.descp_map.entrySet().iterator();
-            } catch (FileNotFoundException e) {
-                ProgramOptions.getLoger().error("read protocol file \"%s\" failed. %s", ProgramOptions.getInstance().protocolFile, e.toString());
-                return null;
-            } catch (IOException e) {
-                ProgramOptions.getLoger().error("parse protocol file \"%s\" failed. %s", ProgramOptions.getInstance().protocolFile, e.toString());
-                return null;
-            }
-
-            // 载入完成,swap
-            last_pb_data = new_pb_info;
+    static private PbInfoSet pbs = new PbInfoSet();
+    static boolean load_pb_file(String file_path, boolean build_msg) {
+        if (pbs.fileNames.contains(file_path)) {
+            return true;
         }
-
-        return last_pb_data;
-    }
-
-    static Descriptors.Descriptor build_pb_file(String file_path, String proto_name) {
-        // 尽可能缓存已加载好的数据，防止重复加载
-        if (null == load_pb_file(file_path)) {
-            return null;
-        }
-
-        // 缓存查不到，尝试走迭代器读取
-        while (null != last_pb_data && !last_pb_data.proto_fd_map.containsKey(proto_name)) {
-            boolean is_continue = true;
-
-            while(is_continue) {
-                if (null == last_pb_data.desc_iter) {
-                    if (null == last_pb_data.descp_iter || !last_pb_data.descp_iter.hasNext()) {
-                        is_continue = false;
-                        break;
-                    }
-
-                    HashMap.Entry<String, DescriptorProtos.FileDescriptorProto> iter_data = last_pb_data.descp_iter.next();
-                    last_pb_data.iter_file_name = iter_data.getKey();
-                    last_pb_data.desc_iter = iter_data.getValue().getMessageTypeList().iterator();
-                }
-
-                if (null == last_pb_data.desc_iter || !last_pb_data.desc_iter.hasNext()) {
-                    last_pb_data.desc_iter = null;
+        String package_name = "";
+        try {
+            // 文件描述集读取
+            InputStream fis = new FileInputStream(file_path);
+            DescriptorProtos.FileDescriptorSet fds = DescriptorProtos.FileDescriptorSet.parseFrom(fis);
+            pbs.fileNames.add(file_path);
+            // 保存文件名和文件描述Proto的关系
+            for (DescriptorProtos.FileDescriptorProto fdp : fds.getFileList()) {
+                if (pbs.files.containsKey(fdp.getName())) {
                     continue;
                 }
+                pbs.files.put(fdp.getName(), fdp);
 
-                DescriptorProtos.DescriptorProto dp = last_pb_data.desc_iter.next();
-                last_pb_data.proto_fd_map.put(dp.getName(), last_pb_data.iter_file_name);
+                if (package_name.isEmpty()) {
+                    package_name = fdp.getPackage();
+                } else if (!package_name.equals(fdp.getPackage())) {
+                    ProgramOptions.getLoger().warn("configure protocol namespace change from %s to %s, more than one package may lead to type coverage",
+                            package_name,
+                            fdp.getPackage()
+                    );
+                    package_name = fdp.getPackage();
+                }
 
-                // 找到则停止
-                if(proto_name.equals(dp.getName())) {
-                    is_continue = false;
-                    break;
+                for(DescriptorProtos.EnumDescriptorProto edp: fdp.getEnumTypeList()) {
+                    pbs.enums.put(edp.getName(), edp);
+                }
+
+                for(DescriptorProtos.DescriptorProto mdp: fdp.getMessageTypeList()) {
+                    pbs.messages.put(mdp.getName(), mdp);
                 }
             }
 
-            break;
+            // 初始化
+            if (build_msg) {
+                for (HashMap.Entry<String, DescriptorProtos.FileDescriptorProto> fme : pbs.files.entrySet()) {
+                    init_pb_files(fme.getKey());
+                }
+            }
+
+        } catch (FileNotFoundException e) {
+            ProgramOptions.getLoger().error("read protocol file \"%s\" failed. %s", ProgramOptions.getInstance().protocolFile, e.toString());
+            return false;
+        } catch (IOException e) {
+            ProgramOptions.getLoger().error("parse protocol file \"%s\" failed. %s", ProgramOptions.getInstance().protocolFile, e.toString());
+            return false;
         }
 
-        // 如果协议名称不存在与所有的文件描述中，直接退出
-        if (null == last_pb_data || !last_pb_data.proto_fd_map.containsKey(proto_name)) {
-            ProgramOptions.getLoger().error("proto message name \"%s\" not found.", proto_name);
+        // 载入完成,swap
+        return true;
+    }
+
+    static Descriptors.Descriptor get_message_proto(String proto_name) {
+        Descriptors.Descriptor ret = pbs.message_descs.getOrDefault(proto_name, null);
+        if (null == ret) {
+            ProgramOptions.getLoger().error("protocol message %s not found.", proto_name);
+            return null;
+        }
+        return ret;
+    }
+
+    static Descriptors.FileDescriptor init_pb_files(String name) {
+        Descriptors.FileDescriptor ret = pbs.file_descs.getOrDefault(name, null);
+        if (null != ret) {
+            return ret;
+        }
+
+        DescriptorProtos.FileDescriptorProto fdp = pbs.files.getOrDefault(name, null);
+        if (null == fdp) {
+            ProgramOptions.getLoger().error("protocol file descriptor %s not found.", name);
             return null;
         }
 
-        Descriptors.FileDescriptor fd = build_fd(last_pb_data.proto_fd_map.get(proto_name), last_pb_data);
-        if (null == fd) {
-            ProgramOptions.getLoger().error("build  protocol \"%s\" failed.", proto_name);
-            return null;
+        Descriptors.FileDescriptor[] deps = new Descriptors.FileDescriptor[fdp.getDependencyCount()];
+        for(int i = 0; i < fdp.getDependencyCount(); ++ i) {
+            deps[i] = init_pb_files(fdp.getDependency(i));
+            if (null == deps[i]) {
+                ProgramOptions.getLoger().error("initialize protocol file descriptor %s failed. dependency %s", name, fdp.getDependency(i));
+                return null;
+            }
         }
 
-        return fd.findMessageTypeByName(SchemeConf.getInstance().getProtoName());
+        try {
+            ret = Descriptors.FileDescriptor.buildFrom(fdp, deps);
+            pbs.file_descs.put(name, ret);
+            for(Descriptors.Descriptor md: ret.getMessageTypes()) {
+                pbs.message_descs.put(md.getName(), md);
+            }
+
+            return ret;
+        } catch (Descriptors.DescriptorValidationException e) {
+            ProgramOptions.getLoger().error("initialize protocol file descriptor %s failed. %s", name, e.getMessage());
+            return null;
+        }
+    }
+
+    private void setup_node_identify(DataDstWriterNode node, IdentifyDescriptor identify) {
+        node.identify = identify;
+
+        if (null == identify.verifier || identify.verifier.isEmpty()) {
+            identify.verify_engine = null;
+        } else {
+            identify.verify_engine = pbs.identifiers.getOrDefault(identify.verifier, null);
+            if (null == identify.verify_engine) {
+
+                DescriptorProtos.EnumDescriptorProto enum_desc = pbs.enums.getOrDefault(identify.verifier, null);
+                if (enum_desc != null) {
+                    identify.verify_engine = new DataVerifyPbEnum(enum_desc);
+                } else {
+                    DescriptorProtos.DescriptorProto msg_desc = pbs.messages.getOrDefault(identify.verifier, null);
+                    if (msg_desc != null) {
+                        identify.verify_engine = new DataVerifyPbMsg(msg_desc);
+                    }
+                }
+
+                if (null != identify.verify_engine) {
+                    pbs.identifiers.put(identify.verifier, identify.verify_engine);
+                }
+            }
+        }
     }
 
     @Override
     public boolean init() {
-        currentMsgDesc = build_pb_file(ProgramOptions.getInstance().protocolFile, SchemeConf.getInstance().getProtoName());
+        if (false == load_pb_file(ProgramOptions.getInstance().protocolFile, true)) {
+            return false;
+        }
+
+        currentMsgDesc = get_message_proto(SchemeConf.getInstance().getProtoName());
         return null != currentMsgDesc;
     }
 
@@ -157,8 +201,8 @@ public class DataDstPb extends DataDstImpl {
 
     @Override
     public final DataDstWriterNode compile() throws ConvException {
-        DataDstWriterNode ret = new DataDstWriterNode();
-        if (test(ret, currentMsgDesc, new LinkedList<String>(), false)) {
+        DataDstWriterNode ret = DataDstWriterNode.create(currentMsgDesc, DataDstWriterNode.JAVA_TYPE.MESSAGE);
+        if (test(ret, new LinkedList<String>())) {
             return ret;
         }
 
@@ -168,7 +212,7 @@ public class DataDstPb extends DataDstImpl {
     }
 
     @Override
-    public final byte[] build(DataDstImpl compiler) throws ConvException {
+    public final byte[] build(DataDstImpl src) throws ConvException {
         // 初始化header
         PbHeaderV3.xresloader_datablocks.Builder blocks = PbHeaderV3.xresloader_datablocks.newBuilder();
         PbHeaderV3.xresloader_header.Builder header = blocks.getHeaderBuilder();
@@ -189,7 +233,7 @@ public class DataDstPb extends DataDstImpl {
         int count = 0;
         while (DataSrcImpl.getOurInstance().next_table()) {
             // 生成描述集
-            DataDstWriterNode desc = compiler.compile();
+            DataDstWriterNode desc = src.compile();
 
             while(DataSrcImpl.getOurInstance().next_row()) {
                 ByteString data = convData(desc);
@@ -221,172 +265,127 @@ public class DataDstPb extends DataDstImpl {
         return writer.toByteArray();
     }
 
-    /***
-     * 递归生成文件描述集
-     * @param fdn 文件名
-     * @param pb_info_set 数据来源和缓存目标
-     * @return 需要的文件描述集
-     */
-    static private Descriptors.FileDescriptor build_fd(String fdn, PbInfoSet pb_info_set) {
-        Descriptors.FileDescriptor ret = pb_info_set.desc_map.getOrDefault(fdn, null);
-        if (null != ret)
-            return ret;
-
-        DescriptorProtos.FileDescriptorProto fdp = pb_info_set.descp_map.get(fdn);
-        try {
-            Descriptors.FileDescriptor[] deps = get_deps(fdp, pb_info_set);
-            if (null == deps) {
-                ProgramOptions.getLoger().error("build protocol \"%s\" failed(dependency build failed).", fdn);
-                return null;
-            }
-
-            ret = Descriptors.FileDescriptor.buildFrom(fdp, deps);
-            pb_info_set.desc_map.put(fdn, ret); // 缓存所有的描述集
-
-        } catch (Descriptors.DescriptorValidationException e) {
-            e.printStackTrace();
-            ProgramOptions.getLoger().error("build protocol \"%s\" failed. %s", fdn, e.toString());
-            return null;
-        }
-
-        return ret;
-    }
-
-    static private Descriptors.FileDescriptor[] get_deps(DescriptorProtos.FileDescriptorProto fdp, PbInfoSet pb_info_set) {
-        Descriptors.FileDescriptor[] ret = new Descriptors.FileDescriptor[fdp.getDependencyCount()];
-        for (int i = 0; i < ret.length; ++i) {
-            ret[i] = build_fd(fdp.getDependency(i), pb_info_set);
-            if (null == ret[i])
-                return null;
-        }
-
-        return ret;
-    }
-
-
     /**
      * 测试并生成数据结构
      *
      * @param node      待填充的节点
-     * @param desc      protobuf 结构描述信息
      * @param name_list 当前命名列表
      * @return 查找到对应的数据源映射关系并非空则返回true，否则返回false
      */
-    private boolean test(DataDstWriterNode node, Descriptors.Descriptor desc, LinkedList<String> name_list, boolean is_list) {
+    private boolean test(DataDstWriterNode node, LinkedList<String> name_list) {
         String prefix = String.join(".", name_list);
-        boolean ret = true;
-        boolean has_data = false;
+        boolean ret = false;
+        Descriptors.Descriptor desc = (Descriptors.Descriptor)node.descriptor;
+        if (null == desc) {
+            return ret;
+        }
 
         DataSrcImpl data_src = DataSrcImpl.getOurInstance();
-
         for (Descriptors.FieldDescriptor fd : desc.getFields()) {
-            switch (fd.getJavaType()) {
-                // 标准类型直接检测节点
-                case INT:
-                case LONG:
-                case FLOAT:
-                case DOUBLE:
-                case BOOLEAN:
-                case STRING:
-                case BYTE_STRING:
-                case ENUM:
-                    // list 类型
-                    if (fd.isRepeated()) {
-                        int count = 0;
-                        for (; ; ++count) {
-                            String real_name = DataDstWriterNode.makeChildPath(prefix, fd.getName(), count);
-                            if (!data_src.checkName(real_name))
-                                break;
-                        }
-
-                        has_data = has_data || count > 0;
-
-                        if (has_data) {
-                            DataDstWriterNode c = node.createChild(fd.getName());
-
-                            if (count > c.getListCount()) {
-                                c.setListCount(count);
-                            }
-
-                            c.setType(fd.getJavaType().toString());
-
-                            node.addChild(fd.getName(), c);
-                        }
-                    } else {
-                        // 非 list 类型
-                        String real_name = DataDstWriterNode.makeChildPath(prefix, fd.getName());
-                        if (data_src.checkName(real_name)) {
-                            DataDstWriterNode c = node.createChild(fd.getName());
-                            c.setType(fd.getJavaType().toString());
-                            node.addChild(fd.getName(), c);
-                            has_data = true;
-
-                        } else if (fd.isRequired()) {
-                            // 非测试list长度的模式下才输出错误
-                            if (false == is_list) {
-                                ProgramOptions.getLoger().error("required field \"%s\" not found", real_name);
-                            }
-                            ret = false;
-                        }
-                    }
-                    break;
-
-
+            switch (fd.getType()) {
                 // 复杂类型还需要检测子节点
                 case MESSAGE:
                     if (fd.isRepeated()) {
                         int count = 0;
-                        DataDstWriterNode c = node.createChild(fd.getName());
 
                         name_list.addLast("");
                         for (; ; ++count) {
+                            DataDstWriterNode c = node.create(fd.getMessageType(), DataDstWriterNode.JAVA_TYPE.MESSAGE);
                             name_list.removeLast();
                             name_list.addLast(DataDstWriterNode.makeNodeName(fd.getName(), count));
-                            if (!test(c, fd.getMessageType(), name_list, true))
+                            if (test(c, name_list)) {
+                                node.addChild(fd.getName(), c, fd,true);
+                            } else {
                                 break;
+                            }
                         }
                         name_list.removeLast();
-                        has_data = has_data || count > 0;
-
-                        if (has_data) {
-                            if (count > c.getListCount()) {
-                                c.setListCount(count);
-                            }
-
-                            node.addChild(fd.getName(), c);
-                        }
+                        ret = ret || count > 0;
                     } else {
-                        DataDstWriterNode c = node.createChild(fd.getName());
+                        DataDstWriterNode c = node.create(fd.getMessageType(), DataDstWriterNode.JAVA_TYPE.MESSAGE);
                         name_list.addLast(DataDstWriterNode.makeNodeName(fd.getName()));
-                        if (test(c, fd.getMessageType(), name_list, is_list)) {
-                            node.addChild(fd.getName(), c);
-                            has_data = true;
-                        } else if (fd.isRequired()) {
-                            // 非测试list长度的模式下才输出错误
-                            if (false == is_list) {
-                                ProgramOptions.getLoger().error("required field \"%s\" not found", fd.getName());
-                            }
-                            ret = false;
+                        if (test(c, name_list)) {
+                            node.addChild(fd.getName(), c, fd,false);
+                            ret = true;
                         }
                         name_list.removeLast();
                     }
                     break;
+                default: {
+                    // list 类型
+                    DataDstWriterNode.JAVA_TYPE inner_type = DataDstWriterNode.JAVA_TYPE.INT;
+                    switch (fd.getType()) {
+                        case DOUBLE:
+                            inner_type = DataDstWriterNode.JAVA_TYPE.DOUBLE;
+                            break;
+                        case FLOAT:
+                            inner_type = DataDstWriterNode.JAVA_TYPE.FLOAT;
+                            break;
+                        case INT64:
+                        case UINT64:
+                        case INT32:
+                        case FIXED64:
+                        case FIXED32:
+                        case UINT32:
+                        case SFIXED32:
+                        case SFIXED64:
+                        case SINT32:
+                        case SINT64:
+                            inner_type = DataDstWriterNode.JAVA_TYPE.LONG;
+                            break;
+                        case BOOL:
+                            inner_type = DataDstWriterNode.JAVA_TYPE.BOOLEAN;
+                            break;
+                        case STRING:
+                            inner_type = DataDstWriterNode.JAVA_TYPE.STRING;
+                            break;
+                        case GROUP:
+                        case MESSAGE:
+                        case BYTES:
+                            inner_type = DataDstWriterNode.JAVA_TYPE.BYTES;
+                            break;
+                        case ENUM:
+                            break;
+                    }
+                    if (fd.isRepeated()) {
+                        int count = 0;
+                        for (; ; ++count) {
+                            DataDstWriterNode c = node.create(null, inner_type);
+                            String real_name = DataDstWriterNode.makeChildPath(prefix, fd.getName(), count);
+                            IdentifyDescriptor col = data_src.getColumnByName(real_name);
+                            if (null != col) {
+                                setup_node_identify(c, col);
+                                node.addChild(fd.getName(), c, fd,true);
+                            } else {
+                                break;
+                            }
+                        }
 
-                default:
-                    if (fd.isRequired())
-                        ret = false;
+                        ret = ret || count > 0;
+                    } else {
+                        // 非 list 类型
+                        String real_name = DataDstWriterNode.makeChildPath(prefix, fd.getName());
+                        IdentifyDescriptor col = data_src.getColumnByName(real_name);
+                        if (null != col) {
+                            DataDstWriterNode c = node.create(null, inner_type);
+                            setup_node_identify(c, col);
+                            node.addChild(fd.getName(), c, fd,false);
+                            ret = true;
+                        }
+                    }
                     break;
+                }
             }
         }
 
-        return ret && has_data;
+        return ret;
     }
 
+    private ByteString convData(DataDstWriterNode node) throws ConvException {
+        Descriptors.Descriptor msg_desc = (Descriptors.Descriptor)node.descriptor;
 
-    private ByteString convData(DataDstWriterNode desc) throws ConvException {
         DynamicMessage.Builder root = DynamicMessage.newBuilder(currentMsgDesc);
-
-        boolean valid_data = writeData(root, desc, currentMsgDesc, "");
+        boolean valid_data = dumpMessage(root, node);
         // 过滤空项
         if(!valid_data) {
             return null;
@@ -401,128 +400,115 @@ public class DataDstPb extends DataDstImpl {
     }
 
 
-    private boolean writeData(DynamicMessage.Builder builder, DataDstWriterNode desc, Descriptors.Descriptor proto_desc, String prefix) throws ConvException {
+    /**
+     * 转储数据到builder
+     * @param builder 转储目标
+     * @param node message的描述结构
+     * @return 有数据则返回true
+     * @throws ConvException
+     */
+    private boolean dumpMessage(DynamicMessage.Builder builder, DataDstWriterNode node) throws ConvException {
         boolean ret = false;
 
-        for (Map.Entry<String, DataDstWriterNode> c : desc.getChildren().entrySet()) {
-            String _name = DataDstWriterNode.makeNodeName(c.getKey());
-
-            Descriptors.FieldDescriptor fd = proto_desc.findFieldByName(_name);
+        for (Map.Entry<String, DataDstWriterNode.DataDstChildrenNode> c : node.getChildren().entrySet()) {
+            Descriptors.FieldDescriptor fd = (Descriptors.FieldDescriptor)c.getValue().fieldDescriptor;
             if (null == fd) {
                 // 不需要提示，如果从其他方式解包协议描述的时候可能有可选字段丢失的
                 continue;
             }
 
-            if (c.getValue().isList() && fd.isRepeated()) {
-                for (int i = 0; i < c.getValue().getListCount(); ++i) {
-                    String new_prefix = DataDstWriterNode.makeChildPath(prefix, c.getKey(), i);
-                    DataEntry ele = writeOneData(c.getValue(), fd, new_prefix);
-                    if (null != ele && (ele.valid || ProgramOptions.getInstance().enbleEmptyList)) {
-                        builder.addRepeatedField(fd, ele.value);
-                        ret = ret || ele.valid;
-                    }
-                }
-            } else {
-                String new_prefix = DataDstWriterNode.makeChildPath(prefix, c.getKey());
-                DataEntry ele = writeOneData(c.getValue(), fd, new_prefix);
-
-                if (null != ele && (ele.valid || fd.isRequired())) {
-                    // 资源存在时要判定转换列表类型
-                    if (c.getValue().isList() != fd.isRepeated()) {
-                        throw new ConvException(
-                            String.format(
-                                "excel data %s%s is %s list but protocol description \"%s\" is %s repeated",
-                                prefix.isEmpty()? prefix: prefix + ".",
-                                c.getKey(),
-                                c.getValue().isList()? "a": "not",
-                                fd.getFullName(),
-                                fd.isRepeated()? "": "not"
-                            )
-                        );
-                    }
-
-                    builder.setField(fd, ele.value);
-                    ret = ret || ele.valid;
+            for (DataDstWriterNode child: c.getValue().nodes) {
+                if (dumpField(builder, child, fd)) {
+                    ret = true;
                 }
             }
-
         }
 
         return ret;
     }
 
-    private DataEntry writeOneData(DataDstWriterNode desc, Descriptors.FieldDescriptor fd, String prefix) throws ConvException {
-        String encoding = SchemeConf.getInstance().getKey().getEncoding();
-        DataEntry ret = new DataEntry();
+    private boolean dumpField(DynamicMessage.Builder builder, DataDstWriterNode desc, Descriptors.FieldDescriptor fd) throws ConvException {
+        if (null == desc.identify) {
+            return false;
+        }
+
+        Object val = null;
 
         switch (fd.getJavaType()) {
             case INT: {
-                ret.set(DataSrcImpl.getOurInstance().getValue(prefix, new Integer(0)));
+                DataContainer<Integer> ret = DataSrcImpl.getOurInstance().getValue(desc.identify, Integer.valueOf(0));
+                if (null != ret && ret.valid) {
+                    val = ret.value;
+                }
                 break;
             }
 
             case LONG:{
-                ret.set(DataSrcImpl.getOurInstance().getValue(prefix, new Long(0)));
+                DataContainer<Long> ret = DataSrcImpl.getOurInstance().getValue(desc.identify, Long.valueOf(0));
+                if (null != ret && ret.valid) {
+                    val = ret.value;
+                }
                 break;
             }
 
             case FLOAT:{
-                ret.set(DataSrcImpl.getOurInstance().getValue(prefix, new Float(0)));
+                DataContainer<Float> ret = DataSrcImpl.getOurInstance().getValue(desc.identify, Float.valueOf(0));
+                if (null != ret && ret.valid) {
+                    val = ret.value;
+                }
                 break;
             }
 
             case DOUBLE:{
-                ret.set(DataSrcImpl.getOurInstance().getValue(prefix, new Double(0)));
+                DataContainer<Double> ret = DataSrcImpl.getOurInstance().getValue(desc.identify, Double.valueOf(0));
+                if (null != ret && ret.valid) {
+                    val = ret.value;
+                }
                 break;
             }
 
             case BOOLEAN:{
-                ret.set(DataSrcImpl.getOurInstance().getValue(prefix, Boolean.FALSE));
+                DataContainer<Boolean> ret = DataSrcImpl.getOurInstance().getValue(desc.identify, Boolean.FALSE);
+                if (null != ret && ret.valid) {
+                    val = ret.value;
+                }
                 break;
             }
 
             case STRING: {
-                ret.set(DataSrcImpl.getOurInstance().getValue(prefix, ""));
+                DataContainer<String> ret = DataSrcImpl.getOurInstance().getValue(desc.identify, "");
+                if (null != ret && ret.valid) {
+                    val = ret.value;
+                }
                 break;
             }
 
             case BYTE_STRING: {
-                DataContainer<String> res = DataSrcImpl.getOurInstance().getValue(prefix, "");
-                ret.valid = res.valid;
-                if (null == encoding || encoding.isEmpty()) {
-                    ret.value = com.google.protobuf.ByteString.copyFrom(res.value.getBytes());
-                } else {
-                    ret.value = com.google.protobuf.ByteString.copyFrom(res.value.getBytes(Charset.forName(encoding)));
+                DataContainer<String> res = DataSrcImpl.getOurInstance().getValue(desc.identify, "");
+                if(null != res && res.valid) {
+                    String encoding = SchemeConf.getInstance().getKey().getEncoding();
+                    if (null == encoding || encoding.isEmpty()) {
+                        val = com.google.protobuf.ByteString.copyFrom(res.value.getBytes());
+                    } else {
+                        val = com.google.protobuf.ByteString.copyFrom(res.value.getBytes(Charset.forName(encoding)));
+                    }
                 }
                 break;
             }
             case ENUM: {
-                DataContainer<Integer> res1 = DataSrcImpl.getOurInstance().getValue(prefix, new Integer(0));
-                ret.valid = res1.valid;
-
-                Descriptors.EnumValueDescriptor enum_val = fd.getEnumType().findValueByNumber(res1.value);
-                if (null != enum_val) {
-                    ret.value = enum_val;
-                    return ret;
+                DataContainer<Integer> ret = DataSrcImpl.getOurInstance().getValue(desc.identify, Integer.valueOf(0));
+                if (null != ret && ret.valid) {
+                    val = ret.value;
                 }
 
-                DataContainer<String> res2 = DataSrcImpl.getOurInstance().getValue(prefix, "");
-                ret.valid = res2.valid;
-                enum_val = fd.getEnumType().findValueByName(res2.value);
-
-                if (null != enum_val) {
-                    ret.value = enum_val;
-                    return ret;
-                }
-
-                ProgramOptions.getLoger().error("serialize failed. %s data error.", prefix);
                 break;
             }
 
             case MESSAGE: {
                 DynamicMessage.Builder node = DynamicMessage.newBuilder(fd.getMessageType());
-                ret.valid = writeData(node, desc, fd.getMessageType(), prefix);
-                ret.value = node.build();
+                if (dumpMessage(node, desc)) {
+                    val = node.build();
+                }
                 break;
             }
 
@@ -530,7 +516,17 @@ public class DataDstPb extends DataDstImpl {
                 break;
         }
 
-        return ret;
+        if (null == val) {
+            return false;
+        }
+
+        if (fd.isRepeated()) {
+            builder.addRepeatedField(fd, val);
+        } else {
+            builder.setField(fd, val);
+        }
+
+        return true;
     }
 
     /**
@@ -538,17 +534,17 @@ public class DataDstPb extends DataDstImpl {
      * @return 常量数据,不支持的时候返回空
      */
     public HashMap<String, Object> buildConst() {
-        if(null == load_pb_file(ProgramOptions.getInstance().protocolFile)) {
+        if (false == load_pb_file(ProgramOptions.getInstance().protocolFile, false)) {
             return null;
         }
 
-        if (null == last_pb_data) {
+        if (null == pbs.enums) {
             return null;
         }
 
         HashMap<String, Object> ret = new HashMap<String, Object>();
 
-        for(HashMap.Entry<String, DescriptorProtos.FileDescriptorProto> fdp : last_pb_data.descp_map.entrySet()) {
+        for(HashMap.Entry<String, DescriptorProtos.FileDescriptorProto> fdp : pbs.files.entrySet()) {
             String[] names = null;
             HashMap<String, Object> fd_root = ret;
 
@@ -558,6 +554,9 @@ public class DataDstPb extends DataDstImpl {
 
             if (null != names) {
                 for(String seg: names) {
+                    if (seg.isEmpty()) {
+                        continue;
+                    }
                     if(fd_root.containsKey(seg)) {
                         Object node = fd_root.get(seg);
                         if (node instanceof HashMap) {
@@ -606,7 +605,7 @@ public class DataDstPb extends DataDstImpl {
      */
     public final byte[] dumpConst(HashMap<String, Object> data) {
         // protobuf的常量输出直接复制描述文件就好了
-        if(ProgramOptions.getInstance().protocolFile == ProgramOptions.getInstance().constPrint) {
+        if(ProgramOptions.getInstance().protocolFile.equals(ProgramOptions.getInstance().constPrint)) {
             return null;
         }
 

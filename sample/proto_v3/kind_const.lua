@@ -14,6 +14,11 @@ local const_res = {
     EN_GCC_RANDOM_RANGE_UNIT = 10,
     EN_GCC_ACTIVITY_TYPE_MASK = 1000,
   },
+  cost_type = {
+    EN_CT_DIAMOND = 10101,
+    EN_CT_MONEY = 10001,
+    EN_CT_UNKNOWN = 0,
+  },
 }
 
 local function extend(dst, src)

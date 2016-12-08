@@ -3,6 +3,7 @@ package com.owent.xresloader.data.src;
 import com.owent.xresloader.ProgramOptions;
 import com.owent.xresloader.data.err.ConvException;
 import com.owent.xresloader.engine.ExcelEngine;
+import com.owent.xresloader.engine.IdentifyDescriptor;
 import com.owent.xresloader.engine.IdentifyEngine;
 import com.owent.xresloader.scheme.SchemeConf;
 import org.apache.poi.ss.usermodel.FormulaEvaluator;
@@ -24,7 +25,7 @@ public class DataSrcExcel extends DataSrcImpl {
         public Row current_row = null;
         public int next_index = 0;
         public int last_row_number = 0;
-        public HashMap<String, Integer> name_mapping = new HashMap<String, Integer>();
+        public HashMap<String, IdentifyDescriptor> name_mapping = new HashMap<String, IdentifyDescriptor>();
     }
 
     private HashMap<String, String> macros = null;
@@ -50,6 +51,11 @@ public class DataSrcExcel extends DataSrcImpl {
     private class MacroFileCache {
         public SchemeConf.DataInfo file = null;
         public HashMap<String, String> macros = new HashMap<String, String>();
+
+        public MacroFileCache(SchemeConf.DataInfo _f, String fixed_file_name) {
+            file = _f;
+            file.file_path = fixed_file_name;
+        }
     }
 
     /***
@@ -68,6 +74,8 @@ public class DataSrcExcel extends DataSrcImpl {
     HashMap<String, String> init_macro_with_cache(List<SchemeConf.DataInfo> src_list) {
         LinkedList<HashMap<String, String> > data_filled = new LinkedList<HashMap<String, String> >();
 
+        IdentifyDescriptor column_ident = new IdentifyDescriptor();
+
         // 枚举所有macro表信息
         for(SchemeConf.DataInfo src: src_list) {
             String file_path = "";
@@ -79,26 +87,26 @@ public class DataSrcExcel extends DataSrcImpl {
             // 优先读缓存
             MacroFileCache res = macro_cache.cache.getOrDefault(fp_name, null);
             if (null != res) {
-                if (res.file.file_path == src.file_path && res.file.table_name == src.table_name
+                if (res.file.file_path.equals(file_path) && res.file.table_name.equals(src.table_name)
                         && res.file.data_row == src.data_row && res.file.data_col == src.data_col) {
                     data_filled.add(res.macros);
                     continue;
                 } else {
-                    ProgramOptions.getLoger().warn("try to open macro source \"%s\" or table %s (row=%d,col=%d) but already has cache \"%s\" or table %s (row=d,col=%d). the old macros will be covered",
-                            src.file_path, src.table_name, src.data_row, src.data_col,
+                    ProgramOptions.getLoger().warn("try to open macro source \"%s:%s\" (row=%d,col=%d) but already has cache \"%s:%s\" (row=%d,col=%d). the old macros will be covered",
+                            file_path, src.table_name, src.data_row, src.data_col,
                             res.file.file_path, res.file.table_name, res.file.data_row, res.file.data_col);
                 }
             }
-            res = new MacroFileCache();
+            res = new MacroFileCache(src, file_path);
 
             if (file_path.isEmpty() || src.table_name.isEmpty() || src.data_col <= 0 || src.data_row <= 0) {
-                ProgramOptions.getLoger().warn("macro source \"%s\" (%s:%d，%d) ignored.", src.file_path, src.table_name, src.data_row, src.data_col);
+                ProgramOptions.getLoger().warn("macro source \"%s\" (%s:%d，%d) ignored.", file_path, src.table_name, src.data_row, src.data_col);
                 continue;
             }
 
             Sheet tb = ExcelEngine.openSheet(file_path, src.table_name);
             if (null == tb) {
-                ProgramOptions.getLoger().warn("open macro source \"%s\" or table %s failed.", src.file_path, src.table_name);
+                ProgramOptions.getLoger().warn("open macro source \"%s\" or table %s failed.", file_path, src.table_name);
                 continue;
             }
 
@@ -107,8 +115,10 @@ public class DataSrcExcel extends DataSrcImpl {
             int row_num = tb.getLastRowNum() + 1;
             for (int i = src.data_row - 1; i < row_num; ++i) {
                 Row row = tb.getRow(i);
-                DataContainer<String> key = ExcelEngine.cell2s(row, src.data_col - 1);
-                DataContainer<String> val = ExcelEngine.cell2s(row, src.data_col, evalor);
+                column_ident.index = src.data_col - 1;
+                DataContainer<String> key = ExcelEngine.cell2s(row, column_ident);
+                column_ident.index = src.data_col;
+                DataContainer<String> val = ExcelEngine.cell2s(row, column_ident, evalor);
                 if (key.valid && val.valid && !key.get().isEmpty() && !val.get().isEmpty()) {
                     if (res.macros.containsKey(key)) {
                         ProgramOptions.getLoger().warn("macro key \"%s\" is used more than once.", key);
@@ -158,6 +168,8 @@ public class DataSrcExcel extends DataSrcImpl {
         SchemeConf scfg = SchemeConf.getInstance();
         String file_path = "";
 
+        IdentifyDescriptor column_ident = new IdentifyDescriptor();
+
         // 枚举所有数据表信息
         for(SchemeConf.DataInfo src: scfg.getDataSource()) {
             if (false == src.file_path.isEmpty()) {
@@ -191,9 +203,12 @@ public class DataSrcExcel extends DataSrcImpl {
                             src.table_name, src.file_path, key_row);
                     return -53;
                 }
+
                 for (int i = src.data_col - 1; i < row.getLastCellNum() + 1; ++i) {
-                    DataContainer<String> k = ExcelEngine.cell2s(row, i, formula);
-                    res.name_mapping.put(IdentifyEngine.n2i(k.get()), i);
+                    column_ident.index = i;
+                    DataContainer<String> k = ExcelEngine.cell2s(row, column_ident, formula);
+                    IdentifyDescriptor ident = IdentifyEngine.n2i(k.get(), i);
+                    res.name_mapping.put(ident.name, ident);
                 }
             }
 
@@ -256,48 +271,48 @@ public class DataSrcExcel extends DataSrcImpl {
     }
 
     @Override
-    public <T> DataContainer<T> getValue(String ident, T ret_default) throws ConvException {
+    public <T> DataContainer<T> getValue(IdentifyDescriptor ident, T ret_default) throws ConvException {
         DataContainer<T> ret = new DataContainer<T>();
         ret.value = ret_default;
 
-        int index = current.name_mapping.getOrDefault(ident, -1);
-        if (index < 0)
+        if (null == ident) {
             return ret;
+        }
 
         if (ret_default instanceof Integer) {
-            DataContainer<Long> dt = ExcelEngine.cell2i(current.current_row, index, current.formula);
+            DataContainer<Long> dt = ExcelEngine.cell2i(current.current_row, ident, current.formula);
             ret.valid = dt.valid;
             ret.value = (T)Integer.valueOf(dt.value.intValue());
             return ret;
         } else if (ret_default instanceof Long) {
-            DataContainer<Long> dt = ExcelEngine.cell2i(current.current_row, index, current.formula);
+            DataContainer<Long> dt = ExcelEngine.cell2i(current.current_row, ident, current.formula);
             ret.valid = dt.valid;
             ret.value = (T)Long.valueOf(dt.value.longValue());
             return ret;
         } else if (ret_default instanceof Short) {
-            DataContainer<Long> dt = ExcelEngine.cell2i(current.current_row, index, current.formula);
+            DataContainer<Long> dt = ExcelEngine.cell2i(current.current_row, ident, current.formula);
             ret.valid = dt.valid;
             ret.value = (T)Short.valueOf(dt.value.shortValue());
             return ret;
         } else if (ret_default instanceof Byte) {
-            DataContainer<Long> dt = ExcelEngine.cell2i(current.current_row, index, current.formula);
+            DataContainer<Long> dt = ExcelEngine.cell2i(current.current_row, ident, current.formula);
             ret.valid = dt.valid;
             ret.value = (T)Byte.valueOf(dt.value.byteValue());
             return ret;
         } else if (ret_default instanceof Double) {
-            DataContainer<Double> dt = ExcelEngine.cell2d(current.current_row, index, current.formula);
+            DataContainer<Double> dt = ExcelEngine.cell2d(current.current_row, ident, current.formula);
             ret.valid = dt.valid;
             ret.value = (T)Double.valueOf(dt.value.doubleValue());
             return ret;
         } else if (ret_default instanceof Float) {
-            DataContainer<Double> dt = ExcelEngine.cell2d(current.current_row, index, current.formula);
+            DataContainer<Double> dt = ExcelEngine.cell2d(current.current_row, ident, current.formula);
             ret.valid = dt.valid;
             ret.value = (T)Float.valueOf(dt.value.floatValue());
             return ret;
         } else if (ret_default instanceof Boolean) {
-            ret = (DataContainer<T>) ExcelEngine.cell2b(current.current_row, index, current.formula);
+            ret = (DataContainer<T>) ExcelEngine.cell2b(current.current_row, ident, current.formula);
         } else if (ret_default instanceof String) {
-            ret = (DataContainer<T>) ExcelEngine.cell2s(current.current_row, index, current.formula);
+            ret = (DataContainer<T>) ExcelEngine.cell2s(current.current_row, ident, current.formula);
         } else {
             ProgramOptions.getLoger().error("default value not supported");
         }
@@ -311,8 +326,8 @@ public class DataSrcExcel extends DataSrcImpl {
     }
 
     @Override
-    public boolean checkName(String _name) {
-        return current.name_mapping.containsKey(_name);
+    public IdentifyDescriptor getColumnByName(String _name) {
+        return current.name_mapping.getOrDefault(_name, null);
     }
 
     @Override

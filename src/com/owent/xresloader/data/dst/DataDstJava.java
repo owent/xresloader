@@ -54,9 +54,9 @@ public abstract class DataDstJava extends DataDstImpl {
             DataDstWriterNode desc = compiler.compile();
 
             while(DataSrcImpl.getOurInstance().next_row()) {
-                DataEntry conv_data = writeData(desc, "");
-                if (conv_data.valid) {
-                    item_list.add(conv_data.value);
+                HashMap<String, Object> msg = new HashMap<String, Object>();
+                if(dumpMessage(msg, desc)) {
+                    item_list.add(msg);
                 }
             }
         }
@@ -64,87 +64,101 @@ public abstract class DataDstJava extends DataDstImpl {
         return ret;
     }
 
-    private DataEntry writeData(DataDstWriterNode desc, String prefix) throws ConvException {
-        DataEntry ret = new DataEntry();
-        HashMap<String, Object> ret_val = new HashMap<String, Object>();
-        ret.value = ret_val;
-        for (Map.Entry<String, DataDstWriterNode> c : desc.getChildren().entrySet()) {
-            String _name = DataDstWriterNode.makeNodeName(c.getKey());
-            if (c.getValue().isList()) {
-                List<Object> item_list = new ArrayList<Object>();
+    /**
+     * 转储数据到builder
+     * @param builder 转储目标
+     * @param node message的描述结构
+     * @return 有数据则返回true
+     * @throws ConvException
+     */
+    private boolean dumpMessage(HashMap<String, Object> builder, DataDstWriterNode node) throws ConvException {
+        boolean ret = false;
 
-                for (int i = 0; i < c.getValue().getListCount(); ++i) {
-                    String new_prefix = DataDstWriterNode.makeChildPath(prefix, c.getKey(), i);
-                    DataEntry ele = writeOneData(c.getValue(), new_prefix);
-                    if (null != ele && (ele.valid || ProgramOptions.getInstance().enbleEmptyList)) {
-                        item_list.add(ele.value);
-                        ret.valid = ret.valid || ele.valid;
-                    }
-
-                }
-
-                if(!item_list.isEmpty()) {
-                    ret_val.put(_name, item_list);
-                }
-            } else {
-                String new_prefix = DataDstWriterNode.makeChildPath(prefix, c.getKey());
-                DataEntry ele = writeOneData(c.getValue(), new_prefix);
-                if (null != ele && ele.valid) {
-                    ret_val.put(_name, ele.value);
-                    ret.valid = true;
+        for (Map.Entry<String, DataDstWriterNode.DataDstChildrenNode> c : node.getChildren().entrySet()) {
+            for (DataDstWriterNode child: c.getValue().nodes) {
+                if (dumpField(builder, child, c.getKey(), c.getValue().isList)) {
+                    ret = true;
                 }
             }
-
         }
 
         return ret;
     }
 
-    private DataEntry writeOneData(DataDstWriterNode desc, String prefix) throws ConvException {
-        String encoding = SchemeConf.getInstance().getKey().getEncoding();
-        DataEntry ret = new DataEntry();
+    private boolean dumpField(HashMap<String, Object> builder, DataDstWriterNode desc, String field_name, boolean is_list) throws ConvException {
+        if (null == desc.identify) {
+            return false;
+        }
 
-        switch (desc.getType()) {
-            case INT:
-            case LONG: {
-                ret.set(DataSrcImpl.getOurInstance().getValue(prefix, new Long(0)));
+        Object val = null;
+        switch (desc.getType())
+        {
+            case INT: {
+                DataContainer<Integer> ret = DataSrcImpl.getOurInstance().getValue(desc.identify, Integer.valueOf(0));
+                if (null != ret && ret.valid) {
+                    val = ret.value;
+                }
                 break;
             }
 
-            case FLOAT:
+            case LONG:{
+                DataContainer<Long> ret = DataSrcImpl.getOurInstance().getValue(desc.identify, Long.valueOf(0));
+                if (null != ret && ret.valid) {
+                    val = ret.value;
+                }
+                break;
+            }
+
+            case FLOAT:{
+                DataContainer<Float> ret = DataSrcImpl.getOurInstance().getValue(desc.identify, Float.valueOf(0));
+                if (null != ret && ret.valid) {
+                    val = ret.value;
+                }
+                break;
+            }
+
             case DOUBLE:{
-                ret.set(DataSrcImpl.getOurInstance().getValue(prefix, new Double(0)));
+                DataContainer<Double> ret = DataSrcImpl.getOurInstance().getValue(desc.identify, Double.valueOf(0));
+                if (null != ret && ret.valid) {
+                    val = ret.value;
+                }
                 break;
             }
 
             case BOOLEAN:{
-                ret.set(DataSrcImpl.getOurInstance().getValue(prefix, Boolean.FALSE));
-                break;
-            }
-
-            case STRING:{
-                ret.set(DataSrcImpl.getOurInstance().getValue(prefix, ""));
-                break;
-            }
-
-            case BYTE_STRING: {
-                DataContainer<String> res = DataSrcImpl.getOurInstance().getValue(prefix, "");
-                ret.valid = res.valid;
-                if (null == encoding || encoding.isEmpty()) {
-                    ret.value = com.google.protobuf.ByteString.copyFrom(res.value.getBytes());
-                } else {
-                    ret.value = com.google.protobuf.ByteString.copyFrom(res.value.getBytes(Charset.forName(encoding)));
+                DataContainer<Boolean> ret = DataSrcImpl.getOurInstance().getValue(desc.identify, Boolean.FALSE);
+                if (null != ret && ret.valid) {
+                    val = ret.value;
                 }
                 break;
             }
 
-            case ENUM: {
-                ret.set(DataSrcImpl.getOurInstance().getValue(prefix, new Long(0)));
+            case STRING: {
+                DataContainer<String> ret = DataSrcImpl.getOurInstance().getValue(desc.identify, "");
+                if (null != ret && ret.valid) {
+                    val = ret.value;
+                }
                 break;
             }
 
-            case OBJECT: {
-                ret = writeData(desc, prefix);
+            case BYTES: {
+                DataContainer<String> res = DataSrcImpl.getOurInstance().getValue(desc.identify, "");
+                if(null != res && res.valid) {
+                    String encoding = SchemeConf.getInstance().getKey().getEncoding();
+                    if (null == encoding || encoding.isEmpty()) {
+                        val = com.google.protobuf.ByteString.copyFrom(res.value.getBytes());
+                    } else {
+                        val = com.google.protobuf.ByteString.copyFrom(res.value.getBytes(Charset.forName(encoding)));
+                    }
+                }
+                break;
+            }
+
+            case MESSAGE: {
+                HashMap<String, Object> node = new HashMap<String, Object>();
+                if (dumpMessage(node, desc)) {
+                    val = node;
+                }
                 break;
             }
 
@@ -152,6 +166,21 @@ public abstract class DataDstJava extends DataDstImpl {
                 break;
         }
 
-        return ret;
+        if (null == val) {
+            return false;
+        }
+
+        if (is_list) {
+            ArrayList<Object> old = (ArrayList<Object>)builder.getOrDefault(field_name,null);
+            if (null == old) {
+                old = new ArrayList<Object>();
+                builder.put(field_name, old);
+            }
+            old.add(val);
+        } else {
+            builder.put(field_name, val);
+        }
+
+        return true;
     }
 }

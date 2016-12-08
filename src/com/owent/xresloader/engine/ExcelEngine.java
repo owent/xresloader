@@ -1,9 +1,8 @@
 package com.owent.xresloader.engine;
 
+import com.owent.xresloader.ProgramOptions;
 import com.owent.xresloader.data.err.ConvException;
 import com.owent.xresloader.data.src.DataContainer;
-
-import com.owent.xresloader.ProgramOptions;
 import com.owent.xresloader.data.src.DataSrcImpl;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.extractor.ExcelExtractor;
@@ -130,7 +129,7 @@ public class ExcelEngine {
      * @param col 列号
      * @return
      */
-    static public DataContainer<String> cell2s(Row row, int col) {
+    static public DataContainer<String> cell2s(Row row, IdentifyDescriptor col) {
         return cell2s(row, col, null);
     }
 
@@ -142,7 +141,7 @@ public class ExcelEngine {
      * @param evalor 公式管理器
      * @return
      */
-    static public DataContainer<String> cell2s(Row row, int col, FormulaEvaluator evalor) {
+    static public DataContainer<String> cell2s(Row row, IdentifyDescriptor col, FormulaEvaluator evalor) {
         DataContainer<String> ret = new DataContainer<String>();
         ret.setDefault("");
 
@@ -150,7 +149,7 @@ public class ExcelEngine {
             return ret;
         }
 
-        Cell c = row.getCell(col);
+        Cell c = row.getCell(col.index);
         if (null == c) {
             return ret;
         }
@@ -232,7 +231,7 @@ public class ExcelEngine {
      * @param col 列号
      * @return
      */
-    static public DataContainer<Long> cell2i(Row row, int col) throws ConvException {
+    static public DataContainer<Long> cell2i(Row row, IdentifyDescriptor col) throws ConvException {
         return cell2i(row, col, null);
     }
 
@@ -244,14 +243,14 @@ public class ExcelEngine {
      * @param evalor 公式管理器
      * @return
      */
-    static public DataContainer<Long> cell2i(Row row, int col, FormulaEvaluator evalor) throws ConvException {
+    static public DataContainer<Long> cell2i(Row row, IdentifyDescriptor col, FormulaEvaluator evalor) throws ConvException {
         DataContainer<Long> ret = new DataContainer<Long>();
         ret.setDefault(0L);
 
         if (null == row)
             return ret;
 
-        Cell c = row.getCell(col);
+        Cell c = row.getCell(col.index);
         if (null == c)
             return ret;
 
@@ -268,23 +267,40 @@ public class ExcelEngine {
             case Cell.CELL_TYPE_BLANK:
                 return ret;
             case Cell.CELL_TYPE_BOOLEAN:
-                return ret.set(c.getBooleanCellValue() ? 1L : 0L);
+                if (null != col.verify_engine) {
+                    return ret.set(Long.valueOf(col.verify_engine.get(c.getBooleanCellValue() ? 1 : 0)));
+                } else {
+                    return ret.set(c.getBooleanCellValue() ? 1L : 0L);
+                }
             case Cell.CELL_TYPE_ERROR:
                 return ret;
             case Cell.CELL_TYPE_FORMULA:
                 return ret;
-            case Cell.CELL_TYPE_NUMERIC:
-                if(DateUtil.isCellDateFormatted(c)) {
-                    return ret.set(c.getDateCellValue().getTime() / 1000);
+            case Cell.CELL_TYPE_NUMERIC: {
+                long val = 0;
+                if (DateUtil.isCellDateFormatted(c)) {
+                    val = c.getDateCellValue().getTime() / 1000;
+                } else {
+                    val = Math.round(c.getNumericCellValue());
                 }
-                return ret.set(Math.round(c.getNumericCellValue()));
+
+                if (null != col.verify_engine) {
+                    return ret.set(Long.valueOf(col.verify_engine.get((int) val)));
+                } else {
+                    return ret.set(val);
+                }
+            }
             case Cell.CELL_TYPE_STRING: {
                 String val = c.getStringCellValue().trim();
                 if (val.isEmpty()) {
                     return ret;
                 }
                 try {
-                    return ret.set(Math.round(Double.valueOf(tryMacro(val))));
+                    if (null != col.verify_engine) {
+                        return ret.set(Long.valueOf(col.verify_engine.get(tryMacro(val))));
+                    } else {
+                        return ret.set(Math.round(Double.valueOf(tryMacro(val))));
+                    }
                 } catch (java.lang.NumberFormatException e) {
                     throw new ConvException(
                         String.format("%s can not be converted to a integer", val)
@@ -303,7 +319,7 @@ public class ExcelEngine {
      * @param col 列号
      * @return
      */
-    static public DataContainer<Double> cell2d(Row row, int col) throws ConvException {
+    static public DataContainer<Double> cell2d(Row row, IdentifyDescriptor col) throws ConvException {
         return cell2d(row, col, null);
     }
 
@@ -315,14 +331,14 @@ public class ExcelEngine {
      * @param evalor 公式管理器
      * @return
      */
-    static public DataContainer<Double> cell2d(Row row, int col, FormulaEvaluator evalor) throws ConvException {
+    static public DataContainer<Double> cell2d(Row row, IdentifyDescriptor col, FormulaEvaluator evalor) throws ConvException {
         DataContainer<Double> ret = new DataContainer<Double>();
         ret.setDefault(0.0);
 
         if (null == row)
             return ret;
 
-        Cell c = row.getCell(col);
+        Cell c = row.getCell(col.index);
         if (null == c)
             return ret;
 
@@ -375,7 +391,7 @@ public class ExcelEngine {
      * @param col 列号
      * @return
      */
-    static public DataContainer<Boolean> cell2b(Row row, int col) {
+    static public DataContainer<Boolean> cell2b(Row row, IdentifyDescriptor col) {
         return cell2b(row, col, null);
     }
 
@@ -387,14 +403,14 @@ public class ExcelEngine {
      * @param evalor 公式管理器
      * @return
      */
-    static public DataContainer<Boolean> cell2b(Row row, int col, FormulaEvaluator evalor) {
+    static public DataContainer<Boolean> cell2b(Row row, IdentifyDescriptor col, FormulaEvaluator evalor) {
         DataContainer<Boolean> ret = new DataContainer<Boolean>();
         ret.setDefault(false);
 
         if (null == row)
             return ret;
 
-        Cell c = row.getCell(col);
+        Cell c = row.getCell(col.index);
         if (null == c)
             return ret;
 
@@ -424,7 +440,7 @@ public class ExcelEngine {
                     return ret;
                 }
 
-                return ret.set(!item.equals("0") && !item.equals("0.0") && !item.equals("false") && !item.equals("no") && !item.equals("disable"));
+                return ret.set(!item.equals("0") && !item.equals("0.0") && !item.equalsIgnoreCase("false") && !item.equalsIgnoreCase("no") && !item.equalsIgnoreCase("disable"));
             default:
                 return ret;
         }

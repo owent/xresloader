@@ -19,6 +19,7 @@ for item in glob.glob(os.path.join(proto_dir, '*.proto')):
     proto_file.append('"' + item + '"');
 
 os.chdir(work_dir);
+os.system('/usr/bin/python "{0}"'.format(os.path.join(project_dir, 'tools', 'gen_header_v3.py')))
 
 cpp_out_dir = os.path.join(script_dir, 'cxx');
 
@@ -30,4 +31,3 @@ params.extend(proto_file)
 cmd = ' '.join(params)
 print(cmd)
 os.system(cmd)
-

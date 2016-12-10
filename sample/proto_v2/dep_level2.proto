@@ -1,5 +1,4 @@
 syntax = "proto2";
-option optimize_for = LITE_RUNTIME;
 
 message dep2_cfg {
   optional uint32 id = 1;

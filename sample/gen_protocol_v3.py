@@ -19,14 +19,14 @@ for item in glob.glob(os.path.join(proto_dir, '*.proto')):
     proto_file.append('"' + item + '"');
 
 os.chdir(work_dir);
-os.system('/usr/bin/python "{0}"'.format(os.path.join(project_dir, 'loader-binding', 'cxx', 'gen_protocol_v3.py')))
+os.system('python "{0}"'.format(os.path.join(project_dir, 'loader-binding', 'cxx', 'gen_protocol_v3.py')))
 
 cpp_out_dir = os.path.join(script_dir, 'cxx');
 
 proto_src_dir = '{0}/v3'.format(cpp_out_dir)
 if not os.path.exists(proto_src_dir):
     os.mkdir(proto_src_dir)
-params = ['protoc', '-I', proto_dir, '-o', os.path.join(proto_dir, 'kind.pb'), '--cpp_out=lite:{0}'.format(proto_src_dir)]
+params = ['protoc', '-I', proto_dir, '-o', os.path.join(proto_dir, 'kind.pb'), '--cpp_out={0}'.format(proto_src_dir)]
 params.extend(proto_file)
 cmd = ' '.join(params)
 print(cmd)

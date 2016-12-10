@@ -22,10 +22,12 @@
 #include <google/protobuf/arena.h>
 #include <google/protobuf/arenastring.h>
 #include <google/protobuf/generated_message_util.h>
-#include <google/protobuf/message_lite.h>
+#include <google/protobuf/metadata.h>
+#include <google/protobuf/message.h>
 #include <google/protobuf/repeated_field.h>
 #include <google/protobuf/extension_set.h>
-#include <google/protobuf/generated_enum_util.h>
+#include <google/protobuf/generated_enum_reflection.h>
+#include <google/protobuf/unknown_field_set.h>
 #include "dep_level2.pb.h"
 // @@protoc_insertion_point(includes)
 
@@ -56,6 +58,16 @@ const game_const_config game_const_config_MIN = EN_GCC_UNKNOWN;
 const game_const_config game_const_config_MAX = EN_GCC_RESOURCE_MAX_LIMIT;
 const int game_const_config_ARRAYSIZE = game_const_config_MAX + 1;
 
+const ::google::protobuf::EnumDescriptor* game_const_config_descriptor();
+inline const ::std::string& game_const_config_Name(game_const_config value) {
+  return ::google::protobuf::internal::NameOfEnum(
+    game_const_config_descriptor(), value);
+}
+inline bool game_const_config_Parse(
+    const ::std::string& name, game_const_config* value) {
+  return ::google::protobuf::internal::ParseNamedEnum<game_const_config>(
+    game_const_config_descriptor(), name, value);
+}
 enum cost_type {
   EN_CT_UNKNOWN = 0,
   EN_CT_MONEY = 10001,
@@ -68,9 +80,19 @@ const cost_type cost_type_MIN = EN_CT_UNKNOWN;
 const cost_type cost_type_MAX = EN_CT_DIAMOND;
 const int cost_type_ARRAYSIZE = cost_type_MAX + 1;
 
+const ::google::protobuf::EnumDescriptor* cost_type_descriptor();
+inline const ::std::string& cost_type_Name(cost_type value) {
+  return ::google::protobuf::internal::NameOfEnum(
+    cost_type_descriptor(), value);
+}
+inline bool cost_type_Parse(
+    const ::std::string& name, cost_type* value) {
+  return ::google::protobuf::internal::ParseNamedEnum<cost_type>(
+    cost_type_descriptor(), name, value);
+}
 // ===================================================================
 
-class dep_cfg : public ::google::protobuf::MessageLite /* @@protoc_insertion_point(class_definition:dep_cfg) */ {
+class dep_cfg : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:dep_cfg) */ {
  public:
   dep_cfg();
   virtual ~dep_cfg();
@@ -82,17 +104,8 @@ class dep_cfg : public ::google::protobuf::MessageLite /* @@protoc_insertion_poi
     return *this;
   }
 
+  static const ::google::protobuf::Descriptor* descriptor();
   static const dep_cfg& default_instance();
-
-  #ifdef GOOGLE_PROTOBUF_NO_STATIC_INITIALIZER
-  // Returns the internal default instance pointer. This function can
-  // return NULL thus should not be used by the user. This is intended
-  // for Protobuf internal code. Please use default_instance() declared
-  // above instead.
-  static inline const dep_cfg* internal_default_instance() {
-    return default_instance_;
-  }
-  #endif
 
   void Swap(dep_cfg* other);
 
@@ -101,7 +114,8 @@ class dep_cfg : public ::google::protobuf::MessageLite /* @@protoc_insertion_poi
   inline dep_cfg* New() const { return New(NULL); }
 
   dep_cfg* New(::google::protobuf::Arena* arena) const;
-  void CheckTypeAndMergeFrom(const ::google::protobuf::MessageLite& from);
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
   void CopyFrom(const dep_cfg& from);
   void MergeFrom(const dep_cfg& from);
   void Clear();
@@ -112,7 +126,11 @@ class dep_cfg : public ::google::protobuf::MessageLite /* @@protoc_insertion_poi
       ::google::protobuf::io::CodedInputStream* input);
   void SerializeWithCachedSizes(
       ::google::protobuf::io::CodedOutputStream* output) const;
-  void DiscardUnknownFields();
+  ::google::protobuf::uint8* InternalSerializeWithCachedSizesToArray(
+      bool deterministic, ::google::protobuf::uint8* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const {
+    return InternalSerializeWithCachedSizesToArray(false, output);
+  }
   int GetCachedSize() const { return _cached_size_; }
   private:
   void SharedCtor();
@@ -121,14 +139,14 @@ class dep_cfg : public ::google::protobuf::MessageLite /* @@protoc_insertion_poi
   void InternalSwap(dep_cfg* other);
   private:
   inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
-    return _arena_ptr_;
+    return _internal_metadata_.arena();
   }
-  inline ::google::protobuf::Arena* MaybeArenaPtr() const {
-    return _arena_ptr_;
+  inline void* MaybeArenaPtr() const {
+    return _internal_metadata_.raw_arena_ptr();
   }
   public:
 
-  ::std::string GetTypeName() const;
+  ::google::protobuf::Metadata GetMetadata() const;
 
   // nested types ----------------------------------------------------
 
@@ -163,19 +181,13 @@ class dep_cfg : public ::google::protobuf::MessageLite /* @@protoc_insertion_poi
   // @@protoc_insertion_point(class_scope:dep_cfg)
  private:
 
-  ::google::protobuf::internal::ArenaStringPtr _unknown_fields_;
-  ::google::protobuf::Arena* _arena_ptr_;
-
+  ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
   bool _is_default_instance_;
   ::google::protobuf::internal::ArenaStringPtr name_;
   ::dep2_cfg* dep2_;
   ::google::protobuf::uint32 id_;
   mutable int _cached_size_;
-  #ifdef GOOGLE_PROTOBUF_NO_STATIC_INITIALIZER
-  friend void  protobuf_AddDesc_dependency_2eproto_impl();
-  #else
   friend void  protobuf_AddDesc_dependency_2eproto();
-  #endif
   friend void protobuf_AssignDesc_dependency_2eproto();
   friend void protobuf_ShutdownFile_dependency_2eproto();
 
@@ -258,11 +270,7 @@ inline void dep_cfg::clear_dep2() {
 }
 inline const ::dep2_cfg& dep_cfg::dep2() const {
   // @@protoc_insertion_point(field_get:dep_cfg.dep2)
-#ifdef GOOGLE_PROTOBUF_NO_STATIC_INITIALIZER
-  return dep2_ != NULL ? *dep2_ : *default_instance().dep2_;
-#else
   return dep2_ != NULL ? *dep2_ : *default_instance_->dep2_;
-#endif
 }
 inline ::dep2_cfg* dep_cfg::mutable_dep2() {
   
@@ -299,7 +307,15 @@ namespace google {
 namespace protobuf {
 
 template <> struct is_proto_enum< ::game_const_config> : ::google::protobuf::internal::true_type {};
+template <>
+inline const EnumDescriptor* GetEnumDescriptor< ::game_const_config>() {
+  return ::game_const_config_descriptor();
+}
 template <> struct is_proto_enum< ::cost_type> : ::google::protobuf::internal::true_type {};
+template <>
+inline const EnumDescriptor* GetEnumDescriptor< ::cost_type>() {
+  return ::cost_type_descriptor();
+}
 
 }  // namespace protobuf
 }  // namespace google

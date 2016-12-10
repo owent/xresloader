@@ -11,18 +11,68 @@
 #include <google/protobuf/stubs/once.h>
 #include <google/protobuf/io/coded_stream.h>
 #include <google/protobuf/wire_format_lite_inl.h>
-#include <google/protobuf/io/zero_copy_stream_impl_lite.h>
+#include <google/protobuf/descriptor.h>
+#include <google/protobuf/generated_message_reflection.h>
+#include <google/protobuf/reflection_ops.h>
+#include <google/protobuf/wire_format.h>
 // @@protoc_insertion_point(includes)
+
+namespace {
+
+const ::google::protobuf::Descriptor* dep2_cfg_descriptor_ = NULL;
+const ::google::protobuf::internal::GeneratedMessageReflection*
+  dep2_cfg_reflection_ = NULL;
+
+}  // namespace
+
+
+void protobuf_AssignDesc_dep_5flevel2_2eproto() GOOGLE_ATTRIBUTE_COLD;
+void protobuf_AssignDesc_dep_5flevel2_2eproto() {
+  protobuf_AddDesc_dep_5flevel2_2eproto();
+  const ::google::protobuf::FileDescriptor* file =
+    ::google::protobuf::DescriptorPool::generated_pool()->FindFileByName(
+      "dep_level2.proto");
+  GOOGLE_CHECK(file != NULL);
+  dep2_cfg_descriptor_ = file->message_type(0);
+  static const int dep2_cfg_offsets_[2] = {
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(dep2_cfg, id_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(dep2_cfg, level_),
+  };
+  dep2_cfg_reflection_ =
+    ::google::protobuf::internal::GeneratedMessageReflection::NewGeneratedMessageReflection(
+      dep2_cfg_descriptor_,
+      dep2_cfg::default_instance_,
+      dep2_cfg_offsets_,
+      -1,
+      -1,
+      -1,
+      sizeof(dep2_cfg),
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(dep2_cfg, _internal_metadata_),
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(dep2_cfg, _is_default_instance_));
+}
+
+namespace {
+
+GOOGLE_PROTOBUF_DECLARE_ONCE(protobuf_AssignDescriptors_once_);
+inline void protobuf_AssignDescriptorsOnce() {
+  ::google::protobuf::GoogleOnceInit(&protobuf_AssignDescriptors_once_,
+                 &protobuf_AssignDesc_dep_5flevel2_2eproto);
+}
+
+void protobuf_RegisterTypes(const ::std::string&) GOOGLE_ATTRIBUTE_COLD;
+void protobuf_RegisterTypes(const ::std::string&) {
+  protobuf_AssignDescriptorsOnce();
+  ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
+      dep2_cfg_descriptor_, &dep2_cfg::default_instance());
+}
+
+}  // namespace
 
 void protobuf_ShutdownFile_dep_5flevel2_2eproto() {
   delete dep2_cfg::default_instance_;
+  delete dep2_cfg_reflection_;
 }
 
-#ifdef GOOGLE_PROTOBUF_NO_STATIC_INITIALIZER
-void protobuf_AddDesc_dep_5flevel2_2eproto_impl() {
-  GOOGLE_PROTOBUF_VERIFY_VERSION;
-
-#else
 void protobuf_AddDesc_dep_5flevel2_2eproto() GOOGLE_ATTRIBUTE_COLD;
 void protobuf_AddDesc_dep_5flevel2_2eproto() {
   static bool already_here = false;
@@ -30,26 +80,22 @@ void protobuf_AddDesc_dep_5flevel2_2eproto() {
   already_here = true;
   GOOGLE_PROTOBUF_VERIFY_VERSION;
 
-#endif
+  ::google::protobuf::DescriptorPool::InternalAddGeneratedFile(
+    "\n\020dep_level2.proto\"%\n\010dep2_cfg\022\n\n\002id\030\001 \001"
+    "(\r\022\r\n\005level\030\002 \001(\tb\006proto3", 65);
+  ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
+    "dep_level2.proto", &protobuf_RegisterTypes);
   dep2_cfg::default_instance_ = new dep2_cfg();
   dep2_cfg::default_instance_->InitAsDefaultInstance();
   ::google::protobuf::internal::OnShutdown(&protobuf_ShutdownFile_dep_5flevel2_2eproto);
 }
 
-#ifdef GOOGLE_PROTOBUF_NO_STATIC_INITIALIZER
-GOOGLE_PROTOBUF_DECLARE_ONCE(protobuf_AddDesc_dep_5flevel2_2eproto_once_);
-void protobuf_AddDesc_dep_5flevel2_2eproto() {
-  ::google::protobuf::GoogleOnceInit(&protobuf_AddDesc_dep_5flevel2_2eproto_once_,
-                 &protobuf_AddDesc_dep_5flevel2_2eproto_impl);
-}
-#else
 // Force AddDescriptors() to be called at static initialization time.
 struct StaticDescriptorInitializer_dep_5flevel2_2eproto {
   StaticDescriptorInitializer_dep_5flevel2_2eproto() {
     protobuf_AddDesc_dep_5flevel2_2eproto();
   }
 } static_descriptor_initializer_dep_5flevel2_2eproto_;
-#endif
 
 // ===================================================================
 
@@ -59,7 +105,7 @@ const int dep2_cfg::kLevelFieldNumber;
 #endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
 
 dep2_cfg::dep2_cfg()
-  : ::google::protobuf::MessageLite(), _arena_ptr_(NULL) {
+  : ::google::protobuf::Message(), _internal_metadata_(NULL) {
   SharedCtor();
   // @@protoc_insertion_point(constructor:dep2_cfg)
 }
@@ -69,8 +115,8 @@ void dep2_cfg::InitAsDefaultInstance() {
 }
 
 dep2_cfg::dep2_cfg(const dep2_cfg& from)
-  : ::google::protobuf::MessageLite(),
-    _arena_ptr_(NULL) {
+  : ::google::protobuf::Message(),
+    _internal_metadata_(NULL) {
   SharedCtor();
   MergeFrom(from);
   // @@protoc_insertion_point(copy_constructor:dep2_cfg)
@@ -91,11 +137,7 @@ dep2_cfg::~dep2_cfg() {
 
 void dep2_cfg::SharedDtor() {
   level_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  #ifdef GOOGLE_PROTOBUF_NO_STATIC_INITIALIZER
-  if (this != &default_instance()) {
-  #else
   if (this != default_instance_) {
-  #endif
   }
 }
 
@@ -104,12 +146,13 @@ void dep2_cfg::SetCachedSize(int size) const {
   _cached_size_ = size;
   GOOGLE_SAFE_CONCURRENT_WRITES_END();
 }
+const ::google::protobuf::Descriptor* dep2_cfg::descriptor() {
+  protobuf_AssignDescriptorsOnce();
+  return dep2_cfg_descriptor_;
+}
+
 const dep2_cfg& dep2_cfg::default_instance() {
-#ifdef GOOGLE_PROTOBUF_NO_STATIC_INITIALIZER
-  protobuf_AddDesc_dep_5flevel2_2eproto();
-#else
   if (default_instance_ == NULL) protobuf_AddDesc_dep_5flevel2_2eproto();
-#endif
   return *default_instance_;
 }
 
@@ -212,6 +255,29 @@ void dep2_cfg::SerializeWithCachedSizes(
   // @@protoc_insertion_point(serialize_end:dep2_cfg)
 }
 
+::google::protobuf::uint8* dep2_cfg::InternalSerializeWithCachedSizesToArray(
+    bool deterministic, ::google::protobuf::uint8* target) const {
+  // @@protoc_insertion_point(serialize_to_array_start:dep2_cfg)
+  // optional uint32 id = 1;
+  if (this->id() != 0) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteUInt32ToArray(1, this->id(), target);
+  }
+
+  // optional string level = 2;
+  if (this->level().size() > 0) {
+    ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+      this->level().data(), this->level().length(),
+      ::google::protobuf::internal::WireFormatLite::SERIALIZE,
+      "dep2_cfg.level");
+    target =
+      ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
+        2, this->level(), target);
+  }
+
+  // @@protoc_insertion_point(serialize_to_array_end:dep2_cfg)
+  return target;
+}
+
 int dep2_cfg::ByteSize() const {
 // @@protoc_insertion_point(message_byte_size_start:dep2_cfg)
   int total_size = 0;
@@ -236,9 +302,21 @@ int dep2_cfg::ByteSize() const {
   return total_size;
 }
 
-void dep2_cfg::CheckTypeAndMergeFrom(
-    const ::google::protobuf::MessageLite& from) {
-  MergeFrom(*::google::protobuf::down_cast<const dep2_cfg*>(&from));
+void dep2_cfg::MergeFrom(const ::google::protobuf::Message& from) {
+// @@protoc_insertion_point(generalized_merge_from_start:dep2_cfg)
+  if (GOOGLE_PREDICT_FALSE(&from == this)) {
+    ::google::protobuf::internal::MergeFromFail(__FILE__, __LINE__);
+  }
+  const dep2_cfg* source = 
+      ::google::protobuf::internal::DynamicCastToGenerated<const dep2_cfg>(
+          &from);
+  if (source == NULL) {
+  // @@protoc_insertion_point(generalized_merge_from_cast_fail:dep2_cfg)
+    ::google::protobuf::internal::ReflectionOps::Merge(from, this);
+  } else {
+  // @@protoc_insertion_point(generalized_merge_from_cast_success:dep2_cfg)
+    MergeFrom(*source);
+  }
 }
 
 void dep2_cfg::MergeFrom(const dep2_cfg& from) {
@@ -253,6 +331,13 @@ void dep2_cfg::MergeFrom(const dep2_cfg& from) {
 
     level_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.level_);
   }
+}
+
+void dep2_cfg::CopyFrom(const ::google::protobuf::Message& from) {
+// @@protoc_insertion_point(generalized_copy_from_start:dep2_cfg)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
 }
 
 void dep2_cfg::CopyFrom(const dep2_cfg& from) {
@@ -274,12 +359,16 @@ void dep2_cfg::Swap(dep2_cfg* other) {
 void dep2_cfg::InternalSwap(dep2_cfg* other) {
   std::swap(id_, other->id_);
   level_.Swap(&other->level_);
-  _unknown_fields_.Swap(&other->_unknown_fields_);
+  _internal_metadata_.Swap(&other->_internal_metadata_);
   std::swap(_cached_size_, other->_cached_size_);
 }
 
-::std::string dep2_cfg::GetTypeName() const {
-  return "dep2_cfg";
+::google::protobuf::Metadata dep2_cfg::GetMetadata() const {
+  protobuf_AssignDescriptorsOnce();
+  ::google::protobuf::Metadata metadata;
+  metadata.descriptor = dep2_cfg_descriptor_;
+  metadata.reflection = dep2_cfg_reflection_;
+  return metadata;
 }
 
 #if PROTOBUF_INLINE_NOT_IN_HEADERS

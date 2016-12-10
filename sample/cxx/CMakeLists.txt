@@ -11,7 +11,7 @@ set(CMAKE_BUILD_TYPE Debug)
 find_package(Protobuf REQUIRED)
 include_directories(${PROTOBUF_INCLUDE_DIRS})
 message(STATUS "protobuf include dir=${PROTOBUF_INCLUDE_DIRS}")
-message(STATUS "protobuf-lite libs=${PROTOBUF_LITE_LIBRARIES}")
+message(STATUS "protobuf-lite libs=${PROTOBUF_LIBRARIES}")
 
 set(CMAKE_C_STANDARD 11)
 set(CMAKE_CXX_STANDARD 11)
@@ -57,5 +57,5 @@ endif()
 
 #####################################################################
 add_executable(xresloader_cxx_sample ${SAMPLE_SRCS} ${PROTO_GEN_SRCS} ${PROTO_HEADER_SRCS})
-target_link_libraries(xresloader_cxx_sample ${PROTOBUF_LITE_LIBRARIES})
+target_link_libraries(xresloader_cxx_sample ${PROTOBUF_LIBRARIES})
 

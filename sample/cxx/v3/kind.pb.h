@@ -22,9 +22,11 @@
 #include <google/protobuf/arena.h>
 #include <google/protobuf/arenastring.h>
 #include <google/protobuf/generated_message_util.h>
-#include <google/protobuf/message_lite.h>
+#include <google/protobuf/metadata.h>
+#include <google/protobuf/message.h>
 #include <google/protobuf/repeated_field.h>
 #include <google/protobuf/extension_set.h>
+#include <google/protobuf/unknown_field_set.h>
 #include "dependency.pb.h"
 // @@protoc_insertion_point(includes)
 
@@ -41,7 +43,7 @@ class test_msg_verifier;
 
 // ===================================================================
 
-class role_cfg : public ::google::protobuf::MessageLite /* @@protoc_insertion_point(class_definition:role_cfg) */ {
+class role_cfg : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:role_cfg) */ {
  public:
   role_cfg();
   virtual ~role_cfg();
@@ -53,17 +55,8 @@ class role_cfg : public ::google::protobuf::MessageLite /* @@protoc_insertion_po
     return *this;
   }
 
+  static const ::google::protobuf::Descriptor* descriptor();
   static const role_cfg& default_instance();
-
-  #ifdef GOOGLE_PROTOBUF_NO_STATIC_INITIALIZER
-  // Returns the internal default instance pointer. This function can
-  // return NULL thus should not be used by the user. This is intended
-  // for Protobuf internal code. Please use default_instance() declared
-  // above instead.
-  static inline const role_cfg* internal_default_instance() {
-    return default_instance_;
-  }
-  #endif
 
   void Swap(role_cfg* other);
 
@@ -72,7 +65,8 @@ class role_cfg : public ::google::protobuf::MessageLite /* @@protoc_insertion_po
   inline role_cfg* New() const { return New(NULL); }
 
   role_cfg* New(::google::protobuf::Arena* arena) const;
-  void CheckTypeAndMergeFrom(const ::google::protobuf::MessageLite& from);
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
   void CopyFrom(const role_cfg& from);
   void MergeFrom(const role_cfg& from);
   void Clear();
@@ -83,7 +77,11 @@ class role_cfg : public ::google::protobuf::MessageLite /* @@protoc_insertion_po
       ::google::protobuf::io::CodedInputStream* input);
   void SerializeWithCachedSizes(
       ::google::protobuf::io::CodedOutputStream* output) const;
-  void DiscardUnknownFields();
+  ::google::protobuf::uint8* InternalSerializeWithCachedSizesToArray(
+      bool deterministic, ::google::protobuf::uint8* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const {
+    return InternalSerializeWithCachedSizesToArray(false, output);
+  }
   int GetCachedSize() const { return _cached_size_; }
   private:
   void SharedCtor();
@@ -92,14 +90,14 @@ class role_cfg : public ::google::protobuf::MessageLite /* @@protoc_insertion_po
   void InternalSwap(role_cfg* other);
   private:
   inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
-    return _arena_ptr_;
+    return _internal_metadata_.arena();
   }
-  inline ::google::protobuf::Arena* MaybeArenaPtr() const {
-    return _arena_ptr_;
+  inline void* MaybeArenaPtr() const {
+    return _internal_metadata_.raw_arena_ptr();
   }
   public:
 
-  ::std::string GetTypeName() const;
+  ::google::protobuf::Metadata GetMetadata() const;
 
   // nested types ----------------------------------------------------
 
@@ -168,9 +166,7 @@ class role_cfg : public ::google::protobuf::MessageLite /* @@protoc_insertion_po
   // @@protoc_insertion_point(class_scope:role_cfg)
  private:
 
-  ::google::protobuf::internal::ArenaStringPtr _unknown_fields_;
-  ::google::protobuf::Arena* _arena_ptr_;
-
+  ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
   bool _is_default_instance_;
   ::google::protobuf::uint32 id_;
   ::google::protobuf::uint32 unlock_level_;
@@ -180,11 +176,7 @@ class role_cfg : public ::google::protobuf::MessageLite /* @@protoc_insertion_po
   ::dep_cfg* dep_test_;
   ::google::protobuf::RepeatedPtrField< ::std::string> test_array_;
   mutable int _cached_size_;
-  #ifdef GOOGLE_PROTOBUF_NO_STATIC_INITIALIZER
-  friend void  protobuf_AddDesc_kind_2eproto_impl();
-  #else
   friend void  protobuf_AddDesc_kind_2eproto();
-  #endif
   friend void protobuf_AssignDesc_kind_2eproto();
   friend void protobuf_ShutdownFile_kind_2eproto();
 
@@ -193,7 +185,7 @@ class role_cfg : public ::google::protobuf::MessageLite /* @@protoc_insertion_po
 };
 // -------------------------------------------------------------------
 
-class role_upgrade_cfg : public ::google::protobuf::MessageLite /* @@protoc_insertion_point(class_definition:role_upgrade_cfg) */ {
+class role_upgrade_cfg : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:role_upgrade_cfg) */ {
  public:
   role_upgrade_cfg();
   virtual ~role_upgrade_cfg();
@@ -205,17 +197,8 @@ class role_upgrade_cfg : public ::google::protobuf::MessageLite /* @@protoc_inse
     return *this;
   }
 
+  static const ::google::protobuf::Descriptor* descriptor();
   static const role_upgrade_cfg& default_instance();
-
-  #ifdef GOOGLE_PROTOBUF_NO_STATIC_INITIALIZER
-  // Returns the internal default instance pointer. This function can
-  // return NULL thus should not be used by the user. This is intended
-  // for Protobuf internal code. Please use default_instance() declared
-  // above instead.
-  static inline const role_upgrade_cfg* internal_default_instance() {
-    return default_instance_;
-  }
-  #endif
 
   void Swap(role_upgrade_cfg* other);
 
@@ -224,7 +207,8 @@ class role_upgrade_cfg : public ::google::protobuf::MessageLite /* @@protoc_inse
   inline role_upgrade_cfg* New() const { return New(NULL); }
 
   role_upgrade_cfg* New(::google::protobuf::Arena* arena) const;
-  void CheckTypeAndMergeFrom(const ::google::protobuf::MessageLite& from);
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
   void CopyFrom(const role_upgrade_cfg& from);
   void MergeFrom(const role_upgrade_cfg& from);
   void Clear();
@@ -235,7 +219,11 @@ class role_upgrade_cfg : public ::google::protobuf::MessageLite /* @@protoc_inse
       ::google::protobuf::io::CodedInputStream* input);
   void SerializeWithCachedSizes(
       ::google::protobuf::io::CodedOutputStream* output) const;
-  void DiscardUnknownFields();
+  ::google::protobuf::uint8* InternalSerializeWithCachedSizesToArray(
+      bool deterministic, ::google::protobuf::uint8* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const {
+    return InternalSerializeWithCachedSizesToArray(false, output);
+  }
   int GetCachedSize() const { return _cached_size_; }
   private:
   void SharedCtor();
@@ -244,14 +232,14 @@ class role_upgrade_cfg : public ::google::protobuf::MessageLite /* @@protoc_inse
   void InternalSwap(role_upgrade_cfg* other);
   private:
   inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
-    return _arena_ptr_;
+    return _internal_metadata_.arena();
   }
-  inline ::google::protobuf::Arena* MaybeArenaPtr() const {
-    return _arena_ptr_;
+  inline void* MaybeArenaPtr() const {
+    return _internal_metadata_.raw_arena_ptr();
   }
   public:
 
-  ::std::string GetTypeName() const;
+  ::google::protobuf::Metadata GetMetadata() const;
 
   // nested types ----------------------------------------------------
 
@@ -290,9 +278,7 @@ class role_upgrade_cfg : public ::google::protobuf::MessageLite /* @@protoc_inse
   // @@protoc_insertion_point(class_scope:role_upgrade_cfg)
  private:
 
-  ::google::protobuf::internal::ArenaStringPtr _unknown_fields_;
-  ::google::protobuf::Arena* _arena_ptr_;
-
+  ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
   bool _is_default_instance_;
   ::google::protobuf::uint32 id_;
   ::google::protobuf::uint32 level_;
@@ -300,11 +286,7 @@ class role_upgrade_cfg : public ::google::protobuf::MessageLite /* @@protoc_inse
   ::google::protobuf::int32 costvalue_;
   ::google::protobuf::int32 scoreadd_;
   mutable int _cached_size_;
-  #ifdef GOOGLE_PROTOBUF_NO_STATIC_INITIALIZER
-  friend void  protobuf_AddDesc_kind_2eproto_impl();
-  #else
   friend void  protobuf_AddDesc_kind_2eproto();
-  #endif
   friend void protobuf_AssignDesc_kind_2eproto();
   friend void protobuf_ShutdownFile_kind_2eproto();
 
@@ -313,7 +295,7 @@ class role_upgrade_cfg : public ::google::protobuf::MessageLite /* @@protoc_inse
 };
 // -------------------------------------------------------------------
 
-class arr_in_arr : public ::google::protobuf::MessageLite /* @@protoc_insertion_point(class_definition:arr_in_arr) */ {
+class arr_in_arr : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:arr_in_arr) */ {
  public:
   arr_in_arr();
   virtual ~arr_in_arr();
@@ -325,17 +307,8 @@ class arr_in_arr : public ::google::protobuf::MessageLite /* @@protoc_insertion_
     return *this;
   }
 
+  static const ::google::protobuf::Descriptor* descriptor();
   static const arr_in_arr& default_instance();
-
-  #ifdef GOOGLE_PROTOBUF_NO_STATIC_INITIALIZER
-  // Returns the internal default instance pointer. This function can
-  // return NULL thus should not be used by the user. This is intended
-  // for Protobuf internal code. Please use default_instance() declared
-  // above instead.
-  static inline const arr_in_arr* internal_default_instance() {
-    return default_instance_;
-  }
-  #endif
 
   void Swap(arr_in_arr* other);
 
@@ -344,7 +317,8 @@ class arr_in_arr : public ::google::protobuf::MessageLite /* @@protoc_insertion_
   inline arr_in_arr* New() const { return New(NULL); }
 
   arr_in_arr* New(::google::protobuf::Arena* arena) const;
-  void CheckTypeAndMergeFrom(const ::google::protobuf::MessageLite& from);
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
   void CopyFrom(const arr_in_arr& from);
   void MergeFrom(const arr_in_arr& from);
   void Clear();
@@ -355,7 +329,11 @@ class arr_in_arr : public ::google::protobuf::MessageLite /* @@protoc_insertion_
       ::google::protobuf::io::CodedInputStream* input);
   void SerializeWithCachedSizes(
       ::google::protobuf::io::CodedOutputStream* output) const;
-  void DiscardUnknownFields();
+  ::google::protobuf::uint8* InternalSerializeWithCachedSizesToArray(
+      bool deterministic, ::google::protobuf::uint8* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const {
+    return InternalSerializeWithCachedSizesToArray(false, output);
+  }
   int GetCachedSize() const { return _cached_size_; }
   private:
   void SharedCtor();
@@ -364,14 +342,14 @@ class arr_in_arr : public ::google::protobuf::MessageLite /* @@protoc_insertion_
   void InternalSwap(arr_in_arr* other);
   private:
   inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
-    return _arena_ptr_;
+    return _internal_metadata_.arena();
   }
-  inline ::google::protobuf::Arena* MaybeArenaPtr() const {
-    return _arena_ptr_;
+  inline void* MaybeArenaPtr() const {
+    return _internal_metadata_.raw_arena_ptr();
   }
   public:
 
-  ::std::string GetTypeName() const;
+  ::google::protobuf::Metadata GetMetadata() const;
 
   // nested types ----------------------------------------------------
 
@@ -419,20 +397,14 @@ class arr_in_arr : public ::google::protobuf::MessageLite /* @@protoc_insertion_
   // @@protoc_insertion_point(class_scope:arr_in_arr)
  private:
 
-  ::google::protobuf::internal::ArenaStringPtr _unknown_fields_;
-  ::google::protobuf::Arena* _arena_ptr_;
-
+  ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
   bool _is_default_instance_;
   ::google::protobuf::internal::ArenaStringPtr name_;
   ::google::protobuf::RepeatedField< ::google::protobuf::int32 > int_arr_;
   mutable int _int_arr_cached_byte_size_;
   ::google::protobuf::RepeatedPtrField< ::std::string> str_arr_;
   mutable int _cached_size_;
-  #ifdef GOOGLE_PROTOBUF_NO_STATIC_INITIALIZER
-  friend void  protobuf_AddDesc_kind_2eproto_impl();
-  #else
   friend void  protobuf_AddDesc_kind_2eproto();
-  #endif
   friend void protobuf_AssignDesc_kind_2eproto();
   friend void protobuf_ShutdownFile_kind_2eproto();
 
@@ -441,7 +413,7 @@ class arr_in_arr : public ::google::protobuf::MessageLite /* @@protoc_insertion_
 };
 // -------------------------------------------------------------------
 
-class test_msg_verifier : public ::google::protobuf::MessageLite /* @@protoc_insertion_point(class_definition:test_msg_verifier) */ {
+class test_msg_verifier : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:test_msg_verifier) */ {
  public:
   test_msg_verifier();
   virtual ~test_msg_verifier();
@@ -453,17 +425,8 @@ class test_msg_verifier : public ::google::protobuf::MessageLite /* @@protoc_ins
     return *this;
   }
 
+  static const ::google::protobuf::Descriptor* descriptor();
   static const test_msg_verifier& default_instance();
-
-  #ifdef GOOGLE_PROTOBUF_NO_STATIC_INITIALIZER
-  // Returns the internal default instance pointer. This function can
-  // return NULL thus should not be used by the user. This is intended
-  // for Protobuf internal code. Please use default_instance() declared
-  // above instead.
-  static inline const test_msg_verifier* internal_default_instance() {
-    return default_instance_;
-  }
-  #endif
 
   void Swap(test_msg_verifier* other);
 
@@ -472,7 +435,8 @@ class test_msg_verifier : public ::google::protobuf::MessageLite /* @@protoc_ins
   inline test_msg_verifier* New() const { return New(NULL); }
 
   test_msg_verifier* New(::google::protobuf::Arena* arena) const;
-  void CheckTypeAndMergeFrom(const ::google::protobuf::MessageLite& from);
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
   void CopyFrom(const test_msg_verifier& from);
   void MergeFrom(const test_msg_verifier& from);
   void Clear();
@@ -483,7 +447,11 @@ class test_msg_verifier : public ::google::protobuf::MessageLite /* @@protoc_ins
       ::google::protobuf::io::CodedInputStream* input);
   void SerializeWithCachedSizes(
       ::google::protobuf::io::CodedOutputStream* output) const;
-  void DiscardUnknownFields();
+  ::google::protobuf::uint8* InternalSerializeWithCachedSizesToArray(
+      bool deterministic, ::google::protobuf::uint8* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const {
+    return InternalSerializeWithCachedSizesToArray(false, output);
+  }
   int GetCachedSize() const { return _cached_size_; }
   private:
   void SharedCtor();
@@ -492,14 +460,14 @@ class test_msg_verifier : public ::google::protobuf::MessageLite /* @@protoc_ins
   void InternalSwap(test_msg_verifier* other);
   private:
   inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
-    return _arena_ptr_;
+    return _internal_metadata_.arena();
   }
-  inline ::google::protobuf::Arena* MaybeArenaPtr() const {
-    return _arena_ptr_;
+  inline void* MaybeArenaPtr() const {
+    return _internal_metadata_.raw_arena_ptr();
   }
   public:
 
-  ::std::string GetTypeName() const;
+  ::google::protobuf::Metadata GetMetadata() const;
 
   // nested types ----------------------------------------------------
 
@@ -520,18 +488,12 @@ class test_msg_verifier : public ::google::protobuf::MessageLite /* @@protoc_ins
   // @@protoc_insertion_point(class_scope:test_msg_verifier)
  private:
 
-  ::google::protobuf::internal::ArenaStringPtr _unknown_fields_;
-  ::google::protobuf::Arena* _arena_ptr_;
-
+  ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
   bool _is_default_instance_;
   ::google::protobuf::uint32 test_id_1_;
   ::google::protobuf::uint32 test_id_2_;
   mutable int _cached_size_;
-  #ifdef GOOGLE_PROTOBUF_NO_STATIC_INITIALIZER
-  friend void  protobuf_AddDesc_kind_2eproto_impl();
-  #else
   friend void  protobuf_AddDesc_kind_2eproto();
-  #endif
   friend void protobuf_AssignDesc_kind_2eproto();
   friend void protobuf_ShutdownFile_kind_2eproto();
 
@@ -540,7 +502,7 @@ class test_msg_verifier : public ::google::protobuf::MessageLite /* @@protoc_ins
 };
 // -------------------------------------------------------------------
 
-class arr_in_arr_cfg : public ::google::protobuf::MessageLite /* @@protoc_insertion_point(class_definition:arr_in_arr_cfg) */ {
+class arr_in_arr_cfg : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:arr_in_arr_cfg) */ {
  public:
   arr_in_arr_cfg();
   virtual ~arr_in_arr_cfg();
@@ -552,17 +514,8 @@ class arr_in_arr_cfg : public ::google::protobuf::MessageLite /* @@protoc_insert
     return *this;
   }
 
+  static const ::google::protobuf::Descriptor* descriptor();
   static const arr_in_arr_cfg& default_instance();
-
-  #ifdef GOOGLE_PROTOBUF_NO_STATIC_INITIALIZER
-  // Returns the internal default instance pointer. This function can
-  // return NULL thus should not be used by the user. This is intended
-  // for Protobuf internal code. Please use default_instance() declared
-  // above instead.
-  static inline const arr_in_arr_cfg* internal_default_instance() {
-    return default_instance_;
-  }
-  #endif
 
   void Swap(arr_in_arr_cfg* other);
 
@@ -571,7 +524,8 @@ class arr_in_arr_cfg : public ::google::protobuf::MessageLite /* @@protoc_insert
   inline arr_in_arr_cfg* New() const { return New(NULL); }
 
   arr_in_arr_cfg* New(::google::protobuf::Arena* arena) const;
-  void CheckTypeAndMergeFrom(const ::google::protobuf::MessageLite& from);
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
   void CopyFrom(const arr_in_arr_cfg& from);
   void MergeFrom(const arr_in_arr_cfg& from);
   void Clear();
@@ -582,7 +536,11 @@ class arr_in_arr_cfg : public ::google::protobuf::MessageLite /* @@protoc_insert
       ::google::protobuf::io::CodedInputStream* input);
   void SerializeWithCachedSizes(
       ::google::protobuf::io::CodedOutputStream* output) const;
-  void DiscardUnknownFields();
+  ::google::protobuf::uint8* InternalSerializeWithCachedSizesToArray(
+      bool deterministic, ::google::protobuf::uint8* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const {
+    return InternalSerializeWithCachedSizesToArray(false, output);
+  }
   int GetCachedSize() const { return _cached_size_; }
   private:
   void SharedCtor();
@@ -591,14 +549,14 @@ class arr_in_arr_cfg : public ::google::protobuf::MessageLite /* @@protoc_insert
   void InternalSwap(arr_in_arr_cfg* other);
   private:
   inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
-    return _arena_ptr_;
+    return _internal_metadata_.arena();
   }
-  inline ::google::protobuf::Arena* MaybeArenaPtr() const {
-    return _arena_ptr_;
+  inline void* MaybeArenaPtr() const {
+    return _internal_metadata_.raw_arena_ptr();
   }
   public:
 
-  ::std::string GetTypeName() const;
+  ::google::protobuf::Metadata GetMetadata() const;
 
   // nested types ----------------------------------------------------
 
@@ -625,18 +583,12 @@ class arr_in_arr_cfg : public ::google::protobuf::MessageLite /* @@protoc_insert
   // @@protoc_insertion_point(class_scope:arr_in_arr_cfg)
  private:
 
-  ::google::protobuf::internal::ArenaStringPtr _unknown_fields_;
-  ::google::protobuf::Arena* _arena_ptr_;
-
+  ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
   bool _is_default_instance_;
   ::google::protobuf::RepeatedPtrField< ::arr_in_arr > arr_;
   ::google::protobuf::uint32 id_;
   mutable int _cached_size_;
-  #ifdef GOOGLE_PROTOBUF_NO_STATIC_INITIALIZER
-  friend void  protobuf_AddDesc_kind_2eproto_impl();
-  #else
   friend void  protobuf_AddDesc_kind_2eproto();
-  #endif
   friend void protobuf_AssignDesc_kind_2eproto();
   friend void protobuf_ShutdownFile_kind_2eproto();
 
@@ -761,11 +713,7 @@ inline void role_cfg::clear_dep_test() {
 }
 inline const ::dep_cfg& role_cfg::dep_test() const {
   // @@protoc_insertion_point(field_get:role_cfg.dep_test)
-#ifdef GOOGLE_PROTOBUF_NO_STATIC_INITIALIZER
-  return dep_test_ != NULL ? *dep_test_ : *default_instance().dep_test_;
-#else
   return dep_test_ != NULL ? *dep_test_ : *default_instance_->dep_test_;
-#endif
 }
 inline ::dep_cfg* role_cfg::mutable_dep_test() {
   

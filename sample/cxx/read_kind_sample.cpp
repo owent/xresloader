@@ -39,7 +39,6 @@ int main(int argc, char* argv[]) {
         printf("%s\n", data1->DebugString().c_str());
     } while(false);
 
-
     // key - list
     do {
         typedef xresloader::conf_manager_kl<role_cfg, uint32_t> kind_upg_cfg_t;

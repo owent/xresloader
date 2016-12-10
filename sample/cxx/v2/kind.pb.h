@@ -20,9 +20,10 @@
 #endif
 
 #include <google/protobuf/generated_message_util.h>
-#include <google/protobuf/message_lite.h>
+#include <google/protobuf/message.h>
 #include <google/protobuf/repeated_field.h>
 #include <google/protobuf/extension_set.h>
+#include <google/protobuf/unknown_field_set.h>
 #include "dependency.pb.h"
 // @@protoc_insertion_point(includes)
 
@@ -33,12 +34,13 @@ void protobuf_ShutdownFile_kind_2eproto();
 
 class role_cfg;
 class role_upgrade_cfg;
+class test_msg_verifier;
 class arr_in_arr;
 class arr_in_arr_cfg;
 
 // ===================================================================
 
-class role_cfg : public ::google::protobuf::MessageLite {
+class role_cfg : public ::google::protobuf::Message {
  public:
   role_cfg();
   virtual ~role_cfg();
@@ -50,32 +52,24 @@ class role_cfg : public ::google::protobuf::MessageLite {
     return *this;
   }
 
-  inline const ::std::string& unknown_fields() const {
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
     return _unknown_fields_;
   }
 
-  inline ::std::string* mutable_unknown_fields() {
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
     return &_unknown_fields_;
   }
 
+  static const ::google::protobuf::Descriptor* descriptor();
   static const role_cfg& default_instance();
-
-  #ifdef GOOGLE_PROTOBUF_NO_STATIC_INITIALIZER
-  // Returns the internal default instance pointer. This function can
-  // return NULL thus should not be used by the user. This is intended
-  // for Protobuf internal code. Please use default_instance() declared
-  // above instead.
-  static inline const role_cfg* internal_default_instance() {
-    return default_instance_;
-  }
-  #endif
 
   void Swap(role_cfg* other);
 
   // implements Message ----------------------------------------------
 
   role_cfg* New() const;
-  void CheckTypeAndMergeFrom(const ::google::protobuf::MessageLite& from);
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
   void CopyFrom(const role_cfg& from);
   void MergeFrom(const role_cfg& from);
   void Clear();
@@ -86,14 +80,14 @@ class role_cfg : public ::google::protobuf::MessageLite {
       ::google::protobuf::io::CodedInputStream* input);
   void SerializeWithCachedSizes(
       ::google::protobuf::io::CodedOutputStream* output) const;
-  void DiscardUnknownFields();
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
   int GetCachedSize() const { return _cached_size_; }
   private:
   void SharedCtor();
   void SharedDtor();
   void SetCachedSize(int size) const;
   public:
-  ::std::string GetTypeName() const;
+  ::google::protobuf::Metadata GetMetadata() const;
 
   // nested types ----------------------------------------------------
 
@@ -179,7 +173,7 @@ class role_cfg : public ::google::protobuf::MessageLite {
   inline void set_has_dep_test();
   inline void clear_has_dep_test();
 
-  ::std::string _unknown_fields_;
+  ::google::protobuf::UnknownFieldSet _unknown_fields_;
 
   ::google::protobuf::uint32 _has_bits_[1];
   mutable int _cached_size_;
@@ -190,11 +184,7 @@ class role_cfg : public ::google::protobuf::MessageLite {
   ::std::string* name_;
   ::dep_cfg* dep_test_;
   ::google::protobuf::RepeatedPtrField< ::std::string> test_array_;
-  #ifdef GOOGLE_PROTOBUF_NO_STATIC_INITIALIZER
-  friend void  protobuf_AddDesc_kind_2eproto_impl();
-  #else
   friend void  protobuf_AddDesc_kind_2eproto();
-  #endif
   friend void protobuf_AssignDesc_kind_2eproto();
   friend void protobuf_ShutdownFile_kind_2eproto();
 
@@ -203,7 +193,7 @@ class role_cfg : public ::google::protobuf::MessageLite {
 };
 // -------------------------------------------------------------------
 
-class role_upgrade_cfg : public ::google::protobuf::MessageLite {
+class role_upgrade_cfg : public ::google::protobuf::Message {
  public:
   role_upgrade_cfg();
   virtual ~role_upgrade_cfg();
@@ -215,32 +205,24 @@ class role_upgrade_cfg : public ::google::protobuf::MessageLite {
     return *this;
   }
 
-  inline const ::std::string& unknown_fields() const {
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
     return _unknown_fields_;
   }
 
-  inline ::std::string* mutable_unknown_fields() {
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
     return &_unknown_fields_;
   }
 
+  static const ::google::protobuf::Descriptor* descriptor();
   static const role_upgrade_cfg& default_instance();
-
-  #ifdef GOOGLE_PROTOBUF_NO_STATIC_INITIALIZER
-  // Returns the internal default instance pointer. This function can
-  // return NULL thus should not be used by the user. This is intended
-  // for Protobuf internal code. Please use default_instance() declared
-  // above instead.
-  static inline const role_upgrade_cfg* internal_default_instance() {
-    return default_instance_;
-  }
-  #endif
 
   void Swap(role_upgrade_cfg* other);
 
   // implements Message ----------------------------------------------
 
   role_upgrade_cfg* New() const;
-  void CheckTypeAndMergeFrom(const ::google::protobuf::MessageLite& from);
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
   void CopyFrom(const role_upgrade_cfg& from);
   void MergeFrom(const role_upgrade_cfg& from);
   void Clear();
@@ -251,53 +233,53 @@ class role_upgrade_cfg : public ::google::protobuf::MessageLite {
       ::google::protobuf::io::CodedInputStream* input);
   void SerializeWithCachedSizes(
       ::google::protobuf::io::CodedOutputStream* output) const;
-  void DiscardUnknownFields();
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
   int GetCachedSize() const { return _cached_size_; }
   private:
   void SharedCtor();
   void SharedDtor();
   void SetCachedSize(int size) const;
   public:
-  ::std::string GetTypeName() const;
+  ::google::protobuf::Metadata GetMetadata() const;
 
   // nested types ----------------------------------------------------
 
   // accessors -------------------------------------------------------
 
-  // optional uint32 id = 1;
+  // optional uint32 Id = 1;
   inline bool has_id() const;
   inline void clear_id();
   static const int kIdFieldNumber = 1;
   inline ::google::protobuf::uint32 id() const;
   inline void set_id(::google::protobuf::uint32 value);
 
-  // optional uint32 level = 2;
+  // optional uint32 Level = 2;
   inline bool has_level() const;
   inline void clear_level();
   static const int kLevelFieldNumber = 2;
   inline ::google::protobuf::uint32 level() const;
   inline void set_level(::google::protobuf::uint32 value);
 
-  // optional uint32 cost_type = 3;
-  inline bool has_cost_type() const;
-  inline void clear_cost_type();
+  // optional uint32 CostType = 3;
+  inline bool has_costtype() const;
+  inline void clear_costtype();
   static const int kCostTypeFieldNumber = 3;
-  inline ::google::protobuf::uint32 cost_type() const;
-  inline void set_cost_type(::google::protobuf::uint32 value);
+  inline ::google::protobuf::uint32 costtype() const;
+  inline void set_costtype(::google::protobuf::uint32 value);
 
-  // optional int32 cost_value = 4;
-  inline bool has_cost_value() const;
-  inline void clear_cost_value();
+  // optional int32 CostValue = 4;
+  inline bool has_costvalue() const;
+  inline void clear_costvalue();
   static const int kCostValueFieldNumber = 4;
-  inline ::google::protobuf::int32 cost_value() const;
-  inline void set_cost_value(::google::protobuf::int32 value);
+  inline ::google::protobuf::int32 costvalue() const;
+  inline void set_costvalue(::google::protobuf::int32 value);
 
-  // optional int32 score_add = 5;
-  inline bool has_score_add() const;
-  inline void clear_score_add();
+  // optional int32 ScoreAdd = 5;
+  inline bool has_scoreadd() const;
+  inline void clear_scoreadd();
   static const int kScoreAddFieldNumber = 5;
-  inline ::google::protobuf::int32 score_add() const;
-  inline void set_score_add(::google::protobuf::int32 value);
+  inline ::google::protobuf::int32 scoreadd() const;
+  inline void set_scoreadd(::google::protobuf::int32 value);
 
   // @@protoc_insertion_point(class_scope:role_upgrade_cfg)
  private:
@@ -305,27 +287,23 @@ class role_upgrade_cfg : public ::google::protobuf::MessageLite {
   inline void clear_has_id();
   inline void set_has_level();
   inline void clear_has_level();
-  inline void set_has_cost_type();
-  inline void clear_has_cost_type();
-  inline void set_has_cost_value();
-  inline void clear_has_cost_value();
-  inline void set_has_score_add();
-  inline void clear_has_score_add();
+  inline void set_has_costtype();
+  inline void clear_has_costtype();
+  inline void set_has_costvalue();
+  inline void clear_has_costvalue();
+  inline void set_has_scoreadd();
+  inline void clear_has_scoreadd();
 
-  ::std::string _unknown_fields_;
+  ::google::protobuf::UnknownFieldSet _unknown_fields_;
 
   ::google::protobuf::uint32 _has_bits_[1];
   mutable int _cached_size_;
   ::google::protobuf::uint32 id_;
   ::google::protobuf::uint32 level_;
-  ::google::protobuf::uint32 cost_type_;
-  ::google::protobuf::int32 cost_value_;
-  ::google::protobuf::int32 score_add_;
-  #ifdef GOOGLE_PROTOBUF_NO_STATIC_INITIALIZER
-  friend void  protobuf_AddDesc_kind_2eproto_impl();
-  #else
+  ::google::protobuf::uint32 costtype_;
+  ::google::protobuf::int32 costvalue_;
+  ::google::protobuf::int32 scoreadd_;
   friend void  protobuf_AddDesc_kind_2eproto();
-  #endif
   friend void protobuf_AssignDesc_kind_2eproto();
   friend void protobuf_ShutdownFile_kind_2eproto();
 
@@ -334,7 +312,96 @@ class role_upgrade_cfg : public ::google::protobuf::MessageLite {
 };
 // -------------------------------------------------------------------
 
-class arr_in_arr : public ::google::protobuf::MessageLite {
+class test_msg_verifier : public ::google::protobuf::Message {
+ public:
+  test_msg_verifier();
+  virtual ~test_msg_verifier();
+
+  test_msg_verifier(const test_msg_verifier& from);
+
+  inline test_msg_verifier& operator=(const test_msg_verifier& from) {
+    CopyFrom(from);
+    return *this;
+  }
+
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+    return _unknown_fields_;
+  }
+
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+    return &_unknown_fields_;
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const test_msg_verifier& default_instance();
+
+  void Swap(test_msg_verifier* other);
+
+  // implements Message ----------------------------------------------
+
+  test_msg_verifier* New() const;
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
+  void CopyFrom(const test_msg_verifier& from);
+  void MergeFrom(const test_msg_verifier& from);
+  void Clear();
+  bool IsInitialized() const;
+
+  int ByteSize() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  public:
+  ::google::protobuf::Metadata GetMetadata() const;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // optional uint32 test_id_1 = 10001;
+  inline bool has_test_id_1() const;
+  inline void clear_test_id_1();
+  static const int kTestId1FieldNumber = 10001;
+  inline ::google::protobuf::uint32 test_id_1() const;
+  inline void set_test_id_1(::google::protobuf::uint32 value);
+
+  // optional uint32 test_id_2 = 10002;
+  inline bool has_test_id_2() const;
+  inline void clear_test_id_2();
+  static const int kTestId2FieldNumber = 10002;
+  inline ::google::protobuf::uint32 test_id_2() const;
+  inline void set_test_id_2(::google::protobuf::uint32 value);
+
+  // @@protoc_insertion_point(class_scope:test_msg_verifier)
+ private:
+  inline void set_has_test_id_1();
+  inline void clear_has_test_id_1();
+  inline void set_has_test_id_2();
+  inline void clear_has_test_id_2();
+
+  ::google::protobuf::UnknownFieldSet _unknown_fields_;
+
+  ::google::protobuf::uint32 _has_bits_[1];
+  mutable int _cached_size_;
+  ::google::protobuf::uint32 test_id_1_;
+  ::google::protobuf::uint32 test_id_2_;
+  friend void  protobuf_AddDesc_kind_2eproto();
+  friend void protobuf_AssignDesc_kind_2eproto();
+  friend void protobuf_ShutdownFile_kind_2eproto();
+
+  void InitAsDefaultInstance();
+  static test_msg_verifier* default_instance_;
+};
+// -------------------------------------------------------------------
+
+class arr_in_arr : public ::google::protobuf::Message {
  public:
   arr_in_arr();
   virtual ~arr_in_arr();
@@ -346,32 +413,24 @@ class arr_in_arr : public ::google::protobuf::MessageLite {
     return *this;
   }
 
-  inline const ::std::string& unknown_fields() const {
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
     return _unknown_fields_;
   }
 
-  inline ::std::string* mutable_unknown_fields() {
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
     return &_unknown_fields_;
   }
 
+  static const ::google::protobuf::Descriptor* descriptor();
   static const arr_in_arr& default_instance();
-
-  #ifdef GOOGLE_PROTOBUF_NO_STATIC_INITIALIZER
-  // Returns the internal default instance pointer. This function can
-  // return NULL thus should not be used by the user. This is intended
-  // for Protobuf internal code. Please use default_instance() declared
-  // above instead.
-  static inline const arr_in_arr* internal_default_instance() {
-    return default_instance_;
-  }
-  #endif
 
   void Swap(arr_in_arr* other);
 
   // implements Message ----------------------------------------------
 
   arr_in_arr* New() const;
-  void CheckTypeAndMergeFrom(const ::google::protobuf::MessageLite& from);
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
   void CopyFrom(const arr_in_arr& from);
   void MergeFrom(const arr_in_arr& from);
   void Clear();
@@ -382,14 +441,14 @@ class arr_in_arr : public ::google::protobuf::MessageLite {
       ::google::protobuf::io::CodedInputStream* input);
   void SerializeWithCachedSizes(
       ::google::protobuf::io::CodedOutputStream* output) const;
-  void DiscardUnknownFields();
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
   int GetCachedSize() const { return _cached_size_; }
   private:
   void SharedCtor();
   void SharedDtor();
   void SetCachedSize(int size) const;
   public:
-  ::std::string GetTypeName() const;
+  ::google::protobuf::Metadata GetMetadata() const;
 
   // nested types ----------------------------------------------------
 
@@ -440,18 +499,14 @@ class arr_in_arr : public ::google::protobuf::MessageLite {
   inline void set_has_name();
   inline void clear_has_name();
 
-  ::std::string _unknown_fields_;
+  ::google::protobuf::UnknownFieldSet _unknown_fields_;
 
   ::google::protobuf::uint32 _has_bits_[1];
   mutable int _cached_size_;
   ::std::string* name_;
   ::google::protobuf::RepeatedField< ::google::protobuf::int32 > int_arr_;
   ::google::protobuf::RepeatedPtrField< ::std::string> str_arr_;
-  #ifdef GOOGLE_PROTOBUF_NO_STATIC_INITIALIZER
-  friend void  protobuf_AddDesc_kind_2eproto_impl();
-  #else
   friend void  protobuf_AddDesc_kind_2eproto();
-  #endif
   friend void protobuf_AssignDesc_kind_2eproto();
   friend void protobuf_ShutdownFile_kind_2eproto();
 
@@ -460,7 +515,7 @@ class arr_in_arr : public ::google::protobuf::MessageLite {
 };
 // -------------------------------------------------------------------
 
-class arr_in_arr_cfg : public ::google::protobuf::MessageLite {
+class arr_in_arr_cfg : public ::google::protobuf::Message {
  public:
   arr_in_arr_cfg();
   virtual ~arr_in_arr_cfg();
@@ -472,32 +527,24 @@ class arr_in_arr_cfg : public ::google::protobuf::MessageLite {
     return *this;
   }
 
-  inline const ::std::string& unknown_fields() const {
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
     return _unknown_fields_;
   }
 
-  inline ::std::string* mutable_unknown_fields() {
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
     return &_unknown_fields_;
   }
 
+  static const ::google::protobuf::Descriptor* descriptor();
   static const arr_in_arr_cfg& default_instance();
-
-  #ifdef GOOGLE_PROTOBUF_NO_STATIC_INITIALIZER
-  // Returns the internal default instance pointer. This function can
-  // return NULL thus should not be used by the user. This is intended
-  // for Protobuf internal code. Please use default_instance() declared
-  // above instead.
-  static inline const arr_in_arr_cfg* internal_default_instance() {
-    return default_instance_;
-  }
-  #endif
 
   void Swap(arr_in_arr_cfg* other);
 
   // implements Message ----------------------------------------------
 
   arr_in_arr_cfg* New() const;
-  void CheckTypeAndMergeFrom(const ::google::protobuf::MessageLite& from);
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
   void CopyFrom(const arr_in_arr_cfg& from);
   void MergeFrom(const arr_in_arr_cfg& from);
   void Clear();
@@ -508,14 +555,14 @@ class arr_in_arr_cfg : public ::google::protobuf::MessageLite {
       ::google::protobuf::io::CodedInputStream* input);
   void SerializeWithCachedSizes(
       ::google::protobuf::io::CodedOutputStream* output) const;
-  void DiscardUnknownFields();
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
   int GetCachedSize() const { return _cached_size_; }
   private:
   void SharedCtor();
   void SharedDtor();
   void SetCachedSize(int size) const;
   public:
-  ::std::string GetTypeName() const;
+  ::google::protobuf::Metadata GetMetadata() const;
 
   // nested types ----------------------------------------------------
 
@@ -545,17 +592,13 @@ class arr_in_arr_cfg : public ::google::protobuf::MessageLite {
   inline void set_has_id();
   inline void clear_has_id();
 
-  ::std::string _unknown_fields_;
+  ::google::protobuf::UnknownFieldSet _unknown_fields_;
 
   ::google::protobuf::uint32 _has_bits_[1];
   mutable int _cached_size_;
   ::google::protobuf::RepeatedPtrField< ::arr_in_arr > arr_;
   ::google::protobuf::uint32 id_;
-  #ifdef GOOGLE_PROTOBUF_NO_STATIC_INITIALIZER
-  friend void  protobuf_AddDesc_kind_2eproto_impl();
-  #else
   friend void  protobuf_AddDesc_kind_2eproto();
-  #endif
   friend void protobuf_AssignDesc_kind_2eproto();
   friend void protobuf_ShutdownFile_kind_2eproto();
 
@@ -757,11 +800,7 @@ inline void role_cfg::clear_dep_test() {
 }
 inline const ::dep_cfg& role_cfg::dep_test() const {
   // @@protoc_insertion_point(field_get:role_cfg.dep_test)
-#ifdef GOOGLE_PROTOBUF_NO_STATIC_INITIALIZER
-  return dep_test_ != NULL ? *dep_test_ : *default_instance().dep_test_;
-#else
   return dep_test_ != NULL ? *dep_test_ : *default_instance_->dep_test_;
-#endif
 }
 inline ::dep_cfg* role_cfg::mutable_dep_test() {
   set_has_dep_test();
@@ -844,7 +883,7 @@ role_cfg::mutable_test_array() {
 
 // role_upgrade_cfg
 
-// optional uint32 id = 1;
+// optional uint32 Id = 1;
 inline bool role_upgrade_cfg::has_id() const {
   return (_has_bits_[0] & 0x00000001u) != 0;
 }
@@ -859,16 +898,16 @@ inline void role_upgrade_cfg::clear_id() {
   clear_has_id();
 }
 inline ::google::protobuf::uint32 role_upgrade_cfg::id() const {
-  // @@protoc_insertion_point(field_get:role_upgrade_cfg.id)
+  // @@protoc_insertion_point(field_get:role_upgrade_cfg.Id)
   return id_;
 }
 inline void role_upgrade_cfg::set_id(::google::protobuf::uint32 value) {
   set_has_id();
   id_ = value;
-  // @@protoc_insertion_point(field_set:role_upgrade_cfg.id)
+  // @@protoc_insertion_point(field_set:role_upgrade_cfg.Id)
 }
 
-// optional uint32 level = 2;
+// optional uint32 Level = 2;
 inline bool role_upgrade_cfg::has_level() const {
   return (_has_bits_[0] & 0x00000002u) != 0;
 }
@@ -883,85 +922,137 @@ inline void role_upgrade_cfg::clear_level() {
   clear_has_level();
 }
 inline ::google::protobuf::uint32 role_upgrade_cfg::level() const {
-  // @@protoc_insertion_point(field_get:role_upgrade_cfg.level)
+  // @@protoc_insertion_point(field_get:role_upgrade_cfg.Level)
   return level_;
 }
 inline void role_upgrade_cfg::set_level(::google::protobuf::uint32 value) {
   set_has_level();
   level_ = value;
-  // @@protoc_insertion_point(field_set:role_upgrade_cfg.level)
+  // @@protoc_insertion_point(field_set:role_upgrade_cfg.Level)
 }
 
-// optional uint32 cost_type = 3;
-inline bool role_upgrade_cfg::has_cost_type() const {
+// optional uint32 CostType = 3;
+inline bool role_upgrade_cfg::has_costtype() const {
   return (_has_bits_[0] & 0x00000004u) != 0;
 }
-inline void role_upgrade_cfg::set_has_cost_type() {
+inline void role_upgrade_cfg::set_has_costtype() {
   _has_bits_[0] |= 0x00000004u;
 }
-inline void role_upgrade_cfg::clear_has_cost_type() {
+inline void role_upgrade_cfg::clear_has_costtype() {
   _has_bits_[0] &= ~0x00000004u;
 }
-inline void role_upgrade_cfg::clear_cost_type() {
-  cost_type_ = 0u;
-  clear_has_cost_type();
+inline void role_upgrade_cfg::clear_costtype() {
+  costtype_ = 0u;
+  clear_has_costtype();
 }
-inline ::google::protobuf::uint32 role_upgrade_cfg::cost_type() const {
-  // @@protoc_insertion_point(field_get:role_upgrade_cfg.cost_type)
-  return cost_type_;
+inline ::google::protobuf::uint32 role_upgrade_cfg::costtype() const {
+  // @@protoc_insertion_point(field_get:role_upgrade_cfg.CostType)
+  return costtype_;
 }
-inline void role_upgrade_cfg::set_cost_type(::google::protobuf::uint32 value) {
-  set_has_cost_type();
-  cost_type_ = value;
-  // @@protoc_insertion_point(field_set:role_upgrade_cfg.cost_type)
+inline void role_upgrade_cfg::set_costtype(::google::protobuf::uint32 value) {
+  set_has_costtype();
+  costtype_ = value;
+  // @@protoc_insertion_point(field_set:role_upgrade_cfg.CostType)
 }
 
-// optional int32 cost_value = 4;
-inline bool role_upgrade_cfg::has_cost_value() const {
+// optional int32 CostValue = 4;
+inline bool role_upgrade_cfg::has_costvalue() const {
   return (_has_bits_[0] & 0x00000008u) != 0;
 }
-inline void role_upgrade_cfg::set_has_cost_value() {
+inline void role_upgrade_cfg::set_has_costvalue() {
   _has_bits_[0] |= 0x00000008u;
 }
-inline void role_upgrade_cfg::clear_has_cost_value() {
+inline void role_upgrade_cfg::clear_has_costvalue() {
   _has_bits_[0] &= ~0x00000008u;
 }
-inline void role_upgrade_cfg::clear_cost_value() {
-  cost_value_ = 0;
-  clear_has_cost_value();
+inline void role_upgrade_cfg::clear_costvalue() {
+  costvalue_ = 0;
+  clear_has_costvalue();
 }
-inline ::google::protobuf::int32 role_upgrade_cfg::cost_value() const {
-  // @@protoc_insertion_point(field_get:role_upgrade_cfg.cost_value)
-  return cost_value_;
+inline ::google::protobuf::int32 role_upgrade_cfg::costvalue() const {
+  // @@protoc_insertion_point(field_get:role_upgrade_cfg.CostValue)
+  return costvalue_;
 }
-inline void role_upgrade_cfg::set_cost_value(::google::protobuf::int32 value) {
-  set_has_cost_value();
-  cost_value_ = value;
-  // @@protoc_insertion_point(field_set:role_upgrade_cfg.cost_value)
+inline void role_upgrade_cfg::set_costvalue(::google::protobuf::int32 value) {
+  set_has_costvalue();
+  costvalue_ = value;
+  // @@protoc_insertion_point(field_set:role_upgrade_cfg.CostValue)
 }
 
-// optional int32 score_add = 5;
-inline bool role_upgrade_cfg::has_score_add() const {
+// optional int32 ScoreAdd = 5;
+inline bool role_upgrade_cfg::has_scoreadd() const {
   return (_has_bits_[0] & 0x00000010u) != 0;
 }
-inline void role_upgrade_cfg::set_has_score_add() {
+inline void role_upgrade_cfg::set_has_scoreadd() {
   _has_bits_[0] |= 0x00000010u;
 }
-inline void role_upgrade_cfg::clear_has_score_add() {
+inline void role_upgrade_cfg::clear_has_scoreadd() {
   _has_bits_[0] &= ~0x00000010u;
 }
-inline void role_upgrade_cfg::clear_score_add() {
-  score_add_ = 0;
-  clear_has_score_add();
+inline void role_upgrade_cfg::clear_scoreadd() {
+  scoreadd_ = 0;
+  clear_has_scoreadd();
 }
-inline ::google::protobuf::int32 role_upgrade_cfg::score_add() const {
-  // @@protoc_insertion_point(field_get:role_upgrade_cfg.score_add)
-  return score_add_;
+inline ::google::protobuf::int32 role_upgrade_cfg::scoreadd() const {
+  // @@protoc_insertion_point(field_get:role_upgrade_cfg.ScoreAdd)
+  return scoreadd_;
 }
-inline void role_upgrade_cfg::set_score_add(::google::protobuf::int32 value) {
-  set_has_score_add();
-  score_add_ = value;
-  // @@protoc_insertion_point(field_set:role_upgrade_cfg.score_add)
+inline void role_upgrade_cfg::set_scoreadd(::google::protobuf::int32 value) {
+  set_has_scoreadd();
+  scoreadd_ = value;
+  // @@protoc_insertion_point(field_set:role_upgrade_cfg.ScoreAdd)
+}
+
+// -------------------------------------------------------------------
+
+// test_msg_verifier
+
+// optional uint32 test_id_1 = 10001;
+inline bool test_msg_verifier::has_test_id_1() const {
+  return (_has_bits_[0] & 0x00000001u) != 0;
+}
+inline void test_msg_verifier::set_has_test_id_1() {
+  _has_bits_[0] |= 0x00000001u;
+}
+inline void test_msg_verifier::clear_has_test_id_1() {
+  _has_bits_[0] &= ~0x00000001u;
+}
+inline void test_msg_verifier::clear_test_id_1() {
+  test_id_1_ = 0u;
+  clear_has_test_id_1();
+}
+inline ::google::protobuf::uint32 test_msg_verifier::test_id_1() const {
+  // @@protoc_insertion_point(field_get:test_msg_verifier.test_id_1)
+  return test_id_1_;
+}
+inline void test_msg_verifier::set_test_id_1(::google::protobuf::uint32 value) {
+  set_has_test_id_1();
+  test_id_1_ = value;
+  // @@protoc_insertion_point(field_set:test_msg_verifier.test_id_1)
+}
+
+// optional uint32 test_id_2 = 10002;
+inline bool test_msg_verifier::has_test_id_2() const {
+  return (_has_bits_[0] & 0x00000002u) != 0;
+}
+inline void test_msg_verifier::set_has_test_id_2() {
+  _has_bits_[0] |= 0x00000002u;
+}
+inline void test_msg_verifier::clear_has_test_id_2() {
+  _has_bits_[0] &= ~0x00000002u;
+}
+inline void test_msg_verifier::clear_test_id_2() {
+  test_id_2_ = 0u;
+  clear_has_test_id_2();
+}
+inline ::google::protobuf::uint32 test_msg_verifier::test_id_2() const {
+  // @@protoc_insertion_point(field_get:test_msg_verifier.test_id_2)
+  return test_id_2_;
+}
+inline void test_msg_verifier::set_test_id_2(::google::protobuf::uint32 value) {
+  set_has_test_id_2();
+  test_id_2_ = value;
+  // @@protoc_insertion_point(field_set:test_msg_verifier.test_id_2)
 }
 
 // -------------------------------------------------------------------
@@ -1188,6 +1279,15 @@ arr_in_arr_cfg::mutable_arr() {
 
 
 // @@protoc_insertion_point(namespace_scope)
+
+#ifndef SWIG
+namespace google {
+namespace protobuf {
+
+
+}  // namespace google
+}  // namespace protobuf
+#endif  // SWIG
 
 // @@protoc_insertion_point(global_scope)
 

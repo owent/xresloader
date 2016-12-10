@@ -20,9 +20,10 @@
 #endif
 
 #include <google/protobuf/generated_message_util.h>
-#include <google/protobuf/message_lite.h>
+#include <google/protobuf/message.h>
 #include <google/protobuf/repeated_field.h>
 #include <google/protobuf/extension_set.h>
+#include <google/protobuf/unknown_field_set.h>
 // @@protoc_insertion_point(includes)
 
 // Internal implementation detail -- do not call these.
@@ -34,7 +35,7 @@ class dep2_cfg;
 
 // ===================================================================
 
-class dep2_cfg : public ::google::protobuf::MessageLite {
+class dep2_cfg : public ::google::protobuf::Message {
  public:
   dep2_cfg();
   virtual ~dep2_cfg();
@@ -46,32 +47,24 @@ class dep2_cfg : public ::google::protobuf::MessageLite {
     return *this;
   }
 
-  inline const ::std::string& unknown_fields() const {
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
     return _unknown_fields_;
   }
 
-  inline ::std::string* mutable_unknown_fields() {
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
     return &_unknown_fields_;
   }
 
+  static const ::google::protobuf::Descriptor* descriptor();
   static const dep2_cfg& default_instance();
-
-  #ifdef GOOGLE_PROTOBUF_NO_STATIC_INITIALIZER
-  // Returns the internal default instance pointer. This function can
-  // return NULL thus should not be used by the user. This is intended
-  // for Protobuf internal code. Please use default_instance() declared
-  // above instead.
-  static inline const dep2_cfg* internal_default_instance() {
-    return default_instance_;
-  }
-  #endif
 
   void Swap(dep2_cfg* other);
 
   // implements Message ----------------------------------------------
 
   dep2_cfg* New() const;
-  void CheckTypeAndMergeFrom(const ::google::protobuf::MessageLite& from);
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
   void CopyFrom(const dep2_cfg& from);
   void MergeFrom(const dep2_cfg& from);
   void Clear();
@@ -82,14 +75,14 @@ class dep2_cfg : public ::google::protobuf::MessageLite {
       ::google::protobuf::io::CodedInputStream* input);
   void SerializeWithCachedSizes(
       ::google::protobuf::io::CodedOutputStream* output) const;
-  void DiscardUnknownFields();
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
   int GetCachedSize() const { return _cached_size_; }
   private:
   void SharedCtor();
   void SharedDtor();
   void SetCachedSize(int size) const;
   public:
-  ::std::string GetTypeName() const;
+  ::google::protobuf::Metadata GetMetadata() const;
 
   // nested types ----------------------------------------------------
 
@@ -121,17 +114,13 @@ class dep2_cfg : public ::google::protobuf::MessageLite {
   inline void set_has_level();
   inline void clear_has_level();
 
-  ::std::string _unknown_fields_;
+  ::google::protobuf::UnknownFieldSet _unknown_fields_;
 
   ::google::protobuf::uint32 _has_bits_[1];
   mutable int _cached_size_;
   ::std::string* level_;
   ::google::protobuf::uint32 id_;
-  #ifdef GOOGLE_PROTOBUF_NO_STATIC_INITIALIZER
-  friend void  protobuf_AddDesc_dep_5flevel2_2eproto_impl();
-  #else
   friend void  protobuf_AddDesc_dep_5flevel2_2eproto();
-  #endif
   friend void protobuf_AssignDesc_dep_5flevel2_2eproto();
   friend void protobuf_ShutdownFile_dep_5flevel2_2eproto();
 
@@ -247,6 +236,15 @@ inline void dep2_cfg::set_allocated_level(::std::string* level) {
 
 
 // @@protoc_insertion_point(namespace_scope)
+
+#ifndef SWIG
+namespace google {
+namespace protobuf {
+
+
+}  // namespace google
+}  // namespace protobuf
+#endif  // SWIG
 
 // @@protoc_insertion_point(global_scope)
 

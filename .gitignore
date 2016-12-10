@@ -13,4 +13,14 @@ hs_err_pid*
 /out
 /target
 .idea
+.vscode
 *.iml
+
+# sample
+/sample/cxx/build
+/sample/cxx/build_*
+/sample/~$*.xlsx
+/sample/~$*.xls
+/sample/xresloader.run.log
+
+/dependency-reduced-pom.xml

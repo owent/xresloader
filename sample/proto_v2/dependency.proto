@@ -1,5 +1,4 @@
 syntax = "proto2";
-option optimize_for = LITE_RUNTIME;
 
 import "dep_level2.proto";
 
@@ -26,11 +25,9 @@ enum game_const_config {
   EN_GCC_CAMERA_OFFSET = 268;
 }
 
-
 // 常量类型
-enum cost_type
-{
-    EN_CT_UNKNOWN              = 0;
-    EN_CT_MONEY                = 10001;
-    EN_CT_DIAMOND              = 10101;
+enum cost_type {
+  EN_CT_UNKNOWN = 0;
+  EN_CT_MONEY = 10001;
+  EN_CT_DIAMOND = 10101;
 }

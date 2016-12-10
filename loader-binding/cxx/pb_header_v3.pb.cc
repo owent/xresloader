@@ -20,56 +20,44 @@ namespace xresloader {
 namespace pb {
 
 void protobuf_ShutdownFile_pb_5fheader_5fv3_2eproto() {
-  xresloader_header_default_instance_.Shutdown();
-  xresloader_datablocks_default_instance_.Shutdown();
+  delete xresloader_header::default_instance_;
+  delete xresloader_datablocks::default_instance_;
 }
 
-void protobuf_InitDefaults_pb_5fheader_5fv3_2eproto_impl() {
-  GOOGLE_PROTOBUF_VERIFY_VERSION;
-
-  ::google::protobuf::internal::GetEmptyString();
-  xresloader_header_default_instance_.DefaultConstruct();
-  ::google::protobuf::internal::GetEmptyString();
-  xresloader_datablocks_default_instance_.DefaultConstruct();
-  xresloader_header_default_instance_.get_mutable()->InitAsDefaultInstance();
-  xresloader_datablocks_default_instance_.get_mutable()->InitAsDefaultInstance();
-}
-
-GOOGLE_PROTOBUF_DECLARE_ONCE(protobuf_InitDefaults_pb_5fheader_5fv3_2eproto_once_);
-void protobuf_InitDefaults_pb_5fheader_5fv3_2eproto() {
-  ::google::protobuf::GoogleOnceInit(&protobuf_InitDefaults_pb_5fheader_5fv3_2eproto_once_,
-                 &protobuf_InitDefaults_pb_5fheader_5fv3_2eproto_impl);
-}
+#ifdef GOOGLE_PROTOBUF_NO_STATIC_INITIALIZER
 void protobuf_AddDesc_pb_5fheader_5fv3_2eproto_impl() {
   GOOGLE_PROTOBUF_VERIFY_VERSION;
 
-  protobuf_InitDefaults_pb_5fheader_5fv3_2eproto();
+#else
+void protobuf_AddDesc_pb_5fheader_5fv3_2eproto() GOOGLE_ATTRIBUTE_COLD;
+void protobuf_AddDesc_pb_5fheader_5fv3_2eproto() {
+  static bool already_here = false;
+  if (already_here) return;
+  already_here = true;
+  GOOGLE_PROTOBUF_VERIFY_VERSION;
+
+#endif
+  xresloader_header::default_instance_ = new xresloader_header();
+  xresloader_datablocks::default_instance_ = new xresloader_datablocks();
+  xresloader_header::default_instance_->InitAsDefaultInstance();
+  xresloader_datablocks::default_instance_->InitAsDefaultInstance();
   ::google::protobuf::internal::OnShutdown(&protobuf_ShutdownFile_pb_5fheader_5fv3_2eproto);
 }
 
+#ifdef GOOGLE_PROTOBUF_NO_STATIC_INITIALIZER
 GOOGLE_PROTOBUF_DECLARE_ONCE(protobuf_AddDesc_pb_5fheader_5fv3_2eproto_once_);
 void protobuf_AddDesc_pb_5fheader_5fv3_2eproto() {
   ::google::protobuf::GoogleOnceInit(&protobuf_AddDesc_pb_5fheader_5fv3_2eproto_once_,
                  &protobuf_AddDesc_pb_5fheader_5fv3_2eproto_impl);
 }
-#ifdef GOOGLE_PROTOBUF_NO_STATIC_INITIALIZER
+#else
 // Force AddDescriptors() to be called at static initialization time.
 struct StaticDescriptorInitializer_pb_5fheader_5fv3_2eproto {
   StaticDescriptorInitializer_pb_5fheader_5fv3_2eproto() {
     protobuf_AddDesc_pb_5fheader_5fv3_2eproto();
   }
 } static_descriptor_initializer_pb_5fheader_5fv3_2eproto_;
-#endif  // GOOGLE_PROTOBUF_NO_STATIC_INITIALIZER
-
-namespace {
-
-static void MergeFromFail(int line) GOOGLE_ATTRIBUTE_COLD GOOGLE_ATTRIBUTE_NORETURN;
-static void MergeFromFail(int line) {
-  ::google::protobuf::internal::MergeFromFail(__FILE__, line);
-}
-
-}  // namespace
-
+#endif
 
 // ===================================================================
 
@@ -82,28 +70,30 @@ const int xresloader_header::kHashCodeFieldNumber;
 
 xresloader_header::xresloader_header()
   : ::google::protobuf::MessageLite(), _arena_ptr_(NULL) {
-  if (this != internal_default_instance()) protobuf_InitDefaults_pb_5fheader_5fv3_2eproto();
   SharedCtor();
   // @@protoc_insertion_point(constructor:com.owent.xresloader.pb.xresloader_header)
 }
 
 void xresloader_header::InitAsDefaultInstance() {
+  _is_default_instance_ = true;
 }
 
 xresloader_header::xresloader_header(const xresloader_header& from)
   : ::google::protobuf::MessageLite(),
     _arena_ptr_(NULL) {
   SharedCtor();
-  UnsafeMergeFrom(from);
+  MergeFrom(from);
   // @@protoc_insertion_point(copy_constructor:com.owent.xresloader.pb.xresloader_header)
 }
 
 void xresloader_header::SharedCtor() {
+    _is_default_instance_ = false;
+  ::google::protobuf::internal::GetEmptyString();
+  _cached_size_ = 0;
   xres_ver_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   data_ver_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  hash_code_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   count_ = 0u;
-  _cached_size_ = 0;
+  hash_code_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
 
 xresloader_header::~xresloader_header() {
@@ -115,6 +105,12 @@ void xresloader_header::SharedDtor() {
   xres_ver_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   data_ver_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   hash_code_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  #ifdef GOOGLE_PROTOBUF_NO_STATIC_INITIALIZER
+  if (this != &default_instance()) {
+  #else
+  if (this != default_instance_) {
+  #endif
+  }
 }
 
 void xresloader_header::SetCachedSize(int size) const {
@@ -123,11 +119,15 @@ void xresloader_header::SetCachedSize(int size) const {
   GOOGLE_SAFE_CONCURRENT_WRITES_END();
 }
 const xresloader_header& xresloader_header::default_instance() {
-  protobuf_InitDefaults_pb_5fheader_5fv3_2eproto();
-  return *internal_default_instance();
+#ifdef GOOGLE_PROTOBUF_NO_STATIC_INITIALIZER
+  protobuf_AddDesc_pb_5fheader_5fv3_2eproto();
+#else
+  if (default_instance_ == NULL) protobuf_AddDesc_pb_5fheader_5fv3_2eproto();
+#endif
+  return *default_instance_;
 }
 
-::google::protobuf::internal::ExplicitlyConstructed<xresloader_header> xresloader_header_default_instance_;
+xresloader_header* xresloader_header::default_instance_ = NULL;
 
 xresloader_header* xresloader_header::New(::google::protobuf::Arena* arena) const {
   xresloader_header* n = new xresloader_header;
@@ -192,10 +192,10 @@ bool xresloader_header::MergePartialFromCodedStream(
       case 3: {
         if (tag == 24) {
          parse_count:
-
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    ::google::protobuf::uint32, ::google::protobuf::internal::WireFormatLite::TYPE_UINT32>(
                  input, &count_)));
+
         } else {
           goto handle_unusual;
         }
@@ -282,9 +282,9 @@ void xresloader_header::SerializeWithCachedSizes(
   // @@protoc_insertion_point(serialize_end:com.owent.xresloader.pb.xresloader_header)
 }
 
-size_t xresloader_header::ByteSizeLong() const {
+int xresloader_header::ByteSize() const {
 // @@protoc_insertion_point(message_byte_size_start:com.owent.xresloader.pb.xresloader_header)
-  size_t total_size = 0;
+  int total_size = 0;
 
   // optional string xres_ver = 1;
   if (this->xres_ver().size() > 0) {
@@ -314,9 +314,8 @@ size_t xresloader_header::ByteSizeLong() const {
         this->hash_code());
   }
 
-  int cached_size = ::google::protobuf::internal::ToCachedSize(total_size);
   GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
-  _cached_size_ = cached_size;
+  _cached_size_ = total_size;
   GOOGLE_SAFE_CONCURRENT_WRITES_END();
   return total_size;
 }
@@ -328,15 +327,9 @@ void xresloader_header::CheckTypeAndMergeFrom(
 
 void xresloader_header::MergeFrom(const xresloader_header& from) {
 // @@protoc_insertion_point(class_specific_merge_from_start:com.owent.xresloader.pb.xresloader_header)
-  if (GOOGLE_PREDICT_TRUE(&from != this)) {
-    UnsafeMergeFrom(from);
-  } else {
-    MergeFromFail(__LINE__);
+  if (GOOGLE_PREDICT_FALSE(&from == this)) {
+    ::google::protobuf::internal::MergeFromFail(__FILE__, __LINE__);
   }
-}
-
-void xresloader_header::UnsafeMergeFrom(const xresloader_header& from) {
-  GOOGLE_DCHECK(&from != this);
   if (from.xres_ver().size() > 0) {
 
     xres_ver_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.xres_ver_);
@@ -358,7 +351,7 @@ void xresloader_header::CopyFrom(const xresloader_header& from) {
 // @@protoc_insertion_point(class_specific_copy_from_start:com.owent.xresloader.pb.xresloader_header)
   if (&from == this) return;
   Clear();
-  UnsafeMergeFrom(from);
+  MergeFrom(from);
 }
 
 bool xresloader_header::IsInitialized() const {
@@ -390,37 +383,37 @@ void xresloader_header::InternalSwap(xresloader_header* other) {
 void xresloader_header::clear_xres_ver() {
   xres_ver_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
-const ::std::string& xresloader_header::xres_ver() const {
+ const ::std::string& xresloader_header::xres_ver() const {
   // @@protoc_insertion_point(field_get:com.owent.xresloader.pb.xresloader_header.xres_ver)
   return xres_ver_.GetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
-void xresloader_header::set_xres_ver(const ::std::string& value) {
+ void xresloader_header::set_xres_ver(const ::std::string& value) {
   
   xres_ver_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
   // @@protoc_insertion_point(field_set:com.owent.xresloader.pb.xresloader_header.xres_ver)
 }
-void xresloader_header::set_xres_ver(const char* value) {
+ void xresloader_header::set_xres_ver(const char* value) {
   
   xres_ver_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
   // @@protoc_insertion_point(field_set_char:com.owent.xresloader.pb.xresloader_header.xres_ver)
 }
-void xresloader_header::set_xres_ver(const char* value, size_t size) {
+ void xresloader_header::set_xres_ver(const char* value, size_t size) {
   
   xres_ver_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
       ::std::string(reinterpret_cast<const char*>(value), size));
   // @@protoc_insertion_point(field_set_pointer:com.owent.xresloader.pb.xresloader_header.xres_ver)
 }
-::std::string* xresloader_header::mutable_xres_ver() {
+ ::std::string* xresloader_header::mutable_xres_ver() {
   
   // @@protoc_insertion_point(field_mutable:com.owent.xresloader.pb.xresloader_header.xres_ver)
   return xres_ver_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
-::std::string* xresloader_header::release_xres_ver() {
+ ::std::string* xresloader_header::release_xres_ver() {
   // @@protoc_insertion_point(field_release:com.owent.xresloader.pb.xresloader_header.xres_ver)
   
   return xres_ver_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
-void xresloader_header::set_allocated_xres_ver(::std::string* xres_ver) {
+ void xresloader_header::set_allocated_xres_ver(::std::string* xres_ver) {
   if (xres_ver != NULL) {
     
   } else {
@@ -434,37 +427,37 @@ void xresloader_header::set_allocated_xres_ver(::std::string* xres_ver) {
 void xresloader_header::clear_data_ver() {
   data_ver_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
-const ::std::string& xresloader_header::data_ver() const {
+ const ::std::string& xresloader_header::data_ver() const {
   // @@protoc_insertion_point(field_get:com.owent.xresloader.pb.xresloader_header.data_ver)
   return data_ver_.GetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
-void xresloader_header::set_data_ver(const ::std::string& value) {
+ void xresloader_header::set_data_ver(const ::std::string& value) {
   
   data_ver_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
   // @@protoc_insertion_point(field_set:com.owent.xresloader.pb.xresloader_header.data_ver)
 }
-void xresloader_header::set_data_ver(const char* value) {
+ void xresloader_header::set_data_ver(const char* value) {
   
   data_ver_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
   // @@protoc_insertion_point(field_set_char:com.owent.xresloader.pb.xresloader_header.data_ver)
 }
-void xresloader_header::set_data_ver(const char* value, size_t size) {
+ void xresloader_header::set_data_ver(const char* value, size_t size) {
   
   data_ver_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
       ::std::string(reinterpret_cast<const char*>(value), size));
   // @@protoc_insertion_point(field_set_pointer:com.owent.xresloader.pb.xresloader_header.data_ver)
 }
-::std::string* xresloader_header::mutable_data_ver() {
+ ::std::string* xresloader_header::mutable_data_ver() {
   
   // @@protoc_insertion_point(field_mutable:com.owent.xresloader.pb.xresloader_header.data_ver)
   return data_ver_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
-::std::string* xresloader_header::release_data_ver() {
+ ::std::string* xresloader_header::release_data_ver() {
   // @@protoc_insertion_point(field_release:com.owent.xresloader.pb.xresloader_header.data_ver)
   
   return data_ver_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
-void xresloader_header::set_allocated_data_ver(::std::string* data_ver) {
+ void xresloader_header::set_allocated_data_ver(::std::string* data_ver) {
   if (data_ver != NULL) {
     
   } else {
@@ -478,11 +471,11 @@ void xresloader_header::set_allocated_data_ver(::std::string* data_ver) {
 void xresloader_header::clear_count() {
   count_ = 0u;
 }
-::google::protobuf::uint32 xresloader_header::count() const {
+ ::google::protobuf::uint32 xresloader_header::count() const {
   // @@protoc_insertion_point(field_get:com.owent.xresloader.pb.xresloader_header.count)
   return count_;
 }
-void xresloader_header::set_count(::google::protobuf::uint32 value) {
+ void xresloader_header::set_count(::google::protobuf::uint32 value) {
   
   count_ = value;
   // @@protoc_insertion_point(field_set:com.owent.xresloader.pb.xresloader_header.count)
@@ -492,37 +485,37 @@ void xresloader_header::set_count(::google::protobuf::uint32 value) {
 void xresloader_header::clear_hash_code() {
   hash_code_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
-const ::std::string& xresloader_header::hash_code() const {
+ const ::std::string& xresloader_header::hash_code() const {
   // @@protoc_insertion_point(field_get:com.owent.xresloader.pb.xresloader_header.hash_code)
   return hash_code_.GetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
-void xresloader_header::set_hash_code(const ::std::string& value) {
+ void xresloader_header::set_hash_code(const ::std::string& value) {
   
   hash_code_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
   // @@protoc_insertion_point(field_set:com.owent.xresloader.pb.xresloader_header.hash_code)
 }
-void xresloader_header::set_hash_code(const char* value) {
+ void xresloader_header::set_hash_code(const char* value) {
   
   hash_code_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
   // @@protoc_insertion_point(field_set_char:com.owent.xresloader.pb.xresloader_header.hash_code)
 }
-void xresloader_header::set_hash_code(const char* value, size_t size) {
+ void xresloader_header::set_hash_code(const char* value, size_t size) {
   
   hash_code_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
       ::std::string(reinterpret_cast<const char*>(value), size));
   // @@protoc_insertion_point(field_set_pointer:com.owent.xresloader.pb.xresloader_header.hash_code)
 }
-::std::string* xresloader_header::mutable_hash_code() {
+ ::std::string* xresloader_header::mutable_hash_code() {
   
   // @@protoc_insertion_point(field_mutable:com.owent.xresloader.pb.xresloader_header.hash_code)
   return hash_code_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
-::std::string* xresloader_header::release_hash_code() {
+ ::std::string* xresloader_header::release_hash_code() {
   // @@protoc_insertion_point(field_release:com.owent.xresloader.pb.xresloader_header.hash_code)
   
   return hash_code_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
-void xresloader_header::set_allocated_hash_code(::std::string* hash_code) {
+ void xresloader_header::set_allocated_hash_code(::std::string* hash_code) {
   if (hash_code != NULL) {
     
   } else {
@@ -532,9 +525,6 @@ void xresloader_header::set_allocated_hash_code(::std::string* hash_code) {
   // @@protoc_insertion_point(field_set_allocated:com.owent.xresloader.pb.xresloader_header.hash_code)
 }
 
-inline const xresloader_header* xresloader_header::internal_default_instance() {
-  return &xresloader_header_default_instance_.get();
-}
 #endif  // PROTOBUF_INLINE_NOT_IN_HEADERS
 
 // ===================================================================
@@ -546,27 +536,33 @@ const int xresloader_datablocks::kDataBlockFieldNumber;
 
 xresloader_datablocks::xresloader_datablocks()
   : ::google::protobuf::MessageLite(), _arena_ptr_(NULL) {
-  if (this != internal_default_instance()) protobuf_InitDefaults_pb_5fheader_5fv3_2eproto();
   SharedCtor();
   // @@protoc_insertion_point(constructor:com.owent.xresloader.pb.xresloader_datablocks)
 }
 
 void xresloader_datablocks::InitAsDefaultInstance() {
+  _is_default_instance_ = true;
+#ifdef GOOGLE_PROTOBUF_NO_STATIC_INITIALIZER
   header_ = const_cast< ::com::owent::xresloader::pb::xresloader_header*>(
       ::com::owent::xresloader::pb::xresloader_header::internal_default_instance());
+#else
+  header_ = const_cast< ::com::owent::xresloader::pb::xresloader_header*>(&::com::owent::xresloader::pb::xresloader_header::default_instance());
+#endif
 }
 
 xresloader_datablocks::xresloader_datablocks(const xresloader_datablocks& from)
   : ::google::protobuf::MessageLite(),
     _arena_ptr_(NULL) {
   SharedCtor();
-  UnsafeMergeFrom(from);
+  MergeFrom(from);
   // @@protoc_insertion_point(copy_constructor:com.owent.xresloader.pb.xresloader_datablocks)
 }
 
 void xresloader_datablocks::SharedCtor() {
-  header_ = NULL;
+    _is_default_instance_ = false;
+  ::google::protobuf::internal::GetEmptyString();
   _cached_size_ = 0;
+  header_ = NULL;
 }
 
 xresloader_datablocks::~xresloader_datablocks() {
@@ -575,7 +571,11 @@ xresloader_datablocks::~xresloader_datablocks() {
 }
 
 void xresloader_datablocks::SharedDtor() {
-  if (this != &xresloader_datablocks_default_instance_.get()) {
+  #ifdef GOOGLE_PROTOBUF_NO_STATIC_INITIALIZER
+  if (this != &default_instance()) {
+  #else
+  if (this != default_instance_) {
+  #endif
     delete header_;
   }
 }
@@ -586,11 +586,15 @@ void xresloader_datablocks::SetCachedSize(int size) const {
   GOOGLE_SAFE_CONCURRENT_WRITES_END();
 }
 const xresloader_datablocks& xresloader_datablocks::default_instance() {
-  protobuf_InitDefaults_pb_5fheader_5fv3_2eproto();
-  return *internal_default_instance();
+#ifdef GOOGLE_PROTOBUF_NO_STATIC_INITIALIZER
+  protobuf_AddDesc_pb_5fheader_5fv3_2eproto();
+#else
+  if (default_instance_ == NULL) protobuf_AddDesc_pb_5fheader_5fv3_2eproto();
+#endif
+  return *default_instance_;
 }
 
-::google::protobuf::internal::ExplicitlyConstructed<xresloader_datablocks> xresloader_datablocks_default_instance_;
+xresloader_datablocks* xresloader_datablocks::default_instance_ = NULL;
 
 xresloader_datablocks* xresloader_datablocks::New(::google::protobuf::Arena* arena) const {
   xresloader_datablocks* n = new xresloader_datablocks;
@@ -682,9 +686,9 @@ void xresloader_datablocks::SerializeWithCachedSizes(
   // @@protoc_insertion_point(serialize_end:com.owent.xresloader.pb.xresloader_datablocks)
 }
 
-size_t xresloader_datablocks::ByteSizeLong() const {
+int xresloader_datablocks::ByteSize() const {
 // @@protoc_insertion_point(message_byte_size_start:com.owent.xresloader.pb.xresloader_datablocks)
-  size_t total_size = 0;
+  int total_size = 0;
 
   // optional .com.owent.xresloader.pb.xresloader_header header = 1;
   if (this->has_header()) {
@@ -694,16 +698,14 @@ size_t xresloader_datablocks::ByteSizeLong() const {
   }
 
   // repeated bytes data_block = 2;
-  total_size += 1 *
-      ::google::protobuf::internal::FromIntSize(this->data_block_size());
+  total_size += 1 * this->data_block_size();
   for (int i = 0; i < this->data_block_size(); i++) {
     total_size += ::google::protobuf::internal::WireFormatLite::BytesSize(
       this->data_block(i));
   }
 
-  int cached_size = ::google::protobuf::internal::ToCachedSize(total_size);
   GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
-  _cached_size_ = cached_size;
+  _cached_size_ = total_size;
   GOOGLE_SAFE_CONCURRENT_WRITES_END();
   return total_size;
 }
@@ -715,16 +717,10 @@ void xresloader_datablocks::CheckTypeAndMergeFrom(
 
 void xresloader_datablocks::MergeFrom(const xresloader_datablocks& from) {
 // @@protoc_insertion_point(class_specific_merge_from_start:com.owent.xresloader.pb.xresloader_datablocks)
-  if (GOOGLE_PREDICT_TRUE(&from != this)) {
-    UnsafeMergeFrom(from);
-  } else {
-    MergeFromFail(__LINE__);
+  if (GOOGLE_PREDICT_FALSE(&from == this)) {
+    ::google::protobuf::internal::MergeFromFail(__FILE__, __LINE__);
   }
-}
-
-void xresloader_datablocks::UnsafeMergeFrom(const xresloader_datablocks& from) {
-  GOOGLE_DCHECK(&from != this);
-  data_block_.UnsafeMergeFrom(from.data_block_);
+  data_block_.MergeFrom(from.data_block_);
   if (from.has_header()) {
     mutable_header()->::com::owent::xresloader::pb::xresloader_header::MergeFrom(from.header());
   }
@@ -734,7 +730,7 @@ void xresloader_datablocks::CopyFrom(const xresloader_datablocks& from) {
 // @@protoc_insertion_point(class_specific_copy_from_start:com.owent.xresloader.pb.xresloader_datablocks)
   if (&from == this) return;
   Clear();
-  UnsafeMergeFrom(from);
+  MergeFrom(from);
 }
 
 bool xresloader_datablocks::IsInitialized() const {
@@ -762,7 +758,7 @@ void xresloader_datablocks::InternalSwap(xresloader_datablocks* other) {
 
 // optional .com.owent.xresloader.pb.xresloader_header header = 1;
 bool xresloader_datablocks::has_header() const {
-  return this != internal_default_instance() && header_ != NULL;
+  return !_is_default_instance_ && header_ != NULL;
 }
 void xresloader_datablocks::clear_header() {
   if (GetArenaNoVirtual() == NULL && header_ != NULL) delete header_;
@@ -770,8 +766,11 @@ void xresloader_datablocks::clear_header() {
 }
 const ::com::owent::xresloader::pb::xresloader_header& xresloader_datablocks::header() const {
   // @@protoc_insertion_point(field_get:com.owent.xresloader.pb.xresloader_datablocks.header)
-  return header_ != NULL ? *header_
-                         : *::com::owent::xresloader::pb::xresloader_header::internal_default_instance();
+#ifdef GOOGLE_PROTOBUF_NO_STATIC_INITIALIZER
+  return header_ != NULL ? *header_ : *default_instance().header_;
+#else
+  return header_ != NULL ? *header_ : *default_instance_->header_;
+#endif
 }
 ::com::owent::xresloader::pb::xresloader_header* xresloader_datablocks::mutable_header() {
   
@@ -806,57 +805,54 @@ int xresloader_datablocks::data_block_size() const {
 void xresloader_datablocks::clear_data_block() {
   data_block_.Clear();
 }
-const ::std::string& xresloader_datablocks::data_block(int index) const {
+ const ::std::string& xresloader_datablocks::data_block(int index) const {
   // @@protoc_insertion_point(field_get:com.owent.xresloader.pb.xresloader_datablocks.data_block)
   return data_block_.Get(index);
 }
-::std::string* xresloader_datablocks::mutable_data_block(int index) {
+ ::std::string* xresloader_datablocks::mutable_data_block(int index) {
   // @@protoc_insertion_point(field_mutable:com.owent.xresloader.pb.xresloader_datablocks.data_block)
   return data_block_.Mutable(index);
 }
-void xresloader_datablocks::set_data_block(int index, const ::std::string& value) {
+ void xresloader_datablocks::set_data_block(int index, const ::std::string& value) {
   // @@protoc_insertion_point(field_set:com.owent.xresloader.pb.xresloader_datablocks.data_block)
   data_block_.Mutable(index)->assign(value);
 }
-void xresloader_datablocks::set_data_block(int index, const char* value) {
+ void xresloader_datablocks::set_data_block(int index, const char* value) {
   data_block_.Mutable(index)->assign(value);
   // @@protoc_insertion_point(field_set_char:com.owent.xresloader.pb.xresloader_datablocks.data_block)
 }
-void xresloader_datablocks::set_data_block(int index, const void* value, size_t size) {
+ void xresloader_datablocks::set_data_block(int index, const void* value, size_t size) {
   data_block_.Mutable(index)->assign(
     reinterpret_cast<const char*>(value), size);
   // @@protoc_insertion_point(field_set_pointer:com.owent.xresloader.pb.xresloader_datablocks.data_block)
 }
-::std::string* xresloader_datablocks::add_data_block() {
+ ::std::string* xresloader_datablocks::add_data_block() {
   // @@protoc_insertion_point(field_add_mutable:com.owent.xresloader.pb.xresloader_datablocks.data_block)
   return data_block_.Add();
 }
-void xresloader_datablocks::add_data_block(const ::std::string& value) {
+ void xresloader_datablocks::add_data_block(const ::std::string& value) {
   data_block_.Add()->assign(value);
   // @@protoc_insertion_point(field_add:com.owent.xresloader.pb.xresloader_datablocks.data_block)
 }
-void xresloader_datablocks::add_data_block(const char* value) {
+ void xresloader_datablocks::add_data_block(const char* value) {
   data_block_.Add()->assign(value);
   // @@protoc_insertion_point(field_add_char:com.owent.xresloader.pb.xresloader_datablocks.data_block)
 }
-void xresloader_datablocks::add_data_block(const void* value, size_t size) {
+ void xresloader_datablocks::add_data_block(const void* value, size_t size) {
   data_block_.Add()->assign(reinterpret_cast<const char*>(value), size);
   // @@protoc_insertion_point(field_add_pointer:com.owent.xresloader.pb.xresloader_datablocks.data_block)
 }
-const ::google::protobuf::RepeatedPtrField< ::std::string>&
+ const ::google::protobuf::RepeatedPtrField< ::std::string>&
 xresloader_datablocks::data_block() const {
   // @@protoc_insertion_point(field_list:com.owent.xresloader.pb.xresloader_datablocks.data_block)
   return data_block_;
 }
-::google::protobuf::RepeatedPtrField< ::std::string>*
+ ::google::protobuf::RepeatedPtrField< ::std::string>*
 xresloader_datablocks::mutable_data_block() {
   // @@protoc_insertion_point(field_mutable_list:com.owent.xresloader.pb.xresloader_datablocks.data_block)
   return &data_block_;
 }
 
-inline const xresloader_datablocks* xresloader_datablocks::internal_default_instance() {
-  return &xresloader_datablocks_default_instance_.get();
-}
 #endif  // PROTOBUF_INLINE_NOT_IN_HEADERS
 
 // @@protoc_insertion_point(namespace_scope)

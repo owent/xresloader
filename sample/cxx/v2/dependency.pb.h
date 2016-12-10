@@ -20,9 +20,11 @@
 #endif
 
 #include <google/protobuf/generated_message_util.h>
-#include <google/protobuf/message_lite.h>
+#include <google/protobuf/message.h>
 #include <google/protobuf/repeated_field.h>
 #include <google/protobuf/extension_set.h>
+#include <google/protobuf/generated_enum_reflection.h>
+#include <google/protobuf/unknown_field_set.h>
 #include "dep_level2.pb.h"
 // @@protoc_insertion_point(includes)
 
@@ -50,9 +52,39 @@ const game_const_config game_const_config_MIN = EN_GCC_RANDOM_RANGE_UNIT;
 const game_const_config game_const_config_MAX = EN_GCC_RESOURCE_MAX_LIMIT;
 const int game_const_config_ARRAYSIZE = game_const_config_MAX + 1;
 
+const ::google::protobuf::EnumDescriptor* game_const_config_descriptor();
+inline const ::std::string& game_const_config_Name(game_const_config value) {
+  return ::google::protobuf::internal::NameOfEnum(
+    game_const_config_descriptor(), value);
+}
+inline bool game_const_config_Parse(
+    const ::std::string& name, game_const_config* value) {
+  return ::google::protobuf::internal::ParseNamedEnum<game_const_config>(
+    game_const_config_descriptor(), name, value);
+}
+enum cost_type {
+  EN_CT_UNKNOWN = 0,
+  EN_CT_MONEY = 10001,
+  EN_CT_DIAMOND = 10101
+};
+bool cost_type_IsValid(int value);
+const cost_type cost_type_MIN = EN_CT_UNKNOWN;
+const cost_type cost_type_MAX = EN_CT_DIAMOND;
+const int cost_type_ARRAYSIZE = cost_type_MAX + 1;
+
+const ::google::protobuf::EnumDescriptor* cost_type_descriptor();
+inline const ::std::string& cost_type_Name(cost_type value) {
+  return ::google::protobuf::internal::NameOfEnum(
+    cost_type_descriptor(), value);
+}
+inline bool cost_type_Parse(
+    const ::std::string& name, cost_type* value) {
+  return ::google::protobuf::internal::ParseNamedEnum<cost_type>(
+    cost_type_descriptor(), name, value);
+}
 // ===================================================================
 
-class dep_cfg : public ::google::protobuf::MessageLite {
+class dep_cfg : public ::google::protobuf::Message {
  public:
   dep_cfg();
   virtual ~dep_cfg();
@@ -64,32 +96,24 @@ class dep_cfg : public ::google::protobuf::MessageLite {
     return *this;
   }
 
-  inline const ::std::string& unknown_fields() const {
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
     return _unknown_fields_;
   }
 
-  inline ::std::string* mutable_unknown_fields() {
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
     return &_unknown_fields_;
   }
 
+  static const ::google::protobuf::Descriptor* descriptor();
   static const dep_cfg& default_instance();
-
-  #ifdef GOOGLE_PROTOBUF_NO_STATIC_INITIALIZER
-  // Returns the internal default instance pointer. This function can
-  // return NULL thus should not be used by the user. This is intended
-  // for Protobuf internal code. Please use default_instance() declared
-  // above instead.
-  static inline const dep_cfg* internal_default_instance() {
-    return default_instance_;
-  }
-  #endif
 
   void Swap(dep_cfg* other);
 
   // implements Message ----------------------------------------------
 
   dep_cfg* New() const;
-  void CheckTypeAndMergeFrom(const ::google::protobuf::MessageLite& from);
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
   void CopyFrom(const dep_cfg& from);
   void MergeFrom(const dep_cfg& from);
   void Clear();
@@ -100,14 +124,14 @@ class dep_cfg : public ::google::protobuf::MessageLite {
       ::google::protobuf::io::CodedInputStream* input);
   void SerializeWithCachedSizes(
       ::google::protobuf::io::CodedOutputStream* output) const;
-  void DiscardUnknownFields();
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
   int GetCachedSize() const { return _cached_size_; }
   private:
   void SharedCtor();
   void SharedDtor();
   void SetCachedSize(int size) const;
   public:
-  ::std::string GetTypeName() const;
+  ::google::protobuf::Metadata GetMetadata() const;
 
   // nested types ----------------------------------------------------
 
@@ -150,18 +174,14 @@ class dep_cfg : public ::google::protobuf::MessageLite {
   inline void set_has_dep2();
   inline void clear_has_dep2();
 
-  ::std::string _unknown_fields_;
+  ::google::protobuf::UnknownFieldSet _unknown_fields_;
 
   ::google::protobuf::uint32 _has_bits_[1];
   mutable int _cached_size_;
   ::std::string* name_;
   ::dep2_cfg* dep2_;
   ::google::protobuf::uint32 id_;
-  #ifdef GOOGLE_PROTOBUF_NO_STATIC_INITIALIZER
-  friend void  protobuf_AddDesc_dependency_2eproto_impl();
-  #else
   friend void  protobuf_AddDesc_dependency_2eproto();
-  #endif
   friend void protobuf_AssignDesc_dependency_2eproto();
   friend void protobuf_ShutdownFile_dependency_2eproto();
 
@@ -291,11 +311,7 @@ inline void dep_cfg::clear_dep2() {
 }
 inline const ::dep2_cfg& dep_cfg::dep2() const {
   // @@protoc_insertion_point(field_get:dep_cfg.dep2)
-#ifdef GOOGLE_PROTOBUF_NO_STATIC_INITIALIZER
-  return dep2_ != NULL ? *dep2_ : *default_instance().dep2_;
-#else
   return dep2_ != NULL ? *dep2_ : *default_instance_->dep2_;
-#endif
 }
 inline ::dep2_cfg* dep_cfg::mutable_dep2() {
   set_has_dep2();
@@ -322,6 +338,25 @@ inline void dep_cfg::set_allocated_dep2(::dep2_cfg* dep2) {
 
 
 // @@protoc_insertion_point(namespace_scope)
+
+#ifndef SWIG
+namespace google {
+namespace protobuf {
+
+template <> struct is_proto_enum< ::game_const_config> : ::google::protobuf::internal::true_type {};
+template <>
+inline const EnumDescriptor* GetEnumDescriptor< ::game_const_config>() {
+  return ::game_const_config_descriptor();
+}
+template <> struct is_proto_enum< ::cost_type> : ::google::protobuf::internal::true_type {};
+template <>
+inline const EnumDescriptor* GetEnumDescriptor< ::cost_type>() {
+  return ::cost_type_descriptor();
+}
+
+}  // namespace google
+}  // namespace protobuf
+#endif  // SWIG
 
 // @@protoc_insertion_point(global_scope)
 

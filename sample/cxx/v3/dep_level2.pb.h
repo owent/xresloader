@@ -22,9 +22,11 @@
 #include <google/protobuf/arena.h>
 #include <google/protobuf/arenastring.h>
 #include <google/protobuf/generated_message_util.h>
-#include <google/protobuf/message_lite.h>
+#include <google/protobuf/metadata.h>
+#include <google/protobuf/message.h>
 #include <google/protobuf/repeated_field.h>
 #include <google/protobuf/extension_set.h>
+#include <google/protobuf/unknown_field_set.h>
 // @@protoc_insertion_point(includes)
 
 // Internal implementation detail -- do not call these.
@@ -36,7 +38,7 @@ class dep2_cfg;
 
 // ===================================================================
 
-class dep2_cfg : public ::google::protobuf::MessageLite /* @@protoc_insertion_point(class_definition:dep2_cfg) */ {
+class dep2_cfg : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:dep2_cfg) */ {
  public:
   dep2_cfg();
   virtual ~dep2_cfg();
@@ -48,17 +50,8 @@ class dep2_cfg : public ::google::protobuf::MessageLite /* @@protoc_insertion_po
     return *this;
   }
 
+  static const ::google::protobuf::Descriptor* descriptor();
   static const dep2_cfg& default_instance();
-
-  #ifdef GOOGLE_PROTOBUF_NO_STATIC_INITIALIZER
-  // Returns the internal default instance pointer. This function can
-  // return NULL thus should not be used by the user. This is intended
-  // for Protobuf internal code. Please use default_instance() declared
-  // above instead.
-  static inline const dep2_cfg* internal_default_instance() {
-    return default_instance_;
-  }
-  #endif
 
   void Swap(dep2_cfg* other);
 
@@ -67,7 +60,8 @@ class dep2_cfg : public ::google::protobuf::MessageLite /* @@protoc_insertion_po
   inline dep2_cfg* New() const { return New(NULL); }
 
   dep2_cfg* New(::google::protobuf::Arena* arena) const;
-  void CheckTypeAndMergeFrom(const ::google::protobuf::MessageLite& from);
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
   void CopyFrom(const dep2_cfg& from);
   void MergeFrom(const dep2_cfg& from);
   void Clear();
@@ -78,7 +72,11 @@ class dep2_cfg : public ::google::protobuf::MessageLite /* @@protoc_insertion_po
       ::google::protobuf::io::CodedInputStream* input);
   void SerializeWithCachedSizes(
       ::google::protobuf::io::CodedOutputStream* output) const;
-  void DiscardUnknownFields();
+  ::google::protobuf::uint8* InternalSerializeWithCachedSizesToArray(
+      bool deterministic, ::google::protobuf::uint8* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const {
+    return InternalSerializeWithCachedSizesToArray(false, output);
+  }
   int GetCachedSize() const { return _cached_size_; }
   private:
   void SharedCtor();
@@ -87,14 +85,14 @@ class dep2_cfg : public ::google::protobuf::MessageLite /* @@protoc_insertion_po
   void InternalSwap(dep2_cfg* other);
   private:
   inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
-    return _arena_ptr_;
+    return _internal_metadata_.arena();
   }
-  inline ::google::protobuf::Arena* MaybeArenaPtr() const {
-    return _arena_ptr_;
+  inline void* MaybeArenaPtr() const {
+    return _internal_metadata_.raw_arena_ptr();
   }
   public:
 
-  ::std::string GetTypeName() const;
+  ::google::protobuf::Metadata GetMetadata() const;
 
   // nested types ----------------------------------------------------
 
@@ -120,18 +118,12 @@ class dep2_cfg : public ::google::protobuf::MessageLite /* @@protoc_insertion_po
   // @@protoc_insertion_point(class_scope:dep2_cfg)
  private:
 
-  ::google::protobuf::internal::ArenaStringPtr _unknown_fields_;
-  ::google::protobuf::Arena* _arena_ptr_;
-
+  ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
   bool _is_default_instance_;
   ::google::protobuf::internal::ArenaStringPtr level_;
   ::google::protobuf::uint32 id_;
   mutable int _cached_size_;
-  #ifdef GOOGLE_PROTOBUF_NO_STATIC_INITIALIZER
-  friend void  protobuf_AddDesc_dep_5flevel2_2eproto_impl();
-  #else
   friend void  protobuf_AddDesc_dep_5flevel2_2eproto();
-  #endif
   friend void protobuf_AssignDesc_dep_5flevel2_2eproto();
   friend void protobuf_ShutdownFile_dep_5flevel2_2eproto();
 

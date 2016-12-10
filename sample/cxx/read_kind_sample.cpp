@@ -36,6 +36,7 @@ int main(int argc, char* argv[]) {
         } else {
             printf("role id: %u, unlock level: %u, name %s, dep_test.name: NONE\n", data1->id(), data1->unlock_level(), data1->name().c_str());
         }
+        printf("%s\n", data1->DebugString().c_str());
     } while(false);
 
 
@@ -60,6 +61,8 @@ int main(int argc, char* argv[]) {
         } else {
             printf("role id: %u, unlock level: %u, name %s, dep_test.name: NONE\n", data1->id(), data1->unlock_level(), data1->name().c_str());
         }
+
+        printf("%s\n", data1->DebugString().c_str());
     } while(false);
 
     return 0;

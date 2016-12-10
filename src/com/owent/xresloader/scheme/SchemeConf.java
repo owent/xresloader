@@ -223,15 +223,27 @@ public class SchemeConf {
     }
 
     public int initScheme() {
-        if (ProgramOptions.FileType.EXCEL == ProgramOptions.getInstance().dataSourceType) {
-            scheme = new SchemeDataSourceExcel();
-        } else if (ProgramOptions.FileType.INI == ProgramOptions.getInstance().dataSourceType) {
-            scheme = new SchemeDataSourceConf();
-        } else if (ProgramOptions.FileType.JSON == ProgramOptions.getInstance().dataSourceType) {
-            scheme = new SchemeDataSourceJson();
-        } else {
-            ProgramOptions.getLoger().error("data source file type error.");
-            return -11;
+        switch(ProgramOptions.getInstance().dataSourceType) {
+            case BIN: {
+                scheme = new SchemeDataSourceCmd();
+                break;
+            }
+            case EXCEL: {
+                scheme = new SchemeDataSourceExcel();
+                break;
+            }
+            case INI: {
+                scheme = new SchemeDataSourceConf();
+                break;
+            }
+            case JSON: {
+                scheme = new SchemeDataSourceJson();
+                break;
+            }
+            default:{
+                ProgramOptions.getLoger().error("data source file type error.");
+                return -11;
+            }
         }
 
         return scheme.load();

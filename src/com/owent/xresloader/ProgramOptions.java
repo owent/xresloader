@@ -38,6 +38,7 @@ public class ProgramOptions {
     public String dataSourceFile = "";
     public FileType dataSourceType;
     public String[] dataSourceMetas = null;
+    public String dataSourceMetaDelimiter = "\\|";
     public RenameRule renameRule = null;
     public boolean enableFormular = true;
     public boolean enbleEmptyList = false;
@@ -78,6 +79,7 @@ public class ProgramOptions {
         dataSourceFile = "";
         dataSourceType = FileType.BIN;
         dataSourceMetas = null;
+        dataSourceMetaDelimiter = "\\|";
         renameRule = null;
         enableFormular = true;
         enbleEmptyList = false;
@@ -149,9 +151,26 @@ public class ProgramOptions {
 
         options.addOption(Option.builder("m")
                 .longOpt("src-meta")
-                .desc("data description meta")
+                .desc(
+                    String.format("%s\n\t%-32s=>%s\n\t%-32s=>%s\n\t%-32s=>%s\n\t%-32s=>%s",
+                            "data description meta information of data source.",
+                            ".xls,/xlsx/.cvx/.xlsm/.dos", "scheme sheet name",
+                            ".ini/.cfg/.conf", "scheme section name",
+                            ".json", "scheme key name",
+                            "[NOTHING]", "KEY=VALUE1|VAL2|VAL3 pair of scheme configures"
+                    )
+                )
                 .hasArg()
                 .argName("META NAME")
+                .build()
+        );
+
+        options.addOption(Option.builder("l")
+                .longOpt("delimiter")
+                .desc(String.format("regex delimiter for description meta when data source file is [NOTHING].(default: %s)",
+                        getInstance().dataSourceMetaDelimiter))
+                .hasArg()
+                .argName("DELTMITER")
                 .build()
         );
 
@@ -231,6 +250,7 @@ public class ProgramOptions {
 
             String script = System.getProperty("java.class.path");
             HelpFormatter formatter = new HelpFormatter();
+            formatter.setWidth(140);
             formatter.printHelp("Usage: java -client -jar " + script + " [options...]", options);
             return -1;
         }
@@ -238,6 +258,7 @@ public class ProgramOptions {
         if (cmd.hasOption('h')) {
             String script = System.getProperty("java.class.path");
             HelpFormatter formatter = new HelpFormatter();
+            formatter.setWidth(140);
             formatter.printHelp(String.format("java -client -jar \"%s\" [options...]", script), get_options_group());
             return 1;
         }
@@ -346,12 +367,14 @@ public class ProgramOptions {
 //          } else if (null != name_suffix && name_suffix.equalsIgnoreCase("xml")) {
 //              dataSourceType = FileType.XML;
             }
-        } else {
-            return 1;
         }
 
         // macro names
         dataSourceMetas = cmd.getOptionValues('m');
+
+        if (cmd.hasOption('l')) {
+            dataSourceMetaDelimiter = cmd.getOptionValue('l');
+        }
 
         // rename rules
         if (cmd.hasOption('n')) {

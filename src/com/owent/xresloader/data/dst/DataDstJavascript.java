@@ -17,7 +17,7 @@ public class DataDstJavascript extends DataDstJava {
     private String endl = "\n";
     private String ident = "    ";
 
-    private enum EXPORT_MODE { GLOBAL, NODEJS, AMD };
+    private enum EXPORT_MODE { GLOBAL, NODEJS, AMD }
 
     @Override
     public boolean init() {
@@ -281,5 +281,5 @@ public class DataDstJavascript extends DataDstJava {
         if (null == encoding || encoding.isEmpty())
             return sb.toString().getBytes();
         return sb.toString().getBytes(Charset.forName(encoding));
-    };
+    }
 }

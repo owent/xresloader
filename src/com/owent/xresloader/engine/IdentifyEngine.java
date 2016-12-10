@@ -102,10 +102,7 @@ public class IdentifyEngine {
 
     static public boolean isAbsPath(String path) {
         path = path.trim();
-        if(path.charAt(0) == '/' || (path.length() > 1 && path.charAt(1) == ':' && Character.isLetter(path.charAt(0)))) {
-            return true;
-        }
+        return path.charAt(0) == '/' || (path.length() > 1 && path.charAt(1) == ':' && Character.isLetter(path.charAt(0)));
 
-        return false;
     }
 }

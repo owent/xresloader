@@ -25,6 +25,8 @@ import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.Map;
 
+import static com.google.protobuf.Descriptors.FieldDescriptor.JavaType.MESSAGE;
+
 /**
  * Created by owent on 2014/10/10.
  */
@@ -290,19 +292,19 @@ public class DataDstPb extends DataDstImpl {
 
                         name_list.addLast("");
                         for (; ; ++count) {
-                            DataDstWriterNode c = node.create(fd.getMessageType(), DataDstWriterNode.JAVA_TYPE.MESSAGE);
+                            DataDstWriterNode c = DataDstWriterNode.create(fd.getMessageType(), DataDstWriterNode.JAVA_TYPE.MESSAGE);
                             name_list.removeLast();
                             name_list.addLast(DataDstWriterNode.makeNodeName(fd.getName(), count));
                             if (test(c, name_list)) {
                                 node.addChild(fd.getName(), c, fd,true);
+                                ret = true;
                             } else {
                                 break;
                             }
                         }
                         name_list.removeLast();
-                        ret = ret || count > 0;
                     } else {
-                        DataDstWriterNode c = node.create(fd.getMessageType(), DataDstWriterNode.JAVA_TYPE.MESSAGE);
+                        DataDstWriterNode c = DataDstWriterNode.create(fd.getMessageType(), DataDstWriterNode.JAVA_TYPE.MESSAGE);
                         name_list.addLast(DataDstWriterNode.makeNodeName(fd.getName()));
                         if (test(c, name_list)) {
                             node.addChild(fd.getName(), c, fd,false);
@@ -350,24 +352,23 @@ public class DataDstPb extends DataDstImpl {
                     if (fd.isRepeated()) {
                         int count = 0;
                         for (; ; ++count) {
-                            DataDstWriterNode c = node.create(null, inner_type);
+                            DataDstWriterNode c = DataDstWriterNode.create(null, inner_type);
                             String real_name = DataDstWriterNode.makeChildPath(prefix, fd.getName(), count);
                             IdentifyDescriptor col = data_src.getColumnByName(real_name);
                             if (null != col) {
                                 setup_node_identify(c, col);
                                 node.addChild(fd.getName(), c, fd,true);
+                                ret = true;
                             } else {
                                 break;
                             }
                         }
-
-                        ret = ret || count > 0;
                     } else {
                         // 非 list 类型
                         String real_name = DataDstWriterNode.makeChildPath(prefix, fd.getName());
                         IdentifyDescriptor col = data_src.getColumnByName(real_name);
                         if (null != col) {
-                            DataDstWriterNode c = node.create(null, inner_type);
+                            DataDstWriterNode c = DataDstWriterNode.create(null, inner_type);
                             setup_node_identify(c, col);
                             node.addChild(fd.getName(), c, fd,false);
                             ret = true;
@@ -428,7 +429,7 @@ public class DataDstPb extends DataDstImpl {
     }
 
     private boolean dumpField(DynamicMessage.Builder builder, DataDstWriterNode desc, Descriptors.FieldDescriptor fd) throws ConvException {
-        if (null == desc.identify) {
+        if (null == desc.identify && MESSAGE != fd.getJavaType()) {
             return false;
         }
 

@@ -12,6 +12,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import static com.google.protobuf.Descriptors.FieldDescriptor.JavaType.MESSAGE;
+
 /**
  * Created by owentou on 2015/04/29.
  */
@@ -86,7 +88,7 @@ public abstract class DataDstJava extends DataDstImpl {
     }
 
     private boolean dumpField(HashMap<String, Object> builder, DataDstWriterNode desc, String field_name, boolean is_list) throws ConvException {
-        if (null == desc.identify) {
+        if (null == desc.identify && DataDstWriterNode.JAVA_TYPE.MESSAGE != desc.getType()) {
             return false;
         }
 

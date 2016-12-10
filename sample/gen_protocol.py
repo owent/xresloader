@@ -19,7 +19,7 @@ for item in glob.glob(os.path.join(proto_dir, '*.proto')):
     proto_file.append('"' + item + '"');
 
 os.chdir(work_dir);
-os.system('/usr/bin/python "{0}"'.format(os.path.join(project_dir, 'tools', 'gen_header.py')))
+os.system('/usr/bin/python "{0}"'.format(os.path.join(project_dir, 'loader-binding', 'cxx', 'gen_protocol.py')))
 cpp_out_dir = os.path.join(script_dir, 'cxx');
 
 proto_src_dir = '{0}/v2'.format(cpp_out_dir)

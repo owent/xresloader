@@ -6,7 +6,7 @@ import java.util.regex.Pattern;
  * Created by owentou on 2014/9/30.
  */
 public class SchemeKeyConf {
-    private int row;
+    private int row = 0;
 
     private KeyCase letterCase = KeyCase.NONE;
     private String wordSplit = "";

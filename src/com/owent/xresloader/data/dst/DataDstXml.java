@@ -196,5 +196,5 @@ public class DataDstXml extends DataDstJava {
             ProgramOptions.getLoger().error("write xml failed, %s", e.getMessage());
             return null;
         }
-    };
+    }
 }

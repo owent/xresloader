@@ -71,5 +71,5 @@ public class DataDstJson extends DataDstJava {
         if (null == encoding || encoding.isEmpty())
             return encoded.getBytes();
         return encoded.getBytes(Charset.forName(encoding));
-    };
+    }
 }

@@ -65,7 +65,8 @@ public class DataSrcExcel extends DataSrcImpl {
         /*** file_path:key->value ***/
         private HashMap<String, MacroFileCache> cache = new HashMap<String, MacroFileCache>();
         private HashMap<String, String> empty = new HashMap<String, String>(); // 空项特殊处理
-    };
+    }
+
     static private MacroCacheInfo macro_cache = new MacroCacheInfo();
 
     /***

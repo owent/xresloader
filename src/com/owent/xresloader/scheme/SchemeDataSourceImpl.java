@@ -5,7 +5,7 @@ package com.owent.xresloader.scheme;
  */
 public interface SchemeDataSourceImpl {
 
-    public int load();
+    int load();
 
-    public boolean load_scheme(String table);
+    boolean load_scheme(String table);
 }

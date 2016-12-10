@@ -187,5 +187,5 @@ public class DataDstLua extends DataDstJava {
         if (null == encoding || encoding.isEmpty())
             return sb.toString().getBytes();
         return sb.toString().getBytes(Charset.forName(encoding));
-    };
+    }
 }

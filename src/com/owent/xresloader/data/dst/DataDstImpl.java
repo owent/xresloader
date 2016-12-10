@@ -52,5 +52,5 @@ public abstract class DataDstImpl {
      * 转储常量数据
      * @return 常量数据,不支持的时候返回空
      */
-    public byte[] dumpConst(HashMap<String, Object> data) { return null; };
+    public byte[] dumpConst(HashMap<String, Object> data) { return null; }
 }

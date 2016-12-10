@@ -17,6 +17,8 @@ import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import static com.owent.xresloader.ProgramOptions.FileType.BIN;
+
 /**
  * @author owentou
  */
@@ -139,6 +141,15 @@ public class main {
             // 0. 清理
             SchemeConf.getInstance().getMacroSource().clear();
             SchemeConf.getInstance().getDataSource().clear();
+
+            if (BIN == ProgramOptions.getInstance().dataSourceType) {
+                // 命令行输入模式只触发一次，并且scheme名称改成所有配置的和
+                if (i > 0) {
+                    break;
+                } else {
+                    sn = String.join(" ", ProgramOptions.getInstance().dataSourceMetas);
+                }
+            }
 
             // 1. 描述信息
             if (false == SchemeConf.getInstance().getScheme().load_scheme(sn)) {

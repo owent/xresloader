@@ -1,9 +1,6 @@
 package com.owent.xresloader.data.dst;
 
-import com.google.protobuf.ByteString;
-import com.google.protobuf.DescriptorProtos;
-import com.google.protobuf.Descriptors;
-import com.google.protobuf.DynamicMessage;
+import com.google.protobuf.*;
 import com.owent.xresloader.ProgramOptions;
 import com.owent.xresloader.data.err.ConvException;
 import com.owent.xresloader.data.src.DataContainer;
@@ -401,6 +398,56 @@ public class DataDstPb extends DataDstImpl {
     }
 
 
+    private void dumpDefault(DynamicMessage.Builder builder, Descriptors.FieldDescriptor fd) {
+        switch(fd.getType()) {
+            case DOUBLE:
+                builder.setField(fd, Double.valueOf(0.0));
+                break;
+            case FLOAT:
+                builder.setField(fd, Float.valueOf(0));
+                break;
+            case INT64:
+            case UINT64:
+            case INT32:
+            case FIXED64:
+            case FIXED32:
+            case UINT32:
+            case SFIXED32:
+            case SFIXED64:
+            case SINT32:
+            case SINT64:
+                builder.setField(fd, 0);
+                break;
+            case ENUM:
+                builder.setField(fd, fd.getEnumType().findValueByNumber(0));
+                break;
+            case BOOL:
+                builder.setField(fd, false);
+                break;
+            case STRING:
+                builder.setField(fd, "");
+                break;
+            case GROUP:
+                builder.setField(fd, new byte[0]);
+                break;
+            case MESSAGE: {
+                DynamicMessage.Builder subnode = DynamicMessage.newBuilder(fd.getMessageType());
+
+                // fill required
+                for(Descriptors.FieldDescriptor sub_fd: fd.getMessageType().getFields()) {
+                    if (sub_fd.isRequired()) {
+                        dumpDefault(subnode, sub_fd);
+                    }
+                }
+
+                builder.setField(fd, subnode.build());
+                break;
+            } case BYTES:
+                builder.setField(fd, new byte[0]);
+                break;
+        }
+    }
+
     /**
      * 转储数据到builder
      * @param builder 转储目标
@@ -421,6 +468,15 @@ public class DataDstPb extends DataDstImpl {
             for (DataDstWriterNode child: c.getValue().nodes) {
                 if (dumpField(builder, child, fd)) {
                     ret = true;
+                }
+            }
+        }
+
+        // fill required
+        for(Descriptors.FieldDescriptor fd: builder.getDescriptorForType().getFields()) {
+            if (fd.isRequired()) {
+                if (false == builder.hasField(fd)) {
+                    dumpDefault(builder, fd);
                 }
             }
         }
@@ -499,7 +555,7 @@ public class DataDstPb extends DataDstImpl {
             case ENUM: {
                 DataContainer<Integer> ret = DataSrcImpl.getOurInstance().getValue(desc.identify, Integer.valueOf(0));
                 if (null != ret && ret.valid) {
-                    val = ret.value;
+                    val = fd.getEnumType().findValueByNumber(ret.value);
                 }
 
                 break;

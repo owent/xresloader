@@ -2,9 +2,9 @@
 
 return {
     [1] = {
-        xres_ver = "1.3.0.0",
+        xres_ver = "1.3.0.1",
         hash_code = "no hash code",
-        data_ver = "1.3.0.0",
+        data_ver = "1.3.0.1",
         count = 7,
     },
     role_cfg = {

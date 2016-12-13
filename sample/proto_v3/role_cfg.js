@@ -2,9 +2,9 @@
 
 (function(){
   var role_cfg_header = {
-    xres_ver : "1.3.0.1",
+    xres_ver : "1.3.0.2",
     hash_code : "no hash code",
-    data_ver : "1.3.0.1",
+    data_ver : "1.3.0.2",
     count : 7
   };
   var extend = function (dst, src) {

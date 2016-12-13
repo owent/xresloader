@@ -306,6 +306,9 @@ public class DataDstPb extends DataDstImpl {
                         if (test(c, name_list)) {
                             node.addChild(fd.getName(), c, fd,false);
                             ret = true;
+                        } else if (fd.isRequired()) {
+                            // required 字段要dump默认数据
+                            node.addChild(fd.getName(), c, fd,false);
                         }
                         name_list.removeLast();
                     }
@@ -349,10 +352,10 @@ public class DataDstPb extends DataDstImpl {
                     if (fd.isRepeated()) {
                         int count = 0;
                         for (; ; ++count) {
-                            DataDstWriterNode c = DataDstWriterNode.create(null, inner_type);
                             String real_name = DataDstWriterNode.makeChildPath(prefix, fd.getName(), count);
                             IdentifyDescriptor col = data_src.getColumnByName(real_name);
                             if (null != col) {
+                                DataDstWriterNode c = DataDstWriterNode.create(null, inner_type);
                                 setup_node_identify(c, col);
                                 node.addChild(fd.getName(), c, fd,true);
                                 ret = true;
@@ -369,6 +372,10 @@ public class DataDstPb extends DataDstImpl {
                             setup_node_identify(c, col);
                             node.addChild(fd.getName(), c, fd,false);
                             ret = true;
+                        } else if (fd.isRequired()) {
+                            DataDstWriterNode c = DataDstWriterNode.create(null, inner_type);
+                            // required 字段要dump默认数据
+                            node.addChild(fd.getName(), c, fd,false);
                         }
                     }
                     break;
@@ -472,20 +479,13 @@ public class DataDstPb extends DataDstImpl {
             }
         }
 
-        // fill required
-        for(Descriptors.FieldDescriptor fd: builder.getDescriptorForType().getFields()) {
-            if (fd.isRequired()) {
-                if (false == builder.hasField(fd)) {
-                    dumpDefault(builder, fd);
-                }
-            }
-        }
-
         return ret;
     }
 
     private boolean dumpField(DynamicMessage.Builder builder, DataDstWriterNode desc, Descriptors.FieldDescriptor fd) throws ConvException {
         if (null == desc.identify && MESSAGE != fd.getJavaType()) {
+            // required 空字段填充默认值
+            dumpDefault(builder, fd);
             return false;
         }
 

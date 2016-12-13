@@ -66,6 +66,58 @@ public abstract class DataDstJava extends DataDstImpl {
         return ret;
     }
 
+    private void dumpDefault(HashMap<String, Object> builder, DataDstWriterNode desc, String field_name, boolean is_list) {
+        Object val = null;
+        switch (desc.getType()) {
+            case INT:
+                val = Integer.valueOf(0);
+                break;
+            case LONG:
+                val = Long.valueOf(0);
+                break;
+            case BOOLEAN:
+                val = Boolean.FALSE;
+                break;
+            case STRING:
+                val = "";
+                break;
+            case BYTES:
+                val = new byte[0];
+                break;
+            case FLOAT:
+                val = Float.valueOf(0);
+                break;
+            case DOUBLE:
+                val = Double.valueOf(0);
+                break;
+            case MESSAGE: {
+                HashMap<String, Object> sub_msg = new HashMap<String, Object>();
+                for(Map.Entry<String, DataDstWriterNode.DataDstChildrenNode> sub_item: desc.getChildren().entrySet()) {
+                    for (DataDstWriterNode sub_desc : sub_item.getValue().nodes) {
+                        dumpDefault(sub_msg, sub_desc, sub_item.getKey(), sub_item.getValue().isList);
+                    }
+                }
+                break;
+            }
+        }
+
+        if (null == val) {
+            return;
+        }
+
+        if (is_list) {
+            ArrayList<Object> old = (ArrayList<Object>)builder.getOrDefault(field_name,null);
+            if (null == old) {
+                old = new ArrayList<Object>();
+                builder.put(field_name, old);
+            }
+            old.add(val);
+        } else {
+            builder.put(field_name, val);
+        }
+    }
+
+
     /**
      * 转储数据到builder
      * @param builder 转储目标
@@ -89,6 +141,7 @@ public abstract class DataDstJava extends DataDstImpl {
 
     private boolean dumpField(HashMap<String, Object> builder, DataDstWriterNode desc, String field_name, boolean is_list) throws ConvException {
         if (null == desc.identify && DataDstWriterNode.JAVA_TYPE.MESSAGE != desc.getType()) {
+            dumpDefault(builder, desc, field_name, is_list);
             return false;
         }
 

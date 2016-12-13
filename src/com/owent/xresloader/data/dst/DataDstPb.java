@@ -293,7 +293,7 @@ public class DataDstPb extends DataDstImpl {
                             name_list.removeLast();
                             name_list.addLast(DataDstWriterNode.makeNodeName(fd.getName(), count));
                             if (test(c, name_list)) {
-                                node.addChild(fd.getName(), c, fd,true);
+                                node.addChild(fd.getName(), c, fd,true, false);
                                 ret = true;
                             } else {
                                 break;
@@ -304,11 +304,11 @@ public class DataDstPb extends DataDstImpl {
                         DataDstWriterNode c = DataDstWriterNode.create(fd.getMessageType(), DataDstWriterNode.JAVA_TYPE.MESSAGE);
                         name_list.addLast(DataDstWriterNode.makeNodeName(fd.getName()));
                         if (test(c, name_list)) {
-                            node.addChild(fd.getName(), c, fd,false);
+                            node.addChild(fd.getName(), c, fd,false, false);
                             ret = true;
                         } else if (fd.isRequired()) {
                             // required 字段要dump默认数据
-                            node.addChild(fd.getName(), c, fd,false);
+                            node.addChild(fd.getName(), c, fd,false, true);
                         }
                         name_list.removeLast();
                     }
@@ -357,7 +357,7 @@ public class DataDstPb extends DataDstImpl {
                             if (null != col) {
                                 DataDstWriterNode c = DataDstWriterNode.create(null, inner_type);
                                 setup_node_identify(c, col);
-                                node.addChild(fd.getName(), c, fd,true);
+                                node.addChild(fd.getName(), c, fd,true, false);
                                 ret = true;
                             } else {
                                 break;
@@ -370,12 +370,12 @@ public class DataDstPb extends DataDstImpl {
                         if (null != col) {
                             DataDstWriterNode c = DataDstWriterNode.create(null, inner_type);
                             setup_node_identify(c, col);
-                            node.addChild(fd.getName(), c, fd,false);
+                            node.addChild(fd.getName(), c, fd,false, false);
                             ret = true;
                         } else if (fd.isRequired()) {
                             DataDstWriterNode c = DataDstWriterNode.create(null, inner_type);
                             // required 字段要dump默认数据
-                            node.addChild(fd.getName(), c, fd,false);
+                            node.addChild(fd.getName(), c, fd,false, true);
                         }
                     }
                     break;
@@ -399,7 +399,7 @@ public class DataDstPb extends DataDstImpl {
         try {
             return root.build().toByteString();
         } catch (Exception e) {
-            ProgramOptions.getLoger().error("serialize failed. %s", root.getInitializationErrorString());
+            ProgramOptions.getLoger().error("serialize failed. %s", e.getMessage());
             return null;
         }
     }
@@ -563,8 +563,15 @@ public class DataDstPb extends DataDstImpl {
 
             case MESSAGE: {
                 DynamicMessage.Builder node = DynamicMessage.newBuilder(fd.getMessageType());
-                if (dumpMessage(node, desc)) {
-                    val = node.build();
+                if (dumpMessage(node, desc) || fd.isRequired()) {
+                    try {
+                        val = node.build();
+                    } catch (UninitializedMessageException e) {
+                        ProgramOptions.getLoger().error("serialize %s(%s) failed. %s",
+                                fd.getFullName(),
+                                fd.getMessageType().getName(),
+                                e.getMessage());
+                    }
                 }
                 break;
             }
@@ -574,6 +581,10 @@ public class DataDstPb extends DataDstImpl {
         }
 
         if (null == val) {
+            if (fd.isRequired()) {
+                dumpDefault(builder, fd);
+            }
+
             return false;
         }
 

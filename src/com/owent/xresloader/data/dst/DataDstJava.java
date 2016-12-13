@@ -66,7 +66,7 @@ public abstract class DataDstJava extends DataDstImpl {
         return ret;
     }
 
-    private void dumpDefault(HashMap<String, Object> builder, DataDstWriterNode desc, String field_name, boolean is_list) {
+    private void dumpDefault(HashMap<String, Object> builder, DataDstWriterNode desc, String field_name,  DataDstWriterNode.DataDstChildrenNode as_child) {
         Object val = null;
         switch (desc.getType()) {
             case INT:
@@ -94,7 +94,7 @@ public abstract class DataDstJava extends DataDstImpl {
                 HashMap<String, Object> sub_msg = new HashMap<String, Object>();
                 for(Map.Entry<String, DataDstWriterNode.DataDstChildrenNode> sub_item: desc.getChildren().entrySet()) {
                     for (DataDstWriterNode sub_desc : sub_item.getValue().nodes) {
-                        dumpDefault(sub_msg, sub_desc, sub_item.getKey(), sub_item.getValue().isList);
+                        dumpDefault(sub_msg, sub_desc, sub_item.getKey(), sub_item.getValue());
                     }
                 }
                 break;
@@ -102,10 +102,11 @@ public abstract class DataDstJava extends DataDstImpl {
         }
 
         if (null == val) {
+            ProgramOptions.getLoger().error("serialize failed. %s is not supported for java default value", desc.getType().toString());
             return;
         }
 
-        if (is_list) {
+        if (as_child.isList) {
             ArrayList<Object> old = (ArrayList<Object>)builder.getOrDefault(field_name,null);
             if (null == old) {
                 old = new ArrayList<Object>();
@@ -130,7 +131,7 @@ public abstract class DataDstJava extends DataDstImpl {
 
         for (Map.Entry<String, DataDstWriterNode.DataDstChildrenNode> c : node.getChildren().entrySet()) {
             for (DataDstWriterNode child: c.getValue().nodes) {
-                if (dumpField(builder, child, c.getKey(), c.getValue().isList)) {
+                if (dumpField(builder, child, c.getKey(), c.getValue())) {
                     ret = true;
                 }
             }
@@ -139,9 +140,9 @@ public abstract class DataDstJava extends DataDstImpl {
         return ret;
     }
 
-    private boolean dumpField(HashMap<String, Object> builder, DataDstWriterNode desc, String field_name, boolean is_list) throws ConvException {
+    private boolean dumpField(HashMap<String, Object> builder, DataDstWriterNode desc, String field_name, DataDstWriterNode.DataDstChildrenNode as_child) throws ConvException {
         if (null == desc.identify && DataDstWriterNode.JAVA_TYPE.MESSAGE != desc.getType()) {
-            dumpDefault(builder, desc, field_name, is_list);
+            dumpDefault(builder, desc, field_name, as_child);
             return false;
         }
 
@@ -222,10 +223,13 @@ public abstract class DataDstJava extends DataDstImpl {
         }
 
         if (null == val) {
+            if (as_child.isRequired) {
+                dumpDefault(builder, desc, field_name, as_child);
+            }
             return false;
         }
 
-        if (is_list) {
+        if (as_child.isList) {
             ArrayList<Object> old = (ArrayList<Object>)builder.getOrDefault(field_name,null);
             if (null == old) {
                 old = new ArrayList<Object>();

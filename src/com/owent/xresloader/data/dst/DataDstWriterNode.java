@@ -15,6 +15,7 @@ public class DataDstWriterNode {
 
     public static class DataDstChildrenNode {
         public boolean isList = false;
+        public boolean isRequired = false;
         public Object fieldDescriptor = null;
         public ArrayList<DataDstWriterNode> nodes = null;
     }
@@ -76,12 +77,13 @@ public class DataDstWriterNode {
         return prefix.isEmpty() ? child_name : String.format("%s.%s", prefix, child_name);
     }
 
-    public void addChild(String child_name, DataDstWriterNode node, Object _field_descriptor, boolean isList) {
+    public void addChild(String child_name, DataDstWriterNode node, Object _field_descriptor, boolean isList, boolean isRequired) {
         DataDstChildrenNode res = getChildren().getOrDefault(child_name, null);
         if (null == res) {
             res = new DataDstChildrenNode();
             getChildren().put(child_name, res);
             res.isList = isList;
+            res.isRequired = isRequired;
             res.fieldDescriptor = _field_descriptor;
         }
 

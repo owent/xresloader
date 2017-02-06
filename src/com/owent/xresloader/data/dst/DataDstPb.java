@@ -30,6 +30,11 @@ import static com.google.protobuf.Descriptors.FieldDescriptor.JavaType.MESSAGE;
 public class DataDstPb extends DataDstImpl {
     private Descriptors.Descriptor currentMsgDesc = null;
 
+    static private class PbAliasNode<T> {
+        public T element = null;
+        LinkedList<String> names = null;
+    };
+
     /***
      * protobuf 的描述信息生成是按文件的，所以要缓存并先生成依赖，再生成需要的文件描述数据
      */
@@ -40,19 +45,62 @@ public class DataDstPb extends DataDstImpl {
         /*** 描述信息-已加载文件描述集，用于文件描述去重(.proto文件) ***/
         public HashMap<String, DescriptorProtos.FileDescriptorProto> files = new HashMap<String, DescriptorProtos.FileDescriptorProto>();
         /*** 描述信息-消息描述集合 ***/
-        public HashMap<String, DescriptorProtos.DescriptorProto> messages = new HashMap<String, DescriptorProtos.DescriptorProto>();
+        public HashMap<String, PbAliasNode<DescriptorProtos.DescriptorProto> > messages = new HashMap<String, PbAliasNode<DescriptorProtos.DescriptorProto> >();
         /*** 描述信息-枚举描述集合 ***/
-        public HashMap<String, DescriptorProtos.EnumDescriptorProto> enums = new HashMap<String, DescriptorProtos.EnumDescriptorProto>();
+        public HashMap<String, PbAliasNode<DescriptorProtos.EnumDescriptorProto> > enums = new HashMap<String, PbAliasNode<DescriptorProtos.EnumDescriptorProto> >();
 
         // ========================== 配置描述集 ==========================
         /*** 类型信息-文件描述器集合 ***/
         public HashMap<String, Descriptors.FileDescriptor> file_descs = new HashMap<String, Descriptors.FileDescriptor>();
         /*** 类型信息-Message描述器集合 ***/
-        public HashMap<String, Descriptors.Descriptor> message_descs = new HashMap<String, Descriptors.Descriptor>();
+        public HashMap<String, PbAliasNode<Descriptors.Descriptor> > message_descs = new HashMap<String, PbAliasNode<Descriptors.Descriptor> >();
 
         // ========================== 验证器 ==========================
         HashMap<String, DataVerifyImpl> identifiers = new HashMap<String, DataVerifyImpl>();
         public PbInfoSet(){}
+    }
+
+    static <T> void append_alias_list(String short_name, String full_name, HashMap<String, PbAliasNode<T> > hashmap, T ele ) {
+        if (!short_name.isEmpty()) {
+            PbAliasNode<T> ls = hashmap.getOrDefault(short_name, null);
+            if (null == ls) {
+                ls = new PbAliasNode<T>();
+                ls.names = new LinkedList<String>();
+                hashmap.put(short_name, ls);
+            }
+            ls.element = ele;
+            if (!full_name.isEmpty()) {
+                ls.names.addLast(full_name);
+            }
+        }
+
+        if (!full_name.isEmpty()) {
+            PbAliasNode<T> ls = hashmap.getOrDefault(full_name, null);
+            if (null == ls) {
+                ls = new PbAliasNode<T>();
+                hashmap.put(full_name, ls);
+            }
+            ls.element = ele;
+        }
+    }
+
+    static <T> T get_alias_list_element(String name, HashMap<String, PbAliasNode<T> > hashmap, String type_name) {
+        PbAliasNode<T> ls = hashmap.getOrDefault(name, null);
+        if (null == ls || null == ls.element) {
+            ProgramOptions.getLoger().error("%s \"%s\" not found", type_name, name);
+            return null;
+        }
+
+        if (null == ls.names || ls.names.size() <= 1) {
+            return ls.element;
+        }
+
+        ProgramOptions.getLoger().error("there is more than one %s \"%s\" matched, please use full name. available names:", type_name, name);
+        for(String full_name: ls.names) {
+            ProgramOptions.getLoger().error("\t%s", full_name);
+        }
+
+        return null;
     }
 
     static private PbInfoSet pbs = new PbInfoSet();
@@ -60,7 +108,6 @@ public class DataDstPb extends DataDstImpl {
         if (pbs.fileNames.contains(file_path)) {
             return true;
         }
-        String package_name = "";
         try {
             // 文件描述集读取
             InputStream fis = new FileInputStream(file_path);
@@ -73,22 +120,14 @@ public class DataDstPb extends DataDstImpl {
                 }
                 pbs.files.put(fdp.getName(), fdp);
 
-                if (package_name.isEmpty()) {
-                    package_name = fdp.getPackage();
-                } else if (!package_name.equals(fdp.getPackage())) {
-                    ProgramOptions.getLoger().warn("configure protocol namespace change from %s to %s, more than one package may lead to type coverage",
-                            package_name,
-                            fdp.getPackage()
-                    );
-                    package_name = fdp.getPackage();
-                }
+                if (build_msg) {
+                    for(DescriptorProtos.EnumDescriptorProto edp: fdp.getEnumTypeList()) {
+                        append_alias_list(edp.getName(), String.format("%s.%s", fdp.getPackage(), edp.getName()), pbs.enums, edp);
+                    }
 
-                for(DescriptorProtos.EnumDescriptorProto edp: fdp.getEnumTypeList()) {
-                    pbs.enums.put(edp.getName(), edp);
-                }
-
-                for(DescriptorProtos.DescriptorProto mdp: fdp.getMessageTypeList()) {
-                    pbs.messages.put(mdp.getName(), mdp);
+                    for (DescriptorProtos.DescriptorProto mdp : fdp.getMessageTypeList()) {
+                        append_alias_list(mdp.getName(), String.format("%s.%s", fdp.getPackage(), mdp.getName()), pbs.messages, mdp);
+                    }
                 }
             }
 
@@ -112,12 +151,7 @@ public class DataDstPb extends DataDstImpl {
     }
 
     static Descriptors.Descriptor get_message_proto(String proto_name) {
-        Descriptors.Descriptor ret = pbs.message_descs.getOrDefault(proto_name, null);
-        if (null == ret) {
-            ProgramOptions.getLoger().error("protocol message %s not found.", proto_name);
-            return null;
-        }
-        return ret;
+        return get_alias_list_element(proto_name, pbs.message_descs, "protocol message");
     }
 
     static Descriptors.FileDescriptor init_pb_files(String name) {
@@ -145,7 +179,7 @@ public class DataDstPb extends DataDstImpl {
             ret = Descriptors.FileDescriptor.buildFrom(fdp, deps);
             pbs.file_descs.put(name, ret);
             for(Descriptors.Descriptor md: ret.getMessageTypes()) {
-                pbs.message_descs.put(md.getName(), md);
+                append_alias_list(md.getName(), String.format("%s.%s", fdp.getPackage(), md.getName()), pbs.message_descs, md);
             }
 
             return ret;
@@ -164,11 +198,11 @@ public class DataDstPb extends DataDstImpl {
             identify.verify_engine = pbs.identifiers.getOrDefault(identify.verifier, null);
             if (null == identify.verify_engine) {
 
-                DescriptorProtos.EnumDescriptorProto enum_desc = pbs.enums.getOrDefault(identify.verifier, null);
+                DescriptorProtos.EnumDescriptorProto enum_desc = get_alias_list_element(identify.verifier, pbs.enums, "enum type");
                 if (enum_desc != null) {
                     identify.verify_engine = new DataVerifyPbEnum(enum_desc);
                 } else {
-                    DescriptorProtos.DescriptorProto msg_desc = pbs.messages.getOrDefault(identify.verifier, null);
+                    DescriptorProtos.DescriptorProto msg_desc = get_alias_list_element(identify.verifier, pbs.messages, "message type");
                     if (msg_desc != null) {
                         identify.verify_engine = new DataVerifyPbMsg(msg_desc);
                     }

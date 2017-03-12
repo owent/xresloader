@@ -35,7 +35,7 @@ mvn package
 
 更新依赖包
 ------
-编译和打包见 [安装说明](doc/INSTALL.md\)
+编译和打包见 [安装说明](doc/INSTALL.md)
 
 
 工具命令行参数

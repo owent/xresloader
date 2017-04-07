@@ -32,7 +32,7 @@ public class SchemeDataSourceCmd extends SchemeDataSourceBase {
                 ProgramOptions.getLoger().error("Data meta %s error.Must be KEY=%s",
                         unwrap_val,
                         String.join(
-                            ProgramOptions.getInstance().dataSourceMetaDelimiter.replaceAll("\\(.)", "$1"),
+                            ProgramOptions.getInstance().dataSourceMetaDelimiter,
                             "VALUE1", "VALUE2", "VALUE3"
                         )
                 );

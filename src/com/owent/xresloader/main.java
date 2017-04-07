@@ -142,31 +142,51 @@ public class main {
             SchemeConf.getInstance().getMacroSource().clear();
             SchemeConf.getInstance().getDataSource().clear();
 
-            if (BIN == ProgramOptions.getInstance().dataSourceType) {
-                // 命令行输入模式只触发一次，并且scheme名称改成所有配置的和
-                if (i > 0) {
-                    break;
-                } else {
-                    sn = String.join(" ", ProgramOptions.getInstance().dataSourceMetas);
-                }
-            }
-
             // 1. 描述信息
             if (false == SchemeConf.getInstance().getScheme().load_scheme(sn)) {
-                ProgramOptions.getLoger().error("convert scheme \"%s\" failed", sn);
+
+                // 命令行模式下dataSourceType为默认值，也就是BIN
+                if (BIN == ProgramOptions.getInstance().dataSourceType) {
+                    // 命令行输入模式只触发一次，并且scheme名称改成所有配置的和
+                    if (i > 0) {
+                        break;
+                    } else {
+                        sn = String.join(" ", ProgramOptions.getInstance().dataSourceMetas);
+                    }
+                }
+
+                ProgramOptions.getLoger().error("convert from \"%s\" failed", sn);
+                ++ failed_count;
                 continue;
             }
+
+            // 重新组织sn
+            StringBuilder descBuilder = new StringBuilder();
+            for(SchemeConf.DataInfo di: SchemeConf.getInstance().getDataSource()) {
+                if (descBuilder.length() > 0) {
+                    descBuilder.append(',');
+                }
+                descBuilder.append(di.file_path);
+
+                if (!di.file_path.contains(di.table_name)) {
+                    descBuilder.append('|');
+                    descBuilder.append(di.table_name);
+                }
+            }
+            sn = descBuilder.toString();
 
             // 2. 数据工作簿
             Class ds_clazz = DataSrcExcel.class;
             DataSrcImpl ds = DataSrcImpl.create(ds_clazz);
             if (null == ds) {
                 ProgramOptions.getLoger().error("create data source class \"%s\" failed", ds_clazz.getName());
+                ++ failed_count;
                 continue;
             }
             ret = ds.init();
             if (ret < 0) {
                 ProgramOptions.getLoger().error("init data source class \"%s\" failed", ds_clazz.getName());
+                ++ failed_count;
                 continue;
             }
 
@@ -178,6 +198,7 @@ public class main {
                     break;
                 default:
                     ProgramOptions.getLoger().error("protocol type \"%s\" invalid", ProgramOptions.getInstance().protocol.toString());
+                    ++ failed_count;
                     break;
             }
 
@@ -185,6 +206,7 @@ public class main {
                 continue;
             if (false == protoDesc.init()) {
                 ProgramOptions.getLoger().error("protocol desc \"%s\" init failed", ProgramOptions.getInstance().protocol.toString());
+                ++ failed_count;
                 continue;
             }
 
@@ -194,10 +216,9 @@ public class main {
                 continue;
 
             ProgramOptions.getLoger().trace(
-                "convert scheme \"%s\" to \"%s\" started ...",
+                "convert from \"%s\" to \"%s\" started (protocol=%s) ...",
                 sn,
-                SchemeConf.getInstance().getOutputFile(),
-                SchemeConf.getInstance().getKey().getEncoding()
+                SchemeConf.getInstance().getOutputFile(), SchemeConf.getInstance().getProtoName()
             );
 
             try {
@@ -224,7 +245,7 @@ public class main {
             }
 
             ProgramOptions.getLoger().info(
-                "convert scheme \"%s\" to \"%s\" success.(charset: %s)",
+                "convert from \"%s\" to \"%s\" success.(charset: %s)",
                 sn,
                 SchemeConf.getInstance().getOutputFile(),
                 SchemeConf.getInstance().getKey().getEncoding()

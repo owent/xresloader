@@ -144,20 +144,20 @@ public class main {
 
             // 1. 描述信息
             if (false == SchemeConf.getInstance().getScheme().load_scheme(sn)) {
-
-                // 命令行模式下dataSourceType为默认值，也就是BIN
-                if (BIN == ProgramOptions.getInstance().dataSourceType) {
-                    // 命令行输入模式只触发一次，并且scheme名称改成所有配置的和
-                    if (i > 0) {
-                        break;
-                    } else {
-                        sn = String.join(" ", ProgramOptions.getInstance().dataSourceMetas);
-                    }
-                }
-
+                sn = String.join(" ", ProgramOptions.getInstance().dataSourceMetas);
                 ProgramOptions.getLoger().error("convert from \"%s\" failed", sn);
                 ++ failed_count;
                 continue;
+            }
+
+            // 命令行模式下dataSourceType为默认值，也就是BIN
+            if (false == SchemeConf.getInstance().getScheme().isSupportMultipleScheme()) {
+                // 命令行输入模式只触发一次，并且scheme名称改成所有配置的和
+                if (i > 0) {
+                    break;
+                } else {
+                    sn = String.join(" ", ProgramOptions.getInstance().dataSourceMetas);
+                }
             }
 
             // 重新组织sn

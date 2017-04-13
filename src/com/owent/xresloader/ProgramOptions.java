@@ -7,6 +7,7 @@ import org.apache.logging.log4j.Logger;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.nio.charset.UnsupportedCharsetException;
 import java.util.Properties;
 import java.util.regex.Pattern;
 import java.util.regex.PatternSyntaxException;
@@ -465,7 +466,15 @@ public class ProgramOptions {
             System.err.println(String.format("[ERROR] Get application name failed.\n%s", e.toString()));
         }
 
-        logger = LogManager.getFormatterLogger(name);
+        try {
+            logger = LogManager.getFormatterLogger(name);
+        } catch (UnsupportedCharsetException e) {
+            System.err.println(String.format("[WARN] Unknown console charset %s, we will try use UTF-8 for console output", e.getCharsetName()));
+        }
+
+        if (null == logger) {
+            //logger = LogManager.get
+        }
         return logger;
     }
 }

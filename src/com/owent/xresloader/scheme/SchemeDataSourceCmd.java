@@ -78,4 +78,8 @@ public class SchemeDataSourceCmd extends SchemeDataSourceBase {
 
         return ret;
     }
+
+    public boolean isSupportMultipleScheme() {
+        return false;
+    }
 }

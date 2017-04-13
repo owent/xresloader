@@ -13,8 +13,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
-import java.util.HashMap;
-import java.util.LinkedList;
+import java.util.*;
 import java.util.regex.Pattern;
 
 /**
@@ -155,7 +154,7 @@ public class ExcelEngine {
         }
 
         CellValue cv = null;
-        if (Cell.CELL_TYPE_FORMULA == c.getCellType()) {
+        if (CellType.FORMULA == c.getCellTypeEnum()) {
             if (null != evalor)
                 cv = evalor.evaluate(c);
             else {
@@ -164,17 +163,17 @@ public class ExcelEngine {
             }
         }
 
-        int type = (null == cv)? c.getCellType(): cv.getCellType();
+        CellType type = (null == cv)? c.getCellTypeEnum(): cv.getCellTypeEnum();
         switch (type) {
-            case Cell.CELL_TYPE_BLANK:
+            case BLANK:
                 return ret;
-            case Cell.CELL_TYPE_BOOLEAN:
+            case BOOLEAN:
                 return ret.set(String.valueOf((null == cv) ? c.getBooleanCellValue() : cv.getBooleanValue()));
-            case Cell.CELL_TYPE_ERROR:
+            case ERROR:
                 return ret.set(String.valueOf((null == cv) ? c.getErrorCellValue() : cv.getErrorValue()));
-            case Cell.CELL_TYPE_FORMULA:
+            case FORMULA:
                 return (null == cv)? ret.set(c.getCellFormula()): ret;
-            case Cell.CELL_TYPE_NUMERIC:
+            case NUMERIC:
                 if(DateUtil.isCellDateFormatted(c)) {
                     // 参照POI DateUtil.isADateFormat函数，去除无效字符
                     String fs = c.getCellStyle().getDataFormatString()
@@ -216,7 +215,7 @@ public class ExcelEngine {
                 }
 
                 return ret.set(String.valueOf((null == cv) ? c.getNumericCellValue() : cv.getNumberValue()));
-            case Cell.CELL_TYPE_STRING:
+            case STRING:
                 //return ret.set(tryMacro((null == cv) ? c.getStringCellValue().trim() : cv.getStringValue()));
                 return ret.set((null == cv) ? c.getStringCellValue().trim() : cv.getStringValue());
             default:
@@ -255,31 +254,31 @@ public class ExcelEngine {
             return ret;
 
         CellValue cv = null;
-        if (Cell.CELL_TYPE_FORMULA == c.getCellType()) {
+        if (CellType.FORMULA == c.getCellTypeEnum()) {
             if (null != evalor)
                 cv = evalor.evaluate(c);
             else
                 return ret;
         }
 
-        int type = (null == cv)? c.getCellType(): cv.getCellType();
+        CellType type = (null == cv)? c.getCellTypeEnum(): cv.getCellTypeEnum();
         switch (type) {
-            case Cell.CELL_TYPE_BLANK:
+            case BLANK:
                 return ret;
-            case Cell.CELL_TYPE_BOOLEAN:
+            case BOOLEAN:
                 if (null != col.verify_engine) {
                     return ret.set(Long.valueOf(col.verify_engine.get(c.getBooleanCellValue() ? 1 : 0)));
                 } else {
                     return ret.set(c.getBooleanCellValue() ? 1L : 0L);
                 }
-            case Cell.CELL_TYPE_ERROR:
+            case ERROR:
                 return ret;
-            case Cell.CELL_TYPE_FORMULA:
+            case FORMULA:
                 return ret;
-            case Cell.CELL_TYPE_NUMERIC: {
+            case NUMERIC: {
                 long val = 0;
                 if (DateUtil.isCellDateFormatted(c)) {
-                    val = c.getDateCellValue().getTime() / 1000;
+                    val = dateToUnixTimestamp(c.getDateCellValue());
                 } else {
                     val = Math.round(c.getNumericCellValue());
                 }
@@ -290,7 +289,7 @@ public class ExcelEngine {
                     return ret.set(val);
                 }
             }
-            case Cell.CELL_TYPE_STRING: {
+            case STRING: {
                 String val = c.getStringCellValue().trim();
                 if (val.isEmpty()) {
                     return ret;
@@ -343,29 +342,29 @@ public class ExcelEngine {
             return ret;
 
         CellValue cv = null;
-        if (Cell.CELL_TYPE_FORMULA == c.getCellType()) {
+        if (CellType.FORMULA == c.getCellTypeEnum()) {
             if (null != evalor)
                 cv = evalor.evaluate(c);
             else
                 return ret;
         }
 
-        int type = (null == cv)? c.getCellType(): cv.getCellType();
+        CellType type = (null == cv)? c.getCellTypeEnum(): cv.getCellTypeEnum();
         switch (type) {
-            case Cell.CELL_TYPE_BLANK:
+            case BLANK:
                 return ret;
-            case Cell.CELL_TYPE_BOOLEAN:
+            case BOOLEAN:
                 return ret.set(c.getBooleanCellValue() ? 1.0 : 0.0);
-            case Cell.CELL_TYPE_ERROR:
+            case ERROR:
                 return ret;
-            case Cell.CELL_TYPE_FORMULA:
+            case FORMULA:
                 return ret;
-            case Cell.CELL_TYPE_NUMERIC:
+            case NUMERIC:
                 if(DateUtil.isCellDateFormatted(c)) {
-                    return ret.set((double) c.getDateCellValue().getTime() / 1000);
+                    return ret.set((double) dateToUnixTimestamp(c.getDateCellValue()));
                 }
                 return ret.set(c.getNumericCellValue());
-            case Cell.CELL_TYPE_STRING: {
+            case STRING: {
                 String val = c.getStringCellValue().trim();
                 if (val.isEmpty()) {
                     return ret;
@@ -415,26 +414,26 @@ public class ExcelEngine {
             return ret;
 
         CellValue cv = null;
-        if (Cell.CELL_TYPE_FORMULA == c.getCellType()) {
+        if (CellType.FORMULA == c.getCellTypeEnum()) {
             if (null != evalor)
                 cv = evalor.evaluate(c);
             else
                 return ret.set(true);
         }
 
-        int type = (null == cv)? c.getCellType(): cv.getCellType();
+        CellType type = (null == cv)? c.getCellTypeEnum(): cv.getCellTypeEnum();
         switch (type) {
-            case Cell.CELL_TYPE_BLANK:
+            case BLANK:
                 return ret;
-            case Cell.CELL_TYPE_BOOLEAN:
+            case BOOLEAN:
                 return ret.set(c.getBooleanCellValue());
-            case Cell.CELL_TYPE_ERROR:
+            case ERROR:
                 return ret;
-            case Cell.CELL_TYPE_FORMULA:
+            case FORMULA:
                 return ret;
-            case Cell.CELL_TYPE_NUMERIC:
+            case NUMERIC:
                 return ret.set(c.getNumericCellValue() != 0);
-            case Cell.CELL_TYPE_STRING:
+            case STRING:
                 String item = tryMacro(c.getStringCellValue().trim()).toLowerCase();
                 if (item.isEmpty()) {
                     return ret;
@@ -444,5 +443,25 @@ public class ExcelEngine {
             default:
                 return ret;
         }
+    }
+
+    static private long dateToUnixTimestamp(Date d) {
+        if (null == d) {
+            return 0;
+        }
+
+        Calendar c = new GregorianCalendar();
+        c.setTime(d);
+        int y = c.get(Calendar.YEAR);
+        // @see Date.getYear();
+        // unix timstamp时间搓是负数的都认为日期无效，仅时间有效
+        if (y <= 1970) {
+            //int day = c.get(Calendar.DAY_OF_YEAR);
+            int h = c.get(Calendar.HOUR_OF_DAY);
+            int m = c.get(Calendar.MINUTE);
+            int s = c.get(Calendar.SECOND);
+            return h * 3600 + m *60 + s;
+        }
+        return d.getTime() / 1000;
     }
 }

@@ -69,4 +69,8 @@ public abstract class SchemeDataSourceBase implements SchemeDataSourceImpl {
 
         return true;
     }
+
+    public boolean isSupportMultipleScheme() {
+        return true;
+    }
 }

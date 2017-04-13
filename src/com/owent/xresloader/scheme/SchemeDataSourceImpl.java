@@ -8,4 +8,6 @@ public interface SchemeDataSourceImpl {
     int load();
 
     boolean load_scheme(String table);
+
+    boolean isSupportMultipleScheme();
 }

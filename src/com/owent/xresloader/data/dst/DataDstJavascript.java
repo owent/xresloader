@@ -25,7 +25,7 @@ public class DataDstJavascript extends DataDstJava {
             endl = " ";
             ident = "";
         } else {
-            endl = System.getProperty("line.separator", "\n");
+            endl = getSystemEndl();
 
             ident = "";
             for (int i = 0; i < ProgramOptions.getInstance().prettyIndent; ++ i) {

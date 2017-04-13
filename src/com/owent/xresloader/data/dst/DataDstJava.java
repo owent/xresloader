@@ -28,6 +28,20 @@ public abstract class DataDstJava extends DataDstImpl {
         }
     }
 
+    private String systemEndl = null;
+
+    public String getSystemEndl() {
+        if (null != systemEndl) {
+            return systemEndl;
+        }
+
+        systemEndl = System.getProperty("line.separator", "\n");
+        if (null == systemEndl || systemEndl.isEmpty()) {
+            systemEndl = "\r\n";
+        }
+        return systemEndl;
+    }
+
     /**
      * @return 协议处理器名字
      */

@@ -7,6 +7,7 @@
 #include <algorithm>
 
 #include <google/protobuf/stubs/common.h>
+#include <google/protobuf/stubs/port.h>
 #include <google/protobuf/stubs/once.h>
 #include <google/protobuf/io/coded_stream.h>
 #include <google/protobuf/wire_format_lite_inl.h>
@@ -25,6 +26,7 @@ const ::google::protobuf::internal::GeneratedMessageReflection*
 }  // namespace
 
 
+void protobuf_AssignDesc_dep_5flevel2_2eproto() GOOGLE_ATTRIBUTE_COLD;
 void protobuf_AssignDesc_dep_5flevel2_2eproto() {
   protobuf_AddDesc_dep_5flevel2_2eproto();
   const ::google::protobuf::FileDescriptor* file =
@@ -37,55 +39,69 @@ void protobuf_AssignDesc_dep_5flevel2_2eproto() {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(dep2_cfg, level_),
   };
   dep2_cfg_reflection_ =
-    new ::google::protobuf::internal::GeneratedMessageReflection(
+    ::google::protobuf::internal::GeneratedMessageReflection::NewGeneratedMessageReflection(
       dep2_cfg_descriptor_,
-      dep2_cfg::default_instance_,
+      dep2_cfg::internal_default_instance(),
       dep2_cfg_offsets_,
-      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(dep2_cfg, _has_bits_[0]),
-      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(dep2_cfg, _unknown_fields_),
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(dep2_cfg, _has_bits_),
       -1,
-      ::google::protobuf::DescriptorPool::generated_pool(),
-      ::google::protobuf::MessageFactory::generated_factory(),
-      sizeof(dep2_cfg));
+      -1,
+      sizeof(dep2_cfg),
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(dep2_cfg, _internal_metadata_));
 }
 
 namespace {
 
 GOOGLE_PROTOBUF_DECLARE_ONCE(protobuf_AssignDescriptors_once_);
-inline void protobuf_AssignDescriptorsOnce() {
+void protobuf_AssignDescriptorsOnce() {
   ::google::protobuf::GoogleOnceInit(&protobuf_AssignDescriptors_once_,
                  &protobuf_AssignDesc_dep_5flevel2_2eproto);
 }
 
+void protobuf_RegisterTypes(const ::std::string&) GOOGLE_ATTRIBUTE_COLD;
 void protobuf_RegisterTypes(const ::std::string&) {
   protobuf_AssignDescriptorsOnce();
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
-    dep2_cfg_descriptor_, &dep2_cfg::default_instance());
+      dep2_cfg_descriptor_, dep2_cfg::internal_default_instance());
 }
 
 }  // namespace
 
 void protobuf_ShutdownFile_dep_5flevel2_2eproto() {
-  delete dep2_cfg::default_instance_;
+  dep2_cfg_default_instance_.Shutdown();
   delete dep2_cfg_reflection_;
 }
 
-void protobuf_AddDesc_dep_5flevel2_2eproto() {
-  static bool already_here = false;
-  if (already_here) return;
-  already_here = true;
+void protobuf_InitDefaults_dep_5flevel2_2eproto_impl() {
   GOOGLE_PROTOBUF_VERIFY_VERSION;
 
+  ::google::protobuf::internal::GetEmptyString();
+  dep2_cfg_default_instance_.DefaultConstruct();
+  dep2_cfg_default_instance_.get_mutable()->InitAsDefaultInstance();
+}
+
+GOOGLE_PROTOBUF_DECLARE_ONCE(protobuf_InitDefaults_dep_5flevel2_2eproto_once_);
+void protobuf_InitDefaults_dep_5flevel2_2eproto() {
+  ::google::protobuf::GoogleOnceInit(&protobuf_InitDefaults_dep_5flevel2_2eproto_once_,
+                 &protobuf_InitDefaults_dep_5flevel2_2eproto_impl);
+}
+void protobuf_AddDesc_dep_5flevel2_2eproto_impl() {
+  GOOGLE_PROTOBUF_VERIFY_VERSION;
+
+  protobuf_InitDefaults_dep_5flevel2_2eproto();
   ::google::protobuf::DescriptorPool::InternalAddGeneratedFile(
     "\n\020dep_level2.proto\"%\n\010dep2_cfg\022\n\n\002id\030\001 \001"
     "(\r\022\r\n\005level\030\002 \001(\t", 57);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "dep_level2.proto", &protobuf_RegisterTypes);
-  dep2_cfg::default_instance_ = new dep2_cfg();
-  dep2_cfg::default_instance_->InitAsDefaultInstance();
   ::google::protobuf::internal::OnShutdown(&protobuf_ShutdownFile_dep_5flevel2_2eproto);
 }
 
+GOOGLE_PROTOBUF_DECLARE_ONCE(protobuf_AddDesc_dep_5flevel2_2eproto_once_);
+void protobuf_AddDesc_dep_5flevel2_2eproto() {
+  ::google::protobuf::GoogleOnceInit(&protobuf_AddDesc_dep_5flevel2_2eproto_once_,
+                 &protobuf_AddDesc_dep_5flevel2_2eproto_impl);
+}
 // Force AddDescriptors() to be called at static initialization time.
 struct StaticDescriptorInitializer_dep_5flevel2_2eproto {
   StaticDescriptorInitializer_dep_5flevel2_2eproto() {
@@ -93,15 +109,26 @@ struct StaticDescriptorInitializer_dep_5flevel2_2eproto {
   }
 } static_descriptor_initializer_dep_5flevel2_2eproto_;
 
+namespace {
+
+static void MergeFromFail(int line) GOOGLE_ATTRIBUTE_COLD GOOGLE_ATTRIBUTE_NORETURN;
+static void MergeFromFail(int line) {
+  ::google::protobuf::internal::MergeFromFail(__FILE__, line);
+}
+
+}  // namespace
+
+
 // ===================================================================
 
-#ifndef _MSC_VER
+#if !defined(_MSC_VER) || _MSC_VER >= 1900
 const int dep2_cfg::kIdFieldNumber;
 const int dep2_cfg::kLevelFieldNumber;
-#endif  // !_MSC_VER
+#endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
 
 dep2_cfg::dep2_cfg()
-  : ::google::protobuf::Message() {
+  : ::google::protobuf::Message(), _internal_metadata_(NULL) {
+  if (this != internal_default_instance()) protobuf_InitDefaults_dep_5flevel2_2eproto();
   SharedCtor();
   // @@protoc_insertion_point(constructor:dep2_cfg)
 }
@@ -110,18 +137,17 @@ void dep2_cfg::InitAsDefaultInstance() {
 }
 
 dep2_cfg::dep2_cfg(const dep2_cfg& from)
-  : ::google::protobuf::Message() {
+  : ::google::protobuf::Message(),
+    _internal_metadata_(NULL) {
   SharedCtor();
-  MergeFrom(from);
+  UnsafeMergeFrom(from);
   // @@protoc_insertion_point(copy_constructor:dep2_cfg)
 }
 
 void dep2_cfg::SharedCtor() {
-  ::google::protobuf::internal::GetEmptyString();
   _cached_size_ = 0;
+  level_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   id_ = 0u;
-  level_ = const_cast< ::std::string*>(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  ::memset(_has_bits_, 0, sizeof(_has_bits_));
 }
 
 dep2_cfg::~dep2_cfg() {
@@ -130,11 +156,7 @@ dep2_cfg::~dep2_cfg() {
 }
 
 void dep2_cfg::SharedDtor() {
-  if (level_ != &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
-    delete level_;
-  }
-  if (this != default_instance_) {
-  }
+  level_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
 
 void dep2_cfg::SetCachedSize(int size) const {
@@ -148,32 +170,37 @@ const ::google::protobuf::Descriptor* dep2_cfg::descriptor() {
 }
 
 const dep2_cfg& dep2_cfg::default_instance() {
-  if (default_instance_ == NULL) protobuf_AddDesc_dep_5flevel2_2eproto();
-  return *default_instance_;
+  protobuf_InitDefaults_dep_5flevel2_2eproto();
+  return *internal_default_instance();
 }
 
-dep2_cfg* dep2_cfg::default_instance_ = NULL;
+::google::protobuf::internal::ExplicitlyConstructed<dep2_cfg> dep2_cfg_default_instance_;
 
-dep2_cfg* dep2_cfg::New() const {
-  return new dep2_cfg;
+dep2_cfg* dep2_cfg::New(::google::protobuf::Arena* arena) const {
+  dep2_cfg* n = new dep2_cfg;
+  if (arena != NULL) {
+    arena->Own(n);
+  }
+  return n;
 }
 
 void dep2_cfg::Clear() {
-  if (_has_bits_[0 / 32] & 3) {
+// @@protoc_insertion_point(message_clear_start:dep2_cfg)
+  if (_has_bits_[0 / 32] & 3u) {
     id_ = 0u;
     if (has_level()) {
-      if (level_ != &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
-        level_->clear();
-      }
+      level_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
     }
   }
-  ::memset(_has_bits_, 0, sizeof(_has_bits_));
-  mutable_unknown_fields()->Clear();
+  _has_bits_.Clear();
+  if (_internal_metadata_.have_unknown_fields()) {
+    mutable_unknown_fields()->Clear();
+  }
 }
 
 bool dep2_cfg::MergePartialFromCodedStream(
     ::google::protobuf::io::CodedInputStream* input) {
-#define DO_(EXPRESSION) if (!(EXPRESSION)) goto failure
+#define DO_(EXPRESSION) if (!GOOGLE_PREDICT_TRUE(EXPRESSION)) goto failure
   ::google::protobuf::uint32 tag;
   // @@protoc_insertion_point(parse_start:dep2_cfg)
   for (;;) {
@@ -184,10 +211,10 @@ bool dep2_cfg::MergePartialFromCodedStream(
       // optional uint32 id = 1;
       case 1: {
         if (tag == 8) {
+          set_has_id();
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    ::google::protobuf::uint32, ::google::protobuf::internal::WireFormatLite::TYPE_UINT32>(
                  input, &id_)));
-          set_has_id();
         } else {
           goto handle_unusual;
         }
@@ -204,7 +231,7 @@ bool dep2_cfg::MergePartialFromCodedStream(
           ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
             this->level().data(), this->level().length(),
             ::google::protobuf::internal::WireFormat::PARSE,
-            "level");
+            "dep2_cfg.level");
         } else {
           goto handle_unusual;
         }
@@ -247,20 +274,21 @@ void dep2_cfg::SerializeWithCachedSizes(
     ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
       this->level().data(), this->level().length(),
       ::google::protobuf::internal::WireFormat::SERIALIZE,
-      "level");
+      "dep2_cfg.level");
     ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
       2, this->level(), output);
   }
 
-  if (!unknown_fields().empty()) {
+  if (_internal_metadata_.have_unknown_fields()) {
     ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
         unknown_fields(), output);
   }
   // @@protoc_insertion_point(serialize_end:dep2_cfg)
 }
 
-::google::protobuf::uint8* dep2_cfg::SerializeWithCachedSizesToArray(
-    ::google::protobuf::uint8* target) const {
+::google::protobuf::uint8* dep2_cfg::InternalSerializeWithCachedSizesToArray(
+    bool deterministic, ::google::protobuf::uint8* target) const {
+  (void)deterministic; // Unused
   // @@protoc_insertion_point(serialize_to_array_start:dep2_cfg)
   // optional uint32 id = 1;
   if (has_id()) {
@@ -272,13 +300,13 @@ void dep2_cfg::SerializeWithCachedSizes(
     ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
       this->level().data(), this->level().length(),
       ::google::protobuf::internal::WireFormat::SERIALIZE,
-      "level");
+      "dep2_cfg.level");
     target =
       ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
         2, this->level(), target);
   }
 
-  if (!unknown_fields().empty()) {
+  if (_internal_metadata_.have_unknown_fields()) {
     target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
         unknown_fields(), target);
   }
@@ -286,10 +314,11 @@ void dep2_cfg::SerializeWithCachedSizes(
   return target;
 }
 
-int dep2_cfg::ByteSize() const {
-  int total_size = 0;
+size_t dep2_cfg::ByteSizeLong() const {
+// @@protoc_insertion_point(message_byte_size_start:dep2_cfg)
+  size_t total_size = 0;
 
-  if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
+  if (_has_bits_[0 / 32] & 3u) {
     // optional uint32 id = 1;
     if (has_id()) {
       total_size += 1 +
@@ -305,52 +334,71 @@ int dep2_cfg::ByteSize() const {
     }
 
   }
-  if (!unknown_fields().empty()) {
+  if (_internal_metadata_.have_unknown_fields()) {
     total_size +=
       ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
         unknown_fields());
   }
+  int cached_size = ::google::protobuf::internal::ToCachedSize(total_size);
   GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
-  _cached_size_ = total_size;
+  _cached_size_ = cached_size;
   GOOGLE_SAFE_CONCURRENT_WRITES_END();
   return total_size;
 }
 
 void dep2_cfg::MergeFrom(const ::google::protobuf::Message& from) {
-  GOOGLE_CHECK_NE(&from, this);
+// @@protoc_insertion_point(generalized_merge_from_start:dep2_cfg)
+  if (GOOGLE_PREDICT_FALSE(&from == this)) MergeFromFail(__LINE__);
   const dep2_cfg* source =
-    ::google::protobuf::internal::dynamic_cast_if_available<const dep2_cfg*>(
-      &from);
+      ::google::protobuf::internal::DynamicCastToGenerated<const dep2_cfg>(
+          &from);
   if (source == NULL) {
+  // @@protoc_insertion_point(generalized_merge_from_cast_fail:dep2_cfg)
     ::google::protobuf::internal::ReflectionOps::Merge(from, this);
   } else {
-    MergeFrom(*source);
+  // @@protoc_insertion_point(generalized_merge_from_cast_success:dep2_cfg)
+    UnsafeMergeFrom(*source);
   }
 }
 
 void dep2_cfg::MergeFrom(const dep2_cfg& from) {
-  GOOGLE_CHECK_NE(&from, this);
+// @@protoc_insertion_point(class_specific_merge_from_start:dep2_cfg)
+  if (GOOGLE_PREDICT_TRUE(&from != this)) {
+    UnsafeMergeFrom(from);
+  } else {
+    MergeFromFail(__LINE__);
+  }
+}
+
+void dep2_cfg::UnsafeMergeFrom(const dep2_cfg& from) {
+  GOOGLE_DCHECK(&from != this);
   if (from._has_bits_[0 / 32] & (0xffu << (0 % 32))) {
     if (from.has_id()) {
       set_id(from.id());
     }
     if (from.has_level()) {
-      set_level(from.level());
+      set_has_level();
+      level_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.level_);
     }
   }
-  mutable_unknown_fields()->MergeFrom(from.unknown_fields());
+  if (from._internal_metadata_.have_unknown_fields()) {
+    ::google::protobuf::UnknownFieldSet::MergeToInternalMetdata(
+      from.unknown_fields(), &_internal_metadata_);
+  }
 }
 
 void dep2_cfg::CopyFrom(const ::google::protobuf::Message& from) {
+// @@protoc_insertion_point(generalized_copy_from_start:dep2_cfg)
   if (&from == this) return;
   Clear();
   MergeFrom(from);
 }
 
 void dep2_cfg::CopyFrom(const dep2_cfg& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:dep2_cfg)
   if (&from == this) return;
   Clear();
-  MergeFrom(from);
+  UnsafeMergeFrom(from);
 }
 
 bool dep2_cfg::IsInitialized() const {
@@ -359,13 +407,15 @@ bool dep2_cfg::IsInitialized() const {
 }
 
 void dep2_cfg::Swap(dep2_cfg* other) {
-  if (other != this) {
-    std::swap(id_, other->id_);
-    std::swap(level_, other->level_);
-    std::swap(_has_bits_[0], other->_has_bits_[0]);
-    _unknown_fields_.Swap(&other->_unknown_fields_);
-    std::swap(_cached_size_, other->_cached_size_);
-  }
+  if (other == this) return;
+  InternalSwap(other);
+}
+void dep2_cfg::InternalSwap(dep2_cfg* other) {
+  std::swap(id_, other->id_);
+  level_.Swap(&other->level_);
+  std::swap(_has_bits_[0], other->_has_bits_[0]);
+  _internal_metadata_.Swap(&other->_internal_metadata_);
+  std::swap(_cached_size_, other->_cached_size_);
 }
 
 ::google::protobuf::Metadata dep2_cfg::GetMetadata() const {
@@ -376,6 +426,91 @@ void dep2_cfg::Swap(dep2_cfg* other) {
   return metadata;
 }
 
+#if PROTOBUF_INLINE_NOT_IN_HEADERS
+// dep2_cfg
+
+// optional uint32 id = 1;
+bool dep2_cfg::has_id() const {
+  return (_has_bits_[0] & 0x00000001u) != 0;
+}
+void dep2_cfg::set_has_id() {
+  _has_bits_[0] |= 0x00000001u;
+}
+void dep2_cfg::clear_has_id() {
+  _has_bits_[0] &= ~0x00000001u;
+}
+void dep2_cfg::clear_id() {
+  id_ = 0u;
+  clear_has_id();
+}
+::google::protobuf::uint32 dep2_cfg::id() const {
+  // @@protoc_insertion_point(field_get:dep2_cfg.id)
+  return id_;
+}
+void dep2_cfg::set_id(::google::protobuf::uint32 value) {
+  set_has_id();
+  id_ = value;
+  // @@protoc_insertion_point(field_set:dep2_cfg.id)
+}
+
+// optional string level = 2;
+bool dep2_cfg::has_level() const {
+  return (_has_bits_[0] & 0x00000002u) != 0;
+}
+void dep2_cfg::set_has_level() {
+  _has_bits_[0] |= 0x00000002u;
+}
+void dep2_cfg::clear_has_level() {
+  _has_bits_[0] &= ~0x00000002u;
+}
+void dep2_cfg::clear_level() {
+  level_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  clear_has_level();
+}
+const ::std::string& dep2_cfg::level() const {
+  // @@protoc_insertion_point(field_get:dep2_cfg.level)
+  return level_.GetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+void dep2_cfg::set_level(const ::std::string& value) {
+  set_has_level();
+  level_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
+  // @@protoc_insertion_point(field_set:dep2_cfg.level)
+}
+void dep2_cfg::set_level(const char* value) {
+  set_has_level();
+  level_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
+  // @@protoc_insertion_point(field_set_char:dep2_cfg.level)
+}
+void dep2_cfg::set_level(const char* value, size_t size) {
+  set_has_level();
+  level_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+      ::std::string(reinterpret_cast<const char*>(value), size));
+  // @@protoc_insertion_point(field_set_pointer:dep2_cfg.level)
+}
+::std::string* dep2_cfg::mutable_level() {
+  set_has_level();
+  // @@protoc_insertion_point(field_mutable:dep2_cfg.level)
+  return level_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+::std::string* dep2_cfg::release_level() {
+  // @@protoc_insertion_point(field_release:dep2_cfg.level)
+  clear_has_level();
+  return level_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+void dep2_cfg::set_allocated_level(::std::string* level) {
+  if (level != NULL) {
+    set_has_level();
+  } else {
+    clear_has_level();
+  }
+  level_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), level);
+  // @@protoc_insertion_point(field_set_allocated:dep2_cfg.level)
+}
+
+inline const dep2_cfg* dep2_cfg::internal_default_instance() {
+  return &dep2_cfg_default_instance_.get();
+}
+#endif  // PROTOBUF_INLINE_NOT_IN_HEADERS
 
 // @@protoc_insertion_point(namespace_scope)
 

@@ -87,7 +87,6 @@ public class DataDstPb extends DataDstImpl {
     static <T> T get_alias_list_element(String name, HashMap<String, PbAliasNode<T> > hashmap, String type_name) {
         PbAliasNode<T> ls = hashmap.getOrDefault(name, null);
         if (null == ls || null == ls.element) {
-            ProgramOptions.getLoger().error("%s \"%s\" not found", type_name, name);
             return null;
         }
 
@@ -210,6 +209,8 @@ public class DataDstPb extends DataDstImpl {
 
                 if (null != identify.verify_engine) {
                     pbs.identifiers.put(identify.verifier, identify.verify_engine);
+                } else {
+                    ProgramOptions.getLoger().error("enum or message \"%s\" not found", identify.verifier);
                 }
             }
         }

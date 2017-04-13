@@ -268,13 +268,23 @@ public class main {
             while(rem.find()) {
                 String item = rem.group();
                 if (item.charAt(0) == '"' && item.charAt(item.length() - 1) == '"') {
-                    item = item.substring(1, item.length() - 1);
+                    if (item.length() > 2) {
+                        item = item.substring(1, item.length() - 1);
+                    } else {
+                        item = "";
+                    }
                     // 如果需要转义功能的话
                 } else if (item.charAt(0) == '\'' && item.charAt(item.length() - 1) == '\'') {
-                    item = item.substring(1, item.length() - 1);
+                    if (item.length() > 2) {
+                        item = item.substring(1, item.length() - 1);
+                    } else {
+                        item = "";
+                    }
                 }
 
-                res.add(item);
+                if (item.length() > 0) {
+                    res.add(item);
+                }
             }
 
 

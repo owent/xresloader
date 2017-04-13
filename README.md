@@ -8,59 +8,47 @@ xresloader
 当前构建状态 | [![Build Status](https://travis-ci.org/xresloader/xresloader.svg?branch=master)](https://travis-ci.org/xresloader/xresloader) |
 
 
-Gitter
-------
 [![Gitter](https://badges.gitter.im/xresloader/xresloader.svg)](https://gitter.im/xresloader/xresloader?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
 
 License
 ------
 [MIT License](LICENSE)
 
-编译和打包
+GET START
 ======
+使用步骤
 
-+ 本项目使用[apache maven](https://maven.apache.org/)管理包依赖和打包构建流程。
-+ JDK 需要1.8或以上版本
+1. 定义protobuf的协议文件(.proto)
+2. 使用protobuf官方工具****protoc**把.proto文件转换成pb
+3. 编写Excel,并且字段名和protobuf协议字段名和层级关系对应
+4. 执行命令 java -jar XRESLOADER.jar [参数...]，传入excel文件名、表名和其他规则。（参数和选项见 [工具命令行参数](#工具命令行参数) ）
+5. 使用对应的语言或者工具库加载导出的数据。（编码规则和解析工具见 [关于加载导出的数据](#关于加载导出的数据) ）
 
-```bash
-# 编译
-mvn compile
-# 打包
-mvn package
-```
-
-以上命令会自动下载依赖文件、包和插件。
-
-编译完成后，输出的结果默认会放在 ***target*** 目录下。
-
-更新依赖包
-------
-编译和打包见 [安装说明](doc/INSTALL.md)
-
+> + [sample](sample)目录下有所有功能的示例excel、配置、协议和对sample数据的几种读取方式代码
 
 工具命令行参数
 ======
 执行方式    java -jar xresloader.jar [参数...]
 
-比如：（生成源和结果在sample目录下, xresloader的路径为 ../target/xresloader-1.3.0.2.jar）
+比如：（生成源和结果在sample目录下, xresloader的路径为 ../target/xresloader-1.3.3.0.jar）
 
 ```bash
 cd sample;
 
 # Excel=>二进制（按协议） 
-java -client -jar ../target/xresloader-1.3.0.2.jar -t bin -p protobuf -f proto_v3/kind.pb -s 资源转换示例.xlsx -m scheme_kind -o proto_v3
+java -client -jar ../target/xresloader-1.3.3.0.jar -t bin -p protobuf -f proto_v3/kind.pb -s 资源转换示例.xlsx -m scheme_kind -o proto_v3
 
 # Excel=>Lua，并重命名输出文件 
-java -client -jar ../target/xresloader-1.3.0.2.jar -t lua -p protobuf -f proto_v3/kind.pb --pretty 4 -s 资源转换示例.xlsx -m scheme_kind -n "/(?i)\.bin$/\.lua/" -o proto_v3
+java -client -jar ../target/xresloader-1.3.3.0.jar -t lua -p protobuf -f proto_v3/kind.pb --pretty 4 -s 资源转换示例.xlsx -m scheme_kind -n "/(?i)\.bin$/\.lua/" -o proto_v3
 
 # Excel=>Javascript，并重命名输出文件， 并把数据都导入到全局变量sample
-java -client -jar ../target/xresloader-1.3.0.2.jar -t js -p protobuf -f proto_v3/kind.pb --pretty 2 -s 资源转换示例.xlsx -m scheme_kind -n "/(?i)\.bin$/\.js/" --javascript-global sample -o proto_v3
+java -client -jar ../target/xresloader-1.3.3.0.jar -t js -p protobuf -f proto_v3/kind.pb --pretty 2 -s 资源转换示例.xlsx -m scheme_kind -n "/(?i)\.bin$/\.js/" --javascript-global sample -o proto_v3
 
 # Excel=>MsgPack二进制，并重命名输出文件 
-java -client -jar ../target/xresloader-1.3.0.2.jar -t msgpack -p protobuf -f proto_v3/kind.pb -s 资源转换示例.xlsx -m scheme_kind -n "/(?i)\.bin$/\.msgpack.bin/" -o proto_v3
+java -client -jar ../target/xresloader-1.3.3.0.jar -t msgpack -p protobuf -f proto_v3/kind.pb -s 资源转换示例.xlsx -m scheme_kind -n "/(?i)\.bin$/\.msgpack.bin/" -o proto_v3
 
 # 输出文件重命名+输出json格式+多次转表（多个-m参数）
-java -client -jar ../target/xresloader-1.3.0.2.jar -t json -p protobuf -f proto_v3/kind.pb -n "/(?i)\.bin$/\.json/" -s 资源转换示例.xlsx -m scheme_kind -m scheme_upgrade -o proto_v3
+java -client -jar ../target/xresloader-1.3.3.0.jar -t json -p protobuf -f proto_v3/kind.pb -n "/(?i)\.bin$/\.json/" -s 资源转换示例.xlsx -m scheme_kind -m scheme_upgrade -o proto_v3
 
 # Excel=>Xml，并重命名输出文件 
 # Excel=>Xml，数据源是ini文件, 并重命名输出文件 
@@ -71,7 +59,7 @@ echo "
 -t xml -p protobuf -f proto_v3/kind.pb --pretty 2 -s 资源转换示例.scheme.ini -m scheme_kind -n \"/(?i)\.bin$/\.xml/\" -o proto_v3
 -t xml -p protobuf -f proto_v3/kind.pb -s 资源转换示例.scheme.json -m scheme_kind -n \"/(?i)\.bin$/\.xml/\" -o proto_v3
 -t lua -p protobuf -f proto_v3/kind.pb --pretty 2 -c kind_const.lua --lua-global -o proto_v3
-" | java -Dfile.encoding=UTF-8 -client -jar ../target/xresloader-1.3.0.2.jar --stdin
+" | java -Dfile.encoding=UTF-8 -client -jar ../target/xresloader-1.3.3.0.jar --stdin
 
 # 注意这个命令必须使用bash或sh
 # 如果bash的编码是UTF-8在Windows下会因为编码错误而找不到文件,所以需要加-Dfile.encoding=UTF-8
@@ -82,7 +70,7 @@ echo "
 echo "
 -t lua -p protobuf -f proto_v3/kind.pb --pretty 2 -m \"DataSource=资源转换示例.xlsx|arr_in_arr|3,1\" -m \"MacroSource=资源转换示例.xlsx|macro|2,1\" -m \"ProtoName=arr_in_arr_cfg\" -m \"OutputFile=arr_in_arr_cfg.lua\" -m \"KeyRow=2\" -o proto_v3
 -t bin -p protobuf -f proto_v3/kind.pb -m \"DataSource=资源转换示例.xlsx|arr_in_arr|3,1\" -m \"MacroSource=资源转换示例.xlsx|macro|2,1\" -m \"ProtoName=arr_in_arr_cfg\" -m \"OutputFile=arr_in_arr_cfg.bin\" -m \"KeyRow=2\" -o proto_v3
-" | java -Dfile.encoding=UTF-8 -client -jar ../target/xresloader-1.3.0.2.jar --stdin
+" | java -Dfile.encoding=UTF-8 -client -jar ../target/xresloader-1.3.3.0.jar --stdin
 ```
 
 可用参数列表
@@ -221,7 +209,9 @@ protobuf协议
 > 
 > 需要使用pbc先加载[header/pb_header.pb](header/pb_header.pb)文件
 > 
-> **proto v3请注意: pbc不支持[packed=true]属性。在proto v3中，所有的*repeated*整数都默认是[packed=true]，要使用pbc解码请注意这些field要显示申明为[packed=false]**
+> **proto v3请注意: [pbc](https://github.com/cloudwu/pbc)不支持[packed=true]属性。在proto v3中，所有的*repeated*整数都默认是[packed=true]，要使用pbc解码请注意这些field要显示申明为[packed=false]**
+> 
+> 或者使用我修改过的[pbc的proto_v3分支](https://github.com/owent-contrib/pbc/tree/proto_v3)
 > 
 > pbc_config_manager:load_buffer_kv(协议名, 二进制, function(序号, 转出的lua table) return key的值 end) -- 读取key-value型数据接口
 > 
@@ -253,6 +243,27 @@ protobuf协议
 Excel里的Key使用@后缀的字段名，@后面的部分都属于验证器。如果一个字段使用了验证器，那么可以直接填写验证器类型的内部名字或者ID
 
 详见 [sample/资源转换示例.xlsx](sample/资源转换示例.xlsx) 的upgrade_10001和upgrade_10002表
+
+编译和打包（For developer）
+======
+
++ 本项目使用[apache maven](https://maven.apache.org/)管理包依赖和打包构建流程。
++ JDK 需要1.8或以上版本
+
+```bash
+# 编译
+mvn compile
+# 打包
+mvn package
+```
+
+以上命令会自动下载依赖文件、包和插件。
+
+编译完成后，输出的结果默认会放在 ***target*** 目录下。
+
+更新依赖包
+------
+编译和打包见 [安装说明](doc/INSTALL.md)
 
 FAQ
 ======

@@ -1,6 +1,8 @@
 xresloader
 ==========
 
+[![Join the chat at https://gitter.im/xresloader/xresloader](https://badges.gitter.im/xresloader/xresloader.svg)](https://gitter.im/xresloader/xresloader?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
 快速实现一个简单暴力功能强大的导表工具
 
 构建环境     | Linux (Oracle JDK 8) |

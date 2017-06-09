@@ -64,13 +64,14 @@ public class ExcelEngine {
             }
             file_path = file_check.getCanonicalPath();
         } catch (IOException e) {
-            e.printStackTrace();
+            ProgramOptions.getLoger().error("%s", e.getMessage());
         }
 
 
         Workbook ret = openedWorkbooks.get(file_path);
-        if (null != ret)
+        if (null != ret) {
             return ret;
+        }
 
         FileInputStream is = null;
         try {
@@ -88,7 +89,7 @@ public class ExcelEngine {
 
             extractor.setFormulasNotResults(false);
         } catch (java.io.IOException e) {
-            e.printStackTrace();
+            ProgramOptions.getLoger().error("%s", e.getMessage());
         }
 
         openedWorkbooks.put(file_path, ret);

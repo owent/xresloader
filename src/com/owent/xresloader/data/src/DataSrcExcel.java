@@ -178,13 +178,13 @@ public class DataSrcExcel extends DataSrcImpl {
             }
 
             if (file_path.isEmpty() || src.table_name.isEmpty() || src.data_col <= 0 || src.data_row <= 0) {
-                ProgramOptions.getLoger().error("data source \"%s\" (%s:%d，%d) ignored.", src.file_path, src.table_name, src.data_row, src.data_col);
+                ProgramOptions.getLoger().error("data source file \"%s\" (%s:%d，%d) ignored.", src.file_path, src.table_name, src.data_row, src.data_col);
                 continue;
             }
 
             Sheet tb = ExcelEngine.openSheet(file_path, src.table_name);
             if (null == tb) {
-                ProgramOptions.getLoger().error("open data source \"%s\" or table %s.", src.file_path, src.table_name);
+                ProgramOptions.getLoger().error("open data source file \"%s\" or sheet \"%s\".", src.file_path, src.table_name);
                 continue;
             }
 

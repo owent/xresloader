@@ -75,7 +75,7 @@ public final class SchemeDataSourceExcel extends SchemeDataSourceBase {
         }
 
         if (data_row >= row_num) {
-            ProgramOptions.getLoger().error("scheme \"" + sheet_name + "\" has no valid header");
+            ProgramOptions.getLoger().error("scheme \"" + sheet_name + "\" has no configure, or it's not a scheme sheet?");
             return false;
         }
 

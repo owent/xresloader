@@ -1,5 +1,15 @@
 更新记录：
 ==========
+1.3.3.2
+------
+1. 更新POI到3.17
+2. 更新protobuf到3.4.0
+3. 更新json到20170506
+4. 更新log4j到2.9.0
+5. 更新maven-shade-plugin到3.1.0
+6. 更新maven-compiler-plugin到3.7.0
+7. 统一使用“sheet”作为输出的“表”的称谓
+
 1.3.3.1
 ------
 1. 修复lua和javascript无pretty模式输出的首行注释问题

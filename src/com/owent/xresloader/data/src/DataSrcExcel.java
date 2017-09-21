@@ -107,7 +107,7 @@ public class DataSrcExcel extends DataSrcImpl {
 
             Sheet tb = ExcelEngine.openSheet(file_path, src.table_name);
             if (null == tb) {
-                ProgramOptions.getLoger().warn("open macro source \"%s\" or table %s failed.", file_path, src.table_name);
+                ProgramOptions.getLoger().warn("open macro source \"%s\" or sheet %s failed.", file_path, src.table_name);
                 continue;
             }
 

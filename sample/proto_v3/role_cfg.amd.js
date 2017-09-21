@@ -2,9 +2,9 @@
 
 define({
   role_cfg_header: {
-    xres_ver : "1.3.3.1",
+    xres_ver : "1.3.3.2",
     hash_code : "no hash code",
-    data_ver : "1.3.3.1",
+    data_ver : "1.3.3.2",
     count : 7
   },
   role_cfg: [

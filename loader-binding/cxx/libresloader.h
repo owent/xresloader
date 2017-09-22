@@ -176,7 +176,7 @@ namespace xresloader {
 
                 int len = root_.data_block_size();
                 for (int i = 0; i < len; ++i) {
-                    const std::string data_block = root_.data_block(i);
+                    const std::string& data_block = root_.data_block(i);
                     value_type p = value_type(new TItem());
                     if (false == p->ParseFromArray(data_block.data(), static_cast<int>(data_block.size()))) {
                         std::cerr << "parse config data block failed." << std::endl <<

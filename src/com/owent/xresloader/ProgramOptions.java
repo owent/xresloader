@@ -9,7 +9,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.nio.charset.UnsupportedCharsetException;
 import java.text.SimpleDateFormat;
-import java.time.LocalDateTime;
+import java.util.Calendar;
 import java.util.Properties;
 import java.util.regex.Pattern;
 import java.util.regex.PatternSyntaxException;
@@ -463,7 +463,7 @@ public class ProgramOptions {
     public String getDataVersion() {
         if (dataVersion == null || dataVersion.isEmpty()) {
             dataVersion = String.format("%s.%s", getVersion(),
-                    new SimpleDateFormat("yyMMddHHmmss").format(LocalDateTime.now())
+                    new SimpleDateFormat("yyyyMMddHHmmss").format(Calendar.getInstance().getTime())
             );
         }
         return dataVersion;

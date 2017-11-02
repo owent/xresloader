@@ -4,7 +4,7 @@ return {
   [1] = {
     xres_ver = "1.4.0",
     hash_code = "no hash code",
-    data_ver = "1.0.0.0",
+    data_ver = "1.4.0.20171102052943",
     count = 2,
   },
   arr_in_arr_cfg = {

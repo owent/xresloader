@@ -58,7 +58,7 @@ public abstract class DataDstJava extends DataDstImpl {
         DataDstObject ret = new DataDstObject();
 
         ret.header.put("xres_ver", ProgramOptions.getInstance().getVersion());
-        ret.header.put("data_ver", ProgramOptions.getInstance().getVersion());
+        ret.header.put("data_ver", ProgramOptions.getInstance().getDataVersion());
         ret.header.put("count", DataSrcImpl.getOurInstance().getRecordNumber());
         ret.header.put("hash_code", "no hash code");
 

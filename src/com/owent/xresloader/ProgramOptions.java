@@ -8,6 +8,8 @@ import org.apache.logging.log4j.Logger;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.charset.UnsupportedCharsetException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
 import java.util.Properties;
 import java.util.regex.Pattern;
 import java.util.regex.PatternSyntaxException;
@@ -29,6 +31,7 @@ public class ProgramOptions {
     private static ProgramOptions instance = null;
     private static Options options = null;
     private static String version = null;
+    private static String dataVersion = null;
 
     public FileType outType;
 
@@ -185,6 +188,14 @@ public class ProgramOptions {
                 .build()
         );
 
+        options.addOption(Option.builder("a")
+                .longOpt("data-version")
+                .desc("set data version")
+                .hasArg()
+                .argName("DATA VERSION")
+                .build()
+        );
+
         options.addOption(Option.builder()
                 .longOpt("pretty")
                 .desc("set pretty output and set ident length when output type supported.(disable pretty output by set to 0)")
@@ -262,6 +273,10 @@ public class ProgramOptions {
             formatter.setWidth(140);
             formatter.printHelp(String.format("java -client -jar \"%s\" [options...]", script), get_options_group());
             return 1;
+        }
+
+        if (cmd.hasOption('a')) {
+            dataVersion = cmd.getOptionValue('a', "");
         }
 
         if (cmd.hasOption('v')) {
@@ -443,6 +458,15 @@ public class ProgramOptions {
             }
         }
         return version;
+    }
+
+    public String getDataVersion() {
+        if (dataVersion == null || dataVersion.isEmpty()) {
+            dataVersion = String.format("%s.%s", getVersion(),
+                    new SimpleDateFormat("yyMMddHHmmss").format(LocalDateTime.now())
+            );
+        }
+        return dataVersion;
     }
 
 

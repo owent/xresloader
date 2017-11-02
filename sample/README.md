@@ -1,8 +1,14 @@
+生成脚本
+======
+
++ Unix/Linux/Mingw/Msys脚本见 [gen_sample_output.sh](gen_sample_output.sh)
++ Windows脚本见（中文文件名在Windows下可能编码原因会提示文件找不到） [gen_sample_output.ps1](gen_sample_output.ps1)
+
+
 关于proto v2和proto v3
 ======
-目前已经全部使用proto v3转换数据，而proto v3是没有**required**字段得。这意味着所有未填写得Excel内容将不会转出到二进制文件中，并且读取API将会获得默认值。
+sample的脚本会分别生成proto v2和proto v3的配置，实际上由于转表系统没有使用v3的新数据结构，所以任意一种转出来的配置都喝一同时被v2和v3的读取工具读取。
 
-另外，由于proto v3精简掉了proto v2得一些功能，而且我们得转表工具并没有使用proto v3得新功能，所以xresload得转换出得数据规范不会变化。也是这个原因，老版本得proto v2得代码仍然可以读取现在的proto v3转出的数据
 
 xresloader示例文件说明:
 ======
@@ -38,5 +44,3 @@ role_cfg.n.js       |  打包Excel数据之后的Node.js模块输出            
 role_cfg.amd.js     |  打包Excel数据之后的AMD.js模块输出              | java -client -jar xresloader.jar -t js -p protobuf -o $proto_dir -f $proto_dir/kind.pb --pretty 2 -s *.xlsx -m scheme_kind -n '/(?i)\.bin$/\.amd\.js/' --javascript-export amd
 arr_in_arr_cfg.lua  |  嵌套数组示例Lua输出                           | java -client -jar xresloader.jar -t lua -p protobuf -o $proto_dir -f $proto_dir/kind.pb --pretty 2 -m "DataSource=$(ls *.xlsx)|arr_in_arr|3,1" -m "MacroSource=$(ls *.xlsx)|macro|2,1" -m ProtoName=arr_in_arr_cfg -m OutputFile=arr_in_arr_cfg.lua -m KeyRow=2 -o proto_v3
 arr_in_arr_cfg.bin  |  嵌套数组示例协议二进制输出                     | java -client -jar xresloader.jar -t bin -p protobuf -o $proto_dir -f $proto_dir/kind.pb -m "DataSource=$(ls *.xlsx)|arr_in_arr|3,1" -m "MacroSource=$(ls *.xlsx)|macro|2,1" -m ProtoName=arr_in_arr_cfg -m OutputFile=arr_in_arr_cfg.bin -m KeyRow=2 -o proto_v3
-
-详见 [gen_sample_output.sh](gen_sample_output.sh)

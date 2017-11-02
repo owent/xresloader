@@ -251,7 +251,7 @@ public class DataDstPb extends DataDstImpl {
         PbHeaderV3.xresloader_datablocks.Builder blocks = PbHeaderV3.xresloader_datablocks.newBuilder();
         PbHeaderV3.xresloader_header.Builder header = blocks.getHeaderBuilder();
         header.setXresVer(ProgramOptions.getInstance().getVersion());
-        header.setDataVer(ProgramOptions.getInstance().getVersion());
+        header.setDataVer(ProgramOptions.getInstance().getDataVersion());
         header.setHashCode("");
 
         // 校验码

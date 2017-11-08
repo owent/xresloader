@@ -24,11 +24,12 @@ GET START
 ======
 使用步骤
 
-1. 定义protobuf的协议文件(.proto)
-2. 使用protobuf官方工具***protoc***把.proto文件转换成pb
-3. 编写Excel,并且字段名和protobuf协议字段名和层级关系对应
-4. 执行命令 java -jar XRESLOADER.jar [参数...]，传入excel文件名、表名和其他规则。（参数和选项见 [工具命令行参数](#工具命令行参数) ）
-5. 使用对应的语言或者工具库加载导出的数据。（编码规则和解析工具见 [关于加载导出的数据](#关于加载导出的数据) ）
+1. 下载[xresloader](https://github.com/xresloader/xresloader/releases)
+2. 定义protobuf的协议文件(.proto)
+3. 使用protobuf官方工具***protoc***把.proto文件转换成pb
+4. 编写Excel,并且字段名和protobuf协议字段名和层级关系对应
+5. 执行命令 java -jar XRESLOADER.jar [参数...]，传入excel文件名、表名和其他规则。（参数和选项见 [工具命令行参数](#工具命令行参数) ）
+6. 使用对应的语言或者工具库加载导出的数据。（编码规则和解析工具见 [关于加载导出的数据](#关于加载导出的数据) ）
 
 > + [sample](sample)目录下有所有功能的示例excel、配置、协议和对sample数据的几种读取方式代码
 

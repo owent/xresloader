@@ -223,6 +223,7 @@ Excel里的Key使用@后缀的字段名，@后面的部分都属于验证器。�
 + 协议类型（对应protobuf的message里的每个field，excel里可以填field number或者field name）
 + 枚举类型（对应protobuf的enum里的每个number，excel里可以填enum number或者enum name）
 + 值范围A-B（比如0-1234）
++ 多个验证器可以使用“或”符号（“|”)来分隔开， 任意一个验证器满足条件则认为时合法数据(如: 100-200|2000-3000|test_msg_verifier)
 
 详见 [sample/资源转换示例.xlsx](sample/资源转换示例.xlsx) 的upgrade_10001和upgrade_10002表
 

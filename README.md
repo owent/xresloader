@@ -24,11 +24,12 @@ GET START
 ======
 使用步骤
 
-1. 定义protobuf的协议文件(.proto)
-2. 使用protobuf官方工具***protoc***把.proto文件转换成pb
-3. 编写Excel,并且字段名和protobuf协议字段名和层级关系对应
-4. 执行命令 java -jar XRESLOADER.jar [参数...]，传入excel文件名、表名和其他规则。（参数和选项见 [工具命令行参数](#工具命令行参数) ）
-5. 使用对应的语言或者工具库加载导出的数据。（编码规则和解析工具见 [关于加载导出的数据](#关于加载导出的数据) ）
+1. 下载[xresloader](https://github.com/xresloader/xresloader/releases)
+2. 定义protobuf的协议文件(.proto)
+3. 使用protobuf官方工具***protoc***把.proto文件转换成pb
+4. 编写Excel,并且字段名和protobuf协议字段名和层级关系对应
+5. 执行命令 java -jar XRESLOADER.jar [参数...]，传入excel文件名、表名和其他规则。（参数和选项见 [工具命令行参数](#工具命令行参数) ）
+6. 使用对应的语言或者工具库加载导出的数据。（编码规则和解析工具见 [关于加载导出的数据](#关于加载导出的数据) ）
 
 > + [sample](sample)目录下有所有功能的示例excel、配置、协议和对sample数据的几种读取方式代码
 
@@ -104,7 +105,7 @@ echo "
 |ProtoName     | 协议描述名称                                                                           |   role_cfg                 |              |              |   **必须**, 这个名字可以直接是类型名称[MessageName]，也可以是[PackageName].[MessageName]   |
 |OutputFile    | 输出文件                                                                               |   role_cfg.bin             |              |              |   **必须**   |
 |KeyRow        | 字段名描述行                                                                           |  2                         |              |              |   **必须**   |
-|KeyCase       | 字段名大小写                                                                           | 不变                       |              |              |大写/小写/不变(大小写转换，如果不需要则留空或小写)|
+|KeyCase       | 字段名大小写                                                                           | 小写                       |              |              |大写/小写/不变(大小写转换，如果不需要则留空或小写)|
 |KeyWordSplit  | 字段名分词字符                                                                         | _                          |              |              |    *可选*,字段名映射时单词之间填充的字符串,不需要请留空 |
 |KeyPrefix     | 字段名固定前缀                                                                         |                            |              |              |    *可选*,字段名映射时附加的前缀,不需要请留空 |
 |KeySuffix     | 字段名固定后缀                                                                         |                            |              |              |    *可选*,字段名映射时附加的后缀,不需要请留空 |
@@ -141,7 +142,7 @@ echo "
 1. KeyWordRegex的补充配置会过滤掉前缀0（不匹配[a-zA-Z_\$]），即CostType
 2. KeyWordRegex的主配置会在大写字母处做分词，次配置指明保留字母，即分割成Cost Type
 3. KeyCase指明转换成小写，即cost type
-4. KeyWordSplit指明分词符号是*_*，即cost_type
+4. KeyWordSplit指明分词符号是_，即cost_type
 5. 最后匹配到*kind.proto*中*role_cfg*的*cost_type*字段.
 
 如果不需要字段名转换，直接把KeyWordRegex的配置全部配成空即可。（注意这样大小写转换也不会执行）
@@ -150,14 +151,15 @@ echo "
 ======
 |          输出格式参数       |                                  输出格式说明                                                                                       |           说明                                    |
 |-----------------------------|-------------------------------------------------------------------------------------------------------------------------------------|---------------------------------------------------|
-|           bin               | 基于协议的二进制文件,不同的协议类型(-p参数)输出的二进制不一样,一般是header+body,body中有转出的数据列表, 协议格式见header文件夹      | 示例见 [sample](sample/role_cfg.bin) (protobuf)                |
-|           lua               | 转出为格式化的lua文件(易读), 一般格式为 return {\[1\] = 转表头信息, \[协议结构名称\] = {数据列表} }                                 | 示例见[sample](sample/role_cfg.lua)          |
-|          msgpack            | 转出为使用[MsgPack](http://msgpack.org/)打包的二进制文件,内含的第一个message是转表头信息，后面紧跟数据，可以用任何支持得客户端解包  | 示例见[sample](sample/role_cfg.msgpack.bin)  |
-|           json              | 转出为json文件,一般格式为 \[ {转表头信息}, {协议结构名称 : \[ 转出的数据 \] } \]                                             | 示例见[sample](sample/role_cfg.json)         |
-|           xml               | 转出为xml文件,一般格式为&lt;root&gt;&lt;header&gt;转表头信息&lt;/header&gt;&lt;body&gt;&lt;协议结构名称&gt;数据内容&lt;/协议结构名称&gt;&lt;/body&gt;&lt;/root&gt; | 示例见[sample](sample/role_cfg.xml)  |
+|           bin               | 基于协议的二进制文件,不同的协议类型(-p参数)输出的二进制不一样,一般是header+body,body中有转出的数据列表, 协议格式见header文件夹      | 示例见 [sample](sample/proto_v3) (protobuf)                |
+|           lua               | 转出为的lua代码文件(可选是否要pretty格式化), 一般格式为 return {\[1\] = 转表头信息, \[协议结构名称\] = {数据列表} }             | 示例见[sample](sample/proto_v3)          |
+|          msgpack            | 转出为使用[MsgPack](http://msgpack.org/)打包的二进制文件,内含的第一个message是转表头信息，后面紧跟数据，可以用任何支持得客户端解包  | 示例见[sample](sample/proto_v3)  |
+|           json              | 转出为json文件,一般格式为 \[ {转表头信息}, {协议结构名称 : \[ 转出的数据 \] } \]                                             | 示例见[sample](sample/proto_v3)         |
+|           xml               | 转出为xml文件,一般格式为&lt;root&gt;&lt;header&gt;转表头信息&lt;/header&gt;&lt;body&gt;&lt;协议结构名称&gt;数据内容&lt;/协议结构名称&gt;&lt;/body&gt;&lt;/root&gt; | 示例见[sample](sample/proto_v3)  |
+|           js               | 转出为js代码文件(可选是否要pretty格式化) | 示例见[sample](sample/proto_v3)  |
 
 
-**注意：** Xml输出格式中，列表元素的结构是*&lt;配置名称 for="0"&gt;数据1&lt;/配置名称&gt;&lt;配置名称 for="1"&gt;数据2...&lt;/配置名称&gt;* 属性字段for表示数组索引，目的是方便通过xpath查找。
+**注意：** Xml输出格式中，列表元素的结构是&lt;配置名称 for="0"&gt;数据1&lt;/配置名称&gt;&lt;配置名称 for="1"&gt;数据2...&lt;/配置名称&gt; 属性字段for表示数组索引，目的是方便通过xpath查找。
 
 关于加载导出的数据
 ======

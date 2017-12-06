@@ -5,9 +5,7 @@ import com.owent.xresloader.ProgramOptions;
 import com.owent.xresloader.data.err.ConvException;
 import com.owent.xresloader.data.src.DataContainer;
 import com.owent.xresloader.data.src.DataSrcImpl;
-import com.owent.xresloader.data.vfy.DataVerifyImpl;
-import com.owent.xresloader.data.vfy.DataVerifyPbEnum;
-import com.owent.xresloader.data.vfy.DataVerifyPbMsg;
+import com.owent.xresloader.data.vfy.*;
 import com.owent.xresloader.engine.IdentifyDescriptor;
 import com.owent.xresloader.pb.PbHeaderV3;
 import com.owent.xresloader.scheme.SchemeConf;
@@ -192,25 +190,52 @@ public class DataDstPb extends DataDstImpl {
         node.identify = identify;
 
         if (null == identify.verifier || identify.verifier.isEmpty()) {
-            identify.verify_engine = null;
+            identify.resetVerifier();
         } else {
-            identify.verify_engine = pbs.identifiers.getOrDefault(identify.verifier, null);
-            if (null == identify.verify_engine) {
-
-                DescriptorProtos.EnumDescriptorProto enum_desc = get_alias_list_element(identify.verifier, pbs.enums, "enum type");
-                if (enum_desc != null) {
-                    identify.verify_engine = new DataVerifyPbEnum(enum_desc);
-                } else {
-                    DescriptorProtos.DescriptorProto msg_desc = get_alias_list_element(identify.verifier, pbs.messages, "message type");
-                    if (msg_desc != null) {
-                        identify.verify_engine = new DataVerifyPbMsg(msg_desc);
-                    }
+            String[] all_verify_rules = identify.verifier.split("\\|");
+            for (String vfy_rule: all_verify_rules) {
+                String rule = vfy_rule.trim();
+                if (rule.isEmpty()) {
+                    continue;
                 }
 
-                if (null != identify.verify_engine) {
-                    pbs.identifiers.put(identify.verifier, identify.verify_engine);
+                if (rule.charAt(0) == '-' || (rule.charAt(0) >= '0' && rule.charAt(0) <= '9')) {
+                    DataVerifyIntRange vfy = new DataVerifyIntRange(rule);
+                    if (vfy.isValid()) {
+                        identify.addVerifier(vfy);
+                    } else {
+                        ProgramOptions.getLoger().error("try to add DataVerifyIntRange(%s) for %s at column %d failed",
+                                rule, identify.name, identify.index + 1);
+                    }
+
+                    continue;
                 } else {
-                    ProgramOptions.getLoger().error("enum or message \"%s\" not found", identify.verifier);
+                    // 协议验证器
+                    DataVerifyImpl vfy = pbs.identifiers.getOrDefault(rule, null);
+                    if (null == vfy) {
+                        DescriptorProtos.EnumDescriptorProto enum_desc = get_alias_list_element(rule, pbs.enums, "enum type");
+                        if (enum_desc != null) {
+                            vfy = new DataVerifyPbEnum(enum_desc);
+                        } else {
+                            DescriptorProtos.DescriptorProto msg_desc = get_alias_list_element(rule, pbs.messages, "message type");
+                            if (msg_desc != null) {
+                                vfy = new DataVerifyPbMsg(msg_desc);
+                            }
+                        }
+
+                        if (null != vfy) {
+                            pbs.identifiers.put(rule, vfy);
+                        } else {
+                            ProgramOptions.getLoger().error("enum or message \"%s\" not found", rule);
+                        }
+                    }
+
+                    if (vfy != null) {
+                        identify.addVerifier(vfy);
+                    } else {
+                        ProgramOptions.getLoger().error("try to add DataVerifyPb(%s) for %s at column %d failed",
+                                rule, identify.name, identify.index + 1);
+                    }
                 }
             }
         }

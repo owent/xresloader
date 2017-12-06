@@ -36,7 +36,7 @@ GET START
 ======
 执行方式    java -jar xresloader.jar [参数...]
 
-> 生成源和结果在sample目录下, xresloader的路径为 ../target/xresloader-1.4.0.jar
+> 生成源和结果在sample目录下, xresloader的路径为 ../target/xresloader-1.4.1.jar
 
 推荐使用--stdin批量输入+多个-m参数指定转表参数的模式,如:
 ```bash
@@ -216,7 +216,11 @@ protobuf协议
 ======
 验证器
 ------
-Excel里的Key使用@后缀的字段名，@后面的部分都属于验证器。如果一个字段使用了验证器，那么可以直接填写验证器类型的内部名字或者ID
+Excel里的Key使用@后缀的字段名，@后面的部分都属于验证器。如果一个字段使用了验证器，验证器可以使用以下值:
+
++ 协议类型（对应protobuf的message里的每个field，excel里可以填field number或者field name）
++ 枚举类型（对应protobuf的enum里的每个number，excel里可以填enum number或者enum name）
++ 值范围A-B（比如0-1234）
 
 详见 [sample/资源转换示例.xlsx](sample/资源转换示例.xlsx) 的upgrade_10001和upgrade_10002表
 

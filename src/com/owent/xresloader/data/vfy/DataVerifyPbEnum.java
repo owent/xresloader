@@ -10,8 +10,8 @@ public class DataVerifyPbEnum extends DataVerifyImpl {
         super(desc.getName());
 
         for (DescriptorProtos.EnumValueDescriptorProto val_desc : desc.getValueList()) {
-            all_names.put(val_desc.getName(), val_desc.getNumber());
-            all_numbers.add(val_desc.getNumber());
+            all_names.put(val_desc.getName(), (long)val_desc.getNumber());
+            all_numbers.add((long)val_desc.getNumber());
         }
     }
 }

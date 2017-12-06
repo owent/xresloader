@@ -10,8 +10,8 @@ public class DataVerifyPbMsg extends DataVerifyImpl {
         super(desc.getName());
 
         for (DescriptorProtos.FieldDescriptorProto fd : desc.getFieldList()) {
-            all_names.put(fd.getName(), fd.getNumber());
-            all_numbers.add(fd.getNumber());
+            all_names.put(fd.getName(), (long)fd.getNumber());
+            all_numbers.add((long)fd.getNumber());
         }
     }
 }

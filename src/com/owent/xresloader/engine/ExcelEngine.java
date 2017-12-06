@@ -133,6 +133,39 @@ public class ExcelEngine {
         return cell2s(row, col, null);
     }
 
+
+    static private Byte cal_cell2err(Cell c, CellValue cv) {
+        if (null == cv) {
+            return c.getErrorCellValue();
+        }
+
+        return cv.getErrorValue();
+    }
+
+    static private double cal_cell2num(Cell c, CellValue cv) {
+        if (null == cv) {
+            return c.getNumericCellValue();
+        }
+
+        return cv.getNumberValue();
+    }
+
+    static private String cal_cell2str(Cell c, CellValue cv) {
+        if (null == cv) {
+            return c.getStringCellValue();
+        }
+
+        return cv.getStringValue();
+    }
+
+    static private Boolean cal_cell2bool(Cell c, CellValue cv) {
+        if (null == cv) {
+            return c.getBooleanCellValue();
+        }
+
+        return cv.getBooleanValue();
+    }
+
     /**
      * 单元格数据转换（String）
      *
@@ -169,9 +202,9 @@ public class ExcelEngine {
             case BLANK:
                 return ret;
             case BOOLEAN:
-                return ret.set(String.valueOf((null == cv) ? c.getBooleanCellValue() : cv.getBooleanValue()));
+                return ret.set(cal_cell2bool(c, cv).toString());
             case ERROR:
-                return ret.set(String.valueOf((null == cv) ? c.getErrorCellValue() : cv.getErrorValue()));
+                return ret.set(cal_cell2err(c, cv).toString());
             case FORMULA:
                 return (null == cv)? ret.set(c.getCellFormula()): ret;
             case NUMERIC:
@@ -215,10 +248,10 @@ public class ExcelEngine {
                     return ret.set(df.format(c.getDateCellValue()).trim());
                 }
 
-                return ret.set(String.valueOf((null == cv) ? c.getNumericCellValue() : cv.getNumberValue()));
+                return ret.set(String.valueOf(cal_cell2num(c, cv)));
             case STRING:
-                //return ret.set(tryMacro((null == cv) ? c.getStringCellValue().trim() : cv.getStringValue()));
-                return ret.set((null == cv) ? c.getStringCellValue().trim() : cv.getStringValue());
+                //return ret.set(tryMacro(cal_cell2str(c, cv).trim()));
+                return ret.set(cal_cell2str(c, cv).trim());
             default:
                 return ret;
         }
@@ -266,12 +299,10 @@ public class ExcelEngine {
         switch (type) {
             case BLANK:
                 return ret;
-            case BOOLEAN:
-                if (null != col.verify_engine) {
-                    return ret.set(Long.valueOf(col.verify_engine.get(c.getBooleanCellValue() ? 1 : 0)));
-                } else {
-                    return ret.set(c.getBooleanCellValue() ? 1L : 0L);
-                }
+            case BOOLEAN: {
+                boolean res = cal_cell2bool(c, cv);
+                return ret.set(col.getAndVerify(res ? 1 : 0));
+            }
             case ERROR:
                 return ret;
             case FORMULA:
@@ -281,31 +312,20 @@ public class ExcelEngine {
                 if (DateUtil.isCellDateFormatted(c)) {
                     val = dateToUnixTimestamp(c.getDateCellValue());
                 } else {
-                    val = Math.round(c.getNumericCellValue());
+                    val = Math.round(cal_cell2num(c, cv));
                 }
 
-                if (null != col.verify_engine) {
-                    return ret.set(Long.valueOf(col.verify_engine.get((int) val)));
-                } else {
-                    return ret.set(val);
-                }
+                ret.set(col.getAndVerify(val));
+                return ret;
             }
             case STRING: {
-                String val = c.getStringCellValue().trim();
+                String val = cal_cell2str(c, cv).trim();
                 if (val.isEmpty()) {
                     return ret;
                 }
-                try {
-                    if (null != col.verify_engine) {
-                        return ret.set(Long.valueOf(col.verify_engine.get(tryMacro(val))));
-                    } else {
-                        return ret.set(Math.round(Double.valueOf(tryMacro(val))));
-                    }
-                } catch (java.lang.NumberFormatException e) {
-                    throw new ConvException(
-                        String.format("%s can not be converted to a integer", val)
-                    );
-                }
+
+                ret.set(col.getAndVerify(tryMacro(val)));
+                return ret;
             }
             default:
                 return ret;
@@ -355,7 +375,7 @@ public class ExcelEngine {
             case BLANK:
                 return ret;
             case BOOLEAN:
-                return ret.set(c.getBooleanCellValue() ? 1.0 : 0.0);
+                return ret.set(cal_cell2bool(c, cv) ? 1.0 : 0.0);
             case ERROR:
                 return ret;
             case FORMULA:
@@ -364,9 +384,9 @@ public class ExcelEngine {
                 if(DateUtil.isCellDateFormatted(c)) {
                     return ret.set((double) dateToUnixTimestamp(c.getDateCellValue()));
                 }
-                return ret.set(c.getNumericCellValue());
+                return ret.set(cal_cell2num(c, cv));
             case STRING: {
-                String val = c.getStringCellValue().trim();
+                String val = cal_cell2str(c, cv).trim();
                 if (val.isEmpty()) {
                     return ret;
                 }
@@ -427,15 +447,15 @@ public class ExcelEngine {
             case BLANK:
                 return ret;
             case BOOLEAN:
-                return ret.set(c.getBooleanCellValue());
+                return ret.set(cal_cell2bool(c, cv));
             case ERROR:
                 return ret;
             case FORMULA:
                 return ret;
             case NUMERIC:
-                return ret.set(c.getNumericCellValue() != 0);
+                return ret.set(cal_cell2num(c, cv) != 0);
             case STRING:
-                String item = tryMacro(c.getStringCellValue().trim()).toLowerCase();
+                String item = tryMacro(cal_cell2str(c, cv).trim()).toLowerCase();
                 if (item.isEmpty()) {
                     return ret;
                 }

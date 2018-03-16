@@ -232,9 +232,10 @@ public class main {
                     fos.write(data);
                 }
             } catch (com.owent.xresloader.data.err.ConvException e) {
-                ProgramOptions.getLoger().error("convert data failed.%s  > %s%s  > %s",
-                    endl, String.join(" ", args),
-                    endl, e.getMessage()
+                ProgramOptions.getLoger().error("convert data failed.%s  > %s%s  > File: %s, Table: %s, Row: %d, Column: %d%s  > %s",
+                    endl, String.join(" ", args), endl,
+                    ds.getCurrentFileName(), ds.getCurrentTableName(), ds.getCurrentRowNum() + 1, ds.getLastColomnNum() + 1, endl,
+                    e.getMessage()
                 );
                 ++ failed_count;
                 continue;

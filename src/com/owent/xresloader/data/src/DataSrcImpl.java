@@ -11,6 +11,7 @@ import java.util.HashMap;
 public abstract class DataSrcImpl {
 
     private static DataSrcImpl ourInstance = null;
+    private int last_column_index_ = 0;
 
     protected DataSrcImpl() {
     }
@@ -52,7 +53,20 @@ public abstract class DataSrcImpl {
         return false;
     }
 
+    public int getLastColomnNum() { return last_column_index_; }
+    protected void setLastColumnNum(int c) { last_column_index_ = c; }
+
+    public int getCurrentRowNum() { return 0; }
+
+    public String getCurrentTableName() { return ""; }
+
+    public String getCurrentFileName() { return ""; }
+
+
     public <T> DataContainer<T> getValue(IdentifyDescriptor ident, T dv) throws ConvException {
+        if (null != ident) {
+            setLastColumnNum(ident.index);
+        }
         DataContainer<T> ret = new DataContainer<T>();
         ret.value = dv;
         return ret;

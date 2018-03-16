@@ -20,6 +20,7 @@ import java.util.List;
 public class DataSrcExcel extends DataSrcImpl {
 
     private class DataSheetInfo {
+        public String file_name = "";
         public Sheet table = null;
         public FormulaEvaluator formula = null;
         public Row current_row = null;
@@ -214,6 +215,7 @@ public class DataSrcExcel extends DataSrcImpl {
             }
 
 
+            res.file_name = file_path;
             res.table = tb;
             res.formula = formula;
             res.next_index = src.data_row - 1;
@@ -280,6 +282,8 @@ public class DataSrcExcel extends DataSrcImpl {
             return ret;
         }
 
+        setLastColumnNum(ident.index);
+
         if (ret_default instanceof Integer) {
             DataContainer<Long> dt = ExcelEngine.cell2i(current.current_row, ident, current.formula);
             ret.valid = dt.valid;
@@ -334,5 +338,32 @@ public class DataSrcExcel extends DataSrcImpl {
     @Override
     public HashMap<String, String> getMacros() {
         return macros;
+    }
+
+    @Override
+    public int getCurrentRowNum() {
+        if (null == current.current_row) {
+            return 0;
+        }
+
+        return current.current_row.getRowNum();
+    }
+
+    @Override
+    public String getCurrentTableName() {
+        if (null == current.table) {
+            return "";
+        }
+
+        return current.table.getSheetName();
+    }
+
+    @Override
+    public String getCurrentFileName() {
+        if (null == current.file_name) {
+            return "";
+        }
+
+        return current.file_name;
     }
 }

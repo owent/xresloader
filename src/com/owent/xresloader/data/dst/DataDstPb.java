@@ -204,8 +204,8 @@ public class DataDstPb extends DataDstImpl {
                     if (vfy.isValid()) {
                         identify.addVerifier(vfy);
                     } else {
-                        ProgramOptions.getLoger().error("try to add DataVerifyIntRange(%s) for %s at column %d failed",
-                                rule, identify.name, identify.index + 1);
+                        ProgramOptions.getLoger().error("try to add DataVerifyIntRange(%s) for %s at column %d in %s failed",
+                                rule, identify.name, identify.index + 1, DataSrcImpl.getOurInstance().getCurrentTableName());
                     }
 
                     continue;
@@ -233,8 +233,8 @@ public class DataDstPb extends DataDstImpl {
                     if (vfy != null) {
                         identify.addVerifier(vfy);
                     } else {
-                        ProgramOptions.getLoger().error("try to add DataVerifyPb(%s) for %s at column %d failed",
-                                rule, identify.name, identify.index + 1);
+                        ProgramOptions.getLoger().error("try to add DataVerifyPb(%s) for %s at column %d in %s failed",
+                                rule, identify.name, identify.index + 1, DataSrcImpl.getOurInstance().getCurrentTableName());
                     }
                 }
             }

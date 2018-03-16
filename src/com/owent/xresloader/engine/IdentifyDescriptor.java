@@ -1,6 +1,7 @@
 package com.owent.xresloader.engine;
 
 import com.owent.xresloader.data.err.ConvException;
+import com.owent.xresloader.data.src.DataSrcImpl;
 import com.owent.xresloader.data.vfy.DataVerifyImpl;
 import com.owent.xresloader.data.vfy.DataVerifyResult;
 
@@ -56,12 +57,14 @@ public class IdentifyDescriptor {
                 }
             }
         } catch (Exception e) {
-            throw new ConvException(String.format("check %d for %s at column %d failed, %s",
-                    n, name, index + 1, e.getMessage()));
+            throw new ConvException(String.format("check %d for %s at row %d, column %d in %s failed, %s",
+                    n, name, DataSrcImpl.getOurInstance().getCurrentRowNum() + 1, index + 1,
+                    DataSrcImpl.getOurInstance().getCurrentTableName(), e.getMessage()));
         }
 
-        throw new ConvException(String.format("check %d for %s at column %d failed, check data failed.",
-                n, name, index + 1));
+        throw new ConvException(String.format("check %d for %s at row %d, column %d in %s failed, check data failed.",
+                n, name, DataSrcImpl.getOurInstance().getCurrentRowNum() + 1, index + 1,
+                DataSrcImpl.getOurInstance().getCurrentTableName()));
     }
 
     public long getAndVerify(String val) throws ConvException {
@@ -92,11 +95,14 @@ public class IdentifyDescriptor {
                 }
             }
         } catch (Exception e) {
-            throw new ConvException(String.format("convert %s for %s at column %d failed, %s",
-                    val, name, index + 1, e.getMessage()));
+            throw new ConvException(String.format("convert %s for %s at row %d, column %d in %s failed, %s",
+                    val, name, DataSrcImpl.getOurInstance().getCurrentRowNum() + 1, index + 1,
+                    DataSrcImpl.getOurInstance().getCurrentTableName(),
+                    e.getMessage()));
         }
 
-        throw new ConvException(String.format("convert %s for %s at column %d failed, check data failed.",
-                val, name, index + 1));
+        throw new ConvException(String.format("convert %s for %s at row %d, column %d in %s failed, check data failed.",
+                val, name, DataSrcImpl.getOurInstance().getCurrentRowNum() + 1, index + 1,
+                DataSrcImpl.getOurInstance().getCurrentTableName()));
     }
 }

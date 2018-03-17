@@ -205,6 +205,7 @@ public class DataDstLua extends DataDstJava {
 
         // 写入全局,需要防止覆盖问题
         if (ProgramOptions.getInstance().luaGlobal) {
+            sb.append(getSystemEndl());
             sb.append("local function extend(dst, src)").append(endl);
             sb.append(ident).append("for k, v in pairs(src) do").append(endl);
             sb.append(ident).append(ident).append("if not dst[k] or 'table' ~= type(v) then").append(endl);
@@ -220,6 +221,7 @@ public class DataDstLua extends DataDstJava {
             sb.append("extend(_G, const_res)").append(endl).append(endl);
         }
 
+        sb.append(getSystemEndl());
         if (isUsingLuaModule()) {
             for(HashMap.Entry<String, Object> itemSet: data.entrySet()) {
                 sb.append(String.format("%s = const_res.%s", itemSet.getKey(), itemSet.getKey())).append(endl);

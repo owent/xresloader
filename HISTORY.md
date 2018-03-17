@@ -5,6 +5,7 @@
 1. 增加一些错误提示信息的行提示和表名提示，用以辅助排查配置错误
 2. org.json更新到20180130
 3. com.google.protobuf更新到3.5.1
+4. Lua常量输出支持module("模块名", package.seeall)的模式
 
 1.4.1
 ------

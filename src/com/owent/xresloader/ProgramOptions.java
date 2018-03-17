@@ -51,6 +51,7 @@ public class ProgramOptions {
 
     public String constPrint = "";
     public boolean luaGlobal = false;
+    public String luaModule = null;
     public String xmlRootName = "root";
     public String javascriptExport = null;
     public String javascriptGlobalVar = "";
@@ -91,6 +92,7 @@ public class ProgramOptions {
         enableStdin = false;
         constPrint = "";
         luaGlobal = false;
+        luaModule = null;
         xmlRootName = "root";
         javascriptExport = null;
         javascriptGlobalVar = "";
@@ -242,6 +244,7 @@ public class ProgramOptions {
         options.addOption(null, "enable-empty-list", false, "keep empty elements in a list or repeated field with default value.");
         options.addOption(null, "stdin", false, "enable read from stdin and convert more files.");
         options.addOption(null, "lua-global", false, "add data to _G if in lua mode when print const data");
+        options.addOption(null, "lua-module", true, "module(MODULE_NAME, package.seeall) if in lua mode");
 
         return options;
     }
@@ -337,6 +340,7 @@ public class ProgramOptions {
         }
 
         luaGlobal = cmd.hasOption("lua-global");
+        luaModule = cmd.getOptionValue("lua-module", null);
         xmlRootName = cmd.getOptionValue("xml-root", xmlRootName);
         javascriptExport = cmd.getOptionValue("javascript-export", javascriptExport);
         javascriptGlobalVar = cmd.getOptionValue("javascript-global", javascriptGlobalVar);

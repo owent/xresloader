@@ -2,7 +2,7 @@
 
 return {
     [1] = {
-        xres_ver = "1.4.2",
+        xres_ver = "1.4.3",
         hash_code = "no hash code",
         data_ver = "1.0.0.0",
         count = 7,

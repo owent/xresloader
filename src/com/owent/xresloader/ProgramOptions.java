@@ -224,7 +224,7 @@ public class ProgramOptions {
 
         options.addOption(Option.builder()
             .longOpt("javascript-export")
-            .desc("set javascript export mode(nodejs, amd or no)")
+            .desc("set javascript export mode(nodejs, amd or global)")
             .hasArg()
             .argName("EXPORT MODE")
             .build()

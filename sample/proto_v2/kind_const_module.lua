@@ -21,5 +21,6 @@ local const_res = {
   },
 }
 
+
 game_const_config = const_res.game_const_config
 cost_type = const_res.cost_type

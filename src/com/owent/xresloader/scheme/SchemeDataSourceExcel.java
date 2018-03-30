@@ -2,6 +2,8 @@ package com.owent.xresloader.scheme;
 
 import com.owent.xresloader.ProgramOptions;
 import com.owent.xresloader.data.err.ConvException;
+import com.owent.xresloader.data.src.DataContainer;
+import com.owent.xresloader.data.src.DataSrcImpl;
 import com.owent.xresloader.engine.ExcelEngine;
 import com.owent.xresloader.engine.IdentifyDescriptor;
 import org.apache.poi.ss.usermodel.Row;
@@ -100,12 +102,19 @@ public final class SchemeDataSourceExcel extends SchemeDataSourceBase {
     private String cell2str(Row row, int col) {
         IdentifyDescriptor ident = new IdentifyDescriptor();
         ident.index = col;
-        return ExcelEngine.cell2s(row, ident).get();
+
+        DataContainer<String> cache = DataSrcImpl.getStringCache("");
+        ExcelEngine.cell2s(cache, row, ident);
+        return cache.get();
     }
 
     private int cell2int(Row row, int col) throws ConvException {
         IdentifyDescriptor ident = new IdentifyDescriptor();
         ident.index = col;
-        return ExcelEngine.cell2i(row, ident).get().intValue();
+
+        DataContainer<Long> cache = DataSrcImpl.getLongCache(0L);
+
+        ExcelEngine.cell2i(cache, row, ident);
+        return cache.get().intValue();
     }
 }

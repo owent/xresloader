@@ -118,14 +118,20 @@ public class DataSrcExcel extends DataSrcImpl {
             for (int i = src.data_row - 1; i < row_num; ++i) {
                 Row row = tb.getRow(i);
                 column_ident.index = src.data_col - 1;
-                DataContainer<String> key = ExcelEngine.cell2s(row, column_ident);
+                DataContainer<String> data_cache = getStringCache("");
+                ExcelEngine.cell2s(data_cache, row, column_ident);
+                String key = data_cache.get();
+
                 column_ident.index = src.data_col;
-                DataContainer<String> val = ExcelEngine.cell2s(row, column_ident, evalor);
-                if (key.valid && val.valid && !key.get().isEmpty() && !val.get().isEmpty()) {
+                data_cache = getStringCache("");
+                ExcelEngine.cell2s(data_cache, row, column_ident, evalor);
+
+                String val = data_cache.get();
+                if (null != key && null != val && !key.isEmpty() && !val.isEmpty()) {
                     if (res.macros.containsKey(key)) {
                         ProgramOptions.getLoger().warn("macro key \"%s\" is used more than once.", key);
                     }
-                    res.macros.put(key.get(), val.get());
+                    res.macros.put(key, val);
                 }
             }
 
@@ -208,7 +214,8 @@ public class DataSrcExcel extends DataSrcImpl {
 
                 for (int i = src.data_col - 1; i < row.getLastCellNum() + 1; ++i) {
                     column_ident.index = i;
-                    DataContainer<String> k = ExcelEngine.cell2s(row, column_ident, formula);
+                    DataContainer<String> k = getStringCache("");
+                    ExcelEngine.cell2s(k, row, column_ident, formula);
                     IdentifyDescriptor ident = IdentifyEngine.n2i(k.get(), i);
                     res.name_mapping.put(ident.name, ident);
                 }
@@ -274,54 +281,46 @@ public class DataSrcExcel extends DataSrcImpl {
     }
 
     @Override
-    public <T> DataContainer<T> getValue(IdentifyDescriptor ident, T ret_default) throws ConvException {
-        DataContainer<T> ret = new DataContainer<T>();
-        ret.value = ret_default;
-
-        if (null == ident) {
-            return ret;
+    public DataContainer<Boolean> getValue(IdentifyDescriptor ident, boolean dv) throws ConvException {
+        DataContainer<Boolean> ret = super.getValue(ident, dv);
+        if (null != ident) {
+            setLastColumnNum(ident.index);
         }
 
-        setLastColumnNum(ident.index);
+        ExcelEngine.cell2b(ret, current.current_row, ident, current.formula);
+        return ret;
+    }
 
-        if (ret_default instanceof Integer) {
-            DataContainer<Long> dt = ExcelEngine.cell2i(current.current_row, ident, current.formula);
-            ret.valid = dt.valid;
-            ret.value = (T)Integer.valueOf(dt.value.intValue());
-            return ret;
-        } else if (ret_default instanceof Long) {
-            DataContainer<Long> dt = ExcelEngine.cell2i(current.current_row, ident, current.formula);
-            ret.valid = dt.valid;
-            ret.value = (T)Long.valueOf(dt.value.longValue());
-            return ret;
-        } else if (ret_default instanceof Short) {
-            DataContainer<Long> dt = ExcelEngine.cell2i(current.current_row, ident, current.formula);
-            ret.valid = dt.valid;
-            ret.value = (T)Short.valueOf(dt.value.shortValue());
-            return ret;
-        } else if (ret_default instanceof Byte) {
-            DataContainer<Long> dt = ExcelEngine.cell2i(current.current_row, ident, current.formula);
-            ret.valid = dt.valid;
-            ret.value = (T)Byte.valueOf(dt.value.byteValue());
-            return ret;
-        } else if (ret_default instanceof Double) {
-            DataContainer<Double> dt = ExcelEngine.cell2d(current.current_row, ident, current.formula);
-            ret.valid = dt.valid;
-            ret.value = (T)Double.valueOf(dt.value.doubleValue());
-            return ret;
-        } else if (ret_default instanceof Float) {
-            DataContainer<Double> dt = ExcelEngine.cell2d(current.current_row, ident, current.formula);
-            ret.valid = dt.valid;
-            ret.value = (T)Float.valueOf(dt.value.floatValue());
-            return ret;
-        } else if (ret_default instanceof Boolean) {
-            ret = (DataContainer<T>) ExcelEngine.cell2b(current.current_row, ident, current.formula);
-        } else if (ret_default instanceof String) {
-            ret = (DataContainer<T>) ExcelEngine.cell2s(current.current_row, ident, current.formula);
-        } else {
-            ProgramOptions.getLoger().error("default value not supported");
+    @Override
+    public DataContainer<String> getValue(IdentifyDescriptor ident, String dv) throws ConvException {
+        DataContainer<String> ret = super.getValue(ident, dv);
+        if (null != ident) {
+            setLastColumnNum(ident.index);
         }
 
+        ExcelEngine.cell2s(ret, current.current_row, ident, current.formula);
+        return ret;
+    }
+
+    @Override
+    public DataContainer<Long> getValue(IdentifyDescriptor ident, long dv) throws ConvException {
+        DataContainer<Long> ret = super.getValue(ident, dv);
+        if (null != ident) {
+            setLastColumnNum(ident.index);
+        }
+
+        ExcelEngine.cell2i(ret, current.current_row, ident, current.formula);
+        return ret;
+    }
+
+    @Override
+    public DataContainer<Double> getValue(IdentifyDescriptor ident, double dv) throws ConvException {
+        DataContainer<Double> ret = super.getValue(ident, dv);
+        if (null != ident) {
+            setLastColumnNum(ident.index);
+        }
+
+        ExcelEngine.cell2d(ret, current.current_row, ident, current.formula);
         return ret;
     }
 

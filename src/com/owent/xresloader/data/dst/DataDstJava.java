@@ -164,41 +164,41 @@ public abstract class DataDstJava extends DataDstImpl {
         switch (desc.getType())
         {
             case INT: {
-                DataContainer<Integer> ret = DataSrcImpl.getOurInstance().getValue(desc.identify, Integer.valueOf(0));
+                DataContainer<Long> ret = DataSrcImpl.getOurInstance().getValue(desc.identify, 0L);
                 if (null != ret && ret.valid) {
-                    val = ret.value;
+                    val = ret.value.intValue();
                 }
                 break;
             }
 
             case LONG:{
-                DataContainer<Long> ret = DataSrcImpl.getOurInstance().getValue(desc.identify, Long.valueOf(0));
+                DataContainer<Long> ret = DataSrcImpl.getOurInstance().getValue(desc.identify, 0L);
                 if (null != ret && ret.valid) {
-                    val = ret.value;
+                    val = ret.value.longValue();
                 }
                 break;
             }
 
             case FLOAT:{
-                DataContainer<Float> ret = DataSrcImpl.getOurInstance().getValue(desc.identify, Float.valueOf(0));
+                DataContainer<Double> ret = DataSrcImpl.getOurInstance().getValue(desc.identify, 0.0);
                 if (null != ret && ret.valid) {
-                    val = ret.value;
+                    val = ret.value.floatValue();
                 }
                 break;
             }
 
             case DOUBLE:{
-                DataContainer<Double> ret = DataSrcImpl.getOurInstance().getValue(desc.identify, Double.valueOf(0));
+                DataContainer<Double> ret = DataSrcImpl.getOurInstance().getValue(desc.identify, 0.0);
                 if (null != ret && ret.valid) {
-                    val = ret.value;
+                    val = ret.value.doubleValue();
                 }
                 break;
             }
 
             case BOOLEAN:{
-                DataContainer<Boolean> ret = DataSrcImpl.getOurInstance().getValue(desc.identify, Boolean.FALSE);
+                DataContainer<Boolean> ret = DataSrcImpl.getOurInstance().getValue(desc.identify, false);
                 if (null != ret && ret.valid) {
-                    val = ret.value;
+                    val = ret.value.booleanValue();
                 }
                 break;
             }

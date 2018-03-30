@@ -12,8 +12,36 @@ public abstract class DataSrcImpl {
 
     private static DataSrcImpl ourInstance = null;
     private int last_column_index_ = 0;
+    private static DataContainer<Boolean> dc_cache_bool_ = new DataContainer<Boolean>();
+    private static DataContainer<String> dc_cache_str_ = new DataContainer<String>();
+    private static DataContainer<Double> dc_cache_dbl_ = new DataContainer<Double>();
+    private static DataContainer<Long> dc_cache_long_ = new DataContainer<Long>();
 
     protected DataSrcImpl() {
+    }
+
+    public static DataContainer<Boolean> getBoolCache(boolean default_val) {
+        dc_cache_bool_.value = default_val;
+        dc_cache_bool_.valid = false;
+        return dc_cache_bool_;
+    }
+
+    public static DataContainer<String> getStringCache(String default_val) {
+        dc_cache_str_.value = default_val;
+        dc_cache_bool_.valid = false;
+        return dc_cache_str_;
+    }
+
+    public static DataContainer<Double> getDoubleCache(double default_val) {
+        dc_cache_dbl_.value = default_val;
+        dc_cache_bool_.valid = false;
+        return dc_cache_dbl_;
+    }
+
+    public static DataContainer<Long> getLongCache(long default_val) {
+        dc_cache_long_.value = default_val;
+        dc_cache_bool_.valid = false;
+        return dc_cache_long_;
     }
 
     public static DataSrcImpl create(Class clazz) {
@@ -63,14 +91,34 @@ public abstract class DataSrcImpl {
     public String getCurrentFileName() { return ""; }
 
 
-    public <T> DataContainer<T> getValue(IdentifyDescriptor ident, T dv) throws ConvException {
+    public DataContainer<Boolean> getValue(IdentifyDescriptor ident, boolean dv) throws ConvException {
         if (null != ident) {
             setLastColumnNum(ident.index);
         }
-        DataContainer<T> ret = new DataContainer<T>();
-        ret.value = dv;
-        return ret;
+        return getBoolCache(dv);
     }
+
+    public DataContainer<String> getValue(IdentifyDescriptor ident, String dv) throws ConvException {
+        if (null != ident) {
+            setLastColumnNum(ident.index);
+        }
+        return getStringCache(dv);
+    }
+
+    public DataContainer<Long> getValue(IdentifyDescriptor ident, long dv) throws ConvException {
+        if (null != ident) {
+            setLastColumnNum(ident.index);
+        }
+        return getLongCache(dv);
+    }
+
+    public DataContainer<Double> getValue(IdentifyDescriptor ident, double dv) throws ConvException {
+        if (null != ident) {
+            setLastColumnNum(ident.index);
+        }
+        return getDoubleCache(dv);
+    }
+
 
     public int getRecordNumber() {
         return 0;

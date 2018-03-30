@@ -129,8 +129,8 @@ public class ExcelEngine {
      * @param col 列号
      * @return
      */
-    static public DataContainer<String> cell2s(Row row, IdentifyDescriptor col) {
-        return cell2s(row, col, null);
+    static public void cell2s(DataContainer<String> out, Row row, IdentifyDescriptor col) {
+        cell2s(out, row, col, null);
     }
 
 
@@ -174,39 +174,41 @@ public class ExcelEngine {
      * @param evalor 公式管理器
      * @return
      */
-    static public DataContainer<String> cell2s(Row row, IdentifyDescriptor col, FormulaEvaluator evalor) {
-        DataContainer<String> ret = new DataContainer<String>();
-        ret.setDefault("");
-
+    static public void cell2s(DataContainer<String> out, Row row, IdentifyDescriptor col, FormulaEvaluator evalor) {
         if (null == row) {
-            return ret;
+            return;
         }
 
         Cell c = row.getCell(col.index);
         if (null == c) {
-            return ret;
+            return;
         }
 
         CellValue cv = null;
         if (CellType.FORMULA == c.getCellTypeEnum()) {
-            if (null != evalor)
+            if (null != evalor) {
                 cv = evalor.evaluate(c);
-            else {
-                ret.set(c.toString());
-                return ret;
+            } else {
+                out.set(c.toString());
+                return;
             }
         }
 
         CellType type = (null == cv)? c.getCellTypeEnum(): cv.getCellTypeEnum();
         switch (type) {
             case BLANK:
-                return ret;
+                break;
             case BOOLEAN:
-                return ret.set(cal_cell2bool(c, cv).toString());
+                out.set(cal_cell2bool(c, cv).toString());
+                break;
             case ERROR:
-                return ret.set(cal_cell2err(c, cv).toString());
+                out.set(cal_cell2err(c, cv).toString());
+                break;
             case FORMULA:
-                return (null == cv)? ret.set(c.getCellFormula()): ret;
+                if (null == cv) {
+                    out.set(c.getCellFormula());
+                }
+                break;
             case NUMERIC:
                 if(DateUtil.isCellDateFormatted(c)) {
                     // 参照POI DateUtil.isADateFormat函数，去除无效字符
@@ -245,15 +247,18 @@ public class ExcelEngine {
 
 
                     SimpleDateFormat df = new SimpleDateFormat(fs);
-                    return ret.set(df.format(c.getDateCellValue()).trim());
+                    out.set(df.format(c.getDateCellValue()).trim());
+                    break;
                 }
 
-                return ret.set(String.valueOf(cal_cell2num(c, cv)));
+                out.set(String.valueOf(cal_cell2num(c, cv)));
+                break;
             case STRING:
                 //return ret.set(tryMacro(cal_cell2str(c, cv).trim()));
-                return ret.set(cal_cell2str(c, cv).trim());
+                out.set(cal_cell2str(c, cv).trim());
+                break;
             default:
-                return ret;
+                break;
         }
     }
 
@@ -264,8 +269,8 @@ public class ExcelEngine {
      * @param col 列号
      * @return
      */
-    static public DataContainer<Long> cell2i(Row row, IdentifyDescriptor col) throws ConvException {
-        return cell2i(row, col, null);
+    static public void cell2i(DataContainer<Long> out, Row row, IdentifyDescriptor col) throws ConvException {
+        cell2i(out, row, col, null);
     }
 
     /**
@@ -276,37 +281,35 @@ public class ExcelEngine {
      * @param evalor 公式管理器
      * @return
      */
-    static public DataContainer<Long> cell2i(Row row, IdentifyDescriptor col, FormulaEvaluator evalor) throws ConvException {
-        DataContainer<Long> ret = new DataContainer<Long>();
-        ret.setDefault(0L);
-
+    static public void cell2i(DataContainer<Long> out, Row row, IdentifyDescriptor col, FormulaEvaluator evalor) throws ConvException {
         if (null == row)
-            return ret;
+            return;
 
         Cell c = row.getCell(col.index);
         if (null == c)
-            return ret;
+            return;
 
         CellValue cv = null;
         if (CellType.FORMULA == c.getCellTypeEnum()) {
             if (null != evalor)
                 cv = evalor.evaluate(c);
             else
-                return ret;
+                return;
         }
 
         CellType type = (null == cv)? c.getCellTypeEnum(): cv.getCellTypeEnum();
         switch (type) {
             case BLANK:
-                return ret;
+                break;
             case BOOLEAN: {
                 boolean res = cal_cell2bool(c, cv);
-                return ret.set(col.getAndVerify(res ? 1 : 0));
+                out.set(col.getAndVerify(res ? 1 : 0));
+                break;
             }
             case ERROR:
-                return ret;
+                break;
             case FORMULA:
-                return ret;
+                break;
             case NUMERIC: {
                 long val = 0;
                 if (DateUtil.isCellDateFormatted(c)) {
@@ -315,20 +318,20 @@ public class ExcelEngine {
                     val = Math.round(cal_cell2num(c, cv));
                 }
 
-                ret.set(col.getAndVerify(val));
-                return ret;
+                out.set(col.getAndVerify(val));
+                break;
             }
             case STRING: {
                 String val = cal_cell2str(c, cv).trim();
                 if (val.isEmpty()) {
-                    return ret;
+                    break;
                 }
 
-                ret.set(col.getAndVerify(tryMacro(val)));
-                return ret;
+                out.set(col.getAndVerify(tryMacro(val)));
+                break;
             }
             default:
-                return ret;
+                break;
         }
     }
 
@@ -339,8 +342,8 @@ public class ExcelEngine {
      * @param col 列号
      * @return
      */
-    static public DataContainer<Double> cell2d(Row row, IdentifyDescriptor col) throws ConvException {
-        return cell2d(row, col, null);
+    static public void cell2d(DataContainer<Double> out, Row row, IdentifyDescriptor col) throws ConvException {
+        cell2d(out, row, col, null);
     }
 
     /**
@@ -351,56 +354,58 @@ public class ExcelEngine {
      * @param evalor 公式管理器
      * @return
      */
-    static public DataContainer<Double> cell2d(Row row, IdentifyDescriptor col, FormulaEvaluator evalor) throws ConvException {
-        DataContainer<Double> ret = new DataContainer<Double>();
-        ret.setDefault(0.0);
-
+    static public void cell2d(DataContainer<Double> out, Row row, IdentifyDescriptor col, FormulaEvaluator evalor) throws ConvException {
         if (null == row)
-            return ret;
+            return;
 
         Cell c = row.getCell(col.index);
         if (null == c)
-            return ret;
+            return;
 
         CellValue cv = null;
         if (CellType.FORMULA == c.getCellTypeEnum()) {
-            if (null != evalor)
+            if (null != evalor) {
                 cv = evalor.evaluate(c);
-            else
-                return ret;
+            } else {
+                return;
+            }
         }
 
         CellType type = (null == cv)? c.getCellTypeEnum(): cv.getCellTypeEnum();
         switch (type) {
             case BLANK:
-                return ret;
+                break;
             case BOOLEAN:
-                return ret.set(cal_cell2bool(c, cv) ? 1.0 : 0.0);
+                out.set(cal_cell2bool(c, cv) ? 1.0 : 0.0);
+                break;
             case ERROR:
-                return ret;
+                break;
             case FORMULA:
-                return ret;
+                break;
             case NUMERIC:
                 if(DateUtil.isCellDateFormatted(c)) {
-                    return ret.set((double) dateToUnixTimestamp(c.getDateCellValue()));
+                    out.set((double) dateToUnixTimestamp(c.getDateCellValue()));
+                    break;
                 }
-                return ret.set(cal_cell2num(c, cv));
+                out.set(cal_cell2num(c, cv));
+                break;
             case STRING: {
                 String val = cal_cell2str(c, cv).trim();
                 if (val.isEmpty()) {
-                    return ret;
+                    break;
                 }
 
                 try {
-                    return ret.set(Double.valueOf(tryMacro(val)));
+                    out.set(Double.valueOf(tryMacro(val)));
                 } catch (java.lang.NumberFormatException e) {
                     throw new ConvException(
                         String.format("%s can not be converted to a number", val)
                     );
                 }
+                break;
             }
             default:
-                return ret;
+                break;
         }
     }
 
@@ -411,8 +416,8 @@ public class ExcelEngine {
      * @param col 列号
      * @return
      */
-    static public DataContainer<Boolean> cell2b(Row row, IdentifyDescriptor col) {
-        return cell2b(row, col, null);
+    static public void cell2b(DataContainer<Boolean> out, Row row, IdentifyDescriptor col) {
+        cell2b(out, row, col, null);
     }
 
     /**
@@ -423,46 +428,48 @@ public class ExcelEngine {
      * @param evalor 公式管理器
      * @return
      */
-    static public DataContainer<Boolean> cell2b(Row row, IdentifyDescriptor col, FormulaEvaluator evalor) {
-        DataContainer<Boolean> ret = new DataContainer<Boolean>();
-        ret.setDefault(false);
-
+    static public void cell2b(DataContainer<Boolean> out, Row row, IdentifyDescriptor col, FormulaEvaluator evalor) {
         if (null == row)
-            return ret;
+            return;
 
         Cell c = row.getCell(col.index);
         if (null == c)
-            return ret;
+            return;
 
         CellValue cv = null;
         if (CellType.FORMULA == c.getCellTypeEnum()) {
-            if (null != evalor)
+            if (null != evalor) {
                 cv = evalor.evaluate(c);
-            else
-                return ret.set(true);
+            } else {
+                out.set(true);
+                return;
+            }
         }
 
         CellType type = (null == cv)? c.getCellTypeEnum(): cv.getCellTypeEnum();
         switch (type) {
             case BLANK:
-                return ret;
+                break;
             case BOOLEAN:
-                return ret.set(cal_cell2bool(c, cv));
+                out.set(cal_cell2bool(c, cv));
+                break;
             case ERROR:
-                return ret;
+                break;
             case FORMULA:
-                return ret;
+                break;
             case NUMERIC:
-                return ret.set(cal_cell2num(c, cv) != 0);
+                out.set(cal_cell2num(c, cv) != 0);
+                break;
             case STRING:
                 String item = tryMacro(cal_cell2str(c, cv).trim()).toLowerCase();
                 if (item.isEmpty()) {
-                    return ret;
+                    break;
                 }
 
-                return ret.set(!item.equals("0") && !item.equals("0.0") && !item.equalsIgnoreCase("false") && !item.equalsIgnoreCase("no") && !item.equalsIgnoreCase("disable"));
+                out.set(!item.equals("0") && !item.equals("0.0") && !item.equalsIgnoreCase("false") && !item.equalsIgnoreCase("no") && !item.equalsIgnoreCase("disable"));
+                break;
             default:
-                return ret;
+                break;
         }
     }
 

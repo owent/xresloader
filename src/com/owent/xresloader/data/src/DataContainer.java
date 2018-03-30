@@ -17,13 +17,7 @@ public class DataContainer<T> {
 
     public DataContainer<T> set(T v) {
         value = v;
-
-        // 空字符串也认为是未配置项
-        if (v instanceof String) {
-            valid = false == ((String) v).isEmpty();
-        } else {
-            valid = true;
-        }
+        valid = true;
 
         return this;
     }

@@ -283,8 +283,8 @@ public class DataSrcExcel extends DataSrcImpl {
     @Override
     public DataContainer<Boolean> getValue(IdentifyDescriptor ident, boolean dv) throws ConvException {
         DataContainer<Boolean> ret = super.getValue(ident, dv);
-        if (null != ident) {
-            setLastColumnNum(ident.index);
+        if (null == ident) {
+            return ret;
         }
 
         ExcelEngine.cell2b(ret, current.current_row, ident, current.formula);
@@ -294,8 +294,8 @@ public class DataSrcExcel extends DataSrcImpl {
     @Override
     public DataContainer<String> getValue(IdentifyDescriptor ident, String dv) throws ConvException {
         DataContainer<String> ret = super.getValue(ident, dv);
-        if (null != ident) {
-            setLastColumnNum(ident.index);
+        if (null == ident) {
+            return ret;
         }
 
         ExcelEngine.cell2s(ret, current.current_row, ident, current.formula);
@@ -305,8 +305,8 @@ public class DataSrcExcel extends DataSrcImpl {
     @Override
     public DataContainer<Long> getValue(IdentifyDescriptor ident, long dv) throws ConvException {
         DataContainer<Long> ret = super.getValue(ident, dv);
-        if (null != ident) {
-            setLastColumnNum(ident.index);
+        if (null == ident) {
+            return ret;
         }
 
         ExcelEngine.cell2i(ret, current.current_row, ident, current.formula);
@@ -316,8 +316,8 @@ public class DataSrcExcel extends DataSrcImpl {
     @Override
     public DataContainer<Double> getValue(IdentifyDescriptor ident, double dv) throws ConvException {
         DataContainer<Double> ret = super.getValue(ident, dv);
-        if (null != ident) {
-            setLastColumnNum(ident.index);
+        if (null == ident) {
+            return ret;
         }
 
         ExcelEngine.cell2d(ret, current.current_row, ident, current.formula);

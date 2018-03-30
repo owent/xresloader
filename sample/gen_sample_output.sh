@@ -20,7 +20,7 @@ for proto_dir in proto_v2 proto_v3; do
     java -client -jar "$XRESLOADER" -t lua -p protobuf -o $proto_dir -f $proto_dir/kind.pb --pretty 4 -s $XLSX_FILE -m scheme_kind -n "/(?i)\.bin\$/\.lua/" --data-version 1.0.0.0 ;
     java -client -jar "$XRESLOADER" -t lua -p protobuf -o $proto_dir -f $proto_dir/kind.pb --lua-module ProtoData.Kind -s $XLSX_FILE -m scheme_kind -n "/(?i)\.bin\$/_module\.lua/" --data-version 1.0.0.0 ;
     echo "Generate sample data for $proto_dir, batchmode using --stdin";
-    echo '
+    CMDS='
         -t json -p protobuf -o '$proto_dir'    -f '$proto_dir/kind.pb' -s '$XLSX_FILE' -m scheme_kind -n "/(?i)\.bin$/\.json/"
         -t xml -p protobuf -o '$proto_dir'     -f '$proto_dir/kind.pb' -s '$XLSX_FILE' -m scheme_kind -n "/(?i)\.bin$/\.xml/"
         -t msgpack -p protobuf -o '$proto_dir' -f '$proto_dir/kind.pb' -s '$XLSX_FILE' -m scheme_kind -n "/(?i)\.bin$/\.msgpack.bin/"
@@ -31,5 +31,7 @@ for proto_dir in proto_v2 proto_v3; do
         -t bin -p protobuf -o '$proto_dir'     -f '$proto_dir/kind.pb' -m DataSource='$XLSX_FILE'|arr_in_arr|3,1 -m MacroSource='$XLSX_FILE'|macro|2,1 -m ProtoName=arr_in_arr_cfg -m OutputFile=arr_in_arr_cfg.bin -m KeyRow=2 -o '$proto_dir'
         -t json -p protobuf -o '$proto_dir'    -f '$proto_dir/kind.pb' -s '$XLSX_FILE' -m scheme_upgrade -n "/(?i)\.bin$/\.json/"
         -t lua -p protobuf -o '$proto_dir'     -f '$proto_dir/kind.pb' -s '$XLSX_FILE' -m scheme_upgrade -n "/(?i)\.bin$/\.lua/"
-    ' | java -client -jar "$XRESLOADER" --stdin;
+    ';
+    echo "Run with --stdin: $CMDS";
+    echo "$CMDS" | java -client -jar "$XRESLOADER" --stdin;
 done

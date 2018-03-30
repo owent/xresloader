@@ -28,19 +28,19 @@ public abstract class DataSrcImpl {
 
     public static DataContainer<String> getStringCache(String default_val) {
         dc_cache_str_.value = default_val;
-        dc_cache_bool_.valid = false;
+        dc_cache_str_.valid = false;
         return dc_cache_str_;
     }
 
     public static DataContainer<Double> getDoubleCache(double default_val) {
         dc_cache_dbl_.value = default_val;
-        dc_cache_bool_.valid = false;
+        dc_cache_dbl_.valid = false;
         return dc_cache_dbl_;
     }
 
     public static DataContainer<Long> getLongCache(long default_val) {
         dc_cache_long_.value = default_val;
-        dc_cache_bool_.valid = false;
+        dc_cache_long_.valid = false;
         return dc_cache_long_;
     }
 

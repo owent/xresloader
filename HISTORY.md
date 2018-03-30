@@ -4,6 +4,8 @@
 ------
 1. javascript全局导出支持多层namespace
 2. 修订sample脚本问题导致的node.js转出选项不正确的问题
+3. 优化执行转表时创建对象的数量，使用共享的输出缓存，不再依赖运行时java反射
+4. 补充sample的新的示例的README
 
 
 1.4.2

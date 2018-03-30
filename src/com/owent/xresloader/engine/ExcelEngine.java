@@ -255,7 +255,10 @@ public class ExcelEngine {
                 break;
             case STRING:
                 //return ret.set(tryMacro(cal_cell2str(c, cv).trim()));
-                out.set(cal_cell2str(c, cv).trim());
+                String val = cal_cell2str(c, cv).trim();
+                if (!val.isEmpty()) {
+                    out.set(val);
+                }
                 break;
             default:
                 break;

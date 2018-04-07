@@ -28,7 +28,7 @@ message test_msg_verifier {
 
 message arr_in_arr {
   optional string name = 1;
-  repeated int32 int_arr = 2;
+  repeated int32 int_arr = 2 [ packed = true ];
   repeated string str_arr = 3;
 }
 

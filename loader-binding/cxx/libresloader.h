@@ -16,7 +16,7 @@
 #include <type_traits>
 #include <map>
 
-#if defined(__cplusplus) && __cplusplus >= 201103L
+#if !defined(LIBRESLOADER_DISABLE_UNORDER) && ((defined(__cplusplus) && __cplusplus >= 201103L) || (defined(_MSVC_LANG) && _MSVC_LANG >= 201402L))
     #include <unordered_map>
     #include <tuple>
 #endif
@@ -32,7 +32,7 @@
 
 namespace xresloader {
     namespace details {
-#if defined(__cplusplus) && __cplusplus >= 201103L
+#if !defined(LIBRESLOADER_DISABLE_UNORDER) && ((defined(__cplusplus) && __cplusplus >= 201103L) || (defined(_MSVC_LANG) && _MSVC_LANG >= 201402L))
 
         // Implementing some of the C++14 features in C++11
         template <size_t... I> class index_sequence {};
@@ -304,7 +304,7 @@ namespace xresloader {
         }
 
     private:
-#if defined(__cplusplus) && __cplusplus >= 201103L
+#if !defined(LIBRESLOADER_DISABLE_UNORDER) && ((defined(__cplusplus) && __cplusplus >= 201103L) || (defined(_MSVC_LANG) && _MSVC_LANG >= 201402L))
         typedef std::unordered_map<key_type, value_type, typename details::conf_hash_dector<key_type>::type > data_map_t;
 #else
         typedef std::map<key_type, value_type> data_map_t;
@@ -397,7 +397,7 @@ namespace xresloader {
         }
 
     protected:
-#if defined(__cplusplus) && __cplusplus >= 201103L
+#if !defined(LIBRESLOADER_DISABLE_UNORDER) && ((defined(__cplusplus) && __cplusplus >= 201103L) || (defined(_MSVC_LANG) && _MSVC_LANG >= 201402L))
         typedef std::unordered_map<key_type, list_type, typename details::conf_hash_dector<key_type>::type> data_map_t;
 #else
         typedef std::map<key_type, list_type> data_map_t;

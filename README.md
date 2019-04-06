@@ -3,9 +3,9 @@ xresloader
 
 快速实现一个简单暴力功能强大的导表工具
 
-构建环境     | Linux (Oracle JDK 8) |
--------------|----------------------|
-当前构建状态 | [![Build Status](https://travis-ci.org/xresloader/xresloader.svg?branch=master)](https://travis-ci.org/xresloader/xresloader) |
+| 构建环境     | Linux (Oracle JDK 8)                                                                                                          |
+| ------------ | ----------------------------------------------------------------------------------------------------------------------------- |
+| 当前构建状态 | [![Build Status](https://travis-ci.org/xresloader/xresloader.svg?branch=master)](https://travis-ci.org/xresloader/xresloader) |
 
 
 [![Gitter](https://badges.gitter.im/xresloader/xresloader.svg)](https://gitter.im/xresloader/xresloader?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
@@ -52,31 +52,31 @@ echo "
 可用参数列表
 ------
 
-|          参数选项           |         描述        |                   说明                                                                          |
-|-----------------------------|---------------------|------------------------------------------------------------------------------------------------------------|
-|-h --help                    | 帮助信息            | 显示帮助和支持的参数列表                                                                           |
-|-t --output-type             | 输出类型            | bin（默认值）,lua,msgpack,json,xml,javascript,js                                                 |
-|-p --proto                   | 协议描述类型        | protobuf(默认值),capnproto(暂未实现),flatbuffer(暂未实现)                                           |
-|-f --proto-file              | 协议描述文件        |                                                                                                 |
-|-o --output-dir              | 输出目录            | 默认为当前目录                                                                                    |
-|-d --data-src-dir            | 数据源根目录        | 默认为当前目录                                                                                    |
-|-s --src-file                | 数据源描述文件      | 后缀可以是 .xls, .xlsx, .cvs, .xlsm, .ods, .ini, .cfg, .conf, .json                               |
-|-m --src-meta                | 数据源描述表        | 可多个                                                                                           |
-|-v --version                 | 打印版本号          |                                                                                                 |
-|-n --rename                  | 重命名输出文件名    | 正则表达式 （如：/(?i)\\.bin$/\\.lua/）                                                             |
-|-c --const-print             | 输出协议描述中的常量 | 参数为字符串，表示输出的文件名                                                                       |
-|-a --data-version            | 设置数据版本号       | 参数为字符串，表示输出的数据的data_ver字段。如果不设置将按执行时间自动生成一个                             |
-|--pretty                     | 格式化输出          | 参数为整数，0代表关闭美化输出功能，大于0表示格式化时的缩进量                                             |
-|--enable-excel-formular      | 开启Excel公式支持   | 默认开启，使用公式会大幅减慢转表速度                                                                  |
-|--disable-excel-formular     | 关闭Excel公式支持   | 2003版的excel(*.xls)关闭公式会大幅加快转表速度                                                       |
-|--disable-empty-list         | 禁止空列表项        | 默认开启，禁止空列表项，自动删除Excel中的未填充数据，不会转出到输出文件中                                  |
-|--enable-empty-list          | 开启空列表项        | 开启空列表项，未填充数据将使用默认的空值来填充，并转出到输出文件中                                         |     
-|--stdin                      | 通过标准输入批量转表| 通过标准输入批量转表，参数可上面的一样,每行一项，字符串参数可以用单引号或双引号包裹，但是都不支持转义             |
-|--lua-global                 | lua输出写到全局表   | 输出协议描述中的常量到Lua脚本时，同时导入符号到全局表_G中（仅对常量导出有效）                               |
-|--lua-module                 | lua输出使用module写出 | 输出Lua脚本时，使用 module(模块名, package.seeall) 导出到全局                                       |    
-|--xml-root                   | xml输出的根节点tag  | 输出格式为xml时的根节点的TagName                                                                    |
-|--javascript-export          | 导出javascript数据的模式| 可选项(nodejs: 使用兼容nodejs的exports, amd: 使用兼容amd的define, 其他: 写入全局(window或global))  |
-|--javascript-global          | 导出javascript全局空间| 导出数据到全局时，可以指定写入的名字空间                                                             |
+| 参数选项                 | 描述                     | 说明                                                                                                  |
+| ------------------------ | ------------------------ | ----------------------------------------------------------------------------------------------------- |
+| -h --help                | 帮助信息                 | 显示帮助和支持的参数列表                                                                              |
+| -t --output-type         | 输出类型                 | bin（默认值）,lua,msgpack,json,xml,javascript,js                                                      |
+| -p --proto               | 协议描述类型             | protobuf(默认值),capnproto(暂未实现),flatbuffer(暂未实现)                                             |
+| -f --proto-file          | 协议描述文件             |                                                                                                       |
+| -o --output-dir          | 输出目录                 | 默认为当前目录                                                                                        |
+| -d --data-src-dir        | 数据源根目录             | 默认为当前目录                                                                                        |
+| -s --src-file            | 数据源描述文件           | 后缀可以是 .xls, .xlsx, .cvs, .xlsm, .ods, .ini, .cfg, .conf, .json                                   |
+| -m --src-meta            | 数据源描述表             | 可多个                                                                                                |
+| -v --version             | 打印版本号               |                                                                                                       |
+| -n --rename              | 重命名输出文件名         | 正则表达式 （如：/(?i)\\.bin$/\\.lua/）                                                               |
+| -c --const-print         | 输出协议描述中的常量     | 参数为字符串，表示输出的文件名                                                                        |
+| -a --data-version        | 设置数据版本号           | 参数为字符串，表示输出的数据的data_ver字段。如果不设置将按执行时间自动生成一个                        |
+| --pretty                 | 格式化输出               | 参数为整数，0代表关闭美化输出功能，大于0表示格式化时的缩进量                                          |
+| --enable-excel-formular  | 开启Excel公式支持        | 默认开启，使用公式会大幅减慢转表速度                                                                  |
+| --disable-excel-formular | 关闭Excel公式支持        | 2003版的excel(*.xls)关闭公式会大幅加快转表速度                                                        |
+| --disable-empty-list     | 禁止空列表项             | 默认开启，禁止空列表项，自动删除Excel中的未填充数据，不会转出到输出文件中                             |
+| --enable-empty-list      | 开启空列表项             | 开启空列表项，未填充数据将使用默认的空值来填充，并转出到输出文件中                                    |
+| --stdin                  | 通过标准输入批量转表     | 通过标准输入批量转表，参数可上面的一样,每行一项，字符串参数可以用单引号或双引号包裹，但是都不支持转义 |
+| --lua-global             | lua输出写到全局表        | 输出协议描述中的常量到Lua脚本时，同时导入符号到全局表_G中（仅对常量导出有效）                         |
+| --lua-module             | lua输出使用module写出    | 输出Lua脚本时，使用 module(模块名, package.seeall) 导出到全局                                         |
+| --xml-root               | xml输出的根节点tag       | 输出格式为xml时的根节点的TagName                                                                      |
+| --javascript-export      | 导出javascript数据的模式 | 可选项(nodejs: 使用兼容nodejs的exports, amd: 使用兼容amd的define, 其他: 写入全局(window或global))     |
+| --javascript-global      | 导出javascript全局空间   | 导出数据到全局时，可以指定写入的名字空间                                                              |
 
  
 协议类型
@@ -88,30 +88,31 @@ echo "
                 
 数据源描述文件说明(根据后缀判断类型有不同读取方式)
 ------
-|     数据源描述文件后缀      |                                  数据源描述表                                  |           说明           |
-|-----------------------------|--------------------------------------------------------------------------------|--------------------------|
-|         .xls,.xlsx          | 视作Excel文件，数据源描述表为Excel内的Sheet名称                                |已实现, 非微软格式尚未测试|
-|     .ini,.conf,.cfg         | 视作ini文件，数据源描述表为ini内的Section名称                                  |已实现(不支持自动合表)   |
-|          .json              | 视作json文件，数据源描述表为json内的第一层子节点名称                              |已实现(必须是UTF-8编码,不支持自动合表)   |
-|          .xml               | 视作xml文件，数据源描述表为xml内的根节点下的子节点TagName，并且只取第一个            |(暂未支持)                |
+| 数据源描述文件后缀 | 数据源描述表                                                              | 说明                                   |
+| ------------------ | ------------------------------------------------------------------------- | -------------------------------------- |
+| .xls,.xlsx         | 视作Excel文件，数据源描述表为Excel内的Sheet名称                           | 已实现, 非微软格式尚未测试             |
+| .ini,.conf,.cfg    | 视作ini文件，数据源描述表为ini内的Section名称                             | 已实现(不支持自动合表)                 |
+| .json              | 视作json文件，数据源描述表为json内的第一层子节点名称                      | 已实现(必须是UTF-8编码,不支持自动合表) |
+| .xml               | 视作xml文件，数据源描述表为xml内的根节点下的子节点TagName，并且只取第一个 | (暂未支持)                             |
 
 
 数据源描述表配置项及示例
 ======
-|     字段     |                        简介                                                            |           主配置           |     次配置   |   补充配置   |     说明     |
-|--------------|----------------------------------------------------------------------------------------|----------------------------|--------------|--------------|--------------|
-|DataSource    | 配置数据源(主配置:文件路径,次配置:表名,补充配置:起始行号，列号)                        |  ./资源转换示例.xlsx       | kind         |  3,1         |   **必须**，可多个。多个则表示把多个Excel表数据合并再生成配置输出，这意味着这多个Excel表的描述Key的顺序和个数必须相同   |
-|MacroSource   | 元数据数据源(主配置:文件路径,次配置:表名,补充配置:起始行号，列号)                      |  ./资源转换示例.xlsx       | macro        |  2,1         |    *可选*    |
-|编程接口配置  |
-|ProtoName     | 协议描述名称                                                                           |   role_cfg                 |              |              |   **必须**, 这个名字可以直接是类型名称[MessageName]，也可以是[PackageName].[MessageName]   |
-|OutputFile    | 输出文件                                                                               |   role_cfg.bin             |              |              |   **必须**   |
-|KeyRow        | 字段名描述行                                                                           |  2                         |              |              |   **必须**   |
-|KeyCase       | 字段名大小写                                                                           | 小写                       |              |              |大写/小写/不变(大小写转换，如果不需要则留空或小写)|
-|KeyWordSplit  | 字段名分词字符                                                                         | _                          |              |              |    *可选*,字段名映射时单词之间填充的字符串,不需要请留空 |
-|KeyPrefix     | 字段名固定前缀                                                                         |                            |              |              |    *可选*,字段名映射时附加的前缀,不需要请留空 |
-|KeySuffix     | 字段名固定后缀                                                                         |                            |              |              |    *可选*,字段名映射时附加的后缀,不需要请留空 |
-|KeyWordRegex  | 分词规则(判断规则,移除分词符号规则,前缀过滤规则)                                       | [A-Z_\$ \t\r\n]            | [_\$ \t\r\n] | [a-zA-Z_\$]  | *(可选)*,字段名映射时单词的分词规则,正则表达式,不需要请留空 |
-|Encoding      | 编码转换                                                                               | UTF-8                      |              |              |注：Google的protobuf库的代码里写死了UTF-8，故而该选项对Protobuf的二进制输出无效|
+| 字段            | 简介                                                              | 主配置              | 次配置       | 补充配置    | 说明                                                                                                                |
+| --------------- | ----------------------------------------------------------------- | ------------------- | ------------ | ----------- | ------------------------------------------------------------------------------------------------------------------- |
+| DataSource      | 配置数据源(主配置:文件路径,次配置:表名,补充配置:起始行号，列号)   | ./资源转换示例.xlsx | kind         | 3,1         | **必须**，可多个。多个则表示把多个Excel表数据合并再生成配置输出，这意味着这多个Excel表的描述Key的顺序和个数必须相同 |
+| MacroSource     | 元数据数据源(主配置:文件路径,次配置:表名,补充配置:起始行号，列号) | ./资源转换示例.xlsx | macro        | 2,1         | *可选*                                                                                                              |
+| 编程接口配置    |
+| ProtoName       | 协议描述名称                                                      | role_cfg            |              |             | **必须**, 这个名字可以直接是类型名称[MessageName]，也可以是[PackageName].[MessageName]                              |
+| OutputFile      | 输出文件                                                          | role_cfg.bin        |              |             | **必须**                                                                                                            |
+| KeyRow          | 字段名描述行                                                      | 2                   |              |             | **必须**                                                                                                            |
+| KeyCase         | 字段名大小写                                                      | 小写                |              |             | 大写/小写/不变(大小写转换，如果不需要则留空或小写)                                                                  |
+| KeyWordSplit    | 字段名分词字符                                                    | _                   |              |             | *可选*,字段名映射时单词之间填充的字符串,不需要请留空                                                                |
+| KeyPrefix       | 字段名固定前缀                                                    |                     |              |             | *可选*,字段名映射时附加的前缀,不需要请留空                                                                          |
+| KeySuffix       | 字段名固定后缀                                                    |                     |              |             | *可选*,字段名映射时附加的后缀,不需要请留空                                                                          |
+| KeyWordRegex    | 分词规则(判断规则,移除分词符号规则,前缀过滤规则)                  | [A-Z_\$ \t\r\n]     | [_\$ \t\r\n] | [a-zA-Z_\$] | *(可选)*,字段名映射时单词的分词规则,正则表达式,不需要请留空                                                         |
+| Encoding        | 编码转换                                                          | UTF-8               |              |             | 注：Google的protobuf库的代码里写死了UTF-8，故而该选项对Protobuf的二进制输出无效                                     |
+| UeCsv-UProperty | UnrealEngine配置支持的字段属性                                    | 字段分组            | 蓝图权限     | 编辑权限    | 默认值: XresConfig\|BlueprintReadOnly\|EditAnywhere                                                                 |
 
 
 数据源描述的特别说明
@@ -150,14 +151,14 @@ echo "
 
 输出格式说明
 ======
-|          输出格式参数       |                                  输出格式说明                                                                                       |           说明                                    |
-|-----------------------------|-------------------------------------------------------------------------------------------------------------------------------------|---------------------------------------------------|
-|           bin               | 基于协议的二进制文件,不同的协议类型(-p参数)输出的二进制不一样,一般是header+body,body中有转出的数据列表, 协议格式见header文件夹      | 示例见 [sample](sample/proto_v3) (protobuf)                |
-|           lua               | 转出为的lua代码文件(可选是否要pretty格式化), 一般格式为 return {\[1\] = 转表头信息, \[协议结构名称\] = {数据列表} }             | 示例见[sample](sample/proto_v3)          |
-|          msgpack            | 转出为使用[MsgPack](http://msgpack.org/)打包的二进制文件,内含的第一个message是转表头信息，后面紧跟数据，可以用任何支持得客户端解包  | 示例见[sample](sample/proto_v3)  |
-|           json              | 转出为json文件,一般格式为 \[ {转表头信息}, {协议结构名称 : \[ 转出的数据 \] } \]                                             | 示例见[sample](sample/proto_v3)         |
-|           xml               | 转出为xml文件,一般格式为&lt;root&gt;&lt;header&gt;转表头信息&lt;/header&gt;&lt;body&gt;&lt;协议结构名称&gt;数据内容&lt;/协议结构名称&gt;&lt;/body&gt;&lt;/root&gt; | 示例见[sample](sample/proto_v3)  |
-|           js               | 转出为js代码文件(可选是否要pretty格式化) | 示例见[sample](sample/proto_v3)  |
+| 输出格式参数 | 输出格式说明                                                                                                                                                       | 说明                                        |
+| ------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------- |
+| bin          | 基于协议的二进制文件,不同的协议类型(-p参数)输出的二进制不一样,一般是header+body,body中有转出的数据列表, 协议格式见header文件夹                                     | 示例见 [sample](sample/proto_v3) (protobuf) |
+| lua          | 转出为的lua代码文件(可选是否要pretty格式化), 一般格式为 return {\[1\] = 转表头信息, \[协议结构名称\] = {数据列表} }                                                | 示例见[sample](sample/proto_v3)             |
+| msgpack      | 转出为使用[MsgPack](http://msgpack.org/)打包的二进制文件,内含的第一个message是转表头信息，后面紧跟数据，可以用任何支持得客户端解包                                 | 示例见[sample](sample/proto_v3)             |
+| json         | 转出为json文件,一般格式为 \[ {转表头信息}, {协议结构名称 : \[ 转出的数据 \] } \]                                                                                   | 示例见[sample](sample/proto_v3)             |
+| xml          | 转出为xml文件,一般格式为&lt;root&gt;&lt;header&gt;转表头信息&lt;/header&gt;&lt;body&gt;&lt;协议结构名称&gt;数据内容&lt;/协议结构名称&gt;&lt;/body&gt;&lt;/root&gt; | 示例见[sample](sample/proto_v3)             |
+| js           | 转出为js代码文件(可选是否要pretty格式化)                                                                                                                           | 示例见[sample](sample/proto_v3)             |
 
 
 **注意：** Xml输出格式中，列表元素的结构是&lt;配置名称 for="0"&gt;数据1&lt;/配置名称&gt;&lt;配置名称 for="1"&gt;数据2...&lt;/配置名称&gt; 属性字段for表示数组索引，目的是方便通过xpath查找。

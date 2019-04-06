@@ -63,6 +63,8 @@ public abstract class SchemeDataSourceBase implements SchemeDataSourceImpl {
             SchemeConf.getInstance().getKey().buildKeyWordRegexPrefixRule(datas.get(2));
         } else if (key.equalsIgnoreCase("Encoding")) {
             SchemeConf.getInstance().getKey().setEncoding(datas.get(0));
+        } else if (key.equalsIgnoreCase("UeCsv-UProperty")) {
+            SchemeConf.getInstance().setUECSVOptions(datas.get(0), datas.get(1), datas.get(2));
         } else {
             return false;
         }

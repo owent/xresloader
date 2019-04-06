@@ -1,5 +1,19 @@
 更新记录：
 ==========
+2.0.0
+------
+1. 包名由 com.owent.xresloader 改为 org.xresloader.core
+2. 协议包名由 com.owent.xresloader.pb 改为 org.xresloader.pb
+3. 初步支持 UnrealEngine 4 的数据表和代码导出
+4. 更新protobuf到 3.7.1
+5. 更新maven-compiler-plugin到3.8.0
+6. 更新maven-shade-plugin到3.2.1
+7. 更新commons-codec到1.12
+8. 更新log4j到2.11.2
+9. 使用org.msgpack.msgpack-core代替org.msgpack.msgpack
+10. 更新org.json到20180813
+11. 更新poi到4.0.1
+
 1.4.3
 ------
 1. javascript全局导出支持多层namespace

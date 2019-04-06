@@ -1,6 +1,6 @@
 syntax = "proto3";
 
-package com.owent.xresloader.pb;
+package org.xresloader.pb;
 
 message xresloader_header {
   string xres_ver = 1;

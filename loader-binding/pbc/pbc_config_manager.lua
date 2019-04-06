@@ -107,7 +107,7 @@ function pbc_config_manager:load_datablocks(path, data_blocks, data_collector_fn
 end
 
 function pbc_config_manager:load_buffer_kv(path, buffers, kv_fn, cfg_set_name)
-    local msg, error_text = pbc.decode("com.owent.xresloader.pb.xresloader_datablocks", buffers)
+    local msg, error_text = pbc.decode("org.xresloader.pb.xresloader_datablocks", buffers)
     if false == msg then
         log_error('decode buffer failed, path=%s: %s', tostring(path), error_text)
         return false
@@ -131,7 +131,7 @@ function pbc_config_manager:load_buffer_kv(path, buffers, kv_fn, cfg_set_name)
 end
 
 function pbc_config_manager:load_buffer_kl(path, buffers, kv_fn, cfg_set_name)
-    local msg, error_text = pbc.decode("com.owent.xresloader.pb.xresloader_datablocks", buffers)
+    local msg, error_text = pbc.decode("org.xresloader.pb.xresloader_datablocks", buffers)
     if false == msg then
         log_error('decode buffer failed, path=%s: %s', tostring(path), error_text)
         return false

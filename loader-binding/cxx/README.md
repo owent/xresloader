@@ -7,7 +7,7 @@
 FAQ
 ======
 
-出现xresloader符号重定义（multiple definition of `com::owent::xresloader::pb::xresloader_XXX）
+出现xresloader符号重定义（multiple definition of `org::xresloader::pb::xresloader_XXX）
 ------
 
 [pb_header.pb.cc](pb_header.pb.cc) 和 [pb_header_v3.pb.cc](pb_header_v3.pb.cc) 只能保留一个

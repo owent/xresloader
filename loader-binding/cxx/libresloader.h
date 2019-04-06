@@ -96,7 +96,7 @@ namespace xresloader {
         public:
             typedef std::tuple<TKey...> key_type;
             typedef std::shared_ptr<TItem> value_type;
-            typedef com::owent::xresloader::pb::xresloader_datablocks proto_type;
+            typedef org::xresloader::pb::xresloader_datablocks proto_type;
 
             typedef std::function<key_type(value_type)> func_type;
             typedef std::function<bool(const value_type&)> filter_func_type;

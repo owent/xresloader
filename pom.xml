@@ -4,9 +4,9 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.owent.xresloader</groupId>
+    <groupId>org.xresloader</groupId>
     <artifactId>xresloader</artifactId>
-    <version>1.4.3</version>
+    <version>2.0.0</version>
     <packaging>jar</packaging>
     <name>xresloader</name>
 
@@ -17,7 +17,7 @@
     <build>
         <resources>
             <resource>
-                <directory>src/com/owent/xresloader/resource</directory>
+                <directory>src/org/xresloader/core/resource</directory>
                 <filtering>true</filtering>
             </resource>
         </resources>
@@ -28,7 +28,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.7.0</version>
+                <version>3.8.0</version>
                 <configuration>
                     <source>1.8</source>
                     <target>1.8</target>
@@ -59,7 +59,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-shade-plugin</artifactId>
-                <version>3.1.0</version>
+                <version>3.2.1</version>
                 <executions>
                     <execution>
                         <phase>package</phase>
@@ -80,7 +80,7 @@
                             <transformers>
                                 <transformer
                                     implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
-                                    <mainClass>com.owent.xresloader.main</mainClass>
+                                    <mainClass>org.xresloader.core.main</mainClass>
                                 </transformer>
                             </transformers>
                         </configuration>
@@ -100,18 +100,18 @@
         <dependency>
             <groupId>commons-codec</groupId>
             <artifactId>commons-codec</artifactId>
-            <version>1.11</version>
+            <version>1.12</version>
         </dependency>
 
         <dependency>
             <groupId>org.apache.logging.log4j</groupId>
             <artifactId>log4j-api</artifactId>
-            <version>2.10.0</version>
+            <version>2.11.2</version>
         </dependency>
         <dependency>
             <groupId>org.apache.logging.log4j</groupId>
             <artifactId>log4j-core</artifactId>
-            <version>2.10.0</version>
+            <version>2.11.2</version>
         </dependency>
 
         <dependency>
@@ -129,26 +129,26 @@
         <dependency>
             <groupId>org.json</groupId>
             <artifactId>json</artifactId>
-            <version>20180130</version>
+            <version>20180813</version>
         </dependency>
 
         <dependency>
             <groupId>com.google.protobuf</groupId>
             <artifactId>protobuf-java</artifactId>
-            <version>3.5.1</version>
+            <version>3.7.1</version>
         </dependency>
 
         <!-- POI -->
         <dependency>
             <groupId>org.apache.poi</groupId>
             <artifactId>poi-ooxml</artifactId>
-            <version>3.17</version>
+            <version>4.0.1</version>
         </dependency>
 
         <dependency>
             <groupId>org.apache.poi</groupId>
             <artifactId>poi</artifactId>
-            <version>3.17</version>
+            <version>4.0.1</version>
         </dependency>
 
         <dependency>

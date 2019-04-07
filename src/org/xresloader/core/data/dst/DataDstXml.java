@@ -96,6 +96,7 @@ public class DataDstXml extends DataDstJava {
         return null;
     }
 
+    @SuppressWarnings("unchecked")
     private void writeData(Element sb, Object data, String wrapper_name) {
         // null
         if (null == data) {

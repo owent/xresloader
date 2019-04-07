@@ -681,6 +681,7 @@ public class DataDstPb extends DataDstImpl {
      * 
      * @return 常量数据,不支持的时候返回空
      */
+    @SuppressWarnings("unchecked")
     public HashMap<String, Object> buildConst() {
         if (false == load_pb_file(ProgramOptions.getInstance().protocolFile, false)) {
             return null;

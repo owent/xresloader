@@ -22,8 +22,9 @@ public class SchemeConf {
 
     public class DataExtUECSV {
         public String blueprintAccess = "BlueprintReadOnly";
-        public String category = "XresConfig";
+        public String category = "XResConfig";
         public String editAccess = "EditAnywhere";
+        public Boolean enableCaseConvert = true;
     }
 
     /**
@@ -60,8 +61,9 @@ public class SchemeConf {
         scheme = null;
 
         extUECSV.blueprintAccess = "BlueprintReadOnly";
-        extUECSV.category = "XresConfig";
+        extUECSV.category = "XResConfig";
         extUECSV.editAccess = "EditAnywhere";
+        extUECSV.enableCaseConvert = true;
     }
 
     /**
@@ -334,6 +336,15 @@ public class SchemeConf {
             ProgramOptions.getLoger().warn(
                     "EditAccess for UECSV can only be one of EditAnywhere/EditInstanceOnly/EditDefaultsOnly, the invalid %s will be ignored",
                     editAccess);
+        }
+    }
+
+    public void setUECSVCaseConvert(String data) {
+        if (data == null || data.isEmpty() || 0 == data.compareTo("0") || 0 == data.compareToIgnoreCase("no")
+                || 0 == data.compareToIgnoreCase("false") || 0 == data.compareToIgnoreCase("disable")) {
+            extUECSV.enableCaseConvert = false;
+        } else {
+            extUECSV.enableCaseConvert = true;
         }
     }
 

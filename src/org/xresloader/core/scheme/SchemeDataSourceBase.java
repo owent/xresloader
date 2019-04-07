@@ -2,7 +2,6 @@ package org.xresloader.core.scheme;
 
 import java.util.ArrayList;
 
-
 /**
  * Created by owentou on 2015/04/29.
  */
@@ -10,17 +9,18 @@ public abstract class SchemeDataSourceBase implements SchemeDataSourceImpl {
 
     /**
      * 设置一项转表配置
-     * @param key 配置Key
+     * 
+     * @param key   配置Key
      * @param datas 配置Value
      * @return 成功或失败
      */
     protected boolean set_scheme(String key, ArrayList<String> datas) {
-        while(datas.size() < 3) {
+        while (datas.size() < 3) {
             datas.add(null);
         }
 
         key = key.trim();
-        if(key.isEmpty()) {
+        if (key.isEmpty()) {
             return true;
         }
 
@@ -37,11 +37,8 @@ public abstract class SchemeDataSourceBase implements SchemeDataSourceImpl {
         } else if (key.equalsIgnoreCase("OutputFile")) {
             SchemeConf.getInstance().setOutputFile(datas.get(0));
         } else if (key.equalsIgnoreCase("KeyRow")) {
-            SchemeConf.getInstance().getKey().setRow(
-                datas.get(0).isEmpty()?
-                    0:
-                    (int)Math.round(Double.valueOf(datas.get(0)))
-            );
+            SchemeConf.getInstance().getKey()
+                    .setRow(datas.get(0).isEmpty() ? 0 : (int) Math.round(Double.valueOf(datas.get(0))));
         } else if (key.equalsIgnoreCase("KeyCase")) {
             String letter_case = datas.get(0).toLowerCase();
             if (letter_case.equals("大写") || letter_case.equals("upper")) {
@@ -65,6 +62,8 @@ public abstract class SchemeDataSourceBase implements SchemeDataSourceImpl {
             SchemeConf.getInstance().getKey().setEncoding(datas.get(0));
         } else if (key.equalsIgnoreCase("UeCsv-UProperty")) {
             SchemeConf.getInstance().setUECSVOptions(datas.get(0), datas.get(1), datas.get(2));
+        } else if (key.equalsIgnoreCase("UeCsv-CaseConvert")) {
+            SchemeConf.getInstance().setUECSVCaseConvert(datas.get(0));
         } else {
             return false;
         }

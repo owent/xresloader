@@ -3,6 +3,7 @@ package org.xresloader.core.data.src;
 import org.xresloader.core.data.err.ConvException;
 import org.xresloader.core.engine.IdentifyDescriptor;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.HashMap;
 import java.util.LinkedList;
 
@@ -47,10 +48,19 @@ public abstract class DataSrcImpl {
 
     public static DataSrcImpl create(Class clazz) {
         try {
-            return ourInstance = (DataSrcImpl) clazz.newInstance();
+            // return ourInstance = (DataSrcImpl) clazz.newInstance();
+            return ourInstance = (DataSrcImpl) clazz.getDeclaredConstructor().newInstance();
         } catch (InstantiationException e) {
             e.printStackTrace();
         } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        } catch (IllegalArgumentException e) {
+            e.printStackTrace();
+        } catch (InvocationTargetException e) {
+            e.printStackTrace();
+        } catch (NoSuchMethodException e) {
+            e.printStackTrace();
+        } catch (SecurityException e) {
             e.printStackTrace();
         }
 

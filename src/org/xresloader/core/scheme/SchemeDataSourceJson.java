@@ -24,12 +24,10 @@ public final class SchemeDataSourceJson extends SchemeDataSourceBase {
             File fd = new File(file_path);
 
             byte[] utf8_bom = new byte[3];
-            int file_length = (int)fd.length();
+            int file_length = (int) fd.length();
 
             fis.read(utf8_bom);
-            if(utf8_bom[0] != (byte)0xef ||
-                utf8_bom[1] != (byte)0xbb ||
-                utf8_bom[2] != (byte)0xbf) {
+            if (utf8_bom[0] != (byte) 0xef || utf8_bom[1] != (byte) 0xbb || utf8_bom[2] != (byte) 0xbf) {
                 fis.close();
 
                 fis = new FileInputStream(file_path);
@@ -50,6 +48,7 @@ public final class SchemeDataSourceJson extends SchemeDataSourceBase {
         return 0;
     }
 
+    @SuppressWarnings("unchecked")
     public boolean load_scheme(String section_name) {
         if (null == current_object || false == (current_object instanceof Map)) {
             ProgramOptions.getLoger().warn("scheme file error");
@@ -67,8 +66,8 @@ public final class SchemeDataSourceJson extends SchemeDataSourceBase {
             return false;
         }
 
-        Map<Object, Object> scheme_map = (Map<Object, Object>)scheme_obj;
-        for(Map.Entry item : scheme_map.entrySet()) {
+        Map<Object, Object> scheme_map = (Map<Object, Object>) scheme_obj;
+        for (Map.Entry item : scheme_map.entrySet()) {
             load_segment(item.getKey().toString(), item.getValue());
         }
 
@@ -81,7 +80,7 @@ public final class SchemeDataSourceJson extends SchemeDataSourceBase {
         if (val instanceof List) {
             int index = 0;
 
-            for(Object obj: (List)val) {
+            for (Object obj : (List) val) {
                 if (obj instanceof List) {
                     load_segment(key, obj);
                 } else {

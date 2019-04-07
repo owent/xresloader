@@ -205,6 +205,7 @@ public class DataDstJavascript extends DataDstJava {
         }
     }
 
+    @SuppressWarnings("unchecked")
     private void writeData(StringBuffer sb, Object data, int ident_num) {
         // null
         if (null == data) {

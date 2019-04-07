@@ -183,7 +183,7 @@ public class ExcelEngine {
         }
 
         CellValue cv = null;
-        if (CellType.FORMULA == c.getCellTypeEnum()) {
+        if (CellType.FORMULA == c.getCellType()) {
             if (null != evalor) {
                 cv = evalor.evaluate(c);
             } else {
@@ -192,7 +192,7 @@ public class ExcelEngine {
             }
         }
 
-        CellType type = (null == cv) ? c.getCellTypeEnum() : cv.getCellTypeEnum();
+        CellType type = (null == cv) ? c.getCellType() : cv.getCellType();
         switch (type) {
         case BLANK:
             break;
@@ -286,14 +286,14 @@ public class ExcelEngine {
             return;
 
         CellValue cv = null;
-        if (CellType.FORMULA == c.getCellTypeEnum()) {
+        if (CellType.FORMULA == c.getCellType()) {
             if (null != evalor)
                 cv = evalor.evaluate(c);
             else
                 return;
         }
 
-        CellType type = (null == cv) ? c.getCellTypeEnum() : cv.getCellTypeEnum();
+        CellType type = (null == cv) ? c.getCellType() : cv.getCellType();
         switch (type) {
         case BLANK:
             break;
@@ -360,7 +360,7 @@ public class ExcelEngine {
             return;
 
         CellValue cv = null;
-        if (CellType.FORMULA == c.getCellTypeEnum()) {
+        if (CellType.FORMULA == c.getCellType()) {
             if (null != evalor) {
                 cv = evalor.evaluate(c);
             } else {
@@ -368,7 +368,7 @@ public class ExcelEngine {
             }
         }
 
-        CellType type = (null == cv) ? c.getCellTypeEnum() : cv.getCellTypeEnum();
+        CellType type = (null == cv) ? c.getCellType() : cv.getCellType();
         switch (type) {
         case BLANK:
             break;
@@ -432,7 +432,7 @@ public class ExcelEngine {
             return;
 
         CellValue cv = null;
-        if (CellType.FORMULA == c.getCellTypeEnum()) {
+        if (CellType.FORMULA == c.getCellType()) {
             if (null != evalor) {
                 cv = evalor.evaluate(c);
             } else {
@@ -441,7 +441,7 @@ public class ExcelEngine {
             }
         }
 
-        CellType type = (null == cv) ? c.getCellTypeEnum() : cv.getCellTypeEnum();
+        CellType type = (null == cv) ? c.getCellType() : cv.getCellType();
         switch (type) {
         case BLANK:
             break;

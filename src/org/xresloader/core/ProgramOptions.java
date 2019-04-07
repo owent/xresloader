@@ -1,6 +1,5 @@
 package org.xresloader.core;
 
-
 import org.apache.commons.cli.*;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -57,7 +56,7 @@ public class ProgramOptions {
     public String javascriptGlobalVar = "";
 
     private ProgramOptions() {
-        dataSourceMetas = new String[]{};
+        dataSourceMetas = new String[] {};
         outType = FileType.BIN;
         protocol = Protocol.PROTOBUF;
 
@@ -107,141 +106,72 @@ public class ProgramOptions {
         options = new Options();
         options.addOption("h", "help", false, "print this help message and exit");
 
-        options.addOption(Option.builder("t")
-                .longOpt("output-type")
-                .desc("output type(bin, lua, msgpack, json, xml, javascript/js)")
-                .hasArg()
-                .argName("TYPE")
-                .build()
-        );
+        options.addOption(Option.builder("t").longOpt("output-type")
+                .desc("output type(bin, lua, msgpack, json, xml, javascript/js)").hasArg().argName("TYPE").build());
 
-        options.addOption(Option.builder("p")
-                .longOpt("proto")
-                .desc("protocol(protobuf)")
-                .hasArg()
-                .argName("PROTOCOL")
-                .build()
-        );
+        options.addOption(
+                Option.builder("p").longOpt("proto").desc("protocol(protobuf)").hasArg().argName("PROTOCOL").build());
 
-        options.addOption(Option.builder("f")
-                .longOpt("proto-file")
-                .desc("protocol description file")
-                .hasArg()
-                .argName("FILE NAME")
-                .build()
-        );
+        options.addOption(Option.builder("f").longOpt("proto-file").desc("protocol description file").hasArg()
+                .argName("FILE NAME").build());
 
-        options.addOption(Option.builder("o")
-                .longOpt("output-dir")
-                .desc("output directory")
-                .hasArg()
-                .argName("DIRECTORY PATH")
-                .build()
-        );
+        options.addOption(Option.builder("o").longOpt("output-dir").desc("output directory").hasArg()
+                .argName("DIRECTORY PATH").build());
 
-        options.addOption(Option.builder("d")
-                .longOpt("data-src-dir")
-                .desc("data source directory(where to find excel specified by meta)")
-                .hasArg()
-                .argName("DIRECTORY PATH")
-                .build()
-        );
+        options.addOption(Option.builder("d").longOpt("data-src-dir")
+                .desc("data source directory(where to find excel specified by meta)").hasArg().argName("DIRECTORY PATH")
+                .build());
 
-        options.addOption(Option.builder("s")
-                .longOpt("src-file")
-                .desc("data source file(.xls, .xlsx, .cvs, .xlsm, .ods, .ini, .cfg, .conf, .json)")
-                .hasArg()
-                .argName("META FILE PATH")
-                .build()
-        );
+        options.addOption(Option.builder("s").longOpt("src-file")
+                .desc("data source file(.xls, .xlsx, .cvs, .xlsm, .ods, .ini, .cfg, .conf, .json)").hasArg()
+                .argName("META FILE PATH").build());
 
-        options.addOption(Option.builder("m")
-                .longOpt("src-meta")
-                .desc(
-                    String.format("%s\n\t%-32s=>%s\n\t%-32s=>%s\n\t%-32s=>%s\n\t%-32s=>%s",
-                            "data description meta information of data source.",
-                            ".xls,/xlsx/.cvx/.xlsm/.dos", "scheme sheet name",
-                            ".ini/.cfg/.conf", "scheme section name",
-                            ".json", "scheme key name",
-                            "[NOTHING]", "KEY=VALUE1|VAL2|VAL3 pair of scheme configures"
-                    )
-                )
-                .hasArg()
-                .argName("META NAME")
-                .build()
-        );
+        options.addOption(Option.builder("m").longOpt("src-meta")
+                .desc(String.format("%s\n\t%-32s=>%s\n\t%-32s=>%s\n\t%-32s=>%s\n\t%-32s=>%s",
+                        "data description meta information of data source.", ".xls,/xlsx/.cvx/.xlsm/.dos",
+                        "scheme sheet name", ".ini/.cfg/.conf", "scheme section name", ".json", "scheme key name",
+                        "[NOTHING]", "KEY=VALUE1|VAL2|VAL3 pair of scheme configures"))
+                .hasArg().argName("META NAME").build());
 
-        options.addOption(Option.builder("l")
-                .longOpt("delimiter")
-                .desc(String.format("regex delimiter for description meta when data source file is [NOTHING].(default: %s)",
+        options.addOption(Option.builder("l").longOpt("delimiter")
+                .desc(String.format(
+                        "regex delimiter for description meta when data source file is [NOTHING].(default: %s)",
                         getInstance().dataSourceMetaDelimiter))
-                .hasArg()
-                .argName("DELTMITER")
-                .build()
-        );
+                .hasArg().argName("DELTMITER").build());
 
         options.addOption("v", "version", false, "print version and exit");
 
-        options.addOption(Option.builder("n")
-                .longOpt("rename")
-                .desc("rename output file name(regex), sample: /(?i)\\.bin$/\\.lua/")
-                .hasArg()
-                .argName("RENAME PATTERN")
-                .build()
-        );
+        options.addOption(Option.builder("n").longOpt("rename")
+                .desc("rename output file name(regex), sample: /(?i)\\.bin$/\\.lua/").hasArg().argName("RENAME PATTERN")
+                .build());
 
-        options.addOption(Option.builder("a")
-                .longOpt("data-version")
-                .desc("set data version")
-                .hasArg()
-                .argName("DATA VERSION")
-                .build()
-        );
+        options.addOption(Option.builder("a").longOpt("data-version").desc("set data version").hasArg()
+                .argName("DATA VERSION").build());
 
-        options.addOption(Option.builder()
-                .longOpt("pretty")
-                .desc("set pretty output and set ident length when output type supported.(disable pretty output by set to 0)")
-                .hasArg()
-                .argName("INDENT LENGTH")
-                .build()
-        );
+        options.addOption(Option.builder().longOpt("pretty").desc(
+                "set pretty output and set ident length when output type supported.(disable pretty output by set to 0)")
+                .hasArg().argName("INDENT LENGTH").build());
 
-        options.addOption(Option.builder("c")
-                .longOpt("const-print")
-                .desc("print all const data to file")
-                .hasArg()
-                .argName("OUTPUT FILE PATH")
-                .build()
-        );
+        options.addOption(Option.builder("c").longOpt("const-print").desc("print all const data to file").hasArg()
+                .argName("OUTPUT FILE PATH").build());
 
-        options.addOption(Option.builder()
-                .longOpt("xml-root")
-                .desc("set xml root node name.(default: root)")
-                .hasArg()
-                .argName("ROOT NAME")
-                .build()
-        );
+        options.addOption(Option.builder().longOpt("xml-root").desc("set xml root node name.(default: root)").hasArg()
+                .argName("ROOT NAME").build());
 
-        options.addOption(Option.builder()
-            .longOpt("javascript-export")
-            .desc("set javascript export mode(nodejs, amd or global)")
-            .hasArg()
-            .argName("EXPORT MODE")
-            .build()
-        );
+        options.addOption(Option.builder().longOpt("javascript-export")
+                .desc("set javascript export mode(nodejs, amd or global)").hasArg().argName("EXPORT MODE").build());
 
-        options.addOption(Option.builder()
-            .longOpt("javascript-global")
-            .desc("set javascript export namespace of window or global")
-            .hasArg()
-            .argName("NAME")
-            .build()
-        );
+        options.addOption(Option.builder().longOpt("javascript-global")
+                .desc("set javascript export namespace of window or global").hasArg().argName("NAME").build());
 
-        options.addOption(null, "disable-excel-formular", false, "disable formular in excel. will be faster when convert data.");
-        options.addOption(null, "enable-excel-formular", false, "[default] enable formular in excel. will be slower when convert data.");
-        options.addOption(null, "disable-empty-list", false, "[default] remove empty elements in a list or repeated field.");
-        options.addOption(null, "enable-empty-list", false, "keep empty elements in a list or repeated field with default value.");
+        options.addOption(null, "disable-excel-formular", false,
+                "disable formular in excel. will be faster when convert data.");
+        options.addOption(null, "enable-excel-formular", false,
+                "[default] enable formular in excel. will be slower when convert data.");
+        options.addOption(null, "disable-empty-list", false,
+                "[default] remove empty elements in a list or repeated field.");
+        options.addOption(null, "enable-empty-list", false,
+                "keep empty elements in a list or repeated field with default value.");
         options.addOption(null, "stdin", false, "enable read from stdin and convert more files.");
         options.addOption(null, "lua-global", false, "add data to _G if in lua mode when print const data");
         options.addOption(null, "lua-module", true, "module(MODULE_NAME, package.seeall) if in lua mode");
@@ -257,9 +187,8 @@ public class ProgramOptions {
         CommandLine cmd = null;
         try {
             // parse the command line arguments
-            cmd = parser.parse( get_options_group(), args );
-        }
-        catch( ParseException exp ) {
+            cmd = parser.parse(get_options_group(), args);
+        } catch (ParseException exp) {
             // oops, something went wrong
             ProgramOptions.getLoger().error("parsing failed.  reason: \"%s\" failed", exp.getMessage());
 
@@ -293,7 +222,7 @@ public class ProgramOptions {
 
         if (cmd.hasOption("disable-empty-list")) {
             enbleEmptyList = false;
-        } else if(cmd.hasOption("enable-empty-list")) {
+        } else if (cmd.hasOption("enable-empty-list")) {
             enbleEmptyList = true;
         }
 
@@ -304,11 +233,11 @@ public class ProgramOptions {
                 outType = FileType.BIN;
             } else if (val.equalsIgnoreCase("lua")) {
                 outType = FileType.LUA;
-            } else if (val.equalsIgnoreCase("msgpack")){
+            } else if (val.equalsIgnoreCase("msgpack")) {
                 outType = FileType.MSGPACK;
-            } else if (val.equalsIgnoreCase("json")){
+            } else if (val.equalsIgnoreCase("json")) {
                 outType = FileType.JSON;
-            } else if (val.equalsIgnoreCase("xml")){
+            } else if (val.equalsIgnoreCase("xml")) {
                 outType = FileType.XML;
             } else if (val.equalsIgnoreCase("js") || val.equalsIgnoreCase("javascript")) {
                 outType = FileType.JAVASCRIPT;
@@ -327,7 +256,7 @@ public class ProgramOptions {
                 protocol = Protocol.PROTOBUF;
             } else if (val.equalsIgnoreCase("capnproto")) {
                 protocol = Protocol.CAPNPROTO;
-            } else if (val.equalsIgnoreCase("flatbuffer")){
+            } else if (val.equalsIgnoreCase("flatbuffer")) {
                 protocol = Protocol.FLATBUFFER;
             } else {
                 ProgramOptions.getLoger().error("invalid protocol type ", val);
@@ -366,28 +295,23 @@ public class ProgramOptions {
             dataSourceFile = cmd.getOptionValue('s');
             int dot_index = dataSourceFile.lastIndexOf('.');
 
-            String name_suffix = dot_index >= 0 && dot_index < dataSourceFile.length() - 1? dataSourceFile.substring(dot_index + 1) : null;
-            if (null != name_suffix && (
-                    name_suffix.equalsIgnoreCase("xls") ||
-                            name_suffix.equalsIgnoreCase("xlsx") ||
-                            name_suffix.equalsIgnoreCase("cvs") ||
-                            name_suffix.equalsIgnoreCase("xlsm") ||
-                            name_suffix.equalsIgnoreCase("ods")
-            )) {
+            String name_suffix = dot_index >= 0 && dot_index < dataSourceFile.length() - 1
+                    ? dataSourceFile.substring(dot_index + 1)
+                    : null;
+            if (null != name_suffix && (name_suffix.equalsIgnoreCase("xls") || name_suffix.equalsIgnoreCase("xlsx")
+                    || name_suffix.equalsIgnoreCase("cvs") || name_suffix.equalsIgnoreCase("xlsm")
+                    || name_suffix.equalsIgnoreCase("ods"))) {
                 dataSourceType = FileType.EXCEL;
 
-            } else if (null != name_suffix && (
-                    name_suffix.equalsIgnoreCase("ini") ||
-                    name_suffix.equalsIgnoreCase("cfg") ||
-                    name_suffix.equalsIgnoreCase("conf")
-            )) {
+            } else if (null != name_suffix && (name_suffix.equalsIgnoreCase("ini")
+                    || name_suffix.equalsIgnoreCase("cfg") || name_suffix.equalsIgnoreCase("conf"))) {
                 dataSourceType = FileType.INI;
             } else if (null != name_suffix && name_suffix.equalsIgnoreCase("json")) {
                 dataSourceType = FileType.JSON;
-//          } else if (null != name_suffix && name_suffix.equalsIgnoreCase("lua")) {
-//              dataSourceType = FileType.LUA;
-//          } else if (null != name_suffix && name_suffix.equalsIgnoreCase("xml")) {
-//              dataSourceType = FileType.XML;
+                // } else if (null != name_suffix && name_suffix.equalsIgnoreCase("lua")) {
+                // dataSourceType = FileType.LUA;
+                // } else if (null != name_suffix && name_suffix.equalsIgnoreCase("xml")) {
+                // dataSourceType = FileType.XML;
             }
         }
 
@@ -406,6 +330,11 @@ public class ProgramOptions {
                 if (rule_string.isEmpty()) {
                     ProgramOptions.getLoger().error("Invalid rename rule %s", rule_string);
                     break;
+                }
+
+                if (rule_string.length() >= 2 && (rule_string.charAt(0) == '"' || rule_string.charAt(0) == '\'')
+                        && rule_string.charAt(0) == rule_string.charAt(rule_string.length() - 1)) {
+                    rule_string = rule_string.substring(1, rule_string.length() - 1);
                 }
 
                 String[] groups = rule_string.split(rule_string.substring(0, 1));
@@ -432,19 +361,19 @@ public class ProgramOptions {
                 renameRule = new RenameRule();
                 renameRule.match = match_rule;
                 renameRule.replace = groups[start_index + 1];
-            } while(false);
+            } while (false);
         }
 
         // special functions
         if (cmd.hasOption("disable-excel-formular")) {
             enableFormular = false;
-        } else if(cmd.hasOption("enable-excel-formular")) {
+        } else if (cmd.hasOption("enable-excel-formular")) {
             enableFormular = true;
         }
 
         if (cmd.hasOption("disable-empty-list")) {
             enbleEmptyList = false;
-        } else if(cmd.hasOption("enable-empty-list")) {
+        } else if (cmd.hasOption("enable-empty-list")) {
             enbleEmptyList = true;
         }
 
@@ -469,16 +398,18 @@ public class ProgramOptions {
     public String getDataVersion() {
         if (dataVersion == null || dataVersion.isEmpty()) {
             dataVersion = String.format("%s.%s", getVersion(),
-                    new SimpleDateFormat("yyyyMMddHHmmss").format(Calendar.getInstance().getTime())
-            );
+                    new SimpleDateFormat("yyyyMMddHHmmss").format(Calendar.getInstance().getTime()));
         }
         return dataVersion;
     }
 
+    public enum FileType {
+        BIN, LUA, MSGPACK, JSON, XML, INI, EXCEL, JAVASCRIPT, UECSV
+    }
 
-    public enum FileType {BIN, LUA, MSGPACK, JSON, XML, INI, EXCEL, JAVASCRIPT, UECSV}
-
-    public enum Protocol {PROTOBUF, CAPNPROTO, FLATBUFFER}
+    public enum Protocol {
+        PROTOBUF, CAPNPROTO, FLATBUFFER
+    }
 
     static public Logger getLoger() {
         if (null != logger) {
@@ -499,11 +430,12 @@ public class ProgramOptions {
         try {
             logger = LogManager.getFormatterLogger(name);
         } catch (UnsupportedCharsetException e) {
-            System.err.println(String.format("[WARN] Unknown console charset %s, we will try use UTF-8 for console output", e.getCharsetName()));
+            System.err.println(String.format(
+                    "[WARN] Unknown console charset %s, we will try use UTF-8 for console output", e.getCharsetName()));
         }
 
         if (null == logger) {
-            //logger = LogManager.get
+            // logger = LogManager.get
         }
         return logger;
     }

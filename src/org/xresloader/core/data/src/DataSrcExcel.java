@@ -27,6 +27,7 @@ public class DataSrcExcel extends DataSrcImpl {
         public int next_index = 0;
         public int last_row_number = 0;
         public HashMap<String, IdentifyDescriptor> name_mapping = new HashMap<String, IdentifyDescriptor>();
+        public LinkedList<IdentifyDescriptor> index_mapping = new LinkedList<IdentifyDescriptor>();
     }
 
     private HashMap<String, String> macros = null;
@@ -74,12 +75,12 @@ public class DataSrcExcel extends DataSrcImpl {
      * 构建macro表cache，由于macro表大多数情况下都一样，所以加缓存优化
      */
     HashMap<String, String> init_macro_with_cache(List<SchemeConf.DataInfo> src_list) {
-        LinkedList<HashMap<String, String> > data_filled = new LinkedList<HashMap<String, String> >();
+        LinkedList<HashMap<String, String>> data_filled = new LinkedList<HashMap<String, String>>();
 
         IdentifyDescriptor column_ident = new IdentifyDescriptor();
 
         // 枚举所有macro表信息
-        for(SchemeConf.DataInfo src: src_list) {
+        for (SchemeConf.DataInfo src : src_list) {
             String file_path = "";
             if (false == src.file_path.isEmpty()) {
                 file_path = src.file_path;
@@ -94,21 +95,24 @@ public class DataSrcExcel extends DataSrcImpl {
                     data_filled.add(res.macros);
                     continue;
                 } else {
-                    ProgramOptions.getLoger().warn("try to open macro source \"%s:%s\" (row=%d,col=%d) but already has cache \"%s:%s\" (row=%d,col=%d). the old macros will be covered",
-                            file_path, src.table_name, src.data_row, src.data_col,
-                            res.file.file_path, res.file.table_name, res.file.data_row, res.file.data_col);
+                    ProgramOptions.getLoger().warn(
+                            "try to open macro source \"%s:%s\" (row=%d,col=%d) but already has cache \"%s:%s\" (row=%d,col=%d). the old macros will be covered",
+                            file_path, src.table_name, src.data_row, src.data_col, res.file.file_path,
+                            res.file.table_name, res.file.data_row, res.file.data_col);
                 }
             }
             res = new MacroFileCache(src, file_path);
 
             if (file_path.isEmpty() || src.table_name.isEmpty() || src.data_col <= 0 || src.data_row <= 0) {
-                ProgramOptions.getLoger().warn("macro source \"%s\" (%s:%d，%d) ignored.", file_path, src.table_name, src.data_row, src.data_col);
+                ProgramOptions.getLoger().warn("macro source \"%s\" (%s:%d，%d) ignored.", file_path, src.table_name,
+                        src.data_row, src.data_col);
                 continue;
             }
 
             Sheet tb = ExcelEngine.openSheet(file_path, src.table_name);
             if (null == tb) {
-                ProgramOptions.getLoger().warn("open macro source \"%s\" or sheet %s failed.", file_path, src.table_name);
+                ProgramOptions.getLoger().warn("open macro source \"%s\" or sheet %s failed.", file_path,
+                        src.table_name);
                 continue;
             }
 
@@ -150,7 +154,7 @@ public class DataSrcExcel extends DataSrcImpl {
         }
 
         HashMap<String, String> ret = new HashMap<String, String>();
-        for(HashMap<String, String> copy_from: data_filled) {
+        for (HashMap<String, String> copy_from : data_filled) {
             ret.putAll(copy_from);
         }
 
@@ -179,19 +183,21 @@ public class DataSrcExcel extends DataSrcImpl {
         IdentifyDescriptor column_ident = new IdentifyDescriptor();
 
         // 枚举所有数据表信息
-        for(SchemeConf.DataInfo src: scfg.getDataSource()) {
+        for (SchemeConf.DataInfo src : scfg.getDataSource()) {
             if (false == src.file_path.isEmpty()) {
                 file_path = src.file_path;
             }
 
             if (file_path.isEmpty() || src.table_name.isEmpty() || src.data_col <= 0 || src.data_row <= 0) {
-                ProgramOptions.getLoger().error("data source file \"%s\" (%s:%d，%d) ignored.", src.file_path, src.table_name, src.data_row, src.data_col);
+                ProgramOptions.getLoger().error("data source file \"%s\" (%s:%d，%d) ignored.", src.file_path,
+                        src.table_name, src.data_row, src.data_col);
                 continue;
             }
 
             Sheet tb = ExcelEngine.openSheet(file_path, src.table_name);
             if (null == tb) {
-                ProgramOptions.getLoger().error("open data source file \"%s\" or sheet \"%s\".", src.file_path, src.table_name);
+                ProgramOptions.getLoger().error("open data source file \"%s\" or sheet \"%s\".", src.file_path,
+                        src.table_name);
                 continue;
             }
 
@@ -218,9 +224,9 @@ public class DataSrcExcel extends DataSrcImpl {
                     ExcelEngine.cell2s(k, row, column_ident, formula);
                     IdentifyDescriptor ident = IdentifyEngine.n2i(k.get(), i);
                     res.name_mapping.put(ident.name, ident);
+                    res.index_mapping.add(ident);
                 }
             }
-
 
             res.file_name = file_path;
             res.table = tb;
@@ -245,7 +251,7 @@ public class DataSrcExcel extends DataSrcImpl {
             return false;
         }
 
-        while(true) {
+        while (true) {
             current = tables.removeFirst();
             if (null != current) {
                 break;
@@ -261,7 +267,7 @@ public class DataSrcExcel extends DataSrcImpl {
             return false;
         }
 
-        while(true) {
+        while (true) {
             // 当前行超出
             if (current.next_index > current.last_row_number) {
                 current.current_row = null;
@@ -364,5 +370,14 @@ public class DataSrcExcel extends DataSrcImpl {
         }
 
         return current.file_name;
+    }
+
+    @Override
+    public LinkedList<IdentifyDescriptor> getColumns() {
+        if (null == current) {
+            return null;
+        }
+
+        return current.index_mapping;
     }
 }

@@ -4,6 +4,7 @@ import org.xresloader.core.data.err.ConvException;
 import org.xresloader.core.engine.IdentifyDescriptor;
 
 import java.util.HashMap;
+import java.util.LinkedList;
 
 /**
  * Created by owentou on 2014/10/9.
@@ -81,15 +82,25 @@ public abstract class DataSrcImpl {
         return false;
     }
 
-    public int getLastColomnNum() { return last_column_index_; }
-    protected void setLastColumnNum(int c) { last_column_index_ = c; }
+    public int getLastColomnNum() {
+        return last_column_index_;
+    }
 
-    public int getCurrentRowNum() { return 0; }
+    protected void setLastColumnNum(int c) {
+        last_column_index_ = c;
+    }
 
-    public String getCurrentTableName() { return ""; }
+    public int getCurrentRowNum() {
+        return 0;
+    }
 
-    public String getCurrentFileName() { return ""; }
+    public String getCurrentTableName() {
+        return "";
+    }
 
+    public String getCurrentFileName() {
+        return "";
+    }
 
     public DataContainer<Boolean> getValue(IdentifyDescriptor ident, boolean dv) throws ConvException {
         if (null != ident) {
@@ -119,7 +130,6 @@ public abstract class DataSrcImpl {
         return getDoubleCache(dv);
     }
 
-
     public int getRecordNumber() {
         return 0;
     }
@@ -129,6 +139,10 @@ public abstract class DataSrcImpl {
     }
 
     public HashMap<String, String> getMacros() {
+        return null;
+    }
+
+    public LinkedList<IdentifyDescriptor> getColumns() {
         return null;
     }
 }

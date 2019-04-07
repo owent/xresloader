@@ -6,19 +6,18 @@ import org.xresloader.core.scheme.SchemeConf;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.io.IOException;
 import java.nio.charset.Charset;
 import java.util.HashMap;
-
 
 /**
  * Created by owentou on 2014/10/10.
  */
 public class DataDstJson extends DataDstJava {
 
-
     @Override
     public boolean init() {
-       return true;
+        return true;
     }
 
     /**
@@ -53,9 +52,10 @@ public class DataDstJson extends DataDstJava {
 
     /**
      * 转储常量数据
+     * 
      * @return 常量数据,不支持的时候返回空
      */
-    public final byte[] dumpConst(HashMap<String, Object> data) {
+    public final byte[] dumpConst(HashMap<String, Object> data) throws IOException {
         JSONObject wrapper = null;
 
         if (null != data) {

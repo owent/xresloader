@@ -51,9 +51,9 @@ public class DataDstMsgPack extends DataDstJava {
             e.printStackTrace();
         }
         // 带编码的输出
-//        String encoding = SchemeConf.getInstance().getKey().getEncoding();
-//        if (null == encoding || encoding.isEmpty())
-//            return sb.toString().getBytes();
+        // String encoding = SchemeConf.getInstance().getKey().getEncoding();
+        // if (null == encoding || encoding.isEmpty())
+        // return sb.toString().getBytes();
         return out.toByteArray();
     }
 
@@ -65,9 +65,10 @@ public class DataDstMsgPack extends DataDstJava {
 
     /**
      * 转储常量数据
+     * 
      * @return 常量数据,不支持的时候返回空
      */
-    public final byte[] dumpConst(HashMap<String, Object> data) {
+    public final byte[] dumpConst(HashMap<String, Object> data) throws IOException {
         ByteArrayOutputStream out = new ByteArrayOutputStream();
         Packer packer = msgpack.createPacker(out);
 
@@ -78,9 +79,9 @@ public class DataDstMsgPack extends DataDstJava {
             e.printStackTrace();
         }
         // 带编码的输出
-//        String encoding = SchemeConf.getInstance().getKey().getEncoding();
-//        if (null == encoding || encoding.isEmpty())
-//            return sb.toString().getBytes();
+        // String encoding = SchemeConf.getInstance().getKey().getEncoding();
+        // if (null == encoding || encoding.isEmpty())
+        // return sb.toString().getBytes();
         return out.toByteArray();
     }
 }

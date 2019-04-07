@@ -47,22 +47,25 @@ public class DataDstPb extends DataDstImpl {
         /*** 描述信息-已加载文件描述集，用于文件描述去重(.proto文件) ***/
         public HashMap<String, DescriptorProtos.FileDescriptorProto> files = new HashMap<String, DescriptorProtos.FileDescriptorProto>();
         /*** 描述信息-消息描述集合 ***/
-        public HashMap<String, PbAliasNode<DescriptorProtos.DescriptorProto> > messages = new HashMap<String, PbAliasNode<DescriptorProtos.DescriptorProto> >();
+        public HashMap<String, PbAliasNode<DescriptorProtos.DescriptorProto>> messages = new HashMap<String, PbAliasNode<DescriptorProtos.DescriptorProto>>();
         /*** 描述信息-枚举描述集合 ***/
-        public HashMap<String, PbAliasNode<DescriptorProtos.EnumDescriptorProto> > enums = new HashMap<String, PbAliasNode<DescriptorProtos.EnumDescriptorProto> >();
+        public HashMap<String, PbAliasNode<DescriptorProtos.EnumDescriptorProto>> enums = new HashMap<String, PbAliasNode<DescriptorProtos.EnumDescriptorProto>>();
 
         // ========================== 配置描述集 ==========================
         /*** 类型信息-文件描述器集合 ***/
         public HashMap<String, Descriptors.FileDescriptor> file_descs = new HashMap<String, Descriptors.FileDescriptor>();
         /*** 类型信息-Message描述器集合 ***/
-        public HashMap<String, PbAliasNode<Descriptors.Descriptor> > message_descs = new HashMap<String, PbAliasNode<Descriptors.Descriptor> >();
+        public HashMap<String, PbAliasNode<Descriptors.Descriptor>> message_descs = new HashMap<String, PbAliasNode<Descriptors.Descriptor>>();
 
         // ========================== 验证器 ==========================
         HashMap<String, DataVerifyImpl> identifiers = new HashMap<String, DataVerifyImpl>();
-        public PbInfoSet(){}
+
+        public PbInfoSet() {
+        }
     }
 
-    static <T> void append_alias_list(String short_name, String full_name, HashMap<String, PbAliasNode<T> > hashmap, T ele ) {
+    static <T> void append_alias_list(String short_name, String full_name, HashMap<String, PbAliasNode<T>> hashmap,
+            T ele) {
         if (!short_name.isEmpty()) {
             PbAliasNode<T> ls = hashmap.getOrDefault(short_name, null);
             if (null == ls) {
@@ -86,7 +89,7 @@ public class DataDstPb extends DataDstImpl {
         }
     }
 
-    static <T> T get_alias_list_element(String name, HashMap<String, PbAliasNode<T> > hashmap, String type_name) {
+    static <T> T get_alias_list_element(String name, HashMap<String, PbAliasNode<T>> hashmap, String type_name) {
         PbAliasNode<T> ls = hashmap.getOrDefault(name, null);
         if (null == ls || null == ls.element) {
             return null;
@@ -96,8 +99,9 @@ public class DataDstPb extends DataDstImpl {
             return ls.element;
         }
 
-        ProgramOptions.getLoger().error("there is more than one %s \"%s\" matched, please use full name. available names:", type_name, name);
-        for(String full_name: ls.names) {
+        ProgramOptions.getLoger().error(
+                "there is more than one %s \"%s\" matched, please use full name. available names:", type_name, name);
+        for (String full_name : ls.names) {
             ProgramOptions.getLoger().error("\t%s", full_name);
         }
 
@@ -105,6 +109,7 @@ public class DataDstPb extends DataDstImpl {
     }
 
     static private PbInfoSet pbs = new PbInfoSet();
+
     static boolean load_pb_file(String file_path, boolean build_msg) {
         if (pbs.fileNames.contains(file_path)) {
             return true;
@@ -122,12 +127,14 @@ public class DataDstPb extends DataDstImpl {
                 pbs.files.put(fdp.getName(), fdp);
 
                 if (build_msg) {
-                    for(DescriptorProtos.EnumDescriptorProto edp: fdp.getEnumTypeList()) {
-                        append_alias_list(edp.getName(), String.format("%s.%s", fdp.getPackage(), edp.getName()), pbs.enums, edp);
+                    for (DescriptorProtos.EnumDescriptorProto edp : fdp.getEnumTypeList()) {
+                        append_alias_list(edp.getName(), String.format("%s.%s", fdp.getPackage(), edp.getName()),
+                                pbs.enums, edp);
                     }
 
                     for (DescriptorProtos.DescriptorProto mdp : fdp.getMessageTypeList()) {
-                        append_alias_list(mdp.getName(), String.format("%s.%s", fdp.getPackage(), mdp.getName()), pbs.messages, mdp);
+                        append_alias_list(mdp.getName(), String.format("%s.%s", fdp.getPackage(), mdp.getName()),
+                                pbs.messages, mdp);
                     }
                 }
             }
@@ -140,10 +147,12 @@ public class DataDstPb extends DataDstImpl {
             }
 
         } catch (FileNotFoundException e) {
-            ProgramOptions.getLoger().error("read protocol file \"%s\" failed. %s", ProgramOptions.getInstance().protocolFile, e.toString());
+            ProgramOptions.getLoger().error("read protocol file \"%s\" failed. %s",
+                    ProgramOptions.getInstance().protocolFile, e.toString());
             return false;
         } catch (IOException e) {
-            ProgramOptions.getLoger().error("parse protocol file \"%s\" failed. %s", ProgramOptions.getInstance().protocolFile, e.toString());
+            ProgramOptions.getLoger().error("parse protocol file \"%s\" failed. %s",
+                    ProgramOptions.getInstance().protocolFile, e.toString());
             return false;
         }
 
@@ -168,10 +177,11 @@ public class DataDstPb extends DataDstImpl {
         }
 
         Descriptors.FileDescriptor[] deps = new Descriptors.FileDescriptor[fdp.getDependencyCount()];
-        for(int i = 0; i < fdp.getDependencyCount(); ++ i) {
+        for (int i = 0; i < fdp.getDependencyCount(); ++i) {
             deps[i] = init_pb_files(fdp.getDependency(i));
             if (null == deps[i]) {
-                ProgramOptions.getLoger().error("initialize protocol file descriptor %s failed. dependency %s", name, fdp.getDependency(i));
+                ProgramOptions.getLoger().error("initialize protocol file descriptor %s failed. dependency %s", name,
+                        fdp.getDependency(i));
                 return null;
             }
         }
@@ -179,8 +189,9 @@ public class DataDstPb extends DataDstImpl {
         try {
             ret = Descriptors.FileDescriptor.buildFrom(fdp, deps);
             pbs.file_descs.put(name, ret);
-            for(Descriptors.Descriptor md: ret.getMessageTypes()) {
-                append_alias_list(md.getName(), String.format("%s.%s", fdp.getPackage(), md.getName()), pbs.message_descs, md);
+            for (Descriptors.Descriptor md : ret.getMessageTypes()) {
+                append_alias_list(md.getName(), String.format("%s.%s", fdp.getPackage(), md.getName()),
+                        pbs.message_descs, md);
             }
 
             return ret;
@@ -197,7 +208,7 @@ public class DataDstPb extends DataDstImpl {
             identify.resetVerifier();
         } else {
             String[] all_verify_rules = identify.verifier.split("\\|");
-            for (String vfy_rule: all_verify_rules) {
+            for (String vfy_rule : all_verify_rules) {
                 String rule = vfy_rule.trim();
                 if (rule.isEmpty()) {
                     continue;
@@ -208,8 +219,9 @@ public class DataDstPb extends DataDstImpl {
                     if (vfy.isValid()) {
                         identify.addVerifier(vfy);
                     } else {
-                        ProgramOptions.getLoger().error("try to add DataVerifyIntRange(%s) for %s at column %d in %s failed",
-                                rule, identify.name, identify.index + 1, DataSrcImpl.getOurInstance().getCurrentTableName());
+                        ProgramOptions.getLoger().error(
+                                "try to add DataVerifyIntRange(%s) for %s at column %d in %s failed", rule,
+                                identify.name, identify.index + 1, DataSrcImpl.getOurInstance().getCurrentTableName());
                     }
 
                     continue;
@@ -217,11 +229,13 @@ public class DataDstPb extends DataDstImpl {
                     // 协议验证器
                     DataVerifyImpl vfy = pbs.identifiers.getOrDefault(rule, null);
                     if (null == vfy) {
-                        DescriptorProtos.EnumDescriptorProto enum_desc = get_alias_list_element(rule, pbs.enums, "enum type");
+                        DescriptorProtos.EnumDescriptorProto enum_desc = get_alias_list_element(rule, pbs.enums,
+                                "enum type");
                         if (enum_desc != null) {
                             vfy = new DataVerifyPbEnum(enum_desc);
                         } else {
-                            DescriptorProtos.DescriptorProto msg_desc = get_alias_list_element(rule, pbs.messages, "message type");
+                            DescriptorProtos.DescriptorProto msg_desc = get_alias_list_element(rule, pbs.messages,
+                                    "message type");
                             if (msg_desc != null) {
                                 vfy = new DataVerifyPbMsg(msg_desc);
                             }
@@ -238,7 +252,8 @@ public class DataDstPb extends DataDstImpl {
                         identify.addVerifier(vfy);
                     } else {
                         ProgramOptions.getLoger().error("try to add DataVerifyPb(%s) for %s at column %d in %s failed",
-                                rule, identify.name, identify.index + 1, DataSrcImpl.getOurInstance().getCurrentTableName());
+                                rule, identify.name, identify.index + 1,
+                                DataSrcImpl.getOurInstance().getCurrentTableName());
                     }
                 }
             }
@@ -269,9 +284,7 @@ public class DataDstPb extends DataDstImpl {
             return ret;
         }
 
-        throw new ConvException(String.format(
-                "protocol %s compile mapping relationship failed", name()
-        ));
+        throw new ConvException(String.format("protocol %s compile mapping relationship failed", name()));
     }
 
     @Override
@@ -284,7 +297,7 @@ public class DataDstPb extends DataDstImpl {
         header.setHashCode("");
 
         // 校验码
-        MessageDigest md5 = null ;
+        MessageDigest md5 = null;
         try {
             md5 = MessageDigest.getInstance("MD5");
         } catch (NoSuchAlgorithmException e) {
@@ -298,7 +311,7 @@ public class DataDstPb extends DataDstImpl {
             // 生成描述集
             DataDstWriterNode desc = src.compile();
 
-            while(DataSrcImpl.getOurInstance().next_row()) {
+            while (DataSrcImpl.getOurInstance().next_row()) {
                 ByteString data = convData(desc);
                 if (null != data && !data.isEmpty()) {
                     ++count;
@@ -338,7 +351,7 @@ public class DataDstPb extends DataDstImpl {
     private boolean test(DataDstWriterNode node, LinkedList<String> name_list) {
         String prefix = String.join(".", name_list);
         boolean ret = false;
-        Descriptors.Descriptor desc = (Descriptors.Descriptor)node.descriptor;
+        Descriptors.Descriptor desc = (Descriptors.Descriptor) node.descriptor;
         if (null == desc) {
             return ret;
         }
@@ -346,104 +359,106 @@ public class DataDstPb extends DataDstImpl {
         DataSrcImpl data_src = DataSrcImpl.getOurInstance();
         for (Descriptors.FieldDescriptor fd : desc.getFields()) {
             switch (fd.getType()) {
-                // 复杂类型还需要检测子节点
-                case MESSAGE:
-                    if (fd.isRepeated()) {
-                        int count = 0;
+            // 复杂类型还需要检测子节点
+            case MESSAGE:
+                if (fd.isRepeated()) {
+                    int count = 0;
 
-                        name_list.addLast("");
-                        for (; ; ++count) {
-                            DataDstWriterNode c = DataDstWriterNode.create(fd.getMessageType(), DataDstWriterNode.JAVA_TYPE.MESSAGE);
-                            name_list.removeLast();
-                            name_list.addLast(DataDstWriterNode.makeNodeName(fd.getName(), count));
-                            if (test(c, name_list)) {
-                                node.addChild(fd.getName(), c, fd,true, false);
-                                ret = true;
-                            } else {
-                                break;
-                            }
-                        }
+                    name_list.addLast("");
+                    for (;; ++count) {
+                        DataDstWriterNode c = DataDstWriterNode.create(fd.getMessageType(),
+                                DataDstWriterNode.JAVA_TYPE.MESSAGE);
                         name_list.removeLast();
-                    } else {
-                        DataDstWriterNode c = DataDstWriterNode.create(fd.getMessageType(), DataDstWriterNode.JAVA_TYPE.MESSAGE);
-                        name_list.addLast(DataDstWriterNode.makeNodeName(fd.getName()));
+                        name_list.addLast(DataDstWriterNode.makeNodeName(fd.getName(), count));
                         if (test(c, name_list)) {
-                            node.addChild(fd.getName(), c, fd,false, false);
+                            node.addChild(fd.getName(), c, fd, true, false);
                             ret = true;
-                        } else if (fd.isRequired()) {
-                            // required 字段要dump默认数据
-                            node.addChild(fd.getName(), c, fd,false, true);
+                        } else {
+                            break;
                         }
-                        name_list.removeLast();
                     }
+                    name_list.removeLast();
+                } else {
+                    DataDstWriterNode c = DataDstWriterNode.create(fd.getMessageType(),
+                            DataDstWriterNode.JAVA_TYPE.MESSAGE);
+                    name_list.addLast(DataDstWriterNode.makeNodeName(fd.getName()));
+                    if (test(c, name_list)) {
+                        node.addChild(fd.getName(), c, fd, false, false);
+                        ret = true;
+                    } else if (fd.isRequired()) {
+                        // required 字段要dump默认数据
+                        node.addChild(fd.getName(), c, fd, false, true);
+                    }
+                    name_list.removeLast();
+                }
+                break;
+            default: {
+                // list 类型
+                DataDstWriterNode.JAVA_TYPE inner_type = DataDstWriterNode.JAVA_TYPE.INT;
+                switch (fd.getType()) {
+                case DOUBLE:
+                    inner_type = DataDstWriterNode.JAVA_TYPE.DOUBLE;
                     break;
-                default: {
-                    // list 类型
-                    DataDstWriterNode.JAVA_TYPE inner_type = DataDstWriterNode.JAVA_TYPE.INT;
-                    switch (fd.getType()) {
-                        case DOUBLE:
-                            inner_type = DataDstWriterNode.JAVA_TYPE.DOUBLE;
-                            break;
-                        case FLOAT:
-                            inner_type = DataDstWriterNode.JAVA_TYPE.FLOAT;
-                            break;
-                        case INT64:
-                        case UINT64:
-                        case INT32:
-                        case FIXED64:
-                        case FIXED32:
-                        case UINT32:
-                        case SFIXED32:
-                        case SFIXED64:
-                        case SINT32:
-                        case SINT64:
-                            inner_type = DataDstWriterNode.JAVA_TYPE.LONG;
-                            break;
-                        case BOOL:
-                            inner_type = DataDstWriterNode.JAVA_TYPE.BOOLEAN;
-                            break;
-                        case STRING:
-                            inner_type = DataDstWriterNode.JAVA_TYPE.STRING;
-                            break;
-                        case GROUP:
-                        case MESSAGE:
-                        case BYTES:
-                            inner_type = DataDstWriterNode.JAVA_TYPE.BYTES;
-                            break;
-                        case ENUM:
-                            break;
-                    }
-                    if (fd.isRepeated()) {
-                        int count = 0;
-                        for (; ; ++count) {
-                            String real_name = DataDstWriterNode.makeChildPath(prefix, fd.getName(), count);
-                            IdentifyDescriptor col = data_src.getColumnByName(real_name);
-                            if (null != col) {
-                                DataDstWriterNode c = DataDstWriterNode.create(null, inner_type);
-                                setup_node_identify(c, col);
-                                node.addChild(fd.getName(), c, fd,true, false);
-                                ret = true;
-                            } else {
-                                break;
-                            }
-                        }
-                    } else {
-                        // 非 list 类型
-                        String real_name = DataDstWriterNode.makeChildPath(prefix, fd.getName());
+                case FLOAT:
+                    inner_type = DataDstWriterNode.JAVA_TYPE.FLOAT;
+                    break;
+                case INT64:
+                case UINT64:
+                case INT32:
+                case FIXED64:
+                case FIXED32:
+                case UINT32:
+                case SFIXED32:
+                case SFIXED64:
+                case SINT32:
+                case SINT64:
+                    inner_type = DataDstWriterNode.JAVA_TYPE.LONG;
+                    break;
+                case BOOL:
+                    inner_type = DataDstWriterNode.JAVA_TYPE.BOOLEAN;
+                    break;
+                case STRING:
+                    inner_type = DataDstWriterNode.JAVA_TYPE.STRING;
+                    break;
+                case GROUP:
+                case MESSAGE:
+                case BYTES:
+                    inner_type = DataDstWriterNode.JAVA_TYPE.BYTES;
+                    break;
+                case ENUM:
+                    break;
+                }
+                if (fd.isRepeated()) {
+                    int count = 0;
+                    for (;; ++count) {
+                        String real_name = DataDstWriterNode.makeChildPath(prefix, fd.getName(), count);
                         IdentifyDescriptor col = data_src.getColumnByName(real_name);
                         if (null != col) {
                             DataDstWriterNode c = DataDstWriterNode.create(null, inner_type);
                             setup_node_identify(c, col);
-                            node.addChild(fd.getName(), c, fd,false, false);
+                            node.addChild(fd.getName(), c, fd, true, false);
                             ret = true;
-                        } else if (fd.isRequired()) {
-                            DataDstWriterNode c = DataDstWriterNode.create(null, inner_type);
-                            // required 字段要dump默认数据
-                            node.addChild(fd.getName(), c, fd,false, true);
+                        } else {
+                            break;
                         }
                     }
-                    break;
+                } else {
+                    // 非 list 类型
+                    String real_name = DataDstWriterNode.makeChildPath(prefix, fd.getName());
+                    IdentifyDescriptor col = data_src.getColumnByName(real_name);
+                    if (null != col) {
+                        DataDstWriterNode c = DataDstWriterNode.create(null, inner_type);
+                        setup_node_identify(c, col);
+                        node.addChild(fd.getName(), c, fd, false, false);
+                        ret = true;
+                    } else if (fd.isRequired()) {
+                        DataDstWriterNode c = DataDstWriterNode.create(null, inner_type);
+                        // required 字段要dump默认数据
+                        node.addChild(fd.getName(), c, fd, false, true);
+                    }
                 }
+                break;
+            }
             }
         }
 
@@ -451,12 +466,12 @@ public class DataDstPb extends DataDstImpl {
     }
 
     private ByteString convData(DataDstWriterNode node) throws ConvException {
-        Descriptors.Descriptor msg_desc = (Descriptors.Descriptor)node.descriptor;
+        Descriptors.Descriptor msg_desc = (Descriptors.Descriptor) node.descriptor;
 
         DynamicMessage.Builder root = DynamicMessage.newBuilder(currentMsgDesc);
         boolean valid_data = dumpMessage(root, node);
         // 过滤空项
-        if(!valid_data) {
+        if (!valid_data) {
             return null;
         }
 
@@ -468,61 +483,62 @@ public class DataDstPb extends DataDstImpl {
         }
     }
 
-
     private void dumpDefault(DynamicMessage.Builder builder, Descriptors.FieldDescriptor fd) {
-        switch(fd.getType()) {
-            case DOUBLE:
-                builder.setField(fd, Double.valueOf(0.0));
-                break;
-            case FLOAT:
-                builder.setField(fd, Float.valueOf(0));
-                break;
-            case INT64:
-            case UINT64:
-            case INT32:
-            case FIXED64:
-            case FIXED32:
-            case UINT32:
-            case SFIXED32:
-            case SFIXED64:
-            case SINT32:
-            case SINT64:
-                builder.setField(fd, 0);
-                break;
-            case ENUM:
-                builder.setField(fd, fd.getEnumType().findValueByNumber(0));
-                break;
-            case BOOL:
-                builder.setField(fd, false);
-                break;
-            case STRING:
-                builder.setField(fd, "");
-                break;
-            case GROUP:
-                builder.setField(fd, new byte[0]);
-                break;
-            case MESSAGE: {
-                DynamicMessage.Builder subnode = DynamicMessage.newBuilder(fd.getMessageType());
+        switch (fd.getType()) {
+        case DOUBLE:
+            builder.setField(fd, Double.valueOf(0.0));
+            break;
+        case FLOAT:
+            builder.setField(fd, Float.valueOf(0));
+            break;
+        case INT64:
+        case UINT64:
+        case INT32:
+        case FIXED64:
+        case FIXED32:
+        case UINT32:
+        case SFIXED32:
+        case SFIXED64:
+        case SINT32:
+        case SINT64:
+            builder.setField(fd, 0);
+            break;
+        case ENUM:
+            builder.setField(fd, fd.getEnumType().findValueByNumber(0));
+            break;
+        case BOOL:
+            builder.setField(fd, false);
+            break;
+        case STRING:
+            builder.setField(fd, "");
+            break;
+        case GROUP:
+            builder.setField(fd, new byte[0]);
+            break;
+        case MESSAGE: {
+            DynamicMessage.Builder subnode = DynamicMessage.newBuilder(fd.getMessageType());
 
-                // fill required
-                for(Descriptors.FieldDescriptor sub_fd: fd.getMessageType().getFields()) {
-                    if (sub_fd.isRequired()) {
-                        dumpDefault(subnode, sub_fd);
-                    }
+            // fill required
+            for (Descriptors.FieldDescriptor sub_fd : fd.getMessageType().getFields()) {
+                if (sub_fd.isRequired()) {
+                    dumpDefault(subnode, sub_fd);
                 }
+            }
 
-                builder.setField(fd, subnode.build());
-                break;
-            } case BYTES:
-                builder.setField(fd, new byte[0]);
-                break;
+            builder.setField(fd, subnode.build());
+            break;
+        }
+        case BYTES:
+            builder.setField(fd, new byte[0]);
+            break;
         }
     }
 
     /**
      * 转储数据到builder
+     * 
      * @param builder 转储目标
-     * @param node message的描述结构
+     * @param node    message的描述结构
      * @return 有数据则返回true
      * @throws ConvException
      */
@@ -530,13 +546,13 @@ public class DataDstPb extends DataDstImpl {
         boolean ret = false;
 
         for (Map.Entry<String, DataDstWriterNode.DataDstChildrenNode> c : node.getChildren().entrySet()) {
-            Descriptors.FieldDescriptor fd = (Descriptors.FieldDescriptor)c.getValue().fieldDescriptor;
+            Descriptors.FieldDescriptor fd = (Descriptors.FieldDescriptor) c.getValue().fieldDescriptor;
             if (null == fd) {
                 // 不需要提示，如果从其他方式解包协议描述的时候可能有可选字段丢失的
                 continue;
             }
 
-            for (DataDstWriterNode child: c.getValue().nodes) {
+            for (DataDstWriterNode child : c.getValue().nodes) {
                 if (dumpField(builder, child, fd)) {
                     ret = true;
                 }
@@ -546,7 +562,8 @@ public class DataDstPb extends DataDstImpl {
         return ret;
     }
 
-    private boolean dumpField(DynamicMessage.Builder builder, DataDstWriterNode desc, Descriptors.FieldDescriptor fd) throws ConvException {
+    private boolean dumpField(DynamicMessage.Builder builder, DataDstWriterNode desc, Descriptors.FieldDescriptor fd)
+            throws ConvException {
         if (null == desc.identify && MESSAGE != fd.getJavaType()) {
             // required 空字段填充默认值
             dumpDefault(builder, fd);
@@ -556,92 +573,90 @@ public class DataDstPb extends DataDstImpl {
         Object val = null;
 
         switch (fd.getJavaType()) {
-            case INT: {
-                DataContainer<Long> ret = DataSrcImpl.getOurInstance().getValue(desc.identify, 0L);
-                if (null != ret && ret.valid) {
-                    val = ret.value.intValue();
+        case INT: {
+            DataContainer<Long> ret = DataSrcImpl.getOurInstance().getValue(desc.identify, 0L);
+            if (null != ret && ret.valid) {
+                val = ret.value.intValue();
+            }
+            break;
+        }
+
+        case LONG: {
+            DataContainer<Long> ret = DataSrcImpl.getOurInstance().getValue(desc.identify, 0L);
+            if (null != ret && ret.valid) {
+                val = ret.value.longValue();
+            }
+            break;
+        }
+
+        case FLOAT: {
+            DataContainer<Double> ret = DataSrcImpl.getOurInstance().getValue(desc.identify, 0.0);
+            if (null != ret && ret.valid) {
+                val = ret.value.floatValue();
+            }
+            break;
+        }
+
+        case DOUBLE: {
+            DataContainer<Double> ret = DataSrcImpl.getOurInstance().getValue(desc.identify, 0.0);
+            if (null != ret && ret.valid) {
+                val = ret.value.doubleValue();
+            }
+            break;
+        }
+
+        case BOOLEAN: {
+            DataContainer<Boolean> ret = DataSrcImpl.getOurInstance().getValue(desc.identify, false);
+            if (null != ret && ret.valid) {
+                val = ret.value.booleanValue();
+            }
+            break;
+        }
+
+        case STRING: {
+            DataContainer<String> ret = DataSrcImpl.getOurInstance().getValue(desc.identify, "");
+            if (null != ret && ret.valid) {
+                val = ret.value;
+            }
+            break;
+        }
+
+        case BYTE_STRING: {
+            DataContainer<String> res = DataSrcImpl.getOurInstance().getValue(desc.identify, "");
+            if (null != res && res.valid) {
+                String encoding = SchemeConf.getInstance().getKey().getEncoding();
+                if (null == encoding || encoding.isEmpty()) {
+                    val = com.google.protobuf.ByteString.copyFrom(res.value.getBytes());
+                } else {
+                    val = com.google.protobuf.ByteString.copyFrom(res.value.getBytes(Charset.forName(encoding)));
                 }
-                break;
+            }
+            break;
+        }
+        case ENUM: {
+            DataContainer<Long> ret = DataSrcImpl.getOurInstance().getValue(desc.identify, 0L);
+            if (null != ret && ret.valid) {
+                val = fd.getEnumType().findValueByNumber(ret.value.intValue());
             }
 
-            case LONG:{
-                DataContainer<Long> ret = DataSrcImpl.getOurInstance().getValue(desc.identify, 0L);
-                if (null != ret && ret.valid) {
-                    val = ret.value.longValue();
-                }
-                break;
-            }
+            break;
+        }
 
-            case FLOAT:{
-                DataContainer<Double> ret = DataSrcImpl.getOurInstance().getValue(desc.identify, 0.0);
-                if (null != ret && ret.valid) {
-                    val = ret.value.floatValue();
+        case MESSAGE: {
+            DynamicMessage.Builder node = DynamicMessage.newBuilder(fd.getMessageType());
+            if (dumpMessage(node, desc) || fd.isRequired()) {
+                try {
+                    val = node.build();
+                } catch (UninitializedMessageException e) {
+                    ProgramOptions.getLoger().error("serialize %s(%s) failed. %s", fd.getFullName(),
+                            fd.getMessageType().getName(), e.getMessage());
                 }
-                break;
             }
+            break;
+        }
 
-            case DOUBLE:{
-                DataContainer<Double> ret = DataSrcImpl.getOurInstance().getValue(desc.identify, 0.0);
-                if (null != ret && ret.valid) {
-                    val = ret.value.doubleValue();
-                }
-                break;
-            }
-
-            case BOOLEAN:{
-                DataContainer<Boolean> ret = DataSrcImpl.getOurInstance().getValue(desc.identify, false);
-                if (null != ret && ret.valid) {
-                    val = ret.value.booleanValue();
-                }
-                break;
-            }
-
-            case STRING: {
-                DataContainer<String> ret = DataSrcImpl.getOurInstance().getValue(desc.identify, "");
-                if (null != ret && ret.valid) {
-                    val = ret.value;
-                }
-                break;
-            }
-
-            case BYTE_STRING: {
-                DataContainer<String> res = DataSrcImpl.getOurInstance().getValue(desc.identify, "");
-                if(null != res && res.valid) {
-                    String encoding = SchemeConf.getInstance().getKey().getEncoding();
-                    if (null == encoding || encoding.isEmpty()) {
-                        val = com.google.protobuf.ByteString.copyFrom(res.value.getBytes());
-                    } else {
-                        val = com.google.protobuf.ByteString.copyFrom(res.value.getBytes(Charset.forName(encoding)));
-                    }
-                }
-                break;
-            }
-            case ENUM: {
-                DataContainer<Long> ret = DataSrcImpl.getOurInstance().getValue(desc.identify, 0L);
-                if (null != ret && ret.valid) {
-                    val = fd.getEnumType().findValueByNumber(ret.value.intValue());
-                }
-
-                break;
-            }
-
-            case MESSAGE: {
-                DynamicMessage.Builder node = DynamicMessage.newBuilder(fd.getMessageType());
-                if (dumpMessage(node, desc) || fd.isRequired()) {
-                    try {
-                        val = node.build();
-                    } catch (UninitializedMessageException e) {
-                        ProgramOptions.getLoger().error("serialize %s(%s) failed. %s",
-                                fd.getFullName(),
-                                fd.getMessageType().getName(),
-                                e.getMessage());
-                    }
-                }
-                break;
-            }
-
-            default:
-                break;
+        default:
+            break;
         }
 
         if (null == val) {
@@ -663,6 +678,7 @@ public class DataDstPb extends DataDstImpl {
 
     /**
      * 生成常量数据
+     * 
      * @return 常量数据,不支持的时候返回空
      */
     public HashMap<String, Object> buildConst() {
@@ -676,25 +692,26 @@ public class DataDstPb extends DataDstImpl {
 
         HashMap<String, Object> ret = new HashMap<String, Object>();
 
-        for(HashMap.Entry<String, DescriptorProtos.FileDescriptorProto> fdp : pbs.files.entrySet()) {
+        for (HashMap.Entry<String, DescriptorProtos.FileDescriptorProto> fdp : pbs.files.entrySet()) {
             String[] names = null;
             HashMap<String, Object> fd_root = ret;
 
-            if(false == fdp.getValue().getPackage().isEmpty()) {
+            if (false == fdp.getValue().getPackage().isEmpty()) {
                 names = fdp.getValue().getPackage().split("\\.");
             }
 
             if (null != names) {
-                for(String seg: names) {
+                for (String seg : names) {
                     if (seg.isEmpty()) {
                         continue;
                     }
-                    if(fd_root.containsKey(seg)) {
+                    if (fd_root.containsKey(seg)) {
                         Object node = fd_root.get(seg);
                         if (node instanceof HashMap) {
-                            fd_root = (HashMap<String, Object>)node;
+                            fd_root = (HashMap<String, Object>) node;
                         } else {
-                            ProgramOptions.getLoger().error("package name %s conflict(failed in %s).", fdp.getValue().getPackage(), seg);
+                            ProgramOptions.getLoger().error("package name %s conflict(failed in %s).",
+                                    fdp.getValue().getPackage(), seg);
                             break;
                         }
                     } else {
@@ -705,13 +722,13 @@ public class DataDstPb extends DataDstImpl {
                 }
             }
 
-            for(DescriptorProtos.EnumDescriptorProto enum_desc : fdp.getValue().getEnumTypeList()) {
+            for (DescriptorProtos.EnumDescriptorProto enum_desc : fdp.getValue().getEnumTypeList()) {
                 String seg = enum_desc.getName();
                 HashMap<String, Object> enum_root;
-                if(fd_root.containsKey(seg)) {
+                if (fd_root.containsKey(seg)) {
                     Object node = fd_root.get(seg);
                     if (node instanceof HashMap) {
-                        enum_root = (HashMap<String, Object>)node;
+                        enum_root = (HashMap<String, Object>) node;
                     } else {
                         ProgramOptions.getLoger().error("enum name %s.%s conflict.", fdp.getValue().getPackage(), seg);
                         continue;
@@ -722,7 +739,7 @@ public class DataDstPb extends DataDstImpl {
                 }
 
                 // 写出所有常量值
-                for(DescriptorProtos.EnumValueDescriptorProto enum_val : enum_desc.getValueList()) {
+                for (DescriptorProtos.EnumValueDescriptorProto enum_val : enum_desc.getValueList()) {
                     enum_root.put(enum_val.getName(), enum_val.getNumber());
                 }
             }
@@ -733,11 +750,12 @@ public class DataDstPb extends DataDstImpl {
 
     /**
      * 转储常量数据
+     * 
      * @return 常量数据,不支持的时候返回空
      */
-    public final byte[] dumpConst(HashMap<String, Object> data) {
+    public final byte[] dumpConst(HashMap<String, Object> data) throws IOException {
         // protobuf的常量输出直接复制描述文件就好了
-        if(ProgramOptions.getInstance().protocolFile.equals(ProgramOptions.getInstance().constPrint)) {
+        if (ProgramOptions.getInstance().protocolFile.equals(ProgramOptions.getInstance().constPrint)) {
             return null;
         }
 
@@ -745,15 +763,12 @@ public class DataDstPb extends DataDstImpl {
             File f = new File(ProgramOptions.getInstance().protocolFile);
 
             FileInputStream fin = new FileInputStream(ProgramOptions.getInstance().protocolFile);
-            byte[] all_buffer = new byte[(int)f.length()];
+            byte[] all_buffer = new byte[(int) f.length()];
             fin.read(all_buffer);
 
             return all_buffer;
         } catch (FileNotFoundException e) {
             ProgramOptions.getLoger().error("protocol file %s not found.", ProgramOptions.getInstance().protocolFile);
-        } catch (IOException e) {
-            ProgramOptions.getLoger().error("read protocol file %s failed.", ProgramOptions.getInstance().protocolFile);
-            e.printStackTrace();
         }
 
         return null;

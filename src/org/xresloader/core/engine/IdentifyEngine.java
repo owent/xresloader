@@ -57,7 +57,8 @@ public class IdentifyEngine {
         if (null != cfg.getKeyWordRegexPrefixRule()) {
             int invalid_index = 0;
             for (; invalid_index < ident.length(); ++invalid_index) {
-                if (cfg.getKeyWordRegexPrefixRule().matcher(ident.substring(invalid_index, invalid_index + 1)).matches())
+                if (cfg.getKeyWordRegexPrefixRule().matcher(ident.substring(invalid_index, invalid_index + 1))
+                        .matches())
                     break;
             }
             ident = ident.substring(invalid_index);
@@ -77,7 +78,8 @@ public class IdentifyEngine {
                     words.add(this_word);
                 }
 
-                if (null != cfg.getKeyWordRegexRemoveRule() && !cfg.getKeyWordRegexRemoveRule().matcher(String.valueOf(c)).matches())
+                if (null != cfg.getKeyWordRegexRemoveRule()
+                        && !cfg.getKeyWordRegexRemoveRule().matcher(String.valueOf(c)).matches())
                     this_word = String.valueOf(c);
                 else
                     this_word = "";
@@ -98,11 +100,5 @@ public class IdentifyEngine {
 
         // 加前后缀，加分词符
         return cfg.getPrefix() + String.join(cfg.getWordSplit(), words) + cfg.getSuffix();
-    }
-
-    static public boolean isAbsPath(String path) {
-        path = path.trim();
-        return path.charAt(0) == '/' || (path.length() > 1 && path.charAt(1) == ':' && Character.isLetter(path.charAt(0)));
-
     }
 }

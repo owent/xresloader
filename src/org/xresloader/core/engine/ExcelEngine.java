@@ -29,17 +29,16 @@ public class ExcelEngine {
     static private HashMap<String, Workbook> openedWorkbooks = new HashMap<String, Workbook>();
 
     /**
-     * 日期格式列缓存，XSSF在获取Style时性能极其低下，缓存一下有助于提升性能
-     * 导致的副作用就是只接受第一个数据行的日期格式
+     * 日期格式列缓存，XSSF在获取Style时性能极其低下，缓存一下有助于提升性能 导致的副作用就是只接受第一个数据行的日期格式
      */
-    //static private HashMap<Integer, SimpleDateFormat> dateTypeStyle = new HashMap<Integer, SimpleDateFormat>();
-
+    // static private HashMap<Integer, SimpleDateFormat> dateTypeStyle = new
+    // HashMap<Integer, SimpleDateFormat>();
 
     /**
      * 清空缓存
      */
     static public void clearAllCache() {
-        //dateTypeStyle.clear();
+        // dateTypeStyle.clear();
     }
 
     /**
@@ -52,12 +51,13 @@ public class ExcelEngine {
         // 无论打开什么Excel文件，都要清空缓存
         clearAllCache();
 
-        if(!IdentifyEngine.isAbsPath(file_path)) {
+        File file_check = new File(file_path);
+        if (!file_check.isAbsolute()) {
             file_path = ProgramOptions.getInstance().dataSourceDirectory + '/' + file_path;
+            file_check = new File(file_path);
         }
 
         try {
-            File file_check = new File(file_path);
             file_path = file_check.getCanonicalPath();
             if (false == file_check.exists()) {
                 return null;
@@ -66,7 +66,6 @@ public class ExcelEngine {
         } catch (IOException e) {
             ProgramOptions.getLoger().error("%s", e.getMessage());
         }
-
 
         Workbook ret = openedWorkbooks.get(file_path);
         if (null != ret) {
@@ -81,10 +80,10 @@ public class ExcelEngine {
             // 类型枚举，以后能支持 ods等非微软格式？
             if (file_path.endsWith(".xls")) {
                 ret = new HSSFWorkbook(is);
-                extractor = new org.apache.poi.hssf.extractor.ExcelExtractor((HSSFWorkbook)ret);
+                extractor = new org.apache.poi.hssf.extractor.ExcelExtractor((HSSFWorkbook) ret);
             } else {
                 ret = new XSSFWorkbook(is);
-                extractor = new org.apache.poi.xssf.extractor.XSSFExcelExtractor((XSSFWorkbook)ret);
+                extractor = new org.apache.poi.xssf.extractor.XSSFExcelExtractor((XSSFWorkbook) ret);
             }
 
             extractor.setFormulasNotResults(false);
@@ -132,7 +131,6 @@ public class ExcelEngine {
     static public void cell2s(DataContainer<String> out, Row row, IdentifyDescriptor col) {
         cell2s(out, row, col, null);
     }
-
 
     static private Byte cal_cell2err(Cell c, CellValue cv) {
         if (null == cv) {
@@ -194,74 +192,68 @@ public class ExcelEngine {
             }
         }
 
-        CellType type = (null == cv)? c.getCellTypeEnum(): cv.getCellTypeEnum();
+        CellType type = (null == cv) ? c.getCellTypeEnum() : cv.getCellTypeEnum();
         switch (type) {
-            case BLANK:
-                break;
-            case BOOLEAN:
-                out.set(cal_cell2bool(c, cv).toString());
-                break;
-            case ERROR:
-                out.set(cal_cell2err(c, cv).toString());
-                break;
-            case FORMULA:
-                if (null == cv) {
-                    out.set(c.getCellFormula());
-                }
-                break;
-            case NUMERIC:
-                if(DateUtil.isCellDateFormatted(c)) {
-                    // 参照POI DateUtil.isADateFormat函数，去除无效字符
-                    String fs = c.getCellStyle().getDataFormatString()
-                        .replaceAll("\\\\-","-")
-                        .replaceAll("\\\\,",",")
-                        .replaceAll("\\\\\\.",".")
-                        .replaceAll("\\\\ "," ")
-                        .replaceAll("AM/PM","")
+        case BLANK:
+            break;
+        case BOOLEAN:
+            out.set(cal_cell2bool(c, cv).toString());
+            break;
+        case ERROR:
+            out.set(cal_cell2err(c, cv).toString());
+            break;
+        case FORMULA:
+            if (null == cv) {
+                out.set(c.getCellFormula());
+            }
+            break;
+        case NUMERIC:
+            if (DateUtil.isCellDateFormatted(c)) {
+                // 参照POI DateUtil.isADateFormat函数，去除无效字符
+                String fs = c.getCellStyle().getDataFormatString().replaceAll("\\\\-", "-").replaceAll("\\\\,", ",")
+                        .replaceAll("\\\\\\.", ".").replaceAll("\\\\ ", " ").replaceAll("AM/PM", "")
                         .replaceAll("\\[[^]]*\\]", "");
 
-                    // 默认格式
-                    int idx = fs.indexOf(";@");
-                    if (idx > 0 && idx < fs.length()) {
-                        // 包含年月日
-                        LinkedList<String> rfs = new LinkedList<String>();
+                // 默认格式
+                int idx = fs.indexOf(";@");
+                if (idx > 0 && idx < fs.length()) {
+                    // 包含年月日
+                    LinkedList<String> rfs = new LinkedList<String>();
 
+                    if (checkDate.matcher(fs).find())
+                        rfs.addLast("yyyy-MM-dd");
 
-                        if (checkDate.matcher(fs).find())
-                            rfs.addLast("yyyy-MM-dd");
+                    if (checkTime.matcher(fs).find())
+                        rfs.addLast("HH:mm:ss");
 
-                        if (checkTime.matcher(fs).find())
-                            rfs.addLast("HH:mm:ss");
+                    if (rfs.isEmpty())
+                        fs = "yyyy-MM-dd HH:mm:ss";
+                    else
+                        fs = String.join(" ", rfs);
 
-                        if (rfs.isEmpty())
-                            fs = "yyyy-MM-dd HH:mm:ss";
-                        else
-                            fs = String.join(" ", rfs);
-
-                    } else {
-                        idx = fs.indexOf(";");
-                        if(idx > 0 && idx < fs.length() - 1 ) {
-                            fs = fs.substring(0, idx);
-                        }
+                } else {
+                    idx = fs.indexOf(";");
+                    if (idx > 0 && idx < fs.length() - 1) {
+                        fs = fs.substring(0, idx);
                     }
-
-
-                    SimpleDateFormat df = new SimpleDateFormat(fs);
-                    out.set(df.format(c.getDateCellValue()).trim());
-                    break;
                 }
 
-                out.set(String.valueOf(cal_cell2num(c, cv)));
+                SimpleDateFormat df = new SimpleDateFormat(fs);
+                out.set(df.format(c.getDateCellValue()).trim());
                 break;
-            case STRING:
-                //return ret.set(tryMacro(cal_cell2str(c, cv).trim()));
-                String val = cal_cell2str(c, cv).trim();
-                if (!val.isEmpty()) {
-                    out.set(val);
-                }
-                break;
-            default:
-                break;
+            }
+
+            out.set(String.valueOf(cal_cell2num(c, cv)));
+            break;
+        case STRING:
+            // return ret.set(tryMacro(cal_cell2str(c, cv).trim()));
+            String val = cal_cell2str(c, cv).trim();
+            if (!val.isEmpty()) {
+                out.set(val);
+            }
+            break;
+        default:
+            break;
         }
     }
 
@@ -284,7 +276,8 @@ public class ExcelEngine {
      * @param evalor 公式管理器
      * @return
      */
-    static public void cell2i(DataContainer<Long> out, Row row, IdentifyDescriptor col, FormulaEvaluator evalor) throws ConvException {
+    static public void cell2i(DataContainer<Long> out, Row row, IdentifyDescriptor col, FormulaEvaluator evalor)
+            throws ConvException {
         if (null == row)
             return;
 
@@ -300,41 +293,41 @@ public class ExcelEngine {
                 return;
         }
 
-        CellType type = (null == cv)? c.getCellTypeEnum(): cv.getCellTypeEnum();
+        CellType type = (null == cv) ? c.getCellTypeEnum() : cv.getCellTypeEnum();
         switch (type) {
-            case BLANK:
-                break;
-            case BOOLEAN: {
-                boolean res = cal_cell2bool(c, cv);
-                out.set(col.getAndVerify(res ? 1 : 0));
-                break;
+        case BLANK:
+            break;
+        case BOOLEAN: {
+            boolean res = cal_cell2bool(c, cv);
+            out.set(col.getAndVerify(res ? 1 : 0));
+            break;
+        }
+        case ERROR:
+            break;
+        case FORMULA:
+            break;
+        case NUMERIC: {
+            long val = 0;
+            if (DateUtil.isCellDateFormatted(c)) {
+                val = dateToUnixTimestamp(c.getDateCellValue());
+            } else {
+                val = Math.round(cal_cell2num(c, cv));
             }
-            case ERROR:
-                break;
-            case FORMULA:
-                break;
-            case NUMERIC: {
-                long val = 0;
-                if (DateUtil.isCellDateFormatted(c)) {
-                    val = dateToUnixTimestamp(c.getDateCellValue());
-                } else {
-                    val = Math.round(cal_cell2num(c, cv));
-                }
 
-                out.set(col.getAndVerify(val));
+            out.set(col.getAndVerify(val));
+            break;
+        }
+        case STRING: {
+            String val = cal_cell2str(c, cv).trim();
+            if (val.isEmpty()) {
                 break;
             }
-            case STRING: {
-                String val = cal_cell2str(c, cv).trim();
-                if (val.isEmpty()) {
-                    break;
-                }
 
-                out.set(col.getAndVerify(tryMacro(val)));
-                break;
-            }
-            default:
-                break;
+            out.set(col.getAndVerify(tryMacro(val)));
+            break;
+        }
+        default:
+            break;
         }
     }
 
@@ -357,7 +350,8 @@ public class ExcelEngine {
      * @param evalor 公式管理器
      * @return
      */
-    static public void cell2d(DataContainer<Double> out, Row row, IdentifyDescriptor col, FormulaEvaluator evalor) throws ConvException {
+    static public void cell2d(DataContainer<Double> out, Row row, IdentifyDescriptor col, FormulaEvaluator evalor)
+            throws ConvException {
         if (null == row)
             return;
 
@@ -374,41 +368,39 @@ public class ExcelEngine {
             }
         }
 
-        CellType type = (null == cv)? c.getCellTypeEnum(): cv.getCellTypeEnum();
+        CellType type = (null == cv) ? c.getCellTypeEnum() : cv.getCellTypeEnum();
         switch (type) {
-            case BLANK:
-                break;
-            case BOOLEAN:
-                out.set(cal_cell2bool(c, cv) ? 1.0 : 0.0);
-                break;
-            case ERROR:
-                break;
-            case FORMULA:
-                break;
-            case NUMERIC:
-                if(DateUtil.isCellDateFormatted(c)) {
-                    out.set((double) dateToUnixTimestamp(c.getDateCellValue()));
-                    break;
-                }
-                out.set(cal_cell2num(c, cv));
-                break;
-            case STRING: {
-                String val = cal_cell2str(c, cv).trim();
-                if (val.isEmpty()) {
-                    break;
-                }
-
-                try {
-                    out.set(Double.valueOf(tryMacro(val)));
-                } catch (java.lang.NumberFormatException e) {
-                    throw new ConvException(
-                        String.format("%s can not be converted to a number", val)
-                    );
-                }
+        case BLANK:
+            break;
+        case BOOLEAN:
+            out.set(cal_cell2bool(c, cv) ? 1.0 : 0.0);
+            break;
+        case ERROR:
+            break;
+        case FORMULA:
+            break;
+        case NUMERIC:
+            if (DateUtil.isCellDateFormatted(c)) {
+                out.set((double) dateToUnixTimestamp(c.getDateCellValue()));
                 break;
             }
-            default:
+            out.set(cal_cell2num(c, cv));
+            break;
+        case STRING: {
+            String val = cal_cell2str(c, cv).trim();
+            if (val.isEmpty()) {
                 break;
+            }
+
+            try {
+                out.set(Double.valueOf(tryMacro(val)));
+            } catch (java.lang.NumberFormatException e) {
+                throw new ConvException(String.format("%s can not be converted to a number", val));
+            }
+            break;
+        }
+        default:
+            break;
         }
     }
 
@@ -449,30 +441,31 @@ public class ExcelEngine {
             }
         }
 
-        CellType type = (null == cv)? c.getCellTypeEnum(): cv.getCellTypeEnum();
+        CellType type = (null == cv) ? c.getCellTypeEnum() : cv.getCellTypeEnum();
         switch (type) {
-            case BLANK:
+        case BLANK:
+            break;
+        case BOOLEAN:
+            out.set(cal_cell2bool(c, cv));
+            break;
+        case ERROR:
+            break;
+        case FORMULA:
+            break;
+        case NUMERIC:
+            out.set(cal_cell2num(c, cv) != 0);
+            break;
+        case STRING:
+            String item = tryMacro(cal_cell2str(c, cv).trim()).toLowerCase();
+            if (item.isEmpty()) {
                 break;
-            case BOOLEAN:
-                out.set(cal_cell2bool(c, cv));
-                break;
-            case ERROR:
-                break;
-            case FORMULA:
-                break;
-            case NUMERIC:
-                out.set(cal_cell2num(c, cv) != 0);
-                break;
-            case STRING:
-                String item = tryMacro(cal_cell2str(c, cv).trim()).toLowerCase();
-                if (item.isEmpty()) {
-                    break;
-                }
+            }
 
-                out.set(!item.equals("0") && !item.equals("0.0") && !item.equalsIgnoreCase("false") && !item.equalsIgnoreCase("no") && !item.equalsIgnoreCase("disable"));
-                break;
-            default:
-                break;
+            out.set(!item.equals("0") && !item.equals("0.0") && !item.equalsIgnoreCase("false")
+                    && !item.equalsIgnoreCase("no") && !item.equalsIgnoreCase("disable"));
+            break;
+        default:
+            break;
         }
     }
 
@@ -487,11 +480,11 @@ public class ExcelEngine {
         // @see Date.getYear();
         // unix timstamp时间搓是负数的都认为日期无效，仅时间有效
         if (y <= 1970) {
-            //int day = c.get(Calendar.DAY_OF_YEAR);
+            // int day = c.get(Calendar.DAY_OF_YEAR);
             int h = c.get(Calendar.HOUR_OF_DAY);
             int m = c.get(Calendar.MINUTE);
             int s = c.get(Calendar.SECOND);
-            return h * 3600 + m *60 + s;
+            return h * 3600 + m * 60 + s;
         }
         return d.getTime() / 1000;
     }

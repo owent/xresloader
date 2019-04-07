@@ -1,7 +1,10 @@
 package org.xresloader.core.scheme;
 
 import org.xresloader.core.ProgramOptions;
+import org.xresloader.core.engine.IdentifyEngine;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.LinkedList;
 
@@ -72,10 +75,11 @@ public class SchemeConf {
 
     /**
      * 添加配置数据源
-     * @param file_path 文件路径
+     * 
+     * @param file_path  文件路径
      * @param table_name 表名
-     * @param row 行号
-     * @param col 列号
+     * @param row        行号
+     * @param col        列号
      */
     public void addDataSource(String file_path, String table_name, int row, int col) {
         DataInfo data = new DataInfo();
@@ -89,9 +93,10 @@ public class SchemeConf {
 
     /**
      * 添加配置数据源
-     * @param file_path 文件路径
+     * 
+     * @param file_path  文件路径
      * @param table_name 表名
-     * @param position 行号,列号
+     * @param position   行号,列号
      */
     public void addDataSource(String file_path, String table_name, String position) {
         int row = 2;
@@ -99,7 +104,7 @@ public class SchemeConf {
 
         String[] group = position.split("[^\\d]");
         ArrayList<String> valid_group = new ArrayList<String>();
-        for(String n: group) {
+        for (String n : group) {
             if (false == n.isEmpty()) {
                 valid_group.add(n);
             }
@@ -127,10 +132,11 @@ public class SchemeConf {
 
     /**
      * 添加宏数据源
-     * @param file_path 文件路径
+     * 
+     * @param file_path  文件路径
      * @param table_name 表名
-     * @param row 行号
-     * @param col 列号
+     * @param row        行号
+     * @param col        列号
      */
     public void addMacroSource(String file_path, String table_name, int row, int col) {
         DataInfo data = new DataInfo();
@@ -144,9 +150,10 @@ public class SchemeConf {
 
     /**
      * 添加宏数据源
-     * @param file_path 文件路径
+     * 
+     * @param file_path  文件路径
      * @param table_name 表名
-     * @param position 行号,列号
+     * @param position   行号,列号
      */
     public void addMacroSource(String file_path, String table_name, String position) {
         int row = 2;
@@ -154,7 +161,7 @@ public class SchemeConf {
 
         String[] group = position.split("[^\\d]");
         ArrayList<String> valid_group = new ArrayList<String>();
-        for(String n: group) {
+        for (String n : group) {
             if (false == n.isEmpty()) {
                 valid_group.add(n);
             }
@@ -189,18 +196,50 @@ public class SchemeConf {
         this.protoName = protoName;
     }
 
+    private String outputFilePathCache = "";
+    private String outputFileAbsPathCache = "";
+
     /**
      * Getter for property 'outputFile'.
      *
      * @return Value for property 'outputFile'.
      */
     public String getOutputFile() {
-        ProgramOptions.RenameRule rename_rule = ProgramOptions.getInstance().renameRule;
-        if (null != rename_rule) {
-            return rename_rule.match.matcher(outputFile).replaceAll(rename_rule.replace);
+        if (!this.outputFilePathCache.isEmpty()) {
+            return this.outputFilePathCache;
         }
 
-        return outputFile;
+        if (false == ProgramOptions.getInstance().constPrint.isEmpty()) {
+            this.outputFilePathCache = ProgramOptions.getInstance().constPrint;
+            return this.outputFilePathCache;
+        }
+
+        ProgramOptions.RenameRule rename_rule = ProgramOptions.getInstance().renameRule;
+        if (null != rename_rule) {
+            this.outputFilePathCache = rename_rule.match.matcher(outputFile).replaceAll(rename_rule.replace);
+        }
+
+        return this.outputFilePathCache;
+    }
+
+    public String getOutputFileAbsPath() {
+        if (!this.outputFileAbsPathCache.isEmpty()) {
+            return this.outputFileAbsPathCache;
+        }
+
+        String filePath = this.getOutputFile();
+        File fd = new File(filePath);
+        if (!fd.isAbsolute()) {
+            filePath = ProgramOptions.getInstance().outputDirectory + '/' + filePath;
+            fd = new File(filePath);
+        }
+
+        try {
+            this.outputFileAbsPathCache = fd.getCanonicalFile().getAbsolutePath();
+        } catch (IOException e) {
+            this.outputFileAbsPathCache = fd.getAbsolutePath();
+        }
+        return this.outputFileAbsPathCache;
     }
 
     /**
@@ -210,6 +249,8 @@ public class SchemeConf {
      */
     public void setOutputFile(String outputFile) {
         this.outputFile = outputFile;
+        this.outputFilePathCache = "";
+        this.outputFileAbsPathCache = "";
     }
 
     /**
@@ -235,27 +276,27 @@ public class SchemeConf {
     }
 
     public int initScheme() {
-        switch(ProgramOptions.getInstance().dataSourceType) {
-            case BIN: {
-                scheme = new SchemeDataSourceCmd();
-                break;
-            }
-            case EXCEL: {
-                scheme = new SchemeDataSourceExcel();
-                break;
-            }
-            case INI: {
-                scheme = new SchemeDataSourceConf();
-                break;
-            }
-            case JSON: {
-                scheme = new SchemeDataSourceJson();
-                break;
-            }
-            default:{
-                ProgramOptions.getLoger().error("data source file type error.");
-                return -11;
-            }
+        switch (ProgramOptions.getInstance().dataSourceType) {
+        case BIN: {
+            scheme = new SchemeDataSourceCmd();
+            break;
+        }
+        case EXCEL: {
+            scheme = new SchemeDataSourceExcel();
+            break;
+        }
+        case INI: {
+            scheme = new SchemeDataSourceConf();
+            break;
+        }
+        case JSON: {
+            scheme = new SchemeDataSourceJson();
+            break;
+        }
+        default: {
+            ProgramOptions.getLoger().error("data source file type error.");
+            return -11;
+        }
         }
 
         return scheme.load();
@@ -263,36 +304,40 @@ public class SchemeConf {
 
     /**
      * 添加配置数据源
-     * @param category 分类名称
+     * 
+     * @param category        分类名称
      * @param blueprintAccess 蓝图权限(BlueprintReadOnly/BlueprintReadWrite/BlueprintGetter/BlueprintSetter)
-     * @param editAccess 编辑权限(EditAnywhere/EditInstanceOnly/EditDefaultsOnly)
+     * @param editAccess      编辑权限(EditAnywhere/EditInstanceOnly/EditDefaultsOnly)
      */
     public void setUECSVOptions(String category, String blueprintAccess, String editAccess) {
         extUECSV.category = category;
 
         if (blueprintAccess == null || blueprintAccess.isEmpty()) {
             extUECSV.blueprintAccess = "";
-        } else if (blueprintAccess.equalsIgnoreCase("BlueprintReadOnly") ||
-                blueprintAccess.equalsIgnoreCase("BlueprintReadWrite") ||
-                blueprintAccess.equalsIgnoreCase("BlueprintGetter") ||
-                blueprintAccess.equalsIgnoreCase("BlueprintSetter")
-        ) {
+        } else if (blueprintAccess.equalsIgnoreCase("BlueprintReadOnly")
+                || blueprintAccess.equalsIgnoreCase("BlueprintReadWrite")
+                || blueprintAccess.equalsIgnoreCase("BlueprintGetter")
+                || blueprintAccess.equalsIgnoreCase("BlueprintSetter")) {
             extUECSV.blueprintAccess = blueprintAccess;
         } else if (!blueprintAccess.isEmpty()) {
-            ProgramOptions.getLoger().warn("BlueprintAccess for UECSV can only be one of BlueprintReadOnly/BlueprintReadWrite/BlueprintGetter/BlueprintSetter, the invalid %s will be ignored", blueprintAccess);
+            ProgramOptions.getLoger().warn(
+                    "BlueprintAccess for UECSV can only be one of BlueprintReadOnly/BlueprintReadWrite/BlueprintGetter/BlueprintSetter, the invalid %s will be ignored",
+                    blueprintAccess);
         }
 
         if (editAccess != null || editAccess.isEmpty()) {
             extUECSV.editAccess = "";
-        } else if (editAccess.equalsIgnoreCase("EditAnywhere") ||
-                editAccess.equalsIgnoreCase("EditInstanceOnly") ||
-                editAccess.equalsIgnoreCase("EditDefaultsOnly")
-        ) {
+        } else if (editAccess.equalsIgnoreCase("EditAnywhere") || editAccess.equalsIgnoreCase("EditInstanceOnly")
+                || editAccess.equalsIgnoreCase("EditDefaultsOnly")) {
             extUECSV.editAccess = editAccess;
         } else if (!editAccess.isEmpty()) {
-            ProgramOptions.getLoger().warn("EditAccess for UECSV can only be one of EditAnywhere/EditInstanceOnly/EditDefaultsOnly, the invalid %s will be ignored", editAccess);
+            ProgramOptions.getLoger().warn(
+                    "EditAccess for UECSV can only be one of EditAnywhere/EditInstanceOnly/EditDefaultsOnly, the invalid %s will be ignored",
+                    editAccess);
         }
     }
 
-    public DataExtUECSV getUECSVOptions() { return extUECSV; }
+    public DataExtUECSV getUECSVOptions() {
+        return extUECSV;
+    }
 }

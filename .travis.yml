@@ -27,3 +27,16 @@ env:
 os:
   - linux
 
+deploy:
+  provider: releases
+  api_key:
+    secure: FpssIbMGTjAG4Ny8TYIKn8vmEhkODR2Bqvx46k8/LDRwDRW+CHilULz8KvdZ66CELCjF9n2a88Msnl5B1PVviLX0H+mw8yqqM04gE/BN2l7cNGR941tBlKnGfnT0CPGuLBX+zKETy+9k8FeluYNDwlCklbI2hnGly2F9vpK55Z337TlTd6LFkJhElv6v3fmGH8LRGV/cen5He7NzgmnFq/lqnNUdE9Cg8LQ8tLc8fOHOAWJAmQzP/stKSoHZWGwp1rgc36im4FSkSrF+2k4vK2GurbTTBjOeI2/wyUxcii29t1ACTQMVCNVO27dUoi4F0jEOzbtX5JYsNO+GL3kFj6FeIGAVo8ogoqDfEEmeAuQA+95SWh/m9VVAWTvdIEbUEH3rxHGs0CAzkrxJOxVKgje+cA+ZRz1DmVle74icLL5tV6pQoHeG2iii3e8tpmmu42ovrp9z5qKSrFyVEmQXyN1fs6T8/t8KL4/1dL0gwmuKNdaXLo8TA8jRCJZNdamhtoa1NnrIoy+XPwoD4/su3s6hyBznvNwki07yIcprCc6ubKipj86KLdbhtkaJlIBR+D98jb1b8ngE2Y+OhsPk5DnbPERn7NbR3bP3KanXw9i/h23R9OkoSwku1hio/n4nx2p9Hjn8wICrtuVCSJnf+SVlRT5uzumig1VgDxWLMaw=
+  file_glob: true
+  file: "target/*.jar"
+  skip_cleanup: true
+  overwrite: true
+  draft: true
+  on:
+    all_branches: true
+    tags: true
+  

@@ -2,6 +2,7 @@ package org.xresloader.core.data.dst;
 
 import org.xresloader.core.data.err.ConvException;
 
+import java.io.IOException;
 import java.util.HashMap;
 
 /**
@@ -10,6 +11,7 @@ import java.util.HashMap;
 public abstract class DataDstImpl {
     /**
      * 初始化
+     * 
      * @return
      */
     public boolean init() {
@@ -25,6 +27,7 @@ public abstract class DataDstImpl {
 
     /**
      * 编译并返回协议映射关系
+     * 
      * @return 协议映射关系
      */
     public DataDstWriterNode compile() throws ConvException {
@@ -33,6 +36,7 @@ public abstract class DataDstImpl {
 
     /**
      * 生成数据
+     * 
      * @param src 生成输出结构的描述器
      * @return
      */
@@ -42,6 +46,7 @@ public abstract class DataDstImpl {
 
     /**
      * 生成常量数据
+     * 
      * @return 常量数据,不支持的时候返回空
      */
     public HashMap<String, Object> buildConst() {
@@ -50,7 +55,10 @@ public abstract class DataDstImpl {
 
     /**
      * 转储常量数据
+     * 
      * @return 常量数据,不支持的时候返回空
      */
-    public byte[] dumpConst(HashMap<String, Object> data) { return null; }
+    public byte[] dumpConst(HashMap<String, Object> data) throws IOException {
+        return null;
+    }
 }

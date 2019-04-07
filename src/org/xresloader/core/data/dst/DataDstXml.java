@@ -11,6 +11,7 @@ import org.dom4j.io.OutputFormat;
 import org.dom4j.io.XMLWriter;
 
 import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -62,8 +63,8 @@ public class DataDstXml extends DataDstJava {
         writeData(header, data_obj.header, header.getName());
 
         // body
-        for(Map.Entry<String, List<Object> > item: data_obj.body.entrySet()) {
-            for(Object obj: item.getValue()) {
+        for (Map.Entry<String, List<Object>> item : data_obj.body.entrySet()) {
+            for (Object obj : item.getValue()) {
                 Element xml_item = DocumentHelper.createElement(item.getKey());
 
                 writeData(xml_item, obj, item.getKey());
@@ -83,7 +84,7 @@ public class DataDstXml extends DataDstJava {
             writer.write(doc);
 
             return bos.toByteArray();
-        } catch(Exception e) {
+        } catch (Exception e) {
             ProgramOptions.getLoger().error("write xml failed, %s", e.getMessage());
             return null;
         }
@@ -122,26 +123,26 @@ public class DataDstXml extends DataDstJava {
 
         // 列表
         if (data instanceof List) {
-            List<Object> ls = (List<Object>)data;
+            List<Object> ls = (List<Object>) data;
 
             int index = 0;
-            for(Object obj: ls) {
+            for (Object obj : ls) {
                 Element list_ele = DocumentHelper.createElement(wrapper_name);
                 Attribute index_attr = DocumentHelper.createAttribute(list_ele, "for", String.valueOf(index));
                 list_ele.add(index_attr);
 
                 writeData(list_ele, obj, wrapper_name);
                 sb.add(list_ele);
-                ++ index;
+                ++index;
             }
             return;
         }
 
         // Hashmap
         if (data instanceof Map) {
-            Map<String, Object> mp = (Map<String, Object>)data;
+            Map<String, Object> mp = (Map<String, Object>) data;
 
-            for(Map.Entry<String, Object> item: mp.entrySet()) {
+            for (Map.Entry<String, Object> item : mp.entrySet()) {
                 // 数据会多一层，这里去除
                 if (item.getValue() instanceof List) {
                     writeData(sb, item.getValue(), item.getKey());
@@ -161,13 +162,14 @@ public class DataDstXml extends DataDstJava {
 
     /**
      * 转储常量数据
+     * 
      * @return 常量数据,不支持的时候返回空
      */
-    public final byte[] dumpConst(HashMap<String, Object> data) {
+    public final byte[] dumpConst(HashMap<String, Object> data) throws IOException {
         // pretty print
         OutputFormat of = null;
         if (ProgramOptions.getInstance().prettyIndent <= 0) {
-            of= OutputFormat.createCompactFormat();
+            of = OutputFormat.createCompactFormat();
         } else {
             of = OutputFormat.createPrettyPrint();
             of.setIndentSize(ProgramOptions.getInstance().prettyIndent);
@@ -186,15 +188,10 @@ public class DataDstXml extends DataDstJava {
 
         writeData(doc.getRootElement(), data, "");
 
-        try {
-            ByteArrayOutputStream bos = new ByteArrayOutputStream();
-            XMLWriter writer = new XMLWriter(bos, of);
-            writer.write(doc);
+        ByteArrayOutputStream bos = new ByteArrayOutputStream();
+        XMLWriter writer = new XMLWriter(bos, of);
+        writer.write(doc);
 
-            return bos.toByteArray();
-        } catch(Exception e) {
-            ProgramOptions.getLoger().error("write xml failed, %s", e.getMessage());
-            return null;
-        }
+        return bos.toByteArray();
     }
 }

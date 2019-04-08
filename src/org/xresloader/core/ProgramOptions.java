@@ -107,7 +107,8 @@ public class ProgramOptions {
         options.addOption("h", "help", false, "print this help message and exit");
 
         options.addOption(Option.builder("t").longOpt("output-type")
-                .desc("output type(bin, lua, msgpack, json, xml, javascript/js)").hasArg().argName("TYPE").build());
+                .desc("output type(bin, lua, msgpack, json, xml, javascript/js, ue-csv, ue-json)").hasArg()
+                .argName("TYPE").build());
 
         options.addOption(
                 Option.builder("p").longOpt("proto").desc("protocol(protobuf)").hasArg().argName("PROTOCOL").build());
@@ -241,8 +242,10 @@ public class ProgramOptions {
                 outType = FileType.XML;
             } else if (val.equalsIgnoreCase("js") || val.equalsIgnoreCase("javascript")) {
                 outType = FileType.JAVASCRIPT;
-            } else if (val.equalsIgnoreCase("ue") || val.equalsIgnoreCase("ue-csv")) {
+            } else if (val.equalsIgnoreCase("ue-csv")) {
                 outType = FileType.UECSV;
+            } else if (val.equalsIgnoreCase("ue-json")) {
+                outType = FileType.UEJSON;
             } else {
                 ProgramOptions.getLoger().error("invalid output type ", val);
                 return -1;
@@ -404,7 +407,7 @@ public class ProgramOptions {
     }
 
     public enum FileType {
-        BIN, LUA, MSGPACK, JSON, XML, INI, EXCEL, JAVASCRIPT, UECSV
+        BIN, LUA, MSGPACK, JSON, XML, INI, EXCEL, JAVASCRIPT, UECSV, UEJSON
     }
 
     public enum Protocol {

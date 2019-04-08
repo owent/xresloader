@@ -56,6 +56,10 @@ public class main {
             outDesc = new DataDstUECsv();
             outDesc = outDesc.init() ? outDesc : null;
             break;
+        case UEJSON:
+            outDesc = new DataDstUEJson();
+            outDesc = outDesc.init() ? outDesc : null;
+            break;
         default:
             ProgramOptions.getLoger().error("output type \"%s\" invalid",
                     ProgramOptions.getInstance().outType.toString());

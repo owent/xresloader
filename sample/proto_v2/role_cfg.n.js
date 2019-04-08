@@ -3,7 +3,7 @@
 exports.role_cfg_header = {
   xres_ver : "2.0.0",
   hash_code : "no hash code",
-  data_ver : "2.0.0.20190406141615",
+  data_ver : "2.0.0.20190408175640",
   count : 7
 };
 exports.role_cfg = [

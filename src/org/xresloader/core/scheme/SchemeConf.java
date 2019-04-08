@@ -43,6 +43,9 @@ public class SchemeConf {
 
     private DataExtUECSV extUECSV = new DataExtUECSV();
 
+    private String outputFilePathCache = "";
+    private String outputFileAbsPathCache = "";
+
     private SchemeConf() {
         key = new SchemeKeyConf();
     }
@@ -62,6 +65,22 @@ public class SchemeConf {
         key = new SchemeKeyConf();
 
         scheme = null;
+
+        extUECSV.blueprintAccess = "BlueprintReadOnly";
+        extUECSV.category = "XResConfig";
+        extUECSV.editAccess = "EditAnywhere";
+        extUECSV.enableCaseConvert = true;
+
+        outputFilePathCache = "";
+        outputFileAbsPathCache = "";
+    }
+
+    public void clear() {
+        dateSource.clear();
+        macroSource.clear();
+        protoName = "";
+        outputFile = "";
+        key = new SchemeKeyConf();
 
         extUECSV.blueprintAccess = "BlueprintReadOnly";
         extUECSV.category = "XResConfig";
@@ -200,9 +219,6 @@ public class SchemeConf {
     public void setProtoName(String protoName) {
         this.protoName = protoName;
     }
-
-    private String outputFilePathCache = "";
-    private String outputFileAbsPathCache = "";
 
     /**
      * Getter for property 'outputFile'.

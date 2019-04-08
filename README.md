@@ -55,7 +55,7 @@ echo "
 | 参数选项                 | 描述                     | 说明                                                                                                  |
 | ------------------------ | ------------------------ | ----------------------------------------------------------------------------------------------------- |
 | -h --help                | 帮助信息                 | 显示帮助和支持的参数列表                                                                              |
-| -t --output-type         | 输出类型                 | bin（默认值）,lua,msgpack,json,xml,javascript,js                                                      |
+| -t --output-type         | 输出类型                 | bin（默认值）,lua,msgpack,json,xml,javascript,js,ue-csv,ue-json                                       |
 | -p --proto               | 协议描述类型             | protobuf(默认值),capnproto(暂未实现),flatbuffer(暂未实现)                                             |
 | -f --proto-file          | 协议描述文件             |                                                                                                       |
 | -o --output-dir          | 输出目录                 | 默认为当前目录                                                                                        |

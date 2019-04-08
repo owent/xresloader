@@ -4,8 +4,8 @@ return {
   [1] = {
     xres_ver = "2.0.0",
     hash_code = "no hash code",
-    data_ver = "2.0.0.20190406141615",
-    count = 2,
+    data_ver = "2.0.0.20190408175640",
+    count = 3,
   },
   arr_in_arr_cfg = {
     {
@@ -61,6 +61,26 @@ return {
         },
       },
       id = 10002,
+    },
+    {
+      arr = {
+        {
+          int_arr = {
+            301,
+          },
+          name = "测试项-C",
+        },
+        {
+          str_arr = {
+            "哦哦哦哦",
+          },
+          int_arr = {
+            311,
+          },
+          name = "测试项-B",
+        },
+      },
+      id = 10003,
     },
   },
 }

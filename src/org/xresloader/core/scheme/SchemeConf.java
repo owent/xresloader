@@ -25,6 +25,9 @@ public class SchemeConf {
         public String category = "XResConfig";
         public String editAccess = "EditAnywhere";
         public Boolean enableCaseConvert = true;
+        public String codeOutputDir = "";
+        public String codeOutputPublicDir = "";
+        public String codeOutputPrivateDir = "";
     }
 
     /**
@@ -219,6 +222,8 @@ public class SchemeConf {
         ProgramOptions.RenameRule rename_rule = ProgramOptions.getInstance().renameRule;
         if (null != rename_rule) {
             this.outputFilePathCache = rename_rule.match.matcher(outputFile).replaceAll(rename_rule.replace);
+        } else {
+            this.outputFilePathCache = outputFile;
         }
 
         return this.outputFilePathCache;
@@ -305,7 +310,7 @@ public class SchemeConf {
     }
 
     /**
-     * 添加配置数据源
+     * 设置UE属性选项
      * 
      * @param category        分类名称
      * @param blueprintAccess 蓝图权限(BlueprintReadOnly/BlueprintReadWrite/BlueprintGetter/BlueprintSetter)
@@ -336,6 +341,33 @@ public class SchemeConf {
             ProgramOptions.getLoger().warn(
                     "EditAccess for UECSV can only be one of EditAnywhere/EditInstanceOnly/EditDefaultsOnly, the invalid %s will be ignored",
                     editAccess);
+        }
+    }
+
+    /**
+     * 设置代码输出目录
+     * 
+     * @param dir    输出目录
+     * @param pubDir 追加的头文件目录
+     * @param priDir 追加的源文件目录
+     */
+    public void setUECSVCodeOutput(String dir, String pubDir, String priDir) {
+        if (dir == null) {
+            extUECSV.codeOutputDir = "";
+        } else {
+            extUECSV.codeOutputDir = dir;
+        }
+
+        if (pubDir == null) {
+            extUECSV.codeOutputPublicDir = "";
+        } else {
+            extUECSV.codeOutputPublicDir = pubDir;
+        }
+
+        if (priDir == null) {
+            extUECSV.codeOutputPrivateDir = "";
+        } else {
+            extUECSV.codeOutputPrivateDir = priDir;
         }
     }
 

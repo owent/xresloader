@@ -46,6 +46,7 @@ public abstract class DataSrcImpl {
         return dc_cache_long_;
     }
 
+    @SuppressWarnings("unchecked")
     public static DataSrcImpl create(Class clazz) {
         try {
             // return ourInstance = (DataSrcImpl) clazz.newInstance();

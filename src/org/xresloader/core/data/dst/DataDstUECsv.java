@@ -1,29 +1,38 @@
 package org.xresloader.core.data.dst;
 
 import org.xresloader.core.ProgramOptions;
+import org.xresloader.core.data.dst.DataDstWriterNode.DataDstChildrenNode;
 import org.xresloader.core.data.err.ConvException;
+import org.xresloader.core.data.src.DataContainer;
+import org.xresloader.core.data.src.DataSrcImpl;
 import org.xresloader.core.engine.IdentifyEngine;
 import org.xresloader.core.scheme.SchemeConf;
+import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
+import org.json.JSONTokener;
 import org.apache.commons.csv.CSVPrinter;
 import org.apache.commons.csv.CSVFormat;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.nio.charset.Charset;
 import java.nio.file.Path;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.regex.Pattern;
+import java.util.Base64;
 
 /**
  * Created by owentou on 2014/10/10.
  */
-public class DataDstUECsv extends DataDstJava {
+public class DataDstUECsv extends DataDstImpl {
     static private Pattern fileToClassMatcher = Pattern.compile("[" + Pattern.quote(".-()_") + "\\s]");
 
     static private String codeHeaderPrefix1 = String.join("\r\n",
@@ -37,6 +46,7 @@ public class DataDstUECsv extends DataDstJava {
     static private String codeHeaderSuffix = "\r\n};";
 
     static private String codeSourceInclude = "#include \"%s.h\"";
+    static private String ueImportFile = "UnreaImportSettings.json";
 
     @Override
     public boolean init() {
@@ -53,12 +63,32 @@ public class DataDstUECsv extends DataDstJava {
     public class UECsvCodeInfo {
         public String header = null;
         public String source = null;
+        public String outputFile = null;
         public String outputDir = null;
         public String headerDir = null;
         public String sourceDir = null;
+        public String includeDir = null;
         public String clazzName = null;
         public String bashName = null;
-    };
+    }
+
+    public class DataDstWriterNodeWrapper implements Comparable<DataDstWriterNodeWrapper> {
+        public String varName = null;
+        public DataDstWriterNode desc = null;
+
+        @Override
+        public int compareTo(DataDstWriterNodeWrapper r) {
+            int lv = 0;
+            if (desc.identify != null) {
+                lv = desc.identify.index;
+            }
+            int rv = 0;
+            if (r.desc.identify != null) {
+                rv = r.desc.identify.index;
+            }
+            return lv - rv;
+        }
+    }
 
     static public String getIdentName(String in) {
         String[] segs = fileToClassMatcher.split(in);
@@ -75,22 +105,58 @@ public class DataDstUECsv extends DataDstJava {
         }
     }
 
-    public UECsvCodeInfo getCodeInfo(String outputFile) throws IOException {
+    public UECsvCodeInfo getCodeInfo(String outputFile, String clazzName) throws IOException {
         UECsvCodeInfo ret = new UECsvCodeInfo();
 
         File ofd = new File(outputFile);
+        ret.outputFile = ofd.getCanonicalFile().getAbsolutePath();
         ret.outputDir = ofd.getParentFile().getCanonicalFile().getAbsolutePath();
 
-        // TODO redirect header directory and source directory
-        ret.headerDir = ret.outputDir;
-        ret.sourceDir = ret.outputDir;
+        // redirect header directory and source directory
+        String codeOutputDir = SchemeConf.getInstance().getUECSVOptions().codeOutputDir;
+        if (codeOutputDir.isEmpty()) {
+            codeOutputDir = (new File(ProgramOptions.getInstance().outputDirectory)).getCanonicalFile()
+                    .getAbsolutePath();
+        }
 
-        String fileName = ofd.getName();
-        int lastDot = fileName.lastIndexOf('.');
-        if (lastDot < 0) {
-            ret.bashName = outputFile;
+        if (!SchemeConf.getInstance().getUECSVOptions().codeOutputPublicDir.isEmpty()) {
+            String pubDir = SchemeConf.getInstance().getUECSVOptions().codeOutputPublicDir;
+            ret.headerDir = codeOutputDir + File.separator + pubDir;
+            if (pubDir.charAt(0) == '/' || pubDir.charAt(0) == '\\') {
+                pubDir = pubDir.substring(1);
+            }
+
+            if (pubDir.substring(0, 7).equalsIgnoreCase("Public/")) {
+                ret.includeDir = pubDir.substring(7).replace('\\', '/');
+            } else {
+                ret.includeDir = pubDir.replace('\\', '/');
+            }
+
+            if (!ret.includeDir.isEmpty() && !ret.includeDir.endsWith("/")) {
+                ret.includeDir = ret.includeDir + "/";
+            }
         } else {
-            ret.bashName = fileName.substring(0, lastDot);
+            ret.headerDir = codeOutputDir;
+            ret.includeDir = "";
+        }
+
+        if (!SchemeConf.getInstance().getUECSVOptions().codeOutputPrivateDir.isEmpty()) {
+            ret.sourceDir = codeOutputDir + File.separator
+                    + SchemeConf.getInstance().getUECSVOptions().codeOutputPrivateDir;
+        } else {
+            ret.sourceDir = codeOutputDir;
+        }
+
+        if (clazzName == null || clazzName.isEmpty()) {
+            String fileName = ofd.getName();
+            int lastDot = fileName.lastIndexOf('.');
+            if (lastDot < 0) {
+                ret.bashName = outputFile;
+            } else {
+                ret.bashName = fileName.substring(0, lastDot);
+            }
+        } else {
+            ret.bashName = clazzName;
         }
         ret.clazzName = getIdentName(ret.bashName);
 
@@ -98,6 +164,89 @@ public class DataDstUECsv extends DataDstJava {
         ret.source = ret.sourceDir + File.separator + ret.clazzName + ".cpp";
 
         return ret;
+    }
+
+    public void writeImportSettings(UECsvCodeInfo code) {
+        File importFile = new File(code.outputDir + File.separator + ueImportFile);
+        if (!importFile.getParentFile().exists()) {
+            importFile.getParentFile().mkdirs();
+        }
+
+        JSONObject importObj;
+        JSONArray groupObj;
+
+        if (importFile.exists()) {
+            try {
+                importObj = new JSONObject(new JSONTokener(new FileInputStream(importFile)));
+            } catch (JSONException | FileNotFoundException e) {
+                importObj = new JSONObject();
+                ProgramOptions.getLoger().error("Read json from %s failed, %s", importFile.getAbsolutePath(),
+                        e.getMessage());
+            }
+        } else {
+            importObj = new JSONObject();
+        }
+
+        try {
+            if (importObj.has("ImportGroups")) {
+                groupObj = importObj.getJSONArray("ImportGroups");
+            } else {
+                groupObj = new JSONArray();
+                importObj.put("ImportGroups", groupObj);
+            }
+
+            JSONObject selectedItem = null;
+            for (int i = 0; i < groupObj.length(); ++i) {
+                JSONObject item = groupObj.getJSONObject(i);
+                if (item.has("ImportSettings")) {
+                    if (item.getJSONObject("ImportSettings").optString("ImportRowStruct").equals(code.clazzName)) {
+                        selectedItem = item;
+                        break;
+                    }
+                }
+            }
+
+            if (null == selectedItem) {
+                selectedItem = new JSONObject();
+                groupObj.put(selectedItem);
+            }
+
+            if (SchemeConf.getInstance().getUECSVOptions().category.isEmpty()) {
+                selectedItem.put("GroupName", "DataTable");
+            } else {
+                selectedItem.put("GroupName", SchemeConf.getInstance().getUECSVOptions().category);
+            }
+
+            JSONArray dataFileList = new JSONArray();
+            dataFileList.put(code.outputFile);
+            selectedItem.put("Filenames", dataFileList);
+            String desPath = "DataTable";
+            if (code.includeDir.length() > 1) {
+                desPath = String.format("%s", code.includeDir.substring(0, code.includeDir.length() - 1));
+            }
+            selectedItem.put("DestinationPath", desPath);
+            selectedItem.put("bReplaceExisting", "true");
+            selectedItem.put("bSkipReadOnly", "true");
+            selectedItem.put("FactoryName", "ReimportDataTableFactory");
+
+            JSONObject importSetting = null;
+            if (selectedItem.has("ImportSettings")) {
+                importSetting = selectedItem.getJSONObject("ImportSettings");
+            } else {
+                importSetting = new JSONObject();
+                selectedItem.put("ImportSettings", importSetting);
+            }
+
+            importSetting.put("ImportRowStruct", code.clazzName);
+            importSetting.put("ImportType", "ECSV_DataTable");
+
+            FileOutputStream fos = new FileOutputStream(importFile, false);
+            fos.write(dumpString(importObj.toString(4)));
+            fos.close();
+        } catch (Exception e) {
+            ProgramOptions.getLoger().error("Write json to %s failed, %s", importFile.getAbsolutePath(),
+                    e.getMessage());
+        }
     }
 
     private Charset encodingCache = null;
@@ -141,7 +290,7 @@ public class DataDstUECsv extends DataDstJava {
         }
 
         FileOutputStream fos = new FileOutputStream(code.source, false);
-        fos.write(dumpString(String.format(codeSourceInclude, code.clazzName)));
+        fos.write(dumpString(String.format(codeSourceInclude, code.includeDir + code.clazzName)));
 
         return fos;
     }
@@ -154,11 +303,241 @@ public class DataDstUECsv extends DataDstJava {
     public final byte[] build(DataDstImpl compiler) throws ConvException {
         // DataDstJava.DataDstObject data_obj = build_data(compiler);
         StringBuffer sb = new StringBuffer();
+
+        try {
+            CSVPrinter csv = new CSVPrinter(sb, CSVFormat.EXCEL);
+            appendCommonHeader(csv);
+            build_data(csv, compiler);
+        } catch (IOException e) {
+            throw new ConvException(String.format("build data for %s failed. msg: %s", name(), e.getMessage()));
+        }
+
         // 带编码的输出
         String encoding = SchemeConf.getInstance().getKey().getEncoding();
         if (null == encoding || encoding.isEmpty())
             return sb.toString().getBytes();
+
         return sb.toString().getBytes(Charset.forName(encoding));
+    }
+
+    protected void build_data(CSVPrinter csv, DataDstImpl compiler) throws ConvException, IOException {
+        UECsvCodeInfo codeInfo = getCodeInfo(SchemeConf.getInstance().getOutputFileAbsPath(),
+                SchemeConf.getInstance().getProtoName());
+
+        csv.printComment(String.format("%s=%s", "xres_ver", ProgramOptions.getInstance().getVersion()));
+        csv.printComment(String.format("%s=%s", "data_ver", ProgramOptions.getInstance().getDataVersion()));
+        csv.printComment(String.format("%s=%d", "count", DataSrcImpl.getOurInstance().getRecordNumber()));
+        csv.printComment(String.format("%s=%s", "hash_code", "no hash code"));
+
+        while (DataSrcImpl.getOurInstance().next_table()) {
+            // 生成描述集
+            DataDstWriterNode desc = compiler.compile();
+
+            // 生成描述集,CSV必须固定化描述集，还要把字段平铺开来。
+            ArrayList<DataDstWriterNodeWrapper> expanded_desc = new ArrayList<DataDstWriterNodeWrapper>();
+            expanded_desc.ensureCapacity(32);
+            expandDescription(expanded_desc, desc, "");
+
+            if (expanded_desc.isEmpty()) {
+                continue;
+            }
+
+            expanded_desc.sort(null);
+
+            // UE 要求Key字段名必须是 Name，所以要查找Name的字段，没有的话要生成一个
+            int nameIndex = 0;
+            int columnIndex = 2147483647;
+            for (int i = 0; i < expanded_desc.size(); ++i) {
+                if (expanded_desc.get(i).varName.equalsIgnoreCase("Name")) {
+                    nameIndex = i;
+                    break;
+                } else if (null != expanded_desc.get(i).desc.identify
+                        && expanded_desc.get(i).desc.identify.index < columnIndex) {
+                    nameIndex = i;
+                    columnIndex = expanded_desc.get(i).desc.identify.index;
+                }
+            }
+
+            if (expanded_desc.get(nameIndex).varName.equalsIgnoreCase("Name")) {
+                if (nameIndex != 0) {
+                    DataDstWriterNodeWrapper moved = expanded_desc.get(nameIndex);
+                    expanded_desc.remove(nameIndex);
+                    moved.varName = "Name";
+                    expanded_desc.add(0, moved);
+                }
+            } else {
+                DataDstWriterNodeWrapper namedKey = new DataDstWriterNodeWrapper();
+                namedKey.varName = "Name";
+                namedKey.desc = expanded_desc.get(nameIndex).desc;
+                expanded_desc.add(0, namedKey);
+            }
+
+            // 输出header
+            ArrayList<Object> row_data = new ArrayList<Object>();
+            row_data.ensureCapacity(expanded_desc.size());
+            for (int i = 0; i < expanded_desc.size(); ++i) {
+                row_data.add(expanded_desc.get(i).varName);
+            }
+            csv.printRecord(row_data);
+
+            while (DataSrcImpl.getOurInstance().next_row()) {
+                row_data = new ArrayList<Object>();
+                row_data.ensureCapacity(expanded_desc.size());
+                for (int i = 0; i < expanded_desc.size(); ++i) {
+                    row_data.add(pickField(expanded_desc.get(i).desc));
+                }
+                csv.printRecord(row_data);
+            }
+
+            // 加载代码
+            DataDstWriterNode valueField = DataDstWriterNode.create(null, DataDstWriterNode.JAVA_TYPE.INT);
+            valueField.identify = IdentifyEngine.n2i("Value", 0);
+
+            FileOutputStream headerFs = createCodeHeaderFileStream(codeInfo);
+            headerFs.write(dumpString("\r\n    /** Field Type: FString, Name: Key, skipped tag field**/\r\n"));
+
+            for (DataDstWriterNodeWrapper desc_wraper : expanded_desc) {
+                writeCodeHeaderField(headerFs, desc_wraper.desc, desc_wraper.varName);
+            }
+
+            headerFs.write(dumpString(codeHeaderSuffix));
+            headerFs.close();
+
+            FileOutputStream sourceFs = createCodeSourceFileStream(codeInfo);
+            sourceFs.close();
+
+            // 写出导出文件
+            writeImportSettings(codeInfo);
+        }
+    }
+
+    private Object pickField(DataDstWriterNode desc) throws ConvException {
+        if (null == desc.identify || desc.getType() == DataDstWriterNode.JAVA_TYPE.MESSAGE) {
+            return false;
+        }
+
+        switch (desc.getType()) {
+        case INT: {
+            DataContainer<Long> ret = DataSrcImpl.getOurInstance().getValue(desc.identify, 0L);
+            if (null != ret && ret.valid) {
+                return ret.value.intValue();
+            }
+            break;
+        }
+
+        case LONG: {
+            DataContainer<Long> ret = DataSrcImpl.getOurInstance().getValue(desc.identify, 0L);
+            if (null != ret && ret.valid) {
+                return ret.value.longValue();
+            }
+            break;
+        }
+
+        case FLOAT: {
+            DataContainer<Double> ret = DataSrcImpl.getOurInstance().getValue(desc.identify, 0.0);
+            if (null != ret && ret.valid) {
+                return ret.value.floatValue();
+            }
+            break;
+        }
+
+        case DOUBLE: {
+            DataContainer<Double> ret = DataSrcImpl.getOurInstance().getValue(desc.identify, 0.0);
+            if (null != ret && ret.valid) {
+                return ret.value.doubleValue();
+            }
+            break;
+        }
+
+        case BOOLEAN: {
+            DataContainer<Boolean> ret = DataSrcImpl.getOurInstance().getValue(desc.identify, false);
+            if (null != ret && ret.valid) {
+                return ret.value.booleanValue();
+            }
+            break;
+        }
+
+        case STRING: {
+            DataContainer<String> ret = DataSrcImpl.getOurInstance().getValue(desc.identify, "");
+            if (null != ret && ret.valid) {
+                return ret.value;
+            }
+            break;
+        }
+
+        case BYTES: {
+            DataContainer<String> res = DataSrcImpl.getOurInstance().getValue(desc.identify, "");
+            if (null != res && res.valid) {
+                String encoding = SchemeConf.getInstance().getKey().getEncoding();
+                if (null == encoding || encoding.isEmpty()) {
+                    return Base64.getEncoder().encodeToString(res.value.getBytes());
+                } else {
+                    return Base64.getEncoder().encodeToString(res.value.getBytes(Charset.forName(encoding)));
+                }
+            }
+            break;
+        }
+
+        case MESSAGE: {
+            break;
+        }
+        default:
+            break;
+        }
+
+        return null;
+    }
+
+    protected void expandDescription(ArrayList<DataDstWriterNodeWrapper> descs, DataDstWriterNode desc, String prefix) {
+        boolean isLeaf = true;
+        switch (desc.getType()) {
+        case INT: {
+            break;
+        }
+        case LONG: {
+            break;
+        }
+        case BOOLEAN: {
+            break;
+        }
+        case STRING: {
+            break;
+        }
+        case BYTES: {
+            break;
+        }
+        case FLOAT: {
+            break;
+        }
+        case DOUBLE: {
+            break;
+        }
+        case MESSAGE: {
+            isLeaf = false;
+            for (HashMap.Entry<String, DataDstChildrenNode> child : desc.getChildren().entrySet()) {
+                String varName = getIdentName(child.getKey());
+                if (child.getValue().isList) {
+                    for (int i = 0; i < child.getValue().nodes.size(); ++i) {
+                        DataDstWriterNode child_desc = child.getValue().nodes.get(i);
+                        expandDescription(descs, child.getValue().nodes.get(0),
+                                prefix + String.format("_%s_%d", varName, i));
+                    }
+                } else if (!child.getValue().nodes.isEmpty()) {
+                    expandDescription(descs, child.getValue().nodes.get(0), prefix + "_" + varName);
+                }
+            }
+            break;
+        }
+        }
+
+        if (!isLeaf) {
+            return;
+        }
+
+        DataDstWriterNodeWrapper res = new DataDstWriterNodeWrapper();
+        res.varName = prefix.substring(1);
+        res.desc = desc;
+        descs.add(res);
     }
 
     @Override
@@ -232,27 +611,29 @@ public class DataDstUECsv extends DataDstJava {
     public final byte[] dumpConst(HashMap<String, Object> data) throws IOException {
 
         StringBuffer sb = new StringBuffer();
-        CSVPrinter csv = new CSVPrinter(sb, CSVFormat.EXCEL.withHeader(getIdentName("Key"), getIdentName("Value")));
+        CSVPrinter csv = new CSVPrinter(sb, CSVFormat.EXCEL.withHeader(getIdentName("Name"), getIdentName("Value")));
 
         appendCommonHeader(csv);
         writeConstData(csv, data, "");
 
         // 加载代码
-        UECsvCodeInfo codeInfo = getCodeInfo(SchemeConf.getInstance().getOutputFileAbsPath());
+        UECsvCodeInfo codeInfo = getCodeInfo(SchemeConf.getInstance().getOutputFileAbsPath(), null);
 
         DataDstWriterNode valueField = DataDstWriterNode.create(null, DataDstWriterNode.JAVA_TYPE.INT);
         valueField.identify = IdentifyEngine.n2i("Value", 0);
 
         FileOutputStream headerFs = createCodeHeaderFileStream(codeInfo);
-        headerFs.write(dumpString("\r\n    /** Field Type: FString, Name: Key, skipped tag field**/\r\n"));
+        headerFs.write(dumpString("\r\n    /** Field Type: FString, Name: Name, skipped tag field**/\r\n"));
 
-        writeCodeHeaderField(headerFs, valueField);
+        writeCodeHeaderField(headerFs, valueField, getIdentName(valueField.identify.name));
         headerFs.write(dumpString(codeHeaderSuffix));
         headerFs.close();
 
         FileOutputStream sourceFs = createCodeSourceFileStream(codeInfo);
         sourceFs.close();
 
+        // 写出导出文件
+        writeImportSettings(codeInfo);
         // 带编码的输出
         return dumpString(sb.toString());
     }
@@ -277,47 +658,48 @@ public class DataDstUECsv extends DataDstJava {
         return headerFieldUProperty;
     }
 
-    private final void writeCodeHeaderField(FileOutputStream fout, DataDstWriterNode node) throws IOException {
-        fout.write(dumpString(String.format("\r\n    /** Field Type: %s, Name: %s **/\r\n", node.getType().name(),
-                node.identify.name)));
+    private final void writeCodeHeaderField(FileOutputStream fout, DataDstWriterNode node, String varName)
+            throws IOException {
+        fout.write(dumpString(
+                String.format("\r\n    /** Field Type: %s, Name: %s **/\r\n", node.getType().name(), varName)));
 
         fout.write(dumpString(getHeaderFieldUProperty()));
 
         switch (node.getType()) {
         case INT: {
-            fout.write(dumpString(String.format("    %s %s;\r\n", "int32", getIdentName(node.identify.name))));
+            fout.write(dumpString(String.format("    %s %s;\r\n", "int32", varName)));
             break;
         }
 
         case LONG: {
-            fout.write(dumpString(String.format("    %s %s;\r\n", "int64", getIdentName(node.identify.name))));
+            fout.write(dumpString(String.format("    %s %s;\r\n", "int64", varName)));
             break;
         }
 
         case FLOAT: {
-            fout.write(dumpString(String.format("    %s %s;\r\n", "float", getIdentName(node.identify.name))));
+            fout.write(dumpString(String.format("    %s %s;\r\n", "float", varName)));
             break;
         }
 
         case DOUBLE: {
-            fout.write(dumpString(String.format("    %s %s;\r\n", "double", getIdentName(node.identify.name))));
+            fout.write(dumpString(String.format("    %s %s;\r\n", "double", varName)));
             break;
         }
 
         case BOOLEAN: {
-            fout.write(dumpString(String.format("    %s %s;\r\n", "bool", getIdentName(node.identify.name))));
+            fout.write(dumpString(String.format("    %s %s;\r\n", "bool", varName)));
             break;
         }
 
         case STRING: {
-            fout.write(dumpString(String.format("    %s %s;\r\n", "FString", getIdentName(node.identify.name))));
+            fout.write(dumpString(String.format("    %s %s;\r\n", "FString", varName)));
             break;
         }
 
         case BYTES: {
             fout.write(dumpString(String.format("\r\n    /** Bytes data will be encoded by base64 */\r\n",
                     node.identify.name, node.getType().name())));
-            fout.write(dumpString(String.format("    %s %s;\r\n", "FString", getIdentName(node.identify.name))));
+            fout.write(dumpString(String.format("    %s %s;\r\n", "FString", varName)));
             break;
         }
 

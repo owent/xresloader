@@ -1,38 +1,32 @@
 language: java
-
 jdk:
-  - oraclejdk8
-
+- oraclejdk8
 cache:
   directories:
-    - $HOME/.m2
-
+  - "$HOME/.m2"
 install: mvn install -DskipTests=true
-    
 script: mvn package
-
 notifications:
   email: false
   irc:
     template:
-      - "%{repository}/%{branch} (%{commit} - %{author}): %{build_url}: %{message}"
-
+    - "%{repository}/%{branch} (%{commit} - %{author}): %{build_url}: %{message}"
 env:
-  - LANG="zh_CN.UTF-8"
-
+- LANG="zh_CN.UTF-8"
 os:
-  - linux
+- linux
 
 deploy:
   provider: releases
   api_key:
-    secure: FpssIbMGTjAG4Ny8TYIKn8vmEhkODR2Bqvx46k8/LDRwDRW+CHilULz8KvdZ66CELCjF9n2a88Msnl5B1PVviLX0H+mw8yqqM04gE/BN2l7cNGR941tBlKnGfnT0CPGuLBX+zKETy+9k8FeluYNDwlCklbI2hnGly2F9vpK55Z337TlTd6LFkJhElv6v3fmGH8LRGV/cen5He7NzgmnFq/lqnNUdE9Cg8LQ8tLc8fOHOAWJAmQzP/stKSoHZWGwp1rgc36im4FSkSrF+2k4vK2GurbTTBjOeI2/wyUxcii29t1ACTQMVCNVO27dUoi4F0jEOzbtX5JYsNO+GL3kFj6FeIGAVo8ogoqDfEEmeAuQA+95SWh/m9VVAWTvdIEbUEH3rxHGs0CAzkrxJOxVKgje+cA+ZRz1DmVle74icLL5tV6pQoHeG2iii3e8tpmmu42ovrp9z5qKSrFyVEmQXyN1fs6T8/t8KL4/1dL0gwmuKNdaXLo8TA8jRCJZNdamhtoa1NnrIoy+XPwoD4/su3s6hyBznvNwki07yIcprCc6ubKipj86KLdbhtkaJlIBR+D98jb1b8ngE2Y+OhsPk5DnbPERn7NbR3bP3KanXw9i/h23R9OkoSwku1hio/n4nx2p9Hjn8wICrtuVCSJnf+SVlRT5uzumig1VgDxWLMaw=
+    secure: VMJdp5oQbE9eICvGeb26KkELAZ1yWWB3xyoiUPHPD6s4EuWxWdD6A4aQXTEwrtY2jSz1Q6rsx/SZkupDNVNJcnhXknlft89P0WhuJ+lphf47EJpRgThK/n7DS3UrdkXIhcwhlbCODy3Q7EgKKifv/L7tecS+yspD8EpXQQu2400=
   file_glob: true
   file: "target/*.jar"
   skip_cleanup: true
   overwrite: true
   draft: true
   on:
+    repo: xresloader/xresloader
     all_branches: true
     tags: true
   

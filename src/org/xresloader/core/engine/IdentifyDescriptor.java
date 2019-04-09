@@ -17,7 +17,8 @@ public class IdentifyDescriptor {
     public int index = 0;
     public List<DataVerifyImpl> verify_engine = null;
 
-    public IdentifyDescriptor() {}
+    public IdentifyDescriptor() {
+    }
 
     public boolean hasVerifier() {
         return null != verify_engine && false == verify_engine.isEmpty();
@@ -40,7 +41,7 @@ public class IdentifyDescriptor {
     }
 
     public long getAndVerify(int n) throws ConvException {
-        return getAndVerify((long)n);
+        return getAndVerify((long) n);
     }
 
     public long getAndVerify(long n) throws ConvException {
@@ -51,14 +52,14 @@ public class IdentifyDescriptor {
         try {
             DataVerifyResult verify_cache = new DataVerifyResult();
 
-            for (DataVerifyImpl vfy: verify_engine) {
+            for (DataVerifyImpl vfy : verify_engine) {
                 if (vfy.get(n, verify_cache)) {
                     return verify_cache.value;
                 }
             }
         } catch (Exception e) {
-            throw new ConvException(String.format("check %d for %s at row %d, column %d in %s failed, %s",
-                    n, name, DataSrcImpl.getOurInstance().getCurrentRowNum() + 1, index + 1,
+            throw new ConvException(String.format("check %d for %s at row %d, column %d in %s failed, %s", n, name,
+                    DataSrcImpl.getOurInstance().getCurrentRowNum() + 1, index + 1,
                     DataSrcImpl.getOurInstance().getCurrentTableName(), e.getMessage()));
         }
 
@@ -69,11 +70,9 @@ public class IdentifyDescriptor {
 
     public long getAndVerify(String val) throws ConvException {
         boolean is_int = true;
-        for(int i = 0; is_int && i < val.length(); ++ i) {
+        for (int i = 0; is_int && i < val.length(); ++i) {
             char c = val.charAt(i);
-            if ((c < '0' || c > '9') &&
-                    '.' != c &&
-                    '-' != c) {
+            if ((c < '0' || c > '9') && '.' != c && '-' != c) {
                 is_int = false;
             }
         }
@@ -89,16 +88,15 @@ public class IdentifyDescriptor {
 
             DataVerifyResult verify_cache = new DataVerifyResult();
 
-            for (DataVerifyImpl vfy: verify_engine) {
+            for (DataVerifyImpl vfy : verify_engine) {
                 if (vfy.get(val, verify_cache)) {
                     return verify_cache.value;
                 }
             }
         } catch (Exception e) {
-            throw new ConvException(String.format("convert %s for %s at row %d, column %d in %s failed, %s",
-                    val, name, DataSrcImpl.getOurInstance().getCurrentRowNum() + 1, index + 1,
-                    DataSrcImpl.getOurInstance().getCurrentTableName(),
-                    e.getMessage()));
+            throw new ConvException(String.format("convert %s for %s at row %d, column %d in %s failed, %s", val, name,
+                    DataSrcImpl.getOurInstance().getCurrentRowNum() + 1, index + 1,
+                    DataSrcImpl.getOurInstance().getCurrentTableName(), e.getMessage()));
         }
 
         throw new ConvException(String.format("convert %s for %s at row %d, column %d in %s failed, check data failed.",

@@ -201,7 +201,8 @@ public class DataDstPb extends DataDstImpl {
         }
     }
 
-    private void setup_node_identify(DataDstWriterNode node, IdentifyDescriptor identify) {
+    private void setup_node_identify(DataDstWriterNode node, IdentifyDescriptor identify,
+            Descriptors.FieldDescriptor fd) {
         node.identify = identify;
 
         if (null == identify.verifier || identify.verifier.isEmpty()) {
@@ -279,7 +280,12 @@ public class DataDstPb extends DataDstImpl {
 
     @Override
     public final DataDstWriterNode compile() throws ConvException {
-        DataDstWriterNode ret = DataDstWriterNode.create(currentMsgDesc, DataDstWriterNode.JAVA_TYPE.MESSAGE);
+        String packageName = "";
+        if (currentMsgDesc != null) {
+            packageName = currentMsgDesc.getFile().getPackage();
+        }
+        DataDstWriterNode ret = DataDstWriterNode.create(currentMsgDesc, DataDstWriterNode.JAVA_TYPE.MESSAGE,
+                packageName);
         if (test(ret, new LinkedList<String>())) {
             return ret;
         }
@@ -367,7 +373,7 @@ public class DataDstPb extends DataDstImpl {
                     name_list.addLast("");
                     for (;; ++count) {
                         DataDstWriterNode c = DataDstWriterNode.create(fd.getMessageType(),
-                                DataDstWriterNode.JAVA_TYPE.MESSAGE);
+                                DataDstWriterNode.JAVA_TYPE.MESSAGE, node.packageName);
                         name_list.removeLast();
                         name_list.addLast(DataDstWriterNode.makeNodeName(fd.getName(), count));
                         if (test(c, name_list)) {
@@ -380,7 +386,7 @@ public class DataDstPb extends DataDstImpl {
                     name_list.removeLast();
                 } else {
                     DataDstWriterNode c = DataDstWriterNode.create(fd.getMessageType(),
-                            DataDstWriterNode.JAVA_TYPE.MESSAGE);
+                            DataDstWriterNode.JAVA_TYPE.MESSAGE, node.packageName);
                     name_list.addLast(DataDstWriterNode.makeNodeName(fd.getName()));
                     if (test(c, name_list)) {
                         node.addChild(fd.getName(), c, fd, false, false);
@@ -402,15 +408,16 @@ public class DataDstPb extends DataDstImpl {
                 case FLOAT:
                     inner_type = DataDstWriterNode.JAVA_TYPE.FLOAT;
                     break;
-                case INT64:
-                case UINT64:
                 case INT32:
-                case FIXED64:
                 case FIXED32:
                 case UINT32:
                 case SFIXED32:
-                case SFIXED64:
                 case SINT32:
+                    inner_type = DataDstWriterNode.JAVA_TYPE.INT;
+                case INT64:
+                case UINT64:
+                case FIXED64:
+                case SFIXED64:
                 case SINT64:
                     inner_type = DataDstWriterNode.JAVA_TYPE.LONG;
                     break;
@@ -434,8 +441,8 @@ public class DataDstPb extends DataDstImpl {
                         String real_name = DataDstWriterNode.makeChildPath(prefix, fd.getName(), count);
                         IdentifyDescriptor col = data_src.getColumnByName(real_name);
                         if (null != col) {
-                            DataDstWriterNode c = DataDstWriterNode.create(null, inner_type);
-                            setup_node_identify(c, col);
+                            DataDstWriterNode c = DataDstWriterNode.create(null, inner_type, node.packageName);
+                            setup_node_identify(c, col, fd);
                             node.addChild(fd.getName(), c, fd, true, false);
                             ret = true;
                         } else {
@@ -447,12 +454,12 @@ public class DataDstPb extends DataDstImpl {
                     String real_name = DataDstWriterNode.makeChildPath(prefix, fd.getName());
                     IdentifyDescriptor col = data_src.getColumnByName(real_name);
                     if (null != col) {
-                        DataDstWriterNode c = DataDstWriterNode.create(null, inner_type);
-                        setup_node_identify(c, col);
+                        DataDstWriterNode c = DataDstWriterNode.create(null, inner_type, node.packageName);
+                        setup_node_identify(c, col, fd);
                         node.addChild(fd.getName(), c, fd, false, false);
                         ret = true;
                     } else if (fd.isRequired()) {
-                        DataDstWriterNode c = DataDstWriterNode.create(null, inner_type);
+                        DataDstWriterNode c = DataDstWriterNode.create(null, inner_type, node.packageName);
                         // required 字段要dump默认数据
                         node.addChild(fd.getName(), c, fd, false, true);
                     }

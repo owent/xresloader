@@ -321,12 +321,17 @@ public abstract class DataDstUEBase extends DataDstImpl {
     abstract protected void buildForUEOnPrintRecord(Object buildObj, ArrayList<Object> rowData) throws IOException;
 
     protected final void build_data(Object buildObj, DataDstImpl compiler) throws ConvException, IOException {
-        UECodeInfo codeInfo = getCodeInfo(SchemeConf.getInstance().getOutputFileAbsPath(),
-                SchemeConf.getInstance().getProtoName());
-
         while (DataSrcImpl.getOurInstance().next_table()) {
             // 生成描述集
             DataDstWriterNode desc = compiler.compile();
+
+            String packageName;
+            if (desc.packageName == null || desc.packageName.isEmpty()) {
+                packageName = SchemeConf.getInstance().getProtoName();
+            } else {
+                packageName = desc.packageName + "_" + SchemeConf.getInstance().getProtoName();
+            }
+            UECodeInfo codeInfo = getCodeInfo(SchemeConf.getInstance().getOutputFileAbsPath(), packageName);
 
             // 生成描述集,CSV必须固定化描述集，还要把字段平铺开来。
             ArrayList<DataDstWriterNodeWrapper> expanded_desc = new ArrayList<DataDstWriterNodeWrapper>();
@@ -386,13 +391,11 @@ public abstract class DataDstUEBase extends DataDstImpl {
             }
 
             // 加载代码
-            DataDstWriterNode valueField = DataDstWriterNode.create(null, DataDstWriterNode.JAVA_TYPE.INT);
-            valueField.identify = IdentifyEngine.n2i("Value", 0);
-
             FileOutputStream headerFs = createCodeHeaderFileStream(codeInfo);
             headerFs.write(dumpString("\r\n    /** Field Type: FString, Name: Key, skipped tag field**/\r\n"));
 
-            for (DataDstWriterNodeWrapper desc_wraper : expanded_desc) {
+            for (int i = 1; i < expanded_desc.size(); ++i) {
+                DataDstWriterNodeWrapper desc_wraper = expanded_desc.get(i);
                 writeCodeHeaderField(headerFs, desc_wraper.desc, desc_wraper.varName);
             }
 
@@ -556,7 +559,8 @@ public abstract class DataDstUEBase extends DataDstImpl {
         // 加载代码
         UECodeInfo codeInfo = getCodeInfo(SchemeConf.getInstance().getOutputFileAbsPath(), null);
 
-        DataDstWriterNode valueField = DataDstWriterNode.create(null, DataDstWriterNode.JAVA_TYPE.INT);
+        // const完整路径都在data里了，不需要额外的包名(可能包含多个包)
+        DataDstWriterNode valueField = DataDstWriterNode.create(null, DataDstWriterNode.JAVA_TYPE.INT, "");
         valueField.identify = IdentifyEngine.n2i("Value", 0);
 
         FileOutputStream headerFs = createCodeHeaderFileStream(codeInfo);
@@ -574,7 +578,6 @@ public abstract class DataDstUEBase extends DataDstImpl {
         // 带编码的输出
         return dumpString(constCode);
     }
-
 
     private final String getHeaderFieldUProperty() {
         if (null == headerFieldUProperty) {

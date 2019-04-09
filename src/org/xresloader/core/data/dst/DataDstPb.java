@@ -414,6 +414,7 @@ public class DataDstPb extends DataDstImpl {
                 case SFIXED32:
                 case SINT32:
                     inner_type = DataDstWriterNode.JAVA_TYPE.INT;
+                    break;
                 case INT64:
                 case UINT64:
                 case FIXED64:

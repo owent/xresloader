@@ -4,7 +4,7 @@
 import os
 import re
 import string
-
+import glob
 
 work_dir = os.getcwd();
 script_dir = os.path.dirname(os.path.realpath(__file__))
@@ -14,6 +14,7 @@ os.chdir(os.path.join('..'));
 project_dir = os.getcwd();
 proto_dir = os.path.join(project_dir, 'header');
 proto_file = os.path.join(proto_dir, 'pb_header.proto');
+extension_proto_file = glob.glob(os.path.join(proto_dir, 'extensions', '*.proto'));
 
 os.chdir(work_dir);
 
@@ -41,4 +42,3 @@ print('[PROCESS] generate proto pb file ... ')
 print(cmd)
 os.system(cmd)
 print('[PROCESS] generate proto pb file done.')
-

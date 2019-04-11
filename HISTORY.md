@@ -1,5 +1,11 @@
 更新记录：
 ==========
+2.1.0
+------
+1. 增加protobuf的扩展插件支持
+2. 增加protobuf插件 - org.xresloader.verifier (支持和Excel里一样的验证器语法)
+3. 增加protobuf插件 - org.xresloader.ue.key_tag (用于UE代码输出时输出Key -> Name 的函数)
+
 2.0.1
 ------
 1. 修复UE代码输出中，多输出了Name字段的问题

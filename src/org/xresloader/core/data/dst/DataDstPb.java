@@ -12,6 +12,7 @@ import org.xresloader.core.data.vfy.DataVerifyPbEnum;
 import org.xresloader.core.data.vfy.DataVerifyPbMsg;
 import org.xresloader.core.engine.IdentifyDescriptor;
 import org.xresloader.pb.PbHeaderV3;
+import org.xresloader.Xresloader;
 import org.xresloader.core.scheme.SchemeConf;
 import org.apache.commons.codec.binary.Hex;
 
@@ -205,10 +206,23 @@ public class DataDstPb extends DataDstImpl {
             Descriptors.FieldDescriptor fd) {
         node.identify = identify;
 
-        if (null == identify.verifier || identify.verifier.isEmpty()) {
+        String verifier = "";
+        if (fd.getOptions().hasExtension(Xresloader.verifier)) {
+            verifier = fd.getOptions().getExtension(Xresloader.verifier);
+        }
+
+        if (null != identify.verifier && !identify.verifier.isEmpty()) {
+            if (verifier.isEmpty()) {
+                verifier = identify.verifier;
+            } else {
+                verifier = verifier + "|" + identify.verifier;
+            }
+        }
+
+        if (verifier.isEmpty()) {
             identify.resetVerifier();
         } else {
-            String[] all_verify_rules = identify.verifier.split("\\|");
+            String[] all_verify_rules = verifier.split("\\|");
             for (String vfy_rule : all_verify_rules) {
                 String rule = vfy_rule.trim();
                 if (rule.isEmpty()) {

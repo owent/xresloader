@@ -1,0 +1,9 @@
+syntax = "proto3";
+
+import "google/protobuf/descriptor.proto";
+
+package org.xresloader.ue;
+
+extend google.protobuf.FieldOptions {
+  int32 key_tag = 1101; // key字段映射的系数
+}

@@ -4,6 +4,7 @@
 import os
 import re
 import string
+import glob;
 
 
 work_dir = os.getcwd();
@@ -14,6 +15,7 @@ os.chdir(os.path.join('..'));
 project_dir = os.getcwd();
 proto_dir = os.path.join(project_dir, 'header');
 proto_file = os.path.join(proto_dir, 'pb_header_v3.proto');
+extension_proto_file = glob.glob(os.path.join(proto_dir, 'extensions', '*.proto'));
 
 os.chdir(work_dir);
 
@@ -36,3 +38,12 @@ print(cmd)
 os.system(cmd)
 print('[PROCESS] generate proto pb file done.')
 
+# 插件支持
+params = ['protoc', '-I', '"' + proto_dir + '/extensions"' , '--java_out',  '"' + java_out_dir + '"']
+params.extend(extension_proto_file)
+
+cmd = ' '.join(params)
+print('[PROCESS] generate java source for extension ... ')
+print(cmd)
+os.system(cmd)
+print('[PROCESS] generate java source for extension done.')

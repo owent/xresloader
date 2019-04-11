@@ -12,9 +12,13 @@
 hs_err_pid*
 /out
 /target
+/bin
 .idea
 .vscode
 *.iml
+/.settings
+/.factorypath
+/.project
 
 # sample
 /sample/cxx/build

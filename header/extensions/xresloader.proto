@@ -2,8 +2,6 @@ syntax = "proto3";
 
 import "google/protobuf/descriptor.proto";
 
-import "xresloader_ue.proto";
-
 package org.xresloader;
 
 extend google.protobuf.FieldOptions {

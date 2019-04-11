@@ -13,6 +13,7 @@ import org.xresloader.core.data.vfy.DataVerifyPbMsg;
 import org.xresloader.core.engine.IdentifyDescriptor;
 import org.xresloader.pb.PbHeaderV3;
 import org.xresloader.Xresloader;
+import org.xresloader.ue.XresloaderUe;
 import org.xresloader.core.scheme.SchemeConf;
 import org.apache.commons.codec.binary.Hex;
 
@@ -109,6 +110,21 @@ public class DataDstPb extends DataDstImpl {
         return null;
     }
 
+    static private com.google.protobuf.ExtensionRegistryLite pb_extensions = null;
+
+    static private com.google.protobuf.ExtensionRegistryLite get_extension_registry() {
+        if (null != pb_extensions) {
+            return pb_extensions;
+        }
+
+        pb_extensions = com.google.protobuf.ExtensionRegistryLite.newInstance();
+
+        pb_extensions.add(Xresloader.verifier);
+        pb_extensions.add(XresloaderUe.keyTag);
+
+        return pb_extensions;
+    }
+
     static private PbInfoSet pbs = new PbInfoSet();
 
     static boolean load_pb_file(String file_path, boolean build_msg) {
@@ -118,7 +134,8 @@ public class DataDstPb extends DataDstImpl {
         try {
             // 文件描述集读取
             InputStream fis = new FileInputStream(file_path);
-            DescriptorProtos.FileDescriptorSet fds = DescriptorProtos.FileDescriptorSet.parseFrom(fis);
+            DescriptorProtos.FileDescriptorSet fds = DescriptorProtos.FileDescriptorSet.parseFrom(fis,
+                    get_extension_registry());
             pbs.fileNames.add(file_path);
             // 保存文件名和文件描述Proto的关系
             for (DescriptorProtos.FileDescriptorProto fdp : fds.getFileList()) {

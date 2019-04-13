@@ -39,6 +39,8 @@ public final class SchemeDataSourceJson extends SchemeDataSourceBase {
             fis.read(data);
 
             current_object = new JSONObject(new String(data, "utf-8"));
+
+            fis.close();
         } catch (Exception e) {
             e.printStackTrace();
             ProgramOptions.getLoger().error("open file %s failed", file_path);
@@ -67,20 +69,21 @@ public final class SchemeDataSourceJson extends SchemeDataSourceBase {
         }
 
         Map<Object, Object> scheme_map = (Map<Object, Object>) scheme_obj;
-        for (Map.Entry item : scheme_map.entrySet()) {
+        for (Map.Entry<Object, Object> item : scheme_map.entrySet()) {
             load_segment(item.getKey().toString(), item.getValue());
         }
 
         return true;
     }
 
+    @SuppressWarnings("unchecked")
     private void load_segment(String key, Object val) {
         ArrayList<String> datas = new ArrayList<String>();
 
         if (val instanceof List) {
             int index = 0;
 
-            for (Object obj : (List) val) {
+            for (Object obj : (List<Object>) val) {
                 if (obj instanceof List) {
                     load_segment(key, obj);
                 } else {

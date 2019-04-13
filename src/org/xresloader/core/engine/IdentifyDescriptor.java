@@ -12,20 +12,49 @@ import java.util.List;
  * Created by owt50 on 2016/12/7.
  */
 public class IdentifyDescriptor {
+    public class IdentifyFieldExtUE {
+        public long keyTag = 0;
+        public String ueTypeName = null;
+    }
+
+    public class IdentifyFieldExt {
+        public String verifier = null;
+        private IdentifyFieldExtUE ue = null;
+
+        public IdentifyFieldExtUE mutableUE() {
+            if (null != ue) {
+                return ue;
+            }
+
+            ue = new IdentifyFieldExtUE();
+            return ue;
+        }
+    }
+
     public String name = "";
-    public String verifier = null;
+    public String dataSourceFieldVerifier = null;
     public int index = 0;
-    public List<DataVerifyImpl> verify_engine = null;
+    public List<DataVerifyImpl> verifyEngine = null;
+    private IdentifyFieldExt extension = null;
 
     public IdentifyDescriptor() {
     }
 
+    public IdentifyFieldExt mutableExtension() {
+        if (null != extension) {
+            return extension;
+        }
+
+        extension = new IdentifyFieldExt();
+        return extension;
+    }
+
     public boolean hasVerifier() {
-        return null != verify_engine && false == verify_engine.isEmpty();
+        return null != verifyEngine && false == verifyEngine.isEmpty();
     }
 
     public void resetVerifier() {
-        verify_engine = null;
+        verifyEngine = null;
     }
 
     public void addVerifier(DataVerifyImpl ver) {
@@ -33,11 +62,11 @@ public class IdentifyDescriptor {
             return;
         }
 
-        if (null == verify_engine) {
-            verify_engine = new LinkedList<DataVerifyImpl>();
+        if (null == verifyEngine) {
+            verifyEngine = new LinkedList<DataVerifyImpl>();
         }
 
-        verify_engine.add(ver);
+        verifyEngine.add(ver);
     }
 
     public long getAndVerify(int n) throws ConvException {
@@ -52,7 +81,7 @@ public class IdentifyDescriptor {
         try {
             DataVerifyResult verify_cache = new DataVerifyResult();
 
-            for (DataVerifyImpl vfy : verify_engine) {
+            for (DataVerifyImpl vfy : verifyEngine) {
                 if (vfy.get(n, verify_cache)) {
                     return verify_cache.value;
                 }
@@ -88,7 +117,7 @@ public class IdentifyDescriptor {
 
             DataVerifyResult verify_cache = new DataVerifyResult();
 
-            for (DataVerifyImpl vfy : verify_engine) {
+            for (DataVerifyImpl vfy : verifyEngine) {
                 if (vfy.get(val, verify_cache)) {
                     return verify_cache.value;
                 }

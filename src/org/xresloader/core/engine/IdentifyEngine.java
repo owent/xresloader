@@ -27,7 +27,7 @@ public class IdentifyEngine {
                 if (verify_index > 0) {
                     String old_val = segs[i];
                     segs[i] = make_word(old_val.substring(0, verify_index));
-                    ret.verifier = old_val.substring(verify_index + 1);
+                    ret.dataSourceFieldVerifier = old_val.substring(verify_index + 1);
                 } else {
                     segs[i] = make_word(segs[i]);
                 }

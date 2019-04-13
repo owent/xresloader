@@ -8,6 +8,8 @@ public final class XresloaderUe {
   public static void registerAllExtensions(
       com.google.protobuf.ExtensionRegistryLite registry) {
     registry.add(org.xresloader.ue.XresloaderUe.keyTag);
+    registry.add(org.xresloader.ue.XresloaderUe.ueTypeName);
+    registry.add(org.xresloader.ue.XresloaderUe.helper);
   }
 
   public static void registerAllExtensions(
@@ -26,9 +28,39 @@ public final class XresloaderUe {
   public static final
     com.google.protobuf.GeneratedMessage.GeneratedExtension<
       com.google.protobuf.DescriptorProtos.FieldOptions,
-      java.lang.Integer> keyTag = com.google.protobuf.GeneratedMessage
+      java.lang.Long> keyTag = com.google.protobuf.GeneratedMessage
           .newFileScopedGeneratedExtension(
-        java.lang.Integer.class,
+        java.lang.Long.class,
+        null);
+  public static final int UETYPENAME_FIELD_NUMBER = 1102;
+  /**
+   * <pre>
+   * UE内部类型(比如: TSoftObjectPtr&lt;UTexture&gt;)
+   * </pre>
+   *
+   * <code>extend .google.protobuf.FieldOptions { ... }</code>
+   */
+  public static final
+    com.google.protobuf.GeneratedMessage.GeneratedExtension<
+      com.google.protobuf.DescriptorProtos.FieldOptions,
+      java.lang.String> ueTypeName = com.google.protobuf.GeneratedMessage
+          .newFileScopedGeneratedExtension(
+        java.lang.String.class,
+        null);
+  public static final int HELPER_FIELD_NUMBER = 1101;
+  /**
+   * <pre>
+   * 辅助函数的类名
+   * </pre>
+   *
+   * <code>extend .google.protobuf.MessageOptions { ... }</code>
+   */
+  public static final
+    com.google.protobuf.GeneratedMessage.GeneratedExtension<
+      com.google.protobuf.DescriptorProtos.MessageOptions,
+      java.lang.String> helper = com.google.protobuf.GeneratedMessage
+          .newFileScopedGeneratedExtension(
+        java.lang.String.class,
         null);
 
   public static com.google.protobuf.Descriptors.FileDescriptor
@@ -42,7 +74,9 @@ public final class XresloaderUe {
       "\n\023xresloader_ue.proto\022\021org.xresloader.ue" +
       "\032 google/protobuf/descriptor.proto:/\n\007ke" +
       "y_tag\022\035.google.protobuf.FieldOptions\030\315\010 " +
-      "\001(\005b\006proto3"
+      "\001(\003:2\n\nueTypeName\022\035.google.protobuf.Fiel" +
+      "dOptions\030\316\010 \001(\t:0\n\006helper\022\037.google.proto" +
+      "buf.MessageOptions\030\315\010 \001(\tb\006proto3"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -58,6 +92,8 @@ public final class XresloaderUe {
           com.google.protobuf.DescriptorProtos.getDescriptor(),
         }, assigner);
     keyTag.internalInit(descriptor.getExtensions().get(0));
+    ueTypeName.internalInit(descriptor.getExtensions().get(1));
+    helper.internalInit(descriptor.getExtensions().get(2));
     com.google.protobuf.DescriptorProtos.getDescriptor();
   }
 

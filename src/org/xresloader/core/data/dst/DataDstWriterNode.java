@@ -1,9 +1,11 @@
 package org.xresloader.core.data.dst;
 
 import org.xresloader.core.engine.IdentifyDescriptor;
+import org.xresloader.Xresloader;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 /**
  * Created by owentou on 2014/10/11.
@@ -20,16 +22,46 @@ public class DataDstWriterNode {
         public ArrayList<DataDstWriterNode> nodes = null;
     }
 
+    public class DataDstMessageExtUE {
+        public String helper = null;
+    }
+
+    public class DataDstMessageExt {
+        public List<Xresloader.IndexDescriptor> kvIndex = null;
+        public List<Xresloader.IndexDescriptor> klIndex = null;
+
+        private DataDstMessageExtUE ue = null;
+
+        public DataDstMessageExtUE mutableUE() {
+            if (null != ue) {
+                return ue;
+            }
+
+            ue = new DataDstMessageExtUE();
+            return ue;
+        }
+    }
+
     private HashMap<String, DataDstChildrenNode> children = null;
     private JAVA_TYPE type = JAVA_TYPE.INT;
     public Object descriptor = null; // 关联的Message描述信息，不同的DataDstImpl子类不一样。这里的数据和抽象数据结构的类型有关
     public IdentifyDescriptor identify = null; // 关联的Field信息，同一个抽象数据结构类型可能对应的数据几乎不一样。和具体某个结构内的字段有关
     public String packageName = null;
+    private DataDstMessageExt extension = null;
 
     private DataDstWriterNode(Object desc, JAVA_TYPE _type, String pkgName) {
         descriptor = desc;
         type = _type;
         packageName = pkgName;
+    }
+
+    public DataDstMessageExt mutableExtension() {
+        if (null != extension) {
+            return extension;
+        }
+
+        extension = new DataDstMessageExt();
+        return extension;
     }
 
     static public String makeChildPath(String prefix, String child_name, int list_index) {

@@ -119,8 +119,8 @@ public class DataDstPb extends DataDstImpl {
 
         pb_extensions = com.google.protobuf.ExtensionRegistryLite.newInstance();
 
-        pb_extensions.add(Xresloader.verifier);
-        pb_extensions.add(XresloaderUe.keyTag);
+        Xresloader.registerAllExtensions(pb_extensions);
+        XresloaderUe.registerAllExtensions(pb_extensions);
 
         return pb_extensions;
     }
@@ -228,17 +228,20 @@ public class DataDstPb extends DataDstImpl {
             verifier = fd.getOptions().getExtension(Xresloader.verifier);
         }
 
-        if (null != identify.verifier && !identify.verifier.isEmpty()) {
+        if (null != identify.dataSourceFieldVerifier && !identify.dataSourceFieldVerifier.isEmpty()) {
             if (verifier.isEmpty()) {
-                verifier = identify.verifier;
+                verifier = identify.dataSourceFieldVerifier;
             } else {
-                verifier = verifier + "|" + identify.verifier;
+                verifier = verifier + "|" + identify.dataSourceFieldVerifier;
             }
         }
 
+        // setup identifier
         if (verifier.isEmpty()) {
             identify.resetVerifier();
         } else {
+            identify.mutableExtension().verifier = verifier;
+
             String[] all_verify_rules = verifier.split("\\|");
             for (String vfy_rule : all_verify_rules) {
                 String rule = vfy_rule.trim();
@@ -290,6 +293,15 @@ public class DataDstPb extends DataDstImpl {
                 }
             }
         }
+
+        // setup UE extension
+        if (fd.getOptions().hasExtension(XresloaderUe.keyTag)) {
+            identify.mutableExtension().mutableUE().keyTag = fd.getOptions().getExtension(XresloaderUe.keyTag);
+        }
+
+        if (fd.getOptions().hasExtension(XresloaderUe.ueTypeName)) {
+            identify.mutableExtension().mutableUE().ueTypeName = fd.getOptions().getExtension(XresloaderUe.ueTypeName);
+        }
     }
 
     @Override
@@ -309,14 +321,35 @@ public class DataDstPb extends DataDstImpl {
         return "protobuf";
     }
 
+    static private DataDstWriterNode createMessageWriterNode(Descriptors.Descriptor pbDesc,
+            DataDstWriterNode.JAVA_TYPE type, String pkgName) {
+        if (null == pbDesc) {
+            return DataDstWriterNode.create(null, type, pkgName);
+        }
+
+        DataDstWriterNode ret = DataDstWriterNode.create(pbDesc, DataDstWriterNode.JAVA_TYPE.MESSAGE,
+                pbDesc.getFile().getPackage());
+
+        // extensions
+        if (pbDesc.getOptions().getExtensionCount(Xresloader.kvIndex) > 0) {
+            ret.mutableExtension().kvIndex = pbDesc.getOptions().getExtension(Xresloader.kvIndex);
+        }
+
+        if (pbDesc.getOptions().getExtensionCount(Xresloader.klIndex) > 0) {
+            ret.mutableExtension().klIndex = pbDesc.getOptions().getExtension(Xresloader.klIndex);
+        }
+
+        // extensions for UE
+        if (pbDesc.getOptions().hasExtension(XresloaderUe.helper)) {
+            ret.mutableExtension().mutableUE().helper = pbDesc.getOptions().getExtension(XresloaderUe.helper);
+        }
+
+        return ret;
+    }
+
     @Override
     public final DataDstWriterNode compile() throws ConvException {
-        String packageName = "";
-        if (currentMsgDesc != null) {
-            packageName = currentMsgDesc.getFile().getPackage();
-        }
-        DataDstWriterNode ret = DataDstWriterNode.create(currentMsgDesc, DataDstWriterNode.JAVA_TYPE.MESSAGE,
-                packageName);
+        DataDstWriterNode ret = createMessageWriterNode(currentMsgDesc, DataDstWriterNode.JAVA_TYPE.MESSAGE, null);
         if (test(ret, new LinkedList<String>())) {
             return ret;
         }
@@ -403,7 +436,7 @@ public class DataDstPb extends DataDstImpl {
 
                     name_list.addLast("");
                     for (;; ++count) {
-                        DataDstWriterNode c = DataDstWriterNode.create(fd.getMessageType(),
+                        DataDstWriterNode c = createMessageWriterNode(fd.getMessageType(),
                                 DataDstWriterNode.JAVA_TYPE.MESSAGE, node.packageName);
                         name_list.removeLast();
                         name_list.addLast(DataDstWriterNode.makeNodeName(fd.getName(), count));
@@ -416,7 +449,7 @@ public class DataDstPb extends DataDstImpl {
                     }
                     name_list.removeLast();
                 } else {
-                    DataDstWriterNode c = DataDstWriterNode.create(fd.getMessageType(),
+                    DataDstWriterNode c = createMessageWriterNode(fd.getMessageType(),
                             DataDstWriterNode.JAVA_TYPE.MESSAGE, node.packageName);
                     name_list.addLast(DataDstWriterNode.makeNodeName(fd.getName()));
                     if (test(c, name_list)) {
@@ -473,7 +506,7 @@ public class DataDstPb extends DataDstImpl {
                         String real_name = DataDstWriterNode.makeChildPath(prefix, fd.getName(), count);
                         IdentifyDescriptor col = data_src.getColumnByName(real_name);
                         if (null != col) {
-                            DataDstWriterNode c = DataDstWriterNode.create(null, inner_type, node.packageName);
+                            DataDstWriterNode c = createMessageWriterNode(null, inner_type, node.packageName);
                             setup_node_identify(c, col, fd);
                             node.addChild(fd.getName(), c, fd, true, false);
                             ret = true;
@@ -486,12 +519,12 @@ public class DataDstPb extends DataDstImpl {
                     String real_name = DataDstWriterNode.makeChildPath(prefix, fd.getName());
                     IdentifyDescriptor col = data_src.getColumnByName(real_name);
                     if (null != col) {
-                        DataDstWriterNode c = DataDstWriterNode.create(null, inner_type, node.packageName);
+                        DataDstWriterNode c = createMessageWriterNode(null, inner_type, node.packageName);
                         setup_node_identify(c, col, fd);
                         node.addChild(fd.getName(), c, fd, false, false);
                         ret = true;
                     } else if (fd.isRequired()) {
-                        DataDstWriterNode c = DataDstWriterNode.create(null, inner_type, node.packageName);
+                        DataDstWriterNode c = createMessageWriterNode(null, inner_type, node.packageName);
                         // required 字段要dump默认数据
                         node.addChild(fd.getName(), c, fd, false, true);
                     }
@@ -805,6 +838,7 @@ public class DataDstPb extends DataDstImpl {
             FileInputStream fin = new FileInputStream(ProgramOptions.getInstance().protocolFile);
             byte[] all_buffer = new byte[(int) f.length()];
             fin.read(all_buffer);
+            fin.close();
 
             return all_buffer;
         } catch (FileNotFoundException e) {

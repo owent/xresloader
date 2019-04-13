@@ -107,8 +107,11 @@ public class main {
             } else {
                 ProgramOptions.getLoger().error("write const data to file \"%s\" failed, output type invalid.",
                         ProgramOptions.getInstance().constPrint);
+
+                fos.close();
                 return 1;
             }
+            fos.close();
         } catch (java.io.IOException e) {
             ProgramOptions.getLoger().error("write data to file \"%s\" failed%d%s  > %s",
                     ProgramOptions.getInstance().constPrint, endl, e.getMessage());
@@ -236,6 +239,8 @@ public class main {
                 if (null != data) {
                     fos.write(data);
                 }
+
+                fos.close();
             } catch (ConvException e) {
                 ProgramOptions.getLoger().error(
                         "convert data failed.%s  > %s%s  > File: %s, Table: %s, Row: %d, Column: %d%s  > %s", endl,

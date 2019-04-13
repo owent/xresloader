@@ -348,7 +348,7 @@ public class SchemeConf {
                     blueprintAccess);
         }
 
-        if (editAccess != null || editAccess.isEmpty()) {
+        if (editAccess == null || editAccess.isEmpty()) {
             extUECSV.editAccess = "";
         } else if (editAccess.equalsIgnoreCase("EditAnywhere") || editAccess.equalsIgnoreCase("EditInstanceOnly")
                 || editAccess.equalsIgnoreCase("EditDefaultsOnly")) {

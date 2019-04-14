@@ -1,4 +1,8 @@
-﻿$SCRIPT_DIR = Split-Path -Parent $MyInvocation.MyCommand.Definition
+﻿$PSDefaultParameterValues['*:Encoding'] = 'UTF-8'
+
+$OutputEncoding = [System.Text.UTF8Encoding]::new()
+
+$SCRIPT_DIR = Split-Path -Parent $MyInvocation.MyCommand.Definition
 
 Set-Location $SCRIPT_DIR
 
@@ -35,5 +39,5 @@ foreach ($proto_dir in "proto_v2", "proto_v3") {
         -t ue-json -o '$proto_dir' -f '$proto_dir/kind.pb' -c KindConst.json
         -t ue-csv -o '$proto_dir' -f '$proto_dir/kind.pb' -m DataSource='$XLSX_FILE'|arr_in_arr|3,1 -m MacroSource='$XLSX_FILE'|macro|2,1 -m ProtoName=arr_in_arr_cfg -m OutputFile=ArrInArrCfg.csv -m KeyRow=2 -m UeCfg-CodeOutput=|Public/Config|Private/Config
         -t ue-json -o '$proto_dir' -f '$proto_dir/kind.pb' -m DataSource='$XLSX_FILE'|arr_in_arr|3,1 -m MacroSource='$XLSX_FILE'|macro|2,1 -m ProtoName=arr_in_arr_cfg -m OutputFile=ArrInArrCfg.json -m KeyRow=2 -m UeCfg-CodeOutput=|Public/Config|Private/Config
-    ' | java.exe "-Dfile.encoding=UTF-16" -client -jar "$XRESLOADER" --stdin --data-version 1.0.0.0
+    ' | java.exe "-Dfile.encoding=UTF-8" -client -jar "$XRESLOADER" --stdin --data-version 1.0.0.0
 }

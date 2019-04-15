@@ -27,6 +27,7 @@ public class DataDstWriterNode {
     }
 
     public class DataDstMessageExt {
+        public String description = null;
         public List<Xresloader.IndexDescriptor> kvIndex = null;
         public List<Xresloader.IndexDescriptor> klIndex = null;
 

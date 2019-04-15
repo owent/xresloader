@@ -7,6 +7,7 @@ message xresloader_header {
   string data_ver = 2;
   uint32 count = 3;
   string hash_code = 4;
+  string description = 5;
 }
 
 message xresloader_datablocks {

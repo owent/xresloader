@@ -7,9 +7,15 @@ public final class Xresloader {
   private Xresloader() {}
   public static void registerAllExtensions(
       com.google.protobuf.ExtensionRegistryLite registry) {
-    registry.add(org.xresloader.Xresloader.verifier);
+    registry.add(org.xresloader.Xresloader.fileDescription);
+    registry.add(org.xresloader.Xresloader.msgDescription);
     registry.add(org.xresloader.Xresloader.kvIndex);
     registry.add(org.xresloader.Xresloader.klIndex);
+    registry.add(org.xresloader.Xresloader.verifier);
+    registry.add(org.xresloader.Xresloader.fieldDescription);
+    registry.add(org.xresloader.Xresloader.oneofDescription);
+    registry.add(org.xresloader.Xresloader.enumDescription);
+    registry.add(org.xresloader.Xresloader.enumvDescription);
   }
 
   public static void registerAllExtensions(
@@ -760,6 +766,66 @@ public final class Xresloader {
 
   }
 
+  public static final int FILE_DESCRIPTION_FIELD_NUMBER = 1001;
+  /**
+   * <pre>
+   * 描述信息（不同的输出可能有不同的功能）
+   * </pre>
+   *
+   * <code>extend .google.protobuf.FileOptions { ... }</code>
+   */
+  public static final
+    com.google.protobuf.GeneratedMessage.GeneratedExtension<
+      com.google.protobuf.DescriptorProtos.FileOptions,
+      java.lang.String> fileDescription = com.google.protobuf.GeneratedMessage
+          .newFileScopedGeneratedExtension(
+        java.lang.String.class,
+        null);
+  public static final int MSG_DESCRIPTION_FIELD_NUMBER = 1001;
+  /**
+   * <pre>
+   * 描述信息（不同的输出可能有不同的功能）
+   * </pre>
+   *
+   * <code>extend .google.protobuf.MessageOptions { ... }</code>
+   */
+  public static final
+    com.google.protobuf.GeneratedMessage.GeneratedExtension<
+      com.google.protobuf.DescriptorProtos.MessageOptions,
+      java.lang.String> msgDescription = com.google.protobuf.GeneratedMessage
+          .newFileScopedGeneratedExtension(
+        java.lang.String.class,
+        null);
+  public static final int KV_INDEX_FIELD_NUMBER = 1021;
+  /**
+   * <pre>
+   * TODO [预留] key-value 类型索引
+   * </pre>
+   *
+   * <code>extend .google.protobuf.MessageOptions { ... }</code>
+   */
+  public static final
+    com.google.protobuf.GeneratedMessage.GeneratedExtension<
+      com.google.protobuf.DescriptorProtos.MessageOptions,
+      java.util.List<org.xresloader.Xresloader.IndexDescriptor>> kvIndex = com.google.protobuf.GeneratedMessage
+          .newFileScopedGeneratedExtension(
+        org.xresloader.Xresloader.IndexDescriptor.class,
+        org.xresloader.Xresloader.IndexDescriptor.getDefaultInstance());
+  public static final int KL_INDEX_FIELD_NUMBER = 1022;
+  /**
+   * <pre>
+   * TODO [预留] key-list 类型索引
+   * </pre>
+   *
+   * <code>extend .google.protobuf.MessageOptions { ... }</code>
+   */
+  public static final
+    com.google.protobuf.GeneratedMessage.GeneratedExtension<
+      com.google.protobuf.DescriptorProtos.MessageOptions,
+      java.util.List<org.xresloader.Xresloader.IndexDescriptor>> klIndex = com.google.protobuf.GeneratedMessage
+          .newFileScopedGeneratedExtension(
+        org.xresloader.Xresloader.IndexDescriptor.class,
+        org.xresloader.Xresloader.IndexDescriptor.getDefaultInstance());
   public static final int VERIFIER_FIELD_NUMBER = 1001;
   /**
    * <pre>
@@ -775,36 +841,66 @@ public final class Xresloader {
           .newFileScopedGeneratedExtension(
         java.lang.String.class,
         null);
-  public static final int KV_INDEX_FIELD_NUMBER = 1001;
+  public static final int FIELD_DESCRIPTION_FIELD_NUMBER = 1011;
   /**
    * <pre>
-   * TODO [预留] key-value 类型索引
+   * 描述信息（不同的输出可能有不同的功能）
    * </pre>
    *
-   * <code>extend .google.protobuf.MessageOptions { ... }</code>
+   * <code>extend .google.protobuf.FieldOptions { ... }</code>
    */
   public static final
     com.google.protobuf.GeneratedMessage.GeneratedExtension<
-      com.google.protobuf.DescriptorProtos.MessageOptions,
-      java.util.List<org.xresloader.Xresloader.IndexDescriptor>> kvIndex = com.google.protobuf.GeneratedMessage
+      com.google.protobuf.DescriptorProtos.FieldOptions,
+      java.lang.String> fieldDescription = com.google.protobuf.GeneratedMessage
           .newFileScopedGeneratedExtension(
-        org.xresloader.Xresloader.IndexDescriptor.class,
-        org.xresloader.Xresloader.IndexDescriptor.getDefaultInstance());
-  public static final int KL_INDEX_FIELD_NUMBER = 1002;
+        java.lang.String.class,
+        null);
+  public static final int ONEOF_DESCRIPTION_FIELD_NUMBER = 1001;
   /**
    * <pre>
-   * TODO [预留] key-list 类型索引
+   * 描述信息（不同的输出可能有不同的功能）
    * </pre>
    *
-   * <code>extend .google.protobuf.MessageOptions { ... }</code>
+   * <code>extend .google.protobuf.OneofOptions { ... }</code>
    */
   public static final
     com.google.protobuf.GeneratedMessage.GeneratedExtension<
-      com.google.protobuf.DescriptorProtos.MessageOptions,
-      java.util.List<org.xresloader.Xresloader.IndexDescriptor>> klIndex = com.google.protobuf.GeneratedMessage
+      com.google.protobuf.DescriptorProtos.OneofOptions,
+      java.lang.String> oneofDescription = com.google.protobuf.GeneratedMessage
           .newFileScopedGeneratedExtension(
-        org.xresloader.Xresloader.IndexDescriptor.class,
-        org.xresloader.Xresloader.IndexDescriptor.getDefaultInstance());
+        java.lang.String.class,
+        null);
+  public static final int ENUM_DESCRIPTION_FIELD_NUMBER = 1001;
+  /**
+   * <pre>
+   * 描述信息（不同的输出可能有不同的功能）
+   * </pre>
+   *
+   * <code>extend .google.protobuf.EnumOptions { ... }</code>
+   */
+  public static final
+    com.google.protobuf.GeneratedMessage.GeneratedExtension<
+      com.google.protobuf.DescriptorProtos.EnumOptions,
+      java.lang.String> enumDescription = com.google.protobuf.GeneratedMessage
+          .newFileScopedGeneratedExtension(
+        java.lang.String.class,
+        null);
+  public static final int ENUMV_DESCRIPTION_FIELD_NUMBER = 1001;
+  /**
+   * <pre>
+   * 描述信息（不同的输出可能有不同的功能）
+   * </pre>
+   *
+   * <code>extend .google.protobuf.EnumValueOptions { ... }</code>
+   */
+  public static final
+    com.google.protobuf.GeneratedMessage.GeneratedExtension<
+      com.google.protobuf.DescriptorProtos.EnumValueOptions,
+      java.lang.String> enumvDescription = com.google.protobuf.GeneratedMessage
+          .newFileScopedGeneratedExtension(
+        java.lang.String.class,
+        null);
   private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_org_xresloader_IndexDescriptor_descriptor;
   private static final 
@@ -821,13 +917,22 @@ public final class Xresloader {
     java.lang.String[] descriptorData = {
       "\n\020xresloader.proto\022\016org.xresloader\032 goog" +
       "le/protobuf/descriptor.proto\"/\n\017IndexDes" +
-      "criptor\022\014\n\004name\030\001 \001(\t\022\016\n\006fields\030\002 \003(\t:0\n" +
-      "\010verifier\022\035.google.protobuf.FieldOptions" +
-      "\030\351\007 \001(\t:S\n\010kv_index\022\037.google.protobuf.Me" +
-      "ssageOptions\030\351\007 \003(\0132\037.org.xresloader.Ind" +
-      "exDescriptor:S\n\010kl_index\022\037.google.protob" +
-      "uf.MessageOptions\030\352\007 \003(\0132\037.org.xresloade" +
-      "r.IndexDescriptorb\006proto3"
+      "criptor\022\014\n\004name\030\001 \001(\t\022\016\n\006fields\030\002 \003(\t:7\n" +
+      "\020file_description\022\034.google.protobuf.File" +
+      "Options\030\351\007 \001(\t:9\n\017msg_description\022\037.goog" +
+      "le.protobuf.MessageOptions\030\351\007 \001(\t:S\n\010kv_" +
+      "index\022\037.google.protobuf.MessageOptions\030\375" +
+      "\007 \003(\0132\037.org.xresloader.IndexDescriptor:S" +
+      "\n\010kl_index\022\037.google.protobuf.MessageOpti" +
+      "ons\030\376\007 \003(\0132\037.org.xresloader.IndexDescrip" +
+      "tor:0\n\010verifier\022\035.google.protobuf.FieldO" +
+      "ptions\030\351\007 \001(\t:9\n\021field_description\022\035.goo" +
+      "gle.protobuf.FieldOptions\030\363\007 \001(\t:9\n\021oneo" +
+      "f_description\022\035.google.protobuf.OneofOpt" +
+      "ions\030\351\007 \001(\t:7\n\020enum_description\022\034.google" +
+      ".protobuf.EnumOptions\030\351\007 \001(\t:=\n\021enumv_de" +
+      "scription\022!.google.protobuf.EnumValueOpt" +
+      "ions\030\351\007 \001(\tb\006proto3"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -848,9 +953,15 @@ public final class Xresloader {
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_org_xresloader_IndexDescriptor_descriptor,
         new java.lang.String[] { "Name", "Fields", });
-    verifier.internalInit(descriptor.getExtensions().get(0));
-    kvIndex.internalInit(descriptor.getExtensions().get(1));
-    klIndex.internalInit(descriptor.getExtensions().get(2));
+    fileDescription.internalInit(descriptor.getExtensions().get(0));
+    msgDescription.internalInit(descriptor.getExtensions().get(1));
+    kvIndex.internalInit(descriptor.getExtensions().get(2));
+    klIndex.internalInit(descriptor.getExtensions().get(3));
+    verifier.internalInit(descriptor.getExtensions().get(4));
+    fieldDescription.internalInit(descriptor.getExtensions().get(5));
+    oneofDescription.internalInit(descriptor.getExtensions().get(6));
+    enumDescription.internalInit(descriptor.getExtensions().get(7));
+    enumvDescription.internalInit(descriptor.getExtensions().get(8));
     com.google.protobuf.DescriptorProtos.getDescriptor();
   }
 

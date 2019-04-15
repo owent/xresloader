@@ -52,6 +52,16 @@ public final class PbHeaderV3 {
      */
     com.google.protobuf.ByteString
         getHashCodeBytes();
+
+    /**
+     * <code>string description = 5;</code>
+     */
+    java.lang.String getDescription();
+    /**
+     * <code>string description = 5;</code>
+     */
+    com.google.protobuf.ByteString
+        getDescriptionBytes();
   }
   /**
    * Protobuf type {@code org.xresloader.pb.xresloader_header}
@@ -69,6 +79,7 @@ public final class PbHeaderV3 {
       xresVer_ = "";
       dataVer_ = "";
       hashCode_ = "";
+      description_ = "";
     }
 
     @java.lang.Override
@@ -116,6 +127,12 @@ public final class PbHeaderV3 {
               java.lang.String s = input.readStringRequireUtf8();
 
               hashCode_ = s;
+              break;
+            }
+            case 42: {
+              java.lang.String s = input.readStringRequireUtf8();
+
+              description_ = s;
               break;
             }
             default: {
@@ -261,6 +278,40 @@ public final class PbHeaderV3 {
       }
     }
 
+    public static final int DESCRIPTION_FIELD_NUMBER = 5;
+    private volatile java.lang.Object description_;
+    /**
+     * <code>string description = 5;</code>
+     */
+    public java.lang.String getDescription() {
+      java.lang.Object ref = description_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        description_ = s;
+        return s;
+      }
+    }
+    /**
+     * <code>string description = 5;</code>
+     */
+    public com.google.protobuf.ByteString
+        getDescriptionBytes() {
+      java.lang.Object ref = description_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        description_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
     private byte memoizedIsInitialized = -1;
     @java.lang.Override
     public final boolean isInitialized() {
@@ -287,6 +338,9 @@ public final class PbHeaderV3 {
       if (!getHashCodeBytes().isEmpty()) {
         com.google.protobuf.GeneratedMessageV3.writeString(output, 4, hashCode_);
       }
+      if (!getDescriptionBytes().isEmpty()) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 5, description_);
+      }
       unknownFields.writeTo(output);
     }
 
@@ -308,6 +362,9 @@ public final class PbHeaderV3 {
       }
       if (!getHashCodeBytes().isEmpty()) {
         size += com.google.protobuf.GeneratedMessageV3.computeStringSize(4, hashCode_);
+      }
+      if (!getDescriptionBytes().isEmpty()) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(5, description_);
       }
       size += unknownFields.getSerializedSize();
       memoizedSize = size;
@@ -332,6 +389,8 @@ public final class PbHeaderV3 {
           != other.getCount()) return false;
       if (!getHashCode()
           .equals(other.getHashCode())) return false;
+      if (!getDescription()
+          .equals(other.getDescription())) return false;
       if (!unknownFields.equals(other.unknownFields)) return false;
       return true;
     }
@@ -351,6 +410,8 @@ public final class PbHeaderV3 {
       hash = (53 * hash) + getCount();
       hash = (37 * hash) + HASH_CODE_FIELD_NUMBER;
       hash = (53 * hash) + getHashCode().hashCode();
+      hash = (37 * hash) + DESCRIPTION_FIELD_NUMBER;
+      hash = (53 * hash) + getDescription().hashCode();
       hash = (29 * hash) + unknownFields.hashCode();
       memoizedHashCode = hash;
       return hash;
@@ -492,6 +553,8 @@ public final class PbHeaderV3 {
 
         hashCode_ = "";
 
+        description_ = "";
+
         return this;
       }
 
@@ -522,6 +585,7 @@ public final class PbHeaderV3 {
         result.dataVer_ = dataVer_;
         result.count_ = count_;
         result.hashCode_ = hashCode_;
+        result.description_ = description_;
         onBuilt();
         return result;
       }
@@ -583,6 +647,10 @@ public final class PbHeaderV3 {
         }
         if (!other.getHashCode().isEmpty()) {
           hashCode_ = other.hashCode_;
+          onChanged();
+        }
+        if (!other.getDescription().isEmpty()) {
+          description_ = other.description_;
           onChanged();
         }
         this.mergeUnknownFields(other.unknownFields);
@@ -843,6 +911,75 @@ public final class PbHeaderV3 {
   checkByteStringIsUtf8(value);
         
         hashCode_ = value;
+        onChanged();
+        return this;
+      }
+
+      private java.lang.Object description_ = "";
+      /**
+       * <code>string description = 5;</code>
+       */
+      public java.lang.String getDescription() {
+        java.lang.Object ref = description_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          description_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>string description = 5;</code>
+       */
+      public com.google.protobuf.ByteString
+          getDescriptionBytes() {
+        java.lang.Object ref = description_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          description_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>string description = 5;</code>
+       */
+      public Builder setDescription(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  
+        description_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string description = 5;</code>
+       */
+      public Builder clearDescription() {
+        
+        description_ = getDefaultInstance().getDescription();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string description = 5;</code>
+       */
+      public Builder setDescriptionBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
+        
+        description_ = value;
         onChanged();
         return this;
       }
@@ -1685,11 +1822,12 @@ public final class PbHeaderV3 {
   static {
     java.lang.String[] descriptorData = {
       "\n\022pb_header_v3.proto\022\021org.xresloader.pb\"" +
-      "Y\n\021xresloader_header\022\020\n\010xres_ver\030\001 \001(\t\022\020" +
+      "n\n\021xresloader_header\022\020\n\010xres_ver\030\001 \001(\t\022\020" +
       "\n\010data_ver\030\002 \001(\t\022\r\n\005count\030\003 \001(\r\022\021\n\thash_" +
-      "code\030\004 \001(\t\"a\n\025xresloader_datablocks\0224\n\006h" +
-      "eader\030\001 \001(\0132$.org.xresloader.pb.xresload" +
-      "er_header\022\022\n\ndata_block\030\002 \003(\014b\006proto3"
+      "code\030\004 \001(\t\022\023\n\013description\030\005 \001(\t\"a\n\025xresl" +
+      "oader_datablocks\0224\n\006header\030\001 \001(\0132$.org.x" +
+      "resloader.pb.xresloader_header\022\022\n\ndata_b" +
+      "lock\030\002 \003(\014b\006proto3"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -1708,7 +1846,7 @@ public final class PbHeaderV3 {
     internal_static_org_xresloader_pb_xresloader_header_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_org_xresloader_pb_xresloader_header_descriptor,
-        new java.lang.String[] { "XresVer", "DataVer", "Count", "HashCode", });
+        new java.lang.String[] { "XresVer", "DataVer", "Count", "HashCode", "Description", });
     internal_static_org_xresloader_pb_xresloader_datablocks_descriptor =
       getDescriptor().getMessageTypes().get(1);
     internal_static_org_xresloader_pb_xresloader_datablocks_fieldAccessorTable = new

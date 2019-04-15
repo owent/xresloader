@@ -68,6 +68,20 @@ public final class PbHeader {
      */
     com.google.protobuf.ByteString
         getHashCodeBytes();
+
+    /**
+     * <code>optional string description = 5;</code>
+     */
+    boolean hasDescription();
+    /**
+     * <code>optional string description = 5;</code>
+     */
+    java.lang.String getDescription();
+    /**
+     * <code>optional string description = 5;</code>
+     */
+    com.google.protobuf.ByteString
+        getDescriptionBytes();
   }
   /**
    * Protobuf type {@code org.xresloader.pb.xresloader_header}
@@ -85,6 +99,7 @@ public final class PbHeader {
       xresVer_ = "";
       dataVer_ = "";
       hashCode_ = "";
+      description_ = "";
     }
 
     @java.lang.Override
@@ -132,6 +147,12 @@ public final class PbHeader {
               com.google.protobuf.ByteString bs = input.readBytes();
               bitField0_ |= 0x00000008;
               hashCode_ = bs;
+              break;
+            }
+            case 42: {
+              com.google.protobuf.ByteString bs = input.readBytes();
+              bitField0_ |= 0x00000010;
+              description_ = bs;
               break;
             }
             default: {
@@ -308,6 +329,48 @@ public final class PbHeader {
       }
     }
 
+    public static final int DESCRIPTION_FIELD_NUMBER = 5;
+    private volatile java.lang.Object description_;
+    /**
+     * <code>optional string description = 5;</code>
+     */
+    public boolean hasDescription() {
+      return ((bitField0_ & 0x00000010) != 0);
+    }
+    /**
+     * <code>optional string description = 5;</code>
+     */
+    public java.lang.String getDescription() {
+      java.lang.Object ref = description_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          description_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>optional string description = 5;</code>
+     */
+    public com.google.protobuf.ByteString
+        getDescriptionBytes() {
+      java.lang.Object ref = description_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        description_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
     private byte memoizedIsInitialized = -1;
     @java.lang.Override
     public final boolean isInitialized() {
@@ -342,6 +405,9 @@ public final class PbHeader {
       if (((bitField0_ & 0x00000008) != 0)) {
         com.google.protobuf.GeneratedMessageV3.writeString(output, 4, hashCode_);
       }
+      if (((bitField0_ & 0x00000010) != 0)) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 5, description_);
+      }
       unknownFields.writeTo(output);
     }
 
@@ -363,6 +429,9 @@ public final class PbHeader {
       }
       if (((bitField0_ & 0x00000008) != 0)) {
         size += com.google.protobuf.GeneratedMessageV3.computeStringSize(4, hashCode_);
+      }
+      if (((bitField0_ & 0x00000010) != 0)) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(5, description_);
       }
       size += unknownFields.getSerializedSize();
       memoizedSize = size;
@@ -399,6 +468,11 @@ public final class PbHeader {
         if (!getHashCode()
             .equals(other.getHashCode())) return false;
       }
+      if (hasDescription() != other.hasDescription()) return false;
+      if (hasDescription()) {
+        if (!getDescription()
+            .equals(other.getDescription())) return false;
+      }
       if (!unknownFields.equals(other.unknownFields)) return false;
       return true;
     }
@@ -425,6 +499,10 @@ public final class PbHeader {
       if (hasHashCode()) {
         hash = (37 * hash) + HASH_CODE_FIELD_NUMBER;
         hash = (53 * hash) + getHashCode().hashCode();
+      }
+      if (hasDescription()) {
+        hash = (37 * hash) + DESCRIPTION_FIELD_NUMBER;
+        hash = (53 * hash) + getDescription().hashCode();
       }
       hash = (29 * hash) + unknownFields.hashCode();
       memoizedHashCode = hash;
@@ -567,6 +645,8 @@ public final class PbHeader {
         bitField0_ = (bitField0_ & ~0x00000004);
         hashCode_ = "";
         bitField0_ = (bitField0_ & ~0x00000008);
+        description_ = "";
+        bitField0_ = (bitField0_ & ~0x00000010);
         return this;
       }
 
@@ -611,6 +691,10 @@ public final class PbHeader {
           to_bitField0_ |= 0x00000008;
         }
         result.hashCode_ = hashCode_;
+        if (((from_bitField0_ & 0x00000010) != 0)) {
+          to_bitField0_ |= 0x00000010;
+        }
+        result.description_ = description_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -676,6 +760,11 @@ public final class PbHeader {
         if (other.hasHashCode()) {
           bitField0_ |= 0x00000008;
           hashCode_ = other.hashCode_;
+          onChanged();
+        }
+        if (other.hasDescription()) {
+          bitField0_ |= 0x00000010;
+          description_ = other.description_;
           onChanged();
         }
         this.mergeUnknownFields(other.unknownFields);
@@ -970,6 +1059,82 @@ public final class PbHeader {
   }
   bitField0_ |= 0x00000008;
         hashCode_ = value;
+        onChanged();
+        return this;
+      }
+
+      private java.lang.Object description_ = "";
+      /**
+       * <code>optional string description = 5;</code>
+       */
+      public boolean hasDescription() {
+        return ((bitField0_ & 0x00000010) != 0);
+      }
+      /**
+       * <code>optional string description = 5;</code>
+       */
+      public java.lang.String getDescription() {
+        java.lang.Object ref = description_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            description_ = s;
+          }
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>optional string description = 5;</code>
+       */
+      public com.google.protobuf.ByteString
+          getDescriptionBytes() {
+        java.lang.Object ref = description_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          description_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>optional string description = 5;</code>
+       */
+      public Builder setDescription(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000010;
+        description_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string description = 5;</code>
+       */
+      public Builder clearDescription() {
+        bitField0_ = (bitField0_ & ~0x00000010);
+        description_ = getDefaultInstance().getDescription();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string description = 5;</code>
+       */
+      public Builder setDescriptionBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000010;
+        description_ = value;
         onChanged();
         return this;
       }
@@ -1827,12 +1992,13 @@ public final class PbHeader {
       descriptor;
   static {
     java.lang.String[] descriptorData = {
-      "\n\017pb_header.proto\022\021org.xresloader.pb\"Y\n\021" +
+      "\n\017pb_header.proto\022\021org.xresloader.pb\"n\n\021" +
       "xresloader_header\022\020\n\010xres_ver\030\001 \001(\t\022\020\n\010d" +
       "ata_ver\030\002 \001(\t\022\r\n\005count\030\003 \002(\r\022\021\n\thash_cod" +
-      "e\030\004 \002(\t\"a\n\025xresloader_datablocks\0224\n\006head" +
-      "er\030\001 \001(\0132$.org.xresloader.pb.xresloader_" +
-      "header\022\022\n\ndata_block\030\002 \003(\014"
+      "e\030\004 \002(\t\022\023\n\013description\030\005 \001(\t\"a\n\025xresload" +
+      "er_datablocks\0224\n\006header\030\001 \001(\0132$.org.xres" +
+      "loader.pb.xresloader_header\022\022\n\ndata_bloc" +
+      "k\030\002 \003(\014"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -1851,7 +2017,7 @@ public final class PbHeader {
     internal_static_org_xresloader_pb_xresloader_header_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_org_xresloader_pb_xresloader_header_descriptor,
-        new java.lang.String[] { "XresVer", "DataVer", "Count", "HashCode", });
+        new java.lang.String[] { "XresVer", "DataVer", "Count", "HashCode", "Description", });
     internal_static_org_xresloader_pb_xresloader_datablocks_descriptor =
       getDescriptor().getMessageTypes().get(1);
     internal_static_org_xresloader_pb_xresloader_datablocks_fieldAccessorTable = new

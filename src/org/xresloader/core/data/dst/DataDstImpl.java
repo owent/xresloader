@@ -9,6 +9,20 @@ import java.util.HashMap;
  * Created by owentou on 2014/10/10.
  */
 public abstract class DataDstImpl {
+    private String systemEndl = null;
+
+    public String getSystemEndl() {
+        if (null != systemEndl) {
+            return systemEndl;
+        }
+
+        systemEndl = System.getProperty("line.separator", "\n");
+        if (null == systemEndl || systemEndl.isEmpty()) {
+            systemEndl = "\r\n";
+        }
+        return systemEndl;
+    }
+
     /**
      * 初始化
      * 

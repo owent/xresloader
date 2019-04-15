@@ -49,6 +49,7 @@ public class DataDstUECsv extends DataDstUEBase {
         CSVPrinter csv = null;
     }
 
+    @Override
     protected Object buildForUEOnInit() throws IOException {
         UEBuildObject ret = new UEBuildObject();
         ret.sb = new StringBuffer();
@@ -64,6 +65,7 @@ public class DataDstUECsv extends DataDstUEBase {
     }
 
     @SuppressWarnings("unchecked")
+    @Override
     protected byte[] buildForUEOnFinal(Object buildObj) {
         // 带编码的输出
         String encoding = SchemeConf.getInstance().getKey().getEncoding();
@@ -74,12 +76,16 @@ public class DataDstUECsv extends DataDstUEBase {
     }
 
     @SuppressWarnings("unchecked")
-    protected void buildForUEOnPrintHeader(Object buildObj, ArrayList<Object> rowData) throws IOException {
+    @Override
+    protected void buildForUEOnPrintHeader(Object buildObj, ArrayList<Object> rowData, UEDataRowRule rule)
+            throws IOException {
         ((UEBuildObject) buildObj).csv.printRecord(rowData);
     }
 
     @SuppressWarnings("unchecked")
-    protected void buildForUEOnPrintRecord(Object buildObj, ArrayList<Object> rowData) throws IOException {
+    @Override
+    protected void buildForUEOnPrintRecord(Object buildObj, ArrayList<Object> rowData, UEDataRowRule rule)
+            throws IOException {
         ((UEBuildObject) buildObj).csv.printRecord(rowData);
     }
 
@@ -151,7 +157,8 @@ public class DataDstUECsv extends DataDstUEBase {
      * @param data 常量数据集
      * @return 常量代码
      */
-    public String dumpConstForUE(HashMap<String, Object> data) throws IOException {
+    @Override
+    public String dumpConstForUE(HashMap<String, Object> data, UEDataRowRule rule) throws IOException {
         StringBuffer sb = new StringBuffer();
         CSVPrinter csv = new CSVPrinter(sb, CSVFormat.EXCEL.withHeader(getIdentName("Name"), getIdentName("Value")));
 

@@ -18,6 +18,7 @@ public class IdentifyDescriptor {
     }
 
     public class IdentifyFieldExt {
+        public String description = null;
         public String verifier = null;
         private IdentifyFieldExtUE ue = null;
 

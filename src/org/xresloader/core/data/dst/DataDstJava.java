@@ -26,20 +26,6 @@ public abstract class DataDstJava extends DataDstImpl {
         }
     }
 
-    private String systemEndl = null;
-
-    public String getSystemEndl() {
-        if (null != systemEndl) {
-            return systemEndl;
-        }
-
-        systemEndl = System.getProperty("line.separator", "\n");
-        if (null == systemEndl || systemEndl.isEmpty()) {
-            systemEndl = "\r\n";
-        }
-        return systemEndl;
-    }
-
     /**
      * @return 协议处理器名字
      */
@@ -59,6 +45,7 @@ public abstract class DataDstJava extends DataDstImpl {
         ret.header.put("data_ver", ProgramOptions.getInstance().getDataVersion());
         ret.header.put("count", DataSrcImpl.getOurInstance().getRecordNumber());
         ret.header.put("hash_code", "no hash code");
+        ArrayList<String> descriptionList = new ArrayList<String>();
 
         List<Object> item_list = new ArrayList<Object>();
         ret.body.put(SchemeConf.getInstance().getProtoName(), item_list);
@@ -73,6 +60,14 @@ public abstract class DataDstJava extends DataDstImpl {
                     item_list.add(msg);
                 }
             }
+
+            if (desc.mutableExtension().description != null) {
+                descriptionList.add(desc.mutableExtension().description);
+            }
+        }
+
+        if (!descriptionList.isEmpty()) {
+            ret.header.put("description", String.join(getSystemEndl(), descriptionList));
         }
 
         return ret;

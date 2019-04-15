@@ -21,6 +21,7 @@ import java.io.*;
 import java.nio.charset.Charset;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedList;
@@ -228,6 +229,10 @@ public class DataDstPb extends DataDstImpl {
             verifier = fd.getOptions().getExtension(Xresloader.verifier);
         }
 
+        if (fd.getOptions().hasExtension(Xresloader.fieldDescription)) {
+            identify.mutableExtension().description = fd.getOptions().getExtension(Xresloader.fieldDescription);
+        }
+
         if (null != identify.dataSourceFieldVerifier && !identify.dataSourceFieldVerifier.isEmpty()) {
             if (verifier.isEmpty()) {
                 verifier = identify.dataSourceFieldVerifier;
@@ -331,6 +336,10 @@ public class DataDstPb extends DataDstImpl {
                 pbDesc.getFile().getPackage());
 
         // extensions
+        if (pbDesc.getOptions().hasExtension(Xresloader.msgDescription)) {
+            ret.mutableExtension().description = pbDesc.getOptions().getExtension(Xresloader.msgDescription);
+        }
+
         if (pbDesc.getOptions().getExtensionCount(Xresloader.kvIndex) > 0) {
             ret.mutableExtension().kvIndex = pbDesc.getOptions().getExtension(Xresloader.kvIndex);
         }
@@ -365,6 +374,7 @@ public class DataDstPb extends DataDstImpl {
         header.setXresVer(ProgramOptions.getInstance().getVersion());
         header.setDataVer(ProgramOptions.getInstance().getDataVersion());
         header.setHashCode("");
+        ArrayList<String> descriptionList = new ArrayList<String>();
 
         // 校验码
         MessageDigest md5 = null;
@@ -392,10 +402,19 @@ public class DataDstPb extends DataDstImpl {
                     }
                 }
             }
+
+            if (desc.mutableExtension().description != null) {
+                descriptionList.add(desc.mutableExtension().description);
+            }
         }
+
         header.setCount(count);
         if (null != md5) {
             header.setHashCode("md5:" + Hex.encodeHexString(md5.digest()));
+        }
+
+        if (!descriptionList.isEmpty()) {
+            header.setDescription(String.join(getSystemEndl(), descriptionList));
         }
 
         // 写出

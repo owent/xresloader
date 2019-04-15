@@ -43,6 +43,7 @@ public class DataDstUEJson extends DataDstUEBase {
         ArrayList<Object> header = null;
     }
 
+    @Override
     protected Object buildForUEOnInit() throws IOException {
         UEBuildObject ret = new UEBuildObject();
         ret.ja = new JSONArray();
@@ -51,6 +52,7 @@ public class DataDstUEJson extends DataDstUEBase {
     }
 
     @SuppressWarnings("unchecked")
+    @Override
     protected byte[] buildForUEOnFinal(Object buildObj) {
         // 带编码的输出
         String encoding = SchemeConf.getInstance().getKey().getEncoding();
@@ -61,12 +63,16 @@ public class DataDstUEJson extends DataDstUEBase {
     }
 
     @SuppressWarnings("unchecked")
-    protected void buildForUEOnPrintHeader(Object buildObj, ArrayList<Object> rowData) throws IOException {
+    @Override
+    protected void buildForUEOnPrintHeader(Object buildObj, ArrayList<Object> rowData, UEDataRowRule rule)
+            throws IOException {
         ((UEBuildObject) buildObj).header = rowData;
     }
 
     @SuppressWarnings("unchecked")
-    protected void buildForUEOnPrintRecord(Object buildObj, ArrayList<Object> rowData) throws IOException {
+    @Override
+    protected void buildForUEOnPrintRecord(Object buildObj, ArrayList<Object> rowData, UEDataRowRule rule)
+            throws IOException {
         JSONObject jobj = new JSONObject();
         UEBuildObject bobj = ((UEBuildObject) buildObj);
         for (int i = 0; i < bobj.header.size() && i < rowData.size(); ++i) {
@@ -157,7 +163,7 @@ public class DataDstUEJson extends DataDstUEBase {
      * @return 常量代码
      */
     @Override
-    public String dumpConstForUE(HashMap<String, Object> data) throws IOException {
+    public String dumpConstForUE(HashMap<String, Object> data, UEDataRowRule rule) throws IOException {
         JSONArray jo = new JSONArray();
 
         writeConstData(jo, data, "", getIdentName("Value"));

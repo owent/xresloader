@@ -19,6 +19,16 @@ local const_res = {
     EN_CT_MONEY = 10001,
     EN_CT_UNKNOWN = 0,
   },
+  org = {
+    xresloader = {
+      ue = {
+      },
+    },
+  },
+  google = {
+    protobuf = {
+    },
+  },
 }
 
 

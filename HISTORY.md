@@ -2,9 +2,14 @@
 ==========
 2.1.0
 ------
-1. 增加protobuf的扩展插件支持
+1. 对protobuf的proto 3增加protobuf的扩展插件支持
 2. 增加protobuf插件 - org.xresloader.verifier (支持和Excel里一样的验证器语法)
-3. 增加protobuf插件 - org.xresloader.ue.key_tag (用于UE代码输出时输出Key -> Name 的函数)
+3. 增加protobuf插件 - org.xresloader.msg_description
+4. 增加protobuf插件 - org.xresloader.field_description
+5. 增加protobuf插件 - org.xresloader.ue.key_tag (用于UE代码输出时输出Key -> Name 的函数)
+6. 增加protobuf插件 - org.xresloader.ue.ueTypeName (用于UE代码输出时直接输出UE支持的 ```TSoftObjectPtr<T>``` 类型)
+7. 增加protobuf插件 - org.xresloader.ue.helper (用于UE代码输出时的Utility类的类名后缀)
+8. sample里增加一个协议里的verifier示例
 
 2.0.1
 ------

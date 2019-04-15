@@ -179,7 +179,7 @@ public class main {
                 }
                 descBuilder.append(di.file_path);
 
-                if (!di.file_path.contains(di.table_name)) {
+                if (!di.file_path.isEmpty()) {
                     descBuilder.append('|');
                     descBuilder.append(di.table_name);
                 }

@@ -1,30 +1,33 @@
 syntax = "proto3";
 
+import "xresloader.proto";
+import "xresloader_ue.proto";
+
 import "dependency.proto";
 
 message role_cfg {
-  uint32 id = 1;
-  uint32 unlock_level = 2;
-  uint32 cost_type = 3;
-  int32 cost_value = 4;
-  string name = 5;
-  dep_cfg dep_test = 10;
+    uint32  id           = 1;
+    uint32  unlock_level = 2;
+    uint32  cost_type    = 3;
+    int32   cost_value   = 4;
+    string  name         = 5;
+    dep_cfg dep_test     = 10;
 
-  repeated string test_array = 11;
+    repeated string test_array = 11;
 }
 
 message role_upgrade_cfg {
-  uint32 Id = 1;
-  uint32 Level = 2;
-  uint32 CostType = 3;
-  int32 CostValue = 4;
-  int32 ScoreAdd = 5;
+    uint32 Id        = 1;
+    uint32 Level     = 2;
+    uint32 CostType  = 3 [ (org.xresloader.verifier) = "cost_type" ];
+    int32  CostValue = 4;
+    int32  ScoreAdd  = 5;
 }
 
 message arr_in_arr {
-  string name = 1;
-  repeated int32 int_arr = 2;
-  repeated string str_arr = 3;
+    string   name           = 1;
+    repeated int32 int_arr  = 2;
+    repeated string str_arr = 3;
 }
 
 message test_msg_verifier {
@@ -33,6 +36,9 @@ message test_msg_verifier {
 }
 
 message arr_in_arr_cfg {
-  uint32 id = 1;
-  repeated arr_in_arr arr = 2;
+    option (org.xresloader.ue.helper)       = "helper";
+    option (org.xresloader.msg_description) = "Test arr_in_arr_cfg";
+
+    uint32   id             = 1;
+    repeated arr_in_arr arr = 2;
 }

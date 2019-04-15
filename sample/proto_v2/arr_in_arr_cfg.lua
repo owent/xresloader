@@ -2,10 +2,11 @@
 
 return {
   [1] = {
-    xres_ver = "2.0.0",
+    xres_ver = "2.1.0",
     hash_code = "no hash code",
-    data_ver = "2.0.0.20190408175640",
+    data_ver = "2.1.0.20190415123828",
     count = 3,
+    description = "Test arr_in_arr_cfg",
   },
   arr_in_arr_cfg = {
     {

@@ -1,0 +1,50 @@
+option optimize_for = SPEED;
+
+import "google/protobuf/descriptor.proto";
+
+package org.xresloader;
+
+extend google.protobuf.FileOptions {
+    optional string file_description = 1001; // 描述信息（不同的输出可能有不同的功能）
+
+    // 用户自定义扩展字段请使用 2000 to max;
+}
+
+message IndexDescriptor {
+    optional string name   = 1;
+    repeated string fields = 2;
+}
+
+extend google.protobuf.MessageOptions {
+    optional string msg_description   = 1001; // 描述信息（不同的输出可能有不同的功能）
+    repeated IndexDescriptor kv_index = 1021; // TODO [预留] key-value 类型索引
+    repeated IndexDescriptor kl_index = 1022; // TODO [预留] key-list 类型索引
+
+    // 用户自定义扩展字段请使用 2000 to max;
+}
+
+extend google.protobuf.FieldOptions {
+    optional string verifier          = 1001; // 附加验证器
+    optional string field_description = 1011; // 描述信息（不同的输出可能有不同的功能）
+
+    // 用户自定义扩展字段请使用 2000 to max;
+    // extensions 1000 to max;
+}
+
+extend google.protobuf.OneofOptions {
+    optional string oneof_description = 1001; // 描述信息（不同的输出可能有不同的功能）
+
+    // 用户自定义扩展字段请使用 2000 to max;
+}
+
+extend google.protobuf.EnumOptions {
+    optional string enum_description = 1001; // 描述信息（不同的输出可能有不同的功能）
+
+    // 用户自定义扩展字段请使用 2000 to max;
+}
+
+extend google.protobuf.EnumValueOptions {
+    optional string enumv_description = 1001; // 描述信息（不同的输出可能有不同的功能）
+
+    // 用户自定义扩展字段请使用 2000 to max;
+}

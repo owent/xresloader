@@ -19,8 +19,20 @@ local const_res = {
     EN_CT_MONEY = 10001,
     EN_CT_UNKNOWN = 0,
   },
+  org = {
+    xresloader = {
+      ue = {
+      },
+    },
+  },
+  google = {
+    protobuf = {
+    },
+  },
 }
 
 
 game_const_config = const_res.game_const_config
 cost_type = const_res.cost_type
+org = const_res.org
+google = const_res.google

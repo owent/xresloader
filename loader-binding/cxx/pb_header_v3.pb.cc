@@ -79,6 +79,7 @@ const ::google::protobuf::uint32 TableStruct_pb_5fheader_5fv3_2eproto::offsets[]
   PROTOBUF_FIELD_OFFSET(::org::xresloader::pb::xresloader_header, data_ver_),
   PROTOBUF_FIELD_OFFSET(::org::xresloader::pb::xresloader_header, count_),
   PROTOBUF_FIELD_OFFSET(::org::xresloader::pb::xresloader_header, hash_code_),
+  PROTOBUF_FIELD_OFFSET(::org::xresloader::pb::xresloader_header, description_),
   ~0u,  // no _has_bits_
   PROTOBUF_FIELD_OFFSET(::org::xresloader::pb::xresloader_datablocks, _internal_metadata_),
   ~0u,  // no _extensions_
@@ -89,7 +90,7 @@ const ::google::protobuf::uint32 TableStruct_pb_5fheader_5fv3_2eproto::offsets[]
 };
 static const ::google::protobuf::internal::MigrationSchema schemas[] PROTOBUF_SECTION_VARIABLE(protodesc_cold) = {
   { 0, -1, sizeof(::org::xresloader::pb::xresloader_header)},
-  { 9, -1, sizeof(::org::xresloader::pb::xresloader_datablocks)},
+  { 10, -1, sizeof(::org::xresloader::pb::xresloader_datablocks)},
 };
 
 static ::google::protobuf::Message const * const file_default_instances[] = {
@@ -105,16 +106,17 @@ static ::google::protobuf::Message const * const file_default_instances[] = {
 
 const char descriptor_table_protodef_pb_5fheader_5fv3_2eproto[] =
   "\n\022pb_header_v3.proto\022\021org.xresloader.pb\""
-  "Y\n\021xresloader_header\022\020\n\010xres_ver\030\001 \001(\t\022\020"
+  "n\n\021xresloader_header\022\020\n\010xres_ver\030\001 \001(\t\022\020"
   "\n\010data_ver\030\002 \001(\t\022\r\n\005count\030\003 \001(\r\022\021\n\thash_"
-  "code\030\004 \001(\t\"a\n\025xresloader_datablocks\0224\n\006h"
-  "eader\030\001 \001(\0132$.org.xresloader.pb.xresload"
-  "er_header\022\022\n\ndata_block\030\002 \003(\014b\006proto3"
+  "code\030\004 \001(\t\022\023\n\013description\030\005 \001(\t\"a\n\025xresl"
+  "oader_datablocks\0224\n\006header\030\001 \001(\0132$.org.x"
+  "resloader.pb.xresloader_header\022\022\n\ndata_b"
+  "lock\030\002 \003(\014b\006proto3"
   ;
 ::google::protobuf::internal::DescriptorTable descriptor_table_pb_5fheader_5fv3_2eproto = {
   false, InitDefaults_pb_5fheader_5fv3_2eproto, 
   descriptor_table_protodef_pb_5fheader_5fv3_2eproto,
-  "pb_header_v3.proto", &assign_descriptors_table_pb_5fheader_5fv3_2eproto, 237,
+  "pb_header_v3.proto", &assign_descriptors_table_pb_5fheader_5fv3_2eproto, 258,
 };
 
 void AddDescriptors_pb_5fheader_5fv3_2eproto() {
@@ -143,6 +145,7 @@ const int xresloader_header::kXresVerFieldNumber;
 const int xresloader_header::kDataVerFieldNumber;
 const int xresloader_header::kCountFieldNumber;
 const int xresloader_header::kHashCodeFieldNumber;
+const int xresloader_header::kDescriptionFieldNumber;
 #endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
 
 xresloader_header::xresloader_header()
@@ -166,6 +169,10 @@ xresloader_header::xresloader_header(const xresloader_header& from)
   if (from.hash_code().size() > 0) {
     hash_code_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.hash_code_);
   }
+  description_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  if (from.description().size() > 0) {
+    description_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.description_);
+  }
   count_ = from.count_;
   // @@protoc_insertion_point(copy_constructor:org.xresloader.pb.xresloader_header)
 }
@@ -176,6 +183,7 @@ void xresloader_header::SharedCtor() {
   xres_ver_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   data_ver_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   hash_code_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  description_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   count_ = 0u;
 }
 
@@ -188,6 +196,7 @@ void xresloader_header::SharedDtor() {
   xres_ver_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   data_ver_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   hash_code_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  description_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
 
 void xresloader_header::SetCachedSize(int size) const {
@@ -208,6 +217,7 @@ void xresloader_header::Clear() {
   xres_ver_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   data_ver_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   hash_code_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  description_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   count_ = 0u;
   _internal_metadata_.Clear();
 }
@@ -271,6 +281,22 @@ const char* xresloader_header::_InternalParse(const char* begin, const char* end
         GOOGLE_PROTOBUF_PARSER_ASSERT(ptr);
         ctx->extra_parse_data().SetFieldName("org.xresloader.pb.xresloader_header.hash_code");
         object = msg->mutable_hash_code();
+        if (size > end - ptr + ::google::protobuf::internal::ParseContext::kSlopBytes) {
+          parser_till_end = ::google::protobuf::internal::GreedyStringParserUTF8;
+          goto string_till_end;
+        }
+        GOOGLE_PROTOBUF_PARSER_ASSERT(::google::protobuf::internal::StringCheckUTF8(ptr, size, ctx));
+        ::google::protobuf::internal::InlineGreedyStringParser(object, ptr, size, ctx);
+        ptr += size;
+        break;
+      }
+      // string description = 5;
+      case 5: {
+        if (static_cast<::google::protobuf::uint8>(tag) != 42) goto handle_unusual;
+        ptr = ::google::protobuf::io::ReadSize(ptr, &size);
+        GOOGLE_PROTOBUF_PARSER_ASSERT(ptr);
+        ctx->extra_parse_data().SetFieldName("org.xresloader.pb.xresloader_header.description");
+        object = msg->mutable_description();
         if (size > end - ptr + ::google::protobuf::internal::ParseContext::kSlopBytes) {
           parser_till_end = ::google::protobuf::internal::GreedyStringParserUTF8;
           goto string_till_end;
@@ -372,6 +398,21 @@ bool xresloader_header::MergePartialFromCodedStream(
         break;
       }
 
+      // string description = 5;
+      case 5: {
+        if (static_cast< ::google::protobuf::uint8>(tag) == (42 & 0xFF)) {
+          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
+                input, this->mutable_description()));
+          DO_(::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+            this->description().data(), static_cast<int>(this->description().length()),
+            ::google::protobuf::internal::WireFormatLite::PARSE,
+            "org.xresloader.pb.xresloader_header.description"));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
       default: {
       handle_unusual:
         if (tag == 0) {
@@ -434,6 +475,16 @@ void xresloader_header::SerializeWithCachedSizes(
       4, this->hash_code(), output);
   }
 
+  // string description = 5;
+  if (this->description().size() > 0) {
+    ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+      this->description().data(), static_cast<int>(this->description().length()),
+      ::google::protobuf::internal::WireFormatLite::SERIALIZE,
+      "org.xresloader.pb.xresloader_header.description");
+    ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
+      5, this->description(), output);
+  }
+
   if (_internal_metadata_.have_unknown_fields()) {
     ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
         _internal_metadata_.unknown_fields(), output);
@@ -485,6 +536,17 @@ void xresloader_header::SerializeWithCachedSizes(
         4, this->hash_code(), target);
   }
 
+  // string description = 5;
+  if (this->description().size() > 0) {
+    ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+      this->description().data(), static_cast<int>(this->description().length()),
+      ::google::protobuf::internal::WireFormatLite::SERIALIZE,
+      "org.xresloader.pb.xresloader_header.description");
+    target =
+      ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
+        5, this->description(), target);
+  }
+
   if (_internal_metadata_.have_unknown_fields()) {
     target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
         _internal_metadata_.unknown_fields(), target);
@@ -525,6 +587,13 @@ size_t xresloader_header::ByteSizeLong() const {
     total_size += 1 +
       ::google::protobuf::internal::WireFormatLite::StringSize(
         this->hash_code());
+  }
+
+  // string description = 5;
+  if (this->description().size() > 0) {
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::StringSize(
+        this->description());
   }
 
   // uint32 count = 3;
@@ -573,6 +642,10 @@ void xresloader_header::MergeFrom(const xresloader_header& from) {
 
     hash_code_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.hash_code_);
   }
+  if (from.description().size() > 0) {
+
+    description_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.description_);
+  }
   if (from.count() != 0) {
     set_count(from.count());
   }
@@ -608,6 +681,8 @@ void xresloader_header::InternalSwap(xresloader_header* other) {
   data_ver_.Swap(&other->data_ver_, &::google::protobuf::internal::GetEmptyStringAlreadyInited(),
     GetArenaNoVirtual());
   hash_code_.Swap(&other->hash_code_, &::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+    GetArenaNoVirtual());
+  description_.Swap(&other->description_, &::google::protobuf::internal::GetEmptyStringAlreadyInited(),
     GetArenaNoVirtual());
   swap(count_, other->count_);
 }

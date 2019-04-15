@@ -621,14 +621,16 @@ public abstract class DataDstUEBase extends DataDstImpl {
         DataDstWriterNodeWrapper constNameNode = new DataDstWriterNodeWrapper();
         constNameNode.desc = DataDstWriterNode.create(null, DataDstWriterNode.JAVA_TYPE.STRING, "");
         constNameNode.desc.identify = IdentifyEngine.n2i("Name", 0);
-        expandedDesc.add(constNameNode);
+        constNameNode.varName = getIdentName("Name");
         constNameNode.isGenerated = true;
+        expandedDesc.add(constNameNode);
 
         DataDstWriterNodeWrapper constValueNode = new DataDstWriterNodeWrapper();
         constValueNode.desc = DataDstWriterNode.create(null, DataDstWriterNode.JAVA_TYPE.STRING, "");
         constValueNode.desc.identify = IdentifyEngine.n2i("Value", 1);
-        expandedDesc.add(constValueNode);
+        constValueNode.varName = getIdentName("Value");
         constValueNode.isGenerated = true;
+        expandedDesc.add(constValueNode);
 
         UEDataRowRule constRule = splitDataRowDesc(expandedDesc);
         constRule.helper = "helper";

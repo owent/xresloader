@@ -1,49 +1,55 @@
-#!/usr/bin/python
+#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
 import os
 import re
 import string
-import glob;
+import glob
+import sys
+from subprocess import Popen
 
-
-work_dir = os.getcwd();
+work_dir = os.getcwd()
 script_dir = os.path.dirname(os.path.realpath(__file__))
+sys.path.append(script_dir)
 os.chdir(script_dir)
-os.chdir(os.path.join('..'));
+os.chdir(os.path.join('..'))
 
-project_dir = os.getcwd();
-proto_dir = os.path.join(project_dir, 'header');
-proto_file = os.path.join(proto_dir, 'pb_header_v3.proto');
-extension_proto_file = glob.glob(os.path.join(proto_dir, 'extensions', '*.proto'));
+project_dir = os.getcwd()
+proto_dir = os.path.join(project_dir, 'header')
+proto_file = os.path.join(proto_dir, 'pb_header_v3.proto')
+extension_proto_file = glob.glob(os.path.join(proto_dir, 'extensions', 'v3', '*.proto'))
 
-os.chdir(work_dir);
+os.chdir(work_dir)
 
-java_out_dir = proto_dir;
-pb_out_file = os.path.join(proto_dir, 'pb_header_v3.pb');
+java_out_dir = proto_dir
+pb_out_file = os.path.join(proto_dir, 'pb_header_v3.pb')
+
+from find_protoc import find_protoc
+
+common_args = [
+    "-I", os.path.join(proto_dir),
+    "-I", os.path.join(proto_dir, 'extensions', 'v3'),
+    "-I", os.path.join(proto_dir, 'extensions')
+]
 
 # java 文件为非LITE版本
-params = ['protoc', '-I', '"' + proto_dir + '"' , '--java_out',  '"' + java_out_dir + '"', '"' + proto_file + '"']
-cmd = ' '.join(params)
 print('[PROCESS] generate java source ... ')
-print(cmd)
-os.system(cmd)
+Popen(
+    [
+        find_protoc(), *common_args, 
+        '--java_out', java_out_dir,
+        proto_file, *extension_proto_file
+    ],
+    shell=False).wait()
 print('[PROCESS] generate java source done.')
 
 # pb 文件为LITE版本
-params = ['protoc', '-I', '"' + proto_dir + '"' , '-o',  '"' + pb_out_file + '"', '"' + proto_file + '"']
-cmd = ' '.join(params)
 print('[PROCESS] generate proto pb file ... ')
-print(cmd)
-os.system(cmd)
+Popen(
+    [
+        find_protoc(), *common_args, 
+        '-o', pb_out_file,
+        proto_file
+    ],
+    shell=False).wait()
 print('[PROCESS] generate proto pb file done.')
-
-# 插件支持
-params = ['protoc', '-I', '"' + proto_dir + '/extensions"' , '--java_out',  '"' + java_out_dir + '"']
-params.extend(extension_proto_file)
-
-cmd = ' '.join(params)
-print('[PROCESS] generate java source for extension ... ')
-print(cmd)
-os.system(cmd)
-print('[PROCESS] generate java source for extension done.')

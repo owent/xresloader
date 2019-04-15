@@ -1,0 +1,14 @@
+option optimize_for = SPEED;
+
+import "google/protobuf/descriptor.proto";
+
+package org.xresloader.ue;
+
+extend google.protobuf.FieldOptions {
+    optional int64 key_tag     = 1101; // key字段映射的系数
+    optional string ueTypeName = 1102; // UE内部类型(比如: TSoftObjectPtr<UTexture>)
+}
+
+extend google.protobuf.MessageOptions {
+    optional string helper = 1101; // 辅助函数的类名
+}

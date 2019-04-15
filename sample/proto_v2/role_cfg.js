@@ -19,9 +19,9 @@
   local_data_set = {
     xresloader : {
       role_cfg_header : {
-        xres_ver : "2.0.0",
+        xres_ver : "2.1.0",
         hash_code : "no hash code",
-        data_ver : "2.0.0.20190408175640",
+        data_ver : "2.1.0.20190415123828",
         count : 7
       },
       role_cfg : [

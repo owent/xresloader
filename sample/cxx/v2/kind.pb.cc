@@ -210,31 +210,35 @@ static ::google::protobuf::Message const * const file_default_instances[] = {
 };
 
 const char descriptor_table_protodef_kind_2eproto[] =
-  "\n\nkind.proto\032\020dependency.proto\"\221\001\n\010role_"
-  "cfg\022\n\n\002id\030\001 \001(\r\022\024\n\014unlock_level\030\002 \001(\r\022\021\n"
-  "\tcost_type\030\003 \001(\r\022\022\n\ncost_value\030\004 \001(\005\022\014\n\004"
-  "name\030\005 \001(\t\022\032\n\010dep_test\030\n \001(\0132\010.dep_cfg\022\022"
-  "\n\ntest_array\030\013 \003(\t\"d\n\020role_upgrade_cfg\022\n"
-  "\n\002Id\030\001 \001(\r\022\r\n\005Level\030\002 \001(\r\022\020\n\010CostType\030\003 "
-  "\001(\r\022\021\n\tCostValue\030\004 \001(\005\022\020\n\010ScoreAdd\030\005 \001(\005"
-  "\";\n\021test_msg_verifier\022\022\n\ttest_id_1\030\221N \001("
-  "\r\022\022\n\ttest_id_2\030\222N \001(\r\"@\n\narr_in_arr\022\014\n\004n"
-  "ame\030\001 \001(\t\022\023\n\007int_arr\030\002 \003(\005B\002\020\001\022\017\n\007str_ar"
-  "r\030\003 \003(\t\"6\n\016arr_in_arr_cfg\022\n\n\002id\030\001 \001(\r\022\030\n"
-  "\003arr\030\002 \003(\0132\013.arr_in_arr"
+  "\n\nkind.proto\032\020xresloader.proto\032\023xresload"
+  "er_ue.proto\032\020dependency.proto\"\221\001\n\010role_c"
+  "fg\022\n\n\002id\030\001 \001(\r\022\024\n\014unlock_level\030\002 \001(\r\022\021\n\t"
+  "cost_type\030\003 \001(\r\022\022\n\ncost_value\030\004 \001(\005\022\014\n\004n"
+  "ame\030\005 \001(\t\022\032\n\010dep_test\030\n \001(\0132\010.dep_cfg\022\022\n"
+  "\ntest_array\030\013 \003(\t\"r\n\020role_upgrade_cfg\022\n\n"
+  "\002Id\030\001 \001(\r\022\r\n\005Level\030\002 \001(\r\022\036\n\010CostType\030\003 \001"
+  "(\rB\014\312>\tcost_type\022\021\n\tCostValue\030\004 \001(\005\022\020\n\010S"
+  "coreAdd\030\005 \001(\005\";\n\021test_msg_verifier\022\022\n\tte"
+  "st_id_1\030\221N \001(\r\022\022\n\ttest_id_2\030\222N \001(\r\"@\n\nar"
+  "r_in_arr\022\014\n\004name\030\001 \001(\t\022\023\n\007int_arr\030\002 \003(\005B"
+  "\002\020\001\022\017\n\007str_arr\030\003 \003(\t\"W\n\016arr_in_arr_cfg\022\n"
+  "\n\002id\030\001 \001(\r\022\030\n\003arr\030\002 \003(\0132\013.arr_in_arr:\037\352D"
+  "\006helper\312>\023Test arr_in_arr_cfg"
   ;
 ::google::protobuf::internal::DescriptorTable descriptor_table_kind_2eproto = {
   false, InitDefaults_kind_2eproto, 
   descriptor_table_protodef_kind_2eproto,
-  "kind.proto", &assign_descriptors_table_kind_2eproto, 463,
+  "kind.proto", &assign_descriptors_table_kind_2eproto, 549,
 };
 
 void AddDescriptors_kind_2eproto() {
-  static constexpr ::google::protobuf::internal::InitFunc deps[1] =
+  static constexpr ::google::protobuf::internal::InitFunc deps[3] =
   {
+    ::AddDescriptors_xresloader_2eproto,
+    ::AddDescriptors_xresloader_5fue_2eproto,
     ::AddDescriptors_dependency_2eproto,
   };
- ::google::protobuf::internal::AddDescriptors(&descriptor_table_kind_2eproto, deps, 1);
+ ::google::protobuf::internal::AddDescriptors(&descriptor_table_kind_2eproto, deps, 3);
 }
 
 // Force running AddDescriptors() at dynamic initialization time.
@@ -1002,7 +1006,7 @@ const char* role_upgrade_cfg::_InternalParse(const char* begin, const char* end,
         GOOGLE_PROTOBUF_PARSER_ASSERT(ptr);
         break;
       }
-      // optional uint32 CostType = 3;
+      // optional uint32 CostType = 3 [(.org.xresloader.verifier) = "cost_type"];
       case 3: {
         if (static_cast<::google::protobuf::uint8>(tag) != 24) goto handle_unusual;
         msg->set_costtype(::google::protobuf::internal::ReadVarint(&ptr));
@@ -1076,7 +1080,7 @@ bool role_upgrade_cfg::MergePartialFromCodedStream(
         break;
       }
 
-      // optional uint32 CostType = 3;
+      // optional uint32 CostType = 3 [(.org.xresloader.verifier) = "cost_type"];
       case 3: {
         if (static_cast< ::google::protobuf::uint8>(tag) == (24 & 0xFF)) {
           HasBitSetters::set_has_costtype(this);
@@ -1153,7 +1157,7 @@ void role_upgrade_cfg::SerializeWithCachedSizes(
     ::google::protobuf::internal::WireFormatLite::WriteUInt32(2, this->level(), output);
   }
 
-  // optional uint32 CostType = 3;
+  // optional uint32 CostType = 3 [(.org.xresloader.verifier) = "cost_type"];
   if (cached_has_bits & 0x00000004u) {
     ::google::protobuf::internal::WireFormatLite::WriteUInt32(3, this->costtype(), output);
   }
@@ -1192,7 +1196,7 @@ void role_upgrade_cfg::SerializeWithCachedSizes(
     target = ::google::protobuf::internal::WireFormatLite::WriteUInt32ToArray(2, this->level(), target);
   }
 
-  // optional uint32 CostType = 3;
+  // optional uint32 CostType = 3 [(.org.xresloader.verifier) = "cost_type"];
   if (cached_has_bits & 0x00000004u) {
     target = ::google::protobuf::internal::WireFormatLite::WriteUInt32ToArray(3, this->costtype(), target);
   }
@@ -1244,7 +1248,7 @@ size_t role_upgrade_cfg::ByteSizeLong() const {
           this->level());
     }
 
-    // optional uint32 CostType = 3;
+    // optional uint32 CostType = 3 [(.org.xresloader.verifier) = "cost_type"];
     if (cached_has_bits & 0x00000004u) {
       total_size += 1 +
         ::google::protobuf::internal::WireFormatLite::UInt32Size(

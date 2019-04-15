@@ -388,7 +388,7 @@ class role_upgrade_cfg :
   ::google::protobuf::uint32 level() const;
   void set_level(::google::protobuf::uint32 value);
 
-  // optional uint32 CostType = 3 [(.org.xresloader.verifier) = "cost_type"];
+  // optional uint32 CostType = 3 [(.org.xresloader.verifier) = "cost_type", (.org.xresloader.field_description) = "Refer to cost_type"];
   bool has_costtype() const;
   void clear_costtype();
   static const int kCostTypeFieldNumber = 3;
@@ -690,7 +690,7 @@ class arr_in_arr :
   const ::google::protobuf::RepeatedPtrField<::std::string>& str_arr() const;
   ::google::protobuf::RepeatedPtrField<::std::string>* mutable_str_arr();
 
-  // optional string name = 1;
+  // optional string name = 1 [(.org.xresloader.field_description) = "This is a test name in array"];
   bool has_name() const;
   void clear_name();
   static const int kNameFieldNumber = 1;
@@ -834,7 +834,7 @@ class arr_in_arr_cfg :
   const ::google::protobuf::RepeatedPtrField< ::arr_in_arr >&
       arr() const;
 
-  // optional uint32 id = 1;
+  // optional uint32 id = 1 [(.org.xresloader.field_description) = "This is a Key"];
   bool has_id() const;
   void clear_id();
   static const int kIdFieldNumber = 1;
@@ -1149,7 +1149,7 @@ inline void role_upgrade_cfg::set_level(::google::protobuf::uint32 value) {
   // @@protoc_insertion_point(field_set:role_upgrade_cfg.Level)
 }
 
-// optional uint32 CostType = 3 [(.org.xresloader.verifier) = "cost_type"];
+// optional uint32 CostType = 3 [(.org.xresloader.verifier) = "cost_type", (.org.xresloader.field_description) = "Refer to cost_type"];
 inline bool role_upgrade_cfg::has_costtype() const {
   return (_has_bits_[0] & 0x00000004u) != 0;
 }
@@ -1247,7 +1247,7 @@ inline void test_msg_verifier::set_test_id_2(::google::protobuf::uint32 value) {
 
 // arr_in_arr
 
-// optional string name = 1;
+// optional string name = 1 [(.org.xresloader.field_description) = "This is a test name in array"];
 inline bool arr_in_arr::has_name() const {
   return (_has_bits_[0] & 0x00000001u) != 0;
 }
@@ -1410,7 +1410,7 @@ arr_in_arr::mutable_str_arr() {
 
 // arr_in_arr_cfg
 
-// optional uint32 id = 1;
+// optional uint32 id = 1 [(.org.xresloader.field_description) = "This is a Key"];
 inline bool arr_in_arr_cfg::has_id() const {
   return (_has_bits_[0] & 0x00000001u) != 0;
 }

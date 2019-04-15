@@ -16,14 +16,17 @@ struct FArrInArrCfg : public FTableRowBase
 
     // Start of fields
     /** Field Type: INT, Name: Name. This field is generated for UE Editor compatible. **/
+    // This is a Key
     UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "XResConfig")
     int32 Name;
 
     /** Field Type: INT, Name: Id **/
+    // This is a Key
     UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "XResConfig")
     int32 Id;
 
     /** Field Type: STRING, Name: Arr_0_Name **/
+    // This is a test name in array
     UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "XResConfig")
     FString Arr_0_Name;
 
@@ -44,6 +47,7 @@ struct FArrInArrCfg : public FTableRowBase
     FString Arr_0_StrArr_1;
 
     /** Field Type: STRING, Name: Arr_1_Name **/
+    // This is a test name in array
     UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "XResConfig")
     FString Arr_1_Name;
 

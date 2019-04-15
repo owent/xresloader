@@ -821,19 +821,24 @@ public abstract class DataDstUEBase extends DataDstImpl {
 
     private final void writeCodeHeaderField(FileOutputStream fout, DataDstWriterNodeWrapper nodeWraper, String varName)
             throws IOException {
-
+        fout.write(dumpString("\r\n"));
         DataDstWriterNode.JAVA_TYPE descType = DataDstWriterNode.JAVA_TYPE.STRING;
         if (null != nodeWraper.desc) {
             descType = nodeWraper.desc.getType();
+            if (null != nodeWraper.desc.identify && null != nodeWraper.desc.identify.mutableExtension().description) {
+                for (String descLine : nodeWraper.desc.identify.mutableExtension().description.replace("\r\n", "\n")
+                        .replace("\r", "\n").split("\n")) {
+                    fout.write(dumpString(String.format("    // %s\r\n", descLine)));
+                }
+            }
         }
 
         if (nodeWraper.isGenerated) {
             fout.write(dumpString(String.format(
-                    "\r\n    /** Field Type: %s, Name: %s. This field is generated for UE Editor compatible. **/\r\n",
+                    "    /** Field Type: %s, Name: %s. This field is generated for UE Editor compatible. **/\r\n",
                     descType.name(), varName)));
         } else {
-            fout.write(dumpString(
-                    String.format("\r\n    /** Field Type: %s, Name: %s **/\r\n", descType.name(), varName)));
+            fout.write(dumpString(String.format("    /** Field Type: %s, Name: %s **/\r\n", descType.name(), varName)));
         }
 
         String ueTypeName = null;

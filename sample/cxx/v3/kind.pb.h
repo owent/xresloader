@@ -366,7 +366,7 @@ class role_upgrade_cfg :
   ::google::protobuf::uint32 level() const;
   void set_level(::google::protobuf::uint32 value);
 
-  // uint32 CostType = 3 [(.org.xresloader.verifier) = "cost_type"];
+  // uint32 CostType = 3 [(.org.xresloader.verifier) = "cost_type", (.org.xresloader.field_description) = "Refer to cost_type"];
   void clear_costtype();
   static const int kCostTypeFieldNumber = 3;
   ::google::protobuf::uint32 costtype() const;
@@ -528,7 +528,7 @@ class arr_in_arr :
   const ::google::protobuf::RepeatedPtrField<::std::string>& str_arr() const;
   ::google::protobuf::RepeatedPtrField<::std::string>* mutable_str_arr();
 
-  // string name = 1;
+  // string name = 1 [(.org.xresloader.field_description) = "This is a test name in array"];
   void clear_name();
   static const int kNameFieldNumber = 1;
   const ::std::string& name() const;
@@ -782,7 +782,7 @@ class arr_in_arr_cfg :
   const ::google::protobuf::RepeatedPtrField< ::arr_in_arr >&
       arr() const;
 
-  // uint32 id = 1;
+  // uint32 id = 1 [(.org.xresloader.field_description) = "This is a Key"];
   void clear_id();
   static const int kIdFieldNumber = 1;
   ::google::protobuf::uint32 id() const;
@@ -1064,7 +1064,7 @@ inline void role_upgrade_cfg::set_level(::google::protobuf::uint32 value) {
   // @@protoc_insertion_point(field_set:role_upgrade_cfg.Level)
 }
 
-// uint32 CostType = 3 [(.org.xresloader.verifier) = "cost_type"];
+// uint32 CostType = 3 [(.org.xresloader.verifier) = "cost_type", (.org.xresloader.field_description) = "Refer to cost_type"];
 inline void role_upgrade_cfg::clear_costtype() {
   costtype_ = 0u;
 }
@@ -1110,7 +1110,7 @@ inline void role_upgrade_cfg::set_scoreadd(::google::protobuf::int32 value) {
 
 // arr_in_arr
 
-// string name = 1;
+// string name = 1 [(.org.xresloader.field_description) = "This is a test name in array"];
 inline void arr_in_arr::clear_name() {
   name_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
@@ -1298,7 +1298,7 @@ inline void test_msg_verifier::set_test_id_2(::google::protobuf::uint32 value) {
 
 // arr_in_arr_cfg
 
-// uint32 id = 1;
+// uint32 id = 1 [(.org.xresloader.field_description) = "This is a Key"];
 inline void arr_in_arr_cfg::clear_id() {
   id_ = 0u;
 }

@@ -1123,6 +1123,10 @@ public abstract class DataDstUEBase extends DataDstImpl {
         headerFs.write(dumpString("    void OnReload();\r\n"));
         headerFs.write(dumpString("\r\n"));
 
+        headerFs.write(dumpString(
+                String.format("    static FName GetRowName(%s);\r\n", getDataRowKeyToNameParamsSpecify(rule))));
+        headerFs.write(dumpString("\r\n"));
+
         headerFs.write(dumpString(getHeaderFieldUFunction()));
         headerFs.write(dumpString(
                 String.format("    FName GetDataRowName(%s) const;\r\n", getDataRowKeyToNameParamsSpecify(rule))));
@@ -1149,7 +1153,15 @@ public abstract class DataDstUEBase extends DataDstImpl {
         headerFs.write(dumpString("\r\n"));
 
         headerFs.write(dumpString(getHeaderFieldUFunction()));
-        headerFs.write(dumpString(String.format("    UDataTable* GetRawDataTable(bool& IsValid) const;\r\n")));
+        headerFs.write(dumpString("    UDataTable* GetRawDataTable(bool& IsValid) const;\r\n"));
+        headerFs.write(dumpString("\r\n"));
+
+        headerFs.write(dumpString(String.format("    static void ClearRow(F%s& TableRow);\r\n", codeInfo.clazzName)));
+        headerFs.write(dumpString("\r\n"));
+
+        headerFs.write(dumpString(getHeaderFieldUFunction()));
+        headerFs.write(
+                dumpString(String.format("    void ClearDataRow(F%s& TableRow) const;\r\n", codeInfo.clazzName)));
         headerFs.write(dumpString("\r\n"));
 
         headerFs.write(dumpString("private:\r\n"));
@@ -1201,17 +1213,8 @@ public abstract class DataDstUEBase extends DataDstImpl {
                 "    this->Loader = MakeShareable(new ConstructorHelpers::FObjectFinder<UDataTable>(TEXT(\"DataTable'/Game/%s'\")));\r\n",
                 helperDestination)));
         // 初始化Empty
-        for (int i = 0; i < rule.keyFields.size(); ++i) {
-            DataDstWriterNodeWrapper wrapper = rule.keyFields.get(i);
-            sourceFs.write(dumpString(
-                    String.format("    this->Empty.%s = %s;\r\n", wrapper.varName, getUETypeDefault(wrapper))));
-        }
-        for (int i = 0; i < rule.valueFields.size(); ++i) {
-            DataDstWriterNodeWrapper wrapper = rule.valueFields.get(i);
-            sourceFs.write(dumpString(
-                    String.format("    this->Empty.%s = %s;\r\n", wrapper.varName, getUETypeDefault(wrapper))));
-        }
-
+        sourceFs.write(dumpString(String.format("    U%s::ClearRow(this->Empty);\r\n", helperClazzName)));
+        // 初始化事件监听
         sourceFs.write(dumpString("    if (this->Loader && this->Loader->Succeeded())\r\n"));
         sourceFs.write(dumpString("    {\r\n"));
         sourceFs.write(dumpString("        this->DataTable = this->Loader->Object;\r\n"));
@@ -1232,11 +1235,19 @@ public abstract class DataDstUEBase extends DataDstImpl {
         sourceFs.write(dumpString("    // TODO Rebuild Index\r\n"));
         sourceFs.write(dumpString("}\r\n\r\n"));
 
+        // GetRowName(...)
+        sourceFs.write(dumpString(String.format("FName U%s::GetRowName(%s)\r\n", helperClazzName,
+                getDataRowKeyToNameParamsSpecify(rule))));
+        sourceFs.write(dumpString("{\r\n"));
+        sourceFs.write(dumpString(String.format("    return %s;\r\n", getDataRowKeyToNameExpression(rule))));
+        sourceFs.write(dumpString("}\r\n\r\n"));
+
         // GetDataRowName(...)
         sourceFs.write(dumpString(String.format("FName U%s::GetDataRowName(%s) const\r\n", helperClazzName,
                 getDataRowKeyToNameParamsSpecify(rule))));
         sourceFs.write(dumpString("{\r\n"));
-        sourceFs.write(dumpString(String.format("    return %s;\r\n", getDataRowKeyToNameExpression(rule))));
+        sourceFs.write(dumpString(String.format("    return U%s::GetRowName(%s);\r\n", helperClazzName,
+                getDataRowKeyToNameParamsPass(rule, ""))));
         sourceFs.write(dumpString("}\r\n\r\n"));
 
         // GetTableRowName(const T& TableRow)
@@ -1265,6 +1276,7 @@ public abstract class DataDstUEBase extends DataDstImpl {
         sourceFs.write(dumpString("        return this->Empty;\r\n"));
         sourceFs.write(dumpString("    };\r\n"));
         sourceFs.write(dumpString("\r\n"));
+        sourceFs.write(dumpString(String.format("    %s = true;\r\n", varIsValidName)));
         sourceFs.write(dumpString("    return *LookupRow;\r\n"));
         sourceFs.write(dumpString("}\r\n\r\n"));
 
@@ -1303,6 +1315,28 @@ public abstract class DataDstUEBase extends DataDstImpl {
         sourceFs.write(dumpString("    return this->DataTable;\r\n"));
         sourceFs.write(dumpString("}\r\n\r\n"));
 
+        // static void ClearDataRow(const F%s& TableRow);
+        sourceFs.write(dumpString(
+                String.format("void U%s::ClearRow(F%s& TableRow)\r\n", helperClazzName, codeInfo.clazzName)));
+        sourceFs.write(dumpString("{\r\n"));
+        for (int i = 0; i < rule.keyFields.size(); ++i) {
+            DataDstWriterNodeWrapper wrapper = rule.keyFields.get(i);
+            sourceFs.write(
+                    dumpString(String.format("    TableRow.%s = %s;\r\n", wrapper.varName, getUETypeDefault(wrapper))));
+        }
+        for (int i = 0; i < rule.valueFields.size(); ++i) {
+            DataDstWriterNodeWrapper wrapper = rule.valueFields.get(i);
+            sourceFs.write(
+                    dumpString(String.format("    TableRow.%s = %s;\r\n", wrapper.varName, getUETypeDefault(wrapper))));
+        }
+        sourceFs.write(dumpString("}\r\n\r\n"));
+
+        // void ClearDataRow(const F%s& TableRow) const;
+        sourceFs.write(dumpString(
+                String.format("void U%s::ClearDataRow(F%s& TableRow) const\r\n", helperClazzName, codeInfo.clazzName)));
+        sourceFs.write(dumpString("{\r\n"));
+        sourceFs.write(dumpString(String.format("    U%s::ClearRow(TableRow);\r\n", helperClazzName)));
+        sourceFs.write(dumpString("}\r\n\r\n"));
         sourceFs.close();
     }
 }

@@ -2,7 +2,7 @@ chcp 65001
 
 where pwsh
 
-if not %ERRORLEVEL% 0 (
+if not ERRORLEVEL 0 (
     goto USE_POWERSHELL
 )
 

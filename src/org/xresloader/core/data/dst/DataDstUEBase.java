@@ -892,7 +892,11 @@ public abstract class DataDstUEBase extends DataDstImpl {
                 if (ueTypeNameIdent == null || ueTypeNameIdent.isEmpty()) {
                     ueTypeName = getUETypeName(descType);
                 } else {
-                    ueTypeName = String.format("TSoftObjectPtr<%s>", ueTypeNameIdent);
+                    if (nodeWraper.desc.identify.mutableExtension().mutableUE().ueTypeIsClass) {
+                        ueTypeName = String.format("TSoftClassPtr<%s>", ueTypeNameIdent);
+                    } else {
+                        ueTypeName = String.format("TSoftObjectPtr<%s>", ueTypeNameIdent);
+                    }
                 }
             }
             fout.write(dumpString(getHeaderFieldUProperty()));

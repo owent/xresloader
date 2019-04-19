@@ -307,6 +307,11 @@ public class DataDstPb extends DataDstImpl {
         if (fd.getOptions().hasExtension(XresloaderUe.ueTypeName)) {
             identify.mutableExtension().mutableUE().ueTypeName = fd.getOptions().getExtension(XresloaderUe.ueTypeName);
         }
+
+        if (fd.getOptions().hasExtension(XresloaderUe.ueTypeIsClass)) {
+            identify.mutableExtension().mutableUE().ueTypeIsClass = fd.getOptions()
+                    .getExtension(XresloaderUe.ueTypeIsClass);
+        }
     }
 
     @Override

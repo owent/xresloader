@@ -1,5 +1,9 @@
 更新记录：
 ==========
+2.1.2
+------
+1. 增加protobuf插件 - org.xresloader.ue.ueTypeueTypeIsClassName (用于UE代码输出时直接输出UE支持的 ```TSoftClassPtr<T>``` 来替换 ```TSoftObjectPtr<T>``` 类型)
+
 2.1.1
 ------
 1. 增加UE输出的Clear接口，用于把所有的数据清空

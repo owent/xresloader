@@ -15,6 +15,7 @@ public class IdentifyDescriptor {
     public class IdentifyFieldExtUE {
         public long keyTag = 0;
         public String ueTypeName = null;
+        public boolean ueTypeIsClass = false;
     }
 
     public class IdentifyFieldExt {

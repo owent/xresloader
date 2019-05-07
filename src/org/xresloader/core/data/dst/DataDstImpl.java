@@ -1,9 +1,9 @@
 package org.xresloader.core.data.dst;
 
-import org.xresloader.core.data.err.ConvException;
-
 import java.io.IOException;
 import java.util.HashMap;
+
+import org.xresloader.core.data.err.ConvException;
 
 /**
  * Created by owentou on 2014/10/10.
@@ -63,7 +63,6 @@ public abstract class DataDstImpl {
      * 
      * @return 常量数据,不支持的时候返回空
      */
-    @SuppressWarnings("unchecked")
     public HashMap<String, Object> buildConst() {
         return null;
     }

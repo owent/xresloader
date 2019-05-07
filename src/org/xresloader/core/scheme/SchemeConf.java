@@ -1,12 +1,11 @@
 package org.xresloader.core.scheme;
 
-import org.xresloader.core.ProgramOptions;
-import org.xresloader.core.engine.IdentifyEngine;
-
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.LinkedList;
+
+import org.xresloader.core.ProgramOptions;
 
 /**
  * Created by owentou on 2014/9/30.

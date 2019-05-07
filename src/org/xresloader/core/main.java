@@ -3,14 +3,6 @@
  */
 package org.xresloader.core;
 
-import org.xresloader.core.data.dst.*;
-import org.xresloader.core.data.dst.*;
-import org.xresloader.core.data.err.ConvException;
-import org.xresloader.core.data.src.DataSrcExcel;
-import org.xresloader.core.data.src.DataSrcImpl;
-import org.xresloader.core.engine.IdentifyEngine;
-import org.xresloader.core.scheme.SchemeConf;
-
 import java.io.FileOutputStream;
 import java.io.OutputStream;
 import java.util.HashMap;
@@ -18,6 +10,20 @@ import java.util.LinkedList;
 import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import org.xresloader.core.data.dst.DataDstImpl;
+import org.xresloader.core.data.dst.DataDstJavascript;
+import org.xresloader.core.data.dst.DataDstJson;
+import org.xresloader.core.data.dst.DataDstLua;
+import org.xresloader.core.data.dst.DataDstMsgPack;
+import org.xresloader.core.data.dst.DataDstPb;
+import org.xresloader.core.data.dst.DataDstUECsv;
+import org.xresloader.core.data.dst.DataDstUEJson;
+import org.xresloader.core.data.dst.DataDstXml;
+import org.xresloader.core.data.err.ConvException;
+import org.xresloader.core.data.src.DataSrcExcel;
+import org.xresloader.core.data.src.DataSrcImpl;
+import org.xresloader.core.scheme.SchemeConf;
 
 /**
  * @author owentou

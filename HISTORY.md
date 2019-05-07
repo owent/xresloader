@@ -1,8 +1,10 @@
 更新记录：
 ==========
-2.1.2
+2.2.0
 ------
 1. 增加protobuf插件 - org.xresloader.ue.ueTypeueTypeIsClassName (用于UE代码输出时直接输出UE支持的 ```TSoftClassPtr<T>``` 来替换 ```TSoftObjectPtr<T>``` 类型)
+2. 增加和优化xresloader内部的Message描述抽象
+3. 支持UE-JSON的嵌套模式导出
 
 2.1.1
 ------

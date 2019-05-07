@@ -1,23 +1,13 @@
 package org.xresloader.core.data.dst;
 
-import com.google.protobuf.*;
-import org.xresloader.core.ProgramOptions;
-import org.xresloader.core.data.err.ConvException;
-import org.xresloader.core.data.src.DataContainer;
-import org.xresloader.core.data.src.DataSrcImpl;
-import org.xresloader.core.data.vfy.*;
-import org.xresloader.core.data.vfy.DataVerifyImpl;
-import org.xresloader.core.data.vfy.DataVerifyIntRange;
-import org.xresloader.core.data.vfy.DataVerifyPbEnum;
-import org.xresloader.core.data.vfy.DataVerifyPbMsg;
-import org.xresloader.core.engine.IdentifyDescriptor;
-import org.xresloader.pb.PbHeaderV3;
-import org.xresloader.Xresloader;
-import org.xresloader.ue.XresloaderUe;
-import org.xresloader.core.scheme.SchemeConf;
-import org.apache.commons.codec.binary.Hex;
+import static com.google.protobuf.Descriptors.FieldDescriptor.JavaType.MESSAGE;
 
-import java.io.*;
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
 import java.nio.charset.Charset;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -27,7 +17,27 @@ import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.Map;
 
-import static com.google.protobuf.Descriptors.FieldDescriptor.JavaType.MESSAGE;
+import com.google.protobuf.ByteString;
+import com.google.protobuf.DescriptorProtos;
+import com.google.protobuf.Descriptors;
+import com.google.protobuf.DynamicMessage;
+import com.google.protobuf.UninitializedMessageException;
+
+import org.apache.commons.codec.binary.Hex;
+import org.xresloader.Xresloader;
+import org.xresloader.core.ProgramOptions;
+import org.xresloader.core.data.dst.DataDstWriterNode.DataDstMessageDescriptor;
+import org.xresloader.core.data.err.ConvException;
+import org.xresloader.core.data.src.DataContainer;
+import org.xresloader.core.data.src.DataSrcImpl;
+import org.xresloader.core.data.vfy.DataVerifyImpl;
+import org.xresloader.core.data.vfy.DataVerifyIntRange;
+import org.xresloader.core.data.vfy.DataVerifyPbEnum;
+import org.xresloader.core.data.vfy.DataVerifyPbMsg;
+import org.xresloader.core.engine.IdentifyDescriptor;
+import org.xresloader.core.scheme.SchemeConf;
+import org.xresloader.pb.PbHeaderV3;
+import org.xresloader.ue.XresloaderUe;
 
 /**
  * Created by owent on 2014/10/10.
@@ -62,6 +72,9 @@ public class DataDstPb extends DataDstImpl {
 
         // ========================== 验证器 ==========================
         HashMap<String, DataVerifyImpl> identifiers = new HashMap<String, DataVerifyImpl>();
+
+        // ========================== 内建AST类型缓存 ==========================
+        HashMap<String, DataDstMessageDescriptor> dataDstDescs = new HashMap<String, DataDstMessageDescriptor>();
 
         public PbInfoSet() {
         }
@@ -331,14 +344,35 @@ public class DataDstPb extends DataDstImpl {
         return "protobuf";
     }
 
-    static private DataDstWriterNode createMessageWriterNode(Descriptors.Descriptor pbDesc,
-            DataDstWriterNode.JAVA_TYPE type, String pkgName) {
+    static private DataDstMessageDescriptor mutableDataDstDescriptor(Descriptors.Descriptor pbDesc,
+            DataDstWriterNode.JAVA_TYPE type) {
+        String key = null;
         if (null == pbDesc) {
-            return DataDstWriterNode.create(null, type, pkgName);
+            key = type.toString();
+        } else {
+            key = pbDesc.getFullName();
+        }
+        DataDstMessageDescriptor ret = pbs.dataDstDescs.getOrDefault(key, null);
+        if (ret != null) {
+            return ret;
         }
 
-        DataDstWriterNode ret = DataDstWriterNode.create(pbDesc, DataDstWriterNode.JAVA_TYPE.MESSAGE,
-                pbDesc.getFile().getPackage());
+        if (pbDesc == null) {
+            ret = DataDstWriterNode.getDefaultMessageDescriptor(type);
+        } else {
+            ret = new DataDstMessageDescriptor(type, pbDesc.getFile().getPackage(), pbDesc.getName());
+        }
+        pbs.dataDstDescs.put(key, ret);
+        return ret;
+    }
+
+    static private DataDstWriterNode createMessageWriterNode(Descriptors.Descriptor pbDesc,
+            DataDstWriterNode.JAVA_TYPE type) {
+        if (null == pbDesc) {
+            return DataDstWriterNode.create(null, mutableDataDstDescriptor(pbDesc, type));
+        }
+
+        DataDstWriterNode ret = DataDstWriterNode.create(pbDesc, mutableDataDstDescriptor(pbDesc, type));
 
         // extensions
         if (pbDesc.getOptions().hasExtension(Xresloader.msgDescription)) {
@@ -363,7 +397,7 @@ public class DataDstPb extends DataDstImpl {
 
     @Override
     public final DataDstWriterNode compile() throws ConvException {
-        DataDstWriterNode ret = createMessageWriterNode(currentMsgDesc, DataDstWriterNode.JAVA_TYPE.MESSAGE, null);
+        DataDstWriterNode ret = createMessageWriterNode(currentMsgDesc, DataDstWriterNode.JAVA_TYPE.MESSAGE);
         if (test(ret, new LinkedList<String>())) {
             return ret;
         }
@@ -445,7 +479,7 @@ public class DataDstPb extends DataDstImpl {
     private boolean test(DataDstWriterNode node, LinkedList<String> name_list) {
         String prefix = String.join(".", name_list);
         boolean ret = false;
-        Descriptors.Descriptor desc = (Descriptors.Descriptor) node.descriptor;
+        Descriptors.Descriptor desc = (Descriptors.Descriptor) node.privateData;
         if (null == desc) {
             return ret;
         }
@@ -461,7 +495,7 @@ public class DataDstPb extends DataDstImpl {
                     name_list.addLast("");
                     for (;; ++count) {
                         DataDstWriterNode c = createMessageWriterNode(fd.getMessageType(),
-                                DataDstWriterNode.JAVA_TYPE.MESSAGE, node.packageName);
+                                DataDstWriterNode.JAVA_TYPE.MESSAGE);
                         name_list.removeLast();
                         name_list.addLast(DataDstWriterNode.makeNodeName(fd.getName(), count));
                         if (test(c, name_list)) {
@@ -474,7 +508,7 @@ public class DataDstPb extends DataDstImpl {
                     name_list.removeLast();
                 } else {
                     DataDstWriterNode c = createMessageWriterNode(fd.getMessageType(),
-                            DataDstWriterNode.JAVA_TYPE.MESSAGE, node.packageName);
+                            DataDstWriterNode.JAVA_TYPE.MESSAGE);
                     name_list.addLast(DataDstWriterNode.makeNodeName(fd.getName()));
                     if (test(c, name_list)) {
                         node.addChild(fd.getName(), c, fd, false, false);
@@ -530,7 +564,7 @@ public class DataDstPb extends DataDstImpl {
                         String real_name = DataDstWriterNode.makeChildPath(prefix, fd.getName(), count);
                         IdentifyDescriptor col = data_src.getColumnByName(real_name);
                         if (null != col) {
-                            DataDstWriterNode c = createMessageWriterNode(null, inner_type, node.packageName);
+                            DataDstWriterNode c = createMessageWriterNode(null, inner_type);
                             setup_node_identify(c, col, fd);
                             node.addChild(fd.getName(), c, fd, true, false);
                             ret = true;
@@ -543,12 +577,12 @@ public class DataDstPb extends DataDstImpl {
                     String real_name = DataDstWriterNode.makeChildPath(prefix, fd.getName());
                     IdentifyDescriptor col = data_src.getColumnByName(real_name);
                     if (null != col) {
-                        DataDstWriterNode c = createMessageWriterNode(null, inner_type, node.packageName);
+                        DataDstWriterNode c = createMessageWriterNode(null, inner_type);
                         setup_node_identify(c, col, fd);
                         node.addChild(fd.getName(), c, fd, false, false);
                         ret = true;
                     } else if (fd.isRequired()) {
-                        DataDstWriterNode c = createMessageWriterNode(null, inner_type, node.packageName);
+                        DataDstWriterNode c = createMessageWriterNode(null, inner_type);
                         // required 字段要dump默认数据
                         node.addChild(fd.getName(), c, fd, false, true);
                     }
@@ -562,7 +596,7 @@ public class DataDstPb extends DataDstImpl {
     }
 
     private ByteString convData(DataDstWriterNode node) throws ConvException {
-        Descriptors.Descriptor msg_desc = (Descriptors.Descriptor) node.descriptor;
+        Descriptors.Descriptor msg_desc = (Descriptors.Descriptor) node.privateData;
 
         DynamicMessage.Builder root = DynamicMessage.newBuilder(currentMsgDesc);
         boolean valid_data = dumpMessage(root, node);
@@ -632,7 +666,7 @@ public class DataDstPb extends DataDstImpl {
 
     /**
      * 转储数据到builder
-     * 
+     *
      * @param builder 转储目标
      * @param node    message的描述结构
      * @return 有数据则返回true
@@ -774,7 +808,7 @@ public class DataDstPb extends DataDstImpl {
 
     /**
      * 生成常量数据
-     * 
+     *
      * @return 常量数据,不支持的时候返回空
      */
     @SuppressWarnings("unchecked")
@@ -847,7 +881,7 @@ public class DataDstPb extends DataDstImpl {
 
     /**
      * 转储常量数据
-     * 
+     *
      * @return 常量数据,不支持的时候返回空
      */
     public final byte[] dumpConst(HashMap<String, Object> data) throws IOException {

@@ -1,31 +1,16 @@
 package org.xresloader.core.data.dst;
 
-import org.xresloader.core.ProgramOptions;
-import org.xresloader.core.data.dst.DataDstWriterNode.DataDstChildrenNode;
-import org.xresloader.core.data.err.ConvException;
-import org.xresloader.core.data.src.DataContainer;
-import org.xresloader.core.data.src.DataSrcImpl;
-import org.xresloader.core.engine.IdentifyEngine;
-import org.xresloader.core.scheme.SchemeConf;
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-import org.json.JSONTokener;
-
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.nio.charset.Charset;
-import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
-import java.util.regex.Pattern;
-import java.util.Base64;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
+import org.xresloader.core.ProgramOptions;
+import org.xresloader.core.scheme.SchemeConf;
 
 /**
  * Created by owentou on 2019/04/08.

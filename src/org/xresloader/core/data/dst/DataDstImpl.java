@@ -2,7 +2,6 @@ package org.xresloader.core.data.dst;
 
 import java.io.IOException;
 import java.util.HashMap;
-
 import org.xresloader.core.data.err.ConvException;
 
 /**
@@ -72,7 +71,7 @@ public abstract class DataDstImpl {
      * 
      * @return 常量数据,不支持的时候返回空
      */
-    public byte[] dumpConst(HashMap<String, Object> data) throws IOException {
+    public byte[] dumpConst(HashMap<String, Object> data) throws ConvException, IOException {
         return null;
     }
 }

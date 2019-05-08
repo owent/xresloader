@@ -3,7 +3,6 @@ package org.xresloader.core.data.dst;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-
 import org.xresloader.Xresloader;
 import org.xresloader.core.engine.IdentifyDescriptor;
 
@@ -15,11 +14,96 @@ public class DataDstWriterNode {
         INT, LONG, BOOLEAN, STRING, BYTES, FLOAT, DOUBLE, MESSAGE
     }
 
+    static public class DataDstFieldExtUE {
+        public long keyTag = 0;
+        public String ueTypeName = null;
+        public boolean ueTypeIsClass = false;
+    }
+
+    static public class DataDstFieldExt {
+        public String description = null;
+        public String verifier = null;
+        private DataDstFieldExtUE ue = null;
+
+        public DataDstFieldExtUE mutableUE() {
+            if (null != ue) {
+                return ue;
+            }
+
+            ue = new DataDstFieldExtUE();
+            return ue;
+        }
+    }
+
+    static public class DataDstMessageExtUE {
+        public String helper = null;
+    }
+
+    static public class DataDstMessageExt {
+        public String description = null;
+        public List<Xresloader.IndexDescriptor> kvIndex = null;
+        public List<Xresloader.IndexDescriptor> klIndex = null;
+
+        private DataDstMessageExtUE ue = null;
+
+        public DataDstMessageExtUE mutableUE() {
+            if (null != ue) {
+                return ue;
+            }
+
+            ue = new DataDstMessageExtUE();
+            return ue;
+        }
+    }
+
+    static public class DataDstFieldDescriptor {
+        private JAVA_TYPE type = JAVA_TYPE.INT;
+        private int index = 0;
+        private String name = null;
+        private boolean isListB = false;
+        public DataDstMessageDescriptor messageDescriptor = null;
+        private DataDstFieldExt extension = null;
+
+        public DataDstFieldDescriptor(JAVA_TYPE type, int index, String name, boolean isList) {
+            this.type = type;
+            this.index = index;
+            this.name = name;
+            this.isListB = isList;
+        }
+
+        public JAVA_TYPE getType() {
+            return this.type;
+        }
+
+        public int getIndex() {
+            return this.index;
+        }
+
+        public String getName() {
+            return this.name;
+        }
+
+        public boolean isList() {
+            return this.isListB;
+        }
+
+        public DataDstFieldExt mutableExtension() {
+            if (null != extension) {
+                return extension;
+            }
+
+            extension = new DataDstFieldExt();
+            return extension;
+        }
+    }
+
     static public class DataDstMessageDescriptor {
         private JAVA_TYPE type = JAVA_TYPE.INT;
         private String packageName = null;
         private String messageName = null;
         private String fullName = null;
+        private DataDstMessageExt extension = null;
+        public HashMap<String, DataDstFieldDescriptor> fields = null;
 
         public DataDstMessageDescriptor(JAVA_TYPE type, String pkgName, String msgName) {
             this.type = type;
@@ -51,41 +135,29 @@ public class DataDstWriterNode {
         public String getFullName() {
             return this.fullName;
         }
+
+        public DataDstMessageExt mutableExtension() {
+            if (null != extension) {
+                return extension;
+            }
+
+            extension = new DataDstMessageExt();
+            return extension;
+        }
     }
 
     public static class DataDstChildrenNode {
-        public boolean isList = false;
+        public DataDstFieldDescriptor innerDesc = null;
         public boolean isRequired = false;
         public Object fieldDescriptor = null;
         public ArrayList<DataDstWriterNode> nodes = null;
     }
 
-    public class DataDstMessageExtUE {
-        public String helper = null;
-    }
-
-    public class DataDstMessageExt {
-        public String description = null;
-        public List<Xresloader.IndexDescriptor> kvIndex = null;
-        public List<Xresloader.IndexDescriptor> klIndex = null;
-
-        private DataDstMessageExtUE ue = null;
-
-        public DataDstMessageExtUE mutableUE() {
-            if (null != ue) {
-                return ue;
-            }
-
-            ue = new DataDstMessageExtUE();
-            return ue;
-        }
-    }
-
     private HashMap<String, DataDstChildrenNode> children = null;
     private DataDstMessageDescriptor typeDescriptor = null;
+    private DataDstFieldDescriptor fieldDescriptor = null;
     public Object privateData = null; // 关联的Message描述信息，不同的DataDstImpl子类不一样。这里的数据和抽象数据结构的类型有关
-    public IdentifyDescriptor identify = null; // 关联的Field信息，同一个抽象数据结构类型可能对应的数据几乎不一样。和具体某个结构内的字段有关
-    private DataDstMessageExt extension = null;
+    public IdentifyDescriptor identify = null; // 关联的Field/Excel列信息，同一个抽象数据结构类型可能对应的数据几乎不一样。和具体某个结构内的字段有关
 
     static private HashMap<JAVA_TYPE, DataDstMessageDescriptor> defaultDescs = new HashMap<JAVA_TYPE, DataDstMessageDescriptor>();
 
@@ -105,19 +177,9 @@ public class DataDstWriterNode {
         this.typeDescriptor = typeDesc;
     }
 
-    public DataDstMessageExt mutableExtension() {
-        if (null != extension) {
-            return extension;
-        }
-
-        extension = new DataDstMessageExt();
-        return extension;
-    }
-
     static public String makeChildPath(String prefix, String child_name, int list_index) {
         if (list_index >= 0)
-            return prefix.isEmpty() ? String.format("%s[%d]", child_name, list_index)
-                    : String.format("%s.%s[%d]", prefix, child_name, list_index);
+            return prefix.isEmpty() ? String.format("%s[%d]", child_name, list_index) : String.format("%s.%s[%d]", prefix, child_name, list_index);
 
         return makeChildPath(prefix, child_name);
     }
@@ -159,12 +221,40 @@ public class DataDstWriterNode {
         return this.typeDescriptor.getFullName();
     }
 
+    public DataDstMessageExt getMessageExtension() {
+        return this.typeDescriptor.mutableExtension();
+    }
+
+    public int getFieldIndex() {
+        if (this.fieldDescriptor == null) {
+            return 0;
+        }
+
+        return this.fieldDescriptor.getIndex();
+    }
+
+    public String getFieldName() {
+        if (this.fieldDescriptor == null) {
+            return "";
+        }
+
+        return this.fieldDescriptor.getName();
+    }
+
+    public DataDstFieldExt getFieldExtension() {
+        if (this.fieldDescriptor == null) {
+            return null;
+        }
+
+        return this.fieldDescriptor.mutableExtension();
+    }
+
     public String getChildPath(String prefix, int list_index, String child_name) {
         DataDstChildrenNode res = getChildren().getOrDefault(child_name, null);
         if (null == res)
             return null;
 
-        if (res.isList)
+        if (res.innerDesc.isList())
             return String.format("%s[%d].%s", prefix, list_index, child_name);
 
         return getChildPath(prefix, child_name);
@@ -174,13 +264,12 @@ public class DataDstWriterNode {
         return prefix.isEmpty() ? child_name : String.format("%s.%s", prefix, child_name);
     }
 
-    public void addChild(String child_name, DataDstWriterNode node, Object _field_descriptor, boolean isList,
-            boolean isRequired) {
+    public DataDstChildrenNode addChild(String child_name, DataDstWriterNode node, Object _field_descriptor, boolean isList, boolean isRequired) {
         DataDstChildrenNode res = getChildren().getOrDefault(child_name, null);
         if (null == res) {
             res = new DataDstChildrenNode();
             getChildren().put(child_name, res);
-            res.isList = isList;
+            res.innerDesc = typeDescriptor.fields.get(child_name);
             res.isRequired = isRequired;
             res.fieldDescriptor = _field_descriptor;
         }
@@ -189,16 +278,21 @@ public class DataDstWriterNode {
             res.nodes = new ArrayList<DataDstWriterNode>();
         }
         res.nodes.add(node);
+
+        // 复制一份字段数据结构描述
+        node.fieldDescriptor = res.innerDesc;
+
+        return res;
     }
 
     /**
      * 创建节点
      *
-     * @param _descriptor 原始协议描述器
-     * @param _type       Java映射类型
+     * @param privateData 原始协议描述器
+     * @param typeDesc    内部描述类型
      * @return 创建爱你的节点
      */
-    static public DataDstWriterNode create(Object _descriptor, DataDstMessageDescriptor typeDesc) {
-        return new DataDstWriterNode(_descriptor, typeDesc);
+    static public DataDstWriterNode create(Object privateData, DataDstMessageDescriptor typeDesc) {
+        return new DataDstWriterNode(privateData, typeDesc);
     }
 }

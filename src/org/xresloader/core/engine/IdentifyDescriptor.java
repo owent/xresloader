@@ -1,54 +1,22 @@
 package org.xresloader.core.engine;
 
+import java.util.LinkedList;
+import java.util.List;
 import org.xresloader.core.data.err.ConvException;
 import org.xresloader.core.data.src.DataSrcImpl;
 import org.xresloader.core.data.vfy.DataVerifyImpl;
 import org.xresloader.core.data.vfy.DataVerifyResult;
 
-import java.util.LinkedList;
-import java.util.List;
-
 /**
  * Created by owt50 on 2016/12/7.
  */
 public class IdentifyDescriptor {
-    public class IdentifyFieldExtUE {
-        public long keyTag = 0;
-        public String ueTypeName = null;
-        public boolean ueTypeIsClass = false;
-    }
-
-    public class IdentifyFieldExt {
-        public String description = null;
-        public String verifier = null;
-        private IdentifyFieldExtUE ue = null;
-
-        public IdentifyFieldExtUE mutableUE() {
-            if (null != ue) {
-                return ue;
-            }
-
-            ue = new IdentifyFieldExtUE();
-            return ue;
-        }
-    }
-
     public String name = "";
     public String dataSourceFieldVerifier = null;
     public int index = 0;
     public List<DataVerifyImpl> verifyEngine = null;
-    private IdentifyFieldExt extension = null;
 
     public IdentifyDescriptor() {
-    }
-
-    public IdentifyFieldExt mutableExtension() {
-        if (null != extension) {
-            return extension;
-        }
-
-        extension = new IdentifyFieldExt();
-        return extension;
     }
 
     public boolean hasVerifier() {
@@ -90,13 +58,11 @@ public class IdentifyDescriptor {
             }
         } catch (Exception e) {
             throw new ConvException(String.format("check %d for %s at row %d, column %d in %s failed, %s", n, name,
-                    DataSrcImpl.getOurInstance().getCurrentRowNum() + 1, index + 1,
-                    DataSrcImpl.getOurInstance().getCurrentTableName(), e.getMessage()));
+                    DataSrcImpl.getOurInstance().getCurrentRowNum() + 1, index + 1, DataSrcImpl.getOurInstance().getCurrentTableName(), e.getMessage()));
         }
 
-        throw new ConvException(String.format("check %d for %s at row %d, column %d in %s failed, check data failed.",
-                n, name, DataSrcImpl.getOurInstance().getCurrentRowNum() + 1, index + 1,
-                DataSrcImpl.getOurInstance().getCurrentTableName()));
+        throw new ConvException(String.format("check %d for %s at row %d, column %d in %s failed, check data failed.", n, name,
+                DataSrcImpl.getOurInstance().getCurrentRowNum() + 1, index + 1, DataSrcImpl.getOurInstance().getCurrentTableName()));
     }
 
     public long getAndVerify(String val) throws ConvException {
@@ -126,12 +92,10 @@ public class IdentifyDescriptor {
             }
         } catch (Exception e) {
             throw new ConvException(String.format("convert %s for %s at row %d, column %d in %s failed, %s", val, name,
-                    DataSrcImpl.getOurInstance().getCurrentRowNum() + 1, index + 1,
-                    DataSrcImpl.getOurInstance().getCurrentTableName(), e.getMessage()));
+                    DataSrcImpl.getOurInstance().getCurrentRowNum() + 1, index + 1, DataSrcImpl.getOurInstance().getCurrentTableName(), e.getMessage()));
         }
 
-        throw new ConvException(String.format("convert %s for %s at row %d, column %d in %s failed, check data failed.",
-                val, name, DataSrcImpl.getOurInstance().getCurrentRowNum() + 1, index + 1,
-                DataSrcImpl.getOurInstance().getCurrentTableName()));
+        throw new ConvException(String.format("convert %s for %s at row %d, column %d in %s failed, check data failed.", val, name,
+                DataSrcImpl.getOurInstance().getCurrentRowNum() + 1, index + 1, DataSrcImpl.getOurInstance().getCurrentTableName()));
     }
 }

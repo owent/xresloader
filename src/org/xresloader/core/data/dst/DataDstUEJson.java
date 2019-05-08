@@ -6,7 +6,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.xresloader.core.ProgramOptions;
@@ -26,6 +25,11 @@ public class DataDstUEJson extends DataDstUEBase {
     private class UEBuildObject {
         JSONArray ja = null;
         ArrayList<Object> header = null;
+    }
+
+    @Override
+    protected boolean isRecursiveEnabled() {
+        return true;
     }
 
     @Override
@@ -49,15 +53,13 @@ public class DataDstUEJson extends DataDstUEBase {
 
     @SuppressWarnings("unchecked")
     @Override
-    protected void buildForUEOnPrintHeader(Object buildObj, ArrayList<Object> rowData, UEDataRowRule rule)
-            throws IOException {
+    protected void buildForUEOnPrintHeader(Object buildObj, ArrayList<Object> rowData, UEDataRowRule rule) throws IOException {
         ((UEBuildObject) buildObj).header = rowData;
     }
 
     @SuppressWarnings("unchecked")
     @Override
-    protected void buildForUEOnPrintRecord(Object buildObj, ArrayList<Object> rowData, UEDataRowRule rule)
-            throws IOException {
+    protected void buildForUEOnPrintRecord(Object buildObj, ArrayList<Object> rowData, UEDataRowRule rule) throws IOException {
         JSONObject jobj = new JSONObject();
         UEBuildObject bobj = ((UEBuildObject) buildObj);
         for (int i = 0; i < bobj.header.size() && i < rowData.size(); ++i) {

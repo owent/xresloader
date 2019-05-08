@@ -6,7 +6,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVPrinter;
 import org.xresloader.core.ProgramOptions;
@@ -31,6 +30,11 @@ public class DataDstUECsv extends DataDstUEBase {
     private class UEBuildObject {
         StringBuffer sb = null;
         CSVPrinter csv = null;
+    }
+
+    @Override
+    protected boolean isRecursiveEnabled() {
+        return false;
     }
 
     @Override
@@ -61,15 +65,13 @@ public class DataDstUECsv extends DataDstUEBase {
 
     @SuppressWarnings("unchecked")
     @Override
-    protected void buildForUEOnPrintHeader(Object buildObj, ArrayList<Object> rowData, UEDataRowRule rule)
-            throws IOException {
+    protected void buildForUEOnPrintHeader(Object buildObj, ArrayList<Object> rowData, UEDataRowRule rule) throws IOException {
         ((UEBuildObject) buildObj).csv.printRecord(rowData);
     }
 
     @SuppressWarnings("unchecked")
     @Override
-    protected void buildForUEOnPrintRecord(Object buildObj, ArrayList<Object> rowData, UEDataRowRule rule)
-            throws IOException {
+    protected void buildForUEOnPrintRecord(Object buildObj, ArrayList<Object> rowData, UEDataRowRule rule) throws IOException {
         ((UEBuildObject) buildObj).csv.printRecord(rowData);
     }
 

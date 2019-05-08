@@ -1,13 +1,12 @@
 package org.xresloader.core.data.dst;
 
-import org.xresloader.core.ProgramOptions;
-import org.xresloader.core.data.err.ConvException;
-import org.msgpack.MessagePack;
-import org.msgpack.packer.Packer;
-
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.util.HashMap;
+import org.msgpack.MessagePack;
+import org.msgpack.packer.Packer;
+import org.xresloader.core.ProgramOptions;
+import org.xresloader.core.data.err.ConvException;
 
 /**
  * Created by owentou on 2014/10/10.
@@ -68,7 +67,7 @@ public class DataDstMsgPack extends DataDstJava {
      * 
      * @return 常量数据,不支持的时候返回空
      */
-    public final byte[] dumpConst(HashMap<String, Object> data) throws IOException {
+    public final byte[] dumpConst(HashMap<String, Object> data) throws ConvException, IOException {
         ByteArrayOutputStream out = new ByteArrayOutputStream();
         Packer packer = msgpack.createPacker(out);
 

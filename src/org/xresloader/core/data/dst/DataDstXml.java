@@ -1,20 +1,19 @@
 package org.xresloader.core.data.dst;
 
-import org.xresloader.core.ProgramOptions;
-import org.xresloader.core.data.err.ConvException;
-import org.xresloader.core.scheme.SchemeConf;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import org.dom4j.Attribute;
 import org.dom4j.Document;
 import org.dom4j.DocumentHelper;
 import org.dom4j.Element;
 import org.dom4j.io.OutputFormat;
 import org.dom4j.io.XMLWriter;
-
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import org.xresloader.core.ProgramOptions;
+import org.xresloader.core.data.err.ConvException;
+import org.xresloader.core.scheme.SchemeConf;
 
 /**
  * Created by owentou on 2014/10/10.
@@ -166,7 +165,7 @@ public class DataDstXml extends DataDstJava {
      * 
      * @return 常量数据,不支持的时候返回空
      */
-    public final byte[] dumpConst(HashMap<String, Object> data) throws IOException {
+    public final byte[] dumpConst(HashMap<String, Object> data) throws ConvException, IOException {
         // pretty print
         OutputFormat of = null;
         if (ProgramOptions.getInstance().prettyIndent <= 0) {

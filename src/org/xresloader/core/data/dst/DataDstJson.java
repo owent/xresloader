@@ -1,14 +1,13 @@
 package org.xresloader.core.data.dst;
 
-import org.xresloader.core.ProgramOptions;
-import org.xresloader.core.data.err.ConvException;
-import org.xresloader.core.scheme.SchemeConf;
-import org.json.JSONArray;
-import org.json.JSONObject;
-
 import java.io.IOException;
 import java.nio.charset.Charset;
 import java.util.HashMap;
+import org.json.JSONArray;
+import org.json.JSONObject;
+import org.xresloader.core.ProgramOptions;
+import org.xresloader.core.data.err.ConvException;
+import org.xresloader.core.scheme.SchemeConf;
 
 /**
  * Created by owentou on 2014/10/10.
@@ -55,7 +54,7 @@ public class DataDstJson extends DataDstJava {
      * 
      * @return 常量数据,不支持的时候返回空
      */
-    public final byte[] dumpConst(HashMap<String, Object> data) throws IOException {
+    public final byte[] dumpConst(HashMap<String, Object> data) throws ConvException, IOException {
         JSONObject wrapper = null;
 
         if (null != data) {

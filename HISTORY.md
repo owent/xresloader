@@ -5,6 +5,9 @@
 1. 增加protobuf插件 - org.xresloader.ue.ueTypeueTypeIsClassName (用于UE代码输出时直接输出UE支持的 ```TSoftClassPtr<T>``` 来替换 ```TSoftObjectPtr<T>``` 类型)
 2. 增加和优化xresloader内部的Message描述抽象
 3. 支持UE-JSON的嵌套模式导出
+4. TODO header的递归模式字段补全
+5. TODO source的递归模式字段补全的清空代码生成
+6. TODO 提取数据接口，默认使用pickValue
 
 2.1.1
 ------

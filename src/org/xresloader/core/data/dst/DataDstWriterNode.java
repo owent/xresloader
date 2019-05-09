@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import org.xresloader.Xresloader;
+import org.xresloader.core.data.err.ConvException;
 import org.xresloader.core.engine.IdentifyDescriptor;
 
 /**
@@ -275,7 +276,8 @@ public class DataDstWriterNode {
         return prefix.isEmpty() ? child_name : String.format("%s.%s", prefix, child_name);
     }
 
-    public DataDstChildrenNode addChild(String child_name, DataDstWriterNode node, Object _field_descriptor, boolean isList, boolean isRequired) {
+    public DataDstChildrenNode addChild(String child_name, DataDstWriterNode node, Object _field_descriptor, boolean isList, boolean isRequired)
+            throws ConvException {
         DataDstChildrenNode res = getChildren().getOrDefault(child_name, null);
         if (null == res) {
             res = new DataDstChildrenNode();
@@ -291,9 +293,22 @@ public class DataDstWriterNode {
         res.nodes.add(node);
 
         // 复制一份字段数据结构描述
-        node.fieldDescriptor = res.innerDesc;
+        node.setFieldDescriptor(res.innerDesc);
 
         return res;
+    }
+
+    public void setFieldDescriptor(DataDstFieldDescriptor fd) throws ConvException {
+        if (fd == null) {
+            this.fieldDescriptor = fd;
+            return;
+        }
+
+        if (fd.getTypeDescriptor() != this.typeDescriptor) {
+            throw new ConvException(String.format("type descriptor and field descriptor not match"));
+        }
+
+        this.fieldDescriptor = fd;
     }
 
     /**

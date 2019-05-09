@@ -254,7 +254,7 @@ public class DataDstPb extends DataDstImpl {
         String verifier = child.innerDesc.mutableExtension().verifier;
 
         if (null != identify.dataSourceFieldVerifier && !identify.dataSourceFieldVerifier.isEmpty()) {
-            if (verifier.isEmpty()) {
+            if (verifier == null || verifier.isEmpty()) {
                 verifier = identify.dataSourceFieldVerifier;
             } else {
                 verifier = verifier + "|" + identify.dataSourceFieldVerifier;
@@ -262,7 +262,7 @@ public class DataDstPb extends DataDstImpl {
         }
 
         // setup identifier
-        if (verifier.isEmpty()) {
+        if (verifier == null || verifier.isEmpty()) {
             identify.resetVerifier();
         } else {
             String[] all_verify_rules = verifier.split("\\|");
@@ -518,7 +518,7 @@ public class DataDstPb extends DataDstImpl {
      * @param name_list 当前命名列表
      * @return 查找到对应的数据源映射关系并非空则返回true，否则返回false
      */
-    private boolean test(DataDstWriterNode node, LinkedList<String> name_list) {
+    private boolean test(DataDstWriterNode node, LinkedList<String> name_list) throws ConvException {
         String prefix = String.join(".", name_list);
         boolean ret = false;
         Descriptors.Descriptor desc = (Descriptors.Descriptor) node.privateData;

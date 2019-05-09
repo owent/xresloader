@@ -3,6 +3,7 @@
  */
 package org.xresloader.core;
 
+import java.io.File;
 import java.io.FileOutputStream;
 import java.io.OutputStream;
 import java.util.HashMap;
@@ -101,6 +102,12 @@ public class main {
 
         try {
             String filePath = SchemeConf.getInstance().getOutputFileAbsPath();
+            File fout = new File(filePath);
+            File dout = fout.getParentFile();
+            if (!dout.exists()) {
+                dout.mkdirs();
+            }
+
             OutputStream fos = new FileOutputStream(filePath, false);
             byte[] data = outDesc.dumpConst(enum_data);
 
@@ -114,10 +121,10 @@ public class main {
             }
             fos.close();
         } catch (java.io.IOException e) {
-            ProgramOptions.getLoger().error("write data to file \"%s\" failed%d%s  > %s", ProgramOptions.getInstance().constPrint, endl, e.getMessage());
+            ProgramOptions.getLoger().error("write data to file \"%s\" failed%s  > %s", ProgramOptions.getInstance().constPrint, endl, e.getMessage());
             return 1;
         } catch (ConvException e) {
-            ProgramOptions.getLoger().error("write data to file \"%s\" failed%d%s  > %s", ProgramOptions.getInstance().constPrint, endl, e.getMessage());
+            ProgramOptions.getLoger().error("write data to file \"%s\" failed%s  > %s", ProgramOptions.getInstance().constPrint, endl, e.getMessage());
             return 1;
         }
 
@@ -234,6 +241,12 @@ public class main {
 
             try {
                 String filePath = SchemeConf.getInstance().getOutputFileAbsPath();
+                File fout = new File(filePath);
+                File dout = fout.getParentFile();
+                if (!dout.exists()) {
+                    dout.mkdirs();
+                }
+
                 OutputStream fos = new FileOutputStream(filePath, false);
                 byte[] data = outDesc.build(protoDesc);
 

@@ -3,7 +3,7 @@
         "GroupName": "XResConfig",
         "DestinationPath": "DataTable",
         "FactoryName": "ReimportDataTableFactory",
-        "Filenames": ["/mnt/d/workspace/github/xresloader/xresloader/sample/proto_v3/KindConst.json"],
+        "Filenames": ["/data/workspace/git/xresloader/xresloader/sample/proto_v3/KindConst.json"],
         "ImportSettings": {
             "ImportType": "ECSV_DataTable",
             "ImportRowStruct": "KindConst"
@@ -15,7 +15,7 @@
         "GroupName": "XResConfig",
         "DestinationPath": "Config",
         "FactoryName": "ReimportDataTableFactory",
-        "Filenames": ["/mnt/d/workspace/github/xresloader/xresloader/sample/proto_v3/ArrInArrCfg.json"],
+        "Filenames": ["/data/workspace/git/xresloader/xresloader/sample/proto_v3/ArrInArrCfg.json"],
         "ImportSettings": {
             "ImportType": "ECSV_DataTable",
             "ImportRowStruct": "ArrInArrCfg"

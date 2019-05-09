@@ -163,41 +163,70 @@ public class DataDstUEJson extends DataDstUEBase {
     }
 
     @Override
-    final protected Object pickValueField(DataDstWriterNode desc) throws ConvException {
+    final protected Object pickValueField(DataDstWriterNodeWrapper desc) throws ConvException {
         if (!isRecursiveEnabled()) {
-            return pickValueFieldBaseImpl(desc);
+            return pickValueFieldBaseImpl(desc, 0);
         }
 
         return pickValueFieldJsonImpl(desc);
     }
 
-    protected Object pickValueFieldJsonImpl(DataDstWriterNode desc) throws ConvException {
-        if (null == desc.identify || desc.getType() == DataDstWriterNode.JAVA_TYPE.MESSAGE) {
-            return false;
+    protected Object pickValueFieldJsonImpl(DataDstWriterNodeWrapper descWrapper) throws ConvException {
+        if (null == descWrapper || null == descWrapper.descs || descWrapper.descs.isEmpty()) {
+            return null;
         }
 
-        if (desc.getType() != JAVA_TYPE.MESSAGE) {
-            return pickValueFieldBaseImpl(desc);
+        DataDstWriterNode desc = descWrapper.GetWriterNode(0);
+        if (desc == null) {
+            return null;
         }
 
-        JSONObject ret = new JSONObject();
-
-        for (Entry<String, DataDstChildrenNode> varPair : desc.getChildren().entrySet()) {
-            if (varPair.getValue().nodes.isEmpty()) {
-                continue;
-            }
-
-            if (varPair.getValue().innerDesc.isList()) {
-                JSONArray subObj = new JSONArray();
-                for (DataDstWriterNode child : varPair.getValue().nodes) {
-                    subObj.put(pickValueFieldJsonImpl(child));
+        if (descWrapper.isList) {
+            JSONArray ret = new JSONArray();
+            for (DataDstWriterNode child : descWrapper.descs) {
+                Object val = pickValueFieldJsonImpl(child);
+                if (val != null) {
+                    ret.put(val);
                 }
-                ret.put(getIdentName(varPair.getKey()), subObj);
-            } else {
-                ret.put(getIdentName(varPair.getKey()), pickValueFieldJsonImpl(varPair.getValue().nodes.get(0)));
             }
+
+            return ret;
+        } else {
+            return pickValueFieldJsonImpl(desc);
+        }
+    }
+
+    protected Object pickValueFieldJsonImpl(DataDstWriterNode desc) throws ConvException {
+        if (desc == null) {
+            return null;
         }
 
-        return ret;
+        if (desc.getType() == JAVA_TYPE.MESSAGE) {
+            JSONObject ret = new JSONObject();
+            for (Entry<String, DataDstChildrenNode> child : desc.getChildren().entrySet()) {
+                Object val = null;
+                if (child.getValue().innerDesc.isList()) {
+                    JSONArray res = new JSONArray();
+
+                    for (DataDstWriterNode subNode : child.getValue().nodes) {
+                        Object v = pickValueFieldJsonImpl(subNode);
+                        if (v != null) {
+                            res.put(v);
+                        }
+                    }
+
+                    val = res;
+                } else if (!child.getValue().nodes.isEmpty()) {
+                    val = pickValueFieldJsonImpl(child.getValue().nodes.get(0));
+                }
+
+                if (val != null) {
+                    ret.put(getIdentName(child.getKey()), val);
+                }
+            }
+            return ret;
+        }
+
+        return pickValueFieldBaseImpl(desc);
     }
 }

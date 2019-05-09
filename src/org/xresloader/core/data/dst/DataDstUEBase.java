@@ -9,6 +9,7 @@ import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.Base64;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.regex.Pattern;
 import org.json.JSONArray;
@@ -17,7 +18,9 @@ import org.json.JSONObject;
 import org.json.JSONTokener;
 import org.xresloader.core.ProgramOptions;
 import org.xresloader.core.data.dst.DataDstWriterNode.DataDstChildrenNode;
+import org.xresloader.core.data.dst.DataDstWriterNode.DataDstFieldDescriptor;
 import org.xresloader.core.data.dst.DataDstWriterNode.DataDstFieldExt;
+import org.xresloader.core.data.dst.DataDstWriterNode.DataDstMessageDescriptor;
 import org.xresloader.core.data.dst.DataDstWriterNode.DataDstMessageExt;
 import org.xresloader.core.data.dst.DataDstWriterNode.JAVA_TYPE;
 import org.xresloader.core.data.err.ConvException;
@@ -633,7 +636,11 @@ public abstract class DataDstUEBase extends DataDstImpl {
         }
     }
 
-    private Object pickValueField(DataDstWriterNode desc) throws ConvException {
+    protected Object pickValueField(DataDstWriterNode desc) throws ConvException {
+        return pickValueFieldBaseImpl(desc);
+    }
+
+    protected Object pickValueFieldBaseImpl(DataDstWriterNode desc) throws ConvException {
         if (null == desc.identify || desc.getType() == DataDstWriterNode.JAVA_TYPE.MESSAGE) {
             return false;
         }
@@ -737,10 +744,8 @@ public abstract class DataDstUEBase extends DataDstImpl {
                 break;
             }
             case MESSAGE: {
-                boolean isRecursiveMode = isRecursiveEnabled();
-
                 // if it's top message or is not recursive mode
-                if (!isRecursiveMode) {
+                if (!isRecursiveEnabled()) {
                     isLeaf = false;
                 }
 
@@ -1045,19 +1050,24 @@ public abstract class DataDstUEBase extends DataDstImpl {
         }
     }
 
-    private final void writeCodeHeaderField(FileOutputStream fout, DataDstWriterNodeWrapper nodeWraper, String varName) throws IOException {
+    private final void writeCodeHeaderField(FileOutputStream fout, DataDstMessageDescriptor typeDesc, DataDstFieldDescriptor fieldDesc, String varName,
+            boolean isList, boolean isGenerated) throws IOException {
+        if ((varName == null || varName.isEmpty()) && fieldDesc != null) {
+            varName = fieldDesc.getName();
+        }
+
         fout.write(dumpString("\r\n"));
         DataDstWriterNode.JAVA_TYPE descType = DataDstWriterNode.JAVA_TYPE.STRING;
-        if (null != nodeWraper.descs && !nodeWraper.descs.isEmpty()) {
-            descType = nodeWraper.getJavaType();
-            if (null != nodeWraper.GetWriterNode(0).identify && null != nodeWraper.getFieldExtension().description) {
-                for (String descLine : nodeWraper.getFieldExtension().description.replace("\r\n", "\n").replace("\r", "\n").split("\n")) {
+        if (null != typeDesc) {
+            descType = typeDesc.getType();
+            if (null != fieldDesc) {
+                for (String descLine : fieldDesc.mutableExtension().description.replace("\r\n", "\n").replace("\r", "\n").split("\n")) {
                     fout.write(dumpString(String.format("    // %s\r\n", descLine)));
                 }
             }
         }
 
-        if (nodeWraper.isGenerated) {
+        if (isGenerated) {
             fout.write(dumpString(
                     String.format("    /** Field Type: %s, Name: %s. This field is generated for UE Editor compatible. **/\r\n", descType.name(), varName)));
         } else {
@@ -1088,7 +1098,7 @@ public abstract class DataDstUEBase extends DataDstImpl {
             }
 
             case MESSAGE: {
-                ueTypeName = getUETypeName(nodeWraper.GetWriterNode(0));
+                ueTypeName = getUETypeName(typeDesc);
                 break;
             }
 
@@ -1102,17 +1112,13 @@ public abstract class DataDstUEBase extends DataDstImpl {
         if (enable) {
             if (null == ueTypeName) {
                 String ueTypeNameIdent = null;
-                if (null != nodeWraper.descs && !nodeWraper.descs.isEmpty() && null != nodeWraper.GetWriterNode(0).identify) {
-                    ueTypeNameIdent = nodeWraper.getFieldExtension().mutableUE().ueTypeName;
+                if (null != fieldDesc) {
+                    ueTypeNameIdent = fieldDesc.mutableExtension().mutableUE().ueTypeName;
                 }
                 if (ueTypeNameIdent == null || ueTypeNameIdent.isEmpty()) {
-                    if (null != nodeWraper.descs && !nodeWraper.descs.isEmpty()) {
-                        ueTypeName = getUETypeName(nodeWraper.GetWriterNode(0));
-                    } else {
-                        ueTypeName = getUETypeName(null);
-                    }
+                    ueTypeName = getUETypeName(typeDesc);
                 } else {
-                    if (nodeWraper.getFieldExtension().mutableUE().ueTypeIsClass) {
+                    if (null != fieldDesc && fieldDesc.mutableExtension().mutableUE().ueTypeIsClass) {
                         ueTypeName = String.format("TSoftClassPtr< %s >", ueTypeNameIdent);
                     } else {
                         ueTypeName = String.format("TSoftObjectPtr< %s >", ueTypeNameIdent);
@@ -1121,7 +1127,7 @@ public abstract class DataDstUEBase extends DataDstImpl {
             }
             fout.write(dumpString(getHeaderFieldUProperty()));
 
-            if (nodeWraper.isList) {
+            if (isList) {
                 fout.write(dumpString(String.format("    TArray< %s > %s;\r\n", ueTypeName, varName)));
             } else {
                 fout.write(dumpString(String.format("    %s %s;\r\n", ueTypeName, varName)));
@@ -1130,6 +1136,14 @@ public abstract class DataDstUEBase extends DataDstImpl {
     }
 
     private final String getUETypeName(DataDstWriterNode desc) {
+        if (null == desc) {
+            return "FString";
+        }
+
+        return getUETypeName(desc.getTypeDescriptor());
+    }
+
+    private final String getUETypeName(DataDstMessageDescriptor desc) {
         if (null == desc) {
             return "FString";
         }
@@ -1157,17 +1171,9 @@ public abstract class DataDstUEBase extends DataDstImpl {
         }
     }
 
-    private final String getUETypeDefault(DataDstWriterNodeWrapper wrapper) {
-        DataDstWriterNode.JAVA_TYPE descType = wrapper.getJavaType();
-        String ueTypeNameIdent = null;
-
-        if (null != wrapper.descs && !wrapper.descs.isEmpty()) {
-            DataDstWriterNode dwn = wrapper.GetWriterNode(0);
-
-            if (null != dwn.identify) {
-                ueTypeNameIdent = dwn.getFieldExtension().mutableUE().ueTypeName;
-            }
-        }
+    private final String getUETypeDefault(DataDstFieldDescriptor field) {
+        DataDstWriterNode.JAVA_TYPE descType = field.getType();
+        String ueTypeNameIdent = field.mutableExtension().mutableUE().ueTypeName;
 
         if (ueTypeNameIdent != null && !ueTypeNameIdent.isEmpty()) {
             return "nullptr";
@@ -1195,25 +1201,30 @@ public abstract class DataDstUEBase extends DataDstImpl {
         }
     }
 
-    private final void writeUETypeSetDefaultCode(FileOutputStream sourceFs, String prefix, DataDstWriterNodeWrapper wrapper) throws IOException {
+    private final void writeUETypeSetDefaultCode(FileOutputStream sourceFs, String prefix, String varName, DataDstFieldDescriptor field, boolean isList)
+            throws IOException {
         // if (wrapper.desc != null && wrapper.desc)
-        if (wrapper.isList) {
-            sourceFs.write(dumpString(String.format("%s.%s.Reset(0);\r\n", prefix, wrapper.varName)));
+        if (isList) {
+            sourceFs.write(dumpString(String.format("%s.%s.Reset(0);\r\n", prefix, varName)));
             return;
         }
 
-        if (wrapper.descs.isEmpty()) {
-            return;
-        }
-
-        if (wrapper.children != null) {
-            for (DataDstWriterNodeWrapper child : wrapper.children) {
-                writeUETypeSetDefaultCode(sourceFs, String.format("%s.%s", prefix, wrapper.varName), child);
+        if (field.getType() == JAVA_TYPE.MESSAGE) {
+            // 如果开启了嵌套模式，还要补全未使用的字段，因为可能被别处用到
+            if (null != field.getTypeDescriptor().fields) {
+                for (HashMap.Entry<String, DataDstFieldDescriptor> varPair : field.getTypeDescriptor().fields.entrySet()) {
+                    boolean isFieldList = varPair.getValue().isList();
+                    if (!isRecursiveEnabled()) {
+                        isFieldList = false;
+                    }
+                    writeUETypeSetDefaultCode(sourceFs, String.format("%s.%s", prefix, varName), getIdentName(varPair.getKey()), varPair.getValue(),
+                            isFieldList);
+                }
             }
             return;
         }
 
-        sourceFs.write(dumpString(String.format("%s.%s = %s;\r\n", prefix, wrapper.varName, getUETypeDefault(wrapper))));
+        sourceFs.write(dumpString(String.format("%s.%s = %s;\r\n", prefix, varName, getUETypeDefault(field))));
     }
 
     private final String getUETypeFormat(DataDstWriterNode.JAVA_TYPE type) {
@@ -1357,19 +1368,52 @@ public abstract class DataDstUEBase extends DataDstImpl {
         // 加载代码
         FileOutputStream headerFs = createCodeHeaderFileStream(rule, codeInfo);
 
+        HashSet<String> dumpedFields = null;
+        if (isRecursiveEnabled()) {
+            dumpedFields = new HashSet<String>();
+        }
+
         for (int i = 0; i < rule.keyFields.size(); ++i) {
             DataDstWriterNodeWrapper desc_wraper = rule.keyFields.get(i);
-            writeCodeHeaderField(headerFs, desc_wraper, desc_wraper.varName);
+            DataDstWriterNode node = desc_wraper.GetWriterNode(0);
+            if (null == node) {
+                continue;
+            }
+
+            if (null != dumpedFields) {
+                dumpedFields.add(desc_wraper.varName);
+            }
+
+            writeCodeHeaderField(headerFs, node.getTypeDescriptor(), node.getFieldDescriptor(), desc_wraper.varName, desc_wraper.isList,
+                    desc_wraper.isGenerated);
         }
 
         for (int i = 0; i < rule.valueFields.size(); ++i) {
-            DataDstWriterNodeWrapper desc_wraper = rule.valueFields.get(i);
-            writeCodeHeaderField(headerFs, desc_wraper, desc_wraper.varName);
+            DataDstWriterNodeWrapper desc_wraper = rule.keyFields.get(i);
+            DataDstWriterNode node = desc_wraper.GetWriterNode(0);
+            if (null == node) {
+                continue;
+            }
+
+            if (null != dumpedFields) {
+                dumpedFields.add(desc_wraper.varName);
+            }
+
+            writeCodeHeaderField(headerFs, node.getTypeDescriptor(), node.getFieldDescriptor(), desc_wraper.varName, desc_wraper.isList,
+                    desc_wraper.isGenerated);
         }
 
-        // 如果开启了嵌套模式，还要补全未使用的字段，因为可能被别处用到
-        if (isRecursiveEnabled()) {
-            // TODO
+        // 如果开启了嵌套模式，还要补全未使用的字段
+        if (isRecursiveEnabled() && null != codeInfo.desc) {
+            for (HashMap.Entry<String, DataDstFieldDescriptor> varPair : codeInfo.desc.getTypeDescriptor().fields.entrySet()) {
+                String varName = getIdentName(varPair.getKey());
+                if (dumpedFields.contains(varName)) {
+                    continue;
+                }
+                dumpedFields.add(varName);
+
+                writeCodeHeaderField(headerFs, varPair.getValue().getTypeDescriptor(), varPair.getValue(), varName, varPair.getValue().isList(), false);
+            }
         }
 
         headerFs.write(dumpString(codeHeaderSuffix));
@@ -1573,13 +1617,43 @@ public abstract class DataDstUEBase extends DataDstImpl {
         // static void ClearDataRow(const F%s& TableRow);
         sourceFs.write(dumpString(String.format("void U%s::ClearRow(F%s& TableRow)\r\n", helperClazzName, codeInfo.clazzName)));
         sourceFs.write(dumpString("{\r\n"));
+        HashSet<String> dumpedFields = null;
+        if (isRecursiveEnabled()) {
+            dumpedFields = new HashSet<String>();
+        }
         for (int i = 0; i < rule.keyFields.size(); ++i) {
             DataDstWriterNodeWrapper wrapper = rule.keyFields.get(i);
-            writeUETypeSetDefaultCode(sourceFs, "    TableRow", wrapper);
+            DataDstWriterNode node = wrapper.GetWriterNode(0);
+            if (null == node || null == node.getFieldDescriptor()) {
+                continue;
+            }
+            writeUETypeSetDefaultCode(sourceFs, "    TableRow", wrapper.varName, node.getFieldDescriptor(), wrapper.isList);
+            if (null != dumpedFields) {
+                dumpedFields.add(wrapper.varName);
+            }
         }
         for (int i = 0; i < rule.valueFields.size(); ++i) {
             DataDstWriterNodeWrapper wrapper = rule.valueFields.get(i);
-            writeUETypeSetDefaultCode(sourceFs, "    TableRow", wrapper);
+            DataDstWriterNode node = wrapper.GetWriterNode(0);
+            if (null == node || null == node.getFieldDescriptor()) {
+                continue;
+            }
+            writeUETypeSetDefaultCode(sourceFs, "    TableRow", wrapper.varName, node.getFieldDescriptor(), wrapper.isList);
+            if (null != dumpedFields) {
+                dumpedFields.add(wrapper.varName);
+            }
+        }
+        // 如果开启了嵌套模式，还要补全未使用的字段，因为可能被别处用到
+        if (isRecursiveEnabled() && null != codeInfo.desc) {
+            for (HashMap.Entry<String, DataDstFieldDescriptor> varPair : codeInfo.desc.getTypeDescriptor().fields.entrySet()) {
+                String varName = getIdentName(varPair.getKey());
+                if (dumpedFields.contains(varName)) {
+                    continue;
+                }
+                dumpedFields.add(varName);
+
+                writeUETypeSetDefaultCode(sourceFs, "    TableRow", getIdentName(varPair.getKey()), varPair.getValue(), varPair.getValue().isList());
+            }
         }
         sourceFs.write(dumpString("}\r\n\r\n"));
 

@@ -6,9 +6,13 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.xresloader.core.ProgramOptions;
+import org.xresloader.core.data.dst.DataDstWriterNode.DataDstChildrenNode;
+import org.xresloader.core.data.dst.DataDstWriterNode.JAVA_TYPE;
+import org.xresloader.core.data.err.ConvException;
 import org.xresloader.core.scheme.SchemeConf;
 
 /**
@@ -156,5 +160,44 @@ public class DataDstUEJson extends DataDstUEBase {
         writeConstData(jo, data, "", getIdentName("Value"));
 
         return jo.toString(4);
+    }
+
+    @Override
+    final protected Object pickValueField(DataDstWriterNode desc) throws ConvException {
+        if (!isRecursiveEnabled()) {
+            return pickValueFieldBaseImpl(desc);
+        }
+
+        return pickValueFieldJsonImpl(desc);
+    }
+
+    protected Object pickValueFieldJsonImpl(DataDstWriterNode desc) throws ConvException {
+        if (null == desc.identify || desc.getType() == DataDstWriterNode.JAVA_TYPE.MESSAGE) {
+            return false;
+        }
+
+        if (desc.getType() != JAVA_TYPE.MESSAGE) {
+            return pickValueFieldBaseImpl(desc);
+        }
+
+        JSONObject ret = new JSONObject();
+
+        for (Entry<String, DataDstChildrenNode> varPair : desc.getChildren().entrySet()) {
+            if (varPair.getValue().nodes.isEmpty()) {
+                continue;
+            }
+
+            if (varPair.getValue().innerDesc.isList()) {
+                JSONArray subObj = new JSONArray();
+                for (DataDstWriterNode child : varPair.getValue().nodes) {
+                    subObj.put(pickValueFieldJsonImpl(child));
+                }
+                ret.put(getIdentName(varPair.getKey()), subObj);
+            } else {
+                ret.put(getIdentName(varPair.getKey()), pickValueFieldJsonImpl(varPair.getValue().nodes.get(0)));
+            }
+        }
+
+        return ret;
     }
 }

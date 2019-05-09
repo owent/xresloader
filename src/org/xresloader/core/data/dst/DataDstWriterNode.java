@@ -57,22 +57,25 @@ public class DataDstWriterNode {
     }
 
     static public class DataDstFieldDescriptor {
-        private JAVA_TYPE type = JAVA_TYPE.INT;
         private int index = 0;
         private String name = null;
         private boolean isListB = false;
-        public DataDstMessageDescriptor messageDescriptor = null;
+        private DataDstMessageDescriptor typeDescriptor = null;
         private DataDstFieldExt extension = null;
 
-        public DataDstFieldDescriptor(JAVA_TYPE type, int index, String name, boolean isList) {
-            this.type = type;
+        public DataDstFieldDescriptor(DataDstMessageDescriptor typeDesc, int index, String name, boolean isList) {
+            this.typeDescriptor = typeDesc;
             this.index = index;
             this.name = name;
             this.isListB = isList;
         }
 
         public JAVA_TYPE getType() {
-            return this.type;
+            return typeDescriptor.getType();
+        }
+
+        public DataDstMessageDescriptor getTypeDescriptor() {
+            return this.typeDescriptor;
         }
 
         public int getIndex() {
@@ -205,6 +208,10 @@ public class DataDstWriterNode {
         return children;
     }
 
+    public DataDstMessageDescriptor getTypeDescriptor() {
+        return this.typeDescriptor;
+    }
+
     public JAVA_TYPE getType() {
         return this.typeDescriptor.getType();
     }
@@ -223,6 +230,10 @@ public class DataDstWriterNode {
 
     public DataDstMessageExt getMessageExtension() {
         return this.typeDescriptor.mutableExtension();
+    }
+
+    public DataDstFieldDescriptor getFieldDescriptor() {
+        return this.fieldDescriptor;
     }
 
     public int getFieldIndex() {

@@ -18,6 +18,7 @@ import java.util.Map;
 import com.google.protobuf.ByteString;
 import com.google.protobuf.DescriptorProtos;
 import com.google.protobuf.Descriptors;
+import com.google.protobuf.Descriptors.FieldDescriptor.JavaType;
 import com.google.protobuf.DynamicMessage;
 import com.google.protobuf.UninitializedMessageException;
 import org.apache.commons.codec.binary.Hex;
@@ -26,7 +27,6 @@ import org.xresloader.core.ProgramOptions;
 import org.xresloader.core.data.dst.DataDstWriterNode.DataDstChildrenNode;
 import org.xresloader.core.data.dst.DataDstWriterNode.DataDstFieldDescriptor;
 import org.xresloader.core.data.dst.DataDstWriterNode.DataDstMessageDescriptor;
-import org.xresloader.core.data.dst.DataDstWriterNode.JAVA_TYPE;
 import org.xresloader.core.data.err.ConvException;
 import org.xresloader.core.data.src.DataContainer;
 import org.xresloader.core.data.src.DataSrcImpl;
@@ -340,15 +340,15 @@ public class DataDstPb extends DataDstImpl {
 
         innerDesc.fields = new HashMap<String, DataDstFieldDescriptor>();
         for (Descriptors.FieldDescriptor field : pbDesc.getFields()) {
-            DataDstFieldDescriptor innerField =
-                    new DataDstFieldDescriptor(pbTypeToInnerType(field.getType()), field.getNumber(), field.getName(), field.isRepeated());
+            Descriptors.Descriptor fieldPbDesc = null;
+            if (field.getJavaType() == JavaType.MESSAGE) {
+                fieldPbDesc = field.getMessageType();
+            }
+            DataDstFieldDescriptor innerField = new DataDstFieldDescriptor(mutableDataDstDescriptor(fieldPbDesc, pbTypeToInnerType(field.getType())),
+                    field.getNumber(), field.getName(), field.isRepeated());
             innerDesc.fields.put(field.getName(), innerField);
 
             setup_extension(innerField, field);
-
-            if (innerField.getType() == JAVA_TYPE.MESSAGE) {
-                innerField.messageDescriptor = mutableDataDstDescriptor(field.getMessageType(), JAVA_TYPE.MESSAGE);
-            }
         }
     }
 

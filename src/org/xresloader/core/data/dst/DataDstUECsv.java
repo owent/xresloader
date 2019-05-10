@@ -65,13 +65,15 @@ public class DataDstUECsv extends DataDstUEBase {
 
     @SuppressWarnings("unchecked")
     @Override
-    protected void buildForUEOnPrintHeader(Object buildObj, ArrayList<Object> rowData, UEDataRowRule rule) throws IOException {
+    protected void buildForUEOnPrintHeader(Object buildObj, ArrayList<Object> rowData, UEDataRowRule rule)
+            throws IOException {
         ((UEBuildObject) buildObj).csv.printRecord(rowData);
     }
 
     @SuppressWarnings("unchecked")
     @Override
-    protected void buildForUEOnPrintRecord(Object buildObj, ArrayList<Object> rowData, UEDataRowRule rule) throws IOException {
+    protected void buildForUEOnPrintRecord(Object buildObj, ArrayList<Object> rowData, UEDataRowRule rule,
+            UECodeInfo codeInfo) throws IOException {
         ((UEBuildObject) buildObj).csv.printRecord(rowData);
     }
 

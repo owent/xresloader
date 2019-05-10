@@ -834,7 +834,7 @@ class arr_in_arr_cfg :
   const ::google::protobuf::RepeatedPtrField< ::arr_in_arr >&
       arr() const;
 
-  // optional uint32 id = 1 [(.org.xresloader.field_description) = "This is a Key"];
+  // optional uint32 id = 1 [(.org.xresloader.field_description) = "This is a Key", (.org.xresloader.ue.key_tag) = 1];
   bool has_id() const;
   void clear_id();
   static const int kIdFieldNumber = 1;
@@ -1410,7 +1410,7 @@ arr_in_arr::mutable_str_arr() {
 
 // arr_in_arr_cfg
 
-// optional uint32 id = 1 [(.org.xresloader.field_description) = "This is a Key"];
+// optional uint32 id = 1 [(.org.xresloader.field_description) = "This is a Key", (.org.xresloader.ue.key_tag) = 1];
 inline bool arr_in_arr_cfg::has_id() const {
   return (_has_bits_[0] & 0x00000001u) != 0;
 }

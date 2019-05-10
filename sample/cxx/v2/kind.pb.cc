@@ -222,15 +222,15 @@ const char descriptor_table_protodef_kind_2eproto[] =
   "est_msg_verifier\022\022\n\ttest_id_1\030\221N \001(\r\022\022\n\t"
   "test_id_2\030\222N \001(\r\"a\n\narr_in_arr\022-\n\004name\030\001"
   " \001(\tB\037\232\?\034This is a test name in array\022\023\n"
-  "\007int_arr\030\002 \003(\005B\002\020\001\022\017\n\007str_arr\030\003 \003(\t\"i\n\016a"
-  "rr_in_arr_cfg\022\034\n\002id\030\001 \001(\rB\020\232\?\rThis is a "
-  "Key\022\030\n\003arr\030\002 \003(\0132\013.arr_in_arr:\037\352D\006helper"
-  "\312>\023Test arr_in_arr_cfg"
+  "\007int_arr\030\002 \003(\005B\002\020\001\022\017\n\007str_arr\030\003 \003(\t\"l\n\016a"
+  "rr_in_arr_cfg\022\037\n\002id\030\001 \001(\rB\023\350D\001\232\?\rThis is"
+  " a Key\022\030\n\003arr\030\002 \003(\0132\013.arr_in_arr:\037\352D\006hel"
+  "per\312>\023Test arr_in_arr_cfg"
   ;
 ::google::protobuf::internal::DescriptorTable descriptor_table_kind_2eproto = {
   false, InitDefaults_kind_2eproto, 
   descriptor_table_protodef_kind_2eproto,
-  "kind.proto", &assign_descriptors_table_kind_2eproto, 622,
+  "kind.proto", &assign_descriptors_table_kind_2eproto, 625,
 };
 
 void AddDescriptors_kind_2eproto() {
@@ -2224,7 +2224,7 @@ const char* arr_in_arr_cfg::_InternalParse(const char* begin, const char* end, v
     ptr = ::google::protobuf::io::Parse32(ptr, &tag);
     GOOGLE_PROTOBUF_PARSER_ASSERT(ptr);
     switch (tag >> 3) {
-      // optional uint32 id = 1 [(.org.xresloader.field_description) = "This is a Key"];
+      // optional uint32 id = 1 [(.org.xresloader.field_description) = "This is a Key", (.org.xresloader.ue.key_tag) = 1];
       case 1: {
         if (static_cast<::google::protobuf::uint8>(tag) != 8) goto handle_unusual;
         msg->set_id(::google::protobuf::internal::ReadVarint(&ptr));
@@ -2277,7 +2277,7 @@ bool arr_in_arr_cfg::MergePartialFromCodedStream(
     tag = p.first;
     if (!p.second) goto handle_unusual;
     switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
-      // optional uint32 id = 1 [(.org.xresloader.field_description) = "This is a Key"];
+      // optional uint32 id = 1 [(.org.xresloader.field_description) = "This is a Key", (.org.xresloader.ue.key_tag) = 1];
       case 1: {
         if (static_cast< ::google::protobuf::uint8>(tag) == (8 & 0xFF)) {
           HasBitSetters::set_has_id(this);
@@ -2329,7 +2329,7 @@ void arr_in_arr_cfg::SerializeWithCachedSizes(
   (void) cached_has_bits;
 
   cached_has_bits = _has_bits_[0];
-  // optional uint32 id = 1 [(.org.xresloader.field_description) = "This is a Key"];
+  // optional uint32 id = 1 [(.org.xresloader.field_description) = "This is a Key", (.org.xresloader.ue.key_tag) = 1];
   if (cached_has_bits & 0x00000001u) {
     ::google::protobuf::internal::WireFormatLite::WriteUInt32(1, this->id(), output);
   }
@@ -2357,7 +2357,7 @@ void arr_in_arr_cfg::SerializeWithCachedSizes(
   (void) cached_has_bits;
 
   cached_has_bits = _has_bits_[0];
-  // optional uint32 id = 1 [(.org.xresloader.field_description) = "This is a Key"];
+  // optional uint32 id = 1 [(.org.xresloader.field_description) = "This is a Key", (.org.xresloader.ue.key_tag) = 1];
   if (cached_has_bits & 0x00000001u) {
     target = ::google::protobuf::internal::WireFormatLite::WriteUInt32ToArray(1, this->id(), target);
   }
@@ -2402,7 +2402,7 @@ size_t arr_in_arr_cfg::ByteSizeLong() const {
     }
   }
 
-  // optional uint32 id = 1 [(.org.xresloader.field_description) = "This is a Key"];
+  // optional uint32 id = 1 [(.org.xresloader.field_description) = "This is a Key", (.org.xresloader.ue.key_tag) = 1];
   cached_has_bits = _has_bits_[0];
   if (cached_has_bits & 0x00000001u) {
     total_size += 1 +

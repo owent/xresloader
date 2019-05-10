@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -11,6 +12,7 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 import org.xresloader.core.ProgramOptions;
 import org.xresloader.core.data.dst.DataDstWriterNode.DataDstChildrenNode;
+import org.xresloader.core.data.dst.DataDstWriterNode.DataDstFieldDescriptor;
 import org.xresloader.core.data.dst.DataDstWriterNode.JAVA_TYPE;
 import org.xresloader.core.data.err.ConvException;
 import org.xresloader.core.scheme.SchemeConf;
@@ -57,17 +59,40 @@ public class DataDstUEJson extends DataDstUEBase {
 
     @SuppressWarnings("unchecked")
     @Override
-    protected void buildForUEOnPrintHeader(Object buildObj, ArrayList<Object> rowData, UEDataRowRule rule) throws IOException {
+    protected void buildForUEOnPrintHeader(Object buildObj, ArrayList<Object> rowData, UEDataRowRule rule)
+            throws IOException {
         ((UEBuildObject) buildObj).header = rowData;
     }
 
     @SuppressWarnings("unchecked")
     @Override
-    protected void buildForUEOnPrintRecord(Object buildObj, ArrayList<Object> rowData, UEDataRowRule rule) throws IOException {
+    protected void buildForUEOnPrintRecord(Object buildObj, ArrayList<Object> rowData, UEDataRowRule rule,
+            UECodeInfo codeInfo) throws IOException {
         JSONObject jobj = new JSONObject();
+        HashSet<String> dumpedFields = null;
+        if (isRecursiveEnabled()) {
+            dumpedFields = new HashSet<String>();
+        }
+
         UEBuildObject bobj = ((UEBuildObject) buildObj);
         for (int i = 0; i < bobj.header.size() && i < rowData.size(); ++i) {
             jobj.put(bobj.header.get(i).toString(), rowData.get(i));
+            if (null != dumpedFields) {
+                dumpedFields.add(bobj.header.get(i).toString());
+            }
+        }
+
+        // 需要补全空字段
+        if (null != dumpedFields && null != codeInfo.desc) {
+            for (HashMap.Entry<String, DataDstFieldDescriptor> varPair : codeInfo.desc.getTypeDescriptor().fields
+                    .entrySet()) {
+                String varName = getIdentName(varPair.getKey());
+                if (dumpedFields.contains(varName)) {
+                    continue;
+                }
+
+                jobj.put(varName, pickValueFieldJsonDefaultImpl(varPair.getValue()));
+            }
         }
 
         bobj.ja.put(jobj);
@@ -202,6 +227,11 @@ public class DataDstUEJson extends DataDstUEBase {
         }
 
         if (desc.getType() == JAVA_TYPE.MESSAGE) {
+            HashSet<String> dumpedFields = null;
+            if (isRecursiveEnabled()) {
+                dumpedFields = new HashSet<String>();
+            }
+
             JSONObject ret = new JSONObject();
             for (Entry<String, DataDstChildrenNode> child : desc.getChildren().entrySet()) {
                 Object val = null;
@@ -221,12 +251,65 @@ public class DataDstUEJson extends DataDstUEBase {
                 }
 
                 if (val != null) {
-                    ret.put(getIdentName(child.getKey()), val);
+                    String varName = getIdentName(child.getKey());
+                    ret.put(varName, val);
+
+                    if (null != dumpedFields) {
+                        dumpedFields.add(varName);
+                    }
                 }
             }
+
+            // 需要补全空字段
+            if (null != dumpedFields) {
+                for (HashMap.Entry<String, DataDstFieldDescriptor> varPair : desc.getTypeDescriptor().fields
+                        .entrySet()) {
+                    String varName = getIdentName(varPair.getKey());
+                    if (dumpedFields.contains(varName)) {
+                        continue;
+                    }
+
+                    ret.put(varName, pickValueFieldJsonDefaultImpl(varPair.getValue()));
+                }
+            }
+
             return ret;
         }
 
         return pickValueFieldBaseImpl(desc);
+    }
+
+    protected Object pickValueFieldJsonDefaultImpl(DataDstFieldDescriptor fd) {
+        if (fd.isList()) {
+            return new JSONArray();
+        }
+
+        switch (fd.getType()) {
+        case INT:
+        case LONG: {
+            return 0;
+        }
+        case BOOLEAN: {
+            return false;
+        }
+        case STRING:
+        case BYTES: {
+            return "";
+        }
+        case FLOAT:
+        case DOUBLE: {
+            return 0.0f;
+        }
+        case MESSAGE: {
+            JSONObject ret = new JSONObject();
+            for (HashMap.Entry<String, DataDstFieldDescriptor> varPair : fd.getTypeDescriptor().fields.entrySet()) {
+                ret.put(getIdentName(varPair.getKey()), pickValueFieldJsonDefaultImpl(varPair.getValue()));
+            }
+
+            return ret;
+        }
+        default:
+            return null;
+        }
     }
 }

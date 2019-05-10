@@ -264,7 +264,7 @@ public abstract class DataDstUEBase extends DataDstImpl {
                 } else {
                     originClazzName = fileName.substring(0, lastDot);
                 }
-                originClazzName = getIdentName(originClazzName);
+                originClazzName = "F" + getIdentName(originClazzName);
             } else {
                 originClazzName = getUETypeName(desc);
             }
@@ -494,8 +494,8 @@ public abstract class DataDstUEBase extends DataDstImpl {
     abstract protected void buildForUEOnPrintHeader(Object buildObj, ArrayList<Object> rowData, UEDataRowRule rule)
             throws IOException;
 
-    abstract protected void buildForUEOnPrintRecord(Object buildObj, ArrayList<Object> rowData, UEDataRowRule rule)
-            throws IOException;
+    abstract protected void buildForUEOnPrintRecord(Object buildObj, ArrayList<Object> rowData, UEDataRowRule rule,
+            UECodeInfo codeInfo) throws IOException;
 
     private UEDataRowRule rebuildCodeRule(UECodeInfo codeInfo) throws ConvException {
         if (null == codeInfo.desc) {
@@ -541,6 +541,10 @@ public abstract class DataDstUEBase extends DataDstImpl {
                 continue;
             }
 
+            if (rule.keyFields.isEmpty()) {
+                throw new ConvException("DataTable for UE must has a Name field or has field(s) with key_tag");
+            }
+
             // 输出header
             ArrayList<Object> row_data = new ArrayList<Object>();
             row_data.ensureCapacity(rule.keyFields.size() + rule.valueFields.size());
@@ -558,14 +562,16 @@ public abstract class DataDstUEBase extends DataDstImpl {
                 row_data.ensureCapacity(rule.keyFields.size() + rule.valueFields.size());
 
                 // 先用特殊规则导入Name字段,Name字段可能是合成字段
-                row_data.add(pickNameField(rule));
-                for (int i = 1; i < rule.keyFields.size(); ++i) {
-                    row_data.add(pickValueField(rule.keyFields.get(i)));
+                if (!rule.keyFields.isEmpty()) {
+                    row_data.add(pickNameField(rule));
+                    for (int i = 1; i < rule.keyFields.size(); ++i) {
+                        row_data.add(pickValueField(rule.keyFields.get(i)));
+                    }
                 }
                 for (int i = 0; i < rule.valueFields.size(); ++i) {
                     row_data.add(pickValueField(rule.valueFields.get(i)));
                 }
-                buildForUEOnPrintRecord(buildObj, row_data, rule);
+                buildForUEOnPrintRecord(buildObj, row_data, rule, codeInfo);
             }
 
             // 加载代码
@@ -610,6 +616,10 @@ public abstract class DataDstUEBase extends DataDstImpl {
     }
 
     private Object pickNameField(UEDataRowRule rule) throws ConvException {
+        if (rule.keyFields.isEmpty()) {
+            return null;
+        }
+
         // 如果是直接采用原始字段则直接返回原始字段数据
         if (null != rule.keyFields.get(0).descs && !rule.keyFields.get(0).descs.isEmpty()) {
             return pickValueField(rule.keyFields.get(0));
@@ -1423,19 +1433,8 @@ public abstract class DataDstUEBase extends DataDstImpl {
 
         // 如果没有key tag,则使用第一个非repeated\非message字段
         if (ret.keyFields.size() <= 1) {
-            for (int i = 0; i < ret.valueFields.size(); ++i) {
-                DataDstWriterNodeWrapper nw = ret.valueFields.get(i);
-                if (!nw.isList && nw.getJavaType() != JAVA_TYPE.MESSAGE) {
-                    namedKey.descs = nw.descs;
-                    break;
-                }
-            }
-
-            if (namedKey.descs == null || namedKey.descs.isEmpty()) {
-                throw new ConvException(
-                        String.format("There isn't ant key field for UE DataRow class \"%s\"", codeInfo.clazzName));
-            }
-            ret.nameType = getUENameType(namedKey);
+            ret.keyFields.clear();
+            ret.nameType = NAME_TYPE.STRING;
         }
 
         return ret;
@@ -1521,41 +1520,45 @@ public abstract class DataDstUEBase extends DataDstImpl {
         headerFs.write(dumpString("public:\r\n"));
         headerFs.write(dumpString(String.format("    U%s();\r\n", helperClazzName)));
         headerFs.write(dumpString("\r\n"));
-        headerFs.write(dumpString("    void OnReload();\r\n"));
-        headerFs.write(dumpString("\r\n"));
 
-        headerFs.write(dumpString(
-                String.format("    static FName GetRowName(%s);\r\n", getDataRowKeyToNameParamsSpecify(rule))));
-        headerFs.write(dumpString("\r\n"));
+        if (!rule.keyFields.isEmpty()) {
+            headerFs.write(dumpString("    void OnReload();\r\n"));
+            headerFs.write(dumpString("\r\n"));
 
-        headerFs.write(dumpString(getHeaderFieldUFunction()));
-        headerFs.write(dumpString(
-                String.format("    FName GetDataRowName(%s) const;\r\n", getDataRowKeyToNameParamsSpecify(rule))));
-        headerFs.write(dumpString("\r\n"));
+            headerFs.write(dumpString(
+                    String.format("    static FName GetRowName(%s);\r\n", getDataRowKeyToNameParamsSpecify(rule))));
+            headerFs.write(dumpString("\r\n"));
 
-        headerFs.write(dumpString(getHeaderFieldUFunction()));
-        headerFs.write(dumpString(
-                String.format("    FName GetTableRowName(const %s& TableRow) const;\r\n", codeInfo.clazzName)));
-        headerFs.write(dumpString("\r\n"));
+            headerFs.write(dumpString(getHeaderFieldUFunction()));
+            headerFs.write(dumpString(
+                    String.format("    FName GetDataRowName(%s) const;\r\n", getDataRowKeyToNameParamsSpecify(rule))));
+            headerFs.write(dumpString("\r\n"));
 
-        headerFs.write(dumpString(getHeaderFieldUFunction()));
-        headerFs.write(dumpString(String.format(
-                "    const %s& GetDataRowByName(const FName& Name, bool& IsValid) const;\r\n", codeInfo.clazzName)));
-        headerFs.write(dumpString("\r\n"));
+            headerFs.write(dumpString(getHeaderFieldUFunction()));
+            headerFs.write(dumpString(
+                    String.format("    FName GetTableRowName(const %s& TableRow) const;\r\n", codeInfo.clazzName)));
+            headerFs.write(dumpString("\r\n"));
 
-        headerFs.write(dumpString(getHeaderFieldUFunction()));
-        headerFs.write(dumpString(String.format("    const %s& GetDataRowByKey(%s, bool& IsValid) const;\r\n",
-                codeInfo.clazzName, getDataRowKeyToNameParamsSpecify(rule))));
-        headerFs.write(dumpString("\r\n"));
+            headerFs.write(dumpString(getHeaderFieldUFunction()));
+            headerFs.write(dumpString(
+                    String.format("    const %s& GetDataRowByName(const FName& Name, bool& IsValid) const;\r\n",
+                            codeInfo.clazzName)));
+            headerFs.write(dumpString("\r\n"));
 
-        headerFs.write(dumpString(String.format(
-                "    bool ForeachRow(TFunctionRef<void (const FName& Key, const %s& Value)> Predicate) const;\r\n",
-                codeInfo.clazzName)));
-        headerFs.write(dumpString("\r\n"));
+            headerFs.write(dumpString(getHeaderFieldUFunction()));
+            headerFs.write(dumpString(String.format("    const %s& GetDataRowByKey(%s, bool& IsValid) const;\r\n",
+                    codeInfo.clazzName, getDataRowKeyToNameParamsSpecify(rule))));
+            headerFs.write(dumpString("\r\n"));
 
-        headerFs.write(dumpString(getHeaderFieldUFunction()));
-        headerFs.write(dumpString("    UDataTable* GetRawDataTable(bool& IsValid) const;\r\n"));
-        headerFs.write(dumpString("\r\n"));
+            headerFs.write(dumpString(String.format(
+                    "    bool ForeachRow(TFunctionRef<void (const FName& Key, const %s& Value)> Predicate) const;\r\n",
+                    codeInfo.clazzName)));
+            headerFs.write(dumpString("\r\n"));
+
+            headerFs.write(dumpString(getHeaderFieldUFunction()));
+            headerFs.write(dumpString("    UDataTable* GetRawDataTable(bool& IsValid) const;\r\n"));
+            headerFs.write(dumpString("\r\n"));
+        }
 
         headerFs.write(dumpString(String.format("    static void ClearRow(%s& TableRow);\r\n", codeInfo.clazzName)));
         headerFs.write(dumpString("\r\n"));
@@ -1565,8 +1568,10 @@ public abstract class DataDstUEBase extends DataDstImpl {
         headerFs.write(dumpString("\r\n"));
 
         headerFs.write(dumpString("private:\r\n"));
-        headerFs.write(dumpString("    TSharedPtr<ConstructorHelpers::FObjectFinder<UDataTable> > Loader;\r\n"));
-        headerFs.write(dumpString("    UDataTable* DataTable;\r\n"));
+        if (!rule.keyFields.isEmpty()) {
+            headerFs.write(dumpString("    TSharedPtr<ConstructorHelpers::FObjectFinder<UDataTable> > Loader;\r\n"));
+            headerFs.write(dumpString("    UDataTable* DataTable;\r\n"));
+        }
         headerFs.write(dumpString(String.format("    %s Empty;\r\n", codeInfo.clazzName)));
         headerFs.write(dumpString("};\r\n"));
         headerFs.write(dumpString("\r\n"));
@@ -1614,110 +1619,115 @@ public abstract class DataDstUEBase extends DataDstImpl {
         // constructor
         sourceFs.write(dumpString(String.format("U%s::U%s() : Super()\r\n", helperClazzName, helperClazzName)));
         sourceFs.write(dumpString("{\r\n"));
-        sourceFs.write(dumpString(String.format(
-                "    this->Loader = MakeShareable(new ConstructorHelpers::FObjectFinder<UDataTable>(TEXT(\"DataTable'/Game/%s'\")));\r\n",
-                helperDestination)));
         // 初始化Empty
         sourceFs.write(dumpString(String.format("    U%s::ClearRow(this->Empty);\r\n", helperClazzName)));
-        // 初始化事件监听
-        sourceFs.write(dumpString("    if (this->Loader && this->Loader->Succeeded())\r\n"));
-        sourceFs.write(dumpString("    {\r\n"));
-        sourceFs.write(dumpString("        this->DataTable = this->Loader->Object;\r\n"));
-        sourceFs.write(dumpString(
-                String.format("        this->DataTable->OnDataTableChanged().AddUObject(this, &U%s::OnReload);\r\n",
-                        helperClazzName)));
-        sourceFs.write(dumpString("        OnReload();\r\n"));
-        sourceFs.write(dumpString("    }\r\n"));
-        sourceFs.write(dumpString("    else\r\n"));
-        sourceFs.write(dumpString("    {\r\n"));
-        sourceFs.write(dumpString("        this->DataTable = nullptr;\r\n"));
-        sourceFs.write(dumpString("    }\r\n"));
+        if (!rule.keyFields.isEmpty()) {
+            sourceFs.write(dumpString(String.format(
+                    "    this->Loader = MakeShareable(new ConstructorHelpers::FObjectFinder<UDataTable>(TEXT(\"DataTable'/Game/%s'\")));\r\n",
+                    helperDestination)));
+            // 初始化事件监听
+            sourceFs.write(dumpString("    if (this->Loader && this->Loader->Succeeded())\r\n"));
+            sourceFs.write(dumpString("    {\r\n"));
+            sourceFs.write(dumpString("        this->DataTable = this->Loader->Object;\r\n"));
+            sourceFs.write(dumpString(
+                    String.format("        this->DataTable->OnDataTableChanged().AddUObject(this, &U%s::OnReload);\r\n",
+                            helperClazzName)));
+            sourceFs.write(dumpString("        OnReload();\r\n"));
+            sourceFs.write(dumpString("    }\r\n"));
+            sourceFs.write(dumpString("    else\r\n"));
+            sourceFs.write(dumpString("    {\r\n"));
+            sourceFs.write(dumpString("        this->DataTable = nullptr;\r\n"));
+            sourceFs.write(dumpString("    }\r\n"));
+        }
         sourceFs.write(dumpString("}\r\n\r\n"));
 
-        // OnReload()
-        sourceFs.write(dumpString(String.format("void U%s::OnReload()\r\n", helperClazzName)));
-        sourceFs.write(dumpString("{\r\n"));
-        sourceFs.write(dumpString("    // TODO Rebuild Index\r\n"));
-        sourceFs.write(dumpString("}\r\n\r\n"));
+        if (!rule.keyFields.isEmpty()) {
+            // OnReload()
+            sourceFs.write(dumpString(String.format("void U%s::OnReload()\r\n", helperClazzName)));
+            sourceFs.write(dumpString("{\r\n"));
+            sourceFs.write(dumpString("    // TODO Rebuild Index\r\n"));
+            sourceFs.write(dumpString("}\r\n\r\n"));
 
-        // GetRowName(...)
-        sourceFs.write(dumpString(String.format("FName U%s::GetRowName(%s)\r\n", helperClazzName,
-                getDataRowKeyToNameParamsSpecify(rule))));
-        sourceFs.write(dumpString("{\r\n"));
-        sourceFs.write(dumpString(String.format("    return %s;\r\n", getDataRowKeyToNameExpression(rule))));
-        sourceFs.write(dumpString("}\r\n\r\n"));
+            // GetRowName(...)
+            sourceFs.write(dumpString(String.format("FName U%s::GetRowName(%s)\r\n", helperClazzName,
+                    getDataRowKeyToNameParamsSpecify(rule))));
+            sourceFs.write(dumpString("{\r\n"));
+            sourceFs.write(dumpString(String.format("    return %s;\r\n", getDataRowKeyToNameExpression(rule))));
+            sourceFs.write(dumpString("}\r\n\r\n"));
 
-        // GetDataRowName(...)
-        sourceFs.write(dumpString(String.format("FName U%s::GetDataRowName(%s) const\r\n", helperClazzName,
-                getDataRowKeyToNameParamsSpecify(rule))));
-        sourceFs.write(dumpString("{\r\n"));
-        sourceFs.write(dumpString(String.format("    return U%s::GetRowName(%s);\r\n", helperClazzName,
-                getDataRowKeyToNameParamsPass(rule, ""))));
-        sourceFs.write(dumpString("}\r\n\r\n"));
+            // GetDataRowName(...)
+            sourceFs.write(dumpString(String.format("FName U%s::GetDataRowName(%s) const\r\n", helperClazzName,
+                    getDataRowKeyToNameParamsSpecify(rule))));
+            sourceFs.write(dumpString("{\r\n"));
+            sourceFs.write(dumpString(String.format("    return U%s::GetRowName(%s);\r\n", helperClazzName,
+                    getDataRowKeyToNameParamsPass(rule, ""))));
+            sourceFs.write(dumpString("}\r\n\r\n"));
 
-        // GetTableRowName(const T& TableRow)
-        sourceFs.write(dumpString(String.format("FName U%s::GetTableRowName(const %s& TableRow) const\r\n",
-                helperClazzName, codeInfo.clazzName)));
-        sourceFs.write(dumpString("{\r\n"));
-        sourceFs.write(dumpString(
-                String.format("    return GetDataRowName(%s);\r\n", getDataRowKeyToNameParamsPass(rule, "TableRow."))));
-        sourceFs.write(dumpString("}\r\n\r\n"));
+            // GetTableRowName(const T& TableRow)
+            sourceFs.write(dumpString(String.format("FName U%s::GetTableRowName(const %s& TableRow) const\r\n",
+                    helperClazzName, codeInfo.clazzName)));
+            sourceFs.write(dumpString("{\r\n"));
+            sourceFs.write(dumpString(String.format("    return GetDataRowName(%s);\r\n",
+                    getDataRowKeyToNameParamsPass(rule, "TableRow."))));
+            sourceFs.write(dumpString("}\r\n\r\n"));
 
-        // GetTableRowName(const T& TableRow)
-        sourceFs.write(
-                dumpString(String.format("const %s& U%s::GetDataRowByName(const FName& Name, bool& %s) const\r\n",
-                        codeInfo.clazzName, helperClazzName, varIsValidName)));
-        sourceFs.write(dumpString("{\r\n"));
-        sourceFs.write(dumpString(String.format("    %s = false;\r\n", varIsValidName)));
-        sourceFs.write(dumpString("    if (!this->DataTable) {\r\n"));
-        sourceFs.write(dumpString("        return this->Empty;\r\n"));
-        sourceFs.write(dumpString("    }\r\n"));
-        sourceFs.write(dumpString("\r\n"));
-        sourceFs.write(dumpString("    FString Context;\r\n"));
-        sourceFs.write(dumpString(String.format("    %s* LookupRow = DataTable->FindRow<%s>(Name, Context, false);\r\n",
-                codeInfo.clazzName, codeInfo.clazzName)));
-        sourceFs.write(dumpString("    if (!LookupRow) {\r\n"));
-        sourceFs.write(dumpString("        return this->Empty;\r\n"));
-        sourceFs.write(dumpString("    };\r\n"));
-        sourceFs.write(dumpString("\r\n"));
-        sourceFs.write(dumpString(String.format("    %s = true;\r\n", varIsValidName)));
-        sourceFs.write(dumpString("    return *LookupRow;\r\n"));
-        sourceFs.write(dumpString("}\r\n\r\n"));
+            // GetTableRowName(const T& TableRow)
+            sourceFs.write(
+                    dumpString(String.format("const %s& U%s::GetDataRowByName(const FName& Name, bool& %s) const\r\n",
+                            codeInfo.clazzName, helperClazzName, varIsValidName)));
+            sourceFs.write(dumpString("{\r\n"));
+            sourceFs.write(dumpString(String.format("    %s = false;\r\n", varIsValidName)));
+            sourceFs.write(dumpString("    if (!this->DataTable) {\r\n"));
+            sourceFs.write(dumpString("        return this->Empty;\r\n"));
+            sourceFs.write(dumpString("    }\r\n"));
+            sourceFs.write(dumpString("\r\n"));
+            sourceFs.write(dumpString("    FString Context;\r\n"));
+            sourceFs.write(
+                    dumpString(String.format("    %s* LookupRow = DataTable->FindRow<%s>(Name, Context, false);\r\n",
+                            codeInfo.clazzName, codeInfo.clazzName)));
+            sourceFs.write(dumpString("    if (!LookupRow) {\r\n"));
+            sourceFs.write(dumpString("        return this->Empty;\r\n"));
+            sourceFs.write(dumpString("    };\r\n"));
+            sourceFs.write(dumpString("\r\n"));
+            sourceFs.write(dumpString(String.format("    %s = true;\r\n", varIsValidName)));
+            sourceFs.write(dumpString("    return *LookupRow;\r\n"));
+            sourceFs.write(dumpString("}\r\n\r\n"));
 
-        // GetDataRowByKey(..., bool& IsValid)
-        sourceFs.write(dumpString(String.format("const %s& U%s::GetDataRowByKey(%s, bool& %s) const\r\n",
-                codeInfo.clazzName, helperClazzName, getDataRowKeyToNameParamsSpecify(rule), varIsValidName)));
-        sourceFs.write(dumpString("{\r\n"));
-        sourceFs.write(dumpString(String.format("    return GetDataRowByName(GetDataRowName(%s), %s);\r\n",
-                getDataRowKeyToNameParamsPass(rule, ""), varIsValidName)));
-        sourceFs.write(dumpString("}\r\n\r\n"));
+            // GetDataRowByKey(..., bool& IsValid)
+            sourceFs.write(dumpString(String.format("const %s& U%s::GetDataRowByKey(%s, bool& %s) const\r\n",
+                    codeInfo.clazzName, helperClazzName, getDataRowKeyToNameParamsSpecify(rule), varIsValidName)));
+            sourceFs.write(dumpString("{\r\n"));
+            sourceFs.write(dumpString(String.format("    return GetDataRowByName(GetDataRowName(%s), %s);\r\n",
+                    getDataRowKeyToNameParamsPass(rule, ""), varIsValidName)));
+            sourceFs.write(dumpString("}\r\n\r\n"));
 
-        // ForeachRow(TFunctionRef<void (const FName& Key, const T& Value)> Predicate)
-        sourceFs.write(dumpString(String.format(
-                "bool U%s::ForeachRow(TFunctionRef<void (const FName& Key, const %s& Value)> Predicate) const\r\n",
-                helperClazzName, codeInfo.clazzName)));
-        sourceFs.write(dumpString("{\r\n"));
-        sourceFs.write(dumpString("    if (!this->DataTable) {\r\n"));
-        sourceFs.write(dumpString("        return false;\r\n"));
-        sourceFs.write(dumpString("    }\r\n"));
-        sourceFs.write(dumpString("\r\n"));
-        sourceFs.write(dumpString("    FString Context;\r\n"));
-        sourceFs.write(dumpString("    this->DataTable->ForeachRow(Context, Predicate);\r\n"));
-        sourceFs.write(dumpString("    return true;\r\n"));
-        sourceFs.write(dumpString("}\r\n\r\n"));
+            // ForeachRow(TFunctionRef<void (const FName& Key, const T& Value)> Predicate)
+            sourceFs.write(dumpString(String.format(
+                    "bool U%s::ForeachRow(TFunctionRef<void (const FName& Key, const %s& Value)> Predicate) const\r\n",
+                    helperClazzName, codeInfo.clazzName)));
+            sourceFs.write(dumpString("{\r\n"));
+            sourceFs.write(dumpString("    if (!this->DataTable) {\r\n"));
+            sourceFs.write(dumpString("        return false;\r\n"));
+            sourceFs.write(dumpString("    }\r\n"));
+            sourceFs.write(dumpString("\r\n"));
+            sourceFs.write(dumpString("    FString Context;\r\n"));
+            sourceFs.write(dumpString("    this->DataTable->ForeachRow(Context, Predicate);\r\n"));
+            sourceFs.write(dumpString("    return true;\r\n"));
+            sourceFs.write(dumpString("}\r\n\r\n"));
 
-        // GetRawDataTable(bool& IsValid)
-        sourceFs.write(dumpString(String.format("UDataTable* U%s::GetRawDataTable(bool& %s) const\r\n", helperClazzName,
-                varIsValidName)));
-        sourceFs.write(dumpString("{\r\n"));
-        sourceFs.write(dumpString(String.format("    %s = false;\r\n", varIsValidName)));
-        sourceFs.write(dumpString("    if (!this->DataTable) {\r\n"));
-        sourceFs.write(dumpString("        return NULL;\r\n"));
-        sourceFs.write(dumpString("    }\r\n"));
-        sourceFs.write(dumpString("\r\n"));
-        sourceFs.write(dumpString(String.format("    %s = true;\r\n", varIsValidName)));
-        sourceFs.write(dumpString("    return this->DataTable;\r\n"));
-        sourceFs.write(dumpString("}\r\n\r\n"));
+            // GetRawDataTable(bool& IsValid)
+            sourceFs.write(dumpString(String.format("UDataTable* U%s::GetRawDataTable(bool& %s) const\r\n",
+                    helperClazzName, varIsValidName)));
+            sourceFs.write(dumpString("{\r\n"));
+            sourceFs.write(dumpString(String.format("    %s = false;\r\n", varIsValidName)));
+            sourceFs.write(dumpString("    if (!this->DataTable) {\r\n"));
+            sourceFs.write(dumpString("        return NULL;\r\n"));
+            sourceFs.write(dumpString("    }\r\n"));
+            sourceFs.write(dumpString("\r\n"));
+            sourceFs.write(dumpString(String.format("    %s = true;\r\n", varIsValidName)));
+            sourceFs.write(dumpString("    return this->DataTable;\r\n"));
+            sourceFs.write(dumpString("}\r\n\r\n"));
+        }
 
         // static void ClearDataRow(const %s& TableRow);
         sourceFs.write(

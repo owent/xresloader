@@ -43,13 +43,15 @@ const char descriptor_table_protodef_xresloader_5fue_2eproto[] =
   "\032 google/protobuf/descriptor.proto:/\n\007ke"
   "y_tag\022\035.google.protobuf.FieldOptions\030\315\010 "
   "\001(\003:2\n\nueTypeName\022\035.google.protobuf.Fiel"
-  "dOptions\030\316\010 \001(\t:0\n\006helper\022\037.google.proto"
-  "buf.MessageOptions\030\315\010 \001(\tB\002H\001"
+  "dOptions\030\316\010 \001(\t:5\n\rueTypeIsClass\022\035.googl"
+  "e.protobuf.FieldOptions\030\317\010 \001(\010:0\n\006helper"
+  "\022\037.google.protobuf.MessageOptions\030\315\010 \001(\t"
+  "B\002H\001"
   ;
 ::google::protobuf::internal::DescriptorTable descriptor_table_xresloader_5fue_2eproto = {
   false, InitDefaults_xresloader_5fue_2eproto, 
   descriptor_table_protodef_xresloader_5fue_2eproto,
-  "xresloader_ue.proto", &assign_descriptors_table_xresloader_5fue_2eproto, 229,
+  "xresloader_ue.proto", &assign_descriptors_table_xresloader_5fue_2eproto, 284,
 };
 
 void AddDescriptors_xresloader_5fue_2eproto() {
@@ -72,6 +74,9 @@ const ::std::string ueTypeName_default("");
 ::google::protobuf::internal::ExtensionIdentifier< ::google::protobuf::FieldOptions,
     ::google::protobuf::internal::StringTypeTraits, 9, false >
   ueTypeName(kUeTypeNameFieldNumber, ueTypeName_default);
+::google::protobuf::internal::ExtensionIdentifier< ::google::protobuf::FieldOptions,
+    ::google::protobuf::internal::PrimitiveTypeTraits< bool >, 8, false >
+  ueTypeIsClass(kUeTypeIsClassFieldNumber, false);
 const ::std::string helper_default("");
 ::google::protobuf::internal::ExtensionIdentifier< ::google::protobuf::MessageOptions,
     ::google::protobuf::internal::StringTypeTraits, 9, false >

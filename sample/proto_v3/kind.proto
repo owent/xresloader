@@ -39,6 +39,6 @@ message arr_in_arr_cfg {
     option (org.xresloader.ue.helper)       = "helper";
     option (org.xresloader.msg_description) = "Test arr_in_arr_cfg";
 
-    uint32   id             = 1 [ (org.xresloader.field_description) = "This is a Key" ];
+    uint32   id             = 1 [ (org.xresloader.ue.key_tag) = 1, (org.xresloader.field_description) = "This is a Key" ];
     repeated arr_in_arr arr = 2;
 }

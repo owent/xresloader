@@ -3,7 +3,7 @@
         "GroupName": "XResConfig",
         "DestinationPath": "DataTable",
         "FactoryName": "ReimportDataTableFactory",
-        "Filenames": ["/data/workspace/git/xresloader/xresloader/sample/proto_v3/csv/KindConst.csv"],
+        "Filenames": ["/mnt/d/workspace/projs/xresloader/xresloader/sample/proto_v3/csv/KindConst.csv"],
         "ImportSettings": {
             "ImportType": "ECSV_DataTable",
             "ImportRowStruct": "KindConst"
@@ -16,6 +16,66 @@
         "DestinationPath": "Config",
         "FactoryName": "ReimportDataTableFactory",
         "Filenames": ["/data/workspace/git/xresloader/xresloader/sample/proto_v3/csv/ArrInArrCfg.csv"],
+        "ImportSettings": {
+            "ImportType": "ECSV_DataTable",
+            "ImportRowStruct": "ArrInArrCfg"
+        },
+        "bSkipReadOnly": "true",
+        "bReplaceExisting": "true"
+    },
+    {
+        "GroupName": "XResConfig",
+        "DestinationPath": "Config",
+        "FactoryName": "ReimportDataTableFactory",
+        "Filenames": ["/mnt/d/workspace/projs/xresloader/xresloader/sample/proto_v3/csv/ArrInArrCfg.csv"],
+        "ImportSettings": {
+            "ImportType": "ECSV_DataTable",
+            "ImportRowStruct": "ArrInArrCfg"
+        },
+        "bSkipReadOnly": "true",
+        "bReplaceExisting": "true"
+    },
+    {
+        "GroupName": "XResConfig",
+        "DestinationPath": "DataTable",
+        "FactoryName": "ReimportDataTableFactory",
+        "Filenames": ["/mnt/d/workspace/projs/xresloader/xresloader/sample/proto_v3/csv/KindConst.csv"],
+        "ImportSettings": {
+            "ImportType": "ECSV_DataTable",
+            "ImportRowStruct": "KindConst"
+        },
+        "bSkipReadOnly": "true",
+        "bReplaceExisting": "true"
+    },
+    {
+        "GroupName": "XResConfig",
+        "DestinationPath": "Config",
+        "FactoryName": "ReimportDataTableFactory",
+        "Filenames": ["/mnt/d/workspace/projs/xresloader/xresloader/sample/proto_v3/csv/ArrInArrCfg.csv"],
+        "ImportSettings": {
+            "ImportType": "ECSV_DataTable",
+            "ImportRowStruct": "ArrInArrCfg"
+        },
+        "bSkipReadOnly": "true",
+        "bReplaceExisting": "true"
+    },
+    {
+        "GroupName": "XResConfig",
+        "DestinationPath": "DataTable",
+        "FactoryName": "ReimportDataTableFactory",
+        "Filenames": ["/mnt/d/workspace/projs/xresloader/xresloader/sample/proto_v3/csv/KindConst.csv"],
+        "ImportSettings": {
+            "ImportType": "ECSV_DataTable",
+            "ImportRowStruct": "KindConst"
+        },
+        "bSkipReadOnly": "true",
+        "bReplaceExisting": "true"
+    },
+    {
+        "GroupName": "XResConfig",
+        "DestinationPath": "Config",
+        "FactoryName": "ReimportDataTableFactory",
+        "Filenames": ["/mnt/d/workspace/projs/xresloader/xresloader/sample/proto_v3/csv/ArrInArrCfg.csv"],
         "ImportSettings": {
             "ImportType": "ECSV_DataTable",
             "ImportRowStruct": "ArrInArrCfg"

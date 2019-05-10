@@ -17,18 +17,13 @@ struct FArrInArrCfg : public FTableRowBase
 
     // Start of fields
     // This is a Key
-    /** Field Type: INT, Name: Name. This field is generated for UE Editor compatible. **/
+    /** Field Type: INT, Name: Id **/
     UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "XResConfig")
-    int32 Name;
+    int32 Id;
 
     /** Field Type: MESSAGE, Name: Arr **/
     UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "XResConfig")
     TArray< FArrInArr > Arr;
-
-    // This is a Key
-    /** Field Type: INT, Name: Id **/
-    UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "XResConfig")
-    int32 Id;
 
 };
 
@@ -43,10 +38,10 @@ public:
 
     void OnReload();
 
-    static FName GetRowName(int32 Name);
+    static FName GetRowName(int32 Id);
 
     UFUNCTION(BlueprintCallable, Category = "XResConfig")
-    FName GetDataRowName(int32 Name) const;
+    FName GetDataRowName(int32 Id) const;
 
     UFUNCTION(BlueprintCallable, Category = "XResConfig")
     FName GetTableRowName(const FArrInArrCfg& TableRow) const;
@@ -55,7 +50,7 @@ public:
     const FArrInArrCfg& GetDataRowByName(const FName& Name, bool& IsValid) const;
 
     UFUNCTION(BlueprintCallable, Category = "XResConfig")
-    const FArrInArrCfg& GetDataRowByKey(int32 Name, bool& IsValid) const;
+    const FArrInArrCfg& GetDataRowByKey(int32 Id, bool& IsValid) const;
 
     bool ForeachRow(TFunctionRef<void (const FName& Key, const FArrInArrCfg& Value)> Predicate) const;
 

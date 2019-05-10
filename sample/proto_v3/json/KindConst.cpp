@@ -6,8 +6,8 @@
 
 UKindConstHelper::UKindConstHelper() : Super()
 {
-    this->Loader = MakeShareable(new ConstructorHelpers::FObjectFinder<UDataTable>(TEXT("DataTable'/Game/DataTable/KindConst'")));
     UKindConstHelper::ClearRow(this->Empty);
+    this->Loader = MakeShareable(new ConstructorHelpers::FObjectFinder<UDataTable>(TEXT("DataTable'/Game/DataTable/KindConst'")));
     if (this->Loader && this->Loader->Succeeded())
     {
         this->DataTable = this->Loader->Object;

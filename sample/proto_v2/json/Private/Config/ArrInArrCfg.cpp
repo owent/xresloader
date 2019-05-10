@@ -8,8 +8,8 @@
 
 UArrInArrCfgHelper::UArrInArrCfgHelper() : Super()
 {
-    this->Loader = MakeShareable(new ConstructorHelpers::FObjectFinder<UDataTable>(TEXT("DataTable'/Game/Config/ArrInArrCfg'")));
     UArrInArrCfgHelper::ClearRow(this->Empty);
+    this->Loader = MakeShareable(new ConstructorHelpers::FObjectFinder<UDataTable>(TEXT("DataTable'/Game/Config/ArrInArrCfg'")));
     if (this->Loader && this->Loader->Succeeded())
     {
         this->DataTable = this->Loader->Object;
@@ -27,19 +27,19 @@ void UArrInArrCfgHelper::OnReload()
     // TODO Rebuild Index
 }
 
-FName UArrInArrCfgHelper::GetRowName(int32 Name)
+FName UArrInArrCfgHelper::GetRowName(int32 Id)
 {
-    return *FString::Printf(TEXT("%lld"), static_cast<long long>(Name));
+    return *FString::Printf(TEXT("%lld"), static_cast<long long>(Id) * 1);
 }
 
-FName UArrInArrCfgHelper::GetDataRowName(int32 Name) const
+FName UArrInArrCfgHelper::GetDataRowName(int32 Id) const
 {
-    return UArrInArrCfgHelper::GetRowName(Name);
+    return UArrInArrCfgHelper::GetRowName(Id);
 }
 
 FName UArrInArrCfgHelper::GetTableRowName(const FArrInArrCfg& TableRow) const
 {
-    return GetDataRowName(TableRow.Name);
+    return GetDataRowName(TableRow.Id);
 }
 
 const FArrInArrCfg& UArrInArrCfgHelper::GetDataRowByName(const FName& Name, bool& IsValid) const
@@ -59,9 +59,9 @@ const FArrInArrCfg& UArrInArrCfgHelper::GetDataRowByName(const FName& Name, bool
     return *LookupRow;
 }
 
-const FArrInArrCfg& UArrInArrCfgHelper::GetDataRowByKey(int32 Name, bool& IsValid) const
+const FArrInArrCfg& UArrInArrCfgHelper::GetDataRowByKey(int32 Id, bool& IsValid) const
 {
-    return GetDataRowByName(GetDataRowName(Name), IsValid);
+    return GetDataRowByName(GetDataRowName(Id), IsValid);
 }
 
 bool UArrInArrCfgHelper::ForeachRow(TFunctionRef<void (const FName& Key, const FArrInArrCfg& Value)> Predicate) const
@@ -88,9 +88,8 @@ UDataTable* UArrInArrCfgHelper::GetRawDataTable(bool& IsValid) const
 
 void UArrInArrCfgHelper::ClearRow(FArrInArrCfg& TableRow)
 {
-    TableRow.Name = 0;
-    TableRow.Arr.Reset(0);
     TableRow.Id = 0;
+    TableRow.Arr.Reset(0);
 }
 
 void UArrInArrCfgHelper::ClearDataRow(FArrInArrCfg& TableRow) const

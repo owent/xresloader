@@ -68,6 +68,10 @@ static const int kUeTypeNameFieldNumber = 1102;
 extern ::google::protobuf::internal::ExtensionIdentifier< ::google::protobuf::FieldOptions,
     ::google::protobuf::internal::StringTypeTraits, 9, false >
   ueTypeName;
+static const int kUeTypeIsClassFieldNumber = 1103;
+extern ::google::protobuf::internal::ExtensionIdentifier< ::google::protobuf::FieldOptions,
+    ::google::protobuf::internal::PrimitiveTypeTraits< bool >, 8, false >
+  ueTypeIsClass;
 static const int kHelperFieldNumber = 1101;
 extern ::google::protobuf::internal::ExtensionIdentifier< ::google::protobuf::MessageOptions,
     ::google::protobuf::internal::StringTypeTraits, 9, false >

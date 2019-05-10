@@ -11,6 +11,7 @@ public final class XresloaderUe {
     registry.add(org.xresloader.ue.XresloaderUe.ueTypeName);
     registry.add(org.xresloader.ue.XresloaderUe.ueTypeIsClass);
     registry.add(org.xresloader.ue.XresloaderUe.helper);
+    registry.add(org.xresloader.ue.XresloaderUe.notDataTable);
   }
 
   public static void registerAllExtensions(
@@ -33,7 +34,7 @@ public final class XresloaderUe {
           .newFileScopedGeneratedExtension(
         java.lang.Long.class,
         null);
-  public static final int UETYPENAME_FIELD_NUMBER = 1102;
+  public static final int UE_TYPE_NAME_FIELD_NUMBER = 1102;
   /**
    * <pre>
    * UE内部类型(比如: TSoftObjectPtr&lt;UTexture&gt;)
@@ -48,7 +49,7 @@ public final class XresloaderUe {
           .newFileScopedGeneratedExtension(
         java.lang.String.class,
         null);
-  public static final int UETYPEISCLASS_FIELD_NUMBER = 1103;
+  public static final int UE_TYPE_IS_CLASS_FIELD_NUMBER = 1103;
   /**
    * <pre>
    * UE内部类型是否是Class(如果为true，会生成: TSoftClassPtr&lt;T&gt; 而不是 TSoftObjectPtr&lt;T&gt;)
@@ -78,6 +79,21 @@ public final class XresloaderUe {
           .newFileScopedGeneratedExtension(
         java.lang.String.class,
         null);
+  public static final int NOT_DATA_TABLE_FIELD_NUMBER = 1102;
+  /**
+   * <pre>
+   * 不是DataTable，helper类里不生成加载代码
+   * </pre>
+   *
+   * <code>extend .google.protobuf.MessageOptions { ... }</code>
+   */
+  public static final
+    com.google.protobuf.GeneratedMessage.GeneratedExtension<
+      com.google.protobuf.DescriptorProtos.MessageOptions,
+      java.lang.Boolean> notDataTable = com.google.protobuf.GeneratedMessage
+          .newFileScopedGeneratedExtension(
+        java.lang.Boolean.class,
+        null);
 
   public static com.google.protobuf.Descriptors.FileDescriptor
       getDescriptor() {
@@ -90,11 +106,13 @@ public final class XresloaderUe {
       "\n!extensions/v3/xresloader_ue.proto\022\021org" +
       ".xresloader.ue\032 google/protobuf/descript" +
       "or.proto:/\n\007key_tag\022\035.google.protobuf.Fi" +
-      "eldOptions\030\315\010 \001(\003:2\n\nueTypeName\022\035.google" +
-      ".protobuf.FieldOptions\030\316\010 \001(\t:5\n\rueTypeI" +
-      "sClass\022\035.google.protobuf.FieldOptions\030\317\010" +
-      " \001(\010:0\n\006helper\022\037.google.protobuf.Message" +
-      "Options\030\315\010 \001(\tb\006proto3"
+      "eldOptions\030\315\010 \001(\003:4\n\014ue_type_name\022\035.goog" +
+      "le.protobuf.FieldOptions\030\316\010 \001(\t:8\n\020ue_ty" +
+      "pe_is_class\022\035.google.protobuf.FieldOptio" +
+      "ns\030\317\010 \001(\010:0\n\006helper\022\037.google.protobuf.Me" +
+      "ssageOptions\030\315\010 \001(\t:8\n\016not_data_table\022\037." +
+      "google.protobuf.MessageOptions\030\316\010 \001(\010b\006p" +
+      "roto3"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -113,6 +131,7 @@ public final class XresloaderUe {
     ueTypeName.internalInit(descriptor.getExtensions().get(1));
     ueTypeIsClass.internalInit(descriptor.getExtensions().get(2));
     helper.internalInit(descriptor.getExtensions().get(3));
+    notDataTable.internalInit(descriptor.getExtensions().get(4));
     com.google.protobuf.DescriptorProtos.getDescriptor();
   }
 

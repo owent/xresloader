@@ -67,15 +67,19 @@ extern ::google::protobuf::internal::ExtensionIdentifier< ::google::protobuf::Fi
 static const int kUeTypeNameFieldNumber = 1102;
 extern ::google::protobuf::internal::ExtensionIdentifier< ::google::protobuf::FieldOptions,
     ::google::protobuf::internal::StringTypeTraits, 9, false >
-  ueTypeName;
+  ue_type_name;
 static const int kUeTypeIsClassFieldNumber = 1103;
 extern ::google::protobuf::internal::ExtensionIdentifier< ::google::protobuf::FieldOptions,
     ::google::protobuf::internal::PrimitiveTypeTraits< bool >, 8, false >
-  ueTypeIsClass;
+  ue_type_is_class;
 static const int kHelperFieldNumber = 1101;
 extern ::google::protobuf::internal::ExtensionIdentifier< ::google::protobuf::MessageOptions,
     ::google::protobuf::internal::StringTypeTraits, 9, false >
   helper;
+static const int kNotDataTableFieldNumber = 1102;
+extern ::google::protobuf::internal::ExtensionIdentifier< ::google::protobuf::MessageOptions,
+    ::google::protobuf::internal::PrimitiveTypeTraits< bool >, 8, false >
+  not_data_table;
 
 // ===================================================================
 

@@ -2,11 +2,13 @@
 ==========
 2.2.0
 ------
-1. 增加protobuf插件 - org.xresloader.ue.ueTypeueTypeIsClassName (用于UE代码输出时直接输出UE支持的 ```TSoftClassPtr<T>``` 来替换 ```TSoftObjectPtr<T>``` 类型)
+1. 增加protobuf插件 - org.xresloader.ue.ue_type_is_class (用于UE代码输出时直接输出UE支持的 ```TSoftClassPtr<T>``` 来替换 ```TSoftObjectPtr<T>``` 类型)
 2. 增加和优化xresloader内部的Message描述抽象
 3. 支持UE-JSON的嵌套模式导出
 4. 自动创建输出目录
 5. 不再自动猜测Name字段，必须指定key_tag或者显式命名Name字段。（用于区分嵌套子类型和转表类型）
+6. 优化统一插件命名
+7. 增加protobuf插件 - org.xresloader.ue.not_data_table (用于UE代码输出时显式指定不输出转表数据加载代码)
 
 2.1.1
 ------
@@ -21,7 +23,7 @@
 3. 增加protobuf插件 - org.xresloader.msg_description
 4. 增加protobuf插件 - org.xresloader.field_description
 5. 增加protobuf插件 - org.xresloader.ue.key_tag (用于UE代码输出时输出Key -> Name 的函数)
-6. 增加protobuf插件 - org.xresloader.ue.ueTypeName (用于UE代码输出时直接输出UE支持的 ```TSoftObjectPtr<T>``` 类型)
+6. 增加protobuf插件 - org.xresloader.ue.ue_type_name (用于UE代码输出时直接输出UE支持的 ```TSoftObjectPtr<T>``` 类型)
 7. 增加protobuf插件 - org.xresloader.ue.helper (用于UE代码输出时的Utility类的类名后缀)
 8. sample里增加一个协议里的verifier示例
 

@@ -1514,6 +1514,14 @@ public abstract class DataDstUEBase extends DataDstImpl {
             return;
         }
 
+        boolean enableDataTable = true;
+        if (rule.keyFields.isEmpty()) {
+            enableDataTable = false;
+        }
+        if (null != codeInfo.desc && codeInfo.desc.getMessageExtension().mutableUE().notDataTable) {
+            enableDataTable = false;
+        }
+
         headerFs.write(dumpString("\r\n"));
         headerFs.write(dumpString("\r\n"));
         headerFs.write(dumpString("\r\n"));
@@ -1529,7 +1537,7 @@ public abstract class DataDstUEBase extends DataDstImpl {
         headerFs.write(dumpString(String.format("    U%s();\r\n", helperClazzName)));
         headerFs.write(dumpString("\r\n"));
 
-        if (!rule.keyFields.isEmpty()) {
+        if (enableDataTable) {
             headerFs.write(dumpString("    void OnReload();\r\n"));
             headerFs.write(dumpString("\r\n"));
 
@@ -1576,7 +1584,7 @@ public abstract class DataDstUEBase extends DataDstImpl {
         headerFs.write(dumpString("\r\n"));
 
         headerFs.write(dumpString("private:\r\n"));
-        if (!rule.keyFields.isEmpty()) {
+        if (enableDataTable) {
             headerFs.write(dumpString("    TSharedPtr<ConstructorHelpers::FObjectFinder<UDataTable> > Loader;\r\n"));
             headerFs.write(dumpString("    UDataTable* DataTable;\r\n"));
         }
@@ -1602,6 +1610,14 @@ public abstract class DataDstUEBase extends DataDstImpl {
 
         String varIsValidName = "IsValid";
         boolean varIsValidCheck = true;
+        boolean enableDataTable = true;
+        if (rule.keyFields.isEmpty()) {
+            enableDataTable = false;
+        }
+        if (null != codeInfo.desc && codeInfo.desc.getMessageExtension().mutableUE().notDataTable) {
+            enableDataTable = false;
+        }
+
         while (varIsValidCheck) {
             varIsValidCheck = false;
             for (int i = 1; i < rule.keyFields.size(); ++i) {
@@ -1629,7 +1645,7 @@ public abstract class DataDstUEBase extends DataDstImpl {
         sourceFs.write(dumpString("{\r\n"));
         // 初始化Empty
         sourceFs.write(dumpString(String.format("    U%s::ClearRow(this->Empty);\r\n", helperClazzName)));
-        if (!rule.keyFields.isEmpty()) {
+        if (enableDataTable) {
             sourceFs.write(dumpString(String.format(
                     "    this->Loader = MakeShareable(new ConstructorHelpers::FObjectFinder<UDataTable>(TEXT(\"DataTable'/Game/%s'\")));\r\n",
                     helperDestination)));
@@ -1649,7 +1665,7 @@ public abstract class DataDstUEBase extends DataDstImpl {
         }
         sourceFs.write(dumpString("}\r\n\r\n"));
 
-        if (!rule.keyFields.isEmpty()) {
+        if (enableDataTable) {
             // OnReload()
             sourceFs.write(dumpString(String.format("void U%s::OnReload()\r\n", helperClazzName)));
             sourceFs.write(dumpString("{\r\n"));

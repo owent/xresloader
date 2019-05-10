@@ -25,10 +25,11 @@ data_block (R	dataBlock
 oneof_description.google.protobuf.OneofOptionsé (	RoneofDescription:H
 enum_description.google.protobuf.EnumOptionsé (	RenumDescription:O
 enumv_description!.google.protobuf.EnumValueOptionsé (	RenumvDescriptionBH
-
+¢
 !extensions/v2/xresloader_ue.protoorg.xresloader.ue google/protobuf/descriptor.proto:7
-key_tag.google.protobuf.FieldOptionsÍ (RkeyTag:>
-
-ueTypeName.google.protobuf.FieldOptionsÎ (	R
-ueTypeName:8
-helper.google.protobuf.MessageOptionsÍ (	RhelperBH
+key_tag.google.protobuf.FieldOptionsÍ (RkeyTag:@
+ue_type_name.google.protobuf.FieldOptionsÎ (	R
+ueTypeName:G
+ue_type_is_class.google.protobuf.FieldOptionsÏ (RueTypeIsClass:8
+helper.google.protobuf.MessageOptionsÍ (	Rhelper:F
+not_data_table.google.protobuf.MessageOptionsÎ (RnotDataTableBH

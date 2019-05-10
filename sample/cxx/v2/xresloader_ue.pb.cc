@@ -42,16 +42,17 @@ const char descriptor_table_protodef_xresloader_5fue_2eproto[] =
   "\n\023xresloader_ue.proto\022\021org.xresloader.ue"
   "\032 google/protobuf/descriptor.proto:/\n\007ke"
   "y_tag\022\035.google.protobuf.FieldOptions\030\315\010 "
-  "\001(\003:2\n\nueTypeName\022\035.google.protobuf.Fiel"
-  "dOptions\030\316\010 \001(\t:5\n\rueTypeIsClass\022\035.googl"
-  "e.protobuf.FieldOptions\030\317\010 \001(\010:0\n\006helper"
-  "\022\037.google.protobuf.MessageOptions\030\315\010 \001(\t"
-  "B\002H\001"
+  "\001(\003:4\n\014ue_type_name\022\035.google.protobuf.Fi"
+  "eldOptions\030\316\010 \001(\t:8\n\020ue_type_is_class\022\035."
+  "google.protobuf.FieldOptions\030\317\010 \001(\010:0\n\006h"
+  "elper\022\037.google.protobuf.MessageOptions\030\315"
+  "\010 \001(\t:8\n\016not_data_table\022\037.google.protobu"
+  "f.MessageOptions\030\316\010 \001(\010B\002H\001"
   ;
 ::google::protobuf::internal::DescriptorTable descriptor_table_xresloader_5fue_2eproto = {
   false, InitDefaults_xresloader_5fue_2eproto, 
   descriptor_table_protodef_xresloader_5fue_2eproto,
-  "xresloader_ue.proto", &assign_descriptors_table_xresloader_5fue_2eproto, 284,
+  "xresloader_ue.proto", &assign_descriptors_table_xresloader_5fue_2eproto, 347,
 };
 
 void AddDescriptors_xresloader_5fue_2eproto() {
@@ -70,17 +71,20 @@ namespace ue {
 ::google::protobuf::internal::ExtensionIdentifier< ::google::protobuf::FieldOptions,
     ::google::protobuf::internal::PrimitiveTypeTraits< ::google::protobuf::int64 >, 3, false >
   key_tag(kKeyTagFieldNumber, PROTOBUF_LONGLONG(0));
-const ::std::string ueTypeName_default("");
+const ::std::string ue_type_name_default("");
 ::google::protobuf::internal::ExtensionIdentifier< ::google::protobuf::FieldOptions,
     ::google::protobuf::internal::StringTypeTraits, 9, false >
-  ueTypeName(kUeTypeNameFieldNumber, ueTypeName_default);
+  ue_type_name(kUeTypeNameFieldNumber, ue_type_name_default);
 ::google::protobuf::internal::ExtensionIdentifier< ::google::protobuf::FieldOptions,
     ::google::protobuf::internal::PrimitiveTypeTraits< bool >, 8, false >
-  ueTypeIsClass(kUeTypeIsClassFieldNumber, false);
+  ue_type_is_class(kUeTypeIsClassFieldNumber, false);
 const ::std::string helper_default("");
 ::google::protobuf::internal::ExtensionIdentifier< ::google::protobuf::MessageOptions,
     ::google::protobuf::internal::StringTypeTraits, 9, false >
   helper(kHelperFieldNumber, helper_default);
+::google::protobuf::internal::ExtensionIdentifier< ::google::protobuf::MessageOptions,
+    ::google::protobuf::internal::PrimitiveTypeTraits< bool >, 8, false >
+  not_data_table(kNotDataTableFieldNumber, false);
 
 // @@protoc_insertion_point(namespace_scope)
 }  // namespace ue

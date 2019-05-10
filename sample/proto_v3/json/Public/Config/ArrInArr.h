@@ -28,3 +28,22 @@ struct FArrInArr : public FTableRowBase
     TArray< FString > StrArr;
 
 };
+
+
+UCLASS(Blueprintable, BlueprintType)
+class UArrInArrHelper : public UObject
+{
+    GENERATED_BODY()
+
+public:
+    UArrInArrHelper();
+
+    static void ClearRow(FArrInArr& TableRow);
+
+    UFUNCTION(BlueprintCallable, Category = "XResConfig")
+    void ClearDataRow(FArrInArr& TableRow) const;
+
+private:
+    FArrInArr Empty;
+};
+

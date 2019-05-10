@@ -30,6 +30,9 @@ message test_msg_verifier {
 }
 
 message arr_in_arr {
+    option (org.xresloader.ue.helper)         = "helper";
+    option (org.xresloader.ue.not_data_table) = true;
+
     optional string name    = 1 [ (org.xresloader.field_description) = "This is a test name in array" ];
     repeated int32 int_arr  = 2 [ packed = true ];
     repeated string str_arr = 3;

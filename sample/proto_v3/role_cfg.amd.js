@@ -4,7 +4,7 @@ define({
   role_cfg_header: {
     xres_ver : "2.2.0",
     hash_code : "no hash code",
-    data_ver : "2.2.0.20190510113940",
+    data_ver : "2.2.0.20190510120810",
     count : 7
   },
   role_cfg: [

@@ -38,6 +38,7 @@ public class DataDstWriterNode {
 
     static public class DataDstMessageExtUE {
         public String helper = null;
+        public boolean notDataTable = false;
     }
 
     static public class DataDstMessageExt {
@@ -183,7 +184,8 @@ public class DataDstWriterNode {
 
     static public String makeChildPath(String prefix, String child_name, int list_index) {
         if (list_index >= 0)
-            return prefix.isEmpty() ? String.format("%s[%d]", child_name, list_index) : String.format("%s.%s[%d]", prefix, child_name, list_index);
+            return prefix.isEmpty() ? String.format("%s[%d]", child_name, list_index)
+                    : String.format("%s.%s[%d]", prefix, child_name, list_index);
 
         return makeChildPath(prefix, child_name);
     }
@@ -276,8 +278,8 @@ public class DataDstWriterNode {
         return prefix.isEmpty() ? child_name : String.format("%s.%s", prefix, child_name);
     }
 
-    public DataDstChildrenNode addChild(String child_name, DataDstWriterNode node, Object _field_descriptor, boolean isList, boolean isRequired)
-            throws ConvException {
+    public DataDstChildrenNode addChild(String child_name, DataDstWriterNode node, Object _field_descriptor,
+            boolean isList, boolean isRequired) throws ConvException {
         DataDstChildrenNode res = getChildren().getOrDefault(child_name, null);
         if (null == res) {
             res = new DataDstChildrenNode();

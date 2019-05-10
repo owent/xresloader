@@ -199,19 +199,20 @@ const char descriptor_table_protodef_kind_2eproto[] =
   "\ntest_array\030\013 \003(\t\"\207\001\n\020role_upgrade_cfg\022\n"
   "\n\002Id\030\001 \001(\r\022\r\n\005Level\030\002 \001(\r\0223\n\010CostType\030\003 "
   "\001(\rB!\312>\tcost_type\232\?\022Refer to cost_type\022\021"
-  "\n\tCostValue\030\004 \001(\005\022\020\n\010ScoreAdd\030\005 \001(\005\"]\n\na"
+  "\n\tCostValue\030\004 \001(\005\022\020\n\010ScoreAdd\030\005 \001(\005\"k\n\na"
   "rr_in_arr\022-\n\004name\030\001 \001(\tB\037\232\?\034This is a te"
   "st name in array\022\017\n\007int_arr\030\002 \003(\005\022\017\n\007str"
-  "_arr\030\003 \003(\t\";\n\021test_msg_verifier\022\022\n\ttest_"
-  "id_1\030\221N \001(\r\022\022\n\ttest_id_2\030\222N \001(\r\"l\n\016arr_i"
-  "n_arr_cfg\022\037\n\002id\030\001 \001(\rB\023\350D\001\232\?\rThis is a K"
-  "ey\022\030\n\003arr\030\002 \003(\0132\013.arr_in_arr:\037\352D\006helper\312"
-  ">\023Test arr_in_arr_cfgb\006proto3"
+  "_arr\030\003 \003(\t:\014\352D\006helper\360D\001\";\n\021test_msg_ver"
+  "ifier\022\022\n\ttest_id_1\030\221N \001(\r\022\022\n\ttest_id_2\030\222"
+  "N \001(\r\"l\n\016arr_in_arr_cfg\022\037\n\002id\030\001 \001(\rB\023\350D\001"
+  "\232\?\rThis is a Key\022\030\n\003arr\030\002 \003(\0132\013.arr_in_a"
+  "rr:\037\352D\006helper\312>\023Test arr_in_arr_cfgb\006pro"
+  "to3"
   ;
 ::google::protobuf::internal::DescriptorTable descriptor_table_kind_2eproto = {
   false, InitDefaults_kind_2eproto, 
   descriptor_table_protodef_kind_2eproto,
-  "kind.proto", &assign_descriptors_table_kind_2eproto, 629,
+  "kind.proto", &assign_descriptors_table_kind_2eproto, 643,
 };
 
 void AddDescriptors_kind_2eproto() {

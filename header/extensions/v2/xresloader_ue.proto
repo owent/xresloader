@@ -5,11 +5,12 @@ import "google/protobuf/descriptor.proto";
 package org.xresloader.ue;
 
 extend google.protobuf.FieldOptions {
-    optional int64 key_tag        = 1101; // key字段映射的系数
-    optional string ueTypeName    = 1102; // UE内部类型(比如: TSoftObjectPtr<UTexture>)
-    optional bool   ueTypeIsClass = 1103; // UE内部类型是否是Class(如果为true，会生成: TSoftClassPtr<T> 而不是 TSoftObjectPtr<T>)
+    optional int64 key_tag           = 1101; // key字段映射的系数
+    optional string ue_type_name     = 1102; // UE内部类型(比如: TSoftObjectPtr<UTexture>)
+    optional bool   ue_type_is_class = 1103; // UE内部类型是否是Class(如果为true，会生成: TSoftClassPtr<T> 而不是 TSoftObjectPtr<T>)
 }
 
 extend google.protobuf.MessageOptions {
-    optional string helper = 1101; // 辅助函数的类名
+    optional string helper       = 1101; // 辅助函数的类名
+    optional bool not_data_table = 1102; // 不是DataTable，helper类里不生成加载代码
 }

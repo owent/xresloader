@@ -21,7 +21,7 @@
       role_cfg_header : {
         xres_ver : "2.2.0",
         hash_code : "no hash code",
-        data_ver : "2.2.0.20190510113932",
+        data_ver : "2.2.0.20190510114331",
         count : 7
       },
       role_cfg : [

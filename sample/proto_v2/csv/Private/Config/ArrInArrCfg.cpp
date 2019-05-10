@@ -29,7 +29,7 @@ void UArrInArrCfgHelper::OnReload()
 
 FName UArrInArrCfgHelper::GetRowName(int32 Id)
 {
-    return *FString::Printf(TEXT("%lld"), static_cast<long long>(Id) * 1);
+    return *FString::Printf(TEXT("%lld"), static_cast<long long>(Id));
 }
 
 FName UArrInArrCfgHelper::GetDataRowName(int32 Id) const

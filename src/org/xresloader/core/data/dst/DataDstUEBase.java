@@ -1070,8 +1070,12 @@ public abstract class DataDstUEBase extends DataDstImpl {
             params.ensureCapacity(rule.keyFields.size());
             for (int i = 1; i < rule.keyFields.size(); ++i) {
                 DataDstWriterNodeWrapper keyNode = rule.keyFields.get(i);
-                params.add(String.format("static_cast<long long>(%s) * %s", keyNode.varName,
-                        keyNode.getFieldExtension().mutableUE().keyTag));
+                if (keyNode.getFieldExtension().mutableUE().keyTag != 1) {
+                    params.add(String.format("static_cast<long long>(%s) * %s", keyNode.varName,
+                            keyNode.getFieldExtension().mutableUE().keyTag));
+                } else {
+                    params.add(String.format("static_cast<long long>(%s)", keyNode.varName));
+                }
             }
             return String.format("*FString::Printf(TEXT(\"%%lld\"), %s)", String.join(" + ", params));
         }
@@ -1080,8 +1084,12 @@ public abstract class DataDstUEBase extends DataDstImpl {
             params.ensureCapacity(rule.keyFields.size());
             for (int i = 1; i < rule.keyFields.size(); ++i) {
                 DataDstWriterNodeWrapper keyNode = rule.keyFields.get(i);
-                params.add(String.format("static_cast<double>(%s) * %s", keyNode.varName,
-                        keyNode.getFieldExtension().mutableUE().keyTag));
+                if (keyNode.getFieldExtension().mutableUE().keyTag != 1) {
+                    params.add(String.format("static_cast<double>(%s) * %s", keyNode.varName,
+                            keyNode.getFieldExtension().mutableUE().keyTag));
+                } else {
+                    params.add(String.format("static_cast<double>(%s)", keyNode.varName));
+                }
             }
             return String.format("*FString::Printf(TEXT(\"%%g\"), %s)", String.join(" + ", params));
         }

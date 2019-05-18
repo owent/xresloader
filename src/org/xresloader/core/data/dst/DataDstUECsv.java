@@ -9,6 +9,9 @@ import java.util.Map;
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVPrinter;
 import org.xresloader.core.ProgramOptions;
+import org.xresloader.core.data.dst.DataDstWriterNode.DataDstFieldDescriptor;
+import org.xresloader.core.data.dst.DataDstWriterNode.JAVA_TYPE;
+import org.xresloader.core.data.err.ConvException;
 import org.xresloader.core.data.src.DataSrcImpl;
 import org.xresloader.core.scheme.SchemeConf;
 
@@ -65,9 +68,11 @@ public class DataDstUECsv extends DataDstUEBase {
 
     @SuppressWarnings("unchecked")
     @Override
-    protected void buildForUEOnPrintHeader(Object buildObj, ArrayList<Object> rowData, UEDataRowRule rule)
-            throws IOException {
-        ((UEBuildObject) buildObj).csv.printRecord(rowData);
+    protected void buildForUEOnPrintHeader(Object buildObj, ArrayList<Object> rowData, UEDataRowRule rule,
+            UECodeInfo codeInfo) throws IOException {
+        if (isRecursiveEnabled()) {
+            ((UEBuildObject) buildObj).csv.printRecord(rowData);
+        }
     }
 
     @SuppressWarnings("unchecked")
@@ -154,5 +159,136 @@ public class DataDstUECsv extends DataDstUEBase {
         writeConstData(csv, data, "");
 
         return sb.toString();
+    }
+
+    @Override
+    final protected Object pickValueField(DataDstWriterNodeWrapper desc) throws ConvException {
+        if (!isRecursiveEnabled()) {
+            return pickValueFieldBaseImpl(desc, 0);
+        }
+
+        return pickValueFieldCsvImpl(desc);
+    }
+
+    protected Object pickValueFieldCsvImpl(DataDstWriterNodeWrapper descWrapper) throws ConvException {
+        if (null == descWrapper || null == descWrapper.descs || descWrapper.descs.isEmpty()) {
+            return null;
+        }
+
+        DataDstWriterNode desc = descWrapper.GetWriterNode(0);
+        if (desc == null) {
+            return null;
+        }
+
+        if (descWrapper.isList) {
+            JSONArray ret = new JSONArray();
+            for (DataDstWriterNode child : descWrapper.descs) {
+                Object val = pickValueFieldJsonImpl(child);
+                if (val != null) {
+                    ret.put(val);
+                }
+            }
+
+            return ret;
+        } else {
+            return pickValueFieldJsonImpl(desc);
+        }
+    }
+
+    protected Object pickValueFieldCsvImpl(DataDstWriterNode desc) throws ConvException {
+        if (desc == null) {
+            return null;
+        }
+
+        if (desc.getType() == JAVA_TYPE.MESSAGE) {
+            HashSet<String> dumpedFields = null;
+            if (isRecursiveEnabled()) {
+                dumpedFields = new HashSet<String>();
+            }
+
+            JSONObject ret = new JSONObject();
+            for (Entry<String, DataDstChildrenNode> child : desc.getChildren().entrySet()) {
+                Object val = null;
+                if (child.getValue().innerDesc.isList()) {
+                    JSONArray res = new JSONArray();
+
+                    for (DataDstWriterNode subNode : child.getValue().nodes) {
+                        Object v = pickValueFieldJsonImpl(subNode);
+                        if (v != null) {
+                            res.put(v);
+                        }
+                    }
+
+                    val = res;
+                } else if (!child.getValue().nodes.isEmpty()) {
+                    val = pickValueFieldJsonImpl(child.getValue().nodes.get(0));
+                }
+
+                if (val != null) {
+                    String varName = getIdentName(child.getKey());
+                    ret.put(varName, val);
+
+                    if (null != dumpedFields) {
+                        dumpedFields.add(varName);
+                    }
+                }
+            }
+
+            // 需要补全空字段
+            if (null != dumpedFields) {
+                for (HashMap.Entry<String, DataDstFieldDescriptor> varPair : desc.getTypeDescriptor().fields
+                        .entrySet()) {
+                    String varName = getIdentName(varPair.getKey());
+                    if (dumpedFields.contains(varName)) {
+                        continue;
+                    }
+
+                    ret.put(varName, pickValueFieldCsvDefaultImpl(varPair.getValue()));
+                }
+            }
+
+            return ret;
+        }
+
+        return pickValueFieldBaseImpl(desc);
+    }
+
+    protected void pickValueFieldCsvDefaultImpl(StringBuffer sb, DataDstFieldDescriptor fd) {
+        if (fd.isList()) {
+            return;
+        }
+
+        switch (fd.getType()) {
+        case INT:
+        case LONG:
+        case FLOAT:
+        case DOUBLE: {
+            sb.append("0");
+        }
+        case BOOLEAN: {
+            sb.append("false");
+        }
+        case STRING:
+        case BYTES: {
+            break;
+        }
+        case MESSAGE: {
+            sb.append("(");
+
+            for (HashMap.Entry<String, DataDstFieldDescriptor> varPair : fd.getTypeDescriptor().fields.entrySet()) {
+                sb.append("getIdentName(varPair.getKey())");
+                sb.append("=");
+                if (varPair.getValue().isList() || varPair.getValue().getType() == JAVA_TYPE.STRING) {
+                    sb.append("\"\"");
+                } else {
+                    pickValueFieldCsvDefaultImpl(sb, varPair.getValue());
+                }
+            }
+
+            sb.append(")");
+        }
+        default:
+            break;
+        }
     }
 }

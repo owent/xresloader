@@ -59,8 +59,8 @@ public class DataDstUEJson extends DataDstUEBase {
 
     @SuppressWarnings("unchecked")
     @Override
-    protected void buildForUEOnPrintHeader(Object buildObj, ArrayList<Object> rowData, UEDataRowRule rule)
-            throws IOException {
+    protected void buildForUEOnPrintHeader(Object buildObj, ArrayList<Object> rowData, UEDataRowRule rule,
+            UECodeInfo codeInfo) throws IOException {
         ((UEBuildObject) buildObj).header = rowData;
     }
 

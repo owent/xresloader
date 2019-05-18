@@ -491,8 +491,8 @@ public abstract class DataDstUEBase extends DataDstImpl {
 
     abstract protected byte[] buildForUEOnFinal(Object buildObj);
 
-    abstract protected void buildForUEOnPrintHeader(Object buildObj, ArrayList<Object> rowData, UEDataRowRule rule)
-            throws IOException;
+    abstract protected void buildForUEOnPrintHeader(Object buildObj, ArrayList<Object> rowData, UEDataRowRule rule,
+            UECodeInfo codeInfo) throws IOException;
 
     abstract protected void buildForUEOnPrintRecord(Object buildObj, ArrayList<Object> rowData, UEDataRowRule rule,
             UECodeInfo codeInfo) throws IOException;
@@ -554,7 +554,7 @@ public abstract class DataDstUEBase extends DataDstImpl {
             for (int i = 0; i < rule.valueFields.size(); ++i) {
                 row_data.add(rule.valueFields.get(i).varName);
             }
-            buildForUEOnPrintHeader(buildObj, row_data, rule);
+            buildForUEOnPrintHeader(buildObj, row_data, rule, codeInfo);
 
             // 输出数据
             while (DataSrcImpl.getOurInstance().next_row()) {

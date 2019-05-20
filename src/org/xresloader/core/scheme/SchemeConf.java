@@ -19,11 +19,13 @@ public class SchemeConf {
         public int data_col;
     }
 
-    public class DataExtUECSV {
+    public class DataExtUE {
         public String blueprintAccess = "BlueprintReadOnly";
         public String category = "XResConfig";
         public String editAccess = "EditAnywhere";
         public Boolean enableCaseConvert = true;
+        public Boolean enableRecursiveMode = true;
+        public String destinationPath = "";
         public String codeOutputDir = "";
         public String codeOutputPublicDir = "";
         public String codeOutputPrivateDir = "";
@@ -40,13 +42,22 @@ public class SchemeConf {
     private SchemeKeyConf key;
     private SchemeDataSourceImpl scheme;
 
-    private DataExtUECSV extUECSV = new DataExtUECSV();
+    private DataExtUE extUECSV = new DataExtUE();
 
     private String outputFilePathCache = "";
     private String outputFileAbsPathCache = "";
 
     private SchemeConf() {
         key = new SchemeKeyConf();
+    }
+
+    static public boolean getLogicalValue(String data) {
+        if (data == null || data.isEmpty() || 0 == data.compareTo("0") || 0 == data.compareToIgnoreCase("no")
+                || 0 == data.compareToIgnoreCase("false") || 0 == data.compareToIgnoreCase("disable")) {
+            return false;
+        } else {
+            return true;
+        }
     }
 
     public static SchemeConf getInstance() {
@@ -69,6 +80,11 @@ public class SchemeConf {
         extUECSV.category = "XResConfig";
         extUECSV.editAccess = "EditAnywhere";
         extUECSV.enableCaseConvert = true;
+        extUECSV.enableRecursiveMode = true;
+        extUECSV.destinationPath = "";
+        extUECSV.codeOutputDir = "";
+        extUECSV.codeOutputPublicDir = "";
+        extUECSV.codeOutputPrivateDir = "";
 
         outputFilePathCache = "";
         outputFileAbsPathCache = "";
@@ -85,6 +101,11 @@ public class SchemeConf {
         extUECSV.category = "XResConfig";
         extUECSV.editAccess = "EditAnywhere";
         extUECSV.enableCaseConvert = true;
+        extUECSV.enableRecursiveMode = true;
+        extUECSV.destinationPath = "";
+        extUECSV.codeOutputDir = "";
+        extUECSV.codeOutputPublicDir = "";
+        extUECSV.codeOutputPrivateDir = "";
     }
 
     /**
@@ -331,7 +352,7 @@ public class SchemeConf {
      * @param blueprintAccess 蓝图权限(BlueprintReadOnly/BlueprintReadWrite/BlueprintGetter/BlueprintSetter)
      * @param editAccess      编辑权限(EditAnywhere/EditInstanceOnly/EditDefaultsOnly)
      */
-    public void setUECSVOptions(String category, String blueprintAccess, String editAccess) {
+    public void setUEOptions(String category, String blueprintAccess, String editAccess) {
         extUECSV.category = category;
 
         if (blueprintAccess == null || blueprintAccess.isEmpty()) {
@@ -366,7 +387,7 @@ public class SchemeConf {
      * @param pubDir 追加的头文件目录
      * @param priDir 追加的源文件目录
      */
-    public void setUECSVCodeOutput(String dir, String pubDir, String priDir) {
+    public void setUECodeOutput(String dir, String pubDir, String priDir) {
         if (dir == null) {
             extUECSV.codeOutputDir = "";
         } else {
@@ -386,16 +407,23 @@ public class SchemeConf {
         }
     }
 
-    public void setUECSVCaseConvert(String data) {
-        if (data == null || data.isEmpty() || 0 == data.compareTo("0") || 0 == data.compareToIgnoreCase("no")
-                || 0 == data.compareToIgnoreCase("false") || 0 == data.compareToIgnoreCase("disable")) {
-            extUECSV.enableCaseConvert = false;
+    public void setUECaseConvert(String data) {
+        extUECSV.enableCaseConvert = getLogicalValue(data);
+    }
+
+    public void setUERecursiveMode(String data) {
+        extUECSV.enableRecursiveMode = getLogicalValue(data);
+    }
+
+    public void setUEDestinationPath(String dir) {
+        if (dir == null) {
+            extUECSV.destinationPath = "";
         } else {
-            extUECSV.enableCaseConvert = true;
+            extUECSV.destinationPath = dir;
         }
     }
 
-    public DataExtUECSV getUECSVOptions() {
+    public DataExtUE getUEOptions() {
         return extUECSV;
     }
 }

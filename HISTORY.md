@@ -1,5 +1,12 @@
 更新记录：
 ==========
+2.3.0
+------
+1. 优化sample输出脚本，先移除过期的 ```UnreaImportSettings.json``` 文件。
+2. 增加 ```UeCfg-RecursiveMode=true/false``` 的 **SchemeMeta** 用以控制是否启用嵌套模式，默认统一为开启嵌套模式。
+3. 增加 ```UeCfg-DestinationPath=<PATH>``` 的 **SchemeMeta** 用以控制输出的uassert目录。
+4. 重新开启 ```--disable-empty-list``` 和 ```--enable-empty-list``` 的功能。
+
 2.2.0
 ------
 1. 增加protobuf插件 - org.xresloader.ue.ue_type_is_class (用于UE代码输出时直接输出UE支持的 ```TSoftClassPtr<T>``` 来替换 ```TSoftObjectPtr<T>``` 类型)

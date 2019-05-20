@@ -240,7 +240,7 @@ public abstract class DataDstUEBase extends DataDstImpl {
 
     static public String getIdentName(String in) {
         String[] segs = fileToClassMatcher.split(in);
-        if (SchemeConf.getInstance().getUECSVOptions().enableCaseConvert) {
+        if (SchemeConf.getInstance().getUEOptions().enableCaseConvert) {
             for (int i = 0; i < segs.length; ++i) {
                 if (!segs[i].isEmpty() && Character.isLowerCase(segs[i].charAt(0))) {
                     segs[i] = Character.toUpperCase(segs[i].charAt(0)) + segs[i].substring(1);
@@ -281,18 +281,18 @@ public abstract class DataDstUEBase extends DataDstImpl {
         ret.outputFile = ofd.getCanonicalFile().getAbsolutePath();
         ret.outputDir = ofd.getParentFile().getCanonicalFile().getAbsolutePath();
         // redirect header directory and source directory
-        String codeOutputDir = SchemeConf.getInstance().getUECSVOptions().codeOutputDir;
+        String codeOutputDir = SchemeConf.getInstance().getUEOptions().codeOutputDir;
         if (codeOutputDir.isEmpty()) {
             codeOutputDir = (new File(ProgramOptions.getInstance().outputDirectory)).getCanonicalFile()
                     .getAbsolutePath();
         }
-        if (SchemeConf.getInstance().getUECSVOptions().category.isEmpty()) {
+        if (SchemeConf.getInstance().getUEOptions().category.isEmpty()) {
             ret.category = "DataTable";
         } else {
-            ret.category = SchemeConf.getInstance().getUECSVOptions().category;
+            ret.category = SchemeConf.getInstance().getUEOptions().category;
         }
-        if (!SchemeConf.getInstance().getUECSVOptions().codeOutputPublicDir.isEmpty()) {
-            String pubDir = SchemeConf.getInstance().getUECSVOptions().codeOutputPublicDir;
+        if (!SchemeConf.getInstance().getUEOptions().codeOutputPublicDir.isEmpty()) {
+            String pubDir = SchemeConf.getInstance().getUEOptions().codeOutputPublicDir;
             ret.headerDir = codeOutputDir + File.separator + pubDir;
             if (pubDir.charAt(0) == '/' || pubDir.charAt(0) == '\\') {
                 pubDir = pubDir.substring(1);
@@ -309,16 +309,18 @@ public abstract class DataDstUEBase extends DataDstImpl {
             ret.headerDir = codeOutputDir;
             ret.includeDir = "";
         }
-        if (!SchemeConf.getInstance().getUECSVOptions().codeOutputPrivateDir.isEmpty()) {
+        if (!SchemeConf.getInstance().getUEOptions().codeOutputPrivateDir.isEmpty()) {
             ret.sourceDir = codeOutputDir + File.separator
-                    + SchemeConf.getInstance().getUECSVOptions().codeOutputPrivateDir;
+                    + SchemeConf.getInstance().getUEOptions().codeOutputPrivateDir;
         } else {
             ret.sourceDir = codeOutputDir;
         }
 
         ret.initClazzName(originClazzName);
         ret.destinationPath = "DataTable";
-        if (ret.includeDir.length() > 1) {
+        if (!SchemeConf.getInstance().getUEOptions().destinationPath.isEmpty()) {
+            ret.destinationPath = SchemeConf.getInstance().getUEOptions().destinationPath;
+        } else if (ret.includeDir.length() > 1) {
             ret.destinationPath = String.format("%s", ret.includeDir.substring(0, ret.includeDir.length() - 1));
         }
 
@@ -563,13 +565,13 @@ public abstract class DataDstUEBase extends DataDstImpl {
 
                 // 先用特殊规则导入Name字段,Name字段可能是合成字段
                 if (!rule.keyFields.isEmpty()) {
-                    row_data.add(pickNameField(rule));
+                    row_data.add(pickNameField(buildObj, rule));
                     for (int i = 1; i < rule.keyFields.size(); ++i) {
-                        row_data.add(pickValueField(rule.keyFields.get(i)));
+                        row_data.add(pickValueField(buildObj, rule.keyFields.get(i)));
                     }
                 }
                 for (int i = 0; i < rule.valueFields.size(); ++i) {
-                    row_data.add(pickValueField(rule.valueFields.get(i)));
+                    row_data.add(pickValueField(buildObj, rule.valueFields.get(i)));
                 }
                 buildForUEOnPrintRecord(buildObj, row_data, rule, codeInfo);
             }
@@ -615,14 +617,14 @@ public abstract class DataDstUEBase extends DataDstImpl {
         writeCodeSourceFile(rule, codeInfo);
     }
 
-    private Object pickNameField(UEDataRowRule rule) throws ConvException {
+    private Object pickNameField(Object buildObj, UEDataRowRule rule) throws ConvException {
         if (rule.keyFields.isEmpty()) {
             return null;
         }
 
         // 如果是直接采用原始字段则直接返回原始字段数据
         if (null != rule.keyFields.get(0).descs && !rule.keyFields.get(0).descs.isEmpty()) {
-            return pickValueField(rule.keyFields.get(0));
+            return pickValueField(buildObj, rule.keyFields.get(0));
         }
 
         switch (rule.nameType) {
@@ -630,12 +632,12 @@ public abstract class DataDstUEBase extends DataDstImpl {
             long ret = 0;
             for (int i = 1; i < rule.keyFields.size(); ++i) {
                 DataDstWriterNodeWrapper wrapper = rule.keyFields.get(i);
-                Object val = pickValueField(wrapper);
+                Object val = pickValueField(buildObj, wrapper);
                 if (val instanceof Number) {
                     ret = ret + wrapper.getFieldExtension().mutableUE().keyTag * ((Number) val).longValue();
                 } else {
                     ret = ret + wrapper.getFieldExtension().mutableUE().keyTag
-                            * Long.valueOf(pickValueField(rule.keyFields.get(i)).toString());
+                            * Long.valueOf(pickValueField(buildObj, rule.keyFields.get(i)).toString());
                 }
             }
 
@@ -645,12 +647,12 @@ public abstract class DataDstUEBase extends DataDstImpl {
             double ret = 0.0;
             for (int i = 1; i < rule.keyFields.size(); ++i) {
                 DataDstWriterNodeWrapper wrapper = rule.keyFields.get(i);
-                Object val = pickValueField(wrapper);
+                Object val = pickValueField(buildObj, wrapper);
                 if (val instanceof Number) {
                     ret = ret + wrapper.getFieldExtension().mutableUE().keyTag * ((Number) val).doubleValue();
                 } else {
                     ret = ret + wrapper.getFieldExtension().mutableUE().keyTag
-                            * Double.valueOf(pickValueField(rule.keyFields.get(i)).toString());
+                            * Double.valueOf(pickValueField(buildObj, rule.keyFields.get(i)).toString());
                 }
             }
 
@@ -660,7 +662,7 @@ public abstract class DataDstUEBase extends DataDstImpl {
             ArrayList<String> ls = new ArrayList<String>();
             ls.ensureCapacity(rule.keyFields.size());
             for (int i = 1; i < rule.keyFields.size(); ++i) {
-                ls.add(pickValueField(rule.keyFields.get(i)).toString());
+                ls.add(pickValueField(buildObj, rule.keyFields.get(i)).toString());
             }
 
             return String.join("", ls);
@@ -670,7 +672,7 @@ public abstract class DataDstUEBase extends DataDstImpl {
         }
     }
 
-    protected Object pickValueField(DataDstWriterNodeWrapper descWrapper) throws ConvException {
+    protected Object pickValueField(Object buildObj, DataDstWriterNodeWrapper descWrapper) throws ConvException {
         return pickValueFieldBaseImpl(descWrapper, 0);
     }
 
@@ -693,6 +695,8 @@ public abstract class DataDstUEBase extends DataDstImpl {
             DataContainer<Long> ret = DataSrcImpl.getOurInstance().getValue(desc.identify, 0L);
             if (null != ret && ret.valid) {
                 return ret.value.intValue();
+            } else if (ProgramOptions.getInstance().enbleEmptyList) {
+                return Integer.valueOf(0);
             }
             break;
         }
@@ -701,6 +705,8 @@ public abstract class DataDstUEBase extends DataDstImpl {
             DataContainer<Long> ret = DataSrcImpl.getOurInstance().getValue(desc.identify, 0L);
             if (null != ret && ret.valid) {
                 return ret.value.longValue();
+            } else if (ProgramOptions.getInstance().enbleEmptyList) {
+                return Long.valueOf(0);
             }
             break;
         }
@@ -709,6 +715,8 @@ public abstract class DataDstUEBase extends DataDstImpl {
             DataContainer<Double> ret = DataSrcImpl.getOurInstance().getValue(desc.identify, 0.0);
             if (null != ret && ret.valid) {
                 return ret.value.floatValue();
+            } else if (ProgramOptions.getInstance().enbleEmptyList) {
+                return Float.valueOf(0);
             }
             break;
         }
@@ -717,6 +725,8 @@ public abstract class DataDstUEBase extends DataDstImpl {
             DataContainer<Double> ret = DataSrcImpl.getOurInstance().getValue(desc.identify, 0.0);
             if (null != ret && ret.valid) {
                 return ret.value.doubleValue();
+            } else if (ProgramOptions.getInstance().enbleEmptyList) {
+                return Double.valueOf(0);
             }
             break;
         }
@@ -725,6 +735,8 @@ public abstract class DataDstUEBase extends DataDstImpl {
             DataContainer<Boolean> ret = DataSrcImpl.getOurInstance().getValue(desc.identify, false);
             if (null != ret && ret.valid) {
                 return ret.value.booleanValue();
+            } else if (ProgramOptions.getInstance().enbleEmptyList) {
+                return Boolean.valueOf(false);
             }
             break;
         }
@@ -733,6 +745,8 @@ public abstract class DataDstUEBase extends DataDstImpl {
             DataContainer<String> ret = DataSrcImpl.getOurInstance().getValue(desc.identify, "");
             if (null != ret && ret.valid) {
                 return ret.value;
+            } else if (ProgramOptions.getInstance().enbleEmptyList) {
+                return "";
             }
             break;
         }
@@ -746,6 +760,8 @@ public abstract class DataDstUEBase extends DataDstImpl {
                 } else {
                     return Base64.getEncoder().encodeToString(res.value.getBytes(Charset.forName(encoding)));
                 }
+            } else if (ProgramOptions.getInstance().enbleEmptyList) {
+                return "";
             }
             break;
         }
@@ -944,14 +960,14 @@ public abstract class DataDstUEBase extends DataDstImpl {
     private final String getHeaderFieldUProperty() {
         if (null == headerFieldUProperty) {
             LinkedList<String> ls = new LinkedList<String>();
-            if (!SchemeConf.getInstance().getUECSVOptions().editAccess.isEmpty()) {
-                ls.add(SchemeConf.getInstance().getUECSVOptions().editAccess);
+            if (!SchemeConf.getInstance().getUEOptions().editAccess.isEmpty()) {
+                ls.add(SchemeConf.getInstance().getUEOptions().editAccess);
             }
 
-            if (!SchemeConf.getInstance().getUECSVOptions().category.isEmpty()
-                    && !SchemeConf.getInstance().getUECSVOptions().blueprintAccess.isEmpty()) {
-                ls.add(SchemeConf.getInstance().getUECSVOptions().blueprintAccess);
-                ls.add(String.format("Category = \"%s\"", SchemeConf.getInstance().getUECSVOptions().category));
+            if (!SchemeConf.getInstance().getUEOptions().category.isEmpty()
+                    && !SchemeConf.getInstance().getUEOptions().blueprintAccess.isEmpty()) {
+                ls.add(SchemeConf.getInstance().getUEOptions().blueprintAccess);
+                ls.add(String.format("Category = \"%s\"", SchemeConf.getInstance().getUEOptions().category));
             }
             headerFieldUProperty = String.format("    UPROPERTY(%s)\r\n", String.join(", ", ls));
         }
@@ -964,8 +980,8 @@ public abstract class DataDstUEBase extends DataDstImpl {
             LinkedList<String> ls = new LinkedList<String>();
 
             ls.add("BlueprintCallable");
-            if (!SchemeConf.getInstance().getUECSVOptions().category.isEmpty()) {
-                ls.add(String.format("Category = \"%s\"", SchemeConf.getInstance().getUECSVOptions().category));
+            if (!SchemeConf.getInstance().getUEOptions().category.isEmpty()) {
+                ls.add(String.format("Category = \"%s\"", SchemeConf.getInstance().getUEOptions().category));
             }
             headerFieldUFunction = String.format("    UFUNCTION(%s)\r\n", String.join(", ", ls));
         }

@@ -61,11 +61,15 @@ public abstract class SchemeDataSourceBase implements SchemeDataSourceImpl {
         } else if (key.equalsIgnoreCase("Encoding")) {
             SchemeConf.getInstance().getKey().setEncoding(datas.get(0));
         } else if (key.equalsIgnoreCase("UeCfg-UProperty")) {
-            SchemeConf.getInstance().setUECSVOptions(datas.get(0), datas.get(1), datas.get(2));
+            SchemeConf.getInstance().setUEOptions(datas.get(0), datas.get(1), datas.get(2));
         } else if (key.equalsIgnoreCase("UeCfg-CodeOutput")) {
-            SchemeConf.getInstance().setUECSVCodeOutput(datas.get(0), datas.get(1), datas.get(2));
+            SchemeConf.getInstance().setUECodeOutput(datas.get(0), datas.get(1), datas.get(2));
         } else if (key.equalsIgnoreCase("UeCfg-CaseConvert")) {
-            SchemeConf.getInstance().setUECSVCaseConvert(datas.get(0));
+            SchemeConf.getInstance().setUECaseConvert(datas.get(0));
+        } else if (key.equalsIgnoreCase("UeCfg-RecursiveMode")) {
+            SchemeConf.getInstance().setUERecursiveMode(datas.get(0));
+        } else if (key.equalsIgnoreCase("UeCfg-DestinationPath")) {
+            SchemeConf.getInstance().setUEDestinationPath(datas.get(0));
         } else {
             return false;
         }

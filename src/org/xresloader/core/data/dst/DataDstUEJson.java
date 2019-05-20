@@ -35,7 +35,7 @@ public class DataDstUEJson extends DataDstUEBase {
 
     @Override
     protected boolean isRecursiveEnabled() {
-        return true;
+        return SchemeConf.getInstance().getUEOptions().enableRecursiveMode;
     }
 
     @Override
@@ -188,7 +188,7 @@ public class DataDstUEJson extends DataDstUEBase {
     }
 
     @Override
-    final protected Object pickValueField(DataDstWriterNodeWrapper desc) throws ConvException {
+    final protected Object pickValueField(Object buildObj, DataDstWriterNodeWrapper desc) throws ConvException {
         if (!isRecursiveEnabled()) {
             return pickValueFieldBaseImpl(desc, 0);
         }

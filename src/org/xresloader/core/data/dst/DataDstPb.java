@@ -681,7 +681,7 @@ public class DataDstPb extends DataDstImpl {
 
             // fill required
             for (Descriptors.FieldDescriptor sub_fd : fd.getMessageType().getFields()) {
-                if (sub_fd.isRequired()) {
+                if (sub_fd.isRequired() || ProgramOptions.getInstance().enbleEmptyList) {
                     dumpDefault(subnode, sub_fd);
                 }
             }
@@ -727,7 +727,9 @@ public class DataDstPb extends DataDstImpl {
             throws ConvException {
         if (null == desc.identify && MESSAGE != fd.getJavaType()) {
             // required 空字段填充默认值
-            dumpDefault(builder, fd);
+            if (fd.isRepeated() || ProgramOptions.getInstance().enbleEmptyList) {
+                dumpDefault(builder, fd);
+            }
             return false;
         }
 
@@ -821,7 +823,7 @@ public class DataDstPb extends DataDstImpl {
         }
 
         if (null == val) {
-            if (fd.isRequired()) {
+            if (fd.isRequired() || ProgramOptions.getInstance().enbleEmptyList) {
                 dumpDefault(builder, fd);
             }
 

@@ -135,6 +135,7 @@ const ::google::protobuf::uint32 TableStruct_kind_2eproto::offsets[] PROTOBUF_SE
   PROTOBUF_FIELD_OFFSET(::role_cfg, name_),
   PROTOBUF_FIELD_OFFSET(::role_cfg, dep_test_),
   PROTOBUF_FIELD_OFFSET(::role_cfg, test_array_),
+  PROTOBUF_FIELD_OFFSET(::role_cfg, int_as_string_),
   ~0u,  // no _has_bits_
   PROTOBUF_FIELD_OFFSET(::role_upgrade_cfg, _internal_metadata_),
   ~0u,  // no _extensions_
@@ -170,10 +171,10 @@ const ::google::protobuf::uint32 TableStruct_kind_2eproto::offsets[] PROTOBUF_SE
 };
 static const ::google::protobuf::internal::MigrationSchema schemas[] PROTOBUF_SECTION_VARIABLE(protodesc_cold) = {
   { 0, -1, sizeof(::role_cfg)},
-  { 12, -1, sizeof(::role_upgrade_cfg)},
-  { 22, -1, sizeof(::arr_in_arr)},
-  { 30, -1, sizeof(::test_msg_verifier)},
-  { 37, -1, sizeof(::arr_in_arr_cfg)},
+  { 13, -1, sizeof(::role_upgrade_cfg)},
+  { 23, -1, sizeof(::arr_in_arr)},
+  { 31, -1, sizeof(::test_msg_verifier)},
+  { 38, -1, sizeof(::arr_in_arr_cfg)},
 };
 
 static ::google::protobuf::Message const * const file_default_instances[] = {
@@ -192,27 +193,27 @@ static ::google::protobuf::Message const * const file_default_instances[] = {
 
 const char descriptor_table_protodef_kind_2eproto[] =
   "\n\nkind.proto\032\020xresloader.proto\032\023xresload"
-  "er_ue.proto\032\020dependency.proto\"\221\001\n\010role_c"
+  "er_ue.proto\032\020dependency.proto\"\250\001\n\010role_c"
   "fg\022\n\n\002id\030\001 \001(\r\022\024\n\014unlock_level\030\002 \001(\r\022\021\n\t"
   "cost_type\030\003 \001(\r\022\022\n\ncost_value\030\004 \001(\005\022\014\n\004n"
   "ame\030\005 \001(\t\022\032\n\010dep_test\030\n \001(\0132\010.dep_cfg\022\022\n"
-  "\ntest_array\030\013 \003(\t\"\207\001\n\020role_upgrade_cfg\022\n"
-  "\n\002Id\030\001 \001(\r\022\r\n\005Level\030\002 \001(\r\0223\n\010CostType\030\003 "
-  "\001(\rB!\312>\tcost_type\232\?\022Refer to cost_type\022\021"
-  "\n\tCostValue\030\004 \001(\005\022\020\n\010ScoreAdd\030\005 \001(\005\"k\n\na"
-  "rr_in_arr\022-\n\004name\030\001 \001(\tB\037\232\?\034This is a te"
-  "st name in array\022\017\n\007int_arr\030\002 \003(\005\022\017\n\007str"
-  "_arr\030\003 \003(\t:\014\352D\006helper\360D\001\";\n\021test_msg_ver"
-  "ifier\022\022\n\ttest_id_1\030\221N \001(\r\022\022\n\ttest_id_2\030\222"
-  "N \001(\r\"l\n\016arr_in_arr_cfg\022\037\n\002id\030\001 \001(\rB\023\350D\001"
-  "\232\?\rThis is a Key\022\030\n\003arr\030\002 \003(\0132\013.arr_in_a"
-  "rr:\037\352D\006helper\312>\023Test arr_in_arr_cfgb\006pro"
-  "to3"
+  "\ntest_array\030\013 \003(\t\022\025\n\rint_as_string\030\014 \001(\t"
+  "\"\207\001\n\020role_upgrade_cfg\022\n\n\002Id\030\001 \001(\r\022\r\n\005Lev"
+  "el\030\002 \001(\r\0223\n\010CostType\030\003 \001(\rB!\312>\tcost_type"
+  "\232\?\022Refer to cost_type\022\021\n\tCostValue\030\004 \001(\005"
+  "\022\020\n\010ScoreAdd\030\005 \001(\005\"k\n\narr_in_arr\022-\n\004name"
+  "\030\001 \001(\tB\037\232\?\034This is a test name in array\022"
+  "\017\n\007int_arr\030\002 \003(\005\022\017\n\007str_arr\030\003 \003(\t:\014\352D\006he"
+  "lper\360D\001\";\n\021test_msg_verifier\022\022\n\ttest_id_"
+  "1\030\221N \001(\r\022\022\n\ttest_id_2\030\222N \001(\r\"l\n\016arr_in_a"
+  "rr_cfg\022\037\n\002id\030\001 \001(\rB\023\350D\001\232\?\rThis is a Key\022"
+  "\030\n\003arr\030\002 \003(\0132\013.arr_in_arr:\037\352D\006helper\312>\023T"
+  "est arr_in_arr_cfgb\006proto3"
   ;
 ::google::protobuf::internal::DescriptorTable descriptor_table_kind_2eproto = {
   false, InitDefaults_kind_2eproto, 
   descriptor_table_protodef_kind_2eproto,
-  "kind.proto", &assign_descriptors_table_kind_2eproto, 643,
+  "kind.proto", &assign_descriptors_table_kind_2eproto, 666,
 };
 
 void AddDescriptors_kind_2eproto() {
@@ -257,6 +258,7 @@ const int role_cfg::kCostValueFieldNumber;
 const int role_cfg::kNameFieldNumber;
 const int role_cfg::kDepTestFieldNumber;
 const int role_cfg::kTestArrayFieldNumber;
+const int role_cfg::kIntAsStringFieldNumber;
 #endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
 
 role_cfg::role_cfg()
@@ -273,6 +275,10 @@ role_cfg::role_cfg(const role_cfg& from)
   if (from.name().size() > 0) {
     name_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.name_);
   }
+  int_as_string_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  if (from.int_as_string().size() > 0) {
+    int_as_string_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.int_as_string_);
+  }
   if (from.has_dep_test()) {
     dep_test_ = new ::dep_cfg(*from.dep_test_);
   } else {
@@ -288,6 +294,7 @@ void role_cfg::SharedCtor() {
   ::google::protobuf::internal::InitSCC(
       &scc_info_role_cfg_kind_2eproto.base);
   name_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  int_as_string_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   ::memset(&dep_test_, 0, static_cast<size_t>(
       reinterpret_cast<char*>(&cost_value_) -
       reinterpret_cast<char*>(&dep_test_)) + sizeof(cost_value_));
@@ -300,6 +307,7 @@ role_cfg::~role_cfg() {
 
 void role_cfg::SharedDtor() {
   name_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  int_as_string_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   if (this != internal_default_instance()) delete dep_test_;
 }
 
@@ -320,6 +328,7 @@ void role_cfg::Clear() {
 
   test_array_.Clear();
   name_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  int_as_string_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   if (GetArenaNoVirtual() == nullptr && dep_test_ != nullptr) {
     delete dep_test_;
   }
@@ -417,6 +426,22 @@ const char* role_cfg::_InternalParse(const char* begin, const char* end, void* o
           ptr += size;
           if (ptr >= end) break;
         } while ((::google::protobuf::io::UnalignedLoad<::google::protobuf::uint64>(ptr) & 255) == 90 && (ptr += 1));
+        break;
+      }
+      // string int_as_string = 12;
+      case 12: {
+        if (static_cast<::google::protobuf::uint8>(tag) != 98) goto handle_unusual;
+        ptr = ::google::protobuf::io::ReadSize(ptr, &size);
+        GOOGLE_PROTOBUF_PARSER_ASSERT(ptr);
+        ctx->extra_parse_data().SetFieldName("role_cfg.int_as_string");
+        object = msg->mutable_int_as_string();
+        if (size > end - ptr + ::google::protobuf::internal::ParseContext::kSlopBytes) {
+          parser_till_end = ::google::protobuf::internal::GreedyStringParserUTF8;
+          goto string_till_end;
+        }
+        GOOGLE_PROTOBUF_PARSER_ASSERT(::google::protobuf::internal::StringCheckUTF8(ptr, size, ctx));
+        ::google::protobuf::internal::InlineGreedyStringParser(object, ptr, size, ctx);
+        ptr += size;
         break;
       }
       default: {
@@ -547,6 +572,21 @@ bool role_cfg::MergePartialFromCodedStream(
         break;
       }
 
+      // string int_as_string = 12;
+      case 12: {
+        if (static_cast< ::google::protobuf::uint8>(tag) == (98 & 0xFF)) {
+          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
+                input, this->mutable_int_as_string()));
+          DO_(::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+            this->int_as_string().data(), static_cast<int>(this->int_as_string().length()),
+            ::google::protobuf::internal::WireFormatLite::PARSE,
+            "role_cfg.int_as_string"));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
       default: {
       handle_unusual:
         if (tag == 0) {
@@ -620,6 +660,16 @@ void role_cfg::SerializeWithCachedSizes(
       11, this->test_array(i), output);
   }
 
+  // string int_as_string = 12;
+  if (this->int_as_string().size() > 0) {
+    ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+      this->int_as_string().data(), static_cast<int>(this->int_as_string().length()),
+      ::google::protobuf::internal::WireFormatLite::SERIALIZE,
+      "role_cfg.int_as_string");
+    ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
+      12, this->int_as_string(), output);
+  }
+
   if (_internal_metadata_.have_unknown_fields()) {
     ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
         _internal_metadata_.unknown_fields(), output);
@@ -681,6 +731,17 @@ void role_cfg::SerializeWithCachedSizes(
       WriteStringToArray(11, this->test_array(i), target);
   }
 
+  // string int_as_string = 12;
+  if (this->int_as_string().size() > 0) {
+    ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+      this->int_as_string().data(), static_cast<int>(this->int_as_string().length()),
+      ::google::protobuf::internal::WireFormatLite::SERIALIZE,
+      "role_cfg.int_as_string");
+    target =
+      ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
+        12, this->int_as_string(), target);
+  }
+
   if (_internal_metadata_.have_unknown_fields()) {
     target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
         _internal_metadata_.unknown_fields(), target);
@@ -715,6 +776,13 @@ size_t role_cfg::ByteSizeLong() const {
     total_size += 1 +
       ::google::protobuf::internal::WireFormatLite::StringSize(
         this->name());
+  }
+
+  // string int_as_string = 12;
+  if (this->int_as_string().size() > 0) {
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::StringSize(
+        this->int_as_string());
   }
 
   // .dep_cfg dep_test = 10;
@@ -784,6 +852,10 @@ void role_cfg::MergeFrom(const role_cfg& from) {
 
     name_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.name_);
   }
+  if (from.int_as_string().size() > 0) {
+
+    int_as_string_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.int_as_string_);
+  }
   if (from.has_dep_test()) {
     mutable_dep_test()->::dep_cfg::MergeFrom(from.dep_test());
   }
@@ -828,6 +900,8 @@ void role_cfg::InternalSwap(role_cfg* other) {
   _internal_metadata_.Swap(&other->_internal_metadata_);
   test_array_.InternalSwap(CastToBase(&other->test_array_));
   name_.Swap(&other->name_, &::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+    GetArenaNoVirtual());
+  int_as_string_.Swap(&other->int_as_string_, &::google::protobuf::internal::GetEmptyStringAlreadyInited(),
     GetArenaNoVirtual());
   swap(dep_test_, other->dep_test_);
   swap(id_, other->id_);

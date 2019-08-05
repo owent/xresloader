@@ -21,11 +21,12 @@
       role_cfg_header : {
         xres_ver : "2.3.0",
         hash_code : "no hash code",
-        data_ver : "2.3.0.20190520132612",
+        data_ver : "2.3.0.20190805151451",
         count : 7
       },
       role_cfg : [
         {
+          int_as_string : "0",
           test_array : [
             "lalal",
             "欧若拉",
@@ -44,6 +45,7 @@
           id : 10001
         },
         {
+          int_as_string : "1",
           unlock_level : 39,
           test_array : [
             "blebleble",
@@ -63,6 +65,7 @@
           id : 10002
         },
         {
+          int_as_string : "2",
           unlock_level : 85,
           test_array : [
             "hahaha",
@@ -82,6 +85,7 @@
           id : 10003
         },
         {
+          int_as_string : "3",
           unlock_level : 122,
           test_array : [
             "angel",
@@ -100,6 +104,10 @@
           id : 10004
         },
         {
+          int_as_string : "4"
+        },
+        {
+          int_as_string : "5",
           unlock_level : 183,
           cost_type : 10001,
           test_array : [
@@ -119,6 +127,7 @@
           id : 10005
         },
         {
+          int_as_string : "6",
           unlock_level : 274,
           cost_type : 10101,
           test_array : [

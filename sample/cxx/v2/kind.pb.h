@@ -217,6 +217,21 @@ class role_cfg :
   ::std::string* release_name();
   void set_allocated_name(::std::string* name);
 
+  // optional string int_as_string = 12;
+  bool has_int_as_string() const;
+  void clear_int_as_string();
+  static const int kIntAsStringFieldNumber = 12;
+  const ::std::string& int_as_string() const;
+  void set_int_as_string(const ::std::string& value);
+  #if LANG_CXX11
+  void set_int_as_string(::std::string&& value);
+  #endif
+  void set_int_as_string(const char* value);
+  void set_int_as_string(const char* value, size_t size);
+  ::std::string* mutable_int_as_string();
+  ::std::string* release_int_as_string();
+  void set_allocated_int_as_string(::std::string* int_as_string);
+
   // optional .dep_cfg dep_test = 10;
   bool has_dep_test() const;
   void clear_dep_test();
@@ -263,6 +278,7 @@ class role_cfg :
   mutable ::google::protobuf::internal::CachedSize _cached_size_;
   ::google::protobuf::RepeatedPtrField<::std::string> test_array_;
   ::google::protobuf::internal::ArenaStringPtr name_;
+  ::google::protobuf::internal::ArenaStringPtr int_as_string_;
   ::dep_cfg* dep_test_;
   ::google::protobuf::uint32 id_;
   ::google::protobuf::uint32 unlock_level_;
@@ -865,72 +881,72 @@ class arr_in_arr_cfg :
 
 // optional uint32 id = 1;
 inline bool role_cfg::has_id() const {
-  return (_has_bits_[0] & 0x00000004u) != 0;
+  return (_has_bits_[0] & 0x00000008u) != 0;
 }
 inline void role_cfg::clear_id() {
   id_ = 0u;
-  _has_bits_[0] &= ~0x00000004u;
+  _has_bits_[0] &= ~0x00000008u;
 }
 inline ::google::protobuf::uint32 role_cfg::id() const {
   // @@protoc_insertion_point(field_get:role_cfg.id)
   return id_;
 }
 inline void role_cfg::set_id(::google::protobuf::uint32 value) {
-  _has_bits_[0] |= 0x00000004u;
+  _has_bits_[0] |= 0x00000008u;
   id_ = value;
   // @@protoc_insertion_point(field_set:role_cfg.id)
 }
 
 // optional uint32 unlock_level = 2;
 inline bool role_cfg::has_unlock_level() const {
-  return (_has_bits_[0] & 0x00000008u) != 0;
+  return (_has_bits_[0] & 0x00000010u) != 0;
 }
 inline void role_cfg::clear_unlock_level() {
   unlock_level_ = 0u;
-  _has_bits_[0] &= ~0x00000008u;
+  _has_bits_[0] &= ~0x00000010u;
 }
 inline ::google::protobuf::uint32 role_cfg::unlock_level() const {
   // @@protoc_insertion_point(field_get:role_cfg.unlock_level)
   return unlock_level_;
 }
 inline void role_cfg::set_unlock_level(::google::protobuf::uint32 value) {
-  _has_bits_[0] |= 0x00000008u;
+  _has_bits_[0] |= 0x00000010u;
   unlock_level_ = value;
   // @@protoc_insertion_point(field_set:role_cfg.unlock_level)
 }
 
 // optional uint32 cost_type = 3;
 inline bool role_cfg::has_cost_type() const {
-  return (_has_bits_[0] & 0x00000010u) != 0;
+  return (_has_bits_[0] & 0x00000020u) != 0;
 }
 inline void role_cfg::clear_cost_type() {
   cost_type_ = 0u;
-  _has_bits_[0] &= ~0x00000010u;
+  _has_bits_[0] &= ~0x00000020u;
 }
 inline ::google::protobuf::uint32 role_cfg::cost_type() const {
   // @@protoc_insertion_point(field_get:role_cfg.cost_type)
   return cost_type_;
 }
 inline void role_cfg::set_cost_type(::google::protobuf::uint32 value) {
-  _has_bits_[0] |= 0x00000010u;
+  _has_bits_[0] |= 0x00000020u;
   cost_type_ = value;
   // @@protoc_insertion_point(field_set:role_cfg.cost_type)
 }
 
 // optional int32 cost_value = 4;
 inline bool role_cfg::has_cost_value() const {
-  return (_has_bits_[0] & 0x00000020u) != 0;
+  return (_has_bits_[0] & 0x00000040u) != 0;
 }
 inline void role_cfg::clear_cost_value() {
   cost_value_ = 0;
-  _has_bits_[0] &= ~0x00000020u;
+  _has_bits_[0] &= ~0x00000040u;
 }
 inline ::google::protobuf::int32 role_cfg::cost_value() const {
   // @@protoc_insertion_point(field_get:role_cfg.cost_value)
   return cost_value_;
 }
 inline void role_cfg::set_cost_value(::google::protobuf::int32 value) {
-  _has_bits_[0] |= 0x00000020u;
+  _has_bits_[0] |= 0x00000040u;
   cost_value_ = value;
   // @@protoc_insertion_point(field_set:role_cfg.cost_value)
 }
@@ -997,7 +1013,7 @@ inline void role_cfg::set_allocated_name(::std::string* name) {
 
 // optional .dep_cfg dep_test = 10;
 inline bool role_cfg::has_dep_test() const {
-  return (_has_bits_[0] & 0x00000002u) != 0;
+  return (_has_bits_[0] & 0x00000004u) != 0;
 }
 inline const ::dep_cfg& role_cfg::dep_test() const {
   const ::dep_cfg* p = dep_test_;
@@ -1007,13 +1023,13 @@ inline const ::dep_cfg& role_cfg::dep_test() const {
 }
 inline ::dep_cfg* role_cfg::release_dep_test() {
   // @@protoc_insertion_point(field_release:role_cfg.dep_test)
-  _has_bits_[0] &= ~0x00000002u;
+  _has_bits_[0] &= ~0x00000004u;
   ::dep_cfg* temp = dep_test_;
   dep_test_ = nullptr;
   return temp;
 }
 inline ::dep_cfg* role_cfg::mutable_dep_test() {
-  _has_bits_[0] |= 0x00000002u;
+  _has_bits_[0] |= 0x00000004u;
   if (dep_test_ == nullptr) {
     auto* p = CreateMaybeMessage<::dep_cfg>(GetArenaNoVirtual());
     dep_test_ = p;
@@ -1032,9 +1048,9 @@ inline void role_cfg::set_allocated_dep_test(::dep_cfg* dep_test) {
       dep_test = ::google::protobuf::internal::GetOwnedMessage(
           message_arena, dep_test, submessage_arena);
     }
-    _has_bits_[0] |= 0x00000002u;
+    _has_bits_[0] |= 0x00000004u;
   } else {
-    _has_bits_[0] &= ~0x00000002u;
+    _has_bits_[0] &= ~0x00000004u;
   }
   dep_test_ = dep_test;
   // @@protoc_insertion_point(field_set_allocated:role_cfg.dep_test)
@@ -1107,6 +1123,66 @@ inline ::google::protobuf::RepeatedPtrField<::std::string>*
 role_cfg::mutable_test_array() {
   // @@protoc_insertion_point(field_mutable_list:role_cfg.test_array)
   return &test_array_;
+}
+
+// optional string int_as_string = 12;
+inline bool role_cfg::has_int_as_string() const {
+  return (_has_bits_[0] & 0x00000002u) != 0;
+}
+inline void role_cfg::clear_int_as_string() {
+  int_as_string_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  _has_bits_[0] &= ~0x00000002u;
+}
+inline const ::std::string& role_cfg::int_as_string() const {
+  // @@protoc_insertion_point(field_get:role_cfg.int_as_string)
+  return int_as_string_.GetNoArena();
+}
+inline void role_cfg::set_int_as_string(const ::std::string& value) {
+  _has_bits_[0] |= 0x00000002u;
+  int_as_string_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
+  // @@protoc_insertion_point(field_set:role_cfg.int_as_string)
+}
+#if LANG_CXX11
+inline void role_cfg::set_int_as_string(::std::string&& value) {
+  _has_bits_[0] |= 0x00000002u;
+  int_as_string_.SetNoArena(
+    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
+  // @@protoc_insertion_point(field_set_rvalue:role_cfg.int_as_string)
+}
+#endif
+inline void role_cfg::set_int_as_string(const char* value) {
+  GOOGLE_DCHECK(value != nullptr);
+  _has_bits_[0] |= 0x00000002u;
+  int_as_string_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
+  // @@protoc_insertion_point(field_set_char:role_cfg.int_as_string)
+}
+inline void role_cfg::set_int_as_string(const char* value, size_t size) {
+  _has_bits_[0] |= 0x00000002u;
+  int_as_string_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+      ::std::string(reinterpret_cast<const char*>(value), size));
+  // @@protoc_insertion_point(field_set_pointer:role_cfg.int_as_string)
+}
+inline ::std::string* role_cfg::mutable_int_as_string() {
+  _has_bits_[0] |= 0x00000002u;
+  // @@protoc_insertion_point(field_mutable:role_cfg.int_as_string)
+  return int_as_string_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline ::std::string* role_cfg::release_int_as_string() {
+  // @@protoc_insertion_point(field_release:role_cfg.int_as_string)
+  if (!has_int_as_string()) {
+    return nullptr;
+  }
+  _has_bits_[0] &= ~0x00000002u;
+  return int_as_string_.ReleaseNonDefaultNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline void role_cfg::set_allocated_int_as_string(::std::string* int_as_string) {
+  if (int_as_string != nullptr) {
+    _has_bits_[0] |= 0x00000002u;
+  } else {
+    _has_bits_[0] &= ~0x00000002u;
+  }
+  int_as_string_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), int_as_string);
+  // @@protoc_insertion_point(field_set_allocated:role_cfg.int_as_string)
 }
 
 // -------------------------------------------------------------------

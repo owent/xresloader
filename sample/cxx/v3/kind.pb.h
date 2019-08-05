@@ -209,6 +209,20 @@ class role_cfg :
   ::std::string* release_name();
   void set_allocated_name(::std::string* name);
 
+  // string int_as_string = 12;
+  void clear_int_as_string();
+  static const int kIntAsStringFieldNumber = 12;
+  const ::std::string& int_as_string() const;
+  void set_int_as_string(const ::std::string& value);
+  #if LANG_CXX11
+  void set_int_as_string(::std::string&& value);
+  #endif
+  void set_int_as_string(const char* value);
+  void set_int_as_string(const char* value, size_t size);
+  ::std::string* mutable_int_as_string();
+  ::std::string* release_int_as_string();
+  void set_allocated_int_as_string(::std::string* int_as_string);
+
   // .dep_cfg dep_test = 10;
   bool has_dep_test() const;
   void clear_dep_test();
@@ -249,6 +263,7 @@ class role_cfg :
   ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
   ::google::protobuf::RepeatedPtrField<::std::string> test_array_;
   ::google::protobuf::internal::ArenaStringPtr name_;
+  ::google::protobuf::internal::ArenaStringPtr int_as_string_;
   ::dep_cfg* dep_test_;
   ::google::protobuf::uint32 id_;
   ::google::protobuf::uint32 unlock_level_;
@@ -1030,6 +1045,59 @@ inline ::google::protobuf::RepeatedPtrField<::std::string>*
 role_cfg::mutable_test_array() {
   // @@protoc_insertion_point(field_mutable_list:role_cfg.test_array)
   return &test_array_;
+}
+
+// string int_as_string = 12;
+inline void role_cfg::clear_int_as_string() {
+  int_as_string_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline const ::std::string& role_cfg::int_as_string() const {
+  // @@protoc_insertion_point(field_get:role_cfg.int_as_string)
+  return int_as_string_.GetNoArena();
+}
+inline void role_cfg::set_int_as_string(const ::std::string& value) {
+  
+  int_as_string_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
+  // @@protoc_insertion_point(field_set:role_cfg.int_as_string)
+}
+#if LANG_CXX11
+inline void role_cfg::set_int_as_string(::std::string&& value) {
+  
+  int_as_string_.SetNoArena(
+    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
+  // @@protoc_insertion_point(field_set_rvalue:role_cfg.int_as_string)
+}
+#endif
+inline void role_cfg::set_int_as_string(const char* value) {
+  GOOGLE_DCHECK(value != nullptr);
+  
+  int_as_string_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
+  // @@protoc_insertion_point(field_set_char:role_cfg.int_as_string)
+}
+inline void role_cfg::set_int_as_string(const char* value, size_t size) {
+  
+  int_as_string_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+      ::std::string(reinterpret_cast<const char*>(value), size));
+  // @@protoc_insertion_point(field_set_pointer:role_cfg.int_as_string)
+}
+inline ::std::string* role_cfg::mutable_int_as_string() {
+  
+  // @@protoc_insertion_point(field_mutable:role_cfg.int_as_string)
+  return int_as_string_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline ::std::string* role_cfg::release_int_as_string() {
+  // @@protoc_insertion_point(field_release:role_cfg.int_as_string)
+  
+  return int_as_string_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline void role_cfg::set_allocated_int_as_string(::std::string* int_as_string) {
+  if (int_as_string != nullptr) {
+    
+  } else {
+    
+  }
+  int_as_string_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), int_as_string);
+  // @@protoc_insertion_point(field_set_allocated:role_cfg.int_as_string)
 }
 
 // -------------------------------------------------------------------

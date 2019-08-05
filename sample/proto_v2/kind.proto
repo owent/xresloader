@@ -13,7 +13,8 @@ message role_cfg {
     optional string name         = 5;
     optional dep_cfg dep_test    = 10;
 
-    repeated string test_array = 11;
+    repeated string test_array    = 11;
+    optional string int_as_string = 12;
 }
 
 message role_upgrade_cfg {

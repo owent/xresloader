@@ -74,6 +74,13 @@ public final class Xresloader {
     }
 
     @java.lang.Override
+    @SuppressWarnings({"unused"})
+    protected java.lang.Object newInstance(
+        UnusedPrivateParameter unused) {
+      return new IndexDescriptor();
+    }
+
+    @java.lang.Override
     public final com.google.protobuf.UnknownFieldSet
     getUnknownFields() {
       return this.unknownFields;
@@ -105,9 +112,9 @@ public final class Xresloader {
             }
             case 18: {
               java.lang.String s = input.readStringRequireUtf8();
-              if (!((mutable_bitField0_ & 0x00000002) != 0)) {
+              if (!((mutable_bitField0_ & 0x00000001) != 0)) {
                 fields_ = new com.google.protobuf.LazyStringArrayList();
-                mutable_bitField0_ |= 0x00000002;
+                mutable_bitField0_ |= 0x00000001;
               }
               fields_.add(s);
               break;
@@ -127,7 +134,7 @@ public final class Xresloader {
         throw new com.google.protobuf.InvalidProtocolBufferException(
             e).setUnfinishedMessage(this);
       } finally {
-        if (((mutable_bitField0_ & 0x00000002) != 0)) {
+        if (((mutable_bitField0_ & 0x00000001) != 0)) {
           fields_ = fields_.getUnmodifiableView();
         }
         this.unknownFields = unknownFields.build();
@@ -147,7 +154,6 @@ public final class Xresloader {
               org.xresloader.Xresloader.IndexDescriptor.class, org.xresloader.Xresloader.IndexDescriptor.Builder.class);
     }
 
-    private int bitField0_;
     public static final int NAME_FIELD_NUMBER = 1;
     private volatile java.lang.Object name_;
     /**
@@ -423,7 +429,7 @@ public final class Xresloader {
         name_ = "";
 
         fields_ = com.google.protobuf.LazyStringArrayList.EMPTY;
-        bitField0_ = (bitField0_ & ~0x00000002);
+        bitField0_ = (bitField0_ & ~0x00000001);
         return this;
       }
 
@@ -451,14 +457,12 @@ public final class Xresloader {
       public org.xresloader.Xresloader.IndexDescriptor buildPartial() {
         org.xresloader.Xresloader.IndexDescriptor result = new org.xresloader.Xresloader.IndexDescriptor(this);
         int from_bitField0_ = bitField0_;
-        int to_bitField0_ = 0;
         result.name_ = name_;
-        if (((bitField0_ & 0x00000002) != 0)) {
+        if (((bitField0_ & 0x00000001) != 0)) {
           fields_ = fields_.getUnmodifiableView();
-          bitField0_ = (bitField0_ & ~0x00000002);
+          bitField0_ = (bitField0_ & ~0x00000001);
         }
         result.fields_ = fields_;
-        result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
       }
@@ -514,7 +518,7 @@ public final class Xresloader {
         if (!other.fields_.isEmpty()) {
           if (fields_.isEmpty()) {
             fields_ = other.fields_;
-            bitField0_ = (bitField0_ & ~0x00000002);
+            bitField0_ = (bitField0_ & ~0x00000001);
           } else {
             ensureFieldsIsMutable();
             fields_.addAll(other.fields_);
@@ -622,9 +626,9 @@ public final class Xresloader {
 
       private com.google.protobuf.LazyStringList fields_ = com.google.protobuf.LazyStringArrayList.EMPTY;
       private void ensureFieldsIsMutable() {
-        if (!((bitField0_ & 0x00000002) != 0)) {
+        if (!((bitField0_ & 0x00000001) != 0)) {
           fields_ = new com.google.protobuf.LazyStringArrayList(fields_);
-          bitField0_ |= 0x00000002;
+          bitField0_ |= 0x00000001;
          }
       }
       /**
@@ -695,7 +699,7 @@ public final class Xresloader {
        */
       public Builder clearFields() {
         fields_ = com.google.protobuf.LazyStringArrayList.EMPTY;
-        bitField0_ = (bitField0_ & ~0x00000002);
+        bitField0_ = (bitField0_ & ~0x00000001);
         onChanged();
         return this;
       }
@@ -934,19 +938,11 @@ public final class Xresloader {
       "(\t:=\n\021enumv_description\022!.google.protobu" +
       "f.EnumValueOptions\030\351\007 \001(\tb\006proto3"
     };
-    com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
-        new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
-          public com.google.protobuf.ExtensionRegistry assignDescriptors(
-              com.google.protobuf.Descriptors.FileDescriptor root) {
-            descriptor = root;
-            return null;
-          }
-        };
-    com.google.protobuf.Descriptors.FileDescriptor
+    descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
         new com.google.protobuf.Descriptors.FileDescriptor[] {
           com.google.protobuf.DescriptorProtos.getDescriptor(),
-        }, assigner);
+        });
     internal_static_org_xresloader_IndexDescriptor_descriptor =
       getDescriptor().getMessageTypes().get(0);
     internal_static_org_xresloader_IndexDescriptor_fieldAccessorTable = new

@@ -197,6 +197,7 @@ public class ProgramOptions {
             HelpFormatter formatter = new HelpFormatter();
             formatter.setWidth(140);
             formatter.printHelp("Usage: java -client -jar " + script + " [options...]", options);
+            System.out.println("You can add -Dlog4j.configuration=log4j2.xml to use you own log configure.");
             return -1;
         }
 
@@ -205,6 +206,7 @@ public class ProgramOptions {
             HelpFormatter formatter = new HelpFormatter();
             formatter.setWidth(140);
             formatter.printHelp(String.format("java -client -jar \"%s\" [options...]", script), get_options_group());
+            System.out.println("You can add -Dlog4j.configuration=log4j2.xml to use you own log configure.");
             return 1;
         }
 
@@ -419,6 +421,13 @@ public class ProgramOptions {
             return logger;
         }
 
+        // try {
+        // System.setProperty("log4j.configurationFile", new
+        // File("log4j2.xml").toURI().toString());
+        // } catch (Exception e) {
+        // System.err.println(String.format("[ERROR] set
+        // -Dlog4j.configuration=log4j2.xml failed.\n%s", e.toString()));
+        // }
         String name = "xresloader";
         InputStream inCfg = getInstance().getClass().getClassLoader().getResourceAsStream("application.properties");
         Properties props = new Properties();

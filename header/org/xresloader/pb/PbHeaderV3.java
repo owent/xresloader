@@ -83,6 +83,13 @@ public final class PbHeaderV3 {
     }
 
     @java.lang.Override
+    @SuppressWarnings({"unused"})
+    protected java.lang.Object newInstance(
+        UnusedPrivateParameter unused) {
+      return new xresloader_header();
+    }
+
+    @java.lang.Override
     public final com.google.protobuf.UnknownFieldSet
     getUnknownFields() {
       return this.unknownFields;
@@ -95,7 +102,6 @@ public final class PbHeaderV3 {
       if (extensionRegistry == null) {
         throw new java.lang.NullPointerException();
       }
-      int mutable_bitField0_ = 0;
       com.google.protobuf.UnknownFieldSet.Builder unknownFields =
           com.google.protobuf.UnknownFieldSet.newBuilder();
       try {
@@ -1083,6 +1089,13 @@ public final class PbHeaderV3 {
     }
 
     @java.lang.Override
+    @SuppressWarnings({"unused"})
+    protected java.lang.Object newInstance(
+        UnusedPrivateParameter unused) {
+      return new xresloader_datablocks();
+    }
+
+    @java.lang.Override
     public final com.google.protobuf.UnknownFieldSet
     getUnknownFields() {
       return this.unknownFields;
@@ -1120,9 +1133,9 @@ public final class PbHeaderV3 {
               break;
             }
             case 18: {
-              if (!((mutable_bitField0_ & 0x00000002) != 0)) {
+              if (!((mutable_bitField0_ & 0x00000001) != 0)) {
                 dataBlock_ = new java.util.ArrayList<com.google.protobuf.ByteString>();
-                mutable_bitField0_ |= 0x00000002;
+                mutable_bitField0_ |= 0x00000001;
               }
               dataBlock_.add(input.readBytes());
               break;
@@ -1142,7 +1155,7 @@ public final class PbHeaderV3 {
         throw new com.google.protobuf.InvalidProtocolBufferException(
             e).setUnfinishedMessage(this);
       } finally {
-        if (((mutable_bitField0_ & 0x00000002) != 0)) {
+        if (((mutable_bitField0_ & 0x00000001) != 0)) {
           dataBlock_ = java.util.Collections.unmodifiableList(dataBlock_); // C
         }
         this.unknownFields = unknownFields.build();
@@ -1162,7 +1175,6 @@ public final class PbHeaderV3 {
               org.xresloader.pb.PbHeaderV3.xresloader_datablocks.class, org.xresloader.pb.PbHeaderV3.xresloader_datablocks.Builder.class);
     }
 
-    private int bitField0_;
     public static final int HEADER_FIELD_NUMBER = 1;
     private org.xresloader.pb.PbHeaderV3.xresloader_header header_;
     /**
@@ -1429,7 +1441,7 @@ public final class PbHeaderV3 {
           headerBuilder_ = null;
         }
         dataBlock_ = java.util.Collections.emptyList();
-        bitField0_ = (bitField0_ & ~0x00000002);
+        bitField0_ = (bitField0_ & ~0x00000001);
         return this;
       }
 
@@ -1457,18 +1469,16 @@ public final class PbHeaderV3 {
       public org.xresloader.pb.PbHeaderV3.xresloader_datablocks buildPartial() {
         org.xresloader.pb.PbHeaderV3.xresloader_datablocks result = new org.xresloader.pb.PbHeaderV3.xresloader_datablocks(this);
         int from_bitField0_ = bitField0_;
-        int to_bitField0_ = 0;
         if (headerBuilder_ == null) {
           result.header_ = header_;
         } else {
           result.header_ = headerBuilder_.build();
         }
-        if (((bitField0_ & 0x00000002) != 0)) {
+        if (((bitField0_ & 0x00000001) != 0)) {
           dataBlock_ = java.util.Collections.unmodifiableList(dataBlock_);
-          bitField0_ = (bitField0_ & ~0x00000002);
+          bitField0_ = (bitField0_ & ~0x00000001);
         }
         result.dataBlock_ = dataBlock_;
-        result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
       }
@@ -1523,7 +1533,7 @@ public final class PbHeaderV3 {
         if (!other.dataBlock_.isEmpty()) {
           if (dataBlock_.isEmpty()) {
             dataBlock_ = other.dataBlock_;
-            bitField0_ = (bitField0_ & ~0x00000002);
+            bitField0_ = (bitField0_ & ~0x00000001);
           } else {
             ensureDataBlockIsMutable();
             dataBlock_.addAll(other.dataBlock_);
@@ -1679,9 +1689,9 @@ public final class PbHeaderV3 {
 
       private java.util.List<com.google.protobuf.ByteString> dataBlock_ = java.util.Collections.emptyList();
       private void ensureDataBlockIsMutable() {
-        if (!((bitField0_ & 0x00000002) != 0)) {
+        if (!((bitField0_ & 0x00000001) != 0)) {
           dataBlock_ = new java.util.ArrayList<com.google.protobuf.ByteString>(dataBlock_);
-          bitField0_ |= 0x00000002;
+          bitField0_ |= 0x00000001;
          }
       }
       /**
@@ -1689,7 +1699,7 @@ public final class PbHeaderV3 {
        */
       public java.util.List<com.google.protobuf.ByteString>
           getDataBlockList() {
-        return ((bitField0_ & 0x00000002) != 0) ?
+        return ((bitField0_ & 0x00000001) != 0) ?
                  java.util.Collections.unmodifiableList(dataBlock_) : dataBlock_;
       }
       /**
@@ -1745,7 +1755,7 @@ public final class PbHeaderV3 {
        */
       public Builder clearDataBlock() {
         dataBlock_ = java.util.Collections.emptyList();
-        bitField0_ = (bitField0_ & ~0x00000002);
+        bitField0_ = (bitField0_ & ~0x00000001);
         onChanged();
         return this;
       }
@@ -1829,18 +1839,10 @@ public final class PbHeaderV3 {
       "resloader.pb.xresloader_header\022\022\n\ndata_b" +
       "lock\030\002 \003(\014b\006proto3"
     };
-    com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
-        new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
-          public com.google.protobuf.ExtensionRegistry assignDescriptors(
-              com.google.protobuf.Descriptors.FileDescriptor root) {
-            descriptor = root;
-            return null;
-          }
-        };
-    com.google.protobuf.Descriptors.FileDescriptor
+    descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
         new com.google.protobuf.Descriptors.FileDescriptor[] {
-        }, assigner);
+        });
     internal_static_org_xresloader_pb_xresloader_header_descriptor =
       getDescriptor().getMessageTypes().get(0);
     internal_static_org_xresloader_pb_xresloader_header_fieldAccessorTable = new

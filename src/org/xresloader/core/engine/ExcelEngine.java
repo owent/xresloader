@@ -243,7 +243,7 @@ public class ExcelEngine {
                 break;
             }
 
-            out.set(String.valueOf(cal_cell2num(c, cv)));
+            out.set(String.format("%g", cal_cell2num(c, cv)));
             break;
         case STRING:
             // return ret.set(tryMacro(cal_cell2str(c, cv).trim()));

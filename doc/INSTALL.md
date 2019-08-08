@@ -36,6 +36,13 @@ mvn package
 比如:
 ```xml
         <mirror>
+            <id>tencent-cloud</id>
+            <mirrorOf>central</mirrorOf>
+            <name>Aliyun Mirror.</name>
+            <url>http://mirrors.cloud.tencent.com/nexus/repository/maven-public/</url>
+        </mirror>
+
+        <mirror>
             <id>aliyun</id>
             <mirrorOf>central</mirrorOf>
             <name>Aliyun Mirror.</name>
@@ -83,13 +90,16 @@ mvn -s [settings.xml路径] package
 ```
 
 ### 其他仓库地址
+
 #### 公有仓库地址：
-1. **http://maven.aliyun.com/nexus/#view-repositories**
-2. **[http://search.maven.org/](http://search.maven.org/#browse)**
-3. **http://mvnrepository.com/**
-4. http://repository.jboss.com/maven2/
-5. http://repository.sonatype.org/content/groups/public/
-6. http://mirrors.ibiblio.org/pub/mirrors/maven2/org/acegisecurity/
+
+1. **http://mirrors.cloud.tencent.com/nexus/repository/maven-public/**
+2. **http://maven.aliyun.com/nexus/#view-repositories**
+3. **[http://search.maven.org/](http://search.maven.org/#browse)**
+4. **http://mvnrepository.com/**
+5. http://repository.jboss.com/maven2/
+6. http://repository.sonatype.org/content/groups/public/
+7. http://mirrors.ibiblio.org/pub/mirrors/maven2/org/acegisecurity/
 
 #### 私有仓库地址：
 1. http://repository.codehaus.org/

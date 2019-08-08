@@ -243,7 +243,12 @@ public class ExcelEngine {
                 break;
             }
 
-            out.set(String.format("%g", cal_cell2num(c, cv)));
+            double dv = cal_cell2num(c, cv);
+            if (dv == (long) dv) {
+                out.set(String.format("%d", (long) dv));
+            } else {
+                out.set(String.format("%s", dv));
+            }
             break;
         case STRING:
             // return ret.set(tryMacro(cal_cell2str(c, cv).trim()));

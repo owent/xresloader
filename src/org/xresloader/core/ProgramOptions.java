@@ -197,7 +197,7 @@ public class ProgramOptions {
             HelpFormatter formatter = new HelpFormatter();
             formatter.setWidth(140);
             formatter.printHelp("Usage: java -client -jar " + script + " [options...]", options);
-            System.out.println("You can add -Dlog4j.configuration=log4j2.xml to use you own log configure.");
+            System.out.println("You can add -Dlog4j.configuration=log4j2.xml to use your own log configure.");
             return -1;
         }
 
@@ -206,7 +206,7 @@ public class ProgramOptions {
             HelpFormatter formatter = new HelpFormatter();
             formatter.setWidth(140);
             formatter.printHelp(String.format("java -client -jar \"%s\" [options...]", script), get_options_group());
-            System.out.println("You can add -Dlog4j.configuration=log4j2.xml to use you own log configure.");
+            System.out.println("You can add -Dlog4j.configuration=log4j2.xml to use your own log configure.");
             return 1;
         }
 

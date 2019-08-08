@@ -2,14 +2,14 @@
 ==========
 2.3.1
 ------
-1. 数字类型转字符串，使用 %g format（去除不必要的小数点和0）
-2. 手动控制依赖包打包，裁剪掉不需要的class，精简jar包的大小\(包体减小约 37%\)
-3. 更新 maven-compiler-plugin 到 3.8.1
-4. 更新 commons-codec 到 1.13
-5. 更新 log4j 到 2.12.0
-6. 更新 protobuf 到 3.9.1
-7. 更新 org.apache.poi 到 4.1.0
-8. 更新 commons-csv 到 1.7
+1. 数字类型转字符串，使用 ```%g``` 格式（去除不必要的小数点和0）
+2. 更新 maven-compiler-plugin 到 3.8.1
+3. 更新 commons-codec 到 1.13
+4. 更新 log4j 到 2.12.0
+5. 更新 protobuf 到 3.9.1
+6. 更新 org.apache.poi 到 4.1.0
+7. 更新 commons-csv 到 1.7
+8. 修订powershell的sample生成脚本
 
 2.3.0
 ------

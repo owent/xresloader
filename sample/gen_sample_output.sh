@@ -3,7 +3,11 @@
 cd "$(dirname $0)";
 SCRIPT_DIR="$PWD";
 
-XRESLOADER="$(ls -t ../target/*.jar | head -n 1)";
+XRESLOADER="$(ls -t ../target/xresloader-*-jar-with-dependencies.jar 2>/dev/null | head -n 1)";
+if [ -z "$XRESLOADER" ] || [ ! -e "$XRESLOADER" ]; then
+    XRESLOADER="$(ls -t ../target/xresloader-*.jar 2>/dev/null | head -n 1)";
+fi
+
 if [ -z "$XRESLOADER" ] || [ ! -e "$XRESLOADER" ]; then
     echo "xresloader not found.";
     exit 0;

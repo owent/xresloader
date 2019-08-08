@@ -7,9 +7,6 @@ xresloader
 | ------------ | ----------------------------------------------------------------------------------------------------------------------------- |
 | 当前构建状态 | [![Build Status](https://travis-ci.org/xresloader/xresloader.svg?branch=master)](https://travis-ci.org/xresloader/xresloader) |
 
-
-[![Gitter](https://badges.gitter.im/xresloader/xresloader.svg)](https://gitter.im/xresloader/xresloader?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
-
 本工程只是转表引擎工具，批处理（批量转表）工具的请参见：
 
 * 批量转表配置规范: https://github.com/xresloader/xresconv-conf

@@ -2,7 +2,7 @@
 
 return {
     [1] = {
-        xres_ver = "2.3.0",
+        xres_ver = "2.3.1",
         hash_code = "no hash code",
         data_ver = "1.0.0.0",
         count = 7,
@@ -17,7 +17,7 @@ return {
             },
             name = "欧若拉",
             dep_test = {
-                name = "123.0",
+                name = "123",
                 id = 51,
                 dep2 = {
                     level = "2014-10-13",
@@ -37,7 +37,7 @@ return {
             },
             name = "杰克",
             dep_test = {
-                name = "654.0",
+                name = "654",
                 id = 61,
                 dep2 = {
                     level = "2014-10-14",

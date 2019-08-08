@@ -1,11 +1,34 @@
 xresloader
 ==========
 
-快速实现一个简单暴力功能强大的导表工具
-
 | 构建环境     | Linux (Oracle JDK 8)                                                                                                          |
 | ------------ | ----------------------------------------------------------------------------------------------------------------------------- |
 | 当前构建状态 | [![Build Status](https://travis-ci.org/xresloader/xresloader.svg?branch=master)](https://travis-ci.org/xresloader/xresloader) |
+
+文档: https://xresloader.atframe.work
+
+主要功能
+------------
+
++ 跨平台（java 1.8 or upper）
++ Excel => protobuf/msgpack/lua/javascript/json/xml
++ 完整支持协议结构，包括嵌套结构和数组嵌套
++ 同时支持protobuf proto v2 和 proto v3
++ 支持导出proto枚举值到lua/javascript代码和json/xml数据
++ 支持导出 UnrealEngine 支持的json或csv格式，支持自动生成和导出 UnrealEngine 的 DataTable 加载代码
++ 支持别名表，用于给数据内容使用一个易读的名字
++ 支持验证器，可以在数据里直接填写proto字段名或枚举名，或者验证填入数据的是否有效
++ 支持通过protobuf协议插件控制部分输出
++ 支持自动合表，把多个Excel数据表合并成一个输出文件
++ 支持公式
++ 支持空数据压缩（裁剪）或保留定长数组
++ 支持基于正则表达式分词的字段名映射转换规则
++ 支持设置数据版本号
++ Lua输出支持全局导出或导出为 require 模块或导出为 module 模块。
++ Javascript输出支持全局导出或导出为 nodejs 模块或导出为 AMD 模块。
++ 提供CLI批量转换工具（支持python 2.7/python 3 @ Windows、macOS、Linux）
++ 提供GUI批量转换工具（支持Windows、macOS、Linux）
++ CLI/GUI批量转换工具支持include来实现配置复用
 
 本工程只是转表引擎工具，批处理（批量转表）工具的请参见：
 
@@ -14,7 +37,7 @@ xresloader
 * 跨平台命令行工具(兼容python2和python3，Windows/Linux/macOS): https://github.com/xresloader/xresconv-cli
 
 License
-------
+------------
 [MIT License](LICENSE)
 
 GET START

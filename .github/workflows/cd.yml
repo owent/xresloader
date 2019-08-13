@@ -1,0 +1,35 @@
+# setup @see https://help.github.com/en/articles/workflow-syntax-for-github-actions
+# environment @see https://help.github.com/en/articles/software-in-virtual-environments-for-github-actions 
+#                  https://help.github.com/en/articles/virtual-environments-for-github-actions
+# example     @see https://github.com/actions/toolkit/blob/master/.github/workflows/workflow.yml
+name: Continuous Deploy
+# This workflow is triggered on pushes to the repository.
+on: # @see https://help.github.com/en/articles/events-that-trigger-workflows#webhook-events
+  push:
+    branches:    # Array of patterns that match refs/heads
+    - master     # Push events on master branch
+    - releases/* # Push events to branches matching refs/heads/releases/*
+    - !refs/pull/*
+  # schedule:
+  #  - cron:  0 * * * *
+
+
+
+jobs:
+  build: # job id, can be any string
+    # Job name is Build And Publish
+    name: Build And Publish
+    # This job runs on Linux
+    strategy:
+      matrix:
+        os: [ubuntu-latest]
+    steps:
+    - name: Checkout
+      uses: actions/checkout@master # https://github.com/actions/actions
+    - name: Set up JDK 8.x
+      uses: actions/setup-java@master # https://github.com/actions/setup-java
+      with:
+        version: '8.x'  # The JDK version to make available on the path. Takes a whole or semver Jdk version, or 1.x syntax (e.g. 1.8 => Jdk 8.x)
+        architecture: x64 # (x64 or x86) - defaults to x64
+    - name: Build with Maven
+      run: mvn package --file pom.xml

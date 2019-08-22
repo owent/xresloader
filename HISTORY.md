@@ -1,7 +1,15 @@
-更新记录：
+更新记录
 ==========
+
+2.4.0
+------
+
+1. 常量导出现在会导出protobuf的message里包含oneof了(使用C++的命名规则 ```k大写驼峰名字``` )
+2. 支持解析protobuf的内嵌message
+
 2.3.1
 ------
+
 1. 数字类型转字符串，使用 ```%g``` 格式（去除不必要的小数点和0）
 2. 更新 maven-compiler-plugin 到 3.8.1
 3. 更新 commons-codec 到 1.13
@@ -13,6 +21,7 @@
 
 2.3.0
 ------
+
 1. 优化sample输出脚本，先移除过期的 ```UnreaImportSettings.json``` 文件。
 2. 增加 ```UeCfg-RecursiveMode=true/false``` 的 **SchemeMeta** 用以控制是否启用嵌套模式，默认统一为开启嵌套模式。
 3. 增加 ```UeCfg-DestinationPath=<PATH>``` 的 **SchemeMeta** 用以控制输出的uassert目录。
@@ -20,6 +29,7 @@
 
 2.2.0
 ------
+
 1. 增加protobuf插件 - org.xresloader.ue.ue_type_is_class (用于UE代码输出时直接输出UE支持的 ```TSoftClassPtr<T>``` 来替换 ```TSoftObjectPtr<T>``` 类型)
 2. 增加和优化xresloader内部的Message描述抽象
 3. 支持UE-JSON的嵌套模式导出
@@ -30,12 +40,14 @@
 
 2.1.1
 ------
+
 1. 增加UE输出的Clear接口，用于把所有的数据清空
 2. 增加UE输出的GetRowName接口，用于方便C++接口调用
 3. 修复UE接口返回的IsValid参数错误的问题
 
 2.1.0
 ------
+
 1. 对protobuf的proto 3增加protobuf的扩展插件支持
 2. 增加protobuf插件 - org.xresloader.verifier (支持和Excel里一样的验证器语法)
 3. 增加protobuf插件 - org.xresloader.msg_description
@@ -47,12 +59,14 @@
 
 2.0.1
 ------
+
 1. 修复UE代码输出中，多输出了Name字段的问题
 2. 修复int32类型转出UE代码时，变成了int64的问题
 3. 输出的类名包含包名前缀
 
 2.0.0
 ------
+
 1. 包名由 com.owent.xresloader 改为 org.xresloader.core
 2. 协议包名由 com.owent.xresloader.pb 改为 org.xresloader.pb
 3. 初步支持 UnrealEngine 4 的数据表和代码导出
@@ -68,14 +82,15 @@
 
 1.4.3
 ------
+
 1. javascript全局导出支持多层namespace
 2. 修订sample脚本问题导致的node.js转出选项不正确的问题
 3. 优化执行转表时创建对象的数量，使用共享的输出缓存，不再依赖运行时java反射
 4. 补充sample的新的示例的README
 
-
 1.4.2
 ------
+
 1. 增加一些错误提示信息的行提示和表名提示，用以辅助排查配置错误
 2. org.json更新到20180130
 3. com.google.protobuf更新到3.5.1
@@ -83,6 +98,7 @@
 
 1.4.1
 ------
+
 1. 支持使用"或"符号|分隔的多个验证器
 2. 支持整数范围验证器
 3. 更新protobuf到3.5.0
@@ -91,6 +107,7 @@
 
 1.4.0
 ------
+
 1. 修改版本号规则为3位，和maven内大多数库的结构一致，主版本号.功能版本号.修订版本号
 2. 增加-a --data-version用于允许用户设置数据内数据版本号，方便业务做多版本兼容
 3. 更新commons-codec到1.11
@@ -99,6 +116,7 @@
 
 1.3.3.2
 ------
+
 1. 更新POI到3.17
 2. 更新protobuf到3.4.0
 3. 更新json到20170506
@@ -109,11 +127,13 @@
 
 1.3.3.1
 ------
+
 1. 修复lua和javascript无pretty模式输出的首行注释问题
 2. 修复验证器误报error日志的问题
 
 1.3.3.0
 ------
+
 1. 更新log4j到2.8.2
 2. 修复1.3.2.0版本中，使用命令行模式时，同一个表会被转多次的BUG
 3. 使用maven-compiler-plugin来指定java版本
@@ -121,9 +141,9 @@
 5. 移除一批对poi的deprecated的API的使用，兼容至poi 4.1版本。poi 4.2版本后API又要改名，到时候再换一次
 6. 现在对1970年之前的时间，都视为日期无效，只取时分秒
 
-
 1.3.2.0
 ------
+
 1. 更新build-helper-maven-plugin到3.0.0
 2. 更新maven-shade-plugin到3.0.0
 3. 更新commons-cli到1.4
@@ -132,23 +152,26 @@
 6. 优化命令行模式的信息输出
 7. 修复scheme表读取失败时返回码未增加失败计数的问题
 
-
 1.3.1.0
 ------
+
 1. 允许多个package（命名空间）,当缩写类型名称存在于多个命名空间时，必须使用完整类型名
 
 1.3.0.2
 ------
+
 1. 修复1.3.0.1中仅二进制输出会导出默认required字段的问题
 2. 修正移除转表失败是的错误提示信息
 
 1.3.0.1
 ------
+
 1. 修复1.3.0.0不兼容以前版本对proto v2 的required字段生成默认值的行为
 2. 重复的元表增加warning
 
 1.3.0.0
 ------
+
 1. 支持差异化合表(不再要求合表的Key的那一行必须一致)
 2. 增加验证器功能,允许使用验证器校验数据和转换数据
 3. json配置和conf元表配置也支持合表
@@ -157,9 +180,9 @@
 6. 大规模优化数据流，减少转表开销
 7. sample里生成pb文件时也会调用tools里的脚本生成header的pb和cpp文件（现在c++的header增加了版本号检查，需要不低于当前所用的protobuf版本）
 
-
 1.1.0.0
 ------
+
 1. 更新build-helper-maven-plugin到1.12
 2. 更新log4j到2.6.2
 3. 更新ini4j到20160810
@@ -169,12 +192,14 @@
 
 1.0.6.1
 ------
+
 1. 修复excel里配置成list而协议不是repeated时的错误提示
 2. 使用[log4j2](http://logging.apache.org/log4j/2.x/)来输出日志
 3. 控制台输出颜色支持
 
 1.0.6.0
 ------
+
 1. javascript的写入全局可以设置导出的到统一名字空间(lua和其他输出很容易在上层做包装，但是js不行，所以js特别处理一下)
 2. 修正数组嵌套数组的结构转换丢失的BUG
 3. 补充msgpack的读取说明，补充node.js的读取示例代码
@@ -186,10 +211,12 @@
 
 1.0.5.0
 ------
+
 1. 增加javascript的导出支持
 
 1.0.4.0
 ------
+
 1. 返回码改为失败的数量，无失败则返回0（用以和jre执行崩溃的返回码是1相统一）
 2. 更新build-helper-maven-plugin到1.10
 3. 更新maven-shade-plugin到2.4.3
@@ -198,6 +225,7 @@
 
 1.0.3.0
 ------
+
 1. 依赖库更新,全部更新到目前为止的最新稳定版
 2. 增加导出enum名称集的功能
 3. 修正没有元信息表时，公式选项被忽略的BUG
@@ -206,6 +234,7 @@
 
 1.0.2.1
 ------
+
 1. 允许把枚举类型提取到外部
 2. 优化protobuf的读取逻辑，对于相同的描述文件不再反复转换
 3. 整理部分字符串拼接代码
@@ -213,5 +242,6 @@
 
 1.0.2.0
 ------
+
 1. 增加通过std输入转换列表的功能，提升转换速度
 2. 更换gnu.getopt为commons-cli，优化参数转换代码

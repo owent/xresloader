@@ -1,7 +1,7 @@
 xresloader
 ==========
 
-| 构建环境     | Linux (Oracle JDK 8)                                                                                                          |
+| 构建环境     | Linux (OpenJDK 8)                                                                                                          |
 | ------------ | ----------------------------------------------------------------------------------------------------------------------------- |
 | 当前构建状态 | [![Build Status](https://travis-ci.org/xresloader/xresloader.svg?branch=master)](https://travis-ci.org/xresloader/xresloader) |
 

@@ -5,7 +5,10 @@ cache:
   directories:
   - "$HOME/.m2"
 install: mvn install -DskipTests=true
-script: mvn package
+script: 
+  - mvn package
+  - if [ -e "target/protocols.zip" ]; then rm -f "target/protocols.zip"; fi
+  - echo $(cd header && zip -r "../target/protocols.zip" extensions *.proto *.pb)
 notifications:
   email: false
   irc:
@@ -21,7 +24,9 @@ deploy:
   api_key:
     secure: VMJdp5oQbE9eICvGeb26KkELAZ1yWWB3xyoiUPHPD6s4EuWxWdD6A4aQXTEwrtY2jSz1Q6rsx/SZkupDNVNJcnhXknlft89P0WhuJ+lphf47EJpRgThK/n7DS3UrdkXIhcwhlbCODy3Q7EgKKifv/L7tecS+yspD8EpXQQu2400=
   file_glob: true
-  file: "target/*.jar"
+  file: 
+    - "target/*.jar"
+    - "target/protocols.zip"
   skip_cleanup: true
   overwrite: true
   draft: true

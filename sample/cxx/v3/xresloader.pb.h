@@ -28,10 +28,8 @@
 #include <google/protobuf/inlined_string_field.h>
 #include <google/protobuf/metadata.h>
 #include <google/protobuf/generated_message_reflection.h>
-#include <google/protobuf/message.h>
 #include <google/protobuf/repeated_field.h>  // IWYU pragma: export
 #include <google/protobuf/extension_set.h>  // IWYU pragma: export
-#include <google/protobuf/unknown_field_set.h>
 #include <google/protobuf/descriptor.pb.h>
 // @@protoc_insertion_point(includes)
 #include <google/protobuf/port_def.inc>
@@ -55,175 +53,14 @@ struct TableStruct_xresloader_2eproto {
   static const ::PROTOBUF_NAMESPACE_ID::uint32 offsets[];
 };
 extern const ::PROTOBUF_NAMESPACE_ID::internal::DescriptorTable descriptor_table_xresloader_2eproto;
-namespace org {
-namespace xresloader {
-class IndexDescriptor;
-class IndexDescriptorDefaultTypeInternal;
-extern IndexDescriptorDefaultTypeInternal _IndexDescriptor_default_instance_;
-}  // namespace xresloader
-}  // namespace org
 PROTOBUF_NAMESPACE_OPEN
-template<> ::org::xresloader::IndexDescriptor* Arena::CreateMaybeMessage<::org::xresloader::IndexDescriptor>(Arena*);
 PROTOBUF_NAMESPACE_CLOSE
 namespace org {
 namespace xresloader {
 
 // ===================================================================
 
-class IndexDescriptor :
-    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:org.xresloader.IndexDescriptor) */ {
- public:
-  IndexDescriptor();
-  virtual ~IndexDescriptor();
 
-  IndexDescriptor(const IndexDescriptor& from);
-  IndexDescriptor(IndexDescriptor&& from) noexcept
-    : IndexDescriptor() {
-    *this = ::std::move(from);
-  }
-
-  inline IndexDescriptor& operator=(const IndexDescriptor& from) {
-    CopyFrom(from);
-    return *this;
-  }
-  inline IndexDescriptor& operator=(IndexDescriptor&& from) noexcept {
-    if (GetArenaNoVirtual() == from.GetArenaNoVirtual()) {
-      if (this != &from) InternalSwap(&from);
-    } else {
-      CopyFrom(from);
-    }
-    return *this;
-  }
-
-  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* descriptor() {
-    return GetDescriptor();
-  }
-  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* GetDescriptor() {
-    return GetMetadataStatic().descriptor;
-  }
-  static const ::PROTOBUF_NAMESPACE_ID::Reflection* GetReflection() {
-    return GetMetadataStatic().reflection;
-  }
-  static const IndexDescriptor& default_instance();
-
-  static void InitAsDefaultInstance();  // FOR INTERNAL USE ONLY
-  static inline const IndexDescriptor* internal_default_instance() {
-    return reinterpret_cast<const IndexDescriptor*>(
-               &_IndexDescriptor_default_instance_);
-  }
-  static constexpr int kIndexInFileMessages =
-    0;
-
-  friend void swap(IndexDescriptor& a, IndexDescriptor& b) {
-    a.Swap(&b);
-  }
-  inline void Swap(IndexDescriptor* other) {
-    if (other == this) return;
-    InternalSwap(other);
-  }
-
-  // implements Message ----------------------------------------------
-
-  inline IndexDescriptor* New() const final {
-    return CreateMaybeMessage<IndexDescriptor>(nullptr);
-  }
-
-  IndexDescriptor* New(::PROTOBUF_NAMESPACE_ID::Arena* arena) const final {
-    return CreateMaybeMessage<IndexDescriptor>(arena);
-  }
-  void CopyFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) final;
-  void MergeFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) final;
-  void CopyFrom(const IndexDescriptor& from);
-  void MergeFrom(const IndexDescriptor& from);
-  PROTOBUF_ATTRIBUTE_REINITIALIZES void Clear() final;
-  bool IsInitialized() const final;
-
-  size_t ByteSizeLong() const final;
-  #if GOOGLE_PROTOBUF_ENABLE_EXPERIMENTAL_PARSER
-  const char* _InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) final;
-  #else
-  bool MergePartialFromCodedStream(
-      ::PROTOBUF_NAMESPACE_ID::io::CodedInputStream* input) final;
-  #endif  // GOOGLE_PROTOBUF_ENABLE_EXPERIMENTAL_PARSER
-  void SerializeWithCachedSizes(
-      ::PROTOBUF_NAMESPACE_ID::io::CodedOutputStream* output) const final;
-  ::PROTOBUF_NAMESPACE_ID::uint8* InternalSerializeWithCachedSizesToArray(
-      ::PROTOBUF_NAMESPACE_ID::uint8* target) const final;
-  int GetCachedSize() const final { return _cached_size_.Get(); }
-
-  private:
-  inline void SharedCtor();
-  inline void SharedDtor();
-  void SetCachedSize(int size) const final;
-  void InternalSwap(IndexDescriptor* other);
-  friend class ::PROTOBUF_NAMESPACE_ID::internal::AnyMetadata;
-  static ::PROTOBUF_NAMESPACE_ID::StringPiece FullMessageName() {
-    return "org.xresloader.IndexDescriptor";
-  }
-  private:
-  inline ::PROTOBUF_NAMESPACE_ID::Arena* GetArenaNoVirtual() const {
-    return nullptr;
-  }
-  inline void* MaybeArenaPtr() const {
-    return nullptr;
-  }
-  public:
-
-  ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadata() const final;
-  private:
-  static ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadataStatic() {
-    ::PROTOBUF_NAMESPACE_ID::internal::AssignDescriptors(&::descriptor_table_xresloader_2eproto);
-    return ::descriptor_table_xresloader_2eproto.file_level_metadata[kIndexInFileMessages];
-  }
-
-  public:
-
-  // nested types ----------------------------------------------------
-
-  // accessors -------------------------------------------------------
-
-  enum : int {
-    kFieldsFieldNumber = 2,
-    kNameFieldNumber = 1,
-  };
-  // repeated string fields = 2;
-  int fields_size() const;
-  void clear_fields();
-  const std::string& fields(int index) const;
-  std::string* mutable_fields(int index);
-  void set_fields(int index, const std::string& value);
-  void set_fields(int index, std::string&& value);
-  void set_fields(int index, const char* value);
-  void set_fields(int index, const char* value, size_t size);
-  std::string* add_fields();
-  void add_fields(const std::string& value);
-  void add_fields(std::string&& value);
-  void add_fields(const char* value);
-  void add_fields(const char* value, size_t size);
-  const ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField<std::string>& fields() const;
-  ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField<std::string>* mutable_fields();
-
-  // string name = 1;
-  void clear_name();
-  const std::string& name() const;
-  void set_name(const std::string& value);
-  void set_name(std::string&& value);
-  void set_name(const char* value);
-  void set_name(const char* value, size_t size);
-  std::string* mutable_name();
-  std::string* release_name();
-  void set_allocated_name(std::string* name);
-
-  // @@protoc_insertion_point(class_scope:org.xresloader.IndexDescriptor)
- private:
-  class _Internal;
-
-  ::PROTOBUF_NAMESPACE_ID::internal::InternalMetadataWithArena _internal_metadata_;
-  ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField<std::string> fields_;
-  ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr name_;
-  mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
-  friend struct ::TableStruct_xresloader_2eproto;
-};
 // ===================================================================
 
 static const int kFileDescriptionFieldNumber = 1001;
@@ -234,14 +71,6 @@ static const int kMsgDescriptionFieldNumber = 1001;
 extern ::PROTOBUF_NAMESPACE_ID::internal::ExtensionIdentifier< ::google::protobuf::MessageOptions,
     ::PROTOBUF_NAMESPACE_ID::internal::StringTypeTraits, 9, false >
   msg_description;
-static const int kKvIndexFieldNumber = 1021;
-extern ::PROTOBUF_NAMESPACE_ID::internal::ExtensionIdentifier< ::google::protobuf::MessageOptions,
-    ::PROTOBUF_NAMESPACE_ID::internal::RepeatedMessageTypeTraits< ::org::xresloader::IndexDescriptor >, 11, false >
-  kv_index;
-static const int kKlIndexFieldNumber = 1022;
-extern ::PROTOBUF_NAMESPACE_ID::internal::ExtensionIdentifier< ::google::protobuf::MessageOptions,
-    ::PROTOBUF_NAMESPACE_ID::internal::RepeatedMessageTypeTraits< ::org::xresloader::IndexDescriptor >, 11, false >
-  kl_index;
 static const int kVerifierFieldNumber = 1001;
 extern ::PROTOBUF_NAMESPACE_ID::internal::ExtensionIdentifier< ::google::protobuf::FieldOptions,
     ::PROTOBUF_NAMESPACE_ID::internal::StringTypeTraits, 9, false >
@@ -250,6 +79,14 @@ static const int kFieldDescriptionFieldNumber = 1011;
 extern ::PROTOBUF_NAMESPACE_ID::internal::ExtensionIdentifier< ::google::protobuf::FieldOptions,
     ::PROTOBUF_NAMESPACE_ID::internal::StringTypeTraits, 9, false >
   field_description;
+static const int kFieldAliasFieldNumber = 1012;
+extern ::PROTOBUF_NAMESPACE_ID::internal::ExtensionIdentifier< ::google::protobuf::FieldOptions,
+    ::PROTOBUF_NAMESPACE_ID::internal::StringTypeTraits, 9, false >
+  field_alias;
+static const int kFieldRatioFieldNumber = 1013;
+extern ::PROTOBUF_NAMESPACE_ID::internal::ExtensionIdentifier< ::google::protobuf::FieldOptions,
+    ::PROTOBUF_NAMESPACE_ID::internal::PrimitiveTypeTraits< ::PROTOBUF_NAMESPACE_ID::int32 >, 5, false >
+  field_ratio;
 static const int kOneofDescriptionFieldNumber = 1001;
 extern ::PROTOBUF_NAMESPACE_ID::internal::ExtensionIdentifier< ::google::protobuf::OneofOptions,
     ::PROTOBUF_NAMESPACE_ID::internal::StringTypeTraits, 9, false >
@@ -262,6 +99,10 @@ static const int kEnumvDescriptionFieldNumber = 1001;
 extern ::PROTOBUF_NAMESPACE_ID::internal::ExtensionIdentifier< ::google::protobuf::EnumValueOptions,
     ::PROTOBUF_NAMESPACE_ID::internal::StringTypeTraits, 9, false >
   enumv_description;
+static const int kEnumAliasFieldNumber = 1002;
+extern ::PROTOBUF_NAMESPACE_ID::internal::ExtensionIdentifier< ::google::protobuf::EnumValueOptions,
+    ::PROTOBUF_NAMESPACE_ID::internal::StringTypeTraits, 9, false >
+  enum_alias;
 
 // ===================================================================
 
@@ -269,124 +110,6 @@ extern ::PROTOBUF_NAMESPACE_ID::internal::ExtensionIdentifier< ::google::protobu
   #pragma GCC diagnostic push
   #pragma GCC diagnostic ignored "-Wstrict-aliasing"
 #endif  // __GNUC__
-// IndexDescriptor
-
-// string name = 1;
-inline void IndexDescriptor::clear_name() {
-  name_.ClearToEmptyNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
-}
-inline const std::string& IndexDescriptor::name() const {
-  // @@protoc_insertion_point(field_get:org.xresloader.IndexDescriptor.name)
-  return name_.GetNoArena();
-}
-inline void IndexDescriptor::set_name(const std::string& value) {
-  
-  name_.SetNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), value);
-  // @@protoc_insertion_point(field_set:org.xresloader.IndexDescriptor.name)
-}
-inline void IndexDescriptor::set_name(std::string&& value) {
-  
-  name_.SetNoArena(
-    &::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
-  // @@protoc_insertion_point(field_set_rvalue:org.xresloader.IndexDescriptor.name)
-}
-inline void IndexDescriptor::set_name(const char* value) {
-  GOOGLE_DCHECK(value != nullptr);
-  
-  name_.SetNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
-  // @@protoc_insertion_point(field_set_char:org.xresloader.IndexDescriptor.name)
-}
-inline void IndexDescriptor::set_name(const char* value, size_t size) {
-  
-  name_.SetNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(),
-      ::std::string(reinterpret_cast<const char*>(value), size));
-  // @@protoc_insertion_point(field_set_pointer:org.xresloader.IndexDescriptor.name)
-}
-inline std::string* IndexDescriptor::mutable_name() {
-  
-  // @@protoc_insertion_point(field_mutable:org.xresloader.IndexDescriptor.name)
-  return name_.MutableNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
-}
-inline std::string* IndexDescriptor::release_name() {
-  // @@protoc_insertion_point(field_release:org.xresloader.IndexDescriptor.name)
-  
-  return name_.ReleaseNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
-}
-inline void IndexDescriptor::set_allocated_name(std::string* name) {
-  if (name != nullptr) {
-    
-  } else {
-    
-  }
-  name_.SetAllocatedNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), name);
-  // @@protoc_insertion_point(field_set_allocated:org.xresloader.IndexDescriptor.name)
-}
-
-// repeated string fields = 2;
-inline int IndexDescriptor::fields_size() const {
-  return fields_.size();
-}
-inline void IndexDescriptor::clear_fields() {
-  fields_.Clear();
-}
-inline const std::string& IndexDescriptor::fields(int index) const {
-  // @@protoc_insertion_point(field_get:org.xresloader.IndexDescriptor.fields)
-  return fields_.Get(index);
-}
-inline std::string* IndexDescriptor::mutable_fields(int index) {
-  // @@protoc_insertion_point(field_mutable:org.xresloader.IndexDescriptor.fields)
-  return fields_.Mutable(index);
-}
-inline void IndexDescriptor::set_fields(int index, const std::string& value) {
-  // @@protoc_insertion_point(field_set:org.xresloader.IndexDescriptor.fields)
-  fields_.Mutable(index)->assign(value);
-}
-inline void IndexDescriptor::set_fields(int index, std::string&& value) {
-  // @@protoc_insertion_point(field_set:org.xresloader.IndexDescriptor.fields)
-  fields_.Mutable(index)->assign(std::move(value));
-}
-inline void IndexDescriptor::set_fields(int index, const char* value) {
-  GOOGLE_DCHECK(value != nullptr);
-  fields_.Mutable(index)->assign(value);
-  // @@protoc_insertion_point(field_set_char:org.xresloader.IndexDescriptor.fields)
-}
-inline void IndexDescriptor::set_fields(int index, const char* value, size_t size) {
-  fields_.Mutable(index)->assign(
-    reinterpret_cast<const char*>(value), size);
-  // @@protoc_insertion_point(field_set_pointer:org.xresloader.IndexDescriptor.fields)
-}
-inline std::string* IndexDescriptor::add_fields() {
-  // @@protoc_insertion_point(field_add_mutable:org.xresloader.IndexDescriptor.fields)
-  return fields_.Add();
-}
-inline void IndexDescriptor::add_fields(const std::string& value) {
-  fields_.Add()->assign(value);
-  // @@protoc_insertion_point(field_add:org.xresloader.IndexDescriptor.fields)
-}
-inline void IndexDescriptor::add_fields(std::string&& value) {
-  fields_.Add(std::move(value));
-  // @@protoc_insertion_point(field_add:org.xresloader.IndexDescriptor.fields)
-}
-inline void IndexDescriptor::add_fields(const char* value) {
-  GOOGLE_DCHECK(value != nullptr);
-  fields_.Add()->assign(value);
-  // @@protoc_insertion_point(field_add_char:org.xresloader.IndexDescriptor.fields)
-}
-inline void IndexDescriptor::add_fields(const char* value, size_t size) {
-  fields_.Add()->assign(reinterpret_cast<const char*>(value), size);
-  // @@protoc_insertion_point(field_add_pointer:org.xresloader.IndexDescriptor.fields)
-}
-inline const ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField<std::string>&
-IndexDescriptor::fields() const {
-  // @@protoc_insertion_point(field_list:org.xresloader.IndexDescriptor.fields)
-  return fields_;
-}
-inline ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField<std::string>*
-IndexDescriptor::mutable_fields() {
-  // @@protoc_insertion_point(field_mutable_list:org.xresloader.IndexDescriptor.fields)
-  return &fields_;
-}
-
 #ifdef __GNUC__
   #pragma GCC diagnostic pop
 #endif  // __GNUC__

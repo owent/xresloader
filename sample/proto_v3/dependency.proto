@@ -1,5 +1,7 @@
 syntax = "proto3";
 
+import "xresloader.proto";
+
 import "dep_level2.proto";
 
 message dep_cfg {
@@ -31,6 +33,6 @@ enum game_const_config
 enum cost_type
 {
     EN_CT_UNKNOWN              = 0;
-    EN_CT_MONEY                = 10001;
-    EN_CT_DIAMOND              = 10101;
+    EN_CT_MONEY                = 10001 [(org.xresloader.enum_alias) = "金币"];
+    EN_CT_DIAMOND              = 10101 [(org.xresloader.enum_alias) = "钻石"];
 }

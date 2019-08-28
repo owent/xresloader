@@ -10,15 +10,8 @@ extend google.protobuf.FileOptions {
     // 用户自定义扩展字段请使用 2000 to max;
 }
 
-message IndexDescriptor {
-    string   name          = 1;
-    repeated string fields = 2;
-}
-
 extend google.protobuf.MessageOptions {
-    string   msg_description          = 1001; // 描述信息（不同的输出可能有不同的功能）
-    repeated IndexDescriptor kv_index = 1021; // TODO [预留] key-value 类型索引
-    repeated IndexDescriptor kl_index = 1022; // TODO [预留] key-list 类型索引
+    string msg_description = 1001; // 描述信息（不同的输出可能有不同的功能）
 
     // 用户自定义扩展字段请使用 2000 to max;
 }
@@ -26,6 +19,8 @@ extend google.protobuf.MessageOptions {
 extend google.protobuf.FieldOptions {
     string verifier          = 1001; // 附加验证器
     string field_description = 1011; // 描述信息（不同的输出可能有不同的功能）
+    string field_alias       = 1012; // 字段别名，可用于验证器名字
+    int32  field_ratio       = 1013; // 字段放大倍数，可用于验证器名字
 
     // 用户自定义扩展字段请使用 2000 to max;
     // extensions 1000 to max;
@@ -45,6 +40,7 @@ extend google.protobuf.EnumOptions {
 
 extend google.protobuf.EnumValueOptions {
     string enumv_description = 1001; // 描述信息（不同的输出可能有不同的功能）
+    string enum_alias        = 1002; // 枚举别名，可用于验证器名字
 
     // 用户自定义扩展字段请使用 2000 to max;
 }

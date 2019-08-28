@@ -15,418 +15,54 @@
 #include <google/protobuf/wire_format.h>
 // @@protoc_insertion_point(includes)
 #include <google/protobuf/port_def.inc>
-extern PROTOBUF_INTERNAL_EXPORT_xresloader_2eproto ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_IndexDescriptor_xresloader_2eproto;
 namespace org {
 namespace xresloader {
-class IndexDescriptorDefaultTypeInternal {
- public:
-  ::PROTOBUF_NAMESPACE_ID::internal::ExplicitlyConstructed<IndexDescriptor> _instance;
-} _IndexDescriptor_default_instance_;
 }  // namespace xresloader
 }  // namespace org
-static void InitDefaultsscc_info_IndexDescriptor_xresloader_2eproto() {
-  GOOGLE_PROTOBUF_VERIFY_VERSION;
-
-  {
-    void* ptr = &::org::xresloader::_IndexDescriptor_default_instance_;
-    new (ptr) ::org::xresloader::IndexDescriptor();
-    ::PROTOBUF_NAMESPACE_ID::internal::OnShutdownDestroyMessage(ptr);
-  }
-  ::org::xresloader::IndexDescriptor::InitAsDefaultInstance();
-}
-
-::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_IndexDescriptor_xresloader_2eproto =
-    {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 0, InitDefaultsscc_info_IndexDescriptor_xresloader_2eproto}, {}};
-
-static ::PROTOBUF_NAMESPACE_ID::Metadata file_level_metadata_xresloader_2eproto[1];
+static constexpr ::PROTOBUF_NAMESPACE_ID::Metadata* file_level_metadata_xresloader_2eproto = nullptr;
 static constexpr ::PROTOBUF_NAMESPACE_ID::EnumDescriptor const** file_level_enum_descriptors_xresloader_2eproto = nullptr;
 static constexpr ::PROTOBUF_NAMESPACE_ID::ServiceDescriptor const** file_level_service_descriptors_xresloader_2eproto = nullptr;
-
-const ::PROTOBUF_NAMESPACE_ID::uint32 TableStruct_xresloader_2eproto::offsets[] PROTOBUF_SECTION_VARIABLE(protodesc_cold) = {
-  ~0u,  // no _has_bits_
-  PROTOBUF_FIELD_OFFSET(::org::xresloader::IndexDescriptor, _internal_metadata_),
-  ~0u,  // no _extensions_
-  ~0u,  // no _oneof_case_
-  ~0u,  // no _weak_field_map_
-  PROTOBUF_FIELD_OFFSET(::org::xresloader::IndexDescriptor, name_),
-  PROTOBUF_FIELD_OFFSET(::org::xresloader::IndexDescriptor, fields_),
-};
-static const ::PROTOBUF_NAMESPACE_ID::internal::MigrationSchema schemas[] PROTOBUF_SECTION_VARIABLE(protodesc_cold) = {
-  { 0, -1, sizeof(::org::xresloader::IndexDescriptor)},
-};
-
-static ::PROTOBUF_NAMESPACE_ID::Message const * const file_default_instances[] = {
-  reinterpret_cast<const ::PROTOBUF_NAMESPACE_ID::Message*>(&::org::xresloader::_IndexDescriptor_default_instance_),
-};
+const ::PROTOBUF_NAMESPACE_ID::uint32 TableStruct_xresloader_2eproto::offsets[1] = {};
+static constexpr ::PROTOBUF_NAMESPACE_ID::internal::MigrationSchema* schemas = nullptr;
+static constexpr ::PROTOBUF_NAMESPACE_ID::Message* const* file_default_instances = nullptr;
 
 const char descriptor_table_protodef_xresloader_2eproto[] PROTOBUF_SECTION_VARIABLE(protodesc_cold) =
   "\n\020xresloader.proto\022\016org.xresloader\032 goog"
-  "le/protobuf/descriptor.proto\"/\n\017IndexDes"
-  "criptor\022\014\n\004name\030\001 \001(\t\022\016\n\006fields\030\002 \003(\t:7\n"
-  "\020file_description\022\034.google.protobuf.File"
-  "Options\030\351\007 \001(\t:9\n\017msg_description\022\037.goog"
-  "le.protobuf.MessageOptions\030\351\007 \001(\t:S\n\010kv_"
-  "index\022\037.google.protobuf.MessageOptions\030\375"
-  "\007 \003(\0132\037.org.xresloader.IndexDescriptor:S"
-  "\n\010kl_index\022\037.google.protobuf.MessageOpti"
-  "ons\030\376\007 \003(\0132\037.org.xresloader.IndexDescrip"
-  "tor:0\n\010verifier\022\035.google.protobuf.FieldO"
-  "ptions\030\351\007 \001(\t:9\n\021field_description\022\035.goo"
-  "gle.protobuf.FieldOptions\030\363\007 \001(\t:9\n\021oneo"
-  "f_description\022\035.google.protobuf.OneofOpt"
-  "ions\030\351\007 \001(\t:7\n\020enum_description\022\034.google"
-  ".protobuf.EnumOptions\030\351\007 \001(\t:=\n\021enumv_de"
-  "scription\022!.google.protobuf.EnumValueOpt"
-  "ions\030\351\007 \001(\tb\006proto3"
+  "le/protobuf/descriptor.proto:7\n\020file_des"
+  "cription\022\034.google.protobuf.FileOptions\030\351"
+  "\007 \001(\t:9\n\017msg_description\022\037.google.protob"
+  "uf.MessageOptions\030\351\007 \001(\t:0\n\010verifier\022\035.g"
+  "oogle.protobuf.FieldOptions\030\351\007 \001(\t:9\n\021fi"
+  "eld_description\022\035.google.protobuf.FieldO"
+  "ptions\030\363\007 \001(\t:3\n\013field_alias\022\035.google.pr"
+  "otobuf.FieldOptions\030\364\007 \001(\t:3\n\013field_rati"
+  "o\022\035.google.protobuf.FieldOptions\030\365\007 \001(\005:"
+  "9\n\021oneof_description\022\035.google.protobuf.O"
+  "neofOptions\030\351\007 \001(\t:7\n\020enum_description\022\034"
+  ".google.protobuf.EnumOptions\030\351\007 \001(\t:=\n\021e"
+  "numv_description\022!.google.protobuf.EnumV"
+  "alueOptions\030\351\007 \001(\t:6\n\nenum_alias\022!.googl"
+  "e.protobuf.EnumValueOptions\030\352\007 \001(\tb\006prot"
+  "o3"
   ;
 static const ::PROTOBUF_NAMESPACE_ID::internal::DescriptorTable*const descriptor_table_xresloader_2eproto_deps[1] = {
   &::descriptor_table_google_2fprotobuf_2fdescriptor_2eproto,
 };
 static ::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase*const descriptor_table_xresloader_2eproto_sccs[1] = {
-  &scc_info_IndexDescriptor_xresloader_2eproto.base,
 };
 static ::PROTOBUF_NAMESPACE_ID::internal::once_flag descriptor_table_xresloader_2eproto_once;
 static bool descriptor_table_xresloader_2eproto_initialized = false;
 const ::PROTOBUF_NAMESPACE_ID::internal::DescriptorTable descriptor_table_xresloader_2eproto = {
-  &descriptor_table_xresloader_2eproto_initialized, descriptor_table_protodef_xresloader_2eproto, "xresloader.proto", 699,
-  &descriptor_table_xresloader_2eproto_once, descriptor_table_xresloader_2eproto_sccs, descriptor_table_xresloader_2eproto_deps, 1, 1,
+  &descriptor_table_xresloader_2eproto_initialized, descriptor_table_protodef_xresloader_2eproto, "xresloader.proto", 642,
+  &descriptor_table_xresloader_2eproto_once, descriptor_table_xresloader_2eproto_sccs, descriptor_table_xresloader_2eproto_deps, 0, 1,
   schemas, file_default_instances, TableStruct_xresloader_2eproto::offsets,
-  file_level_metadata_xresloader_2eproto, 1, file_level_enum_descriptors_xresloader_2eproto, file_level_service_descriptors_xresloader_2eproto,
+  file_level_metadata_xresloader_2eproto, 0, file_level_enum_descriptors_xresloader_2eproto, file_level_service_descriptors_xresloader_2eproto,
 };
 
 // Force running AddDescriptors() at dynamic initialization time.
 static bool dynamic_init_dummy_xresloader_2eproto = (  ::PROTOBUF_NAMESPACE_ID::internal::AddDescriptors(&descriptor_table_xresloader_2eproto), true);
 namespace org {
 namespace xresloader {
-
-// ===================================================================
-
-void IndexDescriptor::InitAsDefaultInstance() {
-}
-class IndexDescriptor::_Internal {
- public:
-};
-
-IndexDescriptor::IndexDescriptor()
-  : ::PROTOBUF_NAMESPACE_ID::Message(), _internal_metadata_(nullptr) {
-  SharedCtor();
-  // @@protoc_insertion_point(constructor:org.xresloader.IndexDescriptor)
-}
-IndexDescriptor::IndexDescriptor(const IndexDescriptor& from)
-  : ::PROTOBUF_NAMESPACE_ID::Message(),
-      _internal_metadata_(nullptr),
-      fields_(from.fields_) {
-  _internal_metadata_.MergeFrom(from._internal_metadata_);
-  name_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
-  if (!from.name().empty()) {
-    name_.AssignWithDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), from.name_);
-  }
-  // @@protoc_insertion_point(copy_constructor:org.xresloader.IndexDescriptor)
-}
-
-void IndexDescriptor::SharedCtor() {
-  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&scc_info_IndexDescriptor_xresloader_2eproto.base);
-  name_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
-}
-
-IndexDescriptor::~IndexDescriptor() {
-  // @@protoc_insertion_point(destructor:org.xresloader.IndexDescriptor)
-  SharedDtor();
-}
-
-void IndexDescriptor::SharedDtor() {
-  name_.DestroyNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
-}
-
-void IndexDescriptor::SetCachedSize(int size) const {
-  _cached_size_.Set(size);
-}
-const IndexDescriptor& IndexDescriptor::default_instance() {
-  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&::scc_info_IndexDescriptor_xresloader_2eproto.base);
-  return *internal_default_instance();
-}
-
-
-void IndexDescriptor::Clear() {
-// @@protoc_insertion_point(message_clear_start:org.xresloader.IndexDescriptor)
-  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
-  // Prevent compiler warnings about cached_has_bits being unused
-  (void) cached_has_bits;
-
-  fields_.Clear();
-  name_.ClearToEmptyNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
-  _internal_metadata_.Clear();
-}
-
-#if GOOGLE_PROTOBUF_ENABLE_EXPERIMENTAL_PARSER
-const char* IndexDescriptor::_InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) {
-#define CHK_(x) if (PROTOBUF_PREDICT_FALSE(!(x))) goto failure
-  while (!ctx->Done(&ptr)) {
-    ::PROTOBUF_NAMESPACE_ID::uint32 tag;
-    ptr = ::PROTOBUF_NAMESPACE_ID::internal::ReadTag(ptr, &tag);
-    CHK_(ptr);
-    switch (tag >> 3) {
-      // string name = 1;
-      case 1:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 10)) {
-          ptr = ::PROTOBUF_NAMESPACE_ID::internal::InlineGreedyStringParserUTF8(mutable_name(), ptr, ctx, "org.xresloader.IndexDescriptor.name");
-          CHK_(ptr);
-        } else goto handle_unusual;
-        continue;
-      // repeated string fields = 2;
-      case 2:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 18)) {
-          ptr -= 1;
-          do {
-            ptr += 1;
-            ptr = ::PROTOBUF_NAMESPACE_ID::internal::InlineGreedyStringParserUTF8(add_fields(), ptr, ctx, "org.xresloader.IndexDescriptor.fields");
-            CHK_(ptr);
-            if (!ctx->DataAvailable(ptr)) break;
-          } while (::PROTOBUF_NAMESPACE_ID::internal::UnalignedLoad<::PROTOBUF_NAMESPACE_ID::uint8>(ptr) == 18);
-        } else goto handle_unusual;
-        continue;
-      default: {
-      handle_unusual:
-        if ((tag & 7) == 4 || tag == 0) {
-          ctx->SetLastTag(tag);
-          goto success;
-        }
-        ptr = UnknownFieldParse(tag, &_internal_metadata_, ptr, ctx);
-        CHK_(ptr != nullptr);
-        continue;
-      }
-    }  // switch
-  }  // while
-success:
-  return ptr;
-failure:
-  ptr = nullptr;
-  goto success;
-#undef CHK_
-}
-#else  // GOOGLE_PROTOBUF_ENABLE_EXPERIMENTAL_PARSER
-bool IndexDescriptor::MergePartialFromCodedStream(
-    ::PROTOBUF_NAMESPACE_ID::io::CodedInputStream* input) {
-#define DO_(EXPRESSION) if (!PROTOBUF_PREDICT_TRUE(EXPRESSION)) goto failure
-  ::PROTOBUF_NAMESPACE_ID::uint32 tag;
-  // @@protoc_insertion_point(parse_start:org.xresloader.IndexDescriptor)
-  for (;;) {
-    ::std::pair<::PROTOBUF_NAMESPACE_ID::uint32, bool> p = input->ReadTagWithCutoffNoLastTag(127u);
-    tag = p.first;
-    if (!p.second) goto handle_unusual;
-    switch (::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::GetTagFieldNumber(tag)) {
-      // string name = 1;
-      case 1: {
-        if (static_cast< ::PROTOBUF_NAMESPACE_ID::uint8>(tag) == (10 & 0xFF)) {
-          DO_(::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::ReadString(
-                input, this->mutable_name()));
-          DO_(::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
-            this->name().data(), static_cast<int>(this->name().length()),
-            ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::PARSE,
-            "org.xresloader.IndexDescriptor.name"));
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
-      // repeated string fields = 2;
-      case 2: {
-        if (static_cast< ::PROTOBUF_NAMESPACE_ID::uint8>(tag) == (18 & 0xFF)) {
-          DO_(::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::ReadString(
-                input, this->add_fields()));
-          DO_(::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
-            this->fields(this->fields_size() - 1).data(),
-            static_cast<int>(this->fields(this->fields_size() - 1).length()),
-            ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::PARSE,
-            "org.xresloader.IndexDescriptor.fields"));
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
-      default: {
-      handle_unusual:
-        if (tag == 0) {
-          goto success;
-        }
-        DO_(::PROTOBUF_NAMESPACE_ID::internal::WireFormat::SkipField(
-              input, tag, _internal_metadata_.mutable_unknown_fields()));
-        break;
-      }
-    }
-  }
-success:
-  // @@protoc_insertion_point(parse_success:org.xresloader.IndexDescriptor)
-  return true;
-failure:
-  // @@protoc_insertion_point(parse_failure:org.xresloader.IndexDescriptor)
-  return false;
-#undef DO_
-}
-#endif  // GOOGLE_PROTOBUF_ENABLE_EXPERIMENTAL_PARSER
-
-void IndexDescriptor::SerializeWithCachedSizes(
-    ::PROTOBUF_NAMESPACE_ID::io::CodedOutputStream* output) const {
-  // @@protoc_insertion_point(serialize_start:org.xresloader.IndexDescriptor)
-  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
-  (void) cached_has_bits;
-
-  // string name = 1;
-  if (this->name().size() > 0) {
-    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
-      this->name().data(), static_cast<int>(this->name().length()),
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::SERIALIZE,
-      "org.xresloader.IndexDescriptor.name");
-    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteStringMaybeAliased(
-      1, this->name(), output);
-  }
-
-  // repeated string fields = 2;
-  for (int i = 0, n = this->fields_size(); i < n; i++) {
-    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
-      this->fields(i).data(), static_cast<int>(this->fields(i).length()),
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::SERIALIZE,
-      "org.xresloader.IndexDescriptor.fields");
-    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteString(
-      2, this->fields(i), output);
-  }
-
-  if (_internal_metadata_.have_unknown_fields()) {
-    ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::SerializeUnknownFields(
-        _internal_metadata_.unknown_fields(), output);
-  }
-  // @@protoc_insertion_point(serialize_end:org.xresloader.IndexDescriptor)
-}
-
-::PROTOBUF_NAMESPACE_ID::uint8* IndexDescriptor::InternalSerializeWithCachedSizesToArray(
-    ::PROTOBUF_NAMESPACE_ID::uint8* target) const {
-  // @@protoc_insertion_point(serialize_to_array_start:org.xresloader.IndexDescriptor)
-  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
-  (void) cached_has_bits;
-
-  // string name = 1;
-  if (this->name().size() > 0) {
-    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
-      this->name().data(), static_cast<int>(this->name().length()),
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::SERIALIZE,
-      "org.xresloader.IndexDescriptor.name");
-    target =
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteStringToArray(
-        1, this->name(), target);
-  }
-
-  // repeated string fields = 2;
-  for (int i = 0, n = this->fields_size(); i < n; i++) {
-    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
-      this->fields(i).data(), static_cast<int>(this->fields(i).length()),
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::SERIALIZE,
-      "org.xresloader.IndexDescriptor.fields");
-    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
-      WriteStringToArray(2, this->fields(i), target);
-  }
-
-  if (_internal_metadata_.have_unknown_fields()) {
-    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::SerializeUnknownFieldsToArray(
-        _internal_metadata_.unknown_fields(), target);
-  }
-  // @@protoc_insertion_point(serialize_to_array_end:org.xresloader.IndexDescriptor)
-  return target;
-}
-
-size_t IndexDescriptor::ByteSizeLong() const {
-// @@protoc_insertion_point(message_byte_size_start:org.xresloader.IndexDescriptor)
-  size_t total_size = 0;
-
-  if (_internal_metadata_.have_unknown_fields()) {
-    total_size +=
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::ComputeUnknownFieldsSize(
-        _internal_metadata_.unknown_fields());
-  }
-  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
-  // Prevent compiler warnings about cached_has_bits being unused
-  (void) cached_has_bits;
-
-  // repeated string fields = 2;
-  total_size += 1 *
-      ::PROTOBUF_NAMESPACE_ID::internal::FromIntSize(this->fields_size());
-  for (int i = 0, n = this->fields_size(); i < n; i++) {
-    total_size += ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
-      this->fields(i));
-  }
-
-  // string name = 1;
-  if (this->name().size() > 0) {
-    total_size += 1 +
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
-        this->name());
-  }
-
-  int cached_size = ::PROTOBUF_NAMESPACE_ID::internal::ToCachedSize(total_size);
-  SetCachedSize(cached_size);
-  return total_size;
-}
-
-void IndexDescriptor::MergeFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) {
-// @@protoc_insertion_point(generalized_merge_from_start:org.xresloader.IndexDescriptor)
-  GOOGLE_DCHECK_NE(&from, this);
-  const IndexDescriptor* source =
-      ::PROTOBUF_NAMESPACE_ID::DynamicCastToGenerated<IndexDescriptor>(
-          &from);
-  if (source == nullptr) {
-  // @@protoc_insertion_point(generalized_merge_from_cast_fail:org.xresloader.IndexDescriptor)
-    ::PROTOBUF_NAMESPACE_ID::internal::ReflectionOps::Merge(from, this);
-  } else {
-  // @@protoc_insertion_point(generalized_merge_from_cast_success:org.xresloader.IndexDescriptor)
-    MergeFrom(*source);
-  }
-}
-
-void IndexDescriptor::MergeFrom(const IndexDescriptor& from) {
-// @@protoc_insertion_point(class_specific_merge_from_start:org.xresloader.IndexDescriptor)
-  GOOGLE_DCHECK_NE(&from, this);
-  _internal_metadata_.MergeFrom(from._internal_metadata_);
-  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
-  (void) cached_has_bits;
-
-  fields_.MergeFrom(from.fields_);
-  if (from.name().size() > 0) {
-
-    name_.AssignWithDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), from.name_);
-  }
-}
-
-void IndexDescriptor::CopyFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) {
-// @@protoc_insertion_point(generalized_copy_from_start:org.xresloader.IndexDescriptor)
-  if (&from == this) return;
-  Clear();
-  MergeFrom(from);
-}
-
-void IndexDescriptor::CopyFrom(const IndexDescriptor& from) {
-// @@protoc_insertion_point(class_specific_copy_from_start:org.xresloader.IndexDescriptor)
-  if (&from == this) return;
-  Clear();
-  MergeFrom(from);
-}
-
-bool IndexDescriptor::IsInitialized() const {
-  return true;
-}
-
-void IndexDescriptor::InternalSwap(IndexDescriptor* other) {
-  using std::swap;
-  _internal_metadata_.Swap(&other->_internal_metadata_);
-  fields_.InternalSwap(CastToBase(&other->fields_));
-  name_.Swap(&other->name_, &::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(),
-    GetArenaNoVirtual());
-}
-
-::PROTOBUF_NAMESPACE_ID::Metadata IndexDescriptor::GetMetadata() const {
-  return GetMetadataStatic();
-}
-
 const std::string file_description_default("");
 ::PROTOBUF_NAMESPACE_ID::internal::ExtensionIdentifier< ::google::protobuf::FileOptions,
     ::PROTOBUF_NAMESPACE_ID::internal::StringTypeTraits, 9, false >
@@ -435,12 +71,6 @@ const std::string msg_description_default("");
 ::PROTOBUF_NAMESPACE_ID::internal::ExtensionIdentifier< ::google::protobuf::MessageOptions,
     ::PROTOBUF_NAMESPACE_ID::internal::StringTypeTraits, 9, false >
   msg_description(kMsgDescriptionFieldNumber, msg_description_default);
-::PROTOBUF_NAMESPACE_ID::internal::ExtensionIdentifier< ::google::protobuf::MessageOptions,
-    ::PROTOBUF_NAMESPACE_ID::internal::RepeatedMessageTypeTraits< ::org::xresloader::IndexDescriptor >, 11, false >
-  kv_index(kKvIndexFieldNumber, *::org::xresloader::IndexDescriptor::internal_default_instance());
-::PROTOBUF_NAMESPACE_ID::internal::ExtensionIdentifier< ::google::protobuf::MessageOptions,
-    ::PROTOBUF_NAMESPACE_ID::internal::RepeatedMessageTypeTraits< ::org::xresloader::IndexDescriptor >, 11, false >
-  kl_index(kKlIndexFieldNumber, *::org::xresloader::IndexDescriptor::internal_default_instance());
 const std::string verifier_default("");
 ::PROTOBUF_NAMESPACE_ID::internal::ExtensionIdentifier< ::google::protobuf::FieldOptions,
     ::PROTOBUF_NAMESPACE_ID::internal::StringTypeTraits, 9, false >
@@ -449,6 +79,13 @@ const std::string field_description_default("");
 ::PROTOBUF_NAMESPACE_ID::internal::ExtensionIdentifier< ::google::protobuf::FieldOptions,
     ::PROTOBUF_NAMESPACE_ID::internal::StringTypeTraits, 9, false >
   field_description(kFieldDescriptionFieldNumber, field_description_default);
+const std::string field_alias_default("");
+::PROTOBUF_NAMESPACE_ID::internal::ExtensionIdentifier< ::google::protobuf::FieldOptions,
+    ::PROTOBUF_NAMESPACE_ID::internal::StringTypeTraits, 9, false >
+  field_alias(kFieldAliasFieldNumber, field_alias_default);
+::PROTOBUF_NAMESPACE_ID::internal::ExtensionIdentifier< ::google::protobuf::FieldOptions,
+    ::PROTOBUF_NAMESPACE_ID::internal::PrimitiveTypeTraits< ::PROTOBUF_NAMESPACE_ID::int32 >, 5, false >
+  field_ratio(kFieldRatioFieldNumber, 0);
 const std::string oneof_description_default("");
 ::PROTOBUF_NAMESPACE_ID::internal::ExtensionIdentifier< ::google::protobuf::OneofOptions,
     ::PROTOBUF_NAMESPACE_ID::internal::StringTypeTraits, 9, false >
@@ -461,14 +98,15 @@ const std::string enumv_description_default("");
 ::PROTOBUF_NAMESPACE_ID::internal::ExtensionIdentifier< ::google::protobuf::EnumValueOptions,
     ::PROTOBUF_NAMESPACE_ID::internal::StringTypeTraits, 9, false >
   enumv_description(kEnumvDescriptionFieldNumber, enumv_description_default);
+const std::string enum_alias_default("");
+::PROTOBUF_NAMESPACE_ID::internal::ExtensionIdentifier< ::google::protobuf::EnumValueOptions,
+    ::PROTOBUF_NAMESPACE_ID::internal::StringTypeTraits, 9, false >
+  enum_alias(kEnumAliasFieldNumber, enum_alias_default);
 
 // @@protoc_insertion_point(namespace_scope)
 }  // namespace xresloader
 }  // namespace org
 PROTOBUF_NAMESPACE_OPEN
-template<> PROTOBUF_NOINLINE ::org::xresloader::IndexDescriptor* Arena::CreateMaybeMessage< ::org::xresloader::IndexDescriptor >(Arena* arena) {
-  return Arena::CreateInternal< ::org::xresloader::IndexDescriptor >(arena);
-}
 PROTOBUF_NAMESPACE_CLOSE
 
 // @@protoc_insertion_point(global_scope)

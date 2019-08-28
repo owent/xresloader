@@ -278,6 +278,10 @@ public class DataDstPb extends DataDstImpl {
             child_field.mutableExtension().description = fd.getOptions().getExtension(Xresloader.fieldDescription);
         }
 
+        if (fd.getOptions().hasExtension(Xresloader.fieldRatio)) {
+            child_field.mutableExtension().ratio = fd.getOptions().getExtension(Xresloader.fieldRatio);
+        }
+
         // setup UE extension
         if (fd.getOptions().hasExtension(XresloaderUe.keyTag)) {
             child_field.mutableExtension().mutableUE().keyTag = fd.getOptions().getExtension(XresloaderUe.keyTag);
@@ -299,6 +303,7 @@ public class DataDstPb extends DataDstImpl {
         node.identify = identify;
 
         String verifier = child.innerDesc.mutableExtension().verifier;
+        identify.ratio = child.innerDesc.mutableExtension().ratio;
 
         if (null != identify.dataSourceFieldVerifier && !identify.dataSourceFieldVerifier.isEmpty()) {
             if (verifier == null || verifier.isEmpty()) {
@@ -440,13 +445,13 @@ public class DataDstPb extends DataDstImpl {
             ret.getMessageExtension().description = pbDesc.getOptions().getExtension(Xresloader.msgDescription);
         }
 
-        if (pbDesc.getOptions().getExtensionCount(Xresloader.kvIndex) > 0) {
-            ret.getMessageExtension().kvIndex = pbDesc.getOptions().getExtension(Xresloader.kvIndex);
-        }
+        // if (pbDesc.getOptions().getExtensionCount(Xresloader.kvIndex) > 0) {
+        //     ret.getMessageExtension().kvIndex = pbDesc.getOptions().getExtension(Xresloader.kvIndex);
+        // }
 
-        if (pbDesc.getOptions().getExtensionCount(Xresloader.klIndex) > 0) {
-            ret.getMessageExtension().klIndex = pbDesc.getOptions().getExtension(Xresloader.klIndex);
-        }
+        // if (pbDesc.getOptions().getExtensionCount(Xresloader.klIndex) > 0) {
+        //     ret.getMessageExtension().klIndex = pbDesc.getOptions().getExtension(Xresloader.klIndex);
+        // }
 
         // extensions for UE
         if (pbDesc.getOptions().hasExtension(XresloaderUe.helper)) {
@@ -875,6 +880,7 @@ public class DataDstPb extends DataDstImpl {
         return true;
     }
 
+    @SuppressWarnings("unchecked")
     static private void dumpConstIntoHashMap(String package_name, HashMap<String, Object> parent, Descriptors.EnumDescriptor enum_desc) {
         String enum_seg = enum_desc.getName();
         HashMap<String, Object> enum_root;
@@ -897,6 +903,7 @@ public class DataDstPb extends DataDstImpl {
         }
     }
 
+    @SuppressWarnings("unchecked")
     static private void dumpConstIntoHashMap(String package_name, HashMap<String, Object> parent, Descriptors.OneofDescriptor oneof_desc) {
         String oneof_seg = oneof_desc.getName();
         HashMap<String, Object> oneof_root;
@@ -924,6 +931,7 @@ public class DataDstPb extends DataDstImpl {
         }
     }
 
+    @SuppressWarnings("unchecked")
     static private void dumpConstIntoHashMap(String package_name, HashMap<String, Object> parent, Descriptors.Descriptor msg_desc) {
         String msg_seg = msg_desc.getName();
         HashMap<String, Object> msg_root = null;

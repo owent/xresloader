@@ -604,7 +604,7 @@ class test_msg_verifier :
   ::PROTOBUF_NAMESPACE_ID::uint32 test_id_1() const;
   void set_test_id_1(::PROTOBUF_NAMESPACE_ID::uint32 value);
 
-  // optional uint32 test_id_2 = 10002;
+  // optional uint32 test_id_2 = 10002 [(.org.xresloader.field_alias) = "\346\265\213\350\257\225ID\345\210\253\345\220\2152"];
   bool has_test_id_2() const;
   void clear_test_id_2();
   ::PROTOBUF_NAMESPACE_ID::uint32 test_id_2() const;
@@ -1378,7 +1378,7 @@ inline void test_msg_verifier::set_test_id_1(::PROTOBUF_NAMESPACE_ID::uint32 val
   // @@protoc_insertion_point(field_set:test_msg_verifier.test_id_1)
 }
 
-// optional uint32 test_id_2 = 10002;
+// optional uint32 test_id_2 = 10002 [(.org.xresloader.field_alias) = "\346\265\213\350\257\225ID\345\210\253\345\220\2152"];
 inline bool test_msg_verifier::has_test_id_2() const {
   return (_has_bits_[0] & 0x00000002u) != 0;
 }

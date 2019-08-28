@@ -244,6 +244,9 @@ public class ExcelEngine {
             }
 
             double dv = cal_cell2num(c, cv);
+            if (col.ratio != 1) {
+                dv = dv * col.ratio;
+            }
             if (dv == (long) dv) {
                 out.set(String.format("%d", (long) dv));
             } else {
@@ -316,7 +319,11 @@ public class ExcelEngine {
             if (DateUtil.isCellDateFormatted(c)) {
                 val = dateToUnixTimestamp(c.getDateCellValue());
             } else {
-                val = Math.round(cal_cell2num(c, cv));
+                if (col.ratio == 1) {
+                    val = Math.round(cal_cell2num(c, cv));
+                } else {
+                    val = Math.round(cal_cell2num(c, cv) * col.ratio);
+                }
             }
 
             out.set(col.getAndVerify(val));
@@ -389,7 +396,11 @@ public class ExcelEngine {
                 out.set((double) dateToUnixTimestamp(c.getDateCellValue()));
                 break;
             }
-            out.set(cal_cell2num(c, cv));
+            if (col.ratio == 1) {
+                out.set(cal_cell2num(c, cv));
+            } else {
+                out.set(cal_cell2num(c, cv) * col.ratio);
+            }
             break;
         case STRING: {
             String val = cal_cell2str(c, cv).trim();
@@ -458,7 +469,7 @@ public class ExcelEngine {
         case FORMULA:
             break;
         case NUMERIC:
-            out.set(cal_cell2num(c, cv) != 0);
+            out.set(cal_cell2num(c, cv) != 0 && col.ratio != 0);
             break;
         case STRING:
             String item = tryMacro(cal_cell2str(c, cv).trim()).toLowerCase();

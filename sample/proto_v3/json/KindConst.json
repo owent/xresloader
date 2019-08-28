@@ -54,5 +54,137 @@
     {
         "Value": 0,
         "Name": "cost_type.EN_CT_UNKNOWN"
+    },
+    {
+        "Value": 1,
+        "Name": "google.protobuf.FieldOptions.JSType.JS_STRING"
+    },
+    {
+        "Value": 2,
+        "Name": "google.protobuf.FieldOptions.JSType.JS_NUMBER"
+    },
+    {
+        "Value": 0,
+        "Name": "google.protobuf.FieldOptions.JSType.JS_NORMAL"
+    },
+    {
+        "Value": 1,
+        "Name": "google.protobuf.FieldOptions.CType.CORD"
+    },
+    {
+        "Value": 0,
+        "Name": "google.protobuf.FieldOptions.CType.STRING"
+    },
+    {
+        "Value": 2,
+        "Name": "google.protobuf.FieldOptions.CType.STRING_PIECE"
+    },
+    {
+        "Value": 10,
+        "Name": "google.protobuf.FieldDescriptorProto.Type.TYPE_GROUP"
+    },
+    {
+        "Value": 17,
+        "Name": "google.protobuf.FieldDescriptorProto.Type.TYPE_SINT32"
+    },
+    {
+        "Value": 8,
+        "Name": "google.protobuf.FieldDescriptorProto.Type.TYPE_BOOL"
+    },
+    {
+        "Value": 9,
+        "Name": "google.protobuf.FieldDescriptorProto.Type.TYPE_STRING"
+    },
+    {
+        "Value": 15,
+        "Name": "google.protobuf.FieldDescriptorProto.Type.TYPE_SFIXED32"
+    },
+    {
+        "Value": 16,
+        "Name": "google.protobuf.FieldDescriptorProto.Type.TYPE_SFIXED64"
+    },
+    {
+        "Value": 14,
+        "Name": "google.protobuf.FieldDescriptorProto.Type.TYPE_ENUM"
+    },
+    {
+        "Value": 4,
+        "Name": "google.protobuf.FieldDescriptorProto.Type.TYPE_UINT64"
+    },
+    {
+        "Value": 7,
+        "Name": "google.protobuf.FieldDescriptorProto.Type.TYPE_FIXED32"
+    },
+    {
+        "Value": 12,
+        "Name": "google.protobuf.FieldDescriptorProto.Type.TYPE_BYTES"
+    },
+    {
+        "Value": 6,
+        "Name": "google.protobuf.FieldDescriptorProto.Type.TYPE_FIXED64"
+    },
+    {
+        "Value": 13,
+        "Name": "google.protobuf.FieldDescriptorProto.Type.TYPE_UINT32"
+    },
+    {
+        "Value": 11,
+        "Name": "google.protobuf.FieldDescriptorProto.Type.TYPE_MESSAGE"
+    },
+    {
+        "Value": 1,
+        "Name": "google.protobuf.FieldDescriptorProto.Type.TYPE_DOUBLE"
+    },
+    {
+        "Value": 5,
+        "Name": "google.protobuf.FieldDescriptorProto.Type.TYPE_INT32"
+    },
+    {
+        "Value": 2,
+        "Name": "google.protobuf.FieldDescriptorProto.Type.TYPE_FLOAT"
+    },
+    {
+        "Value": 3,
+        "Name": "google.protobuf.FieldDescriptorProto.Type.TYPE_INT64"
+    },
+    {
+        "Value": 18,
+        "Name": "google.protobuf.FieldDescriptorProto.Type.TYPE_SINT64"
+    },
+    {
+        "Value": 3,
+        "Name": "google.protobuf.FieldDescriptorProto.Label.LABEL_REPEATED"
+    },
+    {
+        "Value": 1,
+        "Name": "google.protobuf.FieldDescriptorProto.Label.LABEL_OPTIONAL"
+    },
+    {
+        "Value": 2,
+        "Name": "google.protobuf.FieldDescriptorProto.Label.LABEL_REQUIRED"
+    },
+    {
+        "Value": 1,
+        "Name": "google.protobuf.MethodOptions.IdempotencyLevel.NO_SIDE_EFFECTS"
+    },
+    {
+        "Value": 2,
+        "Name": "google.protobuf.MethodOptions.IdempotencyLevel.IDEMPOTENT"
+    },
+    {
+        "Value": 0,
+        "Name": "google.protobuf.MethodOptions.IdempotencyLevel.IDEMPOTENCY_UNKNOWN"
+    },
+    {
+        "Value": 1,
+        "Name": "google.protobuf.FileOptions.OptimizeMode.SPEED"
+    },
+    {
+        "Value": 3,
+        "Name": "google.protobuf.FileOptions.OptimizeMode.LITE_RUNTIME"
+    },
+    {
+        "Value": 2,
+        "Name": "google.protobuf.FileOptions.OptimizeMode.CODE_SIZE"
     }
 ]

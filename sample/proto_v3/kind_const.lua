@@ -28,6 +28,69 @@ local const_res = {
   },
   google = {
     protobuf = {
+      EnumDescriptorProto = {
+      },
+      GeneratedCodeInfo = {
+      },
+      SourceCodeInfo = {
+      },
+      DescriptorProto = {
+      },
+      FieldOptions = {
+        JSType = {
+          JS_STRING = 1,
+          JS_NUMBER = 2,
+          JS_NORMAL = 0,
+        },
+        CType = {
+          CORD = 1,
+          STRING = 0,
+          STRING_PIECE = 2,
+        },
+      },
+      UninterpretedOption = {
+      },
+      FieldDescriptorProto = {
+        Type = {
+          TYPE_GROUP = 10,
+          TYPE_SINT32 = 17,
+          TYPE_BOOL = 8,
+          TYPE_STRING = 9,
+          TYPE_SFIXED32 = 15,
+          TYPE_SFIXED64 = 16,
+          TYPE_ENUM = 14,
+          TYPE_UINT64 = 4,
+          TYPE_FIXED32 = 7,
+          TYPE_BYTES = 12,
+          TYPE_FIXED64 = 6,
+          TYPE_UINT32 = 13,
+          TYPE_MESSAGE = 11,
+          TYPE_DOUBLE = 1,
+          TYPE_INT32 = 5,
+          TYPE_FLOAT = 2,
+          TYPE_INT64 = 3,
+          TYPE_SINT64 = 18,
+        },
+        Label = {
+          LABEL_REPEATED = 3,
+          LABEL_OPTIONAL = 1,
+          LABEL_REQUIRED = 2,
+        },
+      },
+      MethodOptions = {
+        IdempotencyLevel = {
+          NO_SIDE_EFFECTS = 1,
+          IDEMPOTENT = 2,
+          IDEMPOTENCY_UNKNOWN = 0,
+        },
+      },
+      FileOptions = {
+        OptimizeMode = {
+          SPEED = 1,
+          LITE_RUNTIME = 3,
+          CODE_SIZE = 2,
+        },
+      },
     },
   },
 }

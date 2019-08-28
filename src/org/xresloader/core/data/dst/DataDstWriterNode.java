@@ -2,8 +2,6 @@ package org.xresloader.core.data.dst;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
-import org.xresloader.Xresloader;
 import org.xresloader.core.data.err.ConvException;
 import org.xresloader.core.engine.IdentifyDescriptor;
 
@@ -24,6 +22,7 @@ public class DataDstWriterNode {
     static public class DataDstFieldExt {
         public String description = null;
         public String verifier = null;
+        public int ratio = 1;
         private DataDstFieldExtUE ue = null;
 
         public DataDstFieldExtUE mutableUE() {
@@ -43,8 +42,8 @@ public class DataDstWriterNode {
 
     static public class DataDstMessageExt {
         public String description = null;
-        public List<Xresloader.IndexDescriptor> kvIndex = null;
-        public List<Xresloader.IndexDescriptor> klIndex = null;
+        // public List<Xresloader.IndexDescriptor> kvIndex = null;
+        // public List<Xresloader.IndexDescriptor> klIndex = null;
 
         private DataDstMessageExtUE ue = null;
 

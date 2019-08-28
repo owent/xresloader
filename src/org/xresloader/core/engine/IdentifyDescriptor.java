@@ -15,6 +15,7 @@ public class IdentifyDescriptor {
     public String dataSourceFieldVerifier = null;
     public int index = 0;
     public List<DataVerifyImpl> verifyEngine = null;
+    public int ratio = 1;
 
     public IdentifyDescriptor() {
     }

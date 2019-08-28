@@ -58,22 +58,24 @@ static ::PROTOBUF_NAMESPACE_ID::Message const * const file_default_instances[] =
 };
 
 const char descriptor_table_protodef_dependency_2eproto[] PROTOBUF_SECTION_VARIABLE(protodesc_cold) =
-  "\n\020dependency.proto\032\020dep_level2.proto\"<\n\007"
-  "dep_cfg\022\n\n\002id\030\001 \001(\r\022\014\n\004name\030\002 \001(\t\022\027\n\004dep"
-  "2\030\003 \001(\0132\t.dep2_cfg*\313\002\n\021game_const_config"
-  "\022\022\n\016EN_GCC_UNKNOWN\020\000\022\030\n\023EN_GCC_PERCENT_B"
-  "ASE\020\220N\022\034\n\030EN_GCC_RANDOM_RANGE_UNIT\020\n\022 \n\031"
-  "EN_GCC_RESOURCE_MAX_LIMIT\020\377\254\342\004\022\027\n\022EN_GCC"
-  "_LEVEL_LIMIT\020\347\007\022\034\n\030EN_GCC_SOLDIER_TYPE_M"
-  "ASK\020d\022\036\n\031EN_GCC_ACTIVITY_TYPE_MASK\020\350\007\022\035\n"
-  "\031EN_GCC_FORMULAR_TYPE_MASK\020\n\022\030\n\023EN_GCC_S"
-  "CREEN_WIDTH\020\360\010\022\031\n\024EN_GCC_SCREEN_HEIGHT\020\200"
-  "\005\022\031\n\024EN_GCC_CAMERA_OFFSET\020\214\002\032\002\020\001*D\n\tcost"
-  "_type\022\021\n\rEN_CT_UNKNOWN\020\000\022\020\n\013EN_CT_MONEY\020"
-  "\221N\022\022\n\rEN_CT_DIAMOND\020\365Nb\006proto3"
+  "\n\020dependency.proto\032\020xresloader.proto\032\020de"
+  "p_level2.proto\"<\n\007dep_cfg\022\n\n\002id\030\001 \001(\r\022\014\n"
+  "\004name\030\002 \001(\t\022\027\n\004dep2\030\003 \001(\0132\t.dep2_cfg*\313\002\n"
+  "\021game_const_config\022\022\n\016EN_GCC_UNKNOWN\020\000\022\030"
+  "\n\023EN_GCC_PERCENT_BASE\020\220N\022\034\n\030EN_GCC_RANDO"
+  "M_RANGE_UNIT\020\n\022 \n\031EN_GCC_RESOURCE_MAX_LI"
+  "MIT\020\377\254\342\004\022\027\n\022EN_GCC_LEVEL_LIMIT\020\347\007\022\034\n\030EN_"
+  "GCC_SOLDIER_TYPE_MASK\020d\022\036\n\031EN_GCC_ACTIVI"
+  "TY_TYPE_MASK\020\350\007\022\035\n\031EN_GCC_FORMULAR_TYPE_"
+  "MASK\020\n\022\030\n\023EN_GCC_SCREEN_WIDTH\020\360\010\022\031\n\024EN_G"
+  "CC_SCREEN_HEIGHT\020\200\005\022\031\n\024EN_GCC_CAMERA_OFF"
+  "SET\020\214\002\032\002\020\001*Z\n\tcost_type\022\021\n\rEN_CT_UNKNOWN"
+  "\020\000\022\033\n\013EN_CT_MONEY\020\221N\032\t\322>\006\351\207\221\345\270\201\022\035\n\rEN_CT"
+  "_DIAMOND\020\365N\032\t\322>\006\351\222\273\347\237\263b\006proto3"
   ;
-static const ::PROTOBUF_NAMESPACE_ID::internal::DescriptorTable*const descriptor_table_dependency_2eproto_deps[1] = {
+static const ::PROTOBUF_NAMESPACE_ID::internal::DescriptorTable*const descriptor_table_dependency_2eproto_deps[2] = {
   &::descriptor_table_dep_5flevel2_2eproto,
+  &::descriptor_table_xresloader_2eproto,
 };
 static ::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase*const descriptor_table_dependency_2eproto_sccs[1] = {
   &scc_info_dep_cfg_dependency_2eproto.base,
@@ -81,8 +83,8 @@ static ::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase*const descriptor_table_dep
 static ::PROTOBUF_NAMESPACE_ID::internal::once_flag descriptor_table_dependency_2eproto_once;
 static bool descriptor_table_dependency_2eproto_initialized = false;
 const ::PROTOBUF_NAMESPACE_ID::internal::DescriptorTable descriptor_table_dependency_2eproto = {
-  &descriptor_table_dependency_2eproto_initialized, descriptor_table_protodef_dependency_2eproto, "dependency.proto", 510,
-  &descriptor_table_dependency_2eproto_once, descriptor_table_dependency_2eproto_sccs, descriptor_table_dependency_2eproto_deps, 1, 1,
+  &descriptor_table_dependency_2eproto_initialized, descriptor_table_protodef_dependency_2eproto, "dependency.proto", 550,
+  &descriptor_table_dependency_2eproto_once, descriptor_table_dependency_2eproto_sccs, descriptor_table_dependency_2eproto_deps, 1, 2,
   schemas, file_default_instances, TableStruct_dependency_2eproto::offsets,
   file_level_metadata_dependency_2eproto, 1, file_level_enum_descriptors_dependency_2eproto, file_level_service_descriptors_dependency_2eproto,
 };

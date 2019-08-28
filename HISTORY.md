@@ -1,6 +1,13 @@
 更新记录
 ==========
 
+2.5.0
+------
+
+1. 增加protobuf插件 - org.xresloader.field_alias 可以设置字段别名并用于配置了验证器的excel数据中
+2. 增加protobuf插件 - org.xresloader.enum_alias 可以设置枚举项目的别名并用于配置了验证器的excel数据中
+3. 增加protobuf插件 - org.xresloader.field_ratio 可以设置字段放大倍数值，可用于需要转出整数类型的百分率/千分率/万分率，但excel中保留小数表达
+
 2.4.0
 ------
 

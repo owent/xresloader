@@ -27,7 +27,7 @@ message role_upgrade_cfg {
 
 message test_msg_verifier {
     optional uint32 test_id_1 = 10001;
-    optional uint32 test_id_2 = 10002;
+    optional uint32 test_id_2 = 10002 [(org.xresloader.field_alias) = "测试ID别名2"];
 }
 
 message arr_in_arr {

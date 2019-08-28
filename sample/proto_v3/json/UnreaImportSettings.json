@@ -190,5 +190,29 @@
         },
         "bSkipReadOnly": "true",
         "bReplaceExisting": "true"
+    },
+    {
+        "GroupName": "XResConfig",
+        "DestinationPath": "DataTable",
+        "FactoryName": "ReimportDataTableFactory",
+        "Filenames": ["/data/workspace/xresloader/xresloader/sample/proto_v3/json/KindConst.json"],
+        "ImportSettings": {
+            "ImportType": "ECSV_DataTable",
+            "ImportRowStruct": "KindConst"
+        },
+        "bSkipReadOnly": "true",
+        "bReplaceExisting": "true"
+    },
+    {
+        "GroupName": "XResConfig",
+        "DestinationPath": "Config",
+        "FactoryName": "ReimportDataTableFactory",
+        "Filenames": ["/data/workspace/xresloader/xresloader/sample/proto_v3/json/ArrInArrCfg.json"],
+        "ImportSettings": {
+            "ImportType": "ECSV_DataTable",
+            "ImportRowStruct": "ArrInArrCfg"
+        },
+        "bSkipReadOnly": "true",
+        "bReplaceExisting": "true"
     }
 ]}

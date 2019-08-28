@@ -206,14 +206,15 @@ const char descriptor_table_protodef_kind_2eproto[] PROTOBUF_SECTION_VARIABLE(pr
   "\"\207\001\n\020role_upgrade_cfg\022\n\n\002Id\030\001 \001(\r\022\r\n\005Lev"
   "el\030\002 \001(\r\0223\n\010CostType\030\003 \001(\rB!\312>\tcost_type"
   "\232\?\022Refer to cost_type\022\021\n\tCostValue\030\004 \001(\005"
-  "\022\020\n\010ScoreAdd\030\005 \001(\005\";\n\021test_msg_verifier\022"
-  "\022\n\ttest_id_1\030\221N \001(\r\022\022\n\ttest_id_2\030\222N \001(\r\""
-  "o\n\narr_in_arr\022-\n\004name\030\001 \001(\tB\037\232\?\034This is "
-  "a test name in array\022\023\n\007int_arr\030\002 \003(\005B\002\020"
-  "\001\022\017\n\007str_arr\030\003 \003(\t:\014\352D\006helper\360D\001\"l\n\016arr_"
-  "in_arr_cfg\022\037\n\002id\030\001 \001(\rB\023\350D\001\232\?\rThis is a "
-  "Key\022\030\n\003arr\030\002 \003(\0132\013.arr_in_arr:\037\352D\006helper"
-  "\312>\023Test arr_in_arr_cfg"
+  "\022\020\n\010ScoreAdd\030\005 \001(\005\"O\n\021test_msg_verifier\022"
+  "\022\n\ttest_id_1\030\221N \001(\r\022&\n\ttest_id_2\030\222N \001(\rB"
+  "\022\242\?\017\346\265\213\350\257\225ID\345\210\253\345\220\2152\"o\n\narr_in_arr\022-\n\004nam"
+  "e\030\001 \001(\tB\037\232\?\034This is a test name in array"
+  "\022\023\n\007int_arr\030\002 \003(\005B\002\020\001\022\017\n\007str_arr\030\003 \003(\t:\014"
+  "\352D\006helper\360D\001\"l\n\016arr_in_arr_cfg\022\037\n\002id\030\001 \001"
+  "(\rB\023\350D\001\232\?\rThis is a Key\022\030\n\003arr\030\002 \003(\0132\013.a"
+  "rr_in_arr:\037\352D\006helper\312>\023Test arr_in_arr_c"
+  "fg"
   ;
 static const ::PROTOBUF_NAMESPACE_ID::internal::DescriptorTable*const descriptor_table_kind_2eproto_deps[3] = {
   &::descriptor_table_dependency_2eproto,
@@ -230,7 +231,7 @@ static ::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase*const descriptor_table_kin
 static ::PROTOBUF_NAMESPACE_ID::internal::once_flag descriptor_table_kind_2eproto_once;
 static bool descriptor_table_kind_2eproto_initialized = false;
 const ::PROTOBUF_NAMESPACE_ID::internal::DescriptorTable descriptor_table_kind_2eproto = {
-  &descriptor_table_kind_2eproto_initialized, descriptor_table_protodef_kind_2eproto, "kind.proto", 662,
+  &descriptor_table_kind_2eproto_initialized, descriptor_table_protodef_kind_2eproto, "kind.proto", 682,
   &descriptor_table_kind_2eproto_once, descriptor_table_kind_2eproto_sccs, descriptor_table_kind_2eproto_deps, 5, 3,
   schemas, file_default_instances, TableStruct_kind_2eproto::offsets,
   file_level_metadata_kind_2eproto, 5, file_level_enum_descriptors_kind_2eproto, file_level_service_descriptors_kind_2eproto,
@@ -1460,7 +1461,7 @@ const char* test_msg_verifier::_InternalParse(const char* ptr, ::PROTOBUF_NAMESP
           CHK_(ptr);
         } else goto handle_unusual;
         continue;
-      // optional uint32 test_id_2 = 10002;
+      // optional uint32 test_id_2 = 10002 [(.org.xresloader.field_alias) = "\346\265\213\350\257\225ID\345\210\253\345\220\2152"];
       case 10002:
         if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 144)) {
           _Internal::set_has_test_id_2(&has_bits);
@@ -1512,7 +1513,7 @@ bool test_msg_verifier::MergePartialFromCodedStream(
         break;
       }
 
-      // optional uint32 test_id_2 = 10002;
+      // optional uint32 test_id_2 = 10002 [(.org.xresloader.field_alias) = "\346\265\213\350\257\225ID\345\210\253\345\220\2152"];
       case 10002: {
         if (static_cast< ::PROTOBUF_NAMESPACE_ID::uint8>(tag) == (80016 & 0xFF)) {
           _Internal::set_has_test_id_2(&_has_bits_);
@@ -1558,7 +1559,7 @@ void test_msg_verifier::SerializeWithCachedSizes(
     ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteUInt32(10001, this->test_id_1(), output);
   }
 
-  // optional uint32 test_id_2 = 10002;
+  // optional uint32 test_id_2 = 10002 [(.org.xresloader.field_alias) = "\346\265\213\350\257\225ID\345\210\253\345\220\2152"];
   if (cached_has_bits & 0x00000002u) {
     ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteUInt32(10002, this->test_id_2(), output);
   }
@@ -1582,7 +1583,7 @@ void test_msg_verifier::SerializeWithCachedSizes(
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteUInt32ToArray(10001, this->test_id_1(), target);
   }
 
-  // optional uint32 test_id_2 = 10002;
+  // optional uint32 test_id_2 = 10002 [(.org.xresloader.field_alias) = "\346\265\213\350\257\225ID\345\210\253\345\220\2152"];
   if (cached_has_bits & 0x00000002u) {
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteUInt32ToArray(10002, this->test_id_2(), target);
   }
@@ -1617,7 +1618,7 @@ size_t test_msg_verifier::ByteSizeLong() const {
           this->test_id_1());
     }
 
-    // optional uint32 test_id_2 = 10002;
+    // optional uint32 test_id_2 = 10002 [(.org.xresloader.field_alias) = "\346\265\213\350\257\225ID\345\210\253\345\220\2152"];
     if (cached_has_bits & 0x00000002u) {
       total_size += 3 +
         ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::UInt32Size(

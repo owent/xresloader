@@ -9,13 +9,14 @@ public final class Xresloader {
       com.google.protobuf.ExtensionRegistryLite registry) {
     registry.add(org.xresloader.Xresloader.fileDescription);
     registry.add(org.xresloader.Xresloader.msgDescription);
-    registry.add(org.xresloader.Xresloader.kvIndex);
-    registry.add(org.xresloader.Xresloader.klIndex);
     registry.add(org.xresloader.Xresloader.verifier);
     registry.add(org.xresloader.Xresloader.fieldDescription);
+    registry.add(org.xresloader.Xresloader.fieldAlias);
+    registry.add(org.xresloader.Xresloader.fieldRatio);
     registry.add(org.xresloader.Xresloader.oneofDescription);
     registry.add(org.xresloader.Xresloader.enumDescription);
     registry.add(org.xresloader.Xresloader.enumvDescription);
+    registry.add(org.xresloader.Xresloader.enumAlias);
   }
 
   public static void registerAllExtensions(
@@ -23,753 +24,6 @@ public final class Xresloader {
     registerAllExtensions(
         (com.google.protobuf.ExtensionRegistryLite) registry);
   }
-  public interface IndexDescriptorOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:org.xresloader.IndexDescriptor)
-      com.google.protobuf.MessageOrBuilder {
-
-    /**
-     * <code>string name = 1;</code>
-     */
-    java.lang.String getName();
-    /**
-     * <code>string name = 1;</code>
-     */
-    com.google.protobuf.ByteString
-        getNameBytes();
-
-    /**
-     * <code>repeated string fields = 2;</code>
-     */
-    java.util.List<java.lang.String>
-        getFieldsList();
-    /**
-     * <code>repeated string fields = 2;</code>
-     */
-    int getFieldsCount();
-    /**
-     * <code>repeated string fields = 2;</code>
-     */
-    java.lang.String getFields(int index);
-    /**
-     * <code>repeated string fields = 2;</code>
-     */
-    com.google.protobuf.ByteString
-        getFieldsBytes(int index);
-  }
-  /**
-   * Protobuf type {@code org.xresloader.IndexDescriptor}
-   */
-  public  static final class IndexDescriptor extends
-      com.google.protobuf.GeneratedMessageV3 implements
-      // @@protoc_insertion_point(message_implements:org.xresloader.IndexDescriptor)
-      IndexDescriptorOrBuilder {
-  private static final long serialVersionUID = 0L;
-    // Use IndexDescriptor.newBuilder() to construct.
-    private IndexDescriptor(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
-      super(builder);
-    }
-    private IndexDescriptor() {
-      name_ = "";
-      fields_ = com.google.protobuf.LazyStringArrayList.EMPTY;
-    }
-
-    @java.lang.Override
-    @SuppressWarnings({"unused"})
-    protected java.lang.Object newInstance(
-        UnusedPrivateParameter unused) {
-      return new IndexDescriptor();
-    }
-
-    @java.lang.Override
-    public final com.google.protobuf.UnknownFieldSet
-    getUnknownFields() {
-      return this.unknownFields;
-    }
-    private IndexDescriptor(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      this();
-      if (extensionRegistry == null) {
-        throw new java.lang.NullPointerException();
-      }
-      int mutable_bitField0_ = 0;
-      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
-          com.google.protobuf.UnknownFieldSet.newBuilder();
-      try {
-        boolean done = false;
-        while (!done) {
-          int tag = input.readTag();
-          switch (tag) {
-            case 0:
-              done = true;
-              break;
-            case 10: {
-              java.lang.String s = input.readStringRequireUtf8();
-
-              name_ = s;
-              break;
-            }
-            case 18: {
-              java.lang.String s = input.readStringRequireUtf8();
-              if (!((mutable_bitField0_ & 0x00000001) != 0)) {
-                fields_ = new com.google.protobuf.LazyStringArrayList();
-                mutable_bitField0_ |= 0x00000001;
-              }
-              fields_.add(s);
-              break;
-            }
-            default: {
-              if (!parseUnknownField(
-                  input, unknownFields, extensionRegistry, tag)) {
-                done = true;
-              }
-              break;
-            }
-          }
-        }
-      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-        throw e.setUnfinishedMessage(this);
-      } catch (java.io.IOException e) {
-        throw new com.google.protobuf.InvalidProtocolBufferException(
-            e).setUnfinishedMessage(this);
-      } finally {
-        if (((mutable_bitField0_ & 0x00000001) != 0)) {
-          fields_ = fields_.getUnmodifiableView();
-        }
-        this.unknownFields = unknownFields.build();
-        makeExtensionsImmutable();
-      }
-    }
-    public static final com.google.protobuf.Descriptors.Descriptor
-        getDescriptor() {
-      return org.xresloader.Xresloader.internal_static_org_xresloader_IndexDescriptor_descriptor;
-    }
-
-    @java.lang.Override
-    protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-        internalGetFieldAccessorTable() {
-      return org.xresloader.Xresloader.internal_static_org_xresloader_IndexDescriptor_fieldAccessorTable
-          .ensureFieldAccessorsInitialized(
-              org.xresloader.Xresloader.IndexDescriptor.class, org.xresloader.Xresloader.IndexDescriptor.Builder.class);
-    }
-
-    public static final int NAME_FIELD_NUMBER = 1;
-    private volatile java.lang.Object name_;
-    /**
-     * <code>string name = 1;</code>
-     */
-    public java.lang.String getName() {
-      java.lang.Object ref = name_;
-      if (ref instanceof java.lang.String) {
-        return (java.lang.String) ref;
-      } else {
-        com.google.protobuf.ByteString bs = 
-            (com.google.protobuf.ByteString) ref;
-        java.lang.String s = bs.toStringUtf8();
-        name_ = s;
-        return s;
-      }
-    }
-    /**
-     * <code>string name = 1;</code>
-     */
-    public com.google.protobuf.ByteString
-        getNameBytes() {
-      java.lang.Object ref = name_;
-      if (ref instanceof java.lang.String) {
-        com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
-        name_ = b;
-        return b;
-      } else {
-        return (com.google.protobuf.ByteString) ref;
-      }
-    }
-
-    public static final int FIELDS_FIELD_NUMBER = 2;
-    private com.google.protobuf.LazyStringList fields_;
-    /**
-     * <code>repeated string fields = 2;</code>
-     */
-    public com.google.protobuf.ProtocolStringList
-        getFieldsList() {
-      return fields_;
-    }
-    /**
-     * <code>repeated string fields = 2;</code>
-     */
-    public int getFieldsCount() {
-      return fields_.size();
-    }
-    /**
-     * <code>repeated string fields = 2;</code>
-     */
-    public java.lang.String getFields(int index) {
-      return fields_.get(index);
-    }
-    /**
-     * <code>repeated string fields = 2;</code>
-     */
-    public com.google.protobuf.ByteString
-        getFieldsBytes(int index) {
-      return fields_.getByteString(index);
-    }
-
-    private byte memoizedIsInitialized = -1;
-    @java.lang.Override
-    public final boolean isInitialized() {
-      byte isInitialized = memoizedIsInitialized;
-      if (isInitialized == 1) return true;
-      if (isInitialized == 0) return false;
-
-      memoizedIsInitialized = 1;
-      return true;
-    }
-
-    @java.lang.Override
-    public void writeTo(com.google.protobuf.CodedOutputStream output)
-                        throws java.io.IOException {
-      if (!getNameBytes().isEmpty()) {
-        com.google.protobuf.GeneratedMessageV3.writeString(output, 1, name_);
-      }
-      for (int i = 0; i < fields_.size(); i++) {
-        com.google.protobuf.GeneratedMessageV3.writeString(output, 2, fields_.getRaw(i));
-      }
-      unknownFields.writeTo(output);
-    }
-
-    @java.lang.Override
-    public int getSerializedSize() {
-      int size = memoizedSize;
-      if (size != -1) return size;
-
-      size = 0;
-      if (!getNameBytes().isEmpty()) {
-        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(1, name_);
-      }
-      {
-        int dataSize = 0;
-        for (int i = 0; i < fields_.size(); i++) {
-          dataSize += computeStringSizeNoTag(fields_.getRaw(i));
-        }
-        size += dataSize;
-        size += 1 * getFieldsList().size();
-      }
-      size += unknownFields.getSerializedSize();
-      memoizedSize = size;
-      return size;
-    }
-
-    @java.lang.Override
-    public boolean equals(final java.lang.Object obj) {
-      if (obj == this) {
-       return true;
-      }
-      if (!(obj instanceof org.xresloader.Xresloader.IndexDescriptor)) {
-        return super.equals(obj);
-      }
-      org.xresloader.Xresloader.IndexDescriptor other = (org.xresloader.Xresloader.IndexDescriptor) obj;
-
-      if (!getName()
-          .equals(other.getName())) return false;
-      if (!getFieldsList()
-          .equals(other.getFieldsList())) return false;
-      if (!unknownFields.equals(other.unknownFields)) return false;
-      return true;
-    }
-
-    @java.lang.Override
-    public int hashCode() {
-      if (memoizedHashCode != 0) {
-        return memoizedHashCode;
-      }
-      int hash = 41;
-      hash = (19 * hash) + getDescriptor().hashCode();
-      hash = (37 * hash) + NAME_FIELD_NUMBER;
-      hash = (53 * hash) + getName().hashCode();
-      if (getFieldsCount() > 0) {
-        hash = (37 * hash) + FIELDS_FIELD_NUMBER;
-        hash = (53 * hash) + getFieldsList().hashCode();
-      }
-      hash = (29 * hash) + unknownFields.hashCode();
-      memoizedHashCode = hash;
-      return hash;
-    }
-
-    public static org.xresloader.Xresloader.IndexDescriptor parseFrom(
-        java.nio.ByteBuffer data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data);
-    }
-    public static org.xresloader.Xresloader.IndexDescriptor parseFrom(
-        java.nio.ByteBuffer data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data, extensionRegistry);
-    }
-    public static org.xresloader.Xresloader.IndexDescriptor parseFrom(
-        com.google.protobuf.ByteString data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data);
-    }
-    public static org.xresloader.Xresloader.IndexDescriptor parseFrom(
-        com.google.protobuf.ByteString data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data, extensionRegistry);
-    }
-    public static org.xresloader.Xresloader.IndexDescriptor parseFrom(byte[] data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data);
-    }
-    public static org.xresloader.Xresloader.IndexDescriptor parseFrom(
-        byte[] data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data, extensionRegistry);
-    }
-    public static org.xresloader.Xresloader.IndexDescriptor parseFrom(java.io.InputStream input)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input);
-    }
-    public static org.xresloader.Xresloader.IndexDescriptor parseFrom(
-        java.io.InputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input, extensionRegistry);
-    }
-    public static org.xresloader.Xresloader.IndexDescriptor parseDelimitedFrom(java.io.InputStream input)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseDelimitedWithIOException(PARSER, input);
-    }
-    public static org.xresloader.Xresloader.IndexDescriptor parseDelimitedFrom(
-        java.io.InputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
-    }
-    public static org.xresloader.Xresloader.IndexDescriptor parseFrom(
-        com.google.protobuf.CodedInputStream input)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input);
-    }
-    public static org.xresloader.Xresloader.IndexDescriptor parseFrom(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input, extensionRegistry);
-    }
-
-    @java.lang.Override
-    public Builder newBuilderForType() { return newBuilder(); }
-    public static Builder newBuilder() {
-      return DEFAULT_INSTANCE.toBuilder();
-    }
-    public static Builder newBuilder(org.xresloader.Xresloader.IndexDescriptor prototype) {
-      return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
-    }
-    @java.lang.Override
-    public Builder toBuilder() {
-      return this == DEFAULT_INSTANCE
-          ? new Builder() : new Builder().mergeFrom(this);
-    }
-
-    @java.lang.Override
-    protected Builder newBuilderForType(
-        com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
-      Builder builder = new Builder(parent);
-      return builder;
-    }
-    /**
-     * Protobuf type {@code org.xresloader.IndexDescriptor}
-     */
-    public static final class Builder extends
-        com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:org.xresloader.IndexDescriptor)
-        org.xresloader.Xresloader.IndexDescriptorOrBuilder {
-      public static final com.google.protobuf.Descriptors.Descriptor
-          getDescriptor() {
-        return org.xresloader.Xresloader.internal_static_org_xresloader_IndexDescriptor_descriptor;
-      }
-
-      @java.lang.Override
-      protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-          internalGetFieldAccessorTable() {
-        return org.xresloader.Xresloader.internal_static_org_xresloader_IndexDescriptor_fieldAccessorTable
-            .ensureFieldAccessorsInitialized(
-                org.xresloader.Xresloader.IndexDescriptor.class, org.xresloader.Xresloader.IndexDescriptor.Builder.class);
-      }
-
-      // Construct using org.xresloader.Xresloader.IndexDescriptor.newBuilder()
-      private Builder() {
-        maybeForceBuilderInitialization();
-      }
-
-      private Builder(
-          com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
-        super(parent);
-        maybeForceBuilderInitialization();
-      }
-      private void maybeForceBuilderInitialization() {
-        if (com.google.protobuf.GeneratedMessageV3
-                .alwaysUseFieldBuilders) {
-        }
-      }
-      @java.lang.Override
-      public Builder clear() {
-        super.clear();
-        name_ = "";
-
-        fields_ = com.google.protobuf.LazyStringArrayList.EMPTY;
-        bitField0_ = (bitField0_ & ~0x00000001);
-        return this;
-      }
-
-      @java.lang.Override
-      public com.google.protobuf.Descriptors.Descriptor
-          getDescriptorForType() {
-        return org.xresloader.Xresloader.internal_static_org_xresloader_IndexDescriptor_descriptor;
-      }
-
-      @java.lang.Override
-      public org.xresloader.Xresloader.IndexDescriptor getDefaultInstanceForType() {
-        return org.xresloader.Xresloader.IndexDescriptor.getDefaultInstance();
-      }
-
-      @java.lang.Override
-      public org.xresloader.Xresloader.IndexDescriptor build() {
-        org.xresloader.Xresloader.IndexDescriptor result = buildPartial();
-        if (!result.isInitialized()) {
-          throw newUninitializedMessageException(result);
-        }
-        return result;
-      }
-
-      @java.lang.Override
-      public org.xresloader.Xresloader.IndexDescriptor buildPartial() {
-        org.xresloader.Xresloader.IndexDescriptor result = new org.xresloader.Xresloader.IndexDescriptor(this);
-        int from_bitField0_ = bitField0_;
-        result.name_ = name_;
-        if (((bitField0_ & 0x00000001) != 0)) {
-          fields_ = fields_.getUnmodifiableView();
-          bitField0_ = (bitField0_ & ~0x00000001);
-        }
-        result.fields_ = fields_;
-        onBuilt();
-        return result;
-      }
-
-      @java.lang.Override
-      public Builder clone() {
-        return super.clone();
-      }
-      @java.lang.Override
-      public Builder setField(
-          com.google.protobuf.Descriptors.FieldDescriptor field,
-          java.lang.Object value) {
-        return super.setField(field, value);
-      }
-      @java.lang.Override
-      public Builder clearField(
-          com.google.protobuf.Descriptors.FieldDescriptor field) {
-        return super.clearField(field);
-      }
-      @java.lang.Override
-      public Builder clearOneof(
-          com.google.protobuf.Descriptors.OneofDescriptor oneof) {
-        return super.clearOneof(oneof);
-      }
-      @java.lang.Override
-      public Builder setRepeatedField(
-          com.google.protobuf.Descriptors.FieldDescriptor field,
-          int index, java.lang.Object value) {
-        return super.setRepeatedField(field, index, value);
-      }
-      @java.lang.Override
-      public Builder addRepeatedField(
-          com.google.protobuf.Descriptors.FieldDescriptor field,
-          java.lang.Object value) {
-        return super.addRepeatedField(field, value);
-      }
-      @java.lang.Override
-      public Builder mergeFrom(com.google.protobuf.Message other) {
-        if (other instanceof org.xresloader.Xresloader.IndexDescriptor) {
-          return mergeFrom((org.xresloader.Xresloader.IndexDescriptor)other);
-        } else {
-          super.mergeFrom(other);
-          return this;
-        }
-      }
-
-      public Builder mergeFrom(org.xresloader.Xresloader.IndexDescriptor other) {
-        if (other == org.xresloader.Xresloader.IndexDescriptor.getDefaultInstance()) return this;
-        if (!other.getName().isEmpty()) {
-          name_ = other.name_;
-          onChanged();
-        }
-        if (!other.fields_.isEmpty()) {
-          if (fields_.isEmpty()) {
-            fields_ = other.fields_;
-            bitField0_ = (bitField0_ & ~0x00000001);
-          } else {
-            ensureFieldsIsMutable();
-            fields_.addAll(other.fields_);
-          }
-          onChanged();
-        }
-        this.mergeUnknownFields(other.unknownFields);
-        onChanged();
-        return this;
-      }
-
-      @java.lang.Override
-      public final boolean isInitialized() {
-        return true;
-      }
-
-      @java.lang.Override
-      public Builder mergeFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws java.io.IOException {
-        org.xresloader.Xresloader.IndexDescriptor parsedMessage = null;
-        try {
-          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
-        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          parsedMessage = (org.xresloader.Xresloader.IndexDescriptor) e.getUnfinishedMessage();
-          throw e.unwrapIOException();
-        } finally {
-          if (parsedMessage != null) {
-            mergeFrom(parsedMessage);
-          }
-        }
-        return this;
-      }
-      private int bitField0_;
-
-      private java.lang.Object name_ = "";
-      /**
-       * <code>string name = 1;</code>
-       */
-      public java.lang.String getName() {
-        java.lang.Object ref = name_;
-        if (!(ref instanceof java.lang.String)) {
-          com.google.protobuf.ByteString bs =
-              (com.google.protobuf.ByteString) ref;
-          java.lang.String s = bs.toStringUtf8();
-          name_ = s;
-          return s;
-        } else {
-          return (java.lang.String) ref;
-        }
-      }
-      /**
-       * <code>string name = 1;</code>
-       */
-      public com.google.protobuf.ByteString
-          getNameBytes() {
-        java.lang.Object ref = name_;
-        if (ref instanceof String) {
-          com.google.protobuf.ByteString b = 
-              com.google.protobuf.ByteString.copyFromUtf8(
-                  (java.lang.String) ref);
-          name_ = b;
-          return b;
-        } else {
-          return (com.google.protobuf.ByteString) ref;
-        }
-      }
-      /**
-       * <code>string name = 1;</code>
-       */
-      public Builder setName(
-          java.lang.String value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  
-        name_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>string name = 1;</code>
-       */
-      public Builder clearName() {
-        
-        name_ = getDefaultInstance().getName();
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>string name = 1;</code>
-       */
-      public Builder setNameBytes(
-          com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  checkByteStringIsUtf8(value);
-        
-        name_ = value;
-        onChanged();
-        return this;
-      }
-
-      private com.google.protobuf.LazyStringList fields_ = com.google.protobuf.LazyStringArrayList.EMPTY;
-      private void ensureFieldsIsMutable() {
-        if (!((bitField0_ & 0x00000001) != 0)) {
-          fields_ = new com.google.protobuf.LazyStringArrayList(fields_);
-          bitField0_ |= 0x00000001;
-         }
-      }
-      /**
-       * <code>repeated string fields = 2;</code>
-       */
-      public com.google.protobuf.ProtocolStringList
-          getFieldsList() {
-        return fields_.getUnmodifiableView();
-      }
-      /**
-       * <code>repeated string fields = 2;</code>
-       */
-      public int getFieldsCount() {
-        return fields_.size();
-      }
-      /**
-       * <code>repeated string fields = 2;</code>
-       */
-      public java.lang.String getFields(int index) {
-        return fields_.get(index);
-      }
-      /**
-       * <code>repeated string fields = 2;</code>
-       */
-      public com.google.protobuf.ByteString
-          getFieldsBytes(int index) {
-        return fields_.getByteString(index);
-      }
-      /**
-       * <code>repeated string fields = 2;</code>
-       */
-      public Builder setFields(
-          int index, java.lang.String value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  ensureFieldsIsMutable();
-        fields_.set(index, value);
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>repeated string fields = 2;</code>
-       */
-      public Builder addFields(
-          java.lang.String value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  ensureFieldsIsMutable();
-        fields_.add(value);
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>repeated string fields = 2;</code>
-       */
-      public Builder addAllFields(
-          java.lang.Iterable<java.lang.String> values) {
-        ensureFieldsIsMutable();
-        com.google.protobuf.AbstractMessageLite.Builder.addAll(
-            values, fields_);
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>repeated string fields = 2;</code>
-       */
-      public Builder clearFields() {
-        fields_ = com.google.protobuf.LazyStringArrayList.EMPTY;
-        bitField0_ = (bitField0_ & ~0x00000001);
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>repeated string fields = 2;</code>
-       */
-      public Builder addFieldsBytes(
-          com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  checkByteStringIsUtf8(value);
-        ensureFieldsIsMutable();
-        fields_.add(value);
-        onChanged();
-        return this;
-      }
-      @java.lang.Override
-      public final Builder setUnknownFields(
-          final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return super.setUnknownFields(unknownFields);
-      }
-
-      @java.lang.Override
-      public final Builder mergeUnknownFields(
-          final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return super.mergeUnknownFields(unknownFields);
-      }
-
-
-      // @@protoc_insertion_point(builder_scope:org.xresloader.IndexDescriptor)
-    }
-
-    // @@protoc_insertion_point(class_scope:org.xresloader.IndexDescriptor)
-    private static final org.xresloader.Xresloader.IndexDescriptor DEFAULT_INSTANCE;
-    static {
-      DEFAULT_INSTANCE = new org.xresloader.Xresloader.IndexDescriptor();
-    }
-
-    public static org.xresloader.Xresloader.IndexDescriptor getDefaultInstance() {
-      return DEFAULT_INSTANCE;
-    }
-
-    private static final com.google.protobuf.Parser<IndexDescriptor>
-        PARSER = new com.google.protobuf.AbstractParser<IndexDescriptor>() {
-      @java.lang.Override
-      public IndexDescriptor parsePartialFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws com.google.protobuf.InvalidProtocolBufferException {
-        return new IndexDescriptor(input, extensionRegistry);
-      }
-    };
-
-    public static com.google.protobuf.Parser<IndexDescriptor> parser() {
-      return PARSER;
-    }
-
-    @java.lang.Override
-    public com.google.protobuf.Parser<IndexDescriptor> getParserForType() {
-      return PARSER;
-    }
-
-    @java.lang.Override
-    public org.xresloader.Xresloader.IndexDescriptor getDefaultInstanceForType() {
-      return DEFAULT_INSTANCE;
-    }
-
-  }
-
   public static final int FILE_DESCRIPTION_FIELD_NUMBER = 1001;
   /**
    * <pre>
@@ -800,36 +54,6 @@ public final class Xresloader {
           .newFileScopedGeneratedExtension(
         java.lang.String.class,
         null);
-  public static final int KV_INDEX_FIELD_NUMBER = 1021;
-  /**
-   * <pre>
-   * TODO [预留] key-value 类型索引
-   * </pre>
-   *
-   * <code>extend .google.protobuf.MessageOptions { ... }</code>
-   */
-  public static final
-    com.google.protobuf.GeneratedMessage.GeneratedExtension<
-      com.google.protobuf.DescriptorProtos.MessageOptions,
-      java.util.List<org.xresloader.Xresloader.IndexDescriptor>> kvIndex = com.google.protobuf.GeneratedMessage
-          .newFileScopedGeneratedExtension(
-        org.xresloader.Xresloader.IndexDescriptor.class,
-        org.xresloader.Xresloader.IndexDescriptor.getDefaultInstance());
-  public static final int KL_INDEX_FIELD_NUMBER = 1022;
-  /**
-   * <pre>
-   * TODO [预留] key-list 类型索引
-   * </pre>
-   *
-   * <code>extend .google.protobuf.MessageOptions { ... }</code>
-   */
-  public static final
-    com.google.protobuf.GeneratedMessage.GeneratedExtension<
-      com.google.protobuf.DescriptorProtos.MessageOptions,
-      java.util.List<org.xresloader.Xresloader.IndexDescriptor>> klIndex = com.google.protobuf.GeneratedMessage
-          .newFileScopedGeneratedExtension(
-        org.xresloader.Xresloader.IndexDescriptor.class,
-        org.xresloader.Xresloader.IndexDescriptor.getDefaultInstance());
   public static final int VERIFIER_FIELD_NUMBER = 1001;
   /**
    * <pre>
@@ -859,6 +83,36 @@ public final class Xresloader {
       java.lang.String> fieldDescription = com.google.protobuf.GeneratedMessage
           .newFileScopedGeneratedExtension(
         java.lang.String.class,
+        null);
+  public static final int FIELD_ALIAS_FIELD_NUMBER = 1012;
+  /**
+   * <pre>
+   * 字段别名，可用于验证器名字
+   * </pre>
+   *
+   * <code>extend .google.protobuf.FieldOptions { ... }</code>
+   */
+  public static final
+    com.google.protobuf.GeneratedMessage.GeneratedExtension<
+      com.google.protobuf.DescriptorProtos.FieldOptions,
+      java.lang.String> fieldAlias = com.google.protobuf.GeneratedMessage
+          .newFileScopedGeneratedExtension(
+        java.lang.String.class,
+        null);
+  public static final int FIELD_RATIO_FIELD_NUMBER = 1013;
+  /**
+   * <pre>
+   * 字段放大倍数，可用于验证器名字
+   * </pre>
+   *
+   * <code>extend .google.protobuf.FieldOptions { ... }</code>
+   */
+  public static final
+    com.google.protobuf.GeneratedMessage.GeneratedExtension<
+      com.google.protobuf.DescriptorProtos.FieldOptions,
+      java.lang.Integer> fieldRatio = com.google.protobuf.GeneratedMessage
+          .newFileScopedGeneratedExtension(
+        java.lang.Integer.class,
         null);
   public static final int ONEOF_DESCRIPTION_FIELD_NUMBER = 1001;
   /**
@@ -905,11 +159,21 @@ public final class Xresloader {
           .newFileScopedGeneratedExtension(
         java.lang.String.class,
         null);
-  private static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_org_xresloader_IndexDescriptor_descriptor;
-  private static final 
-    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-      internal_static_org_xresloader_IndexDescriptor_fieldAccessorTable;
+  public static final int ENUM_ALIAS_FIELD_NUMBER = 1002;
+  /**
+   * <pre>
+   * 枚举别名，可用于验证器名字
+   * </pre>
+   *
+   * <code>extend .google.protobuf.EnumValueOptions { ... }</code>
+   */
+  public static final
+    com.google.protobuf.GeneratedMessage.GeneratedExtension<
+      com.google.protobuf.DescriptorProtos.EnumValueOptions,
+      java.lang.String> enumAlias = com.google.protobuf.GeneratedMessage
+          .newFileScopedGeneratedExtension(
+        java.lang.String.class,
+        null);
 
   public static com.google.protobuf.Descriptors.FileDescriptor
       getDescriptor() {
@@ -921,43 +185,37 @@ public final class Xresloader {
     java.lang.String[] descriptorData = {
       "\n\036extensions/v3/xresloader.proto\022\016org.xr" +
       "esloader\032 google/protobuf/descriptor.pro" +
-      "to\"/\n\017IndexDescriptor\022\014\n\004name\030\001 \001(\t\022\016\n\006f" +
-      "ields\030\002 \003(\t:7\n\020file_description\022\034.google" +
-      ".protobuf.FileOptions\030\351\007 \001(\t:9\n\017msg_desc" +
-      "ription\022\037.google.protobuf.MessageOptions" +
-      "\030\351\007 \001(\t:S\n\010kv_index\022\037.google.protobuf.Me" +
-      "ssageOptions\030\375\007 \003(\0132\037.org.xresloader.Ind" +
-      "exDescriptor:S\n\010kl_index\022\037.google.protob" +
-      "uf.MessageOptions\030\376\007 \003(\0132\037.org.xresloade" +
-      "r.IndexDescriptor:0\n\010verifier\022\035.google.p" +
-      "rotobuf.FieldOptions\030\351\007 \001(\t:9\n\021field_des" +
-      "cription\022\035.google.protobuf.FieldOptions\030" +
-      "\363\007 \001(\t:9\n\021oneof_description\022\035.google.pro" +
-      "tobuf.OneofOptions\030\351\007 \001(\t:7\n\020enum_descri" +
-      "ption\022\034.google.protobuf.EnumOptions\030\351\007 \001" +
-      "(\t:=\n\021enumv_description\022!.google.protobu" +
-      "f.EnumValueOptions\030\351\007 \001(\tb\006proto3"
+      "to:7\n\020file_description\022\034.google.protobuf" +
+      ".FileOptions\030\351\007 \001(\t:9\n\017msg_description\022\037" +
+      ".google.protobuf.MessageOptions\030\351\007 \001(\t:0" +
+      "\n\010verifier\022\035.google.protobuf.FieldOption" +
+      "s\030\351\007 \001(\t:9\n\021field_description\022\035.google.p" +
+      "rotobuf.FieldOptions\030\363\007 \001(\t:3\n\013field_ali" +
+      "as\022\035.google.protobuf.FieldOptions\030\364\007 \001(\t" +
+      ":3\n\013field_ratio\022\035.google.protobuf.FieldO" +
+      "ptions\030\365\007 \001(\005:9\n\021oneof_description\022\035.goo" +
+      "gle.protobuf.OneofOptions\030\351\007 \001(\t:7\n\020enum" +
+      "_description\022\034.google.protobuf.EnumOptio" +
+      "ns\030\351\007 \001(\t:=\n\021enumv_description\022!.google." +
+      "protobuf.EnumValueOptions\030\351\007 \001(\t:6\n\nenum" +
+      "_alias\022!.google.protobuf.EnumValueOption" +
+      "s\030\352\007 \001(\tb\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
         new com.google.protobuf.Descriptors.FileDescriptor[] {
           com.google.protobuf.DescriptorProtos.getDescriptor(),
         });
-    internal_static_org_xresloader_IndexDescriptor_descriptor =
-      getDescriptor().getMessageTypes().get(0);
-    internal_static_org_xresloader_IndexDescriptor_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_org_xresloader_IndexDescriptor_descriptor,
-        new java.lang.String[] { "Name", "Fields", });
     fileDescription.internalInit(descriptor.getExtensions().get(0));
     msgDescription.internalInit(descriptor.getExtensions().get(1));
-    kvIndex.internalInit(descriptor.getExtensions().get(2));
-    klIndex.internalInit(descriptor.getExtensions().get(3));
-    verifier.internalInit(descriptor.getExtensions().get(4));
-    fieldDescription.internalInit(descriptor.getExtensions().get(5));
+    verifier.internalInit(descriptor.getExtensions().get(2));
+    fieldDescription.internalInit(descriptor.getExtensions().get(3));
+    fieldAlias.internalInit(descriptor.getExtensions().get(4));
+    fieldRatio.internalInit(descriptor.getExtensions().get(5));
     oneofDescription.internalInit(descriptor.getExtensions().get(6));
     enumDescription.internalInit(descriptor.getExtensions().get(7));
     enumvDescription.internalInit(descriptor.getExtensions().get(8));
+    enumAlias.internalInit(descriptor.getExtensions().get(9));
     com.google.protobuf.DescriptorProtos.getDescriptor();
   }
 

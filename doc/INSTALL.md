@@ -38,7 +38,7 @@ mvn package
         <mirror>
             <id>tencent-cloud</id>
             <mirrorOf>central</mirrorOf>
-            <name>Aliyun Mirror.</name>
+            <name>Tencent Cloud Mirror.</name>
             <url>http://mirrors.cloud.tencent.com/nexus/repository/maven-public/</url>
         </mirror>
 

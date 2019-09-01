@@ -44,8 +44,6 @@ import org.xresloader.ue.XresloaderUe;
  * Created by owent on 2014/10/10.
  */
 public class DataDstPb extends DataDstImpl {
-    private Descriptors.Descriptor currentMsgDesc = null;
-
     static private class PbAliasNode<T> {
         public T element = null;
         LinkedList<String> names = null;
@@ -81,6 +79,10 @@ public class DataDstPb extends DataDstImpl {
         public PbInfoSet() {
         }
     }
+
+    private Descriptors.Descriptor currentMsgDesc = null;
+    static private com.google.protobuf.ExtensionRegistryLite pb_extensions = null;
+    static private PbInfoSet pbs = new PbInfoSet();
 
     static <T> void append_alias_list(String short_name, String full_name, HashMap<String, PbAliasNode<T>> hashmap,
             T ele) {
@@ -126,8 +128,6 @@ public class DataDstPb extends DataDstImpl {
         return null;
     }
 
-    static private com.google.protobuf.ExtensionRegistryLite pb_extensions = null;
-
     static private com.google.protobuf.ExtensionRegistryLite get_extension_registry() {
         if (null != pb_extensions) {
             return pb_extensions;
@@ -140,8 +140,6 @@ public class DataDstPb extends DataDstImpl {
 
         return pb_extensions;
     }
-
-    static private PbInfoSet pbs = new PbInfoSet();
 
     static void load_pb_message(DescriptorProtos.DescriptorProto mdp, String package_name,
             HashMap<String, PbAliasNode<DescriptorProtos.DescriptorProto>> hashmap) {
@@ -236,10 +234,11 @@ public class DataDstPb extends DataDstImpl {
         for (int i = 0; i < fdp.getDependencyCount(); ++i) {
             Descriptors.FileDescriptor dep = init_pb_files(fdp.getDependency(i), allow_unknown_dependencies);
             if (null == dep) {
-                if (allow_unknown_dependencies){
+                if (allow_unknown_dependencies) {
                     failed_deps.add(fdp.getDependency(i));
                 } else {
-                    ProgramOptions.getLoger().error("initialize protocol file descriptor %s failed. dependency %s", name, fdp.getDependency(i));
+                    ProgramOptions.getLoger().error("initialize protocol file descriptor %s failed. dependency %s",
+                            name, fdp.getDependency(i));
                     return null;
                 }
             } else {
@@ -248,9 +247,9 @@ public class DataDstPb extends DataDstImpl {
         }
 
         if (!failed_deps.isEmpty()) {
-            ProgramOptions.getLoger().warn("initialize protocol file descriptor %s without dependency %s, maybe missing some descriptor(s).", 
-                name, String.join(",", failed_deps)
-            );
+            ProgramOptions.getLoger().warn(
+                    "initialize protocol file descriptor %s without dependency %s, maybe missing some descriptor(s).",
+                    name, String.join(",", failed_deps));
         }
 
         try {
@@ -446,11 +445,13 @@ public class DataDstPb extends DataDstImpl {
         }
 
         // if (pbDesc.getOptions().getExtensionCount(Xresloader.kvIndex) > 0) {
-        //     ret.getMessageExtension().kvIndex = pbDesc.getOptions().getExtension(Xresloader.kvIndex);
+        // ret.getMessageExtension().kvIndex =
+        // pbDesc.getOptions().getExtension(Xresloader.kvIndex);
         // }
 
         // if (pbDesc.getOptions().getExtensionCount(Xresloader.klIndex) > 0) {
-        //     ret.getMessageExtension().klIndex = pbDesc.getOptions().getExtension(Xresloader.klIndex);
+        // ret.getMessageExtension().klIndex =
+        // pbDesc.getOptions().getExtension(Xresloader.klIndex);
         // }
 
         // extensions for UE
@@ -881,7 +882,8 @@ public class DataDstPb extends DataDstImpl {
     }
 
     @SuppressWarnings("unchecked")
-    static private void dumpConstIntoHashMap(String package_name, HashMap<String, Object> parent, Descriptors.EnumDescriptor enum_desc) {
+    static private void dumpConstIntoHashMap(String package_name, HashMap<String, Object> parent,
+            Descriptors.EnumDescriptor enum_desc) {
         String enum_seg = enum_desc.getName();
         HashMap<String, Object> enum_root;
         if (parent.containsKey(enum_seg)) {
@@ -904,7 +906,8 @@ public class DataDstPb extends DataDstImpl {
     }
 
     @SuppressWarnings("unchecked")
-    static private void dumpConstIntoHashMap(String package_name, HashMap<String, Object> parent, Descriptors.OneofDescriptor oneof_desc) {
+    static private void dumpConstIntoHashMap(String package_name, HashMap<String, Object> parent,
+            Descriptors.OneofDescriptor oneof_desc) {
         String oneof_seg = oneof_desc.getName();
         HashMap<String, Object> oneof_root;
         if (parent.containsKey(oneof_seg)) {
@@ -919,7 +922,7 @@ public class DataDstPb extends DataDstImpl {
             oneof_root = new HashMap<String, Object>();
             parent.put(oneof_seg, oneof_root);
         }
-    
+
         // 写出所有常量值
         for (Descriptors.FieldDescriptor oneof_option : oneof_desc.getFields()) {
             String field_name = oneof_option.getJsonName();
@@ -932,7 +935,8 @@ public class DataDstPb extends DataDstImpl {
     }
 
     @SuppressWarnings("unchecked")
-    static private void dumpConstIntoHashMap(String package_name, HashMap<String, Object> parent, Descriptors.Descriptor msg_desc) {
+    static private void dumpConstIntoHashMap(String package_name, HashMap<String, Object> parent,
+            Descriptors.Descriptor msg_desc) {
         String msg_seg = msg_desc.getName();
         HashMap<String, Object> msg_root = null;
         Object msg_node = parent.getOrDefault(msg_seg, null);
@@ -965,7 +969,7 @@ public class DataDstPb extends DataDstImpl {
                 msg_root = new HashMap<String, Object>();
                 parent.put(msg_seg, msg_root);
             }
-        
+
             dumpConstIntoHashMap(msg_full_name, msg_root, oneof_desc);
         }
 

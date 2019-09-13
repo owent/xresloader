@@ -10,7 +10,6 @@ on: # @see https://help.github.com/en/articles/events-that-trigger-workflows#web
     - master     # Push events on master branch
     - dev
     - releases/* # Push events to branches matching refs/heads/releases/*
-    - !refs/pull/*
   # schedule:
   #  - cron:  0 * * * *
 

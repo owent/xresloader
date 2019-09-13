@@ -5,6 +5,9 @@ xresloader
 | ------------ | ----------------------------------------------------------------------------------------------------------------------------- |
 | 当前构建状态 | [![Build Status](https://travis-ci.org/xresloader/xresloader.svg?branch=master)](https://travis-ci.org/xresloader/xresloader) |
 
+[![GitHub release (latest by date)](https://img.shields.io/github/v/release/xresloader/xresloader)](https://github.com/xresloader/xresloader/releases)
+[![GitHub Actions status](https://github.com/xresloader/xresloader/workflows/Master%20Building/badge.svg)](https://github.com/xresloader/xresloader/actions)
+
 文档: https://xresloader.atframe.work
 
 主要功能
@@ -38,7 +41,7 @@ xresloader
 
 License
 ------------
-[MIT License](LICENSE)
+[![MIT License](https://img.shields.io/github/license/xresloader/xresloader)](LICENSE)
 
 GET START
 ======

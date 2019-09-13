@@ -2,19 +2,10 @@
 # environment @see https://help.github.com/en/articles/software-in-virtual-environments-for-github-actions 
 #                  https://help.github.com/en/articles/virtual-environments-for-github-actions
 # example     @see https://github.com/actions/toolkit/blob/master/.github/workflows/workflow.yml
-name: Continuous Deploy
+name: Release
 # This workflow is triggered on pushes to the repository.
 on: # @see https://help.github.com/en/articles/events-that-trigger-workflows#webhook-events
-  push:
-    branches:    # Array of patterns that match refs/heads
-    - master     # Push events on master branch
-    - dev
-    - releases/* # Push events to branches matching refs/heads/releases/*
-    - !refs/pull/*
-  # schedule:
-  #  - cron:  0 * * * *
-
-
+  push: tags
 
 jobs:
   build: # job id, can be any string
@@ -35,7 +26,8 @@ jobs:
         architecture: x64 # (x64 or x86) - defaults to x64
     - name: Build with Maven
       run: mvn package --file pom.xml
-    # - name: Upload to release
-    #   - uses: toolmantim/release-drafter@v5.2.0
-    #     env:
-    #       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    - name: Upload to release
+      - uses: toolmantim/release-drafter@v5.2.0
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    # https://api.github.com/repos/xresloader/xresloader/releases

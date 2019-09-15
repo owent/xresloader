@@ -47,6 +47,6 @@ foreach ($proto_dir in "proto_v2", "proto_v3") {
         "-t ue-csv -o '$proto_dir/csv' -f '$proto_dir/kind.pb' -m 'DataSource=$XLSX_FILE|arr_in_arr|3,1' -m 'MacroSource=$XLSX_FILE|macro|2,1' -m ProtoName=arr_in_arr_cfg -m OutputFile=ArrInArrCfg.csv -m KeyRow=2 -m UeCfg-CodeOutput=|Public/Config|Private/Config -m UeCfg-RecursiveMode=false",
         "-t ue-json -o '$proto_dir/json' -f '$proto_dir/kind.pb' -m 'DataSource=$XLSX_FILE|arr_in_arr|3,1' -m 'MacroSource=$XLSX_FILE|macro|2,1' -m ProtoName=arr_in_arr_cfg -m OutputFile=ArrInArrCfg.json -m KeyRow=2 -m UeCfg-CodeOutput=|Public/Config|Private/Config"
     )
-    Write-Output "Write-Output '$(Join-String -Separator `n -InputObject $TASK_LINES)' | java \"-Dfile.encoding=UTF-8\" -client -jar \"$XRESLOADER\" --stdin --data-version 1.0.0.0"
+    Write-Output "Write-Output '$(Join-String -Separator `n -InputObject $TASK_LINES)' | java `"-Dfile.encoding=UTF-8`" -client -jar `"$XRESLOADER`" --stdin --data-version 1.0.0.0"
     Join-String -Separator "`n" -InputObject $TASK_LINES | java "-Dfile.encoding=UTF-8" -client -jar "$XRESLOADER" --stdin --data-version 1.0.0.0
 }

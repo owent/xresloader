@@ -13,8 +13,8 @@ message role_cfg {
     string  name         = 5;
     dep_cfg dep_test     = 10;
 
-    repeated string test_array = 11;
-    string int_as_string       = 12;
+    repeated string test_array    = 11;
+    string          int_as_string = 12;
 }
 
 message role_upgrade_cfg {
@@ -32,11 +32,33 @@ message arr_in_arr {
     string   name           = 1 [ (org.xresloader.field_description) = "This is a test name in array" ];
     repeated int32 int_arr  = 2;
     repeated string str_arr = 3;
+
+    oneof test_onof {
+        role_cfg         test_info_role        = 11;
+        role_upgrade_cfg test_role_upgrade_cfg = 12;
+    }
+
+    enum test_nested_enum {
+        EN_TEST_NESTED_ENUM_VAL_1 = 0;
+        EN_TEST_NESTED_ENUM_VAL_2 = 123;
+    }
+
+    message test_nested_message {
+        oneof test_onof {
+            role_cfg         test_nested_message_info_role        = 11;
+            role_upgrade_cfg test_nested_message_role_upgrade_cfg = 12;
+        }
+
+        enum test_nested_enum {
+            EN_TEST_NESTED_MESSAGE_ENUM_VAL_1 = 0;
+            EN_TEST_NESTED_MESSAGE_ENUM_VAL_2 = 123;
+        }
+    }
 }
 
 message test_msg_verifier {
     uint32 test_id_1 = 10001;
-    uint32 test_id_2 = 10002 [(org.xresloader.field_alias) = "测试ID别名2"];
+    uint32 test_id_2 = 10002 [ (org.xresloader.field_alias) = "测试ID别名2" ];
 }
 
 message arr_in_arr_cfg {

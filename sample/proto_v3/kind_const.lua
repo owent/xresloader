@@ -93,6 +93,26 @@ local const_res = {
       },
     },
   },
+  arr_in_arr = {
+    test_nested_enum = {
+      EN_TEST_NESTED_ENUM_VAL_1 = 0,
+      EN_TEST_NESTED_ENUM_VAL_2 = 123,
+    },
+    test_onof = {
+      kTestRoleUpgradeCfg = 12,
+      kTestInfoRole = 11,
+    },
+    test_nested_message = {
+      test_nested_enum = {
+        EN_TEST_NESTED_MESSAGE_ENUM_VAL_1 = 0,
+        EN_TEST_NESTED_MESSAGE_ENUM_VAL_2 = 123,
+      },
+      test_onof = {
+        kTestNestedMessageInfoRole = 11,
+        kTestNestedMessageRoleUpgradeCfg = 12,
+      },
+    },
+  },
 }
 
 
@@ -100,3 +120,4 @@ game_const_config = const_res.game_const_config
 cost_type = const_res.cost_type
 org = const_res.org
 google = const_res.google
+arr_in_arr = const_res.arr_in_arr

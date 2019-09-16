@@ -8,6 +8,12 @@ xresloader
 [![GitHub release (latest by date)](https://img.shields.io/github/v/release/xresloader/xresloader)](https://github.com/xresloader/xresloader/releases)
 [![GitHub Actions status](https://github.com/xresloader/xresloader/workflows/Master%20Building/badge.svg)](https://github.com/xresloader/xresloader/actions)
 
+![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/xresloader/xresloader)
+![GitHub repo size](https://img.shields.io/github/repo-size/xresloader/xresloader)
+![GitHub All Releases](https://img.shields.io/github/downloads/xresloader/xresloader/total)
+![GitHub forks](https://img.shields.io/github/forks/xresloader/xresloader?style=social)
+![GitHub stars](https://img.shields.io/github/stars/xresloader/xresloader?style=social)
+
 文档: https://xresloader.atframe.work
 
 主要功能

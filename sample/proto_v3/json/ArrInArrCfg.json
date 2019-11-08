@@ -1,6 +1,13 @@
 [
     {
         "Arr": [{
+            "TestRoleUpgradeCfg": {
+                "ScoreAdd": 0,
+                "CostValue": 0,
+                "Level": 0,
+                "Id": 0,
+                "CostType": 0
+            },
             "IntArr": [
                 101,
                 102
@@ -9,13 +16,37 @@
                 "啦啦啦啦",
                 "嘞嘞嘞嘞"
             ],
-            "Name": "第一个-A"
+            "Name": "第一个-A",
+            "TestInfoRole": {
+                "DepTest": {
+                    "Dep2": {
+                        "Level": "",
+                        "Id": 0
+                    },
+                    "Id": 0,
+                    "Name": ""
+                },
+                "TestArray": [],
+                "CostValue": 0,
+                "IntAsString": "",
+                "Id": 0,
+                "UnlockLevel": 0,
+                "CostType": 0,
+                "Name": ""
+            }
         }],
         "Id": 10001,
         "Name": 10001
     },
     {
         "Arr": [{
+            "TestRoleUpgradeCfg": {
+                "ScoreAdd": 0,
+                "CostValue": 0,
+                "Level": 0,
+                "Id": 0,
+                "CostType": 0
+            },
             "IntArr": [
                 201,
                 202
@@ -24,16 +55,57 @@
                 "biubiubiubiu",
                 "唰唰唰唰"
             ],
-            "Name": "测试项-A"
+            "Name": "测试项-A",
+            "TestInfoRole": {
+                "DepTest": {
+                    "Dep2": {
+                        "Level": "",
+                        "Id": 0
+                    },
+                    "Id": 0,
+                    "Name": ""
+                },
+                "TestArray": [],
+                "CostValue": 0,
+                "IntAsString": "",
+                "Id": 0,
+                "UnlockLevel": 0,
+                "CostType": 0,
+                "Name": ""
+            }
         }],
         "Id": 10002,
         "Name": 10002
     },
     {
         "Arr": [{
+            "TestRoleUpgradeCfg": {
+                "ScoreAdd": 0,
+                "CostValue": 0,
+                "Level": 0,
+                "Id": 0,
+                "CostType": 0
+            },
             "IntArr": [301],
             "StrArr": [],
-            "Name": "测试项-C"
+            "Name": "测试项-C",
+            "TestInfoRole": {
+                "DepTest": {
+                    "Dep2": {
+                        "Level": "",
+                        "Id": 0
+                    },
+                    "Id": 0,
+                    "Name": ""
+                },
+                "TestArray": [],
+                "CostValue": 0,
+                "IntAsString": "",
+                "Id": 0,
+                "UnlockLevel": 0,
+                "CostType": 0,
+                "Name": ""
+            }
         }],
         "Id": 10003,
         "Name": 10003

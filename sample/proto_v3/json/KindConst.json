@@ -186,5 +186,37 @@
     {
         "Value": 2,
         "Name": "google.protobuf.FileOptions.OptimizeMode.CODE_SIZE"
+    },
+    {
+        "Value": 0,
+        "Name": "arr_in_arr.test_nested_enum.EN_TEST_NESTED_ENUM_VAL_1"
+    },
+    {
+        "Value": 123,
+        "Name": "arr_in_arr.test_nested_enum.EN_TEST_NESTED_ENUM_VAL_2"
+    },
+    {
+        "Value": 12,
+        "Name": "arr_in_arr.test_onof.kTestRoleUpgradeCfg"
+    },
+    {
+        "Value": 11,
+        "Name": "arr_in_arr.test_onof.kTestInfoRole"
+    },
+    {
+        "Value": 0,
+        "Name": "arr_in_arr.test_nested_message.test_nested_enum.EN_TEST_NESTED_MESSAGE_ENUM_VAL_1"
+    },
+    {
+        "Value": 123,
+        "Name": "arr_in_arr.test_nested_message.test_nested_enum.EN_TEST_NESTED_MESSAGE_ENUM_VAL_2"
+    },
+    {
+        "Value": 11,
+        "Name": "arr_in_arr.test_nested_message.test_onof.kTestNestedMessageInfoRole"
+    },
+    {
+        "Value": 12,
+        "Name": "arr_in_arr.test_nested_message.test_onof.kTestNestedMessageRoleUpgradeCfg"
     }
 ]

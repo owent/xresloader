@@ -192,7 +192,7 @@ public class DataDstUECsv extends DataDstUEBase {
             return;
         }
 
-        ProgramOptions.getLoger().error("rewrite %s as nil, should not called here.", data.toString());
+        sp.printRecord(prefix, data.toString());
     }
 
     /**

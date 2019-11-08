@@ -31,6 +31,7 @@
 #include <google/protobuf/message.h>
 #include <google/protobuf/repeated_field.h>  // IWYU pragma: export
 #include <google/protobuf/extension_set.h>  // IWYU pragma: export
+#include <google/protobuf/generated_enum_reflection.h>
 #include <google/protobuf/unknown_field_set.h>
 #include "xresloader.pb.h"
 #include "xresloader_ue.pb.h"
@@ -50,7 +51,7 @@ struct TableStruct_kind_2eproto {
     PROTOBUF_SECTION_VARIABLE(protodesc_cold);
   static const ::PROTOBUF_NAMESPACE_ID::internal::AuxillaryParseTableField aux[]
     PROTOBUF_SECTION_VARIABLE(protodesc_cold);
-  static const ::PROTOBUF_NAMESPACE_ID::internal::ParseTable schema[5]
+  static const ::PROTOBUF_NAMESPACE_ID::internal::ParseTable schema[6]
     PROTOBUF_SECTION_VARIABLE(protodesc_cold);
   static const ::PROTOBUF_NAMESPACE_ID::internal::FieldMetadata field_metadata[];
   static const ::PROTOBUF_NAMESPACE_ID::internal::SerializationTable serialization_table[];
@@ -63,6 +64,9 @@ extern arr_in_arrDefaultTypeInternal _arr_in_arr_default_instance_;
 class arr_in_arr_cfg;
 class arr_in_arr_cfgDefaultTypeInternal;
 extern arr_in_arr_cfgDefaultTypeInternal _arr_in_arr_cfg_default_instance_;
+class arr_in_arr_test_nested_message;
+class arr_in_arr_test_nested_messageDefaultTypeInternal;
+extern arr_in_arr_test_nested_messageDefaultTypeInternal _arr_in_arr_test_nested_message_default_instance_;
 class role_cfg;
 class role_cfgDefaultTypeInternal;
 extern role_cfgDefaultTypeInternal _role_cfg_default_instance_;
@@ -75,11 +79,62 @@ extern test_msg_verifierDefaultTypeInternal _test_msg_verifier_default_instance_
 PROTOBUF_NAMESPACE_OPEN
 template<> ::arr_in_arr* Arena::CreateMaybeMessage<::arr_in_arr>(Arena*);
 template<> ::arr_in_arr_cfg* Arena::CreateMaybeMessage<::arr_in_arr_cfg>(Arena*);
+template<> ::arr_in_arr_test_nested_message* Arena::CreateMaybeMessage<::arr_in_arr_test_nested_message>(Arena*);
 template<> ::role_cfg* Arena::CreateMaybeMessage<::role_cfg>(Arena*);
 template<> ::role_upgrade_cfg* Arena::CreateMaybeMessage<::role_upgrade_cfg>(Arena*);
 template<> ::test_msg_verifier* Arena::CreateMaybeMessage<::test_msg_verifier>(Arena*);
 PROTOBUF_NAMESPACE_CLOSE
 
+enum arr_in_arr_test_nested_message_test_nested_enum : int {
+  arr_in_arr_test_nested_message_test_nested_enum_EN_TEST_NESTED_MESSAGE_ENUM_VAL_1 = 0,
+  arr_in_arr_test_nested_message_test_nested_enum_EN_TEST_NESTED_MESSAGE_ENUM_VAL_2 = 123,
+  arr_in_arr_test_nested_message_test_nested_enum_arr_in_arr_test_nested_message_test_nested_enum_INT_MIN_SENTINEL_DO_NOT_USE_ = std::numeric_limits<::PROTOBUF_NAMESPACE_ID::int32>::min(),
+  arr_in_arr_test_nested_message_test_nested_enum_arr_in_arr_test_nested_message_test_nested_enum_INT_MAX_SENTINEL_DO_NOT_USE_ = std::numeric_limits<::PROTOBUF_NAMESPACE_ID::int32>::max()
+};
+bool arr_in_arr_test_nested_message_test_nested_enum_IsValid(int value);
+constexpr arr_in_arr_test_nested_message_test_nested_enum arr_in_arr_test_nested_message_test_nested_enum_test_nested_enum_MIN = arr_in_arr_test_nested_message_test_nested_enum_EN_TEST_NESTED_MESSAGE_ENUM_VAL_1;
+constexpr arr_in_arr_test_nested_message_test_nested_enum arr_in_arr_test_nested_message_test_nested_enum_test_nested_enum_MAX = arr_in_arr_test_nested_message_test_nested_enum_EN_TEST_NESTED_MESSAGE_ENUM_VAL_2;
+constexpr int arr_in_arr_test_nested_message_test_nested_enum_test_nested_enum_ARRAYSIZE = arr_in_arr_test_nested_message_test_nested_enum_test_nested_enum_MAX + 1;
+
+const ::PROTOBUF_NAMESPACE_ID::EnumDescriptor* arr_in_arr_test_nested_message_test_nested_enum_descriptor();
+template<typename T>
+inline const std::string& arr_in_arr_test_nested_message_test_nested_enum_Name(T enum_t_value) {
+  static_assert(::std::is_same<T, arr_in_arr_test_nested_message_test_nested_enum>::value ||
+    ::std::is_integral<T>::value,
+    "Incorrect type passed to function arr_in_arr_test_nested_message_test_nested_enum_Name.");
+  return ::PROTOBUF_NAMESPACE_ID::internal::NameOfEnum(
+    arr_in_arr_test_nested_message_test_nested_enum_descriptor(), enum_t_value);
+}
+inline bool arr_in_arr_test_nested_message_test_nested_enum_Parse(
+    const std::string& name, arr_in_arr_test_nested_message_test_nested_enum* value) {
+  return ::PROTOBUF_NAMESPACE_ID::internal::ParseNamedEnum<arr_in_arr_test_nested_message_test_nested_enum>(
+    arr_in_arr_test_nested_message_test_nested_enum_descriptor(), name, value);
+}
+enum arr_in_arr_test_nested_enum : int {
+  arr_in_arr_test_nested_enum_EN_TEST_NESTED_ENUM_VAL_1 = 0,
+  arr_in_arr_test_nested_enum_EN_TEST_NESTED_ENUM_VAL_2 = 123,
+  arr_in_arr_test_nested_enum_arr_in_arr_test_nested_enum_INT_MIN_SENTINEL_DO_NOT_USE_ = std::numeric_limits<::PROTOBUF_NAMESPACE_ID::int32>::min(),
+  arr_in_arr_test_nested_enum_arr_in_arr_test_nested_enum_INT_MAX_SENTINEL_DO_NOT_USE_ = std::numeric_limits<::PROTOBUF_NAMESPACE_ID::int32>::max()
+};
+bool arr_in_arr_test_nested_enum_IsValid(int value);
+constexpr arr_in_arr_test_nested_enum arr_in_arr_test_nested_enum_test_nested_enum_MIN = arr_in_arr_test_nested_enum_EN_TEST_NESTED_ENUM_VAL_1;
+constexpr arr_in_arr_test_nested_enum arr_in_arr_test_nested_enum_test_nested_enum_MAX = arr_in_arr_test_nested_enum_EN_TEST_NESTED_ENUM_VAL_2;
+constexpr int arr_in_arr_test_nested_enum_test_nested_enum_ARRAYSIZE = arr_in_arr_test_nested_enum_test_nested_enum_MAX + 1;
+
+const ::PROTOBUF_NAMESPACE_ID::EnumDescriptor* arr_in_arr_test_nested_enum_descriptor();
+template<typename T>
+inline const std::string& arr_in_arr_test_nested_enum_Name(T enum_t_value) {
+  static_assert(::std::is_same<T, arr_in_arr_test_nested_enum>::value ||
+    ::std::is_integral<T>::value,
+    "Incorrect type passed to function arr_in_arr_test_nested_enum_Name.");
+  return ::PROTOBUF_NAMESPACE_ID::internal::NameOfEnum(
+    arr_in_arr_test_nested_enum_descriptor(), enum_t_value);
+}
+inline bool arr_in_arr_test_nested_enum_Parse(
+    const std::string& name, arr_in_arr_test_nested_enum* value) {
+  return ::PROTOBUF_NAMESPACE_ID::internal::ParseNamedEnum<arr_in_arr_test_nested_enum>(
+    arr_in_arr_test_nested_enum_descriptor(), name, value);
+}
 // ===================================================================
 
 class role_cfg :
@@ -448,6 +503,198 @@ class role_upgrade_cfg :
 };
 // -------------------------------------------------------------------
 
+class arr_in_arr_test_nested_message :
+    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:arr_in_arr.test_nested_message) */ {
+ public:
+  arr_in_arr_test_nested_message();
+  virtual ~arr_in_arr_test_nested_message();
+
+  arr_in_arr_test_nested_message(const arr_in_arr_test_nested_message& from);
+  arr_in_arr_test_nested_message(arr_in_arr_test_nested_message&& from) noexcept
+    : arr_in_arr_test_nested_message() {
+    *this = ::std::move(from);
+  }
+
+  inline arr_in_arr_test_nested_message& operator=(const arr_in_arr_test_nested_message& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  inline arr_in_arr_test_nested_message& operator=(arr_in_arr_test_nested_message&& from) noexcept {
+    if (GetArenaNoVirtual() == from.GetArenaNoVirtual()) {
+      if (this != &from) InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* descriptor() {
+    return GetDescriptor();
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* GetDescriptor() {
+    return GetMetadataStatic().descriptor;
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Reflection* GetReflection() {
+    return GetMetadataStatic().reflection;
+  }
+  static const arr_in_arr_test_nested_message& default_instance();
+
+  enum TestOnofCase {
+    kTestNestedMessageInfoRole = 11,
+    kTestNestedMessageRoleUpgradeCfg = 12,
+    TEST_ONOF_NOT_SET = 0,
+  };
+
+  static void InitAsDefaultInstance();  // FOR INTERNAL USE ONLY
+  static inline const arr_in_arr_test_nested_message* internal_default_instance() {
+    return reinterpret_cast<const arr_in_arr_test_nested_message*>(
+               &_arr_in_arr_test_nested_message_default_instance_);
+  }
+  static constexpr int kIndexInFileMessages =
+    2;
+
+  friend void swap(arr_in_arr_test_nested_message& a, arr_in_arr_test_nested_message& b) {
+    a.Swap(&b);
+  }
+  inline void Swap(arr_in_arr_test_nested_message* other) {
+    if (other == this) return;
+    InternalSwap(other);
+  }
+
+  // implements Message ----------------------------------------------
+
+  inline arr_in_arr_test_nested_message* New() const final {
+    return CreateMaybeMessage<arr_in_arr_test_nested_message>(nullptr);
+  }
+
+  arr_in_arr_test_nested_message* New(::PROTOBUF_NAMESPACE_ID::Arena* arena) const final {
+    return CreateMaybeMessage<arr_in_arr_test_nested_message>(arena);
+  }
+  void CopyFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) final;
+  void MergeFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) final;
+  void CopyFrom(const arr_in_arr_test_nested_message& from);
+  void MergeFrom(const arr_in_arr_test_nested_message& from);
+  PROTOBUF_ATTRIBUTE_REINITIALIZES void Clear() final;
+  bool IsInitialized() const final;
+
+  size_t ByteSizeLong() const final;
+  #if GOOGLE_PROTOBUF_ENABLE_EXPERIMENTAL_PARSER
+  const char* _InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) final;
+  #else
+  bool MergePartialFromCodedStream(
+      ::PROTOBUF_NAMESPACE_ID::io::CodedInputStream* input) final;
+  #endif  // GOOGLE_PROTOBUF_ENABLE_EXPERIMENTAL_PARSER
+  void SerializeWithCachedSizes(
+      ::PROTOBUF_NAMESPACE_ID::io::CodedOutputStream* output) const final;
+  ::PROTOBUF_NAMESPACE_ID::uint8* InternalSerializeWithCachedSizesToArray(
+      ::PROTOBUF_NAMESPACE_ID::uint8* target) const final;
+  int GetCachedSize() const final { return _cached_size_.Get(); }
+
+  private:
+  inline void SharedCtor();
+  inline void SharedDtor();
+  void SetCachedSize(int size) const final;
+  void InternalSwap(arr_in_arr_test_nested_message* other);
+  friend class ::PROTOBUF_NAMESPACE_ID::internal::AnyMetadata;
+  static ::PROTOBUF_NAMESPACE_ID::StringPiece FullMessageName() {
+    return "arr_in_arr.test_nested_message";
+  }
+  private:
+  inline ::PROTOBUF_NAMESPACE_ID::Arena* GetArenaNoVirtual() const {
+    return nullptr;
+  }
+  inline void* MaybeArenaPtr() const {
+    return nullptr;
+  }
+  public:
+
+  ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadata() const final;
+  private:
+  static ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadataStatic() {
+    ::PROTOBUF_NAMESPACE_ID::internal::AssignDescriptors(&::descriptor_table_kind_2eproto);
+    return ::descriptor_table_kind_2eproto.file_level_metadata[kIndexInFileMessages];
+  }
+
+  public:
+
+  // nested types ----------------------------------------------------
+
+  typedef arr_in_arr_test_nested_message_test_nested_enum test_nested_enum;
+  static constexpr test_nested_enum EN_TEST_NESTED_MESSAGE_ENUM_VAL_1 =
+    arr_in_arr_test_nested_message_test_nested_enum_EN_TEST_NESTED_MESSAGE_ENUM_VAL_1;
+  static constexpr test_nested_enum EN_TEST_NESTED_MESSAGE_ENUM_VAL_2 =
+    arr_in_arr_test_nested_message_test_nested_enum_EN_TEST_NESTED_MESSAGE_ENUM_VAL_2;
+  static inline bool test_nested_enum_IsValid(int value) {
+    return arr_in_arr_test_nested_message_test_nested_enum_IsValid(value);
+  }
+  static constexpr test_nested_enum test_nested_enum_MIN =
+    arr_in_arr_test_nested_message_test_nested_enum_test_nested_enum_MIN;
+  static constexpr test_nested_enum test_nested_enum_MAX =
+    arr_in_arr_test_nested_message_test_nested_enum_test_nested_enum_MAX;
+  static constexpr int test_nested_enum_ARRAYSIZE =
+    arr_in_arr_test_nested_message_test_nested_enum_test_nested_enum_ARRAYSIZE;
+  static inline const ::PROTOBUF_NAMESPACE_ID::EnumDescriptor*
+  test_nested_enum_descriptor() {
+    return arr_in_arr_test_nested_message_test_nested_enum_descriptor();
+  }
+  template<typename T>
+  static inline const std::string& test_nested_enum_Name(T enum_t_value) {
+    static_assert(::std::is_same<T, test_nested_enum>::value ||
+      ::std::is_integral<T>::value,
+      "Incorrect type passed to function test_nested_enum_Name.");
+    return arr_in_arr_test_nested_message_test_nested_enum_Name(enum_t_value);
+  }
+  static inline bool test_nested_enum_Parse(const std::string& name,
+      test_nested_enum* value) {
+    return arr_in_arr_test_nested_message_test_nested_enum_Parse(name, value);
+  }
+
+  // accessors -------------------------------------------------------
+
+  enum : int {
+    kTestNestedMessageInfoRoleFieldNumber = 11,
+    kTestNestedMessageRoleUpgradeCfgFieldNumber = 12,
+  };
+  // .role_cfg test_nested_message_info_role = 11;
+  bool has_test_nested_message_info_role() const;
+  void clear_test_nested_message_info_role();
+  const ::role_cfg& test_nested_message_info_role() const;
+  ::role_cfg* release_test_nested_message_info_role();
+  ::role_cfg* mutable_test_nested_message_info_role();
+  void set_allocated_test_nested_message_info_role(::role_cfg* test_nested_message_info_role);
+
+  // .role_upgrade_cfg test_nested_message_role_upgrade_cfg = 12;
+  bool has_test_nested_message_role_upgrade_cfg() const;
+  void clear_test_nested_message_role_upgrade_cfg();
+  const ::role_upgrade_cfg& test_nested_message_role_upgrade_cfg() const;
+  ::role_upgrade_cfg* release_test_nested_message_role_upgrade_cfg();
+  ::role_upgrade_cfg* mutable_test_nested_message_role_upgrade_cfg();
+  void set_allocated_test_nested_message_role_upgrade_cfg(::role_upgrade_cfg* test_nested_message_role_upgrade_cfg);
+
+  void clear_test_onof();
+  TestOnofCase test_onof_case() const;
+  // @@protoc_insertion_point(class_scope:arr_in_arr.test_nested_message)
+ private:
+  class _Internal;
+  void set_has_test_nested_message_info_role();
+  void set_has_test_nested_message_role_upgrade_cfg();
+
+  inline bool has_test_onof() const;
+  inline void clear_has_test_onof();
+
+  ::PROTOBUF_NAMESPACE_ID::internal::InternalMetadataWithArena _internal_metadata_;
+  union TestOnofUnion {
+    TestOnofUnion() {}
+    ::role_cfg* test_nested_message_info_role_;
+    ::role_upgrade_cfg* test_nested_message_role_upgrade_cfg_;
+  } test_onof_;
+  mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
+  ::PROTOBUF_NAMESPACE_ID::uint32 _oneof_case_[1];
+
+  friend struct ::TableStruct_kind_2eproto;
+};
+// -------------------------------------------------------------------
+
 class arr_in_arr :
     public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:arr_in_arr) */ {
  public:
@@ -484,13 +731,19 @@ class arr_in_arr :
   }
   static const arr_in_arr& default_instance();
 
+  enum TestOnofCase {
+    kTestInfoRole = 11,
+    kTestRoleUpgradeCfg = 12,
+    TEST_ONOF_NOT_SET = 0,
+  };
+
   static void InitAsDefaultInstance();  // FOR INTERNAL USE ONLY
   static inline const arr_in_arr* internal_default_instance() {
     return reinterpret_cast<const arr_in_arr*>(
                &_arr_in_arr_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    2;
+    3;
 
   friend void swap(arr_in_arr& a, arr_in_arr& b) {
     a.Swap(&b);
@@ -558,12 +811,46 @@ class arr_in_arr :
 
   // nested types ----------------------------------------------------
 
+  typedef arr_in_arr_test_nested_message test_nested_message;
+
+  typedef arr_in_arr_test_nested_enum test_nested_enum;
+  static constexpr test_nested_enum EN_TEST_NESTED_ENUM_VAL_1 =
+    arr_in_arr_test_nested_enum_EN_TEST_NESTED_ENUM_VAL_1;
+  static constexpr test_nested_enum EN_TEST_NESTED_ENUM_VAL_2 =
+    arr_in_arr_test_nested_enum_EN_TEST_NESTED_ENUM_VAL_2;
+  static inline bool test_nested_enum_IsValid(int value) {
+    return arr_in_arr_test_nested_enum_IsValid(value);
+  }
+  static constexpr test_nested_enum test_nested_enum_MIN =
+    arr_in_arr_test_nested_enum_test_nested_enum_MIN;
+  static constexpr test_nested_enum test_nested_enum_MAX =
+    arr_in_arr_test_nested_enum_test_nested_enum_MAX;
+  static constexpr int test_nested_enum_ARRAYSIZE =
+    arr_in_arr_test_nested_enum_test_nested_enum_ARRAYSIZE;
+  static inline const ::PROTOBUF_NAMESPACE_ID::EnumDescriptor*
+  test_nested_enum_descriptor() {
+    return arr_in_arr_test_nested_enum_descriptor();
+  }
+  template<typename T>
+  static inline const std::string& test_nested_enum_Name(T enum_t_value) {
+    static_assert(::std::is_same<T, test_nested_enum>::value ||
+      ::std::is_integral<T>::value,
+      "Incorrect type passed to function test_nested_enum_Name.");
+    return arr_in_arr_test_nested_enum_Name(enum_t_value);
+  }
+  static inline bool test_nested_enum_Parse(const std::string& name,
+      test_nested_enum* value) {
+    return arr_in_arr_test_nested_enum_Parse(name, value);
+  }
+
   // accessors -------------------------------------------------------
 
   enum : int {
     kIntArrFieldNumber = 2,
     kStrArrFieldNumber = 3,
     kNameFieldNumber = 1,
+    kTestInfoRoleFieldNumber = 11,
+    kTestRoleUpgradeCfgFieldNumber = 12,
   };
   // repeated int32 int_arr = 2;
   int int_arr_size() const;
@@ -604,16 +891,46 @@ class arr_in_arr :
   std::string* release_name();
   void set_allocated_name(std::string* name);
 
+  // .role_cfg test_info_role = 11;
+  bool has_test_info_role() const;
+  void clear_test_info_role();
+  const ::role_cfg& test_info_role() const;
+  ::role_cfg* release_test_info_role();
+  ::role_cfg* mutable_test_info_role();
+  void set_allocated_test_info_role(::role_cfg* test_info_role);
+
+  // .role_upgrade_cfg test_role_upgrade_cfg = 12;
+  bool has_test_role_upgrade_cfg() const;
+  void clear_test_role_upgrade_cfg();
+  const ::role_upgrade_cfg& test_role_upgrade_cfg() const;
+  ::role_upgrade_cfg* release_test_role_upgrade_cfg();
+  ::role_upgrade_cfg* mutable_test_role_upgrade_cfg();
+  void set_allocated_test_role_upgrade_cfg(::role_upgrade_cfg* test_role_upgrade_cfg);
+
+  void clear_test_onof();
+  TestOnofCase test_onof_case() const;
   // @@protoc_insertion_point(class_scope:arr_in_arr)
  private:
   class _Internal;
+  void set_has_test_info_role();
+  void set_has_test_role_upgrade_cfg();
+
+  inline bool has_test_onof() const;
+  inline void clear_has_test_onof();
 
   ::PROTOBUF_NAMESPACE_ID::internal::InternalMetadataWithArena _internal_metadata_;
   ::PROTOBUF_NAMESPACE_ID::RepeatedField< ::PROTOBUF_NAMESPACE_ID::int32 > int_arr_;
   mutable std::atomic<int> _int_arr_cached_byte_size_;
   ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField<std::string> str_arr_;
   ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr name_;
+  union TestOnofUnion {
+    TestOnofUnion() {}
+    ::role_cfg* test_info_role_;
+    ::role_upgrade_cfg* test_role_upgrade_cfg_;
+  } test_onof_;
   mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
+  ::PROTOBUF_NAMESPACE_ID::uint32 _oneof_case_[1];
+
   friend struct ::TableStruct_kind_2eproto;
 };
 // -------------------------------------------------------------------
@@ -660,7 +977,7 @@ class test_msg_verifier :
                &_test_msg_verifier_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    3;
+    4;
 
   friend void swap(test_msg_verifier& a, test_msg_verifier& b) {
     a.Swap(&b);
@@ -798,7 +1115,7 @@ class arr_in_arr_cfg :
                &_arr_in_arr_cfg_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    4;
+    5;
 
   friend void swap(arr_in_arr_cfg& a, arr_in_arr_cfg& b) {
     a.Swap(&b);
@@ -1253,6 +1570,101 @@ inline void role_upgrade_cfg::set_scoreadd(::PROTOBUF_NAMESPACE_ID::int32 value)
 
 // -------------------------------------------------------------------
 
+// arr_in_arr_test_nested_message
+
+// .role_cfg test_nested_message_info_role = 11;
+inline bool arr_in_arr_test_nested_message::has_test_nested_message_info_role() const {
+  return test_onof_case() == kTestNestedMessageInfoRole;
+}
+inline void arr_in_arr_test_nested_message::set_has_test_nested_message_info_role() {
+  _oneof_case_[0] = kTestNestedMessageInfoRole;
+}
+inline void arr_in_arr_test_nested_message::clear_test_nested_message_info_role() {
+  if (has_test_nested_message_info_role()) {
+    delete test_onof_.test_nested_message_info_role_;
+    clear_has_test_onof();
+  }
+}
+inline ::role_cfg* arr_in_arr_test_nested_message::release_test_nested_message_info_role() {
+  // @@protoc_insertion_point(field_release:arr_in_arr.test_nested_message.test_nested_message_info_role)
+  if (has_test_nested_message_info_role()) {
+    clear_has_test_onof();
+      ::role_cfg* temp = test_onof_.test_nested_message_info_role_;
+    test_onof_.test_nested_message_info_role_ = nullptr;
+    return temp;
+  } else {
+    return nullptr;
+  }
+}
+inline const ::role_cfg& arr_in_arr_test_nested_message::test_nested_message_info_role() const {
+  // @@protoc_insertion_point(field_get:arr_in_arr.test_nested_message.test_nested_message_info_role)
+  return has_test_nested_message_info_role()
+      ? *test_onof_.test_nested_message_info_role_
+      : *reinterpret_cast< ::role_cfg*>(&::_role_cfg_default_instance_);
+}
+inline ::role_cfg* arr_in_arr_test_nested_message::mutable_test_nested_message_info_role() {
+  if (!has_test_nested_message_info_role()) {
+    clear_test_onof();
+    set_has_test_nested_message_info_role();
+    test_onof_.test_nested_message_info_role_ = CreateMaybeMessage< ::role_cfg >(
+        GetArenaNoVirtual());
+  }
+  // @@protoc_insertion_point(field_mutable:arr_in_arr.test_nested_message.test_nested_message_info_role)
+  return test_onof_.test_nested_message_info_role_;
+}
+
+// .role_upgrade_cfg test_nested_message_role_upgrade_cfg = 12;
+inline bool arr_in_arr_test_nested_message::has_test_nested_message_role_upgrade_cfg() const {
+  return test_onof_case() == kTestNestedMessageRoleUpgradeCfg;
+}
+inline void arr_in_arr_test_nested_message::set_has_test_nested_message_role_upgrade_cfg() {
+  _oneof_case_[0] = kTestNestedMessageRoleUpgradeCfg;
+}
+inline void arr_in_arr_test_nested_message::clear_test_nested_message_role_upgrade_cfg() {
+  if (has_test_nested_message_role_upgrade_cfg()) {
+    delete test_onof_.test_nested_message_role_upgrade_cfg_;
+    clear_has_test_onof();
+  }
+}
+inline ::role_upgrade_cfg* arr_in_arr_test_nested_message::release_test_nested_message_role_upgrade_cfg() {
+  // @@protoc_insertion_point(field_release:arr_in_arr.test_nested_message.test_nested_message_role_upgrade_cfg)
+  if (has_test_nested_message_role_upgrade_cfg()) {
+    clear_has_test_onof();
+      ::role_upgrade_cfg* temp = test_onof_.test_nested_message_role_upgrade_cfg_;
+    test_onof_.test_nested_message_role_upgrade_cfg_ = nullptr;
+    return temp;
+  } else {
+    return nullptr;
+  }
+}
+inline const ::role_upgrade_cfg& arr_in_arr_test_nested_message::test_nested_message_role_upgrade_cfg() const {
+  // @@protoc_insertion_point(field_get:arr_in_arr.test_nested_message.test_nested_message_role_upgrade_cfg)
+  return has_test_nested_message_role_upgrade_cfg()
+      ? *test_onof_.test_nested_message_role_upgrade_cfg_
+      : *reinterpret_cast< ::role_upgrade_cfg*>(&::_role_upgrade_cfg_default_instance_);
+}
+inline ::role_upgrade_cfg* arr_in_arr_test_nested_message::mutable_test_nested_message_role_upgrade_cfg() {
+  if (!has_test_nested_message_role_upgrade_cfg()) {
+    clear_test_onof();
+    set_has_test_nested_message_role_upgrade_cfg();
+    test_onof_.test_nested_message_role_upgrade_cfg_ = CreateMaybeMessage< ::role_upgrade_cfg >(
+        GetArenaNoVirtual());
+  }
+  // @@protoc_insertion_point(field_mutable:arr_in_arr.test_nested_message.test_nested_message_role_upgrade_cfg)
+  return test_onof_.test_nested_message_role_upgrade_cfg_;
+}
+
+inline bool arr_in_arr_test_nested_message::has_test_onof() const {
+  return test_onof_case() != TEST_ONOF_NOT_SET;
+}
+inline void arr_in_arr_test_nested_message::clear_has_test_onof() {
+  _oneof_case_[0] = TEST_ONOF_NOT_SET;
+}
+inline arr_in_arr_test_nested_message::TestOnofCase arr_in_arr_test_nested_message::test_onof_case() const {
+  return arr_in_arr_test_nested_message::TestOnofCase(_oneof_case_[0]);
+}
+// -------------------------------------------------------------------
+
 // arr_in_arr
 
 // string name = 1 [(.org.xresloader.field_description) = "This is a test name in array"];
@@ -1401,6 +1813,97 @@ arr_in_arr::mutable_str_arr() {
   return &str_arr_;
 }
 
+// .role_cfg test_info_role = 11;
+inline bool arr_in_arr::has_test_info_role() const {
+  return test_onof_case() == kTestInfoRole;
+}
+inline void arr_in_arr::set_has_test_info_role() {
+  _oneof_case_[0] = kTestInfoRole;
+}
+inline void arr_in_arr::clear_test_info_role() {
+  if (has_test_info_role()) {
+    delete test_onof_.test_info_role_;
+    clear_has_test_onof();
+  }
+}
+inline ::role_cfg* arr_in_arr::release_test_info_role() {
+  // @@protoc_insertion_point(field_release:arr_in_arr.test_info_role)
+  if (has_test_info_role()) {
+    clear_has_test_onof();
+      ::role_cfg* temp = test_onof_.test_info_role_;
+    test_onof_.test_info_role_ = nullptr;
+    return temp;
+  } else {
+    return nullptr;
+  }
+}
+inline const ::role_cfg& arr_in_arr::test_info_role() const {
+  // @@protoc_insertion_point(field_get:arr_in_arr.test_info_role)
+  return has_test_info_role()
+      ? *test_onof_.test_info_role_
+      : *reinterpret_cast< ::role_cfg*>(&::_role_cfg_default_instance_);
+}
+inline ::role_cfg* arr_in_arr::mutable_test_info_role() {
+  if (!has_test_info_role()) {
+    clear_test_onof();
+    set_has_test_info_role();
+    test_onof_.test_info_role_ = CreateMaybeMessage< ::role_cfg >(
+        GetArenaNoVirtual());
+  }
+  // @@protoc_insertion_point(field_mutable:arr_in_arr.test_info_role)
+  return test_onof_.test_info_role_;
+}
+
+// .role_upgrade_cfg test_role_upgrade_cfg = 12;
+inline bool arr_in_arr::has_test_role_upgrade_cfg() const {
+  return test_onof_case() == kTestRoleUpgradeCfg;
+}
+inline void arr_in_arr::set_has_test_role_upgrade_cfg() {
+  _oneof_case_[0] = kTestRoleUpgradeCfg;
+}
+inline void arr_in_arr::clear_test_role_upgrade_cfg() {
+  if (has_test_role_upgrade_cfg()) {
+    delete test_onof_.test_role_upgrade_cfg_;
+    clear_has_test_onof();
+  }
+}
+inline ::role_upgrade_cfg* arr_in_arr::release_test_role_upgrade_cfg() {
+  // @@protoc_insertion_point(field_release:arr_in_arr.test_role_upgrade_cfg)
+  if (has_test_role_upgrade_cfg()) {
+    clear_has_test_onof();
+      ::role_upgrade_cfg* temp = test_onof_.test_role_upgrade_cfg_;
+    test_onof_.test_role_upgrade_cfg_ = nullptr;
+    return temp;
+  } else {
+    return nullptr;
+  }
+}
+inline const ::role_upgrade_cfg& arr_in_arr::test_role_upgrade_cfg() const {
+  // @@protoc_insertion_point(field_get:arr_in_arr.test_role_upgrade_cfg)
+  return has_test_role_upgrade_cfg()
+      ? *test_onof_.test_role_upgrade_cfg_
+      : *reinterpret_cast< ::role_upgrade_cfg*>(&::_role_upgrade_cfg_default_instance_);
+}
+inline ::role_upgrade_cfg* arr_in_arr::mutable_test_role_upgrade_cfg() {
+  if (!has_test_role_upgrade_cfg()) {
+    clear_test_onof();
+    set_has_test_role_upgrade_cfg();
+    test_onof_.test_role_upgrade_cfg_ = CreateMaybeMessage< ::role_upgrade_cfg >(
+        GetArenaNoVirtual());
+  }
+  // @@protoc_insertion_point(field_mutable:arr_in_arr.test_role_upgrade_cfg)
+  return test_onof_.test_role_upgrade_cfg_;
+}
+
+inline bool arr_in_arr::has_test_onof() const {
+  return test_onof_case() != TEST_ONOF_NOT_SET;
+}
+inline void arr_in_arr::clear_has_test_onof() {
+  _oneof_case_[0] = TEST_ONOF_NOT_SET;
+}
+inline arr_in_arr::TestOnofCase arr_in_arr::test_onof_case() const {
+  return arr_in_arr::TestOnofCase(_oneof_case_[0]);
+}
 // -------------------------------------------------------------------
 
 // test_msg_verifier
@@ -1492,9 +1995,26 @@ arr_in_arr_cfg::arr() const {
 
 // -------------------------------------------------------------------
 
+// -------------------------------------------------------------------
+
 
 // @@protoc_insertion_point(namespace_scope)
 
+
+PROTOBUF_NAMESPACE_OPEN
+
+template <> struct is_proto_enum< ::arr_in_arr_test_nested_message_test_nested_enum> : ::std::true_type {};
+template <>
+inline const EnumDescriptor* GetEnumDescriptor< ::arr_in_arr_test_nested_message_test_nested_enum>() {
+  return ::arr_in_arr_test_nested_message_test_nested_enum_descriptor();
+}
+template <> struct is_proto_enum< ::arr_in_arr_test_nested_enum> : ::std::true_type {};
+template <>
+inline const EnumDescriptor* GetEnumDescriptor< ::arr_in_arr_test_nested_enum>() {
+  return ::arr_in_arr_test_nested_enum_descriptor();
+}
+
+PROTOBUF_NAMESPACE_CLOSE
 
 // @@protoc_insertion_point(global_scope)
 

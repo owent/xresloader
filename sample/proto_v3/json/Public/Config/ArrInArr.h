@@ -27,6 +27,14 @@ struct FArrInArr : public FTableRowBase
     UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "XResConfig")
     TArray< FString > StrArr;
 
+    /** Field Type: MESSAGE, Name: TestInfoRole **/
+    UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "XResConfig")
+    FRoleCfg TestInfoRole;
+
+    /** Field Type: MESSAGE, Name: TestRoleUpgradeCfg **/
+    UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "XResConfig")
+    FRoleUpgradeCfg TestRoleUpgradeCfg;
+
 };
 
 

@@ -48,7 +48,8 @@ public class ProgramOptions {
     public int prettyIndent = 0;
     public boolean enableStdin = false;
 
-    public String constPrint = "";
+    public String protoDumpFile = "";
+    public ProtoDumpType protoDumpType = ProtoDumpType.NONE;
     public boolean luaGlobal = false;
     public String luaModule = null;
     public String xmlRootName = "root";
@@ -89,7 +90,8 @@ public class ProgramOptions {
         enbleEmptyList = false;
         prettyIndent = 0;
         enableStdin = false;
-        constPrint = "";
+        protoDumpFile = "";
+        protoDumpType = ProtoDumpType.NONE;
         luaGlobal = false;
         luaModule = null;
         xmlRootName = "root";
@@ -154,6 +156,9 @@ public class ProgramOptions {
                 .hasArg().argName("INDENT LENGTH").build());
 
         options.addOption(Option.builder("c").longOpt("const-print").desc("print all const data to file").hasArg()
+                .argName("OUTPUT FILE PATH").build());
+
+        options.addOption(Option.builder("i").longOpt("option-print").desc("print all option data to file").hasArg()
                 .argName("OUTPUT FILE PATH").build());
 
         options.addOption(Option.builder().longOpt("xml-root").desc("set xml root node name.(default: root)").hasArg()
@@ -291,7 +296,15 @@ public class ProgramOptions {
 
         // const print
         if (cmd.hasOption('c')) {
-            constPrint = cmd.getOptionValue('c');
+            protoDumpFile = cmd.getOptionValue('c');
+            protoDumpType = ProtoDumpType.CONST;
+            return 0;
+        }
+
+        // option print
+        if (cmd.hasOption('i')) {
+            protoDumpFile = cmd.getOptionValue('i');
+            protoDumpType = ProtoDumpType.OPTIONS;
             return 0;
         }
 
@@ -414,6 +427,10 @@ public class ProgramOptions {
 
     public enum Protocol {
         PROTOBUF, CAPNPROTO, FLATBUFFER
+    }
+
+    public enum ProtoDumpType {
+        NONE, CONST, OPTIONS
     }
 
     static public Logger getLoger() {

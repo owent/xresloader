@@ -15,8 +15,10 @@
 #include <google/protobuf/wire_format.h>
 // @@protoc_insertion_point(includes)
 #include <google/protobuf/port_def.inc>
-extern PROTOBUF_INTERNAL_EXPORT_kind_2eproto ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_arr_in_arr_kind_2eproto;
+extern PROTOBUF_INTERNAL_EXPORT_kind_2eproto ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<2> scc_info_arr_in_arr_kind_2eproto;
 extern PROTOBUF_INTERNAL_EXPORT_dependency_2eproto ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<1> scc_info_dep_cfg_dependency_2eproto;
+extern PROTOBUF_INTERNAL_EXPORT_kind_2eproto ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<1> scc_info_role_cfg_kind_2eproto;
+extern PROTOBUF_INTERNAL_EXPORT_kind_2eproto ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_role_upgrade_cfg_kind_2eproto;
 class role_cfgDefaultTypeInternal {
  public:
   ::PROTOBUF_NAMESPACE_ID::internal::ExplicitlyConstructed<role_cfg> _instance;
@@ -25,9 +27,17 @@ class role_upgrade_cfgDefaultTypeInternal {
  public:
   ::PROTOBUF_NAMESPACE_ID::internal::ExplicitlyConstructed<role_upgrade_cfg> _instance;
 } _role_upgrade_cfg_default_instance_;
+class arr_in_arr_test_nested_messageDefaultTypeInternal {
+ public:
+  ::PROTOBUF_NAMESPACE_ID::internal::ExplicitlyConstructed<arr_in_arr_test_nested_message> _instance;
+  const ::role_cfg* test_nested_message_info_role_;
+  const ::role_upgrade_cfg* test_nested_message_role_upgrade_cfg_;
+} _arr_in_arr_test_nested_message_default_instance_;
 class arr_in_arrDefaultTypeInternal {
  public:
   ::PROTOBUF_NAMESPACE_ID::internal::ExplicitlyConstructed<arr_in_arr> _instance;
+  const ::role_cfg* test_info_role_;
+  const ::role_upgrade_cfg* test_role_upgrade_cfg_;
 } _arr_in_arr_default_instance_;
 class test_msg_verifierDefaultTypeInternal {
  public:
@@ -48,8 +58,26 @@ static void InitDefaultsscc_info_arr_in_arr_kind_2eproto() {
   ::arr_in_arr::InitAsDefaultInstance();
 }
 
-::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_arr_in_arr_kind_2eproto =
-    {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 0, InitDefaultsscc_info_arr_in_arr_kind_2eproto}, {}};
+::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<2> scc_info_arr_in_arr_kind_2eproto =
+    {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 2, InitDefaultsscc_info_arr_in_arr_kind_2eproto}, {
+      &scc_info_role_cfg_kind_2eproto.base,
+      &scc_info_role_upgrade_cfg_kind_2eproto.base,}};
+
+static void InitDefaultsscc_info_arr_in_arr_test_nested_message_kind_2eproto() {
+  GOOGLE_PROTOBUF_VERIFY_VERSION;
+
+  {
+    void* ptr = &::_arr_in_arr_test_nested_message_default_instance_;
+    new (ptr) ::arr_in_arr_test_nested_message();
+    ::PROTOBUF_NAMESPACE_ID::internal::OnShutdownDestroyMessage(ptr);
+  }
+  ::arr_in_arr_test_nested_message::InitAsDefaultInstance();
+}
+
+::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<2> scc_info_arr_in_arr_test_nested_message_kind_2eproto =
+    {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 2, InitDefaultsscc_info_arr_in_arr_test_nested_message_kind_2eproto}, {
+      &scc_info_role_cfg_kind_2eproto.base,
+      &scc_info_role_upgrade_cfg_kind_2eproto.base,}};
 
 static void InitDefaultsscc_info_arr_in_arr_cfg_kind_2eproto() {
   GOOGLE_PROTOBUF_VERIFY_VERSION;
@@ -109,8 +137,8 @@ static void InitDefaultsscc_info_test_msg_verifier_kind_2eproto() {
 ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_test_msg_verifier_kind_2eproto =
     {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 0, InitDefaultsscc_info_test_msg_verifier_kind_2eproto}, {}};
 
-static ::PROTOBUF_NAMESPACE_ID::Metadata file_level_metadata_kind_2eproto[5];
-static constexpr ::PROTOBUF_NAMESPACE_ID::EnumDescriptor const** file_level_enum_descriptors_kind_2eproto = nullptr;
+static ::PROTOBUF_NAMESPACE_ID::Metadata file_level_metadata_kind_2eproto[6];
+static const ::PROTOBUF_NAMESPACE_ID::EnumDescriptor* file_level_enum_descriptors_kind_2eproto[2];
 static constexpr ::PROTOBUF_NAMESPACE_ID::ServiceDescriptor const** file_level_service_descriptors_kind_2eproto = nullptr;
 
 const ::PROTOBUF_NAMESPACE_ID::uint32 TableStruct_kind_2eproto::offsets[] PROTOBUF_SECTION_VARIABLE(protodesc_cold) = {
@@ -138,13 +166,24 @@ const ::PROTOBUF_NAMESPACE_ID::uint32 TableStruct_kind_2eproto::offsets[] PROTOB
   PROTOBUF_FIELD_OFFSET(::role_upgrade_cfg, costvalue_),
   PROTOBUF_FIELD_OFFSET(::role_upgrade_cfg, scoreadd_),
   ~0u,  // no _has_bits_
+  PROTOBUF_FIELD_OFFSET(::arr_in_arr_test_nested_message, _internal_metadata_),
+  ~0u,  // no _extensions_
+  PROTOBUF_FIELD_OFFSET(::arr_in_arr_test_nested_message, _oneof_case_[0]),
+  ~0u,  // no _weak_field_map_
+  offsetof(::arr_in_arr_test_nested_messageDefaultTypeInternal, test_nested_message_info_role_),
+  offsetof(::arr_in_arr_test_nested_messageDefaultTypeInternal, test_nested_message_role_upgrade_cfg_),
+  PROTOBUF_FIELD_OFFSET(::arr_in_arr_test_nested_message, test_onof_),
+  ~0u,  // no _has_bits_
   PROTOBUF_FIELD_OFFSET(::arr_in_arr, _internal_metadata_),
   ~0u,  // no _extensions_
-  ~0u,  // no _oneof_case_
+  PROTOBUF_FIELD_OFFSET(::arr_in_arr, _oneof_case_[0]),
   ~0u,  // no _weak_field_map_
   PROTOBUF_FIELD_OFFSET(::arr_in_arr, name_),
   PROTOBUF_FIELD_OFFSET(::arr_in_arr, int_arr_),
   PROTOBUF_FIELD_OFFSET(::arr_in_arr, str_arr_),
+  offsetof(::arr_in_arrDefaultTypeInternal, test_info_role_),
+  offsetof(::arr_in_arrDefaultTypeInternal, test_role_upgrade_cfg_),
+  PROTOBUF_FIELD_OFFSET(::arr_in_arr, test_onof_),
   ~0u,  // no _has_bits_
   PROTOBUF_FIELD_OFFSET(::test_msg_verifier, _internal_metadata_),
   ~0u,  // no _extensions_
@@ -163,14 +202,16 @@ const ::PROTOBUF_NAMESPACE_ID::uint32 TableStruct_kind_2eproto::offsets[] PROTOB
 static const ::PROTOBUF_NAMESPACE_ID::internal::MigrationSchema schemas[] PROTOBUF_SECTION_VARIABLE(protodesc_cold) = {
   { 0, -1, sizeof(::role_cfg)},
   { 13, -1, sizeof(::role_upgrade_cfg)},
-  { 23, -1, sizeof(::arr_in_arr)},
-  { 31, -1, sizeof(::test_msg_verifier)},
-  { 38, -1, sizeof(::arr_in_arr_cfg)},
+  { 23, -1, sizeof(::arr_in_arr_test_nested_message)},
+  { 31, -1, sizeof(::arr_in_arr)},
+  { 42, -1, sizeof(::test_msg_verifier)},
+  { 49, -1, sizeof(::arr_in_arr_cfg)},
 };
 
 static ::PROTOBUF_NAMESPACE_ID::Message const * const file_default_instances[] = {
   reinterpret_cast<const ::PROTOBUF_NAMESPACE_ID::Message*>(&::_role_cfg_default_instance_),
   reinterpret_cast<const ::PROTOBUF_NAMESPACE_ID::Message*>(&::_role_upgrade_cfg_default_instance_),
+  reinterpret_cast<const ::PROTOBUF_NAMESPACE_ID::Message*>(&::_arr_in_arr_test_nested_message_default_instance_),
   reinterpret_cast<const ::PROTOBUF_NAMESPACE_ID::Message*>(&::_arr_in_arr_default_instance_),
   reinterpret_cast<const ::PROTOBUF_NAMESPACE_ID::Message*>(&::_test_msg_verifier_default_instance_),
   reinterpret_cast<const ::PROTOBUF_NAMESPACE_ID::Message*>(&::_arr_in_arr_cfg_default_instance_),
@@ -186,23 +227,35 @@ const char descriptor_table_protodef_kind_2eproto[] PROTOBUF_SECTION_VARIABLE(pr
   "\"\207\001\n\020role_upgrade_cfg\022\n\n\002Id\030\001 \001(\r\022\r\n\005Lev"
   "el\030\002 \001(\r\0223\n\010CostType\030\003 \001(\rB!\312>\tcost_type"
   "\232\?\022Refer to cost_type\022\021\n\tCostValue\030\004 \001(\005"
-  "\022\020\n\010ScoreAdd\030\005 \001(\005\"k\n\narr_in_arr\022-\n\004name"
-  "\030\001 \001(\tB\037\232\?\034This is a test name in array\022"
-  "\017\n\007int_arr\030\002 \003(\005\022\017\n\007str_arr\030\003 \003(\t:\014\352D\006he"
-  "lper\360D\001\"O\n\021test_msg_verifier\022\022\n\ttest_id_"
-  "1\030\221N \001(\r\022&\n\ttest_id_2\030\222N \001(\rB\022\242\?\017\346\265\213\350\257\225I"
-  "D\345\210\253\345\220\2152\"l\n\016arr_in_arr_cfg\022\037\n\002id\030\001 \001(\rB\023"
-  "\350D\001\232\?\rThis is a Key\022\030\n\003arr\030\002 \003(\0132\013.arr_i"
-  "n_arr:\037\352D\006helper\312>\023Test arr_in_arr_cfgb\006"
-  "proto3"
+  "\022\020\n\010ScoreAdd\030\005 \001(\005\"\241\004\n\narr_in_arr\022-\n\004nam"
+  "e\030\001 \001(\tB\037\232\?\034This is a test name in array"
+  "\022\017\n\007int_arr\030\002 \003(\005\022\017\n\007str_arr\030\003 \003(\t\022#\n\016te"
+  "st_info_role\030\013 \001(\0132\t.role_cfgH\000\0222\n\025test_"
+  "role_upgrade_cfg\030\014 \001(\0132\021.role_upgrade_cf"
+  "gH\000\032\373\001\n\023test_nested_message\0222\n\035test_nest"
+  "ed_message_info_role\030\013 \001(\0132\t.role_cfgH\000\022"
+  "A\n$test_nested_message_role_upgrade_cfg\030"
+  "\014 \001(\0132\021.role_upgrade_cfgH\000\"`\n\020test_neste"
+  "d_enum\022%\n!EN_TEST_NESTED_MESSAGE_ENUM_VA"
+  "L_1\020\000\022%\n!EN_TEST_NESTED_MESSAGE_ENUM_VAL"
+  "_2\020{B\013\n\ttest_onof\"P\n\020test_nested_enum\022\035\n"
+  "\031EN_TEST_NESTED_ENUM_VAL_1\020\000\022\035\n\031EN_TEST_"
+  "NESTED_ENUM_VAL_2\020{:\014\352D\006helper\360D\001B\013\n\ttes"
+  "t_onof\"O\n\021test_msg_verifier\022\022\n\ttest_id_1"
+  "\030\221N \001(\r\022&\n\ttest_id_2\030\222N \001(\rB\022\242\?\017\346\265\213\350\257\225ID"
+  "\345\210\253\345\220\2152\"l\n\016arr_in_arr_cfg\022\037\n\002id\030\001 \001(\rB\023\350"
+  "D\001\232\?\rThis is a Key\022\030\n\003arr\030\002 \003(\0132\013.arr_in"
+  "_arr:\037\352D\006helper\312>\023Test arr_in_arr_cfgb\006p"
+  "roto3"
   ;
 static const ::PROTOBUF_NAMESPACE_ID::internal::DescriptorTable*const descriptor_table_kind_2eproto_deps[3] = {
   &::descriptor_table_dependency_2eproto,
   &::descriptor_table_xresloader_2eproto,
   &::descriptor_table_xresloader_5fue_2eproto,
 };
-static ::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase*const descriptor_table_kind_2eproto_sccs[5] = {
+static ::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase*const descriptor_table_kind_2eproto_sccs[6] = {
   &scc_info_arr_in_arr_kind_2eproto.base,
+  &scc_info_arr_in_arr_test_nested_message_kind_2eproto.base,
   &scc_info_arr_in_arr_cfg_kind_2eproto.base,
   &scc_info_role_cfg_kind_2eproto.base,
   &scc_info_role_upgrade_cfg_kind_2eproto.base,
@@ -211,14 +264,56 @@ static ::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase*const descriptor_table_kin
 static ::PROTOBUF_NAMESPACE_ID::internal::once_flag descriptor_table_kind_2eproto_once;
 static bool descriptor_table_kind_2eproto_initialized = false;
 const ::PROTOBUF_NAMESPACE_ID::internal::DescriptorTable descriptor_table_kind_2eproto = {
-  &descriptor_table_kind_2eproto_initialized, descriptor_table_protodef_kind_2eproto, "kind.proto", 686,
-  &descriptor_table_kind_2eproto_once, descriptor_table_kind_2eproto_sccs, descriptor_table_kind_2eproto_deps, 5, 3,
+  &descriptor_table_kind_2eproto_initialized, descriptor_table_protodef_kind_2eproto, "kind.proto", 1125,
+  &descriptor_table_kind_2eproto_once, descriptor_table_kind_2eproto_sccs, descriptor_table_kind_2eproto_deps, 6, 3,
   schemas, file_default_instances, TableStruct_kind_2eproto::offsets,
-  file_level_metadata_kind_2eproto, 5, file_level_enum_descriptors_kind_2eproto, file_level_service_descriptors_kind_2eproto,
+  file_level_metadata_kind_2eproto, 6, file_level_enum_descriptors_kind_2eproto, file_level_service_descriptors_kind_2eproto,
 };
 
 // Force running AddDescriptors() at dynamic initialization time.
 static bool dynamic_init_dummy_kind_2eproto = (  ::PROTOBUF_NAMESPACE_ID::internal::AddDescriptors(&descriptor_table_kind_2eproto), true);
+const ::PROTOBUF_NAMESPACE_ID::EnumDescriptor* arr_in_arr_test_nested_message_test_nested_enum_descriptor() {
+  ::PROTOBUF_NAMESPACE_ID::internal::AssignDescriptors(&descriptor_table_kind_2eproto);
+  return file_level_enum_descriptors_kind_2eproto[0];
+}
+bool arr_in_arr_test_nested_message_test_nested_enum_IsValid(int value) {
+  switch (value) {
+    case 0:
+    case 123:
+      return true;
+    default:
+      return false;
+  }
+}
+
+#if (__cplusplus < 201703) && (!defined(_MSC_VER) || _MSC_VER >= 1900)
+constexpr arr_in_arr_test_nested_message_test_nested_enum arr_in_arr_test_nested_message::EN_TEST_NESTED_MESSAGE_ENUM_VAL_1;
+constexpr arr_in_arr_test_nested_message_test_nested_enum arr_in_arr_test_nested_message::EN_TEST_NESTED_MESSAGE_ENUM_VAL_2;
+constexpr arr_in_arr_test_nested_message_test_nested_enum arr_in_arr_test_nested_message::test_nested_enum_MIN;
+constexpr arr_in_arr_test_nested_message_test_nested_enum arr_in_arr_test_nested_message::test_nested_enum_MAX;
+constexpr int arr_in_arr_test_nested_message::test_nested_enum_ARRAYSIZE;
+#endif  // (__cplusplus < 201703) && (!defined(_MSC_VER) || _MSC_VER >= 1900)
+const ::PROTOBUF_NAMESPACE_ID::EnumDescriptor* arr_in_arr_test_nested_enum_descriptor() {
+  ::PROTOBUF_NAMESPACE_ID::internal::AssignDescriptors(&descriptor_table_kind_2eproto);
+  return file_level_enum_descriptors_kind_2eproto[1];
+}
+bool arr_in_arr_test_nested_enum_IsValid(int value) {
+  switch (value) {
+    case 0:
+    case 123:
+      return true;
+    default:
+      return false;
+  }
+}
+
+#if (__cplusplus < 201703) && (!defined(_MSC_VER) || _MSC_VER >= 1900)
+constexpr arr_in_arr_test_nested_enum arr_in_arr::EN_TEST_NESTED_ENUM_VAL_1;
+constexpr arr_in_arr_test_nested_enum arr_in_arr::EN_TEST_NESTED_ENUM_VAL_2;
+constexpr arr_in_arr_test_nested_enum arr_in_arr::test_nested_enum_MIN;
+constexpr arr_in_arr_test_nested_enum arr_in_arr::test_nested_enum_MAX;
+constexpr int arr_in_arr::test_nested_enum_ARRAYSIZE;
+#endif  // (__cplusplus < 201703) && (!defined(_MSC_VER) || _MSC_VER >= 1900)
 
 // ===================================================================
 
@@ -1271,12 +1366,436 @@ void role_upgrade_cfg::InternalSwap(role_upgrade_cfg* other) {
 
 // ===================================================================
 
+void arr_in_arr_test_nested_message::InitAsDefaultInstance() {
+  ::_arr_in_arr_test_nested_message_default_instance_.test_nested_message_info_role_ = const_cast< ::role_cfg*>(
+      ::role_cfg::internal_default_instance());
+  ::_arr_in_arr_test_nested_message_default_instance_.test_nested_message_role_upgrade_cfg_ = const_cast< ::role_upgrade_cfg*>(
+      ::role_upgrade_cfg::internal_default_instance());
+}
+class arr_in_arr_test_nested_message::_Internal {
+ public:
+  static const ::role_cfg& test_nested_message_info_role(const arr_in_arr_test_nested_message* msg);
+  static const ::role_upgrade_cfg& test_nested_message_role_upgrade_cfg(const arr_in_arr_test_nested_message* msg);
+};
+
+const ::role_cfg&
+arr_in_arr_test_nested_message::_Internal::test_nested_message_info_role(const arr_in_arr_test_nested_message* msg) {
+  return *msg->test_onof_.test_nested_message_info_role_;
+}
+const ::role_upgrade_cfg&
+arr_in_arr_test_nested_message::_Internal::test_nested_message_role_upgrade_cfg(const arr_in_arr_test_nested_message* msg) {
+  return *msg->test_onof_.test_nested_message_role_upgrade_cfg_;
+}
+void arr_in_arr_test_nested_message::set_allocated_test_nested_message_info_role(::role_cfg* test_nested_message_info_role) {
+  ::PROTOBUF_NAMESPACE_ID::Arena* message_arena = GetArenaNoVirtual();
+  clear_test_onof();
+  if (test_nested_message_info_role) {
+    ::PROTOBUF_NAMESPACE_ID::Arena* submessage_arena = nullptr;
+    if (message_arena != submessage_arena) {
+      test_nested_message_info_role = ::PROTOBUF_NAMESPACE_ID::internal::GetOwnedMessage(
+          message_arena, test_nested_message_info_role, submessage_arena);
+    }
+    set_has_test_nested_message_info_role();
+    test_onof_.test_nested_message_info_role_ = test_nested_message_info_role;
+  }
+  // @@protoc_insertion_point(field_set_allocated:arr_in_arr.test_nested_message.test_nested_message_info_role)
+}
+void arr_in_arr_test_nested_message::set_allocated_test_nested_message_role_upgrade_cfg(::role_upgrade_cfg* test_nested_message_role_upgrade_cfg) {
+  ::PROTOBUF_NAMESPACE_ID::Arena* message_arena = GetArenaNoVirtual();
+  clear_test_onof();
+  if (test_nested_message_role_upgrade_cfg) {
+    ::PROTOBUF_NAMESPACE_ID::Arena* submessage_arena = nullptr;
+    if (message_arena != submessage_arena) {
+      test_nested_message_role_upgrade_cfg = ::PROTOBUF_NAMESPACE_ID::internal::GetOwnedMessage(
+          message_arena, test_nested_message_role_upgrade_cfg, submessage_arena);
+    }
+    set_has_test_nested_message_role_upgrade_cfg();
+    test_onof_.test_nested_message_role_upgrade_cfg_ = test_nested_message_role_upgrade_cfg;
+  }
+  // @@protoc_insertion_point(field_set_allocated:arr_in_arr.test_nested_message.test_nested_message_role_upgrade_cfg)
+}
+arr_in_arr_test_nested_message::arr_in_arr_test_nested_message()
+  : ::PROTOBUF_NAMESPACE_ID::Message(), _internal_metadata_(nullptr) {
+  SharedCtor();
+  // @@protoc_insertion_point(constructor:arr_in_arr.test_nested_message)
+}
+arr_in_arr_test_nested_message::arr_in_arr_test_nested_message(const arr_in_arr_test_nested_message& from)
+  : ::PROTOBUF_NAMESPACE_ID::Message(),
+      _internal_metadata_(nullptr) {
+  _internal_metadata_.MergeFrom(from._internal_metadata_);
+  clear_has_test_onof();
+  switch (from.test_onof_case()) {
+    case kTestNestedMessageInfoRole: {
+      mutable_test_nested_message_info_role()->::role_cfg::MergeFrom(from.test_nested_message_info_role());
+      break;
+    }
+    case kTestNestedMessageRoleUpgradeCfg: {
+      mutable_test_nested_message_role_upgrade_cfg()->::role_upgrade_cfg::MergeFrom(from.test_nested_message_role_upgrade_cfg());
+      break;
+    }
+    case TEST_ONOF_NOT_SET: {
+      break;
+    }
+  }
+  // @@protoc_insertion_point(copy_constructor:arr_in_arr.test_nested_message)
+}
+
+void arr_in_arr_test_nested_message::SharedCtor() {
+  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&scc_info_arr_in_arr_test_nested_message_kind_2eproto.base);
+  clear_has_test_onof();
+}
+
+arr_in_arr_test_nested_message::~arr_in_arr_test_nested_message() {
+  // @@protoc_insertion_point(destructor:arr_in_arr.test_nested_message)
+  SharedDtor();
+}
+
+void arr_in_arr_test_nested_message::SharedDtor() {
+  if (has_test_onof()) {
+    clear_test_onof();
+  }
+}
+
+void arr_in_arr_test_nested_message::SetCachedSize(int size) const {
+  _cached_size_.Set(size);
+}
+const arr_in_arr_test_nested_message& arr_in_arr_test_nested_message::default_instance() {
+  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&::scc_info_arr_in_arr_test_nested_message_kind_2eproto.base);
+  return *internal_default_instance();
+}
+
+
+void arr_in_arr_test_nested_message::clear_test_onof() {
+// @@protoc_insertion_point(one_of_clear_start:arr_in_arr.test_nested_message)
+  switch (test_onof_case()) {
+    case kTestNestedMessageInfoRole: {
+      delete test_onof_.test_nested_message_info_role_;
+      break;
+    }
+    case kTestNestedMessageRoleUpgradeCfg: {
+      delete test_onof_.test_nested_message_role_upgrade_cfg_;
+      break;
+    }
+    case TEST_ONOF_NOT_SET: {
+      break;
+    }
+  }
+  _oneof_case_[0] = TEST_ONOF_NOT_SET;
+}
+
+
+void arr_in_arr_test_nested_message::Clear() {
+// @@protoc_insertion_point(message_clear_start:arr_in_arr.test_nested_message)
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  clear_test_onof();
+  _internal_metadata_.Clear();
+}
+
+#if GOOGLE_PROTOBUF_ENABLE_EXPERIMENTAL_PARSER
+const char* arr_in_arr_test_nested_message::_InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) {
+#define CHK_(x) if (PROTOBUF_PREDICT_FALSE(!(x))) goto failure
+  while (!ctx->Done(&ptr)) {
+    ::PROTOBUF_NAMESPACE_ID::uint32 tag;
+    ptr = ::PROTOBUF_NAMESPACE_ID::internal::ReadTag(ptr, &tag);
+    CHK_(ptr);
+    switch (tag >> 3) {
+      // .role_cfg test_nested_message_info_role = 11;
+      case 11:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 90)) {
+          ptr = ctx->ParseMessage(mutable_test_nested_message_info_role(), ptr);
+          CHK_(ptr);
+        } else goto handle_unusual;
+        continue;
+      // .role_upgrade_cfg test_nested_message_role_upgrade_cfg = 12;
+      case 12:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 98)) {
+          ptr = ctx->ParseMessage(mutable_test_nested_message_role_upgrade_cfg(), ptr);
+          CHK_(ptr);
+        } else goto handle_unusual;
+        continue;
+      default: {
+      handle_unusual:
+        if ((tag & 7) == 4 || tag == 0) {
+          ctx->SetLastTag(tag);
+          goto success;
+        }
+        ptr = UnknownFieldParse(tag, &_internal_metadata_, ptr, ctx);
+        CHK_(ptr != nullptr);
+        continue;
+      }
+    }  // switch
+  }  // while
+success:
+  return ptr;
+failure:
+  ptr = nullptr;
+  goto success;
+#undef CHK_
+}
+#else  // GOOGLE_PROTOBUF_ENABLE_EXPERIMENTAL_PARSER
+bool arr_in_arr_test_nested_message::MergePartialFromCodedStream(
+    ::PROTOBUF_NAMESPACE_ID::io::CodedInputStream* input) {
+#define DO_(EXPRESSION) if (!PROTOBUF_PREDICT_TRUE(EXPRESSION)) goto failure
+  ::PROTOBUF_NAMESPACE_ID::uint32 tag;
+  // @@protoc_insertion_point(parse_start:arr_in_arr.test_nested_message)
+  for (;;) {
+    ::std::pair<::PROTOBUF_NAMESPACE_ID::uint32, bool> p = input->ReadTagWithCutoffNoLastTag(127u);
+    tag = p.first;
+    if (!p.second) goto handle_unusual;
+    switch (::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::GetTagFieldNumber(tag)) {
+      // .role_cfg test_nested_message_info_role = 11;
+      case 11: {
+        if (static_cast< ::PROTOBUF_NAMESPACE_ID::uint8>(tag) == (90 & 0xFF)) {
+          DO_(::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::ReadMessage(
+               input, mutable_test_nested_message_info_role()));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
+      // .role_upgrade_cfg test_nested_message_role_upgrade_cfg = 12;
+      case 12: {
+        if (static_cast< ::PROTOBUF_NAMESPACE_ID::uint8>(tag) == (98 & 0xFF)) {
+          DO_(::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::ReadMessage(
+               input, mutable_test_nested_message_role_upgrade_cfg()));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
+      default: {
+      handle_unusual:
+        if (tag == 0) {
+          goto success;
+        }
+        DO_(::PROTOBUF_NAMESPACE_ID::internal::WireFormat::SkipField(
+              input, tag, _internal_metadata_.mutable_unknown_fields()));
+        break;
+      }
+    }
+  }
+success:
+  // @@protoc_insertion_point(parse_success:arr_in_arr.test_nested_message)
+  return true;
+failure:
+  // @@protoc_insertion_point(parse_failure:arr_in_arr.test_nested_message)
+  return false;
+#undef DO_
+}
+#endif  // GOOGLE_PROTOBUF_ENABLE_EXPERIMENTAL_PARSER
+
+void arr_in_arr_test_nested_message::SerializeWithCachedSizes(
+    ::PROTOBUF_NAMESPACE_ID::io::CodedOutputStream* output) const {
+  // @@protoc_insertion_point(serialize_start:arr_in_arr.test_nested_message)
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  // .role_cfg test_nested_message_info_role = 11;
+  if (has_test_nested_message_info_role()) {
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteMessageMaybeToArray(
+      11, _Internal::test_nested_message_info_role(this), output);
+  }
+
+  // .role_upgrade_cfg test_nested_message_role_upgrade_cfg = 12;
+  if (has_test_nested_message_role_upgrade_cfg()) {
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteMessageMaybeToArray(
+      12, _Internal::test_nested_message_role_upgrade_cfg(this), output);
+  }
+
+  if (_internal_metadata_.have_unknown_fields()) {
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::SerializeUnknownFields(
+        _internal_metadata_.unknown_fields(), output);
+  }
+  // @@protoc_insertion_point(serialize_end:arr_in_arr.test_nested_message)
+}
+
+::PROTOBUF_NAMESPACE_ID::uint8* arr_in_arr_test_nested_message::InternalSerializeWithCachedSizesToArray(
+    ::PROTOBUF_NAMESPACE_ID::uint8* target) const {
+  // @@protoc_insertion_point(serialize_to_array_start:arr_in_arr.test_nested_message)
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  // .role_cfg test_nested_message_info_role = 11;
+  if (has_test_nested_message_info_role()) {
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
+      InternalWriteMessageToArray(
+        11, _Internal::test_nested_message_info_role(this), target);
+  }
+
+  // .role_upgrade_cfg test_nested_message_role_upgrade_cfg = 12;
+  if (has_test_nested_message_role_upgrade_cfg()) {
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
+      InternalWriteMessageToArray(
+        12, _Internal::test_nested_message_role_upgrade_cfg(this), target);
+  }
+
+  if (_internal_metadata_.have_unknown_fields()) {
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::SerializeUnknownFieldsToArray(
+        _internal_metadata_.unknown_fields(), target);
+  }
+  // @@protoc_insertion_point(serialize_to_array_end:arr_in_arr.test_nested_message)
+  return target;
+}
+
+size_t arr_in_arr_test_nested_message::ByteSizeLong() const {
+// @@protoc_insertion_point(message_byte_size_start:arr_in_arr.test_nested_message)
+  size_t total_size = 0;
+
+  if (_internal_metadata_.have_unknown_fields()) {
+    total_size +=
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::ComputeUnknownFieldsSize(
+        _internal_metadata_.unknown_fields());
+  }
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  switch (test_onof_case()) {
+    // .role_cfg test_nested_message_info_role = 11;
+    case kTestNestedMessageInfoRole: {
+      total_size += 1 +
+        ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
+          *test_onof_.test_nested_message_info_role_);
+      break;
+    }
+    // .role_upgrade_cfg test_nested_message_role_upgrade_cfg = 12;
+    case kTestNestedMessageRoleUpgradeCfg: {
+      total_size += 1 +
+        ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
+          *test_onof_.test_nested_message_role_upgrade_cfg_);
+      break;
+    }
+    case TEST_ONOF_NOT_SET: {
+      break;
+    }
+  }
+  int cached_size = ::PROTOBUF_NAMESPACE_ID::internal::ToCachedSize(total_size);
+  SetCachedSize(cached_size);
+  return total_size;
+}
+
+void arr_in_arr_test_nested_message::MergeFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) {
+// @@protoc_insertion_point(generalized_merge_from_start:arr_in_arr.test_nested_message)
+  GOOGLE_DCHECK_NE(&from, this);
+  const arr_in_arr_test_nested_message* source =
+      ::PROTOBUF_NAMESPACE_ID::DynamicCastToGenerated<arr_in_arr_test_nested_message>(
+          &from);
+  if (source == nullptr) {
+  // @@protoc_insertion_point(generalized_merge_from_cast_fail:arr_in_arr.test_nested_message)
+    ::PROTOBUF_NAMESPACE_ID::internal::ReflectionOps::Merge(from, this);
+  } else {
+  // @@protoc_insertion_point(generalized_merge_from_cast_success:arr_in_arr.test_nested_message)
+    MergeFrom(*source);
+  }
+}
+
+void arr_in_arr_test_nested_message::MergeFrom(const arr_in_arr_test_nested_message& from) {
+// @@protoc_insertion_point(class_specific_merge_from_start:arr_in_arr.test_nested_message)
+  GOOGLE_DCHECK_NE(&from, this);
+  _internal_metadata_.MergeFrom(from._internal_metadata_);
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  switch (from.test_onof_case()) {
+    case kTestNestedMessageInfoRole: {
+      mutable_test_nested_message_info_role()->::role_cfg::MergeFrom(from.test_nested_message_info_role());
+      break;
+    }
+    case kTestNestedMessageRoleUpgradeCfg: {
+      mutable_test_nested_message_role_upgrade_cfg()->::role_upgrade_cfg::MergeFrom(from.test_nested_message_role_upgrade_cfg());
+      break;
+    }
+    case TEST_ONOF_NOT_SET: {
+      break;
+    }
+  }
+}
+
+void arr_in_arr_test_nested_message::CopyFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) {
+// @@protoc_insertion_point(generalized_copy_from_start:arr_in_arr.test_nested_message)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+void arr_in_arr_test_nested_message::CopyFrom(const arr_in_arr_test_nested_message& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:arr_in_arr.test_nested_message)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+bool arr_in_arr_test_nested_message::IsInitialized() const {
+  return true;
+}
+
+void arr_in_arr_test_nested_message::InternalSwap(arr_in_arr_test_nested_message* other) {
+  using std::swap;
+  _internal_metadata_.Swap(&other->_internal_metadata_);
+  swap(test_onof_, other->test_onof_);
+  swap(_oneof_case_[0], other->_oneof_case_[0]);
+}
+
+::PROTOBUF_NAMESPACE_ID::Metadata arr_in_arr_test_nested_message::GetMetadata() const {
+  return GetMetadataStatic();
+}
+
+
+// ===================================================================
+
 void arr_in_arr::InitAsDefaultInstance() {
+  ::_arr_in_arr_default_instance_.test_info_role_ = const_cast< ::role_cfg*>(
+      ::role_cfg::internal_default_instance());
+  ::_arr_in_arr_default_instance_.test_role_upgrade_cfg_ = const_cast< ::role_upgrade_cfg*>(
+      ::role_upgrade_cfg::internal_default_instance());
 }
 class arr_in_arr::_Internal {
  public:
+  static const ::role_cfg& test_info_role(const arr_in_arr* msg);
+  static const ::role_upgrade_cfg& test_role_upgrade_cfg(const arr_in_arr* msg);
 };
 
+const ::role_cfg&
+arr_in_arr::_Internal::test_info_role(const arr_in_arr* msg) {
+  return *msg->test_onof_.test_info_role_;
+}
+const ::role_upgrade_cfg&
+arr_in_arr::_Internal::test_role_upgrade_cfg(const arr_in_arr* msg) {
+  return *msg->test_onof_.test_role_upgrade_cfg_;
+}
+void arr_in_arr::set_allocated_test_info_role(::role_cfg* test_info_role) {
+  ::PROTOBUF_NAMESPACE_ID::Arena* message_arena = GetArenaNoVirtual();
+  clear_test_onof();
+  if (test_info_role) {
+    ::PROTOBUF_NAMESPACE_ID::Arena* submessage_arena = nullptr;
+    if (message_arena != submessage_arena) {
+      test_info_role = ::PROTOBUF_NAMESPACE_ID::internal::GetOwnedMessage(
+          message_arena, test_info_role, submessage_arena);
+    }
+    set_has_test_info_role();
+    test_onof_.test_info_role_ = test_info_role;
+  }
+  // @@protoc_insertion_point(field_set_allocated:arr_in_arr.test_info_role)
+}
+void arr_in_arr::set_allocated_test_role_upgrade_cfg(::role_upgrade_cfg* test_role_upgrade_cfg) {
+  ::PROTOBUF_NAMESPACE_ID::Arena* message_arena = GetArenaNoVirtual();
+  clear_test_onof();
+  if (test_role_upgrade_cfg) {
+    ::PROTOBUF_NAMESPACE_ID::Arena* submessage_arena = nullptr;
+    if (message_arena != submessage_arena) {
+      test_role_upgrade_cfg = ::PROTOBUF_NAMESPACE_ID::internal::GetOwnedMessage(
+          message_arena, test_role_upgrade_cfg, submessage_arena);
+    }
+    set_has_test_role_upgrade_cfg();
+    test_onof_.test_role_upgrade_cfg_ = test_role_upgrade_cfg;
+  }
+  // @@protoc_insertion_point(field_set_allocated:arr_in_arr.test_role_upgrade_cfg)
+}
 arr_in_arr::arr_in_arr()
   : ::PROTOBUF_NAMESPACE_ID::Message(), _internal_metadata_(nullptr) {
   SharedCtor();
@@ -1292,12 +1811,27 @@ arr_in_arr::arr_in_arr(const arr_in_arr& from)
   if (!from.name().empty()) {
     name_.AssignWithDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), from.name_);
   }
+  clear_has_test_onof();
+  switch (from.test_onof_case()) {
+    case kTestInfoRole: {
+      mutable_test_info_role()->::role_cfg::MergeFrom(from.test_info_role());
+      break;
+    }
+    case kTestRoleUpgradeCfg: {
+      mutable_test_role_upgrade_cfg()->::role_upgrade_cfg::MergeFrom(from.test_role_upgrade_cfg());
+      break;
+    }
+    case TEST_ONOF_NOT_SET: {
+      break;
+    }
+  }
   // @@protoc_insertion_point(copy_constructor:arr_in_arr)
 }
 
 void arr_in_arr::SharedCtor() {
   ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&scc_info_arr_in_arr_kind_2eproto.base);
   name_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  clear_has_test_onof();
 }
 
 arr_in_arr::~arr_in_arr() {
@@ -1307,6 +1841,9 @@ arr_in_arr::~arr_in_arr() {
 
 void arr_in_arr::SharedDtor() {
   name_.DestroyNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  if (has_test_onof()) {
+    clear_test_onof();
+  }
 }
 
 void arr_in_arr::SetCachedSize(int size) const {
@@ -1315,6 +1852,25 @@ void arr_in_arr::SetCachedSize(int size) const {
 const arr_in_arr& arr_in_arr::default_instance() {
   ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&::scc_info_arr_in_arr_kind_2eproto.base);
   return *internal_default_instance();
+}
+
+
+void arr_in_arr::clear_test_onof() {
+// @@protoc_insertion_point(one_of_clear_start:arr_in_arr)
+  switch (test_onof_case()) {
+    case kTestInfoRole: {
+      delete test_onof_.test_info_role_;
+      break;
+    }
+    case kTestRoleUpgradeCfg: {
+      delete test_onof_.test_role_upgrade_cfg_;
+      break;
+    }
+    case TEST_ONOF_NOT_SET: {
+      break;
+    }
+  }
+  _oneof_case_[0] = TEST_ONOF_NOT_SET;
 }
 
 
@@ -1327,6 +1883,7 @@ void arr_in_arr::Clear() {
   int_arr_.Clear();
   str_arr_.Clear();
   name_.ClearToEmptyNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  clear_test_onof();
   _internal_metadata_.Clear();
 }
 
@@ -1365,6 +1922,20 @@ const char* arr_in_arr::_InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID:
             CHK_(ptr);
             if (!ctx->DataAvailable(ptr)) break;
           } while (::PROTOBUF_NAMESPACE_ID::internal::UnalignedLoad<::PROTOBUF_NAMESPACE_ID::uint8>(ptr) == 26);
+        } else goto handle_unusual;
+        continue;
+      // .role_cfg test_info_role = 11;
+      case 11:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 90)) {
+          ptr = ctx->ParseMessage(mutable_test_info_role(), ptr);
+          CHK_(ptr);
+        } else goto handle_unusual;
+        continue;
+      // .role_upgrade_cfg test_role_upgrade_cfg = 12;
+      case 12:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 98)) {
+          ptr = ctx->ParseMessage(mutable_test_role_upgrade_cfg(), ptr);
+          CHK_(ptr);
         } else goto handle_unusual;
         continue;
       default: {
@@ -1444,6 +2015,28 @@ bool arr_in_arr::MergePartialFromCodedStream(
         break;
       }
 
+      // .role_cfg test_info_role = 11;
+      case 11: {
+        if (static_cast< ::PROTOBUF_NAMESPACE_ID::uint8>(tag) == (90 & 0xFF)) {
+          DO_(::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::ReadMessage(
+               input, mutable_test_info_role()));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
+      // .role_upgrade_cfg test_role_upgrade_cfg = 12;
+      case 12: {
+        if (static_cast< ::PROTOBUF_NAMESPACE_ID::uint8>(tag) == (98 & 0xFF)) {
+          DO_(::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::ReadMessage(
+               input, mutable_test_role_upgrade_cfg()));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
       default: {
       handle_unusual:
         if (tag == 0) {
@@ -1502,6 +2095,18 @@ void arr_in_arr::SerializeWithCachedSizes(
       3, this->str_arr(i), output);
   }
 
+  // .role_cfg test_info_role = 11;
+  if (has_test_info_role()) {
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteMessageMaybeToArray(
+      11, _Internal::test_info_role(this), output);
+  }
+
+  // .role_upgrade_cfg test_role_upgrade_cfg = 12;
+  if (has_test_role_upgrade_cfg()) {
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteMessageMaybeToArray(
+      12, _Internal::test_role_upgrade_cfg(this), output);
+  }
+
   if (_internal_metadata_.have_unknown_fields()) {
     ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::SerializeUnknownFields(
         _internal_metadata_.unknown_fields(), output);
@@ -1547,6 +2152,20 @@ void arr_in_arr::SerializeWithCachedSizes(
       "arr_in_arr.str_arr");
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
       WriteStringToArray(3, this->str_arr(i), target);
+  }
+
+  // .role_cfg test_info_role = 11;
+  if (has_test_info_role()) {
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
+      InternalWriteMessageToArray(
+        11, _Internal::test_info_role(this), target);
+  }
+
+  // .role_upgrade_cfg test_role_upgrade_cfg = 12;
+  if (has_test_role_upgrade_cfg()) {
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
+      InternalWriteMessageToArray(
+        12, _Internal::test_role_upgrade_cfg(this), target);
   }
 
   if (_internal_metadata_.have_unknown_fields()) {
@@ -1600,6 +2219,25 @@ size_t arr_in_arr::ByteSizeLong() const {
         this->name());
   }
 
+  switch (test_onof_case()) {
+    // .role_cfg test_info_role = 11;
+    case kTestInfoRole: {
+      total_size += 1 +
+        ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
+          *test_onof_.test_info_role_);
+      break;
+    }
+    // .role_upgrade_cfg test_role_upgrade_cfg = 12;
+    case kTestRoleUpgradeCfg: {
+      total_size += 1 +
+        ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
+          *test_onof_.test_role_upgrade_cfg_);
+      break;
+    }
+    case TEST_ONOF_NOT_SET: {
+      break;
+    }
+  }
   int cached_size = ::PROTOBUF_NAMESPACE_ID::internal::ToCachedSize(total_size);
   SetCachedSize(cached_size);
   return total_size;
@@ -1633,6 +2271,19 @@ void arr_in_arr::MergeFrom(const arr_in_arr& from) {
 
     name_.AssignWithDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), from.name_);
   }
+  switch (from.test_onof_case()) {
+    case kTestInfoRole: {
+      mutable_test_info_role()->::role_cfg::MergeFrom(from.test_info_role());
+      break;
+    }
+    case kTestRoleUpgradeCfg: {
+      mutable_test_role_upgrade_cfg()->::role_upgrade_cfg::MergeFrom(from.test_role_upgrade_cfg());
+      break;
+    }
+    case TEST_ONOF_NOT_SET: {
+      break;
+    }
+  }
 }
 
 void arr_in_arr::CopyFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) {
@@ -1660,6 +2311,8 @@ void arr_in_arr::InternalSwap(arr_in_arr* other) {
   str_arr_.InternalSwap(CastToBase(&other->str_arr_));
   name_.Swap(&other->name_, &::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(),
     GetArenaNoVirtual());
+  swap(test_onof_, other->test_onof_);
+  swap(_oneof_case_[0], other->_oneof_case_[0]);
 }
 
 ::PROTOBUF_NAMESPACE_ID::Metadata arr_in_arr::GetMetadata() const {
@@ -2275,6 +2928,9 @@ template<> PROTOBUF_NOINLINE ::role_cfg* Arena::CreateMaybeMessage< ::role_cfg >
 }
 template<> PROTOBUF_NOINLINE ::role_upgrade_cfg* Arena::CreateMaybeMessage< ::role_upgrade_cfg >(Arena* arena) {
   return Arena::CreateInternal< ::role_upgrade_cfg >(arena);
+}
+template<> PROTOBUF_NOINLINE ::arr_in_arr_test_nested_message* Arena::CreateMaybeMessage< ::arr_in_arr_test_nested_message >(Arena* arena) {
+  return Arena::CreateInternal< ::arr_in_arr_test_nested_message >(arena);
 }
 template<> PROTOBUF_NOINLINE ::arr_in_arr* Arena::CreateMaybeMessage< ::arr_in_arr >(Arena* arena) {
   return Arena::CreateInternal< ::arr_in_arr >(arena);

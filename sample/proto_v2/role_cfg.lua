@@ -2,11 +2,12 @@
 
 return {
     [1] = {
-        xres_ver = "2.5.0",
+        xres_ver = "2.6.0",
         hash_code = "no hash code",
         data_ver = "1.0.0.0",
         count = 7,
     },
+    [2] = "role_cfg",
     role_cfg = {
         {
             int_as_string = "0",

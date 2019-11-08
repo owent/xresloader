@@ -2,12 +2,13 @@
 
 return {
   [1] = {
-    xres_ver = "2.5.0",
+    xres_ver = "2.6.0",
     hash_code = "no hash code",
     data_ver = "1.0.0.0",
     count = 3,
     description = "Test arr_in_arr_cfg",
   },
+  [2] = "arr_in_arr_cfg",
   arr_in_arr_cfg = {
     {
       arr = {

@@ -169,7 +169,10 @@ public class DataDstUEJson extends DataDstUEBase {
             return;
         }
 
-        ProgramOptions.getLoger().error("rewrite %s as nil, should not called here.", data.toString());
+        JSONObject obj = new JSONObject();
+        obj.put("Name", prefix);
+        obj.put(valSeg, data.toString());
+        jo.put(obj);
     }
 
     /**

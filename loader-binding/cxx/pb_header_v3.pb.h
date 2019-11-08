@@ -373,6 +373,7 @@ class xresloader_datablocks :
 
   enum : int {
     kDataBlockFieldNumber = 2,
+    kDataMessageTypeFieldNumber = 3,
     kHeaderFieldNumber = 1,
   };
   // repeated bytes data_block = 2;
@@ -392,6 +393,17 @@ class xresloader_datablocks :
   const ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField<std::string>& data_block() const;
   ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField<std::string>* mutable_data_block();
 
+  // string data_message_type = 3;
+  void clear_data_message_type();
+  const std::string& data_message_type() const;
+  void set_data_message_type(const std::string& value);
+  void set_data_message_type(std::string&& value);
+  void set_data_message_type(const char* value);
+  void set_data_message_type(const char* value, size_t size);
+  std::string* mutable_data_message_type();
+  std::string* release_data_message_type();
+  void set_allocated_data_message_type(std::string* data_message_type);
+
   // .org.xresloader.pb.xresloader_header header = 1;
   bool has_header() const;
   void clear_header();
@@ -406,6 +418,7 @@ class xresloader_datablocks :
 
   ::PROTOBUF_NAMESPACE_ID::internal::InternalMetadataWithArena _internal_metadata_;
   ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField<std::string> data_block_;
+  ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr data_message_type_;
   ::org::xresloader::pb::xresloader_header* header_;
   mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
   friend struct ::TableStruct_pb_5fheader_5fv3_2eproto;
@@ -757,6 +770,57 @@ inline ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField<std::string>*
 xresloader_datablocks::mutable_data_block() {
   // @@protoc_insertion_point(field_mutable_list:org.xresloader.pb.xresloader_datablocks.data_block)
   return &data_block_;
+}
+
+// string data_message_type = 3;
+inline void xresloader_datablocks::clear_data_message_type() {
+  data_message_type_.ClearToEmptyNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+}
+inline const std::string& xresloader_datablocks::data_message_type() const {
+  // @@protoc_insertion_point(field_get:org.xresloader.pb.xresloader_datablocks.data_message_type)
+  return data_message_type_.GetNoArena();
+}
+inline void xresloader_datablocks::set_data_message_type(const std::string& value) {
+  
+  data_message_type_.SetNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), value);
+  // @@protoc_insertion_point(field_set:org.xresloader.pb.xresloader_datablocks.data_message_type)
+}
+inline void xresloader_datablocks::set_data_message_type(std::string&& value) {
+  
+  data_message_type_.SetNoArena(
+    &::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
+  // @@protoc_insertion_point(field_set_rvalue:org.xresloader.pb.xresloader_datablocks.data_message_type)
+}
+inline void xresloader_datablocks::set_data_message_type(const char* value) {
+  GOOGLE_DCHECK(value != nullptr);
+  
+  data_message_type_.SetNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
+  // @@protoc_insertion_point(field_set_char:org.xresloader.pb.xresloader_datablocks.data_message_type)
+}
+inline void xresloader_datablocks::set_data_message_type(const char* value, size_t size) {
+  
+  data_message_type_.SetNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(),
+      ::std::string(reinterpret_cast<const char*>(value), size));
+  // @@protoc_insertion_point(field_set_pointer:org.xresloader.pb.xresloader_datablocks.data_message_type)
+}
+inline std::string* xresloader_datablocks::mutable_data_message_type() {
+  
+  // @@protoc_insertion_point(field_mutable:org.xresloader.pb.xresloader_datablocks.data_message_type)
+  return data_message_type_.MutableNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+}
+inline std::string* xresloader_datablocks::release_data_message_type() {
+  // @@protoc_insertion_point(field_release:org.xresloader.pb.xresloader_datablocks.data_message_type)
+  
+  return data_message_type_.ReleaseNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+}
+inline void xresloader_datablocks::set_allocated_data_message_type(std::string* data_message_type) {
+  if (data_message_type != nullptr) {
+    
+  } else {
+    
+  }
+  data_message_type_.SetAllocatedNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), data_message_type);
+  // @@protoc_insertion_point(field_set_allocated:org.xresloader.pb.xresloader_datablocks.data_message_type)
 }
 
 #ifdef __GNUC__

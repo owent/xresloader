@@ -36,6 +36,9 @@ for proto_dir in proto_v2 proto_v3; do
         -t bin -p protobuf -o '$proto_dir'     -f '$proto_dir/kind.pb' -m DataSource='$XLSX_FILE'|arr_in_arr|3,1 -m MacroSource='$XLSX_FILE'|macro|2,1 -m ProtoName=arr_in_arr_cfg -m OutputFile=arr_in_arr_cfg.bin -m KeyRow=2 -o '$proto_dir'
         -t json -p protobuf -o '$proto_dir'    -f '$proto_dir/kind.pb' -s '$XLSX_FILE' -m scheme_upgrade -n "/(?i)\.bin$/\.json/"
         -t lua -p protobuf -o '$proto_dir'     -f '$proto_dir/kind.pb' -s '$XLSX_FILE' -m scheme_upgrade -n "/(?i)\.bin$/\.lua/"
+        -t lua -o '$proto_dir'     -f '$proto_dir/kind.pb' --pretty 2 -c kind_option.lua
+        -t lua -o '$proto_dir'     -f '$proto_dir/kind.pb' --pretty 2 --lua-module ProtoOptions.Kind -c kind_option.lua
+        -t js -o '$proto_dir'      -f '$proto_dir/kind.pb' --pretty 2 -c kind_option.js --javascript-export nodejs
         -t ue-csv -o '$proto_dir/csv' -f '$proto_dir/kind.pb' -c KindConst.csv  -m UeCfg-RecursiveMode=false
         -t ue-json -o '$proto_dir/json' -f '$proto_dir/kind.pb' -c KindConst.json
         -t ue-csv -o '$proto_dir/csv' -f '$proto_dir/kind.pb' -m DataSource='$XLSX_FILE'|arr_in_arr|3,1 -m MacroSource='$XLSX_FILE'|macro|2,1 -m ProtoName=arr_in_arr_cfg -m OutputFile=ArrInArrCfg.csv -m KeyRow=2 -m UeCfg-CodeOutput=|Public/Config|Private/Config  -m UeCfg-RecursiveMode=false

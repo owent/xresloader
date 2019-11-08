@@ -45,6 +45,7 @@ public class DataDstMsgPack extends DataDstJava {
         try {
             packer.write(data_obj.header);
             packer.write(data_obj.body);
+            packer.write(data_obj.data_message_type);
         } catch (IOException e) {
             ProgramOptions.getLoger().error("MessagePacker write failed.");
             e.printStackTrace();

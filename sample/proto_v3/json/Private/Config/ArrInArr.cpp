@@ -14,6 +14,22 @@ void UArrInArrHelper::ClearRow(FArrInArr& TableRow)
     TableRow.Name = TEXT("");
     TableRow.IntArr.Reset(0);
     TableRow.StrArr.Reset(0);
+    TableRow.TestInfoRole.IntAsString = TEXT("");
+    TableRow.TestInfoRole.UnlockLevel = 0;
+    TableRow.TestInfoRole.CostType = 0;
+    TableRow.TestInfoRole.TestArray.Reset(0);
+    TableRow.TestInfoRole.Name = TEXT("");
+    TableRow.TestInfoRole.DepTest.Name = TEXT("");
+    TableRow.TestInfoRole.DepTest.Id = 0;
+    TableRow.TestInfoRole.DepTest.Dep2.Level = TEXT("");
+    TableRow.TestInfoRole.DepTest.Dep2.Id = 0;
+    TableRow.TestInfoRole.CostValue = 0;
+    TableRow.TestInfoRole.Id = 0;
+    TableRow.TestRoleUpgradeCfg.ScoreAdd = 0;
+    TableRow.TestRoleUpgradeCfg.CostValue = 0;
+    TableRow.TestRoleUpgradeCfg.Level = 0;
+    TableRow.TestRoleUpgradeCfg.Id = 0;
+    TableRow.TestRoleUpgradeCfg.CostType = 0;
 }
 
 void UArrInArrHelper::ClearDataRow(FArrInArr& TableRow) const

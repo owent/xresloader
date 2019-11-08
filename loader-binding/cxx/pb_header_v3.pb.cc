@@ -81,6 +81,7 @@ const ::PROTOBUF_NAMESPACE_ID::uint32 TableStruct_pb_5fheader_5fv3_2eproto::offs
   ~0u,  // no _weak_field_map_
   PROTOBUF_FIELD_OFFSET(::org::xresloader::pb::xresloader_datablocks, header_),
   PROTOBUF_FIELD_OFFSET(::org::xresloader::pb::xresloader_datablocks, data_block_),
+  PROTOBUF_FIELD_OFFSET(::org::xresloader::pb::xresloader_datablocks, data_message_type_),
 };
 static const ::PROTOBUF_NAMESPACE_ID::internal::MigrationSchema schemas[] PROTOBUF_SECTION_VARIABLE(protodesc_cold) = {
   { 0, -1, sizeof(::org::xresloader::pb::xresloader_header)},
@@ -96,10 +97,11 @@ const char descriptor_table_protodef_pb_5fheader_5fv3_2eproto[] PROTOBUF_SECTION
   "\n\022pb_header_v3.proto\022\021org.xresloader.pb\""
   "n\n\021xresloader_header\022\020\n\010xres_ver\030\001 \001(\t\022\020"
   "\n\010data_ver\030\002 \001(\t\022\r\n\005count\030\003 \001(\r\022\021\n\thash_"
-  "code\030\004 \001(\t\022\023\n\013description\030\005 \001(\t\"a\n\025xresl"
+  "code\030\004 \001(\t\022\023\n\013description\030\005 \001(\t\"|\n\025xresl"
   "oader_datablocks\0224\n\006header\030\001 \001(\0132$.org.x"
   "resloader.pb.xresloader_header\022\022\n\ndata_b"
-  "lock\030\002 \003(\014b\006proto3"
+  "lock\030\002 \003(\014\022\031\n\021data_message_type\030\003 \001(\tb\006p"
+  "roto3"
   ;
 static const ::PROTOBUF_NAMESPACE_ID::internal::DescriptorTable*const descriptor_table_pb_5fheader_5fv3_2eproto_deps[1] = {
 };
@@ -110,7 +112,7 @@ static ::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase*const descriptor_table_pb_
 static ::PROTOBUF_NAMESPACE_ID::internal::once_flag descriptor_table_pb_5fheader_5fv3_2eproto_once;
 static bool descriptor_table_pb_5fheader_5fv3_2eproto_initialized = false;
 const ::PROTOBUF_NAMESPACE_ID::internal::DescriptorTable descriptor_table_pb_5fheader_5fv3_2eproto = {
-  &descriptor_table_pb_5fheader_5fv3_2eproto_initialized, descriptor_table_protodef_pb_5fheader_5fv3_2eproto, "pb_header_v3.proto", 258,
+  &descriptor_table_pb_5fheader_5fv3_2eproto_initialized, descriptor_table_protodef_pb_5fheader_5fv3_2eproto, "pb_header_v3.proto", 285,
   &descriptor_table_pb_5fheader_5fv3_2eproto_once, descriptor_table_pb_5fheader_5fv3_2eproto_sccs, descriptor_table_pb_5fheader_5fv3_2eproto_deps, 2, 0,
   schemas, file_default_instances, TableStruct_pb_5fheader_5fv3_2eproto::offsets,
   file_level_metadata_pb_5fheader_5fv3_2eproto, 2, file_level_enum_descriptors_pb_5fheader_5fv3_2eproto, file_level_service_descriptors_pb_5fheader_5fv3_2eproto,
@@ -649,6 +651,10 @@ xresloader_datablocks::xresloader_datablocks(const xresloader_datablocks& from)
       _internal_metadata_(nullptr),
       data_block_(from.data_block_) {
   _internal_metadata_.MergeFrom(from._internal_metadata_);
+  data_message_type_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  if (!from.data_message_type().empty()) {
+    data_message_type_.AssignWithDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), from.data_message_type_);
+  }
   if (from.has_header()) {
     header_ = new ::org::xresloader::pb::xresloader_header(*from.header_);
   } else {
@@ -659,6 +665,7 @@ xresloader_datablocks::xresloader_datablocks(const xresloader_datablocks& from)
 
 void xresloader_datablocks::SharedCtor() {
   ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&scc_info_xresloader_datablocks_pb_5fheader_5fv3_2eproto.base);
+  data_message_type_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
   header_ = nullptr;
 }
 
@@ -668,6 +675,7 @@ xresloader_datablocks::~xresloader_datablocks() {
 }
 
 void xresloader_datablocks::SharedDtor() {
+  data_message_type_.DestroyNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
   if (this != internal_default_instance()) delete header_;
 }
 
@@ -687,6 +695,7 @@ void xresloader_datablocks::Clear() {
   (void) cached_has_bits;
 
   data_block_.Clear();
+  data_message_type_.ClearToEmptyNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
   if (GetArenaNoVirtual() == nullptr && header_ != nullptr) {
     delete header_;
   }
@@ -719,6 +728,13 @@ const char* xresloader_datablocks::_InternalParse(const char* ptr, ::PROTOBUF_NA
             CHK_(ptr);
             if (!ctx->DataAvailable(ptr)) break;
           } while (::PROTOBUF_NAMESPACE_ID::internal::UnalignedLoad<::PROTOBUF_NAMESPACE_ID::uint8>(ptr) == 18);
+        } else goto handle_unusual;
+        continue;
+      // string data_message_type = 3;
+      case 3:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 26)) {
+          ptr = ::PROTOBUF_NAMESPACE_ID::internal::InlineGreedyStringParserUTF8(mutable_data_message_type(), ptr, ctx, "org.xresloader.pb.xresloader_datablocks.data_message_type");
+          CHK_(ptr);
         } else goto handle_unusual;
         continue;
       default: {
@@ -773,6 +789,21 @@ bool xresloader_datablocks::MergePartialFromCodedStream(
         break;
       }
 
+      // string data_message_type = 3;
+      case 3: {
+        if (static_cast< ::PROTOBUF_NAMESPACE_ID::uint8>(tag) == (26 & 0xFF)) {
+          DO_(::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::ReadString(
+                input, this->mutable_data_message_type()));
+          DO_(::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
+            this->data_message_type().data(), static_cast<int>(this->data_message_type().length()),
+            ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::PARSE,
+            "org.xresloader.pb.xresloader_datablocks.data_message_type"));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
       default: {
       handle_unusual:
         if (tag == 0) {
@@ -812,6 +843,16 @@ void xresloader_datablocks::SerializeWithCachedSizes(
       2, this->data_block(i), output);
   }
 
+  // string data_message_type = 3;
+  if (this->data_message_type().size() > 0) {
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
+      this->data_message_type().data(), static_cast<int>(this->data_message_type().length()),
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::SERIALIZE,
+      "org.xresloader.pb.xresloader_datablocks.data_message_type");
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteStringMaybeAliased(
+      3, this->data_message_type(), output);
+  }
+
   if (_internal_metadata_.have_unknown_fields()) {
     ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::SerializeUnknownFields(
         _internal_metadata_.unknown_fields(), output);
@@ -836,6 +877,17 @@ void xresloader_datablocks::SerializeWithCachedSizes(
   for (int i = 0, n = this->data_block_size(); i < n; i++) {
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
       WriteBytesToArray(2, this->data_block(i), target);
+  }
+
+  // string data_message_type = 3;
+  if (this->data_message_type().size() > 0) {
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
+      this->data_message_type().data(), static_cast<int>(this->data_message_type().length()),
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::SERIALIZE,
+      "org.xresloader.pb.xresloader_datablocks.data_message_type");
+    target =
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteStringToArray(
+        3, this->data_message_type(), target);
   }
 
   if (_internal_metadata_.have_unknown_fields()) {
@@ -865,6 +917,13 @@ size_t xresloader_datablocks::ByteSizeLong() const {
   for (int i = 0, n = this->data_block_size(); i < n; i++) {
     total_size += ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::BytesSize(
       this->data_block(i));
+  }
+
+  // string data_message_type = 3;
+  if (this->data_message_type().size() > 0) {
+    total_size += 1 +
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
+        this->data_message_type());
   }
 
   // .org.xresloader.pb.xresloader_header header = 1;
@@ -902,6 +961,10 @@ void xresloader_datablocks::MergeFrom(const xresloader_datablocks& from) {
   (void) cached_has_bits;
 
   data_block_.MergeFrom(from.data_block_);
+  if (from.data_message_type().size() > 0) {
+
+    data_message_type_.AssignWithDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), from.data_message_type_);
+  }
   if (from.has_header()) {
     mutable_header()->::org::xresloader::pb::xresloader_header::MergeFrom(from.header());
   }
@@ -929,6 +992,8 @@ void xresloader_datablocks::InternalSwap(xresloader_datablocks* other) {
   using std::swap;
   _internal_metadata_.Swap(&other->_internal_metadata_);
   data_block_.InternalSwap(CastToBase(&other->data_block_));
+  data_message_type_.Swap(&other->data_message_type_, &::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(),
+    GetArenaNoVirtual());
   swap(header_, other->header_);
 }
 

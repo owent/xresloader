@@ -250,8 +250,8 @@ public class SchemeConf {
             return this.outputFilePathCache;
         }
 
-        if (false == ProgramOptions.getInstance().constPrint.isEmpty()) {
-            this.outputFilePathCache = ProgramOptions.getInstance().constPrint;
+        if (false == ProgramOptions.getInstance().protoDumpFile.isEmpty()) {
+            this.outputFilePathCache = ProgramOptions.getInstance().protoDumpFile;
             return this.outputFilePathCache;
         }
 

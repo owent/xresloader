@@ -35,6 +35,7 @@ public abstract class DataDstJava extends DataDstImpl {
     public class DataDstObject {
         public HashMap<String, Object> header = new HashMap<String, Object>();
         public HashMap<String, List<Object>> body = new HashMap<String, List<Object>>();
+        public String data_message_type = "";
     }
 
     protected DataDstObject build_data(DataDstImpl compiler) throws ConvException {
@@ -63,6 +64,8 @@ public abstract class DataDstJava extends DataDstImpl {
             if (desc.getMessageExtension().description != null) {
                 descriptionList.add(desc.getMessageExtension().description);
             }
+
+            ret.data_message_type = desc.getFullName();
         }
 
         if (!descriptionList.isEmpty()) {

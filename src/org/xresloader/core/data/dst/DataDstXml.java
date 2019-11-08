@@ -58,6 +58,7 @@ public class DataDstXml extends DataDstJava {
 
         Element header = DocumentHelper.createElement("header");
         Element body = DocumentHelper.createElement("body");
+        Element data_message_type = DocumentHelper.createElement("data_message_type");
 
         writeData(header, data_obj.header, header.getName());
 
@@ -74,8 +75,11 @@ public class DataDstXml extends DataDstJava {
 
         writeData(body, data_obj.body, body.getName());
 
+        writeData(data_message_type, data_obj.data_message_type, data_message_type.getName());
+
         doc.getRootElement().add(header);
         doc.getRootElement().add(body);
+        doc.getRootElement().add(data_message_type);
 
         try {
             ByteArrayOutputStream bos = new ByteArrayOutputStream();

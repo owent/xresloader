@@ -18,8 +18,9 @@
   var local_data_set = null;
   local_data_set = {
     xresloader : {
+      role_cfg_data_message_type : "role_cfg",
       role_cfg_header : {
-        xres_ver : "2.5.0",
+        xres_ver : "2.6.0",
         hash_code : "no hash code",
         data_ver : "1.0.0.0",
         count : 7

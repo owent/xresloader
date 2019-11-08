@@ -67,6 +67,15 @@ public abstract class DataDstImpl {
     }
 
     /**
+     * 生成选项数据
+     * 
+     * @return 选项数据,不支持的时候返回空
+     */
+    public HashMap<String, Object> buildOptions() {
+        return null;
+    }
+
+    /**
      * 转储常量数据
      * 
      * @return 常量数据,不支持的时候返回空

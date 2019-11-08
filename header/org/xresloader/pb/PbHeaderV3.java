@@ -1071,6 +1071,16 @@ public final class PbHeaderV3 {
      * <code>repeated bytes data_block = 2;</code>
      */
     com.google.protobuf.ByteString getDataBlock(int index);
+
+    /**
+     * <code>string data_message_type = 3;</code>
+     */
+    java.lang.String getDataMessageType();
+    /**
+     * <code>string data_message_type = 3;</code>
+     */
+    com.google.protobuf.ByteString
+        getDataMessageTypeBytes();
   }
   /**
    * Protobuf type {@code org.xresloader.pb.xresloader_datablocks}
@@ -1086,6 +1096,7 @@ public final class PbHeaderV3 {
     }
     private xresloader_datablocks() {
       dataBlock_ = java.util.Collections.emptyList();
+      dataMessageType_ = "";
     }
 
     @java.lang.Override
@@ -1138,6 +1149,12 @@ public final class PbHeaderV3 {
                 mutable_bitField0_ |= 0x00000001;
               }
               dataBlock_.add(input.readBytes());
+              break;
+            }
+            case 26: {
+              java.lang.String s = input.readStringRequireUtf8();
+
+              dataMessageType_ = s;
               break;
             }
             default: {
@@ -1218,6 +1235,40 @@ public final class PbHeaderV3 {
       return dataBlock_.get(index);
     }
 
+    public static final int DATA_MESSAGE_TYPE_FIELD_NUMBER = 3;
+    private volatile java.lang.Object dataMessageType_;
+    /**
+     * <code>string data_message_type = 3;</code>
+     */
+    public java.lang.String getDataMessageType() {
+      java.lang.Object ref = dataMessageType_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        dataMessageType_ = s;
+        return s;
+      }
+    }
+    /**
+     * <code>string data_message_type = 3;</code>
+     */
+    public com.google.protobuf.ByteString
+        getDataMessageTypeBytes() {
+      java.lang.Object ref = dataMessageType_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        dataMessageType_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
     private byte memoizedIsInitialized = -1;
     @java.lang.Override
     public final boolean isInitialized() {
@@ -1237,6 +1288,9 @@ public final class PbHeaderV3 {
       }
       for (int i = 0; i < dataBlock_.size(); i++) {
         output.writeBytes(2, dataBlock_.get(i));
+      }
+      if (!getDataMessageTypeBytes().isEmpty()) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 3, dataMessageType_);
       }
       unknownFields.writeTo(output);
     }
@@ -1260,6 +1314,9 @@ public final class PbHeaderV3 {
         size += dataSize;
         size += 1 * getDataBlockList().size();
       }
+      if (!getDataMessageTypeBytes().isEmpty()) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(3, dataMessageType_);
+      }
       size += unknownFields.getSerializedSize();
       memoizedSize = size;
       return size;
@@ -1282,6 +1339,8 @@ public final class PbHeaderV3 {
       }
       if (!getDataBlockList()
           .equals(other.getDataBlockList())) return false;
+      if (!getDataMessageType()
+          .equals(other.getDataMessageType())) return false;
       if (!unknownFields.equals(other.unknownFields)) return false;
       return true;
     }
@@ -1301,6 +1360,8 @@ public final class PbHeaderV3 {
         hash = (37 * hash) + DATA_BLOCK_FIELD_NUMBER;
         hash = (53 * hash) + getDataBlockList().hashCode();
       }
+      hash = (37 * hash) + DATA_MESSAGE_TYPE_FIELD_NUMBER;
+      hash = (53 * hash) + getDataMessageType().hashCode();
       hash = (29 * hash) + unknownFields.hashCode();
       memoizedHashCode = hash;
       return hash;
@@ -1442,6 +1503,8 @@ public final class PbHeaderV3 {
         }
         dataBlock_ = java.util.Collections.emptyList();
         bitField0_ = (bitField0_ & ~0x00000001);
+        dataMessageType_ = "";
+
         return this;
       }
 
@@ -1479,6 +1542,7 @@ public final class PbHeaderV3 {
           bitField0_ = (bitField0_ & ~0x00000001);
         }
         result.dataBlock_ = dataBlock_;
+        result.dataMessageType_ = dataMessageType_;
         onBuilt();
         return result;
       }
@@ -1538,6 +1602,10 @@ public final class PbHeaderV3 {
             ensureDataBlockIsMutable();
             dataBlock_.addAll(other.dataBlock_);
           }
+          onChanged();
+        }
+        if (!other.getDataMessageType().isEmpty()) {
+          dataMessageType_ = other.dataMessageType_;
           onChanged();
         }
         this.mergeUnknownFields(other.unknownFields);
@@ -1759,6 +1827,75 @@ public final class PbHeaderV3 {
         onChanged();
         return this;
       }
+
+      private java.lang.Object dataMessageType_ = "";
+      /**
+       * <code>string data_message_type = 3;</code>
+       */
+      public java.lang.String getDataMessageType() {
+        java.lang.Object ref = dataMessageType_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          dataMessageType_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>string data_message_type = 3;</code>
+       */
+      public com.google.protobuf.ByteString
+          getDataMessageTypeBytes() {
+        java.lang.Object ref = dataMessageType_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          dataMessageType_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>string data_message_type = 3;</code>
+       */
+      public Builder setDataMessageType(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  
+        dataMessageType_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string data_message_type = 3;</code>
+       */
+      public Builder clearDataMessageType() {
+        
+        dataMessageType_ = getDefaultInstance().getDataMessageType();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string data_message_type = 3;</code>
+       */
+      public Builder setDataMessageTypeBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
+        
+        dataMessageType_ = value;
+        onChanged();
+        return this;
+      }
       @java.lang.Override
       public final Builder setUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
@@ -1834,10 +1971,11 @@ public final class PbHeaderV3 {
       "\n\022pb_header_v3.proto\022\021org.xresloader.pb\"" +
       "n\n\021xresloader_header\022\020\n\010xres_ver\030\001 \001(\t\022\020" +
       "\n\010data_ver\030\002 \001(\t\022\r\n\005count\030\003 \001(\r\022\021\n\thash_" +
-      "code\030\004 \001(\t\022\023\n\013description\030\005 \001(\t\"a\n\025xresl" +
+      "code\030\004 \001(\t\022\023\n\013description\030\005 \001(\t\"|\n\025xresl" +
       "oader_datablocks\0224\n\006header\030\001 \001(\0132$.org.x" +
       "resloader.pb.xresloader_header\022\022\n\ndata_b" +
-      "lock\030\002 \003(\014b\006proto3"
+      "lock\030\002 \003(\014\022\031\n\021data_message_type\030\003 \001(\tb\006p" +
+      "roto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
@@ -1854,7 +1992,7 @@ public final class PbHeaderV3 {
     internal_static_org_xresloader_pb_xresloader_datablocks_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_org_xresloader_pb_xresloader_datablocks_descriptor,
-        new java.lang.String[] { "Header", "DataBlock", });
+        new java.lang.String[] { "Header", "DataBlock", "DataMessageType", });
   }
 
   // @@protoc_insertion_point(outer_class_scope)

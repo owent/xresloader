@@ -35,55 +35,57 @@ public class main {
     private static DataDstImpl get_out_desc(DataDstImpl proto_desc) {
         DataDstImpl outDesc = null;
         switch (ProgramOptions.getInstance().outType) {
-            case BIN:
-                outDesc = proto_desc;
-                break;
-            case LUA:
-                outDesc = new DataDstLua();
-                outDesc = outDesc.init() ? outDesc : null;
-                break;
-            case MSGPACK:
-                outDesc = new DataDstMsgPack();
-                outDesc = outDesc.init() ? outDesc : null;
-                break;
-            case JSON:
-                outDesc = new DataDstJson();
-                outDesc = outDesc.init() ? outDesc : null;
-                break;
-            case XML:
-                outDesc = new DataDstXml();
-                outDesc = outDesc.init() ? outDesc : null;
-                break;
-            case JAVASCRIPT:
-                outDesc = new DataDstJavascript();
-                outDesc = outDesc.init() ? outDesc : null;
-                break;
-            case UECSV:
-                outDesc = new DataDstUECsv();
-                outDesc = outDesc.init() ? outDesc : null;
-                break;
-            case UEJSON:
-                outDesc = new DataDstUEJson();
-                outDesc = outDesc.init() ? outDesc : null;
-                break;
-            default:
-                ProgramOptions.getLoger().error("output type \"%s\" invalid", ProgramOptions.getInstance().outType.toString());
-                break;
+        case BIN:
+            outDesc = proto_desc;
+            break;
+        case LUA:
+            outDesc = new DataDstLua();
+            outDesc = outDesc.init() ? outDesc : null;
+            break;
+        case MSGPACK:
+            outDesc = new DataDstMsgPack();
+            outDesc = outDesc.init() ? outDesc : null;
+            break;
+        case JSON:
+            outDesc = new DataDstJson();
+            outDesc = outDesc.init() ? outDesc : null;
+            break;
+        case XML:
+            outDesc = new DataDstXml();
+            outDesc = outDesc.init() ? outDesc : null;
+            break;
+        case JAVASCRIPT:
+            outDesc = new DataDstJavascript();
+            outDesc = outDesc.init() ? outDesc : null;
+            break;
+        case UECSV:
+            outDesc = new DataDstUECsv();
+            outDesc = outDesc.init() ? outDesc : null;
+            break;
+        case UEJSON:
+            outDesc = new DataDstUEJson();
+            outDesc = outDesc.init() ? outDesc : null;
+            break;
+        default:
+            ProgramOptions.getLoger().error("output type \"%s\" invalid",
+                    ProgramOptions.getInstance().outType.toString());
+            break;
         }
 
         return outDesc;
     }
 
-    private static int print_const_data() {
+    private static int print_proto_data() {
         // 1. 协议描述文件
         DataDstImpl protoDesc = null;
         switch (ProgramOptions.getInstance().protocol) {
-            case PROTOBUF:
-                protoDesc = new DataDstPb();
-                break;
-            default:
-                ProgramOptions.getLoger().error("protocol type \"%s\" invalid", ProgramOptions.getInstance().protocol.toString());
-                break;
+        case PROTOBUF:
+            protoDesc = new DataDstPb();
+            break;
+        default:
+            ProgramOptions.getLoger().error("protocol type \"%s\" invalid",
+                    ProgramOptions.getInstance().protocol.toString());
+            break;
         }
 
         if (null == protoDesc)
@@ -93,10 +95,25 @@ public class main {
         if (null == outDesc)
             return 1;
 
-        HashMap<String, Object> enum_data = protoDesc.buildConst();
+        HashMap<String, Object> dump_data = null;
+        String dump_name = null;
 
-        if (null == enum_data) {
-            ProgramOptions.getLoger().error("protocol desc \"%s\" init and build const values failed", ProgramOptions.getInstance().protocol.toString());
+        switch (ProgramOptions.getInstance().protoDumpType) {
+        case CONST:
+            dump_data = protoDesc.buildConst();
+            dump_name = "const";
+            break;
+        case OPTIONS:
+            dump_data = protoDesc.buildOptions();
+            dump_name = "option";
+            break;
+        default:
+            break;
+        }
+
+        if (null == dump_data) {
+            ProgramOptions.getLoger().error("protocol desc \"%s\" init and build %s values failed",
+                    ProgramOptions.getInstance().protocol.toString(), dump_name);
             return 1;
         }
 
@@ -109,27 +126,30 @@ public class main {
             }
 
             OutputStream fos = new FileOutputStream(filePath, false);
-            byte[] data = outDesc.dumpConst(enum_data);
+            byte[] data = outDesc.dumpConst(dump_data);
 
             if (null != data) {
                 fos.write(data);
             } else {
-                ProgramOptions.getLoger().error("write const data to file \"%s\" failed, output type invalid.", ProgramOptions.getInstance().constPrint);
+                ProgramOptions.getLoger().error("write %s data to file \"%s\" failed, output type invalid.", dump_name,
+                        ProgramOptions.getInstance().protoDumpFile);
 
                 fos.close();
                 return 1;
             }
             fos.close();
         } catch (java.io.IOException e) {
-            ProgramOptions.getLoger().error("write data to file \"%s\" failed%s  > %s", ProgramOptions.getInstance().constPrint, endl, e.getMessage());
+            ProgramOptions.getLoger().error("write data to file \"%s\" failed%s  > %s",
+                    ProgramOptions.getInstance().protoDumpFile, endl, e.getMessage());
             return 1;
         } catch (ConvException e) {
-            ProgramOptions.getLoger().error("write data to file \"%s\" failed%s  > %s", ProgramOptions.getInstance().constPrint, endl, e.getMessage());
+            ProgramOptions.getLoger().error("write data to file \"%s\" failed%s  > %s",
+                    ProgramOptions.getInstance().protoDumpFile, endl, e.getMessage());
             return 1;
         }
 
-        ProgramOptions.getLoger().info("write const data to \"%s\" success.(charset: %s)", ProgramOptions.getInstance().constPrint,
-                SchemeConf.getInstance().getKey().getEncoding());
+        ProgramOptions.getLoger().info("write %s data to \"%s\" success.(charset: %s)", dump_name,
+                ProgramOptions.getInstance().protoDumpFile, SchemeConf.getInstance().getKey().getEncoding());
 
         return 0;
     }
@@ -145,8 +165,8 @@ public class main {
         SchemeConf.getInstance().reset();
 
         // 特殊流程，常量打印
-        if (false == ProgramOptions.getInstance().constPrint.isEmpty()) {
-            return print_const_data();
+        if (false == ProgramOptions.getInstance().protoDumpFile.isEmpty()) {
+            return print_proto_data();
         }
 
         ret = SchemeConf.getInstance().initScheme();
@@ -214,19 +234,21 @@ public class main {
             // 3. 协议描述文件
             DataDstImpl protoDesc = null;
             switch (ProgramOptions.getInstance().protocol) {
-                case PROTOBUF:
-                    protoDesc = new DataDstPb();
-                    break;
-                default:
-                    ProgramOptions.getLoger().error("protocol type \"%s\" invalid", ProgramOptions.getInstance().protocol.toString());
-                    ++failed_count;
-                    break;
+            case PROTOBUF:
+                protoDesc = new DataDstPb();
+                break;
+            default:
+                ProgramOptions.getLoger().error("protocol type \"%s\" invalid",
+                        ProgramOptions.getInstance().protocol.toString());
+                ++failed_count;
+                break;
             }
 
             if (null == protoDesc)
                 continue;
             if (false == protoDesc.init()) {
-                ProgramOptions.getLoger().error("protocol desc \"%s\" init failed", ProgramOptions.getInstance().protocol.toString());
+                ProgramOptions.getLoger().error("protocol desc \"%s\" init failed",
+                        ProgramOptions.getInstance().protocol.toString());
                 ++failed_count;
                 continue;
             }
@@ -236,8 +258,8 @@ public class main {
             if (null == outDesc)
                 continue;
 
-            ProgramOptions.getLoger().trace("convert from \"%s\" to \"%s\" started (protocol=%s) ...", sn, SchemeConf.getInstance().getOutputFile(),
-                    SchemeConf.getInstance().getProtoName());
+            ProgramOptions.getLoger().trace("convert from \"%s\" to \"%s\" started (protocol=%s) ...", sn,
+                    SchemeConf.getInstance().getOutputFile(), SchemeConf.getInstance().getProtoName());
 
             try {
                 String filePath = SchemeConf.getInstance().getOutputFileAbsPath();
@@ -256,26 +278,29 @@ public class main {
 
                 fos.close();
             } catch (ConvException e) {
-                ProgramOptions.getLoger().error("convert data failed.%s  > %s%s  > File: %s, Table: %s, Row: %d, Column: %d%s  > %s", endl,
-                        String.join(" ", args), endl, ds.getCurrentFileName(), ds.getCurrentTableName(), ds.getCurrentRowNum() + 1, ds.getLastColomnNum() + 1,
-                        endl, e.getMessage());
+                ProgramOptions.getLoger().error(
+                        "convert data failed.%s  > %s%s  > File: %s, Table: %s, Row: %d, Column: %d%s  > %s", endl,
+                        String.join(" ", args), endl, ds.getCurrentFileName(), ds.getCurrentTableName(),
+                        ds.getCurrentRowNum() + 1, ds.getLastColomnNum() + 1, endl, e.getMessage());
                 ++failed_count;
                 continue;
             } catch (java.io.IOException e) {
-                ProgramOptions.getLoger().error("write data to file \"%s\" failed%s  > %s", SchemeConf.getInstance().getOutputFile(), endl, e.getMessage());
+                ProgramOptions.getLoger().error("write data to file \"%s\" failed%s  > %s",
+                        SchemeConf.getInstance().getOutputFile(), endl, e.getMessage());
                 ++failed_count;
                 continue;
             }
 
-            ProgramOptions.getLoger().info("convert from \"%s\" to \"%s\" success.(charset: %s)", sn, SchemeConf.getInstance().getOutputFile(),
-                    SchemeConf.getInstance().getKey().getEncoding());
+            ProgramOptions.getLoger().info("convert from \"%s\" to \"%s\" success.(charset: %s)", sn,
+                    SchemeConf.getInstance().getOutputFile(), SchemeConf.getInstance().getKey().getEncoding());
         }
 
         return failed_count;
     }
 
     // 因为所有的参数除了特定名字外都是文件或目录的路径，而跨平台的路径是不能包含双引号的，所以为了简单起见，就不需要“的转义功能了
-    private static Pattern pick_args_rule = Pattern.compile("('[^']*')|(\"[^\"]*\")|(\\S+)", Pattern.MULTILINE | Pattern.CASE_INSENSITIVE);
+    private static Pattern pick_args_rule = Pattern.compile("('[^']*')|(\"[^\"]*\")|(\\S+)",
+            Pattern.MULTILINE | Pattern.CASE_INSENSITIVE);
 
     private static String[] pick_stdin_args(Scanner jin) {
         String[] ret = null;

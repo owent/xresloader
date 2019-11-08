@@ -3,14 +3,15 @@
 package org.xresloader.pb;
 
 message xresloader_header {
-  optional string xres_ver = 1;
-  optional string data_ver = 2;
-  required uint32 count = 3;
-  required string hash_code = 4;
-  optional string description = 5;
+    optional string xres_ver    = 1;
+    optional string data_ver    = 2;
+    required uint32 count       = 3;
+    required string hash_code   = 4;
+    optional string description = 5;
 }
 
 message xresloader_datablocks {
-  optional xresloader_header header = 1;
-  repeated bytes data_block = 2;
+    optional xresloader_header header            = 1;
+    repeated bytes             data_block        = 2;
+    optional                   data_message_type = 3;
 }

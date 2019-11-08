@@ -18,7 +18,6 @@ import java.util.Map;
 import com.google.protobuf.ByteString;
 import com.google.protobuf.DescriptorProtos;
 import com.google.protobuf.Descriptors;
-import com.google.protobuf.Descriptors.FieldDescriptor;
 import com.google.protobuf.Descriptors.FieldDescriptor.JavaType;
 import com.google.protobuf.DynamicMessage;
 import com.google.protobuf.UninitializedMessageException;
@@ -488,11 +487,11 @@ public class DataDstPb extends DataDstImpl {
         ArrayList<String> descriptionList = new ArrayList<String>();
 
         // 校验码
-        MessageDigest md5 = null;
+        MessageDigest sha256 = null;
         try {
-            md5 = MessageDigest.getInstance("MD5");
+            sha256 = MessageDigest.getInstance("SHA-256");
         } catch (NoSuchAlgorithmException e) {
-            ProgramOptions.getLoger().error("failed to find md5 algorithm.");
+            ProgramOptions.getLoger().error("failed to find sha-256 algorithm.");
             header.setHashCode("");
         }
 
@@ -508,8 +507,8 @@ public class DataDstPb extends DataDstImpl {
                     ++count;
                     blocks.addDataBlock(data);
 
-                    if (null != md5) {
-                        md5.update(data.toByteArray());
+                    if (null != sha256) {
+                        sha256.update(data.toByteArray());
                     }
                 }
             }
@@ -517,11 +516,13 @@ public class DataDstPb extends DataDstImpl {
             if (desc.getMessageExtension().description != null) {
                 descriptionList.add(desc.getMessageExtension().description);
             }
+
+            blocks.setDataMessageType(desc.getFullName());
         }
 
         header.setCount(count);
-        if (null != md5) {
-            header.setHashCode("md5:" + Hex.encodeHexString(md5.digest()));
+        if (null != sha256) {
+            header.setHashCode("sha256:" + Hex.encodeHexString(sha256.digest()));
         }
 
         if (!descriptionList.isEmpty()) {
@@ -531,7 +532,6 @@ public class DataDstPb extends DataDstImpl {
         // 写出
         ByteArrayOutputStream writer = new ByteArrayOutputStream();
         try {
-            PbHeaderV3.xresloader_header builtHeader = header.build();
             blocks.build().writeTo(writer);
         } catch (IOException e) {
             e.printStackTrace();
@@ -881,109 +881,6 @@ public class DataDstPb extends DataDstImpl {
         return true;
     }
 
-    @SuppressWarnings("unchecked")
-    static private void dumpConstIntoHashMap(String package_name, HashMap<String, Object> parent,
-            Descriptors.EnumDescriptor enum_desc) {
-        String enum_seg = enum_desc.getName();
-        HashMap<String, Object> enum_root;
-        if (parent.containsKey(enum_seg)) {
-            Object node = parent.get(enum_seg);
-            if (node instanceof HashMap) {
-                enum_root = (HashMap<String, Object>) node;
-            } else {
-                ProgramOptions.getLoger().error("enum name %s.%s conflict.", package_name, enum_seg);
-                return;
-            }
-        } else {
-            enum_root = new HashMap<String, Object>();
-            parent.put(enum_seg, enum_root);
-        }
-
-        // 写出所有常量值
-        for (Descriptors.EnumValueDescriptor enum_val : enum_desc.getValues()) {
-            enum_root.put(enum_val.getName(), enum_val.getNumber());
-        }
-    }
-
-    @SuppressWarnings("unchecked")
-    static private void dumpConstIntoHashMap(String package_name, HashMap<String, Object> parent,
-            Descriptors.OneofDescriptor oneof_desc) {
-        String oneof_seg = oneof_desc.getName();
-        HashMap<String, Object> oneof_root;
-        if (parent.containsKey(oneof_seg)) {
-            Object node = parent.get(oneof_seg);
-            if (node instanceof HashMap) {
-                oneof_root = (HashMap<String, Object>) node;
-            } else {
-                ProgramOptions.getLoger().error("oneof name %s.%s conflict.", package_name, oneof_seg);
-                return;
-            }
-        } else {
-            oneof_root = new HashMap<String, Object>();
-            parent.put(oneof_seg, oneof_root);
-        }
-
-        // 写出所有常量值
-        for (Descriptors.FieldDescriptor oneof_option : oneof_desc.getFields()) {
-            String field_name = oneof_option.getJsonName();
-            if (field_name.length() > 0) {
-                field_name = Character.toUpperCase(field_name.charAt(0)) + field_name.substring(1);
-            }
-            field_name = String.format("k%s", field_name);
-            oneof_root.put(field_name, oneof_option.getNumber());
-        }
-    }
-
-    @SuppressWarnings("unchecked")
-    static private void dumpConstIntoHashMap(String package_name, HashMap<String, Object> parent,
-            Descriptors.Descriptor msg_desc) {
-        String msg_seg = msg_desc.getName();
-        HashMap<String, Object> msg_root = null;
-        Object msg_node = parent.getOrDefault(msg_seg, null);
-        String msg_full_name = String.format("%s.%s", package_name, msg_seg);
-        if (msg_node != null) {
-            if (msg_node instanceof HashMap) {
-                msg_root = (HashMap<String, Object>) msg_node;
-            } else {
-                ProgramOptions.getLoger().error("message name %s conflict.", msg_full_name);
-                return;
-            }
-        }
-
-        // enum in message.
-        for (Descriptors.EnumDescriptor enum_desc : msg_desc.getEnumTypes()) {
-            if (null == msg_root) {
-                msg_root = new HashMap<String, Object>();
-                parent.put(msg_seg, msg_root);
-            }
-
-            dumpConstIntoHashMap(msg_full_name, msg_root, enum_desc);
-        }
-
-        // if has oneof in message, dump all fields's number.
-        for (Descriptors.OneofDescriptor oneof_desc : msg_desc.getOneofs()) {
-            if (oneof_desc.getFieldCount() <= 0) {
-                continue;
-            }
-            if (null == msg_root) {
-                msg_root = new HashMap<String, Object>();
-                parent.put(msg_seg, msg_root);
-            }
-
-            dumpConstIntoHashMap(msg_full_name, msg_root, oneof_desc);
-        }
-
-        // nested message
-        for (Descriptors.Descriptor sub_msg_desc : msg_desc.getNestedTypes()) {
-            if (null == msg_root) {
-                msg_root = new HashMap<String, Object>();
-                parent.put(msg_seg, msg_root);
-            }
-
-            dumpConstIntoHashMap(msg_full_name, msg_root, sub_msg_desc);
-        }
-    }
-
     /**
      * 生成常量数据
      *
@@ -1033,11 +930,11 @@ public class DataDstPb extends DataDstImpl {
 
             // dump oneof and enum in message
             for (Descriptors.Descriptor msg_desc : fdp.getValue().getMessageTypes()) {
-                dumpConstIntoHashMap(fdp.getValue().getPackage(), fd_root, msg_desc);
+                DataDstPbHelper.dumpConstIntoHashMap(fdp.getValue().getPackage(), fd_root, msg_desc);
             }
 
             for (Descriptors.EnumDescriptor enum_desc : fdp.getValue().getEnumTypes()) {
-                dumpConstIntoHashMap(fdp.getValue().getPackage(), fd_root, enum_desc);
+                DataDstPbHelper.dumpConstIntoHashMap(fdp.getValue().getPackage(), fd_root, enum_desc);
             }
         }
 
@@ -1051,7 +948,7 @@ public class DataDstPb extends DataDstImpl {
      */
     public final byte[] dumpConst(HashMap<String, Object> data) throws ConvException, IOException {
         // protobuf的常量输出直接复制描述文件就好了
-        if (ProgramOptions.getInstance().protocolFile.equals(ProgramOptions.getInstance().constPrint)) {
+        if (ProgramOptions.getInstance().protocolFile.equals(ProgramOptions.getInstance().protoDumpFile)) {
             return null;
         }
 
@@ -1069,5 +966,34 @@ public class DataDstPb extends DataDstImpl {
         }
 
         return null;
+    }
+
+    /**
+     * 生成选项数据
+     *
+     * @return 选项数据,不支持的时候返回空
+     */
+    public HashMap<String, Object> buildOptions() {
+        if (false == load_pb_file(ProgramOptions.getInstance().protocolFile, true, true)) {
+            return null;
+        }
+
+        if (null == pbs.enums) {
+            return null;
+        }
+
+        HashMap<String, Object> ret = new HashMap<String, Object>();
+        LinkedList<Object> files = new LinkedList<Object>();
+
+        for (HashMap.Entry<String, Descriptors.FileDescriptor> fdp : pbs.file_descs.entrySet()) {
+            if (fdp.getValue().getPackage().equals("google.protobuf")) {
+                continue;
+            }
+            DataDstPbHelper.dumpOptionsIntoHashMap(files, fdp.getValue());
+        }
+
+        ret.put("files", files);
+
+        return ret;
     }
 }

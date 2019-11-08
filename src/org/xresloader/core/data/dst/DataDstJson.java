@@ -33,6 +33,7 @@ public class DataDstJson extends DataDstJava {
 
         wrapper.put(data_obj.header);
         wrapper.put(data_obj.body);
+        wrapper.put(data_obj.data_message_type);
 
         String encoded = wrapper.toString(ProgramOptions.getInstance().prettyIndent);
 

@@ -81,7 +81,7 @@ public class DataDstPb extends DataDstImpl {
 
     private Descriptors.Descriptor currentMsgDesc = null;
     static private com.google.protobuf.ExtensionRegistryLite pb_extensions = null;
-    static private PbInfoSet pbs = new PbInfoSet();
+    static private PbInfoSet cachePbs = new PbInfoSet();
 
     static <T> void append_alias_list(String short_name, String full_name, HashMap<String, PbAliasNode<T>> hashmap,
             T ele) {
@@ -140,25 +140,29 @@ public class DataDstPb extends DataDstImpl {
         return pb_extensions;
     }
 
-    static void load_pb_message(DescriptorProtos.DescriptorProto mdp, String package_name,
+    static void load_pb_message(PbInfoSet pbs, DescriptorProtos.DescriptorProto mdp, String package_name,
             HashMap<String, PbAliasNode<DescriptorProtos.DescriptorProto>> hashmap) {
         String full_name = String.format("%s.%s", package_name, mdp.getName());
         append_alias_list(mdp.getName(), full_name, pbs.messages, mdp);
         for (DescriptorProtos.DescriptorProto sub_mdp : mdp.getNestedTypeList()) {
-            load_pb_message(sub_mdp, full_name, hashmap);
+            load_pb_message(pbs, sub_mdp, full_name, hashmap);
         }
     }
 
-    static boolean load_pb_file(String file_path, boolean build_msg, boolean allow_unknown_dependencies) {
+    static boolean load_pb_file(PbInfoSet pbs, String file_path, boolean build_msg, boolean allow_unknown_dependencies,
+            com.google.protobuf.ExtensionRegistryLite exts) {
         if (pbs.fileNames.contains(file_path)) {
             return true;
         }
 
         try {
+            if (exts == null) {
+                exts = get_extension_registry();
+            }
+
             // 文件描述集读取
             InputStream fis = new FileInputStream(file_path);
-            DescriptorProtos.FileDescriptorSet fds = DescriptorProtos.FileDescriptorSet.parseFrom(fis,
-                    get_extension_registry());
+            DescriptorProtos.FileDescriptorSet fds = DescriptorProtos.FileDescriptorSet.parseFrom(fis, exts);
             pbs.fileNames.add(file_path);
             // 保存文件名和文件描述Proto的关系
             for (DescriptorProtos.FileDescriptorProto fdp : fds.getFileList()) {
@@ -174,7 +178,7 @@ public class DataDstPb extends DataDstImpl {
                     }
 
                     for (DescriptorProtos.DescriptorProto mdp : fdp.getMessageTypeList()) {
-                        load_pb_message(mdp, fdp.getPackage(), pbs.messages);
+                        load_pb_message(pbs, mdp, fdp.getPackage(), pbs.messages);
                     }
                 }
             }
@@ -182,7 +186,7 @@ public class DataDstPb extends DataDstImpl {
             // 初始化
             if (build_msg) {
                 for (HashMap.Entry<String, DescriptorProtos.FileDescriptorProto> fme : pbs.files.entrySet()) {
-                    init_pb_files(fme.getKey(), allow_unknown_dependencies);
+                    init_pb_files(pbs, fme.getKey(), allow_unknown_dependencies);
                 }
             }
 
@@ -200,11 +204,11 @@ public class DataDstPb extends DataDstImpl {
         return true;
     }
 
-    static Descriptors.Descriptor get_message_proto(String proto_name) {
+    static Descriptors.Descriptor get_message_proto(PbInfoSet pbs, String proto_name) {
         return get_alias_list_element(proto_name, pbs.message_descs, "protocol message");
     }
 
-    static Descriptors.FileDescriptor init_pb_files(String name, boolean allow_unknown_dependencies) {
+    static Descriptors.FileDescriptor init_pb_files(PbInfoSet pbs, String name, boolean allow_unknown_dependencies) {
         Descriptors.FileDescriptor ret = pbs.file_descs.getOrDefault(name, null);
         if (null != ret) {
             return ret;
@@ -231,7 +235,7 @@ public class DataDstPb extends DataDstImpl {
         deps.ensureCapacity(fdp.getDependencyCount());
         failed_deps.ensureCapacity(fdp.getDependencyCount());
         for (int i = 0; i < fdp.getDependencyCount(); ++i) {
-            Descriptors.FileDescriptor dep = init_pb_files(fdp.getDependency(i), allow_unknown_dependencies);
+            Descriptors.FileDescriptor dep = init_pb_files(pbs, fdp.getDependency(i), allow_unknown_dependencies);
             if (null == dep) {
                 if (allow_unknown_dependencies) {
                     failed_deps.add(fdp.getDependency(i));
@@ -335,14 +339,14 @@ public class DataDstPb extends DataDstImpl {
                     continue;
                 } else {
                     // 协议验证器
-                    DataVerifyImpl vfy = pbs.identifiers.getOrDefault(rule, null);
+                    DataVerifyImpl vfy = cachePbs.identifiers.getOrDefault(rule, null);
                     if (null == vfy) {
-                        DescriptorProtos.EnumDescriptorProto enum_desc = get_alias_list_element(rule, pbs.enums,
+                        DescriptorProtos.EnumDescriptorProto enum_desc = get_alias_list_element(rule, cachePbs.enums,
                                 "enum type");
                         if (enum_desc != null) {
                             vfy = new DataVerifyPbEnum(enum_desc);
                         } else {
-                            DescriptorProtos.DescriptorProto msg_desc = get_alias_list_element(rule, pbs.messages,
+                            DescriptorProtos.DescriptorProto msg_desc = get_alias_list_element(rule, cachePbs.messages,
                                     "message type");
                             if (msg_desc != null) {
                                 vfy = new DataVerifyPbMsg(msg_desc);
@@ -350,7 +354,7 @@ public class DataDstPb extends DataDstImpl {
                         }
 
                         if (null != vfy) {
-                            pbs.identifiers.put(rule, vfy);
+                            cachePbs.identifiers.put(rule, vfy);
                         } else {
                             ProgramOptions.getLoger().error("enum or message \"%s\" not found", rule);
                         }
@@ -371,11 +375,11 @@ public class DataDstPb extends DataDstImpl {
 
     @Override
     public boolean init() {
-        if (false == load_pb_file(ProgramOptions.getInstance().protocolFile, true, false)) {
+        if (false == load_pb_file(cachePbs, ProgramOptions.getInstance().protocolFile, true, false, null)) {
             return false;
         }
 
-        currentMsgDesc = get_message_proto(SchemeConf.getInstance().getProtoName());
+        currentMsgDesc = get_message_proto(cachePbs, SchemeConf.getInstance().getProtoName());
         return null != currentMsgDesc;
     }
 
@@ -386,7 +390,7 @@ public class DataDstPb extends DataDstImpl {
         return "protobuf";
     }
 
-    static private void buildDataDstDescriptorMessage(Descriptors.Descriptor pbDesc,
+    static private void buildDataDstDescriptorMessage(PbInfoSet pbs, Descriptors.Descriptor pbDesc,
             DataDstMessageDescriptor innerDesc) {
         if (null == pbDesc || null == innerDesc) {
             return;
@@ -399,7 +403,7 @@ public class DataDstPb extends DataDstImpl {
                 fieldPbDesc = field.getMessageType();
             }
             DataDstFieldDescriptor innerField = new DataDstFieldDescriptor(
-                    mutableDataDstDescriptor(fieldPbDesc, pbTypeToInnerType(field.getType())), field.getNumber(),
+                    mutableDataDstDescriptor(pbs, fieldPbDesc, pbTypeToInnerType(field.getType())), field.getNumber(),
                     field.getName(), field.isRepeated());
             innerDesc.fields.put(field.getName(), innerField);
 
@@ -407,7 +411,7 @@ public class DataDstPb extends DataDstImpl {
         }
     }
 
-    static private DataDstMessageDescriptor mutableDataDstDescriptor(Descriptors.Descriptor pbDesc,
+    static private DataDstMessageDescriptor mutableDataDstDescriptor(PbInfoSet pbs, Descriptors.Descriptor pbDesc,
             DataDstWriterNode.JAVA_TYPE type) {
         String key = null;
         if (null == pbDesc) {
@@ -426,17 +430,17 @@ public class DataDstPb extends DataDstImpl {
             ret = new DataDstMessageDescriptor(type, pbDesc.getFile().getPackage(), pbDesc.getName());
         }
         pbs.dataDstDescs.put(key, ret);
-        buildDataDstDescriptorMessage(pbDesc, ret);
+        buildDataDstDescriptorMessage(pbs, pbDesc, ret);
         return ret;
     }
 
-    static private DataDstWriterNode createMessageWriterNode(Descriptors.Descriptor pbDesc,
+    static private DataDstWriterNode createMessageWriterNode(PbInfoSet pbs, Descriptors.Descriptor pbDesc,
             DataDstWriterNode.JAVA_TYPE type) {
         if (null == pbDesc) {
-            return DataDstWriterNode.create(null, mutableDataDstDescriptor(pbDesc, type));
+            return DataDstWriterNode.create(null, mutableDataDstDescriptor(pbs, pbDesc, type));
         }
 
-        DataDstWriterNode ret = DataDstWriterNode.create(pbDesc, mutableDataDstDescriptor(pbDesc, type));
+        DataDstWriterNode ret = DataDstWriterNode.create(pbDesc, mutableDataDstDescriptor(pbs, pbDesc, type));
 
         // extensions
         if (pbDesc.getOptions().hasExtension(Xresloader.msgDescription)) {
@@ -468,7 +472,7 @@ public class DataDstPb extends DataDstImpl {
 
     @Override
     public final DataDstWriterNode compile() throws ConvException {
-        DataDstWriterNode ret = createMessageWriterNode(currentMsgDesc, DataDstWriterNode.JAVA_TYPE.MESSAGE);
+        DataDstWriterNode ret = createMessageWriterNode(cachePbs, currentMsgDesc, DataDstWriterNode.JAVA_TYPE.MESSAGE);
         if (test(ret, new LinkedList<String>())) {
             return ret;
         }
@@ -602,7 +606,7 @@ public class DataDstPb extends DataDstImpl {
 
                     name_list.addLast("");
                     for (;; ++count) {
-                        DataDstWriterNode c = createMessageWriterNode(fd.getMessageType(),
+                        DataDstWriterNode c = createMessageWriterNode(cachePbs, fd.getMessageType(),
                                 DataDstWriterNode.JAVA_TYPE.MESSAGE);
                         name_list.removeLast();
                         name_list.addLast(DataDstWriterNode.makeNodeName(fd.getName(), count));
@@ -615,7 +619,7 @@ public class DataDstPb extends DataDstImpl {
                     }
                     name_list.removeLast();
                 } else {
-                    DataDstWriterNode c = createMessageWriterNode(fd.getMessageType(),
+                    DataDstWriterNode c = createMessageWriterNode(cachePbs, fd.getMessageType(),
                             DataDstWriterNode.JAVA_TYPE.MESSAGE);
                     name_list.addLast(DataDstWriterNode.makeNodeName(fd.getName()));
                     if (test(c, name_list)) {
@@ -637,7 +641,7 @@ public class DataDstPb extends DataDstImpl {
                         String real_name = DataDstWriterNode.makeChildPath(prefix, fd.getName(), count);
                         IdentifyDescriptor col = data_src.getColumnByName(real_name);
                         if (null != col) {
-                            DataDstWriterNode c = createMessageWriterNode(null, inner_type);
+                            DataDstWriterNode c = createMessageWriterNode(cachePbs, null, inner_type);
                             child = node.addChild(fd.getName(), c, fd, true, false);
                             setup_node_identify(c, child, col, fd);
                             ret = true;
@@ -650,12 +654,12 @@ public class DataDstPb extends DataDstImpl {
                     String real_name = DataDstWriterNode.makeChildPath(prefix, fd.getName());
                     IdentifyDescriptor col = data_src.getColumnByName(real_name);
                     if (null != col) {
-                        DataDstWriterNode c = createMessageWriterNode(null, inner_type);
+                        DataDstWriterNode c = createMessageWriterNode(cachePbs, null, inner_type);
                         child = node.addChild(fd.getName(), c, fd, false, false);
                         setup_node_identify(c, child, col, fd);
                         ret = true;
                     } else if (fd.isRequired()) {
-                        DataDstWriterNode c = createMessageWriterNode(null, inner_type);
+                        DataDstWriterNode c = createMessageWriterNode(cachePbs, null, inner_type);
                         // required 字段要dump默认数据
                         child = node.addChild(fd.getName(), c, fd, false, true);
                     }
@@ -669,7 +673,7 @@ public class DataDstPb extends DataDstImpl {
     }
 
     private ByteString convData(DataDstWriterNode node) throws ConvException {
-        Descriptors.Descriptor msg_desc = (Descriptors.Descriptor) node.privateData;
+        // Descriptors.Descriptor msg_desc = (Descriptors.Descriptor) node.privateData;
 
         DynamicMessage.Builder root = DynamicMessage.newBuilder(currentMsgDesc);
         boolean valid_data = dumpMessage(root, node);
@@ -888,17 +892,21 @@ public class DataDstPb extends DataDstImpl {
      */
     @SuppressWarnings("unchecked")
     public HashMap<String, Object> buildConst() {
-        if (false == load_pb_file(ProgramOptions.getInstance().protocolFile, true, true)) {
+        if (false == load_pb_file(cachePbs, ProgramOptions.getInstance().protocolFile, true, true, null)) {
             return null;
         }
 
-        if (null == pbs.enums) {
+        if (null == cachePbs.enums) {
             return null;
         }
 
         HashMap<String, Object> ret = new HashMap<String, Object>();
 
-        for (HashMap.Entry<String, Descriptors.FileDescriptor> fdp : pbs.file_descs.entrySet()) {
+        for (HashMap.Entry<String, Descriptors.FileDescriptor> fdp : cachePbs.file_descs.entrySet()) {
+            if (fdp.getValue().getPackage().equals("google.protobuf")) {
+                continue;
+            }
+
             String[] names = null;
             HashMap<String, Object> fd_root = ret;
 
@@ -974,22 +982,33 @@ public class DataDstPb extends DataDstImpl {
      * @return 选项数据,不支持的时候返回空
      */
     public HashMap<String, Object> buildOptions() {
-        if (false == load_pb_file(ProgramOptions.getInstance().protocolFile, true, true)) {
+        if (false == load_pb_file(cachePbs, ProgramOptions.getInstance().protocolFile, true, true, null)) {
             return null;
         }
 
-        if (null == pbs.enums) {
-            return null;
+        com.google.protobuf.ExtensionRegistry custom_extensions = com.google.protobuf.ExtensionRegistry.newInstance();
+
+        Xresloader.registerAllExtensions(custom_extensions);
+        XresloaderUe.registerAllExtensions(custom_extensions);
+
+        for (HashMap.Entry<String, Descriptors.FileDescriptor> fdp : cachePbs.file_descs.entrySet()) {
+            for (Descriptors.FieldDescriptor sub_desc : fdp.getValue().getExtensions()) {
+                if (sub_desc.getJavaType() == Descriptors.FieldDescriptor.JavaType.MESSAGE) {
+                    custom_extensions.add(sub_desc, DynamicMessage.newBuilder(sub_desc.getMessageType()).build());
+                } else {
+                    custom_extensions.add(sub_desc);
+                }
+            }
         }
 
         HashMap<String, Object> ret = new HashMap<String, Object>();
         LinkedList<Object> files = new LinkedList<Object>();
 
-        for (HashMap.Entry<String, Descriptors.FileDescriptor> fdp : pbs.file_descs.entrySet()) {
+        for (HashMap.Entry<String, Descriptors.FileDescriptor> fdp : cachePbs.file_descs.entrySet()) {
             if (fdp.getValue().getPackage().equals("google.protobuf")) {
                 continue;
             }
-            DataDstPbHelper.dumpOptionsIntoHashMap(files, fdp.getValue());
+            DataDstPbHelper.dumpOptionsIntoHashMap(files, fdp.getValue(), custom_extensions);
         }
 
         ret.put("files", files);

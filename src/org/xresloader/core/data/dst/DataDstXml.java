@@ -2,6 +2,7 @@ package org.xresloader.core.data.dst;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -145,8 +146,18 @@ public class DataDstXml extends DataDstJava {
         // Hashmap
         if (data instanceof Map) {
             Map<String, Object> mp = (Map<String, Object>) data;
+            ArrayList<Map.Entry<String, Object>> sorted_array = new ArrayList<Map.Entry<String, Object>>();
+            sorted_array.ensureCapacity(mp.size());
+            sorted_array.addAll(mp.entrySet());
+            sorted_array.sort((l, r) -> {
+                if (l.getValue() instanceof Integer && r.getValue() instanceof Integer) {
+                    return ((Integer) l.getValue()).compareTo((Integer) r.getValue());
+                }
 
-            for (Map.Entry<String, Object> item : mp.entrySet()) {
+                return 0;
+            });
+
+            for (Map.Entry<String, Object> item : sorted_array) {
                 // 数据会多一层，这里去除
                 if (item.getValue() instanceof List) {
                     writeData(sb, item.getValue(), item.getKey());

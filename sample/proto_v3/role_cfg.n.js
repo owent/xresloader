@@ -106,8 +106,8 @@ exports.role_cfg = [
         id : 501
       }
     },
-    cost_value : 99999,
-    id : 10005
+    id : 10005,
+    cost_value : 99999
   },
   {
     int_as_string : "6",

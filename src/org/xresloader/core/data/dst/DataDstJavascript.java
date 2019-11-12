@@ -2,6 +2,7 @@ package org.xresloader.core.data.dst;
 
 import java.io.IOException;
 import java.nio.charset.Charset;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -264,10 +265,21 @@ public class DataDstJavascript extends DataDstJava {
         // Hashmap
         if (data instanceof Map) {
             Map<String, Object> mp = (Map<String, Object>) data;
+            ArrayList<Map.Entry<String, Object>> sorted_array = new ArrayList<Map.Entry<String, Object>>();
+            sorted_array.ensureCapacity(mp.size());
+            sorted_array.addAll(mp.entrySet());
+            sorted_array.sort((l, r) -> {
+                if (l.getValue() instanceof Integer && r.getValue() instanceof Integer) {
+                    return ((Integer) l.getValue()).compareTo((Integer) r.getValue());
+                }
+
+                return 0;
+            });
+
             sb.append("{");
 
             boolean is_first = true;
-            for (Map.Entry<String, Object> item : mp.entrySet()) {
+            for (Map.Entry<String, Object> item : sorted_array) {
                 if (is_first) {
                     sb.append(endl);
                 } else {

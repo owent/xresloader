@@ -2,6 +2,7 @@ package org.xresloader.core.data.dst;
 
 import java.io.IOException;
 import java.nio.charset.Charset;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -171,7 +172,17 @@ public class DataDstLua extends DataDstJava {
             Map<String, Object> mp = (Map<String, Object>) data;
             sb.append("{").append(endl);
 
-            for (Map.Entry<String, Object> item : mp.entrySet()) {
+            ArrayList<Map.Entry<String, Object>> sorted_array = new ArrayList<Map.Entry<String, Object>>();
+            sorted_array.ensureCapacity(mp.size());
+            sorted_array.addAll(mp.entrySet());
+            sorted_array.sort((l, r) -> {
+                if (l.getValue() instanceof Integer && r.getValue() instanceof Integer) {
+                    return ((Integer) l.getValue()).compareTo((Integer) r.getValue());
+                }
+
+                return 0;
+            });
+            for (Map.Entry<String, Object> item : sorted_array) {
                 writeIdent(sb, ident_num + 1);
                 sb.append(item.getKey()).append(" = ");
 

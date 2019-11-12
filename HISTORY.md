@@ -11,6 +11,8 @@
 5. hash算法更替为SHA-256
 6. 协议外层包体增加 ```data_message_type``` 用于方便使用者通过反射机制查找 ```data_block``` 对应的数据结构
 7. 增加 ```-i/--option-print <文件名>``` 用于输出协议配置中的选项信息
+8. 对内部的 ```Map<string, int32>``` 类型输出排序，有利于 ```-c/--const-print <文件名>``` 时有序输出枚举值
+9. 移除 ```-c/--const-print <文件名>``` 时导出的 ```google.protobuf``` 的内置枚举类型值。
 
 2.5.0
 ------

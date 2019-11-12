@@ -217,7 +217,7 @@ public class main {
             sn = descBuilder.toString();
 
             // 2. 数据工作簿
-            Class ds_clazz = DataSrcExcel.class;
+            Class<?> ds_clazz = DataSrcExcel.class;
             DataSrcImpl ds = DataSrcImpl.create(ds_clazz);
             if (null == ds) {
                 ProgramOptions.getLoger().error("create data source class \"%s\" failed", ds_clazz.getName());

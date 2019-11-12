@@ -46,7 +46,6 @@ public class DataDstUEJson extends DataDstUEBase {
         return ret;
     }
 
-    @SuppressWarnings("unchecked")
     @Override
     protected byte[] buildForUEOnFinal(Object buildObj) {
         // 带编码的输出
@@ -57,14 +56,12 @@ public class DataDstUEJson extends DataDstUEBase {
         return ((UEBuildObject) buildObj).ja.toString(4).getBytes(Charset.forName(encoding));
     }
 
-    @SuppressWarnings("unchecked")
     @Override
     protected void buildForUEOnPrintHeader(Object buildObj, ArrayList<Object> rowData, UEDataRowRule rule,
             UECodeInfo codeInfo) throws IOException {
         ((UEBuildObject) buildObj).header = rowData;
     }
 
-    @SuppressWarnings("unchecked")
     @Override
     protected void buildForUEOnPrintRecord(Object buildObj, ArrayList<Object> rowData, UEDataRowRule rule,
             UECodeInfo codeInfo) throws IOException {

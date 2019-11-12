@@ -5,7 +5,6 @@ import org.xresloader.core.data.err.ConvException;
 import org.xresloader.core.data.src.DataContainer;
 import org.xresloader.core.data.src.DataSrcImpl;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
-import org.apache.poi.ss.extractor.ExcelExtractor;
 import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
@@ -76,17 +75,20 @@ public class ExcelEngine {
         try {
             is = new FileInputStream(file_path);
 
-            ExcelExtractor extractor = null;
             // 类型枚举，以后能支持 ods等非微软格式？
             if (file_path.endsWith(".xls")) {
                 ret = new HSSFWorkbook(is);
-                extractor = new org.apache.poi.hssf.extractor.ExcelExtractor((HSSFWorkbook) ret);
+                org.apache.poi.hssf.extractor.ExcelExtractor extractor = new org.apache.poi.hssf.extractor.ExcelExtractor(
+                        (HSSFWorkbook) ret);
+                extractor.setFormulasNotResults(false);
+                extractor.close();
             } else {
                 ret = new XSSFWorkbook(is);
-                extractor = new org.apache.poi.xssf.extractor.XSSFExcelExtractor((XSSFWorkbook) ret);
+                org.apache.poi.xssf.extractor.XSSFExcelExtractor extractor = new org.apache.poi.xssf.extractor.XSSFExcelExtractor(
+                        (XSSFWorkbook) ret);
+                extractor.setFormulasNotResults(false);
+                extractor.close();
             }
-
-            extractor.setFormulasNotResults(false);
         } catch (java.io.IOException e) {
             ProgramOptions.getLoger().error("%s", e.getMessage());
         }

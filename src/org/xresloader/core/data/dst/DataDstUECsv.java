@@ -60,7 +60,6 @@ public class DataDstUECsv extends DataDstUEBase {
         return ret;
     }
 
-    @SuppressWarnings("unchecked")
     @Override
     protected byte[] buildForUEOnFinal(Object buildObj) {
         // 带编码的输出
@@ -71,7 +70,6 @@ public class DataDstUECsv extends DataDstUEBase {
         return ((UEBuildObject) buildObj).sb.toString().getBytes(Charset.forName(encoding));
     }
 
-    @SuppressWarnings("unchecked")
     @Override
     protected void buildForUEOnPrintHeader(Object buildObj, ArrayList<Object> rowData, UEDataRowRule rule,
             UECodeInfo codeInfo) throws IOException {
@@ -105,7 +103,6 @@ public class DataDstUECsv extends DataDstUEBase {
         }
     }
 
-    @SuppressWarnings("unchecked")
     @Override
     protected void buildForUEOnPrintRecord(Object buildObj, ArrayList<Object> rowData, UEDataRowRule rule,
             UECodeInfo codeInfo) throws IOException {
@@ -223,7 +220,6 @@ public class DataDstUECsv extends DataDstUEBase {
         return sb.toString();
     }
 
-    @SuppressWarnings("unchecked")
     @Override
     final protected Object pickValueField(Object buildObj, DataDstWriterNodeWrapper desc) throws ConvException {
         if (!isRecursiveEnabled()) {

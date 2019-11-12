@@ -15,16 +15,6 @@ import org.xresloader.core.scheme.SchemeConf;
  * Created by owentou on 2015/04/29.
  */
 public abstract class DataDstJava extends DataDstImpl {
-    private class DataEntry {
-        public boolean valid = false;
-        public Object value = null;
-
-        public <T> void set(DataContainer<T> v) {
-            valid = v.valid;
-            value = v.value;
-        }
-    }
-
     /**
      * @return 协议处理器名字
      */

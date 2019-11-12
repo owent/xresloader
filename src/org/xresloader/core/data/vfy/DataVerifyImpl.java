@@ -1,7 +1,5 @@
 package org.xresloader.core.data.vfy;
 
-import org.xresloader.core.ProgramOptions;
-
 import java.util.HashMap;
 import java.util.HashSet;
 
@@ -26,7 +24,7 @@ public abstract class DataVerifyImpl {
             return res.success;
         }
 
-        if (all_numbers.contains((Long)number)) {
+        if (all_numbers.contains((Long) number)) {
             res.success = true;
             res.value = number;
             return res.success;
@@ -44,11 +42,9 @@ public abstract class DataVerifyImpl {
         }
 
         boolean is_int = true;
-        for(int i = 0; is_int && i < enum_name.length(); ++ i) {
+        for (int i = 0; is_int && i < enum_name.length(); ++i) {
             char c = enum_name.charAt(i);
-            if ((c < '0' || c > '9') &&
-                    '.' != c &&
-                    '-' != c) {
+            if ((c < '0' || c > '9') && '.' != c && '-' != c) {
                 is_int = false;
             }
         }

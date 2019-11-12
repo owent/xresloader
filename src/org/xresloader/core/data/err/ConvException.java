@@ -5,6 +5,11 @@ package org.xresloader.core.data.err;
  */
 public class ConvException extends Exception {
     /**
+     *
+     */
+    private static final long serialVersionUID = 4628238600976179989L;
+
+    /**
      * Constructs an {@code IOException} with {@code null} as its error detail
      * message.
      */

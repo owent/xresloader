@@ -1,53 +1,23 @@
 package org.xresloader.core.data.dst;
 
-import static com.google.protobuf.Descriptors.FieldDescriptor.JavaType.MESSAGE;
-import java.io.ByteArrayOutputStream;
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
-import java.nio.charset.Charset;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
 import com.google.protobuf.ByteString;
-import com.google.protobuf.DescriptorProtos;
 import com.google.protobuf.Descriptors;
 import com.google.protobuf.Descriptors.EnumValueDescriptor;
 import com.google.protobuf.Descriptors.FieldDescriptor;
-import com.google.protobuf.Descriptors.FieldDescriptor.JavaType;
 import com.google.protobuf.ExtensionRegistry.ExtensionInfo;
-import com.google.protobuf.DynamicMessage;
-import com.google.protobuf.GeneratedMessageV3;
 import com.google.protobuf.InvalidProtocolBufferException;
 import com.google.protobuf.Message;
-import com.google.protobuf.UninitializedMessageException;
-import org.apache.commons.codec.binary.Hex;
-import org.xresloader.Xresloader;
+
 import org.xresloader.core.ProgramOptions;
-import org.xresloader.core.data.dst.DataDstWriterNode.DataDstChildrenNode;
-import org.xresloader.core.data.dst.DataDstWriterNode.DataDstFieldDescriptor;
-import org.xresloader.core.data.dst.DataDstWriterNode.DataDstMessageDescriptor;
-import org.xresloader.core.data.err.ConvException;
-import org.xresloader.core.data.src.DataContainer;
-import org.xresloader.core.data.src.DataSrcImpl;
-import org.xresloader.core.data.vfy.DataVerifyImpl;
-import org.xresloader.core.data.vfy.DataVerifyIntRange;
-import org.xresloader.core.data.vfy.DataVerifyPbEnum;
-import org.xresloader.core.data.vfy.DataVerifyPbMsg;
-import org.xresloader.core.engine.IdentifyDescriptor;
-import org.xresloader.core.scheme.SchemeConf;
-import org.xresloader.pb.PbHeaderV3;
-import org.xresloader.ue.XresloaderUe;
 
 /**
  * Created by owent on 2019/11/08.

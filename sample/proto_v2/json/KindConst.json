@@ -1,5 +1,17 @@
 [
     {
+        "Value": 0,
+        "Name": "cost_type.EN_CT_UNKNOWN"
+    },
+    {
+        "Value": 10001,
+        "Name": "cost_type.EN_CT_MONEY"
+    },
+    {
+        "Value": 10101,
+        "Name": "cost_type.EN_CT_DIAMOND"
+    },
+    {
         "Value": 10,
         "Name": "game_const_config.EN_GCC_FORMULAR_TYPE_MASK"
     },
@@ -38,17 +50,5 @@
     {
         "Value": 9999999,
         "Name": "game_const_config.EN_GCC_RESOURCE_MAX_LIMIT"
-    },
-    {
-        "Value": 0,
-        "Name": "cost_type.EN_CT_UNKNOWN"
-    },
-    {
-        "Value": 10001,
-        "Name": "cost_type.EN_CT_MONEY"
-    },
-    {
-        "Value": 10101,
-        "Name": "cost_type.EN_CT_DIAMOND"
     }
 ]

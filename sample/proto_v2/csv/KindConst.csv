@@ -1,4 +1,7 @@
 Name,Value
+cost_type.EN_CT_UNKNOWN,0
+cost_type.EN_CT_MONEY,10001
+cost_type.EN_CT_DIAMOND,10101
 game_const_config.EN_GCC_FORMULAR_TYPE_MASK,10
 game_const_config.EN_GCC_RANDOM_RANGE_UNIT,10
 game_const_config.EN_GCC_SOLDIER_TYPE_MASK,100
@@ -9,6 +12,3 @@ game_const_config.EN_GCC_ACTIVITY_TYPE_MASK,1000
 game_const_config.EN_GCC_SCREEN_WIDTH,1136
 game_const_config.EN_GCC_PERCENT_BASE,10000
 game_const_config.EN_GCC_RESOURCE_MAX_LIMIT,9999999
-cost_type.EN_CT_UNKNOWN,0
-cost_type.EN_CT_MONEY,10001
-cost_type.EN_CT_DIAMOND,10101

@@ -1,6 +1,14 @@
 更新记录
 ==========
 
+2.6.1
+------
+
+1. 对 ```-i/--option-print <文件名>``` 和 ```-c/--const-print <文件名>``` 的字段输出排序，有利于diff
+2. 更新 protobuf 到 3.10.0
+3. 使用 [org.msgpack.msgpack-core](https://mvnrepository.com/artifact/org.msgpack/msgpack-core) 替换 [org.msgpack.msgpack](https://mvnrepository.com/artifact/org.msgpack/msgpack)，保持和 lua/javascript/xml等一样的输出顺序。
+4. msgpack 的输出结构变化（详见: https://github.com/xresloader/xresloader/tree/master/loader-binding/msgpack ）
+
 2.6.0
 ------
 

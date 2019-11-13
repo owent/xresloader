@@ -1,6 +1,50 @@
 [
     {
         "Value": 0,
+        "Name": "arr_in_arr.test_nested_enum.EN_TEST_NESTED_ENUM_VAL_1"
+    },
+    {
+        "Value": 123,
+        "Name": "arr_in_arr.test_nested_enum.EN_TEST_NESTED_ENUM_VAL_2"
+    },
+    {
+        "Value": 0,
+        "Name": "arr_in_arr.test_nested_message.test_nested_enum.EN_TEST_NESTED_MESSAGE_ENUM_VAL_1"
+    },
+    {
+        "Value": 123,
+        "Name": "arr_in_arr.test_nested_message.test_nested_enum.EN_TEST_NESTED_MESSAGE_ENUM_VAL_2"
+    },
+    {
+        "Value": 11,
+        "Name": "arr_in_arr.test_nested_message.test_onof.kTestNestedMessageInfoRole"
+    },
+    {
+        "Value": 12,
+        "Name": "arr_in_arr.test_nested_message.test_onof.kTestNestedMessageRoleUpgradeCfg"
+    },
+    {
+        "Value": 11,
+        "Name": "arr_in_arr.test_onof.kTestInfoRole"
+    },
+    {
+        "Value": 12,
+        "Name": "arr_in_arr.test_onof.kTestRoleUpgradeCfg"
+    },
+    {
+        "Value": 0,
+        "Name": "cost_type.EN_CT_UNKNOWN"
+    },
+    {
+        "Value": 10001,
+        "Name": "cost_type.EN_CT_MONEY"
+    },
+    {
+        "Value": 10101,
+        "Name": "cost_type.EN_CT_DIAMOND"
+    },
+    {
+        "Value": 0,
         "Name": "game_const_config.EN_GCC_UNKNOWN"
     },
     {
@@ -42,49 +86,5 @@
     {
         "Value": 9999999,
         "Name": "game_const_config.EN_GCC_RESOURCE_MAX_LIMIT"
-    },
-    {
-        "Value": 0,
-        "Name": "cost_type.EN_CT_UNKNOWN"
-    },
-    {
-        "Value": 10001,
-        "Name": "cost_type.EN_CT_MONEY"
-    },
-    {
-        "Value": 10101,
-        "Name": "cost_type.EN_CT_DIAMOND"
-    },
-    {
-        "Value": 0,
-        "Name": "arr_in_arr.test_nested_enum.EN_TEST_NESTED_ENUM_VAL_1"
-    },
-    {
-        "Value": 123,
-        "Name": "arr_in_arr.test_nested_enum.EN_TEST_NESTED_ENUM_VAL_2"
-    },
-    {
-        "Value": 11,
-        "Name": "arr_in_arr.test_onof.kTestInfoRole"
-    },
-    {
-        "Value": 12,
-        "Name": "arr_in_arr.test_onof.kTestRoleUpgradeCfg"
-    },
-    {
-        "Value": 0,
-        "Name": "arr_in_arr.test_nested_message.test_nested_enum.EN_TEST_NESTED_MESSAGE_ENUM_VAL_1"
-    },
-    {
-        "Value": 123,
-        "Name": "arr_in_arr.test_nested_message.test_nested_enum.EN_TEST_NESTED_MESSAGE_ENUM_VAL_2"
-    },
-    {
-        "Value": 11,
-        "Name": "arr_in_arr.test_nested_message.test_onof.kTestNestedMessageInfoRole"
-    },
-    {
-        "Value": 12,
-        "Name": "arr_in_arr.test_nested_message.test_onof.kTestNestedMessageRoleUpgradeCfg"
     }
 ]

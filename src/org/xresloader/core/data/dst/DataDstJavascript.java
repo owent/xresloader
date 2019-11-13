@@ -273,7 +273,7 @@ public class DataDstJavascript extends DataDstJava {
                     return ((Integer) l.getValue()).compareTo((Integer) r.getValue());
                 }
 
-                return 0;
+                return l.getKey().compareTo(r.getKey());
             });
 
             sb.append("{");

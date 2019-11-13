@@ -164,7 +164,7 @@ public class DataDstUEJson extends DataDstUEBase {
                     return ((Integer) l.getValue()).compareTo((Integer) r.getValue());
                 }
 
-                return 0;
+                return l.getKey().compareTo(r.getKey());
             });
 
             for (Map.Entry<String, Object> item : sorted_array) {

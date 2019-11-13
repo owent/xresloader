@@ -1004,7 +1004,14 @@ public class DataDstPb extends DataDstImpl {
         HashMap<String, Object> ret = new HashMap<String, Object>();
         LinkedList<Object> files = new LinkedList<Object>();
 
-        for (HashMap.Entry<String, Descriptors.FileDescriptor> fdp : cachePbs.file_descs.entrySet()) {
+        ArrayList<HashMap.Entry<String, Descriptors.FileDescriptor>> sorted_array = new ArrayList<HashMap.Entry<String, Descriptors.FileDescriptor>>();
+        sorted_array.ensureCapacity(cachePbs.file_descs.size());
+        sorted_array.addAll(cachePbs.file_descs.entrySet());
+        sorted_array.sort((l, r) -> {
+            return l.getValue().getFullName().compareTo(r.getValue().getFullName());
+        });
+
+        for (HashMap.Entry<String, Descriptors.FileDescriptor> fdp : sorted_array) {
             if (fdp.getValue().getPackage().equals("google.protobuf")) {
                 continue;
             }

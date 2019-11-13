@@ -7,20 +7,23 @@ MessagePack配置读取
 
 ```
 {
-    xres_ver: "版本号字符串",
-	data_ver: "版本号字符串",
-	count: 配置记录个数,
-	hash_code: "hash算法:hash值",
+    header : {
+        xres_ver: "版本号字符串",
+        data_ver: "版本号字符串",
+        count: 配置记录个数,
+        hash_code: "hash算法:hash值",
+    }
+    data_block: [
+        {配置内容},
+        {配置内容},
+        {配置内容},
+    ],
+    data_message_type: "协议名"
 }
-配置协议名: [
-    {配置内容},
-	{配置内容},
-	{配置内容},
-]
 ```
 
 
-Sample - Python2读取示例：
+Sample - Python3读取示例：
 ------
 
 ```bash
@@ -29,8 +32,8 @@ wget -c --no-check-certificate "https://bootstrap.pypa.io/get-pip.py"
 python get-pip.py
 
 # 安装msgpack模块,已安装可跳过(以下2选1)
+python3 -m pip install msgpack-python
 pip install msgpack-python
-python -m pip install msgpack-python
 
 ```
 
@@ -40,7 +43,7 @@ python -m pip install msgpack-python
 
 import msgpack
 
-unpacker = msgpack.Unpacker(open('role_cfg.msgpack.bin'))
+unpacker = msgpack.Unpacker(open('proto_v3/role_cfg.msgpack.bin', 'rb'))
 
 cfg_mgr = {}
 
@@ -48,22 +51,21 @@ for unpacked in unpacker:
     # dump raw data
     print(unpacked)
     # make index in cfg_mgr
-    for cfg_name in unpacked:
-        cfg_set = unpacked[cfg_name]
-        # header must be skiped
-        if list != type(cfg_set):
-            break
-        cfg_index_set = {}
-        for cfg_item in cfg_set:
-            # we assume id is the key
-            cfg_index_set[cfg_item['id']] = cfg_item
-        cfg_mgr[cfg_name] = cfg_index_set
+for cfg_name in unpacked[b'data_block']:
+    cfg_set = unpacked[b'data_block'][cfg_name]
+    cfg_index_set = {}
+    for cfg_item in cfg_set:
+        # we assume id is the key
+        if b'id' not in cfg_item:
+            continue
+        cfg_index_set[cfg_item[b'id']] = cfg_item
+    cfg_mgr[cfg_name] = cfg_index_set
 
 # dump cfg_mgr
 print(cfg_mgr)
 
 # get cfg item from role_cfg with key = 10001
-print(cfg_mgr['role_cfg'][10001])
+print(cfg_mgr[b'role_cfg'][10001])
 ```
 
 
@@ -77,35 +79,34 @@ npm install --save msgpack-lite
 ```
 
 ```javascript
-var fs = require("fs");
-var msgpack = require("msgpack-lite");
+"use strick";
+const fs = require("fs");
+const msgpack = require("msgpack-lite");
 
-var readStream = fs.createReadStream("role_cfg.msgpack.bin");
-var decodeStream = msgpack.createDecodeStream();
+const readStream = fs.createReadStream("proto_v3/role_cfg.msgpack.bin");
+const decodeStream = msgpack.createDecodeStream();
 
 // show multiple objects decoded from stream
-var cfg_mgr = {};
+const cfg_mgr = {};
 
-readStream.pipe(decodeStream).on("data", function(obj){
-    for(var cfg_name in obj) {
-        var cfg_set = obj[cfg_name];
-        // header must be skiped
-        if('object' != typeof(cfg_set)) {
-            break;
-        }
-        var cfg_index = {};
-        for (var key in cfg_set) {
-            var cfg_item = cfg_set[key];
+readStream.pipe(decodeStream).on("data", function (obj) {
+    for (const cfg_name in obj["data_block"]) {
+        const cfg_set = obj["data_block"][cfg_name];
+        const cfg_index = {};
+        for (const cfg_item of cfg_set) {
             // we assume id is the key
-            cfg_index[cfg_item.id || 0] = cfg_item
+            if (!cfg_item.id) {
+                continue;
+            }
+            cfg_index[cfg_item.id] = cfg_item
         }
-        
+
         cfg_mgr[cfg_name] = cfg_index;
     }
-}).on("end", function() { // must run after read all data 
+}).on("end", function () { // must run after read all data 
     // dump cfg_mgr ( )
     console.log(cfg_mgr)
-    
+
     // get cfg item from role_cfg with key = 10001
     console.log(cfg_mgr['role_cfg'][10001])
 });

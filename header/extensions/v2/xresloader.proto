@@ -12,7 +12,8 @@ extend google.protobuf.FileOptions {
 
 
 extend google.protobuf.MessageOptions {
-    optional string msg_description = 1001; // 描述信息（不同的输出可能有不同的功能）
+    optional string msg_description         = 1001; // 描述信息（不同的输出可能有不同的功能）
+    optional bool   msg_require_mapping_all = 1101; // 开启所有字段映射检查
 
     // 用户自定义扩展字段请使用 2000 to max;
 }
@@ -41,7 +42,7 @@ extend google.protobuf.EnumOptions {
 
 extend google.protobuf.EnumValueOptions {
     optional string enumv_description = 1001; // 描述信息（不同的输出可能有不同的功能）
-    optional string enum_alias       = 1002; // 枚举别名，可用于验证器名字
+    optional string enum_alias        = 1002; // 枚举别名，可用于验证器名字
 
     // 用户自定义扩展字段请使用 2000 to max;
 }

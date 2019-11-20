@@ -10,7 +10,6 @@ import java.util.Map;
 import java.util.Map.Entry;
 import org.json.JSONArray;
 import org.json.JSONObject;
-import org.xresloader.core.ProgramOptions;
 import org.xresloader.core.data.dst.DataDstWriterNode.DataDstChildrenNode;
 import org.xresloader.core.data.dst.DataDstWriterNode.DataDstFieldDescriptor;
 import org.xresloader.core.data.dst.DataDstWriterNode.JAVA_TYPE;
@@ -97,7 +96,7 @@ public class DataDstUEJson extends DataDstUEBase {
 
     @Override
     public final DataDstWriterNode compile() {
-        ProgramOptions.getLoger().error("UE-json can not be protocol description.");
+        this.logErrorMessage("UE-json can not be protocol description.");
         return null;
     }
 

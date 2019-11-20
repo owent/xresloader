@@ -43,6 +43,7 @@ public class ProgramOptions {
     public String[] dataSourceMetas = null;
     public String dataSourceMetaDelimiter = "\\|";
     public RenameRule renameRule = null;
+    public boolean requireMappingAllFields = false;
     public boolean enableFormular = true;
     public boolean enbleEmptyList = false;
     public int prettyIndent = 0;
@@ -64,6 +65,7 @@ public class ProgramOptions {
         outputDirectory = System.getProperty("user.dir");
         dataSourceDirectory = outputDirectory;
         dataSourceType = FileType.BIN;
+        requireMappingAllFields = false;
     }
 
     public static ProgramOptions getInstance() {
@@ -86,6 +88,7 @@ public class ProgramOptions {
         dataSourceMetas = null;
         dataSourceMetaDelimiter = "\\|";
         renameRule = null;
+        requireMappingAllFields = false;
         enableFormular = true;
         enbleEmptyList = false;
         prettyIndent = 0;
@@ -147,6 +150,8 @@ public class ProgramOptions {
         options.addOption(Option.builder("n").longOpt("rename")
                 .desc("rename output file name(regex), sample: /(?i)\\.bin$/\\.lua/").hasArg().argName("RENAME PATTERN")
                 .build());
+        options.addOption(null, "require-mapping-all", false,
+                "require all fields in protocol message to be mapped from data source");
 
         options.addOption(Option.builder("a").longOpt("data-version").desc("set data version").hasArg()
                 .argName("DATA VERSION").build());
@@ -380,6 +385,10 @@ public class ProgramOptions {
                 renameRule.match = match_rule;
                 renameRule.replace = groups[start_index + 1];
             } while (false);
+        }
+
+        if (cmd.hasOption("require-mapping-all")) {
+            requireMappingAllFields = true;
         }
 
         // special functions

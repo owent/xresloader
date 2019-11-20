@@ -342,8 +342,7 @@ public abstract class DataDstUEBase extends DataDstImpl {
                 importObj = new JSONObject(new JSONTokener(new FileInputStream(importFile)));
             } catch (JSONException | FileNotFoundException e) {
                 importObj = new JSONObject();
-                ProgramOptions.getLoger().error("Read json from %s failed, %s", importFile.getAbsolutePath(),
-                        e.getMessage());
+                this.logErrorMessage("Read json from %s failed, %s", importFile.getAbsolutePath(), e.getMessage());
             }
         } else {
             importObj = new JSONObject();
@@ -398,8 +397,7 @@ public abstract class DataDstUEBase extends DataDstImpl {
             fos.write(dumpString(importObj.toString(4)));
             fos.close();
         } catch (Exception e) {
-            ProgramOptions.getLoger().error("Write json to %s failed, %s", importFile.getAbsolutePath(),
-                    e.getMessage());
+            this.logErrorMessage("Write json to %s failed, %s", importFile.getAbsolutePath(), e.getMessage());
         }
     }
 
@@ -837,8 +835,7 @@ public abstract class DataDstUEBase extends DataDstImpl {
 
                         DataDstWriterNodeWrapper lastChild = children.get(children.size() - 1);
                         if (lastChild.descs.isEmpty() || lastChild.GetWriterNode(0) != child_desc) {
-                            ProgramOptions.getLoger().error("Add child %s for %s failed.", child.getKey(),
-                                    desc.getFullName());
+                            this.logErrorMessage("Add child %s for %s failed.", child.getKey(), desc.getFullName());
                             continue;
                         }
 
@@ -1196,7 +1193,7 @@ public abstract class DataDstUEBase extends DataDstImpl {
             enable = false;
             fout.write(dumpString(String.format("    /** invalid data type %s of UE DataTable for %s */\r\n",
                     descType.name(), varName)));
-            ProgramOptions.getLoger().error("invalid data type %s of UE DataTable for %s, should not called here.",
+            this.logErrorMessage("invalid data type %s of UE DataTable for %s, should not called here.",
                     descType.name(), varName);
             break;
         }

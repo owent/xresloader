@@ -113,7 +113,7 @@ public class DataDstLua extends DataDstJava {
 
     @Override
     public final DataDstWriterNode compile() {
-        ProgramOptions.getLoger().error("lua can not be protocol description.");
+        this.logErrorMessage("lua can not be protocol description.");
         return null;
     }
 

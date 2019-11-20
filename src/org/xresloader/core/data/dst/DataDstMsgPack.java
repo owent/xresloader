@@ -1,6 +1,5 @@
 package org.xresloader.core.data.dst;
 
-import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -9,7 +8,6 @@ import java.util.Map;
 
 import org.msgpack.core.MessagePack;
 import org.msgpack.core.MessageBufferPacker;
-import org.xresloader.core.ProgramOptions;
 import org.xresloader.core.data.err.ConvException;
 
 /**
@@ -131,7 +129,7 @@ public class DataDstMsgPack extends DataDstJava {
             packer.packString("data_message_type");
             writeData(packer, data_obj.data_message_type);
         } catch (IOException e) {
-            ProgramOptions.getLoger().error("MessagePacker write failed.");
+            this.logErrorMessage("MessagePacker write failed.");
             e.printStackTrace();
         }
 
@@ -140,7 +138,7 @@ public class DataDstMsgPack extends DataDstJava {
 
     @Override
     public final DataDstWriterNode compile() {
-        ProgramOptions.getLoger().error("msgpack can not be protocol description.");
+        this.logErrorMessage("msgpack can not be protocol description.");
         return null;
     }
 
@@ -155,7 +153,7 @@ public class DataDstMsgPack extends DataDstJava {
         try {
             writeData(packer, data);
         } catch (IOException e) {
-            ProgramOptions.getLoger().error("MessagePacker write failed.");
+            this.logErrorMessage("MessagePacker write failed.");
             e.printStackTrace();
         }
 

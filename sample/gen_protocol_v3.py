@@ -5,17 +5,17 @@ import os
 import string
 import glob
 import sys
+import codecs
 from subprocess import Popen
 
 work_dir = os.getcwd()
 script_dir = os.path.dirname(os.path.realpath(__file__))
 os.chdir(script_dir)
-os.chdir(os.path.join('..'))
-project_dir = os.getcwd()
-proto_dir = os.path.join(script_dir, 'proto_v3')
+project_dir = '../'
+proto_dir = './proto_v3'
 
-header_dir = os.path.realpath(os.path.join(project_dir, 'header'))
-tools_dir = os.path.realpath(os.path.join(project_dir, 'tools'))
+header_dir = os.path.join(project_dir, 'header')
+tools_dir = os.path.join(project_dir, 'tools')
 
 sys.path.append(tools_dir)
 from find_protoc import find_protoc
@@ -50,6 +50,10 @@ if not os.path.exists(proto_src_dir):
 exec_args = [find_protoc(), '-o', os.path.join(proto_dir, 'kind.pb'), '--cpp_out', proto_src_dir]
 exec_args.extend(common_args)
 exec_args.extend(proto_file)
+
+gen_file = codecs.open(os.path.join(script_dir, 'gen_protocol_v3.gen.sh'), "w", encoding='utf-8')
+gen_file.write("#!/bin/bash\n")
+gen_file.write('"{0}"'.format('" "'.join([x.replace('\\', '/') for x in exec_args])))
 
 Popen(exec_args,
     stdin=None,

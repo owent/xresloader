@@ -112,7 +112,7 @@ public class main {
         }
 
         if (null == dump_data) {
-            ProgramOptions.getLoger().error("protocol desc \"%s\" init and build %s values failed",
+            ProgramOptions.getLoger().error("protocol description \"%s\" initialize and build %s values failed",
                     ProgramOptions.getInstance().protocol.toString(), dump_name);
             return 1;
         }
@@ -226,7 +226,7 @@ public class main {
             }
             ret = ds.init();
             if (ret < 0) {
-                ProgramOptions.getLoger().error("init data source class \"%s\" failed", ds_clazz.getName());
+                ProgramOptions.getLoger().error("initialize data source class \"%s\" failed", ds_clazz.getName());
                 ++failed_count;
                 continue;
             }
@@ -247,8 +247,8 @@ public class main {
             if (null == protoDesc)
                 continue;
             if (false == protoDesc.init()) {
-                ProgramOptions.getLoger().error("protocol desc \"%s\" init failed",
-                        ProgramOptions.getInstance().protocol.toString());
+                ProgramOptions.getLoger().error("protocol description \"%s\" initialize failed: %s ",
+                        ProgramOptions.getInstance().protocol.toString(), protoDesc.getLastErrorMessage());
                 ++failed_count;
                 continue;
             }

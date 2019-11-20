@@ -89,14 +89,14 @@ public class DataDstXml extends DataDstJava {
 
             return bos.toByteArray();
         } catch (Exception e) {
-            ProgramOptions.getLoger().error("write xml failed, %s", e.getMessage());
+            this.logErrorMessage("write xml failed, %s", e.getMessage());
             return null;
         }
     }
 
     @Override
     public final DataDstWriterNode compile() {
-        ProgramOptions.getLoger().error("xml can not be protocol description.");
+        this.logErrorMessage("xml can not be protocol description.");
         return null;
     }
 

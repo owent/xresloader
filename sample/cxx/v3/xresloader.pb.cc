@@ -5,7 +5,6 @@
 
 #include <algorithm>
 
-#include <google/protobuf/stubs/common.h>
 #include <google/protobuf/io/coded_stream.h>
 #include <google/protobuf/extension_set.h>
 #include <google/protobuf/wire_format_lite.h>
@@ -31,19 +30,20 @@ const char descriptor_table_protodef_xresloader_2eproto[] PROTOBUF_SECTION_VARIA
   "le/protobuf/descriptor.proto:7\n\020file_des"
   "cription\022\034.google.protobuf.FileOptions\030\351"
   "\007 \001(\t:9\n\017msg_description\022\037.google.protob"
-  "uf.MessageOptions\030\351\007 \001(\t:0\n\010verifier\022\035.g"
-  "oogle.protobuf.FieldOptions\030\351\007 \001(\t:9\n\021fi"
-  "eld_description\022\035.google.protobuf.FieldO"
-  "ptions\030\363\007 \001(\t:3\n\013field_alias\022\035.google.pr"
-  "otobuf.FieldOptions\030\364\007 \001(\t:3\n\013field_rati"
-  "o\022\035.google.protobuf.FieldOptions\030\365\007 \001(\005:"
-  "9\n\021oneof_description\022\035.google.protobuf.O"
-  "neofOptions\030\351\007 \001(\t:7\n\020enum_description\022\034"
-  ".google.protobuf.EnumOptions\030\351\007 \001(\t:=\n\021e"
-  "numv_description\022!.google.protobuf.EnumV"
-  "alueOptions\030\351\007 \001(\t:6\n\nenum_alias\022!.googl"
-  "e.protobuf.EnumValueOptions\030\352\007 \001(\tb\006prot"
-  "o3"
+  "uf.MessageOptions\030\351\007 \001(\t:A\n\027msg_require_"
+  "mapping_all\022\037.google.protobuf.MessageOpt"
+  "ions\030\315\010 \001(\010:0\n\010verifier\022\035.google.protobu"
+  "f.FieldOptions\030\351\007 \001(\t:9\n\021field_descripti"
+  "on\022\035.google.protobuf.FieldOptions\030\363\007 \001(\t"
+  ":3\n\013field_alias\022\035.google.protobuf.FieldO"
+  "ptions\030\364\007 \001(\t:3\n\013field_ratio\022\035.google.pr"
+  "otobuf.FieldOptions\030\365\007 \001(\005:9\n\021oneof_desc"
+  "ription\022\035.google.protobuf.OneofOptions\030\351"
+  "\007 \001(\t:7\n\020enum_description\022\034.google.proto"
+  "buf.EnumOptions\030\351\007 \001(\t:=\n\021enumv_descript"
+  "ion\022!.google.protobuf.EnumValueOptions\030\351"
+  "\007 \001(\t:6\n\nenum_alias\022!.google.protobuf.En"
+  "umValueOptions\030\352\007 \001(\tb\006proto3"
   ;
 static const ::PROTOBUF_NAMESPACE_ID::internal::DescriptorTable*const descriptor_table_xresloader_2eproto_deps[1] = {
   &::descriptor_table_google_2fprotobuf_2fdescriptor_2eproto,
@@ -53,7 +53,7 @@ static ::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase*const descriptor_table_xre
 static ::PROTOBUF_NAMESPACE_ID::internal::once_flag descriptor_table_xresloader_2eproto_once;
 static bool descriptor_table_xresloader_2eproto_initialized = false;
 const ::PROTOBUF_NAMESPACE_ID::internal::DescriptorTable descriptor_table_xresloader_2eproto = {
-  &descriptor_table_xresloader_2eproto_initialized, descriptor_table_protodef_xresloader_2eproto, "xresloader.proto", 642,
+  &descriptor_table_xresloader_2eproto_initialized, descriptor_table_protodef_xresloader_2eproto, "xresloader.proto", 709,
   &descriptor_table_xresloader_2eproto_once, descriptor_table_xresloader_2eproto_sccs, descriptor_table_xresloader_2eproto_deps, 0, 1,
   schemas, file_default_instances, TableStruct_xresloader_2eproto::offsets,
   file_level_metadata_xresloader_2eproto, 0, file_level_enum_descriptors_xresloader_2eproto, file_level_service_descriptors_xresloader_2eproto,
@@ -71,6 +71,9 @@ const std::string msg_description_default("");
 ::PROTOBUF_NAMESPACE_ID::internal::ExtensionIdentifier< ::google::protobuf::MessageOptions,
     ::PROTOBUF_NAMESPACE_ID::internal::StringTypeTraits, 9, false >
   msg_description(kMsgDescriptionFieldNumber, msg_description_default);
+::PROTOBUF_NAMESPACE_ID::internal::ExtensionIdentifier< ::google::protobuf::MessageOptions,
+    ::PROTOBUF_NAMESPACE_ID::internal::PrimitiveTypeTraits< bool >, 8, false >
+  msg_require_mapping_all(kMsgRequireMappingAllFieldNumber, false);
 const std::string verifier_default("");
 ::PROTOBUF_NAMESPACE_ID::internal::ExtensionIdentifier< ::google::protobuf::FieldOptions,
     ::PROTOBUF_NAMESPACE_ID::internal::StringTypeTraits, 9, false >

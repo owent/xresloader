@@ -132,7 +132,7 @@ public class DataDstUECsv extends DataDstUEBase {
 
     @Override
     public DataDstWriterNode compile() {
-        ProgramOptions.getLoger().error("UE-CSV can not be protocol description.");
+        this.logErrorMessage("UE-CSV can not be protocol description.");
         return null;
     }
 

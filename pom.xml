@@ -6,7 +6,7 @@
 
     <groupId>org.xresloader</groupId>
     <artifactId>xresloader</artifactId>
-    <version>2.6.1</version>
+    <version>2.7.0</version>
     <packaging>jar</packaging>
     <name>xresloader</name>
 
@@ -86,6 +86,9 @@
                                 <transformer
                                     implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
                                     <mainClass>org.xresloader.core.main</mainClass>
+                                    <manifestEntries>
+                                        <Multi-Release>true</Multi-Release>
+                                    </manifestEntries>
                                 </transformer>
                             </transformers>
                             <!--<finalName>${project.artifactId}-${project.version}.min</finalName>-->

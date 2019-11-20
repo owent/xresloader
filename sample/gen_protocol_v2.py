@@ -5,6 +5,7 @@ import os
 import sys
 import string
 import glob
+import codecs
 from subprocess import Popen
 
 work_dir = os.getcwd()
@@ -47,6 +48,9 @@ if not os.path.exists(proto_src_dir):
 exec_args = [find_protoc(), '-o', os.path.join(proto_dir, 'kind.pb'), '--cpp_out', proto_src_dir]
 exec_args.extend(common_args)
 exec_args.extend(proto_file)
+
+gen_file = codecs.open(os.path.join(script_dir, 'gen_protocol_v2.gen.sh'), "w", encoding='utf-8')
+gen_file.write('"{0}"'.format('" "'.join(exec_args)))
 
 Popen(exec_args,
     shell=False).wait()

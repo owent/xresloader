@@ -93,6 +93,7 @@ echo "
 | -m --src-meta            | 数据源描述表             | 可多个                                                                                                |
 | -v --version             | 打印版本号               |                                                                                                       |
 | -n --rename              | 重命名输出文件名         | 正则表达式 （如：/(?i)\\.bin$/\\.lua/）                                                               |
+| --require-mapping-all    | 开启所有字段映射检查     | 开启所有字段映射检查后，转出结构中所有的字段都必须配置映射关系，数组字段至少要有一个元素              |
 | -c --const-print         | 输出协议描述中的常量     | 参数为字符串，表示输出的文件名                                                                        |
 | -i --option-print        | 输出协议描述中的选项     | 参数为字符串，表示输出的文件名                                                                        |
 | -a --data-version        | 设置数据版本号           | 参数为字符串，表示输出的数据的data_ver字段。如果不设置将按执行时间自动生成一个                        |
@@ -268,19 +269,22 @@ Protobuf插件
 
 ### Protobuf插件 - Message插件
 
-|            插件名称            |                   插件功能                   |
-| :----------------------------: | :------------------------------------------: |
-| org.xresloader.msg_description | 消息体描述信息，会写入输出的header中和代码中 |
-|    org.xresloader.ue.helper    |         生成UE Utility代码的类名后缀         |
+|            插件名称                           |                   插件功能                    |
+| :-------------------------------------------: | :-------------------------------------------: |
+| org.xresloader.msg_description                | 消息体描述信息，会写入输出的header中和代码中  |
+| org.xresloader.msg_require_mapping_all        | 设置message的所有字段必须被全部映射           |
+| org.xresloader.ue.helper                      | 生成UE Utility代码的类名后缀                  |
 
 ### Protobuf插件 - Field插件
 
 |             插件名称             |                                                      插件功能                                                      |
 | :------------------------------: | :----------------------------------------------------------------------------------------------------------------: |
-| org.xresloader.field_description |                                     字段描述信息，会写入输出的header中和代码中                                     |
-|     org.xresloader.verifier      |                                     字段描述信息，会写入输出的header中和代码中                                     |
-|    org.xresloader.ue.key_tag     |                  生成UE代码时，如果需要支持多个Key组合成一个Name，用这个字段指定系数（必须大于0）                  |
-|   org.xresloader.ue.ueTypeName   | 生成UE代码时，如果指定了这个字段，那么生成的字段类型将是 ```TSoftObjectPtr<ueTypeName>``` , 并且支持蓝图中直接引用 |
+| org.xresloader.verifier          | 验证器，可填范围(log-high),message名，enum名。多个由 ```|``` 分隔。任意验证器通过检查则认为数据有效                |
+| org.xresloader.field_description | 字段描述信息，会写入输出的header中和代码中                                                                         |
+| org.xresloader.field_alias       | 字段别名，配合 **验证器** 功能，允许在数据源中直接填写别名来配置数据                                               |
+| org.xresloader.field_ratio       | 字段放大，用于比如配置百分率为 0.12，当 org.xresloader.field_ratio=100时转出的数据为12                             |
+| org.xresloader.ue.key_tag        | 生成UE代码时，如果需要支持多个Key组合成一个Name，用这个字段指定系数（必须大于0）                                   |
+| org.xresloader.ue.ueTypeName     | 生成UE代码时，如果指定了这个字段，那么生成的字段类型将是 ```TSoftObjectPtr<ueTypeName>``` , 并且支持蓝图中直接引用 |
 
 编译和打包（For developer）
 ======

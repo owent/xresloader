@@ -9,6 +9,7 @@ public final class Xresloader {
       com.google.protobuf.ExtensionRegistryLite registry) {
     registry.add(org.xresloader.Xresloader.fileDescription);
     registry.add(org.xresloader.Xresloader.msgDescription);
+    registry.add(org.xresloader.Xresloader.msgRequireMappingAll);
     registry.add(org.xresloader.Xresloader.verifier);
     registry.add(org.xresloader.Xresloader.fieldDescription);
     registry.add(org.xresloader.Xresloader.fieldAlias);
@@ -53,6 +54,21 @@ public final class Xresloader {
       java.lang.String> msgDescription = com.google.protobuf.GeneratedMessage
           .newFileScopedGeneratedExtension(
         java.lang.String.class,
+        null);
+  public static final int MSG_REQUIRE_MAPPING_ALL_FIELD_NUMBER = 1101;
+  /**
+   * <pre>
+   * 开启所有字段映射检查
+   * </pre>
+   *
+   * <code>extend .google.protobuf.MessageOptions { ... }</code>
+   */
+  public static final
+    com.google.protobuf.GeneratedMessage.GeneratedExtension<
+      com.google.protobuf.DescriptorProtos.MessageOptions,
+      java.lang.Boolean> msgRequireMappingAll = com.google.protobuf.GeneratedMessage
+          .newFileScopedGeneratedExtension(
+        java.lang.Boolean.class,
         null);
   public static final int VERIFIER_FIELD_NUMBER = 1001;
   /**
@@ -187,19 +203,21 @@ public final class Xresloader {
       "esloader\032 google/protobuf/descriptor.pro" +
       "to:7\n\020file_description\022\034.google.protobuf" +
       ".FileOptions\030\351\007 \001(\t:9\n\017msg_description\022\037" +
-      ".google.protobuf.MessageOptions\030\351\007 \001(\t:0" +
-      "\n\010verifier\022\035.google.protobuf.FieldOption" +
-      "s\030\351\007 \001(\t:9\n\021field_description\022\035.google.p" +
-      "rotobuf.FieldOptions\030\363\007 \001(\t:3\n\013field_ali" +
-      "as\022\035.google.protobuf.FieldOptions\030\364\007 \001(\t" +
-      ":3\n\013field_ratio\022\035.google.protobuf.FieldO" +
-      "ptions\030\365\007 \001(\005:9\n\021oneof_description\022\035.goo" +
-      "gle.protobuf.OneofOptions\030\351\007 \001(\t:7\n\020enum" +
-      "_description\022\034.google.protobuf.EnumOptio" +
-      "ns\030\351\007 \001(\t:=\n\021enumv_description\022!.google." +
-      "protobuf.EnumValueOptions\030\351\007 \001(\t:6\n\nenum" +
-      "_alias\022!.google.protobuf.EnumValueOption" +
-      "s\030\352\007 \001(\tb\006proto3"
+      ".google.protobuf.MessageOptions\030\351\007 \001(\t:A" +
+      "\n\027msg_require_mapping_all\022\037.google.proto" +
+      "buf.MessageOptions\030\315\010 \001(\010:0\n\010verifier\022\035." +
+      "google.protobuf.FieldOptions\030\351\007 \001(\t:9\n\021f" +
+      "ield_description\022\035.google.protobuf.Field" +
+      "Options\030\363\007 \001(\t:3\n\013field_alias\022\035.google.p" +
+      "rotobuf.FieldOptions\030\364\007 \001(\t:3\n\013field_rat" +
+      "io\022\035.google.protobuf.FieldOptions\030\365\007 \001(\005" +
+      ":9\n\021oneof_description\022\035.google.protobuf." +
+      "OneofOptions\030\351\007 \001(\t:7\n\020enum_description\022" +
+      "\034.google.protobuf.EnumOptions\030\351\007 \001(\t:=\n\021" +
+      "enumv_description\022!.google.protobuf.Enum" +
+      "ValueOptions\030\351\007 \001(\t:6\n\nenum_alias\022!.goog" +
+      "le.protobuf.EnumValueOptions\030\352\007 \001(\tb\006pro" +
+      "to3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
@@ -208,14 +226,15 @@ public final class Xresloader {
         });
     fileDescription.internalInit(descriptor.getExtensions().get(0));
     msgDescription.internalInit(descriptor.getExtensions().get(1));
-    verifier.internalInit(descriptor.getExtensions().get(2));
-    fieldDescription.internalInit(descriptor.getExtensions().get(3));
-    fieldAlias.internalInit(descriptor.getExtensions().get(4));
-    fieldRatio.internalInit(descriptor.getExtensions().get(5));
-    oneofDescription.internalInit(descriptor.getExtensions().get(6));
-    enumDescription.internalInit(descriptor.getExtensions().get(7));
-    enumvDescription.internalInit(descriptor.getExtensions().get(8));
-    enumAlias.internalInit(descriptor.getExtensions().get(9));
+    msgRequireMappingAll.internalInit(descriptor.getExtensions().get(2));
+    verifier.internalInit(descriptor.getExtensions().get(3));
+    fieldDescription.internalInit(descriptor.getExtensions().get(4));
+    fieldAlias.internalInit(descriptor.getExtensions().get(5));
+    fieldRatio.internalInit(descriptor.getExtensions().get(6));
+    oneofDescription.internalInit(descriptor.getExtensions().get(7));
+    enumDescription.internalInit(descriptor.getExtensions().get(8));
+    enumvDescription.internalInit(descriptor.getExtensions().get(9));
+    enumAlias.internalInit(descriptor.getExtensions().get(10));
     com.google.protobuf.DescriptorProtos.getDescriptor();
   }
 

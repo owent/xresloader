@@ -105,7 +105,7 @@ public abstract class DataDstJava extends DataDstImpl {
         }
 
         if (null == val) {
-            ProgramOptions.getLoger().error("serialize failed. %s is not supported for java default value",
+            this.logErrorMessage("serialize failed. %s is not supported for java default value",
                     desc.getType().toString());
             return;
         }

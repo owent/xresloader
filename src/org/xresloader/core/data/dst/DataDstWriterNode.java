@@ -153,6 +153,7 @@ public class DataDstWriterNode {
     public static class DataDstChildrenNode {
         public DataDstFieldDescriptor innerDesc = null;
         public boolean isRequired = false;
+        public boolean isPlain = false;
         public Object fieldDescriptor = null;
         public ArrayList<DataDstWriterNode> nodes = null;
     }

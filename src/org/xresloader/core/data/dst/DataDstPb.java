@@ -331,8 +331,7 @@ public class DataDstPb extends DataDstImpl {
                     if (vfy.isValid()) {
                         identify.addVerifier(vfy);
                     } else {
-                        ProgramOptions.getLoger().error(
-                                "try to add DataVerifyIntRange(%s) for %s at column %d in %s failed", rule,
+                        this.logErrorMessage("try to add DataVerifyIntRange(%s) for %s at column %d in %s failed", rule,
                                 identify.name, identify.index + 1, DataSrcImpl.getOurInstance().getCurrentTableName());
                     }
 
@@ -356,16 +355,15 @@ public class DataDstPb extends DataDstImpl {
                         if (null != vfy) {
                             cachePbs.identifiers.put(rule, vfy);
                         } else {
-                            ProgramOptions.getLoger().error("enum or message \"%s\" not found", rule);
+                            this.logErrorMessage("enum or message \"%s\" not found", rule);
                         }
                     }
 
                     if (vfy != null) {
                         identify.addVerifier(vfy);
                     } else {
-                        ProgramOptions.getLoger().error("try to add DataVerifyPb(%s) for %s at column %d in %s failed",
-                                rule, identify.name, identify.index + 1,
-                                DataSrcImpl.getOurInstance().getCurrentTableName());
+                        this.logErrorMessage("try to add DataVerifyPb(%s) for %s at column %d in %s failed", rule,
+                                identify.name, identify.index + 1, DataSrcImpl.getOurInstance().getCurrentTableName());
                     }
                 }
             }
@@ -380,7 +378,12 @@ public class DataDstPb extends DataDstImpl {
         }
 
         currentMsgDesc = get_message_proto(cachePbs, SchemeConf.getInstance().getProtoName());
-        return null != currentMsgDesc;
+        if (null == currentMsgDesc) {
+            this.setLastErrorMessage("can not find protocol message %s", SchemeConf.getInstance().getProtoName());
+            return false;
+        }
+
+        return true;
     }
 
     /**
@@ -495,7 +498,7 @@ public class DataDstPb extends DataDstImpl {
         try {
             sha256 = MessageDigest.getInstance("SHA-256");
         } catch (NoSuchAlgorithmException e) {
-            ProgramOptions.getLoger().error("failed to find sha-256 algorithm.");
+            this.logErrorMessage("failed to find sha-256 algorithm.");
             header.setHashCode("");
         }
 
@@ -539,7 +542,7 @@ public class DataDstPb extends DataDstImpl {
             blocks.build().writeTo(writer);
         } catch (IOException e) {
             e.printStackTrace();
-            ProgramOptions.getLoger().error("try to serialize protobuf header failed. %s", e.toString());
+            this.logErrorMessage("try to serialize protobuf header failed. %s", e.toString());
             ProgramOptions.getLoger().error("%s", header.build().getInitializationErrorString());
         }
         return writer.toByteArray();
@@ -580,6 +583,22 @@ public class DataDstPb extends DataDstImpl {
         }
     }
 
+    static private void filterMissingFields(LinkedList<String> missingFields, HashSet<String> missingOneof,
+            Descriptors.FieldDescriptor fd, boolean isMissing) {
+        if (missingFields == null || missingOneof == null) {
+            return;
+        }
+
+        Descriptors.OneofDescriptor oneof = fd.getContainingOneof();
+        if (isMissing && oneof == null) {
+            missingFields.push(fd.getName());
+        }
+
+        if (!isMissing && oneof != null && missingOneof.contains(oneof.getName())) {
+            missingOneof.remove(oneof.getName());
+        }
+    }
+
     /**
      * 测试并生成数据结构
      *
@@ -593,6 +612,19 @@ public class DataDstPb extends DataDstImpl {
         Descriptors.Descriptor desc = (Descriptors.Descriptor) node.privateData;
         if (null == desc) {
             return ret;
+        }
+
+        LinkedList<String> missingFields = null;
+        HashSet<String> missingOneof = null;
+
+        if (ProgramOptions.getInstance().requireMappingAllFields
+                || (desc.getOptions().hasExtension(Xresloader.msgRequireMappingAll)
+                        && desc.getOptions().getExtension(Xresloader.msgRequireMappingAll))) {
+            missingFields = new LinkedList<String>();
+            missingOneof = new HashSet<String>();
+            for (Descriptors.OneofDescriptor oneof : desc.getOneofs()) {
+                missingOneof.add(oneof.getName());
+            }
         }
 
         DataSrcImpl data_src = DataSrcImpl.getOurInstance();
@@ -618,16 +650,22 @@ public class DataDstPb extends DataDstImpl {
                         }
                     }
                     name_list.removeLast();
+
+                    filterMissingFields(missingFields, missingOneof, fd, count == 0);
                 } else {
                     DataDstWriterNode c = createMessageWriterNode(cachePbs, fd.getMessageType(),
                             DataDstWriterNode.JAVA_TYPE.MESSAGE);
                     name_list.addLast(DataDstWriterNode.makeNodeName(fd.getName()));
                     if (test(c, name_list)) {
+                        filterMissingFields(missingFields, missingOneof, fd, false);
                         child = node.addChild(fd.getName(), c, fd, false, false);
                         ret = true;
-                    } else if (fd.isRequired()) {
-                        // required 字段要dump默认数据
-                        child = node.addChild(fd.getName(), c, fd, false, true);
+                    } else {
+                        filterMissingFields(missingFields, missingOneof, fd, true);
+                        if (fd.isRequired()) {
+                            // required 字段要dump默认数据
+                            child = node.addChild(fd.getName(), c, fd, false, true);
+                        }
                     }
                     name_list.removeLast();
                 }
@@ -649,24 +687,44 @@ public class DataDstPb extends DataDstImpl {
                             break;
                         }
                     }
+
+                    filterMissingFields(missingFields, missingOneof, fd, count == 0);
                 } else {
                     // 非 list 类型
                     String real_name = DataDstWriterNode.makeChildPath(prefix, fd.getName());
                     IdentifyDescriptor col = data_src.getColumnByName(real_name);
                     if (null != col) {
+                        filterMissingFields(missingFields, missingOneof, fd, false);
                         DataDstWriterNode c = createMessageWriterNode(cachePbs, null, inner_type);
                         child = node.addChild(fd.getName(), c, fd, false, false);
                         setup_node_identify(c, child, col, fd);
                         ret = true;
-                    } else if (fd.isRequired()) {
-                        DataDstWriterNode c = createMessageWriterNode(cachePbs, null, inner_type);
-                        // required 字段要dump默认数据
-                        child = node.addChild(fd.getName(), c, fd, false, true);
+                    } else {
+                        filterMissingFields(missingFields, missingOneof, fd, true);
+                        if (fd.isRequired()) {
+                            DataDstWriterNode c = createMessageWriterNode(cachePbs, null, inner_type);
+                            // required 字段要dump默认数据
+                            child = node.addChild(fd.getName(), c, fd, false, true);
+                        }
                     }
                 }
                 break;
             }
             }
+        }
+
+        if (missingFields != null && missingOneof != null && (!missingFields.isEmpty() || !missingOneof.isEmpty())) {
+            String missingFliedDesc = "";
+            if (!missingFields.isEmpty()) {
+                missingFliedDesc = String.format(" fields %s", String.join(",", missingFields));
+            }
+            String missingOneofDesc = "";
+            if (!missingOneof.isEmpty()) {
+                missingOneofDesc = String.format(" oneof %s", String.join(",", missingOneof));
+            }
+            setLastErrorMessage("message %s in %s can not find%s%s in data source", desc.getFullName(), prefix,
+                    missingFliedDesc, missingOneofDesc);
+            throw new ConvException(getLastErrorMessage());
         }
 
         return ret;
@@ -685,7 +743,7 @@ public class DataDstPb extends DataDstImpl {
         try {
             return root.build().toByteString();
         } catch (Exception e) {
-            ProgramOptions.getLoger().error("serialize failed. %s", e.getMessage());
+            this.logErrorMessage("serialize failed. %s", e.getMessage());
             return null;
         }
     }
@@ -857,8 +915,8 @@ public class DataDstPb extends DataDstImpl {
                 try {
                     val = node.build();
                 } catch (UninitializedMessageException e) {
-                    ProgramOptions.getLoger().error("serialize %s(%s) failed. %s", fd.getFullName(),
-                            fd.getMessageType().getName(), e.getMessage());
+                    this.logErrorMessage("serialize %s(%s) failed. %s", fd.getFullName(), fd.getMessageType().getName(),
+                            e.getMessage());
                 }
             }
             break;
@@ -924,8 +982,8 @@ public class DataDstPb extends DataDstImpl {
                         if (node instanceof HashMap) {
                             fd_root = (HashMap<String, Object>) node;
                         } else {
-                            ProgramOptions.getLoger().error("package name %s conflict(failed in %s).",
-                                    fdp.getValue().getPackage(), seg);
+                            this.logErrorMessage("package name %s conflict(failed in %s).", fdp.getValue().getPackage(),
+                                    seg);
                             break;
                         }
                     } else {
@@ -970,7 +1028,7 @@ public class DataDstPb extends DataDstImpl {
 
             return all_buffer;
         } catch (FileNotFoundException e) {
-            ProgramOptions.getLoger().error("protocol file %s not found.", ProgramOptions.getInstance().protocolFile);
+            this.logErrorMessage("protocol file %s not found.", ProgramOptions.getInstance().protocolFile);
         }
 
         return null;

@@ -20,45 +20,54 @@ public final class PbHeaderV3 {
 
     /**
      * <code>string xres_ver = 1;</code>
+     * @return The xresVer.
      */
     java.lang.String getXresVer();
     /**
      * <code>string xres_ver = 1;</code>
+     * @return The bytes for xresVer.
      */
     com.google.protobuf.ByteString
         getXresVerBytes();
 
     /**
      * <code>string data_ver = 2;</code>
+     * @return The dataVer.
      */
     java.lang.String getDataVer();
     /**
      * <code>string data_ver = 2;</code>
+     * @return The bytes for dataVer.
      */
     com.google.protobuf.ByteString
         getDataVerBytes();
 
     /**
      * <code>uint32 count = 3;</code>
+     * @return The count.
      */
     int getCount();
 
     /**
      * <code>string hash_code = 4;</code>
+     * @return The hashCode.
      */
     java.lang.String getHashCode();
     /**
      * <code>string hash_code = 4;</code>
+     * @return The bytes for hashCode.
      */
     com.google.protobuf.ByteString
         getHashCodeBytes();
 
     /**
      * <code>string description = 5;</code>
+     * @return The description.
      */
     java.lang.String getDescription();
     /**
      * <code>string description = 5;</code>
+     * @return The bytes for description.
      */
     com.google.protobuf.ByteString
         getDescriptionBytes();
@@ -177,6 +186,7 @@ public final class PbHeaderV3 {
     private volatile java.lang.Object xresVer_;
     /**
      * <code>string xres_ver = 1;</code>
+     * @return The xresVer.
      */
     public java.lang.String getXresVer() {
       java.lang.Object ref = xresVer_;
@@ -192,6 +202,7 @@ public final class PbHeaderV3 {
     }
     /**
      * <code>string xres_ver = 1;</code>
+     * @return The bytes for xresVer.
      */
     public com.google.protobuf.ByteString
         getXresVerBytes() {
@@ -211,6 +222,7 @@ public final class PbHeaderV3 {
     private volatile java.lang.Object dataVer_;
     /**
      * <code>string data_ver = 2;</code>
+     * @return The dataVer.
      */
     public java.lang.String getDataVer() {
       java.lang.Object ref = dataVer_;
@@ -226,6 +238,7 @@ public final class PbHeaderV3 {
     }
     /**
      * <code>string data_ver = 2;</code>
+     * @return The bytes for dataVer.
      */
     public com.google.protobuf.ByteString
         getDataVerBytes() {
@@ -245,6 +258,7 @@ public final class PbHeaderV3 {
     private int count_;
     /**
      * <code>uint32 count = 3;</code>
+     * @return The count.
      */
     public int getCount() {
       return count_;
@@ -254,6 +268,7 @@ public final class PbHeaderV3 {
     private volatile java.lang.Object hashCode_;
     /**
      * <code>string hash_code = 4;</code>
+     * @return The hashCode.
      */
     public java.lang.String getHashCode() {
       java.lang.Object ref = hashCode_;
@@ -269,6 +284,7 @@ public final class PbHeaderV3 {
     }
     /**
      * <code>string hash_code = 4;</code>
+     * @return The bytes for hashCode.
      */
     public com.google.protobuf.ByteString
         getHashCodeBytes() {
@@ -288,6 +304,7 @@ public final class PbHeaderV3 {
     private volatile java.lang.Object description_;
     /**
      * <code>string description = 5;</code>
+     * @return The description.
      */
     public java.lang.String getDescription() {
       java.lang.Object ref = description_;
@@ -303,6 +320,7 @@ public final class PbHeaderV3 {
     }
     /**
      * <code>string description = 5;</code>
+     * @return The bytes for description.
      */
     public com.google.protobuf.ByteString
         getDescriptionBytes() {
@@ -691,6 +709,7 @@ public final class PbHeaderV3 {
       private java.lang.Object xresVer_ = "";
       /**
        * <code>string xres_ver = 1;</code>
+       * @return The xresVer.
        */
       public java.lang.String getXresVer() {
         java.lang.Object ref = xresVer_;
@@ -706,6 +725,7 @@ public final class PbHeaderV3 {
       }
       /**
        * <code>string xres_ver = 1;</code>
+       * @return The bytes for xresVer.
        */
       public com.google.protobuf.ByteString
           getXresVerBytes() {
@@ -722,6 +742,8 @@ public final class PbHeaderV3 {
       }
       /**
        * <code>string xres_ver = 1;</code>
+       * @param value The xresVer to set.
+       * @return This builder for chaining.
        */
       public Builder setXresVer(
           java.lang.String value) {
@@ -735,6 +757,7 @@ public final class PbHeaderV3 {
       }
       /**
        * <code>string xres_ver = 1;</code>
+       * @return This builder for chaining.
        */
       public Builder clearXresVer() {
         
@@ -744,6 +767,8 @@ public final class PbHeaderV3 {
       }
       /**
        * <code>string xres_ver = 1;</code>
+       * @param value The bytes for xresVer to set.
+       * @return This builder for chaining.
        */
       public Builder setXresVerBytes(
           com.google.protobuf.ByteString value) {
@@ -760,6 +785,7 @@ public final class PbHeaderV3 {
       private java.lang.Object dataVer_ = "";
       /**
        * <code>string data_ver = 2;</code>
+       * @return The dataVer.
        */
       public java.lang.String getDataVer() {
         java.lang.Object ref = dataVer_;
@@ -775,6 +801,7 @@ public final class PbHeaderV3 {
       }
       /**
        * <code>string data_ver = 2;</code>
+       * @return The bytes for dataVer.
        */
       public com.google.protobuf.ByteString
           getDataVerBytes() {
@@ -791,6 +818,8 @@ public final class PbHeaderV3 {
       }
       /**
        * <code>string data_ver = 2;</code>
+       * @param value The dataVer to set.
+       * @return This builder for chaining.
        */
       public Builder setDataVer(
           java.lang.String value) {
@@ -804,6 +833,7 @@ public final class PbHeaderV3 {
       }
       /**
        * <code>string data_ver = 2;</code>
+       * @return This builder for chaining.
        */
       public Builder clearDataVer() {
         
@@ -813,6 +843,8 @@ public final class PbHeaderV3 {
       }
       /**
        * <code>string data_ver = 2;</code>
+       * @param value The bytes for dataVer to set.
+       * @return This builder for chaining.
        */
       public Builder setDataVerBytes(
           com.google.protobuf.ByteString value) {
@@ -829,12 +861,15 @@ public final class PbHeaderV3 {
       private int count_ ;
       /**
        * <code>uint32 count = 3;</code>
+       * @return The count.
        */
       public int getCount() {
         return count_;
       }
       /**
        * <code>uint32 count = 3;</code>
+       * @param value The count to set.
+       * @return This builder for chaining.
        */
       public Builder setCount(int value) {
         
@@ -844,6 +879,7 @@ public final class PbHeaderV3 {
       }
       /**
        * <code>uint32 count = 3;</code>
+       * @return This builder for chaining.
        */
       public Builder clearCount() {
         
@@ -855,6 +891,7 @@ public final class PbHeaderV3 {
       private java.lang.Object hashCode_ = "";
       /**
        * <code>string hash_code = 4;</code>
+       * @return The hashCode.
        */
       public java.lang.String getHashCode() {
         java.lang.Object ref = hashCode_;
@@ -870,6 +907,7 @@ public final class PbHeaderV3 {
       }
       /**
        * <code>string hash_code = 4;</code>
+       * @return The bytes for hashCode.
        */
       public com.google.protobuf.ByteString
           getHashCodeBytes() {
@@ -886,6 +924,8 @@ public final class PbHeaderV3 {
       }
       /**
        * <code>string hash_code = 4;</code>
+       * @param value The hashCode to set.
+       * @return This builder for chaining.
        */
       public Builder setHashCode(
           java.lang.String value) {
@@ -899,6 +939,7 @@ public final class PbHeaderV3 {
       }
       /**
        * <code>string hash_code = 4;</code>
+       * @return This builder for chaining.
        */
       public Builder clearHashCode() {
         
@@ -908,6 +949,8 @@ public final class PbHeaderV3 {
       }
       /**
        * <code>string hash_code = 4;</code>
+       * @param value The bytes for hashCode to set.
+       * @return This builder for chaining.
        */
       public Builder setHashCodeBytes(
           com.google.protobuf.ByteString value) {
@@ -924,6 +967,7 @@ public final class PbHeaderV3 {
       private java.lang.Object description_ = "";
       /**
        * <code>string description = 5;</code>
+       * @return The description.
        */
       public java.lang.String getDescription() {
         java.lang.Object ref = description_;
@@ -939,6 +983,7 @@ public final class PbHeaderV3 {
       }
       /**
        * <code>string description = 5;</code>
+       * @return The bytes for description.
        */
       public com.google.protobuf.ByteString
           getDescriptionBytes() {
@@ -955,6 +1000,8 @@ public final class PbHeaderV3 {
       }
       /**
        * <code>string description = 5;</code>
+       * @param value The description to set.
+       * @return This builder for chaining.
        */
       public Builder setDescription(
           java.lang.String value) {
@@ -968,6 +1015,7 @@ public final class PbHeaderV3 {
       }
       /**
        * <code>string description = 5;</code>
+       * @return This builder for chaining.
        */
       public Builder clearDescription() {
         
@@ -977,6 +1025,8 @@ public final class PbHeaderV3 {
       }
       /**
        * <code>string description = 5;</code>
+       * @param value The bytes for description to set.
+       * @return This builder for chaining.
        */
       public Builder setDescriptionBytes(
           com.google.protobuf.ByteString value) {
@@ -1048,10 +1098,12 @@ public final class PbHeaderV3 {
 
     /**
      * <code>.org.xresloader.pb.xresloader_header header = 1;</code>
+     * @return Whether the header field is set.
      */
     boolean hasHeader();
     /**
      * <code>.org.xresloader.pb.xresloader_header header = 1;</code>
+     * @return The header.
      */
     org.xresloader.pb.PbHeaderV3.xresloader_header getHeader();
     /**
@@ -1061,23 +1113,29 @@ public final class PbHeaderV3 {
 
     /**
      * <code>repeated bytes data_block = 2;</code>
+     * @return A list containing the dataBlock.
      */
     java.util.List<com.google.protobuf.ByteString> getDataBlockList();
     /**
      * <code>repeated bytes data_block = 2;</code>
+     * @return The count of dataBlock.
      */
     int getDataBlockCount();
     /**
      * <code>repeated bytes data_block = 2;</code>
+     * @param index The index of the element to return.
+     * @return The dataBlock at the given index.
      */
     com.google.protobuf.ByteString getDataBlock(int index);
 
     /**
      * <code>string data_message_type = 3;</code>
+     * @return The dataMessageType.
      */
     java.lang.String getDataMessageType();
     /**
      * <code>string data_message_type = 3;</code>
+     * @return The bytes for dataMessageType.
      */
     com.google.protobuf.ByteString
         getDataMessageTypeBytes();
@@ -1196,12 +1254,14 @@ public final class PbHeaderV3 {
     private org.xresloader.pb.PbHeaderV3.xresloader_header header_;
     /**
      * <code>.org.xresloader.pb.xresloader_header header = 1;</code>
+     * @return Whether the header field is set.
      */
     public boolean hasHeader() {
       return header_ != null;
     }
     /**
      * <code>.org.xresloader.pb.xresloader_header header = 1;</code>
+     * @return The header.
      */
     public org.xresloader.pb.PbHeaderV3.xresloader_header getHeader() {
       return header_ == null ? org.xresloader.pb.PbHeaderV3.xresloader_header.getDefaultInstance() : header_;
@@ -1217,6 +1277,7 @@ public final class PbHeaderV3 {
     private java.util.List<com.google.protobuf.ByteString> dataBlock_;
     /**
      * <code>repeated bytes data_block = 2;</code>
+     * @return A list containing the dataBlock.
      */
     public java.util.List<com.google.protobuf.ByteString>
         getDataBlockList() {
@@ -1224,12 +1285,15 @@ public final class PbHeaderV3 {
     }
     /**
      * <code>repeated bytes data_block = 2;</code>
+     * @return The count of dataBlock.
      */
     public int getDataBlockCount() {
       return dataBlock_.size();
     }
     /**
      * <code>repeated bytes data_block = 2;</code>
+     * @param index The index of the element to return.
+     * @return The dataBlock at the given index.
      */
     public com.google.protobuf.ByteString getDataBlock(int index) {
       return dataBlock_.get(index);
@@ -1239,6 +1303,7 @@ public final class PbHeaderV3 {
     private volatile java.lang.Object dataMessageType_;
     /**
      * <code>string data_message_type = 3;</code>
+     * @return The dataMessageType.
      */
     public java.lang.String getDataMessageType() {
       java.lang.Object ref = dataMessageType_;
@@ -1254,6 +1319,7 @@ public final class PbHeaderV3 {
     }
     /**
      * <code>string data_message_type = 3;</code>
+     * @return The bytes for dataMessageType.
      */
     public com.google.protobuf.ByteString
         getDataMessageTypeBytes() {
@@ -1643,12 +1709,14 @@ public final class PbHeaderV3 {
           org.xresloader.pb.PbHeaderV3.xresloader_header, org.xresloader.pb.PbHeaderV3.xresloader_header.Builder, org.xresloader.pb.PbHeaderV3.xresloader_headerOrBuilder> headerBuilder_;
       /**
        * <code>.org.xresloader.pb.xresloader_header header = 1;</code>
+       * @return Whether the header field is set.
        */
       public boolean hasHeader() {
         return headerBuilder_ != null || header_ != null;
       }
       /**
        * <code>.org.xresloader.pb.xresloader_header header = 1;</code>
+       * @return The header.
        */
       public org.xresloader.pb.PbHeaderV3.xresloader_header getHeader() {
         if (headerBuilder_ == null) {
@@ -1764,6 +1832,7 @@ public final class PbHeaderV3 {
       }
       /**
        * <code>repeated bytes data_block = 2;</code>
+       * @return A list containing the dataBlock.
        */
       public java.util.List<com.google.protobuf.ByteString>
           getDataBlockList() {
@@ -1772,18 +1841,24 @@ public final class PbHeaderV3 {
       }
       /**
        * <code>repeated bytes data_block = 2;</code>
+       * @return The count of dataBlock.
        */
       public int getDataBlockCount() {
         return dataBlock_.size();
       }
       /**
        * <code>repeated bytes data_block = 2;</code>
+       * @param index The index of the element to return.
+       * @return The dataBlock at the given index.
        */
       public com.google.protobuf.ByteString getDataBlock(int index) {
         return dataBlock_.get(index);
       }
       /**
        * <code>repeated bytes data_block = 2;</code>
+       * @param index The index to set the value at.
+       * @param value The dataBlock to set.
+       * @return This builder for chaining.
        */
       public Builder setDataBlock(
           int index, com.google.protobuf.ByteString value) {
@@ -1797,6 +1872,8 @@ public final class PbHeaderV3 {
       }
       /**
        * <code>repeated bytes data_block = 2;</code>
+       * @param value The dataBlock to add.
+       * @return This builder for chaining.
        */
       public Builder addDataBlock(com.google.protobuf.ByteString value) {
         if (value == null) {
@@ -1809,6 +1886,8 @@ public final class PbHeaderV3 {
       }
       /**
        * <code>repeated bytes data_block = 2;</code>
+       * @param values The dataBlock to add.
+       * @return This builder for chaining.
        */
       public Builder addAllDataBlock(
           java.lang.Iterable<? extends com.google.protobuf.ByteString> values) {
@@ -1820,6 +1899,7 @@ public final class PbHeaderV3 {
       }
       /**
        * <code>repeated bytes data_block = 2;</code>
+       * @return This builder for chaining.
        */
       public Builder clearDataBlock() {
         dataBlock_ = java.util.Collections.emptyList();
@@ -1831,6 +1911,7 @@ public final class PbHeaderV3 {
       private java.lang.Object dataMessageType_ = "";
       /**
        * <code>string data_message_type = 3;</code>
+       * @return The dataMessageType.
        */
       public java.lang.String getDataMessageType() {
         java.lang.Object ref = dataMessageType_;
@@ -1846,6 +1927,7 @@ public final class PbHeaderV3 {
       }
       /**
        * <code>string data_message_type = 3;</code>
+       * @return The bytes for dataMessageType.
        */
       public com.google.protobuf.ByteString
           getDataMessageTypeBytes() {
@@ -1862,6 +1944,8 @@ public final class PbHeaderV3 {
       }
       /**
        * <code>string data_message_type = 3;</code>
+       * @param value The dataMessageType to set.
+       * @return This builder for chaining.
        */
       public Builder setDataMessageType(
           java.lang.String value) {
@@ -1875,6 +1959,7 @@ public final class PbHeaderV3 {
       }
       /**
        * <code>string data_message_type = 3;</code>
+       * @return This builder for chaining.
        */
       public Builder clearDataMessageType() {
         
@@ -1884,6 +1969,8 @@ public final class PbHeaderV3 {
       }
       /**
        * <code>string data_message_type = 3;</code>
+       * @param value The bytes for dataMessageType to set.
+       * @return This builder for chaining.
        */
       public Builder setDataMessageTypeBytes(
           com.google.protobuf.ByteString value) {

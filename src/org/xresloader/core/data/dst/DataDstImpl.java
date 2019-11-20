@@ -3,12 +3,14 @@ package org.xresloader.core.data.dst;
 import java.io.IOException;
 import java.util.HashMap;
 import org.xresloader.core.data.err.ConvException;
+import org.xresloader.core.ProgramOptions;
 
 /**
  * Created by owentou on 2014/10/10.
  */
 public abstract class DataDstImpl {
     private String systemEndl = null;
+    private String lastErrorMessage = "";
 
     public String getSystemEndl() {
         if (null != systemEndl) {
@@ -82,5 +84,18 @@ public abstract class DataDstImpl {
      */
     public byte[] dumpConst(HashMap<String, Object> data) throws ConvException, IOException {
         return null;
+    }
+
+    public String getLastErrorMessage() {
+        return this.lastErrorMessage;
+    }
+
+    public void setLastErrorMessage(String format, Object... args) {
+        this.lastErrorMessage = String.format(format, args);
+    }
+
+    public void logErrorMessage(String format, Object... args) {
+        this.setLastErrorMessage(format, args);
+        ProgramOptions.getLoger().error("%s", this.lastErrorMessage);
     }
 }

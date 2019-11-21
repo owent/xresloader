@@ -1,26 +1,30 @@
 
-»
+è
 pb_header.protoorg.xresloader.pb"ž
 xresloader_header
 xres_ver (	RxresVer
 data_ver (	RdataVer
 count (Rcount
 	hash_code (	RhashCode 
-description (	Rdescription"t
+description (	Rdescription" 
 xresloader_datablocks<
 header (2$.org.xresloader.pb.xresloader_headerRheader
 
-data_block (R	dataBlock
-¡
+data_block (R	dataBlock*
+data_message_type (	RdataMessageType
+Š
 extensions/v2/xresloader.protoorg.xresloader google/protobuf/descriptor.proto:H
 file_description.google.protobuf.FileOptionsé (	RfileDescription:I
-msg_description.google.protobuf.MessageOptionsé (	RmsgDescription::
+msg_description.google.protobuf.MessageOptionsé (	RmsgDescription:W
+msg_require_mapping_all.google.protobuf.MessageOptionsó (RmsgRequireMappingAll:E
+msg_separator.google.protobuf.MessageOptionsô (	RmsgSeparator::
 verifier.google.protobuf.FieldOptionsé (	Rverifier:K
 field_description.google.protobuf.FieldOptionsó (	RfieldDescription:?
 field_alias.google.protobuf.FieldOptionsô (	R
 fieldAlias:?
 field_ratio.google.protobuf.FieldOptionsõ (R
-fieldRatio:K
+fieldRatio:G
+field_separator.google.protobuf.FieldOptionsö (	RfieldSeparator:K
 oneof_description.google.protobuf.OneofOptionsé (	RoneofDescription:H
 enum_description.google.protobuf.EnumOptionsé (	RenumDescription:O
 enumv_description!.google.protobuf.EnumValueOptionsé (	RenumvDescription:A

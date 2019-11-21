@@ -671,19 +671,20 @@ public abstract class DataDstUEBase extends DataDstImpl {
     }
 
     protected Object pickValueField(Object buildObj, DataDstWriterNodeWrapper descWrapper) throws ConvException {
-        return pickValueFieldBaseImpl(descWrapper, 0);
+        return pickValueFieldBaseStandardImpl(descWrapper, 0);
     }
 
-    protected Object pickValueFieldBaseImpl(DataDstWriterNodeWrapper descWrapper, int pickIndex) throws ConvException {
+    protected Object pickValueFieldBaseStandardImpl(DataDstWriterNodeWrapper descWrapper, int pickIndex)
+            throws ConvException {
         if (descWrapper.isList || pickIndex >= descWrapper.descs.size()) {
             return null;
         }
 
         DataDstWriterNode desc = descWrapper.GetWriterNode(pickIndex);
-        return pickValueFieldBaseImpl(desc);
+        return pickValueFieldBaseStandardImpl(desc);
     }
 
-    protected Object pickValueFieldBaseImpl(DataDstWriterNode desc) throws ConvException {
+    protected Object pickValueFieldBaseStandardImpl(DataDstWriterNode desc) throws ConvException {
         if (null == desc || null == desc.identify || desc.getType() == DataDstWriterNode.JAVA_TYPE.MESSAGE) {
             return null;
         }
@@ -817,6 +818,16 @@ public abstract class DataDstUEBase extends DataDstImpl {
             }
 
             for (HashMap.Entry<String, DataDstChildrenNode> child : desc.getChildren().entrySet()) {
+                // TODO 当前UE模式生成的字段是映射字段和协议字段交集的动态结构, 目前还不支持仅依据协议字段的静态结构，所以先跳过Plain模式
+                if (child.getValue().mode == DataDstWriterNode.CHILD_NODE_TYPE.PLAIN) {
+                    continue;
+                }
+                // UE不支持递归的模式中，不允许动态长度，所以跳过Plain模式的数组
+                // if (!isRecursiveEnabled() && child.getValue().innerDesc.isList()
+                // && child.getValue().mode == DataDstWriterNode.CHILD_NODE_TYPE.PLAIN) {
+                // continue;
+                // }
+
                 String varName = getIdentName(child.getKey());
                 if (isLeaf) {
                     if (child.getValue().innerDesc.isList()) {
@@ -852,9 +863,13 @@ public abstract class DataDstUEBase extends DataDstImpl {
                             DataDstWriterNode child_desc = child.getValue().nodes.get(i);
                             expandDescription(descs, child_desc, prefix + String.format("_%s_%d", varName, i), 0);
                         }
-                    } else if (!child.getValue().nodes.isEmpty()) {
-                        expandDescription(descs, child.getValue().nodes.get(0), prefix + "_" + varName, 0);
+                    } else if (child.getValue().mode == DataDstWriterNode.CHILD_NODE_TYPE.STANDARD) {
+                        if (!child.getValue().nodes.isEmpty()) {
+                            expandDescription(descs, child.getValue().nodes.get(0), prefix + "_" + varName, 0);
+                        }
                     }
+                    // TODO else if (child.getValue().mode ==
+                    // DataDstWriterNode.CHILD_NODE_TYPE.PLAIN) {
                 }
             }
 
@@ -918,7 +933,8 @@ public abstract class DataDstUEBase extends DataDstImpl {
         DataDstWriterNodeWrapper constNameNode = new DataDstWriterNodeWrapper();
         ddNode = DataDstWriterNode.create(null,
                 DataDstWriterNode.getDefaultMessageDescriptor(DataDstWriterNode.JAVA_TYPE.STRING));
-        ddNode.setFieldDescriptor(new DataDstFieldDescriptor(ddNode.getTypeDescriptor(), 1, "Name", false));
+        ddNode.setFieldDescriptor(new DataDstFieldDescriptor(ddNode.getTypeDescriptor(), 1, "Name",
+                DataDstWriterNode.FIELD_LABEL_TYPE.OPTIONAL, null));
         ddNode.identify = IdentifyEngine.n2i("Name", 0);
         constNameNode.descs.add(ddNode);
         constNameNode.varName = getIdentName("Name");
@@ -929,7 +945,8 @@ public abstract class DataDstUEBase extends DataDstImpl {
         DataDstWriterNodeWrapper constValueNode = new DataDstWriterNodeWrapper();
         ddNode = DataDstWriterNode.create(null,
                 DataDstWriterNode.getDefaultMessageDescriptor(DataDstWriterNode.JAVA_TYPE.INT));
-        ddNode.setFieldDescriptor(new DataDstFieldDescriptor(ddNode.getTypeDescriptor(), 1, "Value", false));
+        ddNode.setFieldDescriptor(new DataDstFieldDescriptor(ddNode.getTypeDescriptor(), 1, "Value",
+                DataDstWriterNode.FIELD_LABEL_TYPE.OPTIONAL, null));
         ddNode.identify = IdentifyEngine.n2i("Value", 1);
         constValueNode.descs.add(ddNode);
         constValueNode.varName = getIdentName("Value");

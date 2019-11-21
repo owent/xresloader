@@ -32,18 +32,21 @@ const char descriptor_table_protodef_xresloader_2eproto[] PROTOBUF_SECTION_VARIA
   "\007 \001(\t:9\n\017msg_description\022\037.google.protob"
   "uf.MessageOptions\030\351\007 \001(\t:A\n\027msg_require_"
   "mapping_all\022\037.google.protobuf.MessageOpt"
-  "ions\030\315\010 \001(\010:0\n\010verifier\022\035.google.protobu"
-  "f.FieldOptions\030\351\007 \001(\t:9\n\021field_descripti"
-  "on\022\035.google.protobuf.FieldOptions\030\363\007 \001(\t"
-  ":3\n\013field_alias\022\035.google.protobuf.FieldO"
-  "ptions\030\364\007 \001(\t:3\n\013field_ratio\022\035.google.pr"
-  "otobuf.FieldOptions\030\365\007 \001(\005:9\n\021oneof_desc"
-  "ription\022\035.google.protobuf.OneofOptions\030\351"
-  "\007 \001(\t:7\n\020enum_description\022\034.google.proto"
-  "buf.EnumOptions\030\351\007 \001(\t:=\n\021enumv_descript"
-  "ion\022!.google.protobuf.EnumValueOptions\030\351"
-  "\007 \001(\t:6\n\nenum_alias\022!.google.protobuf.En"
-  "umValueOptions\030\352\007 \001(\tb\006proto3"
+  "ions\030\363\007 \001(\010:7\n\rmsg_separator\022\037.google.pr"
+  "otobuf.MessageOptions\030\364\007 \001(\t:0\n\010verifier"
+  "\022\035.google.protobuf.FieldOptions\030\351\007 \001(\t:9"
+  "\n\021field_description\022\035.google.protobuf.Fi"
+  "eldOptions\030\363\007 \001(\t:3\n\013field_alias\022\035.googl"
+  "e.protobuf.FieldOptions\030\364\007 \001(\t:3\n\013field_"
+  "ratio\022\035.google.protobuf.FieldOptions\030\365\007 "
+  "\001(\005:7\n\017field_separator\022\035.google.protobuf"
+  ".FieldOptions\030\366\007 \001(\t:9\n\021oneof_descriptio"
+  "n\022\035.google.protobuf.OneofOptions\030\351\007 \001(\t:"
+  "7\n\020enum_description\022\034.google.protobuf.En"
+  "umOptions\030\351\007 \001(\t:=\n\021enumv_description\022!."
+  "google.protobuf.EnumValueOptions\030\351\007 \001(\t:"
+  "6\n\nenum_alias\022!.google.protobuf.EnumValu"
+  "eOptions\030\352\007 \001(\tb\006proto3"
   ;
 static const ::PROTOBUF_NAMESPACE_ID::internal::DescriptorTable*const descriptor_table_xresloader_2eproto_deps[1] = {
   &::descriptor_table_google_2fprotobuf_2fdescriptor_2eproto,
@@ -53,7 +56,7 @@ static ::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase*const descriptor_table_xre
 static ::PROTOBUF_NAMESPACE_ID::internal::once_flag descriptor_table_xresloader_2eproto_once;
 static bool descriptor_table_xresloader_2eproto_initialized = false;
 const ::PROTOBUF_NAMESPACE_ID::internal::DescriptorTable descriptor_table_xresloader_2eproto = {
-  &descriptor_table_xresloader_2eproto_initialized, descriptor_table_protodef_xresloader_2eproto, "xresloader.proto", 709,
+  &descriptor_table_xresloader_2eproto_initialized, descriptor_table_protodef_xresloader_2eproto, "xresloader.proto", 823,
   &descriptor_table_xresloader_2eproto_once, descriptor_table_xresloader_2eproto_sccs, descriptor_table_xresloader_2eproto_deps, 0, 1,
   schemas, file_default_instances, TableStruct_xresloader_2eproto::offsets,
   file_level_metadata_xresloader_2eproto, 0, file_level_enum_descriptors_xresloader_2eproto, file_level_service_descriptors_xresloader_2eproto,
@@ -74,6 +77,10 @@ const std::string msg_description_default("");
 ::PROTOBUF_NAMESPACE_ID::internal::ExtensionIdentifier< ::google::protobuf::MessageOptions,
     ::PROTOBUF_NAMESPACE_ID::internal::PrimitiveTypeTraits< bool >, 8, false >
   msg_require_mapping_all(kMsgRequireMappingAllFieldNumber, false);
+const std::string msg_separator_default("");
+::PROTOBUF_NAMESPACE_ID::internal::ExtensionIdentifier< ::google::protobuf::MessageOptions,
+    ::PROTOBUF_NAMESPACE_ID::internal::StringTypeTraits, 9, false >
+  msg_separator(kMsgSeparatorFieldNumber, msg_separator_default);
 const std::string verifier_default("");
 ::PROTOBUF_NAMESPACE_ID::internal::ExtensionIdentifier< ::google::protobuf::FieldOptions,
     ::PROTOBUF_NAMESPACE_ID::internal::StringTypeTraits, 9, false >
@@ -89,6 +96,10 @@ const std::string field_alias_default("");
 ::PROTOBUF_NAMESPACE_ID::internal::ExtensionIdentifier< ::google::protobuf::FieldOptions,
     ::PROTOBUF_NAMESPACE_ID::internal::PrimitiveTypeTraits< ::PROTOBUF_NAMESPACE_ID::int32 >, 5, false >
   field_ratio(kFieldRatioFieldNumber, 0);
+const std::string field_separator_default("");
+::PROTOBUF_NAMESPACE_ID::internal::ExtensionIdentifier< ::google::protobuf::FieldOptions,
+    ::PROTOBUF_NAMESPACE_ID::internal::StringTypeTraits, 9, false >
+  field_separator(kFieldSeparatorFieldNumber, field_separator_default);
 const std::string oneof_description_default("");
 ::PROTOBUF_NAMESPACE_ID::internal::ExtensionIdentifier< ::google::protobuf::OneofOptions,
     ::PROTOBUF_NAMESPACE_ID::internal::StringTypeTraits, 9, false >

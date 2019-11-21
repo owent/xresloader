@@ -6,28 +6,30 @@ import "xresloader_ue.proto";
 import "dependency.proto";
 
 message role_cfg {
-    optional uint32 id           = 1;
-    optional uint32 unlock_level = 2;
-    optional uint32 cost_type    = 3;
-    optional int32 cost_value    = 4;
-    optional string name         = 5;
-    optional dep_cfg dep_test    = 10;
+    optional uint32  id           = 1;
+    optional uint32  unlock_level = 2;
+    optional uint32  cost_type    = 3;
+    optional int32   cost_value   = 4;
+    optional string  name         = 5;
+    optional dep_cfg dep_test     = 10;
 
     repeated string test_array    = 11;
     optional string int_as_string = 12;
 }
 
 message role_upgrade_cfg {
-    optional uint32 Id       = 1;
-    optional uint32 Level    = 2;
-    optional uint32 CostType = 3 [ (org.xresloader.verifier) = "cost_type", (org.xresloader.field_description) = "Refer to cost_type" ];
-    optional int32 CostValue = 4;
-    optional int32 ScoreAdd  = 5;
+    optional uint32 Id        = 1;
+    optional uint32 Level     = 2;
+    optional uint32 CostType  = 3 [ (org.xresloader.verifier) = "cost_type", (org.xresloader.field_description) = "Refer to cost_type" ];
+    optional int32  CostValue = 4;
+    optional int32  ScoreAdd  = 5;
 }
 
 message test_msg_verifier {
+    option (org.xresloader.msg_separator) = "-^";
+
     optional uint32 test_id_1 = 10001;
-    optional uint32 test_id_2 = 10002 [(org.xresloader.field_alias) = "测试ID别名2"];
+    optional uint32 test_id_2 = 10002 [ (org.xresloader.field_alias) = "测试ID别名2" ];
 }
 
 message arr_in_arr {
@@ -35,7 +37,7 @@ message arr_in_arr {
     option (org.xresloader.ue.not_data_table) = true;
 
     optional string name    = 1 [ (org.xresloader.field_description) = "This is a test name in array" ];
-    repeated int32 int_arr  = 2 [ packed = true ];
+    repeated int32  int_arr = 2 [ packed = true ];
     repeated string str_arr = 3;
 }
 
@@ -43,6 +45,11 @@ message arr_in_arr_cfg {
     option (org.xresloader.ue.helper)       = "helper";
     option (org.xresloader.msg_description) = "Test arr_in_arr_cfg";
 
-    optional uint32 id      = 1 [ (org.xresloader.ue.key_tag) = 1, (org.xresloader.field_description) = "This is a Key" ];
+    optional uint32     id  = 1 [ (org.xresloader.ue.key_tag) = 1, (org.xresloader.field_description) = "This is a Key" ];
     repeated arr_in_arr arr = 2;
+
+    repeated int32             test_plain_int_arr  = 3;
+    repeated cost_type         test_plain_enum_arr = 4;
+    optional test_msg_verifier test_plain_msg      = 5 [ (org.xresloader.field_separator) = "&" ];
+    repeated test_msg_verifier test_plain_msg_arr  = 6;
 }

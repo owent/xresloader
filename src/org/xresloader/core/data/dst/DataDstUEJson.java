@@ -200,7 +200,7 @@ public class DataDstUEJson extends DataDstUEBase {
     @Override
     final protected Object pickValueField(Object buildObj, DataDstWriterNodeWrapper desc) throws ConvException {
         if (!isRecursiveEnabled()) {
-            return pickValueFieldBaseImpl(desc, 0);
+            return pickValueFieldBaseStandardImpl(desc, 0);
         }
 
         return pickValueFieldJsonImpl(desc);
@@ -244,6 +244,16 @@ public class DataDstUEJson extends DataDstUEBase {
 
             JSONObject ret = new JSONObject();
             for (Entry<String, DataDstChildrenNode> child : desc.getChildren().entrySet()) {
+                // TODO 当前UE模式生成的字段是映射字段和协议字段交集的动态结构, 目前还不支持仅依据协议字段的静态结构，所以先跳过Plain模式
+                if (child.getValue().mode == DataDstWriterNode.CHILD_NODE_TYPE.PLAIN) {
+                    continue;
+                }
+                // UE不支持递归的模式中，不允许动态长度，所以跳过Plain模式的数组
+                // if (!isRecursiveEnabled() && child.getValue().innerDesc.isList()
+                // && child.getValue().mode == DataDstWriterNode.CHILD_NODE_TYPE.PLAIN) {
+                // continue;
+                // }
+
                 Object val = null;
                 if (child.getValue().innerDesc.isList()) {
                     JSONArray res = new JSONArray();
@@ -286,7 +296,7 @@ public class DataDstUEJson extends DataDstUEBase {
             return ret;
         }
 
-        return pickValueFieldBaseImpl(desc);
+        return pickValueFieldBaseStandardImpl(desc);
     }
 
     protected Object pickValueFieldJsonDefaultImpl(DataDstFieldDescriptor fd) {

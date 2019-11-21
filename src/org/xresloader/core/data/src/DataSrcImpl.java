@@ -155,4 +155,13 @@ public abstract class DataSrcImpl {
     public LinkedList<IdentifyDescriptor> getColumns() {
         return null;
     }
+
+    static public Boolean getBooleanFromString(String item) {
+        if (item == null || item.isEmpty()) {
+            return false;
+        }
+
+        return !item.equals("0") && !item.equals("0.0") && !item.equalsIgnoreCase("false")
+                && !item.equalsIgnoreCase("no") && !item.equalsIgnoreCase("disable");
+    }
 }

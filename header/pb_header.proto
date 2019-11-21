@@ -13,5 +13,5 @@ message xresloader_header {
 message xresloader_datablocks {
     optional xresloader_header header            = 1;
     repeated bytes             data_block        = 2;
-    optional                   data_message_type = 3;
+    optional string            data_message_type = 3;
 }

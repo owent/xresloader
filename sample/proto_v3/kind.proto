@@ -29,8 +29,8 @@ message arr_in_arr {
     option (org.xresloader.ue.helper)         = "helper";
     option (org.xresloader.ue.not_data_table) = true;
 
-    string   name           = 1 [ (org.xresloader.field_description) = "This is a test name in array" ];
-    repeated int32 int_arr  = 2;
+    string          name    = 1 [ (org.xresloader.field_description) = "This is a test name in array" ];
+    repeated int32  int_arr = 2;
     repeated string str_arr = 3;
 
     oneof test_onof {
@@ -57,6 +57,8 @@ message arr_in_arr {
 }
 
 message test_msg_verifier {
+    option (org.xresloader.msg_separator) = "-^";
+
     uint32 test_id_1 = 10001;
     uint32 test_id_2 = 10002 [ (org.xresloader.field_alias) = "测试ID别名2" ];
 }
@@ -65,6 +67,11 @@ message arr_in_arr_cfg {
     option (org.xresloader.ue.helper)       = "helper";
     option (org.xresloader.msg_description) = "Test arr_in_arr_cfg";
 
-    uint32   id             = 1 [ (org.xresloader.ue.key_tag) = 1, (org.xresloader.field_description) = "This is a Key" ];
+    uint32              id  = 1 [ (org.xresloader.ue.key_tag) = 1, (org.xresloader.field_description) = "This is a Key" ];
     repeated arr_in_arr arr = 2;
+
+    repeated int32             test_plain_int_arr  = 3;
+    repeated cost_type         test_plain_enum_arr = 4;
+    test_msg_verifier          test_plain_msg      = 5 [ (org.xresloader.field_separator) = "&" ];
+    repeated test_msg_verifier test_plain_msg_arr  = 6;
 }

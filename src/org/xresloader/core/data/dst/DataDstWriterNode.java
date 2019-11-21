@@ -2,8 +2,12 @@ package org.xresloader.core.data.dst;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.List;
+
 import org.xresloader.core.data.err.ConvException;
 import org.xresloader.core.engine.IdentifyDescriptor;
+import org.xresloader.core.data.vfy.DataVerifyImpl;
 
 /**
  * Created by owentou on 2014/10/11.
@@ -11,6 +15,14 @@ import org.xresloader.core.engine.IdentifyDescriptor;
 public class DataDstWriterNode {
     public enum JAVA_TYPE {
         INT, LONG, BOOLEAN, STRING, BYTES, FLOAT, DOUBLE, MESSAGE
+    }
+
+    public enum FIELD_LABEL_TYPE {
+        OPTIONAL, LIST, REQUIRED
+    }
+
+    public enum CHILD_NODE_TYPE {
+        STANDARD, PLAIN
     }
 
     static public class DataDstFieldExtUE {
@@ -22,6 +34,7 @@ public class DataDstWriterNode {
     static public class DataDstFieldExt {
         public String description = null;
         public String verifier = null;
+        public String plainSeparator = null;
         public int ratio = 1;
         private DataDstFieldExtUE ue = null;
 
@@ -42,6 +55,7 @@ public class DataDstWriterNode {
 
     static public class DataDstMessageExt {
         public String description = null;
+        public String plainSeparator = null;
         // public List<Xresloader.IndexDescriptor> kvIndex = null;
         // public List<Xresloader.IndexDescriptor> klIndex = null;
 
@@ -60,15 +74,48 @@ public class DataDstWriterNode {
     static public class DataDstFieldDescriptor {
         private int index = 0;
         private String name = null;
-        private boolean isListB = false;
+        private FIELD_LABEL_TYPE label = FIELD_LABEL_TYPE.OPTIONAL;
         private DataDstMessageDescriptor typeDescriptor = null;
         private DataDstFieldExt extension = null;
+        private List<DataVerifyImpl> verifyEngine = null;
+        private Object rawDescriptor = null;
 
-        public DataDstFieldDescriptor(DataDstMessageDescriptor typeDesc, int index, String name, boolean isList) {
+        public DataDstFieldDescriptor(DataDstMessageDescriptor typeDesc, int index, String name, FIELD_LABEL_TYPE label,
+                Object rawDesc) {
             this.typeDescriptor = typeDesc;
             this.index = index;
             this.name = name;
-            this.isListB = isList;
+            this.label = label;
+
+            this.rawDescriptor = rawDesc;
+        }
+
+        public Object getRawDescriptor() {
+            return rawDescriptor;
+        }
+
+        public boolean hasVerifier() {
+            return null != verifyEngine && false == verifyEngine.isEmpty();
+        }
+
+        public void resetVerifier() {
+            verifyEngine = null;
+        }
+
+        public void addVerifier(DataVerifyImpl ver) {
+            if (null == ver) {
+                return;
+            }
+
+            if (null == verifyEngine) {
+                verifyEngine = new LinkedList<DataVerifyImpl>();
+            }
+
+            verifyEngine.add(ver);
+        }
+
+        public List<DataVerifyImpl> getVerifier() {
+            return verifyEngine;
         }
 
         public JAVA_TYPE getType() {
@@ -88,7 +135,11 @@ public class DataDstWriterNode {
         }
 
         public boolean isList() {
-            return this.isListB;
+            return this.label == FIELD_LABEL_TYPE.LIST;
+        }
+
+        public boolean isRequired() {
+            return this.label == FIELD_LABEL_TYPE.REQUIRED;
         }
 
         public DataDstFieldExt mutableExtension() {
@@ -108,8 +159,10 @@ public class DataDstWriterNode {
         private String fullName = null;
         private DataDstMessageExt extension = null;
         public HashMap<String, DataDstFieldDescriptor> fields = null;
+        private ArrayList<DataDstFieldDescriptor> sortedFields = null;
+        private Object rawDescriptor = null;
 
-        public DataDstMessageDescriptor(JAVA_TYPE type, String pkgName, String msgName) {
+        public DataDstMessageDescriptor(JAVA_TYPE type, String pkgName, String msgName, Object rawDesc) {
             this.type = type;
             if (msgName == null || msgName.isEmpty()) {
                 msgName = type.toString();
@@ -122,6 +175,11 @@ public class DataDstWriterNode {
             } else {
                 this.fullName = String.format("%s.%s", this.packageName, this.messageName);
             }
+            this.rawDescriptor = rawDesc;
+        }
+
+        public Object getRawDescriptor() {
+            return rawDescriptor;
         }
 
         public JAVA_TYPE getType() {
@@ -148,21 +206,52 @@ public class DataDstWriterNode {
             extension = new DataDstMessageExt();
             return extension;
         }
+
+        public ArrayList<DataDstFieldDescriptor> getSortedFields() {
+            if (sortedFields != null && sortedFields.size() == fields.size()) {
+                return sortedFields;
+            }
+
+            sortedFields = new ArrayList<DataDstFieldDescriptor>();
+            sortedFields.ensureCapacity(fields.size());
+            for (HashMap.Entry<String, DataDstFieldDescriptor> d : fields.entrySet()) {
+                sortedFields.add(d.getValue());
+            }
+            sortedFields.sort((l, r) -> {
+                return Integer.compare(l.getIndex(), r.getIndex());
+            });
+            return sortedFields;
+        }
     }
 
     public static class DataDstChildrenNode {
         public DataDstFieldDescriptor innerDesc = null;
-        public boolean isRequired = false;
-        public boolean isPlain = false;
+        public CHILD_NODE_TYPE mode = CHILD_NODE_TYPE.STANDARD;
         public Object fieldDescriptor = null;
         public ArrayList<DataDstWriterNode> nodes = null;
+
+        public boolean isRequired() {
+            return innerDesc != null && innerDesc.isRequired();
+        }
+
+        public boolean isList() {
+            return innerDesc != null && innerDesc.isList();
+        }
+
+        public int getIndex() {
+            if (innerDesc == null) {
+                return 0;
+            }
+
+            return innerDesc.getIndex();
+        }
     }
 
     private HashMap<String, DataDstChildrenNode> children = null;
     private DataDstMessageDescriptor typeDescriptor = null;
     private DataDstFieldDescriptor fieldDescriptor = null;
     public Object privateData = null; // 关联的Message描述信息，不同的DataDstImpl子类不一样。这里的数据和抽象数据结构的类型有关
-    public IdentifyDescriptor identify = null; // 关联的Field/Excel列信息，同一个抽象数据结构类型可能对应的数据几乎不一样。和具体某个结构内的字段有关
+    public IdentifyDescriptor identify = null; // 关联的Field/Excel列信息，同一个抽象数据结构类型可能对应的数据列不一样。和具体某个结构内的字段有关
 
     static private HashMap<JAVA_TYPE, DataDstMessageDescriptor> defaultDescs = new HashMap<JAVA_TYPE, DataDstMessageDescriptor>();
 
@@ -172,7 +261,7 @@ public class DataDstWriterNode {
             return ret;
         }
 
-        ret = new DataDstMessageDescriptor(type, null, null);
+        ret = new DataDstMessageDescriptor(type, null, null, null);
         defaultDescs.put(type, ret);
         return ret;
     }
@@ -279,16 +368,16 @@ public class DataDstWriterNode {
     }
 
     public DataDstChildrenNode addChild(String child_name, DataDstWriterNode node, Object _field_descriptor,
-            boolean isList, boolean isRequired) throws ConvException {
+            CHILD_NODE_TYPE mode) throws ConvException {
         DataDstChildrenNode res = getChildren().getOrDefault(child_name, null);
         if (null == res) {
             res = new DataDstChildrenNode();
             getChildren().put(child_name, res);
             res.innerDesc = typeDescriptor.fields.get(child_name);
-            res.isRequired = isRequired;
             res.fieldDescriptor = _field_descriptor;
         }
 
+        res.mode = mode;
         if (null == res.nodes) {
             res.nodes = new ArrayList<DataDstWriterNode>();
         }

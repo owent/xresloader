@@ -18,6 +18,7 @@ extern PROTOBUF_INTERNAL_EXPORT_kind_2eproto ::PROTOBUF_NAMESPACE_ID::internal::
 extern PROTOBUF_INTERNAL_EXPORT_dependency_2eproto ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<1> scc_info_dep_cfg_dependency_2eproto;
 extern PROTOBUF_INTERNAL_EXPORT_kind_2eproto ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<1> scc_info_role_cfg_kind_2eproto;
 extern PROTOBUF_INTERNAL_EXPORT_kind_2eproto ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_role_upgrade_cfg_kind_2eproto;
+extern PROTOBUF_INTERNAL_EXPORT_kind_2eproto ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_test_msg_verifier_kind_2eproto;
 class role_cfgDefaultTypeInternal {
  public:
   ::PROTOBUF_NAMESPACE_ID::internal::ExplicitlyConstructed<role_cfg> _instance;
@@ -89,9 +90,10 @@ static void InitDefaultsscc_info_arr_in_arr_cfg_kind_2eproto() {
   ::arr_in_arr_cfg::InitAsDefaultInstance();
 }
 
-::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<1> scc_info_arr_in_arr_cfg_kind_2eproto =
-    {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 1, 0, InitDefaultsscc_info_arr_in_arr_cfg_kind_2eproto}, {
-      &scc_info_arr_in_arr_kind_2eproto.base,}};
+::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<2> scc_info_arr_in_arr_cfg_kind_2eproto =
+    {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 2, 0, InitDefaultsscc_info_arr_in_arr_cfg_kind_2eproto}, {
+      &scc_info_arr_in_arr_kind_2eproto.base,
+      &scc_info_test_msg_verifier_kind_2eproto.base,}};
 
 static void InitDefaultsscc_info_role_cfg_kind_2eproto() {
   GOOGLE_PROTOBUF_VERIFY_VERSION;
@@ -197,6 +199,10 @@ const ::PROTOBUF_NAMESPACE_ID::uint32 TableStruct_kind_2eproto::offsets[] PROTOB
   ~0u,  // no _weak_field_map_
   PROTOBUF_FIELD_OFFSET(::arr_in_arr_cfg, id_),
   PROTOBUF_FIELD_OFFSET(::arr_in_arr_cfg, arr_),
+  PROTOBUF_FIELD_OFFSET(::arr_in_arr_cfg, test_plain_int_arr_),
+  PROTOBUF_FIELD_OFFSET(::arr_in_arr_cfg, test_plain_enum_arr_),
+  PROTOBUF_FIELD_OFFSET(::arr_in_arr_cfg, test_plain_msg_),
+  PROTOBUF_FIELD_OFFSET(::arr_in_arr_cfg, test_plain_msg_arr_),
 };
 static const ::PROTOBUF_NAMESPACE_ID::internal::MigrationSchema schemas[] PROTOBUF_SECTION_VARIABLE(protodesc_cold) = {
   { 0, -1, sizeof(::role_cfg)},
@@ -240,12 +246,16 @@ const char descriptor_table_protodef_kind_2eproto[] PROTOBUF_SECTION_VARIABLE(pr
   "_2\020{B\013\n\ttest_onof\"P\n\020test_nested_enum\022\035\n"
   "\031EN_TEST_NESTED_ENUM_VAL_1\020\000\022\035\n\031EN_TEST_"
   "NESTED_ENUM_VAL_2\020{:\014\352D\006helper\360D\001B\013\n\ttes"
-  "t_onof\"O\n\021test_msg_verifier\022\022\n\ttest_id_1"
+  "t_onof\"V\n\021test_msg_verifier\022\022\n\ttest_id_1"
   "\030\221N \001(\r\022&\n\ttest_id_2\030\222N \001(\rB\022\242\?\017\346\265\213\350\257\225ID"
-  "\345\210\253\345\220\2152\"l\n\016arr_in_arr_cfg\022\037\n\002id\030\001 \001(\rB\023\350"
-  "D\001\232\?\rThis is a Key\022\030\n\003arr\030\002 \003(\0132\013.arr_in"
-  "_arr:\037\352D\006helper\312>\023Test arr_in_arr_cfgb\006p"
-  "roto3"
+  "\345\210\253\345\220\2152:\005\242\?\002-^\"\223\002\n\016arr_in_arr_cfg\022\037\n\002id\030"
+  "\001 \001(\rB\023\350D\001\232\?\rThis is a Key\022\030\n\003arr\030\002 \003(\0132"
+  "\013.arr_in_arr\022\032\n\022test_plain_int_arr\030\003 \003(\005"
+  "\022\'\n\023test_plain_enum_arr\030\004 \003(\0162\n.cost_typ"
+  "e\0220\n\016test_plain_msg\030\005 \001(\0132\022.test_msg_ver"
+  "ifierB\004\262\?\001&\022.\n\022test_plain_msg_arr\030\006 \003(\0132"
+  "\022.test_msg_verifier:\037\352D\006helper\312>\023Test ar"
+  "r_in_arr_cfgb\006proto3"
   ;
 static const ::PROTOBUF_NAMESPACE_ID::internal::DescriptorTable*const descriptor_table_kind_2eproto_deps[3] = {
   &::descriptor_table_dependency_2eproto,
@@ -263,7 +273,7 @@ static ::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase*const descriptor_table_kin
 static ::PROTOBUF_NAMESPACE_ID::internal::once_flag descriptor_table_kind_2eproto_once;
 static bool descriptor_table_kind_2eproto_initialized = false;
 const ::PROTOBUF_NAMESPACE_ID::internal::DescriptorTable descriptor_table_kind_2eproto = {
-  &descriptor_table_kind_2eproto_initialized, descriptor_table_protodef_kind_2eproto, "kind.proto", 1125,
+  &descriptor_table_kind_2eproto_initialized, descriptor_table_protodef_kind_2eproto, "kind.proto", 1300,
   &descriptor_table_kind_2eproto_once, descriptor_table_kind_2eproto_sccs, descriptor_table_kind_2eproto_deps, 6, 3,
   schemas, file_default_instances, TableStruct_kind_2eproto::offsets,
   file_level_metadata_kind_2eproto, 6, file_level_enum_descriptors_kind_2eproto, file_level_service_descriptors_kind_2eproto,
@@ -1960,11 +1970,18 @@ void test_msg_verifier::InternalSwap(test_msg_verifier* other) {
 // ===================================================================
 
 void arr_in_arr_cfg::InitAsDefaultInstance() {
+  ::_arr_in_arr_cfg_default_instance_._instance.get_mutable()->test_plain_msg_ = const_cast< ::test_msg_verifier*>(
+      ::test_msg_verifier::internal_default_instance());
 }
 class arr_in_arr_cfg::_Internal {
  public:
+  static const ::test_msg_verifier& test_plain_msg(const arr_in_arr_cfg* msg);
 };
 
+const ::test_msg_verifier&
+arr_in_arr_cfg::_Internal::test_plain_msg(const arr_in_arr_cfg* msg) {
+  return *msg->test_plain_msg_;
+}
 arr_in_arr_cfg::arr_in_arr_cfg()
   : ::PROTOBUF_NAMESPACE_ID::Message(), _internal_metadata_(nullptr) {
   SharedCtor();
@@ -1973,15 +1990,25 @@ arr_in_arr_cfg::arr_in_arr_cfg()
 arr_in_arr_cfg::arr_in_arr_cfg(const arr_in_arr_cfg& from)
   : ::PROTOBUF_NAMESPACE_ID::Message(),
       _internal_metadata_(nullptr),
-      arr_(from.arr_) {
+      arr_(from.arr_),
+      test_plain_int_arr_(from.test_plain_int_arr_),
+      test_plain_enum_arr_(from.test_plain_enum_arr_),
+      test_plain_msg_arr_(from.test_plain_msg_arr_) {
   _internal_metadata_.MergeFrom(from._internal_metadata_);
+  if (from._internal_has_test_plain_msg()) {
+    test_plain_msg_ = new ::test_msg_verifier(*from.test_plain_msg_);
+  } else {
+    test_plain_msg_ = nullptr;
+  }
   id_ = from.id_;
   // @@protoc_insertion_point(copy_constructor:arr_in_arr_cfg)
 }
 
 void arr_in_arr_cfg::SharedCtor() {
   ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&scc_info_arr_in_arr_cfg_kind_2eproto.base);
-  id_ = 0u;
+  ::memset(&test_plain_msg_, 0, static_cast<size_t>(
+      reinterpret_cast<char*>(&id_) -
+      reinterpret_cast<char*>(&test_plain_msg_)) + sizeof(id_));
 }
 
 arr_in_arr_cfg::~arr_in_arr_cfg() {
@@ -1990,6 +2017,7 @@ arr_in_arr_cfg::~arr_in_arr_cfg() {
 }
 
 void arr_in_arr_cfg::SharedDtor() {
+  if (this != internal_default_instance()) delete test_plain_msg_;
 }
 
 void arr_in_arr_cfg::SetCachedSize(int size) const {
@@ -2008,6 +2036,13 @@ void arr_in_arr_cfg::Clear() {
   (void) cached_has_bits;
 
   arr_.Clear();
+  test_plain_int_arr_.Clear();
+  test_plain_enum_arr_.Clear();
+  test_plain_msg_arr_.Clear();
+  if (GetArenaNoVirtual() == nullptr && test_plain_msg_ != nullptr) {
+    delete test_plain_msg_;
+  }
+  test_plain_msg_ = nullptr;
   id_ = 0u;
   _internal_metadata_.Clear();
 }
@@ -2036,6 +2071,46 @@ const char* arr_in_arr_cfg::_InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE
             CHK_(ptr);
             if (!ctx->DataAvailable(ptr)) break;
           } while (::PROTOBUF_NAMESPACE_ID::internal::ExpectTag<18>(ptr));
+        } else goto handle_unusual;
+        continue;
+      // repeated int32 test_plain_int_arr = 3;
+      case 3:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 26)) {
+          ptr = ::PROTOBUF_NAMESPACE_ID::internal::PackedInt32Parser(_internal_mutable_test_plain_int_arr(), ptr, ctx);
+          CHK_(ptr);
+        } else if (static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 24) {
+          _internal_add_test_plain_int_arr(::PROTOBUF_NAMESPACE_ID::internal::ReadVarint(&ptr));
+          CHK_(ptr);
+        } else goto handle_unusual;
+        continue;
+      // repeated .cost_type test_plain_enum_arr = 4;
+      case 4:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 34)) {
+          ptr = ::PROTOBUF_NAMESPACE_ID::internal::PackedEnumParser(_internal_mutable_test_plain_enum_arr(), ptr, ctx);
+          CHK_(ptr);
+        } else if (static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 32) {
+          ::PROTOBUF_NAMESPACE_ID::uint64 val = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint(&ptr);
+          CHK_(ptr);
+          _internal_add_test_plain_enum_arr(static_cast<::cost_type>(val));
+        } else goto handle_unusual;
+        continue;
+      // .test_msg_verifier test_plain_msg = 5 [(.org.xresloader.field_separator) = "&"];
+      case 5:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 42)) {
+          ptr = ctx->ParseMessage(_internal_mutable_test_plain_msg(), ptr);
+          CHK_(ptr);
+        } else goto handle_unusual;
+        continue;
+      // repeated .test_msg_verifier test_plain_msg_arr = 6;
+      case 6:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 50)) {
+          ptr -= 1;
+          do {
+            ptr += 1;
+            ptr = ctx->ParseMessage(_internal_add_test_plain_msg_arr(), ptr);
+            CHK_(ptr);
+            if (!ctx->DataAvailable(ptr)) break;
+          } while (::PROTOBUF_NAMESPACE_ID::internal::ExpectTag<50>(ptr));
         } else goto handle_unusual;
         continue;
       default: {
@@ -2078,6 +2153,40 @@ failure:
       InternalWriteMessageToArray(2, this->_internal_arr(i), target, stream);
   }
 
+  // repeated int32 test_plain_int_arr = 3;
+  {
+    int byte_size = _test_plain_int_arr_cached_byte_size_.load(std::memory_order_relaxed);
+    if (byte_size > 0) {
+      target = stream->WriteInt32Packed(
+          3, _internal_test_plain_int_arr(), byte_size, target);
+    }
+  }
+
+  // repeated .cost_type test_plain_enum_arr = 4;
+  {
+    int byte_size = _test_plain_enum_arr_cached_byte_size_.load(std::memory_order_relaxed);
+    if (byte_size > 0) {
+      target = stream->WriteEnumPacked(
+          4, test_plain_enum_arr_, byte_size, target);
+    }
+  }
+
+  // .test_msg_verifier test_plain_msg = 5 [(.org.xresloader.field_separator) = "&"];
+  if (this->has_test_plain_msg()) {
+    stream->EnsureSpace(&target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
+      InternalWriteMessageToArray(
+        5, _Internal::test_plain_msg(this), target, stream);
+  }
+
+  // repeated .test_msg_verifier test_plain_msg_arr = 6;
+  for (unsigned int i = 0,
+      n = static_cast<unsigned int>(this->_internal_test_plain_msg_arr_size()); i < n; i++) {
+    stream->EnsureSpace(&target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
+      InternalWriteMessageToArray(6, this->_internal_test_plain_msg_arr(i), target, stream);
+  }
+
   if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::InternalSerializeUnknownFieldsToArray(
         _internal_metadata_.unknown_fields(), target, stream);
@@ -2099,6 +2208,53 @@ size_t arr_in_arr_cfg::ByteSizeLong() const {
   for (const auto& msg : this->arr_) {
     total_size +=
       ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(msg);
+  }
+
+  // repeated int32 test_plain_int_arr = 3;
+  {
+    size_t data_size = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
+      Int32Size(this->test_plain_int_arr_);
+    if (data_size > 0) {
+      total_size += 1 +
+        ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::Int32Size(
+            static_cast<::PROTOBUF_NAMESPACE_ID::int32>(data_size));
+    }
+    int cached_size = ::PROTOBUF_NAMESPACE_ID::internal::ToCachedSize(data_size);
+    _test_plain_int_arr_cached_byte_size_.store(cached_size,
+                                    std::memory_order_relaxed);
+    total_size += data_size;
+  }
+
+  // repeated .cost_type test_plain_enum_arr = 4;
+  {
+    size_t data_size = 0;
+    unsigned int count = static_cast<unsigned int>(this->_internal_test_plain_enum_arr_size());for (unsigned int i = 0; i < count; i++) {
+      data_size += ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::EnumSize(
+        this->_internal_test_plain_enum_arr(static_cast<int>(i)));
+    }
+    if (data_size > 0) {
+      total_size += 1 +
+        ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::Int32Size(
+            static_cast<::PROTOBUF_NAMESPACE_ID::int32>(data_size));
+    }
+    int cached_size = ::PROTOBUF_NAMESPACE_ID::internal::ToCachedSize(data_size);
+    _test_plain_enum_arr_cached_byte_size_.store(cached_size,
+                                    std::memory_order_relaxed);
+    total_size += data_size;
+  }
+
+  // repeated .test_msg_verifier test_plain_msg_arr = 6;
+  total_size += 1UL * this->_internal_test_plain_msg_arr_size();
+  for (const auto& msg : this->test_plain_msg_arr_) {
+    total_size +=
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(msg);
+  }
+
+  // .test_msg_verifier test_plain_msg = 5 [(.org.xresloader.field_separator) = "&"];
+  if (this->has_test_plain_msg()) {
+    total_size += 1 +
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
+        *test_plain_msg_);
   }
 
   // uint32 id = 1 [(.org.xresloader.field_description) = "This is a Key", (.org.xresloader.ue.key_tag) = 1];
@@ -2140,6 +2296,12 @@ void arr_in_arr_cfg::MergeFrom(const arr_in_arr_cfg& from) {
   (void) cached_has_bits;
 
   arr_.MergeFrom(from.arr_);
+  test_plain_int_arr_.MergeFrom(from.test_plain_int_arr_);
+  test_plain_enum_arr_.MergeFrom(from.test_plain_enum_arr_);
+  test_plain_msg_arr_.MergeFrom(from.test_plain_msg_arr_);
+  if (from.has_test_plain_msg()) {
+    _internal_mutable_test_plain_msg()->::test_msg_verifier::MergeFrom(from._internal_test_plain_msg());
+  }
   if (from.id() != 0) {
     _internal_set_id(from._internal_id());
   }
@@ -2167,6 +2329,10 @@ void arr_in_arr_cfg::InternalSwap(arr_in_arr_cfg* other) {
   using std::swap;
   _internal_metadata_.Swap(&other->_internal_metadata_);
   arr_.InternalSwap(&other->arr_);
+  test_plain_int_arr_.InternalSwap(&other->test_plain_int_arr_);
+  test_plain_enum_arr_.InternalSwap(&other->test_plain_enum_arr_);
+  test_plain_msg_arr_.InternalSwap(&other->test_plain_msg_arr_);
+  swap(test_plain_msg_, other->test_plain_msg_);
   swap(id_, other->id_);
 }
 

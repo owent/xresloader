@@ -31,6 +31,7 @@ public class ProgramOptions {
     private static Options options = null;
     private static String version = null;
     private static String dataVersion = null;
+    private static Properties properties = null;
 
     public FileType outType;
 
@@ -407,17 +408,26 @@ public class ProgramOptions {
         return 0;
     }
 
+    public static Properties getProperties() {
+        if (properties != null) {
+            return properties;
+        }
+
+        properties = new Properties();
+        try {
+            InputStream inCfg = getInstance().getClass().getClassLoader().getResourceAsStream("application.properties");
+            properties.load(inCfg);
+            inCfg.close();
+        } catch (IOException e) {
+            ProgramOptions.getLoger().error("Get properties file application.properties failed.\n%s", e.toString());
+        }
+
+        return properties;
+    }
+
     public String getVersion() {
         if (version == null) {
-            InputStream inCfg = getClass().getClassLoader().getResourceAsStream("application.properties");
-            Properties props = new Properties();
-            try {
-                props.load(inCfg);
-                version = props.getProperty("version");
-            } catch (IOException e) {
-                ProgramOptions.getLoger().error("Get version failed.\n%s", e.toString());
-                version = "Unknown";
-            }
+            version = getProperties().getProperty("version", "Unknown");
         }
         return version;
     }
@@ -454,16 +464,7 @@ public class ProgramOptions {
         // System.err.println(String.format("[ERROR] set
         // -Dlog4j.configuration=log4j2.xml failed.\n%s", e.toString()));
         // }
-        String name = "xresloader";
-        InputStream inCfg = getInstance().getClass().getClassLoader().getResourceAsStream("application.properties");
-        Properties props = new Properties();
-
-        try {
-            props.load(inCfg);
-            name = props.getProperty("name");
-        } catch (IOException e) {
-            System.err.println(String.format("[ERROR] Get application name failed.\n%s", e.toString()));
-        }
+        String name = getProperties().getProperty("name", "xresloader");
 
         try {
             logger = LogManager.getFormatterLogger(name);
@@ -476,5 +477,13 @@ public class ProgramOptions {
             // logger = LogManager.get
         }
         return logger;
+    }
+
+    static public String getReportUrl() {
+        return getProperties().getProperty("report", "https://github.com/xresloader/xresloader/issues");
+    }
+
+    static public String getHomeUrl() {
+        return getProperties().getProperty("home", "https://xresloader.atframe.work/");
     }
 }

@@ -1,8 +1,13 @@
 package org.xresloader.core.data.dst;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import org.xresloader.core.data.err.ConvException;
+import org.xresloader.core.data.src.DataSrcImpl;
+import org.xresloader.core.data.vfy.DataVerifyImpl;
+import org.xresloader.core.engine.ExcelEngine;
+import org.xresloader.core.engine.IdentifyDescriptor;
 import org.xresloader.core.ProgramOptions;
 
 /**
@@ -97,5 +102,197 @@ public abstract class DataDstImpl {
     public void logErrorMessage(String format, Object... args) {
         this.setLastErrorMessage(format, args);
         ProgramOptions.getLoger().error("%s", this.lastErrorMessage);
+    }
+
+    static public String[] splitPlainGroups(String input, String sep) {
+        if (sep == null || sep.isEmpty()) {
+            sep = ",;|";
+        }
+
+        if (input == null || input.isEmpty()) {
+            return null;
+        }
+
+        char sepC = 0;
+        for (int i = 0; sepC == 0 && i < input.length(); ++i) {
+            if (sep.indexOf(input.charAt(i)) < 0) {
+                continue;
+            }
+
+            sepC = input.charAt(i);
+        }
+
+        return input.split(String.valueOf(sepC));
+    }
+
+    static public Boolean parsePlainDataBoolean(String input, IdentifyDescriptor ident,
+            DataDstWriterNode.DataDstFieldDescriptor field) throws ConvException {
+        if (input == null) {
+            return false;
+        }
+
+        String item = ExcelEngine.tryMacro(input.trim());
+        return DataSrcImpl.getBooleanFromString(item);
+    }
+
+    static public Boolean[] parsePlainDataBoolean(String[] groups, IdentifyDescriptor ident,
+            DataDstWriterNode.DataDstFieldDescriptor field) throws ConvException {
+        if (groups == null || ident == null) {
+            return null;
+        }
+
+        Boolean[] ret = new Boolean[groups.length];
+        for (int i = 0; i < groups.length; ++i) {
+            ret[i] = parsePlainDataBoolean(groups[i], ident, field);
+        }
+
+        return ret;
+    }
+
+    static public String parsePlainDataString(String input, IdentifyDescriptor ident,
+            DataDstWriterNode.DataDstFieldDescriptor field) throws ConvException {
+        if (input == null) {
+            return null;
+        }
+
+        return input.trim();
+    }
+
+    static public String[] parsePlainDataString(String[] groups, IdentifyDescriptor ident,
+            DataDstWriterNode.DataDstFieldDescriptor field) throws ConvException {
+        if (groups == null || ident == null) {
+            return null;
+        }
+
+        String[] ret = new String[groups.length];
+        for (int i = 0; i < groups.length; ++i) {
+            String item = groups[i];
+            ret[i] = parsePlainDataString(item, ident, field);
+        }
+
+        return ret;
+    }
+
+    static public Long parsePlainDataLong(String input, IdentifyDescriptor ident,
+            DataDstWriterNode.DataDstFieldDescriptor field) throws ConvException {
+        if (input == null || ident == null) {
+            return null;
+        }
+
+        Long ret;
+        String item = ExcelEngine.tryMacro(input.trim());
+        if (field != null) {
+            ret = DataVerifyImpl.getAndVerify(field.getVerifier(), ident.index, ident.name, item);
+            if (field.mutableExtension().ratio > 1) {
+                ret *= field.mutableExtension().ratio;
+            }
+        } else {
+            ret = DataVerifyImpl.getAndVerify(ident.getVerifier(), ident.index, ident.name, item);
+            if (ident.ratio > 1) {
+                ret *= ident.ratio;
+            }
+        }
+
+        return ret;
+    }
+
+    static public Long[] parsePlainDataLong(String[] groups, IdentifyDescriptor ident,
+            DataDstWriterNode.DataDstFieldDescriptor field) throws ConvException {
+        if (groups == null || ident == null) {
+            return null;
+        }
+
+        Long[] ret = new Long[groups.length];
+        for (int i = 0; i < groups.length; ++i) {
+            ret[i] = parsePlainDataLong(groups[i], ident, field);
+        }
+
+        return ret;
+    }
+
+    static public Double parsePlainDataDouble(String input, IdentifyDescriptor ident,
+            DataDstWriterNode.DataDstFieldDescriptor field) throws ConvException {
+        if (input == null || ident == null) {
+            return 0.0;
+        }
+
+        try {
+            Double ret = Double.valueOf(ExcelEngine.tryMacro(input));
+            if (field != null) {
+                if (field.mutableExtension().ratio > 1) {
+                    ret *= field.mutableExtension().ratio;
+                }
+            } else {
+                if (ident.ratio > 1) {
+                    ret *= ident.ratio;
+                }
+            }
+            return ret;
+        } catch (java.lang.NumberFormatException e) {
+            throw new ConvException(String.format("Try to convert %s to double failed.", input));
+        }
+    }
+
+    static public Double[] parsePlainDataDouble(String[] groups, IdentifyDescriptor ident,
+            DataDstWriterNode.DataDstFieldDescriptor field) throws ConvException {
+        if (groups == null || ident == null) {
+            return null;
+        }
+
+        Double[] ret = new Double[groups.length];
+        for (int i = 0; i < groups.length; ++i) {
+            String item = ExcelEngine.tryMacro(groups[i].trim());
+            ret[i] = parsePlainDataDouble(item, ident, field);
+        }
+
+        return ret;
+    }
+
+    static public String getPlainFieldSeparator(DataDstWriterNode.DataDstFieldDescriptor field) {
+        if (field == null) {
+            return null;
+        }
+
+        if (field.isList()) {
+            return field.mutableExtension().plainSeparator;
+        }
+
+        String ret = field.mutableExtension().plainSeparator;
+        if (field.getTypeDescriptor() == null) {
+            return ret;
+        }
+
+        if (ret == null) {
+            ret = field.getTypeDescriptor().mutableExtension().plainSeparator;
+        } else if (field.getTypeDescriptor().mutableExtension().plainSeparator != null) {
+            ret = ret + field.getTypeDescriptor().mutableExtension().plainSeparator;
+        }
+
+        return ret;
+    }
+
+    static public String getPlainMessageSeparator(DataDstWriterNode.DataDstFieldDescriptor field) {
+        if (field == null) {
+            return null;
+        }
+
+        if (field.isList()) {
+            if (field.getTypeDescriptor() == null) {
+                return field.getTypeDescriptor().mutableExtension().plainSeparator;
+            }
+        }
+
+        String ret = field.mutableExtension().plainSeparator;
+        if (field.getTypeDescriptor() == null) {
+            return ret;
+        }
+
+        if (ret == null) {
+            ret = field.getTypeDescriptor().mutableExtension().plainSeparator;
+        } else if (field.getTypeDescriptor().mutableExtension().plainSeparator != null) {
+            ret = ret + field.getTypeDescriptor().mutableExtension().plainSeparator;
+        }
+
+        return ret;
     }
 }

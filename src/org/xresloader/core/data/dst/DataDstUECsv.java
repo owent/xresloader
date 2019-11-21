@@ -223,7 +223,7 @@ public class DataDstUECsv extends DataDstUEBase {
     @Override
     final protected Object pickValueField(Object buildObj, DataDstWriterNodeWrapper desc) throws ConvException {
         if (!isRecursiveEnabled()) {
-            Object ret = pickValueFieldBaseImpl(desc, 0);
+            Object ret = pickValueFieldBaseStandardImpl(desc, 0);
             if (ret == null) {
                 switch (desc.getJavaType()) {
                 case INT:
@@ -300,6 +300,16 @@ public class DataDstUECsv extends DataDstUEBase {
 
             boolean isFirst = true;
             for (HashMap.Entry<String, DataDstChildrenNode> child : desc.getChildren().entrySet()) {
+                // TODO 当前UE模式生成的字段是映射字段和协议字段交集的动态结构, 目前还不支持仅依据协议字段的静态结构，所以先跳过Plain模式
+                if (child.getValue().mode == DataDstWriterNode.CHILD_NODE_TYPE.PLAIN) {
+                    continue;
+                }
+                // UE不支持递归的模式中，不允许动态长度，所以跳过Plain模式的数组
+                // if (!isRecursiveEnabled() && child.getValue().innerDesc.isList()
+                // && child.getValue().mode == DataDstWriterNode.CHILD_NODE_TYPE.PLAIN) {
+                // continue;
+                // }
+
                 if (isFirst) {
                     isFirst = false;
                 } else {
@@ -387,7 +397,7 @@ public class DataDstUECsv extends DataDstUEBase {
             return true;
         }
 
-        Object val = pickValueFieldBaseImpl(desc);
+        Object val = pickValueFieldBaseStandardImpl(desc);
         if (val == null) {
             if (desc.getFieldDescriptor() != null && desc.getFieldDescriptor().isList()) {
                 return false;

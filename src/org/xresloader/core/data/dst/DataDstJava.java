@@ -9,6 +9,8 @@ import org.xresloader.core.ProgramOptions;
 import org.xresloader.core.data.err.ConvException;
 import org.xresloader.core.data.src.DataContainer;
 import org.xresloader.core.data.src.DataSrcImpl;
+import org.xresloader.core.engine.ExcelEngine;
+import org.xresloader.core.engine.IdentifyDescriptor;
 import org.xresloader.core.scheme.SchemeConf;
 
 /**
@@ -65,11 +67,14 @@ public abstract class DataDstJava extends DataDstImpl {
         return ret;
     }
 
+    private void dumpDefault(HashMap<String, Object> builder, DataDstWriterNode.DataDstChildrenNode as_child) {
+        dumpDefault(builder, as_child.innerDesc);
+    }
+
     @SuppressWarnings("unchecked")
-    private void dumpDefault(HashMap<String, Object> builder, DataDstWriterNode desc, String field_name,
-            DataDstWriterNode.DataDstChildrenNode as_child) {
+    private void dumpDefault(HashMap<String, Object> builder, DataDstWriterNode.DataDstFieldDescriptor field) {
         Object val = null;
-        switch (desc.getType()) {
+        switch (field.getType()) {
         case INT:
             val = Integer.valueOf(0);
             break;
@@ -93,11 +98,10 @@ public abstract class DataDstJava extends DataDstImpl {
             break;
         case MESSAGE: {
             HashMap<String, Object> sub_msg = new HashMap<String, Object>();
-            for (Map.Entry<String, DataDstWriterNode.DataDstChildrenNode> sub_item : desc.getChildren().entrySet()) {
-                for (DataDstWriterNode sub_desc : sub_item.getValue().nodes) {
-                    if (sub_item.getValue().isRequired || ProgramOptions.getInstance().enbleEmptyList) {
-                        dumpDefault(sub_msg, sub_desc, sub_item.getKey(), sub_item.getValue());
-                    }
+            for (Map.Entry<String, DataDstWriterNode.DataDstFieldDescriptor> sub_item : field.getTypeDescriptor().fields
+                    .entrySet()) {
+                if (sub_item.getValue().isRequired() || ProgramOptions.getInstance().enbleEmptyList) {
+                    dumpDefault(sub_msg, sub_item.getValue());
                 }
             }
             break;
@@ -106,19 +110,19 @@ public abstract class DataDstJava extends DataDstImpl {
 
         if (null == val) {
             this.logErrorMessage("serialize failed. %s is not supported for java default value",
-                    desc.getType().toString());
+                    field.getType().toString());
             return;
         }
 
-        if (as_child.innerDesc.isList()) {
-            ArrayList<Object> old = (ArrayList<Object>) builder.getOrDefault(field_name, null);
+        if (field.isList()) {
+            ArrayList<Object> old = (ArrayList<Object>) builder.getOrDefault(field.getName(), null);
             if (null == old) {
                 old = new ArrayList<Object>();
-                builder.put(field_name, old);
+                builder.put(field.getName(), old);
             }
             old.add(val);
         } else {
-            builder.put(field_name, val);
+            builder.put(field.getName(), val);
         }
     }
 
@@ -134,9 +138,17 @@ public abstract class DataDstJava extends DataDstImpl {
         boolean ret = false;
 
         for (Map.Entry<String, DataDstWriterNode.DataDstChildrenNode> c : node.getChildren().entrySet()) {
-            for (DataDstWriterNode child : c.getValue().nodes) {
-                if (dumpField(builder, child, c.getKey(), c.getValue())) {
-                    ret = true;
+            if (c.getValue().mode == DataDstWriterNode.CHILD_NODE_TYPE.STANDARD) {
+                for (DataDstWriterNode child : c.getValue().nodes) {
+                    if (dumpStandardField(builder, child, c.getValue())) {
+                        ret = true;
+                    }
+                }
+            } else if (c.getValue().mode == DataDstWriterNode.CHILD_NODE_TYPE.PLAIN) {
+                for (DataDstWriterNode child : c.getValue().nodes) {
+                    if (dumpPlainField(builder, child.identify, child.getFieldDescriptor(), true)) {
+                        ret = true;
+                    }
                 }
             }
         }
@@ -145,11 +157,11 @@ public abstract class DataDstJava extends DataDstImpl {
     }
 
     @SuppressWarnings("unchecked")
-    private boolean dumpField(HashMap<String, Object> builder, DataDstWriterNode desc, String field_name,
+    private boolean dumpStandardField(HashMap<String, Object> builder, DataDstWriterNode desc,
             DataDstWriterNode.DataDstChildrenNode as_child) throws ConvException {
         if (null == desc.identify && DataDstWriterNode.JAVA_TYPE.MESSAGE != desc.getType()) {
             if (ProgramOptions.getInstance().enbleEmptyList) {
-                dumpDefault(builder, desc, field_name, as_child);
+                dumpDefault(builder, as_child);
             }
             return false;
         }
@@ -230,23 +242,236 @@ public abstract class DataDstJava extends DataDstImpl {
         }
 
         if (null == val) {
-            if (as_child.isRequired || ProgramOptions.getInstance().enbleEmptyList) {
-                dumpDefault(builder, desc, field_name, as_child);
+            if (as_child.isRequired() || ProgramOptions.getInstance().enbleEmptyList) {
+                dumpDefault(builder, as_child);
             }
             return false;
         }
 
         if (as_child.innerDesc.isList()) {
-            ArrayList<Object> old = (ArrayList<Object>) builder.getOrDefault(field_name, null);
+            ArrayList<Object> old = (ArrayList<Object>) builder.getOrDefault(as_child.innerDesc.getName(), null);
             if (null == old) {
                 old = new ArrayList<Object>();
-                builder.put(field_name, old);
+                builder.put(as_child.innerDesc.getName(), old);
             }
             old.add(val);
         } else {
-            builder.put(field_name, val);
+            builder.put(as_child.innerDesc.getName(), val);
         }
 
         return true;
+    }
+
+    private boolean dumpPlainField(HashMap<String, Object> builder, IdentifyDescriptor ident,
+            DataDstWriterNode.DataDstFieldDescriptor field, boolean isTopLevel) throws ConvException {
+        if (null == ident) {
+            if (ProgramOptions.getInstance().enbleEmptyList) {
+                dumpDefault(builder, field);
+            }
+            return false;
+        }
+
+        DataContainer<String> res = DataSrcImpl.getOurInstance().getValue(ident, "");
+        if (null == res || !res.valid) {
+            if (field.isRequired() || ProgramOptions.getInstance().enbleEmptyList) {
+                dumpDefault(builder, field);
+            }
+            return false;
+        }
+
+        return dumpPlainField(builder, ident, field, isTopLevel, res.value);
+    }
+
+    private boolean dumpPlainField(HashMap<String, Object> builder, IdentifyDescriptor ident,
+            DataDstWriterNode.DataDstFieldDescriptor field, boolean isTopLevel, String input) throws ConvException {
+
+        if ((isTopLevel && !field.isList()) && field.getType() != DataDstWriterNode.JAVA_TYPE.MESSAGE) {
+            // error type
+            logErrorMessage("Plain type %s of %s.%s must be list", field.getType().toString(),
+                    field.getTypeDescriptor().getFullName(), field.getName());
+            return false;
+        }
+
+        Object val = null;
+        if (field.isList()) {
+            String[] groups = splitPlainGroups(input.trim(), getPlainFieldSeparator(field));
+            switch (field.getType()) {
+            case INT: {
+                Long[] values = parsePlainDataLong(groups, ident, isTopLevel ? null : field);
+                ArrayList<Object> tmp = new ArrayList<Object>();
+                if (values != null) {
+                    tmp.ensureCapacity(values.length);
+                }
+                for (Long v : values) {
+                    tmp.add(v.intValue());
+                }
+                val = tmp;
+                break;
+            }
+
+            case LONG: {
+                Long[] values = parsePlainDataLong(groups, ident, isTopLevel ? null : field);
+                ArrayList<Object> tmp = new ArrayList<Object>();
+                if (values != null) {
+                    tmp.ensureCapacity(values.length);
+                }
+                for (Long v : values) {
+                    tmp.add(v);
+                }
+                val = tmp;
+                break;
+            }
+
+            case FLOAT: {
+                Double[] values = parsePlainDataDouble(groups, ident, isTopLevel ? null : field);
+                ArrayList<Object> tmp = new ArrayList<Object>();
+                if (values != null) {
+                    tmp.ensureCapacity(values.length);
+                }
+                for (Double v : values) {
+                    tmp.add(v.floatValue());
+                }
+                val = tmp;
+                break;
+            }
+
+            case DOUBLE: {
+                Double[] values = parsePlainDataDouble(groups, ident, isTopLevel ? null : field);
+                ArrayList<Object> tmp = new ArrayList<Object>();
+                if (values != null) {
+                    tmp.ensureCapacity(values.length);
+                }
+                for (Double v : values) {
+                    tmp.add(v);
+                }
+                val = tmp;
+                break;
+            }
+
+            case BOOLEAN: {
+                Boolean[] values = parsePlainDataBoolean(groups, ident, isTopLevel ? null : field);
+                ArrayList<Object> tmp = new ArrayList<Object>();
+                if (values != null) {
+                    tmp.ensureCapacity(values.length);
+                }
+                for (Boolean v : values) {
+                    tmp.add(v);
+                }
+                val = tmp;
+                break;
+            }
+
+            case STRING:
+            case BYTES: {
+                String[] values = parsePlainDataString(groups, ident, isTopLevel ? null : field);
+                ArrayList<Object> tmp = new ArrayList<Object>();
+                if (values != null) {
+                    tmp.ensureCapacity(values.length);
+                }
+                for (String v : values) {
+                    tmp.add(v);
+                }
+                val = tmp;
+                break;
+            }
+
+            case MESSAGE: {
+                ArrayList<Object> tmp = new ArrayList<Object>();
+                tmp.ensureCapacity(groups.length);
+                for (String v : groups) {
+                    String[] subGroups = splitPlainGroups(v, getPlainMessageSeparator(field));
+                    HashMap<String, Object> msg = parsePlainDataMessage(subGroups, ident, field);
+                    if (msg != null) {
+                        tmp.add(msg);
+                    }
+                }
+                if (!tmp.isEmpty()) {
+                    val = tmp;
+                }
+                break;
+            }
+
+            default:
+                break;
+            }
+        } else {
+            switch (field.getType()) {
+            case INT: {
+                val = parsePlainDataLong(input.trim(), ident, isTopLevel ? null : field).intValue();
+                break;
+            }
+
+            case LONG: {
+                val = parsePlainDataLong(input.trim(), ident, isTopLevel ? null : field);
+                break;
+            }
+
+            case FLOAT: {
+                val = parsePlainDataDouble(input.trim(), ident, isTopLevel ? null : field).floatValue();
+                break;
+            }
+
+            case DOUBLE: {
+                val = parsePlainDataDouble(input.trim(), ident, isTopLevel ? null : field);
+                break;
+            }
+
+            case BOOLEAN: {
+                val = parsePlainDataBoolean(input.trim(), ident, isTopLevel ? null : field);
+                break;
+            }
+
+            case STRING:
+            case BYTES: {
+                val = parsePlainDataString(input.trim(), ident, isTopLevel ? null : field);
+                break;
+            }
+
+            case MESSAGE: {
+                String[] groups = splitPlainGroups(input.trim(), getPlainFieldSeparator(field));
+                val = parsePlainDataMessage(groups, ident, field);
+                if (val == null && field.isRequired()) {
+                    dumpDefault(builder, field);
+                }
+                break;
+            }
+
+            default:
+                break;
+            }
+        }
+
+        if (val == null) {
+            return false;
+        }
+
+        builder.put(field.getName(), val);
+        return true;
+    }
+
+    public HashMap<String, Object> parsePlainDataMessage(String[] inputs, IdentifyDescriptor ident,
+            DataDstWriterNode.DataDstFieldDescriptor field) throws ConvException {
+        if (field.getTypeDescriptor() == null || ident == null || inputs == null || inputs.length == 0) {
+            return null;
+        }
+
+        ArrayList<DataDstWriterNode.DataDstFieldDescriptor> children = field.getTypeDescriptor().getSortedFields();
+        if (children.size() != inputs.length) {
+            throw new ConvException(
+                    String.format("Try to convert %s to %s failed, field count not matched(expect %d, real %d).",
+                            field.getTypeDescriptor().getFullName(), field.getTypeDescriptor().getFullName(),
+                            children.size(), inputs.length));
+        }
+
+        HashMap<String, Object> ret = new HashMap<String, Object>();
+        for (int i = 0; i < inputs.length; ++i) {
+            dumpPlainField(ret, ident, children.get(i), false, inputs[i]);
+        }
+
+        if (ret.isEmpty()) {
+            return null;
+        }
+
+        return ret;
     }
 }

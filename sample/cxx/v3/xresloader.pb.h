@@ -71,10 +71,14 @@ static const int kMsgDescriptionFieldNumber = 1001;
 extern ::PROTOBUF_NAMESPACE_ID::internal::ExtensionIdentifier< ::google::protobuf::MessageOptions,
     ::PROTOBUF_NAMESPACE_ID::internal::StringTypeTraits, 9, false >
   msg_description;
-static const int kMsgRequireMappingAllFieldNumber = 1101;
+static const int kMsgRequireMappingAllFieldNumber = 1011;
 extern ::PROTOBUF_NAMESPACE_ID::internal::ExtensionIdentifier< ::google::protobuf::MessageOptions,
     ::PROTOBUF_NAMESPACE_ID::internal::PrimitiveTypeTraits< bool >, 8, false >
   msg_require_mapping_all;
+static const int kMsgSeparatorFieldNumber = 1012;
+extern ::PROTOBUF_NAMESPACE_ID::internal::ExtensionIdentifier< ::google::protobuf::MessageOptions,
+    ::PROTOBUF_NAMESPACE_ID::internal::StringTypeTraits, 9, false >
+  msg_separator;
 static const int kVerifierFieldNumber = 1001;
 extern ::PROTOBUF_NAMESPACE_ID::internal::ExtensionIdentifier< ::google::protobuf::FieldOptions,
     ::PROTOBUF_NAMESPACE_ID::internal::StringTypeTraits, 9, false >
@@ -91,6 +95,10 @@ static const int kFieldRatioFieldNumber = 1013;
 extern ::PROTOBUF_NAMESPACE_ID::internal::ExtensionIdentifier< ::google::protobuf::FieldOptions,
     ::PROTOBUF_NAMESPACE_ID::internal::PrimitiveTypeTraits< ::PROTOBUF_NAMESPACE_ID::int32 >, 5, false >
   field_ratio;
+static const int kFieldSeparatorFieldNumber = 1014;
+extern ::PROTOBUF_NAMESPACE_ID::internal::ExtensionIdentifier< ::google::protobuf::FieldOptions,
+    ::PROTOBUF_NAMESPACE_ID::internal::StringTypeTraits, 9, false >
+  field_separator;
 static const int kOneofDescriptionFieldNumber = 1001;
 extern ::PROTOBUF_NAMESPACE_ID::internal::ExtensionIdentifier< ::google::protobuf::OneofOptions,
     ::PROTOBUF_NAMESPACE_ID::internal::StringTypeTraits, 9, false >

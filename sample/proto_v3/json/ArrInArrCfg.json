@@ -35,7 +35,14 @@
                 "Name": ""
             }
         }],
+        "TestPlainIntArr": [],
+        "TestPlainEnumArr": [],
+        "TestPlainMsgArr": [],
         "Id": 10001,
+        "TestPlainMsg": {
+            "TestId2": 0,
+            "TestId1": 0
+        },
         "Name": 10001
     },
     {
@@ -74,7 +81,14 @@
                 "Name": ""
             }
         }],
+        "TestPlainIntArr": [],
+        "TestPlainEnumArr": [],
+        "TestPlainMsgArr": [],
         "Id": 10002,
+        "TestPlainMsg": {
+            "TestId2": 0,
+            "TestId1": 0
+        },
         "Name": 10002
     },
     {
@@ -107,7 +121,14 @@
                 "Name": ""
             }
         }],
+        "TestPlainIntArr": [],
+        "TestPlainEnumArr": [],
+        "TestPlainMsgArr": [],
         "Id": 10003,
+        "TestPlainMsg": {
+            "TestId2": 0,
+            "TestId1": 0
+        },
         "Name": 10003
     }
 ]

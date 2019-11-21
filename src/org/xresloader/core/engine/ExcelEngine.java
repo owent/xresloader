@@ -4,6 +4,7 @@ import org.xresloader.core.ProgramOptions;
 import org.xresloader.core.data.err.ConvException;
 import org.xresloader.core.data.src.DataContainer;
 import org.xresloader.core.data.src.DataSrcImpl;
+import org.xresloader.core.data.vfy.DataVerifyImpl;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
@@ -113,6 +114,10 @@ public class ExcelEngine {
     }
 
     static public String tryMacro(String m) {
+        if (m == null || m.isEmpty()) {
+            return m;
+        }
+
         if (null == DataSrcImpl.getOurInstance())
             return m;
 
@@ -309,7 +314,7 @@ public class ExcelEngine {
             break;
         case BOOLEAN: {
             boolean res = cal_cell2bool(c, cv);
-            out.set(col.getAndVerify(res ? 1 : 0));
+            out.set(DataVerifyImpl.getAndVerify(col.getVerifier(), col.index, col.name, res ? 1 : 0));
             break;
         }
         case ERROR:
@@ -328,7 +333,7 @@ public class ExcelEngine {
                 }
             }
 
-            out.set(col.getAndVerify(val));
+            out.set(DataVerifyImpl.getAndVerify(col.getVerifier(), col.index, col.name, val));
             break;
         }
         case STRING: {
@@ -337,7 +342,7 @@ public class ExcelEngine {
                 break;
             }
 
-            out.set(col.getAndVerify(tryMacro(val)));
+            out.set(DataVerifyImpl.getAndVerify(col.getVerifier(), col.index, col.name, tryMacro(val)));
             break;
         }
         default:
@@ -413,7 +418,9 @@ public class ExcelEngine {
             try {
                 out.set(Double.valueOf(tryMacro(val)));
             } catch (java.lang.NumberFormatException e) {
-                throw new ConvException(String.format("%s can not be converted to a number", val));
+                throw new ConvException(
+                        String.format("Table %s, Row %d, Column %d : %s can not be converted to a number",
+                                row.getSheet().getSheetName(), c.getRowIndex() + 1, c.getColumnIndex() + 1, val));
             }
             break;
         }
@@ -479,8 +486,7 @@ public class ExcelEngine {
                 break;
             }
 
-            out.set(!item.equals("0") && !item.equals("0.0") && !item.equalsIgnoreCase("false")
-                    && !item.equalsIgnoreCase("no") && !item.equalsIgnoreCase("disable"));
+            out.set(DataSrcImpl.getBooleanFromString(item));
             break;
         default:
             break;

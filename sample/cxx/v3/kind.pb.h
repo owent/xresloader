@@ -1264,6 +1264,10 @@ class arr_in_arr_cfg :
 
   enum : int {
     kArrFieldNumber = 2,
+    kTestPlainIntArrFieldNumber = 3,
+    kTestPlainEnumArrFieldNumber = 4,
+    kTestPlainMsgArrFieldNumber = 6,
+    kTestPlainMsgFieldNumber = 5,
     kIdFieldNumber = 1,
   };
   // repeated .arr_in_arr arr = 2;
@@ -1284,6 +1288,78 @@ class arr_in_arr_cfg :
   const ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::arr_in_arr >&
       arr() const;
 
+  // repeated int32 test_plain_int_arr = 3;
+  int test_plain_int_arr_size() const;
+  private:
+  int _internal_test_plain_int_arr_size() const;
+  public:
+  void clear_test_plain_int_arr();
+  private:
+  ::PROTOBUF_NAMESPACE_ID::int32 _internal_test_plain_int_arr(int index) const;
+  const ::PROTOBUF_NAMESPACE_ID::RepeatedField< ::PROTOBUF_NAMESPACE_ID::int32 >&
+      _internal_test_plain_int_arr() const;
+  void _internal_add_test_plain_int_arr(::PROTOBUF_NAMESPACE_ID::int32 value);
+  ::PROTOBUF_NAMESPACE_ID::RepeatedField< ::PROTOBUF_NAMESPACE_ID::int32 >*
+      _internal_mutable_test_plain_int_arr();
+  public:
+  ::PROTOBUF_NAMESPACE_ID::int32 test_plain_int_arr(int index) const;
+  void set_test_plain_int_arr(int index, ::PROTOBUF_NAMESPACE_ID::int32 value);
+  void add_test_plain_int_arr(::PROTOBUF_NAMESPACE_ID::int32 value);
+  const ::PROTOBUF_NAMESPACE_ID::RepeatedField< ::PROTOBUF_NAMESPACE_ID::int32 >&
+      test_plain_int_arr() const;
+  ::PROTOBUF_NAMESPACE_ID::RepeatedField< ::PROTOBUF_NAMESPACE_ID::int32 >*
+      mutable_test_plain_int_arr();
+
+  // repeated .cost_type test_plain_enum_arr = 4;
+  int test_plain_enum_arr_size() const;
+  private:
+  int _internal_test_plain_enum_arr_size() const;
+  public:
+  void clear_test_plain_enum_arr();
+  private:
+  ::cost_type _internal_test_plain_enum_arr(int index) const;
+  void _internal_add_test_plain_enum_arr(::cost_type value);
+  ::PROTOBUF_NAMESPACE_ID::RepeatedField<int>* _internal_mutable_test_plain_enum_arr();
+  public:
+  ::cost_type test_plain_enum_arr(int index) const;
+  void set_test_plain_enum_arr(int index, ::cost_type value);
+  void add_test_plain_enum_arr(::cost_type value);
+  const ::PROTOBUF_NAMESPACE_ID::RepeatedField<int>& test_plain_enum_arr() const;
+  ::PROTOBUF_NAMESPACE_ID::RepeatedField<int>* mutable_test_plain_enum_arr();
+
+  // repeated .test_msg_verifier test_plain_msg_arr = 6;
+  int test_plain_msg_arr_size() const;
+  private:
+  int _internal_test_plain_msg_arr_size() const;
+  public:
+  void clear_test_plain_msg_arr();
+  ::test_msg_verifier* mutable_test_plain_msg_arr(int index);
+  ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::test_msg_verifier >*
+      mutable_test_plain_msg_arr();
+  private:
+  const ::test_msg_verifier& _internal_test_plain_msg_arr(int index) const;
+  ::test_msg_verifier* _internal_add_test_plain_msg_arr();
+  public:
+  const ::test_msg_verifier& test_plain_msg_arr(int index) const;
+  ::test_msg_verifier* add_test_plain_msg_arr();
+  const ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::test_msg_verifier >&
+      test_plain_msg_arr() const;
+
+  // .test_msg_verifier test_plain_msg = 5 [(.org.xresloader.field_separator) = "&"];
+  bool has_test_plain_msg() const;
+  private:
+  bool _internal_has_test_plain_msg() const;
+  public:
+  void clear_test_plain_msg();
+  const ::test_msg_verifier& test_plain_msg() const;
+  ::test_msg_verifier* release_test_plain_msg();
+  ::test_msg_verifier* mutable_test_plain_msg();
+  void set_allocated_test_plain_msg(::test_msg_verifier* test_plain_msg);
+  private:
+  const ::test_msg_verifier& _internal_test_plain_msg() const;
+  ::test_msg_verifier* _internal_mutable_test_plain_msg();
+  public:
+
   // uint32 id = 1 [(.org.xresloader.field_description) = "This is a Key", (.org.xresloader.ue.key_tag) = 1];
   void clear_id();
   ::PROTOBUF_NAMESPACE_ID::uint32 id() const;
@@ -1299,6 +1375,12 @@ class arr_in_arr_cfg :
 
   ::PROTOBUF_NAMESPACE_ID::internal::InternalMetadataWithArena _internal_metadata_;
   ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::arr_in_arr > arr_;
+  ::PROTOBUF_NAMESPACE_ID::RepeatedField< ::PROTOBUF_NAMESPACE_ID::int32 > test_plain_int_arr_;
+  mutable std::atomic<int> _test_plain_int_arr_cached_byte_size_;
+  ::PROTOBUF_NAMESPACE_ID::RepeatedField<int> test_plain_enum_arr_;
+  mutable std::atomic<int> _test_plain_enum_arr_cached_byte_size_;
+  ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::test_msg_verifier > test_plain_msg_arr_;
+  ::test_msg_verifier* test_plain_msg_;
   ::PROTOBUF_NAMESPACE_ID::uint32 id_;
   mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
   friend struct ::TableStruct_kind_2eproto;
@@ -2258,6 +2340,195 @@ inline const ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::arr_in_arr >&
 arr_in_arr_cfg::arr() const {
   // @@protoc_insertion_point(field_list:arr_in_arr_cfg.arr)
   return arr_;
+}
+
+// repeated int32 test_plain_int_arr = 3;
+inline int arr_in_arr_cfg::_internal_test_plain_int_arr_size() const {
+  return test_plain_int_arr_.size();
+}
+inline int arr_in_arr_cfg::test_plain_int_arr_size() const {
+  return _internal_test_plain_int_arr_size();
+}
+inline void arr_in_arr_cfg::clear_test_plain_int_arr() {
+  test_plain_int_arr_.Clear();
+}
+inline ::PROTOBUF_NAMESPACE_ID::int32 arr_in_arr_cfg::_internal_test_plain_int_arr(int index) const {
+  return test_plain_int_arr_.Get(index);
+}
+inline ::PROTOBUF_NAMESPACE_ID::int32 arr_in_arr_cfg::test_plain_int_arr(int index) const {
+  // @@protoc_insertion_point(field_get:arr_in_arr_cfg.test_plain_int_arr)
+  return _internal_test_plain_int_arr(index);
+}
+inline void arr_in_arr_cfg::set_test_plain_int_arr(int index, ::PROTOBUF_NAMESPACE_ID::int32 value) {
+  test_plain_int_arr_.Set(index, value);
+  // @@protoc_insertion_point(field_set:arr_in_arr_cfg.test_plain_int_arr)
+}
+inline void arr_in_arr_cfg::_internal_add_test_plain_int_arr(::PROTOBUF_NAMESPACE_ID::int32 value) {
+  test_plain_int_arr_.Add(value);
+}
+inline void arr_in_arr_cfg::add_test_plain_int_arr(::PROTOBUF_NAMESPACE_ID::int32 value) {
+  _internal_add_test_plain_int_arr(value);
+  // @@protoc_insertion_point(field_add:arr_in_arr_cfg.test_plain_int_arr)
+}
+inline const ::PROTOBUF_NAMESPACE_ID::RepeatedField< ::PROTOBUF_NAMESPACE_ID::int32 >&
+arr_in_arr_cfg::_internal_test_plain_int_arr() const {
+  return test_plain_int_arr_;
+}
+inline const ::PROTOBUF_NAMESPACE_ID::RepeatedField< ::PROTOBUF_NAMESPACE_ID::int32 >&
+arr_in_arr_cfg::test_plain_int_arr() const {
+  // @@protoc_insertion_point(field_list:arr_in_arr_cfg.test_plain_int_arr)
+  return _internal_test_plain_int_arr();
+}
+inline ::PROTOBUF_NAMESPACE_ID::RepeatedField< ::PROTOBUF_NAMESPACE_ID::int32 >*
+arr_in_arr_cfg::_internal_mutable_test_plain_int_arr() {
+  return &test_plain_int_arr_;
+}
+inline ::PROTOBUF_NAMESPACE_ID::RepeatedField< ::PROTOBUF_NAMESPACE_ID::int32 >*
+arr_in_arr_cfg::mutable_test_plain_int_arr() {
+  // @@protoc_insertion_point(field_mutable_list:arr_in_arr_cfg.test_plain_int_arr)
+  return _internal_mutable_test_plain_int_arr();
+}
+
+// repeated .cost_type test_plain_enum_arr = 4;
+inline int arr_in_arr_cfg::_internal_test_plain_enum_arr_size() const {
+  return test_plain_enum_arr_.size();
+}
+inline int arr_in_arr_cfg::test_plain_enum_arr_size() const {
+  return _internal_test_plain_enum_arr_size();
+}
+inline void arr_in_arr_cfg::clear_test_plain_enum_arr() {
+  test_plain_enum_arr_.Clear();
+}
+inline ::cost_type arr_in_arr_cfg::_internal_test_plain_enum_arr(int index) const {
+  return static_cast< ::cost_type >(test_plain_enum_arr_.Get(index));
+}
+inline ::cost_type arr_in_arr_cfg::test_plain_enum_arr(int index) const {
+  // @@protoc_insertion_point(field_get:arr_in_arr_cfg.test_plain_enum_arr)
+  return _internal_test_plain_enum_arr(index);
+}
+inline void arr_in_arr_cfg::set_test_plain_enum_arr(int index, ::cost_type value) {
+  test_plain_enum_arr_.Set(index, value);
+  // @@protoc_insertion_point(field_set:arr_in_arr_cfg.test_plain_enum_arr)
+}
+inline void arr_in_arr_cfg::_internal_add_test_plain_enum_arr(::cost_type value) {
+  test_plain_enum_arr_.Add(value);
+}
+inline void arr_in_arr_cfg::add_test_plain_enum_arr(::cost_type value) {
+  // @@protoc_insertion_point(field_add:arr_in_arr_cfg.test_plain_enum_arr)
+  _internal_add_test_plain_enum_arr(value);
+}
+inline const ::PROTOBUF_NAMESPACE_ID::RepeatedField<int>&
+arr_in_arr_cfg::test_plain_enum_arr() const {
+  // @@protoc_insertion_point(field_list:arr_in_arr_cfg.test_plain_enum_arr)
+  return test_plain_enum_arr_;
+}
+inline ::PROTOBUF_NAMESPACE_ID::RepeatedField<int>*
+arr_in_arr_cfg::_internal_mutable_test_plain_enum_arr() {
+  return &test_plain_enum_arr_;
+}
+inline ::PROTOBUF_NAMESPACE_ID::RepeatedField<int>*
+arr_in_arr_cfg::mutable_test_plain_enum_arr() {
+  // @@protoc_insertion_point(field_mutable_list:arr_in_arr_cfg.test_plain_enum_arr)
+  return _internal_mutable_test_plain_enum_arr();
+}
+
+// .test_msg_verifier test_plain_msg = 5 [(.org.xresloader.field_separator) = "&"];
+inline bool arr_in_arr_cfg::_internal_has_test_plain_msg() const {
+  return this != internal_default_instance() && test_plain_msg_ != nullptr;
+}
+inline bool arr_in_arr_cfg::has_test_plain_msg() const {
+  return _internal_has_test_plain_msg();
+}
+inline void arr_in_arr_cfg::clear_test_plain_msg() {
+  if (GetArenaNoVirtual() == nullptr && test_plain_msg_ != nullptr) {
+    delete test_plain_msg_;
+  }
+  test_plain_msg_ = nullptr;
+}
+inline const ::test_msg_verifier& arr_in_arr_cfg::_internal_test_plain_msg() const {
+  const ::test_msg_verifier* p = test_plain_msg_;
+  return p != nullptr ? *p : *reinterpret_cast<const ::test_msg_verifier*>(
+      &::_test_msg_verifier_default_instance_);
+}
+inline const ::test_msg_verifier& arr_in_arr_cfg::test_plain_msg() const {
+  // @@protoc_insertion_point(field_get:arr_in_arr_cfg.test_plain_msg)
+  return _internal_test_plain_msg();
+}
+inline ::test_msg_verifier* arr_in_arr_cfg::release_test_plain_msg() {
+  // @@protoc_insertion_point(field_release:arr_in_arr_cfg.test_plain_msg)
+  
+  ::test_msg_verifier* temp = test_plain_msg_;
+  test_plain_msg_ = nullptr;
+  return temp;
+}
+inline ::test_msg_verifier* arr_in_arr_cfg::_internal_mutable_test_plain_msg() {
+  
+  if (test_plain_msg_ == nullptr) {
+    auto* p = CreateMaybeMessage<::test_msg_verifier>(GetArenaNoVirtual());
+    test_plain_msg_ = p;
+  }
+  return test_plain_msg_;
+}
+inline ::test_msg_verifier* arr_in_arr_cfg::mutable_test_plain_msg() {
+  // @@protoc_insertion_point(field_mutable:arr_in_arr_cfg.test_plain_msg)
+  return _internal_mutable_test_plain_msg();
+}
+inline void arr_in_arr_cfg::set_allocated_test_plain_msg(::test_msg_verifier* test_plain_msg) {
+  ::PROTOBUF_NAMESPACE_ID::Arena* message_arena = GetArenaNoVirtual();
+  if (message_arena == nullptr) {
+    delete test_plain_msg_;
+  }
+  if (test_plain_msg) {
+    ::PROTOBUF_NAMESPACE_ID::Arena* submessage_arena = nullptr;
+    if (message_arena != submessage_arena) {
+      test_plain_msg = ::PROTOBUF_NAMESPACE_ID::internal::GetOwnedMessage(
+          message_arena, test_plain_msg, submessage_arena);
+    }
+    
+  } else {
+    
+  }
+  test_plain_msg_ = test_plain_msg;
+  // @@protoc_insertion_point(field_set_allocated:arr_in_arr_cfg.test_plain_msg)
+}
+
+// repeated .test_msg_verifier test_plain_msg_arr = 6;
+inline int arr_in_arr_cfg::_internal_test_plain_msg_arr_size() const {
+  return test_plain_msg_arr_.size();
+}
+inline int arr_in_arr_cfg::test_plain_msg_arr_size() const {
+  return _internal_test_plain_msg_arr_size();
+}
+inline void arr_in_arr_cfg::clear_test_plain_msg_arr() {
+  test_plain_msg_arr_.Clear();
+}
+inline ::test_msg_verifier* arr_in_arr_cfg::mutable_test_plain_msg_arr(int index) {
+  // @@protoc_insertion_point(field_mutable:arr_in_arr_cfg.test_plain_msg_arr)
+  return test_plain_msg_arr_.Mutable(index);
+}
+inline ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::test_msg_verifier >*
+arr_in_arr_cfg::mutable_test_plain_msg_arr() {
+  // @@protoc_insertion_point(field_mutable_list:arr_in_arr_cfg.test_plain_msg_arr)
+  return &test_plain_msg_arr_;
+}
+inline const ::test_msg_verifier& arr_in_arr_cfg::_internal_test_plain_msg_arr(int index) const {
+  return test_plain_msg_arr_.Get(index);
+}
+inline const ::test_msg_verifier& arr_in_arr_cfg::test_plain_msg_arr(int index) const {
+  // @@protoc_insertion_point(field_get:arr_in_arr_cfg.test_plain_msg_arr)
+  return _internal_test_plain_msg_arr(index);
+}
+inline ::test_msg_verifier* arr_in_arr_cfg::_internal_add_test_plain_msg_arr() {
+  return test_plain_msg_arr_.Add();
+}
+inline ::test_msg_verifier* arr_in_arr_cfg::add_test_plain_msg_arr() {
+  // @@protoc_insertion_point(field_add:arr_in_arr_cfg.test_plain_msg_arr)
+  return _internal_add_test_plain_msg_arr();
+}
+inline const ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::test_msg_verifier >&
+arr_in_arr_cfg::test_plain_msg_arr() const {
+  // @@protoc_insertion_point(field_list:arr_in_arr_cfg.test_plain_msg_arr)
+  return test_plain_msg_arr_;
 }
 
 #ifdef __GNUC__

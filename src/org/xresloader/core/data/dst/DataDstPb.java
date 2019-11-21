@@ -272,8 +272,18 @@ public class DataDstPb extends DataDstImpl {
     }
 
     static private void setup_extension(DataDstFieldDescriptor child_field, Descriptors.FieldDescriptor fd) {
+        String verifierExpr = null;
         if (fd.getOptions().hasExtension(Xresloader.verifier)) {
-            child_field.mutableExtension().verifier = fd.getOptions().getExtension(Xresloader.verifier);
+            verifierExpr = fd.getOptions().getExtension(Xresloader.verifier);
+            child_field.mutableExtension().verifier = verifierExpr;
+        }
+        LinkedList<DataVerifyImpl> gen = setup_verifier(verifierExpr, fd);
+        if (gen != null && !gen.isEmpty()) {
+            for (DataVerifyImpl vfy : gen) {
+                child_field.addVerifier(vfy);
+            }
+        } else {
+            child_field.resetVerifier();
         }
 
         if (fd.getOptions().hasExtension(Xresloader.fieldDescription)) {
@@ -282,6 +292,10 @@ public class DataDstPb extends DataDstImpl {
 
         if (fd.getOptions().hasExtension(Xresloader.fieldRatio)) {
             child_field.mutableExtension().ratio = fd.getOptions().getExtension(Xresloader.fieldRatio);
+        }
+
+        if (fd.getOptions().hasExtension(Xresloader.fieldSeparator)) {
+            child_field.mutableExtension().plainSeparator = fd.getOptions().getExtension(Xresloader.fieldSeparator);
         }
 
         // setup UE extension
@@ -300,25 +314,13 @@ public class DataDstPb extends DataDstImpl {
         }
     }
 
-    private void setup_node_identify(DataDstWriterNode node, DataDstChildrenNode child, IdentifyDescriptor identify,
-            Descriptors.FieldDescriptor fd) {
-        node.identify = identify;
-
-        String verifier = child.innerDesc.mutableExtension().verifier;
-        identify.ratio = child.innerDesc.mutableExtension().ratio;
-
-        if (null != identify.dataSourceFieldVerifier && !identify.dataSourceFieldVerifier.isEmpty()) {
-            if (verifier == null || verifier.isEmpty()) {
-                verifier = identify.dataSourceFieldVerifier;
-            } else {
-                verifier = verifier + "|" + identify.dataSourceFieldVerifier;
-            }
+    static private LinkedList<DataVerifyImpl> setup_verifier(String verifier, Descriptors.FieldDescriptor fd) {
+        if (!(verifier != null && !verifier.trim().isEmpty()) && !(fd != null && fd.getJavaType() == JavaType.ENUM)) {
+            return null;
         }
 
-        // setup identifier
-        if (verifier == null || verifier.isEmpty()) {
-            identify.resetVerifier();
-        } else {
+        LinkedList<DataVerifyImpl> ret = new LinkedList<DataVerifyImpl>();
+        if (verifier != null && !verifier.trim().isEmpty()) {
             String[] all_verify_rules = verifier.split("\\|");
             for (String vfy_rule : all_verify_rules) {
                 String rule = vfy_rule.trim();
@@ -329,10 +331,10 @@ public class DataDstPb extends DataDstImpl {
                 if (rule.charAt(0) == '-' || (rule.charAt(0) >= '0' && rule.charAt(0) <= '9')) {
                     DataVerifyIntRange vfy = new DataVerifyIntRange(rule);
                     if (vfy.isValid()) {
-                        identify.addVerifier(vfy);
+                        ret.add(vfy);
                     } else {
-                        this.logErrorMessage("try to add DataVerifyIntRange(%s) for %s at column %d in %s failed", rule,
-                                identify.name, identify.index + 1, DataSrcImpl.getOurInstance().getCurrentTableName());
+                        ProgramOptions.getLoger().error("try to add DataVerifyIntRange(%s) in %s failed", rule,
+                                DataSrcImpl.getOurInstance().getCurrentTableName());
                     }
 
                     continue;
@@ -355,20 +357,68 @@ public class DataDstPb extends DataDstImpl {
                         if (null != vfy) {
                             cachePbs.identifiers.put(rule, vfy);
                         } else {
-                            this.logErrorMessage("enum or message \"%s\" not found", rule);
+                            ProgramOptions.getLoger().error("enum or message \"%s\" not found", rule);
                         }
                     }
 
                     if (vfy != null) {
-                        identify.addVerifier(vfy);
+                        ret.add(vfy);
                     } else {
-                        this.logErrorMessage("try to add DataVerifyPb(%s) for %s at column %d in %s failed", rule,
-                                identify.name, identify.index + 1, DataSrcImpl.getOurInstance().getCurrentTableName());
+                        ProgramOptions.getLoger().error("try to add DataVerifyPb(%s) in %s failed", rule,
+                                DataSrcImpl.getOurInstance().getCurrentTableName());
                     }
                 }
             }
         }
 
+        // auto verifier for enum
+        if (fd != null && fd.getJavaType() == JavaType.ENUM) {
+            String rule = String.format("%s.%s", fd.getFile().getPackage(), fd.getEnumType().getName());
+            DataVerifyImpl vfy = cachePbs.identifiers.getOrDefault(rule, null);
+            if (null == vfy) {
+                DescriptorProtos.EnumDescriptorProto enum_desc = get_alias_list_element(rule, cachePbs.enums,
+                        "enum type");
+                if (enum_desc != null) {
+                    vfy = new DataVerifyPbEnum(enum_desc);
+                }
+
+                if (null != vfy) {
+                    cachePbs.identifiers.put(rule, vfy);
+                    ret.add(vfy);
+                } else {
+                    ProgramOptions.getLoger().error("enum verifier \"%s\" setup error, please report this bug to %s",
+                            rule, ProgramOptions.getReportUrl());
+                }
+            }
+        }
+
+        return ret;
+    }
+
+    private void setup_node_identify(DataDstWriterNode node, DataDstChildrenNode child, IdentifyDescriptor identify,
+            Descriptors.FieldDescriptor fd) {
+        node.identify = identify;
+
+        identify.ratio = child.innerDesc.mutableExtension().ratio;
+        identify.resetVerifier();
+
+        if (null != identify.dataSourceFieldVerifier && !identify.dataSourceFieldVerifier.isEmpty()) {
+            LinkedList<DataVerifyImpl> gen = setup_verifier(identify.dataSourceFieldVerifier, fd);
+            if (gen != null && !gen.isEmpty()) {
+                for (DataVerifyImpl vfy : gen) {
+                    identify.addVerifier(vfy);
+                }
+            } else {
+                identify.resetVerifier();
+            }
+        }
+
+        // merge verifier from field descriptor
+        if (child.innerDesc.hasVerifier()) {
+            for (DataVerifyImpl vfy : child.innerDesc.getVerifier()) {
+                identify.addVerifier(vfy);
+            }
+        }
     }
 
     @Override
@@ -405,9 +455,16 @@ public class DataDstPb extends DataDstImpl {
             if (field.getJavaType() == JavaType.MESSAGE) {
                 fieldPbDesc = field.getMessageType();
             }
+
+            DataDstWriterNode.FIELD_LABEL_TYPE inner_label = DataDstWriterNode.FIELD_LABEL_TYPE.OPTIONAL;
+            if (field.isRepeated()) {
+                inner_label = DataDstWriterNode.FIELD_LABEL_TYPE.LIST;
+            } else if (field.isRequired()) {
+                inner_label = DataDstWriterNode.FIELD_LABEL_TYPE.REQUIRED;
+            }
             DataDstFieldDescriptor innerField = new DataDstFieldDescriptor(
                     mutableDataDstDescriptor(pbs, fieldPbDesc, pbTypeToInnerType(field.getType())), field.getNumber(),
-                    field.getName(), field.isRepeated());
+                    field.getName(), inner_label, field);
             innerDesc.fields.put(field.getName(), innerField);
 
             setup_extension(innerField, field);
@@ -430,7 +487,7 @@ public class DataDstPb extends DataDstImpl {
         if (pbDesc == null) {
             ret = DataDstWriterNode.getDefaultMessageDescriptor(type);
         } else {
-            ret = new DataDstMessageDescriptor(type, pbDesc.getFile().getPackage(), pbDesc.getName());
+            ret = new DataDstMessageDescriptor(type, pbDesc.getFile().getPackage(), pbDesc.getName(), pbDesc);
         }
         pbs.dataDstDescs.put(key, ret);
         buildDataDstDescriptorMessage(pbs, pbDesc, ret);
@@ -448,6 +505,10 @@ public class DataDstPb extends DataDstImpl {
         // extensions
         if (pbDesc.getOptions().hasExtension(Xresloader.msgDescription)) {
             ret.getMessageExtension().description = pbDesc.getOptions().getExtension(Xresloader.msgDescription);
+        }
+
+        if (pbDesc.getOptions().hasExtension(Xresloader.msgSeparator)) {
+            ret.getMessageExtension().plainSeparator = pbDesc.getOptions().getExtension(Xresloader.msgSeparator);
         }
 
         // if (pbDesc.getOptions().getExtensionCount(Xresloader.kvIndex) > 0) {
@@ -643,7 +704,7 @@ public class DataDstPb extends DataDstImpl {
                         name_list.removeLast();
                         name_list.addLast(DataDstWriterNode.makeNodeName(fd.getName(), count));
                         if (test(c, name_list)) {
-                            child = node.addChild(fd.getName(), c, fd, true, false);
+                            child = node.addChild(fd.getName(), c, fd, DataDstWriterNode.CHILD_NODE_TYPE.STANDARD);
                             ret = true;
                         } else {
                             break;
@@ -651,20 +712,50 @@ public class DataDstPb extends DataDstImpl {
                     }
                     name_list.removeLast();
 
-                    filterMissingFields(missingFields, missingOneof, fd, count == 0);
+                    if (count > 0) {
+                        filterMissingFields(missingFields, missingOneof, fd, false);
+                    } else {
+                        // try plain mode
+                        String real_name = DataDstWriterNode.makeChildPath(prefix, fd.getName());
+                        IdentifyDescriptor col = data_src.getColumnByName(real_name);
+                        if (null != col) {
+                            DataDstWriterNode c = createMessageWriterNode(cachePbs, fd.getMessageType(),
+                                    DataDstWriterNode.JAVA_TYPE.MESSAGE);
+                            child = node.addChild(fd.getName(), c, fd, DataDstWriterNode.CHILD_NODE_TYPE.PLAIN);
+                            setup_node_identify(c, child, col, fd);
+                            ret = true;
+
+                            filterMissingFields(missingFields, missingOneof, fd, false);
+                        } else {
+                            filterMissingFields(missingFields, missingOneof, fd, true);
+                        }
+                    }
                 } else {
                     DataDstWriterNode c = createMessageWriterNode(cachePbs, fd.getMessageType(),
                             DataDstWriterNode.JAVA_TYPE.MESSAGE);
                     name_list.addLast(DataDstWriterNode.makeNodeName(fd.getName()));
                     if (test(c, name_list)) {
                         filterMissingFields(missingFields, missingOneof, fd, false);
-                        child = node.addChild(fd.getName(), c, fd, false, false);
+                        child = node.addChild(fd.getName(), c, fd, DataDstWriterNode.CHILD_NODE_TYPE.STANDARD);
                         ret = true;
                     } else {
                         filterMissingFields(missingFields, missingOneof, fd, true);
-                        if (fd.isRequired()) {
-                            // required 字段要dump默认数据
-                            child = node.addChild(fd.getName(), c, fd, false, true);
+
+                        // try plain mode
+                        IdentifyDescriptor col = data_src.getColumnByName(prefix);
+                        if (null != col) {
+                            child = node.addChild(fd.getName(), c, fd, DataDstWriterNode.CHILD_NODE_TYPE.PLAIN);
+                            setup_node_identify(c, child, col, fd);
+                            ret = true;
+
+                            filterMissingFields(missingFields, missingOneof, fd, false);
+                        } else {
+                            filterMissingFields(missingFields, missingOneof, fd, true);
+
+                            if (fd.isRequired()) {
+                                // required 字段要dump默认数据
+                                child = node.addChild(fd.getName(), c, fd, DataDstWriterNode.CHILD_NODE_TYPE.STANDARD);
+                            }
                         }
                     }
                     name_list.removeLast();
@@ -680,7 +771,7 @@ public class DataDstPb extends DataDstImpl {
                         IdentifyDescriptor col = data_src.getColumnByName(real_name);
                         if (null != col) {
                             DataDstWriterNode c = createMessageWriterNode(cachePbs, null, inner_type);
-                            child = node.addChild(fd.getName(), c, fd, true, false);
+                            child = node.addChild(fd.getName(), c, fd, DataDstWriterNode.CHILD_NODE_TYPE.STANDARD);
                             setup_node_identify(c, child, col, fd);
                             ret = true;
                         } else {
@@ -688,7 +779,23 @@ public class DataDstPb extends DataDstImpl {
                         }
                     }
 
-                    filterMissingFields(missingFields, missingOneof, fd, count == 0);
+                    if (count > 0) {
+                        filterMissingFields(missingFields, missingOneof, fd, false);
+                    } else {
+                        // try plain mode
+                        String real_name = DataDstWriterNode.makeChildPath(prefix, fd.getName());
+                        IdentifyDescriptor col = data_src.getColumnByName(real_name);
+                        if (null != col) {
+                            DataDstWriterNode c = createMessageWriterNode(cachePbs, null, inner_type);
+                            child = node.addChild(fd.getName(), c, fd, DataDstWriterNode.CHILD_NODE_TYPE.PLAIN);
+                            setup_node_identify(c, child, col, fd);
+                            ret = true;
+
+                            filterMissingFields(missingFields, missingOneof, fd, false);
+                        } else {
+                            filterMissingFields(missingFields, missingOneof, fd, true);
+                        }
+                    }
                 } else {
                     // 非 list 类型
                     String real_name = DataDstWriterNode.makeChildPath(prefix, fd.getName());
@@ -696,7 +803,7 @@ public class DataDstPb extends DataDstImpl {
                     if (null != col) {
                         filterMissingFields(missingFields, missingOneof, fd, false);
                         DataDstWriterNode c = createMessageWriterNode(cachePbs, null, inner_type);
-                        child = node.addChild(fd.getName(), c, fd, false, false);
+                        child = node.addChild(fd.getName(), c, fd, DataDstWriterNode.CHILD_NODE_TYPE.STANDARD);
                         setup_node_identify(c, child, col, fd);
                         ret = true;
                     } else {
@@ -704,7 +811,7 @@ public class DataDstPb extends DataDstImpl {
                         if (fd.isRequired()) {
                             DataDstWriterNode c = createMessageWriterNode(cachePbs, null, inner_type);
                             // required 字段要dump默认数据
-                            child = node.addChild(fd.getName(), c, fd, false, true);
+                            child = node.addChild(fd.getName(), c, fd, DataDstWriterNode.CHILD_NODE_TYPE.STANDARD);
                         }
                     }
                 }
@@ -811,15 +918,23 @@ public class DataDstPb extends DataDstImpl {
         boolean ret = false;
 
         for (Map.Entry<String, DataDstWriterNode.DataDstChildrenNode> c : node.getChildren().entrySet()) {
-            Descriptors.FieldDescriptor fd = (Descriptors.FieldDescriptor) c.getValue().fieldDescriptor;
-            if (null == fd) {
-                // 不需要提示，如果从其他方式解包协议描述的时候可能有可选字段丢失的
-                continue;
-            }
+            if (c.getValue().mode == DataDstWriterNode.CHILD_NODE_TYPE.STANDARD) {
+                Descriptors.FieldDescriptor fd = (Descriptors.FieldDescriptor) c.getValue().fieldDescriptor;
+                if (null == fd) {
+                    // 不需要提示，如果从其他方式解包协议描述的时候可能有可选字段丢失的
+                    continue;
+                }
 
-            for (DataDstWriterNode child : c.getValue().nodes) {
-                if (dumpField(builder, child, fd)) {
-                    ret = true;
+                for (DataDstWriterNode child : c.getValue().nodes) {
+                    if (dumpStandardField(builder, child, fd)) {
+                        ret = true;
+                    }
+                }
+            } else if (c.getValue().mode == DataDstWriterNode.CHILD_NODE_TYPE.PLAIN) {
+                for (DataDstWriterNode child : c.getValue().nodes) {
+                    if (dumpPlainField(builder, child.identify, child.getFieldDescriptor(), true)) {
+                        ret = true;
+                    }
                 }
             }
         }
@@ -827,8 +942,8 @@ public class DataDstPb extends DataDstImpl {
         return ret;
     }
 
-    private boolean dumpField(DynamicMessage.Builder builder, DataDstWriterNode desc, Descriptors.FieldDescriptor fd)
-            throws ConvException {
+    private boolean dumpStandardField(DynamicMessage.Builder builder, DataDstWriterNode desc,
+            Descriptors.FieldDescriptor fd) throws ConvException {
         if (null == desc.identify && MESSAGE != fd.getJavaType()) {
             // required 空字段填充默认值
             if (fd.isRepeated() || ProgramOptions.getInstance().enbleEmptyList) {
@@ -941,6 +1056,247 @@ public class DataDstPb extends DataDstImpl {
         }
 
         return true;
+    }
+
+    private boolean dumpPlainField(DynamicMessage.Builder builder, IdentifyDescriptor ident,
+            DataDstWriterNode.DataDstFieldDescriptor field, boolean isTopLevel) throws ConvException {
+        Descriptors.FieldDescriptor fd = (Descriptors.FieldDescriptor) field.getRawDescriptor();
+        if (null == fd) {
+            // 不需要提示，如果从其他方式解包协议描述的时候可能有可选字段丢失的
+            return false;
+        }
+
+        if (null == ident) {
+            if (ProgramOptions.getInstance().enbleEmptyList) {
+                dumpDefault(builder, fd);
+            }
+            return false;
+        }
+
+        DataContainer<String> res = DataSrcImpl.getOurInstance().getValue(ident, "");
+        if (null == res || !res.valid) {
+            if (field.isRequired() || ProgramOptions.getInstance().enbleEmptyList) {
+                dumpDefault(builder, fd);
+            }
+            return false;
+        }
+
+        return dumpPlainField(builder, ident, field, isTopLevel, res.value);
+    }
+
+    private boolean dumpPlainField(DynamicMessage.Builder builder, IdentifyDescriptor ident,
+            DataDstWriterNode.DataDstFieldDescriptor field, boolean isTopLevel, String input) throws ConvException {
+        Descriptors.FieldDescriptor fd = (Descriptors.FieldDescriptor) field.getRawDescriptor();
+        if (null == fd) {
+            // 不需要提示，如果从其他方式解包协议描述的时候可能有可选字段丢失的
+            return false;
+        }
+
+        if ((isTopLevel && !field.isList()) && field.getType() != DataDstWriterNode.JAVA_TYPE.MESSAGE) {
+            // error type
+            logErrorMessage("Plain type %s of %s.%s must be list", field.getType().toString(),
+                    field.getTypeDescriptor().getFullName(), field.getName());
+            return false;
+        }
+
+        Object val = null;
+
+        if (field.isList()) {
+            String[] groups = splitPlainGroups(input.trim(), getPlainFieldSeparator(field));
+            switch (field.getType()) {
+            case INT: {
+                Long[] values = parsePlainDataLong(groups, ident, isTopLevel ? null : field);
+                ArrayList<Object> tmp = new ArrayList<Object>();
+                if (values != null) {
+                    tmp.ensureCapacity(values.length);
+                }
+                for (Long v : values) {
+                    tmp.add(v.intValue());
+                }
+                val = tmp;
+                break;
+            }
+
+            case LONG: {
+                Long[] values = parsePlainDataLong(groups, ident, isTopLevel ? null : field);
+                ArrayList<Object> tmp = new ArrayList<Object>();
+                if (values != null) {
+                    tmp.ensureCapacity(values.length);
+                }
+                for (Long v : values) {
+                    tmp.add(v);
+                }
+                val = tmp;
+                break;
+            }
+
+            case FLOAT: {
+                Double[] values = parsePlainDataDouble(groups, ident, isTopLevel ? null : field);
+                ArrayList<Object> tmp = new ArrayList<Object>();
+                if (values != null) {
+                    tmp.ensureCapacity(values.length);
+                }
+                for (Double v : values) {
+                    tmp.add(v.floatValue());
+                }
+                val = tmp;
+                break;
+            }
+
+            case DOUBLE: {
+                Double[] values = parsePlainDataDouble(groups, ident, isTopLevel ? null : field);
+                ArrayList<Object> tmp = new ArrayList<Object>();
+                if (values != null) {
+                    tmp.ensureCapacity(values.length);
+                }
+                for (Double v : values) {
+                    tmp.add(v);
+                }
+                val = tmp;
+                break;
+            }
+
+            case BOOLEAN: {
+                Boolean[] values = parsePlainDataBoolean(groups, ident, isTopLevel ? null : field);
+                ArrayList<Object> tmp = new ArrayList<Object>();
+                if (values != null) {
+                    tmp.ensureCapacity(values.length);
+                }
+                for (Boolean v : values) {
+                    tmp.add(v);
+                }
+                val = tmp;
+                break;
+            }
+
+            case STRING:
+            case BYTES: {
+                String[] values = parsePlainDataString(groups, ident, isTopLevel ? null : field);
+                ArrayList<Object> tmp = new ArrayList<Object>();
+                if (values != null) {
+                    tmp.ensureCapacity(values.length);
+                }
+                for (String v : values) {
+                    tmp.add(v);
+                }
+                val = tmp;
+                break;
+            }
+
+            case MESSAGE: {
+                ArrayList<DynamicMessage> tmp = new ArrayList<DynamicMessage>();
+                tmp.ensureCapacity(groups.length);
+                for (String v : groups) {
+                    String[] subGroups = splitPlainGroups(v, getPlainMessageSeparator(field));
+                    DynamicMessage msg = parsePlainDataMessage(subGroups, ident, field);
+                    if (msg != null) {
+                        tmp.add(msg);
+                    }
+                }
+                if (!tmp.isEmpty()) {
+                    val = tmp;
+                }
+                break;
+            }
+
+            default:
+                break;
+            }
+        } else {
+            switch (field.getType()) {
+            case INT: {
+                val = parsePlainDataLong(input.trim(), ident, isTopLevel ? null : field).intValue();
+                break;
+            }
+
+            case LONG: {
+                val = parsePlainDataLong(input.trim(), ident, isTopLevel ? null : field);
+                break;
+            }
+
+            case FLOAT: {
+                val = parsePlainDataDouble(input.trim(), ident, isTopLevel ? null : field).floatValue();
+                break;
+            }
+
+            case DOUBLE: {
+                val = parsePlainDataDouble(input.trim(), ident, isTopLevel ? null : field);
+                break;
+            }
+
+            case BOOLEAN: {
+                val = parsePlainDataBoolean(input.trim(), ident, isTopLevel ? null : field);
+                break;
+            }
+
+            case STRING:
+            case BYTES: {
+                val = parsePlainDataString(input.trim(), ident, isTopLevel ? null : field);
+                break;
+            }
+
+            case MESSAGE: {
+                String[] groups = splitPlainGroups(input.trim(), getPlainFieldSeparator(field));
+                val = parsePlainDataMessage(groups, ident, field);
+                if (val == null && field.isRequired()) {
+                    dumpDefault(builder, fd);
+                }
+                break;
+            }
+
+            default:
+                break;
+            }
+        }
+
+        if (val == null) {
+            return false;
+        }
+
+        if (fd.isRepeated() && val instanceof ArrayList<?>) {
+            for (Object obj : (ArrayList<?>) val) {
+                builder.addRepeatedField(fd, obj);
+            }
+        } else {
+            builder.setField(fd, val);
+        }
+
+        return true;
+    }
+
+    public DynamicMessage parsePlainDataMessage(String[] inputs, IdentifyDescriptor ident,
+            DataDstWriterNode.DataDstFieldDescriptor field) throws ConvException {
+        if (field.getTypeDescriptor() == null || ident == null || inputs == null || inputs.length == 0) {
+            return null;
+        }
+
+        Descriptors.FieldDescriptor fd = (Descriptors.FieldDescriptor) field.getRawDescriptor();
+        if (null == fd || fd.getJavaType() != MESSAGE) {
+            // 不需要提示，如果从其他方式解包协议描述的时候可能有可选字段丢失的
+            return null;
+        }
+
+        ArrayList<DataDstWriterNode.DataDstFieldDescriptor> children = field.getTypeDescriptor().getSortedFields();
+        if (children.size() != inputs.length) {
+            throw new ConvException(
+                    String.format("Try to convert %s to %s failed, field count not matched(expect %d, real %d).",
+                            field.getTypeDescriptor().getFullName(), field.getTypeDescriptor().getFullName(),
+                            children.size(), inputs.length));
+        }
+
+        DynamicMessage.Builder ret = DynamicMessage.newBuilder(fd.getMessageType());
+        boolean hasData = false;
+        for (int i = 0; i < inputs.length; ++i) {
+            if (dumpPlainField(ret, ident, children.get(i), false, inputs[i])) {
+                hasData = true;
+            }
+        }
+
+        if (!hasData) {
+            return null;
+        }
+
+        return ret.build();
     }
 
     /**

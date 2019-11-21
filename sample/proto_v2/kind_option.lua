@@ -72,6 +72,14 @@ local const_res = {
               },
               type_name = "UINT32",
             },
+            test_plain_msg = {
+              name = "test_plain_msg",
+              number = 5,
+              options = {
+                field_separator = "&",
+              },
+              type_name = "MESSAGE",
+            },
           },
           name = "arr_in_arr_cfg",
           options = {
@@ -105,6 +113,9 @@ local const_res = {
             },
           },
           name = "test_msg_verifier",
+          options = {
+            msg_separator = "-^",
+          },
         },
       },
       name = "kind.proto",

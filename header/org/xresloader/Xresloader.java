@@ -10,10 +10,12 @@ public final class Xresloader {
     registry.add(org.xresloader.Xresloader.fileDescription);
     registry.add(org.xresloader.Xresloader.msgDescription);
     registry.add(org.xresloader.Xresloader.msgRequireMappingAll);
+    registry.add(org.xresloader.Xresloader.msgSeparator);
     registry.add(org.xresloader.Xresloader.verifier);
     registry.add(org.xresloader.Xresloader.fieldDescription);
     registry.add(org.xresloader.Xresloader.fieldAlias);
     registry.add(org.xresloader.Xresloader.fieldRatio);
+    registry.add(org.xresloader.Xresloader.fieldSeparator);
     registry.add(org.xresloader.Xresloader.oneofDescription);
     registry.add(org.xresloader.Xresloader.enumDescription);
     registry.add(org.xresloader.Xresloader.enumvDescription);
@@ -55,7 +57,7 @@ public final class Xresloader {
           .newFileScopedGeneratedExtension(
         java.lang.String.class,
         null);
-  public static final int MSG_REQUIRE_MAPPING_ALL_FIELD_NUMBER = 1101;
+  public static final int MSG_REQUIRE_MAPPING_ALL_FIELD_NUMBER = 1011;
   /**
    * <pre>
    * 开启所有字段映射检查
@@ -69,6 +71,21 @@ public final class Xresloader {
       java.lang.Boolean> msgRequireMappingAll = com.google.protobuf.GeneratedMessage
           .newFileScopedGeneratedExtension(
         java.lang.Boolean.class,
+        null);
+  public static final int MSG_SEPARATOR_FIELD_NUMBER = 1012;
+  /**
+   * <pre>
+   * Plain模式字段分隔符（默认为: ,;|）
+   * </pre>
+   *
+   * <code>extend .google.protobuf.MessageOptions { ... }</code>
+   */
+  public static final
+    com.google.protobuf.GeneratedMessage.GeneratedExtension<
+      com.google.protobuf.DescriptorProtos.MessageOptions,
+      java.lang.String> msgSeparator = com.google.protobuf.GeneratedMessage
+          .newFileScopedGeneratedExtension(
+        java.lang.String.class,
         null);
   public static final int VERIFIER_FIELD_NUMBER = 1001;
   /**
@@ -129,6 +146,21 @@ public final class Xresloader {
       java.lang.Integer> fieldRatio = com.google.protobuf.GeneratedMessage
           .newFileScopedGeneratedExtension(
         java.lang.Integer.class,
+        null);
+  public static final int FIELD_SEPARATOR_FIELD_NUMBER = 1014;
+  /**
+   * <pre>
+   * Plain模式字段分隔符（默认为: ,;|）
+   * </pre>
+   *
+   * <code>extend .google.protobuf.FieldOptions { ... }</code>
+   */
+  public static final
+    com.google.protobuf.GeneratedMessage.GeneratedExtension<
+      com.google.protobuf.DescriptorProtos.FieldOptions,
+      java.lang.String> fieldSeparator = com.google.protobuf.GeneratedMessage
+          .newFileScopedGeneratedExtension(
+        java.lang.String.class,
         null);
   public static final int ONEOF_DESCRIPTION_FIELD_NUMBER = 1001;
   /**
@@ -205,19 +237,21 @@ public final class Xresloader {
       ".FileOptions\030\351\007 \001(\t:9\n\017msg_description\022\037" +
       ".google.protobuf.MessageOptions\030\351\007 \001(\t:A" +
       "\n\027msg_require_mapping_all\022\037.google.proto" +
-      "buf.MessageOptions\030\315\010 \001(\010:0\n\010verifier\022\035." +
-      "google.protobuf.FieldOptions\030\351\007 \001(\t:9\n\021f" +
-      "ield_description\022\035.google.protobuf.Field" +
-      "Options\030\363\007 \001(\t:3\n\013field_alias\022\035.google.p" +
-      "rotobuf.FieldOptions\030\364\007 \001(\t:3\n\013field_rat" +
-      "io\022\035.google.protobuf.FieldOptions\030\365\007 \001(\005" +
-      ":9\n\021oneof_description\022\035.google.protobuf." +
-      "OneofOptions\030\351\007 \001(\t:7\n\020enum_description\022" +
-      "\034.google.protobuf.EnumOptions\030\351\007 \001(\t:=\n\021" +
-      "enumv_description\022!.google.protobuf.Enum" +
-      "ValueOptions\030\351\007 \001(\t:6\n\nenum_alias\022!.goog" +
-      "le.protobuf.EnumValueOptions\030\352\007 \001(\tb\006pro" +
-      "to3"
+      "buf.MessageOptions\030\363\007 \001(\010:7\n\rmsg_separat" +
+      "or\022\037.google.protobuf.MessageOptions\030\364\007 \001" +
+      "(\t:0\n\010verifier\022\035.google.protobuf.FieldOp" +
+      "tions\030\351\007 \001(\t:9\n\021field_description\022\035.goog" +
+      "le.protobuf.FieldOptions\030\363\007 \001(\t:3\n\013field" +
+      "_alias\022\035.google.protobuf.FieldOptions\030\364\007" +
+      " \001(\t:3\n\013field_ratio\022\035.google.protobuf.Fi" +
+      "eldOptions\030\365\007 \001(\005:7\n\017field_separator\022\035.g" +
+      "oogle.protobuf.FieldOptions\030\366\007 \001(\t:9\n\021on" +
+      "eof_description\022\035.google.protobuf.OneofO" +
+      "ptions\030\351\007 \001(\t:7\n\020enum_description\022\034.goog" +
+      "le.protobuf.EnumOptions\030\351\007 \001(\t:=\n\021enumv_" +
+      "description\022!.google.protobuf.EnumValueO" +
+      "ptions\030\351\007 \001(\t:6\n\nenum_alias\022!.google.pro" +
+      "tobuf.EnumValueOptions\030\352\007 \001(\tb\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
@@ -227,14 +261,16 @@ public final class Xresloader {
     fileDescription.internalInit(descriptor.getExtensions().get(0));
     msgDescription.internalInit(descriptor.getExtensions().get(1));
     msgRequireMappingAll.internalInit(descriptor.getExtensions().get(2));
-    verifier.internalInit(descriptor.getExtensions().get(3));
-    fieldDescription.internalInit(descriptor.getExtensions().get(4));
-    fieldAlias.internalInit(descriptor.getExtensions().get(5));
-    fieldRatio.internalInit(descriptor.getExtensions().get(6));
-    oneofDescription.internalInit(descriptor.getExtensions().get(7));
-    enumDescription.internalInit(descriptor.getExtensions().get(8));
-    enumvDescription.internalInit(descriptor.getExtensions().get(9));
-    enumAlias.internalInit(descriptor.getExtensions().get(10));
+    msgSeparator.internalInit(descriptor.getExtensions().get(3));
+    verifier.internalInit(descriptor.getExtensions().get(4));
+    fieldDescription.internalInit(descriptor.getExtensions().get(5));
+    fieldAlias.internalInit(descriptor.getExtensions().get(6));
+    fieldRatio.internalInit(descriptor.getExtensions().get(7));
+    fieldSeparator.internalInit(descriptor.getExtensions().get(8));
+    oneofDescription.internalInit(descriptor.getExtensions().get(9));
+    enumDescription.internalInit(descriptor.getExtensions().get(10));
+    enumvDescription.internalInit(descriptor.getExtensions().get(11));
+    enumAlias.internalInit(descriptor.getExtensions().get(12));
     com.google.protobuf.DescriptorProtos.getDescriptor();
   }
 

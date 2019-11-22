@@ -428,7 +428,7 @@ public abstract class DataDstJava extends DataDstImpl {
             }
 
             case MESSAGE: {
-                String[] groups = splitPlainGroups(input.trim(), getPlainFieldSeparator(field));
+                String[] groups = splitPlainGroups(input.trim(), getPlainMessageSeparator(field));
                 val = parsePlainDataMessage(groups, ident, field);
                 if (val == null && field.isRequired()) {
                     dumpDefault(builder, field);

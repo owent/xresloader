@@ -399,7 +399,7 @@ public class DataDstPb extends DataDstImpl {
             Descriptors.FieldDescriptor fd) {
         node.identify = identify;
 
-        identify.ratio = child.innerDesc.mutableExtension().ratio;
+        identify.referToWriterNode = node;
         identify.resetVerifier();
 
         if (null != identify.dataSourceFieldVerifier && !identify.dataSourceFieldVerifier.isEmpty()) {
@@ -742,7 +742,8 @@ public class DataDstPb extends DataDstImpl {
                         filterMissingFields(missingFields, missingOneof, fd, true);
 
                         // try plain mode
-                        IdentifyDescriptor col = data_src.getColumnByName(prefix);
+                        String real_name = DataDstWriterNode.makeChildPath(prefix, fd.getName());
+                        IdentifyDescriptor col = data_src.getColumnByName(real_name);
                         if (null != col) {
                             child = node.addChild(fd.getName(), c, fd, DataDstWriterNode.CHILD_NODE_TYPE.PLAIN);
                             setup_node_identify(c, child, col, fd);
@@ -1236,7 +1237,7 @@ public class DataDstPb extends DataDstImpl {
             }
 
             case MESSAGE: {
-                String[] groups = splitPlainGroups(input.trim(), getPlainFieldSeparator(field));
+                String[] groups = splitPlainGroups(input.trim(), getPlainMessageSeparator(field));
                 val = parsePlainDataMessage(groups, ident, field);
                 if (val == null && field.isRequired()) {
                     dumpDefault(builder, fd);

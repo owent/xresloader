@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 
+import org.xresloader.core.ProgramOptions;
 import org.xresloader.core.data.err.ConvException;
 import org.xresloader.core.engine.IdentifyDescriptor;
 import org.xresloader.core.data.vfy.DataVerifyImpl;
@@ -252,6 +253,7 @@ public class DataDstWriterNode {
     private DataDstFieldDescriptor fieldDescriptor = null;
     public Object privateData = null; // 关联的Message描述信息，不同的DataDstImpl子类不一样。这里的数据和抽象数据结构的类型有关
     public IdentifyDescriptor identify = null; // 关联的Field/Excel列信息，同一个抽象数据结构类型可能对应的数据列不一样。和具体某个结构内的字段有关
+    private DataDstChildrenNode referBrothers = null;
 
     static private HashMap<JAVA_TYPE, DataDstMessageDescriptor> defaultDescs = new HashMap<JAVA_TYPE, DataDstMessageDescriptor>();
 
@@ -259,6 +261,13 @@ public class DataDstWriterNode {
         DataDstMessageDescriptor ret = defaultDescs.getOrDefault(type, null);
         if (ret != null) {
             return ret;
+        }
+
+        if (type == JAVA_TYPE.MESSAGE) {
+            ProgramOptions.getLoger().error(
+                    "Can not get default description of message type, please report this bug to %s",
+                    ProgramOptions.getReportUrl());
+            return null;
         }
 
         ret = new DataDstMessageDescriptor(type, null, null, null);
@@ -292,6 +301,10 @@ public class DataDstWriterNode {
 
     static public String makeNodeName(String _name) {
         return _name;
+    }
+
+    public DataDstChildrenNode getReferBrothers() {
+        return this.referBrothers;
     }
 
     public HashMap<String, DataDstChildrenNode> getChildren() {
@@ -382,6 +395,7 @@ public class DataDstWriterNode {
             res.nodes = new ArrayList<DataDstWriterNode>();
         }
         res.nodes.add(node);
+        node.referBrothers = res;
 
         // 复制一份字段数据结构描述
         node.setFieldDescriptor(res.innerDesc);

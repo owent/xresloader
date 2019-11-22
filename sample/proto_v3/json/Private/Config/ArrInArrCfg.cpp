@@ -90,8 +90,8 @@ void UArrInArrCfgHelper::ClearRow(FArrInArrCfg& TableRow)
 {
     TableRow.Id = 0;
     TableRow.Arr.Reset(0);
-    TableRow.TestPlainEnumArr.Reset(0);
     TableRow.TestPlainIntArr.Reset(0);
+    TableRow.TestPlainEnumArr.Reset(0);
     TableRow.TestPlainMsg.TestId2 = 0;
     TableRow.TestPlainMsg.TestId1 = 0;
     TableRow.TestPlainMsgArr.Reset(0);

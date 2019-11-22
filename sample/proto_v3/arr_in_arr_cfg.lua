@@ -46,6 +46,10 @@ return {
         2,
         3,
       },
+      test_plain_msg = {
+        test_id_1 = 1,
+        test_id_2 = 2,
+      },
       test_plain_msg_arr = {
         {
           test_id_1 = 1,
@@ -97,6 +101,10 @@ return {
         5,
         6,
       },
+      test_plain_msg = {
+        test_id_1 = 3,
+        test_id_2 = 4,
+      },
       test_plain_msg_arr = {
         {
           test_id_1 = 7,
@@ -136,6 +144,10 @@ return {
         7,
         8,
         9,
+      },
+      test_plain_msg = {
+        test_id_1 = 5,
+        test_id_2 = 6,
       },
       test_plain_msg_arr = {
         {

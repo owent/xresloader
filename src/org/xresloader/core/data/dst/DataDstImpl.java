@@ -1,7 +1,6 @@
 package org.xresloader.core.data.dst;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.HashMap;
 
 import org.xresloader.core.data.dst.DataDstWriterNode.JAVA_TYPE;
@@ -124,7 +123,7 @@ public abstract class DataDstImpl {
             sepC = input.charAt(i);
         }
 
-        return input.split("\\" + String.valueOf(sepC));
+        return input.split("\\" + sepC);
     }
 
     static public Boolean parsePlainDataBoolean(String input, IdentifyDescriptor ident,
@@ -190,8 +189,8 @@ public abstract class DataDstImpl {
             }
         } else {
             ret = DataVerifyImpl.getAndVerify(ident.getVerifier(), ident.index, ident.name, item);
-            if (ident.ratio > 1) {
-                ret *= ident.ratio;
+            if (ident.getRatio() != 1) {
+                ret *= ident.getRatio();
             }
         }
 
@@ -225,8 +224,8 @@ public abstract class DataDstImpl {
                     ret *= field.mutableExtension().ratio;
                 }
             } else {
-                if (ident.ratio > 1) {
-                    ret *= ident.ratio;
+                if (ident.getRatio() != 1) {
+                    ret *= ident.getRatio();
                 }
             }
             return ret;

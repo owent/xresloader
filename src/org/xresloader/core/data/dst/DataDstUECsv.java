@@ -80,16 +80,15 @@ public class DataDstUECsv extends DataDstUEBase {
             ArrayList<String> finalRowData = new ArrayList<String>();
             ArrayList<HashMap.Entry<String, DataDstFieldDescriptor>> paddingFields = new ArrayList<HashMap.Entry<String, DataDstFieldDescriptor>>();
             ((UEBuildObject) buildObj).paddingFields = paddingFields;
-            finalRowData.ensureCapacity(codeInfo.desc.getTypeDescriptor().fields.size() + 1); // 1 for additional Name
-                                                                                              // field
-            paddingFields.ensureCapacity(codeInfo.desc.getTypeDescriptor().fields.size());
+            finalRowData.ensureCapacity(codeInfo.messageDesc.fields.size() + 1); // 1 for additional Name
+                                                                                 // field
+            paddingFields.ensureCapacity(codeInfo.messageDesc.fields.size());
             for (Object keyName : rowData) {
                 dumpedFields.add(keyName.toString());
                 finalRowData.add(keyName.toString());
             }
 
-            for (HashMap.Entry<String, DataDstFieldDescriptor> varPair : codeInfo.desc.getTypeDescriptor().fields
-                    .entrySet()) {
+            for (HashMap.Entry<String, DataDstFieldDescriptor> varPair : codeInfo.messageDesc.fields.entrySet()) {
                 String varName = getIdentName(varPair.getKey());
                 if (dumpedFields.contains(varName)) {
                     continue;
@@ -221,7 +220,7 @@ public class DataDstUECsv extends DataDstUEBase {
     }
 
     @Override
-    final protected Object pickValueField(Object buildObj, DataDstWriterNodeWrapper desc) throws ConvException {
+    final protected Object pickValueField(Object buildObj, DataDstFieldNodeWrapper desc) throws ConvException {
         if (!isRecursiveEnabled()) {
             Object ret = pickValueFieldBaseStandardImpl(desc, 0);
             if (ret == null) {
@@ -257,9 +256,9 @@ public class DataDstUECsv extends DataDstUEBase {
         return ret;
     }
 
-    protected void pickValueFieldCsvImpl(StringBuffer fieldSB, DataDstWriterNodeWrapper descWrapper)
+    protected void pickValueFieldCsvImpl(StringBuffer fieldSB, DataDstFieldNodeWrapper descWrapper)
             throws ConvException {
-        if (null == descWrapper || null == descWrapper.descs || descWrapper.descs.isEmpty()) {
+        if (null == descWrapper || null == descWrapper.referWriterNodes || descWrapper.referWriterNodes.isEmpty()) {
             return;
         }
 
@@ -268,18 +267,18 @@ public class DataDstUECsv extends DataDstUEBase {
             return;
         }
 
-        if (descWrapper.isList) {
-            if (descWrapper.descs.isEmpty()) {
+        if (descWrapper.isList()) {
+            if (descWrapper.referWriterNodes.isEmpty()) {
                 return;
             }
 
             fieldSB.append("(");
             boolean hasListData = false;
-            for (int i = 0; i < descWrapper.descs.size(); ++i) {
+            for (int i = 0; i < descWrapper.referWriterNodes.size(); ++i) {
                 if (hasListData) {
                     fieldSB.append(",");
                 }
-                if (pickValueFieldCsvImpl(fieldSB, descWrapper.descs.get(i))) {
+                if (pickValueFieldCsvImpl(fieldSB, descWrapper.referWriterNodes.get(i))) {
                     hasListData = true;
                 } else {
                     if (hasListData) {

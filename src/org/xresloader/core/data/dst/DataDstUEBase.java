@@ -6,11 +6,7 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.nio.charset.Charset;
-import java.util.ArrayList;
-import java.util.Base64;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.LinkedList;
+import java.util.*;
 import java.util.regex.Pattern;
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -22,6 +18,7 @@ import org.xresloader.core.data.dst.DataDstWriterNode.DataDstFieldDescriptor;
 import org.xresloader.core.data.dst.DataDstWriterNode.DataDstFieldExt;
 import org.xresloader.core.data.dst.DataDstWriterNode.DataDstMessageDescriptor;
 import org.xresloader.core.data.dst.DataDstWriterNode.DataDstMessageExt;
+import org.xresloader.core.data.dst.DataDstWriterNode.FIELD_LABEL_TYPE;
 import org.xresloader.core.data.dst.DataDstWriterNode.JAVA_TYPE;
 import org.xresloader.core.data.err.ConvException;
 import org.xresloader.core.data.src.DataContainer;
@@ -92,7 +89,48 @@ public abstract class DataDstUEBase extends DataDstImpl {
 
         public boolean hasGeneratedCode = false;
         public HashMap<String, UECodeInfo> dependencies = null;
-        public DataDstWriterNode desc = null;
+        public DataDstWriterNode writerNode = null;
+        public DataDstMessageDescriptor messageDesc = null;
+
+        UECodeInfo makeDependence(DataDstMessageDescriptor messageDesc) {
+            // 这里必须和build_data一样
+            String originClazzName = getUETypeName(messageDesc);
+            if (dependencies != null && dependencies.containsKey(originClazzName)) {
+                return dependencies.get(originClazzName);
+            }
+
+            UECodeInfo ret = getCodeCache(originClazzName);
+            if (ret != null) {
+                if (null == dependencies) {
+                    dependencies = new HashMap<String, UECodeInfo>();
+                }
+                dependencies.put(originClazzName, ret);
+
+                ret.messageDesc = messageDesc;
+                return ret;
+            }
+
+            ret = new UECodeInfo();
+            ret.messageDesc = messageDesc;
+            ret.outputFile = this.outputFile;
+            ret.outputDir = this.outputDir;
+            ret.headerDir = this.headerDir;
+            ret.sourceDir = this.sourceDir;
+            ret.includeDir = this.includeDir;
+            ret.category = this.category;
+            ret.destinationPath = this.destinationPath;
+            ret.packageName = packageName;
+
+            ret.initClazzName(originClazzName);
+
+            if (null == dependencies) {
+                dependencies = new HashMap<String, UECodeInfo>();
+            }
+            dependencies.put(originClazzName, ret);
+
+            setCodeCache(originClazzName, ret);
+            return ret;
+        }
 
         UECodeInfo makeDependence(DataDstWriterNode desc) {
             // 这里必须和build_data一样
@@ -108,12 +146,14 @@ public abstract class DataDstUEBase extends DataDstImpl {
                 }
                 dependencies.put(originClazzName, ret);
 
-                ret.desc = desc;
+                ret.writerNode = desc;
+                ret.messageDesc = desc.getTypeDescriptor();
                 return ret;
             }
 
             ret = new UECodeInfo();
-            ret.desc = desc;
+            ret.writerNode = desc;
+            ret.messageDesc = desc.getTypeDescriptor();
             ret.outputFile = this.outputFile;
             ret.outputDir = this.outputDir;
             ret.headerDir = this.headerDir;
@@ -170,71 +210,98 @@ public abstract class DataDstUEBase extends DataDstImpl {
     }
 
     static public class DataDstWriterNodeWrapper implements Comparable<DataDstWriterNodeWrapper> {
-        public String varName = null;
-        public ArrayList<DataDstWriterNode> descs = new ArrayList<DataDstWriterNode>();
-        public boolean isGenerated = false;
-        public boolean isList = false;
-        public ArrayList<DataDstWriterNodeWrapper> children = null;
+        private String varName = null;
+        private boolean isGenerated = false;
+        private DataDstFieldDescriptor referField = null;
+        private DataDstWriterNode referNode = null;
+        private LinkedList<ArrayList<DataDstWriterNodeWrapper>> children = null;
 
-        public DataDstWriterNode GetWriterNode(int i) {
-            if (i >= descs.size()) {
-                return null;
-            }
+        public DataDstWriterNodeWrapper(String varName, boolean isGenerated, DataDstFieldDescriptor field,
+                DataDstWriterNode referNode) {
+            this.varName = varName;
+            this.isGenerated = isGenerated;
+            this.referField = field;
+            this.referNode = referNode;
+        }
 
-            return descs.get(i);
+        public String getVarName() {
+            return varName;
+        }
+
+        public boolean isGenerated() {
+            return this.isGenerated;
+        }
+
+        public DataDstFieldDescriptor getReferField() {
+            return referField;
+        }
+
+        public DataDstWriterNode getReferNode() {
+            return referNode;
+        }
+
+        public LinkedList<ArrayList<DataDstWriterNodeWrapper>> getChildren() {
+            return children;
+        }
+
+        public boolean hasChidlren() {
+            return children != null && !children.isEmpty();
+        }
+
+        public void addChild(ArrayList<DataDstWriterNodeWrapper> childrenSet) {
+            children.add(childrenSet);
         }
 
         public JAVA_TYPE getJavaType() {
-            DataDstWriterNode n = GetWriterNode(0);
-            if (n == null) {
+            if (referField == null) {
                 return JAVA_TYPE.STRING;
             }
 
-            return n.getType();
+            return referField.getType();
         }
 
         static private DataDstMessageExt emptyMsgExt = new DataDstMessageExt();
 
         public DataDstMessageExt getMessageExtension() {
-            DataDstWriterNode n = GetWriterNode(0);
-            if (n == null) {
+            if (referField == null) {
                 return emptyMsgExt;
             }
 
-            return n.getMessageExtension();
+            return referField.getTypeDescriptor().mutableExtension();
         }
 
         static private DataDstFieldExt emptyFieldExt = new DataDstFieldExt();
 
         public DataDstFieldExt getFieldExtension() {
-            DataDstWriterNode n = GetWriterNode(0);
-            if (n == null) {
+            if (referField == null) {
                 return emptyFieldExt;
             }
 
-            return n.getFieldExtension();
+            return referField.mutableExtension();
         }
 
         @Override
         public int compareTo(DataDstWriterNodeWrapper r) {
-            for (int i = 0; i < descs.size() && i < r.descs.size(); ++i) {
-                DataDstWriterNode ld = GetWriterNode(i);
-                DataDstWriterNode rd = r.GetWriterNode(i);
-                int lv = 0;
-                if (ld != null && ld.identify != null) {
-                    lv = ld.identify.index;
-                }
-                int rv = 0;
-                if (rd != null && rd.identify != null) {
-                    rv = rd.identify.index;
-                }
+            int lv = referField == null ? 0 : referField.getIndex();
+            int rv = r.referField == null ? 0 : r.referField.getIndex();
 
-                if (lv != rv) {
-                    return lv - rv;
-                }
+            if (lv != rv) {
+                return lv - rv;
             }
 
-            return descs.size() - r.descs.size();
+            if (referNode != null && referNode.identify != null) {
+                lv = referNode.identify.index;
+            } else {
+                lv = 0;
+            }
+
+            if (r.referNode != null && r.referNode.identify != null) {
+                rv = r.referNode.identify.index;
+            } else {
+                rv = 0;
+            }
+
+            return lv - rv;
         }
     }
 
@@ -252,11 +319,11 @@ public abstract class DataDstUEBase extends DataDstImpl {
         }
     }
 
-    public UECodeInfo getCodeInfo(String outputFile, String originClazzName, DataDstWriterNode desc)
+    public UECodeInfo getCodeInfo(String outputFile, String originClazzName, DataDstMessageDescriptor messageDesc)
             throws IOException {
         File ofd = new File(outputFile);
         if (originClazzName == null || originClazzName.isEmpty()) {
-            if (null == desc) {
+            if (null == messageDesc) {
                 String fileName = ofd.getName();
                 int lastDot = fileName.lastIndexOf('.');
                 if (lastDot < 0) {
@@ -266,18 +333,18 @@ public abstract class DataDstUEBase extends DataDstImpl {
                 }
                 originClazzName = "F" + getIdentName(originClazzName);
             } else {
-                originClazzName = getUETypeName(desc);
+                originClazzName = getUETypeName(messageDesc);
             }
         }
 
         UECodeInfo ret = getCodeCache(originClazzName);
         if (ret != null) {
-            ret.desc = desc;
+            ret.messageDesc = messageDesc;
             return ret;
         }
 
         ret = new UECodeInfo();
-        ret.desc = desc;
+        ret.messageDesc = messageDesc;
         ret.outputFile = ofd.getCanonicalFile().getAbsolutePath();
         ret.outputDir = ofd.getParentFile().getCanonicalFile().getAbsolutePath();
         // redirect header directory and source directory
@@ -518,33 +585,43 @@ public abstract class DataDstUEBase extends DataDstImpl {
             UECodeInfo codeInfo) throws IOException;
 
     private UEDataRowRule rebuildCodeRule(UECodeInfo codeInfo) throws ConvException {
-        if (null == codeInfo.desc) {
+        if (null == codeInfo.messageDesc) {
             return null;
         }
 
-        // 生成描述集,CSV必须固定化描述集，可能需要把字段平铺开来。
-        ArrayList<DataDstWriterNodeWrapper> expandedDesc = expandDescription(null, codeInfo.desc, "", 0);
-
-        if (expandedDesc == null || expandedDesc.isEmpty()) {
-            return null;
-        }
-
-        // 如果是递归模式,第一层是Message
+        // 递归模式要导出所有字段（可能被其他模块引用），所以不能走动态结构DataDstWriterNode，必须走静态结构DataDstMessageDescriptor
         if (isRecursiveEnabled()) {
-            expandedDesc = expandedDesc.get(0).children;
+            LinkedList<DataDstWriterNodeWrapper> expandedDesc = buildWriterNodeWraper(codeInfo.writerNode,
+                    codeInfo.messageDesc);
+
+            // ======================================================================================================
+            UEDataRowRule rule = splitDataRowDescStatic(expandedDesc);
+            rule.helper = codeInfo.messageDesc.mutableExtension().mutableUE().helper;
+            rule.description = codeInfo.messageDesc.mutableExtension().description;
+            // ======================================================================================================
+
+            return rule;
+        } else {
+            if (null == codeInfo.writerNode) {
+                return null;
+            }
+
+            // 生成描述集,CSV必须固定化描述集，可能需要把字段平铺开来。
+            LinkedList<DataDstWriterNodeWrapper> expandedDesc = buildWriterNodeWraper(codeInfo.writerNode,
+                    codeInfo.messageDesc);
+
+            if (expandedDesc == null || expandedDesc.isEmpty()) {
+                return null;
+            }
+
+            // ======================================================================================================
+            UEDataRowRule rule = splitDataRowDescDynamic(expandedDesc);
+            rule.helper = codeInfo.messageDesc.mutableExtension().mutableUE().helper;
+            rule.description = codeInfo.messageDesc.mutableExtension().description;
+            // ======================================================================================================
+
+            return rule;
         }
-        if (expandedDesc == null || expandedDesc.isEmpty()) {
-            return null;
-        }
-
-        // ======================================================================================================
-        UEDataRowRule rule = splitDataRowDesc(codeInfo, expandedDesc);
-        rule.helper = codeInfo.desc.getMessageExtension().mutableUE().helper;
-        rule.description = codeInfo.desc.getMessageExtension().description;
-        // ======================================================================================================
-
-        return rule;
-
     }
 
     protected final void build_data(Object buildObj, DataDstImpl compiler) throws ConvException, IOException {
@@ -554,7 +631,8 @@ public abstract class DataDstUEBase extends DataDstImpl {
 
             // 这里规则必须和makeDependence(desc)一样
             String originClazzName = getUETypeName(desc);
-            UECodeInfo codeInfo = getCodeInfo(SchemeConf.getInstance().getOutputFileAbsPath(), originClazzName, desc);
+            UECodeInfo codeInfo = getCodeInfo(SchemeConf.getInstance().getOutputFileAbsPath(), originClazzName,
+                    desc.getTypeDescriptor());
             UEDataRowRule rule = rebuildCodeRule(codeInfo);
 
             if (rule == null) {
@@ -612,14 +690,10 @@ public abstract class DataDstUEBase extends DataDstImpl {
         }
 
         // 递归写出依赖的数据结构
-        if (isRecursiveEnabled() && null != codeInfo.desc && codeInfo.desc.getChildren() != null) {
-            for (HashMap.Entry<String, DataDstChildrenNode> child : codeInfo.desc.getChildren().entrySet()) {
-                if (child.getValue().nodes.isEmpty()) {
-                    continue;
-                }
-
-                if (child.getValue().nodes.get(0).getType() == JAVA_TYPE.MESSAGE) {
-                    UECodeInfo depCodeInfo = codeInfo.makeDependence(child.getValue().nodes.get(0));
+        if (isRecursiveEnabled() && null != codeInfo.messageDesc && codeInfo.messageDesc.fields != null) {
+            for (DataDstFieldDescriptor child : codeInfo.messageDesc.getSortedFields()) {
+                if (child.getType() == JAVA_TYPE.MESSAGE) {
+                    UECodeInfo depCodeInfo = codeInfo.makeDependence(child.getTypeDescriptor());
                     if (null == depCodeInfo || depCodeInfo.hasGeneratedCode) {
                         continue;
                     }
@@ -641,7 +715,7 @@ public abstract class DataDstUEBase extends DataDstImpl {
         }
 
         // 如果是直接采用原始字段则直接返回原始字段数据
-        if (null != rule.keyFields.get(0).descs && !rule.keyFields.get(0).descs.isEmpty()) {
+        if (1 == rule.keyFields.size() && null != rule.keyFields.get(0).getReferNode()) {
             return pickValueField(buildObj, rule.keyFields.get(0));
         }
 
@@ -691,17 +765,7 @@ public abstract class DataDstUEBase extends DataDstImpl {
     }
 
     protected Object pickValueField(Object buildObj, DataDstWriterNodeWrapper descWrapper) throws ConvException {
-        return pickValueFieldBaseStandardImpl(descWrapper, 0);
-    }
-
-    protected Object pickValueFieldBaseStandardImpl(DataDstWriterNodeWrapper descWrapper, int pickIndex)
-            throws ConvException {
-        if (descWrapper.isList || pickIndex >= descWrapper.descs.size()) {
-            return null;
-        }
-
-        DataDstWriterNode desc = descWrapper.GetWriterNode(pickIndex);
-        return pickValueFieldBaseStandardImpl(desc);
+        return pickValueFieldBaseStandardImpl(descWrapper.getReferNode());
     }
 
     protected Object pickValueFieldBaseStandardImpl(DataDstWriterNode desc) throws ConvException {
@@ -795,135 +859,114 @@ public abstract class DataDstUEBase extends DataDstImpl {
         return null;
     }
 
-    protected ArrayList<DataDstWriterNodeWrapper> expandDescription(ArrayList<DataDstWriterNodeWrapper> descs,
-            DataDstWriterNode desc, String prefix, int listCapacity) {
-        boolean isLeaf = true;
-        ArrayList<DataDstWriterNodeWrapper> children = null;
-        switch (desc.getType()) {
-        case INT: {
-            break;
+    protected void collectLeavesWithWriterNode(LinkedList<DataDstWriterNodeWrapper> out,
+            DataDstWriterNodeWrapper current) {
+
+        if (current.getJavaType() != JAVA_TYPE.MESSAGE) {
+            out.add(current);
+            return;
         }
-        case LONG: {
-            break;
+
+        if (!current.hasChidlren()) {
+            return;
         }
-        case BOOLEAN: {
-            break;
+        for (ArrayList<DataDstWriterNodeWrapper> children : current.getChildren()) {
+            for (DataDstWriterNodeWrapper child : children) {
+                collectLeavesWithWriterNode(out, child);
+            }
         }
-        case STRING: {
-            break;
-        }
-        case BYTES: {
-            break;
-        }
-        case FLOAT: {
-            break;
-        }
-        case DOUBLE: {
-            break;
-        }
-        case MESSAGE: {
-            // if it's top message or is not recursive mode
-            if (!isRecursiveEnabled()) {
-                isLeaf = false;
+    }
+
+    protected LinkedList<DataDstWriterNodeWrapper> buildWriterNodeWraper(DataDstWriterNode referWriterNode,
+            DataDstMessageDescriptor messageDesc) {
+        DataDstWriterNodeWrapper root = new DataDstWriterNodeWrapper("", false, null, referWriterNode);
+
+        for (DataDstFieldDescriptor field : messageDesc.getSortedFields()) {
+            ArrayList<DataDstWriterNodeWrapper> children = new ArrayList<DataDstWriterNodeWrapper>();
+            String baseVarName = getIdentName(field.getName());
+            if (referWriterNode == null) {
+                children.add(buildWriterNodeWraper(baseVarName, null, field, false));
+                root.addChild(children);
+                continue;
             }
 
-            if (descs == null) {
-                descs = new ArrayList<DataDstWriterNodeWrapper>();
-                if (isLeaf) {
-                    // 留一个给Name字段
-                    descs.ensureCapacity(desc.getChildren().size() + 2);
-                } else {
-                    descs.ensureCapacity(Math.max(desc.getChildren().size() * 2, 32));
-                }
+            DataDstChildrenNode referChildren = referWriterNode.getChildren().getOrDefault(field.getName(), null);
+            if (referChildren == null || referChildren.nodes == null || referChildren.nodes.isEmpty()) {
+                children.add(buildWriterNodeWraper(baseVarName, null, field, false));
+                root.addChild(children);
+                continue;
             }
 
-            for (HashMap.Entry<String, DataDstChildrenNode> child : desc.getChildren().entrySet()) {
-                // TODO 当前UE模式生成的字段是映射字段和协议字段交集的动态结构, 目前还不支持仅依据协议字段的静态结构，所以先跳过Plain模式
-                if (child.getValue().mode == DataDstWriterNode.CHILD_NODE_TYPE.PLAIN) {
-                    continue;
+            if (field.isList()) {
+                for (int i = 0; i < referChildren.nodes.size(); ++i) {
+                    children.add(buildWriterNodeWraper(String.format("%s_%d", baseVarName, i),
+                            referChildren.nodes.get(i), field, false));
                 }
-                // UE不支持递归的模式中，不允许动态长度，所以跳过Plain模式的数组
-                // if (!isRecursiveEnabled() && child.getValue().innerDesc.isList()
-                // && child.getValue().mode == DataDstWriterNode.CHILD_NODE_TYPE.PLAIN) {
-                // continue;
-                // }
-
-                String varName = getIdentName(child.getKey());
-                if (isLeaf) {
-                    if (child.getValue().innerDesc.isList()) {
-                        if (child.getValue().nodes.size() <= 0) {
-                            children = new ArrayList<DataDstWriterNodeWrapper>();
-                            continue;
-                        }
-
-                        DataDstWriterNode child_desc = child.getValue().nodes.get(0);
-                        children = expandDescription(children, child_desc, "_" + varName,
-                                child.getValue().nodes.size());
-
-                        if (!children.isEmpty()) {
-                            continue;
-                        }
-
-                        DataDstWriterNodeWrapper lastChild = children.get(children.size() - 1);
-                        if (lastChild.descs.isEmpty() || lastChild.GetWriterNode(0) != child_desc) {
-                            this.logErrorMessage("Add child %s for %s failed.", child.getKey(), desc.getFullName());
-                            continue;
-                        }
-
-                        // 把剩下的也加进去
-                        for (int i = 1; i < child.getValue().nodes.size(); ++i) {
-                            lastChild.descs.add(child.getValue().nodes.get(i));
-                        }
-                    } else if (!child.getValue().nodes.isEmpty()) {
-                        children = expandDescription(children, child.getValue().nodes.get(0), "_" + varName, 0);
-                    }
-                } else {
-                    if (child.getValue().innerDesc.isList()) {
-                        for (int i = 0; i < child.getValue().nodes.size(); ++i) {
-                            DataDstWriterNode child_desc = child.getValue().nodes.get(i);
-                            expandDescription(descs, child_desc, prefix + String.format("_%s_%d", varName, i), 0);
-                        }
-                    } else if (child.getValue().mode == DataDstWriterNode.CHILD_NODE_TYPE.STANDARD) {
-                        if (!child.getValue().nodes.isEmpty()) {
-                            expandDescription(descs, child.getValue().nodes.get(0), prefix + "_" + varName, 0);
-                        }
-                    }
-                    // TODO else if (child.getValue().mode ==
-                    // DataDstWriterNode.CHILD_NODE_TYPE.PLAIN) {
-                }
-            }
-
-            break;
-        }
-        }
-
-        if (!isLeaf) {
-            return descs;
-        }
-
-        if (descs == null) {
-            descs = new ArrayList<DataDstWriterNodeWrapper>();
-            if (listCapacity > 0) {
-                descs.ensureCapacity(listCapacity);
+                root.addChild(children);
             } else {
-                descs.ensureCapacity(2);
+                children.add(buildWriterNodeWraper(baseVarName, null, field, false));
+                root.addChild(children);
             }
         }
 
-        DataDstWriterNodeWrapper res = new DataDstWriterNodeWrapper();
-        if (prefix == null || prefix.isEmpty()) {
-            res.varName = "";
-        } else if (prefix.charAt(0) == '_') {
-            res.varName = prefix.substring(1);
+        LinkedList<DataDstWriterNodeWrapper> ret = new LinkedList<DataDstWriterNodeWrapper>();
+        if (isRecursiveEnabled()) {
+            ret.add(root);
+            return ret;
         } else {
-            res.varName = prefix;
+            collectLeavesWithWriterNode(ret, root);
+            return ret;
         }
-        res.descs.add(desc);
-        res.children = children;
-        res.isList = listCapacity > 0;
-        descs.add(res);
+    }
 
-        return descs;
+    protected DataDstWriterNodeWrapper buildWriterNodeWraper(String varName, DataDstWriterNode referWriterNode,
+            DataDstFieldDescriptor fieldDesc, boolean isGenerated) {
+        DataDstWriterNodeWrapper ret = new DataDstWriterNodeWrapper(varName, isGenerated, fieldDesc, referWriterNode);
+
+        if (fieldDesc.getType() != JAVA_TYPE.MESSAGE) {
+            return ret;
+        }
+
+        for (DataDstFieldDescriptor field : fieldDesc.getTypeDescriptor().getSortedFields()) {
+            String baseVarName;
+            if (isRecursiveEnabled()) {
+                baseVarName = getIdentName(field.getName());
+            } else {
+                baseVarName = String.format("%s_%s", varName, getIdentName(field.getName()));
+            }
+            ArrayList<DataDstWriterNodeWrapper> children = new ArrayList<DataDstWriterNodeWrapper>();
+            if (referWriterNode == null) {
+                children.add(buildWriterNodeWraper(baseVarName, null, field, false));
+                ret.addChild(children);
+                continue;
+            }
+
+            DataDstChildrenNode referChildren = referWriterNode.getChildren().getOrDefault(field.getName(), null);
+            if (referChildren == null || referChildren.nodes == null || referChildren.nodes.isEmpty()) {
+                children.add(buildWriterNodeWraper(baseVarName, null, field, false));
+                ret.addChild(children);
+                continue;
+            }
+
+            if (field.isList()) {
+                for (int i = 0; i < referChildren.nodes.size(); ++i) {
+                    String childVarName;
+                    if (isRecursiveEnabled()) {
+                        childVarName = baseVarName;
+                    } else {
+                        childVarName = String.format("%s_%d", baseVarName, i);
+                    }
+
+                    children.add(buildWriterNodeWraper(childVarName, referChildren.nodes.get(i), field, false));
+                }
+                ret.addChild(children);
+            } else {
+                children.add(buildWriterNodeWraper(baseVarName, null, field, false));
+                ret.addChild(children);
+            }
+        }
+
+        return ret;
     }
 
     /**
@@ -974,7 +1017,7 @@ public abstract class DataDstUEBase extends DataDstImpl {
         constValueNode.isList = false;
         expandedDesc.add(constValueNode);
 
-        UEDataRowRule constRule = splitDataRowDesc(codeInfo, expandedDesc);
+        UEDataRowRule constRule = splitDataRowDescDynamic(codeInfo, expandedDesc);
         constRule.helper = "helper";
         constRule.nameType = NAME_TYPE.STRING;
         // ======================================================================================================
@@ -1381,34 +1424,28 @@ public abstract class DataDstUEBase extends DataDstImpl {
         }
     }
 
-    private final NAME_TYPE getUENameType(DataDstWriterNodeWrapper descWrapper) {
-        DataDstWriterNode desc = descWrapper.GetWriterNode(0);
-        if (desc == null) {
+    private final NAME_TYPE getUENameType(DataDstFieldDescriptor field) {
+        if (field == null) {
             return NAME_TYPE.STRING;
         }
 
-        if (null != desc.identify && null != desc.getFieldExtension()) {
-            String ueTypeName = desc.getFieldExtension().mutableUE().ueTypeName;
+        if (null != field.mutableExtension()) {
+            String ueTypeName = field.mutableExtension().mutableUE().ueTypeName;
             if (ueTypeName != null && !ueTypeName.isEmpty()) {
                 return NAME_TYPE.STRING;
             }
         }
 
-        switch (desc.getType()) {
+        switch (field.getType()) {
         case INT:
-            return NAME_TYPE.LONG;
         case LONG:
-            return NAME_TYPE.LONG;
-        case FLOAT:
-            return NAME_TYPE.DOUBLE;
-        case DOUBLE:
-            return NAME_TYPE.DOUBLE;
         case BOOLEAN:
             return NAME_TYPE.LONG;
+        case FLOAT:
+        case DOUBLE:
+            return NAME_TYPE.DOUBLE;
         case STRING:
-            return NAME_TYPE.STRING;
         case BYTES:
-            return NAME_TYPE.STRING;
         case MESSAGE:
             return NAME_TYPE.STRING;
         default:
@@ -1416,23 +1453,68 @@ public abstract class DataDstUEBase extends DataDstImpl {
         }
     }
 
-    private final UEDataRowRule splitDataRowDesc(UECodeInfo codeInfo, ArrayList<DataDstWriterNodeWrapper> expandedDesc)
+    private final NAME_TYPE getUENameType(DataDstWriterNodeWrapper descWrapper) {
+        if (descWrapper.getReferField() == null) {
+            return NAME_TYPE.STRING;
+        }
+
+        return getUENameType(descWrapper.getReferField());
+    }
+
+    static DataDstFieldDescriptor createVirtualFieldDescriptor(String name, int index, JAVA_TYPE type) {
+        return new DataDstFieldDescriptor(DataDstWriterNode.getDefaultMessageDescriptor(type), index, name,
+                FIELD_LABEL_TYPE.OPTIONAL, null);
+    }
+
+    static DataDstWriterNodeWrapper createVirtualWriterNodeWrapper(String name, int index, JAVA_TYPE type) {
+        return new DataDstWriterNodeWrapper(name, true, createVirtualFieldDescriptor(name, index, type), null);
+    }
+
+    private final UEDataRowRule splitDataRowDescStatic(LinkedList<DataDstWriterNodeWrapper> originAllFields)
             throws ConvException {
         UEDataRowRule ret = new UEDataRowRule();
-        if (expandedDesc.isEmpty()) {
+        if (originAllFields.isEmpty()) {
             return ret;
         }
 
-        expandedDesc.sort(null);
+        ArrayList<DataDstWriterNodeWrapper> allFields = new ArrayList<DataDstWriterNodeWrapper>();
+        allFields.ensureCapacity(originAllFields.getFirst().getChildren().size() + 2);
+        originAllFields.getFirst().getChildren().forEach((e1) -> {
+            if (!e1.isEmpty()) {
+                allFields.add(e1.get(0));
+            }
+        });
+
+        return buildUEDataRowRule(ret, allFields);
+    }
+
+    private final UEDataRowRule splitDataRowDescDynamic(LinkedList<DataDstWriterNodeWrapper> originAllFields)
+            throws ConvException {
+        UEDataRowRule ret = new UEDataRowRule();
+        if (originAllFields.isEmpty()) {
+            return ret;
+        }
+
+        ArrayList<DataDstWriterNodeWrapper> allFields = new ArrayList<DataDstWriterNodeWrapper>();
+        allFields.ensureCapacity(originAllFields.size() + 2);
+        originAllFields.forEach((e) -> {
+            allFields.add(e);
+        });
+
+        return buildUEDataRowRule(ret, allFields);
+    }
+
+    private final UEDataRowRule buildUEDataRowRule(UEDataRowRule ret, ArrayList<DataDstWriterNodeWrapper> allFields)
+            throws ConvException {
+        if (allFields.isEmpty()) {
+            return ret;
+        }
 
         // UE 要求Key字段名必须是 Name，所以要查找Name的字段，没有的话要生成一个
         int nameIndex = -1;
-        for (int i = 0; i < expandedDesc.size(); ++i) {
-            DataDstWriterNodeWrapper nw = expandedDesc.get(i);
-            if (nw.varName.equalsIgnoreCase("Name")) {
-                if (nw.isList) {
-                    throw new ConvException("Name field can not be array/list/repeated");
-                }
+        for (int i = 0; i < allFields.size(); ++i) {
+            DataDstWriterNodeWrapper nw = allFields.get(i);
+            if (nw.getVarName().equalsIgnoreCase("Name")) {
                 nameIndex = i;
                 break;
             }
@@ -1441,35 +1523,33 @@ public abstract class DataDstUEBase extends DataDstImpl {
         // 如果字段里本来就有，就直接用原始的字段
         if (nameIndex >= 0) {
             ret.keyFields = new ArrayList<DataDstWriterNodeWrapper>();
-            ret.keyFields.add(expandedDesc.get(nameIndex));
-            expandedDesc.remove(nameIndex);
-            ret.valueFields = expandedDesc;
-            ret.nameType = getUENameType(ret.keyFields.get(0));
+            ret.keyFields.add(allFields.get(nameIndex));
+            allFields.remove(nameIndex);
+            ret.valueFields = allFields;
+            ret.nameType = getUENameType(ret.keyFields.get(0).getReferField());
             return ret;
         }
 
         // 检查 key_tag，如果找到了，就优先用 key_tag
-        DataDstWriterNodeWrapper namedKey = new DataDstWriterNodeWrapper();
-        namedKey.varName = "Name";
-        namedKey.isGenerated = true;
+        DataDstWriterNodeWrapper namedKey = createVirtualWriterNodeWrapper("Name", 0, JAVA_TYPE.STRING);
 
         ret.keyFields = new ArrayList<DataDstWriterNodeWrapper>();
-        ret.keyFields.ensureCapacity(expandedDesc.size());
+        ret.keyFields.ensureCapacity(allFields.size());
         ret.keyFields.add(namedKey);
 
         ret.valueFields = new ArrayList<DataDstWriterNodeWrapper>();
-        ret.valueFields.ensureCapacity(expandedDesc.size());
+        ret.valueFields.ensureCapacity(allFields.size());
 
         ret.nameType = NAME_TYPE.LONG;
-        for (int i = 0; i < expandedDesc.size(); ++i) {
-            DataDstWriterNodeWrapper moved = expandedDesc.get(i);
-            if (null != moved.descs && !moved.descs.isEmpty() && null != moved.GetWriterNode(0).identify
-                    && moved.GetWriterNode(0).getFieldExtension().mutableUE().keyTag > 0) {
-                if (moved.isList) {
-                    throw new ConvException("Field with key_tag can not be array/list/repeated");
+        for (int i = 0; i < allFields.size(); ++i) {
+            DataDstWriterNodeWrapper moved = allFields.get(i);
+            if (null != moved.getReferField() && moved.getFieldExtension().mutableUE().keyTag > 0) {
+                if (moved.getReferField().isList()) {
+                    throw new ConvException(String.format("Field %s with key_tag can not be array/list/repeated",
+                            moved.getReferField().getTypeDescriptor().getFullName()));
                 }
                 ret.keyFields.add(moved);
-                switch (getUENameType(moved)) {
+                switch (getUENameType(moved.getReferField())) {
                 case LONG:
                     ret.nameType = NAME_TYPE.LONG;
                     break;
@@ -1543,9 +1623,8 @@ public abstract class DataDstUEBase extends DataDstImpl {
         }
 
         // 如果开启了嵌套模式，还要补全未使用的字段
-        if (isRecursiveEnabled() && null != codeInfo.desc) {
-            for (HashMap.Entry<String, DataDstFieldDescriptor> varPair : codeInfo.desc.getTypeDescriptor().fields
-                    .entrySet()) {
+        if (isRecursiveEnabled() && null != codeInfo.messageDesc) {
+            for (HashMap.Entry<String, DataDstFieldDescriptor> varPair : codeInfo.messageDesc.fields.entrySet()) {
                 String varName = getIdentName(varPair.getKey());
                 if (dumpedFields.contains(varName)) {
                     continue;
@@ -1568,7 +1647,7 @@ public abstract class DataDstUEBase extends DataDstImpl {
         if (rule.keyFields.isEmpty()) {
             enableDataTable = false;
         }
-        if (null != codeInfo.desc && codeInfo.desc.getMessageExtension().mutableUE().notDataTable) {
+        if (null != codeInfo.messageDesc && codeInfo.messageDesc.mutableExtension().mutableUE().notDataTable) {
             enableDataTable = false;
         }
 
@@ -1664,7 +1743,7 @@ public abstract class DataDstUEBase extends DataDstImpl {
         if (rule.keyFields.isEmpty()) {
             enableDataTable = false;
         }
-        if (null != codeInfo.desc && codeInfo.desc.getMessageExtension().mutableUE().notDataTable) {
+        if (null != codeInfo.messageDesc && codeInfo.messageDesc.mutableExtension().mutableUE().notDataTable) {
             enableDataTable = false;
         }
 
@@ -1836,9 +1915,8 @@ public abstract class DataDstUEBase extends DataDstImpl {
             }
         }
         // 如果开启了嵌套模式，还要补全未使用的字段，因为可能被别处用到
-        if (isRecursiveEnabled() && null != codeInfo.desc) {
-            for (HashMap.Entry<String, DataDstFieldDescriptor> varPair : codeInfo.desc.getTypeDescriptor().fields
-                    .entrySet()) {
+        if (isRecursiveEnabled() && null != codeInfo.messageDesc) {
+            for (HashMap.Entry<String, DataDstFieldDescriptor> varPair : codeInfo.messageDesc.fields.entrySet()) {
                 String varName = getIdentName(varPair.getKey());
                 if (dumpedFields.contains(varName)) {
                     continue;

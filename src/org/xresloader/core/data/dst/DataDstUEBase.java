@@ -356,22 +356,7 @@ public abstract class DataDstUEBase extends DataDstImpl {
                 importObj.put("ImportGroups", groupObj);
             }
 
-            JSONObject selectedItem = null;
-            for (int i = 0; i < groupObj.length(); ++i) {
-                JSONObject item = groupObj.getJSONObject(i);
-                if (item.has("ImportSettings")) {
-                    if (item.getJSONObject("ImportSettings").optString("ImportRowStruct").equals(code.clazzName)) {
-                        selectedItem = item;
-                        break;
-                    }
-                }
-            }
-
-            if (null == selectedItem) {
-                selectedItem = new JSONObject();
-                groupObj.put(selectedItem);
-            }
-
+            JSONObject selectedItem = new JSONObject();
             selectedItem.put("GroupName", code.category);
 
             JSONArray dataFileList = new JSONArray();
@@ -392,6 +377,41 @@ public abstract class DataDstUEBase extends DataDstImpl {
 
             importSetting.put("ImportRowStruct", code.baseName); // 这个得是不带F前缀的名字
             importSetting.put("ImportType", "ECSV_DataTable");
+
+            // remove old items
+            for (int i = 0; i < groupObj.length(); ++i) {
+                JSONObject oldItem = groupObj.getJSONObject(i);
+                if (!oldItem.has("ImportSettings")) {
+                    continue;
+                }
+
+                if (!oldItem.optString("GroupName").equals(selectedItem.optString("GroupName"))) {
+                    continue;
+                }
+
+                if (!oldItem.optString("DestinationPath").equals(selectedItem.optString("DestinationPath"))) {
+                    continue;
+                }
+
+                if (!oldItem.optString("FactoryName").equals(selectedItem.optString("FactoryName"))) {
+                    continue;
+                }
+
+                JSONObject oldImportSetting = oldItem.getJSONObject("ImportSettings");
+                if (!oldImportSetting.optString("ImportType").equals(importSetting.optString("ImportType"))) {
+                    continue;
+                }
+
+                if (!oldImportSetting.optString("ImportRowStruct").equals(importSetting.optString("ImportRowStruct"))) {
+                    continue;
+                }
+
+                groupObj.remove(i);
+                --i;
+            }
+
+            // add new item
+            groupObj.put(selectedItem);
 
             FileOutputStream fos = new FileOutputStream(importFile, false);
             fos.write(dumpString(importObj.toString(4)));

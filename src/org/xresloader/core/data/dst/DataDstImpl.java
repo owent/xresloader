@@ -3,6 +3,8 @@ package org.xresloader.core.data.dst;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
+
+import org.xresloader.core.data.dst.DataDstWriterNode.JAVA_TYPE;
 import org.xresloader.core.data.err.ConvException;
 import org.xresloader.core.data.src.DataSrcImpl;
 import org.xresloader.core.data.vfy.DataVerifyImpl;
@@ -122,7 +124,7 @@ public abstract class DataDstImpl {
             sepC = input.charAt(i);
         }
 
-        return input.split(String.valueOf(sepC));
+        return input.split("\\" + String.valueOf(sepC));
     }
 
     static public Boolean parsePlainDataBoolean(String input, IdentifyDescriptor ident,
@@ -258,7 +260,7 @@ public abstract class DataDstImpl {
         }
 
         String ret = field.mutableExtension().plainSeparator;
-        if (field.getTypeDescriptor() == null) {
+        if (field.getType() != JAVA_TYPE.MESSAGE) {
             return ret;
         }
 
@@ -277,13 +279,13 @@ public abstract class DataDstImpl {
         }
 
         if (field.isList()) {
-            if (field.getTypeDescriptor() == null) {
+            if (field.getType() == JAVA_TYPE.MESSAGE) {
                 return field.getTypeDescriptor().mutableExtension().plainSeparator;
             }
         }
 
         String ret = field.mutableExtension().plainSeparator;
-        if (field.getTypeDescriptor() == null) {
+        if (field.getType() != JAVA_TYPE.MESSAGE) {
             return ret;
         }
 

@@ -9,8 +9,19 @@
 3. 增加protobuf插件 - ```org.xresloader.msg_require_mapping_all``` 可以设置某个message的所有字段必须被全部映射，用于检查配置遗漏
 4. 协议里直接配置 ```enum``` 类型也支持默认增加该类型的验证器 
 5. 大量优化内部数据结构，更好地分离映射关系和AST描述
-6. 增加实验性功能Plain模式，允许把message所有字段或动态长度的数组配置在一个单元格内（UE-CSV模式由于不支持动态长度所以不支持）
+6. 增加实验性功能Plain模式，允许把message所有字段或动态长度的数组配置在一个单元格内（UE-CSV模式暂不支持）
 7. 修复输出的UE导入文件的没有自动删除老的导入条目的问题
+
+CheckList:
+
+> 依赖结构写出
+> Key<->Name正常
+> TArray<T>和CSV,TArray<T>和Reset代码正确
+> 写出目录
+> 嵌套Message的Reset代码正确
+> CSV仅映射字段
+> 变量名
+> field order  const
 
 2.6.1
 ------

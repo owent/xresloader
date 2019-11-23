@@ -7,7 +7,6 @@
 #include "UObject/ConstructorHelpers.h"
 #include "Engine/DataTable.h"
 #include "Config/ArrInArr.h"
-#include "Config/TestMsgVerifier.h"
 #include "ArrInArrCfg.generated.h"
 
 
@@ -26,13 +25,13 @@ struct FArrInArrCfg : public FTableRowBase
     UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "XResConfig")
     TArray< FArrInArr > Arr;
 
-    /** Field Type: INT, Name: TestPlainIntArr **/
-    UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "XResConfig")
-    TArray< int32 > TestPlainIntArr;
-
     /** Field Type: INT, Name: TestPlainEnumArr **/
     UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "XResConfig")
     TArray< int32 > TestPlainEnumArr;
+
+    /** Field Type: INT, Name: TestPlainIntArr **/
+    UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "XResConfig")
+    TArray< int32 > TestPlainIntArr;
 
     /** Field Type: MESSAGE, Name: TestPlainMsg **/
     UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "XResConfig")

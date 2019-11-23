@@ -220,11 +220,16 @@ public class DataDstUECsv extends DataDstUEBase {
     }
 
     @Override
-    final protected Object pickValueField(Object buildObj, DataDstFieldNodeWrapper desc) throws ConvException {
+    final protected Object pickValueField(Object buildObj, ArrayList<DataDstWriterNodeWrapper> fieldSet)
+            throws ConvException {
+        if (fieldSet.isEmpty()) {
+            return "";
+        }
+
         if (!isRecursiveEnabled()) {
-            Object ret = pickValueFieldBaseStandardImpl(desc, 0);
+            Object ret = pickValueFieldBaseStandardImpl(getFirstWriterNode(fieldSet));
             if (ret == null) {
-                switch (desc.getJavaType()) {
+                switch (getFieldDescriptor(fieldSet).getType()) {
                 case INT:
                 case LONG:
                 case FLOAT:
@@ -247,7 +252,7 @@ public class DataDstUECsv extends DataDstUEBase {
         }
 
         StringBuffer fieldSB = new StringBuffer();
-        pickValueFieldCsvImpl(fieldSB, desc);
+        pickValueFieldCsvImpl(fieldSB, fieldSet);
         String ret = fieldSB.toString();
         // empty list to nothing
         if (ret.equalsIgnoreCase("()")) {
@@ -256,29 +261,26 @@ public class DataDstUECsv extends DataDstUEBase {
         return ret;
     }
 
-    protected void pickValueFieldCsvImpl(StringBuffer fieldSB, DataDstFieldNodeWrapper descWrapper)
+    protected void pickValueFieldCsvImpl(StringBuffer fieldSB, ArrayList<DataDstWriterNodeWrapper> fieldSet)
             throws ConvException {
-        if (null == descWrapper || null == descWrapper.referWriterNodes || descWrapper.referWriterNodes.isEmpty()) {
+        DataDstFieldDescriptor field = getFieldDescriptor(fieldSet);
+        if (null == field) {
             return;
         }
 
-        DataDstWriterNode desc = descWrapper.GetWriterNode(0);
-        if (desc == null) {
-            return;
-        }
-
-        if (descWrapper.isList()) {
-            if (descWrapper.referWriterNodes.isEmpty()) {
+        if (field.isList() && isRecursiveEnabled()) {
+            if (fieldSet == null || fieldSet.isEmpty()) {
+                pickValueFieldCsvDefaultImpl(fieldSB, field);
                 return;
             }
 
             fieldSB.append("(");
             boolean hasListData = false;
-            for (int i = 0; i < descWrapper.referWriterNodes.size(); ++i) {
+            for (int i = 0; i < fieldSet.size(); ++i) {
                 if (hasListData) {
                     fieldSB.append(",");
                 }
-                if (pickValueFieldCsvImpl(fieldSB, descWrapper.referWriterNodes.get(i))) {
+                if (pickValueFieldCsvImpl(fieldSB, fieldSet.get(i).getReferNode())) {
                     hasListData = true;
                 } else {
                     if (hasListData) {
@@ -288,7 +290,10 @@ public class DataDstUECsv extends DataDstUEBase {
             }
             fieldSB.append(")");
         } else {
-            pickValueFieldCsvImpl(fieldSB, desc);
+            if (fieldSet.isEmpty()) {
+                pickValueFieldCsvDefaultImpl(fieldSB, field);
+            }
+            pickValueFieldCsvImpl(fieldSB, fieldSet.get(0).getReferNode());
         }
     }
 
@@ -399,7 +404,7 @@ public class DataDstUECsv extends DataDstUEBase {
         Object val = pickValueFieldBaseStandardImpl(desc);
         if (val == null) {
             if (desc.getFieldDescriptor() != null && desc.getFieldDescriptor().isList()) {
-                return false;
+                return pickValueFieldCsvDefaultImpl(fieldSB, desc.getFieldDescriptor());
             } else {
                 return pickValueMessageCsvDefaultImpl(fieldSB, desc.getTypeDescriptor());
             }
@@ -463,7 +468,8 @@ public class DataDstUECsv extends DataDstUEBase {
 
     protected boolean pickValueFieldCsvDefaultImpl(StringBuffer sb, DataDstFieldDescriptor fd) {
         if (fd.isList()) {
-            return false;
+            sb.append("()");
+            return true;
         }
 
         return pickValueMessageCsvDefaultImpl(sb, fd.getTypeDescriptor());

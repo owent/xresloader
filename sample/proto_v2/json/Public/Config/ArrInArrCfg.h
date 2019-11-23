@@ -7,7 +7,6 @@
 #include "UObject/ConstructorHelpers.h"
 #include "Engine/DataTable.h"
 #include "Config/ArrInArr.h"
-#include "Config/TestMsgVerifier.h"
 #include "ArrInArrCfg.generated.h"
 
 

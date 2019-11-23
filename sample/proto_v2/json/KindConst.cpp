@@ -87,7 +87,7 @@ UDataTable* UKindConstHelper::GetRawDataTable(bool& IsValid) const
 void UKindConstHelper::ClearRow(FKindConst& TableRow)
 {
     TableRow.Name = TEXT("");
-    TableRow.Value = 0;
+    TableRow.Value = TEXT("");
 }
 
 void UKindConstHelper::ClearDataRow(FKindConst& TableRow) const

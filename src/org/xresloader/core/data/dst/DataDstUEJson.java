@@ -13,6 +13,7 @@ import org.json.JSONObject;
 import org.xresloader.core.ProgramOptions;
 import org.xresloader.core.data.dst.DataDstWriterNode.DataDstChildrenNode;
 import org.xresloader.core.data.dst.DataDstWriterNode.DataDstFieldDescriptor;
+import org.xresloader.core.data.dst.DataDstWriterNode.DataDstMessageDescriptor;
 import org.xresloader.core.data.dst.DataDstWriterNode.JAVA_TYPE;
 import org.xresloader.core.data.err.ConvException;
 import org.xresloader.core.data.src.DataContainer;
@@ -201,52 +202,46 @@ public class DataDstUEJson extends DataDstUEBase {
     }
 
     @Override
-    final protected Object pickValueField(Object buildObj, DataDstFieldNodeWrapper desc) throws ConvException {
-        if (!isRecursiveEnabled()) {
-            return pickValueFieldBaseStandardImpl(desc, 0);
-        }
+    final protected Object pickValueField(Object buildObj, ArrayList<DataDstWriterNodeWrapper> fieldSet)
+            throws ConvException {
+        return pickValueFieldJsonImpl(fieldSet);
+    }
 
-        if (null == desc || null == desc.referWriterNodes || desc.referWriterNodes.isEmpty()) {
+    protected Object pickValueFieldJsonImpl(ArrayList<DataDstWriterNodeWrapper> fieldSet) throws ConvException {
+        DataDstWriterNode msgDesc = getFirstWriterNode(fieldSet);
+        DataDstFieldDescriptor field = getFieldDescriptor(fieldSet);
+        if (msgDesc == null || field == null) {
             return null;
         }
 
-        if (desc.GetWriterNode(0).getReferBrothers().mode == DataDstWriterNode.CHILD_NODE_TYPE.STANDARD) {
-            return pickValueFieldJsonStandardImpl(desc);
+        if (msgDesc.getReferBrothers().mode == DataDstWriterNode.CHILD_NODE_TYPE.STANDARD) {
+            if (isRecursiveEnabled() && field.isList()) {
+                JSONArray ret = new JSONArray();
+                for (int i = 0; i < fieldSet.size(); ++i) {
+                    Object obj = pickValueFieldJsonStandardImpl(fieldSet.get(i));
+                    if (obj != null) {
+                        ret.put(obj);
+                    }
+                }
+                return ret;
+            } else {
+                return pickValueFieldJsonStandardImpl(fieldSet.get(0));
+            }
         }
 
-        if (desc.GetWriterNode(0).getReferBrothers().mode == DataDstWriterNode.CHILD_NODE_TYPE.PLAIN) {
-            return pickValueFieldJsonPlainImpl(desc);
+        if (msgDesc.getReferBrothers().mode == DataDstWriterNode.CHILD_NODE_TYPE.PLAIN) {
+            return pickValueFieldJsonPlainImpl(field, fieldSet);
         }
 
         return null;
     }
 
-    protected Object pickValueFieldJsonStandardImpl(DataDstFieldNodeWrapper descWrapper) throws ConvException {
-        if (null == descWrapper || null == descWrapper.referWriterNodes || descWrapper.referWriterNodes.isEmpty()) {
+    protected Object pickValueFieldJsonStandardImpl(DataDstWriterNodeWrapper descWrapper) throws ConvException {
+        if (null == descWrapper || null == descWrapper.getReferNode()) {
             return null;
         }
 
-        DataDstWriterNode desc = descWrapper.GetWriterNode(0);
-        if (desc == null) {
-            return null;
-        }
-
-        if (descWrapper.isList()) {
-            JSONArray ret = new JSONArray();
-            for (DataDstWriterNode child : descWrapper.referWriterNodes) {
-                Object val = pickValueFieldJsonStandardImpl(child);
-                if (val != null) {
-                    ret.put(val);
-                }
-            }
-
-            return ret;
-        } else {
-            return pickValueFieldJsonStandardImpl(desc);
-        }
-    }
-
-    protected Object pickValueFieldJsonStandardImpl(DataDstWriterNode desc) throws ConvException {
+        DataDstWriterNode desc = descWrapper.getReferNode();
         if (desc == null) {
             return null;
         }
@@ -258,29 +253,20 @@ public class DataDstUEJson extends DataDstUEBase {
             }
 
             JSONObject ret = new JSONObject();
-            for (Entry<String, DataDstChildrenNode> child : desc.getChildren().entrySet()) {
-                Object val = null;
-                if (child.getValue().innerDesc.isList()) {
-                    JSONArray res = new JSONArray();
-
-                    for (DataDstWriterNode subNode : child.getValue().nodes) {
-                        Object v = pickValueFieldJsonStandardImpl(subNode);
-                        if (v != null) {
-                            res.put(v);
-                        }
+            if (descWrapper.getChildren() != null) {
+                for (ArrayList<DataDstWriterNodeWrapper> child : descWrapper.getChildren()) {
+                    if (child.isEmpty()) {
+                        continue;
                     }
 
-                    val = res;
-                } else if (!child.getValue().nodes.isEmpty()) {
-                    val = pickValueFieldJsonStandardImpl(child.getValue().nodes.get(0));
-                }
+                    Object val = pickValueFieldJsonImpl(child);
+                    if (val != null) {
+                        String varName = getIdentName(child.get(0).getVarName());
+                        ret.put(varName, val);
 
-                if (val != null) {
-                    String varName = getIdentName(child.getKey());
-                    ret.put(varName, val);
-
-                    if (null != dumpedFields) {
-                        dumpedFields.add(varName);
+                        if (null != dumpedFields) {
+                            dumpedFields.add(varName);
+                        }
                     }
                 }
             }
@@ -304,12 +290,17 @@ public class DataDstUEJson extends DataDstUEBase {
         return pickValueFieldBaseStandardImpl(desc);
     }
 
-    protected Object pickValueFieldJsonPlainImpl(DataDstFieldNodeWrapper descWrapper) throws ConvException {
-        if (null == descWrapper || null == descWrapper.referWriterNodes || descWrapper.referWriterNodes.isEmpty()) {
+    protected Object pickValueFieldJsonPlainImpl(DataDstFieldDescriptor field,
+            ArrayList<DataDstWriterNodeWrapper> fieldSet) throws ConvException {
+        if (null == field) {
             return null;
         }
 
-        DataDstWriterNode desc = descWrapper.GetWriterNode(0);
+        if (fieldSet.isEmpty()) {
+            return pickValueFieldJsonDefaultImpl(field);
+        }
+
+        DataDstWriterNode desc = fieldSet.get(0).getReferNode();
         if (desc == null) {
             return null;
         }

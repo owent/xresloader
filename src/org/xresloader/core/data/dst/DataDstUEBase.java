@@ -7,6 +7,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.nio.charset.Charset;
 import java.util.*;
+import java.util.function.Consumer;
 import java.util.regex.Pattern;
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -55,8 +56,8 @@ public abstract class DataDstUEBase extends DataDstImpl {
         public String helper = null;
         public String description = null;
         public NAME_TYPE nameType = NAME_TYPE.LONG;
-        public ArrayList<DataDstWriterNodeWrapper> keyFields = null;
-        public ArrayList<DataDstWriterNodeWrapper> valueFields = null;
+        public List<ArrayList<DataDstWriterNodeWrapper>> keyFields = null;
+        public List<ArrayList<DataDstWriterNodeWrapper>> valueFields = null;
     }
 
     @Override
@@ -589,39 +590,27 @@ public abstract class DataDstUEBase extends DataDstImpl {
             return null;
         }
 
-        // 递归模式要导出所有字段（可能被其他模块引用），所以不能走动态结构DataDstWriterNode，必须走静态结构DataDstMessageDescriptor
-        if (isRecursiveEnabled()) {
-            LinkedList<DataDstWriterNodeWrapper> expandedDesc = buildWriterNodeWraper(codeInfo.writerNode,
-                    codeInfo.messageDesc);
-
-            // ======================================================================================================
-            UEDataRowRule rule = splitDataRowDescStatic(expandedDesc);
-            rule.helper = codeInfo.messageDesc.mutableExtension().mutableUE().helper;
-            rule.description = codeInfo.messageDesc.mutableExtension().description;
-            // ======================================================================================================
-
-            return rule;
-        } else {
-            if (null == codeInfo.writerNode) {
-                return null;
-            }
-
-            // 生成描述集,CSV必须固定化描述集，可能需要把字段平铺开来。
-            LinkedList<DataDstWriterNodeWrapper> expandedDesc = buildWriterNodeWraper(codeInfo.writerNode,
-                    codeInfo.messageDesc);
-
-            if (expandedDesc == null || expandedDesc.isEmpty()) {
-                return null;
-            }
-
-            // ======================================================================================================
-            UEDataRowRule rule = splitDataRowDescDynamic(expandedDesc);
-            rule.helper = codeInfo.messageDesc.mutableExtension().mutableUE().helper;
-            rule.description = codeInfo.messageDesc.mutableExtension().description;
-            // ======================================================================================================
-
-            return rule;
+        // 递归模式要导出所有字段（可能被其他模块引用）
+        if (null == codeInfo.writerNode) {
+            return null;
         }
+
+        // 生成描述集,CSV必须固定化描述集，可能需要把字段平铺开来。
+        LinkedList<DataDstWriterNodeWrapper> expandedDesc = buildWriterNodeWraper(codeInfo.writerNode,
+                codeInfo.messageDesc);
+
+        if (expandedDesc == null || expandedDesc.isEmpty()) {
+            return null;
+        }
+
+        // ======================================================================================================
+        // 递归模式中，第一个为外层Message
+        UEDataRowRule rule = buildUEDataRowCodeRule(expandedDesc, isRecursiveEnabled());
+        rule.helper = codeInfo.messageDesc.mutableExtension().mutableUE().helper;
+        rule.description = codeInfo.messageDesc.mutableExtension().description;
+        // ======================================================================================================
+
+        return rule;
     }
 
     protected final void build_data(Object buildObj, DataDstImpl compiler) throws ConvException, IOException {
@@ -647,10 +636,16 @@ public abstract class DataDstUEBase extends DataDstImpl {
             ArrayList<Object> row_data = new ArrayList<Object>();
             row_data.ensureCapacity(rule.keyFields.size() + rule.valueFields.size());
             for (int i = 0; i < rule.keyFields.size(); ++i) {
-                row_data.add(rule.keyFields.get(i).varName);
+                if (rule.keyFields.get(i).isEmpty()) {
+                    continue;
+                }
+                row_data.add(rule.keyFields.get(i).get(0).varName);
             }
             for (int i = 0; i < rule.valueFields.size(); ++i) {
-                row_data.add(rule.valueFields.get(i).varName);
+                if (rule.keyFields.get(i).isEmpty()) {
+                    continue;
+                }
+                row_data.add(rule.valueFields.get(i).get(0).varName);
             }
             buildForUEOnPrintHeader(buildObj, row_data, rule, codeInfo);
 
@@ -709,13 +704,42 @@ public abstract class DataDstUEBase extends DataDstImpl {
         writeCodeSourceFile(rule, codeInfo);
     }
 
+    static protected DataDstFieldDescriptor getFieldDescriptor(ArrayList<DataDstWriterNodeWrapper> fieldSet) {
+        return getFieldDescriptor(fieldSet, 0);
+    }
+
+    static protected DataDstFieldDescriptor getFieldDescriptor(ArrayList<DataDstWriterNodeWrapper> fieldSet,
+            int index) {
+        if (fieldSet == null || index >= fieldSet.size()) {
+            return null;
+        }
+
+        return fieldSet.get(index).getReferField();
+    }
+
+    static protected DataDstWriterNode getFirstWriterNode(ArrayList<DataDstWriterNodeWrapper> fieldSet) {
+        return getWriterNode(fieldSet, 0);
+    }
+
+    static protected DataDstWriterNode getWriterNode(ArrayList<DataDstWriterNodeWrapper> fieldSet, int index) {
+        if (fieldSet == null || index >= fieldSet.size()) {
+            return null;
+        }
+
+        return fieldSet.get(index).getReferNode();
+    }
+
     private Object pickNameField(Object buildObj, UEDataRowRule rule) throws ConvException {
         if (rule.keyFields.isEmpty()) {
             return null;
         }
 
+        if (rule.keyFields.get(0).isEmpty()) {
+            return null;
+        }
+
         // 如果是直接采用原始字段则直接返回原始字段数据
-        if (1 == rule.keyFields.size() && null != rule.keyFields.get(0).getReferNode()) {
+        if (1 == rule.keyFields.size() && null != getFirstWriterNode(rule.keyFields.get(0))) {
             return pickValueField(buildObj, rule.keyFields.get(0));
         }
 
@@ -723,12 +747,13 @@ public abstract class DataDstUEBase extends DataDstImpl {
         case LONG: {
             long ret = 0;
             for (int i = 1; i < rule.keyFields.size(); ++i) {
-                DataDstWriterNodeWrapper wrapper = rule.keyFields.get(i);
-                Object val = pickValueField(buildObj, wrapper);
+                ArrayList<DataDstWriterNodeWrapper> wrappers = rule.keyFields.get(i);
+                Object val = pickValueField(buildObj, wrappers);
                 if (val instanceof Number) {
-                    ret = ret + wrapper.getFieldExtension().mutableUE().keyTag * ((Number) val).longValue();
+                    ret = ret + getFieldDescriptor(wrappers).mutableExtension().mutableUE().keyTag
+                            * ((Number) val).longValue();
                 } else {
-                    ret = ret + wrapper.getFieldExtension().mutableUE().keyTag
+                    ret = ret + getFieldDescriptor(wrappers).mutableExtension().mutableUE().keyTag
                             * Long.valueOf(pickValueField(buildObj, rule.keyFields.get(i)).toString());
                 }
             }
@@ -738,12 +763,13 @@ public abstract class DataDstUEBase extends DataDstImpl {
         case DOUBLE: {
             double ret = 0.0;
             for (int i = 1; i < rule.keyFields.size(); ++i) {
-                DataDstWriterNodeWrapper wrapper = rule.keyFields.get(i);
-                Object val = pickValueField(buildObj, wrapper);
+                ArrayList<DataDstWriterNodeWrapper> wrappers = rule.keyFields.get(i);
+                Object val = pickValueField(buildObj, wrappers);
                 if (val instanceof Number) {
-                    ret = ret + wrapper.getFieldExtension().mutableUE().keyTag * ((Number) val).doubleValue();
+                    ret = ret + getFieldDescriptor(wrappers).mutableExtension().mutableUE().keyTag
+                            * ((Number) val).doubleValue();
                 } else {
-                    ret = ret + wrapper.getFieldExtension().mutableUE().keyTag
+                    ret = ret + getFieldDescriptor(wrappers).mutableExtension().mutableUE().keyTag
                             * Double.valueOf(pickValueField(buildObj, rule.keyFields.get(i)).toString());
                 }
             }
@@ -764,8 +790,31 @@ public abstract class DataDstUEBase extends DataDstImpl {
         }
     }
 
-    protected Object pickValueField(Object buildObj, DataDstWriterNodeWrapper descWrapper) throws ConvException {
-        return pickValueFieldBaseStandardImpl(descWrapper.getReferNode());
+    protected Object pickValueField(Object buildObj, ArrayList<DataDstWriterNodeWrapper> fieldSet)
+            throws ConvException {
+        if (fieldSet == null || fieldSet.isEmpty()) {
+            return null;
+        }
+
+        DataDstFieldDescriptor field = getFieldDescriptor(fieldSet);
+        if (field == null) {
+            return null;
+        }
+
+        if (field.isList()) {
+            ArrayList<Object> ret = new ArrayList<Object>();
+            ret.ensureCapacity(fieldSet.size());
+            for (DataDstWriterNodeWrapper descWraper : fieldSet) {
+                Object res = pickValueFieldBaseStandardImpl(descWraper.getReferNode());
+                if (res != null) {
+                    ret.add(res);
+                }
+            }
+
+            return ret;
+        } else {
+            return pickValueFieldBaseStandardImpl(fieldSet.get(0).getReferNode());
+        }
     }
 
     protected Object pickValueFieldBaseStandardImpl(DataDstWriterNode desc) throws ConvException {
@@ -870,9 +919,12 @@ public abstract class DataDstUEBase extends DataDstImpl {
         if (!current.hasChidlren()) {
             return;
         }
-        for (ArrayList<DataDstWriterNodeWrapper> children : current.getChildren()) {
-            for (DataDstWriterNodeWrapper child : children) {
-                collectLeavesWithWriterNode(out, child);
+
+        if (null != current.getChildren()) {
+            for (ArrayList<DataDstWriterNodeWrapper> children : current.getChildren()) {
+                for (DataDstWriterNodeWrapper child : children) {
+                    collectLeavesWithWriterNode(out, child);
+                }
             }
         }
     }
@@ -899,8 +951,14 @@ public abstract class DataDstUEBase extends DataDstImpl {
 
             if (field.isList()) {
                 for (int i = 0; i < referChildren.nodes.size(); ++i) {
-                    children.add(buildWriterNodeWraper(String.format("%s_%d", baseVarName, i),
-                            referChildren.nodes.get(i), field, false));
+                    String childVarName;
+                    if (isRecursiveEnabled()) {
+                        childVarName = baseVarName;
+                    } else {
+                        childVarName = String.format("%s_%d", baseVarName, i);
+                    }
+
+                    children.add(buildWriterNodeWraper(childVarName, referChildren.nodes.get(i), field, false));
                 }
                 root.addChild(children);
             } else {
@@ -992,32 +1050,28 @@ public abstract class DataDstUEBase extends DataDstImpl {
 
         // const完整路径都在data里了，不需要额外的包名(可能包含多个包)
         // ======================================================================================================
-        ArrayList<DataDstWriterNodeWrapper> expandedDesc = new ArrayList<DataDstWriterNodeWrapper>();
-        DataDstWriterNodeWrapper constNameNode = new DataDstWriterNodeWrapper();
+        LinkedList<DataDstWriterNodeWrapper> expandedDesc = new LinkedList<DataDstWriterNodeWrapper>();
         ddNode = DataDstWriterNode.create(null,
                 DataDstWriterNode.getDefaultMessageDescriptor(DataDstWriterNode.JAVA_TYPE.STRING));
         ddNode.setFieldDescriptor(new DataDstFieldDescriptor(ddNode.getTypeDescriptor(), 1, "Name",
                 DataDstWriterNode.FIELD_LABEL_TYPE.OPTIONAL, null));
         ddNode.identify = IdentifyEngine.n2i("Name", 0);
-        constNameNode.descs.add(ddNode);
+
+        DataDstWriterNodeWrapper constNameNode = createVirtualWriterNodeWrapper("Name", 1, JAVA_TYPE.STRING, ddNode);
         constNameNode.varName = getIdentName("Name");
-        constNameNode.isGenerated = true;
-        constNameNode.isList = false;
         expandedDesc.add(constNameNode);
 
-        DataDstWriterNodeWrapper constValueNode = new DataDstWriterNodeWrapper();
         ddNode = DataDstWriterNode.create(null,
                 DataDstWriterNode.getDefaultMessageDescriptor(DataDstWriterNode.JAVA_TYPE.INT));
-        ddNode.setFieldDescriptor(new DataDstFieldDescriptor(ddNode.getTypeDescriptor(), 1, "Value",
+        ddNode.setFieldDescriptor(new DataDstFieldDescriptor(ddNode.getTypeDescriptor(), 2, "Value",
                 DataDstWriterNode.FIELD_LABEL_TYPE.OPTIONAL, null));
         ddNode.identify = IdentifyEngine.n2i("Value", 1);
-        constValueNode.descs.add(ddNode);
+
+        DataDstWriterNodeWrapper constValueNode = createVirtualWriterNodeWrapper("Value", 2, JAVA_TYPE.STRING, ddNode);
         constValueNode.varName = getIdentName("Value");
-        constValueNode.isGenerated = true;
-        constValueNode.isList = false;
         expandedDesc.add(constValueNode);
 
-        UEDataRowRule constRule = splitDataRowDescDynamic(codeInfo, expandedDesc);
+        UEDataRowRule constRule = buildUEDataRowCodeRule(expandedDesc, false);
         constRule.helper = "helper";
         constRule.nameType = NAME_TYPE.STRING;
         // ======================================================================================================
@@ -1075,9 +1129,14 @@ public abstract class DataDstUEBase extends DataDstImpl {
             return "";
         }
 
-        DataDstWriterNodeWrapper nameNode = rule.keyFields.get(0);
-        if (nameNode.descs != null && !nameNode.descs.isEmpty()) {
-            String ueTypeName = getUETypeName(nameNode.GetWriterNode(0));
+        if (rule.keyFields.get(0).isEmpty()) {
+            return "";
+        }
+
+        // keyField can not be list, so it must has only 1 element
+        DataDstWriterNodeWrapper nameNode = rule.keyFields.get(0).get(0);
+        if (nameNode.getReferField() != null) {
+            String ueTypeName = getUETypeName(nameNode.getReferField());
             if (ueTypeName.equalsIgnoreCase("FString")) {
                 ueTypeName = "FName";
             }
@@ -1087,8 +1146,13 @@ public abstract class DataDstUEBase extends DataDstImpl {
         ArrayList<String> params = new ArrayList<String>();
         params.ensureCapacity(rule.keyFields.size());
         for (int i = 1; i < rule.keyFields.size(); ++i) {
-            DataDstWriterNodeWrapper keyNode = rule.keyFields.get(i);
-            params.add(String.format("%s %s", getUETypeName(keyNode.GetWriterNode(0)), keyNode.varName));
+            if (rule.keyFields.get(i).isEmpty()) {
+                continue;
+            }
+
+            // keyField can not be list, so it must has only 1 element
+            DataDstWriterNodeWrapper keyNode = rule.keyFields.get(i).get(0);
+            params.add(String.format("%s %s", getUETypeName(keyNode.getReferField()), keyNode.varName));
         }
 
         return String.join(", ", params);
@@ -1103,18 +1167,25 @@ public abstract class DataDstUEBase extends DataDstImpl {
             return "";
         }
 
+        if (rule.keyFields.get(0).isEmpty()) {
+            return "";
+        }
+
         if (null == prefix) {
             prefix = "";
         }
-        DataDstWriterNodeWrapper nameNode = rule.keyFields.get(0);
-        if (nameNode.descs != null && !nameNode.descs.isEmpty()) {
+
+        // keyField can not be list, so it must has only 1 element
+        DataDstWriterNodeWrapper nameNode = rule.keyFields.get(0).get(0);
+        if (nameNode.getReferField() != null) {
             return String.format("%s%s", prefix, nameNode.varName);
         }
 
         ArrayList<String> params = new ArrayList<String>();
         params.ensureCapacity(rule.keyFields.size());
         for (int i = 1; i < rule.keyFields.size(); ++i) {
-            DataDstWriterNodeWrapper keyNode = rule.keyFields.get(i);
+            // keyField can not be list, so it must has only 1 element
+            DataDstWriterNodeWrapper keyNode = rule.keyFields.get(i).get(0);
             params.add(String.format("%s%s", prefix, keyNode.varName));
         }
 
@@ -1135,8 +1206,13 @@ public abstract class DataDstUEBase extends DataDstImpl {
             return "";
         }
 
-        DataDstWriterNodeWrapper nameNode = rule.keyFields.get(0);
-        if (!nameNode.descs.isEmpty()) {
+        if (rule.keyFields.get(0).isEmpty()) {
+            return "";
+        }
+
+        // keyField can not be list, so it must has only 1 element
+        DataDstWriterNodeWrapper nameNode = rule.keyFields.get(0).get(0);
+        if (nameNode.getReferField() != null) {
             String ueTypeNameIdent = null;
             if (null != nameNode.getFieldExtension()) {
                 ueTypeNameIdent = nameNode.getFieldExtension().mutableUE().ueTypeName;
@@ -1162,7 +1238,8 @@ public abstract class DataDstUEBase extends DataDstImpl {
             ArrayList<String> params = new ArrayList<String>();
             params.ensureCapacity(rule.keyFields.size());
             for (int i = 1; i < rule.keyFields.size(); ++i) {
-                DataDstWriterNodeWrapper keyNode = rule.keyFields.get(i);
+                // keyField can not be list, so it must has only 1 element
+                DataDstWriterNodeWrapper keyNode = rule.keyFields.get(i).get(0);
                 if (keyNode.getFieldExtension().mutableUE().keyTag != 1) {
                     params.add(String.format("static_cast<long long>(%s) * %s", keyNode.varName,
                             keyNode.getFieldExtension().mutableUE().keyTag));
@@ -1176,7 +1253,8 @@ public abstract class DataDstUEBase extends DataDstImpl {
             ArrayList<String> params = new ArrayList<String>();
             params.ensureCapacity(rule.keyFields.size());
             for (int i = 1; i < rule.keyFields.size(); ++i) {
-                DataDstWriterNodeWrapper keyNode = rule.keyFields.get(i);
+                // keyField can not be list, so it must has only 1 element
+                DataDstWriterNodeWrapper keyNode = rule.keyFields.get(i).get(0);
                 if (keyNode.getFieldExtension().mutableUE().keyTag != 1) {
                     params.add(String.format("static_cast<double>(%s) * %s", keyNode.varName,
                             keyNode.getFieldExtension().mutableUE().keyTag));
@@ -1192,7 +1270,8 @@ public abstract class DataDstUEBase extends DataDstImpl {
             paramTypes.ensureCapacity(rule.keyFields.size());
             paramValues.ensureCapacity(rule.keyFields.size());
             for (int i = 1; i < rule.keyFields.size(); ++i) {
-                DataDstWriterNodeWrapper keyNode = rule.keyFields.get(i);
+                // keyField can not be list, so it must has only 1 element
+                DataDstWriterNodeWrapper keyNode = rule.keyFields.get(i).get(0);
                 String fmt = getUETypeFormat(keyNode.getJavaType());
                 paramTypes.add(fmt);
 
@@ -1214,11 +1293,13 @@ public abstract class DataDstUEBase extends DataDstImpl {
         }
     }
 
-    private final void writeCodeHeaderField(FileOutputStream fout, DataDstMessageDescriptor typeDesc,
-            DataDstFieldDescriptor fieldDesc, String varName, boolean isList, boolean isGenerated) throws IOException {
+    private final void writeCodeHeaderField(FileOutputStream fout, DataDstFieldDescriptor fieldDesc, String varName,
+            boolean isGenerated) throws IOException {
         if ((varName == null || varName.isEmpty()) && fieldDesc != null) {
             varName = getIdentName(fieldDesc.getName());
         }
+
+        DataDstMessageDescriptor typeDesc = fieldDesc.getTypeDescriptor();
 
         fout.write(dumpString("\r\n"));
         DataDstWriterNode.JAVA_TYPE descType = DataDstWriterNode.JAVA_TYPE.STRING;
@@ -1296,7 +1377,7 @@ public abstract class DataDstUEBase extends DataDstImpl {
             }
             fout.write(dumpString(getHeaderFieldUProperty()));
 
-            if (isList) {
+            if (fieldDesc.isList() && isRecursiveEnabled()) {
                 fout.write(dumpString(String.format("    TArray< %s > %s;\r\n", ueTypeName, varName)));
             } else {
                 fout.write(dumpString(String.format("    %s %s;\r\n", ueTypeName, varName)));
@@ -1305,6 +1386,14 @@ public abstract class DataDstUEBase extends DataDstImpl {
     }
 
     static private final String getUETypeName(DataDstWriterNode desc) {
+        if (null == desc) {
+            return "FString";
+        }
+
+        return getUETypeName(desc.getTypeDescriptor());
+    }
+
+    static private final String getUETypeName(DataDstFieldDescriptor desc) {
         if (null == desc) {
             return "FString";
         }
@@ -1344,7 +1433,7 @@ public abstract class DataDstUEBase extends DataDstImpl {
         }
     }
 
-    private final String getUETypeDefault(DataDstFieldDescriptor field) {
+    protected final String getUETypeDefault(DataDstFieldDescriptor field) {
         DataDstWriterNode.JAVA_TYPE descType = field.getType();
         String ueTypeNameIdent = field.mutableExtension().mutableUE().ueTypeName;
 
@@ -1375,9 +1464,9 @@ public abstract class DataDstUEBase extends DataDstImpl {
     }
 
     private final void writeUETypeSetDefaultCode(FileOutputStream sourceFs, String prefix, String varName,
-            DataDstFieldDescriptor field, boolean isList) throws IOException {
+            DataDstFieldDescriptor field) throws IOException {
         // if (wrapper.desc != null && wrapper.desc)
-        if (isList) {
+        if (field.isList() && isRecursiveEnabled()) {
             sourceFs.write(dumpString(String.format("%s.%s.Reset(0);\r\n", prefix, varName)));
             return;
         }
@@ -1387,12 +1476,8 @@ public abstract class DataDstUEBase extends DataDstImpl {
             if (null != field.getTypeDescriptor().fields) {
                 for (HashMap.Entry<String, DataDstFieldDescriptor> varPair : field.getTypeDescriptor().fields
                         .entrySet()) {
-                    boolean isFieldList = varPair.getValue().isList();
-                    if (!isRecursiveEnabled()) {
-                        isFieldList = false;
-                    }
                     writeUETypeSetDefaultCode(sourceFs, String.format("%s.%s", prefix, varName),
-                            getIdentName(varPair.getKey()), varPair.getValue(), isFieldList);
+                            getIdentName(varPair.getKey()), varPair.getValue());
                 }
             }
             return;
@@ -1453,59 +1538,58 @@ public abstract class DataDstUEBase extends DataDstImpl {
         }
     }
 
-    private final NAME_TYPE getUENameType(DataDstWriterNodeWrapper descWrapper) {
-        if (descWrapper.getReferField() == null) {
-            return NAME_TYPE.STRING;
-        }
-
-        return getUENameType(descWrapper.getReferField());
-    }
-
     static DataDstFieldDescriptor createVirtualFieldDescriptor(String name, int index, JAVA_TYPE type) {
         return new DataDstFieldDescriptor(DataDstWriterNode.getDefaultMessageDescriptor(type), index, name,
                 FIELD_LABEL_TYPE.OPTIONAL, null);
+    }
+
+    static DataDstWriterNodeWrapper createVirtualWriterNodeWrapper(String name, int index, JAVA_TYPE type,
+            DataDstWriterNode referWriterNode) {
+        return new DataDstWriterNodeWrapper(name, true, createVirtualFieldDescriptor(name, index, type),
+                referWriterNode);
     }
 
     static DataDstWriterNodeWrapper createVirtualWriterNodeWrapper(String name, int index, JAVA_TYPE type) {
         return new DataDstWriterNodeWrapper(name, true, createVirtualFieldDescriptor(name, index, type), null);
     }
 
-    private final UEDataRowRule splitDataRowDescStatic(LinkedList<DataDstWriterNodeWrapper> originAllFields)
-            throws ConvException {
+    private final UEDataRowRule buildUEDataRowCodeRule(LinkedList<DataDstWriterNodeWrapper> originAllFields,
+            boolean isMsgWraper) throws ConvException {
         UEDataRowRule ret = new UEDataRowRule();
         if (originAllFields.isEmpty()) {
             return ret;
         }
 
-        ArrayList<DataDstWriterNodeWrapper> allFields = new ArrayList<DataDstWriterNodeWrapper>();
-        allFields.ensureCapacity(originAllFields.getFirst().getChildren().size() + 2);
-        originAllFields.getFirst().getChildren().forEach((e1) -> {
-            if (!e1.isEmpty()) {
-                allFields.add(e1.get(0));
+        LinkedList<ArrayList<DataDstWriterNodeWrapper>> allFields = new LinkedList<ArrayList<DataDstWriterNodeWrapper>>();
+
+        // if originAllFields is a Message, unpack it
+        if (isMsgWraper) {
+            if (originAllFields.getFirst().getChildren() != null) {
+                originAllFields.getFirst().getChildren().forEach((e1) -> {
+                    if (!e1.isEmpty()) {
+                        ArrayList<DataDstWriterNodeWrapper> fieldSet = new ArrayList<DataDstWriterNodeWrapper>();
+                        fieldSet.ensureCapacity(e1.size());
+                        e1.forEach((e2) -> {
+                            fieldSet.add(e2);
+                        });
+                        allFields.add(fieldSet);
+                    }
+                });
             }
-        });
-
-        return buildUEDataRowRule(ret, allFields);
-    }
-
-    private final UEDataRowRule splitDataRowDescDynamic(LinkedList<DataDstWriterNodeWrapper> originAllFields)
-            throws ConvException {
-        UEDataRowRule ret = new UEDataRowRule();
-        if (originAllFields.isEmpty()) {
-            return ret;
+        } else {
+            originAllFields.forEach((e1) -> {
+                ArrayList<DataDstWriterNodeWrapper> fieldSet = new ArrayList<DataDstWriterNodeWrapper>();
+                fieldSet.ensureCapacity(1);
+                fieldSet.add(e1);
+                allFields.add(fieldSet);
+            });
         }
 
-        ArrayList<DataDstWriterNodeWrapper> allFields = new ArrayList<DataDstWriterNodeWrapper>();
-        allFields.ensureCapacity(originAllFields.size() + 2);
-        originAllFields.forEach((e) -> {
-            allFields.add(e);
-        });
-
-        return buildUEDataRowRule(ret, allFields);
+        return buildUEDataRowCodeRuleInner(ret, allFields);
     }
 
-    private final UEDataRowRule buildUEDataRowRule(UEDataRowRule ret, ArrayList<DataDstWriterNodeWrapper> allFields)
-            throws ConvException {
+    private final UEDataRowRule buildUEDataRowCodeRuleInner(UEDataRowRule ret,
+            List<ArrayList<DataDstWriterNodeWrapper>> allFields) throws ConvException {
         if (allFields.isEmpty()) {
             return ret;
         }
@@ -1513,7 +1597,11 @@ public abstract class DataDstUEBase extends DataDstImpl {
         // UE 要求Key字段名必须是 Name，所以要查找Name的字段，没有的话要生成一个
         int nameIndex = -1;
         for (int i = 0; i < allFields.size(); ++i) {
-            DataDstWriterNodeWrapper nw = allFields.get(i);
+            if (allFields.get(i).isEmpty()) {
+                continue;
+            }
+
+            DataDstWriterNodeWrapper nw = allFields.get(i).get(0);
             if (nw.getVarName().equalsIgnoreCase("Name")) {
                 nameIndex = i;
                 break;
@@ -1522,34 +1610,34 @@ public abstract class DataDstUEBase extends DataDstImpl {
 
         // 如果字段里本来就有，就直接用原始的字段
         if (nameIndex >= 0) {
-            ret.keyFields = new ArrayList<DataDstWriterNodeWrapper>();
+            ret.keyFields = new LinkedList<ArrayList<DataDstWriterNodeWrapper>>();
             ret.keyFields.add(allFields.get(nameIndex));
             allFields.remove(nameIndex);
             ret.valueFields = allFields;
-            ret.nameType = getUENameType(ret.keyFields.get(0).getReferField());
+            ret.nameType = getUENameType(getFieldDescriptor(ret.keyFields.get(0)));
             return ret;
         }
 
         // 检查 key_tag，如果找到了，就优先用 key_tag
         DataDstWriterNodeWrapper namedKey = createVirtualWriterNodeWrapper("Name", 0, JAVA_TYPE.STRING);
 
-        ret.keyFields = new ArrayList<DataDstWriterNodeWrapper>();
-        ret.keyFields.ensureCapacity(allFields.size());
-        ret.keyFields.add(namedKey);
+        ret.keyFields = new LinkedList<ArrayList<DataDstWriterNodeWrapper>>();
+        ret.keyFields.add(new ArrayList<DataDstWriterNodeWrapper>());
+        ret.keyFields.get(0).add(namedKey);
 
-        ret.valueFields = new ArrayList<DataDstWriterNodeWrapper>();
-        ret.valueFields.ensureCapacity(allFields.size());
+        ret.valueFields = new LinkedList<ArrayList<DataDstWriterNodeWrapper>>();
 
         ret.nameType = NAME_TYPE.LONG;
         for (int i = 0; i < allFields.size(); ++i) {
-            DataDstWriterNodeWrapper moved = allFields.get(i);
-            if (null != moved.getReferField() && moved.getFieldExtension().mutableUE().keyTag > 0) {
-                if (moved.getReferField().isList()) {
+            ArrayList<DataDstWriterNodeWrapper> movedList = allFields.get(i);
+            DataDstFieldDescriptor fieldDesc = getFieldDescriptor(movedList);
+            if (null != fieldDesc && fieldDesc.mutableExtension().mutableUE().keyTag > 0) {
+                if (fieldDesc.isList()) {
                     throw new ConvException(String.format("Field %s with key_tag can not be array/list/repeated",
-                            moved.getReferField().getTypeDescriptor().getFullName()));
+                            fieldDesc.getTypeDescriptor().getFullName()));
                 }
-                ret.keyFields.add(moved);
-                switch (getUENameType(moved.getReferField())) {
+                ret.keyFields.add(movedList);
+                switch (getUENameType(fieldDesc)) {
                 case LONG:
                     ret.nameType = NAME_TYPE.LONG;
                     break;
@@ -1565,7 +1653,7 @@ public abstract class DataDstUEBase extends DataDstImpl {
                     break;
                 }
             } else {
-                ret.valueFields.add(moved);
+                ret.valueFields.add(movedList);
             }
         }
 
@@ -1593,33 +1681,37 @@ public abstract class DataDstUEBase extends DataDstImpl {
         }
 
         for (int i = 0; i < rule.keyFields.size(); ++i) {
-            DataDstWriterNodeWrapper desc_wraper = rule.keyFields.get(i);
-            DataDstWriterNode node = desc_wraper.GetWriterNode(0);
-            if (null == node) {
+            ArrayList<DataDstWriterNodeWrapper> fieldSet = rule.keyFields.get(i);
+            DataDstFieldDescriptor field = getFieldDescriptor(fieldSet);
+            if (null == field || fieldSet.isEmpty()) {
                 continue;
             }
 
             if (null != dumpedFields) {
-                dumpedFields.add(desc_wraper.varName);
+                dumpedFields.add(fieldSet.get(0).varName);
             }
 
-            writeCodeHeaderField(headerFs, node.getTypeDescriptor(), node.getFieldDescriptor(), desc_wraper.varName,
-                    desc_wraper.isList, desc_wraper.isGenerated);
+            for (int j = 0; j < fieldSet.size(); ++j) {
+                DataDstWriterNodeWrapper descWraper = fieldSet.get(j);
+                writeCodeHeaderField(headerFs, descWraper.getReferField(), descWraper.varName, descWraper.isGenerated);
+            }
         }
 
         for (int i = 0; i < rule.valueFields.size(); ++i) {
-            DataDstWriterNodeWrapper desc_wraper = rule.valueFields.get(i);
-            DataDstWriterNode node = desc_wraper.GetWriterNode(0);
-            if (null == node) {
+            ArrayList<DataDstWriterNodeWrapper> fieldSet = rule.valueFields.get(i);
+            DataDstFieldDescriptor field = getFieldDescriptor(fieldSet);
+            if (null == field || fieldSet.isEmpty()) {
                 continue;
             }
 
             if (null != dumpedFields) {
-                dumpedFields.add(desc_wraper.varName);
+                dumpedFields.add(fieldSet.get(0).varName);
             }
 
-            writeCodeHeaderField(headerFs, node.getTypeDescriptor(), node.getFieldDescriptor(), desc_wraper.varName,
-                    desc_wraper.isList, desc_wraper.isGenerated);
+            for (int j = 0; j < fieldSet.size(); ++j) {
+                DataDstWriterNodeWrapper descWraper = fieldSet.get(j);
+                writeCodeHeaderField(headerFs, descWraper.getReferField(), descWraper.varName, descWraper.isGenerated);
+            }
         }
 
         // 如果开启了嵌套模式，还要补全未使用的字段
@@ -1631,8 +1723,7 @@ public abstract class DataDstUEBase extends DataDstImpl {
                 }
                 dumpedFields.add(varName);
 
-                writeCodeHeaderField(headerFs, varPair.getValue().getTypeDescriptor(), varPair.getValue(), varName,
-                        varPair.getValue().isList(), false);
+                writeCodeHeaderField(headerFs, varPair.getValue(), varName, false);
             }
         }
 
@@ -1750,7 +1841,11 @@ public abstract class DataDstUEBase extends DataDstImpl {
         while (varIsValidCheck) {
             varIsValidCheck = false;
             for (int i = 1; i < rule.keyFields.size(); ++i) {
-                if (rule.keyFields.get(i).varName.equalsIgnoreCase(varIsValidName)) {
+                ArrayList<DataDstWriterNodeWrapper> fieldSet = rule.keyFields.get(i);
+                if (fieldSet.isEmpty()) {
+                    continue;
+                }
+                if (fieldSet.get(0).varName.equalsIgnoreCase(varIsValidName)) {
                     varIsValidName = varIsValidName + "DTR";
                     varIsValidCheck = true;
                 }
@@ -1890,30 +1985,45 @@ public abstract class DataDstUEBase extends DataDstImpl {
         if (isRecursiveEnabled()) {
             dumpedFields = new HashSet<String>();
         }
+
         for (int i = 0; i < rule.keyFields.size(); ++i) {
-            DataDstWriterNodeWrapper wrapper = rule.keyFields.get(i);
-            DataDstWriterNode node = wrapper.GetWriterNode(0);
-            if (null == node || null == node.getFieldDescriptor()) {
+            ArrayList<DataDstWriterNodeWrapper> fieldSet = rule.keyFields.get(i);
+            if (fieldSet.isEmpty()) {
                 continue;
             }
-            writeUETypeSetDefaultCode(sourceFs, "    TableRow", wrapper.varName, node.getFieldDescriptor(),
-                    wrapper.isList);
-            if (null != dumpedFields) {
-                dumpedFields.add(wrapper.varName);
+
+            for (int j = 0; j < fieldSet.size(); ++j) {
+                DataDstWriterNodeWrapper wrapper = fieldSet.get(j);
+                DataDstFieldDescriptor field = wrapper.getReferField();
+                if (null == field) {
+                    continue;
+                }
+                writeUETypeSetDefaultCode(sourceFs, "    TableRow", wrapper.varName, field);
+                if (null != dumpedFields) {
+                    dumpedFields.add(wrapper.varName);
+                }
             }
         }
+
         for (int i = 0; i < rule.valueFields.size(); ++i) {
-            DataDstWriterNodeWrapper wrapper = rule.valueFields.get(i);
-            DataDstWriterNode node = wrapper.GetWriterNode(0);
-            if (null == node || null == node.getFieldDescriptor()) {
+            ArrayList<DataDstWriterNodeWrapper> fieldSet = rule.valueFields.get(i);
+            if (fieldSet.isEmpty()) {
                 continue;
             }
-            writeUETypeSetDefaultCode(sourceFs, "    TableRow", wrapper.varName, node.getFieldDescriptor(),
-                    wrapper.isList);
-            if (null != dumpedFields) {
-                dumpedFields.add(wrapper.varName);
+
+            for (int j = 0; j < fieldSet.size(); ++j) {
+                DataDstWriterNodeWrapper wrapper = fieldSet.get(j);
+                DataDstFieldDescriptor field = wrapper.getReferField();
+                if (null == field) {
+                    continue;
+                }
+                writeUETypeSetDefaultCode(sourceFs, "    TableRow", wrapper.varName, field);
+                if (null != dumpedFields) {
+                    dumpedFields.add(wrapper.varName);
+                }
             }
         }
+
         // 如果开启了嵌套模式，还要补全未使用的字段，因为可能被别处用到
         if (isRecursiveEnabled() && null != codeInfo.messageDesc) {
             for (HashMap.Entry<String, DataDstFieldDescriptor> varPair : codeInfo.messageDesc.fields.entrySet()) {
@@ -1923,8 +2033,7 @@ public abstract class DataDstUEBase extends DataDstImpl {
                 }
                 dumpedFields.add(varName);
 
-                writeUETypeSetDefaultCode(sourceFs, "    TableRow", getIdentName(varPair.getKey()), varPair.getValue(),
-                        varPair.getValue().isList());
+                writeUETypeSetDefaultCode(sourceFs, "    TableRow", getIdentName(varPair.getKey()), varPair.getValue());
             }
         }
         sourceFs.write(dumpString("}\r\n\r\n"));

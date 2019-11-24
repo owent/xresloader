@@ -1,1 +1,144 @@
-[]
+[
+    {
+        "Arr": [
+            {
+                "IntArr": [
+                    101,
+                    102
+                ],
+                "StrArr": [
+                    "啦啦啦啦",
+                    "嘞嘞嘞嘞"
+                ],
+                "Name": "第一个-A"
+            },
+            {
+                "IntArr": [
+                    111,
+                    112
+                ],
+                "StrArr": [
+                    "嘟嘟嘟嘟",
+                    "嚓嚓嚓嚓"
+                ],
+                "Name": "第一个-B"
+            }
+        ],
+        "TestPlainIntArr": [
+            1,
+            2,
+            3
+        ],
+        "TestPlainEnumArr": [
+            10001,
+            10001,
+            10001
+        ],
+        "TestPlainMsgArr": [
+            {
+                "TestId2": 2,
+                "TestId1": 1
+            },
+            {
+                "TestId2": 4,
+                "TestId1": 3
+            },
+            {
+                "TestId2": 6,
+                "TestId1": 5
+            }
+        ],
+        "Id": 10001,
+        "TestPlainMsg": {
+            "TestId2": 2,
+            "TestId1": 1
+        },
+        "Name": 10001
+    },
+    {
+        "Arr": [
+            {
+                "IntArr": [
+                    201,
+                    202
+                ],
+                "StrArr": [
+                    "biubiubiubiu",
+                    "唰唰唰唰"
+                ],
+                "Name": "测试项-A"
+            },
+            {
+                "IntArr": [
+                    211,
+                    212
+                ],
+                "StrArr": [
+                    "哦哦哦哦",
+                    "哈哈哈哈"
+                ],
+                "Name": "测试项-B"
+            }
+        ],
+        "TestPlainIntArr": [
+            4,
+            5,
+            6
+        ],
+        "TestPlainEnumArr": [
+            10101,
+            10101,
+            10101
+        ],
+        "TestPlainMsgArr": [
+            {
+                "TestId2": 8,
+                "TestId1": 7
+            },
+            {
+                "TestId2": 10,
+                "TestId1": 9
+            }
+        ],
+        "Id": 10002,
+        "TestPlainMsg": {
+            "TestId2": 4,
+            "TestId1": 3
+        },
+        "Name": 10002
+    },
+    {
+        "Arr": [
+            {
+                "IntArr": [301],
+                "StrArr": [],
+                "Name": "测试项-C"
+            },
+            {
+                "IntArr": [311],
+                "StrArr": ["哦哦哦哦"],
+                "Name": "测试项-B"
+            }
+        ],
+        "TestPlainIntArr": [
+            7,
+            8,
+            9
+        ],
+        "TestPlainEnumArr": [
+            10001,
+            10001,
+            10001
+        ],
+        "TestPlainMsgArr": [{
+            "TestId2": 12,
+            "TestId1": 11
+        }],
+        "Id": 10003,
+        "TestPlainMsg": {
+            "TestId2": 6,
+            "TestId1": 5
+        },
+        "Name": 10003
+    }
+]

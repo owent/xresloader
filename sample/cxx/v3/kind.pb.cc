@@ -229,33 +229,35 @@ const char descriptor_table_protodef_kind_2eproto[] PROTOBUF_SECTION_VARIABLE(pr
   "cost_type\030\003 \001(\r\022\022\n\ncost_value\030\004 \001(\005\022\014\n\004n"
   "ame\030\005 \001(\t\022\032\n\010dep_test\030\n \001(\0132\010.dep_cfg\022\022\n"
   "\ntest_array\030\013 \003(\t\022\025\n\rint_as_string\030\014 \001(\t"
-  "\"\207\001\n\020role_upgrade_cfg\022\n\n\002Id\030\001 \001(\r\022\r\n\005Lev"
-  "el\030\002 \001(\r\0223\n\010CostType\030\003 \001(\rB!\312>\tcost_type"
-  "\232\?\022Refer to cost_type\022\021\n\tCostValue\030\004 \001(\005"
-  "\022\020\n\010ScoreAdd\030\005 \001(\005\"\241\004\n\narr_in_arr\022-\n\004nam"
-  "e\030\001 \001(\tB\037\232\?\034This is a test name in array"
-  "\022\017\n\007int_arr\030\002 \003(\005\022\017\n\007str_arr\030\003 \003(\t\022#\n\016te"
-  "st_info_role\030\013 \001(\0132\t.role_cfgH\000\0222\n\025test_"
-  "role_upgrade_cfg\030\014 \001(\0132\021.role_upgrade_cf"
-  "gH\000\032\373\001\n\023test_nested_message\0222\n\035test_nest"
-  "ed_message_info_role\030\013 \001(\0132\t.role_cfgH\000\022"
-  "A\n$test_nested_message_role_upgrade_cfg\030"
-  "\014 \001(\0132\021.role_upgrade_cfgH\000\"`\n\020test_neste"
-  "d_enum\022%\n!EN_TEST_NESTED_MESSAGE_ENUM_VA"
-  "L_1\020\000\022%\n!EN_TEST_NESTED_MESSAGE_ENUM_VAL"
-  "_2\020{B\013\n\ttest_onof\"P\n\020test_nested_enum\022\035\n"
-  "\031EN_TEST_NESTED_ENUM_VAL_1\020\000\022\035\n\031EN_TEST_"
-  "NESTED_ENUM_VAL_2\020{:\014\352D\006helper\360D\001B\013\n\ttes"
-  "t_onof\"V\n\021test_msg_verifier\022\022\n\ttest_id_1"
-  "\030\221N \001(\r\022&\n\ttest_id_2\030\222N \001(\rB\022\242\?\017\346\265\213\350\257\225ID"
-  "\345\210\253\345\220\2152:\005\242\?\002-^\"\223\002\n\016arr_in_arr_cfg\022\037\n\002id\030"
-  "\001 \001(\rB\023\350D\001\232\?\rThis is a Key\022\030\n\003arr\030\002 \003(\0132"
-  "\013.arr_in_arr\022\032\n\022test_plain_int_arr\030\003 \003(\005"
-  "\022\'\n\023test_plain_enum_arr\030\004 \003(\0162\n.cost_typ"
-  "e\0220\n\016test_plain_msg\030\005 \001(\0132\022.test_msg_ver"
-  "ifierB\004\262\?\001&\022.\n\022test_plain_msg_arr\030\006 \003(\0132"
-  "\022.test_msg_verifier:\037\352D\006helper\312>\023Test ar"
-  "r_in_arr_cfgb\006proto3"
+  "\"\305\001\n\020role_upgrade_cfg\022\020\n\002Id\030\001 \001(\rB\004\350D\350\007\022"
+  "\022\n\005Level\030\002 \001(\rB\003\350D\001\0223\n\010CostType\030\003 \001(\rB!\312"
+  ">\tcost_type\232\?\022Refer to cost_type\022\021\n\tCost"
+  "Value\030\004 \001(\005\022\020\n\010ScoreAdd\030\005 \001(\005:1\352D\006helper"
+  "\312>%Test role_upgrade_cfg with multi keys"
+  "\"\241\004\n\narr_in_arr\022-\n\004name\030\001 \001(\tB\037\232\?\034This i"
+  "s a test name in array\022\017\n\007int_arr\030\002 \003(\005\022"
+  "\017\n\007str_arr\030\003 \003(\t\022#\n\016test_info_role\030\013 \001(\013"
+  "2\t.role_cfgH\000\0222\n\025test_role_upgrade_cfg\030\014"
+  " \001(\0132\021.role_upgrade_cfgH\000\032\373\001\n\023test_neste"
+  "d_message\0222\n\035test_nested_message_info_ro"
+  "le\030\013 \001(\0132\t.role_cfgH\000\022A\n$test_nested_mes"
+  "sage_role_upgrade_cfg\030\014 \001(\0132\021.role_upgra"
+  "de_cfgH\000\"`\n\020test_nested_enum\022%\n!EN_TEST_"
+  "NESTED_MESSAGE_ENUM_VAL_1\020\000\022%\n!EN_TEST_N"
+  "ESTED_MESSAGE_ENUM_VAL_2\020{B\013\n\ttest_onof\""
+  "P\n\020test_nested_enum\022\035\n\031EN_TEST_NESTED_EN"
+  "UM_VAL_1\020\000\022\035\n\031EN_TEST_NESTED_ENUM_VAL_2\020"
+  "{:\014\352D\006helper\360D\001B\013\n\ttest_onof\"V\n\021test_msg"
+  "_verifier\022\022\n\ttest_id_1\030\221N \001(\r\022&\n\ttest_id"
+  "_2\030\222N \001(\rB\022\242\?\017\346\265\213\350\257\225ID\345\210\253\345\220\2152:\005\242\?\002-^\"\223\002\n"
+  "\016arr_in_arr_cfg\022\037\n\002id\030\001 \001(\rB\023\350D\001\232\?\rThis "
+  "is a Key\022\030\n\003arr\030\002 \003(\0132\013.arr_in_arr\022\032\n\022te"
+  "st_plain_int_arr\030\003 \003(\005\022\'\n\023test_plain_enu"
+  "m_arr\030\004 \003(\0162\n.cost_type\0220\n\016test_plain_ms"
+  "g\030\005 \001(\0132\022.test_msg_verifierB\004\262\?\001&\022.\n\022tes"
+  "t_plain_msg_arr\030\006 \003(\0132\022.test_msg_verifie"
+  "r:\037\352D\006helper\312>\023Test arr_in_arr_cfgb\006prot"
+  "o3"
   ;
 static const ::PROTOBUF_NAMESPACE_ID::internal::DescriptorTable*const descriptor_table_kind_2eproto_deps[3] = {
   &::descriptor_table_dependency_2eproto,
@@ -273,7 +275,7 @@ static ::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase*const descriptor_table_kin
 static ::PROTOBUF_NAMESPACE_ID::internal::once_flag descriptor_table_kind_2eproto_once;
 static bool descriptor_table_kind_2eproto_initialized = false;
 const ::PROTOBUF_NAMESPACE_ID::internal::DescriptorTable descriptor_table_kind_2eproto = {
-  &descriptor_table_kind_2eproto_initialized, descriptor_table_protodef_kind_2eproto, "kind.proto", 1300,
+  &descriptor_table_kind_2eproto_initialized, descriptor_table_protodef_kind_2eproto, "kind.proto", 1362,
   &descriptor_table_kind_2eproto_once, descriptor_table_kind_2eproto_sccs, descriptor_table_kind_2eproto_deps, 6, 3,
   schemas, file_default_instances, TableStruct_kind_2eproto::offsets,
   file_level_metadata_kind_2eproto, 6, file_level_enum_descriptors_kind_2eproto, file_level_service_descriptors_kind_2eproto,
@@ -811,14 +813,14 @@ const char* role_upgrade_cfg::_InternalParse(const char* ptr, ::PROTOBUF_NAMESPA
     ptr = ::PROTOBUF_NAMESPACE_ID::internal::ReadTag(ptr, &tag);
     CHK_(ptr);
     switch (tag >> 3) {
-      // uint32 Id = 1;
+      // uint32 Id = 1 [(.org.xresloader.ue.key_tag) = 1000];
       case 1:
         if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 8)) {
           id_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint(&ptr);
           CHK_(ptr);
         } else goto handle_unusual;
         continue;
-      // uint32 Level = 2;
+      // uint32 Level = 2 [(.org.xresloader.ue.key_tag) = 1];
       case 2:
         if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 16)) {
           level_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint(&ptr);
@@ -872,13 +874,13 @@ failure:
   ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
-  // uint32 Id = 1;
+  // uint32 Id = 1 [(.org.xresloader.ue.key_tag) = 1000];
   if (this->id() != 0) {
     stream->EnsureSpace(&target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteUInt32ToArray(1, this->_internal_id(), target);
   }
 
-  // uint32 Level = 2;
+  // uint32 Level = 2 [(.org.xresloader.ue.key_tag) = 1];
   if (this->level() != 0) {
     stream->EnsureSpace(&target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteUInt32ToArray(2, this->_internal_level(), target);
@@ -918,14 +920,14 @@ size_t role_upgrade_cfg::ByteSizeLong() const {
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  // uint32 Id = 1;
+  // uint32 Id = 1 [(.org.xresloader.ue.key_tag) = 1000];
   if (this->id() != 0) {
     total_size += 1 +
       ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::UInt32Size(
         this->_internal_id());
   }
 
-  // uint32 Level = 2;
+  // uint32 Level = 2 [(.org.xresloader.ue.key_tag) = 1];
   if (this->level() != 0) {
     total_size += 1 +
       ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::UInt32Size(

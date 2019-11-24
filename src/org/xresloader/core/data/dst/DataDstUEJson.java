@@ -84,14 +84,18 @@ public class DataDstUEJson extends DataDstUEBase {
         }
 
         // 需要补全空字段
-        if (null != dumpedFields && null != codeInfo.messageDesc) {
-            for (HashMap.Entry<String, DataDstFieldDescriptor> varPair : codeInfo.messageDesc.fields.entrySet()) {
-                String varName = getIdentName(varPair.getKey());
+        if (null != dumpedFields && null != codeInfo.writerNodeWrapper && codeInfo.writerNodeWrapper.hasChidlren()) {
+            for (ArrayList<DataDstWriterNodeWrapper> child : codeInfo.writerNodeWrapper.getChildren()) {
+                if (child.isEmpty()) {
+                    continue;
+                }
+
+                String varName = child.get(0).getVarName();
                 if (dumpedFields.contains(varName)) {
                     continue;
                 }
 
-                jobj.put(varName, pickValueFieldJsonDefaultImpl(varPair.getValue()));
+                jobj.put(varName, pickValueFieldJsonDefaultImpl(child.get(0).getReferField()));
             }
         }
 
@@ -273,14 +277,13 @@ public class DataDstUEJson extends DataDstUEBase {
 
             // 需要补全空字段
             if (null != dumpedFields) {
-                for (HashMap.Entry<String, DataDstFieldDescriptor> varPair : desc.getTypeDescriptor().fields
-                        .entrySet()) {
-                    String varName = getIdentName(varPair.getKey());
+                for (DataDstFieldDescriptor subField : desc.getTypeDescriptor().getSortedFields()) {
+                    String varName = getIdentName(subField.getName());
                     if (dumpedFields.contains(varName)) {
                         continue;
                     }
 
-                    ret.put(varName, pickValueFieldJsonDefaultImpl(varPair.getValue()));
+                    ret.put(varName, pickValueFieldJsonDefaultImpl(subField));
                 }
             }
 
@@ -518,8 +521,8 @@ public class DataDstUEJson extends DataDstUEBase {
         }
         case MESSAGE: {
             JSONObject ret = new JSONObject();
-            for (HashMap.Entry<String, DataDstFieldDescriptor> varPair : fd.getTypeDescriptor().fields.entrySet()) {
-                ret.put(getIdentName(varPair.getKey()), pickValueFieldJsonDefaultImpl(varPair.getValue()));
+            for (DataDstFieldDescriptor subField : fd.getTypeDescriptor().getSortedFields()) {
+                ret.put(getIdentName(subField.getName()), pickValueFieldJsonDefaultImpl(subField));
             }
 
             return ret;

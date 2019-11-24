@@ -489,7 +489,7 @@ class role_upgrade_cfg :
     kCostValueFieldNumber = 4,
     kScoreAddFieldNumber = 5,
   };
-  // uint32 Id = 1;
+  // uint32 Id = 1 [(.org.xresloader.ue.key_tag) = 1000];
   void clear_id();
   ::PROTOBUF_NAMESPACE_ID::uint32 id() const;
   void set_id(::PROTOBUF_NAMESPACE_ID::uint32 value);
@@ -498,7 +498,7 @@ class role_upgrade_cfg :
   void _internal_set_id(::PROTOBUF_NAMESPACE_ID::uint32 value);
   public:
 
-  // uint32 Level = 2;
+  // uint32 Level = 2 [(.org.xresloader.ue.key_tag) = 1];
   void clear_level();
   ::PROTOBUF_NAMESPACE_ID::uint32 level() const;
   void set_level(::PROTOBUF_NAMESPACE_ID::uint32 value);
@@ -1728,7 +1728,7 @@ inline void role_cfg::set_allocated_int_as_string(std::string* int_as_string) {
 
 // role_upgrade_cfg
 
-// uint32 Id = 1;
+// uint32 Id = 1 [(.org.xresloader.ue.key_tag) = 1000];
 inline void role_upgrade_cfg::clear_id() {
   id_ = 0u;
 }
@@ -1748,7 +1748,7 @@ inline void role_upgrade_cfg::set_id(::PROTOBUF_NAMESPACE_ID::uint32 value) {
   // @@protoc_insertion_point(field_set:role_upgrade_cfg.Id)
 }
 
-// uint32 Level = 2;
+// uint32 Level = 2 [(.org.xresloader.ue.key_tag) = 1];
 inline void role_upgrade_cfg::clear_level() {
   level_ = 0u;
 }

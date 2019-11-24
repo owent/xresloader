@@ -208,7 +208,15 @@ public class DataDstWriterNode {
             return extension;
         }
 
+        public boolean hasChildrenFields() {
+            return fields != null && false == fields.isEmpty();
+        }
+
         public ArrayList<DataDstFieldDescriptor> getSortedFields() {
+            if (fields == null) {
+                return null;
+            }
+
             if (sortedFields != null && sortedFields.size() == fields.size()) {
                 return sortedFields;
             }

@@ -212,22 +212,23 @@ const char descriptor_table_protodef_kind_2eproto[] PROTOBUF_SECTION_VARIABLE(pr
   "cost_type\030\003 \001(\r\022\022\n\ncost_value\030\004 \001(\005\022\014\n\004n"
   "ame\030\005 \001(\t\022\032\n\010dep_test\030\n \001(\0132\010.dep_cfg\022\022\n"
   "\ntest_array\030\013 \003(\t\022\025\n\rint_as_string\030\014 \001(\t"
-  "\"\207\001\n\020role_upgrade_cfg\022\n\n\002Id\030\001 \001(\r\022\r\n\005Lev"
-  "el\030\002 \001(\r\0223\n\010CostType\030\003 \001(\rB!\312>\tcost_type"
-  "\232\?\022Refer to cost_type\022\021\n\tCostValue\030\004 \001(\005"
-  "\022\020\n\010ScoreAdd\030\005 \001(\005\"V\n\021test_msg_verifier\022"
-  "\022\n\ttest_id_1\030\221N \001(\r\022&\n\ttest_id_2\030\222N \001(\rB"
-  "\022\242\?\017\346\265\213\350\257\225ID\345\210\253\345\220\2152:\005\242\?\002-^\"o\n\narr_in_arr"
-  "\022-\n\004name\030\001 \001(\tB\037\232\?\034This is a test name i"
-  "n array\022\023\n\007int_arr\030\002 \003(\005B\002\020\001\022\017\n\007str_arr\030"
-  "\003 \003(\t:\014\352D\006helper\360D\001\"\223\002\n\016arr_in_arr_cfg\022\037"
-  "\n\002id\030\001 \001(\rB\023\350D\001\232\?\rThis is a Key\022\030\n\003arr\030\002"
-  " \003(\0132\013.arr_in_arr\022\032\n\022test_plain_int_arr\030"
-  "\003 \003(\005\022\'\n\023test_plain_enum_arr\030\004 \003(\0162\n.cos"
-  "t_type\0220\n\016test_plain_msg\030\005 \001(\0132\022.test_ms"
-  "g_verifierB\004\262\?\001&\022.\n\022test_plain_msg_arr\030\006"
-  " \003(\0132\022.test_msg_verifier:\037\352D\006helper\312>\023Te"
-  "st arr_in_arr_cfg"
+  "\"\305\001\n\020role_upgrade_cfg\022\020\n\002Id\030\001 \001(\rB\004\350D\350\007\022"
+  "\022\n\005Level\030\002 \001(\rB\003\350D\001\0223\n\010CostType\030\003 \001(\rB!\312"
+  ">\tcost_type\232\?\022Refer to cost_type\022\021\n\tCost"
+  "Value\030\004 \001(\005\022\020\n\010ScoreAdd\030\005 \001(\005:1\352D\006helper"
+  "\312>%Test role_upgrade_cfg with multi keys"
+  "\"V\n\021test_msg_verifier\022\022\n\ttest_id_1\030\221N \001("
+  "\r\022&\n\ttest_id_2\030\222N \001(\rB\022\242\?\017\346\265\213\350\257\225ID\345\210\253\345\220\215"
+  "2:\005\242\?\002-^\"o\n\narr_in_arr\022-\n\004name\030\001 \001(\tB\037\232\?"
+  "\034This is a test name in array\022\023\n\007int_arr"
+  "\030\002 \003(\005B\002\020\001\022\017\n\007str_arr\030\003 \003(\t:\014\352D\006helper\360D"
+  "\001\"\223\002\n\016arr_in_arr_cfg\022\037\n\002id\030\001 \001(\rB\023\350D\001\232\?\r"
+  "This is a Key\022\030\n\003arr\030\002 \003(\0132\013.arr_in_arr\022"
+  "\032\n\022test_plain_int_arr\030\003 \003(\005\022\'\n\023test_plai"
+  "n_enum_arr\030\004 \003(\0162\n.cost_type\0220\n\016test_pla"
+  "in_msg\030\005 \001(\0132\022.test_msg_verifierB\004\262\?\001&\022."
+  "\n\022test_plain_msg_arr\030\006 \003(\0132\022.test_msg_ve"
+  "rifier:\037\352D\006helper\312>\023Test arr_in_arr_cfg"
   ;
 static const ::PROTOBUF_NAMESPACE_ID::internal::DescriptorTable*const descriptor_table_kind_2eproto_deps[3] = {
   &::descriptor_table_dependency_2eproto,
@@ -244,7 +245,7 @@ static ::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase*const descriptor_table_kin
 static ::PROTOBUF_NAMESPACE_ID::internal::once_flag descriptor_table_kind_2eproto_once;
 static bool descriptor_table_kind_2eproto_initialized = false;
 const ::PROTOBUF_NAMESPACE_ID::internal::DescriptorTable descriptor_table_kind_2eproto = {
-  &descriptor_table_kind_2eproto_initialized, descriptor_table_protodef_kind_2eproto, "kind.proto", 857,
+  &descriptor_table_kind_2eproto_initialized, descriptor_table_protodef_kind_2eproto, "kind.proto", 919,
   &descriptor_table_kind_2eproto_once, descriptor_table_kind_2eproto_sccs, descriptor_table_kind_2eproto_deps, 5, 3,
   schemas, file_default_instances, TableStruct_kind_2eproto::offsets,
   file_level_metadata_kind_2eproto, 5, file_level_enum_descriptors_kind_2eproto, file_level_service_descriptors_kind_2eproto,
@@ -808,7 +809,7 @@ const char* role_upgrade_cfg::_InternalParse(const char* ptr, ::PROTOBUF_NAMESPA
     ptr = ::PROTOBUF_NAMESPACE_ID::internal::ReadTag(ptr, &tag);
     CHK_(ptr);
     switch (tag >> 3) {
-      // optional uint32 Id = 1;
+      // optional uint32 Id = 1 [(.org.xresloader.ue.key_tag) = 1000];
       case 1:
         if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 8)) {
           _Internal::set_has_id(&has_bits);
@@ -816,7 +817,7 @@ const char* role_upgrade_cfg::_InternalParse(const char* ptr, ::PROTOBUF_NAMESPA
           CHK_(ptr);
         } else goto handle_unusual;
         continue;
-      // optional uint32 Level = 2;
+      // optional uint32 Level = 2 [(.org.xresloader.ue.key_tag) = 1];
       case 2:
         if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 16)) {
           _Internal::set_has_level(&has_bits);
@@ -876,13 +877,13 @@ failure:
   (void) cached_has_bits;
 
   cached_has_bits = _has_bits_[0];
-  // optional uint32 Id = 1;
+  // optional uint32 Id = 1 [(.org.xresloader.ue.key_tag) = 1000];
   if (cached_has_bits & 0x00000001u) {
     stream->EnsureSpace(&target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteUInt32ToArray(1, this->_internal_id(), target);
   }
 
-  // optional uint32 Level = 2;
+  // optional uint32 Level = 2 [(.org.xresloader.ue.key_tag) = 1];
   if (cached_has_bits & 0x00000002u) {
     stream->EnsureSpace(&target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteUInt32ToArray(2, this->_internal_level(), target);
@@ -924,14 +925,14 @@ size_t role_upgrade_cfg::ByteSizeLong() const {
 
   cached_has_bits = _has_bits_[0];
   if (cached_has_bits & 0x0000001fu) {
-    // optional uint32 Id = 1;
+    // optional uint32 Id = 1 [(.org.xresloader.ue.key_tag) = 1000];
     if (cached_has_bits & 0x00000001u) {
       total_size += 1 +
         ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::UInt32Size(
           this->_internal_id());
     }
 
-    // optional uint32 Level = 2;
+    // optional uint32 Level = 2 [(.org.xresloader.ue.key_tag) = 1];
     if (cached_has_bits & 0x00000002u) {
       total_size += 1 +
         ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::UInt32Size(

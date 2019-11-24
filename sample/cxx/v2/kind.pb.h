@@ -473,7 +473,7 @@ class role_upgrade_cfg :
     kCostValueFieldNumber = 4,
     kScoreAddFieldNumber = 5,
   };
-  // optional uint32 Id = 1;
+  // optional uint32 Id = 1 [(.org.xresloader.ue.key_tag) = 1000];
   bool has_id() const;
   private:
   bool _internal_has_id() const;
@@ -486,7 +486,7 @@ class role_upgrade_cfg :
   void _internal_set_id(::PROTOBUF_NAMESPACE_ID::uint32 value);
   public:
 
-  // optional uint32 Level = 2;
+  // optional uint32 Level = 2 [(.org.xresloader.ue.key_tag) = 1];
   bool has_level() const;
   private:
   bool _internal_has_level() const;
@@ -1544,7 +1544,7 @@ inline void role_cfg::set_allocated_int_as_string(std::string* int_as_string) {
 
 // role_upgrade_cfg
 
-// optional uint32 Id = 1;
+// optional uint32 Id = 1 [(.org.xresloader.ue.key_tag) = 1000];
 inline bool role_upgrade_cfg::_internal_has_id() const {
   bool value = (_has_bits_[0] & 0x00000001u) != 0;
   return value;
@@ -1572,7 +1572,7 @@ inline void role_upgrade_cfg::set_id(::PROTOBUF_NAMESPACE_ID::uint32 value) {
   // @@protoc_insertion_point(field_set:role_upgrade_cfg.Id)
 }
 
-// optional uint32 Level = 2;
+// optional uint32 Level = 2 [(.org.xresloader.ue.key_tag) = 1];
 inline bool role_upgrade_cfg::_internal_has_level() const {
   bool value = (_has_bits_[0] & 0x00000002u) != 0;
   return value;

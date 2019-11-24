@@ -88,9 +88,29 @@ exports.files = [
               verifier : "cost_type"
             },
             type_name : "UINT32"
+          },
+          Id : {
+            name : "Id",
+            number : 1,
+            options : {
+              key_tag : 1000
+            },
+            type_name : "UINT32"
+          },
+          Level : {
+            name : "Level",
+            number : 2,
+            options : {
+              key_tag : 1
+            },
+            type_name : "UINT32"
           }
         },
-        name : "role_upgrade_cfg"
+        name : "role_upgrade_cfg",
+        options : {
+          helper : "helper",
+          msg_description : "Test role_upgrade_cfg with multi keys"
+        }
       },
       test_msg_verifier : {
         field : {

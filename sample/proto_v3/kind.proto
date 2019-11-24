@@ -18,8 +18,11 @@ message role_cfg {
 }
 
 message role_upgrade_cfg {
-    uint32 Id        = 1 [ (org.xresloader.ue.key_tag) = 1, (org.xresloader.field_description) = "This is a Key" ];
-    uint32 Level     = 2;
+    option (org.xresloader.ue.helper)       = "helper";
+    option (org.xresloader.msg_description) = "Test role_upgrade_cfg with multi keys";
+
+    uint32 Id        = 1 [ (org.xresloader.ue.key_tag) = 1000 ];
+    uint32 Level     = 2 [ (org.xresloader.ue.key_tag) = 1 ];
     uint32 CostType  = 3 [ (org.xresloader.verifier) = "cost_type", (org.xresloader.field_description) = "Refer to cost_type" ];
     int32  CostValue = 4;
     int32  ScoreAdd  = 5;

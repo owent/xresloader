@@ -21,9 +21,9 @@ struct FKindConst : public FTableRowBase
     UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "XResConfig")
     FName Name;
 
-    /** Field Type: STRING, Name: Value. This field is generated for UE Editor compatible. **/
+    /** Field Type: INT, Name: Value. This field is generated for UE Editor compatible. **/
     UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "XResConfig")
-    FString Value;
+    int32 Value;
 
 };
 

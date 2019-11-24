@@ -1080,7 +1080,7 @@ public abstract class DataDstUEBase extends DataDstImpl {
                 DataDstWriterNode.FIELD_LABEL_TYPE.OPTIONAL, null));
         ddNode.identify = IdentifyEngine.n2i("Value", 1);
 
-        DataDstWriterNodeWrapper constValueNode = createVirtualWriterNodeWrapper("Value", 2, JAVA_TYPE.STRING, ddNode);
+        DataDstWriterNodeWrapper constValueNode = createVirtualWriterNodeWrapper("Value", 2, JAVA_TYPE.INT, ddNode);
         constValueNode.varName = getIdentName("Value");
         expandedDesc.add(constValueNode);
 
@@ -1713,7 +1713,8 @@ public abstract class DataDstUEBase extends DataDstImpl {
                 dumpedFields.add(fieldSet.get(0).varName);
             }
 
-            for (int j = 0; j < fieldSet.size(); ++j) {
+            // 只要输出一个即可，list类型只输出一次，非递归模式每个都是单独的fields
+            for (int j = 0; j < fieldSet.size() && j < 1; ++j) {
                 DataDstWriterNodeWrapper descWraper = fieldSet.get(j);
                 writeCodeHeaderField(headerFs, descWraper.getReferField(), descWraper.varName, descWraper.isGenerated);
             }
@@ -1730,7 +1731,8 @@ public abstract class DataDstUEBase extends DataDstImpl {
                 dumpedFields.add(fieldSet.get(0).varName);
             }
 
-            for (int j = 0; j < fieldSet.size(); ++j) {
+            // 只要输出一个即可，list类型只输出一次，非递归模式每个都是单独的fields
+            for (int j = 0; j < fieldSet.size() && j < 1; ++j) {
                 DataDstWriterNodeWrapper descWraper = fieldSet.get(j);
                 writeCodeHeaderField(headerFs, descWraper.getReferField(), descWraper.varName, descWraper.isGenerated);
             }
@@ -2016,7 +2018,8 @@ public abstract class DataDstUEBase extends DataDstImpl {
                 continue;
             }
 
-            for (int j = 0; j < fieldSet.size(); ++j) {
+            // 只要输出一个即可，list类型只输出一次，非递归模式每个都是单独的fields
+            for (int j = 0; j < fieldSet.size() && j < 1; ++j) {
                 DataDstWriterNodeWrapper wrapper = fieldSet.get(j);
                 DataDstFieldDescriptor field = wrapper.getReferField();
                 if (null == field) {
@@ -2035,7 +2038,8 @@ public abstract class DataDstUEBase extends DataDstImpl {
                 continue;
             }
 
-            for (int j = 0; j < fieldSet.size(); ++j) {
+            // 只要输出一个即可，list类型只输出一次，非递归模式每个都是单独的fields
+            for (int j = 0; j < fieldSet.size() && j < 1; ++j) {
                 DataDstWriterNodeWrapper wrapper = fieldSet.get(j);
                 DataDstFieldDescriptor field = wrapper.getReferField();
                 if (null == field) {

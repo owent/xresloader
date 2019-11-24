@@ -26,14 +26,6 @@ struct FArrInArr : public FTableRowBase
     UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "XResConfig")
     TArray< int32 > IntArr;
 
-    /** Field Type: INT, Name: IntArr **/
-    UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "XResConfig")
-    TArray< int32 > IntArr;
-
-    /** Field Type: STRING, Name: StrArr **/
-    UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "XResConfig")
-    TArray< FString > StrArr;
-
     /** Field Type: STRING, Name: StrArr **/
     UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "XResConfig")
     TArray< FString > StrArr;

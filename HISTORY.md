@@ -11,17 +11,7 @@
 5. 大量优化内部数据结构，更好地分离映射关系和AST描述
 6. 增加实验性功能Plain模式，允许把message所有字段或动态长度的数组配置在一个单元格内（UE-CSV模式暂不支持）
 7. 修复输出的UE导入文件的没有自动删除老的导入条目的问题
-
-CheckList:
-
-> 依赖结构写出
-> Key<->Name正常
-> TArray<T>和CSV,TArray<T>和Reset代码正确
-> 写出目录
-> 嵌套Message的Reset代码正确
-> CSV仅映射字段
-> 变量名
-> field order  const
+8. UE-CSV 和 UE-Json 模式输出也按照field定义顺序输出(即: 先Key再Value，然后二级排序按field的定义number)
 
 2.6.1
 ------

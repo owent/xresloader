@@ -16,8 +16,6 @@ void UArrInArrHelper::ClearRow(FArrInArr& TableRow)
 {
     TableRow.Name = TEXT("");
     TableRow.IntArr.Reset(0);
-    TableRow.IntArr.Reset(0);
-    TableRow.StrArr.Reset(0);
     TableRow.StrArr.Reset(0);
 }
 

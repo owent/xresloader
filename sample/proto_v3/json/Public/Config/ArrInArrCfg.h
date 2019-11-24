@@ -33,10 +33,6 @@ struct FArrInArrCfg : public FTableRowBase
     UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "XResConfig")
     TArray< FArrInArr > Arr;
 
-    /** Field Type: MESSAGE, Name: Arr **/
-    UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "XResConfig")
-    TArray< FArrInArr > Arr;
-
     /** Field Type: INT, Name: TestPlainIntArr **/
     UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "XResConfig")
     TArray< int32 > TestPlainIntArr;

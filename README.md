@@ -24,6 +24,7 @@ xresloader
 + 完整支持协议结构，包括嵌套结构和数组嵌套
 + 同时支持protobuf proto v2 和 proto v3
 + 支持导出proto枚举值到lua/javascript代码和json/xml数据
++ 支持导出proto描述信息值到lua/javascript代码和json/xml数据（支持自定义插件，方便用户根据proto描述自定义反射功能）
 + 支持导出 UnrealEngine 支持的json或csv格式，支持自动生成和导出 UnrealEngine 的 DataTable 加载代码
 + 支持别名表，用于给数据内容使用一个易读的名字
 + 支持验证器，可以在数据里直接填写proto字段名或枚举名，或者验证填入数据的是否有效

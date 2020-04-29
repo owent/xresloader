@@ -146,7 +146,10 @@ local const_res = {
     {
       name = "xresloader.proto",
       options = {
-        optimize_for = "SPEED",
+        optimize_for = {
+          name = "SPEED",
+          number = 1,
+        },
       },
       package = "org.xresloader",
       path = "xresloader.proto",
@@ -154,7 +157,10 @@ local const_res = {
     {
       name = "xresloader_ue.proto",
       options = {
-        optimize_for = "SPEED",
+        optimize_for = {
+          name = "SPEED",
+          number = 1,
+        },
       },
       package = "org.xresloader.ue",
       path = "xresloader_ue.proto",

@@ -1,0 +1,112 @@
+{"files": [
+  {
+    "name": "dependency.proto",
+    "path": "dependency.proto",
+    "enum_type": {
+      "game_const_config": {
+        "options": {"allow_alias": true},
+        "name": "game_const_config"
+      },
+      "cost_type": {
+        "name": "cost_type",
+        "value": {
+          "EN_CT_DIAMOND": {
+            "options": {"enum_alias": "钻石"},
+            "name": "EN_CT_DIAMOND",
+            "number": 10101
+          },
+          "EN_CT_MONEY": {
+            "options": {"enum_alias": "金币"},
+            "name": "EN_CT_MONEY",
+            "number": 10001
+          }
+        }
+      }
+    },
+    "package": ""
+  },
+  {
+    "name": "kind.proto",
+    "path": "kind.proto",
+    "message_type": {
+      "role_upgrade_cfg": {
+        "field": {
+          "CostType": {
+            "options": {
+              "verifier": "cost_type",
+              "field_description": "Refer to cost_type"
+            },
+            "name": "CostType",
+            "number": 3,
+            "type_name": "UINT32"
+          },
+          "Level": {
+            "options": {"key_tag": 1},
+            "name": "Level",
+            "number": 2,
+            "type_name": "UINT32"
+          },
+          "Id": {
+            "options": {"key_tag": 1000},
+            "name": "Id",
+            "number": 1,
+            "type_name": "UINT32"
+          }
+        },
+        "options": {
+          "helper": "helper",
+          "msg_description": "Test role_upgrade_cfg with multi keys"
+        },
+        "name": "role_upgrade_cfg"
+      },
+      "arr_in_arr_cfg": {
+        "field": {
+          "test_plain_msg": {
+            "options": {"field_separator": "&"},
+            "name": "test_plain_msg",
+            "number": 5,
+            "type_name": "MESSAGE"
+          },
+          "id": {
+            "options": {
+              "key_tag": 1,
+              "field_description": "This is a Key"
+            },
+            "name": "id",
+            "number": 1,
+            "type_name": "UINT32"
+          }
+        },
+        "options": {
+          "helper": "helper",
+          "msg_description": "Test arr_in_arr_cfg"
+        },
+        "name": "arr_in_arr_cfg"
+      },
+      "test_msg_verifier": {
+        "field": {"test_id_2": {
+          "options": {"field_alias": "测试ID别名2"},
+          "name": "test_id_2",
+          "number": 10002,
+          "type_name": "UINT32"
+        }},
+        "options": {"msg_separator": "-^"},
+        "name": "test_msg_verifier"
+      },
+      "arr_in_arr": {
+        "field": {"name": {
+          "options": {"field_description": "This is a test name in array"},
+          "name": "name",
+          "number": 1,
+          "type_name": "STRING"
+        }},
+        "options": {
+          "helper": "helper",
+          "not_data_table": true
+        },
+        "name": "arr_in_arr"
+      }
+    },
+    "package": ""
+  }
+]}

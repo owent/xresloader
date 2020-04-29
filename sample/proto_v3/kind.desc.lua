@@ -38,14 +38,6 @@ local const_res = {
       message_type = {
         arr_in_arr = {
           field = {
-            int_arr = {
-              name = "int_arr",
-              number = 2,
-              options = {
-                packed = true,
-              },
-              type_name = "INT32",
-            },
             name = {
               name = "name",
               number = 1,
@@ -141,28 +133,6 @@ local const_res = {
       name = "kind.proto",
       package = "",
       path = "kind.proto",
-    },
-    {
-      name = "xresloader.proto",
-      options = {
-        optimize_for = {
-          name = "SPEED",
-          number = 1,
-        },
-      },
-      package = "org.xresloader",
-      path = "xresloader.proto",
-    },
-    {
-      name = "xresloader_ue.proto",
-      options = {
-        optimize_for = {
-          name = "SPEED",
-          number = 1,
-        },
-      },
-      package = "org.xresloader.ue",
-      path = "xresloader_ue.proto",
     },
   },
 }

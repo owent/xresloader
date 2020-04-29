@@ -464,14 +464,12 @@ public class DataDstPbHelper {
         }
     }
 
-    private static HashMap<String, Object> convertMessageIntoInnerMap(Message msg) {
-        HashMap<String, Object> ret = new HashMap<String, Object>();
-        if (msg == null) {
-            return ret;
+    private static Object convertMessageFieldIntoObject(Descriptors.FieldDescriptor desc, Object value,
+            boolean expandEnum) {
+        if (desc == null || value == null) {
+            return null;
         }
-
-        for (Map.Entry<Descriptors.FieldDescriptor, Object> kv : msg.getAllFields().entrySet()) {
-            switch (kv.getKey().getJavaType()) {
+        switch (desc.getJavaType()) {
             case INT:
             case LONG:
             case FLOAT:
@@ -479,264 +477,296 @@ public class DataDstPbHelper {
             case BOOLEAN:
             case STRING:
             case BYTE_STRING: {
-                ret.put(kv.getKey().getName(), kv.getValue());
-                break;
+                return value;
             }
             case ENUM: {
-                if (kv.getValue() instanceof List<?>) {
-                    ArrayList<Integer> res = new ArrayList<Integer>();
-                    res.ensureCapacity(((List<?>) kv.getValue()).size());
+                if (value instanceof List<?>) {
+                    if (expandEnum) {
+                        ArrayList<HashMap<String, Object>> ret = new ArrayList<HashMap<String, Object>>();
+                        ret.ensureCapacity(((List<?>) value).size());
 
-                    for (Object enum_value_desc : (List<?>) kv.getValue()) {
-                        if (enum_value_desc instanceof EnumValueDescriptor) {
-                            res.add(((EnumValueDescriptor) enum_value_desc).getNumber());
+                        for (Object enum_value_desc : (List<?>) value) {
+                            if (enum_value_desc instanceof EnumValueDescriptor) {
+                                HashMap<String, Object> res = new HashMap<String, Object>();
+                                res.put("name", ((EnumValueDescriptor) enum_value_desc).getName());
+                                res.put("number", ((EnumValueDescriptor) enum_value_desc).getNumber());
+                                ret.add(res);
+                            }
                         }
+                        return ret;
+                    } else {
+                        ArrayList<Integer> ret = new ArrayList<Integer>();
+                        ret.ensureCapacity(((List<?>) value).size());
+
+                        for (Object enum_value_desc : (List<?>) value) {
+                            if (enum_value_desc instanceof EnumValueDescriptor) {
+                                ret.add(((EnumValueDescriptor) enum_value_desc).getNumber());
+                            }
+                        }
+                        return ret;
                     }
-                    ret.put(kv.getKey().getName(), res);
-                } else if (kv.getValue() instanceof EnumValueDescriptor) {
-                    ret.put(kv.getKey().getName(), ((EnumValueDescriptor) kv.getValue()).getNumber());
+                } else if (value instanceof EnumValueDescriptor) {
+                    if (expandEnum) {
+                        HashMap<String, Object> ret = new HashMap<String, Object>();
+                        ret.put("name", ((EnumValueDescriptor) value).getName());
+                        ret.put("number", ((EnumValueDescriptor) value).getNumber());
+                        return ret;
+                    } else {
+                        return ((EnumValueDescriptor) value).getNumber();
+                    }
                 }
-                break;
             }
             case MESSAGE: {
-                if (kv.getValue() instanceof List<?>) {
-                    ArrayList<HashMap<String, Object>> res = new ArrayList<HashMap<String, Object>>();
-                    res.ensureCapacity(((List<?>) kv.getValue()).size());
+                if (value instanceof List<?>) {
+                    ArrayList<HashMap<String, Object>> ret = new ArrayList<HashMap<String, Object>>();
+                    ret.ensureCapacity(((List<?>) value).size());
 
-                    for (Object submsg : (List<?>) kv.getValue()) {
+                    for (Object submsg : (List<?>) value) {
                         if (submsg instanceof Message) {
-                            res.add(convertMessageIntoInnerMap((Message) submsg));
+                            ret.add(convertMessageIntoInnerMap((Message) submsg, expandEnum));
                         }
                     }
-                    ret.put(kv.getKey().getName(), res);
-                } else if (kv.getValue() instanceof Message) {
-                    ret.put(kv.getKey().getName(), convertMessageIntoInnerMap((Message) kv.getValue()));
+                    return ret;
+                } else if (value instanceof Message) {
+                    return convertMessageIntoInnerMap((Message) value, expandEnum);
+                } else {
+                    return null;
                 }
-                break;
             }
             default:
-                break;
-            }
+                return null;
+        }
+    }
+
+    private static HashMap<String, Object> convertMessageIntoInnerMap(Message msg, boolean expandEnum) {
+        HashMap<String, Object> ret = new HashMap<String, Object>();
+        if (msg == null) {
+            return ret;
+        }
+
+        for (Map.Entry<Descriptors.FieldDescriptor, Object> kv : msg.getAllFields().entrySet()) {
+            ret.put(kv.getKey().getName(), convertMessageFieldIntoObject(kv.getKey(), kv.getValue(), expandEnum));
         }
 
         return ret;
     }
 
     private static Object pickMessageField(com.google.protobuf.UnknownFieldSet.Field field_data,
-            FieldDescriptor field_desc, Message defaultInstance)
+            FieldDescriptor field_desc, Message defaultInstance, boolean expandEnum)
             throws InvalidProtocolBufferException, UnsupportedEncodingException {
         if (null == field_desc || null == field_data) {
             return null;
         }
 
         switch (field_desc.getType()) {
-        case DOUBLE: {
-            List<Long> raw_data = field_data.getFixed64List();
-            if (raw_data == null || raw_data.isEmpty()) {
-                return null;
-            }
-
-            if (field_desc.isRepeated()) {
-                ArrayList<Double> ret = new ArrayList<Double>();
-                ret.ensureCapacity(raw_data.size());
-                for (Long v : raw_data) {
-                    ret.add(Double.longBitsToDouble(v));
+            case DOUBLE: {
+                List<Long> raw_data = field_data.getFixed64List();
+                if (raw_data == null || raw_data.isEmpty()) {
+                    return null;
                 }
-                return ret;
-            } else {
-                return Double.longBitsToDouble(raw_data.get(0));
-            }
-        }
-        case FLOAT: {
-            List<Integer> raw_data = field_data.getFixed32List();
-            if (raw_data == null || raw_data.isEmpty()) {
-                return null;
-            }
 
-            if (field_desc.isRepeated()) {
-                ArrayList<Float> ret = new ArrayList<Float>();
-                ret.ensureCapacity(raw_data.size());
-                for (Integer v : raw_data) {
-                    ret.add(Float.intBitsToFloat(v));
+                if (field_desc.isRepeated()) {
+                    ArrayList<Double> ret = new ArrayList<Double>();
+                    ret.ensureCapacity(raw_data.size());
+                    for (Long v : raw_data) {
+                        ret.add(Double.longBitsToDouble(v));
+                    }
+                    return ret;
+                } else {
+                    return Double.longBitsToDouble(raw_data.get(0));
                 }
-                return ret;
-            } else {
-                return Float.intBitsToFloat(raw_data.get(0));
             }
-        }
-        case INT64:
-        case UINT64:
-        case INT32:
-        case UINT32: {
-            List<Long> raw_data = field_data.getVarintList();
-            if (raw_data == null || raw_data.isEmpty()) {
-                return null;
-            }
-
-            if (field_desc.isRepeated()) {
-                return raw_data;
-            } else {
-                return raw_data.get(0);
-            }
-        }
-
-        case SINT64: {
-            List<Long> raw_data = field_data.getVarintList();
-            if (raw_data == null || raw_data.isEmpty()) {
-                return null;
-            }
-
-            if (field_desc.isRepeated()) {
-                ArrayList<Long> ret = new ArrayList<Long>();
-                ret.ensureCapacity(raw_data.size());
-                for (int i = 0; i < raw_data.size(); ++i) {
-                    ret.add((raw_data.get(i) << 63) ^ (raw_data.get(i) >> 63));
+            case FLOAT: {
+                List<Integer> raw_data = field_data.getFixed32List();
+                if (raw_data == null || raw_data.isEmpty()) {
+                    return null;
                 }
-                return raw_data;
-            } else {
-                return (raw_data.get(0) << 63) ^ (raw_data.get(0) >> 63);
-            }
-        }
-        case SINT32: {
-            List<Long> raw_data = field_data.getVarintList();
-            if (raw_data == null || raw_data.isEmpty()) {
-                return null;
-            }
 
-            if (field_desc.isRepeated()) {
-                ArrayList<Integer> ret = new ArrayList<Integer>();
-                ret.ensureCapacity(raw_data.size());
-                for (int i = 0; i < raw_data.size(); ++i) {
-                    ret.add((raw_data.get(i).intValue() << 31) ^ (raw_data.get(i).intValue() >> 31));
+                if (field_desc.isRepeated()) {
+                    ArrayList<Float> ret = new ArrayList<Float>();
+                    ret.ensureCapacity(raw_data.size());
+                    for (Integer v : raw_data) {
+                        ret.add(Float.intBitsToFloat(v));
+                    }
+                    return ret;
+                } else {
+                    return Float.intBitsToFloat(raw_data.get(0));
                 }
-                return raw_data;
-            } else {
-                return (raw_data.get(0).intValue() << 31) ^ (raw_data.get(0).intValue() >> 31);
             }
-        }
+            case INT64:
+            case UINT64:
+            case INT32:
+            case UINT32: {
+                List<Long> raw_data = field_data.getVarintList();
+                if (raw_data == null || raw_data.isEmpty()) {
+                    return null;
+                }
 
-        case ENUM: {
-            List<Long> raw_data = field_data.getVarintList();
-            if (raw_data == null || raw_data.isEmpty()) {
-                return null;
+                if (field_desc.isRepeated()) {
+                    return raw_data;
+                } else {
+                    return raw_data.get(0);
+                }
             }
 
-            if (field_desc.isRepeated()) {
-                ArrayList<Integer> ret = new ArrayList<Integer>();
-                ret.ensureCapacity(raw_data.size());
-                for (int i = 0; i < raw_data.size(); ++i) {
+            case SINT64: {
+                List<Long> raw_data = field_data.getVarintList();
+                if (raw_data == null || raw_data.isEmpty()) {
+                    return null;
+                }
+
+                if (field_desc.isRepeated()) {
+                    ArrayList<Long> ret = new ArrayList<Long>();
+                    ret.ensureCapacity(raw_data.size());
+                    for (int i = 0; i < raw_data.size(); ++i) {
+                        ret.add((raw_data.get(i) << 63) ^ (raw_data.get(i) >> 63));
+                    }
+                    return raw_data;
+                } else {
+                    return (raw_data.get(0) << 63) ^ (raw_data.get(0) >> 63);
+                }
+            }
+            case SINT32: {
+                List<Long> raw_data = field_data.getVarintList();
+                if (raw_data == null || raw_data.isEmpty()) {
+                    return null;
+                }
+
+                if (field_desc.isRepeated()) {
+                    ArrayList<Integer> ret = new ArrayList<Integer>();
+                    ret.ensureCapacity(raw_data.size());
+                    for (int i = 0; i < raw_data.size(); ++i) {
+                        ret.add((raw_data.get(i).intValue() << 31) ^ (raw_data.get(i).intValue() >> 31));
+                    }
+                    return raw_data;
+                } else {
+                    return (raw_data.get(0).intValue() << 31) ^ (raw_data.get(0).intValue() >> 31);
+                }
+            }
+
+            case ENUM: {
+                List<Long> raw_data = field_data.getVarintList();
+                if (raw_data == null || raw_data.isEmpty()) {
+                    return null;
+                }
+
+                if (field_desc.isRepeated()) {
+                    ArrayList<EnumValueDescriptor> res = new ArrayList<EnumValueDescriptor>();
+                    res.ensureCapacity(raw_data.size());
+                    for (int i = 0; i < raw_data.size(); ++i) {
+                        EnumValueDescriptor enum_value_desc = field_desc.getEnumType()
+                                .findValueByNumber(raw_data.get(0).intValue());
+                        if (null == enum_value_desc) {
+                            continue;
+                        }
+                        res.add(enum_value_desc);
+                    }
+                    return convertMessageFieldIntoObject(field_desc, res, expandEnum);
+                } else {
                     EnumValueDescriptor enum_value_desc = field_desc.getEnumType()
                             .findValueByNumber(raw_data.get(0).intValue());
                     if (null == enum_value_desc) {
-                        continue;
+                        return null;
                     }
-                    ret.add(enum_value_desc.getNumber());
+
+                    return convertMessageFieldIntoObject(field_desc, enum_value_desc, expandEnum);
                 }
-                return ret;
-            } else {
-                EnumValueDescriptor enum_value_desc = field_desc.getEnumType()
-                        .findValueByNumber(raw_data.get(0).intValue());
-                if (null == enum_value_desc) {
+            }
+            case BOOL: {
+                List<Long> raw_data = field_data.getVarintList();
+                if (raw_data == null || raw_data.isEmpty()) {
                     return null;
                 }
-                return enum_value_desc.getNumber();
-            }
-        }
-        case BOOL: {
-            List<Long> raw_data = field_data.getVarintList();
-            if (raw_data == null || raw_data.isEmpty()) {
-                return null;
-            }
 
-            if (field_desc.isRepeated()) {
-                ArrayList<Boolean> ret = new ArrayList<Boolean>();
-                ret.ensureCapacity(raw_data.size());
-                for (int i = 0; i < raw_data.size(); ++i) {
-                    ret.add(raw_data.get(i) != 0);
+                if (field_desc.isRepeated()) {
+                    ArrayList<Boolean> ret = new ArrayList<Boolean>();
+                    ret.ensureCapacity(raw_data.size());
+                    for (int i = 0; i < raw_data.size(); ++i) {
+                        ret.add(raw_data.get(i) != 0);
+                    }
+                    return ret;
+                } else {
+                    return raw_data.get(0) != 0;
                 }
-                return ret;
-            } else {
-                return raw_data.get(0) != 0;
             }
-        }
-        case SFIXED64:
-        case FIXED64: {
-            List<Long> raw_data = field_data.getFixed64List();
-            if (raw_data == null || raw_data.isEmpty()) {
-                return null;
-            }
-
-            if (field_desc.isRepeated()) {
-                return raw_data;
-            } else {
-                return raw_data.get(0);
-            }
-        }
-        case SFIXED32:
-        case FIXED32: {
-            List<Integer> raw_data = field_data.getFixed32List();
-            if (raw_data == null || raw_data.isEmpty()) {
-                return null;
-            }
-
-            if (field_desc.isRepeated()) {
-                return raw_data;
-            } else {
-                return raw_data.get(0);
-            }
-        }
-        case STRING: {
-            List<ByteString> raw_data = field_data.getLengthDelimitedList();
-            if (raw_data == null || raw_data.isEmpty()) {
-                return null;
-            }
-
-            if (field_desc.isRepeated()) {
-                ArrayList<String> ret = new ArrayList<String>();
-                ret.ensureCapacity(raw_data.size());
-                for (int i = 0; i < raw_data.size(); ++i) {
-                    ret.add(new String(raw_data.get(i).toByteArray(), "UTF-8"));
+            case SFIXED64:
+            case FIXED64: {
+                List<Long> raw_data = field_data.getFixed64List();
+                if (raw_data == null || raw_data.isEmpty()) {
+                    return null;
                 }
-                return ret;
-            } else {
-                return new String(raw_data.get(0).toByteArray(), "UTF-8");
-            }
-        }
-        case GROUP: // ignore & skip
-            return null;
-        case MESSAGE: {
-            List<ByteString> raw_data = field_data.getLengthDelimitedList();
-            if (raw_data == null || raw_data.isEmpty()) {
-                return null;
-            }
 
-            if (field_desc.isRepeated()) {
-                ArrayList<HashMap<String, Object>> ret = new ArrayList<HashMap<String, Object>>();
-                ret.ensureCapacity(raw_data.size());
-                for (int i = 0; i < raw_data.size(); ++i) {
+                if (field_desc.isRepeated()) {
+                    return raw_data;
+                } else {
+                    return raw_data.get(0);
+                }
+            }
+            case SFIXED32:
+            case FIXED32: {
+                List<Integer> raw_data = field_data.getFixed32List();
+                if (raw_data == null || raw_data.isEmpty()) {
+                    return null;
+                }
+
+                if (field_desc.isRepeated()) {
+                    return raw_data;
+                } else {
+                    return raw_data.get(0);
+                }
+            }
+            case STRING: {
+                List<ByteString> raw_data = field_data.getLengthDelimitedList();
+                if (raw_data == null || raw_data.isEmpty()) {
+                    return null;
+                }
+
+                if (field_desc.isRepeated()) {
+                    ArrayList<String> ret = new ArrayList<String>();
+                    ret.ensureCapacity(raw_data.size());
+                    for (int i = 0; i < raw_data.size(); ++i) {
+                        ret.add(new String(raw_data.get(i).toByteArray(), "UTF-8"));
+                    }
+                    return ret;
+                } else {
+                    return new String(raw_data.get(0).toByteArray(), "UTF-8");
+                }
+            }
+            case GROUP: // ignore & skip
+                return null;
+            case MESSAGE: {
+                List<ByteString> raw_data = field_data.getLengthDelimitedList();
+                if (raw_data == null || raw_data.isEmpty()) {
+                    return null;
+                }
+
+                if (field_desc.isRepeated()) {
+                    ArrayList<HashMap<String, Object>> ret = new ArrayList<HashMap<String, Object>>();
+                    ret.ensureCapacity(raw_data.size());
+                    for (int i = 0; i < raw_data.size(); ++i) {
+                        Message.Builder builder = defaultInstance.newBuilderForType();
+                        ret.add(convertMessageIntoInnerMap(builder.mergeFrom(raw_data.get(i)).build(), expandEnum));
+                    }
+                    return ret;
+                } else {
                     Message.Builder builder = defaultInstance.newBuilderForType();
-                    ret.add(convertMessageIntoInnerMap(builder.mergeFrom(raw_data.get(i)).build()));
+                    return convertMessageIntoInnerMap(builder.mergeFrom(raw_data.get(0)).build(), expandEnum);
                 }
-                return ret;
-            } else {
-                Message.Builder builder = defaultInstance.newBuilderForType();
-                return convertMessageIntoInnerMap(builder.mergeFrom(raw_data.get(0)).build());
             }
-        }
-        case BYTES: {
-            List<ByteString> raw_data = field_data.getLengthDelimitedList();
-            if (raw_data == null || raw_data.isEmpty()) {
-                return null;
-            }
+            case BYTES: {
+                List<ByteString> raw_data = field_data.getLengthDelimitedList();
+                if (raw_data == null || raw_data.isEmpty()) {
+                    return null;
+                }
 
-            if (field_desc.isRepeated()) {
-                return raw_data;
-            } else {
-                return raw_data.get(0);
+                if (field_desc.isRepeated()) {
+                    return raw_data;
+                } else {
+                    return raw_data.get(0);
+                }
             }
-        }
-        default:
-            return null;
+            default:
+                return null;
         }
     }
 
@@ -751,7 +781,7 @@ public class DataDstPbHelper {
         if (options != null && !options.isEmpty()) {
             ret = new HashMap<String, Object>();
             for (Map.Entry<Descriptors.FieldDescriptor, Object> kv : options.entrySet()) {
-                ret.put(kv.getKey().getName(), kv.getValue());
+                ret.put(kv.getKey().getName(), convertMessageFieldIntoObject(kv.getKey(), kv.getValue(), true));
             }
         }
 
@@ -780,7 +810,7 @@ public class DataDstPbHelper {
 
             try {
                 Object val;
-                val = pickMessageField(field_data, ext_type.descriptor, ext_type.defaultInstance);
+                val = pickMessageField(field_data, ext_type.descriptor, ext_type.defaultInstance, true);
                 if (null != val) {
                     if (ret == null) {
                         ret = new HashMap<String, Object>();

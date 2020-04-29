@@ -48,3 +48,5 @@ role_upgrade_cfg.lua |  Lua输出upgrade表                           | java -cl
 role_upgrade_cfg.json | Json输出upgrade表                          | java -client -jar xresloader.jar -t json -p protobuf -o '$proto_dir'    -f '$proto_dir/kind.pb' -s '$XLSX_FILE' -m scheme_upgrade -n "/(?i)\.bin$/\.json/"
 kind_const_module.lua |  使用module来导出lua枚举类型                 | java -client -jar xresloader.jar -t lua -p protobuf -o $proto_dir -f $proto_dir/kind.pb --pretty 2 --lua-module ProtoEnums.Kind -c kind_const_module.lua 
 role_cfg_module.lua |  使用module来导出lua输出，指定数据版本号为 1.0.0.0 | java -client -jar xresloader.jar -t lua -p protobuf -o $proto_dir -f $proto_dir/kind.pb --lua-module ProtoData.Kind -s $XLSX_FILE -m scheme_kind -n "/(?i)\.bin\$/_module\.lua/" --data-version 1.0.0.0 
+kind.desc.lua       |  导出lua格式的描述信息，可用于用户自己实现反射接入 | java -client -jar xresloader.jar -t lua -p protobuf -o $proto_dir -f $proto_dir/kind.pb --pretty 2 -i kind.desc.lua
+kind.desc.json      | 导出json格式的描述信息，可用于用户自己实现反射接入 | java -client -jar xresloader.jar -t json -p protobuf -o $proto_dir -f $proto_dir/kind.pb --pretty 2 -i kind.desc.json

@@ -251,14 +251,22 @@ const char* xresloader_header::_InternalParse(const char* ptr, ::PROTOBUF_NAMESP
       // optional string xres_ver = 1;
       case 1:
         if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 10)) {
-          ptr = ::PROTOBUF_NAMESPACE_ID::internal::InlineGreedyStringParserUTF8Verify(_internal_mutable_xres_ver(), ptr, ctx, "org.xresloader.pb.xresloader_header.xres_ver");
+          auto str = _internal_mutable_xres_ver();
+          ptr = ::PROTOBUF_NAMESPACE_ID::internal::InlineGreedyStringParser(str, ptr, ctx);
+          #ifndef NDEBUG
+          ::PROTOBUF_NAMESPACE_ID::internal::VerifyUTF8(str, "org.xresloader.pb.xresloader_header.xres_ver");
+          #endif  // !NDEBUG
           CHK_(ptr);
         } else goto handle_unusual;
         continue;
       // optional string data_ver = 2;
       case 2:
         if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 18)) {
-          ptr = ::PROTOBUF_NAMESPACE_ID::internal::InlineGreedyStringParserUTF8Verify(_internal_mutable_data_ver(), ptr, ctx, "org.xresloader.pb.xresloader_header.data_ver");
+          auto str = _internal_mutable_data_ver();
+          ptr = ::PROTOBUF_NAMESPACE_ID::internal::InlineGreedyStringParser(str, ptr, ctx);
+          #ifndef NDEBUG
+          ::PROTOBUF_NAMESPACE_ID::internal::VerifyUTF8(str, "org.xresloader.pb.xresloader_header.data_ver");
+          #endif  // !NDEBUG
           CHK_(ptr);
         } else goto handle_unusual;
         continue;
@@ -273,14 +281,22 @@ const char* xresloader_header::_InternalParse(const char* ptr, ::PROTOBUF_NAMESP
       // required string hash_code = 4;
       case 4:
         if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 34)) {
-          ptr = ::PROTOBUF_NAMESPACE_ID::internal::InlineGreedyStringParserUTF8Verify(_internal_mutable_hash_code(), ptr, ctx, "org.xresloader.pb.xresloader_header.hash_code");
+          auto str = _internal_mutable_hash_code();
+          ptr = ::PROTOBUF_NAMESPACE_ID::internal::InlineGreedyStringParser(str, ptr, ctx);
+          #ifndef NDEBUG
+          ::PROTOBUF_NAMESPACE_ID::internal::VerifyUTF8(str, "org.xresloader.pb.xresloader_header.hash_code");
+          #endif  // !NDEBUG
           CHK_(ptr);
         } else goto handle_unusual;
         continue;
       // optional string description = 5;
       case 5:
         if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 42)) {
-          ptr = ::PROTOBUF_NAMESPACE_ID::internal::InlineGreedyStringParserUTF8Verify(_internal_mutable_description(), ptr, ctx, "org.xresloader.pb.xresloader_header.description");
+          auto str = _internal_mutable_description();
+          ptr = ::PROTOBUF_NAMESPACE_ID::internal::InlineGreedyStringParser(str, ptr, ctx);
+          #ifndef NDEBUG
+          ::PROTOBUF_NAMESPACE_ID::internal::VerifyUTF8(str, "org.xresloader.pb.xresloader_header.description");
+          #endif  // !NDEBUG
           CHK_(ptr);
         } else goto handle_unusual;
         continue;
@@ -305,7 +321,7 @@ failure:
 #undef CHK_
 }
 
-::PROTOBUF_NAMESPACE_ID::uint8* xresloader_header::InternalSerializeWithCachedSizesToArray(
+::PROTOBUF_NAMESPACE_ID::uint8* xresloader_header::_InternalSerialize(
     ::PROTOBUF_NAMESPACE_ID::uint8* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const {
   // @@protoc_insertion_point(serialize_to_array_start:org.xresloader.pb.xresloader_header)
   ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
@@ -334,7 +350,7 @@ failure:
 
   // required uint32 count = 3;
   if (cached_has_bits & 0x00000010u) {
-    stream->EnsureSpace(&target);
+    target = stream->EnsureSpace(target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteUInt32ToArray(3, this->_internal_count(), target);
   }
 
@@ -370,14 +386,14 @@ size_t xresloader_header::RequiredFieldsByteSizeFallback() const {
 // @@protoc_insertion_point(required_fields_byte_size_fallback_start:org.xresloader.pb.xresloader_header)
   size_t total_size = 0;
 
-  if (has_hash_code()) {
+  if (_internal_has_hash_code()) {
     // required string hash_code = 4;
     total_size += 1 +
       ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
         this->_internal_hash_code());
   }
 
-  if (has_count()) {
+  if (_internal_has_count()) {
     // required uint32 count = 3;
     total_size += 1 +
       ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::UInt32Size(
@@ -639,7 +655,8 @@ const char* xresloader_datablocks::_InternalParse(const char* ptr, ::PROTOBUF_NA
           ptr -= 1;
           do {
             ptr += 1;
-            ptr = ::PROTOBUF_NAMESPACE_ID::internal::InlineGreedyStringParser(_internal_add_data_block(), ptr, ctx);
+            auto str = _internal_add_data_block();
+            ptr = ::PROTOBUF_NAMESPACE_ID::internal::InlineGreedyStringParser(str, ptr, ctx);
             CHK_(ptr);
             if (!ctx->DataAvailable(ptr)) break;
           } while (::PROTOBUF_NAMESPACE_ID::internal::ExpectTag<18>(ptr));
@@ -648,7 +665,11 @@ const char* xresloader_datablocks::_InternalParse(const char* ptr, ::PROTOBUF_NA
       // optional string data_message_type = 3;
       case 3:
         if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 26)) {
-          ptr = ::PROTOBUF_NAMESPACE_ID::internal::InlineGreedyStringParserUTF8Verify(_internal_mutable_data_message_type(), ptr, ctx, "org.xresloader.pb.xresloader_datablocks.data_message_type");
+          auto str = _internal_mutable_data_message_type();
+          ptr = ::PROTOBUF_NAMESPACE_ID::internal::InlineGreedyStringParser(str, ptr, ctx);
+          #ifndef NDEBUG
+          ::PROTOBUF_NAMESPACE_ID::internal::VerifyUTF8(str, "org.xresloader.pb.xresloader_datablocks.data_message_type");
+          #endif  // !NDEBUG
           CHK_(ptr);
         } else goto handle_unusual;
         continue;
@@ -673,7 +694,7 @@ failure:
 #undef CHK_
 }
 
-::PROTOBUF_NAMESPACE_ID::uint8* xresloader_datablocks::InternalSerializeWithCachedSizesToArray(
+::PROTOBUF_NAMESPACE_ID::uint8* xresloader_datablocks::_InternalSerialize(
     ::PROTOBUF_NAMESPACE_ID::uint8* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const {
   // @@protoc_insertion_point(serialize_to_array_start:org.xresloader.pb.xresloader_datablocks)
   ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
@@ -682,9 +703,9 @@ failure:
   cached_has_bits = _has_bits_[0];
   // optional .org.xresloader.pb.xresloader_header header = 1;
   if (cached_has_bits & 0x00000002u) {
-    stream->EnsureSpace(&target);
+    target = stream->EnsureSpace(target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
-      InternalWriteMessageToArray(
+      InternalWriteMessage(
         1, _Internal::header(this), target, stream);
   }
 
@@ -804,8 +825,8 @@ void xresloader_datablocks::CopyFrom(const xresloader_datablocks& from) {
 }
 
 bool xresloader_datablocks::IsInitialized() const {
-  if (has_header()) {
-    if (!this->header_->IsInitialized()) return false;
+  if (_internal_has_header()) {
+    if (!header_->IsInitialized()) return false;
   }
   return true;
 }

@@ -1,6 +1,19 @@
 更新记录
 ==========
 
+2.7.1
+------
+
+1. 常规更新
+2. 升级protobuf到3.11.4
+3. 升级maven-shade-plugin到3.2.3
+4. 升级build-helper-maven-plugin到3.1.0
+5. 升级commons-codec到1.14
+6. 升级log4j到2.13.2
+7. 升级msgpack-core到0.8.20
+8. 升级poi到4.1.2
+9. 升级commons-csv到1.8
+
 2.7.0
 ------
 

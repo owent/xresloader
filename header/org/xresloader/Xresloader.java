@@ -16,6 +16,7 @@ public final class Xresloader {
     registry.add(org.xresloader.Xresloader.fieldAlias);
     registry.add(org.xresloader.Xresloader.fieldRatio);
     registry.add(org.xresloader.Xresloader.fieldSeparator);
+    registry.add(org.xresloader.Xresloader.fieldRequired);
     registry.add(org.xresloader.Xresloader.oneofDescription);
     registry.add(org.xresloader.Xresloader.enumDescription);
     registry.add(org.xresloader.Xresloader.enumvDescription);
@@ -162,6 +163,21 @@ public final class Xresloader {
           .newFileScopedGeneratedExtension(
         java.lang.String.class,
         null);
+  public static final int FIELD_REQUIRED_FIELD_NUMBER = 1015;
+  /**
+   * <pre>
+   * 字段标记为必须，相当于 pb2 的required
+   * </pre>
+   *
+   * <code>extend .google.protobuf.FieldOptions { ... }</code>
+   */
+  public static final
+    com.google.protobuf.GeneratedMessage.GeneratedExtension<
+      com.google.protobuf.DescriptorProtos.FieldOptions,
+      java.lang.Boolean> fieldRequired = com.google.protobuf.GeneratedMessage
+          .newFileScopedGeneratedExtension(
+        java.lang.Boolean.class,
+        null);
   public static final int ONEOF_DESCRIPTION_FIELD_NUMBER = 1001;
   /**
    * <pre>
@@ -245,13 +261,15 @@ public final class Xresloader {
       "_alias\022\035.google.protobuf.FieldOptions\030\364\007" +
       " \001(\t:3\n\013field_ratio\022\035.google.protobuf.Fi" +
       "eldOptions\030\365\007 \001(\005:7\n\017field_separator\022\035.g" +
-      "oogle.protobuf.FieldOptions\030\366\007 \001(\t:9\n\021on" +
-      "eof_description\022\035.google.protobuf.OneofO" +
-      "ptions\030\351\007 \001(\t:7\n\020enum_description\022\034.goog" +
-      "le.protobuf.EnumOptions\030\351\007 \001(\t:=\n\021enumv_" +
-      "description\022!.google.protobuf.EnumValueO" +
-      "ptions\030\351\007 \001(\t:6\n\nenum_alias\022!.google.pro" +
-      "tobuf.EnumValueOptions\030\352\007 \001(\tb\006proto3"
+      "oogle.protobuf.FieldOptions\030\366\007 \001(\t:6\n\016fi" +
+      "eld_required\022\035.google.protobuf.FieldOpti" +
+      "ons\030\367\007 \001(\010:9\n\021oneof_description\022\035.google" +
+      ".protobuf.OneofOptions\030\351\007 \001(\t:7\n\020enum_de" +
+      "scription\022\034.google.protobuf.EnumOptions\030" +
+      "\351\007 \001(\t:=\n\021enumv_description\022!.google.pro" +
+      "tobuf.EnumValueOptions\030\351\007 \001(\t:6\n\nenum_al" +
+      "ias\022!.google.protobuf.EnumValueOptions\030\352" +
+      "\007 \001(\tb\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
@@ -267,10 +285,11 @@ public final class Xresloader {
     fieldAlias.internalInit(descriptor.getExtensions().get(6));
     fieldRatio.internalInit(descriptor.getExtensions().get(7));
     fieldSeparator.internalInit(descriptor.getExtensions().get(8));
-    oneofDescription.internalInit(descriptor.getExtensions().get(9));
-    enumDescription.internalInit(descriptor.getExtensions().get(10));
-    enumvDescription.internalInit(descriptor.getExtensions().get(11));
-    enumAlias.internalInit(descriptor.getExtensions().get(12));
+    fieldRequired.internalInit(descriptor.getExtensions().get(9));
+    oneofDescription.internalInit(descriptor.getExtensions().get(10));
+    enumDescription.internalInit(descriptor.getExtensions().get(11));
+    enumvDescription.internalInit(descriptor.getExtensions().get(12));
+    enumAlias.internalInit(descriptor.getExtensions().get(13));
     com.google.protobuf.DescriptorProtos.getDescriptor();
   }
 

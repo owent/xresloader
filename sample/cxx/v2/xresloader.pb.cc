@@ -40,13 +40,14 @@ const char descriptor_table_protodef_xresloader_2eproto[] PROTOBUF_SECTION_VARIA
   "e.protobuf.FieldOptions\030\364\007 \001(\t:3\n\013field_"
   "ratio\022\035.google.protobuf.FieldOptions\030\365\007 "
   "\001(\005:7\n\017field_separator\022\035.google.protobuf"
-  ".FieldOptions\030\366\007 \001(\t:9\n\021oneof_descriptio"
-  "n\022\035.google.protobuf.OneofOptions\030\351\007 \001(\t:"
-  "7\n\020enum_description\022\034.google.protobuf.En"
-  "umOptions\030\351\007 \001(\t:=\n\021enumv_description\022!."
-  "google.protobuf.EnumValueOptions\030\351\007 \001(\t:"
-  "6\n\nenum_alias\022!.google.protobuf.EnumValu"
-  "eOptions\030\352\007 \001(\tB\002H\001"
+  ".FieldOptions\030\366\007 \001(\t:6\n\016field_required\022\035"
+  ".google.protobuf.FieldOptions\030\367\007 \001(\010:9\n\021"
+  "oneof_description\022\035.google.protobuf.Oneo"
+  "fOptions\030\351\007 \001(\t:7\n\020enum_description\022\034.go"
+  "ogle.protobuf.EnumOptions\030\351\007 \001(\t:=\n\021enum"
+  "v_description\022!.google.protobuf.EnumValu"
+  "eOptions\030\351\007 \001(\t:6\n\nenum_alias\022!.google.p"
+  "rotobuf.EnumValueOptions\030\352\007 \001(\tB\002H\001"
   ;
 static const ::PROTOBUF_NAMESPACE_ID::internal::DescriptorTable*const descriptor_table_xresloader_2eproto_deps[1] = {
   &::descriptor_table_google_2fprotobuf_2fdescriptor_2eproto,
@@ -54,16 +55,15 @@ static const ::PROTOBUF_NAMESPACE_ID::internal::DescriptorTable*const descriptor
 static ::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase*const descriptor_table_xresloader_2eproto_sccs[1] = {
 };
 static ::PROTOBUF_NAMESPACE_ID::internal::once_flag descriptor_table_xresloader_2eproto_once;
-static bool descriptor_table_xresloader_2eproto_initialized = false;
 const ::PROTOBUF_NAMESPACE_ID::internal::DescriptorTable descriptor_table_xresloader_2eproto = {
-  &descriptor_table_xresloader_2eproto_initialized, descriptor_table_protodef_xresloader_2eproto, "xresloader.proto", 819,
+  false, false, descriptor_table_protodef_xresloader_2eproto, "xresloader.proto", 875,
   &descriptor_table_xresloader_2eproto_once, descriptor_table_xresloader_2eproto_sccs, descriptor_table_xresloader_2eproto_deps, 0, 1,
   schemas, file_default_instances, TableStruct_xresloader_2eproto::offsets,
   file_level_metadata_xresloader_2eproto, 0, file_level_enum_descriptors_xresloader_2eproto, file_level_service_descriptors_xresloader_2eproto,
 };
 
 // Force running AddDescriptors() at dynamic initialization time.
-static bool dynamic_init_dummy_xresloader_2eproto = (  ::PROTOBUF_NAMESPACE_ID::internal::AddDescriptors(&descriptor_table_xresloader_2eproto), true);
+static bool dynamic_init_dummy_xresloader_2eproto = (static_cast<void>(::PROTOBUF_NAMESPACE_ID::internal::AddDescriptors(&descriptor_table_xresloader_2eproto)), true);
 namespace org {
 namespace xresloader {
 const std::string file_description_default("");
@@ -100,6 +100,9 @@ const std::string field_separator_default("");
 ::PROTOBUF_NAMESPACE_ID::internal::ExtensionIdentifier< ::google::protobuf::FieldOptions,
     ::PROTOBUF_NAMESPACE_ID::internal::StringTypeTraits, 9, false >
   field_separator(kFieldSeparatorFieldNumber, field_separator_default);
+::PROTOBUF_NAMESPACE_ID::internal::ExtensionIdentifier< ::google::protobuf::FieldOptions,
+    ::PROTOBUF_NAMESPACE_ID::internal::PrimitiveTypeTraits< bool >, 8, false >
+  field_required(kFieldRequiredFieldNumber, false);
 const std::string oneof_description_default("");
 ::PROTOBUF_NAMESPACE_ID::internal::ExtensionIdentifier< ::google::protobuf::OneofOptions,
     ::PROTOBUF_NAMESPACE_ID::internal::StringTypeTraits, 9, false >

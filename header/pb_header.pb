@@ -12,7 +12,7 @@
 
 data_block (R	dataBlock*
 data_message_type (	RdataMessageType
-Š
+Ñ
 extensions/v2/xresloader.protoorg.xresloader google/protobuf/descriptor.proto:H
 file_description.google.protobuf.FileOptionsé (	RfileDescription:I
 msg_description.google.protobuf.MessageOptionsé (	RmsgDescription:W
@@ -24,7 +24,8 @@ data_block (R	dataBlock*
 fieldAlias:?
 field_ratio.google.protobuf.FieldOptionsõ (R
 fieldRatio:G
-field_separator.google.protobuf.FieldOptionsö (	RfieldSeparator:K
+field_separator.google.protobuf.FieldOptionsö (	RfieldSeparator:E
+field_required.google.protobuf.FieldOptions÷ (RfieldRequired:K
 oneof_description.google.protobuf.OneofOptionsé (	RoneofDescription:H
 enum_description.google.protobuf.EnumOptionsé (	RenumDescription:O
 enumv_description!.google.protobuf.EnumValueOptionsé (	RenumvDescription:A

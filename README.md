@@ -284,6 +284,8 @@ Protobuf插件
 | org.xresloader.field_description | 字段描述信息，会写入输出的header中和代码中                                                                         |
 | org.xresloader.field_alias       | 字段别名，配合 **验证器** 功能，允许在数据源中直接填写别名来配置数据                                               |
 | org.xresloader.field_ratio       | 字段放大，用于比如配置百分率为 0.12，当 org.xresloader.field_ratio=100时转出的数据为12                             |
+| org.xresloader.field_separator   | Plain模式分隔符，可指定多个，用于在一个单元格内配置复杂格式时的分隔符列表，默认值: ```,;|```                       |
+| org.xresloader.field_required    | 设置字段为 **required** ，用于向proto3提供，proto2的 **required** 约束                                             |
 | org.xresloader.ue.key_tag        | 生成UE代码时，如果需要支持多个Key组合成一个Name，用这个字段指定系数（必须大于0）                                   |
 | org.xresloader.ue.ueTypeName     | 生成UE代码时，如果指定了这个字段，那么生成的字段类型将是 ```TSoftObjectPtr<ueTypeName>``` , 并且支持蓝图中直接引用 |
 

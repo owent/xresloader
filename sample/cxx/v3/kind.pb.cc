@@ -273,16 +273,15 @@ static ::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase*const descriptor_table_kin
   &scc_info_test_msg_verifier_kind_2eproto.base,
 };
 static ::PROTOBUF_NAMESPACE_ID::internal::once_flag descriptor_table_kind_2eproto_once;
-static bool descriptor_table_kind_2eproto_initialized = false;
 const ::PROTOBUF_NAMESPACE_ID::internal::DescriptorTable descriptor_table_kind_2eproto = {
-  &descriptor_table_kind_2eproto_initialized, descriptor_table_protodef_kind_2eproto, "kind.proto", 1362,
+  false, false, descriptor_table_protodef_kind_2eproto, "kind.proto", 1362,
   &descriptor_table_kind_2eproto_once, descriptor_table_kind_2eproto_sccs, descriptor_table_kind_2eproto_deps, 6, 3,
   schemas, file_default_instances, TableStruct_kind_2eproto::offsets,
   file_level_metadata_kind_2eproto, 6, file_level_enum_descriptors_kind_2eproto, file_level_service_descriptors_kind_2eproto,
 };
 
 // Force running AddDescriptors() at dynamic initialization time.
-static bool dynamic_init_dummy_kind_2eproto = (  ::PROTOBUF_NAMESPACE_ID::internal::AddDescriptors(&descriptor_table_kind_2eproto), true);
+static bool dynamic_init_dummy_kind_2eproto = (static_cast<void>(::PROTOBUF_NAMESPACE_ID::internal::AddDescriptors(&descriptor_table_kind_2eproto)), true);
 const ::PROTOBUF_NAMESPACE_ID::EnumDescriptor* arr_in_arr_test_nested_message_test_nested_enum_descriptor() {
   ::PROTOBUF_NAMESPACE_ID::internal::AssignDescriptors(&descriptor_table_kind_2eproto);
   return file_level_enum_descriptors_kind_2eproto[0];
@@ -342,28 +341,31 @@ role_cfg::_Internal::dep_test(const role_cfg* msg) {
   return *msg->dep_test_;
 }
 void role_cfg::clear_dep_test() {
-  if (GetArenaNoVirtual() == nullptr && dep_test_ != nullptr) {
+  if (GetArena() == nullptr && dep_test_ != nullptr) {
     delete dep_test_;
   }
   dep_test_ = nullptr;
 }
-role_cfg::role_cfg()
-  : ::PROTOBUF_NAMESPACE_ID::Message(), _internal_metadata_(nullptr) {
+role_cfg::role_cfg(::PROTOBUF_NAMESPACE_ID::Arena* arena)
+  : ::PROTOBUF_NAMESPACE_ID::Message(arena),
+  test_array_(arena) {
   SharedCtor();
-  // @@protoc_insertion_point(constructor:role_cfg)
+  RegisterArenaDtor(arena);
+  // @@protoc_insertion_point(arena_constructor:role_cfg)
 }
 role_cfg::role_cfg(const role_cfg& from)
   : ::PROTOBUF_NAMESPACE_ID::Message(),
-      _internal_metadata_(nullptr),
       test_array_(from.test_array_) {
-  _internal_metadata_.MergeFrom(from._internal_metadata_);
+  _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
   name_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
   if (!from._internal_name().empty()) {
-    name_.AssignWithDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), from.name_);
+    name_.Set(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), from._internal_name(),
+      GetArena());
   }
   int_as_string_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
   if (!from._internal_int_as_string().empty()) {
-    int_as_string_.AssignWithDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), from.int_as_string_);
+    int_as_string_.Set(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), from._internal_int_as_string(),
+      GetArena());
   }
   if (from._internal_has_dep_test()) {
     dep_test_ = new ::dep_cfg(*from.dep_test_);
@@ -388,14 +390,22 @@ void role_cfg::SharedCtor() {
 role_cfg::~role_cfg() {
   // @@protoc_insertion_point(destructor:role_cfg)
   SharedDtor();
+  _internal_metadata_.Delete<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
 }
 
 void role_cfg::SharedDtor() {
+  GOOGLE_DCHECK(GetArena() == nullptr);
   name_.DestroyNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
   int_as_string_.DestroyNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
   if (this != internal_default_instance()) delete dep_test_;
 }
 
+void role_cfg::ArenaDtor(void* object) {
+  role_cfg* _this = reinterpret_cast< role_cfg* >(object);
+  (void)_this;
+}
+void role_cfg::RegisterArenaDtor(::PROTOBUF_NAMESPACE_ID::Arena*) {
+}
 void role_cfg::SetCachedSize(int size) const {
   _cached_size_.Set(size);
 }
@@ -412,20 +422,21 @@ void role_cfg::Clear() {
   (void) cached_has_bits;
 
   test_array_.Clear();
-  name_.ClearToEmptyNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
-  int_as_string_.ClearToEmptyNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
-  if (GetArenaNoVirtual() == nullptr && dep_test_ != nullptr) {
+  name_.ClearToEmpty(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
+  int_as_string_.ClearToEmpty(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
+  if (GetArena() == nullptr && dep_test_ != nullptr) {
     delete dep_test_;
   }
   dep_test_ = nullptr;
   ::memset(&id_, 0, static_cast<size_t>(
       reinterpret_cast<char*>(&cost_value_) -
       reinterpret_cast<char*>(&id_)) + sizeof(cost_value_));
-  _internal_metadata_.Clear();
+  _internal_metadata_.Clear<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
 }
 
 const char* role_cfg::_InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) {
 #define CHK_(x) if (PROTOBUF_PREDICT_FALSE(!(x))) goto failure
+  ::PROTOBUF_NAMESPACE_ID::Arena* arena = GetArena(); (void)arena;
   while (!ctx->Done(&ptr)) {
     ::PROTOBUF_NAMESPACE_ID::uint32 tag;
     ptr = ::PROTOBUF_NAMESPACE_ID::internal::ReadTag(ptr, &tag);
@@ -434,28 +445,28 @@ const char* role_cfg::_InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::i
       // uint32 id = 1;
       case 1:
         if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 8)) {
-          id_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint(&ptr);
+          id_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint32(&ptr);
           CHK_(ptr);
         } else goto handle_unusual;
         continue;
       // uint32 unlock_level = 2;
       case 2:
         if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 16)) {
-          unlock_level_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint(&ptr);
+          unlock_level_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint32(&ptr);
           CHK_(ptr);
         } else goto handle_unusual;
         continue;
       // uint32 cost_type = 3;
       case 3:
         if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 24)) {
-          cost_type_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint(&ptr);
+          cost_type_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint32(&ptr);
           CHK_(ptr);
         } else goto handle_unusual;
         continue;
       // int32 cost_value = 4;
       case 4:
         if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 32)) {
-          cost_value_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint(&ptr);
+          cost_value_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint64(&ptr);
           CHK_(ptr);
         } else goto handle_unusual;
         continue;
@@ -504,7 +515,9 @@ const char* role_cfg::_InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::i
           ctx->SetLastTag(tag);
           goto success;
         }
-        ptr = UnknownFieldParse(tag, &_internal_metadata_, ptr, ctx);
+        ptr = UnknownFieldParse(tag,
+            _internal_metadata_.mutable_unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(),
+            ptr, ctx);
         CHK_(ptr != nullptr);
         continue;
       }
@@ -588,7 +601,7 @@ failure:
 
   if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::InternalSerializeUnknownFieldsToArray(
-        _internal_metadata_.unknown_fields(), target, stream);
+        _internal_metadata_.unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(::PROTOBUF_NAMESPACE_ID::UnknownFieldSet::default_instance), target, stream);
   }
   // @@protoc_insertion_point(serialize_to_array_end:role_cfg)
   return target;
@@ -686,18 +699,16 @@ void role_cfg::MergeFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) {
 void role_cfg::MergeFrom(const role_cfg& from) {
 // @@protoc_insertion_point(class_specific_merge_from_start:role_cfg)
   GOOGLE_DCHECK_NE(&from, this);
-  _internal_metadata_.MergeFrom(from._internal_metadata_);
+  _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
   ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
   test_array_.MergeFrom(from.test_array_);
   if (from.name().size() > 0) {
-
-    name_.AssignWithDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), from.name_);
+    _internal_set_name(from._internal_name());
   }
   if (from.int_as_string().size() > 0) {
-
-    int_as_string_.AssignWithDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), from.int_as_string_);
+    _internal_set_int_as_string(from._internal_int_as_string());
   }
   if (from.has_dep_test()) {
     _internal_mutable_dep_test()->::dep_cfg::MergeFrom(from._internal_dep_test());
@@ -736,17 +747,16 @@ bool role_cfg::IsInitialized() const {
 
 void role_cfg::InternalSwap(role_cfg* other) {
   using std::swap;
-  _internal_metadata_.Swap(&other->_internal_metadata_);
+  _internal_metadata_.Swap<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(&other->_internal_metadata_);
   test_array_.InternalSwap(&other->test_array_);
-  name_.Swap(&other->name_, &::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(),
-    GetArenaNoVirtual());
-  int_as_string_.Swap(&other->int_as_string_, &::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(),
-    GetArenaNoVirtual());
-  swap(dep_test_, other->dep_test_);
-  swap(id_, other->id_);
-  swap(unlock_level_, other->unlock_level_);
-  swap(cost_type_, other->cost_type_);
-  swap(cost_value_, other->cost_value_);
+  name_.Swap(&other->name_, &::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
+  int_as_string_.Swap(&other->int_as_string_, &::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
+  ::PROTOBUF_NAMESPACE_ID::internal::memswap<
+      PROTOBUF_FIELD_OFFSET(role_cfg, cost_value_)
+      + sizeof(role_cfg::cost_value_)
+      - PROTOBUF_FIELD_OFFSET(role_cfg, dep_test_)>(
+          reinterpret_cast<char*>(&dep_test_),
+          reinterpret_cast<char*>(&other->dep_test_));
 }
 
 ::PROTOBUF_NAMESPACE_ID::Metadata role_cfg::GetMetadata() const {
@@ -762,15 +772,15 @@ class role_upgrade_cfg::_Internal {
  public:
 };
 
-role_upgrade_cfg::role_upgrade_cfg()
-  : ::PROTOBUF_NAMESPACE_ID::Message(), _internal_metadata_(nullptr) {
+role_upgrade_cfg::role_upgrade_cfg(::PROTOBUF_NAMESPACE_ID::Arena* arena)
+  : ::PROTOBUF_NAMESPACE_ID::Message(arena) {
   SharedCtor();
-  // @@protoc_insertion_point(constructor:role_upgrade_cfg)
+  RegisterArenaDtor(arena);
+  // @@protoc_insertion_point(arena_constructor:role_upgrade_cfg)
 }
 role_upgrade_cfg::role_upgrade_cfg(const role_upgrade_cfg& from)
-  : ::PROTOBUF_NAMESPACE_ID::Message(),
-      _internal_metadata_(nullptr) {
-  _internal_metadata_.MergeFrom(from._internal_metadata_);
+  : ::PROTOBUF_NAMESPACE_ID::Message() {
+  _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
   ::memcpy(&id_, &from.id_,
     static_cast<size_t>(reinterpret_cast<char*>(&scoreadd_) -
     reinterpret_cast<char*>(&id_)) + sizeof(scoreadd_));
@@ -786,11 +796,19 @@ void role_upgrade_cfg::SharedCtor() {
 role_upgrade_cfg::~role_upgrade_cfg() {
   // @@protoc_insertion_point(destructor:role_upgrade_cfg)
   SharedDtor();
+  _internal_metadata_.Delete<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
 }
 
 void role_upgrade_cfg::SharedDtor() {
+  GOOGLE_DCHECK(GetArena() == nullptr);
 }
 
+void role_upgrade_cfg::ArenaDtor(void* object) {
+  role_upgrade_cfg* _this = reinterpret_cast< role_upgrade_cfg* >(object);
+  (void)_this;
+}
+void role_upgrade_cfg::RegisterArenaDtor(::PROTOBUF_NAMESPACE_ID::Arena*) {
+}
 void role_upgrade_cfg::SetCachedSize(int size) const {
   _cached_size_.Set(size);
 }
@@ -809,11 +827,12 @@ void role_upgrade_cfg::Clear() {
   ::memset(&id_, 0, static_cast<size_t>(
       reinterpret_cast<char*>(&scoreadd_) -
       reinterpret_cast<char*>(&id_)) + sizeof(scoreadd_));
-  _internal_metadata_.Clear();
+  _internal_metadata_.Clear<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
 }
 
 const char* role_upgrade_cfg::_InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) {
 #define CHK_(x) if (PROTOBUF_PREDICT_FALSE(!(x))) goto failure
+  ::PROTOBUF_NAMESPACE_ID::Arena* arena = GetArena(); (void)arena;
   while (!ctx->Done(&ptr)) {
     ::PROTOBUF_NAMESPACE_ID::uint32 tag;
     ptr = ::PROTOBUF_NAMESPACE_ID::internal::ReadTag(ptr, &tag);
@@ -822,35 +841,35 @@ const char* role_upgrade_cfg::_InternalParse(const char* ptr, ::PROTOBUF_NAMESPA
       // uint32 Id = 1 [(.org.xresloader.ue.key_tag) = 1000];
       case 1:
         if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 8)) {
-          id_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint(&ptr);
+          id_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint32(&ptr);
           CHK_(ptr);
         } else goto handle_unusual;
         continue;
       // uint32 Level = 2 [(.org.xresloader.ue.key_tag) = 1];
       case 2:
         if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 16)) {
-          level_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint(&ptr);
+          level_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint32(&ptr);
           CHK_(ptr);
         } else goto handle_unusual;
         continue;
       // uint32 CostType = 3 [(.org.xresloader.verifier) = "cost_type", (.org.xresloader.field_description) = "Refer to cost_type"];
       case 3:
         if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 24)) {
-          costtype_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint(&ptr);
+          costtype_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint32(&ptr);
           CHK_(ptr);
         } else goto handle_unusual;
         continue;
       // int32 CostValue = 4;
       case 4:
         if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 32)) {
-          costvalue_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint(&ptr);
+          costvalue_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint64(&ptr);
           CHK_(ptr);
         } else goto handle_unusual;
         continue;
       // int32 ScoreAdd = 5;
       case 5:
         if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 40)) {
-          scoreadd_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint(&ptr);
+          scoreadd_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint64(&ptr);
           CHK_(ptr);
         } else goto handle_unusual;
         continue;
@@ -860,7 +879,9 @@ const char* role_upgrade_cfg::_InternalParse(const char* ptr, ::PROTOBUF_NAMESPA
           ctx->SetLastTag(tag);
           goto success;
         }
-        ptr = UnknownFieldParse(tag, &_internal_metadata_, ptr, ctx);
+        ptr = UnknownFieldParse(tag,
+            _internal_metadata_.mutable_unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(),
+            ptr, ctx);
         CHK_(ptr != nullptr);
         continue;
       }
@@ -912,7 +933,7 @@ failure:
 
   if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::InternalSerializeUnknownFieldsToArray(
-        _internal_metadata_.unknown_fields(), target, stream);
+        _internal_metadata_.unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(::PROTOBUF_NAMESPACE_ID::UnknownFieldSet::default_instance), target, stream);
   }
   // @@protoc_insertion_point(serialize_to_array_end:role_upgrade_cfg)
   return target;
@@ -988,7 +1009,7 @@ void role_upgrade_cfg::MergeFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) {
 void role_upgrade_cfg::MergeFrom(const role_upgrade_cfg& from) {
 // @@protoc_insertion_point(class_specific_merge_from_start:role_upgrade_cfg)
   GOOGLE_DCHECK_NE(&from, this);
-  _internal_metadata_.MergeFrom(from._internal_metadata_);
+  _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
   ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
@@ -1029,12 +1050,13 @@ bool role_upgrade_cfg::IsInitialized() const {
 
 void role_upgrade_cfg::InternalSwap(role_upgrade_cfg* other) {
   using std::swap;
-  _internal_metadata_.Swap(&other->_internal_metadata_);
-  swap(id_, other->id_);
-  swap(level_, other->level_);
-  swap(costtype_, other->costtype_);
-  swap(costvalue_, other->costvalue_);
-  swap(scoreadd_, other->scoreadd_);
+  _internal_metadata_.Swap<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(&other->_internal_metadata_);
+  ::PROTOBUF_NAMESPACE_ID::internal::memswap<
+      PROTOBUF_FIELD_OFFSET(role_upgrade_cfg, scoreadd_)
+      + sizeof(role_upgrade_cfg::scoreadd_)
+      - PROTOBUF_FIELD_OFFSET(role_upgrade_cfg, id_)>(
+          reinterpret_cast<char*>(&id_),
+          reinterpret_cast<char*>(&other->id_));
 }
 
 ::PROTOBUF_NAMESPACE_ID::Metadata role_upgrade_cfg::GetMetadata() const {
@@ -1065,10 +1087,11 @@ arr_in_arr_test_nested_message::_Internal::test_nested_message_role_upgrade_cfg(
   return *msg->test_onof_.test_nested_message_role_upgrade_cfg_;
 }
 void arr_in_arr_test_nested_message::set_allocated_test_nested_message_info_role(::role_cfg* test_nested_message_info_role) {
-  ::PROTOBUF_NAMESPACE_ID::Arena* message_arena = GetArenaNoVirtual();
+  ::PROTOBUF_NAMESPACE_ID::Arena* message_arena = GetArena();
   clear_test_onof();
   if (test_nested_message_info_role) {
-    ::PROTOBUF_NAMESPACE_ID::Arena* submessage_arena = nullptr;
+    ::PROTOBUF_NAMESPACE_ID::Arena* submessage_arena =
+      ::PROTOBUF_NAMESPACE_ID::Arena::GetArena(test_nested_message_info_role);
     if (message_arena != submessage_arena) {
       test_nested_message_info_role = ::PROTOBUF_NAMESPACE_ID::internal::GetOwnedMessage(
           message_arena, test_nested_message_info_role, submessage_arena);
@@ -1079,10 +1102,11 @@ void arr_in_arr_test_nested_message::set_allocated_test_nested_message_info_role
   // @@protoc_insertion_point(field_set_allocated:arr_in_arr.test_nested_message.test_nested_message_info_role)
 }
 void arr_in_arr_test_nested_message::set_allocated_test_nested_message_role_upgrade_cfg(::role_upgrade_cfg* test_nested_message_role_upgrade_cfg) {
-  ::PROTOBUF_NAMESPACE_ID::Arena* message_arena = GetArenaNoVirtual();
+  ::PROTOBUF_NAMESPACE_ID::Arena* message_arena = GetArena();
   clear_test_onof();
   if (test_nested_message_role_upgrade_cfg) {
-    ::PROTOBUF_NAMESPACE_ID::Arena* submessage_arena = nullptr;
+    ::PROTOBUF_NAMESPACE_ID::Arena* submessage_arena =
+      ::PROTOBUF_NAMESPACE_ID::Arena::GetArena(test_nested_message_role_upgrade_cfg);
     if (message_arena != submessage_arena) {
       test_nested_message_role_upgrade_cfg = ::PROTOBUF_NAMESPACE_ID::internal::GetOwnedMessage(
           message_arena, test_nested_message_role_upgrade_cfg, submessage_arena);
@@ -1092,15 +1116,15 @@ void arr_in_arr_test_nested_message::set_allocated_test_nested_message_role_upgr
   }
   // @@protoc_insertion_point(field_set_allocated:arr_in_arr.test_nested_message.test_nested_message_role_upgrade_cfg)
 }
-arr_in_arr_test_nested_message::arr_in_arr_test_nested_message()
-  : ::PROTOBUF_NAMESPACE_ID::Message(), _internal_metadata_(nullptr) {
+arr_in_arr_test_nested_message::arr_in_arr_test_nested_message(::PROTOBUF_NAMESPACE_ID::Arena* arena)
+  : ::PROTOBUF_NAMESPACE_ID::Message(arena) {
   SharedCtor();
-  // @@protoc_insertion_point(constructor:arr_in_arr.test_nested_message)
+  RegisterArenaDtor(arena);
+  // @@protoc_insertion_point(arena_constructor:arr_in_arr.test_nested_message)
 }
 arr_in_arr_test_nested_message::arr_in_arr_test_nested_message(const arr_in_arr_test_nested_message& from)
-  : ::PROTOBUF_NAMESPACE_ID::Message(),
-      _internal_metadata_(nullptr) {
-  _internal_metadata_.MergeFrom(from._internal_metadata_);
+  : ::PROTOBUF_NAMESPACE_ID::Message() {
+  _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
   clear_has_test_onof();
   switch (from.test_onof_case()) {
     case kTestNestedMessageInfoRole: {
@@ -1126,14 +1150,22 @@ void arr_in_arr_test_nested_message::SharedCtor() {
 arr_in_arr_test_nested_message::~arr_in_arr_test_nested_message() {
   // @@protoc_insertion_point(destructor:arr_in_arr.test_nested_message)
   SharedDtor();
+  _internal_metadata_.Delete<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
 }
 
 void arr_in_arr_test_nested_message::SharedDtor() {
+  GOOGLE_DCHECK(GetArena() == nullptr);
   if (has_test_onof()) {
     clear_test_onof();
   }
 }
 
+void arr_in_arr_test_nested_message::ArenaDtor(void* object) {
+  arr_in_arr_test_nested_message* _this = reinterpret_cast< arr_in_arr_test_nested_message* >(object);
+  (void)_this;
+}
+void arr_in_arr_test_nested_message::RegisterArenaDtor(::PROTOBUF_NAMESPACE_ID::Arena*) {
+}
 void arr_in_arr_test_nested_message::SetCachedSize(int size) const {
   _cached_size_.Set(size);
 }
@@ -1147,11 +1179,15 @@ void arr_in_arr_test_nested_message::clear_test_onof() {
 // @@protoc_insertion_point(one_of_clear_start:arr_in_arr.test_nested_message)
   switch (test_onof_case()) {
     case kTestNestedMessageInfoRole: {
-      delete test_onof_.test_nested_message_info_role_;
+      if (GetArena() == nullptr) {
+        delete test_onof_.test_nested_message_info_role_;
+      }
       break;
     }
     case kTestNestedMessageRoleUpgradeCfg: {
-      delete test_onof_.test_nested_message_role_upgrade_cfg_;
+      if (GetArena() == nullptr) {
+        delete test_onof_.test_nested_message_role_upgrade_cfg_;
+      }
       break;
     }
     case TEST_ONOF_NOT_SET: {
@@ -1169,11 +1205,12 @@ void arr_in_arr_test_nested_message::Clear() {
   (void) cached_has_bits;
 
   clear_test_onof();
-  _internal_metadata_.Clear();
+  _internal_metadata_.Clear<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
 }
 
 const char* arr_in_arr_test_nested_message::_InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) {
 #define CHK_(x) if (PROTOBUF_PREDICT_FALSE(!(x))) goto failure
+  ::PROTOBUF_NAMESPACE_ID::Arena* arena = GetArena(); (void)arena;
   while (!ctx->Done(&ptr)) {
     ::PROTOBUF_NAMESPACE_ID::uint32 tag;
     ptr = ::PROTOBUF_NAMESPACE_ID::internal::ReadTag(ptr, &tag);
@@ -1199,7 +1236,9 @@ const char* arr_in_arr_test_nested_message::_InternalParse(const char* ptr, ::PR
           ctx->SetLastTag(tag);
           goto success;
         }
-        ptr = UnknownFieldParse(tag, &_internal_metadata_, ptr, ctx);
+        ptr = UnknownFieldParse(tag,
+            _internal_metadata_.mutable_unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(),
+            ptr, ctx);
         CHK_(ptr != nullptr);
         continue;
       }
@@ -1237,7 +1276,7 @@ failure:
 
   if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::InternalSerializeUnknownFieldsToArray(
-        _internal_metadata_.unknown_fields(), target, stream);
+        _internal_metadata_.unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(::PROTOBUF_NAMESPACE_ID::UnknownFieldSet::default_instance), target, stream);
   }
   // @@protoc_insertion_point(serialize_to_array_end:arr_in_arr.test_nested_message)
   return target;
@@ -1297,7 +1336,7 @@ void arr_in_arr_test_nested_message::MergeFrom(const ::PROTOBUF_NAMESPACE_ID::Me
 void arr_in_arr_test_nested_message::MergeFrom(const arr_in_arr_test_nested_message& from) {
 // @@protoc_insertion_point(class_specific_merge_from_start:arr_in_arr.test_nested_message)
   GOOGLE_DCHECK_NE(&from, this);
-  _internal_metadata_.MergeFrom(from._internal_metadata_);
+  _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
   ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
@@ -1336,7 +1375,7 @@ bool arr_in_arr_test_nested_message::IsInitialized() const {
 
 void arr_in_arr_test_nested_message::InternalSwap(arr_in_arr_test_nested_message* other) {
   using std::swap;
-  _internal_metadata_.Swap(&other->_internal_metadata_);
+  _internal_metadata_.Swap<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(&other->_internal_metadata_);
   swap(test_onof_, other->test_onof_);
   swap(_oneof_case_[0], other->_oneof_case_[0]);
 }
@@ -1369,10 +1408,11 @@ arr_in_arr::_Internal::test_role_upgrade_cfg(const arr_in_arr* msg) {
   return *msg->test_onof_.test_role_upgrade_cfg_;
 }
 void arr_in_arr::set_allocated_test_info_role(::role_cfg* test_info_role) {
-  ::PROTOBUF_NAMESPACE_ID::Arena* message_arena = GetArenaNoVirtual();
+  ::PROTOBUF_NAMESPACE_ID::Arena* message_arena = GetArena();
   clear_test_onof();
   if (test_info_role) {
-    ::PROTOBUF_NAMESPACE_ID::Arena* submessage_arena = nullptr;
+    ::PROTOBUF_NAMESPACE_ID::Arena* submessage_arena =
+      ::PROTOBUF_NAMESPACE_ID::Arena::GetArena(test_info_role);
     if (message_arena != submessage_arena) {
       test_info_role = ::PROTOBUF_NAMESPACE_ID::internal::GetOwnedMessage(
           message_arena, test_info_role, submessage_arena);
@@ -1383,10 +1423,11 @@ void arr_in_arr::set_allocated_test_info_role(::role_cfg* test_info_role) {
   // @@protoc_insertion_point(field_set_allocated:arr_in_arr.test_info_role)
 }
 void arr_in_arr::set_allocated_test_role_upgrade_cfg(::role_upgrade_cfg* test_role_upgrade_cfg) {
-  ::PROTOBUF_NAMESPACE_ID::Arena* message_arena = GetArenaNoVirtual();
+  ::PROTOBUF_NAMESPACE_ID::Arena* message_arena = GetArena();
   clear_test_onof();
   if (test_role_upgrade_cfg) {
-    ::PROTOBUF_NAMESPACE_ID::Arena* submessage_arena = nullptr;
+    ::PROTOBUF_NAMESPACE_ID::Arena* submessage_arena =
+      ::PROTOBUF_NAMESPACE_ID::Arena::GetArena(test_role_upgrade_cfg);
     if (message_arena != submessage_arena) {
       test_role_upgrade_cfg = ::PROTOBUF_NAMESPACE_ID::internal::GetOwnedMessage(
           message_arena, test_role_upgrade_cfg, submessage_arena);
@@ -1396,20 +1437,23 @@ void arr_in_arr::set_allocated_test_role_upgrade_cfg(::role_upgrade_cfg* test_ro
   }
   // @@protoc_insertion_point(field_set_allocated:arr_in_arr.test_role_upgrade_cfg)
 }
-arr_in_arr::arr_in_arr()
-  : ::PROTOBUF_NAMESPACE_ID::Message(), _internal_metadata_(nullptr) {
+arr_in_arr::arr_in_arr(::PROTOBUF_NAMESPACE_ID::Arena* arena)
+  : ::PROTOBUF_NAMESPACE_ID::Message(arena),
+  int_arr_(arena),
+  str_arr_(arena) {
   SharedCtor();
-  // @@protoc_insertion_point(constructor:arr_in_arr)
+  RegisterArenaDtor(arena);
+  // @@protoc_insertion_point(arena_constructor:arr_in_arr)
 }
 arr_in_arr::arr_in_arr(const arr_in_arr& from)
   : ::PROTOBUF_NAMESPACE_ID::Message(),
-      _internal_metadata_(nullptr),
       int_arr_(from.int_arr_),
       str_arr_(from.str_arr_) {
-  _internal_metadata_.MergeFrom(from._internal_metadata_);
+  _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
   name_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
   if (!from._internal_name().empty()) {
-    name_.AssignWithDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), from.name_);
+    name_.Set(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), from._internal_name(),
+      GetArena());
   }
   clear_has_test_onof();
   switch (from.test_onof_case()) {
@@ -1437,15 +1481,23 @@ void arr_in_arr::SharedCtor() {
 arr_in_arr::~arr_in_arr() {
   // @@protoc_insertion_point(destructor:arr_in_arr)
   SharedDtor();
+  _internal_metadata_.Delete<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
 }
 
 void arr_in_arr::SharedDtor() {
+  GOOGLE_DCHECK(GetArena() == nullptr);
   name_.DestroyNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
   if (has_test_onof()) {
     clear_test_onof();
   }
 }
 
+void arr_in_arr::ArenaDtor(void* object) {
+  arr_in_arr* _this = reinterpret_cast< arr_in_arr* >(object);
+  (void)_this;
+}
+void arr_in_arr::RegisterArenaDtor(::PROTOBUF_NAMESPACE_ID::Arena*) {
+}
 void arr_in_arr::SetCachedSize(int size) const {
   _cached_size_.Set(size);
 }
@@ -1459,11 +1511,15 @@ void arr_in_arr::clear_test_onof() {
 // @@protoc_insertion_point(one_of_clear_start:arr_in_arr)
   switch (test_onof_case()) {
     case kTestInfoRole: {
-      delete test_onof_.test_info_role_;
+      if (GetArena() == nullptr) {
+        delete test_onof_.test_info_role_;
+      }
       break;
     }
     case kTestRoleUpgradeCfg: {
-      delete test_onof_.test_role_upgrade_cfg_;
+      if (GetArena() == nullptr) {
+        delete test_onof_.test_role_upgrade_cfg_;
+      }
       break;
     }
     case TEST_ONOF_NOT_SET: {
@@ -1482,13 +1538,14 @@ void arr_in_arr::Clear() {
 
   int_arr_.Clear();
   str_arr_.Clear();
-  name_.ClearToEmptyNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  name_.ClearToEmpty(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
   clear_test_onof();
-  _internal_metadata_.Clear();
+  _internal_metadata_.Clear<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
 }
 
 const char* arr_in_arr::_InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) {
 #define CHK_(x) if (PROTOBUF_PREDICT_FALSE(!(x))) goto failure
+  ::PROTOBUF_NAMESPACE_ID::Arena* arena = GetArena(); (void)arena;
   while (!ctx->Done(&ptr)) {
     ::PROTOBUF_NAMESPACE_ID::uint32 tag;
     ptr = ::PROTOBUF_NAMESPACE_ID::internal::ReadTag(ptr, &tag);
@@ -1509,7 +1566,7 @@ const char* arr_in_arr::_InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID:
           ptr = ::PROTOBUF_NAMESPACE_ID::internal::PackedInt32Parser(_internal_mutable_int_arr(), ptr, ctx);
           CHK_(ptr);
         } else if (static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 16) {
-          _internal_add_int_arr(::PROTOBUF_NAMESPACE_ID::internal::ReadVarint(&ptr));
+          _internal_add_int_arr(::PROTOBUF_NAMESPACE_ID::internal::ReadVarint64(&ptr));
           CHK_(ptr);
         } else goto handle_unusual;
         continue;
@@ -1547,7 +1604,9 @@ const char* arr_in_arr::_InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID:
           ctx->SetLastTag(tag);
           goto success;
         }
-        ptr = UnknownFieldParse(tag, &_internal_metadata_, ptr, ctx);
+        ptr = UnknownFieldParse(tag,
+            _internal_metadata_.mutable_unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(),
+            ptr, ctx);
         CHK_(ptr != nullptr);
         continue;
       }
@@ -1614,7 +1673,7 @@ failure:
 
   if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::InternalSerializeUnknownFieldsToArray(
-        _internal_metadata_.unknown_fields(), target, stream);
+        _internal_metadata_.unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(::PROTOBUF_NAMESPACE_ID::UnknownFieldSet::default_instance), target, stream);
   }
   // @@protoc_insertion_point(serialize_to_array_end:arr_in_arr)
   return target;
@@ -1704,15 +1763,14 @@ void arr_in_arr::MergeFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) {
 void arr_in_arr::MergeFrom(const arr_in_arr& from) {
 // @@protoc_insertion_point(class_specific_merge_from_start:arr_in_arr)
   GOOGLE_DCHECK_NE(&from, this);
-  _internal_metadata_.MergeFrom(from._internal_metadata_);
+  _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
   ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
   int_arr_.MergeFrom(from.int_arr_);
   str_arr_.MergeFrom(from.str_arr_);
   if (from.name().size() > 0) {
-
-    name_.AssignWithDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), from.name_);
+    _internal_set_name(from._internal_name());
   }
   switch (from.test_onof_case()) {
     case kTestInfoRole: {
@@ -1749,11 +1807,10 @@ bool arr_in_arr::IsInitialized() const {
 
 void arr_in_arr::InternalSwap(arr_in_arr* other) {
   using std::swap;
-  _internal_metadata_.Swap(&other->_internal_metadata_);
+  _internal_metadata_.Swap<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(&other->_internal_metadata_);
   int_arr_.InternalSwap(&other->int_arr_);
   str_arr_.InternalSwap(&other->str_arr_);
-  name_.Swap(&other->name_, &::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(),
-    GetArenaNoVirtual());
+  name_.Swap(&other->name_, &::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
   swap(test_onof_, other->test_onof_);
   swap(_oneof_case_[0], other->_oneof_case_[0]);
 }
@@ -1771,15 +1828,15 @@ class test_msg_verifier::_Internal {
  public:
 };
 
-test_msg_verifier::test_msg_verifier()
-  : ::PROTOBUF_NAMESPACE_ID::Message(), _internal_metadata_(nullptr) {
+test_msg_verifier::test_msg_verifier(::PROTOBUF_NAMESPACE_ID::Arena* arena)
+  : ::PROTOBUF_NAMESPACE_ID::Message(arena) {
   SharedCtor();
-  // @@protoc_insertion_point(constructor:test_msg_verifier)
+  RegisterArenaDtor(arena);
+  // @@protoc_insertion_point(arena_constructor:test_msg_verifier)
 }
 test_msg_verifier::test_msg_verifier(const test_msg_verifier& from)
-  : ::PROTOBUF_NAMESPACE_ID::Message(),
-      _internal_metadata_(nullptr) {
-  _internal_metadata_.MergeFrom(from._internal_metadata_);
+  : ::PROTOBUF_NAMESPACE_ID::Message() {
+  _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
   ::memcpy(&test_id_1_, &from.test_id_1_,
     static_cast<size_t>(reinterpret_cast<char*>(&test_id_2_) -
     reinterpret_cast<char*>(&test_id_1_)) + sizeof(test_id_2_));
@@ -1795,11 +1852,19 @@ void test_msg_verifier::SharedCtor() {
 test_msg_verifier::~test_msg_verifier() {
   // @@protoc_insertion_point(destructor:test_msg_verifier)
   SharedDtor();
+  _internal_metadata_.Delete<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
 }
 
 void test_msg_verifier::SharedDtor() {
+  GOOGLE_DCHECK(GetArena() == nullptr);
 }
 
+void test_msg_verifier::ArenaDtor(void* object) {
+  test_msg_verifier* _this = reinterpret_cast< test_msg_verifier* >(object);
+  (void)_this;
+}
+void test_msg_verifier::RegisterArenaDtor(::PROTOBUF_NAMESPACE_ID::Arena*) {
+}
 void test_msg_verifier::SetCachedSize(int size) const {
   _cached_size_.Set(size);
 }
@@ -1818,11 +1883,12 @@ void test_msg_verifier::Clear() {
   ::memset(&test_id_1_, 0, static_cast<size_t>(
       reinterpret_cast<char*>(&test_id_2_) -
       reinterpret_cast<char*>(&test_id_1_)) + sizeof(test_id_2_));
-  _internal_metadata_.Clear();
+  _internal_metadata_.Clear<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
 }
 
 const char* test_msg_verifier::_InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) {
 #define CHK_(x) if (PROTOBUF_PREDICT_FALSE(!(x))) goto failure
+  ::PROTOBUF_NAMESPACE_ID::Arena* arena = GetArena(); (void)arena;
   while (!ctx->Done(&ptr)) {
     ::PROTOBUF_NAMESPACE_ID::uint32 tag;
     ptr = ::PROTOBUF_NAMESPACE_ID::internal::ReadTag(ptr, &tag);
@@ -1831,14 +1897,14 @@ const char* test_msg_verifier::_InternalParse(const char* ptr, ::PROTOBUF_NAMESP
       // uint32 test_id_1 = 10001;
       case 10001:
         if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 136)) {
-          test_id_1_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint(&ptr);
+          test_id_1_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint32(&ptr);
           CHK_(ptr);
         } else goto handle_unusual;
         continue;
       // uint32 test_id_2 = 10002 [(.org.xresloader.field_alias) = "\346\265\213\350\257\225ID\345\210\253\345\220\2152"];
       case 10002:
         if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 144)) {
-          test_id_2_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint(&ptr);
+          test_id_2_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint32(&ptr);
           CHK_(ptr);
         } else goto handle_unusual;
         continue;
@@ -1848,7 +1914,9 @@ const char* test_msg_verifier::_InternalParse(const char* ptr, ::PROTOBUF_NAMESP
           ctx->SetLastTag(tag);
           goto success;
         }
-        ptr = UnknownFieldParse(tag, &_internal_metadata_, ptr, ctx);
+        ptr = UnknownFieldParse(tag,
+            _internal_metadata_.mutable_unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(),
+            ptr, ctx);
         CHK_(ptr != nullptr);
         continue;
       }
@@ -1882,7 +1950,7 @@ failure:
 
   if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::InternalSerializeUnknownFieldsToArray(
-        _internal_metadata_.unknown_fields(), target, stream);
+        _internal_metadata_.unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(::PROTOBUF_NAMESPACE_ID::UnknownFieldSet::default_instance), target, stream);
   }
   // @@protoc_insertion_point(serialize_to_array_end:test_msg_verifier)
   return target;
@@ -1937,7 +2005,7 @@ void test_msg_verifier::MergeFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) 
 void test_msg_verifier::MergeFrom(const test_msg_verifier& from) {
 // @@protoc_insertion_point(class_specific_merge_from_start:test_msg_verifier)
   GOOGLE_DCHECK_NE(&from, this);
-  _internal_metadata_.MergeFrom(from._internal_metadata_);
+  _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
   ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
@@ -1969,9 +2037,13 @@ bool test_msg_verifier::IsInitialized() const {
 
 void test_msg_verifier::InternalSwap(test_msg_verifier* other) {
   using std::swap;
-  _internal_metadata_.Swap(&other->_internal_metadata_);
-  swap(test_id_1_, other->test_id_1_);
-  swap(test_id_2_, other->test_id_2_);
+  _internal_metadata_.Swap<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(&other->_internal_metadata_);
+  ::PROTOBUF_NAMESPACE_ID::internal::memswap<
+      PROTOBUF_FIELD_OFFSET(test_msg_verifier, test_id_2_)
+      + sizeof(test_msg_verifier::test_id_2_)
+      - PROTOBUF_FIELD_OFFSET(test_msg_verifier, test_id_1_)>(
+          reinterpret_cast<char*>(&test_id_1_),
+          reinterpret_cast<char*>(&other->test_id_1_));
 }
 
 ::PROTOBUF_NAMESPACE_ID::Metadata test_msg_verifier::GetMetadata() const {
@@ -1994,19 +2066,23 @@ const ::test_msg_verifier&
 arr_in_arr_cfg::_Internal::test_plain_msg(const arr_in_arr_cfg* msg) {
   return *msg->test_plain_msg_;
 }
-arr_in_arr_cfg::arr_in_arr_cfg()
-  : ::PROTOBUF_NAMESPACE_ID::Message(), _internal_metadata_(nullptr) {
+arr_in_arr_cfg::arr_in_arr_cfg(::PROTOBUF_NAMESPACE_ID::Arena* arena)
+  : ::PROTOBUF_NAMESPACE_ID::Message(arena),
+  arr_(arena),
+  test_plain_int_arr_(arena),
+  test_plain_enum_arr_(arena),
+  test_plain_msg_arr_(arena) {
   SharedCtor();
-  // @@protoc_insertion_point(constructor:arr_in_arr_cfg)
+  RegisterArenaDtor(arena);
+  // @@protoc_insertion_point(arena_constructor:arr_in_arr_cfg)
 }
 arr_in_arr_cfg::arr_in_arr_cfg(const arr_in_arr_cfg& from)
   : ::PROTOBUF_NAMESPACE_ID::Message(),
-      _internal_metadata_(nullptr),
       arr_(from.arr_),
       test_plain_int_arr_(from.test_plain_int_arr_),
       test_plain_enum_arr_(from.test_plain_enum_arr_),
       test_plain_msg_arr_(from.test_plain_msg_arr_) {
-  _internal_metadata_.MergeFrom(from._internal_metadata_);
+  _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
   if (from._internal_has_test_plain_msg()) {
     test_plain_msg_ = new ::test_msg_verifier(*from.test_plain_msg_);
   } else {
@@ -2026,12 +2102,20 @@ void arr_in_arr_cfg::SharedCtor() {
 arr_in_arr_cfg::~arr_in_arr_cfg() {
   // @@protoc_insertion_point(destructor:arr_in_arr_cfg)
   SharedDtor();
+  _internal_metadata_.Delete<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
 }
 
 void arr_in_arr_cfg::SharedDtor() {
+  GOOGLE_DCHECK(GetArena() == nullptr);
   if (this != internal_default_instance()) delete test_plain_msg_;
 }
 
+void arr_in_arr_cfg::ArenaDtor(void* object) {
+  arr_in_arr_cfg* _this = reinterpret_cast< arr_in_arr_cfg* >(object);
+  (void)_this;
+}
+void arr_in_arr_cfg::RegisterArenaDtor(::PROTOBUF_NAMESPACE_ID::Arena*) {
+}
 void arr_in_arr_cfg::SetCachedSize(int size) const {
   _cached_size_.Set(size);
 }
@@ -2051,16 +2135,17 @@ void arr_in_arr_cfg::Clear() {
   test_plain_int_arr_.Clear();
   test_plain_enum_arr_.Clear();
   test_plain_msg_arr_.Clear();
-  if (GetArenaNoVirtual() == nullptr && test_plain_msg_ != nullptr) {
+  if (GetArena() == nullptr && test_plain_msg_ != nullptr) {
     delete test_plain_msg_;
   }
   test_plain_msg_ = nullptr;
   id_ = 0u;
-  _internal_metadata_.Clear();
+  _internal_metadata_.Clear<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
 }
 
 const char* arr_in_arr_cfg::_InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) {
 #define CHK_(x) if (PROTOBUF_PREDICT_FALSE(!(x))) goto failure
+  ::PROTOBUF_NAMESPACE_ID::Arena* arena = GetArena(); (void)arena;
   while (!ctx->Done(&ptr)) {
     ::PROTOBUF_NAMESPACE_ID::uint32 tag;
     ptr = ::PROTOBUF_NAMESPACE_ID::internal::ReadTag(ptr, &tag);
@@ -2069,7 +2154,7 @@ const char* arr_in_arr_cfg::_InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE
       // uint32 id = 1 [(.org.xresloader.field_description) = "This is a Key", (.org.xresloader.ue.key_tag) = 1];
       case 1:
         if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 8)) {
-          id_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint(&ptr);
+          id_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint32(&ptr);
           CHK_(ptr);
         } else goto handle_unusual;
         continue;
@@ -2091,7 +2176,7 @@ const char* arr_in_arr_cfg::_InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE
           ptr = ::PROTOBUF_NAMESPACE_ID::internal::PackedInt32Parser(_internal_mutable_test_plain_int_arr(), ptr, ctx);
           CHK_(ptr);
         } else if (static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 24) {
-          _internal_add_test_plain_int_arr(::PROTOBUF_NAMESPACE_ID::internal::ReadVarint(&ptr));
+          _internal_add_test_plain_int_arr(::PROTOBUF_NAMESPACE_ID::internal::ReadVarint64(&ptr));
           CHK_(ptr);
         } else goto handle_unusual;
         continue;
@@ -2101,7 +2186,7 @@ const char* arr_in_arr_cfg::_InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE
           ptr = ::PROTOBUF_NAMESPACE_ID::internal::PackedEnumParser(_internal_mutable_test_plain_enum_arr(), ptr, ctx);
           CHK_(ptr);
         } else if (static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 32) {
-          ::PROTOBUF_NAMESPACE_ID::uint64 val = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint(&ptr);
+          ::PROTOBUF_NAMESPACE_ID::uint64 val = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint64(&ptr);
           CHK_(ptr);
           _internal_add_test_plain_enum_arr(static_cast<::cost_type>(val));
         } else goto handle_unusual;
@@ -2131,7 +2216,9 @@ const char* arr_in_arr_cfg::_InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE
           ctx->SetLastTag(tag);
           goto success;
         }
-        ptr = UnknownFieldParse(tag, &_internal_metadata_, ptr, ctx);
+        ptr = UnknownFieldParse(tag,
+            _internal_metadata_.mutable_unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(),
+            ptr, ctx);
         CHK_(ptr != nullptr);
         continue;
       }
@@ -2201,7 +2288,7 @@ failure:
 
   if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::InternalSerializeUnknownFieldsToArray(
-        _internal_metadata_.unknown_fields(), target, stream);
+        _internal_metadata_.unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(::PROTOBUF_NAMESPACE_ID::UnknownFieldSet::default_instance), target, stream);
   }
   // @@protoc_insertion_point(serialize_to_array_end:arr_in_arr_cfg)
   return target;
@@ -2303,7 +2390,7 @@ void arr_in_arr_cfg::MergeFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) {
 void arr_in_arr_cfg::MergeFrom(const arr_in_arr_cfg& from) {
 // @@protoc_insertion_point(class_specific_merge_from_start:arr_in_arr_cfg)
   GOOGLE_DCHECK_NE(&from, this);
-  _internal_metadata_.MergeFrom(from._internal_metadata_);
+  _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
   ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
@@ -2339,13 +2426,17 @@ bool arr_in_arr_cfg::IsInitialized() const {
 
 void arr_in_arr_cfg::InternalSwap(arr_in_arr_cfg* other) {
   using std::swap;
-  _internal_metadata_.Swap(&other->_internal_metadata_);
+  _internal_metadata_.Swap<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(&other->_internal_metadata_);
   arr_.InternalSwap(&other->arr_);
   test_plain_int_arr_.InternalSwap(&other->test_plain_int_arr_);
   test_plain_enum_arr_.InternalSwap(&other->test_plain_enum_arr_);
   test_plain_msg_arr_.InternalSwap(&other->test_plain_msg_arr_);
-  swap(test_plain_msg_, other->test_plain_msg_);
-  swap(id_, other->id_);
+  ::PROTOBUF_NAMESPACE_ID::internal::memswap<
+      PROTOBUF_FIELD_OFFSET(arr_in_arr_cfg, id_)
+      + sizeof(arr_in_arr_cfg::id_)
+      - PROTOBUF_FIELD_OFFSET(arr_in_arr_cfg, test_plain_msg_)>(
+          reinterpret_cast<char*>(&test_plain_msg_),
+          reinterpret_cast<char*>(&other->test_plain_msg_));
 }
 
 ::PROTOBUF_NAMESPACE_ID::Metadata arr_in_arr_cfg::GetMetadata() const {
@@ -2356,22 +2447,22 @@ void arr_in_arr_cfg::InternalSwap(arr_in_arr_cfg* other) {
 // @@protoc_insertion_point(namespace_scope)
 PROTOBUF_NAMESPACE_OPEN
 template<> PROTOBUF_NOINLINE ::role_cfg* Arena::CreateMaybeMessage< ::role_cfg >(Arena* arena) {
-  return Arena::CreateInternal< ::role_cfg >(arena);
+  return Arena::CreateMessageInternal< ::role_cfg >(arena);
 }
 template<> PROTOBUF_NOINLINE ::role_upgrade_cfg* Arena::CreateMaybeMessage< ::role_upgrade_cfg >(Arena* arena) {
-  return Arena::CreateInternal< ::role_upgrade_cfg >(arena);
+  return Arena::CreateMessageInternal< ::role_upgrade_cfg >(arena);
 }
 template<> PROTOBUF_NOINLINE ::arr_in_arr_test_nested_message* Arena::CreateMaybeMessage< ::arr_in_arr_test_nested_message >(Arena* arena) {
-  return Arena::CreateInternal< ::arr_in_arr_test_nested_message >(arena);
+  return Arena::CreateMessageInternal< ::arr_in_arr_test_nested_message >(arena);
 }
 template<> PROTOBUF_NOINLINE ::arr_in_arr* Arena::CreateMaybeMessage< ::arr_in_arr >(Arena* arena) {
-  return Arena::CreateInternal< ::arr_in_arr >(arena);
+  return Arena::CreateMessageInternal< ::arr_in_arr >(arena);
 }
 template<> PROTOBUF_NOINLINE ::test_msg_verifier* Arena::CreateMaybeMessage< ::test_msg_verifier >(Arena* arena) {
-  return Arena::CreateInternal< ::test_msg_verifier >(arena);
+  return Arena::CreateMessageInternal< ::test_msg_verifier >(arena);
 }
 template<> PROTOBUF_NOINLINE ::arr_in_arr_cfg* Arena::CreateMaybeMessage< ::arr_in_arr_cfg >(Arena* arena) {
-  return Arena::CreateInternal< ::arr_in_arr_cfg >(arena);
+  return Arena::CreateMessageInternal< ::arr_in_arr_cfg >(arena);
 }
 PROTOBUF_NAMESPACE_CLOSE
 

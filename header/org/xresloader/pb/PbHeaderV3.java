@@ -75,7 +75,7 @@ public final class PbHeaderV3 {
   /**
    * Protobuf type {@code org.xresloader.pb.xresloader_header}
    */
-  public  static final class xresloader_header extends
+  public static final class xresloader_header extends
       com.google.protobuf.GeneratedMessageV3 implements
       // @@protoc_insertion_point(message_implements:org.xresloader.pb.xresloader_header)
       xresloader_headerOrBuilder {
@@ -188,6 +188,7 @@ public final class PbHeaderV3 {
      * <code>string xres_ver = 1;</code>
      * @return The xresVer.
      */
+    @java.lang.Override
     public java.lang.String getXresVer() {
       java.lang.Object ref = xresVer_;
       if (ref instanceof java.lang.String) {
@@ -204,6 +205,7 @@ public final class PbHeaderV3 {
      * <code>string xres_ver = 1;</code>
      * @return The bytes for xresVer.
      */
+    @java.lang.Override
     public com.google.protobuf.ByteString
         getXresVerBytes() {
       java.lang.Object ref = xresVer_;
@@ -224,6 +226,7 @@ public final class PbHeaderV3 {
      * <code>string data_ver = 2;</code>
      * @return The dataVer.
      */
+    @java.lang.Override
     public java.lang.String getDataVer() {
       java.lang.Object ref = dataVer_;
       if (ref instanceof java.lang.String) {
@@ -240,6 +243,7 @@ public final class PbHeaderV3 {
      * <code>string data_ver = 2;</code>
      * @return The bytes for dataVer.
      */
+    @java.lang.Override
     public com.google.protobuf.ByteString
         getDataVerBytes() {
       java.lang.Object ref = dataVer_;
@@ -260,6 +264,7 @@ public final class PbHeaderV3 {
      * <code>uint32 count = 3;</code>
      * @return The count.
      */
+    @java.lang.Override
     public int getCount() {
       return count_;
     }
@@ -270,6 +275,7 @@ public final class PbHeaderV3 {
      * <code>string hash_code = 4;</code>
      * @return The hashCode.
      */
+    @java.lang.Override
     public java.lang.String getHashCode() {
       java.lang.Object ref = hashCode_;
       if (ref instanceof java.lang.String) {
@@ -286,6 +292,7 @@ public final class PbHeaderV3 {
      * <code>string hash_code = 4;</code>
      * @return The bytes for hashCode.
      */
+    @java.lang.Override
     public com.google.protobuf.ByteString
         getHashCodeBytes() {
       java.lang.Object ref = hashCode_;
@@ -306,6 +313,7 @@ public final class PbHeaderV3 {
      * <code>string description = 5;</code>
      * @return The description.
      */
+    @java.lang.Override
     public java.lang.String getDescription() {
       java.lang.Object ref = description_;
       if (ref instanceof java.lang.String) {
@@ -322,6 +330,7 @@ public final class PbHeaderV3 {
      * <code>string description = 5;</code>
      * @return The bytes for description.
      */
+    @java.lang.Override
     public com.google.protobuf.ByteString
         getDescriptionBytes() {
       java.lang.Object ref = description_;
@@ -863,6 +872,7 @@ public final class PbHeaderV3 {
        * <code>uint32 count = 3;</code>
        * @return The count.
        */
+      @java.lang.Override
       public int getCount() {
         return count_;
       }
@@ -1143,7 +1153,7 @@ public final class PbHeaderV3 {
   /**
    * Protobuf type {@code org.xresloader.pb.xresloader_datablocks}
    */
-  public  static final class xresloader_datablocks extends
+  public static final class xresloader_datablocks extends
       com.google.protobuf.GeneratedMessageV3 implements
       // @@protoc_insertion_point(message_implements:org.xresloader.pb.xresloader_datablocks)
       xresloader_datablocksOrBuilder {
@@ -1256,6 +1266,7 @@ public final class PbHeaderV3 {
      * <code>.org.xresloader.pb.xresloader_header header = 1;</code>
      * @return Whether the header field is set.
      */
+    @java.lang.Override
     public boolean hasHeader() {
       return header_ != null;
     }
@@ -1263,12 +1274,14 @@ public final class PbHeaderV3 {
      * <code>.org.xresloader.pb.xresloader_header header = 1;</code>
      * @return The header.
      */
+    @java.lang.Override
     public org.xresloader.pb.PbHeaderV3.xresloader_header getHeader() {
       return header_ == null ? org.xresloader.pb.PbHeaderV3.xresloader_header.getDefaultInstance() : header_;
     }
     /**
      * <code>.org.xresloader.pb.xresloader_header header = 1;</code>
      */
+    @java.lang.Override
     public org.xresloader.pb.PbHeaderV3.xresloader_headerOrBuilder getHeaderOrBuilder() {
       return getHeader();
     }
@@ -1279,6 +1292,7 @@ public final class PbHeaderV3 {
      * <code>repeated bytes data_block = 2;</code>
      * @return A list containing the dataBlock.
      */
+    @java.lang.Override
     public java.util.List<com.google.protobuf.ByteString>
         getDataBlockList() {
       return dataBlock_;
@@ -1305,6 +1319,7 @@ public final class PbHeaderV3 {
      * <code>string data_message_type = 3;</code>
      * @return The dataMessageType.
      */
+    @java.lang.Override
     public java.lang.String getDataMessageType() {
       java.lang.Object ref = dataMessageType_;
       if (ref instanceof java.lang.String) {
@@ -1321,6 +1336,7 @@ public final class PbHeaderV3 {
      * <code>string data_message_type = 3;</code>
      * @return The bytes for dataMessageType.
      */
+    @java.lang.Override
     public com.google.protobuf.ByteString
         getDataMessageTypeBytes() {
       java.lang.Object ref = dataMessageType_;

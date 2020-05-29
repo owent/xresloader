@@ -14,6 +14,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Map;
 import com.google.protobuf.ByteString;
 import com.google.protobuf.DescriptorProtos;
@@ -26,6 +27,7 @@ import org.xresloader.Xresloader;
 import org.xresloader.core.ProgramOptions;
 import org.xresloader.core.data.dst.DataDstWriterNode.DataDstChildrenNode;
 import org.xresloader.core.data.dst.DataDstWriterNode.DataDstFieldDescriptor;
+import org.xresloader.core.data.dst.DataDstWriterNode.DataDstOneofDescriptor;
 import org.xresloader.core.data.dst.DataDstWriterNode.DataDstMessageDescriptor;
 import org.xresloader.core.data.err.ConvException;
 import org.xresloader.core.data.src.DataContainer;
@@ -33,7 +35,8 @@ import org.xresloader.core.data.src.DataSrcImpl;
 import org.xresloader.core.data.vfy.DataVerifyImpl;
 import org.xresloader.core.data.vfy.DataVerifyIntRange;
 import org.xresloader.core.data.vfy.DataVerifyPbEnum;
-import org.xresloader.core.data.vfy.DataVerifyPbMsg;
+import org.xresloader.core.data.vfy.DataVerifyPbMsgField;
+import org.xresloader.core.data.vfy.DataVerifyPbOneof;
 import org.xresloader.core.engine.IdentifyDescriptor;
 import org.xresloader.core.scheme.SchemeConf;
 import org.xresloader.pb.PbHeaderV3;
@@ -61,6 +64,8 @@ public class DataDstPb extends DataDstImpl {
         public HashMap<String, PbAliasNode<DescriptorProtos.DescriptorProto>> messages = new HashMap<String, PbAliasNode<DescriptorProtos.DescriptorProto>>();
         /*** 描述信息-枚举描述集合 ***/
         public HashMap<String, PbAliasNode<DescriptorProtos.EnumDescriptorProto>> enums = new HashMap<String, PbAliasNode<DescriptorProtos.EnumDescriptorProto>>();
+        /*** 描述信息-oneof描述集合 ***/
+        public HashMap<String, PbAliasNode<DescriptorProtos.OneofDescriptorProto>> oneofs = new HashMap<String, PbAliasNode<DescriptorProtos.OneofDescriptorProto>>();
 
         // ========================== 配置描述集 ==========================
         /*** 类型信息-文件描述器集合 ***/
@@ -146,6 +151,13 @@ public class DataDstPb extends DataDstImpl {
         append_alias_list(mdp.getName(), full_name, pbs.messages, mdp);
         for (DescriptorProtos.DescriptorProto sub_mdp : mdp.getNestedTypeList()) {
             load_pb_message(pbs, sub_mdp, full_name, hashmap);
+        }
+
+        // oneof
+        for (DescriptorProtos.OneofDescriptorProto oneof_desc : mdp.getOneofDeclList()) {
+            append_alias_list(oneof_desc.getName(),
+                    String.format("%s.%s.%s", package_name, mdp.getName(), oneof_desc.getName()), pbs.oneofs,
+                    oneof_desc);
         }
     }
 
@@ -314,6 +326,82 @@ public class DataDstPb extends DataDstImpl {
         }
     }
 
+    static private void setup_extension(DataDstOneofDescriptor child_field, Descriptors.Descriptor container,
+            Descriptors.OneofDescriptor fd) {
+        LinkedList<DataVerifyImpl> gen = setup_verifier(container, fd);
+        if (gen != null && !gen.isEmpty()) {
+            for (DataVerifyImpl vfy : gen) {
+                child_field.addVerifier(vfy);
+            }
+        } else {
+            child_field.resetVerifier();
+        }
+
+        if (fd.getOptions().hasExtension(Xresloader.oneofDescription)) {
+            child_field.mutableExtension().description = fd.getOptions().getExtension(Xresloader.oneofDescription);
+        }
+
+        if (fd.getOptions().hasExtension(Xresloader.oneofSeparator)) {
+            child_field.mutableExtension().plainSeparator = fd.getOptions().getExtension(Xresloader.oneofSeparator);
+        }
+    }
+
+    static private LinkedList<DataVerifyImpl> setup_verifier(Descriptors.Descriptor container,
+            Descriptors.OneofDescriptor fd) {
+        LinkedList<DataVerifyImpl> ret = new LinkedList<DataVerifyImpl>();
+
+        String rule = String.format("%s.%s.%s", container.getFile().getPackage(), container.getName(), fd.getName());
+        {
+            DataVerifyImpl vfy = cachePbs.identifiers.getOrDefault(rule, null);
+            // 命中缓存
+            if (null != vfy) {
+                ret.add(vfy);
+                return ret;
+            }
+        }
+
+        PbAliasNode<DescriptorProtos.OneofDescriptorProto> fd_desc = cachePbs.oneofs.getOrDefault(rule, null);
+        if (fd_desc == null || fd_desc.element == null) {
+            return ret;
+        }
+
+        DataVerifyPbOneof new_vfy = new DataVerifyPbOneof(fd_desc.element);
+        cachePbs.identifiers.put(rule, new_vfy);
+        ret.add(new_vfy);
+
+        for (Descriptors.FieldDescriptor sub_field : fd.getFields()) {
+            String sub_rule = sub_field.getFullName();
+            if (sub_rule.length() > 0 && rule.charAt(0) == '.') {
+                sub_rule = sub_rule.substring(1);
+            }
+
+            DataVerifyImpl sub_vfy = cachePbs.identifiers.getOrDefault(sub_rule, null);
+            if (sub_vfy != null) {
+                new_vfy.addSubVerify(Long.valueOf(sub_field.getNumber()), sub_vfy);
+                new_vfy.addSubVerify(sub_field.getName(), sub_vfy);
+                if (sub_field.getOptions().hasExtension(Xresloader.fieldAlias)) {
+                    new_vfy.addSubVerify(sub_field.getOptions().getExtension(Xresloader.fieldAlias), sub_vfy);
+                }
+                continue;
+            }
+
+            String verifier_expr = null;
+            if (sub_field.getOptions().hasExtension(Xresloader.verifier)) {
+                verifier_expr = sub_field.getOptions().getExtension(Xresloader.verifier);
+            }
+            LinkedList<DataVerifyImpl> gen = setup_verifier(verifier_expr, sub_field);
+            if (gen != null && !gen.isEmpty()) {
+                for (DataVerifyImpl vfy : gen) {
+                    child_field.addVerifier(vfy);
+                }
+            } else {
+                child_field.resetVerifier();
+            }
+        }
+
+        return ret;
+    }
+
     static private LinkedList<DataVerifyImpl> setup_verifier(String verifier, Descriptors.FieldDescriptor fd) {
         if (!(verifier != null && !verifier.trim().isEmpty()) && !(fd != null && fd.getJavaType() == JavaType.ENUM)) {
             return null;
@@ -350,7 +438,7 @@ public class DataDstPb extends DataDstImpl {
                             DescriptorProtos.DescriptorProto msg_desc = get_alias_list_element(rule, cachePbs.messages,
                                     "message type");
                             if (msg_desc != null) {
-                                vfy = new DataVerifyPbMsg(msg_desc);
+                                vfy = new DataVerifyPbMsgField(msg_desc);
                             }
                         }
 
@@ -373,7 +461,10 @@ public class DataDstPb extends DataDstImpl {
 
         // auto verifier for enum
         if (fd != null && fd.getJavaType() == JavaType.ENUM) {
-            String rule = String.format("%s.%s", fd.getFile().getPackage(), fd.getEnumType().getName());
+            String rule = fd.getFullName();
+            if (rule.length() > 0 && rule.charAt(0) == '.') {
+                rule = rule.substring(1);
+            }
             DataVerifyImpl vfy = cachePbs.identifiers.getOrDefault(rule, null);
             if (null == vfy) {
                 DescriptorProtos.EnumDescriptorProto enum_desc = get_alias_list_element(rule, cachePbs.enums,
@@ -487,6 +578,21 @@ public class DataDstPb extends DataDstImpl {
             innerDesc.fields.put(field.getName(), innerField);
 
             setup_extension(innerField, field);
+        }
+
+        for (Descriptors.OneofDescriptor oneof : pbDesc.getOneofs()) {
+            HashMap<String, DataDstFieldDescriptor> fields = new HashMap<String, DataDstFieldDescriptor>();
+            for (Descriptors.FieldDescriptor field : pbDesc.getFields()) {
+                DataDstFieldDescriptor find_field = innerDesc.fields.getOrDefault(field.getName(), null);
+                if (find_field != null) {
+                    fields.put(field.getName(), find_field);
+                }
+            }
+            DataDstOneofDescriptor innerField = new DataDstOneofDescriptor(fields, oneof.getIndex(), oneof.getName(),
+                    oneof);
+            innerDesc.oneofs.put(oneof.getName(), innerField);
+
+            setup_extension(innerField, pbDesc, oneof);
         }
     }
 
@@ -840,6 +946,8 @@ public class DataDstPb extends DataDstImpl {
                 }
             }
         }
+
+        // TODO 索引oneof
 
         if (missingFields != null && missingOneof != null && (!missingFields.isEmpty() || !missingOneof.isEmpty())) {
             String missingFliedDesc = "";

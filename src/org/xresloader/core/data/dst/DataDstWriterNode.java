@@ -49,6 +49,11 @@ public class DataDstWriterNode {
         }
     }
 
+    static public class DataDstOneofExt {
+        public String description = null;
+        public String plainSeparator = null;
+    }
+
     static public class DataDstMessageExtUE {
         public String helper = null;
         public boolean notDataTable = false;
@@ -153,6 +158,99 @@ public class DataDstWriterNode {
         }
     }
 
+    static public class DataDstOneofDescriptor {
+        private int index = 0;
+        private String name = null;
+        private HashMap<String, DataDstFieldDescriptor> fields = null;
+        private ArrayList<DataDstFieldDescriptor> sortedFields = null;
+        private DataDstMessageDescriptor typeDescriptor = null;
+        private DataDstOneofExt extension = null;
+        private List<DataVerifyImpl> verifyEngine = null;
+        private Object rawDescriptor = null;
+
+        public DataDstOneofDescriptor(HashMap<String, DataDstFieldDescriptor> fields, int index, String name,
+                Object rawDesc) {
+            this.fields = fields;
+            this.index = index;
+            this.name = name;
+
+            this.rawDescriptor = rawDesc;
+        }
+
+        public Object getRawDescriptor() {
+            return rawDescriptor;
+        }
+
+        public boolean hasVerifier() {
+            return null != verifyEngine && false == verifyEngine.isEmpty();
+        }
+
+        public void resetVerifier() {
+            verifyEngine = null;
+        }
+
+        public void addVerifier(DataVerifyImpl ver) {
+            if (null == ver) {
+                return;
+            }
+
+            if (null == verifyEngine) {
+                verifyEngine = new LinkedList<DataVerifyImpl>();
+            }
+
+            verifyEngine.add(ver);
+        }
+
+        public List<DataVerifyImpl> getVerifier() {
+            return verifyEngine;
+        }
+
+        public JAVA_TYPE getType() {
+            return typeDescriptor.getType();
+        }
+
+        public DataDstMessageDescriptor getTypeDescriptor() {
+            return this.typeDescriptor;
+        }
+
+        public int getIndex() {
+            return this.index;
+        }
+
+        public String getName() {
+            return this.name;
+        }
+
+        public DataDstOneofExt mutableExtension() {
+            if (null != extension) {
+                return extension;
+            }
+
+            extension = new DataDstOneofExt();
+            return extension;
+        }
+
+        public ArrayList<DataDstFieldDescriptor> getSortedFields() {
+            if (fields == null) {
+                return null;
+            }
+
+            if (sortedFields != null && sortedFields.size() == fields.size()) {
+                return sortedFields;
+            }
+
+            sortedFields = new ArrayList<DataDstFieldDescriptor>();
+            sortedFields.ensureCapacity(fields.size());
+            for (HashMap.Entry<String, DataDstFieldDescriptor> d : fields.entrySet()) {
+                sortedFields.add(d.getValue());
+            }
+            sortedFields.sort((l, r) -> {
+                return Integer.compare(l.getIndex(), r.getIndex());
+            });
+            return sortedFields;
+        }
+    }
+
     static public class DataDstMessageDescriptor {
         private JAVA_TYPE type = JAVA_TYPE.INT;
         private String packageName = null;
@@ -160,7 +258,9 @@ public class DataDstWriterNode {
         private String fullName = null;
         private DataDstMessageExt extension = null;
         public HashMap<String, DataDstFieldDescriptor> fields = null;
+        public HashMap<String, DataDstOneofDescriptor> oneofs = null;
         private ArrayList<DataDstFieldDescriptor> sortedFields = null;
+        private ArrayList<DataDstOneofDescriptor> sortedOneofs = null;
         private Object rawDescriptor = null;
 
         public DataDstMessageDescriptor(JAVA_TYPE type, String pkgName, String msgName, Object rawDesc) {
@@ -231,6 +331,27 @@ public class DataDstWriterNode {
             });
             return sortedFields;
         }
+
+        public ArrayList<DataDstOneofDescriptor> getSortedOneofs() {
+            if (fields == null) {
+                return null;
+            }
+
+            if (sortedOneofs != null && sortedOneofs.size() == fields.size()) {
+                return sortedOneofs;
+            }
+
+            sortedOneofs = new ArrayList<DataDstOneofDescriptor>();
+            sortedOneofs.ensureCapacity(fields.size());
+            for (HashMap.Entry<String, DataDstOneofDescriptor> d : oneofs.entrySet()) {
+                sortedOneofs.add(d.getValue());
+            }
+            sortedOneofs.sort((l, r) -> {
+                return Integer.compare(l.getIndex(), r.getIndex());
+            });
+            return sortedOneofs;
+        }
+
     }
 
     public static class DataDstChildrenNode {

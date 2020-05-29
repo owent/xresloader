@@ -78,3 +78,23 @@ message arr_in_arr_cfg {
     test_msg_verifier  test_plain_msg             = 5 [ (org.xresloader.field_separator) = "&" ];
     repeated test_msg_verifier test_plain_msg_arr = 6;
 }
+
+message event_reward_item {
+    uint32 item_id    = 1;
+    uint32 item_count = 2;
+}
+
+message event_cfg {
+    option (org.xresloader.ue.helper)       = "helper";
+    option (org.xresloader.msg_description) = "Test role_upgrade_cfg with oneof fields";
+
+    uint32 id          = 1 [ (org.xresloader.ue.key_tag) = 100 ];
+    uint32 process     = 2 [ (org.xresloader.ue.key_tag) = 1 ];
+    
+    oneof reward {
+        event_reward_item item      = 11 [ (org.xresloader.field_alias) = "奖励道具" ];
+        int64             user_exp  = 12 [ (org.xresloader.field_alias) = "奖励经验" ];
+        string            note      = 13 [ (org.xresloader.field_alias) = "描述文本" ];
+        cost_type         enum_type = 14 [ (org.xresloader.field_alias) = "货币类型" ];
+    }
+}

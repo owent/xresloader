@@ -32,6 +32,7 @@ extend google.protobuf.FieldOptions {
 
 extend google.protobuf.OneofOptions {
     string oneof_description = 1001; // 描述信息（不同的输出可能有不同的功能）
+    string oneof_separator   = 1002; // Plain模式字段分隔符（默认为: ,;|）
 
     // 用户自定义扩展字段请使用 2000 to max;
 }

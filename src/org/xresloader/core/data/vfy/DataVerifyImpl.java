@@ -5,10 +5,9 @@ import java.util.HashSet;
 import java.util.List;
 
 import org.xresloader.core.data.err.ConvException;
-import org.xresloader.core.data.src.DataSrcImpl;
 
 /**
- * Created by owt50 on 2016/12/7.
+ * Created by owent on 2016/12/7.
  */
 
 public abstract class DataVerifyImpl {

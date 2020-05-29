@@ -34,5 +34,29 @@
         },
         "bSkipReadOnly": "true",
         "bReplaceExisting": "true"
+    },
+    {
+        "GroupName": "XResConfig",
+        "DestinationPath": "ConfigRec",
+        "FactoryName": "ReimportDataTableFactory",
+        "Filenames": ["D:\\workspace\\github\\xresloader\\xresloader\\sample\\proto_v2\\csv\\ArrInArrCfgRec.csv"],
+        "ImportSettings": {
+            "ImportType": "ECSV_DataTable",
+            "ImportRowStruct": "ArrInArrCfg"
+        },
+        "bSkipReadOnly": "true",
+        "bReplaceExisting": "true"
+    },
+    {
+        "GroupName": "XResConfig",
+        "DestinationPath": "ConfigRec",
+        "FactoryName": "ReimportDataTableFactory",
+        "Filenames": ["D:\\workspace\\github\\xresloader\\xresloader\\sample\\proto_v2\\csv\\RoleUpgradeCfgRec.csv"],
+        "ImportSettings": {
+            "ImportType": "ECSV_DataTable",
+            "ImportRowStruct": "RoleUpgradeCfg"
+        },
+        "bSkipReadOnly": "true",
+        "bReplaceExisting": "true"
     }
 ]}

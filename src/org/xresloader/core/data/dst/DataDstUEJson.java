@@ -305,7 +305,7 @@ public class DataDstUEJson extends DataDstUEBase {
 
         DataDstWriterNode desc = fieldSet.get(0).getReferNode();
         if (desc == null) {
-            return null;
+            return pickValueFieldJsonDefaultImpl(field);
         }
 
         Object ret = pickValueFieldJsonPlainField(desc.identify, desc.getFieldDescriptor(), true);
@@ -343,127 +343,139 @@ public class DataDstUEJson extends DataDstUEBase {
         if (field.isList()) {
             String[] groups = splitPlainGroups(input.trim(), getPlainFieldSeparator(field));
             switch (field.getType()) {
-            case INT: {
-                Long[] values = parsePlainDataLong(groups, ident, isTopLevel ? null : field);
-                JSONArray tmp = new JSONArray();
-                for (Long v : values) {
-                    tmp.put(v.intValue());
-                }
-                ret = tmp;
-                break;
-            }
-
-            case LONG: {
-                Long[] values = parsePlainDataLong(groups, ident, isTopLevel ? null : field);
-                JSONArray tmp = new JSONArray();
-                for (Long v : values) {
-                    tmp.put(v);
-                }
-                ret = tmp;
-                break;
-            }
-
-            case FLOAT: {
-                Double[] values = parsePlainDataDouble(groups, ident, isTopLevel ? null : field);
-                JSONArray tmp = new JSONArray();
-                for (Double v : values) {
-                    tmp.put(v.floatValue());
-                }
-                ret = tmp;
-                break;
-            }
-
-            case DOUBLE: {
-                Double[] values = parsePlainDataDouble(groups, ident, isTopLevel ? null : field);
-                JSONArray tmp = new JSONArray();
-                for (Double v : values) {
-                    tmp.put(v);
-                }
-                ret = tmp;
-                break;
-            }
-
-            case BOOLEAN: {
-                Boolean[] values = parsePlainDataBoolean(groups, ident, isTopLevel ? null : field);
-                JSONArray tmp = new JSONArray();
-                for (Boolean v : values) {
-                    tmp.put(v);
-                }
-                ret = tmp;
-                break;
-            }
-
-            case STRING:
-            case BYTES: {
-                String[] values = parsePlainDataString(groups, ident, isTopLevel ? null : field);
-                JSONArray tmp = new JSONArray();
-                for (String v : values) {
-                    tmp.put(v);
-                }
-                ret = tmp;
-                break;
-            }
-
-            case MESSAGE: {
-                JSONArray tmp = new JSONArray();
-                for (String v : groups) {
-                    String[] subGroups = splitPlainGroups(v, getPlainMessageSeparator(field));
-                    JSONObject msg = pickValueFieldJsonPlainField(subGroups, ident, field);
-                    if (msg != null) {
-                        tmp.put(msg);
+                case INT: {
+                    Long[] values = parsePlainDataLong(groups, ident, isTopLevel ? null : field);
+                    JSONArray tmp = new JSONArray();
+                    if (null != values) {
+                        for (Long v : values) {
+                            tmp.put(v.intValue());
+                        }
                     }
+                    ret = tmp;
+                    break;
                 }
-                ret = tmp;
-                break;
-            }
 
-            default:
-                break;
+                case LONG: {
+                    Long[] values = parsePlainDataLong(groups, ident, isTopLevel ? null : field);
+                    JSONArray tmp = new JSONArray();
+                    if (null != values) {
+                        for (Long v : values) {
+                            tmp.put(v);
+                        }
+                    }
+                    ret = tmp;
+                    break;
+                }
+
+                case FLOAT: {
+                    Double[] values = parsePlainDataDouble(groups, ident, isTopLevel ? null : field);
+                    JSONArray tmp = new JSONArray();
+                    if (null != values) {
+                        for (Double v : values) {
+                            tmp.put(v.floatValue());
+                        }
+                    }
+                    ret = tmp;
+                    break;
+                }
+
+                case DOUBLE: {
+                    Double[] values = parsePlainDataDouble(groups, ident, isTopLevel ? null : field);
+                    JSONArray tmp = new JSONArray();
+                    if (null != values) {
+                        for (Double v : values) {
+                            tmp.put(v);
+                        }
+                    }
+                    ret = tmp;
+                    break;
+                }
+
+                case BOOLEAN: {
+                    Boolean[] values = parsePlainDataBoolean(groups, ident, isTopLevel ? null : field);
+                    JSONArray tmp = new JSONArray();
+                    if (null != values) {
+                        for (Boolean v : values) {
+                            tmp.put(v);
+                        }
+                    }
+                    ret = tmp;
+                    break;
+                }
+
+                case STRING:
+                case BYTES: {
+                    String[] values = parsePlainDataString(groups, ident, isTopLevel ? null : field);
+                    JSONArray tmp = new JSONArray();
+                    if (null != values) {
+                        for (String v : values) {
+                            tmp.put(v);
+                        }
+                    }
+                    ret = tmp;
+                    break;
+                }
+
+                case MESSAGE: {
+                    JSONArray tmp = new JSONArray();
+                    for (String v : groups) {
+                        String[] subGroups = splitPlainGroups(v, getPlainMessageSeparator(field));
+                        JSONObject msg = pickValueFieldJsonPlainField(subGroups, ident, field);
+                        if (msg != null) {
+                            tmp.put(msg);
+                        }
+                    }
+                    ret = tmp;
+                    break;
+                }
+
+                default:
+                    break;
             }
         } else {
             switch (field.getType()) {
-            case INT: {
-                ret = parsePlainDataLong(input.trim(), ident, isTopLevel ? null : field).intValue();
-                break;
-            }
-
-            case LONG: {
-                ret = parsePlainDataLong(input.trim(), ident, isTopLevel ? null : field);
-                break;
-            }
-
-            case FLOAT: {
-                ret = parsePlainDataDouble(input.trim(), ident, isTopLevel ? null : field).floatValue();
-                break;
-            }
-
-            case DOUBLE: {
-                ret = parsePlainDataDouble(input.trim(), ident, isTopLevel ? null : field);
-                break;
-            }
-
-            case BOOLEAN: {
-                ret = parsePlainDataBoolean(input.trim(), ident, isTopLevel ? null : field);
-                break;
-            }
-
-            case STRING:
-            case BYTES: {
-                ret = parsePlainDataString(input.trim(), ident, isTopLevel ? null : field);
-                break;
-            }
-
-            case MESSAGE: {
-                String[] groups = splitPlainGroups(input.trim(), getPlainMessageSeparator(field));
-                ret = pickValueFieldJsonPlainField(groups, ident, field);
-                if (ret == null) {
-                    ret = pickValueFieldJsonDefaultImpl(field);
+                case INT: {
+                    ret = parsePlainDataLong(input.trim(), ident, isTopLevel ? null : field).intValue();
+                    break;
                 }
-                break;
-            }
 
-            default:
-                break;
+                case LONG: {
+                    ret = parsePlainDataLong(input.trim(), ident, isTopLevel ? null : field);
+                    break;
+                }
+
+                case FLOAT: {
+                    ret = parsePlainDataDouble(input.trim(), ident, isTopLevel ? null : field).floatValue();
+                    break;
+                }
+
+                case DOUBLE: {
+                    ret = parsePlainDataDouble(input.trim(), ident, isTopLevel ? null : field);
+                    break;
+                }
+
+                case BOOLEAN: {
+                    ret = parsePlainDataBoolean(input.trim(), ident, isTopLevel ? null : field);
+                    break;
+                }
+
+                case STRING:
+                case BYTES: {
+                    ret = parsePlainDataString(input.trim(), ident, isTopLevel ? null : field);
+                    break;
+                }
+
+                case MESSAGE: {
+                    String[] groups = splitPlainGroups(input.trim(), getPlainMessageSeparator(field));
+                    ret = pickValueFieldJsonPlainField(groups, ident, field);
+                    if (ret == null) {
+                        ret = pickValueFieldJsonDefaultImpl(field);
+                    }
+                    break;
+                }
+
+                default:
+                    break;
             }
         }
 
@@ -504,31 +516,31 @@ public class DataDstUEJson extends DataDstUEBase {
         }
 
         switch (fd.getType()) {
-        case INT:
-        case LONG: {
-            return 0;
-        }
-        case BOOLEAN: {
-            return false;
-        }
-        case STRING:
-        case BYTES: {
-            return "";
-        }
-        case FLOAT:
-        case DOUBLE: {
-            return 0.0f;
-        }
-        case MESSAGE: {
-            JSONObject ret = new JSONObject();
-            for (DataDstFieldDescriptor subField : fd.getTypeDescriptor().getSortedFields()) {
-                ret.put(getIdentName(subField.getName()), pickValueFieldJsonDefaultImpl(subField));
+            case INT:
+            case LONG: {
+                return 0;
             }
+            case BOOLEAN: {
+                return false;
+            }
+            case STRING:
+            case BYTES: {
+                return "";
+            }
+            case FLOAT:
+            case DOUBLE: {
+                return 0.0f;
+            }
+            case MESSAGE: {
+                JSONObject ret = new JSONObject();
+                for (DataDstFieldDescriptor subField : fd.getTypeDescriptor().getSortedFields()) {
+                    ret.put(getIdentName(subField.getName()), pickValueFieldJsonDefaultImpl(subField));
+                }
 
-            return ret;
-        }
-        default:
-            return null;
+                return ret;
+            }
+            default:
+                return null;
         }
     }
 }

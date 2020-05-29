@@ -35,41 +35,41 @@ public class main {
     private static DataDstImpl get_out_desc(DataDstImpl proto_desc) {
         DataDstImpl outDesc = null;
         switch (ProgramOptions.getInstance().outType) {
-        case BIN:
-            outDesc = proto_desc;
-            break;
-        case LUA:
-            outDesc = new DataDstLua();
-            outDesc = outDesc.init() ? outDesc : null;
-            break;
-        case MSGPACK:
-            outDesc = new DataDstMsgPack();
-            outDesc = outDesc.init() ? outDesc : null;
-            break;
-        case JSON:
-            outDesc = new DataDstJson();
-            outDesc = outDesc.init() ? outDesc : null;
-            break;
-        case XML:
-            outDesc = new DataDstXml();
-            outDesc = outDesc.init() ? outDesc : null;
-            break;
-        case JAVASCRIPT:
-            outDesc = new DataDstJavascript();
-            outDesc = outDesc.init() ? outDesc : null;
-            break;
-        case UECSV:
-            outDesc = new DataDstUECsv();
-            outDesc = outDesc.init() ? outDesc : null;
-            break;
-        case UEJSON:
-            outDesc = new DataDstUEJson();
-            outDesc = outDesc.init() ? outDesc : null;
-            break;
-        default:
-            ProgramOptions.getLoger().error("output type \"%s\" invalid",
-                    ProgramOptions.getInstance().outType.toString());
-            break;
+            case BIN:
+                outDesc = proto_desc;
+                break;
+            case LUA:
+                outDesc = new DataDstLua();
+                outDesc = outDesc.init() ? outDesc : null;
+                break;
+            case MSGPACK:
+                outDesc = new DataDstMsgPack();
+                outDesc = outDesc.init() ? outDesc : null;
+                break;
+            case JSON:
+                outDesc = new DataDstJson();
+                outDesc = outDesc.init() ? outDesc : null;
+                break;
+            case XML:
+                outDesc = new DataDstXml();
+                outDesc = outDesc.init() ? outDesc : null;
+                break;
+            case JAVASCRIPT:
+                outDesc = new DataDstJavascript();
+                outDesc = outDesc.init() ? outDesc : null;
+                break;
+            case UECSV:
+                outDesc = new DataDstUECsv();
+                outDesc = outDesc.init() ? outDesc : null;
+                break;
+            case UEJSON:
+                outDesc = new DataDstUEJson();
+                outDesc = outDesc.init() ? outDesc : null;
+                break;
+            default:
+                ProgramOptions.getLoger().error("output type \"%s\" invalid",
+                        ProgramOptions.getInstance().outType.toString());
+                break;
         }
 
         return outDesc;
@@ -79,13 +79,13 @@ public class main {
         // 1. 协议描述文件
         DataDstImpl protoDesc = null;
         switch (ProgramOptions.getInstance().protocol) {
-        case PROTOBUF:
-            protoDesc = new DataDstPb();
-            break;
-        default:
-            ProgramOptions.getLoger().error("protocol type \"%s\" invalid",
-                    ProgramOptions.getInstance().protocol.toString());
-            break;
+            case PROTOBUF:
+                protoDesc = new DataDstPb();
+                break;
+            default:
+                ProgramOptions.getLoger().error("protocol type \"%s\" invalid",
+                        ProgramOptions.getInstance().protocol.toString());
+                break;
         }
 
         if (null == protoDesc)
@@ -99,16 +99,16 @@ public class main {
         String dump_name = null;
 
         switch (ProgramOptions.getInstance().protoDumpType) {
-        case CONST:
-            dump_data = protoDesc.buildConst();
-            dump_name = "const";
-            break;
-        case OPTIONS:
-            dump_data = protoDesc.buildOptions();
-            dump_name = "option";
-            break;
-        default:
-            break;
+            case CONST:
+                dump_data = protoDesc.buildConst();
+                dump_name = "const";
+                break;
+            case OPTIONS:
+                dump_data = protoDesc.buildOptions();
+                dump_name = "option";
+                break;
+            default:
+                break;
         }
 
         if (null == dump_data) {
@@ -234,14 +234,14 @@ public class main {
             // 3. 协议描述文件
             DataDstImpl protoDesc = null;
             switch (ProgramOptions.getInstance().protocol) {
-            case PROTOBUF:
-                protoDesc = new DataDstPb();
-                break;
-            default:
-                ProgramOptions.getLoger().error("protocol type \"%s\" invalid",
-                        ProgramOptions.getInstance().protocol.toString());
-                ++failed_count;
-                break;
+                case PROTOBUF:
+                    protoDesc = new DataDstPb();
+                    break;
+                default:
+                    ProgramOptions.getLoger().error("protocol type \"%s\" invalid",
+                            ProgramOptions.getInstance().protocol.toString());
+                    ++failed_count;
+                    break;
             }
 
             if (null == protoDesc)
@@ -347,7 +347,18 @@ public class main {
         endl = System.getProperty("line.separator", "\n");
 
         // 先尝试根据传入参数转表
-        int ret_code = build_group(args);
+        int ret_code = 1;
+        try {
+            ret_code = build_group(args);
+        } catch (Exception e) {
+            ProgramOptions.getLoger().error("%s", e.toString());
+            for (StackTraceElement frame : e.getStackTrace()) {
+                ProgramOptions.getLoger().error("\t%s", frame.toString());
+            }
+
+            ProgramOptions.getLoger().error(
+                    "Panic!, it's probably a BUG, please report to https://github.com/xresloader/xresloader/issues or mail to owt5008137@live.com/admin@owent.net");
+        }
 
         // 再尝试使用标准输入来批量转表
         if (ProgramOptions.getInstance().enableStdin) {
@@ -355,12 +366,26 @@ public class main {
             Scanner jin = new Scanner(System.in);
             while (null != (stdin_args = pick_stdin_args(jin))) {
                 if (stdin_args.length > 0) {
-                    ret_code += build_group(stdin_args);
+                    try {
+                        ret_code += build_group(stdin_args);
+                    } catch (Exception e) {
+                        ++ret_code;
+                        ProgramOptions.getLoger().error("%s", e.toString());
+                        for (StackTraceElement frame : e.getStackTrace()) {
+                            ProgramOptions.getLoger().error("\t%s", frame.toString());
+                        }
+
+                        ProgramOptions.getLoger().error(
+                                "Panic!, it's probably a BUG, please report to https://github.com/xresloader/xresloader/issues or mail to owt5008137@live.com/admin@owent.net");
+                    }
                 }
             }
         }
 
         // 退出码为失败的任务个数，用以外部捕获转换失败
+        if (ret_code > 255) {
+            ret_code = 255;
+        }
         System.exit(ret_code);
     }
 

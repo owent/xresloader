@@ -6,7 +6,7 @@ return {
     data_ver = "1.0.0.0",
     description = "Test arr_in_arr_cfg",
     hash_code = "no hash code",
-    xres_ver = "2.7.2",
+    xres_ver = "2.7.3",
   },
   [2] = "arr_in_arr_cfg",
   arr_in_arr_cfg = {

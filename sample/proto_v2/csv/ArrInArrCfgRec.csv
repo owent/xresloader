@@ -1,0 +1,4 @@
+"Name","Id","Arr","TestPlainIntArr","TestPlainEnumArr","TestPlainMsg","TestPlainMsgArr"
+"10001","10001","((StrArr=(""啦啦啦啦"",""嘞嘞嘞嘞""),IntArr=(101,102),Name=""第一个-A""),(StrArr=(""嘟嘟嘟嘟"",""嚓嚓嚓嚓""),IntArr=(111,112),Name=""第一个-B""))","(1,2,3)","(10001,10001,10001)","(TestId1=1,TestId2=2)","((TestId1=1,TestId2=2),(TestId1=3,TestId2=4),(TestId1=5,TestId2=6))"
+"10002","10002","((StrArr=(""biubiubiubiu"",""唰唰唰唰""),IntArr=(201,202),Name=""测试项-A""),(StrArr=(""哦哦哦哦"",""哈哈哈哈""),IntArr=(211,212),Name=""测试项-B""))","(4,5,6)","(10101,10101,10101)","(TestId1=3,TestId2=4)","((TestId1=7,TestId2=8),(TestId1=9,TestId2=10))"
+"10003","10003","((StrArr=(),IntArr=(301),Name=""测试项-C""),(StrArr=(""哦哦哦哦""),IntArr=(311),Name=""测试项-B""))","(7,8,9)","(10001,10001,10001)","(TestId1=5,TestId2=6)","((TestId1=11,TestId2=12))"

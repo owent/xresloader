@@ -360,44 +360,9 @@ public class DataDstPb extends DataDstImpl {
             }
         }
 
-        PbAliasNode<DescriptorProtos.OneofDescriptorProto> fd_desc = cachePbs.oneofs.getOrDefault(rule, null);
-        if (fd_desc == null || fd_desc.element == null) {
-            return ret;
-        }
-
-        DataVerifyPbOneof new_vfy = new DataVerifyPbOneof(fd_desc.element);
+        DataVerifyPbOneof new_vfy = new DataVerifyPbOneof(fd);
         cachePbs.identifiers.put(rule, new_vfy);
         ret.add(new_vfy);
-
-        for (Descriptors.FieldDescriptor sub_field : fd.getFields()) {
-            String sub_rule = sub_field.getFullName();
-            if (sub_rule.length() > 0 && rule.charAt(0) == '.') {
-                sub_rule = sub_rule.substring(1);
-            }
-
-            DataVerifyImpl sub_vfy = cachePbs.identifiers.getOrDefault(sub_rule, null);
-            if (sub_vfy != null) {
-                new_vfy.addSubVerify(Long.valueOf(sub_field.getNumber()), sub_vfy);
-                new_vfy.addSubVerify(sub_field.getName(), sub_vfy);
-                if (sub_field.getOptions().hasExtension(Xresloader.fieldAlias)) {
-                    new_vfy.addSubVerify(sub_field.getOptions().getExtension(Xresloader.fieldAlias), sub_vfy);
-                }
-                continue;
-            }
-
-            String verifier_expr = null;
-            if (sub_field.getOptions().hasExtension(Xresloader.verifier)) {
-                verifier_expr = sub_field.getOptions().getExtension(Xresloader.verifier);
-            }
-            LinkedList<DataVerifyImpl> gen = setup_verifier(verifier_expr, sub_field);
-            if (gen != null && !gen.isEmpty()) {
-                for (DataVerifyImpl vfy : gen) {
-                    child_field.addVerifier(vfy);
-                }
-            } else {
-                child_field.resetVerifier();
-            }
-        }
 
         return ret;
     }
@@ -948,6 +913,9 @@ public class DataDstPb extends DataDstImpl {
         }
 
         // TODO 索引oneof
+        // child = node.addChild(fd.getName(), c, fd,
+        // DataDstWriterNode.CHILD_NODE_TYPE.PLAIN);
+        // setup_node_identify
 
         if (missingFields != null && missingOneof != null && (!missingFields.isEmpty() || !missingOneof.isEmpty())) {
             String missingFliedDesc = "";

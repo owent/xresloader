@@ -97,4 +97,8 @@ message event_cfg {
         string            note      = 13 [ (org.xresloader.field_alias) = "描述文本" ];
         cost_type         enum_type = 14 [ (org.xresloader.field_alias) = "货币类型" ];
     }
+
+    oneof unlock_type {
+        uint32 user_level = 51 [ (org.xresloader.field_alias) = "玩家等级" ];
+    }
 }

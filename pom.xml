@@ -138,6 +138,7 @@
                             <sources>
                                 <!-- 我们可以通过在这里添加多个source节点，来添加任意多个源文件夹 -->
                                 <source>${basedir}/header</source>
+                                <source>${basedir}/src</source>
                             </sources>
                         </configuration>
                     </execution>

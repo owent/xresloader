@@ -29,3 +29,5 @@ hs_err_pid*
 /sample/xresloader.run.log
 
 /dependency-reduced-pom.xml
+/sample/gen_protocol_v2.gen.sh
+/sample/gen_protocol_v3.gen.sh

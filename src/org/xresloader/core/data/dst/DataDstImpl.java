@@ -180,18 +180,10 @@ public abstract class DataDstImpl {
             return null;
         }
 
-        Long ret;
         String item = ExcelEngine.tryMacro(input.trim());
-        if (field != null) {
-            ret = DataVerifyImpl.getAndVerify(field.getVerifier(), ident.index, ident.name, item);
-            if (field.mutableExtension().ratio > 1) {
-                ret *= field.mutableExtension().ratio;
-            }
-        } else {
-            ret = DataVerifyImpl.getAndVerify(ident.getVerifier(), ident.index, ident.name, item);
-            if (ident.getRatio() != 1) {
-                ret *= ident.getRatio();
-            }
+        Long ret = DataVerifyImpl.getAndVerify(ident.getVerifier(), ident.index, ident.name, item);
+        if (ident.getRatio() != 1) {
+            ret *= ident.getRatio();
         }
 
         return ret;
@@ -249,6 +241,32 @@ public abstract class DataDstImpl {
         return ret;
     }
 
+    static public Object[] parsePlainDataOneof(String input, IdentifyDescriptor ident,
+            DataDstWriterNode.DataDstOneofDescriptor oneof) throws ConvException {
+        if (input == null || ident == null) {
+            return null;
+        }
+
+        String[] groups = splitPlainGroups(input, getPlainOneofSeparator(oneof));
+        if (groups == null || groups.length < 1) {
+            return null;
+        }
+
+        String item = ExcelEngine.tryMacro(groups[0].trim());
+        Long select = DataVerifyImpl.getAndVerify(ident.getVerifier(), ident.index, ident.name, item);
+        if (select <= 0) {
+            return null;
+        }
+
+        Object[] ret = new Object[groups.length];
+        ret[0] = select;
+        for (int i = 1; i < groups.length; ++i) {
+            ret[i] = groups[i];
+        }
+
+        return ret;
+    }
+
     static public String getPlainFieldSeparator(DataDstWriterNode.DataDstFieldDescriptor field) {
         if (field == null) {
             return null;
@@ -295,5 +313,13 @@ public abstract class DataDstImpl {
         }
 
         return ret;
+    }
+
+    static public String getPlainOneofSeparator(DataDstWriterNode.DataDstOneofDescriptor oneof) {
+        if (oneof == null) {
+            return null;
+        }
+
+        return oneof.mutableExtension().plainSeparator;
     }
 }

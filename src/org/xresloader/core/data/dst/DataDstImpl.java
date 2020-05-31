@@ -254,12 +254,13 @@ public abstract class DataDstImpl {
 
         String item = ExcelEngine.tryMacro(groups[0].trim());
         Long select = DataVerifyImpl.getAndVerify(ident.getVerifier(), ident.index, ident.name, item);
-        if (select <= 0) {
+        DataDstWriterNode.DataDstFieldDescriptor field = oneof.getFieldById(select.intValue());
+        if (field == null) {
             return null;
         }
 
         Object[] ret = new Object[groups.length];
-        ret[0] = select;
+        ret[0] = field;
         for (int i = 1; i < groups.length; ++i) {
             ret[i] = groups[i];
         }

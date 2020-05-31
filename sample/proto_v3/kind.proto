@@ -82,6 +82,21 @@ message arr_in_arr_cfg {
 message event_reward_item {
     uint32 item_id    = 1;
     uint32 item_count = 2;
+
+    oneof nested {
+        string            nested_note      = 11 [ (org.xresloader.field_alias) = "描述文本" ];
+        cost_type         nested_enum_type = 12 [ (org.xresloader.field_alias) = "货币类型" ];
+    }
+}
+
+message event_rule_item {
+    uint32 rule_id    = 1;
+    uint32 rule_param = 2;
+
+    oneof nested {
+        string            nested_note      = 11 [ (org.xresloader.field_alias) = "描述文本" ];
+        cost_type         nested_enum_type = 12 [ (org.xresloader.field_alias) = "货币类型" ];
+    }
 }
 
 message event_cfg {
@@ -90,6 +105,8 @@ message event_cfg {
 
     uint32 id          = 1 [ (org.xresloader.ue.key_tag) = 100 ];
     uint32 process     = 2 [ (org.xresloader.ue.key_tag) = 1 ];
+
+    event_rule_item rule = 6;
     
     oneof reward {
         event_reward_item item      = 11 [ (org.xresloader.field_alias) = "奖励道具" ];

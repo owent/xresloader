@@ -473,8 +473,25 @@ public class DataDstPb extends DataDstImpl {
         }
 
         // merge verifier from field descriptor
-        if (child.innerDesc.hasVerifier()) {
-            for (DataVerifyImpl vfy : child.innerDesc.getVerifier()) {
+        if (child.innerFieldDesc != null && child.innerFieldDesc.hasVerifier()) {
+            for (DataVerifyImpl vfy : child.innerFieldDesc.getVerifier()) {
+                identify.addVerifier(vfy);
+            }
+        }
+    }
+
+    private void setup_node_identify(DataDstWriterNode node, DataDstChildrenNode child, IdentifyDescriptor identify,
+            Descriptors.OneofDescriptor fd) {
+        node.identify = identify;
+
+        identify.referToWriterNode = node;
+        identify.resetVerifier();
+
+        // Data source field verifier is ignored in oneof descriptor
+
+        // merge verifier from oneof descriptor
+        if (child.innerOneofDesc != null && child.innerOneofDesc.hasVerifier()) {
+            for (DataVerifyImpl vfy : child.innerOneofDesc.getVerifier()) {
                 identify.addVerifier(vfy);
             }
         }
@@ -553,8 +570,8 @@ public class DataDstPb extends DataDstImpl {
                     fields.put(field.getName(), find_field);
                 }
             }
-            DataDstOneofDescriptor innerField = new DataDstOneofDescriptor(fields, oneof.getIndex(), oneof.getName(),
-                    oneof);
+            DataDstOneofDescriptor innerField = new DataDstOneofDescriptor(innerDesc, fields, oneof.getIndex(),
+                    oneof.getName(), oneof);
             innerDesc.oneofs.put(oneof.getName(), innerField);
 
             setup_extension(innerField, pbDesc, oneof);
@@ -580,48 +597,50 @@ public class DataDstPb extends DataDstImpl {
             ret = new DataDstMessageDescriptor(type, pbDesc.getFile().getPackage(), pbDesc.getName(), pbDesc);
         }
         pbs.dataDstDescs.put(key, ret);
+
+        // extensions
+        if (pbDesc.getOptions().hasExtension(Xresloader.msgDescription)) {
+            ret.mutableExtension().description = pbDesc.getOptions().getExtension(Xresloader.msgDescription);
+        }
+
+        if (pbDesc.getOptions().hasExtension(Xresloader.msgSeparator)) {
+            ret.mutableExtension().plainSeparator = pbDesc.getOptions().getExtension(Xresloader.msgSeparator);
+        }
+
+        // extensions for UE
+        if (pbDesc.getOptions().hasExtension(XresloaderUe.helper)) {
+            ret.mutableExtension().mutableUE().helper = pbDesc.getOptions().getExtension(XresloaderUe.helper);
+        }
+
+        if (pbDesc.getOptions().hasExtension(XresloaderUe.notDataTable)) {
+            ret.mutableExtension().mutableUE().notDataTable = pbDesc.getOptions()
+                    .getExtension(XresloaderUe.notDataTable);
+        }
+
         buildDataDstDescriptorMessage(pbs, pbDesc, ret);
         return ret;
+    }
+
+    static private DataDstWriterNode createMessageWriterNode(PbInfoSet pbs, DataDstWriterNode.JAVA_TYPE type) {
+        return DataDstWriterNode.create(null, mutableDataDstDescriptor(pbs, null, type));
     }
 
     static private DataDstWriterNode createMessageWriterNode(PbInfoSet pbs, Descriptors.Descriptor pbDesc,
             DataDstWriterNode.JAVA_TYPE type) {
         if (null == pbDesc) {
-            return DataDstWriterNode.create(null, mutableDataDstDescriptor(pbs, pbDesc, type));
+            return createMessageWriterNode(pbs, type);
         }
 
-        DataDstWriterNode ret = DataDstWriterNode.create(pbDesc, mutableDataDstDescriptor(pbs, pbDesc, type));
+        return DataDstWriterNode.create(pbDesc, mutableDataDstDescriptor(pbs, pbDesc, type));
+    }
 
-        // extensions
-        if (pbDesc.getOptions().hasExtension(Xresloader.msgDescription)) {
-            ret.getMessageExtension().description = pbDesc.getOptions().getExtension(Xresloader.msgDescription);
+    static private DataDstWriterNode createOneofWriterNode(PbInfoSet pbs, DataDstOneofDescriptor oneofDesc) {
+        if (null == oneofDesc) {
+            return null;
         }
 
-        if (pbDesc.getOptions().hasExtension(Xresloader.msgSeparator)) {
-            ret.getMessageExtension().plainSeparator = pbDesc.getOptions().getExtension(Xresloader.msgSeparator);
-        }
-
-        // if (pbDesc.getOptions().getExtensionCount(Xresloader.kvIndex) > 0) {
-        // ret.getMessageExtension().kvIndex =
-        // pbDesc.getOptions().getExtension(Xresloader.kvIndex);
-        // }
-
-        // if (pbDesc.getOptions().getExtensionCount(Xresloader.klIndex) > 0) {
-        // ret.getMessageExtension().klIndex =
-        // pbDesc.getOptions().getExtension(Xresloader.klIndex);
-        // }
-
-        // extensions for UE
-        if (pbDesc.getOptions().hasExtension(XresloaderUe.helper)) {
-            ret.getMessageExtension().mutableUE().helper = pbDesc.getOptions().getExtension(XresloaderUe.helper);
-        }
-
-        if (pbDesc.getOptions().hasExtension(XresloaderUe.notDataTable)) {
-            ret.getMessageExtension().mutableUE().notDataTable = pbDesc.getOptions()
-                    .getExtension(XresloaderUe.notDataTable);
-        }
-
-        return ret;
+        // DataDstWriterNode.JAVA_TYPE.ONEOF
+        return DataDstWriterNode.create(oneofDesc.getRawDescriptor(), oneofDesc);
     }
 
     @Override
@@ -734,19 +753,26 @@ public class DataDstPb extends DataDstImpl {
         }
     }
 
-    static private void filterMissingFields(LinkedList<String> missingFields, HashSet<String> missingOneof,
-            Descriptors.FieldDescriptor fd, boolean isMissing) {
-        if (missingFields == null || missingOneof == null) {
+    private void filterMissingFields(LinkedList<String> missingFields, HashMap<String, String> oneofField,
+            Descriptors.FieldDescriptor fd, boolean isMissing) throws ConvException {
+        if (missingFields == null && oneofField == null) {
             return;
         }
 
         Descriptors.OneofDescriptor oneof = fd.getContainingOneof();
-        if (isMissing && oneof == null) {
+        if (isMissing && oneof == null && missingFields != null) {
             missingFields.push(fd.getName());
         }
 
-        if (!isMissing && oneof != null && missingOneof.contains(oneof.getName())) {
-            missingOneof.remove(oneof.getName());
+        if (!isMissing && oneof != null && oneofField.containsKey(oneof.getFullName())) {
+            String old_field = oneofField.get(oneof.getFullName());
+            if (old_field != null) {
+                setLastErrorMessage(
+                        "field \"%s\" in oneof descriptor \"%s\" already exists, can not add another field \"%s\" with the same oneof descriptor",
+                        old_field, oneof.getFullName(), fd.getName());
+                throw new ConvException(getLastErrorMessage());
+            }
+            oneofField.replace(oneof.getFullName(), fd.getName());
         }
     }
 
@@ -758,6 +784,10 @@ public class DataDstPb extends DataDstImpl {
      * @return 查找到对应的数据源映射关系并非空则返回true，否则返回false
      */
     private boolean test(DataDstWriterNode node, LinkedList<String> name_list) throws ConvException {
+        return testMessage(node, name_list);
+    }
+
+    private boolean testMessage(DataDstWriterNode node, LinkedList<String> name_list) throws ConvException {
         String prefix = String.join(".", name_list);
         boolean ret = false;
         Descriptors.Descriptor desc = (Descriptors.Descriptor) node.privateData;
@@ -766,16 +796,17 @@ public class DataDstPb extends DataDstImpl {
         }
 
         LinkedList<String> missingFields = null;
-        HashSet<String> missingOneof = null;
+        HashMap<String, String> oneofField = new HashMap<String, String>();
 
-        if (ProgramOptions.getInstance().requireMappingAllFields
+        boolean require_mapping_all_fields = ProgramOptions.getInstance().requireMappingAllFields
                 || (desc.getOptions().hasExtension(Xresloader.msgRequireMappingAll)
-                        && desc.getOptions().getExtension(Xresloader.msgRequireMappingAll))) {
+                        && desc.getOptions().getExtension(Xresloader.msgRequireMappingAll));
+        if (require_mapping_all_fields) {
             missingFields = new LinkedList<String>();
-            missingOneof = new HashSet<String>();
-            for (Descriptors.OneofDescriptor oneof : desc.getOneofs()) {
-                missingOneof.add(oneof.getName());
-            }
+        }
+
+        for (Descriptors.OneofDescriptor oneof : desc.getOneofs()) {
+            oneofField.put(oneof.getFullName(), null);
         }
 
         DataSrcImpl data_src = DataSrcImpl.getOurInstance();
@@ -803,7 +834,7 @@ public class DataDstPb extends DataDstImpl {
                         name_list.removeLast();
 
                         if (count > 0) {
-                            filterMissingFields(missingFields, missingOneof, fd, false);
+                            filterMissingFields(missingFields, oneofField, fd, false);
                         } else {
                             // try plain mode
                             String real_name = DataDstWriterNode.makeChildPath(prefix, fd.getName());
@@ -815,9 +846,9 @@ public class DataDstPb extends DataDstImpl {
                                 setup_node_identify(c, child, col, fd);
                                 ret = true;
 
-                                filterMissingFields(missingFields, missingOneof, fd, false);
+                                filterMissingFields(missingFields, oneofField, fd, false);
                             } else {
-                                filterMissingFields(missingFields, missingOneof, fd, true);
+                                filterMissingFields(missingFields, oneofField, fd, true);
                             }
                         }
                     } else {
@@ -825,11 +856,11 @@ public class DataDstPb extends DataDstImpl {
                                 DataDstWriterNode.JAVA_TYPE.MESSAGE);
                         name_list.addLast(DataDstWriterNode.makeNodeName(fd.getName()));
                         if (test(c, name_list)) {
-                            filterMissingFields(missingFields, missingOneof, fd, false);
+                            filterMissingFields(missingFields, oneofField, fd, false);
                             child = node.addChild(fd.getName(), c, fd, DataDstWriterNode.CHILD_NODE_TYPE.STANDARD);
                             ret = true;
                         } else {
-                            filterMissingFields(missingFields, missingOneof, fd, true);
+                            filterMissingFields(missingFields, oneofField, fd, true);
 
                             // try plain mode
                             String real_name = DataDstWriterNode.makeChildPath(prefix, fd.getName());
@@ -839,9 +870,9 @@ public class DataDstPb extends DataDstImpl {
                                 setup_node_identify(c, child, col, fd);
                                 ret = true;
 
-                                filterMissingFields(missingFields, missingOneof, fd, false);
+                                filterMissingFields(missingFields, oneofField, fd, false);
                             } else {
-                                filterMissingFields(missingFields, missingOneof, fd, true);
+                                filterMissingFields(missingFields, oneofField, fd, true);
 
                                 if (checkFieldIsRequired(fd)) {
                                     // required 字段要dump默认数据
@@ -862,7 +893,7 @@ public class DataDstPb extends DataDstImpl {
                             String real_name = DataDstWriterNode.makeChildPath(prefix, fd.getName(), count);
                             IdentifyDescriptor col = data_src.getColumnByName(real_name);
                             if (null != col) {
-                                DataDstWriterNode c = createMessageWriterNode(cachePbs, null, inner_type);
+                                DataDstWriterNode c = createMessageWriterNode(cachePbs, inner_type);
                                 child = node.addChild(fd.getName(), c, fd, DataDstWriterNode.CHILD_NODE_TYPE.STANDARD);
                                 setup_node_identify(c, child, col, fd);
                                 ret = true;
@@ -872,20 +903,20 @@ public class DataDstPb extends DataDstImpl {
                         }
 
                         if (count > 0) {
-                            filterMissingFields(missingFields, missingOneof, fd, false);
+                            filterMissingFields(missingFields, oneofField, fd, false);
                         } else {
                             // try plain mode
                             String real_name = DataDstWriterNode.makeChildPath(prefix, fd.getName());
                             IdentifyDescriptor col = data_src.getColumnByName(real_name);
                             if (null != col) {
-                                DataDstWriterNode c = createMessageWriterNode(cachePbs, null, inner_type);
+                                DataDstWriterNode c = createMessageWriterNode(cachePbs, inner_type);
                                 child = node.addChild(fd.getName(), c, fd, DataDstWriterNode.CHILD_NODE_TYPE.PLAIN);
                                 setup_node_identify(c, child, col, fd);
                                 ret = true;
 
-                                filterMissingFields(missingFields, missingOneof, fd, false);
+                                filterMissingFields(missingFields, oneofField, fd, false);
                             } else {
-                                filterMissingFields(missingFields, missingOneof, fd, true);
+                                filterMissingFields(missingFields, oneofField, fd, true);
                             }
                         }
                     } else {
@@ -893,15 +924,15 @@ public class DataDstPb extends DataDstImpl {
                         String real_name = DataDstWriterNode.makeChildPath(prefix, fd.getName());
                         IdentifyDescriptor col = data_src.getColumnByName(real_name);
                         if (null != col) {
-                            filterMissingFields(missingFields, missingOneof, fd, false);
-                            DataDstWriterNode c = createMessageWriterNode(cachePbs, null, inner_type);
+                            filterMissingFields(missingFields, oneofField, fd, false);
+                            DataDstWriterNode c = createMessageWriterNode(cachePbs, inner_type);
                             child = node.addChild(fd.getName(), c, fd, DataDstWriterNode.CHILD_NODE_TYPE.STANDARD);
                             setup_node_identify(c, child, col, fd);
                             ret = true;
                         } else {
-                            filterMissingFields(missingFields, missingOneof, fd, true);
+                            filterMissingFields(missingFields, oneofField, fd, true);
                             if (checkFieldIsRequired(fd)) {
-                                DataDstWriterNode c = createMessageWriterNode(cachePbs, null, inner_type);
+                                DataDstWriterNode c = createMessageWriterNode(cachePbs, inner_type);
                                 // required 字段要dump默认数据
                                 child = node.addChild(fd.getName(), c, fd, DataDstWriterNode.CHILD_NODE_TYPE.STANDARD);
                             }
@@ -912,23 +943,70 @@ public class DataDstPb extends DataDstImpl {
             }
         }
 
-        // TODO 索引oneof
-        // child = node.addChild(fd.getName(), c, fd,
-        // DataDstWriterNode.CHILD_NODE_TYPE.PLAIN);
-        // setup_node_identify
+        // 索引oneof
+        for (Descriptors.OneofDescriptor fd : desc.getOneofs()) {
+            String old_field = oneofField.getOrDefault(fd.getFullName(), null);
+            if (old_field != null) {
+                setLastErrorMessage(
+                        "field \"%s\" in oneof descriptor \"%s\" already exists, can not add the oneof writer again",
+                        old_field, fd.getFullName());
+                throw new ConvException(getLastErrorMessage());
+            }
 
-        if (missingFields != null && missingOneof != null && (!missingFields.isEmpty() || !missingOneof.isEmpty())) {
+            if (node.getTypeDescriptor() == null) {
+                setLastErrorMessage("type descriptor \"%s\" not found, it's probably a BUG, please report to %s",
+                        node.getFullName(), ProgramOptions.getReportUrl());
+                throw new ConvException(getLastErrorMessage());
+            }
+
+            DataDstOneofDescriptor oneof_inner_desc = node.getTypeDescriptor().oneofs.getOrDefault(fd.getName(), null);
+            if (oneof_inner_desc == null) {
+                setLastErrorMessage(
+                        "oneof descriptor \"%s\" not found in type descriptor \"%s\", it's probably a BUG, please report to %s",
+                        fd.getFullName(), node.getFullName(), ProgramOptions.getReportUrl());
+                throw new ConvException(getLastErrorMessage());
+            }
+
+            DataDstChildrenNode child = null;
+            String real_name = DataDstWriterNode.makeChildPath(prefix, fd.getName());
+            IdentifyDescriptor col = data_src.getColumnByName(real_name);
+
+            if (null == col) {
+                continue;
+            }
+
+            oneofField.replace(fd.getFullName(), fd.getName());
+
+            DataDstWriterNode c = createOneofWriterNode(cachePbs, oneof_inner_desc);
+            // oneof field must be a plain field
+            child = node.addChild(fd.getName(), c, fd, DataDstWriterNode.CHILD_NODE_TYPE.PLAIN);
+            setup_node_identify(c, child, col, fd);
+            ret = true;
+        }
+
+        if (require_mapping_all_fields) {
             String missingFliedDesc = "";
-            if (!missingFields.isEmpty()) {
+            if (missingFields != null && !missingFields.isEmpty()) {
                 missingFliedDesc = String.format(" fields %s", String.join(",", missingFields));
             }
+
             String missingOneofDesc = "";
-            if (!missingOneof.isEmpty()) {
-                missingOneofDesc = String.format(" oneof %s", String.join(",", missingOneof));
+            ArrayList<String> missingOneofs = new ArrayList<String>();
+            missingOneofs.ensureCapacity(oneofField.size());
+            for (Map.Entry<String, String> oneofEntry : oneofField.entrySet()) {
+                if (oneofEntry.getValue() == null) {
+                    missingOneofs.add(oneofEntry.getKey());
+                }
             }
-            setLastErrorMessage("message %s in %s can not find%s%s in data source", desc.getFullName(), prefix,
-                    missingFliedDesc, missingOneofDesc);
-            throw new ConvException(getLastErrorMessage());
+            if (!missingOneofs.isEmpty()) {
+                missingOneofDesc = String.format(" oneof %s", String.join(",", missingOneofs));
+            }
+
+            if (!missingFliedDesc.isEmpty() || !missingOneofDesc.isEmpty()) {
+                setLastErrorMessage("message %s in %s can not find%s%s in data source", desc.getFullName(), prefix,
+                        missingFliedDesc, missingOneofDesc);
+                throw new ConvException(getLastErrorMessage());
+            }
         }
 
         return ret;
@@ -1015,8 +1093,11 @@ public class DataDstPb extends DataDstImpl {
         boolean ret = false;
 
         for (Map.Entry<String, DataDstWriterNode.DataDstChildrenNode> c : node.getChildren().entrySet()) {
-            if (c.getValue().mode == DataDstWriterNode.CHILD_NODE_TYPE.STANDARD) {
-                Descriptors.FieldDescriptor fd = (Descriptors.FieldDescriptor) c.getValue().fieldDescriptor;
+            if (c.getValue().isOneof()) {
+                // TODO dump oneof data
+
+            } else if (c.getValue().mode == DataDstWriterNode.CHILD_NODE_TYPE.STANDARD) {
+                Descriptors.FieldDescriptor fd = (Descriptors.FieldDescriptor) c.getValue().rawDescriptor;
                 if (null == fd) {
                     // 不需要提示，如果从其他方式解包协议描述的时候可能有可选字段丢失的
                     continue;
@@ -1297,6 +1378,7 @@ public class DataDstPb extends DataDstImpl {
                 }
 
                 default:
+                    // TODO dump oneof
                     break;
             }
         } else {
@@ -1342,6 +1424,7 @@ public class DataDstPb extends DataDstImpl {
                 }
 
                 default:
+                    // TODO dump oneof
                     break;
             }
         }
@@ -1388,6 +1471,11 @@ public class DataDstPb extends DataDstImpl {
                 hasData = true;
             }
         }
+
+        // TODO dump oneof data
+        // for (DataDstOneofDescriptor oneof :
+        // field.getTypeDescriptor().getSortedOneofs()) {
+        // }
 
         if (!hasData) {
             return null;

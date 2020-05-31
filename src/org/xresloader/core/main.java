@@ -356,8 +356,8 @@ public class main {
                 ProgramOptions.getLoger().error("\t%s", frame.toString());
             }
 
-            ProgramOptions.getLoger().error(
-                    "Panic!, it's probably a BUG, please report to https://github.com/xresloader/xresloader/issues or mail to owt5008137@live.com/admin@owent.net");
+            ProgramOptions.getLoger().error("Panic!, it's probably a BUG, please report to %s",
+                    ProgramOptions.getReportUrl());
         }
 
         // 再尝试使用标准输入来批量转表
@@ -375,8 +375,8 @@ public class main {
                             ProgramOptions.getLoger().error("\t%s", frame.toString());
                         }
 
-                        ProgramOptions.getLoger().error(
-                                "Panic!, it's probably a BUG, please report to https://github.com/xresloader/xresloader/issues or mail to owt5008137@live.com/admin@owent.net");
+                        ProgramOptions.getLoger().error("Panic!, it's probably a BUG, please report to %s",
+                                ProgramOptions.getReportUrl());
                     }
                 }
             }

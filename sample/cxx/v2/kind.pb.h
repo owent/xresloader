@@ -50,7 +50,7 @@ struct TableStruct_kind_2eproto {
     PROTOBUF_SECTION_VARIABLE(protodesc_cold);
   static const ::PROTOBUF_NAMESPACE_ID::internal::AuxillaryParseTableField aux[]
     PROTOBUF_SECTION_VARIABLE(protodesc_cold);
-  static const ::PROTOBUF_NAMESPACE_ID::internal::ParseTable schema[5]
+  static const ::PROTOBUF_NAMESPACE_ID::internal::ParseTable schema[8]
     PROTOBUF_SECTION_VARIABLE(protodesc_cold);
   static const ::PROTOBUF_NAMESPACE_ID::internal::FieldMetadata field_metadata[];
   static const ::PROTOBUF_NAMESPACE_ID::internal::SerializationTable serialization_table[];
@@ -63,6 +63,15 @@ extern arr_in_arrDefaultTypeInternal _arr_in_arr_default_instance_;
 class arr_in_arr_cfg;
 class arr_in_arr_cfgDefaultTypeInternal;
 extern arr_in_arr_cfgDefaultTypeInternal _arr_in_arr_cfg_default_instance_;
+class event_cfg;
+class event_cfgDefaultTypeInternal;
+extern event_cfgDefaultTypeInternal _event_cfg_default_instance_;
+class event_reward_item;
+class event_reward_itemDefaultTypeInternal;
+extern event_reward_itemDefaultTypeInternal _event_reward_item_default_instance_;
+class event_rule_item;
+class event_rule_itemDefaultTypeInternal;
+extern event_rule_itemDefaultTypeInternal _event_rule_item_default_instance_;
 class role_cfg;
 class role_cfgDefaultTypeInternal;
 extern role_cfgDefaultTypeInternal _role_cfg_default_instance_;
@@ -75,6 +84,9 @@ extern test_msg_verifierDefaultTypeInternal _test_msg_verifier_default_instance_
 PROTOBUF_NAMESPACE_OPEN
 template<> ::arr_in_arr* Arena::CreateMaybeMessage<::arr_in_arr>(Arena*);
 template<> ::arr_in_arr_cfg* Arena::CreateMaybeMessage<::arr_in_arr_cfg>(Arena*);
+template<> ::event_cfg* Arena::CreateMaybeMessage<::event_cfg>(Arena*);
+template<> ::event_reward_item* Arena::CreateMaybeMessage<::event_reward_item>(Arena*);
+template<> ::event_rule_item* Arena::CreateMaybeMessage<::event_rule_item>(Arena*);
 template<> ::role_cfg* Arena::CreateMaybeMessage<::role_cfg>(Arena*);
 template<> ::role_upgrade_cfg* Arena::CreateMaybeMessage<::role_upgrade_cfg>(Arena*);
 template<> ::test_msg_verifier* Arena::CreateMaybeMessage<::test_msg_verifier>(Arena*);
@@ -1221,6 +1233,778 @@ class arr_in_arr_cfg PROTOBUF_FINAL :
   ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::test_msg_verifier > test_plain_msg_arr_;
   ::test_msg_verifier* test_plain_msg_;
   ::PROTOBUF_NAMESPACE_ID::uint32 id_;
+  friend struct ::TableStruct_kind_2eproto;
+};
+// -------------------------------------------------------------------
+
+class event_reward_item PROTOBUF_FINAL :
+    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:event_reward_item) */ {
+ public:
+  inline event_reward_item() : event_reward_item(nullptr) {};
+  virtual ~event_reward_item();
+
+  event_reward_item(const event_reward_item& from);
+  event_reward_item(event_reward_item&& from) noexcept
+    : event_reward_item() {
+    *this = ::std::move(from);
+  }
+
+  inline event_reward_item& operator=(const event_reward_item& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  inline event_reward_item& operator=(event_reward_item&& from) noexcept {
+    if (GetArena() == from.GetArena()) {
+      if (this != &from) InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+
+  inline const ::PROTOBUF_NAMESPACE_ID::UnknownFieldSet& unknown_fields() const {
+    return _internal_metadata_.unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(::PROTOBUF_NAMESPACE_ID::UnknownFieldSet::default_instance);
+  }
+  inline ::PROTOBUF_NAMESPACE_ID::UnknownFieldSet* mutable_unknown_fields() {
+    return _internal_metadata_.mutable_unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
+  }
+
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* descriptor() {
+    return GetDescriptor();
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* GetDescriptor() {
+    return GetMetadataStatic().descriptor;
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Reflection* GetReflection() {
+    return GetMetadataStatic().reflection;
+  }
+  static const event_reward_item& default_instance();
+
+  enum NestedCase {
+    kNestedNote = 11,
+    kNestedEnumType = 12,
+    NESTED_NOT_SET = 0,
+  };
+
+  static void InitAsDefaultInstance();  // FOR INTERNAL USE ONLY
+  static inline const event_reward_item* internal_default_instance() {
+    return reinterpret_cast<const event_reward_item*>(
+               &_event_reward_item_default_instance_);
+  }
+  static constexpr int kIndexInFileMessages =
+    5;
+
+  friend void swap(event_reward_item& a, event_reward_item& b) {
+    a.Swap(&b);
+  }
+  inline void Swap(event_reward_item* other) {
+    if (other == this) return;
+    if (GetArena() == other->GetArena()) {
+      InternalSwap(other);
+    } else {
+      ::PROTOBUF_NAMESPACE_ID::internal::GenericSwap(this, other);
+    }
+  }
+  void UnsafeArenaSwap(event_reward_item* other) {
+    if (other == this) return;
+    GOOGLE_DCHECK(GetArena() == other->GetArena());
+    InternalSwap(other);
+  }
+
+  // implements Message ----------------------------------------------
+
+  inline event_reward_item* New() const final {
+    return CreateMaybeMessage<event_reward_item>(nullptr);
+  }
+
+  event_reward_item* New(::PROTOBUF_NAMESPACE_ID::Arena* arena) const final {
+    return CreateMaybeMessage<event_reward_item>(arena);
+  }
+  void CopyFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) final;
+  void MergeFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) final;
+  void CopyFrom(const event_reward_item& from);
+  void MergeFrom(const event_reward_item& from);
+  PROTOBUF_ATTRIBUTE_REINITIALIZES void Clear() final;
+  bool IsInitialized() const final;
+
+  size_t ByteSizeLong() const final;
+  const char* _InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) final;
+  ::PROTOBUF_NAMESPACE_ID::uint8* _InternalSerialize(
+      ::PROTOBUF_NAMESPACE_ID::uint8* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const final;
+  int GetCachedSize() const final { return _cached_size_.Get(); }
+
+  private:
+  inline void SharedCtor();
+  inline void SharedDtor();
+  void SetCachedSize(int size) const final;
+  void InternalSwap(event_reward_item* other);
+  friend class ::PROTOBUF_NAMESPACE_ID::internal::AnyMetadata;
+  static ::PROTOBUF_NAMESPACE_ID::StringPiece FullMessageName() {
+    return "event_reward_item";
+  }
+  protected:
+  explicit event_reward_item(::PROTOBUF_NAMESPACE_ID::Arena* arena);
+  private:
+  static void ArenaDtor(void* object);
+  inline void RegisterArenaDtor(::PROTOBUF_NAMESPACE_ID::Arena* arena);
+  public:
+
+  ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadata() const final;
+  private:
+  static ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadataStatic() {
+    ::PROTOBUF_NAMESPACE_ID::internal::AssignDescriptors(&::descriptor_table_kind_2eproto);
+    return ::descriptor_table_kind_2eproto.file_level_metadata[kIndexInFileMessages];
+  }
+
+  public:
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  enum : int {
+    kItemIdFieldNumber = 1,
+    kItemCountFieldNumber = 2,
+    kNestedNoteFieldNumber = 11,
+    kNestedEnumTypeFieldNumber = 12,
+  };
+  // optional uint32 item_id = 1;
+  bool has_item_id() const;
+  private:
+  bool _internal_has_item_id() const;
+  public:
+  void clear_item_id();
+  ::PROTOBUF_NAMESPACE_ID::uint32 item_id() const;
+  void set_item_id(::PROTOBUF_NAMESPACE_ID::uint32 value);
+  private:
+  ::PROTOBUF_NAMESPACE_ID::uint32 _internal_item_id() const;
+  void _internal_set_item_id(::PROTOBUF_NAMESPACE_ID::uint32 value);
+  public:
+
+  // optional uint32 item_count = 2;
+  bool has_item_count() const;
+  private:
+  bool _internal_has_item_count() const;
+  public:
+  void clear_item_count();
+  ::PROTOBUF_NAMESPACE_ID::uint32 item_count() const;
+  void set_item_count(::PROTOBUF_NAMESPACE_ID::uint32 value);
+  private:
+  ::PROTOBUF_NAMESPACE_ID::uint32 _internal_item_count() const;
+  void _internal_set_item_count(::PROTOBUF_NAMESPACE_ID::uint32 value);
+  public:
+
+  // string nested_note = 11 [(.org.xresloader.field_alias) = "\346\217\217\350\277\260\346\226\207\346\234\254"];
+  bool has_nested_note() const;
+  private:
+  bool _internal_has_nested_note() const;
+  public:
+  void clear_nested_note();
+  const std::string& nested_note() const;
+  void set_nested_note(const std::string& value);
+  void set_nested_note(std::string&& value);
+  void set_nested_note(const char* value);
+  void set_nested_note(const char* value, size_t size);
+  std::string* mutable_nested_note();
+  std::string* release_nested_note();
+  void set_allocated_nested_note(std::string* nested_note);
+  GOOGLE_PROTOBUF_RUNTIME_DEPRECATED("The unsafe_arena_ accessors for"
+  "    string fields are deprecated and will be removed in a"
+  "    future release.")
+  std::string* unsafe_arena_release_nested_note();
+  GOOGLE_PROTOBUF_RUNTIME_DEPRECATED("The unsafe_arena_ accessors for"
+  "    string fields are deprecated and will be removed in a"
+  "    future release.")
+  void unsafe_arena_set_allocated_nested_note(
+      std::string* nested_note);
+  private:
+  const std::string& _internal_nested_note() const;
+  void _internal_set_nested_note(const std::string& value);
+  std::string* _internal_mutable_nested_note();
+  public:
+
+  // .cost_type nested_enum_type = 12 [(.org.xresloader.field_alias) = "\350\264\247\345\270\201\347\261\273\345\236\213"];
+  bool has_nested_enum_type() const;
+  private:
+  bool _internal_has_nested_enum_type() const;
+  public:
+  void clear_nested_enum_type();
+  ::cost_type nested_enum_type() const;
+  void set_nested_enum_type(::cost_type value);
+  private:
+  ::cost_type _internal_nested_enum_type() const;
+  void _internal_set_nested_enum_type(::cost_type value);
+  public:
+
+  void clear_nested();
+  NestedCase nested_case() const;
+  // @@protoc_insertion_point(class_scope:event_reward_item)
+ private:
+  class _Internal;
+  void set_has_nested_note();
+  void set_has_nested_enum_type();
+
+  inline bool has_nested() const;
+  inline void clear_has_nested();
+
+  template <typename T> friend class ::PROTOBUF_NAMESPACE_ID::Arena::InternalHelper;
+  typedef void InternalArenaConstructable_;
+  typedef void DestructorSkippable_;
+  ::PROTOBUF_NAMESPACE_ID::internal::HasBits<1> _has_bits_;
+  mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
+  ::PROTOBUF_NAMESPACE_ID::uint32 item_id_;
+  ::PROTOBUF_NAMESPACE_ID::uint32 item_count_;
+  union NestedUnion {
+    NestedUnion() {}
+    ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr nested_note_;
+    int nested_enum_type_;
+  } nested_;
+  ::PROTOBUF_NAMESPACE_ID::uint32 _oneof_case_[1];
+
+  friend struct ::TableStruct_kind_2eproto;
+};
+// -------------------------------------------------------------------
+
+class event_rule_item PROTOBUF_FINAL :
+    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:event_rule_item) */ {
+ public:
+  inline event_rule_item() : event_rule_item(nullptr) {};
+  virtual ~event_rule_item();
+
+  event_rule_item(const event_rule_item& from);
+  event_rule_item(event_rule_item&& from) noexcept
+    : event_rule_item() {
+    *this = ::std::move(from);
+  }
+
+  inline event_rule_item& operator=(const event_rule_item& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  inline event_rule_item& operator=(event_rule_item&& from) noexcept {
+    if (GetArena() == from.GetArena()) {
+      if (this != &from) InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+
+  inline const ::PROTOBUF_NAMESPACE_ID::UnknownFieldSet& unknown_fields() const {
+    return _internal_metadata_.unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(::PROTOBUF_NAMESPACE_ID::UnknownFieldSet::default_instance);
+  }
+  inline ::PROTOBUF_NAMESPACE_ID::UnknownFieldSet* mutable_unknown_fields() {
+    return _internal_metadata_.mutable_unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
+  }
+
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* descriptor() {
+    return GetDescriptor();
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* GetDescriptor() {
+    return GetMetadataStatic().descriptor;
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Reflection* GetReflection() {
+    return GetMetadataStatic().reflection;
+  }
+  static const event_rule_item& default_instance();
+
+  enum NestedCase {
+    kNestedNote = 11,
+    kNestedEnumType = 12,
+    NESTED_NOT_SET = 0,
+  };
+
+  static void InitAsDefaultInstance();  // FOR INTERNAL USE ONLY
+  static inline const event_rule_item* internal_default_instance() {
+    return reinterpret_cast<const event_rule_item*>(
+               &_event_rule_item_default_instance_);
+  }
+  static constexpr int kIndexInFileMessages =
+    6;
+
+  friend void swap(event_rule_item& a, event_rule_item& b) {
+    a.Swap(&b);
+  }
+  inline void Swap(event_rule_item* other) {
+    if (other == this) return;
+    if (GetArena() == other->GetArena()) {
+      InternalSwap(other);
+    } else {
+      ::PROTOBUF_NAMESPACE_ID::internal::GenericSwap(this, other);
+    }
+  }
+  void UnsafeArenaSwap(event_rule_item* other) {
+    if (other == this) return;
+    GOOGLE_DCHECK(GetArena() == other->GetArena());
+    InternalSwap(other);
+  }
+
+  // implements Message ----------------------------------------------
+
+  inline event_rule_item* New() const final {
+    return CreateMaybeMessage<event_rule_item>(nullptr);
+  }
+
+  event_rule_item* New(::PROTOBUF_NAMESPACE_ID::Arena* arena) const final {
+    return CreateMaybeMessage<event_rule_item>(arena);
+  }
+  void CopyFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) final;
+  void MergeFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) final;
+  void CopyFrom(const event_rule_item& from);
+  void MergeFrom(const event_rule_item& from);
+  PROTOBUF_ATTRIBUTE_REINITIALIZES void Clear() final;
+  bool IsInitialized() const final;
+
+  size_t ByteSizeLong() const final;
+  const char* _InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) final;
+  ::PROTOBUF_NAMESPACE_ID::uint8* _InternalSerialize(
+      ::PROTOBUF_NAMESPACE_ID::uint8* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const final;
+  int GetCachedSize() const final { return _cached_size_.Get(); }
+
+  private:
+  inline void SharedCtor();
+  inline void SharedDtor();
+  void SetCachedSize(int size) const final;
+  void InternalSwap(event_rule_item* other);
+  friend class ::PROTOBUF_NAMESPACE_ID::internal::AnyMetadata;
+  static ::PROTOBUF_NAMESPACE_ID::StringPiece FullMessageName() {
+    return "event_rule_item";
+  }
+  protected:
+  explicit event_rule_item(::PROTOBUF_NAMESPACE_ID::Arena* arena);
+  private:
+  static void ArenaDtor(void* object);
+  inline void RegisterArenaDtor(::PROTOBUF_NAMESPACE_ID::Arena* arena);
+  public:
+
+  ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadata() const final;
+  private:
+  static ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadataStatic() {
+    ::PROTOBUF_NAMESPACE_ID::internal::AssignDescriptors(&::descriptor_table_kind_2eproto);
+    return ::descriptor_table_kind_2eproto.file_level_metadata[kIndexInFileMessages];
+  }
+
+  public:
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  enum : int {
+    kRuleIdFieldNumber = 1,
+    kRuleParamFieldNumber = 2,
+    kNestedNoteFieldNumber = 11,
+    kNestedEnumTypeFieldNumber = 12,
+  };
+  // optional uint32 rule_id = 1;
+  bool has_rule_id() const;
+  private:
+  bool _internal_has_rule_id() const;
+  public:
+  void clear_rule_id();
+  ::PROTOBUF_NAMESPACE_ID::uint32 rule_id() const;
+  void set_rule_id(::PROTOBUF_NAMESPACE_ID::uint32 value);
+  private:
+  ::PROTOBUF_NAMESPACE_ID::uint32 _internal_rule_id() const;
+  void _internal_set_rule_id(::PROTOBUF_NAMESPACE_ID::uint32 value);
+  public:
+
+  // optional uint32 rule_param = 2;
+  bool has_rule_param() const;
+  private:
+  bool _internal_has_rule_param() const;
+  public:
+  void clear_rule_param();
+  ::PROTOBUF_NAMESPACE_ID::uint32 rule_param() const;
+  void set_rule_param(::PROTOBUF_NAMESPACE_ID::uint32 value);
+  private:
+  ::PROTOBUF_NAMESPACE_ID::uint32 _internal_rule_param() const;
+  void _internal_set_rule_param(::PROTOBUF_NAMESPACE_ID::uint32 value);
+  public:
+
+  // string nested_note = 11 [(.org.xresloader.field_alias) = "\346\217\217\350\277\260\346\226\207\346\234\254"];
+  bool has_nested_note() const;
+  private:
+  bool _internal_has_nested_note() const;
+  public:
+  void clear_nested_note();
+  const std::string& nested_note() const;
+  void set_nested_note(const std::string& value);
+  void set_nested_note(std::string&& value);
+  void set_nested_note(const char* value);
+  void set_nested_note(const char* value, size_t size);
+  std::string* mutable_nested_note();
+  std::string* release_nested_note();
+  void set_allocated_nested_note(std::string* nested_note);
+  GOOGLE_PROTOBUF_RUNTIME_DEPRECATED("The unsafe_arena_ accessors for"
+  "    string fields are deprecated and will be removed in a"
+  "    future release.")
+  std::string* unsafe_arena_release_nested_note();
+  GOOGLE_PROTOBUF_RUNTIME_DEPRECATED("The unsafe_arena_ accessors for"
+  "    string fields are deprecated and will be removed in a"
+  "    future release.")
+  void unsafe_arena_set_allocated_nested_note(
+      std::string* nested_note);
+  private:
+  const std::string& _internal_nested_note() const;
+  void _internal_set_nested_note(const std::string& value);
+  std::string* _internal_mutable_nested_note();
+  public:
+
+  // .cost_type nested_enum_type = 12 [(.org.xresloader.field_alias) = "\350\264\247\345\270\201\347\261\273\345\236\213"];
+  bool has_nested_enum_type() const;
+  private:
+  bool _internal_has_nested_enum_type() const;
+  public:
+  void clear_nested_enum_type();
+  ::cost_type nested_enum_type() const;
+  void set_nested_enum_type(::cost_type value);
+  private:
+  ::cost_type _internal_nested_enum_type() const;
+  void _internal_set_nested_enum_type(::cost_type value);
+  public:
+
+  void clear_nested();
+  NestedCase nested_case() const;
+  // @@protoc_insertion_point(class_scope:event_rule_item)
+ private:
+  class _Internal;
+  void set_has_nested_note();
+  void set_has_nested_enum_type();
+
+  inline bool has_nested() const;
+  inline void clear_has_nested();
+
+  template <typename T> friend class ::PROTOBUF_NAMESPACE_ID::Arena::InternalHelper;
+  typedef void InternalArenaConstructable_;
+  typedef void DestructorSkippable_;
+  ::PROTOBUF_NAMESPACE_ID::internal::HasBits<1> _has_bits_;
+  mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
+  ::PROTOBUF_NAMESPACE_ID::uint32 rule_id_;
+  ::PROTOBUF_NAMESPACE_ID::uint32 rule_param_;
+  union NestedUnion {
+    NestedUnion() {}
+    ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr nested_note_;
+    int nested_enum_type_;
+  } nested_;
+  ::PROTOBUF_NAMESPACE_ID::uint32 _oneof_case_[1];
+
+  friend struct ::TableStruct_kind_2eproto;
+};
+// -------------------------------------------------------------------
+
+class event_cfg PROTOBUF_FINAL :
+    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:event_cfg) */ {
+ public:
+  inline event_cfg() : event_cfg(nullptr) {};
+  virtual ~event_cfg();
+
+  event_cfg(const event_cfg& from);
+  event_cfg(event_cfg&& from) noexcept
+    : event_cfg() {
+    *this = ::std::move(from);
+  }
+
+  inline event_cfg& operator=(const event_cfg& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  inline event_cfg& operator=(event_cfg&& from) noexcept {
+    if (GetArena() == from.GetArena()) {
+      if (this != &from) InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+
+  inline const ::PROTOBUF_NAMESPACE_ID::UnknownFieldSet& unknown_fields() const {
+    return _internal_metadata_.unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(::PROTOBUF_NAMESPACE_ID::UnknownFieldSet::default_instance);
+  }
+  inline ::PROTOBUF_NAMESPACE_ID::UnknownFieldSet* mutable_unknown_fields() {
+    return _internal_metadata_.mutable_unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
+  }
+
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* descriptor() {
+    return GetDescriptor();
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* GetDescriptor() {
+    return GetMetadataStatic().descriptor;
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Reflection* GetReflection() {
+    return GetMetadataStatic().reflection;
+  }
+  static const event_cfg& default_instance();
+
+  enum RewardCase {
+    kItem = 11,
+    kUserExp = 12,
+    kNote = 13,
+    kEnumType = 14,
+    REWARD_NOT_SET = 0,
+  };
+
+  enum UnlockTypeCase {
+    kUserLevel = 51,
+    UNLOCK_TYPE_NOT_SET = 0,
+  };
+
+  static void InitAsDefaultInstance();  // FOR INTERNAL USE ONLY
+  static inline const event_cfg* internal_default_instance() {
+    return reinterpret_cast<const event_cfg*>(
+               &_event_cfg_default_instance_);
+  }
+  static constexpr int kIndexInFileMessages =
+    7;
+
+  friend void swap(event_cfg& a, event_cfg& b) {
+    a.Swap(&b);
+  }
+  inline void Swap(event_cfg* other) {
+    if (other == this) return;
+    if (GetArena() == other->GetArena()) {
+      InternalSwap(other);
+    } else {
+      ::PROTOBUF_NAMESPACE_ID::internal::GenericSwap(this, other);
+    }
+  }
+  void UnsafeArenaSwap(event_cfg* other) {
+    if (other == this) return;
+    GOOGLE_DCHECK(GetArena() == other->GetArena());
+    InternalSwap(other);
+  }
+
+  // implements Message ----------------------------------------------
+
+  inline event_cfg* New() const final {
+    return CreateMaybeMessage<event_cfg>(nullptr);
+  }
+
+  event_cfg* New(::PROTOBUF_NAMESPACE_ID::Arena* arena) const final {
+    return CreateMaybeMessage<event_cfg>(arena);
+  }
+  void CopyFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) final;
+  void MergeFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) final;
+  void CopyFrom(const event_cfg& from);
+  void MergeFrom(const event_cfg& from);
+  PROTOBUF_ATTRIBUTE_REINITIALIZES void Clear() final;
+  bool IsInitialized() const final;
+
+  size_t ByteSizeLong() const final;
+  const char* _InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) final;
+  ::PROTOBUF_NAMESPACE_ID::uint8* _InternalSerialize(
+      ::PROTOBUF_NAMESPACE_ID::uint8* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const final;
+  int GetCachedSize() const final { return _cached_size_.Get(); }
+
+  private:
+  inline void SharedCtor();
+  inline void SharedDtor();
+  void SetCachedSize(int size) const final;
+  void InternalSwap(event_cfg* other);
+  friend class ::PROTOBUF_NAMESPACE_ID::internal::AnyMetadata;
+  static ::PROTOBUF_NAMESPACE_ID::StringPiece FullMessageName() {
+    return "event_cfg";
+  }
+  protected:
+  explicit event_cfg(::PROTOBUF_NAMESPACE_ID::Arena* arena);
+  private:
+  static void ArenaDtor(void* object);
+  inline void RegisterArenaDtor(::PROTOBUF_NAMESPACE_ID::Arena* arena);
+  public:
+
+  ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadata() const final;
+  private:
+  static ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadataStatic() {
+    ::PROTOBUF_NAMESPACE_ID::internal::AssignDescriptors(&::descriptor_table_kind_2eproto);
+    return ::descriptor_table_kind_2eproto.file_level_metadata[kIndexInFileMessages];
+  }
+
+  public:
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  enum : int {
+    kRuleFieldNumber = 6,
+    kIdFieldNumber = 1,
+    kProcessFieldNumber = 2,
+    kItemFieldNumber = 11,
+    kUserExpFieldNumber = 12,
+    kNoteFieldNumber = 13,
+    kEnumTypeFieldNumber = 14,
+    kUserLevelFieldNumber = 51,
+  };
+  // optional .event_rule_item rule = 6;
+  bool has_rule() const;
+  private:
+  bool _internal_has_rule() const;
+  public:
+  void clear_rule();
+  const ::event_rule_item& rule() const;
+  ::event_rule_item* release_rule();
+  ::event_rule_item* mutable_rule();
+  void set_allocated_rule(::event_rule_item* rule);
+  private:
+  const ::event_rule_item& _internal_rule() const;
+  ::event_rule_item* _internal_mutable_rule();
+  public:
+  void unsafe_arena_set_allocated_rule(
+      ::event_rule_item* rule);
+  ::event_rule_item* unsafe_arena_release_rule();
+
+  // optional uint32 id = 1 [(.org.xresloader.ue.key_tag) = 100];
+  bool has_id() const;
+  private:
+  bool _internal_has_id() const;
+  public:
+  void clear_id();
+  ::PROTOBUF_NAMESPACE_ID::uint32 id() const;
+  void set_id(::PROTOBUF_NAMESPACE_ID::uint32 value);
+  private:
+  ::PROTOBUF_NAMESPACE_ID::uint32 _internal_id() const;
+  void _internal_set_id(::PROTOBUF_NAMESPACE_ID::uint32 value);
+  public:
+
+  // optional uint32 process = 2 [(.org.xresloader.ue.key_tag) = 1];
+  bool has_process() const;
+  private:
+  bool _internal_has_process() const;
+  public:
+  void clear_process();
+  ::PROTOBUF_NAMESPACE_ID::uint32 process() const;
+  void set_process(::PROTOBUF_NAMESPACE_ID::uint32 value);
+  private:
+  ::PROTOBUF_NAMESPACE_ID::uint32 _internal_process() const;
+  void _internal_set_process(::PROTOBUF_NAMESPACE_ID::uint32 value);
+  public:
+
+  // .event_reward_item item = 11 [(.org.xresloader.field_alias) = "\345\245\226\345\212\261\351\201\223\345\205\267"];
+  bool has_item() const;
+  private:
+  bool _internal_has_item() const;
+  public:
+  void clear_item();
+  const ::event_reward_item& item() const;
+  ::event_reward_item* release_item();
+  ::event_reward_item* mutable_item();
+  void set_allocated_item(::event_reward_item* item);
+  private:
+  const ::event_reward_item& _internal_item() const;
+  ::event_reward_item* _internal_mutable_item();
+  public:
+  void unsafe_arena_set_allocated_item(
+      ::event_reward_item* item);
+  ::event_reward_item* unsafe_arena_release_item();
+
+  // int64 user_exp = 12 [(.org.xresloader.field_alias) = "\345\245\226\345\212\261\347\273\217\351\252\214"];
+  bool has_user_exp() const;
+  private:
+  bool _internal_has_user_exp() const;
+  public:
+  void clear_user_exp();
+  ::PROTOBUF_NAMESPACE_ID::int64 user_exp() const;
+  void set_user_exp(::PROTOBUF_NAMESPACE_ID::int64 value);
+  private:
+  ::PROTOBUF_NAMESPACE_ID::int64 _internal_user_exp() const;
+  void _internal_set_user_exp(::PROTOBUF_NAMESPACE_ID::int64 value);
+  public:
+
+  // string note = 13 [(.org.xresloader.field_alias) = "\346\217\217\350\277\260\346\226\207\346\234\254"];
+  bool has_note() const;
+  private:
+  bool _internal_has_note() const;
+  public:
+  void clear_note();
+  const std::string& note() const;
+  void set_note(const std::string& value);
+  void set_note(std::string&& value);
+  void set_note(const char* value);
+  void set_note(const char* value, size_t size);
+  std::string* mutable_note();
+  std::string* release_note();
+  void set_allocated_note(std::string* note);
+  GOOGLE_PROTOBUF_RUNTIME_DEPRECATED("The unsafe_arena_ accessors for"
+  "    string fields are deprecated and will be removed in a"
+  "    future release.")
+  std::string* unsafe_arena_release_note();
+  GOOGLE_PROTOBUF_RUNTIME_DEPRECATED("The unsafe_arena_ accessors for"
+  "    string fields are deprecated and will be removed in a"
+  "    future release.")
+  void unsafe_arena_set_allocated_note(
+      std::string* note);
+  private:
+  const std::string& _internal_note() const;
+  void _internal_set_note(const std::string& value);
+  std::string* _internal_mutable_note();
+  public:
+
+  // .cost_type enum_type = 14 [(.org.xresloader.field_alias) = "\350\264\247\345\270\201\347\261\273\345\236\213"];
+  bool has_enum_type() const;
+  private:
+  bool _internal_has_enum_type() const;
+  public:
+  void clear_enum_type();
+  ::cost_type enum_type() const;
+  void set_enum_type(::cost_type value);
+  private:
+  ::cost_type _internal_enum_type() const;
+  void _internal_set_enum_type(::cost_type value);
+  public:
+
+  // uint32 user_level = 51 [(.org.xresloader.field_alias) = "\347\216\251\345\256\266\347\255\211\347\272\247"];
+  bool has_user_level() const;
+  private:
+  bool _internal_has_user_level() const;
+  public:
+  void clear_user_level();
+  ::PROTOBUF_NAMESPACE_ID::uint32 user_level() const;
+  void set_user_level(::PROTOBUF_NAMESPACE_ID::uint32 value);
+  private:
+  ::PROTOBUF_NAMESPACE_ID::uint32 _internal_user_level() const;
+  void _internal_set_user_level(::PROTOBUF_NAMESPACE_ID::uint32 value);
+  public:
+
+  void clear_reward();
+  RewardCase reward_case() const;
+  void clear_unlock_type();
+  UnlockTypeCase unlock_type_case() const;
+  // @@protoc_insertion_point(class_scope:event_cfg)
+ private:
+  class _Internal;
+  void set_has_item();
+  void set_has_user_exp();
+  void set_has_note();
+  void set_has_enum_type();
+  void set_has_user_level();
+
+  inline bool has_reward() const;
+  inline void clear_has_reward();
+
+  inline bool has_unlock_type() const;
+  inline void clear_has_unlock_type();
+
+  template <typename T> friend class ::PROTOBUF_NAMESPACE_ID::Arena::InternalHelper;
+  typedef void InternalArenaConstructable_;
+  typedef void DestructorSkippable_;
+  ::PROTOBUF_NAMESPACE_ID::internal::HasBits<1> _has_bits_;
+  mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
+  ::event_rule_item* rule_;
+  ::PROTOBUF_NAMESPACE_ID::uint32 id_;
+  ::PROTOBUF_NAMESPACE_ID::uint32 process_;
+  union RewardUnion {
+    RewardUnion() {}
+    ::event_reward_item* item_;
+    ::PROTOBUF_NAMESPACE_ID::int64 user_exp_;
+    ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr note_;
+    int enum_type_;
+  } reward_;
+  union UnlockTypeUnion {
+    UnlockTypeUnion() {}
+    ::PROTOBUF_NAMESPACE_ID::uint32 user_level_;
+  } unlock_type_;
+  ::PROTOBUF_NAMESPACE_ID::uint32 _oneof_case_[2];
+
   friend struct ::TableStruct_kind_2eproto;
 };
 // ===================================================================
@@ -2388,9 +3172,962 @@ arr_in_arr_cfg::test_plain_msg_arr() const {
   return test_plain_msg_arr_;
 }
 
+// -------------------------------------------------------------------
+
+// event_reward_item
+
+// optional uint32 item_id = 1;
+inline bool event_reward_item::_internal_has_item_id() const {
+  bool value = (_has_bits_[0] & 0x00000001u) != 0;
+  return value;
+}
+inline bool event_reward_item::has_item_id() const {
+  return _internal_has_item_id();
+}
+inline void event_reward_item::clear_item_id() {
+  item_id_ = 0u;
+  _has_bits_[0] &= ~0x00000001u;
+}
+inline ::PROTOBUF_NAMESPACE_ID::uint32 event_reward_item::_internal_item_id() const {
+  return item_id_;
+}
+inline ::PROTOBUF_NAMESPACE_ID::uint32 event_reward_item::item_id() const {
+  // @@protoc_insertion_point(field_get:event_reward_item.item_id)
+  return _internal_item_id();
+}
+inline void event_reward_item::_internal_set_item_id(::PROTOBUF_NAMESPACE_ID::uint32 value) {
+  _has_bits_[0] |= 0x00000001u;
+  item_id_ = value;
+}
+inline void event_reward_item::set_item_id(::PROTOBUF_NAMESPACE_ID::uint32 value) {
+  _internal_set_item_id(value);
+  // @@protoc_insertion_point(field_set:event_reward_item.item_id)
+}
+
+// optional uint32 item_count = 2;
+inline bool event_reward_item::_internal_has_item_count() const {
+  bool value = (_has_bits_[0] & 0x00000002u) != 0;
+  return value;
+}
+inline bool event_reward_item::has_item_count() const {
+  return _internal_has_item_count();
+}
+inline void event_reward_item::clear_item_count() {
+  item_count_ = 0u;
+  _has_bits_[0] &= ~0x00000002u;
+}
+inline ::PROTOBUF_NAMESPACE_ID::uint32 event_reward_item::_internal_item_count() const {
+  return item_count_;
+}
+inline ::PROTOBUF_NAMESPACE_ID::uint32 event_reward_item::item_count() const {
+  // @@protoc_insertion_point(field_get:event_reward_item.item_count)
+  return _internal_item_count();
+}
+inline void event_reward_item::_internal_set_item_count(::PROTOBUF_NAMESPACE_ID::uint32 value) {
+  _has_bits_[0] |= 0x00000002u;
+  item_count_ = value;
+}
+inline void event_reward_item::set_item_count(::PROTOBUF_NAMESPACE_ID::uint32 value) {
+  _internal_set_item_count(value);
+  // @@protoc_insertion_point(field_set:event_reward_item.item_count)
+}
+
+// string nested_note = 11 [(.org.xresloader.field_alias) = "\346\217\217\350\277\260\346\226\207\346\234\254"];
+inline bool event_reward_item::_internal_has_nested_note() const {
+  return nested_case() == kNestedNote;
+}
+inline bool event_reward_item::has_nested_note() const {
+  return _internal_has_nested_note();
+}
+inline void event_reward_item::set_has_nested_note() {
+  _oneof_case_[0] = kNestedNote;
+}
+inline void event_reward_item::clear_nested_note() {
+  if (_internal_has_nested_note()) {
+    nested_.nested_note_.Destroy(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
+    clear_has_nested();
+  }
+}
+inline const std::string& event_reward_item::nested_note() const {
+  // @@protoc_insertion_point(field_get:event_reward_item.nested_note)
+  return _internal_nested_note();
+}
+inline void event_reward_item::set_nested_note(const std::string& value) {
+  _internal_set_nested_note(value);
+  // @@protoc_insertion_point(field_set:event_reward_item.nested_note)
+}
+inline std::string* event_reward_item::mutable_nested_note() {
+  // @@protoc_insertion_point(field_mutable:event_reward_item.nested_note)
+  return _internal_mutable_nested_note();
+}
+inline const std::string& event_reward_item::_internal_nested_note() const {
+  if (_internal_has_nested_note()) {
+    return nested_.nested_note_.Get();
+  }
+  return *&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited();
+}
+inline void event_reward_item::_internal_set_nested_note(const std::string& value) {
+  if (!_internal_has_nested_note()) {
+    clear_nested();
+    set_has_nested_note();
+    nested_.nested_note_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  }
+  nested_.nested_note_.Set(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), value, GetArena());
+}
+inline void event_reward_item::set_nested_note(std::string&& value) {
+  // @@protoc_insertion_point(field_set:event_reward_item.nested_note)
+  if (!_internal_has_nested_note()) {
+    clear_nested();
+    set_has_nested_note();
+    nested_.nested_note_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  }
+  nested_.nested_note_.Set(
+    &::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), ::std::move(value), GetArena());
+  // @@protoc_insertion_point(field_set_rvalue:event_reward_item.nested_note)
+}
+inline void event_reward_item::set_nested_note(const char* value) {
+  GOOGLE_DCHECK(value != nullptr);
+  if (!_internal_has_nested_note()) {
+    clear_nested();
+    set_has_nested_note();
+    nested_.nested_note_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  }
+  nested_.nested_note_.Set(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(),
+      ::std::string(value), GetArena());
+  // @@protoc_insertion_point(field_set_char:event_reward_item.nested_note)
+}
+inline void event_reward_item::set_nested_note(const char* value,
+                             size_t size) {
+  if (!_internal_has_nested_note()) {
+    clear_nested();
+    set_has_nested_note();
+    nested_.nested_note_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  }
+  nested_.nested_note_.Set(
+      &::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), ::std::string(
+      reinterpret_cast<const char*>(value), size),
+      GetArena());
+  // @@protoc_insertion_point(field_set_pointer:event_reward_item.nested_note)
+}
+inline std::string* event_reward_item::_internal_mutable_nested_note() {
+  if (!_internal_has_nested_note()) {
+    clear_nested();
+    set_has_nested_note();
+    nested_.nested_note_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  }
+  return nested_.nested_note_.Mutable(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
+}
+inline std::string* event_reward_item::release_nested_note() {
+  // @@protoc_insertion_point(field_release:event_reward_item.nested_note)
+  if (_internal_has_nested_note()) {
+    clear_has_nested();
+    return nested_.nested_note_.Release(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
+  } else {
+    return nullptr;
+  }
+}
+inline void event_reward_item::set_allocated_nested_note(std::string* nested_note) {
+  if (has_nested()) {
+    clear_nested();
+  }
+  if (nested_note != nullptr) {
+    set_has_nested_note();
+    nested_.nested_note_.UnsafeSetDefault(nested_note);
+  }
+  // @@protoc_insertion_point(field_set_allocated:event_reward_item.nested_note)
+}
+inline std::string* event_reward_item::unsafe_arena_release_nested_note() {
+  // @@protoc_insertion_point(field_unsafe_arena_release:event_reward_item.nested_note)
+  GOOGLE_DCHECK(GetArena() != nullptr);
+  if (_internal_has_nested_note()) {
+    clear_has_nested();
+    return nested_.nested_note_.UnsafeArenaRelease(
+        &::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
+  } else {
+    return nullptr;
+  }
+}
+inline void event_reward_item::unsafe_arena_set_allocated_nested_note(std::string* nested_note) {
+  GOOGLE_DCHECK(GetArena() != nullptr);
+  if (!_internal_has_nested_note()) {
+    nested_.nested_note_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  }
+  clear_nested();
+  if (nested_note) {
+    set_has_nested_note();
+    nested_.nested_note_.UnsafeArenaSetAllocated(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), nested_note, GetArena());
+  }
+  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:event_reward_item.nested_note)
+}
+
+// .cost_type nested_enum_type = 12 [(.org.xresloader.field_alias) = "\350\264\247\345\270\201\347\261\273\345\236\213"];
+inline bool event_reward_item::_internal_has_nested_enum_type() const {
+  return nested_case() == kNestedEnumType;
+}
+inline bool event_reward_item::has_nested_enum_type() const {
+  return _internal_has_nested_enum_type();
+}
+inline void event_reward_item::set_has_nested_enum_type() {
+  _oneof_case_[0] = kNestedEnumType;
+}
+inline void event_reward_item::clear_nested_enum_type() {
+  if (_internal_has_nested_enum_type()) {
+    nested_.nested_enum_type_ = 0;
+    clear_has_nested();
+  }
+}
+inline ::cost_type event_reward_item::_internal_nested_enum_type() const {
+  if (_internal_has_nested_enum_type()) {
+    return static_cast< ::cost_type >(nested_.nested_enum_type_);
+  }
+  return static_cast< ::cost_type >(0);
+}
+inline ::cost_type event_reward_item::nested_enum_type() const {
+  // @@protoc_insertion_point(field_get:event_reward_item.nested_enum_type)
+  return _internal_nested_enum_type();
+}
+inline void event_reward_item::_internal_set_nested_enum_type(::cost_type value) {
+  assert(::cost_type_IsValid(value));
+  if (!_internal_has_nested_enum_type()) {
+    clear_nested();
+    set_has_nested_enum_type();
+  }
+  nested_.nested_enum_type_ = value;
+}
+inline void event_reward_item::set_nested_enum_type(::cost_type value) {
+  // @@protoc_insertion_point(field_set:event_reward_item.nested_enum_type)
+  _internal_set_nested_enum_type(value);
+}
+
+inline bool event_reward_item::has_nested() const {
+  return nested_case() != NESTED_NOT_SET;
+}
+inline void event_reward_item::clear_has_nested() {
+  _oneof_case_[0] = NESTED_NOT_SET;
+}
+inline event_reward_item::NestedCase event_reward_item::nested_case() const {
+  return event_reward_item::NestedCase(_oneof_case_[0]);
+}
+// -------------------------------------------------------------------
+
+// event_rule_item
+
+// optional uint32 rule_id = 1;
+inline bool event_rule_item::_internal_has_rule_id() const {
+  bool value = (_has_bits_[0] & 0x00000001u) != 0;
+  return value;
+}
+inline bool event_rule_item::has_rule_id() const {
+  return _internal_has_rule_id();
+}
+inline void event_rule_item::clear_rule_id() {
+  rule_id_ = 0u;
+  _has_bits_[0] &= ~0x00000001u;
+}
+inline ::PROTOBUF_NAMESPACE_ID::uint32 event_rule_item::_internal_rule_id() const {
+  return rule_id_;
+}
+inline ::PROTOBUF_NAMESPACE_ID::uint32 event_rule_item::rule_id() const {
+  // @@protoc_insertion_point(field_get:event_rule_item.rule_id)
+  return _internal_rule_id();
+}
+inline void event_rule_item::_internal_set_rule_id(::PROTOBUF_NAMESPACE_ID::uint32 value) {
+  _has_bits_[0] |= 0x00000001u;
+  rule_id_ = value;
+}
+inline void event_rule_item::set_rule_id(::PROTOBUF_NAMESPACE_ID::uint32 value) {
+  _internal_set_rule_id(value);
+  // @@protoc_insertion_point(field_set:event_rule_item.rule_id)
+}
+
+// optional uint32 rule_param = 2;
+inline bool event_rule_item::_internal_has_rule_param() const {
+  bool value = (_has_bits_[0] & 0x00000002u) != 0;
+  return value;
+}
+inline bool event_rule_item::has_rule_param() const {
+  return _internal_has_rule_param();
+}
+inline void event_rule_item::clear_rule_param() {
+  rule_param_ = 0u;
+  _has_bits_[0] &= ~0x00000002u;
+}
+inline ::PROTOBUF_NAMESPACE_ID::uint32 event_rule_item::_internal_rule_param() const {
+  return rule_param_;
+}
+inline ::PROTOBUF_NAMESPACE_ID::uint32 event_rule_item::rule_param() const {
+  // @@protoc_insertion_point(field_get:event_rule_item.rule_param)
+  return _internal_rule_param();
+}
+inline void event_rule_item::_internal_set_rule_param(::PROTOBUF_NAMESPACE_ID::uint32 value) {
+  _has_bits_[0] |= 0x00000002u;
+  rule_param_ = value;
+}
+inline void event_rule_item::set_rule_param(::PROTOBUF_NAMESPACE_ID::uint32 value) {
+  _internal_set_rule_param(value);
+  // @@protoc_insertion_point(field_set:event_rule_item.rule_param)
+}
+
+// string nested_note = 11 [(.org.xresloader.field_alias) = "\346\217\217\350\277\260\346\226\207\346\234\254"];
+inline bool event_rule_item::_internal_has_nested_note() const {
+  return nested_case() == kNestedNote;
+}
+inline bool event_rule_item::has_nested_note() const {
+  return _internal_has_nested_note();
+}
+inline void event_rule_item::set_has_nested_note() {
+  _oneof_case_[0] = kNestedNote;
+}
+inline void event_rule_item::clear_nested_note() {
+  if (_internal_has_nested_note()) {
+    nested_.nested_note_.Destroy(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
+    clear_has_nested();
+  }
+}
+inline const std::string& event_rule_item::nested_note() const {
+  // @@protoc_insertion_point(field_get:event_rule_item.nested_note)
+  return _internal_nested_note();
+}
+inline void event_rule_item::set_nested_note(const std::string& value) {
+  _internal_set_nested_note(value);
+  // @@protoc_insertion_point(field_set:event_rule_item.nested_note)
+}
+inline std::string* event_rule_item::mutable_nested_note() {
+  // @@protoc_insertion_point(field_mutable:event_rule_item.nested_note)
+  return _internal_mutable_nested_note();
+}
+inline const std::string& event_rule_item::_internal_nested_note() const {
+  if (_internal_has_nested_note()) {
+    return nested_.nested_note_.Get();
+  }
+  return *&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited();
+}
+inline void event_rule_item::_internal_set_nested_note(const std::string& value) {
+  if (!_internal_has_nested_note()) {
+    clear_nested();
+    set_has_nested_note();
+    nested_.nested_note_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  }
+  nested_.nested_note_.Set(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), value, GetArena());
+}
+inline void event_rule_item::set_nested_note(std::string&& value) {
+  // @@protoc_insertion_point(field_set:event_rule_item.nested_note)
+  if (!_internal_has_nested_note()) {
+    clear_nested();
+    set_has_nested_note();
+    nested_.nested_note_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  }
+  nested_.nested_note_.Set(
+    &::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), ::std::move(value), GetArena());
+  // @@protoc_insertion_point(field_set_rvalue:event_rule_item.nested_note)
+}
+inline void event_rule_item::set_nested_note(const char* value) {
+  GOOGLE_DCHECK(value != nullptr);
+  if (!_internal_has_nested_note()) {
+    clear_nested();
+    set_has_nested_note();
+    nested_.nested_note_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  }
+  nested_.nested_note_.Set(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(),
+      ::std::string(value), GetArena());
+  // @@protoc_insertion_point(field_set_char:event_rule_item.nested_note)
+}
+inline void event_rule_item::set_nested_note(const char* value,
+                             size_t size) {
+  if (!_internal_has_nested_note()) {
+    clear_nested();
+    set_has_nested_note();
+    nested_.nested_note_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  }
+  nested_.nested_note_.Set(
+      &::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), ::std::string(
+      reinterpret_cast<const char*>(value), size),
+      GetArena());
+  // @@protoc_insertion_point(field_set_pointer:event_rule_item.nested_note)
+}
+inline std::string* event_rule_item::_internal_mutable_nested_note() {
+  if (!_internal_has_nested_note()) {
+    clear_nested();
+    set_has_nested_note();
+    nested_.nested_note_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  }
+  return nested_.nested_note_.Mutable(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
+}
+inline std::string* event_rule_item::release_nested_note() {
+  // @@protoc_insertion_point(field_release:event_rule_item.nested_note)
+  if (_internal_has_nested_note()) {
+    clear_has_nested();
+    return nested_.nested_note_.Release(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
+  } else {
+    return nullptr;
+  }
+}
+inline void event_rule_item::set_allocated_nested_note(std::string* nested_note) {
+  if (has_nested()) {
+    clear_nested();
+  }
+  if (nested_note != nullptr) {
+    set_has_nested_note();
+    nested_.nested_note_.UnsafeSetDefault(nested_note);
+  }
+  // @@protoc_insertion_point(field_set_allocated:event_rule_item.nested_note)
+}
+inline std::string* event_rule_item::unsafe_arena_release_nested_note() {
+  // @@protoc_insertion_point(field_unsafe_arena_release:event_rule_item.nested_note)
+  GOOGLE_DCHECK(GetArena() != nullptr);
+  if (_internal_has_nested_note()) {
+    clear_has_nested();
+    return nested_.nested_note_.UnsafeArenaRelease(
+        &::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
+  } else {
+    return nullptr;
+  }
+}
+inline void event_rule_item::unsafe_arena_set_allocated_nested_note(std::string* nested_note) {
+  GOOGLE_DCHECK(GetArena() != nullptr);
+  if (!_internal_has_nested_note()) {
+    nested_.nested_note_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  }
+  clear_nested();
+  if (nested_note) {
+    set_has_nested_note();
+    nested_.nested_note_.UnsafeArenaSetAllocated(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), nested_note, GetArena());
+  }
+  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:event_rule_item.nested_note)
+}
+
+// .cost_type nested_enum_type = 12 [(.org.xresloader.field_alias) = "\350\264\247\345\270\201\347\261\273\345\236\213"];
+inline bool event_rule_item::_internal_has_nested_enum_type() const {
+  return nested_case() == kNestedEnumType;
+}
+inline bool event_rule_item::has_nested_enum_type() const {
+  return _internal_has_nested_enum_type();
+}
+inline void event_rule_item::set_has_nested_enum_type() {
+  _oneof_case_[0] = kNestedEnumType;
+}
+inline void event_rule_item::clear_nested_enum_type() {
+  if (_internal_has_nested_enum_type()) {
+    nested_.nested_enum_type_ = 0;
+    clear_has_nested();
+  }
+}
+inline ::cost_type event_rule_item::_internal_nested_enum_type() const {
+  if (_internal_has_nested_enum_type()) {
+    return static_cast< ::cost_type >(nested_.nested_enum_type_);
+  }
+  return static_cast< ::cost_type >(0);
+}
+inline ::cost_type event_rule_item::nested_enum_type() const {
+  // @@protoc_insertion_point(field_get:event_rule_item.nested_enum_type)
+  return _internal_nested_enum_type();
+}
+inline void event_rule_item::_internal_set_nested_enum_type(::cost_type value) {
+  assert(::cost_type_IsValid(value));
+  if (!_internal_has_nested_enum_type()) {
+    clear_nested();
+    set_has_nested_enum_type();
+  }
+  nested_.nested_enum_type_ = value;
+}
+inline void event_rule_item::set_nested_enum_type(::cost_type value) {
+  // @@protoc_insertion_point(field_set:event_rule_item.nested_enum_type)
+  _internal_set_nested_enum_type(value);
+}
+
+inline bool event_rule_item::has_nested() const {
+  return nested_case() != NESTED_NOT_SET;
+}
+inline void event_rule_item::clear_has_nested() {
+  _oneof_case_[0] = NESTED_NOT_SET;
+}
+inline event_rule_item::NestedCase event_rule_item::nested_case() const {
+  return event_rule_item::NestedCase(_oneof_case_[0]);
+}
+// -------------------------------------------------------------------
+
+// event_cfg
+
+// optional uint32 id = 1 [(.org.xresloader.ue.key_tag) = 100];
+inline bool event_cfg::_internal_has_id() const {
+  bool value = (_has_bits_[0] & 0x00000002u) != 0;
+  return value;
+}
+inline bool event_cfg::has_id() const {
+  return _internal_has_id();
+}
+inline void event_cfg::clear_id() {
+  id_ = 0u;
+  _has_bits_[0] &= ~0x00000002u;
+}
+inline ::PROTOBUF_NAMESPACE_ID::uint32 event_cfg::_internal_id() const {
+  return id_;
+}
+inline ::PROTOBUF_NAMESPACE_ID::uint32 event_cfg::id() const {
+  // @@protoc_insertion_point(field_get:event_cfg.id)
+  return _internal_id();
+}
+inline void event_cfg::_internal_set_id(::PROTOBUF_NAMESPACE_ID::uint32 value) {
+  _has_bits_[0] |= 0x00000002u;
+  id_ = value;
+}
+inline void event_cfg::set_id(::PROTOBUF_NAMESPACE_ID::uint32 value) {
+  _internal_set_id(value);
+  // @@protoc_insertion_point(field_set:event_cfg.id)
+}
+
+// optional uint32 process = 2 [(.org.xresloader.ue.key_tag) = 1];
+inline bool event_cfg::_internal_has_process() const {
+  bool value = (_has_bits_[0] & 0x00000004u) != 0;
+  return value;
+}
+inline bool event_cfg::has_process() const {
+  return _internal_has_process();
+}
+inline void event_cfg::clear_process() {
+  process_ = 0u;
+  _has_bits_[0] &= ~0x00000004u;
+}
+inline ::PROTOBUF_NAMESPACE_ID::uint32 event_cfg::_internal_process() const {
+  return process_;
+}
+inline ::PROTOBUF_NAMESPACE_ID::uint32 event_cfg::process() const {
+  // @@protoc_insertion_point(field_get:event_cfg.process)
+  return _internal_process();
+}
+inline void event_cfg::_internal_set_process(::PROTOBUF_NAMESPACE_ID::uint32 value) {
+  _has_bits_[0] |= 0x00000004u;
+  process_ = value;
+}
+inline void event_cfg::set_process(::PROTOBUF_NAMESPACE_ID::uint32 value) {
+  _internal_set_process(value);
+  // @@protoc_insertion_point(field_set:event_cfg.process)
+}
+
+// optional .event_rule_item rule = 6;
+inline bool event_cfg::_internal_has_rule() const {
+  bool value = (_has_bits_[0] & 0x00000001u) != 0;
+  PROTOBUF_ASSUME(!value || rule_ != nullptr);
+  return value;
+}
+inline bool event_cfg::has_rule() const {
+  return _internal_has_rule();
+}
+inline void event_cfg::clear_rule() {
+  if (rule_ != nullptr) rule_->Clear();
+  _has_bits_[0] &= ~0x00000001u;
+}
+inline const ::event_rule_item& event_cfg::_internal_rule() const {
+  const ::event_rule_item* p = rule_;
+  return p != nullptr ? *p : *reinterpret_cast<const ::event_rule_item*>(
+      &::_event_rule_item_default_instance_);
+}
+inline const ::event_rule_item& event_cfg::rule() const {
+  // @@protoc_insertion_point(field_get:event_cfg.rule)
+  return _internal_rule();
+}
+inline void event_cfg::unsafe_arena_set_allocated_rule(
+    ::event_rule_item* rule) {
+  if (GetArena() == nullptr) {
+    delete reinterpret_cast<::PROTOBUF_NAMESPACE_ID::MessageLite*>(rule_);
+  }
+  rule_ = rule;
+  if (rule) {
+    _has_bits_[0] |= 0x00000001u;
+  } else {
+    _has_bits_[0] &= ~0x00000001u;
+  }
+  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:event_cfg.rule)
+}
+inline ::event_rule_item* event_cfg::release_rule() {
+  auto temp = unsafe_arena_release_rule();
+  if (GetArena() != nullptr) {
+    temp = ::PROTOBUF_NAMESPACE_ID::internal::DuplicateIfNonNull(temp);
+  }
+  return temp;
+}
+inline ::event_rule_item* event_cfg::unsafe_arena_release_rule() {
+  // @@protoc_insertion_point(field_release:event_cfg.rule)
+  _has_bits_[0] &= ~0x00000001u;
+  ::event_rule_item* temp = rule_;
+  rule_ = nullptr;
+  return temp;
+}
+inline ::event_rule_item* event_cfg::_internal_mutable_rule() {
+  _has_bits_[0] |= 0x00000001u;
+  if (rule_ == nullptr) {
+    auto* p = CreateMaybeMessage<::event_rule_item>(GetArena());
+    rule_ = p;
+  }
+  return rule_;
+}
+inline ::event_rule_item* event_cfg::mutable_rule() {
+  // @@protoc_insertion_point(field_mutable:event_cfg.rule)
+  return _internal_mutable_rule();
+}
+inline void event_cfg::set_allocated_rule(::event_rule_item* rule) {
+  ::PROTOBUF_NAMESPACE_ID::Arena* message_arena = GetArena();
+  if (message_arena == nullptr) {
+    delete rule_;
+  }
+  if (rule) {
+    ::PROTOBUF_NAMESPACE_ID::Arena* submessage_arena =
+      ::PROTOBUF_NAMESPACE_ID::Arena::GetArena(rule);
+    if (message_arena != submessage_arena) {
+      rule = ::PROTOBUF_NAMESPACE_ID::internal::GetOwnedMessage(
+          message_arena, rule, submessage_arena);
+    }
+    _has_bits_[0] |= 0x00000001u;
+  } else {
+    _has_bits_[0] &= ~0x00000001u;
+  }
+  rule_ = rule;
+  // @@protoc_insertion_point(field_set_allocated:event_cfg.rule)
+}
+
+// .event_reward_item item = 11 [(.org.xresloader.field_alias) = "\345\245\226\345\212\261\351\201\223\345\205\267"];
+inline bool event_cfg::_internal_has_item() const {
+  return reward_case() == kItem;
+}
+inline bool event_cfg::has_item() const {
+  return _internal_has_item();
+}
+inline void event_cfg::set_has_item() {
+  _oneof_case_[0] = kItem;
+}
+inline void event_cfg::clear_item() {
+  if (_internal_has_item()) {
+    if (GetArena() == nullptr) {
+      delete reward_.item_;
+    }
+    clear_has_reward();
+  }
+}
+inline ::event_reward_item* event_cfg::release_item() {
+  // @@protoc_insertion_point(field_release:event_cfg.item)
+  if (_internal_has_item()) {
+    clear_has_reward();
+      ::event_reward_item* temp = reward_.item_;
+    if (GetArena() != nullptr) {
+      temp = ::PROTOBUF_NAMESPACE_ID::internal::DuplicateIfNonNull(temp);
+    }
+    reward_.item_ = nullptr;
+    return temp;
+  } else {
+    return nullptr;
+  }
+}
+inline const ::event_reward_item& event_cfg::_internal_item() const {
+  return _internal_has_item()
+      ? *reward_.item_
+      : *reinterpret_cast< ::event_reward_item*>(&::_event_reward_item_default_instance_);
+}
+inline const ::event_reward_item& event_cfg::item() const {
+  // @@protoc_insertion_point(field_get:event_cfg.item)
+  return _internal_item();
+}
+inline ::event_reward_item* event_cfg::unsafe_arena_release_item() {
+  // @@protoc_insertion_point(field_unsafe_arena_release:event_cfg.item)
+  if (_internal_has_item()) {
+    clear_has_reward();
+    ::event_reward_item* temp = reward_.item_;
+    reward_.item_ = nullptr;
+    return temp;
+  } else {
+    return nullptr;
+  }
+}
+inline void event_cfg::unsafe_arena_set_allocated_item(::event_reward_item* item) {
+  clear_reward();
+  if (item) {
+    set_has_item();
+    reward_.item_ = item;
+  }
+  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:event_cfg.item)
+}
+inline ::event_reward_item* event_cfg::_internal_mutable_item() {
+  if (!_internal_has_item()) {
+    clear_reward();
+    set_has_item();
+    reward_.item_ = CreateMaybeMessage< ::event_reward_item >(GetArena());
+  }
+  return reward_.item_;
+}
+inline ::event_reward_item* event_cfg::mutable_item() {
+  // @@protoc_insertion_point(field_mutable:event_cfg.item)
+  return _internal_mutable_item();
+}
+
+// int64 user_exp = 12 [(.org.xresloader.field_alias) = "\345\245\226\345\212\261\347\273\217\351\252\214"];
+inline bool event_cfg::_internal_has_user_exp() const {
+  return reward_case() == kUserExp;
+}
+inline bool event_cfg::has_user_exp() const {
+  return _internal_has_user_exp();
+}
+inline void event_cfg::set_has_user_exp() {
+  _oneof_case_[0] = kUserExp;
+}
+inline void event_cfg::clear_user_exp() {
+  if (_internal_has_user_exp()) {
+    reward_.user_exp_ = PROTOBUF_LONGLONG(0);
+    clear_has_reward();
+  }
+}
+inline ::PROTOBUF_NAMESPACE_ID::int64 event_cfg::_internal_user_exp() const {
+  if (_internal_has_user_exp()) {
+    return reward_.user_exp_;
+  }
+  return PROTOBUF_LONGLONG(0);
+}
+inline void event_cfg::_internal_set_user_exp(::PROTOBUF_NAMESPACE_ID::int64 value) {
+  if (!_internal_has_user_exp()) {
+    clear_reward();
+    set_has_user_exp();
+  }
+  reward_.user_exp_ = value;
+}
+inline ::PROTOBUF_NAMESPACE_ID::int64 event_cfg::user_exp() const {
+  // @@protoc_insertion_point(field_get:event_cfg.user_exp)
+  return _internal_user_exp();
+}
+inline void event_cfg::set_user_exp(::PROTOBUF_NAMESPACE_ID::int64 value) {
+  _internal_set_user_exp(value);
+  // @@protoc_insertion_point(field_set:event_cfg.user_exp)
+}
+
+// string note = 13 [(.org.xresloader.field_alias) = "\346\217\217\350\277\260\346\226\207\346\234\254"];
+inline bool event_cfg::_internal_has_note() const {
+  return reward_case() == kNote;
+}
+inline bool event_cfg::has_note() const {
+  return _internal_has_note();
+}
+inline void event_cfg::set_has_note() {
+  _oneof_case_[0] = kNote;
+}
+inline void event_cfg::clear_note() {
+  if (_internal_has_note()) {
+    reward_.note_.Destroy(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
+    clear_has_reward();
+  }
+}
+inline const std::string& event_cfg::note() const {
+  // @@protoc_insertion_point(field_get:event_cfg.note)
+  return _internal_note();
+}
+inline void event_cfg::set_note(const std::string& value) {
+  _internal_set_note(value);
+  // @@protoc_insertion_point(field_set:event_cfg.note)
+}
+inline std::string* event_cfg::mutable_note() {
+  // @@protoc_insertion_point(field_mutable:event_cfg.note)
+  return _internal_mutable_note();
+}
+inline const std::string& event_cfg::_internal_note() const {
+  if (_internal_has_note()) {
+    return reward_.note_.Get();
+  }
+  return *&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited();
+}
+inline void event_cfg::_internal_set_note(const std::string& value) {
+  if (!_internal_has_note()) {
+    clear_reward();
+    set_has_note();
+    reward_.note_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  }
+  reward_.note_.Set(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), value, GetArena());
+}
+inline void event_cfg::set_note(std::string&& value) {
+  // @@protoc_insertion_point(field_set:event_cfg.note)
+  if (!_internal_has_note()) {
+    clear_reward();
+    set_has_note();
+    reward_.note_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  }
+  reward_.note_.Set(
+    &::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), ::std::move(value), GetArena());
+  // @@protoc_insertion_point(field_set_rvalue:event_cfg.note)
+}
+inline void event_cfg::set_note(const char* value) {
+  GOOGLE_DCHECK(value != nullptr);
+  if (!_internal_has_note()) {
+    clear_reward();
+    set_has_note();
+    reward_.note_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  }
+  reward_.note_.Set(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(),
+      ::std::string(value), GetArena());
+  // @@protoc_insertion_point(field_set_char:event_cfg.note)
+}
+inline void event_cfg::set_note(const char* value,
+                             size_t size) {
+  if (!_internal_has_note()) {
+    clear_reward();
+    set_has_note();
+    reward_.note_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  }
+  reward_.note_.Set(
+      &::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), ::std::string(
+      reinterpret_cast<const char*>(value), size),
+      GetArena());
+  // @@protoc_insertion_point(field_set_pointer:event_cfg.note)
+}
+inline std::string* event_cfg::_internal_mutable_note() {
+  if (!_internal_has_note()) {
+    clear_reward();
+    set_has_note();
+    reward_.note_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  }
+  return reward_.note_.Mutable(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
+}
+inline std::string* event_cfg::release_note() {
+  // @@protoc_insertion_point(field_release:event_cfg.note)
+  if (_internal_has_note()) {
+    clear_has_reward();
+    return reward_.note_.Release(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
+  } else {
+    return nullptr;
+  }
+}
+inline void event_cfg::set_allocated_note(std::string* note) {
+  if (has_reward()) {
+    clear_reward();
+  }
+  if (note != nullptr) {
+    set_has_note();
+    reward_.note_.UnsafeSetDefault(note);
+  }
+  // @@protoc_insertion_point(field_set_allocated:event_cfg.note)
+}
+inline std::string* event_cfg::unsafe_arena_release_note() {
+  // @@protoc_insertion_point(field_unsafe_arena_release:event_cfg.note)
+  GOOGLE_DCHECK(GetArena() != nullptr);
+  if (_internal_has_note()) {
+    clear_has_reward();
+    return reward_.note_.UnsafeArenaRelease(
+        &::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
+  } else {
+    return nullptr;
+  }
+}
+inline void event_cfg::unsafe_arena_set_allocated_note(std::string* note) {
+  GOOGLE_DCHECK(GetArena() != nullptr);
+  if (!_internal_has_note()) {
+    reward_.note_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  }
+  clear_reward();
+  if (note) {
+    set_has_note();
+    reward_.note_.UnsafeArenaSetAllocated(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), note, GetArena());
+  }
+  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:event_cfg.note)
+}
+
+// .cost_type enum_type = 14 [(.org.xresloader.field_alias) = "\350\264\247\345\270\201\347\261\273\345\236\213"];
+inline bool event_cfg::_internal_has_enum_type() const {
+  return reward_case() == kEnumType;
+}
+inline bool event_cfg::has_enum_type() const {
+  return _internal_has_enum_type();
+}
+inline void event_cfg::set_has_enum_type() {
+  _oneof_case_[0] = kEnumType;
+}
+inline void event_cfg::clear_enum_type() {
+  if (_internal_has_enum_type()) {
+    reward_.enum_type_ = 0;
+    clear_has_reward();
+  }
+}
+inline ::cost_type event_cfg::_internal_enum_type() const {
+  if (_internal_has_enum_type()) {
+    return static_cast< ::cost_type >(reward_.enum_type_);
+  }
+  return static_cast< ::cost_type >(0);
+}
+inline ::cost_type event_cfg::enum_type() const {
+  // @@protoc_insertion_point(field_get:event_cfg.enum_type)
+  return _internal_enum_type();
+}
+inline void event_cfg::_internal_set_enum_type(::cost_type value) {
+  assert(::cost_type_IsValid(value));
+  if (!_internal_has_enum_type()) {
+    clear_reward();
+    set_has_enum_type();
+  }
+  reward_.enum_type_ = value;
+}
+inline void event_cfg::set_enum_type(::cost_type value) {
+  // @@protoc_insertion_point(field_set:event_cfg.enum_type)
+  _internal_set_enum_type(value);
+}
+
+// uint32 user_level = 51 [(.org.xresloader.field_alias) = "\347\216\251\345\256\266\347\255\211\347\272\247"];
+inline bool event_cfg::_internal_has_user_level() const {
+  return unlock_type_case() == kUserLevel;
+}
+inline bool event_cfg::has_user_level() const {
+  return _internal_has_user_level();
+}
+inline void event_cfg::set_has_user_level() {
+  _oneof_case_[1] = kUserLevel;
+}
+inline void event_cfg::clear_user_level() {
+  if (_internal_has_user_level()) {
+    unlock_type_.user_level_ = 0u;
+    clear_has_unlock_type();
+  }
+}
+inline ::PROTOBUF_NAMESPACE_ID::uint32 event_cfg::_internal_user_level() const {
+  if (_internal_has_user_level()) {
+    return unlock_type_.user_level_;
+  }
+  return 0u;
+}
+inline void event_cfg::_internal_set_user_level(::PROTOBUF_NAMESPACE_ID::uint32 value) {
+  if (!_internal_has_user_level()) {
+    clear_unlock_type();
+    set_has_user_level();
+  }
+  unlock_type_.user_level_ = value;
+}
+inline ::PROTOBUF_NAMESPACE_ID::uint32 event_cfg::user_level() const {
+  // @@protoc_insertion_point(field_get:event_cfg.user_level)
+  return _internal_user_level();
+}
+inline void event_cfg::set_user_level(::PROTOBUF_NAMESPACE_ID::uint32 value) {
+  _internal_set_user_level(value);
+  // @@protoc_insertion_point(field_set:event_cfg.user_level)
+}
+
+inline bool event_cfg::has_reward() const {
+  return reward_case() != REWARD_NOT_SET;
+}
+inline void event_cfg::clear_has_reward() {
+  _oneof_case_[0] = REWARD_NOT_SET;
+}
+inline bool event_cfg::has_unlock_type() const {
+  return unlock_type_case() != UNLOCK_TYPE_NOT_SET;
+}
+inline void event_cfg::clear_has_unlock_type() {
+  _oneof_case_[1] = UNLOCK_TYPE_NOT_SET;
+}
+inline event_cfg::RewardCase event_cfg::reward_case() const {
+  return event_cfg::RewardCase(_oneof_case_[0]);
+}
+inline event_cfg::UnlockTypeCase event_cfg::unlock_type_case() const {
+  return event_cfg::UnlockTypeCase(_oneof_case_[1]);
+}
 #ifdef __GNUC__
   #pragma GCC diagnostic pop
 #endif  // __GNUC__
+// -------------------------------------------------------------------
+
+// -------------------------------------------------------------------
+
+// -------------------------------------------------------------------
+
 // -------------------------------------------------------------------
 
 // -------------------------------------------------------------------

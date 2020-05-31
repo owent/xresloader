@@ -43,11 +43,13 @@ const char descriptor_table_protodef_xresloader_2eproto[] PROTOBUF_SECTION_VARIA
   ".FieldOptions\030\366\007 \001(\t:6\n\016field_required\022\035"
   ".google.protobuf.FieldOptions\030\367\007 \001(\010:9\n\021"
   "oneof_description\022\035.google.protobuf.Oneo"
-  "fOptions\030\351\007 \001(\t:7\n\020enum_description\022\034.go"
-  "ogle.protobuf.EnumOptions\030\351\007 \001(\t:=\n\021enum"
-  "v_description\022!.google.protobuf.EnumValu"
-  "eOptions\030\351\007 \001(\t:6\n\nenum_alias\022!.google.p"
-  "rotobuf.EnumValueOptions\030\352\007 \001(\tB\002H\001"
+  "fOptions\030\351\007 \001(\t:7\n\017oneof_separator\022\035.goo"
+  "gle.protobuf.OneofOptions\030\352\007 \001(\t:7\n\020enum"
+  "_description\022\034.google.protobuf.EnumOptio"
+  "ns\030\351\007 \001(\t:=\n\021enumv_description\022!.google."
+  "protobuf.EnumValueOptions\030\351\007 \001(\t:6\n\nenum"
+  "_alias\022!.google.protobuf.EnumValueOption"
+  "s\030\352\007 \001(\tB\002H\001"
   ;
 static const ::PROTOBUF_NAMESPACE_ID::internal::DescriptorTable*const descriptor_table_xresloader_2eproto_deps[1] = {
   &::descriptor_table_google_2fprotobuf_2fdescriptor_2eproto,
@@ -56,7 +58,7 @@ static ::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase*const descriptor_table_xre
 };
 static ::PROTOBUF_NAMESPACE_ID::internal::once_flag descriptor_table_xresloader_2eproto_once;
 const ::PROTOBUF_NAMESPACE_ID::internal::DescriptorTable descriptor_table_xresloader_2eproto = {
-  false, false, descriptor_table_protodef_xresloader_2eproto, "xresloader.proto", 875,
+  false, false, descriptor_table_protodef_xresloader_2eproto, "xresloader.proto", 932,
   &descriptor_table_xresloader_2eproto_once, descriptor_table_xresloader_2eproto_sccs, descriptor_table_xresloader_2eproto_deps, 0, 1,
   schemas, file_default_instances, TableStruct_xresloader_2eproto::offsets,
   file_level_metadata_xresloader_2eproto, 0, file_level_enum_descriptors_xresloader_2eproto, file_level_service_descriptors_xresloader_2eproto,
@@ -107,6 +109,10 @@ const std::string oneof_description_default("");
 ::PROTOBUF_NAMESPACE_ID::internal::ExtensionIdentifier< ::google::protobuf::OneofOptions,
     ::PROTOBUF_NAMESPACE_ID::internal::StringTypeTraits, 9, false >
   oneof_description(kOneofDescriptionFieldNumber, oneof_description_default);
+const std::string oneof_separator_default("");
+::PROTOBUF_NAMESPACE_ID::internal::ExtensionIdentifier< ::google::protobuf::OneofOptions,
+    ::PROTOBUF_NAMESPACE_ID::internal::StringTypeTraits, 9, false >
+  oneof_separator(kOneofSeparatorFieldNumber, oneof_separator_default);
 const std::string enum_description_default("");
 ::PROTOBUF_NAMESPACE_ID::internal::ExtensionIdentifier< ::google::protobuf::EnumOptions,
     ::PROTOBUF_NAMESPACE_ID::internal::StringTypeTraits, 9, false >

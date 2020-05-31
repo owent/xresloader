@@ -15,7 +15,7 @@ import org.xresloader.core.data.vfy.DataVerifyImpl;
  */
 public class DataDstWriterNode {
     public enum JAVA_TYPE {
-        INT, LONG, BOOLEAN, STRING, BYTES, FLOAT, DOUBLE, MESSAGE
+        INT, LONG, BOOLEAN, STRING, BYTES, FLOAT, DOUBLE, MESSAGE, ONEOF
     }
 
     public enum FIELD_LABEL_TYPE {
@@ -85,6 +85,7 @@ public class DataDstWriterNode {
         private DataDstFieldExt extension = null;
         private List<DataVerifyImpl> verifyEngine = null;
         private Object rawDescriptor = null;
+        private DataDstOneofDescriptor referOneofDescriptor = null;
 
         public DataDstFieldDescriptor(DataDstMessageDescriptor typeDesc, int index, String name, FIELD_LABEL_TYPE label,
                 Object rawDesc) {
@@ -125,7 +126,7 @@ public class DataDstWriterNode {
         }
 
         public JAVA_TYPE getType() {
-            return typeDescriptor.getType();
+            return this.typeDescriptor.getType();
         }
 
         public DataDstMessageDescriptor getTypeDescriptor() {
@@ -156,25 +157,43 @@ public class DataDstWriterNode {
             extension = new DataDstFieldExt();
             return extension;
         }
+
+        public void setReferOneof(DataDstOneofDescriptor fd) {
+            this.referOneofDescriptor = fd;
+        }
+
+        public DataDstOneofDescriptor getReferOneof() {
+            return this.referOneofDescriptor;
+        }
     }
 
     static public class DataDstOneofDescriptor {
         private int index = 0;
         private String name = null;
-        private HashMap<String, DataDstFieldDescriptor> fields = null;
+        private String fullName = null;
+        private HashMap<String, DataDstFieldDescriptor> fields_by_name = null;
+        private HashMap<Integer, DataDstFieldDescriptor> fields_by_id = null;
         private ArrayList<DataDstFieldDescriptor> sortedFields = null;
-        private DataDstMessageDescriptor typeDescriptor = null;
+        private DataDstMessageDescriptor owner = null;
         private DataDstOneofExt extension = null;
         private List<DataVerifyImpl> verifyEngine = null;
         private Object rawDescriptor = null;
 
-        public DataDstOneofDescriptor(HashMap<String, DataDstFieldDescriptor> fields, int index, String name,
-                Object rawDesc) {
-            this.fields = fields;
+        public DataDstOneofDescriptor(DataDstMessageDescriptor owner, HashMap<String, DataDstFieldDescriptor> fields,
+                int index, String name, Object rawDesc) {
+            this.owner = owner;
+            this.fields_by_name = fields;
             this.index = index;
             this.name = name;
 
             this.rawDescriptor = rawDesc;
+
+            this.fields_by_id = new HashMap<Integer, DataDstFieldDescriptor>();
+            for (HashMap.Entry<String, DataDstFieldDescriptor> d : fields.entrySet()) {
+                this.fields_by_id.put(d.getValue().getIndex(), d.getValue());
+                d.getValue().setReferOneof(this);
+            }
+            this.fullName = String.format("%s.%s", owner.getFullName(), name);
         }
 
         public Object getRawDescriptor() {
@@ -206,11 +225,11 @@ public class DataDstWriterNode {
         }
 
         public JAVA_TYPE getType() {
-            return typeDescriptor.getType();
+            return JAVA_TYPE.ONEOF;
         }
 
-        public DataDstMessageDescriptor getTypeDescriptor() {
-            return this.typeDescriptor;
+        public DataDstMessageDescriptor getOwnerDescriptor() {
+            return this.owner;
         }
 
         public int getIndex() {
@@ -219,6 +238,10 @@ public class DataDstWriterNode {
 
         public String getName() {
             return this.name;
+        }
+
+        public String getFullName() {
+            return this.fullName;
         }
 
         public DataDstOneofExt mutableExtension() {
@@ -230,24 +253,32 @@ public class DataDstWriterNode {
             return extension;
         }
 
+        public DataDstFieldDescriptor getFieldById(int index) {
+            return fields_by_id.getOrDefault(index, null);
+        }
+
+        public DataDstFieldDescriptor getFieldByName(String name) {
+            return fields_by_name.getOrDefault(name, null);
+        }
+
         public ArrayList<DataDstFieldDescriptor> getSortedFields() {
-            if (fields == null) {
+            if (this.fields_by_name == null) {
                 return null;
             }
 
-            if (sortedFields != null && sortedFields.size() == fields.size()) {
-                return sortedFields;
+            if (this.sortedFields != null && this.sortedFields.size() == this.fields_by_name.size()) {
+                return this.sortedFields;
             }
 
-            sortedFields = new ArrayList<DataDstFieldDescriptor>();
-            sortedFields.ensureCapacity(fields.size());
-            for (HashMap.Entry<String, DataDstFieldDescriptor> d : fields.entrySet()) {
-                sortedFields.add(d.getValue());
+            this.sortedFields = new ArrayList<DataDstFieldDescriptor>();
+            this.sortedFields.ensureCapacity(this.fields_by_name.size());
+            for (HashMap.Entry<String, DataDstFieldDescriptor> d : this.fields_by_name.entrySet()) {
+                this.sortedFields.add(d.getValue());
             }
-            sortedFields.sort((l, r) -> {
+            this.sortedFields.sort((l, r) -> {
                 return Integer.compare(l.getIndex(), r.getIndex());
             });
-            return sortedFields;
+            return this.sortedFields;
         }
     }
 
@@ -355,31 +386,45 @@ public class DataDstWriterNode {
     }
 
     public static class DataDstChildrenNode {
-        public DataDstFieldDescriptor innerDesc = null;
+        public DataDstFieldDescriptor innerFieldDesc = null;
+        public DataDstOneofDescriptor innerOneofDesc = null;
         public CHILD_NODE_TYPE mode = CHILD_NODE_TYPE.STANDARD;
-        public Object fieldDescriptor = null;
+        public Object rawDescriptor = null;
         public ArrayList<DataDstWriterNode> nodes = null;
 
         public boolean isRequired() {
-            return innerDesc != null && innerDesc.isRequired();
+            return this.innerFieldDesc != null && this.innerFieldDesc.isRequired();
         }
 
         public boolean isList() {
-            return innerDesc != null && innerDesc.isList();
+            return this.innerFieldDesc != null && this.innerFieldDesc.isList();
         }
 
-        public int getIndex() {
-            if (innerDesc == null) {
+        public int getFieldIndex() {
+            if (this.innerFieldDesc == null) {
                 return 0;
             }
 
-            return innerDesc.getIndex();
+            return this.innerFieldDesc.getIndex();
+        }
+
+        public boolean isOneof() {
+            return this.innerOneofDesc != null;
+        }
+
+        public int getOneofIndex() {
+            if (this.innerOneofDesc == null) {
+                return -1;
+            }
+
+            return this.innerOneofDesc.getIndex();
         }
     }
 
     private HashMap<String, DataDstChildrenNode> children = null;
     private DataDstMessageDescriptor typeDescriptor = null;
     private DataDstFieldDescriptor fieldDescriptor = null;
+    private DataDstOneofDescriptor oneofDescriptor = null;
     public Object privateData = null; // 关联的Message描述信息，不同的DataDstImpl子类不一样。这里的数据和抽象数据结构的类型有关
     public IdentifyDescriptor identify = null; // 关联的Field/Excel列信息，同一个抽象数据结构类型可能对应的数据列不一样。和具体某个结构内的字段有关
     private DataDstChildrenNode referBrothers = null;
@@ -399,6 +444,13 @@ public class DataDstWriterNode {
             return null;
         }
 
+        if (type == JAVA_TYPE.ONEOF) {
+            ProgramOptions.getLoger().error(
+                    "Can not get default description of oneof type, please report this bug to %s",
+                    ProgramOptions.getReportUrl());
+            return null;
+        }
+
         ret = new DataDstMessageDescriptor(type, null, null, null);
         defaultDescs.put(type, ret);
         return ret;
@@ -407,6 +459,13 @@ public class DataDstWriterNode {
     private DataDstWriterNode(Object privateData, DataDstMessageDescriptor typeDesc) {
         this.privateData = privateData;
         this.typeDescriptor = typeDesc;
+        this.oneofDescriptor = null;
+    }
+
+    private DataDstWriterNode(Object privateData, DataDstOneofDescriptor oneofDesc) {
+        this.privateData = privateData;
+        this.typeDescriptor = null;
+        this.oneofDescriptor = oneofDesc;
     }
 
     static public String makeChildPath(String prefix, String child_name, int list_index) {
@@ -447,22 +506,41 @@ public class DataDstWriterNode {
     }
 
     public JAVA_TYPE getType() {
+        if (this.oneofDescriptor != null) {
+            return this.oneofDescriptor.getType();
+        }
         return this.typeDescriptor.getType();
     }
 
     public String getPackageName() {
+        if (this.oneofDescriptor != null) {
+            return this.oneofDescriptor.getOwnerDescriptor().getPackageName();
+        }
+
         return this.typeDescriptor.getPackageName();
     }
 
     public String getMessageName() {
+        if (this.oneofDescriptor != null) {
+            return this.oneofDescriptor.getOwnerDescriptor().getMessageName();
+        }
+
         return this.typeDescriptor.getMessageName();
     }
 
     public String getFullName() {
+        if (this.oneofDescriptor != null) {
+            return this.oneofDescriptor.getFullName();
+        }
+
         return this.typeDescriptor.getFullName();
     }
 
     public DataDstMessageExt getMessageExtension() {
+        if (this.typeDescriptor == null) {
+            return null;
+        }
+
         return this.typeDescriptor.mutableExtension();
     }
 
@@ -494,12 +572,40 @@ public class DataDstWriterNode {
         return this.fieldDescriptor.mutableExtension();
     }
 
+    public DataDstOneofDescriptor getOneofDescriptor() {
+        return this.oneofDescriptor;
+    }
+
+    public int getOneofIndex() {
+        if (this.oneofDescriptor == null) {
+            return -1;
+        }
+
+        return this.oneofDescriptor.getIndex();
+    }
+
+    public String getOneofName() {
+        if (this.oneofDescriptor == null) {
+            return "";
+        }
+
+        return this.oneofDescriptor.getName();
+    }
+
+    public DataDstOneofExt getOneofExtension() {
+        if (this.oneofDescriptor == null) {
+            return null;
+        }
+
+        return this.oneofDescriptor.mutableExtension();
+    }
+
     public String getChildPath(String prefix, int list_index, String child_name) {
         DataDstChildrenNode res = getChildren().getOrDefault(child_name, null);
         if (null == res)
             return null;
 
-        if (res.innerDesc.isList())
+        if (res.innerFieldDesc.isList())
             return String.format("%s[%d].%s", prefix, list_index, child_name);
 
         return getChildPath(prefix, child_name);
@@ -509,14 +615,31 @@ public class DataDstWriterNode {
         return prefix.isEmpty() ? child_name : String.format("%s.%s", prefix, child_name);
     }
 
-    public DataDstChildrenNode addChild(String child_name, DataDstWriterNode node, Object _field_descriptor,
+    public DataDstChildrenNode addChild(String child_name, DataDstWriterNode node, Object _raw_descriptor,
             CHILD_NODE_TYPE mode) throws ConvException {
+        DataDstFieldDescriptor child_field_desc = null;
+        DataDstOneofDescriptor child_oneof_desc = null;
+        if (this.oneofDescriptor != null) {
+            child_field_desc = this.oneofDescriptor.getFieldByName(child_name);
+        } else if (this.typeDescriptor != null) {
+            child_field_desc = this.typeDescriptor.fields.getOrDefault(child_name, null);
+            if (null == child_field_desc) {
+                child_oneof_desc = this.typeDescriptor.oneofs.getOrDefault(child_name, null);
+            }
+        }
+
+        if (null == child_field_desc && null == child_oneof_desc) {
+            throw new ConvException(
+                    String.format("can not find any child with name \"%s\" for %s.", child_name, getFullName()));
+        }
+
         DataDstChildrenNode res = getChildren().getOrDefault(child_name, null);
         if (null == res) {
             res = new DataDstChildrenNode();
             getChildren().put(child_name, res);
-            res.innerDesc = typeDescriptor.fields.get(child_name);
-            res.fieldDescriptor = _field_descriptor;
+            res.innerFieldDesc = child_field_desc;
+            res.innerOneofDesc = child_oneof_desc;
+            res.rawDescriptor = _raw_descriptor;
         }
 
         res.mode = mode;
@@ -527,7 +650,8 @@ public class DataDstWriterNode {
         node.referBrothers = res;
 
         // 复制一份字段数据结构描述
-        node.setFieldDescriptor(res.innerDesc);
+        node.setFieldDescriptor(res.innerFieldDesc);
+        node.setFieldDescriptor(res.innerOneofDesc);
 
         return res;
     }
@@ -539,10 +663,14 @@ public class DataDstWriterNode {
         }
 
         if (fd.getTypeDescriptor() != this.typeDescriptor) {
-            throw new ConvException(String.format("type descriptor and field descriptor not match"));
+            throw new ConvException(String.format("writer's type descriptor and field's type descriptor not match"));
         }
 
         this.fieldDescriptor = fd;
+    }
+
+    public void setFieldDescriptor(DataDstOneofDescriptor fd) throws ConvException {
+        this.oneofDescriptor = fd;
     }
 
     /**
@@ -550,9 +678,20 @@ public class DataDstWriterNode {
      *
      * @param privateData 原始协议描述器
      * @param typeDesc    内部描述类型
-     * @return 创建爱你的节点
+     * @return 创建的节点
      */
     static public DataDstWriterNode create(Object privateData, DataDstMessageDescriptor typeDesc) {
         return new DataDstWriterNode(privateData, typeDesc);
+    }
+
+    /**
+     * 创建节点
+     *
+     * @param privateData 原始协议描述器
+     * @param typeDesc    内部描述类型
+     * @return 创建的节点
+     */
+    static public DataDstWriterNode create(Object privateData, DataDstOneofDescriptor oneofDesc) {
+        return new DataDstWriterNode(privateData, oneofDesc);
     }
 }

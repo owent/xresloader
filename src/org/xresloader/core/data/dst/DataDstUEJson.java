@@ -250,6 +250,8 @@ public class DataDstUEJson extends DataDstUEBase {
             return null;
         }
 
+        // TODO dump oneof data
+
         if (desc.getType() == JAVA_TYPE.MESSAGE) {
             HashSet<String> dumpedFields = null;
             if (isRecursiveEnabled()) {
@@ -285,6 +287,11 @@ public class DataDstUEJson extends DataDstUEBase {
 
                     ret.put(varName, pickValueFieldJsonDefaultImpl(subField));
                 }
+
+                // TODO dump oneof data
+                // for (DataDstOneofDescriptor oneof :
+                // desc.getTypeDescriptor().getSortedOneofs()) {
+                // }
             }
 
             return ret;
@@ -332,6 +339,7 @@ public class DataDstUEJson extends DataDstUEBase {
     private Object pickValueFieldJsonPlainField(IdentifyDescriptor ident, DataDstFieldDescriptor field,
             boolean isTopLevel, String input) throws ConvException {
 
+        // TODO dump oneof data
         if ((isTopLevel && !field.isList()) && field.getType() != DataDstWriterNode.JAVA_TYPE.MESSAGE) {
             // error type
             logErrorMessage("Plain type %s of %s.%s must be list", field.getType().toString(),
@@ -430,6 +438,7 @@ public class DataDstUEJson extends DataDstUEBase {
                 }
 
                 default:
+                    // TODO dump oneof data
                     break;
             }
         } else {
@@ -475,6 +484,7 @@ public class DataDstUEJson extends DataDstUEBase {
                 }
 
                 default:
+                    // TODO dump oneof data
                     break;
             }
         }
@@ -502,6 +512,11 @@ public class DataDstUEJson extends DataDstUEBase {
             String varName = getIdentName(children.get(i).getName());
             ret.put(varName, fieldVal);
         }
+
+        // TODO dump oneof data
+        // for (DataDstOneofDescriptor oneof :
+        // field.getTypeDescriptor().getSortedOneofs()) {
+        // }
 
         if (ret.isEmpty()) {
             return null;
@@ -537,9 +552,15 @@ public class DataDstUEJson extends DataDstUEBase {
                     ret.put(getIdentName(subField.getName()), pickValueFieldJsonDefaultImpl(subField));
                 }
 
+                // TODO dump oneof data
+                // for (DataDstOneofDescriptor oneof :
+                // fd.getTypeDescriptor().getSortedOneofs()) {
+                // }
+
                 return ret;
             }
             default:
+                // TODO dump oneof data
                 return null;
         }
     }

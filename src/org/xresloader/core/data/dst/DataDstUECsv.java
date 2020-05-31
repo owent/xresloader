@@ -345,12 +345,19 @@ public class DataDstUECsv extends DataDstUEBase {
             return true;
         }
 
+        // TODO dump oneof data
+
         if (desc.getType() == JAVA_TYPE.MESSAGE) {
             fieldSB.append("(");
             HashSet<String> dumpedFields = new HashSet<String>();
 
             boolean isFirst = true;
             for (HashMap.Entry<String, DataDstChildrenNode> child : desc.getChildren().entrySet()) {
+                if (child.getValue().isOneof()) {
+                    // TODO dump oneof data
+                    continue;
+                }
+
                 if (isFirst) {
                     isFirst = false;
                 } else {
@@ -384,6 +391,11 @@ public class DataDstUECsv extends DataDstUEBase {
                 }
             }
 
+            // TODO dump oneof data
+            // for (DataDstOneofDescriptor oneof :
+            // desc.getTypeDescriptor().getSortedOneofs()) {
+            // }
+
             fieldSB.append(")");
             return true;
         }
@@ -405,14 +417,15 @@ public class DataDstUECsv extends DataDstUEBase {
     protected void pickValueFieldStandardCsvImpl(StringBuffer fieldSB, DataDstChildrenNode node, boolean isTopLevel)
             throws ConvException {
         boolean isString = false;
-        if (node.innerDesc != null) {
-            isString = node.innerDesc.getType() == JAVA_TYPE.STRING || node.innerDesc.getType() == JAVA_TYPE.BYTES;
+        if (node.innerFieldDesc != null) {
+            isString = node.innerFieldDesc.getType() == JAVA_TYPE.STRING
+                    || node.innerFieldDesc.getType() == JAVA_TYPE.BYTES;
         } else if (!node.nodes.isEmpty()) {
             isString = node.nodes.get(0).getType() == JAVA_TYPE.STRING
                     || node.nodes.get(0).getType() == JAVA_TYPE.BYTES;
         }
 
-        if (node.innerDesc.isList()) {
+        if (node.innerFieldDesc.isList()) {
             if (node.nodes.isEmpty()) {
                 fieldSB.append("\"\"");
                 return;
@@ -458,11 +471,11 @@ public class DataDstUECsv extends DataDstUEBase {
     protected boolean pickValueFieldPlainCsvImpl(StringBuffer fieldSB, DataDstWriterNode desc, DataDstChildrenNode node,
             boolean isTopLevel) throws ConvException {
         if (null == desc || node == null) {
-            if (node.innerDesc != null) {
-                return pickValueFieldCsvDefaultImpl(fieldSB, node.innerDesc);
+            if (node.innerFieldDesc != null) {
+                return pickValueFieldCsvDefaultImpl(fieldSB, node.innerFieldDesc);
             }
         }
-        return pickValueFieldPlainCsvImpl(fieldSB, desc.identify, node.innerDesc, isTopLevel);
+        return pickValueFieldPlainCsvImpl(fieldSB, desc.identify, node.innerFieldDesc, isTopLevel);
     }
 
     protected boolean pickValueFieldPlainCsvImpl(StringBuffer fieldSB, IdentifyDescriptor ident,
@@ -642,6 +655,7 @@ public class DataDstUECsv extends DataDstUEBase {
                 }
 
                 default:
+                    // TODO dump oneof data
                     break;
             }
 
@@ -688,6 +702,7 @@ public class DataDstUECsv extends DataDstUEBase {
                 }
 
                 default:
+                    // TODO dump oneof data
                     break;
             }
 
@@ -719,6 +734,12 @@ public class DataDstUECsv extends DataDstUEBase {
             fieldSB.append("=");
             pickValueFieldPlainCsvImpl(fieldSB, ident, children.get(i), false, inputs[i]);
         }
+
+        // TODO dump oneof data
+        // for (DataDstOneofDescriptor oneof :
+        // field.getTypeDescriptor().getSortedOneofs()) {
+        // }
+
         fieldSB.append(")");
         return true;
     }
@@ -766,10 +787,16 @@ public class DataDstUECsv extends DataDstUEBase {
                     }
                 }
 
+                // TODO dump oneof data
+                // for (DataDstOneofDescriptor oneof :
+                // fd.getSortedOneofs()) {
+                // }
+
                 sb.append(")");
                 break;
             }
             default:
+                // TODO dump oneof data
                 return false;
         }
 

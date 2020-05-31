@@ -10,8 +10,7 @@ import org.xresloader.core.data.vfy.DataVerifyImpl;
 import org.xresloader.core.data.vfy.DataVerifyResult;
 
 /**
- * Created by owt50 on 2016/12/7.
- * 这个数据结构对应Excel里的一列
+ * Created by owt50 on 2016/12/7. 这个数据结构对应Excel里的一列
  */
 public class IdentifyDescriptor {
     /**
@@ -66,10 +65,11 @@ public class IdentifyDescriptor {
     }
 
     public int getRatio() {
-        if (null == referToWriterNode || null == referToWriterNode.getReferBrothers()) {
+        if (null == referToWriterNode || null == referToWriterNode.getReferBrothers()
+                || null == referToWriterNode.getReferBrothers().innerFieldDesc) {
             return 1;
         }
 
-        return referToWriterNode.getReferBrothers().innerDesc.mutableExtension().ratio;
+        return referToWriterNode.getReferBrothers().innerFieldDesc.mutableExtension().ratio;
     }
 }

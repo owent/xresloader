@@ -17,11 +17,6 @@ struct FArrInArr : public FTableRowBase
     GENERATED_USTRUCT_BODY()
 
     // Start of fields
-    // This is a test name in array
-    /** Field Type: STRING, Name: Name **/
-    UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "XResConfig")
-    FName Name;
-
     /** Field Type: INT, Name: IntArr **/
     UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "XResConfig")
     TArray< int32 > IntArr;
@@ -29,6 +24,11 @@ struct FArrInArr : public FTableRowBase
     /** Field Type: STRING, Name: StrArr **/
     UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "XResConfig")
     TArray< FString > StrArr;
+
+    // This is a test name in array
+    /** Field Type: STRING, Name: Name **/
+    UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "XResConfig")
+    FName Name;
 
 };
 

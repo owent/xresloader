@@ -44,6 +44,42 @@
         "Name": "cost_type.EN_CT_DIAMOND"
     },
     {
+        "Value": 11,
+        "Name": "event_cfg.reward.kItem"
+    },
+    {
+        "Value": 12,
+        "Name": "event_cfg.reward.kUserExp"
+    },
+    {
+        "Value": 13,
+        "Name": "event_cfg.reward.kNote"
+    },
+    {
+        "Value": 14,
+        "Name": "event_cfg.reward.kEnumType"
+    },
+    {
+        "Value": 51,
+        "Name": "event_cfg.unlock_type.kUserLevel"
+    },
+    {
+        "Value": 11,
+        "Name": "event_reward_item.nested.kNestedNote"
+    },
+    {
+        "Value": 12,
+        "Name": "event_reward_item.nested.kNestedEnumType"
+    },
+    {
+        "Value": 11,
+        "Name": "event_rule_item.nested.kNestedNote"
+    },
+    {
+        "Value": 12,
+        "Name": "event_rule_item.nested.kNestedEnumType"
+    },
+    {
         "Value": 0,
         "Name": "game_const_config.EN_GCC_UNKNOWN"
     },

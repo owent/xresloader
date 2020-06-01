@@ -90,6 +90,10 @@ public class DataDstPb extends DataDstImpl {
 
     static <T> void append_alias_list(String short_name, String full_name, HashMap<String, PbAliasNode<T>> hashmap,
             T ele) {
+        while (full_name.length() > 0 && full_name.charAt(0) == '.') {
+            full_name = full_name.substring(1);
+        }
+
         if (!short_name.isEmpty()) {
             PbAliasNode<T> ls = hashmap.getOrDefault(short_name, null);
             if (null == ls) {
@@ -114,6 +118,9 @@ public class DataDstPb extends DataDstImpl {
     }
 
     static <T> T get_alias_list_element(String name, HashMap<String, PbAliasNode<T>> hashmap, String type_name) {
+        while (name.length() > 0 && name.charAt(0) == '.') {
+            name = name.substring(1);
+        }
         PbAliasNode<T> ls = hashmap.getOrDefault(name, null);
         if (null == ls || null == ls.element) {
             return null;
@@ -351,6 +358,9 @@ public class DataDstPb extends DataDstImpl {
         LinkedList<DataVerifyImpl> ret = new LinkedList<DataVerifyImpl>();
 
         String rule = String.format("%s.%s.%s", container.getFile().getPackage(), container.getName(), fd.getName());
+        if (rule.length() > 0 && rule.charAt(0) == '.') {
+            rule = rule.substring(1);
+        }
         {
             DataVerifyImpl vfy = cachePbs.identifiers.getOrDefault(rule, null);
             // 命中缓存
@@ -426,7 +436,7 @@ public class DataDstPb extends DataDstImpl {
 
         // auto verifier for enum
         if (fd != null && fd.getJavaType() == JavaType.ENUM) {
-            String rule = fd.getFullName();
+            String rule = fd.getEnumType().getFullName();
             if (rule.length() > 0 && rule.charAt(0) == '.') {
                 rule = rule.substring(1);
             }
@@ -542,6 +552,8 @@ public class DataDstPb extends DataDstImpl {
         }
 
         innerDesc.fields = new HashMap<String, DataDstFieldDescriptor>();
+        innerDesc.oneofs = new HashMap<String, DataDstOneofDescriptor>();
+
         for (Descriptors.FieldDescriptor field : pbDesc.getFields()) {
             Descriptors.Descriptor fieldPbDesc = null;
             if (field.getJavaType() == JavaType.MESSAGE) {
@@ -597,6 +609,10 @@ public class DataDstPb extends DataDstImpl {
             ret = new DataDstMessageDescriptor(type, pbDesc.getFile().getPackage(), pbDesc.getName(), pbDesc);
         }
         pbs.dataDstDescs.put(key, ret);
+
+        if (null == pbDesc) {
+            return ret;
+        }
 
         // extensions
         if (pbDesc.getOptions().hasExtension(Xresloader.msgDescription)) {

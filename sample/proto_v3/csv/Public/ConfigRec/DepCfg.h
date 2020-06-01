@@ -18,10 +18,6 @@ struct FDepCfg : public FTableRowBase
     GENERATED_USTRUCT_BODY()
 
     // Start of fields
-    /** Field Type: STRING, Name: Name **/
-    UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "XResConfig")
-    FName Name;
-
     /** Field Type: INT, Name: Id **/
     UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "XResConfig")
     int32 Id;
@@ -29,5 +25,9 @@ struct FDepCfg : public FTableRowBase
     /** Field Type: MESSAGE, Name: Dep2 **/
     UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "XResConfig")
     FDep2Cfg Dep2;
+
+    /** Field Type: STRING, Name: Name **/
+    UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "XResConfig")
+    FName Name;
 
 };

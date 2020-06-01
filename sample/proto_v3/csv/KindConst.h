@@ -17,10 +17,6 @@ struct FKindConst : public FTableRowBase
     GENERATED_USTRUCT_BODY()
 
     // Start of fields
-    /** Field Type: STRING, Name: Name. This field is generated for UE Editor compatible. **/
-    UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "XResConfig")
-    FName Name;
-
     /** Field Type: INT, Name: Value. This field is generated for UE Editor compatible. **/
     UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "XResConfig")
     int32 Value;

@@ -49,6 +49,11 @@ public class DataDstUECsv extends DataDstUEBase {
     }
 
     @Override
+    protected boolean isNameFieldEnabledForCode() {
+        return false;
+    }
+
+    @Override
     protected Object buildForUEOnInit() throws IOException {
         UEBuildObject ret = new UEBuildObject();
         ret.sb = new StringBuffer();

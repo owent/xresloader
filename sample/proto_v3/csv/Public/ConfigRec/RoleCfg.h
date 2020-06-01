@@ -18,10 +18,6 @@ struct FRoleCfg : public FTableRowBase
     GENERATED_USTRUCT_BODY()
 
     // Start of fields
-    /** Field Type: STRING, Name: Name **/
-    UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "XResConfig")
-    FName Name;
-
     /** Field Type: INT, Name: Id **/
     UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "XResConfig")
     int32 Id;
@@ -49,5 +45,9 @@ struct FRoleCfg : public FTableRowBase
     /** Field Type: STRING, Name: IntAsString **/
     UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "XResConfig")
     FString IntAsString;
+
+    /** Field Type: STRING, Name: Name **/
+    UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "XResConfig")
+    FName Name;
 
 };

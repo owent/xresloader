@@ -43,6 +43,11 @@ public class DataDstUEJson extends DataDstUEBase {
     }
 
     @Override
+    protected boolean isNameFieldEnabledForCode() {
+        return true;
+    }
+
+    @Override
     protected Object buildForUEOnInit() throws IOException {
         UEBuildObject ret = new UEBuildObject();
         ret.ja = new JSONArray();

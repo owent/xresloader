@@ -14,9 +14,9 @@ UArrInArrHelper::UArrInArrHelper() : Super()
 
 void UArrInArrHelper::ClearRow(FArrInArr& TableRow)
 {
-    TableRow.Name = TEXT("");
     TableRow.IntArr.Reset(0);
     TableRow.StrArr.Reset(0);
+    TableRow.Name = TEXT("");
 }
 
 void UArrInArrHelper::ClearDataRow(FArrInArr& TableRow) const

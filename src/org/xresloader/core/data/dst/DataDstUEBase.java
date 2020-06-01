@@ -572,6 +572,8 @@ public abstract class DataDstUEBase extends DataDstImpl {
 
     abstract protected boolean isRecursiveEnabled();
 
+    abstract protected boolean isNameFieldEnabledForCode();
+
     abstract protected Object buildForUEOnInit() throws IOException;
 
     abstract protected byte[] buildForUEOnFinal(Object buildObj);
@@ -1724,7 +1726,12 @@ public abstract class DataDstUEBase extends DataDstImpl {
             dumpedFields = new HashSet<String>();
         }
 
-        for (int i = 0; i < rule.keyFields.size(); ++i) {
+        // The key field of 0 is FName Name
+        int start_key_field = 0;
+        if (!isNameFieldEnabledForCode()) {
+            start_key_field = 1;
+        }
+        for (int i = start_key_field; i < rule.keyFields.size(); ++i) {
             ArrayList<DataDstWriterNodeWrapper> fieldSet = rule.keyFields.get(i);
             DataDstFieldDescriptor field = getFieldDescriptor(fieldSet);
             if (null == field || fieldSet.isEmpty()) {
@@ -2039,7 +2046,12 @@ public abstract class DataDstUEBase extends DataDstImpl {
             dumpedFields = new HashSet<String>();
         }
 
-        for (int i = 0; i < rule.keyFields.size(); ++i) {
+        // The key field of 0 is FName Name
+        int start_key_field = 0;
+        if (!isNameFieldEnabledForCode()) {
+            start_key_field = 1;
+        }
+        for (int i = start_key_field; i < rule.keyFields.size(); ++i) {
             ArrayList<DataDstWriterNodeWrapper> fieldSet = rule.keyFields.get(i);
             if (fieldSet.isEmpty()) {
                 continue;

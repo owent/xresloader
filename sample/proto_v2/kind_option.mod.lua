@@ -88,6 +88,113 @@ local const_res = {
             msg_description = "Test arr_in_arr_cfg",
           },
         },
+        event_cfg = {
+          field = {
+            enum_type = {
+              name = "enum_type",
+              number = 14,
+              options = {
+                field_alias = "货币类型",
+              },
+              type_name = "ENUM",
+            },
+            id = {
+              name = "id",
+              number = 1,
+              options = {
+                key_tag = 100,
+              },
+              type_name = "UINT32",
+            },
+            item = {
+              name = "item",
+              number = 11,
+              options = {
+                field_alias = "奖励道具",
+              },
+              type_name = "MESSAGE",
+            },
+            note = {
+              name = "note",
+              number = 13,
+              options = {
+                field_alias = "描述文本",
+              },
+              type_name = "STRING",
+            },
+            process = {
+              name = "process",
+              number = 2,
+              options = {
+                key_tag = 1,
+              },
+              type_name = "UINT32",
+            },
+            user_exp = {
+              name = "user_exp",
+              number = 12,
+              options = {
+                field_alias = "奖励经验",
+              },
+              type_name = "INT64",
+            },
+            user_level = {
+              name = "user_level",
+              number = 51,
+              options = {
+                field_alias = "玩家等级",
+              },
+              type_name = "UINT32",
+            },
+          },
+          name = "event_cfg",
+          options = {
+            helper = "helper",
+            msg_description = "Test role_upgrade_cfg with oneof fields",
+          },
+        },
+        event_reward_item = {
+          field = {
+            nested_enum_type = {
+              name = "nested_enum_type",
+              number = 12,
+              options = {
+                field_alias = "货币类型",
+              },
+              type_name = "ENUM",
+            },
+            nested_note = {
+              name = "nested_note",
+              number = 11,
+              options = {
+                field_alias = "描述文本",
+              },
+              type_name = "STRING",
+            },
+          },
+          name = "event_reward_item",
+        },
+        event_rule_item = {
+          field = {
+            nested_enum_type = {
+              name = "nested_enum_type",
+              number = 12,
+              options = {
+                field_alias = "货币类型",
+              },
+              type_name = "ENUM",
+            },
+            nested_note = {
+              name = "nested_note",
+              number = 11,
+              options = {
+                field_alias = "描述文本",
+              },
+              type_name = "STRING",
+            },
+          },
+          name = "event_rule_item",
+        },
         role_upgrade_cfg = {
           field = {
             CostType = {

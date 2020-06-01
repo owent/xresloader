@@ -10,6 +10,15 @@ arr_in_arr.test_onof.kTestRoleUpgradeCfg,12
 cost_type.EN_CT_UNKNOWN,0
 cost_type.EN_CT_MONEY,10001
 cost_type.EN_CT_DIAMOND,10101
+event_cfg.reward.kItem,11
+event_cfg.reward.kUserExp,12
+event_cfg.reward.kNote,13
+event_cfg.reward.kEnumType,14
+event_cfg.unlock_type.kUserLevel,51
+event_reward_item.nested.kNestedNote,11
+event_reward_item.nested.kNestedEnumType,12
+event_rule_item.nested.kNestedNote,11
+event_rule_item.nested.kNestedEnumType,12
 game_const_config.EN_GCC_UNKNOWN,0
 game_const_config.EN_GCC_FORMULAR_TYPE_MASK,10
 game_const_config.EN_GCC_RANDOM_RANGE_UNIT,10

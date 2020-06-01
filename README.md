@@ -274,6 +274,7 @@ Protobuf插件
 | :-------------------------------------------: | :-------------------------------------------: |
 | org.xresloader.msg_description                | 消息体描述信息，会写入输出的header中和代码中  |
 | org.xresloader.msg_require_mapping_all        | 设置message的所有字段必须被全部映射           |
+| org.xresloader.msg_separator                  | Plain模式字段分隔符，可指定多个，用于在一个单元格内配置复杂格式时的分隔符列表，默认值: ```,;|``` |
 | org.xresloader.ue.helper                      | 生成UE Utility代码的类名后缀                  |
 
 ### Protobuf插件 - Field插件
@@ -288,6 +289,20 @@ Protobuf插件
 | org.xresloader.field_required    | 设置字段为 **required** ，用于向proto3提供，proto2的 **required** 约束                                             |
 | org.xresloader.ue.key_tag        | 生成UE代码时，如果需要支持多个Key组合成一个Name，用这个字段指定系数（必须大于0）                                   |
 | org.xresloader.ue.ueTypeName     | 生成UE代码时，如果指定了这个字段，那么生成的字段类型将是 ```TSoftObjectPtr<ueTypeName>``` , 并且支持蓝图中直接引用 |
+
+### Protobuf插件 - EnumValue插件
+
+|             插件名称             |                                                      插件功能                                                      |
+| :------------------------------: | :----------------------------------------------------------------------------------------------------------------: |
+| org.xresloader.enumv_description | 枚举值描述信息，可能会写入输出的header中和代码中                                                                   |
+| org.xresloader.enum_alias        | 枚举值别名，配合 **验证器** 功能，允许在数据源中直接填写别名来配置数据                                             |
+
+### Protobuf插件 - Oneof插件(2.8.0版本及以上)
+
+|             插件名称             |                                                      插件功能                                                      |
+| :------------------------------: | :----------------------------------------------------------------------------------------------------------------: |
+| org.xresloader.oneof_description | oneof描述信息，可能会写入输出的header中和代码中                                                                    |
+| org.xresloader.oneof_separator   | Plain模式类型和值字段的分隔符，可指定多个，用于在一个单元格内配置复杂格式时的分隔符列表，默认值: ```,;|```         |
 
 编译和打包（For developer）
 ======

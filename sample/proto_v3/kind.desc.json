@@ -93,6 +93,74 @@
         "options": {"msg_separator": "-^"},
         "name": "test_msg_verifier"
       },
+      "event_cfg": {
+        "field": {
+          "note": {
+            "options": {"field_alias": "描述文本"},
+            "name": "note",
+            "number": 13,
+            "type_name": "STRING"
+          },
+          "process": {
+            "options": {"key_tag": 1},
+            "name": "process",
+            "number": 2,
+            "type_name": "UINT32"
+          },
+          "item": {
+            "options": {"field_alias": "奖励道具"},
+            "name": "item",
+            "number": 11,
+            "type_name": "MESSAGE"
+          },
+          "enum_type": {
+            "options": {"field_alias": "货币类型"},
+            "name": "enum_type",
+            "number": 14,
+            "type_name": "ENUM"
+          },
+          "user_level": {
+            "options": {"field_alias": "玩家等级"},
+            "name": "user_level",
+            "number": 51,
+            "type_name": "UINT32"
+          },
+          "id": {
+            "options": {"key_tag": 100},
+            "name": "id",
+            "number": 1,
+            "type_name": "UINT32"
+          },
+          "user_exp": {
+            "options": {"field_alias": "奖励经验"},
+            "name": "user_exp",
+            "number": 12,
+            "type_name": "INT64"
+          }
+        },
+        "options": {
+          "helper": "helper",
+          "msg_description": "Test role_upgrade_cfg with oneof fields"
+        },
+        "name": "event_cfg"
+      },
+      "event_reward_item": {
+        "field": {
+          "nested_note": {
+            "options": {"field_alias": "描述文本"},
+            "name": "nested_note",
+            "number": 11,
+            "type_name": "STRING"
+          },
+          "nested_enum_type": {
+            "options": {"field_alias": "货币类型"},
+            "name": "nested_enum_type",
+            "number": 12,
+            "type_name": "ENUM"
+          }
+        },
+        "name": "event_reward_item"
+      },
       "arr_in_arr": {
         "field": {"name": {
           "options": {"field_description": "This is a test name in array"},
@@ -105,6 +173,23 @@
           "not_data_table": true
         },
         "name": "arr_in_arr"
+      },
+      "event_rule_item": {
+        "field": {
+          "nested_note": {
+            "options": {"field_alias": "描述文本"},
+            "name": "nested_note",
+            "number": 11,
+            "type_name": "STRING"
+          },
+          "nested_enum_type": {
+            "options": {"field_alias": "货币类型"},
+            "name": "nested_enum_type",
+            "number": 12,
+            "type_name": "ENUM"
+          }
+        },
+        "name": "event_rule_item"
       }
     },
     "package": ""

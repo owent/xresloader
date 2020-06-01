@@ -91,7 +91,6 @@ UDataTable* URoleUpgradeCfgHelper::GetRawDataTable(bool& IsValid) const
 
 void URoleUpgradeCfgHelper::ClearRow(FRoleUpgradeCfg& TableRow)
 {
-    TableRow.Name = TEXT("");
     TableRow.Id = 0;
     TableRow.Level = 0;
     TableRow.CostType = 0;

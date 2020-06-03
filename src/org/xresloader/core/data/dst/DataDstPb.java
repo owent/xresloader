@@ -73,6 +73,7 @@ public class DataDstPb extends DataDstImpl {
         public HashSet<String> file_descs_failed = new HashSet<String>();
         /*** 类型信息-Message描述器集合 ***/
         public HashMap<String, PbAliasNode<Descriptors.Descriptor>> message_descs = new HashMap<String, PbAliasNode<Descriptors.Descriptor>>();
+        public HashMap<String, HashMap<Integer, Descriptors.EnumValueDescriptor>> enum_values_descs = new HashMap<String, HashMap<Integer, Descriptors.EnumValueDescriptor>>();
 
         // ========================== 验证器 ==========================
         HashMap<String, DataVerifyImpl> identifiers = new HashMap<String, DataVerifyImpl>();
@@ -225,6 +226,24 @@ public class DataDstPb extends DataDstImpl {
 
     static Descriptors.Descriptor get_message_proto(PbInfoSet pbs, String proto_name) {
         return get_alias_list_element(proto_name, pbs.message_descs, "protocol message");
+    }
+
+    static Descriptors.EnumValueDescriptor get_enum_value(PbInfoSet pbs, Descriptors.EnumDescriptor enum_desc,
+            Integer val) {
+        String name = enum_desc.getFullName();
+        while (!name.isEmpty() && '.' == name.charAt(0)) {
+            name = name.substring(1);
+        }
+        HashMap<Integer, Descriptors.EnumValueDescriptor> cache_set = pbs.enum_values_descs.getOrDefault(name, null);
+        if (cache_set == null) {
+            cache_set = new HashMap<Integer, Descriptors.EnumValueDescriptor>();
+            pbs.enum_values_descs.put(name, cache_set);
+            for (Descriptors.EnumValueDescriptor enum_val : enum_desc.getValues()) {
+                cache_set.put(Integer.valueOf(enum_val.getNumber()), enum_val);
+            }
+        }
+
+        return cache_set.getOrDefault(val, null);
     }
 
     static Descriptors.FileDescriptor init_pb_files(PbInfoSet pbs, String name, boolean allow_unknown_dependencies) {
@@ -576,7 +595,7 @@ public class DataDstPb extends DataDstImpl {
 
         for (Descriptors.OneofDescriptor oneof : pbDesc.getOneofs()) {
             HashMap<String, DataDstFieldDescriptor> fields = new HashMap<String, DataDstFieldDescriptor>();
-            for (Descriptors.FieldDescriptor field : pbDesc.getFields()) {
+            for (Descriptors.FieldDescriptor field : oneof.getFields()) {
                 DataDstFieldDescriptor find_field = innerDesc.fields.getOrDefault(field.getName(), null);
                 if (find_field != null) {
                     fields.put(field.getName(), find_field);
@@ -1046,13 +1065,38 @@ public class DataDstPb extends DataDstImpl {
         }
     }
 
+    private void dumpValue(DynamicMessage.Builder builder, Descriptors.FieldDescriptor fd, Object val) {
+        if (JavaType.ENUM == fd.getJavaType()) {
+            Descriptors.EnumValueDescriptor enum_val = get_enum_value(cachePbs, fd.getEnumType(), (Integer) val);
+            if (null == enum_val) {
+                return;
+            }
+
+            if (fd.isRepeated()) {
+                builder.addRepeatedField(fd, enum_val);
+            } else {
+                builder.setField(fd, enum_val);
+            }
+        } else {
+            if (fd.isRepeated()) {
+                builder.addRepeatedField(fd, val);
+            } else {
+                builder.setField(fd, val);
+            }
+        }
+    }
+
+    private void dumpDefault(DynamicMessage.Builder builder, Descriptors.OneofDescriptor fd) {
+        builder.clearOneof(fd);
+    }
+
     private void dumpDefault(DynamicMessage.Builder builder, Descriptors.FieldDescriptor fd) {
         switch (fd.getType()) {
             case DOUBLE:
-                builder.setField(fd, Double.valueOf(0.0));
+                dumpValue(builder, fd, Double.valueOf(0.0));
                 break;
             case FLOAT:
-                builder.setField(fd, Float.valueOf(0));
+                dumpValue(builder, fd, Float.valueOf(0));
                 break;
             case INT64:
             case UINT64:
@@ -1064,19 +1108,19 @@ public class DataDstPb extends DataDstImpl {
             case SFIXED64:
             case SINT32:
             case SINT64:
-                builder.setField(fd, 0);
+                dumpValue(builder, fd, 0);
                 break;
             case ENUM:
-                builder.setField(fd, fd.getEnumType().findValueByNumber(0));
+                dumpValue(builder, fd, fd.getEnumType().findValueByNumber(0));
                 break;
             case BOOL:
-                builder.setField(fd, false);
+                dumpValue(builder, fd, false);
                 break;
             case STRING:
-                builder.setField(fd, "");
+                dumpValue(builder, fd, "");
                 break;
             case GROUP:
-                builder.setField(fd, new byte[0]);
+                dumpValue(builder, fd, new byte[0]);
                 break;
             case MESSAGE: {
                 DynamicMessage.Builder subnode = DynamicMessage.newBuilder(fd.getMessageType());
@@ -1088,11 +1132,11 @@ public class DataDstPb extends DataDstImpl {
                     }
                 }
 
-                builder.setField(fd, subnode.build());
+                dumpValue(builder, fd, subnode.build());
                 break;
             }
             case BYTES:
-                builder.setField(fd, new byte[0]);
+                dumpValue(builder, fd, new byte[0]);
                 break;
         }
     }
@@ -1110,8 +1154,12 @@ public class DataDstPb extends DataDstImpl {
 
         for (Map.Entry<String, DataDstWriterNode.DataDstChildrenNode> c : node.getChildren().entrySet()) {
             if (c.getValue().isOneof()) {
-                // TODO dump oneof data
-
+                // dump oneof data
+                for (DataDstWriterNode child : c.getValue().nodes) {
+                    if (dumpPlainField(builder, child.identify, child.getOneofDescriptor(), true)) {
+                        ret = true;
+                    }
+                }
             } else if (c.getValue().mode == DataDstWriterNode.CHILD_NODE_TYPE.STANDARD) {
                 Descriptors.FieldDescriptor fd = (Descriptors.FieldDescriptor) c.getValue().rawDescriptor;
                 if (null == fd) {
@@ -1243,13 +1291,64 @@ public class DataDstPb extends DataDstImpl {
             return false;
         }
 
-        if (fd.isRepeated()) {
-            builder.addRepeatedField(fd, val);
-        } else {
-            builder.setField(fd, val);
+        dumpValue(builder, fd, val);
+        return true;
+    }
+
+    private boolean dumpPlainField(DynamicMessage.Builder builder, IdentifyDescriptor ident,
+            DataDstWriterNode.DataDstOneofDescriptor field, boolean isTopLevel) throws ConvException {
+        if (field == null) {
+            return false;
         }
 
-        return true;
+        if (null == ident) {
+            if (ProgramOptions.getInstance().enbleEmptyList) {
+                Descriptors.OneofDescriptor fd = (Descriptors.OneofDescriptor) field.getRawDescriptor();
+                if (null == fd) {
+                    // 不需要提示，如果从其他方式解包协议描述的时候可能有可选字段丢失的
+                    return false;
+                }
+                dumpDefault(builder, fd);
+            }
+            return false;
+        }
+
+        DataContainer<String> res = DataSrcImpl.getOurInstance().getValue(ident, "");
+        if (null == res || !res.valid) {
+            return false;
+        }
+
+        return dumpPlainField(builder, ident, field, isTopLevel, res.value);
+    }
+
+    private boolean dumpPlainField(DynamicMessage.Builder builder, IdentifyDescriptor ident,
+            DataDstWriterNode.DataDstOneofDescriptor field, boolean isTopLevel, String input) throws ConvException {
+        if (field == null) {
+            return false;
+        }
+
+        Object[] res = parsePlainDataOneof(input, ident, field);
+        if (null == res) {
+            return false;
+        }
+
+        if (res.length < 1) {
+            return false;
+        }
+
+        DataDstWriterNode.DataDstFieldDescriptor sub_field = (DataDstWriterNode.DataDstFieldDescriptor) res[0];
+
+        if (sub_field == null) {
+            return false;
+        }
+
+        if (res.length == 1) {
+            dumpDefault(builder, (Descriptors.FieldDescriptor) sub_field.getRawDescriptor());
+            return true;
+        }
+
+        // 非顶层，不用验证类型
+        return dumpPlainField(builder, null, sub_field, false, (String) res[1]);
     }
 
     private boolean dumpPlainField(DynamicMessage.Builder builder, IdentifyDescriptor ident,
@@ -1299,7 +1398,7 @@ public class DataDstPb extends DataDstImpl {
             String[] groups = splitPlainGroups(input.trim(), getPlainFieldSeparator(field));
             switch (field.getType()) {
                 case INT: {
-                    Long[] values = parsePlainDataLong(groups, ident, isTopLevel ? null : field);
+                    Long[] values = parsePlainDataLong(groups, ident, field);
                     ArrayList<Object> tmp = new ArrayList<Object>();
                     if (values != null) {
                         tmp.ensureCapacity(values.length);
@@ -1312,7 +1411,7 @@ public class DataDstPb extends DataDstImpl {
                 }
 
                 case LONG: {
-                    Long[] values = parsePlainDataLong(groups, ident, isTopLevel ? null : field);
+                    Long[] values = parsePlainDataLong(groups, ident, field);
                     ArrayList<Object> tmp = new ArrayList<Object>();
                     if (values != null) {
                         tmp.ensureCapacity(values.length);
@@ -1325,7 +1424,7 @@ public class DataDstPb extends DataDstImpl {
                 }
 
                 case FLOAT: {
-                    Double[] values = parsePlainDataDouble(groups, ident, isTopLevel ? null : field);
+                    Double[] values = parsePlainDataDouble(groups, ident, field);
                     ArrayList<Object> tmp = new ArrayList<Object>();
                     if (values != null) {
                         tmp.ensureCapacity(values.length);
@@ -1338,7 +1437,7 @@ public class DataDstPb extends DataDstImpl {
                 }
 
                 case DOUBLE: {
-                    Double[] values = parsePlainDataDouble(groups, ident, isTopLevel ? null : field);
+                    Double[] values = parsePlainDataDouble(groups, ident, field);
                     ArrayList<Object> tmp = new ArrayList<Object>();
                     if (values != null) {
                         tmp.ensureCapacity(values.length);
@@ -1351,7 +1450,7 @@ public class DataDstPb extends DataDstImpl {
                 }
 
                 case BOOLEAN: {
-                    Boolean[] values = parsePlainDataBoolean(groups, ident, isTopLevel ? null : field);
+                    Boolean[] values = parsePlainDataBoolean(groups, ident, field);
                     ArrayList<Object> tmp = new ArrayList<Object>();
                     if (values != null) {
                         tmp.ensureCapacity(values.length);
@@ -1365,7 +1464,7 @@ public class DataDstPb extends DataDstImpl {
 
                 case STRING:
                 case BYTES: {
-                    String[] values = parsePlainDataString(groups, ident, isTopLevel ? null : field);
+                    String[] values = parsePlainDataString(groups, ident, field);
                     ArrayList<Object> tmp = new ArrayList<Object>();
                     if (values != null) {
                         tmp.ensureCapacity(values.length);
@@ -1394,39 +1493,39 @@ public class DataDstPb extends DataDstImpl {
                 }
 
                 default:
-                    // TODO dump oneof
+                    // oneof can not be repeated
                     break;
             }
         } else {
             switch (field.getType()) {
                 case INT: {
-                    val = parsePlainDataLong(input.trim(), ident, isTopLevel ? null : field).intValue();
+                    val = parsePlainDataLong(input.trim(), ident, field).intValue();
                     break;
                 }
 
                 case LONG: {
-                    val = parsePlainDataLong(input.trim(), ident, isTopLevel ? null : field);
+                    val = parsePlainDataLong(input.trim(), ident, field);
                     break;
                 }
 
                 case FLOAT: {
-                    val = parsePlainDataDouble(input.trim(), ident, isTopLevel ? null : field).floatValue();
+                    val = parsePlainDataDouble(input.trim(), ident, field).floatValue();
                     break;
                 }
 
                 case DOUBLE: {
-                    val = parsePlainDataDouble(input.trim(), ident, isTopLevel ? null : field);
+                    val = parsePlainDataDouble(input.trim(), ident, field);
                     break;
                 }
 
                 case BOOLEAN: {
-                    val = parsePlainDataBoolean(input.trim(), ident, isTopLevel ? null : field);
+                    val = parsePlainDataBoolean(input.trim(), ident, field);
                     break;
                 }
 
                 case STRING:
                 case BYTES: {
-                    val = parsePlainDataString(input.trim(), ident, isTopLevel ? null : field);
+                    val = parsePlainDataString(input.trim(), ident, field);
                     break;
                 }
 
@@ -1440,7 +1539,6 @@ public class DataDstPb extends DataDstImpl {
                 }
 
                 default:
-                    // TODO dump oneof
                     break;
             }
         }
@@ -1451,10 +1549,10 @@ public class DataDstPb extends DataDstImpl {
 
         if (fd.isRepeated() && val instanceof ArrayList<?>) {
             for (Object obj : (ArrayList<?>) val) {
-                builder.addRepeatedField(fd, obj);
+                dumpValue(builder, fd, obj);
             }
         } else {
-            builder.setField(fd, val);
+            dumpValue(builder, fd, val);
         }
 
         return true;
@@ -1462,7 +1560,7 @@ public class DataDstPb extends DataDstImpl {
 
     public DynamicMessage parsePlainDataMessage(String[] inputs, IdentifyDescriptor ident,
             DataDstWriterNode.DataDstFieldDescriptor field) throws ConvException {
-        if (field.getTypeDescriptor() == null || ident == null || inputs == null || inputs.length == 0) {
+        if (field.getTypeDescriptor() == null || inputs == null || inputs.length == 0) {
             return null;
         }
 
@@ -1473,25 +1571,67 @@ public class DataDstPb extends DataDstImpl {
         }
 
         ArrayList<DataDstWriterNode.DataDstFieldDescriptor> children = field.getTypeDescriptor().getSortedFields();
-        if (children.size() != inputs.length) {
-            throw new ConvException(
-                    String.format("Try to convert %s to %s failed, field count not matched(expect %d, real %d).",
-                            field.getTypeDescriptor().getFullName(), field.getTypeDescriptor().getFullName(),
-                            children.size(), inputs.length));
-        }
-
         DynamicMessage.Builder ret = DynamicMessage.newBuilder(fd.getMessageType());
         boolean hasData = false;
-        for (int i = 0; i < inputs.length; ++i) {
-            if (dumpPlainField(ret, ident, children.get(i), false, inputs[i])) {
-                hasData = true;
+        HashSet<String> dumpedOneof = null;
+        if (field.getTypeDescriptor().getSortedOneofs().size() > 0) {
+            dumpedOneof = new HashSet<String>();
+        }
+
+        int usedInputIdx = 0;
+        for (int i = 0; i < children.size(); ++i) {
+            if (children.get(i).getReferOneof() != null) {
+                if (dumpedOneof == null) {
+                    throw new ConvException(String.format(
+                            "Try to convert field %s of %s failed, found oneof descriptor but oneof set is not initialized.",
+                            children.get(i).getName(), field.getTypeDescriptor().getFullName()));
+                }
+                if (dumpedOneof.contains(children.get(i).getReferOneof().getFullName())) {
+                    continue;
+                }
+
+                if (usedInputIdx >= inputs.length) {
+                    throw new ConvException(String.format(
+                            "Try to convert %s of %s failed, field count not matched(expect %d, real %d).",
+                            children.get(i).getReferOneof().getName(), field.getTypeDescriptor().getFullName(),
+                            usedInputIdx + 1, inputs.length));
+                }
+
+                if (dumpPlainField(ret, null, children.get(i).getReferOneof(), false, inputs[usedInputIdx])) {
+                    hasData = true;
+                    dumpedOneof.add(children.get(i).getReferOneof().getFullName());
+                }
+
+                ++usedInputIdx;
+            } else {
+                if (usedInputIdx >= inputs.length) {
+                    throw new ConvException(String.format(
+                            "Try to convert %s of %s failed, field count not matched(expect %d, real %d).",
+                            children.get(i).getName(), field.getTypeDescriptor().getFullName(), usedInputIdx + 1,
+                            inputs.length));
+                }
+
+                if (dumpPlainField(ret, null, children.get(i), false, inputs[usedInputIdx])) {
+                    hasData = true;
+                }
+
+                ++usedInputIdx;
             }
         }
 
-        // TODO dump oneof data
-        // for (DataDstOneofDescriptor oneof :
-        // field.getTypeDescriptor().getSortedOneofs()) {
-        // }
+        if (usedInputIdx != inputs.length) {
+            DataSrcImpl current_source = DataSrcImpl.getOurInstance();
+            if (null == current_source) {
+                ProgramOptions.getLoger().warn("Try to convert %s need %d fields, but provide %d fields.",
+                        field.getTypeDescriptor().getFullName(), usedInputIdx, inputs.length);
+            } else {
+                ProgramOptions.getLoger().warn(
+                        "Try to convert %s need %d fields, but provide %d fields.%s  > File: %s, Table: %s, Row: %d, Column: %d",
+                        field.getTypeDescriptor().getFullName(), usedInputIdx, inputs.length, ProgramOptions.getEndl(),
+                        current_source.getCurrentFileName(), current_source.getCurrentTableName(),
+                        current_source.getCurrentRowNum() + 1, current_source.getLastColomnNum() + 1);
+            }
+        }
 
         if (!hasData) {
             return null;

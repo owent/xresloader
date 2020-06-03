@@ -3,6 +3,7 @@ package org.xresloader.core.data.dst;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import org.xresloader.core.ProgramOptions;
@@ -107,7 +108,6 @@ public abstract class DataDstJava extends DataDstImpl {
                 break;
             }
             default:
-                // TODO dump oneof
                 break;
         }
 
@@ -142,8 +142,11 @@ public abstract class DataDstJava extends DataDstImpl {
 
         for (Map.Entry<String, DataDstWriterNode.DataDstChildrenNode> c : node.getChildren().entrySet()) {
             if (c.getValue().isOneof()) {
-                // TODO dump oneof data
-
+                for (DataDstWriterNode child : c.getValue().nodes) {
+                    if (dumpPlainField(builder, child.identify, child.getOneofDescriptor(), true)) {
+                        ret = true;
+                    }
+                }
             } else if (c.getValue().mode == DataDstWriterNode.CHILD_NODE_TYPE.STANDARD) {
                 for (DataDstWriterNode child : c.getValue().nodes) {
                     if (dumpStandardField(builder, child, c.getValue())) {
@@ -244,7 +247,6 @@ public abstract class DataDstJava extends DataDstImpl {
             }
 
             default:
-                // TODO dump oneof
                 break;
         }
 
@@ -267,6 +269,54 @@ public abstract class DataDstJava extends DataDstImpl {
         }
 
         return true;
+    }
+
+    private boolean dumpPlainField(HashMap<String, Object> builder, IdentifyDescriptor ident,
+            DataDstWriterNode.DataDstOneofDescriptor field, boolean isTopLevel) throws ConvException {
+        if (field == null) {
+            return false;
+        }
+
+        if (null == ident) {
+            return false;
+        }
+
+        DataContainer<String> res = DataSrcImpl.getOurInstance().getValue(ident, "");
+        if (null == res || !res.valid) {
+            return false;
+        }
+
+        return dumpPlainField(builder, ident, field, isTopLevel, res.value);
+    }
+
+    private boolean dumpPlainField(HashMap<String, Object> builder, IdentifyDescriptor ident,
+            DataDstWriterNode.DataDstOneofDescriptor field, boolean isTopLevel, String input) throws ConvException {
+        if (field == null) {
+            return false;
+        }
+
+        Object[] res = parsePlainDataOneof(input, ident, field);
+        if (null == res) {
+            return false;
+        }
+
+        if (res.length < 1) {
+            return false;
+        }
+
+        DataDstWriterNode.DataDstFieldDescriptor sub_field = (DataDstWriterNode.DataDstFieldDescriptor) res[0];
+
+        if (sub_field == null) {
+            return false;
+        }
+
+        if (res.length == 1) {
+            dumpDefault(builder, sub_field);
+            return true;
+        }
+
+        // 非顶层，不用验证类型
+        return dumpPlainField(builder, null, sub_field, false, (String) res[1]);
     }
 
     private boolean dumpPlainField(HashMap<String, Object> builder, IdentifyDescriptor ident,
@@ -304,7 +354,7 @@ public abstract class DataDstJava extends DataDstImpl {
             String[] groups = splitPlainGroups(input.trim(), getPlainFieldSeparator(field));
             switch (field.getType()) {
                 case INT: {
-                    Long[] values = parsePlainDataLong(groups, ident, isTopLevel ? null : field);
+                    Long[] values = parsePlainDataLong(groups, ident, field);
                     ArrayList<Object> tmp = new ArrayList<Object>();
                     if (values != null) {
                         tmp.ensureCapacity(values.length);
@@ -317,7 +367,7 @@ public abstract class DataDstJava extends DataDstImpl {
                 }
 
                 case LONG: {
-                    Long[] values = parsePlainDataLong(groups, ident, isTopLevel ? null : field);
+                    Long[] values = parsePlainDataLong(groups, ident, field);
                     ArrayList<Object> tmp = new ArrayList<Object>();
                     if (values != null) {
                         tmp.ensureCapacity(values.length);
@@ -330,7 +380,7 @@ public abstract class DataDstJava extends DataDstImpl {
                 }
 
                 case FLOAT: {
-                    Double[] values = parsePlainDataDouble(groups, ident, isTopLevel ? null : field);
+                    Double[] values = parsePlainDataDouble(groups, ident, field);
                     ArrayList<Object> tmp = new ArrayList<Object>();
                     if (values != null) {
                         tmp.ensureCapacity(values.length);
@@ -343,7 +393,7 @@ public abstract class DataDstJava extends DataDstImpl {
                 }
 
                 case DOUBLE: {
-                    Double[] values = parsePlainDataDouble(groups, ident, isTopLevel ? null : field);
+                    Double[] values = parsePlainDataDouble(groups, ident, field);
                     ArrayList<Object> tmp = new ArrayList<Object>();
                     if (values != null) {
                         tmp.ensureCapacity(values.length);
@@ -356,7 +406,7 @@ public abstract class DataDstJava extends DataDstImpl {
                 }
 
                 case BOOLEAN: {
-                    Boolean[] values = parsePlainDataBoolean(groups, ident, isTopLevel ? null : field);
+                    Boolean[] values = parsePlainDataBoolean(groups, ident, field);
                     ArrayList<Object> tmp = new ArrayList<Object>();
                     if (values != null) {
                         tmp.ensureCapacity(values.length);
@@ -370,7 +420,7 @@ public abstract class DataDstJava extends DataDstImpl {
 
                 case STRING:
                 case BYTES: {
-                    String[] values = parsePlainDataString(groups, ident, isTopLevel ? null : field);
+                    String[] values = parsePlainDataString(groups, ident, field);
                     ArrayList<Object> tmp = new ArrayList<Object>();
                     if (values != null) {
                         tmp.ensureCapacity(values.length);
@@ -399,39 +449,38 @@ public abstract class DataDstJava extends DataDstImpl {
                 }
 
                 default:
-                    // TODO dump oneof
                     break;
             }
         } else {
             switch (field.getType()) {
                 case INT: {
-                    val = parsePlainDataLong(input.trim(), ident, isTopLevel ? null : field).intValue();
+                    val = parsePlainDataLong(input.trim(), ident, field).intValue();
                     break;
                 }
 
                 case LONG: {
-                    val = parsePlainDataLong(input.trim(), ident, isTopLevel ? null : field);
+                    val = parsePlainDataLong(input.trim(), ident, field);
                     break;
                 }
 
                 case FLOAT: {
-                    val = parsePlainDataDouble(input.trim(), ident, isTopLevel ? null : field).floatValue();
+                    val = parsePlainDataDouble(input.trim(), ident, field).floatValue();
                     break;
                 }
 
                 case DOUBLE: {
-                    val = parsePlainDataDouble(input.trim(), ident, isTopLevel ? null : field);
+                    val = parsePlainDataDouble(input.trim(), ident, field);
                     break;
                 }
 
                 case BOOLEAN: {
-                    val = parsePlainDataBoolean(input.trim(), ident, isTopLevel ? null : field);
+                    val = parsePlainDataBoolean(input.trim(), ident, field);
                     break;
                 }
 
                 case STRING:
                 case BYTES: {
-                    val = parsePlainDataString(input.trim(), ident, isTopLevel ? null : field);
+                    val = parsePlainDataString(input.trim(), ident, field);
                     break;
                 }
 
@@ -445,7 +494,6 @@ public abstract class DataDstJava extends DataDstImpl {
                 }
 
                 default:
-                    // TODO dump oneof
                     break;
             }
         }
@@ -460,27 +508,69 @@ public abstract class DataDstJava extends DataDstImpl {
 
     public HashMap<String, Object> parsePlainDataMessage(String[] inputs, IdentifyDescriptor ident,
             DataDstWriterNode.DataDstFieldDescriptor field) throws ConvException {
-        if (field.getTypeDescriptor() == null || ident == null || inputs == null || inputs.length == 0) {
+        if (field.getTypeDescriptor() == null || inputs == null || inputs.length == 0) {
             return null;
         }
 
         ArrayList<DataDstWriterNode.DataDstFieldDescriptor> children = field.getTypeDescriptor().getSortedFields();
-        if (children.size() != inputs.length) {
-            throw new ConvException(
-                    String.format("Try to convert %s to %s failed, field count not matched(expect %d, real %d).",
-                            field.getTypeDescriptor().getFullName(), field.getTypeDescriptor().getFullName(),
-                            children.size(), inputs.length));
+
+        HashSet<String> dumpedOneof = null;
+        if (field.getTypeDescriptor().getSortedOneofs().size() > 0) {
+            dumpedOneof = new HashSet<String>();
         }
 
         HashMap<String, Object> ret = new HashMap<String, Object>();
-        for (int i = 0; i < inputs.length; ++i) {
-            dumpPlainField(ret, ident, children.get(i), false, inputs[i]);
+        int usedInputIdx = 0;
+        for (int i = 0; i < children.size(); ++i) {
+            if (null != children.get(i).getReferOneof()) {
+                if (dumpedOneof == null) {
+                    throw new ConvException(String.format(
+                            "Try to convert field %s of %s failed, found oneof descriptor but oneof set is not initialized.",
+                            children.get(i).getName(), field.getTypeDescriptor().getFullName()));
+                }
+                if (dumpedOneof.contains(children.get(i).getReferOneof().getFullName())) {
+                    continue;
+                }
+
+                if (usedInputIdx >= inputs.length) {
+                    throw new ConvException(String.format(
+                            "Try to convert %s of %s failed, field count not matched(expect %d, real %d).",
+                            children.get(i).getReferOneof().getName(), field.getTypeDescriptor().getFullName(),
+                            usedInputIdx + 1, inputs.length));
+                }
+
+                if (dumpPlainField(ret, null, children.get(i).getReferOneof(), false, inputs[usedInputIdx])) {
+                    dumpedOneof.add(children.get(i).getReferOneof().getFullName());
+                }
+
+                ++usedInputIdx;
+            } else {
+                if (usedInputIdx >= inputs.length) {
+                    throw new ConvException(String.format(
+                            "Try to convert %s of %s failed, field count not matched(expect %d, real %d).",
+                            children.get(i).getName(), field.getTypeDescriptor().getFullName(), usedInputIdx + 1,
+                            inputs.length));
+                }
+
+                dumpPlainField(ret, null, children.get(i), false, inputs[usedInputIdx]);
+
+                ++usedInputIdx;
+            }
         }
 
-        // TODO dump oneof data
-        // for (DataDstOneofDescriptor oneof :
-        // field.getTypeDescriptor().getSortedOneofs()) {
-        // }
+        if (usedInputIdx != inputs.length) {
+            DataSrcImpl current_source = DataSrcImpl.getOurInstance();
+            if (null == current_source) {
+                ProgramOptions.getLoger().warn("Try to convert %s need %d fields, but provide %d fields.",
+                        field.getTypeDescriptor().getFullName(), usedInputIdx, inputs.length);
+            } else {
+                ProgramOptions.getLoger().warn(
+                        "Try to convert %s need %d fields, but provide %d fields.%s  > File: %s, Table: %s, Row: %d, Column: %d",
+                        field.getTypeDescriptor().getFullName(), usedInputIdx, inputs.length, ProgramOptions.getEndl(),
+                        current_source.getCurrentFileName(), current_source.getCurrentTableName(),
+                        current_source.getCurrentRowNum() + 1, current_source.getLastColomnNum() + 1);
+            }
+        }
 
         if (ret.isEmpty()) {
             return null;

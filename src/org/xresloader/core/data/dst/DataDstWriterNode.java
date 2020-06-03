@@ -15,7 +15,7 @@ import org.xresloader.core.data.vfy.DataVerifyImpl;
  */
 public class DataDstWriterNode {
     public enum JAVA_TYPE {
-        INT, LONG, BOOLEAN, STRING, BYTES, FLOAT, DOUBLE, MESSAGE, ONEOF
+        INT, LONG, BOOLEAN, STRING, BYTES, FLOAT, DOUBLE, MESSAGE, UNKNOWN
     }
 
     public enum FIELD_LABEL_TYPE {
@@ -222,10 +222,6 @@ public class DataDstWriterNode {
 
         public List<DataVerifyImpl> getVerifier() {
             return verifyEngine;
-        }
-
-        public JAVA_TYPE getType() {
-            return JAVA_TYPE.ONEOF;
         }
 
         public DataDstMessageDescriptor getOwnerDescriptor() {
@@ -444,13 +440,6 @@ public class DataDstWriterNode {
             return null;
         }
 
-        if (type == JAVA_TYPE.ONEOF) {
-            ProgramOptions.getLoger().error(
-                    "Can not get default description of oneof type, please report this bug to %s",
-                    ProgramOptions.getReportUrl());
-            return null;
-        }
-
         ret = new DataDstMessageDescriptor(type, null, null, null);
         defaultDescs.put(type, ret);
         return ret;
@@ -506,10 +495,16 @@ public class DataDstWriterNode {
     }
 
     public JAVA_TYPE getType() {
-        if (this.oneofDescriptor != null) {
-            return this.oneofDescriptor.getType();
+        if (this.typeDescriptor != null) {
+            return this.typeDescriptor.getType();
         }
-        return this.typeDescriptor.getType();
+
+        if (this.fieldDescriptor != null) {
+            return this.fieldDescriptor.getType();
+        }
+
+        // enum retrun JAVA_TYPE as UNKNOWN
+        return JAVA_TYPE.UNKNOWN;
     }
 
     public String getPackageName() {

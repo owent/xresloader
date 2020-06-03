@@ -344,7 +344,7 @@ public class main {
      * @param args
      */
     public static void main(String[] args) {
-        endl = System.getProperty("line.separator", "\n");
+        endl = ProgramOptions.getEndl();
 
         // 先尝试根据传入参数转表
         int ret_code = 1;

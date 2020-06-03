@@ -201,74 +201,74 @@ public class ExcelEngine {
 
         CellType type = (null == cv) ? c.getCellType() : cv.getCellType();
         switch (type) {
-        case BLANK:
-            break;
-        case BOOLEAN:
-            out.set(cal_cell2bool(c, cv).toString());
-            break;
-        case ERROR:
-            out.set(cal_cell2err(c, cv).toString());
-            break;
-        case FORMULA:
-            if (null == cv) {
-                out.set(c.getCellFormula());
-            }
-            break;
-        case NUMERIC:
-            if (DateUtil.isCellDateFormatted(c)) {
-                // 参照POI DateUtil.isADateFormat函数，去除无效字符
-                String fs = c.getCellStyle().getDataFormatString().replaceAll("\\\\-", "-").replaceAll("\\\\,", ",")
-                        .replaceAll("\\\\\\.", ".").replaceAll("\\\\ ", " ").replaceAll("AM/PM", "")
-                        .replaceAll("\\[[^]]*\\]", "");
+            case BLANK:
+                break;
+            case BOOLEAN:
+                out.set(cal_cell2bool(c, cv).toString());
+                break;
+            case ERROR:
+                out.set(cal_cell2err(c, cv).toString());
+                break;
+            case FORMULA:
+                if (null == cv) {
+                    out.set(c.getCellFormula());
+                }
+                break;
+            case NUMERIC:
+                if (DateUtil.isCellDateFormatted(c)) {
+                    // 参照POI DateUtil.isADateFormat函数，去除无效字符
+                    String fs = c.getCellStyle().getDataFormatString().replaceAll("\\\\-", "-").replaceAll("\\\\,", ",")
+                            .replaceAll("\\\\\\.", ".").replaceAll("\\\\ ", " ").replaceAll("AM/PM", "")
+                            .replaceAll("\\[[^]]*\\]", "");
 
-                // 默认格式
-                int idx = fs.indexOf(";@");
-                if (idx > 0 && idx < fs.length()) {
-                    // 包含年月日
-                    LinkedList<String> rfs = new LinkedList<String>();
+                    // 默认格式
+                    int idx = fs.indexOf(";@");
+                    if (idx > 0 && idx < fs.length()) {
+                        // 包含年月日
+                        LinkedList<String> rfs = new LinkedList<String>();
 
-                    if (checkDate.matcher(fs).find())
-                        rfs.addLast("yyyy-MM-dd");
+                        if (checkDate.matcher(fs).find())
+                            rfs.addLast("yyyy-MM-dd");
 
-                    if (checkTime.matcher(fs).find())
-                        rfs.addLast("HH:mm:ss");
+                        if (checkTime.matcher(fs).find())
+                            rfs.addLast("HH:mm:ss");
 
-                    if (rfs.isEmpty())
-                        fs = "yyyy-MM-dd HH:mm:ss";
-                    else
-                        fs = String.join(" ", rfs);
+                        if (rfs.isEmpty())
+                            fs = "yyyy-MM-dd HH:mm:ss";
+                        else
+                            fs = String.join(" ", rfs);
 
-                } else {
-                    idx = fs.indexOf(";");
-                    if (idx > 0 && idx < fs.length() - 1) {
-                        fs = fs.substring(0, idx);
+                    } else {
+                        idx = fs.indexOf(";");
+                        if (idx > 0 && idx < fs.length() - 1) {
+                            fs = fs.substring(0, idx);
+                        }
                     }
+
+                    SimpleDateFormat df = new SimpleDateFormat(fs);
+                    out.set(df.format(c.getDateCellValue()).trim());
+                    break;
                 }
 
-                SimpleDateFormat df = new SimpleDateFormat(fs);
-                out.set(df.format(c.getDateCellValue()).trim());
+                double dv = cal_cell2num(c, cv);
+                if (col.getRatio() != 1) {
+                    dv = dv * col.getRatio();
+                }
+                if (dv == (long) dv) {
+                    out.set(String.format("%d", (long) dv));
+                } else {
+                    out.set(String.format("%s", dv));
+                }
                 break;
-            }
-
-            double dv = cal_cell2num(c, cv);
-            if (col.getRatio() != 1) {
-                dv = dv * col.getRatio();
-            }
-            if (dv == (long) dv) {
-                out.set(String.format("%d", (long) dv));
-            } else {
-                out.set(String.format("%s", dv));
-            }
-            break;
-        case STRING:
-            // return ret.set(tryMacro(cal_cell2str(c, cv).trim()));
-            String val = cal_cell2str(c, cv).trim();
-            if (!val.isEmpty()) {
-                out.set(val);
-            }
-            break;
-        default:
-            break;
+            case STRING:
+                // return ret.set(tryMacro(cal_cell2str(c, cv).trim()));
+                String val = cal_cell2str(c, cv).trim();
+                if (!val.isEmpty()) {
+                    out.set(val);
+                }
+                break;
+            default:
+                break;
         }
     }
 
@@ -310,43 +310,43 @@ public class ExcelEngine {
 
         CellType type = (null == cv) ? c.getCellType() : cv.getCellType();
         switch (type) {
-        case BLANK:
-            break;
-        case BOOLEAN: {
-            boolean res = cal_cell2bool(c, cv);
-            out.set(DataVerifyImpl.getAndVerify(col.getVerifier(), col.index, col.name, res ? 1 : 0));
-            break;
-        }
-        case ERROR:
-            break;
-        case FORMULA:
-            break;
-        case NUMERIC: {
-            long val = 0;
-            if (DateUtil.isCellDateFormatted(c)) {
-                val = dateToUnixTimestamp(c.getDateCellValue());
-            } else {
-                if (col.getRatio() == 1) {
-                    val = Math.round(cal_cell2num(c, cv));
-                } else {
-                    val = Math.round(cal_cell2num(c, cv) * col.getRatio());
-                }
-            }
-
-            out.set(DataVerifyImpl.getAndVerify(col.getVerifier(), col.index, col.name, val));
-            break;
-        }
-        case STRING: {
-            String val = cal_cell2str(c, cv).trim();
-            if (val.isEmpty()) {
+            case BLANK:
+                break;
+            case BOOLEAN: {
+                boolean res = cal_cell2bool(c, cv);
+                out.set(DataVerifyImpl.getAndVerify(col.getVerifier(), col.name, res ? 1 : 0));
                 break;
             }
+            case ERROR:
+                break;
+            case FORMULA:
+                break;
+            case NUMERIC: {
+                long val = 0;
+                if (DateUtil.isCellDateFormatted(c)) {
+                    val = dateToUnixTimestamp(c.getDateCellValue());
+                } else {
+                    if (col.getRatio() == 1) {
+                        val = Math.round(cal_cell2num(c, cv));
+                    } else {
+                        val = Math.round(cal_cell2num(c, cv) * col.getRatio());
+                    }
+                }
 
-            out.set(DataVerifyImpl.getAndVerify(col.getVerifier(), col.index, col.name, tryMacro(val)));
-            break;
-        }
-        default:
-            break;
+                out.set(DataVerifyImpl.getAndVerify(col.getVerifier(), col.name, val));
+                break;
+            }
+            case STRING: {
+                String val = cal_cell2str(c, cv).trim();
+                if (val.isEmpty()) {
+                    break;
+                }
+
+                out.set(DataVerifyImpl.getAndVerify(col.getVerifier(), col.name, tryMacro(val)));
+                break;
+            }
+            default:
+                break;
         }
     }
 
@@ -389,43 +389,43 @@ public class ExcelEngine {
 
         CellType type = (null == cv) ? c.getCellType() : cv.getCellType();
         switch (type) {
-        case BLANK:
-            break;
-        case BOOLEAN:
-            out.set(cal_cell2bool(c, cv) ? 1.0 : 0.0);
-            break;
-        case ERROR:
-            break;
-        case FORMULA:
-            break;
-        case NUMERIC:
-            if (DateUtil.isCellDateFormatted(c)) {
-                out.set((double) dateToUnixTimestamp(c.getDateCellValue()));
+            case BLANK:
                 break;
-            }
-            if (col.getRatio() == 1) {
-                out.set(cal_cell2num(c, cv));
-            } else {
-                out.set(cal_cell2num(c, cv) * col.getRatio());
-            }
-            break;
-        case STRING: {
-            String val = cal_cell2str(c, cv).trim();
-            if (val.isEmpty()) {
+            case BOOLEAN:
+                out.set(cal_cell2bool(c, cv) ? 1.0 : 0.0);
                 break;
-            }
+            case ERROR:
+                break;
+            case FORMULA:
+                break;
+            case NUMERIC:
+                if (DateUtil.isCellDateFormatted(c)) {
+                    out.set((double) dateToUnixTimestamp(c.getDateCellValue()));
+                    break;
+                }
+                if (col.getRatio() == 1) {
+                    out.set(cal_cell2num(c, cv));
+                } else {
+                    out.set(cal_cell2num(c, cv) * col.getRatio());
+                }
+                break;
+            case STRING: {
+                String val = cal_cell2str(c, cv).trim();
+                if (val.isEmpty()) {
+                    break;
+                }
 
-            try {
-                out.set(Double.valueOf(tryMacro(val)));
-            } catch (java.lang.NumberFormatException e) {
-                throw new ConvException(
-                        String.format("Table %s, Row %d, Column %d : %s can not be converted to a number",
-                                row.getSheet().getSheetName(), c.getRowIndex() + 1, c.getColumnIndex() + 1, val));
+                try {
+                    out.set(Double.valueOf(tryMacro(val)));
+                } catch (java.lang.NumberFormatException e) {
+                    throw new ConvException(
+                            String.format("Table %s, Row %d, Column %d : %s can not be converted to a number",
+                                    row.getSheet().getSheetName(), c.getRowIndex() + 1, c.getColumnIndex() + 1, val));
+                }
+                break;
             }
-            break;
-        }
-        default:
-            break;
+            default:
+                break;
         }
     }
 
@@ -468,28 +468,28 @@ public class ExcelEngine {
 
         CellType type = (null == cv) ? c.getCellType() : cv.getCellType();
         switch (type) {
-        case BLANK:
-            break;
-        case BOOLEAN:
-            out.set(cal_cell2bool(c, cv));
-            break;
-        case ERROR:
-            break;
-        case FORMULA:
-            break;
-        case NUMERIC:
-            out.set(cal_cell2num(c, cv) != 0 && col.getRatio() != 0);
-            break;
-        case STRING:
-            String item = tryMacro(cal_cell2str(c, cv).trim()).toLowerCase();
-            if (item.isEmpty()) {
+            case BLANK:
                 break;
-            }
+            case BOOLEAN:
+                out.set(cal_cell2bool(c, cv));
+                break;
+            case ERROR:
+                break;
+            case FORMULA:
+                break;
+            case NUMERIC:
+                out.set(cal_cell2num(c, cv) != 0 && col.getRatio() != 0);
+                break;
+            case STRING:
+                String item = tryMacro(cal_cell2str(c, cv).trim()).toLowerCase();
+                if (item.isEmpty()) {
+                    break;
+                }
 
-            out.set(DataSrcImpl.getBooleanFromString(item));
-            break;
-        default:
-            break;
+                out.set(DataSrcImpl.getBooleanFromString(item));
+                break;
+            default:
+                break;
         }
     }
 

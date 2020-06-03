@@ -79,7 +79,7 @@ message event_rule_item {
 
 message event_cfg {
     option (org.xresloader.ue.helper)       = "helper";
-    option (org.xresloader.msg_description) = "Test role_upgrade_cfg with oneof fields";
+    option (org.xresloader.msg_description) = "Test event_cfg with oneof fields";
 
     optional uint32 id          = 1 [ (org.xresloader.ue.key_tag) = 100 ];
     optional uint32 process     = 2 [ (org.xresloader.ue.key_tag) = 1 ];

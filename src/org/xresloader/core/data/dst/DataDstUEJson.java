@@ -14,6 +14,7 @@ import org.xresloader.core.ProgramOptions;
 import org.xresloader.core.data.dst.DataDstWriterNode.DataDstChildrenNode;
 import org.xresloader.core.data.dst.DataDstWriterNode.DataDstFieldDescriptor;
 import org.xresloader.core.data.dst.DataDstWriterNode.DataDstMessageDescriptor;
+import org.xresloader.core.data.dst.DataDstWriterNode.DataDstOneofDescriptor;
 import org.xresloader.core.data.dst.DataDstWriterNode.JAVA_TYPE;
 import org.xresloader.core.data.err.ConvException;
 import org.xresloader.core.data.src.DataContainer;
@@ -223,7 +224,10 @@ public class DataDstUEJson extends DataDstUEBase {
             return null;
         }
 
-        if (msgDesc.getReferBrothers().mode == DataDstWriterNode.CHILD_NODE_TYPE.STANDARD) {
+        if (msgDesc.getReferBrothers().isOneof()) {
+            // TODO oneof
+            // OneofDataObject data = pickValueFieldJsonPlainField(fieldSet.get(0));
+        } else if (msgDesc.getReferBrothers().mode == DataDstWriterNode.CHILD_NODE_TYPE.STANDARD) {
             if (isRecursiveEnabled() && field.isList()) {
                 JSONArray ret = new JSONArray();
                 for (int i = 0; i < fieldSet.size(); ++i) {
@@ -271,6 +275,8 @@ public class DataDstUEJson extends DataDstUEBase {
                     }
 
                     Object val = pickValueFieldJsonImpl(child);
+
+                    // TODO oneof 数据索引
                     if (val != null) {
                         String varName = getIdentName(child.get(0).getVarName());
                         ret.put(varName, val);
@@ -327,6 +333,48 @@ public class DataDstUEJson extends DataDstUEBase {
         return ret;
     }
 
+    private OneofDataObject pickValueFieldJsonPlainField(IdentifyDescriptor ident, DataDstOneofDescriptor field,
+            boolean isTopLevel) throws ConvException {
+        if (null == ident) {
+            return null;
+        }
+
+        DataContainer<String> res = DataSrcImpl.getOurInstance().getValue(ident, "");
+        if (null == res || !res.valid) {
+            return null;
+        }
+
+        return pickValueFieldJsonPlainField(ident, field, isTopLevel, res.value);
+    }
+
+    private OneofDataObject pickValueFieldJsonPlainField(IdentifyDescriptor ident, DataDstOneofDescriptor field,
+            boolean isTopLevel, String input) throws ConvException {
+        if (field == null) {
+            return null;
+        }
+
+        Object[] res = parsePlainDataOneof(input, ident, field);
+        if (null == res) {
+            return null;
+        }
+
+        if (res.length < 1) {
+            return null;
+        }
+
+        DataDstFieldDescriptor sub_field = (DataDstFieldDescriptor) res[0];
+        if (sub_field == null) {
+            return null;
+        }
+
+        if (res.length == 1) {
+            return new OneofDataObject(sub_field, pickValueFieldJsonDefaultImpl(sub_field));
+        }
+
+        // 非顶层，不用验证类型
+        return new OneofDataObject(sub_field, pickValueFieldJsonPlainField(null, sub_field, false, (String) res[1]));
+    }
+
     private Object pickValueFieldJsonPlainField(IdentifyDescriptor ident, DataDstFieldDescriptor field,
             boolean isTopLevel) throws ConvException {
         if (null == ident) {
@@ -357,7 +405,7 @@ public class DataDstUEJson extends DataDstUEBase {
             String[] groups = splitPlainGroups(input.trim(), getPlainFieldSeparator(field));
             switch (field.getType()) {
                 case INT: {
-                    Long[] values = parsePlainDataLong(groups, ident, isTopLevel ? null : field);
+                    Long[] values = parsePlainDataLong(groups, ident, field);
                     JSONArray tmp = new JSONArray();
                     if (null != values) {
                         for (Long v : values) {
@@ -369,7 +417,7 @@ public class DataDstUEJson extends DataDstUEBase {
                 }
 
                 case LONG: {
-                    Long[] values = parsePlainDataLong(groups, ident, isTopLevel ? null : field);
+                    Long[] values = parsePlainDataLong(groups, ident, field);
                     JSONArray tmp = new JSONArray();
                     if (null != values) {
                         for (Long v : values) {
@@ -381,7 +429,7 @@ public class DataDstUEJson extends DataDstUEBase {
                 }
 
                 case FLOAT: {
-                    Double[] values = parsePlainDataDouble(groups, ident, isTopLevel ? null : field);
+                    Double[] values = parsePlainDataDouble(groups, ident, field);
                     JSONArray tmp = new JSONArray();
                     if (null != values) {
                         for (Double v : values) {
@@ -393,7 +441,7 @@ public class DataDstUEJson extends DataDstUEBase {
                 }
 
                 case DOUBLE: {
-                    Double[] values = parsePlainDataDouble(groups, ident, isTopLevel ? null : field);
+                    Double[] values = parsePlainDataDouble(groups, ident, field);
                     JSONArray tmp = new JSONArray();
                     if (null != values) {
                         for (Double v : values) {
@@ -405,7 +453,7 @@ public class DataDstUEJson extends DataDstUEBase {
                 }
 
                 case BOOLEAN: {
-                    Boolean[] values = parsePlainDataBoolean(groups, ident, isTopLevel ? null : field);
+                    Boolean[] values = parsePlainDataBoolean(groups, ident, field);
                     JSONArray tmp = new JSONArray();
                     if (null != values) {
                         for (Boolean v : values) {
@@ -418,7 +466,7 @@ public class DataDstUEJson extends DataDstUEBase {
 
                 case STRING:
                 case BYTES: {
-                    String[] values = parsePlainDataString(groups, ident, isTopLevel ? null : field);
+                    String[] values = parsePlainDataString(groups, ident, field);
                     JSONArray tmp = new JSONArray();
                     if (null != values) {
                         for (String v : values) {
@@ -443,39 +491,38 @@ public class DataDstUEJson extends DataDstUEBase {
                 }
 
                 default:
-                    // TODO dump oneof data
                     break;
             }
         } else {
             switch (field.getType()) {
                 case INT: {
-                    ret = parsePlainDataLong(input.trim(), ident, isTopLevel ? null : field).intValue();
+                    ret = parsePlainDataLong(input.trim(), ident, field).intValue();
                     break;
                 }
 
                 case LONG: {
-                    ret = parsePlainDataLong(input.trim(), ident, isTopLevel ? null : field);
+                    ret = parsePlainDataLong(input.trim(), ident, field);
                     break;
                 }
 
                 case FLOAT: {
-                    ret = parsePlainDataDouble(input.trim(), ident, isTopLevel ? null : field).floatValue();
+                    ret = parsePlainDataDouble(input.trim(), ident, field).floatValue();
                     break;
                 }
 
                 case DOUBLE: {
-                    ret = parsePlainDataDouble(input.trim(), ident, isTopLevel ? null : field);
+                    ret = parsePlainDataDouble(input.trim(), ident, field);
                     break;
                 }
 
                 case BOOLEAN: {
-                    ret = parsePlainDataBoolean(input.trim(), ident, isTopLevel ? null : field);
+                    ret = parsePlainDataBoolean(input.trim(), ident, field);
                     break;
                 }
 
                 case STRING:
                 case BYTES: {
-                    ret = parsePlainDataString(input.trim(), ident, isTopLevel ? null : field);
+                    ret = parsePlainDataString(input.trim(), ident, field);
                     break;
                 }
 
@@ -489,7 +536,6 @@ public class DataDstUEJson extends DataDstUEBase {
                 }
 
                 default:
-                    // TODO dump oneof data
                     break;
             }
         }
@@ -499,7 +545,7 @@ public class DataDstUEJson extends DataDstUEBase {
 
     private JSONObject pickValueFieldJsonPlainField(String[] inputs, IdentifyDescriptor ident,
             DataDstFieldDescriptor field) throws ConvException {
-        if (field.getTypeDescriptor() == null || ident == null || inputs == null || inputs.length == 0) {
+        if (field.getTypeDescriptor() == null || inputs == null || inputs.length == 0) {
             return null;
         }
 
@@ -565,7 +611,6 @@ public class DataDstUEJson extends DataDstUEBase {
                 return ret;
             }
             default:
-                // TODO dump oneof data
                 return null;
         }
     }

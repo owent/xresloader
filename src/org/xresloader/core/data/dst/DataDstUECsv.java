@@ -518,7 +518,7 @@ public class DataDstUECsv extends DataDstUEBase {
             String[] groups = splitPlainGroups(input.trim(), getPlainFieldSeparator(field));
             switch (field.getType()) {
                 case INT: {
-                    Long[] values = parsePlainDataLong(groups, ident, isTopLevel ? null : field);
+                    Long[] values = parsePlainDataLong(groups, ident, field);
                     if (null != values && values.length > 0) {
                         fieldSB.append("(");
                         boolean isFirst = true;
@@ -535,7 +535,7 @@ public class DataDstUECsv extends DataDstUEBase {
                     break;
                 }
                 case LONG: {
-                    Long[] values = parsePlainDataLong(groups, ident, isTopLevel ? null : field);
+                    Long[] values = parsePlainDataLong(groups, ident, field);
                     if (null != values && values.length > 0) {
                         fieldSB.append("(");
                         boolean isFirst = true;
@@ -553,7 +553,7 @@ public class DataDstUECsv extends DataDstUEBase {
                 }
 
                 case FLOAT: {
-                    Double[] values = parsePlainDataDouble(groups, ident, isTopLevel ? null : field);
+                    Double[] values = parsePlainDataDouble(groups, ident, field);
                     if (null != values && values.length > 0) {
                         fieldSB.append("(");
                         boolean isFirst = true;
@@ -571,7 +571,7 @@ public class DataDstUECsv extends DataDstUEBase {
                 }
 
                 case DOUBLE: {
-                    Double[] values = parsePlainDataDouble(groups, ident, isTopLevel ? null : field);
+                    Double[] values = parsePlainDataDouble(groups, ident, field);
                     if (null != values && values.length > 0) {
                         fieldSB.append("(");
                         boolean isFirst = true;
@@ -589,7 +589,7 @@ public class DataDstUECsv extends DataDstUEBase {
                 }
 
                 case BOOLEAN: {
-                    Boolean[] values = parsePlainDataBoolean(groups, ident, isTopLevel ? null : field);
+                    Boolean[] values = parsePlainDataBoolean(groups, ident, field);
                     if (null != values && values.length > 0) {
                         fieldSB.append("(");
                         boolean isFirst = true;
@@ -613,7 +613,7 @@ public class DataDstUECsv extends DataDstUEBase {
 
                 case STRING:
                 case BYTES: {
-                    String[] values = parsePlainDataString(groups, ident, isTopLevel ? null : field);
+                    String[] values = parsePlainDataString(groups, ident, field);
                     if (null != values && values.length > 0) {
                         fieldSB.append("(");
                         boolean isFirst = true;
@@ -668,34 +668,34 @@ public class DataDstUECsv extends DataDstUEBase {
         } else {
             switch (field.getType()) {
                 case INT: {
-                    fieldSB.append(parsePlainDataLong(input.trim(), ident, isTopLevel ? null : field).intValue());
+                    fieldSB.append(parsePlainDataLong(input.trim(), ident, field).intValue());
                     break;
                 }
 
                 case LONG: {
-                    fieldSB.append(parsePlainDataLong(input.trim(), ident, isTopLevel ? null : field));
+                    fieldSB.append(parsePlainDataLong(input.trim(), ident, field));
                     break;
                 }
 
                 case FLOAT: {
-                    fieldSB.append(parsePlainDataDouble(input.trim(), ident, isTopLevel ? null : field).floatValue());
+                    fieldSB.append(parsePlainDataDouble(input.trim(), ident, field).floatValue());
                     break;
                 }
 
                 case DOUBLE: {
-                    fieldSB.append(parsePlainDataDouble(input.trim(), ident, isTopLevel ? null : field));
+                    fieldSB.append(parsePlainDataDouble(input.trim(), ident, field));
                     break;
                 }
 
                 case BOOLEAN: {
-                    fieldSB.append(parsePlainDataBoolean(input.trim(), ident, isTopLevel ? null : field));
+                    fieldSB.append(parsePlainDataBoolean(input.trim(), ident, field));
                     break;
                 }
 
                 case STRING:
                 case BYTES: {
                     fieldSB.append("\"");
-                    fieldSB.append(parsePlainDataString(input.trim(), ident, isTopLevel ? null : field));
+                    fieldSB.append(parsePlainDataString(input.trim(), ident, field));
                     fieldSB.append("\"");
                     break;
                 }
@@ -717,7 +717,7 @@ public class DataDstUECsv extends DataDstUEBase {
 
     private boolean pickValueFieldCsvPlainField(StringBuffer fieldSB, String[] inputs, IdentifyDescriptor ident,
             DataDstFieldDescriptor field) throws ConvException {
-        if (field.getTypeDescriptor() == null || ident == null || inputs == null || inputs.length == 0) {
+        if (field.getTypeDescriptor() == null || inputs == null || inputs.length == 0) {
             return false;
         }
 

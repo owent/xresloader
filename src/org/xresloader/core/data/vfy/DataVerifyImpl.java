@@ -71,13 +71,11 @@ public abstract class DataVerifyImpl {
         return name;
     }
 
-    static public long getAndVerify(List<DataVerifyImpl> verifyEngine, int columnIndex, String path, int n)
-            throws ConvException {
-        return getAndVerify(verifyEngine, columnIndex, path, (long) n);
+    static public long getAndVerify(List<DataVerifyImpl> verifyEngine, String path, int n) throws ConvException {
+        return getAndVerify(verifyEngine, path, (long) n);
     }
 
-    static public long getAndVerify(List<DataVerifyImpl> verifyEngine, int columnIndex, String path, long n)
-            throws ConvException {
+    static public long getAndVerify(List<DataVerifyImpl> verifyEngine, String path, long n) throws ConvException {
         if (verifyEngine == null || verifyEngine.isEmpty()) {
             return n;
         }
@@ -97,8 +95,7 @@ public abstract class DataVerifyImpl {
         throw new ConvException(String.format("Check %d for %s failed, check data failed.", n, path));
     }
 
-    static public long getAndVerify(List<DataVerifyImpl> verifyEngine, int columnIndex, String path, String val)
-            throws ConvException {
+    static public long getAndVerify(List<DataVerifyImpl> verifyEngine, String path, String val) throws ConvException {
         boolean is_int = true;
         for (int i = 0; is_int && i < val.length(); ++i) {
             char c = val.charAt(i);
@@ -108,7 +105,7 @@ public abstract class DataVerifyImpl {
         }
 
         if (is_int) {
-            return getAndVerify(verifyEngine, columnIndex, path, Math.round(Double.valueOf(val)));
+            return getAndVerify(verifyEngine, path, Math.round(Double.valueOf(val)));
         }
 
         try {

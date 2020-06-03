@@ -18,6 +18,7 @@ import java.util.regex.PatternSyntaxException;
 public class ProgramOptions {
 
     private static Logger logger = null;
+    static private String endl = null;
 
     public class RenameRule {
         public Pattern match;
@@ -485,5 +486,13 @@ public class ProgramOptions {
 
     static public String getHomeUrl() {
         return getProperties().getProperty("home", "https://xresloader.atframe.work/");
+    }
+
+    static public String getEndl() {
+        if (endl == null) {
+            endl = System.getProperty("line.separator", "\n");
+        }
+
+        return endl;
     }
 }

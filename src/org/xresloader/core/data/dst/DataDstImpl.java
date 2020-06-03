@@ -138,7 +138,7 @@ public abstract class DataDstImpl {
 
     static public Boolean[] parsePlainDataBoolean(String[] groups, IdentifyDescriptor ident,
             DataDstWriterNode.DataDstFieldDescriptor field) throws ConvException {
-        if (groups == null || ident == null) {
+        if (groups == null) {
             return null;
         }
 
@@ -161,7 +161,7 @@ public abstract class DataDstImpl {
 
     static public String[] parsePlainDataString(String[] groups, IdentifyDescriptor ident,
             DataDstWriterNode.DataDstFieldDescriptor field) throws ConvException {
-        if (groups == null || ident == null) {
+        if (groups == null) {
             return null;
         }
 
@@ -176,14 +176,24 @@ public abstract class DataDstImpl {
 
     static public Long parsePlainDataLong(String input, IdentifyDescriptor ident,
             DataDstWriterNode.DataDstFieldDescriptor field) throws ConvException {
-        if (input == null || ident == null) {
+        if (input == null) {
             return null;
         }
 
         String item = ExcelEngine.tryMacro(input.trim());
-        Long ret = DataVerifyImpl.getAndVerify(ident.getVerifier(), ident.index, ident.name, item);
-        if (ident.getRatio() != 1) {
-            ret *= ident.getRatio();
+        Long ret;
+        if (ident != null) {
+            ret = DataVerifyImpl.getAndVerify(ident.getVerifier(), ident.name, item);
+            if (ident.getRatio() != 1) {
+                ret *= ident.getRatio();
+            }
+        } else if (field != null) {
+            ret = DataVerifyImpl.getAndVerify(field.getVerifier(), field.getName(), item);
+            if (field.mutableExtension().ratio != 1) {
+                ret *= field.mutableExtension().ratio;
+            }
+        } else {
+            ret = Long.valueOf(0);
         }
 
         return ret;
@@ -191,7 +201,7 @@ public abstract class DataDstImpl {
 
     static public Long[] parsePlainDataLong(String[] groups, IdentifyDescriptor ident,
             DataDstWriterNode.DataDstFieldDescriptor field) throws ConvException {
-        if (groups == null || ident == null) {
+        if (groups == null) {
             return null;
         }
 
@@ -205,21 +215,23 @@ public abstract class DataDstImpl {
 
     static public Double parsePlainDataDouble(String input, IdentifyDescriptor ident,
             DataDstWriterNode.DataDstFieldDescriptor field) throws ConvException {
-        if (input == null || ident == null) {
+        if (input == null) {
             return 0.0;
         }
 
         try {
-            Double ret = Double.valueOf(ExcelEngine.tryMacro(input));
-            if (field != null) {
-                if (field.mutableExtension().ratio > 1) {
-                    ret *= field.mutableExtension().ratio;
-                }
-            } else {
+            String item = ExcelEngine.tryMacro(input.trim());
+            Double ret = Double.valueOf(item);
+            if (ident != null) {
                 if (ident.getRatio() != 1) {
                     ret *= ident.getRatio();
                 }
+            } else if (field != null) {
+                if (field.mutableExtension().ratio != 1) {
+                    ret *= field.mutableExtension().ratio;
+                }
             }
+
             return ret;
         } catch (java.lang.NumberFormatException e) {
             throw new ConvException(String.format("Try to convert %s to double failed.", input));
@@ -228,7 +240,7 @@ public abstract class DataDstImpl {
 
     static public Double[] parsePlainDataDouble(String[] groups, IdentifyDescriptor ident,
             DataDstWriterNode.DataDstFieldDescriptor field) throws ConvException {
-        if (groups == null || ident == null) {
+        if (groups == null) {
             return null;
         }
 
@@ -243,7 +255,7 @@ public abstract class DataDstImpl {
 
     static public Object[] parsePlainDataOneof(String input, IdentifyDescriptor ident,
             DataDstWriterNode.DataDstOneofDescriptor oneof) throws ConvException {
-        if (input == null || ident == null) {
+        if (input == null) {
             return null;
         }
 
@@ -253,7 +265,17 @@ public abstract class DataDstImpl {
         }
 
         String item = ExcelEngine.tryMacro(groups[0].trim());
-        Long select = DataVerifyImpl.getAndVerify(ident.getVerifier(), ident.index, ident.name, item);
+        Long select;
+        if (ident != null) {
+            select = DataVerifyImpl.getAndVerify(ident.getVerifier(), ident.name, item);
+        } else {
+            try {
+                select = Long.valueOf(DataVerifyImpl.getAndVerify(oneof.getVerifier(), "[PLAIN TEXT]", item.trim()));
+            } catch (java.lang.NumberFormatException e) {
+                throw new ConvException(String.format("Try to convert %s to oneof case failed.", input));
+            }
+        }
+
         DataDstWriterNode.DataDstFieldDescriptor field = oneof.getFieldById(select.intValue());
         if (field == null) {
             return null;
@@ -263,6 +285,26 @@ public abstract class DataDstImpl {
         ret[0] = field;
         for (int i = 1; i < groups.length; ++i) {
             ret[i] = groups[i];
+        }
+
+        if (ret.length > 2) {
+            DataSrcImpl current_source = DataSrcImpl.getOurInstance();
+            String[] ignored = new String[ret.length - 2];
+            for (int i = 2; i < ret.length; ++i) {
+                ignored[i - 2] = groups[i];
+            }
+            if (current_source != null) {
+                ProgramOptions.getLoger().warn(
+                        "Convert %s from \"%s\", we need only %d fields but provided %d, \"%s\" may be ignored.%s  > File: %s, Table: %s, Row: %d, Column: %d",
+                        oneof.getFullName(), input, 2, ret.length, String.join("\",\"", ignored),
+                        ProgramOptions.getEndl(), current_source.getCurrentFileName(),
+                        current_source.getCurrentTableName(), current_source.getCurrentRowNum() + 1,
+                        current_source.getLastColomnNum() + 1);
+            } else {
+                ProgramOptions.getLoger().warn(
+                        "Convert %s from \"%s\", we need only %d fields but provided %d, \"%s\" may be ignored.",
+                        oneof.getFullName(), input, 2, ret.length, String.join("\",\"", ignored));
+            }
         }
 
         return ret;

@@ -375,3 +375,7 @@ ERROR StatusLogger Unable to invoke factory method in class class org.apache.log
 这是因为在Windows控制台中，如果编码是UTF-8，java获取编码时会获取到cp65001，而这个编码java本身是不识别的。这种情况可以按下面的方法解决：
 + 第一种: 执行xresloader之前先执行 chcp 936，切换到GBK编码
 + 第二种: 在powershell里执行
+
+4. 为什么 我在proto里定义的是一个无符号(unsigned)类型(uint32、uint64等)，实际输出的UE代码是有符号(signed)的(int32/int64)？
+
+Ans: 因为有一些语言是没有无符号(unsigned)类型的，为了统一数据类型，我们统一转换为有符号类型，转换方式和protobuf的java版SDK保持一致。如果需要使用大于int32最大值的uint32类型，请用int64代替。

@@ -127,7 +127,7 @@ public class DataDstUECsv extends DataDstUEBase {
 
     @Override
     protected void buildForUEOnPrintRecord(Object buildObj, ArrayList<Object> rowData, UEDataRowRule rule,
-            UECodeInfo codeInfo) throws IOException {
+            UECodeInfo codeInfo, HashMap<String, Object> fieldDataByOneof) throws IOException {
         if (!isRecursiveEnabled()) {
             ((UEBuildObject) buildObj).csv.printRecord(rowData);
         } else {

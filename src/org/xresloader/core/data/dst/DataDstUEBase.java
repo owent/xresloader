@@ -615,7 +615,7 @@ public abstract class DataDstUEBase extends DataDstImpl {
             UECodeInfo codeInfo) throws IOException;
 
     abstract protected void buildForUEOnPrintRecord(Object buildObj, ArrayList<Object> rowData, UEDataRowRule rule,
-            UECodeInfo codeInfo) throws IOException;
+            UECodeInfo codeInfo, HashMap<String, Object> fieldDataByOneof) throws IOException;
 
     private UEDataRowRule rebuildCodeRule(UECodeInfo codeInfo) throws ConvException {
         if (null == codeInfo.writerNodeWrapper) {
@@ -688,6 +688,7 @@ public abstract class DataDstUEBase extends DataDstImpl {
                 // 先用特殊规则导入Name字段,Name字段可能是合成字段
                 if (!rule.keyFields.isEmpty()) {
                     row_data.add(pickNameField(buildObj, rule));
+
                     for (int i = 1; i < rule.keyFields.size(); ++i) {
                         row_data.add(pickValueField(buildObj, rule.keyFields.get(i)));
                     }
@@ -705,13 +706,17 @@ public abstract class DataDstUEBase extends DataDstImpl {
                     }
 
                     if (firstNode.getReferOneof() != null) {
-                        // 如果是生成的节点，直接填充固定值
-                        if (firstNode.isGenerated() && firstNode.getReferField() != null) {
-                            row_data.add(firstNode.getReferField().getIndex());
+                        // 如果是生成的节点，case 直接填充固定值
+                        if (firstNode.isGenerated()) {
+                            if (firstNode.getReferField() != null) {
+                                row_data.add(firstNode.getReferField().getIndex());
+                            } else {
+                                row_data.add(Integer.valueOf(0));
+                            }
                             continue;
                         }
 
-                        // oneof 处理
+                        // oneof 设置 case,缓存field
                         Object res = pickValueField(buildObj, rule.valueFields.get(i));
                         if (res instanceof OneofDataObject) {
                             String fieldVarName = getIdentName(((OneofDataObject) res).field.getName());
@@ -726,16 +731,16 @@ public abstract class DataDstUEBase extends DataDstImpl {
 
                     // oneof一定先处理,如果有oneof引用且已经有数据缓存了直接用
                     if (firstNode.getReferOneofNode() != null) {
-                        String fieldVarName = getIdentName(firstNode.getReferField().getName());
-                        if (fieldDataByOneof.containsKey(fieldVarName)) {
-                            row_data.add(pickValueField(buildObj, rule.valueFields.get(i)));
+                        if (fieldDataByOneof.containsKey(firstNode.getVarName())) {
+                            row_data.add(fieldDataByOneof.get(firstNode.getVarName()));
                             continue;
                         }
                     }
 
                     row_data.add(pickValueField(buildObj, rule.valueFields.get(i)));
                 }
-                buildForUEOnPrintRecord(buildObj, row_data, rule, codeInfo);
+
+                buildForUEOnPrintRecord(buildObj, row_data, rule, codeInfo, fieldDataByOneof);
             }
 
             // 加载代码
@@ -880,33 +885,6 @@ public abstract class DataDstUEBase extends DataDstImpl {
 
     abstract protected Object pickValueField(Object buildObj, ArrayList<DataDstWriterNodeWrapper> fieldSet)
             throws ConvException;
-    // protected Object pickValueField(Object buildObj,
-    // ArrayList<DataDstWriterNodeWrapper> fieldSet)
-    // throws ConvException {
-    // if (fieldSet == null || fieldSet.isEmpty()) {
-    // return null;
-    // }
-    //
-    // DataDstFieldDescriptor field = getFieldDescriptor(fieldSet);
-    // if (field == null) {
-    // return null;
-    // }
-    //
-    // if (field.isList()) {
-    // ArrayList<Object> ret = new ArrayList<Object>();
-    // ret.ensureCapacity(fieldSet.size());
-    // for (DataDstWriterNodeWrapper descWraper : fieldSet) {
-    // Object res = pickValueFieldBaseStandardImpl(descWraper.getReferNode());
-    // if (res != null) {
-    // ret.add(res);
-    // }
-    // }
-    //
-    // return ret;
-    // } else {
-    // return pickValueFieldBaseStandardImpl(fieldSet.get(0).getReferNode());
-    // }
-    // }
 
     protected Object pickValueFieldBaseStandardImpl(DataDstWriterNode desc) throws ConvException {
         if (null == desc || null == desc.identify) {
@@ -1046,7 +1024,7 @@ public abstract class DataDstUEBase extends DataDstImpl {
                 break;
             }
 
-            DataDstChildrenNode referChildren = referWriterNode.getChildren().getOrDefault(baseVarName, null);
+            DataDstChildrenNode referChildren = referWriterNode.getChildren().getOrDefault(oneof.getName(), null);
             if (referChildren == null || referChildren.nodes == null || referChildren.nodes.isEmpty()) {
                 // 非递归模式中忽略未映射的oneof直接忽略即可
                 break;
@@ -1969,8 +1947,7 @@ public abstract class DataDstUEBase extends DataDstImpl {
 
         for (int i = 0; i < rule.valueFields.size(); ++i) {
             ArrayList<DataDstWriterNodeWrapper> fieldSet = rule.valueFields.get(i);
-            DataDstFieldDescriptor field = getFieldDescriptor(fieldSet);
-            if (null == field || fieldSet.isEmpty()) {
+            if (fieldSet.isEmpty()) {
                 continue;
             }
 
@@ -1983,13 +1960,11 @@ public abstract class DataDstUEBase extends DataDstImpl {
                 DataDstWriterNodeWrapper descWraper = fieldSet.get(j);
 
                 // oneof 处理
-                if (descWraper.getReferOneofNode() != null) {
-                    String oneofVarName = descWraper.getReferOneofNode().varName;
-                    if (!dumpedOneof.contains(oneofVarName)) {
-                        writeCodeHeaderField(headerFs, descWraper.getReferOneofNode().getReferOneof(), oneofVarName,
-                                descWraper.getReferOneofNode().isGenerated);
-                        dumpedOneof.add(oneofVarName);
-                    }
+                if (descWraper.getReferOneof() != null) {
+                    writeCodeHeaderField(headerFs, descWraper.getReferOneof(), descWraper.varName,
+                            descWraper.isGenerated);
+                    dumpedOneof.add(descWraper.varName);
+                    continue;
                 }
 
                 writeCodeHeaderField(headerFs, descWraper.getReferField(), descWraper.varName, descWraper.isGenerated);
@@ -2316,14 +2291,10 @@ public abstract class DataDstUEBase extends DataDstImpl {
             for (int j = 0; j < fieldSet.size() && j < 1; ++j) {
                 DataDstWriterNodeWrapper wrapper = fieldSet.get(j);
 
-                // oneof 处理
-                if (wrapper.getReferOneofNode() != null) {
-                    String oneofVarName = wrapper.getReferOneofNode().varName;
-                    if (!dumpedOneof.contains(oneofVarName)) {
-                        writeUETypeSetDefaultCode(sourceFs, "    TableRow", oneofVarName,
-                                wrapper.getReferOneofNode().getReferOneof());
-                        dumpedOneof.add(oneofVarName);
-                    }
+                if (wrapper.getReferOneof() != null) {
+                    writeUETypeSetDefaultCode(sourceFs, "    TableRow", wrapper.varName, wrapper.getReferOneof());
+                    dumpedOneof.add(wrapper.varName);
+                    continue;
                 }
 
                 DataDstFieldDescriptor field = wrapper.getReferField();

@@ -85,6 +85,7 @@ message event_cfg {
     optional uint32 process     = 2 [ (org.xresloader.ue.key_tag) = 1 ];
 
     optional event_rule_item rule = 6;
+    optional event_rule_item specify_field = 7;
     
     oneof reward {
         event_reward_item item      = 11 [ (org.xresloader.field_alias) = "奖励道具" ];
@@ -96,4 +97,7 @@ message event_cfg {
     oneof unlock_type {
         uint32 user_level = 51 [ (org.xresloader.field_alias) = "玩家等级" ];
     }
+
+    repeated event_rule_item test_arr       = 91 [ (org.xresloader.field_separator) = ";" ];
+    repeated event_rule_item test_empty_arr = 92 [ (org.xresloader.field_separator) = ";" ];
 }

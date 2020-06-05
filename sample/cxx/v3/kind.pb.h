@@ -2044,7 +2044,10 @@ class event_cfg PROTOBUF_FINAL :
   // accessors -------------------------------------------------------
 
   enum : int {
+    kTestArrFieldNumber = 91,
+    kTestEmptyArrFieldNumber = 92,
     kRuleFieldNumber = 6,
+    kSpecifyFieldFieldNumber = 7,
     kIdFieldNumber = 1,
     kProcessFieldNumber = 2,
     kItemFieldNumber = 11,
@@ -2053,6 +2056,42 @@ class event_cfg PROTOBUF_FINAL :
     kEnumTypeFieldNumber = 14,
     kUserLevelFieldNumber = 51,
   };
+  // repeated .event_rule_item test_arr = 91 [(.org.xresloader.field_separator) = ";"];
+  int test_arr_size() const;
+  private:
+  int _internal_test_arr_size() const;
+  public:
+  void clear_test_arr();
+  ::event_rule_item* mutable_test_arr(int index);
+  ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::event_rule_item >*
+      mutable_test_arr();
+  private:
+  const ::event_rule_item& _internal_test_arr(int index) const;
+  ::event_rule_item* _internal_add_test_arr();
+  public:
+  const ::event_rule_item& test_arr(int index) const;
+  ::event_rule_item* add_test_arr();
+  const ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::event_rule_item >&
+      test_arr() const;
+
+  // repeated .event_rule_item test_empty_arr = 92 [(.org.xresloader.field_separator) = ";"];
+  int test_empty_arr_size() const;
+  private:
+  int _internal_test_empty_arr_size() const;
+  public:
+  void clear_test_empty_arr();
+  ::event_rule_item* mutable_test_empty_arr(int index);
+  ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::event_rule_item >*
+      mutable_test_empty_arr();
+  private:
+  const ::event_rule_item& _internal_test_empty_arr(int index) const;
+  ::event_rule_item* _internal_add_test_empty_arr();
+  public:
+  const ::event_rule_item& test_empty_arr(int index) const;
+  ::event_rule_item* add_test_empty_arr();
+  const ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::event_rule_item >&
+      test_empty_arr() const;
+
   // .event_rule_item rule = 6;
   bool has_rule() const;
   private:
@@ -2070,6 +2109,24 @@ class event_cfg PROTOBUF_FINAL :
   void unsafe_arena_set_allocated_rule(
       ::event_rule_item* rule);
   ::event_rule_item* unsafe_arena_release_rule();
+
+  // .event_rule_item specify_field = 7;
+  bool has_specify_field() const;
+  private:
+  bool _internal_has_specify_field() const;
+  public:
+  void clear_specify_field();
+  const ::event_rule_item& specify_field() const;
+  ::event_rule_item* release_specify_field();
+  ::event_rule_item* mutable_specify_field();
+  void set_allocated_specify_field(::event_rule_item* specify_field);
+  private:
+  const ::event_rule_item& _internal_specify_field() const;
+  ::event_rule_item* _internal_mutable_specify_field();
+  public:
+  void unsafe_arena_set_allocated_specify_field(
+      ::event_rule_item* specify_field);
+  ::event_rule_item* unsafe_arena_release_specify_field();
 
   // uint32 id = 1 [(.org.xresloader.ue.key_tag) = 100];
   void clear_id();
@@ -2193,7 +2250,10 @@ class event_cfg PROTOBUF_FINAL :
   template <typename T> friend class ::PROTOBUF_NAMESPACE_ID::Arena::InternalHelper;
   typedef void InternalArenaConstructable_;
   typedef void DestructorSkippable_;
+  ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::event_rule_item > test_arr_;
+  ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::event_rule_item > test_empty_arr_;
   ::event_rule_item* rule_;
+  ::event_rule_item* specify_field_;
   ::PROTOBUF_NAMESPACE_ID::uint32 id_;
   ::PROTOBUF_NAMESPACE_ID::uint32 process_;
   union RewardUnion {
@@ -4106,6 +4166,87 @@ inline void event_cfg::set_allocated_rule(::event_rule_item* rule) {
   // @@protoc_insertion_point(field_set_allocated:event_cfg.rule)
 }
 
+// .event_rule_item specify_field = 7;
+inline bool event_cfg::_internal_has_specify_field() const {
+  return this != internal_default_instance() && specify_field_ != nullptr;
+}
+inline bool event_cfg::has_specify_field() const {
+  return _internal_has_specify_field();
+}
+inline void event_cfg::clear_specify_field() {
+  if (GetArena() == nullptr && specify_field_ != nullptr) {
+    delete specify_field_;
+  }
+  specify_field_ = nullptr;
+}
+inline const ::event_rule_item& event_cfg::_internal_specify_field() const {
+  const ::event_rule_item* p = specify_field_;
+  return p != nullptr ? *p : *reinterpret_cast<const ::event_rule_item*>(
+      &::_event_rule_item_default_instance_);
+}
+inline const ::event_rule_item& event_cfg::specify_field() const {
+  // @@protoc_insertion_point(field_get:event_cfg.specify_field)
+  return _internal_specify_field();
+}
+inline void event_cfg::unsafe_arena_set_allocated_specify_field(
+    ::event_rule_item* specify_field) {
+  if (GetArena() == nullptr) {
+    delete reinterpret_cast<::PROTOBUF_NAMESPACE_ID::MessageLite*>(specify_field_);
+  }
+  specify_field_ = specify_field;
+  if (specify_field) {
+    
+  } else {
+    
+  }
+  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:event_cfg.specify_field)
+}
+inline ::event_rule_item* event_cfg::release_specify_field() {
+  auto temp = unsafe_arena_release_specify_field();
+  if (GetArena() != nullptr) {
+    temp = ::PROTOBUF_NAMESPACE_ID::internal::DuplicateIfNonNull(temp);
+  }
+  return temp;
+}
+inline ::event_rule_item* event_cfg::unsafe_arena_release_specify_field() {
+  // @@protoc_insertion_point(field_release:event_cfg.specify_field)
+  
+  ::event_rule_item* temp = specify_field_;
+  specify_field_ = nullptr;
+  return temp;
+}
+inline ::event_rule_item* event_cfg::_internal_mutable_specify_field() {
+  
+  if (specify_field_ == nullptr) {
+    auto* p = CreateMaybeMessage<::event_rule_item>(GetArena());
+    specify_field_ = p;
+  }
+  return specify_field_;
+}
+inline ::event_rule_item* event_cfg::mutable_specify_field() {
+  // @@protoc_insertion_point(field_mutable:event_cfg.specify_field)
+  return _internal_mutable_specify_field();
+}
+inline void event_cfg::set_allocated_specify_field(::event_rule_item* specify_field) {
+  ::PROTOBUF_NAMESPACE_ID::Arena* message_arena = GetArena();
+  if (message_arena == nullptr) {
+    delete specify_field_;
+  }
+  if (specify_field) {
+    ::PROTOBUF_NAMESPACE_ID::Arena* submessage_arena =
+      ::PROTOBUF_NAMESPACE_ID::Arena::GetArena(specify_field);
+    if (message_arena != submessage_arena) {
+      specify_field = ::PROTOBUF_NAMESPACE_ID::internal::GetOwnedMessage(
+          message_arena, specify_field, submessage_arena);
+    }
+    
+  } else {
+    
+  }
+  specify_field_ = specify_field;
+  // @@protoc_insertion_point(field_set_allocated:event_cfg.specify_field)
+}
+
 // .event_reward_item item = 11 [(.org.xresloader.field_alias) = "\345\245\226\345\212\261\351\201\223\345\205\267"];
 inline bool event_cfg::_internal_has_item() const {
   return reward_case() == kItem;
@@ -4407,6 +4548,84 @@ inline ::PROTOBUF_NAMESPACE_ID::uint32 event_cfg::user_level() const {
 inline void event_cfg::set_user_level(::PROTOBUF_NAMESPACE_ID::uint32 value) {
   _internal_set_user_level(value);
   // @@protoc_insertion_point(field_set:event_cfg.user_level)
+}
+
+// repeated .event_rule_item test_arr = 91 [(.org.xresloader.field_separator) = ";"];
+inline int event_cfg::_internal_test_arr_size() const {
+  return test_arr_.size();
+}
+inline int event_cfg::test_arr_size() const {
+  return _internal_test_arr_size();
+}
+inline void event_cfg::clear_test_arr() {
+  test_arr_.Clear();
+}
+inline ::event_rule_item* event_cfg::mutable_test_arr(int index) {
+  // @@protoc_insertion_point(field_mutable:event_cfg.test_arr)
+  return test_arr_.Mutable(index);
+}
+inline ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::event_rule_item >*
+event_cfg::mutable_test_arr() {
+  // @@protoc_insertion_point(field_mutable_list:event_cfg.test_arr)
+  return &test_arr_;
+}
+inline const ::event_rule_item& event_cfg::_internal_test_arr(int index) const {
+  return test_arr_.Get(index);
+}
+inline const ::event_rule_item& event_cfg::test_arr(int index) const {
+  // @@protoc_insertion_point(field_get:event_cfg.test_arr)
+  return _internal_test_arr(index);
+}
+inline ::event_rule_item* event_cfg::_internal_add_test_arr() {
+  return test_arr_.Add();
+}
+inline ::event_rule_item* event_cfg::add_test_arr() {
+  // @@protoc_insertion_point(field_add:event_cfg.test_arr)
+  return _internal_add_test_arr();
+}
+inline const ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::event_rule_item >&
+event_cfg::test_arr() const {
+  // @@protoc_insertion_point(field_list:event_cfg.test_arr)
+  return test_arr_;
+}
+
+// repeated .event_rule_item test_empty_arr = 92 [(.org.xresloader.field_separator) = ";"];
+inline int event_cfg::_internal_test_empty_arr_size() const {
+  return test_empty_arr_.size();
+}
+inline int event_cfg::test_empty_arr_size() const {
+  return _internal_test_empty_arr_size();
+}
+inline void event_cfg::clear_test_empty_arr() {
+  test_empty_arr_.Clear();
+}
+inline ::event_rule_item* event_cfg::mutable_test_empty_arr(int index) {
+  // @@protoc_insertion_point(field_mutable:event_cfg.test_empty_arr)
+  return test_empty_arr_.Mutable(index);
+}
+inline ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::event_rule_item >*
+event_cfg::mutable_test_empty_arr() {
+  // @@protoc_insertion_point(field_mutable_list:event_cfg.test_empty_arr)
+  return &test_empty_arr_;
+}
+inline const ::event_rule_item& event_cfg::_internal_test_empty_arr(int index) const {
+  return test_empty_arr_.Get(index);
+}
+inline const ::event_rule_item& event_cfg::test_empty_arr(int index) const {
+  // @@protoc_insertion_point(field_get:event_cfg.test_empty_arr)
+  return _internal_test_empty_arr(index);
+}
+inline ::event_rule_item* event_cfg::_internal_add_test_empty_arr() {
+  return test_empty_arr_.Add();
+}
+inline ::event_rule_item* event_cfg::add_test_empty_arr() {
+  // @@protoc_insertion_point(field_add:event_cfg.test_empty_arr)
+  return _internal_add_test_empty_arr();
+}
+inline const ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::event_rule_item >&
+event_cfg::test_empty_arr() const {
+  // @@protoc_insertion_point(field_list:event_cfg.test_empty_arr)
+  return test_empty_arr_;
 }
 
 inline bool event_cfg::has_reward() const {

@@ -2,6 +2,7 @@
     {
         "Arr": [
             {
+                "TestOnof": 0,
                 "TestRoleUpgradeCfg": {
                     "ScoreAdd": 0,
                     "CostValue": 0,
@@ -37,6 +38,7 @@
                 }
             },
             {
+                "TestOnof": 0,
                 "TestRoleUpgradeCfg": {
                     "ScoreAdd": 0,
                     "CostValue": 0,
@@ -106,6 +108,7 @@
     {
         "Arr": [
             {
+                "TestOnof": 0,
                 "TestRoleUpgradeCfg": {
                     "ScoreAdd": 0,
                     "CostValue": 0,
@@ -141,6 +144,7 @@
                 }
             },
             {
+                "TestOnof": 0,
                 "TestRoleUpgradeCfg": {
                     "ScoreAdd": 0,
                     "CostValue": 0,
@@ -206,6 +210,7 @@
     {
         "Arr": [
             {
+                "TestOnof": 0,
                 "TestRoleUpgradeCfg": {
                     "ScoreAdd": 0,
                     "CostValue": 0,
@@ -235,6 +240,7 @@
                 }
             },
             {
+                "TestOnof": 0,
                 "TestRoleUpgradeCfg": {
                     "ScoreAdd": 0,
                     "CostValue": 0,

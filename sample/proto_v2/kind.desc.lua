@@ -129,6 +129,22 @@ local const_res = {
               },
               type_name = "UINT32",
             },
+            test_arr = {
+              name = "test_arr",
+              number = 91,
+              options = {
+                field_separator = ";",
+              },
+              type_name = "MESSAGE",
+            },
+            test_empty_arr = {
+              name = "test_empty_arr",
+              number = 92,
+              options = {
+                field_separator = ";",
+              },
+              type_name = "MESSAGE",
+            },
             user_exp = {
               name = "user_exp",
               number = 12,
@@ -149,7 +165,7 @@ local const_res = {
           name = "event_cfg",
           options = {
             helper = "helper",
-            msg_description = "Test role_upgrade_cfg with oneof fields",
+            msg_description = "Test event_cfg with oneof fields",
           },
         },
         event_reward_item = {

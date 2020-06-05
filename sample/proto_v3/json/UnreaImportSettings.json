@@ -34,5 +34,17 @@
         },
         "bSkipReadOnly": "true",
         "bReplaceExisting": "true"
+    },
+    {
+        "GroupName": "XResConfig",
+        "DestinationPath": "Config",
+        "FactoryName": "ReimportDataTableFactory",
+        "Filenames": ["D:\\workspace\\github\\xresloader\\xresloader\\sample\\proto_v3\\json\\EventCfg.json"],
+        "ImportSettings": {
+            "ImportType": "ECSV_DataTable",
+            "ImportRowStruct": "EventCfg"
+        },
+        "bSkipReadOnly": "true",
+        "bReplaceExisting": "true"
     }
 ]}

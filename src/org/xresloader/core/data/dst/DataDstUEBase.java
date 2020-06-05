@@ -224,6 +224,15 @@ public abstract class DataDstUEBase extends DataDstImpl {
             return null;
         }
 
+        void setReferField(DataDstFieldDescriptor f) {
+            // 如果不是生成的，或有绑定数据源则不能设置关联field
+            if (!this.isGenerated || null != this.referNode) {
+                return;
+            }
+
+            this.referField = f;
+        }
+
         public DataDstOneofDescriptor getReferOneof() {
             if (referOneof != null) {
                 return referOneof;
@@ -1008,8 +1017,7 @@ public abstract class DataDstUEBase extends DataDstImpl {
     }
 
     private DataDstWriterNodeWrapper mutableOneofWriterNodeWrapper(DataDstWriterNodeWrapper root,
-            HashMap<String, DataDstWriterNodeWrapper> cache, DataDstOneofDescriptor oneof,
-            DataDstFieldDescriptor field) {
+            HashMap<String, DataDstWriterNodeWrapper> cache, DataDstOneofDescriptor oneof) {
         String baseVarName = getIdentName(oneof.getName());
 
         DataDstWriterNodeWrapper ret = cache.getOrDefault(baseVarName, null);
@@ -1037,8 +1045,6 @@ public abstract class DataDstUEBase extends DataDstImpl {
         // 没有配置了oneof的映射要生成一个
         if (ret == null) {
             ret = buildWriterNodeWraper(baseVarName, null, oneof, true);
-            // 生成的oneof字段要设置静态绑定的字段
-            ret.referField = field;
         }
 
         ArrayList<DataDstWriterNodeWrapper> children = new ArrayList<DataDstWriterNodeWrapper>();
@@ -1065,7 +1071,10 @@ public abstract class DataDstUEBase extends DataDstImpl {
                         oneofCache = new HashMap<String, DataDstWriterNodeWrapper>();
                     }
 
-                    referOneof = mutableOneofWriterNodeWrapper(root, oneofCache, field.getReferOneof(), field);
+                    // 非嵌套模式不支持oneof
+                    if (isRecursiveEnabled()) {
+                        referOneof = mutableOneofWriterNodeWrapper(root, oneofCache, field.getReferOneof());
+                    }
                 }
 
                 ArrayList<DataDstWriterNodeWrapper> children = new ArrayList<DataDstWriterNodeWrapper>();
@@ -1089,6 +1098,10 @@ public abstract class DataDstUEBase extends DataDstImpl {
                         root.addChild(children);
                     }
                     continue;
+                }
+
+                if (null != referOneof) {
+                    referOneof.setReferField(field);
                 }
 
                 if (field.isList()) {
@@ -1157,7 +1170,10 @@ public abstract class DataDstUEBase extends DataDstImpl {
                     oneofCache = new HashMap<String, DataDstWriterNodeWrapper>();
                 }
 
-                referOneof = mutableOneofWriterNodeWrapper(ret, oneofCache, field.getReferOneof(), field);
+                // 非嵌套模式不支持oneof
+                if (isRecursiveEnabled()) {
+                    referOneof = mutableOneofWriterNodeWrapper(ret, oneofCache, field.getReferOneof());
+                }
             }
 
             String baseVarName;
@@ -1186,6 +1202,10 @@ public abstract class DataDstUEBase extends DataDstImpl {
                     ret.addChild(children);
                 }
                 continue;
+            }
+
+            if (null != referOneof) {
+                referOneof.setReferField(field);
             }
 
             if (field.isList()) {
@@ -1496,10 +1516,11 @@ public abstract class DataDstUEBase extends DataDstImpl {
         String ueTypeName = "int32";
         if (isGenerated) {
             fout.write(dumpString(String.format(
-                    "    /** Field Type: %s, Name: %s. This field is generated for UE Editor compatible. **/\r\n",
-                    ueTypeName, varName)));
+                    "    /** Field Type: %s, Name: %s, Index: %d. This field is generated for UE Editor compatible. **/\r\n",
+                    "oneof/union -> int32", varName, oneofDesc.getIndex())));
         } else {
-            fout.write(dumpString(String.format("    /** Field Type: %s, Name: %s **/\r\n", ueTypeName, varName)));
+            fout.write(dumpString(String.format("    /** Field Type: %s, Name: %s, Index: %d **/\r\n",
+                    "oneof/union -> int32", varName, oneofDesc.getIndex())));
         }
 
         fout.write(dumpString(getHeaderFieldUProperty()));
@@ -1528,10 +1549,11 @@ public abstract class DataDstUEBase extends DataDstImpl {
 
         if (isGenerated) {
             fout.write(dumpString(String.format(
-                    "    /** Field Type: %s, Name: %s. This field is generated for UE Editor compatible. **/\r\n",
-                    descType.name(), varName)));
+                    "    /** Field Type: %s, Name: %s, Index: %d. This field is generated for UE Editor compatible. **/\r\n",
+                    descType.name(), varName, fieldDesc.getIndex())));
         } else {
-            fout.write(dumpString(String.format("    /** Field Type: %s, Name: %s **/\r\n", descType.name(), varName)));
+            fout.write(dumpString(String.format("    /** Field Type: %s, Name: %s, Index: %d **/\r\n", descType.name(),
+                    varName, fieldDesc.getIndex())));
         }
 
         String ueTypeName = null;
@@ -1914,6 +1936,17 @@ public abstract class DataDstUEBase extends DataDstImpl {
 
         // 加载代码
         FileOutputStream headerFs = createCodeHeaderFileStream(rule, codeInfo);
+
+        // 如果是嵌套模式，输出字段FieldNumber，规则和protobuf的C++接口一样
+        if (isRecursiveEnabled() && null != codeInfo.writerNodeWrapper) {
+            headerFs.write(dumpString("\r\n    UENUM(BlueprintType)\r\n    enum : int32 {\r\n"));
+            for (DataDstFieldDescriptor field : codeInfo.writerNodeWrapper.getTypeDescriptor().getSortedFields()) {
+                String varName = getIdentName(field.getName());
+                headerFs.write(dumpString(String.format("        k%sFieldNumber = %d UMETA(DisplayName = \"%s\"),\r\n",
+                        varName, field.getIndex(), varName)));
+            }
+            headerFs.write(dumpString("    };\r\n"));
+        }
 
         HashSet<String> dumpedFields = null;
         if (isRecursiveEnabled()) {

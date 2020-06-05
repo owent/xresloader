@@ -291,16 +291,22 @@ const ::PROTOBUF_NAMESPACE_ID::uint32 TableStruct_kind_2eproto::offsets[] PROTOB
   PROTOBUF_FIELD_OFFSET(::event_cfg, id_),
   PROTOBUF_FIELD_OFFSET(::event_cfg, process_),
   PROTOBUF_FIELD_OFFSET(::event_cfg, rule_),
+  PROTOBUF_FIELD_OFFSET(::event_cfg, specify_field_),
   offsetof(::event_cfgDefaultTypeInternal, item_),
   offsetof(::event_cfgDefaultTypeInternal, user_exp_),
   offsetof(::event_cfgDefaultTypeInternal, note_),
   offsetof(::event_cfgDefaultTypeInternal, enum_type_),
   offsetof(::event_cfgDefaultTypeInternal, user_level_),
+  PROTOBUF_FIELD_OFFSET(::event_cfg, test_arr_),
+  PROTOBUF_FIELD_OFFSET(::event_cfg, test_empty_arr_),
   PROTOBUF_FIELD_OFFSET(::event_cfg, reward_),
   PROTOBUF_FIELD_OFFSET(::event_cfg, unlock_type_),
-  1,
   2,
+  3,
   0,
+  1,
+  ~0u,
+  ~0u,
   ~0u,
   ~0u,
   ~0u,
@@ -315,7 +321,7 @@ static const ::PROTOBUF_NAMESPACE_ID::internal::MigrationSchema schemas[] PROTOB
   { 56, 67, sizeof(::arr_in_arr_cfg)},
   { 73, 83, sizeof(::event_reward_item)},
   { 87, 97, sizeof(::event_rule_item)},
-  { 101, 116, sizeof(::event_cfg)},
+  { 101, 119, sizeof(::event_cfg)},
 };
 
 static ::PROTOBUF_NAMESPACE_ID::Message const * const file_default_instances[] = {
@@ -361,16 +367,19 @@ const char descriptor_table_protodef_kind_2eproto[] PROTOBUF_SECTION_VARIABLE(pr
   "(\r\022\022\n\nrule_param\030\002 \001(\r\022&\n\013nested_note\030\013 "
   "\001(\tB\017\242\?\014\346\217\217\350\277\260\346\226\207\346\234\254H\000\0227\n\020nested_enum_ty"
   "pe\030\014 \001(\0162\n.cost_typeB\017\242\?\014\350\264\247\345\270\201\347\261\273\345\236\213H\000B"
-  "\010\n\006nested\"\364\002\n\tevent_cfg\022\017\n\002id\030\001 \001(\rB\003\350Dd"
+  "\010\n\006nested\"\360\003\n\tevent_cfg\022\017\n\002id\030\001 \001(\rB\003\350Dd"
   "\022\024\n\007process\030\002 \001(\rB\003\350D\001\022\036\n\004rule\030\006 \001(\0132\020.e"
-  "vent_rule_item\0223\n\004item\030\013 \001(\0132\022.event_rew"
-  "ard_itemB\017\242\?\014\345\245\226\345\212\261\351\201\223\345\205\267H\000\022#\n\010user_exp\030"
-  "\014 \001(\003B\017\242\?\014\345\245\226\345\212\261\347\273\217\351\252\214H\000\022\037\n\004note\030\r \001(\tB\017"
-  "\242\?\014\346\217\217\350\277\260\346\226\207\346\234\254H\000\0220\n\tenum_type\030\016 \001(\0162\n.c"
-  "ost_typeB\017\242\?\014\350\264\247\345\270\201\347\261\273\345\236\213H\000\022%\n\nuser_leve"
-  "l\0303 \001(\rB\017\242\?\014\347\216\251\345\256\266\347\255\211\347\272\247H\001:3\352D\006helper\312>\'"
-  "Test role_upgrade_cfg with oneof fieldsB"
-  "\010\n\006rewardB\r\n\013unlock_type"
+  "vent_rule_item\022\'\n\rspecify_field\030\007 \001(\0132\020."
+  "event_rule_item\0223\n\004item\030\013 \001(\0132\022.event_re"
+  "ward_itemB\017\242\?\014\345\245\226\345\212\261\351\201\223\345\205\267H\000\022#\n\010user_exp"
+  "\030\014 \001(\003B\017\242\?\014\345\245\226\345\212\261\347\273\217\351\252\214H\000\022\037\n\004note\030\r \001(\tB"
+  "\017\242\?\014\346\217\217\350\277\260\346\226\207\346\234\254H\000\0220\n\tenum_type\030\016 \001(\0162\n."
+  "cost_typeB\017\242\?\014\350\264\247\345\270\201\347\261\273\345\236\213H\000\022%\n\nuser_lev"
+  "el\0303 \001(\rB\017\242\?\014\347\216\251\345\256\266\347\255\211\347\272\247H\001\022(\n\010test_arr\030"
+  "[ \003(\0132\020.event_rule_itemB\004\262\?\001;\022.\n\016test_em"
+  "pty_arr\030\\ \003(\0132\020.event_rule_itemB\004\262\?\001;:,\352"
+  "D\006helper\312> Test event_cfg with oneof fie"
+  "ldsB\010\n\006rewardB\r\n\013unlock_type"
   ;
 static const ::PROTOBUF_NAMESPACE_ID::internal::DescriptorTable*const descriptor_table_kind_2eproto_deps[3] = {
   &::descriptor_table_dependency_2eproto,
@@ -389,7 +398,7 @@ static ::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase*const descriptor_table_kin
 };
 static ::PROTOBUF_NAMESPACE_ID::internal::once_flag descriptor_table_kind_2eproto_once;
 const ::PROTOBUF_NAMESPACE_ID::internal::DescriptorTable descriptor_table_kind_2eproto = {
-  false, false, descriptor_table_protodef_kind_2eproto, "kind.proto", 1624,
+  false, false, descriptor_table_protodef_kind_2eproto, "kind.proto", 1748,
   &descriptor_table_kind_2eproto_once, descriptor_table_kind_2eproto_sccs, descriptor_table_kind_2eproto_deps, 8, 3,
   schemas, file_default_instances, TableStruct_kind_2eproto::offsets,
   file_level_metadata_kind_2eproto, 8, file_level_enum_descriptors_kind_2eproto, file_level_service_descriptors_kind_2eproto,
@@ -2944,6 +2953,8 @@ void event_rule_item::InternalSwap(event_rule_item* other) {
 void event_cfg::InitAsDefaultInstance() {
   ::_event_cfg_default_instance_._instance.get_mutable()->rule_ = const_cast< ::event_rule_item*>(
       ::event_rule_item::internal_default_instance());
+  ::_event_cfg_default_instance_._instance.get_mutable()->specify_field_ = const_cast< ::event_rule_item*>(
+      ::event_rule_item::internal_default_instance());
   ::_event_cfg_default_instance_.item_ = const_cast< ::event_reward_item*>(
       ::event_reward_item::internal_default_instance());
   ::_event_cfg_default_instance_.user_exp_ = PROTOBUF_LONGLONG(0);
@@ -2956,14 +2967,18 @@ class event_cfg::_Internal {
  public:
   using HasBits = decltype(std::declval<event_cfg>()._has_bits_);
   static void set_has_id(HasBits* has_bits) {
-    (*has_bits)[0] |= 2u;
+    (*has_bits)[0] |= 4u;
   }
   static void set_has_process(HasBits* has_bits) {
-    (*has_bits)[0] |= 4u;
+    (*has_bits)[0] |= 8u;
   }
   static const ::event_rule_item& rule(const event_cfg* msg);
   static void set_has_rule(HasBits* has_bits) {
     (*has_bits)[0] |= 1u;
+  }
+  static const ::event_rule_item& specify_field(const event_cfg* msg);
+  static void set_has_specify_field(HasBits* has_bits) {
+    (*has_bits)[0] |= 2u;
   }
   static const ::event_reward_item& item(const event_cfg* msg);
 };
@@ -2971,6 +2986,10 @@ class event_cfg::_Internal {
 const ::event_rule_item&
 event_cfg::_Internal::rule(const event_cfg* msg) {
   return *msg->rule_;
+}
+const ::event_rule_item&
+event_cfg::_Internal::specify_field(const event_cfg* msg) {
+  return *msg->specify_field_;
 }
 const ::event_reward_item&
 event_cfg::_Internal::item(const event_cfg* msg) {
@@ -2992,19 +3011,28 @@ void event_cfg::set_allocated_item(::event_reward_item* item) {
   // @@protoc_insertion_point(field_set_allocated:event_cfg.item)
 }
 event_cfg::event_cfg(::PROTOBUF_NAMESPACE_ID::Arena* arena)
-  : ::PROTOBUF_NAMESPACE_ID::Message(arena) {
+  : ::PROTOBUF_NAMESPACE_ID::Message(arena),
+  test_arr_(arena),
+  test_empty_arr_(arena) {
   SharedCtor();
   RegisterArenaDtor(arena);
   // @@protoc_insertion_point(arena_constructor:event_cfg)
 }
 event_cfg::event_cfg(const event_cfg& from)
   : ::PROTOBUF_NAMESPACE_ID::Message(),
-      _has_bits_(from._has_bits_) {
+      _has_bits_(from._has_bits_),
+      test_arr_(from.test_arr_),
+      test_empty_arr_(from.test_empty_arr_) {
   _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
   if (from._internal_has_rule()) {
     rule_ = new ::event_rule_item(*from.rule_);
   } else {
     rule_ = nullptr;
+  }
+  if (from._internal_has_specify_field()) {
+    specify_field_ = new ::event_rule_item(*from.specify_field_);
+  } else {
+    specify_field_ = nullptr;
   }
   ::memcpy(&id_, &from.id_,
     static_cast<size_t>(reinterpret_cast<char*>(&process_) -
@@ -3062,6 +3090,7 @@ event_cfg::~event_cfg() {
 void event_cfg::SharedDtor() {
   GOOGLE_DCHECK(GetArena() == nullptr);
   if (this != internal_default_instance()) delete rule_;
+  if (this != internal_default_instance()) delete specify_field_;
   if (has_reward()) {
     clear_reward();
   }
@@ -3134,12 +3163,20 @@ void event_cfg::Clear() {
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
+  test_arr_.Clear();
+  test_empty_arr_.Clear();
   cached_has_bits = _has_bits_[0];
-  if (cached_has_bits & 0x00000001u) {
-    GOOGLE_DCHECK(rule_ != nullptr);
-    rule_->Clear();
+  if (cached_has_bits & 0x00000003u) {
+    if (cached_has_bits & 0x00000001u) {
+      GOOGLE_DCHECK(rule_ != nullptr);
+      rule_->Clear();
+    }
+    if (cached_has_bits & 0x00000002u) {
+      GOOGLE_DCHECK(specify_field_ != nullptr);
+      specify_field_->Clear();
+    }
   }
-  if (cached_has_bits & 0x00000006u) {
+  if (cached_has_bits & 0x0000000cu) {
     ::memset(&id_, 0, static_cast<size_t>(
         reinterpret_cast<char*>(&process_) -
         reinterpret_cast<char*>(&id_)) + sizeof(process_));
@@ -3179,6 +3216,13 @@ const char* event_cfg::_InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::
       case 6:
         if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 50)) {
           ptr = ctx->ParseMessage(_internal_mutable_rule(), ptr);
+          CHK_(ptr);
+        } else goto handle_unusual;
+        continue;
+      // optional .event_rule_item specify_field = 7;
+      case 7:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 58)) {
+          ptr = ctx->ParseMessage(_internal_mutable_specify_field(), ptr);
           CHK_(ptr);
         } else goto handle_unusual;
         continue;
@@ -3226,6 +3270,30 @@ const char* event_cfg::_InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::
           CHK_(ptr);
         } else goto handle_unusual;
         continue;
+      // repeated .event_rule_item test_arr = 91 [(.org.xresloader.field_separator) = ";"];
+      case 91:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 218)) {
+          ptr -= 2;
+          do {
+            ptr += 2;
+            ptr = ctx->ParseMessage(_internal_add_test_arr(), ptr);
+            CHK_(ptr);
+            if (!ctx->DataAvailable(ptr)) break;
+          } while (::PROTOBUF_NAMESPACE_ID::internal::ExpectTag<730>(ptr));
+        } else goto handle_unusual;
+        continue;
+      // repeated .event_rule_item test_empty_arr = 92 [(.org.xresloader.field_separator) = ";"];
+      case 92:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 226)) {
+          ptr -= 2;
+          do {
+            ptr += 2;
+            ptr = ctx->ParseMessage(_internal_add_test_empty_arr(), ptr);
+            CHK_(ptr);
+            if (!ctx->DataAvailable(ptr)) break;
+          } while (::PROTOBUF_NAMESPACE_ID::internal::ExpectTag<738>(ptr));
+        } else goto handle_unusual;
+        continue;
       default: {
       handle_unusual:
         if ((tag & 7) == 4 || tag == 0) {
@@ -3257,13 +3325,13 @@ failure:
 
   cached_has_bits = _has_bits_[0];
   // optional uint32 id = 1 [(.org.xresloader.ue.key_tag) = 100];
-  if (cached_has_bits & 0x00000002u) {
+  if (cached_has_bits & 0x00000004u) {
     target = stream->EnsureSpace(target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteUInt32ToArray(1, this->_internal_id(), target);
   }
 
   // optional uint32 process = 2 [(.org.xresloader.ue.key_tag) = 1];
-  if (cached_has_bits & 0x00000004u) {
+  if (cached_has_bits & 0x00000008u) {
     target = stream->EnsureSpace(target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteUInt32ToArray(2, this->_internal_process(), target);
   }
@@ -3274,6 +3342,14 @@ failure:
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
       InternalWriteMessage(
         6, _Internal::rule(this), target, stream);
+  }
+
+  // optional .event_rule_item specify_field = 7;
+  if (cached_has_bits & 0x00000002u) {
+    target = stream->EnsureSpace(target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
+      InternalWriteMessage(
+        7, _Internal::specify_field(this), target, stream);
   }
 
   switch (reward_case()) {
@@ -3312,6 +3388,22 @@ failure:
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteUInt32ToArray(51, this->_internal_user_level(), target);
   }
 
+  // repeated .event_rule_item test_arr = 91 [(.org.xresloader.field_separator) = ";"];
+  for (unsigned int i = 0,
+      n = static_cast<unsigned int>(this->_internal_test_arr_size()); i < n; i++) {
+    target = stream->EnsureSpace(target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
+      InternalWriteMessage(91, this->_internal_test_arr(i), target, stream);
+  }
+
+  // repeated .event_rule_item test_empty_arr = 92 [(.org.xresloader.field_separator) = ";"];
+  for (unsigned int i = 0,
+      n = static_cast<unsigned int>(this->_internal_test_empty_arr_size()); i < n; i++) {
+    target = stream->EnsureSpace(target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
+      InternalWriteMessage(92, this->_internal_test_empty_arr(i), target, stream);
+  }
+
   if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::InternalSerializeUnknownFieldsToArray(
         _internal_metadata_.unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(::PROTOBUF_NAMESPACE_ID::UnknownFieldSet::default_instance), target, stream);
@@ -3328,8 +3420,22 @@ size_t event_cfg::ByteSizeLong() const {
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
+  // repeated .event_rule_item test_arr = 91 [(.org.xresloader.field_separator) = ";"];
+  total_size += 2UL * this->_internal_test_arr_size();
+  for (const auto& msg : this->test_arr_) {
+    total_size +=
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(msg);
+  }
+
+  // repeated .event_rule_item test_empty_arr = 92 [(.org.xresloader.field_separator) = ";"];
+  total_size += 2UL * this->_internal_test_empty_arr_size();
+  for (const auto& msg : this->test_empty_arr_) {
+    total_size +=
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(msg);
+  }
+
   cached_has_bits = _has_bits_[0];
-  if (cached_has_bits & 0x00000007u) {
+  if (cached_has_bits & 0x0000000fu) {
     // optional .event_rule_item rule = 6;
     if (cached_has_bits & 0x00000001u) {
       total_size += 1 +
@@ -3337,15 +3443,22 @@ size_t event_cfg::ByteSizeLong() const {
           *rule_);
     }
 
-    // optional uint32 id = 1 [(.org.xresloader.ue.key_tag) = 100];
+    // optional .event_rule_item specify_field = 7;
     if (cached_has_bits & 0x00000002u) {
+      total_size += 1 +
+        ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
+          *specify_field_);
+    }
+
+    // optional uint32 id = 1 [(.org.xresloader.ue.key_tag) = 100];
+    if (cached_has_bits & 0x00000004u) {
       total_size += 1 +
         ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::UInt32Size(
           this->_internal_id());
     }
 
     // optional uint32 process = 2 [(.org.xresloader.ue.key_tag) = 1];
-    if (cached_has_bits & 0x00000004u) {
+    if (cached_has_bits & 0x00000008u) {
       total_size += 1 +
         ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::UInt32Size(
           this->_internal_process());
@@ -3427,15 +3540,20 @@ void event_cfg::MergeFrom(const event_cfg& from) {
   ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
+  test_arr_.MergeFrom(from.test_arr_);
+  test_empty_arr_.MergeFrom(from.test_empty_arr_);
   cached_has_bits = from._has_bits_[0];
-  if (cached_has_bits & 0x00000007u) {
+  if (cached_has_bits & 0x0000000fu) {
     if (cached_has_bits & 0x00000001u) {
       _internal_mutable_rule()->::event_rule_item::MergeFrom(from._internal_rule());
     }
     if (cached_has_bits & 0x00000002u) {
-      id_ = from.id_;
+      _internal_mutable_specify_field()->::event_rule_item::MergeFrom(from._internal_specify_field());
     }
     if (cached_has_bits & 0x00000004u) {
+      id_ = from.id_;
+    }
+    if (cached_has_bits & 0x00000008u) {
       process_ = from.process_;
     }
     _has_bits_[0] |= cached_has_bits;
@@ -3494,6 +3612,8 @@ void event_cfg::InternalSwap(event_cfg* other) {
   using std::swap;
   _internal_metadata_.Swap<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(&other->_internal_metadata_);
   swap(_has_bits_[0], other->_has_bits_[0]);
+  test_arr_.InternalSwap(&other->test_arr_);
+  test_empty_arr_.InternalSwap(&other->test_empty_arr_);
   ::PROTOBUF_NAMESPACE_ID::internal::memswap<
       PROTOBUF_FIELD_OFFSET(event_cfg, process_)
       + sizeof(event_cfg::process_)

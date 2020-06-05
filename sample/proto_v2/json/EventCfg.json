@@ -1,0 +1,198 @@
+[
+    {
+        "TestArr": [{
+            "NestedNote": "内嵌one of文本",
+            "RuleParam": 712,
+            "RuleId": 711,
+            "NestedEnumType": 0,
+            "Nested": 11
+        }],
+        "UserExp": 0,
+        "UserLevel": 0,
+        "UnlockType": 0,
+        "Process": 1,
+        "SpecifyField": {
+            "NestedNote": "",
+            "RuleParam": 0,
+            "NestedEnumType": 10001,
+            "RuleId": 0,
+            "Nested": 12
+        },
+        "Name": 5000101,
+        "TestEmptyArr": [],
+        "Item": {
+            "NestedNote": "啦啦啦",
+            "NestedEnumType": 0,
+            "Nested": 11,
+            "ItemCount": 1512,
+            "ItemId": 1511
+        },
+        "EnumType": 0,
+        "Note": "",
+        "Id": 50001,
+        "Rule": {
+            "NestedNote": "内嵌one of文本",
+            "RuleParam": 512,
+            "RuleId": 511,
+            "NestedEnumType": 0,
+            "Nested": 11
+        },
+        "Reward": 11
+    },
+    {
+        "TestArr": [
+            {
+                "NestedNote": "",
+                "RuleParam": 722,
+                "RuleId": 721,
+                "NestedEnumType": 10001,
+                "Nested": 12
+            },
+            {
+                "NestedNote": "",
+                "RuleParam": 822,
+                "RuleId": 821,
+                "NestedEnumType": 10101,
+                "Nested": 12
+            },
+            {
+                "NestedNote": "数组嵌套one of",
+                "RuleParam": 822,
+                "RuleId": 921,
+                "NestedEnumType": 0,
+                "Nested": 11
+            }
+        ],
+        "UserExp": 1520,
+        "UserLevel": 0,
+        "UnlockType": 0,
+        "Process": 2,
+        "SpecifyField": {
+            "NestedNote": "",
+            "RuleParam": 0,
+            "NestedEnumType": 10001,
+            "RuleId": 0,
+            "Nested": 12
+        },
+        "Name": 5000202,
+        "TestEmptyArr": [],
+        "Item": {
+            "NestedNote": "",
+            "NestedEnumType": 0,
+            "Nested": 0,
+            "ItemCount": 0,
+            "ItemId": 0
+        },
+        "EnumType": 0,
+        "Note": "",
+        "Id": 50002,
+        "Rule": {
+            "NestedNote": "",
+            "RuleParam": 522,
+            "RuleId": 521,
+            "NestedEnumType": 10001,
+            "Nested": 12
+        },
+        "Reward": 12
+    },
+    {
+        "TestArr": [],
+        "UserExp": 0,
+        "UserLevel": 0,
+        "UnlockType": 0,
+        "Process": 3,
+        "SpecifyField": {
+            "NestedNote": "",
+            "RuleParam": 0,
+            "NestedEnumType": 10101,
+            "RuleId": 0,
+            "Nested": 12
+        },
+        "Name": 5000303,
+        "TestEmptyArr": [],
+        "Item": {
+            "NestedNote": "",
+            "NestedEnumType": 0,
+            "Nested": 0,
+            "ItemCount": 0,
+            "ItemId": 0
+        },
+        "EnumType": 10001,
+        "Note": "",
+        "Id": 50003,
+        "Rule": {
+            "NestedNote": "",
+            "RuleParam": 532,
+            "RuleId": 531,
+            "NestedEnumType": 10101,
+            "Nested": 12
+        },
+        "Reward": 14
+    },
+    {
+        "TestArr": [],
+        "UserExp": 0,
+        "UserLevel": 0,
+        "UnlockType": 0,
+        "Process": 4,
+        "SpecifyField": {
+            "NestedNote": "",
+            "RuleParam": 0,
+            "RuleId": 0,
+            "NestedEnumType": 0,
+            "Nested": 12
+        },
+        "Name": 5000404,
+        "TestEmptyArr": [],
+        "Item": {
+            "NestedNote": "",
+            "NestedEnumType": 0,
+            "Nested": 0,
+            "ItemCount": 0,
+            "ItemId": 0
+        },
+        "EnumType": 0,
+        "Note": "",
+        "Id": 50004,
+        "Rule": {
+            "NestedNote": "",
+            "RuleParam": 542,
+            "RuleId": 541,
+            "NestedEnumType": 0
+        },
+        "Reward": 13
+    },
+    {
+        "TestArr": [],
+        "UserExp": 0,
+        "UserLevel": 0,
+        "UnlockType": 0,
+        "Process": 5,
+        "SpecifyField": {
+            "NestedNote": "",
+            "RuleParam": 0,
+            "RuleId": 0,
+            "NestedEnumType": 0,
+            "Nested": 12
+        },
+        "Name": 5000505,
+        "TestEmptyArr": [],
+        "Item": {
+            "NestedNote": "",
+            "NestedEnumType": 0,
+            "Nested": 0,
+            "ItemCount": 0,
+            "ItemId": 0
+        },
+        "EnumType": 0,
+        "Note": "",
+        "Id": 50005,
+        "Rule": {
+            "NestedNote": "",
+            "RuleParam": 552,
+            "RuleId": 551,
+            "NestedEnumType": 0
+        },
+        "Reward": 0
+    }
+]

@@ -5,20 +5,22 @@
 ------
 
 1. 优化一些issue的上报提示
-2. 增加plain模式的oneof支持，输入为 ```[类型名或ID或别名][分隔符][具体内容的plain模式数据]``` , 比如: ```item|1001,123```
-3. 增加oneof的sample
-4. UE-Csv 模式输出移除生成的代码中的 ```FName Name``` 字段，导入CSV数据时这个内置字段无法正常读入。
-5. 修复enum字段类型输出二进制时的值类型错误
-6. 优化oneof字段的配置冲突检测
+2. 增加plain模式的 ```oneof``` 支持，输入为 ```[类型名或ID或别名][分隔符][具体内容的plain模式数据]``` , 比如: ```item|1001,123``` 。不支持 **UE-Csv** 输出的非嵌套模式（ ```UeCfg-RecursiveMode=False``` ）
+3. 增加 ```oneof``` 的sample
+4. **UE-Csv** 模式输出移除生成的代码中的 ```FName Name``` 字段，导入CSV数据时这个内置字段无法正常读入。
+5. 修复 ```enum``` 字段类型输出二进制时的值类型错误
+6. 优化 ```oneof``` 字段的配置冲突检测
+7. 标记 **UE-Csv** 输出的非嵌套模式（ ```UeCfg-RecursiveMode=False``` ） 为不推荐的，以后将被移除。
+8. \[实验性\] **UE-Json** 和 **UE-Csv** 输出的蓝图代码中，增加类似C++的 ```k[字段名]FieldNumber``` 的枚举值，便于对 ```oneof``` 输出的分支判断和反射使用
 
 2.7.3
 ------
 
-1. 修复UE-CSV格式输出的一处空数据的崩溃BUG
+1. 修复 **UE-Csv** 格式输出的一处空数据的崩溃BUG
 2. 增加BUG上报说明
-3. 修复启用多文件合并功能时，UE-CSV格式输出会输出多次Header的BUG
-4. sample输出增加递归模式的UE-Csv
-5. [实验性] UE-CSV格式输出的现在也支持plain模式了
+3. 修复启用多文件合并功能时，**UE-Csv** 格式输出会输出多次Header的BUG
+4. sample输出增加递归模式的 **UE-Csv** 
+5. \[实验性\] **UE-Csv** 格式输出的现在也支持plain模式了（不包含非嵌套模式（ ```UeCfg-RecursiveMode=False``` ））
 
 2.7.2
 ------

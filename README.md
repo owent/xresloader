@@ -347,12 +347,7 @@ ERROR StatusLogger Unable to inject fields into builder class for plugin type cl
         at java.nio.charset.Charset.forName(Unknown Source)
         at org.apache.logging.log4j.util.PropertiesUtil.getCharsetProperty(PropertiesUtil.java:146)
         at org.apache.logging.log4j.util.PropertiesUtil.getCharsetProperty(PropertiesUtil.java:134)
-        at org.apache.logging.log4j.core.appender.ConsoleAppender$Target.getCharset(ConsoleAppender.java:85)
-        at org.apache.logging.log4j.core.appender.ConsoleAppender$Target$1.getDefaultCharset(ConsoleAppender.java:71)
-        at org.apache.logging.log4j.core.appender.ConsoleAppender$Builder.build(ConsoleAppender.java:218)
-        at org.apache.logging.log4j.core.appender.ConsoleAppender$Builder.build(ConsoleAppender.java:185)
-        at org.apache.logging.log4j.core.config.plugins.util.PluginBuilder.build(PluginBuilder.java:122)
-...
+        ...
 ```
 和
 ```
@@ -361,16 +356,7 @@ ERROR StatusLogger Unable to invoke factory method in class class org.apache.log
         at org.apache.logging.log4j.core.config.plugins.util.PluginBuilder.findFactoryMethod(PluginBuilder.java:224)
         at org.apache.logging.log4j.core.config.plugins.util.PluginBuilder.build(PluginBuilder.java:130)
         at org.apache.logging.log4j.core.config.AbstractConfiguration.createPluginObject(AbstractConfiguration.java:952)
-        at org.apache.logging.log4j.core.config.AbstractConfiguration.createConfiguration(AbstractConfiguration.java:892)
-        at org.apache.logging.log4j.core.config.AbstractConfiguration.createConfiguration(AbstractConfiguration.java:884)
-        at org.apache.logging.log4j.core.config.AbstractConfiguration.doConfigure(AbstractConfiguration.java:508)
-        at org.apache.logging.log4j.core.config.AbstractConfiguration.initialize(AbstractConfiguration.java:232)
-        at org.apache.logging.log4j.core.config.AbstractConfiguration.start(AbstractConfiguration.java:244)
-        at org.apache.logging.log4j.core.LoggerContext.setConfiguration(LoggerContext.java:545)
-        at org.apache.logging.log4j.core.LoggerContext.reconfigure(LoggerContext.java:617)
-        at org.apache.logging.log4j.core.LoggerContext.reconfigure(LoggerContext.java:634)
-        at org.apache.logging.log4j.core.LoggerContext.start(LoggerContext.java:229)
-...
+        ...
 ```
 这是因为在Windows控制台中，如果编码是UTF-8，java获取编码时会获取到cp65001，而这个编码java本身是不识别的。这种情况可以按下面的方法解决：
 + 第一种: 执行xresloader之前先执行 chcp 936，切换到GBK编码

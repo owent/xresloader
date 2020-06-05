@@ -863,7 +863,16 @@ public class DataDstPb extends DataDstImpl {
                                 child = node.addChild(fd.getName(), c, fd, DataDstWriterNode.CHILD_NODE_TYPE.STANDARD);
                                 ret = true;
                             } else {
-                                break;
+                                // try plain mode - array item
+                                String real_name = DataDstWriterNode.makeChildPath(prefix, fd.getName(), count);
+                                IdentifyDescriptor col = data_src.getColumnByName(real_name);
+                                if (null != col) {
+                                    child = node.addChild(fd.getName(), c, fd, DataDstWriterNode.CHILD_NODE_TYPE.PLAIN);
+                                    setup_node_identify(c, child, col, fd);
+                                    ret = true;
+                                } else {
+                                    break;
+                                }
                             }
                         }
                         name_list.removeLast();
@@ -871,7 +880,7 @@ public class DataDstPb extends DataDstImpl {
                         if (count > 0) {
                             filterMissingFields(missingFields, oneofField, fd, false);
                         } else {
-                            // try plain mode
+                            // try plain mode - the whole array
                             String real_name = DataDstWriterNode.makeChildPath(prefix, fd.getName());
                             IdentifyDescriptor col = data_src.getColumnByName(real_name);
                             if (null != col) {
@@ -980,14 +989,6 @@ public class DataDstPb extends DataDstImpl {
 
         // 索引oneof
         for (Descriptors.OneofDescriptor fd : desc.getOneofs()) {
-            String old_field = oneofField.getOrDefault(fd.getFullName(), null);
-            if (old_field != null) {
-                setLastErrorMessage(
-                        "field \"%s\" in oneof descriptor \"%s\" already exists, can not add the oneof writer again",
-                        old_field, fd.getFullName());
-                throw new ConvException(getLastErrorMessage());
-            }
-
             if (node.getTypeDescriptor() == null) {
                 setLastErrorMessage("type descriptor \"%s\" not found, it's probably a BUG, please report to %s",
                         node.getFullName(), ProgramOptions.getReportUrl());
@@ -1008,6 +1009,14 @@ public class DataDstPb extends DataDstImpl {
 
             if (null == col) {
                 continue;
+            }
+
+            String old_field = oneofField.getOrDefault(fd.getFullName(), null);
+            if (old_field != null) {
+                setLastErrorMessage(
+                        "field \"%s\" in oneof descriptor \"%s\" already exists, can not add the oneof writer again",
+                        old_field, fd.getFullName());
+                throw new ConvException(getLastErrorMessage());
             }
 
             oneofField.replace(fd.getFullName(), fd.getName());
@@ -1067,7 +1076,13 @@ public class DataDstPb extends DataDstImpl {
 
     private void dumpValue(DynamicMessage.Builder builder, Descriptors.FieldDescriptor fd, Object val) {
         if (JavaType.ENUM == fd.getJavaType()) {
-            Descriptors.EnumValueDescriptor enum_val = get_enum_value(cachePbs, fd.getEnumType(), (Integer) val);
+            Descriptors.EnumValueDescriptor enum_val = null;
+            if (val instanceof Descriptors.EnumValueDescriptor) {
+                enum_val = (Descriptors.EnumValueDescriptor) val;
+            } else {
+                val = get_enum_value(cachePbs, fd.getEnumType(), (Integer) val);
+            }
+
             if (null == enum_val) {
                 return;
             }

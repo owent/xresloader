@@ -101,12 +101,16 @@ public class DataDstUEJson extends DataDstUEBase {
                 // Write oneof
                 if (field.getReferOneof() != null) {
                     String oneofVarName = getIdentName(field.getReferOneof().getName());
-                    if (!dumpedFields.contains(oneofVarName)) {
-                        jobj.put(oneofVarName, Integer.valueOf(0)); // default for oneof case
-                        dumpedFields.add(oneofVarName);
-                    }
-
                     val = fieldDataByOneof.getOrDefault(varName, null);
+
+                    if (!dumpedFields.contains(oneofVarName)) {
+                        dumpedFields.add(oneofVarName);
+                        if (val == null) {
+                            jobj.put(oneofVarName, Integer.valueOf(0)); // default for oneof case
+                        } else {
+                            jobj.put(oneofVarName, field.getIndex()); // default for oneof case
+                        }
+                    }
                 }
 
                 if (dumpedFields.contains(varName)) {
@@ -299,13 +303,18 @@ public class DataDstUEJson extends DataDstUEBase {
                     if (child.isEmpty()) {
                         continue;
                     }
-                    String varName = getIdentName(child.get(0).getVarName());
+
                     DataDstWriterNodeWrapper firstNode = child.get(0);
+                    String varName = firstNode.getVarName();
 
                     // oneof node
                     if (firstNode.getReferOneof() != null) {
+                        if (null != dumpedFields) {
+                            dumpedFields.add(varName);
+                        }
+
                         // 如果是生成的节点，case 直接填充固定值
-                        if (firstNode.isGenerated() && firstNode.getReferField() != null) {
+                        if (firstNode.isGenerated()) {
                             if (firstNode.getReferField() != null) {
                                 ret.put(varName, firstNode.getReferField().getIndex());
                             } else {
@@ -328,15 +337,15 @@ public class DataDstUEJson extends DataDstUEBase {
 
                     // oneof一定先处理,如果有oneof引用且已经有数据缓存了直接用
                     if (firstNode.getReferOneofNode() != null) {
-                        String fieldVarName = getIdentName(firstNode.getReferField().getName());
-                        if (fieldDataByOneof.containsKey(fieldVarName)) {
-                            ret.put(varName, fieldDataByOneof.get(fieldVarName));
+                        if (fieldDataByOneof.containsKey(varName)) {
+                            ret.put(varName, fieldDataByOneof.get(varName));
 
                             if (null != dumpedFields) {
                                 dumpedFields.add(varName);
                             }
+
+                            continue;
                         }
-                        continue;
                     }
 
                     Object val = pickValueFieldJsonImpl(child);
@@ -354,11 +363,30 @@ public class DataDstUEJson extends DataDstUEBase {
             if (null != dumpedFields) {
                 for (DataDstFieldDescriptor subField : desc.getTypeDescriptor().getSortedFields()) {
                     String varName = getIdentName(subField.getName());
+                    Object val = null;
+                    // Write oneof
+                    if (subField.getReferOneof() != null) {
+                        String oneofVarName = getIdentName(subField.getReferOneof().getName());
+                        val = fieldDataByOneof.getOrDefault(varName, null);
+
+                        if (!dumpedFields.contains(oneofVarName)) {
+                            dumpedFields.add(oneofVarName);
+                            if (val == null) {
+                                ret.put(oneofVarName, Integer.valueOf(0)); // default for oneof case
+                            } else {
+                                ret.put(oneofVarName, subField.getIndex()); // default for oneof case
+                            }
+                        }
+                    }
+
                     if (dumpedFields.contains(varName)) {
                         continue;
                     }
 
-                    ret.put(varName, pickValueFieldJsonDefaultImpl(subField));
+                    if (val == null) {
+                        val = pickValueFieldJsonDefaultImpl(subField);
+                    }
+                    ret.put(varName, val);
                 }
             }
 

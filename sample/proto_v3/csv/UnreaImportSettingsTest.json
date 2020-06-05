@@ -1,0 +1,74 @@
+{"ImportGroups": [
+    {
+        "GroupName": "XResConfig",
+        "DestinationPath": "ConfigRec",
+        "FactoryName": "ReimportDataTableFactory",
+        "Filenames": ["D:\\workspace\\github\\xresloader\\xresloader\\sample\\proto_v3\\csv\\ArrInArrCfgRec.csv"],
+        "ImportSettings": {
+            "ImportType": "ECSV_DataTable",
+            "ImportRowStruct": "ArrInArrCfg"
+        },
+        "bSkipReadOnly": "true",
+        "bReplaceExisting": "true"
+    },
+    {
+        "GroupName": "XResConfig",
+        "DestinationPath": "ConfigRec",
+        "FactoryName": "ReimportDataTableFactory",
+        "Filenames": ["D:\\workspace\\github\\xresloader\\xresloader\\sample\\proto_v3\\csv\\RoleUpgradeCfgRec.csv"],
+        "ImportSettings": {
+            "ImportType": "ECSV_DataTable",
+            "ImportRowStruct": "RoleUpgradeCfg"
+        },
+        "bSkipReadOnly": "true",
+        "bReplaceExisting": "true"
+    },
+    {
+        "GroupName": "XResConfig",
+        "DestinationPath": "ConfigRec",
+        "FactoryName": "ReimportDataTableFactory",
+        "Filenames": ["D:\\workspace\\github\\xresloader\\xresloader\\sample\\proto_v3\\json\\ArrInArrCfg.json"],
+        "ImportSettings": {
+            "ImportType": "ECSV_DataTable",
+            "ImportRowStruct": "ArrInArrCfg"
+        },
+        "bSkipReadOnly": "true",
+        "bReplaceExisting": "true"
+    },
+    {
+        "GroupName": "XResConfig",
+        "DestinationPath": "ConfigRec",
+        "FactoryName": "ReimportDataTableFactory",
+        "Filenames": ["D:\\workspace\\github\\xresloader\\xresloader\\sample\\proto_v3\\json\\RoleUpgradeCfg.json"],
+        "ImportSettings": {
+            "ImportType": "ECSV_DataTable",
+            "ImportRowStruct": "RoleUpgradeCfg"
+        },
+        "bSkipReadOnly": "true",
+        "bReplaceExisting": "true"
+    },
+    {
+        "GroupName": "XResConfig",
+        "DestinationPath": "ConfigRec",
+        "FactoryName": "ReimportDataTableFactory",
+        "Filenames": ["D:\\workspace\\github\\xresloader\\xresloader\\sample\\proto_v3\\EventCfg.json"],
+        "ImportSettings": {
+            "ImportType": "ECSV_DataTable",
+            "ImportRowStruct": "EventCfg"
+        },
+        "bSkipReadOnly": "true",
+        "bReplaceExisting": "true"
+    },
+    {
+        "GroupName": "XResConfig",
+        "DestinationPath": "ConfigRec",
+        "FactoryName": "ReimportDataTableFactory",
+        "Filenames": ["D:\\workspace\\github\\xresloader\\xresloader\\sample\\proto_v3\\EventCfgRec.csv"],
+        "ImportSettings": {
+            "ImportType": "ECSV_DataTable",
+            "ImportRowStruct": "EventCfg"
+        },
+        "bSkipReadOnly": "true",
+        "bReplaceExisting": "true"
+    }
+]}

@@ -320,26 +320,26 @@ public class SchemeConf {
 
     public int initScheme() {
         switch (ProgramOptions.getInstance().dataSourceType) {
-        case BIN: {
-            scheme = new SchemeDataSourceCmd();
-            break;
-        }
-        case EXCEL: {
-            scheme = new SchemeDataSourceExcel();
-            break;
-        }
-        case INI: {
-            scheme = new SchemeDataSourceConf();
-            break;
-        }
-        case JSON: {
-            scheme = new SchemeDataSourceJson();
-            break;
-        }
-        default: {
-            ProgramOptions.getLoger().error("data source file type error.");
-            return -11;
-        }
+            case BIN: {
+                scheme = new SchemeDataSourceCmd();
+                break;
+            }
+            case EXCEL: {
+                scheme = new SchemeDataSourceExcel();
+                break;
+            }
+            case INI: {
+                scheme = new SchemeDataSourceConf();
+                break;
+            }
+            case JSON: {
+                scheme = new SchemeDataSourceJson();
+                break;
+            }
+            default: {
+                ProgramOptions.getLoger().error("data source file type error.");
+                return -11;
+            }
         }
 
         return scheme.load();
@@ -413,6 +413,10 @@ public class SchemeConf {
 
     public void setUERecursiveMode(String data) {
         extUECSV.enableRecursiveMode = getLogicalValue(data);
+        if (!extUECSV.enableRecursiveMode) {
+            ProgramOptions.getLoger()
+                    .warn("UeCfg-RecursiveMode=False is desprecated and will be removed in the future.");
+        }
     }
 
     public void setUEDestinationPath(String dir) {

@@ -119,6 +119,12 @@
             "number": 14,
             "type_name": "ENUM"
           },
+          "test_empty_arr": {
+            "options": {"field_separator": ";"},
+            "name": "test_empty_arr",
+            "number": 92,
+            "type_name": "MESSAGE"
+          },
           "user_level": {
             "options": {"field_alias": "玩家等级"},
             "name": "user_level",
@@ -136,11 +142,17 @@
             "name": "user_exp",
             "number": 12,
             "type_name": "INT64"
+          },
+          "test_arr": {
+            "options": {"field_separator": ";"},
+            "name": "test_arr",
+            "number": 91,
+            "type_name": "MESSAGE"
           }
         },
         "options": {
           "helper": "helper",
-          "msg_description": "Test role_upgrade_cfg with oneof fields"
+          "msg_description": "Test event_cfg with oneof fields"
         },
         "name": "event_cfg"
       },

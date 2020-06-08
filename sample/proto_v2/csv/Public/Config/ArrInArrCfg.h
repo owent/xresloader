@@ -18,6 +18,10 @@ struct FArrInArrCfg : public FTableRowBase
     GENERATED_USTRUCT_BODY()
 
     // Start of fields
+    /** Field Type: STRING, Name: Name, Index: 0. This field is generated for UE Editor compatible. **/
+    UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "XResConfig")
+    FName Name;
+
     // This is a Key
     /** Field Type: INT, Name: Id, Index: 1 **/
     UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "XResConfig")

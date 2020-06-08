@@ -9,8 +9,8 @@
 #include "CoreMinimal.h"
 #include "UObject/ConstructorHelpers.h"
 #include "Engine/DataTable.h"
-#include "Config/EventRewardItem.h"
-#include "Config/EventRuleItem.h"
+#include "ConfigRec/EventRewardItem.h"
+#include "ConfigRec/EventRuleItem.h"
 #include "EventCfg.generated.h"
 
 
@@ -20,6 +20,21 @@ struct FEventCfg : public FTableRowBase
     GENERATED_USTRUCT_BODY()
 
     // Start of fields
+    UENUM(BlueprintType)
+    enum : int32 {
+        kIdFieldNumber = 1 UMETA(DisplayName = "Id"),
+        kProcessFieldNumber = 2 UMETA(DisplayName = "Process"),
+        kRuleFieldNumber = 6 UMETA(DisplayName = "Rule"),
+        kSpecifyFieldFieldNumber = 7 UMETA(DisplayName = "SpecifyField"),
+        kItemFieldNumber = 11 UMETA(DisplayName = "Item"),
+        kUserExpFieldNumber = 12 UMETA(DisplayName = "UserExp"),
+        kNoteFieldNumber = 13 UMETA(DisplayName = "Note"),
+        kEnumTypeFieldNumber = 14 UMETA(DisplayName = "EnumType"),
+        kUserLevelFieldNumber = 51 UMETA(DisplayName = "UserLevel"),
+        kTestArrFieldNumber = 91 UMETA(DisplayName = "TestArr"),
+        kTestEmptyArrFieldNumber = 92 UMETA(DisplayName = "TestEmptyArr"),
+    };
+
     /** Field Type: STRING, Name: Name, Index: 0. This field is generated for UE Editor compatible. **/
     UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "XResConfig")
     FName Name;
@@ -40,9 +55,9 @@ struct FEventCfg : public FTableRowBase
     UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "XResConfig")
     FEventRuleItem SpecifyField;
 
-    /** Field Type: oneof/union -> FString, Name: Reward, Index: 0 **/
+    /** Field Type: oneof/union -> int32, Name: Reward, Index: 0 **/
     UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "XResConfig")
-    FString Reward;
+    int32 Reward;
 
     /** Field Type: MESSAGE, Name: Item, Index: 11 **/
     UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "XResConfig")
@@ -60,9 +75,9 @@ struct FEventCfg : public FTableRowBase
     UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "XResConfig")
     int32 EnumType;
 
-    /** Field Type: oneof/union -> FString, Name: UnlockType, Index: 1. This field is generated for UE Editor compatible. **/
+    /** Field Type: oneof/union -> int32, Name: UnlockType, Index: 1. This field is generated for UE Editor compatible. **/
     UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "XResConfig")
-    FString UnlockType;
+    int32 UnlockType;
 
     /** Field Type: INT, Name: UserLevel, Index: 51 **/
     UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "XResConfig")

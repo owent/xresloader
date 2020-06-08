@@ -17,14 +17,6 @@ struct FEventRuleItem : public FTableRowBase
     GENERATED_USTRUCT_BODY()
 
     // Start of fields
-    UENUM(BlueprintType)
-    enum : int32 {
-        kRuleIdFieldNumber = 1 UMETA(DisplayName = "RuleId"),
-        kRuleParamFieldNumber = 2 UMETA(DisplayName = "RuleParam"),
-        kNestedNoteFieldNumber = 11 UMETA(DisplayName = "NestedNote"),
-        kNestedEnumTypeFieldNumber = 12 UMETA(DisplayName = "NestedEnumType"),
-    };
-
     /** Field Type: INT, Name: RuleId, Index: 1 **/
     UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "XResConfig")
     int32 RuleId;
@@ -33,9 +25,9 @@ struct FEventRuleItem : public FTableRowBase
     UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "XResConfig")
     int32 RuleParam;
 
-    /** Field Type: oneof/union -> int32, Name: Nested, Index: 0 **/
+    /** Field Type: oneof/union -> FString, Name: Nested, Index: 0 **/
     UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "XResConfig")
-    int32 Nested;
+    FString Nested;
 
     /** Field Type: STRING, Name: NestedNote, Index: 11 **/
     UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "XResConfig")

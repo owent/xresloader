@@ -18,18 +18,6 @@ struct FRoleCfg : public FTableRowBase
     GENERATED_USTRUCT_BODY()
 
     // Start of fields
-    UENUM(BlueprintType)
-    enum : int32 {
-        kIdFieldNumber = 1 UMETA(DisplayName = "Id"),
-        kUnlockLevelFieldNumber = 2 UMETA(DisplayName = "UnlockLevel"),
-        kCostTypeFieldNumber = 3 UMETA(DisplayName = "CostType"),
-        kCostValueFieldNumber = 4 UMETA(DisplayName = "CostValue"),
-        kNameFieldNumber = 5 UMETA(DisplayName = "Name"),
-        kDepTestFieldNumber = 10 UMETA(DisplayName = "DepTest"),
-        kTestArrayFieldNumber = 11 UMETA(DisplayName = "TestArray"),
-        kIntAsStringFieldNumber = 12 UMETA(DisplayName = "IntAsString"),
-    };
-
     /** Field Type: STRING, Name: Name, Index: 5 **/
     UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "XResConfig")
     FName Name;

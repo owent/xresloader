@@ -17,14 +17,6 @@ struct FEventRewardItem : public FTableRowBase
     GENERATED_USTRUCT_BODY()
 
     // Start of fields
-    UENUM(BlueprintType)
-    enum : int32 {
-        kItemIdFieldNumber = 1 UMETA(DisplayName = "ItemId"),
-        kItemCountFieldNumber = 2 UMETA(DisplayName = "ItemCount"),
-        kNestedNoteFieldNumber = 11 UMETA(DisplayName = "NestedNote"),
-        kNestedEnumTypeFieldNumber = 12 UMETA(DisplayName = "NestedEnumType"),
-    };
-
     /** Field Type: INT, Name: ItemId, Index: 1 **/
     UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "XResConfig")
     int32 ItemId;
@@ -33,9 +25,9 @@ struct FEventRewardItem : public FTableRowBase
     UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "XResConfig")
     int32 ItemCount;
 
-    /** Field Type: oneof/union -> int32, Name: Nested, Index: 0. This field is generated for UE Editor compatible. **/
+    /** Field Type: oneof/union -> FString, Name: Nested, Index: 0. This field is generated for UE Editor compatible. **/
     UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "XResConfig")
-    int32 Nested;
+    FString Nested;
 
     /** Field Type: STRING, Name: NestedNote, Index: 11 **/
     UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "XResConfig")

@@ -342,7 +342,7 @@ public abstract class DataDstUEBase extends DataDstImpl {
         }
     }
 
-    static public String getIdentName(String in) {
+    static public String[] getIdentSegments(String in) {
         String[] segs = fileToClassMatcher.split(in);
         if (SchemeConf.getInstance().getUEOptions().enableCaseConvert) {
             for (int i = 0; i < segs.length; ++i) {
@@ -350,9 +350,17 @@ public abstract class DataDstUEBase extends DataDstImpl {
                     segs[i] = Character.toUpperCase(segs[i].charAt(0)) + segs[i].substring(1);
                 }
             }
-            return String.join("", segs);
+            return segs;
         } else {
-            return String.join("_", segs);
+            return segs;
+        }
+    }
+
+    static public String getIdentName(String in) {
+        if (SchemeConf.getInstance().getUEOptions().enableCaseConvert) {
+            return String.join("", getIdentSegments(in));
+        } else {
+            return String.join("_", getIdentSegments(in));
         }
     }
 
@@ -614,8 +622,6 @@ public abstract class DataDstUEBase extends DataDstImpl {
 
     abstract protected boolean isRecursiveEnabled();
 
-    abstract protected boolean isNameFieldEnabledForCode();
-
     abstract protected Object buildForUEOnInit() throws IOException;
 
     abstract protected byte[] buildForUEOnFinal(Object buildObj);
@@ -692,18 +698,18 @@ public abstract class DataDstUEBase extends DataDstImpl {
             // 输出数据
             while (DataSrcImpl.getOurInstance().next_row()) {
                 row_data = new ArrayList<Object>();
+                HashMap<String, Object> fieldDataByOneof = new HashMap<String, Object>();
                 row_data.ensureCapacity(rule.keyFields.size() + rule.valueFields.size());
 
                 // 先用特殊规则导入Name字段,Name字段可能是合成字段
                 if (!rule.keyFields.isEmpty()) {
-                    row_data.add(pickNameField(buildObj, rule));
+                    row_data.add(pickNameField(buildObj, rule, fieldDataByOneof));
 
                     for (int i = 1; i < rule.keyFields.size(); ++i) {
-                        row_data.add(pickValueField(buildObj, rule.keyFields.get(i)));
+                        row_data.add(pickValueField(buildObj, rule.keyFields.get(i), fieldDataByOneof));
                     }
                 }
 
-                HashMap<String, Object> fieldDataByOneof = new HashMap<String, Object>();
                 for (int i = 0; i < rule.valueFields.size(); ++i) {
                     if (rule.valueFields.get(i).isEmpty()) {
                         continue;
@@ -718,19 +724,19 @@ public abstract class DataDstUEBase extends DataDstImpl {
                         // 如果是生成的节点，case 直接填充固定值
                         if (firstNode.isGenerated()) {
                             if (firstNode.getReferField() != null) {
-                                row_data.add(firstNode.getReferField().getIndex());
+                                row_data.add(firstNode.getVarName());
                             } else {
-                                row_data.add(Integer.valueOf(0));
+                                row_data.add("");
                             }
                             continue;
                         }
 
                         // oneof 设置 case,缓存field
-                        Object res = pickValueField(buildObj, rule.valueFields.get(i));
+                        Object res = pickValueField(buildObj, rule.valueFields.get(i), fieldDataByOneof);
                         if (res instanceof OneofDataObject) {
                             String fieldVarName = getIdentName(((OneofDataObject) res).field.getName());
                             fieldDataByOneof.put(fieldVarName, ((OneofDataObject) res).value);
-                            row_data.add(((OneofDataObject) res).field.getIndex());
+                            row_data.add(fieldVarName);
                         } else {
                             row_data.add(res);
                         }
@@ -746,7 +752,7 @@ public abstract class DataDstUEBase extends DataDstImpl {
                         }
                     }
 
-                    row_data.add(pickValueField(buildObj, rule.valueFields.get(i)));
+                    row_data.add(pickValueField(buildObj, rule.valueFields.get(i), fieldDataByOneof));
                 }
 
                 buildForUEOnPrintRecord(buildObj, row_data, rule, codeInfo, fieldDataByOneof);
@@ -831,7 +837,8 @@ public abstract class DataDstUEBase extends DataDstImpl {
         return fieldSet.get(index).getReferNode();
     }
 
-    private Object pickNameField(Object buildObj, UEDataRowRule rule) throws ConvException {
+    private Object pickNameField(Object buildObj, UEDataRowRule rule, HashMap<String, Object> fieldDataByOneof)
+            throws ConvException {
         if (rule.keyFields.isEmpty()) {
             return null;
         }
@@ -842,7 +849,7 @@ public abstract class DataDstUEBase extends DataDstImpl {
 
         // 如果是直接采用原始字段则直接返回原始字段数据
         if (1 == rule.keyFields.size() && null != getFirstWriterNode(rule.keyFields.get(0))) {
-            return pickValueField(buildObj, rule.keyFields.get(0));
+            return pickValueField(buildObj, rule.keyFields.get(0), fieldDataByOneof);
         }
 
         switch (rule.nameType) {
@@ -850,13 +857,13 @@ public abstract class DataDstUEBase extends DataDstImpl {
                 long ret = 0;
                 for (int i = 1; i < rule.keyFields.size(); ++i) {
                     ArrayList<DataDstWriterNodeWrapper> wrappers = rule.keyFields.get(i);
-                    Object val = pickValueField(buildObj, wrappers);
+                    Object val = pickValueField(buildObj, wrappers, fieldDataByOneof);
                     if (val instanceof Number) {
                         ret = ret + getFieldDescriptor(wrappers).mutableExtension().mutableUE().keyTag
                                 * ((Number) val).longValue();
                     } else {
-                        ret = ret + getFieldDescriptor(wrappers).mutableExtension().mutableUE().keyTag
-                                * Long.valueOf(pickValueField(buildObj, rule.keyFields.get(i)).toString());
+                        ret = ret + getFieldDescriptor(wrappers).mutableExtension().mutableUE().keyTag * Long
+                                .valueOf(pickValueField(buildObj, rule.keyFields.get(i), fieldDataByOneof).toString());
                     }
                 }
 
@@ -866,13 +873,13 @@ public abstract class DataDstUEBase extends DataDstImpl {
                 double ret = 0.0;
                 for (int i = 1; i < rule.keyFields.size(); ++i) {
                     ArrayList<DataDstWriterNodeWrapper> wrappers = rule.keyFields.get(i);
-                    Object val = pickValueField(buildObj, wrappers);
+                    Object val = pickValueField(buildObj, wrappers, fieldDataByOneof);
                     if (val instanceof Number) {
                         ret = ret + getFieldDescriptor(wrappers).mutableExtension().mutableUE().keyTag
                                 * ((Number) val).doubleValue();
                     } else {
-                        ret = ret + getFieldDescriptor(wrappers).mutableExtension().mutableUE().keyTag
-                                * Double.valueOf(pickValueField(buildObj, rule.keyFields.get(i)).toString());
+                        ret = ret + getFieldDescriptor(wrappers).mutableExtension().mutableUE().keyTag * Double
+                                .valueOf(pickValueField(buildObj, rule.keyFields.get(i), fieldDataByOneof).toString());
                     }
                 }
 
@@ -882,7 +889,7 @@ public abstract class DataDstUEBase extends DataDstImpl {
                 ArrayList<String> ls = new ArrayList<String>();
                 ls.ensureCapacity(rule.keyFields.size());
                 for (int i = 1; i < rule.keyFields.size(); ++i) {
-                    ls.add(pickValueField(buildObj, rule.keyFields.get(i)).toString());
+                    ls.add(pickValueField(buildObj, rule.keyFields.get(i), fieldDataByOneof).toString());
                 }
 
                 return String.join("", ls);
@@ -892,8 +899,8 @@ public abstract class DataDstUEBase extends DataDstImpl {
         }
     }
 
-    abstract protected Object pickValueField(Object buildObj, ArrayList<DataDstWriterNodeWrapper> fieldSet)
-            throws ConvException;
+    abstract protected Object pickValueField(Object buildObj, ArrayList<DataDstWriterNodeWrapper> fieldSet,
+            HashMap<String, Object> fieldDataByOneof) throws ConvException;
 
     protected Object pickValueFieldBaseStandardImpl(DataDstWriterNode desc) throws ConvException {
         if (null == desc || null == desc.identify) {
@@ -1502,6 +1509,10 @@ public abstract class DataDstUEBase extends DataDstImpl {
         }
     }
 
+    protected String getOneofUETypeName(DataDstOneofDescriptor oneofDesc) {
+        return String.format("E%sCase", getIdentName(oneofDesc.getName()));
+    }
+
     private final void writeCodeHeaderField(FileOutputStream fout, DataDstOneofDescriptor oneofDesc, String varName,
             boolean isGenerated) throws IOException {
         fout.write(dumpString("\r\n"));
@@ -1513,14 +1524,33 @@ public abstract class DataDstUEBase extends DataDstImpl {
             }
         }
 
-        String ueTypeName = "int32";
+        // UE only support UENUM of uint8, so we can only use field name as case
+        // selector here
+        // String ueTypeName = getOneofUETypeName(oneofDesc);
+        //
+        // fout.write(dumpString("\r\n UENUM(BlueprintType)\r\n"));
+        // fout.write(dumpString(String.format(" enum class %s: int32 {\r\n",
+        // ueTypeName)));
+        // fout.write(dumpString(
+        // String.format(" %s_NOT_SET = 0 UMETA(DisplayName=\"Not Set\"),\r\n",
+        // varName.toUpperCase())));
+        //
+        // for (DataDstFieldDescriptor field : oneofDesc.getSortedFields()) {
+        // String subVarName = getIdentName(field.getName());
+        // fout.write(dumpString(String.format(" k%s = %d UMETA(DisplayName =
+        // \"%s\"),\r\n", subVarName,
+        // field.getIndex(), subVarName)));
+        // }
+        // fout.write(dumpString(" };\r\n"));
+
+        String ueTypeName = "FString";
         if (isGenerated) {
             fout.write(dumpString(String.format(
-                    "    /** Field Type: %s, Name: %s, Index: %d. This field is generated for UE Editor compatible. **/\r\n",
-                    "oneof/union -> int32", varName, oneofDesc.getIndex())));
+                    "    /** Field Type: oneof/union -> %s, Name: %s, Index: %d. This field is generated for UE Editor compatible. **/\r\n",
+                    ueTypeName, varName, oneofDesc.getIndex())));
         } else {
-            fout.write(dumpString(String.format("    /** Field Type: %s, Name: %s, Index: %d **/\r\n",
-                    "oneof/union -> int32", varName, oneofDesc.getIndex())));
+            fout.write(dumpString(String.format("    /** Field Type: oneof/union -> %s, Name: %s, Index: %d **/\r\n",
+                    ueTypeName, varName, oneofDesc.getIndex())));
         }
 
         fout.write(dumpString(getHeaderFieldUProperty()));
@@ -1700,7 +1730,11 @@ public abstract class DataDstUEBase extends DataDstImpl {
 
     private final void writeUETypeSetDefaultCode(FileOutputStream sourceFs, String prefix, String varName,
             DataDstOneofDescriptor oneof) throws IOException {
-        sourceFs.write(dumpString(String.format("%s.%s = %s;\r\n", prefix, varName, 0)));
+        // UE only support UENUM of uint8, so we can only use field name as case
+        // sourceFs.write(dumpString(String.format("%s.%s =
+        // decltype(%s.%s)::%s_NOT_SET;\r\n", prefix, varName,
+        // prefix.trim(), varName, varName.toUpperCase())));
+        sourceFs.write(dumpString(String.format("%s.%s = TEXT(\"\");\r\n", prefix, varName)));
     }
 
     private final void writeUETypeSetDefaultCode(FileOutputStream sourceFs, String prefix, String varName,
@@ -1937,28 +1971,13 @@ public abstract class DataDstUEBase extends DataDstImpl {
         // 加载代码
         FileOutputStream headerFs = createCodeHeaderFileStream(rule, codeInfo);
 
-        // 如果是嵌套模式，输出字段FieldNumber，规则和protobuf的C++接口一样
-        if (isRecursiveEnabled() && null != codeInfo.writerNodeWrapper) {
-            headerFs.write(dumpString("\r\n    UENUM(BlueprintType)\r\n    enum : int32 {\r\n"));
-            for (DataDstFieldDescriptor field : codeInfo.writerNodeWrapper.getTypeDescriptor().getSortedFields()) {
-                String varName = getIdentName(field.getName());
-                headerFs.write(dumpString(String.format("        k%sFieldNumber = %d UMETA(DisplayName = \"%s\"),\r\n",
-                        varName, field.getIndex(), varName)));
-            }
-            headerFs.write(dumpString("    };\r\n"));
-        }
-
         HashSet<String> dumpedFields = null;
         if (isRecursiveEnabled()) {
             dumpedFields = new HashSet<String>();
         }
 
         // The key field of 0 is FName Name
-        int start_key_field = 0;
-        if (!isNameFieldEnabledForCode()) {
-            start_key_field = 1;
-        }
-        for (int i = start_key_field; i < rule.keyFields.size(); ++i) {
+        for (int i = 0; i < rule.keyFields.size(); ++i) {
             ArrayList<DataDstWriterNodeWrapper> fieldSet = rule.keyFields.get(i);
             DataDstFieldDescriptor field = getFieldDescriptor(fieldSet);
             if (null == field || fieldSet.isEmpty()) {
@@ -2289,11 +2308,7 @@ public abstract class DataDstUEBase extends DataDstImpl {
         }
 
         // The key field of 0 is FName Name
-        int start_key_field = 0;
-        if (!isNameFieldEnabledForCode()) {
-            start_key_field = 1;
-        }
-        for (int i = start_key_field; i < rule.keyFields.size(); ++i) {
+        for (int i = 0; i < rule.keyFields.size(); ++i) {
             ArrayList<DataDstWriterNodeWrapper> fieldSet = rule.keyFields.get(i);
             if (fieldSet.isEmpty()) {
                 continue;

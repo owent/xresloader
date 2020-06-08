@@ -17,13 +17,6 @@ struct FArrInArr : public FTableRowBase
     GENERATED_USTRUCT_BODY()
 
     // Start of fields
-    UENUM(BlueprintType)
-    enum : int32 {
-        kNameFieldNumber = 1 UMETA(DisplayName = "Name"),
-        kIntArrFieldNumber = 2 UMETA(DisplayName = "IntArr"),
-        kStrArrFieldNumber = 3 UMETA(DisplayName = "StrArr"),
-    };
-
     // This is a test name in array
     /** Field Type: STRING, Name: Name, Index: 1 **/
     UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "XResConfig")

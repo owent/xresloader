@@ -91,6 +91,7 @@ UDataTable* UArrInArrCfgHelper::GetRawDataTable(bool& IsValid) const
 
 void UArrInArrCfgHelper::ClearRow(FArrInArrCfg& TableRow)
 {
+    TableRow.Name = TEXT("");
     TableRow.Id = 0;
     TableRow.Arr_0_Name = TEXT("");
     TableRow.Arr_0_IntArr_0 = 0;

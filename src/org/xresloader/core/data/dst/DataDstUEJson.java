@@ -44,11 +44,6 @@ public class DataDstUEJson extends DataDstUEBase {
     }
 
     @Override
-    protected boolean isNameFieldEnabledForCode() {
-        return true;
-    }
-
-    @Override
     protected Object buildForUEOnInit() throws IOException {
         UEBuildObject ret = new UEBuildObject();
         ret.ja = new JSONArray();
@@ -106,9 +101,9 @@ public class DataDstUEJson extends DataDstUEBase {
                     if (!dumpedFields.contains(oneofVarName)) {
                         dumpedFields.add(oneofVarName);
                         if (val == null) {
-                            jobj.put(oneofVarName, Integer.valueOf(0)); // default for oneof case
+                            jobj.put(oneofVarName, ""); // default for oneof case
                         } else {
-                            jobj.put(oneofVarName, field.getIndex()); // default for oneof case
+                            jobj.put(oneofVarName, varName); // default for oneof case
                         }
                     }
                 }
@@ -232,8 +227,8 @@ public class DataDstUEJson extends DataDstUEBase {
     }
 
     @Override
-    final protected Object pickValueField(Object buildObj, ArrayList<DataDstWriterNodeWrapper> fieldSet)
-            throws ConvException {
+    final protected Object pickValueField(Object buildObj, ArrayList<DataDstWriterNodeWrapper> fieldSet,
+            HashMap<String, Object> fieldDataByOneof) throws ConvException {
         return pickValueFieldJsonImpl(fieldSet);
     }
 
@@ -316,9 +311,9 @@ public class DataDstUEJson extends DataDstUEBase {
                         // 如果是生成的节点，case 直接填充固定值
                         if (firstNode.isGenerated()) {
                             if (firstNode.getReferField() != null) {
-                                ret.put(varName, firstNode.getReferField().getIndex());
+                                ret.put(varName, getIdentName(firstNode.getReferField().getName()));
                             } else {
-                                ret.put(varName, Integer.valueOf(0));
+                                ret.put(varName, "");
                             }
                             continue;
                         }
@@ -328,7 +323,7 @@ public class DataDstUEJson extends DataDstUEBase {
                         if (res instanceof OneofDataObject) {
                             String fieldVarName = getIdentName(((OneofDataObject) res).field.getName());
                             fieldDataByOneof.put(fieldVarName, ((OneofDataObject) res).value);
-                            ret.put(varName, ((OneofDataObject) res).field.getIndex());
+                            ret.put(varName, fieldVarName);
                         } else {
                             ret.put(varName, res);
                         }
@@ -372,9 +367,9 @@ public class DataDstUEJson extends DataDstUEBase {
                         if (!dumpedFields.contains(oneofVarName)) {
                             dumpedFields.add(oneofVarName);
                             if (val == null) {
-                                ret.put(oneofVarName, Integer.valueOf(0)); // default for oneof case
+                                ret.put(oneofVarName, ""); // default for oneof case
                             } else {
-                                ret.put(oneofVarName, subField.getIndex()); // default for oneof case
+                                ret.put(oneofVarName, varName); // default for oneof case
                             }
                         }
                     }
@@ -671,11 +666,12 @@ public class DataDstUEJson extends DataDstUEBase {
                         inputs[usedInputIdx]);
                 if (res != null && res instanceof OneofDataObject) {
                     OneofDataObject realRes = ((OneofDataObject) res);
-                    ret.put(oneofVarName, realRes.field.getIndex());
+                    String readVarName = getIdentName(realRes.field.getName());
+                    ret.put(oneofVarName, readVarName);
                     if (realRes.value != null) {
-                        ret.put(getIdentName(realRes.field.getName()), realRes.value);
+                        ret.put(readVarName, realRes.value);
                     } else {
-                        ret.put(getIdentName(realRes.field.getName()), pickValueFieldJsonDefaultImpl(realRes.field));
+                        ret.put(readVarName, pickValueFieldJsonDefaultImpl(realRes.field));
                     }
 
                     dumpedOneof.add(oneofVarName);

@@ -362,6 +362,10 @@ ERROR StatusLogger Unable to invoke factory method in class class org.apache.log
 + 第一种: 执行xresloader之前先执行 chcp 936，切换到GBK编码
 + 第二种: 在powershell里执行
 
-4. 为什么 我在proto里定义的是一个无符号(unsigned)类型(uint32、uint64等)，实际输出的UE代码是有符号(signed)的(int32/int64)？
+4. 为什么在proto里定义的是一个无符号(unsigned)类型(uint32、uint64等)，实际输出的UE代码是有符号(signed)的(int32/int64)？
 
 Ans: 因为有一些语言是没有无符号(unsigned)类型的，为了统一数据类型，我们统一转换为有符号类型，转换方式和protobuf的java版SDK保持一致。如果需要使用大于int32最大值的uint32类型，请用int64代替。
+
+5. 为什么 ```UE-Csv``` 和 ```UE-Json``` 输出的代码会多一个 ```Name``` 字段?
+
+Ans: 因为对 ```UE-Json``` 输出中， ```Name``` 是一个特殊字段，也用于UE中内置的接口的查找索引。所以为了统一输出的数据结构（ 这样无论是 ```UE-Csv``` 还是 ```UE-Json``` 都可以用相同的代码结构来导入 ），我们对 ```UE-Csv``` 和 ```UE-Json``` 统一自动生成 ```Name``` 字段。但是如果用户自定义了 ```Name``` 字段， 我们会使用用户自定义的 ```Name``` 字段。

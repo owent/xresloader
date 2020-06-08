@@ -8,26 +8,34 @@
 #include "CoreMinimal.h"
 #include "UObject/ConstructorHelpers.h"
 #include "Engine/DataTable.h"
-#include "EventRuleItem.generated.h"
+#include "EventRewardItem.generated.h"
 
 
 USTRUCT(BlueprintType)
-struct FEventRuleItem : public FTableRowBase
+struct FEventRewardItem : public FTableRowBase
 {
     GENERATED_USTRUCT_BODY()
 
     // Start of fields
-    /** Field Type: INT, Name: RuleId, Index: 1 **/
-    UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "XResConfig")
-    int32 RuleId;
+    UENUM(BlueprintType)
+    enum : int32 {
+        kItemIdFieldNumber = 1 UMETA(DisplayName = "ItemId"),
+        kItemCountFieldNumber = 2 UMETA(DisplayName = "ItemCount"),
+        kNestedNoteFieldNumber = 11 UMETA(DisplayName = "NestedNote"),
+        kNestedEnumTypeFieldNumber = 12 UMETA(DisplayName = "NestedEnumType"),
+    };
 
-    /** Field Type: INT, Name: RuleParam, Index: 2 **/
+    /** Field Type: INT, Name: ItemId, Index: 1 **/
     UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "XResConfig")
-    int32 RuleParam;
+    int32 ItemId;
 
-    /** Field Type: oneof/union -> FString, Name: Nested, Index: 0 **/
+    /** Field Type: INT, Name: ItemCount, Index: 2 **/
     UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "XResConfig")
-    FString Nested;
+    int32 ItemCount;
+
+    /** Field Type: oneof/union -> int32, Name: Nested, Index: 0. This field is generated for UE Editor compatible. **/
+    UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "XResConfig")
+    int32 Nested;
 
     /** Field Type: STRING, Name: NestedNote, Index: 11 **/
     UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "XResConfig")

@@ -5,14 +5,14 @@
  */
 // Test event_cfg with oneof fields
 
-#include "Config/EventCfg.h"
+#include "ConfigRec/EventCfg.h"
 
 
 
 UEventCfgHelper::UEventCfgHelper() : Super()
 {
     UEventCfgHelper::ClearRow(this->Empty);
-    this->Loader = MakeShareable(new ConstructorHelpers::FObjectFinder<UDataTable>(TEXT("DataTable'/Game/Config/EventCfg'")));
+    this->Loader = MakeShareable(new ConstructorHelpers::FObjectFinder<UDataTable>(TEXT("DataTable'/Game/ConfigRec/EventCfg'")));
     if (this->Loader && this->Loader->Succeeded())
     {
         this->DataTable = this->Loader->Object;
@@ -96,24 +96,24 @@ void UEventCfgHelper::ClearRow(FEventCfg& TableRow)
     TableRow.Process = 0;
     TableRow.Rule.RuleId = 0;
     TableRow.Rule.RuleParam = 0;
-    TableRow.Rule.Nested = TEXT("");
+    TableRow.Rule.Nested = 0;
     TableRow.Rule.NestedNote = TEXT("");
     TableRow.Rule.NestedEnumType = 0;
     TableRow.SpecifyField.RuleId = 0;
     TableRow.SpecifyField.RuleParam = 0;
-    TableRow.SpecifyField.Nested = TEXT("");
+    TableRow.SpecifyField.Nested = 0;
     TableRow.SpecifyField.NestedNote = TEXT("");
     TableRow.SpecifyField.NestedEnumType = 0;
-    TableRow.Reward = TEXT("");
+    TableRow.Reward = 0;
     TableRow.Item.ItemId = 0;
     TableRow.Item.ItemCount = 0;
-    TableRow.Item.Nested = TEXT("");
+    TableRow.Item.Nested = 0;
     TableRow.Item.NestedNote = TEXT("");
     TableRow.Item.NestedEnumType = 0;
     TableRow.UserExp = 0;
     TableRow.Note = TEXT("");
     TableRow.EnumType = 0;
-    TableRow.UnlockType = TEXT("");
+    TableRow.UnlockType = 0;
     TableRow.UserLevel = 0;
     TableRow.TestArr.Reset(0);
     TableRow.TestEmptyArr.Reset(0);

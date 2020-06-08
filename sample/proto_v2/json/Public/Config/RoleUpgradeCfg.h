@@ -18,15 +18,6 @@ struct FRoleUpgradeCfg : public FTableRowBase
     GENERATED_USTRUCT_BODY()
 
     // Start of fields
-    UENUM(BlueprintType)
-    enum : int32 {
-        kIdFieldNumber = 1 UMETA(DisplayName = "Id"),
-        kLevelFieldNumber = 2 UMETA(DisplayName = "Level"),
-        kCostTypeFieldNumber = 3 UMETA(DisplayName = "CostType"),
-        kCostValueFieldNumber = 4 UMETA(DisplayName = "CostValue"),
-        kScoreAddFieldNumber = 5 UMETA(DisplayName = "ScoreAdd"),
-    };
-
     /** Field Type: STRING, Name: Name, Index: 0. This field is generated for UE Editor compatible. **/
     UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "XResConfig")
     FName Name;

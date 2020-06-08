@@ -20,16 +20,6 @@ struct FArrInArrCfg : public FTableRowBase
     GENERATED_USTRUCT_BODY()
 
     // Start of fields
-    UENUM(BlueprintType)
-    enum : int32 {
-        kIdFieldNumber = 1 UMETA(DisplayName = "Id"),
-        kArrFieldNumber = 2 UMETA(DisplayName = "Arr"),
-        kTestPlainIntArrFieldNumber = 3 UMETA(DisplayName = "TestPlainIntArr"),
-        kTestPlainEnumArrFieldNumber = 4 UMETA(DisplayName = "TestPlainEnumArr"),
-        kTestPlainMsgFieldNumber = 5 UMETA(DisplayName = "TestPlainMsg"),
-        kTestPlainMsgArrFieldNumber = 6 UMETA(DisplayName = "TestPlainMsgArr"),
-    };
-
     /** Field Type: STRING, Name: Name, Index: 0. This field is generated for UE Editor compatible. **/
     UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "XResConfig")
     FName Name;

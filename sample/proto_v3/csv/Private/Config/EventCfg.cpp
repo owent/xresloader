@@ -91,6 +91,7 @@ UDataTable* UEventCfgHelper::GetRawDataTable(bool& IsValid) const
 
 void UEventCfgHelper::ClearRow(FEventCfg& TableRow)
 {
+    TableRow.Name = TEXT("");
     TableRow.Id = 0;
     TableRow.Process = 0;
     TableRow.Rule_RuleId = 0;

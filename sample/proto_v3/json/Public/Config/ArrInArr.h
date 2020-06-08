@@ -19,15 +19,6 @@ struct FArrInArr : public FTableRowBase
     GENERATED_USTRUCT_BODY()
 
     // Start of fields
-    UENUM(BlueprintType)
-    enum : int32 {
-        kNameFieldNumber = 1 UMETA(DisplayName = "Name"),
-        kIntArrFieldNumber = 2 UMETA(DisplayName = "IntArr"),
-        kStrArrFieldNumber = 3 UMETA(DisplayName = "StrArr"),
-        kTestInfoRoleFieldNumber = 11 UMETA(DisplayName = "TestInfoRole"),
-        kTestRoleUpgradeCfgFieldNumber = 12 UMETA(DisplayName = "TestRoleUpgradeCfg"),
-    };
-
     // This is a test name in array
     /** Field Type: STRING, Name: Name, Index: 1 **/
     UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "XResConfig")
@@ -41,9 +32,9 @@ struct FArrInArr : public FTableRowBase
     UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "XResConfig")
     TArray< FString > StrArr;
 
-    /** Field Type: oneof/union -> int32, Name: TestOnof, Index: 0. This field is generated for UE Editor compatible. **/
+    /** Field Type: oneof/union -> FString, Name: TestOnof, Index: 0. This field is generated for UE Editor compatible. **/
     UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "XResConfig")
-    int32 TestOnof;
+    FString TestOnof;
 
     /** Field Type: MESSAGE, Name: TestInfoRole, Index: 11 **/
     UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "XResConfig")

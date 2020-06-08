@@ -91,28 +91,29 @@ UDataTable* UEventCfgHelper::GetRawDataTable(bool& IsValid) const
 
 void UEventCfgHelper::ClearRow(FEventCfg& TableRow)
 {
+    TableRow.Name = TEXT("");
     TableRow.Id = 0;
     TableRow.Process = 0;
     TableRow.Rule.RuleId = 0;
     TableRow.Rule.RuleParam = 0;
-    TableRow.Rule.Nested = 0;
+    TableRow.Rule.Nested = TEXT("");
     TableRow.Rule.NestedNote = TEXT("");
     TableRow.Rule.NestedEnumType = 0;
     TableRow.SpecifyField.RuleId = 0;
     TableRow.SpecifyField.RuleParam = 0;
-    TableRow.SpecifyField.Nested = 0;
+    TableRow.SpecifyField.Nested = TEXT("");
     TableRow.SpecifyField.NestedNote = TEXT("");
     TableRow.SpecifyField.NestedEnumType = 0;
-    TableRow.Reward = 0;
+    TableRow.Reward = TEXT("");
     TableRow.Item.ItemId = 0;
     TableRow.Item.ItemCount = 0;
-    TableRow.Item.Nested = 0;
+    TableRow.Item.Nested = TEXT("");
     TableRow.Item.NestedNote = TEXT("");
     TableRow.Item.NestedEnumType = 0;
     TableRow.UserExp = 0;
     TableRow.Note = TEXT("");
     TableRow.EnumType = 0;
-    TableRow.UnlockType = 0;
+    TableRow.UnlockType = TEXT("");
     TableRow.UserLevel = 0;
     TableRow.TestArr.Reset(0);
     TableRow.TestEmptyArr.Reset(0);

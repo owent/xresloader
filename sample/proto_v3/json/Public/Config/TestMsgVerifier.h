@@ -17,12 +17,6 @@ struct FTestMsgVerifier : public FTableRowBase
     GENERATED_USTRUCT_BODY()
 
     // Start of fields
-    UENUM(BlueprintType)
-    enum : int32 {
-        kTestId1FieldNumber = 10001 UMETA(DisplayName = "TestId1"),
-        kTestId2FieldNumber = 10002 UMETA(DisplayName = "TestId2"),
-    };
-
     /** Field Type: INT, Name: TestId1, Index: 10001 **/
     UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "XResConfig")
     int32 TestId1;

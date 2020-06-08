@@ -17,7 +17,7 @@ void UArrInArrHelper::ClearRow(FArrInArr& TableRow)
     TableRow.Name = TEXT("");
     TableRow.IntArr.Reset(0);
     TableRow.StrArr.Reset(0);
-    TableRow.TestOnof = 0;
+    TableRow.TestOnof = TEXT("");
     TableRow.TestInfoRole.Id = 0;
     TableRow.TestInfoRole.UnlockLevel = 0;
     TableRow.TestInfoRole.CostType = 0;

@@ -43,17 +43,11 @@ public class DataDstUECsv extends DataDstUEBase {
         CSVPrinter csv = null;
         ArrayList<String> header = null;
         boolean hasPrintHeader = false;
-        HashMap<String, String> fieldDataByOneof = new HashMap<String, String>();
     }
 
     @Override
     protected boolean isRecursiveEnabled() {
         return SchemeConf.getInstance().getUEOptions().enableRecursiveMode;
-    }
-
-    @Override
-    protected boolean isNameFieldEnabledForCode() {
-        return false;
     }
 
     @Override
@@ -92,6 +86,10 @@ public class DataDstUECsv extends DataDstUEBase {
         if (!isRecursiveEnabled()) {
             ArrayList<String> finalRowData = new ArrayList<String>();
             ((UEBuildObject) buildObj).header = finalRowData;
+
+            finalRowData.ensureCapacity(rowData.size() + 1);
+            // Add a empty column for "Row Name"
+            finalRowData.add("---");
             for (Object keyName : rowData) {
                 finalRowData.add(keyName.toString());
             }
@@ -105,6 +103,8 @@ public class DataDstUECsv extends DataDstUEBase {
             if (codeInfo.writerNodeWrapper != null && codeInfo.writerNodeWrapper.hasChidlren()) {
                 finalRowData.ensureCapacity(rowData.size() + 1); // 1 for additional Name
             }
+            // Add a empty column for "Row Name"
+            finalRowData.add("---");
             for (Object keyName : rowData) {
                 dumpedFields.add(keyName.toString());
                 finalRowData.add(keyName.toString());
@@ -142,6 +142,21 @@ public class DataDstUECsv extends DataDstUEBase {
     protected void buildForUEOnPrintRecord(Object buildObj, ArrayList<Object> rowData, UEDataRowRule rule,
             UECodeInfo codeInfo, HashMap<String, Object> fieldDataByOneof) throws IOException {
         if (!isRecursiveEnabled()) {
+            ArrayList<Object> finalRowData = new ArrayList<Object>();
+            finalRowData.ensureCapacity(rowData.size() + 1);
+            // Copy first "Row Name"
+            if (!rowData.isEmpty()) {
+                Object copyName = rowData.get(0);
+                if (copyName == null) {
+                    finalRowData.add("");
+                } else {
+                    finalRowData.add(copyName);
+                }
+            }
+            for (Object obj : rowData) {
+                finalRowData.add(obj);
+            }
+
             ((UEBuildObject) buildObj).csv.printRecord(rowData);
         } else {
             HashSet<String> dumpedFields = new HashSet<String>();
@@ -149,8 +164,18 @@ public class DataDstUECsv extends DataDstUEBase {
             finalRowData.ensureCapacity(
                     rowData.size() + codeInfo.writerNodeWrapper.getTypeDescriptor().getSortedFields().size() + 1);
 
+            // Copy first "Row Name"
+            if (!rowData.isEmpty()) {
+                Object copyName = rowData.get(0);
+                if (copyName == null) {
+                    finalRowData.add("");
+                } else {
+                    finalRowData.add(copyName.toString());
+                }
+            }
+
             UEBuildObject bobj = ((UEBuildObject) buildObj);
-            for (int i = 0; i < bobj.header.size() && i < rowData.size(); ++i) {
+            for (int i = 0; i + 1 < bobj.header.size() && i < rowData.size(); ++i) {
                 Object val = rowData.get(i);
                 if (val == null) {
                     finalRowData.add("");
@@ -158,7 +183,7 @@ public class DataDstUECsv extends DataDstUEBase {
                     finalRowData.add(val.toString());
                 }
 
-                dumpedFields.add(bobj.header.get(i));
+                dumpedFields.add(bobj.header.get(i + 1));
             }
 
             // 需要补全空字段 - data
@@ -176,9 +201,9 @@ public class DataDstUECsv extends DataDstUEBase {
                         if (!dumpedFields.contains(oneofVarName)) {
                             dumpedFields.add(oneofVarName);
                             if (val == null) {
-                                finalRowData.add(String.format("%s=%d", oneofVarName, 0));
+                                finalRowData.add(String.format("%s=\"\"", oneofVarName));
                             } else {
-                                finalRowData.add(String.format("%s=%d", oneofVarName, field.getIndex()));
+                                finalRowData.add(String.format("%s=\"%s\"", oneofVarName, varName));
                             }
                         }
                     }
@@ -190,7 +215,7 @@ public class DataDstUECsv extends DataDstUEBase {
 
                     if (val == null) {
                         StringBuffer fieldSb = new StringBuffer();
-                        pickValueFieldCsvDefaultImpl(fieldSb, field);
+                        pickValueFieldCsvDefaultImpl(fieldSb, field, false);
                         val = fieldSb.toString();
                     }
                     finalRowData.add(val.toString());
@@ -292,15 +317,15 @@ public class DataDstUECsv extends DataDstUEBase {
     }
 
     @Override
-    final protected Object pickValueField(Object buildObj, ArrayList<DataDstWriterNodeWrapper> fieldSet)
-            throws ConvException {
+    final protected Object pickValueField(Object buildObj, ArrayList<DataDstWriterNodeWrapper> fieldSet,
+            HashMap<String, Object> fieldDataByOneof) throws ConvException {
         DataDstWriterNode msgDesc = getFirstWriterNode(fieldSet);
         DataDstFieldDescriptor field = getFieldDescriptor(fieldSet);
         DataDstOneofDescriptor oneof = getOneofDescriptor(fieldSet);
         if (msgDesc == null || (field == null && oneof == null)) {
             if (field != null) {
                 StringBuffer fieldSB = new StringBuffer();
-                pickValueFieldCsvDefaultImpl(fieldSB, field);
+                pickValueFieldCsvDefaultImpl(fieldSB, field, false);
                 String ret = fieldSB.toString();
                 // empty list to nothing
                 if (field.isList() && ret.equalsIgnoreCase("()")) {
@@ -344,7 +369,6 @@ public class DataDstUECsv extends DataDstUEBase {
             return ret;
         }
 
-        HashMap<String, String> fieldDataByOneof = ((UEBuildObject) buildObj).fieldDataByOneof;
         if (fieldSet.size() > 0 && fieldDataByOneof.containsKey(fieldSet.get(0).getVarName())) {
             return fieldDataByOneof.get(fieldSet.get(0).getVarName());
         }
@@ -361,7 +385,7 @@ public class DataDstUECsv extends DataDstUEBase {
     }
 
     protected void pickValueFieldCsvImpl(StringBuffer fieldSB, ArrayList<DataDstWriterNodeWrapper> fieldSet,
-            boolean isPlainMode, boolean isTopLevel, HashMap<String, String> fieldDataByOneof) throws ConvException {
+            boolean isPlainMode, boolean isTopLevel, HashMap<String, Object> fieldDataByOneof) throws ConvException {
         if (fieldSet == null || fieldSet.isEmpty()) {
             return;
         }
@@ -413,7 +437,7 @@ public class DataDstUECsv extends DataDstUEBase {
     }
 
     protected boolean pickValueFieldCsvImpl(StringBuffer fieldSB, DataDstWriterNodeWrapper descWrapper,
-            boolean isPlainMode, boolean isTopLevel, HashMap<String, String> fieldDataByOneof) throws ConvException {
+            boolean isPlainMode, boolean isTopLevel, HashMap<String, Object> fieldDataByOneof) throws ConvException {
         if (null == descWrapper || null == descWrapper.getReferNode()) {
             return false;
         }
@@ -441,7 +465,7 @@ public class DataDstUECsv extends DataDstUEBase {
                 dumpedFields = new HashSet<String>();
             }
 
-            HashMap<String, String> subFieldDataByOneof = new HashMap<String, String>();
+            HashMap<String, Object> subFieldDataByOneof = new HashMap<String, Object>();
 
             boolean isFirst = true;
             for (ArrayList<DataDstWriterNodeWrapper> child : descWrapper.getChildren()) {
@@ -464,11 +488,12 @@ public class DataDstUECsv extends DataDstUEBase {
                     if (firstNode.isGenerated()) {
                         if (firstNode.getReferField() != null) {
                             fieldSB.append(varName);
-                            fieldSB.append("=");
-                            fieldSB.append(firstNode.getReferField().getIndex());
+                            fieldSB.append("=\"");
+                            fieldSB.append(getIdentName(firstNode.getReferField().getName()));
+                            fieldSB.append("\"");
                         } else {
                             fieldSB.append(varName);
-                            fieldSB.append("=0");
+                            fieldSB.append("=\"\"");
                         }
                         continue;
                     }
@@ -485,16 +510,12 @@ public class DataDstUECsv extends DataDstUEBase {
                         fieldSB.append(varName);
                         fieldSB.append("=");
                         fieldSB.append(subFieldDataByOneof.get(varName));
-                    } else {
-                        fieldSB.append(varName);
-                        fieldSB.append("=");
-                        pickValueFieldCsvDefaultImpl(fieldSB, firstNode.getReferField());
-                    }
 
-                    if (null != dumpedFields) {
-                        dumpedFields.add(varName);
+                        if (null != dumpedFields) {
+                            dumpedFields.add(varName);
+                        }
+                        continue;
                     }
-                    continue;
                 }
 
                 fieldSB.append(varName);
@@ -511,7 +532,7 @@ public class DataDstUECsv extends DataDstUEBase {
             if (dumpedFields != null) {
                 for (DataDstFieldDescriptor subField : desc.getTypeDescriptor().getSortedFields()) {
                     String varName = getIdentName(subField.getName());
-                    String val = null;
+                    Object val = null;
                     // Write oneof
                     if (subField.getReferOneof() != null) {
                         String oneofVarName = getIdentName(subField.getReferOneof().getName());
@@ -523,11 +544,12 @@ public class DataDstUECsv extends DataDstUEBase {
                             dumpedFields.add(oneofVarName);
                             if (val == null) {
                                 fieldSB.append(oneofVarName);
-                                fieldSB.append("=0");
+                                fieldSB.append("=\"\"");
                             } else {
                                 fieldSB.append(oneofVarName);
-                                fieldSB.append("=");
-                                fieldSB.append(subField.getIndex());
+                                fieldSB.append("=\"");
+                                fieldSB.append(varName);
+                                fieldSB.append("\"");
                             }
                         }
                     }
@@ -543,12 +565,8 @@ public class DataDstUECsv extends DataDstUEBase {
 
                     if (val != null) {
                         fieldSB.append(val);
-                    } else if (subField.isList()) {
-                        fieldSB.append("()");
-                    } else if (subField.getType() == JAVA_TYPE.STRING || subField.getType() == JAVA_TYPE.BYTES) {
-                        fieldSB.append("\"\"");
                     } else {
-                        pickValueFieldCsvDefaultImpl(fieldSB, subField);
+                        pickValueFieldCsvDefaultImpl(fieldSB, subField, true);
                     }
                 }
             }
@@ -563,7 +581,7 @@ public class DataDstUECsv extends DataDstUEBase {
                 // return pickValueFieldCsvDefaultImpl(fieldSB, desc.getFieldDescriptor());
                 return false; // 这里是取值, List 不能追加 () 否则会出现异常数据
             } else {
-                return pickValueMessageCsvDefaultImpl(fieldSB, desc.getTypeDescriptor());
+                return pickValueMessageCsvDefaultImpl(fieldSB, desc.getTypeDescriptor(), false == isTopLevel);
             }
         } else {
             boolean isString = desc.getType() == JAVA_TYPE.STRING || desc.getType() == JAVA_TYPE.BYTES;
@@ -579,10 +597,14 @@ public class DataDstUECsv extends DataDstUEBase {
     }
 
     protected void pickValueFieldStandardCsvImpl(StringBuffer fieldSB, ArrayList<DataDstWriterNodeWrapper> fieldSet,
-            boolean isTopLevel, HashMap<String, String> fieldDataByOneof) throws ConvException {
+            boolean isTopLevel, HashMap<String, Object> fieldDataByOneof) throws ConvException {
 
         DataDstWriterNode msgDesc = getFirstWriterNode(fieldSet);
         if (msgDesc == null) {
+            DataDstFieldDescriptor fd = getFieldDescriptor(fieldSet);
+            if (fd != null) {
+                pickValueFieldCsvDefaultImpl(fieldSB, fd, false == isTopLevel);
+            }
             return;
         }
 
@@ -616,17 +638,17 @@ public class DataDstUECsv extends DataDstUEBase {
     }
 
     protected boolean pickValueFieldPlainCsvImpl(StringBuffer fieldSB, DataDstWriterNode desc, DataDstChildrenNode node,
-            boolean isTopLevel, HashMap<String, String> fieldDataByOneof) throws ConvException {
+            boolean isTopLevel, HashMap<String, Object> fieldDataByOneof) throws ConvException {
         if (null == desc || node == null) {
             if (node.innerFieldDesc != null) {
-                return pickValueFieldCsvDefaultImpl(fieldSB, node.innerFieldDesc);
+                return pickValueFieldCsvDefaultImpl(fieldSB, node.innerFieldDesc, false == isTopLevel);
             }
         }
         return pickValueFieldPlainCsvImpl(fieldSB, desc.identify, node.innerFieldDesc, isTopLevel);
     }
 
     protected boolean pickValueFieldPlainCsvImpl(StringBuffer fieldSB, IdentifyDescriptor ident,
-            DataDstOneofDescriptor field, boolean isTopLevel, HashMap<String, String> fieldDataByOneof)
+            DataDstOneofDescriptor field, boolean isTopLevel, HashMap<String, Object> fieldDataByOneof)
             throws ConvException {
         if (null == ident) {
             return false;
@@ -634,15 +656,16 @@ public class DataDstUECsv extends DataDstUEBase {
 
         DataContainer<String> res = DataSrcImpl.getOurInstance().getValue(ident, "");
         if (null == res || !res.valid) {
-            return pickValueFieldCsvDefaultImpl(fieldSB, field);
+            return pickValueFieldCsvDefaultImpl(fieldSB, field, false == isTopLevel);
         }
 
-        return pickValueFieldPlainCsvImpl(fieldSB, ident, field, isTopLevel, res.value, fieldDataByOneof);
+        return pickValueFieldPlainCsvImpl(fieldSB, ident, field, isTopLevel, res.value, fieldDataByOneof,
+                false == isTopLevel);
     }
 
     protected boolean pickValueFieldPlainCsvImpl(StringBuffer fieldSB, IdentifyDescriptor ident,
-            DataDstOneofDescriptor field, boolean isTopLevel, String input, HashMap<String, String> fieldDataByOneof)
-            throws ConvException {
+            DataDstOneofDescriptor field, boolean isTopLevel, String input, HashMap<String, Object> fieldDataByOneof,
+            boolean needQuote) throws ConvException {
         if (field == null) {
             return false;
         }
@@ -650,19 +673,26 @@ public class DataDstUECsv extends DataDstUEBase {
         Object[] res = parsePlainDataOneof(input, ident, field);
 
         if (null == res) {
-            return pickValueFieldCsvDefaultImpl(fieldSB, field);
+            return pickValueFieldCsvDefaultImpl(fieldSB, field, needQuote);
         }
 
         if (res.length < 1) {
-            return pickValueFieldCsvDefaultImpl(fieldSB, field);
+            return pickValueFieldCsvDefaultImpl(fieldSB, field, needQuote);
         }
 
         DataDstFieldDescriptor sub_field = (DataDstFieldDescriptor) res[0];
         if (sub_field == null) {
-            return pickValueFieldCsvDefaultImpl(fieldSB, field);
+            return pickValueFieldCsvDefaultImpl(fieldSB, field, needQuote);
         }
 
-        fieldSB.append(sub_field.getIndex());
+        String subVarName = getIdentName(sub_field.getName());
+        if (needQuote) {
+            fieldSB.append("\"");
+        }
+        fieldSB.append(subVarName);
+        if (needQuote) {
+            fieldSB.append("\"");
+        }
         if (res.length == 1) {
             return true;
         }
@@ -670,7 +700,6 @@ public class DataDstUECsv extends DataDstUEBase {
         // 非顶层，不用验证类型
         StringBuffer oneofValueSB = new StringBuffer();
         pickValueFieldPlainCsvImpl(oneofValueSB, null, sub_field, false, (String) res[1]);
-        String subVarName = getIdentName(sub_field.getName());
         if (!fieldDataByOneof.containsKey(subVarName)) {
             fieldDataByOneof.put(subVarName, oneofValueSB.toString());
         }
@@ -682,14 +711,14 @@ public class DataDstUECsv extends DataDstUEBase {
             DataDstFieldDescriptor field, boolean isTopLevel) throws ConvException {
         if (null == ident || field == null) {
             if (field != null) {
-                return pickValueFieldCsvDefaultImpl(fieldSB, field);
+                return pickValueFieldCsvDefaultImpl(fieldSB, field, false == isTopLevel);
             }
             return false;
         }
 
         DataContainer<String> res = DataSrcImpl.getOurInstance().getValue(ident, "");
         if (null == res || !res.valid) {
-            return pickValueFieldCsvDefaultImpl(fieldSB, field);
+            return pickValueFieldCsvDefaultImpl(fieldSB, field, false == isTopLevel);
         }
 
         return pickValueFieldPlainCsvImpl(fieldSB, ident, field, isTopLevel, res.value);
@@ -902,10 +931,10 @@ public class DataDstUECsv extends DataDstUEBase {
         ArrayList<DataDstFieldDescriptor> children = field.getTypeDescriptor().getSortedFields();
 
         HashSet<String> dumpedOneof = null;
-        HashMap<String, String> fieldDataByOneof = null;
+        HashMap<String, Object> fieldDataByOneof = null;
         if (field.getTypeDescriptor().getSortedOneofs().size() > 0) {
             dumpedOneof = new HashSet<String>();
-            fieldDataByOneof = new HashMap<String, String>();
+            fieldDataByOneof = new HashMap<String, Object>();
         }
         int usedInputIdx = 0;
 
@@ -926,7 +955,7 @@ public class DataDstUECsv extends DataDstUEBase {
                 String oneofVarName = getIdentName(children.get(i).getReferOneof().getName());
                 if (dumpedOneof.contains(oneofVarName)) {
                     // already dumped with other field, dump default or cache
-                    String val = fieldDataByOneof.getOrDefault(varName, null);
+                    Object val = fieldDataByOneof.getOrDefault(varName, null);
                     if (val != null) {
                         fieldSB.append(varName);
                         fieldSB.append("=");
@@ -934,7 +963,7 @@ public class DataDstUECsv extends DataDstUEBase {
                     } else {
                         fieldSB.append(varName);
                         fieldSB.append("=");
-                        pickValueFieldCsvDefaultImpl(fieldSB, children.get(i));
+                        pickValueFieldCsvDefaultImpl(fieldSB, children.get(i), true);
                     }
 
                     continue;
@@ -951,12 +980,12 @@ public class DataDstUECsv extends DataDstUEBase {
                 fieldSB.append(oneofVarName);
                 fieldSB.append("=");
                 if (!pickValueFieldPlainCsvImpl(fieldSB, null, children.get(i).getReferOneof(), false,
-                        inputs[usedInputIdx], fieldDataByOneof)) {
-                    pickValueFieldCsvDefaultImpl(fieldSB, children.get(i).getReferOneof());
+                        inputs[usedInputIdx], fieldDataByOneof, true)) {
+                    pickValueFieldCsvDefaultImpl(fieldSB, children.get(i).getReferOneof(), true);
                 }
                 fieldSB.append(",");
 
-                String val = fieldDataByOneof.getOrDefault(varName, null);
+                Object val = fieldDataByOneof.getOrDefault(varName, null);
                 if (val != null) {
                     fieldSB.append(varName);
                     fieldSB.append("=");
@@ -964,7 +993,7 @@ public class DataDstUECsv extends DataDstUEBase {
                 } else {
                     fieldSB.append(varName);
                     fieldSB.append("=");
-                    pickValueFieldCsvDefaultImpl(fieldSB, children.get(i));
+                    pickValueFieldCsvDefaultImpl(fieldSB, children.get(i), true);
                 }
 
                 ++usedInputIdx;
@@ -1003,7 +1032,7 @@ public class DataDstUECsv extends DataDstUEBase {
         return true;
     }
 
-    protected boolean pickValueMessageCsvDefaultImpl(StringBuffer sb, DataDstMessageDescriptor fd) {
+    protected boolean pickValueMessageCsvDefaultImpl(StringBuffer sb, DataDstMessageDescriptor fd, boolean fillEmpty) {
         if (fd == null) {
             return false;
         }
@@ -1022,7 +1051,13 @@ public class DataDstUECsv extends DataDstUEBase {
             }
             case STRING:
             case BYTES: {
-                return false;
+                if (fillEmpty) {
+                    sb.append("\"\"");
+                } else {
+                    return false;
+                }
+
+                break;
             }
             case MESSAGE: {
                 sb.append("(");
@@ -1047,7 +1082,7 @@ public class DataDstUECsv extends DataDstUEBase {
                             dumpedOneof.add(oneofVarName);
                             sb.append(oneofVarName);
                             sb.append("=");
-                            pickValueFieldCsvDefaultImpl(sb, subField.getReferOneof());
+                            pickValueFieldCsvDefaultImpl(sb, subField.getReferOneof(), true);
                             sb.append(",");
                         }
                     }
@@ -1059,7 +1094,8 @@ public class DataDstUECsv extends DataDstUEBase {
                     } else if (subField.getType() == JAVA_TYPE.STRING || subField.getType() == JAVA_TYPE.BYTES) {
                         sb.append("\"\"");
                     } else {
-                        pickValueFieldCsvDefaultImpl(sb, subField);
+                        // 嵌套默认值总是要输出空值
+                        pickValueFieldCsvDefaultImpl(sb, subField, true);
                     }
                 }
 
@@ -1073,17 +1109,25 @@ public class DataDstUECsv extends DataDstUEBase {
         return true;
     }
 
-    protected boolean pickValueFieldCsvDefaultImpl(StringBuffer sb, DataDstFieldDescriptor fd) {
+    protected boolean pickValueFieldCsvDefaultImpl(StringBuffer sb, DataDstFieldDescriptor fd, boolean fillEmpty) {
         if (fd.isList()) {
-            sb.append("()");
-            return true;
+            if (fillEmpty) {
+                sb.append("()");
+                return true;
+            } else {
+                return false;
+            }
         }
 
-        return pickValueMessageCsvDefaultImpl(sb, fd.getTypeDescriptor());
+        return pickValueMessageCsvDefaultImpl(sb, fd.getTypeDescriptor(), fillEmpty);
     }
 
-    protected boolean pickValueFieldCsvDefaultImpl(StringBuffer sb, DataDstOneofDescriptor fd) {
-        sb.append("0");
-        return true;
+    protected boolean pickValueFieldCsvDefaultImpl(StringBuffer sb, DataDstOneofDescriptor fd, boolean needQuote) {
+        if (needQuote) {
+            sb.append("\"\"");
+            return true;
+        } else {
+            return false;
+        }
     }
 }

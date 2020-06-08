@@ -18,13 +18,6 @@ struct FDepCfg : public FTableRowBase
     GENERATED_USTRUCT_BODY()
 
     // Start of fields
-    UENUM(BlueprintType)
-    enum : int32 {
-        kIdFieldNumber = 1 UMETA(DisplayName = "Id"),
-        kNameFieldNumber = 2 UMETA(DisplayName = "Name"),
-        kDep2FieldNumber = 3 UMETA(DisplayName = "Dep2"),
-    };
-
     /** Field Type: STRING, Name: Name, Index: 2 **/
     UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "XResConfig")
     FName Name;

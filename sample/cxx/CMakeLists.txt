@@ -2,6 +2,9 @@ cmake_minimum_required(VERSION 2.8.9)
 if ( "${CMAKE_MAJOR_VERSION}.${CMAKE_MINOR_VERSION}" VERSION_GREATER "3.0" )
     cmake_policy(SET CMP0054 NEW)
 endif()
+if ( "${CMAKE_MAJOR_VERSION}.${CMAKE_MINOR_VERSION}" VERSION_GREATER_EQUAL "3.12" )
+    cmake_policy(SET CMP0074 NEW)
+endif()
 
 project(xresloader_cxx_sample)
 

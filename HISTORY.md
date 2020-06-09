@@ -10,7 +10,7 @@
 4. 修复 ```enum``` 字段类型输出二进制时的值类型错误
 5. 优化 ```oneof``` 字段的配置冲突检测
 6. 标记 **UE-Csv** 输出的非嵌套模式（ ```UeCfg-RecursiveMode=False``` ） 为不推荐的，以后将被移除。
-7. \[实验性\] **UE-Json** 和 **UE-Csv** 输出的蓝图代码中，增加类似C++的 ```k[字段名]FieldNumber``` 的枚举值，便于对 ```oneof``` 输出的分支判断和反射使用
+7. \[实验性\] **UE-Json** 和 **UE-Csv** 输出的蓝图代码中，增加指示oneof分支的字段，便于对 ```oneof``` 输出的分支判断和反射使用
 8. 优化一系列错误提示流程
 9. 增加一个python工具，可以打印转出的protobuf二进制数据（需要 ```pip/python3 -m pip install protobuf [--user]```）
 

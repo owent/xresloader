@@ -20,7 +20,7 @@
 1. 修复 **UE-Csv** 格式输出的一处空数据的崩溃BUG
 2. 增加BUG上报说明
 3. 修复启用多文件合并功能时，**UE-Csv** 格式输出会输出多次Header的BUG
-4. sample输出增加递归模式的 **UE-Csv** 
+4. sample输出增加递归模式的 **UE-Csv**
 5. \[实验性\] **UE-Csv** 格式输出的现在也支持plain模式了（不包含非嵌套模式（ ```UeCfg-RecursiveMode=False``` ））
 
 2.7.2

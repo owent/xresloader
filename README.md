@@ -369,3 +369,9 @@ Ans: 因为有一些语言是没有无符号(unsigned)类型的，为了统一�
 5. 为什么 ```UE-Csv``` 和 ```UE-Json``` 输出的代码会多一个 ```Name``` 字段?
 
 Ans: 因为对 ```UE-Json``` 输出中， ```Name``` 是一个特殊字段，也用于UE中内置的接口的查找索引。所以为了统一输出的数据结构（ 这样无论是 ```UE-Csv``` 还是 ```UE-Json``` 都可以用相同的代码结构来导入 ），我们对 ```UE-Csv``` 和 ```UE-Json``` 统一自动生成 ```Name``` 字段。但是如果用户自定义了 ```Name``` 字段， 我们会使用用户自定义的 ```Name``` 字段。
+
+6. 提示 ```Can not reserve enough space for XXX objecct heap```
+
+在转换很大的Excel文件时（上万行数据），会需要很高的内存（>=1GB）。所以为了方便我们在批量转表sample的xml中配置了 ```<java_option desc="java选项-最大内存限制2GB">-Xmx2048m</java_option>``` 。
+如果出现这个提示可能是32位jre无法分配这么多地址空间导致的，可以在xml里删除这个配置。但是还是建议使用64位jre。
+

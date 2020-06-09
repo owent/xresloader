@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 
 import org.xresloader.core.ProgramOptions;
+import org.xresloader.core.data.err.InitializeException;
 
 /**
  * Created by owentou on 2014/9/30.
@@ -318,7 +319,7 @@ public class SchemeConf {
         return scheme;
     }
 
-    public int initScheme() {
+    public int initScheme() throws InitializeException {
         switch (ProgramOptions.getInstance().dataSourceType) {
             case BIN: {
                 scheme = new SchemeDataSourceCmd();
@@ -337,8 +338,7 @@ public class SchemeConf {
                 break;
             }
             default: {
-                ProgramOptions.getLoger().error("data source file type error.");
-                return -11;
+                throw new InitializeException("data source file type error.");
             }
         }
 

@@ -10,6 +10,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.xresloader.core.data.err.InitializeException;
 
 /**
  * Created by owentou on 2015/04/29.
@@ -18,9 +19,10 @@ public final class SchemeDataSourceConf extends SchemeDataSourceBase {
 
     private ConfigParser current_file = new ConfigParser();
 
-    public int load() {
+    public int load() throws InitializeException {
 
         String file_path = ProgramOptions.getInstance().dataSourceFile;
+        String error_message = null;
         try {
             FileInputStream fsi = new FileInputStream(file_path);
             byte[] utf8_bom = new byte[3];
@@ -35,14 +37,17 @@ public final class SchemeDataSourceConf extends SchemeDataSourceBase {
             current_file.read(fsi);
         } catch (IOException e) {
             e.printStackTrace();
-            ProgramOptions.getLoger().error("open file %s failed", file_path);
-            return -21;
+            error_message = String.format("open file %s failed", file_path);
+        }
+
+        if (error_message != null) {
+            throw new InitializeException(error_message);
         }
 
         return 0;
     }
 
-    public boolean load_scheme(String section_name) {
+    public boolean load_scheme(String section_name) throws InitializeException {
         Map<String, HashMap<String, ArrayList<String>>> all_conf = new HashMap<String, HashMap<String, ArrayList<String>>>();
         List<Map.Entry<String,String>> datas = null;
         try {

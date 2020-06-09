@@ -4,23 +4,24 @@ import org.xresloader.core.ProgramOptions;
 
 import java.util.ArrayList;
 
+import org.xresloader.core.data.err.InitializeException;
+
 /**
  * Created by owt50 on 2016/12/10.
  */
 public class SchemeDataSourceCmd extends SchemeDataSourceBase {
     @Override
-    public int load() {
+    public int load() throws InitializeException {
         // 至少有四个必须字段，所以少于四项的肯定错
         if(null == ProgramOptions.getInstance().dataSourceMetas || ProgramOptions.getInstance().dataSourceMetas.length < 4) {
-            ProgramOptions.getLoger().error("Data source error. DataSource,ProtoName,OutputFile and KeyRow is required.");
-            return -21;
+            throw new InitializeException("Data source error. DataSource,ProtoName,OutputFile and KeyRow is required.");
         }
 
         return 0;
     }
 
     @Override
-    public boolean load_scheme(String table) {
+    public boolean load_scheme(String table) throws InitializeException {
         for(String cfg_val : ProgramOptions.getInstance().dataSourceMetas) {
             String unwrap_val = cfg_val;
             if (unwrap_val.length() > 2 && ('"' == unwrap_val.charAt(0) || '\'' == unwrap_val.charAt(0)) && unwrap_val.charAt(0) == unwrap_val.charAt(unwrap_val.length() - 1)) {
@@ -57,23 +58,19 @@ public class SchemeDataSourceCmd extends SchemeDataSourceBase {
         boolean ret = true;
         // 检查数据
         if (SchemeConf.getInstance().getDataSource().isEmpty()) {
-            ProgramOptions.getLoger().error("DataSource is required");
-            ret = false;
+            throw new InitializeException("DataSource is required");
         }
 
         if (0 == SchemeConf.getInstance().getKey().getRow()) {
-            ProgramOptions.getLoger().error("KeyRow is required");
-            ret = false;
+            throw new InitializeException("KeyRow is required");
         }
 
         if (SchemeConf.getInstance().getProtoName().isEmpty()) {
-            ProgramOptions.getLoger().error("ProtoName is required");
-            ret = false;
+            throw new InitializeException("ProtoName is required");
         }
 
         if (SchemeConf.getInstance().getOutputFile().isEmpty()) {
-            ProgramOptions.getLoger().error("ProtoName is required");
-            ret = false;
+            throw new InitializeException("ProtoName is required");
         }
 
         return ret;

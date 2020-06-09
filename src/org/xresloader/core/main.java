@@ -21,6 +21,7 @@ import org.xresloader.core.data.dst.DataDstUECsv;
 import org.xresloader.core.data.dst.DataDstUEJson;
 import org.xresloader.core.data.dst.DataDstXml;
 import org.xresloader.core.data.err.ConvException;
+import org.xresloader.core.data.err.InitializeException;
 import org.xresloader.core.data.src.DataSrcExcel;
 import org.xresloader.core.data.src.DataSrcImpl;
 import org.xresloader.core.scheme.SchemeConf;
@@ -154,7 +155,7 @@ public class main {
         return 0;
     }
 
-    private static int build_group(String[] args) {
+    private static int build_group(String[] args) throws InitializeException {
         int ret = ProgramOptions.getInstance().init(args);
         if (ret < 0) {
             return 1;
@@ -171,6 +172,10 @@ public class main {
 
         ret = SchemeConf.getInstance().initScheme();
         if (ret < 0) {
+            return 1;
+        }
+
+        if (ProgramOptions.getInstance().dataSourceMetas == null) {
             return 1;
         }
 
@@ -350,6 +355,9 @@ public class main {
         int ret_code = 1;
         try {
             ret_code = build_group(args);
+        } catch (InitializeException e) {
+            ProgramOptions.getLoger().error(
+                "initlize failed.%s%s> %s", e.getMessage(), endl, String.join(" ", args));
         } catch (Exception e) {
             ProgramOptions.getLoger().error("%s", e.toString());
             for (StackTraceElement frame : e.getStackTrace()) {
@@ -368,6 +376,10 @@ public class main {
                 if (stdin_args.length > 0) {
                     try {
                         ret_code += build_group(stdin_args);
+                    } catch (InitializeException e) {
+                        ++ret_code;
+                        ProgramOptions.getLoger().error(
+                            "initlize failed.%s%s> %s", e.getMessage(), endl, String.join(" ", stdin_args));
                     } catch (Exception e) {
                         ++ret_code;
                         ProgramOptions.getLoger().error("%s", e.toString());

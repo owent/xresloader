@@ -13,26 +13,28 @@ sample的脚本会分别生成proto v2和proto v3的配置，实际上由于转�
 xresloader示例文件说明:
 ======
 
-1. 数据读取依赖[../header/pb_header.proto](../header/pb_header.proto)或[../header/pb_header_v3.proto](../header/pb_header.proto)里的数据描述
-2. protobuf的数据生成规则是最外层一个xresloader_datablocks结构，里面是header和打包后的数据集，每一个data_block条目是一个数据项。header内的校验码是xresloader_header.hash_code为空字符串时的校验码
-3. 解码时需要依赖protobuf和pb_header
-4. [proto_v2](sample/proto_v2)目录下是使用protobuf v2的协议文件，[gen_protocol.py](gen_protocol.py)用于生成protobuf v2的pb文件和C++所需代码
-5. [proto_v3](sample/proto_v3)目录下是使用protobuf v3的协议文件，[gen_protocol_v3.py](gen_protocol.py)用于生成protobuf v3的pb文件和所需代码
-6. [cxx/read_kind_sample.cpp](cxx/read_kind_sample.cpp) 是C++读取协议二进制示例代码(依赖 [../loader-binding/cxx](../loader-binding/cxx) 里的内容)
-7. [lua/sample_lua.lua](lua/sample_lua.lua) 是用Lua读取Lua输出的示例(依赖 [../loader-binding/lua](../loader-binding/lua) 里提及的内容)
-8. [pbc/sample_pbc.lua](pbc/sample_pbc.lua) 是用Lua读取协议二进制示例代码(依赖 [../loader-binding/pbc](../loader-binding/pbc) 里提及的内容)
-9. [../loader-binding/javascript](../loader-binding/javascript) 内有读取javascript输出的相关说明
-10. [../loader-binding/msgpack](../loader-binding/msgpack) 内有读取msgpack输出的相关说明和node.js和python的示例
+1. 所有生成的数据由Powershell脚本 [gen_sample_output.ps1](gen_sample_output.ps1) 或bash脚本 [gen_sample_output.sh](gen_sample_output.sh) 生成，具体参数可以参照这两个脚本。
+2. 数据读取依赖[../header/pb_header.proto](../header/pb_header.proto)或[../header/pb_header_v3.proto](../header/pb_header.proto)里的数据描述
+3. protobuf的数据生成规则是最外层一个xresloader_datablocks结构，里面是header和打包后的数据集，每一个data_block条目是一个数据项。header内的校验码是xresloader_header.hash_code为空字符串时的校验码
+4. 解码时需要依赖protobuf和pb_header
+5. [proto_v2](sample/proto_v2)目录下是使用protobuf v2的协议文件，[gen_protocol.py](gen_protocol.py)用于生成protobuf v2的pb文件和C++所需代码
+6. [proto_v3](sample/proto_v3)目录下是使用protobuf v3的协议文件，[gen_protocol_v3.py](gen_protocol.py)用于生成protobuf v3的pb文件和所需代码
+7. [cxx/read_kind_sample.cpp](cxx/read_kind_sample.cpp) 是C++读取协议二进制示例代码(依赖 [../loader-binding/cxx](../loader-binding/cxx) 里的内容)
+8. [lua/sample_lua.lua](lua/sample_lua.lua) 是用Lua读取Lua输出的示例(依赖 [../loader-binding/lua](../loader-binding/lua) 里提及的内容)
+9. [pbc/sample_pbc.lua](pbc/sample_pbc.lua) 是用Lua读取协议二进制示例代码(依赖 [../loader-binding/pbc](../loader-binding/pbc) 里提及的内容)
+10. [../loader-binding/javascript](../loader-binding/javascript) 内有读取javascript输出的相关说明
+11. [../loader-binding/msgpack](../loader-binding/msgpack) 内有读取msgpack输出的相关说明和node.js和python的示例
+12. [proto_v2/json](sample/proto_v2/json)目录下是使用protobuf v2的输出的UE-Json格式的数据文件和支持蓝图的加载代码，不再另外说明生成脚本和使用方法
+13. [proto_v2/json](sample/proto_v2/json)目录下是使用protobuf v2的输出的UE-Json格式的数据文件和支持蓝图的加载代码，不再另外说明生成脚本和使用方法
 
+以下生成的sample文件假设协议是 ```$proto_dir``` （ ***proto_v2*** 或 ***proto_v3*** ）, 数据源是 ```$XLSX_FILE``` ( ***资源转换示例.xlsx*** ) 等效执行命令表如下:
 
-以下生成的sample文件假设协议是 **$proto_dir** （***proto_v2***或***proto_v3***）,等效执行命令表
-
-文件名               |  描述                                        |  参考命令 
---------------------|----------------------------------------------|----------
+文件名              |  描述                                           |  参考命令
+--------------------|-------------------------------------------------|--------------------------------------------------------------------------------
 *.proto             |  protobuf格式的协议描述文件                     | 需要根据实际使用手动编辑
-proto_v2/kind.pb    |  protobuf工具的打包proto文件的输出结果           | protoc -o proto_v2/kind.pb proto_v2/*.proto -I proto_v2 或 gen_protocol.py
-proto_v3/kind.pb    |  protobuf工具的打包proto文件的输出结果           | protoc -o proto_v3/kind.pb proto_v3/*.proto -I proto_v3 或 gen_protocol.py
-*.xlsx              |  保存配置数据和生成规则描述的Excel文件            | 需要根据实际使用手动编辑
+proto_v2/kind.pb    |  protobuf工具的打包proto文件的输出结果          | protoc -o proto_v2/kind.pb proto_v2/*.proto -I proto_v2 或 gen_protocol.py
+proto_v3/kind.pb    |  protobuf工具的打包proto文件的输出结果          | protoc -o proto_v3/kind.pb proto_v3/*.proto -I proto_v3 或 gen_protocol.py
+*.xlsx              |  保存配置数据和生成规则描述的Excel文件          | 需要根据实际使用手动编辑
 kind_const.lua      |  导出的lua格式的常量(protobuf里的enum)          | java -client -jar xresloader.jar -t lua -p protobuf -o $proto_dir -f $proto_dir/kind.pb --pretty 2 -c kind_const.lua--lua-global
 role_cfg.bin        |  打包Excel数据之后的协议（protobuf）二进制文件，指定数据版本号为 1.0.0.0 | java -client -jar xresloader.jar -t bin -p protobuf -o $proto_dir -f $proto_dir/kind.pb -s *.xlsx -m scheme_kind -a 1.0.0.0
 role_cfg.lua        |  打包Excel数据之后的Lua格式输出，指定数据版本号为 1.0.0.0 | java -client -jar xresloader.jar -t lua -p protobuf -o $proto_dir -f $proto_dir/kind.pb --pretty 4 -s *.xlsx -m scheme_kind -n '/(?i)\.bin$/\.lua/' --data-version 1.0.0.0
@@ -42,21 +44,21 @@ role_cfg.msgpack.bin|  打包Excel数据之后的Msgpack格式输出            
 role_cfg.js         |  打包Excel数据之后的Javascript格式输出          | java -client -jar xresloader.jar -t js -p protobuf -o $proto_dir -f $proto_dir/kind.pb --pretty 2 -s *.xlsx -m scheme_kind -n '/(?i)\.bin$/\.js/' --javascript-global sample.xresloader 
 role_cfg.n.js       |  打包Excel数据之后的Node.js模块输出             | java -client -jar xresloader.jar -t js -p protobuf -o $proto_dir -f $proto_dir/kind.pb --pretty 2 -m "DataSource=$(ls *.xlsx)|kind|3,1" -m "MacroSource=$(ls *.xlsx)|macro|2,1" -m "ProtoName=role_cfg" -m "OutputFile=role_cfg.bin" -m "KeyRow=2" -m "KeyCase=lower" -m "KeyWordSplit=_" -m 'KeyWordRegex=[A-Z_\$ \t]|[_\$ \t]|[a-zA-Z_\$]' -n '/(?i)\.bin$/\.n\.js/' --javascript-export nodejs
 role_cfg.amd.js     |  打包Excel数据之后的AMD.js模块输出              | java -client -jar xresloader.jar -t js -p protobuf -o $proto_dir -f $proto_dir/kind.pb --pretty 2 -s *.xlsx -m scheme_kind -n '/(?i)\.bin$/\.amd\.js/' --javascript-export amd
-arr_in_arr_cfg.lua  |  嵌套数组示例Lua输出                           | java -client -jar xresloader.jar -t lua -p protobuf -o $proto_dir -f $proto_dir/kind.pb --pretty 2 -m "DataSource=$(ls *.xlsx)|arr_in_arr|3,1" -m "MacroSource=$(ls *.xlsx)|macro|2,1" -m ProtoName=arr_in_arr_cfg -m OutputFile=arr_in_arr_cfg.lua -m KeyRow=2 -o proto_v3
+arr_in_arr_cfg.lua  |  嵌套数组示例Lua输出                            | java -client -jar xresloader.jar -t lua -p protobuf -o $proto_dir -f $proto_dir/kind.pb --pretty 2 -m "DataSource=$(ls *.xlsx)|arr_in_arr|3,1" -m "MacroSource=$(ls *.xlsx)|macro|2,1" -m ProtoName=arr_in_arr_cfg -m OutputFile=arr_in_arr_cfg.lua -m KeyRow=2 -o proto_v3
 arr_in_arr_cfg.bin  |  嵌套数组示例协议二进制输出                     | java -client -jar xresloader.jar -t bin -p protobuf -o $proto_dir -f $proto_dir/kind.pb -m "DataSource=$(ls *.xlsx)|arr_in_arr|3,1" -m "MacroSource=$(ls *.xlsx)|macro|2,1" -m ProtoName=arr_in_arr_cfg -m OutputFile=arr_in_arr_cfg.bin -m KeyRow=2 -o proto_v3
-role_upgrade_cfg.lua |  Lua输出upgrade表                           | java -client -jar xresloader.jar -t lua -p protobuf -o '$proto_dir'     -f '$proto_dir/kind.pb' -s '$XLSX_FILE' -m scheme_upgrade -n "/(?i)\.bin$/\.lua/"
-role_upgrade_cfg.json | Json输出upgrade表                          | java -client -jar xresloader.jar -t json -p protobuf -o '$proto_dir'    -f '$proto_dir/kind.pb' -s '$XLSX_FILE' -m scheme_upgrade -n "/(?i)\.bin$/\.json/"
-kind_const_module.lua |  使用module来导出lua枚举类型                 | java -client -jar xresloader.jar -t lua -p protobuf -o $proto_dir -f $proto_dir/kind.pb --pretty 2 --lua-module ProtoEnums.Kind -c kind_const_module.lua 
+role_upgrade_cfg.lua |  Lua输出upgrade表                              | java -client -jar xresloader.jar -t lua -p protobuf -o '$proto_dir'     -f '$proto_dir/kind.pb' -s '$XLSX_FILE' -m scheme_upgrade -n "/(?i)\.bin$/\.lua/"
+role_upgrade_cfg.json | Json输出upgrade表                             | java -client -jar xresloader.jar -t json -p protobuf -o '$proto_dir'    -f '$proto_dir/kind.pb' -s '$XLSX_FILE' -m scheme_upgrade -n "/(?i)\.bin$/\.json/"
+kind_const_module.lua |  使用module来导出lua枚举类型                  | java -client -jar xresloader.jar -t lua -p protobuf -o $proto_dir -f $proto_dir/kind.pb --pretty 2 --lua-module ProtoEnums.Kind -c kind_const_module.lua 
 role_cfg_module.lua |  使用module来导出lua输出，指定数据版本号为 1.0.0.0 | java -client -jar xresloader.jar -t lua -p protobuf -o $proto_dir -f $proto_dir/kind.pb --lua-module ProtoData.Kind -s $XLSX_FILE -m scheme_kind -n "/(?i)\.bin\$/_module\.lua/" --data-version 1.0.0.0 
 kind.desc.lua       |  导出lua格式的描述信息，可用于用户自己实现反射接入 | java -client -jar xresloader.jar -t lua -p protobuf -o $proto_dir -f $proto_dir/kind.pb --pretty 2 -i kind.desc.lua
 kind.desc.json      | 导出json格式的描述信息，可用于用户自己实现反射接入 | java -client -jar xresloader.jar -t json -p protobuf -o $proto_dir -f $proto_dir/kind.pb --pretty 2 -i kind.desc.json
+event_cfg.bin       | oneof功能示例协议二进制输出                        | java -client -jar xresloader.jar -t bin --pretty 2 -m 'DataSource=$XLSX_FILE|test_oneof|3,1' -m 'MacroSource=$XLSX_FILE|macro|2,1' -m ProtoName=event_cfg -m OutputFile=event_cfg.bin -m KeyRow=2 -o $proto_dir
+event_cfg.lua       | oneof功能示例协议lua输出                           | java -client -jar xresloader.jar -t lua --pretty 2 -m 'DataSource=$XLSX_FILE|test_oneof|3,1' -m 'MacroSource=$XLSX_FILE|macro|2,1' -m ProtoName=event_cfg -m OutputFile=event_cfg.lua -m KeyRow=2 -o $proto_dir
 
 
 TODO LIST
 ======
 
-+ [ ] ```oneof``` verify
-+ [ ] ```oneof``` value
-+ [ ] ```oneof``` alias
-+ [ ] both ```field``` and ```oneof``` have the same field is not allowed.
-+ [ ] plain message verifier
++ [ ] 内置 ```duration/google.protobuf.Duration``` 类型接入
++ [ ] 内置 ```timestamp/google.protobuf.Timestamp``` 类型接入
++ [ ] 内置 ```map<Key, Value>/[nested]MapFieldEntry``` 类型接入

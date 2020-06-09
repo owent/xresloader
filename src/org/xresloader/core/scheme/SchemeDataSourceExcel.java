@@ -2,6 +2,7 @@ package org.xresloader.core.scheme;
 
 import org.xresloader.core.ProgramOptions;
 import org.xresloader.core.data.err.ConvException;
+import org.xresloader.core.data.err.InitializeException;
 import org.xresloader.core.data.src.DataContainer;
 import org.xresloader.core.data.src.DataSrcImpl;
 import org.xresloader.core.engine.ExcelEngine;
@@ -20,24 +21,22 @@ public final class SchemeDataSourceExcel extends SchemeDataSourceBase {
 
     private Workbook currentWorkbook = null;
 
-    public int load() {
+    public int load() throws InitializeException {
 
         String file_path = ProgramOptions.getInstance().dataSourceFile;
         currentWorkbook = ExcelEngine.openWorkbook(file_path);
         if (null == currentWorkbook) {
-            ProgramOptions.getLoger().error("open file \"" + ProgramOptions.getInstance().dataSourceFile + "\" failed");
-            return -21;
+            throw new InitializeException(String.format("open file \"%s\" failed", ProgramOptions.getInstance().dataSourceFile));
         }
 
         return 0;
     }
 
-    public boolean load_scheme(String sheet_name) {
+    public boolean load_scheme(String sheet_name) throws InitializeException {
         Workbook wb = currentWorkbook;
         Sheet table = wb.getSheet(sheet_name);
         if (null == table) {
-            ProgramOptions.getLoger().error("excel sheet \"" + sheet_name + "\" not found");
-            return false;
+            throw new InitializeException(String.format("excel sheet \"%s\" not found", sheet_name));
         }
 
         // 数据及header
@@ -77,8 +76,7 @@ public final class SchemeDataSourceExcel extends SchemeDataSourceBase {
         }
 
         if (data_row >= row_num) {
-            ProgramOptions.getLoger().error("scheme \"" + sheet_name + "\" has no configure, or it's not a scheme sheet?");
-            return false;
+            throw new InitializeException(String.format("scheme \"%s\" has no configure, or it's not a scheme sheet?", sheet_name));
         }
 
         // 数据项必须在这之后

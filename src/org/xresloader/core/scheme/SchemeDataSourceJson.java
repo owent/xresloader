@@ -9,6 +9,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import org.xresloader.core.data.err.InitializeException;
+
 /**
  * Created by owentou on 2015/04/29.
  */
@@ -16,7 +18,7 @@ public final class SchemeDataSourceJson extends SchemeDataSourceBase {
 
     private JSONObject current_object = null;
 
-    public int load() {
+    public int load() throws InitializeException {
 
         String file_path = ProgramOptions.getInstance().dataSourceFile;
         try {
@@ -43,15 +45,14 @@ public final class SchemeDataSourceJson extends SchemeDataSourceBase {
             fis.close();
         } catch (Exception e) {
             e.printStackTrace();
-            ProgramOptions.getLoger().error("open file %s failed", file_path);
-            return -21;
+            throw new InitializeException(String.format("open file %s failed", file_path));
         }
 
         return 0;
     }
 
     @SuppressWarnings("unchecked")
-    public boolean load_scheme(String section_name) {
+    public boolean load_scheme(String section_name) throws InitializeException {
         if (null == current_object || false == (current_object instanceof Map)) {
             ProgramOptions.getLoger().warn("scheme file error");
             return false;

@@ -3,7 +3,7 @@
 return {
   [1] = {
     count = 3,
-    data_ver = "1.0.0.0",
+    data_ver = "2.8.0.20200609105146",
     description = "Test arr_in_arr_cfg",
     hash_code = "no hash code",
     xres_ver = "2.8.0",

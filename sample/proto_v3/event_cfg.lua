@@ -3,7 +3,7 @@
 return {
   [1] = {
     count = 5,
-    data_ver = "1.0.0.0",
+    data_ver = "2.8.0.20200609105152",
     description = "Test event_cfg with oneof fields",
     hash_code = "no hash code",
     xres_ver = "2.8.0",

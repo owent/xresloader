@@ -4,9 +4,9 @@ define({
   role_cfg_data_message_type: "role_cfg",
   role_cfg_header: {
     count : 7,
-    data_ver : "2.8.0.20200609105146",
+    data_ver : "1.0.0.0",
     hash_code : "no hash code",
-    xres_ver : "2.8.0"
+    xres_ver : "2.8.1"
   },
   role_cfg: [
     {

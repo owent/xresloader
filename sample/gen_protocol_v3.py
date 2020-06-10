@@ -27,8 +27,8 @@ common_args = [
 ]
 
 proto_file = glob.glob(os.path.join(proto_dir, '*.proto'))
-proto_file.append(os.path.join(header_dir, 'extensions', 'google', 'protobuf', 'descriptor.proto'))
-proto_file.extend(glob.glob(os.path.join(header_dir, 'extensions', 'v3', '*.proto')))
+# proto_file.append(os.path.join(header_dir, 'extensions', 'google', 'protobuf', 'descriptor.proto'))
+# proto_file.extend(glob.glob(os.path.join(header_dir, 'extensions', 'v3', '*.proto')))
 
 os.chdir(work_dir)
 

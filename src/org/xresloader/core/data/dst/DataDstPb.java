@@ -23,6 +23,7 @@ import com.google.protobuf.Descriptors.FieldDescriptor.JavaType;
 import com.google.protobuf.DynamicMessage;
 import com.google.protobuf.UninitializedMessageException;
 import org.apache.commons.codec.binary.Hex;
+import org.apache.poi.util.NullLogger;
 import org.xresloader.Xresloader;
 import org.xresloader.core.ProgramOptions;
 import org.xresloader.core.data.dst.DataDstWriterNode.DataDstChildrenNode;
@@ -88,6 +89,9 @@ public class DataDstPb extends DataDstImpl {
     private Descriptors.Descriptor currentMsgDesc = null;
     static private com.google.protobuf.ExtensionRegistryLite pb_extensions = null;
     static private PbInfoSet cachePbs = new PbInfoSet();
+    static private Descriptors.FileDescriptor[] inner_file_descs = new Descriptors.FileDescriptor[] {
+            DescriptorProtos.getDescriptor(), PbHeaderV3.getDescriptor(), Xresloader.getDescriptor(),
+            XresloaderUe.getDescriptor() };
 
     static <T> void append_alias_list(String short_name, String full_name, HashMap<String, PbAliasNode<T>> hashmap,
             T ele) {
@@ -258,6 +262,18 @@ public class DataDstPb extends DataDstImpl {
 
         DescriptorProtos.FileDescriptorProto fdp = pbs.files.getOrDefault(name, null);
         if (null == fdp) {
+            // Inner proto files
+            String standardName = name.replace('\\', '/');
+            for (Descriptors.FileDescriptor innerFileDesc : inner_file_descs) {
+                if (standardName.equalsIgnoreCase(innerFileDesc.getName())) {
+                    return innerFileDesc;
+                }
+            }
+
+            if (standardName.equalsIgnoreCase("pb_header.proto")) {
+                return PbHeaderV3.getDescriptor();
+            }
+
             if (allow_unknown_dependencies) {
                 ProgramOptions.getLoger().warn("protocol file descriptor %s not found.", name);
             } else {
@@ -528,7 +544,8 @@ public class DataDstPb extends DataDstImpl {
 
     @Override
     public boolean init() {
-        if (false == load_pb_file(cachePbs, ProgramOptions.getInstance().protocolFile, true, false, null)) {
+        if (false == load_pb_file(cachePbs, ProgramOptions.getInstance().protocolFile, true,
+                ProgramOptions.getInstance().protocolIgnoreUnknownDependency, null)) {
             return false;
         }
 

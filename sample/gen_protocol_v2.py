@@ -11,12 +11,11 @@ from subprocess import Popen
 work_dir = os.getcwd()
 script_dir = os.path.dirname(os.path.realpath(__file__))
 os.chdir(script_dir)
-os.chdir(os.path.join('..'))
-project_dir = os.getcwd()
-proto_dir = os.path.join(script_dir, 'proto_v2')
+project_dir = '../'
+proto_dir = './proto_v2'
 
-header_dir = os.path.realpath(os.path.join(project_dir, 'header'))
-tools_dir = os.path.realpath(os.path.join(project_dir, 'tools'))
+header_dir = os.path.join(project_dir, 'header')
+tools_dir = os.path.join(project_dir, 'tools')
 
 sys.path.append(tools_dir)
 from find_protoc import find_protoc
@@ -28,8 +27,8 @@ common_args = [
 ]
 
 proto_file = glob.glob(os.path.join(proto_dir, '*.proto'))
-proto_file.append(os.path.join(header_dir, 'extensions', 'google', 'protobuf', 'descriptor.proto'))
-proto_file.extend(glob.glob(os.path.join(header_dir, 'extensions', 'v2', '*.proto')))
+# proto_file.append(os.path.join(header_dir, 'extensions', 'google', 'protobuf', 'descriptor.proto'))
+# proto_file.extend(glob.glob(os.path.join(header_dir, 'extensions', 'v2', '*.proto')))
 
 os.chdir(work_dir)
 

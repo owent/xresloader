@@ -5,7 +5,7 @@ return {
         count = 7,
         data_ver = "1.0.0.0",
         hash_code = "no hash code",
-        xres_ver = "2.8.0",
+        xres_ver = "2.8.1",
     },
     [2] = "role_cfg",
     role_cfg = {

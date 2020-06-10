@@ -31,13 +31,14 @@ public class ProgramOptions {
     private static ProgramOptions instance = null;
     private static Options options = null;
     private static String version = null;
-    private static String dataVersion = null;
+    private static String defaultDataVersion = null;
     private static Properties properties = null;
 
     public FileType outType;
 
     public Protocol protocol;
     public String protocolFile = "";
+    public boolean protocolIgnoreUnknownDependency = false;
     public String outputDirectory = ".";
     public String dataSourceDirectory = ".";
     public String dataSourceFile = "";
@@ -51,6 +52,7 @@ public class ProgramOptions {
     public int prettyIndent = 0;
     public boolean enableStdin = false;
 
+    private static String dataVersion = null;
     public String protoDumpFile = "";
     public ProtoDumpType protoDumpType = ProtoDumpType.NONE;
     public boolean luaGlobal = false;
@@ -83,6 +85,7 @@ public class ProgramOptions {
         outType = FileType.BIN;
         protocol = Protocol.PROTOBUF;
         protocolFile = "";
+        protocolIgnoreUnknownDependency = false;
         outputDirectory = "";
         dataSourceDirectory = "";
         dataSourceFile = "";
@@ -95,6 +98,7 @@ public class ProgramOptions {
         enbleEmptyList = false;
         prettyIndent = 0;
         enableStdin = false;
+        dataVersion = null;
         protoDumpFile = "";
         protoDumpType = ProtoDumpType.NONE;
         luaGlobal = false;
@@ -122,6 +126,9 @@ public class ProgramOptions {
 
         options.addOption(Option.builder("f").longOpt("proto-file").desc("protocol description file").hasArg()
                 .argName("FILE NAME").build());
+
+        options.addOption(null, "ignore-unknown-dependency", false,
+                "ignore unknown dependency when initialize protocol files.");
 
         options.addOption(Option.builder("o").longOpt("output-dir").desc("output directory").hasArg()
                 .argName("DIRECTORY PATH").build());
@@ -222,17 +229,21 @@ public class ProgramOptions {
             return 1;
         }
 
+        if (cmd.hasOption("stdin")) {
+            enableStdin = true;
+        }
+
         if (cmd.hasOption('a')) {
-            dataVersion = cmd.getOptionValue('a', "");
+            if (enableStdin) {
+                defaultDataVersion = cmd.getOptionValue('a', "");
+            } else {
+                dataVersion = cmd.getOptionValue('a', "");
+            }
         }
 
         if (cmd.hasOption('v')) {
             System.out.println(getVersion());
             return 1;
-        }
-
-        if (cmd.hasOption("stdin")) {
-            enableStdin = true;
         }
 
         if (cmd.hasOption("disable-empty-list")) {
@@ -286,6 +297,7 @@ public class ProgramOptions {
         if (protocolFile.isEmpty()) {
             return 1;
         }
+        protocolIgnoreUnknownDependency = cmd.hasOption("ignore-unknown-dependency");
 
         luaGlobal = cmd.hasOption("lua-global");
         luaModule = cmd.getOptionValue("lua-module", null);
@@ -435,10 +447,17 @@ public class ProgramOptions {
 
     public String getDataVersion() {
         if (dataVersion == null || dataVersion.isEmpty()) {
-            dataVersion = String.format("%s.%s", getVersion(),
-                    new SimpleDateFormat("yyyyMMddHHmmss").format(Calendar.getInstance().getTime()));
+            dataVersion = getDefaultDataVersion();
         }
         return dataVersion;
+    }
+
+    public String getDefaultDataVersion() {
+        if (defaultDataVersion == null || defaultDataVersion.isEmpty()) {
+            defaultDataVersion = String.format("%s.%s", getVersion(),
+                    new SimpleDateFormat("yyyyMMddHHmmss").format(Calendar.getInstance().getTime()));
+        }
+        return defaultDataVersion;
     }
 
     public enum FileType {

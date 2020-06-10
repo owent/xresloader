@@ -27,9 +27,9 @@ pb_out_file = os.path.join(proto_dir, 'pb_header.pb')
 from find_protoc import find_protoc
 
 common_args = [
-    "-I", os.path.join(proto_dir),
     "-I", os.path.join(proto_dir, 'extensions', 'v2'),
-    "-I", os.path.join(proto_dir, 'extensions')
+    "-I", os.path.join(proto_dir, 'extensions'),
+    "-I", os.path.join(proto_dir)
 ]
 
 # java 文件为非LITE版本
@@ -54,7 +54,6 @@ print('[PROCESS] generate proto pb file ... ')
 exec_args = [find_protoc(), '-o', pb_out_file]
 exec_args.extend(common_args)
 exec_args.extend([proto_file])
-exec_args.extend(extension_proto_file)
 Popen(
     exec_args,
     shell=False).wait()

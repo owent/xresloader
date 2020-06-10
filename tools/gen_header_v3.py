@@ -27,9 +27,9 @@ pb_out_file = os.path.join(proto_dir, 'pb_header_v3.pb')
 from find_protoc import find_protoc
 
 common_args = [
-    "-I", os.path.join(proto_dir),
     "-I", os.path.join(proto_dir, 'extensions', 'v3'),
-    "-I", os.path.join(proto_dir, 'extensions')
+    "-I", os.path.join(proto_dir, 'extensions'),
+    "-I", os.path.join(proto_dir)
 ]
 
 # java 文件为非LITE版本
@@ -40,6 +40,7 @@ Popen(
         '--java_out', java_out_dir,
         proto_file, *extension_proto_file
     ],
+    cwd=os.path.join(proto_dir, 'extensions'),
     shell=False).wait()
 print('[PROCESS] generate java source done.')
 

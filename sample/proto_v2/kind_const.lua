@@ -41,12 +41,6 @@ local const_res = {
     EN_GCC_PERCENT_BASE = 10000,
     EN_GCC_RESOURCE_MAX_LIMIT = 9999999,
   },
-  org = {
-    xresloader = {
-      ue = {
-      },
-    },
-  },
 }
 
 

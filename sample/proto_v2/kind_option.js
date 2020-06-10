@@ -263,28 +263,6 @@ exports.files = [
     name : "kind.proto",
     package : "",
     path : "kind.proto"
-  },
-  {
-    name : "xresloader.proto",
-    options : {
-      optimize_for : {
-        name : "SPEED",
-        number : 1
-      }
-    },
-    package : "org.xresloader",
-    path : "xresloader.proto"
-  },
-  {
-    name : "xresloader_ue.proto",
-    options : {
-      optimize_for : {
-        name : "SPEED",
-        number : 1
-      }
-    },
-    package : "org.xresloader.ue",
-    path : "xresloader_ue.proto"
   }
 ];
 

@@ -213,23 +213,5 @@
       }
     },
     "package": ""
-  },
-  {
-    "options": {"optimize_for": {
-      "name": "SPEED",
-      "number": 1
-    }},
-    "name": "xresloader.proto",
-    "path": "xresloader.proto",
-    "package": "org.xresloader"
-  },
-  {
-    "options": {"optimize_for": {
-      "name": "SPEED",
-      "number": 1
-    }},
-    "name": "xresloader_ue.proto",
-    "path": "xresloader_ue.proto",
-    "package": "org.xresloader.ue"
   }
 ]}

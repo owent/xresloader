@@ -42,18 +42,11 @@ local const_res = {
     EN_GCC_PERCENT_BASE = 10000,
     EN_GCC_RESOURCE_MAX_LIMIT = 9999999,
   },
-  org = {
-    xresloader = {
-      ue = {
-      },
-    },
-  },
 }
 
 
 game_const_config = const_res.game_const_config
 cost_type = const_res.cost_type
-org = const_res.org
 event_cfg = const_res.event_cfg
 event_reward_item = const_res.event_reward_item
 event_rule_item = const_res.event_rule_item

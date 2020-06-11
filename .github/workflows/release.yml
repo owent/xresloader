@@ -1,5 +1,5 @@
 # setup @see https://help.github.com/en/articles/workflow-syntax-for-github-actions
-# environment @see https://help.github.com/en/articles/software-in-virtual-environments-for-github-actions 
+# environment @see https://help.github.com/en/articles/software-in-virtual-environments-for-github-actions
 #                  https://help.github.com/en/articles/virtual-environments-for-github-actions
 # example     @see https://github.com/actions/toolkit/blob/master/.github/workflows/workflow.yml
 name: Release
@@ -7,7 +7,7 @@ name: Release
 on: # @see https://help.github.com/en/articles/events-that-trigger-workflows#webhook-events
   push:
     tags:
-      - '*'
+      - "*"
 
 jobs:
   build: # job id, can be any string
@@ -19,23 +19,25 @@ jobs:
         os: [ubuntu-latest]
     runs-on: ${{ matrix.os }}
     steps:
-    - name: Checkout
-      uses: actions/checkout@master # https://github.com/actions/actions
-    - name: Set up JDK 8.x
-      uses: actions/setup-java@master # https://github.com/actions/setup-java
-      with:
-        version: '8.x'  # The JDK version to make available on the path. Takes a whole or semver Jdk version, or 1.x syntax (e.g. 1.8 => Jdk 8.x)
-        architecture: x64 # (x64 or x86) - defaults to x64
-    - name: Build with Maven
-      run: |
-        mvn package --file pom.xml
-        if [ -e "target/protocols.zip" ]; then rm -f "target/protocols.zip"; fi
-        echo $(cd header && zip -r "../target/protocols.zip" extensions *.proto *.pb)
-    - uses: xresloader/upload-to-github-release@v1
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      with:
-        file: "target/protocols.zip;target/*.jar"
-        tags: true
-        draft: true
-        overwrite: true
+      - name: Checkout
+        uses: actions/checkout@master # https://github.com/actions/actions
+        with:
+          lfs: false
+      - name: Set up JDK 8.x
+        uses: actions/setup-java@master # https://github.com/actions/setup-java
+        with:
+          version: "8.x" # The JDK version to make available on the path. Takes a whole or semver Jdk version, or 1.x syntax (e.g. 1.8 => Jdk 8.x)
+          architecture: x64 # (x64 or x86) - defaults to x64
+      - name: Build with Maven
+        run: |
+          mvn package --file pom.xml
+          if [ -e "target/protocols.zip" ]; then rm -f "target/protocols.zip"; fi
+          echo $(cd header && zip -r "../target/protocols.zip" extensions *.proto *.pb)
+      - uses: xresloader/upload-to-github-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          file: "target/protocols.zip;target/*.jar"
+          tags: true
+          draft: true
+          overwrite: true

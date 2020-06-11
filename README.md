@@ -1,12 +1,9 @@
 xresloader
 ==========
 
-| 构建环境     | Linux (OpenJDK 8)                                                                                                          |
-| ------------ | ----------------------------------------------------------------------------------------------------------------------------- |
-| 当前构建状态 | [![Build Status](https://travis-ci.org/xresloader/xresloader.svg?branch=master)](https://travis-ci.org/xresloader/xresloader) |
-
-[![GitHub release (latest by date)](https://img.shields.io/github/v/release/xresloader/xresloader)](https://github.com/xresloader/xresloader/releases)
 [![GitHub Actions status](https://github.com/xresloader/xresloader/workflows/Master%20Building/badge.svg)](https://github.com/xresloader/xresloader/actions)
+[![Release](https://github.com/xresloader/xresloader/workflows/Release/badge.svg)](https://github.com/xresloader/xresloader/actions?query=workflow%3ARelease)
+[![GitHub release (latest by date)](https://img.shields.io/github/v/release/xresloader/xresloader)](https://github.com/xresloader/xresloader/releases)
 
 ![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/xresloader/xresloader)
 ![GitHub repo size](https://img.shields.io/github/repo-size/xresloader/xresloader)

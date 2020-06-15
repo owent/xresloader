@@ -13,7 +13,7 @@ import org.json.JSONObject;
 import org.xresloader.core.ProgramOptions;
 import org.xresloader.core.data.dst.DataDstWriterNode.DataDstChildrenNode;
 import org.xresloader.core.data.dst.DataDstWriterNode.DataDstFieldDescriptor;
-import org.xresloader.core.data.dst.DataDstWriterNode.DataDstMessageDescriptor;
+import org.xresloader.core.data.dst.DataDstWriterNode.DataDstTypeDescriptor;
 import org.xresloader.core.data.dst.DataDstWriterNode.DataDstOneofDescriptor;
 import org.xresloader.core.data.dst.DataDstWriterNode.JAVA_TYPE;
 import org.xresloader.core.data.err.ConvException;

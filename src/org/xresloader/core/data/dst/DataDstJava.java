@@ -105,6 +105,7 @@ public abstract class DataDstJava extends DataDstImpl {
                         dumpDefault(sub_msg, sub_item.getValue());
                     }
                 }
+                val = sub_msg;
                 break;
             }
             default:
@@ -117,7 +118,18 @@ public abstract class DataDstJava extends DataDstImpl {
             return;
         }
 
-        if (field.isList()) {
+        if (field.isMap()) {
+            Object mapKey = ((HashMap<String, Object>) val).getOrDefault("key", null);
+            Object mapValue = ((HashMap<String, Object>) val).getOrDefault("value", null);
+            if (mapKey != null && mapValue != null) {
+                HashMap<Object, Object> old = (HashMap<Object, Object>) builder.getOrDefault(field.getName(), null);
+                if (null == old) {
+                    old = new HashMap<Object, Object>();
+                    builder.put(field.getName(), old);
+                }
+                old.put(mapKey, mapValue);
+            }
+        } else if (field.isList()) {
             ArrayList<Object> old = (ArrayList<Object>) builder.getOrDefault(field.getName(), null);
             if (null == old) {
                 old = new ArrayList<Object>();
@@ -257,7 +269,19 @@ public abstract class DataDstJava extends DataDstImpl {
             return false;
         }
 
-        if (as_child.innerFieldDesc.isList()) {
+        if (as_child.innerFieldDesc.isMap()) {
+            Object mapKey = ((HashMap<String, Object>) val).getOrDefault("key", null);
+            Object mapValue = ((HashMap<String, Object>) val).getOrDefault("value", null);
+            if (mapKey != null && mapValue != null) {
+                HashMap<Object, Object> old = (HashMap<Object, Object>) builder
+                        .getOrDefault(as_child.innerFieldDesc.getName(), null);
+                if (null == old) {
+                    old = new HashMap<Object, Object>();
+                    builder.put(as_child.innerFieldDesc.getName(), old);
+                }
+                old.put(mapKey, mapValue);
+            }
+        } else if (as_child.innerFieldDesc.isList()) {
             ArrayList<Object> old = (ArrayList<Object>) builder.getOrDefault(as_child.innerFieldDesc.getName(), null);
             if (null == old) {
                 old = new ArrayList<Object>();
@@ -433,17 +457,35 @@ public abstract class DataDstJava extends DataDstImpl {
                 }
 
                 case MESSAGE: {
-                    ArrayList<Object> tmp = new ArrayList<Object>();
-                    tmp.ensureCapacity(groups.length);
-                    for (String v : groups) {
-                        String[] subGroups = splitPlainGroups(v, getPlainMessageSeparator(field));
-                        HashMap<String, Object> msg = parsePlainDataMessage(subGroups, ident, field);
-                        if (msg != null) {
-                            tmp.add(msg);
+                    if (field.isMap()) {
+                        HashMap<Object, Object> tmp = new HashMap<Object, Object>();
+                        for (String v : groups) {
+                            String[] subGroups = splitPlainGroups(v, getPlainMessageSeparator(field));
+                            HashMap<String, Object> msg = parsePlainDataMessage(subGroups, ident, field);
+                            if (msg != null) {
+                                Object mapKey = msg.getOrDefault("key", null);
+                                Object mapValue = msg.getOrDefault("value", null);
+                                if (mapKey != null && mapValue != null) {
+                                    tmp.put(mapKey, mapValue);
+                                }
+                            }
                         }
-                    }
-                    if (!tmp.isEmpty()) {
-                        val = tmp;
+                        if (!tmp.isEmpty()) {
+                            val = tmp;
+                        }
+                    } else {
+                        ArrayList<Object> tmp = new ArrayList<Object>();
+                        tmp.ensureCapacity(groups.length);
+                        for (String v : groups) {
+                            String[] subGroups = splitPlainGroups(v, getPlainMessageSeparator(field));
+                            HashMap<String, Object> msg = parsePlainDataMessage(subGroups, ident, field);
+                            if (msg != null) {
+                                tmp.add(msg);
+                            }
+                        }
+                        if (!tmp.isEmpty()) {
+                            val = tmp;
+                        }
                     }
                     break;
                 }

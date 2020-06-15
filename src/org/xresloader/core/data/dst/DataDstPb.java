@@ -14,22 +14,32 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedList;
-import java.util.List;
 import java.util.Map;
 import com.google.protobuf.ByteString;
 import com.google.protobuf.DescriptorProtos;
+import com.google.protobuf.DurationProto;
+import com.google.protobuf.TimestampProto;
+import com.google.protobuf.AnyProto;
+import com.google.protobuf.ApiProto;
+import com.google.protobuf.EmptyProto;
+import com.google.protobuf.FieldMaskProto;
+import com.google.protobuf.StructProto;
+import com.google.protobuf.TypeProto;
+import com.google.protobuf.WrappersProto;
+import com.google.protobuf.SourceContextProto;
 import com.google.protobuf.Descriptors;
+import com.google.protobuf.Timestamp;
+import com.google.protobuf.Duration;
 import com.google.protobuf.Descriptors.FieldDescriptor.JavaType;
 import com.google.protobuf.DynamicMessage;
 import com.google.protobuf.UninitializedMessageException;
 import org.apache.commons.codec.binary.Hex;
-import org.apache.poi.util.NullLogger;
 import org.xresloader.Xresloader;
 import org.xresloader.core.ProgramOptions;
 import org.xresloader.core.data.dst.DataDstWriterNode.DataDstChildrenNode;
 import org.xresloader.core.data.dst.DataDstWriterNode.DataDstFieldDescriptor;
 import org.xresloader.core.data.dst.DataDstWriterNode.DataDstOneofDescriptor;
-import org.xresloader.core.data.dst.DataDstWriterNode.DataDstMessageDescriptor;
+import org.xresloader.core.data.dst.DataDstWriterNode.DataDstTypeDescriptor;
 import org.xresloader.core.data.err.ConvException;
 import org.xresloader.core.data.src.DataContainer;
 import org.xresloader.core.data.src.DataSrcImpl;
@@ -80,7 +90,7 @@ public class DataDstPb extends DataDstImpl {
         HashMap<String, DataVerifyImpl> identifiers = new HashMap<String, DataVerifyImpl>();
 
         // ========================== 内建AST类型缓存 ==========================
-        HashMap<String, DataDstMessageDescriptor> dataDstDescs = new HashMap<String, DataDstMessageDescriptor>();
+        HashMap<String, DataDstTypeDescriptor> dataDstDescs = new HashMap<String, DataDstTypeDescriptor>();
 
         public PbInfoSet() {
         }
@@ -89,9 +99,7 @@ public class DataDstPb extends DataDstImpl {
     private Descriptors.Descriptor currentMsgDesc = null;
     static private com.google.protobuf.ExtensionRegistryLite pb_extensions = null;
     static private PbInfoSet cachePbs = new PbInfoSet();
-    static private Descriptors.FileDescriptor[] inner_file_descs = new Descriptors.FileDescriptor[] {
-            DescriptorProtos.getDescriptor(), PbHeaderV3.getDescriptor(), Xresloader.getDescriptor(),
-            XresloaderUe.getDescriptor() };
+    static private HashMap<String, Descriptors.FileDescriptor> inner_file_descs = null;
 
     static <T> void append_alias_list(String short_name, String full_name, HashMap<String, PbAliasNode<T>> hashmap,
             T ele) {
@@ -250,6 +258,26 @@ public class DataDstPb extends DataDstImpl {
         return cache_set.getOrDefault(val, null);
     }
 
+    static Descriptors.FileDescriptor try_get_inner_deile_desc(String name) {
+        if (inner_file_descs != null) {
+            return inner_file_descs.getOrDefault(name.replace('\\', '/').toLowerCase(), null);
+        }
+
+        Descriptors.FileDescriptor[] inner_descs = new Descriptors.FileDescriptor[] { Xresloader.getDescriptor(),
+                XresloaderUe.getDescriptor(), PbHeaderV3.getDescriptor(), DescriptorProtos.getDescriptor(),
+                DurationProto.getDescriptor(), TimestampProto.getDescriptor(), AnyProto.getDescriptor(),
+                ApiProto.getDescriptor(), EmptyProto.getDescriptor(), FieldMaskProto.getDescriptor(),
+                StructProto.getDescriptor(), TypeProto.getDescriptor(), WrappersProto.getDescriptor(),
+                SourceContextProto.getDescriptor(), };
+
+        inner_file_descs = new HashMap<String, Descriptors.FileDescriptor>();
+        for (Descriptors.FileDescriptor innerFileDesc : inner_descs) {
+            inner_file_descs.put(innerFileDesc.getName().replace('\\', '/').toLowerCase(), innerFileDesc);
+        }
+
+        return inner_file_descs.getOrDefault(name.toLowerCase(), null);
+    }
+
     static Descriptors.FileDescriptor init_pb_files(PbInfoSet pbs, String name, boolean allow_unknown_dependencies) {
         Descriptors.FileDescriptor ret = pbs.file_descs.getOrDefault(name, null);
         if (null != ret) {
@@ -264,10 +292,9 @@ public class DataDstPb extends DataDstImpl {
         if (null == fdp) {
             // Inner proto files
             String standardName = name.replace('\\', '/');
-            for (Descriptors.FileDescriptor innerFileDesc : inner_file_descs) {
-                if (standardName.equalsIgnoreCase(innerFileDesc.getName())) {
-                    return innerFileDesc;
-                }
+            Descriptors.FileDescriptor innerFileDesc = try_get_inner_deile_desc(standardName);
+            if (null != innerFileDesc) {
+                return innerFileDesc;
             }
 
             if (standardName.equalsIgnoreCase("pb_header.proto")) {
@@ -582,7 +609,7 @@ public class DataDstPb extends DataDstImpl {
     }
 
     static private void buildDataDstDescriptorMessage(PbInfoSet pbs, Descriptors.Descriptor pbDesc,
-            DataDstMessageDescriptor innerDesc) {
+            DataDstTypeDescriptor innerDesc) {
         if (null == pbDesc || null == innerDesc) {
             return;
         }
@@ -626,7 +653,7 @@ public class DataDstPb extends DataDstImpl {
         }
     }
 
-    static private DataDstMessageDescriptor mutableDataDstDescriptor(PbInfoSet pbs, Descriptors.Descriptor pbDesc,
+    static private DataDstTypeDescriptor mutableDataDstDescriptor(PbInfoSet pbs, Descriptors.Descriptor pbDesc,
             DataDstWriterNode.JAVA_TYPE type) {
         String key = null;
         if (null == pbDesc) {
@@ -634,7 +661,7 @@ public class DataDstPb extends DataDstImpl {
         } else {
             key = pbDesc.getFullName();
         }
-        DataDstMessageDescriptor ret = pbs.dataDstDescs.getOrDefault(key, null);
+        DataDstTypeDescriptor ret = pbs.dataDstDescs.getOrDefault(key, null);
         if (ret != null) {
             return ret;
         }
@@ -642,7 +669,15 @@ public class DataDstPb extends DataDstImpl {
         if (pbDesc == null) {
             ret = DataDstWriterNode.getDefaultMessageDescriptor(type);
         } else {
-            ret = new DataDstMessageDescriptor(type, pbDesc.getFile().getPackage(), pbDesc.getName(), pbDesc);
+            DataDstWriterNode.SPECIAL_MESSAGE_TYPE smt = DataDstWriterNode.SPECIAL_MESSAGE_TYPE.NONE;
+            if (pbDesc.getOptions().getMapEntry()) {
+                smt = DataDstWriterNode.SPECIAL_MESSAGE_TYPE.MAP;
+            } else if (pbDesc.getFullName() == Timestamp.getDescriptor().getFullName()) {
+                smt = DataDstWriterNode.SPECIAL_MESSAGE_TYPE.TIMEPOINT;
+            } else if (pbDesc.getFullName() == Duration.getDescriptor().getFullName()) {
+                smt = DataDstWriterNode.SPECIAL_MESSAGE_TYPE.DURATION;
+            }
+            ret = new DataDstTypeDescriptor(type, pbDesc.getFile().getPackage(), pbDesc.getName(), pbDesc, smt);
         }
         pbs.dataDstDescs.put(key, ret);
 

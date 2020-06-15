@@ -17,7 +17,7 @@ import org.xresloader.core.data.dst.DataDstWriterNode.CHILD_NODE_TYPE;
 import org.xresloader.core.data.dst.DataDstWriterNode.DataDstChildrenNode;
 import org.xresloader.core.data.dst.DataDstWriterNode.DataDstFieldDescriptor;
 import org.xresloader.core.data.dst.DataDstWriterNode.DataDstFieldExt;
-import org.xresloader.core.data.dst.DataDstWriterNode.DataDstMessageDescriptor;
+import org.xresloader.core.data.dst.DataDstWriterNode.DataDstTypeDescriptor;
 import org.xresloader.core.data.dst.DataDstWriterNode.DataDstMessageExt;
 import org.xresloader.core.data.dst.DataDstWriterNode.DataDstOneofDescriptor;
 import org.xresloader.core.data.dst.DataDstWriterNode.FIELD_LABEL_TYPE;
@@ -257,7 +257,7 @@ public abstract class DataDstUEBase extends DataDstImpl {
             this.referOneofNode = n;
         }
 
-        public DataDstMessageDescriptor getTypeDescriptor() {
+        public DataDstTypeDescriptor getTypeDescriptor() {
             if (referNode != null) {
                 return referNode.getTypeDescriptor();
             }
@@ -285,7 +285,7 @@ public abstract class DataDstUEBase extends DataDstImpl {
         }
 
         public JAVA_TYPE getJavaType() {
-            DataDstMessageDescriptor typeDesc = getTypeDescriptor();
+            DataDstTypeDescriptor typeDesc = getTypeDescriptor();
             if (typeDesc == null) {
                 return JAVA_TYPE.STRING;
             }
@@ -296,7 +296,7 @@ public abstract class DataDstUEBase extends DataDstImpl {
         static private DataDstMessageExt emptyMsgExt = new DataDstMessageExt();
 
         public DataDstMessageExt getMessageExtension() {
-            DataDstMessageDescriptor rawDesc = getTypeDescriptor();
+            DataDstTypeDescriptor rawDesc = getTypeDescriptor();
             if (rawDesc == null) {
                 return emptyMsgExt;
             }
@@ -639,7 +639,7 @@ public abstract class DataDstUEBase extends DataDstImpl {
         }
 
         // 生成描述集,CSV必须固定化描述集，可能需要把字段平铺开来。
-        DataDstMessageDescriptor msgDesc = codeInfo.writerNodeWrapper.getTypeDescriptor();
+        DataDstTypeDescriptor msgDesc = codeInfo.writerNodeWrapper.getTypeDescriptor();
         LinkedList<DataDstWriterNodeWrapper> expandedDesc = buildWriterNodeWraper(codeInfo.writerNodeWrapper, msgDesc);
 
         if (expandedDesc == null || expandedDesc.isEmpty()) {
@@ -1063,7 +1063,7 @@ public abstract class DataDstUEBase extends DataDstImpl {
     }
 
     protected LinkedList<DataDstWriterNodeWrapper> buildWriterNodeWraper(DataDstWriterNodeWrapper root,
-            DataDstMessageDescriptor messageDesc) {
+            DataDstTypeDescriptor messageDesc) {
         DataDstWriterNode referWriterNode = root.getReferNode();
 
         // 只需要build一次
@@ -1563,7 +1563,7 @@ public abstract class DataDstUEBase extends DataDstImpl {
             varName = getIdentName(fieldDesc.getName());
         }
 
-        DataDstMessageDescriptor typeDesc = fieldDesc.getTypeDescriptor();
+        DataDstTypeDescriptor typeDesc = fieldDesc.getTypeDescriptor();
 
         fout.write(dumpString("\r\n"));
         DataDstWriterNode.JAVA_TYPE descType = DataDstWriterNode.JAVA_TYPE.STRING;
@@ -1666,7 +1666,7 @@ public abstract class DataDstUEBase extends DataDstImpl {
         return getUETypeName(desc.getTypeDescriptor());
     }
 
-    static private final String getUETypeName(DataDstMessageDescriptor desc) {
+    static private final String getUETypeName(DataDstTypeDescriptor desc) {
         if (null == desc) {
             return "FString";
         }
@@ -1828,8 +1828,7 @@ public abstract class DataDstUEBase extends DataDstImpl {
                 FIELD_LABEL_TYPE.OPTIONAL, null);
     }
 
-    static DataDstFieldDescriptor createVirtualFieldDescriptor(String name, int index,
-            DataDstMessageDescriptor msgDesc) {
+    static DataDstFieldDescriptor createVirtualFieldDescriptor(String name, int index, DataDstTypeDescriptor msgDesc) {
         return new DataDstFieldDescriptor(msgDesc, index, name, FIELD_LABEL_TYPE.OPTIONAL, null);
     }
 

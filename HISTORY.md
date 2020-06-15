@@ -4,9 +4,10 @@
 2.8.1
 ------
 
-1. 允许输入的pb文件不用打包插件的proto( ```xresloader.proto``` , ```xresloader_ue.proto``` )和protobuf官方的 ```descriptor.proto```
-2. 增加 ```--ignore-unknown-dependency``` 选项用于忽略未知的依赖项
-3. 优化版本号选项 ```--data-vserion``` ，在批处理模式设置位默认版本号，对所有批处理项生效，在普通模式设置版本号，仅对当前转表项生效
+1. 允许输入的pb文件不用打包插件的proto( ```xresloader.proto``` , ```xresloader_ue.proto``` )和protobuf官方的proto文件(如: ```google/protobuf/duration.proto```, ```google/protobuf/descriptor.proto``` 等)
+2. 增加 ```--ignore-unknown-dependency``` 选项用于忽略未知的输入协议的依赖项
+3. 优化版本号选项 ```--data-version``` ，在批处理模式设置位默认版本号，对所有批处理项生效，在普通模式设置版本号，仅对当前转表项生效
+4. 重构，重命名 ```DataDstMessageDescriptor``` -> ```DataDstTypeDescriptor``` 。
 
 2.8.0
 ------

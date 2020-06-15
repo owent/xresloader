@@ -14,7 +14,7 @@ import org.xresloader.core.ProgramOptions;
 import org.xresloader.core.data.dst.DataDstWriterNode.CHILD_NODE_TYPE;
 import org.xresloader.core.data.dst.DataDstWriterNode.DataDstChildrenNode;
 import org.xresloader.core.data.dst.DataDstWriterNode.DataDstFieldDescriptor;
-import org.xresloader.core.data.dst.DataDstWriterNode.DataDstMessageDescriptor;
+import org.xresloader.core.data.dst.DataDstWriterNode.DataDstTypeDescriptor;
 import org.xresloader.core.data.dst.DataDstWriterNode.DataDstOneofDescriptor;
 import org.xresloader.core.data.dst.DataDstWriterNode.JAVA_TYPE;
 import org.xresloader.core.data.err.ConvException;
@@ -1032,7 +1032,7 @@ public class DataDstUECsv extends DataDstUEBase {
         return true;
     }
 
-    protected boolean pickValueMessageCsvDefaultImpl(StringBuffer sb, DataDstMessageDescriptor fd, boolean fillEmpty) {
+    protected boolean pickValueMessageCsvDefaultImpl(StringBuffer sb, DataDstTypeDescriptor fd, boolean fillEmpty) {
         if (fd == null) {
             return false;
         }

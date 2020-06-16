@@ -1642,7 +1642,23 @@ public abstract class DataDstUEBase extends DataDstImpl {
             }
             fout.write(dumpString(getHeaderFieldUProperty()));
 
-            if (fieldDesc.isList() && isRecursiveEnabled()) {
+            if (fieldDesc.isMap() && isRecursiveEnabled() && typeDesc.getSortedFields().size() >= 2) {
+                String keyUeTypeName = getUETypeName(typeDesc.getSortedFields().get(0).getTypeDescriptor());
+                String ueTypeNameIdent = fieldDesc.mutableExtension().mutableUE().ueTypeName;
+                String valueUeTypeName;
+                if (ueTypeNameIdent == null || ueTypeNameIdent.isEmpty()) {
+                    valueUeTypeName = getUETypeName(typeDesc);
+                } else {
+                    if (null != fieldDesc && fieldDesc.mutableExtension().mutableUE().ueTypeIsClass) {
+                        valueUeTypeName = String.format("TSoftClassPtr< %s >", ueTypeNameIdent);
+                    } else {
+                        valueUeTypeName = String.format("TSoftObjectPtr< %s >", ueTypeNameIdent);
+                    }
+                }
+
+                fout.write(dumpString(
+                        String.format("    TMap< %s, %s > %s;\r\n", keyUeTypeName, valueUeTypeName, varName)));
+            } else if (fieldDesc.isList() && isRecursiveEnabled()) {
                 fout.write(dumpString(String.format("    TArray< %s > %s;\r\n", ueTypeName, varName)));
             } else {
                 fout.write(dumpString(String.format("    %s %s;\r\n", ueTypeName, varName)));
@@ -1740,7 +1756,10 @@ public abstract class DataDstUEBase extends DataDstImpl {
     private final void writeUETypeSetDefaultCode(FileOutputStream sourceFs, String prefix, String varName,
             DataDstFieldDescriptor field) throws IOException {
         // if (wrapper.desc != null && wrapper.desc)
-        if (field.isList() && isRecursiveEnabled()) {
+        if (field.isMap() && isRecursiveEnabled()) {
+            sourceFs.write(dumpString(String.format("%s.%s.Reset();\r\n", prefix, varName)));
+            return;
+        } else if (field.isList() && isRecursiveEnabled()) {
             sourceFs.write(dumpString(String.format("%s.%s.Reset(0);\r\n", prefix, varName)));
             return;
         }

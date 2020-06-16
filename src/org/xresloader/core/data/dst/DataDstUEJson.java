@@ -7,13 +7,10 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.xresloader.core.ProgramOptions;
-import org.xresloader.core.data.dst.DataDstWriterNode.DataDstChildrenNode;
 import org.xresloader.core.data.dst.DataDstWriterNode.DataDstFieldDescriptor;
-import org.xresloader.core.data.dst.DataDstWriterNode.DataDstTypeDescriptor;
 import org.xresloader.core.data.dst.DataDstWriterNode.DataDstOneofDescriptor;
 import org.xresloader.core.data.dst.DataDstWriterNode.JAVA_TYPE;
 import org.xresloader.core.data.err.ConvException;
@@ -232,6 +229,7 @@ public class DataDstUEJson extends DataDstUEBase {
         return pickValueFieldJsonImpl(fieldSet);
     }
 
+    @SuppressWarnings("unchecked")
     protected Object pickValueFieldJsonImpl(ArrayList<DataDstWriterNodeWrapper> fieldSet) throws ConvException {
         DataDstWriterNode msgDesc = getFirstWriterNode(fieldSet);
         if (msgDesc == null) {
@@ -248,7 +246,21 @@ public class DataDstUEJson extends DataDstUEBase {
             return null;
         }
         if (msgDesc.getReferBrothers().mode == DataDstWriterNode.CHILD_NODE_TYPE.STANDARD) {
-            if (isRecursiveEnabled() && field.isList()) {
+            if (isRecursiveEnabled() && field.isMap()) {
+                JSONObject ret = new JSONObject();
+                for (int i = 0; i < fieldSet.size(); ++i) {
+                    Object obj = pickValueFieldJsonStandardImpl(fieldSet.get(i));
+                    if (obj != null && obj instanceof JSONObject) {
+                        Object mapKey = ((JSONObject) obj).opt("key");
+                        Object mapValue = ((JSONObject) obj).opt("value");
+
+                        if (mapKey != null && mapValue != null) {
+                            ret.put(mapKey.toString(), mapValue);
+                        }
+                    }
+                }
+                return ret;
+            } else if (isRecursiveEnabled() && field.isList()) {
                 JSONArray ret = new JSONArray();
                 for (int i = 0; i < fieldSet.size(); ++i) {
                     Object obj = pickValueFieldJsonStandardImpl(fieldSet.get(i));
@@ -556,15 +568,32 @@ public class DataDstUEJson extends DataDstUEBase {
                 }
 
                 case MESSAGE: {
-                    JSONArray tmp = new JSONArray();
-                    for (String v : groups) {
-                        String[] subGroups = splitPlainGroups(v, getPlainMessageSeparator(field));
-                        JSONObject msg = pickValueFieldJsonPlainField(subGroups, ident, field);
-                        if (msg != null) {
-                            tmp.put(msg);
+                    if (field.isMap()) {
+                        JSONObject tmp = new JSONObject();
+                        for (String v : groups) {
+                            String[] subGroups = splitPlainGroups(v, getPlainMessageSeparator(field));
+                            JSONObject msg = pickValueFieldJsonPlainField(subGroups, ident, field);
+                            if (msg != null) {
+                                Object mapKey = msg.opt("key");
+                                Object mapValue = msg.opt("value");
+
+                                if (mapKey != null && mapValue != null) {
+                                    tmp.put(mapKey.toString(), mapValue);
+                                }
+                            }
                         }
+                        ret = tmp;
+                    } else {
+                        JSONArray tmp = new JSONArray();
+                        for (String v : groups) {
+                            String[] subGroups = splitPlainGroups(v, getPlainMessageSeparator(field));
+                            JSONObject msg = pickValueFieldJsonPlainField(subGroups, ident, field);
+                            if (msg != null) {
+                                tmp.put(msg);
+                            }
+                        }
+                        ret = tmp;
                     }
-                    ret = tmp;
                     break;
                 }
 
@@ -720,7 +749,9 @@ public class DataDstUEJson extends DataDstUEBase {
     }
 
     protected Object pickValueFieldJsonDefaultImpl(DataDstFieldDescriptor fd) {
-        if (fd.isList()) {
+        if (fd.isMap()) {
+            return new HashMap<String, Object>();
+        } else if (fd.isList()) {
             return new JSONArray();
         }
 

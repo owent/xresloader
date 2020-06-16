@@ -327,7 +327,7 @@ public class DataDstUECsv extends DataDstUEBase {
                 StringBuffer fieldSB = new StringBuffer();
                 pickValueFieldCsvDefaultImpl(fieldSB, field, false);
                 String ret = fieldSB.toString();
-                // empty list to nothing
+                // empty list to nothing, empty map is just like empty list
                 if (field.isList() && ret.equalsIgnoreCase("()")) {
                     ret = "";
                 }
@@ -377,7 +377,7 @@ public class DataDstUECsv extends DataDstUEBase {
         pickValueFieldCsvImpl(fieldSB, fieldSet,
                 msgDesc.getReferBrothers().mode == DataDstWriterNode.CHILD_NODE_TYPE.PLAIN, true, fieldDataByOneof);
         String ret = fieldSB.toString();
-        // empty list to nothing
+        // empty list to nothing, empty map is just like empty list
         if (field != null && field.isList() && ret.equalsIgnoreCase("()")) {
             ret = "";
         }
@@ -1089,7 +1089,7 @@ public class DataDstUECsv extends DataDstUEBase {
 
                     sb.append(getIdentName(subField.getName()));
                     sb.append("=");
-                    if (subField.isList()) {
+                    if (subField.isList()) { // empty map is just like empty list
                         sb.append("()");
                     } else if (subField.getType() == JAVA_TYPE.STRING || subField.getType() == JAVA_TYPE.BYTES) {
                         sb.append("\"\"");
@@ -1110,7 +1110,7 @@ public class DataDstUECsv extends DataDstUEBase {
     }
 
     protected boolean pickValueFieldCsvDefaultImpl(StringBuffer sb, DataDstFieldDescriptor fd, boolean fillEmpty) {
-        if (fd.isList()) {
+        if (fd.isList()) { // empty map is just like empty list
             if (fillEmpty) {
                 sb.append("()");
                 return true;

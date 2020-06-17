@@ -518,8 +518,11 @@ public class DataDstUECsv extends DataDstUEBase {
                     }
                 }
 
-                fieldSB.append(varName);
-                fieldSB.append("=");
+                // Map不用输出Key=
+                if (false == (firstNode.getReferField() != null && firstNode.getReferField().isMap())) {
+                    fieldSB.append(varName);
+                    fieldSB.append("=");
+                }
 
                 pickValueFieldStandardCsvImpl(fieldSB, child, false, subFieldDataByOneof);
 
@@ -560,8 +563,11 @@ public class DataDstUECsv extends DataDstUEBase {
 
                     isFirst = tryWriteSeprator(fieldSB, isFirst);
 
-                    fieldSB.append(varName);
-                    fieldSB.append("=");
+                    // Map不用输出Key=
+                    if (false == subField.isMap()) {
+                        fieldSB.append(varName);
+                        fieldSB.append("=");
+                    }
 
                     if (val != null) {
                         fieldSB.append(val);
@@ -579,6 +585,7 @@ public class DataDstUECsv extends DataDstUEBase {
         if (val == null) {
             if (desc.getFieldDescriptor() != null && desc.getFieldDescriptor().isList()) {
                 // return pickValueFieldCsvDefaultImpl(fieldSB, desc.getFieldDescriptor());
+                // empty map is just like empty list
                 return false; // 这里是取值, List 不能追加 () 否则会出现异常数据
             } else {
                 return pickValueMessageCsvDefaultImpl(fieldSB, desc.getTypeDescriptor(), false == isTopLevel);
@@ -943,16 +950,17 @@ public class DataDstUECsv extends DataDstUEBase {
             if (i != 0) {
                 fieldSB.append(",");
             }
+            DataDstFieldDescriptor childField = children.get(i);
 
-            if (children.get(i).getReferOneof() != null) {
+            if (childField.getReferOneof() != null) {
                 if (dumpedOneof == null || fieldDataByOneof == null) {
                     throw new ConvException(String.format(
                             "Try to convert field %s of %s failed, found oneof descriptor but oneof set is not initialized.",
-                            children.get(i).getName(), field.getTypeDescriptor().getFullName()));
+                            childField.getName(), field.getTypeDescriptor().getFullName()));
                 }
 
-                String varName = getIdentName(children.get(i).getName());
-                String oneofVarName = getIdentName(children.get(i).getReferOneof().getName());
+                String varName = getIdentName(childField.getName());
+                String oneofVarName = getIdentName(childField.getReferOneof().getName());
                 if (dumpedOneof.contains(oneofVarName)) {
                     // already dumped with other field, dump default or cache
                     Object val = fieldDataByOneof.getOrDefault(varName, null);
@@ -963,7 +971,7 @@ public class DataDstUECsv extends DataDstUEBase {
                     } else {
                         fieldSB.append(varName);
                         fieldSB.append("=");
-                        pickValueFieldCsvDefaultImpl(fieldSB, children.get(i), true);
+                        pickValueFieldCsvDefaultImpl(fieldSB, childField, true);
                     }
 
                     continue;
@@ -972,28 +980,32 @@ public class DataDstUECsv extends DataDstUEBase {
                 if (usedInputIdx >= inputs.length) {
                     throw new ConvException(String.format(
                             "Try to convert %s of %s failed, field count not matched(expect %d, real %d).",
-                            children.get(i).getReferOneof().getName(), field.getTypeDescriptor().getFullName(),
+                            childField.getReferOneof().getName(), field.getTypeDescriptor().getFullName(),
                             usedInputIdx + 1, inputs.length));
                 }
 
                 dumpedOneof.add(oneofVarName);
                 fieldSB.append(oneofVarName);
                 fieldSB.append("=");
-                if (!pickValueFieldPlainCsvImpl(fieldSB, null, children.get(i).getReferOneof(), false,
-                        inputs[usedInputIdx], fieldDataByOneof, true)) {
-                    pickValueFieldCsvDefaultImpl(fieldSB, children.get(i).getReferOneof(), true);
+                if (!pickValueFieldPlainCsvImpl(fieldSB, null, childField.getReferOneof(), false, inputs[usedInputIdx],
+                        fieldDataByOneof, true)) {
+                    pickValueFieldCsvDefaultImpl(fieldSB, childField.getReferOneof(), true);
                 }
                 fieldSB.append(",");
 
                 Object val = fieldDataByOneof.getOrDefault(varName, null);
                 if (val != null) {
-                    fieldSB.append(varName);
-                    fieldSB.append("=");
+                    if (false == childField.isMap()) {
+                        fieldSB.append(varName);
+                        fieldSB.append("=");
+                    }
                     fieldSB.append(val);
                 } else {
-                    fieldSB.append(varName);
-                    fieldSB.append("=");
-                    pickValueFieldCsvDefaultImpl(fieldSB, children.get(i), true);
+                    if (false == childField.isMap()) {
+                        fieldSB.append(varName);
+                        fieldSB.append("=");
+                    }
+                    pickValueFieldCsvDefaultImpl(fieldSB, childField, true);
                 }
 
                 ++usedInputIdx;
@@ -1001,14 +1013,16 @@ public class DataDstUECsv extends DataDstUEBase {
                 if (usedInputIdx >= inputs.length) {
                     throw new ConvException(String.format(
                             "Try to convert %s of %s failed, field count not matched(expect %d, real %d).",
-                            children.get(i).getName(), field.getTypeDescriptor().getFullName(), usedInputIdx + 1,
+                            childField.getName(), field.getTypeDescriptor().getFullName(), usedInputIdx + 1,
                             inputs.length));
                 }
 
-                String varName = getIdentName(children.get(i).getName());
-                fieldSB.append(varName);
-                fieldSB.append("=");
-                pickValueFieldPlainCsvImpl(fieldSB, ident, children.get(i), false, inputs[usedInputIdx]);
+                if (false == childField.isMap()) {
+                    String varName = getIdentName(childField.getName());
+                    fieldSB.append(varName);
+                    fieldSB.append("=");
+                }
+                pickValueFieldPlainCsvImpl(fieldSB, ident, childField, false, inputs[usedInputIdx]);
 
                 ++usedInputIdx;
             }

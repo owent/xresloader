@@ -80,6 +80,7 @@ def main():
 
     header_pb_fds = pb2.FileDescriptorSet.FromString(open(options.header_pb_file, 'rb').read())
     real_pb_fds = pb2.FileDescriptorSet.FromString(open(left_args[0], 'rb').read())
+    protobuf_fds = pb2.FileDescriptorSet.FromString(open(os.path.join(script_dir, 'extensions.pb'), 'rb').read())
 
     header_message_desc = _message_factory.GetMessages([x for x in header_pb_fds.file])
     pb_fds_header_clazz = header_message_desc["org.xresloader.pb.xresloader_datablocks"]
@@ -89,7 +90,10 @@ def main():
     print('==================================================================')
     print(MessageToString(header_inst.header, as_utf8=True, as_one_line=options.as_one_line, use_short_repeated_primitives=True))
 
-    real_message_desc = _message_factory.GetMessages([x for x in real_pb_fds.file])
+    real_file_descs = [x for x in real_pb_fds.file]
+    real_file_descs.extend([x for x in header_pb_fds.file])
+    real_file_descs.extend([x for x in protobuf_fds.file])
+    real_message_desc = _message_factory.GetMessages(real_file_descs)
     if header_inst.data_message_type not in real_message_desc:
         print('------------------------------------------------------------------')
         print('data_message_type {0} not found in {1}'.format(header_inst.data_message_type, open(left_args[0])))

@@ -37,7 +37,7 @@ public final class XresloaderUe {
   public static final int UE_TYPE_NAME_FIELD_NUMBER = 1102;
   /**
    * <pre>
-   * UE内部类型(比如: TSoftObjectPtr&lt;UTexture&gt;)
+   * UE内部类型(比如: UTexture, 会生成字段类型为 TSoftObjectPtr&lt;UTexture&gt;)
    * </pre>
    *
    * <code>extend .google.protobuf.FieldOptions { ... }</code>
@@ -52,7 +52,7 @@ public final class XresloaderUe {
   public static final int UE_TYPE_IS_CLASS_FIELD_NUMBER = 1103;
   /**
    * <pre>
-   * UE内部类型是否是Class(如果为true，会生成: TSoftClassPtr&lt;T&gt; 而不是 TSoftObjectPtr&lt;T&gt;)
+   *   特殊的，当字段类型是Map时，这个插件仅影响Value类型
    * </pre>
    *
    * <code>extend .google.protobuf.FieldOptions { ... }</code>

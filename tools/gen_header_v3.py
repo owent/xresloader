@@ -54,3 +54,16 @@ Popen(
     ],
     shell=False).wait()
 print('[PROCESS] generate proto pb file done.')
+
+# pb 文件为LITE版本
+print('[PROCESS] generate proto pb file ... ')
+Popen(
+    [
+        find_protoc(),
+        "-I", os.path.join(proto_dir, 'extensions', 'v3'),
+        "-I", os.path.join(proto_dir, 'extensions'), 
+        '-o', os.path.join(script_dir, 'extensions.pb'),
+        *extension_proto_file, *glob.glob(os.path.join(proto_dir, 'extensions','google', 'protobuf', '*.proto'))
+    ],
+    shell=False).wait()
+print('[PROCESS] generate protobuf.pb file done.')

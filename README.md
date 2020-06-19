@@ -106,6 +106,7 @@ echo "
 | --xml-root               | xml输出的根节点tag       | 输出格式为xml时的根节点的TagName                                                                      |
 | --javascript-export      | 导出javascript数据的模式 | 可选项(nodejs: 使用兼容nodejs的exports, amd: 使用兼容amd的define, 其他: 写入全局(window或global))     |
 | --javascript-global      | 导出javascript全局空间   | 导出数据到全局时，可以指定写入的名字空间                                                              |
+| --ignore-unknown-dependency | 忽略未知的依赖项      | 忽略未知的输入协议的依赖项(>=2.9.0版                                                                  |
 
  
 协议类型

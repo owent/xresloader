@@ -6,6 +6,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.regex.Pattern;
+
 import org.dom4j.Attribute;
 import org.dom4j.Document;
 import org.dom4j.DocumentHelper;
@@ -20,6 +22,29 @@ import org.xresloader.core.scheme.SchemeConf;
  * Created by owentou on 2014/10/10.
  */
 public class DataDstXml extends DataDstJava {
+
+    static Pattern xmlTagNameValidateRule = null;
+
+    static boolean validateTagName(String in) {
+        if (in == null) {
+            return false;
+        }
+
+        if (in.isEmpty()) {
+            return false;
+        }
+
+        if (in.length() >= 3 && in.substring(0, 3).equalsIgnoreCase("xml")) {
+            return false;
+        }
+
+        if (xmlTagNameValidateRule == null) {
+            xmlTagNameValidateRule = Pattern.compile("[a-zA-Z][^\\s:]*");
+        }
+
+        return xmlTagNameValidateRule.matcher(in).matches();
+    }
+
     @Override
     public boolean init() {
         return true;
@@ -144,9 +169,9 @@ public class DataDstXml extends DataDstJava {
         }
 
         // Hashmap
-        if (data instanceof Map) {
-            Map<String, Object> mp = (Map<String, Object>) data;
-            ArrayList<Map.Entry<String, Object>> sorted_array = new ArrayList<Map.Entry<String, Object>>();
+        if (data instanceof Map<?, ?>) {
+            Map<?, ?> mp = (Map<?, ?>) data;
+            ArrayList<Map.Entry<?, ?>> sorted_array = new ArrayList<Map.Entry<?, ?>>();
             sorted_array.ensureCapacity(mp.size());
             sorted_array.addAll(mp.entrySet());
             sorted_array.sort((l, r) -> {
@@ -154,16 +179,63 @@ public class DataDstXml extends DataDstJava {
                     return ((Integer) l.getValue()).compareTo((Integer) r.getValue());
                 }
 
-                return l.getKey().compareTo(r.getKey());
+                if (l.getKey() instanceof Integer && r.getKey() instanceof Integer) {
+                    return ((Integer) l.getKey()).compareTo((Integer) r.getKey());
+                } else if (l.getKey() instanceof Long && r.getKey() instanceof Long) {
+                    return ((Long) l.getKey()).compareTo((Long) r.getKey());
+                } else {
+                    return l.getKey().toString().compareTo(r.getKey().toString());
+                }
             });
 
-            for (Map.Entry<String, Object> item : sorted_array) {
+            boolean hasInvalidTagName = false;
+            for (Map.Entry<?, ?> item : sorted_array) {
+                if (!(item.getKey() instanceof String)) {
+                    hasInvalidTagName = true;
+                    break;
+                }
+
+                if (!validateTagName((String) item.getKey())) {
+                    hasInvalidTagName = true;
+                    break;
+                }
+            }
+
+            if (data instanceof SpecialInnerHashMap<?, ?>) {
+                sb.addAttribute("mode", "map");
+            } else {
+                sb.addAttribute("mode", "message");
+            }
+
+            for (Map.Entry<?, ?> item : sorted_array) {
                 // 数据会多一层，这里去除
                 if (item.getValue() instanceof List) {
-                    writeData(sb, item.getValue(), item.getKey());
+                    if (item.getKey() instanceof Number) {
+                        writeData(sb, item.getValue(), item.getKey().toString());
+                    } else {
+                        writeData(sb, item.getValue(), item.getKey().toString());
+                    }
                 } else {
-                    Element xml_item = DocumentHelper.createElement(item.getKey());
-                    writeData(xml_item, item.getValue(), item.getKey());
+                    Element xml_item;
+
+                    if (hasInvalidTagName || data instanceof SpecialInnerHashMap<?, ?>) {
+                        String realTypeName;
+                        if (item.getKey() instanceof Integer) {
+                            realTypeName = "int32";
+                        } else if (item.getKey() instanceof Long) {
+                            realTypeName = "int64";
+                        } else {
+                            realTypeName = item.getKey().getClass().getSimpleName().toLowerCase();
+                        }
+
+                        xml_item = DocumentHelper.createElement(realTypeName);
+                        writeData(xml_item, item.getValue(), realTypeName);
+                        xml_item.addAttribute("key", item.getKey().toString());
+                        xml_item.addAttribute("type", realTypeName);
+                    } else {
+                        xml_item = DocumentHelper.createElement(item.getKey().toString());
+                        writeData(xml_item, item.getValue(), item.getKey().toString());
+                    }
 
                     sb.add(xml_item);
                 }

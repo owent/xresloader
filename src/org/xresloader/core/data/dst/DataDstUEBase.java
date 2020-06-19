@@ -569,7 +569,21 @@ public abstract class DataDstUEBase extends DataDstImpl {
         if (code.dependencies != null) {
             for (HashMap.Entry<String, UECodeInfo> varPair : code.dependencies.entrySet()) {
                 UECodeInfo depCodeInfo = varPair.getValue();
-                fos.write(dumpString(String.format(codeSourceInclude, depCodeInfo.includeDir + depCodeInfo.baseName)));
+
+                // Map类型要输内部依赖的include列表
+                if (depCodeInfo.writerNodeWrapper != null && depCodeInfo.writerNodeWrapper.getReferField() != null
+                        && depCodeInfo.writerNodeWrapper.getReferField().isMap()) {
+                    if (depCodeInfo.dependencies != null) {
+                        for (HashMap.Entry<String, UECodeInfo> subVarPair : depCodeInfo.dependencies.entrySet()) {
+                            UECodeInfo depSubCodeInfo = subVarPair.getValue();
+                            fos.write(dumpString(String.format(codeSourceInclude,
+                                    depSubCodeInfo.includeDir + depSubCodeInfo.baseName)));
+                        }
+                    }
+                } else {
+                    fos.write(dumpString(
+                            String.format(codeSourceInclude, depCodeInfo.includeDir + depCodeInfo.baseName)));
+                }
             }
         }
 
@@ -782,19 +796,26 @@ public abstract class DataDstUEBase extends DataDstImpl {
                     continue;
                 }
 
-                if (child.get(0).getJavaType() == JAVA_TYPE.MESSAGE) {
-                    UECodeInfo depCodeInfo = codeInfo.makeDependence(child.get(0));
-                    if (null == depCodeInfo || depCodeInfo.hasGeneratedCode) {
-                        continue;
-                    }
-
-                    UEDataRowRule depRule = rebuildCodeRule(depCodeInfo);
-                    writeCodeFiles(depRule, depCodeInfo);
+                if (child.get(0).getJavaType() != JAVA_TYPE.MESSAGE) {
+                    continue;
                 }
+
+                UECodeInfo depCodeInfo = codeInfo.makeDependence(child.get(0));
+                if (null == depCodeInfo || depCodeInfo.hasGeneratedCode) {
+                    continue;
+                }
+
+                UEDataRowRule depRule = rebuildCodeRule(depCodeInfo);
+                writeCodeFiles(depRule, depCodeInfo);
             }
         }
 
-        // 加载代码
+        // Map 字段仅需要分析依赖，不需要写出代码
+        if (codeInfo.writerNodeWrapper != null && codeInfo.writerNodeWrapper.getReferField() != null
+                && codeInfo.writerNodeWrapper.getReferField().isMap()) {
+            return;
+        }
+        // 写出加载代码
         writeCodeHeaderFile(rule, codeInfo);
         writeCodeSourceFile(rule, codeInfo);
     }
@@ -1647,7 +1668,7 @@ public abstract class DataDstUEBase extends DataDstImpl {
                 String ueTypeNameIdent = fieldDesc.mutableExtension().mutableUE().ueTypeName;
                 String valueUeTypeName;
                 if (ueTypeNameIdent == null || ueTypeNameIdent.isEmpty()) {
-                    valueUeTypeName = getUETypeName(typeDesc);
+                    valueUeTypeName = getUETypeName(typeDesc.getSortedFields().get(1).getTypeDescriptor());
                 } else {
                     if (null != fieldDesc && fieldDesc.mutableExtension().mutableUE().ueTypeIsClass) {
                         valueUeTypeName = String.format("TSoftClassPtr< %s >", ueTypeNameIdent);

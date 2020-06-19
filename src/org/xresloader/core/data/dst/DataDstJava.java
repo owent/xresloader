@@ -18,6 +18,44 @@ import org.xresloader.core.scheme.SchemeConf;
  * Created by owentou on 2015/04/29.
  */
 public abstract class DataDstJava extends DataDstImpl {
+    public class SpecialInnerHashMap<K, V> extends HashMap<K, V> {
+        public SpecialInnerHashMap(int initialCapacity, float loadFactor) {
+            super(initialCapacity, loadFactor);
+        }
+
+        /**
+         * Constructs an empty <tt>HashMap</tt> with the specified initial capacity and
+         * the default load factor (0.75).
+         *
+         * @param initialCapacity the initial capacity.
+         * @throws IllegalArgumentException if the initial capacity is negative.
+         */
+        public SpecialInnerHashMap(int initialCapacity) {
+            super(initialCapacity);
+        }
+
+        /**
+         * Constructs an empty <tt>HashMap</tt> with the default initial capacity (16)
+         * and the default load factor (0.75).
+         */
+        public SpecialInnerHashMap() {
+            super();
+        }
+
+        /**
+         * Constructs a new <tt>HashMap</tt> with the same mappings as the specified
+         * <tt>Map</tt>. The <tt>HashMap</tt> is created with default load factor (0.75)
+         * and an initial capacity sufficient to hold the mappings in the specified
+         * <tt>Map</tt>.
+         *
+         * @param m the map whose mappings are to be placed in this map
+         * @throws NullPointerException if the specified map is null
+         */
+        public SpecialInnerHashMap(Map<? extends K, ? extends V> m) {
+            super(m);
+        }
+    }
+
     /**
      * @return 协议处理器名字
      */
@@ -122,9 +160,10 @@ public abstract class DataDstJava extends DataDstImpl {
             Object mapKey = ((HashMap<String, Object>) val).getOrDefault("key", null);
             Object mapValue = ((HashMap<String, Object>) val).getOrDefault("value", null);
             if (mapKey != null && mapValue != null) {
-                HashMap<Object, Object> old = (HashMap<Object, Object>) builder.getOrDefault(field.getName(), null);
+                SpecialInnerHashMap<Object, Object> old = (SpecialInnerHashMap<Object, Object>) builder
+                        .getOrDefault(field.getName(), null);
                 if (null == old) {
-                    old = new HashMap<Object, Object>();
+                    old = new SpecialInnerHashMap<Object, Object>();
                     builder.put(field.getName(), old);
                 }
                 old.put(mapKey, mapValue);
@@ -273,10 +312,10 @@ public abstract class DataDstJava extends DataDstImpl {
             Object mapKey = ((HashMap<String, Object>) val).getOrDefault("key", null);
             Object mapValue = ((HashMap<String, Object>) val).getOrDefault("value", null);
             if (mapKey != null && mapValue != null) {
-                HashMap<Object, Object> old = (HashMap<Object, Object>) builder
+                SpecialInnerHashMap<Object, Object> old = (SpecialInnerHashMap<Object, Object>) builder
                         .getOrDefault(as_child.innerFieldDesc.getName(), null);
                 if (null == old) {
-                    old = new HashMap<Object, Object>();
+                    old = new SpecialInnerHashMap<Object, Object>();
                     builder.put(as_child.innerFieldDesc.getName(), old);
                 }
                 old.put(mapKey, mapValue);
@@ -458,7 +497,7 @@ public abstract class DataDstJava extends DataDstImpl {
 
                 case MESSAGE: {
                     if (field.isMap()) {
-                        HashMap<Object, Object> tmp = new HashMap<Object, Object>();
+                        SpecialInnerHashMap<Object, Object> tmp = new SpecialInnerHashMap<Object, Object>();
                         for (String v : groups) {
                             String[] subGroups = splitPlainGroups(v, getPlainMessageSeparator(field));
                             HashMap<String, Object> msg = parsePlainDataMessage(subGroups, ident, field);

@@ -21,6 +21,8 @@ local const_res = {
       kTestRoleUpgradeCfg = 12,
     },
   },
+  arr_in_arr_cfg = {
+  },
   cost_type = {
     EN_CT_UNKNOWN = 0,
     EN_CT_MONEY = 10001,

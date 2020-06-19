@@ -229,6 +229,7 @@ public class main {
                 ++failed_count;
                 continue;
             }
+
             ret = ds.init();
             if (ret < 0) {
                 ProgramOptions.getLoger().error("initialize data source class \"%s\" failed", ds_clazz.getName());
@@ -356,8 +357,7 @@ public class main {
         try {
             ret_code = build_group(args);
         } catch (InitializeException e) {
-            ProgramOptions.getLoger().error(
-                "initlize failed.%s%s> %s", e.getMessage(), endl, String.join(" ", args));
+            ProgramOptions.getLoger().error("initlize failed.%s%s> %s", e.getMessage(), endl, String.join(" ", args));
         } catch (Exception e) {
             ProgramOptions.getLoger().error("%s", e.toString());
             for (StackTraceElement frame : e.getStackTrace()) {
@@ -378,8 +378,8 @@ public class main {
                         ret_code += build_group(stdin_args);
                     } catch (InitializeException e) {
                         ++ret_code;
-                        ProgramOptions.getLoger().error(
-                            "initlize failed.%s%s> %s", e.getMessage(), endl, String.join(" ", stdin_args));
+                        ProgramOptions.getLoger().error("initlize failed.%s%s> %s", e.getMessage(), endl,
+                                String.join(" ", stdin_args));
                     } catch (Exception e) {
                         ++ret_code;
                         ProgramOptions.getLoger().error("%s", e.toString());

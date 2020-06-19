@@ -168,11 +168,11 @@ public class DataDstLua extends DataDstJava {
         }
 
         // Hashmap
-        if (data instanceof Map) {
-            Map<String, Object> mp = (Map<String, Object>) data;
+        if (data instanceof Map<?, ?>) {
+            Map<?, ?> mp = (Map<?, ?>) data;
             sb.append("{").append(endl);
 
-            ArrayList<Map.Entry<String, Object>> sorted_array = new ArrayList<Map.Entry<String, Object>>();
+            ArrayList<Map.Entry<?, ?>> sorted_array = new ArrayList<Map.Entry<?, ?>>();
             sorted_array.ensureCapacity(mp.size());
             sorted_array.addAll(mp.entrySet());
             sorted_array.sort((l, r) -> {
@@ -180,11 +180,27 @@ public class DataDstLua extends DataDstJava {
                     return ((Integer) l.getValue()).compareTo((Integer) r.getValue());
                 }
 
-                return l.getKey().compareTo(r.getKey());
+                if (l.getKey() instanceof Integer && r.getKey() instanceof Integer) {
+                    return ((Integer) l.getKey()).compareTo((Integer) r.getKey());
+                } else if (l.getKey() instanceof Long && r.getKey() instanceof Long) {
+                    return ((Long) l.getKey()).compareTo((Long) r.getKey());
+                } else {
+                    return l.getKey().toString().compareTo(r.getKey().toString());
+                }
             });
-            for (Map.Entry<String, Object> item : sorted_array) {
+            for (Map.Entry<?, ?> item : sorted_array) {
                 writeIdent(sb, ident_num + 1);
-                sb.append(item.getKey()).append(" = ");
+                if (data instanceof SpecialInnerHashMap<?, ?>) {
+                    if (item.getKey() instanceof String) {
+                        sb.append("[");
+                        sb.append(JSONObject.quote((String) item.getKey())).append("] = ");
+                    } else {
+                        sb.append("[");
+                        sb.append(item.getKey()).append("] = ");
+                    }
+                } else {
+                    sb.append(item.getKey()).append(" = ");
+                }
 
                 writeData(sb, item.getValue(), ident_num + 1);
                 sb.append(",").append(endl);

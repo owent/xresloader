@@ -54,6 +54,20 @@ local const_res = {
           },
         },
         arr_in_arr_cfg = {
+          enum_type = {
+            TestMapIsEntry = {
+              name = "TestMapIsEntry",
+              options = {
+                map_entry = true,
+              },
+            },
+            TestMapSmEntry = {
+              name = "TestMapSmEntry",
+              options = {
+                map_entry = true,
+              },
+            },
+          },
           field = {
             id = {
               name = "id",
@@ -63,6 +77,14 @@ local const_res = {
                 key_tag = 1,
               },
               type_name = "UINT32",
+            },
+            test_map_sm = {
+              name = "test_map_sm",
+              number = 8,
+              options = {
+                field_separator = "|",
+              },
+              type_name = "MESSAGE",
             },
             test_plain_msg = {
               name = "test_plain_msg",

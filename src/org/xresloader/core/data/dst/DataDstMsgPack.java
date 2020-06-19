@@ -89,9 +89,9 @@ public class DataDstMsgPack extends DataDstJava {
 
         // Hashmap
         if (data instanceof Map<?, ?>) {
-            Map<String, Object> mp = (Map<String, Object>) data;
+            Map<?, ?> mp = (Map<?, ?>) data;
 
-            ArrayList<Map.Entry<String, Object>> sorted_array = new ArrayList<Map.Entry<String, Object>>();
+            ArrayList<Map.Entry<?, ?>> sorted_array = new ArrayList<Map.Entry<?, ?>>();
             sorted_array.ensureCapacity(mp.size());
             sorted_array.addAll(mp.entrySet());
             sorted_array.sort((l, r) -> {
@@ -99,11 +99,17 @@ public class DataDstMsgPack extends DataDstJava {
                     return ((Integer) l.getValue()).compareTo((Integer) r.getValue());
                 }
 
-                return l.getKey().compareTo(r.getKey());
+                if (l.getKey() instanceof Integer && r.getKey() instanceof Integer) {
+                    return ((Integer) l.getKey()).compareTo((Integer) r.getKey());
+                } else if (l.getKey() instanceof Long && r.getKey() instanceof Long) {
+                    return ((Long) l.getKey()).compareTo((Long) r.getKey());
+                } else {
+                    return l.getKey().toString().compareTo(r.getKey().toString());
+                }
             });
 
             packer.packMapHeader(sorted_array.size());
-            for (Map.Entry<String, Object> item : sorted_array) {
+            for (Map.Entry<?, ?> item : sorted_array) {
                 writeData(packer, item.getKey());
                 writeData(packer, item.getValue());
             }

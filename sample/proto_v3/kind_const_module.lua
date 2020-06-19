@@ -22,6 +22,8 @@ local const_res = {
       kTestRoleUpgradeCfg = 12,
     },
   },
+  arr_in_arr_cfg = {
+  },
   cost_type = {
     EN_CT_UNKNOWN = 0,
     EN_CT_MONEY = 10001,
@@ -67,6 +69,7 @@ local const_res = {
 
 
 game_const_config = const_res.game_const_config
+arr_in_arr_cfg = const_res.arr_in_arr_cfg
 cost_type = const_res.cost_type
 event_cfg = const_res.event_cfg
 event_reward_item = const_res.event_reward_item

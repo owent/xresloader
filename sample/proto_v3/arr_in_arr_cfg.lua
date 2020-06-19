@@ -6,7 +6,7 @@ return {
     data_ver = "1.0.0.0",
     description = "Test arr_in_arr_cfg",
     hash_code = "no hash code",
-    xres_ver = "2.8.1",
+    xres_ver = "2.9.0",
   },
   [2] = "arr_in_arr_cfg",
   arr_in_arr_cfg = {
@@ -36,6 +36,20 @@ return {
         },
       },
       id = 10001,
+      test_map_is = {
+        [10] = "Map嵌套模式[0].value",
+        [11] = "Map嵌套模式[1].value",
+      },
+      test_map_sm = {
+        ["aa"] = {
+          id = 111,
+          level = "112",
+        },
+        ["特殊:字符"] = {
+          id = 121,
+          level = "122",
+        },
+      },
       test_plain_enum_arr = {
         10001,
         10001,
@@ -91,6 +105,20 @@ return {
         },
       },
       id = 10002,
+      test_map_is = {
+        [20] = "Map嵌套模式[0].value",
+        [21] = "Map嵌套模式[1].value",
+      },
+      test_map_sm = {
+        ["ba"] = {
+          id = 211,
+          level = "212",
+        },
+        ["特殊.字符"] = {
+          id = 221,
+          level = "222",
+        },
+      },
       test_plain_enum_arr = {
         10101,
         10101,
@@ -135,6 +163,20 @@ return {
         },
       },
       id = 10003,
+      test_map_is = {
+        [30] = "Map嵌套模式[0].value",
+        [31] = "Map嵌套模式[1].value",
+      },
+      test_map_sm = {
+        ["ca"] = {
+          id = 311,
+          level = "312",
+        },
+        ["cb"] = {
+          id = 321,
+          level = "322",
+        },
+      },
       test_plain_enum_arr = {
         10001,
         10001,

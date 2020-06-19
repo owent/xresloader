@@ -60,11 +60,32 @@
         "name": "role_upgrade_cfg"
       },
       "arr_in_arr_cfg": {
+        "options": {
+          "helper": "helper",
+          "msg_description": "Test arr_in_arr_cfg"
+        },
+        "name": "arr_in_arr_cfg",
+        "enum_type": {
+          "TestMapIsEntry": {
+            "options": {"map_entry": true},
+            "name": "TestMapIsEntry"
+          },
+          "TestMapSmEntry": {
+            "options": {"map_entry": true},
+            "name": "TestMapSmEntry"
+          }
+        },
         "field": {
           "test_plain_msg": {
             "options": {"field_separator": "&"},
             "name": "test_plain_msg",
             "number": 5,
+            "type_name": "MESSAGE"
+          },
+          "test_map_sm": {
+            "options": {"field_separator": "|"},
+            "name": "test_map_sm",
+            "number": 8,
             "type_name": "MESSAGE"
           },
           "id": {
@@ -76,12 +97,7 @@
             "number": 1,
             "type_name": "UINT32"
           }
-        },
-        "options": {
-          "helper": "helper",
-          "msg_description": "Test arr_in_arr_cfg"
-        },
-        "name": "arr_in_arr_cfg"
+        }
       },
       "test_msg_verifier": {
         "field": {"test_id_2": {

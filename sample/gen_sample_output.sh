@@ -34,15 +34,16 @@ for proto_dir in proto_v2 proto_v3; do
         -t js -p protobuf -o '$proto_dir'      -f '$proto_dir/kind.pb' --pretty 2 -s '$XLSX_FILE' -m scheme_kind -n "/(?i)\.bin$/\.js/" --javascript-global sample.xresloader 
         -t js -p protobuf -o '$proto_dir'      -f '$proto_dir/kind.pb' --pretty 2 -m DataSource='$XLSX_FILE'|kind|3,1 -m MacroSource='$XLSX_FILE'|macro|2,1 -m ProtoName=role_cfg -m OutputFile=role_cfg.n.js -m KeyRow=2 -m KeyCase=lower -m KeyWordSplit=_ -m "KeyWordRegex=[A-Z_\$ \t]|[_\$ \t]|[a-zA-Z_\$]" --javascript-export nodejs 
         -t js -p protobuf -o '$proto_dir'      -f '$proto_dir/kind.pb' --pretty 2 -s '$XLSX_FILE' -m scheme_kind -n "/(?i)\.bin$/\.amd\.js/" --javascript-export amd 
-        -t lua -p protobuf -o '$proto_dir'     -f '$proto_dir/kind.pb' --pretty 2 -m DataSource='$XLSX_FILE'|arr_in_arr|3,1 -m MacroSource='$XLSX_FILE'|macro|2,1 -m ProtoName=arr_in_arr_cfg -m OutputFile=arr_in_arr_cfg.lua -m KeyRow=2 -o '$proto_dir'
-        -t bin -p protobuf -o '$proto_dir'     -f '$proto_dir/kind.pb' -m DataSource='$XLSX_FILE'|arr_in_arr|3,1 -m MacroSource='$XLSX_FILE'|macro|2,1 -m ProtoName=arr_in_arr_cfg -m OutputFile=arr_in_arr_cfg.bin -m KeyRow=2 -o '$proto_dir'
+        -t lua -p protobuf -o '$proto_dir'     -f '$proto_dir/kind.pb' --pretty 2 -m DataSource='$XLSX_FILE'|arr_in_arr|3,1 -m MacroSource='$XLSX_FILE'|macro|2,1 -m ProtoName=arr_in_arr_cfg -m OutputFile=arr_in_arr_cfg.lua -m KeyRow=2
+        -t bin -p protobuf -o '$proto_dir'     -f '$proto_dir/kind.pb' -m DataSource='$XLSX_FILE'|arr_in_arr|3,1 -m MacroSource='$XLSX_FILE'|macro|2,1 -m ProtoName=arr_in_arr_cfg -m OutputFile=arr_in_arr_cfg.bin -m KeyRow=2 -o
+        -t xml -p protobuf -o '$proto_dir'     -f '$proto_dir/kind.pb' --pretty 2 -m DataSource='$XLSX_FILE'|arr_in_arr|3,1 -m MacroSource='$XLSX_FILE'|macro|2,1 -m ProtoName=arr_in_arr_cfg -m OutputFile=arr_in_arr_cfg.xml -m KeyRow=2
         -t json -p protobuf -o '$proto_dir'    -f '$proto_dir/kind.pb' -s '$XLSX_FILE' -m scheme_upgrade -n "/(?i)\.bin$/\.json/"
         -t lua -p protobuf -o '$proto_dir'     -f '$proto_dir/kind.pb' -s '$XLSX_FILE' -m scheme_upgrade -n "/(?i)\.bin$/\.lua/"
         -t lua -o '$proto_dir'     -f '$proto_dir/kind.pb' --pretty 2 -i kind_option.lua
         -t lua -o '$proto_dir'     -f '$proto_dir/kind.pb' --pretty 2 --lua-module ProtoOptions.Kind -i kind_option.mod.lua
         -t js -o '$proto_dir'      -f '$proto_dir/kind.pb' --pretty 2 -i kind_option.js --javascript-export nodejs
-        -t bin -p protobuf -o '$proto_dir' -f '$proto_dir/kind.pb' --pretty 2 -m DataSource='$XLSX_FILE'|test_oneof|3,1 -m MacroSource='$XLSX_FILE'|macro|2,1 -m ProtoName=event_cfg -m OutputFile=event_cfg.bin -m KeyRow=2 -o '$proto_dir'
-        -t lua -p protobuf -o '$proto_dir' -f '$proto_dir/kind.pb' --pretty 2 -m DataSource='$XLSX_FILE'|test_oneof|3,1 -m MacroSource='$XLSX_FILE'|macro|2,1 -m ProtoName=event_cfg -m OutputFile=event_cfg.lua -m KeyRow=2 -o '$proto_dir'
+        -t bin -p protobuf -o '$proto_dir' -f '$proto_dir/kind.pb' --pretty 2 -m DataSource='$XLSX_FILE'|test_oneof|3,1 -m MacroSource='$XLSX_FILE'|macro|2,1 -m ProtoName=event_cfg -m OutputFile=event_cfg.bin -m KeyRow=2
+        -t lua -p protobuf -o '$proto_dir' -f '$proto_dir/kind.pb' --pretty 2 -m DataSource='$XLSX_FILE'|test_oneof|3,1 -m MacroSource='$XLSX_FILE'|macro|2,1 -m ProtoName=event_cfg -m OutputFile=event_cfg.lua -m KeyRow=2
         -t ue-csv -o '$proto_dir/csv' -f '$proto_dir/kind.pb' -c KindConst.csv  -m UeCfg-RecursiveMode=false
         -t ue-json -o '$proto_dir/json' -f '$proto_dir/kind.pb' -c KindConst.json
         -t ue-csv -o '$proto_dir/csv' -f '$proto_dir/kind.pb' -m DataSource='$XLSX_FILE'|arr_in_arr|3,1 -m MacroSource='$XLSX_FILE'|macro|2,1 -m ProtoName=arr_in_arr_cfg -m OutputFile=ArrInArrCfg.csv -m KeyRow=2 -m UeCfg-CodeOutput=|Public/Config|Private/Config  -m UeCfg-RecursiveMode=false

@@ -507,8 +507,10 @@ public class DataDstUECsv extends DataDstUEBase {
                 // oneof一定先处理,如果有oneof引用且已经有数据缓存了直接用
                 if (firstNode.getReferOneofNode() != null) {
                     if (subFieldDataByOneof.containsKey(varName)) {
-                        fieldSB.append(varName);
-                        fieldSB.append("=");
+                        if (false == (desc.getFieldDescriptor() != null && desc.getFieldDescriptor().isMap())) {
+                            fieldSB.append(varName);
+                            fieldSB.append("=");
+                        }
                         fieldSB.append(subFieldDataByOneof.get(varName));
 
                         if (null != dumpedFields) {
@@ -519,7 +521,7 @@ public class DataDstUECsv extends DataDstUEBase {
                 }
 
                 // Map不用输出Key=
-                if (false == (firstNode.getReferField() != null && firstNode.getReferField().isMap())) {
+                if (false == (desc.getFieldDescriptor() != null && desc.getFieldDescriptor().isMap())) {
                     fieldSB.append(varName);
                     fieldSB.append("=");
                 }
@@ -564,7 +566,7 @@ public class DataDstUECsv extends DataDstUEBase {
                     isFirst = tryWriteSeprator(fieldSB, isFirst);
 
                     // Map不用输出Key=
-                    if (false == subField.isMap()) {
+                    if (false == (desc.getFieldDescriptor() != null && desc.getFieldDescriptor().isMap())) {
                         fieldSB.append(varName);
                         fieldSB.append("=");
                     }
@@ -995,13 +997,13 @@ public class DataDstUECsv extends DataDstUEBase {
 
                 Object val = fieldDataByOneof.getOrDefault(varName, null);
                 if (val != null) {
-                    if (false == childField.isMap()) {
+                    if (false == field.isMap()) {
                         fieldSB.append(varName);
                         fieldSB.append("=");
                     }
                     fieldSB.append(val);
                 } else {
-                    if (false == childField.isMap()) {
+                    if (false == field.isMap()) {
                         fieldSB.append(varName);
                         fieldSB.append("=");
                     }
@@ -1017,7 +1019,7 @@ public class DataDstUECsv extends DataDstUEBase {
                             inputs.length));
                 }
 
-                if (false == childField.isMap()) {
+                if (false == field.isMap()) {
                     String varName = getIdentName(childField.getName());
                     fieldSB.append(varName);
                     fieldSB.append("=");

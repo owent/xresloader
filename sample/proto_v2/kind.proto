@@ -55,6 +55,9 @@ message arr_in_arr_cfg {
     repeated cost_type test_plain_enum_arr        = 4;
     optional test_msg_verifier test_plain_msg     = 5 [ (org.xresloader.field_separator) = "&" ];
     repeated test_msg_verifier test_plain_msg_arr = 6;
+
+    map<int32, string>    test_map_is = 7;
+    map<string, dep2_cfg> test_map_sm = 8 [ (org.xresloader.field_separator) = "|" ]; 
 }
 
 message event_reward_item {

@@ -251,8 +251,15 @@ public class DataDstUEJson extends DataDstUEBase {
                 for (int i = 0; i < fieldSet.size(); ++i) {
                     Object obj = pickValueFieldJsonStandardImpl(fieldSet.get(i));
                     if (obj != null && obj instanceof JSONObject) {
-                        Object mapKey = ((JSONObject) obj).opt("key");
-                        Object mapValue = ((JSONObject) obj).opt("value");
+                        Object mapKey = null;
+                        Object mapValue = null;
+                        for (String key : ((JSONObject) obj).keySet()) {
+                            if (key.equalsIgnoreCase("key")) {
+                                mapKey = ((JSONObject) obj).opt(key);
+                            } else if (key.equalsIgnoreCase("value")) {
+                                mapValue = ((JSONObject) obj).opt(key);
+                            }
+                        }
 
                         if (mapKey != null && mapValue != null) {
                             ret.put(mapKey.toString(), mapValue);
@@ -574,8 +581,15 @@ public class DataDstUEJson extends DataDstUEBase {
                             String[] subGroups = splitPlainGroups(v, getPlainMessageSeparator(field));
                             JSONObject msg = pickValueFieldJsonPlainField(subGroups, ident, field);
                             if (msg != null) {
-                                Object mapKey = msg.opt("key");
-                                Object mapValue = msg.opt("value");
+                                Object mapKey = null;
+                                Object mapValue = null;
+                                for (String key : ((JSONObject) msg).keySet()) {
+                                    if (key.equalsIgnoreCase("key")) {
+                                        mapKey = ((JSONObject) msg).opt(key);
+                                    } else if (key.equalsIgnoreCase("value")) {
+                                        mapValue = ((JSONObject) msg).opt(key);
+                                    }
+                                }
 
                                 if (mapKey != null && mapValue != null) {
                                     tmp.put(mapKey.toString(), mapValue);
@@ -750,7 +764,7 @@ public class DataDstUEJson extends DataDstUEBase {
 
     protected Object pickValueFieldJsonDefaultImpl(DataDstFieldDescriptor fd) {
         if (fd.isMap()) {
-            return new HashMap<String, Object>();
+            return new HashMap<Object, Object>();
         } else if (fd.isList()) {
             return new JSONArray();
         }

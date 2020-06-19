@@ -31,11 +31,15 @@
 #include <google/protobuf/message.h>
 #include <google/protobuf/repeated_field.h>  // IWYU pragma: export
 #include <google/protobuf/extension_set.h>  // IWYU pragma: export
+#include <google/protobuf/map.h>  // IWYU pragma: export
+#include <google/protobuf/map_entry.h>
+#include <google/protobuf/map_field_inl.h>
 #include <google/protobuf/generated_enum_reflection.h>
 #include <google/protobuf/unknown_field_set.h>
 #include "xresloader.pb.h"
 #include "xresloader_ue.pb.h"
 #include "dependency.pb.h"
+#include "dep_level2.pb.h"
 // @@protoc_insertion_point(includes)
 #include <google/protobuf/port_def.inc>
 #define PROTOBUF_INTERNAL_EXPORT_kind_2eproto
@@ -51,7 +55,7 @@ struct TableStruct_kind_2eproto {
     PROTOBUF_SECTION_VARIABLE(protodesc_cold);
   static const ::PROTOBUF_NAMESPACE_ID::internal::AuxillaryParseTableField aux[]
     PROTOBUF_SECTION_VARIABLE(protodesc_cold);
-  static const ::PROTOBUF_NAMESPACE_ID::internal::ParseTable schema[9]
+  static const ::PROTOBUF_NAMESPACE_ID::internal::ParseTable schema[11]
     PROTOBUF_SECTION_VARIABLE(protodesc_cold);
   static const ::PROTOBUF_NAMESPACE_ID::internal::FieldMetadata field_metadata[];
   static const ::PROTOBUF_NAMESPACE_ID::internal::SerializationTable serialization_table[];
@@ -64,6 +68,12 @@ extern arr_in_arrDefaultTypeInternal _arr_in_arr_default_instance_;
 class arr_in_arr_cfg;
 class arr_in_arr_cfgDefaultTypeInternal;
 extern arr_in_arr_cfgDefaultTypeInternal _arr_in_arr_cfg_default_instance_;
+class arr_in_arr_cfg_TestMapIsEntry_DoNotUse;
+class arr_in_arr_cfg_TestMapIsEntry_DoNotUseDefaultTypeInternal;
+extern arr_in_arr_cfg_TestMapIsEntry_DoNotUseDefaultTypeInternal _arr_in_arr_cfg_TestMapIsEntry_DoNotUse_default_instance_;
+class arr_in_arr_cfg_TestMapSmEntry_DoNotUse;
+class arr_in_arr_cfg_TestMapSmEntry_DoNotUseDefaultTypeInternal;
+extern arr_in_arr_cfg_TestMapSmEntry_DoNotUseDefaultTypeInternal _arr_in_arr_cfg_TestMapSmEntry_DoNotUse_default_instance_;
 class arr_in_arr_test_nested_message;
 class arr_in_arr_test_nested_messageDefaultTypeInternal;
 extern arr_in_arr_test_nested_messageDefaultTypeInternal _arr_in_arr_test_nested_message_default_instance_;
@@ -88,6 +98,8 @@ extern test_msg_verifierDefaultTypeInternal _test_msg_verifier_default_instance_
 PROTOBUF_NAMESPACE_OPEN
 template<> ::arr_in_arr* Arena::CreateMaybeMessage<::arr_in_arr>(Arena*);
 template<> ::arr_in_arr_cfg* Arena::CreateMaybeMessage<::arr_in_arr_cfg>(Arena*);
+template<> ::arr_in_arr_cfg_TestMapIsEntry_DoNotUse* Arena::CreateMaybeMessage<::arr_in_arr_cfg_TestMapIsEntry_DoNotUse>(Arena*);
+template<> ::arr_in_arr_cfg_TestMapSmEntry_DoNotUse* Arena::CreateMaybeMessage<::arr_in_arr_cfg_TestMapSmEntry_DoNotUse>(Arena*);
 template<> ::arr_in_arr_test_nested_message* Arena::CreateMaybeMessage<::arr_in_arr_test_nested_message>(Arena*);
 template<> ::event_cfg* Arena::CreateMaybeMessage<::event_cfg>(Arena*);
 template<> ::event_reward_item* Arena::CreateMaybeMessage<::event_reward_item>(Arena*);
@@ -1256,6 +1268,70 @@ class test_msg_verifier PROTOBUF_FINAL :
 };
 // -------------------------------------------------------------------
 
+class arr_in_arr_cfg_TestMapIsEntry_DoNotUse : public ::PROTOBUF_NAMESPACE_ID::internal::MapEntry<arr_in_arr_cfg_TestMapIsEntry_DoNotUse, 
+    ::PROTOBUF_NAMESPACE_ID::int32, std::string,
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::TYPE_INT32,
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::TYPE_STRING,
+    0 > {
+public:
+  typedef ::PROTOBUF_NAMESPACE_ID::internal::MapEntry<arr_in_arr_cfg_TestMapIsEntry_DoNotUse, 
+    ::PROTOBUF_NAMESPACE_ID::int32, std::string,
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::TYPE_INT32,
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::TYPE_STRING,
+    0 > SuperType;
+  arr_in_arr_cfg_TestMapIsEntry_DoNotUse();
+  arr_in_arr_cfg_TestMapIsEntry_DoNotUse(::PROTOBUF_NAMESPACE_ID::Arena* arena);
+  void MergeFrom(const arr_in_arr_cfg_TestMapIsEntry_DoNotUse& other);
+  static const arr_in_arr_cfg_TestMapIsEntry_DoNotUse* internal_default_instance() { return reinterpret_cast<const arr_in_arr_cfg_TestMapIsEntry_DoNotUse*>(&_arr_in_arr_cfg_TestMapIsEntry_DoNotUse_default_instance_); }
+  static bool ValidateKey(void*) { return true; }
+  static bool ValidateValue(std::string* s) {
+    return ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(s->data(), static_cast<int>(s->size()), ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::PARSE, "arr_in_arr_cfg.TestMapIsEntry.value");
+ }
+  void MergeFrom(const ::PROTOBUF_NAMESPACE_ID::Message& other) final;
+  ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadata() const final;
+  private:
+  static ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadataStatic() {
+    ::PROTOBUF_NAMESPACE_ID::internal::AssignDescriptors(&::descriptor_table_kind_2eproto);
+    return ::descriptor_table_kind_2eproto.file_level_metadata[5];
+  }
+
+  public:
+};
+
+// -------------------------------------------------------------------
+
+class arr_in_arr_cfg_TestMapSmEntry_DoNotUse : public ::PROTOBUF_NAMESPACE_ID::internal::MapEntry<arr_in_arr_cfg_TestMapSmEntry_DoNotUse, 
+    std::string, ::dep2_cfg,
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::TYPE_STRING,
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::TYPE_MESSAGE,
+    0 > {
+public:
+  typedef ::PROTOBUF_NAMESPACE_ID::internal::MapEntry<arr_in_arr_cfg_TestMapSmEntry_DoNotUse, 
+    std::string, ::dep2_cfg,
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::TYPE_STRING,
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::TYPE_MESSAGE,
+    0 > SuperType;
+  arr_in_arr_cfg_TestMapSmEntry_DoNotUse();
+  arr_in_arr_cfg_TestMapSmEntry_DoNotUse(::PROTOBUF_NAMESPACE_ID::Arena* arena);
+  void MergeFrom(const arr_in_arr_cfg_TestMapSmEntry_DoNotUse& other);
+  static const arr_in_arr_cfg_TestMapSmEntry_DoNotUse* internal_default_instance() { return reinterpret_cast<const arr_in_arr_cfg_TestMapSmEntry_DoNotUse*>(&_arr_in_arr_cfg_TestMapSmEntry_DoNotUse_default_instance_); }
+  static bool ValidateKey(std::string* s) {
+    return ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(s->data(), static_cast<int>(s->size()), ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::PARSE, "arr_in_arr_cfg.TestMapSmEntry.key");
+ }
+  static bool ValidateValue(void*) { return true; }
+  void MergeFrom(const ::PROTOBUF_NAMESPACE_ID::Message& other) final;
+  ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadata() const final;
+  private:
+  static ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadataStatic() {
+    ::PROTOBUF_NAMESPACE_ID::internal::AssignDescriptors(&::descriptor_table_kind_2eproto);
+    return ::descriptor_table_kind_2eproto.file_level_metadata[6];
+  }
+
+  public:
+};
+
+// -------------------------------------------------------------------
+
 class arr_in_arr_cfg PROTOBUF_FINAL :
     public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:arr_in_arr_cfg) */ {
  public:
@@ -1298,7 +1374,7 @@ class arr_in_arr_cfg PROTOBUF_FINAL :
                &_arr_in_arr_cfg_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    5;
+    7;
 
   friend void swap(arr_in_arr_cfg& a, arr_in_arr_cfg& b) {
     a.Swap(&b);
@@ -1366,6 +1442,7 @@ class arr_in_arr_cfg PROTOBUF_FINAL :
 
   // nested types ----------------------------------------------------
 
+
   // accessors -------------------------------------------------------
 
   enum : int {
@@ -1373,6 +1450,8 @@ class arr_in_arr_cfg PROTOBUF_FINAL :
     kTestPlainIntArrFieldNumber = 3,
     kTestPlainEnumArrFieldNumber = 4,
     kTestPlainMsgArrFieldNumber = 6,
+    kTestMapIsFieldNumber = 7,
+    kTestMapSmFieldNumber = 8,
     kTestPlainMsgFieldNumber = 5,
     kIdFieldNumber = 1,
   };
@@ -1451,6 +1530,40 @@ class arr_in_arr_cfg PROTOBUF_FINAL :
   const ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::test_msg_verifier >&
       test_plain_msg_arr() const;
 
+  // map<int32, string> test_map_is = 7;
+  int test_map_is_size() const;
+  private:
+  int _internal_test_map_is_size() const;
+  public:
+  void clear_test_map_is();
+  private:
+  const ::PROTOBUF_NAMESPACE_ID::Map< ::PROTOBUF_NAMESPACE_ID::int32, std::string >&
+      _internal_test_map_is() const;
+  ::PROTOBUF_NAMESPACE_ID::Map< ::PROTOBUF_NAMESPACE_ID::int32, std::string >*
+      _internal_mutable_test_map_is();
+  public:
+  const ::PROTOBUF_NAMESPACE_ID::Map< ::PROTOBUF_NAMESPACE_ID::int32, std::string >&
+      test_map_is() const;
+  ::PROTOBUF_NAMESPACE_ID::Map< ::PROTOBUF_NAMESPACE_ID::int32, std::string >*
+      mutable_test_map_is();
+
+  // map<string, .dep2_cfg> test_map_sm = 8 [(.org.xresloader.field_separator) = "|"];
+  int test_map_sm_size() const;
+  private:
+  int _internal_test_map_sm_size() const;
+  public:
+  void clear_test_map_sm();
+  private:
+  const ::PROTOBUF_NAMESPACE_ID::Map< std::string, ::dep2_cfg >&
+      _internal_test_map_sm() const;
+  ::PROTOBUF_NAMESPACE_ID::Map< std::string, ::dep2_cfg >*
+      _internal_mutable_test_map_sm();
+  public:
+  const ::PROTOBUF_NAMESPACE_ID::Map< std::string, ::dep2_cfg >&
+      test_map_sm() const;
+  ::PROTOBUF_NAMESPACE_ID::Map< std::string, ::dep2_cfg >*
+      mutable_test_map_sm();
+
   // .test_msg_verifier test_plain_msg = 5 [(.org.xresloader.field_separator) = "&"];
   bool has_test_plain_msg() const;
   private:
@@ -1491,6 +1604,18 @@ class arr_in_arr_cfg PROTOBUF_FINAL :
   ::PROTOBUF_NAMESPACE_ID::RepeatedField<int> test_plain_enum_arr_;
   mutable std::atomic<int> _test_plain_enum_arr_cached_byte_size_;
   ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::test_msg_verifier > test_plain_msg_arr_;
+  ::PROTOBUF_NAMESPACE_ID::internal::MapField<
+      arr_in_arr_cfg_TestMapIsEntry_DoNotUse,
+      ::PROTOBUF_NAMESPACE_ID::int32, std::string,
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::TYPE_INT32,
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::TYPE_STRING,
+      0 > test_map_is_;
+  ::PROTOBUF_NAMESPACE_ID::internal::MapField<
+      arr_in_arr_cfg_TestMapSmEntry_DoNotUse,
+      std::string, ::dep2_cfg,
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::TYPE_STRING,
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::TYPE_MESSAGE,
+      0 > test_map_sm_;
   ::test_msg_verifier* test_plain_msg_;
   ::PROTOBUF_NAMESPACE_ID::uint32 id_;
   mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
@@ -1546,7 +1671,7 @@ class event_reward_item PROTOBUF_FINAL :
                &_event_reward_item_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    6;
+    8;
 
   friend void swap(event_reward_item& a, event_reward_item& b) {
     a.Swap(&b);
@@ -1756,7 +1881,7 @@ class event_rule_item PROTOBUF_FINAL :
                &_event_rule_item_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    7;
+    9;
 
   friend void swap(event_rule_item& a, event_rule_item& b) {
     a.Swap(&b);
@@ -1973,7 +2098,7 @@ class event_cfg PROTOBUF_FINAL :
                &_event_cfg_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    8;
+    10;
 
   friend void swap(event_cfg& a, event_cfg& b) {
     a.Swap(&b);
@@ -3344,6 +3469,10 @@ inline void test_msg_verifier::set_test_id_2(::PROTOBUF_NAMESPACE_ID::uint32 val
 
 // -------------------------------------------------------------------
 
+// -------------------------------------------------------------------
+
+// -------------------------------------------------------------------
+
 // arr_in_arr_cfg
 
 // uint32 id = 1 [(.org.xresloader.field_description) = "This is a Key", (.org.xresloader.ue.key_tag) = 1];
@@ -3613,6 +3742,61 @@ inline const ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::test_msg_verifier >&
 arr_in_arr_cfg::test_plain_msg_arr() const {
   // @@protoc_insertion_point(field_list:arr_in_arr_cfg.test_plain_msg_arr)
   return test_plain_msg_arr_;
+}
+
+// map<int32, string> test_map_is = 7;
+inline int arr_in_arr_cfg::_internal_test_map_is_size() const {
+  return test_map_is_.size();
+}
+inline int arr_in_arr_cfg::test_map_is_size() const {
+  return _internal_test_map_is_size();
+}
+inline void arr_in_arr_cfg::clear_test_map_is() {
+  test_map_is_.Clear();
+}
+inline const ::PROTOBUF_NAMESPACE_ID::Map< ::PROTOBUF_NAMESPACE_ID::int32, std::string >&
+arr_in_arr_cfg::_internal_test_map_is() const {
+  return test_map_is_.GetMap();
+}
+inline const ::PROTOBUF_NAMESPACE_ID::Map< ::PROTOBUF_NAMESPACE_ID::int32, std::string >&
+arr_in_arr_cfg::test_map_is() const {
+  // @@protoc_insertion_point(field_map:arr_in_arr_cfg.test_map_is)
+  return _internal_test_map_is();
+}
+inline ::PROTOBUF_NAMESPACE_ID::Map< ::PROTOBUF_NAMESPACE_ID::int32, std::string >*
+arr_in_arr_cfg::_internal_mutable_test_map_is() {
+  return test_map_is_.MutableMap();
+}
+inline ::PROTOBUF_NAMESPACE_ID::Map< ::PROTOBUF_NAMESPACE_ID::int32, std::string >*
+arr_in_arr_cfg::mutable_test_map_is() {
+  // @@protoc_insertion_point(field_mutable_map:arr_in_arr_cfg.test_map_is)
+  return _internal_mutable_test_map_is();
+}
+
+// map<string, .dep2_cfg> test_map_sm = 8 [(.org.xresloader.field_separator) = "|"];
+inline int arr_in_arr_cfg::_internal_test_map_sm_size() const {
+  return test_map_sm_.size();
+}
+inline int arr_in_arr_cfg::test_map_sm_size() const {
+  return _internal_test_map_sm_size();
+}
+inline const ::PROTOBUF_NAMESPACE_ID::Map< std::string, ::dep2_cfg >&
+arr_in_arr_cfg::_internal_test_map_sm() const {
+  return test_map_sm_.GetMap();
+}
+inline const ::PROTOBUF_NAMESPACE_ID::Map< std::string, ::dep2_cfg >&
+arr_in_arr_cfg::test_map_sm() const {
+  // @@protoc_insertion_point(field_map:arr_in_arr_cfg.test_map_sm)
+  return _internal_test_map_sm();
+}
+inline ::PROTOBUF_NAMESPACE_ID::Map< std::string, ::dep2_cfg >*
+arr_in_arr_cfg::_internal_mutable_test_map_sm() {
+  return test_map_sm_.MutableMap();
+}
+inline ::PROTOBUF_NAMESPACE_ID::Map< std::string, ::dep2_cfg >*
+arr_in_arr_cfg::mutable_test_map_sm() {
+  // @@protoc_insertion_point(field_mutable_map:arr_in_arr_cfg.test_map_sm)
+  return _internal_mutable_test_map_sm();
 }
 
 // -------------------------------------------------------------------
@@ -4649,6 +4833,10 @@ inline event_cfg::UnlockTypeCase event_cfg::unlock_type_case() const {
 #ifdef __GNUC__
   #pragma GCC diagnostic pop
 #endif  // __GNUC__
+// -------------------------------------------------------------------
+
+// -------------------------------------------------------------------
+
 // -------------------------------------------------------------------
 
 // -------------------------------------------------------------------

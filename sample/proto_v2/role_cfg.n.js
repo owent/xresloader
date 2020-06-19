@@ -5,7 +5,7 @@ exports.role_cfg_header = {
   count : 7,
   data_ver : "1.0.0.0",
   hash_code : "no hash code",
-  xres_ver : "2.8.1"
+  xres_ver : "2.9.0"
 };
 exports.role_cfg = [
   {

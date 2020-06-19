@@ -15,6 +15,9 @@
 // @@protoc_insertion_point(includes)
 #include <google/protobuf/port_def.inc>
 extern PROTOBUF_INTERNAL_EXPORT_kind_2eproto ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<2> scc_info_arr_in_arr_kind_2eproto;
+extern PROTOBUF_INTERNAL_EXPORT_kind_2eproto ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_arr_in_arr_cfg_TestMapIsEntry_DoNotUse_kind_2eproto;
+extern PROTOBUF_INTERNAL_EXPORT_kind_2eproto ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<1> scc_info_arr_in_arr_cfg_TestMapSmEntry_DoNotUse_kind_2eproto;
+extern PROTOBUF_INTERNAL_EXPORT_dep_5flevel2_2eproto ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_dep2_cfg_dep_5flevel2_2eproto;
 extern PROTOBUF_INTERNAL_EXPORT_dependency_2eproto ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<1> scc_info_dep_cfg_dependency_2eproto;
 extern PROTOBUF_INTERNAL_EXPORT_kind_2eproto ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_event_reward_item_kind_2eproto;
 extern PROTOBUF_INTERNAL_EXPORT_kind_2eproto ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_event_rule_item_kind_2eproto;
@@ -45,6 +48,14 @@ class test_msg_verifierDefaultTypeInternal {
  public:
   ::PROTOBUF_NAMESPACE_ID::internal::ExplicitlyConstructed<test_msg_verifier> _instance;
 } _test_msg_verifier_default_instance_;
+class arr_in_arr_cfg_TestMapIsEntry_DoNotUseDefaultTypeInternal {
+ public:
+  ::PROTOBUF_NAMESPACE_ID::internal::ExplicitlyConstructed<arr_in_arr_cfg_TestMapIsEntry_DoNotUse> _instance;
+} _arr_in_arr_cfg_TestMapIsEntry_DoNotUse_default_instance_;
+class arr_in_arr_cfg_TestMapSmEntry_DoNotUseDefaultTypeInternal {
+ public:
+  ::PROTOBUF_NAMESPACE_ID::internal::ExplicitlyConstructed<arr_in_arr_cfg_TestMapSmEntry_DoNotUse> _instance;
+} _arr_in_arr_cfg_TestMapSmEntry_DoNotUse_default_instance_;
 class arr_in_arr_cfgDefaultTypeInternal {
  public:
   ::PROTOBUF_NAMESPACE_ID::internal::ExplicitlyConstructed<arr_in_arr_cfg> _instance;
@@ -113,10 +124,39 @@ static void InitDefaultsscc_info_arr_in_arr_cfg_kind_2eproto() {
   ::arr_in_arr_cfg::InitAsDefaultInstance();
 }
 
-::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<2> scc_info_arr_in_arr_cfg_kind_2eproto =
-    {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 2, 0, InitDefaultsscc_info_arr_in_arr_cfg_kind_2eproto}, {
+::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<4> scc_info_arr_in_arr_cfg_kind_2eproto =
+    {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 4, 0, InitDefaultsscc_info_arr_in_arr_cfg_kind_2eproto}, {
       &scc_info_arr_in_arr_kind_2eproto.base,
-      &scc_info_test_msg_verifier_kind_2eproto.base,}};
+      &scc_info_test_msg_verifier_kind_2eproto.base,
+      &scc_info_arr_in_arr_cfg_TestMapIsEntry_DoNotUse_kind_2eproto.base,
+      &scc_info_arr_in_arr_cfg_TestMapSmEntry_DoNotUse_kind_2eproto.base,}};
+
+static void InitDefaultsscc_info_arr_in_arr_cfg_TestMapIsEntry_DoNotUse_kind_2eproto() {
+  GOOGLE_PROTOBUF_VERIFY_VERSION;
+
+  {
+    void* ptr = &::_arr_in_arr_cfg_TestMapIsEntry_DoNotUse_default_instance_;
+    new (ptr) ::arr_in_arr_cfg_TestMapIsEntry_DoNotUse();
+  }
+  ::arr_in_arr_cfg_TestMapIsEntry_DoNotUse::InitAsDefaultInstance();
+}
+
+::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_arr_in_arr_cfg_TestMapIsEntry_DoNotUse_kind_2eproto =
+    {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 0, 0, InitDefaultsscc_info_arr_in_arr_cfg_TestMapIsEntry_DoNotUse_kind_2eproto}, {}};
+
+static void InitDefaultsscc_info_arr_in_arr_cfg_TestMapSmEntry_DoNotUse_kind_2eproto() {
+  GOOGLE_PROTOBUF_VERIFY_VERSION;
+
+  {
+    void* ptr = &::_arr_in_arr_cfg_TestMapSmEntry_DoNotUse_default_instance_;
+    new (ptr) ::arr_in_arr_cfg_TestMapSmEntry_DoNotUse();
+  }
+  ::arr_in_arr_cfg_TestMapSmEntry_DoNotUse::InitAsDefaultInstance();
+}
+
+::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<1> scc_info_arr_in_arr_cfg_TestMapSmEntry_DoNotUse_kind_2eproto =
+    {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 1, 0, InitDefaultsscc_info_arr_in_arr_cfg_TestMapSmEntry_DoNotUse_kind_2eproto}, {
+      &scc_info_dep2_cfg_dep_5flevel2_2eproto.base,}};
 
 static void InitDefaultsscc_info_event_cfg_kind_2eproto() {
   GOOGLE_PROTOBUF_VERIFY_VERSION;
@@ -205,7 +245,7 @@ static void InitDefaultsscc_info_test_msg_verifier_kind_2eproto() {
 ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_test_msg_verifier_kind_2eproto =
     {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 0, 0, InitDefaultsscc_info_test_msg_verifier_kind_2eproto}, {}};
 
-static ::PROTOBUF_NAMESPACE_ID::Metadata file_level_metadata_kind_2eproto[9];
+static ::PROTOBUF_NAMESPACE_ID::Metadata file_level_metadata_kind_2eproto[11];
 static const ::PROTOBUF_NAMESPACE_ID::EnumDescriptor* file_level_enum_descriptors_kind_2eproto[2];
 static constexpr ::PROTOBUF_NAMESPACE_ID::ServiceDescriptor const** file_level_service_descriptors_kind_2eproto = nullptr;
 
@@ -259,6 +299,24 @@ const ::PROTOBUF_NAMESPACE_ID::uint32 TableStruct_kind_2eproto::offsets[] PROTOB
   ~0u,  // no _weak_field_map_
   PROTOBUF_FIELD_OFFSET(::test_msg_verifier, test_id_1_),
   PROTOBUF_FIELD_OFFSET(::test_msg_verifier, test_id_2_),
+  PROTOBUF_FIELD_OFFSET(::arr_in_arr_cfg_TestMapIsEntry_DoNotUse, _has_bits_),
+  PROTOBUF_FIELD_OFFSET(::arr_in_arr_cfg_TestMapIsEntry_DoNotUse, _internal_metadata_),
+  ~0u,  // no _extensions_
+  ~0u,  // no _oneof_case_
+  ~0u,  // no _weak_field_map_
+  PROTOBUF_FIELD_OFFSET(::arr_in_arr_cfg_TestMapIsEntry_DoNotUse, key_),
+  PROTOBUF_FIELD_OFFSET(::arr_in_arr_cfg_TestMapIsEntry_DoNotUse, value_),
+  0,
+  1,
+  PROTOBUF_FIELD_OFFSET(::arr_in_arr_cfg_TestMapSmEntry_DoNotUse, _has_bits_),
+  PROTOBUF_FIELD_OFFSET(::arr_in_arr_cfg_TestMapSmEntry_DoNotUse, _internal_metadata_),
+  ~0u,  // no _extensions_
+  ~0u,  // no _oneof_case_
+  ~0u,  // no _weak_field_map_
+  PROTOBUF_FIELD_OFFSET(::arr_in_arr_cfg_TestMapSmEntry_DoNotUse, key_),
+  PROTOBUF_FIELD_OFFSET(::arr_in_arr_cfg_TestMapSmEntry_DoNotUse, value_),
+  0,
+  1,
   ~0u,  // no _has_bits_
   PROTOBUF_FIELD_OFFSET(::arr_in_arr_cfg, _internal_metadata_),
   ~0u,  // no _extensions_
@@ -270,6 +328,8 @@ const ::PROTOBUF_NAMESPACE_ID::uint32 TableStruct_kind_2eproto::offsets[] PROTOB
   PROTOBUF_FIELD_OFFSET(::arr_in_arr_cfg, test_plain_enum_arr_),
   PROTOBUF_FIELD_OFFSET(::arr_in_arr_cfg, test_plain_msg_),
   PROTOBUF_FIELD_OFFSET(::arr_in_arr_cfg, test_plain_msg_arr_),
+  PROTOBUF_FIELD_OFFSET(::arr_in_arr_cfg, test_map_is_),
+  PROTOBUF_FIELD_OFFSET(::arr_in_arr_cfg, test_map_sm_),
   ~0u,  // no _has_bits_
   PROTOBUF_FIELD_OFFSET(::event_reward_item, _internal_metadata_),
   ~0u,  // no _extensions_
@@ -315,10 +375,12 @@ static const ::PROTOBUF_NAMESPACE_ID::internal::MigrationSchema schemas[] PROTOB
   { 23, -1, sizeof(::arr_in_arr_test_nested_message)},
   { 31, -1, sizeof(::arr_in_arr)},
   { 42, -1, sizeof(::test_msg_verifier)},
-  { 49, -1, sizeof(::arr_in_arr_cfg)},
-  { 60, -1, sizeof(::event_reward_item)},
-  { 70, -1, sizeof(::event_rule_item)},
-  { 80, -1, sizeof(::event_cfg)},
+  { 49, 56, sizeof(::arr_in_arr_cfg_TestMapIsEntry_DoNotUse)},
+  { 58, 65, sizeof(::arr_in_arr_cfg_TestMapSmEntry_DoNotUse)},
+  { 67, -1, sizeof(::arr_in_arr_cfg)},
+  { 80, -1, sizeof(::event_reward_item)},
+  { 90, -1, sizeof(::event_rule_item)},
+  { 100, -1, sizeof(::event_cfg)},
 };
 
 static ::PROTOBUF_NAMESPACE_ID::Message const * const file_default_instances[] = {
@@ -327,6 +389,8 @@ static ::PROTOBUF_NAMESPACE_ID::Message const * const file_default_instances[] =
   reinterpret_cast<const ::PROTOBUF_NAMESPACE_ID::Message*>(&::_arr_in_arr_test_nested_message_default_instance_),
   reinterpret_cast<const ::PROTOBUF_NAMESPACE_ID::Message*>(&::_arr_in_arr_default_instance_),
   reinterpret_cast<const ::PROTOBUF_NAMESPACE_ID::Message*>(&::_test_msg_verifier_default_instance_),
+  reinterpret_cast<const ::PROTOBUF_NAMESPACE_ID::Message*>(&::_arr_in_arr_cfg_TestMapIsEntry_DoNotUse_default_instance_),
+  reinterpret_cast<const ::PROTOBUF_NAMESPACE_ID::Message*>(&::_arr_in_arr_cfg_TestMapSmEntry_DoNotUse_default_instance_),
   reinterpret_cast<const ::PROTOBUF_NAMESPACE_ID::Message*>(&::_arr_in_arr_cfg_default_instance_),
   reinterpret_cast<const ::PROTOBUF_NAMESPACE_ID::Message*>(&::_event_reward_item_default_instance_),
   reinterpret_cast<const ::PROTOBUF_NAMESPACE_ID::Message*>(&::_event_rule_item_default_instance_),
@@ -335,70 +399,79 @@ static ::PROTOBUF_NAMESPACE_ID::Message const * const file_default_instances[] =
 
 const char descriptor_table_protodef_kind_2eproto[] PROTOBUF_SECTION_VARIABLE(protodesc_cold) =
   "\n\nkind.proto\032\020xresloader.proto\032\023xresload"
-  "er_ue.proto\032\020dependency.proto\"\250\001\n\010role_c"
-  "fg\022\n\n\002id\030\001 \001(\r\022\024\n\014unlock_level\030\002 \001(\r\022\021\n\t"
-  "cost_type\030\003 \001(\r\022\022\n\ncost_value\030\004 \001(\005\022\014\n\004n"
-  "ame\030\005 \001(\t\022\032\n\010dep_test\030\n \001(\0132\010.dep_cfg\022\022\n"
-  "\ntest_array\030\013 \003(\t\022\025\n\rint_as_string\030\014 \001(\t"
-  "\"\305\001\n\020role_upgrade_cfg\022\020\n\002Id\030\001 \001(\rB\004\350D\350\007\022"
-  "\022\n\005Level\030\002 \001(\rB\003\350D\001\0223\n\010CostType\030\003 \001(\rB!\312"
-  ">\tcost_type\232\?\022Refer to cost_type\022\021\n\tCost"
-  "Value\030\004 \001(\005\022\020\n\010ScoreAdd\030\005 \001(\005:1\352D\006helper"
-  "\312>%Test role_upgrade_cfg with multi keys"
-  "\"\241\004\n\narr_in_arr\022-\n\004name\030\001 \001(\tB\037\232\?\034This i"
-  "s a test name in array\022\017\n\007int_arr\030\002 \003(\005\022"
-  "\017\n\007str_arr\030\003 \003(\t\022#\n\016test_info_role\030\013 \001(\013"
-  "2\t.role_cfgH\000\0222\n\025test_role_upgrade_cfg\030\014"
-  " \001(\0132\021.role_upgrade_cfgH\000\032\373\001\n\023test_neste"
-  "d_message\0222\n\035test_nested_message_info_ro"
-  "le\030\013 \001(\0132\t.role_cfgH\000\022A\n$test_nested_mes"
-  "sage_role_upgrade_cfg\030\014 \001(\0132\021.role_upgra"
-  "de_cfgH\000\"`\n\020test_nested_enum\022%\n!EN_TEST_"
-  "NESTED_MESSAGE_ENUM_VAL_1\020\000\022%\n!EN_TEST_N"
-  "ESTED_MESSAGE_ENUM_VAL_2\020{B\013\n\ttest_onof\""
-  "P\n\020test_nested_enum\022\035\n\031EN_TEST_NESTED_EN"
-  "UM_VAL_1\020\000\022\035\n\031EN_TEST_NESTED_ENUM_VAL_2\020"
-  "{:\014\352D\006helper\360D\001B\013\n\ttest_onof\"V\n\021test_msg"
-  "_verifier\022\022\n\ttest_id_1\030\221N \001(\r\022&\n\ttest_id"
-  "_2\030\222N \001(\rB\022\242\?\017\346\265\213\350\257\225ID\345\210\253\345\220\2152:\005\242\?\002-^\"\223\002\n"
-  "\016arr_in_arr_cfg\022\037\n\002id\030\001 \001(\rB\023\350D\001\232\?\rThis "
-  "is a Key\022\030\n\003arr\030\002 \003(\0132\013.arr_in_arr\022\032\n\022te"
-  "st_plain_int_arr\030\003 \003(\005\022\'\n\023test_plain_enu"
-  "m_arr\030\004 \003(\0162\n.cost_type\0220\n\016test_plain_ms"
-  "g\030\005 \001(\0132\022.test_msg_verifierB\004\262\?\001&\022.\n\022tes"
-  "t_plain_msg_arr\030\006 \003(\0132\022.test_msg_verifie"
-  "r:\037\352D\006helper\312>\023Test arr_in_arr_cfg\"\243\001\n\021e"
-  "vent_reward_item\022\017\n\007item_id\030\001 \001(\r\022\022\n\nite"
-  "m_count\030\002 \001(\r\022&\n\013nested_note\030\013 \001(\tB\017\242\?\014\346"
-  "\217\217\350\277\260\346\226\207\346\234\254H\000\0227\n\020nested_enum_type\030\014 \001(\0162"
-  "\n.cost_typeB\017\242\?\014\350\264\247\345\270\201\347\261\273\345\236\213H\000B\010\n\006nested"
-  "\"\241\001\n\017event_rule_item\022\017\n\007rule_id\030\001 \001(\r\022\022\n"
-  "\nrule_param\030\002 \001(\r\022&\n\013nested_note\030\013 \001(\tB\017"
-  "\242\?\014\346\217\217\350\277\260\346\226\207\346\234\254H\000\0227\n\020nested_enum_type\030\014 "
-  "\001(\0162\n.cost_typeB\017\242\?\014\350\264\247\345\270\201\347\261\273\345\236\213H\000B\010\n\006ne"
-  "sted\"\360\003\n\tevent_cfg\022\017\n\002id\030\001 \001(\rB\003\350Dd\022\024\n\007p"
-  "rocess\030\002 \001(\rB\003\350D\001\022\036\n\004rule\030\006 \001(\0132\020.event_"
-  "rule_item\022\'\n\rspecify_field\030\007 \001(\0132\020.event"
-  "_rule_item\0223\n\004item\030\013 \001(\0132\022.event_reward_"
-  "itemB\017\242\?\014\345\245\226\345\212\261\351\201\223\345\205\267H\000\022#\n\010user_exp\030\014 \001("
-  "\003B\017\242\?\014\345\245\226\345\212\261\347\273\217\351\252\214H\000\022\037\n\004note\030\r \001(\tB\017\242\?\014\346"
-  "\217\217\350\277\260\346\226\207\346\234\254H\000\0220\n\tenum_type\030\016 \001(\0162\n.cost_"
-  "typeB\017\242\?\014\350\264\247\345\270\201\347\261\273\345\236\213H\000\022%\n\nuser_level\0303 "
-  "\001(\rB\017\242\?\014\347\216\251\345\256\266\347\255\211\347\272\247H\001\022(\n\010test_arr\030[ \003(\013"
-  "2\020.event_rule_itemB\004\262\?\001;\022.\n\016test_empty_a"
-  "rr\030\\ \003(\0132\020.event_rule_itemB\004\262\?\001;:,\352D\006hel"
-  "per\312> Test event_cfg with oneof fieldsB\010"
-  "\n\006rewardB\r\n\013unlock_typeb\006proto3"
+  "er_ue.proto\032\020dependency.proto\032\020dep_level"
+  "2.proto\"\250\001\n\010role_cfg\022\n\n\002id\030\001 \001(\r\022\024\n\014unlo"
+  "ck_level\030\002 \001(\r\022\021\n\tcost_type\030\003 \001(\r\022\022\n\ncos"
+  "t_value\030\004 \001(\005\022\014\n\004name\030\005 \001(\t\022\032\n\010dep_test\030"
+  "\n \001(\0132\010.dep_cfg\022\022\n\ntest_array\030\013 \003(\t\022\025\n\ri"
+  "nt_as_string\030\014 \001(\t\"\305\001\n\020role_upgrade_cfg\022"
+  "\020\n\002Id\030\001 \001(\rB\004\350D\350\007\022\022\n\005Level\030\002 \001(\rB\003\350D\001\0223\n"
+  "\010CostType\030\003 \001(\rB!\312>\tcost_type\232\?\022Refer to"
+  " cost_type\022\021\n\tCostValue\030\004 \001(\005\022\020\n\010ScoreAd"
+  "d\030\005 \001(\005:1\352D\006helper\312>%Test role_upgrade_c"
+  "fg with multi keys\"\241\004\n\narr_in_arr\022-\n\004nam"
+  "e\030\001 \001(\tB\037\232\?\034This is a test name in array"
+  "\022\017\n\007int_arr\030\002 \003(\005\022\017\n\007str_arr\030\003 \003(\t\022#\n\016te"
+  "st_info_role\030\013 \001(\0132\t.role_cfgH\000\0222\n\025test_"
+  "role_upgrade_cfg\030\014 \001(\0132\021.role_upgrade_cf"
+  "gH\000\032\373\001\n\023test_nested_message\0222\n\035test_nest"
+  "ed_message_info_role\030\013 \001(\0132\t.role_cfgH\000\022"
+  "A\n$test_nested_message_role_upgrade_cfg\030"
+  "\014 \001(\0132\021.role_upgrade_cfgH\000\"`\n\020test_neste"
+  "d_enum\022%\n!EN_TEST_NESTED_MESSAGE_ENUM_VA"
+  "L_1\020\000\022%\n!EN_TEST_NESTED_MESSAGE_ENUM_VAL"
+  "_2\020{B\013\n\ttest_onof\"P\n\020test_nested_enum\022\035\n"
+  "\031EN_TEST_NESTED_ENUM_VAL_1\020\000\022\035\n\031EN_TEST_"
+  "NESTED_ENUM_VAL_2\020{:\014\352D\006helper\360D\001B\013\n\ttes"
+  "t_onof\"V\n\021test_msg_verifier\022\022\n\ttest_id_1"
+  "\030\221N \001(\r\022&\n\ttest_id_2\030\222N \001(\rB\022\242\?\017\346\265\213\350\257\225ID"
+  "\345\210\253\345\220\2152:\005\242\?\002-^\"\362\003\n\016arr_in_arr_cfg\022\037\n\002id\030"
+  "\001 \001(\rB\023\350D\001\232\?\rThis is a Key\022\030\n\003arr\030\002 \003(\0132"
+  "\013.arr_in_arr\022\032\n\022test_plain_int_arr\030\003 \003(\005"
+  "\022\'\n\023test_plain_enum_arr\030\004 \003(\0162\n.cost_typ"
+  "e\0220\n\016test_plain_msg\030\005 \001(\0132\022.test_msg_ver"
+  "ifierB\004\262\?\001&\022.\n\022test_plain_msg_arr\030\006 \003(\0132"
+  "\022.test_msg_verifier\0223\n\013test_map_is\030\007 \003(\013"
+  "2\036.arr_in_arr_cfg.TestMapIsEntry\0229\n\013test"
+  "_map_sm\030\010 \003(\0132\036.arr_in_arr_cfg.TestMapSm"
+  "EntryB\004\262\?\001|\0320\n\016TestMapIsEntry\022\013\n\003key\030\001 \001"
+  "(\005\022\r\n\005value\030\002 \001(\t:\0028\001\032;\n\016TestMapSmEntry\022"
+  "\013\n\003key\030\001 \001(\t\022\030\n\005value\030\002 \001(\0132\t.dep2_cfg:\002"
+  "8\001:\037\352D\006helper\312>\023Test arr_in_arr_cfg\"\243\001\n\021"
+  "event_reward_item\022\017\n\007item_id\030\001 \001(\r\022\022\n\nit"
+  "em_count\030\002 \001(\r\022&\n\013nested_note\030\013 \001(\tB\017\242\?\014"
+  "\346\217\217\350\277\260\346\226\207\346\234\254H\000\0227\n\020nested_enum_type\030\014 \001(\016"
+  "2\n.cost_typeB\017\242\?\014\350\264\247\345\270\201\347\261\273\345\236\213H\000B\010\n\006neste"
+  "d\"\241\001\n\017event_rule_item\022\017\n\007rule_id\030\001 \001(\r\022\022"
+  "\n\nrule_param\030\002 \001(\r\022&\n\013nested_note\030\013 \001(\tB"
+  "\017\242\?\014\346\217\217\350\277\260\346\226\207\346\234\254H\000\0227\n\020nested_enum_type\030\014"
+  " \001(\0162\n.cost_typeB\017\242\?\014\350\264\247\345\270\201\347\261\273\345\236\213H\000B\010\n\006n"
+  "ested\"\360\003\n\tevent_cfg\022\017\n\002id\030\001 \001(\rB\003\350Dd\022\024\n\007"
+  "process\030\002 \001(\rB\003\350D\001\022\036\n\004rule\030\006 \001(\0132\020.event"
+  "_rule_item\022\'\n\rspecify_field\030\007 \001(\0132\020.even"
+  "t_rule_item\0223\n\004item\030\013 \001(\0132\022.event_reward"
+  "_itemB\017\242\?\014\345\245\226\345\212\261\351\201\223\345\205\267H\000\022#\n\010user_exp\030\014 \001"
+  "(\003B\017\242\?\014\345\245\226\345\212\261\347\273\217\351\252\214H\000\022\037\n\004note\030\r \001(\tB\017\242\?\014"
+  "\346\217\217\350\277\260\346\226\207\346\234\254H\000\0220\n\tenum_type\030\016 \001(\0162\n.cost"
+  "_typeB\017\242\?\014\350\264\247\345\270\201\347\261\273\345\236\213H\000\022%\n\nuser_level\0303"
+  " \001(\rB\017\242\?\014\347\216\251\345\256\266\347\255\211\347\272\247H\001\022(\n\010test_arr\030[ \003("
+  "\0132\020.event_rule_itemB\004\262\?\001;\022.\n\016test_empty_"
+  "arr\030\\ \003(\0132\020.event_rule_itemB\004\262\?\001;:,\352D\006he"
+  "lper\312> Test event_cfg with oneof fieldsB"
+  "\010\n\006rewardB\r\n\013unlock_typeb\006proto3"
   ;
-static const ::PROTOBUF_NAMESPACE_ID::internal::DescriptorTable*const descriptor_table_kind_2eproto_deps[3] = {
+static const ::PROTOBUF_NAMESPACE_ID::internal::DescriptorTable*const descriptor_table_kind_2eproto_deps[4] = {
+  &::descriptor_table_dep_5flevel2_2eproto,
   &::descriptor_table_dependency_2eproto,
   &::descriptor_table_xresloader_2eproto,
   &::descriptor_table_xresloader_5fue_2eproto,
 };
-static ::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase*const descriptor_table_kind_2eproto_sccs[9] = {
+static ::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase*const descriptor_table_kind_2eproto_sccs[11] = {
   &scc_info_arr_in_arr_kind_2eproto.base,
   &scc_info_arr_in_arr_test_nested_message_kind_2eproto.base,
   &scc_info_arr_in_arr_cfg_kind_2eproto.base,
+  &scc_info_arr_in_arr_cfg_TestMapIsEntry_DoNotUse_kind_2eproto.base,
+  &scc_info_arr_in_arr_cfg_TestMapSmEntry_DoNotUse_kind_2eproto.base,
   &scc_info_event_cfg_kind_2eproto.base,
   &scc_info_event_reward_item_kind_2eproto.base,
   &scc_info_event_rule_item_kind_2eproto.base,
@@ -408,10 +481,10 @@ static ::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase*const descriptor_table_kin
 };
 static ::PROTOBUF_NAMESPACE_ID::internal::once_flag descriptor_table_kind_2eproto_once;
 const ::PROTOBUF_NAMESPACE_ID::internal::DescriptorTable descriptor_table_kind_2eproto = {
-  false, false, descriptor_table_protodef_kind_2eproto, "kind.proto", 2191,
-  &descriptor_table_kind_2eproto_once, descriptor_table_kind_2eproto_sccs, descriptor_table_kind_2eproto_deps, 9, 3,
+  false, false, descriptor_table_protodef_kind_2eproto, "kind.proto", 2432,
+  &descriptor_table_kind_2eproto_once, descriptor_table_kind_2eproto_sccs, descriptor_table_kind_2eproto_deps, 11, 4,
   schemas, file_default_instances, TableStruct_kind_2eproto::offsets,
-  file_level_metadata_kind_2eproto, 9, file_level_enum_descriptors_kind_2eproto, file_level_service_descriptors_kind_2eproto,
+  file_level_metadata_kind_2eproto, 11, file_level_enum_descriptors_kind_2eproto, file_level_service_descriptors_kind_2eproto,
 };
 
 // Force running AddDescriptors() at dynamic initialization time.
@@ -2187,6 +2260,40 @@ void test_msg_verifier::InternalSwap(test_msg_verifier* other) {
 
 // ===================================================================
 
+arr_in_arr_cfg_TestMapIsEntry_DoNotUse::arr_in_arr_cfg_TestMapIsEntry_DoNotUse() {}
+arr_in_arr_cfg_TestMapIsEntry_DoNotUse::arr_in_arr_cfg_TestMapIsEntry_DoNotUse(::PROTOBUF_NAMESPACE_ID::Arena* arena)
+    : SuperType(arena) {}
+void arr_in_arr_cfg_TestMapIsEntry_DoNotUse::MergeFrom(const arr_in_arr_cfg_TestMapIsEntry_DoNotUse& other) {
+  MergeFromInternal(other);
+}
+::PROTOBUF_NAMESPACE_ID::Metadata arr_in_arr_cfg_TestMapIsEntry_DoNotUse::GetMetadata() const {
+  return GetMetadataStatic();
+}
+void arr_in_arr_cfg_TestMapIsEntry_DoNotUse::MergeFrom(
+    const ::PROTOBUF_NAMESPACE_ID::Message& other) {
+  ::PROTOBUF_NAMESPACE_ID::Message::MergeFrom(other);
+}
+
+
+// ===================================================================
+
+arr_in_arr_cfg_TestMapSmEntry_DoNotUse::arr_in_arr_cfg_TestMapSmEntry_DoNotUse() {}
+arr_in_arr_cfg_TestMapSmEntry_DoNotUse::arr_in_arr_cfg_TestMapSmEntry_DoNotUse(::PROTOBUF_NAMESPACE_ID::Arena* arena)
+    : SuperType(arena) {}
+void arr_in_arr_cfg_TestMapSmEntry_DoNotUse::MergeFrom(const arr_in_arr_cfg_TestMapSmEntry_DoNotUse& other) {
+  MergeFromInternal(other);
+}
+::PROTOBUF_NAMESPACE_ID::Metadata arr_in_arr_cfg_TestMapSmEntry_DoNotUse::GetMetadata() const {
+  return GetMetadataStatic();
+}
+void arr_in_arr_cfg_TestMapSmEntry_DoNotUse::MergeFrom(
+    const ::PROTOBUF_NAMESPACE_ID::Message& other) {
+  ::PROTOBUF_NAMESPACE_ID::Message::MergeFrom(other);
+}
+
+
+// ===================================================================
+
 void arr_in_arr_cfg::InitAsDefaultInstance() {
   ::_arr_in_arr_cfg_default_instance_._instance.get_mutable()->test_plain_msg_ = const_cast< ::test_msg_verifier*>(
       ::test_msg_verifier::internal_default_instance());
@@ -2200,12 +2307,17 @@ const ::test_msg_verifier&
 arr_in_arr_cfg::_Internal::test_plain_msg(const arr_in_arr_cfg* msg) {
   return *msg->test_plain_msg_;
 }
+void arr_in_arr_cfg::clear_test_map_sm() {
+  test_map_sm_.Clear();
+}
 arr_in_arr_cfg::arr_in_arr_cfg(::PROTOBUF_NAMESPACE_ID::Arena* arena)
   : ::PROTOBUF_NAMESPACE_ID::Message(arena),
   arr_(arena),
   test_plain_int_arr_(arena),
   test_plain_enum_arr_(arena),
-  test_plain_msg_arr_(arena) {
+  test_plain_msg_arr_(arena),
+  test_map_is_(arena),
+  test_map_sm_(arena) {
   SharedCtor();
   RegisterArenaDtor(arena);
   // @@protoc_insertion_point(arena_constructor:arr_in_arr_cfg)
@@ -2217,6 +2329,8 @@ arr_in_arr_cfg::arr_in_arr_cfg(const arr_in_arr_cfg& from)
       test_plain_enum_arr_(from.test_plain_enum_arr_),
       test_plain_msg_arr_(from.test_plain_msg_arr_) {
   _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
+  test_map_is_.MergeFrom(from.test_map_is_);
+  test_map_sm_.MergeFrom(from.test_map_sm_);
   if (from._internal_has_test_plain_msg()) {
     test_plain_msg_ = new ::test_msg_verifier(*from.test_plain_msg_);
   } else {
@@ -2269,6 +2383,8 @@ void arr_in_arr_cfg::Clear() {
   test_plain_int_arr_.Clear();
   test_plain_enum_arr_.Clear();
   test_plain_msg_arr_.Clear();
+  test_map_is_.Clear();
+  test_map_sm_.Clear();
   if (GetArena() == nullptr && test_plain_msg_ != nullptr) {
     delete test_plain_msg_;
   }
@@ -2342,6 +2458,30 @@ const char* arr_in_arr_cfg::_InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE
             CHK_(ptr);
             if (!ctx->DataAvailable(ptr)) break;
           } while (::PROTOBUF_NAMESPACE_ID::internal::ExpectTag<50>(ptr));
+        } else goto handle_unusual;
+        continue;
+      // map<int32, string> test_map_is = 7;
+      case 7:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 58)) {
+          ptr -= 1;
+          do {
+            ptr += 1;
+            ptr = ctx->ParseMessage(&test_map_is_, ptr);
+            CHK_(ptr);
+            if (!ctx->DataAvailable(ptr)) break;
+          } while (::PROTOBUF_NAMESPACE_ID::internal::ExpectTag<58>(ptr));
+        } else goto handle_unusual;
+        continue;
+      // map<string, .dep2_cfg> test_map_sm = 8 [(.org.xresloader.field_separator) = "|"];
+      case 8:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 66)) {
+          ptr -= 1;
+          do {
+            ptr += 1;
+            ptr = ctx->ParseMessage(&test_map_sm_, ptr);
+            CHK_(ptr);
+            if (!ctx->DataAvailable(ptr)) break;
+          } while (::PROTOBUF_NAMESPACE_ID::internal::ExpectTag<66>(ptr));
         } else goto handle_unusual;
         continue;
       default: {
@@ -2420,6 +2560,88 @@ failure:
       InternalWriteMessage(6, this->_internal_test_plain_msg_arr(i), target, stream);
   }
 
+  // map<int32, string> test_map_is = 7;
+  if (!this->_internal_test_map_is().empty()) {
+    typedef ::PROTOBUF_NAMESPACE_ID::Map< ::PROTOBUF_NAMESPACE_ID::int32, std::string >::const_pointer
+        ConstPtr;
+    typedef ::PROTOBUF_NAMESPACE_ID::internal::SortItem< ::PROTOBUF_NAMESPACE_ID::int32, ConstPtr > SortItem;
+    typedef ::PROTOBUF_NAMESPACE_ID::internal::CompareByFirstField<SortItem> Less;
+    struct Utf8Check {
+      static void Check(ConstPtr p) {
+        ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
+          p->second.data(), static_cast<int>(p->second.length()),
+          ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::SERIALIZE,
+          "arr_in_arr_cfg.TestMapIsEntry.value");
+      }
+    };
+
+    if (stream->IsSerializationDeterministic() &&
+        this->_internal_test_map_is().size() > 1) {
+      ::std::unique_ptr<SortItem[]> items(
+          new SortItem[this->_internal_test_map_is().size()]);
+      typedef ::PROTOBUF_NAMESPACE_ID::Map< ::PROTOBUF_NAMESPACE_ID::int32, std::string >::size_type size_type;
+      size_type n = 0;
+      for (::PROTOBUF_NAMESPACE_ID::Map< ::PROTOBUF_NAMESPACE_ID::int32, std::string >::const_iterator
+          it = this->_internal_test_map_is().begin();
+          it != this->_internal_test_map_is().end(); ++it, ++n) {
+        items[static_cast<ptrdiff_t>(n)] = SortItem(&*it);
+      }
+      ::std::sort(&items[0], &items[static_cast<ptrdiff_t>(n)], Less());
+      for (size_type i = 0; i < n; i++) {
+        target = arr_in_arr_cfg_TestMapIsEntry_DoNotUse::Funcs::InternalSerialize(7, items[static_cast<ptrdiff_t>(i)].second->first, items[static_cast<ptrdiff_t>(i)].second->second, target, stream);
+        Utf8Check::Check(&(*items[static_cast<ptrdiff_t>(i)].second));
+      }
+    } else {
+      for (::PROTOBUF_NAMESPACE_ID::Map< ::PROTOBUF_NAMESPACE_ID::int32, std::string >::const_iterator
+          it = this->_internal_test_map_is().begin();
+          it != this->_internal_test_map_is().end(); ++it) {
+        target = arr_in_arr_cfg_TestMapIsEntry_DoNotUse::Funcs::InternalSerialize(7, it->first, it->second, target, stream);
+        Utf8Check::Check(&(*it));
+      }
+    }
+  }
+
+  // map<string, .dep2_cfg> test_map_sm = 8 [(.org.xresloader.field_separator) = "|"];
+  if (!this->_internal_test_map_sm().empty()) {
+    typedef ::PROTOBUF_NAMESPACE_ID::Map< std::string, ::dep2_cfg >::const_pointer
+        ConstPtr;
+    typedef ConstPtr SortItem;
+    typedef ::PROTOBUF_NAMESPACE_ID::internal::CompareByDerefFirst<SortItem> Less;
+    struct Utf8Check {
+      static void Check(ConstPtr p) {
+        ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
+          p->first.data(), static_cast<int>(p->first.length()),
+          ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::SERIALIZE,
+          "arr_in_arr_cfg.TestMapSmEntry.key");
+      }
+    };
+
+    if (stream->IsSerializationDeterministic() &&
+        this->_internal_test_map_sm().size() > 1) {
+      ::std::unique_ptr<SortItem[]> items(
+          new SortItem[this->_internal_test_map_sm().size()]);
+      typedef ::PROTOBUF_NAMESPACE_ID::Map< std::string, ::dep2_cfg >::size_type size_type;
+      size_type n = 0;
+      for (::PROTOBUF_NAMESPACE_ID::Map< std::string, ::dep2_cfg >::const_iterator
+          it = this->_internal_test_map_sm().begin();
+          it != this->_internal_test_map_sm().end(); ++it, ++n) {
+        items[static_cast<ptrdiff_t>(n)] = SortItem(&*it);
+      }
+      ::std::sort(&items[0], &items[static_cast<ptrdiff_t>(n)], Less());
+      for (size_type i = 0; i < n; i++) {
+        target = arr_in_arr_cfg_TestMapSmEntry_DoNotUse::Funcs::InternalSerialize(8, items[static_cast<ptrdiff_t>(i)]->first, items[static_cast<ptrdiff_t>(i)]->second, target, stream);
+        Utf8Check::Check(&(*items[static_cast<ptrdiff_t>(i)]));
+      }
+    } else {
+      for (::PROTOBUF_NAMESPACE_ID::Map< std::string, ::dep2_cfg >::const_iterator
+          it = this->_internal_test_map_sm().begin();
+          it != this->_internal_test_map_sm().end(); ++it) {
+        target = arr_in_arr_cfg_TestMapSmEntry_DoNotUse::Funcs::InternalSerialize(8, it->first, it->second, target, stream);
+        Utf8Check::Check(&(*it));
+      }
+    }
+  }
+
   if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::InternalSerializeUnknownFieldsToArray(
         _internal_metadata_.unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(::PROTOBUF_NAMESPACE_ID::UnknownFieldSet::default_instance), target, stream);
@@ -2483,6 +2705,24 @@ size_t arr_in_arr_cfg::ByteSizeLong() const {
       ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(msg);
   }
 
+  // map<int32, string> test_map_is = 7;
+  total_size += 1 *
+      ::PROTOBUF_NAMESPACE_ID::internal::FromIntSize(this->_internal_test_map_is_size());
+  for (::PROTOBUF_NAMESPACE_ID::Map< ::PROTOBUF_NAMESPACE_ID::int32, std::string >::const_iterator
+      it = this->_internal_test_map_is().begin();
+      it != this->_internal_test_map_is().end(); ++it) {
+    total_size += arr_in_arr_cfg_TestMapIsEntry_DoNotUse::Funcs::ByteSizeLong(it->first, it->second);
+  }
+
+  // map<string, .dep2_cfg> test_map_sm = 8 [(.org.xresloader.field_separator) = "|"];
+  total_size += 1 *
+      ::PROTOBUF_NAMESPACE_ID::internal::FromIntSize(this->_internal_test_map_sm_size());
+  for (::PROTOBUF_NAMESPACE_ID::Map< std::string, ::dep2_cfg >::const_iterator
+      it = this->_internal_test_map_sm().begin();
+      it != this->_internal_test_map_sm().end(); ++it) {
+    total_size += arr_in_arr_cfg_TestMapSmEntry_DoNotUse::Funcs::ByteSizeLong(it->first, it->second);
+  }
+
   // .test_msg_verifier test_plain_msg = 5 [(.org.xresloader.field_separator) = "&"];
   if (this->has_test_plain_msg()) {
     total_size += 1 +
@@ -2532,6 +2772,8 @@ void arr_in_arr_cfg::MergeFrom(const arr_in_arr_cfg& from) {
   test_plain_int_arr_.MergeFrom(from.test_plain_int_arr_);
   test_plain_enum_arr_.MergeFrom(from.test_plain_enum_arr_);
   test_plain_msg_arr_.MergeFrom(from.test_plain_msg_arr_);
+  test_map_is_.MergeFrom(from.test_map_is_);
+  test_map_sm_.MergeFrom(from.test_map_sm_);
   if (from.has_test_plain_msg()) {
     _internal_mutable_test_plain_msg()->::test_msg_verifier::MergeFrom(from._internal_test_plain_msg());
   }
@@ -2565,6 +2807,8 @@ void arr_in_arr_cfg::InternalSwap(arr_in_arr_cfg* other) {
   test_plain_int_arr_.InternalSwap(&other->test_plain_int_arr_);
   test_plain_enum_arr_.InternalSwap(&other->test_plain_enum_arr_);
   test_plain_msg_arr_.InternalSwap(&other->test_plain_msg_arr_);
+  test_map_is_.Swap(&other->test_map_is_);
+  test_map_sm_.Swap(&other->test_map_sm_);
   ::PROTOBUF_NAMESPACE_ID::internal::memswap<
       PROTOBUF_FIELD_OFFSET(arr_in_arr_cfg, id_)
       + sizeof(arr_in_arr_cfg::id_)
@@ -3919,6 +4163,12 @@ template<> PROTOBUF_NOINLINE ::arr_in_arr* Arena::CreateMaybeMessage< ::arr_in_a
 }
 template<> PROTOBUF_NOINLINE ::test_msg_verifier* Arena::CreateMaybeMessage< ::test_msg_verifier >(Arena* arena) {
   return Arena::CreateMessageInternal< ::test_msg_verifier >(arena);
+}
+template<> PROTOBUF_NOINLINE ::arr_in_arr_cfg_TestMapIsEntry_DoNotUse* Arena::CreateMaybeMessage< ::arr_in_arr_cfg_TestMapIsEntry_DoNotUse >(Arena* arena) {
+  return Arena::CreateMessageInternal< ::arr_in_arr_cfg_TestMapIsEntry_DoNotUse >(arena);
+}
+template<> PROTOBUF_NOINLINE ::arr_in_arr_cfg_TestMapSmEntry_DoNotUse* Arena::CreateMaybeMessage< ::arr_in_arr_cfg_TestMapSmEntry_DoNotUse >(Arena* arena) {
+  return Arena::CreateMessageInternal< ::arr_in_arr_cfg_TestMapSmEntry_DoNotUse >(arena);
 }
 template<> PROTOBUF_NOINLINE ::arr_in_arr_cfg* Arena::CreateMaybeMessage< ::arr_in_arr_cfg >(Arena* arena) {
   return Arena::CreateMessageInternal< ::arr_in_arr_cfg >(arena);

@@ -770,6 +770,8 @@ public abstract class DataDstUEBase extends DataDstImpl {
                 }
 
                 buildForUEOnPrintRecord(buildObj, row_data, rule, codeInfo, fieldDataByOneof);
+
+                // TODO hint of datasource?
             }
 
             // 加载代码

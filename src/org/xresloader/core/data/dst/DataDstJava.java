@@ -4,6 +4,7 @@ import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import org.xresloader.core.ProgramOptions;
@@ -63,6 +64,11 @@ public abstract class DataDstJava extends DataDstImpl {
         return "java";
     }
 
+    public class DataDstDataSource {
+        String file = null;
+        String sheet = null;
+    }
+
     public class DataDstObject {
         public HashMap<String, Object> header = new HashMap<String, Object>();
         public HashMap<String, List<Object>> body = new HashMap<String, List<Object>>();
@@ -76,7 +82,9 @@ public abstract class DataDstJava extends DataDstImpl {
         ret.header.put("data_ver", ProgramOptions.getInstance().getDataVersion());
         ret.header.put("count", DataSrcImpl.getOurInstance().getRecordNumber());
         ret.header.put("hash_code", "no hash code");
-        ArrayList<String> descriptionList = new ArrayList<String>();
+        ArrayList<String> description_list = new ArrayList<String>();
+        LinkedList<HashMap<String, Object>> data_source = new LinkedList<HashMap<String, Object>>();
+        ret.header.put("data_source", data_source);
 
         List<Object> item_list = new ArrayList<Object>();
         ret.body.put(SchemeConf.getInstance().getProtoName(), item_list);
@@ -93,14 +101,18 @@ public abstract class DataDstJava extends DataDstImpl {
             }
 
             if (desc.getMessageExtension().description != null) {
-                descriptionList.add(desc.getMessageExtension().description);
+                description_list.add(desc.getMessageExtension().description);
             }
 
             ret.data_message_type = desc.getFullName();
+            HashMap<String, Object> new_data_source = new HashMap<String, Object>();
+            new_data_source.put("file", DataSrcImpl.getOurInstance().getCurrentFileName());
+            new_data_source.put("sheet", DataSrcImpl.getOurInstance().getCurrentTableName());
+            data_source.add(new_data_source);
         }
 
-        if (!descriptionList.isEmpty()) {
-            ret.header.put("description", String.join(getSystemEndl(), descriptionList));
+        if (!description_list.isEmpty()) {
+            ret.header.put("description", String.join(getSystemEndl(), description_list));
         }
 
         return ret;

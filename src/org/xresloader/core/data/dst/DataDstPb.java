@@ -782,6 +782,10 @@ public class DataDstPb extends DataDstImpl {
             }
 
             blocks.setDataMessageType(desc.getFullName());
+
+            PbHeaderV3.xresloader_data_source.Builder data_source = header.addDataSourceBuilder();
+            data_source.setFile(DataSrcImpl.getOurInstance().getCurrentFileName());
+            data_source.setSheet(DataSrcImpl.getOurInstance().getCurrentTableName());
         }
 
         header.setCount(count);
@@ -799,8 +803,8 @@ public class DataDstPb extends DataDstImpl {
             blocks.build().writeTo(writer);
         } catch (IOException e) {
             e.printStackTrace();
-            this.logErrorMessage("try to serialize protobuf header failed. %s", e.toString());
-            ProgramOptions.getLoger().error("%s", header.build().getInitializationErrorString());
+            this.logErrorMessage("try to serialize protobuf data failed. %s", e.toString());
+            ProgramOptions.getLoger().error("%s", blocks.getInitializationErrorString());
         }
         return writer.toByteArray();
     }

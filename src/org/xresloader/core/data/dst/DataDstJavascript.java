@@ -63,7 +63,6 @@ public class DataDstJavascript extends DataDstJava {
             }
             if (!conv_type.containsKey(header_name)) {
                 conv_type.put(header_name, data_obj.header);
-                break;
             }
         }
 

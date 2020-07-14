@@ -199,7 +199,12 @@ public class DataDstLua extends DataDstJava {
                         sb.append(item.getKey()).append("] = ");
                     }
                 } else {
-                    sb.append(item.getKey()).append(" = ");
+                    if (item.getKey() instanceof String && !isStrictIdentify((String) item.getKey())) {
+                        sb.append("[");
+                        sb.append(JSONObject.quote((String) item.getKey())).append("] = ");
+                    } else {
+                        sb.append(item.getKey()).append(" = ");
+                    }
                 }
 
                 writeData(sb, item.getValue(), ident_num + 1);

@@ -7,6 +7,7 @@ import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.regex.Pattern;
 import org.xresloader.core.ProgramOptions;
 import org.xresloader.core.data.err.ConvException;
 import org.xresloader.core.data.src.DataContainer;
@@ -19,6 +20,8 @@ import org.xresloader.core.scheme.SchemeConf;
  * Created by owentou on 2015/04/29.
  */
 public abstract class DataDstJava extends DataDstImpl {
+    private static Pattern strick_identify_rule = Pattern.compile("^[a-zA-Z]\\w*$", Pattern.CASE_INSENSITIVE);
+
     public class SpecialInnerHashMap<K, V> extends HashMap<K, V> {
         public SpecialInnerHashMap(int initialCapacity, float loadFactor) {
             super(initialCapacity, loadFactor);
@@ -55,6 +58,18 @@ public abstract class DataDstJava extends DataDstImpl {
         public SpecialInnerHashMap(Map<? extends K, ? extends V> m) {
             super(m);
         }
+    }
+
+    static public boolean isStrictIdentify(String input) {
+        if (input == null) {
+            return false;
+        }
+
+        if (input.isEmpty()) {
+            return false;
+        }
+
+        return strick_identify_rule.matcher(input).matches();
     }
 
     /**

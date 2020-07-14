@@ -774,6 +774,8 @@ public class DataDstPbHelper {
             T msg, Map<Descriptors.FieldDescriptor, Object> options,
             com.google.protobuf.ExtensionRegistry custom_extensions) {
         HashMap<String, Object> ret = null;
+        HashMap<String, String> conflictChecker = new HashMap<String, String>();
+        String empty = "";
         if (null == custom_extensions) {
             return ret;
         }
@@ -782,6 +784,7 @@ public class DataDstPbHelper {
             ret = new HashMap<String, Object>();
             for (Map.Entry<Descriptors.FieldDescriptor, Object> kv : options.entrySet()) {
                 ret.put(kv.getKey().getName(), convertMessageFieldIntoObject(kv.getKey(), kv.getValue(), true));
+                conflictChecker.put(kv.getKey().getName(), empty);
             }
         }
 
@@ -804,7 +807,8 @@ public class DataDstPbHelper {
                 continue;
             }
 
-            if (ret != null && ret.containsKey(ext_type.descriptor.getName())) {
+            String shortName = ext_type.descriptor.getName();
+            if (ret != null && ret.containsKey(shortName)) {
                 continue;
             }
 
@@ -815,7 +819,25 @@ public class DataDstPbHelper {
                     if (ret == null) {
                         ret = new HashMap<String, Object>();
                     }
-                    ret.put(ext_type.descriptor.getName(), val);
+
+                    // Switch to full name if found conflict name
+                    String oldFullName = conflictChecker.getOrDefault(shortName, null);
+                    if (oldFullName != null) {
+                        if (!oldFullName.isEmpty()) {
+                            Object oldValue = ret.getOrDefault(shortName, null);
+                            if (oldValue != null) {
+                                ret.put(oldFullName, oldValue);
+                                ret.remove(shortName);
+                            }
+
+                            conflictChecker.replace(shortName, empty);
+                        }
+
+                        ret.put(ext_type.descriptor.getFullName(), val);
+                    } else {
+                        conflictChecker.put(shortName, ext_type.descriptor.getFullName());
+                        ret.put(ext_type.descriptor.getName(), val);
+                    }
                 }
             } catch (InvalidProtocolBufferException | UnsupportedEncodingException e) {
                 // Ignore error

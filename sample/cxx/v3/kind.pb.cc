@@ -407,7 +407,7 @@ const char descriptor_table_protodef_kind_2eproto[] PROTOBUF_SECTION_VARIABLE(pr
   "nt_as_string\030\014 \001(\t\"\305\001\n\020role_upgrade_cfg\022"
   "\020\n\002Id\030\001 \001(\rB\004\350D\350\007\022\022\n\005Level\030\002 \001(\rB\003\350D\001\0223\n"
   "\010CostType\030\003 \001(\rB!\312>\tcost_type\232\?\022Refer to"
-  " cost_type\022\021\n\tCostValue\030\004 \001(\005\022\020\n\010ScoreAd"
+  " cost_type\022\021\n\tCostValue\030\004 \001(\003\022\020\n\010ScoreAd"
   "d\030\005 \001(\005:1\352D\006helper\312>%Test role_upgrade_c"
   "fg with multi keys\"\241\004\n\narr_in_arr\022-\n\004nam"
   "e\030\001 \001(\tB\037\232\?\034This is a test name in array"
@@ -1066,7 +1066,7 @@ const char* role_upgrade_cfg::_InternalParse(const char* ptr, ::PROTOBUF_NAMESPA
           CHK_(ptr);
         } else goto handle_unusual;
         continue;
-      // int32 CostValue = 4;
+      // int64 CostValue = 4;
       case 4:
         if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 32)) {
           costvalue_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint64(&ptr);
@@ -1126,10 +1126,10 @@ failure:
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteUInt32ToArray(3, this->_internal_costtype(), target);
   }
 
-  // int32 CostValue = 4;
+  // int64 CostValue = 4;
   if (this->costvalue() != 0) {
     target = stream->EnsureSpace(target);
-    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt32ToArray(4, this->_internal_costvalue(), target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt64ToArray(4, this->_internal_costvalue(), target);
   }
 
   // int32 ScoreAdd = 5;
@@ -1168,18 +1168,18 @@ size_t role_upgrade_cfg::ByteSizeLong() const {
         this->_internal_level());
   }
 
+  // int64 CostValue = 4;
+  if (this->costvalue() != 0) {
+    total_size += 1 +
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::Int64Size(
+        this->_internal_costvalue());
+  }
+
   // uint32 CostType = 3 [(.org.xresloader.verifier) = "cost_type", (.org.xresloader.field_description) = "Refer to cost_type"];
   if (this->costtype() != 0) {
     total_size += 1 +
       ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::UInt32Size(
         this->_internal_costtype());
-  }
-
-  // int32 CostValue = 4;
-  if (this->costvalue() != 0) {
-    total_size += 1 +
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::Int32Size(
-        this->_internal_costvalue());
   }
 
   // int32 ScoreAdd = 5;
@@ -1226,11 +1226,11 @@ void role_upgrade_cfg::MergeFrom(const role_upgrade_cfg& from) {
   if (from.level() != 0) {
     _internal_set_level(from._internal_level());
   }
-  if (from.costtype() != 0) {
-    _internal_set_costtype(from._internal_costtype());
-  }
   if (from.costvalue() != 0) {
     _internal_set_costvalue(from._internal_costvalue());
+  }
+  if (from.costtype() != 0) {
+    _internal_set_costtype(from._internal_costtype());
   }
   if (from.scoreadd() != 0) {
     _internal_set_scoreadd(from._internal_scoreadd());

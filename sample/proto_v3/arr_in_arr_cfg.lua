@@ -3,10 +3,16 @@
 return {
   [1] = {
     count = 3,
+    data_source = {
+      {
+        file = "资源转换示例.xlsx",
+        sheet = "arr_in_arr",
+      },
+    },
     data_ver = "1.0.0.0",
     description = "Test arr_in_arr_cfg",
     hash_code = "no hash code",
-    xres_ver = "2.9.0",
+    xres_ver = "2.9.1",
   },
   [2] = "arr_in_arr_cfg",
   arr_in_arr_cfg = {

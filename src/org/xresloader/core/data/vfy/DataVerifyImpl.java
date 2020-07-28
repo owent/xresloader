@@ -44,16 +44,24 @@ public abstract class DataVerifyImpl {
             return res.success;
         }
 
-        boolean is_int = true;
-        for (int i = 0; is_int && i < enum_name.length(); ++i) {
+        boolean is_numeric = true;
+        boolean is_double = false;
+        for (int i = 0; is_numeric && i < enum_name.length(); ++i) {
             char c = enum_name.charAt(i);
             if ((c < '0' || c > '9') && '.' != c && '-' != c) {
-                is_int = false;
+                is_numeric = false;
+            }
+            if ('.' == c) {
+                is_double = true;
             }
         }
 
-        if (is_int) {
-            return get(Math.round(Double.valueOf(enum_name)), res);
+        if (is_numeric) {
+            if (is_double) {
+                return get(Math.round(Double.valueOf(enum_name)), res);
+            } else {
+                return get(Long.valueOf(enum_name), res);
+            }
         }
 
         Long ret = all_names.getOrDefault(enum_name, null);
@@ -96,21 +104,33 @@ public abstract class DataVerifyImpl {
     }
 
     static public long getAndVerify(List<DataVerifyImpl> verifyEngine, String path, String val) throws ConvException {
-        boolean is_int = true;
-        for (int i = 0; is_int && i < val.length(); ++i) {
+        boolean is_numeric = true;
+        boolean is_double = false;
+        for (int i = 0; is_numeric && i < val.length(); ++i) {
             char c = val.charAt(i);
             if ((c < '0' || c > '9') && '.' != c && '-' != c) {
-                is_int = false;
+                is_numeric = false;
+            }
+            if ('.' == c) {
+                is_double = true;
             }
         }
 
-        if (is_int) {
-            return getAndVerify(verifyEngine, path, Math.round(Double.valueOf(val)));
+        if (is_numeric) {
+            if (is_double) {
+                return getAndVerify(verifyEngine, path, Math.round(Double.valueOf(val)));
+            } else {
+                return getAndVerify(verifyEngine, path, Long.valueOf(val));    
+            }
         }
 
         try {
             if (verifyEngine == null || verifyEngine.isEmpty()) {
-                return Math.round(Double.valueOf(val));
+                if (is_double) {
+                    return Math.round(Double.valueOf(val));
+                } else {
+                    return Long.valueOf(val);
+                }
             }
 
             DataVerifyResult verify_cache = new DataVerifyResult();

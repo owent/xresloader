@@ -24,7 +24,7 @@ message role_upgrade_cfg {
     optional uint32 Id       = 1 [ (org.xresloader.ue.key_tag) = 1000 ];
     optional uint32 Level    = 2 [ (org.xresloader.ue.key_tag) = 1 ];
     optional uint32 CostType = 3 [ (org.xresloader.verifier) = "cost_type", (org.xresloader.field_description) = "Refer to cost_type" ];
-    optional int32 CostValue = 4;
+    optional int64 CostValue = 4;
     optional int32 ScoreAdd  = 5;
 }
 

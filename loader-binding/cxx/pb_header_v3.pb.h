@@ -47,7 +47,7 @@ struct TableStruct_pb_5fheader_5fv3_2eproto {
     PROTOBUF_SECTION_VARIABLE(protodesc_cold);
   static const ::PROTOBUF_NAMESPACE_ID::internal::AuxillaryParseTableField aux[]
     PROTOBUF_SECTION_VARIABLE(protodesc_cold);
-  static const ::PROTOBUF_NAMESPACE_ID::internal::ParseTable schema[2]
+  static const ::PROTOBUF_NAMESPACE_ID::internal::ParseTable schema[3]
     PROTOBUF_SECTION_VARIABLE(protodesc_cold);
   static const ::PROTOBUF_NAMESPACE_ID::internal::FieldMetadata field_metadata[];
   static const ::PROTOBUF_NAMESPACE_ID::internal::SerializationTable serialization_table[];
@@ -57,6 +57,9 @@ extern const ::PROTOBUF_NAMESPACE_ID::internal::DescriptorTable descriptor_table
 namespace org {
 namespace xresloader {
 namespace pb {
+class xresloader_data_source;
+class xresloader_data_sourceDefaultTypeInternal;
+extern xresloader_data_sourceDefaultTypeInternal _xresloader_data_source_default_instance_;
 class xresloader_datablocks;
 class xresloader_datablocksDefaultTypeInternal;
 extern xresloader_datablocksDefaultTypeInternal _xresloader_datablocks_default_instance_;
@@ -67,6 +70,7 @@ extern xresloader_headerDefaultTypeInternal _xresloader_header_default_instance_
 }  // namespace xresloader
 }  // namespace org
 PROTOBUF_NAMESPACE_OPEN
+template<> ::org::xresloader::pb::xresloader_data_source* Arena::CreateMaybeMessage<::org::xresloader::pb::xresloader_data_source>(Arena*);
 template<> ::org::xresloader::pb::xresloader_datablocks* Arena::CreateMaybeMessage<::org::xresloader::pb::xresloader_datablocks>(Arena*);
 template<> ::org::xresloader::pb::xresloader_header* Arena::CreateMaybeMessage<::org::xresloader::pb::xresloader_header>(Arena*);
 PROTOBUF_NAMESPACE_CLOSE
@@ -75,6 +79,186 @@ namespace xresloader {
 namespace pb {
 
 // ===================================================================
+
+class xresloader_data_source PROTOBUF_FINAL :
+    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:org.xresloader.pb.xresloader_data_source) */ {
+ public:
+  inline xresloader_data_source() : xresloader_data_source(nullptr) {};
+  virtual ~xresloader_data_source();
+
+  xresloader_data_source(const xresloader_data_source& from);
+  xresloader_data_source(xresloader_data_source&& from) noexcept
+    : xresloader_data_source() {
+    *this = ::std::move(from);
+  }
+
+  inline xresloader_data_source& operator=(const xresloader_data_source& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  inline xresloader_data_source& operator=(xresloader_data_source&& from) noexcept {
+    if (GetArena() == from.GetArena()) {
+      if (this != &from) InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* descriptor() {
+    return GetDescriptor();
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* GetDescriptor() {
+    return GetMetadataStatic().descriptor;
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Reflection* GetReflection() {
+    return GetMetadataStatic().reflection;
+  }
+  static const xresloader_data_source& default_instance();
+
+  static void InitAsDefaultInstance();  // FOR INTERNAL USE ONLY
+  static inline const xresloader_data_source* internal_default_instance() {
+    return reinterpret_cast<const xresloader_data_source*>(
+               &_xresloader_data_source_default_instance_);
+  }
+  static constexpr int kIndexInFileMessages =
+    0;
+
+  friend void swap(xresloader_data_source& a, xresloader_data_source& b) {
+    a.Swap(&b);
+  }
+  inline void Swap(xresloader_data_source* other) {
+    if (other == this) return;
+    if (GetArena() == other->GetArena()) {
+      InternalSwap(other);
+    } else {
+      ::PROTOBUF_NAMESPACE_ID::internal::GenericSwap(this, other);
+    }
+  }
+  void UnsafeArenaSwap(xresloader_data_source* other) {
+    if (other == this) return;
+    GOOGLE_DCHECK(GetArena() == other->GetArena());
+    InternalSwap(other);
+  }
+
+  // implements Message ----------------------------------------------
+
+  inline xresloader_data_source* New() const final {
+    return CreateMaybeMessage<xresloader_data_source>(nullptr);
+  }
+
+  xresloader_data_source* New(::PROTOBUF_NAMESPACE_ID::Arena* arena) const final {
+    return CreateMaybeMessage<xresloader_data_source>(arena);
+  }
+  void CopyFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) final;
+  void MergeFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) final;
+  void CopyFrom(const xresloader_data_source& from);
+  void MergeFrom(const xresloader_data_source& from);
+  PROTOBUF_ATTRIBUTE_REINITIALIZES void Clear() final;
+  bool IsInitialized() const final;
+
+  size_t ByteSizeLong() const final;
+  const char* _InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) final;
+  ::PROTOBUF_NAMESPACE_ID::uint8* _InternalSerialize(
+      ::PROTOBUF_NAMESPACE_ID::uint8* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const final;
+  int GetCachedSize() const final { return _cached_size_.Get(); }
+
+  private:
+  inline void SharedCtor();
+  inline void SharedDtor();
+  void SetCachedSize(int size) const final;
+  void InternalSwap(xresloader_data_source* other);
+  friend class ::PROTOBUF_NAMESPACE_ID::internal::AnyMetadata;
+  static ::PROTOBUF_NAMESPACE_ID::StringPiece FullMessageName() {
+    return "org.xresloader.pb.xresloader_data_source";
+  }
+  protected:
+  explicit xresloader_data_source(::PROTOBUF_NAMESPACE_ID::Arena* arena);
+  private:
+  static void ArenaDtor(void* object);
+  inline void RegisterArenaDtor(::PROTOBUF_NAMESPACE_ID::Arena* arena);
+  public:
+
+  ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadata() const final;
+  private:
+  static ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadataStatic() {
+    ::PROTOBUF_NAMESPACE_ID::internal::AssignDescriptors(&::descriptor_table_pb_5fheader_5fv3_2eproto);
+    return ::descriptor_table_pb_5fheader_5fv3_2eproto.file_level_metadata[kIndexInFileMessages];
+  }
+
+  public:
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  enum : int {
+    kFileFieldNumber = 1,
+    kSheetFieldNumber = 2,
+  };
+  // string file = 1;
+  void clear_file();
+  const std::string& file() const;
+  void set_file(const std::string& value);
+  void set_file(std::string&& value);
+  void set_file(const char* value);
+  void set_file(const char* value, size_t size);
+  std::string* mutable_file();
+  std::string* release_file();
+  void set_allocated_file(std::string* file);
+  GOOGLE_PROTOBUF_RUNTIME_DEPRECATED("The unsafe_arena_ accessors for"
+  "    string fields are deprecated and will be removed in a"
+  "    future release.")
+  std::string* unsafe_arena_release_file();
+  GOOGLE_PROTOBUF_RUNTIME_DEPRECATED("The unsafe_arena_ accessors for"
+  "    string fields are deprecated and will be removed in a"
+  "    future release.")
+  void unsafe_arena_set_allocated_file(
+      std::string* file);
+  private:
+  const std::string& _internal_file() const;
+  void _internal_set_file(const std::string& value);
+  std::string* _internal_mutable_file();
+  public:
+
+  // string sheet = 2;
+  void clear_sheet();
+  const std::string& sheet() const;
+  void set_sheet(const std::string& value);
+  void set_sheet(std::string&& value);
+  void set_sheet(const char* value);
+  void set_sheet(const char* value, size_t size);
+  std::string* mutable_sheet();
+  std::string* release_sheet();
+  void set_allocated_sheet(std::string* sheet);
+  GOOGLE_PROTOBUF_RUNTIME_DEPRECATED("The unsafe_arena_ accessors for"
+  "    string fields are deprecated and will be removed in a"
+  "    future release.")
+  std::string* unsafe_arena_release_sheet();
+  GOOGLE_PROTOBUF_RUNTIME_DEPRECATED("The unsafe_arena_ accessors for"
+  "    string fields are deprecated and will be removed in a"
+  "    future release.")
+  void unsafe_arena_set_allocated_sheet(
+      std::string* sheet);
+  private:
+  const std::string& _internal_sheet() const;
+  void _internal_set_sheet(const std::string& value);
+  std::string* _internal_mutable_sheet();
+  public:
+
+  // @@protoc_insertion_point(class_scope:org.xresloader.pb.xresloader_data_source)
+ private:
+  class _Internal;
+
+  template <typename T> friend class ::PROTOBUF_NAMESPACE_ID::Arena::InternalHelper;
+  typedef void InternalArenaConstructable_;
+  typedef void DestructorSkippable_;
+  ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr file_;
+  ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr sheet_;
+  mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
+  friend struct ::TableStruct_pb_5fheader_5fv3_2eproto;
+};
+// -------------------------------------------------------------------
 
 class xresloader_header PROTOBUF_FINAL :
     public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:org.xresloader.pb.xresloader_header) */ {
@@ -118,7 +302,7 @@ class xresloader_header PROTOBUF_FINAL :
                &_xresloader_header_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    0;
+    1;
 
   friend void swap(xresloader_header& a, xresloader_header& b) {
     a.Swap(&b);
@@ -189,12 +373,31 @@ class xresloader_header PROTOBUF_FINAL :
   // accessors -------------------------------------------------------
 
   enum : int {
+    kDataSourceFieldNumber = 11,
     kXresVerFieldNumber = 1,
     kDataVerFieldNumber = 2,
     kHashCodeFieldNumber = 4,
     kDescriptionFieldNumber = 5,
     kCountFieldNumber = 3,
   };
+  // repeated .org.xresloader.pb.xresloader_data_source data_source = 11;
+  int data_source_size() const;
+  private:
+  int _internal_data_source_size() const;
+  public:
+  void clear_data_source();
+  ::org::xresloader::pb::xresloader_data_source* mutable_data_source(int index);
+  ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::org::xresloader::pb::xresloader_data_source >*
+      mutable_data_source();
+  private:
+  const ::org::xresloader::pb::xresloader_data_source& _internal_data_source(int index) const;
+  ::org::xresloader::pb::xresloader_data_source* _internal_add_data_source();
+  public:
+  const ::org::xresloader::pb::xresloader_data_source& data_source(int index) const;
+  ::org::xresloader::pb::xresloader_data_source* add_data_source();
+  const ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::org::xresloader::pb::xresloader_data_source >&
+      data_source() const;
+
   // string xres_ver = 1;
   void clear_xres_ver();
   const std::string& xres_ver() const;
@@ -311,6 +514,7 @@ class xresloader_header PROTOBUF_FINAL :
   template <typename T> friend class ::PROTOBUF_NAMESPACE_ID::Arena::InternalHelper;
   typedef void InternalArenaConstructable_;
   typedef void DestructorSkippable_;
+  ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::org::xresloader::pb::xresloader_data_source > data_source_;
   ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr xres_ver_;
   ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr data_ver_;
   ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr hash_code_;
@@ -363,7 +567,7 @@ class xresloader_datablocks PROTOBUF_FINAL :
                &_xresloader_datablocks_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    1;
+    2;
 
   friend void swap(xresloader_datablocks& a, xresloader_datablocks& b) {
     a.Swap(&b);
@@ -527,6 +731,172 @@ class xresloader_datablocks PROTOBUF_FINAL :
   #pragma GCC diagnostic push
   #pragma GCC diagnostic ignored "-Wstrict-aliasing"
 #endif  // __GNUC__
+// xresloader_data_source
+
+// string file = 1;
+inline void xresloader_data_source::clear_file() {
+  file_.ClearToEmpty(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
+}
+inline const std::string& xresloader_data_source::file() const {
+  // @@protoc_insertion_point(field_get:org.xresloader.pb.xresloader_data_source.file)
+  return _internal_file();
+}
+inline void xresloader_data_source::set_file(const std::string& value) {
+  _internal_set_file(value);
+  // @@protoc_insertion_point(field_set:org.xresloader.pb.xresloader_data_source.file)
+}
+inline std::string* xresloader_data_source::mutable_file() {
+  // @@protoc_insertion_point(field_mutable:org.xresloader.pb.xresloader_data_source.file)
+  return _internal_mutable_file();
+}
+inline const std::string& xresloader_data_source::_internal_file() const {
+  return file_.Get();
+}
+inline void xresloader_data_source::_internal_set_file(const std::string& value) {
+  
+  file_.Set(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), value, GetArena());
+}
+inline void xresloader_data_source::set_file(std::string&& value) {
+  
+  file_.Set(
+    &::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), ::std::move(value), GetArena());
+  // @@protoc_insertion_point(field_set_rvalue:org.xresloader.pb.xresloader_data_source.file)
+}
+inline void xresloader_data_source::set_file(const char* value) {
+  GOOGLE_DCHECK(value != nullptr);
+  
+  file_.Set(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), ::std::string(value),
+              GetArena());
+  // @@protoc_insertion_point(field_set_char:org.xresloader.pb.xresloader_data_source.file)
+}
+inline void xresloader_data_source::set_file(const char* value,
+    size_t size) {
+  
+  file_.Set(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), ::std::string(
+      reinterpret_cast<const char*>(value), size), GetArena());
+  // @@protoc_insertion_point(field_set_pointer:org.xresloader.pb.xresloader_data_source.file)
+}
+inline std::string* xresloader_data_source::_internal_mutable_file() {
+  
+  return file_.Mutable(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
+}
+inline std::string* xresloader_data_source::release_file() {
+  // @@protoc_insertion_point(field_release:org.xresloader.pb.xresloader_data_source.file)
+  return file_.Release(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
+}
+inline void xresloader_data_source::set_allocated_file(std::string* file) {
+  if (file != nullptr) {
+    
+  } else {
+    
+  }
+  file_.SetAllocated(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), file,
+      GetArena());
+  // @@protoc_insertion_point(field_set_allocated:org.xresloader.pb.xresloader_data_source.file)
+}
+inline std::string* xresloader_data_source::unsafe_arena_release_file() {
+  // @@protoc_insertion_point(field_unsafe_arena_release:org.xresloader.pb.xresloader_data_source.file)
+  GOOGLE_DCHECK(GetArena() != nullptr);
+  
+  return file_.UnsafeArenaRelease(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(),
+      GetArena());
+}
+inline void xresloader_data_source::unsafe_arena_set_allocated_file(
+    std::string* file) {
+  GOOGLE_DCHECK(GetArena() != nullptr);
+  if (file != nullptr) {
+    
+  } else {
+    
+  }
+  file_.UnsafeArenaSetAllocated(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(),
+      file, GetArena());
+  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:org.xresloader.pb.xresloader_data_source.file)
+}
+
+// string sheet = 2;
+inline void xresloader_data_source::clear_sheet() {
+  sheet_.ClearToEmpty(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
+}
+inline const std::string& xresloader_data_source::sheet() const {
+  // @@protoc_insertion_point(field_get:org.xresloader.pb.xresloader_data_source.sheet)
+  return _internal_sheet();
+}
+inline void xresloader_data_source::set_sheet(const std::string& value) {
+  _internal_set_sheet(value);
+  // @@protoc_insertion_point(field_set:org.xresloader.pb.xresloader_data_source.sheet)
+}
+inline std::string* xresloader_data_source::mutable_sheet() {
+  // @@protoc_insertion_point(field_mutable:org.xresloader.pb.xresloader_data_source.sheet)
+  return _internal_mutable_sheet();
+}
+inline const std::string& xresloader_data_source::_internal_sheet() const {
+  return sheet_.Get();
+}
+inline void xresloader_data_source::_internal_set_sheet(const std::string& value) {
+  
+  sheet_.Set(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), value, GetArena());
+}
+inline void xresloader_data_source::set_sheet(std::string&& value) {
+  
+  sheet_.Set(
+    &::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), ::std::move(value), GetArena());
+  // @@protoc_insertion_point(field_set_rvalue:org.xresloader.pb.xresloader_data_source.sheet)
+}
+inline void xresloader_data_source::set_sheet(const char* value) {
+  GOOGLE_DCHECK(value != nullptr);
+  
+  sheet_.Set(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), ::std::string(value),
+              GetArena());
+  // @@protoc_insertion_point(field_set_char:org.xresloader.pb.xresloader_data_source.sheet)
+}
+inline void xresloader_data_source::set_sheet(const char* value,
+    size_t size) {
+  
+  sheet_.Set(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), ::std::string(
+      reinterpret_cast<const char*>(value), size), GetArena());
+  // @@protoc_insertion_point(field_set_pointer:org.xresloader.pb.xresloader_data_source.sheet)
+}
+inline std::string* xresloader_data_source::_internal_mutable_sheet() {
+  
+  return sheet_.Mutable(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
+}
+inline std::string* xresloader_data_source::release_sheet() {
+  // @@protoc_insertion_point(field_release:org.xresloader.pb.xresloader_data_source.sheet)
+  return sheet_.Release(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
+}
+inline void xresloader_data_source::set_allocated_sheet(std::string* sheet) {
+  if (sheet != nullptr) {
+    
+  } else {
+    
+  }
+  sheet_.SetAllocated(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), sheet,
+      GetArena());
+  // @@protoc_insertion_point(field_set_allocated:org.xresloader.pb.xresloader_data_source.sheet)
+}
+inline std::string* xresloader_data_source::unsafe_arena_release_sheet() {
+  // @@protoc_insertion_point(field_unsafe_arena_release:org.xresloader.pb.xresloader_data_source.sheet)
+  GOOGLE_DCHECK(GetArena() != nullptr);
+  
+  return sheet_.UnsafeArenaRelease(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(),
+      GetArena());
+}
+inline void xresloader_data_source::unsafe_arena_set_allocated_sheet(
+    std::string* sheet) {
+  GOOGLE_DCHECK(GetArena() != nullptr);
+  if (sheet != nullptr) {
+    
+  } else {
+    
+  }
+  sheet_.UnsafeArenaSetAllocated(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(),
+      sheet, GetArena());
+  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:org.xresloader.pb.xresloader_data_source.sheet)
+}
+
+// -------------------------------------------------------------------
+
 // xresloader_header
 
 // string xres_ver = 1;
@@ -873,6 +1243,45 @@ inline void xresloader_header::unsafe_arena_set_allocated_description(
   // @@protoc_insertion_point(field_unsafe_arena_set_allocated:org.xresloader.pb.xresloader_header.description)
 }
 
+// repeated .org.xresloader.pb.xresloader_data_source data_source = 11;
+inline int xresloader_header::_internal_data_source_size() const {
+  return data_source_.size();
+}
+inline int xresloader_header::data_source_size() const {
+  return _internal_data_source_size();
+}
+inline void xresloader_header::clear_data_source() {
+  data_source_.Clear();
+}
+inline ::org::xresloader::pb::xresloader_data_source* xresloader_header::mutable_data_source(int index) {
+  // @@protoc_insertion_point(field_mutable:org.xresloader.pb.xresloader_header.data_source)
+  return data_source_.Mutable(index);
+}
+inline ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::org::xresloader::pb::xresloader_data_source >*
+xresloader_header::mutable_data_source() {
+  // @@protoc_insertion_point(field_mutable_list:org.xresloader.pb.xresloader_header.data_source)
+  return &data_source_;
+}
+inline const ::org::xresloader::pb::xresloader_data_source& xresloader_header::_internal_data_source(int index) const {
+  return data_source_.Get(index);
+}
+inline const ::org::xresloader::pb::xresloader_data_source& xresloader_header::data_source(int index) const {
+  // @@protoc_insertion_point(field_get:org.xresloader.pb.xresloader_header.data_source)
+  return _internal_data_source(index);
+}
+inline ::org::xresloader::pb::xresloader_data_source* xresloader_header::_internal_add_data_source() {
+  return data_source_.Add();
+}
+inline ::org::xresloader::pb::xresloader_data_source* xresloader_header::add_data_source() {
+  // @@protoc_insertion_point(field_add:org.xresloader.pb.xresloader_header.data_source)
+  return _internal_add_data_source();
+}
+inline const ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::org::xresloader::pb::xresloader_data_source >&
+xresloader_header::data_source() const {
+  // @@protoc_insertion_point(field_list:org.xresloader.pb.xresloader_header.data_source)
+  return data_source_;
+}
+
 // -------------------------------------------------------------------
 
 // xresloader_datablocks
@@ -1116,6 +1525,8 @@ inline void xresloader_datablocks::unsafe_arena_set_allocated_data_message_type(
 #ifdef __GNUC__
   #pragma GCC diagnostic pop
 #endif  // __GNUC__
+// -------------------------------------------------------------------
+
 // -------------------------------------------------------------------
 
 

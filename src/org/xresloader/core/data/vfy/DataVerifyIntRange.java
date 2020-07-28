@@ -64,18 +64,24 @@ public class DataVerifyIntRange extends DataVerifyImpl {
     @Override
     public boolean get(String intstr, DataVerifyResult res) {
         // check if it's a number
-        boolean is_int = true;
-        for(int i = 0; is_int && i < intstr.length(); ++ i) {
+        boolean is_numeric = true;
+        boolean is_double = false;
+        for(int i = 0; is_numeric && i < intstr.length(); ++ i) {
             char c = intstr.charAt(i);
-            if ((c < '0' || c > '9') &&
-                    '.' != c &&
-                    '-' != c) {
-                is_int = false;
+            if ((c < '0' || c > '9') && '.' != c && '-' != c) {
+                is_numeric = false;
+            }
+            if ('.' == c) {
+                is_double = true;
             }
         }
 
-        if (is_int) {
-            return get(Math.round(Double.valueOf(intstr)), res);
+        if (is_numeric) {
+            if (is_double) {
+                return get(Math.round(Double.valueOf(intstr)), res);
+            } else {
+                return get(Long.valueOf(intstr), res);
+            }
         }
 
         res.success = false;

@@ -546,8 +546,8 @@ class role_upgrade_cfg PROTOBUF_FINAL :
   enum : int {
     kIdFieldNumber = 1,
     kLevelFieldNumber = 2,
-    kCostTypeFieldNumber = 3,
     kCostValueFieldNumber = 4,
+    kCostTypeFieldNumber = 3,
     kScoreAddFieldNumber = 5,
   };
   // uint32 Id = 1 [(.org.xresloader.ue.key_tag) = 1000];
@@ -568,6 +568,15 @@ class role_upgrade_cfg PROTOBUF_FINAL :
   void _internal_set_level(::PROTOBUF_NAMESPACE_ID::uint32 value);
   public:
 
+  // int64 CostValue = 4;
+  void clear_costvalue();
+  ::PROTOBUF_NAMESPACE_ID::int64 costvalue() const;
+  void set_costvalue(::PROTOBUF_NAMESPACE_ID::int64 value);
+  private:
+  ::PROTOBUF_NAMESPACE_ID::int64 _internal_costvalue() const;
+  void _internal_set_costvalue(::PROTOBUF_NAMESPACE_ID::int64 value);
+  public:
+
   // uint32 CostType = 3 [(.org.xresloader.verifier) = "cost_type", (.org.xresloader.field_description) = "Refer to cost_type"];
   void clear_costtype();
   ::PROTOBUF_NAMESPACE_ID::uint32 costtype() const;
@@ -575,15 +584,6 @@ class role_upgrade_cfg PROTOBUF_FINAL :
   private:
   ::PROTOBUF_NAMESPACE_ID::uint32 _internal_costtype() const;
   void _internal_set_costtype(::PROTOBUF_NAMESPACE_ID::uint32 value);
-  public:
-
-  // int32 CostValue = 4;
-  void clear_costvalue();
-  ::PROTOBUF_NAMESPACE_ID::int32 costvalue() const;
-  void set_costvalue(::PROTOBUF_NAMESPACE_ID::int32 value);
-  private:
-  ::PROTOBUF_NAMESPACE_ID::int32 _internal_costvalue() const;
-  void _internal_set_costvalue(::PROTOBUF_NAMESPACE_ID::int32 value);
   public:
 
   // int32 ScoreAdd = 5;
@@ -604,8 +604,8 @@ class role_upgrade_cfg PROTOBUF_FINAL :
   typedef void DestructorSkippable_;
   ::PROTOBUF_NAMESPACE_ID::uint32 id_;
   ::PROTOBUF_NAMESPACE_ID::uint32 level_;
+  ::PROTOBUF_NAMESPACE_ID::int64 costvalue_;
   ::PROTOBUF_NAMESPACE_ID::uint32 costtype_;
-  ::PROTOBUF_NAMESPACE_ID::int32 costvalue_;
   ::PROTOBUF_NAMESPACE_ID::int32 scoreadd_;
   mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
   friend struct ::TableStruct_kind_2eproto;
@@ -2863,22 +2863,22 @@ inline void role_upgrade_cfg::set_costtype(::PROTOBUF_NAMESPACE_ID::uint32 value
   // @@protoc_insertion_point(field_set:role_upgrade_cfg.CostType)
 }
 
-// int32 CostValue = 4;
+// int64 CostValue = 4;
 inline void role_upgrade_cfg::clear_costvalue() {
-  costvalue_ = 0;
+  costvalue_ = PROTOBUF_LONGLONG(0);
 }
-inline ::PROTOBUF_NAMESPACE_ID::int32 role_upgrade_cfg::_internal_costvalue() const {
+inline ::PROTOBUF_NAMESPACE_ID::int64 role_upgrade_cfg::_internal_costvalue() const {
   return costvalue_;
 }
-inline ::PROTOBUF_NAMESPACE_ID::int32 role_upgrade_cfg::costvalue() const {
+inline ::PROTOBUF_NAMESPACE_ID::int64 role_upgrade_cfg::costvalue() const {
   // @@protoc_insertion_point(field_get:role_upgrade_cfg.CostValue)
   return _internal_costvalue();
 }
-inline void role_upgrade_cfg::_internal_set_costvalue(::PROTOBUF_NAMESPACE_ID::int32 value) {
+inline void role_upgrade_cfg::_internal_set_costvalue(::PROTOBUF_NAMESPACE_ID::int64 value) {
   
   costvalue_ = value;
 }
-inline void role_upgrade_cfg::set_costvalue(::PROTOBUF_NAMESPACE_ID::int32 value) {
+inline void role_upgrade_cfg::set_costvalue(::PROTOBUF_NAMESPACE_ID::int64 value) {
   _internal_set_costvalue(value);
   // @@protoc_insertion_point(field_set:role_upgrade_cfg.CostValue)
 }

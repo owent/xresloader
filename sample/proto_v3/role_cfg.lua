@@ -3,9 +3,15 @@
 return {
     [1] = {
         count = 7,
+        data_source = {
+            {
+                file = "资源转换示例.xlsx",
+                sheet = "kind",
+            },
+        },
         data_ver = "1.0.0.0",
         hash_code = "no hash code",
-        xres_ver = "2.9.0",
+        xres_ver = "2.9.1",
     },
     [2] = "role_cfg",
     role_cfg = {

@@ -3,10 +3,16 @@
 return {
   [1] = {
     count = 5,
+    data_source = {
+      {
+        file = "资源转换示例.xlsx",
+        sheet = "test_oneof",
+      },
+    },
     data_ver = "1.0.0.0",
     description = "Test event_cfg with oneof fields",
     hash_code = "no hash code",
-    xres_ver = "2.9.0",
+    xres_ver = "2.9.1",
   },
   [2] = "event_cfg",
   event_cfg = {
@@ -62,7 +68,7 @@ return {
           rule_id = 921,
         },
       },
-      user_exp = 1520,
+      user_exp = 1473624235014785965,
     },
     {
       process = 3,

@@ -111,8 +111,10 @@ public class DataDstPb extends DataDstImpl {
             PbAliasNode<T> ls = hashmap.getOrDefault(short_name, null);
             if (null == ls) {
                 ls = new PbAliasNode<T>();
-                ls.names = new LinkedList<String>();
                 hashmap.put(short_name, ls);
+            }
+            if (null == ls.names) {
+                ls.names = new LinkedList<String>();
             }
             ls.element = ele;
             if (!full_name.isEmpty()) {
@@ -150,6 +152,30 @@ public class DataDstPb extends DataDstImpl {
         }
 
         return null;
+    }
+
+    static <T> String get_alias_list_element_full_name(String name, HashMap<String, PbAliasNode<T>> hashmap, String type_name) {
+        while (name.length() > 0 && name.charAt(0) == '.') {
+            name = name.substring(1);
+        }
+        PbAliasNode<T> ls = hashmap.getOrDefault(name, null);
+        if (null == ls || null == ls.element) {
+            return name;
+        }
+
+        if (null != ls.names && ls.names.size() > 1) {
+            ProgramOptions.getLoger().error(
+                "there is more than one %s \"%s\" matched, please use full name. available names:", type_name, name);
+            for (String full_name : ls.names) {
+                ProgramOptions.getLoger().error("\t%s", full_name);
+            }
+        }
+
+        if (null != ls.names && ls.names.size() == 1) {
+            return ls.names.get(0);
+        }
+
+        return name;
     }
 
     static private com.google.protobuf.ExtensionRegistryLite get_extension_registry() {
@@ -471,7 +497,9 @@ public class DataDstPb extends DataDstImpl {
                                 "enum type");
                         if (enum_desc != null) {
                             vfy = new DataVerifyPbEnum(enum_desc);
-                        } else {
+                        }
+                        
+                        if (null == vfy) {
                             DescriptorProtos.DescriptorProto msg_desc = get_alias_list_element(rule, cachePbs.messages,
                                     "message type");
                             if (msg_desc != null) {
@@ -479,17 +507,39 @@ public class DataDstPb extends DataDstImpl {
                             }
                         }
 
+                        if (null == vfy) {
+                            DescriptorProtos.OneofDescriptorProto oneof_desc = get_alias_list_element(rule, cachePbs.oneofs,
+                                    "oneof type");
+                            if (oneof_desc != null) {
+                                DescriptorProtos.DescriptorProto msg_desc = null;
+                                int message_bound = rule.lastIndexOf('.');
+                                if (message_bound > 0 && message_bound < rule.length()) {
+                                    msg_desc = get_alias_list_element(rule.substring(0, message_bound), cachePbs.messages, "message type");
+                                } else {
+                                    String oneof_full_name = get_alias_list_element_full_name(rule, cachePbs.oneofs, "oneof type");
+                                    message_bound = oneof_full_name.lastIndexOf('.');
+                                    if (message_bound > 0 && message_bound < oneof_full_name.length()) {
+                                        msg_desc = get_alias_list_element(oneof_full_name.substring(0, message_bound), cachePbs.messages, "message type");
+                                    }
+                                }
+                                
+                                if (oneof_desc != null && msg_desc != null) {
+                                    vfy = new DataVerifyPbOneof(oneof_desc, msg_desc);
+                                }
+                            }
+                        }
+
                         if (null != vfy) {
                             cachePbs.identifiers.put(rule, vfy);
                         } else {
-                            ProgramOptions.getLoger().error("enum or message \"%s\" not found", rule);
+                            ProgramOptions.getLoger().error("enum, oneof or message \"%s\" not found", rule);
                         }
                     }
 
                     if (vfy != null) {
                         ret.add(vfy);
                     } else {
-                        ProgramOptions.getLoger().error("try to add DataVerifyPb(%s) in %s failed", rule,
+                        ProgramOptions.getLoger().error("try to add data verifier %s in %s failed", rule,
                                 DataSrcImpl.getOurInstance().getCurrentTableName());
                     }
                 }

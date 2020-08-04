@@ -17,23 +17,20 @@ public class IdentifyEngine {
      * @return
      */
     static public IdentifyDescriptor n2i(String _name, int index) {
-        String[] segs = _name.trim().split("\\.");
+        String[] segs = null;
 
         IdentifyDescriptor ret = new IdentifyDescriptor();
         ret.index = index;
+        int verify_index = _name.lastIndexOf('@');
+        if (verify_index >= 0) {
+            ret.dataSourceFieldVerifier = _name.substring(verify_index + 1);
+            segs = _name.substring(0, verify_index).trim().split("\\.");
+        } else {
+            segs = _name.trim().split("\\.");
+        }
+
         for (int i = 0; i < segs.length; ++i) {
-            if (i == segs.length - 1) {
-                int verify_index = segs[i].lastIndexOf('@');
-                if (verify_index > 0) {
-                    String old_val = segs[i];
-                    segs[i] = make_word(old_val.substring(0, verify_index));
-                    ret.dataSourceFieldVerifier = old_val.substring(verify_index + 1);
-                } else {
-                    segs[i] = make_word(segs[i]);
-                }
-            } else {
-                segs[i] = make_word(segs[i]);
-            }
+            segs[i] = make_word(segs[i]);
         }
 
         ret.name = String.join(".", segs);

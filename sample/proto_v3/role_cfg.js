@@ -98,6 +98,9 @@
           unlock_level : 122
         },
         {
+          dep_test : {
+            id : 12
+          },
           int_as_string : "4"
         },
         {
@@ -152,7 +155,7 @@
         ],
         data_ver : "1.0.0.0",
         hash_code : "no hash code",
-        xres_ver : "2.9.1"
+        xres_ver : "2.9.2"
       }
     }
   };

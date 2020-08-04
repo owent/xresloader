@@ -7,6 +7,7 @@ import org.xresloader.Xresloader;
 import org.xresloader.core.data.dst.DataDstImpl;
 
 import com.google.protobuf.Descriptors;
+import com.google.protobuf.DescriptorProtos;
 
 /**
  * Created by owent on 2020/05/29.
@@ -16,6 +17,43 @@ public class DataVerifyPbOneof extends DataVerifyImpl {
         super(desc.getName());
 
         for (Descriptors.FieldDescriptor fd : desc.getFields()) {
+
+            all_names.put(fd.getName(), (long) fd.getNumber());
+            all_numbers.add((long) fd.getNumber());
+
+            // alias extension
+            if (fd.getOptions().hasExtension(Xresloader.fieldAlias)) {
+                String alias_name = fd.getOptions().getExtension(Xresloader.fieldAlias);
+                if (!alias_name.isEmpty()) {
+                    all_names.put(alias_name, (long) fd.getNumber());
+                }
+            }
+        }
+    }
+
+    // If oneof verifier is refer by other fields, it's not built and should be built by origin protos
+    public DataVerifyPbOneof(DescriptorProtos.OneofDescriptorProto desc, DescriptorProtos.DescriptorProto msgDesc) {
+        super(desc.getName());
+
+        int oneof_index = -1;
+        int check_index = 0;
+        for (DescriptorProtos.OneofDescriptorProto fd : msgDesc.getOneofDeclList()) {
+            if (fd == desc || fd.getName() == desc.getName()) {
+                oneof_index = check_index;
+                break;
+            }
+
+            check_index = check_index + 1;
+        }
+
+        for (DescriptorProtos.FieldDescriptorProto fd : msgDesc.getFieldList()) {
+            if (!fd.hasOneofIndex()) {
+                continue;
+            }
+
+            if (fd.getOneofIndex() != oneof_index) {
+                continue;
+            }
 
             all_names.put(fd.getName(), (long) fd.getNumber());
             all_numbers.add((long) fd.getNumber());

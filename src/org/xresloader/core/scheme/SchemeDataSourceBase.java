@@ -70,6 +70,8 @@ public abstract class SchemeDataSourceBase implements SchemeDataSourceImpl {
             SchemeConf.getInstance().setUERecursiveMode(datas.get(0));
         } else if (key.equalsIgnoreCase("UeCfg-DestinationPath")) {
             SchemeConf.getInstance().setUEDestinationPath(datas.get(0));
+        } else if (key.equalsIgnoreCase("UeCfg-CsvObjectWrapper")) {
+            SchemeConf.getInstance().setUECsvObjectWrapper(datas.get(0), datas.get(1));
         } else {
             return false;
         }

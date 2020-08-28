@@ -407,7 +407,7 @@ public class DataDstUECsv extends DataDstUEBase {
         }
 
         if (field.isList() && isRecursiveEnabled()) {
-            fieldSB.append("(");
+            fieldSB.append(SchemeConf.getInstance().getUEOptions().codeOutputCsvObjectBegin);
             boolean hasListData = false;
             for (int i = 0; i < fieldSet.size(); ++i) {
                 if (hasListData) {
@@ -421,7 +421,7 @@ public class DataDstUECsv extends DataDstUEBase {
                     }
                 }
             }
-            fieldSB.append(")");
+            fieldSB.append(SchemeConf.getInstance().getUEOptions().codeOutputCsvObjectEnd);
         } else {
             pickValueFieldCsvImpl(fieldSB, fieldSet.get(0), isPlainMode, isTopLevel, fieldDataByOneof);
         }
@@ -459,7 +459,7 @@ public class DataDstUECsv extends DataDstUEBase {
         }
 
         if (desc.getType() == JAVA_TYPE.MESSAGE) {
-            fieldSB.append("(");
+            fieldSB.append(SchemeConf.getInstance().getUEOptions().codeOutputCsvObjectBegin);
             HashSet<String> dumpedFields = null;
             if (isRecursiveEnabled()) {
                 dumpedFields = new HashSet<String>();
@@ -579,7 +579,7 @@ public class DataDstUECsv extends DataDstUEBase {
                 }
             }
 
-            fieldSB.append(")");
+            fieldSB.append(SchemeConf.getInstance().getUEOptions().codeOutputCsvObjectEnd);
             return true;
         }
 
@@ -623,7 +623,7 @@ public class DataDstUECsv extends DataDstUEBase {
         }
 
         if (msgDesc.getReferBrothers().isList()) {
-            fieldSB.append("(");
+            fieldSB.append(SchemeConf.getInstance().getUEOptions().codeOutputCsvObjectBegin);
             boolean hasListData = false;
             for (int i = 0; i < fieldSet.size(); ++i) {
                 if (hasListData) {
@@ -639,7 +639,7 @@ public class DataDstUECsv extends DataDstUEBase {
                     }
                 }
             }
-            fieldSB.append(")");
+            fieldSB.append(SchemeConf.getInstance().getUEOptions().codeOutputCsvObjectEnd);
         } else {
             pickValueFieldCsvImpl(fieldSB, fieldSet.get(0), msgDesc.getReferBrothers().mode == CHILD_NODE_TYPE.PLAIN,
                     false, fieldDataByOneof);
@@ -752,13 +752,13 @@ public class DataDstUECsv extends DataDstUEBase {
                 case INT: {
                     Long[] values = parsePlainDataLong(groups, ident, field);
                     if (null != values && values.length > 0) {
-                        fieldSB.append("(");
+                        fieldSB.append(SchemeConf.getInstance().getUEOptions().codeOutputCsvObjectBegin);
                         boolean isFirst = true;
                         for (Long v : values) {
                             isFirst = tryWriteSeprator(fieldSB, isFirst);
                             fieldSB.append(v.intValue());
                         }
-                        fieldSB.append(")");
+                        fieldSB.append(SchemeConf.getInstance().getUEOptions().codeOutputCsvObjectEnd);
                         ret = true;
                     }
                     break;
@@ -766,13 +766,13 @@ public class DataDstUECsv extends DataDstUEBase {
                 case LONG: {
                     Long[] values = parsePlainDataLong(groups, ident, field);
                     if (null != values && values.length > 0) {
-                        fieldSB.append("(");
+                        fieldSB.append(SchemeConf.getInstance().getUEOptions().codeOutputCsvObjectBegin);
                         boolean isFirst = true;
                         for (Long v : values) {
                             isFirst = tryWriteSeprator(fieldSB, isFirst);
                             fieldSB.append(v);
                         }
-                        fieldSB.append(")");
+                        fieldSB.append(SchemeConf.getInstance().getUEOptions().codeOutputCsvObjectEnd);
                         ret = true;
                     }
                     break;
@@ -781,13 +781,13 @@ public class DataDstUECsv extends DataDstUEBase {
                 case FLOAT: {
                     Double[] values = parsePlainDataDouble(groups, ident, field);
                     if (null != values && values.length > 0) {
-                        fieldSB.append("(");
+                        fieldSB.append(SchemeConf.getInstance().getUEOptions().codeOutputCsvObjectBegin);
                         boolean isFirst = true;
                         for (Double v : values) {
                             isFirst = tryWriteSeprator(fieldSB, isFirst);
                             fieldSB.append(v.floatValue());
                         }
-                        fieldSB.append(")");
+                        fieldSB.append(SchemeConf.getInstance().getUEOptions().codeOutputCsvObjectEnd);
                         ret = true;
                     }
                     break;
@@ -796,13 +796,13 @@ public class DataDstUECsv extends DataDstUEBase {
                 case DOUBLE: {
                     Double[] values = parsePlainDataDouble(groups, ident, field);
                     if (null != values && values.length > 0) {
-                        fieldSB.append("(");
+                        fieldSB.append(SchemeConf.getInstance().getUEOptions().codeOutputCsvObjectBegin);
                         boolean isFirst = true;
                         for (Double v : values) {
                             isFirst = tryWriteSeprator(fieldSB, isFirst);
                             fieldSB.append(v);
                         }
-                        fieldSB.append(")");
+                        fieldSB.append(SchemeConf.getInstance().getUEOptions().codeOutputCsvObjectEnd);
                         ret = true;
                     }
                     break;
@@ -811,7 +811,7 @@ public class DataDstUECsv extends DataDstUEBase {
                 case BOOLEAN: {
                     Boolean[] values = parsePlainDataBoolean(groups, ident, field);
                     if (null != values && values.length > 0) {
-                        fieldSB.append("(");
+                        fieldSB.append(SchemeConf.getInstance().getUEOptions().codeOutputCsvObjectBegin);
                         boolean isFirst = true;
                         for (Boolean v : values) {
                             isFirst = tryWriteSeprator(fieldSB, isFirst);
@@ -821,7 +821,7 @@ public class DataDstUECsv extends DataDstUEBase {
                                 fieldSB.append("False");
                             }
                         }
-                        fieldSB.append(")");
+                        fieldSB.append(SchemeConf.getInstance().getUEOptions().codeOutputCsvObjectEnd);
                         ret = true;
                     }
                     break;
@@ -831,7 +831,7 @@ public class DataDstUECsv extends DataDstUEBase {
                 case BYTES: {
                     String[] values = parsePlainDataString(groups, ident, field);
                     if (null != values && values.length > 0) {
-                        fieldSB.append("(");
+                        fieldSB.append(SchemeConf.getInstance().getUEOptions().codeOutputCsvObjectBegin);
                         boolean isFirst = true;
                         for (String v : values) {
                             isFirst = tryWriteSeprator(fieldSB, isFirst);
@@ -844,7 +844,7 @@ public class DataDstUECsv extends DataDstUEBase {
                             }
                             fieldSB.append("\"");
                         }
-                        fieldSB.append(")");
+                        fieldSB.append(SchemeConf.getInstance().getUEOptions().codeOutputCsvObjectEnd);
                         ret = true;
                     }
                     break;
@@ -853,7 +853,7 @@ public class DataDstUECsv extends DataDstUEBase {
                 case MESSAGE: {
                     boolean hasListData = false;
                     if (groups.length > 0) {
-                        fieldSB.append("(");
+                        fieldSB.append(SchemeConf.getInstance().getUEOptions().codeOutputCsvObjectBegin);
                         for (String v : groups) {
                             String[] subGroups = splitPlainGroups(v, getPlainMessageSeparator(field));
                             if (subGroups != null && subGroups.length > 0) {
@@ -871,7 +871,7 @@ public class DataDstUECsv extends DataDstUEBase {
                             }
                         }
 
-                        fieldSB.append(")");
+                        fieldSB.append(SchemeConf.getInstance().getUEOptions().codeOutputCsvObjectEnd);
                         ret = true;
                     }
                     break;
@@ -947,7 +947,7 @@ public class DataDstUECsv extends DataDstUEBase {
         }
         int usedInputIdx = 0;
 
-        fieldSB.append("(");
+        fieldSB.append(SchemeConf.getInstance().getUEOptions().codeOutputCsvObjectBegin);
         for (int i = 0; i < children.size(); ++i) {
             if (i != 0) {
                 fieldSB.append(",");
@@ -1044,7 +1044,7 @@ public class DataDstUECsv extends DataDstUEBase {
             }
         }
 
-        fieldSB.append(")");
+        fieldSB.append(SchemeConf.getInstance().getUEOptions().codeOutputCsvObjectEnd);
         return true;
     }
 
@@ -1076,7 +1076,7 @@ public class DataDstUECsv extends DataDstUEBase {
                 break;
             }
             case MESSAGE: {
-                sb.append("(");
+                sb.append(SchemeConf.getInstance().getUEOptions().codeOutputCsvObjectBegin);
 
                 HashSet<String> dumpedOneof = null;
                 if (fd.getSortedOneofs().size() > 0) {
@@ -1115,7 +1115,7 @@ public class DataDstUECsv extends DataDstUEBase {
                     }
                 }
 
-                sb.append(")");
+                sb.append(SchemeConf.getInstance().getUEOptions().codeOutputCsvObjectEnd);
                 break;
             }
             default:

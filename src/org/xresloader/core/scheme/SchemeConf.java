@@ -30,6 +30,8 @@ public class SchemeConf {
         public String codeOutputDir = "";
         public String codeOutputPublicDir = "";
         public String codeOutputPrivateDir = "";
+        public String codeOutputCsvObjectBegin = "(";
+        public String codeOutputCsvObjectEnd = ")";
     }
 
     /**
@@ -86,6 +88,8 @@ public class SchemeConf {
         extUECSV.codeOutputDir = "";
         extUECSV.codeOutputPublicDir = "";
         extUECSV.codeOutputPrivateDir = "";
+        extUECSV.codeOutputCsvObjectBegin = "(";
+        extUECSV.codeOutputCsvObjectEnd = ")";
 
         outputFilePathCache = "";
         outputFileAbsPathCache = "";
@@ -107,6 +111,8 @@ public class SchemeConf {
         extUECSV.codeOutputDir = "";
         extUECSV.codeOutputPublicDir = "";
         extUECSV.codeOutputPrivateDir = "";
+        extUECSV.codeOutputCsvObjectBegin = "(";
+        extUECSV.codeOutputCsvObjectEnd = ")";
     }
 
     /**
@@ -424,6 +430,20 @@ public class SchemeConf {
             extUECSV.destinationPath = "";
         } else {
             extUECSV.destinationPath = dir;
+        }
+    }
+
+    public void setUECsvObjectWrapper(String begin, String end) {
+        if (begin == null) {
+            extUECSV.codeOutputCsvObjectBegin = "(";
+        } else {
+            extUECSV.codeOutputCsvObjectBegin = begin;
+        }
+
+        if (end == null) {
+            extUECSV.codeOutputCsvObjectEnd = ")";
+        } else {
+            extUECSV.codeOutputCsvObjectEnd = end;
         }
     }
 

@@ -316,6 +316,28 @@ public class DataDstUECsv extends DataDstUEBase {
         return sb.toString();
     }
 
+    static private boolean isEmptyObject(String input) {
+        if (input == null) {
+            return false;
+        }
+
+        String begin = SchemeConf.getInstance().getUEOptions().codeOutputCsvObjectBegin;
+        String end = SchemeConf.getInstance().getUEOptions().codeOutputCsvObjectEnd;
+        if (input.length() != begin.length() + end.length()) {
+            return false;
+        }
+
+        if (!input.substring(0, begin.length()).equalsIgnoreCase(begin)) {
+            return false;
+        }
+
+        if (!input.substring(begin.length()).equalsIgnoreCase(end)) {
+            return false;
+        }
+
+        return true;
+    }
+
     @Override
     final protected Object pickValueField(Object buildObj, ArrayList<DataDstWriterNodeWrapper> fieldSet,
             HashMap<String, Object> fieldDataByOneof) throws ConvException {
@@ -328,7 +350,7 @@ public class DataDstUECsv extends DataDstUEBase {
                 pickValueFieldCsvDefaultImpl(fieldSB, field, false);
                 String ret = fieldSB.toString();
                 // empty list to nothing, empty map is just like empty list
-                if (field.isList() && ret.equalsIgnoreCase("()")) {
+                if (field.isList() && isEmptyObject(ret)) {
                     ret = "";
                 }
                 return ret;
@@ -378,7 +400,7 @@ public class DataDstUECsv extends DataDstUEBase {
                 msgDesc.getReferBrothers().mode == DataDstWriterNode.CHILD_NODE_TYPE.PLAIN, true, fieldDataByOneof);
         String ret = fieldSB.toString();
         // empty list to nothing, empty map is just like empty list
-        if (field != null && field.isList() && ret.equalsIgnoreCase("()")) {
+        if (field != null && field.isList() && isEmptyObject(ret)) {
             ret = "";
         }
         return ret;
@@ -1106,7 +1128,8 @@ public class DataDstUECsv extends DataDstUEBase {
                     sb.append(getIdentName(subField.getName()));
                     sb.append("=");
                     if (subField.isList()) { // empty map is just like empty list
-                        sb.append("()");
+                        sb.append(SchemeConf.getInstance().getUEOptions().codeOutputCsvObjectBegin);
+                        sb.append(SchemeConf.getInstance().getUEOptions().codeOutputCsvObjectEnd);
                     } else if (subField.getType() == JAVA_TYPE.STRING || subField.getType() == JAVA_TYPE.BYTES) {
                         sb.append("\"\"");
                     } else {
@@ -1128,7 +1151,8 @@ public class DataDstUECsv extends DataDstUEBase {
     protected boolean pickValueFieldCsvDefaultImpl(StringBuffer sb, DataDstFieldDescriptor fd, boolean fillEmpty) {
         if (fd.isList()) { // empty map is just like empty list
             if (fillEmpty) {
-                sb.append("()");
+                sb.append(SchemeConf.getInstance().getUEOptions().codeOutputCsvObjectBegin);
+                sb.append(SchemeConf.getInstance().getUEOptions().codeOutputCsvObjectEnd);
                 return true;
             } else {
                 return false;

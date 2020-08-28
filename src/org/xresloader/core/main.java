@@ -181,7 +181,8 @@ public class main {
 
         // 读入数据表 & 协议编译
         int failed_count = 0;
-        for (int i = 0; i < ProgramOptions.getInstance().dataSourceMetas.length; ++i) {
+        boolean continue_next_scheme = true;
+        for (int i = 0; continue_next_scheme && i < ProgramOptions.getInstance().dataSourceMetas.length; ++i) {
             String sn = ProgramOptions.getInstance().dataSourceMetas[i];
 
             // 0. 清理
@@ -197,14 +198,7 @@ public class main {
             }
 
             // 命令行模式下dataSourceType为默认值，也就是BIN
-            if (false == SchemeConf.getInstance().getScheme().isSupportMultipleScheme()) {
-                // 命令行输入模式只触发一次，并且scheme名称改成所有配置的和
-                if (i > 0) {
-                    break;
-                } else {
-                    sn = String.join(" ", ProgramOptions.getInstance().dataSourceMetas);
-                }
-            }
+            continue_next_scheme = SchemeConf.getInstance().getScheme().isSupportMultipleScheme();
 
             // 重新组织sn
             StringBuilder descBuilder = new StringBuilder();
@@ -250,8 +244,9 @@ public class main {
                     break;
             }
 
-            if (null == protoDesc)
+            if (null == protoDesc) {
                 continue;
+            }
             if (false == protoDesc.init()) {
                 ProgramOptions.getLoger().error("protocol description \"%s\" initialize failed: %s ",
                         ProgramOptions.getInstance().protocol.toString(), protoDesc.getLastErrorMessage());
@@ -261,8 +256,9 @@ public class main {
 
             // 4. 输出类型
             DataDstImpl outDesc = get_out_desc(protoDesc);
-            if (null == outDesc)
+            if (null == outDesc) {
                 continue;
+            }
 
             ProgramOptions.getLoger().trace("convert from \"%s\" to \"%s\" started (protocol=%s) ...", sn,
                     SchemeConf.getInstance().getOutputFile(), SchemeConf.getInstance().getProtoName());

@@ -12,7 +12,7 @@ define({
     ],
     data_ver : "1.0.0.0",
     hash_code : "no hash code",
-    xres_ver : "2.9.2"
+    xres_ver : "2.9.3"
   },
   "role_cfg": [
     {

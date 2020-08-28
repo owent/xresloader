@@ -434,13 +434,13 @@ public class SchemeConf {
     }
 
     public void setUECsvObjectWrapper(String begin, String end) {
-        if (begin == null) {
+        if (begin == null || begin.isEmpty()) {
             extUECSV.codeOutputCsvObjectBegin = "(";
         } else {
             extUECSV.codeOutputCsvObjectBegin = begin;
         }
 
-        if (end == null) {
+        if (end == null || end.isEmpty()) {
             extUECSV.codeOutputCsvObjectEnd = ")";
         } else {
             extUECSV.codeOutputCsvObjectEnd = end;

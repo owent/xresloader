@@ -11,7 +11,7 @@
     <data_ver>1.0.0.0</data_ver>
     <description>Test arr_in_arr_cfg</description>
     <hash_code>no hash code</hash_code>
-    <xres_ver>2.9.2</xres_ver>
+    <xres_ver>2.9.3</xres_ver>
   </header>
   <body mode="message">
     <arr_in_arr_cfg mode="message">

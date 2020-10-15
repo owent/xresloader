@@ -154,7 +154,8 @@ public class DataDstPb extends DataDstImpl {
         return null;
     }
 
-    static <T> String get_alias_list_element_full_name(String name, HashMap<String, PbAliasNode<T>> hashmap, String type_name) {
+    static <T> String get_alias_list_element_full_name(String name, HashMap<String, PbAliasNode<T>> hashmap,
+            String type_name) {
         while (name.length() > 0 && name.charAt(0) == '.') {
             name = name.substring(1);
         }
@@ -165,7 +166,8 @@ public class DataDstPb extends DataDstImpl {
 
         if (null != ls.names && ls.names.size() > 1) {
             ProgramOptions.getLoger().error(
-                "there is more than one %s \"%s\" matched, please use full name. available names:", type_name, name);
+                    "there is more than one %s \"%s\" matched, please use full name. available names:", type_name,
+                    name);
             for (String full_name : ls.names) {
                 ProgramOptions.getLoger().error("\t%s", full_name);
             }
@@ -195,8 +197,15 @@ public class DataDstPb extends DataDstImpl {
             HashMap<String, PbAliasNode<DescriptorProtos.DescriptorProto>> hashmap) {
         String full_name = String.format("%s.%s", package_name, mdp.getName());
         append_alias_list(mdp.getName(), full_name, pbs.messages, mdp);
+
+        // nest messages
         for (DescriptorProtos.DescriptorProto sub_mdp : mdp.getNestedTypeList()) {
             load_pb_message(pbs, sub_mdp, full_name, hashmap);
+        }
+
+        // enums
+        for (DescriptorProtos.EnumDescriptorProto edp : mdp.getEnumTypeList()) {
+            append_alias_list(edp.getName(), String.format("%s.%s", full_name, edp.getName()), pbs.enums, edp);
         }
 
         // oneof
@@ -498,7 +507,7 @@ public class DataDstPb extends DataDstImpl {
                         if (enum_desc != null) {
                             vfy = new DataVerifyPbEnum(enum_desc);
                         }
-                        
+
                         if (null == vfy) {
                             DescriptorProtos.DescriptorProto msg_desc = get_alias_list_element(rule, cachePbs.messages,
                                     "message type");
@@ -508,21 +517,24 @@ public class DataDstPb extends DataDstImpl {
                         }
 
                         if (null == vfy) {
-                            DescriptorProtos.OneofDescriptorProto oneof_desc = get_alias_list_element(rule, cachePbs.oneofs,
-                                    "oneof type");
+                            DescriptorProtos.OneofDescriptorProto oneof_desc = get_alias_list_element(rule,
+                                    cachePbs.oneofs, "oneof type");
                             if (oneof_desc != null) {
                                 DescriptorProtos.DescriptorProto msg_desc = null;
                                 int message_bound = rule.lastIndexOf('.');
                                 if (message_bound > 0 && message_bound < rule.length()) {
-                                    msg_desc = get_alias_list_element(rule.substring(0, message_bound), cachePbs.messages, "message type");
+                                    msg_desc = get_alias_list_element(rule.substring(0, message_bound),
+                                            cachePbs.messages, "message type");
                                 } else {
-                                    String oneof_full_name = get_alias_list_element_full_name(rule, cachePbs.oneofs, "oneof type");
+                                    String oneof_full_name = get_alias_list_element_full_name(rule, cachePbs.oneofs,
+                                            "oneof type");
                                     message_bound = oneof_full_name.lastIndexOf('.');
                                     if (message_bound > 0 && message_bound < oneof_full_name.length()) {
-                                        msg_desc = get_alias_list_element(oneof_full_name.substring(0, message_bound), cachePbs.messages, "message type");
+                                        msg_desc = get_alias_list_element(oneof_full_name.substring(0, message_bound),
+                                                cachePbs.messages, "message type");
                                     }
                                 }
-                                
+
                                 if (oneof_desc != null && msg_desc != null) {
                                     vfy = new DataVerifyPbOneof(oneof_desc, msg_desc);
                                 }
@@ -949,29 +961,66 @@ public class DataDstPb extends DataDstImpl {
         for (Descriptors.OneofDescriptor oneof : desc.getOneofs()) {
             oneofField.put(oneof.getFullName(), null);
         }
+        boolean enable_alias_mapping = ProgramOptions.getInstance().enableAliasMapping;
 
         DataSrcImpl data_src = DataSrcImpl.getOurInstance();
         for (Descriptors.FieldDescriptor fd : desc.getFields()) {
             DataDstChildrenNode child = null;
+            String field_alias = null;
+            if (enable_alias_mapping && fd.getOptions().hasExtension(Xresloader.fieldAlias)
+                    && !fd.getOptions().getExtension(Xresloader.fieldAlias).isEmpty()) {
+                field_alias = fd.getOptions().getExtension(Xresloader.fieldAlias);
+            }
             switch (fd.getType()) {
                 // 复杂类型还需要检测子节点
                 case MESSAGE:
                     if (fd.isRepeated()) {
                         int count = 0;
+                        String repeated_test_name = null;
 
                         name_list.addLast("");
                         for (;; ++count) {
+                            if (0 == count) {
+                                repeated_test_name = fd.getName();
+                            }
+
                             DataDstWriterNode c = createMessageWriterNode(cachePbs, fd.getMessageType(),
                                     DataDstWriterNode.JAVA_TYPE.MESSAGE);
+                            boolean test_passed = false;
+
                             name_list.removeLast();
-                            name_list.addLast(DataDstWriterNode.makeNodeName(fd.getName(), count));
+                            name_list.addLast(DataDstWriterNode.makeNodeName(repeated_test_name, count));
                             if (test(c, name_list)) {
                                 child = node.addChild(fd.getName(), c, fd, DataDstWriterNode.CHILD_NODE_TYPE.STANDARD);
                                 ret = true;
-                            } else {
+                                test_passed = true;
+                            } else if (0 == count && null != field_alias) {
+                                repeated_test_name = field_alias;
+                                name_list.removeLast();
+                                name_list.addLast(DataDstWriterNode.makeNodeName(repeated_test_name, count));
+                                if (test(c, name_list)) {
+                                    child = node.addChild(fd.getName(), c, fd,
+                                            DataDstWriterNode.CHILD_NODE_TYPE.STANDARD);
+                                    ret = true;
+                                    test_passed = true;
+                                }
+                            }
+
+                            if (!test_passed) {
+                                // Reset to field name when test first element
+                                if (0 == count) {
+                                    repeated_test_name = fd.getName();
+                                }
                                 // try plain mode - array item
-                                String real_name = DataDstWriterNode.makeChildPath(prefix, fd.getName(), count);
+                                String real_name = DataDstWriterNode.makeChildPath(prefix, repeated_test_name, count);
                                 IdentifyDescriptor col = data_src.getColumnByName(real_name);
+                                if (null == col && 0 == count && null != field_alias) {
+                                    repeated_test_name = field_alias;
+                                    String alias_name = DataDstWriterNode.makeChildPath(prefix, repeated_test_name,
+                                            count);
+                                    col = data_src.getColumnByName(alias_name);
+                                }
+
                                 if (null != col) {
                                     child = node.addChild(fd.getName(), c, fd, DataDstWriterNode.CHILD_NODE_TYPE.PLAIN);
                                     setup_node_identify(c, child, col, fd);
@@ -989,6 +1038,12 @@ public class DataDstPb extends DataDstImpl {
                             // try plain mode - the whole array
                             String real_name = DataDstWriterNode.makeChildPath(prefix, fd.getName());
                             IdentifyDescriptor col = data_src.getColumnByName(real_name);
+
+                            if (null == col && null != field_alias) {
+                                String alias_name = DataDstWriterNode.makeChildPath(prefix, field_alias);
+                                col = data_src.getColumnByName(alias_name);
+                            }
+
                             if (null != col) {
                                 DataDstWriterNode c = createMessageWriterNode(cachePbs, fd.getMessageType(),
                                         DataDstWriterNode.JAVA_TYPE.MESSAGE);
@@ -1004,17 +1059,36 @@ public class DataDstPb extends DataDstImpl {
                     } else {
                         DataDstWriterNode c = createMessageWriterNode(cachePbs, fd.getMessageType(),
                                 DataDstWriterNode.JAVA_TYPE.MESSAGE);
+                        boolean test_passed = false;
+
                         name_list.addLast(DataDstWriterNode.makeNodeName(fd.getName()));
                         if (test(c, name_list)) {
                             filterMissingFields(missingFields, oneofField, fd, false);
                             child = node.addChild(fd.getName(), c, fd, DataDstWriterNode.CHILD_NODE_TYPE.STANDARD);
                             ret = true;
-                        } else {
+                            test_passed = true;
+                        } else if (null != field_alias) {
+                            name_list.removeLast();
+                            name_list.addLast(DataDstWriterNode.makeNodeName(field_alias));
+                            if (test(c, name_list)) {
+                                filterMissingFields(missingFields, oneofField, fd, false);
+                                child = node.addChild(fd.getName(), c, fd, DataDstWriterNode.CHILD_NODE_TYPE.STANDARD);
+                                ret = true;
+                                test_passed = true;
+                            }
+                        }
+
+                        if (!test_passed) {
                             filterMissingFields(missingFields, oneofField, fd, true);
 
                             // try plain mode
                             String real_name = DataDstWriterNode.makeChildPath(prefix, fd.getName());
                             IdentifyDescriptor col = data_src.getColumnByName(real_name);
+                            if (null == col && null != field_alias) {
+                                String alias_name = DataDstWriterNode.makeChildPath(prefix, field_alias);
+                                col = data_src.getColumnByName(alias_name);
+                            }
+
                             if (null != col) {
                                 child = node.addChild(fd.getName(), c, fd, DataDstWriterNode.CHILD_NODE_TYPE.PLAIN);
                                 setup_node_identify(c, child, col, fd);
@@ -1039,9 +1113,20 @@ public class DataDstPb extends DataDstImpl {
                     DataDstWriterNode.JAVA_TYPE inner_type = pbTypeToInnerType(fd.getType());
                     if (fd.isRepeated()) {
                         int count = 0;
+                        String repeated_test_name = null;
                         for (;; ++count) {
-                            String real_name = DataDstWriterNode.makeChildPath(prefix, fd.getName(), count);
+                            if (0 == count) {
+                                repeated_test_name = fd.getName();
+                            }
+
+                            String real_name = DataDstWriterNode.makeChildPath(prefix, repeated_test_name, count);
                             IdentifyDescriptor col = data_src.getColumnByName(real_name);
+                            if (null == col && 0 == count && null != field_alias) {
+                                repeated_test_name = field_alias;
+                                String alias_name = DataDstWriterNode.makeChildPath(prefix, repeated_test_name, count);
+                                col = data_src.getColumnByName(alias_name);
+                            }
+
                             if (null != col) {
                                 DataDstWriterNode c = createMessageWriterNode(cachePbs, inner_type);
                                 child = node.addChild(fd.getName(), c, fd, DataDstWriterNode.CHILD_NODE_TYPE.STANDARD);
@@ -1058,6 +1143,11 @@ public class DataDstPb extends DataDstImpl {
                             // try plain mode
                             String real_name = DataDstWriterNode.makeChildPath(prefix, fd.getName());
                             IdentifyDescriptor col = data_src.getColumnByName(real_name);
+                            if (null == col && null != field_alias) {
+                                String alias_name = DataDstWriterNode.makeChildPath(prefix, field_alias);
+                                col = data_src.getColumnByName(alias_name);
+                            }
+
                             if (null != col) {
                                 DataDstWriterNode c = createMessageWriterNode(cachePbs, inner_type);
                                 child = node.addChild(fd.getName(), c, fd, DataDstWriterNode.CHILD_NODE_TYPE.PLAIN);
@@ -1073,6 +1163,11 @@ public class DataDstPb extends DataDstImpl {
                         // 非 list 类型
                         String real_name = DataDstWriterNode.makeChildPath(prefix, fd.getName());
                         IdentifyDescriptor col = data_src.getColumnByName(real_name);
+                        if (null == col && null != field_alias) {
+                            String alias_name = DataDstWriterNode.makeChildPath(prefix, field_alias);
+                            col = data_src.getColumnByName(alias_name);
+                        }
+
                         if (null != col) {
                             filterMissingFields(missingFields, oneofField, fd, false);
                             DataDstWriterNode c = createMessageWriterNode(cachePbs, inner_type);
@@ -1112,6 +1207,15 @@ public class DataDstPb extends DataDstImpl {
             DataDstChildrenNode child = null;
             String real_name = DataDstWriterNode.makeChildPath(prefix, fd.getName());
             IdentifyDescriptor col = data_src.getColumnByName(real_name);
+
+            // if (null == col && enable_alias_mapping) {
+            // if (fd.getOptions().hasExtension(Xresloader.oneofAlias)
+            // && !fd.getOptions().getExtension(Xresloader.oneofAlias).isEmpty()) {
+            // String alias_name = DataDstWriterNode.makeChildPath(prefix,
+            // fd.getOptions().getExtension(Xresloader.oneofAlias));
+            // col = data_src.getColumnByName(alias_name);
+            // }
+            // }
 
             if (null == col) {
                 continue;

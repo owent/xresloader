@@ -47,6 +47,7 @@ public class ProgramOptions {
     public String dataSourceMetaDelimiter = "\\|";
     public RenameRule renameRule = null;
     public boolean requireMappingAllFields = false;
+    public boolean enableAliasMapping = false;
     public boolean enableFormular = true;
     public boolean enbleEmptyList = false;
     public int prettyIndent = 0;
@@ -70,6 +71,7 @@ public class ProgramOptions {
         dataSourceDirectory = outputDirectory;
         dataSourceType = FileType.BIN;
         requireMappingAllFields = false;
+        enableAliasMapping = false;
     }
 
     public static ProgramOptions getInstance() {
@@ -94,6 +96,7 @@ public class ProgramOptions {
         dataSourceMetaDelimiter = "\\|";
         renameRule = null;
         requireMappingAllFields = false;
+        enableAliasMapping = false;
         enableFormular = true;
         enbleEmptyList = false;
         prettyIndent = 0;
@@ -161,6 +164,7 @@ public class ProgramOptions {
                 .build());
         options.addOption(null, "require-mapping-all", false,
                 "require all fields in protocol message to be mapped from data source");
+        options.addOption(null, "enable-alias-mapping", false, "allow to use alias when mapping fields");
 
         options.addOption(Option.builder("a").longOpt("data-version").desc("set data version").hasArg()
                 .argName("DATA VERSION").build());
@@ -403,6 +407,10 @@ public class ProgramOptions {
 
         if (cmd.hasOption("require-mapping-all")) {
             requireMappingAllFields = true;
+        }
+
+        if (cmd.hasOption("enable-alias-mapping")) {
+            enableAliasMapping = true;
         }
 
         // special functions

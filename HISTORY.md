@@ -6,6 +6,11 @@
 
 1. 增加 ```--enable-alias-mapping``` 选项，用于在映射Excel列到目标数据结构时，开启别名匹配。
 2. protobuf的枚举类型解析支持message内嵌enum。
+3. 更新 ```maven-shade-plugin.maven-shade-plugin``` 到 3.2.4
+4. 更新 ```org.codehaus.mojo.build-helper-maven-plugin``` 到 3.2.0
+5. 更新 ```commons-codec``` 到 1.15
+6. 更新 ```org.msgpack.msgpack-core``` 到 0.8.21
+7. 更新 ```com.google.protobuf.protobuf-java``` 到 3.13.0
 
 2.9.3
 ------

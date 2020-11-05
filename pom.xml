@@ -181,7 +181,7 @@
         <dependency>
             <groupId>org.msgpack</groupId>
             <artifactId>msgpack-core</artifactId>
-            <version>0.8.20</version>
+            <version>0.8.21</version>
         </dependency>
 
         <dependency>
@@ -202,6 +202,7 @@
             <groupId>org.apache.xmlbeans</groupId>
             <artifactId>xmlbeans</artifactId>
             <version>3.1.0</version>
+            <!-- <version>4.0.0</version> 暂时不支持这个版本 -->
         </dependency>
 
         <dependency>

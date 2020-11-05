@@ -7,12 +7,10 @@ import org.xresloader.core.data.src.DataContainer;
 import org.xresloader.core.data.src.DataSrcImpl;
 import org.xresloader.core.engine.ExcelEngine;
 import org.xresloader.core.engine.IdentifyDescriptor;
-import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 
 import java.util.ArrayList;
-
 
 /**
  * Created by owentou on 2014/9/30.
@@ -26,7 +24,8 @@ public final class SchemeDataSourceExcel extends SchemeDataSourceBase {
         String file_path = ProgramOptions.getInstance().dataSourceFile;
         currentWorkbook = ExcelEngine.openWorkbook(file_path);
         if (null == currentWorkbook) {
-            throw new InitializeException(String.format("open file \"%s\" failed", ProgramOptions.getInstance().dataSourceFile));
+            throw new InitializeException(
+                    String.format("open file \"%s\" failed", ProgramOptions.getInstance().dataSourceFile));
         }
 
         return 0;
@@ -43,26 +42,27 @@ public final class SchemeDataSourceExcel extends SchemeDataSourceBase {
         int row_num = table.getLastRowNum() + 1;
         int data_row = 0;
         int key_col = 0; // 字段列
-        int data_col[] = {2, 3, 4}; // 数据列
+        int data_col[] = { 2, 3, 4 }; // 数据列
 
         // 查找“字段”列
         for (; data_row < row_num; ++data_row) {
-            Row row = table.getRow(data_row);
-            int col_num = row.getLastCellNum() + 1;
+            ExcelEngine.DataRowWrapper rowWrapper = new ExcelEngine.DataRowWrapper(table.getRow(data_row));
+            int col_num = rowWrapper.getLastCellNum() + 1;
             for (key_col = 0; key_col < col_num; ++key_col) {
-                String val = cell2str(row, key_col);
+                String val = cell2str(rowWrapper, key_col);
                 val = val.trim();
                 if (val.equals("字段") || val.equalsIgnoreCase("header")) {
                     break;
                 }
             }
 
-            if (key_col >= col_num)
+            if (key_col >= col_num) {
                 continue;
+            }
 
             // 数据列判定
             for (int i = 0; i < col_num; ++i) {
-                String val = cell2str(row, i);
+                String val = cell2str(rowWrapper, i);
                 val = val.trim();
                 if (val.equals("主配置") || val.equalsIgnoreCase("major")) {
                     data_col[0] = i;
@@ -76,20 +76,22 @@ public final class SchemeDataSourceExcel extends SchemeDataSourceBase {
         }
 
         if (data_row >= row_num) {
-            throw new InitializeException(String.format("scheme \"%s\" has no configure, or it's not a scheme sheet?", sheet_name));
+            throw new InitializeException(
+                    String.format("scheme \"%s\" has no configure, or it's not a scheme sheet?", sheet_name));
         }
 
         // 数据项必须在这之后
         for (++data_row; data_row < row_num; ++data_row) {
-            Row row = table.getRow(data_row);
-            if (null == row)
+            ExcelEngine.DataRowWrapper rowWrapper = new ExcelEngine.DataRowWrapper(table.getRow(data_row));
+            if (null == rowWrapper) {
                 continue;
+            }
 
-            String key = cell2str(row, key_col);
+            String key = cell2str(rowWrapper, key_col);
             ArrayList<String> datas = new ArrayList<String>();
-            datas.add(cell2str(row, data_col[0]));
-            datas.add(cell2str(row, data_col[1]));
-            datas.add(cell2str(row, data_col[2]));
+            datas.add(cell2str(rowWrapper, data_col[0]));
+            datas.add(cell2str(rowWrapper, data_col[1]));
+            datas.add(cell2str(rowWrapper, data_col[2]));
 
             set_scheme(key, datas);
         }
@@ -97,22 +99,22 @@ public final class SchemeDataSourceExcel extends SchemeDataSourceBase {
         return true;
     }
 
-    private String cell2str(Row row, int col) {
+    private String cell2str(ExcelEngine.DataRowWrapper rowWrapper, int col) {
         IdentifyDescriptor ident = new IdentifyDescriptor();
         ident.index = col;
 
         DataContainer<String> cache = DataSrcImpl.getStringCache("");
-        ExcelEngine.cell2s(cache, row, ident);
+        ExcelEngine.cell2s(cache, rowWrapper, ident);
         return cache.get();
     }
 
-    private int cell2int(Row row, int col) throws ConvException {
+    private int cell2int(ExcelEngine.DataRowWrapper rowWrapper, int col) throws ConvException {
         IdentifyDescriptor ident = new IdentifyDescriptor();
         ident.index = col;
 
         DataContainer<Long> cache = DataSrcImpl.getLongCache(0L);
 
-        ExcelEngine.cell2i(cache, row, ident);
+        ExcelEngine.cell2i(cache, rowWrapper, ident);
         return cache.get().intValue();
     }
 }

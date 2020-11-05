@@ -8,6 +8,7 @@ import org.xresloader.core.data.vfy.DataVerifyImpl;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import org.apache.poi.xssf.usermodel.XSSFComment;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -35,10 +36,134 @@ public class ExcelEngine {
     // HashMap<Integer, SimpleDateFormat>();
 
     static public class FormulaWrapper {
-        FormulaEvaluator evalor = null;
+        public FormulaEvaluator evalor = null;
 
-        FormulaWrapper(FormulaEvaluator evalor) {
+        public FormulaWrapper(FormulaEvaluator evalor) {
             this.evalor = evalor;
+        }
+    }
+
+    static public class CustomDataRowIndex {
+        private ArrayList<String> columns = new ArrayList<String>();
+        private int rowNumber = 0;
+        private CustomDataTableIndex ownerSheet = null;
+
+        public CustomDataRowIndex(int rowNum, CustomDataTableIndex owner) {
+            this.rowNumber = rowNum;
+            this.ownerSheet = owner;
+        }
+
+        public ArrayList<String> getColumns() {
+            return columns;
+        }
+
+        public int getColumnSize() {
+            return columns.size();
+        }
+
+        public String getCellValue(int index) {
+            if (index >= columns.size()) {
+                return null;
+            }
+
+            String ret = columns.get(index);
+            if (ret != null) {
+                return ret.trim();
+            }
+            return ret;
+        }
+
+        public int getRowNum() {
+            return rowNumber;
+        }
+
+        public CustomDataTableIndex getTable() {
+            return ownerSheet;
+        }
+    }
+
+    static public class CustomDataTableIndex {
+        private String filePath = null;
+        private String sheetName = null;
+        private int lastRowNum = -1;
+
+        private HashMap<Integer, CustomDataRowIndex> rows = new HashMap<Integer, CustomDataRowIndex>();
+
+        public CustomDataTableIndex(String file_path, String sheet_name) {
+            this.filePath = file_path;
+            this.sheetName = sheet_name;
+        }
+
+        public String getFilePath() {
+            return filePath;
+        }
+
+        public String getSheetName() {
+            return sheetName;
+        }
+
+        public int getLastRowNum() {
+            return lastRowNum;
+        }
+
+        public void addRow(CustomDataRowIndex row) {
+            if (row == null) {
+                return;
+            }
+
+            rows.put(row.getRowNum(), row);
+            if (row.getRowNum() > lastRowNum) {
+                lastRowNum = row.getRowNum();
+            }
+        }
+
+        public CustomDataRowIndex getRow(int index) {
+            return rows.getOrDefault(index, null);
+        }
+    }
+
+    static public class DataRowWrapper {
+        private Row userModuleRow = null;
+        private CustomDataRowIndex customRow = null;
+
+        public DataRowWrapper(Row row) {
+            this.userModuleRow = row;
+        }
+
+        public DataRowWrapper(CustomDataRowIndex row) {
+            this.customRow = row;
+        }
+
+        public Row getUserModuleRow() {
+            return userModuleRow;
+        }
+
+        public CustomDataRowIndex getCustomRowIndex() {
+            return customRow;
+        }
+
+        public boolean isValid() {
+            return userModuleRow != null || customRow != null;
+        }
+
+        public int getLastCellNum() {
+            if (null != userModuleRow) {
+                return userModuleRow.getLastCellNum();
+            }
+            if (null != customRow) {
+                return customRow.getColumnSize() - 1;
+            }
+            return -1;
+        }
+
+        public int getRowNum() {
+            if (null != userModuleRow) {
+                return userModuleRow.getRowNum();
+            }
+            if (null != customRow) {
+                return customRow.getRowNum();
+            }
+            return -1;
         }
     }
 
@@ -139,12 +264,12 @@ public class ExcelEngine {
     /**
      * 单元格数据转换（String）
      *
-     * @param row 行
-     * @param col 列号
+     * @param rowWrapper 行
+     * @param col        列号
      * @return
      */
-    static public void cell2s(DataContainer<String> out, Row row, IdentifyDescriptor col) {
-        cell2s(out, row, col, null);
+    static public void cell2s(DataContainer<String> out, DataRowWrapper rowWrapper, IdentifyDescriptor col) {
+        cell2s(out, rowWrapper, col, null);
     }
 
     static private Byte cal_cell2err(Cell c, CellValue cv) {
@@ -182,12 +307,26 @@ public class ExcelEngine {
     /**
      * 单元格数据转换（String）
      *
-     * @param row     行
-     * @param col     列号
-     * @param formula 公式管理器
+     * @param rowWrapper 行
+     * @param col        列号
+     * @param formula    公式管理器
      * @return
      */
-    static public void cell2s(DataContainer<String> out, Row row, IdentifyDescriptor col, FormulaWrapper formula) {
+    static public void cell2s(DataContainer<String> out, DataRowWrapper rowWrapper, IdentifyDescriptor col,
+            FormulaWrapper formula) {
+        if (null == rowWrapper) {
+            return;
+        }
+
+        if (null != rowWrapper.getCustomRowIndex()) {
+            String val = rowWrapper.getCustomRowIndex().getCellValue(col.index);
+            if (val != null && !val.isEmpty()) {
+                out.set(val);
+            }
+            return;
+        }
+
+        Row row = rowWrapper.getUserModuleRow();
         if (null == row) {
             return;
         }
@@ -283,30 +422,47 @@ public class ExcelEngine {
     /**
      * 单元格数据转换（Integer）
      *
-     * @param row 行
-     * @param col 列号
+     * @param rowWrapper 行
+     * @param col        列号
      * @return
      */
-    static public void cell2i(DataContainer<Long> out, Row row, IdentifyDescriptor col) throws ConvException {
-        cell2i(out, row, col, null);
+    static public void cell2i(DataContainer<Long> out, DataRowWrapper rowWrapper, IdentifyDescriptor col)
+            throws ConvException {
+        cell2i(out, rowWrapper, col, null);
     }
 
     /**
      * 单元格数据转换（Integer）
      *
-     * @param row     行
-     * @param col     列号
-     * @param formula 公式管理器
+     * @param rowWrapper 行
+     * @param col        列号
+     * @param formula    公式管理器
      * @return
      */
-    static public void cell2i(DataContainer<Long> out, Row row, IdentifyDescriptor col, FormulaWrapper formula)
-            throws ConvException {
-        if (null == row)
+    static public void cell2i(DataContainer<Long> out, DataRowWrapper rowWrapper, IdentifyDescriptor col,
+            FormulaWrapper formula) throws ConvException {
+
+        if (null == rowWrapper) {
             return;
+        }
+
+        if (null != rowWrapper.getCustomRowIndex()) {
+            String val = rowWrapper.getCustomRowIndex().getCellValue(col.index);
+            if (val != null && !val.isEmpty()) {
+                out.set(DataVerifyImpl.getAndVerify(col.getVerifier(), col.name, tryMacro(val)));
+            }
+            return;
+        }
+
+        Row row = rowWrapper.getUserModuleRow();
+        if (null == row) {
+            return;
+        }
 
         Cell c = row.getCell(col.index);
-        if (null == c)
+        if (null == c) {
             return;
+        }
 
         CellValue cv = null;
         if (CellType.FORMULA == c.getCellType()) {
@@ -361,30 +517,54 @@ public class ExcelEngine {
     /**
      * 单元格数据转换（Double）
      *
-     * @param row 行
-     * @param col 列号
+     * @param rowWrapper 行
+     * @param col        列号
      * @return
      */
-    static public void cell2d(DataContainer<Double> out, Row row, IdentifyDescriptor col) throws ConvException {
-        cell2d(out, row, col, null);
+    static public void cell2d(DataContainer<Double> out, DataRowWrapper rowWrapper, IdentifyDescriptor col)
+            throws ConvException {
+        cell2d(out, rowWrapper, col, null);
     }
 
     /**
      * 单元格数据转换（Double）
      *
-     * @param row     行
-     * @param col     列号
-     * @param formula 公式管理器
+     * @param rowWrapper 行
+     * @param col        列号
+     * @param formula    公式管理器
      * @return
      */
-    static public void cell2d(DataContainer<Double> out, Row row, IdentifyDescriptor col, FormulaWrapper formula)
-            throws ConvException {
-        if (null == row)
+    static public void cell2d(DataContainer<Double> out, DataRowWrapper rowWrapper, IdentifyDescriptor col,
+            FormulaWrapper formula) throws ConvException {
+
+        if (null == rowWrapper) {
             return;
+        }
+
+        if (null != rowWrapper.getCustomRowIndex()) {
+            String val = rowWrapper.getCustomRowIndex().getCellValue(col.index);
+            if (val != null && !val.isEmpty()) {
+                try {
+                    out.set(Double.valueOf(tryMacro(val)));
+                } catch (java.lang.NumberFormatException e) {
+                    throw new ConvException(
+                            String.format("Table %s, Row %d, Column %d : %s can not be converted to a number",
+                                    rowWrapper.getCustomRowIndex().getTable().getSheetName(),
+                                    rowWrapper.getCustomRowIndex().getRowNum() + 1, col.index + 1, val));
+                }
+            }
+            return;
+        }
+
+        Row row = rowWrapper.getUserModuleRow();
+        if (null == row) {
+            return;
+        }
 
         Cell c = row.getCell(col.index);
-        if (null == c)
+        if (null == c) {
             return;
+        }
 
         CellValue cv = null;
         if (CellType.FORMULA == c.getCellType()) {
@@ -440,34 +620,50 @@ public class ExcelEngine {
     /**
      * 单元格数据转换（boolean）
      *
-     * @param row 行
-     * @param col 列号
+     * @param rowWrapper 行
+     * @param col        列号
      * @return
      */
-    static public void cell2b(DataContainer<Boolean> out, Row row, IdentifyDescriptor col) {
-        cell2b(out, row, col, null);
+    static public void cell2b(DataContainer<Boolean> out, DataRowWrapper rowWrapper, IdentifyDescriptor col) {
+        cell2b(out, rowWrapper, col, null);
     }
 
     /**
      * 单元格数据转换（boolean）
      *
-     * @param row     行
-     * @param col     列号
-     * @param formula 公式管理器
+     * @param rowWrapper 行
+     * @param col        列号
+     * @param formula    公式管理器
      * @return
      */
-    static public void cell2b(DataContainer<Boolean> out, Row row, IdentifyDescriptor col, FormulaWrapper formula) {
-        if (null == row)
+    static public void cell2b(DataContainer<Boolean> out, DataRowWrapper rowWrapper, IdentifyDescriptor col,
+            FormulaWrapper formula) {
+        if (null == rowWrapper) {
             return;
+        }
+
+        if (null != rowWrapper.getCustomRowIndex()) {
+            String val = rowWrapper.getCustomRowIndex().getCellValue(col.index);
+            if (val != null && !val.isEmpty()) {
+                out.set(DataSrcImpl.getBooleanFromString(val));
+            }
+            return;
+        }
+
+        Row row = rowWrapper.getUserModuleRow();
+        if (null == row) {
+            return;
+        }
 
         Cell c = row.getCell(col.index);
-        if (null == c)
+        if (null == c) {
             return;
+        }
 
         CellValue cv = null;
         if (CellType.FORMULA == c.getCellType()) {
             if (null != formula && null != formula.evalor) {
-                cv = evalor.evaluate(c);
+                cv = formula.evalor.evaluate(c);
             } else {
                 out.set(true);
                 return;

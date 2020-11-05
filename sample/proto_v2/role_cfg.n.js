@@ -9,9 +9,9 @@ exports.role_cfg_header = {
       sheet : "kind"
     }
   ],
-  data_ver : "1.0.0.0",
+  data_ver : "2.10.0.20201105221139",
   hash_code : "no hash code",
-  xres_ver : "2.9.3"
+  xres_ver : "2.10.0"
 };
 exports.role_cfg = [
   {

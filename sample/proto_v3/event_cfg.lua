@@ -9,10 +9,10 @@ return {
         sheet = "test_oneof",
       },
     },
-    data_ver = "1.0.0.0",
+    data_ver = "2.10.0.20201105221149",
     description = "Test event_cfg with oneof fields",
     hash_code = "no hash code",
-    xres_ver = "2.9.3",
+    xres_ver = "2.10.0",
   },
   [2] = "event_cfg",
   event_cfg = {

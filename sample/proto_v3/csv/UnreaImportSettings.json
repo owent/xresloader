@@ -3,7 +3,7 @@
         "GroupName": "XResConfig",
         "DestinationPath": "DataTable",
         "FactoryName": "ReimportDataTableFactory",
-        "Filenames": ["D:\\workspace\\github\\xresloader\\xresloader\\sample\\proto_v3\\csv\\KindConst.csv"],
+        "Filenames": ["/mnt/d/workspace/github/xresloader/xresloader/sample/proto_v3/csv/KindConst.csv"],
         "ImportSettings": {
             "ImportType": "ECSV_DataTable",
             "ImportRowStruct": "KindConst"
@@ -15,7 +15,7 @@
         "GroupName": "XResConfig",
         "DestinationPath": "Config",
         "FactoryName": "ReimportDataTableFactory",
-        "Filenames": ["D:\\workspace\\github\\xresloader\\xresloader\\sample\\proto_v3\\csv\\ArrInArrCfg.csv"],
+        "Filenames": ["/mnt/d/workspace/github/xresloader/xresloader/sample/proto_v3/csv/ArrInArrCfg.csv"],
         "ImportSettings": {
             "ImportType": "ECSV_DataTable",
             "ImportRowStruct": "ArrInArrCfg"
@@ -27,7 +27,7 @@
         "GroupName": "XResConfig",
         "DestinationPath": "Config",
         "FactoryName": "ReimportDataTableFactory",
-        "Filenames": ["D:\\workspace\\github\\xresloader\\xresloader\\sample\\proto_v3\\csv\\RoleUpgradeCfg.csv"],
+        "Filenames": ["/mnt/d/workspace/github/xresloader/xresloader/sample/proto_v3/csv/RoleUpgradeCfg.csv"],
         "ImportSettings": {
             "ImportType": "ECSV_DataTable",
             "ImportRowStruct": "RoleUpgradeCfg"
@@ -39,7 +39,7 @@
         "GroupName": "XResConfig",
         "DestinationPath": "ConfigRec",
         "FactoryName": "ReimportDataTableFactory",
-        "Filenames": ["D:\\workspace\\github\\xresloader\\xresloader\\sample\\proto_v3\\csv\\ArrInArrCfgRec.csv"],
+        "Filenames": ["/mnt/d/workspace/github/xresloader/xresloader/sample/proto_v3/csv/ArrInArrCfgRec.csv"],
         "ImportSettings": {
             "ImportType": "ECSV_DataTable",
             "ImportRowStruct": "ArrInArrCfg"
@@ -51,7 +51,7 @@
         "GroupName": "XResConfig",
         "DestinationPath": "ConfigRec",
         "FactoryName": "ReimportDataTableFactory",
-        "Filenames": ["D:\\workspace\\github\\xresloader\\xresloader\\sample\\proto_v3\\csv\\RoleUpgradeCfgRec.csv"],
+        "Filenames": ["/mnt/d/workspace/github/xresloader/xresloader/sample/proto_v3/csv/RoleUpgradeCfgRec.csv"],
         "ImportSettings": {
             "ImportType": "ECSV_DataTable",
             "ImportRowStruct": "RoleUpgradeCfg"
@@ -63,7 +63,7 @@
         "GroupName": "XResConfig",
         "DestinationPath": "Config",
         "FactoryName": "ReimportDataTableFactory",
-        "Filenames": ["D:\\workspace\\github\\xresloader\\xresloader\\sample\\proto_v3\\csv\\EventCfg.csv"],
+        "Filenames": ["/mnt/d/workspace/github/xresloader/xresloader/sample/proto_v3/csv/EventCfg.csv"],
         "ImportSettings": {
             "ImportType": "ECSV_DataTable",
             "ImportRowStruct": "EventCfg"
@@ -75,7 +75,7 @@
         "GroupName": "XResConfig",
         "DestinationPath": "ConfigRec",
         "FactoryName": "ReimportDataTableFactory",
-        "Filenames": ["D:\\workspace\\github\\xresloader\\xresloader\\sample\\proto_v3\\csv\\EventCfgRec.csv"],
+        "Filenames": ["/mnt/d/workspace/github/xresloader/xresloader/sample/proto_v3/csv/EventCfgRec.csv"],
         "ImportSettings": {
             "ImportType": "ECSV_DataTable",
             "ImportRowStruct": "EventCfg"

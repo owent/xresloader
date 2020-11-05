@@ -671,7 +671,7 @@ public abstract class DataDstUEBase extends DataDstImpl {
     }
 
     protected final void build_data(Object buildObj, DataDstImpl compiler) throws ConvException, IOException {
-        while (DataSrcImpl.getOurInstance().next_table()) {
+        while (DataSrcImpl.getOurInstance().nextTable()) {
             // 生成描述集
             DataDstWriterNode desc = compiler.compile();
 
@@ -710,7 +710,7 @@ public abstract class DataDstUEBase extends DataDstImpl {
             buildForUEOnPrintHeader(buildObj, row_data, rule, codeInfo);
 
             // 输出数据
-            while (DataSrcImpl.getOurInstance().next_row()) {
+            while (DataSrcImpl.getOurInstance().nextRow()) {
                 row_data = new ArrayList<Object>();
                 HashMap<String, Object> fieldDataByOneof = new HashMap<String, Object>();
                 row_data.ensureCapacity(rule.keyFields.size() + rule.valueFields.size());

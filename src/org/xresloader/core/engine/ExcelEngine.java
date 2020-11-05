@@ -34,6 +34,14 @@ public class ExcelEngine {
     // static private HashMap<Integer, SimpleDateFormat> dateTypeStyle = new
     // HashMap<Integer, SimpleDateFormat>();
 
+    static public class FormulaWrapper {
+        FormulaEvaluator evalor = null;
+
+        FormulaWrapper(FormulaEvaluator evalor) {
+            this.evalor = evalor;
+        }
+    }
+
     /**
      * 清空缓存
      */
@@ -174,12 +182,12 @@ public class ExcelEngine {
     /**
      * 单元格数据转换（String）
      *
-     * @param row    行
-     * @param col    列号
-     * @param evalor 公式管理器
+     * @param row     行
+     * @param col     列号
+     * @param formula 公式管理器
      * @return
      */
-    static public void cell2s(DataContainer<String> out, Row row, IdentifyDescriptor col, FormulaEvaluator evalor) {
+    static public void cell2s(DataContainer<String> out, Row row, IdentifyDescriptor col, FormulaWrapper formula) {
         if (null == row) {
             return;
         }
@@ -191,8 +199,8 @@ public class ExcelEngine {
 
         CellValue cv = null;
         if (CellType.FORMULA == c.getCellType()) {
-            if (null != evalor) {
-                cv = evalor.evaluate(c);
+            if (null != formula && null != formula.evalor) {
+                cv = formula.evalor.evaluate(c);
             } else {
                 out.set(c.toString());
                 return;
@@ -286,12 +294,12 @@ public class ExcelEngine {
     /**
      * 单元格数据转换（Integer）
      *
-     * @param row    行
-     * @param col    列号
-     * @param evalor 公式管理器
+     * @param row     行
+     * @param col     列号
+     * @param formula 公式管理器
      * @return
      */
-    static public void cell2i(DataContainer<Long> out, Row row, IdentifyDescriptor col, FormulaEvaluator evalor)
+    static public void cell2i(DataContainer<Long> out, Row row, IdentifyDescriptor col, FormulaWrapper formula)
             throws ConvException {
         if (null == row)
             return;
@@ -302,8 +310,8 @@ public class ExcelEngine {
 
         CellValue cv = null;
         if (CellType.FORMULA == c.getCellType()) {
-            if (null != evalor)
-                cv = evalor.evaluate(c);
+            if (null != formula && null != formula.evalor)
+                cv = formula.evalor.evaluate(c);
             else
                 return;
         }
@@ -364,12 +372,12 @@ public class ExcelEngine {
     /**
      * 单元格数据转换（Double）
      *
-     * @param row    行
-     * @param col    列号
-     * @param evalor 公式管理器
+     * @param row     行
+     * @param col     列号
+     * @param formula 公式管理器
      * @return
      */
-    static public void cell2d(DataContainer<Double> out, Row row, IdentifyDescriptor col, FormulaEvaluator evalor)
+    static public void cell2d(DataContainer<Double> out, Row row, IdentifyDescriptor col, FormulaWrapper formula)
             throws ConvException {
         if (null == row)
             return;
@@ -380,8 +388,8 @@ public class ExcelEngine {
 
         CellValue cv = null;
         if (CellType.FORMULA == c.getCellType()) {
-            if (null != evalor) {
-                cv = evalor.evaluate(c);
+            if (null != formula && null != formula.evalor) {
+                cv = formula.evalor.evaluate(c);
             } else {
                 return;
             }
@@ -443,12 +451,12 @@ public class ExcelEngine {
     /**
      * 单元格数据转换（boolean）
      *
-     * @param row    行
-     * @param col    列号
-     * @param evalor 公式管理器
+     * @param row     行
+     * @param col     列号
+     * @param formula 公式管理器
      * @return
      */
-    static public void cell2b(DataContainer<Boolean> out, Row row, IdentifyDescriptor col, FormulaEvaluator evalor) {
+    static public void cell2b(DataContainer<Boolean> out, Row row, IdentifyDescriptor col, FormulaWrapper formula) {
         if (null == row)
             return;
 
@@ -458,7 +466,7 @@ public class ExcelEngine {
 
         CellValue cv = null;
         if (CellType.FORMULA == c.getCellType()) {
-            if (null != evalor) {
+            if (null != formula && null != formula.evalor) {
                 cv = evalor.evaluate(c);
             } else {
                 out.set(true);

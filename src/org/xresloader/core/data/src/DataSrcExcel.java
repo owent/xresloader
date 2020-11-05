@@ -10,6 +10,18 @@ import org.apache.poi.ss.usermodel.FormulaEvaluator;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 
+import org.apache.poi.openxml4j.exceptions.OpenXML4JException;
+import org.apache.poi.openxml4j.opc.OPCPackage;
+import org.apache.poi.openxml4j.opc.PackageAccess;
+import org.apache.poi.xssf.eventusermodel.ReadOnlySharedStringsTable;
+import org.apache.poi.xssf.eventusermodel.XSSFReader;
+import org.apache.poi.xssf.eventusermodel.XSSFSheetXMLHandler;
+
+import org.xml.sax.ContentHandler;
+import org.xml.sax.InputSource;
+import org.xml.sax.SAXException;
+import org.xml.sax.XMLReader;
+
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -22,7 +34,7 @@ public class DataSrcExcel extends DataSrcImpl {
     private class DataSheetInfo {
         public String file_name = "";
         public Sheet table = null;
-        public FormulaEvaluator formula = null;
+        public ExcelEngine.FormulaWrapper formula = null;
         public Row current_row = null;
         public int next_index = 0;
         public int last_row_number = 0;
@@ -57,6 +69,54 @@ public class DataSrcExcel extends DataSrcImpl {
         public MacroFileCache(SchemeConf.DataInfo _f, String fixed_file_name) {
             file = _f;
             file.file_path = fixed_file_name;
+        }
+    }
+
+    private class XSSFStreamSheetHandle implements XSSFSheetXMLHandler.SheetContentsHandler {
+        private int max_row_number = 0;
+
+        @Override
+        public void startRow(int rowNum) {
+            if (this.max_row_number < rowNum) {
+                this.max_row_number = rowNum;
+            }
+        }
+
+        @Override
+        public void endRow(int rowNum) {
+        }
+
+        @Override
+        public void cell(String cellReference, String formattedValue, XSSFComment comment) {
+            if (firstCellOfRow) {
+                firstCellOfRow = false;
+            } else {
+                output.append(',');
+            }
+
+            // gracefully handle missing CellRef here in a similar way as XSSFCell does
+            if (cellReference == null) {
+                cellReference = new CellAddress(currentRow, currentCol).formatAsString();
+            }
+
+            // Did we miss any cells?
+            int thisCol = (new CellReference(cellReference)).getCol();
+            int missedCols = thisCol - currentCol - 1;
+            for (int i = 0; i < missedCols; i++) {
+                output.append(',');
+            }
+            currentCol = thisCol;
+
+            // Number or string?
+            try {
+                // noinspection ResultOfMethodCallIgnored
+                Double.parseDouble(formattedValue);
+                output.append(formattedValue);
+            } catch (Exception e) {
+                output.append('"');
+                output.append(formattedValue);
+                output.append('"');
+            }
         }
     }
 
@@ -116,7 +176,8 @@ public class DataSrcExcel extends DataSrcImpl {
                 continue;
             }
 
-            FormulaEvaluator evalor = tb.getWorkbook().getCreationHelper().createFormulaEvaluator();
+            ExcelEngine.FormulaWrapper formula = new ExcelEngine.FormulaWrapper(
+                    tb.getWorkbook().getCreationHelper().createFormulaEvaluator());
 
             int row_num = tb.getLastRowNum() + 1;
             for (int i = src.data_row - 1; i < row_num; ++i) {
@@ -128,7 +189,7 @@ public class DataSrcExcel extends DataSrcImpl {
 
                 column_ident.index = src.data_col;
                 data_cache = getStringCache("");
-                ExcelEngine.cell2s(data_cache, row, column_ident, evalor);
+                ExcelEngine.cell2s(data_cache, row, column_ident, formula);
 
                 String val = data_cache.get();
                 if (null != key && null != val && !key.isEmpty() && !val.isEmpty()) {
@@ -194,6 +255,37 @@ public class DataSrcExcel extends DataSrcImpl {
                 continue;
             }
 
+            try (OPCPackage xlsx_package = OPCPackage.open(file_path, PackageAccess.READ)) {
+                ReadOnlySharedStringsTable strings = new ReadOnlySharedStringsTable(xlsx_package);
+                XSSFReader xssf_reader = new XSSFReader(xlsx_package);
+                StylesTable styles = xssf_reader.getStylesTable();
+                XSSFReader.SheetIterator iter = (XSSFReader.SheetIterator) xssf_reader.getSheetsData();
+                int index = 0;
+                while (iter.hasNext()) {
+                    try (InputStream stream = iter.next()) {
+                        String sheet_name = iter.getSheetName();
+                        if (sheet_name != src.table_name) {
+                            continue;
+                        }
+
+                        DataFormatter formatter = new DataFormatter();
+                        InputSource sheet_source = new InputSource(stream);
+                        try {
+                            XMLReader sheet_parser = XMLHelper.newXMLReader();
+                            ContentHandler handler = new XSSFSheetXMLHandler(styles, null, strings,
+                                    new XSSFStreamSheetHandle(), formatter, false);
+                            sheet_parser.setContentHandler(handler);
+                            sheet_parser.parse(sheet_source);
+                        } catch (ParserConfigurationException e) {
+                            ProgramOptions.getLoger().error("SAX parser appears to be broken - %s", e.getMessage());
+                            return -53;
+                        }
+                    }
+                    ++index;
+                }
+
+            }
+
             Sheet tb = ExcelEngine.openSheet(file_path, src.table_name);
             if (null == tb) {
                 ProgramOptions.getLoger().error("open data source file \"%s\" or sheet \"%s\".", src.file_path,
@@ -202,9 +294,9 @@ public class DataSrcExcel extends DataSrcImpl {
             }
 
             // 公式支持
-            FormulaEvaluator formula = null;
+            ExcelEngine.FormulaWrapper formula = null;
             if (ProgramOptions.getInstance().enableFormular) {
-                formula = tb.getWorkbook().getCreationHelper().createFormulaEvaluator();
+                formula = new ExcelEngine.FormulaWrapper(tb.getWorkbook().getCreationHelper().createFormulaEvaluator());
             }
 
             DataSheetInfo res = new DataSheetInfo();
@@ -245,7 +337,7 @@ public class DataSrcExcel extends DataSrcImpl {
     }
 
     @Override
-    public boolean next_table() {
+    public boolean nextTable() {
         current = null;
         if (tables.isEmpty()) {
             return false;
@@ -262,7 +354,7 @@ public class DataSrcExcel extends DataSrcImpl {
     }
 
     @Override
-    public boolean next_row() {
+    public boolean nextRow() {
         if (null == current) {
             return false;
         }

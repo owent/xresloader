@@ -80,7 +80,7 @@ public abstract class DataSrcImpl {
      * @note 每次调用这个函数之后最好重做一次列名映射，否则可能数据不匹配
      * @return 有待处理的数据表返回true
      */
-    public boolean next_table() {
+    public boolean nextTable() {
         return false;
     }
 
@@ -88,7 +88,7 @@ public abstract class DataSrcImpl {
      * @brief 获取当前数据源的下一个数据项
      * @return 有数据则返回true
      */
-    public boolean next_row() {
+    public boolean nextRow() {
         return false;
     }
 

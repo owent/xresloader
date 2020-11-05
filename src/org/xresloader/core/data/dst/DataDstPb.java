@@ -823,11 +823,11 @@ public class DataDstPb extends DataDstImpl {
 
         // 数据
         int count = 0;
-        while (DataSrcImpl.getOurInstance().next_table()) {
+        while (DataSrcImpl.getOurInstance().nextTable()) {
             // 生成描述集
             DataDstWriterNode desc = src.compile();
 
-            while (DataSrcImpl.getOurInstance().next_row()) {
+            while (DataSrcImpl.getOurInstance().nextRow()) {
                 ByteString data = convData(desc);
                 if (null != data && !data.isEmpty()) {
                     ++count;

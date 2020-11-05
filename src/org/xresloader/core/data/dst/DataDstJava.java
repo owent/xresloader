@@ -104,11 +104,11 @@ public abstract class DataDstJava extends DataDstImpl {
         List<Object> item_list = new ArrayList<Object>();
         ret.body.put(SchemeConf.getInstance().getProtoName(), item_list);
 
-        while (DataSrcImpl.getOurInstance().next_table()) {
+        while (DataSrcImpl.getOurInstance().nextTable()) {
             // 生成描述集
             DataDstWriterNode desc = compiler.compile();
 
-            while (DataSrcImpl.getOurInstance().next_row()) {
+            while (DataSrcImpl.getOurInstance().nextRow()) {
                 HashMap<String, Object> msg = new HashMap<String, Object>();
                 if (dumpMessage(msg, desc)) {
                     item_list.add(msg);

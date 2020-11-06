@@ -34,7 +34,7 @@ public class DataDstPbHelper {
             if (node instanceof HashMap) {
                 enum_root = (HashMap<String, Object>) node;
             } else {
-                ProgramOptions.getLoger().error("enum name %s.%s conflict.", package_name, enum_seg);
+                ProgramOptions.getLoger().error("Enum name %s.%s conflict.", package_name, enum_seg);
                 return;
             }
         } else {
@@ -58,7 +58,7 @@ public class DataDstPbHelper {
             if (node instanceof HashMap) {
                 oneof_root = (HashMap<String, Object>) node;
             } else {
-                ProgramOptions.getLoger().error("oneof name %s.%s conflict.", package_name, oneof_seg);
+                ProgramOptions.getLoger().error("Oneof name %s.%s conflict.", package_name, oneof_seg);
                 return;
             }
         } else {
@@ -88,7 +88,7 @@ public class DataDstPbHelper {
             if (msg_node instanceof HashMap) {
                 msg_root = (HashMap<String, Object>) msg_node;
             } else {
-                ProgramOptions.getLoger().error("message name %s conflict.", msg_full_name);
+                ProgramOptions.getLoger().error("Message name %s conflict.", msg_full_name);
                 return;
             }
         }

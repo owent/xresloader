@@ -214,12 +214,13 @@ public class ProgramOptions {
             cmd = parser.parse(get_options_group(), args);
         } catch (ParseException exp) {
             // oops, something went wrong
-            ProgramOptions.getLoger().error("parsing failed.  reason: \"%s\" failed", exp.getMessage());
+            ProgramOptions.getLoger().error("Parsing failed.  reason: \"%s\" failed", exp.getMessage());
 
             String script = System.getProperty("java.class.path");
             HelpFormatter formatter = new HelpFormatter();
             formatter.setWidth(140);
             formatter.printHelp("Usage: java -client -jar " + script + " [options...]", options);
+            System.out.println("");
             System.out.println("You can add -Dlog4j.configuration=log4j2.xml to use your own log configure.");
             return -1;
         }
@@ -229,6 +230,7 @@ public class ProgramOptions {
             HelpFormatter formatter = new HelpFormatter();
             formatter.setWidth(140);
             formatter.printHelp(String.format("java -client -jar \"%s\" [options...]", script), get_options_group());
+            System.out.println("");
             System.out.println("You can add -Dlog4j.configuration=log4j2.xml to use your own log configure.");
             return 1;
         }
@@ -276,7 +278,7 @@ public class ProgramOptions {
             } else if (val.equalsIgnoreCase("ue-json")) {
                 outType = FileType.UEJSON;
             } else {
-                ProgramOptions.getLoger().error("invalid output type ", val);
+                ProgramOptions.getLoger().error("Invalid output type ", val);
                 return -1;
             }
         }
@@ -291,7 +293,7 @@ public class ProgramOptions {
             } else if (val.equalsIgnoreCase("flatbuffer")) {
                 protocol = Protocol.FLATBUFFER;
             } else {
-                ProgramOptions.getLoger().error("invalid protocol type ", val);
+                ProgramOptions.getLoger().error("Invalid protocol type ", val);
                 return -2;
             }
         }

@@ -14,7 +14,7 @@ public class DataVerifyIntRange extends DataVerifyImpl {
         }
 
         int split_pos = 1;
-        for(; split_pos < range.length(); ++ split_pos) {
+        for (; split_pos < range.length(); ++split_pos) {
             if ('-' == range.charAt(split_pos)) {
                 break;
             }
@@ -26,7 +26,6 @@ public class DataVerifyIntRange extends DataVerifyImpl {
                 upperBound = lowerBound + 1;
             }
 
-
             lowerBound = Math.round(Double.valueOf(range.substring(0, split_pos).trim()));
             if (split_pos + 1 < range.length()) {
                 upperBound = Math.round(Double.valueOf(range.substring(split_pos + 1).trim())) + 1;
@@ -34,7 +33,7 @@ public class DataVerifyIntRange extends DataVerifyImpl {
                 upperBound = lowerBound + 1;
             }
         } catch (NumberFormatException e) {
-            ProgramOptions.getLoger().error("invalid integer range %s verifier", range);
+            ProgramOptions.getLoger().error("Invalid integer range %s verifier", range);
         }
     }
 
@@ -43,7 +42,7 @@ public class DataVerifyIntRange extends DataVerifyImpl {
     }
 
     @Override
-    public boolean get(long number, DataVerifyResult res)  {
+    public boolean get(long number, DataVerifyResult res) {
         // 0 值永久有效,因为空数据项会被填充默认值
         if (0 == number) {
             res.success = true;
@@ -66,7 +65,7 @@ public class DataVerifyIntRange extends DataVerifyImpl {
         // check if it's a number
         boolean is_numeric = true;
         boolean is_double = false;
-        for(int i = 0; is_numeric && i < intstr.length(); ++ i) {
+        for (int i = 0; is_numeric && i < intstr.length(); ++i) {
             char c = intstr.charAt(i);
             if ((c < '0' || c > '9') && '.' != c && '-' != c) {
                 is_numeric = false;

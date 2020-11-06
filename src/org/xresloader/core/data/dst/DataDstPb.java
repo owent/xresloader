@@ -146,7 +146,7 @@ public class DataDstPb extends DataDstImpl {
         }
 
         ProgramOptions.getLoger().error(
-                "there is more than one %s \"%s\" matched, please use full name. available names:", type_name, name);
+                "There is more than one %s \"%s\" matched, please use full name. available names:", type_name, name);
         for (String full_name : ls.names) {
             ProgramOptions.getLoger().error("\t%s", full_name);
         }
@@ -166,7 +166,7 @@ public class DataDstPb extends DataDstImpl {
 
         if (null != ls.names && ls.names.size() > 1) {
             ProgramOptions.getLoger().error(
-                    "there is more than one %s \"%s\" matched, please use full name. available names:", type_name,
+                    "There is more than one %s \"%s\" matched, please use full name. available names:", type_name,
                     name);
             for (String full_name : ls.names) {
                 ProgramOptions.getLoger().error("\t%s", full_name);
@@ -258,11 +258,11 @@ public class DataDstPb extends DataDstImpl {
             }
 
         } catch (FileNotFoundException e) {
-            ProgramOptions.getLoger().error("read protocol file \"%s\" failed. %s",
+            ProgramOptions.getLoger().error("Read protocol file \"%s\" failed. %s",
                     ProgramOptions.getInstance().protocolFile, e.toString());
             return false;
         } catch (IOException e) {
-            ProgramOptions.getLoger().error("parse protocol file \"%s\" failed. %s",
+            ProgramOptions.getLoger().error("Parse protocol file \"%s\" failed. %s",
                     ProgramOptions.getInstance().protocolFile, e.toString());
             return false;
         }
@@ -337,9 +337,9 @@ public class DataDstPb extends DataDstImpl {
             }
 
             if (allow_unknown_dependencies) {
-                ProgramOptions.getLoger().warn("protocol file descriptor %s not found.", name);
+                ProgramOptions.getLoger().warn("Protocol file descriptor %s not found.", name);
             } else {
-                ProgramOptions.getLoger().error("protocol file descriptor %s not found.", name);
+                ProgramOptions.getLoger().error("Protocol file descriptor %s not found.", name);
             }
 
             pbs.file_descs_failed.add(name);
@@ -356,7 +356,7 @@ public class DataDstPb extends DataDstImpl {
                 if (allow_unknown_dependencies) {
                     failed_deps.add(fdp.getDependency(i));
                 } else {
-                    ProgramOptions.getLoger().error("initialize protocol file descriptor %s failed. dependency %s",
+                    ProgramOptions.getLoger().error("Initialize protocol file descriptor %s failed. dependency %s",
                             name, fdp.getDependency(i));
                     return null;
                 }
@@ -367,7 +367,7 @@ public class DataDstPb extends DataDstImpl {
 
         if (!failed_deps.isEmpty()) {
             ProgramOptions.getLoger().warn(
-                    "initialize protocol file descriptor %s without dependency %s, maybe missing some descriptor(s).",
+                    "Initialize protocol file descriptor %s without dependency %s, maybe missing some descriptor(s).",
                     name, String.join(",", failed_deps));
         }
 
@@ -382,7 +382,7 @@ public class DataDstPb extends DataDstImpl {
 
             return ret;
         } catch (Descriptors.DescriptorValidationException e) {
-            ProgramOptions.getLoger().error("initialize protocol file descriptor %s failed. %s", name, e.getMessage());
+            ProgramOptions.getLoger().error("Initialize protocol file descriptor %s failed. %s", name, e.getMessage());
             return null;
         }
     }
@@ -493,7 +493,7 @@ public class DataDstPb extends DataDstImpl {
                     if (vfy.isValid()) {
                         ret.add(vfy);
                     } else {
-                        ProgramOptions.getLoger().error("try to add DataVerifyIntRange(%s) in %s failed", rule,
+                        ProgramOptions.getLoger().error("Try to add DataVerifyIntRange(%s) in %s failed", rule,
                                 DataSrcImpl.getOurInstance().getCurrentTableName());
                     }
 
@@ -544,14 +544,14 @@ public class DataDstPb extends DataDstImpl {
                         if (null != vfy) {
                             cachePbs.identifiers.put(rule, vfy);
                         } else {
-                            ProgramOptions.getLoger().error("enum, oneof or message \"%s\" not found", rule);
+                            ProgramOptions.getLoger().error("Enum, oneof or message \"%s\" not found", rule);
                         }
                     }
 
                     if (vfy != null) {
                         ret.add(vfy);
                     } else {
-                        ProgramOptions.getLoger().error("try to add data verifier %s in %s failed", rule,
+                        ProgramOptions.getLoger().error("Try to add data verifier %s in %s failed", rule,
                                 DataSrcImpl.getOurInstance().getCurrentTableName());
                     }
                 }
@@ -575,7 +575,7 @@ public class DataDstPb extends DataDstImpl {
                 if (null != vfy) {
                     cachePbs.identifiers.put(rule, vfy);
                 } else {
-                    ProgramOptions.getLoger().error("enum verifier \"%s\" setup error, please report this bug to %s",
+                    ProgramOptions.getLoger().error("Enum verifier \"%s\" setup error, please report this bug to %s",
                             rule, ProgramOptions.getReportUrl());
                 }
             }

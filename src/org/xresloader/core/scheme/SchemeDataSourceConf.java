@@ -27,9 +27,7 @@ public final class SchemeDataSourceConf extends SchemeDataSourceBase {
             FileInputStream fsi = new FileInputStream(file_path);
             byte[] utf8_bom = new byte[3];
             fsi.read(utf8_bom, 0, 3);
-            if(utf8_bom[0] != (byte)0xef ||
-                utf8_bom[1] != (byte)0xbb ||
-                utf8_bom[2] != (byte)0xbf) {
+            if (utf8_bom[0] != (byte) 0xef || utf8_bom[1] != (byte) 0xbb || utf8_bom[2] != (byte) 0xbf) {
                 fsi.close();
                 fsi = new FileInputStream(file_path);
             }
@@ -49,20 +47,20 @@ public final class SchemeDataSourceConf extends SchemeDataSourceBase {
 
     public boolean load_scheme(String section_name) throws InitializeException {
         Map<String, HashMap<String, ArrayList<String>>> all_conf = new HashMap<String, HashMap<String, ArrayList<String>>>();
-        List<Map.Entry<String,String>> datas = null;
+        List<Map.Entry<String, String>> datas = null;
         try {
             datas = current_file.items(section_name);
         } catch (ConfigParser.NoSectionException e) {
-            ProgramOptions.getLoger().warn("scheme section %s not found", section_name);
+            ProgramOptions.getLoger().warn("Scheme section %s not found", section_name);
         } catch (ConfigParser.InterpolationMissingOptionException e) {
-            ProgramOptions.getLoger().warn("read scheme error,%s", e.getMessage());
+            ProgramOptions.getLoger().warn("Read scheme error,%s", e.getMessage());
             e.printStackTrace();
         }
 
         if (null != datas) {
             for (Map.Entry<String, String> data : datas) {
                 String[] keys = data.getKey().split("\\.");
-                for(int i = 0; i < keys.length; ++i) {
+                for (int i = 0; i < keys.length; ++i) {
                     keys[i] = keys[i].trim();
                 }
                 dump_scheme(all_conf, keys, data.getValue());
@@ -70,8 +68,8 @@ public final class SchemeDataSourceConf extends SchemeDataSourceBase {
         }
 
         // 数据项必须在这之后
-        for(Map.Entry<String, HashMap<String, ArrayList<String>>> element: all_conf.entrySet()) {
-            for (Map.Entry<String, ArrayList<String>> sub_datas: element.getValue().entrySet()) {
+        for (Map.Entry<String, HashMap<String, ArrayList<String>>> element : all_conf.entrySet()) {
+            for (Map.Entry<String, ArrayList<String>> sub_datas : element.getValue().entrySet()) {
                 set_scheme(element.getKey(), sub_datas.getValue());
             }
         }
@@ -86,7 +84,7 @@ public final class SchemeDataSourceConf extends SchemeDataSourceBase {
         }
 
         HashMap<String, ArrayList<String>> first_layer = out.getOrDefault(keys[0], null);
-        if(first_layer == null) {
+        if (first_layer == null) {
             first_layer = new HashMap<String, ArrayList<String>>();
             out.put(keys[0], first_layer);
         }
@@ -94,7 +92,7 @@ public final class SchemeDataSourceConf extends SchemeDataSourceBase {
         String second_key = "";
         if (keys.length > 2) {
             second_key = keys[1];
-            for (int i = 2; i < keys.length - 1; ++ i) {
+            for (int i = 2; i < keys.length - 1; ++i) {
                 second_key += "." + keys[i];
             }
         }
@@ -102,7 +100,7 @@ public final class SchemeDataSourceConf extends SchemeDataSourceBase {
         ret = first_layer.getOrDefault(second_key, null);
         if (null == ret) {
             ret = new ArrayList<String>();
-            for (int i = 0; i < 3; ++ i) {
+            for (int i = 0; i < 3; ++i) {
                 ret.add("");
             }
             first_layer.put(second_key, ret);

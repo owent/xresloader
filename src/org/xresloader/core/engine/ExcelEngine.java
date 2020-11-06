@@ -8,7 +8,6 @@ import org.xresloader.core.data.vfy.DataVerifyImpl;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
-import org.apache.poi.xssf.usermodel.XSSFComment;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -210,7 +209,7 @@ public class ExcelEngine {
             is = new FileInputStream(file_path);
 
             // 类型枚举，以后能支持 ods等非微软格式？
-            if (file_path.endsWith(".xls")) {
+            if (file_path.toLowerCase().endsWith(".xls")) {
                 ret = new HSSFWorkbook(is);
                 org.apache.poi.hssf.extractor.ExcelExtractor extractor = new org.apache.poi.hssf.extractor.ExcelExtractor(
                         (HSSFWorkbook) ret);
@@ -238,12 +237,20 @@ public class ExcelEngine {
      * @param sheet_name 表名
      * @return Sheet对象
      */
-    static public Sheet openSheet(String file_path, String sheet_name) {
+    static public Sheet openUserModuleSheet(String file_path, String sheet_name) {
         Workbook wb = openWorkbook(file_path);
         if (null == wb)
             return null;
 
         return wb.getSheet(sheet_name);
+    }
+
+    static public CustomDataTableIndex openStreamTableIndex(String file_path, String sheet_name) {
+        if (file_path.toLowerCase().endsWith(".xls")) {
+            return ExcelHSSFStreamSheetHandle.buildCustomTableIndex(file_path, sheet_name);
+        }
+
+        return ExcelXSSFStreamSheetHandle.buildCustomTableIndex(file_path, sheet_name);
     }
 
     static public String tryMacro(String m) {
@@ -346,7 +353,15 @@ public class ExcelEngine {
             }
         }
 
-        CellType type = (null == cv) ? c.getCellType() : cv.getCellType();
+        CellType type;
+        if (null != cv) {
+            type = cv.getCellType();
+        } else if (c.getCellType() == CellType.FORMULA) {
+            type = c.getCachedFormulaResultType();
+        } else {
+            type = c.getCellType();
+        }
+
         switch (type) {
             case BLANK:
                 break;
@@ -472,7 +487,14 @@ public class ExcelEngine {
                 return;
         }
 
-        CellType type = (null == cv) ? c.getCellType() : cv.getCellType();
+        CellType type;
+        if (null != cv) {
+            type = cv.getCellType();
+        } else if (c.getCellType() == CellType.FORMULA) {
+            type = c.getCachedFormulaResultType();
+        } else {
+            type = c.getCellType();
+        }
         switch (type) {
             case BLANK:
                 break;
@@ -575,7 +597,14 @@ public class ExcelEngine {
             }
         }
 
-        CellType type = (null == cv) ? c.getCellType() : cv.getCellType();
+        CellType type;
+        if (null != cv) {
+            type = cv.getCellType();
+        } else if (c.getCellType() == CellType.FORMULA) {
+            type = c.getCachedFormulaResultType();
+        } else {
+            type = c.getCellType();
+        }
         switch (type) {
             case BLANK:
                 break;
@@ -670,7 +699,14 @@ public class ExcelEngine {
             }
         }
 
-        CellType type = (null == cv) ? c.getCellType() : cv.getCellType();
+        CellType type;
+        if (null != cv) {
+            type = cv.getCellType();
+        } else if (c.getCellType() == CellType.FORMULA) {
+            type = c.getCachedFormulaResultType();
+        } else {
+            type = c.getCellType();
+        }
         switch (type) {
             case BLANK:
                 break;

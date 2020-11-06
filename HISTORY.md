@@ -6,11 +6,13 @@
 
 1. 增加 ```--enable-alias-mapping``` 选项，用于在映射Excel列到目标数据结构时，开启别名匹配。
 2. protobuf的枚举类型解析支持message内嵌enum。
-3. 更新 ```maven-shade-plugin.maven-shade-plugin``` 到 3.2.4
-4. 更新 ```org.codehaus.mojo.build-helper-maven-plugin``` 到 3.2.0
-5. 更新 ```commons-codec``` 到 1.15
-6. 更新 ```org.msgpack.msgpack-core``` 到 0.8.21
-7. 更新 ```com.google.protobuf.protobuf-java``` 到 3.13.0
+3. 对大文件处理每5000行打印一次进度日志。
+4. 更新 ```maven-shade-plugin.maven-shade-plugin``` 到 3.2.4
+5. 更新 ```org.codehaus.mojo.build-helper-maven-plugin``` 到 3.2.0
+6. 更新 ```commons-codec``` 到 1.15
+7. 更新 ```org.msgpack.msgpack-core``` 到 0.8.21
+8. 更新 ```com.google.protobuf.protobuf-java``` 到 3.13.0
+9. \[实验性\] 使用 ```--disable-excel-formular``` 关闭公式后，将采用流式读取机制索引数据，以降低内存开销。同时会关闭日期格式的探测。
 
 2.9.3
 ------

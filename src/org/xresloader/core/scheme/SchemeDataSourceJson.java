@@ -54,18 +54,18 @@ public final class SchemeDataSourceJson extends SchemeDataSourceBase {
     @SuppressWarnings("unchecked")
     public boolean load_scheme(String section_name) throws InitializeException {
         if (null == current_object || false == (current_object instanceof Map)) {
-            ProgramOptions.getLoger().warn("scheme file error");
+            ProgramOptions.getLoger().warn("Scheme file error");
             return false;
         }
 
         if (false == current_object.has(section_name)) {
-            ProgramOptions.getLoger().warn("scheme section %s not found", section_name);
+            ProgramOptions.getLoger().warn("Scheme section %s not found", section_name);
             return false;
         }
 
         Object scheme_obj = current_object.get(section_name);
         if (false == (scheme_obj instanceof JSONObject)) {
-            ProgramOptions.getLoger().warn("scheme section %s data invalid", section_name);
+            ProgramOptions.getLoger().warn("Scheme section %s data invalid", section_name);
             return false;
         }
 

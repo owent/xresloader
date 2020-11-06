@@ -68,7 +68,7 @@ public class main {
                 outDesc = outDesc.init() ? outDesc : null;
                 break;
             default:
-                ProgramOptions.getLoger().error("output type \"%s\" invalid",
+                ProgramOptions.getLoger().error("Output type \"%s\" invalid",
                         ProgramOptions.getInstance().outType.toString());
                 break;
         }
@@ -84,7 +84,7 @@ public class main {
                 protoDesc = new DataDstPb();
                 break;
             default:
-                ProgramOptions.getLoger().error("protocol type \"%s\" invalid",
+                ProgramOptions.getLoger().error("Protocol type \"%s\" invalid",
                         ProgramOptions.getInstance().protocol.toString());
                 break;
         }
@@ -113,7 +113,7 @@ public class main {
         }
 
         if (null == dump_data) {
-            ProgramOptions.getLoger().error("protocol description \"%s\" initialize and build %s values failed",
+            ProgramOptions.getLoger().error("Protocol description \"%s\" initialize and build %s values failed",
                     ProgramOptions.getInstance().protocol.toString(), dump_name);
             return 1;
         }
@@ -132,7 +132,7 @@ public class main {
             if (null != data) {
                 fos.write(data);
             } else {
-                ProgramOptions.getLoger().error("write %s data to file \"%s\" failed, output type invalid.", dump_name,
+                ProgramOptions.getLoger().error("Write %s data to file \"%s\" failed, output type invalid.", dump_name,
                         ProgramOptions.getInstance().protoDumpFile);
 
                 fos.close();
@@ -140,16 +140,16 @@ public class main {
             }
             fos.close();
         } catch (java.io.IOException e) {
-            ProgramOptions.getLoger().error("write data to file \"%s\" failed%s  > %s",
+            ProgramOptions.getLoger().error("Write data to file \"%s\" failed%s  > %s",
                     ProgramOptions.getInstance().protoDumpFile, endl, e.getMessage());
             return 1;
         } catch (ConvException e) {
-            ProgramOptions.getLoger().error("write data to file \"%s\" failed%s  > %s",
+            ProgramOptions.getLoger().error("Write data to file \"%s\" failed%s  > %s",
                     ProgramOptions.getInstance().protoDumpFile, endl, e.getMessage());
             return 1;
         }
 
-        ProgramOptions.getLoger().info("write %s data to \"%s\" success.(charset: %s)", dump_name,
+        ProgramOptions.getLoger().info("Write %s data to \"%s\" success.(charset: %s)", dump_name,
                 ProgramOptions.getInstance().protoDumpFile, SchemeConf.getInstance().getKey().getEncoding());
 
         return 0;
@@ -192,7 +192,7 @@ public class main {
             // 1. 描述信息
             if (false == SchemeConf.getInstance().getScheme().load_scheme(sn)) {
                 sn = String.join(" ", ProgramOptions.getInstance().dataSourceMetas);
-                ProgramOptions.getLoger().error("convert from \"%s\" failed", sn);
+                ProgramOptions.getLoger().error("Convert from \"%s\" failed", sn);
                 ++failed_count;
                 continue;
             }
@@ -219,14 +219,14 @@ public class main {
             Class<?> ds_clazz = DataSrcExcel.class;
             DataSrcImpl ds = DataSrcImpl.create(ds_clazz);
             if (null == ds) {
-                ProgramOptions.getLoger().error("create data source class \"%s\" failed", ds_clazz.getName());
+                ProgramOptions.getLoger().error("Create data source class \"%s\" failed", ds_clazz.getName());
                 ++failed_count;
                 continue;
             }
 
             ret = ds.init();
             if (ret < 0) {
-                ProgramOptions.getLoger().error("initialize data source class \"%s\" failed", ds_clazz.getName());
+                ProgramOptions.getLoger().error("Initialize data source class \"%s\" failed", ds_clazz.getName());
                 ++failed_count;
                 continue;
             }
@@ -238,7 +238,7 @@ public class main {
                     protoDesc = new DataDstPb();
                     break;
                 default:
-                    ProgramOptions.getLoger().error("protocol type \"%s\" invalid",
+                    ProgramOptions.getLoger().error("Protocol type \"%s\" invalid",
                             ProgramOptions.getInstance().protocol.toString());
                     ++failed_count;
                     break;
@@ -248,7 +248,7 @@ public class main {
                 continue;
             }
             if (false == protoDesc.init()) {
-                ProgramOptions.getLoger().error("protocol description \"%s\" initialize failed: %s ",
+                ProgramOptions.getLoger().error("Protocol description \"%s\" initialize failed: %s ",
                         ProgramOptions.getInstance().protocol.toString(), protoDesc.getLastErrorMessage());
                 ++failed_count;
                 continue;
@@ -260,7 +260,7 @@ public class main {
                 continue;
             }
 
-            ProgramOptions.getLoger().trace("convert from \"%s\" to \"%s\" started (protocol=%s) ...", sn,
+            ProgramOptions.getLoger().trace("Convert from \"%s\" to \"%s\" started (protocol=%s) ...", sn,
                     SchemeConf.getInstance().getOutputFile(), SchemeConf.getInstance().getProtoName());
 
             try {
@@ -281,20 +281,21 @@ public class main {
                 fos.close();
             } catch (ConvException e) {
                 ProgramOptions.getLoger().error(
-                        "convert data failed.%s  > %s%s  > File: %s, Table: %s, Row: %d, Column: %d%s  > %s", endl,
+                        "Convert data failed.%s  > %s%s  > File: %s, Table: %s, Row: %d, Column: %d%s  > %s", endl,
                         String.join(" ", args), endl, ds.getCurrentFileName(), ds.getCurrentTableName(),
                         ds.getCurrentRowNum() + 1, ds.getLastColomnNum() + 1, endl, e.getMessage());
                 ++failed_count;
                 continue;
             } catch (java.io.IOException e) {
-                ProgramOptions.getLoger().error("write data to file \"%s\" failed%s  > %s",
+                ProgramOptions.getLoger().error("Write data to file \"%s\" failed%s  > %s",
                         SchemeConf.getInstance().getOutputFile(), endl, e.getMessage());
                 ++failed_count;
                 continue;
             }
 
-            ProgramOptions.getLoger().info("convert from \"%s\" to \"%s\" success.(charset: %s)", sn,
-                    SchemeConf.getInstance().getOutputFile(), SchemeConf.getInstance().getKey().getEncoding());
+            ProgramOptions.getLoger().info("Convert from \"%s\" to \"%s\" success.(charset: %s, %d data row(s))", sn,
+                    SchemeConf.getInstance().getOutputFile(), SchemeConf.getInstance().getKey().getEncoding(),
+                    ds.getRecordNumber());
         }
 
         return failed_count;
@@ -353,7 +354,7 @@ public class main {
         try {
             ret_code = build_group(args);
         } catch (InitializeException e) {
-            ProgramOptions.getLoger().error("initlize failed.%s%s> %s", e.getMessage(), endl, String.join(" ", args));
+            ProgramOptions.getLoger().error("Initlize failed.%s%s> %s", e.getMessage(), endl, String.join(" ", args));
         } catch (Exception e) {
             ProgramOptions.getLoger().error("%s", e.toString());
             for (StackTraceElement frame : e.getStackTrace()) {
@@ -374,7 +375,7 @@ public class main {
                         ret_code += build_group(stdin_args);
                     } catch (InitializeException e) {
                         ++ret_code;
-                        ProgramOptions.getLoger().error("initlize failed.%s%s> %s", e.getMessage(), endl,
+                        ProgramOptions.getLoger().error("Initlize failed.%s%s> %s", e.getMessage(), endl,
                                 String.join(" ", stdin_args));
                     } catch (Exception e) {
                         ++ret_code;

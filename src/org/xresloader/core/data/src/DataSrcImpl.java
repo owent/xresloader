@@ -11,6 +11,7 @@ import java.util.LinkedList;
  * Created by owentou on 2014/10/9.
  */
 public abstract class DataSrcImpl {
+    static public final int LOG_PROCESS_BOUND = 5000;
 
     private static DataSrcImpl ourInstance = null;
     private int last_column_index_ = 0;

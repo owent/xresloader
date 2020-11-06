@@ -6,42 +6,16 @@ import org.xresloader.core.engine.ExcelEngine;
 import org.xresloader.core.engine.IdentifyDescriptor;
 import org.xresloader.core.engine.IdentifyEngine;
 import org.xresloader.core.scheme.SchemeConf;
-import org.apache.poi.ss.usermodel.FormulaEvaluator;
-import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
-import org.apache.poi.ss.usermodel.DataFormatter;
-import org.apache.poi.ss.util.CellAddress;
-import org.apache.poi.ss.util.CellReference;
-
-import org.apache.poi.openxml4j.exceptions.OpenXML4JException;
-import org.apache.poi.openxml4j.opc.OPCPackage;
-import org.apache.poi.openxml4j.opc.PackageAccess;
-import org.apache.poi.xssf.eventusermodel.ReadOnlySharedStringsTable;
-import org.apache.poi.xssf.eventusermodel.XSSFReader;
-import org.apache.poi.xssf.eventusermodel.XSSFSheetXMLHandler;
-import org.apache.poi.xssf.usermodel.XSSFComment;
-import org.apache.poi.xssf.model.StylesTable;
-
-import org.apache.poi.util.XMLHelper;
-
-import org.xml.sax.ContentHandler;
-import org.xml.sax.InputSource;
-import org.xml.sax.SAXException;
-import org.xml.sax.XMLReader;
-
-import javax.xml.parsers.ParserConfigurationException;
 
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 
-import java.io.InputStream;
-
 /**
  * Created by owentou on 2014/10/9.
  */
 public class DataSrcExcel extends DataSrcImpl {
-
     private class DataSheetInfo {
         public String fileName = "";
         public Sheet userModuleTable = null;
@@ -84,61 +58,6 @@ public class DataSrcExcel extends DataSrcImpl {
         }
     }
 
-    private class XSSFStreamSheetHandle implements XSSFSheetXMLHandler.SheetContentsHandler {
-        private int maxRowNumber = 0;
-        private int maxColumnNumber = 0;
-        private int currentRow = -1;
-        private int currentCol = -1;
-        private ExcelEngine.CustomDataRowIndex currentRowIndex = null;
-        private ExcelEngine.CustomDataTableIndex currentTableIndex = null;
-
-        public XSSFStreamSheetHandle(ExcelEngine.CustomDataTableIndex table) {
-            if (table != null) {
-                currentTableIndex = table;
-            } else {
-                currentTableIndex = new ExcelEngine.CustomDataTableIndex("", "");
-            }
-        }
-
-        @Override
-        public void startRow(int rowNum) {
-            if (this.maxRowNumber < rowNum) {
-                this.maxRowNumber = rowNum;
-            }
-            this.currentRow = rowNum;
-            this.currentCol = -1;
-            this.currentRowIndex = new ExcelEngine.CustomDataRowIndex(rowNum, currentTableIndex);
-            this.currentRowIndex.getColumns().ensureCapacity(this.maxColumnNumber + 1);
-        }
-
-        @Override
-        public void endRow(int rowNum) {
-            if (currentTableIndex != null) {
-                currentTableIndex.addRow(currentRowIndex);
-            }
-        }
-
-        @Override
-        public void cell(String cellReference, String formattedValue, XSSFComment comment) {
-            // gracefully handle missing CellRef here in a similar way as XSSFCell does
-            if (cellReference == null) {
-                cellReference = new CellAddress(currentRow, currentCol).formatAsString();
-            }
-
-            // Did we miss any cells?
-            int thisCol = (new CellReference(cellReference)).getCol();
-            while (currentRowIndex.getColumns().size() <= thisCol) {
-                currentRowIndex.getColumns().add(null);
-            }
-            currentCol = thisCol;
-            if (maxColumnNumber < currentCol) {
-                maxColumnNumber = currentCol;
-            }
-
-            currentRowIndex.getColumns().set(thisCol, formattedValue);
-        }
-    }
-
     /***
      * macro表cache
      */
@@ -175,7 +94,7 @@ public class DataSrcExcel extends DataSrcImpl {
                     continue;
                 } else {
                     ProgramOptions.getLoger().warn(
-                            "try to open macro source \"%s:%s\" (row=%d,col=%d) but already has cache \"%s:%s\" (row=%d,col=%d). the old macros will be covered",
+                            "Try to open macro source \"%s:%s\" (row=%d,col=%d) but already has cache \"%s:%s\" (row=%d,col=%d). the old macros will be covered",
                             file_path, src.table_name, src.data_row, src.data_col, res.file.file_path,
                             res.file.table_name, res.file.data_row, res.file.data_col);
                 }
@@ -183,14 +102,14 @@ public class DataSrcExcel extends DataSrcImpl {
             res = new MacroFileCache(src, file_path);
 
             if (file_path.isEmpty() || src.table_name.isEmpty() || src.data_col <= 0 || src.data_row <= 0) {
-                ProgramOptions.getLoger().warn("macro source \"%s\" (%s:%d，%d) ignored.", file_path, src.table_name,
+                ProgramOptions.getLoger().warn("Macro source \"%s\" (%s:%d，%d) ignored.", file_path, src.table_name,
                         src.data_row, src.data_col);
                 continue;
             }
 
-            Sheet tb = ExcelEngine.openSheet(file_path, src.table_name);
+            Sheet tb = ExcelEngine.openUserModuleSheet(file_path, src.table_name);
             if (null == tb) {
-                ProgramOptions.getLoger().warn("open macro source \"%s\" or sheet %s failed.", file_path,
+                ProgramOptions.getLoger().warn("Open macro source \"%s\" or sheet %s failed.", file_path,
                         src.table_name);
                 continue;
             }
@@ -213,7 +132,7 @@ public class DataSrcExcel extends DataSrcImpl {
                 String val = data_cache.get();
                 if (null != key && null != val && !key.isEmpty() && !val.isEmpty()) {
                     if (res.macros.containsKey(key)) {
-                        ProgramOptions.getLoger().warn("macro key \"%s\" is used more than once.", key);
+                        ProgramOptions.getLoger().warn("Macro key \"%s\" is used more than once.", key);
                     }
                     res.macros.put(key, val);
                 }
@@ -269,67 +188,15 @@ public class DataSrcExcel extends DataSrcImpl {
             }
 
             if (file_path.isEmpty() || src.table_name.isEmpty() || src.data_col <= 0 || src.data_row <= 0) {
-                ProgramOptions.getLoger().error("data source file \"%s\" (%s:%d，%d) ignored.", src.file_path,
+                ProgramOptions.getLoger().error("Data source file \"%s\" (%s:%d，%d) ignored.", src.file_path,
                         src.table_name, src.data_row, src.data_col);
                 continue;
             }
 
             DataSheetInfo res = new DataSheetInfo();
             // XLSX 可以使用流式读取引擎
-            if (false == ProgramOptions.getInstance().enableFormular && false == file_path.endsWith(".xls")) {
-                try (OPCPackage xlsx_package = OPCPackage.open(file_path, PackageAccess.READ)) {
-                    ReadOnlySharedStringsTable strings = new ReadOnlySharedStringsTable(xlsx_package);
-                    XSSFReader xssf_reader = new XSSFReader(xlsx_package);
-                    StylesTable styles = xssf_reader.getStylesTable();
-                    XSSFReader.SheetIterator iter = (XSSFReader.SheetIterator) xssf_reader.getSheetsData();
-                    while (iter.hasNext() && res.customTableIndex == null) {
-                        try (InputStream stream = iter.next()) {
-                            String sheet_name = iter.getSheetName();
-                            if (!sheet_name.equals(src.table_name)) {
-                                continue;
-                            }
-
-                            ExcelEngine.CustomDataTableIndex tableIndex = new ExcelEngine.CustomDataTableIndex(
-                                    file_path, sheet_name);
-
-                            DataFormatter formatter = new DataFormatter();
-                            InputSource sheet_source = new InputSource(stream);
-                            try {
-                                XMLReader sheet_parser = XMLHelper.newXMLReader();
-                                ContentHandler handler = new XSSFSheetXMLHandler(styles, null, strings,
-                                        new XSSFStreamSheetHandle(tableIndex), formatter, false);
-                                sheet_parser.setContentHandler(handler);
-                                sheet_parser.parse(sheet_source);
-
-                                res.customTableIndex = tableIndex;
-                            } catch (org.xml.sax.SAXException e) {
-                                ProgramOptions.getLoger().error(
-                                        "Open source file \"%s\" and parse sheet \"%s\" failed, SAX engine appears to be broken - %s.",
-                                        src.file_path, src.table_name, e.getMessage());
-                            } catch (ParserConfigurationException e) {
-                                ProgramOptions.getLoger().error(
-                                        "Open source file \"%s\" and parse sheet \"%s\" failed, SAX parser appears to be broken - %s.",
-                                        src.file_path, src.table_name, e.getMessage());
-                            } catch (java.io.IOException e) {
-                                ProgramOptions.getLoger().error(
-                                        "Open source file \"%s\" and parse sheet \"%s\" failed, %s.", src.file_path,
-                                        src.table_name, e.getMessage());
-                            }
-                        }
-                    }
-                } catch (org.apache.poi.openxml4j.exceptions.OpenXML4JException e) {
-                    ProgramOptions.getLoger().error(
-                            "Open source file \"%s\" and parse sheet \"%s\" failed, OpenXML4J engine appears to be broken - %s.",
-                            src.file_path, src.table_name, e.getMessage());
-                } catch (org.xml.sax.SAXException e) {
-                    ProgramOptions.getLoger().error(
-                            "Open source file \"%s\" and parse sheet \"%s\" failed, SAX engine appears to be broken - %s.",
-                            src.file_path, src.table_name, e.getMessage());
-                } catch (java.io.IOException e) {
-                    ProgramOptions.getLoger().error("Open source file \"%s\" and parse sheet \"%s\" failed, %s.",
-                            src.file_path, src.table_name, e.getMessage());
-                }
-
+            if (false == ProgramOptions.getInstance().enableFormular) {
+                res.customTableIndex = ExcelEngine.openStreamTableIndex(file_path, src.table_name);
                 if (res.customTableIndex != null) {
                     res.lastRowNumber = res.customTableIndex.getLastRowNum();
                 } else {
@@ -338,7 +205,7 @@ public class DataSrcExcel extends DataSrcImpl {
                     continue;
                 }
             } else {
-                res.userModuleTable = ExcelEngine.openSheet(file_path, src.table_name);
+                res.userModuleTable = ExcelEngine.openUserModuleSheet(file_path, src.table_name);
                 if (null == res.userModuleTable) {
                     ProgramOptions.getLoger().error("Open data source file \"%s\" or sheet \"%s\" failed.",
                             src.file_path, src.table_name);
@@ -362,7 +229,7 @@ public class DataSrcExcel extends DataSrcImpl {
                 }
 
                 if (null == rowWrapper) {
-                    ProgramOptions.getLoger().error("try to get description name of %s in \"%s\" row %d failed.",
+                    ProgramOptions.getLoger().error("Try to get description name of %s in \"%s\" row %d failed.",
                             src.table_name, src.file_path, key_row);
                     return -53;
                 }
@@ -422,8 +289,16 @@ public class DataSrcExcel extends DataSrcImpl {
 
             if (null != current.userModuleTable) {
                 current.currentRow = new ExcelEngine.DataRowWrapper(current.userModuleTable.getRow(current.nextIndex));
+                if (current.nextIndex >= LOG_PROCESS_BOUND && current.nextIndex % LOG_PROCESS_BOUND == 0) {
+                    ProgramOptions.getLoger().info("  > File: %s, Table: %s, process %d/%d rows", current.fileName,
+                            current.userModuleTable.getSheetName(), current.nextIndex, current.lastRowNumber);
+                }
             } else if (null != current.customTableIndex) {
                 current.currentRow = new ExcelEngine.DataRowWrapper(current.customTableIndex.getRow(current.nextIndex));
+                if (current.nextIndex >= LOG_PROCESS_BOUND && current.nextIndex % LOG_PROCESS_BOUND == 0) {
+                    ProgramOptions.getLoger().info("  > File: %s, Table: %s, process %d/%d rows", current.fileName,
+                            current.userModuleTable.getSheetName(), current.nextIndex, current.lastRowNumber);
+                }
             } else {
                 current.currentRow = null;
             }
@@ -508,11 +383,15 @@ public class DataSrcExcel extends DataSrcImpl {
 
     @Override
     public String getCurrentTableName() {
-        if (null == current.userModuleTable) {
-            return "";
+        if (null != current.userModuleTable) {
+            return current.userModuleTable.getSheetName();
         }
 
-        return current.userModuleTable.getSheetName();
+        if (null != current.customTableIndex) {
+            return current.customTableIndex.getSheetName();
+        }
+
+        return "";
     }
 
     @Override

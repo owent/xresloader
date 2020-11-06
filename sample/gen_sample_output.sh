@@ -57,5 +57,5 @@ for proto_dir in proto_v2 proto_v3; do
         -t ue-csv -o '$proto_dir/csv' -f '$proto_dir/kind.pb' -m DataSource='$XLSX_FILE'|test_oneof|3,1 -m MacroSource='$XLSX_FILE'|macro|2,1 -m ProtoName=event_cfg -m OutputFile=EventCfgRec.csv -m KeyRow=2 -m UeCfg-CodeOutput=|Public/ConfigRec|Private/ConfigRec
     ';
     echo "Run with --stdin: $CMDS";
-    echo "$CMDS" | java -client -jar "$XRESLOADER" --stdin;
+    echo "$CMDS" | java -client -jar "$XRESLOADER" --stdin --data-version 1.0.0.0;
 done

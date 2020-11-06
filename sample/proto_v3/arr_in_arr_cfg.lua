@@ -9,7 +9,7 @@ return {
         sheet = "arr_in_arr",
       },
     },
-    data_ver = "2.10.0.20201105221149",
+    data_ver = "1.0.0.0",
     description = "Test arr_in_arr_cfg",
     hash_code = "no hash code",
     xres_ver = "2.10.0",

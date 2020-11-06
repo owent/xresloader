@@ -6,15 +6,15 @@ return {
     data_source = {
       {
         file = "资源转换示例.xlsx",
-        sheet = "",
+        sheet = "upgrade_10001",
       },
       {
         file = "资源转换示例.xlsx",
-        sheet = "",
+        sheet = "upgrade_10002",
       },
     },
-    data_ver = "2.10.0.20201105221149",
-    description = "Test role_upgrade_cfg with multi keys\nTest role_upgrade_cfg with multi keys",
+    data_ver = "1.0.0.0",
+    description = "Test role_upgrade_cfg with multi keys\r\nTest role_upgrade_cfg with multi keys",
     hash_code = "no hash code",
     xres_ver = "2.10.0",
   },

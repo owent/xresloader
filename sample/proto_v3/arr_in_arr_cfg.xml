@@ -8,7 +8,7 @@
       <file>资源转换示例.xlsx</file>
       <sheet>arr_in_arr</sheet>
     </data_source>
-    <data_ver>2.10.0.20201105221149</data_ver>
+    <data_ver>1.0.0.0</data_ver>
     <description>Test arr_in_arr_cfg</description>
     <hash_code>no hash code</hash_code>
     <xres_ver>2.10.0</xres_ver>

@@ -12,7 +12,7 @@ return {
     data_ver = "1.0.0.0",
     description = "Test event_cfg with oneof fields",
     hash_code = "no hash code",
-    xres_ver = "2.10.0",
+    xres_ver = "2.10.0-rc1",
   },
   [2] = "event_cfg",
   event_cfg = {

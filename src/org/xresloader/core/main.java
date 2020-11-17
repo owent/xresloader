@@ -247,6 +247,10 @@ public class main {
             if (null == protoDesc) {
                 continue;
             }
+
+            ProgramOptions.getLoger().trace("Convert from \"%s\" to \"%s\" started (protocol=%s) ...", sn,
+                    SchemeConf.getInstance().getOutputFile(), SchemeConf.getInstance().getProtoName());
+
             if (false == protoDesc.init()) {
                 ProgramOptions.getLoger().error("Protocol description \"%s\" initialize failed: %s ",
                         ProgramOptions.getInstance().protocol.toString(), protoDesc.getLastErrorMessage());
@@ -259,9 +263,6 @@ public class main {
             if (null == outDesc) {
                 continue;
             }
-
-            ProgramOptions.getLoger().trace("Convert from \"%s\" to \"%s\" started (protocol=%s) ...", sn,
-                    SchemeConf.getInstance().getOutputFile(), SchemeConf.getInstance().getProtoName());
 
             try {
                 String filePath = SchemeConf.getInstance().getOutputFileAbsPath();

@@ -199,6 +199,12 @@ public class ExcelHSSFStreamSheetHandle implements HSSFListener {
             return;
         }
 
+        if (thisRow >= DataSrcImpl.LOG_PROCESS_BOUND && thisRow % DataSrcImpl.LOG_PROCESS_BOUND == 0
+                && currentTableIndex != null) {
+            ProgramOptions.getLoger().info("  > File: %s, Table: %s, indexes %d rows", currentTableIndex.getFilePath(),
+                    currentTableIndex.getSheetName(), thisRow);
+        }
+
         // Has data, mutable row and cell
         if (thisRow >= 0 && thisColumn >= 0 && thisStr != null && null != currentTableIndex) {
             if (maxRowNumber < thisRow) {
@@ -253,6 +259,13 @@ public class ExcelHSSFStreamSheetHandle implements HSSFListener {
 
             request.addListenerForAllRecords(formatListener);
             factory.processWorkbookEvents(request, xls_fs);
+
+            if (handle.maxRowNumber > DataSrcImpl.LOG_PROCESS_BOUND
+                    && handle.maxRowNumber % DataSrcImpl.LOG_PROCESS_BOUND != 0 && handle.currentTableIndex != null) {
+                ProgramOptions.getLoger().info("  > File: %s, Table: %s, indexes %d rows",
+                        handle.currentTableIndex.getFilePath(), handle.currentTableIndex.getSheetName(),
+                        handle.maxRowNumber);
+            }
 
             return tableIndex;
         } catch (java.io.IOException e) {

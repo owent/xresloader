@@ -70,6 +70,15 @@ public class ExcelXSSFStreamSheetHandle implements XSSFSheetXMLHandler.SheetCont
     }
 
     @Override
+    public void endSheet() {
+        if (this.maxRowNumber > DataSrcImpl.LOG_PROCESS_BOUND && this.maxRowNumber % DataSrcImpl.LOG_PROCESS_BOUND != 0
+                && this.currentTableIndex != null) {
+            ProgramOptions.getLoger().info("  > File: %s, Table: %s, indexes %d rows",
+                    this.currentTableIndex.getFilePath(), this.currentTableIndex.getSheetName(), this.maxRowNumber);
+        }
+    }
+
+    @Override
     public void cell(String cellReference, String formattedValue, XSSFComment comment) {
         // gracefully handle missing CellRef here in a similar way as XSSFCell does
         if (cellReference == null) {

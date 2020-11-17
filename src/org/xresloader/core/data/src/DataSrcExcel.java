@@ -284,6 +284,16 @@ public class DataSrcExcel extends DataSrcImpl {
             // 当前行超出
             if (current.nextIndex > current.lastRowNumber) {
                 current.currentRow = null;
+
+                if (current.lastRowNumber > LOG_PROCESS_BOUND && current.lastRowNumber % LOG_PROCESS_BOUND != 0) {
+                    if (null != current.userModuleTable) {
+                        ProgramOptions.getLoger().info("  > File: %s, Table: %s, process %d/%d rows", current.fileName,
+                                current.userModuleTable.getSheetName(), current.lastRowNumber, current.lastRowNumber);
+                    } else if (null != current.customTableIndex) {
+                        ProgramOptions.getLoger().info("  > File: %s, Table: %s, process %d/%d rows", current.fileName,
+                                current.customTableIndex.getSheetName(), current.lastRowNumber, current.lastRowNumber);
+                    }
+                }
                 return false;
             }
 
@@ -297,7 +307,7 @@ public class DataSrcExcel extends DataSrcImpl {
                 current.currentRow = new ExcelEngine.DataRowWrapper(current.customTableIndex.getRow(current.nextIndex));
                 if (current.nextIndex >= LOG_PROCESS_BOUND && current.nextIndex % LOG_PROCESS_BOUND == 0) {
                     ProgramOptions.getLoger().info("  > File: %s, Table: %s, process %d/%d rows", current.fileName,
-                            current.userModuleTable.getSheetName(), current.nextIndex, current.lastRowNumber);
+                            current.customTableIndex.getSheetName(), current.nextIndex, current.lastRowNumber);
                 }
             } else {
                 current.currentRow = null;

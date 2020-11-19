@@ -51,7 +51,7 @@ GET START
 ======
 使用步骤
 
-1. 下载[xresloader](https://github.com/xresloader/xresloader/releases)
+1. 下载[xresloader][1]
 2. 定义protobuf的协议文件(.proto)
 3. 使用protobuf官方工具***protoc***把.proto文件转换成pb
 4. 编写Excel,并且字段名和protobuf协议字段名和层级关系对应
@@ -358,7 +358,7 @@ ERROR StatusLogger Unable to invoke factory method in class class org.apache.log
         ...
 ```
 这是因为在Windows控制台中，如果编码是UTF-8，java获取编码时会获取到cp65001，而这个编码java本身是不识别的。这种情况可以按下面的方法解决：
-+ 第一种: 执行xresloader之前先执行 chcp 936，切换到GBK编码
++ 第一种: 执行 [xresloader][1] 之前先执行 chcp 936，切换到GBK编码
 + 第二种: 在powershell里执行
 
 4. 为什么在proto里定义的是一个无符号(unsigned)类型(uint32、uint64等)，实际输出的UE代码是有符号(signed)的(int32/int64)？
@@ -371,6 +371,13 @@ Ans: 因为对 ```UE-Json``` 输出中， ```Name``` 是一个特殊字段，也
 
 6. 提示 ```Can not reserve enough space for XXX objecct heap```
 
-在转换很大的Excel文件时（上万行数据），会需要很高的内存（>=1GB）。所以为了方便我们在批量转表sample的xml中配置了 ```<java_option desc="java选项-最大内存限制2GB">-Xmx2048m</java_option>``` 。
+Ans: 在转换很大的Excel文件时（上万行数据），会需要很高的内存（>=1GB）。所以为了方便我们在批量转表sample的xml中配置了 ```<java_option desc="java选项-最大内存限制2GB">-Xmx2048m</java_option>``` 。
 如果出现这个提示可能是32位jre无法分配这么多地址空间导致的，可以在xml里删除这个配置。但是还是建议使用64位jre。
 
+7. 提示 ```Exception in thread "main" java.lang.OutOfMemoryError: Java heap space```
+
+Ans: 这个提示通常是堆内存不足， [xresloader][1] 默认使用的POI的内置缓存机制会消耗大量内存。碰到这种情况，可以和上面的解决方法一样加一个类似 ```-Xmx8192m``` 来增大最大内存限制。
+
+在 [xresloader][1] **2.10.0** 及以上的版本，可以使用 ```--disable-excel-formular``` 选项关闭实时公式计算\(仅仅时关闭公式实时计算，还是会读Excel里已经缓存的计算结果的\)。这时候 [xresloader][1] 会使用流式读取并使用 [xresloader][1] 内部实现的缓存机制，同时关闭文件级缓存和表级缓存，能大幅降低内存消耗。
+
+[1]: https://github.com/xresloader/xresloader/releases

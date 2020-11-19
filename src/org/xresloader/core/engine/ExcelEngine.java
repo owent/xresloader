@@ -279,7 +279,7 @@ public class ExcelEngine {
         cell2s(out, rowWrapper, col, null);
     }
 
-    static private Byte cal_cell2err(Cell c, CellValue cv) {
+    static private byte cal_cell2err(Cell c, CellValue cv) {
         if (null == cv) {
             return c.getErrorCellValue();
         }
@@ -346,7 +346,16 @@ public class ExcelEngine {
         CellValue cv = null;
         if (CellType.FORMULA == c.getCellType()) {
             if (null != formula && null != formula.evalor) {
-                cv = formula.evalor.evaluate(c);
+                try {
+                    cv = formula.evalor.evaluate(c);
+                } catch (Exception e) {
+                    ProgramOptions.getLoger().warn(
+                            "Evaluate formular failed: %s%s  > File: %s, Table: %s, Row: %d, Column: %d",
+                            e.getMessage(), ProgramOptions.getEndl(), DataSrcImpl.getOurInstance().getCurrentFileName(),
+                            DataSrcImpl.getOurInstance().getCurrentTableName(), row.getRowNum() + 1,
+                            c.getRowIndex() + 1);
+                    cv = null;
+                }
             } else {
                 out.set(c.toString());
                 return;
@@ -368,9 +377,15 @@ public class ExcelEngine {
             case BOOLEAN:
                 out.set(cal_cell2bool(c, cv).toString());
                 break;
-            case ERROR:
-                out.set(cal_cell2err(c, cv).toString());
+            case ERROR: {
+                byte error_code = cal_cell2err(c, cv);
+                try {
+                    out.set(FormulaError.forInt(error_code).getString());
+                } catch (IllegalArgumentException e) {
+                    out.set(e.toString());
+                }
                 break;
+            }
             case FORMULA:
                 if (null == cv) {
                     out.set(c.getCellFormula());
@@ -482,7 +497,16 @@ public class ExcelEngine {
         CellValue cv = null;
         if (CellType.FORMULA == c.getCellType()) {
             if (null != formula && null != formula.evalor)
-                cv = formula.evalor.evaluate(c);
+                try {
+                    cv = formula.evalor.evaluate(c);
+                } catch (Exception e) {
+                    ProgramOptions.getLoger().warn(
+                            "Evaluate formular failed: %s%s  > File: %s, Table: %s, Row: %d, Column: %d",
+                            e.getMessage(), ProgramOptions.getEndl(), DataSrcImpl.getOurInstance().getCurrentFileName(),
+                            DataSrcImpl.getOurInstance().getCurrentTableName(), row.getRowNum() + 1,
+                            c.getRowIndex() + 1);
+                    cv = null;
+                }
             else
                 return;
         }
@@ -503,8 +527,15 @@ public class ExcelEngine {
                 out.set(DataVerifyImpl.getAndVerify(col.getVerifier(), col.name, res ? 1 : 0));
                 break;
             }
-            case ERROR:
+            case ERROR: {
+                byte error_code = cal_cell2err(c, cv);
+                try {
+                    ProgramOptions.getLoger().warn("Error message: %s", FormulaError.forInt(error_code).getString());
+                } catch (IllegalArgumentException e) {
+                    ProgramOptions.getLoger().warn("Error message: %s", e.toString());
+                }
                 break;
+            }
             case FORMULA:
                 break;
             case NUMERIC: {
@@ -591,7 +622,16 @@ public class ExcelEngine {
         CellValue cv = null;
         if (CellType.FORMULA == c.getCellType()) {
             if (null != formula && null != formula.evalor) {
-                cv = formula.evalor.evaluate(c);
+                try {
+                    cv = formula.evalor.evaluate(c);
+                } catch (Exception e) {
+                    ProgramOptions.getLoger().warn(
+                            "Evaluate formular failed: %s%s  > File: %s, Table: %s, Row: %d, Column: %d",
+                            e.getMessage(), ProgramOptions.getEndl(), DataSrcImpl.getOurInstance().getCurrentFileName(),
+                            DataSrcImpl.getOurInstance().getCurrentTableName(), row.getRowNum() + 1,
+                            c.getRowIndex() + 1);
+                    cv = null;
+                }
             } else {
                 return;
             }
@@ -611,8 +651,15 @@ public class ExcelEngine {
             case BOOLEAN:
                 out.set(cal_cell2bool(c, cv) ? 1.0 : 0.0);
                 break;
-            case ERROR:
+            case ERROR: {
+                byte error_code = cal_cell2err(c, cv);
+                try {
+                    ProgramOptions.getLoger().warn("Error message: %s", FormulaError.forInt(error_code).getString());
+                } catch (IllegalArgumentException e) {
+                    ProgramOptions.getLoger().warn("Error message: %s", e.toString());
+                }
                 break;
+            }
             case FORMULA:
                 break;
             case NUMERIC:
@@ -692,7 +739,16 @@ public class ExcelEngine {
         CellValue cv = null;
         if (CellType.FORMULA == c.getCellType()) {
             if (null != formula && null != formula.evalor) {
-                cv = formula.evalor.evaluate(c);
+                try {
+                    cv = formula.evalor.evaluate(c);
+                } catch (Exception e) {
+                    ProgramOptions.getLoger().warn(
+                            "Evaluate formular failed: %s%s  > File: %s, Table: %s, Row: %d, Column: %d",
+                            e.getMessage(), ProgramOptions.getEndl(), DataSrcImpl.getOurInstance().getCurrentFileName(),
+                            DataSrcImpl.getOurInstance().getCurrentTableName(), row.getRowNum() + 1,
+                            c.getRowIndex() + 1);
+                    cv = null;
+                }
             } else {
                 out.set(true);
                 return;
@@ -713,8 +769,15 @@ public class ExcelEngine {
             case BOOLEAN:
                 out.set(cal_cell2bool(c, cv));
                 break;
-            case ERROR:
+            case ERROR: {
+                byte error_code = cal_cell2err(c, cv);
+                try {
+                    ProgramOptions.getLoger().warn("Error message: %s", FormulaError.forInt(error_code).getString());
+                } catch (IllegalArgumentException e) {
+                    ProgramOptions.getLoger().warn("Error message: %s", e.toString());
+                }
                 break;
+            }
             case FORMULA:
                 break;
             case NUMERIC:

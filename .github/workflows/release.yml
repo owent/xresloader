@@ -30,14 +30,20 @@ jobs:
           architecture: x64 # (x64 or x86) - defaults to x64
       - name: Build with Maven
         run: |
+          cd tools;
+          python3 gen_header_v2.py;
+          python3 gen_header_v3.py;
+          cd .. ;
           mvn package --file pom.xml
-          if [ -e "target/protocols.zip" ]; then rm -f "target/protocols.zip"; fi
+          if [[ -e "target/protocols.zip" ]]; then rm -f "target/protocols.zip"; fi
+          if [[ -e "target/tools.zip" ]]; then rm -f "target/tools.zip"; fi
           echo $(cd header && zip -r "../target/protocols.zip" extensions *.proto *.pb)
+          echo $(cd tools && zip -r "../target/tools.zip" requirements.txt extensions.pb *.py)
       - uses: xresloader/upload-to-github-release@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          file: "target/protocols.zip;target/*.jar"
+          file: "target/protocols.zip;target/tools.zip;target/*.jar"
           tags: true
           draft: true
           overwrite: true

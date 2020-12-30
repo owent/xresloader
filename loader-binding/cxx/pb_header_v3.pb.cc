@@ -42,7 +42,6 @@ static void InitDefaultsscc_info_xresloader_data_source_pb_5fheader_5fv3_2eproto
     new (ptr) ::org::xresloader::pb::xresloader_data_source();
     ::PROTOBUF_NAMESPACE_ID::internal::OnShutdownDestroyMessage(ptr);
   }
-  ::org::xresloader::pb::xresloader_data_source::InitAsDefaultInstance();
 }
 
 ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_xresloader_data_source_pb_5fheader_5fv3_2eproto =
@@ -56,7 +55,6 @@ static void InitDefaultsscc_info_xresloader_datablocks_pb_5fheader_5fv3_2eproto(
     new (ptr) ::org::xresloader::pb::xresloader_datablocks();
     ::PROTOBUF_NAMESPACE_ID::internal::OnShutdownDestroyMessage(ptr);
   }
-  ::org::xresloader::pb::xresloader_datablocks::InitAsDefaultInstance();
 }
 
 ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<1> scc_info_xresloader_datablocks_pb_5fheader_5fv3_2eproto =
@@ -71,7 +69,6 @@ static void InitDefaultsscc_info_xresloader_header_pb_5fheader_5fv3_2eproto() {
     new (ptr) ::org::xresloader::pb::xresloader_header();
     ::PROTOBUF_NAMESPACE_ID::internal::OnShutdownDestroyMessage(ptr);
   }
-  ::org::xresloader::pb::xresloader_header::InitAsDefaultInstance();
 }
 
 ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<1> scc_info_xresloader_header_pb_5fheader_5fv3_2eproto =
@@ -158,8 +155,6 @@ namespace pb {
 
 // ===================================================================
 
-void xresloader_data_source::InitAsDefaultInstance() {
-}
 class xresloader_data_source::_Internal {
  public:
 };
@@ -175,12 +170,12 @@ xresloader_data_source::xresloader_data_source(const xresloader_data_source& fro
   _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
   file_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
   if (!from._internal_file().empty()) {
-    file_.Set(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), from._internal_file(),
+    file_.Set(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, from._internal_file(), 
       GetArena());
   }
   sheet_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
   if (!from._internal_sheet().empty()) {
-    sheet_.Set(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), from._internal_sheet(),
+    sheet_.Set(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, from._internal_sheet(), 
       GetArena());
   }
   // @@protoc_insertion_point(copy_constructor:org.xresloader.pb.xresloader_data_source)
@@ -225,14 +220,13 @@ void xresloader_data_source::Clear() {
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  file_.ClearToEmpty(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
-  sheet_.ClearToEmpty(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
+  file_.ClearToEmpty();
+  sheet_.ClearToEmpty();
   _internal_metadata_.Clear<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
 }
 
 const char* xresloader_data_source::_InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) {
 #define CHK_(x) if (PROTOBUF_PREDICT_FALSE(!(x))) goto failure
-  ::PROTOBUF_NAMESPACE_ID::Arena* arena = GetArena(); (void)arena;
   while (!ctx->Done(&ptr)) {
     ::PROTOBUF_NAMESPACE_ID::uint32 tag;
     ptr = ::PROTOBUF_NAMESPACE_ID::internal::ReadTag(ptr, &tag);
@@ -405,8 +399,6 @@ void xresloader_data_source::InternalSwap(xresloader_data_source* other) {
 
 // ===================================================================
 
-void xresloader_header::InitAsDefaultInstance() {
-}
 class xresloader_header::_Internal {
  public:
 };
@@ -424,22 +416,22 @@ xresloader_header::xresloader_header(const xresloader_header& from)
   _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
   xres_ver_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
   if (!from._internal_xres_ver().empty()) {
-    xres_ver_.Set(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), from._internal_xres_ver(),
+    xres_ver_.Set(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, from._internal_xres_ver(), 
       GetArena());
   }
   data_ver_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
   if (!from._internal_data_ver().empty()) {
-    data_ver_.Set(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), from._internal_data_ver(),
+    data_ver_.Set(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, from._internal_data_ver(), 
       GetArena());
   }
   hash_code_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
   if (!from._internal_hash_code().empty()) {
-    hash_code_.Set(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), from._internal_hash_code(),
+    hash_code_.Set(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, from._internal_hash_code(), 
       GetArena());
   }
   description_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
   if (!from._internal_description().empty()) {
-    description_.Set(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), from._internal_description(),
+    description_.Set(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, from._internal_description(), 
       GetArena());
   }
   count_ = from.count_;
@@ -491,17 +483,16 @@ void xresloader_header::Clear() {
   (void) cached_has_bits;
 
   data_source_.Clear();
-  xres_ver_.ClearToEmpty(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
-  data_ver_.ClearToEmpty(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
-  hash_code_.ClearToEmpty(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
-  description_.ClearToEmpty(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
+  xres_ver_.ClearToEmpty();
+  data_ver_.ClearToEmpty();
+  hash_code_.ClearToEmpty();
+  description_.ClearToEmpty();
   count_ = 0u;
   _internal_metadata_.Clear<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
 }
 
 const char* xresloader_header::_InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) {
 #define CHK_(x) if (PROTOBUF_PREDICT_FALSE(!(x))) goto failure
-  ::PROTOBUF_NAMESPACE_ID::Arena* arena = GetArena(); (void)arena;
   while (!ctx->Done(&ptr)) {
     ::PROTOBUF_NAMESPACE_ID::uint32 tag;
     ptr = ::PROTOBUF_NAMESPACE_ID::internal::ReadTag(ptr, &tag);
@@ -787,10 +778,6 @@ void xresloader_header::InternalSwap(xresloader_header* other) {
 
 // ===================================================================
 
-void xresloader_datablocks::InitAsDefaultInstance() {
-  ::org::xresloader::pb::_xresloader_datablocks_default_instance_._instance.get_mutable()->header_ = const_cast< ::org::xresloader::pb::xresloader_header*>(
-      ::org::xresloader::pb::xresloader_header::internal_default_instance());
-}
 class xresloader_datablocks::_Internal {
  public:
   static const ::org::xresloader::pb::xresloader_header& header(const xresloader_datablocks* msg);
@@ -813,7 +800,7 @@ xresloader_datablocks::xresloader_datablocks(const xresloader_datablocks& from)
   _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
   data_message_type_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
   if (!from._internal_data_message_type().empty()) {
-    data_message_type_.Set(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), from._internal_data_message_type(),
+    data_message_type_.Set(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, from._internal_data_message_type(), 
       GetArena());
   }
   if (from._internal_has_header()) {
@@ -864,7 +851,7 @@ void xresloader_datablocks::Clear() {
   (void) cached_has_bits;
 
   data_block_.Clear();
-  data_message_type_.ClearToEmpty(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
+  data_message_type_.ClearToEmpty();
   if (GetArena() == nullptr && header_ != nullptr) {
     delete header_;
   }
@@ -874,7 +861,6 @@ void xresloader_datablocks::Clear() {
 
 const char* xresloader_datablocks::_InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) {
 #define CHK_(x) if (PROTOBUF_PREDICT_FALSE(!(x))) goto failure
-  ::PROTOBUF_NAMESPACE_ID::Arena* arena = GetArena(); (void)arena;
   while (!ctx->Done(&ptr)) {
     ::PROTOBUF_NAMESPACE_ID::uint32 tag;
     ptr = ::PROTOBUF_NAMESPACE_ID::internal::ReadTag(ptr, &tag);

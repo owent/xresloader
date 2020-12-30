@@ -33,4 +33,11 @@ jobs:
           architecture: x64 # (x64 or x86) - defaults to x64
       - name: Build with Maven
         # uses: .github/action/build-with-maven
-        run: mvn package --file pom.xml
+        run: |
+          cd tools;
+          python3 gen_header_v2.py;
+          python3 gen_header_v3.py;
+          cd .. ;
+          mvn package --file pom.xml
+          cd sample;
+          bash gen_sample_output.sh;

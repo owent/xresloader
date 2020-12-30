@@ -35,14 +35,10 @@ class role_upgrade_cfgDefaultTypeInternal {
 class arr_in_arr_test_nested_messageDefaultTypeInternal {
  public:
   ::PROTOBUF_NAMESPACE_ID::internal::ExplicitlyConstructed<arr_in_arr_test_nested_message> _instance;
-  const ::role_cfg* test_nested_message_info_role_;
-  const ::role_upgrade_cfg* test_nested_message_role_upgrade_cfg_;
 } _arr_in_arr_test_nested_message_default_instance_;
 class arr_in_arrDefaultTypeInternal {
  public:
   ::PROTOBUF_NAMESPACE_ID::internal::ExplicitlyConstructed<arr_in_arr> _instance;
-  const ::role_cfg* test_info_role_;
-  const ::role_upgrade_cfg* test_role_upgrade_cfg_;
 } _arr_in_arr_default_instance_;
 class test_msg_verifierDefaultTypeInternal {
  public:
@@ -63,23 +59,14 @@ class arr_in_arr_cfgDefaultTypeInternal {
 class event_reward_itemDefaultTypeInternal {
  public:
   ::PROTOBUF_NAMESPACE_ID::internal::ExplicitlyConstructed<event_reward_item> _instance;
-  ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr nested_note_;
-  int nested_enum_type_;
 } _event_reward_item_default_instance_;
 class event_rule_itemDefaultTypeInternal {
  public:
   ::PROTOBUF_NAMESPACE_ID::internal::ExplicitlyConstructed<event_rule_item> _instance;
-  ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr nested_note_;
-  int nested_enum_type_;
 } _event_rule_item_default_instance_;
 class event_cfgDefaultTypeInternal {
  public:
   ::PROTOBUF_NAMESPACE_ID::internal::ExplicitlyConstructed<event_cfg> _instance;
-  const ::event_reward_item* item_;
-  ::PROTOBUF_NAMESPACE_ID::int64 user_exp_;
-  ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr note_;
-  int enum_type_;
-  ::PROTOBUF_NAMESPACE_ID::uint32 user_level_;
 } _event_cfg_default_instance_;
 static void InitDefaultsscc_info_arr_in_arr_kind_2eproto() {
   GOOGLE_PROTOBUF_VERIFY_VERSION;
@@ -89,7 +76,6 @@ static void InitDefaultsscc_info_arr_in_arr_kind_2eproto() {
     new (ptr) ::arr_in_arr();
     ::PROTOBUF_NAMESPACE_ID::internal::OnShutdownDestroyMessage(ptr);
   }
-  ::arr_in_arr::InitAsDefaultInstance();
 }
 
 ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<2> scc_info_arr_in_arr_kind_2eproto =
@@ -105,7 +91,6 @@ static void InitDefaultsscc_info_arr_in_arr_test_nested_message_kind_2eproto() {
     new (ptr) ::arr_in_arr_test_nested_message();
     ::PROTOBUF_NAMESPACE_ID::internal::OnShutdownDestroyMessage(ptr);
   }
-  ::arr_in_arr_test_nested_message::InitAsDefaultInstance();
 }
 
 ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<2> scc_info_arr_in_arr_test_nested_message_kind_2eproto =
@@ -121,7 +106,6 @@ static void InitDefaultsscc_info_arr_in_arr_cfg_kind_2eproto() {
     new (ptr) ::arr_in_arr_cfg();
     ::PROTOBUF_NAMESPACE_ID::internal::OnShutdownDestroyMessage(ptr);
   }
-  ::arr_in_arr_cfg::InitAsDefaultInstance();
 }
 
 ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<4> scc_info_arr_in_arr_cfg_kind_2eproto =
@@ -138,7 +122,6 @@ static void InitDefaultsscc_info_arr_in_arr_cfg_TestMapIsEntry_DoNotUse_kind_2ep
     void* ptr = &::_arr_in_arr_cfg_TestMapIsEntry_DoNotUse_default_instance_;
     new (ptr) ::arr_in_arr_cfg_TestMapIsEntry_DoNotUse();
   }
-  ::arr_in_arr_cfg_TestMapIsEntry_DoNotUse::InitAsDefaultInstance();
 }
 
 ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_arr_in_arr_cfg_TestMapIsEntry_DoNotUse_kind_2eproto =
@@ -151,7 +134,6 @@ static void InitDefaultsscc_info_arr_in_arr_cfg_TestMapSmEntry_DoNotUse_kind_2ep
     void* ptr = &::_arr_in_arr_cfg_TestMapSmEntry_DoNotUse_default_instance_;
     new (ptr) ::arr_in_arr_cfg_TestMapSmEntry_DoNotUse();
   }
-  ::arr_in_arr_cfg_TestMapSmEntry_DoNotUse::InitAsDefaultInstance();
 }
 
 ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<1> scc_info_arr_in_arr_cfg_TestMapSmEntry_DoNotUse_kind_2eproto =
@@ -166,7 +148,6 @@ static void InitDefaultsscc_info_event_cfg_kind_2eproto() {
     new (ptr) ::event_cfg();
     ::PROTOBUF_NAMESPACE_ID::internal::OnShutdownDestroyMessage(ptr);
   }
-  ::event_cfg::InitAsDefaultInstance();
 }
 
 ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<2> scc_info_event_cfg_kind_2eproto =
@@ -182,7 +163,6 @@ static void InitDefaultsscc_info_event_reward_item_kind_2eproto() {
     new (ptr) ::event_reward_item();
     ::PROTOBUF_NAMESPACE_ID::internal::OnShutdownDestroyMessage(ptr);
   }
-  ::event_reward_item::InitAsDefaultInstance();
 }
 
 ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_event_reward_item_kind_2eproto =
@@ -196,7 +176,6 @@ static void InitDefaultsscc_info_event_rule_item_kind_2eproto() {
     new (ptr) ::event_rule_item();
     ::PROTOBUF_NAMESPACE_ID::internal::OnShutdownDestroyMessage(ptr);
   }
-  ::event_rule_item::InitAsDefaultInstance();
 }
 
 ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_event_rule_item_kind_2eproto =
@@ -210,7 +189,6 @@ static void InitDefaultsscc_info_role_cfg_kind_2eproto() {
     new (ptr) ::role_cfg();
     ::PROTOBUF_NAMESPACE_ID::internal::OnShutdownDestroyMessage(ptr);
   }
-  ::role_cfg::InitAsDefaultInstance();
 }
 
 ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<1> scc_info_role_cfg_kind_2eproto =
@@ -225,7 +203,6 @@ static void InitDefaultsscc_info_role_upgrade_cfg_kind_2eproto() {
     new (ptr) ::role_upgrade_cfg();
     ::PROTOBUF_NAMESPACE_ID::internal::OnShutdownDestroyMessage(ptr);
   }
-  ::role_upgrade_cfg::InitAsDefaultInstance();
 }
 
 ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_role_upgrade_cfg_kind_2eproto =
@@ -239,7 +216,6 @@ static void InitDefaultsscc_info_test_msg_verifier_kind_2eproto() {
     new (ptr) ::test_msg_verifier();
     ::PROTOBUF_NAMESPACE_ID::internal::OnShutdownDestroyMessage(ptr);
   }
-  ::test_msg_verifier::InitAsDefaultInstance();
 }
 
 ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_test_msg_verifier_kind_2eproto =
@@ -278,8 +254,8 @@ const ::PROTOBUF_NAMESPACE_ID::uint32 TableStruct_kind_2eproto::offsets[] PROTOB
   ~0u,  // no _extensions_
   PROTOBUF_FIELD_OFFSET(::arr_in_arr_test_nested_message, _oneof_case_[0]),
   ~0u,  // no _weak_field_map_
-  offsetof(::arr_in_arr_test_nested_messageDefaultTypeInternal, test_nested_message_info_role_),
-  offsetof(::arr_in_arr_test_nested_messageDefaultTypeInternal, test_nested_message_role_upgrade_cfg_),
+  ::PROTOBUF_NAMESPACE_ID::internal::kInvalidFieldOffsetTag,
+  ::PROTOBUF_NAMESPACE_ID::internal::kInvalidFieldOffsetTag,
   PROTOBUF_FIELD_OFFSET(::arr_in_arr_test_nested_message, test_onof_),
   ~0u,  // no _has_bits_
   PROTOBUF_FIELD_OFFSET(::arr_in_arr, _internal_metadata_),
@@ -289,8 +265,8 @@ const ::PROTOBUF_NAMESPACE_ID::uint32 TableStruct_kind_2eproto::offsets[] PROTOB
   PROTOBUF_FIELD_OFFSET(::arr_in_arr, name_),
   PROTOBUF_FIELD_OFFSET(::arr_in_arr, int_arr_),
   PROTOBUF_FIELD_OFFSET(::arr_in_arr, str_arr_),
-  offsetof(::arr_in_arrDefaultTypeInternal, test_info_role_),
-  offsetof(::arr_in_arrDefaultTypeInternal, test_role_upgrade_cfg_),
+  ::PROTOBUF_NAMESPACE_ID::internal::kInvalidFieldOffsetTag,
+  ::PROTOBUF_NAMESPACE_ID::internal::kInvalidFieldOffsetTag,
   PROTOBUF_FIELD_OFFSET(::arr_in_arr, test_onof_),
   ~0u,  // no _has_bits_
   PROTOBUF_FIELD_OFFSET(::test_msg_verifier, _internal_metadata_),
@@ -337,8 +313,8 @@ const ::PROTOBUF_NAMESPACE_ID::uint32 TableStruct_kind_2eproto::offsets[] PROTOB
   ~0u,  // no _weak_field_map_
   PROTOBUF_FIELD_OFFSET(::event_reward_item, item_id_),
   PROTOBUF_FIELD_OFFSET(::event_reward_item, item_count_),
-  offsetof(::event_reward_itemDefaultTypeInternal, nested_note_),
-  offsetof(::event_reward_itemDefaultTypeInternal, nested_enum_type_),
+  ::PROTOBUF_NAMESPACE_ID::internal::kInvalidFieldOffsetTag,
+  ::PROTOBUF_NAMESPACE_ID::internal::kInvalidFieldOffsetTag,
   PROTOBUF_FIELD_OFFSET(::event_reward_item, nested_),
   ~0u,  // no _has_bits_
   PROTOBUF_FIELD_OFFSET(::event_rule_item, _internal_metadata_),
@@ -347,8 +323,8 @@ const ::PROTOBUF_NAMESPACE_ID::uint32 TableStruct_kind_2eproto::offsets[] PROTOB
   ~0u,  // no _weak_field_map_
   PROTOBUF_FIELD_OFFSET(::event_rule_item, rule_id_),
   PROTOBUF_FIELD_OFFSET(::event_rule_item, rule_param_),
-  offsetof(::event_rule_itemDefaultTypeInternal, nested_note_),
-  offsetof(::event_rule_itemDefaultTypeInternal, nested_enum_type_),
+  ::PROTOBUF_NAMESPACE_ID::internal::kInvalidFieldOffsetTag,
+  ::PROTOBUF_NAMESPACE_ID::internal::kInvalidFieldOffsetTag,
   PROTOBUF_FIELD_OFFSET(::event_rule_item, nested_),
   ~0u,  // no _has_bits_
   PROTOBUF_FIELD_OFFSET(::event_cfg, _internal_metadata_),
@@ -359,11 +335,11 @@ const ::PROTOBUF_NAMESPACE_ID::uint32 TableStruct_kind_2eproto::offsets[] PROTOB
   PROTOBUF_FIELD_OFFSET(::event_cfg, process_),
   PROTOBUF_FIELD_OFFSET(::event_cfg, rule_),
   PROTOBUF_FIELD_OFFSET(::event_cfg, specify_field_),
-  offsetof(::event_cfgDefaultTypeInternal, item_),
-  offsetof(::event_cfgDefaultTypeInternal, user_exp_),
-  offsetof(::event_cfgDefaultTypeInternal, note_),
-  offsetof(::event_cfgDefaultTypeInternal, enum_type_),
-  offsetof(::event_cfgDefaultTypeInternal, user_level_),
+  ::PROTOBUF_NAMESPACE_ID::internal::kInvalidFieldOffsetTag,
+  ::PROTOBUF_NAMESPACE_ID::internal::kInvalidFieldOffsetTag,
+  ::PROTOBUF_NAMESPACE_ID::internal::kInvalidFieldOffsetTag,
+  ::PROTOBUF_NAMESPACE_ID::internal::kInvalidFieldOffsetTag,
+  ::PROTOBUF_NAMESPACE_ID::internal::kInvalidFieldOffsetTag,
   PROTOBUF_FIELD_OFFSET(::event_cfg, test_arr_),
   PROTOBUF_FIELD_OFFSET(::event_cfg, test_empty_arr_),
   PROTOBUF_FIELD_OFFSET(::event_cfg, reward_),
@@ -534,10 +510,6 @@ constexpr int arr_in_arr::test_nested_enum_ARRAYSIZE;
 
 // ===================================================================
 
-void role_cfg::InitAsDefaultInstance() {
-  ::_role_cfg_default_instance_._instance.get_mutable()->dep_test_ = const_cast< ::dep_cfg*>(
-      ::dep_cfg::internal_default_instance());
-}
 class role_cfg::_Internal {
  public:
   static const ::dep_cfg& dep_test(const role_cfg* msg);
@@ -566,12 +538,12 @@ role_cfg::role_cfg(const role_cfg& from)
   _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
   name_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
   if (!from._internal_name().empty()) {
-    name_.Set(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), from._internal_name(),
+    name_.Set(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, from._internal_name(), 
       GetArena());
   }
   int_as_string_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
   if (!from._internal_int_as_string().empty()) {
-    int_as_string_.Set(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), from._internal_int_as_string(),
+    int_as_string_.Set(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, from._internal_int_as_string(), 
       GetArena());
   }
   if (from._internal_has_dep_test()) {
@@ -589,8 +561,9 @@ void role_cfg::SharedCtor() {
   ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&scc_info_role_cfg_kind_2eproto.base);
   name_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
   int_as_string_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
-  ::memset(&dep_test_, 0, static_cast<size_t>(
-      reinterpret_cast<char*>(&cost_value_) -
+  ::memset(reinterpret_cast<char*>(this) + static_cast<size_t>(
+      reinterpret_cast<char*>(&dep_test_) - reinterpret_cast<char*>(this)),
+      0, static_cast<size_t>(reinterpret_cast<char*>(&cost_value_) -
       reinterpret_cast<char*>(&dep_test_)) + sizeof(cost_value_));
 }
 
@@ -629,8 +602,8 @@ void role_cfg::Clear() {
   (void) cached_has_bits;
 
   test_array_.Clear();
-  name_.ClearToEmpty(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
-  int_as_string_.ClearToEmpty(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
+  name_.ClearToEmpty();
+  int_as_string_.ClearToEmpty();
   if (GetArena() == nullptr && dep_test_ != nullptr) {
     delete dep_test_;
   }
@@ -643,7 +616,6 @@ void role_cfg::Clear() {
 
 const char* role_cfg::_InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) {
 #define CHK_(x) if (PROTOBUF_PREDICT_FALSE(!(x))) goto failure
-  ::PROTOBUF_NAMESPACE_ID::Arena* arena = GetArena(); (void)arena;
   while (!ctx->Done(&ptr)) {
     ::PROTOBUF_NAMESPACE_ID::uint32 tag;
     ptr = ::PROTOBUF_NAMESPACE_ID::internal::ReadTag(ptr, &tag);
@@ -973,8 +945,6 @@ void role_cfg::InternalSwap(role_cfg* other) {
 
 // ===================================================================
 
-void role_upgrade_cfg::InitAsDefaultInstance() {
-}
 class role_upgrade_cfg::_Internal {
  public:
 };
@@ -995,8 +965,9 @@ role_upgrade_cfg::role_upgrade_cfg(const role_upgrade_cfg& from)
 }
 
 void role_upgrade_cfg::SharedCtor() {
-  ::memset(&id_, 0, static_cast<size_t>(
-      reinterpret_cast<char*>(&scoreadd_) -
+  ::memset(reinterpret_cast<char*>(this) + static_cast<size_t>(
+      reinterpret_cast<char*>(&id_) - reinterpret_cast<char*>(this)),
+      0, static_cast<size_t>(reinterpret_cast<char*>(&scoreadd_) -
       reinterpret_cast<char*>(&id_)) + sizeof(scoreadd_));
 }
 
@@ -1039,7 +1010,6 @@ void role_upgrade_cfg::Clear() {
 
 const char* role_upgrade_cfg::_InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) {
 #define CHK_(x) if (PROTOBUF_PREDICT_FALSE(!(x))) goto failure
-  ::PROTOBUF_NAMESPACE_ID::Arena* arena = GetArena(); (void)arena;
   while (!ctx->Done(&ptr)) {
     ::PROTOBUF_NAMESPACE_ID::uint32 tag;
     ptr = ::PROTOBUF_NAMESPACE_ID::internal::ReadTag(ptr, &tag);
@@ -1273,12 +1243,6 @@ void role_upgrade_cfg::InternalSwap(role_upgrade_cfg* other) {
 
 // ===================================================================
 
-void arr_in_arr_test_nested_message::InitAsDefaultInstance() {
-  ::_arr_in_arr_test_nested_message_default_instance_.test_nested_message_info_role_ = const_cast< ::role_cfg*>(
-      ::role_cfg::internal_default_instance());
-  ::_arr_in_arr_test_nested_message_default_instance_.test_nested_message_role_upgrade_cfg_ = const_cast< ::role_upgrade_cfg*>(
-      ::role_upgrade_cfg::internal_default_instance());
-}
 class arr_in_arr_test_nested_message::_Internal {
  public:
   static const ::role_cfg& test_nested_message_info_role(const arr_in_arr_test_nested_message* msg);
@@ -1417,7 +1381,6 @@ void arr_in_arr_test_nested_message::Clear() {
 
 const char* arr_in_arr_test_nested_message::_InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) {
 #define CHK_(x) if (PROTOBUF_PREDICT_FALSE(!(x))) goto failure
-  ::PROTOBUF_NAMESPACE_ID::Arena* arena = GetArena(); (void)arena;
   while (!ctx->Done(&ptr)) {
     ::PROTOBUF_NAMESPACE_ID::uint32 tag;
     ptr = ::PROTOBUF_NAMESPACE_ID::internal::ReadTag(ptr, &tag);
@@ -1594,12 +1557,6 @@ void arr_in_arr_test_nested_message::InternalSwap(arr_in_arr_test_nested_message
 
 // ===================================================================
 
-void arr_in_arr::InitAsDefaultInstance() {
-  ::_arr_in_arr_default_instance_.test_info_role_ = const_cast< ::role_cfg*>(
-      ::role_cfg::internal_default_instance());
-  ::_arr_in_arr_default_instance_.test_role_upgrade_cfg_ = const_cast< ::role_upgrade_cfg*>(
-      ::role_upgrade_cfg::internal_default_instance());
-}
 class arr_in_arr::_Internal {
  public:
   static const ::role_cfg& test_info_role(const arr_in_arr* msg);
@@ -1659,7 +1616,7 @@ arr_in_arr::arr_in_arr(const arr_in_arr& from)
   _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
   name_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
   if (!from._internal_name().empty()) {
-    name_.Set(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), from._internal_name(),
+    name_.Set(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, from._internal_name(), 
       GetArena());
   }
   clear_has_test_onof();
@@ -1745,14 +1702,13 @@ void arr_in_arr::Clear() {
 
   int_arr_.Clear();
   str_arr_.Clear();
-  name_.ClearToEmpty(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
+  name_.ClearToEmpty();
   clear_test_onof();
   _internal_metadata_.Clear<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
 }
 
 const char* arr_in_arr::_InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) {
 #define CHK_(x) if (PROTOBUF_PREDICT_FALSE(!(x))) goto failure
-  ::PROTOBUF_NAMESPACE_ID::Arena* arena = GetArena(); (void)arena;
   while (!ctx->Done(&ptr)) {
     ::PROTOBUF_NAMESPACE_ID::uint32 tag;
     ptr = ::PROTOBUF_NAMESPACE_ID::internal::ReadTag(ptr, &tag);
@@ -2029,8 +1985,6 @@ void arr_in_arr::InternalSwap(arr_in_arr* other) {
 
 // ===================================================================
 
-void test_msg_verifier::InitAsDefaultInstance() {
-}
 class test_msg_verifier::_Internal {
  public:
 };
@@ -2051,8 +2005,9 @@ test_msg_verifier::test_msg_verifier(const test_msg_verifier& from)
 }
 
 void test_msg_verifier::SharedCtor() {
-  ::memset(&test_id_1_, 0, static_cast<size_t>(
-      reinterpret_cast<char*>(&test_id_2_) -
+  ::memset(reinterpret_cast<char*>(this) + static_cast<size_t>(
+      reinterpret_cast<char*>(&test_id_1_) - reinterpret_cast<char*>(this)),
+      0, static_cast<size_t>(reinterpret_cast<char*>(&test_id_2_) -
       reinterpret_cast<char*>(&test_id_1_)) + sizeof(test_id_2_));
 }
 
@@ -2095,7 +2050,6 @@ void test_msg_verifier::Clear() {
 
 const char* test_msg_verifier::_InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) {
 #define CHK_(x) if (PROTOBUF_PREDICT_FALSE(!(x))) goto failure
-  ::PROTOBUF_NAMESPACE_ID::Arena* arena = GetArena(); (void)arena;
   while (!ctx->Done(&ptr)) {
     ::PROTOBUF_NAMESPACE_ID::uint32 tag;
     ptr = ::PROTOBUF_NAMESPACE_ID::internal::ReadTag(ptr, &tag);
@@ -2294,10 +2248,6 @@ void arr_in_arr_cfg_TestMapSmEntry_DoNotUse::MergeFrom(
 
 // ===================================================================
 
-void arr_in_arr_cfg::InitAsDefaultInstance() {
-  ::_arr_in_arr_cfg_default_instance_._instance.get_mutable()->test_plain_msg_ = const_cast< ::test_msg_verifier*>(
-      ::test_msg_verifier::internal_default_instance());
-}
 class arr_in_arr_cfg::_Internal {
  public:
   static const ::test_msg_verifier& test_plain_msg(const arr_in_arr_cfg* msg);
@@ -2342,8 +2292,9 @@ arr_in_arr_cfg::arr_in_arr_cfg(const arr_in_arr_cfg& from)
 
 void arr_in_arr_cfg::SharedCtor() {
   ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&scc_info_arr_in_arr_cfg_kind_2eproto.base);
-  ::memset(&test_plain_msg_, 0, static_cast<size_t>(
-      reinterpret_cast<char*>(&id_) -
+  ::memset(reinterpret_cast<char*>(this) + static_cast<size_t>(
+      reinterpret_cast<char*>(&test_plain_msg_) - reinterpret_cast<char*>(this)),
+      0, static_cast<size_t>(reinterpret_cast<char*>(&id_) -
       reinterpret_cast<char*>(&test_plain_msg_)) + sizeof(id_));
 }
 
@@ -2395,7 +2346,6 @@ void arr_in_arr_cfg::Clear() {
 
 const char* arr_in_arr_cfg::_InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) {
 #define CHK_(x) if (PROTOBUF_PREDICT_FALSE(!(x))) goto failure
-  ::PROTOBUF_NAMESPACE_ID::Arena* arena = GetArena(); (void)arena;
   while (!ctx->Done(&ptr)) {
     ::PROTOBUF_NAMESPACE_ID::uint32 tag;
     ptr = ::PROTOBUF_NAMESPACE_ID::internal::ReadTag(ptr, &tag);
@@ -2824,11 +2774,6 @@ void arr_in_arr_cfg::InternalSwap(arr_in_arr_cfg* other) {
 
 // ===================================================================
 
-void event_reward_item::InitAsDefaultInstance() {
-  ::_event_reward_item_default_instance_.nested_note_.UnsafeSetDefault(
-      &::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
-  ::_event_reward_item_default_instance_.nested_enum_type_ = 0;
-}
 class event_reward_item::_Internal {
  public:
 };
@@ -2864,8 +2809,9 @@ event_reward_item::event_reward_item(const event_reward_item& from)
 
 void event_reward_item::SharedCtor() {
   ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&scc_info_event_reward_item_kind_2eproto.base);
-  ::memset(&item_id_, 0, static_cast<size_t>(
-      reinterpret_cast<char*>(&item_count_) -
+  ::memset(reinterpret_cast<char*>(this) + static_cast<size_t>(
+      reinterpret_cast<char*>(&item_id_) - reinterpret_cast<char*>(this)),
+      0, static_cast<size_t>(reinterpret_cast<char*>(&item_count_) -
       reinterpret_cast<char*>(&item_id_)) + sizeof(item_count_));
   clear_has_nested();
 }
@@ -2902,7 +2848,7 @@ void event_reward_item::clear_nested() {
 // @@protoc_insertion_point(one_of_clear_start:event_reward_item)
   switch (nested_case()) {
     case kNestedNote: {
-      nested_.nested_note_.Destroy(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
+      nested_.nested_note_.Destroy(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, GetArena());
       break;
     }
     case kNestedEnumType: {
@@ -2932,7 +2878,6 @@ void event_reward_item::Clear() {
 
 const char* event_reward_item::_InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) {
 #define CHK_(x) if (PROTOBUF_PREDICT_FALSE(!(x))) goto failure
-  ::PROTOBUF_NAMESPACE_ID::Arena* arena = GetArena(); (void)arena;
   while (!ctx->Done(&ptr)) {
     ::PROTOBUF_NAMESPACE_ID::uint32 tag;
     ptr = ::PROTOBUF_NAMESPACE_ID::internal::ReadTag(ptr, &tag);
@@ -3164,11 +3109,6 @@ void event_reward_item::InternalSwap(event_reward_item* other) {
 
 // ===================================================================
 
-void event_rule_item::InitAsDefaultInstance() {
-  ::_event_rule_item_default_instance_.nested_note_.UnsafeSetDefault(
-      &::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
-  ::_event_rule_item_default_instance_.nested_enum_type_ = 0;
-}
 class event_rule_item::_Internal {
  public:
 };
@@ -3204,8 +3144,9 @@ event_rule_item::event_rule_item(const event_rule_item& from)
 
 void event_rule_item::SharedCtor() {
   ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&scc_info_event_rule_item_kind_2eproto.base);
-  ::memset(&rule_id_, 0, static_cast<size_t>(
-      reinterpret_cast<char*>(&rule_param_) -
+  ::memset(reinterpret_cast<char*>(this) + static_cast<size_t>(
+      reinterpret_cast<char*>(&rule_id_) - reinterpret_cast<char*>(this)),
+      0, static_cast<size_t>(reinterpret_cast<char*>(&rule_param_) -
       reinterpret_cast<char*>(&rule_id_)) + sizeof(rule_param_));
   clear_has_nested();
 }
@@ -3242,7 +3183,7 @@ void event_rule_item::clear_nested() {
 // @@protoc_insertion_point(one_of_clear_start:event_rule_item)
   switch (nested_case()) {
     case kNestedNote: {
-      nested_.nested_note_.Destroy(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
+      nested_.nested_note_.Destroy(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, GetArena());
       break;
     }
     case kNestedEnumType: {
@@ -3272,7 +3213,6 @@ void event_rule_item::Clear() {
 
 const char* event_rule_item::_InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) {
 #define CHK_(x) if (PROTOBUF_PREDICT_FALSE(!(x))) goto failure
-  ::PROTOBUF_NAMESPACE_ID::Arena* arena = GetArena(); (void)arena;
   while (!ctx->Done(&ptr)) {
     ::PROTOBUF_NAMESPACE_ID::uint32 tag;
     ptr = ::PROTOBUF_NAMESPACE_ID::internal::ReadTag(ptr, &tag);
@@ -3504,19 +3444,6 @@ void event_rule_item::InternalSwap(event_rule_item* other) {
 
 // ===================================================================
 
-void event_cfg::InitAsDefaultInstance() {
-  ::_event_cfg_default_instance_._instance.get_mutable()->rule_ = const_cast< ::event_rule_item*>(
-      ::event_rule_item::internal_default_instance());
-  ::_event_cfg_default_instance_._instance.get_mutable()->specify_field_ = const_cast< ::event_rule_item*>(
-      ::event_rule_item::internal_default_instance());
-  ::_event_cfg_default_instance_.item_ = const_cast< ::event_reward_item*>(
-      ::event_reward_item::internal_default_instance());
-  ::_event_cfg_default_instance_.user_exp_ = PROTOBUF_LONGLONG(0);
-  ::_event_cfg_default_instance_.note_.UnsafeSetDefault(
-      &::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
-  ::_event_cfg_default_instance_.enum_type_ = 0;
-  ::_event_cfg_default_instance_.user_level_ = 0u;
-}
 class event_cfg::_Internal {
  public:
   static const ::event_rule_item& rule(const event_cfg* msg);
@@ -3614,8 +3541,9 @@ event_cfg::event_cfg(const event_cfg& from)
 
 void event_cfg::SharedCtor() {
   ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&scc_info_event_cfg_kind_2eproto.base);
-  ::memset(&rule_, 0, static_cast<size_t>(
-      reinterpret_cast<char*>(&process_) -
+  ::memset(reinterpret_cast<char*>(this) + static_cast<size_t>(
+      reinterpret_cast<char*>(&rule_) - reinterpret_cast<char*>(this)),
+      0, static_cast<size_t>(reinterpret_cast<char*>(&process_) -
       reinterpret_cast<char*>(&rule_)) + sizeof(process_));
   clear_has_reward();
   clear_has_unlock_type();
@@ -3668,7 +3596,7 @@ void event_cfg::clear_reward() {
       break;
     }
     case kNote: {
-      reward_.note_.Destroy(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArena());
+      reward_.note_.Destroy(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, GetArena());
       break;
     }
     case kEnumType: {
@@ -3723,7 +3651,6 @@ void event_cfg::Clear() {
 
 const char* event_cfg::_InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) {
 #define CHK_(x) if (PROTOBUF_PREDICT_FALSE(!(x))) goto failure
-  ::PROTOBUF_NAMESPACE_ID::Arena* arena = GetArena(); (void)arena;
   while (!ctx->Done(&ptr)) {
     ::PROTOBUF_NAMESPACE_ID::uint32 tag;
     ptr = ::PROTOBUF_NAMESPACE_ID::internal::ReadTag(ptr, &tag);

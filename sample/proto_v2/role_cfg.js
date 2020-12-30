@@ -155,7 +155,7 @@
         ],
         data_ver : "1.0.0.0",
         hash_code : "no hash code",
-        xres_ver : "2.10.0-rc2"
+        xres_ver : "2.10.0"
       }
     }
   };

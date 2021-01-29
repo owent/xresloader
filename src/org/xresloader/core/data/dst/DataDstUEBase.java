@@ -670,6 +670,22 @@ public abstract class DataDstUEBase extends DataDstImpl {
         return rule;
     }
 
+    private String tryGetIdentifyName(DataDstWriterNodeWrapper input) {
+        if (null == input) {
+            return "[UNKNOWN]";
+        }
+
+        if (null == input.getReferNode()) {
+            return input.getVarName();
+        }
+
+        if (null == input.getReferNode().identify) {
+            return input.getReferNode().getFieldName();
+        }
+
+        return input.getReferNode().identify.name;
+    }
+
     protected final void build_data(Object buildObj, DataDstImpl compiler) throws ConvException, IOException {
         while (DataSrcImpl.getOurInstance().nextTable()) {
             // 生成描述集
@@ -710,17 +726,51 @@ public abstract class DataDstUEBase extends DataDstImpl {
             buildForUEOnPrintHeader(buildObj, row_data, rule, codeInfo);
 
             // 输出数据
-            while (DataSrcImpl.getOurInstance().nextRow()) {
+            DataSrcImpl current_source = DataSrcImpl.getOurInstance();
+            while (current_source.nextRow()) {
                 row_data = new ArrayList<Object>();
                 HashMap<String, Object> fieldDataByOneof = new HashMap<String, Object>();
                 row_data.ensureCapacity(rule.keyFields.size() + rule.valueFields.size());
 
                 // 先用特殊规则导入Name字段,Name字段可能是合成字段
                 if (!rule.keyFields.isEmpty()) {
-                    row_data.add(pickNameField(buildObj, rule, fieldDataByOneof));
+                    Object name_res = pickNameField(buildObj, rule, fieldDataByOneof);
+                    LinkedList<String> missing_key_names = null;
 
+                    row_data.add(name_res);
+
+                    if (null == name_res) {
+                        missing_key_names = new LinkedList<String>();
+                        missing_key_names.add(tryGetIdentifyName(rule.keyFields.get(0).get(0)));
+                    }
+
+                    // 先处理全部的合成Name的key字段
+                    int not_null_keys_count = 0;
                     for (int i = 1; i < rule.keyFields.size(); ++i) {
-                        row_data.add(pickValueField(buildObj, rule.keyFields.get(i), fieldDataByOneof));
+                        Object key_res = pickValueField(buildObj, rule.keyFields.get(i), fieldDataByOneof);
+                        row_data.add(key_res);
+                        if (null != key_res) {
+                            ++not_null_keys_count;
+                        } else if (!rule.keyFields.get(i).isEmpty()) {
+                            if (null == missing_key_names) {
+                                missing_key_names = new LinkedList<String>();
+                            }
+                            missing_key_names.add(tryGetIdentifyName(rule.keyFields.get(i).get(0)));
+                        }
+                    }
+
+                    // 忽略未配置Key的行，可能是空行
+                    // 如果Name不是合成字段，Name为null则全部主键缺失
+                    // 如果Name是合成字段，Name永不为null，此时0 == not_null_keys_count则全部主键缺失
+                    if (name_res == null || (rule.keyFields.size() > 1 && 0 == not_null_keys_count)) {
+                        continue;
+                    }
+
+                    if (null != missing_key_names) {
+                        ProgramOptions.getLoger().warn("Missing key field(s): %s.%s  > File: %s, Table: %s, Row: %d",
+                                String.join(",", missing_key_names), ProgramOptions.getEndl(),
+                                current_source.getCurrentFileName(), current_source.getCurrentTableName(),
+                                current_source.getCurrentRowNum() + 1);
                     }
                 }
 
@@ -881,12 +931,20 @@ public abstract class DataDstUEBase extends DataDstImpl {
                 for (int i = 1; i < rule.keyFields.size(); ++i) {
                     ArrayList<DataDstWriterNodeWrapper> wrappers = rule.keyFields.get(i);
                     Object val = pickValueField(buildObj, wrappers, fieldDataByOneof);
+                    if (null == val) {
+                        continue;
+                    }
                     if (val instanceof Number) {
                         ret = ret + getFieldDescriptor(wrappers).mutableExtension().mutableUE().keyTag
                                 * ((Number) val).longValue();
                     } else {
-                        ret = ret + getFieldDescriptor(wrappers).mutableExtension().mutableUE().keyTag * Long
-                                .valueOf(pickValueField(buildObj, rule.keyFields.get(i), fieldDataByOneof).toString());
+                        try {
+                            ret = ret + getFieldDescriptor(wrappers).mutableExtension().mutableUE().keyTag
+                                    * Long.valueOf(val.toString());
+                        } catch (NumberFormatException e) {
+                            throw new ConvException(String.format("Try to convert %s to integer failed.%s",
+                                    val.toString(), e.getMessage()));
+                        }
                     }
                 }
 
@@ -897,12 +955,20 @@ public abstract class DataDstUEBase extends DataDstImpl {
                 for (int i = 1; i < rule.keyFields.size(); ++i) {
                     ArrayList<DataDstWriterNodeWrapper> wrappers = rule.keyFields.get(i);
                     Object val = pickValueField(buildObj, wrappers, fieldDataByOneof);
+                    if (null == val) {
+                        continue;
+                    }
                     if (val instanceof Number) {
                         ret = ret + getFieldDescriptor(wrappers).mutableExtension().mutableUE().keyTag
                                 * ((Number) val).doubleValue();
                     } else {
-                        ret = ret + getFieldDescriptor(wrappers).mutableExtension().mutableUE().keyTag * Double
-                                .valueOf(pickValueField(buildObj, rule.keyFields.get(i), fieldDataByOneof).toString());
+                        try {
+                            ret = ret + getFieldDescriptor(wrappers).mutableExtension().mutableUE().keyTag
+                                    * Double.valueOf(val.toString());
+                        } catch (NumberFormatException e) {
+                            throw new ConvException(String.format("Try to convert %s to number failed.%s",
+                                    val.toString(), e.getMessage()));
+                        }
                     }
                 }
 
@@ -912,7 +978,11 @@ public abstract class DataDstUEBase extends DataDstImpl {
                 ArrayList<String> ls = new ArrayList<String>();
                 ls.ensureCapacity(rule.keyFields.size());
                 for (int i = 1; i < rule.keyFields.size(); ++i) {
-                    ls.add(pickValueField(buildObj, rule.keyFields.get(i), fieldDataByOneof).toString());
+                    Object val = pickValueField(buildObj, rule.keyFields.get(i), fieldDataByOneof);
+                    if (null == val) {
+                        continue;
+                    }
+                    ls.add(val.toString());
                 }
 
                 return String.join("", ls);

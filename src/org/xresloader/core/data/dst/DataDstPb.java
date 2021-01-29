@@ -1191,16 +1191,18 @@ public class DataDstPb extends DataDstImpl {
         // 索引oneof
         for (Descriptors.OneofDescriptor fd : desc.getOneofs()) {
             if (node.getTypeDescriptor() == null) {
-                setLastErrorMessage("type descriptor \"%s\" not found, it's probably a BUG, please report to %s",
-                        node.getFullName(), ProgramOptions.getReportUrl());
+                setLastErrorMessage(
+                        "type descriptor \"%s\" not found, it's probably a BUG, please report to %s, current version: %s",
+                        node.getFullName(), ProgramOptions.getReportUrl(), ProgramOptions.getInstance().getVersion());
                 throw new ConvException(getLastErrorMessage());
             }
 
             DataDstOneofDescriptor oneof_inner_desc = node.getTypeDescriptor().oneofs.getOrDefault(fd.getName(), null);
             if (oneof_inner_desc == null) {
                 setLastErrorMessage(
-                        "oneof descriptor \"%s\" not found in type descriptor \"%s\", it's probably a BUG, please report to %s",
-                        fd.getFullName(), node.getFullName(), ProgramOptions.getReportUrl());
+                        "oneof descriptor \"%s\" not found in type descriptor \"%s\", it's probably a BUG, please report to %s, current version: %s",
+                        fd.getFullName(), node.getFullName(), ProgramOptions.getReportUrl(),
+                        ProgramOptions.getInstance().getVersion());
                 throw new ConvException(getLastErrorMessage());
             }
 

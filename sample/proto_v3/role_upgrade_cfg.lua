@@ -16,7 +16,7 @@ return {
     data_ver = "1.0.0.0",
     description = "Test role_upgrade_cfg with multi keys\r\nTest role_upgrade_cfg with multi keys",
     hash_code = "no hash code",
-    xres_ver = "2.10.1",
+    xres_ver = "2.10.2",
   },
   [2] = "role_upgrade_cfg",
   role_upgrade_cfg = {

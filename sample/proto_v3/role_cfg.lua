@@ -11,7 +11,7 @@ return {
         },
         data_ver = "1.0.0.0",
         hash_code = "no hash code",
-        xres_ver = "2.10.1",
+        xres_ver = "2.10.2",
     },
     [2] = "role_cfg",
     role_cfg = {

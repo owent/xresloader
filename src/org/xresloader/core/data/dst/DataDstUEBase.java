@@ -2193,6 +2193,16 @@ public abstract class DataDstUEBase extends DataDstImpl {
             headerFs.write(dumpString("\r\n"));
 
             headerFs.write(dumpString(
+                    "    void SetLoader(TSharedPtr<ConstructorHelpers::FObjectFinder<UDataTable> > NewLoader);\r\n"));
+            headerFs.write(dumpString("\r\n"));
+
+            headerFs.write(dumpString("    void InitializeDefaultLoader() const;\r\n"));
+            headerFs.write(dumpString("\r\n"));
+
+            headerFs.write(dumpString("    void DisableDefaultLoader();\r\n"));
+            headerFs.write(dumpString("\r\n"));
+
+            headerFs.write(dumpString(
                     String.format("    static FName GetRowName(%s);\r\n", getDataRowKeyToNameParamsSpecify(rule))));
             headerFs.write(dumpString("\r\n"));
 
@@ -2238,6 +2248,7 @@ public abstract class DataDstUEBase extends DataDstImpl {
         if (enableDataTable) {
             headerFs.write(dumpString("    TSharedPtr<ConstructorHelpers::FObjectFinder<UDataTable> > Loader;\r\n"));
             headerFs.write(dumpString("    UDataTable* DataTable;\r\n"));
+            headerFs.write(dumpString("    bool EnableDefaultLoader;\r\n"));
         }
         headerFs.write(dumpString(String.format("    %s Empty;\r\n", codeInfo.clazzName)));
         headerFs.write(dumpString("};\r\n"));
@@ -2293,7 +2304,13 @@ public abstract class DataDstUEBase extends DataDstImpl {
         if (codeInfo.destinationPath.isEmpty()) {
             helperDestination = codeInfo.baseName;
         } else {
-            helperDestination = String.format("%s/%s", codeInfo.destinationPath, codeInfo.baseName);
+            File filePath = new File(codeInfo.outputFile);
+            String fileBaseName = filePath.getName();
+            int suffixSplit = fileBaseName.lastIndexOf('.');
+            if (suffixSplit > 0) {
+                fileBaseName = fileBaseName.substring(0, suffixSplit);
+            }
+            helperDestination = String.format("%s/%s", codeInfo.destinationPath, fileBaseName);
         }
 
         // constructor
@@ -2302,9 +2319,25 @@ public abstract class DataDstUEBase extends DataDstImpl {
         // 初始化Empty
         sourceFs.write(dumpString(String.format("    U%s::ClearRow(this->Empty);\r\n", helperClazzName)));
         if (enableDataTable) {
+            sourceFs.write(dumpString("    this->DataTable = nullptr;\r\n"));
+            sourceFs.write(dumpString("    this->EnableDefaultLoader = true;\r\n"));
+        }
+        sourceFs.write(dumpString("}\r\n\r\n"));
+
+        if (enableDataTable) {
+            // OnReload()
+            sourceFs.write(dumpString(String.format("void U%s::OnReload()\r\n", helperClazzName)));
+            sourceFs.write(dumpString("{\r\n"));
+            sourceFs.write(dumpString("    // TODO Rebuild Index\r\n"));
+            sourceFs.write(dumpString("}\r\n\r\n"));
+
+            // void SetLoader(TSharedPtr<ConstructorHelpers::FObjectFinder<UDataTable> >
+            // NewLoader);
             sourceFs.write(dumpString(String.format(
-                    "    this->Loader = MakeShareable(new ConstructorHelpers::FObjectFinder<UDataTable>(TEXT(\"DataTable'/Game/%s'\")));\r\n",
-                    helperDestination)));
+                    "void U%s::SetLoader(TSharedPtr<ConstructorHelpers::FObjectFinder<UDataTable> > NewLoader)\r\n",
+                    helperClazzName)));
+            sourceFs.write(dumpString("{\r\n"));
+            sourceFs.write(dumpString("    this->Loader = NewLoader;\r\n"));
             // 初始化事件监听
             sourceFs.write(dumpString("    if (this->Loader && this->Loader->Succeeded())\r\n"));
             sourceFs.write(dumpString("    {\r\n"));
@@ -2318,14 +2351,26 @@ public abstract class DataDstUEBase extends DataDstImpl {
             sourceFs.write(dumpString("    {\r\n"));
             sourceFs.write(dumpString("        this->DataTable = nullptr;\r\n"));
             sourceFs.write(dumpString("    }\r\n"));
-        }
-        sourceFs.write(dumpString("}\r\n\r\n"));
+            sourceFs.write(dumpString("}\r\n\r\n"));
 
-        if (enableDataTable) {
-            // OnReload()
-            sourceFs.write(dumpString(String.format("void U%s::OnReload()\r\n", helperClazzName)));
+            // void InitializeDefaultLoader() const;
+            sourceFs.write(dumpString(String.format("void U%s::InitializeDefaultLoader() const\r\n", helperClazzName,
+                    codeInfo.clazzName)));
             sourceFs.write(dumpString("{\r\n"));
-            sourceFs.write(dumpString("    // TODO Rebuild Index\r\n"));
+            sourceFs.write(dumpString("    if (!this->EnableDefaultLoader) {\r\n"));
+            sourceFs.write(dumpString("        return;\r\n"));
+            sourceFs.write(dumpString("    }\r\n"));
+            sourceFs.write(dumpString("    this->EnableDefaultLoader = false;\r\n"));
+            sourceFs.write(dumpString(String.format(
+                    "    const_cast<U%s*>(this)->SetLoader(MakeShareable(new ConstructorHelpers::FObjectFinder<UDataTable>(TEXT(\"DataTable'/Game/%s'\"))););\r\n",
+                    helperClazzName, helperDestination)));
+            sourceFs.write(dumpString("}\r\n\r\n"));
+
+            // void DisableDefaultLoader();
+            sourceFs.write(dumpString(
+                    String.format("void U%s::DisableDefaultLoader()\r\n", helperClazzName, codeInfo.clazzName)));
+            sourceFs.write(dumpString("{\r\n"));
+            sourceFs.write(dumpString("    this->EnableDefaultLoader = false;\r\n"));
             sourceFs.write(dumpString("}\r\n\r\n"));
 
             // GetRowName(...)
@@ -2357,6 +2402,10 @@ public abstract class DataDstUEBase extends DataDstImpl {
                             codeInfo.clazzName, helperClazzName, varIsValidName)));
             sourceFs.write(dumpString("{\r\n"));
             sourceFs.write(dumpString(String.format("    %s = false;\r\n", varIsValidName)));
+            sourceFs.write(dumpString(
+                    "    if (!this->DataTable && this->EnableDefaultLoader && !this->Loader.IsValid()) {\r\n"));
+            sourceFs.write(dumpString("        this->InitializeDefaultLoader();\r\n"));
+            sourceFs.write(dumpString("    }\r\n"));
             sourceFs.write(dumpString("    if (!this->DataTable) {\r\n"));
             sourceFs.write(dumpString("        return this->Empty;\r\n"));
             sourceFs.write(dumpString("    }\r\n"));
@@ -2386,6 +2435,10 @@ public abstract class DataDstUEBase extends DataDstImpl {
                     "bool U%s::ForeachRow(TFunctionRef<void (const FName& Key, const %s& Value)> Predicate) const\r\n",
                     helperClazzName, codeInfo.clazzName)));
             sourceFs.write(dumpString("{\r\n"));
+            sourceFs.write(dumpString(
+                    "    if (!this->DataTable && this->EnableDefaultLoader && !this->Loader.IsValid()) {\r\n"));
+            sourceFs.write(dumpString("        this->InitializeDefaultLoader();\r\n"));
+            sourceFs.write(dumpString("    }\r\n"));
             sourceFs.write(dumpString("    if (!this->DataTable) {\r\n"));
             sourceFs.write(dumpString("        return false;\r\n"));
             sourceFs.write(dumpString("    }\r\n"));
@@ -2400,6 +2453,10 @@ public abstract class DataDstUEBase extends DataDstImpl {
                     helperClazzName, varIsValidName)));
             sourceFs.write(dumpString("{\r\n"));
             sourceFs.write(dumpString(String.format("    %s = false;\r\n", varIsValidName)));
+            sourceFs.write(dumpString(
+                    "    if (!this->DataTable && this->EnableDefaultLoader && !this->Loader.IsValid()) {\r\n"));
+            sourceFs.write(dumpString("        this->InitializeDefaultLoader();\r\n"));
+            sourceFs.write(dumpString("    }\r\n"));
             sourceFs.write(dumpString("    if (!this->DataTable) {\r\n"));
             sourceFs.write(dumpString("        return NULL;\r\n"));
             sourceFs.write(dumpString("    }\r\n"));
@@ -2496,6 +2553,7 @@ public abstract class DataDstUEBase extends DataDstImpl {
         sourceFs.write(dumpString("{\r\n"));
         sourceFs.write(dumpString(String.format("    U%s::ClearRow(TableRow);\r\n", helperClazzName)));
         sourceFs.write(dumpString("}\r\n\r\n"));
+
         sourceFs.close();
     }
 }

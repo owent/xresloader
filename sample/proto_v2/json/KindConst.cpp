@@ -39,8 +39,8 @@ void UKindConstHelper::InitializeDefaultLoader() const
     if (!this->EnableDefaultLoader) {
         return;
     }
-    this->EnableDefaultLoader = false;
-    const_cast<UKindConstHelper*>(this)->SetLoader(MakeShareable(new ConstructorHelpers::FObjectFinder<UDataTable>(TEXT("DataTable'/Game/DataTable/KindConst'"))););
+    const_cast<UKindConstHelper*>(this)->EnableDefaultLoader = false;
+    const_cast<UKindConstHelper*>(this)->SetLoader(MakeShareable(new ConstructorHelpers::FObjectFinder<UDataTable>(TEXT("DataTable'/Game/DataTable/KindConst'"))));
 }
 
 void UKindConstHelper::DisableDefaultLoader()

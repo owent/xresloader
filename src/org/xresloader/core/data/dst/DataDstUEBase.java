@@ -2360,9 +2360,10 @@ public abstract class DataDstUEBase extends DataDstImpl {
             sourceFs.write(dumpString("    if (!this->EnableDefaultLoader) {\r\n"));
             sourceFs.write(dumpString("        return;\r\n"));
             sourceFs.write(dumpString("    }\r\n"));
-            sourceFs.write(dumpString("    this->EnableDefaultLoader = false;\r\n"));
+            sourceFs.write(dumpString(
+                    String.format("    const_cast<U%s*>(this)->EnableDefaultLoader = false;\r\n", helperClazzName)));
             sourceFs.write(dumpString(String.format(
-                    "    const_cast<U%s*>(this)->SetLoader(MakeShareable(new ConstructorHelpers::FObjectFinder<UDataTable>(TEXT(\"DataTable'/Game/%s'\"))););\r\n",
+                    "    const_cast<U%s*>(this)->SetLoader(MakeShareable(new ConstructorHelpers::FObjectFinder<UDataTable>(TEXT(\"DataTable'/Game/%s'\"))));\r\n",
                     helperClazzName, helperDestination)));
             sourceFs.write(dumpString("}\r\n\r\n"));
 

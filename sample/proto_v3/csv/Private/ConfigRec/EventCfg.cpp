@@ -41,8 +41,8 @@ void UEventCfgHelper::InitializeDefaultLoader() const
     if (!this->EnableDefaultLoader) {
         return;
     }
-    this->EnableDefaultLoader = false;
-    const_cast<UEventCfgHelper*>(this)->SetLoader(MakeShareable(new ConstructorHelpers::FObjectFinder<UDataTable>(TEXT("DataTable'/Game/ConfigRec/EventCfgRec'"))););
+    const_cast<UEventCfgHelper*>(this)->EnableDefaultLoader = false;
+    const_cast<UEventCfgHelper*>(this)->SetLoader(MakeShareable(new ConstructorHelpers::FObjectFinder<UDataTable>(TEXT("DataTable'/Game/ConfigRec/EventCfgRec'"))));
 }
 
 void UEventCfgHelper::DisableDefaultLoader()

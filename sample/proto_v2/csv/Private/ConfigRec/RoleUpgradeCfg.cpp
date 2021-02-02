@@ -41,8 +41,8 @@ void URoleUpgradeCfgHelper::InitializeDefaultLoader() const
     if (!this->EnableDefaultLoader) {
         return;
     }
-    this->EnableDefaultLoader = false;
-    const_cast<URoleUpgradeCfgHelper*>(this)->SetLoader(MakeShareable(new ConstructorHelpers::FObjectFinder<UDataTable>(TEXT("DataTable'/Game/ConfigRec/RoleUpgradeCfgRec'"))););
+    const_cast<URoleUpgradeCfgHelper*>(this)->EnableDefaultLoader = false;
+    const_cast<URoleUpgradeCfgHelper*>(this)->SetLoader(MakeShareable(new ConstructorHelpers::FObjectFinder<UDataTable>(TEXT("DataTable'/Game/ConfigRec/RoleUpgradeCfgRec'"))));
 }
 
 void URoleUpgradeCfgHelper::DisableDefaultLoader()

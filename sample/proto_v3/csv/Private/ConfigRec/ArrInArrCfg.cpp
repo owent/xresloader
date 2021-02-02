@@ -41,8 +41,8 @@ void UArrInArrCfgHelper::InitializeDefaultLoader() const
     if (!this->EnableDefaultLoader) {
         return;
     }
-    this->EnableDefaultLoader = false;
-    const_cast<UArrInArrCfgHelper*>(this)->SetLoader(MakeShareable(new ConstructorHelpers::FObjectFinder<UDataTable>(TEXT("DataTable'/Game/ConfigRec/ArrInArrCfgRec'"))););
+    const_cast<UArrInArrCfgHelper*>(this)->EnableDefaultLoader = false;
+    const_cast<UArrInArrCfgHelper*>(this)->SetLoader(MakeShareable(new ConstructorHelpers::FObjectFinder<UDataTable>(TEXT("DataTable'/Game/ConfigRec/ArrInArrCfgRec'"))));
 }
 
 void UArrInArrCfgHelper::DisableDefaultLoader()

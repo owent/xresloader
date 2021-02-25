@@ -1325,17 +1325,19 @@ public class DataDstPb extends DataDstImpl {
             case FLOAT:
                 dumpValue(builder, fd, Float.valueOf(0));
                 break;
-            case INT64:
-            case UINT64:
             case INT32:
-            case FIXED64:
             case FIXED32:
             case UINT32:
             case SFIXED32:
-            case SFIXED64:
             case SINT32:
+                dumpValue(builder, fd, Integer.valueOf(0));
+                break;
+            case INT64:
+            case UINT64:
+            case FIXED64:
+            case SFIXED64:
             case SINT64:
-                dumpValue(builder, fd, 0);
+                dumpValue(builder, fd, Long.valueOf(0));
                 break;
             case ENUM:
                 dumpValue(builder, fd, fd.getEnumType().findValueByNumber(0));

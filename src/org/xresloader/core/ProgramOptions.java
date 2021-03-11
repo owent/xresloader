@@ -50,6 +50,7 @@ public class ProgramOptions {
     public boolean enableAliasMapping = false;
     public boolean enableFormular = true;
     public boolean enbleEmptyList = false;
+    public boolean StripEmptyList = false;
     public int prettyIndent = 0;
     public boolean enableStdin = false;
 
@@ -99,6 +100,7 @@ public class ProgramOptions {
         enableAliasMapping = false;
         enableFormular = true;
         enbleEmptyList = false;
+        StripEmptyList = false;
         prettyIndent = 0;
         enableStdin = false;
         dataVersion = null;
@@ -196,6 +198,10 @@ public class ProgramOptions {
                 "[default] remove empty elements in a list or repeated field.");
         options.addOption(null, "enable-empty-list", false,
                 "keep empty elements in a list or repeated field with default value.");
+        options.addOption(null, "disstrip-empty-list", false,
+                "[default] strip empty elements in a list or repeated field.");
+        options.addOption(null, "strip-empty-list", false,
+                "[default] strip empty elements in a list or repeated field.");
         options.addOption(null, "stdin", false, "enable read from stdin and convert more files.");
         options.addOption(null, "lua-global", false, "add data to _G if in lua mode when print const data");
         options.addOption(null, "lua-module", true, "module(MODULE_NAME, package.seeall) if in lua mode");
@@ -256,6 +262,12 @@ public class ProgramOptions {
             enbleEmptyList = false;
         } else if (cmd.hasOption("enable-empty-list")) {
             enbleEmptyList = true;
+        }
+
+        if (cmd.hasOption("disstrip-empty-list")) {
+            StripEmptyList = false;
+        } else if (cmd.hasOption("strip-empty-list")) {
+            StripEmptyList = true;
         }
 
         // target type
@@ -426,6 +438,12 @@ public class ProgramOptions {
             enbleEmptyList = false;
         } else if (cmd.hasOption("enable-empty-list")) {
             enbleEmptyList = true;
+        }
+
+        if (cmd.hasOption("disstrip-empty-list")) {
+            StripEmptyList = false;
+        } else if (cmd.hasOption("strip-empty-list")) {
+            StripEmptyList = true;
         }
 
         return 0;

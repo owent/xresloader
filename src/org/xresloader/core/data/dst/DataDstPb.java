@@ -11,9 +11,11 @@ import java.nio.charset.Charset;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Map;
 import com.google.protobuf.ByteString;
 import com.google.protobuf.DescriptorProtos;
@@ -1286,6 +1288,45 @@ public class DataDstPb extends DataDstImpl {
         }
     }
 
+    private void dumpValue(DynamicMessage.Builder builder, Descriptors.FieldDescriptor fd, Object val, int index) {
+        if (fd.isRepeated() == false || ProgramOptions.getInstance().StripEmptyList == false)
+        {
+            return ;
+        }
+        if (JavaType.ENUM == fd.getJavaType()) {
+            Descriptors.EnumValueDescriptor enum_val = null;
+            if (val instanceof Descriptors.EnumValueDescriptor) {
+                enum_val = (Descriptors.EnumValueDescriptor) val;
+            } else {
+                val = get_enum_value(cachePbs, fd.getEnumType(), (Integer) val);
+            }
+
+            if (null == enum_val) {
+                return;
+            }
+            
+            int size = builder.getRepeatedFieldCount(fd);
+            for (int i = size; i <= index; i++) {
+                if (size == index) {
+                    builder.addRepeatedField(fd, enum_val);
+                } else {
+                    dumpDefault(builder, fd, i);
+                }
+            }
+        } else {
+            int size = builder.getRepeatedFieldCount(fd);
+            for (int i = size; i <= index; i++) {
+                if (i == index) {
+                    builder.addRepeatedField(fd, val);
+                    // ProgramOptions.getLoger().warn("Try to add val [%d] to index [%d], size: [%d].", val, i, builder.getRepeatedFieldCount(fd));
+                } else {
+                    dumpDefault(builder, fd, i);
+                    // ProgramOptions.getLoger().warn("Try to add default val to index [%d].", i);
+                }
+            }
+        }
+    }
+
     private void dumpValue(DynamicMessage.Builder builder, Descriptors.FieldDescriptor fd, Object val) {
         if (JavaType.ENUM == fd.getJavaType()) {
             Descriptors.EnumValueDescriptor enum_val = null;
@@ -1315,6 +1356,62 @@ public class DataDstPb extends DataDstImpl {
 
     private void dumpDefault(DynamicMessage.Builder builder, Descriptors.OneofDescriptor fd) {
         builder.clearOneof(fd);
+    }
+
+    private void dumpDefault(DynamicMessage.Builder builder, Descriptors.FieldDescriptor fd, int index) {
+        if (fd.isRepeated() == false || ProgramOptions.getInstance().StripEmptyList == false) {
+            return ;
+        }
+        switch (fd.getType()) {
+            case DOUBLE:
+                dumpValue(builder, fd, Double.valueOf(0.0), index);
+                break;
+            case FLOAT:
+                dumpValue(builder, fd, Float.valueOf(0), index);
+                break;
+            case INT32:
+            case FIXED32:
+            case UINT32:
+            case SFIXED32:
+            case SINT32:
+                dumpValue(builder, fd, Integer.valueOf(0), index);
+                break;
+            case INT64:
+            case UINT64:
+            case FIXED64:
+            case SFIXED64:
+            case SINT64:
+                dumpValue(builder, fd, Long.valueOf(0), index);
+                break;
+            case ENUM:
+                dumpValue(builder, fd, fd.getEnumType().findValueByNumber(0), index);
+                break;
+            case BOOL:
+                dumpValue(builder, fd, false, index);
+                break;
+            case STRING:
+                dumpValue(builder, fd, "", index);
+                break;
+            case GROUP:
+                dumpValue(builder, fd, new byte[0], index);
+                break;
+            case MESSAGE: {
+                DynamicMessage.Builder subnode = DynamicMessage.newBuilder(fd.getMessageType());
+
+                // fill required
+                for (Descriptors.FieldDescriptor sub_fd : fd.getMessageType().getFields()) {
+                    if (checkFieldIsRequired(sub_fd) || ProgramOptions.getInstance().enbleEmptyList) {
+                        dumpDefault(subnode, sub_fd);
+                    }
+                }
+
+                dumpValue(builder, fd, subnode.build(), index);
+                break;
+            }
+            case BYTES:
+                dumpValue(builder, fd, new byte[0], index);
+                break;
+        }
     }
 
     private void dumpDefault(DynamicMessage.Builder builder, Descriptors.FieldDescriptor fd) {
@@ -1395,6 +1492,18 @@ public class DataDstPb extends DataDstImpl {
                     // 不需要提示，如果从其他方式解包协议描述的时候可能有可选字段丢失的
                     continue;
                 }
+                
+                if (ProgramOptions.getInstance().StripEmptyList)
+                {
+                    // strip array field null value
+                    for (int index = 0; index < c.getValue().nodes.size(); index++) {
+                        DataDstWriterNode child = c.getValue().nodes.get(index);
+                        if (dumpStandardField(builder, child, fd, index)) {
+                            ret = true;
+                        }
+                    }   
+                    continue;
+                }
 
                 for (DataDstWriterNode child : c.getValue().nodes) {
                     if (dumpStandardField(builder, child, fd)) {
@@ -1411,6 +1520,113 @@ public class DataDstPb extends DataDstImpl {
         }
 
         return ret;
+    }
+
+    private boolean dumpStandardField(DynamicMessage.Builder builder, DataDstWriterNode desc,
+    Descriptors.FieldDescriptor fd, int index) throws ConvException {
+        if (fd.isRepeated() == false || ProgramOptions.getInstance().StripEmptyList == false) {
+            return dumpStandardField(builder, desc, fd);
+        }
+
+        if (null == desc.identify && MESSAGE != fd.getJavaType()) {
+            return false;
+        }
+
+        Object val = null;
+
+        switch (fd.getJavaType()) {
+            case INT: {
+                DataContainer<Long> ret = DataSrcImpl.getOurInstance().getValue(desc.identify, 0L);
+                if (null != ret && ret.valid) {
+                    val = ret.value.intValue();
+                }
+                break;
+            }
+
+            case LONG: {
+                DataContainer<Long> ret = DataSrcImpl.getOurInstance().getValue(desc.identify, 0L);
+                if (null != ret && ret.valid) {
+                    val = ret.value.longValue();
+                }
+                break;
+            }
+
+            case FLOAT: {
+                DataContainer<Double> ret = DataSrcImpl.getOurInstance().getValue(desc.identify, 0.0);
+                if (null != ret && ret.valid) {
+                    val = ret.value.floatValue();
+                }
+                break;
+            }
+
+            case DOUBLE: {
+                DataContainer<Double> ret = DataSrcImpl.getOurInstance().getValue(desc.identify, 0.0);
+                if (null != ret && ret.valid) {
+                    val = ret.value.doubleValue();
+                }
+                break;
+            }
+
+            case BOOLEAN: {
+                DataContainer<Boolean> ret = DataSrcImpl.getOurInstance().getValue(desc.identify, false);
+                if (null != ret && ret.valid) {
+                    val = ret.value.booleanValue();
+                }
+                break;
+            }
+
+            case STRING: {
+                DataContainer<String> ret = DataSrcImpl.getOurInstance().getValue(desc.identify, "");
+                if (null != ret && ret.valid) {
+                    val = ret.value;
+                }
+                break;
+            }
+
+            case BYTE_STRING: {
+                DataContainer<String> res = DataSrcImpl.getOurInstance().getValue(desc.identify, "");
+                if (null != res && res.valid) {
+                    String encoding = SchemeConf.getInstance().getKey().getEncoding();
+                    if (null == encoding || encoding.isEmpty()) {
+                        val = com.google.protobuf.ByteString.copyFrom(res.value.getBytes());
+                    } else {
+                        val = com.google.protobuf.ByteString.copyFrom(res.value.getBytes(Charset.forName(encoding)));
+                    }
+                }
+                break;
+            }
+            case ENUM: {
+                DataContainer<Long> ret = DataSrcImpl.getOurInstance().getValue(desc.identify, 0L);
+                if (null != ret && ret.valid) {
+                    val = fd.getEnumType().findValueByNumber(ret.value.intValue());
+                }
+
+                break;
+            }
+
+            case MESSAGE: {
+                DynamicMessage.Builder node = DynamicMessage.newBuilder(fd.getMessageType());
+                if (dumpMessage(node, desc)) {
+                    try {
+                        val = node.build();
+                    } catch (UninitializedMessageException e) {
+                        this.logErrorMessage("serialize %s(%s) failed. %s", fd.getFullName(),
+                                fd.getMessageType().getName(), e.getMessage());
+                    }
+                }
+                break;
+            }
+
+            default:
+                break;
+        }
+
+        if (null == val) {
+            return false;
+        }
+
+        dumpValue(builder, fd, val, index);
+        return true;
     }
 
     private boolean dumpStandardField(DynamicMessage.Builder builder, DataDstWriterNode desc,

@@ -132,6 +132,54 @@ public abstract class DataDstJava extends DataDstImpl {
 
         return ret;
     }
+    
+    private Object GetDefault(DataDstWriterNode.DataDstChildrenNode as_child) {
+        DataDstWriterNode.DataDstFieldDescriptor field = as_child.innerFieldDesc;
+        Object val = null;
+        switch (field.getType()) {
+            case INT:
+                val = Integer.valueOf(0);
+                break;
+            case LONG:
+                val = Long.valueOf(0);
+                break;
+            case BOOLEAN:
+                val = Boolean.FALSE;
+                break;
+            case STRING:
+                val = "";
+                break;
+            case BYTES:
+                val = new byte[0];
+                break;
+            case FLOAT:
+                val = Float.valueOf(0);
+                break;
+            case DOUBLE:
+                val = Double.valueOf(0);
+                break;
+            case MESSAGE: {
+                HashMap<String, Object> sub_msg = new HashMap<String, Object>();
+                for (Map.Entry<String, DataDstWriterNode.DataDstFieldDescriptor> sub_item : field
+                        .getTypeDescriptor().fields.entrySet()) {
+                    if (sub_item.getValue().isRequired() || ProgramOptions.getInstance().enbleEmptyList) {
+                        dumpDefault(sub_msg, sub_item.getValue());
+                    }
+                }
+                val = sub_msg;
+                break;
+            }
+            default:
+                break;
+        }
+
+        if (null == val) {
+            this.logErrorMessage("serialize failed. %s is not supported for java default value",
+                    field.getType().toString());
+            return null;
+        }
+        return val;
+    }
 
     private void dumpDefault(HashMap<String, Object> builder, DataDstWriterNode.DataDstChildrenNode as_child) {
         dumpDefault(builder, as_child.innerFieldDesc);
@@ -226,6 +274,17 @@ public abstract class DataDstJava extends DataDstImpl {
                     }
                 }
             } else if (c.getValue().mode == DataDstWriterNode.CHILD_NODE_TYPE.STANDARD) {
+                if (ProgramOptions.getInstance().StripEmptyList) {
+                    // strip array field null value
+                    for (int index = 0; index < c.getValue().nodes.size(); index++) {
+                        DataDstWriterNode child = c.getValue().nodes.get(index);
+                        if (dumpStandardField(builder, child, c.getValue(), index)) {
+                            ret = true;
+                        }
+                    }   
+                    continue;
+                }   
+
                 for (DataDstWriterNode child : c.getValue().nodes) {
                     if (dumpStandardField(builder, child, c.getValue())) {
                         ret = true;
@@ -241,6 +300,112 @@ public abstract class DataDstJava extends DataDstImpl {
         }
 
         return ret;
+    }
+
+    @SuppressWarnings("unchecked")
+    private boolean dumpStandardField(HashMap<String, Object> builder, DataDstWriterNode desc,
+            DataDstWriterNode.DataDstChildrenNode as_child, int index) throws ConvException {
+        if (as_child.innerFieldDesc.isMap() || as_child.innerFieldDesc.isList() == false || ProgramOptions.getInstance().StripEmptyList == false) {
+            return dumpStandardField(builder, desc, as_child);
+        }
+
+        if (null == desc.identify && DataDstWriterNode.JAVA_TYPE.MESSAGE != desc.getType()) {
+            return false;
+        }
+
+        Object val = null;
+        switch (desc.getType()) {
+            case INT: {
+                DataContainer<Long> ret = DataSrcImpl.getOurInstance().getValue(desc.identify, 0L);
+                if (null != ret && ret.valid) {
+                    val = ret.value.intValue();
+                }
+                break;
+            }
+
+            case LONG: {
+                DataContainer<Long> ret = DataSrcImpl.getOurInstance().getValue(desc.identify, 0L);
+                if (null != ret && ret.valid) {
+                    val = ret.value.longValue();
+                }
+                break;
+            }
+
+            case FLOAT: {
+                DataContainer<Double> ret = DataSrcImpl.getOurInstance().getValue(desc.identify, 0.0);
+                if (null != ret && ret.valid) {
+                    val = ret.value.floatValue();
+                }
+                break;
+            }
+
+            case DOUBLE: {
+                DataContainer<Double> ret = DataSrcImpl.getOurInstance().getValue(desc.identify, 0.0);
+                if (null != ret && ret.valid) {
+                    val = ret.value.doubleValue();
+                }
+                break;
+            }
+
+            case BOOLEAN: {
+                DataContainer<Boolean> ret = DataSrcImpl.getOurInstance().getValue(desc.identify, false);
+                if (null != ret && ret.valid) {
+                    val = ret.value.booleanValue();
+                }
+                break;
+            }
+
+            case STRING: {
+                DataContainer<String> ret = DataSrcImpl.getOurInstance().getValue(desc.identify, "");
+                if (null != ret && ret.valid) {
+                    val = ret.value;
+                }
+                break;
+            }
+
+            case BYTES: {
+                DataContainer<String> res = DataSrcImpl.getOurInstance().getValue(desc.identify, "");
+                if (null != res && res.valid) {
+                    String encoding = SchemeConf.getInstance().getKey().getEncoding();
+                    if (null == encoding || encoding.isEmpty()) {
+                        val = com.google.protobuf.ByteString.copyFrom(res.value.getBytes());
+                    } else {
+                        val = com.google.protobuf.ByteString.copyFrom(res.value.getBytes(Charset.forName(encoding)));
+                    }
+                }
+                break;
+            }
+
+            case MESSAGE: {
+                HashMap<String, Object> node = new HashMap<String, Object>();
+                if (dumpMessage(node, desc)) {
+                    val = node;
+                }
+                break;
+            }
+
+            default:
+                break;
+        }
+
+        if (null == val) {
+            return false;
+        }
+
+        ArrayList<Object> old = (ArrayList<Object>) builder.getOrDefault(as_child.innerFieldDesc.getName(), null);
+        if (null == old) {
+            old = new ArrayList<Object>();
+            builder.put(as_child.innerFieldDesc.getName(), old);
+        }
+        for (int i = old.size(); i <= index; i++) {
+            if (i == index) {
+                old.add(val);
+            } else {
+                old.add(GetDefault(as_child));
+            }
+        }
+
+        return true;
     }
 
     @SuppressWarnings("unchecked")

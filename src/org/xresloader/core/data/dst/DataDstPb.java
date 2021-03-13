@@ -1286,7 +1286,10 @@ public class DataDstPb extends DataDstImpl {
         }
     }
 
-    private void dumpValue(DynamicMessage.Builder builder, Descriptors.FieldDescriptor fd, Object val) {
+    private void dumpValue(DynamicMessage.Builder builder, Descriptors.FieldDescriptor fd, Object val, int index) {
+        if (fd.isRepeated() == false || ProgramOptions.getInstance().stripEmptyList == false) {
+            return ;
+        }
         if (JavaType.ENUM == fd.getJavaType()) {
             Descriptors.EnumValueDescriptor enum_val = null;
             if (val instanceof Descriptors.EnumValueDescriptor) {
@@ -1298,58 +1301,73 @@ public class DataDstPb extends DataDstImpl {
             if (null == enum_val) {
                 return;
             }
-
-            if (fd.isRepeated()) {
-                builder.addRepeatedField(fd, enum_val);
-            } else {
-                builder.setField(fd, enum_val);
+            
+            int size = builder.getRepeatedFieldCount(fd);
+            for (int i = size; i <= index; i++) {
+                if (size == index) {
+                    builder.addRepeatedField(fd, enum_val);
+                } else {
+                    dumpDefault(builder, fd, i);
+                }
             }
         } else {
-            if (fd.isRepeated()) {
-                builder.addRepeatedField(fd, val);
-            } else {
-                builder.setField(fd, val);
+            int size = builder.getRepeatedFieldCount(fd);
+            for (int i = size; i <= index; i++) {
+                if (i == index) {
+                    builder.addRepeatedField(fd, val);
+                    // ProgramOptions.getLoger().warn("Try to add val [%d] to index [%d], size: [%d].", val, i, builder.getRepeatedFieldCount(fd));
+                } else {
+                    dumpDefault(builder, fd, i);
+                    // ProgramOptions.getLoger().warn("Try to add default val to index [%d].", i);
+                }
             }
         }
     }
 
-    private void dumpDefault(DynamicMessage.Builder builder, Descriptors.OneofDescriptor fd) {
-        builder.clearOneof(fd);
+    private void dumpDefault(DynamicMessage.Builder builder, Descriptors.FieldDescriptor fd, int index) {
+        if (fd.isRepeated() == false || ProgramOptions.getInstance().stripEmptyList == false) {
+            return ;
+        }
+        Object val = getDefault(builder, fd);
+        if (val != null) {
+            dumpValue(builder, fd, val, index);
+        }
     }
 
-    private void dumpDefault(DynamicMessage.Builder builder, Descriptors.FieldDescriptor fd) {
+    private Object getDefault(DynamicMessage.Builder builder, Descriptors.FieldDescriptor fd) {
+        Object val = null;
         switch (fd.getType()) {
             case DOUBLE:
-                dumpValue(builder, fd, Double.valueOf(0.0));
+                val = Double.valueOf(0.0);
                 break;
             case FLOAT:
-                dumpValue(builder, fd, Float.valueOf(0));
+                val = Float.valueOf(0);
                 break;
             case INT32:
             case FIXED32:
             case UINT32:
             case SFIXED32:
             case SINT32:
-                dumpValue(builder, fd, Integer.valueOf(0));
+                val = Integer.valueOf(0);
                 break;
             case INT64:
             case UINT64:
             case FIXED64:
             case SFIXED64:
             case SINT64:
-                dumpValue(builder, fd, Long.valueOf(0));
+                val = Long.valueOf(0);
                 break;
             case ENUM:
-                dumpValue(builder, fd, fd.getEnumType().findValueByNumber(0));
+                val = fd.getEnumType().findValueByNumber(0);
                 break;
             case BOOL:
-                dumpValue(builder, fd, false);
+                val = false;
                 break;
             case STRING:
-                dumpValue(builder, fd, "");
+                val = "";
                 break;
             case GROUP:
-                dumpValue(builder, fd, new byte[0]);
+                val = new byte[0];
                 break;
             case MESSAGE: {
                 DynamicMessage.Builder subnode = DynamicMessage.newBuilder(fd.getMessageType());
@@ -1361,68 +1379,17 @@ public class DataDstPb extends DataDstImpl {
                     }
                 }
 
-                dumpValue(builder, fd, subnode.build());
+                val = subnode.build();
                 break;
             }
             case BYTES:
-                dumpValue(builder, fd, new byte[0]);
+                val = new byte[0];
                 break;
         }
+        return val;
     }
 
-    /**
-     * 转储数据到builder
-     *
-     * @param builder 转储目标
-     * @param node    message的描述结构
-     * @return 有数据则返回true
-     * @throws ConvException
-     */
-    private boolean dumpMessage(DynamicMessage.Builder builder, DataDstWriterNode node) throws ConvException {
-        boolean ret = false;
-
-        for (Map.Entry<String, DataDstWriterNode.DataDstChildrenNode> c : node.getChildren().entrySet()) {
-            if (c.getValue().isOneof()) {
-                // dump oneof data
-                for (DataDstWriterNode child : c.getValue().nodes) {
-                    if (dumpPlainField(builder, child.identify, child.getOneofDescriptor(), true)) {
-                        ret = true;
-                    }
-                }
-            } else if (c.getValue().mode == DataDstWriterNode.CHILD_NODE_TYPE.STANDARD) {
-                Descriptors.FieldDescriptor fd = (Descriptors.FieldDescriptor) c.getValue().rawDescriptor;
-                if (null == fd) {
-                    // 不需要提示，如果从其他方式解包协议描述的时候可能有可选字段丢失的
-                    continue;
-                }
-
-                for (DataDstWriterNode child : c.getValue().nodes) {
-                    if (dumpStandardField(builder, child, fd)) {
-                        ret = true;
-                    }
-                }
-            } else if (c.getValue().mode == DataDstWriterNode.CHILD_NODE_TYPE.PLAIN) {
-                for (DataDstWriterNode child : c.getValue().nodes) {
-                    if (dumpPlainField(builder, child.identify, child.getFieldDescriptor(), true)) {
-                        ret = true;
-                    }
-                }
-            }
-        }
-
-        return ret;
-    }
-
-    private boolean dumpStandardField(DynamicMessage.Builder builder, DataDstWriterNode desc,
-            Descriptors.FieldDescriptor fd) throws ConvException {
-        if (null == desc.identify && MESSAGE != fd.getJavaType()) {
-            // required 空字段填充默认值
-            if (fd.isRepeated() || ProgramOptions.getInstance().enbleEmptyList) {
-                dumpDefault(builder, fd);
-            }
-            return false;
-        }
-
+    private Object getValFromDataSrc(DataDstWriterNode desc, Descriptors.FieldDescriptor fd) throws ConvException {
         Object val = null;
 
         switch (fd.getJavaType()) {
@@ -1511,6 +1478,122 @@ public class DataDstPb extends DataDstImpl {
             default:
                 break;
         }
+        return val;
+    }
+
+    private void dumpValue(DynamicMessage.Builder builder, Descriptors.FieldDescriptor fd, Object val) {
+        if (JavaType.ENUM == fd.getJavaType()) {
+            Descriptors.EnumValueDescriptor enum_val = null;
+            if (val instanceof Descriptors.EnumValueDescriptor) {
+                enum_val = (Descriptors.EnumValueDescriptor) val;
+            } else {
+                val = get_enum_value(cachePbs, fd.getEnumType(), (Integer) val);
+            }
+
+            if (null == enum_val) {
+                return;
+            }
+
+            if (fd.isRepeated()) {
+                builder.addRepeatedField(fd, enum_val);
+            } else {
+                builder.setField(fd, enum_val);
+            }
+        } else {
+            if (fd.isRepeated()) {
+                builder.addRepeatedField(fd, val);
+            } else {
+                builder.setField(fd, val);
+            }
+        }
+    }
+
+    private void dumpDefault(DynamicMessage.Builder builder, Descriptors.OneofDescriptor fd) {
+        builder.clearOneof(fd);
+    }
+
+    private void dumpDefault(DynamicMessage.Builder builder, Descriptors.FieldDescriptor fd) {
+        Object val = getDefault(builder, fd);
+        if (val != null) {
+            dumpValue(builder, fd, val);
+        }
+    }
+
+    /**
+     * 转储数据到builder
+     *
+     * @param builder 转储目标
+     * @param node    message的描述结构
+     * @return 有数据则返回true
+     * @throws ConvException
+     */
+    private boolean dumpMessage(DynamicMessage.Builder builder, DataDstWriterNode node) throws ConvException {
+        boolean ret = false;
+
+        for (Map.Entry<String, DataDstWriterNode.DataDstChildrenNode> c : node.getChildren().entrySet()) {
+            if (c.getValue().isOneof()) {
+                // dump oneof data
+                for (DataDstWriterNode child : c.getValue().nodes) {
+                    if (dumpPlainField(builder, child.identify, child.getOneofDescriptor(), true)) {
+                        ret = true;
+                    }
+                }
+            } else if (c.getValue().mode == DataDstWriterNode.CHILD_NODE_TYPE.STANDARD) {
+                Descriptors.FieldDescriptor fd = (Descriptors.FieldDescriptor) c.getValue().rawDescriptor;
+                if (null == fd) {
+                    // 不需要提示，如果从其他方式解包协议描述的时候可能有可选字段丢失的
+                    continue;
+                }
+
+                for (int index = 0; index < c.getValue().nodes.size(); index++) {
+                    DataDstWriterNode child = c.getValue().nodes.get(index);
+                    if (dumpStandardField(builder, child, fd, index)) {
+                        ret = true;
+                    }
+                }
+            } else if (c.getValue().mode == DataDstWriterNode.CHILD_NODE_TYPE.PLAIN) {
+                for (DataDstWriterNode child : c.getValue().nodes) {
+                    if (dumpPlainField(builder, child.identify, child.getFieldDescriptor(), true)) {
+                        ret = true;
+                    }
+                }
+            }
+        }
+
+        return ret;
+    }
+
+    private boolean dumpStandardField(DynamicMessage.Builder builder, DataDstWriterNode desc,
+    Descriptors.FieldDescriptor fd, int index) throws ConvException {
+        if (fd.isRepeated() == false || ProgramOptions.getInstance().stripEmptyList == false) {
+            return dumpStandardField(builder, desc, fd);
+        }
+
+        if (null == desc.identify && MESSAGE != fd.getJavaType()) {
+            return false;
+        }
+
+        Object val = getValFromDataSrc(desc, fd);
+
+        if (null == val) {
+            return false;
+        }
+
+        dumpValue(builder, fd, val, index);
+        return true;
+    }
+
+    private boolean dumpStandardField(DynamicMessage.Builder builder, DataDstWriterNode desc,
+            Descriptors.FieldDescriptor fd) throws ConvException {
+        if (null == desc.identify && MESSAGE != fd.getJavaType()) {
+            // required 空字段填充默认值
+            if (fd.isRepeated() || ProgramOptions.getInstance().enbleEmptyList) {
+                dumpDefault(builder, fd);
+            }
+            return false;
+        }
+
+        Object val = getValFromDataSrc(desc, fd);
 
         if (null == val) {
             if (checkFieldIsRequired(fd) || ProgramOptions.getInstance().enbleEmptyList) {

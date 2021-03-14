@@ -104,3 +104,13 @@ message event_cfg {
     repeated event_rule_item test_arr       = 91 [ (org.xresloader.field_separator) = ";" ];
     repeated event_rule_item test_empty_arr = 92 [ (org.xresloader.field_separator) = ";" ];
 }
+
+message keep_or_strip_empty_list_cfg {
+    option (org.xresloader.ue.helper)         = "helper";
+
+    optional uint32   key             = 1 [ (org.xresloader.ue.key_tag) = 1, (org.xresloader.field_description) = "This is a Key" ];
+    repeated dep2_cfg array_msg       = 2;
+    repeated dep2_cfg array_plain_msg = 3;
+    repeated int32 array_int32        = 4;
+    repeated int64 array_int64        = 5;
+}

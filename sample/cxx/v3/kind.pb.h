@@ -54,7 +54,7 @@ struct TableStruct_kind_2eproto {
     PROTOBUF_SECTION_VARIABLE(protodesc_cold);
   static const ::PROTOBUF_NAMESPACE_ID::internal::AuxiliaryParseTableField aux[]
     PROTOBUF_SECTION_VARIABLE(protodesc_cold);
-  static const ::PROTOBUF_NAMESPACE_ID::internal::ParseTable schema[11]
+  static const ::PROTOBUF_NAMESPACE_ID::internal::ParseTable schema[12]
     PROTOBUF_SECTION_VARIABLE(protodesc_cold);
   static const ::PROTOBUF_NAMESPACE_ID::internal::FieldMetadata field_metadata[];
   static const ::PROTOBUF_NAMESPACE_ID::internal::SerializationTable serialization_table[];
@@ -85,6 +85,9 @@ extern event_reward_itemDefaultTypeInternal _event_reward_item_default_instance_
 class event_rule_item;
 class event_rule_itemDefaultTypeInternal;
 extern event_rule_itemDefaultTypeInternal _event_rule_item_default_instance_;
+class keep_or_strip_empty_list_cfg;
+class keep_or_strip_empty_list_cfgDefaultTypeInternal;
+extern keep_or_strip_empty_list_cfgDefaultTypeInternal _keep_or_strip_empty_list_cfg_default_instance_;
 class role_cfg;
 class role_cfgDefaultTypeInternal;
 extern role_cfgDefaultTypeInternal _role_cfg_default_instance_;
@@ -103,6 +106,7 @@ template<> ::arr_in_arr_test_nested_message* Arena::CreateMaybeMessage<::arr_in_
 template<> ::event_cfg* Arena::CreateMaybeMessage<::event_cfg>(Arena*);
 template<> ::event_reward_item* Arena::CreateMaybeMessage<::event_reward_item>(Arena*);
 template<> ::event_rule_item* Arena::CreateMaybeMessage<::event_rule_item>(Arena*);
+template<> ::keep_or_strip_empty_list_cfg* Arena::CreateMaybeMessage<::keep_or_strip_empty_list_cfg>(Arena*);
 template<> ::role_cfg* Arena::CreateMaybeMessage<::role_cfg>(Arena*);
 template<> ::role_upgrade_cfg* Arena::CreateMaybeMessage<::role_upgrade_cfg>(Arena*);
 template<> ::test_msg_verifier* Arena::CreateMaybeMessage<::test_msg_verifier>(Arena*);
@@ -2325,6 +2329,232 @@ class event_cfg PROTOBUF_FINAL :
   mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
   ::PROTOBUF_NAMESPACE_ID::uint32 _oneof_case_[2];
 
+  friend struct ::TableStruct_kind_2eproto;
+};
+// -------------------------------------------------------------------
+
+class keep_or_strip_empty_list_cfg PROTOBUF_FINAL :
+    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:keep_or_strip_empty_list_cfg) */ {
+ public:
+  inline keep_or_strip_empty_list_cfg() : keep_or_strip_empty_list_cfg(nullptr) {}
+  virtual ~keep_or_strip_empty_list_cfg();
+
+  keep_or_strip_empty_list_cfg(const keep_or_strip_empty_list_cfg& from);
+  keep_or_strip_empty_list_cfg(keep_or_strip_empty_list_cfg&& from) noexcept
+    : keep_or_strip_empty_list_cfg() {
+    *this = ::std::move(from);
+  }
+
+  inline keep_or_strip_empty_list_cfg& operator=(const keep_or_strip_empty_list_cfg& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  inline keep_or_strip_empty_list_cfg& operator=(keep_or_strip_empty_list_cfg&& from) noexcept {
+    if (GetArena() == from.GetArena()) {
+      if (this != &from) InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* descriptor() {
+    return GetDescriptor();
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* GetDescriptor() {
+    return GetMetadataStatic().descriptor;
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Reflection* GetReflection() {
+    return GetMetadataStatic().reflection;
+  }
+  static const keep_or_strip_empty_list_cfg& default_instance();
+
+  static inline const keep_or_strip_empty_list_cfg* internal_default_instance() {
+    return reinterpret_cast<const keep_or_strip_empty_list_cfg*>(
+               &_keep_or_strip_empty_list_cfg_default_instance_);
+  }
+  static constexpr int kIndexInFileMessages =
+    11;
+
+  friend void swap(keep_or_strip_empty_list_cfg& a, keep_or_strip_empty_list_cfg& b) {
+    a.Swap(&b);
+  }
+  inline void Swap(keep_or_strip_empty_list_cfg* other) {
+    if (other == this) return;
+    if (GetArena() == other->GetArena()) {
+      InternalSwap(other);
+    } else {
+      ::PROTOBUF_NAMESPACE_ID::internal::GenericSwap(this, other);
+    }
+  }
+  void UnsafeArenaSwap(keep_or_strip_empty_list_cfg* other) {
+    if (other == this) return;
+    GOOGLE_DCHECK(GetArena() == other->GetArena());
+    InternalSwap(other);
+  }
+
+  // implements Message ----------------------------------------------
+
+  inline keep_or_strip_empty_list_cfg* New() const final {
+    return CreateMaybeMessage<keep_or_strip_empty_list_cfg>(nullptr);
+  }
+
+  keep_or_strip_empty_list_cfg* New(::PROTOBUF_NAMESPACE_ID::Arena* arena) const final {
+    return CreateMaybeMessage<keep_or_strip_empty_list_cfg>(arena);
+  }
+  void CopyFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) final;
+  void MergeFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) final;
+  void CopyFrom(const keep_or_strip_empty_list_cfg& from);
+  void MergeFrom(const keep_or_strip_empty_list_cfg& from);
+  PROTOBUF_ATTRIBUTE_REINITIALIZES void Clear() final;
+  bool IsInitialized() const final;
+
+  size_t ByteSizeLong() const final;
+  const char* _InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) final;
+  ::PROTOBUF_NAMESPACE_ID::uint8* _InternalSerialize(
+      ::PROTOBUF_NAMESPACE_ID::uint8* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const final;
+  int GetCachedSize() const final { return _cached_size_.Get(); }
+
+  private:
+  inline void SharedCtor();
+  inline void SharedDtor();
+  void SetCachedSize(int size) const final;
+  void InternalSwap(keep_or_strip_empty_list_cfg* other);
+  friend class ::PROTOBUF_NAMESPACE_ID::internal::AnyMetadata;
+  static ::PROTOBUF_NAMESPACE_ID::StringPiece FullMessageName() {
+    return "keep_or_strip_empty_list_cfg";
+  }
+  protected:
+  explicit keep_or_strip_empty_list_cfg(::PROTOBUF_NAMESPACE_ID::Arena* arena);
+  private:
+  static void ArenaDtor(void* object);
+  inline void RegisterArenaDtor(::PROTOBUF_NAMESPACE_ID::Arena* arena);
+  public:
+
+  ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadata() const final;
+  private:
+  static ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadataStatic() {
+    ::PROTOBUF_NAMESPACE_ID::internal::AssignDescriptors(&::descriptor_table_kind_2eproto);
+    return ::descriptor_table_kind_2eproto.file_level_metadata[kIndexInFileMessages];
+  }
+
+  public:
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  enum : int {
+    kArrayMsgFieldNumber = 2,
+    kArrayPlainMsgFieldNumber = 3,
+    kArrayInt32FieldNumber = 4,
+    kArrayInt64FieldNumber = 5,
+    kKeyFieldNumber = 1,
+  };
+  // repeated .dep2_cfg array_msg = 2;
+  int array_msg_size() const;
+  private:
+  int _internal_array_msg_size() const;
+  public:
+  void clear_array_msg();
+  ::dep2_cfg* mutable_array_msg(int index);
+  ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::dep2_cfg >*
+      mutable_array_msg();
+  private:
+  const ::dep2_cfg& _internal_array_msg(int index) const;
+  ::dep2_cfg* _internal_add_array_msg();
+  public:
+  const ::dep2_cfg& array_msg(int index) const;
+  ::dep2_cfg* add_array_msg();
+  const ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::dep2_cfg >&
+      array_msg() const;
+
+  // repeated .dep2_cfg array_plain_msg = 3;
+  int array_plain_msg_size() const;
+  private:
+  int _internal_array_plain_msg_size() const;
+  public:
+  void clear_array_plain_msg();
+  ::dep2_cfg* mutable_array_plain_msg(int index);
+  ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::dep2_cfg >*
+      mutable_array_plain_msg();
+  private:
+  const ::dep2_cfg& _internal_array_plain_msg(int index) const;
+  ::dep2_cfg* _internal_add_array_plain_msg();
+  public:
+  const ::dep2_cfg& array_plain_msg(int index) const;
+  ::dep2_cfg* add_array_plain_msg();
+  const ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::dep2_cfg >&
+      array_plain_msg() const;
+
+  // repeated int32 array_int32 = 4;
+  int array_int32_size() const;
+  private:
+  int _internal_array_int32_size() const;
+  public:
+  void clear_array_int32();
+  private:
+  ::PROTOBUF_NAMESPACE_ID::int32 _internal_array_int32(int index) const;
+  const ::PROTOBUF_NAMESPACE_ID::RepeatedField< ::PROTOBUF_NAMESPACE_ID::int32 >&
+      _internal_array_int32() const;
+  void _internal_add_array_int32(::PROTOBUF_NAMESPACE_ID::int32 value);
+  ::PROTOBUF_NAMESPACE_ID::RepeatedField< ::PROTOBUF_NAMESPACE_ID::int32 >*
+      _internal_mutable_array_int32();
+  public:
+  ::PROTOBUF_NAMESPACE_ID::int32 array_int32(int index) const;
+  void set_array_int32(int index, ::PROTOBUF_NAMESPACE_ID::int32 value);
+  void add_array_int32(::PROTOBUF_NAMESPACE_ID::int32 value);
+  const ::PROTOBUF_NAMESPACE_ID::RepeatedField< ::PROTOBUF_NAMESPACE_ID::int32 >&
+      array_int32() const;
+  ::PROTOBUF_NAMESPACE_ID::RepeatedField< ::PROTOBUF_NAMESPACE_ID::int32 >*
+      mutable_array_int32();
+
+  // repeated int64 array_int64 = 5;
+  int array_int64_size() const;
+  private:
+  int _internal_array_int64_size() const;
+  public:
+  void clear_array_int64();
+  private:
+  ::PROTOBUF_NAMESPACE_ID::int64 _internal_array_int64(int index) const;
+  const ::PROTOBUF_NAMESPACE_ID::RepeatedField< ::PROTOBUF_NAMESPACE_ID::int64 >&
+      _internal_array_int64() const;
+  void _internal_add_array_int64(::PROTOBUF_NAMESPACE_ID::int64 value);
+  ::PROTOBUF_NAMESPACE_ID::RepeatedField< ::PROTOBUF_NAMESPACE_ID::int64 >*
+      _internal_mutable_array_int64();
+  public:
+  ::PROTOBUF_NAMESPACE_ID::int64 array_int64(int index) const;
+  void set_array_int64(int index, ::PROTOBUF_NAMESPACE_ID::int64 value);
+  void add_array_int64(::PROTOBUF_NAMESPACE_ID::int64 value);
+  const ::PROTOBUF_NAMESPACE_ID::RepeatedField< ::PROTOBUF_NAMESPACE_ID::int64 >&
+      array_int64() const;
+  ::PROTOBUF_NAMESPACE_ID::RepeatedField< ::PROTOBUF_NAMESPACE_ID::int64 >*
+      mutable_array_int64();
+
+  // uint32 key = 1 [(.org.xresloader.field_description) = "This is a Key", (.org.xresloader.ue.key_tag) = 1];
+  void clear_key();
+  ::PROTOBUF_NAMESPACE_ID::uint32 key() const;
+  void set_key(::PROTOBUF_NAMESPACE_ID::uint32 value);
+  private:
+  ::PROTOBUF_NAMESPACE_ID::uint32 _internal_key() const;
+  void _internal_set_key(::PROTOBUF_NAMESPACE_ID::uint32 value);
+  public:
+
+  // @@protoc_insertion_point(class_scope:keep_or_strip_empty_list_cfg)
+ private:
+  class _Internal;
+
+  template <typename T> friend class ::PROTOBUF_NAMESPACE_ID::Arena::InternalHelper;
+  typedef void InternalArenaConstructable_;
+  typedef void DestructorSkippable_;
+  ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::dep2_cfg > array_msg_;
+  ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::dep2_cfg > array_plain_msg_;
+  ::PROTOBUF_NAMESPACE_ID::RepeatedField< ::PROTOBUF_NAMESPACE_ID::int32 > array_int32_;
+  mutable std::atomic<int> _array_int32_cached_byte_size_;
+  ::PROTOBUF_NAMESPACE_ID::RepeatedField< ::PROTOBUF_NAMESPACE_ID::int64 > array_int64_;
+  mutable std::atomic<int> _array_int64_cached_byte_size_;
+  ::PROTOBUF_NAMESPACE_ID::uint32 key_;
+  mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
   friend struct ::TableStruct_kind_2eproto;
 };
 // ===================================================================
@@ -4654,9 +4884,201 @@ inline event_cfg::RewardCase event_cfg::reward_case() const {
 inline event_cfg::UnlockTypeCase event_cfg::unlock_type_case() const {
   return event_cfg::UnlockTypeCase(_oneof_case_[1]);
 }
+// -------------------------------------------------------------------
+
+// keep_or_strip_empty_list_cfg
+
+// uint32 key = 1 [(.org.xresloader.field_description) = "This is a Key", (.org.xresloader.ue.key_tag) = 1];
+inline void keep_or_strip_empty_list_cfg::clear_key() {
+  key_ = 0u;
+}
+inline ::PROTOBUF_NAMESPACE_ID::uint32 keep_or_strip_empty_list_cfg::_internal_key() const {
+  return key_;
+}
+inline ::PROTOBUF_NAMESPACE_ID::uint32 keep_or_strip_empty_list_cfg::key() const {
+  // @@protoc_insertion_point(field_get:keep_or_strip_empty_list_cfg.key)
+  return _internal_key();
+}
+inline void keep_or_strip_empty_list_cfg::_internal_set_key(::PROTOBUF_NAMESPACE_ID::uint32 value) {
+  
+  key_ = value;
+}
+inline void keep_or_strip_empty_list_cfg::set_key(::PROTOBUF_NAMESPACE_ID::uint32 value) {
+  _internal_set_key(value);
+  // @@protoc_insertion_point(field_set:keep_or_strip_empty_list_cfg.key)
+}
+
+// repeated .dep2_cfg array_msg = 2;
+inline int keep_or_strip_empty_list_cfg::_internal_array_msg_size() const {
+  return array_msg_.size();
+}
+inline int keep_or_strip_empty_list_cfg::array_msg_size() const {
+  return _internal_array_msg_size();
+}
+inline ::dep2_cfg* keep_or_strip_empty_list_cfg::mutable_array_msg(int index) {
+  // @@protoc_insertion_point(field_mutable:keep_or_strip_empty_list_cfg.array_msg)
+  return array_msg_.Mutable(index);
+}
+inline ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::dep2_cfg >*
+keep_or_strip_empty_list_cfg::mutable_array_msg() {
+  // @@protoc_insertion_point(field_mutable_list:keep_or_strip_empty_list_cfg.array_msg)
+  return &array_msg_;
+}
+inline const ::dep2_cfg& keep_or_strip_empty_list_cfg::_internal_array_msg(int index) const {
+  return array_msg_.Get(index);
+}
+inline const ::dep2_cfg& keep_or_strip_empty_list_cfg::array_msg(int index) const {
+  // @@protoc_insertion_point(field_get:keep_or_strip_empty_list_cfg.array_msg)
+  return _internal_array_msg(index);
+}
+inline ::dep2_cfg* keep_or_strip_empty_list_cfg::_internal_add_array_msg() {
+  return array_msg_.Add();
+}
+inline ::dep2_cfg* keep_or_strip_empty_list_cfg::add_array_msg() {
+  // @@protoc_insertion_point(field_add:keep_or_strip_empty_list_cfg.array_msg)
+  return _internal_add_array_msg();
+}
+inline const ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::dep2_cfg >&
+keep_or_strip_empty_list_cfg::array_msg() const {
+  // @@protoc_insertion_point(field_list:keep_or_strip_empty_list_cfg.array_msg)
+  return array_msg_;
+}
+
+// repeated .dep2_cfg array_plain_msg = 3;
+inline int keep_or_strip_empty_list_cfg::_internal_array_plain_msg_size() const {
+  return array_plain_msg_.size();
+}
+inline int keep_or_strip_empty_list_cfg::array_plain_msg_size() const {
+  return _internal_array_plain_msg_size();
+}
+inline ::dep2_cfg* keep_or_strip_empty_list_cfg::mutable_array_plain_msg(int index) {
+  // @@protoc_insertion_point(field_mutable:keep_or_strip_empty_list_cfg.array_plain_msg)
+  return array_plain_msg_.Mutable(index);
+}
+inline ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::dep2_cfg >*
+keep_or_strip_empty_list_cfg::mutable_array_plain_msg() {
+  // @@protoc_insertion_point(field_mutable_list:keep_or_strip_empty_list_cfg.array_plain_msg)
+  return &array_plain_msg_;
+}
+inline const ::dep2_cfg& keep_or_strip_empty_list_cfg::_internal_array_plain_msg(int index) const {
+  return array_plain_msg_.Get(index);
+}
+inline const ::dep2_cfg& keep_or_strip_empty_list_cfg::array_plain_msg(int index) const {
+  // @@protoc_insertion_point(field_get:keep_or_strip_empty_list_cfg.array_plain_msg)
+  return _internal_array_plain_msg(index);
+}
+inline ::dep2_cfg* keep_or_strip_empty_list_cfg::_internal_add_array_plain_msg() {
+  return array_plain_msg_.Add();
+}
+inline ::dep2_cfg* keep_or_strip_empty_list_cfg::add_array_plain_msg() {
+  // @@protoc_insertion_point(field_add:keep_or_strip_empty_list_cfg.array_plain_msg)
+  return _internal_add_array_plain_msg();
+}
+inline const ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::dep2_cfg >&
+keep_or_strip_empty_list_cfg::array_plain_msg() const {
+  // @@protoc_insertion_point(field_list:keep_or_strip_empty_list_cfg.array_plain_msg)
+  return array_plain_msg_;
+}
+
+// repeated int32 array_int32 = 4;
+inline int keep_or_strip_empty_list_cfg::_internal_array_int32_size() const {
+  return array_int32_.size();
+}
+inline int keep_or_strip_empty_list_cfg::array_int32_size() const {
+  return _internal_array_int32_size();
+}
+inline void keep_or_strip_empty_list_cfg::clear_array_int32() {
+  array_int32_.Clear();
+}
+inline ::PROTOBUF_NAMESPACE_ID::int32 keep_or_strip_empty_list_cfg::_internal_array_int32(int index) const {
+  return array_int32_.Get(index);
+}
+inline ::PROTOBUF_NAMESPACE_ID::int32 keep_or_strip_empty_list_cfg::array_int32(int index) const {
+  // @@protoc_insertion_point(field_get:keep_or_strip_empty_list_cfg.array_int32)
+  return _internal_array_int32(index);
+}
+inline void keep_or_strip_empty_list_cfg::set_array_int32(int index, ::PROTOBUF_NAMESPACE_ID::int32 value) {
+  array_int32_.Set(index, value);
+  // @@protoc_insertion_point(field_set:keep_or_strip_empty_list_cfg.array_int32)
+}
+inline void keep_or_strip_empty_list_cfg::_internal_add_array_int32(::PROTOBUF_NAMESPACE_ID::int32 value) {
+  array_int32_.Add(value);
+}
+inline void keep_or_strip_empty_list_cfg::add_array_int32(::PROTOBUF_NAMESPACE_ID::int32 value) {
+  _internal_add_array_int32(value);
+  // @@protoc_insertion_point(field_add:keep_or_strip_empty_list_cfg.array_int32)
+}
+inline const ::PROTOBUF_NAMESPACE_ID::RepeatedField< ::PROTOBUF_NAMESPACE_ID::int32 >&
+keep_or_strip_empty_list_cfg::_internal_array_int32() const {
+  return array_int32_;
+}
+inline const ::PROTOBUF_NAMESPACE_ID::RepeatedField< ::PROTOBUF_NAMESPACE_ID::int32 >&
+keep_or_strip_empty_list_cfg::array_int32() const {
+  // @@protoc_insertion_point(field_list:keep_or_strip_empty_list_cfg.array_int32)
+  return _internal_array_int32();
+}
+inline ::PROTOBUF_NAMESPACE_ID::RepeatedField< ::PROTOBUF_NAMESPACE_ID::int32 >*
+keep_or_strip_empty_list_cfg::_internal_mutable_array_int32() {
+  return &array_int32_;
+}
+inline ::PROTOBUF_NAMESPACE_ID::RepeatedField< ::PROTOBUF_NAMESPACE_ID::int32 >*
+keep_or_strip_empty_list_cfg::mutable_array_int32() {
+  // @@protoc_insertion_point(field_mutable_list:keep_or_strip_empty_list_cfg.array_int32)
+  return _internal_mutable_array_int32();
+}
+
+// repeated int64 array_int64 = 5;
+inline int keep_or_strip_empty_list_cfg::_internal_array_int64_size() const {
+  return array_int64_.size();
+}
+inline int keep_or_strip_empty_list_cfg::array_int64_size() const {
+  return _internal_array_int64_size();
+}
+inline void keep_or_strip_empty_list_cfg::clear_array_int64() {
+  array_int64_.Clear();
+}
+inline ::PROTOBUF_NAMESPACE_ID::int64 keep_or_strip_empty_list_cfg::_internal_array_int64(int index) const {
+  return array_int64_.Get(index);
+}
+inline ::PROTOBUF_NAMESPACE_ID::int64 keep_or_strip_empty_list_cfg::array_int64(int index) const {
+  // @@protoc_insertion_point(field_get:keep_or_strip_empty_list_cfg.array_int64)
+  return _internal_array_int64(index);
+}
+inline void keep_or_strip_empty_list_cfg::set_array_int64(int index, ::PROTOBUF_NAMESPACE_ID::int64 value) {
+  array_int64_.Set(index, value);
+  // @@protoc_insertion_point(field_set:keep_or_strip_empty_list_cfg.array_int64)
+}
+inline void keep_or_strip_empty_list_cfg::_internal_add_array_int64(::PROTOBUF_NAMESPACE_ID::int64 value) {
+  array_int64_.Add(value);
+}
+inline void keep_or_strip_empty_list_cfg::add_array_int64(::PROTOBUF_NAMESPACE_ID::int64 value) {
+  _internal_add_array_int64(value);
+  // @@protoc_insertion_point(field_add:keep_or_strip_empty_list_cfg.array_int64)
+}
+inline const ::PROTOBUF_NAMESPACE_ID::RepeatedField< ::PROTOBUF_NAMESPACE_ID::int64 >&
+keep_or_strip_empty_list_cfg::_internal_array_int64() const {
+  return array_int64_;
+}
+inline const ::PROTOBUF_NAMESPACE_ID::RepeatedField< ::PROTOBUF_NAMESPACE_ID::int64 >&
+keep_or_strip_empty_list_cfg::array_int64() const {
+  // @@protoc_insertion_point(field_list:keep_or_strip_empty_list_cfg.array_int64)
+  return _internal_array_int64();
+}
+inline ::PROTOBUF_NAMESPACE_ID::RepeatedField< ::PROTOBUF_NAMESPACE_ID::int64 >*
+keep_or_strip_empty_list_cfg::_internal_mutable_array_int64() {
+  return &array_int64_;
+}
+inline ::PROTOBUF_NAMESPACE_ID::RepeatedField< ::PROTOBUF_NAMESPACE_ID::int64 >*
+keep_or_strip_empty_list_cfg::mutable_array_int64() {
+  // @@protoc_insertion_point(field_mutable_list:keep_or_strip_empty_list_cfg.array_int64)
+  return _internal_mutable_array_int64();
+}
+
 #ifdef __GNUC__
   #pragma GCC diagnostic pop
 #endif  // __GNUC__
+// -------------------------------------------------------------------
+
 // -------------------------------------------------------------------
 
 // -------------------------------------------------------------------

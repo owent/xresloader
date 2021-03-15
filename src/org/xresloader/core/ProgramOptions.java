@@ -3,6 +3,7 @@ package org.xresloader.core;
 import org.apache.commons.cli.*;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.apache.poi.xddf.usermodel.text.StrikeType;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -49,8 +50,7 @@ public class ProgramOptions {
     public boolean requireMappingAllFields = false;
     public boolean enableAliasMapping = false;
     public boolean enableFormular = true;
-    public boolean enbleEmptyList = false;
-    public boolean stripEmptyList = false;
+    public ListStripRule stripListRule = ListStripRule.STRIP_EMPTY_ALL;
     public int prettyIndent = 0;
     public boolean enableStdin = false;
 
@@ -99,8 +99,7 @@ public class ProgramOptions {
         requireMappingAllFields = false;
         enableAliasMapping = false;
         enableFormular = true;
-        enbleEmptyList = false;
-        stripEmptyList = false;
+        stripListRule = ListStripRule.STRIP_EMPTY_ALL;
         prettyIndent = 0;
         enableStdin = false;
         dataVersion = null;
@@ -195,13 +194,15 @@ public class ProgramOptions {
         options.addOption(null, "enable-excel-formular", false,
                 "[default] enable formular in excel. will be slower when convert data.");
         options.addOption(null, "disable-empty-list", false,
-                "[default] remove empty elements in a list or repeated field.");
+                "[deprecated] remove empty elements in a list or repeated field,please use --list-strip-all-empty.");
         options.addOption(null, "enable-empty-list", false,
+                "[deprecated] keep empty elements in a list or repeated field with default value,please use --list-keep-empty.");
+        options.addOption(null, "list-strip-all-empty", false,
+                "[default] remove all empty elements in a list or repeated field.");
+        options.addOption(null, "list-keep-empty", false,
                 "keep empty elements in a list or repeated field with default value.");
-        options.addOption(null, "disstrip-empty-list", false,
-                "[default] strip empty elements in a list or repeated field.");
-        options.addOption(null, "strip-empty-list", false,
-                "[default] strip empty elements in a list or repeated field.");
+        options.addOption(null, "list-strip-empty-tail", false,
+                "remove all tail empty elements in a list or repeated field.");
         options.addOption(null, "stdin", false, "enable read from stdin and convert more files.");
         options.addOption(null, "lua-global", false, "add data to _G if in lua mode when print const data");
         options.addOption(null, "lua-module", true, "module(MODULE_NAME, package.seeall) if in lua mode");
@@ -258,16 +259,12 @@ public class ProgramOptions {
             return 1;
         }
 
-        if (cmd.hasOption("disable-empty-list")) {
-            enbleEmptyList = false;
-        } else if (cmd.hasOption("enable-empty-list")) {
-            enbleEmptyList = true;
-        }
-
-        if (cmd.hasOption("disstrip-empty-list")) {
-            stripEmptyList = false;
-        } else if (cmd.hasOption("strip-empty-list")) {
-            stripEmptyList = true;
+        if (cmd.hasOption("enable-empty-list") || cmd.hasOption("list-keep-empty")) {
+            stripListRule = ListStripRule.KEEP_ALL;
+        } else if (cmd.hasOption("list-strip-empty-tail")) {
+            stripListRule = ListStripRule.STRIP_EMPTY_TAIL;
+        } else {
+            stripListRule = ListStripRule.STRIP_EMPTY_ALL;
         }
 
         // target type
@@ -434,18 +431,6 @@ public class ProgramOptions {
             enableFormular = true;
         }
 
-        if (cmd.hasOption("disable-empty-list")) {
-            enbleEmptyList = false;
-        } else if (cmd.hasOption("enable-empty-list")) {
-            enbleEmptyList = true;
-        }
-
-        if (cmd.hasOption("disstrip-empty-list")) {
-            stripEmptyList = false;
-        } else if (cmd.hasOption("strip-empty-list")) {
-            stripEmptyList = true;
-        }
-
         return 0;
     }
 
@@ -498,6 +483,10 @@ public class ProgramOptions {
 
     public enum ProtoDumpType {
         NONE, CONST, OPTIONS
+    }
+
+    public enum ListStripRule {
+        STRIP_EMPTY_ALL, STRIP_EMPTY_TAIL, KEEP_ALL,
     }
 
     static public Logger getLoger() {

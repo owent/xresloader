@@ -873,36 +873,36 @@ public class DataDstPb extends DataDstImpl {
 
     static DataDstWriterNode.JAVA_TYPE pbTypeToInnerType(Descriptors.FieldDescriptor.Type t) {
         switch (t) {
-            case DOUBLE:
-                return DataDstWriterNode.JAVA_TYPE.DOUBLE;
-            case FLOAT:
-                return DataDstWriterNode.JAVA_TYPE.FLOAT;
-            case INT32:
-            case FIXED32:
-            case UINT32:
-            case SFIXED32:
-            case SINT32:
-                return DataDstWriterNode.JAVA_TYPE.INT;
-            case INT64:
-            case UINT64:
-            case FIXED64:
-            case SFIXED64:
-            case SINT64:
-                return DataDstWriterNode.JAVA_TYPE.LONG;
-            case BOOL:
-                return DataDstWriterNode.JAVA_TYPE.BOOLEAN;
-            case STRING:
-                return DataDstWriterNode.JAVA_TYPE.STRING;
-            case GROUP:
-            case BYTES:
-                return DataDstWriterNode.JAVA_TYPE.BYTES;
-            case MESSAGE:
-                return DataDstWriterNode.JAVA_TYPE.MESSAGE;
-            case ENUM:
-                return DataDstWriterNode.JAVA_TYPE.INT;
+        case DOUBLE:
+            return DataDstWriterNode.JAVA_TYPE.DOUBLE;
+        case FLOAT:
+            return DataDstWriterNode.JAVA_TYPE.FLOAT;
+        case INT32:
+        case FIXED32:
+        case UINT32:
+        case SFIXED32:
+        case SINT32:
+            return DataDstWriterNode.JAVA_TYPE.INT;
+        case INT64:
+        case UINT64:
+        case FIXED64:
+        case SFIXED64:
+        case SINT64:
+            return DataDstWriterNode.JAVA_TYPE.LONG;
+        case BOOL:
+            return DataDstWriterNode.JAVA_TYPE.BOOLEAN;
+        case STRING:
+            return DataDstWriterNode.JAVA_TYPE.STRING;
+        case GROUP:
+        case BYTES:
+            return DataDstWriterNode.JAVA_TYPE.BYTES;
+        case MESSAGE:
+            return DataDstWriterNode.JAVA_TYPE.MESSAGE;
+        case ENUM:
+            return DataDstWriterNode.JAVA_TYPE.INT;
 
-            default:
-                return DataDstWriterNode.JAVA_TYPE.INT;
+        default:
+            return DataDstWriterNode.JAVA_TYPE.INT;
         }
     }
 
@@ -972,106 +972,33 @@ public class DataDstPb extends DataDstImpl {
                 field_alias = fd.getOptions().getExtension(Xresloader.fieldAlias);
             }
             switch (fd.getType()) {
-                // 复杂类型还需要检测子节点
-                case MESSAGE:
-                    if (fd.isRepeated()) {
-                        int count = 0;
-                        String repeated_test_name = null;
+            // 复杂类型还需要检测子节点
+            case MESSAGE:
+                if (fd.isRepeated()) {
+                    int count = 0;
+                    String repeated_test_name = null;
 
-                        name_list.addLast("");
-                        for (;; ++count) {
-                            if (0 == count) {
-                                repeated_test_name = fd.getName();
-                            }
-
-                            DataDstWriterNode c = createMessageWriterNode(cachePbs, fd.getMessageType(),
-                                    DataDstWriterNode.JAVA_TYPE.MESSAGE);
-                            boolean test_passed = false;
-
-                            name_list.removeLast();
-                            name_list.addLast(DataDstWriterNode.makeNodeName(repeated_test_name, count));
-                            if (test(c, name_list)) {
-                                child = node.addChild(fd.getName(), c, fd, DataDstWriterNode.CHILD_NODE_TYPE.STANDARD);
-                                ret = true;
-                                test_passed = true;
-                            } else if (0 == count && null != field_alias) {
-                                repeated_test_name = field_alias;
-                                name_list.removeLast();
-                                name_list.addLast(DataDstWriterNode.makeNodeName(repeated_test_name, count));
-                                if (test(c, name_list)) {
-                                    child = node.addChild(fd.getName(), c, fd,
-                                            DataDstWriterNode.CHILD_NODE_TYPE.STANDARD);
-                                    ret = true;
-                                    test_passed = true;
-                                }
-                            }
-
-                            if (!test_passed) {
-                                // Reset to field name when test first element
-                                if (0 == count) {
-                                    repeated_test_name = fd.getName();
-                                }
-                                // try plain mode - array item
-                                String real_name = DataDstWriterNode.makeChildPath(prefix, repeated_test_name, count);
-                                IdentifyDescriptor col = data_src.getColumnByName(real_name);
-                                if (null == col && 0 == count && null != field_alias) {
-                                    repeated_test_name = field_alias;
-                                    String alias_name = DataDstWriterNode.makeChildPath(prefix, repeated_test_name,
-                                            count);
-                                    col = data_src.getColumnByName(alias_name);
-                                }
-
-                                if (null != col) {
-                                    child = node.addChild(fd.getName(), c, fd, DataDstWriterNode.CHILD_NODE_TYPE.PLAIN);
-                                    setup_node_identify(c, child, col, fd);
-                                    ret = true;
-                                } else {
-                                    break;
-                                }
-                            }
+                    name_list.addLast("");
+                    for (;; ++count) {
+                        if (0 == count) {
+                            repeated_test_name = fd.getName();
                         }
-                        name_list.removeLast();
 
-                        if (count > 0) {
-                            filterMissingFields(missingFields, oneofField, fd, false);
-                        } else {
-                            // try plain mode - the whole array
-                            String real_name = DataDstWriterNode.makeChildPath(prefix, fd.getName());
-                            IdentifyDescriptor col = data_src.getColumnByName(real_name);
-
-                            if (null == col && null != field_alias) {
-                                String alias_name = DataDstWriterNode.makeChildPath(prefix, field_alias);
-                                col = data_src.getColumnByName(alias_name);
-                            }
-
-                            if (null != col) {
-                                DataDstWriterNode c = createMessageWriterNode(cachePbs, fd.getMessageType(),
-                                        DataDstWriterNode.JAVA_TYPE.MESSAGE);
-                                child = node.addChild(fd.getName(), c, fd, DataDstWriterNode.CHILD_NODE_TYPE.PLAIN);
-                                setup_node_identify(c, child, col, fd);
-                                ret = true;
-
-                                filterMissingFields(missingFields, oneofField, fd, false);
-                            } else {
-                                filterMissingFields(missingFields, oneofField, fd, true);
-                            }
-                        }
-                    } else {
                         DataDstWriterNode c = createMessageWriterNode(cachePbs, fd.getMessageType(),
                                 DataDstWriterNode.JAVA_TYPE.MESSAGE);
                         boolean test_passed = false;
 
-                        name_list.addLast(DataDstWriterNode.makeNodeName(fd.getName()));
+                        name_list.removeLast();
+                        name_list.addLast(DataDstWriterNode.makeNodeName(repeated_test_name, count));
                         if (test(c, name_list)) {
-                            filterMissingFields(missingFields, oneofField, fd, false);
                             child = node.addChild(fd.getName(), c, fd, DataDstWriterNode.CHILD_NODE_TYPE.STANDARD);
                             ret = true;
                             test_passed = true;
-                        } else if (null != field_alias) {
+                        } else if (0 == count && null != field_alias) {
+                            repeated_test_name = field_alias;
                             name_list.removeLast();
-                            name_list.addLast(DataDstWriterNode.makeNodeName(field_alias));
+                            name_list.addLast(DataDstWriterNode.makeNodeName(repeated_test_name, count));
                             if (test(c, name_list)) {
-                                filterMissingFields(missingFields, oneofField, fd, false);
                                 child = node.addChild(fd.getName(), c, fd, DataDstWriterNode.CHILD_NODE_TYPE.STANDARD);
                                 ret = true;
                                 test_passed = true;
@@ -1079,46 +1006,11 @@ public class DataDstPb extends DataDstImpl {
                         }
 
                         if (!test_passed) {
-                            filterMissingFields(missingFields, oneofField, fd, true);
-
-                            // try plain mode
-                            String real_name = DataDstWriterNode.makeChildPath(prefix, fd.getName());
-                            IdentifyDescriptor col = data_src.getColumnByName(real_name);
-                            if (null == col && null != field_alias) {
-                                String alias_name = DataDstWriterNode.makeChildPath(prefix, field_alias);
-                                col = data_src.getColumnByName(alias_name);
-                            }
-
-                            if (null != col) {
-                                child = node.addChild(fd.getName(), c, fd, DataDstWriterNode.CHILD_NODE_TYPE.PLAIN);
-                                setup_node_identify(c, child, col, fd);
-                                ret = true;
-
-                                filterMissingFields(missingFields, oneofField, fd, false);
-                            } else {
-                                filterMissingFields(missingFields, oneofField, fd, true);
-
-                                if (checkFieldIsRequired(fd)) {
-                                    // required 字段要dump默认数据
-                                    child = node.addChild(fd.getName(), c, fd,
-                                            DataDstWriterNode.CHILD_NODE_TYPE.STANDARD);
-                                }
-                            }
-                        }
-                        name_list.removeLast();
-                    }
-                    break;
-                default: {
-                    // list 类型
-                    DataDstWriterNode.JAVA_TYPE inner_type = pbTypeToInnerType(fd.getType());
-                    if (fd.isRepeated()) {
-                        int count = 0;
-                        String repeated_test_name = null;
-                        for (;; ++count) {
+                            // Reset to field name when test first element
                             if (0 == count) {
                                 repeated_test_name = fd.getName();
                             }
-
+                            // try plain mode - array item
                             String real_name = DataDstWriterNode.makeChildPath(prefix, repeated_test_name, count);
                             IdentifyDescriptor col = data_src.getColumnByName(real_name);
                             if (null == col && 0 == count && null != field_alias) {
@@ -1128,39 +1020,66 @@ public class DataDstPb extends DataDstImpl {
                             }
 
                             if (null != col) {
-                                DataDstWriterNode c = createMessageWriterNode(cachePbs, inner_type);
-                                child = node.addChild(fd.getName(), c, fd, DataDstWriterNode.CHILD_NODE_TYPE.STANDARD);
+                                child = node.addChild(fd.getName(), c, fd, DataDstWriterNode.CHILD_NODE_TYPE.PLAIN);
                                 setup_node_identify(c, child, col, fd);
                                 ret = true;
                             } else {
                                 break;
                             }
                         }
+                    }
+                    name_list.removeLast();
 
-                        if (count > 0) {
+                    if (count > 0) {
+                        filterMissingFields(missingFields, oneofField, fd, false);
+                    } else {
+                        // try plain mode - the whole array
+                        String real_name = DataDstWriterNode.makeChildPath(prefix, fd.getName());
+                        IdentifyDescriptor col = data_src.getColumnByName(real_name);
+
+                        if (null == col && null != field_alias) {
+                            String alias_name = DataDstWriterNode.makeChildPath(prefix, field_alias);
+                            col = data_src.getColumnByName(alias_name);
+                        }
+
+                        if (null != col) {
+                            DataDstWriterNode c = createMessageWriterNode(cachePbs, fd.getMessageType(),
+                                    DataDstWriterNode.JAVA_TYPE.MESSAGE);
+                            child = node.addChild(fd.getName(), c, fd, DataDstWriterNode.CHILD_NODE_TYPE.PLAIN);
+                            setup_node_identify(c, child, col, fd);
+                            ret = true;
+
                             filterMissingFields(missingFields, oneofField, fd, false);
                         } else {
-                            // try plain mode
-                            String real_name = DataDstWriterNode.makeChildPath(prefix, fd.getName());
-                            IdentifyDescriptor col = data_src.getColumnByName(real_name);
-                            if (null == col && null != field_alias) {
-                                String alias_name = DataDstWriterNode.makeChildPath(prefix, field_alias);
-                                col = data_src.getColumnByName(alias_name);
-                            }
-
-                            if (null != col) {
-                                DataDstWriterNode c = createMessageWriterNode(cachePbs, inner_type);
-                                child = node.addChild(fd.getName(), c, fd, DataDstWriterNode.CHILD_NODE_TYPE.PLAIN);
-                                setup_node_identify(c, child, col, fd);
-                                ret = true;
-
-                                filterMissingFields(missingFields, oneofField, fd, false);
-                            } else {
-                                filterMissingFields(missingFields, oneofField, fd, true);
-                            }
+                            filterMissingFields(missingFields, oneofField, fd, true);
                         }
-                    } else {
-                        // 非 list 类型
+                    }
+                } else {
+                    DataDstWriterNode c = createMessageWriterNode(cachePbs, fd.getMessageType(),
+                            DataDstWriterNode.JAVA_TYPE.MESSAGE);
+                    boolean test_passed = false;
+
+                    name_list.addLast(DataDstWriterNode.makeNodeName(fd.getName()));
+                    if (test(c, name_list)) {
+                        filterMissingFields(missingFields, oneofField, fd, false);
+                        child = node.addChild(fd.getName(), c, fd, DataDstWriterNode.CHILD_NODE_TYPE.STANDARD);
+                        ret = true;
+                        test_passed = true;
+                    } else if (null != field_alias) {
+                        name_list.removeLast();
+                        name_list.addLast(DataDstWriterNode.makeNodeName(field_alias));
+                        if (test(c, name_list)) {
+                            filterMissingFields(missingFields, oneofField, fd, false);
+                            child = node.addChild(fd.getName(), c, fd, DataDstWriterNode.CHILD_NODE_TYPE.STANDARD);
+                            ret = true;
+                            test_passed = true;
+                        }
+                    }
+
+                    if (!test_passed) {
+                        filterMissingFields(missingFields, oneofField, fd, true);
+
+                        // try plain mode
                         String real_name = DataDstWriterNode.makeChildPath(prefix, fd.getName());
                         IdentifyDescriptor col = data_src.getColumnByName(real_name);
                         if (null == col && null != field_alias) {
@@ -1169,22 +1088,100 @@ public class DataDstPb extends DataDstImpl {
                         }
 
                         if (null != col) {
-                            filterMissingFields(missingFields, oneofField, fd, false);
-                            DataDstWriterNode c = createMessageWriterNode(cachePbs, inner_type);
-                            child = node.addChild(fd.getName(), c, fd, DataDstWriterNode.CHILD_NODE_TYPE.STANDARD);
+                            child = node.addChild(fd.getName(), c, fd, DataDstWriterNode.CHILD_NODE_TYPE.PLAIN);
                             setup_node_identify(c, child, col, fd);
                             ret = true;
+
+                            filterMissingFields(missingFields, oneofField, fd, false);
                         } else {
                             filterMissingFields(missingFields, oneofField, fd, true);
+
                             if (checkFieldIsRequired(fd)) {
-                                DataDstWriterNode c = createMessageWriterNode(cachePbs, inner_type);
                                 // required 字段要dump默认数据
                                 child = node.addChild(fd.getName(), c, fd, DataDstWriterNode.CHILD_NODE_TYPE.STANDARD);
                             }
                         }
                     }
-                    break;
+                    name_list.removeLast();
                 }
+                break;
+            default: {
+                // list 类型
+                DataDstWriterNode.JAVA_TYPE inner_type = pbTypeToInnerType(fd.getType());
+                if (fd.isRepeated()) {
+                    int count = 0;
+                    String repeated_test_name = null;
+                    for (;; ++count) {
+                        if (0 == count) {
+                            repeated_test_name = fd.getName();
+                        }
+
+                        String real_name = DataDstWriterNode.makeChildPath(prefix, repeated_test_name, count);
+                        IdentifyDescriptor col = data_src.getColumnByName(real_name);
+                        if (null == col && 0 == count && null != field_alias) {
+                            repeated_test_name = field_alias;
+                            String alias_name = DataDstWriterNode.makeChildPath(prefix, repeated_test_name, count);
+                            col = data_src.getColumnByName(alias_name);
+                        }
+
+                        if (null != col) {
+                            DataDstWriterNode c = createMessageWriterNode(cachePbs, inner_type);
+                            child = node.addChild(fd.getName(), c, fd, DataDstWriterNode.CHILD_NODE_TYPE.STANDARD);
+                            setup_node_identify(c, child, col, fd);
+                            ret = true;
+                        } else {
+                            break;
+                        }
+                    }
+
+                    if (count > 0) {
+                        filterMissingFields(missingFields, oneofField, fd, false);
+                    } else {
+                        // try plain mode
+                        String real_name = DataDstWriterNode.makeChildPath(prefix, fd.getName());
+                        IdentifyDescriptor col = data_src.getColumnByName(real_name);
+                        if (null == col && null != field_alias) {
+                            String alias_name = DataDstWriterNode.makeChildPath(prefix, field_alias);
+                            col = data_src.getColumnByName(alias_name);
+                        }
+
+                        if (null != col) {
+                            DataDstWriterNode c = createMessageWriterNode(cachePbs, inner_type);
+                            child = node.addChild(fd.getName(), c, fd, DataDstWriterNode.CHILD_NODE_TYPE.PLAIN);
+                            setup_node_identify(c, child, col, fd);
+                            ret = true;
+
+                            filterMissingFields(missingFields, oneofField, fd, false);
+                        } else {
+                            filterMissingFields(missingFields, oneofField, fd, true);
+                        }
+                    }
+                } else {
+                    // 非 list 类型
+                    String real_name = DataDstWriterNode.makeChildPath(prefix, fd.getName());
+                    IdentifyDescriptor col = data_src.getColumnByName(real_name);
+                    if (null == col && null != field_alias) {
+                        String alias_name = DataDstWriterNode.makeChildPath(prefix, field_alias);
+                        col = data_src.getColumnByName(alias_name);
+                    }
+
+                    if (null != col) {
+                        filterMissingFields(missingFields, oneofField, fd, false);
+                        DataDstWriterNode c = createMessageWriterNode(cachePbs, inner_type);
+                        child = node.addChild(fd.getName(), c, fd, DataDstWriterNode.CHILD_NODE_TYPE.STANDARD);
+                        setup_node_identify(c, child, col, fd);
+                        ret = true;
+                    } else {
+                        filterMissingFields(missingFields, oneofField, fd, true);
+                        if (checkFieldIsRequired(fd)) {
+                            DataDstWriterNode c = createMessageWriterNode(cachePbs, inner_type);
+                            // required 字段要dump默认数据
+                            child = node.addChild(fd.getName(), c, fd, DataDstWriterNode.CHILD_NODE_TYPE.STANDARD);
+                        }
+                    }
+                }
+                break;
+            }
             }
         }
 
@@ -1286,202 +1283,165 @@ public class DataDstPb extends DataDstImpl {
         }
     }
 
-    private void dumpValue(DynamicMessage.Builder builder, Descriptors.FieldDescriptor fd, Object val, int index) {
-        if (fd.isRepeated() == false || ProgramOptions.getInstance().stripEmptyList == false) {
-            return ;
-        }
-        if (JavaType.ENUM == fd.getJavaType()) {
-            Descriptors.EnumValueDescriptor enum_val = null;
-            if (val instanceof Descriptors.EnumValueDescriptor) {
-                enum_val = (Descriptors.EnumValueDescriptor) val;
-            } else {
-                val = get_enum_value(cachePbs, fd.getEnumType(), (Integer) val);
-            }
-
-            if (null == enum_val) {
-                return;
-            }
-            
-            int size = builder.getRepeatedFieldCount(fd);
-            for (int i = size; i <= index; i++) {
-                if (size == index) {
-                    builder.addRepeatedField(fd, enum_val);
-                } else {
-                    dumpDefault(builder, fd, i);
-                }
-            }
-        } else {
-            int size = builder.getRepeatedFieldCount(fd);
-            for (int i = size; i <= index; i++) {
-                if (i == index) {
-                    builder.addRepeatedField(fd, val);
-                    // ProgramOptions.getLoger().warn("Try to add val [%d] to index [%d], size: [%d].", val, i, builder.getRepeatedFieldCount(fd));
-                } else {
-                    dumpDefault(builder, fd, i);
-                    // ProgramOptions.getLoger().warn("Try to add default val to index [%d].", i);
-                }
-            }
-        }
-    }
-
-    private void dumpDefault(DynamicMessage.Builder builder, Descriptors.FieldDescriptor fd, int index) {
-        if (fd.isRepeated() == false || ProgramOptions.getInstance().stripEmptyList == false) {
-            return ;
-        }
-        Object val = getDefault(builder, fd);
-        if (val != null) {
-            dumpValue(builder, fd, val, index);
-        }
-    }
-
     private Object getDefault(DynamicMessage.Builder builder, Descriptors.FieldDescriptor fd) {
         Object val = null;
         switch (fd.getType()) {
-            case DOUBLE:
-                val = Double.valueOf(0.0);
-                break;
-            case FLOAT:
-                val = Float.valueOf(0);
-                break;
-            case INT32:
-            case FIXED32:
-            case UINT32:
-            case SFIXED32:
-            case SINT32:
-                val = Integer.valueOf(0);
-                break;
-            case INT64:
-            case UINT64:
-            case FIXED64:
-            case SFIXED64:
-            case SINT64:
-                val = Long.valueOf(0);
-                break;
-            case ENUM:
-                val = fd.getEnumType().findValueByNumber(0);
-                break;
-            case BOOL:
-                val = false;
-                break;
-            case STRING:
-                val = "";
-                break;
-            case GROUP:
-                val = new byte[0];
-                break;
-            case MESSAGE: {
-                DynamicMessage.Builder subnode = DynamicMessage.newBuilder(fd.getMessageType());
+        case DOUBLE:
+            val = Double.valueOf(0.0);
+            break;
+        case FLOAT:
+            val = Float.valueOf(0);
+            break;
+        case INT32:
+        case FIXED32:
+        case UINT32:
+        case SFIXED32:
+        case SINT32:
+            val = Integer.valueOf(0);
+            break;
+        case INT64:
+        case UINT64:
+        case FIXED64:
+        case SFIXED64:
+        case SINT64:
+            val = Long.valueOf(0);
+            break;
+        case ENUM:
+            val = fd.getEnumType().findValueByNumber(0);
+            break;
+        case BOOL:
+            val = false;
+            break;
+        case STRING:
+            val = "";
+            break;
+        case GROUP:
+            val = new byte[0];
+            break;
+        case MESSAGE: {
+            DynamicMessage.Builder subnode = DynamicMessage.newBuilder(fd.getMessageType());
 
-                // fill required
-                for (Descriptors.FieldDescriptor sub_fd : fd.getMessageType().getFields()) {
-                    if (checkFieldIsRequired(sub_fd) || ProgramOptions.getInstance().enbleEmptyList) {
-                        dumpDefault(subnode, sub_fd);
-                    }
+            // 仅仅Required需要导出默认值
+            for (Descriptors.FieldDescriptor sub_fd : fd.getMessageType().getFields()) {
+                if (checkFieldIsRequired(sub_fd)) {
+                    dumpDefault(subnode, sub_fd, 0);
                 }
-
-                val = subnode.build();
-                break;
             }
-            case BYTES:
-                val = new byte[0];
-                break;
+
+            val = subnode.build();
+            break;
+        }
+        case BYTES:
+            val = new byte[0];
+            break;
         }
         return val;
     }
 
-    private Object getValFromDataSrc(DataDstWriterNode desc, Descriptors.FieldDescriptor fd) throws ConvException {
+    private Object getValueFromDataSource(DataDstWriterNode desc, Descriptors.FieldDescriptor fd) throws ConvException {
         Object val = null;
 
         switch (fd.getJavaType()) {
-            case INT: {
-                DataContainer<Long> ret = DataSrcImpl.getOurInstance().getValue(desc.identify, 0L);
-                if (null != ret && ret.valid) {
-                    val = ret.value.intValue();
+        case INT: {
+            DataContainer<Long> ret = DataSrcImpl.getOurInstance().getValue(desc.identify, 0L);
+            if (null != ret && ret.valid) {
+                val = ret.value.intValue();
+            }
+            break;
+        }
+
+        case LONG: {
+            DataContainer<Long> ret = DataSrcImpl.getOurInstance().getValue(desc.identify, 0L);
+            if (null != ret && ret.valid) {
+                val = ret.value.longValue();
+            }
+            break;
+        }
+
+        case FLOAT: {
+            DataContainer<Double> ret = DataSrcImpl.getOurInstance().getValue(desc.identify, 0.0);
+            if (null != ret && ret.valid) {
+                val = ret.value.floatValue();
+            }
+            break;
+        }
+
+        case DOUBLE: {
+            DataContainer<Double> ret = DataSrcImpl.getOurInstance().getValue(desc.identify, 0.0);
+            if (null != ret && ret.valid) {
+                val = ret.value.doubleValue();
+            }
+            break;
+        }
+
+        case BOOLEAN: {
+            DataContainer<Boolean> ret = DataSrcImpl.getOurInstance().getValue(desc.identify, false);
+            if (null != ret && ret.valid) {
+                val = ret.value.booleanValue();
+            }
+            break;
+        }
+
+        case STRING: {
+            DataContainer<String> ret = DataSrcImpl.getOurInstance().getValue(desc.identify, "");
+            if (null != ret && ret.valid) {
+                val = ret.value;
+            }
+            break;
+        }
+
+        case BYTE_STRING: {
+            DataContainer<String> res = DataSrcImpl.getOurInstance().getValue(desc.identify, "");
+            if (null != res && res.valid) {
+                String encoding = SchemeConf.getInstance().getKey().getEncoding();
+                if (null == encoding || encoding.isEmpty()) {
+                    val = com.google.protobuf.ByteString.copyFrom(res.value.getBytes());
+                } else {
+                    val = com.google.protobuf.ByteString.copyFrom(res.value.getBytes(Charset.forName(encoding)));
                 }
-                break;
+            }
+            break;
+        }
+        case ENUM: {
+            DataContainer<Long> ret = DataSrcImpl.getOurInstance().getValue(desc.identify, 0L);
+            if (null != ret && ret.valid) {
+                val = fd.getEnumType().findValueByNumber(ret.value.intValue());
             }
 
-            case LONG: {
-                DataContainer<Long> ret = DataSrcImpl.getOurInstance().getValue(desc.identify, 0L);
-                if (null != ret && ret.valid) {
-                    val = ret.value.longValue();
-                }
-                break;
-            }
+            break;
+        }
 
-            case FLOAT: {
-                DataContainer<Double> ret = DataSrcImpl.getOurInstance().getValue(desc.identify, 0.0);
-                if (null != ret && ret.valid) {
-                    val = ret.value.floatValue();
+        case MESSAGE: {
+            DynamicMessage.Builder node = DynamicMessage.newBuilder(fd.getMessageType());
+            if (dumpMessage(node, desc) || checkFieldIsRequired(fd)) {
+                try {
+                    val = node.build();
+                } catch (UninitializedMessageException e) {
+                    this.logErrorMessage("serialize %s(%s) failed. %s", fd.getFullName(), fd.getMessageType().getName(),
+                            e.getMessage());
                 }
-                break;
             }
+            break;
+        }
 
-            case DOUBLE: {
-                DataContainer<Double> ret = DataSrcImpl.getOurInstance().getValue(desc.identify, 0.0);
-                if (null != ret && ret.valid) {
-                    val = ret.value.doubleValue();
-                }
-                break;
-            }
-
-            case BOOLEAN: {
-                DataContainer<Boolean> ret = DataSrcImpl.getOurInstance().getValue(desc.identify, false);
-                if (null != ret && ret.valid) {
-                    val = ret.value.booleanValue();
-                }
-                break;
-            }
-
-            case STRING: {
-                DataContainer<String> ret = DataSrcImpl.getOurInstance().getValue(desc.identify, "");
-                if (null != ret && ret.valid) {
-                    val = ret.value;
-                }
-                break;
-            }
-
-            case BYTE_STRING: {
-                DataContainer<String> res = DataSrcImpl.getOurInstance().getValue(desc.identify, "");
-                if (null != res && res.valid) {
-                    String encoding = SchemeConf.getInstance().getKey().getEncoding();
-                    if (null == encoding || encoding.isEmpty()) {
-                        val = com.google.protobuf.ByteString.copyFrom(res.value.getBytes());
-                    } else {
-                        val = com.google.protobuf.ByteString.copyFrom(res.value.getBytes(Charset.forName(encoding)));
-                    }
-                }
-                break;
-            }
-            case ENUM: {
-                DataContainer<Long> ret = DataSrcImpl.getOurInstance().getValue(desc.identify, 0L);
-                if (null != ret && ret.valid) {
-                    val = fd.getEnumType().findValueByNumber(ret.value.intValue());
-                }
-
-                break;
-            }
-
-            case MESSAGE: {
-                DynamicMessage.Builder node = DynamicMessage.newBuilder(fd.getMessageType());
-                if (dumpMessage(node, desc) || checkFieldIsRequired(fd)) {
-                    try {
-                        val = node.build();
-                    } catch (UninitializedMessageException e) {
-                        this.logErrorMessage("serialize %s(%s) failed. %s", fd.getFullName(),
-                                fd.getMessageType().getName(), e.getMessage());
-                    }
-                }
-                break;
-            }
-
-            default:
-                break;
+        default:
+            break;
         }
         return val;
     }
 
-    private void dumpValue(DynamicMessage.Builder builder, Descriptors.FieldDescriptor fd, Object val) {
+    private void dumpValue(DynamicMessage.Builder builder, Descriptors.FieldDescriptor fd, Object val, int index) {
+        if (fd.isRepeated()
+                && ProgramOptions.getInstance().stripListRule == ProgramOptions.ListStripRule.STRIP_EMPTY_TAIL) {
+            int fill_default_size = builder.getRepeatedFieldCount(fd);
+            for (int i = fill_default_size; i < index; ++i) {
+                Object defaultVal = getDefault(builder, fd);
+                if (defaultVal != null) {
+                    builder.addRepeatedField(fd, defaultVal);
+                }
+            }
+        }
+
         if (JavaType.ENUM == fd.getJavaType()) {
             Descriptors.EnumValueDescriptor enum_val = null;
             if (val instanceof Descriptors.EnumValueDescriptor) {
@@ -1495,13 +1455,21 @@ public class DataDstPb extends DataDstImpl {
             }
 
             if (fd.isRepeated()) {
-                builder.addRepeatedField(fd, enum_val);
+                if (builder.getRepeatedFieldCount(fd) < index) {
+                    builder.addRepeatedField(fd, enum_val);
+                } else {
+                    builder.setRepeatedField(fd, index, enum_val);
+                }
             } else {
                 builder.setField(fd, enum_val);
             }
         } else {
             if (fd.isRepeated()) {
-                builder.addRepeatedField(fd, val);
+                if (builder.getRepeatedFieldCount(fd) < index) {
+                    builder.addRepeatedField(fd, val);
+                } else {
+                    builder.setRepeatedField(fd, index, val);
+                }
             } else {
                 builder.setField(fd, val);
             }
@@ -1512,10 +1480,10 @@ public class DataDstPb extends DataDstImpl {
         builder.clearOneof(fd);
     }
 
-    private void dumpDefault(DynamicMessage.Builder builder, Descriptors.FieldDescriptor fd) {
+    private void dumpDefault(DynamicMessage.Builder builder, Descriptors.FieldDescriptor fd, int index) {
         Object val = getDefault(builder, fd);
         if (val != null) {
-            dumpValue(builder, fd, val);
+            dumpValue(builder, fd, val, index);
         }
     }
 
@@ -1564,46 +1532,28 @@ public class DataDstPb extends DataDstImpl {
     }
 
     private boolean dumpStandardField(DynamicMessage.Builder builder, DataDstWriterNode desc,
-    Descriptors.FieldDescriptor fd, int index) throws ConvException {
-        if (fd.isRepeated() == false || ProgramOptions.getInstance().stripEmptyList == false) {
-            return dumpStandardField(builder, desc, fd);
-        }
-
+            Descriptors.FieldDescriptor fd, int index) throws ConvException {
         if (null == desc.identify && MESSAGE != fd.getJavaType()) {
+            // required 空字段填充默认值
+            if (checkFieldIsRequired(fd)
+                    || ProgramOptions.getInstance().stripListRule == ProgramOptions.ListStripRule.KEEP_ALL) {
+                dumpDefault(builder, fd, index);
+            }
             return false;
         }
 
-        Object val = getValFromDataSrc(desc, fd);
+        Object val = getValueFromDataSource(desc, fd);
 
         if (null == val) {
+            if (checkFieldIsRequired(fd)
+                    || ProgramOptions.getInstance().stripListRule == ProgramOptions.ListStripRule.KEEP_ALL) {
+                dumpDefault(builder, fd, index);
+            }
+
             return false;
         }
 
         dumpValue(builder, fd, val, index);
-        return true;
-    }
-
-    private boolean dumpStandardField(DynamicMessage.Builder builder, DataDstWriterNode desc,
-            Descriptors.FieldDescriptor fd) throws ConvException {
-        if (null == desc.identify && MESSAGE != fd.getJavaType()) {
-            // required 空字段填充默认值
-            if (fd.isRepeated() || ProgramOptions.getInstance().enbleEmptyList) {
-                dumpDefault(builder, fd);
-            }
-            return false;
-        }
-
-        Object val = getValFromDataSrc(desc, fd);
-
-        if (null == val) {
-            if (checkFieldIsRequired(fd) || ProgramOptions.getInstance().enbleEmptyList) {
-                dumpDefault(builder, fd);
-            }
-
-            return false;
-        }
-
-        dumpValue(builder, fd, val);
         return true;
     }
 
@@ -1614,7 +1564,7 @@ public class DataDstPb extends DataDstImpl {
         }
 
         if (null == ident) {
-            if (ProgramOptions.getInstance().enbleEmptyList) {
+            if (ProgramOptions.getInstance().stripListRule == ProgramOptions.ListStripRule.KEEP_ALL) {
                 Descriptors.OneofDescriptor fd = (Descriptors.OneofDescriptor) field.getRawDescriptor();
                 if (null == fd) {
                     // 不需要提示，如果从其他方式解包协议描述的时候可能有可选字段丢失的
@@ -1655,7 +1605,7 @@ public class DataDstPb extends DataDstImpl {
         }
 
         if (res.length == 1) {
-            dumpDefault(builder, (Descriptors.FieldDescriptor) sub_field.getRawDescriptor());
+            dumpDefault(builder, (Descriptors.FieldDescriptor) sub_field.getRawDescriptor(), 0);
             return true;
         }
 
@@ -1672,16 +1622,16 @@ public class DataDstPb extends DataDstImpl {
         }
 
         if (null == ident) {
-            if (ProgramOptions.getInstance().enbleEmptyList) {
-                dumpDefault(builder, fd);
+            if (checkFieldIsRequired(fd)) {
+                dumpDefault(builder, fd, 0);
             }
             return false;
         }
 
         DataContainer<String> res = DataSrcImpl.getOurInstance().getValue(ident, "");
         if (null == res || !res.valid) {
-            if (field.isRequired() || ProgramOptions.getInstance().enbleEmptyList) {
-                dumpDefault(builder, fd);
+            if (checkFieldIsRequired(fd)) {
+                dumpDefault(builder, fd, 0);
             }
             return false;
         }
@@ -1709,149 +1659,149 @@ public class DataDstPb extends DataDstImpl {
         if (field.isList()) {
             String[] groups = splitPlainGroups(input.trim(), getPlainFieldSeparator(field));
             switch (field.getType()) {
-                case INT: {
-                    Long[] values = parsePlainDataLong(groups, ident, field);
-                    ArrayList<Object> tmp = new ArrayList<Object>();
-                    if (values != null) {
-                        tmp.ensureCapacity(values.length);
+            case INT: {
+                Long[] values = parsePlainDataLong(groups, ident, field);
+                ArrayList<Object> tmp = new ArrayList<Object>();
+                if (values != null) {
+                    tmp.ensureCapacity(values.length);
+                }
+                for (Long v : values) {
+                    tmp.add(v.intValue());
+                }
+                val = tmp;
+                break;
+            }
+
+            case LONG: {
+                Long[] values = parsePlainDataLong(groups, ident, field);
+                ArrayList<Object> tmp = new ArrayList<Object>();
+                if (values != null) {
+                    tmp.ensureCapacity(values.length);
+                }
+                for (Long v : values) {
+                    tmp.add(v);
+                }
+                val = tmp;
+                break;
+            }
+
+            case FLOAT: {
+                Double[] values = parsePlainDataDouble(groups, ident, field);
+                ArrayList<Object> tmp = new ArrayList<Object>();
+                if (values != null) {
+                    tmp.ensureCapacity(values.length);
+                }
+                for (Double v : values) {
+                    tmp.add(v.floatValue());
+                }
+                val = tmp;
+                break;
+            }
+
+            case DOUBLE: {
+                Double[] values = parsePlainDataDouble(groups, ident, field);
+                ArrayList<Object> tmp = new ArrayList<Object>();
+                if (values != null) {
+                    tmp.ensureCapacity(values.length);
+                }
+                for (Double v : values) {
+                    tmp.add(v);
+                }
+                val = tmp;
+                break;
+            }
+
+            case BOOLEAN: {
+                Boolean[] values = parsePlainDataBoolean(groups, ident, field);
+                ArrayList<Object> tmp = new ArrayList<Object>();
+                if (values != null) {
+                    tmp.ensureCapacity(values.length);
+                }
+                for (Boolean v : values) {
+                    tmp.add(v);
+                }
+                val = tmp;
+                break;
+            }
+
+            case STRING:
+            case BYTES: {
+                String[] values = parsePlainDataString(groups, ident, field);
+                ArrayList<Object> tmp = new ArrayList<Object>();
+                if (values != null) {
+                    tmp.ensureCapacity(values.length);
+                }
+                for (String v : values) {
+                    tmp.add(v);
+                }
+                val = tmp;
+                break;
+            }
+
+            case MESSAGE: {
+                ArrayList<DynamicMessage> tmp = new ArrayList<DynamicMessage>();
+                tmp.ensureCapacity(groups.length);
+                for (String v : groups) {
+                    String[] subGroups = splitPlainGroups(v, getPlainMessageSeparator(field));
+                    DynamicMessage msg = parsePlainDataMessage(subGroups, ident, field);
+                    if (msg != null) {
+                        tmp.add(msg);
                     }
-                    for (Long v : values) {
-                        tmp.add(v.intValue());
-                    }
+                }
+                if (!tmp.isEmpty()) {
                     val = tmp;
-                    break;
                 }
+                break;
+            }
 
-                case LONG: {
-                    Long[] values = parsePlainDataLong(groups, ident, field);
-                    ArrayList<Object> tmp = new ArrayList<Object>();
-                    if (values != null) {
-                        tmp.ensureCapacity(values.length);
-                    }
-                    for (Long v : values) {
-                        tmp.add(v);
-                    }
-                    val = tmp;
-                    break;
-                }
-
-                case FLOAT: {
-                    Double[] values = parsePlainDataDouble(groups, ident, field);
-                    ArrayList<Object> tmp = new ArrayList<Object>();
-                    if (values != null) {
-                        tmp.ensureCapacity(values.length);
-                    }
-                    for (Double v : values) {
-                        tmp.add(v.floatValue());
-                    }
-                    val = tmp;
-                    break;
-                }
-
-                case DOUBLE: {
-                    Double[] values = parsePlainDataDouble(groups, ident, field);
-                    ArrayList<Object> tmp = new ArrayList<Object>();
-                    if (values != null) {
-                        tmp.ensureCapacity(values.length);
-                    }
-                    for (Double v : values) {
-                        tmp.add(v);
-                    }
-                    val = tmp;
-                    break;
-                }
-
-                case BOOLEAN: {
-                    Boolean[] values = parsePlainDataBoolean(groups, ident, field);
-                    ArrayList<Object> tmp = new ArrayList<Object>();
-                    if (values != null) {
-                        tmp.ensureCapacity(values.length);
-                    }
-                    for (Boolean v : values) {
-                        tmp.add(v);
-                    }
-                    val = tmp;
-                    break;
-                }
-
-                case STRING:
-                case BYTES: {
-                    String[] values = parsePlainDataString(groups, ident, field);
-                    ArrayList<Object> tmp = new ArrayList<Object>();
-                    if (values != null) {
-                        tmp.ensureCapacity(values.length);
-                    }
-                    for (String v : values) {
-                        tmp.add(v);
-                    }
-                    val = tmp;
-                    break;
-                }
-
-                case MESSAGE: {
-                    ArrayList<DynamicMessage> tmp = new ArrayList<DynamicMessage>();
-                    tmp.ensureCapacity(groups.length);
-                    for (String v : groups) {
-                        String[] subGroups = splitPlainGroups(v, getPlainMessageSeparator(field));
-                        DynamicMessage msg = parsePlainDataMessage(subGroups, ident, field);
-                        if (msg != null) {
-                            tmp.add(msg);
-                        }
-                    }
-                    if (!tmp.isEmpty()) {
-                        val = tmp;
-                    }
-                    break;
-                }
-
-                default:
-                    // oneof can not be repeated
-                    break;
+            default:
+                // oneof can not be repeated
+                break;
             }
         } else {
             switch (field.getType()) {
-                case INT: {
-                    val = parsePlainDataLong(input.trim(), ident, field).intValue();
-                    break;
-                }
+            case INT: {
+                val = parsePlainDataLong(input.trim(), ident, field).intValue();
+                break;
+            }
 
-                case LONG: {
-                    val = parsePlainDataLong(input.trim(), ident, field);
-                    break;
-                }
+            case LONG: {
+                val = parsePlainDataLong(input.trim(), ident, field);
+                break;
+            }
 
-                case FLOAT: {
-                    val = parsePlainDataDouble(input.trim(), ident, field).floatValue();
-                    break;
-                }
+            case FLOAT: {
+                val = parsePlainDataDouble(input.trim(), ident, field).floatValue();
+                break;
+            }
 
-                case DOUBLE: {
-                    val = parsePlainDataDouble(input.trim(), ident, field);
-                    break;
-                }
+            case DOUBLE: {
+                val = parsePlainDataDouble(input.trim(), ident, field);
+                break;
+            }
 
-                case BOOLEAN: {
-                    val = parsePlainDataBoolean(input.trim(), ident, field);
-                    break;
-                }
+            case BOOLEAN: {
+                val = parsePlainDataBoolean(input.trim(), ident, field);
+                break;
+            }
 
-                case STRING:
-                case BYTES: {
-                    val = parsePlainDataString(input.trim(), ident, field);
-                    break;
-                }
+            case STRING:
+            case BYTES: {
+                val = parsePlainDataString(input.trim(), ident, field);
+                break;
+            }
 
-                case MESSAGE: {
-                    String[] groups = splitPlainGroups(input.trim(), getPlainMessageSeparator(field));
-                    val = parsePlainDataMessage(groups, ident, field);
-                    if (val == null && field.isRequired()) {
-                        dumpDefault(builder, fd);
-                    }
-                    break;
+            case MESSAGE: {
+                String[] groups = splitPlainGroups(input.trim(), getPlainMessageSeparator(field));
+                val = parsePlainDataMessage(groups, ident, field);
+                if (val == null && field.isRequired()) {
+                    dumpDefault(builder, fd, 0);
                 }
+                break;
+            }
 
-                default:
-                    break;
+            default:
+                break;
             }
         }
 
@@ -1860,11 +1810,12 @@ public class DataDstPb extends DataDstImpl {
         }
 
         if (fd.isRepeated() && val instanceof ArrayList<?>) {
-            for (Object obj : (ArrayList<?>) val) {
-                dumpValue(builder, fd, obj);
+            ArrayList<?> values = (ArrayList<?>) val;
+            for (int i = 0; i < values.size(); ++i) {
+                dumpValue(builder, fd, values.get(i), i);
             }
         } else {
-            dumpValue(builder, fd, val);
+            dumpValue(builder, fd, val, 0);
         }
 
         return true;

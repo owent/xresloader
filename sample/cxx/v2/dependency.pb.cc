@@ -27,7 +27,6 @@ static void InitDefaultsscc_info_dep_cfg_dependency_2eproto() {
     new (ptr) ::dep_cfg();
     ::PROTOBUF_NAMESPACE_ID::internal::OnShutdownDestroyMessage(ptr);
   }
-  ::dep_cfg::InitAsDefaultInstance();
 }
 
 ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<1> scc_info_dep_cfg_dependency_2eproto =
@@ -131,10 +130,6 @@ bool cost_type_IsValid(int value) {
 
 // ===================================================================
 
-void dep_cfg::InitAsDefaultInstance() {
-  ::_dep_cfg_default_instance_._instance.get_mutable()->dep2_ = const_cast< ::dep2_cfg*>(
-      ::dep2_cfg::internal_default_instance());
-}
 class dep_cfg::_Internal {
  public:
   using HasBits = decltype(std::declval<dep_cfg>()._has_bits_);
@@ -170,7 +165,7 @@ dep_cfg::dep_cfg(const dep_cfg& from)
   _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
   name_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
   if (from._internal_has_name()) {
-    name_.Set(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), from._internal_name(),
+    name_.Set(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, from._internal_name(), 
       GetArena());
   }
   if (from._internal_has_dep2()) {
@@ -185,8 +180,9 @@ dep_cfg::dep_cfg(const dep_cfg& from)
 void dep_cfg::SharedCtor() {
   ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&scc_info_dep_cfg_dependency_2eproto.base);
   name_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
-  ::memset(&dep2_, 0, static_cast<size_t>(
-      reinterpret_cast<char*>(&id_) -
+  ::memset(reinterpret_cast<char*>(this) + static_cast<size_t>(
+      reinterpret_cast<char*>(&dep2_) - reinterpret_cast<char*>(this)),
+      0, static_cast<size_t>(reinterpret_cast<char*>(&id_) -
       reinterpret_cast<char*>(&dep2_)) + sizeof(id_));
 }
 
@@ -241,7 +237,6 @@ void dep_cfg::Clear() {
 const char* dep_cfg::_InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) {
 #define CHK_(x) if (PROTOBUF_PREDICT_FALSE(!(x))) goto failure
   _Internal::HasBits has_bits{};
-  ::PROTOBUF_NAMESPACE_ID::Arena* arena = GetArena(); (void)arena;
   while (!ctx->Done(&ptr)) {
     ::PROTOBUF_NAMESPACE_ID::uint32 tag;
     ptr = ::PROTOBUF_NAMESPACE_ID::internal::ReadTag(ptr, &tag);

@@ -3,15 +3,16 @@ syntax = "proto2";
 import "xresloader.proto";
 import "xresloader_ue.proto";
 
+import "dep_level2.proto";
 import "dependency.proto";
 
 message role_cfg {
-    optional uint32 id           = 1;
-    optional uint32 unlock_level = 2;
-    optional uint32 cost_type    = 3;
-    optional int32 cost_value    = 4;
-    optional string name         = 5;
-    optional dep_cfg dep_test    = 10;
+    optional uint32  id           = 1;
+    optional uint32  unlock_level = 2;
+    optional uint32  cost_type    = 3;
+    optional int32   cost_value   = 4;
+    optional string  name         = 5;
+    optional dep_cfg dep_test     = 10;
 
     repeated string test_array    = 11;
     optional string int_as_string = 12;
@@ -21,11 +22,11 @@ message role_upgrade_cfg {
     option (org.xresloader.ue.helper)       = "helper";
     option (org.xresloader.msg_description) = "Test role_upgrade_cfg with multi keys";
 
-    optional uint32 Id       = 1 [ (org.xresloader.ue.key_tag) = 1000 ];
-    optional uint32 Level    = 2 [ (org.xresloader.ue.key_tag) = 1 ];
-    optional uint32 CostType = 3 [ (org.xresloader.verifier) = "cost_type", (org.xresloader.field_description) = "Refer to cost_type" ];
-    optional int64 CostValue = 4;
-    optional int32 ScoreAdd  = 5;
+    optional uint32 Id        = 1 [ (org.xresloader.ue.key_tag) = 1000 ];
+    optional uint32 Level     = 2 [ (org.xresloader.ue.key_tag) = 1 ];
+    optional uint32 CostType  = 3 [ (org.xresloader.verifier) = "cost_type", (org.xresloader.field_description) = "Refer to cost_type" ];
+    optional int64  CostValue = 4;
+    optional int32  ScoreAdd  = 5;
 }
 
 message test_msg_verifier {
@@ -40,7 +41,7 @@ message arr_in_arr {
     option (org.xresloader.ue.not_data_table) = true;
 
     optional string name    = 1 [ (org.xresloader.field_description) = "This is a test name in array" ];
-    repeated int32 int_arr  = 2 [ packed = true ];
+    repeated int32  int_arr = 2 [ packed = true ];
     repeated string str_arr = 3;
 }
 
@@ -48,16 +49,16 @@ message arr_in_arr_cfg {
     option (org.xresloader.ue.helper)       = "helper";
     option (org.xresloader.msg_description) = "Test arr_in_arr_cfg";
 
-    optional uint32 id      = 1 [ (org.xresloader.ue.key_tag) = 1, (org.xresloader.field_description) = "This is a Key" ];
+    optional uint32     id  = 1 [ (org.xresloader.ue.key_tag) = 1, (org.xresloader.field_description) = "This is a Key" ];
     repeated arr_in_arr arr = 2;
 
-    repeated int32 test_plain_int_arr             = 3;
-    repeated cost_type test_plain_enum_arr        = 4;
-    optional test_msg_verifier test_plain_msg     = 5 [ (org.xresloader.field_separator) = "&" ];
-    repeated test_msg_verifier test_plain_msg_arr = 6;
+    repeated int32             test_plain_int_arr  = 3;
+    repeated cost_type         test_plain_enum_arr = 4;
+    optional test_msg_verifier test_plain_msg      = 5 [ (org.xresloader.field_separator) = "&" ];
+    repeated test_msg_verifier test_plain_msg_arr  = 6;
 
     map<int32, string>    test_map_is = 7;
-    map<string, dep2_cfg> test_map_sm = 8 [ (org.xresloader.field_separator) = "|" ]; 
+    map<string, dep2_cfg> test_map_sm = 8 [ (org.xresloader.field_separator) = "|" ];
 }
 
 message event_reward_item {
@@ -65,8 +66,8 @@ message event_reward_item {
     optional uint32 item_count = 2;
 
     oneof nested {
-        string            nested_note      = 11 [ (org.xresloader.field_alias) = "描述文本" ];
-        cost_type         nested_enum_type = 12 [ (org.xresloader.field_alias) = "货币类型" ];
+        string    nested_note      = 11 [ (org.xresloader.field_alias) = "描述文本" ];
+        cost_type nested_enum_type = 12 [ (org.xresloader.field_alias) = "货币类型" ];
     }
 }
 
@@ -75,8 +76,8 @@ message event_rule_item {
     optional uint32 rule_param = 2;
 
     oneof nested {
-        string            nested_note      = 11 [ (org.xresloader.field_alias) = "描述文本" ];
-        cost_type         nested_enum_type = 12 [ (org.xresloader.field_alias) = "货币类型" ];
+        string    nested_note      = 11 [ (org.xresloader.field_alias) = "描述文本" ];
+        cost_type nested_enum_type = 12 [ (org.xresloader.field_alias) = "货币类型" ];
     }
 }
 
@@ -84,12 +85,12 @@ message event_cfg {
     option (org.xresloader.ue.helper)       = "helper";
     option (org.xresloader.msg_description) = "Test event_cfg with oneof fields";
 
-    optional uint32 id          = 1 [ (org.xresloader.ue.key_tag) = 100 ];
-    optional uint32 process     = 2 [ (org.xresloader.ue.key_tag) = 1 ];
+    optional uint32 id      = 1 [ (org.xresloader.ue.key_tag) = 100 ];
+    optional uint32 process = 2 [ (org.xresloader.ue.key_tag) = 1 ];
 
-    optional event_rule_item rule = 6;
+    optional event_rule_item rule          = 6;
     optional event_rule_item specify_field = 7;
-    
+
     oneof reward {
         event_reward_item item      = 11 [ (org.xresloader.field_alias) = "奖励道具" ];
         int64             user_exp  = 12 [ (org.xresloader.field_alias) = "奖励经验" ];
@@ -97,20 +98,18 @@ message event_cfg {
         cost_type         enum_type = 14 [ (org.xresloader.field_alias) = "货币类型" ];
     }
 
-    oneof unlock_type {
-        uint32 user_level = 51 [ (org.xresloader.field_alias) = "玩家等级" ];
-    }
+    oneof unlock_type { uint32 user_level = 51 [ (org.xresloader.field_alias) = "玩家等级" ]; }
 
     repeated event_rule_item test_arr       = 91 [ (org.xresloader.field_separator) = ";" ];
     repeated event_rule_item test_empty_arr = 92 [ (org.xresloader.field_separator) = ";" ];
 }
 
 message keep_or_strip_empty_list_cfg {
-    option (org.xresloader.ue.helper)         = "helper";
+    option (org.xresloader.ue.helper) = "helper";
 
     optional uint32   key             = 1 [ (org.xresloader.ue.key_tag) = 1, (org.xresloader.field_description) = "This is a Key" ];
     repeated dep2_cfg array_msg       = 2;
     repeated dep2_cfg array_plain_msg = 3;
-    repeated int32 array_int32        = 4;
-    repeated int64 array_int64        = 5;
+    repeated int32    array_int32     = 4;
+    repeated int64    array_int64     = 5;
 }

@@ -926,69 +926,69 @@ public abstract class DataDstUEBase extends DataDstImpl {
         }
 
         switch (rule.nameType) {
-            case LONG: {
-                long ret = 0;
-                for (int i = 1; i < rule.keyFields.size(); ++i) {
-                    ArrayList<DataDstWriterNodeWrapper> wrappers = rule.keyFields.get(i);
-                    Object val = pickValueField(buildObj, wrappers, fieldDataByOneof);
-                    if (null == val) {
-                        continue;
-                    }
-                    if (val instanceof Number) {
+        case LONG: {
+            long ret = 0;
+            for (int i = 1; i < rule.keyFields.size(); ++i) {
+                ArrayList<DataDstWriterNodeWrapper> wrappers = rule.keyFields.get(i);
+                Object val = pickValueField(buildObj, wrappers, fieldDataByOneof);
+                if (null == val) {
+                    continue;
+                }
+                if (val instanceof Number) {
+                    ret = ret + getFieldDescriptor(wrappers).mutableExtension().mutableUE().keyTag
+                            * ((Number) val).longValue();
+                } else {
+                    try {
                         ret = ret + getFieldDescriptor(wrappers).mutableExtension().mutableUE().keyTag
-                                * ((Number) val).longValue();
-                    } else {
-                        try {
-                            ret = ret + getFieldDescriptor(wrappers).mutableExtension().mutableUE().keyTag
-                                    * Long.valueOf(val.toString());
-                        } catch (NumberFormatException e) {
-                            throw new ConvException(String.format("Try to convert %s to integer failed.%s",
-                                    val.toString(), e.getMessage()));
-                        }
+                                * Long.valueOf(val.toString());
+                    } catch (NumberFormatException e) {
+                        throw new ConvException(String.format("Try to convert %s to integer failed.%s", val.toString(),
+                                e.getMessage()));
                     }
                 }
-
-                return ret;
             }
-            case DOUBLE: {
-                double ret = 0.0;
-                for (int i = 1; i < rule.keyFields.size(); ++i) {
-                    ArrayList<DataDstWriterNodeWrapper> wrappers = rule.keyFields.get(i);
-                    Object val = pickValueField(buildObj, wrappers, fieldDataByOneof);
-                    if (null == val) {
-                        continue;
-                    }
-                    if (val instanceof Number) {
+
+            return ret;
+        }
+        case DOUBLE: {
+            double ret = 0.0;
+            for (int i = 1; i < rule.keyFields.size(); ++i) {
+                ArrayList<DataDstWriterNodeWrapper> wrappers = rule.keyFields.get(i);
+                Object val = pickValueField(buildObj, wrappers, fieldDataByOneof);
+                if (null == val) {
+                    continue;
+                }
+                if (val instanceof Number) {
+                    ret = ret + getFieldDescriptor(wrappers).mutableExtension().mutableUE().keyTag
+                            * ((Number) val).doubleValue();
+                } else {
+                    try {
                         ret = ret + getFieldDescriptor(wrappers).mutableExtension().mutableUE().keyTag
-                                * ((Number) val).doubleValue();
-                    } else {
-                        try {
-                            ret = ret + getFieldDescriptor(wrappers).mutableExtension().mutableUE().keyTag
-                                    * Double.valueOf(val.toString());
-                        } catch (NumberFormatException e) {
-                            throw new ConvException(String.format("Try to convert %s to number failed.%s",
-                                    val.toString(), e.getMessage()));
-                        }
+                                * Double.valueOf(val.toString());
+                    } catch (NumberFormatException e) {
+                        throw new ConvException(
+                                String.format("Try to convert %s to number failed.%s", val.toString(), e.getMessage()));
                     }
                 }
-
-                return ret;
             }
-            case STRING: {
-                ArrayList<String> ls = new ArrayList<String>();
-                ls.ensureCapacity(rule.keyFields.size());
-                for (int i = 1; i < rule.keyFields.size(); ++i) {
-                    Object val = pickValueField(buildObj, rule.keyFields.get(i), fieldDataByOneof);
-                    if (null == val) {
-                        continue;
-                    }
-                    ls.add(val.toString());
+
+            return ret;
+        }
+        case STRING: {
+            ArrayList<String> ls = new ArrayList<String>();
+            ls.ensureCapacity(rule.keyFields.size());
+            for (int i = 1; i < rule.keyFields.size(); ++i) {
+                Object val = pickValueField(buildObj, rule.keyFields.get(i), fieldDataByOneof);
+                if (null == val) {
+                    continue;
                 }
-
-                return String.join("", ls);
+                ls.add(val.toString());
             }
-            default:
-                return 0;
+
+            return String.join("", ls);
+        }
+        default:
+            return 0;
         }
     }
 
@@ -1010,86 +1010,86 @@ public abstract class DataDstUEBase extends DataDstImpl {
         }
 
         switch (desc.getType()) {
-            case INT: {
-                DataContainer<Long> ret = DataSrcImpl.getOurInstance().getValue(desc.identify, 0L);
-                if (null != ret && ret.valid) {
-                    return ret.value.intValue();
-                } else if (ProgramOptions.getInstance().enbleEmptyList) {
-                    return Integer.valueOf(0);
-                }
-                break;
+        case INT: {
+            DataContainer<Long> ret = DataSrcImpl.getOurInstance().getValue(desc.identify, 0L);
+            if (null != ret && ret.valid) {
+                return ret.value.intValue();
+            } else if (ProgramOptions.getInstance().stripListRule == ProgramOptions.ListStripRule.KEEP_ALL) {
+                return Integer.valueOf(0);
             }
+            break;
+        }
 
-            case LONG: {
-                DataContainer<Long> ret = DataSrcImpl.getOurInstance().getValue(desc.identify, 0L);
-                if (null != ret && ret.valid) {
-                    return ret.value.longValue();
-                } else if (ProgramOptions.getInstance().enbleEmptyList) {
-                    return Long.valueOf(0);
-                }
-                break;
+        case LONG: {
+            DataContainer<Long> ret = DataSrcImpl.getOurInstance().getValue(desc.identify, 0L);
+            if (null != ret && ret.valid) {
+                return ret.value.longValue();
+            } else if (ProgramOptions.getInstance().stripListRule == ProgramOptions.ListStripRule.KEEP_ALL) {
+                return Long.valueOf(0);
             }
+            break;
+        }
 
-            case FLOAT: {
-                DataContainer<Double> ret = DataSrcImpl.getOurInstance().getValue(desc.identify, 0.0);
-                if (null != ret && ret.valid) {
-                    return ret.value.floatValue();
-                } else if (ProgramOptions.getInstance().enbleEmptyList) {
-                    return Float.valueOf(0);
-                }
-                break;
+        case FLOAT: {
+            DataContainer<Double> ret = DataSrcImpl.getOurInstance().getValue(desc.identify, 0.0);
+            if (null != ret && ret.valid) {
+                return ret.value.floatValue();
+            } else if (ProgramOptions.getInstance().stripListRule == ProgramOptions.ListStripRule.KEEP_ALL) {
+                return Float.valueOf(0);
             }
+            break;
+        }
 
-            case DOUBLE: {
-                DataContainer<Double> ret = DataSrcImpl.getOurInstance().getValue(desc.identify, 0.0);
-                if (null != ret && ret.valid) {
-                    return ret.value.doubleValue();
-                } else if (ProgramOptions.getInstance().enbleEmptyList) {
-                    return Double.valueOf(0);
-                }
-                break;
+        case DOUBLE: {
+            DataContainer<Double> ret = DataSrcImpl.getOurInstance().getValue(desc.identify, 0.0);
+            if (null != ret && ret.valid) {
+                return ret.value.doubleValue();
+            } else if (ProgramOptions.getInstance().stripListRule == ProgramOptions.ListStripRule.KEEP_ALL) {
+                return Double.valueOf(0);
             }
+            break;
+        }
 
-            case BOOLEAN: {
-                DataContainer<Boolean> ret = DataSrcImpl.getOurInstance().getValue(desc.identify, false);
-                if (null != ret && ret.valid) {
-                    return ret.value.booleanValue();
-                } else if (ProgramOptions.getInstance().enbleEmptyList) {
-                    return Boolean.valueOf(false);
-                }
-                break;
+        case BOOLEAN: {
+            DataContainer<Boolean> ret = DataSrcImpl.getOurInstance().getValue(desc.identify, false);
+            if (null != ret && ret.valid) {
+                return ret.value.booleanValue();
+            } else if (ProgramOptions.getInstance().stripListRule == ProgramOptions.ListStripRule.KEEP_ALL) {
+                return Boolean.valueOf(false);
             }
+            break;
+        }
 
-            case STRING: {
-                DataContainer<String> ret = DataSrcImpl.getOurInstance().getValue(desc.identify, "");
-                if (null != ret && ret.valid) {
-                    return ret.value;
-                } else if (ProgramOptions.getInstance().enbleEmptyList) {
-                    return "";
-                }
-                break;
+        case STRING: {
+            DataContainer<String> ret = DataSrcImpl.getOurInstance().getValue(desc.identify, "");
+            if (null != ret && ret.valid) {
+                return ret.value;
+            } else if (ProgramOptions.getInstance().stripListRule == ProgramOptions.ListStripRule.KEEP_ALL) {
+                return "";
             }
+            break;
+        }
 
-            case BYTES: {
-                DataContainer<String> res = DataSrcImpl.getOurInstance().getValue(desc.identify, "");
-                if (null != res && res.valid) {
-                    String encoding = SchemeConf.getInstance().getKey().getEncoding();
-                    if (null == encoding || encoding.isEmpty()) {
-                        return Base64.getEncoder().encodeToString(res.value.getBytes());
-                    } else {
-                        return Base64.getEncoder().encodeToString(res.value.getBytes(Charset.forName(encoding)));
-                    }
-                } else if (ProgramOptions.getInstance().enbleEmptyList) {
-                    return "";
+        case BYTES: {
+            DataContainer<String> res = DataSrcImpl.getOurInstance().getValue(desc.identify, "");
+            if (null != res && res.valid) {
+                String encoding = SchemeConf.getInstance().getKey().getEncoding();
+                if (null == encoding || encoding.isEmpty()) {
+                    return Base64.getEncoder().encodeToString(res.value.getBytes());
+                } else {
+                    return Base64.getEncoder().encodeToString(res.value.getBytes(Charset.forName(encoding)));
                 }
-                break;
+            } else if (ProgramOptions.getInstance().stripListRule == ProgramOptions.ListStripRule.KEEP_ALL) {
+                return "";
             }
+            break;
+        }
 
-            case MESSAGE: {
-                break;
-            }
-            default:
-                break;
+        case MESSAGE: {
+            break;
+        }
+        default:
+            break;
         }
 
         return null;
@@ -1530,75 +1530,74 @@ public abstract class DataDstUEBase extends DataDstImpl {
             }
 
             switch (rule.nameType) {
-                case LONG:
-                    return String.format("*FString::Printf(TEXT(\"%%lld\"), static_cast<long long>(%s))",
-                            nameNode.varName);
-                case DOUBLE:
-                    return String.format("*FString::Printf(TEXT(\"%%g\"), static_cast<double>(%s))", nameNode.varName);
-                case STRING:
-                    return nameNode.varName;
-                default:
-                    return "/** Error Key Set **/";
+            case LONG:
+                return String.format("*FString::Printf(TEXT(\"%%lld\"), static_cast<long long>(%s))", nameNode.varName);
+            case DOUBLE:
+                return String.format("*FString::Printf(TEXT(\"%%g\"), static_cast<double>(%s))", nameNode.varName);
+            case STRING:
+                return nameNode.varName;
+            default:
+                return "/** Error Key Set **/";
             }
         }
 
         switch (rule.nameType) {
-            case LONG: {
-                ArrayList<String> params = new ArrayList<String>();
-                params.ensureCapacity(rule.keyFields.size());
-                for (int i = 1; i < rule.keyFields.size(); ++i) {
-                    // keyField can not be list, so it must has only 1 element
-                    DataDstWriterNodeWrapper keyNode = rule.keyFields.get(i).get(0);
-                    if (keyNode.getFieldExtension().mutableUE().keyTag != 1) {
-                        params.add(String.format("static_cast<long long>(%s) * %s", keyNode.varName,
-                                keyNode.getFieldExtension().mutableUE().keyTag));
-                    } else {
-                        params.add(String.format("static_cast<long long>(%s)", keyNode.varName));
-                    }
+        case LONG: {
+            ArrayList<String> params = new ArrayList<String>();
+            params.ensureCapacity(rule.keyFields.size());
+            for (int i = 1; i < rule.keyFields.size(); ++i) {
+                // keyField can not be list, so it must has only 1 element
+                DataDstWriterNodeWrapper keyNode = rule.keyFields.get(i).get(0);
+                if (keyNode.getFieldExtension().mutableUE().keyTag != 1) {
+                    params.add(String.format("static_cast<long long>(%s) * %s", keyNode.varName,
+                            keyNode.getFieldExtension().mutableUE().keyTag));
+                } else {
+                    params.add(String.format("static_cast<long long>(%s)", keyNode.varName));
                 }
-                return String.format("*FString::Printf(TEXT(\"%%lld\"), %s)", String.join(" + ", params));
             }
-            case DOUBLE: {
-                ArrayList<String> params = new ArrayList<String>();
-                params.ensureCapacity(rule.keyFields.size());
-                for (int i = 1; i < rule.keyFields.size(); ++i) {
-                    // keyField can not be list, so it must has only 1 element
-                    DataDstWriterNodeWrapper keyNode = rule.keyFields.get(i).get(0);
-                    if (keyNode.getFieldExtension().mutableUE().keyTag != 1) {
-                        params.add(String.format("static_cast<double>(%s) * %s", keyNode.varName,
-                                keyNode.getFieldExtension().mutableUE().keyTag));
-                    } else {
-                        params.add(String.format("static_cast<double>(%s)", keyNode.varName));
-                    }
+            return String.format("*FString::Printf(TEXT(\"%%lld\"), %s)", String.join(" + ", params));
+        }
+        case DOUBLE: {
+            ArrayList<String> params = new ArrayList<String>();
+            params.ensureCapacity(rule.keyFields.size());
+            for (int i = 1; i < rule.keyFields.size(); ++i) {
+                // keyField can not be list, so it must has only 1 element
+                DataDstWriterNodeWrapper keyNode = rule.keyFields.get(i).get(0);
+                if (keyNode.getFieldExtension().mutableUE().keyTag != 1) {
+                    params.add(String.format("static_cast<double>(%s) * %s", keyNode.varName,
+                            keyNode.getFieldExtension().mutableUE().keyTag));
+                } else {
+                    params.add(String.format("static_cast<double>(%s)", keyNode.varName));
                 }
-                return String.format("*FString::Printf(TEXT(\"%%g\"), %s)", String.join(" + ", params));
             }
-            case STRING: {
-                ArrayList<String> paramTypes = new ArrayList<String>();
-                ArrayList<String> paramValues = new ArrayList<String>();
-                paramTypes.ensureCapacity(rule.keyFields.size());
-                paramValues.ensureCapacity(rule.keyFields.size());
-                for (int i = 1; i < rule.keyFields.size(); ++i) {
-                    // keyField can not be list, so it must has only 1 element
-                    DataDstWriterNodeWrapper keyNode = rule.keyFields.get(i).get(0);
-                    String fmt = getUETypeFormat(keyNode.getJavaType());
-                    paramTypes.add(fmt);
+            return String.format("*FString::Printf(TEXT(\"%%g\"), %s)", String.join(" + ", params));
+        }
+        case STRING: {
+            ArrayList<String> paramTypes = new ArrayList<String>();
+            ArrayList<String> paramValues = new ArrayList<String>();
+            paramTypes.ensureCapacity(rule.keyFields.size());
+            paramValues.ensureCapacity(rule.keyFields.size());
+            for (int i = 1; i < rule.keyFields.size(); ++i) {
+                // keyField can not be list, so it must has only 1 element
+                DataDstWriterNodeWrapper keyNode = rule.keyFields.get(i).get(0);
+                String fmt = getUETypeFormat(keyNode.getJavaType());
+                paramTypes.add(fmt);
 
-                    String ueTypeNameIdent = keyNode.getFieldExtension().mutableUE().ueTypeName;
-                    if (ueTypeNameIdent != null && !ueTypeNameIdent.isEmpty()) {
-                        paramValues.add(String.format("*%s.ToString()", keyNode.varName));
-                    } else if (fmt.equals("%s")) {
-                        paramValues.add("*" + keyNode.varName);
-                    } else {
-                        paramValues.add(keyNode.varName);
-                    }
+                String ueTypeNameIdent = keyNode.getFieldExtension().mutableUE().ueTypeName;
+                if (ueTypeNameIdent != null && !ueTypeNameIdent.isEmpty()) {
+                    paramValues.add(String.format("*%s.ToString()", keyNode.varName));
+                } else if (fmt.equals("%s")) {
+                    paramValues.add("*" + keyNode.varName);
+                } else {
+                    paramValues.add(keyNode.varName);
                 }
-
-                return String.format("*FString::Printf(TEXT(\"%s\"), %s)", String.join("", paramTypes),
-                        String.join(", ", paramValues));
             }
-            default:
-                return "/** Error Key Set **/";
+
+            return String.format("*FString::Printf(TEXT(\"%s\"), %s)", String.join("", paramTypes),
+                    String.join(", ", paramValues));
+        }
+        default:
+            return "/** Error Key Set **/";
         }
     }
 
@@ -1682,39 +1681,39 @@ public abstract class DataDstUEBase extends DataDstImpl {
         String ueTypeName = null;
         boolean enable = true;
         switch (descType) {
-            case INT:
-            case LONG:
-            case FLOAT:
-            case DOUBLE:
-            case BOOLEAN:
-                break;
-            case STRING: {
-                if (varName.equalsIgnoreCase("Name")) {
-                    ueTypeName = "FName";
-                }
-                break;
+        case INT:
+        case LONG:
+        case FLOAT:
+        case DOUBLE:
+        case BOOLEAN:
+            break;
+        case STRING: {
+            if (varName.equalsIgnoreCase("Name")) {
+                ueTypeName = "FName";
             }
-            case BYTES: {
-                if (varName.equalsIgnoreCase("Name")) {
-                    ueTypeName = "FName";
-                }
-                fout.write(dumpString(
-                        String.format("    /** Bytes data will be encoded by base64 for %s */\r\n", varName)));
-                break;
+            break;
+        }
+        case BYTES: {
+            if (varName.equalsIgnoreCase("Name")) {
+                ueTypeName = "FName";
             }
+            fout.write(
+                    dumpString(String.format("    /** Bytes data will be encoded by base64 for %s */\r\n", varName)));
+            break;
+        }
 
-            case MESSAGE: {
-                ueTypeName = getUETypeName(typeDesc);
-                break;
-            }
+        case MESSAGE: {
+            ueTypeName = getUETypeName(typeDesc);
+            break;
+        }
 
-            default:
-                enable = false;
-                fout.write(dumpString(String.format("    /** invalid data type %s of UE DataTable for %s */\r\n",
-                        descType.name(), varName)));
-                this.logErrorMessage("invalid data type %s of UE DataTable for %s, should not called here.",
-                        descType.name(), varName);
-                break;
+        default:
+            enable = false;
+            fout.write(dumpString(String.format("    /** invalid data type %s of UE DataTable for %s */\r\n",
+                    descType.name(), varName)));
+            this.logErrorMessage("invalid data type %s of UE DataTable for %s, should not called here.",
+                    descType.name(), varName);
+            break;
         }
 
         if (enable) {
@@ -1782,28 +1781,28 @@ public abstract class DataDstUEBase extends DataDstImpl {
 
         DataDstWriterNode.JAVA_TYPE type = desc.getType();
         switch (type) {
-            case INT:
-                return "int32";
-            case LONG:
-                return "int64";
-            case FLOAT:
-                return "float";
-            case DOUBLE:
-                return "double";
-            case BOOLEAN:
-                return "bool";
-            case STRING:
-                return "FString";
-            case BYTES:
-                return "FString";
-            case MESSAGE:
-                if (desc.getPackageName() == null || desc.getPackageName().isEmpty()) {
-                    return String.format("F%s", getIdentName(desc.getMessageName()));
-                } else {
-                    return String.format("F%s", getIdentName(desc.getPackageName() + "_" + desc.getMessageName()));
-                }
-            default:
-                return "";
+        case INT:
+            return "int32";
+        case LONG:
+            return "int64";
+        case FLOAT:
+            return "float";
+        case DOUBLE:
+            return "double";
+        case BOOLEAN:
+            return "bool";
+        case STRING:
+            return "FString";
+        case BYTES:
+            return "FString";
+        case MESSAGE:
+            if (desc.getPackageName() == null || desc.getPackageName().isEmpty()) {
+                return String.format("F%s", getIdentName(desc.getMessageName()));
+            } else {
+                return String.format("F%s", getIdentName(desc.getPackageName() + "_" + desc.getMessageName()));
+            }
+        default:
+            return "";
         }
     }
 
@@ -1816,24 +1815,24 @@ public abstract class DataDstUEBase extends DataDstImpl {
         }
 
         switch (descType) {
-            case INT:
-                return "0";
-            case LONG:
-                return "0";
-            case FLOAT:
-                return "0";
-            case DOUBLE:
-                return "0";
-            case BOOLEAN:
-                return "false";
-            case STRING:
-                return "TEXT(\"\")";
-            case BYTES:
-                return "TEXT(\"\")";
-            case MESSAGE:
-                return "nullptr";
-            default:
-                return "NULL";
+        case INT:
+            return "0";
+        case LONG:
+            return "0";
+        case FLOAT:
+            return "0";
+        case DOUBLE:
+            return "0";
+        case BOOLEAN:
+            return "false";
+        case STRING:
+            return "TEXT(\"\")";
+        case BYTES:
+            return "TEXT(\"\")";
+        case MESSAGE:
+            return "nullptr";
+        default:
+            return "NULL";
         }
     }
 
@@ -1885,24 +1884,24 @@ public abstract class DataDstUEBase extends DataDstImpl {
 
     private final String getUETypeFormat(DataDstWriterNode.JAVA_TYPE type) {
         switch (type) {
-            case INT:
-                return "%d";
-            case LONG:
-                return "%lld";
-            case FLOAT:
-                return "%f";
-            case DOUBLE:
-                return "%llf";
-            case BOOLEAN:
-                return "%d";
-            case STRING:
-                return "%s";
-            case BYTES:
-                return "%s";
-            case MESSAGE:
-                return "nullptr";
-            default:
-                return "NULL";
+        case INT:
+            return "%d";
+        case LONG:
+            return "%lld";
+        case FLOAT:
+            return "%f";
+        case DOUBLE:
+            return "%llf";
+        case BOOLEAN:
+            return "%d";
+        case STRING:
+            return "%s";
+        case BYTES:
+            return "%s";
+        case MESSAGE:
+            return "nullptr";
+        default:
+            return "NULL";
         }
     }
 
@@ -1919,19 +1918,19 @@ public abstract class DataDstUEBase extends DataDstImpl {
         }
 
         switch (field.getType()) {
-            case INT:
-            case LONG:
-            case BOOLEAN:
-                return NAME_TYPE.LONG;
-            case FLOAT:
-            case DOUBLE:
-                return NAME_TYPE.DOUBLE;
-            case STRING:
-            case BYTES:
-            case MESSAGE:
-                return NAME_TYPE.STRING;
-            default:
-                return NAME_TYPE.LONG;
+        case INT:
+        case LONG:
+        case BOOLEAN:
+            return NAME_TYPE.LONG;
+        case FLOAT:
+        case DOUBLE:
+            return NAME_TYPE.DOUBLE;
+        case STRING:
+        case BYTES:
+        case MESSAGE:
+            return NAME_TYPE.STRING;
+        default:
+            return NAME_TYPE.LONG;
         }
     }
 
@@ -2045,19 +2044,19 @@ public abstract class DataDstUEBase extends DataDstImpl {
                 }
                 ret.keyFields.add(movedList);
                 switch (getUENameType(fieldDesc)) {
-                    case LONG:
-                        ret.nameType = NAME_TYPE.LONG;
-                        break;
-                    case DOUBLE:
-                        if (ret.nameType == NAME_TYPE.LONG) {
-                            ret.nameType = NAME_TYPE.DOUBLE;
-                        }
-                        break;
-                    case STRING:
-                        ret.nameType = NAME_TYPE.STRING;
-                        break;
-                    default:
-                        break;
+                case LONG:
+                    ret.nameType = NAME_TYPE.LONG;
+                    break;
+                case DOUBLE:
+                    if (ret.nameType == NAME_TYPE.LONG) {
+                        ret.nameType = NAME_TYPE.DOUBLE;
+                    }
+                    break;
+                case STRING:
+                    ret.nameType = NAME_TYPE.STRING;
+                    break;
+                default:
+                    break;
                 }
             } else {
                 ret.valueFields.add(movedList);

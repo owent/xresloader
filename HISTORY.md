@@ -1,6 +1,14 @@
 更新记录
 ==========
 
+2.11.0
+------
+
+1. 修复保留空list处理64位整数不正确的问题 [\#5](https://github.com/xresloader/xresloader/issues/5)
+2. ```--disable-empty-list``` 和 ```--enable-empty-list``` 改为不推荐使用。新增 ```--list-keep-empty``` , ```--list-strip-all-empty``` 和 ```--list-strip-empty-tail``` 。
+3. 新增 ```--list-strip-empty-tail``` 模式仅移List除尾部的空元素。
+
+
 2.10.2
 ------
 

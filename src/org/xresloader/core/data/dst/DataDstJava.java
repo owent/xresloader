@@ -12,7 +12,6 @@ import org.xresloader.core.ProgramOptions;
 import org.xresloader.core.data.err.ConvException;
 import org.xresloader.core.data.src.DataContainer;
 import org.xresloader.core.data.src.DataSrcImpl;
-import org.xresloader.core.engine.ExcelEngine;
 import org.xresloader.core.engine.IdentifyDescriptor;
 import org.xresloader.core.scheme.SchemeConf;
 
@@ -133,12 +132,7 @@ public abstract class DataDstJava extends DataDstImpl {
         return ret;
     }
 
-    private void dumpDefault(HashMap<String, Object> builder, DataDstWriterNode.DataDstChildrenNode as_child) {
-        dumpDefault(builder, as_child.innerFieldDesc);
-    }
-
-    @SuppressWarnings("unchecked")
-    private void dumpDefault(HashMap<String, Object> builder, DataDstWriterNode.DataDstFieldDescriptor field) {
+    private Object getDefault(DataDstWriterNode.DataDstFieldDescriptor field) {
         Object val = null;
         switch (field.getType()) {
             case INT:
@@ -180,79 +174,12 @@ public abstract class DataDstJava extends DataDstImpl {
         if (null == val) {
             this.logErrorMessage("serialize failed. %s is not supported for java default value",
                     field.getType().toString());
-            return;
+            return null;
         }
-
-        if (field.isMap()) {
-            Object mapKey = ((HashMap<String, Object>) val).getOrDefault("key", null);
-            Object mapValue = ((HashMap<String, Object>) val).getOrDefault("value", null);
-            if (mapKey != null && mapValue != null) {
-                SpecialInnerHashMap<Object, Object> old = (SpecialInnerHashMap<Object, Object>) builder
-                        .getOrDefault(field.getName(), null);
-                if (null == old) {
-                    old = new SpecialInnerHashMap<Object, Object>();
-                    builder.put(field.getName(), old);
-                }
-                old.put(mapKey, mapValue);
-            }
-        } else if (field.isList()) {
-            ArrayList<Object> old = (ArrayList<Object>) builder.getOrDefault(field.getName(), null);
-            if (null == old) {
-                old = new ArrayList<Object>();
-                builder.put(field.getName(), old);
-            }
-            old.add(val);
-        } else {
-            builder.put(field.getName(), val);
-        }
+        return val;
     }
 
-    /**
-     * 转储数据到builder
-     * 
-     * @param builder 转储目标
-     * @param node    message的描述结构
-     * @return 有数据则返回true
-     * @throws ConvException
-     */
-    private boolean dumpMessage(HashMap<String, Object> builder, DataDstWriterNode node) throws ConvException {
-        boolean ret = false;
-
-        for (Map.Entry<String, DataDstWriterNode.DataDstChildrenNode> c : node.getChildren().entrySet()) {
-            if (c.getValue().isOneof()) {
-                for (DataDstWriterNode child : c.getValue().nodes) {
-                    if (dumpPlainField(builder, child.identify, child.getOneofDescriptor(), true)) {
-                        ret = true;
-                    }
-                }
-            } else if (c.getValue().mode == DataDstWriterNode.CHILD_NODE_TYPE.STANDARD) {
-                for (DataDstWriterNode child : c.getValue().nodes) {
-                    if (dumpStandardField(builder, child, c.getValue())) {
-                        ret = true;
-                    }
-                }
-            } else if (c.getValue().mode == DataDstWriterNode.CHILD_NODE_TYPE.PLAIN) {
-                for (DataDstWriterNode child : c.getValue().nodes) {
-                    if (dumpPlainField(builder, child.identify, child.getFieldDescriptor(), true)) {
-                        ret = true;
-                    }
-                }
-            }
-        }
-
-        return ret;
-    }
-
-    @SuppressWarnings("unchecked")
-    private boolean dumpStandardField(HashMap<String, Object> builder, DataDstWriterNode desc,
-            DataDstWriterNode.DataDstChildrenNode as_child) throws ConvException {
-        if (null == desc.identify && DataDstWriterNode.JAVA_TYPE.MESSAGE != desc.getType()) {
-            if (ProgramOptions.getInstance().enbleEmptyList) {
-                dumpDefault(builder, as_child);
-            }
-            return false;
-        }
-
+    private Object getValFromDataSrc(DataDstWriterNode desc) throws ConvException {
         Object val = null;
         switch (desc.getType()) {
             case INT: {
@@ -327,6 +254,125 @@ public abstract class DataDstJava extends DataDstImpl {
             default:
                 break;
         }
+        return val;
+    }
+
+    private void dumpDefault(HashMap<String, Object> builder, DataDstWriterNode.DataDstChildrenNode as_child) {
+        dumpDefault(builder, as_child.innerFieldDesc);
+    }
+
+    @SuppressWarnings("unchecked")
+    private void dumpDefault(HashMap<String, Object> builder, DataDstWriterNode.DataDstFieldDescriptor field) {
+        Object val = getDefault(field);
+        if (val == null) {
+            return;
+        }
+
+        if (field.isMap()) {
+            Object mapKey = ((HashMap<String, Object>) val).getOrDefault("key", null);
+            Object mapValue = ((HashMap<String, Object>) val).getOrDefault("value", null);
+            if (mapKey != null && mapValue != null) {
+                SpecialInnerHashMap<Object, Object> old = (SpecialInnerHashMap<Object, Object>) builder
+                        .getOrDefault(field.getName(), null);
+                if (null == old) {
+                    old = new SpecialInnerHashMap<Object, Object>();
+                    builder.put(field.getName(), old);
+                }
+                old.put(mapKey, mapValue);
+            }
+        } else if (field.isList()) {
+            ArrayList<Object> old = (ArrayList<Object>) builder.getOrDefault(field.getName(), null);
+            if (null == old) {
+                old = new ArrayList<Object>();
+                builder.put(field.getName(), old);
+            }
+            old.add(val);
+        } else {
+            builder.put(field.getName(), val);
+        }
+    }
+
+    /**
+     * 转储数据到builder
+     * 
+     * @param builder 转储目标
+     * @param node    message的描述结构
+     * @return 有数据则返回true
+     * @throws ConvException
+     */
+    private boolean dumpMessage(HashMap<String, Object> builder, DataDstWriterNode node) throws ConvException {
+        boolean ret = false;
+
+        for (Map.Entry<String, DataDstWriterNode.DataDstChildrenNode> c : node.getChildren().entrySet()) {
+            if (c.getValue().isOneof()) {
+                for (DataDstWriterNode child : c.getValue().nodes) {
+                    if (dumpPlainField(builder, child.identify, child.getOneofDescriptor(), true)) {
+                        ret = true;
+                    }
+                }
+            } else if (c.getValue().mode == DataDstWriterNode.CHILD_NODE_TYPE.STANDARD) {
+                for (int index = 0; index < c.getValue().nodes.size(); index++) {
+                    DataDstWriterNode child = c.getValue().nodes.get(index);
+                    if (dumpStandardField(builder, child, c.getValue(), index)) {
+                        ret = true;
+                    }
+                }
+            } else if (c.getValue().mode == DataDstWriterNode.CHILD_NODE_TYPE.PLAIN) {
+                for (DataDstWriterNode child : c.getValue().nodes) {
+                    if (dumpPlainField(builder, child.identify, child.getFieldDescriptor(), true)) {
+                        ret = true;
+                    }
+                }
+            }
+        }
+
+        return ret;
+    }
+
+    @SuppressWarnings("unchecked")
+    private boolean dumpStandardField(HashMap<String, Object> builder, DataDstWriterNode desc,
+                                      DataDstWriterNode.DataDstChildrenNode as_child, int index) throws ConvException {
+        if (as_child.innerFieldDesc.isMap() || as_child.innerFieldDesc.isList() == false || ProgramOptions.getInstance().stripEmptyList == false) {
+            return dumpStandardField(builder, desc, as_child);
+        }
+
+        if (null == desc.identify && DataDstWriterNode.JAVA_TYPE.MESSAGE != desc.getType()) {
+            return false;
+        }
+
+        Object val = getValFromDataSrc(desc);
+
+        if (null == val) {
+            return false;
+        }
+
+        ArrayList<Object> old = (ArrayList<Object>) builder.getOrDefault(as_child.innerFieldDesc.getName(), null);
+        if (null == old) {
+            old = new ArrayList<Object>();
+            builder.put(as_child.innerFieldDesc.getName(), old);
+        }
+        for (int i = old.size(); i <= index; i++) {
+            if (i == index) {
+                old.add(val);
+            } else {
+                old.add(getDefault(as_child.innerFieldDesc));
+            }
+        }
+
+        return true;
+    }
+
+    @SuppressWarnings("unchecked")
+    private boolean dumpStandardField(HashMap<String, Object> builder, DataDstWriterNode desc,
+            DataDstWriterNode.DataDstChildrenNode as_child) throws ConvException {
+        if (null == desc.identify && DataDstWriterNode.JAVA_TYPE.MESSAGE != desc.getType()) {
+            if (ProgramOptions.getInstance().enbleEmptyList) {
+                dumpDefault(builder, as_child);
+            }
+            return false;
+        }
+
+        Object val = getValFromDataSrc(desc);
 
         if (null == val) {
             if (as_child.isRequired() || ProgramOptions.getInstance().enbleEmptyList) {

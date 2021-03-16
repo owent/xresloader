@@ -99,8 +99,11 @@ echo "
 | --pretty                 | 格式化输出               | 参数为整数，0代表关闭美化输出功能，大于0表示格式化时的缩进量                                              |
 | --enable-excel-formular  | 开启Excel公式实时计算    | 默认开启，开启公式实时计算会减慢转表速度                                                                  |
 | --disable-excel-formular | 关闭Excel公式实时计算    | 2003版的excel(*.xls)关闭公式会大幅加快转表速度。（注: 也会关闭对日期格式的探测）                          |
-| --disable-empty-list     | 禁止空列表项             | 默认开启，禁止空列表项，自动删除Excel中的未填充数据，不会转出到输出文件中                                 |
-| --enable-empty-list      | 开启空列表项             | 开启空列表项，未填充数据将使用默认的空值来填充，并转出到输出文件中                                        |
+| --disable-empty-list     | 移除数组空项             | (废弃)，请使用 ```--list-strip-all-empty```                                                               |
+| --enable-empty-list      | 保留全部数组空项         | (废弃)，请使用 ```--list-keep-empty```                                                                    |
+| --list-strip-all-empty   | 移除数组空项             | (默认) 移除数组空项，自动删除Excel中的未填充数据，不会转出到输出文件中                                    |
+| --list-keep-empty        | 保留全部数组空项         | 保留全部数组空项，未填充数据将使用默认的空值来填充，并转出到输出文件中                                    |
+| --list-strip-empty-tail  | 移除数组尾部空项         | 移除数组尾部空项，自动删除尾部的未填充数据，其他的未填充数据将使用默认的空值，并转出到输出文件中          |
 | --stdin                  | 通过标准输入批量转表     | 通过标准输入批量转表，参数可上面的一样,每行一项，字符串参数可以用单引号或双引号包裹，但是都不支持转义     |
 | --lua-global             | lua输出写到全局表        | 输出协议描述中的常量到Lua脚本时，同时导入符号到全局表_G中（仅对常量导出有效）                             |
 | --lua-module             | lua输出使用module写出    | 输出Lua脚本时，使用 module(模块名, package.seeall) 导出到全局                                             |

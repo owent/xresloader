@@ -445,6 +445,7 @@ public class DataDstWriterNode {
     public Object privateData = null; // 关联的Message描述信息，不同的DataDstImpl子类不一样。这里的数据和抽象数据结构的类型有关
     public IdentifyDescriptor identify = null; // 关联的Field/Excel列信息，同一个抽象数据结构类型可能对应的数据列不一样。和具体某个结构内的字段有关
     private DataDstChildrenNode referBrothers = null;
+    private int listIndex = -1;
 
     static private HashMap<JAVA_TYPE, DataDstTypeDescriptor> defaultDescs = new HashMap<JAVA_TYPE, DataDstTypeDescriptor>();
 
@@ -466,16 +467,18 @@ public class DataDstWriterNode {
         return ret;
     }
 
-    private DataDstWriterNode(Object privateData, DataDstTypeDescriptor typeDesc) {
+    private DataDstWriterNode(Object privateData, DataDstTypeDescriptor typeDesc, int listIndex) {
         this.privateData = privateData;
         this.typeDescriptor = typeDesc;
         this.oneofDescriptor = null;
+        this.listIndex = listIndex;
     }
 
     private DataDstWriterNode(Object privateData, DataDstOneofDescriptor oneofDesc) {
         this.privateData = privateData;
         this.typeDescriptor = null;
         this.oneofDescriptor = oneofDesc;
+        this.listIndex = -1;
     }
 
     static public String makeChildPath(String prefix, String child_name, int list_index) {
@@ -616,6 +619,18 @@ public class DataDstWriterNode {
         return this.oneofDescriptor.mutableExtension();
     }
 
+    public int getListIndex() {
+        if (this.fieldDescriptor == null) {
+            return -1;
+        }
+
+        if (!this.fieldDescriptor.isList()) {
+            return -1;
+        }
+
+        return this.listIndex;
+    }
+
     public String getChildPath(String prefix, int list_index, String child_name) {
         DataDstChildrenNode res = getChildren().getOrDefault(child_name, null);
         if (null == res)
@@ -696,8 +711,8 @@ public class DataDstWriterNode {
      * @param typeDesc    内部描述类型
      * @return 创建的节点
      */
-    static public DataDstWriterNode create(Object privateData, DataDstTypeDescriptor typeDesc) {
-        return new DataDstWriterNode(privateData, typeDesc);
+    static public DataDstWriterNode create(Object privateData, DataDstTypeDescriptor typeDesc, int listIndex) {
+        return new DataDstWriterNode(privateData, typeDesc, listIndex);
     }
 
     /**

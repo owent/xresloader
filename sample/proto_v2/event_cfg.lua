@@ -12,18 +12,18 @@ return {
     data_ver = "1.0.0.0",
     description = "Test event_cfg with oneof fields",
     hash_code = "no hash code",
-    xres_ver = "2.10.2",
+    xres_ver = "2.11.0",
   },
   [2] = "event_cfg",
   event_cfg = {
     {
+      id = 50001,
       item = {
-        item_id = 1511,
         item_count = 1512,
+        item_id = 1511,
         nested_note = "啦啦啦",
       },
       process = 1,
-      id = 50001,
       rule = {
         nested_note = "内嵌one of文本",
         rule_id = 511,
@@ -41,60 +41,60 @@ return {
       },
     },
     {
-      process = 2,
       id = 50002,
+      process = 2,
       rule = {
+        nested_enum_type = 10001,
         rule_id = 521,
         rule_param = 522,
-        nested_enum_type = 10001,
       },
       specify_field = {
         nested_enum_type = 10001,
       },
       test_arr = {
         {
+          nested_enum_type = 10001,
           rule_id = 721,
           rule_param = 722,
-          nested_enum_type = 10001,
         },
         {
+          nested_enum_type = 10101,
           rule_id = 821,
           rule_param = 822,
-          nested_enum_type = 10101,
         },
         {
           nested_note = "数组嵌套one of",
-          rule_param = 822,
           rule_id = 921,
+          rule_param = 822,
         },
       },
       user_exp = 1473624235014785965,
     },
     {
-      process = 3,
       enum_type = 10001,
       id = 50003,
+      process = 3,
       rule = {
+        nested_enum_type = 10101,
         rule_id = 531,
         rule_param = 532,
-        nested_enum_type = 10101,
       },
       specify_field = {
         nested_enum_type = 10101,
       },
     },
     {
+      id = 50004,
       note = "",
       process = 4,
-      id = 50004,
       rule = {
         rule_id = 541,
         rule_param = 542,
       },
     },
     {
-      process = 5,
       id = 50005,
+      process = 5,
       rule = {
         rule_id = 551,
         rule_param = 552,

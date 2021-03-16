@@ -29,6 +29,20 @@
             2,
             3
         ],
+        "TestMapIs": {
+            "11": "Map嵌套模式[1].value",
+            "10": "Map嵌套模式[0].value"
+        },
+        "TestMapSm": {
+            "aa": {
+                "Level": "112",
+                "Id": 111
+            },
+            "特殊:字符": {
+                "Level": "122",
+                "Id": 121
+            }
+        },
         "TestPlainEnumArr": [
             10001,
             10001,
@@ -85,6 +99,20 @@
             5,
             6
         ],
+        "TestMapIs": {
+            "20": "Map嵌套模式[0].value",
+            "21": "Map嵌套模式[1].value"
+        },
+        "TestMapSm": {
+            "特殊.字符": {
+                "Level": "222",
+                "Id": 221
+            },
+            "ba": {
+                "Level": "212",
+                "Id": 211
+            }
+        },
         "TestPlainEnumArr": [
             10101,
             10101,
@@ -125,6 +153,20 @@
             8,
             9
         ],
+        "TestMapIs": {
+            "30": "Map嵌套模式[0].value",
+            "31": "Map嵌套模式[1].value"
+        },
+        "TestMapSm": {
+            "ca": {
+                "Level": "312",
+                "Id": 311
+            },
+            "cb": {
+                "Level": "322",
+                "Id": 321
+            }
+        },
         "TestPlainEnumArr": [
             10001,
             10001,

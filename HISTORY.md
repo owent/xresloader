@@ -7,7 +7,8 @@
 1. 修复保留空list处理64位整数不正确的问题 [\#5](https://github.com/xresloader/xresloader/issues/5)
 2. ```--disable-empty-list``` 和 ```--enable-empty-list``` 改为不推荐使用。新增 ```--list-keep-empty``` , ```--list-strip-all-empty``` 和 ```--list-strip-empty-tail``` 。
 3. 新增 ```--list-strip-empty-tail``` 模式仅移List除尾部的空元素。
-
+4. 修订文本输出的排序规则，仅和Key有关，和Value无关。
+5. Plain模式的message数组允许指定下标
 
 2.10.2
 ------

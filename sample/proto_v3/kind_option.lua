@@ -224,6 +224,23 @@ local const_res = {
           },
           name = "event_rule_item",
         },
+        keep_or_strip_empty_list_cfg = {
+          field = {
+            key = {
+              name = "key",
+              number = 1,
+              options = {
+                field_description = "This is a Key",
+                key_tag = 1,
+              },
+              type_name = "UINT32",
+            },
+          },
+          name = "keep_or_strip_empty_list_cfg",
+          options = {
+            helper = "helper",
+          },
+        },
         role_upgrade_cfg = {
           field = {
             CostType = {

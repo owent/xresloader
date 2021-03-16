@@ -99,6 +99,19 @@
           }
         }
       },
+      "keep_or_strip_empty_list_cfg": {
+        "field": {"key": {
+          "options": {
+            "key_tag": 1,
+            "field_description": "This is a Key"
+          },
+          "name": "key",
+          "number": 1,
+          "type_name": "UINT32"
+        }},
+        "options": {"helper": "helper"},
+        "name": "keep_or_strip_empty_list_cfg"
+      },
       "test_msg_verifier": {
         "field": {"test_id_2": {
           "options": {"field_alias": "测试ID别名2"},

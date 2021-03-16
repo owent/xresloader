@@ -770,17 +770,18 @@ public class DataDstPb extends DataDstImpl {
         return ret;
     }
 
-    static private DataDstWriterNode createMessageWriterNode(PbInfoSet pbs, DataDstWriterNode.JAVA_TYPE type) {
-        return DataDstWriterNode.create(null, mutableDataDstDescriptor(pbs, null, type));
+    static private DataDstWriterNode createMessageWriterNode(PbInfoSet pbs, DataDstWriterNode.JAVA_TYPE type,
+            int listIndex) {
+        return DataDstWriterNode.create(null, mutableDataDstDescriptor(pbs, null, type), listIndex);
     }
 
     static private DataDstWriterNode createMessageWriterNode(PbInfoSet pbs, Descriptors.Descriptor pbDesc,
-            DataDstWriterNode.JAVA_TYPE type) {
+            DataDstWriterNode.JAVA_TYPE type, int listIndex) {
         if (null == pbDesc) {
-            return createMessageWriterNode(pbs, type);
+            return createMessageWriterNode(pbs, type, listIndex);
         }
 
-        return DataDstWriterNode.create(pbDesc, mutableDataDstDescriptor(pbs, pbDesc, type));
+        return DataDstWriterNode.create(pbDesc, mutableDataDstDescriptor(pbs, pbDesc, type), listIndex);
     }
 
     static private DataDstWriterNode createOneofWriterNode(PbInfoSet pbs, DataDstOneofDescriptor oneofDesc) {
@@ -794,7 +795,8 @@ public class DataDstPb extends DataDstImpl {
 
     @Override
     public final DataDstWriterNode compile() throws ConvException {
-        DataDstWriterNode ret = createMessageWriterNode(cachePbs, currentMsgDesc, DataDstWriterNode.JAVA_TYPE.MESSAGE);
+        DataDstWriterNode ret = createMessageWriterNode(cachePbs, currentMsgDesc, DataDstWriterNode.JAVA_TYPE.MESSAGE,
+                -1);
         if (test(ret, new LinkedList<String>())) {
             return ret;
         }
@@ -985,7 +987,7 @@ public class DataDstPb extends DataDstImpl {
                         }
 
                         DataDstWriterNode c = createMessageWriterNode(cachePbs, fd.getMessageType(),
-                                DataDstWriterNode.JAVA_TYPE.MESSAGE);
+                                DataDstWriterNode.JAVA_TYPE.MESSAGE, count);
                         boolean test_passed = false;
 
                         name_list.removeLast();
@@ -1044,7 +1046,7 @@ public class DataDstPb extends DataDstImpl {
 
                         if (null != col) {
                             DataDstWriterNode c = createMessageWriterNode(cachePbs, fd.getMessageType(),
-                                    DataDstWriterNode.JAVA_TYPE.MESSAGE);
+                                    DataDstWriterNode.JAVA_TYPE.MESSAGE, -1);
                             child = node.addChild(fd.getName(), c, fd, DataDstWriterNode.CHILD_NODE_TYPE.PLAIN);
                             setup_node_identify(c, child, col, fd);
                             ret = true;
@@ -1056,7 +1058,7 @@ public class DataDstPb extends DataDstImpl {
                     }
                 } else {
                     DataDstWriterNode c = createMessageWriterNode(cachePbs, fd.getMessageType(),
-                            DataDstWriterNode.JAVA_TYPE.MESSAGE);
+                            DataDstWriterNode.JAVA_TYPE.MESSAGE, -1);
                     boolean test_passed = false;
 
                     name_list.addLast(DataDstWriterNode.makeNodeName(fd.getName()));
@@ -1125,7 +1127,7 @@ public class DataDstPb extends DataDstImpl {
                         }
 
                         if (null != col) {
-                            DataDstWriterNode c = createMessageWriterNode(cachePbs, inner_type);
+                            DataDstWriterNode c = createMessageWriterNode(cachePbs, inner_type, count);
                             child = node.addChild(fd.getName(), c, fd, DataDstWriterNode.CHILD_NODE_TYPE.STANDARD);
                             setup_node_identify(c, child, col, fd);
                             ret = true;
@@ -1146,7 +1148,7 @@ public class DataDstPb extends DataDstImpl {
                         }
 
                         if (null != col) {
-                            DataDstWriterNode c = createMessageWriterNode(cachePbs, inner_type);
+                            DataDstWriterNode c = createMessageWriterNode(cachePbs, inner_type, -1);
                             child = node.addChild(fd.getName(), c, fd, DataDstWriterNode.CHILD_NODE_TYPE.PLAIN);
                             setup_node_identify(c, child, col, fd);
                             ret = true;
@@ -1167,14 +1169,14 @@ public class DataDstPb extends DataDstImpl {
 
                     if (null != col) {
                         filterMissingFields(missingFields, oneofField, fd, false);
-                        DataDstWriterNode c = createMessageWriterNode(cachePbs, inner_type);
+                        DataDstWriterNode c = createMessageWriterNode(cachePbs, inner_type, -1);
                         child = node.addChild(fd.getName(), c, fd, DataDstWriterNode.CHILD_NODE_TYPE.STANDARD);
                         setup_node_identify(c, child, col, fd);
                         ret = true;
                     } else {
                         filterMissingFields(missingFields, oneofField, fd, true);
                         if (checkFieldIsRequired(fd)) {
-                            DataDstWriterNode c = createMessageWriterNode(cachePbs, inner_type);
+                            DataDstWriterNode c = createMessageWriterNode(cachePbs, inner_type, -1);
                             // required 字段要dump默认数据
                             child = node.addChild(fd.getName(), c, fd, DataDstWriterNode.CHILD_NODE_TYPE.STANDARD);
                         }
@@ -1455,20 +1457,20 @@ public class DataDstPb extends DataDstImpl {
             }
 
             if (fd.isRepeated()) {
-                if (builder.getRepeatedFieldCount(fd) < index) {
-                    builder.addRepeatedField(fd, enum_val);
-                } else {
+                if (index > 0 && builder.getRepeatedFieldCount(fd) > index) {
                     builder.setRepeatedField(fd, index, enum_val);
+                } else {
+                    builder.addRepeatedField(fd, enum_val);
                 }
             } else {
                 builder.setField(fd, enum_val);
             }
         } else {
             if (fd.isRepeated()) {
-                if (builder.getRepeatedFieldCount(fd) < index) {
-                    builder.addRepeatedField(fd, val);
-                } else {
+                if (index > 0 && builder.getRepeatedFieldCount(fd) > index) {
                     builder.setRepeatedField(fd, index, val);
+                } else {
+                    builder.addRepeatedField(fd, val);
                 }
             } else {
                 builder.setField(fd, val);
@@ -1502,7 +1504,7 @@ public class DataDstPb extends DataDstImpl {
             if (c.getValue().isOneof()) {
                 // dump oneof data
                 for (DataDstWriterNode child : c.getValue().nodes) {
-                    if (dumpPlainField(builder, child.identify, child.getOneofDescriptor(), true)) {
+                    if (dumpPlainField(builder, child.identify, child.getOneofDescriptor(), child)) {
                         ret = true;
                     }
                 }
@@ -1513,15 +1515,15 @@ public class DataDstPb extends DataDstImpl {
                     continue;
                 }
 
-                for (int index = 0; index < c.getValue().nodes.size(); index++) {
-                    DataDstWriterNode child = c.getValue().nodes.get(index);
-                    if (dumpStandardField(builder, child, fd, index)) {
+                for (int i = 0; i < c.getValue().nodes.size(); i++) {
+                    DataDstWriterNode child = c.getValue().nodes.get(i);
+                    if (dumpStandardField(builder, child, fd)) {
                         ret = true;
                     }
                 }
             } else if (c.getValue().mode == DataDstWriterNode.CHILD_NODE_TYPE.PLAIN) {
                 for (DataDstWriterNode child : c.getValue().nodes) {
-                    if (dumpPlainField(builder, child.identify, child.getFieldDescriptor(), true)) {
+                    if (dumpPlainField(builder, child.identify, child.getFieldDescriptor(), child)) {
                         ret = true;
                     }
                 }
@@ -1532,12 +1534,12 @@ public class DataDstPb extends DataDstImpl {
     }
 
     private boolean dumpStandardField(DynamicMessage.Builder builder, DataDstWriterNode desc,
-            Descriptors.FieldDescriptor fd, int index) throws ConvException {
+            Descriptors.FieldDescriptor fd) throws ConvException {
         if (null == desc.identify && MESSAGE != fd.getJavaType()) {
             // required 空字段填充默认值
             if (checkFieldIsRequired(fd)
                     || ProgramOptions.getInstance().stripListRule == ProgramOptions.ListStripRule.KEEP_ALL) {
-                dumpDefault(builder, fd, index);
+                dumpDefault(builder, fd, desc.getListIndex());
             }
             return false;
         }
@@ -1547,18 +1549,18 @@ public class DataDstPb extends DataDstImpl {
         if (null == val) {
             if (checkFieldIsRequired(fd)
                     || ProgramOptions.getInstance().stripListRule == ProgramOptions.ListStripRule.KEEP_ALL) {
-                dumpDefault(builder, fd, index);
+                dumpDefault(builder, fd, desc.getListIndex());
             }
 
             return false;
         }
 
-        dumpValue(builder, fd, val, index);
+        dumpValue(builder, fd, val, desc.getListIndex());
         return true;
     }
 
     private boolean dumpPlainField(DynamicMessage.Builder builder, IdentifyDescriptor ident,
-            DataDstWriterNode.DataDstOneofDescriptor field, boolean isTopLevel) throws ConvException {
+            DataDstWriterNode.DataDstOneofDescriptor field, DataDstWriterNode maybeFromNode) throws ConvException {
         if (field == null) {
             return false;
         }
@@ -1580,11 +1582,12 @@ public class DataDstPb extends DataDstImpl {
             return false;
         }
 
-        return dumpPlainField(builder, ident, field, isTopLevel, res.value);
+        return dumpPlainField(builder, ident, field, maybeFromNode, res.value);
     }
 
     private boolean dumpPlainField(DynamicMessage.Builder builder, IdentifyDescriptor ident,
-            DataDstWriterNode.DataDstOneofDescriptor field, boolean isTopLevel, String input) throws ConvException {
+            DataDstWriterNode.DataDstOneofDescriptor field, DataDstWriterNode maybeFromNode, String input)
+            throws ConvException {
         if (field == null) {
             return false;
         }
@@ -1610,11 +1613,11 @@ public class DataDstPb extends DataDstImpl {
         }
 
         // 非顶层，不用验证类型
-        return dumpPlainField(builder, null, sub_field, false, (String) res[1]);
+        return dumpPlainField(builder, null, sub_field, null, (String) res[1]);
     }
 
     private boolean dumpPlainField(DynamicMessage.Builder builder, IdentifyDescriptor ident,
-            DataDstWriterNode.DataDstFieldDescriptor field, boolean isTopLevel) throws ConvException {
+            DataDstWriterNode.DataDstFieldDescriptor field, DataDstWriterNode maybeFromNode) throws ConvException {
         Descriptors.FieldDescriptor fd = (Descriptors.FieldDescriptor) field.getRawDescriptor();
         if (null == fd) {
             // 不需要提示，如果从其他方式解包协议描述的时候可能有可选字段丢失的
@@ -1622,7 +1625,8 @@ public class DataDstPb extends DataDstImpl {
         }
 
         if (null == ident) {
-            if (checkFieldIsRequired(fd)) {
+            if (checkFieldIsRequired(fd)
+                    || ProgramOptions.getInstance().stripListRule == ProgramOptions.ListStripRule.KEEP_ALL) {
                 dumpDefault(builder, fd, 0);
             }
             return false;
@@ -1630,45 +1634,53 @@ public class DataDstPb extends DataDstImpl {
 
         DataContainer<String> res = DataSrcImpl.getOurInstance().getValue(ident, "");
         if (null == res || !res.valid) {
-            if (checkFieldIsRequired(fd)) {
+            if (checkFieldIsRequired(fd)
+                    || ProgramOptions.getInstance().stripListRule == ProgramOptions.ListStripRule.KEEP_ALL) {
                 dumpDefault(builder, fd, 0);
             }
             return false;
         }
 
-        return dumpPlainField(builder, ident, field, isTopLevel, res.value);
+        return dumpPlainField(builder, ident, field, maybeFromNode, res.value);
     }
 
     private boolean dumpPlainField(DynamicMessage.Builder builder, IdentifyDescriptor ident,
-            DataDstWriterNode.DataDstFieldDescriptor field, boolean isTopLevel, String input) throws ConvException {
+            DataDstWriterNode.DataDstFieldDescriptor field, DataDstWriterNode maybeFromNode, String input)
+            throws ConvException {
         Descriptors.FieldDescriptor fd = (Descriptors.FieldDescriptor) field.getRawDescriptor();
         if (null == fd) {
             // 不需要提示，如果从其他方式解包协议描述的时候可能有可选字段丢失的
             return false;
         }
 
-        if ((isTopLevel && !field.isList()) && field.getType() != DataDstWriterNode.JAVA_TYPE.MESSAGE) {
+        if ((null != maybeFromNode && !field.isList()) && field.getType() != DataDstWriterNode.JAVA_TYPE.MESSAGE) {
             // error type
             logErrorMessage("Plain type %s of %s.%s must be list", field.getType().toString(),
                     field.getTypeDescriptor().getFullName(), field.getName());
             return false;
         }
-
-        Object val = null;
-
         if (field.isList()) {
-            String[] groups = splitPlainGroups(input.trim(), getPlainFieldSeparator(field));
+            String[] groups;
+            if (null != maybeFromNode && maybeFromNode.getListIndex() >= 0) {
+                groups = new String[] { input.trim() };
+            } else {
+                groups = splitPlainGroups(input.trim(), getPlainFieldSeparator(field));
+            }
+            Object parsedDatas = null;
+
             switch (field.getType()) {
             case INT: {
                 Long[] values = parsePlainDataLong(groups, ident, field);
                 ArrayList<Object> tmp = new ArrayList<Object>();
                 if (values != null) {
                     tmp.ensureCapacity(values.length);
+                    for (Long v : values) {
+                        tmp.add(v.intValue());
+                    }
                 }
-                for (Long v : values) {
-                    tmp.add(v.intValue());
+                if (!tmp.isEmpty()) {
+                    parsedDatas = tmp;
                 }
-                val = tmp;
                 break;
             }
 
@@ -1677,11 +1689,13 @@ public class DataDstPb extends DataDstImpl {
                 ArrayList<Object> tmp = new ArrayList<Object>();
                 if (values != null) {
                     tmp.ensureCapacity(values.length);
+                    for (Long v : values) {
+                        tmp.add(v);
+                    }
                 }
-                for (Long v : values) {
-                    tmp.add(v);
+                if (!tmp.isEmpty()) {
+                    parsedDatas = tmp;
                 }
-                val = tmp;
                 break;
             }
 
@@ -1690,11 +1704,13 @@ public class DataDstPb extends DataDstImpl {
                 ArrayList<Object> tmp = new ArrayList<Object>();
                 if (values != null) {
                     tmp.ensureCapacity(values.length);
+                    for (Double v : values) {
+                        tmp.add(v.floatValue());
+                    }
                 }
-                for (Double v : values) {
-                    tmp.add(v.floatValue());
+                if (!tmp.isEmpty()) {
+                    parsedDatas = tmp;
                 }
-                val = tmp;
                 break;
             }
 
@@ -1703,11 +1719,13 @@ public class DataDstPb extends DataDstImpl {
                 ArrayList<Object> tmp = new ArrayList<Object>();
                 if (values != null) {
                     tmp.ensureCapacity(values.length);
+                    for (Double v : values) {
+                        tmp.add(v);
+                    }
                 }
-                for (Double v : values) {
-                    tmp.add(v);
+                if (!tmp.isEmpty()) {
+                    parsedDatas = tmp;
                 }
-                val = tmp;
                 break;
             }
 
@@ -1716,11 +1734,13 @@ public class DataDstPb extends DataDstImpl {
                 ArrayList<Object> tmp = new ArrayList<Object>();
                 if (values != null) {
                     tmp.ensureCapacity(values.length);
+                    for (Boolean v : values) {
+                        tmp.add(v);
+                    }
                 }
-                for (Boolean v : values) {
-                    tmp.add(v);
+                if (!tmp.isEmpty()) {
+                    parsedDatas = tmp;
                 }
-                val = tmp;
                 break;
             }
 
@@ -1730,11 +1750,13 @@ public class DataDstPb extends DataDstImpl {
                 ArrayList<Object> tmp = new ArrayList<Object>();
                 if (values != null) {
                     tmp.ensureCapacity(values.length);
+                    for (String v : values) {
+                        tmp.add(v);
+                    }
                 }
-                for (String v : values) {
-                    tmp.add(v);
+                if (!tmp.isEmpty()) {
+                    parsedDatas = tmp;
                 }
-                val = tmp;
                 break;
             }
 
@@ -1749,7 +1771,7 @@ public class DataDstPb extends DataDstImpl {
                     }
                 }
                 if (!tmp.isEmpty()) {
-                    val = tmp;
+                    parsedDatas = tmp;
                 }
                 break;
             }
@@ -1758,7 +1780,48 @@ public class DataDstPb extends DataDstImpl {
                 // oneof can not be repeated
                 break;
             }
+
+            if (parsedDatas != null) {
+                if (!(parsedDatas instanceof ArrayList<?>)) {
+                    return false;
+                }
+                ArrayList<?> values = (ArrayList<?>) parsedDatas;
+
+                if (null != maybeFromNode && maybeFromNode.getListIndex() >= 0) {
+                    if (values.size() != 1) {
+                        throw new ConvException(
+                                String.format("Try to convert %s.%s[%d] failed, too many elements(found %d).",
+                                        field.getTypeDescriptor().getFullName(), field.getName(),
+                                        maybeFromNode.getListIndex(), values.size()));
+                    }
+
+                    int index = maybeFromNode.getListIndex();
+                    if (ProgramOptions.getInstance().stripListRule == ProgramOptions.ListStripRule.STRIP_EMPTY_TAIL) {
+                        while (builder.getRepeatedFieldCount(fd) < index) {
+                            builder.addRepeatedField(fd, getDefault(builder, fd));
+                        }
+                    }
+
+                    if (index >= 0 && builder.getRepeatedFieldCount(fd) > index) {
+                        builder.setRepeatedField(fd, index, values.get(0));
+                    } else {
+                        builder.addRepeatedField(fd, values.get(0));
+                    }
+                } else {
+                    for (int i = 0; i < values.size(); ++i) {
+                        dumpValue(builder, fd, values.get(i), i);
+                    }
+                }
+            } else if (ProgramOptions.getInstance().stripListRule == ProgramOptions.ListStripRule.KEEP_ALL) {
+                builder.addRepeatedField(fd, getDefault(builder, fd));
+            } else {
+                return false;
+            }
+
+            return true;
         } else {
+            Object val = null;
+
             switch (field.getType()) {
             case INT: {
                 val = parsePlainDataLong(input.trim(), ident, field).intValue();
@@ -1803,22 +1866,22 @@ public class DataDstPb extends DataDstImpl {
             default:
                 break;
             }
-        }
 
-        if (val == null) {
-            return false;
-        }
-
-        if (fd.isRepeated() && val instanceof ArrayList<?>) {
-            ArrayList<?> values = (ArrayList<?>) val;
-            for (int i = 0; i < values.size(); ++i) {
-                dumpValue(builder, fd, values.get(i), i);
+            if (val == null) {
+                return false;
             }
-        } else {
-            dumpValue(builder, fd, val, 0);
-        }
 
-        return true;
+            if (fd.isRepeated() && val instanceof ArrayList<?>) {
+                ArrayList<?> values = (ArrayList<?>) val;
+                for (int i = 0; i < values.size(); ++i) {
+                    dumpValue(builder, fd, values.get(i), i);
+                }
+            } else {
+                dumpValue(builder, fd, val, 0);
+            }
+
+            return true;
+        }
     }
 
     public DynamicMessage parsePlainDataMessage(String[] inputs, IdentifyDescriptor ident,
@@ -1860,7 +1923,7 @@ public class DataDstPb extends DataDstImpl {
                             usedInputIdx + 1, inputs.length));
                 }
 
-                if (dumpPlainField(ret, null, children.get(i).getReferOneof(), false, inputs[usedInputIdx])) {
+                if (dumpPlainField(ret, null, children.get(i).getReferOneof(), null, inputs[usedInputIdx])) {
                     hasData = true;
                     dumpedOneof.add(children.get(i).getReferOneof().getFullName());
                 }
@@ -1874,7 +1937,7 @@ public class DataDstPb extends DataDstImpl {
                             inputs.length));
                 }
 
-                if (dumpPlainField(ret, null, children.get(i), false, inputs[usedInputIdx])) {
+                if (dumpPlainField(ret, null, children.get(i), null, inputs[usedInputIdx])) {
                     hasData = true;
                 }
 

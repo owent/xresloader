@@ -95,10 +95,6 @@ public class DataDstMsgPack extends DataDstJava {
             sorted_array.ensureCapacity(mp.size());
             sorted_array.addAll(mp.entrySet());
             sorted_array.sort((l, r) -> {
-                if (l.getValue() instanceof Integer && r.getValue() instanceof Integer) {
-                    return ((Integer) l.getValue()).compareTo((Integer) r.getValue());
-                }
-
                 if (l.getKey() instanceof Integer && r.getKey() instanceof Integer) {
                     return ((Integer) l.getKey()).compareTo((Integer) r.getKey());
                 } else if (l.getKey() instanceof Long && r.getKey() instanceof Long) {

@@ -1360,7 +1360,7 @@ public abstract class DataDstUEBase extends DataDstImpl {
         // ======================================================================================================
         LinkedList<DataDstWriterNodeWrapper> expandedDesc = new LinkedList<DataDstWriterNodeWrapper>();
         ddNode = DataDstWriterNode.create(null,
-                DataDstWriterNode.getDefaultMessageDescriptor(DataDstWriterNode.JAVA_TYPE.STRING));
+                DataDstWriterNode.getDefaultMessageDescriptor(DataDstWriterNode.JAVA_TYPE.STRING), -1);
         ddNode.setFieldDescriptor(new DataDstFieldDescriptor(ddNode.getTypeDescriptor(), 1, "Name",
                 DataDstWriterNode.FIELD_LABEL_TYPE.OPTIONAL, null));
         ddNode.identify = IdentifyEngine.n2i("Name", 0);
@@ -1370,7 +1370,7 @@ public abstract class DataDstUEBase extends DataDstImpl {
         expandedDesc.add(constNameNode);
 
         ddNode = DataDstWriterNode.create(null,
-                DataDstWriterNode.getDefaultMessageDescriptor(DataDstWriterNode.JAVA_TYPE.INT));
+                DataDstWriterNode.getDefaultMessageDescriptor(DataDstWriterNode.JAVA_TYPE.INT), -1);
         ddNode.setFieldDescriptor(new DataDstFieldDescriptor(ddNode.getTypeDescriptor(), 2, "Value",
                 DataDstWriterNode.FIELD_LABEL_TYPE.OPTIONAL, null));
         ddNode.identify = IdentifyEngine.n2i("Value", 1);

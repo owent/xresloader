@@ -307,20 +307,20 @@ public abstract class DataDstJava extends DataDstImpl {
         for (Map.Entry<String, DataDstWriterNode.DataDstChildrenNode> c : node.getChildren().entrySet()) {
             if (c.getValue().isOneof()) {
                 for (DataDstWriterNode child : c.getValue().nodes) {
-                    if (dumpPlainField(builder, child.identify, child.getOneofDescriptor(), true)) {
+                    if (dumpPlainField(builder, child.identify, child.getOneofDescriptor(), child)) {
                         ret = true;
                     }
                 }
             } else if (c.getValue().mode == DataDstWriterNode.CHILD_NODE_TYPE.STANDARD) {
-                for (int index = 0; index < c.getValue().nodes.size(); index++) {
-                    DataDstWriterNode child = c.getValue().nodes.get(index);
-                    if (dumpStandardField(builder, child, c.getValue(), index)) {
+                for (int i = 0; i < c.getValue().nodes.size(); i++) {
+                    DataDstWriterNode child = c.getValue().nodes.get(i);
+                    if (dumpStandardField(builder, child, c.getValue())) {
                         ret = true;
                     }
                 }
             } else if (c.getValue().mode == DataDstWriterNode.CHILD_NODE_TYPE.PLAIN) {
                 for (DataDstWriterNode child : c.getValue().nodes) {
-                    if (dumpPlainField(builder, child.identify, child.getFieldDescriptor(), true)) {
+                    if (dumpPlainField(builder, child.identify, child.getFieldDescriptor(), child)) {
                         ret = true;
                     }
                 }
@@ -332,7 +332,7 @@ public abstract class DataDstJava extends DataDstImpl {
 
     @SuppressWarnings("unchecked")
     private boolean dumpStandardField(HashMap<String, Object> builder, DataDstWriterNode desc,
-            DataDstWriterNode.DataDstChildrenNode as_child, int index) throws ConvException {
+            DataDstWriterNode.DataDstChildrenNode as_child) throws ConvException {
         if (null == desc.identify && DataDstWriterNode.JAVA_TYPE.MESSAGE != desc.getType()) {
             if (as_child.isRequired()
                     || ProgramOptions.getInstance().stripListRule == ProgramOptions.ListStripRule.KEEP_ALL) {
@@ -370,13 +370,18 @@ public abstract class DataDstJava extends DataDstImpl {
                 builder.put(as_child.innerFieldDesc.getName(), old);
             }
 
+            int index = desc.getListIndex();
             if (ProgramOptions.getInstance().stripListRule == ProgramOptions.ListStripRule.STRIP_EMPTY_TAIL) {
                 while (old.size() < index) {
                     dumpDefault(builder, as_child);
                 }
             }
 
-            old.add(val);
+            if (index > 0 && old.size() > index) {
+                old.set(index, val);
+            } else {
+                old.add(val);
+            }
         } else {
             builder.put(as_child.innerFieldDesc.getName(), val);
         }
@@ -385,7 +390,7 @@ public abstract class DataDstJava extends DataDstImpl {
     }
 
     private boolean dumpPlainField(HashMap<String, Object> builder, IdentifyDescriptor ident,
-            DataDstWriterNode.DataDstOneofDescriptor field, boolean isTopLevel) throws ConvException {
+            DataDstWriterNode.DataDstOneofDescriptor field, DataDstWriterNode maybeFromNode) throws ConvException {
         if (field == null) {
             return false;
         }
@@ -399,11 +404,12 @@ public abstract class DataDstJava extends DataDstImpl {
             return false;
         }
 
-        return dumpPlainField(builder, ident, field, isTopLevel, res.value);
+        return dumpPlainField(builder, ident, field, maybeFromNode, res.value);
     }
 
     private boolean dumpPlainField(HashMap<String, Object> builder, IdentifyDescriptor ident,
-            DataDstWriterNode.DataDstOneofDescriptor field, boolean isTopLevel, String input) throws ConvException {
+            DataDstWriterNode.DataDstOneofDescriptor field, DataDstWriterNode maybeFromNode, String input)
+            throws ConvException {
         if (field == null) {
             return false;
         }
@@ -429,14 +435,15 @@ public abstract class DataDstJava extends DataDstImpl {
         }
 
         // 非顶层，不用验证类型
-        return dumpPlainField(builder, null, sub_field, false, (String) res[1]);
+        return dumpPlainField(builder, null, sub_field, null, (String) res[1]);
     }
 
     private boolean dumpPlainField(HashMap<String, Object> builder, IdentifyDescriptor ident,
-            DataDstWriterNode.DataDstFieldDescriptor field, boolean isTopLevel) throws ConvException {
+            DataDstWriterNode.DataDstFieldDescriptor field, DataDstWriterNode maybeFromNode) throws ConvException {
         if (null == ident) {
             // Plain模式的repeated对于STRIP_EMPTY_TAIL也可以直接全部strip掉，下同
-            if (field.isRequired()) {
+            if (field.isRequired()
+                    || ProgramOptions.getInstance().stripListRule == ProgramOptions.ListStripRule.KEEP_ALL) {
                 dumpDefault(builder, field);
             }
             return false;
@@ -444,39 +451,64 @@ public abstract class DataDstJava extends DataDstImpl {
 
         DataContainer<String> res = DataSrcImpl.getOurInstance().getValue(ident, "");
         if (null == res || !res.valid) {
-            if (field.isRequired()) {
+            if (field.isRequired()
+                    || ProgramOptions.getInstance().stripListRule == ProgramOptions.ListStripRule.KEEP_ALL) {
                 dumpDefault(builder, field);
             }
             return false;
         }
 
-        return dumpPlainField(builder, ident, field, isTopLevel, res.value);
+        return dumpPlainField(builder, ident, field, maybeFromNode, res.value);
     }
 
+    @SuppressWarnings("unchecked")
     private boolean dumpPlainField(HashMap<String, Object> builder, IdentifyDescriptor ident,
-            DataDstWriterNode.DataDstFieldDescriptor field, boolean isTopLevel, String input) throws ConvException {
+            DataDstWriterNode.DataDstFieldDescriptor field, DataDstWriterNode maybeFromNode, String input)
+            throws ConvException {
 
-        if ((isTopLevel && !field.isList()) && field.getType() != DataDstWriterNode.JAVA_TYPE.MESSAGE) {
+        if ((null != maybeFromNode && null != maybeFromNode.identify && !field.isList())
+                && field.getType() != DataDstWriterNode.JAVA_TYPE.MESSAGE) {
             // error type
             logErrorMessage("Plain type %s of %s.%s must be list", field.getType().toString(),
                     field.getTypeDescriptor().getFullName(), field.getName());
             return false;
         }
 
-        Object val = null;
         if (field.isList()) {
-            String[] groups = splitPlainGroups(input.trim(), getPlainFieldSeparator(field));
+            Object val = builder.getOrDefault(field.getName(), null);
+            if (field.isMap()) {
+                if (val == null || !(val instanceof SpecialInnerHashMap<?, ?>)) {
+                    val = new SpecialInnerHashMap<Object, Object>();
+                    builder.put(field.getName(), val);
+                }
+            } else {
+                if (val == null || !(val instanceof ArrayList<?>)) {
+                    val = new ArrayList<Object>();
+                    builder.put(field.getName(), val);
+                }
+            }
+
+            String[] groups;
+            if (null != maybeFromNode && maybeFromNode.getListIndex() >= 0) {
+                groups = new String[] { input.trim() };
+            } else {
+                groups = splitPlainGroups(input.trim(), getPlainFieldSeparator(field));
+            }
+            Object parsedDatas = null;
             switch (field.getType()) {
             case INT: {
                 Long[] values = parsePlainDataLong(groups, ident, field);
                 ArrayList<Object> tmp = new ArrayList<Object>();
                 if (values != null) {
                     tmp.ensureCapacity(values.length);
+                    for (Long v : values) {
+                        tmp.add(v.intValue());
+                    }
                 }
-                for (Long v : values) {
-                    tmp.add(v.intValue());
+
+                if (!tmp.isEmpty()) {
+                    parsedDatas = tmp;
                 }
-                val = tmp;
                 break;
             }
 
@@ -485,11 +517,14 @@ public abstract class DataDstJava extends DataDstImpl {
                 ArrayList<Object> tmp = new ArrayList<Object>();
                 if (values != null) {
                     tmp.ensureCapacity(values.length);
+                    for (Long v : values) {
+                        tmp.add(v);
+                    }
                 }
-                for (Long v : values) {
-                    tmp.add(v);
+
+                if (!tmp.isEmpty()) {
+                    parsedDatas = tmp;
                 }
-                val = tmp;
                 break;
             }
 
@@ -498,11 +533,14 @@ public abstract class DataDstJava extends DataDstImpl {
                 ArrayList<Object> tmp = new ArrayList<Object>();
                 if (values != null) {
                     tmp.ensureCapacity(values.length);
+                    for (Double v : values) {
+                        tmp.add(v.floatValue());
+                    }
                 }
-                for (Double v : values) {
-                    tmp.add(v.floatValue());
+
+                if (!tmp.isEmpty()) {
+                    parsedDatas = tmp;
                 }
-                val = tmp;
                 break;
             }
 
@@ -511,11 +549,14 @@ public abstract class DataDstJava extends DataDstImpl {
                 ArrayList<Object> tmp = new ArrayList<Object>();
                 if (values != null) {
                     tmp.ensureCapacity(values.length);
+                    for (Double v : values) {
+                        tmp.add(v);
+                    }
                 }
-                for (Double v : values) {
-                    tmp.add(v);
+
+                if (!tmp.isEmpty()) {
+                    parsedDatas = tmp;
                 }
-                val = tmp;
                 break;
             }
 
@@ -524,11 +565,14 @@ public abstract class DataDstJava extends DataDstImpl {
                 ArrayList<Object> tmp = new ArrayList<Object>();
                 if (values != null) {
                     tmp.ensureCapacity(values.length);
+                    for (Boolean v : values) {
+                        tmp.add(v);
+                    }
                 }
-                for (Boolean v : values) {
-                    tmp.add(v);
+
+                if (!tmp.isEmpty()) {
+                    parsedDatas = tmp;
                 }
-                val = tmp;
                 break;
             }
 
@@ -538,11 +582,14 @@ public abstract class DataDstJava extends DataDstImpl {
                 ArrayList<Object> tmp = new ArrayList<Object>();
                 if (values != null) {
                     tmp.ensureCapacity(values.length);
+                    for (String v : values) {
+                        tmp.add(v);
+                    }
                 }
-                for (String v : values) {
-                    tmp.add(v);
+
+                if (!tmp.isEmpty()) {
+                    parsedDatas = tmp;
                 }
-                val = tmp;
                 break;
             }
 
@@ -561,7 +608,7 @@ public abstract class DataDstJava extends DataDstImpl {
                         }
                     }
                     if (!tmp.isEmpty()) {
-                        val = tmp;
+                        parsedDatas = tmp;
                     }
                 } else {
                     ArrayList<Object> tmp = new ArrayList<Object>();
@@ -573,8 +620,9 @@ public abstract class DataDstJava extends DataDstImpl {
                             tmp.add(msg);
                         }
                     }
+
                     if (!tmp.isEmpty()) {
-                        val = tmp;
+                        parsedDatas = tmp;
                     }
                 }
                 break;
@@ -583,7 +631,48 @@ public abstract class DataDstJava extends DataDstImpl {
             default:
                 break;
             }
+
+            if (field.isMap() && parsedDatas != null) {
+                SpecialInnerHashMap<Object, Object> parsedMap = (SpecialInnerHashMap<Object, Object>) parsedDatas;
+                SpecialInnerHashMap<Object, Object> valMap = (SpecialInnerHashMap<Object, Object>) val;
+                valMap.putAll(parsedMap);
+            } else if (parsedDatas != null) {
+                ArrayList<Object> parsedArray = (ArrayList<Object>) parsedDatas;
+                ArrayList<Object> valArray = (ArrayList<Object>) val;
+                if (null != maybeFromNode && maybeFromNode.getListIndex() >= 0) {
+                    if (parsedArray.size() != 1) {
+                        throw new ConvException(
+                                String.format("Try to convert %s.%s[%d] failed, too many elements(found %d).",
+                                        field.getTypeDescriptor().getFullName(), field.getName(),
+                                        maybeFromNode.getListIndex(), parsedArray.size()));
+                    }
+
+                    int index = maybeFromNode.getListIndex();
+                    if (ProgramOptions.getInstance().stripListRule == ProgramOptions.ListStripRule.STRIP_EMPTY_TAIL) {
+                        while (valArray.size() < index) {
+                            valArray.add(getDefault(field));
+                        }
+                    }
+
+                    if (index >= 0 && valArray.size() > index) {
+                        valArray.set(index, parsedArray.get(0));
+                    } else {
+                        valArray.add(parsedArray.get(0));
+                    }
+                } else {
+                    valArray.addAll(parsedArray);
+                }
+            } else if (ProgramOptions.getInstance().stripListRule == ProgramOptions.ListStripRule.KEEP_ALL) {
+                ArrayList<Object> valArray = (ArrayList<Object>) val;
+                valArray.add(getDefault(field));
+            } else {
+                return false;
+            }
+
+            return true;
         } else {
+            Object val = null;
+
             switch (field.getType()) {
             case INT: {
                 val = parsePlainDataLong(input.trim(), ident, field).intValue();
@@ -628,14 +717,14 @@ public abstract class DataDstJava extends DataDstImpl {
             default:
                 break;
             }
-        }
 
-        if (val == null) {
-            return false;
-        }
+            if (val == null) {
+                return false;
+            }
 
-        builder.put(field.getName(), val);
-        return true;
+            builder.put(field.getName(), val);
+            return true;
+        }
     }
 
     public HashMap<String, Object> parsePlainDataMessage(String[] inputs, IdentifyDescriptor ident,
@@ -671,7 +760,7 @@ public abstract class DataDstJava extends DataDstImpl {
                             usedInputIdx + 1, inputs.length));
                 }
 
-                if (dumpPlainField(ret, null, children.get(i).getReferOneof(), false, inputs[usedInputIdx])) {
+                if (dumpPlainField(ret, null, children.get(i).getReferOneof(), null, inputs[usedInputIdx])) {
                     dumpedOneof.add(children.get(i).getReferOneof().getFullName());
                 }
 
@@ -684,7 +773,7 @@ public abstract class DataDstJava extends DataDstImpl {
                             inputs.length));
                 }
 
-                dumpPlainField(ret, null, children.get(i), false, inputs[usedInputIdx]);
+                dumpPlainField(ret, null, children.get(i), null, inputs[usedInputIdx]);
 
                 ++usedInputIdx;
             }

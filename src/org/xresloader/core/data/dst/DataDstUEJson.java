@@ -185,10 +185,6 @@ public class DataDstUEJson extends DataDstUEBase {
             sorted_array.ensureCapacity(mp.size());
             sorted_array.addAll(mp.entrySet());
             sorted_array.sort((l, r) -> {
-                if (l.getValue() instanceof Integer && r.getValue() instanceof Integer) {
-                    return ((Integer) l.getValue()).compareTo((Integer) r.getValue());
-                }
-
                 return l.getKey().compareTo(r.getKey());
             });
 
@@ -501,163 +497,163 @@ public class DataDstUEJson extends DataDstUEBase {
         if (field.isList()) {
             String[] groups = splitPlainGroups(input.trim(), getPlainFieldSeparator(field));
             switch (field.getType()) {
-                case INT: {
-                    Long[] values = parsePlainDataLong(groups, ident, field);
-                    JSONArray tmp = new JSONArray();
-                    if (null != values) {
-                        for (Long v : values) {
-                            tmp.put(v.intValue());
-                        }
+            case INT: {
+                Long[] values = parsePlainDataLong(groups, ident, field);
+                JSONArray tmp = new JSONArray();
+                if (null != values) {
+                    for (Long v : values) {
+                        tmp.put(v.intValue());
                     }
-                    ret = tmp;
-                    break;
                 }
+                ret = tmp;
+                break;
+            }
 
-                case LONG: {
-                    Long[] values = parsePlainDataLong(groups, ident, field);
-                    JSONArray tmp = new JSONArray();
-                    if (null != values) {
-                        for (Long v : values) {
-                            tmp.put(v);
-                        }
+            case LONG: {
+                Long[] values = parsePlainDataLong(groups, ident, field);
+                JSONArray tmp = new JSONArray();
+                if (null != values) {
+                    for (Long v : values) {
+                        tmp.put(v);
                     }
-                    ret = tmp;
-                    break;
                 }
+                ret = tmp;
+                break;
+            }
 
-                case FLOAT: {
-                    Double[] values = parsePlainDataDouble(groups, ident, field);
-                    JSONArray tmp = new JSONArray();
-                    if (null != values) {
-                        for (Double v : values) {
-                            tmp.put(v.floatValue());
-                        }
+            case FLOAT: {
+                Double[] values = parsePlainDataDouble(groups, ident, field);
+                JSONArray tmp = new JSONArray();
+                if (null != values) {
+                    for (Double v : values) {
+                        tmp.put(v.floatValue());
                     }
-                    ret = tmp;
-                    break;
                 }
+                ret = tmp;
+                break;
+            }
 
-                case DOUBLE: {
-                    Double[] values = parsePlainDataDouble(groups, ident, field);
-                    JSONArray tmp = new JSONArray();
-                    if (null != values) {
-                        for (Double v : values) {
-                            tmp.put(v);
-                        }
+            case DOUBLE: {
+                Double[] values = parsePlainDataDouble(groups, ident, field);
+                JSONArray tmp = new JSONArray();
+                if (null != values) {
+                    for (Double v : values) {
+                        tmp.put(v);
                     }
-                    ret = tmp;
-                    break;
                 }
+                ret = tmp;
+                break;
+            }
 
-                case BOOLEAN: {
-                    Boolean[] values = parsePlainDataBoolean(groups, ident, field);
-                    JSONArray tmp = new JSONArray();
-                    if (null != values) {
-                        for (Boolean v : values) {
-                            tmp.put(v);
-                        }
+            case BOOLEAN: {
+                Boolean[] values = parsePlainDataBoolean(groups, ident, field);
+                JSONArray tmp = new JSONArray();
+                if (null != values) {
+                    for (Boolean v : values) {
+                        tmp.put(v);
                     }
-                    ret = tmp;
-                    break;
                 }
+                ret = tmp;
+                break;
+            }
 
-                case STRING:
-                case BYTES: {
-                    String[] values = parsePlainDataString(groups, ident, field);
-                    JSONArray tmp = new JSONArray();
-                    if (null != values) {
-                        for (String v : values) {
-                            tmp.put(v);
-                        }
+            case STRING:
+            case BYTES: {
+                String[] values = parsePlainDataString(groups, ident, field);
+                JSONArray tmp = new JSONArray();
+                if (null != values) {
+                    for (String v : values) {
+                        tmp.put(v);
                     }
-                    ret = tmp;
-                    break;
                 }
+                ret = tmp;
+                break;
+            }
 
-                case MESSAGE: {
-                    if (field.isMap()) {
-                        JSONObject tmp = new JSONObject();
-                        for (String v : groups) {
-                            String[] subGroups = splitPlainGroups(v, getPlainMessageSeparator(field));
-                            JSONObject msg = pickValueFieldJsonPlainField(subGroups, ident, field);
-                            if (msg != null) {
-                                Object mapKey = null;
-                                Object mapValue = null;
-                                for (String key : ((JSONObject) msg).keySet()) {
-                                    if (key.equalsIgnoreCase("key")) {
-                                        mapKey = ((JSONObject) msg).opt(key);
-                                    } else if (key.equalsIgnoreCase("value")) {
-                                        mapValue = ((JSONObject) msg).opt(key);
-                                    }
-                                }
-
-                                if (mapKey != null && mapValue != null) {
-                                    tmp.put(mapKey.toString(), mapValue);
+            case MESSAGE: {
+                if (field.isMap()) {
+                    JSONObject tmp = new JSONObject();
+                    for (String v : groups) {
+                        String[] subGroups = splitPlainGroups(v, getPlainMessageSeparator(field));
+                        JSONObject msg = pickValueFieldJsonPlainField(subGroups, ident, field);
+                        if (msg != null) {
+                            Object mapKey = null;
+                            Object mapValue = null;
+                            for (String key : ((JSONObject) msg).keySet()) {
+                                if (key.equalsIgnoreCase("key")) {
+                                    mapKey = ((JSONObject) msg).opt(key);
+                                } else if (key.equalsIgnoreCase("value")) {
+                                    mapValue = ((JSONObject) msg).opt(key);
                                 }
                             }
-                        }
-                        ret = tmp;
-                    } else {
-                        JSONArray tmp = new JSONArray();
-                        for (String v : groups) {
-                            String[] subGroups = splitPlainGroups(v, getPlainMessageSeparator(field));
-                            JSONObject msg = pickValueFieldJsonPlainField(subGroups, ident, field);
-                            if (msg != null) {
-                                tmp.put(msg);
+
+                            if (mapKey != null && mapValue != null) {
+                                tmp.put(mapKey.toString(), mapValue);
                             }
                         }
-                        ret = tmp;
                     }
-                    break;
+                    ret = tmp;
+                } else {
+                    JSONArray tmp = new JSONArray();
+                    for (String v : groups) {
+                        String[] subGroups = splitPlainGroups(v, getPlainMessageSeparator(field));
+                        JSONObject msg = pickValueFieldJsonPlainField(subGroups, ident, field);
+                        if (msg != null) {
+                            tmp.put(msg);
+                        }
+                    }
+                    ret = tmp;
                 }
+                break;
+            }
 
-                default:
-                    break;
+            default:
+                break;
             }
         } else {
             switch (field.getType()) {
-                case INT: {
-                    ret = parsePlainDataLong(input.trim(), ident, field).intValue();
-                    break;
-                }
+            case INT: {
+                ret = parsePlainDataLong(input.trim(), ident, field).intValue();
+                break;
+            }
 
-                case LONG: {
-                    ret = parsePlainDataLong(input.trim(), ident, field);
-                    break;
-                }
+            case LONG: {
+                ret = parsePlainDataLong(input.trim(), ident, field);
+                break;
+            }
 
-                case FLOAT: {
-                    ret = parsePlainDataDouble(input.trim(), ident, field).floatValue();
-                    break;
-                }
+            case FLOAT: {
+                ret = parsePlainDataDouble(input.trim(), ident, field).floatValue();
+                break;
+            }
 
-                case DOUBLE: {
-                    ret = parsePlainDataDouble(input.trim(), ident, field);
-                    break;
-                }
+            case DOUBLE: {
+                ret = parsePlainDataDouble(input.trim(), ident, field);
+                break;
+            }
 
-                case BOOLEAN: {
-                    ret = parsePlainDataBoolean(input.trim(), ident, field);
-                    break;
-                }
+            case BOOLEAN: {
+                ret = parsePlainDataBoolean(input.trim(), ident, field);
+                break;
+            }
 
-                case STRING:
-                case BYTES: {
-                    ret = parsePlainDataString(input.trim(), ident, field);
-                    break;
-                }
+            case STRING:
+            case BYTES: {
+                ret = parsePlainDataString(input.trim(), ident, field);
+                break;
+            }
 
-                case MESSAGE: {
-                    String[] groups = splitPlainGroups(input.trim(), getPlainMessageSeparator(field));
-                    ret = pickValueFieldJsonPlainField(groups, ident, field);
-                    if (ret == null) {
-                        ret = pickValueFieldJsonDefaultImpl(field);
-                    }
-                    break;
+            case MESSAGE: {
+                String[] groups = splitPlainGroups(input.trim(), getPlainMessageSeparator(field));
+                ret = pickValueFieldJsonPlainField(groups, ident, field);
+                if (ret == null) {
+                    ret = pickValueFieldJsonDefaultImpl(field);
                 }
+                break;
+            }
 
-                default:
-                    break;
+            default:
+                break;
             }
         }
 
@@ -770,46 +766,46 @@ public class DataDstUEJson extends DataDstUEBase {
         }
 
         switch (fd.getType()) {
-            case INT:
-            case LONG: {
-                return 0;
+        case INT:
+        case LONG: {
+            return 0;
+        }
+        case BOOLEAN: {
+            return false;
+        }
+        case STRING:
+        case BYTES: {
+            return "";
+        }
+        case FLOAT:
+        case DOUBLE: {
+            return 0.0f;
+        }
+        case MESSAGE: {
+            HashSet<String> dumpedOneof = null;
+            if (fd.getTypeDescriptor().getSortedOneofs().size() > 0) {
+                dumpedOneof = new HashSet<String>();
             }
-            case BOOLEAN: {
-                return false;
-            }
-            case STRING:
-            case BYTES: {
-                return "";
-            }
-            case FLOAT:
-            case DOUBLE: {
-                return 0.0f;
-            }
-            case MESSAGE: {
-                HashSet<String> dumpedOneof = null;
-                if (fd.getTypeDescriptor().getSortedOneofs().size() > 0) {
-                    dumpedOneof = new HashSet<String>();
-                }
 
-                JSONObject ret = new JSONObject();
-                for (DataDstFieldDescriptor subField : fd.getTypeDescriptor().getSortedFields()) {
-                    String varName = getIdentName(subField.getName());
-                    // 需要dump一次oneof字段
-                    if (null != subField.getReferOneof()) {
-                        String oneofVarName = getIdentName(subField.getReferOneof().getName());
-                        if (!dumpedOneof.contains(oneofVarName)) {
-                            dumpedOneof.add(oneofVarName);
-                            ret.put(oneofVarName, Integer.valueOf(0));
-                        }
+            JSONObject ret = new JSONObject();
+            for (DataDstFieldDescriptor subField : fd.getTypeDescriptor().getSortedFields()) {
+                String varName = getIdentName(subField.getName());
+                // 需要dump一次oneof字段
+                if (null != subField.getReferOneof()) {
+                    String oneofVarName = getIdentName(subField.getReferOneof().getName());
+                    if (!dumpedOneof.contains(oneofVarName)) {
+                        dumpedOneof.add(oneofVarName);
+                        ret.put(oneofVarName, Integer.valueOf(0));
                     }
-
-                    ret.put(varName, pickValueFieldJsonDefaultImpl(subField));
                 }
 
-                return ret;
+                ret.put(varName, pickValueFieldJsonDefaultImpl(subField));
             }
-            default:
-                return null;
+
+            return ret;
+        }
+        default:
+            return null;
         }
     }
 }

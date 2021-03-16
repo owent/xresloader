@@ -11,7 +11,7 @@
     <data_ver>1.0.0.0</data_ver>
     <description>Test arr_in_arr_cfg</description>
     <hash_code>no hash code</hash_code>
-    <xres_ver>2.10.2</xres_ver>
+    <xres_ver>2.11.0</xres_ver>
   </header>
   <body mode="message">
     <arr_in_arr_cfg mode="message">
@@ -30,6 +30,20 @@
         <str_arr for="1">嚓嚓嚓嚓</str_arr>
       </arr>
       <id>10001</id>
+      <test_map_is mode="map">
+        <int32 key="10" type="int32">Map嵌套模式[0].value</int32>
+        <int32 key="11" type="int32">Map嵌套模式[1].value</int32>
+      </test_map_is>
+      <test_map_sm mode="map">
+        <string mode="message" key="aa" type="string">
+          <id>111</id>
+          <level>112</level>
+        </string>
+        <string mode="message" key="特殊:字符" type="string">
+          <id>121</id>
+          <level>122</level>
+        </string>
+      </test_map_sm>
       <test_plain_enum_arr for="0">10001</test_plain_enum_arr>
       <test_plain_enum_arr for="1">10001</test_plain_enum_arr>
       <test_plain_enum_arr for="2">10001</test_plain_enum_arr>
@@ -69,6 +83,20 @@
         <str_arr for="1">哈哈哈哈</str_arr>
       </arr>
       <id>10002</id>
+      <test_map_is mode="map">
+        <int32 key="20" type="int32">Map嵌套模式[0].value</int32>
+        <int32 key="21" type="int32">Map嵌套模式[1].value</int32>
+      </test_map_is>
+      <test_map_sm mode="map">
+        <string mode="message" key="ba" type="string">
+          <id>211</id>
+          <level>212</level>
+        </string>
+        <string mode="message" key="特殊.字符" type="string">
+          <id>221</id>
+          <level>222</level>
+        </string>
+      </test_map_sm>
       <test_plain_enum_arr for="0">10101</test_plain_enum_arr>
       <test_plain_enum_arr for="1">10101</test_plain_enum_arr>
       <test_plain_enum_arr for="2">10101</test_plain_enum_arr>
@@ -99,6 +127,20 @@
         <str_arr for="0">哦哦哦哦</str_arr>
       </arr>
       <id>10003</id>
+      <test_map_is mode="map">
+        <int32 key="30" type="int32">Map嵌套模式[0].value</int32>
+        <int32 key="31" type="int32">Map嵌套模式[1].value</int32>
+      </test_map_is>
+      <test_map_sm mode="map">
+        <string mode="message" key="ca" type="string">
+          <id>311</id>
+          <level>312</level>
+        </string>
+        <string mode="message" key="cb" type="string">
+          <id>321</id>
+          <level>322</level>
+        </string>
+      </test_map_sm>
       <test_plain_enum_arr for="0">10001</test_plain_enum_arr>
       <test_plain_enum_arr for="1">10001</test_plain_enum_arr>
       <test_plain_enum_arr for="2">10001</test_plain_enum_arr>
@@ -130,6 +172,20 @@
         <str_arr for="1">嚓嚓嚓嚓</str_arr>
       </arr>
       <id>10001</id>
+      <test_map_is mode="map">
+        <int32 key="10" type="int32">Map嵌套模式[0].value</int32>
+        <int32 key="11" type="int32">Map嵌套模式[1].value</int32>
+      </test_map_is>
+      <test_map_sm mode="map">
+        <string mode="message" key="aa" type="string">
+          <id>111</id>
+          <level>112</level>
+        </string>
+        <string mode="message" key="特殊:字符" type="string">
+          <id>121</id>
+          <level>122</level>
+        </string>
+      </test_map_sm>
       <test_plain_enum_arr for="0">10001</test_plain_enum_arr>
       <test_plain_enum_arr for="1">10001</test_plain_enum_arr>
       <test_plain_enum_arr for="2">10001</test_plain_enum_arr>
@@ -169,6 +225,20 @@
         <str_arr for="1">哈哈哈哈</str_arr>
       </arr>
       <id>10002</id>
+      <test_map_is mode="map">
+        <int32 key="20" type="int32">Map嵌套模式[0].value</int32>
+        <int32 key="21" type="int32">Map嵌套模式[1].value</int32>
+      </test_map_is>
+      <test_map_sm mode="map">
+        <string mode="message" key="ba" type="string">
+          <id>211</id>
+          <level>212</level>
+        </string>
+        <string mode="message" key="特殊.字符" type="string">
+          <id>221</id>
+          <level>222</level>
+        </string>
+      </test_map_sm>
       <test_plain_enum_arr for="0">10101</test_plain_enum_arr>
       <test_plain_enum_arr for="1">10101</test_plain_enum_arr>
       <test_plain_enum_arr for="2">10101</test_plain_enum_arr>
@@ -199,6 +269,20 @@
         <str_arr for="0">哦哦哦哦</str_arr>
       </arr>
       <id>10003</id>
+      <test_map_is mode="map">
+        <int32 key="30" type="int32">Map嵌套模式[0].value</int32>
+        <int32 key="31" type="int32">Map嵌套模式[1].value</int32>
+      </test_map_is>
+      <test_map_sm mode="map">
+        <string mode="message" key="ca" type="string">
+          <id>311</id>
+          <level>312</level>
+        </string>
+        <string mode="message" key="cb" type="string">
+          <id>321</id>
+          <level>322</level>
+        </string>
+      </test_map_sm>
       <test_plain_enum_arr for="0">10001</test_plain_enum_arr>
       <test_plain_enum_arr for="1">10001</test_plain_enum_arr>
       <test_plain_enum_arr for="2">10001</test_plain_enum_arr>

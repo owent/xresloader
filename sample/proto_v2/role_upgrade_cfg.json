@@ -2,7 +2,7 @@
   {
     "count": 102,
     "description": "Test role_upgrade_cfg with multi keys\r\nTest role_upgrade_cfg with multi keys",
-    "xres_ver": "2.10.2",
+    "xres_ver": "2.11.0",
     "hash_code": "no hash code",
     "data_ver": "1.0.0.0",
     "data_source": [
@@ -247,7 +247,7 @@
       "Level": 39,
       "Id": 10001,
       "CostType": 10001,
-      "CostValue": 611748781
+      "CostValue": 1473624235014785965
     },
     {
       "Level": 40,

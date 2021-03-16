@@ -63,6 +63,20 @@ local const_res = {
           },
         },
         arr_in_arr_cfg = {
+          enum_type = {
+            TestMapIsEntry = {
+              name = "TestMapIsEntry",
+              options = {
+                map_entry = true,
+              },
+            },
+            TestMapSmEntry = {
+              name = "TestMapSmEntry",
+              options = {
+                map_entry = true,
+              },
+            },
+          },
           field = {
             id = {
               name = "id",
@@ -72,6 +86,14 @@ local const_res = {
                 key_tag = 1,
               },
               type_name = "UINT32",
+            },
+            test_map_sm = {
+              name = "test_map_sm",
+              number = 8,
+              options = {
+                field_separator = "|",
+              },
+              type_name = "MESSAGE",
             },
             test_plain_msg = {
               name = "test_plain_msg",
@@ -210,6 +232,23 @@ local const_res = {
             },
           },
           name = "event_rule_item",
+        },
+        keep_or_strip_empty_list_cfg = {
+          field = {
+            key = {
+              name = "key",
+              number = 1,
+              options = {
+                field_description = "This is a Key",
+                key_tag = 1,
+              },
+              type_name = "UINT32",
+            },
+          },
+          name = "keep_or_strip_empty_list_cfg",
+          options = {
+            helper = "helper",
+          },
         },
         role_upgrade_cfg = {
           field = {

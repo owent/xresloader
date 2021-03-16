@@ -104,50 +104,50 @@ public class DataDstJavascript extends DataDstJava {
 
         // export mode header
         switch (export_mode) {
-            case AMD: {
-                sb.append("define({");
-                break;
-            }
-            case NODEJS: {
-                break;
-            }
-            default: {
-                // 设置导出命名空间
-                if (!ProgramOptions.getInstance().javascriptGlobalVar.trim().isEmpty()) {
-                    String idents[] = ProgramOptions.getInstance().javascriptGlobalVar.trim().split("\\.");
-                    for (int i = idents.length - 1; i >= 0; --i) {
-                        if (idents[i].isEmpty()) {
-                            continue;
-                        }
-
-                        HashMap<String, Object> new_container = new HashMap<String, Object>();
-                        new_container.put(idents[i], export_items);
-                        export_items = new_container;
+        case AMD: {
+            sb.append("define({");
+            break;
+        }
+        case NODEJS: {
+            break;
+        }
+        default: {
+            // 设置导出命名空间
+            if (!ProgramOptions.getInstance().javascriptGlobalVar.trim().isEmpty()) {
+                String idents[] = ProgramOptions.getInstance().javascriptGlobalVar.trim().split("\\.");
+                for (int i = idents.length - 1; i >= 0; --i) {
+                    if (idents[i].isEmpty()) {
+                        continue;
                     }
+
+                    HashMap<String, Object> new_container = new HashMap<String, Object>();
+                    new_container.put(idents[i], export_items);
+                    export_items = new_container;
                 }
-
-                sb.append(String.format("(function(){%s", endl));
-                // extend function
-                sb.append(ident).append("var extend = function (dst, src) {").append(endl);
-                sb.append(ident).append(ident).append("for (var k in src) {").append(endl);
-                sb.append(ident).append(ident).append(ident).append("var v = src[k];").append(endl);
-                sb.append(ident).append(ident).append(ident)
-                        .append("if (undefined === dst[k] || 'object' != typeof(v)) {").append(endl);
-                sb.append(ident).append(ident).append(ident).append(ident).append("dst[k] = v;").append(endl);
-                sb.append(ident).append(ident).append(ident).append("} else {").append(endl);
-                sb.append(ident).append(ident).append(ident).append(ident).append("if ('object' != typeof(dst[k])) {")
-                        .append(endl);
-                sb.append(ident).append(ident).append(ident).append(ident).append(ident).append("dst[k] = {};")
-                        .append(endl);
-                sb.append(ident).append(ident).append(ident).append(ident).append("}").append(endl);
-                sb.append(ident).append(ident).append(ident).append(ident).append("extend(dst[k], v)").append(endl);
-                sb.append(ident).append(ident).append(ident).append("}").append(endl);
-                sb.append(ident).append(ident).append("}").append(endl);
-                sb.append(ident).append("};").append(endl);
-
-                sb.append(endl).append(ident).append("var local_data_set = null;").append(endl);
-                break;
             }
+
+            sb.append(String.format("(function(){%s", endl));
+            // extend function
+            sb.append(ident).append("var extend = function (dst, src) {").append(endl);
+            sb.append(ident).append(ident).append("for (var k in src) {").append(endl);
+            sb.append(ident).append(ident).append(ident).append("var v = src[k];").append(endl);
+            sb.append(ident).append(ident).append(ident).append("if (undefined === dst[k] || 'object' != typeof(v)) {")
+                    .append(endl);
+            sb.append(ident).append(ident).append(ident).append(ident).append("dst[k] = v;").append(endl);
+            sb.append(ident).append(ident).append(ident).append("} else {").append(endl);
+            sb.append(ident).append(ident).append(ident).append(ident).append("if ('object' != typeof(dst[k])) {")
+                    .append(endl);
+            sb.append(ident).append(ident).append(ident).append(ident).append(ident).append("dst[k] = {};")
+                    .append(endl);
+            sb.append(ident).append(ident).append(ident).append(ident).append("}").append(endl);
+            sb.append(ident).append(ident).append(ident).append(ident).append("extend(dst[k], v)").append(endl);
+            sb.append(ident).append(ident).append(ident).append("}").append(endl);
+            sb.append(ident).append(ident).append("}").append(endl);
+            sb.append(ident).append("};").append(endl);
+
+            sb.append(endl).append(ident).append("var local_data_set = null;").append(endl);
+            break;
+        }
         }
 
         // export mode content
@@ -155,36 +155,36 @@ public class DataDstJavascript extends DataDstJava {
         for (Map.Entry<String, Object> item : export_items.entrySet()) {
             // export mode header
             switch (export_mode) {
-                case AMD: {
-                    if (is_first) {
-                        sb.append(endl);
-                    } else {
-                        sb.append(",").append(endl);
-                    }
-
-                    writeIdent(sb, ident_num + 1);
-                    sb.append(JSONObject.quote(item.getKey())).append(": ");
-                    writeData(sb, item.getValue(), 1);
-                    break;
-                }
-                case NODEJS: {
-                    sb.append(String.format("exports.%s = ", item.getKey()));
-                    writeData(sb, item.getValue(), 0);
-                    sb.append(";").append(endl);
-                    break;
-                }
-                default: {
-                    sb.append(String.format("%slocal_data_set = ", ident));
-                    writeData(sb, item.getValue(), 1);
-                    sb.append(";").append(endl);
-
-                    sb.append(ident).append(String.format("try { extend(window, { %s : local_data_set }); }",
-                            JSONObject.quote(item.getKey()))).append(endl);
-                    sb.append(ident).append(String.format("catch(e) { extend(global, { %s : local_data_set }); }",
-                            JSONObject.quote(item.getKey()))).append(endl);
+            case AMD: {
+                if (is_first) {
                     sb.append(endl);
-                    break;
+                } else {
+                    sb.append(",").append(endl);
                 }
+
+                writeIdent(sb, ident_num + 1);
+                sb.append(JSONObject.quote(item.getKey())).append(": ");
+                writeData(sb, item.getValue(), 1);
+                break;
+            }
+            case NODEJS: {
+                sb.append(String.format("exports.%s = ", item.getKey()));
+                writeData(sb, item.getValue(), 0);
+                sb.append(";").append(endl);
+                break;
+            }
+            default: {
+                sb.append(String.format("%slocal_data_set = ", ident));
+                writeData(sb, item.getValue(), 1);
+                sb.append(";").append(endl);
+
+                sb.append(ident).append(String.format("try { extend(window, { %s : local_data_set }); }",
+                        JSONObject.quote(item.getKey()))).append(endl);
+                sb.append(ident).append(String.format("catch(e) { extend(global, { %s : local_data_set }); }",
+                        JSONObject.quote(item.getKey()))).append(endl);
+                sb.append(endl);
+                break;
+            }
             }
 
             is_first = false;
@@ -192,18 +192,18 @@ public class DataDstJavascript extends DataDstJava {
 
         // export mode footer
         switch (export_mode) {
-            case AMD: {
-                writeIdent(sb, ident_num);
-                sb.append(endl).append("});").append(endl);
-                break;
-            }
-            case NODEJS: {
-                break;
-            }
-            default: {
-                sb.append("})();").append(endl);
-                break;
-            }
+        case AMD: {
+            writeIdent(sb, ident_num);
+            sb.append(endl).append("});").append(endl);
+            break;
+        }
+        case NODEJS: {
+            break;
+        }
+        default: {
+            sb.append("})();").append(endl);
+            break;
+        }
         }
     }
 
@@ -268,10 +268,6 @@ public class DataDstJavascript extends DataDstJava {
             sorted_array.ensureCapacity(mp.size());
             sorted_array.addAll(mp.entrySet());
             sorted_array.sort((l, r) -> {
-                if (l.getValue() instanceof Integer && r.getValue() instanceof Integer) {
-                    return ((Integer) l.getValue()).compareTo((Integer) r.getValue());
-                }
-
                 if (l.getKey() instanceof Integer && r.getKey() instanceof Integer) {
                     return ((Integer) l.getKey()).compareTo((Integer) r.getKey());
                 } else if (l.getKey() instanceof Long && r.getKey() instanceof Long) {

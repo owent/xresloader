@@ -1,39 +1,35 @@
 [
     {
-        "Value": 0,
-        "Name": "cost_type.EN_CT_UNKNOWN"
+        "Value": 10101,
+        "Name": "cost_type.EN_CT_DIAMOND"
     },
     {
         "Value": 10001,
         "Name": "cost_type.EN_CT_MONEY"
     },
     {
-        "Value": 10101,
-        "Name": "cost_type.EN_CT_DIAMOND"
-    },
-    {
-        "Value": 11,
-        "Name": "event_cfg.reward.kItem"
-    },
-    {
-        "Value": 12,
-        "Name": "event_cfg.reward.kUserExp"
-    },
-    {
-        "Value": 13,
-        "Name": "event_cfg.reward.kNote"
+        "Value": 0,
+        "Name": "cost_type.EN_CT_UNKNOWN"
     },
     {
         "Value": 14,
         "Name": "event_cfg.reward.kEnumType"
     },
     {
-        "Value": 51,
-        "Name": "event_cfg.unlock_type.kUserLevel"
+        "Value": 11,
+        "Name": "event_cfg.reward.kItem"
     },
     {
-        "Value": 11,
-        "Name": "event_reward_item.nested.kNestedNote"
+        "Value": 13,
+        "Name": "event_cfg.reward.kNote"
+    },
+    {
+        "Value": 12,
+        "Name": "event_cfg.reward.kUserExp"
+    },
+    {
+        "Value": 51,
+        "Name": "event_cfg.unlock_type.kUserLevel"
     },
     {
         "Value": 12,
@@ -41,50 +37,54 @@
     },
     {
         "Value": 11,
-        "Name": "event_rule_item.nested.kNestedNote"
+        "Name": "event_reward_item.nested.kNestedNote"
     },
     {
         "Value": 12,
         "Name": "event_rule_item.nested.kNestedEnumType"
     },
     {
-        "Value": 10,
-        "Name": "game_const_config.EN_GCC_FORMULAR_TYPE_MASK"
-    },
-    {
-        "Value": 10,
-        "Name": "game_const_config.EN_GCC_RANDOM_RANGE_UNIT"
-    },
-    {
-        "Value": 100,
-        "Name": "game_const_config.EN_GCC_SOLDIER_TYPE_MASK"
-    },
-    {
-        "Value": 268,
-        "Name": "game_const_config.EN_GCC_CAMERA_OFFSET"
-    },
-    {
-        "Value": 640,
-        "Name": "game_const_config.EN_GCC_SCREEN_HEIGHT"
-    },
-    {
-        "Value": 999,
-        "Name": "game_const_config.EN_GCC_LEVEL_LIMIT"
+        "Value": 11,
+        "Name": "event_rule_item.nested.kNestedNote"
     },
     {
         "Value": 1000,
         "Name": "game_const_config.EN_GCC_ACTIVITY_TYPE_MASK"
     },
     {
-        "Value": 1136,
-        "Name": "game_const_config.EN_GCC_SCREEN_WIDTH"
+        "Value": 268,
+        "Name": "game_const_config.EN_GCC_CAMERA_OFFSET"
+    },
+    {
+        "Value": 10,
+        "Name": "game_const_config.EN_GCC_FORMULAR_TYPE_MASK"
+    },
+    {
+        "Value": 999,
+        "Name": "game_const_config.EN_GCC_LEVEL_LIMIT"
     },
     {
         "Value": 10000,
         "Name": "game_const_config.EN_GCC_PERCENT_BASE"
     },
     {
+        "Value": 10,
+        "Name": "game_const_config.EN_GCC_RANDOM_RANGE_UNIT"
+    },
+    {
         "Value": 9999999,
         "Name": "game_const_config.EN_GCC_RESOURCE_MAX_LIMIT"
+    },
+    {
+        "Value": 640,
+        "Name": "game_const_config.EN_GCC_SCREEN_HEIGHT"
+    },
+    {
+        "Value": 1136,
+        "Name": "game_const_config.EN_GCC_SCREEN_WIDTH"
+    },
+    {
+        "Value": 100,
+        "Name": "game_const_config.EN_GCC_SOLDIER_TYPE_MASK"
     }
 ]

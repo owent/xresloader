@@ -12,7 +12,7 @@ define({
     ],
     data_ver : "1.0.0.0",
     hash_code : "no hash code",
-    xres_ver : "2.10.2"
+    xres_ver : "2.11.0"
   },
   "role_cfg": [
     {
@@ -100,10 +100,7 @@ define({
       int_as_string : "4"
     },
     {
-      int_as_string : "5",
-      unlock_level : 183,
       cost_type : 10001,
-      id : 10005,
       cost_value : 99999,
       dep_test : {
         dep2 : {
@@ -113,18 +110,18 @@ define({
         id : 91,
         name : "gggg"
       },
+      id : 10005,
+      int_as_string : "5",
       name : "爱丽丝",
       test_array : [
         "laopo",
         "爱丽丝"
-      ]
+      ],
+      unlock_level : 183
     },
     {
-      int_as_string : "6",
-      unlock_level : 274,
-      cost_value : 999,
-      id : 10006,
       cost_type : 10101,
+      cost_value : 999,
       dep_test : {
         dep2 : {
           id : 601,
@@ -133,11 +130,14 @@ define({
         id : 101,
         name : "hhhhh"
       },
+      id : 10006,
+      int_as_string : "6",
       name : "都玛西亚",
       test_array : [
         "keai",
         "都玛西亚"
-      ]
+      ],
+      unlock_level : 274
     }
   ]
 });

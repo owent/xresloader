@@ -222,19 +222,19 @@ public class DataDstUEJson extends DataDstUEBase {
     @Override
     final protected Object pickValueField(Object buildObj, ArrayList<DataDstWriterNodeWrapper> fieldSet,
             HashMap<String, Object> fieldDataByOneof) throws ConvException {
-        return pickValueFieldJsonImpl(fieldSet);
+        return pickValueFieldJsonImpl(null, fieldSet);
     }
 
     @SuppressWarnings("unchecked")
-    protected Object pickValueFieldJsonImpl(ArrayList<DataDstWriterNodeWrapper> fieldSet) throws ConvException {
+    protected Object pickValueFieldJsonImpl(Object reuseOldValue, ArrayList<DataDstWriterNodeWrapper> fieldSet)
+            throws ConvException {
         DataDstWriterNode msgDesc = getFirstWriterNode(fieldSet);
         if (msgDesc == null) {
             return null;
         }
 
         if (msgDesc.getReferBrothers().isOneof()) {
-            return pickValueFieldJsonPlainField(msgDesc.identify, msgDesc.getOneofDescriptor(),
-                    msgDesc.identify != null);
+            return pickValueFieldJsonPlainField(reuseOldValue, msgDesc.identify, msgDesc.getOneofDescriptor(), msgDesc);
         }
 
         DataDstFieldDescriptor field = getFieldDescriptor(fieldSet);
@@ -243,9 +243,14 @@ public class DataDstUEJson extends DataDstUEBase {
         }
         if (msgDesc.getReferBrothers().mode == DataDstWriterNode.CHILD_NODE_TYPE.STANDARD) {
             if (isRecursiveEnabled() && field.isMap()) {
-                JSONObject ret = new JSONObject();
+                JSONObject ret;
+                if (null != reuseOldValue && reuseOldValue instanceof JSONObject) {
+                    ret = (JSONObject) reuseOldValue;
+                } else {
+                    ret = new JSONObject();
+                }
                 for (int i = 0; i < fieldSet.size(); ++i) {
-                    Object obj = pickValueFieldJsonStandardImpl(fieldSet.get(i));
+                    Object obj = pickValueFieldJsonStandardImpl(ret, fieldSet.get(i));
                     if (obj != null && obj instanceof JSONObject) {
                         Object mapKey = null;
                         Object mapValue = null;
@@ -264,27 +269,50 @@ public class DataDstUEJson extends DataDstUEBase {
                 }
                 return ret;
             } else if (isRecursiveEnabled() && field.isList()) {
-                JSONArray ret = new JSONArray();
+                JSONArray ret;
+                if (null != reuseOldValue && reuseOldValue instanceof JSONArray) {
+                    ret = (JSONArray) reuseOldValue;
+                } else {
+                    ret = new JSONArray();
+                }
                 for (int i = 0; i < fieldSet.size(); ++i) {
-                    Object obj = pickValueFieldJsonStandardImpl(fieldSet.get(i));
-                    if (obj != null) {
-                        ret.put(obj);
+                    Object obj = pickValueFieldJsonStandardImpl(ret, fieldSet.get(i));
+                    if (null == obj
+                            && ProgramOptions.getInstance().stripListRule == ProgramOptions.ListStripRule.KEEP_ALL) {
+                        obj = getDefault(field);
+                    }
+
+                    if (null != obj) {
+                        int index = fieldSet.get(i).getReferNode().getListIndex();
+                        if (ProgramOptions
+                                .getInstance().stripListRule == ProgramOptions.ListStripRule.STRIP_EMPTY_TAIL) {
+                            while (ret.length() < index) {
+                                ret.put(getDefault(field));
+                            }
+                        }
+
+                        if (index >= 0 && ret.length() > index) {
+                            ret.put(index, obj);
+                        } else {
+                            ret.put(obj);
+                        }
                     }
                 }
                 return ret;
             } else {
-                return pickValueFieldJsonStandardImpl(fieldSet.get(0));
+                return pickValueFieldJsonStandardImpl(reuseOldValue, fieldSet.get(0));
             }
         }
 
         if (msgDesc.getReferBrothers().mode == DataDstWriterNode.CHILD_NODE_TYPE.PLAIN) {
-            return pickValueFieldJsonPlainImpl(field, fieldSet);
+            return pickValueFieldJsonPlainImpl(reuseOldValue, field, fieldSet);
         }
 
         return null;
     }
 
-    protected Object pickValueFieldJsonStandardImpl(DataDstWriterNodeWrapper descWrapper) throws ConvException {
+    protected Object pickValueFieldJsonStandardImpl(Object reuseOldValue, DataDstWriterNodeWrapper descWrapper)
+            throws ConvException {
         if (null == descWrapper || null == descWrapper.getReferNode()) {
             return null;
         }
@@ -296,7 +324,7 @@ public class DataDstUEJson extends DataDstUEBase {
 
         // oneof data
         if (descWrapper.getReferOneof() != null) {
-            return pickValueFieldJsonPlainField(desc.identify, descWrapper.getReferOneof(), desc.identify != null);
+            return pickValueFieldJsonPlainField(reuseOldValue, desc.identify, descWrapper.getReferOneof(), desc);
         }
 
         if (desc.getType() == JAVA_TYPE.MESSAGE) {
@@ -305,7 +333,12 @@ public class DataDstUEJson extends DataDstUEBase {
                 dumpedFields = new HashSet<String>();
             }
 
-            JSONObject ret = new JSONObject();
+            JSONObject ret;
+            if (null != reuseOldValue && reuseOldValue instanceof JSONObject) {
+                ret = (JSONObject) reuseOldValue;
+            } else {
+                ret = new JSONObject();
+            }
             HashMap<String, Object> fieldDataByOneof = new HashMap<String, Object>();
 
             if (descWrapper.getChildren() != null) {
@@ -334,7 +367,7 @@ public class DataDstUEJson extends DataDstUEBase {
                         }
 
                         // oneof 设置 case,缓存field
-                        Object res = pickValueFieldJsonImpl(child);
+                        Object res = pickValueFieldJsonImpl(ret.opt(varName), child);
                         if (res instanceof OneofDataObject) {
                             String fieldVarName = getIdentName(((OneofDataObject) res).field.getName());
                             fieldDataByOneof.put(fieldVarName, ((OneofDataObject) res).value);
@@ -358,7 +391,7 @@ public class DataDstUEJson extends DataDstUEBase {
                         }
                     }
 
-                    Object val = pickValueFieldJsonImpl(child);
+                    Object val = pickValueFieldJsonImpl(ret.opt(varName), child);
                     if (val != null) {
                         ret.put(varName, val);
 
@@ -406,7 +439,7 @@ public class DataDstUEJson extends DataDstUEBase {
         return pickValueFieldBaseStandardImpl(desc);
     }
 
-    protected Object pickValueFieldJsonPlainImpl(DataDstFieldDescriptor field,
+    protected Object pickValueFieldJsonPlainImpl(Object reuseOldValue, DataDstFieldDescriptor field,
             ArrayList<DataDstWriterNodeWrapper> fieldSet) throws ConvException {
         if (null == field) {
             return null;
@@ -416,20 +449,29 @@ public class DataDstUEJson extends DataDstUEBase {
             return pickValueFieldJsonDefaultImpl(field);
         }
 
-        DataDstWriterNode desc = fieldSet.get(0).getReferNode();
-        if (desc == null) {
-            return pickValueFieldJsonDefaultImpl(field);
+        for (DataDstWriterNodeWrapper node : fieldSet) {
+            Object res = null;
+            DataDstWriterNode desc = node.getReferNode();
+            if (desc != null) {
+                res = pickValueFieldJsonPlainField(reuseOldValue, desc.identify, desc.getFieldDescriptor(), desc);
+            }
+
+            if (null != res) {
+                reuseOldValue = res;
+            } else if (null == reuseOldValue) {
+                reuseOldValue = pickValueFieldJsonDefaultImpl(field);
+            } else if (ProgramOptions.getInstance().stripListRule == ProgramOptions.ListStripRule.KEEP_ALL) {
+                if (reuseOldValue instanceof JSONArray) {
+                    ((JSONArray) reuseOldValue).put(getDefault(field));
+                }
+            }
         }
 
-        Object ret = pickValueFieldJsonPlainField(desc.identify, desc.getFieldDescriptor(), true);
-        if (ret == null) {
-            ret = pickValueFieldJsonDefaultImpl(desc.getFieldDescriptor());
-        }
-        return ret;
+        return reuseOldValue;
     }
 
-    private OneofDataObject pickValueFieldJsonPlainField(IdentifyDescriptor ident, DataDstOneofDescriptor field,
-            boolean isTopLevel) throws ConvException {
+    private OneofDataObject pickValueFieldJsonPlainField(Object reuseOldValue, IdentifyDescriptor ident,
+            DataDstOneofDescriptor field, DataDstWriterNode maybeFromNode) throws ConvException {
         if (null == ident) {
             return null;
         }
@@ -439,11 +481,11 @@ public class DataDstUEJson extends DataDstUEBase {
             return null;
         }
 
-        return pickValueFieldJsonPlainField(ident, field, isTopLevel, res.value);
+        return pickValueFieldJsonPlainField(reuseOldValue, ident, field, maybeFromNode, res.value);
     }
 
-    private OneofDataObject pickValueFieldJsonPlainField(IdentifyDescriptor ident, DataDstOneofDescriptor field,
-            boolean isTopLevel, String input) throws ConvException {
+    private OneofDataObject pickValueFieldJsonPlainField(Object reuseOldValue, IdentifyDescriptor ident,
+            DataDstOneofDescriptor field, DataDstWriterNode maybeFromNode, String input) throws ConvException {
         if (field == null) {
             return null;
         }
@@ -467,11 +509,12 @@ public class DataDstUEJson extends DataDstUEBase {
         }
 
         // 非顶层，不用验证类型
-        return new OneofDataObject(sub_field, pickValueFieldJsonPlainField(null, sub_field, false, (String) res[1]));
+        return new OneofDataObject(sub_field,
+                pickValueFieldJsonPlainField(reuseOldValue, null, sub_field, null, (String) res[1]));
     }
 
-    private Object pickValueFieldJsonPlainField(IdentifyDescriptor ident, DataDstFieldDescriptor field,
-            boolean isTopLevel) throws ConvException {
+    private Object pickValueFieldJsonPlainField(Object reuseOldValue, IdentifyDescriptor ident,
+            DataDstFieldDescriptor field, DataDstWriterNode maybeFromNode) throws ConvException {
         if (null == ident) {
             return pickValueFieldJsonDefaultImpl(field);
         }
@@ -481,12 +524,13 @@ public class DataDstUEJson extends DataDstUEBase {
             return pickValueFieldJsonDefaultImpl(field);
         }
 
-        return pickValueFieldJsonPlainField(ident, field, isTopLevel, res.value);
+        return pickValueFieldJsonPlainField(reuseOldValue, ident, field, maybeFromNode, res.value);
     }
 
-    private Object pickValueFieldJsonPlainField(IdentifyDescriptor ident, DataDstFieldDescriptor field,
-            boolean isTopLevel, String input) throws ConvException {
-        if ((isTopLevel && !field.isList()) && field.getType() != DataDstWriterNode.JAVA_TYPE.MESSAGE) {
+    private Object pickValueFieldJsonPlainField(Object reuseOldValue, IdentifyDescriptor ident,
+            DataDstFieldDescriptor field, DataDstWriterNode maybeFromNode, String input) throws ConvException {
+        if ((null != maybeFromNode && null != maybeFromNode.identify && !field.isList())
+                && field.getType() != DataDstWriterNode.JAVA_TYPE.MESSAGE) {
             // error type
             logErrorMessage("Plain type %s of %s.%s must be list", field.getType().toString(),
                     field.getTypeDescriptor().getFullName(), field.getName());
@@ -495,84 +539,124 @@ public class DataDstUEJson extends DataDstUEBase {
 
         Object ret = null;
         if (field.isList()) {
-            String[] groups = splitPlainGroups(input.trim(), getPlainFieldSeparator(field));
+            if (field.isMap()) {
+                if (reuseOldValue != null && reuseOldValue instanceof JSONObject) {
+                    ret = (JSONObject) reuseOldValue;
+                } else {
+                    ret = new JSONObject();
+                }
+            } else {
+                if (reuseOldValue != null && reuseOldValue instanceof JSONArray) {
+                    ret = (JSONArray) reuseOldValue;
+                } else {
+                    ret = new JSONArray();
+                }
+            }
+
+            String[] groups;
+            if (null != maybeFromNode && maybeFromNode.getListIndex() >= 0) {
+                groups = new String[] { input.trim() };
+            } else {
+                groups = splitPlainGroups(input.trim(), getPlainFieldSeparator(field));
+            }
+
+            Object parsedDatas = null;
             switch (field.getType()) {
             case INT: {
                 Long[] values = parsePlainDataLong(groups, ident, field);
-                JSONArray tmp = new JSONArray();
+                ArrayList<Object> tmp = new ArrayList<Object>();
                 if (null != values) {
+                    tmp.ensureCapacity(values.length);
                     for (Long v : values) {
-                        tmp.put(v.intValue());
+                        tmp.add(v.intValue());
                     }
                 }
-                ret = tmp;
+
+                if (!tmp.isEmpty()) {
+                    parsedDatas = tmp;
+                }
                 break;
             }
 
             case LONG: {
                 Long[] values = parsePlainDataLong(groups, ident, field);
-                JSONArray tmp = new JSONArray();
+                ArrayList<Object> tmp = new ArrayList<Object>();
                 if (null != values) {
+                    tmp.ensureCapacity(values.length);
                     for (Long v : values) {
-                        tmp.put(v);
+                        tmp.add(v);
                     }
                 }
-                ret = tmp;
+                if (!tmp.isEmpty()) {
+                    parsedDatas = tmp;
+                }
                 break;
             }
 
             case FLOAT: {
                 Double[] values = parsePlainDataDouble(groups, ident, field);
-                JSONArray tmp = new JSONArray();
+                ArrayList<Object> tmp = new ArrayList<Object>();
                 if (null != values) {
+                    tmp.ensureCapacity(values.length);
                     for (Double v : values) {
-                        tmp.put(v.floatValue());
+                        tmp.add(v.floatValue());
                     }
                 }
-                ret = tmp;
+                if (!tmp.isEmpty()) {
+                    parsedDatas = tmp;
+                }
                 break;
             }
 
             case DOUBLE: {
                 Double[] values = parsePlainDataDouble(groups, ident, field);
-                JSONArray tmp = new JSONArray();
+                ArrayList<Object> tmp = new ArrayList<Object>();
                 if (null != values) {
+                    tmp.ensureCapacity(values.length);
                     for (Double v : values) {
-                        tmp.put(v);
+                        tmp.add(v);
                     }
                 }
-                ret = tmp;
+                if (!tmp.isEmpty()) {
+                    parsedDatas = tmp;
+                }
                 break;
             }
 
             case BOOLEAN: {
                 Boolean[] values = parsePlainDataBoolean(groups, ident, field);
-                JSONArray tmp = new JSONArray();
+                ArrayList<Object> tmp = new ArrayList<Object>();
                 if (null != values) {
+                    tmp.ensureCapacity(values.length);
                     for (Boolean v : values) {
-                        tmp.put(v);
+                        tmp.add(v);
                     }
                 }
-                ret = tmp;
+                if (!tmp.isEmpty()) {
+                    parsedDatas = tmp;
+                }
                 break;
             }
 
             case STRING:
             case BYTES: {
                 String[] values = parsePlainDataString(groups, ident, field);
-                JSONArray tmp = new JSONArray();
+                ArrayList<Object> tmp = new ArrayList<Object>();
                 if (null != values) {
+                    tmp.ensureCapacity(values.length);
                     for (String v : values) {
-                        tmp.put(v);
+                        tmp.add(v);
                     }
                 }
-                ret = tmp;
+                if (!tmp.isEmpty()) {
+                    parsedDatas = tmp;
+                }
                 break;
             }
 
             case MESSAGE: {
                 if (field.isMap()) {
-                    JSONObject tmp = new JSONObject();
+                    HashMap<Object, Object> tmp = new HashMap<Object, Object>();
                     for (String v : groups) {
                         String[] subGroups = splitPlainGroups(v, getPlainMessageSeparator(field));
                         JSONObject msg = pickValueFieldJsonPlainField(subGroups, ident, field);
@@ -592,23 +676,67 @@ public class DataDstUEJson extends DataDstUEBase {
                             }
                         }
                     }
-                    ret = tmp;
+                    if (!tmp.isEmpty()) {
+                        parsedDatas = tmp;
+                    }
                 } else {
-                    JSONArray tmp = new JSONArray();
+                    ArrayList<Object> tmp = new ArrayList<Object>();
+                    tmp.ensureCapacity(groups.length);
                     for (String v : groups) {
                         String[] subGroups = splitPlainGroups(v, getPlainMessageSeparator(field));
                         JSONObject msg = pickValueFieldJsonPlainField(subGroups, ident, field);
                         if (msg != null) {
-                            tmp.put(msg);
+                            tmp.add(msg);
                         }
                     }
-                    ret = tmp;
+                    if (!tmp.isEmpty()) {
+                        parsedDatas = tmp;
+                    }
                 }
                 break;
             }
 
             default:
                 break;
+            }
+
+            if (field.isMap() && parsedDatas != null) {
+                HashMap<Object, Object> parsedMap = (HashMap<Object, Object>) parsedDatas;
+                JSONObject valMap = (JSONObject) ret;
+                for (HashMap.Entry<Object, Object> pair : parsedMap.entrySet()) {
+                    valMap.put(pair.getKey().toString(), pair.getValue());
+                }
+            } else if (parsedDatas != null) {
+                ArrayList<Object> parsedArray = (ArrayList<Object>) parsedDatas;
+                JSONArray valArray = (JSONArray) ret;
+                if (null != maybeFromNode && maybeFromNode.getListIndex() >= 0) {
+                    if (parsedArray.size() != 1) {
+                        throw new ConvException(
+                                String.format("Try to convert %s.%s[%d] failed, too many elements(found %d).",
+                                        field.getTypeDescriptor().getFullName(), field.getName(),
+                                        maybeFromNode.getListIndex(), parsedArray.size()));
+                    }
+
+                    int index = maybeFromNode.getListIndex();
+                    if (ProgramOptions.getInstance().stripListRule == ProgramOptions.ListStripRule.STRIP_EMPTY_TAIL) {
+                        while (valArray.length() < index) {
+                            valArray.put(getDefault(field));
+                        }
+                    }
+
+                    if (index >= 0 && valArray.length() > index) {
+                        valArray.put(index, parsedArray.get(0));
+                    } else {
+                        valArray.put(parsedArray.get(0));
+                    }
+                } else {
+                    for (Object res : parsedArray) {
+                        valArray.put(res);
+                    }
+                }
+            } else if (ProgramOptions.getInstance().stripListRule == ProgramOptions.ListStripRule.KEEP_ALL) {
+                JSONArray valArray = (JSONArray) ret;
+                valArray.put(getDefault(field));
             }
         } else {
             switch (field.getType()) {
@@ -701,7 +829,7 @@ public class DataDstUEJson extends DataDstUEBase {
                             usedInputIdx + 1, inputs.length));
                 }
 
-                Object res = pickValueFieldJsonPlainField(null, children.get(i).getReferOneof(), false,
+                Object res = pickValueFieldJsonPlainField(null, null, children.get(i).getReferOneof(), null,
                         inputs[usedInputIdx]);
                 if (res != null && res instanceof OneofDataObject) {
                     OneofDataObject realRes = ((OneofDataObject) res);
@@ -729,7 +857,8 @@ public class DataDstUEJson extends DataDstUEBase {
                             inputs.length));
                 }
 
-                Object fieldVal = pickValueFieldJsonPlainField(ident, children.get(i), false, inputs[usedInputIdx]);
+                Object fieldVal = pickValueFieldJsonPlainField(null, ident, children.get(i), null,
+                        inputs[usedInputIdx]);
                 String varName = getIdentName(children.get(i).getName());
                 ret.put(varName, fieldVal);
 
@@ -758,17 +887,13 @@ public class DataDstUEJson extends DataDstUEBase {
         return ret;
     }
 
-    protected Object pickValueFieldJsonDefaultImpl(DataDstFieldDescriptor fd) {
-        if (fd.isMap()) {
-            return new HashMap<Object, Object>();
-        } else if (fd.isList()) {
-            return new JSONArray();
-        }
-
+    private Object getDefault(DataDstFieldDescriptor fd) {
         switch (fd.getType()) {
-        case INT:
-        case LONG: {
+        case INT: {
             return 0;
+        }
+        case LONG: {
+            return Long.valueOf(0);
         }
         case BOOLEAN: {
             return false;
@@ -807,5 +932,15 @@ public class DataDstUEJson extends DataDstUEBase {
         default:
             return null;
         }
+    }
+
+    protected Object pickValueFieldJsonDefaultImpl(DataDstFieldDescriptor fd) {
+        if (fd.isMap()) {
+            return new HashMap<Object, Object>();
+        } else if (fd.isList()) {
+            return new JSONArray();
+        }
+
+        return getDefault(fd);
     }
 }

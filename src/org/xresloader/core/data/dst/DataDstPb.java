@@ -1653,7 +1653,8 @@ public class DataDstPb extends DataDstImpl {
             return false;
         }
 
-        if ((null != maybeFromNode && !field.isList()) && field.getType() != DataDstWriterNode.JAVA_TYPE.MESSAGE) {
+        if ((null != maybeFromNode && null != maybeFromNode.identify && !field.isList())
+                && field.getType() != DataDstWriterNode.JAVA_TYPE.MESSAGE) {
             // error type
             logErrorMessage("Plain type %s of %s.%s must be list", field.getType().toString(),
                     field.getTypeDescriptor().getFullName(), field.getName());

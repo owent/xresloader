@@ -2,21 +2,21 @@
     {
         "Arr": [
             {
+                "StrArr": [
+                    "啦啦啦啦",
+                    "嘞嘞嘞嘞"
+                ],
                 "TestOnof": "",
                 "TestRoleUpgradeCfg": {
-                    "ScoreAdd": 0,
-                    "CostValue": 0,
                     "Level": 0,
                     "Id": 0,
-                    "CostType": 0
+                    "CostType": 0,
+                    "ScoreAdd": 0,
+                    "CostValue": 0
                 },
                 "IntArr": [
                     101,
                     102
-                ],
-                "StrArr": [
-                    "啦啦啦啦",
-                    "嘞嘞嘞嘞"
                 ],
                 "Name": "第一个-A",
                 "TestInfoRole": {
@@ -38,21 +38,21 @@
                 }
             },
             {
+                "StrArr": [
+                    "嘟嘟嘟嘟",
+                    "嚓嚓嚓嚓"
+                ],
                 "TestOnof": "",
                 "TestRoleUpgradeCfg": {
-                    "ScoreAdd": 0,
-                    "CostValue": 0,
                     "Level": 0,
                     "Id": 0,
-                    "CostType": 0
+                    "CostType": 0,
+                    "ScoreAdd": 0,
+                    "CostValue": 0
                 },
                 "IntArr": [
                     111,
                     112
-                ],
-                "StrArr": [
-                    "嘟嘟嘟嘟",
-                    "嚓嚓嚓嚓"
                 ],
                 "Name": "第一个-B",
                 "TestInfoRole": {
@@ -122,21 +122,21 @@
     {
         "Arr": [
             {
+                "StrArr": [
+                    "biubiubiubiu",
+                    "唰唰唰唰"
+                ],
                 "TestOnof": "",
                 "TestRoleUpgradeCfg": {
-                    "ScoreAdd": 0,
-                    "CostValue": 0,
                     "Level": 0,
                     "Id": 0,
-                    "CostType": 0
+                    "CostType": 0,
+                    "ScoreAdd": 0,
+                    "CostValue": 0
                 },
                 "IntArr": [
                     201,
                     202
-                ],
-                "StrArr": [
-                    "biubiubiubiu",
-                    "唰唰唰唰"
                 ],
                 "Name": "测试项-A",
                 "TestInfoRole": {
@@ -158,21 +158,21 @@
                 }
             },
             {
+                "StrArr": [
+                    "哦哦哦哦",
+                    "哈哈哈哈"
+                ],
                 "TestOnof": "",
                 "TestRoleUpgradeCfg": {
-                    "ScoreAdd": 0,
-                    "CostValue": 0,
                     "Level": 0,
                     "Id": 0,
-                    "CostType": 0
+                    "CostType": 0,
+                    "ScoreAdd": 0,
+                    "CostValue": 0
                 },
                 "IntArr": [
                     211,
                     212
-                ],
-                "StrArr": [
-                    "哦哦哦哦",
-                    "哈哈哈哈"
                 ],
                 "Name": "测试项-B",
                 "TestInfoRole": {
@@ -238,16 +238,16 @@
     {
         "Arr": [
             {
+                "StrArr": [],
                 "TestOnof": "",
                 "TestRoleUpgradeCfg": {
-                    "ScoreAdd": 0,
-                    "CostValue": 0,
                     "Level": 0,
                     "Id": 0,
-                    "CostType": 0
+                    "CostType": 0,
+                    "ScoreAdd": 0,
+                    "CostValue": 0
                 },
                 "IntArr": [301],
-                "StrArr": [],
                 "Name": "测试项-C",
                 "TestInfoRole": {
                     "DepTest": {
@@ -268,16 +268,16 @@
                 }
             },
             {
+                "StrArr": ["哦哦哦哦"],
                 "TestOnof": "",
                 "TestRoleUpgradeCfg": {
-                    "ScoreAdd": 0,
-                    "CostValue": 0,
                     "Level": 0,
                     "Id": 0,
-                    "CostType": 0
+                    "CostType": 0,
+                    "ScoreAdd": 0,
+                    "CostValue": 0
                 },
                 "IntArr": [311],
-                "StrArr": ["哦哦哦哦"],
                 "Name": "测试项-B",
                 "TestInfoRole": {
                     "DepTest": {

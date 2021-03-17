@@ -233,8 +233,8 @@ exports.files = [
       },
       keep_or_strip_empty_list_cfg : {
         field : {
-          key : {
-            name : "key",
+          id : {
+            name : "id",
             number : 1,
             options : {
               field_description : "This is a Key",

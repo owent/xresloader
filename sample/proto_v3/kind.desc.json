@@ -100,12 +100,12 @@
         }
       },
       "keep_or_strip_empty_list_cfg": {
-        "field": {"key": {
+        "field": {"id": {
           "options": {
             "key_tag": 1,
             "field_description": "This is a Key"
           },
-          "name": "key",
+          "name": "id",
           "number": 1,
           "type_name": "UINT32"
         }},

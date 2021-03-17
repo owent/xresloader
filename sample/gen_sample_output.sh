@@ -62,6 +62,8 @@ for proto_dir in proto_v2 proto_v3; do
         -t ue-json -o '$proto_dir/json' -f '$proto_dir/kind.pb' -m DataSource='$XLSX_FILE'|keep_or_strip_empty_list|3,1 -m ProtoName=keep_or_strip_empty_list_cfg -m OutputFile=StripListTailCfg.json -m KeyRow=2 -m UeCfg-CodeOutput=|Public/Config|Private/Config --list-strip-empty-tail
         -t bin -p protobuf -o '$proto_dir' -f '$proto_dir/kind.pb' -m DataSource='$XLSX_FILE'|keep_or_strip_empty_list|3,1 -m ProtoName=keep_or_strip_empty_list_cfg -m OutputFile=strip_list_tail_cfg.bin -m KeyRow=2 --list-strip-empty-tail
     ';
+    # -t ue-csv -o '$proto_dir/csv' -f '$proto_dir/kind.pb' -m DataSource='$XLSX_FILE'|keep_or_strip_empty_list|3,1 -m ProtoName=keep_or_strip_empty_list_cfg -m OutputFile=KeepEmptyListCfg.csv -m KeyRow=2 -m UeCfg-CodeOutput=|Public/Config|Private/Config --list-keep-empty
+    # -t ue-csv -o '$proto_dir/csv' -f '$proto_dir/kind.pb' -m DataSource='$XLSX_FILE'|keep_or_strip_empty_list|3,1 -m ProtoName=keep_or_strip_empty_list_cfg -m OutputFile=StripListTailCfg.csv -m KeyRow=2 -m UeCfg-CodeOutput=|Public/Config|Private/Config --list-strip-empty-tail
     echo "Run with --stdin: $CMDS";
     echo "$CMDS" | java -client -jar "$XRESLOADER" --stdin --data-version 1.0.0.0;
 done

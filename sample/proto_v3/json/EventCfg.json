@@ -1,22 +1,22 @@
 [
     {
         "TestArr": [{
+            "Nested": "NestedNote",
             "NestedNote": "内嵌one of文本",
             "RuleParam": 712,
             "RuleId": 711,
-            "NestedEnumType": 0,
-            "Nested": "NestedNote"
+            "NestedEnumType": 0
         }],
         "UserExp": 0,
         "UserLevel": 0,
         "UnlockType": "",
         "Process": 1,
         "SpecifyField": {
+            "Nested": "NestedEnumType",
             "NestedNote": "",
             "RuleParam": 0,
             "NestedEnumType": 10001,
-            "RuleId": 0,
-            "Nested": "NestedEnumType"
+            "RuleId": 0
         },
         "Name": 5000101,
         "TestEmptyArr": [],
@@ -31,36 +31,36 @@
         "Note": "",
         "Id": 50001,
         "Rule": {
-            "NestedNote": "内嵌one of文本",
+            "Nested": "NestedNote",
+            "NestedNote": "",
             "RuleParam": 512,
             "RuleId": 511,
-            "NestedEnumType": 0,
-            "Nested": "NestedNote"
+            "NestedEnumType": 0
         },
         "Reward": "Item"
     },
     {
         "TestArr": [
             {
+                "Nested": "NestedEnumType",
                 "NestedNote": "",
                 "RuleParam": 722,
                 "RuleId": 721,
-                "NestedEnumType": 10001,
-                "Nested": "NestedEnumType"
+                "NestedEnumType": 10001
             },
             {
+                "Nested": "NestedEnumType",
                 "NestedNote": "",
                 "RuleParam": 822,
                 "RuleId": 821,
-                "NestedEnumType": 10101,
-                "Nested": "NestedEnumType"
+                "NestedEnumType": 10101
             },
             {
+                "Nested": "NestedNote",
                 "NestedNote": "数组嵌套one of",
                 "RuleParam": 822,
                 "RuleId": 921,
-                "NestedEnumType": 0,
-                "Nested": "NestedNote"
+                "NestedEnumType": 0
             }
         ],
         "UserExp": 1473624235014785965,
@@ -68,11 +68,11 @@
         "UnlockType": "",
         "Process": 2,
         "SpecifyField": {
+            "Nested": "NestedEnumType",
             "NestedNote": "",
             "RuleParam": 0,
             "NestedEnumType": 10001,
-            "RuleId": 0,
-            "Nested": "NestedEnumType"
+            "RuleId": 0
         },
         "Name": 5000202,
         "TestEmptyArr": [],
@@ -87,11 +87,11 @@
         "Note": "",
         "Id": 50002,
         "Rule": {
+            "Nested": "NestedEnumType",
             "NestedNote": "",
             "RuleParam": 522,
             "RuleId": 521,
-            "NestedEnumType": 10001,
-            "Nested": "NestedEnumType"
+            "NestedEnumType": 0
         },
         "Reward": "UserExp"
     },
@@ -102,11 +102,11 @@
         "UnlockType": "",
         "Process": 3,
         "SpecifyField": {
+            "Nested": "NestedEnumType",
             "NestedNote": "",
             "RuleParam": 0,
             "NestedEnumType": 10101,
-            "RuleId": 0,
-            "Nested": "NestedEnumType"
+            "RuleId": 0
         },
         "Name": 5000303,
         "TestEmptyArr": [],
@@ -121,11 +121,11 @@
         "Note": "",
         "Id": 50003,
         "Rule": {
+            "Nested": "NestedEnumType",
             "NestedNote": "",
             "RuleParam": 532,
             "RuleId": 531,
-            "NestedEnumType": 10101,
-            "Nested": "NestedEnumType"
+            "NestedEnumType": 0
         },
         "Reward": "EnumType"
     },
@@ -140,7 +140,7 @@
             "RuleParam": 0,
             "RuleId": 0,
             "NestedEnumType": 0,
-            "Nested": "NestedEnumType"
+            "Nested": 0
         },
         "Name": 5000404,
         "TestEmptyArr": [],
@@ -173,7 +173,7 @@
             "RuleParam": 0,
             "RuleId": 0,
             "NestedEnumType": 0,
-            "Nested": "NestedEnumType"
+            "Nested": 0
         },
         "Name": 5000505,
         "TestEmptyArr": [],

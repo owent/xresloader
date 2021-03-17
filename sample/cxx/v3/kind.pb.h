@@ -2449,7 +2449,7 @@ class keep_or_strip_empty_list_cfg PROTOBUF_FINAL :
     kArrayPlainMsgFieldNumber = 3,
     kArrayInt32FieldNumber = 4,
     kArrayInt64FieldNumber = 5,
-    kKeyFieldNumber = 1,
+    kIdFieldNumber = 1,
   };
   // repeated .dep2_cfg array_msg = 2;
   int array_msg_size() const;
@@ -2531,13 +2531,13 @@ class keep_or_strip_empty_list_cfg PROTOBUF_FINAL :
   ::PROTOBUF_NAMESPACE_ID::RepeatedField< ::PROTOBUF_NAMESPACE_ID::int64 >*
       mutable_array_int64();
 
-  // uint32 key = 1 [(.org.xresloader.field_description) = "This is a Key", (.org.xresloader.ue.key_tag) = 1];
-  void clear_key();
-  ::PROTOBUF_NAMESPACE_ID::uint32 key() const;
-  void set_key(::PROTOBUF_NAMESPACE_ID::uint32 value);
+  // uint32 id = 1 [(.org.xresloader.field_description) = "This is a Key", (.org.xresloader.ue.key_tag) = 1];
+  void clear_id();
+  ::PROTOBUF_NAMESPACE_ID::uint32 id() const;
+  void set_id(::PROTOBUF_NAMESPACE_ID::uint32 value);
   private:
-  ::PROTOBUF_NAMESPACE_ID::uint32 _internal_key() const;
-  void _internal_set_key(::PROTOBUF_NAMESPACE_ID::uint32 value);
+  ::PROTOBUF_NAMESPACE_ID::uint32 _internal_id() const;
+  void _internal_set_id(::PROTOBUF_NAMESPACE_ID::uint32 value);
   public:
 
   // @@protoc_insertion_point(class_scope:keep_or_strip_empty_list_cfg)
@@ -2553,7 +2553,7 @@ class keep_or_strip_empty_list_cfg PROTOBUF_FINAL :
   mutable std::atomic<int> _array_int32_cached_byte_size_;
   ::PROTOBUF_NAMESPACE_ID::RepeatedField< ::PROTOBUF_NAMESPACE_ID::int64 > array_int64_;
   mutable std::atomic<int> _array_int64_cached_byte_size_;
-  ::PROTOBUF_NAMESPACE_ID::uint32 key_;
+  ::PROTOBUF_NAMESPACE_ID::uint32 id_;
   mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
   friend struct ::TableStruct_kind_2eproto;
 };
@@ -4888,24 +4888,24 @@ inline event_cfg::UnlockTypeCase event_cfg::unlock_type_case() const {
 
 // keep_or_strip_empty_list_cfg
 
-// uint32 key = 1 [(.org.xresloader.field_description) = "This is a Key", (.org.xresloader.ue.key_tag) = 1];
-inline void keep_or_strip_empty_list_cfg::clear_key() {
-  key_ = 0u;
+// uint32 id = 1 [(.org.xresloader.field_description) = "This is a Key", (.org.xresloader.ue.key_tag) = 1];
+inline void keep_or_strip_empty_list_cfg::clear_id() {
+  id_ = 0u;
 }
-inline ::PROTOBUF_NAMESPACE_ID::uint32 keep_or_strip_empty_list_cfg::_internal_key() const {
-  return key_;
+inline ::PROTOBUF_NAMESPACE_ID::uint32 keep_or_strip_empty_list_cfg::_internal_id() const {
+  return id_;
 }
-inline ::PROTOBUF_NAMESPACE_ID::uint32 keep_or_strip_empty_list_cfg::key() const {
-  // @@protoc_insertion_point(field_get:keep_or_strip_empty_list_cfg.key)
-  return _internal_key();
+inline ::PROTOBUF_NAMESPACE_ID::uint32 keep_or_strip_empty_list_cfg::id() const {
+  // @@protoc_insertion_point(field_get:keep_or_strip_empty_list_cfg.id)
+  return _internal_id();
 }
-inline void keep_or_strip_empty_list_cfg::_internal_set_key(::PROTOBUF_NAMESPACE_ID::uint32 value) {
+inline void keep_or_strip_empty_list_cfg::_internal_set_id(::PROTOBUF_NAMESPACE_ID::uint32 value) {
   
-  key_ = value;
+  id_ = value;
 }
-inline void keep_or_strip_empty_list_cfg::set_key(::PROTOBUF_NAMESPACE_ID::uint32 value) {
-  _internal_set_key(value);
-  // @@protoc_insertion_point(field_set:keep_or_strip_empty_list_cfg.key)
+inline void keep_or_strip_empty_list_cfg::set_id(::PROTOBUF_NAMESPACE_ID::uint32 value) {
+  _internal_set_id(value);
+  // @@protoc_insertion_point(field_set:keep_or_strip_empty_list_cfg.id)
 }
 
 // repeated .dep2_cfg array_msg = 2;

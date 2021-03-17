@@ -367,7 +367,7 @@ const ::PROTOBUF_NAMESPACE_ID::uint32 TableStruct_kind_2eproto::offsets[] PROTOB
   ~0u,  // no _extensions_
   ~0u,  // no _oneof_case_
   ~0u,  // no _weak_field_map_
-  PROTOBUF_FIELD_OFFSET(::keep_or_strip_empty_list_cfg, key_),
+  PROTOBUF_FIELD_OFFSET(::keep_or_strip_empty_list_cfg, id_),
   PROTOBUF_FIELD_OFFSET(::keep_or_strip_empty_list_cfg, array_msg_),
   PROTOBUF_FIELD_OFFSET(::keep_or_strip_empty_list_cfg, array_plain_msg_),
   PROTOBUF_FIELD_OFFSET(::keep_or_strip_empty_list_cfg, array_int32_),
@@ -464,12 +464,12 @@ const char descriptor_table_protodef_kind_2eproto[] PROTOBUF_SECTION_VARIABLE(pr
   "\0132\020.event_rule_itemB\004\262\?\001;\022.\n\016test_empty_"
   "arr\030\\ \003(\0132\020.event_rule_itemB\004\262\?\001;:,\352D\006he"
   "lper\312> Test event_cfg with oneof fieldsB"
-  "\010\n\006rewardB\r\n\013unlock_type\"\267\001\n\034keep_or_str"
-  "ip_empty_list_cfg\022 \n\003key\030\001 \001(\rB\023\350D\001\232\?\rTh"
-  "is is a Key\022\034\n\tarray_msg\030\002 \003(\0132\t.dep2_cf"
-  "g\022\"\n\017array_plain_msg\030\003 \003(\0132\t.dep2_cfg\022\023\n"
-  "\013array_int32\030\004 \003(\005\022\023\n\013array_int64\030\005 \003(\003:"
-  "\t\352D\006helperb\006proto3"
+  "\010\n\006rewardB\r\n\013unlock_type\"\266\001\n\034keep_or_str"
+  "ip_empty_list_cfg\022\037\n\002id\030\001 \001(\rB\023\350D\001\232\?\rThi"
+  "s is a Key\022\034\n\tarray_msg\030\002 \003(\0132\t.dep2_cfg"
+  "\022\"\n\017array_plain_msg\030\003 \003(\0132\t.dep2_cfg\022\023\n\013"
+  "array_int32\030\004 \003(\005\022\023\n\013array_int64\030\005 \003(\003:\t"
+  "\352D\006helperb\006proto3"
   ;
 static const ::PROTOBUF_NAMESPACE_ID::internal::DescriptorTable*const descriptor_table_kind_2eproto_deps[4] = {
   &::descriptor_table_dep_5flevel2_2eproto,
@@ -493,7 +493,7 @@ static ::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase*const descriptor_table_kin
 };
 static ::PROTOBUF_NAMESPACE_ID::internal::once_flag descriptor_table_kind_2eproto_once;
 const ::PROTOBUF_NAMESPACE_ID::internal::DescriptorTable descriptor_table_kind_2eproto = {
-  false, false, descriptor_table_protodef_kind_2eproto, "kind.proto", 2618,
+  false, false, descriptor_table_protodef_kind_2eproto, "kind.proto", 2617,
   &descriptor_table_kind_2eproto_once, descriptor_table_kind_2eproto_sccs, descriptor_table_kind_2eproto_deps, 12, 4,
   schemas, file_default_instances, TableStruct_kind_2eproto::offsets,
   file_level_metadata_kind_2eproto, 12, file_level_enum_descriptors_kind_2eproto, file_level_service_descriptors_kind_2eproto,
@@ -4139,13 +4139,13 @@ keep_or_strip_empty_list_cfg::keep_or_strip_empty_list_cfg(const keep_or_strip_e
       array_int32_(from.array_int32_),
       array_int64_(from.array_int64_) {
   _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
-  key_ = from.key_;
+  id_ = from.id_;
   // @@protoc_insertion_point(copy_constructor:keep_or_strip_empty_list_cfg)
 }
 
 void keep_or_strip_empty_list_cfg::SharedCtor() {
   ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&scc_info_keep_or_strip_empty_list_cfg_kind_2eproto.base);
-  key_ = 0u;
+  id_ = 0u;
 }
 
 keep_or_strip_empty_list_cfg::~keep_or_strip_empty_list_cfg() {
@@ -4183,7 +4183,7 @@ void keep_or_strip_empty_list_cfg::Clear() {
   array_plain_msg_.Clear();
   array_int32_.Clear();
   array_int64_.Clear();
-  key_ = 0u;
+  id_ = 0u;
   _internal_metadata_.Clear<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
 }
 
@@ -4194,10 +4194,10 @@ const char* keep_or_strip_empty_list_cfg::_InternalParse(const char* ptr, ::PROT
     ptr = ::PROTOBUF_NAMESPACE_ID::internal::ReadTag(ptr, &tag);
     CHK_(ptr);
     switch (tag >> 3) {
-      // uint32 key = 1 [(.org.xresloader.field_description) = "This is a Key", (.org.xresloader.ue.key_tag) = 1];
+      // uint32 id = 1 [(.org.xresloader.field_description) = "This is a Key", (.org.xresloader.ue.key_tag) = 1];
       case 1:
         if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 8)) {
-          key_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint32(&ptr);
+          id_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint32(&ptr);
           CHK_(ptr);
         } else goto handle_unusual;
         continue;
@@ -4273,10 +4273,10 @@ failure:
   ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
-  // uint32 key = 1 [(.org.xresloader.field_description) = "This is a Key", (.org.xresloader.ue.key_tag) = 1];
-  if (this->key() != 0) {
+  // uint32 id = 1 [(.org.xresloader.field_description) = "This is a Key", (.org.xresloader.ue.key_tag) = 1];
+  if (this->id() != 0) {
     target = stream->EnsureSpace(target);
-    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteUInt32ToArray(1, this->_internal_key(), target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteUInt32ToArray(1, this->_internal_id(), target);
   }
 
   // repeated .dep2_cfg array_msg = 2;
@@ -4373,11 +4373,11 @@ size_t keep_or_strip_empty_list_cfg::ByteSizeLong() const {
     total_size += data_size;
   }
 
-  // uint32 key = 1 [(.org.xresloader.field_description) = "This is a Key", (.org.xresloader.ue.key_tag) = 1];
-  if (this->key() != 0) {
+  // uint32 id = 1 [(.org.xresloader.field_description) = "This is a Key", (.org.xresloader.ue.key_tag) = 1];
+  if (this->id() != 0) {
     total_size += 1 +
       ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::UInt32Size(
-        this->_internal_key());
+        this->_internal_id());
   }
 
   if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
@@ -4415,8 +4415,8 @@ void keep_or_strip_empty_list_cfg::MergeFrom(const keep_or_strip_empty_list_cfg&
   array_plain_msg_.MergeFrom(from.array_plain_msg_);
   array_int32_.MergeFrom(from.array_int32_);
   array_int64_.MergeFrom(from.array_int64_);
-  if (from.key() != 0) {
-    _internal_set_key(from._internal_key());
+  if (from.id() != 0) {
+    _internal_set_id(from._internal_id());
   }
 }
 
@@ -4445,7 +4445,7 @@ void keep_or_strip_empty_list_cfg::InternalSwap(keep_or_strip_empty_list_cfg* ot
   array_plain_msg_.InternalSwap(&other->array_plain_msg_);
   array_int32_.InternalSwap(&other->array_int32_);
   array_int64_.InternalSwap(&other->array_int64_);
-  swap(key_, other->key_);
+  swap(id_, other->id_);
 }
 
 ::PROTOBUF_NAMESPACE_ID::Metadata keep_or_strip_empty_list_cfg::GetMetadata() const {

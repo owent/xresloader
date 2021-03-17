@@ -250,7 +250,8 @@ public class DataDstUEJson extends DataDstUEBase {
                     ret = new JSONObject();
                 }
                 for (int i = 0; i < fieldSet.size(); ++i) {
-                    Object obj = pickValueFieldJsonStandardImpl(ret, fieldSet.get(i));
+                    // 不可填充原始的JSONObject，Map结构要特殊处理
+                    Object obj = pickValueFieldJsonStandardImpl(null, fieldSet.get(i));
                     if (obj != null && obj instanceof JSONObject) {
                         Object mapKey = null;
                         Object mapValue = null;
@@ -659,6 +660,7 @@ public class DataDstUEJson extends DataDstUEBase {
                     HashMap<Object, Object> tmp = new HashMap<Object, Object>();
                     for (String v : groups) {
                         String[] subGroups = splitPlainGroups(v, getPlainMessageSeparator(field));
+                        // 和Standard模式一样，Map结构要特殊处理。但是Plain模式本身就是外部Merge的。所以不影响原有结构
                         JSONObject msg = pickValueFieldJsonPlainField(subGroups, ident, field);
                         if (msg != null) {
                             Object mapKey = null;

@@ -9,6 +9,7 @@ on: # @see https://help.github.com/en/articles/events-that-trigger-workflows#web
     branches: # Array of patterns that match refs/heads
       - master # Push events on master branch
       - dev
+      - main
   # schedule:
   #  - cron:  0 * * * *
 
@@ -23,12 +24,13 @@ jobs:
     runs-on: ${{ matrix.os }}
     steps:
       - name: Checkout
-        uses: actions/checkout@master # https://github.com/actions/checkout
+        uses: actions/checkout@v2 # https://github.com/actions/checkout
         with:
           lfs: true
       - name: Set up JDK 8.x
-        uses: actions/setup-java@master # https://github.com/actions/setup-java
+        uses: actions/setup-java@v2 # https://github.com/actions/setup-java
         with:
+          distribution: adopt
           java-version: "8"
           java-package: jdk
           architecture: x64

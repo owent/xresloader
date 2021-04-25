@@ -12,6 +12,7 @@ import org.json.JSONObject;
 import org.xresloader.core.ProgramOptions;
 import org.xresloader.core.data.dst.DataDstWriterNode.DataDstFieldDescriptor;
 import org.xresloader.core.data.dst.DataDstWriterNode.DataDstOneofDescriptor;
+import org.xresloader.core.data.dst.DataDstWriterNode.DataDstTypeDescriptor;
 import org.xresloader.core.data.dst.DataDstWriterNode.JAVA_TYPE;
 import org.xresloader.core.data.err.ConvException;
 import org.xresloader.core.data.src.DataContainer;
@@ -111,9 +112,8 @@ public class DataDstUEJson extends DataDstUEBase {
                 dumpedFields.add(varName);
 
                 if (val == null) {
-                    val = pickValueFieldJsonDefaultImpl(field);
+                    dumpDefault(jobj, field);
                 }
-                jobj.put(varName, val);
             }
         }
 
@@ -222,44 +222,71 @@ public class DataDstUEJson extends DataDstUEBase {
     @Override
     final protected Object pickValueField(Object buildObj, ArrayList<DataDstWriterNodeWrapper> fieldSet,
             HashMap<String, Object> fieldDataByOneof) throws ConvException {
-        return pickValueFieldJsonImpl(null, fieldSet);
-    }
-
-    @SuppressWarnings("unchecked")
-    protected Object pickValueFieldJsonImpl(Object reuseOldValue, ArrayList<DataDstWriterNodeWrapper> fieldSet)
-            throws ConvException {
         DataDstWriterNode msgDesc = getFirstWriterNode(fieldSet);
         if (msgDesc == null) {
             return null;
         }
 
+        JSONObject builder = new JSONObject();
         if (msgDesc.getReferBrothers().isOneof()) {
-            return pickValueFieldJsonPlainField(reuseOldValue, msgDesc.identify, msgDesc.getOneofDescriptor(), msgDesc);
+            return dumpPlainOneofField(builder, getIdentName(msgDesc.getOneofDescriptor().getName()), msgDesc.identify,
+                    msgDesc.getOneofDescriptor(), msgDesc, null);
+        }
+
+        dumpFieldJsonImpl(builder, fieldSet, fieldDataByOneof);
+        for (Map.Entry<String, Object> pair : builder.toMap().entrySet()) {
+            return pair.getValue();
+        }
+
+        if (builder.length() > 1) {
+            throw new ConvException(
+                    String.format("Pick data of %s with more than 1 value is invalid", msgDesc.getFullName()));
+        }
+
+        return null;
+    }
+
+    protected boolean dumpFieldJsonImpl(JSONObject builder, ArrayList<DataDstWriterNodeWrapper> fieldSet,
+            HashMap<String, Object> fieldDataByOneof) throws ConvException {
+        DataDstWriterNode msgDesc = getFirstWriterNode(fieldSet);
+        if (msgDesc == null) {
+            return false;
+        }
+
+        if (msgDesc.getReferBrothers().isOneof()) {
+            return null != dumpPlainOneofField(builder, getIdentName(msgDesc.getOneofDescriptor().getName()),
+                    msgDesc.identify, msgDesc.getOneofDescriptor(), msgDesc, null);
         }
 
         DataDstFieldDescriptor field = getFieldDescriptor(fieldSet);
         if (field == null) {
-            return null;
+            return false;
         }
+
+        String varName = getIdentName(field.getName());
+
         if (msgDesc.getReferBrothers().mode == DataDstWriterNode.CHILD_NODE_TYPE.STANDARD) {
             if (isRecursiveEnabled() && field.isMap()) {
-                JSONObject ret;
-                if (null != reuseOldValue && reuseOldValue instanceof JSONObject) {
-                    ret = (JSONObject) reuseOldValue;
+                JSONObject ret = null;
+                Object oldValue = builder.opt(varName);
+                if (oldValue != null && oldValue instanceof JSONObject) {
+                    ret = (JSONObject) oldValue;
                 } else {
                     ret = new JSONObject();
+                    builder.put(varName, ret);
                 }
+
                 for (int i = 0; i < fieldSet.size(); ++i) {
                     // 不可填充原始的JSONObject，Map结构要特殊处理
-                    Object obj = pickValueFieldJsonStandardImpl(null, fieldSet.get(i));
-                    if (obj != null && obj instanceof JSONObject) {
+                    Object tmp = pickValueFieldJsonStandardImpl(fieldSet.get(i));
+                    if (tmp != null && tmp instanceof JSONObject) {
                         Object mapKey = null;
                         Object mapValue = null;
-                        for (String key : ((JSONObject) obj).keySet()) {
+                        for (String key : ((JSONObject) tmp).keySet()) {
                             if (key.equalsIgnoreCase("key")) {
-                                mapKey = ((JSONObject) obj).opt(key);
+                                mapKey = ((JSONObject) tmp).opt(key);
                             } else if (key.equalsIgnoreCase("value")) {
-                                mapValue = ((JSONObject) obj).opt(key);
+                                mapValue = ((JSONObject) tmp).opt(key);
                             }
                         }
 
@@ -268,16 +295,20 @@ public class DataDstUEJson extends DataDstUEBase {
                         }
                     }
                 }
-                return ret;
+
+                return !ret.isEmpty();
             } else if (isRecursiveEnabled() && field.isList()) {
                 JSONArray ret;
-                if (null != reuseOldValue && reuseOldValue instanceof JSONArray) {
-                    ret = (JSONArray) reuseOldValue;
+                Object oldValue = builder.opt(varName);
+                if (oldValue != null && oldValue instanceof JSONArray) {
+                    ret = (JSONArray) oldValue;
                 } else {
                     ret = new JSONArray();
+                    builder.put(varName, ret);
                 }
+
                 for (int i = 0; i < fieldSet.size(); ++i) {
-                    Object obj = pickValueFieldJsonStandardImpl(ret, fieldSet.get(i));
+                    Object obj = pickValueFieldJsonStandardImpl(fieldSet.get(i));
                     if (null == obj
                             && ProgramOptions.getInstance().stripListRule == ProgramOptions.ListStripRule.KEEP_ALL) {
                         obj = getDefault(field);
@@ -299,21 +330,33 @@ public class DataDstUEJson extends DataDstUEBase {
                         }
                     }
                 }
-                return ret;
+
+                return !ret.isEmpty();
             } else {
-                return pickValueFieldJsonStandardImpl(reuseOldValue, fieldSet.get(0));
+                Object val = pickValueFieldJsonStandardImpl(fieldSet.get(0));
+                if (val == null) {
+                    return false;
+                }
+
+                if (val instanceof OneofDataObject) {
+                    String fieldVarName = getIdentName(((OneofDataObject) val).field.getName());
+                    fieldDataByOneof.put(fieldVarName, ((OneofDataObject) val).value);
+                    builder.put(varName, fieldVarName);
+                } else {
+                    builder.put(varName, val);
+                }
+                return true;
             }
         }
 
         if (msgDesc.getReferBrothers().mode == DataDstWriterNode.CHILD_NODE_TYPE.PLAIN) {
-            return pickValueFieldJsonPlainImpl(reuseOldValue, field, fieldSet);
+            return dumpPlainFields(builder, field, fieldSet);
         }
 
-        return null;
+        return false;
     }
 
-    protected Object pickValueFieldJsonStandardImpl(Object reuseOldValue, DataDstWriterNodeWrapper descWrapper)
-            throws ConvException {
+    protected Object pickValueFieldJsonStandardImpl(DataDstWriterNodeWrapper descWrapper) throws ConvException {
         if (null == descWrapper || null == descWrapper.getReferNode()) {
             return null;
         }
@@ -325,7 +368,8 @@ public class DataDstUEJson extends DataDstUEBase {
 
         // oneof data
         if (descWrapper.getReferOneof() != null) {
-            return pickValueFieldJsonPlainField(reuseOldValue, desc.identify, descWrapper.getReferOneof(), desc);
+            return dumpPlainOneofField(new JSONObject(), getIdentName(descWrapper.getReferOneof().getName()),
+                    desc.identify, descWrapper.getReferOneof(), desc, null);
         }
 
         if (desc.getType() == JAVA_TYPE.MESSAGE) {
@@ -334,13 +378,9 @@ public class DataDstUEJson extends DataDstUEBase {
                 dumpedFields = new HashSet<String>();
             }
 
-            JSONObject ret;
-            if (null != reuseOldValue && reuseOldValue instanceof JSONObject) {
-                ret = (JSONObject) reuseOldValue;
-            } else {
-                ret = new JSONObject();
-            }
+            JSONObject ret = new JSONObject();
             HashMap<String, Object> fieldDataByOneof = new HashMap<String, Object>();
+            boolean hasChildrenData = false;
 
             if (descWrapper.getChildren() != null) {
                 for (ArrayList<DataDstWriterNodeWrapper> child : descWrapper.getChildren()) {
@@ -368,13 +408,8 @@ public class DataDstUEJson extends DataDstUEBase {
                         }
 
                         // oneof 设置 case,缓存field
-                        Object res = pickValueFieldJsonImpl(ret.opt(varName), child);
-                        if (res instanceof OneofDataObject) {
-                            String fieldVarName = getIdentName(((OneofDataObject) res).field.getName());
-                            fieldDataByOneof.put(fieldVarName, ((OneofDataObject) res).value);
-                            ret.put(varName, fieldVarName);
-                        } else {
-                            ret.put(varName, res);
+                        if (dumpFieldJsonImpl(ret, child, fieldDataByOneof)) {
+                            hasChildrenData = true;
                         }
                         continue;
                     }
@@ -387,19 +422,22 @@ public class DataDstUEJson extends DataDstUEBase {
                             if (null != dumpedFields) {
                                 dumpedFields.add(varName);
                             }
+                            hasChildrenData = true;
 
                             continue;
                         }
                     }
 
-                    Object val = pickValueFieldJsonImpl(ret.opt(varName), child);
-                    if (val != null) {
-                        ret.put(varName, val);
-
+                    if (dumpFieldJsonImpl(ret, child, fieldDataByOneof)) {
                         if (null != dumpedFields) {
                             dumpedFields.add(varName);
                         }
+                        hasChildrenData = true;
                     }
+                }
+
+                if (!hasChildrenData) {
+                    return null;
                 }
             }
 
@@ -428,9 +466,8 @@ public class DataDstUEJson extends DataDstUEBase {
                     }
 
                     if (val == null) {
-                        val = pickValueFieldJsonDefaultImpl(subField);
+                        dumpDefault(ret, subField);
                     }
-                    ret.put(varName, val);
                 }
             }
 
@@ -440,39 +477,34 @@ public class DataDstUEJson extends DataDstUEBase {
         return pickValueFieldBaseStandardImpl(desc);
     }
 
-    protected Object pickValueFieldJsonPlainImpl(Object reuseOldValue, DataDstFieldDescriptor field,
+    protected boolean dumpPlainFields(JSONObject builder, DataDstFieldDescriptor field,
             ArrayList<DataDstWriterNodeWrapper> fieldSet) throws ConvException {
         if (null == field) {
-            return null;
+            return false;
         }
 
         if (fieldSet.isEmpty()) {
-            return pickValueFieldJsonDefaultImpl(field);
+            dumpDefault(builder, field);
+            return false;
         }
 
+        boolean ret = false;
         for (DataDstWriterNodeWrapper node : fieldSet) {
-            Object res = null;
             DataDstWriterNode desc = node.getReferNode();
             if (desc != null) {
-                res = pickValueFieldJsonPlainField(reuseOldValue, desc.identify, desc.getFieldDescriptor(), desc);
-            }
-
-            if (null != res) {
-                reuseOldValue = res;
-            } else if (null == reuseOldValue) {
-                reuseOldValue = pickValueFieldJsonDefaultImpl(field);
-            } else if (ProgramOptions.getInstance().stripListRule == ProgramOptions.ListStripRule.KEEP_ALL) {
-                if (reuseOldValue instanceof JSONArray) {
-                    ((JSONArray) reuseOldValue).put(getDefault(field));
+                if (dumpPlainMessageField(builder, desc.identify, desc.getFieldDescriptor(), desc)) {
+                    ret = true;
                 }
+            } else {
+                dumpDefault(builder, field);
             }
         }
-
-        return reuseOldValue;
+        return ret;
     }
 
-    private OneofDataObject pickValueFieldJsonPlainField(Object reuseOldValue, IdentifyDescriptor ident,
-            DataDstOneofDescriptor field, DataDstWriterNode maybeFromNode) throws ConvException {
+    private OneofDataObject dumpPlainOneofField(JSONObject builder, String oneofVarName, IdentifyDescriptor ident,
+            DataDstOneofDescriptor field, DataDstWriterNode maybeFromNode, HashSet<String> dumpedOneof)
+            throws ConvException {
         if (null == ident) {
             return null;
         }
@@ -482,11 +514,12 @@ public class DataDstUEJson extends DataDstUEBase {
             return null;
         }
 
-        return pickValueFieldJsonPlainField(reuseOldValue, ident, field, maybeFromNode, res.value);
+        return dumpPlainOneofField(builder, oneofVarName, ident, field, maybeFromNode, res.value, dumpedOneof);
     }
 
-    private OneofDataObject pickValueFieldJsonPlainField(Object reuseOldValue, IdentifyDescriptor ident,
-            DataDstOneofDescriptor field, DataDstWriterNode maybeFromNode, String input) throws ConvException {
+    private OneofDataObject dumpPlainOneofField(JSONObject builder, String oneofVarName, IdentifyDescriptor ident,
+            DataDstOneofDescriptor field, DataDstWriterNode maybeFromNode, String input, HashSet<String> dumpedOneof)
+            throws ConvException {
         if (field == null) {
             return null;
         }
@@ -505,52 +538,75 @@ public class DataDstUEJson extends DataDstUEBase {
             return null;
         }
 
+        String readVarName = getIdentName(sub_field.getName());
+        builder.put(oneofVarName, readVarName);
+        Object value;
+
         if (res.length == 1) {
-            return new OneofDataObject(sub_field, pickValueFieldJsonDefaultImpl(sub_field));
+            value = dumpDefault(builder, sub_field);
+        } else {
+            value = dumpPlainMessageField(builder, null, sub_field, null, (String) res[1]);
         }
 
-        // 非顶层，不用验证类型
-        return new OneofDataObject(sub_field,
-                pickValueFieldJsonPlainField(reuseOldValue, null, sub_field, null, (String) res[1]));
+        if (null != value) {
+            builder.put(readVarName, value);
+            if (null != dumpedOneof) {
+                dumpedOneof.add(oneofVarName);
+            }
+        }
+
+        return new OneofDataObject(sub_field, value);
     }
 
-    private Object pickValueFieldJsonPlainField(Object reuseOldValue, IdentifyDescriptor ident,
-            DataDstFieldDescriptor field, DataDstWriterNode maybeFromNode) throws ConvException {
+    private boolean dumpPlainMessageField(JSONObject builder, IdentifyDescriptor ident, DataDstFieldDescriptor field,
+            DataDstWriterNode maybeFromNode) throws ConvException {
         if (null == ident) {
-            return pickValueFieldJsonDefaultImpl(field);
+            dumpDefault(builder, field);
+            return false;
         }
 
         DataContainer<String> res = DataSrcImpl.getOurInstance().getValue(ident, "");
         if (null == res || !res.valid) {
-            return pickValueFieldJsonDefaultImpl(field);
+            dumpDefault(builder, field);
+            return false;
         }
 
-        return pickValueFieldJsonPlainField(reuseOldValue, ident, field, maybeFromNode, res.value);
+        return null != dumpPlainMessageField(builder, ident, field, maybeFromNode, res.value);
     }
 
-    private Object pickValueFieldJsonPlainField(Object reuseOldValue, IdentifyDescriptor ident,
-            DataDstFieldDescriptor field, DataDstWriterNode maybeFromNode, String input) throws ConvException {
+    /**
+     * Dump message field element and return the whole filed
+     * 
+     * @param builder       container
+     * @param ident         identify object
+     * @param field         field descriptor
+     * @param maybeFromNode maybe from writer node(There is a excel cell)
+     * @param input         text data
+     * @return All field data, JSONObect for map and JSONArray for list
+     * @throws ConvException
+     */
+    private Object dumpPlainMessageField(JSONObject builder, IdentifyDescriptor ident, DataDstFieldDescriptor field,
+            DataDstWriterNode maybeFromNode, String input) throws ConvException {
         if ((null != maybeFromNode && null != maybeFromNode.identify && !field.isList())
                 && field.getType() != DataDstWriterNode.JAVA_TYPE.MESSAGE) {
             // error type
             logErrorMessage("Plain type %s of %s.%s must be list", field.getType().toString(),
                     field.getTypeDescriptor().getFullName(), field.getName());
-            return false;
+            return null;
         }
 
-        Object ret = null;
+        String varName = getIdentName(field.getName());
         if (field.isList()) {
+            Object val = builder.opt(varName);
             if (field.isMap()) {
-                if (reuseOldValue != null && reuseOldValue instanceof JSONObject) {
-                    ret = (JSONObject) reuseOldValue;
-                } else {
-                    ret = new JSONObject();
+                if (val == null && !(val instanceof JSONObject)) {
+                    val = new JSONObject();
+                    builder.put(varName, val);
                 }
             } else {
-                if (reuseOldValue != null && reuseOldValue instanceof JSONArray) {
-                    ret = (JSONArray) reuseOldValue;
-                } else {
-                    ret = new JSONArray();
+                if (val == null && !(val instanceof JSONArray)) {
+                    val = new JSONArray();
+                    builder.put(varName, val);
                 }
             }
 
@@ -661,8 +717,9 @@ public class DataDstUEJson extends DataDstUEBase {
                     for (String v : groups) {
                         String[] subGroups = splitPlainGroups(v, getPlainMessageSeparator(field));
                         // 和Standard模式一样，Map结构要特殊处理。但是Plain模式本身就是外部Merge的。所以不影响原有结构
-                        JSONObject msg = pickValueFieldJsonPlainField(subGroups, ident, field);
-                        if (msg != null) {
+                        JSONObject msg = new JSONObject();
+                        dumpPlainMessageFields(msg, subGroups, ident, field.getTypeDescriptor());
+                        if (!msg.isEmpty()) {
                             Object mapKey = null;
                             Object mapValue = null;
                             for (String key : ((JSONObject) msg).keySet()) {
@@ -686,8 +743,9 @@ public class DataDstUEJson extends DataDstUEBase {
                     tmp.ensureCapacity(groups.length);
                     for (String v : groups) {
                         String[] subGroups = splitPlainGroups(v, getPlainMessageSeparator(field));
-                        JSONObject msg = pickValueFieldJsonPlainField(subGroups, ident, field);
-                        if (msg != null) {
+                        JSONObject msg = new JSONObject();
+                        dumpPlainMessageFields(msg, subGroups, ident, field.getTypeDescriptor());
+                        if (!msg.isEmpty()) {
                             tmp.add(msg);
                         }
                     }
@@ -702,15 +760,17 @@ public class DataDstUEJson extends DataDstUEBase {
                 break;
             }
 
-            if (field.isMap() && parsedDatas != null) {
-                HashMap<Object, Object> parsedMap = (HashMap<Object, Object>) parsedDatas;
-                JSONObject valMap = (JSONObject) ret;
-                for (HashMap.Entry<Object, Object> pair : parsedMap.entrySet()) {
+            if (field.isMap() && parsedDatas != null && parsedDatas instanceof HashMap<?, ?>) {
+                HashMap<?, ?> parsedMap = (HashMap<?, ?>) parsedDatas;
+                JSONObject valMap = (JSONObject) val;
+                for (HashMap.Entry<?, ?> pair : parsedMap.entrySet()) {
                     valMap.put(pair.getKey().toString(), pair.getValue());
                 }
-            } else if (parsedDatas != null) {
-                ArrayList<Object> parsedArray = (ArrayList<Object>) parsedDatas;
-                JSONArray valArray = (JSONArray) ret;
+
+                return val;
+            } else if (parsedDatas != null && parsedDatas instanceof ArrayList<?>) {
+                ArrayList<?> parsedArray = (ArrayList<?>) parsedDatas;
+                JSONArray valArray = (JSONArray) val;
                 if (null != maybeFromNode && maybeFromNode.getListIndex() >= 0) {
                     if (parsedArray.size() != 1) {
                         throw new ConvException(
@@ -736,48 +796,53 @@ public class DataDstUEJson extends DataDstUEBase {
                         valArray.put(res);
                     }
                 }
-            } else if (ProgramOptions.getInstance().stripListRule == ProgramOptions.ListStripRule.KEEP_ALL) {
-                JSONArray valArray = (JSONArray) ret;
-                valArray.put(getDefault(field));
+
+                return val;
+            } else {
+                return dumpDefault(builder, field);
             }
         } else {
+            Object val = null;
             switch (field.getType()) {
             case INT: {
-                ret = parsePlainDataLong(input.trim(), ident, field).intValue();
+                val = parsePlainDataLong(input.trim(), ident, field).intValue();
                 break;
             }
 
             case LONG: {
-                ret = parsePlainDataLong(input.trim(), ident, field);
+                val = parsePlainDataLong(input.trim(), ident, field);
                 break;
             }
 
             case FLOAT: {
-                ret = parsePlainDataDouble(input.trim(), ident, field).floatValue();
+                val = parsePlainDataDouble(input.trim(), ident, field).floatValue();
                 break;
             }
 
             case DOUBLE: {
-                ret = parsePlainDataDouble(input.trim(), ident, field);
+                val = parsePlainDataDouble(input.trim(), ident, field);
                 break;
             }
 
             case BOOLEAN: {
-                ret = parsePlainDataBoolean(input.trim(), ident, field);
+                val = parsePlainDataBoolean(input.trim(), ident, field);
                 break;
             }
 
             case STRING:
             case BYTES: {
-                ret = parsePlainDataString(input.trim(), ident, field);
+                val = parsePlainDataString(input.trim(), ident, field);
                 break;
             }
 
             case MESSAGE: {
                 String[] groups = splitPlainGroups(input.trim(), getPlainMessageSeparator(field));
-                ret = pickValueFieldJsonPlainField(groups, ident, field);
-                if (ret == null) {
-                    ret = pickValueFieldJsonDefaultImpl(field);
+                JSONObject res = new JSONObject();
+                dumpPlainMessageFields(res, groups, ident, field.getTypeDescriptor());
+                if (res.isEmpty()) {
+                    val = getDefault(field);
+                } else {
+                    val = res;
                 }
                 break;
             }
@@ -785,40 +850,42 @@ public class DataDstUEJson extends DataDstUEBase {
             default:
                 break;
             }
-        }
 
-        return ret;
+            if (val != null) {
+                builder.put(varName, val);
+            }
+            return val;
+        }
     }
 
-    private JSONObject pickValueFieldJsonPlainField(String[] inputs, IdentifyDescriptor ident,
-            DataDstFieldDescriptor field) throws ConvException {
-        if (field.getTypeDescriptor() == null || inputs == null || inputs.length == 0) {
-            return null;
+    private void dumpPlainMessageFields(JSONObject builder, String[] inputs, IdentifyDescriptor ident,
+            DataDstTypeDescriptor messageType) throws ConvException {
+        if (messageType == null || inputs == null || inputs.length == 0) {
+            return;
         }
 
-        ArrayList<DataDstFieldDescriptor> children = field.getTypeDescriptor().getSortedFields();
+        ArrayList<DataDstFieldDescriptor> children = messageType.getSortedFields();
 
         HashSet<String> dumpedOneof = null;
-        if (field.getTypeDescriptor().getSortedOneofs().size() > 0) {
+        if (messageType.getSortedOneofs().size() > 0) {
             dumpedOneof = new HashSet<String>();
         }
 
-        JSONObject ret = new JSONObject();
         int usedInputIdx = 0;
         for (int i = 0; i < children.size(); ++i) {
             if (children.get(i).getReferOneof() != null) {
                 if (dumpedOneof == null) {
                     throw new ConvException(String.format(
                             "Try to convert field %s of %s failed, found oneof descriptor but oneof set is not initialized.",
-                            children.get(i).getName(), field.getTypeDescriptor().getFullName()));
+                            children.get(i).getName(), messageType.getFullName()));
                 }
 
                 String varName = getIdentName(children.get(i).getName());
                 String oneofVarName = getIdentName(children.get(i).getReferOneof().getName());
                 if (dumpedOneof.contains(oneofVarName)) {
                     // already dumped with other field, dump default
-                    if (!ret.has(varName)) {
-                        ret.put(varName, pickValueFieldJsonDefaultImpl(children.get(i)));
+                    if (!builder.has(varName)) {
+                        dumpDefault(builder, children.get(i));
                     }
 
                     continue;
@@ -827,27 +894,14 @@ public class DataDstUEJson extends DataDstUEBase {
                 if (usedInputIdx >= inputs.length) {
                     throw new ConvException(String.format(
                             "Try to convert %s of %s failed, field count not matched(expect %d, real %d).",
-                            children.get(i).getReferOneof().getName(), field.getTypeDescriptor().getFullName(),
-                            usedInputIdx + 1, inputs.length));
+                            children.get(i).getReferOneof().getName(), messageType.getFullName(), usedInputIdx + 1,
+                            inputs.length));
                 }
 
-                Object res = pickValueFieldJsonPlainField(null, null, children.get(i).getReferOneof(), null,
-                        inputs[usedInputIdx]);
-                if (res != null && res instanceof OneofDataObject) {
-                    OneofDataObject realRes = ((OneofDataObject) res);
-                    String readVarName = getIdentName(realRes.field.getName());
-                    ret.put(oneofVarName, readVarName);
-                    if (realRes.value != null) {
-                        ret.put(readVarName, realRes.value);
-                    } else {
-                        ret.put(readVarName, pickValueFieldJsonDefaultImpl(realRes.field));
-                    }
-
-                    dumpedOneof.add(oneofVarName);
-                }
-
-                if (!ret.has(varName)) {
-                    ret.put(varName, pickValueFieldJsonDefaultImpl(children.get(i)));
+                dumpPlainOneofField(builder, oneofVarName, null, children.get(i).getReferOneof(), null,
+                        inputs[usedInputIdx], dumpedOneof);
+                if (!builder.has(varName)) {
+                    dumpDefault(builder, children.get(i));
                 }
 
                 ++usedInputIdx;
@@ -855,15 +909,10 @@ public class DataDstUEJson extends DataDstUEBase {
                 if (usedInputIdx >= inputs.length) {
                     throw new ConvException(String.format(
                             "Try to convert %s of %s failed, field count not matched(expect %d, real %d).",
-                            children.get(i).getName(), field.getTypeDescriptor().getFullName(), usedInputIdx + 1,
-                            inputs.length));
+                            children.get(i).getName(), messageType.getFullName(), usedInputIdx + 1, inputs.length));
                 }
 
-                Object fieldVal = pickValueFieldJsonPlainField(null, ident, children.get(i), null,
-                        inputs[usedInputIdx]);
-                String varName = getIdentName(children.get(i).getName());
-                ret.put(varName, fieldVal);
-
+                dumpPlainMessageField(builder, ident, children.get(i), null, inputs[usedInputIdx]);
                 ++usedInputIdx;
             }
         }
@@ -872,27 +921,21 @@ public class DataDstUEJson extends DataDstUEBase {
             DataSrcImpl current_source = DataSrcImpl.getOurInstance();
             if (null == current_source) {
                 ProgramOptions.getLoger().warn("Try to convert %s need %d fields, but provide %d fields.",
-                        field.getTypeDescriptor().getFullName(), usedInputIdx, inputs.length);
+                        messageType.getFullName(), usedInputIdx, inputs.length);
             } else {
                 ProgramOptions.getLoger().warn(
                         "Try to convert %s need %d fields, but provide %d fields.%s  > File: %s, Table: %s, Row: %d, Column: %d",
-                        field.getTypeDescriptor().getFullName(), usedInputIdx, inputs.length, ProgramOptions.getEndl(),
+                        messageType.getFullName(), usedInputIdx, inputs.length, ProgramOptions.getEndl(),
                         current_source.getCurrentFileName(), current_source.getCurrentTableName(),
                         current_source.getCurrentRowNum() + 1, current_source.getLastColomnNum() + 1);
             }
         }
-
-        if (ret.isEmpty()) {
-            return null;
-        }
-
-        return ret;
     }
 
     private Object getDefault(DataDstFieldDescriptor fd) {
         switch (fd.getType()) {
         case INT: {
-            return 0;
+            return Integer.valueOf(0);
         }
         case LONG: {
             return Long.valueOf(0);
@@ -926,7 +969,13 @@ public class DataDstUEJson extends DataDstUEBase {
                     }
                 }
 
-                ret.put(varName, pickValueFieldJsonDefaultImpl(subField));
+                if (subField.isMap()) {
+                    ret.put(varName, new JSONObject());
+                } else if (subField.isList()) {
+                    ret.put(varName, new JSONArray());
+                } else {
+                    dumpDefault(ret, subField);
+                }
             }
 
             return ret;
@@ -936,13 +985,44 @@ public class DataDstUEJson extends DataDstUEBase {
         }
     }
 
-    protected Object pickValueFieldJsonDefaultImpl(DataDstFieldDescriptor fd) {
+    /**
+     * Dump default element and return the whole field
+     * 
+     * @param builder container
+     * @param fd      element descriptor
+     * @return All field data, JSONObect for map and JSONArray for list
+     */
+    protected Object dumpDefault(JSONObject builder, DataDstFieldDescriptor fd) {
+        String varName = getIdentName(fd.getName());
         if (fd.isMap()) {
-            return new HashMap<Object, Object>();
+            Object val = builder.opt(varName);
+            if (null == val) {
+                val = new JSONObject();
+                builder.put(varName, val);
+            }
+            return val;
         } else if (fd.isList()) {
-            return new JSONArray();
-        }
+            JSONArray old = (JSONArray) builder.opt(varName);
+            if (null == old) {
+                old = new JSONArray();
+                builder.put(varName, old);
+            }
+            if (ProgramOptions.getInstance().stripListRule == ProgramOptions.ListStripRule.KEEP_ALL) {
+                Object val = getDefault(fd);
+                if (val == null) {
+                    return old;
+                }
+                old.put(val);
+            }
 
-        return getDefault(fd);
+            return old;
+        } else {
+            Object val = getDefault(fd);
+            if (val == null) {
+                return val;
+            }
+            builder.put(varName, val);
+            return val;
+        }
     }
 }

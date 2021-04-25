@@ -98,7 +98,7 @@ echo "
 | -a --data-version        | 设置数据版本号           | 参数为字符串，表示输出的数据的data_ver字段。如果不设置将按执行时间自动生成一个                            |
 | --pretty                 | 格式化输出               | 参数为整数，0代表关闭美化输出功能，大于0表示格式化时的缩进量                                              |
 | --enable-excel-formular  | 开启Excel公式实时计算    | 默认开启，开启公式实时计算会减慢转表速度                                                                  |
-| --disable-excel-formular | 关闭Excel公式实时计算    | 2003版的excel(*.xls)关闭公式会大幅加快转表速度。（注: 也会关闭对日期格式的探测）                          |
+| --disable-excel-formular | 关闭Excel公式实时计算    | 关闭公式实时计算，会使用新的流式索引器，大幅加快转表速度，降低内存开销。（注: 也会关闭对日期格式的探测）  |
 | --disable-empty-list     | 移除数组空项             | (废弃)，请使用 ```--list-strip-all-empty```                                                               |
 | --enable-empty-list      | 保留全部数组空项         | (废弃)，请使用 ```--list-keep-empty```                                                                    |
 | --list-strip-all-empty   | 移除数组空项             | (默认) 移除数组空项，自动删除Excel中的未填充数据，不会转出到输出文件中                                    |

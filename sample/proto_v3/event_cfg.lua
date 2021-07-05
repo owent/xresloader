@@ -11,8 +11,8 @@ return {
     },
     data_ver = "1.0.0.0",
     description = "Test event_cfg with oneof fields",
-    hash_code = "no hash code",
-    xres_ver = "2.11.0",
+    hash_code = "sha256:2abbfaec80e850340ee2e1c9b9b9eb3dc69241d7d933dfae8f9c0a1358429fd2",
+    xres_ver = "2.11.0-rc2",
   },
   [2] = "event_cfg",
   event_cfg = {

@@ -1,6 +1,16 @@
 更新记录
 ==========
 
+2.11.0-RC2
+------
+
+1. 文本类型输出也增加Hash Code（和二进制输出的计算规则不同）
+2. 更新 ```org.apache.logging.log4j``` 到 2.14.1
+3. 更新 ```org.msgpack.msgpack-core``` 到 0.9.0
+4. 更新 ```org.json``` 到 20210307
+5. 更新 ```com.google.protobuf.protobuf-java``` 到 3.17.3
+6. 升级 ```org.apache.xmlbeans``` 到 5.0.0
+
 2.11.0-RC1
 ------
 

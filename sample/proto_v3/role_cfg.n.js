@@ -10,8 +10,8 @@ exports.role_cfg_header = {
     }
   ],
   data_ver : "1.0.0.0",
-  hash_code : "no hash code",
-  xres_ver : "2.11.0"
+  hash_code : "sha256:7574465f9b678b8ce3cb922d9b76934dba88a11632ae4dd79f7e8f1ef467f71a",
+  xres_ver : "2.11.0-rc2"
 };
 exports.role_cfg = [
   {

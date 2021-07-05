@@ -10,8 +10,8 @@ return {
             },
         },
         data_ver = "1.0.0.0",
-        hash_code = "no hash code",
-        xres_ver = "2.11.0",
+        hash_code = "sha256:e597917039729cac146ab284442f852468e2c3cce1e0ad155ce162befc28ab24",
+        xres_ver = "2.11.0-rc2",
     },
     [2] = "role_cfg",
     role_cfg = {

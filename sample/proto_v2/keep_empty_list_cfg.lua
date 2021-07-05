@@ -10,8 +10,8 @@ return {
       },
     },
     data_ver = "1.0.0.0",
-    hash_code = "no hash code",
-    xres_ver = "2.11.0",
+    hash_code = "sha256:e192b1278aea13633eb67e367edc99aa2bb8b487e32f3e8a0f9c5b975230304e",
+    xres_ver = "2.11.0-rc2",
   },
   [2] = "keep_or_strip_empty_list_cfg",
   keep_or_strip_empty_list_cfg = {

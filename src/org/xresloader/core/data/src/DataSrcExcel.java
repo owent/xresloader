@@ -8,6 +8,7 @@ import org.xresloader.core.engine.IdentifyEngine;
 import org.xresloader.core.scheme.SchemeConf;
 import org.apache.poi.ss.usermodel.Sheet;
 
+import java.io.File;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -107,7 +108,13 @@ public class DataSrcExcel extends DataSrcImpl {
                 continue;
             }
 
-            Sheet tb = ExcelEngine.openUserModuleSheet(file_path, src.table_name);
+            File file = new File(file_path);
+            if (!file.isAbsolute()) {
+                file_path = ProgramOptions.getInstance().dataSourceDirectory + '/' + file_path;
+                file = new File(file_path);
+            }
+
+            Sheet tb = ExcelEngine.openUserModuleSheet(file, src.table_name);
             if (null == tb) {
                 ProgramOptions.getLoger().warn("Open macro source \"%s\" or sheet %s failed.", file_path,
                         src.table_name);
@@ -193,10 +200,16 @@ public class DataSrcExcel extends DataSrcImpl {
                 continue;
             }
 
+            File file = new File(file_path);
+            if (!file.isAbsolute()) {
+                file_path = ProgramOptions.getInstance().dataSourceDirectory + '/' + file_path;
+                file = new File(file_path);
+            }
+
             DataSheetInfo res = new DataSheetInfo();
             // XLSX 可以使用流式读取引擎
             if (false == ProgramOptions.getInstance().enableFormular) {
-                res.customTableIndex = ExcelEngine.openStreamTableIndex(file_path, src.table_name);
+                res.customTableIndex = ExcelEngine.openStreamTableIndex(file, src.table_name);
                 if (res.customTableIndex != null) {
                     res.lastRowNumber = res.customTableIndex.getLastRowNum();
                 } else {
@@ -205,7 +218,7 @@ public class DataSrcExcel extends DataSrcImpl {
                     continue;
                 }
             } else {
-                res.userModuleTable = ExcelEngine.openUserModuleSheet(file_path, src.table_name);
+                res.userModuleTable = ExcelEngine.openUserModuleSheet(file, src.table_name);
                 if (null == res.userModuleTable) {
                     ProgramOptions.getLoger().error("Open data source file \"%s\" or sheet \"%s\" failed.",
                             src.file_path, src.table_name);

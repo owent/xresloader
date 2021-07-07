@@ -10,6 +10,7 @@
 4. 更新 ```org.json``` 到 20210307
 5. 更新 ```com.google.protobuf.protobuf-java``` 到 3.17.3
 6. 升级 ```org.apache.xmlbeans``` 到 5.0.0
+7. 修复内置索引引擎为设置数据源目录的BUG(Thanks to [vividkings](https://github.com/vividkings))
 
 2.11.0-RC1
 ------

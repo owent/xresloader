@@ -129,10 +129,10 @@ public class DataDstPbHelper {
 
     // ==================== dump options ====================
 
-    static public HashMap<String, Object> dumpOptionsIntoHashMap(Descriptors.EnumValueDescriptor msg_desc,
-            com.google.protobuf.ExtensionRegistry custom_extensions) {
+    static public HashMap<String, Object> dumpOptionsIntoHashMap(ProgramOptions.ProtoDumpType dump_type,
+            Descriptors.EnumValueDescriptor msg_desc, com.google.protobuf.ExtensionRegistry custom_extensions) {
         HashMap<String, Object> msg_root = new HashMap<String, Object>();
-        boolean has_data = false;
+        boolean has_data = dump_type == ProgramOptions.ProtoDumpType.DESCRIPTOR;
 
         HashMap<String, Object> options_data = dumpMessageExtensions(msg_desc.getOptions(),
                 msg_desc.getOptions().getAllFields(), custom_extensions);
@@ -150,10 +150,10 @@ public class DataDstPbHelper {
         return null;
     }
 
-    static public HashMap<String, Object> dumpOptionsIntoHashMap(Descriptors.EnumDescriptor msg_desc,
-            com.google.protobuf.ExtensionRegistry custom_extensions) {
+    static public HashMap<String, Object> dumpOptionsIntoHashMap(ProgramOptions.ProtoDumpType dump_type,
+            Descriptors.EnumDescriptor msg_desc, com.google.protobuf.ExtensionRegistry custom_extensions) {
         HashMap<String, Object> msg_root = new HashMap<String, Object>();
-        boolean has_data = false;
+        boolean has_data = dump_type == ProgramOptions.ProtoDumpType.DESCRIPTOR;
 
         HashMap<String, Object> options_data = dumpMessageExtensions(msg_desc.getOptions(),
                 msg_desc.getOptions().getAllFields(), custom_extensions);
@@ -165,7 +165,7 @@ public class DataDstPbHelper {
         // value
         HashMap<String, Object> child_message = null;
         for (Descriptors.EnumValueDescriptor sub_desc : msg_desc.getValues()) {
-            HashMap<String, Object> subset = dumpOptionsIntoHashMap(sub_desc, custom_extensions);
+            HashMap<String, Object> subset = dumpOptionsIntoHashMap(dump_type, sub_desc, custom_extensions);
             if (subset == null) {
                 continue;
             }
@@ -187,10 +187,10 @@ public class DataDstPbHelper {
         return null;
     }
 
-    static public HashMap<String, Object> dumpOptionsIntoHashMap(Descriptors.OneofDescriptor msg_desc,
-            com.google.protobuf.ExtensionRegistry custom_extensions) {
+    static public HashMap<String, Object> dumpOptionsIntoHashMap(ProgramOptions.ProtoDumpType dump_type,
+            Descriptors.OneofDescriptor msg_desc, com.google.protobuf.ExtensionRegistry custom_extensions) {
         HashMap<String, Object> msg_root = new HashMap<String, Object>();
-        boolean has_data = false;
+        boolean has_data = dump_type == ProgramOptions.ProtoDumpType.DESCRIPTOR;
 
         HashMap<String, Object> options_data = dumpMessageExtensions(msg_desc.getOptions(),
                 msg_desc.getOptions().getAllFields(), custom_extensions);
@@ -207,10 +207,10 @@ public class DataDstPbHelper {
         return null;
     }
 
-    static public HashMap<String, Object> dumpOptionsIntoHashMap(Descriptors.FieldDescriptor msg_desc,
-            com.google.protobuf.ExtensionRegistry custom_extensions) {
+    static public HashMap<String, Object> dumpOptionsIntoHashMap(ProgramOptions.ProtoDumpType dump_type,
+            Descriptors.FieldDescriptor msg_desc, com.google.protobuf.ExtensionRegistry custom_extensions) {
         HashMap<String, Object> msg_root = new HashMap<String, Object>();
-        boolean has_data = false;
+        boolean has_data = dump_type == ProgramOptions.ProtoDumpType.DESCRIPTOR;
 
         HashMap<String, Object> options_data = dumpMessageExtensions(msg_desc.getOptions(),
                 msg_desc.getOptions().getAllFields(), custom_extensions);
@@ -229,10 +229,10 @@ public class DataDstPbHelper {
         return null;
     }
 
-    static public HashMap<String, Object> dumpOptionsIntoHashMap(Descriptors.Descriptor msg_desc,
-            com.google.protobuf.ExtensionRegistry custom_extensions) {
+    static public HashMap<String, Object> dumpOptionsIntoHashMap(ProgramOptions.ProtoDumpType dump_type,
+            Descriptors.Descriptor msg_desc, com.google.protobuf.ExtensionRegistry custom_extensions) {
         HashMap<String, Object> msg_root = new HashMap<String, Object>();
-        boolean has_data = false;
+        boolean has_data = dump_type == ProgramOptions.ProtoDumpType.DESCRIPTOR;
 
         HashMap<String, Object> options_data = dumpMessageExtensions(msg_desc.getOptions(),
                 msg_desc.getOptions().getAllFields(), custom_extensions);
@@ -244,7 +244,7 @@ public class DataDstPbHelper {
         // nested_type
         HashMap<String, Object> child_message = null;
         for (Descriptors.Descriptor sub_desc : msg_desc.getNestedTypes()) {
-            HashMap<String, Object> subset = dumpOptionsIntoHashMap(sub_desc, custom_extensions);
+            HashMap<String, Object> subset = dumpOptionsIntoHashMap(dump_type, sub_desc, custom_extensions);
             if (subset == null) {
                 continue;
             }
@@ -261,7 +261,7 @@ public class DataDstPbHelper {
         // enum_type
         child_message = null;
         for (Descriptors.EnumDescriptor sub_desc : msg_desc.getEnumTypes()) {
-            HashMap<String, Object> subset = dumpOptionsIntoHashMap(sub_desc, custom_extensions);
+            HashMap<String, Object> subset = dumpOptionsIntoHashMap(dump_type, sub_desc, custom_extensions);
             if (subset == null) {
                 continue;
             }
@@ -278,7 +278,7 @@ public class DataDstPbHelper {
         // oneof_decl
         child_message = null;
         for (Descriptors.OneofDescriptor sub_desc : msg_desc.getOneofs()) {
-            HashMap<String, Object> subset = dumpOptionsIntoHashMap(sub_desc, custom_extensions);
+            HashMap<String, Object> subset = dumpOptionsIntoHashMap(dump_type, sub_desc, custom_extensions);
             if (subset == null) {
                 continue;
             }
@@ -295,7 +295,7 @@ public class DataDstPbHelper {
         // field
         child_message = null;
         for (Descriptors.FieldDescriptor sub_desc : msg_desc.getFields()) {
-            HashMap<String, Object> subset = dumpOptionsIntoHashMap(sub_desc, custom_extensions);
+            HashMap<String, Object> subset = dumpOptionsIntoHashMap(dump_type, sub_desc, custom_extensions);
             if (subset == null) {
                 continue;
             }
@@ -317,10 +317,10 @@ public class DataDstPbHelper {
         return null;
     }
 
-    static public HashMap<String, Object> dumpOptionsIntoHashMap(Descriptors.MethodDescriptor msg_desc,
-            com.google.protobuf.ExtensionRegistry custom_extensions) {
+    static public HashMap<String, Object> dumpOptionsIntoHashMap(ProgramOptions.ProtoDumpType dump_type,
+            Descriptors.MethodDescriptor msg_desc, com.google.protobuf.ExtensionRegistry custom_extensions) {
         HashMap<String, Object> msg_root = new HashMap<String, Object>();
-        boolean has_data = false;
+        boolean has_data = dump_type == ProgramOptions.ProtoDumpType.DESCRIPTOR;
 
         HashMap<String, Object> options_data = dumpMessageExtensions(msg_desc.getOptions(),
                 msg_desc.getOptions().getAllFields(), custom_extensions);
@@ -339,10 +339,10 @@ public class DataDstPbHelper {
         return null;
     }
 
-    static public HashMap<String, Object> dumpOptionsIntoHashMap(Descriptors.ServiceDescriptor msg_desc,
-            com.google.protobuf.ExtensionRegistry custom_extensions) {
+    static public HashMap<String, Object> dumpOptionsIntoHashMap(ProgramOptions.ProtoDumpType dump_type,
+            Descriptors.ServiceDescriptor msg_desc, com.google.protobuf.ExtensionRegistry custom_extensions) {
         HashMap<String, Object> msg_root = new HashMap<String, Object>();
-        boolean has_data = false;
+        boolean has_data = dump_type == ProgramOptions.ProtoDumpType.DESCRIPTOR;
 
         HashMap<String, Object> options_data = dumpMessageExtensions(msg_desc.getOptions(),
                 msg_desc.getOptions().getAllFields(), custom_extensions);
@@ -354,7 +354,7 @@ public class DataDstPbHelper {
         // method
         HashMap<String, Object> child_message = null;
         for (Descriptors.MethodDescriptor sub_desc : msg_desc.getMethods()) {
-            HashMap<String, Object> subset = dumpOptionsIntoHashMap(sub_desc, custom_extensions);
+            HashMap<String, Object> subset = dumpOptionsIntoHashMap(dump_type, sub_desc, custom_extensions);
             if (subset == null) {
                 continue;
             }
@@ -376,10 +376,10 @@ public class DataDstPbHelper {
         return null;
     }
 
-    static public void dumpOptionsIntoHashMap(LinkedList<Object> parent, Descriptors.FileDescriptor file_desc,
-            com.google.protobuf.ExtensionRegistry custom_extensions) {
+    static public void dumpOptionsIntoHashMap(ProgramOptions.ProtoDumpType dump_type, LinkedList<Object> parent,
+            Descriptors.FileDescriptor file_desc, com.google.protobuf.ExtensionRegistry custom_extensions) {
         HashMap<String, Object> msg_root = new HashMap<String, Object>();
-        boolean has_data = false;
+        boolean has_data = dump_type == ProgramOptions.ProtoDumpType.DESCRIPTOR;
 
         HashMap<String, Object> options_data = dumpMessageExtensions(file_desc.getOptions(),
                 file_desc.getOptions().getAllFields(), custom_extensions);
@@ -390,7 +390,7 @@ public class DataDstPbHelper {
 
         HashMap<String, Object> child_message = null;
         for (Descriptors.Descriptor sub_desc : file_desc.getMessageTypes()) {
-            HashMap<String, Object> subset = dumpOptionsIntoHashMap(sub_desc, custom_extensions);
+            HashMap<String, Object> subset = dumpOptionsIntoHashMap(dump_type, sub_desc, custom_extensions);
             if (subset == null) {
                 continue;
             }
@@ -407,7 +407,7 @@ public class DataDstPbHelper {
         // enum_type
         child_message = null;
         for (Descriptors.EnumDescriptor sub_desc : file_desc.getEnumTypes()) {
-            HashMap<String, Object> subset = dumpOptionsIntoHashMap(sub_desc, custom_extensions);
+            HashMap<String, Object> subset = dumpOptionsIntoHashMap(dump_type, sub_desc, custom_extensions);
             if (subset == null) {
                 continue;
             }
@@ -424,7 +424,7 @@ public class DataDstPbHelper {
         // service
         child_message = null;
         for (Descriptors.ServiceDescriptor sub_desc : file_desc.getServices()) {
-            HashMap<String, Object> subset = dumpOptionsIntoHashMap(sub_desc, custom_extensions);
+            HashMap<String, Object> subset = dumpOptionsIntoHashMap(dump_type, sub_desc, custom_extensions);
             if (subset == null) {
                 continue;
             }
@@ -441,7 +441,7 @@ public class DataDstPbHelper {
         // extensions
         child_message = null;
         for (Descriptors.FieldDescriptor sub_desc : file_desc.getExtensions()) {
-            HashMap<String, Object> subset = dumpOptionsIntoHashMap(sub_desc, custom_extensions);
+            HashMap<String, Object> subset = dumpOptionsIntoHashMap(dump_type, sub_desc, custom_extensions);
             if (subset == null) {
                 continue;
             }

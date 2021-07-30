@@ -33,7 +33,7 @@ foreach ($proto_dir in "proto_v2", "proto_v3") {
     Write-Output "Generate sample data for $proto_dir, batchmode using --stdin";
     $TASK_LINES = @(
         "-t lua -p protobuf -o '$proto_dir'     -f '$proto_dir/kind.pb' --pretty 2 -i kind.desc.lua",
-        "-t json -p protobuf -o '$proto_dir'    -f '$proto_dir/kind.pb' --pretty 2 -i kind.desc.json",
+        "-t json -p protobuf -o '$proto_dir'    -f '$proto_dir/kind.pb' --pretty 2 -r kind.desc.json",
         "-t json -p protobuf -o '$proto_dir'    -f '$proto_dir/kind.pb' -s '$XLSX_FILE' -m scheme_kind -n '/(?i)\.bin$/\.json/'",
         "-t xml -p protobuf -o '$proto_dir'     -f '$proto_dir/kind.pb' -s '$XLSX_FILE' -m scheme_kind -n '/(?i)\.bin$/\.xml/'",
         "-t msgpack -p protobuf -o '$proto_dir' -f '$proto_dir/kind.pb' -s '$XLSX_FILE' -m scheme_kind -n '/(?i)\.bin$/\.msgpack.bin/'",

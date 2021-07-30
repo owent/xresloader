@@ -11,6 +11,7 @@
 5. 更新 ```com.google.protobuf.protobuf-java``` 到 3.17.3
 6. 升级 ```org.apache.xmlbeans``` 到 5.0.0
 7. 修复内置索引引擎为设置数据源目录的BUG(Thanks to [vividkings](https://github.com/vividkings))
+8. 增肌 ```-r/--descriptor-print``` 选项，用于导出所有描述数据
 
 2.11.0-RC1
 ------

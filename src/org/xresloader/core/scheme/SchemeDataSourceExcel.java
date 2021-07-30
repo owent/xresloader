@@ -10,6 +10,7 @@ import org.xresloader.core.engine.IdentifyDescriptor;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 
+import java.io.File;
 import java.util.ArrayList;
 
 /**
@@ -22,7 +23,7 @@ public final class SchemeDataSourceExcel extends SchemeDataSourceBase {
     public int load() throws InitializeException {
 
         String file_path = ProgramOptions.getInstance().dataSourceFile;
-        currentWorkbook = ExcelEngine.openWorkbook(file_path);
+        currentWorkbook = ExcelEngine.openWorkbook(new File(file_path));
         if (null == currentWorkbook) {
             throw new InitializeException(
                     String.format("open file \"%s\" failed", ProgramOptions.getInstance().dataSourceFile));

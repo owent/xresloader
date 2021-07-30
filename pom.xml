@@ -22,9 +22,29 @@
             </resource>
         </resources>
 
-        <sourceDirectory>src</sourceDirectory>
+        <sourceDirectory>src/org/xresloader</sourceDirectory>
+        <testSourceDirectory>src/test</testSourceDirectory>
 
         <plugins>
+            <plugin>
+				<groupId>org.jacoco</groupId>
+				<artifactId>jacoco-maven-plugin</artifactId>
+				<version>0.8.7</version>
+				<executions>
+					<execution>
+						<goals>
+							<goal>prepare-agent</goal>
+						</goals>
+					</execution>
+					<execution>
+						<id>report</id>
+						<phase>test</phase>
+						<goals>
+							<goal>report</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
@@ -37,7 +57,10 @@
                     </compilerArgs>
                 </configuration>
             </plugin>
-
+            <plugin>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>2.22.2</version>
+            </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-shade-plugin</artifactId>
@@ -85,6 +108,12 @@
                                         <exclude>META-INF/DEPENDENCIES</exclude>
                                         <exclude>META-INF/LICENSE</exclude>
                                         <exclude>META-INF/NOTICE</exclude>
+                                    </excludes>
+                                </filter>
+                                <filter>
+                                    <artifact>junit:junit</artifact>
+                                    <excludes>
+                                        <exclude>**</exclude>
                                     </excludes>
                                 </filter>
                             </filters>
@@ -142,9 +171,22 @@
                         </goals>
                         <configuration>
                             <sources>
-                                <!-- 我们可以通过在这里添加多个source节点，来添加任意多个源文件夹 -->
                                 <source>${basedir}/header</source>
-                                <source>${basedir}/src</source>
+                                <source>${basedir}/src/org/xresloader</source>
+                            </sources>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>add-test-source</id>
+                        <phase>generate-test-sources</phase>
+                        <goals>
+                            <goal>add-test-source</goal>
+                        </goals>
+                        <configuration>
+                            <sources>
+                                <source>${basedir}/header</source>
+                                <source>${basedir}/src/org/xresloader</source>
+                                <source>${basedir}/src/test</source>
                             </sources>
                         </configuration>
                     </execution>
@@ -239,5 +281,12 @@
             <artifactId>commons-csv</artifactId>
             <version>1.8</version>
         </dependency>
+
+        <dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>4.13.2</version>
+			<scope>test</scope>
+		</dependency>
     </dependencies>
 </project>

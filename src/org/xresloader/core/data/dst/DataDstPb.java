@@ -293,7 +293,7 @@ public class DataDstPb extends DataDstImpl {
         return cache_set.getOrDefault(val, null);
     }
 
-    static Descriptors.FileDescriptor try_get_inner_deile_desc(String name) {
+    static Descriptors.FileDescriptor try_get_inner_detail_desc(String name) {
         if (inner_file_descs != null) {
             return inner_file_descs.getOrDefault(name.replace('\\', '/').toLowerCase(), null);
         }
@@ -327,7 +327,7 @@ public class DataDstPb extends DataDstImpl {
         if (null == fdp) {
             // Inner proto files
             String standardName = name.replace('\\', '/');
-            Descriptors.FileDescriptor innerFileDesc = try_get_inner_deile_desc(standardName);
+            Descriptors.FileDescriptor innerFileDesc = try_get_inner_detail_desc(standardName);
             if (null != innerFileDesc) {
                 return innerFileDesc;
             }
@@ -1679,7 +1679,15 @@ public class DataDstPb extends DataDstImpl {
                     if (values != null) {
                         tmp.ensureCapacity(values.length);
                         for (Long v : values) {
-                            tmp.add(v.intValue());
+                            if (fd.getType() == Descriptors.FieldDescriptor.Type.ENUM) {
+                                Descriptors.EnumValueDescriptor enum_val = get_enum_value(cachePbs, fd.getEnumType(),
+                                        v.intValue());
+                                if (enum_val != null) {
+                                    tmp.add(enum_val);
+                                }
+                            } else {
+                                tmp.add(v.intValue());
+                            }
                         }
                     }
                     if (!tmp.isEmpty()) {

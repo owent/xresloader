@@ -36,6 +36,9 @@
             "lalal",
             "欧若拉",
             "小魔女"
+          ],
+          test_plain_enum_array : [
+            10001
           ]
         },
         {
@@ -56,6 +59,10 @@
             "杰克",
             "海盗王子"
           ],
+          test_plain_enum_array : [
+            10001,
+            10101
+          ],
           unlock_level : 39
         },
         {
@@ -75,6 +82,11 @@
             "hahaha",
             "库拉",
             "喵少年"
+          ],
+          test_plain_enum_array : [
+            10001,
+            10001,
+            10101
           ],
           unlock_level : 85
         },
@@ -149,12 +161,12 @@
         count : 7,
         data_source : [
           {
-            file : "资源转换示例.xlsx",
+            file : "./资源转换示例.xlsx",
             sheet : "kind"
           }
         ],
         data_ver : "1.0.0.0",
-        hash_code : "sha256:7574465f9b678b8ce3cb922d9b76934dba88a11632ae4dd79f7e8f1ef467f71a",
+        hash_code : "sha256:0c333be4391e1f1303efcf68a348d6c74e6b7a9c66a736f3b04536cc90289fca",
         xres_ver : "2.11.0-rc2"
       }
     }

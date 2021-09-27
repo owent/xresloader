@@ -29,6 +29,7 @@ void UArrInArrHelper::ClearRow(FArrInArr& TableRow)
     TableRow.TestInfoRole.DepTest.Dep2.Level = TEXT("");
     TableRow.TestInfoRole.TestArray.Reset(0);
     TableRow.TestInfoRole.IntAsString = TEXT("");
+    TableRow.TestInfoRole.TestPlainEnumArray.Reset(0);
     TableRow.TestRoleUpgradeCfg.Id = 0;
     TableRow.TestRoleUpgradeCfg.Level = 0;
     TableRow.TestRoleUpgradeCfg.CostType = 0;

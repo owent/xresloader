@@ -241,7 +241,7 @@
         <dependency>
             <groupId>com.google.protobuf</groupId>
             <artifactId>protobuf-java</artifactId>
-            <version>3.17.3</version>
+            <version>3.18.0</version>
         </dependency>
 
         <!-- POI -->
@@ -279,7 +279,7 @@
         <dependency>
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-csv</artifactId>
-            <version>1.8</version>
+            <version>1.9.0</version>
         </dependency>
 
         <dependency>

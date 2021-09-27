@@ -5,7 +5,7 @@ return {
     count = 4,
     data_source = {
       {
-        file = "资源转换示例.xlsx",
+        file = "./资源转换示例.xlsx",
         sheet = "keep_or_strip_empty_list",
       },
     },

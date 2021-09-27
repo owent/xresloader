@@ -5,7 +5,7 @@ return {
     count = 3,
     data_source = {
       {
-        file = "资源转换示例.xlsx",
+        file = "./资源转换示例.xlsx",
         sheet = "arr_in_arr",
       },
     },

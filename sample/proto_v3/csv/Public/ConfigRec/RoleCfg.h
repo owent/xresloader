@@ -50,4 +50,8 @@ struct FRoleCfg : public FTableRowBase
     UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "XResConfig")
     FString IntAsString;
 
+    /** Field Type: INT, Name: TestPlainEnumArray, Index: 13 **/
+    UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "XResConfig")
+    TArray< int32 > TestPlainEnumArray;
+
 };

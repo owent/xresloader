@@ -5,20 +5,22 @@
 ------
 
 1. 文本类型输出也增加Hash Code（和二进制输出的计算规则不同）
-2. 更新 ```org.apache.logging.log4j``` 到 2.14.1
-3. 更新 ```org.msgpack.msgpack-core``` 到 0.9.0
-4. 更新 ```org.json``` 到 20210307
-5. 更新 ```com.google.protobuf.protobuf-java``` 到 3.17.3
-6. 升级 ```org.apache.xmlbeans``` 到 5.0.0
-7. 修复内置索引引擎为设置数据源目录的BUG(Thanks to [vividkings](https://github.com/vividkings))
-8. 增肌 ```-r/--descriptor-print``` 选项，用于导出所有描述数据
+2. 更新 `org.apache.logging.log4j` 到 2.14.1
+3. 更新 `org.msgpack.msgpack-core` 到 0.9.0
+4. 更新 `org.json` 到 20210307
+5. 更新 `com.google.protobuf.protobuf-java` 到 3.18.0
+6. 升级 `org.apache.xmlbeans` 到 5.0.0
+7. 更新 `commons-csv` 到 1.9.0
+8. 修复内置索引引擎为设置数据源目录的BUG(Thanks to [vividkings](https://github.com/vividkings))
+9. 增肌 `-r/--descriptor-print` 选项，用于导出所有描述数据
+10. 修复 Plain 模式二进制输出enum数组的BUG
 
 2.11.0-RC1
 ------
 
 1. 修复保留空list处理64位整数不正确的问题 [\#5](https://github.com/xresloader/xresloader/issues/5)
-2. ```--disable-empty-list``` 和 ```--enable-empty-list``` 改为不推荐使用。新增 ```--list-keep-empty``` , ```--list-strip-all-empty``` 和 ```--list-strip-empty-tail``` 。
-3. 新增 ```--list-strip-empty-tail``` 模式仅移List除尾部的空元素。
+2. `--disable-empty-list` 和 `--enable-empty-list` 改为不推荐使用。新增 `--list-keep-empty` , `--list-strip-all-empty` 和 `--list-strip-empty-tail` 。
+3. 新增 `--list-strip-empty-tail` 模式仅移List除尾部的空元素。
 4. 修订文本输出的排序规则，仅和Key有关，和Value无关。
 5. Plain模式的message数组允许指定下标。
 6. 优化公式存在不支持函数时的输出。
@@ -26,31 +28,31 @@
 2.10.2
 ------
 
-1. 修复 ```Ue-Csv``` 和 ```Ue-Json``` 输出时，结构名字和输出资源文件名不一致时生成的路径错误
+1. 修复 `Ue-Csv` 和 `Ue-Json` 输出时，结构名字和输出资源文件名不一致时生成的路径错误
 2. 生成的UE的加载代码允许自己指定Loader
 
 2.10.1
 ------
 
-1. 修复在 ```Ue-Csv``` 和 ```Ue-Json``` 输出时， Excel存在空的合成Key单元格时会crash的BUG。
-2. 升级 ```org.apache.poi``` 到 5.0.0
-3. 升级 ```org.apache.xmlbeans``` 到 4.0.0
+1. 修复在 `Ue-Csv` 和 `Ue-Json` 输出时， Excel存在空的合成Key单元格时会crash的BUG。
+2. 升级 `org.apache.poi` 到 5.0.0
+3. 升级 `org.apache.xmlbeans` 到 4.0.0
 
 2.10.0
 ------
 
-1. 增加 ```--enable-alias-mapping``` 选项，用于在映射Excel列到目标数据结构时，开启别名匹配。
+1. 增加 `--enable-alias-mapping` 选项，用于在映射Excel列到目标数据结构时，开启别名匹配。
 2. protobuf的枚举类型解析支持message内嵌enum。
 3. 对大文件处理每5000行打印一次进度日志。
-4. \[实验性\] 使用 ```--disable-excel-formular``` 关闭公式后，将采用流式读取机制索引数据，以降低内存开销。同时会关闭日期格式的探测。
+4. \[实验性\] 使用 `--disable-excel-formular` 关闭公式后，将采用流式读取机制索引数据，以降低内存开销。同时会关闭日期格式的探测。
 5. 优化公式错误时的处理流程，现在公式错误不会中断执行仅会打印出Warning。
-6. 更新 ```org.codehaus.mojo.build-helper-maven-plugin``` 到 3.2.0
-7. 更新 ```commons-codec``` 到 1.15
-8. 更新 ```org.msgpack.msgpack-core``` 到 0.8.22
-9. 更新 ```com.google.protobuf.protobuf-java``` 到 3.13.0
-10. 更新 ```org.apache.logging.log4j``` 到 2.14.0
-11. 更新 ```org.json``` 到 20201115
-12. 更新 ```com.google.protobuf``` 到 3.14.0
+6. 更新 `org.codehaus.mojo.build-helper-maven-plugin` 到 3.2.0
+7. 更新 `commons-codec` 到 1.15
+8. 更新 `org.msgpack.msgpack-core` 到 0.8.22
+9. 更新 `com.google.protobuf.protobuf-java` 到 3.13.0
+10. 更新 `org.apache.logging.log4j` 到 2.14.0
+11. 更新 `org.json` 到 20201115
+12. 更新 `com.google.protobuf` 到 3.14.0
 
 2.10.0-rc2
 ------
@@ -61,20 +63,20 @@
 2.10.0-rc1
 ------
 
-1. 增加 ```--enable-alias-mapping``` 选项，用于在映射Excel列到目标数据结构时，开启别名匹配。
+1. 增加 `--enable-alias-mapping` 选项，用于在映射Excel列到目标数据结构时，开启别名匹配。
 2. protobuf的枚举类型解析支持message内嵌enum。
 3. 对大文件处理每5000行打印一次进度日志。
-4. 更新 ```maven-shade-plugin.maven-shade-plugin``` 到 3.2.4
-5. 更新 ```org.codehaus.mojo.build-helper-maven-plugin``` 到 3.2.0
-6. 更新 ```commons-codec``` 到 1.15
-7. 更新 ```org.msgpack.msgpack-core``` 到 0.8.21
-8. 更新 ```com.google.protobuf.protobuf-java``` 到 3.13.0
-9. \[实验性\] 使用 ```--disable-excel-formular``` 关闭公式后，将采用流式读取机制索引数据，以降低内存开销。同时会关闭日期格式的探测。
+4. 更新 `maven-shade-plugin.maven-shade-plugin` 到 3.2.4
+5. 更新 `org.codehaus.mojo.build-helper-maven-plugin` 到 3.2.0
+6. 更新 `commons-codec` 到 1.15
+7. 更新 `org.msgpack.msgpack-core` 到 0.8.21
+8. 更新 `com.google.protobuf.protobuf-java` 到 3.13.0
+9. \[实验性\] 使用 `--disable-excel-formular` 关闭公式后，将采用流式读取机制索引数据，以降低内存开销。同时会关闭日期格式的探测。
 
 2.9.3
 ------
 
-1. 增加 ```UeCfg-CsvObjectWrapper``` 选项，接受两个参数用于指定 ```Ue-Csv``` 模式输出时，map和array的包裹字符
+1. 增加 `UeCfg-CsvObjectWrapper` 选项，接受两个参数用于指定 `Ue-Csv` 模式输出时，map和array的包裹字符
 2. 优化命令行模式的参数解析
 
 2.9.2
@@ -86,31 +88,31 @@
 2.9.1
 ------
 
-1. header里（不包含UE输出）增加 ```data_source``` 来方便各类工具在读取失败时提示数据来源。
+1. header里（不包含UE输出）增加 `data_source` 来方便各类工具在读取失败时提示数据来源。
 2. 修正自定义插件重名时的反射数据导出问题，如果发现名字冲突，插件的key采用full name
 3. 修复大整数可能丢失精度的BUG
 
 2.9.0
 ------
 
-1. 允许输入的pb文件不用打包插件的proto( ```xresloader.proto``` , ```xresloader_ue.proto``` )和protobuf官方的proto文件(如: ```google/protobuf/duration.proto```, ```google/protobuf/descriptor.proto``` 等)
-2. 增加 ```--ignore-unknown-dependency``` 选项用于忽略未知的输入协议的依赖项
-3. 优化版本号选项 ```--data-version``` ，在批处理模式设置位默认版本号，对所有批处理项生效，在普通模式设置版本号，仅对当前转表项生效
-4. 重构，重命名 ```DataDstMessageDescriptor``` -> ```DataDstTypeDescriptor``` 。
-5. 增加对map类型的支持,map的key必须是整数或字符串，value可以是任意类型。在 **UE-Json** 和 **UE-Csv** 输出中，会使用 ```TMap<KEY类型, VALUE类型>``` 来输出代码。
+1. 允许输入的pb文件不用打包插件的proto( `xresloader.proto` , `xresloader_ue.proto` )和protobuf官方的proto文件(如: `google/protobuf/duration.proto`, `google/protobuf/descriptor.proto` 等)
+2. 增加 `--ignore-unknown-dependency` 选项用于忽略未知的输入协议的依赖项
+3. 优化版本号选项 `--data-version` ，在批处理模式设置位默认版本号，对所有批处理项生效，在普通模式设置版本号，仅对当前转表项生效
+4. 重构，重命名 `DataDstMessageDescriptor` -> `DataDstTypeDescriptor` 。
+5. 增加对map类型的支持,map的key必须是整数或字符串，value可以是任意类型。在 **UE-Json** 和 **UE-Csv** 输出中，会使用 `TMap<KEY类型, VALUE类型>` 来输出代码。
 
 2.8.0
 ------
 
 1. 优化一些issue的上报提示
-2. 增加plain模式的 ```oneof``` 支持，输入为 ```[类型名或ID或别名][分隔符][具体内容的plain模式数据]``` , 比如: ```item|1001,123``` 。不支持 **UE-Csv** 输出的非嵌套模式（ ```UeCfg-RecursiveMode=False``` ）
-3. 增加 ```oneof``` 的sample
-4. 修复 ```enum``` 字段类型输出二进制时的值类型错误
-5. 优化 ```oneof``` 字段的配置冲突检测
-6. 标记 **UE-Csv** 输出的非嵌套模式（ ```UeCfg-RecursiveMode=False``` ） 为不推荐的，以后将被移除。
-7. \[实验性\] **UE-Json** 和 **UE-Csv** 输出的蓝图代码中，增加指示oneof分支的字段，便于对 ```oneof``` 输出的分支判断和反射使用
+2. 增加plain模式的 `oneof` 支持，输入为 `[类型名或ID或别名][分隔符][具体内容的plain模式数据]` , 比如: `item|1001,123` 。不支持 **UE-Csv** 输出的非嵌套模式（ `UeCfg-RecursiveMode=False` ）
+3. 增加 `oneof` 的sample
+4. 修复 `enum` 字段类型输出二进制时的值类型错误
+5. 优化 `oneof` 字段的配置冲突检测
+6. 标记 **UE-Csv** 输出的非嵌套模式（ `UeCfg-RecursiveMode=False` ） 为不推荐的，以后将被移除。
+7. \[实验性\] **UE-Json** 和 **UE-Csv** 输出的蓝图代码中，增加指示oneof分支的字段，便于对 `oneof` 输出的分支判断和反射使用
 8. 优化一系列错误提示流程
-9. 增加一个python工具，可以打印转出的protobuf二进制数据（需要 ```pip/python3 -m pip install protobuf [--user]```）
+9. 增加一个python工具，可以打印转出的protobuf二进制数据（需要 `pip/python3 -m pip install protobuf [--user]`）
 
 2.7.3
 ------
@@ -119,13 +121,13 @@
 2. 增加BUG上报说明
 3. 修复启用多文件合并功能时，**UE-Csv** 格式输出会输出多次Header的BUG
 4. sample输出增加递归模式的 **UE-Csv**
-5. \[实验性\] **UE-Csv** 格式输出的现在也支持plain模式了（不包含非嵌套模式（ ```UeCfg-RecursiveMode=False``` ））
+5. \[实验性\] **UE-Csv** 格式输出的现在也支持plain模式了（不包含非嵌套模式（ `UeCfg-RecursiveMode=False` ））
 
 2.7.2
 ------
 
 1. 修复一处枚举类型验证器复用丢失的问题
-2. 增加插件 ```org.xresloader.field_required``` ， 用于向proto3提供，proto2的 **required** 约束
+2. 增加插件 `org.xresloader.field_required` ， 用于向proto3提供，proto2的 **required** 约束
 3. 升级protobuf到3.12.1
 4. 升级log4j到2.13.3
 5. 升级org.json到20200518
@@ -150,9 +152,9 @@
 ------
 
 1. 修复一处协议配置错误没有打印具体原因的问题
-2. 添加 ```--require-mapping-all``` 选项用于检查message中所有字段都必须被配置映射关系，用于检查配置遗漏
-3. 增加protobuf插件 - ```org.xresloader.msg_require_mapping_all``` 可以设置某个message的所有字段必须被全部映射，用于检查配置遗漏
-4. 协议里直接配置 ```enum``` 类型也支持默认增加该类型的验证器 
+2. 添加 `--require-mapping-all` 选项用于检查message中所有字段都必须被配置映射关系，用于检查配置遗漏
+3. 增加protobuf插件 - `org.xresloader.msg_require_mapping_all` 可以设置某个message的所有字段必须被全部映射，用于检查配置遗漏
+4. 协议里直接配置 `enum` 类型也支持默认增加该类型的验证器 
 5. 大量优化内部数据结构，更好地分离映射关系和AST描述
 6. 增加实验性功能Plain模式，允许把message所有字段或动态长度的数组配置在一个单元格内（UE-CSV模式暂不支持）
 7. 修复输出的UE导入文件的没有自动删除老的导入条目的问题
@@ -161,7 +163,7 @@
 2.6.1
 ------
 
-1. 对 ```-i/--option-print <文件名>``` 和 ```-c/--const-print <文件名>``` 的字段输出排序，有利于diff
+1. 对 `-i/--option-print <文件名>` 和 `-c/--const-print <文件名>` 的字段输出排序，有利于diff
 2. 更新 protobuf 到 3.10.0
 3. 使用 [org.msgpack.msgpack-core](https://mvnrepository.com/artifact/org.msgpack/msgpack-core) 替换 [org.msgpack.msgpack](https://mvnrepository.com/artifact/org.msgpack/msgpack)，保持和 lua/javascript/xml等一样的输出顺序。
 4. msgpack 的输出结构变化（详见: https://github.com/xresloader/xresloader/tree/master/loader-binding/msgpack ）
@@ -174,10 +176,10 @@
 3. 更新protobuf到3.9.2
 4. 更新poi到4.1.1
 5. hash算法更替为SHA-256
-6. 协议外层包体增加 ```data_message_type``` 用于方便使用者通过反射机制查找 ```data_block``` 对应的数据结构
-7. 增加 ```-i/--option-print <文件名>``` 用于输出协议配置中的选项信息
-8. 对内部的 ```Map<string, int32>``` 类型输出排序，有利于 ```-c/--const-print <文件名>``` 时有序输出枚举值
-9. 移除 ```-c/--const-print <文件名>``` 时导出的 ```google.protobuf``` 的内置枚举类型值。
+6. 协议外层包体增加 `data_message_type` 用于方便使用者通过反射机制查找 `data_block` 对应的数据结构
+7. 增加 `-i/--option-print <文件名>` 用于输出协议配置中的选项信息
+8. 对内部的 `Map<string, int32>` 类型输出排序，有利于 `-c/--const-print <文件名>` 时有序输出枚举值
+9. 移除 `-c/--const-print <文件名>` 时导出的 `google.protobuf` 的内置枚举类型值。
 
 2.5.0
 ------
@@ -189,13 +191,13 @@
 2.4.0
 ------
 
-1. 常量导出现在会导出protobuf的message里包含oneof了(使用C++的命名规则 ```k大写驼峰名字``` )
+1. 常量导出现在会导出protobuf的message里包含oneof了(使用C++的命名规则 `k大写驼峰名字` )
 2. 支持解析protobuf的内嵌message
 
 2.3.1
 ------
 
-1. 数字类型转字符串，使用 ```%g``` 格式（去除不必要的小数点和0）
+1. 数字类型转字符串，使用 `%g` 格式（去除不必要的小数点和0）
 2. 更新 maven-compiler-plugin 到 3.8.1
 3. 更新 commons-codec 到 1.13
 4. 更新 log4j 到 2.12.0
@@ -207,15 +209,15 @@
 2.3.0
 ------
 
-1. 优化sample输出脚本，先移除过期的 ```UnreaImportSettings.json``` 文件。
-2. 增加 ```UeCfg-RecursiveMode=true/false``` 的 **SchemeMeta** 用以控制是否启用嵌套模式，默认统一为开启嵌套模式。
-3. 增加 ```UeCfg-DestinationPath=<PATH>``` 的 **SchemeMeta** 用以控制输出的uassert目录。
-4. 重新开启 ```--disable-empty-list``` 和 ```--enable-empty-list``` 的功能。
+1. 优化sample输出脚本，先移除过期的 `UnreaImportSettings.json` 文件。
+2. 增加 `UeCfg-RecursiveMode=true/false` 的 **SchemeMeta** 用以控制是否启用嵌套模式，默认统一为开启嵌套模式。
+3. 增加 `UeCfg-DestinationPath=<PATH>` 的 **SchemeMeta** 用以控制输出的uassert目录。
+4. 重新开启 `--disable-empty-list` 和 `--enable-empty-list` 的功能。
 
 2.2.0
 ------
 
-1. 增加protobuf插件 - org.xresloader.ue.ue_type_is_class (用于UE代码输出时直接输出UE支持的 ```TSoftClassPtr<T>``` 来替换 ```TSoftObjectPtr<T>``` 类型)
+1. 增加protobuf插件 - org.xresloader.ue.ue_type_is_class (用于UE代码输出时直接输出UE支持的 `TSoftClassPtr<T>` 来替换 `TSoftObjectPtr<T>` 类型)
 2. 增加和优化xresloader内部的Message描述抽象
 3. 支持UE-JSON的嵌套模式导出
 4. 自动创建输出目录
@@ -238,7 +240,7 @@
 3. 增加protobuf插件 - org.xresloader.msg_description
 4. 增加protobuf插件 - org.xresloader.field_description
 5. 增加protobuf插件 - org.xresloader.ue.key_tag (用于UE代码输出时输出Key -> Name 的函数)
-6. 增加protobuf插件 - org.xresloader.ue.ue_type_name (用于UE代码输出时直接输出UE支持的 ```TSoftObjectPtr<T>``` 类型)
+6. 增加protobuf插件 - org.xresloader.ue.ue_type_name (用于UE代码输出时直接输出UE支持的 `TSoftObjectPtr<T>` 类型)
 7. 增加protobuf插件 - org.xresloader.ue.helper (用于UE代码输出时的Utility类的类名后缀)
 8. sample里增加一个协议里的verifier示例
 

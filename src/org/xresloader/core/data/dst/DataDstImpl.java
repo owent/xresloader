@@ -79,7 +79,7 @@ public abstract class DataDstImpl {
      * 
      * @return 选项数据,不支持的时候返回空
      */
-    public HashMap<String, Object> buildOptions() {
+    public HashMap<String, Object> buildOptions(ProgramOptions.ProtoDumpType dumpType) {
         return null;
     }
 

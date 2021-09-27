@@ -1,6 +1,9 @@
 package org.xresloader.core.data.dst;
 
+import java.nio.ByteBuffer;
 import java.nio.charset.Charset;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -8,6 +11,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.regex.Pattern;
+import org.apache.commons.codec.binary.Hex;
 import org.xresloader.core.ProgramOptions;
 import org.xresloader.core.data.err.ConvException;
 import org.xresloader.core.data.src.DataContainer;
@@ -129,47 +133,87 @@ public abstract class DataDstJava extends DataDstImpl {
             ret.header.put("description", String.join(getSystemEndl(), description_list));
         }
 
+        // 校验码
+        MessageDigest sha256 = null;
+        try {
+            sha256 = MessageDigest.getInstance("SHA-256");
+            updateHashCode(sha256, item_list);
+            ret.header.put("hash_code", "sha256:" + Hex.encodeHexString(sha256.digest()));
+        } catch (NoSuchAlgorithmException e) {
+            this.logErrorMessage("failed to find sha-256 algorithm.");
+        }
+
         return ret;
+    }
+
+    @SuppressWarnings("unchecked")
+    private void updateHashCode(MessageDigest hasher, Object input) {
+        if (input instanceof List<?>) {
+            for (Object elem : (List<Object>) input) {
+                updateHashCode(hasher, elem);
+            }
+        } else if (input instanceof Map<?, ?>) {
+            for (Map.Entry<Object, Object> elem : ((Map<Object, Object>) input).entrySet()) {
+                updateHashCode(hasher, elem.getKey());
+                updateHashCode(hasher, elem.getValue());
+            }
+        } else if (input instanceof Double) {
+            hasher.update(ByteBuffer.allocate(8).putDouble(((Double) input).doubleValue()).array());
+        } else if (input instanceof Float) {
+            hasher.update(ByteBuffer.allocate(4).putFloat(((Float) input).floatValue()).array());
+        } else if (input instanceof Long) {
+            hasher.update(ByteBuffer.allocate(8).putLong(((Long) input).longValue()).array());
+        } else if (input instanceof Integer) {
+            hasher.update(ByteBuffer.allocate(4).putInt(((Integer) input).intValue()).array());
+        } else if (input instanceof Boolean) {
+            hasher.update((byte) ((Boolean) input ? 1 : 0));
+        } else if (input instanceof String) {
+            hasher.update(((String) input).getBytes());
+        } else if (input instanceof com.google.protobuf.ByteString) {
+            hasher.update(((com.google.protobuf.ByteString) input).toByteArray());
+        } else if (input instanceof byte[]) {
+            hasher.update((byte[]) input);
+        }
     }
 
     private Object getDefault(DataDstWriterNode.DataDstFieldDescriptor field) {
         Object val = null;
         switch (field.getType()) {
-        case INT:
-            val = Integer.valueOf(0);
-            break;
-        case LONG:
-            val = Long.valueOf(0);
-            break;
-        case BOOLEAN:
-            val = Boolean.FALSE;
-            break;
-        case STRING:
-            val = "";
-            break;
-        case BYTES:
-            val = new byte[0];
-            break;
-        case FLOAT:
-            val = Float.valueOf(0);
-            break;
-        case DOUBLE:
-            val = Double.valueOf(0);
-            break;
-        case MESSAGE: {
-            HashMap<String, Object> sub_msg = new HashMap<String, Object>();
-            for (Map.Entry<String, DataDstWriterNode.DataDstFieldDescriptor> sub_item : field.getTypeDescriptor().fields
-                    .entrySet()) {
-                // 仅仅Required需要导出默认值
-                if (sub_item.getValue().isRequired()) {
-                    dumpDefault(sub_msg, sub_item.getValue());
+            case INT:
+                val = Integer.valueOf(0);
+                break;
+            case LONG:
+                val = Long.valueOf(0);
+                break;
+            case BOOLEAN:
+                val = Boolean.FALSE;
+                break;
+            case STRING:
+                val = "";
+                break;
+            case BYTES:
+                val = new byte[0];
+                break;
+            case FLOAT:
+                val = Float.valueOf(0);
+                break;
+            case DOUBLE:
+                val = Double.valueOf(0);
+                break;
+            case MESSAGE: {
+                HashMap<String, Object> sub_msg = new HashMap<String, Object>();
+                for (Map.Entry<String, DataDstWriterNode.DataDstFieldDescriptor> sub_item : field
+                        .getTypeDescriptor().fields.entrySet()) {
+                    // 仅仅Required需要导出默认值
+                    if (sub_item.getValue().isRequired()) {
+                        dumpDefault(sub_msg, sub_item.getValue());
+                    }
                 }
+                val = sub_msg;
+                break;
             }
-            val = sub_msg;
-            break;
-        }
-        default:
-            break;
+            default:
+                break;
         }
 
         if (null == val) {
@@ -183,77 +227,77 @@ public abstract class DataDstJava extends DataDstImpl {
     private Object getValueFromDataSource(DataDstWriterNode desc) throws ConvException {
         Object val = null;
         switch (desc.getType()) {
-        case INT: {
-            DataContainer<Long> ret = DataSrcImpl.getOurInstance().getValue(desc.identify, 0L);
-            if (null != ret && ret.valid) {
-                val = ret.value.intValue();
-            }
-            break;
-        }
-
-        case LONG: {
-            DataContainer<Long> ret = DataSrcImpl.getOurInstance().getValue(desc.identify, 0L);
-            if (null != ret && ret.valid) {
-                val = ret.value.longValue();
-            }
-            break;
-        }
-
-        case FLOAT: {
-            DataContainer<Double> ret = DataSrcImpl.getOurInstance().getValue(desc.identify, 0.0);
-            if (null != ret && ret.valid) {
-                val = ret.value.floatValue();
-            }
-            break;
-        }
-
-        case DOUBLE: {
-            DataContainer<Double> ret = DataSrcImpl.getOurInstance().getValue(desc.identify, 0.0);
-            if (null != ret && ret.valid) {
-                val = ret.value.doubleValue();
-            }
-            break;
-        }
-
-        case BOOLEAN: {
-            DataContainer<Boolean> ret = DataSrcImpl.getOurInstance().getValue(desc.identify, false);
-            if (null != ret && ret.valid) {
-                val = ret.value.booleanValue();
-            }
-            break;
-        }
-
-        case STRING: {
-            DataContainer<String> ret = DataSrcImpl.getOurInstance().getValue(desc.identify, "");
-            if (null != ret && ret.valid) {
-                val = ret.value;
-            }
-            break;
-        }
-
-        case BYTES: {
-            DataContainer<String> res = DataSrcImpl.getOurInstance().getValue(desc.identify, "");
-            if (null != res && res.valid) {
-                String encoding = SchemeConf.getInstance().getKey().getEncoding();
-                if (null == encoding || encoding.isEmpty()) {
-                    val = com.google.protobuf.ByteString.copyFrom(res.value.getBytes());
-                } else {
-                    val = com.google.protobuf.ByteString.copyFrom(res.value.getBytes(Charset.forName(encoding)));
+            case INT: {
+                DataContainer<Long> ret = DataSrcImpl.getOurInstance().getValue(desc.identify, 0L);
+                if (null != ret && ret.valid) {
+                    val = ret.value.intValue();
                 }
+                break;
             }
-            break;
-        }
 
-        case MESSAGE: {
-            HashMap<String, Object> node = new HashMap<String, Object>();
-            if (dumpMessage(node, desc)) {
-                val = node;
+            case LONG: {
+                DataContainer<Long> ret = DataSrcImpl.getOurInstance().getValue(desc.identify, 0L);
+                if (null != ret && ret.valid) {
+                    val = ret.value.longValue();
+                }
+                break;
             }
-            break;
-        }
 
-        default:
-            break;
+            case FLOAT: {
+                DataContainer<Double> ret = DataSrcImpl.getOurInstance().getValue(desc.identify, 0.0);
+                if (null != ret && ret.valid) {
+                    val = ret.value.floatValue();
+                }
+                break;
+            }
+
+            case DOUBLE: {
+                DataContainer<Double> ret = DataSrcImpl.getOurInstance().getValue(desc.identify, 0.0);
+                if (null != ret && ret.valid) {
+                    val = ret.value.doubleValue();
+                }
+                break;
+            }
+
+            case BOOLEAN: {
+                DataContainer<Boolean> ret = DataSrcImpl.getOurInstance().getValue(desc.identify, false);
+                if (null != ret && ret.valid) {
+                    val = ret.value.booleanValue();
+                }
+                break;
+            }
+
+            case STRING: {
+                DataContainer<String> ret = DataSrcImpl.getOurInstance().getValue(desc.identify, "");
+                if (null != ret && ret.valid) {
+                    val = ret.value;
+                }
+                break;
+            }
+
+            case BYTES: {
+                DataContainer<String> res = DataSrcImpl.getOurInstance().getValue(desc.identify, "");
+                if (null != res && res.valid) {
+                    String encoding = SchemeConf.getInstance().getKey().getEncoding();
+                    if (null == encoding || encoding.isEmpty()) {
+                        val = com.google.protobuf.ByteString.copyFrom(res.value.getBytes());
+                    } else {
+                        val = com.google.protobuf.ByteString.copyFrom(res.value.getBytes(Charset.forName(encoding)));
+                    }
+                }
+                break;
+            }
+
+            case MESSAGE: {
+                HashMap<String, Object> node = new HashMap<String, Object>();
+                if (dumpMessage(node, desc)) {
+                    val = node;
+                }
+                break;
+            }
+
+            default:
+                break;
         }
         return val;
     }
@@ -496,140 +540,140 @@ public abstract class DataDstJava extends DataDstImpl {
             }
             Object parsedDatas = null;
             switch (field.getType()) {
-            case INT: {
-                Long[] values = parsePlainDataLong(groups, ident, field);
-                ArrayList<Object> tmp = new ArrayList<Object>();
-                if (values != null) {
-                    tmp.ensureCapacity(values.length);
-                    for (Long v : values) {
-                        tmp.add(v.intValue());
+                case INT: {
+                    Long[] values = parsePlainDataLong(groups, ident, field);
+                    ArrayList<Object> tmp = new ArrayList<Object>();
+                    if (values != null) {
+                        tmp.ensureCapacity(values.length);
+                        for (Long v : values) {
+                            tmp.add(v.intValue());
+                        }
                     }
-                }
 
-                if (!tmp.isEmpty()) {
-                    parsedDatas = tmp;
-                }
-                break;
-            }
-
-            case LONG: {
-                Long[] values = parsePlainDataLong(groups, ident, field);
-                ArrayList<Object> tmp = new ArrayList<Object>();
-                if (values != null) {
-                    tmp.ensureCapacity(values.length);
-                    for (Long v : values) {
-                        tmp.add(v);
+                    if (!tmp.isEmpty()) {
+                        parsedDatas = tmp;
                     }
+                    break;
                 }
 
-                if (!tmp.isEmpty()) {
-                    parsedDatas = tmp;
-                }
-                break;
-            }
-
-            case FLOAT: {
-                Double[] values = parsePlainDataDouble(groups, ident, field);
-                ArrayList<Object> tmp = new ArrayList<Object>();
-                if (values != null) {
-                    tmp.ensureCapacity(values.length);
-                    for (Double v : values) {
-                        tmp.add(v.floatValue());
+                case LONG: {
+                    Long[] values = parsePlainDataLong(groups, ident, field);
+                    ArrayList<Object> tmp = new ArrayList<Object>();
+                    if (values != null) {
+                        tmp.ensureCapacity(values.length);
+                        for (Long v : values) {
+                            tmp.add(v);
+                        }
                     }
-                }
 
-                if (!tmp.isEmpty()) {
-                    parsedDatas = tmp;
-                }
-                break;
-            }
-
-            case DOUBLE: {
-                Double[] values = parsePlainDataDouble(groups, ident, field);
-                ArrayList<Object> tmp = new ArrayList<Object>();
-                if (values != null) {
-                    tmp.ensureCapacity(values.length);
-                    for (Double v : values) {
-                        tmp.add(v);
+                    if (!tmp.isEmpty()) {
+                        parsedDatas = tmp;
                     }
+                    break;
                 }
 
-                if (!tmp.isEmpty()) {
-                    parsedDatas = tmp;
-                }
-                break;
-            }
-
-            case BOOLEAN: {
-                Boolean[] values = parsePlainDataBoolean(groups, ident, field);
-                ArrayList<Object> tmp = new ArrayList<Object>();
-                if (values != null) {
-                    tmp.ensureCapacity(values.length);
-                    for (Boolean v : values) {
-                        tmp.add(v);
+                case FLOAT: {
+                    Double[] values = parsePlainDataDouble(groups, ident, field);
+                    ArrayList<Object> tmp = new ArrayList<Object>();
+                    if (values != null) {
+                        tmp.ensureCapacity(values.length);
+                        for (Double v : values) {
+                            tmp.add(v.floatValue());
+                        }
                     }
-                }
 
-                if (!tmp.isEmpty()) {
-                    parsedDatas = tmp;
-                }
-                break;
-            }
-
-            case STRING:
-            case BYTES: {
-                String[] values = parsePlainDataString(groups, ident, field);
-                ArrayList<Object> tmp = new ArrayList<Object>();
-                if (values != null) {
-                    tmp.ensureCapacity(values.length);
-                    for (String v : values) {
-                        tmp.add(v);
+                    if (!tmp.isEmpty()) {
+                        parsedDatas = tmp;
                     }
+                    break;
                 }
 
-                if (!tmp.isEmpty()) {
-                    parsedDatas = tmp;
-                }
-                break;
-            }
+                case DOUBLE: {
+                    Double[] values = parsePlainDataDouble(groups, ident, field);
+                    ArrayList<Object> tmp = new ArrayList<Object>();
+                    if (values != null) {
+                        tmp.ensureCapacity(values.length);
+                        for (Double v : values) {
+                            tmp.add(v);
+                        }
+                    }
 
-            case MESSAGE: {
-                if (field.isMap()) {
-                    SpecialInnerHashMap<Object, Object> tmp = new SpecialInnerHashMap<Object, Object>();
-                    for (String v : groups) {
-                        String[] subGroups = splitPlainGroups(v, getPlainMessageSeparator(field));
-                        HashMap<String, Object> msg = parsePlainDataMessage(subGroups, ident, field);
-                        if (msg != null) {
-                            Object mapKey = msg.getOrDefault("key", null);
-                            Object mapValue = msg.getOrDefault("value", null);
-                            if (mapKey != null && mapValue != null) {
-                                tmp.put(mapKey, mapValue);
+                    if (!tmp.isEmpty()) {
+                        parsedDatas = tmp;
+                    }
+                    break;
+                }
+
+                case BOOLEAN: {
+                    Boolean[] values = parsePlainDataBoolean(groups, ident, field);
+                    ArrayList<Object> tmp = new ArrayList<Object>();
+                    if (values != null) {
+                        tmp.ensureCapacity(values.length);
+                        for (Boolean v : values) {
+                            tmp.add(v);
+                        }
+                    }
+
+                    if (!tmp.isEmpty()) {
+                        parsedDatas = tmp;
+                    }
+                    break;
+                }
+
+                case STRING:
+                case BYTES: {
+                    String[] values = parsePlainDataString(groups, ident, field);
+                    ArrayList<Object> tmp = new ArrayList<Object>();
+                    if (values != null) {
+                        tmp.ensureCapacity(values.length);
+                        for (String v : values) {
+                            tmp.add(v);
+                        }
+                    }
+
+                    if (!tmp.isEmpty()) {
+                        parsedDatas = tmp;
+                    }
+                    break;
+                }
+
+                case MESSAGE: {
+                    if (field.isMap()) {
+                        SpecialInnerHashMap<Object, Object> tmp = new SpecialInnerHashMap<Object, Object>();
+                        for (String v : groups) {
+                            String[] subGroups = splitPlainGroups(v, getPlainMessageSeparator(field));
+                            HashMap<String, Object> msg = parsePlainDataMessage(subGroups, ident, field);
+                            if (msg != null) {
+                                Object mapKey = msg.getOrDefault("key", null);
+                                Object mapValue = msg.getOrDefault("value", null);
+                                if (mapKey != null && mapValue != null) {
+                                    tmp.put(mapKey, mapValue);
+                                }
                             }
                         }
-                    }
-                    if (!tmp.isEmpty()) {
-                        parsedDatas = tmp;
-                    }
-                } else {
-                    ArrayList<Object> tmp = new ArrayList<Object>();
-                    tmp.ensureCapacity(groups.length);
-                    for (String v : groups) {
-                        String[] subGroups = splitPlainGroups(v, getPlainMessageSeparator(field));
-                        HashMap<String, Object> msg = parsePlainDataMessage(subGroups, ident, field);
-                        if (msg != null) {
-                            tmp.add(msg);
+                        if (!tmp.isEmpty()) {
+                            parsedDatas = tmp;
+                        }
+                    } else {
+                        ArrayList<Object> tmp = new ArrayList<Object>();
+                        tmp.ensureCapacity(groups.length);
+                        for (String v : groups) {
+                            String[] subGroups = splitPlainGroups(v, getPlainMessageSeparator(field));
+                            HashMap<String, Object> msg = parsePlainDataMessage(subGroups, ident, field);
+                            if (msg != null) {
+                                tmp.add(msg);
+                            }
+                        }
+
+                        if (!tmp.isEmpty()) {
+                            parsedDatas = tmp;
                         }
                     }
-
-                    if (!tmp.isEmpty()) {
-                        parsedDatas = tmp;
-                    }
+                    break;
                 }
-                break;
-            }
 
-            default:
-                break;
+                default:
+                    break;
             }
 
             if (field.isMap() && parsedDatas != null) {
@@ -674,48 +718,48 @@ public abstract class DataDstJava extends DataDstImpl {
             Object val = null;
 
             switch (field.getType()) {
-            case INT: {
-                val = parsePlainDataLong(input.trim(), ident, field).intValue();
-                break;
-            }
-
-            case LONG: {
-                val = parsePlainDataLong(input.trim(), ident, field);
-                break;
-            }
-
-            case FLOAT: {
-                val = parsePlainDataDouble(input.trim(), ident, field).floatValue();
-                break;
-            }
-
-            case DOUBLE: {
-                val = parsePlainDataDouble(input.trim(), ident, field);
-                break;
-            }
-
-            case BOOLEAN: {
-                val = parsePlainDataBoolean(input.trim(), ident, field);
-                break;
-            }
-
-            case STRING:
-            case BYTES: {
-                val = parsePlainDataString(input.trim(), ident, field);
-                break;
-            }
-
-            case MESSAGE: {
-                String[] groups = splitPlainGroups(input.trim(), getPlainMessageSeparator(field));
-                val = parsePlainDataMessage(groups, ident, field);
-                if (val == null && field.isRequired()) {
-                    dumpDefault(builder, field);
+                case INT: {
+                    val = parsePlainDataLong(input.trim(), ident, field).intValue();
+                    break;
                 }
-                break;
-            }
 
-            default:
-                break;
+                case LONG: {
+                    val = parsePlainDataLong(input.trim(), ident, field);
+                    break;
+                }
+
+                case FLOAT: {
+                    val = parsePlainDataDouble(input.trim(), ident, field).floatValue();
+                    break;
+                }
+
+                case DOUBLE: {
+                    val = parsePlainDataDouble(input.trim(), ident, field);
+                    break;
+                }
+
+                case BOOLEAN: {
+                    val = parsePlainDataBoolean(input.trim(), ident, field);
+                    break;
+                }
+
+                case STRING:
+                case BYTES: {
+                    val = parsePlainDataString(input.trim(), ident, field);
+                    break;
+                }
+
+                case MESSAGE: {
+                    String[] groups = splitPlainGroups(input.trim(), getPlainMessageSeparator(field));
+                    val = parsePlainDataMessage(groups, ident, field);
+                    if (val == null && field.isRequired()) {
+                        dumpDefault(builder, field);
+                    }
+                    break;
+                }
+
+                default:
+                    break;
             }
 
             if (val == null) {

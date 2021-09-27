@@ -1,11 +1,97 @@
 {"files": [
   {
+    "name": "dep_level2.proto",
+    "path": "dep_level2.proto",
+    "message_type": {"dep2_cfg": {
+      "field": {
+        "level": {
+          "name": "level",
+          "number": 2,
+          "type_name": "STRING"
+        },
+        "id": {
+          "name": "id",
+          "number": 1,
+          "type_name": "UINT32"
+        }
+      },
+      "name": "dep2_cfg"
+    }},
+    "package": ""
+  },
+  {
     "name": "dependency.proto",
     "path": "dependency.proto",
+    "message_type": {"dep_cfg": {
+      "field": {
+        "name": {
+          "name": "name",
+          "number": 2,
+          "type_name": "STRING"
+        },
+        "dep2": {
+          "name": "dep2",
+          "number": 3,
+          "type_name": "MESSAGE"
+        },
+        "id": {
+          "name": "id",
+          "number": 1,
+          "type_name": "UINT32"
+        }
+      },
+      "name": "dep_cfg"
+    }},
     "enum_type": {
       "game_const_config": {
         "options": {"allow_alias": true},
-        "name": "game_const_config"
+        "name": "game_const_config",
+        "value": {
+          "EN_GCC_SCREEN_WIDTH": {
+            "name": "EN_GCC_SCREEN_WIDTH",
+            "number": 1136
+          },
+          "EN_GCC_SCREEN_HEIGHT": {
+            "name": "EN_GCC_SCREEN_HEIGHT",
+            "number": 640
+          },
+          "EN_GCC_UNKNOWN": {
+            "name": "EN_GCC_UNKNOWN",
+            "number": 0
+          },
+          "EN_GCC_CAMERA_OFFSET": {
+            "name": "EN_GCC_CAMERA_OFFSET",
+            "number": 268
+          },
+          "EN_GCC_FORMULAR_TYPE_MASK": {
+            "name": "EN_GCC_FORMULAR_TYPE_MASK",
+            "number": 10
+          },
+          "EN_GCC_LEVEL_LIMIT": {
+            "name": "EN_GCC_LEVEL_LIMIT",
+            "number": 999
+          },
+          "EN_GCC_RESOURCE_MAX_LIMIT": {
+            "name": "EN_GCC_RESOURCE_MAX_LIMIT",
+            "number": 9999999
+          },
+          "EN_GCC_SOLDIER_TYPE_MASK": {
+            "name": "EN_GCC_SOLDIER_TYPE_MASK",
+            "number": 100
+          },
+          "EN_GCC_PERCENT_BASE": {
+            "name": "EN_GCC_PERCENT_BASE",
+            "number": 10000
+          },
+          "EN_GCC_RANDOM_RANGE_UNIT": {
+            "name": "EN_GCC_RANDOM_RANGE_UNIT",
+            "number": 10
+          },
+          "EN_GCC_ACTIVITY_TYPE_MASK": {
+            "name": "EN_GCC_ACTIVITY_TYPE_MASK",
+            "number": 1000
+          }
+        }
       },
       "cost_type": {
         "name": "cost_type",
@@ -19,6 +105,10 @@
             "options": {"enum_alias": "金币"},
             "name": "EN_CT_MONEY",
             "number": 10001
+          },
+          "EN_CT_UNKNOWN": {
+            "name": "EN_CT_UNKNOWN",
+            "number": 0
           }
         }
       }
@@ -31,15 +121,6 @@
     "message_type": {
       "role_upgrade_cfg": {
         "field": {
-          "CostType": {
-            "options": {
-              "verifier": "cost_type",
-              "field_description": "Refer to cost_type"
-            },
-            "name": "CostType",
-            "number": 3,
-            "type_name": "UINT32"
-          },
           "Level": {
             "options": {"key_tag": 1},
             "name": "Level",
@@ -51,6 +132,25 @@
             "name": "Id",
             "number": 1,
             "type_name": "UINT32"
+          },
+          "CostType": {
+            "options": {
+              "verifier": "cost_type",
+              "field_description": "Refer to cost_type"
+            },
+            "name": "CostType",
+            "number": 3,
+            "type_name": "UINT32"
+          },
+          "ScoreAdd": {
+            "name": "ScoreAdd",
+            "number": 5,
+            "type_name": "INT32"
+          },
+          "CostValue": {
+            "name": "CostValue",
+            "number": 4,
+            "type_name": "INT64"
           }
         },
         "options": {
@@ -67,25 +167,97 @@
         "name": "arr_in_arr_cfg",
         "enum_type": {
           "TestMapIsEntry": {
+            "field": {
+              "value": {
+                "name": "value",
+                "number": 2,
+                "type_name": "STRING"
+              },
+              "key": {
+                "name": "key",
+                "number": 1,
+                "type_name": "INT32"
+              }
+            },
             "options": {"map_entry": true},
             "name": "TestMapIsEntry"
           },
           "TestMapSmEntry": {
+            "field": {
+              "value": {
+                "name": "value",
+                "number": 2,
+                "type_name": "MESSAGE"
+              },
+              "key": {
+                "name": "key",
+                "number": 1,
+                "type_name": "STRING"
+              }
+            },
             "options": {"map_entry": true},
             "name": "TestMapSmEntry"
           }
         },
         "field": {
-          "test_plain_msg": {
-            "options": {"field_separator": "&"},
-            "name": "test_plain_msg",
-            "number": 5,
+          "arr": {
+            "name": "arr",
+            "number": 2,
+            "type_name": "MESSAGE"
+          },
+          "test_map_is": {
+            "name": "test_map_is",
+            "number": 7,
             "type_name": "MESSAGE"
           },
           "test_map_sm": {
             "options": {"field_separator": "|"},
             "name": "test_map_sm",
             "number": 8,
+            "type_name": "MESSAGE"
+          },
+          "test_plain_enum_arr": {
+            "name": "test_plain_enum_arr",
+            "number": 4,
+            "type_name": "ENUM"
+          },
+          "test_plain_int_arr": {
+            "name": "test_plain_int_arr",
+            "number": 3,
+            "type_name": "INT32"
+          },
+          "id": {
+            "options": {
+              "key_tag": 1,
+              "field_description": "This is a Key"
+            },
+            "name": "id",
+            "number": 1,
+            "type_name": "UINT32"
+          },
+          "test_plain_msg": {
+            "options": {"field_separator": "&"},
+            "name": "test_plain_msg",
+            "number": 5,
+            "type_name": "MESSAGE"
+          },
+          "test_plain_msg_arr": {
+            "name": "test_plain_msg_arr",
+            "number": 6,
+            "type_name": "MESSAGE"
+          }
+        }
+      },
+      "keep_or_strip_empty_list_cfg": {
+        "field": {
+          "array_int32": {
+            "name": "array_int32",
+            "number": 4,
+            "type_name": "INT32"
+          },
+          "array_plain_msg": {
+            "name": "array_plain_msg",
+            "number": 3,
             "type_name": "MESSAGE"
           },
           "id": {
@@ -96,33 +268,94 @@
             "name": "id",
             "number": 1,
             "type_name": "UINT32"
-          }
-        }
-      },
-      "keep_or_strip_empty_list_cfg": {
-        "field": {"id": {
-          "options": {
-            "key_tag": 1,
-            "field_description": "This is a Key"
           },
-          "name": "id",
-          "number": 1,
-          "type_name": "UINT32"
-        }},
+          "array_msg": {
+            "name": "array_msg",
+            "number": 2,
+            "type_name": "MESSAGE"
+          },
+          "array_int64": {
+            "name": "array_int64",
+            "number": 5,
+            "type_name": "INT64"
+          }
+        },
         "options": {"helper": "helper"},
         "name": "keep_or_strip_empty_list_cfg"
       },
       "test_msg_verifier": {
-        "field": {"test_id_2": {
-          "options": {"field_alias": "测试ID别名2"},
-          "name": "test_id_2",
-          "number": 10002,
-          "type_name": "UINT32"
-        }},
+        "field": {
+          "test_id_2": {
+            "options": {"field_alias": "测试ID别名2"},
+            "name": "test_id_2",
+            "number": 10002,
+            "type_name": "UINT32"
+          },
+          "test_id_1": {
+            "name": "test_id_1",
+            "number": 10001,
+            "type_name": "UINT32"
+          }
+        },
         "options": {"msg_separator": "-^"},
         "name": "test_msg_verifier"
       },
+      "role_cfg": {
+        "field": {
+          "test_plain_enum_array": {
+            "name": "test_plain_enum_array",
+            "number": 13,
+            "type_name": "ENUM"
+          },
+          "int_as_string": {
+            "name": "int_as_string",
+            "number": 12,
+            "type_name": "STRING"
+          },
+          "unlock_level": {
+            "name": "unlock_level",
+            "number": 2,
+            "type_name": "UINT32"
+          },
+          "cost_type": {
+            "name": "cost_type",
+            "number": 3,
+            "type_name": "UINT32"
+          },
+          "test_array": {
+            "name": "test_array",
+            "number": 11,
+            "type_name": "STRING"
+          },
+          "name": {
+            "name": "name",
+            "number": 5,
+            "type_name": "STRING"
+          },
+          "dep_test": {
+            "name": "dep_test",
+            "number": 10,
+            "type_name": "MESSAGE"
+          },
+          "cost_value": {
+            "name": "cost_value",
+            "number": 4,
+            "type_name": "INT32"
+          },
+          "id": {
+            "name": "id",
+            "number": 1,
+            "type_name": "UINT32"
+          }
+        },
+        "name": "role_cfg"
+      },
       "event_cfg": {
+        "options": {
+          "helper": "helper",
+          "msg_description": "Test event_cfg with oneof fields"
+        },
+        "name": "event_cfg",
         "field": {
           "note": {
             "options": {"field_alias": "描述文本"},
@@ -154,6 +387,16 @@
             "number": 92,
             "type_name": "MESSAGE"
           },
+          "specify_field": {
+            "name": "specify_field",
+            "number": 7,
+            "type_name": "MESSAGE"
+          },
+          "rule": {
+            "name": "rule",
+            "number": 6,
+            "type_name": "MESSAGE"
+          },
           "user_level": {
             "options": {"field_alias": "玩家等级"},
             "name": "user_level",
@@ -179,14 +422,23 @@
             "type_name": "MESSAGE"
           }
         },
-        "options": {
-          "helper": "helper",
-          "msg_description": "Test event_cfg with oneof fields"
-        },
-        "name": "event_cfg"
+        "oneof_decl": {
+          "reward": {"name": "reward"},
+          "unlock_type": {"name": "unlock_type"}
+        }
       },
       "event_reward_item": {
         "field": {
+          "item_count": {
+            "name": "item_count",
+            "number": 2,
+            "type_name": "UINT32"
+          },
+          "item_id": {
+            "name": "item_id",
+            "number": 1,
+            "type_name": "UINT32"
+          },
           "nested_note": {
             "options": {"field_alias": "描述文本"},
             "name": "nested_note",
@@ -200,23 +452,99 @@
             "type_name": "ENUM"
           }
         },
-        "name": "event_reward_item"
+        "name": "event_reward_item",
+        "oneof_decl": {"nested": {"name": "nested"}}
       },
       "arr_in_arr": {
-        "field": {"name": {
-          "options": {"field_description": "This is a test name in array"},
-          "name": "name",
-          "number": 1,
-          "type_name": "STRING"
-        }},
         "options": {
           "helper": "helper",
           "not_data_table": true
         },
-        "name": "arr_in_arr"
+        "name": "arr_in_arr",
+        "enum_type": {"test_nested_message": {
+          "name": "test_nested_message",
+          "field": {
+            "test_nested_message_role_upgrade_cfg": {
+              "name": "test_nested_message_role_upgrade_cfg",
+              "number": 12,
+              "type_name": "MESSAGE"
+            },
+            "test_nested_message_info_role": {
+              "name": "test_nested_message_info_role",
+              "number": 11,
+              "type_name": "MESSAGE"
+            }
+          },
+          "nested_type": {"test_nested_enum": {
+            "name": "test_nested_enum",
+            "value": {
+              "EN_TEST_NESTED_MESSAGE_ENUM_VAL_1": {
+                "name": "EN_TEST_NESTED_MESSAGE_ENUM_VAL_1",
+                "number": 0
+              },
+              "EN_TEST_NESTED_MESSAGE_ENUM_VAL_2": {
+                "name": "EN_TEST_NESTED_MESSAGE_ENUM_VAL_2",
+                "number": 123
+              }
+            }
+          }},
+          "oneof_decl": {"test_onof": {"name": "test_onof"}}
+        }},
+        "field": {
+          "name": {
+            "options": {"field_description": "This is a test name in array"},
+            "name": "name",
+            "number": 1,
+            "type_name": "STRING"
+          },
+          "str_arr": {
+            "name": "str_arr",
+            "number": 3,
+            "type_name": "STRING"
+          },
+          "test_info_role": {
+            "name": "test_info_role",
+            "number": 11,
+            "type_name": "MESSAGE"
+          },
+          "int_arr": {
+            "name": "int_arr",
+            "number": 2,
+            "type_name": "INT32"
+          },
+          "test_role_upgrade_cfg": {
+            "name": "test_role_upgrade_cfg",
+            "number": 12,
+            "type_name": "MESSAGE"
+          }
+        },
+        "nested_type": {"test_nested_enum": {
+          "name": "test_nested_enum",
+          "value": {
+            "EN_TEST_NESTED_ENUM_VAL_1": {
+              "name": "EN_TEST_NESTED_ENUM_VAL_1",
+              "number": 0
+            },
+            "EN_TEST_NESTED_ENUM_VAL_2": {
+              "name": "EN_TEST_NESTED_ENUM_VAL_2",
+              "number": 123
+            }
+          }
+        }},
+        "oneof_decl": {"test_onof": {"name": "test_onof"}}
       },
       "event_rule_item": {
         "field": {
+          "rule_id": {
+            "name": "rule_id",
+            "number": 1,
+            "type_name": "UINT32"
+          },
+          "rule_param": {
+            "name": "rule_param",
+            "number": 2,
+            "type_name": "UINT32"
+          },
           "nested_note": {
             "options": {"field_alias": "描述文本"},
             "name": "nested_note",
@@ -230,7 +558,8 @@
             "type_name": "ENUM"
           }
         },
-        "name": "event_rule_item"
+        "name": "event_rule_item",
+        "oneof_decl": {"nested": {"name": "nested"}}
       }
     },
     "package": ""

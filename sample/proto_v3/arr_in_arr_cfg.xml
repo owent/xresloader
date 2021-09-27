@@ -5,13 +5,13 @@
   <header mode="message">
     <count>3</count>
     <data_source for="0" mode="message">
-      <file>资源转换示例.xlsx</file>
+      <file>./资源转换示例.xlsx</file>
       <sheet>arr_in_arr</sheet>
     </data_source>
     <data_ver>1.0.0.0</data_ver>
     <description>Test arr_in_arr_cfg</description>
-    <hash_code>no hash code</hash_code>
-    <xres_ver>2.11.0</xres_ver>
+    <hash_code>sha256:3ed958da23b37c20c42341e5ad614314abdf83a8d492829679dd0d5e769d4307</hash_code>
+    <xres_ver>2.11.0-rc2</xres_ver>
   </header>
   <body mode="message">
     <arr_in_arr_cfg mode="message">

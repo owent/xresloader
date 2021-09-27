@@ -104,8 +104,9 @@ public class main {
                 dump_data = protoDesc.buildConst();
                 dump_name = "const";
                 break;
+            case DESCRIPTOR:
             case OPTIONS:
-                dump_data = protoDesc.buildOptions();
+                dump_data = protoDesc.buildOptions(ProgramOptions.getInstance().protoDumpType);
                 dump_name = "option";
                 break;
             default:

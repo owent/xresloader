@@ -223,10 +223,10 @@ public final class PbHeaderV3 {
     @java.lang.Override
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
-      if (!getFileBytes().isEmpty()) {
+      if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(file_)) {
         com.google.protobuf.GeneratedMessageV3.writeString(output, 1, file_);
       }
-      if (!getSheetBytes().isEmpty()) {
+      if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(sheet_)) {
         com.google.protobuf.GeneratedMessageV3.writeString(output, 2, sheet_);
       }
       unknownFields.writeTo(output);
@@ -238,10 +238,10 @@ public final class PbHeaderV3 {
       if (size != -1) return size;
 
       size = 0;
-      if (!getFileBytes().isEmpty()) {
+      if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(file_)) {
         size += com.google.protobuf.GeneratedMessageV3.computeStringSize(1, file_);
       }
-      if (!getSheetBytes().isEmpty()) {
+      if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(sheet_)) {
         size += com.google.protobuf.GeneratedMessageV3.computeStringSize(2, sheet_);
       }
       size += unknownFields.getSerializedSize();
@@ -1155,19 +1155,19 @@ public final class PbHeaderV3 {
     @java.lang.Override
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
-      if (!getXresVerBytes().isEmpty()) {
+      if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(xresVer_)) {
         com.google.protobuf.GeneratedMessageV3.writeString(output, 1, xresVer_);
       }
-      if (!getDataVerBytes().isEmpty()) {
+      if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(dataVer_)) {
         com.google.protobuf.GeneratedMessageV3.writeString(output, 2, dataVer_);
       }
       if (count_ != 0) {
         output.writeUInt32(3, count_);
       }
-      if (!getHashCodeBytes().isEmpty()) {
+      if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(hashCode_)) {
         com.google.protobuf.GeneratedMessageV3.writeString(output, 4, hashCode_);
       }
-      if (!getDescriptionBytes().isEmpty()) {
+      if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(description_)) {
         com.google.protobuf.GeneratedMessageV3.writeString(output, 5, description_);
       }
       for (int i = 0; i < dataSource_.size(); i++) {
@@ -1182,20 +1182,20 @@ public final class PbHeaderV3 {
       if (size != -1) return size;
 
       size = 0;
-      if (!getXresVerBytes().isEmpty()) {
+      if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(xresVer_)) {
         size += com.google.protobuf.GeneratedMessageV3.computeStringSize(1, xresVer_);
       }
-      if (!getDataVerBytes().isEmpty()) {
+      if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(dataVer_)) {
         size += com.google.protobuf.GeneratedMessageV3.computeStringSize(2, dataVer_);
       }
       if (count_ != 0) {
         size += com.google.protobuf.CodedOutputStream
           .computeUInt32Size(3, count_);
       }
-      if (!getHashCodeBytes().isEmpty()) {
+      if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(hashCode_)) {
         size += com.google.protobuf.GeneratedMessageV3.computeStringSize(4, hashCode_);
       }
-      if (!getDescriptionBytes().isEmpty()) {
+      if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(description_)) {
         size += com.google.protobuf.GeneratedMessageV3.computeStringSize(5, description_);
       }
       for (int i = 0; i < dataSource_.size(); i++) {
@@ -2464,7 +2464,7 @@ public final class PbHeaderV3 {
       for (int i = 0; i < dataBlock_.size(); i++) {
         output.writeBytes(2, dataBlock_.get(i));
       }
-      if (!getDataMessageTypeBytes().isEmpty()) {
+      if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(dataMessageType_)) {
         com.google.protobuf.GeneratedMessageV3.writeString(output, 3, dataMessageType_);
       }
       unknownFields.writeTo(output);
@@ -2489,7 +2489,7 @@ public final class PbHeaderV3 {
         size += dataSize;
         size += 1 * getDataBlockList().size();
       }
-      if (!getDataMessageTypeBytes().isEmpty()) {
+      if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(dataMessageType_)) {
         size += com.google.protobuf.GeneratedMessageV3.computeStringSize(3, dataMessageType_);
       }
       size += unknownFields.getSerializedSize();

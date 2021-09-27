@@ -2,17 +2,17 @@
   {
     "count": 102,
     "description": "Test role_upgrade_cfg with multi keys\r\nTest role_upgrade_cfg with multi keys",
-    "xres_ver": "2.11.0",
-    "hash_code": "no hash code",
+    "xres_ver": "2.11.0-rc2",
+    "hash_code": "sha256:555ac19246c2a7bff93dd4319caafeb16248bc2430d5d4931dbd1398f4f7e84d",
     "data_ver": "1.0.0.0",
     "data_source": [
       {
         "sheet": "upgrade_10001",
-        "file": "资源转换示例.xlsx"
+        "file": "./资源转换示例.xlsx"
       },
       {
         "sheet": "upgrade_10002",
-        "file": "资源转换示例.xlsx"
+        "file": "././资源转换示例.xlsx"
       }
     ]
   },

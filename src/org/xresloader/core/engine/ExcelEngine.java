@@ -180,24 +180,16 @@ public class ExcelEngine {
      * @param file_path 文件路径
      * @return Excel Workbook对象
      */
-    static public Workbook openWorkbook(String file_path) {
+    static public Workbook openWorkbook(File file) {
         // 无论打开什么Excel文件，都要清空缓存
         clearAllCache();
 
-        File file_check = new File(file_path);
-        if (!file_check.isAbsolute()) {
-            file_path = ProgramOptions.getInstance().dataSourceDirectory + '/' + file_path;
-            file_check = new File(file_path);
-        }
-
+        String file_path = null;
         try {
-            file_path = file_check.getCanonicalPath();
-            if (false == file_check.exists()) {
-                return null;
-            }
-            file_path = file_check.getCanonicalPath();
+            file_path = file.getCanonicalPath();
         } catch (IOException e) {
             ProgramOptions.getLoger().error("%s", e.getMessage());
+            file_path = file.getPath();
         }
 
         Workbook ret = openedWorkbooks.get(file_path);
@@ -238,20 +230,20 @@ public class ExcelEngine {
      * @param sheet_name 表名
      * @return Sheet对象
      */
-    static public Sheet openUserModuleSheet(String file_path, String sheet_name) {
-        Workbook wb = openWorkbook(file_path);
+    static public Sheet openUserModuleSheet(File file, String sheet_name) {
+        Workbook wb = openWorkbook(file);
         if (null == wb)
             return null;
 
         return wb.getSheet(sheet_name);
     }
 
-    static public CustomDataTableIndex openStreamTableIndex(String file_path, String sheet_name) {
-        if (file_path.toLowerCase().endsWith(".xls")) {
-            return ExcelHSSFStreamSheetHandle.buildCustomTableIndex(file_path, sheet_name);
+    static public CustomDataTableIndex openStreamTableIndex(File file, String sheet_name) {
+        if (file.getName().toLowerCase().endsWith(".xls")) {
+            return ExcelHSSFStreamSheetHandle.buildCustomTableIndex(file, sheet_name);
         }
 
-        return ExcelXSSFStreamSheetHandle.buildCustomTableIndex(file_path, sheet_name);
+        return ExcelXSSFStreamSheetHandle.buildCustomTableIndex(file, sheet_name);
     }
 
     static public String tryMacro(String m) {
@@ -380,80 +372,80 @@ public class ExcelEngine {
         }
 
         switch (type) {
-        case BLANK:
-            break;
-        case BOOLEAN:
-            out.set(cal_cell2bool(c, cv).toString());
-            break;
-        case ERROR: {
-            byte error_code = cal_cell2err(c, cv);
-            try {
-                out.set(FormulaError.forInt(error_code).getString());
-            } catch (IllegalArgumentException e) {
-                out.set(e.toString());
-            }
-            break;
-        }
-        case FORMULA:
-            if (null == cv) {
-                out.set(c.getCellFormula());
-            }
-            break;
-        case NUMERIC:
-            if (DateUtil.isCellDateFormatted(c)) {
-                // 参照POI DateUtil.isADateFormat函数，去除无效字符
-                String fs = c.getCellStyle().getDataFormatString().replaceAll("\\\\-", "-").replaceAll("\\\\,", ",")
-                        .replaceAll("\\\\\\.", ".").replaceAll("\\\\ ", " ").replaceAll("AM/PM", "")
-                        .replaceAll("\\[[^]]*\\]", "");
-
-                // 默认格式
-                int idx = fs.indexOf(";@");
-                if (idx > 0 && idx < fs.length()) {
-                    // 包含年月日
-                    LinkedList<String> rfs = new LinkedList<String>();
-
-                    if (checkDate.matcher(fs).find())
-                        rfs.addLast("yyyy-MM-dd");
-
-                    if (checkTime.matcher(fs).find())
-                        rfs.addLast("HH:mm:ss");
-
-                    if (rfs.isEmpty())
-                        fs = "yyyy-MM-dd HH:mm:ss";
-                    else
-                        fs = String.join(" ", rfs);
-
-                } else {
-                    idx = fs.indexOf(";");
-                    if (idx > 0 && idx < fs.length() - 1) {
-                        fs = fs.substring(0, idx);
-                    }
+            case BLANK:
+                break;
+            case BOOLEAN:
+                out.set(cal_cell2bool(c, cv).toString());
+                break;
+            case ERROR: {
+                byte error_code = cal_cell2err(c, cv);
+                try {
+                    out.set(FormulaError.forInt(error_code).getString());
+                } catch (IllegalArgumentException e) {
+                    out.set(e.toString());
                 }
-
-                SimpleDateFormat df = new SimpleDateFormat(fs);
-                out.set(df.format(c.getDateCellValue()).trim());
                 break;
             }
+            case FORMULA:
+                if (null == cv) {
+                    out.set(c.getCellFormula());
+                }
+                break;
+            case NUMERIC:
+                if (DateUtil.isCellDateFormatted(c)) {
+                    // 参照POI DateUtil.isADateFormat函数，去除无效字符
+                    String fs = c.getCellStyle().getDataFormatString().replaceAll("\\\\-", "-").replaceAll("\\\\,", ",")
+                            .replaceAll("\\\\\\.", ".").replaceAll("\\\\ ", " ").replaceAll("AM/PM", "")
+                            .replaceAll("\\[[^]]*\\]", "");
 
-            double dv = cal_cell2num(c, cv);
-            if (col.getRatio() != 1) {
-                dv = dv * col.getRatio();
-            }
-            if (dv == (long) dv) {
-                out.set(String.format("%d", (long) dv));
-            } else {
-                out.set(String.format("%s", dv));
-            }
-            break;
-        case STRING:
-            // return ret.set(tryMacro(cal_cell2str(c, cv).trim()));
-            String val = cal_cell2str(c, cv).trim();
-            if (!val.isEmpty()) {
-                out.set(val);
-            }
-            break;
-        default:
-            break;
+                    // 默认格式
+                    int idx = fs.indexOf(";@");
+                    if (idx > 0 && idx < fs.length()) {
+                        // 包含年月日
+                        LinkedList<String> rfs = new LinkedList<String>();
+
+                        if (checkDate.matcher(fs).find())
+                            rfs.addLast("yyyy-MM-dd");
+
+                        if (checkTime.matcher(fs).find())
+                            rfs.addLast("HH:mm:ss");
+
+                        if (rfs.isEmpty())
+                            fs = "yyyy-MM-dd HH:mm:ss";
+                        else
+                            fs = String.join(" ", rfs);
+
+                    } else {
+                        idx = fs.indexOf(";");
+                        if (idx > 0 && idx < fs.length() - 1) {
+                            fs = fs.substring(0, idx);
+                        }
+                    }
+
+                    SimpleDateFormat df = new SimpleDateFormat(fs);
+                    out.set(df.format(c.getDateCellValue()).trim());
+                    break;
+                }
+
+                double dv = cal_cell2num(c, cv);
+                if (col.getRatio() != 1) {
+                    dv = dv * col.getRatio();
+                }
+                if (dv == (long) dv) {
+                    out.set(String.format("%d", (long) dv));
+                } else {
+                    out.set(String.format("%s", dv));
+                }
+                break;
+            case STRING:
+                // return ret.set(tryMacro(cal_cell2str(c, cv).trim()));
+                String val = cal_cell2str(c, cv).trim();
+                if (!val.isEmpty()) {
+                    out.set(val);
+                }
+                break;
+            default:
+                break;
         }
     }
 
@@ -535,50 +527,50 @@ public class ExcelEngine {
             type = c.getCellType();
         }
         switch (type) {
-        case BLANK:
-            break;
-        case BOOLEAN: {
-            boolean res = cal_cell2bool(c, cv);
-            out.set(DataVerifyImpl.getAndVerify(col.getVerifier(), col.name, res ? 1 : 0));
-            break;
-        }
-        case ERROR: {
-            byte error_code = cal_cell2err(c, cv);
-            try {
-                ProgramOptions.getLoger().warn("Error message: %s", FormulaError.forInt(error_code).getString());
-            } catch (IllegalArgumentException e) {
-                ProgramOptions.getLoger().warn("Error message: %s", e.toString());
-            }
-            break;
-        }
-        case FORMULA:
-            break;
-        case NUMERIC: {
-            long val = 0;
-            if (DateUtil.isCellDateFormatted(c)) {
-                val = dateToUnixTimestamp(c.getDateCellValue());
-            } else {
-                if (col.getRatio() == 1) {
-                    val = Math.round(cal_cell2num(c, cv));
-                } else {
-                    val = Math.round(cal_cell2num(c, cv) * col.getRatio());
-                }
-            }
-
-            out.set(DataVerifyImpl.getAndVerify(col.getVerifier(), col.name, val));
-            break;
-        }
-        case STRING: {
-            String val = cal_cell2str(c, cv).trim();
-            if (val.isEmpty()) {
+            case BLANK:
+                break;
+            case BOOLEAN: {
+                boolean res = cal_cell2bool(c, cv);
+                out.set(DataVerifyImpl.getAndVerify(col.getVerifier(), col.name, res ? 1 : 0));
                 break;
             }
+            case ERROR: {
+                byte error_code = cal_cell2err(c, cv);
+                try {
+                    ProgramOptions.getLoger().warn("Error message: %s", FormulaError.forInt(error_code).getString());
+                } catch (IllegalArgumentException e) {
+                    ProgramOptions.getLoger().warn("Error message: %s", e.toString());
+                }
+                break;
+            }
+            case FORMULA:
+                break;
+            case NUMERIC: {
+                long val = 0;
+                if (DateUtil.isCellDateFormatted(c)) {
+                    val = dateToUnixTimestamp(c.getDateCellValue());
+                } else {
+                    if (col.getRatio() == 1) {
+                        val = Math.round(cal_cell2num(c, cv));
+                    } else {
+                        val = Math.round(cal_cell2num(c, cv) * col.getRatio());
+                    }
+                }
 
-            out.set(DataVerifyImpl.getAndVerify(col.getVerifier(), col.name, tryMacro(val)));
-            break;
-        }
-        default:
-            break;
+                out.set(DataVerifyImpl.getAndVerify(col.getVerifier(), col.name, val));
+                break;
+            }
+            case STRING: {
+                String val = cal_cell2str(c, cv).trim();
+                if (val.isEmpty()) {
+                    break;
+                }
+
+                out.set(DataVerifyImpl.getAndVerify(col.getVerifier(), col.name, tryMacro(val)));
+                break;
+            }
+            default:
+                break;
         }
     }
 
@@ -668,50 +660,50 @@ public class ExcelEngine {
             type = c.getCellType();
         }
         switch (type) {
-        case BLANK:
-            break;
-        case BOOLEAN:
-            out.set(cal_cell2bool(c, cv) ? 1.0 : 0.0);
-            break;
-        case ERROR: {
-            byte error_code = cal_cell2err(c, cv);
-            try {
-                ProgramOptions.getLoger().warn("Error message: %s", FormulaError.forInt(error_code).getString());
-            } catch (IllegalArgumentException e) {
-                ProgramOptions.getLoger().warn("Error message: %s", e.toString());
-            }
-            break;
-        }
-        case FORMULA:
-            break;
-        case NUMERIC:
-            if (DateUtil.isCellDateFormatted(c)) {
-                out.set((double) dateToUnixTimestamp(c.getDateCellValue()));
+            case BLANK:
+                break;
+            case BOOLEAN:
+                out.set(cal_cell2bool(c, cv) ? 1.0 : 0.0);
+                break;
+            case ERROR: {
+                byte error_code = cal_cell2err(c, cv);
+                try {
+                    ProgramOptions.getLoger().warn("Error message: %s", FormulaError.forInt(error_code).getString());
+                } catch (IllegalArgumentException e) {
+                    ProgramOptions.getLoger().warn("Error message: %s", e.toString());
+                }
                 break;
             }
-            if (col.getRatio() == 1) {
-                out.set(cal_cell2num(c, cv));
-            } else {
-                out.set(cal_cell2num(c, cv) * col.getRatio());
-            }
-            break;
-        case STRING: {
-            String val = cal_cell2str(c, cv).trim();
-            if (val.isEmpty()) {
+            case FORMULA:
                 break;
-            }
+            case NUMERIC:
+                if (DateUtil.isCellDateFormatted(c)) {
+                    out.set((double) dateToUnixTimestamp(c.getDateCellValue()));
+                    break;
+                }
+                if (col.getRatio() == 1) {
+                    out.set(cal_cell2num(c, cv));
+                } else {
+                    out.set(cal_cell2num(c, cv) * col.getRatio());
+                }
+                break;
+            case STRING: {
+                String val = cal_cell2str(c, cv).trim();
+                if (val.isEmpty()) {
+                    break;
+                }
 
-            try {
-                out.set(Double.valueOf(tryMacro(val)));
-            } catch (java.lang.NumberFormatException e) {
-                throw new ConvException(
-                        String.format("Table %s, Row %d, Column %d : %s can not be converted to a number",
-                                row.getSheet().getSheetName(), c.getRowIndex() + 1, c.getColumnIndex() + 1, val));
+                try {
+                    out.set(Double.valueOf(tryMacro(val)));
+                } catch (java.lang.NumberFormatException e) {
+                    throw new ConvException(
+                            String.format("Table %s, Row %d, Column %d : %s can not be converted to a number",
+                                    row.getSheet().getSheetName(), c.getRowIndex() + 1, c.getColumnIndex() + 1, val));
+                }
+                break;
             }
-            break;
-        }
-        default:
-            break;
+            default:
+                break;
         }
     }
 
@@ -793,35 +785,35 @@ public class ExcelEngine {
             type = c.getCellType();
         }
         switch (type) {
-        case BLANK:
-            break;
-        case BOOLEAN:
-            out.set(cal_cell2bool(c, cv));
-            break;
-        case ERROR: {
-            byte error_code = cal_cell2err(c, cv);
-            try {
-                ProgramOptions.getLoger().warn("Error message: %s", FormulaError.forInt(error_code).getString());
-            } catch (IllegalArgumentException e) {
-                ProgramOptions.getLoger().warn("Error message: %s", e.toString());
-            }
-            break;
-        }
-        case FORMULA:
-            break;
-        case NUMERIC:
-            out.set(cal_cell2num(c, cv) != 0 && col.getRatio() != 0);
-            break;
-        case STRING:
-            String item = tryMacro(cal_cell2str(c, cv).trim()).toLowerCase();
-            if (item.isEmpty()) {
+            case BLANK:
+                break;
+            case BOOLEAN:
+                out.set(cal_cell2bool(c, cv));
+                break;
+            case ERROR: {
+                byte error_code = cal_cell2err(c, cv);
+                try {
+                    ProgramOptions.getLoger().warn("Error message: %s", FormulaError.forInt(error_code).getString());
+                } catch (IllegalArgumentException e) {
+                    ProgramOptions.getLoger().warn("Error message: %s", e.toString());
+                }
                 break;
             }
+            case FORMULA:
+                break;
+            case NUMERIC:
+                out.set(cal_cell2num(c, cv) != 0 && col.getRatio() != 0);
+                break;
+            case STRING:
+                String item = tryMacro(cal_cell2str(c, cv).trim()).toLowerCase();
+                if (item.isEmpty()) {
+                    break;
+                }
 
-            out.set(DataSrcImpl.getBooleanFromString(item));
-            break;
-        default:
-            break;
+                out.set(DataSrcImpl.getBooleanFromString(item));
+                break;
+            default:
+                break;
         }
     }
 

@@ -3,7 +3,6 @@ package org.xresloader.core;
 import org.apache.commons.cli.*;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.apache.poi.xddf.usermodel.text.StrikeType;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -180,6 +179,9 @@ public class ProgramOptions {
         options.addOption(Option.builder("i").longOpt("option-print").desc("print all option data to file").hasArg()
                 .argName("OUTPUT FILE PATH").build());
 
+        options.addOption(Option.builder("r").longOpt("descriptor-print").desc("print all descriptor data to file")
+                .hasArg().argName("OUTPUT FILE PATH").build());
+
         options.addOption(Option.builder().longOpt("xml-root").desc("set xml root node name.(default: root)").hasArg()
                 .argName("ROOT NAME").build());
 
@@ -336,7 +338,10 @@ public class ProgramOptions {
         }
 
         // option print
-        if (cmd.hasOption('i')) {
+        if (cmd.hasOption('r')) {
+            protoDumpFile = cmd.getOptionValue('r');
+            protoDumpType = ProtoDumpType.DESCRIPTOR;
+        } else if (cmd.hasOption('i')) {
             protoDumpFile = cmd.getOptionValue('i');
             protoDumpType = ProtoDumpType.OPTIONS;
             return 0;
@@ -482,7 +487,7 @@ public class ProgramOptions {
     }
 
     public enum ProtoDumpType {
-        NONE, CONST, OPTIONS
+        NONE, CONST, OPTIONS, DESCRIPTOR
     }
 
     public enum ListStripRule {

@@ -3,6 +3,7 @@ package org.xresloader.core.engine;
 import org.xresloader.core.ProgramOptions;
 import org.xresloader.core.data.src.DataSrcImpl;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.PrintStream;
@@ -240,13 +241,14 @@ public class ExcelHSSFStreamSheetHandle implements HSSFListener {
         }
     }
 
-    static public ExcelEngine.CustomDataTableIndex buildCustomTableIndex(String file_path, String sheet_name) {
-        if (file_path == null || sheet_name == null) {
+    static public ExcelEngine.CustomDataTableIndex buildCustomTableIndex(File file, String sheet_name) {
+        if (file == null || sheet_name == null) {
             return null;
         }
 
-        try (POIFSFileSystem xls_fs = new POIFSFileSystem(new FileInputStream(file_path))) {
-            ExcelEngine.CustomDataTableIndex tableIndex = new ExcelEngine.CustomDataTableIndex(file_path, sheet_name);
+        try (POIFSFileSystem xls_fs = new POIFSFileSystem(new FileInputStream(file))) {
+            ExcelEngine.CustomDataTableIndex tableIndex = new ExcelEngine.CustomDataTableIndex(file.getCanonicalPath(),
+                    sheet_name);
 
             ExcelHSSFStreamSheetHandle handle = new ExcelHSSFStreamSheetHandle(tableIndex);
 
@@ -269,8 +271,8 @@ public class ExcelHSSFStreamSheetHandle implements HSSFListener {
 
             return tableIndex;
         } catch (java.io.IOException e) {
-            ProgramOptions.getLoger().error("Open source file \"%s\" and parse sheet \"%s\" failed, %s.", file_path,
-                    sheet_name, e.getMessage());
+            ProgramOptions.getLoger().error("Open source file \"%s\" and parse sheet \"%s\" failed, %s.",
+                    file.getPath(), sheet_name, e.getMessage());
         }
 
         return null;

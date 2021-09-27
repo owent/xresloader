@@ -6,13 +6,13 @@ define({
     count : 7,
     data_source : [
       {
-        file : "资源转换示例.xlsx",
+        file : "./资源转换示例.xlsx",
         sheet : "kind"
       }
     ],
     data_ver : "1.0.0.0",
-    hash_code : "no hash code",
-    xres_ver : "2.11.0"
+    hash_code : "sha256:0c333be4391e1f1303efcf68a348d6c74e6b7a9c66a736f3b04536cc90289fca",
+    xres_ver : "2.11.0-rc2"
   },
   "role_cfg": [
     {
@@ -32,6 +32,9 @@ define({
         "lalal",
         "欧若拉",
         "小魔女"
+      ],
+      test_plain_enum_array : [
+        10001
       ]
     },
     {
@@ -52,6 +55,10 @@ define({
         "杰克",
         "海盗王子"
       ],
+      test_plain_enum_array : [
+        10001,
+        10101
+      ],
       unlock_level : 39
     },
     {
@@ -71,6 +78,11 @@ define({
         "hahaha",
         "库拉",
         "喵少年"
+      ],
+      test_plain_enum_array : [
+        10001,
+        10001,
+        10101
       ],
       unlock_level : 85
     },

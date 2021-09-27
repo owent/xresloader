@@ -32,6 +32,7 @@
                     "CostValue": 0,
                     "IntAsString": "",
                     "Id": 0,
+                    "TestPlainEnumArray": [],
                     "UnlockLevel": 0,
                     "CostType": 0,
                     "Name": ""
@@ -68,6 +69,7 @@
                     "CostValue": 0,
                     "IntAsString": "",
                     "Id": 0,
+                    "TestPlainEnumArray": [],
                     "UnlockLevel": 0,
                     "CostType": 0,
                     "Name": ""
@@ -152,6 +154,7 @@
                     "CostValue": 0,
                     "IntAsString": "",
                     "Id": 0,
+                    "TestPlainEnumArray": [],
                     "UnlockLevel": 0,
                     "CostType": 0,
                     "Name": ""
@@ -188,6 +191,7 @@
                     "CostValue": 0,
                     "IntAsString": "",
                     "Id": 0,
+                    "TestPlainEnumArray": [],
                     "UnlockLevel": 0,
                     "CostType": 0,
                     "Name": ""
@@ -262,6 +266,7 @@
                     "CostValue": 0,
                     "IntAsString": "",
                     "Id": 0,
+                    "TestPlainEnumArray": [],
                     "UnlockLevel": 0,
                     "CostType": 0,
                     "Name": ""
@@ -292,6 +297,7 @@
                     "CostValue": 0,
                     "IntAsString": "",
                     "Id": 0,
+                    "TestPlainEnumArray": [],
                     "UnlockLevel": 0,
                     "CostType": 0,
                     "Name": ""

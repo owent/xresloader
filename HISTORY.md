@@ -1,6 +1,11 @@
 更新记录
 ==========
 
+Unrelease
+------
+
+1. 更新 `protobuf` 到 3.19.0
+
 2.11.0-RC2
 ------
 
@@ -12,7 +17,7 @@
 6. 升级 `org.apache.xmlbeans` 到 5.0.0
 7. 更新 `commons-csv` 到 1.9.0
 8. 修复内置索引引擎为设置数据源目录的BUG(Thanks to [vividkings](https://github.com/vividkings))
-9. 增肌 `-r/--descriptor-print` 选项，用于导出所有描述数据
+9. 增加 `-r/--descriptor-print` 选项，用于导出所有描述数据
 10. 修复 Plain 模式二进制输出enum数组的BUG
 
 2.11.0-RC1

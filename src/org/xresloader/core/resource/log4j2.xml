@@ -2,6 +2,7 @@
 <Configuration status="OFF">
     <Properties>
         <Property name="filename">xresloader.run.log</Property>
+        <Property name="formatMsgNoLookups">true</Property>
     </Properties>
     <Appenders>
         <Console name="ConsoleOut" ignoreExceptions="true" target="SYSTEM_OUT">

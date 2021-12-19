@@ -2,13 +2,15 @@
 # environment @see https://help.github.com/en/articles/software-in-virtual-environments-for-github-actions
 #                  https://help.github.com/en/articles/virtual-environments-for-github-actions
 # example     @see https://github.com/actions/toolkit/blob/master/.github/workflows/workflow.yml
-name: Master Building
+name: Main Building
 # This workflow is triggered on pushes to the repository.
 on: # @see https://help.github.com/en/articles/events-that-trigger-workflows#webhook-events
   push:
     branches: # Array of patterns that match refs/heads
       - master # Push events on master branch
-      - dev
+      - main
+  pull_request:
+    branches:
       - main
   # schedule:
   #  - cron:  0 * * * *
@@ -16,7 +18,7 @@ on: # @see https://help.github.com/en/articles/events-that-trigger-workflows#web
 jobs:
   build: # job id, can be any string
     # Job name is Build And Publish
-    name: Build And Publish
+    name: Build
     # This job runs on Linux
     strategy:
       matrix:

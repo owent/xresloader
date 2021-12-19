@@ -5,7 +5,7 @@ Unrelease
 ------
 
 1. 更新 `protobuf` 到 3.19.1
-2. 更新 `org.apache.logging.log4j` 到 2.16.0
+2. 更新 `org.apache.logging.log4j` 到 2.17.0
 3. 更新 `org.apache.poi` 到 5.1.0
 4. 更新 `org.apache.santuario` 到 2.3.0
 5. 更新 `org.json` 到 20211205

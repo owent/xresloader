@@ -1,0 +1,4 @@
+[submodule "third_party/xresloader-protocol"]
+	path = third_party/xresloader-protocol
+	url = https://github.com/xresloader/xresloader-protocol.git
+	branch = main

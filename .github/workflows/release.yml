@@ -40,7 +40,9 @@ jobs:
           mvn package --file pom.xml
           if [[ -e "target/protocols.zip" ]]; then rm -f "target/protocols.zip"; fi
           if [[ -e "target/tools.zip" ]]; then rm -f "target/tools.zip"; fi
-          echo $(cd header && zip -r "../target/protocols.zip" extensions *.proto *.pb)
+          mkdir target/protocols
+          cp -rf third_party/xresloader-protocol/core/*.proto third_party/xresloader-protocol/core/extensions header/*.pb target/protocols/
+          echo $(cd target/protocols && zip -r "../protocols.zip" *)
           echo $(cd tools && zip -r "../target/tools.zip" requirements.txt extensions.pb *.py)
       - uses: xresloader/upload-to-github-release@v1
         env:

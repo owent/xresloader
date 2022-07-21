@@ -16,58 +16,65 @@
 #include <google/protobuf/port_def.inc>
 
 PROTOBUF_PRAGMA_INIT_SEG
-constexpr dep2_cfg::dep2_cfg(
-  ::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized)
-  : level_(&::PROTOBUF_NAMESPACE_ID::internal::fixed_address_empty_string)
-  , id_(0u){}
+
+namespace _pb = ::PROTOBUF_NAMESPACE_ID;
+namespace _pbi = _pb::internal;
+
+PROTOBUF_CONSTEXPR dep2_cfg::dep2_cfg(
+    ::_pbi::ConstantInitialized): _impl_{
+    /*decltype(_impl_.level_)*/{&::_pbi::fixed_address_empty_string, ::_pbi::ConstantInitialized{}}
+  , /*decltype(_impl_.id_)*/0u
+  , /*decltype(_impl_._cached_size_)*/{}} {}
 struct dep2_cfgDefaultTypeInternal {
-  constexpr dep2_cfgDefaultTypeInternal()
-    : _instance(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized{}) {}
+  PROTOBUF_CONSTEXPR dep2_cfgDefaultTypeInternal()
+      : _instance(::_pbi::ConstantInitialized{}) {}
   ~dep2_cfgDefaultTypeInternal() {}
   union {
     dep2_cfg _instance;
   };
 };
-PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT dep2_cfgDefaultTypeInternal _dep2_cfg_default_instance_;
-static ::PROTOBUF_NAMESPACE_ID::Metadata file_level_metadata_dep_5flevel2_2eproto[1];
-static constexpr ::PROTOBUF_NAMESPACE_ID::EnumDescriptor const** file_level_enum_descriptors_dep_5flevel2_2eproto = nullptr;
-static constexpr ::PROTOBUF_NAMESPACE_ID::ServiceDescriptor const** file_level_service_descriptors_dep_5flevel2_2eproto = nullptr;
+PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 dep2_cfgDefaultTypeInternal _dep2_cfg_default_instance_;
+static ::_pb::Metadata file_level_metadata_dep_5flevel2_2eproto[1];
+static constexpr ::_pb::EnumDescriptor const** file_level_enum_descriptors_dep_5flevel2_2eproto = nullptr;
+static constexpr ::_pb::ServiceDescriptor const** file_level_service_descriptors_dep_5flevel2_2eproto = nullptr;
 
-const ::PROTOBUF_NAMESPACE_ID::uint32 TableStruct_dep_5flevel2_2eproto::offsets[] PROTOBUF_SECTION_VARIABLE(protodesc_cold) = {
+const uint32_t TableStruct_dep_5flevel2_2eproto::offsets[] PROTOBUF_SECTION_VARIABLE(protodesc_cold) = {
   ~0u,  // no _has_bits_
   PROTOBUF_FIELD_OFFSET(::dep2_cfg, _internal_metadata_),
   ~0u,  // no _extensions_
   ~0u,  // no _oneof_case_
   ~0u,  // no _weak_field_map_
   ~0u,  // no _inlined_string_donated_
-  PROTOBUF_FIELD_OFFSET(::dep2_cfg, id_),
-  PROTOBUF_FIELD_OFFSET(::dep2_cfg, level_),
+  PROTOBUF_FIELD_OFFSET(::dep2_cfg, _impl_.id_),
+  PROTOBUF_FIELD_OFFSET(::dep2_cfg, _impl_.level_),
 };
-static const ::PROTOBUF_NAMESPACE_ID::internal::MigrationSchema schemas[] PROTOBUF_SECTION_VARIABLE(protodesc_cold) = {
+static const ::_pbi::MigrationSchema schemas[] PROTOBUF_SECTION_VARIABLE(protodesc_cold) = {
   { 0, -1, -1, sizeof(::dep2_cfg)},
 };
 
-static ::PROTOBUF_NAMESPACE_ID::Message const * const file_default_instances[] = {
-  reinterpret_cast<const ::PROTOBUF_NAMESPACE_ID::Message*>(&::_dep2_cfg_default_instance_),
+static const ::_pb::Message* const file_default_instances[] = {
+  &::_dep2_cfg_default_instance_._instance,
 };
 
 const char descriptor_table_protodef_dep_5flevel2_2eproto[] PROTOBUF_SECTION_VARIABLE(protodesc_cold) =
   "\n\020dep_level2.proto\"%\n\010dep2_cfg\022\n\n\002id\030\001 \001"
   "(\r\022\r\n\005level\030\002 \001(\tb\006proto3"
   ;
-static ::PROTOBUF_NAMESPACE_ID::internal::once_flag descriptor_table_dep_5flevel2_2eproto_once;
-const ::PROTOBUF_NAMESPACE_ID::internal::DescriptorTable descriptor_table_dep_5flevel2_2eproto = {
-  false, false, 65, descriptor_table_protodef_dep_5flevel2_2eproto, "dep_level2.proto", 
-  &descriptor_table_dep_5flevel2_2eproto_once, nullptr, 0, 1,
-  schemas, file_default_instances, TableStruct_dep_5flevel2_2eproto::offsets,
-  file_level_metadata_dep_5flevel2_2eproto, file_level_enum_descriptors_dep_5flevel2_2eproto, file_level_service_descriptors_dep_5flevel2_2eproto,
+static ::_pbi::once_flag descriptor_table_dep_5flevel2_2eproto_once;
+const ::_pbi::DescriptorTable descriptor_table_dep_5flevel2_2eproto = {
+    false, false, 65, descriptor_table_protodef_dep_5flevel2_2eproto,
+    "dep_level2.proto",
+    &descriptor_table_dep_5flevel2_2eproto_once, nullptr, 0, 1,
+    schemas, file_default_instances, TableStruct_dep_5flevel2_2eproto::offsets,
+    file_level_metadata_dep_5flevel2_2eproto, file_level_enum_descriptors_dep_5flevel2_2eproto,
+    file_level_service_descriptors_dep_5flevel2_2eproto,
 };
-PROTOBUF_ATTRIBUTE_WEAK const ::PROTOBUF_NAMESPACE_ID::internal::DescriptorTable* descriptor_table_dep_5flevel2_2eproto_getter() {
+PROTOBUF_ATTRIBUTE_WEAK const ::_pbi::DescriptorTable* descriptor_table_dep_5flevel2_2eproto_getter() {
   return &descriptor_table_dep_5flevel2_2eproto;
 }
 
 // Force running AddDescriptors() at dynamic initialization time.
-PROTOBUF_ATTRIBUTE_INIT_PRIORITY static ::PROTOBUF_NAMESPACE_ID::internal::AddDescriptorsRunner dynamic_init_dummy_dep_5flevel2_2eproto(&descriptor_table_dep_5flevel2_2eproto);
+PROTOBUF_ATTRIBUTE_INIT_PRIORITY2 static ::_pbi::AddDescriptorsRunner dynamic_init_dummy_dep_5flevel2_2eproto(&descriptor_table_dep_5flevel2_2eproto);
 
 // ===================================================================
 
@@ -78,83 +85,95 @@ class dep2_cfg::_Internal {
 dep2_cfg::dep2_cfg(::PROTOBUF_NAMESPACE_ID::Arena* arena,
                          bool is_message_owned)
   : ::PROTOBUF_NAMESPACE_ID::Message(arena, is_message_owned) {
-  SharedCtor();
-  if (!is_message_owned) {
-    RegisterArenaDtor(arena);
-  }
+  SharedCtor(arena, is_message_owned);
   // @@protoc_insertion_point(arena_constructor:dep2_cfg)
 }
 dep2_cfg::dep2_cfg(const dep2_cfg& from)
   : ::PROTOBUF_NAMESPACE_ID::Message() {
+  dep2_cfg* const _this = this; (void)_this;
+  new (&_impl_) Impl_{
+      decltype(_impl_.level_){}
+    , decltype(_impl_.id_){}
+    , /*decltype(_impl_._cached_size_)*/{}};
+
   _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
-  level_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  _impl_.level_.InitDefault();
+  #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+    _impl_.level_.Set("", GetArenaForAllocation());
+  #endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
   if (!from._internal_level().empty()) {
-    level_.Set(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, from._internal_level(), 
-      GetArenaForAllocation());
+    _this->_impl_.level_.Set(from._internal_level(), 
+      _this->GetArenaForAllocation());
   }
-  id_ = from.id_;
+  _this->_impl_.id_ = from._impl_.id_;
   // @@protoc_insertion_point(copy_constructor:dep2_cfg)
 }
 
-void dep2_cfg::SharedCtor() {
-level_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
-id_ = 0u;
+inline void dep2_cfg::SharedCtor(
+    ::_pb::Arena* arena, bool is_message_owned) {
+  (void)arena;
+  (void)is_message_owned;
+  new (&_impl_) Impl_{
+      decltype(_impl_.level_){}
+    , decltype(_impl_.id_){0u}
+    , /*decltype(_impl_._cached_size_)*/{}
+  };
+  _impl_.level_.InitDefault();
+  #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+    _impl_.level_.Set("", GetArenaForAllocation());
+  #endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
 }
 
 dep2_cfg::~dep2_cfg() {
   // @@protoc_insertion_point(destructor:dep2_cfg)
-  if (GetArenaForAllocation() != nullptr) return;
+  if (auto *arena = _internal_metadata_.DeleteReturnArena<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>()) {
+  (void)arena;
+    return;
+  }
   SharedDtor();
-  _internal_metadata_.Delete<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
 }
 
 inline void dep2_cfg::SharedDtor() {
   GOOGLE_DCHECK(GetArenaForAllocation() == nullptr);
-  level_.DestroyNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  _impl_.level_.Destroy();
 }
 
-void dep2_cfg::ArenaDtor(void* object) {
-  dep2_cfg* _this = reinterpret_cast< dep2_cfg* >(object);
-  (void)_this;
-}
-void dep2_cfg::RegisterArenaDtor(::PROTOBUF_NAMESPACE_ID::Arena*) {
-}
 void dep2_cfg::SetCachedSize(int size) const {
-  _cached_size_.Set(size);
+  _impl_._cached_size_.Set(size);
 }
 
 void dep2_cfg::Clear() {
 // @@protoc_insertion_point(message_clear_start:dep2_cfg)
-  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+  uint32_t cached_has_bits = 0;
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  level_.ClearToEmpty();
-  id_ = 0u;
+  _impl_.level_.ClearToEmpty();
+  _impl_.id_ = 0u;
   _internal_metadata_.Clear<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
 }
 
-const char* dep2_cfg::_InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) {
+const char* dep2_cfg::_InternalParse(const char* ptr, ::_pbi::ParseContext* ctx) {
 #define CHK_(x) if (PROTOBUF_PREDICT_FALSE(!(x))) goto failure
   while (!ctx->Done(&ptr)) {
-    ::PROTOBUF_NAMESPACE_ID::uint32 tag;
-    ptr = ::PROTOBUF_NAMESPACE_ID::internal::ReadTag(ptr, &tag);
+    uint32_t tag;
+    ptr = ::_pbi::ReadTag(ptr, &tag);
     switch (tag >> 3) {
       // uint32 id = 1;
       case 1:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 8)) {
-          id_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint32(&ptr);
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 8)) {
+          _impl_.id_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint32(&ptr);
           CHK_(ptr);
         } else
           goto handle_unusual;
         continue;
       // string level = 2;
       case 2:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 18)) {
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 18)) {
           auto str = _internal_mutable_level();
-          ptr = ::PROTOBUF_NAMESPACE_ID::internal::InlineGreedyStringParser(str, ptr, ctx);
-          CHK_(::PROTOBUF_NAMESPACE_ID::internal::VerifyUTF8(str, "dep2_cfg.level"));
+          ptr = ::_pbi::InlineGreedyStringParser(str, ptr, ctx);
           CHK_(ptr);
+          CHK_(::_pbi::VerifyUTF8(str, "dep2_cfg.level"));
         } else
           goto handle_unusual;
         continue;
@@ -181,16 +200,16 @@ failure:
 #undef CHK_
 }
 
-::PROTOBUF_NAMESPACE_ID::uint8* dep2_cfg::_InternalSerialize(
-    ::PROTOBUF_NAMESPACE_ID::uint8* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const {
+uint8_t* dep2_cfg::_InternalSerialize(
+    uint8_t* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const {
   // @@protoc_insertion_point(serialize_to_array_start:dep2_cfg)
-  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+  uint32_t cached_has_bits = 0;
   (void) cached_has_bits;
 
   // uint32 id = 1;
   if (this->_internal_id() != 0) {
     target = stream->EnsureSpace(target);
-    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteUInt32ToArray(1, this->_internal_id(), target);
+    target = ::_pbi::WireFormatLite::WriteUInt32ToArray(1, this->_internal_id(), target);
   }
 
   // string level = 2;
@@ -204,7 +223,7 @@ failure:
   }
 
   if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
-    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::InternalSerializeUnknownFieldsToArray(
+    target = ::_pbi::WireFormat::InternalSerializeUnknownFieldsToArray(
         _internal_metadata_.unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(::PROTOBUF_NAMESPACE_ID::UnknownFieldSet::default_instance), target, stream);
   }
   // @@protoc_insertion_point(serialize_to_array_end:dep2_cfg)
@@ -215,7 +234,7 @@ size_t dep2_cfg::ByteSizeLong() const {
 // @@protoc_insertion_point(message_byte_size_start:dep2_cfg)
   size_t total_size = 0;
 
-  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+  uint32_t cached_has_bits = 0;
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
@@ -228,38 +247,34 @@ size_t dep2_cfg::ByteSizeLong() const {
 
   // uint32 id = 1;
   if (this->_internal_id() != 0) {
-    total_size += ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::UInt32SizePlusOne(this->_internal_id());
+    total_size += ::_pbi::WireFormatLite::UInt32SizePlusOne(this->_internal_id());
   }
 
-  return MaybeComputeUnknownFieldsSize(total_size, &_cached_size_);
+  return MaybeComputeUnknownFieldsSize(total_size, &_impl_._cached_size_);
 }
 
 const ::PROTOBUF_NAMESPACE_ID::Message::ClassData dep2_cfg::_class_data_ = {
-    ::PROTOBUF_NAMESPACE_ID::Message::CopyWithSizeCheck,
+    ::PROTOBUF_NAMESPACE_ID::Message::CopyWithSourceCheck,
     dep2_cfg::MergeImpl
 };
 const ::PROTOBUF_NAMESPACE_ID::Message::ClassData*dep2_cfg::GetClassData() const { return &_class_data_; }
 
-void dep2_cfg::MergeImpl(::PROTOBUF_NAMESPACE_ID::Message* to,
-                      const ::PROTOBUF_NAMESPACE_ID::Message& from) {
-  static_cast<dep2_cfg *>(to)->MergeFrom(
-      static_cast<const dep2_cfg &>(from));
-}
 
-
-void dep2_cfg::MergeFrom(const dep2_cfg& from) {
-// @@protoc_insertion_point(class_specific_merge_from_start:dep2_cfg)
-  GOOGLE_DCHECK_NE(&from, this);
-  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+void dep2_cfg::MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg, const ::PROTOBUF_NAMESPACE_ID::Message& from_msg) {
+  auto* const _this = static_cast<dep2_cfg*>(&to_msg);
+  auto& from = static_cast<const dep2_cfg&>(from_msg);
+  // @@protoc_insertion_point(class_specific_merge_from_start:dep2_cfg)
+  GOOGLE_DCHECK_NE(&from, _this);
+  uint32_t cached_has_bits = 0;
   (void) cached_has_bits;
 
   if (!from._internal_level().empty()) {
-    _internal_set_level(from._internal_level());
+    _this->_internal_set_level(from._internal_level());
   }
   if (from._internal_id() != 0) {
-    _internal_set_id(from._internal_id());
+    _this->_internal_set_id(from._internal_id());
   }
-  _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
+  _this->_internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
 }
 
 void dep2_cfg::CopyFrom(const dep2_cfg& from) {
@@ -279,22 +294,22 @@ void dep2_cfg::InternalSwap(dep2_cfg* other) {
   auto* rhs_arena = other->GetArenaForAllocation();
   _internal_metadata_.InternalSwap(&other->_internal_metadata_);
   ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::InternalSwap(
-      &::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(),
-      &level_, lhs_arena,
-      &other->level_, rhs_arena
+      &_impl_.level_, lhs_arena,
+      &other->_impl_.level_, rhs_arena
   );
-  swap(id_, other->id_);
+  swap(_impl_.id_, other->_impl_.id_);
 }
 
 ::PROTOBUF_NAMESPACE_ID::Metadata dep2_cfg::GetMetadata() const {
-  return ::PROTOBUF_NAMESPACE_ID::internal::AssignDescriptors(
+  return ::_pbi::AssignDescriptors(
       &descriptor_table_dep_5flevel2_2eproto_getter, &descriptor_table_dep_5flevel2_2eproto_once,
       file_level_metadata_dep_5flevel2_2eproto[0]);
 }
 
 // @@protoc_insertion_point(namespace_scope)
 PROTOBUF_NAMESPACE_OPEN
-template<> PROTOBUF_NOINLINE ::dep2_cfg* Arena::CreateMaybeMessage< ::dep2_cfg >(Arena* arena) {
+template<> PROTOBUF_NOINLINE ::dep2_cfg*
+Arena::CreateMaybeMessage< ::dep2_cfg >(Arena* arena) {
   return Arena::CreateMessageInternal< ::dep2_cfg >(arena);
 }
 PROTOBUF_NAMESPACE_CLOSE

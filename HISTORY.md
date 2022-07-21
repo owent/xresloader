@@ -16,6 +16,7 @@ Unrelease
 10. 更新 `build-helper-maven-plugin` 到 3.3.0
 11. 更新 `org.msgpack.msgpack-core` 到 0.9.3
 12. 更新 `org.apache.pdfbox` 到 2.0.26
+13. 抽离出协议为单独的子模块
 
 2.11.0-RC2
 ------

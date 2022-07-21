@@ -15,55 +15,51 @@ os.chdir(script_dir)
 os.chdir(os.path.join('..'))
 
 project_dir = os.getcwd()
-proto_dir = os.path.join(project_dir, 'header')
+proto_dir = os.path.join(project_dir, 'third_party', 'xresloader-protocol',
+                         'core')
 proto_file = os.path.join(proto_dir, 'pb_header_v3.proto')
-extension_proto_file = glob.glob(os.path.join(proto_dir, 'extensions', 'v3', '*.proto'))
+extension_proto_file = glob.glob(
+    os.path.join(proto_dir, 'extensions', 'v3', '*.proto'))
 
 os.chdir(work_dir)
 
 java_out_dir = proto_dir
-pb_out_file = os.path.join(proto_dir, 'pb_header_v3.pb')
+pb_out_file = os.path.join(project_dir, 'header', 'pb_header_v3.pb')
 
 from find_protoc import find_protoc
 
 common_args = [
-    "-I", os.path.join(proto_dir, 'extensions', 'v3'),
-    "-I", os.path.join(proto_dir, 'extensions'),
-    "-I", os.path.join(proto_dir)
+    "-I",
+    os.path.join(proto_dir, 'extensions', 'v3'), "-I",
+    os.path.join(proto_dir, '..', 'common'), "-I",
+    os.path.join(proto_dir)
 ]
 
 # java 文件为非LITE版本
 print('[PROCESS] generate java source ... ')
-Popen(
-    [
-        find_protoc(), *common_args, 
-        '--java_out', java_out_dir,
-        proto_file, *extension_proto_file
-    ],
-    cwd=os.path.join(proto_dir, 'extensions'),
-    shell=False).wait()
+Popen([
+    find_protoc(), *common_args, '--java_out', java_out_dir, proto_file,
+    *extension_proto_file
+],
+      cwd=os.path.join(proto_dir, 'extensions'),
+      shell=False).wait()
 print('[PROCESS] generate java source done.')
 
 # pb 文件为LITE版本
 print('[PROCESS] generate proto pb file ... ')
-Popen(
-    [
-        find_protoc(), *common_args, 
-        '-o', pb_out_file,
-        proto_file
-    ],
-    shell=False).wait()
+Popen([find_protoc(), *common_args, '-o', pb_out_file, proto_file],
+      shell=False).wait()
 print('[PROCESS] generate proto pb file done.')
 
 # pb 文件为LITE版本
 print('[PROCESS] generate proto pb file ... ')
-Popen(
-    [
-        find_protoc(),
-        "-I", os.path.join(proto_dir, 'extensions', 'v3'),
-        "-I", os.path.join(proto_dir, 'extensions'), 
-        '-o', os.path.join(script_dir, 'extensions.pb'),
-        *extension_proto_file, *glob.glob(os.path.join(proto_dir, 'extensions','google', 'protobuf', '*.proto'))
-    ],
-    shell=False).wait()
+Popen([
+    find_protoc(), "-I",
+    os.path.join(proto_dir, 'extensions', 'v3'), "-I",
+    os.path.join(proto_dir, '..', 'common'), '-o',
+    os.path.join(script_dir, 'extensions.pb'), *extension_proto_file,
+    *glob.glob(
+        os.path.join(proto_dir, 'extensions', 'google', 'protobuf', '*.proto'))
+],
+      shell=False).wait()
 print('[PROCESS] generate protobuf.pb file done.')

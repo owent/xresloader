@@ -4,12 +4,18 @@
 Unrelease
 ------
 
-1. 更新 `protobuf` 到 3.19.1
-2. 更新 `org.apache.logging.log4j` 到 2.17.1
-3. 更新 `org.apache.poi` 到 5.1.0
-4. 更新 `org.apache.santuario` 到 2.3.0
-5. 更新 `org.json` 到 20211205
+1. 更新 `protobuf` 到 3.21.2
+2. 更新 `org.apache.logging.log4j` 到 2.18.0
+3. 更新 `org.apache.poi` 到 5.2.2
+4. 更新 `org.apache.santuario` 到 3.0.0
+5. 更新 `org.json` 到 20220320
 6. 更新 `commons-cli` 到 1.5.0
+7. 更新 `jacoco-maven-plugin` 到 0.8.8
+8. 更新 `maven-compiler-plugin` 到 3.10.1
+9. 更新 `maven-shade-plugin` 到 3.3.0
+10. 更新 `build-helper-maven-plugin` 到 3.3.0
+11. 更新 `org.msgpack.msgpack-core` 到 0.9.3
+12. 更新 `org.apache.pdfbox` 到 2.0.26
 
 2.11.0-RC2
 ------

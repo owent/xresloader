@@ -54,7 +54,7 @@ public class DataDstUECsv extends DataDstUEBase {
     protected Object buildForUEOnInit() throws IOException {
         UEBuildObject ret = new UEBuildObject();
         ret.sb = new StringBuffer();
-        ret.csv = new CSVPrinter(ret.sb, CSVFormat.INFORMIX_UNLOAD_CSV.withQuoteMode(QuoteMode.ALL));
+        ret.csv = new CSVPrinter(ret.sb, CSVFormat.INFORMIX_UNLOAD_CSV.builder().setQuoteMode(QuoteMode.ALL).build());
 
         appendCommonHeader(ret.csv);
         ret.csv.printComment(String.format("%s=%s", "xres_ver", ProgramOptions.getInstance().getVersion()));
@@ -304,7 +304,8 @@ public class DataDstUECsv extends DataDstUEBase {
     @Override
     public String dumpConstForUE(HashMap<String, Object> data, UEDataRowRule rule) throws IOException {
         StringBuffer sb = new StringBuffer();
-        CSVPrinter csv = new CSVPrinter(sb, CSVFormat.EXCEL.withHeader(getIdentName("Name"), getIdentName("Value")));
+        CSVPrinter csv = new CSVPrinter(sb,
+                CSVFormat.EXCEL.builder().setHeader(getIdentName("Name"), getIdentName("Value")).build());
 
         appendCommonHeader(csv);
         writeConstData(csv, data, "");
@@ -365,21 +366,21 @@ public class DataDstUECsv extends DataDstUEBase {
                     ret = Integer.valueOf(0);
                 } else if (field != null) {
                     switch (field.getType()) {
-                    case INT:
-                    case LONG:
-                    case FLOAT:
-                    case DOUBLE: {
-                        ret = "0";
-                        break;
-                    }
-                    case BOOLEAN: {
-                        ret = "False";
-                        break;
-                    }
-                    default: {
-                        ret = "";
-                        break;
-                    }
+                        case INT:
+                        case LONG:
+                        case FLOAT:
+                        case DOUBLE: {
+                            ret = "0";
+                            break;
+                        }
+                        case BOOLEAN: {
+                            ret = "False";
+                            break;
+                        }
+                        default: {
+                            ret = "";
+                            break;
+                        }
                     }
                 }
             }
@@ -767,182 +768,182 @@ public class DataDstUECsv extends DataDstUEBase {
             boolean ret = false;
             String[] groups = splitPlainGroups(input.trim(), getPlainFieldSeparator(field));
             switch (field.getType()) {
-            case INT: {
-                Long[] values = parsePlainDataLong(groups, ident, field);
-                if (null != values && values.length > 0) {
-                    fieldSB.append(SchemeConf.getInstance().getUEOptions().codeOutputCsvObjectBegin);
-                    boolean isFirst = true;
-                    for (Long v : values) {
-                        isFirst = tryWriteSeprator(fieldSB, isFirst);
-                        fieldSB.append(v.intValue());
-                    }
-                    fieldSB.append(SchemeConf.getInstance().getUEOptions().codeOutputCsvObjectEnd);
-                    ret = true;
-                }
-                break;
-            }
-            case LONG: {
-                Long[] values = parsePlainDataLong(groups, ident, field);
-                if (null != values && values.length > 0) {
-                    fieldSB.append(SchemeConf.getInstance().getUEOptions().codeOutputCsvObjectBegin);
-                    boolean isFirst = true;
-                    for (Long v : values) {
-                        isFirst = tryWriteSeprator(fieldSB, isFirst);
-                        fieldSB.append(v);
-                    }
-                    fieldSB.append(SchemeConf.getInstance().getUEOptions().codeOutputCsvObjectEnd);
-                    ret = true;
-                }
-                break;
-            }
-
-            case FLOAT: {
-                Double[] values = parsePlainDataDouble(groups, ident, field);
-                if (null != values && values.length > 0) {
-                    fieldSB.append(SchemeConf.getInstance().getUEOptions().codeOutputCsvObjectBegin);
-                    boolean isFirst = true;
-                    for (Double v : values) {
-                        isFirst = tryWriteSeprator(fieldSB, isFirst);
-                        fieldSB.append(v.floatValue());
-                    }
-                    fieldSB.append(SchemeConf.getInstance().getUEOptions().codeOutputCsvObjectEnd);
-                    ret = true;
-                }
-                break;
-            }
-
-            case DOUBLE: {
-                Double[] values = parsePlainDataDouble(groups, ident, field);
-                if (null != values && values.length > 0) {
-                    fieldSB.append(SchemeConf.getInstance().getUEOptions().codeOutputCsvObjectBegin);
-                    boolean isFirst = true;
-                    for (Double v : values) {
-                        isFirst = tryWriteSeprator(fieldSB, isFirst);
-                        fieldSB.append(v);
-                    }
-                    fieldSB.append(SchemeConf.getInstance().getUEOptions().codeOutputCsvObjectEnd);
-                    ret = true;
-                }
-                break;
-            }
-
-            case BOOLEAN: {
-                Boolean[] values = parsePlainDataBoolean(groups, ident, field);
-                if (null != values && values.length > 0) {
-                    fieldSB.append(SchemeConf.getInstance().getUEOptions().codeOutputCsvObjectBegin);
-                    boolean isFirst = true;
-                    for (Boolean v : values) {
-                        isFirst = tryWriteSeprator(fieldSB, isFirst);
-                        if (v) {
-                            fieldSB.append("True");
-                        } else {
-                            fieldSB.append("False");
+                case INT: {
+                    Long[] values = parsePlainDataLong(groups, ident, field);
+                    if (null != values && values.length > 0) {
+                        fieldSB.append(SchemeConf.getInstance().getUEOptions().codeOutputCsvObjectBegin);
+                        boolean isFirst = true;
+                        for (Long v : values) {
+                            isFirst = tryWriteSeprator(fieldSB, isFirst);
+                            fieldSB.append(v.intValue());
                         }
+                        fieldSB.append(SchemeConf.getInstance().getUEOptions().codeOutputCsvObjectEnd);
+                        ret = true;
                     }
-                    fieldSB.append(SchemeConf.getInstance().getUEOptions().codeOutputCsvObjectEnd);
-                    ret = true;
+                    break;
                 }
-                break;
-            }
-
-            case STRING:
-            case BYTES: {
-                String[] values = parsePlainDataString(groups, ident, field);
-                if (null != values && values.length > 0) {
-                    fieldSB.append(SchemeConf.getInstance().getUEOptions().codeOutputCsvObjectBegin);
-                    boolean isFirst = true;
-                    for (String v : values) {
-                        isFirst = tryWriteSeprator(fieldSB, isFirst);
-                        fieldSB.append("\"");
-                        if (v.length() >= 2 && (v.charAt(0) == '"' || v.charAt(0) == '\'')
-                                && v.charAt(0) == v.charAt(v.length() - 1)) {
-                            fieldSB.append(v.substring(1, v.length() - 1));
-                        } else {
+                case LONG: {
+                    Long[] values = parsePlainDataLong(groups, ident, field);
+                    if (null != values && values.length > 0) {
+                        fieldSB.append(SchemeConf.getInstance().getUEOptions().codeOutputCsvObjectBegin);
+                        boolean isFirst = true;
+                        for (Long v : values) {
+                            isFirst = tryWriteSeprator(fieldSB, isFirst);
                             fieldSB.append(v);
                         }
-                        fieldSB.append("\"");
+                        fieldSB.append(SchemeConf.getInstance().getUEOptions().codeOutputCsvObjectEnd);
+                        ret = true;
                     }
-                    fieldSB.append(SchemeConf.getInstance().getUEOptions().codeOutputCsvObjectEnd);
-                    ret = true;
+                    break;
                 }
-                break;
-            }
 
-            case MESSAGE: {
-                boolean hasListData = false;
-                if (groups.length > 0) {
-                    fieldSB.append(SchemeConf.getInstance().getUEOptions().codeOutputCsvObjectBegin);
-                    for (String v : groups) {
-                        String[] subGroups = splitPlainGroups(v, getPlainMessageSeparator(field));
-                        if (subGroups != null && subGroups.length > 0) {
-                            if (hasListData) {
-                                fieldSB.append(",");
-                            }
+                case FLOAT: {
+                    Double[] values = parsePlainDataDouble(groups, ident, field);
+                    if (null != values && values.length > 0) {
+                        fieldSB.append(SchemeConf.getInstance().getUEOptions().codeOutputCsvObjectBegin);
+                        boolean isFirst = true;
+                        for (Double v : values) {
+                            isFirst = tryWriteSeprator(fieldSB, isFirst);
+                            fieldSB.append(v.floatValue());
+                        }
+                        fieldSB.append(SchemeConf.getInstance().getUEOptions().codeOutputCsvObjectEnd);
+                        ret = true;
+                    }
+                    break;
+                }
 
-                            if (pickValueFieldCsvPlainField(fieldSB, subGroups, ident, field)) {
-                                hasListData = true;
+                case DOUBLE: {
+                    Double[] values = parsePlainDataDouble(groups, ident, field);
+                    if (null != values && values.length > 0) {
+                        fieldSB.append(SchemeConf.getInstance().getUEOptions().codeOutputCsvObjectBegin);
+                        boolean isFirst = true;
+                        for (Double v : values) {
+                            isFirst = tryWriteSeprator(fieldSB, isFirst);
+                            fieldSB.append(v);
+                        }
+                        fieldSB.append(SchemeConf.getInstance().getUEOptions().codeOutputCsvObjectEnd);
+                        ret = true;
+                    }
+                    break;
+                }
+
+                case BOOLEAN: {
+                    Boolean[] values = parsePlainDataBoolean(groups, ident, field);
+                    if (null != values && values.length > 0) {
+                        fieldSB.append(SchemeConf.getInstance().getUEOptions().codeOutputCsvObjectBegin);
+                        boolean isFirst = true;
+                        for (Boolean v : values) {
+                            isFirst = tryWriteSeprator(fieldSB, isFirst);
+                            if (v) {
+                                fieldSB.append("True");
                             } else {
+                                fieldSB.append("False");
+                            }
+                        }
+                        fieldSB.append(SchemeConf.getInstance().getUEOptions().codeOutputCsvObjectEnd);
+                        ret = true;
+                    }
+                    break;
+                }
+
+                case STRING:
+                case BYTES: {
+                    String[] values = parsePlainDataString(groups, ident, field);
+                    if (null != values && values.length > 0) {
+                        fieldSB.append(SchemeConf.getInstance().getUEOptions().codeOutputCsvObjectBegin);
+                        boolean isFirst = true;
+                        for (String v : values) {
+                            isFirst = tryWriteSeprator(fieldSB, isFirst);
+                            fieldSB.append("\"");
+                            if (v.length() >= 2 && (v.charAt(0) == '"' || v.charAt(0) == '\'')
+                                    && v.charAt(0) == v.charAt(v.length() - 1)) {
+                                fieldSB.append(v.substring(1, v.length() - 1));
+                            } else {
+                                fieldSB.append(v);
+                            }
+                            fieldSB.append("\"");
+                        }
+                        fieldSB.append(SchemeConf.getInstance().getUEOptions().codeOutputCsvObjectEnd);
+                        ret = true;
+                    }
+                    break;
+                }
+
+                case MESSAGE: {
+                    boolean hasListData = false;
+                    if (groups.length > 0) {
+                        fieldSB.append(SchemeConf.getInstance().getUEOptions().codeOutputCsvObjectBegin);
+                        for (String v : groups) {
+                            String[] subGroups = splitPlainGroups(v, getPlainMessageSeparator(field));
+                            if (subGroups != null && subGroups.length > 0) {
                                 if (hasListData) {
-                                    fieldSB.deleteCharAt(fieldSB.length() - 1);
+                                    fieldSB.append(",");
+                                }
+
+                                if (pickValueFieldCsvPlainField(fieldSB, subGroups, ident, field)) {
+                                    hasListData = true;
+                                } else {
+                                    if (hasListData) {
+                                        fieldSB.deleteCharAt(fieldSB.length() - 1);
+                                    }
                                 }
                             }
                         }
+
+                        fieldSB.append(SchemeConf.getInstance().getUEOptions().codeOutputCsvObjectEnd);
+                        ret = true;
                     }
-
-                    fieldSB.append(SchemeConf.getInstance().getUEOptions().codeOutputCsvObjectEnd);
-                    ret = true;
+                    break;
                 }
-                break;
-            }
 
-            default:
-                break;
+                default:
+                    break;
             }
 
             return ret;
         } else {
             switch (field.getType()) {
-            case INT: {
-                fieldSB.append(parsePlainDataLong(input.trim(), ident, field).intValue());
-                break;
-            }
+                case INT: {
+                    fieldSB.append(parsePlainDataLong(input.trim(), ident, field).intValue());
+                    break;
+                }
 
-            case LONG: {
-                fieldSB.append(parsePlainDataLong(input.trim(), ident, field));
-                break;
-            }
+                case LONG: {
+                    fieldSB.append(parsePlainDataLong(input.trim(), ident, field));
+                    break;
+                }
 
-            case FLOAT: {
-                fieldSB.append(parsePlainDataDouble(input.trim(), ident, field).floatValue());
-                break;
-            }
+                case FLOAT: {
+                    fieldSB.append(parsePlainDataDouble(input.trim(), ident, field).floatValue());
+                    break;
+                }
 
-            case DOUBLE: {
-                fieldSB.append(parsePlainDataDouble(input.trim(), ident, field));
-                break;
-            }
+                case DOUBLE: {
+                    fieldSB.append(parsePlainDataDouble(input.trim(), ident, field));
+                    break;
+                }
 
-            case BOOLEAN: {
-                fieldSB.append(parsePlainDataBoolean(input.trim(), ident, field));
-                break;
-            }
+                case BOOLEAN: {
+                    fieldSB.append(parsePlainDataBoolean(input.trim(), ident, field));
+                    break;
+                }
 
-            case STRING:
-            case BYTES: {
-                fieldSB.append("\"");
-                fieldSB.append(parsePlainDataString(input.trim(), ident, field));
-                fieldSB.append("\"");
-                break;
-            }
+                case STRING:
+                case BYTES: {
+                    fieldSB.append("\"");
+                    fieldSB.append(parsePlainDataString(input.trim(), ident, field));
+                    fieldSB.append("\"");
+                    break;
+                }
 
-            case MESSAGE: {
-                String[] groups = splitPlainGroups(input.trim(), getPlainMessageSeparator(field));
-                pickValueFieldCsvPlainField(fieldSB, groups, ident, field);
-                break;
-            }
+                case MESSAGE: {
+                    String[] groups = splitPlainGroups(input.trim(), getPlainMessageSeparator(field));
+                    pickValueFieldCsvPlainField(fieldSB, groups, ident, field);
+                    break;
+                }
 
-            default:
-                break;
+                default:
+                    break;
             }
 
             return true;
@@ -1072,73 +1073,73 @@ public class DataDstUECsv extends DataDstUEBase {
         }
 
         switch (fd.getType()) {
-        case INT:
-        case LONG:
-        case FLOAT:
-        case DOUBLE: {
-            sb.append("0");
-            break;
-        }
-        case BOOLEAN: {
-            sb.append("False");
-            break;
-        }
-        case STRING:
-        case BYTES: {
-            if (fillEmpty) {
-                sb.append("\"\"");
-            } else {
-                return false;
+            case INT:
+            case LONG:
+            case FLOAT:
+            case DOUBLE: {
+                sb.append("0");
+                break;
             }
-
-            break;
-        }
-        case MESSAGE: {
-            sb.append(SchemeConf.getInstance().getUEOptions().codeOutputCsvObjectBegin);
-
-            HashSet<String> dumpedOneof = null;
-            if (fd.getSortedOneofs().size() > 0) {
-                dumpedOneof = new HashSet<String>();
+            case BOOLEAN: {
+                sb.append("False");
+                break;
             }
-
-            boolean isFirstField = true;
-            for (DataDstFieldDescriptor subField : fd.getSortedFields()) {
-                if (isFirstField) {
-                    isFirstField = false;
+            case STRING:
+            case BYTES: {
+                if (fillEmpty) {
+                    sb.append("\"\"");
                 } else {
-                    sb.append(",");
+                    return false;
                 }
 
-                // 需要dump一次oneof字段
-                if (null != subField.getReferOneof()) {
-                    String oneofVarName = getIdentName(subField.getReferOneof().getName());
-                    if (!dumpedOneof.contains(oneofVarName)) {
-                        dumpedOneof.add(oneofVarName);
-                        sb.append(oneofVarName);
-                        sb.append("=");
-                        pickValueFieldCsvDefaultImpl(sb, subField.getReferOneof(), true);
+                break;
+            }
+            case MESSAGE: {
+                sb.append(SchemeConf.getInstance().getUEOptions().codeOutputCsvObjectBegin);
+
+                HashSet<String> dumpedOneof = null;
+                if (fd.getSortedOneofs().size() > 0) {
+                    dumpedOneof = new HashSet<String>();
+                }
+
+                boolean isFirstField = true;
+                for (DataDstFieldDescriptor subField : fd.getSortedFields()) {
+                    if (isFirstField) {
+                        isFirstField = false;
+                    } else {
                         sb.append(",");
+                    }
+
+                    // 需要dump一次oneof字段
+                    if (null != subField.getReferOneof()) {
+                        String oneofVarName = getIdentName(subField.getReferOneof().getName());
+                        if (!dumpedOneof.contains(oneofVarName)) {
+                            dumpedOneof.add(oneofVarName);
+                            sb.append(oneofVarName);
+                            sb.append("=");
+                            pickValueFieldCsvDefaultImpl(sb, subField.getReferOneof(), true);
+                            sb.append(",");
+                        }
+                    }
+
+                    sb.append(getIdentName(subField.getName()));
+                    sb.append("=");
+                    if (subField.isList()) { // empty map is just like empty list
+                        sb.append(SchemeConf.getInstance().getUEOptions().codeOutputCsvObjectBegin);
+                        sb.append(SchemeConf.getInstance().getUEOptions().codeOutputCsvObjectEnd);
+                    } else if (subField.getType() == JAVA_TYPE.STRING || subField.getType() == JAVA_TYPE.BYTES) {
+                        sb.append("\"\"");
+                    } else {
+                        // 嵌套默认值总是要输出空值
+                        pickValueFieldCsvDefaultImpl(sb, subField, true);
                     }
                 }
 
-                sb.append(getIdentName(subField.getName()));
-                sb.append("=");
-                if (subField.isList()) { // empty map is just like empty list
-                    sb.append(SchemeConf.getInstance().getUEOptions().codeOutputCsvObjectBegin);
-                    sb.append(SchemeConf.getInstance().getUEOptions().codeOutputCsvObjectEnd);
-                } else if (subField.getType() == JAVA_TYPE.STRING || subField.getType() == JAVA_TYPE.BYTES) {
-                    sb.append("\"\"");
-                } else {
-                    // 嵌套默认值总是要输出空值
-                    pickValueFieldCsvDefaultImpl(sb, subField, true);
-                }
+                sb.append(SchemeConf.getInstance().getUEOptions().codeOutputCsvObjectEnd);
+                break;
             }
-
-            sb.append(SchemeConf.getInstance().getUEOptions().codeOutputCsvObjectEnd);
-            break;
-        }
-        default:
-            return false;
+            default:
+                return false;
         }
 
         return true;

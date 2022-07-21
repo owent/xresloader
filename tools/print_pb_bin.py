@@ -6,7 +6,7 @@ import re
 import string
 import glob
 import sys
-
+import sysconfig
 
 if sys.version_info[0] == 2:
     def CmdArgsGetParser(usage):
@@ -34,6 +34,44 @@ else:
     def CmdArgsParse(parser):
         ret = parser.parse_args()
         return (ret, ret.REMAINDER)
+
+def add_package_prefix_paths(packag_paths):
+    """See https://docs.python.org/3/install/#how-installation-works"""
+    append_paths = []
+    for path in packag_paths:
+        add_package_bin_path = os.path.join(path, "bin")
+        if os.path.exists(add_package_bin_path):
+            if sys.platform.lower() == "win32":
+                os.environ[
+                    "PATH"] = add_package_bin_path + ";" + os.environ["PATH"]
+            else:
+                os.environ[
+                    "PATH"] = add_package_bin_path + ":" + os.environ["PATH"]
+
+        add_package_lib_path = os.path.join(
+            path,
+            "lib",
+            "python{0}".format(sysconfig.get_python_version()),
+            "site-packages",
+        )
+        if os.path.exists(add_package_lib_path):
+            append_paths.append(add_package_lib_path)
+
+        add_package_lib64_path = os.path.join(
+            path,
+            "lib64",
+            "python{0}".format(sysconfig.get_python_version()),
+            "site-packages",
+        )
+        if os.path.exists(add_package_lib64_path):
+            append_paths.append(add_package_lib64_path)
+
+        add_package_lib_path_for_win = os.path.join(path, "Lib",
+                                                    "site-packages")
+        if os.path.exists(add_package_lib_path_for_win):
+            append_paths.append(add_package_lib_path_for_win)
+    append_paths.extend(sys.path)
+    sys.path = append_paths
 
 def main():
     from google.protobuf import descriptor_pb2 as pb2
@@ -64,6 +102,18 @@ def main():
         help="set xresloader header pb file(default: {0})".format(os.path.relpath(default_header_pb_file, os.getcwd())),
         dest="header_pb_file",
         default=default_header_pb_file)
+    CmdArgsAddOption(parser,
+        "--add_path",
+        action="append",
+        help="Append python search PATH(It can be used to set pure python protobuf implementation)",
+        dest="add_path",
+        default=[])
+    CmdArgsAddOption(parser,
+        "--add_package_prefix",
+        action="append",
+        help="Append python search PATH(It can be used to set pure python protobuf implementation)",
+        dest="add_package_prefix",
+        default=[])
 
     (options, left_args) = CmdArgsParse(parser)
     if options.version:
@@ -86,6 +136,12 @@ def main():
     pb_fds_header_clazz = header_message_desc["org.xresloader.pb.xresloader_datablocks"]
 
     header_inst = pb_fds_header_clazz.FromString(open(left_args[1], 'rb').read())
+
+    if options.add_path:
+        prepend_paths = [x for x in options.add_path]
+        prepend_paths.extend(sys.path)
+        sys.path = prepend_paths
+    add_package_prefix_paths(options.add_package_prefix)
 
     print('==================================================================')
     print(MessageToString(header_inst.header, as_utf8=True, as_one_line=options.as_one_line, use_short_repeated_primitives=True))

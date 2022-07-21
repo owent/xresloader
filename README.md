@@ -1,6 +1,6 @@
 # xresloader
 
-[![GitHub Actions status](https://github.com/xresloader/xresloader/workflows/Master%20Building/badge.svg)](https://github.com/xresloader/xresloader/actions)
+[![GitHub Actions status](https://github.com/xresloader/xresloader/workflows/Main%20Building/badge.svg)](https://github.com/xresloader/xresloader/actions)
 [![Release](https://github.com/xresloader/xresloader/workflows/Release/badge.svg)](https://github.com/xresloader/xresloader/actions?query=workflow%3ARelease)
 [![GitHub release (latest by date)](https://img.shields.io/github/v/release/xresloader/xresloader)](https://github.com/xresloader/xresloader/releases)
 

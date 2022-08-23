@@ -321,7 +321,11 @@ public class ExcelEngine {
         if (null != rowWrapper.getCustomRowIndex()) {
             String val = rowWrapper.getCustomRowIndex().getCellValue(col.index);
             if (val != null && !val.isEmpty()) {
-                out.set(val);
+                if (DataSrcImpl.getOurInstance().isInitialized() && ProgramOptions.getInstance().enableStringMacro) {
+                    out.set(tryMacro(val));
+                } else {
+                    out.set(val);
+                }
             }
             return;
         }
@@ -357,7 +361,11 @@ public class ExcelEngine {
                     cv = null;
                 }
             } else {
-                out.set(c.toString());
+                if (DataSrcImpl.getOurInstance().isInitialized() && ProgramOptions.getInstance().enableStringMacro) {
+                    out.set(tryMacro(c.toString()));
+                } else {
+                    out.set(c.toString());
+                }
                 return;
             }
         }
@@ -438,10 +446,13 @@ public class ExcelEngine {
                 }
                 break;
             case STRING:
-                // return ret.set(tryMacro(cal_cell2str(c, cv).trim()));
                 String val = cal_cell2str(c, cv).trim();
                 if (!val.isEmpty()) {
-                    out.set(val);
+                    if (DataSrcImpl.getOurInstance().isInitialized() && ProgramOptions.getInstance().enableStringMacro) {
+                        out.set(tryMacro(val));
+                    } else {
+                        out.set(val);
+                    }
                 }
                 break;
             default:

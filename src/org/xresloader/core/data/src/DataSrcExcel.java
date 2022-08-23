@@ -31,8 +31,9 @@ public class DataSrcExcel extends DataSrcImpl {
 
     private HashMap<String, String> macros = null;
     private LinkedList<DataSheetInfo> tables = new LinkedList<DataSheetInfo>();
-    DataSheetInfo current = null;
-    int recordNumber = 0;
+    private DataSheetInfo current = null;
+    private int recordNumber = 0;
+    private boolean initialized = false;
 
     public DataSrcExcel() {
         super();
@@ -46,7 +47,16 @@ public class DataSrcExcel extends DataSrcImpl {
         if (ret < 0)
             return ret;
 
-        return init_sheet();
+        ret = init_sheet();
+        if (ret >= 0) {
+            initialized = true;
+        }
+        return ret;
+    }
+
+    @Override
+    public boolean isInitialized() {
+        return this.initialized;
     }
 
     private class MacroFileCache {
@@ -114,15 +124,12 @@ public class DataSrcExcel extends DataSrcImpl {
                 file = new File(file_path);
             }
 
-            Sheet tb = ExcelEngine.openUserModuleSheet(file, src.table_name);
+            ExcelEngine.CustomDataTableIndex tb = ExcelEngine.openStreamTableIndex(file, src.table_name);
             if (null == tb) {
                 ProgramOptions.getLoger().warn("Open macro source \"%s\" or sheet %s failed.", file_path,
                         src.table_name);
                 continue;
             }
-
-            ExcelEngine.FormulaWrapper formula = new ExcelEngine.FormulaWrapper(
-                    tb.getWorkbook().getCreationHelper().createFormulaEvaluator());
 
             int row_num = tb.getLastRowNum() + 1;
             for (int i = src.data_row - 1; i < row_num; ++i) {
@@ -134,7 +141,7 @@ public class DataSrcExcel extends DataSrcImpl {
 
                 column_ident.index = src.data_col;
                 data_cache = getStringCache("");
-                ExcelEngine.cell2s(data_cache, rowWrapper, column_ident, formula);
+                ExcelEngine.cell2s(data_cache, rowWrapper, column_ident, null);
 
                 String val = data_cache.get();
                 if (null != key && null != val && !key.isEmpty() && !val.isEmpty()) {

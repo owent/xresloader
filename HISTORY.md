@@ -4,7 +4,7 @@
 Unrelease
 ------
 
-1. 更新 `protobuf` 到 3.21.2
+1. 更新 `protobuf` 到 3.21.5
 2. 更新 `org.apache.logging.log4j` 到 2.18.0
 3. 更新 `org.apache.poi` 到 5.2.2
 4. 更新 `org.apache.santuario` 到 3.0.0
@@ -17,6 +17,8 @@ Unrelease
 11. 更新 `org.msgpack.msgpack-core` 到 0.9.3
 12. 更新 `org.apache.pdfbox` 到 2.0.26
 13. 抽离出协议为单独的子模块
+14. 默认使用 `--disable-excel-formular` 关闭公式实时计算，使用更高效的索引器
+15. 增加 `--enable-string-macro` 用于让Macro(文本替换)，对字符串类型生效
 
 2.11.0-RC2
 ------

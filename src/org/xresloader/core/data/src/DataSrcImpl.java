@@ -76,6 +76,8 @@ public abstract class DataSrcImpl {
         return -41;
     }
 
+    public abstract boolean isInitialized();
+
     /**
      * @brief 获取下一个数据源
      * @note 每次调用这个函数之后最好重做一次列名映射，否则可能数据不匹配

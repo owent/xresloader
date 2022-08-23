@@ -156,7 +156,11 @@ public abstract class DataDstImpl {
             return null;
         }
 
-        return input.trim();
+        if(DataSrcImpl.getOurInstance().isInitialized() && ProgramOptions.getInstance().enableStringMacro) {
+            return ExcelEngine.tryMacro(input.trim());
+        } else {
+            return input.trim();
+        }
     }
 
     static public String[] parsePlainDataString(String[] groups, IdentifyDescriptor ident,

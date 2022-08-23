@@ -45,10 +45,11 @@ public class ProgramOptions {
     public FileType dataSourceType;
     public String[] dataSourceMetas = null;
     public String dataSourceMetaDelimiter = "\\|";
+    public boolean enableStringMacro = false;
     public RenameRule renameRule = null;
     public boolean requireMappingAllFields = false;
     public boolean enableAliasMapping = false;
-    public boolean enableFormular = true;
+    public boolean enableFormular = false;
     public ListStripRule stripListRule = ListStripRule.STRIP_EMPTY_ALL;
     public int prettyIndent = 0;
     public boolean enableStdin = false;
@@ -94,10 +95,11 @@ public class ProgramOptions {
         dataSourceType = FileType.BIN;
         dataSourceMetas = null;
         dataSourceMetaDelimiter = "\\|";
+        enableStringMacro = false;
         renameRule = null;
         requireMappingAllFields = false;
         enableAliasMapping = false;
-        enableFormular = true;
+        enableFormular = false;
         stripListRule = ListStripRule.STRIP_EMPTY_ALL;
         prettyIndent = 0;
         enableStdin = false;
@@ -156,6 +158,9 @@ public class ProgramOptions {
                         "regex delimiter for description meta when data source file is [NOTHING].(default: %s)",
                         getInstance().dataSourceMetaDelimiter))
                 .hasArg().argName("DELTMITER").build());
+
+        options.addOption(null, "enable-string-macro", false,
+                "macro will also apply to string value.");
 
         options.addOption("v", "version", false, "print version and exit");
 
@@ -259,6 +264,10 @@ public class ProgramOptions {
         if (cmd.hasOption('v')) {
             System.out.println(getVersion());
             return 1;
+        }
+
+        if(cmd.hasOption("enable-string-macro")) {
+            enableStringMacro = true;
         }
 
         if (cmd.hasOption("enable-empty-list") || cmd.hasOption("list-keep-empty")) {

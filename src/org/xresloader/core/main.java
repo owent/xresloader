@@ -295,7 +295,7 @@ public class main {
                 continue;
             }
 
-            ProgramOptions.getLoger().info("Convert from \"%s\" to \"%s\" success.(charset: %s, %d data row(s))", sn,
+            ProgramOptions.getLoger().info("Convert from \"%s\" to \"%s\" success.(charset: %s, %d excel row(s))", sn,
                     SchemeConf.getInstance().getOutputFile(), SchemeConf.getInstance().getKey().getEncoding(),
                     ds.getRecordNumber());
         }

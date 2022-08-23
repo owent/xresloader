@@ -77,39 +77,40 @@ echo "
 
 ### 可用参数列表
 
-| 参数选项                 | 描述                     | 说明                                                                                                      |
-| ------------------------ | ------------------------ | --------------------------------------------------------------------------------------------------------- |
-| -h --help                | 帮助信息                 | 显示帮助和支持的参数列表                                                                                  |
-| -t --output-type         | 输出类型                 | bin（默认值）,lua,msgpack,json,xml,javascript,js,ue-csv,ue-json                                           |
-| -p --proto               | 协议描述类型             | protobuf(默认值),capnproto(暂未实现),flatbuffer(暂未实现)                                                 |
-| -f --proto-file          | 协议描述文件             |                                                                                                           |
-| -o --output-dir          | 输出目录                 | 默认为当前目录                                                                                            |
-| -d --data-src-dir        | 数据源根目录             | 默认为当前目录                                                                                            |
-| -s --src-file            | 数据源描述文件           | 后缀可以是 .xls, .xlsx, .cvs, .xlsm, .ods, .ini, .cfg, .conf, .json                                       |
-| -m --src-meta            | 数据源描述表             | 可多个                                                                                                    |
-| -v --version             | 打印版本号               |                                                                                                           |
-| -n --rename              | 重命名输出文件名         | 正则表达式 （如：/(?i)\\.bin$/\\.lua/）                                                                   |
-| --require-mapping-all    | 开启所有字段映射检查     | 开启所有字段映射检查后，转出结构中所有的字段都必须配置映射关系，数组字段至少要有一个元素                  |
-| --enable-alias-mapping   | 开启别名匹配             | 映射Excel列到目标数据结构，允许使用别名                                                                   |
-| -c --const-print         | 输出协议描述中的常量     | 参数为字符串，表示输出的文件名                                                                            |
-| -i --option-print        | 输出协议描述中的选项     | 参数为字符串，表示输出的文件名                                                                            |
-| -r --descriptor-print    | 输出完整协议描述信息     | 参数为字符串，表示输出的文件名                                                                            |
-| -a --data-version        | 设置数据版本号           | 参数为字符串，表示输出的数据的data_ver字段。如果不设置将按执行时间自动生成一个                            |
-| --pretty                 | 格式化输出               | 参数为整数，0代表关闭美化输出功能，大于0表示格式化时的缩进量                                              |
-| --enable-excel-formular  | 开启Excel公式实时计算    | 默认开启，开启公式实时计算会减慢转表速度                                                                  |
-| --disable-excel-formular | 关闭Excel公式实时计算    | 关闭公式实时计算，会使用新的流式索引器，大幅加快转表速度，降低内存开销。（注: 也会关闭对日期格式的探测）  |
-| --disable-empty-list     | 移除数组空项             | (废弃)，请使用 ```--list-strip-all-empty```                                                               |
-| --enable-empty-list      | 保留全部数组空项         | (废弃)，请使用 ```--list-keep-empty```                                                                    |
-| --list-strip-all-empty   | 移除数组空项             | (默认) 移除数组空项，自动删除Excel中的未填充数据，不会转出到输出文件中                                    |
-| --list-keep-empty        | 保留全部数组空项         | 保留全部数组空项，未填充数据将使用默认的空值来填充，并转出到输出文件中                                    |
-| --list-strip-empty-tail  | 移除数组尾部空项         | 移除数组尾部空项，自动删除尾部的未填充数据，其他的未填充数据将使用默认的空值，并转出到输出文件中          |
-| --stdin                  | 通过标准输入批量转表     | 通过标准输入批量转表，参数可上面的一样,每行一项，字符串参数可以用单引号或双引号包裹，但是都不支持转义     |
-| --lua-global             | lua输出写到全局表        | 输出协议描述中的常量到Lua脚本时，同时导入符号到全局表_G中（仅对常量导出有效）                             |
-| --lua-module             | lua输出使用module写出    | 输出Lua脚本时，使用 module(模块名, package.seeall) 导出到全局                                             |
-| --xml-root               | xml输出的根节点tag       | 输出格式为xml时的根节点的TagName                                                                          |
-| --javascript-export      | 导出javascript数据的模式 | 可选项(nodejs: 使用兼容nodejs的exports, amd: 使用兼容amd的define, 其他: 写入全局(window或global))         |
-| --javascript-global      | 导出javascript全局空间   | 导出数据到全局时，可以指定写入的名字空间                                                                  |
-| --ignore-unknown-dependency | 忽略未知的依赖项      | 忽略未知的输入协议的依赖项(>=2.9.0版                                                                      |
+| 参数选项                    | 描述                          | 说明                                                                                                     |
+| --------------------------- | ----------------------------- | -------------------------------------------------------------------------------------------------------- |
+| -h --help                   | 帮助信息                      | 显示帮助和支持的参数列表                                                                                 |
+| -t --output-type            | 输出类型                      | bin（默认值）,lua,msgpack,json,xml,javascript,js,ue-csv,ue-json                                          |
+| -p --proto                  | 协议描述类型                  | protobuf(默认值),capnproto(暂未实现),flatbuffer(暂未实现)                                                |
+| -f --proto-file             | 协议描述文件                  |                                                                                                          |
+| -o --output-dir             | 输出目录                      | 默认为当前目录                                                                                           |
+| -d --data-src-dir           | 数据源根目录                  | 默认为当前目录                                                                                           |
+| -s --src-file               | 数据源描述文件                | 后缀可以是 .xls, .xlsx, .cvs, .xlsm, .ods, .ini, .cfg, .conf, .json                                      |
+| -m --src-meta               | 数据源描述表                  | 可多个                                                                                                   |
+| --enable-string-macro       | 设置Macro表也对字符串类型生效 | 默认不生效                                                                                               |
+| -v --version                | 打印版本号                    |                                                                                                          |
+| -n --rename                 | 重命名输出文件名              | 正则表达式 （如：/(?i)\\.bin$/\\.lua/）                                                                  |
+| --require-mapping-all       | 开启所有字段映射检查          | 开启所有字段映射检查后，转出结构中所有的字段都必须配置映射关系，数组字段至少要有一个元素                 |
+| --enable-alias-mapping      | 开启别名匹配                  | 映射Excel列到目标数据结构，允许使用别名                                                                  |
+| -c --const-print            | 输出协议描述中的常量          | 参数为字符串，表示输出的文件名                                                                           |
+| -i --option-print           | 输出协议描述中的选项          | 参数为字符串，表示输出的文件名                                                                           |
+| -r --descriptor-print       | 输出完整协议描述信息          | 参数为字符串，表示输出的文件名                                                                           |
+| -a --data-version           | 设置数据版本号                | 参数为字符串，表示输出的数据的data_ver字段。如果不设置将按执行时间自动生成一个                           |
+| --pretty                    | 格式化输出                    | 参数为整数，0代表关闭美化输出功能，大于0表示格式化时的缩进量                                             |
+| --enable-excel-formular     | 开启Excel公式实时计算         | 开启公式实时计算会减慢转表速度(2.11-RC3版本后默认关闭)                                                   |
+| --disable-excel-formular    | 关闭Excel公式实时计算         | 关闭公式实时计算，会使用新的流式索引器，大幅加快转表速度，降低内存开销。（注: 也会关闭对日期格式的探测） |
+| --disable-empty-list        | 移除数组空项                  | (废弃)，请使用 ```--list-strip-all-empty```                                                              |
+| --enable-empty-list         | 保留全部数组空项              | (废弃)，请使用 ```--list-keep-empty```                                                                   |
+| --list-strip-all-empty      | 移除数组空项                  | (默认) 移除数组空项，自动删除Excel中的未填充数据，不会转出到输出文件中                                   |
+| --list-keep-empty           | 保留全部数组空项              | 保留全部数组空项，未填充数据将使用默认的空值来填充，并转出到输出文件中                                   |
+| --list-strip-empty-tail     | 移除数组尾部空项              | 移除数组尾部空项，自动删除尾部的未填充数据，其他的未填充数据将使用默认的空值，并转出到输出文件中         |
+| --stdin                     | 通过标准输入批量转表          | 通过标准输入批量转表，参数可上面的一样,每行一项，字符串参数可以用单引号或双引号包裹，但是都不支持转义    |
+| --lua-global                | lua输出写到全局表             | 输出协议描述中的常量到Lua脚本时，同时导入符号到全局表_G中（仅对常量导出有效）                            |
+| --lua-module                | lua输出使用module写出         | 输出Lua脚本时，使用 module(模块名, package.seeall) 导出到全局                                            |
+| --xml-root                  | xml输出的根节点tag            | 输出格式为xml时的根节点的TagName                                                                         |
+| --javascript-export         | 导出javascript数据的模式      | 可选项(nodejs: 使用兼容nodejs的exports, amd: 使用兼容amd的define, 其他: 写入全局(window或global))        |
+| --javascript-global         | 导出javascript全局空间        | 导出数据到全局时，可以指定写入的名字空间                                                                 |
+| --ignore-unknown-dependency | 忽略未知的依赖项              | 忽略未知的输入协议的依赖项(>=2.9.0版                                                                     |
 
 ### 协议类型
 
@@ -129,25 +130,25 @@ echo "
 
 ## 数据源描述表配置项及示例
 
-| 字段                  | 简介                                                              | 主配置              | 次配置          | 补充配置        | 说明                                                                                                                |
-| --------------------- | ----------------------------------------------------------------- | ------------------- | --------------- | --------------- | ------------------------------------------------------------------------------------------------------------------- |
-| DataSource            | 配置数据源(主配置:文件路径,次配置:表名,补充配置:起始行号，列号)   | ./资源转换示例.xlsx | kind            | 3,1             | **必须**，可多个。多个则表示把多个Excel表数据合并再生成配置输出，这意味着这多个Excel表的描述Key的顺序和个数必须相同 |
-| MacroSource           | 元数据数据源(主配置:文件路径,次配置:表名,补充配置:起始行号，列号) | ./资源转换示例.xlsx | macro           | 2,1             | *可选*                                                                                                              |
+| 字段                  | 简介                                                               | 主配置              | 次配置          | 补充配置        | 说明                                                                                                                |
+| --------------------- | ------------------------------------------------------------------ | ------------------- | --------------- | --------------- | ------------------------------------------------------------------------------------------------------------------- |
+| DataSource            | 配置数据源(主配置:文件路径,次配置:表名,补充配置:起始行号，列号)    | ./资源转换示例.xlsx | kind            | 3,1             | **必须**，可多个。多个则表示把多个Excel表数据合并再生成配置输出，这意味着这多个Excel表的描述Key的顺序和个数必须相同 |
+| MacroSource           | 元数据数据源(主配置:文件路径,次配置:表名,补充配置:起始行号，列号)  | ./资源转换示例.xlsx | macro           | 2,1             | *可选*                                                                                                              |
 | 编程接口配置          |
-| ProtoName             | 协议描述名称                                                      | role_cfg            |                 |                 | **必须**, 这个名字可以直接是类型名称[MessageName]，也可以是[PackageName].[MessageName]                              |
-| OutputFile            | 输出文件                                                          | role_cfg.bin        |                 |                 | **必须**                                                                                                            |
-| KeyRow                | 字段名描述行                                                      | 2                   |                 |                 | **必须**                                                                                                            |
-| KeyCase               | 字段名大小写                                                      | 小写                |                 |                 | 大写/小写/不变(大小写转换，如果不需要则留空或小写)                                                                  |
-| KeyWordSplit          | 字段名分词字符                                                    | _                   |                 |                 | *可选*,字段名映射时单词之间填充的字符串,不需要请留空                                                                |
-| KeyPrefix             | 字段名固定前缀                                                    |                     |                 |                 | *可选*,字段名映射时附加的前缀,不需要请留空                                                                          |
-| KeySuffix             | 字段名固定后缀                                                    |                     |                 |                 | *可选*,字段名映射时附加的后缀,不需要请留空                                                                          |
-| KeyWordRegex          | 分词规则(判断规则,移除分词符号规则,前缀过滤规则)                  | [A-Z_\$ \t\r\n]     | [_\$ \t\r\n]    | [a-zA-Z_\$]     | *(可选)*,字段名映射时单词的分词规则,正则表达式,不需要请留空                                                         |
-| Encoding              | 编码转换                                                          | UTF-8               |                 |                 | 注：Google的protobuf库的代码里写死了UTF-8，故而该选项对Protobuf的二进制输出无效                                     |
-| UeCfg-UProperty       | UnrealEngine配置支持的字段属性                                    | 字段分组            | 蓝图权限        | 编辑权限        | *可选*,默认值: XResConfig\|BlueprintReadOnly\|EditAnywhere                                                          |
-| UeCfg-CaseConvert     | 是否开启驼峰命名转换（默认开启）                                  | true/false          |                 |                 | *可选*,开启后将使用首字母大写的驼峰命名法生成字段名和类名                                                           |
-| UeCfg-CodeOutput      | 代码输出目录                                                      | 代码输出根目录      | Publich目录前缀 | Private目录前缀 | *可选*                                                                                                              |
-| UeCfg-RecursiveMode   | 是否使用嵌套模式（嵌套模式会保留原始的结构，可能需要配合插件使用）| true/false          |                 |                 | *可选*                                                                                                              |
-| UeCfg-DestinationPath | 资源输出目录（uassert目录，默认会根据代码输出目录猜测）           | 资源输出目录        |                 |                 | *可选*                                                                                                              |
+| ProtoName             | 协议描述名称                                                       | role_cfg            |                 |                 | **必须**, 这个名字可以直接是类型名称[MessageName]，也可以是[PackageName].[MessageName]                              |
+| OutputFile            | 输出文件                                                           | role_cfg.bin        |                 |                 | **必须**                                                                                                            |
+| KeyRow                | 字段名描述行                                                       | 2                   |                 |                 | **必须**                                                                                                            |
+| KeyCase               | 字段名大小写                                                       | 小写                |                 |                 | 大写/小写/不变(大小写转换，如果不需要则留空或小写)                                                                  |
+| KeyWordSplit          | 字段名分词字符                                                     | _                   |                 |                 | *可选*,字段名映射时单词之间填充的字符串,不需要请留空                                                                |
+| KeyPrefix             | 字段名固定前缀                                                     |                     |                 |                 | *可选*,字段名映射时附加的前缀,不需要请留空                                                                          |
+| KeySuffix             | 字段名固定后缀                                                     |                     |                 |                 | *可选*,字段名映射时附加的后缀,不需要请留空                                                                          |
+| KeyWordRegex          | 分词规则(判断规则,移除分词符号规则,前缀过滤规则)                   | [A-Z_\$ \t\r\n]     | [_\$ \t\r\n]    | [a-zA-Z_\$]     | *(可选)*,字段名映射时单词的分词规则,正则表达式,不需要请留空                                                         |
+| Encoding              | 编码转换                                                           | UTF-8               |                 |                 | 注：Google的protobuf库的代码里写死了UTF-8，故而该选项对Protobuf的二进制输出无效                                     |
+| UeCfg-UProperty       | UnrealEngine配置支持的字段属性                                     | 字段分组            | 蓝图权限        | 编辑权限        | *可选*,默认值: XResConfig\|BlueprintReadOnly\|EditAnywhere                                                          |
+| UeCfg-CaseConvert     | 是否开启驼峰命名转换（默认开启）                                   | true/false          |                 |                 | *可选*,开启后将使用首字母大写的驼峰命名法生成字段名和类名                                                           |
+| UeCfg-CodeOutput      | 代码输出目录                                                       | 代码输出根目录      | Publich目录前缀 | Private目录前缀 | *可选*                                                                                                              |
+| UeCfg-RecursiveMode   | 是否使用嵌套模式（嵌套模式会保留原始的结构，可能需要配合插件使用） | true/false          |                 |                 | *可选*                                                                                                              |
+| UeCfg-DestinationPath | 资源输出目录（uassert目录，默认会根据代码输出目录猜测）            | 资源输出目录        |                 |                 | *可选*                                                                                                              |
 
 ### 数据源描述的特别说明
 
@@ -267,39 +268,39 @@ Excel里的Key使用@后缀的字段名，@后面的部分都属于验证器。�
 
 #### Protobuf插件 - Message插件
 
-|            插件名称                           |                   插件功能                    |
-| :-------------------------------------------: | :-------------------------------------------: |
-| org.xresloader.msg_description                | 消息体描述信息，会写入输出的header中和代码中  |
-| org.xresloader.msg_require_mapping_all        | 设置message的所有字段必须被全部映射           |
-| org.xresloader.msg_separator                  | Plain模式字段分隔符，可指定多个，用于在一个单元格内配置复杂格式时的分隔符列表，默认值: ```,;|``` |
-| org.xresloader.ue.helper                      | 生成UE Utility代码的类名后缀                  |
+|                插件名称                |                                           插件功能                                           |
+| :------------------------------------: | :------------------------------------------------------------------------------------------: |
+|     org.xresloader.msg_description     |                         消息体描述信息，会写入输出的header中和代码中                         |
+| org.xresloader.msg_require_mapping_all |                             设置message的所有字段必须被全部映射                              |
+|      org.xresloader.msg_separator      | Plain模式字段分隔符，可指定多个，用于在一个单元格内配置复杂格式时的分隔符列表，默认值: ```,; | ``` |
+|        org.xresloader.ue.helper        |                                 生成UE Utility代码的类名后缀                                 |
 
 #### Protobuf插件 - Field插件
 
 |             插件名称             |                                                      插件功能                                                      |
 | :------------------------------: | :----------------------------------------------------------------------------------------------------------------: |
-| org.xresloader.verifier          | 验证器，可填范围(log-high),message名，enum名。多个由 ```|``` 分隔。任意验证器通过检查则认为数据有效                |
-| org.xresloader.field_description | 字段描述信息，会写入输出的header中和代码中                                                                         |
-| org.xresloader.field_alias       | 字段别名，配合 **验证器** 功能，允许在数据源中直接填写别名来配置数据                                               |
-| org.xresloader.field_ratio       | 字段放大，用于比如配置百分率为 0.12，当 org.xresloader.field_ratio=100时转出的数据为12                             |
-| org.xresloader.field_separator   | Plain模式分隔符，可指定多个，用于在一个单元格内配置复杂格式时的分隔符列表，默认值: ```,;|```                       |
-| org.xresloader.field_required    | 设置字段为 **required** ，用于向proto3提供，proto2的 **required** 约束                                             |
-| org.xresloader.ue.key_tag        | 生成UE代码时，如果需要支持多个Key组合成一个Name，用这个字段指定系数（必须大于0）                                   |
-| org.xresloader.ue.ueTypeName     | 生成UE代码时，如果指定了这个字段，那么生成的字段类型将是 ```TSoftObjectPtr<ueTypeName>``` , 并且支持蓝图中直接引用 |
+|     org.xresloader.verifier      |                              验证器，可填范围(log-high),message名，enum名。多个由 ```                              | ``` 分隔。任意验证器通过检查则认为数据有效 |
+| org.xresloader.field_description |                                     字段描述信息，会写入输出的header中和代码中                                     |
+|    org.xresloader.field_alias    |                        字段别名，配合 **验证器** 功能，允许在数据源中直接填写别名来配置数据                        |
+|    org.xresloader.field_ratio    |               字段放大，用于比如配置百分率为 0.12，当 org.xresloader.field_ratio=100时转出的数据为12               |
+|  org.xresloader.field_separator  |              Plain模式分隔符，可指定多个，用于在一个单元格内配置复杂格式时的分隔符列表，默认值: ```,;              | ```                                        |
+|  org.xresloader.field_required   |                       设置字段为 **required** ，用于向proto3提供，proto2的 **required** 约束                       |
+|    org.xresloader.ue.key_tag     |                  生成UE代码时，如果需要支持多个Key组合成一个Name，用这个字段指定系数（必须大于0）                  |
+|   org.xresloader.ue.ueTypeName   | 生成UE代码时，如果指定了这个字段，那么生成的字段类型将是 ```TSoftObjectPtr<ueTypeName>``` , 并且支持蓝图中直接引用 |
 
 #### Protobuf插件 - EnumValue插件
 
-|             插件名称             |                                                      插件功能                                                      |
-| :------------------------------: | :----------------------------------------------------------------------------------------------------------------: |
-| org.xresloader.enumv_description | 枚举值描述信息，可能会写入输出的header中和代码中                                                                   |
-| org.xresloader.enum_alias        | 枚举值别名，配合 **验证器** 功能，允许在数据源中直接填写别名来配置数据                                             |
+|             插件名称             |                                插件功能                                |
+| :------------------------------: | :--------------------------------------------------------------------: |
+| org.xresloader.enumv_description |            枚举值描述信息，可能会写入输出的header中和代码中            |
+|    org.xresloader.enum_alias     | 枚举值别名，配合 **验证器** 功能，允许在数据源中直接填写别名来配置数据 |
 
 #### Protobuf插件 - Oneof插件(2.8.0版本及以上)
 
-|             插件名称             |                                                      插件功能                                                      |
-| :------------------------------: | :----------------------------------------------------------------------------------------------------------------: |
-| org.xresloader.oneof_description | oneof描述信息，可能会写入输出的header中和代码中                                                                    |
-| org.xresloader.oneof_separator   | Plain模式类型和值字段的分隔符，可指定多个，用于在一个单元格内配置复杂格式时的分隔符列表，默认值: ```,;|```         |
+|             插件名称             |                                                插件功能                                                |
+| :------------------------------: | :----------------------------------------------------------------------------------------------------: |
+| org.xresloader.oneof_description |                            oneof描述信息，可能会写入输出的header中和代码中                             |
+|  org.xresloader.oneof_separator  | Plain模式类型和值字段的分隔符，可指定多个，用于在一个单元格内配置复杂格式时的分隔符列表，默认值: ```,; | ``` |
 
 ## 编译和打包（For developer）
 

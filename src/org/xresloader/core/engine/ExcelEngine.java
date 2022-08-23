@@ -746,7 +746,7 @@ public class ExcelEngine {
         if (null != rowWrapper.getCustomRowIndex()) {
             String val = rowWrapper.getCustomRowIndex().getCellValue(col.index);
             if (val != null && !val.isEmpty()) {
-                out.set(DataSrcImpl.getBooleanFromString(val));
+                out.set(DataSrcImpl.getBooleanFromString(tryMacro(val)));
             }
             return;
         }

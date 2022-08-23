@@ -18,7 +18,9 @@ Unrelease
 12. 更新 `org.apache.pdfbox` 到 2.0.26
 13. 抽离出协议为单独的子模块
 14. 默认使用 `--disable-excel-formular` 关闭公式实时计算，使用更高效的索引器
-15. 增加 `--enable-string-macro` 用于让Macro(文本替换)，对字符串类型生效
+15. 增加 `--enable-string-macro` 用于让Macro(文本替换)，对字符串类型生效。或使用 `--disable-string-macro` 让Macro(文本替换)，对字符串类型不生效。
+
+  > 默认不生效，批量转表工具中可以通过全局开启 `--enable-string-macro` ，特定表使用 `--disable-string-macro` 来实现默认开启字符串文本替换，特定表不替换
 
 2.11.0-RC2
 ------

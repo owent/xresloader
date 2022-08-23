@@ -161,6 +161,8 @@ public class ProgramOptions {
 
         options.addOption(null, "enable-string-macro", false,
                 "macro will also apply to string value.");
+        options.addOption(null, "disable-string-macro", false,
+                "[default] macro will not apply to string value.");
 
         options.addOption("v", "version", false, "print version and exit");
 
@@ -266,7 +268,9 @@ public class ProgramOptions {
             return 1;
         }
 
-        if(cmd.hasOption("enable-string-macro")) {
+        if(cmd.hasOption("disable-string-macro")) {
+            enableStringMacro = false;
+        } else if(cmd.hasOption("enable-string-macro")) {
             enableStringMacro = true;
         }
 

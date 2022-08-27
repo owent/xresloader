@@ -202,7 +202,7 @@ echo "
 
 转出的数据都采用header+data_block的形式。本工具并不规定怎么读取转表导出的数据，开发者可以按照转出的数据规则自由操作。
 
-> 建议项目中使用导出的协议二进制或者msgpack。协议二进制可以用任意语言加载protobuf或者其他类似工具（如：[pbc](https://github.com/cloudwu/pbc)）加载。
+> 建议项目中使用导出的协议二进制或者msgpack。协议二进制可以用任意语言加载protobuf或者其他类似工具（如：[pbc][3] 或 [upb][2] ）加载。
 > 
 > 而其他导出类型可以用于一些外部工具的集成，比如基于Web的GM工具，基于Lua的远程调试工具等等。
 
@@ -219,18 +219,20 @@ echo "
 + 如果你使用官方的protobuf或protobuf-lite，可以使用[loader-binding/cxx](loader-binding/cxx)来加载配置
   > sample 参见: [sample/cxx/read_kind_sample.cpp](sample/cxx/read_kind_sample.cpp)
 
-+ 如果你使用云风的[pbc](https://github.com/cloudwu/pbc)，可以使用[loader-binding/pbc](loader-binding/pbc)来加载配置
++ 如果你使用云风的[pbc][3]，可以使用[loader-binding/pbc](loader-binding/pbc)来加载配置
   > 这个加载器会依赖 [https://github.com/owent-utils/lua/tree/master/src](https://github.com/owent-utils/lua/tree/master/src) 里的部分内容。
   >
   > 需要使用pbc先加载[header/pb_header.pb](header/pb_header.pb)文件。
   >
-  > **proto v3请注意: [pbc](https://github.com/cloudwu/pbc)不支持[packed=true]属性。在proto v3中，所有的*repeated*整数都默认是[packed=true]，要使用pbc解码请注意这些field要显示申明为[packed=false]**
+  > **proto v3请注意: [pbc][3] 不支持[packed=true]属性。在proto v3中，所有的*repeated*整数都默认是[packed=true]，要使用pbc解码请注意这些field要显示申明为[packed=false]**
   >
   > 或者使用我修改过的[pbc的proto_v3分支](https://github.com/owent-contrib/pbc/tree/proto_v3)
   >
   > pbc_config_manager:load_buffer_kv(协议名, 二进制, function(序号, 转出的lua table) return key的值 end) -- 读取key-value型数据接口
   >
   > pbc_config_manager:load_buffer_kl(协议名, 二进制, function(序号, 转出的lua table) return key的值 end) -- 读取key-list型数据接口
+
++ 如果你使用protobuf的 [upb][2]和 [upb][2] 的Lua binding加载配置，可以使用 [xres-code-generator][4] 子项目 来生成加载配置的代码
 
 ## 其他输出格式
 
@@ -384,3 +386,6 @@ Ans: 这个提示通常是堆内存不足， [xresloader][1] 默认使用的POI�
 在 [xresloader][1] **2.10.0** 及以上的版本，可以使用 ```--disable-excel-formular``` 选项关闭实时公式计算\(仅仅时关闭公式实时计算，还是会读Excel里已经缓存的计算结果的\)。这时候 [xresloader][1] 会使用流式读取并使用 [xresloader][1] 内部实现的缓存机制，同时关闭文件级缓存和表级缓存，能大幅降低内存消耗。
 
 [1]: https://github.com/xresloader/xresloader/releases
+[2]: https://github.com/protocolbuffers/upb
+[3]: https://github.com/cloudwu/pbc
+[4]: https://github.com/xresloader/xres-code-generator

@@ -41,6 +41,13 @@
 + 跨平台GUI工具(Windows/Linux/macOS): https://github.com/xresloader/xresconv-gui
 + 跨平台命令行工具(兼容python2和python3，Windows/Linux/macOS): https://github.com/xresloader/xresconv-cli
 
+## v2.11.0-rc2及以前版本更新迁移指引
+
+由于 v2.11.0-rc3 版本变更了默认的索引器，导致对Excel一些内置的数据类型处理和先前有一些差异。比如对于日期时间类型、百分率等。
+现在会先转出原始的文本，再根据protocol的目标类型做转换。如果需要回退到老的POI索引，可以使用 `--enable-excel-formular` 选项切换到老的索引器。
+
+新版本开始使用JDK 11打包，如果仍然需要 JDK1.8打包请自行下载源码并修改 `pom.xml` 内 `maven-compiler-plugin` 的 `source` 和 `target` 后使用 `mvn package` 命令打包。
+
 ## License
 
 [![MIT License](https://img.shields.io/github/license/xresloader/xresloader)](LICENSE)

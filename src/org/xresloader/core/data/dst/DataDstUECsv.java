@@ -393,7 +393,7 @@ public class DataDstUECsv extends DataDstUEBase {
         }
 
         StringBuffer fieldSB = new StringBuffer();
-        pickValueFieldCsvImpl(fieldSB, fieldSet,
+        dumpValueFieldCsvImpl(fieldSB, fieldSet,
                 msgDesc.getReferBrothers().mode == DataDstWriterNode.CHILD_NODE_TYPE.PLAIN, true, fieldDataByOneof);
         String ret = fieldSB.toString();
         // empty list to nothing, empty map is just like empty list
@@ -403,46 +403,128 @@ public class DataDstUECsv extends DataDstUEBase {
         return ret;
     }
 
-    protected void pickValueFieldCsvImpl(StringBuffer fieldSB, ArrayList<DataDstWriterNodeWrapper> fieldSet,
+    protected boolean dumpValueFieldCsvImpl(StringBuffer fieldSB, ArrayList<DataDstWriterNodeWrapper> fieldSet,
             boolean isPlainMode, boolean isTopLevel, HashMap<String, Object> fieldDataByOneof) throws ConvException {
         if (fieldSet == null || fieldSet.isEmpty()) {
-            return;
+            return false;
         }
 
         DataDstWriterNode msgDesc = getFirstWriterNode(fieldSet);
         if (msgDesc != null && msgDesc.getReferBrothers().isOneof()) {
-            pickValueFieldCsvImpl(fieldSB, fieldSet.get(0), isPlainMode, isTopLevel, fieldDataByOneof);
-            return;
+            return pickValueFieldCsvImpl(fieldSB, fieldSet.get(0), isPlainMode, isTopLevel, fieldDataByOneof);
         }
 
         DataDstFieldDescriptor field = getFieldDescriptor(fieldSet);
         if (null == field) {
-            return;
+            return false;
         }
 
         if (isPlainMode) {
-            pickValueFieldCsvImpl(fieldSB, fieldSet.get(0), isPlainMode, isTopLevel, fieldDataByOneof);
-            return;
+            // 特殊的，对于Plain message list, 需要处理数据补全和裁剪
+            if (isTopLevel && msgDesc != null && msgDesc.getListIndex() >= 0
+                    && fieldSet.get(0).getReferField().isList()) {
+                fieldSB.append(SchemeConf.getInstance().getUEOptions().codeOutputCsvObjectBegin);
+                boolean isFirstElement = true;
+                boolean ret = false;
+                int elementLength = 0;
+                ProgramOptions.ListStripRule stripListRule = ProgramOptions.getInstance().stripListRule;
+
+                for (int i = 0; i < fieldSet.size(); ++i) {
+                    int hasListDataLength = fieldSB.length();
+
+                    int index = fieldSet.get(i).getReferNode().getListIndex();
+                    while (index > elementLength && (stripListRule == ProgramOptions.ListStripRule.KEEP_ALL
+                            || stripListRule == ProgramOptions.ListStripRule.STRIP_EMPTY_TAIL)) {
+                        ++elementLength;
+                        if (!isFirstElement) {
+                            fieldSB.append(",");
+                        }
+                        pickValueMessageCsvDefaultImpl(fieldSB, fieldSet.get(i).getTypeDescriptor(), true);
+                        isFirstElement = false;
+                        hasListDataLength = fieldSB.length() - 1;
+                    }
+
+                    if (!isFirstElement) {
+                        fieldSB.append(",");
+                    }
+                    if (pickValueFieldCsvImpl(fieldSB, fieldSet.get(i), isPlainMode, false, fieldDataByOneof)) {
+                        ++elementLength;
+                        isFirstElement = false;
+                        ret = true;
+                    } else {
+                        fieldSB.setLength(hasListDataLength);
+
+                        if (stripListRule == ProgramOptions.ListStripRule.KEEP_ALL) {
+                            if (!isFirstElement) {
+                                fieldSB.append(",");
+                            }
+
+                            pickValueMessageCsvDefaultImpl(fieldSB, fieldSet.get(i).getTypeDescriptor(), true);
+                            ++elementLength;
+                            isFirstElement = false;
+                            ret = true;
+                        }
+                    }
+                }
+
+                fieldSB.append(SchemeConf.getInstance().getUEOptions().codeOutputCsvObjectEnd);
+                return ret;
+            } else {
+                return pickValueFieldCsvImpl(fieldSB, fieldSet.get(0), isPlainMode, isTopLevel, fieldDataByOneof);
+            }
         }
 
         if (field.isList() && isRecursiveEnabled()) {
             fieldSB.append(SchemeConf.getInstance().getUEOptions().codeOutputCsvObjectBegin);
-            boolean hasListData = false;
+            boolean isFirstElement = true;
+            boolean ret = false;
+            int elementLength = 0;
+            ProgramOptions.ListStripRule stripListRule = ProgramOptions.getInstance().stripListRule;
             for (int i = 0; i < fieldSet.size(); ++i) {
-                if (hasListData) {
+                int hasListDataLength = fieldSB.length();
+
+                int index = -1;
+                if (null != fieldSet.get(i).getReferNode()) {
+                    index = fieldSet.get(i).getReferNode().getListIndex();
+                }
+                while (index > elementLength && (stripListRule == ProgramOptions.ListStripRule.KEEP_ALL
+                        || stripListRule == ProgramOptions.ListStripRule.STRIP_EMPTY_TAIL)) {
+                    ++elementLength;
+                    if (!isFirstElement) {
+                        fieldSB.append(",");
+                    }
+                    pickValueMessageCsvDefaultImpl(fieldSB, fieldSet.get(i).getTypeDescriptor(), true);
+                    isFirstElement = false;
+                    hasListDataLength = fieldSB.length() - 1;
+                }
+
+                if (!isFirstElement) {
                     fieldSB.append(",");
                 }
                 if (pickValueFieldCsvImpl(fieldSB, fieldSet.get(i), isPlainMode, isTopLevel, fieldDataByOneof)) {
-                    hasListData = true;
+                    ++elementLength;
+                    isFirstElement = false;
+                    ret = true;
                 } else {
-                    if (hasListData) {
-                        fieldSB.deleteCharAt(fieldSB.length() - 1);
+                    fieldSB.setLength(hasListDataLength);
+
+                    if (stripListRule == ProgramOptions.ListStripRule.KEEP_ALL) {
+                        if (!isFirstElement) {
+                            fieldSB.append(",");
+                        }
+
+                        pickValueMessageCsvDefaultImpl(fieldSB, fieldSet.get(i).getTypeDescriptor(), true);
+                        ++elementLength;
+                        isFirstElement = false;
+                        ret = true;
                     }
                 }
             }
             fieldSB.append(SchemeConf.getInstance().getUEOptions().codeOutputCsvObjectEnd);
+
+            return ret;
         } else {
-            pickValueFieldCsvImpl(fieldSB, fieldSet.get(0), isPlainMode, isTopLevel, fieldDataByOneof);
+            return pickValueFieldCsvImpl(fieldSB, fieldSet.get(0), isPlainMode, isTopLevel, fieldDataByOneof);
         }
     }
 
@@ -468,16 +550,16 @@ public class DataDstUECsv extends DataDstUEBase {
 
         // dump oneof data
         if (descWrapper.getReferOneof() != null) {
-            return pickValueFieldPlainCsvImpl(fieldSB, desc.identify, descWrapper.getReferOneof(), isTopLevel,
+            return pickValueFieldPlainCsvImpl(fieldSB, desc.identify, descWrapper.getReferOneof(), isTopLevel, desc,
                     fieldDataByOneof);
         }
 
         if (isPlainMode) {
-            pickValueFieldPlainCsvImpl(fieldSB, desc.identify, desc.getFieldDescriptor(), isTopLevel);
-            return true;
+            return pickValueFieldPlainCsvImpl(fieldSB, desc.identify, desc.getFieldDescriptor(), isTopLevel, desc);
         }
 
         if (desc.getType() == JAVA_TYPE.MESSAGE) {
+            boolean ret = false;
             fieldSB.append(SchemeConf.getInstance().getUEOptions().codeOutputCsvObjectBegin);
             HashSet<String> dumpedFields = null;
             if (isRecursiveEnabled()) {
@@ -519,7 +601,9 @@ public class DataDstUECsv extends DataDstUEBase {
 
                     fieldSB.append(varName);
                     fieldSB.append("=");
-                    pickValueFieldCsvImpl(fieldSB, child, true, false, subFieldDataByOneof);
+                    if (dumpValueFieldCsvImpl(fieldSB, child, true, false, subFieldDataByOneof)) {
+                        ret = true;
+                    }
                     continue;
                 }
 
@@ -545,7 +629,9 @@ public class DataDstUECsv extends DataDstUEBase {
                     fieldSB.append("=");
                 }
 
-                pickValueFieldStandardCsvImpl(fieldSB, child, false, subFieldDataByOneof);
+                if (pickValueFieldStandardCsvImpl(fieldSB, child, false, subFieldDataByOneof)) {
+                    ret = true;
+                }
 
                 if (null != dumpedFields) {
                     dumpedFields.add(varName);
@@ -599,17 +685,18 @@ public class DataDstUECsv extends DataDstUEBase {
             }
 
             fieldSB.append(SchemeConf.getInstance().getUEOptions().codeOutputCsvObjectEnd);
-            return true;
+            return ret;
         }
 
         Object val = pickValueFieldBaseStandardImpl(desc);
         if (val == null) {
             if (desc.getFieldDescriptor() != null && desc.getFieldDescriptor().isList()) {
-                // return pickValueFieldCsvDefaultImpl(fieldSB, desc.getFieldDescriptor());
+                // pickValueFieldCsvDefaultImpl(fieldSB, desc.getFieldDescriptor());
                 // empty map is just like empty list
                 return false; // 这里是取值, List 不能追加 () 否则会出现异常数据
             } else {
-                return pickValueMessageCsvDefaultImpl(fieldSB, desc.getTypeDescriptor(), false == isTopLevel);
+                pickValueMessageCsvDefaultImpl(fieldSB, desc.getTypeDescriptor(), false == isTopLevel);
+                return false;
             }
         } else {
             boolean isString = desc.getType() == JAVA_TYPE.STRING || desc.getType() == JAVA_TYPE.BYTES;
@@ -624,7 +711,7 @@ public class DataDstUECsv extends DataDstUEBase {
         }
     }
 
-    protected void pickValueFieldStandardCsvImpl(StringBuffer fieldSB, ArrayList<DataDstWriterNodeWrapper> fieldSet,
+    protected boolean pickValueFieldStandardCsvImpl(StringBuffer fieldSB, ArrayList<DataDstWriterNodeWrapper> fieldSet,
             boolean isTopLevel, HashMap<String, Object> fieldDataByOneof) throws ConvException {
 
         DataDstWriterNode msgDesc = getFirstWriterNode(fieldSet);
@@ -633,12 +720,11 @@ public class DataDstUECsv extends DataDstUEBase {
             if (fd != null) {
                 pickValueFieldCsvDefaultImpl(fieldSB, fd, false == isTopLevel);
             }
-            return;
+            return false;
         }
 
         if (msgDesc.getReferBrothers().isOneof()) {
-            pickValueFieldCsvImpl(fieldSB, fieldSet, true, msgDesc.identify != null, fieldDataByOneof);
-            return;
+            return dumpValueFieldCsvImpl(fieldSB, fieldSet, true, msgDesc.identify != null, fieldDataByOneof);
         }
 
         if (msgDesc.getReferBrothers().isList()) {
@@ -659,8 +745,11 @@ public class DataDstUECsv extends DataDstUEBase {
                 }
             }
             fieldSB.append(SchemeConf.getInstance().getUEOptions().codeOutputCsvObjectEnd);
+
+            return hasListData;
         } else {
-            pickValueFieldCsvImpl(fieldSB, fieldSet.get(0), msgDesc.getReferBrothers().mode == CHILD_NODE_TYPE.PLAIN,
+            return pickValueFieldCsvImpl(fieldSB, fieldSet.get(0),
+                    msgDesc.getReferBrothers().mode == CHILD_NODE_TYPE.PLAIN,
                     false, fieldDataByOneof);
         }
     }
@@ -669,14 +758,16 @@ public class DataDstUECsv extends DataDstUEBase {
             boolean isTopLevel, HashMap<String, Object> fieldDataByOneof) throws ConvException {
         if (null == desc || node == null) {
             if (node.innerFieldDesc != null) {
-                return pickValueFieldCsvDefaultImpl(fieldSB, node.innerFieldDesc, false == isTopLevel);
+                pickValueFieldCsvDefaultImpl(fieldSB, node.innerFieldDesc, false == isTopLevel);
+                return false;
             }
         }
-        return pickValueFieldPlainCsvImpl(fieldSB, desc.identify, node.innerFieldDesc, isTopLevel);
+        return pickValueFieldPlainCsvImpl(fieldSB, desc.identify, node.innerFieldDesc, isTopLevel, desc);
     }
 
     protected boolean pickValueFieldPlainCsvImpl(StringBuffer fieldSB, IdentifyDescriptor ident,
-            DataDstOneofDescriptor field, boolean isTopLevel, HashMap<String, Object> fieldDataByOneof)
+            DataDstOneofDescriptor field, boolean isTopLevel, DataDstWriterNode maybeFromNode,
+            HashMap<String, Object> fieldDataByOneof)
             throws ConvException {
         if (null == ident) {
             return false;
@@ -684,15 +775,17 @@ public class DataDstUECsv extends DataDstUEBase {
 
         DataContainer<String> res = DataSrcImpl.getOurInstance().getValue(ident, "");
         if (null == res || !res.valid) {
-            return pickValueFieldCsvDefaultImpl(fieldSB, field, false == isTopLevel);
+            pickValueFieldCsvDefaultImpl(fieldSB, field, false == isTopLevel);
+            return false;
         }
 
-        return pickValueFieldPlainCsvImpl(fieldSB, ident, field, isTopLevel, res.value, fieldDataByOneof,
+        return pickValueFieldPlainCsvImpl(fieldSB, ident, field, isTopLevel, maybeFromNode, res.value, fieldDataByOneof,
                 false == isTopLevel);
     }
 
     protected boolean pickValueFieldPlainCsvImpl(StringBuffer fieldSB, IdentifyDescriptor ident,
-            DataDstOneofDescriptor field, boolean isTopLevel, String input, HashMap<String, Object> fieldDataByOneof,
+            DataDstOneofDescriptor field, boolean isTopLevel, DataDstWriterNode maybeFromNode, String input,
+            HashMap<String, Object> fieldDataByOneof,
             boolean needQuote) throws ConvException {
         if (field == null) {
             return false;
@@ -701,16 +794,19 @@ public class DataDstUECsv extends DataDstUEBase {
         Object[] res = parsePlainDataOneof(input, ident, field);
 
         if (null == res) {
-            return pickValueFieldCsvDefaultImpl(fieldSB, field, needQuote);
+            pickValueFieldCsvDefaultImpl(fieldSB, field, needQuote);
+            return false;
         }
 
         if (res.length < 1) {
-            return pickValueFieldCsvDefaultImpl(fieldSB, field, needQuote);
+            pickValueFieldCsvDefaultImpl(fieldSB, field, needQuote);
+            return false;
         }
 
         DataDstFieldDescriptor sub_field = (DataDstFieldDescriptor) res[0];
         if (sub_field == null) {
-            return pickValueFieldCsvDefaultImpl(fieldSB, field, needQuote);
+            pickValueFieldCsvDefaultImpl(fieldSB, field, needQuote);
+            return false;
         }
 
         String subVarName = getIdentName(sub_field.getName());
@@ -727,7 +823,7 @@ public class DataDstUECsv extends DataDstUEBase {
 
         // 非顶层，不用验证类型
         StringBuffer oneofValueSB = new StringBuffer();
-        pickValueFieldPlainCsvImpl(oneofValueSB, null, sub_field, false, (String) res[1]);
+        pickValueFieldPlainCsvImpl(oneofValueSB, null, sub_field, false, null, (String) res[1]);
         if (!fieldDataByOneof.containsKey(subVarName)) {
             fieldDataByOneof.put(subVarName, oneofValueSB.toString());
         }
@@ -736,28 +832,36 @@ public class DataDstUECsv extends DataDstUEBase {
     }
 
     protected boolean pickValueFieldPlainCsvImpl(StringBuffer fieldSB, IdentifyDescriptor ident,
-            DataDstFieldDescriptor field, boolean isTopLevel) throws ConvException {
+            DataDstFieldDescriptor field, boolean isTopLevel, DataDstWriterNode maybeFromNode) throws ConvException {
         if (null == ident || field == null) {
             if (field != null) {
-                return pickValueFieldCsvDefaultImpl(fieldSB, field, false == isTopLevel);
+                pickValueFieldCsvDefaultImpl(fieldSB, field, false == isTopLevel);
             }
             return false;
         }
 
         DataContainer<String> res = DataSrcImpl.getOurInstance().getValue(ident, "");
         if (null == res || !res.valid) {
-            return pickValueFieldCsvDefaultImpl(fieldSB, field, false == isTopLevel);
+            pickValueFieldCsvDefaultImpl(fieldSB, field, false == isTopLevel);
+            return false;
         }
 
-        return pickValueFieldPlainCsvImpl(fieldSB, ident, field, isTopLevel, res.value);
+        return pickValueFieldPlainCsvImpl(fieldSB, ident, field, isTopLevel, maybeFromNode, res.value);
     }
 
-    protected boolean pickValueFieldPlainCsvImpl(StringBuffer fieldSB, IdentifyDescriptor ident,
-            DataDstFieldDescriptor field, boolean isTopLevel, String input) throws ConvException {
+    protected boolean pickValueFieldPlainCsvImpl(
+            StringBuffer fieldSB,
+            IdentifyDescriptor ident,
+            DataDstFieldDescriptor field,
+            boolean isTopLevel,
+            DataDstWriterNode maybeFromNode,
+            String input)
+            throws ConvException {
         if (field == null) {
             return false;
         }
-        if ((isTopLevel && !field.isList()) && field.getType() != DataDstWriterNode.JAVA_TYPE.MESSAGE) {
+        if ((isTopLevel && !field.isList())
+                && field.getType() != DataDstWriterNode.JAVA_TYPE.MESSAGE) {
             // error type
             logErrorMessage("Plain type %s of %s.%s must be list", field.getType().toString(),
                     field.getTypeDescriptor().getFullName(), field.getName());
@@ -870,9 +974,17 @@ public class DataDstUECsv extends DataDstUEBase {
                 }
 
                 case MESSAGE: {
-                    boolean hasListData = false;
-                    if (groups.length > 0) {
+                    if (null != maybeFromNode && maybeFromNode.getListIndex() >= 0) {
+                        // Plain模式 message 静态数组下标
+                        if (groups.length > 0 &&
+                                pickValueFieldCsvPlainField(fieldSB, groups, ident, field, maybeFromNode)) {
+                            ret = true;
+                        }
+                    } else if (groups.length > 0) {
+                        // Plain模式 message 动态数组
+                        boolean hasListData = false;
                         fieldSB.append(SchemeConf.getInstance().getUEOptions().codeOutputCsvObjectBegin);
+
                         for (String v : groups) {
                             String[] subGroups = splitPlainGroups(v, getPlainMessageSeparator(field));
                             if (subGroups != null && subGroups.length > 0) {
@@ -880,7 +992,8 @@ public class DataDstUECsv extends DataDstUEBase {
                                     fieldSB.append(",");
                                 }
 
-                                if (pickValueFieldCsvPlainField(fieldSB, subGroups, ident, field)) {
+                                if (pickValueFieldCsvPlainField(fieldSB, subGroups, ident,
+                                        field, null)) {
                                     hasListData = true;
                                 } else {
                                     if (hasListData) {
@@ -904,7 +1017,9 @@ public class DataDstUECsv extends DataDstUEBase {
         } else {
             switch (field.getType()) {
                 case INT: {
-                    fieldSB.append(parsePlainDataLong(input.trim(), ident, field).intValue());
+                    fieldSB
+                            .append(parsePlainDataLong(input.trim(), ident, field)
+                                    .intValue());
                     break;
                 }
 
@@ -914,31 +1029,36 @@ public class DataDstUECsv extends DataDstUEBase {
                 }
 
                 case FLOAT: {
-                    fieldSB.append(parsePlainDataDouble(input.trim(), ident, field).floatValue());
+                    fieldSB
+                            .append(parsePlainDataDouble(input.trim(), ident, field)
+                                    .floatValue());
                     break;
                 }
 
                 case DOUBLE: {
-                    fieldSB.append(parsePlainDataDouble(input.trim(), ident, field));
+                    fieldSB
+                            .append(parsePlainDataDouble(input.trim(), ident, field));
                     break;
                 }
 
                 case BOOLEAN: {
-                    fieldSB.append(parsePlainDataBoolean(input.trim(), ident, field));
+                    fieldSB
+                            .append(parsePlainDataBoolean(input.trim(), ident, field));
                     break;
                 }
 
                 case STRING:
                 case BYTES: {
                     fieldSB.append("\"");
-                    fieldSB.append(parsePlainDataString(input.trim(), ident, field));
+                    fieldSB
+                            .append(parsePlainDataString(input.trim(), ident, field));
                     fieldSB.append("\"");
                     break;
                 }
 
                 case MESSAGE: {
                     String[] groups = splitPlainGroups(input.trim(), getPlainMessageSeparator(field));
-                    pickValueFieldCsvPlainField(fieldSB, groups, ident, field);
+                    pickValueFieldCsvPlainField(fieldSB, groups, ident, field, maybeFromNode);
                     break;
                 }
 
@@ -951,7 +1071,7 @@ public class DataDstUECsv extends DataDstUEBase {
     }
 
     private boolean pickValueFieldCsvPlainField(StringBuffer fieldSB, String[] inputs, IdentifyDescriptor ident,
-            DataDstFieldDescriptor field) throws ConvException {
+            DataDstFieldDescriptor field, DataDstWriterNode maybeFromNode) throws ConvException {
         if (field.getTypeDescriptor() == null || inputs == null || inputs.length == 0) {
             return false;
         }
@@ -1008,7 +1128,8 @@ public class DataDstUECsv extends DataDstUEBase {
                 dumpedOneof.add(oneofVarName);
                 fieldSB.append(oneofVarName);
                 fieldSB.append("=");
-                if (!pickValueFieldPlainCsvImpl(fieldSB, null, childField.getReferOneof(), false, inputs[usedInputIdx],
+                if (!pickValueFieldPlainCsvImpl(fieldSB, null, childField.getReferOneof(), false, null,
+                        inputs[usedInputIdx],
                         fieldDataByOneof, true)) {
                     pickValueFieldCsvDefaultImpl(fieldSB, childField.getReferOneof(), true);
                 }
@@ -1043,7 +1164,7 @@ public class DataDstUECsv extends DataDstUEBase {
                     fieldSB.append(varName);
                     fieldSB.append("=");
                 }
-                pickValueFieldPlainCsvImpl(fieldSB, ident, childField, false, inputs[usedInputIdx]);
+                pickValueFieldPlainCsvImpl(fieldSB, ident, childField, false, null, inputs[usedInputIdx]);
 
                 ++usedInputIdx;
             }

@@ -11,8 +11,8 @@ define({
       }
     ],
     data_ver : "1.0.0.0",
-    hash_code : "sha256:0c333be4391e1f1303efcf68a348d6c74e6b7a9c66a736f3b04536cc90289fca",
-    xres_ver : "2.11.0-rc2"
+    hash_code : "sha256:e7d05f9bf7e780547f2a624e7914a7bf5cf62b06ef14090a6450b033d8d830bf",
+    xres_ver : "2.11.0-rc3"
   },
   "role_cfg": [
     {
@@ -20,7 +20,7 @@ define({
       dep_test : {
         dep2 : {
           id : 101,
-          level : "2014-10-13"
+          level : "2014/10/13"
         },
         id : 51,
         name : "123"
@@ -42,7 +42,7 @@ define({
       dep_test : {
         dep2 : {
           id : 201,
-          level : "2014-10-14"
+          level : "2014/10/14"
         },
         id : 61,
         name : "654"
@@ -66,7 +66,7 @@ define({
       dep_test : {
         dep2 : {
           id : 301,
-          level : "2014-10-15"
+          level : "2014/10/15"
         },
         id : 71,
         name : "sdadasd"
@@ -117,7 +117,7 @@ define({
       dep_test : {
         dep2 : {
           id : 501,
-          level : "09:10:50"
+          level : "9:10:50 上午"
         },
         id : 91,
         name : "gggg"
@@ -137,7 +137,7 @@ define({
       dep_test : {
         dep2 : {
           id : 601,
-          level : "2014-50-20 07:50:50"
+          level : "2014-10-20 19:50:50"
         },
         id : 101,
         name : "hhhhh"

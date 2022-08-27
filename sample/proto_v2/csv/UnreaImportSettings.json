@@ -82,5 +82,17 @@
         },
         "bSkipReadOnly": "true",
         "bReplaceExisting": "true"
+    },
+    {
+        "GroupName": "XResConfig",
+        "DestinationPath": "ConfigRec",
+        "FactoryName": "ReimportDataTableFactory",
+        "Filenames": ["D:\\workspace\\github\\xresloader\\xresloader\\sample\\proto_v2\\csv\\StripListTailCfg.csv"],
+        "ImportSettings": {
+            "ImportType": "ECSV_DataTable",
+            "ImportRowStruct": "KeepOrStripEmptyListCfg"
+        },
+        "bSkipReadOnly": "true",
+        "bReplaceExisting": "true"
     }
 ]}

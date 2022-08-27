@@ -10,8 +10,8 @@ return {
             },
         },
         data_ver = "1.0.0.0",
-        hash_code = "sha256:c4b5e23281085395db29ef008adfd57c80acc5961313356f73907ac22d4520ba",
-        xres_ver = "2.11.0-rc2",
+        hash_code = "sha256:4e3bbf26843d9babe2ed9e7ca8c57702ad0257becd0f526e1f590d4374d72c62",
+        xres_ver = "2.11.0-rc3",
     },
     [2] = "role_cfg",
     role_cfg = {
@@ -20,7 +20,7 @@ return {
             dep_test = {
                 dep2 = {
                     id = 101,
-                    level = "2014-10-13",
+                    level = "2014/10/13",
                 },
                 id = 51,
                 name = "123",
@@ -42,7 +42,7 @@ return {
             dep_test = {
                 dep2 = {
                     id = 201,
-                    level = "2014-10-14",
+                    level = "2014/10/14",
                 },
                 id = 61,
                 name = "654",
@@ -66,7 +66,7 @@ return {
             dep_test = {
                 dep2 = {
                     id = 301,
-                    level = "2014-10-15",
+                    level = "2014/10/15",
                 },
                 id = 71,
                 name = "sdadasd",
@@ -117,7 +117,7 @@ return {
             dep_test = {
                 dep2 = {
                     id = 501,
-                    level = "09:10:50",
+                    level = "9:10:50 上午",
                 },
                 id = 91,
                 name = "gggg",
@@ -137,7 +137,7 @@ return {
             dep_test = {
                 dep2 = {
                     id = 601,
-                    level = "2014-50-20 07:50:50",
+                    level = "2014-10-20 19:50:50",
                 },
                 id = 101,
                 name = "hhhhh",

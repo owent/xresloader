@@ -307,17 +307,17 @@ public class DataDstUEJson extends DataDstUEBase {
                     builder.put(varName, ret);
                 }
 
+                ProgramOptions.ListStripRule stripListRule = ProgramOptions.getInstance().stripListRule;
                 for (int i = 0; i < fieldSet.size(); ++i) {
                     Object obj = pickValueFieldJsonStandardImpl(fieldSet.get(i));
                     if (null == obj
-                            && ProgramOptions.getInstance().stripListRule == ProgramOptions.ListStripRule.KEEP_ALL) {
+                            && stripListRule == ProgramOptions.ListStripRule.KEEP_ALL) {
                         obj = getDefault(field);
                     }
 
                     if (null != obj) {
                         int index = fieldSet.get(i).getReferNode().getListIndex();
-                        if (ProgramOptions
-                                .getInstance().stripListRule == ProgramOptions.ListStripRule.STRIP_EMPTY_TAIL) {
+                        if (stripListRule == ProgramOptions.ListStripRule.KEEP_ALL || stripListRule == ProgramOptions.ListStripRule.STRIP_EMPTY_TAIL) {
                             while (ret.length() < index) {
                                 ret.put(getDefault(field));
                             }
@@ -780,7 +780,8 @@ public class DataDstUEJson extends DataDstUEBase {
                     }
 
                     int index = maybeFromNode.getListIndex();
-                    if (ProgramOptions.getInstance().stripListRule == ProgramOptions.ListStripRule.STRIP_EMPTY_TAIL) {
+                    ProgramOptions.ListStripRule stripListRule = ProgramOptions.getInstance().stripListRule;
+                    if (stripListRule == ProgramOptions.ListStripRule.KEEP_ALL || stripListRule == ProgramOptions.ListStripRule.STRIP_EMPTY_TAIL) {
                         while (valArray.length() < index) {
                             valArray.put(getDefault(field));
                         }

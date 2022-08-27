@@ -2,7 +2,7 @@
   {
     "count": 102,
     "description": "Test role_upgrade_cfg with multi keys\r\nTest role_upgrade_cfg with multi keys",
-    "xres_ver": "2.11.0-rc2",
+    "xres_ver": "2.11.0-rc3",
     "hash_code": "sha256:555ac19246c2a7bff93dd4319caafeb16248bc2430d5d4931dbd1398f4f7e84d",
     "data_ver": "1.0.0.0",
     "data_source": [

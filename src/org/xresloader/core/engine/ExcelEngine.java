@@ -448,7 +448,9 @@ public class ExcelEngine {
             case STRING:
                 String val = cal_cell2str(c, cv).trim();
                 if (!val.isEmpty()) {
-                    if (DataSrcImpl.getOurInstance().isInitialized() && ProgramOptions.getInstance().enableStringMacro) {
+                    // Const 和 option导出时，没有数据源，也不需要文本/宏替换
+                    DataSrcImpl data_source = DataSrcImpl.getOurInstance();
+                    if (null != data_source && data_source.isInitialized() && ProgramOptions.getInstance().enableStringMacro) {
                         out.set(tryMacro(val));
                     } else {
                         out.set(val);

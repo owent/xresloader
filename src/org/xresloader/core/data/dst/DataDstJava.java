@@ -415,7 +415,9 @@ public abstract class DataDstJava extends DataDstImpl {
             }
 
             int index = desc.getListIndex();
-            if (ProgramOptions.getInstance().stripListRule == ProgramOptions.ListStripRule.STRIP_EMPTY_TAIL) {
+            ProgramOptions.ListStripRule stripListRule = ProgramOptions.getInstance().stripListRule;
+            if (stripListRule == ProgramOptions.ListStripRule.KEEP_ALL ||
+                    stripListRule == ProgramOptions.ListStripRule.STRIP_EMPTY_TAIL) {
                 while (old.size() < index) {
                     dumpDefault(builder, as_child);
                 }
@@ -692,7 +694,9 @@ public abstract class DataDstJava extends DataDstImpl {
                     }
 
                     int index = maybeFromNode.getListIndex();
-                    if (ProgramOptions.getInstance().stripListRule == ProgramOptions.ListStripRule.STRIP_EMPTY_TAIL) {
+                    ProgramOptions.ListStripRule stripListRule = ProgramOptions.getInstance().stripListRule;
+                    if (stripListRule == ProgramOptions.ListStripRule.KEEP_ALL
+                            || stripListRule == ProgramOptions.ListStripRule.STRIP_EMPTY_TAIL) {
                         while (valArray.size() < index) {
                             valArray.add(getDefault(field));
                         }

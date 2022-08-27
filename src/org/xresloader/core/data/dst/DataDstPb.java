@@ -1436,8 +1436,10 @@ public class DataDstPb extends DataDstImpl {
     }
 
     private void dumpValue(DynamicMessage.Builder builder, Descriptors.FieldDescriptor fd, Object val, int index) {
+        ProgramOptions.ListStripRule stripListRule = ProgramOptions.getInstance().stripListRule;
         if (fd.isRepeated()
-                && ProgramOptions.getInstance().stripListRule == ProgramOptions.ListStripRule.STRIP_EMPTY_TAIL) {
+                && (stripListRule == ProgramOptions.ListStripRule.KEEP_ALL
+                        || stripListRule == ProgramOptions.ListStripRule.STRIP_EMPTY_TAIL)) {
             int fill_default_size = builder.getRepeatedFieldCount(fd);
             for (int i = fill_default_size; i < index; ++i) {
                 Object defaultVal = getDefault(builder, fd);
@@ -1808,7 +1810,9 @@ public class DataDstPb extends DataDstImpl {
                     }
 
                     int index = maybeFromNode.getListIndex();
-                    if (ProgramOptions.getInstance().stripListRule == ProgramOptions.ListStripRule.STRIP_EMPTY_TAIL) {
+                    ProgramOptions.ListStripRule stripListRule = ProgramOptions.getInstance().stripListRule;
+                    if (stripListRule == ProgramOptions.ListStripRule.KEEP_ALL
+                            || stripListRule == ProgramOptions.ListStripRule.STRIP_EMPTY_TAIL) {
                         while (builder.getRepeatedFieldCount(fd) < index) {
                             builder.addRepeatedField(fd, getDefault(builder, fd));
                         }

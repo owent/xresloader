@@ -14,7 +14,7 @@
 
 ## 主要功能
 
-+ 跨平台（java 1.8 or upper）
++ 跨平台（java 11 or upper）
 + Excel => protobuf/msgpack/lua/javascript/json/xml
 + 完整支持协议结构，包括嵌套结构和数组嵌套
 + 同时支持protobuf proto v2 和 proto v3
@@ -111,7 +111,7 @@ echo "
 | --xml-root                  | xml输出的根节点tag              | 输出格式为xml时的根节点的TagName                                                                         |
 | --javascript-export         | 导出javascript数据的模式        | 可选项(nodejs: 使用兼容nodejs的exports, amd: 使用兼容amd的define, 其他: 写入全局(window或global))        |
 | --javascript-global         | 导出javascript全局空间          | 导出数据到全局时，可以指定写入的名字空间                                                                 |
-| --ignore-unknown-dependency | 忽略未知的依赖项                | 忽略未知的输入协议的依赖项(>=2.9.0版                                                                     |
+| --ignore-unknown-dependency | 忽略未知的依赖项                | 忽略未知的输入协议的依赖项(>=2.9.0版本)                                                                  |
 
 ### 协议类型
 
@@ -305,6 +305,14 @@ Excel里的Key使用@后缀的字段名，@后面的部分都属于验证器。�
 | org.xresloader.oneof_description |                            oneof描述信息，可能会写入输出的header中和代码中                             |
 |  org.xresloader.oneof_separator  | Plain模式类型和值字段的分隔符，可指定多个，用于在一个单元格内配置复杂格式时的分隔符列表，默认值: ```,; | ``` |
 
+## 生态和工具
+
++ [xresconv-gui][5]: GUI批量转表工具。 https://github.com/xresloader/xresconv-gui
++ [xresconv-cli][6]: 命令行批量转表工具。 https://github.com/xresloader/xresconv-cli
++ [xres-code-generator][4]: 读表代码生成工具。 https://github.com/xresloader/xres-code-generator
++ [xresloader-dump-bin][7]: 二进制输出的dump工具。 https://github.com/xresloader/xresloader-dump-bin
+  > 用于把转表生成的二进制导出为Human-Readable的文本，方便调试。可以直接从 https://github.com/xresloader/xresloader-dump-bin/releases 下载对应平台的可执行程序
+
 ## 编译和打包（For developer）
 
 + 本项目使用[apache maven](https://maven.apache.org/)管理包依赖和打包构建流程。
@@ -389,3 +397,6 @@ Ans: 这个提示通常是堆内存不足， [xresloader][1] 默认使用的POI�
 [2]: https://github.com/protocolbuffers/upb
 [3]: https://github.com/cloudwu/pbc
 [4]: https://github.com/xresloader/xres-code-generator
+[5]: https://github.com/xresloader/xresconv-gui
+[6]: https://github.com/xresloader/xresconv-cli
+[7]: https://github.com/xresloader/xresloader-dump-bin

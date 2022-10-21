@@ -1,16 +1,5 @@
 package org.xresloader.core.data.dst;
 
-import java.nio.ByteBuffer;
-import java.nio.charset.Charset;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
-import java.util.regex.Pattern;
 import org.apache.commons.codec.binary.Hex;
 import org.xresloader.core.ProgramOptions;
 import org.xresloader.core.data.err.ConvException;
@@ -18,6 +7,14 @@ import org.xresloader.core.data.src.DataContainer;
 import org.xresloader.core.data.src.DataSrcImpl;
 import org.xresloader.core.engine.IdentifyDescriptor;
 import org.xresloader.core.scheme.SchemeConf;
+import com.google.protobuf.Timestamp;
+import com.google.protobuf.Duration;
+import java.nio.ByteBuffer;
+import java.nio.charset.Charset;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+import java.util.*;
+import java.util.regex.Pattern;
 
 /**
  * Created by owentou on 2015/04/29.
@@ -776,7 +773,7 @@ public abstract class DataDstJava extends DataDstImpl {
     }
 
     public HashMap<String, Object> parsePlainDataMessage(String[] inputs, IdentifyDescriptor ident,
-            DataDstWriterNode.DataDstFieldDescriptor field) throws ConvException {
+            org.xresloader.core.data.dst.DataDstWriterNode.DataDstFieldDescriptor field) throws ConvException {
         if (field.getTypeDescriptor() == null || inputs == null || inputs.length == 0) {
             return null;
         }
@@ -789,6 +786,41 @@ public abstract class DataDstJava extends DataDstImpl {
         }
 
         HashMap<String, Object> ret = new HashMap<String, Object>();
+
+        // 几种特殊模式
+        if (inputs.length == 1) {
+            if (org.xresloader.core.data.dst.DataDstWriterNode.SPECIAL_MESSAGE_TYPE.TIMEPOINT == field
+                    .getTypeDescriptor().getSpecialMessageType() &&
+                    field.getTypeDescriptor().getFullName() == Timestamp.getDescriptor()
+                            .getFullName()) {
+                Timestamp res = DataDstPb.parseTimestampFromString(inputs[0]);
+                for (int i = 0; i < children.size(); ++i) {
+                    if (children.get(i).getName().equalsIgnoreCase("seconds")
+                            && !children.get(i).isList()) {
+                        ret.put(children.get(i).getName(), res.getSeconds());
+                    } else if (children.get(i).getName().equalsIgnoreCase("nanos")
+                            && !children.get(i).isList()) {
+                        ret.put(children.get(i).getName(), res.getNanos());
+                    }
+                }
+                return ret;
+            } else if (org.xresloader.core.data.dst.DataDstWriterNode.SPECIAL_MESSAGE_TYPE.DURATION == field
+                    .getTypeDescriptor().getSpecialMessageType() &&
+                    field.getTypeDescriptor().getFullName() == Duration.getDescriptor().getFullName()) {
+                Duration res = DataDstPb.parseDurationFromString(inputs[0]);
+                for (int i = 0; i < children.size(); ++i) {
+                    if (children.get(i).getName().equalsIgnoreCase("seconds")
+                            && !children.get(i).isList()) {
+                        ret.put(children.get(i).getName(), res.getSeconds());
+                    } else if (children.get(i).getName().equalsIgnoreCase("nanos")
+                            && !children.get(i).isList()) {
+                        ret.put(children.get(i).getName(), res.getNanos());
+                    }
+                }
+                return ret;
+            }
+        }
+
         int usedInputIdx = 0;
         for (int i = 0; i < children.size(); ++i) {
             if (null != children.get(i).getReferOneof()) {

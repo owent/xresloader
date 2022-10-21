@@ -1,14 +1,14 @@
 package org.xresloader.core.data.dst;
 
+import org.xresloader.core.ProgramOptions;
+import org.xresloader.core.data.err.ConvException;
+import org.xresloader.core.data.vfy.DataVerifyImpl;
+import org.xresloader.core.engine.IdentifyDescriptor;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
-
-import org.xresloader.core.ProgramOptions;
-import org.xresloader.core.data.err.ConvException;
-import org.xresloader.core.engine.IdentifyDescriptor;
-import org.xresloader.core.data.vfy.DataVerifyImpl;
 
 /**
  * Created by owentou on 2014/10/11.
@@ -152,6 +152,14 @@ public class DataDstWriterNode {
         public boolean isMap() {
             return this.label == FIELD_LABEL_TYPE.LIST && this.referTypeDescriptor != null
                     && SPECIAL_MESSAGE_TYPE.MAP == this.referTypeDescriptor.getSpecialMessageType();
+        }
+
+        public SPECIAL_MESSAGE_TYPE getSpecialMessageType() {
+            if (this.referTypeDescriptor != null) {
+                return this.referTypeDescriptor.getSpecialMessageType();
+            }
+
+            return SPECIAL_MESSAGE_TYPE.NONE;
         }
 
         public boolean isRequired() {

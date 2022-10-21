@@ -22,6 +22,8 @@ import org.xresloader.core.data.src.DataContainer;
 import org.xresloader.core.data.src.DataSrcImpl;
 import org.xresloader.core.engine.IdentifyDescriptor;
 import org.xresloader.core.scheme.SchemeConf;
+import com.google.protobuf.Timestamp;
+import com.google.protobuf.Duration;
 
 /**
  * Created by owentou on 2019/04/08.
@@ -1077,6 +1079,53 @@ public class DataDstUECsv extends DataDstUEBase {
         }
 
         ArrayList<DataDstFieldDescriptor> children = field.getTypeDescriptor().getSortedFields();
+        // 几种特殊模式
+        if (inputs.length == 1) {
+            if (org.xresloader.core.data.dst.DataDstWriterNode.SPECIAL_MESSAGE_TYPE.TIMEPOINT == field
+                    .getTypeDescriptor()
+                    .getSpecialMessageType() &&
+                    field.getTypeDescriptor().getFullName() == Timestamp.getDescriptor()
+                            .getFullName()) {
+                Timestamp res = DataDstPb.parseTimestampFromString(inputs[0]);
+                for (int i = 0; i < children.size(); ++i) {
+                    if (children.get(i).getName().equalsIgnoreCase("seconds")
+                            && !children.get(i).isList()) {
+                        String varName = getIdentName(children.get(i).getName());
+                        fieldSB.append(varName);
+                        fieldSB.append("=");
+                        fieldSB.append(res.getSeconds());
+                    } else if (children.get(i).getName().equalsIgnoreCase("nanos")
+                            && !children.get(i).isList()) {
+                        String varName = getIdentName(children.get(i).getName());
+                        fieldSB.append(varName);
+                        fieldSB.append("=");
+                        fieldSB.append(res.getNanos());
+                    }
+                }
+                return true;
+            } else if (org.xresloader.core.data.dst.DataDstWriterNode.SPECIAL_MESSAGE_TYPE.DURATION == field
+                    .getTypeDescriptor()
+                    .getSpecialMessageType() &&
+                    field.getTypeDescriptor().getFullName() == Duration.getDescriptor().getFullName()) {
+                Duration res = DataDstPb.parseDurationFromString(inputs[0]);
+                for (int i = 0; i < children.size(); ++i) {
+                    if (children.get(i).getName().equalsIgnoreCase("seconds")
+                            && !children.get(i).isList()) {
+                        String varName = getIdentName(children.get(i).getName());
+                        fieldSB.append(varName);
+                        fieldSB.append("=");
+                        fieldSB.append(res.getSeconds());
+                    } else if (children.get(i).getName().equalsIgnoreCase("nanos")
+                            && !children.get(i).isList()) {
+                        String varName = getIdentName(children.get(i).getName());
+                        fieldSB.append(varName);
+                        fieldSB.append("=");
+                        fieldSB.append(res.getNanos());
+                    }
+                }
+                return true;
+            }
+        }
 
         HashSet<String> dumpedOneof = null;
         HashMap<String, Object> fieldDataByOneof = null;

@@ -33,6 +33,8 @@ import com.google.protobuf.Duration;
 import com.google.protobuf.Descriptors.FieldDescriptor.JavaType;
 import com.google.protobuf.DynamicMessage;
 import com.google.protobuf.UninitializedMessageException;
+import com.google.protobuf.util.Timestamps;
+import com.google.protobuf.util.Durations;
 import org.apache.commons.codec.binary.Hex;
 import org.xresloader.Xresloader;
 import org.xresloader.core.ProgramOptions;
@@ -1914,6 +1916,45 @@ public class DataDstPb extends DataDstImpl {
 
         ArrayList<DataDstWriterNode.DataDstFieldDescriptor> children = field.getTypeDescriptor().getSortedFields();
         DynamicMessage.Builder ret = DynamicMessage.newBuilder(fd.getMessageType());
+
+        // 几种特殊模式
+        if (inputs.length == 1) {
+            if (org.xresloader.core.data.dst.DataDstWriterNode.SPECIAL_MESSAGE_TYPE.TIMEPOINT == field
+                    .getTypeDescriptor().getSpecialMessageType() &&
+                    field.getTypeDescriptor().getFullName() == Timestamp.getDescriptor()
+                            .getFullName()) {
+                Timestamp res = parseTimestampFromString(inputs[0]);
+                for (int i = 0; i < children.size(); ++i) {
+                    Descriptors.FieldDescriptor subfd = (Descriptors.FieldDescriptor) children.get(i)
+                            .getRawDescriptor();
+                    if (subfd.getName().equalsIgnoreCase("seconds")
+                            && !subfd.isRepeated()) {
+                        ret.setField(subfd, res.getSeconds());
+                    } else if (subfd.getName().equalsIgnoreCase("nanos")
+                            && !subfd.isRepeated()) {
+                        ret.setField(subfd, res.getNanos());
+                    }
+                }
+                return ret.build();
+            } else if (org.xresloader.core.data.dst.DataDstWriterNode.SPECIAL_MESSAGE_TYPE.DURATION == field
+                    .getTypeDescriptor().getSpecialMessageType() &&
+                    field.getTypeDescriptor().getFullName() == Duration.getDescriptor().getFullName()) {
+                Duration res = parseDurationFromString(inputs[0]);
+                for (int i = 0; i < children.size(); ++i) {
+                    Descriptors.FieldDescriptor subfd = (Descriptors.FieldDescriptor) children.get(i)
+                            .getRawDescriptor();
+                    if (subfd.getName().equalsIgnoreCase("seconds")
+                            && !subfd.isRepeated()) {
+                        ret.setField(subfd, res.getSeconds());
+                    } else if (subfd.getName().equalsIgnoreCase("nanos")
+                            && !subfd.isRepeated()) {
+                        ret.setField(subfd, res.getNanos());
+                    }
+                }
+                return ret.build();
+            }
+        }
+
         boolean hasData = false;
         HashSet<String> dumpedOneof = null;
         if (field.getTypeDescriptor().getSortedOneofs().size() > 0) {
@@ -1980,6 +2021,54 @@ public class DataDstPb extends DataDstImpl {
         }
 
         return ret.build();
+    }
+
+    static public Timestamp parseTimestampFromString(String input) throws ConvException {
+        if (input.matches("\\d+")) {
+            try {
+                Timestamp.Builder ret = Timestamp.newBuilder();
+                ret.setSeconds(Long.parseLong(input));
+                ret.setNanos(0);
+                return ret.build();
+            } catch (NumberFormatException e) {
+                throw new ConvException(String.format(
+                        "Can convert %s to timestamp(%s).",
+                        input, e.getMessage()));
+            }
+        } else {
+            try {
+                Timestamp ret = Timestamps.parse(input.replace(' ', 'T'));
+                return ret;
+            } catch (java.text.ParseException e) {
+                throw new ConvException(String.format(
+                        "Can convert %s to timestamp(%s).",
+                        input, e.getMessage()));
+            }
+        }
+    }
+
+    static public Duration parseDurationFromString(String input) throws ConvException {
+        if (input.matches("\\d+")) {
+            try {
+                Duration.Builder ret = Duration.newBuilder();
+                ret.setSeconds(Long.parseLong(input));
+                ret.setNanos(0);
+                return ret.build();
+            } catch (NumberFormatException e) {
+                throw new ConvException(String.format(
+                        "Can convert %s to duration(%s).",
+                        input, e.getMessage()));
+            }
+        } else {
+            try {
+                Duration ret = Durations.parse(input.replace(' ', 'T'));
+                return ret;
+            } catch (java.text.ParseException e) {
+                throw new ConvException(String.format(
+                        "Can convert %s to duration(%s).",
+                        input, e.getMessage()));
+            }
+        }
     }
 
     /**

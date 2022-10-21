@@ -19,6 +19,8 @@ import org.xresloader.core.data.src.DataContainer;
 import org.xresloader.core.data.src.DataSrcImpl;
 import org.xresloader.core.engine.IdentifyDescriptor;
 import org.xresloader.core.scheme.SchemeConf;
+import com.google.protobuf.Timestamp;
+import com.google.protobuf.Duration;
 
 /**
  * Created by owentou on 2019/04/08.
@@ -317,7 +319,8 @@ public class DataDstUEJson extends DataDstUEBase {
 
                     if (null != obj) {
                         int index = fieldSet.get(i).getReferNode().getListIndex();
-                        if (stripListRule == ProgramOptions.ListStripRule.KEEP_ALL || stripListRule == ProgramOptions.ListStripRule.STRIP_EMPTY_TAIL) {
+                        if (stripListRule == ProgramOptions.ListStripRule.KEEP_ALL
+                                || stripListRule == ProgramOptions.ListStripRule.STRIP_EMPTY_TAIL) {
                             while (ret.length() < index) {
                                 ret.put(getDefault(field));
                             }
@@ -619,145 +622,145 @@ public class DataDstUEJson extends DataDstUEBase {
 
             Object parsedDatas = null;
             switch (field.getType()) {
-            case INT: {
-                Long[] values = parsePlainDataLong(groups, ident, field);
-                ArrayList<Object> tmp = new ArrayList<Object>();
-                if (null != values) {
-                    tmp.ensureCapacity(values.length);
-                    for (Long v : values) {
-                        tmp.add(v.intValue());
+                case INT: {
+                    Long[] values = parsePlainDataLong(groups, ident, field);
+                    ArrayList<Object> tmp = new ArrayList<Object>();
+                    if (null != values) {
+                        tmp.ensureCapacity(values.length);
+                        for (Long v : values) {
+                            tmp.add(v.intValue());
+                        }
                     }
-                }
 
-                if (!tmp.isEmpty()) {
-                    parsedDatas = tmp;
-                }
-                break;
-            }
-
-            case LONG: {
-                Long[] values = parsePlainDataLong(groups, ident, field);
-                ArrayList<Object> tmp = new ArrayList<Object>();
-                if (null != values) {
-                    tmp.ensureCapacity(values.length);
-                    for (Long v : values) {
-                        tmp.add(v);
+                    if (!tmp.isEmpty()) {
+                        parsedDatas = tmp;
                     }
+                    break;
                 }
-                if (!tmp.isEmpty()) {
-                    parsedDatas = tmp;
-                }
-                break;
-            }
 
-            case FLOAT: {
-                Double[] values = parsePlainDataDouble(groups, ident, field);
-                ArrayList<Object> tmp = new ArrayList<Object>();
-                if (null != values) {
-                    tmp.ensureCapacity(values.length);
-                    for (Double v : values) {
-                        tmp.add(v.floatValue());
+                case LONG: {
+                    Long[] values = parsePlainDataLong(groups, ident, field);
+                    ArrayList<Object> tmp = new ArrayList<Object>();
+                    if (null != values) {
+                        tmp.ensureCapacity(values.length);
+                        for (Long v : values) {
+                            tmp.add(v);
+                        }
                     }
-                }
-                if (!tmp.isEmpty()) {
-                    parsedDatas = tmp;
-                }
-                break;
-            }
-
-            case DOUBLE: {
-                Double[] values = parsePlainDataDouble(groups, ident, field);
-                ArrayList<Object> tmp = new ArrayList<Object>();
-                if (null != values) {
-                    tmp.ensureCapacity(values.length);
-                    for (Double v : values) {
-                        tmp.add(v);
+                    if (!tmp.isEmpty()) {
+                        parsedDatas = tmp;
                     }
+                    break;
                 }
-                if (!tmp.isEmpty()) {
-                    parsedDatas = tmp;
-                }
-                break;
-            }
 
-            case BOOLEAN: {
-                Boolean[] values = parsePlainDataBoolean(groups, ident, field);
-                ArrayList<Object> tmp = new ArrayList<Object>();
-                if (null != values) {
-                    tmp.ensureCapacity(values.length);
-                    for (Boolean v : values) {
-                        tmp.add(v);
+                case FLOAT: {
+                    Double[] values = parsePlainDataDouble(groups, ident, field);
+                    ArrayList<Object> tmp = new ArrayList<Object>();
+                    if (null != values) {
+                        tmp.ensureCapacity(values.length);
+                        for (Double v : values) {
+                            tmp.add(v.floatValue());
+                        }
                     }
-                }
-                if (!tmp.isEmpty()) {
-                    parsedDatas = tmp;
-                }
-                break;
-            }
-
-            case STRING:
-            case BYTES: {
-                String[] values = parsePlainDataString(groups, ident, field);
-                ArrayList<Object> tmp = new ArrayList<Object>();
-                if (null != values) {
-                    tmp.ensureCapacity(values.length);
-                    for (String v : values) {
-                        tmp.add(v);
+                    if (!tmp.isEmpty()) {
+                        parsedDatas = tmp;
                     }
+                    break;
                 }
-                if (!tmp.isEmpty()) {
-                    parsedDatas = tmp;
-                }
-                break;
-            }
 
-            case MESSAGE: {
-                if (field.isMap()) {
-                    HashMap<Object, Object> tmp = new HashMap<Object, Object>();
-                    for (String v : groups) {
-                        String[] subGroups = splitPlainGroups(v, getPlainMessageSeparator(field));
-                        // 和Standard模式一样，Map结构要特殊处理。但是Plain模式本身就是外部Merge的。所以不影响原有结构
-                        JSONObject msg = new JSONObject();
-                        dumpPlainMessageFields(msg, subGroups, ident, field.getTypeDescriptor());
-                        if (!msg.isEmpty()) {
-                            Object mapKey = null;
-                            Object mapValue = null;
-                            for (String key : ((JSONObject) msg).keySet()) {
-                                if (key.equalsIgnoreCase("key")) {
-                                    mapKey = ((JSONObject) msg).opt(key);
-                                } else if (key.equalsIgnoreCase("value")) {
-                                    mapValue = ((JSONObject) msg).opt(key);
+                case DOUBLE: {
+                    Double[] values = parsePlainDataDouble(groups, ident, field);
+                    ArrayList<Object> tmp = new ArrayList<Object>();
+                    if (null != values) {
+                        tmp.ensureCapacity(values.length);
+                        for (Double v : values) {
+                            tmp.add(v);
+                        }
+                    }
+                    if (!tmp.isEmpty()) {
+                        parsedDatas = tmp;
+                    }
+                    break;
+                }
+
+                case BOOLEAN: {
+                    Boolean[] values = parsePlainDataBoolean(groups, ident, field);
+                    ArrayList<Object> tmp = new ArrayList<Object>();
+                    if (null != values) {
+                        tmp.ensureCapacity(values.length);
+                        for (Boolean v : values) {
+                            tmp.add(v);
+                        }
+                    }
+                    if (!tmp.isEmpty()) {
+                        parsedDatas = tmp;
+                    }
+                    break;
+                }
+
+                case STRING:
+                case BYTES: {
+                    String[] values = parsePlainDataString(groups, ident, field);
+                    ArrayList<Object> tmp = new ArrayList<Object>();
+                    if (null != values) {
+                        tmp.ensureCapacity(values.length);
+                        for (String v : values) {
+                            tmp.add(v);
+                        }
+                    }
+                    if (!tmp.isEmpty()) {
+                        parsedDatas = tmp;
+                    }
+                    break;
+                }
+
+                case MESSAGE: {
+                    if (field.isMap()) {
+                        HashMap<Object, Object> tmp = new HashMap<Object, Object>();
+                        for (String v : groups) {
+                            String[] subGroups = splitPlainGroups(v, getPlainMessageSeparator(field));
+                            // 和Standard模式一样，Map结构要特殊处理。但是Plain模式本身就是外部Merge的。所以不影响原有结构
+                            JSONObject msg = new JSONObject();
+                            dumpPlainMessageFields(msg, subGroups, ident, field.getTypeDescriptor());
+                            if (!msg.isEmpty()) {
+                                Object mapKey = null;
+                                Object mapValue = null;
+                                for (String key : ((JSONObject) msg).keySet()) {
+                                    if (key.equalsIgnoreCase("key")) {
+                                        mapKey = ((JSONObject) msg).opt(key);
+                                    } else if (key.equalsIgnoreCase("value")) {
+                                        mapValue = ((JSONObject) msg).opt(key);
+                                    }
+                                }
+
+                                if (mapKey != null && mapValue != null) {
+                                    tmp.put(mapKey.toString(), mapValue);
                                 }
                             }
-
-                            if (mapKey != null && mapValue != null) {
-                                tmp.put(mapKey.toString(), mapValue);
+                        }
+                        if (!tmp.isEmpty()) {
+                            parsedDatas = tmp;
+                        }
+                    } else {
+                        ArrayList<Object> tmp = new ArrayList<Object>();
+                        tmp.ensureCapacity(groups.length);
+                        for (String v : groups) {
+                            String[] subGroups = splitPlainGroups(v, getPlainMessageSeparator(field));
+                            JSONObject msg = new JSONObject();
+                            dumpPlainMessageFields(msg, subGroups, ident, field.getTypeDescriptor());
+                            if (!msg.isEmpty()) {
+                                tmp.add(msg);
                             }
                         }
-                    }
-                    if (!tmp.isEmpty()) {
-                        parsedDatas = tmp;
-                    }
-                } else {
-                    ArrayList<Object> tmp = new ArrayList<Object>();
-                    tmp.ensureCapacity(groups.length);
-                    for (String v : groups) {
-                        String[] subGroups = splitPlainGroups(v, getPlainMessageSeparator(field));
-                        JSONObject msg = new JSONObject();
-                        dumpPlainMessageFields(msg, subGroups, ident, field.getTypeDescriptor());
-                        if (!msg.isEmpty()) {
-                            tmp.add(msg);
+                        if (!tmp.isEmpty()) {
+                            parsedDatas = tmp;
                         }
                     }
-                    if (!tmp.isEmpty()) {
-                        parsedDatas = tmp;
-                    }
+                    break;
                 }
-                break;
-            }
 
-            default:
-                break;
+                default:
+                    break;
             }
 
             if (field.isMap() && parsedDatas != null && parsedDatas instanceof HashMap<?, ?>) {
@@ -781,7 +784,8 @@ public class DataDstUEJson extends DataDstUEBase {
 
                     int index = maybeFromNode.getListIndex();
                     ProgramOptions.ListStripRule stripListRule = ProgramOptions.getInstance().stripListRule;
-                    if (stripListRule == ProgramOptions.ListStripRule.KEEP_ALL || stripListRule == ProgramOptions.ListStripRule.STRIP_EMPTY_TAIL) {
+                    if (stripListRule == ProgramOptions.ListStripRule.KEEP_ALL
+                            || stripListRule == ProgramOptions.ListStripRule.STRIP_EMPTY_TAIL) {
                         while (valArray.length() < index) {
                             valArray.put(getDefault(field));
                         }
@@ -805,51 +809,79 @@ public class DataDstUEJson extends DataDstUEBase {
         } else {
             Object val = null;
             switch (field.getType()) {
-            case INT: {
-                val = parsePlainDataLong(input.trim(), ident, field).intValue();
-                break;
-            }
-
-            case LONG: {
-                val = parsePlainDataLong(input.trim(), ident, field);
-                break;
-            }
-
-            case FLOAT: {
-                val = parsePlainDataDouble(input.trim(), ident, field).floatValue();
-                break;
-            }
-
-            case DOUBLE: {
-                val = parsePlainDataDouble(input.trim(), ident, field);
-                break;
-            }
-
-            case BOOLEAN: {
-                val = parsePlainDataBoolean(input.trim(), ident, field);
-                break;
-            }
-
-            case STRING:
-            case BYTES: {
-                val = parsePlainDataString(input.trim(), ident, field);
-                break;
-            }
-
-            case MESSAGE: {
-                String[] groups = splitPlainGroups(input.trim(), getPlainMessageSeparator(field));
-                JSONObject res = new JSONObject();
-                dumpPlainMessageFields(res, groups, ident, field.getTypeDescriptor());
-                if (res.isEmpty()) {
-                    val = getDefault(field);
-                } else {
-                    val = res;
+                case INT: {
+                    val = parsePlainDataLong(input.trim(), ident, field).intValue();
+                    break;
                 }
-                break;
-            }
 
-            default:
-                break;
+                case LONG: {
+                    val = parsePlainDataLong(input.trim(), ident, field);
+                    break;
+                }
+
+                case FLOAT: {
+                    val = parsePlainDataDouble(input.trim(), ident, field).floatValue();
+                    break;
+                }
+
+                case DOUBLE: {
+                    val = parsePlainDataDouble(input.trim(), ident, field);
+                    break;
+                }
+
+                case BOOLEAN: {
+                    val = parsePlainDataBoolean(input.trim(), ident, field);
+                    break;
+                }
+
+                case STRING:
+                case BYTES: {
+                    val = parsePlainDataString(input.trim(), ident, field);
+                    break;
+                }
+
+                case MESSAGE: {
+                    if (field.isMap()) {
+                        HashMap<Object, Object> res = new HashMap<Object, Object>();
+                        String[] groups = splitPlainGroups(input.trim(), getPlainMessageSeparator(field));
+                        // 和Standard模式一样，Map结构要特殊处理。但是Plain模式本身就是外部Merge的。所以不影响原有结构
+                        JSONObject msg = new JSONObject();
+                        dumpPlainMessageFields(msg, groups, ident, field.getTypeDescriptor());
+                        if (!msg.isEmpty()) {
+                            Object mapKey = null;
+                            Object mapValue = null;
+                            for (String key : ((JSONObject) msg).keySet()) {
+                                if (key.equalsIgnoreCase("key")) {
+                                    mapKey = ((JSONObject) msg).opt(key);
+                                } else if (key.equalsIgnoreCase("value")) {
+                                    mapValue = ((JSONObject) msg).opt(key);
+                                }
+                            }
+
+                            if (mapKey != null && mapValue != null) {
+                                res.put(mapKey.toString(), mapValue);
+                            }
+                        }
+                        if (res.isEmpty()) {
+                            val = getDefault(field);
+                        } else {
+                            val = res;
+                        }
+                    } else {
+                        String[] groups = splitPlainGroups(input.trim(), getPlainMessageSeparator(field));
+                        JSONObject res = new JSONObject();
+                        dumpPlainMessageFields(res, groups, ident, field.getTypeDescriptor());
+                        if (res.isEmpty()) {
+                            val = getDefault(field);
+                        } else {
+                            val = res;
+                        }
+                    }
+                    break;
+                }
+
+                default:
+                    break;
             }
 
             if (val != null) {
@@ -866,6 +898,44 @@ public class DataDstUEJson extends DataDstUEBase {
         }
 
         ArrayList<DataDstFieldDescriptor> children = messageType.getSortedFields();
+
+        // 几种特殊模式
+        if (inputs.length == 1) {
+            if (org.xresloader.core.data.dst.DataDstWriterNode.SPECIAL_MESSAGE_TYPE.TIMEPOINT == messageType
+                    .getSpecialMessageType() &&
+                    messageType.getFullName() == Timestamp.getDescriptor()
+                            .getFullName()) {
+                Timestamp res = DataDstPb.parseTimestampFromString(inputs[0]);
+                for (int i = 0; i < children.size(); ++i) {
+                    if (children.get(i).getName().equalsIgnoreCase("seconds")
+                            && !children.get(i).isList()) {
+                        String varName = getIdentName(children.get(i).getName());
+                        builder.put(varName, res.getSeconds());
+                    } else if (children.get(i).getName().equalsIgnoreCase("nanos")
+                            && !children.get(i).isList()) {
+                        String varName = getIdentName(children.get(i).getName());
+                        builder.put(varName, res.getNanos());
+                    }
+                }
+                return;
+            } else if (org.xresloader.core.data.dst.DataDstWriterNode.SPECIAL_MESSAGE_TYPE.DURATION == messageType
+                    .getSpecialMessageType() &&
+                    messageType.getFullName() == Duration.getDescriptor().getFullName()) {
+                Duration res = DataDstPb.parseDurationFromString(inputs[0]);
+                for (int i = 0; i < children.size(); ++i) {
+                    if (children.get(i).getName().equalsIgnoreCase("seconds")
+                            && !children.get(i).isList()) {
+                        String varName = getIdentName(children.get(i).getName());
+                        builder.put(varName, res.getSeconds());
+                    } else if (children.get(i).getName().equalsIgnoreCase("nanos")
+                            && !children.get(i).isList()) {
+                        String varName = getIdentName(children.get(i).getName());
+                        builder.put(varName, res.getNanos());
+                    }
+                }
+                return;
+            }
+        }
 
         HashSet<String> dumpedOneof = null;
         if (messageType.getSortedOneofs().size() > 0) {
@@ -935,54 +1005,54 @@ public class DataDstUEJson extends DataDstUEBase {
 
     private Object getDefault(DataDstFieldDescriptor fd) {
         switch (fd.getType()) {
-        case INT: {
-            return Integer.valueOf(0);
-        }
-        case LONG: {
-            return Long.valueOf(0);
-        }
-        case BOOLEAN: {
-            return false;
-        }
-        case STRING:
-        case BYTES: {
-            return "";
-        }
-        case FLOAT:
-        case DOUBLE: {
-            return 0.0f;
-        }
-        case MESSAGE: {
-            HashSet<String> dumpedOneof = null;
-            if (fd.getTypeDescriptor().getSortedOneofs().size() > 0) {
-                dumpedOneof = new HashSet<String>();
+            case INT: {
+                return Integer.valueOf(0);
             }
+            case LONG: {
+                return Long.valueOf(0);
+            }
+            case BOOLEAN: {
+                return false;
+            }
+            case STRING:
+            case BYTES: {
+                return "";
+            }
+            case FLOAT:
+            case DOUBLE: {
+                return 0.0f;
+            }
+            case MESSAGE: {
+                HashSet<String> dumpedOneof = null;
+                if (fd.getTypeDescriptor().getSortedOneofs().size() > 0) {
+                    dumpedOneof = new HashSet<String>();
+                }
 
-            JSONObject ret = new JSONObject();
-            for (DataDstFieldDescriptor subField : fd.getTypeDescriptor().getSortedFields()) {
-                String varName = getIdentName(subField.getName());
-                // 需要dump一次oneof字段
-                if (null != subField.getReferOneof()) {
-                    String oneofVarName = getIdentName(subField.getReferOneof().getName());
-                    if (!dumpedOneof.contains(oneofVarName)) {
-                        dumpedOneof.add(oneofVarName);
-                        ret.put(oneofVarName, Integer.valueOf(0));
+                JSONObject ret = new JSONObject();
+                for (DataDstFieldDescriptor subField : fd.getTypeDescriptor().getSortedFields()) {
+                    String varName = getIdentName(subField.getName());
+                    // 需要dump一次oneof字段
+                    if (null != subField.getReferOneof()) {
+                        String oneofVarName = getIdentName(subField.getReferOneof().getName());
+                        if (!dumpedOneof.contains(oneofVarName)) {
+                            dumpedOneof.add(oneofVarName);
+                            ret.put(oneofVarName, Integer.valueOf(0));
+                        }
+                    }
+
+                    if (subField.isMap()) {
+                        ret.put(varName, new JSONObject());
+                    } else if (subField.isList()) {
+                        ret.put(varName, new JSONArray());
+                    } else {
+                        dumpDefault(ret, subField);
                     }
                 }
 
-                if (subField.isMap()) {
-                    ret.put(varName, new JSONObject());
-                } else if (subField.isList()) {
-                    ret.put(varName, new JSONArray());
-                } else {
-                    dumpDefault(ret, subField);
-                }
+                return ret;
             }
-
-            return ret;
-        }
-        default:
-            return null;
+            default:
+                return null;
         }
     }
 

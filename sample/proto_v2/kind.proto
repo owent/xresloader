@@ -6,6 +6,9 @@ import "xresloader_ue.proto";
 import "dep_level2.proto";
 import "dependency.proto";
 
+import "google/protobuf/duration.proto";
+import "google/protobuf/timestamp.proto";
+
 message role_cfg {
     optional uint32  id           = 1;
     optional uint32  unlock_level = 2;
@@ -17,6 +20,15 @@ message role_cfg {
     repeated string    test_array            = 11;
     optional string    int_as_string         = 12;
     repeated cost_type test_plain_enum_array = 13;
+
+    optional google.protobuf.Timestamp convert_timepoint_one = 21 [ (org.xresloader.field_origin_value) = "origin_timepoint_one" ];
+    optional string origin_timepoint_one = 22;
+    optional google.protobuf.Duration convert_duration_one = 23 [ (org.xresloader.field_origin_value) = "origin_duration_one" ];
+    optional string origin_duration_one = 24;
+    repeated google.protobuf.Timestamp convert_timepoint_arr = 25 [ (org.xresloader.field_origin_value) = "origin_timepoint_arr" ];
+    repeated string origin_timepoint_arr = 26;
+    repeated google.protobuf.Duration convert_duration_arr = 27 [ (org.xresloader.field_origin_value) = "origin_duration_arr" ];
+    repeated string origin_duration_arr = 28;
 }
 
 message role_upgrade_cfg {

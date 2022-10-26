@@ -4,10 +4,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 import org.xresloader.core.data.dst.DataDstWriterNode;
-import org.xresloader.core.data.err.ConvException;
-import org.xresloader.core.data.src.DataSrcImpl;
 import org.xresloader.core.data.vfy.DataVerifyImpl;
-import org.xresloader.core.data.vfy.DataVerifyResult;
 
 /**
  * Created by owt50 on 2016/12/7. 这个数据结构对应Excel里的一列

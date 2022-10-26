@@ -25,7 +25,6 @@ public class SchemeConf {
         public String category = "XResConfig";
         public String editAccess = "EditAnywhere";
         public Boolean enableCaseConvert = true;
-        public Boolean enableRecursiveMode = true;
         public String destinationPath = "";
         public String codeOutputDir = "";
         public String codeOutputPublicDir = "";
@@ -83,7 +82,6 @@ public class SchemeConf {
         extUECSV.category = "XResConfig";
         extUECSV.editAccess = "EditAnywhere";
         extUECSV.enableCaseConvert = true;
-        extUECSV.enableRecursiveMode = true;
         extUECSV.destinationPath = "";
         extUECSV.codeOutputDir = "";
         extUECSV.codeOutputPublicDir = "";
@@ -106,7 +104,6 @@ public class SchemeConf {
         extUECSV.category = "XResConfig";
         extUECSV.editAccess = "EditAnywhere";
         extUECSV.enableCaseConvert = true;
-        extUECSV.enableRecursiveMode = true;
         extUECSV.destinationPath = "";
         extUECSV.codeOutputDir = "";
         extUECSV.codeOutputPublicDir = "";
@@ -415,14 +412,6 @@ public class SchemeConf {
 
     public void setUECaseConvert(String data) {
         extUECSV.enableCaseConvert = getLogicalValue(data);
-    }
-
-    public void setUERecursiveMode(String data) {
-        extUECSV.enableRecursiveMode = getLogicalValue(data);
-        if (!extUECSV.enableRecursiveMode) {
-            ProgramOptions.getLoger()
-                    .warn("UeCfg-RecursiveMode=False is desprecated and will be removed in the future.");
-        }
     }
 
     public void setUEDestinationPath(String dir) {

@@ -2,16 +2,18 @@
 
 ## Unrelease
 
-## 2.11.1
+## 2.12.0
 
 1. 特殊处理 `Timestamp` 和 `Duration` 类型的字符串转换
-2. 更新 `protobuf` 到 3.21.8
-3. 更新 `org.apache.poi` 到 5.2.3
-4. 更新 `org.apache.pdfbox` 到 2.0.27
-5. 更新 `org.apache.santuario` 到 3.0.1
-6. 更新 `org.json` 到 20220924
-7. 更新 `org.apache.logging.log4j` 到 2.19.0
-8. 更新 `maven-shade-plugin` 到 3.4.0
+2. 移除 `UeCfg-RecursiveMode` 选项
+3. 重构UE输出的数据生成模块，简化维护复杂度
+4. 更新 `protobuf` 到 3.21.8
+5. 更新 `org.apache.poi` 到 5.2.3
+6. 更新 `org.apache.pdfbox` 到 2.0.27
+7. 更新 `org.apache.santuario` 到 3.0.1
+8. 更新 `org.json` 到 20220924
+9. 更新 `org.apache.logging.log4j` 到 2.19.0
+10. 更新 `maven-shade-plugin` 到 3.4.0
 
 ## 2.11.0-RC3
 

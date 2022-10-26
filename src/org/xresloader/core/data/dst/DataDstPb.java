@@ -1,40 +1,9 @@
 package org.xresloader.core.data.dst;
 
-import static com.google.protobuf.Descriptors.FieldDescriptor.JavaType.MESSAGE;
-import java.io.ByteArrayOutputStream;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.InputStream;
-import java.nio.charset.Charset;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.LinkedList;
-import java.util.Map;
-import com.google.protobuf.ByteString;
-import com.google.protobuf.DescriptorProtos;
-import com.google.protobuf.DurationProto;
-import com.google.protobuf.TimestampProto;
-import com.google.protobuf.AnyProto;
-import com.google.protobuf.ApiProto;
-import com.google.protobuf.EmptyProto;
-import com.google.protobuf.FieldMaskProto;
-import com.google.protobuf.StructProto;
-import com.google.protobuf.TypeProto;
-import com.google.protobuf.WrappersProto;
-import com.google.protobuf.SourceContextProto;
-import com.google.protobuf.Descriptors;
-import com.google.protobuf.Timestamp;
-import com.google.protobuf.Duration;
+import com.google.protobuf.*;
 import com.google.protobuf.Descriptors.FieldDescriptor.JavaType;
-import com.google.protobuf.DynamicMessage;
-import com.google.protobuf.UninitializedMessageException;
-import com.google.protobuf.util.Timestamps;
 import com.google.protobuf.util.Durations;
+import com.google.protobuf.util.Timestamps;
 import org.apache.commons.codec.binary.Hex;
 import org.xresloader.Xresloader;
 import org.xresloader.core.ProgramOptions;
@@ -45,15 +14,22 @@ import org.xresloader.core.data.dst.DataDstWriterNode.DataDstTypeDescriptor;
 import org.xresloader.core.data.err.ConvException;
 import org.xresloader.core.data.src.DataContainer;
 import org.xresloader.core.data.src.DataSrcImpl;
-import org.xresloader.core.data.vfy.DataVerifyImpl;
-import org.xresloader.core.data.vfy.DataVerifyIntRange;
-import org.xresloader.core.data.vfy.DataVerifyPbEnum;
-import org.xresloader.core.data.vfy.DataVerifyPbMsgField;
-import org.xresloader.core.data.vfy.DataVerifyPbOneof;
+import org.xresloader.core.data.vfy.*;
 import org.xresloader.core.engine.IdentifyDescriptor;
 import org.xresloader.core.scheme.SchemeConf;
 import org.xresloader.pb.PbHeaderV3;
 import org.xresloader.ue.XresloaderUe;
+
+import java.io.*;
+import java.nio.charset.Charset;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+import java.time.Instant;
+import java.time.OffsetTime;
+import java.time.temporal.ChronoField;
+import java.util.*;
+
+import static com.google.protobuf.Descriptors.FieldDescriptor.JavaType.MESSAGE;
 
 /**
  * Created by owent on 2014/10/10.
@@ -63,6 +39,11 @@ public class DataDstPb extends DataDstImpl {
         public T element = null;
         LinkedList<String> names = null;
     };
+
+    static private class ParseResult {
+        public DynamicMessage value = null;
+        public String origin = null;
+    }
 
     /***
      * protobuf 的描述信息生成是按文件的，所以要缓存并先生成依赖，再生成需要的文件描述数据
@@ -389,7 +370,8 @@ public class DataDstPb extends DataDstImpl {
         }
     }
 
-    static private void setup_extension(DataDstFieldDescriptor child_field, Descriptors.FieldDescriptor fd) {
+    static private void setup_extension(DataDstTypeDescriptor parent_message, DataDstFieldDescriptor child_field,
+            Descriptors.FieldDescriptor fd) {
         String verifierExpr = null;
         if (fd.getOptions().hasExtension(Xresloader.verifier)) {
             verifierExpr = fd.getOptions().getExtension(Xresloader.verifier);
@@ -416,6 +398,42 @@ public class DataDstPb extends DataDstImpl {
             child_field.mutableExtension().plainSeparator = fd.getOptions().getExtension(Xresloader.fieldSeparator);
         }
 
+        // origin refer
+        if (fd.getOptions().hasExtension(Xresloader.fieldOriginValue)) {
+            String originValue = fd.getOptions().getExtension(Xresloader.fieldOriginValue);
+            DataDstFieldDescriptor refer = parent_message.fields.getOrDefault(originValue, null);
+            do {
+                if (refer == null) {
+                    ProgramOptions.getLoger().error(
+                            "field_origin_value \"%s\" of \"%s\" not found, we will ignore this plugin", originValue,
+                            fd.getFullName());
+                    break;
+                }
+                if (refer.getType() != DataDstWriterNode.JAVA_TYPE.STRING) {
+                    ProgramOptions.getLoger().warn(
+                            "field_origin_value \"%s\" of \"%s\" is not a string, we will ignore this plugin",
+                            originValue, fd.getFullName());
+                    break;
+                }
+
+                if (child_field.isList() && !refer.isList()) {
+                    ProgramOptions.getLoger().warn(
+                            "\"%s\" is repeated but field_origin_value \"%s\" is not, we will ignore this plugin",
+                            fd.getFullName(), originValue);
+                    break;
+                }
+
+                if (!child_field.isList() && refer.isList()) {
+                    ProgramOptions.getLoger().warn(
+                            "\"%s\" is not repeated but field_origin_value \"%s\" is a repeated field, we will ignore this plugin",
+                            fd.getFullName(), originValue);
+                    break;
+                }
+
+                child_field.setReferOriginField(refer);
+            } while (false);
+        }
+
         // setup UE extension
         if (fd.getOptions().hasExtension(XresloaderUe.keyTag)) {
             child_field.mutableExtension().mutableUE().keyTag = fd.getOptions().getExtension(XresloaderUe.keyTag);
@@ -432,7 +450,8 @@ public class DataDstPb extends DataDstImpl {
         }
     }
 
-    static private void setup_extension(DataDstOneofDescriptor child_field, Descriptors.Descriptor container,
+    static private void setup_extension(DataDstTypeDescriptor parent_message, DataDstOneofDescriptor child_field,
+            Descriptors.Descriptor container,
             Descriptors.OneofDescriptor fd) {
         LinkedList<DataVerifyImpl> gen = setup_verifier(container, fd);
         if (gen != null && !gen.isEmpty()) {
@@ -697,8 +716,6 @@ public class DataDstPb extends DataDstImpl {
                     mutableDataDstDescriptor(pbs, fieldPbDesc, pbTypeToInnerType(field.getType())), field.getNumber(),
                     field.getName(), inner_label, field);
             innerDesc.fields.put(field.getName(), innerField);
-
-            setup_extension(innerField, field);
         }
 
         for (Descriptors.OneofDescriptor oneof : pbDesc.getOneofs()) {
@@ -712,8 +729,21 @@ public class DataDstPb extends DataDstImpl {
             DataDstOneofDescriptor innerField = new DataDstOneofDescriptor(innerDesc, fields, oneof.getIndex(),
                     oneof.getName(), oneof);
             innerDesc.oneofs.put(oneof.getName(), innerField);
+        }
 
-            setup_extension(innerField, pbDesc, oneof);
+        // 最后设置插件
+        for (Descriptors.FieldDescriptor field : pbDesc.getFields()) {
+            DataDstFieldDescriptor innerField = innerDesc.fields.getOrDefault(field.getName(), null);
+            if (null != innerField) {
+                setup_extension(innerDesc, innerField, field);
+            }
+        }
+
+        for (Descriptors.OneofDescriptor oneof : pbDesc.getOneofs()) {
+            DataDstOneofDescriptor innerField = innerDesc.oneofs.getOrDefault(oneof.getName(), null);
+            if (null != innerField) {
+                setup_extension(innerDesc, innerField, pbDesc, oneof);
+            }
         }
     }
 
@@ -736,9 +766,9 @@ public class DataDstPb extends DataDstImpl {
             DataDstWriterNode.SPECIAL_MESSAGE_TYPE smt = DataDstWriterNode.SPECIAL_MESSAGE_TYPE.NONE;
             if (pbDesc.getOptions().getMapEntry()) {
                 smt = DataDstWriterNode.SPECIAL_MESSAGE_TYPE.MAP;
-            } else if (pbDesc.getFullName() == Timestamp.getDescriptor().getFullName()) {
+            } else if (pbDesc.getFullName().equals(Timestamp.getDescriptor().getFullName())) {
                 smt = DataDstWriterNode.SPECIAL_MESSAGE_TYPE.TIMEPOINT;
-            } else if (pbDesc.getFullName() == Duration.getDescriptor().getFullName()) {
+            } else if (pbDesc.getFullName().equals(Duration.getDescriptor().getFullName())) {
                 smt = DataDstWriterNode.SPECIAL_MESSAGE_TYPE.DURATION;
             }
             ret = new DataDstTypeDescriptor(type, pbDesc.getFile().getPackage(), pbDesc.getName(), pbDesc, smt);
@@ -1779,11 +1809,20 @@ public class DataDstPb extends DataDstImpl {
                 case MESSAGE: {
                     ArrayList<DynamicMessage> tmp = new ArrayList<DynamicMessage>();
                     tmp.ensureCapacity(groups.length);
-                    for (String v : groups) {
+                    Descriptors.FieldDescriptor referOriginField = (Descriptors.FieldDescriptor) field
+                            .getReferOriginField().getRawDescriptor();
+                    for (int i = 0; i < groups.length; ++i) {
+                        String v = groups[i];
                         String[] subGroups = splitPlainGroups(v, getPlainMessageSeparator(field));
-                        DynamicMessage msg = parsePlainDataMessage(subGroups, ident, field);
-                        if (msg != null) {
-                            tmp.add(msg);
+                        ParseResult res = parsePlainDataMessage(subGroups, ident, field);
+                        if (res != null && res.value != null) {
+                            tmp.add(res.value);
+                            if (res.origin != null && referOriginField != null) {
+                                while (builder.getRepeatedFieldCount(referOriginField) < i) {
+                                    builder.addRepeatedField(referOriginField, "");
+                                }
+                                dumpValue(builder, referOriginField, res.origin, i);
+                            }
                         }
                     }
                     if (!tmp.isEmpty()) {
@@ -1874,8 +1913,15 @@ public class DataDstPb extends DataDstImpl {
 
                 case MESSAGE: {
                     String[] groups = splitPlainGroups(input.trim(), getPlainMessageSeparator(field));
-                    val = parsePlainDataMessage(groups, ident, field);
-                    if (val == null && field.isRequired()) {
+                    ParseResult res = parsePlainDataMessage(groups, ident, field);
+                    if (res != null && res.value != null) {
+                        val = res.value;
+                        if (res.origin != null && field.getReferOriginField() != null) {
+                            dumpValue(builder,
+                                    (Descriptors.FieldDescriptor) field.getReferOriginField().getRawDescriptor(),
+                                    res.origin, 0);
+                        }
+                    } else if (field.isRequired()) {
                         dumpDefault(builder, fd, 0);
                     }
                     break;
@@ -1902,7 +1948,7 @@ public class DataDstPb extends DataDstImpl {
         }
     }
 
-    public DynamicMessage parsePlainDataMessage(String[] inputs, IdentifyDescriptor ident,
+    public ParseResult parsePlainDataMessage(String[] inputs, IdentifyDescriptor ident,
             DataDstWriterNode.DataDstFieldDescriptor field) throws ConvException {
         if (field.getTypeDescriptor() == null || inputs == null || inputs.length == 0) {
             return null;
@@ -1915,43 +1961,46 @@ public class DataDstPb extends DataDstImpl {
         }
 
         ArrayList<DataDstWriterNode.DataDstFieldDescriptor> children = field.getTypeDescriptor().getSortedFields();
-        DynamicMessage.Builder ret = DynamicMessage.newBuilder(fd.getMessageType());
+        DynamicMessage.Builder builder = DynamicMessage.newBuilder(fd.getMessageType());
+        ParseResult ret = new ParseResult();
 
         // 几种特殊模式
         if (inputs.length == 1) {
             if (org.xresloader.core.data.dst.DataDstWriterNode.SPECIAL_MESSAGE_TYPE.TIMEPOINT == field
-                    .getTypeDescriptor().getSpecialMessageType() &&
-                    field.getTypeDescriptor().getFullName() == Timestamp.getDescriptor()
-                            .getFullName()) {
-                Timestamp res = parseTimestampFromString(inputs[0]);
+                    .getTypeDescriptor().getSpecialMessageType()) {
+                Instant res = parsePlainDataDatetime(inputs[0]);
                 for (int i = 0; i < children.size(); ++i) {
                     Descriptors.FieldDescriptor subfd = (Descriptors.FieldDescriptor) children.get(i)
                             .getRawDescriptor();
                     if (subfd.getName().equalsIgnoreCase("seconds")
                             && !subfd.isRepeated()) {
-                        ret.setField(subfd, res.getSeconds());
+                        builder.setField(subfd, res.toEpochMilli() / 1000);
                     } else if (subfd.getName().equalsIgnoreCase("nanos")
                             && !subfd.isRepeated()) {
-                        ret.setField(subfd, res.getNanos());
+                        builder.setField(subfd, res.getNano());
                     }
                 }
-                return ret.build();
+
+                ret.value = builder.build();
+                ret.origin = inputs[0];
+                return ret;
             } else if (org.xresloader.core.data.dst.DataDstWriterNode.SPECIAL_MESSAGE_TYPE.DURATION == field
-                    .getTypeDescriptor().getSpecialMessageType() &&
-                    field.getTypeDescriptor().getFullName() == Duration.getDescriptor().getFullName()) {
-                Duration res = parseDurationFromString(inputs[0]);
+                    .getTypeDescriptor().getSpecialMessageType()) {
+                Instant res = parsePlainDataDuration(inputs[0]);
                 for (int i = 0; i < children.size(); ++i) {
                     Descriptors.FieldDescriptor subfd = (Descriptors.FieldDescriptor) children.get(i)
                             .getRawDescriptor();
                     if (subfd.getName().equalsIgnoreCase("seconds")
                             && !subfd.isRepeated()) {
-                        ret.setField(subfd, res.getSeconds());
+                        builder.setField(subfd, res.toEpochMilli() / 1000);
                     } else if (subfd.getName().equalsIgnoreCase("nanos")
                             && !subfd.isRepeated()) {
-                        ret.setField(subfd, res.getNanos());
+                        builder.setField(subfd, res.getNano());
                     }
                 }
-                return ret.build();
+                ret.value = builder.build();
+                ret.origin = inputs[0];
+                return ret;
             }
         }
 
@@ -1962,7 +2011,13 @@ public class DataDstPb extends DataDstImpl {
         }
 
         int usedInputIdx = 0;
+        int fieldSize = 0;
         for (int i = 0; i < children.size(); ++i) {
+            if (children.get(i).getLinkedValueField() != null) {
+                ++fieldSize;
+                continue;
+            }
+
             if (children.get(i).getReferOneof() != null) {
                 if (dumpedOneof == null) {
                     throw new ConvException(String.format(
@@ -1980,12 +2035,13 @@ public class DataDstPb extends DataDstImpl {
                             usedInputIdx + 1, inputs.length));
                 }
 
-                if (dumpPlainField(ret, null, children.get(i).getReferOneof(), null, inputs[usedInputIdx])) {
+                if (dumpPlainField(builder, null, children.get(i).getReferOneof(), null, inputs[usedInputIdx])) {
                     hasData = true;
                     dumpedOneof.add(children.get(i).getReferOneof().getFullName());
                 }
 
                 ++usedInputIdx;
+                ++fieldSize;
             } else {
                 if (usedInputIdx >= inputs.length) {
                     throw new ConvException(String.format(
@@ -1994,23 +2050,24 @@ public class DataDstPb extends DataDstImpl {
                             inputs.length));
                 }
 
-                if (dumpPlainField(ret, null, children.get(i), null, inputs[usedInputIdx])) {
+                if (dumpPlainField(builder, null, children.get(i), null, inputs[usedInputIdx])) {
                     hasData = true;
                 }
 
+                ++fieldSize;
                 ++usedInputIdx;
             }
         }
 
-        if (usedInputIdx != inputs.length) {
+        if (fieldSize != inputs.length) {
             DataSrcImpl current_source = DataSrcImpl.getOurInstance();
             if (null == current_source) {
                 ProgramOptions.getLoger().warn("Try to convert %s need %d fields, but provide %d fields.",
-                        field.getTypeDescriptor().getFullName(), usedInputIdx, inputs.length);
+                        field.getTypeDescriptor().getFullName(), fieldSize, inputs.length);
             } else {
                 ProgramOptions.getLoger().warn(
                         "Try to convert %s need %d fields, but provide %d fields.%s  > File: %s, Table: %s, Row: %d, Column: %d",
-                        field.getTypeDescriptor().getFullName(), usedInputIdx, inputs.length, ProgramOptions.getEndl(),
+                        field.getTypeDescriptor().getFullName(), fieldSize, inputs.length, ProgramOptions.getEndl(),
                         current_source.getCurrentFileName(), current_source.getCurrentTableName(),
                         current_source.getCurrentRowNum() + 1, current_source.getLastColomnNum() + 1);
             }
@@ -2020,55 +2077,8 @@ public class DataDstPb extends DataDstImpl {
             return null;
         }
 
-        return ret.build();
-    }
-
-    static public Timestamp parseTimestampFromString(String input) throws ConvException {
-        if (input.matches("\\d+")) {
-            try {
-                Timestamp.Builder ret = Timestamp.newBuilder();
-                ret.setSeconds(Long.parseLong(input));
-                ret.setNanos(0);
-                return ret.build();
-            } catch (NumberFormatException e) {
-                throw new ConvException(String.format(
-                        "Can convert %s to timestamp(%s).",
-                        input, e.getMessage()));
-            }
-        } else {
-            try {
-                Timestamp ret = Timestamps.parse(input.replace(' ', 'T'));
-                return ret;
-            } catch (java.text.ParseException e) {
-                throw new ConvException(String.format(
-                        "Can convert %s to timestamp(%s).",
-                        input, e.getMessage()));
-            }
-        }
-    }
-
-    static public Duration parseDurationFromString(String input) throws ConvException {
-        if (input.matches("\\d+")) {
-            try {
-                Duration.Builder ret = Duration.newBuilder();
-                ret.setSeconds(Long.parseLong(input));
-                ret.setNanos(0);
-                return ret.build();
-            } catch (NumberFormatException e) {
-                throw new ConvException(String.format(
-                        "Can convert %s to duration(%s).",
-                        input, e.getMessage()));
-            }
-        } else {
-            try {
-                Duration ret = Durations.parse(input.replace(' ', 'T'));
-                return ret;
-            } catch (java.text.ParseException e) {
-                throw new ConvException(String.format(
-                        "Can convert %s to duration(%s).",
-                        input, e.getMessage()));
-            }
-        }
+        ret.value = builder.build();
+        return ret;
     }
 
     /**

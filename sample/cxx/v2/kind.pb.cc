@@ -26,9 +26,17 @@ PROTOBUF_CONSTEXPR role_cfg::role_cfg(
   , /*decltype(_impl_._cached_size_)*/{}
   , /*decltype(_impl_.test_array_)*/{}
   , /*decltype(_impl_.test_plain_enum_array_)*/{}
+  , /*decltype(_impl_.convert_timepoint_arr_)*/{}
+  , /*decltype(_impl_.origin_timepoint_arr_)*/{}
+  , /*decltype(_impl_.convert_duration_arr_)*/{}
+  , /*decltype(_impl_.origin_duration_arr_)*/{}
   , /*decltype(_impl_.name_)*/{&::_pbi::fixed_address_empty_string, ::_pbi::ConstantInitialized{}}
   , /*decltype(_impl_.int_as_string_)*/{&::_pbi::fixed_address_empty_string, ::_pbi::ConstantInitialized{}}
+  , /*decltype(_impl_.origin_timepoint_one_)*/{&::_pbi::fixed_address_empty_string, ::_pbi::ConstantInitialized{}}
+  , /*decltype(_impl_.origin_duration_one_)*/{&::_pbi::fixed_address_empty_string, ::_pbi::ConstantInitialized{}}
   , /*decltype(_impl_.dep_test_)*/nullptr
+  , /*decltype(_impl_.convert_timepoint_one_)*/nullptr
+  , /*decltype(_impl_.convert_duration_one_)*/nullptr
   , /*decltype(_impl_.id_)*/0u
   , /*decltype(_impl_.unlock_level_)*/0u
   , /*decltype(_impl_.cost_type_)*/0u
@@ -229,14 +237,30 @@ const uint32_t TableStruct_kind_2eproto::offsets[] PROTOBUF_SECTION_VARIABLE(pro
   PROTOBUF_FIELD_OFFSET(::role_cfg, _impl_.test_array_),
   PROTOBUF_FIELD_OFFSET(::role_cfg, _impl_.int_as_string_),
   PROTOBUF_FIELD_OFFSET(::role_cfg, _impl_.test_plain_enum_array_),
-  3,
-  4,
-  5,
-  6,
+  PROTOBUF_FIELD_OFFSET(::role_cfg, _impl_.convert_timepoint_one_),
+  PROTOBUF_FIELD_OFFSET(::role_cfg, _impl_.origin_timepoint_one_),
+  PROTOBUF_FIELD_OFFSET(::role_cfg, _impl_.convert_duration_one_),
+  PROTOBUF_FIELD_OFFSET(::role_cfg, _impl_.origin_duration_one_),
+  PROTOBUF_FIELD_OFFSET(::role_cfg, _impl_.convert_timepoint_arr_),
+  PROTOBUF_FIELD_OFFSET(::role_cfg, _impl_.origin_timepoint_arr_),
+  PROTOBUF_FIELD_OFFSET(::role_cfg, _impl_.convert_duration_arr_),
+  PROTOBUF_FIELD_OFFSET(::role_cfg, _impl_.origin_duration_arr_),
+  7,
+  8,
+  9,
+  10,
   0,
-  2,
+  4,
   ~0u,
   1,
+  ~0u,
+  5,
+  2,
+  6,
+  3,
+  ~0u,
+  ~0u,
+  ~0u,
   ~0u,
   PROTOBUF_FIELD_OFFSET(::role_upgrade_cfg, _impl_._has_bits_),
   PROTOBUF_FIELD_OFFSET(::role_upgrade_cfg, _internal_metadata_),
@@ -396,17 +420,17 @@ const uint32_t TableStruct_kind_2eproto::offsets[] PROTOBUF_SECTION_VARIABLE(pro
   ~0u,
 };
 static const ::_pbi::MigrationSchema schemas[] PROTOBUF_SECTION_VARIABLE(protodesc_cold) = {
-  { 0, 15, -1, sizeof(::role_cfg)},
-  { 24, 35, -1, sizeof(::role_upgrade_cfg)},
-  { 40, 48, -1, sizeof(::test_msg_verifier)},
-  { 50, 59, -1, sizeof(::arr_in_arr)},
-  { 62, 70, -1, sizeof(::arr_in_arr_cfg_TestMapIsEntry_DoNotUse)},
-  { 72, 80, -1, sizeof(::arr_in_arr_cfg_TestMapSmEntry_DoNotUse)},
-  { 82, 96, -1, sizeof(::arr_in_arr_cfg)},
-  { 104, 115, -1, sizeof(::event_reward_item)},
-  { 119, 130, -1, sizeof(::event_rule_item)},
-  { 134, 153, -1, sizeof(::event_cfg)},
-  { 164, 175, -1, sizeof(::keep_or_strip_empty_list_cfg)},
+  { 0, 23, -1, sizeof(::role_cfg)},
+  { 40, 51, -1, sizeof(::role_upgrade_cfg)},
+  { 56, 64, -1, sizeof(::test_msg_verifier)},
+  { 66, 75, -1, sizeof(::arr_in_arr)},
+  { 78, 86, -1, sizeof(::arr_in_arr_cfg_TestMapIsEntry_DoNotUse)},
+  { 88, 96, -1, sizeof(::arr_in_arr_cfg_TestMapSmEntry_DoNotUse)},
+  { 98, 112, -1, sizeof(::arr_in_arr_cfg)},
+  { 120, 131, -1, sizeof(::event_reward_item)},
+  { 135, 146, -1, sizeof(::event_rule_item)},
+  { 150, 169, -1, sizeof(::event_cfg)},
+  { 180, 191, -1, sizeof(::keep_or_strip_empty_list_cfg)},
 };
 
 static const ::_pb::Message* const file_default_instances[] = {
@@ -426,72 +450,87 @@ static const ::_pb::Message* const file_default_instances[] = {
 const char descriptor_table_protodef_kind_2eproto[] PROTOBUF_SECTION_VARIABLE(protodesc_cold) =
   "\n\nkind.proto\032\020xresloader.proto\032\023xresload"
   "er_ue.proto\032\020dep_level2.proto\032\020dependenc"
-  "y.proto\"\323\001\n\010role_cfg\022\n\n\002id\030\001 \001(\r\022\024\n\014unlo"
-  "ck_level\030\002 \001(\r\022\021\n\tcost_type\030\003 \001(\r\022\022\n\ncos"
-  "t_value\030\004 \001(\005\022\014\n\004name\030\005 \001(\t\022\032\n\010dep_test\030"
-  "\n \001(\0132\010.dep_cfg\022\022\n\ntest_array\030\013 \003(\t\022\025\n\ri"
-  "nt_as_string\030\014 \001(\t\022)\n\025test_plain_enum_ar"
-  "ray\030\r \003(\0162\n.cost_type\"\305\001\n\020role_upgrade_c"
-  "fg\022\020\n\002Id\030\001 \001(\rB\004\350D\350\007\022\022\n\005Level\030\002 \001(\rB\003\350D\001"
-  "\0223\n\010CostType\030\003 \001(\rB!\312>\tcost_type\232\?\022Refer"
-  " to cost_type\022\021\n\tCostValue\030\004 \001(\003\022\020\n\010Scor"
-  "eAdd\030\005 \001(\005:1\352D\006helper\312>%Test role_upgrad"
-  "e_cfg with multi keys\"V\n\021test_msg_verifi"
-  "er\022\022\n\ttest_id_1\030\221N \001(\r\022&\n\ttest_id_2\030\222N \001"
-  "(\rB\022\242\?\017\346\265\213\350\257\225ID\345\210\253\345\220\2152:\005\242\?\002-^\"o\n\narr_in_"
-  "arr\022-\n\004name\030\001 \001(\tB\037\232\?\034This is a test nam"
-  "e in array\022\023\n\007int_arr\030\002 \003(\005B\002\020\001\022\017\n\007str_a"
-  "rr\030\003 \003(\t:\014\352D\006helper\360D\001\"\362\003\n\016arr_in_arr_cf"
-  "g\022\037\n\002id\030\001 \001(\rB\023\350D\001\232\?\rThis is a Key\022\030\n\003ar"
-  "r\030\002 \003(\0132\013.arr_in_arr\022\032\n\022test_plain_int_a"
-  "rr\030\003 \003(\005\022\'\n\023test_plain_enum_arr\030\004 \003(\0162\n."
-  "cost_type\0220\n\016test_plain_msg\030\005 \001(\0132\022.test"
-  "_msg_verifierB\004\262\?\001&\022.\n\022test_plain_msg_ar"
-  "r\030\006 \003(\0132\022.test_msg_verifier\0223\n\013test_map_"
-  "is\030\007 \003(\0132\036.arr_in_arr_cfg.TestMapIsEntry"
-  "\0229\n\013test_map_sm\030\010 \003(\0132\036.arr_in_arr_cfg.T"
-  "estMapSmEntryB\004\262\?\001|\0320\n\016TestMapIsEntry\022\013\n"
-  "\003key\030\001 \001(\005\022\r\n\005value\030\002 \001(\t:\0028\001\032;\n\016TestMap"
-  "SmEntry\022\013\n\003key\030\001 \001(\t\022\030\n\005value\030\002 \001(\0132\t.de"
-  "p2_cfg:\0028\001:\037\352D\006helper\312>\023Test arr_in_arr_"
-  "cfg\"\243\001\n\021event_reward_item\022\017\n\007item_id\030\001 \001"
-  "(\r\022\022\n\nitem_count\030\002 \001(\r\022&\n\013nested_note\030\013 "
-  "\001(\tB\017\242\?\014\346\217\217\350\277\260\346\226\207\346\234\254H\000\0227\n\020nested_enum_ty"
-  "pe\030\014 \001(\0162\n.cost_typeB\017\242\?\014\350\264\247\345\270\201\347\261\273\345\236\213H\000B"
-  "\010\n\006nested\"\241\001\n\017event_rule_item\022\017\n\007rule_id"
-  "\030\001 \001(\r\022\022\n\nrule_param\030\002 \001(\r\022&\n\013nested_not"
-  "e\030\013 \001(\tB\017\242\?\014\346\217\217\350\277\260\346\226\207\346\234\254H\000\0227\n\020nested_enu"
-  "m_type\030\014 \001(\0162\n.cost_typeB\017\242\?\014\350\264\247\345\270\201\347\261\273\345\236"
-  "\213H\000B\010\n\006nested\"\360\003\n\tevent_cfg\022\017\n\002id\030\001 \001(\rB"
-  "\003\350Dd\022\024\n\007process\030\002 \001(\rB\003\350D\001\022\036\n\004rule\030\006 \001(\013"
-  "2\020.event_rule_item\022\'\n\rspecify_field\030\007 \001("
-  "\0132\020.event_rule_item\0223\n\004item\030\013 \001(\0132\022.even"
-  "t_reward_itemB\017\242\?\014\345\245\226\345\212\261\351\201\223\345\205\267H\000\022#\n\010user"
-  "_exp\030\014 \001(\003B\017\242\?\014\345\245\226\345\212\261\347\273\217\351\252\214H\000\022\037\n\004note\030\r "
-  "\001(\tB\017\242\?\014\346\217\217\350\277\260\346\226\207\346\234\254H\000\0220\n\tenum_type\030\016 \001("
-  "\0162\n.cost_typeB\017\242\?\014\350\264\247\345\270\201\347\261\273\345\236\213H\000\022%\n\nuser"
-  "_level\0303 \001(\rB\017\242\?\014\347\216\251\345\256\266\347\255\211\347\272\247H\001\022(\n\010test_"
-  "arr\030[ \003(\0132\020.event_rule_itemB\004\262\?\001;\022.\n\016tes"
-  "t_empty_arr\030\\ \003(\0132\020.event_rule_itemB\004\262\?\001"
-  ";:,\352D\006helper\312> Test event_cfg with oneof"
-  " fieldsB\010\n\006rewardB\r\n\013unlock_type\"\266\001\n\034kee"
-  "p_or_strip_empty_list_cfg\022\037\n\002id\030\001 \001(\rB\023\350"
-  "D\001\232\?\rThis is a Key\022\034\n\tarray_msg\030\002 \003(\0132\t."
-  "dep2_cfg\022\"\n\017array_plain_msg\030\003 \003(\0132\t.dep2"
-  "_cfg\022\023\n\013array_int32\030\004 \003(\005\022\023\n\013array_int64"
-  "\030\005 \003(\003:\t\352D\006helper"
+  "y.proto\032\036google/protobuf/duration.proto\032"
+  "\037google/protobuf/timestamp.proto\"\223\005\n\010rol"
+  "e_cfg\022\n\n\002id\030\001 \001(\r\022\024\n\014unlock_level\030\002 \001(\r\022"
+  "\021\n\tcost_type\030\003 \001(\r\022\022\n\ncost_value\030\004 \001(\005\022\014"
+  "\n\004name\030\005 \001(\t\022\032\n\010dep_test\030\n \001(\0132\010.dep_cfg"
+  "\022\022\n\ntest_array\030\013 \003(\t\022\025\n\rint_as_string\030\014 "
+  "\001(\t\022)\n\025test_plain_enum_array\030\r \003(\0162\n.cos"
+  "t_type\022R\n\025convert_timepoint_one\030\025 \001(\0132\032."
+  "google.protobuf.TimestampB\027\302\?\024origin_tim"
+  "epoint_one\022\034\n\024origin_timepoint_one\030\026 \001(\t"
+  "\022O\n\024convert_duration_one\030\027 \001(\0132\031.google."
+  "protobuf.DurationB\026\302\?\023origin_duration_on"
+  "e\022\033\n\023origin_duration_one\030\030 \001(\t\022R\n\025conver"
+  "t_timepoint_arr\030\031 \003(\0132\032.google.protobuf."
+  "TimestampB\027\302\?\024origin_timepoint_arr\022\034\n\024or"
+  "igin_timepoint_arr\030\032 \003(\t\022O\n\024convert_dura"
+  "tion_arr\030\033 \003(\0132\031.google.protobuf.Duratio"
+  "nB\026\302\?\023origin_duration_arr\022\033\n\023origin_dura"
+  "tion_arr\030\034 \003(\t\"\305\001\n\020role_upgrade_cfg\022\020\n\002I"
+  "d\030\001 \001(\rB\004\350D\350\007\022\022\n\005Level\030\002 \001(\rB\003\350D\001\0223\n\010Cos"
+  "tType\030\003 \001(\rB!\312>\tcost_type\232\?\022Refer to cos"
+  "t_type\022\021\n\tCostValue\030\004 \001(\003\022\020\n\010ScoreAdd\030\005 "
+  "\001(\005:1\352D\006helper\312>%Test role_upgrade_cfg w"
+  "ith multi keys\"V\n\021test_msg_verifier\022\022\n\tt"
+  "est_id_1\030\221N \001(\r\022&\n\ttest_id_2\030\222N \001(\rB\022\242\?\017"
+  "\346\265\213\350\257\225ID\345\210\253\345\220\2152:\005\242\?\002-^\"o\n\narr_in_arr\022-\n\004"
+  "name\030\001 \001(\tB\037\232\?\034This is a test name in ar"
+  "ray\022\023\n\007int_arr\030\002 \003(\005B\002\020\001\022\017\n\007str_arr\030\003 \003("
+  "\t:\014\352D\006helper\360D\001\"\362\003\n\016arr_in_arr_cfg\022\037\n\002id"
+  "\030\001 \001(\rB\023\350D\001\232\?\rThis is a Key\022\030\n\003arr\030\002 \003(\013"
+  "2\013.arr_in_arr\022\032\n\022test_plain_int_arr\030\003 \003("
+  "\005\022\'\n\023test_plain_enum_arr\030\004 \003(\0162\n.cost_ty"
+  "pe\0220\n\016test_plain_msg\030\005 \001(\0132\022.test_msg_ve"
+  "rifierB\004\262\?\001&\022.\n\022test_plain_msg_arr\030\006 \003(\013"
+  "2\022.test_msg_verifier\0223\n\013test_map_is\030\007 \003("
+  "\0132\036.arr_in_arr_cfg.TestMapIsEntry\0229\n\013tes"
+  "t_map_sm\030\010 \003(\0132\036.arr_in_arr_cfg.TestMapS"
+  "mEntryB\004\262\?\001|\0320\n\016TestMapIsEntry\022\013\n\003key\030\001 "
+  "\001(\005\022\r\n\005value\030\002 \001(\t:\0028\001\032;\n\016TestMapSmEntry"
+  "\022\013\n\003key\030\001 \001(\t\022\030\n\005value\030\002 \001(\0132\t.dep2_cfg:"
+  "\0028\001:\037\352D\006helper\312>\023Test arr_in_arr_cfg\"\243\001\n"
+  "\021event_reward_item\022\017\n\007item_id\030\001 \001(\r\022\022\n\ni"
+  "tem_count\030\002 \001(\r\022&\n\013nested_note\030\013 \001(\tB\017\242\?"
+  "\014\346\217\217\350\277\260\346\226\207\346\234\254H\000\0227\n\020nested_enum_type\030\014 \001("
+  "\0162\n.cost_typeB\017\242\?\014\350\264\247\345\270\201\347\261\273\345\236\213H\000B\010\n\006nest"
+  "ed\"\241\001\n\017event_rule_item\022\017\n\007rule_id\030\001 \001(\r\022"
+  "\022\n\nrule_param\030\002 \001(\r\022&\n\013nested_note\030\013 \001(\t"
+  "B\017\242\?\014\346\217\217\350\277\260\346\226\207\346\234\254H\000\0227\n\020nested_enum_type\030"
+  "\014 \001(\0162\n.cost_typeB\017\242\?\014\350\264\247\345\270\201\347\261\273\345\236\213H\000B\010\n\006"
+  "nested\"\360\003\n\tevent_cfg\022\017\n\002id\030\001 \001(\rB\003\350Dd\022\024\n"
+  "\007process\030\002 \001(\rB\003\350D\001\022\036\n\004rule\030\006 \001(\0132\020.even"
+  "t_rule_item\022\'\n\rspecify_field\030\007 \001(\0132\020.eve"
+  "nt_rule_item\0223\n\004item\030\013 \001(\0132\022.event_rewar"
+  "d_itemB\017\242\?\014\345\245\226\345\212\261\351\201\223\345\205\267H\000\022#\n\010user_exp\030\014 "
+  "\001(\003B\017\242\?\014\345\245\226\345\212\261\347\273\217\351\252\214H\000\022\037\n\004note\030\r \001(\tB\017\242\?"
+  "\014\346\217\217\350\277\260\346\226\207\346\234\254H\000\0220\n\tenum_type\030\016 \001(\0162\n.cos"
+  "t_typeB\017\242\?\014\350\264\247\345\270\201\347\261\273\345\236\213H\000\022%\n\nuser_level\030"
+  "3 \001(\rB\017\242\?\014\347\216\251\345\256\266\347\255\211\347\272\247H\001\022(\n\010test_arr\030[ \003"
+  "(\0132\020.event_rule_itemB\004\262\?\001;\022.\n\016test_empty"
+  "_arr\030\\ \003(\0132\020.event_rule_itemB\004\262\?\001;:,\352D\006h"
+  "elper\312> Test event_cfg with oneof fields"
+  "B\010\n\006rewardB\r\n\013unlock_type\"\266\001\n\034keep_or_st"
+  "rip_empty_list_cfg\022\037\n\002id\030\001 \001(\rB\023\350D\001\232\?\rTh"
+  "is is a Key\022\034\n\tarray_msg\030\002 \003(\0132\t.dep2_cf"
+  "g\022\"\n\017array_plain_msg\030\003 \003(\0132\t.dep2_cfg\022\023\n"
+  "\013array_int32\030\004 \003(\005\022\023\n\013array_int64\030\005 \003(\003:"
+  "\t\352D\006helper"
   ;
-static const ::_pbi::DescriptorTable* const descriptor_table_kind_2eproto_deps[4] = {
+static const ::_pbi::DescriptorTable* const descriptor_table_kind_2eproto_deps[6] = {
   &::descriptor_table_dep_5flevel2_2eproto,
   &::descriptor_table_dependency_2eproto,
+  &::descriptor_table_google_2fprotobuf_2fduration_2eproto,
+  &::descriptor_table_google_2fprotobuf_2ftimestamp_2eproto,
   &::descriptor_table_xresloader_2eproto,
   &::descriptor_table_xresloader_5fue_2eproto,
 };
 static ::_pbi::once_flag descriptor_table_kind_2eproto_once;
 const ::_pbi::DescriptorTable descriptor_table_kind_2eproto = {
-    false, false, 2217, descriptor_table_protodef_kind_2eproto,
+    false, false, 2730, descriptor_table_protodef_kind_2eproto,
     "kind.proto",
-    &descriptor_table_kind_2eproto_once, descriptor_table_kind_2eproto_deps, 4, 11,
+    &descriptor_table_kind_2eproto_once, descriptor_table_kind_2eproto_deps, 6, 11,
     schemas, file_default_instances, TableStruct_kind_2eproto::offsets,
     file_level_metadata_kind_2eproto, file_level_enum_descriptors_kind_2eproto,
     file_level_service_descriptors_kind_2eproto,
@@ -509,26 +548,40 @@ class role_cfg::_Internal {
  public:
   using HasBits = decltype(std::declval<role_cfg>()._impl_._has_bits_);
   static void set_has_id(HasBits* has_bits) {
-    (*has_bits)[0] |= 8u;
+    (*has_bits)[0] |= 128u;
   }
   static void set_has_unlock_level(HasBits* has_bits) {
-    (*has_bits)[0] |= 16u;
+    (*has_bits)[0] |= 256u;
   }
   static void set_has_cost_type(HasBits* has_bits) {
-    (*has_bits)[0] |= 32u;
+    (*has_bits)[0] |= 512u;
   }
   static void set_has_cost_value(HasBits* has_bits) {
-    (*has_bits)[0] |= 64u;
+    (*has_bits)[0] |= 1024u;
   }
   static void set_has_name(HasBits* has_bits) {
     (*has_bits)[0] |= 1u;
   }
   static const ::dep_cfg& dep_test(const role_cfg* msg);
   static void set_has_dep_test(HasBits* has_bits) {
-    (*has_bits)[0] |= 4u;
+    (*has_bits)[0] |= 16u;
   }
   static void set_has_int_as_string(HasBits* has_bits) {
     (*has_bits)[0] |= 2u;
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Timestamp& convert_timepoint_one(const role_cfg* msg);
+  static void set_has_convert_timepoint_one(HasBits* has_bits) {
+    (*has_bits)[0] |= 32u;
+  }
+  static void set_has_origin_timepoint_one(HasBits* has_bits) {
+    (*has_bits)[0] |= 4u;
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Duration& convert_duration_one(const role_cfg* msg);
+  static void set_has_convert_duration_one(HasBits* has_bits) {
+    (*has_bits)[0] |= 64u;
+  }
+  static void set_has_origin_duration_one(HasBits* has_bits) {
+    (*has_bits)[0] |= 8u;
   }
 };
 
@@ -536,9 +589,31 @@ const ::dep_cfg&
 role_cfg::_Internal::dep_test(const role_cfg* msg) {
   return *msg->_impl_.dep_test_;
 }
+const ::PROTOBUF_NAMESPACE_ID::Timestamp&
+role_cfg::_Internal::convert_timepoint_one(const role_cfg* msg) {
+  return *msg->_impl_.convert_timepoint_one_;
+}
+const ::PROTOBUF_NAMESPACE_ID::Duration&
+role_cfg::_Internal::convert_duration_one(const role_cfg* msg) {
+  return *msg->_impl_.convert_duration_one_;
+}
 void role_cfg::clear_dep_test() {
   if (_impl_.dep_test_ != nullptr) _impl_.dep_test_->Clear();
-  _impl_._has_bits_[0] &= ~0x00000004u;
+  _impl_._has_bits_[0] &= ~0x00000010u;
+}
+void role_cfg::clear_convert_timepoint_one() {
+  if (_impl_.convert_timepoint_one_ != nullptr) _impl_.convert_timepoint_one_->Clear();
+  _impl_._has_bits_[0] &= ~0x00000020u;
+}
+void role_cfg::clear_convert_duration_one() {
+  if (_impl_.convert_duration_one_ != nullptr) _impl_.convert_duration_one_->Clear();
+  _impl_._has_bits_[0] &= ~0x00000040u;
+}
+void role_cfg::clear_convert_timepoint_arr() {
+  _impl_.convert_timepoint_arr_.Clear();
+}
+void role_cfg::clear_convert_duration_arr() {
+  _impl_.convert_duration_arr_.Clear();
 }
 role_cfg::role_cfg(::PROTOBUF_NAMESPACE_ID::Arena* arena,
                          bool is_message_owned)
@@ -554,9 +629,17 @@ role_cfg::role_cfg(const role_cfg& from)
     , /*decltype(_impl_._cached_size_)*/{}
     , decltype(_impl_.test_array_){from._impl_.test_array_}
     , decltype(_impl_.test_plain_enum_array_){from._impl_.test_plain_enum_array_}
+    , decltype(_impl_.convert_timepoint_arr_){from._impl_.convert_timepoint_arr_}
+    , decltype(_impl_.origin_timepoint_arr_){from._impl_.origin_timepoint_arr_}
+    , decltype(_impl_.convert_duration_arr_){from._impl_.convert_duration_arr_}
+    , decltype(_impl_.origin_duration_arr_){from._impl_.origin_duration_arr_}
     , decltype(_impl_.name_){}
     , decltype(_impl_.int_as_string_){}
+    , decltype(_impl_.origin_timepoint_one_){}
+    , decltype(_impl_.origin_duration_one_){}
     , decltype(_impl_.dep_test_){nullptr}
+    , decltype(_impl_.convert_timepoint_one_){nullptr}
+    , decltype(_impl_.convert_duration_one_){nullptr}
     , decltype(_impl_.id_){}
     , decltype(_impl_.unlock_level_){}
     , decltype(_impl_.cost_type_){}
@@ -579,8 +662,30 @@ role_cfg::role_cfg(const role_cfg& from)
     _this->_impl_.int_as_string_.Set(from._internal_int_as_string(), 
       _this->GetArenaForAllocation());
   }
+  _impl_.origin_timepoint_one_.InitDefault();
+  #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+    _impl_.origin_timepoint_one_.Set("", GetArenaForAllocation());
+  #endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  if (from._internal_has_origin_timepoint_one()) {
+    _this->_impl_.origin_timepoint_one_.Set(from._internal_origin_timepoint_one(), 
+      _this->GetArenaForAllocation());
+  }
+  _impl_.origin_duration_one_.InitDefault();
+  #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+    _impl_.origin_duration_one_.Set("", GetArenaForAllocation());
+  #endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  if (from._internal_has_origin_duration_one()) {
+    _this->_impl_.origin_duration_one_.Set(from._internal_origin_duration_one(), 
+      _this->GetArenaForAllocation());
+  }
   if (from._internal_has_dep_test()) {
     _this->_impl_.dep_test_ = new ::dep_cfg(*from._impl_.dep_test_);
+  }
+  if (from._internal_has_convert_timepoint_one()) {
+    _this->_impl_.convert_timepoint_one_ = new ::PROTOBUF_NAMESPACE_ID::Timestamp(*from._impl_.convert_timepoint_one_);
+  }
+  if (from._internal_has_convert_duration_one()) {
+    _this->_impl_.convert_duration_one_ = new ::PROTOBUF_NAMESPACE_ID::Duration(*from._impl_.convert_duration_one_);
   }
   ::memcpy(&_impl_.id_, &from._impl_.id_,
     static_cast<size_t>(reinterpret_cast<char*>(&_impl_.cost_value_) -
@@ -597,9 +702,17 @@ inline void role_cfg::SharedCtor(
     , /*decltype(_impl_._cached_size_)*/{}
     , decltype(_impl_.test_array_){arena}
     , decltype(_impl_.test_plain_enum_array_){arena}
+    , decltype(_impl_.convert_timepoint_arr_){arena}
+    , decltype(_impl_.origin_timepoint_arr_){arena}
+    , decltype(_impl_.convert_duration_arr_){arena}
+    , decltype(_impl_.origin_duration_arr_){arena}
     , decltype(_impl_.name_){}
     , decltype(_impl_.int_as_string_){}
+    , decltype(_impl_.origin_timepoint_one_){}
+    , decltype(_impl_.origin_duration_one_){}
     , decltype(_impl_.dep_test_){nullptr}
+    , decltype(_impl_.convert_timepoint_one_){nullptr}
+    , decltype(_impl_.convert_duration_one_){nullptr}
     , decltype(_impl_.id_){0u}
     , decltype(_impl_.unlock_level_){0u}
     , decltype(_impl_.cost_type_){0u}
@@ -612,6 +725,14 @@ inline void role_cfg::SharedCtor(
   _impl_.int_as_string_.InitDefault();
   #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
     _impl_.int_as_string_.Set("", GetArenaForAllocation());
+  #endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  _impl_.origin_timepoint_one_.InitDefault();
+  #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+    _impl_.origin_timepoint_one_.Set("", GetArenaForAllocation());
+  #endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  _impl_.origin_duration_one_.InitDefault();
+  #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+    _impl_.origin_duration_one_.Set("", GetArenaForAllocation());
   #endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
 }
 
@@ -628,9 +749,17 @@ inline void role_cfg::SharedDtor() {
   GOOGLE_DCHECK(GetArenaForAllocation() == nullptr);
   _impl_.test_array_.~RepeatedPtrField();
   _impl_.test_plain_enum_array_.~RepeatedField();
+  _impl_.convert_timepoint_arr_.~RepeatedPtrField();
+  _impl_.origin_timepoint_arr_.~RepeatedPtrField();
+  _impl_.convert_duration_arr_.~RepeatedPtrField();
+  _impl_.origin_duration_arr_.~RepeatedPtrField();
   _impl_.name_.Destroy();
   _impl_.int_as_string_.Destroy();
+  _impl_.origin_timepoint_one_.Destroy();
+  _impl_.origin_duration_one_.Destroy();
   if (this != internal_default_instance()) delete _impl_.dep_test_;
+  if (this != internal_default_instance()) delete _impl_.convert_timepoint_one_;
+  if (this != internal_default_instance()) delete _impl_.convert_duration_one_;
 }
 
 void role_cfg::SetCachedSize(int size) const {
@@ -645,8 +774,12 @@ void role_cfg::Clear() {
 
   _impl_.test_array_.Clear();
   _impl_.test_plain_enum_array_.Clear();
+  _impl_.convert_timepoint_arr_.Clear();
+  _impl_.origin_timepoint_arr_.Clear();
+  _impl_.convert_duration_arr_.Clear();
+  _impl_.origin_duration_arr_.Clear();
   cached_has_bits = _impl_._has_bits_[0];
-  if (cached_has_bits & 0x00000007u) {
+  if (cached_has_bits & 0x0000007fu) {
     if (cached_has_bits & 0x00000001u) {
       _impl_.name_.ClearNonDefaultToEmpty();
     }
@@ -654,14 +787,29 @@ void role_cfg::Clear() {
       _impl_.int_as_string_.ClearNonDefaultToEmpty();
     }
     if (cached_has_bits & 0x00000004u) {
+      _impl_.origin_timepoint_one_.ClearNonDefaultToEmpty();
+    }
+    if (cached_has_bits & 0x00000008u) {
+      _impl_.origin_duration_one_.ClearNonDefaultToEmpty();
+    }
+    if (cached_has_bits & 0x00000010u) {
       GOOGLE_DCHECK(_impl_.dep_test_ != nullptr);
       _impl_.dep_test_->Clear();
     }
+    if (cached_has_bits & 0x00000020u) {
+      GOOGLE_DCHECK(_impl_.convert_timepoint_one_ != nullptr);
+      _impl_.convert_timepoint_one_->Clear();
+    }
+    if (cached_has_bits & 0x00000040u) {
+      GOOGLE_DCHECK(_impl_.convert_duration_one_ != nullptr);
+      _impl_.convert_duration_one_->Clear();
+    }
   }
-  if (cached_has_bits & 0x00000078u) {
-    ::memset(&_impl_.id_, 0, static_cast<size_t>(
+  _impl_.id_ = 0u;
+  if (cached_has_bits & 0x00000700u) {
+    ::memset(&_impl_.unlock_level_, 0, static_cast<size_t>(
         reinterpret_cast<char*>(&_impl_.cost_value_) -
-        reinterpret_cast<char*>(&_impl_.id_)) + sizeof(_impl_.cost_value_));
+        reinterpret_cast<char*>(&_impl_.unlock_level_)) + sizeof(_impl_.cost_value_));
   }
   _impl_._has_bits_.Clear();
   _internal_metadata_.Clear<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
@@ -780,6 +928,106 @@ const char* role_cfg::_InternalParse(const char* ptr, ::_pbi::ParseContext* ctx)
         } else
           goto handle_unusual;
         continue;
+      // optional .google.protobuf.Timestamp convert_timepoint_one = 21 [(.org.xresloader.field_origin_value) = "origin_timepoint_one"];
+      case 21:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 170)) {
+          ptr = ctx->ParseMessage(_internal_mutable_convert_timepoint_one(), ptr);
+          CHK_(ptr);
+        } else
+          goto handle_unusual;
+        continue;
+      // optional string origin_timepoint_one = 22;
+      case 22:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 178)) {
+          auto str = _internal_mutable_origin_timepoint_one();
+          ptr = ::_pbi::InlineGreedyStringParser(str, ptr, ctx);
+          CHK_(ptr);
+          #ifndef NDEBUG
+          ::_pbi::VerifyUTF8(str, "role_cfg.origin_timepoint_one");
+          #endif  // !NDEBUG
+        } else
+          goto handle_unusual;
+        continue;
+      // optional .google.protobuf.Duration convert_duration_one = 23 [(.org.xresloader.field_origin_value) = "origin_duration_one"];
+      case 23:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 186)) {
+          ptr = ctx->ParseMessage(_internal_mutable_convert_duration_one(), ptr);
+          CHK_(ptr);
+        } else
+          goto handle_unusual;
+        continue;
+      // optional string origin_duration_one = 24;
+      case 24:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 194)) {
+          auto str = _internal_mutable_origin_duration_one();
+          ptr = ::_pbi::InlineGreedyStringParser(str, ptr, ctx);
+          CHK_(ptr);
+          #ifndef NDEBUG
+          ::_pbi::VerifyUTF8(str, "role_cfg.origin_duration_one");
+          #endif  // !NDEBUG
+        } else
+          goto handle_unusual;
+        continue;
+      // repeated .google.protobuf.Timestamp convert_timepoint_arr = 25 [(.org.xresloader.field_origin_value) = "origin_timepoint_arr"];
+      case 25:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 202)) {
+          ptr -= 2;
+          do {
+            ptr += 2;
+            ptr = ctx->ParseMessage(_internal_add_convert_timepoint_arr(), ptr);
+            CHK_(ptr);
+            if (!ctx->DataAvailable(ptr)) break;
+          } while (::PROTOBUF_NAMESPACE_ID::internal::ExpectTag<202>(ptr));
+        } else
+          goto handle_unusual;
+        continue;
+      // repeated string origin_timepoint_arr = 26;
+      case 26:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 210)) {
+          ptr -= 2;
+          do {
+            ptr += 2;
+            auto str = _internal_add_origin_timepoint_arr();
+            ptr = ::_pbi::InlineGreedyStringParser(str, ptr, ctx);
+            CHK_(ptr);
+            #ifndef NDEBUG
+            ::_pbi::VerifyUTF8(str, "role_cfg.origin_timepoint_arr");
+            #endif  // !NDEBUG
+            if (!ctx->DataAvailable(ptr)) break;
+          } while (::PROTOBUF_NAMESPACE_ID::internal::ExpectTag<210>(ptr));
+        } else
+          goto handle_unusual;
+        continue;
+      // repeated .google.protobuf.Duration convert_duration_arr = 27 [(.org.xresloader.field_origin_value) = "origin_duration_arr"];
+      case 27:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 218)) {
+          ptr -= 2;
+          do {
+            ptr += 2;
+            ptr = ctx->ParseMessage(_internal_add_convert_duration_arr(), ptr);
+            CHK_(ptr);
+            if (!ctx->DataAvailable(ptr)) break;
+          } while (::PROTOBUF_NAMESPACE_ID::internal::ExpectTag<218>(ptr));
+        } else
+          goto handle_unusual;
+        continue;
+      // repeated string origin_duration_arr = 28;
+      case 28:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 226)) {
+          ptr -= 2;
+          do {
+            ptr += 2;
+            auto str = _internal_add_origin_duration_arr();
+            ptr = ::_pbi::InlineGreedyStringParser(str, ptr, ctx);
+            CHK_(ptr);
+            #ifndef NDEBUG
+            ::_pbi::VerifyUTF8(str, "role_cfg.origin_duration_arr");
+            #endif  // !NDEBUG
+            if (!ctx->DataAvailable(ptr)) break;
+          } while (::PROTOBUF_NAMESPACE_ID::internal::ExpectTag<226>(ptr));
+        } else
+          goto handle_unusual;
+        continue;
       default:
         goto handle_unusual;
     }  // switch
@@ -812,25 +1060,25 @@ uint8_t* role_cfg::_InternalSerialize(
 
   cached_has_bits = _impl_._has_bits_[0];
   // optional uint32 id = 1;
-  if (cached_has_bits & 0x00000008u) {
+  if (cached_has_bits & 0x00000080u) {
     target = stream->EnsureSpace(target);
     target = ::_pbi::WireFormatLite::WriteUInt32ToArray(1, this->_internal_id(), target);
   }
 
   // optional uint32 unlock_level = 2;
-  if (cached_has_bits & 0x00000010u) {
+  if (cached_has_bits & 0x00000100u) {
     target = stream->EnsureSpace(target);
     target = ::_pbi::WireFormatLite::WriteUInt32ToArray(2, this->_internal_unlock_level(), target);
   }
 
   // optional uint32 cost_type = 3;
-  if (cached_has_bits & 0x00000020u) {
+  if (cached_has_bits & 0x00000200u) {
     target = stream->EnsureSpace(target);
     target = ::_pbi::WireFormatLite::WriteUInt32ToArray(3, this->_internal_cost_type(), target);
   }
 
   // optional int32 cost_value = 4;
-  if (cached_has_bits & 0x00000040u) {
+  if (cached_has_bits & 0x00000400u) {
     target = stream->EnsureSpace(target);
     target = ::_pbi::WireFormatLite::WriteInt32ToArray(4, this->_internal_cost_value(), target);
   }
@@ -846,7 +1094,7 @@ uint8_t* role_cfg::_InternalSerialize(
   }
 
   // optional .dep_cfg dep_test = 10;
-  if (cached_has_bits & 0x00000004u) {
+  if (cached_has_bits & 0x00000010u) {
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
       InternalWriteMessage(10, _Internal::dep_test(this),
         _Internal::dep_test(this).GetCachedSize(), target, stream);
@@ -877,6 +1125,76 @@ uint8_t* role_cfg::_InternalSerialize(
     target = stream->EnsureSpace(target);
     target = ::_pbi::WireFormatLite::WriteEnumToArray(
         13, this->_internal_test_plain_enum_array(i), target);
+  }
+
+  // optional .google.protobuf.Timestamp convert_timepoint_one = 21 [(.org.xresloader.field_origin_value) = "origin_timepoint_one"];
+  if (cached_has_bits & 0x00000020u) {
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
+      InternalWriteMessage(21, _Internal::convert_timepoint_one(this),
+        _Internal::convert_timepoint_one(this).GetCachedSize(), target, stream);
+  }
+
+  // optional string origin_timepoint_one = 22;
+  if (cached_has_bits & 0x00000004u) {
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::VerifyUTF8StringNamedField(
+      this->_internal_origin_timepoint_one().data(), static_cast<int>(this->_internal_origin_timepoint_one().length()),
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::SERIALIZE,
+      "role_cfg.origin_timepoint_one");
+    target = stream->WriteStringMaybeAliased(
+        22, this->_internal_origin_timepoint_one(), target);
+  }
+
+  // optional .google.protobuf.Duration convert_duration_one = 23 [(.org.xresloader.field_origin_value) = "origin_duration_one"];
+  if (cached_has_bits & 0x00000040u) {
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
+      InternalWriteMessage(23, _Internal::convert_duration_one(this),
+        _Internal::convert_duration_one(this).GetCachedSize(), target, stream);
+  }
+
+  // optional string origin_duration_one = 24;
+  if (cached_has_bits & 0x00000008u) {
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::VerifyUTF8StringNamedField(
+      this->_internal_origin_duration_one().data(), static_cast<int>(this->_internal_origin_duration_one().length()),
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::SERIALIZE,
+      "role_cfg.origin_duration_one");
+    target = stream->WriteStringMaybeAliased(
+        24, this->_internal_origin_duration_one(), target);
+  }
+
+  // repeated .google.protobuf.Timestamp convert_timepoint_arr = 25 [(.org.xresloader.field_origin_value) = "origin_timepoint_arr"];
+  for (unsigned i = 0,
+      n = static_cast<unsigned>(this->_internal_convert_timepoint_arr_size()); i < n; i++) {
+    const auto& repfield = this->_internal_convert_timepoint_arr(i);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
+        InternalWriteMessage(25, repfield, repfield.GetCachedSize(), target, stream);
+  }
+
+  // repeated string origin_timepoint_arr = 26;
+  for (int i = 0, n = this->_internal_origin_timepoint_arr_size(); i < n; i++) {
+    const auto& s = this->_internal_origin_timepoint_arr(i);
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::VerifyUTF8StringNamedField(
+      s.data(), static_cast<int>(s.length()),
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::SERIALIZE,
+      "role_cfg.origin_timepoint_arr");
+    target = stream->WriteString(26, s, target);
+  }
+
+  // repeated .google.protobuf.Duration convert_duration_arr = 27 [(.org.xresloader.field_origin_value) = "origin_duration_arr"];
+  for (unsigned i = 0,
+      n = static_cast<unsigned>(this->_internal_convert_duration_arr_size()); i < n; i++) {
+    const auto& repfield = this->_internal_convert_duration_arr(i);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
+        InternalWriteMessage(27, repfield, repfield.GetCachedSize(), target, stream);
+  }
+
+  // repeated string origin_duration_arr = 28;
+  for (int i = 0, n = this->_internal_origin_duration_arr_size(); i < n; i++) {
+    const auto& s = this->_internal_origin_duration_arr(i);
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::VerifyUTF8StringNamedField(
+      s.data(), static_cast<int>(s.length()),
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::SERIALIZE,
+      "role_cfg.origin_duration_arr");
+    target = stream->WriteString(28, s, target);
   }
 
   if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
@@ -913,8 +1231,38 @@ size_t role_cfg::ByteSizeLong() const {
     total_size += (1UL * count) + data_size;
   }
 
+  // repeated .google.protobuf.Timestamp convert_timepoint_arr = 25 [(.org.xresloader.field_origin_value) = "origin_timepoint_arr"];
+  total_size += 2UL * this->_internal_convert_timepoint_arr_size();
+  for (const auto& msg : this->_impl_.convert_timepoint_arr_) {
+    total_size +=
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(msg);
+  }
+
+  // repeated string origin_timepoint_arr = 26;
+  total_size += 2 *
+      ::PROTOBUF_NAMESPACE_ID::internal::FromIntSize(_impl_.origin_timepoint_arr_.size());
+  for (int i = 0, n = _impl_.origin_timepoint_arr_.size(); i < n; i++) {
+    total_size += ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
+      _impl_.origin_timepoint_arr_.Get(i));
+  }
+
+  // repeated .google.protobuf.Duration convert_duration_arr = 27 [(.org.xresloader.field_origin_value) = "origin_duration_arr"];
+  total_size += 2UL * this->_internal_convert_duration_arr_size();
+  for (const auto& msg : this->_impl_.convert_duration_arr_) {
+    total_size +=
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(msg);
+  }
+
+  // repeated string origin_duration_arr = 28;
+  total_size += 2 *
+      ::PROTOBUF_NAMESPACE_ID::internal::FromIntSize(_impl_.origin_duration_arr_.size());
+  for (int i = 0, n = _impl_.origin_duration_arr_.size(); i < n; i++) {
+    total_size += ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
+      _impl_.origin_duration_arr_.Get(i));
+  }
+
   cached_has_bits = _impl_._has_bits_[0];
-  if (cached_has_bits & 0x0000007fu) {
+  if (cached_has_bits & 0x000000ffu) {
     // optional string name = 5;
     if (cached_has_bits & 0x00000001u) {
       total_size += 1 +
@@ -929,30 +1277,60 @@ size_t role_cfg::ByteSizeLong() const {
           this->_internal_int_as_string());
     }
 
-    // optional .dep_cfg dep_test = 10;
+    // optional string origin_timepoint_one = 22;
     if (cached_has_bits & 0x00000004u) {
+      total_size += 2 +
+        ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
+          this->_internal_origin_timepoint_one());
+    }
+
+    // optional string origin_duration_one = 24;
+    if (cached_has_bits & 0x00000008u) {
+      total_size += 2 +
+        ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
+          this->_internal_origin_duration_one());
+    }
+
+    // optional .dep_cfg dep_test = 10;
+    if (cached_has_bits & 0x00000010u) {
       total_size += 1 +
         ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
           *_impl_.dep_test_);
     }
 
+    // optional .google.protobuf.Timestamp convert_timepoint_one = 21 [(.org.xresloader.field_origin_value) = "origin_timepoint_one"];
+    if (cached_has_bits & 0x00000020u) {
+      total_size += 2 +
+        ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
+          *_impl_.convert_timepoint_one_);
+    }
+
+    // optional .google.protobuf.Duration convert_duration_one = 23 [(.org.xresloader.field_origin_value) = "origin_duration_one"];
+    if (cached_has_bits & 0x00000040u) {
+      total_size += 2 +
+        ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
+          *_impl_.convert_duration_one_);
+    }
+
     // optional uint32 id = 1;
-    if (cached_has_bits & 0x00000008u) {
+    if (cached_has_bits & 0x00000080u) {
       total_size += ::_pbi::WireFormatLite::UInt32SizePlusOne(this->_internal_id());
     }
 
+  }
+  if (cached_has_bits & 0x00000700u) {
     // optional uint32 unlock_level = 2;
-    if (cached_has_bits & 0x00000010u) {
+    if (cached_has_bits & 0x00000100u) {
       total_size += ::_pbi::WireFormatLite::UInt32SizePlusOne(this->_internal_unlock_level());
     }
 
     // optional uint32 cost_type = 3;
-    if (cached_has_bits & 0x00000020u) {
+    if (cached_has_bits & 0x00000200u) {
       total_size += ::_pbi::WireFormatLite::UInt32SizePlusOne(this->_internal_cost_type());
     }
 
     // optional int32 cost_value = 4;
-    if (cached_has_bits & 0x00000040u) {
+    if (cached_has_bits & 0x00000400u) {
       total_size += ::_pbi::WireFormatLite::Int32SizePlusOne(this->_internal_cost_value());
     }
 
@@ -977,8 +1355,12 @@ void role_cfg::MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg, const ::PROTO
 
   _this->_impl_.test_array_.MergeFrom(from._impl_.test_array_);
   _this->_impl_.test_plain_enum_array_.MergeFrom(from._impl_.test_plain_enum_array_);
+  _this->_impl_.convert_timepoint_arr_.MergeFrom(from._impl_.convert_timepoint_arr_);
+  _this->_impl_.origin_timepoint_arr_.MergeFrom(from._impl_.origin_timepoint_arr_);
+  _this->_impl_.convert_duration_arr_.MergeFrom(from._impl_.convert_duration_arr_);
+  _this->_impl_.origin_duration_arr_.MergeFrom(from._impl_.origin_duration_arr_);
   cached_has_bits = from._impl_._has_bits_[0];
-  if (cached_has_bits & 0x0000007fu) {
+  if (cached_has_bits & 0x000000ffu) {
     if (cached_has_bits & 0x00000001u) {
       _this->_internal_set_name(from._internal_name());
     }
@@ -986,19 +1368,36 @@ void role_cfg::MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg, const ::PROTO
       _this->_internal_set_int_as_string(from._internal_int_as_string());
     }
     if (cached_has_bits & 0x00000004u) {
+      _this->_internal_set_origin_timepoint_one(from._internal_origin_timepoint_one());
+    }
+    if (cached_has_bits & 0x00000008u) {
+      _this->_internal_set_origin_duration_one(from._internal_origin_duration_one());
+    }
+    if (cached_has_bits & 0x00000010u) {
       _this->_internal_mutable_dep_test()->::dep_cfg::MergeFrom(
           from._internal_dep_test());
     }
-    if (cached_has_bits & 0x00000008u) {
-      _this->_impl_.id_ = from._impl_.id_;
-    }
-    if (cached_has_bits & 0x00000010u) {
-      _this->_impl_.unlock_level_ = from._impl_.unlock_level_;
-    }
     if (cached_has_bits & 0x00000020u) {
-      _this->_impl_.cost_type_ = from._impl_.cost_type_;
+      _this->_internal_mutable_convert_timepoint_one()->::PROTOBUF_NAMESPACE_ID::Timestamp::MergeFrom(
+          from._internal_convert_timepoint_one());
     }
     if (cached_has_bits & 0x00000040u) {
+      _this->_internal_mutable_convert_duration_one()->::PROTOBUF_NAMESPACE_ID::Duration::MergeFrom(
+          from._internal_convert_duration_one());
+    }
+    if (cached_has_bits & 0x00000080u) {
+      _this->_impl_.id_ = from._impl_.id_;
+    }
+    _this->_impl_._has_bits_[0] |= cached_has_bits;
+  }
+  if (cached_has_bits & 0x00000700u) {
+    if (cached_has_bits & 0x00000100u) {
+      _this->_impl_.unlock_level_ = from._impl_.unlock_level_;
+    }
+    if (cached_has_bits & 0x00000200u) {
+      _this->_impl_.cost_type_ = from._impl_.cost_type_;
+    }
+    if (cached_has_bits & 0x00000400u) {
       _this->_impl_.cost_value_ = from._impl_.cost_value_;
     }
     _this->_impl_._has_bits_[0] |= cached_has_bits;
@@ -1025,6 +1424,10 @@ void role_cfg::InternalSwap(role_cfg* other) {
   swap(_impl_._has_bits_[0], other->_impl_._has_bits_[0]);
   _impl_.test_array_.InternalSwap(&other->_impl_.test_array_);
   _impl_.test_plain_enum_array_.InternalSwap(&other->_impl_.test_plain_enum_array_);
+  _impl_.convert_timepoint_arr_.InternalSwap(&other->_impl_.convert_timepoint_arr_);
+  _impl_.origin_timepoint_arr_.InternalSwap(&other->_impl_.origin_timepoint_arr_);
+  _impl_.convert_duration_arr_.InternalSwap(&other->_impl_.convert_duration_arr_);
+  _impl_.origin_duration_arr_.InternalSwap(&other->_impl_.origin_duration_arr_);
   ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::InternalSwap(
       &_impl_.name_, lhs_arena,
       &other->_impl_.name_, rhs_arena
@@ -1032,6 +1435,14 @@ void role_cfg::InternalSwap(role_cfg* other) {
   ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::InternalSwap(
       &_impl_.int_as_string_, lhs_arena,
       &other->_impl_.int_as_string_, rhs_arena
+  );
+  ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::InternalSwap(
+      &_impl_.origin_timepoint_one_, lhs_arena,
+      &other->_impl_.origin_timepoint_one_, rhs_arena
+  );
+  ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::InternalSwap(
+      &_impl_.origin_duration_one_, lhs_arena,
+      &other->_impl_.origin_duration_one_, rhs_arena
   );
   ::PROTOBUF_NAMESPACE_ID::internal::memswap<
       PROTOBUF_FIELD_OFFSET(role_cfg, _impl_.cost_value_)

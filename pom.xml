@@ -6,7 +6,7 @@
 
     <groupId>org.xresloader</groupId>
     <artifactId>xresloader</artifactId>
-    <version>2.11.1</version>
+    <version>2.12.0</version>
     <packaging>jar</packaging>
     <name>xresloader</name>
 
@@ -22,8 +22,8 @@
             </resource>
         </resources>
 
-        <sourceDirectory>src/org/xresloader</sourceDirectory>
-        <testSourceDirectory>src/test</testSourceDirectory>
+        <sourceDirectory>src</sourceDirectory>
+        <testSourceDirectory>test</testSourceDirectory>
 
         <plugins>
             <plugin>
@@ -172,8 +172,8 @@
                         </goals>
                         <configuration>
                             <sources>
-                                <source>${basedir}/header</source>
-                                <source>${basedir}/src/org/xresloader</source>
+                                <source>header</source>
+                                <source>src</source>
                             </sources>
                         </configuration>
                     </execution>
@@ -185,9 +185,9 @@
                         </goals>
                         <configuration>
                             <sources>
-                                <source>${basedir}/header</source>
-                                <source>${basedir}/src/org/xresloader</source>
-                                <source>${basedir}/src/test</source>
+                                <source>header</source>
+                                <source>src</source>
+                                <source>test</source>
                             </sources>
                         </configuration>
                     </execution>

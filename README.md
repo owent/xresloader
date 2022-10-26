@@ -107,8 +107,8 @@ echo "
 | --pretty                    | 格式化输出                      | 参数为整数，0代表关闭美化输出功能，大于0表示格式化时的缩进量                                             |
 | --enable-excel-formular     | 开启Excel公式实时计算           | 开启公式实时计算会减慢转表速度(2.11-RC3版本后默认关闭)                                                   |
 | --disable-excel-formular    | 关闭Excel公式实时计算           | 关闭公式实时计算，会使用新的流式索引器，大幅加快转表速度，降低内存开销。（注: 也会关闭对日期格式的探测） |
-| --disable-empty-list        | 移除数组空项                    | (废弃)，请使用 ```--list-strip-all-empty```                                                              |
-| --enable-empty-list         | 保留全部数组空项                | (废弃)，请使用 ```--list-keep-empty```                                                                   |
+| --disable-empty-list        | 移除数组空项                    | (废弃)，请使用 `--list-strip-all-empty`                                                                  |
+| --enable-empty-list         | 保留全部数组空项                | (废弃)，请使用 `--list-keep-empty`                                                                       |
 | --list-strip-all-empty      | 移除数组空项                    | (默认) 移除数组空项，自动删除Excel中的未填充数据，不会转出到输出文件中                                   |
 | --list-keep-empty           | 保留全部数组空项                | 保留全部数组空项，未填充数据将使用默认的空值来填充，并转出到输出文件中                                   |
 | --list-strip-empty-tail     | 移除数组尾部空项                | 移除数组尾部空项，自动删除尾部的未填充数据，其他的未填充数据将使用默认的空值，并转出到输出文件中         |
@@ -150,12 +150,11 @@ echo "
 | KeyWordSplit          | 字段名分词字符                                                     | _                   |                 |                 | *可选*,字段名映射时单词之间填充的字符串,不需要请留空                                                                |
 | KeyPrefix             | 字段名固定前缀                                                     |                     |                 |                 | *可选*,字段名映射时附加的前缀,不需要请留空                                                                          |
 | KeySuffix             | 字段名固定后缀                                                     |                     |                 |                 | *可选*,字段名映射时附加的后缀,不需要请留空                                                                          |
-| KeyWordRegex          | 分词规则(判断规则,移除分词符号规则,前缀过滤规则)                   | [A-Z_\$ \t\r\n]     | [_\$ \t\r\n]    | [a-zA-Z_\$]     | *(可选)*,字段名映射时单词的分词规则,正则表达式,不需要请留空                                                         |
+| KeyWordRegex          | 分词规则(判断规则,移除分词符号规则,前缀过滤规则)                   | `[A-Z_\$ \t\r\n]`   | `[_\$ \t\r\n]`  | `[a-zA-Z_\$]`   | *(可选)*,字段名映射时单词的分词规则,正则表达式,不需要请留空                                                         |
 | Encoding              | 编码转换                                                           | UTF-8               |                 |                 | 注：Google的protobuf库的代码里写死了UTF-8，故而该选项对Protobuf的二进制输出无效                                     |
 | UeCfg-UProperty       | UnrealEngine配置支持的字段属性                                     | 字段分组            | 蓝图权限        | 编辑权限        | *可选*,默认值: XResConfig\|BlueprintReadOnly\|EditAnywhere                                                          |
-| UeCfg-CaseConvert     | 是否开启驼峰命名转换（默认开启）                                   | true/false          |                 |                 | *可选*,开启后将使用首字母大写的驼峰命名法生成字段名和类名                                                           |
+| UeCfg-CaseConvert     | 是否开启驼峰命名转换（默认开启）                                   | `true/false`        |                 |                 | *可选*,开启后将使用首字母大写的驼峰命名法生成字段名和类名                                                           |
 | UeCfg-CodeOutput      | 代码输出目录                                                       | 代码输出根目录      | Publich目录前缀 | Private目录前缀 | *可选*                                                                                                              |
-| UeCfg-RecursiveMode   | 是否使用嵌套模式（嵌套模式会保留原始的结构，可能需要配合插件使用） | true/false          |                 |                 | *可选*                                                                                                              |
 | UeCfg-DestinationPath | 资源输出目录（uassert目录，默认会根据代码输出目录猜测）            | 资源输出目录        |                 |                 | *可选*                                                                                                              |
 
 ### 数据源描述的特别说明
@@ -172,11 +171,12 @@ echo "
 8. KeyPrefix指明从第2行的字段名称转换成协议中的字段名后，字段名加固定前缀
 9. KeySuffix指明从第2行的字段名称转换成协议中的字段名后，字段名加固定后缀
 10. KeyWordRegex指明分词的判定规则，全部是正则表达式
-  > + 主配置（分词匹配符）：[A-Z_\$ \t\r\n]是指，碰到大写字母、下划线、$符号、空格和打印符、换行符都认为是新单词
-  > + 次配置（过滤匹配符）：[_\$ \t\r\n]是指，碰到分词符号后下划线、$符号、空格和打印符、换行符时都要移除
-  > + 补充配置（起始匹配符）：[a-zA-Z_\$]是指，第一次碰到字母、下划线、$符号后才开始认为是字段名，前面的都视为无效字符
-
-1.  Encoding指明输出的字符串内容都是UTF-8编码。（目前最好只用UTF-8，因为protobuf里写死了UTF-8编码，其他编码不保证完全正常）
+  >
+  > + 主配置（分词匹配符）：`[A-Z_\$ \t\r\n]` 是指，碰到大写字母、下划线、$符号、空格和打印符、换行符都认为是新单词
+  > + 次配置（过滤匹配符）：`[_\$ \t\r\n]` 是指，碰到分词符号后下划线、$符号、空格和打印符、换行符时都要移除
+  > + 补充配置（起始匹配符）：`[a-zA-Z_\$]` 是指，第一次碰到字母、下划线、$符号后才开始认为是字段名，前面的都视为无效字符
+  >
+11. Encoding指明输出的字符串内容都是UTF-8编码。（目前最好只用UTF-8，因为protobuf里写死了UTF-8编码，其他编码不保证完全正常）
 
 上面的配置中，数据从第3行读取，Key从第2行读取。那么第一行可以用来写一些说明或描述性数据。
 
@@ -197,9 +197,9 @@ echo "
 | 输出格式参数 | 输出格式说明                                                                                                                                                       | 说明                                        |
 | ------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------- |
 | bin          | 基于协议的二进制文件,不同的协议类型(-p参数)输出的二进制不一样,一般是header+body,body中有转出的数据列表, 协议格式见header文件夹                                     | 示例见 [sample](sample/proto_v3) (protobuf) |
-| lua          | 转出为的lua代码文件(可选是否要pretty格式化), 一般格式为 return {\[1\] = 转表头信息, \[协议结构名称\] = {数据列表} }                                                | 示例见[sample](sample/proto_v3)             |
+| lua          | 转出为的lua代码文件(可选是否要pretty格式化), 一般格式为 `return {[1] = 转表头信息, [协议结构名称] = {数据列表} }`                                                  | 示例见[sample](sample/proto_v3)             |
 | msgpack      | 转出为使用[MsgPack](http://msgpack.org/)打包的二进制文件,内含的第一个message是转表头信息，后面紧跟数据，可以用任何支持得客户端解包                                 | 示例见[sample](sample/proto_v3)             |
-| json         | 转出为json文件,一般格式为 \[ {转表头信息}, {协议结构名称 : \[ 转出的数据 \] } \]                                                                                   | 示例见[sample](sample/proto_v3)             |
+| json         | 转出为json文件,一般格式为 `[ {转表头信息}, {协议结构名称 : [ 转出的数据 ] } ]`                                                                                     | 示例见[sample](sample/proto_v3)             |
 | xml          | 转出为xml文件,一般格式为&lt;root&gt;&lt;header&gt;转表头信息&lt;/header&gt;&lt;body&gt;&lt;协议结构名称&gt;数据内容&lt;/协议结构名称&gt;&lt;/body&gt;&lt;/root&gt; | 示例见[sample](sample/proto_v3)             |
 | js           | 转出为js代码文件(可选是否要pretty格式化)                                                                                                                           | 示例见[sample](sample/proto_v3)             |
 
@@ -248,12 +248,13 @@ echo "
 > 导出的常量都很简单易懂，直接看生成的文件很容易理解，这里不再额外作说明了。
 
 1. **lua**格式输出可以按[loader-binding/lua](loader-binding/lua)的说明读取。
+  >
   > 这个加载器会依赖 [https://github.com/owent-utils/lua/tree/master/src](https://github.com/owent-utils/lua/tree/master/src) 里的部分内容。
   >
   > conf_manager:load_kv(require的路径, function(序号, 转出的lua table) return key的值 end) -- 读取key-value型数据接口
   >
   > conf_manager:load_kl(require的路径, function(序号, 转出的lua table) return key的值 end) -- 读取key-list型数据接口
-
+  >
 2. [MsgPack](http://msgpack.org/)的读取的语言和工具很多，任意工具都能比较简单地读出数据，[loader-binding/msgpack](loader-binding/msgpack)里有一些读取示例(Python和Node.js)
 3. **Json**的读取的语言和工具很多，任意工具都能比较简单地读出数据，故而不再提供读取工具
 4. **Xml**的读取的语言和工具很多，任意工具都能比较简单地读出数据，故而不再提供读取工具
@@ -278,25 +279,26 @@ Excel里的Key使用@后缀的字段名，@后面的部分都属于验证器。�
 
 #### Protobuf插件 - Message插件
 
-|                插件名称                |                                           插件功能                                           |
-| :------------------------------------: | :------------------------------------------------------------------------------------------: |
-|     org.xresloader.msg_description     |                         消息体描述信息，会写入输出的header中和代码中                         |
-| org.xresloader.msg_require_mapping_all |                             设置message的所有字段必须被全部映射                              |
-|      org.xresloader.msg_separator      | Plain模式字段分隔符，可指定多个，用于在一个单元格内配置复杂格式时的分隔符列表，默认值: ```,; | ``` |
-|        org.xresloader.ue.helper        |                                 生成UE Utility代码的类名后缀                                 |
+|                插件名称                |                                          插件功能                                          |
+| :------------------------------------: | :----------------------------------------------------------------------------------------: |
+|     org.xresloader.msg_description     |                        消息体描述信息，会写入输出的header中和代码中                        |
+| org.xresloader.msg_require_mapping_all |                            设置message的所有字段必须被全部映射                             |
+|      org.xresloader.msg_separator      | Plain模式字段分隔符，可指定多个，用于在一个单元格内配置复杂格式时的分隔符列表，默认值: `,;|` |
+|        org.xresloader.ue.helper        |                                生成UE Utility代码的类名后缀                                |
 
 #### Protobuf插件 - Field插件
 
-|             插件名称             |                                                      插件功能                                                      |
-| :------------------------------: | :----------------------------------------------------------------------------------------------------------------: |
-|     org.xresloader.verifier      |                              验证器，可填范围(log-high),message名，enum名。多个由 ```                              | ``` 分隔。任意验证器通过检查则认为数据有效 |
-| org.xresloader.field_description |                                     字段描述信息，会写入输出的header中和代码中                                     |
-|    org.xresloader.field_alias    |                        字段别名，配合 **验证器** 功能，允许在数据源中直接填写别名来配置数据                        |
-|    org.xresloader.field_ratio    |               字段放大，用于比如配置百分率为 0.12，当 org.xresloader.field_ratio=100时转出的数据为12               |
-|  org.xresloader.field_separator  |              Plain模式分隔符，可指定多个，用于在一个单元格内配置复杂格式时的分隔符列表，默认值: ```,;              | ```                                        |
-|  org.xresloader.field_required   |                       设置字段为 **required** ，用于向proto3提供，proto2的 **required** 约束                       |
-|    org.xresloader.ue.key_tag     |                  生成UE代码时，如果需要支持多个Key组合成一个Name，用这个字段指定系数（必须大于0）                  |
-|   org.xresloader.ue.ueTypeName   | 生成UE代码时，如果指定了这个字段，那么生成的字段类型将是 ```TSoftObjectPtr<ueTypeName>``` , 并且支持蓝图中直接引用 |
+|             插件名称              |                                                    插件功能                                                    |
+| :-------------------------------: | :------------------------------------------------------------------------------------------------------------: |
+|      org.xresloader.verifier      |                             验证器，可填范围(log-high),message名，enum名。多个由 `|` 分隔。任意验证器通过检查则认为数据有效 |
+| org.xresloader.field_description  |                                   字段描述信息，会写入输出的header中和代码中                                   |
+|    org.xresloader.field_alias     |                      字段别名，配合 **验证器** 功能，允许在数据源中直接填写别名来配置数据                      |
+|    org.xresloader.field_ratio     |             字段放大，用于比如配置百分率为 0.12，当 org.xresloader.field_ratio=100时转出的数据为12             |
+|  org.xresloader.field_separator   |             Plain模式分隔符，可指定多个，用于在一个单元格内配置复杂格式时的分隔符列表，默认值: `,;|`           |
+|   org.xresloader.field_required   |                     设置字段为 **required** ，用于向proto3提供，proto2的 **required** 约束                     |
+| org.xresloader.field_origin_value |                              写出原始数据到指定字段（ `TImestamp` 和 `Duration` 类型）                         |
+|     org.xresloader.ue.key_tag     |                生成UE代码时，如果需要支持多个Key组合成一个Name，用这个字段指定系数（必须大于0）                |
+|   org.xresloader.ue.ueTypeName    | 生成UE代码时，如果指定了这个字段，那么生成的字段类型将是 `TSoftObjectPtr<ueTypeName>` , 并且支持蓝图中直接引用 |
 
 #### Protobuf插件 - EnumValue插件
 
@@ -307,10 +309,10 @@ Excel里的Key使用@后缀的字段名，@后面的部分都属于验证器。�
 
 #### Protobuf插件 - Oneof插件(2.8.0版本及以上)
 
-|             插件名称             |                                                插件功能                                                |
-| :------------------------------: | :----------------------------------------------------------------------------------------------------: |
-| org.xresloader.oneof_description |                            oneof描述信息，可能会写入输出的header中和代码中                             |
-|  org.xresloader.oneof_separator  | Plain模式类型和值字段的分隔符，可指定多个，用于在一个单元格内配置复杂格式时的分隔符列表，默认值: ```,; | ``` |
+|             插件名称             |                                               插件功能                                               |
+| :------------------------------: | :--------------------------------------------------------------------------------------------------: |
+| org.xresloader.oneof_description |                           oneof描述信息，可能会写入输出的header中和代码中                            |
+|  org.xresloader.oneof_separator  | Plain模式类型和值字段的分隔符，可指定多个，用于在一个单元格内配置复杂格式时的分隔符列表，默认值: `,;|` |
 
 ## 生态和工具
 
@@ -385,20 +387,20 @@ ERROR StatusLogger Unable to invoke factory method in class class org.apache.log
 
 Ans: 因为有一些语言是没有无符号(unsigned)类型的，为了统一数据类型，我们统一转换为有符号类型，转换方式和protobuf的java版SDK保持一致。如果需要使用大于int32最大值的uint32类型，请用int64代替。
 
-5. 为什么 ```UE-Csv``` 和 ```UE-Json``` 输出的代码会多一个 ```Name``` 字段?
+5. 为什么 `UE-Csv` 和 `UE-Json` 输出的代码会多一个 `Name` 字段?
 
-Ans: 因为对 ```UE-Json``` 输出中， ```Name``` 是一个特殊字段，也用于UE中内置的接口的查找索引。所以为了统一输出的数据结构（ 这样无论是 ```UE-Csv``` 还是 ```UE-Json``` 都可以用相同的代码结构来导入 ），我们对 ```UE-Csv``` 和 ```UE-Json``` 统一自动生成 ```Name``` 字段。但是如果用户自定义了 ```Name``` 字段， 我们会使用用户自定义的 ```Name``` 字段。
+Ans: 因为对 `UE-Json` 输出中， `Name` 是一个特殊字段，也用于UE中内置的接口的查找索引。所以为了统一输出的数据结构（ 这样无论是 `UE-Csv` 还是 `UE-Json` 都可以用相同的代码结构来导入 ），我们对 `UE-Csv` 和 `UE-Json` 统一自动生成 `Name` 字段。但是如果用户自定义了 `Name` 字段， 我们会使用用户自定义的 `Name` 字段。
 
-6. 提示 ```Can not reserve enough space for XXX objecct heap```
+6. 提示 `Can not reserve enough space for XXX objecct heap`
 
-Ans: 在转换很大的Excel文件时（上万行数据），会需要很高的内存（>=1GB）。所以为了方便我们在批量转表sample的xml中配置了 ```<java_option desc="java选项-最大内存限制2GB">-Xmx2048m</java_option>``` 。
+Ans: 在转换很大的Excel文件时（上万行数据），会需要很高的内存（>=1GB）。所以为了方便我们在批量转表sample的xml中配置了 `<java_option desc="java选项-最大内存限制2GB">-Xmx2048m</java_option>` 。
 如果出现这个提示可能是32位jre无法分配这么多地址空间导致的，可以在xml里删除这个配置。但是还是建议使用64位jre。
 
-7. 提示 ```Exception in thread "main" java.lang.OutOfMemoryError: Java heap space```
+7. 提示 `Exception in thread "main" java.lang.OutOfMemoryError: Java heap space`
 
-Ans: 这个提示通常是堆内存不足， [xresloader][1] 默认使用的POI的内置缓存机制会消耗大量内存。碰到这种情况，可以和上面的解决方法一样加一个类似 ```-Xmx8192m``` 来增大最大内存限制。
+Ans: 这个提示通常是堆内存不足， [xresloader][1] 默认使用的POI的内置缓存机制会消耗大量内存。碰到这种情况，可以和上面的解决方法一样加一个类似 `-Xmx8192m` 来增大最大内存限制。
 
-在 [xresloader][1] **2.10.0** 及以上的版本，可以使用 ```--disable-excel-formular``` 选项关闭实时公式计算\(仅仅时关闭公式实时计算，还是会读Excel里已经缓存的计算结果的\)。这时候 [xresloader][1] 会使用流式读取并使用 [xresloader][1] 内部实现的缓存机制，同时关闭文件级缓存和表级缓存，能大幅降低内存消耗。
+在 [xresloader][1] **2.10.0** 及以上的版本，可以使用 `--disable-excel-formular` 选项关闭实时公式计算\(仅仅时关闭公式实时计算，还是会读Excel里已经缓存的计算结果的\)。这时候 [xresloader][1] 会使用流式读取并使用 [xresloader][1] 内部实现的缓存机制，同时关闭文件级缓存和表级缓存，能大幅降低内存消耗。
 
 [1]: https://github.com/xresloader/xresloader/releases
 [2]: https://github.com/protocolbuffers/upb

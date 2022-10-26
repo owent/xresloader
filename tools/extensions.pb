@@ -1,5 +1,5 @@
 
-ê	
+ﬁ	
 xresloader.protoorg.xresloader google/protobuf/descriptor.proto:H
 file_description.google.protobuf.FileOptionsÈ (	RfileDescription:I
 msg_description.google.protobuf.MessageOptionsÈ (	RmsgDescription:W
@@ -12,7 +12,8 @@ fieldAlias:?
 field_ratio.google.protobuf.FieldOptionsı (R
 fieldRatio:G
 field_separator.google.protobuf.FieldOptionsˆ (	RfieldSeparator:E
-field_required.google.protobuf.FieldOptions˜ (RfieldRequired:K
+field_required.google.protobuf.FieldOptions˜ (RfieldRequired:L
+field_origin_value.google.protobuf.FieldOptions¯ (	RfieldOriginValue:K
 oneof_description.google.protobuf.OneofOptionsÈ (	RoneofDescription:G
 oneof_separator.google.protobuf.OneofOptionsÍ (	RoneofSeparator:H
 enum_description.google.protobuf.EnumOptionsÈ (	RenumDescription:O

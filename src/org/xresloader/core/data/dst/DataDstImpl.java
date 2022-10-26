@@ -1,7 +1,23 @@
 package org.xresloader.core.data.dst;
 
 import java.io.IOException;
+import java.time.DateTimeException;
+import java.time.Instant;
+import java.time.ZoneId;
+import java.time.ZoneOffset;
+import java.time.ZonedDateTime;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.OffsetDateTime;
+import java.time.OffsetTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeFormatterBuilder;
+import java.time.format.DateTimeParseException;
+import java.time.format.ResolverStyle;
+import java.time.temporal.ChronoField;
 import java.util.HashMap;
+import java.util.regex.Pattern;
 
 import org.xresloader.core.data.dst.DataDstWriterNode.JAVA_TYPE;
 import org.xresloader.core.data.err.ConvException;
@@ -156,7 +172,7 @@ public abstract class DataDstImpl {
             return null;
         }
 
-        if(DataSrcImpl.getOurInstance().isInitialized() && ProgramOptions.getInstance().enableStringMacro) {
+        if (DataSrcImpl.getOurInstance().isInitialized() && ProgramOptions.getInstance().enableStringMacro) {
             return ExcelEngine.tryMacro(input.trim());
         } else {
             return input.trim();
@@ -239,6 +255,195 @@ public abstract class DataDstImpl {
             return ret;
         } catch (java.lang.NumberFormatException e) {
             throw new ConvException(String.format("Try to convert %s to double failed.", input));
+        }
+    }
+
+    static private final Pattern DATE_CHECK_RULE = Pattern.compile("\\d+-\\d+-\\d+");
+    static private final Pattern TIME_SSS_CHECK_RULE = Pattern.compile("\\d+:\\d+:\\d+\\.\\d+");
+    static private final Pattern TIME_CHECK_RULE = Pattern.compile("\\d+:\\d+:\\d+");
+    static private final Pattern ZONE_CHECK_RULE = Pattern.compile(":\\d+(\\.\\d*)?(Z|[+-])");
+    static private final Pattern DIGITAL_CHECK_RULE = Pattern.compile("[+-]?\\d+(\\.\\d*)?");
+    static DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd").withZone(ZoneId.systemDefault())
+            .withResolverStyle(ResolverStyle.SMART);
+    static DateTimeFormatter DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")
+            .withZone(ZoneId.systemDefault())
+            .withResolverStyle(ResolverStyle.SMART);
+    static DateTimeFormatter DATE_TIME_SSS_FORMATTER = new DateTimeFormatterBuilder()
+            .appendPattern("yyyy-MM-dd HH:mm:ss")
+            .appendFraction(ChronoField.NANO_OF_SECOND, 1, 9, true).toFormatter()
+            .withZone(ZoneId.systemDefault())
+            .withResolverStyle(ResolverStyle.SMART);
+    static DateTimeFormatter DATE_TIME_ZONE_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss[XXXXX][XXX]")
+            .withZone(ZoneId.systemDefault())
+            .withResolverStyle(ResolverStyle.SMART);
+    static DateTimeFormatter DATE_TIME_ZONE_SSS_FORMATTER = new DateTimeFormatterBuilder()
+            .appendPattern("yyyy-MM-dd HH:mm:ss")
+            .appendFraction(ChronoField.NANO_OF_SECOND, 1, 9, true)
+            .optionalStart()
+            .appendOffset("+HH:MM:ss", "Z")
+            .optionalEnd()
+            .optionalStart()
+            .appendOffset("+HH:MM", "Z")
+            .optionalEnd()
+            .toFormatter()
+            .withZone(ZoneId.systemDefault())
+            .withResolverStyle(ResolverStyle.SMART);
+    static DateTimeFormatter TIME_FORMATTER = DateTimeFormatter.ofPattern("HH:mm:ss").withZone(ZoneId.systemDefault())
+            .withResolverStyle(ResolverStyle.SMART);
+    static DateTimeFormatter TIME_SSS_FORMATTER = new DateTimeFormatterBuilder()
+            .appendPattern("HH:mm:ss")
+            .appendFraction(ChronoField.NANO_OF_SECOND, 1, 9, true).toFormatter()
+            .withZone(ZoneId.systemDefault())
+            .withResolverStyle(ResolverStyle.SMART);
+    static DateTimeFormatter TIME_ZONE_FORMATTER = DateTimeFormatter.ofPattern("HH:mm:ss[XXX][XXXXX]")
+            .withZone(ZoneId.systemDefault())
+            .withResolverStyle(ResolverStyle.SMART);
+    static DateTimeFormatter TIME_ZONE_SSS_FORMATTER = new DateTimeFormatterBuilder()
+            .appendPattern("HH:mm:ss")
+            .appendFraction(ChronoField.NANO_OF_SECOND, 1, 9, true)
+            .optionalStart()
+            .appendOffset("+HH:MM:ss", "Z")
+            .optionalEnd()
+            .optionalStart()
+            .appendOffset("+HH:MM", "Z")
+            .optionalEnd()
+            .toFormatter()
+            .withZone(ZoneId.systemDefault())
+            .withResolverStyle(ResolverStyle.SMART);
+    static ZoneOffset SYSTEM_ZONE_OFFSET = OffsetDateTime.now().getOffset();
+    static ZoneOffset UTC_ZONE_OFFSET = ZoneOffset.UTC;
+
+    static public Instant parsePlainDataDatetime(String input) throws ConvException {
+        if (input == null) {
+            return null;
+        }
+
+        String item = ExcelEngine.tryMacro(input.trim()).trim();
+        if (DIGITAL_CHECK_RULE.matcher(item).matches()) {
+            try {
+                int dot = item.indexOf('.');
+                if (dot >= 0) {
+                    long sec = Long.parseLong(item.substring(0, dot));
+                    Double nanos = Double.parseDouble(item.substring(dot)) * 1000000000;
+                    return Instant.ofEpochSecond(sec).plusNanos(nanos.longValue());
+                } else {
+                    long sec = Long.parseLong(item);
+                    return Instant.ofEpochSecond(sec);
+                }
+            } catch (NumberFormatException | DateTimeException e) {
+                throw new ConvException(String.format(
+                        "Can convert %s to datetime(%s).",
+                        input, e.getMessage()));
+            }
+        }
+
+        boolean hasDate = DATE_CHECK_RULE.matcher(item).find();
+        boolean hasTime = TIME_CHECK_RULE.matcher(item).find();
+        boolean hasTimeSSS = TIME_SSS_CHECK_RULE.matcher(item).find();
+        boolean hasZone = ZONE_CHECK_RULE.matcher(item).find();
+        try {
+            if (hasDate) {
+                if (hasTimeSSS && hasZone) {
+                    return ZonedDateTime.parse(item, DATE_TIME_ZONE_SSS_FORMATTER).toInstant();
+                } else if (hasTime && hasZone) {
+                    return ZonedDateTime.parse(item, DATE_TIME_ZONE_FORMATTER).toInstant();
+                } else if (hasTimeSSS) {
+                    return LocalDateTime.parse(item, DATE_TIME_SSS_FORMATTER).toInstant(SYSTEM_ZONE_OFFSET);
+                } else if (hasTime) {
+                    return LocalDateTime.parse(item, DATE_TIME_FORMATTER).toInstant(SYSTEM_ZONE_OFFSET);
+                } else {
+                    // return OffsetDateTime.parse(item, DATE_FORMATTER).toInstant();
+                    return LocalDate.parse(item,
+                            DATE_FORMATTER).atStartOfDay().toInstant(SYSTEM_ZONE_OFFSET);
+                }
+            } else {
+                var colon = item.indexOf(':');
+                String zeroPrefix = item.charAt(0) == '-' ? "-00:" : "00:";
+                if (hasTimeSSS && hasZone) {
+                    return OffsetTime.parse(zeroPrefix + item.substring(colon + 1), TIME_ZONE_SSS_FORMATTER)
+                            .atDate(LocalDate.ofEpochDay(0))
+                            .plusHours(Long.parseLong(item.substring(0, colon)))
+                            .toInstant();
+                } else if (hasTime && hasZone) {
+                    return OffsetTime.parse(zeroPrefix + item.substring(colon + 1), TIME_ZONE_FORMATTER)
+                            .atDate(LocalDate.ofEpochDay(0))
+                            .plusHours(Long.parseLong(item.substring(0, colon)))
+                            .toInstant();
+                } else if (hasTimeSSS) {
+                    return LocalTime.parse(zeroPrefix + item.substring(colon + 1), TIME_SSS_FORMATTER)
+                            .atDate(LocalDate.ofEpochDay(0))
+                            .plusHours(Long.parseLong(item.substring(0, colon)))
+                            .toInstant(UTC_ZONE_OFFSET);
+                } else {
+                    return LocalTime.parse(zeroPrefix + item.substring(colon + 1), TIME_FORMATTER)
+                            .atDate(LocalDate.ofEpochDay(0))
+                            .plusHours(Long.parseLong(item.substring(0, colon)))
+                            .toInstant(UTC_ZONE_OFFSET);
+                }
+            }
+        } catch (DateTimeException e) {
+            throw new ConvException(String.format(
+                    "Can convert %s to datetime(%s).",
+                    input, e.getMessage()));
+        }
+    }
+
+    static public Instant parsePlainDataDuration(String input) throws ConvException {
+        if (input == null) {
+            return null;
+        }
+
+        String item = ExcelEngine.tryMacro(input.trim()).trim();
+        if (DIGITAL_CHECK_RULE.matcher(item).matches()) {
+            try {
+                int dot = item.indexOf('.');
+                if (dot >= 0) {
+                    Long sec = Long.parseLong(item.substring(0, dot));
+                    Double nanos = Double.parseDouble(item.substring(dot)) * 1000000000;
+                    return Instant.ofEpochSecond(sec).plusNanos(nanos.longValue());
+                } else {
+                    Long sec = Long.parseLong(item);
+                    return Instant.ofEpochSecond(sec);
+                }
+            } catch (NumberFormatException e) {
+                throw new ConvException(String.format(
+                        "Can convert %s to duration(%s).",
+                        input, e.getMessage()));
+            }
+        }
+
+        boolean hasTime = TIME_CHECK_RULE.matcher(item).find();
+        boolean hasTimeSSS = TIME_SSS_CHECK_RULE.matcher(item).find();
+        boolean hasZone = ZONE_CHECK_RULE.matcher(item).find();
+
+        try {
+            int colon = item.indexOf(':');
+            String zeroPrefix = item.charAt(0) == '-' ? "-00:" : "00:";
+            if (hasTimeSSS && hasZone) {
+                return OffsetTime.parse(zeroPrefix + item.substring(colon + 1), TIME_ZONE_SSS_FORMATTER)
+                        .atDate(LocalDate.ofEpochDay(0))
+                        .plusHours(Long.parseLong(item.substring(0, colon)))
+                        .toInstant();
+            } else if (hasTime && hasZone) {
+                return OffsetTime.parse(zeroPrefix + item.substring(colon + 1), TIME_ZONE_FORMATTER)
+                        .atDate(LocalDate.ofEpochDay(0))
+                        .plusHours(Long.parseLong(item.substring(0, colon)))
+                        .toInstant();
+            } else if (hasTimeSSS) {
+                return LocalTime.parse(zeroPrefix + item.substring(colon + 1), TIME_SSS_FORMATTER)
+                        .atDate(LocalDate.ofEpochDay(0))
+                        .plusHours(Long.parseLong(item.substring(0, colon)))
+                        .toInstant(UTC_ZONE_OFFSET);
+            } else {
+                return LocalTime.parse(zeroPrefix + item.substring(colon + 1), TIME_FORMATTER)
+                        .atDate(LocalDate.ofEpochDay(0))
+                        .plusHours(Long.parseLong(item.substring(0, colon)))
+                        .toInstant(UTC_ZONE_OFFSET);
+            }
+        } catch (DateTimeParseException e) {
+            throw new ConvException(String.format(
+                    "Can convert %s to duration(%s).",
+                    input, e.getMessage()));
         }
     }
 

@@ -1,10 +1,6 @@
 package org.xresloader.core.data.vfy;
 
-import java.util.HashMap;
-import java.util.LinkedList;
-
 import org.xresloader.Xresloader;
-import org.xresloader.core.data.dst.DataDstImpl;
 
 import com.google.protobuf.Descriptors;
 import com.google.protobuf.DescriptorProtos;
@@ -31,7 +27,8 @@ public class DataVerifyPbOneof extends DataVerifyImpl {
         }
     }
 
-    // If oneof verifier is refer by other fields, it's not built and should be built by origin protos
+    // If oneof verifier is refer by other fields, it's not built and should be
+    // built by origin protos
     public DataVerifyPbOneof(DescriptorProtos.OneofDescriptorProto desc, DescriptorProtos.DescriptorProto msgDesc) {
         super(desc.getName());
 

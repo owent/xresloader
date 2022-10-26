@@ -7,12 +7,12 @@ import org.xresloader.core.data.src.DataContainer;
 import org.xresloader.core.data.src.DataSrcImpl;
 import org.xresloader.core.engine.IdentifyDescriptor;
 import org.xresloader.core.scheme.SchemeConf;
-import com.google.protobuf.Timestamp;
-import com.google.protobuf.Duration;
+
 import java.nio.ByteBuffer;
 import java.nio.charset.Charset;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.time.Instant;
 import java.util.*;
 import java.util.regex.Pattern;
 
@@ -21,6 +21,11 @@ import java.util.regex.Pattern;
  */
 public abstract class DataDstJava extends DataDstImpl {
     private static Pattern strick_identify_rule = Pattern.compile("^[a-zA-Z]\\w*$", Pattern.CASE_INSENSITIVE);
+
+    static private class ParseResult {
+        public HashMap<String, Object> value = null;
+        public String origin = null;
+    }
 
     public class SpecialInnerHashMap<K, V> extends HashMap<K, V> {
         public SpecialInnerHashMap(int initialCapacity, float loadFactor) {
@@ -90,6 +95,51 @@ public abstract class DataDstJava extends DataDstImpl {
         public String data_message_type = "";
     }
 
+    public class DataDstTableContent {
+        public DataDstWriterNode descriptor = null;
+        public LinkedList<HashMap<String, Object>> rows = new LinkedList<HashMap<String, Object>>();
+
+        public HashMap<String, Object> data_source = new HashMap<String, Object>();
+        public String description = null;
+        public String data_message_type = "";
+    }
+
+    protected HashMap<String, Object> buildCurrentRow(DataDstTableContent table) throws ConvException {
+        if (table.descriptor == null) {
+            return null;
+        }
+
+        HashMap<String, Object> ret = new HashMap<String, Object>();
+        if (dumpMessage(ret, table.descriptor)) {
+            return ret;
+        }
+
+        return null;
+    }
+
+    protected DataDstTableContent buildCurrentTable(DataDstImpl compiler) throws ConvException {
+        DataDstTableContent ret = new DataDstTableContent();
+
+        ret.descriptor = compiler.compile();
+
+        while (DataSrcImpl.getOurInstance().nextRow()) {
+            HashMap<String, Object> msg = buildCurrentRow(ret);
+            if (msg != null) {
+                ret.rows.add(msg);
+            }
+        }
+
+        if (ret.descriptor.getMessageExtension().description != null) {
+            ret.description = ret.descriptor.getMessageExtension().description;
+        }
+
+        ret.data_message_type = ret.descriptor.getFullName();
+        ret.data_source.put("file", DataSrcImpl.getOurInstance().getCurrentFileName());
+        ret.data_source.put("sheet", DataSrcImpl.getOurInstance().getCurrentTableName());
+
+        return ret;
+    }
+
     protected DataDstObject build_data(DataDstImpl compiler) throws ConvException {
         DataDstObject ret = new DataDstObject();
 
@@ -105,25 +155,23 @@ public abstract class DataDstJava extends DataDstImpl {
         ret.body.put(SchemeConf.getInstance().getProtoName(), item_list);
 
         while (DataSrcImpl.getOurInstance().nextTable()) {
-            // 生成描述集
-            DataDstWriterNode desc = compiler.compile();
-
-            while (DataSrcImpl.getOurInstance().nextRow()) {
-                HashMap<String, Object> msg = new HashMap<String, Object>();
-                if (dumpMessage(msg, desc)) {
-                    item_list.add(msg);
-                }
+            DataDstTableContent table = buildCurrentTable(compiler);
+            if (table == null) {
+                continue;
             }
 
-            if (desc.getMessageExtension().description != null) {
-                description_list.add(desc.getMessageExtension().description);
+            for (HashMap<String, Object> row : table.rows) {
+                item_list.add(row);
             }
 
-            ret.data_message_type = desc.getFullName();
-            HashMap<String, Object> new_data_source = new HashMap<String, Object>();
-            new_data_source.put("file", DataSrcImpl.getOurInstance().getCurrentFileName());
-            new_data_source.put("sheet", DataSrcImpl.getOurInstance().getCurrentTableName());
-            data_source.add(new_data_source);
+            if (table.description != null) {
+                description_list.add(table.description);
+            }
+
+            if (ret.data_message_type == null || ret.data_message_type.isEmpty()) {
+                ret.data_message_type = table.data_message_type;
+            }
+            data_source.add(table.data_source);
         }
 
         if (!description_list.isEmpty()) {
@@ -639,12 +687,13 @@ public abstract class DataDstJava extends DataDstImpl {
                 case MESSAGE: {
                     if (field.isMap()) {
                         SpecialInnerHashMap<Object, Object> tmp = new SpecialInnerHashMap<Object, Object>();
-                        for (String v : groups) {
+                        for (int i = 0; i < groups.length; ++i) {
+                            String v = groups[i];
                             String[] subGroups = splitPlainGroups(v, getPlainMessageSeparator(field));
-                            HashMap<String, Object> msg = parsePlainDataMessage(subGroups, ident, field);
-                            if (msg != null) {
-                                Object mapKey = msg.getOrDefault("key", null);
-                                Object mapValue = msg.getOrDefault("value", null);
+                            ParseResult res = parsePlainDataMessage(subGroups, ident, field);
+                            if (res != null && res.value != null) {
+                                Object mapKey = res.value.getOrDefault("key", null);
+                                Object mapValue = res.value.getOrDefault("value", null);
                                 if (mapKey != null && mapValue != null) {
                                     tmp.put(mapKey, mapValue);
                                 }
@@ -656,11 +705,33 @@ public abstract class DataDstJava extends DataDstImpl {
                     } else {
                         ArrayList<Object> tmp = new ArrayList<Object>();
                         tmp.ensureCapacity(groups.length);
-                        for (String v : groups) {
+                        DataDstWriterNode.DataDstFieldDescriptor referOriginField = field
+                                .getReferOriginField();
+                        ArrayList<Object> referOrigin = null;
+                        if (referOriginField != null) {
+                            Object refer = builder.getOrDefault(referOriginField.getName(), null);
+                            if (refer != null && refer instanceof ArrayList<?>) {
+                                referOrigin = (ArrayList<Object>) refer;
+                            }
+                        }
+                        for (int i = 0; i < groups.length; ++i) {
+                            String v = groups[i];
                             String[] subGroups = splitPlainGroups(v, getPlainMessageSeparator(field));
-                            HashMap<String, Object> msg = parsePlainDataMessage(subGroups, ident, field);
-                            if (msg != null) {
-                                tmp.add(msg);
+                            ParseResult res = parsePlainDataMessage(subGroups, ident, field);
+                            if (res != null && res.value != null) {
+                                tmp.add(res.value);
+
+                                if (res.origin != null && referOriginField != null) {
+                                    if (referOrigin == null) {
+                                        referOrigin = new ArrayList<Object>();
+                                        referOrigin.ensureCapacity(groups.length);
+                                        builder.put(referOriginField.getName(), referOrigin);
+                                    }
+                                    while (referOrigin.size() <= i) {
+                                        referOrigin.add("");
+                                    }
+                                    referOrigin.set(i, res.origin);
+                                }
                             }
                         }
 
@@ -752,8 +823,13 @@ public abstract class DataDstJava extends DataDstImpl {
 
                 case MESSAGE: {
                     String[] groups = splitPlainGroups(input.trim(), getPlainMessageSeparator(field));
-                    val = parsePlainDataMessage(groups, ident, field);
-                    if (val == null && field.isRequired()) {
+                    ParseResult res = parsePlainDataMessage(groups, ident, field);
+                    if (res != null && res.value != null) {
+                        val = res.value;
+                        if (res.origin != null && field.getReferOriginField() != null) {
+                            builder.put(field.getReferOriginField().getName(), res.origin);
+                        }
+                    } else if (field.isRequired()) {
                         dumpDefault(builder, field);
                     }
                     break;
@@ -772,7 +848,7 @@ public abstract class DataDstJava extends DataDstImpl {
         }
     }
 
-    public HashMap<String, Object> parsePlainDataMessage(String[] inputs, IdentifyDescriptor ident,
+    public ParseResult parsePlainDataMessage(String[] inputs, IdentifyDescriptor ident,
             org.xresloader.core.data.dst.DataDstWriterNode.DataDstFieldDescriptor field) throws ConvException {
         if (field.getTypeDescriptor() == null || inputs == null || inputs.length == 0) {
             return null;
@@ -785,44 +861,53 @@ public abstract class DataDstJava extends DataDstImpl {
             dumpedOneof = new HashSet<String>();
         }
 
-        HashMap<String, Object> ret = new HashMap<String, Object>();
+        ParseResult ret = new ParseResult();
+        ret.value = new HashMap<String, Object>();
 
         // 几种特殊模式
         if (inputs.length == 1) {
             if (org.xresloader.core.data.dst.DataDstWriterNode.SPECIAL_MESSAGE_TYPE.TIMEPOINT == field
-                    .getTypeDescriptor().getSpecialMessageType() &&
-                    field.getTypeDescriptor().getFullName() == Timestamp.getDescriptor()
-                            .getFullName()) {
-                Timestamp res = DataDstPb.parseTimestampFromString(inputs[0]);
+                    .getTypeDescriptor().getSpecialMessageType()) {
+                Instant res = parsePlainDataDatetime(inputs[0]);
                 for (int i = 0; i < children.size(); ++i) {
                     if (children.get(i).getName().equalsIgnoreCase("seconds")
                             && !children.get(i).isList()) {
-                        ret.put(children.get(i).getName(), res.getSeconds());
+                        ret.value.put(children.get(i).getName(), res.toEpochMilli() / 1000);
                     } else if (children.get(i).getName().equalsIgnoreCase("nanos")
                             && !children.get(i).isList()) {
-                        ret.put(children.get(i).getName(), res.getNanos());
+                        ret.value.put(children.get(i).getName(), res.getNano());
                     }
                 }
+
+                ret.origin = inputs[0];
                 return ret;
             } else if (org.xresloader.core.data.dst.DataDstWriterNode.SPECIAL_MESSAGE_TYPE.DURATION == field
-                    .getTypeDescriptor().getSpecialMessageType() &&
-                    field.getTypeDescriptor().getFullName() == Duration.getDescriptor().getFullName()) {
-                Duration res = DataDstPb.parseDurationFromString(inputs[0]);
+                    .getTypeDescriptor().getSpecialMessageType()) {
+                Instant res = parsePlainDataDuration(inputs[0]);
                 for (int i = 0; i < children.size(); ++i) {
                     if (children.get(i).getName().equalsIgnoreCase("seconds")
                             && !children.get(i).isList()) {
-                        ret.put(children.get(i).getName(), res.getSeconds());
+                        ret.value.put(children.get(i).getName(),
+                                res.toEpochMilli() / 1000);
                     } else if (children.get(i).getName().equalsIgnoreCase("nanos")
                             && !children.get(i).isList()) {
-                        ret.put(children.get(i).getName(), res.getNanos());
+                        ret.value.put(children.get(i).getName(), res.getNano());
                     }
                 }
+
+                ret.origin = inputs[0];
                 return ret;
             }
         }
 
         int usedInputIdx = 0;
+        int fieldSize = 0;
         for (int i = 0; i < children.size(); ++i) {
+            if (children.get(i).getLinkedValueField() != null) {
+                ++fieldSize;
+                continue;
+            }
+
             if (null != children.get(i).getReferOneof()) {
                 if (dumpedOneof == null) {
                     throw new ConvException(String.format(
@@ -840,10 +925,11 @@ public abstract class DataDstJava extends DataDstImpl {
                             usedInputIdx + 1, inputs.length));
                 }
 
-                if (dumpPlainField(ret, null, children.get(i).getReferOneof(), null, inputs[usedInputIdx])) {
+                if (dumpPlainField(ret.value, null, children.get(i).getReferOneof(), null, inputs[usedInputIdx])) {
                     dumpedOneof.add(children.get(i).getReferOneof().getFullName());
                 }
 
+                ++fieldSize;
                 ++usedInputIdx;
             } else {
                 if (usedInputIdx >= inputs.length) {
@@ -853,27 +939,28 @@ public abstract class DataDstJava extends DataDstImpl {
                             inputs.length));
                 }
 
-                dumpPlainField(ret, null, children.get(i), null, inputs[usedInputIdx]);
+                dumpPlainField(ret.value, null, children.get(i), null, inputs[usedInputIdx]);
 
+                ++fieldSize;
                 ++usedInputIdx;
             }
         }
 
-        if (usedInputIdx != inputs.length) {
+        if (fieldSize != inputs.length) {
             DataSrcImpl current_source = DataSrcImpl.getOurInstance();
             if (null == current_source) {
                 ProgramOptions.getLoger().warn("Try to convert %s need %d fields, but provide %d fields.",
-                        field.getTypeDescriptor().getFullName(), usedInputIdx, inputs.length);
+                        field.getTypeDescriptor().getFullName(), fieldSize, inputs.length);
             } else {
                 ProgramOptions.getLoger().warn(
                         "Try to convert %s need %d fields, but provide %d fields.%s  > File: %s, Table: %s, Row: %d, Column: %d",
-                        field.getTypeDescriptor().getFullName(), usedInputIdx, inputs.length, ProgramOptions.getEndl(),
+                        field.getTypeDescriptor().getFullName(), fieldSize, inputs.length, ProgramOptions.getEndl(),
                         current_source.getCurrentFileName(), current_source.getCurrentTableName(),
                         current_source.getCurrentRowNum() + 1, current_source.getLastColomnNum() + 1);
             }
         }
 
-        if (ret.isEmpty()) {
+        if (ret.value.isEmpty()) {
             return null;
         }
 

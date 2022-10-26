@@ -91,6 +91,9 @@ public class DataDstWriterNode {
         private Object rawDescriptor = null;
         private DataDstOneofDescriptor referOneofDescriptor = null;
 
+        private DataDstFieldDescriptor referOriginFieldDescriptor = null;
+        private DataDstFieldDescriptor linkValueFieldDescriptor = null;
+
         public DataDstFieldDescriptor(DataDstTypeDescriptor typeDesc, int index, String name, FIELD_LABEL_TYPE label,
                 Object rawDesc) {
             this.referTypeDescriptor = typeDesc;
@@ -181,6 +184,25 @@ public class DataDstWriterNode {
 
         public DataDstOneofDescriptor getReferOneof() {
             return this.referOneofDescriptor;
+        }
+
+        public DataDstFieldDescriptor getReferOriginField() {
+            return this.referOriginFieldDescriptor;
+        }
+
+        public DataDstFieldDescriptor getLinkedValueField() {
+            return this.linkValueFieldDescriptor;
+        }
+
+        public void setReferOriginField(DataDstFieldDescriptor referTo) {
+            if (this.referOriginFieldDescriptor != null) {
+                this.referOriginFieldDescriptor.linkValueFieldDescriptor = null;
+            }
+
+            this.referOriginFieldDescriptor = referTo;
+            if (referTo != null) {
+                referTo.linkValueFieldDescriptor = this;
+            }
         }
     }
 
@@ -384,6 +406,42 @@ public class DataDstWriterNode {
             return sortedFields;
         }
 
+        public DataDstFieldDescriptor getChildField(String name) {
+            if (fields == null) {
+                return null;
+            }
+
+            return fields.getOrDefault(name, null);
+        }
+
+        public DataDstFieldDescriptor getMapKeyField() {
+            if (SPECIAL_MESSAGE_TYPE.MAP != getSpecialMessageType()) {
+                return null;
+            }
+
+            for (HashMap.Entry<String, DataDstFieldDescriptor> d : fields.entrySet()) {
+                if (d.getKey().equalsIgnoreCase("key")) {
+                    return d.getValue();
+                }
+            }
+
+            return null;
+        }
+
+        public DataDstFieldDescriptor getMapValueField() {
+            if (SPECIAL_MESSAGE_TYPE.MAP != getSpecialMessageType()) {
+                return null;
+            }
+
+            for (HashMap.Entry<String, DataDstFieldDescriptor> d : fields.entrySet()) {
+                if (d.getKey().equalsIgnoreCase("value")) {
+                    return d.getValue();
+                }
+            }
+
+            return null;
+        }
+
         public ArrayList<DataDstOneofDescriptor> getSortedOneofs() {
             if (fields == null) {
                 return null;
@@ -402,6 +460,14 @@ public class DataDstWriterNode {
                 return Integer.compare(l.getIndex(), r.getIndex());
             });
             return sortedOneofs;
+        }
+
+        public DataDstOneofDescriptor getChildOneof(String name) {
+            if (oneofs == null) {
+                return null;
+            }
+
+            return oneofs.getOrDefault(name, null);
         }
 
     }

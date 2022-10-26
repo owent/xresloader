@@ -17,6 +17,7 @@ public final class Xresloader {
     registry.add(org.xresloader.Xresloader.fieldRatio);
     registry.add(org.xresloader.Xresloader.fieldSeparator);
     registry.add(org.xresloader.Xresloader.fieldRequired);
+    registry.add(org.xresloader.Xresloader.fieldOriginValue);
     registry.add(org.xresloader.Xresloader.oneofDescription);
     registry.add(org.xresloader.Xresloader.oneofSeparator);
     registry.add(org.xresloader.Xresloader.enumDescription);
@@ -179,6 +180,22 @@ public final class Xresloader {
           .newFileScopedGeneratedExtension(
         java.lang.Boolean.class,
         null);
+  public static final int FIELD_ORIGIN_VALUE_FIELD_NUMBER = 1016;
+  /**
+   * <pre>
+   * 当前字段类型为Timestamp或Duration时且转换过程发生数据转换时，此扩展允许把原始数据写入指定字段
+   * 目标字段必须是string类型且repeated属性和当前字段保持一致
+   * </pre>
+   *
+   * <code>extend .google.protobuf.FieldOptions { ... }</code>
+   */
+  public static final
+    com.google.protobuf.GeneratedMessage.GeneratedExtension<
+      com.google.protobuf.DescriptorProtos.FieldOptions,
+      java.lang.String> fieldOriginValue = com.google.protobuf.GeneratedMessage
+          .newFileScopedGeneratedExtension(
+        java.lang.String.class,
+        null);
   public static final int ONEOF_DESCRIPTION_FIELD_NUMBER = 1001;
   /**
    * <pre>
@@ -278,15 +295,16 @@ public final class Xresloader {
       "ratio\022\035.google.protobuf.FieldOptions\030\365\007 " +
       "\001(\005:7\n\017field_separator\022\035.google.protobuf" +
       ".FieldOptions\030\366\007 \001(\t:6\n\016field_required\022\035" +
-      ".google.protobuf.FieldOptions\030\367\007 \001(\010:9\n\021" +
-      "oneof_description\022\035.google.protobuf.Oneo" +
-      "fOptions\030\351\007 \001(\t:7\n\017oneof_separator\022\035.goo" +
-      "gle.protobuf.OneofOptions\030\352\007 \001(\t:7\n\020enum" +
-      "_description\022\034.google.protobuf.EnumOptio" +
-      "ns\030\351\007 \001(\t:=\n\021enumv_description\022!.google." +
-      "protobuf.EnumValueOptions\030\351\007 \001(\t:6\n\nenum" +
-      "_alias\022!.google.protobuf.EnumValueOption" +
-      "s\030\352\007 \001(\tb\006proto3"
+      ".google.protobuf.FieldOptions\030\367\007 \001(\010::\n\022" +
+      "field_origin_value\022\035.google.protobuf.Fie" +
+      "ldOptions\030\370\007 \001(\t:9\n\021oneof_description\022\035." +
+      "google.protobuf.OneofOptions\030\351\007 \001(\t:7\n\017o" +
+      "neof_separator\022\035.google.protobuf.OneofOp" +
+      "tions\030\352\007 \001(\t:7\n\020enum_description\022\034.googl" +
+      "e.protobuf.EnumOptions\030\351\007 \001(\t:=\n\021enumv_d" +
+      "escription\022!.google.protobuf.EnumValueOp" +
+      "tions\030\351\007 \001(\t:6\n\nenum_alias\022!.google.prot" +
+      "obuf.EnumValueOptions\030\352\007 \001(\tb\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
@@ -303,11 +321,12 @@ public final class Xresloader {
     fieldRatio.internalInit(descriptor.getExtensions().get(7));
     fieldSeparator.internalInit(descriptor.getExtensions().get(8));
     fieldRequired.internalInit(descriptor.getExtensions().get(9));
-    oneofDescription.internalInit(descriptor.getExtensions().get(10));
-    oneofSeparator.internalInit(descriptor.getExtensions().get(11));
-    enumDescription.internalInit(descriptor.getExtensions().get(12));
-    enumvDescription.internalInit(descriptor.getExtensions().get(13));
-    enumAlias.internalInit(descriptor.getExtensions().get(14));
+    fieldOriginValue.internalInit(descriptor.getExtensions().get(10));
+    oneofDescription.internalInit(descriptor.getExtensions().get(11));
+    oneofSeparator.internalInit(descriptor.getExtensions().get(12));
+    enumDescription.internalInit(descriptor.getExtensions().get(13));
+    enumvDescription.internalInit(descriptor.getExtensions().get(14));
+    enumAlias.internalInit(descriptor.getExtensions().get(15));
     com.google.protobuf.DescriptorProtos.getDescriptor();
   }
 

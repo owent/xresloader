@@ -23,7 +23,7 @@ extension_proto_file = glob.glob(
 
 os.chdir(work_dir)
 
-java_out_dir = proto_dir
+java_out_dir = os.path.join(project_dir, 'header')
 pb_out_file = os.path.join(project_dir, 'header', 'pb_header_v3.pb')
 
 from find_protoc import find_protoc

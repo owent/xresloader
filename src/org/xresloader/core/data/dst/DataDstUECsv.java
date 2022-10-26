@@ -1,29 +1,18 @@
 package org.xresloader.core.data.dst;
 
-import java.io.IOException;
-import java.nio.charset.Charset;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVPrinter;
 import org.apache.commons.csv.QuoteMode;
 import org.xresloader.core.ProgramOptions;
-import org.xresloader.core.data.dst.DataDstWriterNode.CHILD_NODE_TYPE;
-import org.xresloader.core.data.dst.DataDstWriterNode.DataDstChildrenNode;
 import org.xresloader.core.data.dst.DataDstWriterNode.DataDstFieldDescriptor;
-import org.xresloader.core.data.dst.DataDstWriterNode.DataDstTypeDescriptor;
 import org.xresloader.core.data.dst.DataDstWriterNode.DataDstOneofDescriptor;
-import org.xresloader.core.data.dst.DataDstWriterNode.JAVA_TYPE;
-import org.xresloader.core.data.err.ConvException;
-import org.xresloader.core.data.src.DataContainer;
+import org.xresloader.core.data.dst.DataDstWriterNode.DataDstTypeDescriptor;
 import org.xresloader.core.data.src.DataSrcImpl;
-import org.xresloader.core.engine.IdentifyDescriptor;
 import org.xresloader.core.scheme.SchemeConf;
-import com.google.protobuf.Timestamp;
-import com.google.protobuf.Duration;
+
+import java.io.IOException;
+import java.nio.charset.Charset;
+import java.util.*;
 
 /**
  * Created by owentou on 2019/04/08.
@@ -43,13 +32,9 @@ public class DataDstUECsv extends DataDstUEBase {
     private class UEBuildObject {
         StringBuffer sb = null;
         CSVPrinter csv = null;
-        ArrayList<String> header = null;
+        ArrayList<DataDstWriterNodeWrapper> headerNodes = null;
+        ArrayList<DataDstWriterNodeWrapper> headerAutocomplete = null;
         boolean hasPrintHeader = false;
-    }
-
-    @Override
-    protected boolean isRecursiveEnabled() {
-        return SchemeConf.getInstance().getUEOptions().enableRecursiveMode;
     }
 
     @Override
@@ -78,154 +63,115 @@ public class DataDstUECsv extends DataDstUEBase {
     }
 
     @Override
-    protected void buildForUEOnPrintHeader(Object buildObj, ArrayList<Object> rowData, UEDataRowRule rule,
+    protected void buildForUEOnPrintHeader(Object buildObj, ArrayList<DataDstWriterNodeWrapper> rowData,
+            UEDataRowRule rule,
             UECodeInfo codeInfo) throws IOException {
         if (((UEBuildObject) buildObj).hasPrintHeader) {
             return;
         }
 
+        HashSet<String> dumpedFields = new HashSet<String>();
+        ArrayList<String> finalRowData = new ArrayList<String>();
+        ArrayList<DataDstWriterNodeWrapper> headerAutocomplete = new ArrayList<>();
+
         ((UEBuildObject) buildObj).hasPrintHeader = true;
-        if (!isRecursiveEnabled()) {
-            ArrayList<String> finalRowData = new ArrayList<String>();
-            ((UEBuildObject) buildObj).header = finalRowData;
+        ((UEBuildObject) buildObj).headerNodes = rowData;
+        ((UEBuildObject) buildObj).headerAutocomplete = headerAutocomplete;
 
-            finalRowData.ensureCapacity(rowData.size() + 1);
-            // Add a empty column for "Row Name"
-            finalRowData.add("---");
-            for (Object keyName : rowData) {
-                finalRowData.add(keyName.toString());
-            }
-
-            ((UEBuildObject) buildObj).csv.printRecord(rowData);
-        } else {
-            HashSet<String> dumpedFields = new HashSet<String>();
-            ArrayList<String> finalRowData = new ArrayList<String>();
-            ((UEBuildObject) buildObj).header = finalRowData;
-
-            if (codeInfo.writerNodeWrapper != null && codeInfo.writerNodeWrapper.hasChidlren()) {
-                finalRowData.ensureCapacity(rowData.size() + 1); // 1 for additional Name
-            }
-            // Add a empty column for "Row Name"
-            finalRowData.add("---");
-            for (Object keyName : rowData) {
-                dumpedFields.add(keyName.toString());
-                finalRowData.add(keyName.toString());
-            }
-
-            // 需要补全空字段 - header
-            if (codeInfo.writerNodeWrapper != null && null != codeInfo.writerNodeWrapper.getTypeDescriptor()) {
-                // 字段补全
-                for (DataDstFieldDescriptor field : codeInfo.writerNodeWrapper.getTypeDescriptor().getSortedFields()) {
-                    String varName = getIdentName(field.getName());
-
-                    // Write oneof
-                    if (field.getReferOneof() != null) {
-                        String oneofVarName = getIdentName(field.getReferOneof().getName());
-
-                        if (!dumpedFields.contains(oneofVarName)) {
-                            dumpedFields.add(oneofVarName);
-                            finalRowData.add(oneofVarName);
-                        }
-                    }
-
-                    if (dumpedFields.contains(varName)) {
-                        continue;
-                    }
-                    dumpedFields.add(varName);
-                    finalRowData.add(varName);
-                }
-            }
-
-            ((UEBuildObject) buildObj).csv.printRecord(finalRowData);
+        if (codeInfo.writerNodeWrapper != null && codeInfo.writerNodeWrapper.hasChidlren()) {
+            finalRowData.ensureCapacity(rowData.size() + 1); // 1 for additional Name
         }
+        // Add a empty column for "Row Name"
+        finalRowData.add("---");
+        for (DataDstWriterNodeWrapper keyName : rowData) {
+            dumpedFields.add(keyName.getVarName());
+            finalRowData.add(keyName.getVarName());
+        }
+
+        // 需要补全空字段 - header
+        if (codeInfo.writerNodeWrapper != null && null != codeInfo.writerNodeWrapper.getTypeDescriptor()) {
+            // 字段补全
+            for (DataDstFieldDescriptor field : codeInfo.writerNodeWrapper.getTypeDescriptor().getSortedFields()) {
+                String varName = getIdentName(field.getName());
+
+                // Write oneof
+                if (field.getReferOneof() != null) {
+                    String oneofVarName = getIdentName(field.getReferOneof().getName());
+
+                    if (!dumpedFields.contains(oneofVarName)) {
+                        dumpedFields.add(oneofVarName);
+                        finalRowData.add(oneofVarName);
+
+                        DataDstWriterNodeWrapper virtualNode = new DataDstWriterNodeWrapper(oneofVarName, true, null);
+                        virtualNode.setReferOneof(field.getReferOneof());
+                        headerAutocomplete.add(virtualNode);
+                    }
+                }
+
+                if (dumpedFields.contains(varName)) {
+                    continue;
+                }
+                dumpedFields.add(varName);
+                finalRowData.add(varName);
+                DataDstWriterNodeWrapper virtualNode = new DataDstWriterNodeWrapper(varName, true, null);
+                virtualNode.setReferField(field);
+                headerAutocomplete.add(virtualNode);
+            }
+        }
+
+        ((UEBuildObject) buildObj).csv.printRecord(finalRowData);
     }
 
     @Override
-    protected void buildForUEOnPrintRecord(Object buildObj, ArrayList<Object> rowData, UEDataRowRule rule,
-            UECodeInfo codeInfo, HashMap<String, Object> fieldDataByOneof) throws IOException {
-        if (!isRecursiveEnabled()) {
-            ArrayList<Object> finalRowData = new ArrayList<Object>();
-            finalRowData.ensureCapacity(rowData.size() + 1);
-            // Copy first "Row Name"
-            if (!rowData.isEmpty()) {
-                Object copyName = rowData.get(0);
-                if (copyName == null) {
-                    finalRowData.add("");
-                } else {
-                    finalRowData.add(copyName);
-                }
-            }
-            for (Object obj : rowData) {
-                finalRowData.add(obj);
-            }
+    protected void buildForUEOnPrintRecord(Object buildObj, HashMap<String, Object> rowData,
+            UEDataRowRule rule,
+            UECodeInfo codeInfo) throws IOException {
 
-            ((UEBuildObject) buildObj).csv.printRecord(rowData);
-        } else {
-            HashSet<String> dumpedFields = new HashSet<String>();
-            ArrayList<String> finalRowData = new ArrayList<String>();
-            finalRowData.ensureCapacity(
-                    rowData.size() + codeInfo.writerNodeWrapper.getTypeDescriptor().getSortedFields().size() + 1);
+        UEBuildObject bobj = ((UEBuildObject) buildObj);
 
-            // Copy first "Row Name"
-            if (!rowData.isEmpty()) {
-                Object copyName = rowData.get(0);
-                if (copyName == null) {
-                    finalRowData.add("");
-                } else {
-                    finalRowData.add(copyName.toString());
-                }
+        // 顺序约定:(必须和上面输出header保持一样的顺序)
+        // 1. key
+        // 2. value(包含oneof)
+        // 3. 补全空字段(提取自
+        // codeInfo.writerNodeWrapper.getTypeDescriptor().getSortedFields())
+
+        HashSet<String> dumpedFields = new HashSet<String>();
+        ArrayList<String> finalRowData = new ArrayList<String>();
+        finalRowData.ensureCapacity(
+                bobj.headerNodes.size() + bobj.headerAutocomplete.size());
+
+        for (DataDstWriterNodeWrapper headerNode : bobj.headerNodes) {
+            if (dumpedFields.contains(headerNode.getVarName())) {
+                continue;
             }
 
-            UEBuildObject bobj = ((UEBuildObject) buildObj);
-            for (int i = 0; i + 1 < bobj.header.size() && i < rowData.size(); ++i) {
-                Object val = rowData.get(i);
-                if (val == null) {
-                    finalRowData.add("");
-                } else {
-                    finalRowData.add(val.toString());
-                }
+            dumpedFields.add(headerNode.getVarName());
 
-                dumpedFields.add(bobj.header.get(i + 1));
-            }
+            StringBuffer fieldSb = new StringBuffer();
+            dumpField(fieldSb, dumpedFields, headerNode, rowData, true);
 
-            // 需要补全空字段 - data
-            if (codeInfo.writerNodeWrapper != null && null != codeInfo.writerNodeWrapper.getTypeDescriptor()) {
-                // 字段补全
-                for (DataDstFieldDescriptor field : codeInfo.writerNodeWrapper.getTypeDescriptor().getSortedFields()) {
-                    Object val = null;
-                    String varName = getIdentName(field.getName());
-
-                    // Write oneof
-                    if (field.getReferOneof() != null) {
-                        String oneofVarName = getIdentName(field.getReferOneof().getName());
-                        val = fieldDataByOneof.getOrDefault(varName, null);
-
-                        if (!dumpedFields.contains(oneofVarName)) {
-                            dumpedFields.add(oneofVarName);
-                            if (val == null) {
-                                finalRowData.add(String.format("%s=\"\"", oneofVarName));
-                            } else {
-                                finalRowData.add(String.format("%s=\"%s\"", oneofVarName, varName));
-                            }
-                        }
-                    }
-
-                    if (dumpedFields.contains(varName)) {
-                        continue;
-                    }
-                    dumpedFields.add(varName);
-
-                    if (val == null) {
-                        StringBuffer fieldSb = new StringBuffer();
-                        pickValueFieldCsvDefaultImpl(fieldSb, field, false);
-                        val = fieldSb.toString();
-                    }
-                    finalRowData.add(val.toString());
-                }
-            }
-
-            ((UEBuildObject) buildObj).csv.printRecord(finalRowData);
+            finalRowData.add(fieldSb.toString());
         }
+
+        for (DataDstWriterNodeWrapper virtualNode : bobj.headerAutocomplete) {
+            String varName = virtualNode.getVarName();
+            if (dumpedFields.contains(varName)) {
+                continue;
+            }
+            dumpedFields.add(varName);
+
+            StringBuffer fieldSb = new StringBuffer();
+
+            if (virtualNode.getReferOneof() != null) {
+                pickValueFieldCsvDefaultImpl(fieldSb, virtualNode.getReferOneof(), false);
+            } else {
+                pickValueFieldCsvDefaultImpl(fieldSb, virtualNode.getReferField(), false);
+            }
+
+            finalRowData.add(fieldSb.toString());
+        }
+
+        ((UEBuildObject) buildObj).csv.printRecord(finalRowData);
     }
 
     @Override
@@ -251,7 +197,7 @@ public class DataDstUECsv extends DataDstUEBase {
 
         // 布尔
         if (data instanceof Boolean) {
-            sp.printRecord(prefix, ((Boolean) data) ? 1 : 0);
+            sp.printRecord(prefix, ((Boolean) data) ? "True" : "False");
             return;
         }
 
@@ -315,219 +261,127 @@ public class DataDstUECsv extends DataDstUEBase {
         return sb.toString();
     }
 
-    static private boolean isEmptyObject(String input) {
-        if (input == null) {
-            return false;
-        }
+    private void dumpMessage(StringBuffer sb, DataDstWriterNodeWrapper descWraper,
+            HashMap<?, ?> dataSet) {
 
-        String begin = SchemeConf.getInstance().getUEOptions().codeOutputCsvObjectBegin;
-        String end = SchemeConf.getInstance().getUEOptions().codeOutputCsvObjectEnd;
-        if (input.length() != begin.length() + end.length()) {
-            return false;
-        }
+        sb.append(SchemeConf.getInstance().getUEOptions().codeOutputCsvObjectBegin);
 
-        if (!input.substring(0, begin.length()).equalsIgnoreCase(begin)) {
-            return false;
-        }
-
-        if (!input.substring(begin.length()).equalsIgnoreCase(end)) {
-            return false;
-        }
-
-        return true;
-    }
-
-    @Override
-    final protected Object pickValueField(Object buildObj, ArrayList<DataDstWriterNodeWrapper> fieldSet,
-            HashMap<String, Object> fieldDataByOneof) throws ConvException {
-        DataDstWriterNode msgDesc = getFirstWriterNode(fieldSet);
-        DataDstFieldDescriptor field = getFieldDescriptor(fieldSet);
-        DataDstOneofDescriptor oneof = getOneofDescriptor(fieldSet);
-        if (msgDesc == null || (field == null && oneof == null)) {
-            if (field != null) {
-                StringBuffer fieldSB = new StringBuffer();
-                pickValueFieldCsvDefaultImpl(fieldSB, field, false);
-                String ret = fieldSB.toString();
-                // empty list to nothing, empty map is just like empty list
-                if (field.isList() && isEmptyObject(ret)) {
-                    ret = "";
-                }
-                return ret;
+        // 仅需要数据结构，提取一个节点就行了，剩下的走dataSet
+        ArrayList<DataDstWriterNodeWrapper> children = new ArrayList<>();
+        children.ensureCapacity(descWraper.getChildren().size());
+        descWraper.getChildren().values().forEach((ea) -> {
+            if (!ea.isEmpty()) {
+                children.add(ea.get(0));
             }
+        });
 
-            if (oneof != null) {
-                return String.valueOf(0);
-            }
-            return "";
+        children.sort((l, r) -> {
+            return l.compareTo(r);
+        });
+
+        HashSet<String> dumpedFields = new HashSet<>();
+        for (DataDstWriterNodeWrapper child : children) {
+            dumpField(sb, dumpedFields, child, dataSet, false);
         }
 
-        if (!isRecursiveEnabled()) {
-            Object ret = pickValueFieldBaseStandardImpl(msgDesc);
-            if (ret == null) {
-                if (oneof != null) {
-                    ret = Integer.valueOf(0);
-                } else if (field != null) {
-                    switch (field.getType()) {
-                        case INT:
-                        case LONG:
-                        case FLOAT:
-                        case DOUBLE: {
-                            ret = "0";
-                            break;
-                        }
-                        case BOOLEAN: {
-                            ret = "False";
-                            break;
-                        }
-                        default: {
-                            ret = "";
-                            break;
-                        }
-                    }
-                }
-            }
-
-            return ret;
-        }
-
-        if (fieldSet.size() > 0 && fieldDataByOneof.containsKey(fieldSet.get(0).getVarName())) {
-            return fieldDataByOneof.get(fieldSet.get(0).getVarName());
-        }
-
-        StringBuffer fieldSB = new StringBuffer();
-        dumpValueFieldCsvImpl(fieldSB, fieldSet,
-                msgDesc.getReferBrothers().mode == DataDstWriterNode.CHILD_NODE_TYPE.PLAIN, true, fieldDataByOneof);
-        String ret = fieldSB.toString();
-        // empty list to nothing, empty map is just like empty list
-        if (field != null && field.isList() && isEmptyObject(ret)) {
-            ret = "";
-        }
-        return ret;
-    }
-
-    protected boolean dumpValueFieldCsvImpl(StringBuffer fieldSB, ArrayList<DataDstWriterNodeWrapper> fieldSet,
-            boolean isPlainMode, boolean isTopLevel, HashMap<String, Object> fieldDataByOneof) throws ConvException {
-        if (fieldSet == null || fieldSet.isEmpty()) {
-            return false;
-        }
-
-        DataDstWriterNode msgDesc = getFirstWriterNode(fieldSet);
-        if (msgDesc != null && msgDesc.getReferBrothers().isOneof()) {
-            return pickValueFieldCsvImpl(fieldSB, fieldSet.get(0), isPlainMode, isTopLevel, fieldDataByOneof);
-        }
-
-        DataDstFieldDescriptor field = getFieldDescriptor(fieldSet);
-        if (null == field) {
-            return false;
-        }
-
-        if (isPlainMode) {
-            // 特殊的，对于Plain message list, 需要处理数据补全和裁剪
-            if (isTopLevel && msgDesc != null && msgDesc.getListIndex() >= 0
-                    && fieldSet.get(0).getReferField().isList()) {
-                fieldSB.append(SchemeConf.getInstance().getUEOptions().codeOutputCsvObjectBegin);
-                boolean isFirstElement = true;
-                boolean ret = false;
-                int elementLength = 0;
-                ProgramOptions.ListStripRule stripListRule = ProgramOptions.getInstance().stripListRule;
-
-                for (int i = 0; i < fieldSet.size(); ++i) {
-                    int hasListDataLength = fieldSB.length();
-
-                    int index = fieldSet.get(i).getReferNode().getListIndex();
-                    while (index > elementLength && (stripListRule == ProgramOptions.ListStripRule.KEEP_ALL
-                            || stripListRule == ProgramOptions.ListStripRule.STRIP_EMPTY_TAIL)) {
-                        ++elementLength;
-                        if (!isFirstElement) {
-                            fieldSB.append(",");
-                        }
-                        pickValueMessageCsvDefaultImpl(fieldSB, fieldSet.get(i).getTypeDescriptor(), true);
-                        isFirstElement = false;
-                        hasListDataLength = fieldSB.length() - 1;
-                    }
-
-                    if (!isFirstElement) {
-                        fieldSB.append(",");
-                    }
-                    if (pickValueFieldCsvImpl(fieldSB, fieldSet.get(i), isPlainMode, false, fieldDataByOneof)) {
-                        ++elementLength;
-                        isFirstElement = false;
-                        ret = true;
-                    } else {
-                        fieldSB.setLength(hasListDataLength);
-
-                        if (stripListRule == ProgramOptions.ListStripRule.KEEP_ALL) {
-                            if (!isFirstElement) {
-                                fieldSB.append(",");
-                            }
-
-                            pickValueMessageCsvDefaultImpl(fieldSB, fieldSet.get(i).getTypeDescriptor(), true);
-                            ++elementLength;
-                            isFirstElement = false;
-                            ret = true;
-                        }
-                    }
-                }
-
-                fieldSB.append(SchemeConf.getInstance().getUEOptions().codeOutputCsvObjectEnd);
-                return ret;
-            } else {
-                return pickValueFieldCsvImpl(fieldSB, fieldSet.get(0), isPlainMode, isTopLevel, fieldDataByOneof);
-            }
-        }
-
-        if (field.isList() && isRecursiveEnabled()) {
-            fieldSB.append(SchemeConf.getInstance().getUEOptions().codeOutputCsvObjectBegin);
-            boolean isFirstElement = true;
-            boolean ret = false;
-            int elementLength = 0;
-            ProgramOptions.ListStripRule stripListRule = ProgramOptions.getInstance().stripListRule;
-            for (int i = 0; i < fieldSet.size(); ++i) {
-                int hasListDataLength = fieldSB.length();
-
-                int index = -1;
-                if (null != fieldSet.get(i).getReferNode()) {
-                    index = fieldSet.get(i).getReferNode().getListIndex();
-                }
-                while (index > elementLength && (stripListRule == ProgramOptions.ListStripRule.KEEP_ALL
-                        || stripListRule == ProgramOptions.ListStripRule.STRIP_EMPTY_TAIL)) {
-                    ++elementLength;
-                    if (!isFirstElement) {
-                        fieldSB.append(",");
-                    }
-                    pickValueMessageCsvDefaultImpl(fieldSB, fieldSet.get(i).getTypeDescriptor(), true);
-                    isFirstElement = false;
-                    hasListDataLength = fieldSB.length() - 1;
-                }
-
-                if (!isFirstElement) {
-                    fieldSB.append(",");
-                }
-                if (pickValueFieldCsvImpl(fieldSB, fieldSet.get(i), isPlainMode, isTopLevel, fieldDataByOneof)) {
-                    ++elementLength;
-                    isFirstElement = false;
-                    ret = true;
+        // 补全缺失字段
+        for (DataDstWriterNodeWrapper child : children) {
+            if (!dumpedFields.contains(child.getVarName())) {
+                if (child.getReferOneof() != null) {
+                    pickValueFieldCsvDefaultImpl(sb, child.getReferOneof(), true);
                 } else {
-                    fieldSB.setLength(hasListDataLength);
-
-                    if (stripListRule == ProgramOptions.ListStripRule.KEEP_ALL) {
-                        if (!isFirstElement) {
-                            fieldSB.append(",");
-                        }
-
-                        pickValueMessageCsvDefaultImpl(fieldSB, fieldSet.get(i).getTypeDescriptor(), true);
-                        ++elementLength;
-                        isFirstElement = false;
-                        ret = true;
-                    }
+                    pickValueFieldCsvDefaultImpl(sb, child.getReferField(), true);
                 }
             }
-            fieldSB.append(SchemeConf.getInstance().getUEOptions().codeOutputCsvObjectEnd);
-
-            return ret;
-        } else {
-            return pickValueFieldCsvImpl(fieldSB, fieldSet.get(0), isPlainMode, isTopLevel, fieldDataByOneof);
         }
+
+        sb.append(SchemeConf.getInstance().getUEOptions().codeOutputCsvObjectEnd);
+    }
+
+    private void dumpFieldValue(StringBuffer sb, DataDstWriterNodeWrapper descWraper, Object data) {
+        if (data instanceof List<?>) {
+            sb.append(SchemeConf.getInstance().getUEOptions().codeOutputCsvObjectBegin);
+            boolean isFirst = true;
+            for (Object val : (List<?>) data) {
+                isFirst = tryWriteSeprator(sb, isFirst);
+                dumpFieldValue(sb, descWraper, val);
+            }
+            sb.append(SchemeConf.getInstance().getUEOptions().codeOutputCsvObjectEnd);
+        } else if (data instanceof SpecialInnerHashMap<?, ?>) {
+            ArrayList<DataDstWriterNodeWrapper> valueDesc = descWraper.getMapValueField();
+
+            sb.append(SchemeConf.getInstance().getUEOptions().codeOutputCsvObjectBegin);
+            if (!valueDesc.isEmpty()) {
+                boolean isFirst = true;
+                for (Map.Entry<?, ?> subval : ((SpecialInnerHashMap<?, ?>) data).entrySet()) {
+                    sb.append(SchemeConf.getInstance().getUEOptions().codeOutputCsvObjectBegin);
+                    isFirst = tryWriteSeprator(sb, isFirst);
+                    sb.append("\"");
+                    sb.append(subval.getKey().toString());
+                    sb.append("\",");
+                    dumpFieldValue(sb, valueDesc.get(0), subval.getValue());
+                    sb.append(SchemeConf.getInstance().getUEOptions().codeOutputCsvObjectEnd);
+                }
+            }
+
+            sb.append(SchemeConf.getInstance().getUEOptions().codeOutputCsvObjectEnd);
+        } else if (data instanceof HashMap<?, ?>) {
+            dumpMessage(sb, descWraper, (HashMap<?, ?>) data);
+        } else {
+            if (data instanceof Number) {
+                sb.append(data);
+            } else if (data instanceof Boolean) {
+                if ((Boolean) data) {
+                    sb.append("True");
+                } else {
+                    sb.append("False");
+                }
+            } else if (data instanceof String) {
+                sb.append("\"");
+                sb.append(((String) data).replaceAll("\"", "\"\""));
+                sb.append("\"");
+            } else if (data instanceof com.google.protobuf.ByteString) {
+                sb.append("\"");
+                sb.append(((com.google.protobuf.ByteString) data).toString().replaceAll("\"", "\"\""));
+                sb.append("\"");
+            } else if (data instanceof byte[]) {
+                sb.append("\"");
+                sb.append(((byte[]) data).toString().replaceAll("\"", "\"\""));
+                sb.append("\"");
+            } else {
+                if (descWraper.getReferOneof() != null) {
+                    pickValueFieldCsvDefaultImpl(sb, descWraper.getReferOneof(), true);
+                } else {
+                    pickValueFieldCsvDefaultImpl(sb, descWraper.getReferField(), true);
+                }
+            }
+        }
+    }
+
+    private void dumpField(StringBuffer sb, HashSet<String> dumpedFields, DataDstWriterNodeWrapper descWraper,
+            HashMap<?, ?> dataSet, boolean isTopLevel) {
+        if (dumpedFields.contains(descWraper.getVarName())) {
+            return;
+        }
+
+        Object val = pickJavaFieldValue(dataSet, descWraper);
+        if (val == null) {
+            dumpedFields.add(descWraper.getVarName());
+
+            if (descWraper.getReferOneof() != null) {
+                pickValueFieldCsvDefaultImpl(sb, descWraper.getReferOneof(), true);
+            } else {
+                pickValueFieldCsvDefaultImpl(sb, descWraper.getReferField(), true);
+            }
+            return;
+        }
+
+        dumpedFields.add(descWraper.getVarName());
+        if (!isTopLevel) {
+            sb.append(descWraper.getVarName());
+            sb.append("=");
+        }
+        dumpFieldValue(sb, descWraper, val);
     }
 
     static private boolean tryWriteSeprator(StringBuffer sb, boolean isFirst) {
@@ -537,704 +391,6 @@ public class DataDstUECsv extends DataDstUEBase {
 
         sb.append(",");
         return false;
-    }
-
-    protected boolean pickValueFieldCsvImpl(StringBuffer fieldSB, DataDstWriterNodeWrapper descWrapper,
-            boolean isPlainMode, boolean isTopLevel, HashMap<String, Object> fieldDataByOneof) throws ConvException {
-        if (null == descWrapper || null == descWrapper.getReferNode()) {
-            return false;
-        }
-
-        DataDstWriterNode desc = descWrapper.getReferNode();
-        if (desc == null) {
-            return false;
-        }
-
-        // dump oneof data
-        if (descWrapper.getReferOneof() != null) {
-            return pickValueFieldPlainCsvImpl(fieldSB, desc.identify, descWrapper.getReferOneof(), isTopLevel, desc,
-                    fieldDataByOneof);
-        }
-
-        if (isPlainMode) {
-            return pickValueFieldPlainCsvImpl(fieldSB, desc.identify, desc.getFieldDescriptor(), isTopLevel, desc);
-        }
-
-        if (desc.getType() == JAVA_TYPE.MESSAGE) {
-            boolean ret = false;
-            fieldSB.append(SchemeConf.getInstance().getUEOptions().codeOutputCsvObjectBegin);
-            HashSet<String> dumpedFields = null;
-            if (isRecursiveEnabled()) {
-                dumpedFields = new HashSet<String>();
-            }
-
-            HashMap<String, Object> subFieldDataByOneof = new HashMap<String, Object>();
-
-            boolean isFirst = true;
-            for (ArrayList<DataDstWriterNodeWrapper> child : descWrapper.getChildren()) {
-                if (child.isEmpty()) {
-                    continue;
-                }
-
-                isFirst = tryWriteSeprator(fieldSB, isFirst);
-
-                DataDstWriterNodeWrapper firstNode = child.get(0);
-                String varName = firstNode.getVarName();
-
-                // oneof node
-                if (firstNode.getReferOneof() != null) {
-                    if (null != dumpedFields) {
-                        dumpedFields.add(varName);
-                    }
-
-                    // 如果是生成的节点，case 直接填充固定值
-                    if (firstNode.isGenerated()) {
-                        if (firstNode.getReferField() != null) {
-                            fieldSB.append(varName);
-                            fieldSB.append("=\"");
-                            fieldSB.append(getIdentName(firstNode.getReferField().getName()));
-                            fieldSB.append("\"");
-                        } else {
-                            fieldSB.append(varName);
-                            fieldSB.append("=\"\"");
-                        }
-                        continue;
-                    }
-
-                    fieldSB.append(varName);
-                    fieldSB.append("=");
-                    if (dumpValueFieldCsvImpl(fieldSB, child, true, false, subFieldDataByOneof)) {
-                        ret = true;
-                    }
-                    continue;
-                }
-
-                // oneof一定先处理,如果有oneof引用且已经有数据缓存了直接用
-                if (firstNode.getReferOneofNode() != null) {
-                    if (subFieldDataByOneof.containsKey(varName)) {
-                        if (false == (desc.getFieldDescriptor() != null && desc.getFieldDescriptor().isMap())) {
-                            fieldSB.append(varName);
-                            fieldSB.append("=");
-                        }
-                        fieldSB.append(subFieldDataByOneof.get(varName));
-
-                        if (null != dumpedFields) {
-                            dumpedFields.add(varName);
-                        }
-                        continue;
-                    }
-                }
-
-                // Map不用输出Key=
-                if (false == (desc.getFieldDescriptor() != null && desc.getFieldDescriptor().isMap())) {
-                    fieldSB.append(varName);
-                    fieldSB.append("=");
-                }
-
-                if (pickValueFieldStandardCsvImpl(fieldSB, child, false, subFieldDataByOneof)) {
-                    ret = true;
-                }
-
-                if (null != dumpedFields) {
-                    dumpedFields.add(varName);
-                }
-            }
-
-            // 需要补全空字段
-            if (dumpedFields != null) {
-                for (DataDstFieldDescriptor subField : desc.getTypeDescriptor().getSortedFields()) {
-                    String varName = getIdentName(subField.getName());
-                    Object val = null;
-                    // Write oneof
-                    if (subField.getReferOneof() != null) {
-                        String oneofVarName = getIdentName(subField.getReferOneof().getName());
-                        val = subFieldDataByOneof.getOrDefault(varName, null);
-
-                        if (!dumpedFields.contains(oneofVarName)) {
-                            isFirst = tryWriteSeprator(fieldSB, isFirst);
-
-                            dumpedFields.add(oneofVarName);
-                            if (val == null) {
-                                fieldSB.append(oneofVarName);
-                                fieldSB.append("=\"\"");
-                            } else {
-                                fieldSB.append(oneofVarName);
-                                fieldSB.append("=\"");
-                                fieldSB.append(varName);
-                                fieldSB.append("\"");
-                            }
-                        }
-                    }
-
-                    if (dumpedFields.contains(varName)) {
-                        continue;
-                    }
-
-                    isFirst = tryWriteSeprator(fieldSB, isFirst);
-
-                    // Map不用输出Key=
-                    if (false == (desc.getFieldDescriptor() != null && desc.getFieldDescriptor().isMap())) {
-                        fieldSB.append(varName);
-                        fieldSB.append("=");
-                    }
-
-                    if (val != null) {
-                        fieldSB.append(val);
-                    } else {
-                        pickValueFieldCsvDefaultImpl(fieldSB, subField, true);
-                    }
-                }
-            }
-
-            fieldSB.append(SchemeConf.getInstance().getUEOptions().codeOutputCsvObjectEnd);
-            return ret;
-        }
-
-        Object val = pickValueFieldBaseStandardImpl(desc);
-        if (val == null) {
-            if (desc.getFieldDescriptor() != null && desc.getFieldDescriptor().isList()) {
-                // pickValueFieldCsvDefaultImpl(fieldSB, desc.getFieldDescriptor());
-                // empty map is just like empty list
-                return false; // 这里是取值, List 不能追加 () 否则会出现异常数据
-            } else {
-                pickValueMessageCsvDefaultImpl(fieldSB, desc.getTypeDescriptor(), false == isTopLevel);
-                return false;
-            }
-        } else {
-            boolean isString = desc.getType() == JAVA_TYPE.STRING || desc.getType() == JAVA_TYPE.BYTES;
-            if (isString) {
-                fieldSB.append("\"");
-            }
-            fieldSB.append(val);
-            if (isString) {
-                fieldSB.append("\"");
-            }
-            return true;
-        }
-    }
-
-    protected boolean pickValueFieldStandardCsvImpl(StringBuffer fieldSB, ArrayList<DataDstWriterNodeWrapper> fieldSet,
-            boolean isTopLevel, HashMap<String, Object> fieldDataByOneof) throws ConvException {
-
-        DataDstWriterNode msgDesc = getFirstWriterNode(fieldSet);
-        if (msgDesc == null) {
-            DataDstFieldDescriptor fd = getFieldDescriptor(fieldSet);
-            if (fd != null) {
-                pickValueFieldCsvDefaultImpl(fieldSB, fd, false == isTopLevel);
-            }
-            return false;
-        }
-
-        if (msgDesc.getReferBrothers().isOneof()) {
-            return dumpValueFieldCsvImpl(fieldSB, fieldSet, true, msgDesc.identify != null, fieldDataByOneof);
-        }
-
-        if (msgDesc.getReferBrothers().isList()) {
-            fieldSB.append(SchemeConf.getInstance().getUEOptions().codeOutputCsvObjectBegin);
-            boolean hasListData = false;
-            for (int i = 0; i < fieldSet.size(); ++i) {
-                if (hasListData) {
-                    fieldSB.append(",");
-                }
-
-                if (pickValueFieldCsvImpl(fieldSB, fieldSet.get(i),
-                        msgDesc.getReferBrothers().mode == CHILD_NODE_TYPE.PLAIN, false, fieldDataByOneof)) {
-                    hasListData = true;
-                } else {
-                    if (hasListData) {
-                        fieldSB.deleteCharAt(fieldSB.length() - 1);
-                    }
-                }
-            }
-            fieldSB.append(SchemeConf.getInstance().getUEOptions().codeOutputCsvObjectEnd);
-
-            return hasListData;
-        } else {
-            return pickValueFieldCsvImpl(fieldSB, fieldSet.get(0),
-                    msgDesc.getReferBrothers().mode == CHILD_NODE_TYPE.PLAIN,
-                    false, fieldDataByOneof);
-        }
-    }
-
-    protected boolean pickValueFieldPlainCsvImpl(StringBuffer fieldSB, DataDstWriterNode desc, DataDstChildrenNode node,
-            boolean isTopLevel, HashMap<String, Object> fieldDataByOneof) throws ConvException {
-        if (null == desc || node == null) {
-            if (node.innerFieldDesc != null) {
-                pickValueFieldCsvDefaultImpl(fieldSB, node.innerFieldDesc, false == isTopLevel);
-                return false;
-            }
-        }
-        return pickValueFieldPlainCsvImpl(fieldSB, desc.identify, node.innerFieldDesc, isTopLevel, desc);
-    }
-
-    protected boolean pickValueFieldPlainCsvImpl(StringBuffer fieldSB, IdentifyDescriptor ident,
-            DataDstOneofDescriptor field, boolean isTopLevel, DataDstWriterNode maybeFromNode,
-            HashMap<String, Object> fieldDataByOneof)
-            throws ConvException {
-        if (null == ident) {
-            return false;
-        }
-
-        DataContainer<String> res = DataSrcImpl.getOurInstance().getValue(ident, "");
-        if (null == res || !res.valid) {
-            pickValueFieldCsvDefaultImpl(fieldSB, field, false == isTopLevel);
-            return false;
-        }
-
-        return pickValueFieldPlainCsvImpl(fieldSB, ident, field, isTopLevel, maybeFromNode, res.value, fieldDataByOneof,
-                false == isTopLevel);
-    }
-
-    protected boolean pickValueFieldPlainCsvImpl(StringBuffer fieldSB, IdentifyDescriptor ident,
-            DataDstOneofDescriptor field, boolean isTopLevel, DataDstWriterNode maybeFromNode, String input,
-            HashMap<String, Object> fieldDataByOneof,
-            boolean needQuote) throws ConvException {
-        if (field == null) {
-            return false;
-        }
-
-        Object[] res = parsePlainDataOneof(input, ident, field);
-
-        if (null == res) {
-            pickValueFieldCsvDefaultImpl(fieldSB, field, needQuote);
-            return false;
-        }
-
-        if (res.length < 1) {
-            pickValueFieldCsvDefaultImpl(fieldSB, field, needQuote);
-            return false;
-        }
-
-        DataDstFieldDescriptor sub_field = (DataDstFieldDescriptor) res[0];
-        if (sub_field == null) {
-            pickValueFieldCsvDefaultImpl(fieldSB, field, needQuote);
-            return false;
-        }
-
-        String subVarName = getIdentName(sub_field.getName());
-        if (needQuote) {
-            fieldSB.append("\"");
-        }
-        fieldSB.append(subVarName);
-        if (needQuote) {
-            fieldSB.append("\"");
-        }
-        if (res.length == 1) {
-            return true;
-        }
-
-        // 非顶层，不用验证类型
-        StringBuffer oneofValueSB = new StringBuffer();
-        pickValueFieldPlainCsvImpl(oneofValueSB, null, sub_field, false, null, (String) res[1]);
-        if (!fieldDataByOneof.containsKey(subVarName)) {
-            fieldDataByOneof.put(subVarName, oneofValueSB.toString());
-        }
-
-        return true;
-    }
-
-    protected boolean pickValueFieldPlainCsvImpl(StringBuffer fieldSB, IdentifyDescriptor ident,
-            DataDstFieldDescriptor field, boolean isTopLevel, DataDstWriterNode maybeFromNode) throws ConvException {
-        if (null == ident || field == null) {
-            if (field != null) {
-                pickValueFieldCsvDefaultImpl(fieldSB, field, false == isTopLevel);
-            }
-            return false;
-        }
-
-        DataContainer<String> res = DataSrcImpl.getOurInstance().getValue(ident, "");
-        if (null == res || !res.valid) {
-            pickValueFieldCsvDefaultImpl(fieldSB, field, false == isTopLevel);
-            return false;
-        }
-
-        return pickValueFieldPlainCsvImpl(fieldSB, ident, field, isTopLevel, maybeFromNode, res.value);
-    }
-
-    protected boolean pickValueFieldPlainCsvImpl(
-            StringBuffer fieldSB,
-            IdentifyDescriptor ident,
-            DataDstFieldDescriptor field,
-            boolean isTopLevel,
-            DataDstWriterNode maybeFromNode,
-            String input)
-            throws ConvException {
-        if (field == null) {
-            return false;
-        }
-        if ((isTopLevel && !field.isList())
-                && field.getType() != DataDstWriterNode.JAVA_TYPE.MESSAGE) {
-            // error type
-            logErrorMessage("Plain type %s of %s.%s must be list", field.getType().toString(),
-                    field.getTypeDescriptor().getFullName(), field.getName());
-            return false;
-        }
-
-        if (field.isList()) {
-            boolean ret = false;
-            String[] groups = splitPlainGroups(input.trim(), getPlainFieldSeparator(field));
-            switch (field.getType()) {
-                case INT: {
-                    Long[] values = parsePlainDataLong(groups, ident, field);
-                    if (null != values && values.length > 0) {
-                        fieldSB.append(SchemeConf.getInstance().getUEOptions().codeOutputCsvObjectBegin);
-                        boolean isFirst = true;
-                        for (Long v : values) {
-                            isFirst = tryWriteSeprator(fieldSB, isFirst);
-                            fieldSB.append(v.intValue());
-                        }
-                        fieldSB.append(SchemeConf.getInstance().getUEOptions().codeOutputCsvObjectEnd);
-                        ret = true;
-                    }
-                    break;
-                }
-                case LONG: {
-                    Long[] values = parsePlainDataLong(groups, ident, field);
-                    if (null != values && values.length > 0) {
-                        fieldSB.append(SchemeConf.getInstance().getUEOptions().codeOutputCsvObjectBegin);
-                        boolean isFirst = true;
-                        for (Long v : values) {
-                            isFirst = tryWriteSeprator(fieldSB, isFirst);
-                            fieldSB.append(v);
-                        }
-                        fieldSB.append(SchemeConf.getInstance().getUEOptions().codeOutputCsvObjectEnd);
-                        ret = true;
-                    }
-                    break;
-                }
-
-                case FLOAT: {
-                    Double[] values = parsePlainDataDouble(groups, ident, field);
-                    if (null != values && values.length > 0) {
-                        fieldSB.append(SchemeConf.getInstance().getUEOptions().codeOutputCsvObjectBegin);
-                        boolean isFirst = true;
-                        for (Double v : values) {
-                            isFirst = tryWriteSeprator(fieldSB, isFirst);
-                            fieldSB.append(v.floatValue());
-                        }
-                        fieldSB.append(SchemeConf.getInstance().getUEOptions().codeOutputCsvObjectEnd);
-                        ret = true;
-                    }
-                    break;
-                }
-
-                case DOUBLE: {
-                    Double[] values = parsePlainDataDouble(groups, ident, field);
-                    if (null != values && values.length > 0) {
-                        fieldSB.append(SchemeConf.getInstance().getUEOptions().codeOutputCsvObjectBegin);
-                        boolean isFirst = true;
-                        for (Double v : values) {
-                            isFirst = tryWriteSeprator(fieldSB, isFirst);
-                            fieldSB.append(v);
-                        }
-                        fieldSB.append(SchemeConf.getInstance().getUEOptions().codeOutputCsvObjectEnd);
-                        ret = true;
-                    }
-                    break;
-                }
-
-                case BOOLEAN: {
-                    Boolean[] values = parsePlainDataBoolean(groups, ident, field);
-                    if (null != values && values.length > 0) {
-                        fieldSB.append(SchemeConf.getInstance().getUEOptions().codeOutputCsvObjectBegin);
-                        boolean isFirst = true;
-                        for (Boolean v : values) {
-                            isFirst = tryWriteSeprator(fieldSB, isFirst);
-                            if (v) {
-                                fieldSB.append("True");
-                            } else {
-                                fieldSB.append("False");
-                            }
-                        }
-                        fieldSB.append(SchemeConf.getInstance().getUEOptions().codeOutputCsvObjectEnd);
-                        ret = true;
-                    }
-                    break;
-                }
-
-                case STRING:
-                case BYTES: {
-                    String[] values = parsePlainDataString(groups, ident, field);
-                    if (null != values && values.length > 0) {
-                        fieldSB.append(SchemeConf.getInstance().getUEOptions().codeOutputCsvObjectBegin);
-                        boolean isFirst = true;
-                        for (String v : values) {
-                            isFirst = tryWriteSeprator(fieldSB, isFirst);
-                            fieldSB.append("\"");
-                            if (v.length() >= 2 && (v.charAt(0) == '"' || v.charAt(0) == '\'')
-                                    && v.charAt(0) == v.charAt(v.length() - 1)) {
-                                fieldSB.append(v.substring(1, v.length() - 1));
-                            } else {
-                                fieldSB.append(v);
-                            }
-                            fieldSB.append("\"");
-                        }
-                        fieldSB.append(SchemeConf.getInstance().getUEOptions().codeOutputCsvObjectEnd);
-                        ret = true;
-                    }
-                    break;
-                }
-
-                case MESSAGE: {
-                    if (null != maybeFromNode && maybeFromNode.getListIndex() >= 0) {
-                        // Plain模式 message 静态数组下标
-                        if (groups.length > 0 &&
-                                pickValueFieldCsvPlainField(fieldSB, groups, ident, field, maybeFromNode)) {
-                            ret = true;
-                        }
-                    } else if (groups.length > 0) {
-                        // Plain模式 message 动态数组
-                        boolean hasListData = false;
-                        fieldSB.append(SchemeConf.getInstance().getUEOptions().codeOutputCsvObjectBegin);
-
-                        for (String v : groups) {
-                            String[] subGroups = splitPlainGroups(v, getPlainMessageSeparator(field));
-                            if (subGroups != null && subGroups.length > 0) {
-                                if (hasListData) {
-                                    fieldSB.append(",");
-                                }
-
-                                if (pickValueFieldCsvPlainField(fieldSB, subGroups, ident,
-                                        field, null)) {
-                                    hasListData = true;
-                                } else {
-                                    if (hasListData) {
-                                        fieldSB.deleteCharAt(fieldSB.length() - 1);
-                                    }
-                                }
-                            }
-                        }
-
-                        fieldSB.append(SchemeConf.getInstance().getUEOptions().codeOutputCsvObjectEnd);
-                        ret = true;
-                    }
-                    break;
-                }
-
-                default:
-                    break;
-            }
-
-            return ret;
-        } else {
-            switch (field.getType()) {
-                case INT: {
-                    fieldSB
-                            .append(parsePlainDataLong(input.trim(), ident, field)
-                                    .intValue());
-                    break;
-                }
-
-                case LONG: {
-                    fieldSB.append(parsePlainDataLong(input.trim(), ident, field));
-                    break;
-                }
-
-                case FLOAT: {
-                    fieldSB
-                            .append(parsePlainDataDouble(input.trim(), ident, field)
-                                    .floatValue());
-                    break;
-                }
-
-                case DOUBLE: {
-                    fieldSB
-                            .append(parsePlainDataDouble(input.trim(), ident, field));
-                    break;
-                }
-
-                case BOOLEAN: {
-                    fieldSB
-                            .append(parsePlainDataBoolean(input.trim(), ident, field));
-                    break;
-                }
-
-                case STRING:
-                case BYTES: {
-                    fieldSB.append("\"");
-                    fieldSB
-                            .append(parsePlainDataString(input.trim(), ident, field));
-                    fieldSB.append("\"");
-                    break;
-                }
-
-                case MESSAGE: {
-                    String[] groups = splitPlainGroups(input.trim(), getPlainMessageSeparator(field));
-                    pickValueFieldCsvPlainField(fieldSB, groups, ident, field, maybeFromNode);
-                    break;
-                }
-
-                default:
-                    break;
-            }
-
-            return true;
-        }
-    }
-
-    private boolean pickValueFieldCsvPlainField(StringBuffer fieldSB, String[] inputs, IdentifyDescriptor ident,
-            DataDstFieldDescriptor field, DataDstWriterNode maybeFromNode) throws ConvException {
-        if (field.getTypeDescriptor() == null || inputs == null || inputs.length == 0) {
-            return false;
-        }
-
-        ArrayList<DataDstFieldDescriptor> children = field.getTypeDescriptor().getSortedFields();
-        // 几种特殊模式
-        if (inputs.length == 1) {
-            if (org.xresloader.core.data.dst.DataDstWriterNode.SPECIAL_MESSAGE_TYPE.TIMEPOINT == field
-                    .getTypeDescriptor()
-                    .getSpecialMessageType() &&
-                    field.getTypeDescriptor().getFullName() == Timestamp.getDescriptor()
-                            .getFullName()) {
-                Timestamp res = DataDstPb.parseTimestampFromString(inputs[0]);
-                for (int i = 0; i < children.size(); ++i) {
-                    if (children.get(i).getName().equalsIgnoreCase("seconds")
-                            && !children.get(i).isList()) {
-                        String varName = getIdentName(children.get(i).getName());
-                        fieldSB.append(varName);
-                        fieldSB.append("=");
-                        fieldSB.append(res.getSeconds());
-                    } else if (children.get(i).getName().equalsIgnoreCase("nanos")
-                            && !children.get(i).isList()) {
-                        String varName = getIdentName(children.get(i).getName());
-                        fieldSB.append(varName);
-                        fieldSB.append("=");
-                        fieldSB.append(res.getNanos());
-                    }
-                }
-                return true;
-            } else if (org.xresloader.core.data.dst.DataDstWriterNode.SPECIAL_MESSAGE_TYPE.DURATION == field
-                    .getTypeDescriptor()
-                    .getSpecialMessageType() &&
-                    field.getTypeDescriptor().getFullName() == Duration.getDescriptor().getFullName()) {
-                Duration res = DataDstPb.parseDurationFromString(inputs[0]);
-                for (int i = 0; i < children.size(); ++i) {
-                    if (children.get(i).getName().equalsIgnoreCase("seconds")
-                            && !children.get(i).isList()) {
-                        String varName = getIdentName(children.get(i).getName());
-                        fieldSB.append(varName);
-                        fieldSB.append("=");
-                        fieldSB.append(res.getSeconds());
-                    } else if (children.get(i).getName().equalsIgnoreCase("nanos")
-                            && !children.get(i).isList()) {
-                        String varName = getIdentName(children.get(i).getName());
-                        fieldSB.append(varName);
-                        fieldSB.append("=");
-                        fieldSB.append(res.getNanos());
-                    }
-                }
-                return true;
-            }
-        }
-
-        HashSet<String> dumpedOneof = null;
-        HashMap<String, Object> fieldDataByOneof = null;
-        if (field.getTypeDescriptor().getSortedOneofs().size() > 0) {
-            dumpedOneof = new HashSet<String>();
-            fieldDataByOneof = new HashMap<String, Object>();
-        }
-        int usedInputIdx = 0;
-
-        fieldSB.append(SchemeConf.getInstance().getUEOptions().codeOutputCsvObjectBegin);
-        for (int i = 0; i < children.size(); ++i) {
-            if (i != 0) {
-                fieldSB.append(",");
-            }
-            DataDstFieldDescriptor childField = children.get(i);
-
-            if (childField.getReferOneof() != null) {
-                if (dumpedOneof == null || fieldDataByOneof == null) {
-                    throw new ConvException(String.format(
-                            "Try to convert field %s of %s failed, found oneof descriptor but oneof set is not initialized.",
-                            childField.getName(), field.getTypeDescriptor().getFullName()));
-                }
-
-                String varName = getIdentName(childField.getName());
-                String oneofVarName = getIdentName(childField.getReferOneof().getName());
-                if (dumpedOneof.contains(oneofVarName)) {
-                    // already dumped with other field, dump default or cache
-                    Object val = fieldDataByOneof.getOrDefault(varName, null);
-                    if (val != null) {
-                        fieldSB.append(varName);
-                        fieldSB.append("=");
-                        fieldSB.append(val);
-                    } else {
-                        fieldSB.append(varName);
-                        fieldSB.append("=");
-                        pickValueFieldCsvDefaultImpl(fieldSB, childField, true);
-                    }
-
-                    continue;
-                }
-
-                if (usedInputIdx >= inputs.length) {
-                    throw new ConvException(String.format(
-                            "Try to convert %s of %s failed, field count not matched(expect %d, real %d).",
-                            childField.getReferOneof().getName(), field.getTypeDescriptor().getFullName(),
-                            usedInputIdx + 1, inputs.length));
-                }
-
-                dumpedOneof.add(oneofVarName);
-                fieldSB.append(oneofVarName);
-                fieldSB.append("=");
-                if (!pickValueFieldPlainCsvImpl(fieldSB, null, childField.getReferOneof(), false, null,
-                        inputs[usedInputIdx],
-                        fieldDataByOneof, true)) {
-                    pickValueFieldCsvDefaultImpl(fieldSB, childField.getReferOneof(), true);
-                }
-                fieldSB.append(",");
-
-                Object val = fieldDataByOneof.getOrDefault(varName, null);
-                if (val != null) {
-                    if (false == field.isMap()) {
-                        fieldSB.append(varName);
-                        fieldSB.append("=");
-                    }
-                    fieldSB.append(val);
-                } else {
-                    if (false == field.isMap()) {
-                        fieldSB.append(varName);
-                        fieldSB.append("=");
-                    }
-                    pickValueFieldCsvDefaultImpl(fieldSB, childField, true);
-                }
-
-                ++usedInputIdx;
-            } else {
-                if (usedInputIdx >= inputs.length) {
-                    throw new ConvException(String.format(
-                            "Try to convert %s of %s failed, field count not matched(expect %d, real %d).",
-                            childField.getName(), field.getTypeDescriptor().getFullName(), usedInputIdx + 1,
-                            inputs.length));
-                }
-
-                if (false == field.isMap()) {
-                    String varName = getIdentName(childField.getName());
-                    fieldSB.append(varName);
-                    fieldSB.append("=");
-                }
-                pickValueFieldPlainCsvImpl(fieldSB, ident, childField, false, null, inputs[usedInputIdx]);
-
-                ++usedInputIdx;
-            }
-        }
-
-        if (usedInputIdx != inputs.length) {
-            DataSrcImpl current_source = DataSrcImpl.getOurInstance();
-            if (null == current_source) {
-                ProgramOptions.getLoger().warn("Try to convert %s need %d fields, but provide %d fields.",
-                        field.getTypeDescriptor().getFullName(), usedInputIdx, inputs.length);
-            } else {
-                ProgramOptions.getLoger().warn(
-                        "Try to convert %s need %d fields, but provide %d fields.%s  > File: %s, Table: %s, Row: %d, Column: %d",
-                        field.getTypeDescriptor().getFullName(), usedInputIdx, inputs.length, ProgramOptions.getEndl(),
-                        current_source.getCurrentFileName(), current_source.getCurrentTableName(),
-                        current_source.getCurrentRowNum() + 1, current_source.getLastColomnNum() + 1);
-            }
-        }
-
-        fieldSB.append(SchemeConf.getInstance().getUEOptions().codeOutputCsvObjectEnd);
-        return true;
     }
 
     protected boolean pickValueMessageCsvDefaultImpl(StringBuffer sb, DataDstTypeDescriptor fd, boolean fillEmpty) {
@@ -1267,11 +423,7 @@ public class DataDstUECsv extends DataDstUEBase {
             case MESSAGE: {
                 sb.append(SchemeConf.getInstance().getUEOptions().codeOutputCsvObjectBegin);
 
-                HashSet<String> dumpedOneof = null;
-                if (fd.getSortedOneofs().size() > 0) {
-                    dumpedOneof = new HashSet<String>();
-                }
-
+                HashSet<String> dumpedOneof = new HashSet<String>();
                 boolean isFirstField = true;
                 for (DataDstFieldDescriptor subField : fd.getSortedFields()) {
                     if (isFirstField) {
@@ -1297,7 +449,8 @@ public class DataDstUECsv extends DataDstUEBase {
                     if (subField.isList()) { // empty map is just like empty list
                         sb.append(SchemeConf.getInstance().getUEOptions().codeOutputCsvObjectBegin);
                         sb.append(SchemeConf.getInstance().getUEOptions().codeOutputCsvObjectEnd);
-                    } else if (subField.getType() == JAVA_TYPE.STRING || subField.getType() == JAVA_TYPE.BYTES) {
+                    } else if (subField.getType() == DataDstWriterNode.JAVA_TYPE.STRING
+                            || subField.getType() == DataDstWriterNode.JAVA_TYPE.BYTES) {
                         sb.append("\"\"");
                     } else {
                         // 嵌套默认值总是要输出空值

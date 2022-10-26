@@ -27,7 +27,6 @@ public class DataDstMsgPack extends DataDstJava {
         return "msgpack";
     }
 
-    @SuppressWarnings("unchecked")
     private void writeData(MessageBufferPacker packer, Object data) throws IOException {
         // null
         if (null == data) {

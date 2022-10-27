@@ -1,17 +1,14 @@
 package org.xresloader.core.data.dst;
 
-import java.io.IOException;
-import java.nio.charset.Charset;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.xresloader.core.ProgramOptions;
 import org.xresloader.core.data.dst.DataDstWriterNode.DataDstFieldDescriptor;
 import org.xresloader.core.scheme.SchemeConf;
+
+import java.io.IOException;
+import java.nio.charset.Charset;
+import java.util.*;
 
 /**
  * Created by owentou on 2019/04/08.
@@ -117,7 +114,11 @@ public class DataDstUEJson extends DataDstUEBase {
         // 补全缺失字段
         for (DataDstWriterNodeWrapper child : children) {
             if (!dumpedFields.contains(child.getVarName())) {
-                dumpDefault(ret, child.getReferField());
+                if (child.getReferOneof() != null) {
+                    dumpDefault(ret, child.getReferOneof());
+                } else {
+                    dumpDefault(ret, child.getReferField());
+                }
             }
         }
 
@@ -328,6 +329,13 @@ public class DataDstUEJson extends DataDstUEBase {
             default:
                 return null;
         }
+    }
+
+    protected Object dumpDefault(JSONObject builder, DataDstWriterNode.DataDstOneofDescriptor oneof) {
+        String varName = getIdentName(oneof.getName());
+        String val = "";
+        builder.put(varName, val);
+        return val;
     }
 
     /**

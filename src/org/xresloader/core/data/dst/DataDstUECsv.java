@@ -138,14 +138,19 @@ public class DataDstUECsv extends DataDstUEBase {
         HashSet<String> dumpedFields = new HashSet<String>();
         ArrayList<String> finalRowData = new ArrayList<String>();
         finalRowData.ensureCapacity(
-                bobj.headerNodes.size() + bobj.headerAutocomplete.size());
+                bobj.headerNodes.size() + bobj.headerAutocomplete.size() + 1);
+
+        // 额外写出一份 --- 的Key
+        if (!bobj.headerNodes.isEmpty()) {
+            StringBuffer fieldSb = new StringBuffer();
+            dumpField(fieldSb, new HashSet<String>(), bobj.headerNodes.get(0), rowData, true);
+            finalRowData.add(fieldSb.toString());
+        }
 
         for (DataDstWriterNodeWrapper headerNode : bobj.headerNodes) {
             if (dumpedFields.contains(headerNode.getVarName())) {
                 continue;
             }
-
-            dumpedFields.add(headerNode.getVarName());
 
             StringBuffer fieldSb = new StringBuffer();
             dumpField(fieldSb, dumpedFields, headerNode, rowData, true);
@@ -280,13 +285,21 @@ public class DataDstUECsv extends DataDstUEBase {
         });
 
         HashSet<String> dumpedFields = new HashSet<>();
+        boolean isFirst = true;
         for (DataDstWriterNodeWrapper child : children) {
+            isFirst = tryWriteSeprator(sb, isFirst);
             dumpField(sb, dumpedFields, child, dataSet, false);
         }
 
         // 补全缺失字段
         for (DataDstWriterNodeWrapper child : children) {
             if (!dumpedFields.contains(child.getVarName())) {
+                isFirst = tryWriteSeprator(sb, isFirst);
+
+                // Key
+                sb.append(child.getVarName());
+                sb.append("=");
+                // Value
                 if (child.getReferOneof() != null) {
                     pickValueFieldCsvDefaultImpl(sb, child.getReferOneof(), true);
                 } else {
@@ -314,8 +327,8 @@ public class DataDstUECsv extends DataDstUEBase {
             if (!valueDesc.isEmpty()) {
                 boolean isFirst = true;
                 for (Map.Entry<?, ?> subval : ((SpecialInnerHashMap<?, ?>) data).entrySet()) {
-                    sb.append(SchemeConf.getInstance().getUEOptions().codeOutputCsvObjectBegin);
                     isFirst = tryWriteSeprator(sb, isFirst);
+                    sb.append(SchemeConf.getInstance().getUEOptions().codeOutputCsvObjectBegin);
                     sb.append("\"");
                     sb.append(subval.getKey().toString());
                     sb.append("\",");
@@ -364,10 +377,14 @@ public class DataDstUECsv extends DataDstUEBase {
             return;
         }
 
+        dumpedFields.add(descWraper.getVarName());
+        if (!isTopLevel) {
+            sb.append(descWraper.getVarName());
+            sb.append("=");
+        }
+
         Object val = pickJavaFieldValue(dataSet, descWraper);
         if (val == null) {
-            dumpedFields.add(descWraper.getVarName());
-
             if (descWraper.getReferOneof() != null) {
                 pickValueFieldCsvDefaultImpl(sb, descWraper.getReferOneof(), true);
             } else {
@@ -376,11 +393,6 @@ public class DataDstUECsv extends DataDstUEBase {
             return;
         }
 
-        dumpedFields.add(descWraper.getVarName());
-        if (!isTopLevel) {
-            sb.append(descWraper.getVarName());
-            sb.append("=");
-        }
         dumpFieldValue(sb, descWraper, val);
     }
 

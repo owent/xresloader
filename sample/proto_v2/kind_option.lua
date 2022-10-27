@@ -249,6 +249,43 @@ local const_res = {
             helper = "helper",
           },
         },
+        role_cfg = {
+          field = {
+            convert_duration_arr = {
+              name = "convert_duration_arr",
+              number = 27,
+              options = {
+                field_origin_value = "origin_duration_arr",
+              },
+              type_name = "MESSAGE",
+            },
+            convert_duration_one = {
+              name = "convert_duration_one",
+              number = 23,
+              options = {
+                field_origin_value = "origin_duration_one",
+              },
+              type_name = "MESSAGE",
+            },
+            convert_timepoint_arr = {
+              name = "convert_timepoint_arr",
+              number = 25,
+              options = {
+                field_origin_value = "origin_timepoint_arr",
+              },
+              type_name = "MESSAGE",
+            },
+            convert_timepoint_one = {
+              name = "convert_timepoint_one",
+              number = 21,
+              options = {
+                field_origin_value = "origin_timepoint_one",
+              },
+              type_name = "MESSAGE",
+            },
+          },
+          name = "role_cfg",
+        },
         role_upgrade_cfg = {
           field = {
             CostType = {

@@ -1,31 +1,21 @@
 package org.xresloader.core.data.dst;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.nio.charset.Charset;
-import java.util.*;
-import java.util.regex.Pattern;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.json.JSONTokener;
 import org.xresloader.core.ProgramOptions;
-import org.xresloader.core.data.dst.DataDstWriterNode.DataDstChildrenNode;
-import org.xresloader.core.data.dst.DataDstWriterNode.DataDstFieldDescriptor;
-import org.xresloader.core.data.dst.DataDstWriterNode.DataDstFieldExt;
-import org.xresloader.core.data.dst.DataDstWriterNode.DataDstTypeDescriptor;
-import org.xresloader.core.data.dst.DataDstWriterNode.DataDstMessageExt;
-import org.xresloader.core.data.dst.DataDstWriterNode.DataDstOneofDescriptor;
-import org.xresloader.core.data.dst.DataDstWriterNode.FIELD_LABEL_TYPE;
-import org.xresloader.core.data.dst.DataDstWriterNode.JAVA_TYPE;
+import org.xresloader.core.data.dst.DataDstWriterNode.*;
 import org.xresloader.core.data.err.ConvException;
 import org.xresloader.core.data.src.DataContainer;
 import org.xresloader.core.data.src.DataSrcImpl;
 import org.xresloader.core.engine.IdentifyEngine;
 import org.xresloader.core.scheme.SchemeConf;
+
+import java.io.*;
+import java.nio.charset.Charset;
+import java.util.*;
+import java.util.regex.Pattern;
 
 /**
  * Created by owentou on 2019/04/08.
@@ -307,9 +297,9 @@ public abstract class DataDstUEBase extends DataDstJava {
             }
 
             ArrayList<DataDstWriterNodeWrapper> values = this.children
-                    .getOrDefault(children.get(0).getReferField().getName(), null);
+                    .getOrDefault(children.get(0).getVarName(), null);
             if (values == null) {
-                this.children.put(children.get(0).getReferField().getName(), values);
+                this.children.put(children.get(0).getVarName(), values);
             } else {
                 for (DataDstWriterNodeWrapper child : children) {
                     values.add(child);
@@ -326,11 +316,10 @@ public abstract class DataDstUEBase extends DataDstJava {
                 this.children = new HashMap<>();
             }
 
-            ArrayList<DataDstWriterNodeWrapper> values = this.children.getOrDefault(child.getReferField().getName(),
-                    null);
+            ArrayList<DataDstWriterNodeWrapper> values = this.children.getOrDefault(child.getVarName(), null);
             if (values == null) {
                 values = new ArrayList<DataDstWriterNodeWrapper>();
-                this.children.put(child.getReferField().getName(), values);
+                this.children.put(child.getVarName(), values);
             }
 
             values.add(child);
@@ -396,7 +385,11 @@ public abstract class DataDstUEBase extends DataDstJava {
                 rv = 0;
             }
 
-            return lv - rv;
+            if (lv != rv) {
+                return lv - rv;
+            }
+
+            return getVarName().compareTo(r.getVarName());
         }
 
         public ArrayList<DataDstWriterNodeWrapper> getMapKeyField() {
@@ -802,7 +795,12 @@ public abstract class DataDstUEBase extends DataDstJava {
 
             // 输出数据
             for (HashMap<String, Object> row : table.rows) {
-                fillOneofCache(rule.valueFields, row);
+                rule.keyFields.forEach((field) -> {
+                    fillOneofCache(field, row);
+                });
+                rule.valueFields.forEach((field) -> {
+                    fillOneofCache(field, row);
+                });
 
                 // 先用特殊规则导入Name字段,Name字段可能是合成字段
                 if (!rule.keyFields.isEmpty()) {
@@ -811,7 +809,7 @@ public abstract class DataDstUEBase extends DataDstJava {
                     if (name_res == null) {
                         continue;
                     }
-                    row.replace("Name", name_res);
+                    row.put("Name", name_res);
                 }
 
                 buildForUEOnPrintRecord(buildObj, row, rule, codeInfo);
@@ -838,19 +836,19 @@ public abstract class DataDstUEBase extends DataDstJava {
 
         // 递归写出依赖的数据结构
         if (null != codeInfo.writerNodeWrapper && codeInfo.writerNodeWrapper.hasChidlren()) {
-            for (Map.Entry<String, ArrayList<DataDstWriterNodeWrapper>> children : codeInfo.writerNodeWrapper
+            for (ArrayList<DataDstWriterNodeWrapper> children : codeInfo.writerNodeWrapper
                     .getChildren()
-                    .entrySet()) {
-                if (children.getValue().isEmpty()) {
+                    .values()) {
+                if (children.isEmpty()) {
                     continue;
                 }
 
                 // 代码仅提取第一层获取类型即可
-                if (children.getValue().get(0).getJavaType() != JAVA_TYPE.MESSAGE) {
+                if (children.get(0).getJavaType() != JAVA_TYPE.MESSAGE) {
                     continue;
                 }
 
-                UECodeInfo depCodeInfo = codeInfo.makeDependence(children.getValue().get(0));
+                UECodeInfo depCodeInfo = codeInfo.makeDependence(children.get(0));
                 if (null == depCodeInfo || depCodeInfo.hasGeneratedCode) {
                     continue;
                 }
@@ -896,29 +894,60 @@ public abstract class DataDstUEBase extends DataDstJava {
         return fieldSet.get(index).getReferOneof();
     }
 
-    protected HashMap<String, Object> fillOneofCache(ArrayList<DataDstWriterNodeWrapper> fields,
-            HashMap<String, Object> data) {
+    @SuppressWarnings("unchecked")
+    protected void fillOneofCache(DataDstWriterNodeWrapper field,
+            HashMap<?, ?> data) {
+        if (field == null) {
+            return;
+        }
+
+        if (field.getReferOneofNode() == null && (field.getChildren() == null || field.getChildren().isEmpty())) {
+            return;
+        }
+
         if (null == data) {
             data = new HashMap<String, Object>();
         }
 
-        if (fields == null || data == null) {
-            return data;
-        }
-
-        for (DataDstWriterNodeWrapper field : fields) {
-            if (field.getReferOneofNode() == null) {
-                continue;
-            }
-
-            Object val = pickJavaFieldValue(data, field);
+        Object val = pickJavaFieldValue(data, field);
+        if (field.getReferOneofNode() != null) {
             if (val != null) {
-                String oneofVarName = getIdentName(field.getReferOneofNode().varName);
-                data.replace(oneofVarName, field.getVarName());
+                String oneofVarName = field.getReferOneofNode().getVarName();
+                ((HashMap<String, Object>) data).put(oneofVarName, field.getVarName());
             }
         }
 
-        return data;
+        // 递归分析子结构
+        if (field.getChildren() == null) {
+            return;
+        }
+
+        if (field.getChildren().isEmpty()) {
+            return;
+        }
+
+        if (val instanceof List<?>) {
+            for (Object element : (List<?>) val) {
+                if (!(element instanceof HashMap<?, ?>)) {
+                    break;
+                }
+
+                for (ArrayList<DataDstWriterNodeWrapper> children : field.getChildren().values()) {
+                    if (children.isEmpty()) {
+                        continue;
+                    }
+                    fillOneofCache(children.get(0), (HashMap<?, ?>) element);
+                }
+            }
+        } else if (val instanceof HashMap<?, ?>) {
+            for (ArrayList<DataDstWriterNodeWrapper> children : field.getChildren().values()) {
+                if (children.isEmpty()) {
+                    continue;
+                }
+                fillOneofCache(children.get(0), (HashMap<?, ?>) val);
+            }
+        }
+
     }
 
     protected Object pickJavaFieldValue(HashMap<?, ?> data, DataDstWriterNodeWrapper fieldWrapper) {
@@ -928,7 +957,11 @@ public abstract class DataDstUEBase extends DataDstJava {
 
         Object ret = data.getOrDefault(fieldWrapper.getVarName(), null);
         if (ret == null) {
-            ret = data.getOrDefault(fieldWrapper.getReferField().getName(), null);
+            if (fieldWrapper.getReferField() != null) {
+                ret = data.getOrDefault(fieldWrapper.getReferField().getName(), null);
+            } else if (fieldWrapper.getReferOneof() != null) {
+                ret = data.getOrDefault(fieldWrapper.getReferOneof().getName(), null);
+            }
         }
 
         return ret;
@@ -1176,7 +1209,7 @@ public abstract class DataDstUEBase extends DataDstJava {
                 String baseVarName = getIdentName(field.getName());
                 // 可能是虚拟节点，直接生成一个元素即可
                 if (referWriterNode == null) {
-                    DataDstWriterNodeWrapper res = buildWriterNodeWraper(baseVarName, null, field, false);
+                    DataDstWriterNodeWrapper res = buildWriterNodeWraper(baseVarName, null, field, true);
                     res.setReferOneofNode(referOneof);
                     root.addChidlren(res);
                     continue;
@@ -1459,7 +1492,6 @@ public abstract class DataDstUEBase extends DataDstJava {
     }
 
     /**
-     * @see pickNameField
      * @param rule
      * @return
      */
@@ -1940,16 +1972,32 @@ public abstract class DataDstUEBase extends DataDstJava {
         ArrayList<DataDstWriterNodeWrapper> allFields = new ArrayList<DataDstWriterNodeWrapper>();
 
         // if originAllFields is a Message, unpack it
-        if (originAllFields.getFirst().getChildren() != null) {
+        if (originAllFields.size() == 1 && originAllFields.getFirst().getChildren() != null) {
             allFields.ensureCapacity(originAllFields.getFirst().getChildren().size());
-            originAllFields.getFirst().getChildren().forEach((_k, v) -> {
+            originAllFields.getFirst().getChildren().values().forEach((v) -> {
                 if (!v.isEmpty()) {
                     allFields.add(v.get(0));
                 }
             });
+        } else {
+            allFields.ensureCapacity(originAllFields.size());
+            originAllFields.forEach((e) -> {
+                allFields.add(e);
+            });
         }
 
-        return buildUEDataRowCodeRuleInner(ret, allFields);
+        ret = buildUEDataRowCodeRuleInner(ret, allFields);
+        if (ret.keyFields != null) {
+            ret.keyFields.sort((l, r) -> {
+                return l.compareTo(r);
+            });
+        }
+        if (ret.valueFields != null) {
+            ret.valueFields.sort((l, r) -> {
+                return l.compareTo(r);
+            });
+        }
+        return ret;
     }
 
     private final UEDataRowRule buildUEDataRowCodeRuleInner(UEDataRowRule ret,

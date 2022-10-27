@@ -1,15 +1,16 @@
 package org.xresloader.core.data.dst;
 
+import org.xresloader.core.ProgramOptions;
+import org.xresloader.core.data.err.ConvException;
+import org.xresloader.core.scheme.SchemeConf;
+
 import java.io.IOException;
+import java.io.StringWriter;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import org.json.JSONObject;
-import org.xresloader.core.ProgramOptions;
-import org.xresloader.core.data.err.ConvException;
-import org.xresloader.core.scheme.SchemeConf;
 
 /**
  * Created by owentou on 2014/10/10.
@@ -123,6 +124,68 @@ public class DataDstLua extends DataDstJava {
         }
     }
 
+    private String quote(String input) {
+        StringWriter w = new StringWriter();
+        if (input == null || input.isEmpty()) {
+            w.write("\"\"");
+            return w.toString();
+        }
+
+        char b;
+        char c = 0;
+        String hhhh;
+        int i;
+        int len = input.length();
+
+        w.write('"');
+        for (i = 0; i < len; i += 1) {
+            b = c;
+            c = input.charAt(i);
+            switch (c) {
+                case '\\':
+                case '"':
+                    w.write('\\');
+                    w.write(c);
+                    break;
+                case '/':
+                    if (b == '<') {
+                        w.write('\\');
+                    }
+                    w.write(c);
+                    break;
+                case '\b':
+                    w.write("\\b");
+                    break;
+                case '\t':
+                    w.write("\\t");
+                    break;
+                case '\n':
+                    w.write("\\n");
+                    break;
+                case '\f':
+                    w.write("\\f");
+                    break;
+                case '\r':
+                    w.write("\\r");
+                    break;
+                default:
+                    if (c < ' ' || (c >= '\u0080' && c < '\u00a0')
+                            || (c >= '\u2000' && c < '\u2100')) {
+                        w.write("\\u{");
+                        hhhh = Integer.toHexString(c);
+                        w.write("0000", 0, 4 - hhhh.length());
+                        w.write(hhhh);
+                        w.write("}");
+                    } else {
+                        w.write(c);
+                    }
+            }
+        }
+        w.write('"');
+
+        return w.toString();
+    }
+
     @SuppressWarnings("unchecked")
     private void writeData(StringBuffer sb, Object data, int ident_num) {
         // null
@@ -146,8 +209,7 @@ public class DataDstLua extends DataDstJava {
 
         // 字符串&二进制
         if (data instanceof String) {
-            // 利用json的字符串格式，和lua一样的没必要再引入一个库
-            sb.append(JSONObject.quote((String) data));
+            sb.append(quote((String) data));
             return;
         }
 
@@ -189,7 +251,7 @@ public class DataDstLua extends DataDstJava {
                 if (data instanceof SpecialInnerHashMap<?, ?>) {
                     if (item.getKey() instanceof String) {
                         sb.append("[");
-                        sb.append(JSONObject.quote((String) item.getKey())).append("] = ");
+                        sb.append(quote((String) item.getKey())).append("] = ");
                     } else {
                         sb.append("[");
                         sb.append(item.getKey()).append("] = ");
@@ -197,7 +259,7 @@ public class DataDstLua extends DataDstJava {
                 } else {
                     if (item.getKey() instanceof String && !isStrictIdentify((String) item.getKey())) {
                         sb.append("[");
-                        sb.append(JSONObject.quote((String) item.getKey())).append("] = ");
+                        sb.append(quote((String) item.getKey())).append("] = ");
                     } else {
                         sb.append(item.getKey()).append(" = ");
                     }
@@ -212,7 +274,7 @@ public class DataDstLua extends DataDstJava {
             return;
         }
 
-        sb.append(JSONObject.quote(data.toString()));
+        sb.append(quote(data.toString()));
     }
 
     /**

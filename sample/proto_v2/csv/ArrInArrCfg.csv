@@ -1,4 +1,0 @@
-"Name","Id","Arr_0_Name","Arr_0_IntArr_0","Arr_0_IntArr_1","Arr_0_StrArr_0","Arr_0_StrArr_1","Arr_1_Name","Arr_1_IntArr_0","Arr_1_IntArr_1","Arr_1_StrArr_0","Arr_1_StrArr_1","TestMapIs_0_Key","TestMapIs_0_Value","TestMapIs_1_Key","TestMapIs_1_Value"
-"10001","10001","第一个-A","101","102","啦啦啦啦","嘞嘞嘞嘞","第一个-B","111","112","嘟嘟嘟嘟","嚓嚓嚓嚓","10","Map嵌套模式[0].value","11","Map嵌套模式[1].value"
-"10002","10002","测试项-A","201","202","biubiubiubiu","唰唰唰唰","测试项-B","211","212","哦哦哦哦","哈哈哈哈","20","Map嵌套模式[0].value","21","Map嵌套模式[1].value"
-"10003","10003","测试项-C","301","0","","","测试项-B","0","311","哦哦哦哦","","30","Map嵌套模式[0].value","31","Map嵌套模式[1].value"

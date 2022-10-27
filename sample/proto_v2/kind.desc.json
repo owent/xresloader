@@ -298,11 +298,6 @@
       },
       "role_cfg": {
         "field": {
-          "test_plain_enum_array": {
-            "name": "test_plain_enum_array",
-            "number": 13,
-            "type_name": "ENUM"
-          },
           "int_as_string": {
             "name": "int_as_string",
             "number": 12,
@@ -323,6 +318,48 @@
             "number": 11,
             "type_name": "STRING"
           },
+          "origin_duration_arr": {
+            "name": "origin_duration_arr",
+            "number": 28,
+            "type_name": "STRING"
+          },
+          "cost_value": {
+            "name": "cost_value",
+            "number": 4,
+            "type_name": "INT32"
+          },
+          "convert_timepoint_one": {
+            "options": {"field_origin_value": "origin_timepoint_one"},
+            "name": "convert_timepoint_one",
+            "number": 21,
+            "type_name": "MESSAGE"
+          },
+          "convert_timepoint_arr": {
+            "options": {"field_origin_value": "origin_timepoint_arr"},
+            "name": "convert_timepoint_arr",
+            "number": 25,
+            "type_name": "MESSAGE"
+          },
+          "origin_timepoint_one": {
+            "name": "origin_timepoint_one",
+            "number": 22,
+            "type_name": "STRING"
+          },
+          "test_plain_enum_array": {
+            "name": "test_plain_enum_array",
+            "number": 13,
+            "type_name": "ENUM"
+          },
+          "origin_duration_one": {
+            "name": "origin_duration_one",
+            "number": 24,
+            "type_name": "STRING"
+          },
+          "origin_timepoint_arr": {
+            "name": "origin_timepoint_arr",
+            "number": 26,
+            "type_name": "STRING"
+          },
           "name": {
             "name": "name",
             "number": 5,
@@ -333,15 +370,22 @@
             "number": 10,
             "type_name": "MESSAGE"
           },
-          "cost_value": {
-            "name": "cost_value",
-            "number": 4,
-            "type_name": "INT32"
+          "convert_duration_arr": {
+            "options": {"field_origin_value": "origin_duration_arr"},
+            "name": "convert_duration_arr",
+            "number": 27,
+            "type_name": "MESSAGE"
           },
           "id": {
             "name": "id",
             "number": 1,
             "type_name": "UINT32"
+          },
+          "convert_duration_one": {
+            "options": {"field_origin_value": "origin_duration_one"},
+            "name": "convert_duration_one",
+            "number": 23,
+            "type_name": "MESSAGE"
           }
         },
         "name": "role_cfg"

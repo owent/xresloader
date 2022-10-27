@@ -2,8 +2,6 @@ package org.xresloader.core.data.dst;
 
 import com.google.protobuf.*;
 import com.google.protobuf.Descriptors.FieldDescriptor.JavaType;
-import com.google.protobuf.util.Durations;
-import com.google.protobuf.util.Timestamps;
 import org.apache.commons.codec.binary.Hex;
 import org.xresloader.Xresloader;
 import org.xresloader.core.ProgramOptions;
@@ -25,8 +23,6 @@ import java.nio.charset.Charset;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.time.Instant;
-import java.time.OffsetTime;
-import java.time.temporal.ChronoField;
 import java.util.*;
 
 import static com.google.protobuf.Descriptors.FieldDescriptor.JavaType.MESSAGE;
@@ -1809,8 +1805,11 @@ public class DataDstPb extends DataDstImpl {
                 case MESSAGE: {
                     ArrayList<DynamicMessage> tmp = new ArrayList<DynamicMessage>();
                     tmp.ensureCapacity(groups.length);
-                    Descriptors.FieldDescriptor referOriginField = (Descriptors.FieldDescriptor) field
-                            .getReferOriginField().getRawDescriptor();
+                    Descriptors.FieldDescriptor referOriginField = null;
+                    if (null != field.getReferOriginField()) {
+                        referOriginField = (Descriptors.FieldDescriptor) field
+                                .getReferOriginField().getRawDescriptor();
+                    }
                     for (int i = 0; i < groups.length; ++i) {
                         String v = groups[i];
                         String[] subGroups = splitPlainGroups(v, getPlainMessageSeparator(field));

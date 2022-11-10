@@ -2,6 +2,12 @@
 
 ## Unrelease
 
+## 2.12.1
+
+1. 更新 `protobuf` 到 3.21.9
+2. Json和UE-Json格式的输出保证有序
+3. 修复UE-Csv格式输出map类型时乱序的问题
+
 ## 2.12.0
 
 1. 特殊处理 `Timestamp` 和 `Duration` 类型的字符串转换

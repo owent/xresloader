@@ -723,7 +723,7 @@ public abstract class DataDstUEBase extends DataDstJava {
 
     abstract protected Object buildForUEOnInit() throws IOException;
 
-    abstract protected byte[] buildForUEOnFinal(Object buildObj);
+    abstract protected byte[] buildForUEOnFinal(Object buildObj) throws ConvException;
 
     abstract protected void buildForUEOnPrintHeader(Object buildObj, ArrayList<DataDstWriterNodeWrapper> rowData,
             UEDataRowRule rule,
@@ -1336,7 +1336,8 @@ public abstract class DataDstUEBase extends DataDstJava {
      * @param data 常量数据集
      * @return 常量代码
      */
-    abstract public String dumpConstForUE(HashMap<String, Object> data, UEDataRowRule rule) throws IOException;
+    abstract public String dumpConstForUE(HashMap<String, Object> data, UEDataRowRule rule)
+            throws IOException, ConvException;
 
     /**
      * 转储常量数据

@@ -1,90 +1,90 @@
 [
     {
-        "Value": 10101,
-        "Name": "cost_type.EN_CT_DIAMOND"
+        "Name": "cost_type.EN_CT_DIAMOND",
+        "Value": 10101
     },
     {
-        "Value": 10001,
-        "Name": "cost_type.EN_CT_MONEY"
+        "Name": "cost_type.EN_CT_MONEY",
+        "Value": 10001
     },
     {
-        "Value": 0,
-        "Name": "cost_type.EN_CT_UNKNOWN"
+        "Name": "cost_type.EN_CT_UNKNOWN",
+        "Value": 0
     },
     {
-        "Value": 14,
-        "Name": "event_cfg.reward.kEnumType"
+        "Name": "event_cfg.reward.kEnumType",
+        "Value": 14
     },
     {
-        "Value": 11,
-        "Name": "event_cfg.reward.kItem"
+        "Name": "event_cfg.reward.kItem",
+        "Value": 11
     },
     {
-        "Value": 13,
-        "Name": "event_cfg.reward.kNote"
+        "Name": "event_cfg.reward.kNote",
+        "Value": 13
     },
     {
-        "Value": 12,
-        "Name": "event_cfg.reward.kUserExp"
+        "Name": "event_cfg.reward.kUserExp",
+        "Value": 12
     },
     {
-        "Value": 51,
-        "Name": "event_cfg.unlock_type.kUserLevel"
+        "Name": "event_cfg.unlock_type.kUserLevel",
+        "Value": 51
     },
     {
-        "Value": 12,
-        "Name": "event_reward_item.nested.kNestedEnumType"
+        "Name": "event_reward_item.nested.kNestedEnumType",
+        "Value": 12
     },
     {
-        "Value": 11,
-        "Name": "event_reward_item.nested.kNestedNote"
+        "Name": "event_reward_item.nested.kNestedNote",
+        "Value": 11
     },
     {
-        "Value": 12,
-        "Name": "event_rule_item.nested.kNestedEnumType"
+        "Name": "event_rule_item.nested.kNestedEnumType",
+        "Value": 12
     },
     {
-        "Value": 11,
-        "Name": "event_rule_item.nested.kNestedNote"
+        "Name": "event_rule_item.nested.kNestedNote",
+        "Value": 11
     },
     {
-        "Value": 1000,
-        "Name": "game_const_config.EN_GCC_ACTIVITY_TYPE_MASK"
+        "Name": "game_const_config.EN_GCC_ACTIVITY_TYPE_MASK",
+        "Value": 1000
     },
     {
-        "Value": 268,
-        "Name": "game_const_config.EN_GCC_CAMERA_OFFSET"
+        "Name": "game_const_config.EN_GCC_CAMERA_OFFSET",
+        "Value": 268
     },
     {
-        "Value": 10,
-        "Name": "game_const_config.EN_GCC_FORMULAR_TYPE_MASK"
+        "Name": "game_const_config.EN_GCC_FORMULAR_TYPE_MASK",
+        "Value": 10
     },
     {
-        "Value": 999,
-        "Name": "game_const_config.EN_GCC_LEVEL_LIMIT"
+        "Name": "game_const_config.EN_GCC_LEVEL_LIMIT",
+        "Value": 999
     },
     {
-        "Value": 10000,
-        "Name": "game_const_config.EN_GCC_PERCENT_BASE"
+        "Name": "game_const_config.EN_GCC_PERCENT_BASE",
+        "Value": 10000
     },
     {
-        "Value": 10,
-        "Name": "game_const_config.EN_GCC_RANDOM_RANGE_UNIT"
+        "Name": "game_const_config.EN_GCC_RANDOM_RANGE_UNIT",
+        "Value": 10
     },
     {
-        "Value": 9999999,
-        "Name": "game_const_config.EN_GCC_RESOURCE_MAX_LIMIT"
+        "Name": "game_const_config.EN_GCC_RESOURCE_MAX_LIMIT",
+        "Value": 9999999
     },
     {
-        "Value": 640,
-        "Name": "game_const_config.EN_GCC_SCREEN_HEIGHT"
+        "Name": "game_const_config.EN_GCC_SCREEN_HEIGHT",
+        "Value": 640
     },
     {
-        "Value": 1136,
-        "Name": "game_const_config.EN_GCC_SCREEN_WIDTH"
+        "Name": "game_const_config.EN_GCC_SCREEN_WIDTH",
+        "Value": 1136
     },
     {
-        "Value": 100,
-        "Name": "game_const_config.EN_GCC_SOLDIER_TYPE_MASK"
+        "Name": "game_const_config.EN_GCC_SOLDIER_TYPE_MASK",
+        "Value": 100
     }
 ]

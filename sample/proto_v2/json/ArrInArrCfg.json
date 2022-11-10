@@ -6,41 +6,38 @@
                     101,
                     102
                 ],
+                "Name": "第一个-A",
                 "StrArr": [
                     "啦啦啦啦",
                     "嘞嘞嘞嘞"
-                ],
-                "Name": "第一个-A"
+                ]
             },
             {
                 "IntArr": [
                     111,
                     112
                 ],
+                "Name": "第一个-B",
                 "StrArr": [
                     "嘟嘟嘟嘟",
                     "嚓嚓嚓嚓"
-                ],
-                "Name": "第一个-B"
+                ]
             }
         ],
-        "TestPlainIntArr": [
-            1,
-            2,
-            3
-        ],
+        "Id": 10001,
+        "Name": 10001,
         "TestMapIs": {
-            "11": "Map嵌套模式[1].value",
-            "10": "Map嵌套模式[0].value"
+            "10": "Map嵌套模式[0].value",
+            "11": "Map嵌套模式[1].value"
         },
         "TestMapSm": {
             "aa": {
-                "Level": "112",
-                "Id": 111
+                "Id": 111,
+                "Level": "112"
             },
             "特殊:字符": {
-                "Level": "122",
-                "Id": 121
+                "Id": 121,
+                "Level": "122"
             }
         },
         "TestPlainEnumArr": [
@@ -48,26 +45,29 @@
             10001,
             10001
         ],
+        "TestPlainIntArr": [
+            1,
+            2,
+            3
+        ],
+        "TestPlainMsg": {
+            "TestId1": 1,
+            "TestId2": 2
+        },
         "TestPlainMsgArr": [
             {
-                "TestId2": 2,
-                "TestId1": 1
+                "TestId1": 1,
+                "TestId2": 2
             },
             {
-                "TestId2": 4,
-                "TestId1": 3
+                "TestId1": 3,
+                "TestId2": 4
             },
             {
-                "TestId2": 6,
-                "TestId1": 5
+                "TestId1": 5,
+                "TestId2": 6
             }
-        ],
-        "Id": 10001,
-        "TestPlainMsg": {
-            "TestId2": 2,
-            "TestId1": 1
-        },
-        "Name": 10001
+        ]
     },
     {
         "Arr": [
@@ -76,41 +76,38 @@
                     201,
                     202
                 ],
+                "Name": "测试项-A",
                 "StrArr": [
                     "biubiubiubiu",
                     "唰唰唰唰"
-                ],
-                "Name": "测试项-A"
+                ]
             },
             {
                 "IntArr": [
                     211,
                     212
                 ],
+                "Name": "测试项-B",
                 "StrArr": [
                     "哦哦哦哦",
                     "哈哈哈哈"
-                ],
-                "Name": "测试项-B"
+                ]
             }
         ],
-        "TestPlainIntArr": [
-            4,
-            5,
-            6
-        ],
+        "Id": 10002,
+        "Name": 10002,
         "TestMapIs": {
             "20": "Map嵌套模式[0].value",
             "21": "Map嵌套模式[1].value"
         },
         "TestMapSm": {
-            "特殊.字符": {
-                "Level": "222",
-                "Id": 221
-            },
             "ba": {
-                "Level": "212",
-                "Id": 211
+                "Id": 211,
+                "Level": "212"
+            },
+            "特殊.字符": {
+                "Id": 221,
+                "Level": "222"
             }
         },
         "TestPlainEnumArr": [
@@ -118,53 +115,53 @@
             10101,
             10101
         ],
+        "TestPlainIntArr": [
+            4,
+            5,
+            6
+        ],
+        "TestPlainMsg": {
+            "TestId1": 3,
+            "TestId2": 4
+        },
         "TestPlainMsgArr": [
             {
-                "TestId2": 8,
-                "TestId1": 7
+                "TestId1": 7,
+                "TestId2": 8
             },
             {
-                "TestId2": 10,
-                "TestId1": 9
+                "TestId1": 9,
+                "TestId2": 10
             }
-        ],
-        "Id": 10002,
-        "TestPlainMsg": {
-            "TestId2": 4,
-            "TestId1": 3
-        },
-        "Name": 10002
+        ]
     },
     {
         "Arr": [
             {
                 "IntArr": [301],
-                "StrArr": [],
-                "Name": "测试项-C"
+                "Name": "测试项-C",
+                "StrArr": []
             },
             {
                 "IntArr": [311],
-                "StrArr": ["哦哦哦哦"],
-                "Name": "测试项-B"
+                "Name": "测试项-B",
+                "StrArr": ["哦哦哦哦"]
             }
         ],
-        "TestPlainIntArr": [
-            7,
-            8,
-            9
-        ],
+        "Id": 10003,
+        "Name": 10003,
         "TestMapIs": {
             "30": "Map嵌套模式[0].value",
             "31": "Map嵌套模式[1].value"
         },
         "TestMapSm": {
             "ca": {
-                "Level": "312",
-                "Id": 311
+                "Id": 311,
+                "Level": "312"
             },
             "cb": {
-                "Level": "322",
-                "Id": 321
+                "Id": 321,
+                "Level": "322"
             }
         },
         "TestPlainEnumArr": [
@@ -172,15 +169,18 @@
             10001,
             10001
         ],
-        "TestPlainMsgArr": [{
-            "TestId2": 12,
-            "TestId1": 11
-        }],
-        "Id": 10003,
+        "TestPlainIntArr": [
+            7,
+            8,
+            9
+        ],
         "TestPlainMsg": {
-            "TestId2": 6,
-            "TestId1": 5
+            "TestId1": 5,
+            "TestId2": 6
         },
-        "Name": 10003
+        "TestPlainMsgArr": [{
+            "TestId1": 11,
+            "TestId2": 12
+        }]
     }
 ]

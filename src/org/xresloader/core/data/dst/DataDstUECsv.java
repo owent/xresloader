@@ -7,6 +7,7 @@ import org.xresloader.core.ProgramOptions;
 import org.xresloader.core.data.dst.DataDstWriterNode.DataDstFieldDescriptor;
 import org.xresloader.core.data.dst.DataDstWriterNode.DataDstOneofDescriptor;
 import org.xresloader.core.data.dst.DataDstWriterNode.DataDstTypeDescriptor;
+import org.xresloader.core.data.err.ConvException;
 import org.xresloader.core.data.src.DataSrcImpl;
 import org.xresloader.core.scheme.SchemeConf;
 
@@ -53,7 +54,7 @@ public class DataDstUECsv extends DataDstUEBase {
     }
 
     @Override
-    protected byte[] buildForUEOnFinal(Object buildObj) {
+    protected byte[] buildForUEOnFinal(Object buildObj) throws ConvException {
         // 带编码的输出
         String encoding = SchemeConf.getInstance().getKey().getEncoding();
         if (null == encoding || encoding.isEmpty())
@@ -255,7 +256,7 @@ public class DataDstUECsv extends DataDstUEBase {
      * @return 常量代码
      */
     @Override
-    public String dumpConstForUE(HashMap<String, Object> data, UEDataRowRule rule) throws IOException {
+    public String dumpConstForUE(HashMap<String, Object> data, UEDataRowRule rule) throws IOException, ConvException {
         StringBuffer sb = new StringBuffer();
         CSVPrinter csv = new CSVPrinter(sb,
                 CSVFormat.EXCEL.builder().setHeader(getIdentName("Name"), getIdentName("Value")).build());
@@ -326,7 +327,20 @@ public class DataDstUECsv extends DataDstUEBase {
             sb.append(SchemeConf.getInstance().getUEOptions().codeOutputCsvObjectBegin);
             if (!valueDesc.isEmpty()) {
                 boolean isFirst = true;
-                for (Map.Entry<?, ?> subval : ((SpecialInnerHashMap<?, ?>) data).entrySet()) {
+                ArrayList<Map.Entry<?, ?>> sorted_array = new ArrayList<Map.Entry<?, ?>>();
+                sorted_array.ensureCapacity(((SpecialInnerHashMap<?, ?>) data).size());
+                sorted_array.addAll(((SpecialInnerHashMap<?, ?>) data).entrySet());
+                sorted_array.sort((l, r) -> {
+                    if (l.getKey() instanceof Integer && r.getKey() instanceof Integer) {
+                        return ((Integer) l.getKey()).compareTo((Integer) r.getKey());
+                    } else if (l.getKey() instanceof Long && r.getKey() instanceof Long) {
+                        return ((Long) l.getKey()).compareTo((Long) r.getKey());
+                    } else {
+                        return l.getKey().toString().compareTo(r.getKey().toString());
+                    }
+                });
+
+                for (Map.Entry<?, ?> subval : sorted_array) {
                     isFirst = tryWriteSeprator(sb, isFirst);
                     sb.append(SchemeConf.getInstance().getUEOptions().codeOutputCsvObjectBegin);
                     sb.append("\"");

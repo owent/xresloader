@@ -1,9 +1,11 @@
 package org.xresloader.core.data.dst;
 
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 import org.xresloader.core.ProgramOptions;
 import org.xresloader.core.data.dst.DataDstWriterNode.DataDstFieldDescriptor;
+import org.xresloader.core.data.err.ConvException;
 import org.xresloader.core.scheme.SchemeConf;
 
 import java.io.IOException;
@@ -34,13 +36,19 @@ public class DataDstUEJson extends DataDstUEBase {
     }
 
     @Override
-    protected byte[] buildForUEOnFinal(Object buildObj) {
-        // 带编码的输出
-        String encoding = SchemeConf.getInstance().getKey().getEncoding();
-        if (null == encoding || encoding.isEmpty())
-            return ((UEBuildObject) buildObj).ja.toString(4).getBytes();
-
-        return ((UEBuildObject) buildObj).ja.toString(4).getBytes(Charset.forName(encoding));
+    protected byte[] buildForUEOnFinal(Object buildObj) throws ConvException {
+        try {
+            // 带编码的输出
+            String encoding = SchemeConf.getInstance().getKey().getEncoding();
+            if (null == encoding || encoding.isEmpty())
+                return DataDstJson.stringify(((UEBuildObject) buildObj).ja, 4).toString().getBytes();
+            return DataDstJson.stringify(((UEBuildObject) buildObj).ja, 4).toString()
+                    .getBytes(Charset.forName(encoding));
+        } catch (JSONException e) {
+            setLastErrorMessage(
+                    "stringify JSON object failed, %s", e.getMessage());
+            throw new ConvException(getLastErrorMessage());
+        }
     }
 
     @Override
@@ -274,12 +282,18 @@ public class DataDstUEJson extends DataDstUEBase {
      * @return 常量代码
      */
     @Override
-    public String dumpConstForUE(HashMap<String, Object> data, UEDataRowRule rule) throws IOException {
+    public String dumpConstForUE(HashMap<String, Object> data, UEDataRowRule rule) throws IOException, ConvException {
         JSONArray jo = new JSONArray();
 
         writeConstData(jo, data, "", getIdentName("Value"));
 
-        return jo.toString(4);
+        try {
+            return DataDstJson.stringify(jo, 4).toString();
+        } catch (JSONException e) {
+            setLastErrorMessage(
+                    "stringify JSON object failed, %s", e.getMessage());
+            throw new ConvException(getLastErrorMessage());
+        }
     }
 
     private Object getDefault(DataDstFieldDescriptor fd) {

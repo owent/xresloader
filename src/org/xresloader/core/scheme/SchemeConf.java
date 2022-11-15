@@ -49,6 +49,16 @@ public class SchemeConf {
     private String outputFilePathCache = "";
     private String outputFileAbsPathCache = "";
 
+    private String callbackScriptPath = "";
+
+    public String getCallbackScriptPath() {
+        return callbackScriptPath;
+    }
+
+    public void setCallbackScriptPath(String callbackScriptPath) {
+        this.callbackScriptPath = callbackScriptPath;
+    }
+
     private SchemeConf() {
         key = new SchemeKeyConf();
     }
@@ -91,6 +101,7 @@ public class SchemeConf {
 
         outputFilePathCache = "";
         outputFileAbsPathCache = "";
+        callbackScriptPath = "";
     }
 
     public void clear() {

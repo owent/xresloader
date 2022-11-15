@@ -3,6 +3,7 @@ package org.xresloader.core.data.dst;
 import org.apache.commons.codec.binary.Hex;
 import org.xresloader.core.ProgramOptions;
 import org.xresloader.core.data.err.ConvException;
+import org.xresloader.core.data.et.DataETProcessor;
 import org.xresloader.core.data.src.DataContainer;
 import org.xresloader.core.data.src.DataSrcImpl;
 import org.xresloader.core.engine.IdentifyDescriptor;
@@ -27,7 +28,7 @@ public abstract class DataDstJava extends DataDstImpl {
         public String origin = null;
     }
 
-    public class SpecialInnerHashMap<K, V> extends HashMap<K, V> {
+    public static class SpecialInnerHashMap<K, V> extends HashMap<K, V> {
         public SpecialInnerHashMap(int initialCapacity, float loadFactor) {
             super(initialCapacity, loadFactor);
         }
@@ -110,7 +111,7 @@ public abstract class DataDstJava extends DataDstImpl {
         }
 
         HashMap<String, Object> ret = new HashMap<String, Object>();
-        if (dumpMessage(ret, table.descriptor)) {
+        if (DataETProcessor.getInstance().dumpMapMsg(ret, table.descriptor)) {
             return ret;
         }
 
@@ -390,7 +391,7 @@ public abstract class DataDstJava extends DataDstImpl {
      * @return 有数据则返回true
      * @throws ConvException
      */
-    private boolean dumpMessage(HashMap<String, Object> builder, DataDstWriterNode node) throws ConvException {
+    protected boolean dumpMessage(HashMap<String, Object> builder, DataDstWriterNode node) throws ConvException {
         boolean ret = false;
 
         for (Map.Entry<String, DataDstWriterNode.DataDstChildrenNode> c : node.getChildren().entrySet()) {

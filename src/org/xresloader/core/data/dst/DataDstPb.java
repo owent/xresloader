@@ -10,6 +10,7 @@ import org.xresloader.core.data.dst.DataDstWriterNode.DataDstFieldDescriptor;
 import org.xresloader.core.data.dst.DataDstWriterNode.DataDstOneofDescriptor;
 import org.xresloader.core.data.dst.DataDstWriterNode.DataDstTypeDescriptor;
 import org.xresloader.core.data.err.ConvException;
+import org.xresloader.core.data.et.DataETProcessor;
 import org.xresloader.core.data.src.DataContainer;
 import org.xresloader.core.data.src.DataSrcImpl;
 import org.xresloader.core.data.vfy.*;
@@ -1300,9 +1301,15 @@ public class DataDstPb extends DataDstImpl {
 
     private ByteString convData(DataDstWriterNode node) throws ConvException {
         // Descriptors.Descriptor msg_desc = (Descriptors.Descriptor) node.privateData;
-
-        DynamicMessage.Builder root = DynamicMessage.newBuilder(currentMsgDesc);
-        boolean valid_data = dumpMessage(root, node);
+        DynamicMessage.Builder root = null;
+        boolean valid_data = false;
+        if (SchemeConf.getInstance().getCallbackScriptPath().isEmpty()) {
+            root = DynamicMessage.newBuilder(currentMsgDesc);
+            valid_data = dumpMessage(root, node);
+        } else {
+            root = DataETProcessor.getInstance().dumpPbMsg(currentMsgDesc, node);
+            valid_data = (root != null);
+        }
         // 过滤空项
         if (!valid_data) {
             return null;

@@ -57,6 +57,7 @@ PROTOBUF_CONSTEXPR role_upgrade_cfg::role_upgrade_cfg(
   , /*decltype(_impl_.costvalue_)*/int64_t{0}
   , /*decltype(_impl_.costtype_)*/0u
   , /*decltype(_impl_.scoreadd_)*/0
+  , /*decltype(_impl_.srcid_)*/0u
   , /*decltype(_impl_._cached_size_)*/{}} {}
 struct role_upgrade_cfgDefaultTypeInternal {
   PROTOBUF_CONSTEXPR role_upgrade_cfgDefaultTypeInternal()
@@ -268,6 +269,7 @@ const uint32_t TableStruct_kind_2eproto::offsets[] PROTOBUF_SECTION_VARIABLE(pro
   PROTOBUF_FIELD_OFFSET(::role_upgrade_cfg, _impl_.costtype_),
   PROTOBUF_FIELD_OFFSET(::role_upgrade_cfg, _impl_.costvalue_),
   PROTOBUF_FIELD_OFFSET(::role_upgrade_cfg, _impl_.scoreadd_),
+  PROTOBUF_FIELD_OFFSET(::role_upgrade_cfg, _impl_.srcid_),
   ~0u,  // no _has_bits_
   PROTOBUF_FIELD_OFFSET(::arr_in_arr_test_nested_message, _internal_metadata_),
   ~0u,  // no _extensions_
@@ -387,16 +389,16 @@ const uint32_t TableStruct_kind_2eproto::offsets[] PROTOBUF_SECTION_VARIABLE(pro
 static const ::_pbi::MigrationSchema schemas[] PROTOBUF_SECTION_VARIABLE(protodesc_cold) = {
   { 0, -1, -1, sizeof(::role_cfg)},
   { 23, -1, -1, sizeof(::role_upgrade_cfg)},
-  { 34, -1, -1, sizeof(::arr_in_arr_test_nested_message)},
-  { 43, -1, -1, sizeof(::arr_in_arr)},
-  { 55, -1, -1, sizeof(::test_msg_verifier)},
-  { 63, 71, -1, sizeof(::arr_in_arr_cfg_TestMapIsEntry_DoNotUse)},
-  { 73, 81, -1, sizeof(::arr_in_arr_cfg_TestMapSmEntry_DoNotUse)},
-  { 83, -1, -1, sizeof(::arr_in_arr_cfg)},
-  { 97, -1, -1, sizeof(::event_reward_item)},
-  { 108, -1, -1, sizeof(::event_rule_item)},
-  { 119, -1, -1, sizeof(::event_cfg)},
-  { 138, -1, -1, sizeof(::keep_or_strip_empty_list_cfg)},
+  { 35, -1, -1, sizeof(::arr_in_arr_test_nested_message)},
+  { 44, -1, -1, sizeof(::arr_in_arr)},
+  { 56, -1, -1, sizeof(::test_msg_verifier)},
+  { 64, 72, -1, sizeof(::arr_in_arr_cfg_TestMapIsEntry_DoNotUse)},
+  { 74, 82, -1, sizeof(::arr_in_arr_cfg_TestMapSmEntry_DoNotUse)},
+  { 84, -1, -1, sizeof(::arr_in_arr_cfg)},
+  { 98, -1, -1, sizeof(::event_reward_item)},
+  { 109, -1, -1, sizeof(::event_rule_item)},
+  { 120, -1, -1, sizeof(::event_cfg)},
+  { 139, -1, -1, sizeof(::keep_or_strip_empty_list_cfg)},
 };
 
 static const ::_pb::Message* const file_default_instances[] = {
@@ -435,66 +437,66 @@ const char descriptor_table_protodef_kind_2eproto[] PROTOBUF_SECTION_VARIABLE(pr
   "igin_timepoint_arr\030\032 \003(\t\022O\n\024convert_dura"
   "tion_arr\030\033 \003(\0132\031.google.protobuf.Duratio"
   "nB\026\302\?\023origin_duration_arr\022\033\n\023origin_dura"
-  "tion_arr\030\034 \003(\t\"\305\001\n\020role_upgrade_cfg\022\020\n\002I"
+  "tion_arr\030\034 \003(\t\"\324\001\n\020role_upgrade_cfg\022\020\n\002I"
   "d\030\001 \001(\rB\004\350D\350\007\022\022\n\005Level\030\002 \001(\rB\003\350D\001\0223\n\010Cos"
   "tType\030\003 \001(\rB!\312>\tcost_type\232\?\022Refer to cos"
   "t_type\022\021\n\tCostValue\030\004 \001(\003\022\020\n\010ScoreAdd\030\005 "
-  "\001(\005:1\352D\006helper\312>%Test role_upgrade_cfg w"
-  "ith multi keys\"\241\004\n\narr_in_arr\022-\n\004name\030\001 "
-  "\001(\tB\037\232\?\034This is a test name in array\022\017\n\007"
-  "int_arr\030\002 \003(\005\022\017\n\007str_arr\030\003 \003(\t\022#\n\016test_i"
-  "nfo_role\030\013 \001(\0132\t.role_cfgH\000\0222\n\025test_role"
-  "_upgrade_cfg\030\014 \001(\0132\021.role_upgrade_cfgH\000\032"
-  "\373\001\n\023test_nested_message\0222\n\035test_nested_m"
-  "essage_info_role\030\013 \001(\0132\t.role_cfgH\000\022A\n$t"
-  "est_nested_message_role_upgrade_cfg\030\014 \001("
-  "\0132\021.role_upgrade_cfgH\000\"`\n\020test_nested_en"
-  "um\022%\n!EN_TEST_NESTED_MESSAGE_ENUM_VAL_1\020"
-  "\000\022%\n!EN_TEST_NESTED_MESSAGE_ENUM_VAL_2\020{"
-  "B\013\n\ttest_onof\"P\n\020test_nested_enum\022\035\n\031EN_"
-  "TEST_NESTED_ENUM_VAL_1\020\000\022\035\n\031EN_TEST_NEST"
-  "ED_ENUM_VAL_2\020{:\014\352D\006helper\360D\001B\013\n\ttest_on"
-  "of\"V\n\021test_msg_verifier\022\022\n\ttest_id_1\030\221N "
-  "\001(\r\022&\n\ttest_id_2\030\222N \001(\rB\022\242\?\017\346\265\213\350\257\225ID\345\210\253\345"
-  "\220\2152:\005\242\?\002-^\"\362\003\n\016arr_in_arr_cfg\022\037\n\002id\030\001 \001("
-  "\rB\023\350D\001\232\?\rThis is a Key\022\030\n\003arr\030\002 \003(\0132\013.ar"
-  "r_in_arr\022\032\n\022test_plain_int_arr\030\003 \003(\005\022\'\n\023"
-  "test_plain_enum_arr\030\004 \003(\0162\n.cost_type\0220\n"
-  "\016test_plain_msg\030\005 \001(\0132\022.test_msg_verifie"
-  "rB\004\262\?\001&\022.\n\022test_plain_msg_arr\030\006 \003(\0132\022.te"
-  "st_msg_verifier\0223\n\013test_map_is\030\007 \003(\0132\036.a"
-  "rr_in_arr_cfg.TestMapIsEntry\0229\n\013test_map"
-  "_sm\030\010 \003(\0132\036.arr_in_arr_cfg.TestMapSmEntr"
-  "yB\004\262\?\001|\0320\n\016TestMapIsEntry\022\013\n\003key\030\001 \001(\005\022\r"
-  "\n\005value\030\002 \001(\t:\0028\001\032;\n\016TestMapSmEntry\022\013\n\003k"
-  "ey\030\001 \001(\t\022\030\n\005value\030\002 \001(\0132\t.dep2_cfg:\0028\001:\037"
-  "\352D\006helper\312>\023Test arr_in_arr_cfg\"\243\001\n\021even"
-  "t_reward_item\022\017\n\007item_id\030\001 \001(\r\022\022\n\nitem_c"
-  "ount\030\002 \001(\r\022&\n\013nested_note\030\013 \001(\tB\017\242\?\014\346\217\217\350"
-  "\277\260\346\226\207\346\234\254H\000\0227\n\020nested_enum_type\030\014 \001(\0162\n.c"
-  "ost_typeB\017\242\?\014\350\264\247\345\270\201\347\261\273\345\236\213H\000B\010\n\006nested\"\241\001"
-  "\n\017event_rule_item\022\017\n\007rule_id\030\001 \001(\r\022\022\n\nru"
-  "le_param\030\002 \001(\r\022&\n\013nested_note\030\013 \001(\tB\017\242\?\014"
-  "\346\217\217\350\277\260\346\226\207\346\234\254H\000\0227\n\020nested_enum_type\030\014 \001(\016"
-  "2\n.cost_typeB\017\242\?\014\350\264\247\345\270\201\347\261\273\345\236\213H\000B\010\n\006neste"
-  "d\"\360\003\n\tevent_cfg\022\017\n\002id\030\001 \001(\rB\003\350Dd\022\024\n\007proc"
-  "ess\030\002 \001(\rB\003\350D\001\022\036\n\004rule\030\006 \001(\0132\020.event_rul"
-  "e_item\022\'\n\rspecify_field\030\007 \001(\0132\020.event_ru"
-  "le_item\0223\n\004item\030\013 \001(\0132\022.event_reward_ite"
-  "mB\017\242\?\014\345\245\226\345\212\261\351\201\223\345\205\267H\000\022#\n\010user_exp\030\014 \001(\003B\017"
-  "\242\?\014\345\245\226\345\212\261\347\273\217\351\252\214H\000\022\037\n\004note\030\r \001(\tB\017\242\?\014\346\217\217\350"
-  "\277\260\346\226\207\346\234\254H\000\0220\n\tenum_type\030\016 \001(\0162\n.cost_typ"
-  "eB\017\242\?\014\350\264\247\345\270\201\347\261\273\345\236\213H\000\022%\n\nuser_level\0303 \001(\r"
-  "B\017\242\?\014\347\216\251\345\256\266\347\255\211\347\272\247H\001\022(\n\010test_arr\030[ \003(\0132\020."
-  "event_rule_itemB\004\262\?\001;\022.\n\016test_empty_arr\030"
-  "\\ \003(\0132\020.event_rule_itemB\004\262\?\001;:,\352D\006helper"
-  "\312> Test event_cfg with oneof fieldsB\010\n\006r"
-  "ewardB\r\n\013unlock_type\"\266\001\n\034keep_or_strip_e"
-  "mpty_list_cfg\022\037\n\002id\030\001 \001(\rB\023\350D\001\232\?\rThis is"
-  " a Key\022\034\n\tarray_msg\030\002 \003(\0132\t.dep2_cfg\022\"\n\017"
-  "array_plain_msg\030\003 \003(\0132\t.dep2_cfg\022\023\n\013arra"
-  "y_int32\030\004 \003(\005\022\023\n\013array_int64\030\005 \003(\003:\t\352D\006h"
-  "elperb\006proto3"
+  "\001(\005\022\r\n\005SrcID\030\006 \001(\r:1\352D\006helper\312>%Test rol"
+  "e_upgrade_cfg with multi keys\"\241\004\n\narr_in"
+  "_arr\022-\n\004name\030\001 \001(\tB\037\232\?\034This is a test na"
+  "me in array\022\017\n\007int_arr\030\002 \003(\005\022\017\n\007str_arr\030"
+  "\003 \003(\t\022#\n\016test_info_role\030\013 \001(\0132\t.role_cfg"
+  "H\000\0222\n\025test_role_upgrade_cfg\030\014 \001(\0132\021.role"
+  "_upgrade_cfgH\000\032\373\001\n\023test_nested_message\0222"
+  "\n\035test_nested_message_info_role\030\013 \001(\0132\t."
+  "role_cfgH\000\022A\n$test_nested_message_role_u"
+  "pgrade_cfg\030\014 \001(\0132\021.role_upgrade_cfgH\000\"`\n"
+  "\020test_nested_enum\022%\n!EN_TEST_NESTED_MESS"
+  "AGE_ENUM_VAL_1\020\000\022%\n!EN_TEST_NESTED_MESSA"
+  "GE_ENUM_VAL_2\020{B\013\n\ttest_onof\"P\n\020test_nes"
+  "ted_enum\022\035\n\031EN_TEST_NESTED_ENUM_VAL_1\020\000\022"
+  "\035\n\031EN_TEST_NESTED_ENUM_VAL_2\020{:\014\352D\006helpe"
+  "r\360D\001B\013\n\ttest_onof\"V\n\021test_msg_verifier\022\022"
+  "\n\ttest_id_1\030\221N \001(\r\022&\n\ttest_id_2\030\222N \001(\rB\022"
+  "\242\?\017\346\265\213\350\257\225ID\345\210\253\345\220\2152:\005\242\?\002-^\"\362\003\n\016arr_in_arr"
+  "_cfg\022\037\n\002id\030\001 \001(\rB\023\350D\001\232\?\rThis is a Key\022\030\n"
+  "\003arr\030\002 \003(\0132\013.arr_in_arr\022\032\n\022test_plain_in"
+  "t_arr\030\003 \003(\005\022\'\n\023test_plain_enum_arr\030\004 \003(\016"
+  "2\n.cost_type\0220\n\016test_plain_msg\030\005 \001(\0132\022.t"
+  "est_msg_verifierB\004\262\?\001&\022.\n\022test_plain_msg"
+  "_arr\030\006 \003(\0132\022.test_msg_verifier\0223\n\013test_m"
+  "ap_is\030\007 \003(\0132\036.arr_in_arr_cfg.TestMapIsEn"
+  "try\0229\n\013test_map_sm\030\010 \003(\0132\036.arr_in_arr_cf"
+  "g.TestMapSmEntryB\004\262\?\001|\0320\n\016TestMapIsEntry"
+  "\022\013\n\003key\030\001 \001(\005\022\r\n\005value\030\002 \001(\t:\0028\001\032;\n\016Test"
+  "MapSmEntry\022\013\n\003key\030\001 \001(\t\022\030\n\005value\030\002 \001(\0132\t"
+  ".dep2_cfg:\0028\001:\037\352D\006helper\312>\023Test arr_in_a"
+  "rr_cfg\"\243\001\n\021event_reward_item\022\017\n\007item_id\030"
+  "\001 \001(\r\022\022\n\nitem_count\030\002 \001(\r\022&\n\013nested_note"
+  "\030\013 \001(\tB\017\242\?\014\346\217\217\350\277\260\346\226\207\346\234\254H\000\0227\n\020nested_enum"
+  "_type\030\014 \001(\0162\n.cost_typeB\017\242\?\014\350\264\247\345\270\201\347\261\273\345\236\213"
+  "H\000B\010\n\006nested\"\241\001\n\017event_rule_item\022\017\n\007rule"
+  "_id\030\001 \001(\r\022\022\n\nrule_param\030\002 \001(\r\022&\n\013nested_"
+  "note\030\013 \001(\tB\017\242\?\014\346\217\217\350\277\260\346\226\207\346\234\254H\000\0227\n\020nested_"
+  "enum_type\030\014 \001(\0162\n.cost_typeB\017\242\?\014\350\264\247\345\270\201\347\261"
+  "\273\345\236\213H\000B\010\n\006nested\"\360\003\n\tevent_cfg\022\017\n\002id\030\001 \001"
+  "(\rB\003\350Dd\022\024\n\007process\030\002 \001(\rB\003\350D\001\022\036\n\004rule\030\006 "
+  "\001(\0132\020.event_rule_item\022\'\n\rspecify_field\030\007"
+  " \001(\0132\020.event_rule_item\0223\n\004item\030\013 \001(\0132\022.e"
+  "vent_reward_itemB\017\242\?\014\345\245\226\345\212\261\351\201\223\345\205\267H\000\022#\n\010u"
+  "ser_exp\030\014 \001(\003B\017\242\?\014\345\245\226\345\212\261\347\273\217\351\252\214H\000\022\037\n\004note"
+  "\030\r \001(\tB\017\242\?\014\346\217\217\350\277\260\346\226\207\346\234\254H\000\0220\n\tenum_type\030\016"
+  " \001(\0162\n.cost_typeB\017\242\?\014\350\264\247\345\270\201\347\261\273\345\236\213H\000\022%\n\nu"
+  "ser_level\0303 \001(\rB\017\242\?\014\347\216\251\345\256\266\347\255\211\347\272\247H\001\022(\n\010te"
+  "st_arr\030[ \003(\0132\020.event_rule_itemB\004\262\?\001;\022.\n\016"
+  "test_empty_arr\030\\ \003(\0132\020.event_rule_itemB\004"
+  "\262\?\001;:,\352D\006helper\312> Test event_cfg with on"
+  "eof fieldsB\010\n\006rewardB\r\n\013unlock_type\"\266\001\n\034"
+  "keep_or_strip_empty_list_cfg\022\037\n\002id\030\001 \001(\r"
+  "B\023\350D\001\232\?\rThis is a Key\022\034\n\tarray_msg\030\002 \003(\013"
+  "2\t.dep2_cfg\022\"\n\017array_plain_msg\030\003 \003(\0132\t.d"
+  "ep2_cfg\022\023\n\013array_int32\030\004 \003(\005\022\023\n\013array_in"
+  "t64\030\005 \003(\003:\t\352D\006helperb\006proto3"
   ;
 static const ::_pbi::DescriptorTable* const descriptor_table_kind_2eproto_deps[6] = {
   &::descriptor_table_dep_5flevel2_2eproto,
@@ -506,7 +508,7 @@ static const ::_pbi::DescriptorTable* const descriptor_table_kind_2eproto_deps[6
 };
 static ::_pbi::once_flag descriptor_table_kind_2eproto_once;
 const ::_pbi::DescriptorTable descriptor_table_kind_2eproto = {
-    false, false, 3173, descriptor_table_protodef_kind_2eproto,
+    false, false, 3188, descriptor_table_protodef_kind_2eproto,
     "kind.proto",
     &descriptor_table_kind_2eproto_once, descriptor_table_kind_2eproto_deps, 6, 12,
     schemas, file_default_instances, TableStruct_kind_2eproto::offsets,
@@ -1422,12 +1424,13 @@ role_upgrade_cfg::role_upgrade_cfg(const role_upgrade_cfg& from)
     , decltype(_impl_.costvalue_){}
     , decltype(_impl_.costtype_){}
     , decltype(_impl_.scoreadd_){}
+    , decltype(_impl_.srcid_){}
     , /*decltype(_impl_._cached_size_)*/{}};
 
   _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
   ::memcpy(&_impl_.id_, &from._impl_.id_,
-    static_cast<size_t>(reinterpret_cast<char*>(&_impl_.scoreadd_) -
-    reinterpret_cast<char*>(&_impl_.id_)) + sizeof(_impl_.scoreadd_));
+    static_cast<size_t>(reinterpret_cast<char*>(&_impl_.srcid_) -
+    reinterpret_cast<char*>(&_impl_.id_)) + sizeof(_impl_.srcid_));
   // @@protoc_insertion_point(copy_constructor:role_upgrade_cfg)
 }
 
@@ -1441,6 +1444,7 @@ inline void role_upgrade_cfg::SharedCtor(
     , decltype(_impl_.costvalue_){int64_t{0}}
     , decltype(_impl_.costtype_){0u}
     , decltype(_impl_.scoreadd_){0}
+    , decltype(_impl_.srcid_){0u}
     , /*decltype(_impl_._cached_size_)*/{}
   };
 }
@@ -1469,8 +1473,8 @@ void role_upgrade_cfg::Clear() {
   (void) cached_has_bits;
 
   ::memset(&_impl_.id_, 0, static_cast<size_t>(
-      reinterpret_cast<char*>(&_impl_.scoreadd_) -
-      reinterpret_cast<char*>(&_impl_.id_)) + sizeof(_impl_.scoreadd_));
+      reinterpret_cast<char*>(&_impl_.srcid_) -
+      reinterpret_cast<char*>(&_impl_.id_)) + sizeof(_impl_.srcid_));
   _internal_metadata_.Clear<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
 }
 
@@ -1516,6 +1520,14 @@ const char* role_upgrade_cfg::_InternalParse(const char* ptr, ::_pbi::ParseConte
       case 5:
         if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 40)) {
           _impl_.scoreadd_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint32(&ptr);
+          CHK_(ptr);
+        } else
+          goto handle_unusual;
+        continue;
+      // uint32 SrcID = 6;
+      case 6:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 48)) {
+          _impl_.srcid_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint32(&ptr);
           CHK_(ptr);
         } else
           goto handle_unusual;
@@ -1579,6 +1591,12 @@ uint8_t* role_upgrade_cfg::_InternalSerialize(
     target = ::_pbi::WireFormatLite::WriteInt32ToArray(5, this->_internal_scoreadd(), target);
   }
 
+  // uint32 SrcID = 6;
+  if (this->_internal_srcid() != 0) {
+    target = stream->EnsureSpace(target);
+    target = ::_pbi::WireFormatLite::WriteUInt32ToArray(6, this->_internal_srcid(), target);
+  }
+
   if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
     target = ::_pbi::WireFormat::InternalSerializeUnknownFieldsToArray(
         _internal_metadata_.unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(::PROTOBUF_NAMESPACE_ID::UnknownFieldSet::default_instance), target, stream);
@@ -1620,6 +1638,11 @@ size_t role_upgrade_cfg::ByteSizeLong() const {
     total_size += ::_pbi::WireFormatLite::Int32SizePlusOne(this->_internal_scoreadd());
   }
 
+  // uint32 SrcID = 6;
+  if (this->_internal_srcid() != 0) {
+    total_size += ::_pbi::WireFormatLite::UInt32SizePlusOne(this->_internal_srcid());
+  }
+
   return MaybeComputeUnknownFieldsSize(total_size, &_impl_._cached_size_);
 }
 
@@ -1653,6 +1676,9 @@ void role_upgrade_cfg::MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg, const
   if (from._internal_scoreadd() != 0) {
     _this->_internal_set_scoreadd(from._internal_scoreadd());
   }
+  if (from._internal_srcid() != 0) {
+    _this->_internal_set_srcid(from._internal_srcid());
+  }
   _this->_internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
 }
 
@@ -1671,8 +1697,8 @@ void role_upgrade_cfg::InternalSwap(role_upgrade_cfg* other) {
   using std::swap;
   _internal_metadata_.InternalSwap(&other->_internal_metadata_);
   ::PROTOBUF_NAMESPACE_ID::internal::memswap<
-      PROTOBUF_FIELD_OFFSET(role_upgrade_cfg, _impl_.scoreadd_)
-      + sizeof(role_upgrade_cfg::_impl_.scoreadd_)
+      PROTOBUF_FIELD_OFFSET(role_upgrade_cfg, _impl_.srcid_)
+      + sizeof(role_upgrade_cfg::_impl_.srcid_)
       - PROTOBUF_FIELD_OFFSET(role_upgrade_cfg, _impl_.id_)>(
           reinterpret_cast<char*>(&_impl_.id_),
           reinterpret_cast<char*>(&other->_impl_.id_));

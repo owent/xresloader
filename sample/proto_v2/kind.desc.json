@@ -522,6 +522,11 @@
             "name": "ScoreAdd",
             "number": 5,
             "type_name": "INT32"
+          },
+          "SrcID": {
+            "name": "SrcID",
+            "number": 6,
+            "type_name": "UINT32"
           }
         },
         "name": "role_upgrade_cfg",

@@ -40,6 +40,7 @@ message role_upgrade_cfg {
     optional uint32 CostType  = 3 [ (org.xresloader.verifier) = "cost_type", (org.xresloader.field_description) = "Refer to cost_type" ];
     optional int64  CostValue = 4;
     optional int32  ScoreAdd  = 5;
+    optional uint32 SrcID = 6;
 }
 
 message test_msg_verifier {

@@ -24,6 +24,7 @@ import org.xresloader.core.data.err.ConvException;
 import org.xresloader.core.data.err.InitializeException;
 import org.xresloader.core.data.src.DataSrcExcel;
 import org.xresloader.core.data.src.DataSrcImpl;
+import org.xresloader.core.engine.ExcelEngine;
 import org.xresloader.core.scheme.SchemeConf;
 
 /**
@@ -350,6 +351,9 @@ public class main {
      */
     public static void main(String[] args) {
         endl = ProgramOptions.getEndl();
+
+        // 全局设置
+        ExcelEngine.setMaxByteArraySize(Integer.MAX_VALUE);
 
         // 先尝试根据传入参数转表
         int ret_code = 1;

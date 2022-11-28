@@ -6,9 +6,11 @@ import org.xresloader.core.data.src.DataContainer;
 import org.xresloader.core.data.src.DataSrcImpl;
 import org.xresloader.core.data.vfy.DataVerifyImpl;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+import org.apache.poi.ooxml.POIXMLException;
 import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.ss.formula.eval.NotImplementedException;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import org.apache.poi.util.IOUtils;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -215,11 +217,21 @@ public class ExcelEngine {
                 extractor.setFormulasNotResults(false);
                 extractor.close();
             }
+
+            openedWorkbooks.put(file_path, ret);
         } catch (java.io.IOException e) {
-            ProgramOptions.getLoger().error("%s", e.getMessage());
+            ProgramOptions.getLoger().error("Open file % failed, %s", file.getPath(), e.getMessage());
+        } catch (POIXMLException e) {
+            ProgramOptions.getLoger().error("Open and unpack file % failed, %s", file.getPath(), e.getMessage());
+            for (var stack : e.getStackTrace()) {
+                ProgramOptions.getLoger().error("\t%s.%s(%s:%d)", stack.getClassName(), stack.getMethodName(),
+                        stack.getFileName(),
+                        stack.getLineNumber());
+            }
+        } catch (RuntimeException e) {
+            ProgramOptions.getLoger().error("Open file % failed, %s", file.getPath(), e.getMessage());
         }
 
-        openedWorkbooks.put(file_path, ret);
         return ret;
     }
 
@@ -450,7 +462,8 @@ public class ExcelEngine {
                 if (!val.isEmpty()) {
                     // Const 和 option导出时，没有数据源，也不需要文本/宏替换
                     DataSrcImpl data_source = DataSrcImpl.getOurInstance();
-                    if (null != data_source && data_source.isInitialized() && ProgramOptions.getInstance().enableStringMacro) {
+                    if (null != data_source && data_source.isInitialized()
+                            && ProgramOptions.getInstance().enableStringMacro) {
                         out.set(tryMacro(val));
                     } else {
                         out.set(val);
@@ -848,5 +861,9 @@ public class ExcelEngine {
             return h * 3600 + m * 60 + s;
         }
         return d.getTime() / 1000;
+    }
+
+    static public void setMaxByteArraySize(int maxSize) {
+        IOUtils.setByteArrayMaxOverride(maxSize);
     }
 }

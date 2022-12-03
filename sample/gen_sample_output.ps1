@@ -66,6 +66,12 @@ foreach ($proto_dir in "proto_v2", "proto_v3") {
         "-t ue-json -o '$proto_dir/json' -f '$proto_dir/kind.pb' -m CallbackScript=none_cb.js -m 'DataSource=$XLSX_FILE|keep_or_strip_empty_list|3,1' -m ProtoName=keep_or_strip_empty_list_cfg -m OutputFile=StripListTailCfg.json -m KeyRow=2 -m UeCfg-CodeOutput=|Public/ConfigRec|Private/ConfigRec --list-strip-empty-tail",
         "-t ue-csv -o '$proto_dir/csv' -f '$proto_dir/kind.pb' -m CallbackScript=none_cb.js -m 'DataSource=$XLSX_FILE|keep_or_strip_empty_list|3,1' -m ProtoName=keep_or_strip_empty_list_cfg -m OutputFile=StripListTailCfg.csv -m KeyRow=2 -m UeCfg-CodeOutput=|Public/ConfigRec|Private/ConfigRec --list-strip-empty-tail",
         "-t bin -p protobuf -o '$proto_dir' -f '$proto_dir/kind.pb' -m CallbackScript=none_cb.js -m 'DataSource=$XLSX_FILE|keep_or_strip_empty_list|3,1' -m ProtoName=keep_or_strip_empty_list_cfg -m OutputFile=strip_list_tail_cfg.bin -m KeyRow=2 --list-strip-empty-tail"
+
+        # 回调脚本参与转表
+        " -t json -p protobuf -o '$proto_dir' -f '$proto_dir/kind.pb' -m CallbackScript=cb_script.js -m 'DataSource=$XLSX_FILE|process_by_script1' -m 'DataSource=$XLSX_FILE|process_by_script2' -m ProtoName=process_by_script -m OutputFile=process_by_script.json -m KeyRow=1 --pretty 2 --list-strip-empty-tail"
+        " -t bin  -p protobuf -o '$proto_dir' -f '$proto_dir/kind.pb' -m CallbackScript=cb_script.js -m 'DataSource=$XLSX_FILE|process_by_script1' -m 'DataSource=$XLSX_FILE|process_by_script2' -m ProtoName=process_by_script -m OutputFile=process_by_script.bin  -m KeyRow=1 --list-strip-empty-tail"
+        " -t lua  -p protobuf -o '$proto_dir' -f '$proto_dir/kind.pb' -m CallbackScript=cb_script.js -m 'DataSource=$XLSX_FILE|process_by_script1' -m 'DataSource=$XLSX_FILE|process_by_script2' -m ProtoName=process_by_script -m OutputFile=process_by_script.lua  -m KeyRow=1 --pretty 2 --list-strip-empty-tail"
+
     )
     Write-Output "Write-Output '$($TASK_LINES -join "`n")' | java `"-Dfile.encoding=UTF-8`" `"-Dlog4j.appender.console.encoding=UTF-8`" -client -jar `"$XRESLOADER`" --stdin --data-version 1.0.0.0"
     $TASK_LINES -join "`n" | java "-Dfile.encoding=UTF-8" "-Dlog4j.appender.console.encoding=UTF-8" -client -jar "$XRESLOADER" --stdin --data-version 1.0.0.0

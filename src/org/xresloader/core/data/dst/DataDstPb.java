@@ -1307,7 +1307,7 @@ public class DataDstPb extends DataDstImpl {
             root = DynamicMessage.newBuilder(currentMsgDesc);
             valid_data = dumpMessage(root, node);
         } else {
-            root = DataETProcessor.getInstance().dumpPbMsg(currentMsgDesc, node);
+            root = DataETProcessor.getInstance().dumpPbMessage(currentMsgDesc, node);
             valid_data = (root != null);
         }
         // 过滤空项

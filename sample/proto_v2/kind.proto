@@ -127,3 +127,28 @@ message keep_or_strip_empty_list_cfg {
     repeated int32    array_int32     = 4;
     repeated int64    array_int64     = 5;
 }
+
+message combine_id {
+    optional uint32 prefix = 1;
+    optional uint32 id = 2[(org.xresloader.verifier)="0-99999"];
+}
+
+message process_by_script {
+    optional uint32 id = 1;
+    map<uint32, string> map_u32_string = 2;
+
+    map<int32, string>    test_map_is = 7;
+    map<string, dep2_cfg> test_map_sm = 8 [ (org.xresloader.field_separator) = "|" ];
+
+    optional combine_id id_id = 1001;
+}
+
+message large_file_test {
+    optional uint32 id = 1;
+    optional int32 i32value = 2;
+    optional uint64 u64value = 3;
+    optional double f64value = 4;
+    optional float f32value = 5;
+    optional string szvalue = 6;
+    optional combine_id id_id = 7;
+}

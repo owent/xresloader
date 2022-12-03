@@ -111,7 +111,13 @@ public abstract class DataDstJava extends DataDstImpl {
         }
 
         HashMap<String, Object> ret = new HashMap<String, Object>();
-        if (DataETProcessor.getInstance().dumpMapMsg(ret, table.descriptor)) {
+        boolean dumpSucceed = false;
+        if (SchemeConf.getInstance().getCallbackScriptPath().isEmpty()) {
+            dumpSucceed = dumpMessage(ret, table.descriptor);
+        } else {
+            dumpSucceed = DataETProcessor.getInstance().dumpMapMessage(ret, table.descriptor);
+        }
+        if (dumpSucceed) {
             return ret;
         }
 

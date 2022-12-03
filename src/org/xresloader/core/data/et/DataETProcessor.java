@@ -3,6 +3,7 @@ package org.xresloader.core.data.et;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -11,6 +12,7 @@ import javax.script.Invocable;
 import javax.script.ScriptEngine;
 import javax.script.ScriptEngineManager;
 import javax.script.ScriptException;
+import javax.script.SimpleScriptContext;
 
 import org.xresloader.core.data.dst.DataDstJava;
 import org.xresloader.core.data.dst.DataDstWriterNode;
@@ -34,26 +36,29 @@ public class DataETProcessor extends DataDstJava {
     private Invocable invocable = null;
     private String lastDataSourceFile = "";
     private String lastDataSourceTable = "";
+    private String lastOutputFile = "";
 
     private DataETProcessor() {
+        ScriptEngineManager mgr = new ScriptEngineManager();
+        scriptEngine = mgr.getEngineByName("javascript");
     }
 
     public void reset() throws ConvException {
-        ScriptEngineManager mgr = new ScriptEngineManager();
-        scriptEngine = mgr.getEngineByName("javascript");
+        boolean engineInitSucceed = true;
         try {
             if (scriptEngine != null) {
                 scriptEngine.put("gOurInstance", DataSrcImpl.getOurInstance());
                 scriptEngine.put("gSchemeConf", SchemeConf.getInstance());
+                scriptEngine.setContext(new SimpleScriptContext());
                 scriptEngine.eval(new FileReader(new File(SchemeConf.getInstance().getCallbackScriptPath())));
             }
         } catch (ScriptException e) {
             throw new ConvException(e.toString());
         } catch (FileNotFoundException e) {
-            scriptEngine = null;
+            engineInitSucceed = false;
         }
         invocable = null;
-        if (scriptEngine instanceof Invocable) {
+        if (engineInitSucceed) {
             invocable = (Invocable)scriptEngine;
         }
     }
@@ -75,43 +80,75 @@ public class DataETProcessor extends DataDstJava {
         return instance;
     }
 
-    Object transformJava2Pb(FieldDescriptor fd, Object obj) {
+    Object transformJava2Pb(FieldDescriptor fd, Object obj) throws UnsupportedEncodingException, ConvException {
         Object val = null;
         if (obj == null) {
             return null;
         }
         switch (fd.getType()) {
             case DOUBLE:
-                val = ((Number)obj).doubleValue();
+                if (obj instanceof Number) {
+                    val = ((Number)obj).doubleValue();
+                } else if (obj instanceof String) {
+                    val = Double.valueOf((String)obj);
+                } else {
+                    throw new ConvException(fd.getFullName() + " expected " + fd.getType().toString() + ", got " + obj.toString() + "");
+                }
                 break;
             case FLOAT:
-                val = ((Number)obj).floatValue();
+                if (obj instanceof Number) {
+                    val = ((Number) obj).floatValue();
+                } else if (obj instanceof String) {
+                    val = Float.valueOf((String) obj);
+                } else {
+                    throw new ConvException(fd.getFullName() + " expected " + fd.getType().toString() + ", got " + obj.toString() + "");
+                }
                 break;
             case FIXED32:
             case SFIXED32:
             case SINT32:
             case INT32:
             case UINT32:
-                val = ((Number)obj).intValue();
+                if (obj instanceof Number) {
+                    val = ((Number)obj).intValue();
+                } else if (obj instanceof String) {
+                    val = Integer.valueOf((String) obj);
+                } else {
+                    throw new ConvException(fd.getFullName() + " expected " + fd.getType().toString() + ", got " + obj.toString() + "");
+                }
                 break;
             case FIXED64:
             case SFIXED64:
             case SINT64:
             case INT64:
             case UINT64:
-                val = ((Number) obj).longValue();
+                if (obj instanceof Number) {
+                    val = ((Number) obj).longValue();
+                } else if (obj instanceof String) {
+                    val = Long.valueOf((String) obj);
+                } else {
+                    throw new ConvException(fd.getFullName() + " expected " + fd.getType().toString() + ", got " + obj.toString() + "");
+                }
                 break;
             case ENUM:
-                val = fd.getEnumType().findValueByNumber((int)obj);
+                if (obj instanceof Number) {
+                    val = fd.getEnumType().findValueByNumber(((Number) obj).intValue());
+                } else if (obj instanceof String) {
+                    val = fd.getEnumType().findValueByNumber(Integer.valueOf((String) obj));
+                }
                 break;
             case BOOL:
-                val = (boolean)obj;
+                val = DataSrcImpl.getBooleanFromString(obj.toString());
                 break;
             case STRING:
                 val = obj.toString();
                 break;
             case BYTES:
-                val = obj.toString().getBytes();
+                if (SchemeConf.getInstance().getKey().getEncoding() != null) {
+                    val = obj.toString().getBytes(SchemeConf.getInstance().getKey().getEncoding());
+                } else {
+                    val = obj.toString().getBytes();
+                }
                 break;
             default: {
                 logErrorMessage("Plain type %s of %s.%s not supported", fd.getType().toString(), fd.getFullName(),
@@ -122,52 +159,56 @@ public class DataETProcessor extends DataDstJava {
         return val;
     }
 
-    @SuppressWarnings("unchecked")
-    private void FillMap2Msg(Descriptor msgDesc, HashMap<String, Object> src, DynamicMessage.Builder builder) throws ConvException {
+    /**
+     * @param msgDesc
+     * @param src Map<String, Object>，配置行按类型转换后的Map
+     * @param builder 要填充的Message对象
+     * @throws ConvException
+     */
+    private void fillMap2Message(Descriptor msgDesc, Object src, DynamicMessage.Builder builder) throws ConvException {
+        Map<?, ?> srcMap;
+        if (src instanceof Map<?, ?>) {
+            srcMap = (Map<?, ?>) src;
+        } else {
+            return;
+        }
         for (FieldDescriptor fd : msgDesc.getFields()) {
             try {
-                Object curValue = src.get(fd.getName());
-                if (curValue != null) {
-                    if (fd.getType() == Type.MESSAGE) {
-                        if (fd.isMapField()) {
-                            for (Map.Entry<String, Object> mapItem : ((SpecialInnerHashMap<String, Object>) curValue)
-                                    .entrySet()) {
-                                // Map类型是List<MapEntry>
-                                Descriptor mapKVDesc = fd.getMessageType();
-                                DynamicMessage.Builder pushMapItem = DynamicMessage.newBuilder(mapKVDesc);
-                                if (mapItem.getValue() instanceof Map) {
-                                    DynamicMessage.Builder subMsgBuild = DynamicMessage
-                                            .newBuilder(mapKVDesc.findFieldByName("value").getMessageType());
-                                    FillMap2Msg(mapKVDesc.findFieldByName("value").getMessageType(),
-                                            (HashMap<String, Object>) mapItem.getValue(), subMsgBuild);
-                                    pushMapItem.setField(mapKVDesc.findFieldByName("key"), mapItem.getKey());
-                                    pushMapItem.setField(mapKVDesc.findFieldByName("value"), subMsgBuild.build());
-                                } else {
-                                    pushMapItem.setField(mapKVDesc.findFieldByName("key"), mapItem.getKey());
-                                    pushMapItem.setField(mapKVDesc.findFieldByName("value"),
-                                            transformJava2Pb(mapKVDesc.findFieldByName("value"), mapItem.getValue()));
-                                }
-                                builder.addRepeatedField(fd, pushMapItem.build());
-                            }
-                        } else if (fd.isRepeated()) {
-                            for (Object arrItem : (ArrayList<?>) curValue) {
-                                DynamicMessage.Builder subMsgBuild = DynamicMessage.newBuilder(fd.getMessageType());
-                                FillMap2Msg(fd.getMessageType(), (HashMap<String, Object>) arrItem, subMsgBuild);
-                                builder.addRepeatedField(fd, subMsgBuild.build());
-                            }
+                Object curValue = srcMap.getOrDefault(fd.getName(), null);
+                if (curValue == null) continue;
+                if (fd.isMapField()) {
+                    for (Map.Entry<?, ?> mapItem : ((SpecialInnerHashMap<?, ?>) curValue).entrySet()) {
+                        // Map类型是List<MapEntry>，只能通过MapEntry.value类型判断是否为Message
+                        Descriptor mapKVDesc = fd.getMessageType();
+                        DynamicMessage.Builder pushMapItem = DynamicMessage.newBuilder(mapKVDesc);
+                        pushMapItem.setField(mapKVDesc.findFieldByName("key"), mapItem.getKey());
+                        var valueDesc = mapKVDesc.findFieldByName("value");
+                        if (valueDesc.getType() == Type.MESSAGE) {
+                            DynamicMessage.Builder subMsgBuild = DynamicMessage.newBuilder(valueDesc.getMessageType());
+                            fillMap2Message(valueDesc.getMessageType(), mapItem.getValue(), subMsgBuild);
+                            pushMapItem.setField(valueDesc, subMsgBuild.build());
                         } else {
+                            pushMapItem.setField(valueDesc, transformJava2Pb(valueDesc, mapItem.getValue()));
+                        }
+                        builder.addRepeatedField(fd, pushMapItem.build());
+                    }
+                } else if (fd.isRepeated()) {
+                    for (Object arrItem : (ArrayList<?>) curValue) {
+                        if (fd.getType() == Type.MESSAGE) {
                             DynamicMessage.Builder subMsgBuild = DynamicMessage.newBuilder(fd.getMessageType());
-                            FillMap2Msg(fd.getMessageType(), (HashMap<String, Object>) curValue, subMsgBuild);
-                            builder.setField(fd, subMsgBuild.build());
-                        }
-                    } else {
-                        if (fd.isRepeated()) {
-                            for (Object arrItem : (ArrayList<?>) curValue) {
-                                builder.addRepeatedField(fd, transformJava2Pb(fd, arrItem));
-                            }
+                            fillMap2Message(fd.getMessageType(), arrItem, subMsgBuild);
+                            builder.addRepeatedField(fd, subMsgBuild.build());
                         } else {
-                            builder.setField(fd, transformJava2Pb(fd, curValue));
+                            builder.addRepeatedField(fd, transformJava2Pb(fd, arrItem));
                         }
+                    }
+                } else {
+                    if (fd.getType() == Type.MESSAGE) {
+                        DynamicMessage.Builder subMsgBuild = DynamicMessage.newBuilder(fd.getMessageType());
+                        fillMap2Message(fd.getMessageType(), curValue, subMsgBuild);
+                        builder.setField(fd, subMsgBuild.build());
+                    } else {
+                        builder.setField(fd, transformJava2Pb(fd, curValue));
                     }
                 }
             } catch (Exception e) {
@@ -177,21 +218,27 @@ public class DataETProcessor extends DataDstJava {
         }
     }
 
-    public DynamicMessage.Builder dumpPbMsg(Descriptor currentMsgDesc, DataDstWriterNode node) throws ConvException {
+    public DynamicMessage.Builder dumpPbMessage(Descriptor currentMsgDesc, DataDstWriterNode node) throws ConvException {
         DynamicMessage.Builder builder = DynamicMessage.newBuilder(currentMsgDesc);
         HashMap<String, Object> msgMap = new HashMap<>();
-        if (dumpMapMsg(msgMap, node) == false) {
+        if (dumpMapMessage(msgMap, node) == false) {
             return null;
         }
-        FillMap2Msg(currentMsgDesc, msgMap, builder);
+        fillMap2Message(currentMsgDesc, msgMap, builder);
         return builder;
     }
 
-    public boolean dumpMapMsg(HashMap<String, Object> builder, DataDstWriterNode node) throws ConvException {
+    public boolean dumpMapMessage(HashMap<String, Object> builder, DataDstWriterNode node) throws ConvException {
         boolean dumpSucceed = dumpMessage(builder, node);
+        if(dumpSucceed == false) {
+            return dumpSucceed;
+        }
+        if (lastOutputFile != SchemeConf.getInstance().getOutputFileAbsPath()) {
+            lastOutputFile = SchemeConf.getInstance().getOutputFileAbsPath();
+            reset();
+        }
         if (lastDataSourceFile != DataSrcImpl.getOurInstance().getCurrentFileName()
                 || lastDataSourceTable != DataSrcImpl.getOurInstance().getCurrentTableName()) {
-            reset();
             initNextTable();
             lastDataSourceFile = DataSrcImpl.getOurInstance().getCurrentFileName();
             lastDataSourceTable = DataSrcImpl.getOurInstance().getCurrentTableName();

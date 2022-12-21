@@ -181,7 +181,8 @@ public class DataETProcessor extends DataDstJava {
                         // Map类型是List<MapEntry>，只能通过MapEntry.value类型判断是否为Message
                         Descriptor mapKVDesc = fd.getMessageType();
                         DynamicMessage.Builder pushMapItem = DynamicMessage.newBuilder(mapKVDesc);
-                        pushMapItem.setField(mapKVDesc.findFieldByName("key"), mapItem.getKey());
+                        var keyDesc = mapKVDesc.findFieldByName("key");
+                        pushMapItem.setField(keyDesc, transformJava2Pb(keyDesc, mapItem.getKey()));
                         var valueDesc = mapKVDesc.findFieldByName("value");
                         if (valueDesc.getType() == Type.MESSAGE) {
                             DynamicMessage.Builder subMsgBuild = DynamicMessage.newBuilder(valueDesc.getMessageType());

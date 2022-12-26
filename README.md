@@ -138,24 +138,25 @@ echo "
 
 ## 数据源描述表配置项及示例
 
-| 字段                  | 简介                                                               | 主配置              | 次配置          | 补充配置        | 说明                                                                                                                |
-| --------------------- | ------------------------------------------------------------------ | ------------------- | --------------- | --------------- | ------------------------------------------------------------------------------------------------------------------- |
-| DataSource            | 配置数据源(主配置:文件路径,次配置:表名,补充配置:起始行号，列号)    | ./资源转换示例.xlsx | kind            | 3,1             | **必须**，可多个。多个则表示把多个Excel表数据合并再生成配置输出，这意味着这多个Excel表的描述Key的顺序和个数必须相同 |
-| MacroSource           | 元数据数据源(主配置:文件路径,次配置:表名,补充配置:起始行号，列号)  | ./资源转换示例.xlsx | macro           | 2,1             | *可选*                                                                                                              |
+| 字段                  | 简介                                                              | 主配置              | 次配置          | 补充配置        | 说明                                                                                                                |
+| --------------------- | ----------------------------------------------------------------- | ------------------- | --------------- | --------------- | ------------------------------------------------------------------------------------------------------------------- |
+| DataSource            | 配置数据源(主配置:文件路径,次配置:表名,补充配置:起始行号，列号)   | ./资源转换示例.xlsx | kind            | 3,1             | **必须**，可多个。多个则表示把多个Excel表数据合并再生成配置输出，这意味着这多个Excel表的描述Key的顺序和个数必须相同 |
+| MacroSource           | 元数据数据源(主配置:文件路径,次配置:表名,补充配置:起始行号，列号) | ./资源转换示例.xlsx | macro           | 2,1             | *可选*                                                                                                              |
 | 编程接口配置          |
-| ProtoName             | 协议描述名称                                                       | role_cfg            |                 |                 | **必须**, 这个名字可以直接是类型名称[MessageName]，也可以是[PackageName].[MessageName]                              |
-| OutputFile            | 输出文件                                                           | role_cfg.bin        |                 |                 | **必须**                                                                                                            |
-| KeyRow                | 字段名描述行                                                       | 2                   |                 |                 | **必须**                                                                                                            |
-| KeyCase               | 字段名大小写                                                       | 小写                |                 |                 | 大写/小写/不变(大小写转换，如果不需要则留空或小写)                                                                  |
-| KeyWordSplit          | 字段名分词字符                                                     | _                   |                 |                 | *可选*,字段名映射时单词之间填充的字符串,不需要请留空                                                                |
-| KeyPrefix             | 字段名固定前缀                                                     |                     |                 |                 | *可选*,字段名映射时附加的前缀,不需要请留空                                                                          |
-| KeySuffix             | 字段名固定后缀                                                     |                     |                 |                 | *可选*,字段名映射时附加的后缀,不需要请留空                                                                          |
-| KeyWordRegex          | 分词规则(判断规则,移除分词符号规则,前缀过滤规则)                   | `[A-Z_\$ \t\r\n]`   | `[_\$ \t\r\n]`  | `[a-zA-Z_\$]`   | *(可选)*,字段名映射时单词的分词规则,正则表达式,不需要请留空                                                         |
-| Encoding              | 编码转换                                                           | UTF-8               |                 |                 | 注：Google的protobuf库的代码里写死了UTF-8，故而该选项对Protobuf的二进制输出无效                                     |
-| UeCfg-UProperty       | UnrealEngine配置支持的字段属性                                     | 字段分组            | 蓝图权限        | 编辑权限        | *可选*,默认值: XResConfig\|BlueprintReadOnly\|EditAnywhere                                                          |
-| UeCfg-CaseConvert     | 是否开启驼峰命名转换（默认开启）                                   | `true/false`        |                 |                 | *可选*,开启后将使用首字母大写的驼峰命名法生成字段名和类名                                                           |
-| UeCfg-CodeOutput      | 代码输出目录                                                       | 代码输出根目录      | Publich目录前缀 | Private目录前缀 | *可选*                                                                                                              |
-| UeCfg-DestinationPath | 资源输出目录（uassert目录，默认会根据代码输出目录猜测）            | 资源输出目录        |                 |                 | *可选*                                                                                                              |
+| ProtoName             | 协议描述名称                                                      | role_cfg            |                 |                 | **必须**, 这个名字可以直接是类型名称[MessageName]，也可以是[PackageName].[MessageName]                              |
+| OutputFile            | 输出文件                                                          | role_cfg.bin        |                 |                 | **必须**                                                                                                            |
+| KeyRow                | 字段名描述行                                                      | 2                   |                 |                 | **必须**                                                                                                            |
+| KeyCase               | 字段名大小写                                                      | 小写                |                 |                 | 大写/小写/不变(大小写转换，如果不需要则留空或小写)                                                                  |
+| KeyWordSplit          | 字段名分词字符                                                    | _                   |                 |                 | *可选*,字段名映射时单词之间填充的字符串,不需要请留空                                                                |
+| KeyPrefix             | 字段名固定前缀                                                    |                     |                 |                 | *可选*,字段名映射时附加的前缀,不需要请留空                                                                          |
+| KeySuffix             | 字段名固定后缀                                                    |                     |                 |                 | *可选*,字段名映射时附加的后缀,不需要请留空                                                                          |
+| KeyWordRegex          | 分词规则(判断规则,移除分词符号规则,前缀过滤规则)                  | `[A-Z_\$ \t\r\n]`   | `[_\$ \t\r\n]`  | `[a-zA-Z_\$]`   | *(可选)*,字段名映射时单词的分词规则,正则表达式,不需要请留空                                                         |
+| Encoding              | 编码转换                                                          | UTF-8               |                 |                 | 注：Google的protobuf库的代码里写死了UTF-8，故而该选项对Protobuf的二进制输出无效                                     |
+| UeCfg-UProperty       | UnrealEngine配置支持的字段属性                                    | 字段分组            | 蓝图权限        | 编辑权限        | *可选*,默认值: XResConfig\|BlueprintReadOnly\|EditAnywhere                                                          |
+| UeCfg-CaseConvert     | 是否开启驼峰命名转换（默认开启）                                  | `true/false`        |                 |                 | *可选*,开启后将使用首字母大写的驼峰命名法生成字段名和类名                                                           |
+| UeCfg-CodeOutput      | 代码输出目录                                                      | 代码输出根目录      | Publich目录前缀 | Private目录前缀 | *可选*                                                                                                              |
+| UeCfg-DestinationPath | 资源输出目录（uassert目录，默认会根据代码输出目录猜测）           | 资源输出目录        |                 |                 | *可选*                                                                                                              |
+| CallbackScript        | 使用Javascript脚本处理输出的数据                                  | Javascript脚本路径  |                 |                 | *可选*, （2.13.0版本开始支持）                                                                                      |
 
 ### 数据源描述的特别说明
 
@@ -177,6 +178,13 @@ echo "
   > + 补充配置（起始匹配符）：`[a-zA-Z_\$]` 是指，第一次碰到字母、下划线、$符号后才开始认为是字段名，前面的都视为无效字符
   >
 11. Encoding指明输出的字符串内容都是UTF-8编码。（目前最好只用UTF-8，因为protobuf里写死了UTF-8编码，其他编码不保证完全正常）
+12. CallbackScript指向的脚本中，需要满足已下条件:
+  + 可使用 `gOurInstance` 访问数据源接口（ `DataSrcImpl.getOurInstance()` ）
+  + 可使用 `gSchemeConf` 访问数据转换配置接口（ `SchemeConf.getInstance()` ）
+  + 提供 `function initDataSource()` 函数，将在切换数据源时触发（文件名或sheet名）。
+  + 提供 `function currentMessageCallback(originMsg, typeDesc)` 函数，将在切换数据源时触发（文件名或sheet名）。
+    + `originMsg` 为原始数据结构的 `HashMap` 结构
+    + `typeDesc` 为数据类型描述信息, `org.xresloader.core.data.dst.DataDstWriterNode.DataDstTypeDescriptor` 结构
 
 上面的配置中，数据从第3行读取，Key从第2行读取。那么第一行可以用来写一些说明或描述性数据。
 
@@ -283,20 +291,20 @@ Excel里的Key使用@后缀的字段名，@后面的部分都属于验证器。�
 | :------------------------------------: | :----------------------------------------------------------------------------------------: |
 |     org.xresloader.msg_description     |                        消息体描述信息，会写入输出的header中和代码中                        |
 | org.xresloader.msg_require_mapping_all |                            设置message的所有字段必须被全部映射                             |
-|      org.xresloader.msg_separator      | Plain模式字段分隔符，可指定多个，用于在一个单元格内配置复杂格式时的分隔符列表，默认值: `,;|` |
+|      org.xresloader.msg_separator      | Plain模式字段分隔符，可指定多个，用于在一个单元格内配置复杂格式时的分隔符列表，默认值: `,; | ` |
 |        org.xresloader.ue.helper        |                                生成UE Utility代码的类名后缀                                |
 
 #### Protobuf插件 - Field插件
 
 |             插件名称              |                                                    插件功能                                                    |
 | :-------------------------------: | :------------------------------------------------------------------------------------------------------------: |
-|      org.xresloader.verifier      |                             验证器，可填范围(log-high),message名，enum名。多个由 `|` 分隔。任意验证器通过检查则认为数据有效 |
+|      org.xresloader.verifier      |                             验证器，可填范围(log-high),message名，enum名。多个由 `                             | ` 分隔。任意验证器通过检查则认为数据有效 |
 | org.xresloader.field_description  |                                   字段描述信息，会写入输出的header中和代码中                                   |
 |    org.xresloader.field_alias     |                      字段别名，配合 **验证器** 功能，允许在数据源中直接填写别名来配置数据                      |
 |    org.xresloader.field_ratio     |             字段放大，用于比如配置百分率为 0.12，当 org.xresloader.field_ratio=100时转出的数据为12             |
-|  org.xresloader.field_separator   |             Plain模式分隔符，可指定多个，用于在一个单元格内配置复杂格式时的分隔符列表，默认值: `,;|`           |
+|  org.xresloader.field_separator   |             Plain模式分隔符，可指定多个，用于在一个单元格内配置复杂格式时的分隔符列表，默认值: `,;             | `                                        |
 |   org.xresloader.field_required   |                     设置字段为 **required** ，用于向proto3提供，proto2的 **required** 约束                     |
-| org.xresloader.field_origin_value |                              写出原始数据到指定字段（ `TImestamp` 和 `Duration` 类型）                         |
+| org.xresloader.field_origin_value |                           写出原始数据到指定字段（ `TImestamp` 和 `Duration` 类型）                            |
 |     org.xresloader.ue.key_tag     |                生成UE代码时，如果需要支持多个Key组合成一个Name，用这个字段指定系数（必须大于0）                |
 |   org.xresloader.ue.ueTypeName    | 生成UE代码时，如果指定了这个字段，那么生成的字段类型将是 `TSoftObjectPtr<ueTypeName>` , 并且支持蓝图中直接引用 |
 
@@ -312,7 +320,7 @@ Excel里的Key使用@后缀的字段名，@后面的部分都属于验证器。�
 |             插件名称             |                                               插件功能                                               |
 | :------------------------------: | :--------------------------------------------------------------------------------------------------: |
 | org.xresloader.oneof_description |                           oneof描述信息，可能会写入输出的header中和代码中                            |
-|  org.xresloader.oneof_separator  | Plain模式类型和值字段的分隔符，可指定多个，用于在一个单元格内配置复杂格式时的分隔符列表，默认值: `,;|` |
+|  org.xresloader.oneof_separator  | Plain模式类型和值字段的分隔符，可指定多个，用于在一个单元格内配置复杂格式时的分隔符列表，默认值: `,; | ` |
 
 ## 生态和工具
 

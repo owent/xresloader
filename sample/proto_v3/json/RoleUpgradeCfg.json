@@ -5,8 +5,7 @@
         "Id": 10001,
         "Level": 1,
         "Name": 10001001,
-        "ScoreAdd": 0,
-        "SrcID": 10001
+        "ScoreAdd": 0
     },
     {
         "CostType": 10001,
@@ -14,8 +13,7 @@
         "Id": 10001,
         "Level": 2,
         "Name": 10001002,
-        "ScoreAdd": 0,
-        "SrcID": 10002
+        "ScoreAdd": 0
     },
     {
         "CostType": 10001,
@@ -23,8 +21,7 @@
         "Id": 10001,
         "Level": 3,
         "Name": 10001003,
-        "ScoreAdd": 0,
-        "SrcID": 10003
+        "ScoreAdd": 0
     },
     {
         "CostType": 10001,
@@ -32,8 +29,7 @@
         "Id": 10001,
         "Level": 4,
         "Name": 10001004,
-        "ScoreAdd": 0,
-        "SrcID": 10004
+        "ScoreAdd": 0
     },
     {
         "CostType": 10001,
@@ -41,8 +37,7 @@
         "Id": 10001,
         "Level": 5,
         "Name": 10001005,
-        "ScoreAdd": 0,
-        "SrcID": 10005
+        "ScoreAdd": 0
     },
     {
         "CostType": 10001,
@@ -50,8 +45,7 @@
         "Id": 10001,
         "Level": 6,
         "Name": 10001006,
-        "ScoreAdd": 0,
-        "SrcID": 10006
+        "ScoreAdd": 0
     },
     {
         "CostType": 10001,
@@ -59,8 +53,7 @@
         "Id": 10001,
         "Level": 7,
         "Name": 10001007,
-        "ScoreAdd": 0,
-        "SrcID": 10007
+        "ScoreAdd": 0
     },
     {
         "CostType": 10001,
@@ -68,8 +61,7 @@
         "Id": 10001,
         "Level": 8,
         "Name": 10001008,
-        "ScoreAdd": 0,
-        "SrcID": 10008
+        "ScoreAdd": 0
     },
     {
         "CostType": 10001,
@@ -77,8 +69,7 @@
         "Id": 10001,
         "Level": 9,
         "Name": 10001009,
-        "ScoreAdd": 0,
-        "SrcID": 10009
+        "ScoreAdd": 0
     },
     {
         "CostType": 10001,
@@ -86,8 +77,7 @@
         "Id": 10001,
         "Level": 10,
         "Name": 10001010,
-        "ScoreAdd": 0,
-        "SrcID": 10010
+        "ScoreAdd": 0
     },
     {
         "CostType": 10001,
@@ -95,8 +85,7 @@
         "Id": 10001,
         "Level": 11,
         "Name": 10001011,
-        "ScoreAdd": 0,
-        "SrcID": 10011
+        "ScoreAdd": 0
     },
     {
         "CostType": 10001,
@@ -104,8 +93,7 @@
         "Id": 10001,
         "Level": 12,
         "Name": 10001012,
-        "ScoreAdd": 0,
-        "SrcID": 10012
+        "ScoreAdd": 0
     },
     {
         "CostType": 10001,
@@ -113,8 +101,7 @@
         "Id": 10001,
         "Level": 13,
         "Name": 10001013,
-        "ScoreAdd": 0,
-        "SrcID": 10013
+        "ScoreAdd": 0
     },
     {
         "CostType": 10001,
@@ -122,8 +109,7 @@
         "Id": 10001,
         "Level": 14,
         "Name": 10001014,
-        "ScoreAdd": 0,
-        "SrcID": 10014
+        "ScoreAdd": 0
     },
     {
         "CostType": 10001,
@@ -131,8 +117,7 @@
         "Id": 10001,
         "Level": 15,
         "Name": 10001015,
-        "ScoreAdd": 0,
-        "SrcID": 10015
+        "ScoreAdd": 0
     },
     {
         "CostType": 10001,
@@ -140,8 +125,7 @@
         "Id": 10001,
         "Level": 16,
         "Name": 10001016,
-        "ScoreAdd": 0,
-        "SrcID": 10016
+        "ScoreAdd": 0
     },
     {
         "CostType": 10001,
@@ -149,8 +133,7 @@
         "Id": 10001,
         "Level": 17,
         "Name": 10001017,
-        "ScoreAdd": 0,
-        "SrcID": 10017
+        "ScoreAdd": 0
     },
     {
         "CostType": 10001,
@@ -158,8 +141,7 @@
         "Id": 10001,
         "Level": 18,
         "Name": 10001018,
-        "ScoreAdd": 0,
-        "SrcID": 10018
+        "ScoreAdd": 0
     },
     {
         "CostType": 10001,
@@ -167,8 +149,7 @@
         "Id": 10001,
         "Level": 19,
         "Name": 10001019,
-        "ScoreAdd": 0,
-        "SrcID": 10019
+        "ScoreAdd": 0
     },
     {
         "CostType": 10001,
@@ -176,8 +157,7 @@
         "Id": 10001,
         "Level": 20,
         "Name": 10001020,
-        "ScoreAdd": 0,
-        "SrcID": 10020
+        "ScoreAdd": 0
     },
     {
         "CostType": 10001,
@@ -185,8 +165,7 @@
         "Id": 10001,
         "Level": 21,
         "Name": 10001021,
-        "ScoreAdd": 0,
-        "SrcID": 10021
+        "ScoreAdd": 0
     },
     {
         "CostType": 10001,
@@ -194,8 +173,7 @@
         "Id": 10001,
         "Level": 22,
         "Name": 10001022,
-        "ScoreAdd": 0,
-        "SrcID": 10022
+        "ScoreAdd": 0
     },
     {
         "CostType": 10001,
@@ -203,8 +181,7 @@
         "Id": 10001,
         "Level": 23,
         "Name": 10001023,
-        "ScoreAdd": 0,
-        "SrcID": 10023
+        "ScoreAdd": 0
     },
     {
         "CostType": 10001,
@@ -212,8 +189,7 @@
         "Id": 10001,
         "Level": 24,
         "Name": 10001024,
-        "ScoreAdd": 0,
-        "SrcID": 10024
+        "ScoreAdd": 0
     },
     {
         "CostType": 10001,
@@ -221,8 +197,7 @@
         "Id": 10001,
         "Level": 25,
         "Name": 10001025,
-        "ScoreAdd": 0,
-        "SrcID": 10025
+        "ScoreAdd": 0
     },
     {
         "CostType": 10001,
@@ -230,8 +205,7 @@
         "Id": 10001,
         "Level": 26,
         "Name": 10001026,
-        "ScoreAdd": 0,
-        "SrcID": 10026
+        "ScoreAdd": 0
     },
     {
         "CostType": 10001,
@@ -239,8 +213,7 @@
         "Id": 10001,
         "Level": 27,
         "Name": 10001027,
-        "ScoreAdd": 0,
-        "SrcID": 10027
+        "ScoreAdd": 0
     },
     {
         "CostType": 10001,
@@ -248,8 +221,7 @@
         "Id": 10001,
         "Level": 28,
         "Name": 10001028,
-        "ScoreAdd": 0,
-        "SrcID": 10028
+        "ScoreAdd": 0
     },
     {
         "CostType": 10001,
@@ -257,8 +229,7 @@
         "Id": 10001,
         "Level": 29,
         "Name": 10001029,
-        "ScoreAdd": 0,
-        "SrcID": 10029
+        "ScoreAdd": 0
     },
     {
         "CostType": 10001,
@@ -266,8 +237,7 @@
         "Id": 10001,
         "Level": 30,
         "Name": 10001030,
-        "ScoreAdd": 0,
-        "SrcID": 10030
+        "ScoreAdd": 0
     },
     {
         "CostType": 10001,
@@ -275,8 +245,7 @@
         "Id": 10001,
         "Level": 31,
         "Name": 10001031,
-        "ScoreAdd": 0,
-        "SrcID": 10031
+        "ScoreAdd": 0
     },
     {
         "CostType": 10001,
@@ -284,8 +253,7 @@
         "Id": 10001,
         "Level": 32,
         "Name": 10001032,
-        "ScoreAdd": 0,
-        "SrcID": 10032
+        "ScoreAdd": 0
     },
     {
         "CostType": 10001,
@@ -293,8 +261,7 @@
         "Id": 10001,
         "Level": 33,
         "Name": 10001033,
-        "ScoreAdd": 0,
-        "SrcID": 10033
+        "ScoreAdd": 0
     },
     {
         "CostType": 10001,
@@ -302,8 +269,7 @@
         "Id": 10001,
         "Level": 34,
         "Name": 10001034,
-        "ScoreAdd": 0,
-        "SrcID": 10034
+        "ScoreAdd": 0
     },
     {
         "CostType": 10001,
@@ -311,8 +277,7 @@
         "Id": 10001,
         "Level": 35,
         "Name": 10001035,
-        "ScoreAdd": 0,
-        "SrcID": 10035
+        "ScoreAdd": 0
     },
     {
         "CostType": 10001,
@@ -320,8 +285,7 @@
         "Id": 10001,
         "Level": 36,
         "Name": 10001036,
-        "ScoreAdd": 0,
-        "SrcID": 10036
+        "ScoreAdd": 0
     },
     {
         "CostType": 10001,
@@ -329,8 +293,7 @@
         "Id": 10001,
         "Level": 37,
         "Name": 10001037,
-        "ScoreAdd": 0,
-        "SrcID": 10037
+        "ScoreAdd": 0
     },
     {
         "CostType": 10001,
@@ -338,8 +301,7 @@
         "Id": 10001,
         "Level": 38,
         "Name": 10001038,
-        "ScoreAdd": 0,
-        "SrcID": 10038
+        "ScoreAdd": 0
     },
     {
         "CostType": 10001,
@@ -347,8 +309,7 @@
         "Id": 10001,
         "Level": 39,
         "Name": 10001039,
-        "ScoreAdd": 0,
-        "SrcID": 10039
+        "ScoreAdd": 0
     },
     {
         "CostType": 10001,
@@ -356,8 +317,7 @@
         "Id": 10001,
         "Level": 40,
         "Name": 10001040,
-        "ScoreAdd": 0,
-        "SrcID": 10040
+        "ScoreAdd": 0
     },
     {
         "CostType": -50,
@@ -365,8 +325,7 @@
         "Id": 10001,
         "Level": 41,
         "Name": 10001041,
-        "ScoreAdd": 0,
-        "SrcID": 10041
+        "ScoreAdd": 0
     },
     {
         "CostType": 20001,
@@ -374,8 +333,7 @@
         "Id": 10001,
         "Level": 42,
         "Name": 10001042,
-        "ScoreAdd": 0,
-        "SrcID": 10042
+        "ScoreAdd": 0
     },
     {
         "CostType": 0,
@@ -383,8 +341,7 @@
         "Id": 10002,
         "Level": 1,
         "Name": 10002001,
-        "ScoreAdd": 0,
-        "SrcID": 20001
+        "ScoreAdd": 0
     },
     {
         "CostType": 10001,
@@ -392,8 +349,7 @@
         "Id": 10002,
         "Level": 2,
         "Name": 10002002,
-        "ScoreAdd": 1,
-        "SrcID": 20002
+        "ScoreAdd": 1
     },
     {
         "CostType": 10001,
@@ -401,8 +357,7 @@
         "Id": 10002,
         "Level": 3,
         "Name": 10002003,
-        "ScoreAdd": 2,
-        "SrcID": 20003
+        "ScoreAdd": 2
     },
     {
         "CostType": 10001,
@@ -410,8 +365,7 @@
         "Id": 10002,
         "Level": 4,
         "Name": 10002004,
-        "ScoreAdd": 3,
-        "SrcID": 20004
+        "ScoreAdd": 3
     },
     {
         "CostType": 10001,
@@ -419,8 +373,7 @@
         "Id": 10002,
         "Level": 5,
         "Name": 10002005,
-        "ScoreAdd": 4,
-        "SrcID": 20005
+        "ScoreAdd": 4
     },
     {
         "CostType": 10001,
@@ -428,8 +381,7 @@
         "Id": 10002,
         "Level": 6,
         "Name": 10002006,
-        "ScoreAdd": 5,
-        "SrcID": 20006
+        "ScoreAdd": 5
     },
     {
         "CostType": 10001,
@@ -437,8 +389,7 @@
         "Id": 10002,
         "Level": 7,
         "Name": 10002007,
-        "ScoreAdd": 6,
-        "SrcID": 20007
+        "ScoreAdd": 6
     },
     {
         "CostType": 10001,
@@ -446,8 +397,7 @@
         "Id": 10002,
         "Level": 8,
         "Name": 10002008,
-        "ScoreAdd": 7,
-        "SrcID": 20008
+        "ScoreAdd": 7
     },
     {
         "CostType": 10001,
@@ -455,8 +405,7 @@
         "Id": 10002,
         "Level": 9,
         "Name": 10002009,
-        "ScoreAdd": 8,
-        "SrcID": 20009
+        "ScoreAdd": 8
     },
     {
         "CostType": 10001,
@@ -464,8 +413,7 @@
         "Id": 10002,
         "Level": 10,
         "Name": 10002010,
-        "ScoreAdd": 9,
-        "SrcID": 20010
+        "ScoreAdd": 9
     },
     {
         "CostType": 10001,
@@ -473,8 +421,7 @@
         "Id": 10002,
         "Level": 11,
         "Name": 10002011,
-        "ScoreAdd": 10,
-        "SrcID": 20011
+        "ScoreAdd": 10
     },
     {
         "CostType": 10001,
@@ -482,8 +429,7 @@
         "Id": 10002,
         "Level": 12,
         "Name": 10002012,
-        "ScoreAdd": 11,
-        "SrcID": 20012
+        "ScoreAdd": 11
     },
     {
         "CostType": 10001,
@@ -491,8 +437,7 @@
         "Id": 10002,
         "Level": 13,
         "Name": 10002013,
-        "ScoreAdd": 12,
-        "SrcID": 20013
+        "ScoreAdd": 12
     },
     {
         "CostType": 10001,
@@ -500,8 +445,7 @@
         "Id": 10002,
         "Level": 14,
         "Name": 10002014,
-        "ScoreAdd": 13,
-        "SrcID": 20014
+        "ScoreAdd": 13
     },
     {
         "CostType": 10001,
@@ -509,8 +453,7 @@
         "Id": 10002,
         "Level": 15,
         "Name": 10002015,
-        "ScoreAdd": 14,
-        "SrcID": 20015
+        "ScoreAdd": 14
     },
     {
         "CostType": 10001,
@@ -518,8 +461,7 @@
         "Id": 10002,
         "Level": 16,
         "Name": 10002016,
-        "ScoreAdd": 15,
-        "SrcID": 20016
+        "ScoreAdd": 15
     },
     {
         "CostType": 10001,
@@ -527,8 +469,7 @@
         "Id": 10002,
         "Level": 17,
         "Name": 10002017,
-        "ScoreAdd": 16,
-        "SrcID": 20017
+        "ScoreAdd": 16
     },
     {
         "CostType": 10001,
@@ -536,8 +477,7 @@
         "Id": 10002,
         "Level": 18,
         "Name": 10002018,
-        "ScoreAdd": 17,
-        "SrcID": 20018
+        "ScoreAdd": 17
     },
     {
         "CostType": 10001,
@@ -545,8 +485,7 @@
         "Id": 10002,
         "Level": 19,
         "Name": 10002019,
-        "ScoreAdd": 18,
-        "SrcID": 20019
+        "ScoreAdd": 18
     },
     {
         "CostType": 10001,
@@ -554,8 +493,7 @@
         "Id": 10002,
         "Level": 20,
         "Name": 10002020,
-        "ScoreAdd": 19,
-        "SrcID": 20020
+        "ScoreAdd": 19
     },
     {
         "CostType": 10101,
@@ -563,8 +501,7 @@
         "Id": 10002,
         "Level": 21,
         "Name": 10002021,
-        "ScoreAdd": 20,
-        "SrcID": 20021
+        "ScoreAdd": 20
     },
     {
         "CostType": 10101,
@@ -572,8 +509,7 @@
         "Id": 10002,
         "Level": 22,
         "Name": 10002022,
-        "ScoreAdd": 21,
-        "SrcID": 20022
+        "ScoreAdd": 21
     },
     {
         "CostType": 10101,
@@ -581,8 +517,7 @@
         "Id": 10002,
         "Level": 23,
         "Name": 10002023,
-        "ScoreAdd": 22,
-        "SrcID": 20023
+        "ScoreAdd": 22
     },
     {
         "CostType": 10101,
@@ -590,8 +525,7 @@
         "Id": 10002,
         "Level": 24,
         "Name": 10002024,
-        "ScoreAdd": 23,
-        "SrcID": 20024
+        "ScoreAdd": 23
     },
     {
         "CostType": 10101,
@@ -599,8 +533,7 @@
         "Id": 10002,
         "Level": 25,
         "Name": 10002025,
-        "ScoreAdd": 24,
-        "SrcID": 20025
+        "ScoreAdd": 24
     },
     {
         "CostType": 10101,
@@ -608,8 +541,7 @@
         "Id": 10002,
         "Level": 26,
         "Name": 10002026,
-        "ScoreAdd": 25,
-        "SrcID": 20026
+        "ScoreAdd": 25
     },
     {
         "CostType": 10101,
@@ -617,8 +549,7 @@
         "Id": 10002,
         "Level": 27,
         "Name": 10002027,
-        "ScoreAdd": 26,
-        "SrcID": 20027
+        "ScoreAdd": 26
     },
     {
         "CostType": 10101,
@@ -626,8 +557,7 @@
         "Id": 10002,
         "Level": 28,
         "Name": 10002028,
-        "ScoreAdd": 27,
-        "SrcID": 20028
+        "ScoreAdd": 27
     },
     {
         "CostType": 10101,
@@ -635,8 +565,7 @@
         "Id": 10002,
         "Level": 29,
         "Name": 10002029,
-        "ScoreAdd": 28,
-        "SrcID": 20029
+        "ScoreAdd": 28
     },
     {
         "CostType": 10101,
@@ -644,8 +573,7 @@
         "Id": 10002,
         "Level": 30,
         "Name": 10002030,
-        "ScoreAdd": 29,
-        "SrcID": 20030
+        "ScoreAdd": 29
     },
     {
         "CostType": 10101,
@@ -653,8 +581,7 @@
         "Id": 10002,
         "Level": 31,
         "Name": 10002031,
-        "ScoreAdd": 30,
-        "SrcID": 20031
+        "ScoreAdd": 30
     },
     {
         "CostType": 10101,
@@ -662,8 +589,7 @@
         "Id": 10002,
         "Level": 32,
         "Name": 10002032,
-        "ScoreAdd": 31,
-        "SrcID": 20032
+        "ScoreAdd": 31
     },
     {
         "CostType": 10101,
@@ -671,8 +597,7 @@
         "Id": 10002,
         "Level": 33,
         "Name": 10002033,
-        "ScoreAdd": 32,
-        "SrcID": 20033
+        "ScoreAdd": 32
     },
     {
         "CostType": 10101,
@@ -680,8 +605,7 @@
         "Id": 10002,
         "Level": 34,
         "Name": 10002034,
-        "ScoreAdd": 33,
-        "SrcID": 20034
+        "ScoreAdd": 33
     },
     {
         "CostType": 10101,
@@ -689,8 +613,7 @@
         "Id": 10002,
         "Level": 35,
         "Name": 10002035,
-        "ScoreAdd": 34,
-        "SrcID": 20035
+        "ScoreAdd": 34
     },
     {
         "CostType": 10101,
@@ -698,8 +621,7 @@
         "Id": 10002,
         "Level": 36,
         "Name": 10002036,
-        "ScoreAdd": 35,
-        "SrcID": 20036
+        "ScoreAdd": 35
     },
     {
         "CostType": 10101,
@@ -707,8 +629,7 @@
         "Id": 10002,
         "Level": 37,
         "Name": 10002037,
-        "ScoreAdd": 36,
-        "SrcID": 20037
+        "ScoreAdd": 36
     },
     {
         "CostType": 10001,
@@ -716,8 +637,7 @@
         "Id": 10002,
         "Level": 38,
         "Name": 10002038,
-        "ScoreAdd": 37,
-        "SrcID": 20038
+        "ScoreAdd": 37
     },
     {
         "CostType": 10001,
@@ -725,8 +645,7 @@
         "Id": 10002,
         "Level": 39,
         "Name": 10002039,
-        "ScoreAdd": 38,
-        "SrcID": 20039
+        "ScoreAdd": 38
     },
     {
         "CostType": 10001,
@@ -734,8 +653,7 @@
         "Id": 10002,
         "Level": 40,
         "Name": 10002040,
-        "ScoreAdd": 39,
-        "SrcID": 20040
+        "ScoreAdd": 39
     },
     {
         "CostType": 10001,
@@ -743,8 +661,7 @@
         "Id": 10002,
         "Level": 41,
         "Name": 10002041,
-        "ScoreAdd": 40,
-        "SrcID": 20041
+        "ScoreAdd": 40
     },
     {
         "CostType": 10001,
@@ -752,8 +669,7 @@
         "Id": 10002,
         "Level": 42,
         "Name": 10002042,
-        "ScoreAdd": 41,
-        "SrcID": 20042
+        "ScoreAdd": 41
     },
     {
         "CostType": 10001,
@@ -761,8 +677,7 @@
         "Id": 10002,
         "Level": 43,
         "Name": 10002043,
-        "ScoreAdd": 42,
-        "SrcID": 20043
+        "ScoreAdd": 42
     },
     {
         "CostType": 10001,
@@ -770,8 +685,7 @@
         "Id": 10002,
         "Level": 44,
         "Name": 10002044,
-        "ScoreAdd": 43,
-        "SrcID": 20044
+        "ScoreAdd": 43
     },
     {
         "CostType": 10001,
@@ -779,8 +693,7 @@
         "Id": 10002,
         "Level": 45,
         "Name": 10002045,
-        "ScoreAdd": 44,
-        "SrcID": 20045
+        "ScoreAdd": 44
     },
     {
         "CostType": 10001,
@@ -788,8 +701,7 @@
         "Id": 10002,
         "Level": 46,
         "Name": 10002046,
-        "ScoreAdd": 45,
-        "SrcID": 20046
+        "ScoreAdd": 45
     },
     {
         "CostType": 10001,
@@ -797,8 +709,7 @@
         "Id": 10002,
         "Level": 47,
         "Name": 10002047,
-        "ScoreAdd": 46,
-        "SrcID": 20047
+        "ScoreAdd": 46
     },
     {
         "CostType": 10001,
@@ -806,8 +717,7 @@
         "Id": 10002,
         "Level": 48,
         "Name": 10002048,
-        "ScoreAdd": 47,
-        "SrcID": 20048
+        "ScoreAdd": 47
     },
     {
         "CostType": 10001,
@@ -815,8 +725,7 @@
         "Id": 10002,
         "Level": 49,
         "Name": 10002049,
-        "ScoreAdd": 48,
-        "SrcID": 20049
+        "ScoreAdd": 48
     },
     {
         "CostType": 10001,
@@ -824,8 +733,7 @@
         "Id": 10002,
         "Level": 50,
         "Name": 10002050,
-        "ScoreAdd": 49,
-        "SrcID": 20050
+        "ScoreAdd": 49
     },
     {
         "CostType": 10001,
@@ -833,8 +741,7 @@
         "Id": 10002,
         "Level": 51,
         "Name": 10002051,
-        "ScoreAdd": 50,
-        "SrcID": 20051
+        "ScoreAdd": 50
     },
     {
         "CostType": 10001,
@@ -842,8 +749,7 @@
         "Id": 10002,
         "Level": 52,
         "Name": 10002052,
-        "ScoreAdd": 51,
-        "SrcID": 20052
+        "ScoreAdd": 51
     },
     {
         "CostType": 10001,
@@ -851,8 +757,7 @@
         "Id": 10002,
         "Level": 53,
         "Name": 10002053,
-        "ScoreAdd": 52,
-        "SrcID": 20053
+        "ScoreAdd": 52
     },
     {
         "CostType": 10001,
@@ -860,8 +765,7 @@
         "Id": 10002,
         "Level": 54,
         "Name": 10002054,
-        "ScoreAdd": 53,
-        "SrcID": 20054
+        "ScoreAdd": 53
     },
     {
         "CostType": 10001,
@@ -869,8 +773,7 @@
         "Id": 10002,
         "Level": 55,
         "Name": 10002055,
-        "ScoreAdd": 54,
-        "SrcID": 20055
+        "ScoreAdd": 54
     },
     {
         "CostType": 10001,
@@ -878,8 +781,7 @@
         "Id": 10002,
         "Level": 56,
         "Name": 10002056,
-        "ScoreAdd": 55,
-        "SrcID": 20056
+        "ScoreAdd": 55
     },
     {
         "CostType": 10001,
@@ -887,8 +789,7 @@
         "Id": 10002,
         "Level": 57,
         "Name": 10002057,
-        "ScoreAdd": 56,
-        "SrcID": 20057
+        "ScoreAdd": 56
     },
     {
         "CostType": 10001,
@@ -896,8 +797,7 @@
         "Id": 10002,
         "Level": 58,
         "Name": 10002058,
-        "ScoreAdd": 57,
-        "SrcID": 20058
+        "ScoreAdd": 57
     },
     {
         "CostType": 10001,
@@ -905,8 +805,7 @@
         "Id": 10002,
         "Level": 59,
         "Name": 10002059,
-        "ScoreAdd": 58,
-        "SrcID": 20059
+        "ScoreAdd": 58
     },
     {
         "CostType": 10001,
@@ -914,7 +813,6 @@
         "Id": 10002,
         "Level": 60,
         "Name": 10002060,
-        "ScoreAdd": 59,
-        "SrcID": 20060
+        "ScoreAdd": 59
     }
 ]

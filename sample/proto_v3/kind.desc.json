@@ -284,6 +284,22 @@
           "msg_description": "Test arr_in_arr_cfg"
         }
       },
+      "combine_id": {
+        "field": {
+          "id": {
+            "name": "id",
+            "number": 2,
+            "options": {"verifier": "0-99999"},
+            "type_name": "UINT32"
+          },
+          "prefix": {
+            "name": "prefix",
+            "number": 1,
+            "type_name": "UINT32"
+          }
+        },
+        "name": "combine_id"
+      },
       "event_cfg": {
         "field": {
           "enum_type": {
@@ -452,6 +468,137 @@
         "name": "keep_or_strip_empty_list_cfg",
         "options": {"helper": "helper"}
       },
+      "large_file_test": {
+        "field": {
+          "f32value": {
+            "name": "f32value",
+            "number": 5,
+            "type_name": "FLOAT"
+          },
+          "f64value": {
+            "name": "f64value",
+            "number": 4,
+            "type_name": "DOUBLE"
+          },
+          "i32value": {
+            "name": "i32value",
+            "number": 2,
+            "type_name": "INT32"
+          },
+          "id": {
+            "name": "id",
+            "number": 1,
+            "type_name": "UINT32"
+          },
+          "id_id": {
+            "name": "id_id",
+            "number": 7,
+            "type_name": "MESSAGE"
+          },
+          "szvalue": {
+            "name": "szvalue",
+            "number": 6,
+            "type_name": "STRING"
+          },
+          "u64value": {
+            "name": "u64value",
+            "number": 3,
+            "type_name": "UINT64"
+          }
+        },
+        "name": "large_file_test"
+      },
+      "process_by_script": {
+        "enum_type": {
+          "MapU32StringEntry": {
+            "field": {
+              "key": {
+                "name": "key",
+                "number": 1,
+                "type_name": "UINT32"
+              },
+              "value": {
+                "name": "value",
+                "number": 2,
+                "type_name": "STRING"
+              }
+            },
+            "name": "MapU32StringEntry",
+            "options": {"map_entry": true}
+          },
+          "TestMapIsEntry": {
+            "field": {
+              "key": {
+                "name": "key",
+                "number": 1,
+                "type_name": "INT32"
+              },
+              "value": {
+                "name": "value",
+                "number": 2,
+                "type_name": "STRING"
+              }
+            },
+            "name": "TestMapIsEntry",
+            "options": {"map_entry": true}
+          },
+          "TestMapSmEntry": {
+            "field": {
+              "key": {
+                "name": "key",
+                "number": 1,
+                "type_name": "STRING"
+              },
+              "value": {
+                "name": "value",
+                "number": 2,
+                "type_name": "MESSAGE"
+              }
+            },
+            "name": "TestMapSmEntry",
+            "options": {"map_entry": true}
+          }
+        },
+        "field": {
+          "date": {
+            "name": "date",
+            "number": 4,
+            "type_name": "MESSAGE"
+          },
+          "human_readable_date": {
+            "name": "human_readable_date",
+            "number": 3,
+            "type_name": "STRING"
+          },
+          "id": {
+            "name": "id",
+            "number": 1,
+            "type_name": "UINT32"
+          },
+          "id_id": {
+            "name": "id_id",
+            "number": 1001,
+            "type_name": "MESSAGE"
+          },
+          "map_u32_string": {
+            "name": "map_u32_string",
+            "number": 2,
+            "type_name": "MESSAGE"
+          },
+          "test_map_is": {
+            "name": "test_map_is",
+            "number": 7,
+            "type_name": "MESSAGE"
+          },
+          "test_map_sm": {
+            "name": "test_map_sm",
+            "number": 8,
+            "options": {"field_separator": "|"},
+            "type_name": "MESSAGE"
+          }
+        },
+        "name": "process_by_script"
+      },
       "role_cfg": {
         "field": {
           "convert_duration_arr": {
@@ -578,11 +725,6 @@
             "name": "ScoreAdd",
             "number": 5,
             "type_name": "INT32"
-          },
-          "SrcID": {
-            "name": "SrcID",
-            "number": 6,
-            "type_name": "UINT32"
           }
         },
         "name": "role_upgrade_cfg",

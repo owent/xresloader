@@ -6,7 +6,7 @@
 
     <groupId>org.xresloader</groupId>
     <artifactId>xresloader</artifactId>
-    <version>2.12.1-pracing</version>
+    <version>2.13.0</version>
     <packaging>jar</packaging>
     <name>xresloader</name>
 

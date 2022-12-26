@@ -102,6 +102,19 @@ local const_res = {
             msg_description = "Test arr_in_arr_cfg",
           },
         },
+        combine_id = {
+          field = {
+            id = {
+              name = "id",
+              number = 2,
+              options = {
+                verifier = "0-99999",
+              },
+              type_name = "UINT32",
+            },
+          },
+          name = "combine_id",
+        },
         event_cfg = {
           field = {
             enum_type = {
@@ -241,6 +254,39 @@ local const_res = {
           options = {
             helper = "helper",
           },
+        },
+        process_by_script = {
+          enum_type = {
+            MapU32StringEntry = {
+              name = "MapU32StringEntry",
+              options = {
+                map_entry = true,
+              },
+            },
+            TestMapIsEntry = {
+              name = "TestMapIsEntry",
+              options = {
+                map_entry = true,
+              },
+            },
+            TestMapSmEntry = {
+              name = "TestMapSmEntry",
+              options = {
+                map_entry = true,
+              },
+            },
+          },
+          field = {
+            test_map_sm = {
+              name = "test_map_sm",
+              number = 8,
+              options = {
+                field_separator = "|",
+              },
+              type_name = "MESSAGE",
+            },
+          },
+          name = "process_by_script",
         },
         role_cfg = {
           field = {

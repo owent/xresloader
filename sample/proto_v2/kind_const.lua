@@ -43,6 +43,8 @@ local const_res = {
     EN_GCC_SCREEN_WIDTH = 1136,
     EN_GCC_SOLDIER_TYPE_MASK = 100,
   },
+  process_by_script = {
+  },
 }
 
 

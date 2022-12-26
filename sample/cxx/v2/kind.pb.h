@@ -65,6 +65,9 @@ extern arr_in_arr_cfg_TestMapIsEntry_DoNotUseDefaultTypeInternal _arr_in_arr_cfg
 class arr_in_arr_cfg_TestMapSmEntry_DoNotUse;
 struct arr_in_arr_cfg_TestMapSmEntry_DoNotUseDefaultTypeInternal;
 extern arr_in_arr_cfg_TestMapSmEntry_DoNotUseDefaultTypeInternal _arr_in_arr_cfg_TestMapSmEntry_DoNotUse_default_instance_;
+class combine_id;
+struct combine_idDefaultTypeInternal;
+extern combine_idDefaultTypeInternal _combine_id_default_instance_;
 class event_cfg;
 struct event_cfgDefaultTypeInternal;
 extern event_cfgDefaultTypeInternal _event_cfg_default_instance_;
@@ -77,6 +80,21 @@ extern event_rule_itemDefaultTypeInternal _event_rule_item_default_instance_;
 class keep_or_strip_empty_list_cfg;
 struct keep_or_strip_empty_list_cfgDefaultTypeInternal;
 extern keep_or_strip_empty_list_cfgDefaultTypeInternal _keep_or_strip_empty_list_cfg_default_instance_;
+class large_file_test;
+struct large_file_testDefaultTypeInternal;
+extern large_file_testDefaultTypeInternal _large_file_test_default_instance_;
+class process_by_script;
+struct process_by_scriptDefaultTypeInternal;
+extern process_by_scriptDefaultTypeInternal _process_by_script_default_instance_;
+class process_by_script_MapU32StringEntry_DoNotUse;
+struct process_by_script_MapU32StringEntry_DoNotUseDefaultTypeInternal;
+extern process_by_script_MapU32StringEntry_DoNotUseDefaultTypeInternal _process_by_script_MapU32StringEntry_DoNotUse_default_instance_;
+class process_by_script_TestMapIsEntry_DoNotUse;
+struct process_by_script_TestMapIsEntry_DoNotUseDefaultTypeInternal;
+extern process_by_script_TestMapIsEntry_DoNotUseDefaultTypeInternal _process_by_script_TestMapIsEntry_DoNotUse_default_instance_;
+class process_by_script_TestMapSmEntry_DoNotUse;
+struct process_by_script_TestMapSmEntry_DoNotUseDefaultTypeInternal;
+extern process_by_script_TestMapSmEntry_DoNotUseDefaultTypeInternal _process_by_script_TestMapSmEntry_DoNotUse_default_instance_;
 class role_cfg;
 struct role_cfgDefaultTypeInternal;
 extern role_cfgDefaultTypeInternal _role_cfg_default_instance_;
@@ -91,10 +109,16 @@ template<> ::arr_in_arr* Arena::CreateMaybeMessage<::arr_in_arr>(Arena*);
 template<> ::arr_in_arr_cfg* Arena::CreateMaybeMessage<::arr_in_arr_cfg>(Arena*);
 template<> ::arr_in_arr_cfg_TestMapIsEntry_DoNotUse* Arena::CreateMaybeMessage<::arr_in_arr_cfg_TestMapIsEntry_DoNotUse>(Arena*);
 template<> ::arr_in_arr_cfg_TestMapSmEntry_DoNotUse* Arena::CreateMaybeMessage<::arr_in_arr_cfg_TestMapSmEntry_DoNotUse>(Arena*);
+template<> ::combine_id* Arena::CreateMaybeMessage<::combine_id>(Arena*);
 template<> ::event_cfg* Arena::CreateMaybeMessage<::event_cfg>(Arena*);
 template<> ::event_reward_item* Arena::CreateMaybeMessage<::event_reward_item>(Arena*);
 template<> ::event_rule_item* Arena::CreateMaybeMessage<::event_rule_item>(Arena*);
 template<> ::keep_or_strip_empty_list_cfg* Arena::CreateMaybeMessage<::keep_or_strip_empty_list_cfg>(Arena*);
+template<> ::large_file_test* Arena::CreateMaybeMessage<::large_file_test>(Arena*);
+template<> ::process_by_script* Arena::CreateMaybeMessage<::process_by_script>(Arena*);
+template<> ::process_by_script_MapU32StringEntry_DoNotUse* Arena::CreateMaybeMessage<::process_by_script_MapU32StringEntry_DoNotUse>(Arena*);
+template<> ::process_by_script_TestMapIsEntry_DoNotUse* Arena::CreateMaybeMessage<::process_by_script_TestMapIsEntry_DoNotUse>(Arena*);
+template<> ::process_by_script_TestMapSmEntry_DoNotUse* Arena::CreateMaybeMessage<::process_by_script_TestMapSmEntry_DoNotUse>(Arena*);
 template<> ::role_cfg* Arena::CreateMaybeMessage<::role_cfg>(Arena*);
 template<> ::role_upgrade_cfg* Arena::CreateMaybeMessage<::role_upgrade_cfg>(Arena*);
 template<> ::test_msg_verifier* Arena::CreateMaybeMessage<::test_msg_verifier>(Arena*);
@@ -717,7 +741,6 @@ class role_upgrade_cfg final :
     kCostValueFieldNumber = 4,
     kCostTypeFieldNumber = 3,
     kScoreAddFieldNumber = 5,
-    kSrcIDFieldNumber = 6,
   };
   // optional uint32 Id = 1 [(.org.xresloader.ue.key_tag) = 1000];
   bool has_id() const;
@@ -784,19 +807,6 @@ class role_upgrade_cfg final :
   void _internal_set_scoreadd(int32_t value);
   public:
 
-  // optional uint32 SrcID = 6;
-  bool has_srcid() const;
-  private:
-  bool _internal_has_srcid() const;
-  public:
-  void clear_srcid();
-  uint32_t srcid() const;
-  void set_srcid(uint32_t value);
-  private:
-  uint32_t _internal_srcid() const;
-  void _internal_set_srcid(uint32_t value);
-  public:
-
   // @@protoc_insertion_point(class_scope:role_upgrade_cfg)
  private:
   class _Internal;
@@ -812,7 +822,6 @@ class role_upgrade_cfg final :
     int64_t costvalue_;
     uint32_t costtype_;
     int32_t scoreadd_;
-    uint32_t srcid_;
   };
   union { Impl_ _impl_; };
   friend struct ::TableStruct_kind_2eproto;
@@ -2668,6 +2677,789 @@ class keep_or_strip_empty_list_cfg final :
   union { Impl_ _impl_; };
   friend struct ::TableStruct_kind_2eproto;
 };
+// -------------------------------------------------------------------
+
+class combine_id final :
+    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:combine_id) */ {
+ public:
+  inline combine_id() : combine_id(nullptr) {}
+  ~combine_id() override;
+  explicit PROTOBUF_CONSTEXPR combine_id(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized);
+
+  combine_id(const combine_id& from);
+  combine_id(combine_id&& from) noexcept
+    : combine_id() {
+    *this = ::std::move(from);
+  }
+
+  inline combine_id& operator=(const combine_id& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  inline combine_id& operator=(combine_id&& from) noexcept {
+    if (this == &from) return *this;
+    if (GetOwningArena() == from.GetOwningArena()
+  #ifdef PROTOBUF_FORCE_COPY_IN_MOVE
+        && GetOwningArena() != nullptr
+  #endif  // !PROTOBUF_FORCE_COPY_IN_MOVE
+    ) {
+      InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+
+  inline const ::PROTOBUF_NAMESPACE_ID::UnknownFieldSet& unknown_fields() const {
+    return _internal_metadata_.unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(::PROTOBUF_NAMESPACE_ID::UnknownFieldSet::default_instance);
+  }
+  inline ::PROTOBUF_NAMESPACE_ID::UnknownFieldSet* mutable_unknown_fields() {
+    return _internal_metadata_.mutable_unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
+  }
+
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* descriptor() {
+    return GetDescriptor();
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* GetDescriptor() {
+    return default_instance().GetMetadata().descriptor;
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Reflection* GetReflection() {
+    return default_instance().GetMetadata().reflection;
+  }
+  static const combine_id& default_instance() {
+    return *internal_default_instance();
+  }
+  static inline const combine_id* internal_default_instance() {
+    return reinterpret_cast<const combine_id*>(
+               &_combine_id_default_instance_);
+  }
+  static constexpr int kIndexInFileMessages =
+    11;
+
+  friend void swap(combine_id& a, combine_id& b) {
+    a.Swap(&b);
+  }
+  inline void Swap(combine_id* other) {
+    if (other == this) return;
+  #ifdef PROTOBUF_FORCE_COPY_IN_SWAP
+    if (GetOwningArena() != nullptr &&
+        GetOwningArena() == other->GetOwningArena()) {
+   #else  // PROTOBUF_FORCE_COPY_IN_SWAP
+    if (GetOwningArena() == other->GetOwningArena()) {
+  #endif  // !PROTOBUF_FORCE_COPY_IN_SWAP
+      InternalSwap(other);
+    } else {
+      ::PROTOBUF_NAMESPACE_ID::internal::GenericSwap(this, other);
+    }
+  }
+  void UnsafeArenaSwap(combine_id* other) {
+    if (other == this) return;
+    GOOGLE_DCHECK(GetOwningArena() == other->GetOwningArena());
+    InternalSwap(other);
+  }
+
+  // implements Message ----------------------------------------------
+
+  combine_id* New(::PROTOBUF_NAMESPACE_ID::Arena* arena = nullptr) const final {
+    return CreateMaybeMessage<combine_id>(arena);
+  }
+  using ::PROTOBUF_NAMESPACE_ID::Message::CopyFrom;
+  void CopyFrom(const combine_id& from);
+  using ::PROTOBUF_NAMESPACE_ID::Message::MergeFrom;
+  void MergeFrom( const combine_id& from) {
+    combine_id::MergeImpl(*this, from);
+  }
+  private:
+  static void MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg, const ::PROTOBUF_NAMESPACE_ID::Message& from_msg);
+  public:
+  PROTOBUF_ATTRIBUTE_REINITIALIZES void Clear() final;
+  bool IsInitialized() const final;
+
+  size_t ByteSizeLong() const final;
+  const char* _InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) final;
+  uint8_t* _InternalSerialize(
+      uint8_t* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const final;
+  int GetCachedSize() const final { return _impl_._cached_size_.Get(); }
+
+  private:
+  void SharedCtor(::PROTOBUF_NAMESPACE_ID::Arena* arena, bool is_message_owned);
+  void SharedDtor();
+  void SetCachedSize(int size) const final;
+  void InternalSwap(combine_id* other);
+
+  private:
+  friend class ::PROTOBUF_NAMESPACE_ID::internal::AnyMetadata;
+  static ::PROTOBUF_NAMESPACE_ID::StringPiece FullMessageName() {
+    return "combine_id";
+  }
+  protected:
+  explicit combine_id(::PROTOBUF_NAMESPACE_ID::Arena* arena,
+                       bool is_message_owned = false);
+  public:
+
+  static const ClassData _class_data_;
+  const ::PROTOBUF_NAMESPACE_ID::Message::ClassData*GetClassData() const final;
+
+  ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadata() const final;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  enum : int {
+    kPrefixFieldNumber = 1,
+    kIdFieldNumber = 2,
+  };
+  // optional uint32 prefix = 1;
+  bool has_prefix() const;
+  private:
+  bool _internal_has_prefix() const;
+  public:
+  void clear_prefix();
+  uint32_t prefix() const;
+  void set_prefix(uint32_t value);
+  private:
+  uint32_t _internal_prefix() const;
+  void _internal_set_prefix(uint32_t value);
+  public:
+
+  // optional uint32 id = 2 [(.org.xresloader.verifier) = "0-99999"];
+  bool has_id() const;
+  private:
+  bool _internal_has_id() const;
+  public:
+  void clear_id();
+  uint32_t id() const;
+  void set_id(uint32_t value);
+  private:
+  uint32_t _internal_id() const;
+  void _internal_set_id(uint32_t value);
+  public:
+
+  // @@protoc_insertion_point(class_scope:combine_id)
+ private:
+  class _Internal;
+
+  template <typename T> friend class ::PROTOBUF_NAMESPACE_ID::Arena::InternalHelper;
+  typedef void InternalArenaConstructable_;
+  typedef void DestructorSkippable_;
+  struct Impl_ {
+    ::PROTOBUF_NAMESPACE_ID::internal::HasBits<1> _has_bits_;
+    mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
+    uint32_t prefix_;
+    uint32_t id_;
+  };
+  union { Impl_ _impl_; };
+  friend struct ::TableStruct_kind_2eproto;
+};
+// -------------------------------------------------------------------
+
+class process_by_script_MapU32StringEntry_DoNotUse : public ::PROTOBUF_NAMESPACE_ID::internal::MapEntry<process_by_script_MapU32StringEntry_DoNotUse, 
+    uint32_t, std::string,
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::TYPE_UINT32,
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::TYPE_STRING> {
+public:
+  typedef ::PROTOBUF_NAMESPACE_ID::internal::MapEntry<process_by_script_MapU32StringEntry_DoNotUse, 
+    uint32_t, std::string,
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::TYPE_UINT32,
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::TYPE_STRING> SuperType;
+  process_by_script_MapU32StringEntry_DoNotUse();
+  explicit PROTOBUF_CONSTEXPR process_by_script_MapU32StringEntry_DoNotUse(
+      ::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized);
+  explicit process_by_script_MapU32StringEntry_DoNotUse(::PROTOBUF_NAMESPACE_ID::Arena* arena);
+  void MergeFrom(const process_by_script_MapU32StringEntry_DoNotUse& other);
+  static const process_by_script_MapU32StringEntry_DoNotUse* internal_default_instance() { return reinterpret_cast<const process_by_script_MapU32StringEntry_DoNotUse*>(&_process_by_script_MapU32StringEntry_DoNotUse_default_instance_); }
+  static bool ValidateKey(void*) { return true; }
+  static bool ValidateValue(std::string* s) {
+#ifndef NDEBUG
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
+       s->data(), static_cast<int>(s->size()), ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::PARSE, "process_by_script.MapU32StringEntry.value");
+#else
+    (void) s;
+#endif
+    return true;
+ }
+  using ::PROTOBUF_NAMESPACE_ID::Message::MergeFrom;
+  ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadata() const final;
+  friend struct ::TableStruct_kind_2eproto;
+};
+
+// -------------------------------------------------------------------
+
+class process_by_script_TestMapIsEntry_DoNotUse : public ::PROTOBUF_NAMESPACE_ID::internal::MapEntry<process_by_script_TestMapIsEntry_DoNotUse, 
+    int32_t, std::string,
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::TYPE_INT32,
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::TYPE_STRING> {
+public:
+  typedef ::PROTOBUF_NAMESPACE_ID::internal::MapEntry<process_by_script_TestMapIsEntry_DoNotUse, 
+    int32_t, std::string,
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::TYPE_INT32,
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::TYPE_STRING> SuperType;
+  process_by_script_TestMapIsEntry_DoNotUse();
+  explicit PROTOBUF_CONSTEXPR process_by_script_TestMapIsEntry_DoNotUse(
+      ::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized);
+  explicit process_by_script_TestMapIsEntry_DoNotUse(::PROTOBUF_NAMESPACE_ID::Arena* arena);
+  void MergeFrom(const process_by_script_TestMapIsEntry_DoNotUse& other);
+  static const process_by_script_TestMapIsEntry_DoNotUse* internal_default_instance() { return reinterpret_cast<const process_by_script_TestMapIsEntry_DoNotUse*>(&_process_by_script_TestMapIsEntry_DoNotUse_default_instance_); }
+  static bool ValidateKey(void*) { return true; }
+  static bool ValidateValue(std::string* s) {
+#ifndef NDEBUG
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
+       s->data(), static_cast<int>(s->size()), ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::PARSE, "process_by_script.TestMapIsEntry.value");
+#else
+    (void) s;
+#endif
+    return true;
+ }
+  using ::PROTOBUF_NAMESPACE_ID::Message::MergeFrom;
+  ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadata() const final;
+  friend struct ::TableStruct_kind_2eproto;
+};
+
+// -------------------------------------------------------------------
+
+class process_by_script_TestMapSmEntry_DoNotUse : public ::PROTOBUF_NAMESPACE_ID::internal::MapEntry<process_by_script_TestMapSmEntry_DoNotUse, 
+    std::string, ::dep2_cfg,
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::TYPE_STRING,
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::TYPE_MESSAGE> {
+public:
+  typedef ::PROTOBUF_NAMESPACE_ID::internal::MapEntry<process_by_script_TestMapSmEntry_DoNotUse, 
+    std::string, ::dep2_cfg,
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::TYPE_STRING,
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::TYPE_MESSAGE> SuperType;
+  process_by_script_TestMapSmEntry_DoNotUse();
+  explicit PROTOBUF_CONSTEXPR process_by_script_TestMapSmEntry_DoNotUse(
+      ::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized);
+  explicit process_by_script_TestMapSmEntry_DoNotUse(::PROTOBUF_NAMESPACE_ID::Arena* arena);
+  void MergeFrom(const process_by_script_TestMapSmEntry_DoNotUse& other);
+  static const process_by_script_TestMapSmEntry_DoNotUse* internal_default_instance() { return reinterpret_cast<const process_by_script_TestMapSmEntry_DoNotUse*>(&_process_by_script_TestMapSmEntry_DoNotUse_default_instance_); }
+  static bool ValidateKey(std::string* s) {
+#ifndef NDEBUG
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
+       s->data(), static_cast<int>(s->size()), ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::PARSE, "process_by_script.TestMapSmEntry.key");
+#else
+    (void) s;
+#endif
+    return true;
+ }
+  static bool ValidateValue(void*) { return true; }
+  using ::PROTOBUF_NAMESPACE_ID::Message::MergeFrom;
+  ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadata() const final;
+  friend struct ::TableStruct_kind_2eproto;
+};
+
+// -------------------------------------------------------------------
+
+class process_by_script final :
+    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:process_by_script) */ {
+ public:
+  inline process_by_script() : process_by_script(nullptr) {}
+  ~process_by_script() override;
+  explicit PROTOBUF_CONSTEXPR process_by_script(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized);
+
+  process_by_script(const process_by_script& from);
+  process_by_script(process_by_script&& from) noexcept
+    : process_by_script() {
+    *this = ::std::move(from);
+  }
+
+  inline process_by_script& operator=(const process_by_script& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  inline process_by_script& operator=(process_by_script&& from) noexcept {
+    if (this == &from) return *this;
+    if (GetOwningArena() == from.GetOwningArena()
+  #ifdef PROTOBUF_FORCE_COPY_IN_MOVE
+        && GetOwningArena() != nullptr
+  #endif  // !PROTOBUF_FORCE_COPY_IN_MOVE
+    ) {
+      InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+
+  inline const ::PROTOBUF_NAMESPACE_ID::UnknownFieldSet& unknown_fields() const {
+    return _internal_metadata_.unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(::PROTOBUF_NAMESPACE_ID::UnknownFieldSet::default_instance);
+  }
+  inline ::PROTOBUF_NAMESPACE_ID::UnknownFieldSet* mutable_unknown_fields() {
+    return _internal_metadata_.mutable_unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
+  }
+
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* descriptor() {
+    return GetDescriptor();
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* GetDescriptor() {
+    return default_instance().GetMetadata().descriptor;
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Reflection* GetReflection() {
+    return default_instance().GetMetadata().reflection;
+  }
+  static const process_by_script& default_instance() {
+    return *internal_default_instance();
+  }
+  static inline const process_by_script* internal_default_instance() {
+    return reinterpret_cast<const process_by_script*>(
+               &_process_by_script_default_instance_);
+  }
+  static constexpr int kIndexInFileMessages =
+    15;
+
+  friend void swap(process_by_script& a, process_by_script& b) {
+    a.Swap(&b);
+  }
+  inline void Swap(process_by_script* other) {
+    if (other == this) return;
+  #ifdef PROTOBUF_FORCE_COPY_IN_SWAP
+    if (GetOwningArena() != nullptr &&
+        GetOwningArena() == other->GetOwningArena()) {
+   #else  // PROTOBUF_FORCE_COPY_IN_SWAP
+    if (GetOwningArena() == other->GetOwningArena()) {
+  #endif  // !PROTOBUF_FORCE_COPY_IN_SWAP
+      InternalSwap(other);
+    } else {
+      ::PROTOBUF_NAMESPACE_ID::internal::GenericSwap(this, other);
+    }
+  }
+  void UnsafeArenaSwap(process_by_script* other) {
+    if (other == this) return;
+    GOOGLE_DCHECK(GetOwningArena() == other->GetOwningArena());
+    InternalSwap(other);
+  }
+
+  // implements Message ----------------------------------------------
+
+  process_by_script* New(::PROTOBUF_NAMESPACE_ID::Arena* arena = nullptr) const final {
+    return CreateMaybeMessage<process_by_script>(arena);
+  }
+  using ::PROTOBUF_NAMESPACE_ID::Message::CopyFrom;
+  void CopyFrom(const process_by_script& from);
+  using ::PROTOBUF_NAMESPACE_ID::Message::MergeFrom;
+  void MergeFrom( const process_by_script& from) {
+    process_by_script::MergeImpl(*this, from);
+  }
+  private:
+  static void MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg, const ::PROTOBUF_NAMESPACE_ID::Message& from_msg);
+  public:
+  PROTOBUF_ATTRIBUTE_REINITIALIZES void Clear() final;
+  bool IsInitialized() const final;
+
+  size_t ByteSizeLong() const final;
+  const char* _InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) final;
+  uint8_t* _InternalSerialize(
+      uint8_t* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const final;
+  int GetCachedSize() const final { return _impl_._cached_size_.Get(); }
+
+  private:
+  void SharedCtor(::PROTOBUF_NAMESPACE_ID::Arena* arena, bool is_message_owned);
+  void SharedDtor();
+  void SetCachedSize(int size) const final;
+  void InternalSwap(process_by_script* other);
+
+  private:
+  friend class ::PROTOBUF_NAMESPACE_ID::internal::AnyMetadata;
+  static ::PROTOBUF_NAMESPACE_ID::StringPiece FullMessageName() {
+    return "process_by_script";
+  }
+  protected:
+  explicit process_by_script(::PROTOBUF_NAMESPACE_ID::Arena* arena,
+                       bool is_message_owned = false);
+  private:
+  static void ArenaDtor(void* object);
+  public:
+
+  static const ClassData _class_data_;
+  const ::PROTOBUF_NAMESPACE_ID::Message::ClassData*GetClassData() const final;
+
+  ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadata() const final;
+
+  // nested types ----------------------------------------------------
+
+
+  // accessors -------------------------------------------------------
+
+  enum : int {
+    kMapU32StringFieldNumber = 2,
+    kTestMapIsFieldNumber = 7,
+    kTestMapSmFieldNumber = 8,
+    kIdIdFieldNumber = 1001,
+    kIdFieldNumber = 1,
+  };
+  // map<uint32, string> map_u32_string = 2;
+  int map_u32_string_size() const;
+  private:
+  int _internal_map_u32_string_size() const;
+  public:
+  void clear_map_u32_string();
+  private:
+  const ::PROTOBUF_NAMESPACE_ID::Map< uint32_t, std::string >&
+      _internal_map_u32_string() const;
+  ::PROTOBUF_NAMESPACE_ID::Map< uint32_t, std::string >*
+      _internal_mutable_map_u32_string();
+  public:
+  const ::PROTOBUF_NAMESPACE_ID::Map< uint32_t, std::string >&
+      map_u32_string() const;
+  ::PROTOBUF_NAMESPACE_ID::Map< uint32_t, std::string >*
+      mutable_map_u32_string();
+
+  // map<int32, string> test_map_is = 7;
+  int test_map_is_size() const;
+  private:
+  int _internal_test_map_is_size() const;
+  public:
+  void clear_test_map_is();
+  private:
+  const ::PROTOBUF_NAMESPACE_ID::Map< int32_t, std::string >&
+      _internal_test_map_is() const;
+  ::PROTOBUF_NAMESPACE_ID::Map< int32_t, std::string >*
+      _internal_mutable_test_map_is();
+  public:
+  const ::PROTOBUF_NAMESPACE_ID::Map< int32_t, std::string >&
+      test_map_is() const;
+  ::PROTOBUF_NAMESPACE_ID::Map< int32_t, std::string >*
+      mutable_test_map_is();
+
+  // map<string, .dep2_cfg> test_map_sm = 8 [(.org.xresloader.field_separator) = "|"];
+  int test_map_sm_size() const;
+  private:
+  int _internal_test_map_sm_size() const;
+  public:
+  void clear_test_map_sm();
+  private:
+  const ::PROTOBUF_NAMESPACE_ID::Map< std::string, ::dep2_cfg >&
+      _internal_test_map_sm() const;
+  ::PROTOBUF_NAMESPACE_ID::Map< std::string, ::dep2_cfg >*
+      _internal_mutable_test_map_sm();
+  public:
+  const ::PROTOBUF_NAMESPACE_ID::Map< std::string, ::dep2_cfg >&
+      test_map_sm() const;
+  ::PROTOBUF_NAMESPACE_ID::Map< std::string, ::dep2_cfg >*
+      mutable_test_map_sm();
+
+  // optional .combine_id id_id = 1001;
+  bool has_id_id() const;
+  private:
+  bool _internal_has_id_id() const;
+  public:
+  void clear_id_id();
+  const ::combine_id& id_id() const;
+  PROTOBUF_NODISCARD ::combine_id* release_id_id();
+  ::combine_id* mutable_id_id();
+  void set_allocated_id_id(::combine_id* id_id);
+  private:
+  const ::combine_id& _internal_id_id() const;
+  ::combine_id* _internal_mutable_id_id();
+  public:
+  void unsafe_arena_set_allocated_id_id(
+      ::combine_id* id_id);
+  ::combine_id* unsafe_arena_release_id_id();
+
+  // optional uint32 id = 1;
+  bool has_id() const;
+  private:
+  bool _internal_has_id() const;
+  public:
+  void clear_id();
+  uint32_t id() const;
+  void set_id(uint32_t value);
+  private:
+  uint32_t _internal_id() const;
+  void _internal_set_id(uint32_t value);
+  public:
+
+  // @@protoc_insertion_point(class_scope:process_by_script)
+ private:
+  class _Internal;
+
+  template <typename T> friend class ::PROTOBUF_NAMESPACE_ID::Arena::InternalHelper;
+  typedef void InternalArenaConstructable_;
+  typedef void DestructorSkippable_;
+  struct Impl_ {
+    ::PROTOBUF_NAMESPACE_ID::internal::HasBits<1> _has_bits_;
+    mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
+    ::PROTOBUF_NAMESPACE_ID::internal::MapField<
+        process_by_script_MapU32StringEntry_DoNotUse,
+        uint32_t, std::string,
+        ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::TYPE_UINT32,
+        ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::TYPE_STRING> map_u32_string_;
+    ::PROTOBUF_NAMESPACE_ID::internal::MapField<
+        process_by_script_TestMapIsEntry_DoNotUse,
+        int32_t, std::string,
+        ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::TYPE_INT32,
+        ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::TYPE_STRING> test_map_is_;
+    ::PROTOBUF_NAMESPACE_ID::internal::MapField<
+        process_by_script_TestMapSmEntry_DoNotUse,
+        std::string, ::dep2_cfg,
+        ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::TYPE_STRING,
+        ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::TYPE_MESSAGE> test_map_sm_;
+    ::combine_id* id_id_;
+    uint32_t id_;
+  };
+  union { Impl_ _impl_; };
+  friend struct ::TableStruct_kind_2eproto;
+};
+// -------------------------------------------------------------------
+
+class large_file_test final :
+    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:large_file_test) */ {
+ public:
+  inline large_file_test() : large_file_test(nullptr) {}
+  ~large_file_test() override;
+  explicit PROTOBUF_CONSTEXPR large_file_test(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized);
+
+  large_file_test(const large_file_test& from);
+  large_file_test(large_file_test&& from) noexcept
+    : large_file_test() {
+    *this = ::std::move(from);
+  }
+
+  inline large_file_test& operator=(const large_file_test& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  inline large_file_test& operator=(large_file_test&& from) noexcept {
+    if (this == &from) return *this;
+    if (GetOwningArena() == from.GetOwningArena()
+  #ifdef PROTOBUF_FORCE_COPY_IN_MOVE
+        && GetOwningArena() != nullptr
+  #endif  // !PROTOBUF_FORCE_COPY_IN_MOVE
+    ) {
+      InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+
+  inline const ::PROTOBUF_NAMESPACE_ID::UnknownFieldSet& unknown_fields() const {
+    return _internal_metadata_.unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(::PROTOBUF_NAMESPACE_ID::UnknownFieldSet::default_instance);
+  }
+  inline ::PROTOBUF_NAMESPACE_ID::UnknownFieldSet* mutable_unknown_fields() {
+    return _internal_metadata_.mutable_unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
+  }
+
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* descriptor() {
+    return GetDescriptor();
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* GetDescriptor() {
+    return default_instance().GetMetadata().descriptor;
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Reflection* GetReflection() {
+    return default_instance().GetMetadata().reflection;
+  }
+  static const large_file_test& default_instance() {
+    return *internal_default_instance();
+  }
+  static inline const large_file_test* internal_default_instance() {
+    return reinterpret_cast<const large_file_test*>(
+               &_large_file_test_default_instance_);
+  }
+  static constexpr int kIndexInFileMessages =
+    16;
+
+  friend void swap(large_file_test& a, large_file_test& b) {
+    a.Swap(&b);
+  }
+  inline void Swap(large_file_test* other) {
+    if (other == this) return;
+  #ifdef PROTOBUF_FORCE_COPY_IN_SWAP
+    if (GetOwningArena() != nullptr &&
+        GetOwningArena() == other->GetOwningArena()) {
+   #else  // PROTOBUF_FORCE_COPY_IN_SWAP
+    if (GetOwningArena() == other->GetOwningArena()) {
+  #endif  // !PROTOBUF_FORCE_COPY_IN_SWAP
+      InternalSwap(other);
+    } else {
+      ::PROTOBUF_NAMESPACE_ID::internal::GenericSwap(this, other);
+    }
+  }
+  void UnsafeArenaSwap(large_file_test* other) {
+    if (other == this) return;
+    GOOGLE_DCHECK(GetOwningArena() == other->GetOwningArena());
+    InternalSwap(other);
+  }
+
+  // implements Message ----------------------------------------------
+
+  large_file_test* New(::PROTOBUF_NAMESPACE_ID::Arena* arena = nullptr) const final {
+    return CreateMaybeMessage<large_file_test>(arena);
+  }
+  using ::PROTOBUF_NAMESPACE_ID::Message::CopyFrom;
+  void CopyFrom(const large_file_test& from);
+  using ::PROTOBUF_NAMESPACE_ID::Message::MergeFrom;
+  void MergeFrom( const large_file_test& from) {
+    large_file_test::MergeImpl(*this, from);
+  }
+  private:
+  static void MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg, const ::PROTOBUF_NAMESPACE_ID::Message& from_msg);
+  public:
+  PROTOBUF_ATTRIBUTE_REINITIALIZES void Clear() final;
+  bool IsInitialized() const final;
+
+  size_t ByteSizeLong() const final;
+  const char* _InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) final;
+  uint8_t* _InternalSerialize(
+      uint8_t* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const final;
+  int GetCachedSize() const final { return _impl_._cached_size_.Get(); }
+
+  private:
+  void SharedCtor(::PROTOBUF_NAMESPACE_ID::Arena* arena, bool is_message_owned);
+  void SharedDtor();
+  void SetCachedSize(int size) const final;
+  void InternalSwap(large_file_test* other);
+
+  private:
+  friend class ::PROTOBUF_NAMESPACE_ID::internal::AnyMetadata;
+  static ::PROTOBUF_NAMESPACE_ID::StringPiece FullMessageName() {
+    return "large_file_test";
+  }
+  protected:
+  explicit large_file_test(::PROTOBUF_NAMESPACE_ID::Arena* arena,
+                       bool is_message_owned = false);
+  public:
+
+  static const ClassData _class_data_;
+  const ::PROTOBUF_NAMESPACE_ID::Message::ClassData*GetClassData() const final;
+
+  ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadata() const final;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  enum : int {
+    kSzvalueFieldNumber = 6,
+    kIdIdFieldNumber = 7,
+    kIdFieldNumber = 1,
+    kI32ValueFieldNumber = 2,
+    kU64ValueFieldNumber = 3,
+    kF64ValueFieldNumber = 4,
+    kF32ValueFieldNumber = 5,
+  };
+  // optional string szvalue = 6;
+  bool has_szvalue() const;
+  private:
+  bool _internal_has_szvalue() const;
+  public:
+  void clear_szvalue();
+  const std::string& szvalue() const;
+  template <typename ArgT0 = const std::string&, typename... ArgT>
+  void set_szvalue(ArgT0&& arg0, ArgT... args);
+  std::string* mutable_szvalue();
+  PROTOBUF_NODISCARD std::string* release_szvalue();
+  void set_allocated_szvalue(std::string* szvalue);
+  private:
+  const std::string& _internal_szvalue() const;
+  inline PROTOBUF_ALWAYS_INLINE void _internal_set_szvalue(const std::string& value);
+  std::string* _internal_mutable_szvalue();
+  public:
+
+  // optional .combine_id id_id = 7;
+  bool has_id_id() const;
+  private:
+  bool _internal_has_id_id() const;
+  public:
+  void clear_id_id();
+  const ::combine_id& id_id() const;
+  PROTOBUF_NODISCARD ::combine_id* release_id_id();
+  ::combine_id* mutable_id_id();
+  void set_allocated_id_id(::combine_id* id_id);
+  private:
+  const ::combine_id& _internal_id_id() const;
+  ::combine_id* _internal_mutable_id_id();
+  public:
+  void unsafe_arena_set_allocated_id_id(
+      ::combine_id* id_id);
+  ::combine_id* unsafe_arena_release_id_id();
+
+  // optional uint32 id = 1;
+  bool has_id() const;
+  private:
+  bool _internal_has_id() const;
+  public:
+  void clear_id();
+  uint32_t id() const;
+  void set_id(uint32_t value);
+  private:
+  uint32_t _internal_id() const;
+  void _internal_set_id(uint32_t value);
+  public:
+
+  // optional int32 i32value = 2;
+  bool has_i32value() const;
+  private:
+  bool _internal_has_i32value() const;
+  public:
+  void clear_i32value();
+  int32_t i32value() const;
+  void set_i32value(int32_t value);
+  private:
+  int32_t _internal_i32value() const;
+  void _internal_set_i32value(int32_t value);
+  public:
+
+  // optional uint64 u64value = 3;
+  bool has_u64value() const;
+  private:
+  bool _internal_has_u64value() const;
+  public:
+  void clear_u64value();
+  uint64_t u64value() const;
+  void set_u64value(uint64_t value);
+  private:
+  uint64_t _internal_u64value() const;
+  void _internal_set_u64value(uint64_t value);
+  public:
+
+  // optional double f64value = 4;
+  bool has_f64value() const;
+  private:
+  bool _internal_has_f64value() const;
+  public:
+  void clear_f64value();
+  double f64value() const;
+  void set_f64value(double value);
+  private:
+  double _internal_f64value() const;
+  void _internal_set_f64value(double value);
+  public:
+
+  // optional float f32value = 5;
+  bool has_f32value() const;
+  private:
+  bool _internal_has_f32value() const;
+  public:
+  void clear_f32value();
+  float f32value() const;
+  void set_f32value(float value);
+  private:
+  float _internal_f32value() const;
+  void _internal_set_f32value(float value);
+  public:
+
+  // @@protoc_insertion_point(class_scope:large_file_test)
+ private:
+  class _Internal;
+
+  template <typename T> friend class ::PROTOBUF_NAMESPACE_ID::Arena::InternalHelper;
+  typedef void InternalArenaConstructable_;
+  typedef void DestructorSkippable_;
+  struct Impl_ {
+    ::PROTOBUF_NAMESPACE_ID::internal::HasBits<1> _has_bits_;
+    mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
+    ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr szvalue_;
+    ::combine_id* id_id_;
+    uint32_t id_;
+    int32_t i32value_;
+    uint64_t u64value_;
+    double f64value_;
+    float f32value_;
+  };
+  union { Impl_ _impl_; };
+  friend struct ::TableStruct_kind_2eproto;
+};
 // ===================================================================
 
 
@@ -3810,34 +4602,6 @@ inline void role_upgrade_cfg::_internal_set_scoreadd(int32_t value) {
 inline void role_upgrade_cfg::set_scoreadd(int32_t value) {
   _internal_set_scoreadd(value);
   // @@protoc_insertion_point(field_set:role_upgrade_cfg.ScoreAdd)
-}
-
-// optional uint32 SrcID = 6;
-inline bool role_upgrade_cfg::_internal_has_srcid() const {
-  bool value = (_impl_._has_bits_[0] & 0x00000020u) != 0;
-  return value;
-}
-inline bool role_upgrade_cfg::has_srcid() const {
-  return _internal_has_srcid();
-}
-inline void role_upgrade_cfg::clear_srcid() {
-  _impl_.srcid_ = 0u;
-  _impl_._has_bits_[0] &= ~0x00000020u;
-}
-inline uint32_t role_upgrade_cfg::_internal_srcid() const {
-  return _impl_.srcid_;
-}
-inline uint32_t role_upgrade_cfg::srcid() const {
-  // @@protoc_insertion_point(field_get:role_upgrade_cfg.SrcID)
-  return _internal_srcid();
-}
-inline void role_upgrade_cfg::_internal_set_srcid(uint32_t value) {
-  _impl_._has_bits_[0] |= 0x00000020u;
-  _impl_.srcid_ = value;
-}
-inline void role_upgrade_cfg::set_srcid(uint32_t value) {
-  _internal_set_srcid(value);
-  // @@protoc_insertion_point(field_set:role_upgrade_cfg.SrcID)
 }
 
 // -------------------------------------------------------------------
@@ -5621,9 +6385,595 @@ keep_or_strip_empty_list_cfg::mutable_array_int64() {
   return _internal_mutable_array_int64();
 }
 
+// -------------------------------------------------------------------
+
+// combine_id
+
+// optional uint32 prefix = 1;
+inline bool combine_id::_internal_has_prefix() const {
+  bool value = (_impl_._has_bits_[0] & 0x00000001u) != 0;
+  return value;
+}
+inline bool combine_id::has_prefix() const {
+  return _internal_has_prefix();
+}
+inline void combine_id::clear_prefix() {
+  _impl_.prefix_ = 0u;
+  _impl_._has_bits_[0] &= ~0x00000001u;
+}
+inline uint32_t combine_id::_internal_prefix() const {
+  return _impl_.prefix_;
+}
+inline uint32_t combine_id::prefix() const {
+  // @@protoc_insertion_point(field_get:combine_id.prefix)
+  return _internal_prefix();
+}
+inline void combine_id::_internal_set_prefix(uint32_t value) {
+  _impl_._has_bits_[0] |= 0x00000001u;
+  _impl_.prefix_ = value;
+}
+inline void combine_id::set_prefix(uint32_t value) {
+  _internal_set_prefix(value);
+  // @@protoc_insertion_point(field_set:combine_id.prefix)
+}
+
+// optional uint32 id = 2 [(.org.xresloader.verifier) = "0-99999"];
+inline bool combine_id::_internal_has_id() const {
+  bool value = (_impl_._has_bits_[0] & 0x00000002u) != 0;
+  return value;
+}
+inline bool combine_id::has_id() const {
+  return _internal_has_id();
+}
+inline void combine_id::clear_id() {
+  _impl_.id_ = 0u;
+  _impl_._has_bits_[0] &= ~0x00000002u;
+}
+inline uint32_t combine_id::_internal_id() const {
+  return _impl_.id_;
+}
+inline uint32_t combine_id::id() const {
+  // @@protoc_insertion_point(field_get:combine_id.id)
+  return _internal_id();
+}
+inline void combine_id::_internal_set_id(uint32_t value) {
+  _impl_._has_bits_[0] |= 0x00000002u;
+  _impl_.id_ = value;
+}
+inline void combine_id::set_id(uint32_t value) {
+  _internal_set_id(value);
+  // @@protoc_insertion_point(field_set:combine_id.id)
+}
+
+// -------------------------------------------------------------------
+
+// -------------------------------------------------------------------
+
+// -------------------------------------------------------------------
+
+// -------------------------------------------------------------------
+
+// process_by_script
+
+// optional uint32 id = 1;
+inline bool process_by_script::_internal_has_id() const {
+  bool value = (_impl_._has_bits_[0] & 0x00000002u) != 0;
+  return value;
+}
+inline bool process_by_script::has_id() const {
+  return _internal_has_id();
+}
+inline void process_by_script::clear_id() {
+  _impl_.id_ = 0u;
+  _impl_._has_bits_[0] &= ~0x00000002u;
+}
+inline uint32_t process_by_script::_internal_id() const {
+  return _impl_.id_;
+}
+inline uint32_t process_by_script::id() const {
+  // @@protoc_insertion_point(field_get:process_by_script.id)
+  return _internal_id();
+}
+inline void process_by_script::_internal_set_id(uint32_t value) {
+  _impl_._has_bits_[0] |= 0x00000002u;
+  _impl_.id_ = value;
+}
+inline void process_by_script::set_id(uint32_t value) {
+  _internal_set_id(value);
+  // @@protoc_insertion_point(field_set:process_by_script.id)
+}
+
+// map<uint32, string> map_u32_string = 2;
+inline int process_by_script::_internal_map_u32_string_size() const {
+  return _impl_.map_u32_string_.size();
+}
+inline int process_by_script::map_u32_string_size() const {
+  return _internal_map_u32_string_size();
+}
+inline void process_by_script::clear_map_u32_string() {
+  _impl_.map_u32_string_.Clear();
+}
+inline const ::PROTOBUF_NAMESPACE_ID::Map< uint32_t, std::string >&
+process_by_script::_internal_map_u32_string() const {
+  return _impl_.map_u32_string_.GetMap();
+}
+inline const ::PROTOBUF_NAMESPACE_ID::Map< uint32_t, std::string >&
+process_by_script::map_u32_string() const {
+  // @@protoc_insertion_point(field_map:process_by_script.map_u32_string)
+  return _internal_map_u32_string();
+}
+inline ::PROTOBUF_NAMESPACE_ID::Map< uint32_t, std::string >*
+process_by_script::_internal_mutable_map_u32_string() {
+  return _impl_.map_u32_string_.MutableMap();
+}
+inline ::PROTOBUF_NAMESPACE_ID::Map< uint32_t, std::string >*
+process_by_script::mutable_map_u32_string() {
+  // @@protoc_insertion_point(field_mutable_map:process_by_script.map_u32_string)
+  return _internal_mutable_map_u32_string();
+}
+
+// map<int32, string> test_map_is = 7;
+inline int process_by_script::_internal_test_map_is_size() const {
+  return _impl_.test_map_is_.size();
+}
+inline int process_by_script::test_map_is_size() const {
+  return _internal_test_map_is_size();
+}
+inline void process_by_script::clear_test_map_is() {
+  _impl_.test_map_is_.Clear();
+}
+inline const ::PROTOBUF_NAMESPACE_ID::Map< int32_t, std::string >&
+process_by_script::_internal_test_map_is() const {
+  return _impl_.test_map_is_.GetMap();
+}
+inline const ::PROTOBUF_NAMESPACE_ID::Map< int32_t, std::string >&
+process_by_script::test_map_is() const {
+  // @@protoc_insertion_point(field_map:process_by_script.test_map_is)
+  return _internal_test_map_is();
+}
+inline ::PROTOBUF_NAMESPACE_ID::Map< int32_t, std::string >*
+process_by_script::_internal_mutable_test_map_is() {
+  return _impl_.test_map_is_.MutableMap();
+}
+inline ::PROTOBUF_NAMESPACE_ID::Map< int32_t, std::string >*
+process_by_script::mutable_test_map_is() {
+  // @@protoc_insertion_point(field_mutable_map:process_by_script.test_map_is)
+  return _internal_mutable_test_map_is();
+}
+
+// map<string, .dep2_cfg> test_map_sm = 8 [(.org.xresloader.field_separator) = "|"];
+inline int process_by_script::_internal_test_map_sm_size() const {
+  return _impl_.test_map_sm_.size();
+}
+inline int process_by_script::test_map_sm_size() const {
+  return _internal_test_map_sm_size();
+}
+inline const ::PROTOBUF_NAMESPACE_ID::Map< std::string, ::dep2_cfg >&
+process_by_script::_internal_test_map_sm() const {
+  return _impl_.test_map_sm_.GetMap();
+}
+inline const ::PROTOBUF_NAMESPACE_ID::Map< std::string, ::dep2_cfg >&
+process_by_script::test_map_sm() const {
+  // @@protoc_insertion_point(field_map:process_by_script.test_map_sm)
+  return _internal_test_map_sm();
+}
+inline ::PROTOBUF_NAMESPACE_ID::Map< std::string, ::dep2_cfg >*
+process_by_script::_internal_mutable_test_map_sm() {
+  return _impl_.test_map_sm_.MutableMap();
+}
+inline ::PROTOBUF_NAMESPACE_ID::Map< std::string, ::dep2_cfg >*
+process_by_script::mutable_test_map_sm() {
+  // @@protoc_insertion_point(field_mutable_map:process_by_script.test_map_sm)
+  return _internal_mutable_test_map_sm();
+}
+
+// optional .combine_id id_id = 1001;
+inline bool process_by_script::_internal_has_id_id() const {
+  bool value = (_impl_._has_bits_[0] & 0x00000001u) != 0;
+  PROTOBUF_ASSUME(!value || _impl_.id_id_ != nullptr);
+  return value;
+}
+inline bool process_by_script::has_id_id() const {
+  return _internal_has_id_id();
+}
+inline void process_by_script::clear_id_id() {
+  if (_impl_.id_id_ != nullptr) _impl_.id_id_->Clear();
+  _impl_._has_bits_[0] &= ~0x00000001u;
+}
+inline const ::combine_id& process_by_script::_internal_id_id() const {
+  const ::combine_id* p = _impl_.id_id_;
+  return p != nullptr ? *p : reinterpret_cast<const ::combine_id&>(
+      ::_combine_id_default_instance_);
+}
+inline const ::combine_id& process_by_script::id_id() const {
+  // @@protoc_insertion_point(field_get:process_by_script.id_id)
+  return _internal_id_id();
+}
+inline void process_by_script::unsafe_arena_set_allocated_id_id(
+    ::combine_id* id_id) {
+  if (GetArenaForAllocation() == nullptr) {
+    delete reinterpret_cast<::PROTOBUF_NAMESPACE_ID::MessageLite*>(_impl_.id_id_);
+  }
+  _impl_.id_id_ = id_id;
+  if (id_id) {
+    _impl_._has_bits_[0] |= 0x00000001u;
+  } else {
+    _impl_._has_bits_[0] &= ~0x00000001u;
+  }
+  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:process_by_script.id_id)
+}
+inline ::combine_id* process_by_script::release_id_id() {
+  _impl_._has_bits_[0] &= ~0x00000001u;
+  ::combine_id* temp = _impl_.id_id_;
+  _impl_.id_id_ = nullptr;
+#ifdef PROTOBUF_FORCE_COPY_IN_RELEASE
+  auto* old =  reinterpret_cast<::PROTOBUF_NAMESPACE_ID::MessageLite*>(temp);
+  temp = ::PROTOBUF_NAMESPACE_ID::internal::DuplicateIfNonNull(temp);
+  if (GetArenaForAllocation() == nullptr) { delete old; }
+#else  // PROTOBUF_FORCE_COPY_IN_RELEASE
+  if (GetArenaForAllocation() != nullptr) {
+    temp = ::PROTOBUF_NAMESPACE_ID::internal::DuplicateIfNonNull(temp);
+  }
+#endif  // !PROTOBUF_FORCE_COPY_IN_RELEASE
+  return temp;
+}
+inline ::combine_id* process_by_script::unsafe_arena_release_id_id() {
+  // @@protoc_insertion_point(field_release:process_by_script.id_id)
+  _impl_._has_bits_[0] &= ~0x00000001u;
+  ::combine_id* temp = _impl_.id_id_;
+  _impl_.id_id_ = nullptr;
+  return temp;
+}
+inline ::combine_id* process_by_script::_internal_mutable_id_id() {
+  _impl_._has_bits_[0] |= 0x00000001u;
+  if (_impl_.id_id_ == nullptr) {
+    auto* p = CreateMaybeMessage<::combine_id>(GetArenaForAllocation());
+    _impl_.id_id_ = p;
+  }
+  return _impl_.id_id_;
+}
+inline ::combine_id* process_by_script::mutable_id_id() {
+  ::combine_id* _msg = _internal_mutable_id_id();
+  // @@protoc_insertion_point(field_mutable:process_by_script.id_id)
+  return _msg;
+}
+inline void process_by_script::set_allocated_id_id(::combine_id* id_id) {
+  ::PROTOBUF_NAMESPACE_ID::Arena* message_arena = GetArenaForAllocation();
+  if (message_arena == nullptr) {
+    delete _impl_.id_id_;
+  }
+  if (id_id) {
+    ::PROTOBUF_NAMESPACE_ID::Arena* submessage_arena =
+        ::PROTOBUF_NAMESPACE_ID::Arena::InternalGetOwningArena(id_id);
+    if (message_arena != submessage_arena) {
+      id_id = ::PROTOBUF_NAMESPACE_ID::internal::GetOwnedMessage(
+          message_arena, id_id, submessage_arena);
+    }
+    _impl_._has_bits_[0] |= 0x00000001u;
+  } else {
+    _impl_._has_bits_[0] &= ~0x00000001u;
+  }
+  _impl_.id_id_ = id_id;
+  // @@protoc_insertion_point(field_set_allocated:process_by_script.id_id)
+}
+
+// -------------------------------------------------------------------
+
+// large_file_test
+
+// optional uint32 id = 1;
+inline bool large_file_test::_internal_has_id() const {
+  bool value = (_impl_._has_bits_[0] & 0x00000004u) != 0;
+  return value;
+}
+inline bool large_file_test::has_id() const {
+  return _internal_has_id();
+}
+inline void large_file_test::clear_id() {
+  _impl_.id_ = 0u;
+  _impl_._has_bits_[0] &= ~0x00000004u;
+}
+inline uint32_t large_file_test::_internal_id() const {
+  return _impl_.id_;
+}
+inline uint32_t large_file_test::id() const {
+  // @@protoc_insertion_point(field_get:large_file_test.id)
+  return _internal_id();
+}
+inline void large_file_test::_internal_set_id(uint32_t value) {
+  _impl_._has_bits_[0] |= 0x00000004u;
+  _impl_.id_ = value;
+}
+inline void large_file_test::set_id(uint32_t value) {
+  _internal_set_id(value);
+  // @@protoc_insertion_point(field_set:large_file_test.id)
+}
+
+// optional int32 i32value = 2;
+inline bool large_file_test::_internal_has_i32value() const {
+  bool value = (_impl_._has_bits_[0] & 0x00000008u) != 0;
+  return value;
+}
+inline bool large_file_test::has_i32value() const {
+  return _internal_has_i32value();
+}
+inline void large_file_test::clear_i32value() {
+  _impl_.i32value_ = 0;
+  _impl_._has_bits_[0] &= ~0x00000008u;
+}
+inline int32_t large_file_test::_internal_i32value() const {
+  return _impl_.i32value_;
+}
+inline int32_t large_file_test::i32value() const {
+  // @@protoc_insertion_point(field_get:large_file_test.i32value)
+  return _internal_i32value();
+}
+inline void large_file_test::_internal_set_i32value(int32_t value) {
+  _impl_._has_bits_[0] |= 0x00000008u;
+  _impl_.i32value_ = value;
+}
+inline void large_file_test::set_i32value(int32_t value) {
+  _internal_set_i32value(value);
+  // @@protoc_insertion_point(field_set:large_file_test.i32value)
+}
+
+// optional uint64 u64value = 3;
+inline bool large_file_test::_internal_has_u64value() const {
+  bool value = (_impl_._has_bits_[0] & 0x00000010u) != 0;
+  return value;
+}
+inline bool large_file_test::has_u64value() const {
+  return _internal_has_u64value();
+}
+inline void large_file_test::clear_u64value() {
+  _impl_.u64value_ = uint64_t{0u};
+  _impl_._has_bits_[0] &= ~0x00000010u;
+}
+inline uint64_t large_file_test::_internal_u64value() const {
+  return _impl_.u64value_;
+}
+inline uint64_t large_file_test::u64value() const {
+  // @@protoc_insertion_point(field_get:large_file_test.u64value)
+  return _internal_u64value();
+}
+inline void large_file_test::_internal_set_u64value(uint64_t value) {
+  _impl_._has_bits_[0] |= 0x00000010u;
+  _impl_.u64value_ = value;
+}
+inline void large_file_test::set_u64value(uint64_t value) {
+  _internal_set_u64value(value);
+  // @@protoc_insertion_point(field_set:large_file_test.u64value)
+}
+
+// optional double f64value = 4;
+inline bool large_file_test::_internal_has_f64value() const {
+  bool value = (_impl_._has_bits_[0] & 0x00000020u) != 0;
+  return value;
+}
+inline bool large_file_test::has_f64value() const {
+  return _internal_has_f64value();
+}
+inline void large_file_test::clear_f64value() {
+  _impl_.f64value_ = 0;
+  _impl_._has_bits_[0] &= ~0x00000020u;
+}
+inline double large_file_test::_internal_f64value() const {
+  return _impl_.f64value_;
+}
+inline double large_file_test::f64value() const {
+  // @@protoc_insertion_point(field_get:large_file_test.f64value)
+  return _internal_f64value();
+}
+inline void large_file_test::_internal_set_f64value(double value) {
+  _impl_._has_bits_[0] |= 0x00000020u;
+  _impl_.f64value_ = value;
+}
+inline void large_file_test::set_f64value(double value) {
+  _internal_set_f64value(value);
+  // @@protoc_insertion_point(field_set:large_file_test.f64value)
+}
+
+// optional float f32value = 5;
+inline bool large_file_test::_internal_has_f32value() const {
+  bool value = (_impl_._has_bits_[0] & 0x00000040u) != 0;
+  return value;
+}
+inline bool large_file_test::has_f32value() const {
+  return _internal_has_f32value();
+}
+inline void large_file_test::clear_f32value() {
+  _impl_.f32value_ = 0;
+  _impl_._has_bits_[0] &= ~0x00000040u;
+}
+inline float large_file_test::_internal_f32value() const {
+  return _impl_.f32value_;
+}
+inline float large_file_test::f32value() const {
+  // @@protoc_insertion_point(field_get:large_file_test.f32value)
+  return _internal_f32value();
+}
+inline void large_file_test::_internal_set_f32value(float value) {
+  _impl_._has_bits_[0] |= 0x00000040u;
+  _impl_.f32value_ = value;
+}
+inline void large_file_test::set_f32value(float value) {
+  _internal_set_f32value(value);
+  // @@protoc_insertion_point(field_set:large_file_test.f32value)
+}
+
+// optional string szvalue = 6;
+inline bool large_file_test::_internal_has_szvalue() const {
+  bool value = (_impl_._has_bits_[0] & 0x00000001u) != 0;
+  return value;
+}
+inline bool large_file_test::has_szvalue() const {
+  return _internal_has_szvalue();
+}
+inline void large_file_test::clear_szvalue() {
+  _impl_.szvalue_.ClearToEmpty();
+  _impl_._has_bits_[0] &= ~0x00000001u;
+}
+inline const std::string& large_file_test::szvalue() const {
+  // @@protoc_insertion_point(field_get:large_file_test.szvalue)
+  return _internal_szvalue();
+}
+template <typename ArgT0, typename... ArgT>
+inline PROTOBUF_ALWAYS_INLINE
+void large_file_test::set_szvalue(ArgT0&& arg0, ArgT... args) {
+ _impl_._has_bits_[0] |= 0x00000001u;
+ _impl_.szvalue_.Set(static_cast<ArgT0 &&>(arg0), args..., GetArenaForAllocation());
+  // @@protoc_insertion_point(field_set:large_file_test.szvalue)
+}
+inline std::string* large_file_test::mutable_szvalue() {
+  std::string* _s = _internal_mutable_szvalue();
+  // @@protoc_insertion_point(field_mutable:large_file_test.szvalue)
+  return _s;
+}
+inline const std::string& large_file_test::_internal_szvalue() const {
+  return _impl_.szvalue_.Get();
+}
+inline void large_file_test::_internal_set_szvalue(const std::string& value) {
+  _impl_._has_bits_[0] |= 0x00000001u;
+  _impl_.szvalue_.Set(value, GetArenaForAllocation());
+}
+inline std::string* large_file_test::_internal_mutable_szvalue() {
+  _impl_._has_bits_[0] |= 0x00000001u;
+  return _impl_.szvalue_.Mutable(GetArenaForAllocation());
+}
+inline std::string* large_file_test::release_szvalue() {
+  // @@protoc_insertion_point(field_release:large_file_test.szvalue)
+  if (!_internal_has_szvalue()) {
+    return nullptr;
+  }
+  _impl_._has_bits_[0] &= ~0x00000001u;
+  auto* p = _impl_.szvalue_.Release();
+#ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  if (_impl_.szvalue_.IsDefault()) {
+    _impl_.szvalue_.Set("", GetArenaForAllocation());
+  }
+#endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  return p;
+}
+inline void large_file_test::set_allocated_szvalue(std::string* szvalue) {
+  if (szvalue != nullptr) {
+    _impl_._has_bits_[0] |= 0x00000001u;
+  } else {
+    _impl_._has_bits_[0] &= ~0x00000001u;
+  }
+  _impl_.szvalue_.SetAllocated(szvalue, GetArenaForAllocation());
+#ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  if (_impl_.szvalue_.IsDefault()) {
+    _impl_.szvalue_.Set("", GetArenaForAllocation());
+  }
+#endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  // @@protoc_insertion_point(field_set_allocated:large_file_test.szvalue)
+}
+
+// optional .combine_id id_id = 7;
+inline bool large_file_test::_internal_has_id_id() const {
+  bool value = (_impl_._has_bits_[0] & 0x00000002u) != 0;
+  PROTOBUF_ASSUME(!value || _impl_.id_id_ != nullptr);
+  return value;
+}
+inline bool large_file_test::has_id_id() const {
+  return _internal_has_id_id();
+}
+inline void large_file_test::clear_id_id() {
+  if (_impl_.id_id_ != nullptr) _impl_.id_id_->Clear();
+  _impl_._has_bits_[0] &= ~0x00000002u;
+}
+inline const ::combine_id& large_file_test::_internal_id_id() const {
+  const ::combine_id* p = _impl_.id_id_;
+  return p != nullptr ? *p : reinterpret_cast<const ::combine_id&>(
+      ::_combine_id_default_instance_);
+}
+inline const ::combine_id& large_file_test::id_id() const {
+  // @@protoc_insertion_point(field_get:large_file_test.id_id)
+  return _internal_id_id();
+}
+inline void large_file_test::unsafe_arena_set_allocated_id_id(
+    ::combine_id* id_id) {
+  if (GetArenaForAllocation() == nullptr) {
+    delete reinterpret_cast<::PROTOBUF_NAMESPACE_ID::MessageLite*>(_impl_.id_id_);
+  }
+  _impl_.id_id_ = id_id;
+  if (id_id) {
+    _impl_._has_bits_[0] |= 0x00000002u;
+  } else {
+    _impl_._has_bits_[0] &= ~0x00000002u;
+  }
+  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:large_file_test.id_id)
+}
+inline ::combine_id* large_file_test::release_id_id() {
+  _impl_._has_bits_[0] &= ~0x00000002u;
+  ::combine_id* temp = _impl_.id_id_;
+  _impl_.id_id_ = nullptr;
+#ifdef PROTOBUF_FORCE_COPY_IN_RELEASE
+  auto* old =  reinterpret_cast<::PROTOBUF_NAMESPACE_ID::MessageLite*>(temp);
+  temp = ::PROTOBUF_NAMESPACE_ID::internal::DuplicateIfNonNull(temp);
+  if (GetArenaForAllocation() == nullptr) { delete old; }
+#else  // PROTOBUF_FORCE_COPY_IN_RELEASE
+  if (GetArenaForAllocation() != nullptr) {
+    temp = ::PROTOBUF_NAMESPACE_ID::internal::DuplicateIfNonNull(temp);
+  }
+#endif  // !PROTOBUF_FORCE_COPY_IN_RELEASE
+  return temp;
+}
+inline ::combine_id* large_file_test::unsafe_arena_release_id_id() {
+  // @@protoc_insertion_point(field_release:large_file_test.id_id)
+  _impl_._has_bits_[0] &= ~0x00000002u;
+  ::combine_id* temp = _impl_.id_id_;
+  _impl_.id_id_ = nullptr;
+  return temp;
+}
+inline ::combine_id* large_file_test::_internal_mutable_id_id() {
+  _impl_._has_bits_[0] |= 0x00000002u;
+  if (_impl_.id_id_ == nullptr) {
+    auto* p = CreateMaybeMessage<::combine_id>(GetArenaForAllocation());
+    _impl_.id_id_ = p;
+  }
+  return _impl_.id_id_;
+}
+inline ::combine_id* large_file_test::mutable_id_id() {
+  ::combine_id* _msg = _internal_mutable_id_id();
+  // @@protoc_insertion_point(field_mutable:large_file_test.id_id)
+  return _msg;
+}
+inline void large_file_test::set_allocated_id_id(::combine_id* id_id) {
+  ::PROTOBUF_NAMESPACE_ID::Arena* message_arena = GetArenaForAllocation();
+  if (message_arena == nullptr) {
+    delete _impl_.id_id_;
+  }
+  if (id_id) {
+    ::PROTOBUF_NAMESPACE_ID::Arena* submessage_arena =
+        ::PROTOBUF_NAMESPACE_ID::Arena::InternalGetOwningArena(id_id);
+    if (message_arena != submessage_arena) {
+      id_id = ::PROTOBUF_NAMESPACE_ID::internal::GetOwnedMessage(
+          message_arena, id_id, submessage_arena);
+    }
+    _impl_._has_bits_[0] |= 0x00000002u;
+  } else {
+    _impl_._has_bits_[0] &= ~0x00000002u;
+  }
+  _impl_.id_id_ = id_id;
+  // @@protoc_insertion_point(field_set_allocated:large_file_test.id_id)
+}
+
 #ifdef __GNUC__
   #pragma GCC diagnostic pop
 #endif  // __GNUC__
+// -------------------------------------------------------------------
+
+// -------------------------------------------------------------------
+
+// -------------------------------------------------------------------
+
+// -------------------------------------------------------------------
+
+// -------------------------------------------------------------------
+
+// -------------------------------------------------------------------
+
 // -------------------------------------------------------------------
 
 // -------------------------------------------------------------------

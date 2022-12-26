@@ -33,11 +33,11 @@ jobs:
           architecture: x64
       - name: Build with Maven
         run: |
-          cd tools;
-          python3 -m pip install --user -r requirements.txt;
-          python3 gen_header_v2.py;
-          python3 gen_header_v3.py;
-          cd .. ;
+          cd tools
+          python3 -m pip install --user -r requirements.txt
+          python3 gen_header_v2.py
+          python3 gen_header_v3.py
+          cd ..
           mvn package --file pom.xml
           if [[ -e "target/protocols.zip" ]]; then rm -f "target/protocols.zip"; fi
           if [[ -e "target/tools.zip" ]]; then rm -f "target/tools.zip"; fi

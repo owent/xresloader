@@ -120,8 +120,20 @@ public class DataSrcExcel extends DataSrcImpl {
 
             File file = new File(file_path);
             if (!file.isAbsolute()) {
-                file_path = ProgramOptions.getInstance().dataSourceDirectory + '/' + file_path;
-                file = new File(file_path);
+                boolean hasFile = false;
+                for (String testFileDir : ProgramOptions.getInstance().dataSourceDirectory) {
+                    file = new File(testFileDir, file_path);
+                    if (file.exists()) {
+                        file_path = testFileDir + "/" + file_path;
+                        hasFile = true;
+                        break;
+                    }
+                }
+                if (!hasFile) {
+                    ProgramOptions.getLoger().warn("Open macro source \"%s\" failed, not found.", file_path,
+                            src.table_name);
+                    continue;
+                }
             }
 
             ExcelEngine.CustomDataTableIndex tb = ExcelEngine.openStreamTableIndex(file, src.table_name);
@@ -209,8 +221,20 @@ public class DataSrcExcel extends DataSrcImpl {
 
             File file = new File(file_path);
             if (!file.isAbsolute()) {
-                file_path = ProgramOptions.getInstance().dataSourceDirectory + '/' + file_path;
-                file = new File(file_path);
+                boolean hasFile = false;
+                for (String testFileDir : ProgramOptions.getInstance().dataSourceDirectory) {
+                    file = new File(testFileDir, file_path);
+                    if (file.exists()) {
+                        file_path = testFileDir + "/" + file_path;
+                        hasFile = true;
+                        break;
+                    }
+                }
+                if (!hasFile) {
+                    ProgramOptions.getLoger().warn("Open data source file \"%s\" failed, not found.", file_path,
+                            src.table_name);
+                    continue;
+                }
             }
 
             DataSheetInfo res = new DataSheetInfo();

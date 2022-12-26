@@ -44,22 +44,21 @@ public class DataETProcessor extends DataDstJava {
     }
 
     public void reset() throws ConvException {
-        boolean engineInitSucceed = true;
+        boolean engineInitSucceed = false;
         try {
-            if (scriptEngine != null) {
+            if (scriptEngine != null && !SchemeConf.getInstance().getCallbackScriptPath().isEmpty()) {
+                scriptEngine.setContext(new SimpleScriptContext());
                 scriptEngine.put("gOurInstance", DataSrcImpl.getOurInstance());
                 scriptEngine.put("gSchemeConf", SchemeConf.getInstance());
-                scriptEngine.setContext(new SimpleScriptContext());
                 scriptEngine.eval(new FileReader(new File(SchemeConf.getInstance().getCallbackScriptPath())));
+                engineInitSucceed = true;
             }
-        } catch (ScriptException e) {
+        } catch (ScriptException | FileNotFoundException e) {
             throw new ConvException(e.toString());
-        } catch (FileNotFoundException e) {
-            engineInitSucceed = false;
         }
         invocable = null;
         if (engineInitSucceed) {
-            invocable = (Invocable)scriptEngine;
+            invocable = (Invocable) scriptEngine;
         }
     }
 
@@ -88,11 +87,12 @@ public class DataETProcessor extends DataDstJava {
         switch (fd.getType()) {
             case DOUBLE:
                 if (obj instanceof Number) {
-                    val = ((Number)obj).doubleValue();
+                    val = ((Number) obj).doubleValue();
                 } else if (obj instanceof String) {
-                    val = Double.valueOf((String)obj);
+                    val = Double.valueOf((String) obj);
                 } else {
-                    throw new ConvException(fd.getFullName() + " expected " + fd.getType().toString() + ", got " + obj.toString() + "");
+                    throw new ConvException(
+                            fd.getFullName() + " expected " + fd.getType().toString() + ", got " + obj.toString() + "");
                 }
                 break;
             case FLOAT:
@@ -101,7 +101,8 @@ public class DataETProcessor extends DataDstJava {
                 } else if (obj instanceof String) {
                     val = Float.valueOf((String) obj);
                 } else {
-                    throw new ConvException(fd.getFullName() + " expected " + fd.getType().toString() + ", got " + obj.toString() + "");
+                    throw new ConvException(
+                            fd.getFullName() + " expected " + fd.getType().toString() + ", got " + obj.toString() + "");
                 }
                 break;
             case FIXED32:
@@ -110,11 +111,12 @@ public class DataETProcessor extends DataDstJava {
             case INT32:
             case UINT32:
                 if (obj instanceof Number) {
-                    val = ((Number)obj).intValue();
+                    val = ((Number) obj).intValue();
                 } else if (obj instanceof String) {
                     val = Integer.valueOf((String) obj);
                 } else {
-                    throw new ConvException(fd.getFullName() + " expected " + fd.getType().toString() + ", got " + obj.toString() + "");
+                    throw new ConvException(
+                            fd.getFullName() + " expected " + fd.getType().toString() + ", got " + obj.toString() + "");
                 }
                 break;
             case FIXED64:
@@ -127,7 +129,8 @@ public class DataETProcessor extends DataDstJava {
                 } else if (obj instanceof String) {
                     val = Long.valueOf((String) obj);
                 } else {
-                    throw new ConvException(fd.getFullName() + " expected " + fd.getType().toString() + ", got " + obj.toString() + "");
+                    throw new ConvException(
+                            fd.getFullName() + " expected " + fd.getType().toString() + ", got " + obj.toString() + "");
                 }
                 break;
             case ENUM:
@@ -161,7 +164,7 @@ public class DataETProcessor extends DataDstJava {
 
     /**
      * @param msgDesc
-     * @param src Map<String, Object>，配置行按类型转换后的Map
+     * @param src     Map<String, Object>，配置行按类型转换后的Map
      * @param builder 要填充的Message对象
      * @throws ConvException
      */
@@ -175,7 +178,8 @@ public class DataETProcessor extends DataDstJava {
         for (FieldDescriptor fd : msgDesc.getFields()) {
             try {
                 Object curValue = srcMap.getOrDefault(fd.getName(), null);
-                if (curValue == null) continue;
+                if (curValue == null)
+                    continue;
                 if (fd.isMapField()) {
                     for (Map.Entry<?, ?> mapItem : ((SpecialInnerHashMap<?, ?>) curValue).entrySet()) {
                         // Map类型是List<MapEntry>，只能通过MapEntry.value类型判断是否为Message
@@ -214,12 +218,14 @@ public class DataETProcessor extends DataDstJava {
                 }
             } catch (Exception e) {
                 e.printStackTrace();
-                throw new ConvException(String.format("FillMap2PbMsg failed\nFullName: %s\n%s\n", fd.getFullName(), e.toString()));
+                throw new ConvException(
+                        String.format("FillMap2PbMsg failed\nFullName: %s\n%s\n", fd.getFullName(), e.toString()));
             }
         }
     }
 
-    public DynamicMessage.Builder dumpPbMessage(Descriptor currentMsgDesc, DataDstWriterNode node) throws ConvException {
+    public DynamicMessage.Builder dumpPbMessage(Descriptor currentMsgDesc, DataDstWriterNode node)
+            throws ConvException {
         DynamicMessage.Builder builder = DynamicMessage.newBuilder(currentMsgDesc);
         HashMap<String, Object> msgMap = new HashMap<>();
         if (dumpMapMessage(msgMap, node) == false) {
@@ -231,7 +237,7 @@ public class DataETProcessor extends DataDstJava {
 
     public boolean dumpMapMessage(HashMap<String, Object> builder, DataDstWriterNode node) throws ConvException {
         boolean dumpSucceed = dumpMessage(builder, node);
-        if(dumpSucceed == false) {
+        if (dumpSucceed == false) {
             return dumpSucceed;
         }
         if (lastOutputFile != SchemeConf.getInstance().getOutputFileAbsPath()) {
@@ -246,7 +252,7 @@ public class DataETProcessor extends DataDstJava {
         }
         if (invocable instanceof Invocable) {
             try {
-                Object ret = invocable.invokeFunction("currentMessageCallback", builder, node.getTypeDescriptor().getRawDescriptor());
+                Object ret = invocable.invokeFunction("currentMessageCallback", builder, node.getTypeDescriptor());
                 if (ret instanceof Boolean && ret.equals(false)) {
                     throw new ConvException("Script return " + ret);
                 }

@@ -40,7 +40,7 @@ public class ProgramOptions {
     public String protocolFile = "";
     public boolean protocolIgnoreUnknownDependency = false;
     public String outputDirectory = ".";
-    public String dataSourceDirectory = ".";
+    public String[] dataSourceDirectory = null;
     public String dataSourceFile = "";
     public FileType dataSourceType;
     public String[] dataSourceMetas = null;
@@ -69,7 +69,7 @@ public class ProgramOptions {
         protocol = Protocol.PROTOBUF;
 
         outputDirectory = System.getProperty("user.dir");
-        dataSourceDirectory = outputDirectory;
+        dataSourceDirectory = new String[] { outputDirectory };
         dataSourceType = FileType.BIN;
         requireMappingAllFields = false;
         enableAliasMapping = false;
@@ -90,7 +90,7 @@ public class ProgramOptions {
         protocolFile = "";
         protocolIgnoreUnknownDependency = false;
         outputDirectory = "";
-        dataSourceDirectory = "";
+        dataSourceDirectory = null;
         dataSourceFile = "";
         dataSourceType = FileType.BIN;
         dataSourceMetas = null;
@@ -139,7 +139,8 @@ public class ProgramOptions {
                 .argName("DIRECTORY PATH").build());
 
         options.addOption(Option.builder("d").longOpt("data-src-dir")
-                .desc("data source directory(where to find excel specified by meta)").hasArg().argName("DIRECTORY PATH")
+                .desc("data source directories(where to find excel files, can be used more than once.)").hasArg()
+                .argName("DIRECTORY PATH")
                 .build());
 
         options.addOption(Option.builder("s").longOpt("src-file")
@@ -268,9 +269,9 @@ public class ProgramOptions {
             return 1;
         }
 
-        if(cmd.hasOption("disable-string-macro")) {
+        if (cmd.hasOption("disable-string-macro")) {
             enableStringMacro = false;
-        } else if(cmd.hasOption("enable-string-macro")) {
+        } else if (cmd.hasOption("enable-string-macro")) {
             enableStringMacro = true;
         }
 
@@ -338,7 +339,10 @@ public class ProgramOptions {
         // output dir
         outputDirectory = cmd.getOptionValue('o', ".");
         // data sorce dir
-        dataSourceDirectory = cmd.getOptionValue('d', ".");
+        dataSourceDirectory = cmd.getOptionValues('d');
+        if (dataSourceDirectory == null || dataSourceDirectory.length == 0) {
+            dataSourceDirectory = new String[] { "." };
+        }
 
         // pretty print
         prettyIndent = Integer.parseInt(cmd.getOptionValue("pretty", "0"));

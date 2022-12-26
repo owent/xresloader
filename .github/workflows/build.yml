@@ -40,11 +40,11 @@ jobs:
       - name: Build with Maven
         # uses: .github/action/build-with-maven
         run: |
-          cd tools;
-          python3 -m pip install --user -r requirements.txt;
-          python3 gen_header_v2.py;
-          python3 gen_header_v3.py;
-          cd .. ;
+          cd tools
+          python3 -m pip install --user -r requirements.txt
+          python3 gen_header_v2.py
+          python3 gen_header_v3.py
+          cd ..
           mvn package --file pom.xml
-          cd sample;
-          bash gen_sample_output.sh;
+          cd sample
+          bash gen_sample_output.sh

@@ -2,7 +2,12 @@
 
 ## Unrelease
 
+## 2.13.0
+
 1. 修复Excel文件过大时的报错和提示
+2. 增加Javascript Patch数据的功能(感谢 [@superwenda](https://github.com/superwenda) )
+3. 允许多个数据源查找目录
+4. 添加benchmark参考
 
 ## 2.12.1
 

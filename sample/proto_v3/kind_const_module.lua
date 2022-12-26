@@ -65,11 +65,14 @@ local const_res = {
     EN_GCC_SOLDIER_TYPE_MASK = 100,
     EN_GCC_UNKNOWN = 0,
   },
+  process_by_script = {
+  },
 }
 
 
 game_const_config = const_res.game_const_config
 arr_in_arr_cfg = const_res.arr_in_arr_cfg
+process_by_script = const_res.process_by_script
 cost_type = const_res.cost_type
 event_cfg = const_res.event_cfg
 event_reward_item = const_res.event_reward_item

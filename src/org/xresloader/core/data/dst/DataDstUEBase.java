@@ -2148,11 +2148,12 @@ public abstract class DataDstUEBase extends DataDstJava {
         if (rule.keyFields.isEmpty()) {
             enableDataTable = false;
         }
-        if (null != codeInfo.writerNodeWrapper
-                && codeInfo.writerNodeWrapper.getMessageExtension().mutableUE().notDataTable) {
-            enableDataTable = false;
+        if (null != codeInfo.writerNodeWrapper) {
+            DataDstMessageExtUE ueExt = codeInfo.writerNodeWrapper.getMessageExtension().mutableUE();
+            if (ueExt.notDataTable) {
+                enableDataTable = false;
+            }
         }
-        boolean enableDefaultLoader = true;
 
         headerFs.write(dumpString("\r\n"));
         headerFs.write(dumpString("\r\n"));
@@ -2257,12 +2258,18 @@ public abstract class DataDstUEBase extends DataDstJava {
         String varIsValidName = "IsValid";
         boolean varIsValidCheck = true;
         boolean enableDataTable = true;
+        boolean enableDefaultLoader = SchemeConf.getInstance().getUEOptions().codeOutputEnableDefaultLoader;
         if (rule.keyFields.isEmpty()) {
             enableDataTable = false;
         }
-        if (null != codeInfo.writerNodeWrapper
-                && codeInfo.writerNodeWrapper.getMessageExtension().mutableUE().notDataTable) {
-            enableDataTable = false;
+        if (null != codeInfo.writerNodeWrapper) {
+            DataDstMessageExtUE ueExt = codeInfo.writerNodeWrapper.getMessageExtension().mutableUE();
+            if (ueExt.notDataTable) {
+                enableDataTable = false;
+            }
+            if (ueExt.enableDefaultLoader != null) {
+                enableDefaultLoader = ueExt.enableDefaultLoader;
+            }
         }
 
         while (varIsValidCheck) {
@@ -2300,7 +2307,12 @@ public abstract class DataDstUEBase extends DataDstJava {
         sourceFs.write(dumpString(String.format("    U%s::ClearRow(this->Empty);\r\n", helperClazzName)));
         if (enableDataTable) {
             sourceFs.write(dumpString("    this->DataTable = nullptr;\r\n"));
-            sourceFs.write(dumpString("    this->EnableDefaultLoader = true;\r\n"));
+            if (enableDefaultLoader) {
+                sourceFs.write(dumpString("    this->EnableDefaultLoader = true;\r\n"));
+                sourceFs.write(dumpString("    this->InitializeDefaultLoader();\r\n"));
+            } else {
+                sourceFs.write(dumpString("    this->EnableDefaultLoader = false;\r\n"));
+            }
         }
         sourceFs.write(dumpString("}\r\n\r\n"));
 
@@ -2391,10 +2403,6 @@ public abstract class DataDstUEBase extends DataDstJava {
                             codeInfo.clazzName, helperClazzName, varIsValidName)));
             sourceFs.write(dumpString("{\r\n"));
             sourceFs.write(dumpString(String.format("    %s = false;\r\n", varIsValidName)));
-            sourceFs.write(dumpString(
-                    "    if (!this->DataTable && this->EnableDefaultLoader && !this->Loader.IsValid()) {\r\n"));
-            sourceFs.write(dumpString("        this->InitializeDefaultLoader();\r\n"));
-            sourceFs.write(dumpString("    }\r\n"));
             sourceFs.write(dumpString("    if (!this->DataTable) {\r\n"));
             sourceFs.write(dumpString("        return this->Empty;\r\n"));
             sourceFs.write(dumpString("    }\r\n"));
@@ -2424,10 +2432,6 @@ public abstract class DataDstUEBase extends DataDstJava {
                     "bool U%s::ForeachRow(TFunctionRef<void (const FName& Key, const %s& Value)> Predicate) const\r\n",
                     helperClazzName, codeInfo.clazzName)));
             sourceFs.write(dumpString("{\r\n"));
-            sourceFs.write(dumpString(
-                    "    if (!this->DataTable && this->EnableDefaultLoader && !this->Loader.IsValid()) {\r\n"));
-            sourceFs.write(dumpString("        this->InitializeDefaultLoader();\r\n"));
-            sourceFs.write(dumpString("    }\r\n"));
             sourceFs.write(dumpString("    if (!this->DataTable) {\r\n"));
             sourceFs.write(dumpString("        return false;\r\n"));
             sourceFs.write(dumpString("    }\r\n"));
@@ -2442,10 +2446,6 @@ public abstract class DataDstUEBase extends DataDstJava {
                     helperClazzName, varIsValidName)));
             sourceFs.write(dumpString("{\r\n"));
             sourceFs.write(dumpString(String.format("    %s = false;\r\n", varIsValidName)));
-            sourceFs.write(dumpString(
-                    "    if (!this->DataTable && this->EnableDefaultLoader && !this->Loader.IsValid()) {\r\n"));
-            sourceFs.write(dumpString("        this->InitializeDefaultLoader();\r\n"));
-            sourceFs.write(dumpString("    }\r\n"));
             sourceFs.write(dumpString("    if (!this->DataTable) {\r\n"));
             sourceFs.write(dumpString("        return NULL;\r\n"));
             sourceFs.write(dumpString("    }\r\n"));

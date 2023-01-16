@@ -795,6 +795,15 @@ public class DataDstPb extends DataDstImpl {
                     .getExtension(XresloaderUe.notDataTable);
         }
 
+        if (pbDesc.getOptions().hasExtension(XresloaderUe.defaultLoader)) {
+            XresloaderUe.loader_mode mode = pbDesc.getOptions().getExtension(XresloaderUe.defaultLoader);
+            if (mode == XresloaderUe.loader_mode.EN_LOADER_MODE_ENABLE) {
+                ret.mutableExtension().mutableUE().enableDefaultLoader = true;
+            } else if (mode == XresloaderUe.loader_mode.EN_LOADER_MODE_DISABLE) {
+                ret.mutableExtension().mutableUE().enableDefaultLoader = false;
+            }
+        }
+
         buildDataDstDescriptorMessage(pbs, pbDesc, ret);
         return ret;
     }

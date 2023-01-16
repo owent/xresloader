@@ -292,8 +292,10 @@ Excel里的Key使用@后缀的字段名，@后面的部分都属于验证器。�
 | :------------------------------------: | :----------------------------------------------------------------------------------------: |
 |     org.xresloader.msg_description     |                        消息体描述信息，会写入输出的header中和代码中                        |
 | org.xresloader.msg_require_mapping_all |                            设置message的所有字段必须被全部映射                             |
-|      org.xresloader.msg_separator      | Plain模式字段分隔符，可指定多个，用于在一个单元格内配置复杂格式时的分隔符列表，默认值: `,; | ` |
+|      org.xresloader.msg_separator      | Plain模式字段分隔符，可指定多个，用于在一个单元格内配置复杂格式时的分隔符列表，默认值: `,; | `                     |
 |        org.xresloader.ue.helper        |                                生成UE Utility代码的类名后缀                                |
+|    org.xresloader.ue.not_data_table    |                          不是DataTable，helper类里不生成加载代码                           |
+|    org.xresloader.ue.default_loader    |                     Message是否开启默认Loader（`EN_LOADER_MODE_DEFAULT                     | EN_LOADER_MODE_ENABLE | EN_LOADER_MODE_DISABLE`） |
 
 #### Protobuf插件 - Field插件
 

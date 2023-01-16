@@ -61,6 +61,7 @@ public class DataDstWriterNode {
     static public class DataDstMessageExtUE {
         public String helper = null;
         public boolean notDataTable = false;
+        public Boolean enableDefaultLoader = null;
     }
 
     static public class DataDstMessageExt {

@@ -72,6 +72,8 @@ public abstract class SchemeDataSourceBase implements SchemeDataSourceImpl {
             SchemeConf.getInstance().setUECsvObjectWrapper(datas.get(0), datas.get(1));
         } else if (key.equalsIgnoreCase("CallbackScript")) {
             SchemeConf.getInstance().setCallbackScriptPath(datas.get(0));
+        } else if (key.equalsIgnoreCase("UeCfg-EnableDefaultLoader")) {
+            SchemeConf.getInstance().setUEEnableDefaultLoader(datas.get(0));
         } else {
             return false;
         }

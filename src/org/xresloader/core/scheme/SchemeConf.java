@@ -31,6 +31,7 @@ public class SchemeConf {
         public String codeOutputPrivateDir = "";
         public String codeOutputCsvObjectBegin = "(";
         public String codeOutputCsvObjectEnd = ")";
+        public Boolean codeOutputEnableDefaultLoader = true;
     }
 
     /**
@@ -98,6 +99,7 @@ public class SchemeConf {
         extUECSV.codeOutputPrivateDir = "";
         extUECSV.codeOutputCsvObjectBegin = "(";
         extUECSV.codeOutputCsvObjectEnd = ")";
+        extUECSV.codeOutputEnableDefaultLoader = true;
 
         outputFilePathCache = "";
         outputFileAbsPathCache = "";
@@ -121,6 +123,7 @@ public class SchemeConf {
         extUECSV.codeOutputPrivateDir = "";
         extUECSV.codeOutputCsvObjectBegin = "(";
         extUECSV.codeOutputCsvObjectEnd = ")";
+        extUECSV.codeOutputEnableDefaultLoader = true;
     }
 
     /**
@@ -445,6 +448,10 @@ public class SchemeConf {
         } else {
             extUECSV.codeOutputCsvObjectEnd = end;
         }
+    }
+
+    public void setUEEnableDefaultLoader(String data) {
+        extUECSV.codeOutputEnableDefaultLoader = getLogicalValue(data);
     }
 
     public DataExtUE getUEOptions() {

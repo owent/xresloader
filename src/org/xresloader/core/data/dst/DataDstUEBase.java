@@ -2152,6 +2152,7 @@ public abstract class DataDstUEBase extends DataDstJava {
                 && codeInfo.writerNodeWrapper.getMessageExtension().mutableUE().notDataTable) {
             enableDataTable = false;
         }
+        boolean enableDefaultLoader = true;
 
         headerFs.write(dumpString("\r\n"));
         headerFs.write(dumpString("\r\n"));
@@ -2180,6 +2181,9 @@ public abstract class DataDstUEBase extends DataDstJava {
             headerFs.write(dumpString("\r\n"));
 
             headerFs.write(dumpString("    void DisableDefaultLoader();\r\n"));
+            headerFs.write(dumpString("\r\n"));
+
+            headerFs.write(dumpString("    const TCHAR* GetObjectPath() const;\r\n"));
             headerFs.write(dumpString("\r\n"));
 
             headerFs.write(dumpString(
@@ -2339,8 +2343,8 @@ public abstract class DataDstUEBase extends DataDstJava {
             sourceFs.write(dumpString(
                     String.format("    const_cast<U%s*>(this)->EnableDefaultLoader = false;\r\n", helperClazzName)));
             sourceFs.write(dumpString(String.format(
-                    "    const_cast<U%s*>(this)->SetLoader(MakeShareable(new ConstructorHelpers::FObjectFinder<UDataTable>(TEXT(\"DataTable'/Game/%s'\"))));\r\n",
-                    helperClazzName, helperDestination)));
+                    "    const_cast<U%s*>(this)->SetLoader(MakeShareable(new ConstructorHelpers::FObjectFinder<UDataTable>(GetObjectPath())));\r\n",
+                    helperClazzName)));
             sourceFs.write(dumpString("}\r\n\r\n"));
 
             // void DisableDefaultLoader();
@@ -2348,6 +2352,14 @@ public abstract class DataDstUEBase extends DataDstJava {
                     String.format("void U%s::DisableDefaultLoader()\r\n", helperClazzName, codeInfo.clazzName)));
             sourceFs.write(dumpString("{\r\n"));
             sourceFs.write(dumpString("    this->EnableDefaultLoader = false;\r\n"));
+            sourceFs.write(dumpString("}\r\n\r\n"));
+
+            // void GetObjectPath();
+            sourceFs.write(dumpString(
+                    String.format("const TCHAR* U%s::GetObjectPath() const\r\n", helperClazzName, codeInfo.clazzName)));
+            sourceFs.write(dumpString("{\r\n"));
+            sourceFs.write(
+                    dumpString(String.format("    return TEXT(\"DataTable'/Game/%s'\");\r\n", helperDestination)));
             sourceFs.write(dumpString("}\r\n\r\n"));
 
             // GetRowName(...)

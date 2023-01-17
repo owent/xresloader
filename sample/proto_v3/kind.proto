@@ -21,14 +21,14 @@ message role_cfg {
     string             int_as_string         = 12;
     repeated cost_type test_plain_enum_array = 13;
 
-    google.protobuf.Timestamp convert_timepoint_one = 21 [ (org.xresloader.field_origin_value) = "origin_timepoint_one" ];
-    string origin_timepoint_one = 22;
-    google.protobuf.Duration convert_duration_one = 23 [ (org.xresloader.field_origin_value) = "origin_duration_one" ];
-    string origin_duration_one = 24;
+    google.protobuf.Timestamp convert_timepoint_one          = 21 [ (org.xresloader.field_origin_value) = "origin_timepoint_one" ];
+    string                    origin_timepoint_one           = 22;
+    google.protobuf.Duration  convert_duration_one           = 23 [ (org.xresloader.field_origin_value) = "origin_duration_one" ];
+    string                    origin_duration_one            = 24;
     repeated google.protobuf.Timestamp convert_timepoint_arr = 25 [ (org.xresloader.field_origin_value) = "origin_timepoint_arr" ];
-    repeated string origin_timepoint_arr = 26;
-    repeated google.protobuf.Duration convert_duration_arr = 27 [ (org.xresloader.field_origin_value) = "origin_duration_arr" ];
-    repeated string origin_duration_arr = 28;
+    repeated string                    origin_timepoint_arr  = 26;
+    repeated google.protobuf.Duration convert_duration_arr   = 27 [ (org.xresloader.field_origin_value) = "origin_duration_arr" ];
+    repeated string                   origin_duration_arr    = 28;
 }
 
 message role_upgrade_cfg {
@@ -45,6 +45,7 @@ message role_upgrade_cfg {
 message arr_in_arr {
     option (org.xresloader.ue.helper)         = "helper";
     option (org.xresloader.ue.not_data_table) = true;
+    option (org.xresloader.ue.include_header) = "Engine/CompositeDataTable.h";
 
     string          name    = 1 [ (org.xresloader.field_description) = "This is a test name in array" ];
     repeated int32  int_arr = 2;
@@ -151,15 +152,15 @@ message keep_or_strip_empty_list_cfg {
 
 message combine_id {
     uint32 prefix = 1;
-    uint32 id = 2[(org.xresloader.verifier)="0-99999"];
+    uint32 id     = 2 [ (org.xresloader.verifier) = "0-99999" ];
 }
 
 message process_by_script {
-    uint32 id = 1;
+    uint32              id             = 1;
     map<uint32, string> map_u32_string = 2;
 
-    string human_readable_date = 3;
-    google.protobuf.Timestamp date = 4;
+    string                    human_readable_date = 3;
+    google.protobuf.Timestamp date                = 4;
 
     map<int32, string>    test_map_is = 7;
     map<string, dep2_cfg> test_map_sm = 8 [ (org.xresloader.field_separator) = "|" ];
@@ -168,11 +169,11 @@ message process_by_script {
 }
 
 message large_file_test {
-    uint32 id = 1;
-    int32 i32value = 2;
-    uint64 u64value = 3;
-    double f64value = 4;
-    float f32value = 5;
-    string szvalue = 6;
-    combine_id id_id = 7;
+    uint32     id       = 1;
+    int32      i32value = 2;
+    uint64     u64value = 3;
+    double     f64value = 4;
+    float      f32value = 5;
+    string     szvalue  = 6;
+    combine_id id_id    = 7;
 }

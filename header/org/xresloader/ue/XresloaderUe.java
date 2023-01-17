@@ -13,6 +13,7 @@ public final class XresloaderUe {
     registry.add(org.xresloader.ue.XresloaderUe.helper);
     registry.add(org.xresloader.ue.XresloaderUe.notDataTable);
     registry.add(org.xresloader.ue.XresloaderUe.defaultLoader);
+    registry.add(org.xresloader.ue.XresloaderUe.includeHeader);
   }
 
   public static void registerAllExtensions(
@@ -228,6 +229,21 @@ public final class XresloaderUe {
           .newFileScopedGeneratedExtension(
         org.xresloader.ue.XresloaderUe.loader_mode.class,
         null);
+  public static final int INCLUDE_HEADER_FIELD_NUMBER = 1104;
+  /**
+   * <pre>
+   * 额外的包含头文件
+   * </pre>
+   *
+   * <code>extend .google.protobuf.MessageOptions { ... }</code>
+   */
+  public static final
+    com.google.protobuf.GeneratedMessage.GeneratedExtension<
+      com.google.protobuf.DescriptorProtos.MessageOptions,
+      java.util.List<java.lang.String>> includeHeader = com.google.protobuf.GeneratedMessage
+          .newFileScopedGeneratedExtension(
+        java.lang.String.class,
+        null);
 
   public static com.google.protobuf.Descriptors.FileDescriptor
       getDescriptor() {
@@ -250,7 +266,8 @@ public final class XresloaderUe {
       "e\022\037.google.protobuf.MessageOptions\030\316\010 \001(" +
       "\010:X\n\016default_loader\022\037.google.protobuf.Me" +
       "ssageOptions\030\317\010 \001(\0162\036.org.xresloader.ue." +
-      "loader_modeb\006proto3"
+      "loader_mode:8\n\016include_header\022\037.google.p" +
+      "rotobuf.MessageOptions\030\320\010 \003(\tb\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
@@ -263,6 +280,7 @@ public final class XresloaderUe {
     helper.internalInit(descriptor.getExtensions().get(3));
     notDataTable.internalInit(descriptor.getExtensions().get(4));
     defaultLoader.internalInit(descriptor.getExtensions().get(5));
+    includeHeader.internalInit(descriptor.getExtensions().get(6));
     com.google.protobuf.DescriptorProtos.getDescriptor();
   }
 

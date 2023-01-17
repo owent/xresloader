@@ -7,6 +7,9 @@
 1. 修订UE的FObjectFinder只能用于构造函数的问题。
    + 增加 `UeCfg-EnableDefaultLoader` 选项控制默认的Loader是否开启
    + 增加 `org.xresloader.ue.default_loader=EN_LOADER_MODE_DEFAULT|EN_LOADER_MODE_ENABLE|EN_LOADER_MODE_DISABLE` 选项控制单独的Message是否开启默认Loader
+2. 增加UE输出代码的额外包含头文件选项
+   + 增加 `UeCfg-IncludeHeader` 选项，对所有输出的UE代码额外包含头文件
+   + 增加 `org.xresloader.ue.include_header` 插件用于对于特定的Message额外附加包含文件
 
 ## 2.13.0
 

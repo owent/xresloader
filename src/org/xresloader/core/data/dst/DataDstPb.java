@@ -804,6 +804,11 @@ public class DataDstPb extends DataDstImpl {
             }
         }
 
+        if (pbDesc.getOptions().getExtensionCount(XresloaderUe.includeHeader) > 0) {
+            ret.mutableExtension().mutableUE().includeHeader = pbDesc.getOptions()
+                    .getExtension(XresloaderUe.includeHeader);
+        }
+
         buildDataDstDescriptorMessage(pbs, pbDesc, ret);
         return ret;
     }

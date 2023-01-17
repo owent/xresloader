@@ -674,6 +674,39 @@ public abstract class DataDstUEBase extends DataDstJava {
             }
         }
 
+        HashSet<String> duplicate = new HashSet<>();
+        duplicate.add("CoreMinimal.h");
+        duplicate.add("UObject/ConstructorHelpers.h");
+        duplicate.add("Engine/DataTable.h");
+
+        if (null != SchemeConf.getInstance().getUEOptions().codeOutputIncludeHeader) {
+            fos.write(dumpString("// Include headers set by UeCfg-IncludeHeader\r\n"));
+            for (String header : SchemeConf.getInstance().getUEOptions().codeOutputIncludeHeader) {
+                if (duplicate.contains(header)) {
+                    continue;
+                }
+                duplicate.add(header);
+                fos.write(dumpString(String.format("#include \"%s\"\r\n", header)));
+            }
+            fos.write(dumpString("\r\n"));
+        }
+
+        if (null != code.writerNodeWrapper) {
+            DataDstMessageExtUE ueExt = code.writerNodeWrapper.getMessageExtension().mutableUE();
+            if (null != ueExt.includeHeader) {
+                fos.write(dumpString("// Include headers set by org.xresloader.ue.include_header extension\r\n"));
+                for (String header : ueExt.includeHeader) {
+                    if (duplicate.contains(header)) {
+                        continue;
+                    }
+                    duplicate.add(header);
+                    fos.write(dumpString(String.format("#include \"%s\"\r\n", header)));
+                }
+                fos.write(dumpString("\r\n"));
+            }
+        }
+
+        fos.write(dumpString("\r\n"));
         fos.write(dumpString(String.format(codeHeaderIncludeGenerated, code.baseName)));
         fos.write(dumpString(codeHeaderPrefix2));
         fos.write(dumpString(String.format(codeHeaderClassName, code.clazzName)));

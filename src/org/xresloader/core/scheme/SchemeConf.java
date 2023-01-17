@@ -32,6 +32,7 @@ public class SchemeConf {
         public String codeOutputCsvObjectBegin = "(";
         public String codeOutputCsvObjectEnd = ")";
         public Boolean codeOutputEnableDefaultLoader = true;
+        public LinkedList<String> codeOutputIncludeHeader = null;
     }
 
     /**
@@ -100,6 +101,7 @@ public class SchemeConf {
         extUECSV.codeOutputCsvObjectBegin = "(";
         extUECSV.codeOutputCsvObjectEnd = ")";
         extUECSV.codeOutputEnableDefaultLoader = true;
+        extUECSV.codeOutputIncludeHeader = null;
 
         outputFilePathCache = "";
         outputFileAbsPathCache = "";
@@ -124,6 +126,7 @@ public class SchemeConf {
         extUECSV.codeOutputCsvObjectBegin = "(";
         extUECSV.codeOutputCsvObjectEnd = ")";
         extUECSV.codeOutputEnableDefaultLoader = true;
+        extUECSV.codeOutputIncludeHeader = null;
     }
 
     /**
@@ -452,6 +455,28 @@ public class SchemeConf {
 
     public void setUEEnableDefaultLoader(String data) {
         extUECSV.codeOutputEnableDefaultLoader = getLogicalValue(data);
+    }
+
+    public void addUEIncludeHeader(String h1, String h2, String h3) {
+        if ((h1 == null || h1.isEmpty()) && (h2 == null || h2.isEmpty()) && (h3 == null || h3.isEmpty())) {
+            return;
+        }
+
+        if (extUECSV.codeOutputIncludeHeader == null) {
+            extUECSV.codeOutputIncludeHeader = new LinkedList<>();
+        }
+
+        if (h1 != null && !h1.isEmpty()) {
+            extUECSV.codeOutputIncludeHeader.add(h1);
+        }
+
+        if (h2 != null && !h2.isEmpty()) {
+            extUECSV.codeOutputIncludeHeader.add(h1);
+        }
+
+        if (h3 != null && !h3.isEmpty()) {
+            extUECSV.codeOutputIncludeHeader.add(h1);
+        }
     }
 
     public DataExtUE getUEOptions() {

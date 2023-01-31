@@ -148,9 +148,6 @@ public class DataDstLua extends DataDstJava {
                     w.write(c);
                     break;
                 case '/':
-                    if (b == '<') {
-                        w.write('\\');
-                    }
                     w.write(c);
                     break;
                 case '\b':

@@ -10,6 +10,7 @@
 2. 增加UE输出代码的额外包含头文件选项
    + 增加 `UeCfg-IncludeHeader` 选项，对所有输出的UE代码额外包含头文件
    + 增加 `org.xresloader.ue.include_header` 插件用于对于特定的Message额外附加包含文件
+3. 修复Lua输出 `</` 时追加了冗余的 `\` 导致转移错误的问题。
 
 ## 2.13.0
 

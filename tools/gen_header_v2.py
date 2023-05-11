@@ -42,14 +42,6 @@ proto_file_no_lite_data = re.sub(
     '// option optimize_for = LITE_RUNTIME;', proto_file_data)
 open(proto_file, 'wb').write(proto_file_no_lite_data.encode('utf-8'))
 
-print('[PROCESS] generate java source ... ')
-exec_args = [find_protoc(), java_out_dir]
-exec_args.extend(common_args)
-exec_args.extend([proto_file])
-exec_args.extend(extension_proto_file)
-Popen(exec_args, shell=False).wait()
-print('[PROCESS] generate java source done.')
-
 # pb 文件为LITE版本
 open(proto_file, 'wb').write(proto_file_data.encode('utf-8'))
 

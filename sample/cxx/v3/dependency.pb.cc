@@ -4,95 +4,128 @@
 #include "dependency.pb.h"
 
 #include <algorithm>
-
-#include <google/protobuf/io/coded_stream.h>
-#include <google/protobuf/extension_set.h>
-#include <google/protobuf/wire_format_lite.h>
-#include <google/protobuf/descriptor.h>
-#include <google/protobuf/generated_message_reflection.h>
-#include <google/protobuf/reflection_ops.h>
-#include <google/protobuf/wire_format.h>
+#include "google/protobuf/io/coded_stream.h"
+#include "google/protobuf/extension_set.h"
+#include "google/protobuf/wire_format_lite.h"
+#include "google/protobuf/descriptor.h"
+#include "google/protobuf/generated_message_reflection.h"
+#include "google/protobuf/reflection_ops.h"
+#include "google/protobuf/wire_format.h"
 // @@protoc_insertion_point(includes)
-#include <google/protobuf/port_def.inc>
 
+// Must be included last.
+#include "google/protobuf/port_def.inc"
 PROTOBUF_PRAGMA_INIT_SEG
-
 namespace _pb = ::PROTOBUF_NAMESPACE_ID;
-namespace _pbi = _pb::internal;
-
+namespace _pbi = ::PROTOBUF_NAMESPACE_ID::internal;
 PROTOBUF_CONSTEXPR dep_cfg::dep_cfg(
     ::_pbi::ConstantInitialized): _impl_{
-    /*decltype(_impl_.name_)*/{&::_pbi::fixed_address_empty_string, ::_pbi::ConstantInitialized{}}
+    /*decltype(_impl_._has_bits_)*/{}
+  , /*decltype(_impl_._cached_size_)*/{}
+  , /*decltype(_impl_.name_)*/ {
+    &::_pbi::fixed_address_empty_string, ::_pbi::ConstantInitialized {}
+  }
+
   , /*decltype(_impl_.dep2_)*/nullptr
-  , /*decltype(_impl_.id_)*/0u
-  , /*decltype(_impl_._cached_size_)*/{}} {}
+  , /*decltype(_impl_.id_)*/ 0u
+} {}
 struct dep_cfgDefaultTypeInternal {
-  PROTOBUF_CONSTEXPR dep_cfgDefaultTypeInternal()
-      : _instance(::_pbi::ConstantInitialized{}) {}
+  PROTOBUF_CONSTEXPR dep_cfgDefaultTypeInternal() : _instance(::_pbi::ConstantInitialized{}) {}
   ~dep_cfgDefaultTypeInternal() {}
   union {
     dep_cfg _instance;
   };
 };
-PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 dep_cfgDefaultTypeInternal _dep_cfg_default_instance_;
+
+PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT
+    PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 dep_cfgDefaultTypeInternal _dep_cfg_default_instance_;
 static ::_pb::Metadata file_level_metadata_dependency_2eproto[1];
 static const ::_pb::EnumDescriptor* file_level_enum_descriptors_dependency_2eproto[2];
-static constexpr ::_pb::ServiceDescriptor const** file_level_service_descriptors_dependency_2eproto = nullptr;
-
-const uint32_t TableStruct_dependency_2eproto::offsets[] PROTOBUF_SECTION_VARIABLE(protodesc_cold) = {
-  ~0u,  // no _has_bits_
-  PROTOBUF_FIELD_OFFSET(::dep_cfg, _internal_metadata_),
-  ~0u,  // no _extensions_
-  ~0u,  // no _oneof_case_
-  ~0u,  // no _weak_field_map_
-  ~0u,  // no _inlined_string_donated_
-  PROTOBUF_FIELD_OFFSET(::dep_cfg, _impl_.id_),
-  PROTOBUF_FIELD_OFFSET(::dep_cfg, _impl_.name_),
-  PROTOBUF_FIELD_OFFSET(::dep_cfg, _impl_.dep2_),
+static constexpr const ::_pb::ServiceDescriptor**
+    file_level_service_descriptors_dependency_2eproto = nullptr;
+const ::uint32_t TableStruct_dependency_2eproto::offsets[] PROTOBUF_SECTION_VARIABLE(
+    protodesc_cold) = {
+    PROTOBUF_FIELD_OFFSET(::dep_cfg, _impl_._has_bits_),
+    PROTOBUF_FIELD_OFFSET(::dep_cfg, _internal_metadata_),
+    ~0u,  // no _extensions_
+    ~0u,  // no _oneof_case_
+    ~0u,  // no _weak_field_map_
+    ~0u,  // no _inlined_string_donated_
+    ~0u,  // no _split_
+    ~0u,  // no sizeof(Split)
+    PROTOBUF_FIELD_OFFSET(::dep_cfg, _impl_.id_),
+    PROTOBUF_FIELD_OFFSET(::dep_cfg, _impl_.name_),
+    PROTOBUF_FIELD_OFFSET(::dep_cfg, _impl_.dep2_),
+    ~0u,
+    ~0u,
+    0,
 };
-static const ::_pbi::MigrationSchema schemas[] PROTOBUF_SECTION_VARIABLE(protodesc_cold) = {
-  { 0, -1, -1, sizeof(::dep_cfg)},
+
+static const ::_pbi::MigrationSchema
+    schemas[] PROTOBUF_SECTION_VARIABLE(protodesc_cold) = {
+        { 0, 11, -1, sizeof(::dep_cfg)},
 };
 
 static const ::_pb::Message* const file_default_instances[] = {
-  &::_dep_cfg_default_instance_._instance,
+    &::_dep_cfg_default_instance_._instance,
 };
-
-const char descriptor_table_protodef_dependency_2eproto[] PROTOBUF_SECTION_VARIABLE(protodesc_cold) =
-  "\n\020dependency.proto\032\020xresloader.proto\032\020de"
-  "p_level2.proto\"<\n\007dep_cfg\022\n\n\002id\030\001 \001(\r\022\014\n"
-  "\004name\030\002 \001(\t\022\027\n\004dep2\030\003 \001(\0132\t.dep2_cfg*\313\002\n"
-  "\021game_const_config\022\022\n\016EN_GCC_UNKNOWN\020\000\022\030"
-  "\n\023EN_GCC_PERCENT_BASE\020\220N\022\034\n\030EN_GCC_RANDO"
-  "M_RANGE_UNIT\020\n\022 \n\031EN_GCC_RESOURCE_MAX_LI"
-  "MIT\020\377\254\342\004\022\027\n\022EN_GCC_LEVEL_LIMIT\020\347\007\022\034\n\030EN_"
-  "GCC_SOLDIER_TYPE_MASK\020d\022\036\n\031EN_GCC_ACTIVI"
-  "TY_TYPE_MASK\020\350\007\022\035\n\031EN_GCC_FORMULAR_TYPE_"
-  "MASK\020\n\022\030\n\023EN_GCC_SCREEN_WIDTH\020\360\010\022\031\n\024EN_G"
-  "CC_SCREEN_HEIGHT\020\200\005\022\031\n\024EN_GCC_CAMERA_OFF"
-  "SET\020\214\002\032\002\020\001*Z\n\tcost_type\022\021\n\rEN_CT_UNKNOWN"
-  "\020\000\022\033\n\013EN_CT_MONEY\020\221N\032\t\322>\006\351\207\221\345\270\201\022\035\n\rEN_CT"
-  "_DIAMOND\020\365N\032\t\322>\006\351\222\273\347\237\263b\006proto3"
-  ;
-static const ::_pbi::DescriptorTable* const descriptor_table_dependency_2eproto_deps[2] = {
-  &::descriptor_table_dep_5flevel2_2eproto,
-  &::descriptor_table_xresloader_2eproto,
+const char descriptor_table_protodef_dependency_2eproto[] PROTOBUF_SECTION_VARIABLE(protodesc_cold) = {
+    "\n\020dependency.proto\032\020xresloader.proto\032\020de"
+    "p_level2.proto\"<\n\007dep_cfg\022\n\n\002id\030\001 \001(\r\022\014\n"
+    "\004name\030\002 \001(\t\022\027\n\004dep2\030\003 \001(\0132\t.dep2_cfg*\313\002\n"
+    "\021game_const_config\022\022\n\016EN_GCC_UNKNOWN\020\000\022\030"
+    "\n\023EN_GCC_PERCENT_BASE\020\220N\022\034\n\030EN_GCC_RANDO"
+    "M_RANGE_UNIT\020\n\022 \n\031EN_GCC_RESOURCE_MAX_LI"
+    "MIT\020\377\254\342\004\022\027\n\022EN_GCC_LEVEL_LIMIT\020\347\007\022\034\n\030EN_"
+    "GCC_SOLDIER_TYPE_MASK\020d\022\036\n\031EN_GCC_ACTIVI"
+    "TY_TYPE_MASK\020\350\007\022\035\n\031EN_GCC_FORMULAR_TYPE_"
+    "MASK\020\n\022\030\n\023EN_GCC_SCREEN_WIDTH\020\360\010\022\031\n\024EN_G"
+    "CC_SCREEN_HEIGHT\020\200\005\022\031\n\024EN_GCC_CAMERA_OFF"
+    "SET\020\214\002\032\002\020\001*Z\n\tcost_type\022\021\n\rEN_CT_UNKNOWN"
+    "\020\000\022\033\n\013EN_CT_MONEY\020\221N\032\t\322>\006\351\207\221\345\270\201\022\035\n\rEN_CT"
+    "_DIAMOND\020\365N\032\t\322>\006\351\222\273\347\237\263b\006proto3"
 };
-static ::_pbi::once_flag descriptor_table_dependency_2eproto_once;
+static const ::_pbi::DescriptorTable* const descriptor_table_dependency_2eproto_deps[2] =
+    {
+        &::descriptor_table_dep_5flevel2_2eproto,
+        &::descriptor_table_xresloader_2eproto,
+};
+static ::absl::once_flag descriptor_table_dependency_2eproto_once;
 const ::_pbi::DescriptorTable descriptor_table_dependency_2eproto = {
-    false, false, 550, descriptor_table_protodef_dependency_2eproto,
+    false,
+    false,
+    550,
+    descriptor_table_protodef_dependency_2eproto,
     "dependency.proto",
-    &descriptor_table_dependency_2eproto_once, descriptor_table_dependency_2eproto_deps, 2, 1,
-    schemas, file_default_instances, TableStruct_dependency_2eproto::offsets,
-    file_level_metadata_dependency_2eproto, file_level_enum_descriptors_dependency_2eproto,
+    &descriptor_table_dependency_2eproto_once,
+    descriptor_table_dependency_2eproto_deps,
+    2,
+    1,
+    schemas,
+    file_default_instances,
+    TableStruct_dependency_2eproto::offsets,
+    file_level_metadata_dependency_2eproto,
+    file_level_enum_descriptors_dependency_2eproto,
     file_level_service_descriptors_dependency_2eproto,
 };
+
+// This function exists to be marked as weak.
+// It can significantly speed up compilation by breaking up LLVM's SCC
+// in the .pb.cc translation units. Large translation units see a
+// reduction of more than 35% of walltime for optimized builds. Without
+// the weak attribute all the messages in the file, including all the
+// vtables and everything they use become part of the same SCC through
+// a cycle like:
+// GetMetadata -> descriptor table -> default instances ->
+//   vtables -> GetMetadata
+// By adding a weak function here we break the connection from the
+// individual vtables back into the descriptor table.
 PROTOBUF_ATTRIBUTE_WEAK const ::_pbi::DescriptorTable* descriptor_table_dependency_2eproto_getter() {
   return &descriptor_table_dependency_2eproto;
 }
-
 // Force running AddDescriptors() at dynamic initialization time.
-PROTOBUF_ATTRIBUTE_INIT_PRIORITY2 static ::_pbi::AddDescriptorsRunner dynamic_init_dummy_dependency_2eproto(&descriptor_table_dependency_2eproto);
+PROTOBUF_ATTRIBUTE_INIT_PRIORITY2
+static ::_pbi::AddDescriptorsRunner dynamic_init_dummy_dependency_2eproto(&descriptor_table_dependency_2eproto);
 const ::PROTOBUF_NAMESPACE_ID::EnumDescriptor* game_const_config_descriptor() {
   ::PROTOBUF_NAMESPACE_ID::internal::AssignDescriptors(&descriptor_table_dependency_2eproto);
   return file_level_enum_descriptors_dependency_2eproto[0];
@@ -114,7 +147,6 @@ bool game_const_config_IsValid(int value) {
       return false;
   }
 }
-
 const ::PROTOBUF_NAMESPACE_ID::EnumDescriptor* cost_type_descriptor() {
   ::PROTOBUF_NAMESPACE_ID::internal::AssignDescriptors(&descriptor_table_dependency_2eproto);
   return file_level_enum_descriptors_dependency_2eproto[1];
@@ -129,13 +161,17 @@ bool cost_type_IsValid(int value) {
       return false;
   }
 }
-
-
 // ===================================================================
 
 class dep_cfg::_Internal {
  public:
+  using HasBits = decltype(std::declval<dep_cfg>()._impl_._has_bits_);
+  static constexpr ::int32_t kHasBitsOffset =
+    8 * PROTOBUF_FIELD_OFFSET(dep_cfg, _impl_._has_bits_);
   static const ::dep2_cfg& dep2(const dep_cfg* msg);
+  static void set_has_dep2(HasBits* has_bits) {
+    (*has_bits)[0] |= 1u;
+  }
 };
 
 const ::dep2_cfg&
@@ -143,56 +179,56 @@ dep_cfg::_Internal::dep2(const dep_cfg* msg) {
   return *msg->_impl_.dep2_;
 }
 void dep_cfg::clear_dep2() {
-  if (GetArenaForAllocation() == nullptr && _impl_.dep2_ != nullptr) {
-    delete _impl_.dep2_;
-  }
-  _impl_.dep2_ = nullptr;
+  if (_impl_.dep2_ != nullptr) _impl_.dep2_->Clear();
+  _impl_._has_bits_[0] &= ~0x00000001u;
 }
-dep_cfg::dep_cfg(::PROTOBUF_NAMESPACE_ID::Arena* arena,
-                         bool is_message_owned)
-  : ::PROTOBUF_NAMESPACE_ID::Message(arena, is_message_owned) {
-  SharedCtor(arena, is_message_owned);
+dep_cfg::dep_cfg(::PROTOBUF_NAMESPACE_ID::Arena* arena)
+  : ::PROTOBUF_NAMESPACE_ID::Message(arena) {
+  SharedCtor(arena);
   // @@protoc_insertion_point(arena_constructor:dep_cfg)
 }
 dep_cfg::dep_cfg(const dep_cfg& from)
   : ::PROTOBUF_NAMESPACE_ID::Message() {
   dep_cfg* const _this = this; (void)_this;
   new (&_impl_) Impl_{
-      decltype(_impl_.name_){}
+      decltype(_impl_._has_bits_){from._impl_._has_bits_}
+    , /*decltype(_impl_._cached_size_)*/{}
+    , decltype(_impl_.name_) {}
+
     , decltype(_impl_.dep2_){nullptr}
-    , decltype(_impl_.id_){}
-    , /*decltype(_impl_._cached_size_)*/{}};
+    , decltype(_impl_.id_) {}
+  };
 
   _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
   _impl_.name_.InitDefault();
   #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
-    _impl_.name_.Set("", GetArenaForAllocation());
-  #endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+        _impl_.name_.Set("", GetArenaForAllocation());
+  #endif  // PROTOBUF_FORCE_COPY_DEFAULT_STRING
   if (!from._internal_name().empty()) {
-    _this->_impl_.name_.Set(from._internal_name(), 
-      _this->GetArenaForAllocation());
+    _this->_impl_.name_.Set(from._internal_name(), _this->GetArenaForAllocation());
   }
-  if (from._internal_has_dep2()) {
+  if ((from._impl_._has_bits_[0] & 0x00000001u) != 0) {
     _this->_impl_.dep2_ = new ::dep2_cfg(*from._impl_.dep2_);
   }
   _this->_impl_.id_ = from._impl_.id_;
   // @@protoc_insertion_point(copy_constructor:dep_cfg)
 }
 
-inline void dep_cfg::SharedCtor(
-    ::_pb::Arena* arena, bool is_message_owned) {
+inline void dep_cfg::SharedCtor(::_pb::Arena* arena) {
   (void)arena;
-  (void)is_message_owned;
   new (&_impl_) Impl_{
-      decltype(_impl_.name_){}
-    , decltype(_impl_.dep2_){nullptr}
-    , decltype(_impl_.id_){0u}
+      decltype(_impl_._has_bits_){}
     , /*decltype(_impl_._cached_size_)*/{}
+    , decltype(_impl_.name_) {}
+
+    , decltype(_impl_.dep2_){nullptr}
+    , decltype(_impl_.id_) { 0u }
+
   };
   _impl_.name_.InitDefault();
   #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
-    _impl_.name_.Set("", GetArenaForAllocation());
-  #endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+        _impl_.name_.Set("", GetArenaForAllocation());
+  #endif  // PROTOBUF_FORCE_COPY_DEFAULT_STRING
 }
 
 dep_cfg::~dep_cfg() {
@@ -205,7 +241,7 @@ dep_cfg::~dep_cfg() {
 }
 
 inline void dep_cfg::SharedDtor() {
-  GOOGLE_DCHECK(GetArenaForAllocation() == nullptr);
+  ABSL_DCHECK(GetArenaForAllocation() == nullptr);
   _impl_.name_.Destroy();
   if (this != internal_default_instance()) delete _impl_.dep2_;
 }
@@ -216,50 +252,56 @@ void dep_cfg::SetCachedSize(int size) const {
 
 void dep_cfg::Clear() {
 // @@protoc_insertion_point(message_clear_start:dep_cfg)
-  uint32_t cached_has_bits = 0;
+  ::uint32_t cached_has_bits = 0;
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
   _impl_.name_.ClearToEmpty();
-  if (GetArenaForAllocation() == nullptr && _impl_.dep2_ != nullptr) {
-    delete _impl_.dep2_;
+  cached_has_bits = _impl_._has_bits_[0];
+  if (cached_has_bits & 0x00000001u) {
+    ABSL_DCHECK(_impl_.dep2_ != nullptr);
+    _impl_.dep2_->Clear();
   }
-  _impl_.dep2_ = nullptr;
   _impl_.id_ = 0u;
+  _impl_._has_bits_.Clear();
   _internal_metadata_.Clear<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
 }
 
 const char* dep_cfg::_InternalParse(const char* ptr, ::_pbi::ParseContext* ctx) {
 #define CHK_(x) if (PROTOBUF_PREDICT_FALSE(!(x))) goto failure
+  _Internal::HasBits has_bits{};
   while (!ctx->Done(&ptr)) {
-    uint32_t tag;
+    ::uint32_t tag;
     ptr = ::_pbi::ReadTag(ptr, &tag);
     switch (tag >> 3) {
       // uint32 id = 1;
       case 1:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 8)) {
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::uint8_t>(tag) == 8)) {
           _impl_.id_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint32(&ptr);
           CHK_(ptr);
-        } else
+        } else {
           goto handle_unusual;
+        }
         continue;
       // string name = 2;
       case 2:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 18)) {
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::uint8_t>(tag) == 18)) {
           auto str = _internal_mutable_name();
           ptr = ::_pbi::InlineGreedyStringParser(str, ptr, ctx);
           CHK_(ptr);
           CHK_(::_pbi::VerifyUTF8(str, "dep_cfg.name"));
-        } else
+        } else {
           goto handle_unusual;
+        }
         continue;
       // .dep2_cfg dep2 = 3;
       case 3:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 26)) {
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::uint8_t>(tag) == 26)) {
           ptr = ctx->ParseMessage(_internal_mutable_dep2(), ptr);
           CHK_(ptr);
-        } else
+        } else {
           goto handle_unusual;
+        }
         continue;
       default:
         goto handle_unusual;
@@ -277,6 +319,7 @@ const char* dep_cfg::_InternalParse(const char* ptr, ::_pbi::ParseContext* ctx) 
     CHK_(ptr != nullptr);
   }  // while
 message_done:
+  _impl_._has_bits_.Or(has_bits);
   return ptr;
 failure:
   ptr = nullptr;
@@ -284,30 +327,30 @@ failure:
 #undef CHK_
 }
 
-uint8_t* dep_cfg::_InternalSerialize(
-    uint8_t* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const {
+::uint8_t* dep_cfg::_InternalSerialize(
+    ::uint8_t* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const {
   // @@protoc_insertion_point(serialize_to_array_start:dep_cfg)
-  uint32_t cached_has_bits = 0;
+  ::uint32_t cached_has_bits = 0;
   (void) cached_has_bits;
 
   // uint32 id = 1;
   if (this->_internal_id() != 0) {
     target = stream->EnsureSpace(target);
-    target = ::_pbi::WireFormatLite::WriteUInt32ToArray(1, this->_internal_id(), target);
+    target = ::_pbi::WireFormatLite::WriteUInt32ToArray(
+        1, this->_internal_id(), target);
   }
 
   // string name = 2;
   if (!this->_internal_name().empty()) {
+    const std::string& _s = this->_internal_name();
     ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
-      this->_internal_name().data(), static_cast<int>(this->_internal_name().length()),
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::SERIALIZE,
-      "dep_cfg.name");
-    target = stream->WriteStringMaybeAliased(
-        2, this->_internal_name(), target);
+        _s.data(), static_cast<int>(_s.length()), ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::SERIALIZE, "dep_cfg.name");
+    target = stream->WriteStringMaybeAliased(2, _s, target);
   }
 
+  cached_has_bits = _impl_._has_bits_[0];
   // .dep2_cfg dep2 = 3;
-  if (this->_internal_has_dep2()) {
+  if (cached_has_bits & 0x00000001u) {
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
       InternalWriteMessage(3, _Internal::dep2(this),
         _Internal::dep2(this).GetCachedSize(), target, stream);
@@ -321,23 +364,23 @@ uint8_t* dep_cfg::_InternalSerialize(
   return target;
 }
 
-size_t dep_cfg::ByteSizeLong() const {
+::size_t dep_cfg::ByteSizeLong() const {
 // @@protoc_insertion_point(message_byte_size_start:dep_cfg)
-  size_t total_size = 0;
+  ::size_t total_size = 0;
 
-  uint32_t cached_has_bits = 0;
+  ::uint32_t cached_has_bits = 0;
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
   // string name = 2;
   if (!this->_internal_name().empty()) {
-    total_size += 1 +
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
-        this->_internal_name());
+    total_size += 1 + ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
+                                    this->_internal_name());
   }
 
   // .dep2_cfg dep2 = 3;
-  if (this->_internal_has_dep2()) {
+  cached_has_bits = _impl_._has_bits_[0];
+  if (cached_has_bits & 0x00000001u) {
     total_size += 1 +
       ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
         *_impl_.dep2_);
@@ -345,7 +388,8 @@ size_t dep_cfg::ByteSizeLong() const {
 
   // uint32 id = 1;
   if (this->_internal_id() != 0) {
-    total_size += ::_pbi::WireFormatLite::UInt32SizePlusOne(this->_internal_id());
+    total_size += ::_pbi::WireFormatLite::UInt32SizePlusOne(
+        this->_internal_id());
   }
 
   return MaybeComputeUnknownFieldsSize(total_size, &_impl_._cached_size_);
@@ -362,14 +406,14 @@ void dep_cfg::MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg, const ::PROTOB
   auto* const _this = static_cast<dep_cfg*>(&to_msg);
   auto& from = static_cast<const dep_cfg&>(from_msg);
   // @@protoc_insertion_point(class_specific_merge_from_start:dep_cfg)
-  GOOGLE_DCHECK_NE(&from, _this);
-  uint32_t cached_has_bits = 0;
+  ABSL_DCHECK_NE(&from, _this);
+  ::uint32_t cached_has_bits = 0;
   (void) cached_has_bits;
 
   if (!from._internal_name().empty()) {
     _this->_internal_set_name(from._internal_name());
   }
-  if (from._internal_has_dep2()) {
+  if ((from._impl_._has_bits_[0] & 0x00000001u) != 0) {
     _this->_internal_mutable_dep2()->::dep2_cfg::MergeFrom(
         from._internal_dep2());
   }
@@ -395,10 +439,9 @@ void dep_cfg::InternalSwap(dep_cfg* other) {
   auto* lhs_arena = GetArenaForAllocation();
   auto* rhs_arena = other->GetArenaForAllocation();
   _internal_metadata_.InternalSwap(&other->_internal_metadata_);
-  ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::InternalSwap(
-      &_impl_.name_, lhs_arena,
-      &other->_impl_.name_, rhs_arena
-  );
+  swap(_impl_._has_bits_[0], other->_impl_._has_bits_[0]);
+  ::_pbi::ArenaStringPtr::InternalSwap(&_impl_.name_, lhs_arena,
+                                       &other->_impl_.name_, rhs_arena);
   ::PROTOBUF_NAMESPACE_ID::internal::memswap<
       PROTOBUF_FIELD_OFFSET(dep_cfg, _impl_.id_)
       + sizeof(dep_cfg::_impl_.id_)
@@ -412,7 +455,6 @@ void dep_cfg::InternalSwap(dep_cfg* other) {
       &descriptor_table_dependency_2eproto_getter, &descriptor_table_dependency_2eproto_once,
       file_level_metadata_dependency_2eproto[0]);
 }
-
 // @@protoc_insertion_point(namespace_scope)
 PROTOBUF_NAMESPACE_OPEN
 template<> PROTOBUF_NOINLINE ::dep_cfg*
@@ -420,6 +462,5 @@ Arena::CreateMaybeMessage< ::dep_cfg >(Arena* arena) {
   return Arena::CreateMessageInternal< ::dep_cfg >(arena);
 }
 PROTOBUF_NAMESPACE_CLOSE
-
 // @@protoc_insertion_point(global_scope)
-#include <google/protobuf/port_undef.inc>
+#include "google/protobuf/port_undef.inc"

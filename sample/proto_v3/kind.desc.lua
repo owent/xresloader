@@ -50,6 +50,9 @@ local const_res = {
           name = "arr_in_arr",
           options = {
             helper = "helper",
+            include_header = {
+              "Engine/CompositeDataTable.h",
+            },
             not_data_table = true,
           },
         },

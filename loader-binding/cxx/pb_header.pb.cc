@@ -4,22 +4,20 @@
 #include "pb_header.pb.h"
 
 #include <algorithm>
-
-#include <google/protobuf/io/coded_stream.h>
-#include <google/protobuf/extension_set.h>
-#include <google/protobuf/wire_format_lite.h>
-#include <google/protobuf/descriptor.h>
-#include <google/protobuf/generated_message_reflection.h>
-#include <google/protobuf/reflection_ops.h>
-#include <google/protobuf/wire_format.h>
+#include "google/protobuf/io/coded_stream.h"
+#include "google/protobuf/extension_set.h"
+#include "google/protobuf/wire_format_lite.h"
+#include "google/protobuf/descriptor.h"
+#include "google/protobuf/generated_message_reflection.h"
+#include "google/protobuf/reflection_ops.h"
+#include "google/protobuf/wire_format.h"
 // @@protoc_insertion_point(includes)
-#include <google/protobuf/port_def.inc>
 
+// Must be included last.
+#include "google/protobuf/port_def.inc"
 PROTOBUF_PRAGMA_INIT_SEG
-
 namespace _pb = ::PROTOBUF_NAMESPACE_ID;
-namespace _pbi = _pb::internal;
-
+namespace _pbi = ::PROTOBUF_NAMESPACE_ID::internal;
 namespace org {
 namespace xresloader {
 namespace pb {
@@ -27,149 +25,205 @@ PROTOBUF_CONSTEXPR xresloader_data_source::xresloader_data_source(
     ::_pbi::ConstantInitialized): _impl_{
     /*decltype(_impl_._has_bits_)*/{}
   , /*decltype(_impl_._cached_size_)*/{}
-  , /*decltype(_impl_.file_)*/{&::_pbi::fixed_address_empty_string, ::_pbi::ConstantInitialized{}}
-  , /*decltype(_impl_.sheet_)*/{&::_pbi::fixed_address_empty_string, ::_pbi::ConstantInitialized{}}} {}
+  , /*decltype(_impl_.file_)*/ {
+    &::_pbi::fixed_address_empty_string, ::_pbi::ConstantInitialized {}
+  }
+
+  , /*decltype(_impl_.sheet_)*/ {
+    &::_pbi::fixed_address_empty_string, ::_pbi::ConstantInitialized {}
+  }
+} {}
 struct xresloader_data_sourceDefaultTypeInternal {
-  PROTOBUF_CONSTEXPR xresloader_data_sourceDefaultTypeInternal()
-      : _instance(::_pbi::ConstantInitialized{}) {}
+  PROTOBUF_CONSTEXPR xresloader_data_sourceDefaultTypeInternal() : _instance(::_pbi::ConstantInitialized{}) {}
   ~xresloader_data_sourceDefaultTypeInternal() {}
   union {
     xresloader_data_source _instance;
   };
 };
-PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 xresloader_data_sourceDefaultTypeInternal _xresloader_data_source_default_instance_;
+
+PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT
+    PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 xresloader_data_sourceDefaultTypeInternal _xresloader_data_source_default_instance_;
 PROTOBUF_CONSTEXPR xresloader_header::xresloader_header(
     ::_pbi::ConstantInitialized): _impl_{
     /*decltype(_impl_._has_bits_)*/{}
   , /*decltype(_impl_._cached_size_)*/{}
   , /*decltype(_impl_.data_source_)*/{}
-  , /*decltype(_impl_.xres_ver_)*/{&::_pbi::fixed_address_empty_string, ::_pbi::ConstantInitialized{}}
-  , /*decltype(_impl_.data_ver_)*/{&::_pbi::fixed_address_empty_string, ::_pbi::ConstantInitialized{}}
-  , /*decltype(_impl_.hash_code_)*/{&::_pbi::fixed_address_empty_string, ::_pbi::ConstantInitialized{}}
-  , /*decltype(_impl_.description_)*/{&::_pbi::fixed_address_empty_string, ::_pbi::ConstantInitialized{}}
-  , /*decltype(_impl_.count_)*/0u} {}
+  , /*decltype(_impl_.xres_ver_)*/ {
+    &::_pbi::fixed_address_empty_string, ::_pbi::ConstantInitialized {}
+  }
+
+  , /*decltype(_impl_.data_ver_)*/ {
+    &::_pbi::fixed_address_empty_string, ::_pbi::ConstantInitialized {}
+  }
+
+  , /*decltype(_impl_.hash_code_)*/ {
+    &::_pbi::fixed_address_empty_string, ::_pbi::ConstantInitialized {}
+  }
+
+  , /*decltype(_impl_.description_)*/ {
+    &::_pbi::fixed_address_empty_string, ::_pbi::ConstantInitialized {}
+  }
+
+  , /*decltype(_impl_.count_)*/ 0u
+} {}
 struct xresloader_headerDefaultTypeInternal {
-  PROTOBUF_CONSTEXPR xresloader_headerDefaultTypeInternal()
-      : _instance(::_pbi::ConstantInitialized{}) {}
+  PROTOBUF_CONSTEXPR xresloader_headerDefaultTypeInternal() : _instance(::_pbi::ConstantInitialized{}) {}
   ~xresloader_headerDefaultTypeInternal() {}
   union {
     xresloader_header _instance;
   };
 };
-PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 xresloader_headerDefaultTypeInternal _xresloader_header_default_instance_;
+
+PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT
+    PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 xresloader_headerDefaultTypeInternal _xresloader_header_default_instance_;
 PROTOBUF_CONSTEXPR xresloader_datablocks::xresloader_datablocks(
     ::_pbi::ConstantInitialized): _impl_{
     /*decltype(_impl_._has_bits_)*/{}
   , /*decltype(_impl_._cached_size_)*/{}
   , /*decltype(_impl_.data_block_)*/{}
-  , /*decltype(_impl_.data_message_type_)*/{&::_pbi::fixed_address_empty_string, ::_pbi::ConstantInitialized{}}
+  , /*decltype(_impl_.data_message_type_)*/ {
+    &::_pbi::fixed_address_empty_string, ::_pbi::ConstantInitialized {}
+  }
+
   , /*decltype(_impl_.header_)*/nullptr} {}
 struct xresloader_datablocksDefaultTypeInternal {
-  PROTOBUF_CONSTEXPR xresloader_datablocksDefaultTypeInternal()
-      : _instance(::_pbi::ConstantInitialized{}) {}
+  PROTOBUF_CONSTEXPR xresloader_datablocksDefaultTypeInternal() : _instance(::_pbi::ConstantInitialized{}) {}
   ~xresloader_datablocksDefaultTypeInternal() {}
   union {
     xresloader_datablocks _instance;
   };
 };
-PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 xresloader_datablocksDefaultTypeInternal _xresloader_datablocks_default_instance_;
+
+PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT
+    PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 xresloader_datablocksDefaultTypeInternal _xresloader_datablocks_default_instance_;
 }  // namespace pb
 }  // namespace xresloader
 }  // namespace org
 static ::_pb::Metadata file_level_metadata_pb_5fheader_2eproto[3];
-static constexpr ::_pb::EnumDescriptor const** file_level_enum_descriptors_pb_5fheader_2eproto = nullptr;
-static constexpr ::_pb::ServiceDescriptor const** file_level_service_descriptors_pb_5fheader_2eproto = nullptr;
-
-const uint32_t TableStruct_pb_5fheader_2eproto::offsets[] PROTOBUF_SECTION_VARIABLE(protodesc_cold) = {
-  PROTOBUF_FIELD_OFFSET(::org::xresloader::pb::xresloader_data_source, _impl_._has_bits_),
-  PROTOBUF_FIELD_OFFSET(::org::xresloader::pb::xresloader_data_source, _internal_metadata_),
-  ~0u,  // no _extensions_
-  ~0u,  // no _oneof_case_
-  ~0u,  // no _weak_field_map_
-  ~0u,  // no _inlined_string_donated_
-  PROTOBUF_FIELD_OFFSET(::org::xresloader::pb::xresloader_data_source, _impl_.file_),
-  PROTOBUF_FIELD_OFFSET(::org::xresloader::pb::xresloader_data_source, _impl_.sheet_),
-  0,
-  1,
-  PROTOBUF_FIELD_OFFSET(::org::xresloader::pb::xresloader_header, _impl_._has_bits_),
-  PROTOBUF_FIELD_OFFSET(::org::xresloader::pb::xresloader_header, _internal_metadata_),
-  ~0u,  // no _extensions_
-  ~0u,  // no _oneof_case_
-  ~0u,  // no _weak_field_map_
-  ~0u,  // no _inlined_string_donated_
-  PROTOBUF_FIELD_OFFSET(::org::xresloader::pb::xresloader_header, _impl_.xres_ver_),
-  PROTOBUF_FIELD_OFFSET(::org::xresloader::pb::xresloader_header, _impl_.data_ver_),
-  PROTOBUF_FIELD_OFFSET(::org::xresloader::pb::xresloader_header, _impl_.count_),
-  PROTOBUF_FIELD_OFFSET(::org::xresloader::pb::xresloader_header, _impl_.hash_code_),
-  PROTOBUF_FIELD_OFFSET(::org::xresloader::pb::xresloader_header, _impl_.description_),
-  PROTOBUF_FIELD_OFFSET(::org::xresloader::pb::xresloader_header, _impl_.data_source_),
-  0,
-  1,
-  4,
-  2,
-  3,
-  ~0u,
-  PROTOBUF_FIELD_OFFSET(::org::xresloader::pb::xresloader_datablocks, _impl_._has_bits_),
-  PROTOBUF_FIELD_OFFSET(::org::xresloader::pb::xresloader_datablocks, _internal_metadata_),
-  ~0u,  // no _extensions_
-  ~0u,  // no _oneof_case_
-  ~0u,  // no _weak_field_map_
-  ~0u,  // no _inlined_string_donated_
-  PROTOBUF_FIELD_OFFSET(::org::xresloader::pb::xresloader_datablocks, _impl_.header_),
-  PROTOBUF_FIELD_OFFSET(::org::xresloader::pb::xresloader_datablocks, _impl_.data_block_),
-  PROTOBUF_FIELD_OFFSET(::org::xresloader::pb::xresloader_datablocks, _impl_.data_message_type_),
-  1,
-  ~0u,
-  0,
+static constexpr const ::_pb::EnumDescriptor**
+    file_level_enum_descriptors_pb_5fheader_2eproto = nullptr;
+static constexpr const ::_pb::ServiceDescriptor**
+    file_level_service_descriptors_pb_5fheader_2eproto = nullptr;
+const ::uint32_t TableStruct_pb_5fheader_2eproto::offsets[] PROTOBUF_SECTION_VARIABLE(
+    protodesc_cold) = {
+    PROTOBUF_FIELD_OFFSET(::org::xresloader::pb::xresloader_data_source, _impl_._has_bits_),
+    PROTOBUF_FIELD_OFFSET(::org::xresloader::pb::xresloader_data_source, _internal_metadata_),
+    ~0u,  // no _extensions_
+    ~0u,  // no _oneof_case_
+    ~0u,  // no _weak_field_map_
+    ~0u,  // no _inlined_string_donated_
+    ~0u,  // no _split_
+    ~0u,  // no sizeof(Split)
+    PROTOBUF_FIELD_OFFSET(::org::xresloader::pb::xresloader_data_source, _impl_.file_),
+    PROTOBUF_FIELD_OFFSET(::org::xresloader::pb::xresloader_data_source, _impl_.sheet_),
+    0,
+    1,
+    PROTOBUF_FIELD_OFFSET(::org::xresloader::pb::xresloader_header, _impl_._has_bits_),
+    PROTOBUF_FIELD_OFFSET(::org::xresloader::pb::xresloader_header, _internal_metadata_),
+    ~0u,  // no _extensions_
+    ~0u,  // no _oneof_case_
+    ~0u,  // no _weak_field_map_
+    ~0u,  // no _inlined_string_donated_
+    ~0u,  // no _split_
+    ~0u,  // no sizeof(Split)
+    PROTOBUF_FIELD_OFFSET(::org::xresloader::pb::xresloader_header, _impl_.xres_ver_),
+    PROTOBUF_FIELD_OFFSET(::org::xresloader::pb::xresloader_header, _impl_.data_ver_),
+    PROTOBUF_FIELD_OFFSET(::org::xresloader::pb::xresloader_header, _impl_.count_),
+    PROTOBUF_FIELD_OFFSET(::org::xresloader::pb::xresloader_header, _impl_.hash_code_),
+    PROTOBUF_FIELD_OFFSET(::org::xresloader::pb::xresloader_header, _impl_.description_),
+    PROTOBUF_FIELD_OFFSET(::org::xresloader::pb::xresloader_header, _impl_.data_source_),
+    0,
+    1,
+    4,
+    2,
+    3,
+    ~0u,
+    PROTOBUF_FIELD_OFFSET(::org::xresloader::pb::xresloader_datablocks, _impl_._has_bits_),
+    PROTOBUF_FIELD_OFFSET(::org::xresloader::pb::xresloader_datablocks, _internal_metadata_),
+    ~0u,  // no _extensions_
+    ~0u,  // no _oneof_case_
+    ~0u,  // no _weak_field_map_
+    ~0u,  // no _inlined_string_donated_
+    ~0u,  // no _split_
+    ~0u,  // no sizeof(Split)
+    PROTOBUF_FIELD_OFFSET(::org::xresloader::pb::xresloader_datablocks, _impl_.header_),
+    PROTOBUF_FIELD_OFFSET(::org::xresloader::pb::xresloader_datablocks, _impl_.data_block_),
+    PROTOBUF_FIELD_OFFSET(::org::xresloader::pb::xresloader_datablocks, _impl_.data_message_type_),
+    1,
+    ~0u,
+    0,
 };
-static const ::_pbi::MigrationSchema schemas[] PROTOBUF_SECTION_VARIABLE(protodesc_cold) = {
-  { 0, 8, -1, sizeof(::org::xresloader::pb::xresloader_data_source)},
-  { 10, 22, -1, sizeof(::org::xresloader::pb::xresloader_header)},
-  { 28, 37, -1, sizeof(::org::xresloader::pb::xresloader_datablocks)},
+
+static const ::_pbi::MigrationSchema
+    schemas[] PROTOBUF_SECTION_VARIABLE(protodesc_cold) = {
+        { 0, 10, -1, sizeof(::org::xresloader::pb::xresloader_data_source)},
+        { 12, 26, -1, sizeof(::org::xresloader::pb::xresloader_header)},
+        { 32, 43, -1, sizeof(::org::xresloader::pb::xresloader_datablocks)},
 };
 
 static const ::_pb::Message* const file_default_instances[] = {
-  &::org::xresloader::pb::_xresloader_data_source_default_instance_._instance,
-  &::org::xresloader::pb::_xresloader_header_default_instance_._instance,
-  &::org::xresloader::pb::_xresloader_datablocks_default_instance_._instance,
+    &::org::xresloader::pb::_xresloader_data_source_default_instance_._instance,
+    &::org::xresloader::pb::_xresloader_header_default_instance_._instance,
+    &::org::xresloader::pb::_xresloader_datablocks_default_instance_._instance,
 };
-
-const char descriptor_table_protodef_pb_5fheader_2eproto[] PROTOBUF_SECTION_VARIABLE(protodesc_cold) =
-  "\n\017pb_header.proto\022\021org.xresloader.pb\"5\n\026"
-  "xresloader_data_source\022\014\n\004file\030\001 \001(\t\022\r\n\005"
-  "sheet\030\002 \001(\t\"\256\001\n\021xresloader_header\022\020\n\010xre"
-  "s_ver\030\001 \001(\t\022\020\n\010data_ver\030\002 \001(\t\022\r\n\005count\030\003"
-  " \002(\r\022\021\n\thash_code\030\004 \002(\t\022\023\n\013description\030\005"
-  " \001(\t\022>\n\013data_source\030\013 \003(\0132).org.xresload"
-  "er.pb.xresloader_data_source\"|\n\025xresload"
-  "er_datablocks\0224\n\006header\030\001 \001(\0132$.org.xres"
-  "loader.pb.xresloader_header\022\022\n\ndata_bloc"
-  "k\030\002 \003(\014\022\031\n\021data_message_type\030\003 \001(\t"
-  ;
-static ::_pbi::once_flag descriptor_table_pb_5fheader_2eproto_once;
+const char descriptor_table_protodef_pb_5fheader_2eproto[] PROTOBUF_SECTION_VARIABLE(protodesc_cold) = {
+    "\n\017pb_header.proto\022\021org.xresloader.pb\"5\n\026"
+    "xresloader_data_source\022\014\n\004file\030\001 \001(\t\022\r\n\005"
+    "sheet\030\002 \001(\t\"\256\001\n\021xresloader_header\022\020\n\010xre"
+    "s_ver\030\001 \001(\t\022\020\n\010data_ver\030\002 \001(\t\022\r\n\005count\030\003"
+    " \002(\r\022\021\n\thash_code\030\004 \002(\t\022\023\n\013description\030\005"
+    " \001(\t\022>\n\013data_source\030\013 \003(\0132).org.xresload"
+    "er.pb.xresloader_data_source\"|\n\025xresload"
+    "er_datablocks\0224\n\006header\030\001 \001(\0132$.org.xres"
+    "loader.pb.xresloader_header\022\022\n\ndata_bloc"
+    "k\030\002 \003(\014\022\031\n\021data_message_type\030\003 \001(\t"
+};
+static ::absl::once_flag descriptor_table_pb_5fheader_2eproto_once;
 const ::_pbi::DescriptorTable descriptor_table_pb_5fheader_2eproto = {
-    false, false, 394, descriptor_table_protodef_pb_5fheader_2eproto,
+    false,
+    false,
+    394,
+    descriptor_table_protodef_pb_5fheader_2eproto,
     "pb_header.proto",
-    &descriptor_table_pb_5fheader_2eproto_once, nullptr, 0, 3,
-    schemas, file_default_instances, TableStruct_pb_5fheader_2eproto::offsets,
-    file_level_metadata_pb_5fheader_2eproto, file_level_enum_descriptors_pb_5fheader_2eproto,
+    &descriptor_table_pb_5fheader_2eproto_once,
+    nullptr,
+    0,
+    3,
+    schemas,
+    file_default_instances,
+    TableStruct_pb_5fheader_2eproto::offsets,
+    file_level_metadata_pb_5fheader_2eproto,
+    file_level_enum_descriptors_pb_5fheader_2eproto,
     file_level_service_descriptors_pb_5fheader_2eproto,
 };
+
+// This function exists to be marked as weak.
+// It can significantly speed up compilation by breaking up LLVM's SCC
+// in the .pb.cc translation units. Large translation units see a
+// reduction of more than 35% of walltime for optimized builds. Without
+// the weak attribute all the messages in the file, including all the
+// vtables and everything they use become part of the same SCC through
+// a cycle like:
+// GetMetadata -> descriptor table -> default instances ->
+//   vtables -> GetMetadata
+// By adding a weak function here we break the connection from the
+// individual vtables back into the descriptor table.
 PROTOBUF_ATTRIBUTE_WEAK const ::_pbi::DescriptorTable* descriptor_table_pb_5fheader_2eproto_getter() {
   return &descriptor_table_pb_5fheader_2eproto;
 }
-
 // Force running AddDescriptors() at dynamic initialization time.
-PROTOBUF_ATTRIBUTE_INIT_PRIORITY2 static ::_pbi::AddDescriptorsRunner dynamic_init_dummy_pb_5fheader_2eproto(&descriptor_table_pb_5fheader_2eproto);
+PROTOBUF_ATTRIBUTE_INIT_PRIORITY2
+static ::_pbi::AddDescriptorsRunner dynamic_init_dummy_pb_5fheader_2eproto(&descriptor_table_pb_5fheader_2eproto);
 namespace org {
 namespace xresloader {
 namespace pb {
-
 // ===================================================================
 
 class xresloader_data_source::_Internal {
  public:
   using HasBits = decltype(std::declval<xresloader_data_source>()._impl_._has_bits_);
+  static constexpr ::int32_t kHasBitsOffset =
+    8 * PROTOBUF_FIELD_OFFSET(xresloader_data_source, _impl_._has_bits_);
   static void set_has_file(HasBits* has_bits) {
     (*has_bits)[0] |= 1u;
   }
@@ -178,10 +232,9 @@ class xresloader_data_source::_Internal {
   }
 };
 
-xresloader_data_source::xresloader_data_source(::PROTOBUF_NAMESPACE_ID::Arena* arena,
-                         bool is_message_owned)
-  : ::PROTOBUF_NAMESPACE_ID::Message(arena, is_message_owned) {
-  SharedCtor(arena, is_message_owned);
+xresloader_data_source::xresloader_data_source(::PROTOBUF_NAMESPACE_ID::Arena* arena)
+  : ::PROTOBUF_NAMESPACE_ID::Message(arena) {
+  SharedCtor(arena);
   // @@protoc_insertion_point(arena_constructor:org.xresloader.pb.xresloader_data_source)
 }
 xresloader_data_source::xresloader_data_source(const xresloader_data_source& from)
@@ -190,47 +243,47 @@ xresloader_data_source::xresloader_data_source(const xresloader_data_source& fro
   new (&_impl_) Impl_{
       decltype(_impl_._has_bits_){from._impl_._has_bits_}
     , /*decltype(_impl_._cached_size_)*/{}
-    , decltype(_impl_.file_){}
-    , decltype(_impl_.sheet_){}};
+    , decltype(_impl_.file_) {}
+
+    , decltype(_impl_.sheet_) {}
+  };
 
   _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
   _impl_.file_.InitDefault();
   #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
-    _impl_.file_.Set("", GetArenaForAllocation());
-  #endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
-  if (from._internal_has_file()) {
-    _this->_impl_.file_.Set(from._internal_file(), 
-      _this->GetArenaForAllocation());
+        _impl_.file_.Set("", GetArenaForAllocation());
+  #endif  // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  if ((from._impl_._has_bits_[0] & 0x00000001u) != 0) {
+    _this->_impl_.file_.Set(from._internal_file(), _this->GetArenaForAllocation());
   }
   _impl_.sheet_.InitDefault();
   #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
-    _impl_.sheet_.Set("", GetArenaForAllocation());
-  #endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
-  if (from._internal_has_sheet()) {
-    _this->_impl_.sheet_.Set(from._internal_sheet(), 
-      _this->GetArenaForAllocation());
+        _impl_.sheet_.Set("", GetArenaForAllocation());
+  #endif  // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  if ((from._impl_._has_bits_[0] & 0x00000002u) != 0) {
+    _this->_impl_.sheet_.Set(from._internal_sheet(), _this->GetArenaForAllocation());
   }
   // @@protoc_insertion_point(copy_constructor:org.xresloader.pb.xresloader_data_source)
 }
 
-inline void xresloader_data_source::SharedCtor(
-    ::_pb::Arena* arena, bool is_message_owned) {
+inline void xresloader_data_source::SharedCtor(::_pb::Arena* arena) {
   (void)arena;
-  (void)is_message_owned;
   new (&_impl_) Impl_{
       decltype(_impl_._has_bits_){}
     , /*decltype(_impl_._cached_size_)*/{}
-    , decltype(_impl_.file_){}
-    , decltype(_impl_.sheet_){}
+    , decltype(_impl_.file_) {}
+
+    , decltype(_impl_.sheet_) {}
+
   };
   _impl_.file_.InitDefault();
   #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
-    _impl_.file_.Set("", GetArenaForAllocation());
-  #endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+        _impl_.file_.Set("", GetArenaForAllocation());
+  #endif  // PROTOBUF_FORCE_COPY_DEFAULT_STRING
   _impl_.sheet_.InitDefault();
   #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
-    _impl_.sheet_.Set("", GetArenaForAllocation());
-  #endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+        _impl_.sheet_.Set("", GetArenaForAllocation());
+  #endif  // PROTOBUF_FORCE_COPY_DEFAULT_STRING
 }
 
 xresloader_data_source::~xresloader_data_source() {
@@ -243,7 +296,7 @@ xresloader_data_source::~xresloader_data_source() {
 }
 
 inline void xresloader_data_source::SharedDtor() {
-  GOOGLE_DCHECK(GetArenaForAllocation() == nullptr);
+  ABSL_DCHECK(GetArenaForAllocation() == nullptr);
   _impl_.file_.Destroy();
   _impl_.sheet_.Destroy();
 }
@@ -254,7 +307,7 @@ void xresloader_data_source::SetCachedSize(int size) const {
 
 void xresloader_data_source::Clear() {
 // @@protoc_insertion_point(message_clear_start:org.xresloader.pb.xresloader_data_source)
-  uint32_t cached_has_bits = 0;
+  ::uint32_t cached_has_bits = 0;
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
@@ -275,32 +328,34 @@ const char* xresloader_data_source::_InternalParse(const char* ptr, ::_pbi::Pars
 #define CHK_(x) if (PROTOBUF_PREDICT_FALSE(!(x))) goto failure
   _Internal::HasBits has_bits{};
   while (!ctx->Done(&ptr)) {
-    uint32_t tag;
+    ::uint32_t tag;
     ptr = ::_pbi::ReadTag(ptr, &tag);
     switch (tag >> 3) {
       // optional string file = 1;
       case 1:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 10)) {
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::uint8_t>(tag) == 10)) {
           auto str = _internal_mutable_file();
           ptr = ::_pbi::InlineGreedyStringParser(str, ptr, ctx);
           CHK_(ptr);
           #ifndef NDEBUG
           ::_pbi::VerifyUTF8(str, "org.xresloader.pb.xresloader_data_source.file");
           #endif  // !NDEBUG
-        } else
+        } else {
           goto handle_unusual;
+        }
         continue;
       // optional string sheet = 2;
       case 2:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 18)) {
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::uint8_t>(tag) == 18)) {
           auto str = _internal_mutable_sheet();
           ptr = ::_pbi::InlineGreedyStringParser(str, ptr, ctx);
           CHK_(ptr);
           #ifndef NDEBUG
           ::_pbi::VerifyUTF8(str, "org.xresloader.pb.xresloader_data_source.sheet");
           #endif  // !NDEBUG
-        } else
+        } else {
           goto handle_unusual;
+        }
         continue;
       default:
         goto handle_unusual;
@@ -326,31 +381,27 @@ failure:
 #undef CHK_
 }
 
-uint8_t* xresloader_data_source::_InternalSerialize(
-    uint8_t* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const {
+::uint8_t* xresloader_data_source::_InternalSerialize(
+    ::uint8_t* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const {
   // @@protoc_insertion_point(serialize_to_array_start:org.xresloader.pb.xresloader_data_source)
-  uint32_t cached_has_bits = 0;
+  ::uint32_t cached_has_bits = 0;
   (void) cached_has_bits;
 
   cached_has_bits = _impl_._has_bits_[0];
   // optional string file = 1;
   if (cached_has_bits & 0x00000001u) {
-    ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::VerifyUTF8StringNamedField(
-      this->_internal_file().data(), static_cast<int>(this->_internal_file().length()),
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::SERIALIZE,
-      "org.xresloader.pb.xresloader_data_source.file");
-    target = stream->WriteStringMaybeAliased(
-        1, this->_internal_file(), target);
+    const std::string& _s = this->_internal_file();
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::VerifyUTF8StringNamedField(_s.data(), static_cast<int>(_s.length()), ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::SERIALIZE,
+                                "org.xresloader.pb.xresloader_data_source.file");
+    target = stream->WriteStringMaybeAliased(1, _s, target);
   }
 
   // optional string sheet = 2;
   if (cached_has_bits & 0x00000002u) {
-    ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::VerifyUTF8StringNamedField(
-      this->_internal_sheet().data(), static_cast<int>(this->_internal_sheet().length()),
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::SERIALIZE,
-      "org.xresloader.pb.xresloader_data_source.sheet");
-    target = stream->WriteStringMaybeAliased(
-        2, this->_internal_sheet(), target);
+    const std::string& _s = this->_internal_sheet();
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::VerifyUTF8StringNamedField(_s.data(), static_cast<int>(_s.length()), ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::SERIALIZE,
+                                "org.xresloader.pb.xresloader_data_source.sheet");
+    target = stream->WriteStringMaybeAliased(2, _s, target);
   }
 
   if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
@@ -361,11 +412,11 @@ uint8_t* xresloader_data_source::_InternalSerialize(
   return target;
 }
 
-size_t xresloader_data_source::ByteSizeLong() const {
+::size_t xresloader_data_source::ByteSizeLong() const {
 // @@protoc_insertion_point(message_byte_size_start:org.xresloader.pb.xresloader_data_source)
-  size_t total_size = 0;
+  ::size_t total_size = 0;
 
-  uint32_t cached_has_bits = 0;
+  ::uint32_t cached_has_bits = 0;
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
@@ -373,16 +424,14 @@ size_t xresloader_data_source::ByteSizeLong() const {
   if (cached_has_bits & 0x00000003u) {
     // optional string file = 1;
     if (cached_has_bits & 0x00000001u) {
-      total_size += 1 +
-        ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
-          this->_internal_file());
+      total_size += 1 + ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
+                                      this->_internal_file());
     }
 
     // optional string sheet = 2;
     if (cached_has_bits & 0x00000002u) {
-      total_size += 1 +
-        ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
-          this->_internal_sheet());
+      total_size += 1 + ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
+                                      this->_internal_sheet());
     }
 
   }
@@ -400,8 +449,8 @@ void xresloader_data_source::MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg,
   auto* const _this = static_cast<xresloader_data_source*>(&to_msg);
   auto& from = static_cast<const xresloader_data_source&>(from_msg);
   // @@protoc_insertion_point(class_specific_merge_from_start:org.xresloader.pb.xresloader_data_source)
-  GOOGLE_DCHECK_NE(&from, _this);
-  uint32_t cached_has_bits = 0;
+  ABSL_DCHECK_NE(&from, _this);
+  ::uint32_t cached_has_bits = 0;
   (void) cached_has_bits;
 
   cached_has_bits = from._impl_._has_bits_[0];
@@ -433,14 +482,10 @@ void xresloader_data_source::InternalSwap(xresloader_data_source* other) {
   auto* rhs_arena = other->GetArenaForAllocation();
   _internal_metadata_.InternalSwap(&other->_internal_metadata_);
   swap(_impl_._has_bits_[0], other->_impl_._has_bits_[0]);
-  ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::InternalSwap(
-      &_impl_.file_, lhs_arena,
-      &other->_impl_.file_, rhs_arena
-  );
-  ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::InternalSwap(
-      &_impl_.sheet_, lhs_arena,
-      &other->_impl_.sheet_, rhs_arena
-  );
+  ::_pbi::ArenaStringPtr::InternalSwap(&_impl_.file_, lhs_arena,
+                                       &other->_impl_.file_, rhs_arena);
+  ::_pbi::ArenaStringPtr::InternalSwap(&_impl_.sheet_, lhs_arena,
+                                       &other->_impl_.sheet_, rhs_arena);
 }
 
 ::PROTOBUF_NAMESPACE_ID::Metadata xresloader_data_source::GetMetadata() const {
@@ -448,12 +493,13 @@ void xresloader_data_source::InternalSwap(xresloader_data_source* other) {
       &descriptor_table_pb_5fheader_2eproto_getter, &descriptor_table_pb_5fheader_2eproto_once,
       file_level_metadata_pb_5fheader_2eproto[0]);
 }
-
 // ===================================================================
 
 class xresloader_header::_Internal {
  public:
   using HasBits = decltype(std::declval<xresloader_header>()._impl_._has_bits_);
+  static constexpr ::int32_t kHasBitsOffset =
+    8 * PROTOBUF_FIELD_OFFSET(xresloader_header, _impl_._has_bits_);
   static void set_has_xres_ver(HasBits* has_bits) {
     (*has_bits)[0] |= 1u;
   }
@@ -474,10 +520,9 @@ class xresloader_header::_Internal {
   }
 };
 
-xresloader_header::xresloader_header(::PROTOBUF_NAMESPACE_ID::Arena* arena,
-                         bool is_message_owned)
-  : ::PROTOBUF_NAMESPACE_ID::Message(arena, is_message_owned) {
-  SharedCtor(arena, is_message_owned);
+xresloader_header::xresloader_header(::PROTOBUF_NAMESPACE_ID::Arena* arena)
+  : ::PROTOBUF_NAMESPACE_ID::Message(arena) {
+  SharedCtor(arena);
   // @@protoc_insertion_point(arena_constructor:org.xresloader.pb.xresloader_header)
 }
 xresloader_header::xresloader_header(const xresloader_header& from)
@@ -487,79 +532,83 @@ xresloader_header::xresloader_header(const xresloader_header& from)
       decltype(_impl_._has_bits_){from._impl_._has_bits_}
     , /*decltype(_impl_._cached_size_)*/{}
     , decltype(_impl_.data_source_){from._impl_.data_source_}
-    , decltype(_impl_.xres_ver_){}
-    , decltype(_impl_.data_ver_){}
-    , decltype(_impl_.hash_code_){}
-    , decltype(_impl_.description_){}
-    , decltype(_impl_.count_){}};
+    , decltype(_impl_.xres_ver_) {}
+
+    , decltype(_impl_.data_ver_) {}
+
+    , decltype(_impl_.hash_code_) {}
+
+    , decltype(_impl_.description_) {}
+
+    , decltype(_impl_.count_) {}
+  };
 
   _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
   _impl_.xres_ver_.InitDefault();
   #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
-    _impl_.xres_ver_.Set("", GetArenaForAllocation());
-  #endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
-  if (from._internal_has_xres_ver()) {
-    _this->_impl_.xres_ver_.Set(from._internal_xres_ver(), 
-      _this->GetArenaForAllocation());
+        _impl_.xres_ver_.Set("", GetArenaForAllocation());
+  #endif  // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  if ((from._impl_._has_bits_[0] & 0x00000001u) != 0) {
+    _this->_impl_.xres_ver_.Set(from._internal_xres_ver(), _this->GetArenaForAllocation());
   }
   _impl_.data_ver_.InitDefault();
   #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
-    _impl_.data_ver_.Set("", GetArenaForAllocation());
-  #endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
-  if (from._internal_has_data_ver()) {
-    _this->_impl_.data_ver_.Set(from._internal_data_ver(), 
-      _this->GetArenaForAllocation());
+        _impl_.data_ver_.Set("", GetArenaForAllocation());
+  #endif  // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  if ((from._impl_._has_bits_[0] & 0x00000002u) != 0) {
+    _this->_impl_.data_ver_.Set(from._internal_data_ver(), _this->GetArenaForAllocation());
   }
   _impl_.hash_code_.InitDefault();
   #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
-    _impl_.hash_code_.Set("", GetArenaForAllocation());
-  #endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
-  if (from._internal_has_hash_code()) {
-    _this->_impl_.hash_code_.Set(from._internal_hash_code(), 
-      _this->GetArenaForAllocation());
+        _impl_.hash_code_.Set("", GetArenaForAllocation());
+  #endif  // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  if ((from._impl_._has_bits_[0] & 0x00000004u) != 0) {
+    _this->_impl_.hash_code_.Set(from._internal_hash_code(), _this->GetArenaForAllocation());
   }
   _impl_.description_.InitDefault();
   #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
-    _impl_.description_.Set("", GetArenaForAllocation());
-  #endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
-  if (from._internal_has_description()) {
-    _this->_impl_.description_.Set(from._internal_description(), 
-      _this->GetArenaForAllocation());
+        _impl_.description_.Set("", GetArenaForAllocation());
+  #endif  // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  if ((from._impl_._has_bits_[0] & 0x00000008u) != 0) {
+    _this->_impl_.description_.Set(from._internal_description(), _this->GetArenaForAllocation());
   }
   _this->_impl_.count_ = from._impl_.count_;
   // @@protoc_insertion_point(copy_constructor:org.xresloader.pb.xresloader_header)
 }
 
-inline void xresloader_header::SharedCtor(
-    ::_pb::Arena* arena, bool is_message_owned) {
+inline void xresloader_header::SharedCtor(::_pb::Arena* arena) {
   (void)arena;
-  (void)is_message_owned;
   new (&_impl_) Impl_{
       decltype(_impl_._has_bits_){}
     , /*decltype(_impl_._cached_size_)*/{}
     , decltype(_impl_.data_source_){arena}
-    , decltype(_impl_.xres_ver_){}
-    , decltype(_impl_.data_ver_){}
-    , decltype(_impl_.hash_code_){}
-    , decltype(_impl_.description_){}
-    , decltype(_impl_.count_){0u}
+    , decltype(_impl_.xres_ver_) {}
+
+    , decltype(_impl_.data_ver_) {}
+
+    , decltype(_impl_.hash_code_) {}
+
+    , decltype(_impl_.description_) {}
+
+    , decltype(_impl_.count_) { 0u }
+
   };
   _impl_.xres_ver_.InitDefault();
   #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
-    _impl_.xres_ver_.Set("", GetArenaForAllocation());
-  #endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+        _impl_.xres_ver_.Set("", GetArenaForAllocation());
+  #endif  // PROTOBUF_FORCE_COPY_DEFAULT_STRING
   _impl_.data_ver_.InitDefault();
   #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
-    _impl_.data_ver_.Set("", GetArenaForAllocation());
-  #endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+        _impl_.data_ver_.Set("", GetArenaForAllocation());
+  #endif  // PROTOBUF_FORCE_COPY_DEFAULT_STRING
   _impl_.hash_code_.InitDefault();
   #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
-    _impl_.hash_code_.Set("", GetArenaForAllocation());
-  #endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+        _impl_.hash_code_.Set("", GetArenaForAllocation());
+  #endif  // PROTOBUF_FORCE_COPY_DEFAULT_STRING
   _impl_.description_.InitDefault();
   #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
-    _impl_.description_.Set("", GetArenaForAllocation());
-  #endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+        _impl_.description_.Set("", GetArenaForAllocation());
+  #endif  // PROTOBUF_FORCE_COPY_DEFAULT_STRING
 }
 
 xresloader_header::~xresloader_header() {
@@ -572,8 +621,8 @@ xresloader_header::~xresloader_header() {
 }
 
 inline void xresloader_header::SharedDtor() {
-  GOOGLE_DCHECK(GetArenaForAllocation() == nullptr);
-  _impl_.data_source_.~RepeatedPtrField();
+  ABSL_DCHECK(GetArenaForAllocation() == nullptr);
+  _internal_mutable_data_source()->~RepeatedPtrField();
   _impl_.xres_ver_.Destroy();
   _impl_.data_ver_.Destroy();
   _impl_.hash_code_.Destroy();
@@ -586,11 +635,11 @@ void xresloader_header::SetCachedSize(int size) const {
 
 void xresloader_header::Clear() {
 // @@protoc_insertion_point(message_clear_start:org.xresloader.pb.xresloader_header)
-  uint32_t cached_has_bits = 0;
+  ::uint32_t cached_has_bits = 0;
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  _impl_.data_source_.Clear();
+  _internal_mutable_data_source()->Clear();
   cached_has_bits = _impl_._has_bits_[0];
   if (cached_has_bits & 0x0000000fu) {
     if (cached_has_bits & 0x00000001u) {
@@ -615,69 +664,74 @@ const char* xresloader_header::_InternalParse(const char* ptr, ::_pbi::ParseCont
 #define CHK_(x) if (PROTOBUF_PREDICT_FALSE(!(x))) goto failure
   _Internal::HasBits has_bits{};
   while (!ctx->Done(&ptr)) {
-    uint32_t tag;
+    ::uint32_t tag;
     ptr = ::_pbi::ReadTag(ptr, &tag);
     switch (tag >> 3) {
       // optional string xres_ver = 1;
       case 1:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 10)) {
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::uint8_t>(tag) == 10)) {
           auto str = _internal_mutable_xres_ver();
           ptr = ::_pbi::InlineGreedyStringParser(str, ptr, ctx);
           CHK_(ptr);
           #ifndef NDEBUG
           ::_pbi::VerifyUTF8(str, "org.xresloader.pb.xresloader_header.xres_ver");
           #endif  // !NDEBUG
-        } else
+        } else {
           goto handle_unusual;
+        }
         continue;
       // optional string data_ver = 2;
       case 2:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 18)) {
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::uint8_t>(tag) == 18)) {
           auto str = _internal_mutable_data_ver();
           ptr = ::_pbi::InlineGreedyStringParser(str, ptr, ctx);
           CHK_(ptr);
           #ifndef NDEBUG
           ::_pbi::VerifyUTF8(str, "org.xresloader.pb.xresloader_header.data_ver");
           #endif  // !NDEBUG
-        } else
+        } else {
           goto handle_unusual;
+        }
         continue;
       // required uint32 count = 3;
       case 3:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 24)) {
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::uint8_t>(tag) == 24)) {
           _Internal::set_has_count(&has_bits);
           _impl_.count_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint32(&ptr);
           CHK_(ptr);
-        } else
+        } else {
           goto handle_unusual;
+        }
         continue;
       // required string hash_code = 4;
       case 4:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 34)) {
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::uint8_t>(tag) == 34)) {
           auto str = _internal_mutable_hash_code();
           ptr = ::_pbi::InlineGreedyStringParser(str, ptr, ctx);
           CHK_(ptr);
           #ifndef NDEBUG
           ::_pbi::VerifyUTF8(str, "org.xresloader.pb.xresloader_header.hash_code");
           #endif  // !NDEBUG
-        } else
+        } else {
           goto handle_unusual;
+        }
         continue;
       // optional string description = 5;
       case 5:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 42)) {
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::uint8_t>(tag) == 42)) {
           auto str = _internal_mutable_description();
           ptr = ::_pbi::InlineGreedyStringParser(str, ptr, ctx);
           CHK_(ptr);
           #ifndef NDEBUG
           ::_pbi::VerifyUTF8(str, "org.xresloader.pb.xresloader_header.description");
           #endif  // !NDEBUG
-        } else
+        } else {
           goto handle_unusual;
+        }
         continue;
       // repeated .org.xresloader.pb.xresloader_data_source data_source = 11;
       case 11:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 90)) {
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::uint8_t>(tag) == 90)) {
           ptr -= 1;
           do {
             ptr += 1;
@@ -685,8 +739,9 @@ const char* xresloader_header::_InternalParse(const char* ptr, ::_pbi::ParseCont
             CHK_(ptr);
             if (!ctx->DataAvailable(ptr)) break;
           } while (::PROTOBUF_NAMESPACE_ID::internal::ExpectTag<90>(ptr));
-        } else
+        } else {
           goto handle_unusual;
+        }
         continue;
       default:
         goto handle_unusual;
@@ -712,57 +767,50 @@ failure:
 #undef CHK_
 }
 
-uint8_t* xresloader_header::_InternalSerialize(
-    uint8_t* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const {
+::uint8_t* xresloader_header::_InternalSerialize(
+    ::uint8_t* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const {
   // @@protoc_insertion_point(serialize_to_array_start:org.xresloader.pb.xresloader_header)
-  uint32_t cached_has_bits = 0;
+  ::uint32_t cached_has_bits = 0;
   (void) cached_has_bits;
 
   cached_has_bits = _impl_._has_bits_[0];
   // optional string xres_ver = 1;
   if (cached_has_bits & 0x00000001u) {
-    ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::VerifyUTF8StringNamedField(
-      this->_internal_xres_ver().data(), static_cast<int>(this->_internal_xres_ver().length()),
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::SERIALIZE,
-      "org.xresloader.pb.xresloader_header.xres_ver");
-    target = stream->WriteStringMaybeAliased(
-        1, this->_internal_xres_ver(), target);
+    const std::string& _s = this->_internal_xres_ver();
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::VerifyUTF8StringNamedField(_s.data(), static_cast<int>(_s.length()), ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::SERIALIZE,
+                                "org.xresloader.pb.xresloader_header.xres_ver");
+    target = stream->WriteStringMaybeAliased(1, _s, target);
   }
 
   // optional string data_ver = 2;
   if (cached_has_bits & 0x00000002u) {
-    ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::VerifyUTF8StringNamedField(
-      this->_internal_data_ver().data(), static_cast<int>(this->_internal_data_ver().length()),
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::SERIALIZE,
-      "org.xresloader.pb.xresloader_header.data_ver");
-    target = stream->WriteStringMaybeAliased(
-        2, this->_internal_data_ver(), target);
+    const std::string& _s = this->_internal_data_ver();
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::VerifyUTF8StringNamedField(_s.data(), static_cast<int>(_s.length()), ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::SERIALIZE,
+                                "org.xresloader.pb.xresloader_header.data_ver");
+    target = stream->WriteStringMaybeAliased(2, _s, target);
   }
 
   // required uint32 count = 3;
   if (cached_has_bits & 0x00000010u) {
     target = stream->EnsureSpace(target);
-    target = ::_pbi::WireFormatLite::WriteUInt32ToArray(3, this->_internal_count(), target);
+    target = ::_pbi::WireFormatLite::WriteUInt32ToArray(
+        3, this->_internal_count(), target);
   }
 
   // required string hash_code = 4;
   if (cached_has_bits & 0x00000004u) {
-    ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::VerifyUTF8StringNamedField(
-      this->_internal_hash_code().data(), static_cast<int>(this->_internal_hash_code().length()),
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::SERIALIZE,
-      "org.xresloader.pb.xresloader_header.hash_code");
-    target = stream->WriteStringMaybeAliased(
-        4, this->_internal_hash_code(), target);
+    const std::string& _s = this->_internal_hash_code();
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::VerifyUTF8StringNamedField(_s.data(), static_cast<int>(_s.length()), ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::SERIALIZE,
+                                "org.xresloader.pb.xresloader_header.hash_code");
+    target = stream->WriteStringMaybeAliased(4, _s, target);
   }
 
   // optional string description = 5;
   if (cached_has_bits & 0x00000008u) {
-    ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::VerifyUTF8StringNamedField(
-      this->_internal_description().data(), static_cast<int>(this->_internal_description().length()),
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::SERIALIZE,
-      "org.xresloader.pb.xresloader_header.description");
-    target = stream->WriteStringMaybeAliased(
-        5, this->_internal_description(), target);
+    const std::string& _s = this->_internal_description();
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::VerifyUTF8StringNamedField(_s.data(), static_cast<int>(_s.length()), ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::SERIALIZE,
+                                "org.xresloader.pb.xresloader_header.description");
+    target = stream->WriteStringMaybeAliased(5, _s, target);
   }
 
   // repeated .org.xresloader.pb.xresloader_data_source data_source = 11;
@@ -781,47 +829,47 @@ uint8_t* xresloader_header::_InternalSerialize(
   return target;
 }
 
-size_t xresloader_header::RequiredFieldsByteSizeFallback() const {
+::size_t xresloader_header::RequiredFieldsByteSizeFallback() const {
 // @@protoc_insertion_point(required_fields_byte_size_fallback_start:org.xresloader.pb.xresloader_header)
-  size_t total_size = 0;
+  ::size_t total_size = 0;
 
-  if (_internal_has_hash_code()) {
+  if ((_impl_._has_bits_[0] & 0x00000004u) != 0) {
     // required string hash_code = 4;
-    total_size += 1 +
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
-        this->_internal_hash_code());
+    total_size += 1 + ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
+                                    this->_internal_hash_code());
   }
 
-  if (_internal_has_count()) {
+  if ((_impl_._has_bits_[0] & 0x00000010u) != 0) {
     // required uint32 count = 3;
-    total_size += ::_pbi::WireFormatLite::UInt32SizePlusOne(this->_internal_count());
+    total_size += ::_pbi::WireFormatLite::UInt32SizePlusOne(
+        this->_internal_count());
   }
 
   return total_size;
 }
-size_t xresloader_header::ByteSizeLong() const {
+::size_t xresloader_header::ByteSizeLong() const {
 // @@protoc_insertion_point(message_byte_size_start:org.xresloader.pb.xresloader_header)
-  size_t total_size = 0;
+  ::size_t total_size = 0;
 
   if (((_impl_._has_bits_[0] & 0x00000014) ^ 0x00000014) == 0) {  // All required fields are present.
     // required string hash_code = 4;
-    total_size += 1 +
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
-        this->_internal_hash_code());
+    total_size += 1 + ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
+                                    this->_internal_hash_code());
 
     // required uint32 count = 3;
-    total_size += ::_pbi::WireFormatLite::UInt32SizePlusOne(this->_internal_count());
+    total_size += ::_pbi::WireFormatLite::UInt32SizePlusOne(
+        this->_internal_count());
 
   } else {
     total_size += RequiredFieldsByteSizeFallback();
   }
-  uint32_t cached_has_bits = 0;
+  ::uint32_t cached_has_bits = 0;
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
   // repeated .org.xresloader.pb.xresloader_data_source data_source = 11;
   total_size += 1UL * this->_internal_data_source_size();
-  for (const auto& msg : this->_impl_.data_source_) {
+  for (const auto& msg : this->_internal_data_source()) {
     total_size +=
       ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(msg);
   }
@@ -830,24 +878,21 @@ size_t xresloader_header::ByteSizeLong() const {
   if (cached_has_bits & 0x00000003u) {
     // optional string xres_ver = 1;
     if (cached_has_bits & 0x00000001u) {
-      total_size += 1 +
-        ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
-          this->_internal_xres_ver());
+      total_size += 1 + ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
+                                      this->_internal_xres_ver());
     }
 
     // optional string data_ver = 2;
     if (cached_has_bits & 0x00000002u) {
-      total_size += 1 +
-        ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
-          this->_internal_data_ver());
+      total_size += 1 + ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
+                                      this->_internal_data_ver());
     }
 
   }
   // optional string description = 5;
   if (cached_has_bits & 0x00000008u) {
-    total_size += 1 +
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
-        this->_internal_description());
+    total_size += 1 + ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
+                                    this->_internal_description());
   }
 
   return MaybeComputeUnknownFieldsSize(total_size, &_impl_._cached_size_);
@@ -864,11 +909,11 @@ void xresloader_header::MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg, cons
   auto* const _this = static_cast<xresloader_header*>(&to_msg);
   auto& from = static_cast<const xresloader_header&>(from_msg);
   // @@protoc_insertion_point(class_specific_merge_from_start:org.xresloader.pb.xresloader_header)
-  GOOGLE_DCHECK_NE(&from, _this);
-  uint32_t cached_has_bits = 0;
+  ABSL_DCHECK_NE(&from, _this);
+  ::uint32_t cached_has_bits = 0;
   (void) cached_has_bits;
 
-  _this->_impl_.data_source_.MergeFrom(from._impl_.data_source_);
+  _this->_internal_mutable_data_source()->MergeFrom(from._internal_data_source());
   cached_has_bits = from._impl_._has_bits_[0];
   if (cached_has_bits & 0x0000001fu) {
     if (cached_has_bits & 0x00000001u) {
@@ -909,23 +954,16 @@ void xresloader_header::InternalSwap(xresloader_header* other) {
   auto* rhs_arena = other->GetArenaForAllocation();
   _internal_metadata_.InternalSwap(&other->_internal_metadata_);
   swap(_impl_._has_bits_[0], other->_impl_._has_bits_[0]);
-  _impl_.data_source_.InternalSwap(&other->_impl_.data_source_);
-  ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::InternalSwap(
-      &_impl_.xres_ver_, lhs_arena,
-      &other->_impl_.xres_ver_, rhs_arena
-  );
-  ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::InternalSwap(
-      &_impl_.data_ver_, lhs_arena,
-      &other->_impl_.data_ver_, rhs_arena
-  );
-  ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::InternalSwap(
-      &_impl_.hash_code_, lhs_arena,
-      &other->_impl_.hash_code_, rhs_arena
-  );
-  ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::InternalSwap(
-      &_impl_.description_, lhs_arena,
-      &other->_impl_.description_, rhs_arena
-  );
+  _internal_mutable_data_source()->InternalSwap(other->_internal_mutable_data_source());
+  ::_pbi::ArenaStringPtr::InternalSwap(&_impl_.xres_ver_, lhs_arena,
+                                       &other->_impl_.xres_ver_, rhs_arena);
+  ::_pbi::ArenaStringPtr::InternalSwap(&_impl_.data_ver_, lhs_arena,
+                                       &other->_impl_.data_ver_, rhs_arena);
+  ::_pbi::ArenaStringPtr::InternalSwap(&_impl_.hash_code_, lhs_arena,
+                                       &other->_impl_.hash_code_, rhs_arena);
+  ::_pbi::ArenaStringPtr::InternalSwap(&_impl_.description_, lhs_arena,
+                                       &other->_impl_.description_, rhs_arena);
+
   swap(_impl_.count_, other->_impl_.count_);
 }
 
@@ -934,12 +972,13 @@ void xresloader_header::InternalSwap(xresloader_header* other) {
       &descriptor_table_pb_5fheader_2eproto_getter, &descriptor_table_pb_5fheader_2eproto_once,
       file_level_metadata_pb_5fheader_2eproto[1]);
 }
-
 // ===================================================================
 
 class xresloader_datablocks::_Internal {
  public:
   using HasBits = decltype(std::declval<xresloader_datablocks>()._impl_._has_bits_);
+  static constexpr ::int32_t kHasBitsOffset =
+    8 * PROTOBUF_FIELD_OFFSET(xresloader_datablocks, _impl_._has_bits_);
   static const ::org::xresloader::pb::xresloader_header& header(const xresloader_datablocks* msg);
   static void set_has_header(HasBits* has_bits) {
     (*has_bits)[0] |= 2u;
@@ -953,10 +992,9 @@ const ::org::xresloader::pb::xresloader_header&
 xresloader_datablocks::_Internal::header(const xresloader_datablocks* msg) {
   return *msg->_impl_.header_;
 }
-xresloader_datablocks::xresloader_datablocks(::PROTOBUF_NAMESPACE_ID::Arena* arena,
-                         bool is_message_owned)
-  : ::PROTOBUF_NAMESPACE_ID::Message(arena, is_message_owned) {
-  SharedCtor(arena, is_message_owned);
+xresloader_datablocks::xresloader_datablocks(::PROTOBUF_NAMESPACE_ID::Arena* arena)
+  : ::PROTOBUF_NAMESPACE_ID::Message(arena) {
+  SharedCtor(arena);
   // @@protoc_insertion_point(arena_constructor:org.xresloader.pb.xresloader_datablocks)
 }
 xresloader_datablocks::xresloader_datablocks(const xresloader_datablocks& from)
@@ -966,39 +1004,38 @@ xresloader_datablocks::xresloader_datablocks(const xresloader_datablocks& from)
       decltype(_impl_._has_bits_){from._impl_._has_bits_}
     , /*decltype(_impl_._cached_size_)*/{}
     , decltype(_impl_.data_block_){from._impl_.data_block_}
-    , decltype(_impl_.data_message_type_){}
+    , decltype(_impl_.data_message_type_) {}
+
     , decltype(_impl_.header_){nullptr}};
 
   _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
   _impl_.data_message_type_.InitDefault();
   #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
-    _impl_.data_message_type_.Set("", GetArenaForAllocation());
-  #endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
-  if (from._internal_has_data_message_type()) {
-    _this->_impl_.data_message_type_.Set(from._internal_data_message_type(), 
-      _this->GetArenaForAllocation());
+        _impl_.data_message_type_.Set("", GetArenaForAllocation());
+  #endif  // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  if ((from._impl_._has_bits_[0] & 0x00000001u) != 0) {
+    _this->_impl_.data_message_type_.Set(from._internal_data_message_type(), _this->GetArenaForAllocation());
   }
-  if (from._internal_has_header()) {
+  if ((from._impl_._has_bits_[0] & 0x00000002u) != 0) {
     _this->_impl_.header_ = new ::org::xresloader::pb::xresloader_header(*from._impl_.header_);
   }
   // @@protoc_insertion_point(copy_constructor:org.xresloader.pb.xresloader_datablocks)
 }
 
-inline void xresloader_datablocks::SharedCtor(
-    ::_pb::Arena* arena, bool is_message_owned) {
+inline void xresloader_datablocks::SharedCtor(::_pb::Arena* arena) {
   (void)arena;
-  (void)is_message_owned;
   new (&_impl_) Impl_{
       decltype(_impl_._has_bits_){}
     , /*decltype(_impl_._cached_size_)*/{}
     , decltype(_impl_.data_block_){arena}
-    , decltype(_impl_.data_message_type_){}
+    , decltype(_impl_.data_message_type_) {}
+
     , decltype(_impl_.header_){nullptr}
   };
   _impl_.data_message_type_.InitDefault();
   #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
-    _impl_.data_message_type_.Set("", GetArenaForAllocation());
-  #endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+        _impl_.data_message_type_.Set("", GetArenaForAllocation());
+  #endif  // PROTOBUF_FORCE_COPY_DEFAULT_STRING
 }
 
 xresloader_datablocks::~xresloader_datablocks() {
@@ -1011,8 +1048,8 @@ xresloader_datablocks::~xresloader_datablocks() {
 }
 
 inline void xresloader_datablocks::SharedDtor() {
-  GOOGLE_DCHECK(GetArenaForAllocation() == nullptr);
-  _impl_.data_block_.~RepeatedPtrField();
+  ABSL_DCHECK(GetArenaForAllocation() == nullptr);
+  _internal_mutable_data_block()->~RepeatedPtrField();
   _impl_.data_message_type_.Destroy();
   if (this != internal_default_instance()) delete _impl_.header_;
 }
@@ -1023,18 +1060,18 @@ void xresloader_datablocks::SetCachedSize(int size) const {
 
 void xresloader_datablocks::Clear() {
 // @@protoc_insertion_point(message_clear_start:org.xresloader.pb.xresloader_datablocks)
-  uint32_t cached_has_bits = 0;
+  ::uint32_t cached_has_bits = 0;
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  _impl_.data_block_.Clear();
+  _internal_mutable_data_block()->Clear();
   cached_has_bits = _impl_._has_bits_[0];
   if (cached_has_bits & 0x00000003u) {
     if (cached_has_bits & 0x00000001u) {
       _impl_.data_message_type_.ClearNonDefaultToEmpty();
     }
     if (cached_has_bits & 0x00000002u) {
-      GOOGLE_DCHECK(_impl_.header_ != nullptr);
+      ABSL_DCHECK(_impl_.header_ != nullptr);
       _impl_.header_->Clear();
     }
   }
@@ -1046,20 +1083,21 @@ const char* xresloader_datablocks::_InternalParse(const char* ptr, ::_pbi::Parse
 #define CHK_(x) if (PROTOBUF_PREDICT_FALSE(!(x))) goto failure
   _Internal::HasBits has_bits{};
   while (!ctx->Done(&ptr)) {
-    uint32_t tag;
+    ::uint32_t tag;
     ptr = ::_pbi::ReadTag(ptr, &tag);
     switch (tag >> 3) {
       // optional .org.xresloader.pb.xresloader_header header = 1;
       case 1:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 10)) {
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::uint8_t>(tag) == 10)) {
           ptr = ctx->ParseMessage(_internal_mutable_header(), ptr);
           CHK_(ptr);
-        } else
+        } else {
           goto handle_unusual;
+        }
         continue;
       // repeated bytes data_block = 2;
       case 2:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 18)) {
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::uint8_t>(tag) == 18)) {
           ptr -= 1;
           do {
             ptr += 1;
@@ -1068,20 +1106,22 @@ const char* xresloader_datablocks::_InternalParse(const char* ptr, ::_pbi::Parse
             CHK_(ptr);
             if (!ctx->DataAvailable(ptr)) break;
           } while (::PROTOBUF_NAMESPACE_ID::internal::ExpectTag<18>(ptr));
-        } else
+        } else {
           goto handle_unusual;
+        }
         continue;
       // optional string data_message_type = 3;
       case 3:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 26)) {
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::uint8_t>(tag) == 26)) {
           auto str = _internal_mutable_data_message_type();
           ptr = ::_pbi::InlineGreedyStringParser(str, ptr, ctx);
           CHK_(ptr);
           #ifndef NDEBUG
           ::_pbi::VerifyUTF8(str, "org.xresloader.pb.xresloader_datablocks.data_message_type");
           #endif  // !NDEBUG
-        } else
+        } else {
           goto handle_unusual;
+        }
         continue;
       default:
         goto handle_unusual;
@@ -1107,10 +1147,10 @@ failure:
 #undef CHK_
 }
 
-uint8_t* xresloader_datablocks::_InternalSerialize(
-    uint8_t* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const {
+::uint8_t* xresloader_datablocks::_InternalSerialize(
+    ::uint8_t* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const {
   // @@protoc_insertion_point(serialize_to_array_start:org.xresloader.pb.xresloader_datablocks)
-  uint32_t cached_has_bits = 0;
+  ::uint32_t cached_has_bits = 0;
   (void) cached_has_bits;
 
   cached_has_bits = _impl_._has_bits_[0];
@@ -1122,19 +1162,17 @@ uint8_t* xresloader_datablocks::_InternalSerialize(
   }
 
   // repeated bytes data_block = 2;
-  for (int i = 0, n = this->_internal_data_block_size(); i < n; i++) {
+  for (int i = 0, n = this->_internal_data_block_size(); i < n; ++i) {
     const auto& s = this->_internal_data_block(i);
     target = stream->WriteBytes(2, s, target);
   }
 
   // optional string data_message_type = 3;
   if (cached_has_bits & 0x00000001u) {
-    ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::VerifyUTF8StringNamedField(
-      this->_internal_data_message_type().data(), static_cast<int>(this->_internal_data_message_type().length()),
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::SERIALIZE,
-      "org.xresloader.pb.xresloader_datablocks.data_message_type");
-    target = stream->WriteStringMaybeAliased(
-        3, this->_internal_data_message_type(), target);
+    const std::string& _s = this->_internal_data_message_type();
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::VerifyUTF8StringNamedField(_s.data(), static_cast<int>(_s.length()), ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::SERIALIZE,
+                                "org.xresloader.pb.xresloader_datablocks.data_message_type");
+    target = stream->WriteStringMaybeAliased(3, _s, target);
   }
 
   if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
@@ -1145,29 +1183,27 @@ uint8_t* xresloader_datablocks::_InternalSerialize(
   return target;
 }
 
-size_t xresloader_datablocks::ByteSizeLong() const {
+::size_t xresloader_datablocks::ByteSizeLong() const {
 // @@protoc_insertion_point(message_byte_size_start:org.xresloader.pb.xresloader_datablocks)
-  size_t total_size = 0;
+  ::size_t total_size = 0;
 
-  uint32_t cached_has_bits = 0;
+  ::uint32_t cached_has_bits = 0;
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
   // repeated bytes data_block = 2;
-  total_size += 1 *
-      ::PROTOBUF_NAMESPACE_ID::internal::FromIntSize(_impl_.data_block_.size());
-  for (int i = 0, n = _impl_.data_block_.size(); i < n; i++) {
+  total_size += 1 * ::PROTOBUF_NAMESPACE_ID::internal::FromIntSize(_internal_data_block().size());
+  for (int i = 0, n = _internal_data_block().size(); i < n; ++i) {
     total_size += ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::BytesSize(
-      _impl_.data_block_.Get(i));
+        _internal_data_block().Get(i));
   }
 
   cached_has_bits = _impl_._has_bits_[0];
   if (cached_has_bits & 0x00000003u) {
     // optional string data_message_type = 3;
     if (cached_has_bits & 0x00000001u) {
-      total_size += 1 +
-        ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
-          this->_internal_data_message_type());
+      total_size += 1 + ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
+                                      this->_internal_data_message_type());
     }
 
     // optional .org.xresloader.pb.xresloader_header header = 1;
@@ -1192,11 +1228,11 @@ void xresloader_datablocks::MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg, 
   auto* const _this = static_cast<xresloader_datablocks*>(&to_msg);
   auto& from = static_cast<const xresloader_datablocks&>(from_msg);
   // @@protoc_insertion_point(class_specific_merge_from_start:org.xresloader.pb.xresloader_datablocks)
-  GOOGLE_DCHECK_NE(&from, _this);
-  uint32_t cached_has_bits = 0;
+  ABSL_DCHECK_NE(&from, _this);
+  ::uint32_t cached_has_bits = 0;
   (void) cached_has_bits;
 
-  _this->_impl_.data_block_.MergeFrom(from._impl_.data_block_);
+  _this->_internal_mutable_data_block()->MergeFrom(from._internal_data_block());
   cached_has_bits = from._impl_._has_bits_[0];
   if (cached_has_bits & 0x00000003u) {
     if (cached_has_bits & 0x00000001u) {
@@ -1218,7 +1254,7 @@ void xresloader_datablocks::CopyFrom(const xresloader_datablocks& from) {
 }
 
 bool xresloader_datablocks::IsInitialized() const {
-  if (_internal_has_header()) {
+  if ((_impl_._has_bits_[0] & 0x00000002u) != 0) {
     if (!_impl_.header_->IsInitialized()) return false;
   }
   return true;
@@ -1230,11 +1266,10 @@ void xresloader_datablocks::InternalSwap(xresloader_datablocks* other) {
   auto* rhs_arena = other->GetArenaForAllocation();
   _internal_metadata_.InternalSwap(&other->_internal_metadata_);
   swap(_impl_._has_bits_[0], other->_impl_._has_bits_[0]);
-  _impl_.data_block_.InternalSwap(&other->_impl_.data_block_);
-  ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::InternalSwap(
-      &_impl_.data_message_type_, lhs_arena,
-      &other->_impl_.data_message_type_, rhs_arena
-  );
+  _internal_mutable_data_block()->InternalSwap(
+      other->_internal_mutable_data_block());
+  ::_pbi::ArenaStringPtr::InternalSwap(&_impl_.data_message_type_, lhs_arena,
+                                       &other->_impl_.data_message_type_, rhs_arena);
   swap(_impl_.header_, other->_impl_.header_);
 }
 
@@ -1243,7 +1278,6 @@ void xresloader_datablocks::InternalSwap(xresloader_datablocks* other) {
       &descriptor_table_pb_5fheader_2eproto_getter, &descriptor_table_pb_5fheader_2eproto_once,
       file_level_metadata_pb_5fheader_2eproto[2]);
 }
-
 // @@protoc_insertion_point(namespace_scope)
 }  // namespace pb
 }  // namespace xresloader
@@ -1262,6 +1296,5 @@ Arena::CreateMaybeMessage< ::org::xresloader::pb::xresloader_datablocks >(Arena*
   return Arena::CreateMessageInternal< ::org::xresloader::pb::xresloader_datablocks >(arena);
 }
 PROTOBUF_NAMESPACE_CLOSE
-
 // @@protoc_insertion_point(global_scope)
-#include <google/protobuf/port_undef.inc>
+#include "google/protobuf/port_undef.inc"

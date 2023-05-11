@@ -3,7 +3,7 @@
         "GroupName": "XResConfig",
         "DestinationPath": "DataTable",
         "FactoryName": "ReimportDataTableFactory",
-        "Filenames": ["D:\\workspace\\projs\\github\\xresloader\\xresloader\\sample\\proto_v3\\json\\KindConst.json"],
+        "Filenames": ["D:\\workspace\\github\\xresloader\\xresloader\\sample\\proto_v3\\json\\KindConst.json"],
         "ImportSettings": {
             "ImportType": "ECSV_DataTable",
             "ImportRowStruct": "KindConst"
@@ -15,7 +15,7 @@
         "GroupName": "XResConfig",
         "DestinationPath": "ConfigRec",
         "FactoryName": "ReimportDataTableFactory",
-        "Filenames": ["D:\\workspace\\projs\\github\\xresloader\\xresloader\\sample\\proto_v3\\json\\ArrInArrCfg.json"],
+        "Filenames": ["D:\\workspace\\github\\xresloader\\xresloader\\sample\\proto_v3\\json\\ArrInArrCfg.json"],
         "ImportSettings": {
             "ImportType": "ECSV_DataTable",
             "ImportRowStruct": "ArrInArrCfg"
@@ -27,7 +27,7 @@
         "GroupName": "XResConfig",
         "DestinationPath": "ConfigRec",
         "FactoryName": "ReimportDataTableFactory",
-        "Filenames": ["D:\\workspace\\projs\\github\\xresloader\\xresloader\\sample\\proto_v3\\json\\RoleUpgradeCfg.json"],
+        "Filenames": ["D:\\workspace\\github\\xresloader\\xresloader\\sample\\proto_v3\\json\\RoleUpgradeCfg.json"],
         "ImportSettings": {
             "ImportType": "ECSV_DataTable",
             "ImportRowStruct": "RoleUpgradeCfg"
@@ -39,7 +39,7 @@
         "GroupName": "XResConfig",
         "DestinationPath": "ConfigRec",
         "FactoryName": "ReimportDataTableFactory",
-        "Filenames": ["D:\\workspace\\projs\\github\\xresloader\\xresloader\\sample\\proto_v3\\json\\EventCfg.json"],
+        "Filenames": ["D:\\workspace\\github\\xresloader\\xresloader\\sample\\proto_v3\\json\\EventCfg.json"],
         "ImportSettings": {
             "ImportType": "ECSV_DataTable",
             "ImportRowStruct": "EventCfg"
@@ -51,7 +51,7 @@
         "GroupName": "XResConfig",
         "DestinationPath": "ConfigRec",
         "FactoryName": "ReimportDataTableFactory",
-        "Filenames": ["D:\\workspace\\projs\\github\\xresloader\\xresloader\\sample\\proto_v3\\json\\StripListTailCfg.json"],
+        "Filenames": ["D:\\workspace\\github\\xresloader\\xresloader\\sample\\proto_v3\\json\\StripListTailCfg.json"],
         "ImportSettings": {
             "ImportType": "ECSV_DataTable",
             "ImportRowStruct": "KeepOrStripEmptyListCfg"

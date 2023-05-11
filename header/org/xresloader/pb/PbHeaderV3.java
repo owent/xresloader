@@ -66,11 +66,6 @@ public final class PbHeaderV3 {
       return new xresloader_data_source();
     }
 
-    @java.lang.Override
-    public final com.google.protobuf.UnknownFieldSet
-    getUnknownFields() {
-      return this.unknownFields;
-    }
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
       return org.xresloader.pb.PbHeaderV3.internal_static_org_xresloader_pb_xresloader_data_source_descriptor;
@@ -85,7 +80,8 @@ public final class PbHeaderV3 {
     }
 
     public static final int FILE_FIELD_NUMBER = 1;
-    private volatile java.lang.Object file_;
+    @SuppressWarnings("serial")
+    private volatile java.lang.Object file_ = "";
     /**
      * <code>string file = 1;</code>
      * @return The file.
@@ -123,7 +119,8 @@ public final class PbHeaderV3 {
     }
 
     public static final int SHEET_FIELD_NUMBER = 2;
-    private volatile java.lang.Object sheet_;
+    @SuppressWarnings("serial")
+    private volatile java.lang.Object sheet_ = "";
     /**
      * <code>string sheet = 2;</code>
      * @return The sheet.
@@ -278,11 +275,13 @@ public final class PbHeaderV3 {
       return com.google.protobuf.GeneratedMessageV3
           .parseWithIOException(PARSER, input, extensionRegistry);
     }
+
     public static org.xresloader.pb.PbHeaderV3.xresloader_data_source parseDelimitedFrom(java.io.InputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseDelimitedWithIOException(PARSER, input);
     }
+
     public static org.xresloader.pb.PbHeaderV3.xresloader_data_source parseDelimitedFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
@@ -357,10 +356,9 @@ public final class PbHeaderV3 {
       @java.lang.Override
       public Builder clear() {
         super.clear();
+        bitField0_ = 0;
         file_ = "";
-
         sheet_ = "";
-
         return this;
       }
 
@@ -387,44 +385,21 @@ public final class PbHeaderV3 {
       @java.lang.Override
       public org.xresloader.pb.PbHeaderV3.xresloader_data_source buildPartial() {
         org.xresloader.pb.PbHeaderV3.xresloader_data_source result = new org.xresloader.pb.PbHeaderV3.xresloader_data_source(this);
-        result.file_ = file_;
-        result.sheet_ = sheet_;
+        if (bitField0_ != 0) { buildPartial0(result); }
         onBuilt();
         return result;
       }
 
-      @java.lang.Override
-      public Builder clone() {
-        return super.clone();
+      private void buildPartial0(org.xresloader.pb.PbHeaderV3.xresloader_data_source result) {
+        int from_bitField0_ = bitField0_;
+        if (((from_bitField0_ & 0x00000001) != 0)) {
+          result.file_ = file_;
+        }
+        if (((from_bitField0_ & 0x00000002) != 0)) {
+          result.sheet_ = sheet_;
+        }
       }
-      @java.lang.Override
-      public Builder setField(
-          com.google.protobuf.Descriptors.FieldDescriptor field,
-          java.lang.Object value) {
-        return super.setField(field, value);
-      }
-      @java.lang.Override
-      public Builder clearField(
-          com.google.protobuf.Descriptors.FieldDescriptor field) {
-        return super.clearField(field);
-      }
-      @java.lang.Override
-      public Builder clearOneof(
-          com.google.protobuf.Descriptors.OneofDescriptor oneof) {
-        return super.clearOneof(oneof);
-      }
-      @java.lang.Override
-      public Builder setRepeatedField(
-          com.google.protobuf.Descriptors.FieldDescriptor field,
-          int index, java.lang.Object value) {
-        return super.setRepeatedField(field, index, value);
-      }
-      @java.lang.Override
-      public Builder addRepeatedField(
-          com.google.protobuf.Descriptors.FieldDescriptor field,
-          java.lang.Object value) {
-        return super.addRepeatedField(field, value);
-      }
+
       @java.lang.Override
       public Builder mergeFrom(com.google.protobuf.Message other) {
         if (other instanceof org.xresloader.pb.PbHeaderV3.xresloader_data_source) {
@@ -439,10 +414,12 @@ public final class PbHeaderV3 {
         if (other == org.xresloader.pb.PbHeaderV3.xresloader_data_source.getDefaultInstance()) return this;
         if (!other.getFile().isEmpty()) {
           file_ = other.file_;
+          bitField0_ |= 0x00000001;
           onChanged();
         }
         if (!other.getSheet().isEmpty()) {
           sheet_ = other.sheet_;
+          bitField0_ |= 0x00000002;
           onChanged();
         }
         this.mergeUnknownFields(other.getUnknownFields());
@@ -473,12 +450,12 @@ public final class PbHeaderV3 {
                 break;
               case 10: {
                 file_ = input.readStringRequireUtf8();
-
+                bitField0_ |= 0x00000001;
                 break;
               } // case 10
               case 18: {
                 sheet_ = input.readStringRequireUtf8();
-
+                bitField0_ |= 0x00000002;
                 break;
               } // case 18
               default: {
@@ -496,6 +473,7 @@ public final class PbHeaderV3 {
         } // finally
         return this;
       }
+      private int bitField0_;
 
       private java.lang.Object file_ = "";
       /**
@@ -538,11 +516,9 @@ public final class PbHeaderV3 {
        */
       public Builder setFile(
           java.lang.String value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  
+        if (value == null) { throw new NullPointerException(); }
         file_ = value;
+        bitField0_ |= 0x00000001;
         onChanged();
         return this;
       }
@@ -551,8 +527,8 @@ public final class PbHeaderV3 {
        * @return This builder for chaining.
        */
       public Builder clearFile() {
-        
         file_ = getDefaultInstance().getFile();
+        bitField0_ = (bitField0_ & ~0x00000001);
         onChanged();
         return this;
       }
@@ -563,12 +539,10 @@ public final class PbHeaderV3 {
        */
       public Builder setFileBytes(
           com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  checkByteStringIsUtf8(value);
-        
+        if (value == null) { throw new NullPointerException(); }
+        checkByteStringIsUtf8(value);
         file_ = value;
+        bitField0_ |= 0x00000001;
         onChanged();
         return this;
       }
@@ -614,11 +588,9 @@ public final class PbHeaderV3 {
        */
       public Builder setSheet(
           java.lang.String value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  
+        if (value == null) { throw new NullPointerException(); }
         sheet_ = value;
+        bitField0_ |= 0x00000002;
         onChanged();
         return this;
       }
@@ -627,8 +599,8 @@ public final class PbHeaderV3 {
        * @return This builder for chaining.
        */
       public Builder clearSheet() {
-        
         sheet_ = getDefaultInstance().getSheet();
+        bitField0_ = (bitField0_ & ~0x00000002);
         onChanged();
         return this;
       }
@@ -639,12 +611,10 @@ public final class PbHeaderV3 {
        */
       public Builder setSheetBytes(
           com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  checkByteStringIsUtf8(value);
-        
+        if (value == null) { throw new NullPointerException(); }
+        checkByteStringIsUtf8(value);
         sheet_ = value;
+        bitField0_ |= 0x00000002;
         onChanged();
         return this;
       }
@@ -821,11 +791,6 @@ public final class PbHeaderV3 {
       return new xresloader_header();
     }
 
-    @java.lang.Override
-    public final com.google.protobuf.UnknownFieldSet
-    getUnknownFields() {
-      return this.unknownFields;
-    }
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
       return org.xresloader.pb.PbHeaderV3.internal_static_org_xresloader_pb_xresloader_header_descriptor;
@@ -840,7 +805,8 @@ public final class PbHeaderV3 {
     }
 
     public static final int XRES_VER_FIELD_NUMBER = 1;
-    private volatile java.lang.Object xresVer_;
+    @SuppressWarnings("serial")
+    private volatile java.lang.Object xresVer_ = "";
     /**
      * <code>string xres_ver = 1;</code>
      * @return The xresVer.
@@ -878,7 +844,8 @@ public final class PbHeaderV3 {
     }
 
     public static final int DATA_VER_FIELD_NUMBER = 2;
-    private volatile java.lang.Object dataVer_;
+    @SuppressWarnings("serial")
+    private volatile java.lang.Object dataVer_ = "";
     /**
      * <code>string data_ver = 2;</code>
      * @return The dataVer.
@@ -916,7 +883,7 @@ public final class PbHeaderV3 {
     }
 
     public static final int COUNT_FIELD_NUMBER = 3;
-    private int count_;
+    private int count_ = 0;
     /**
      * <code>uint32 count = 3;</code>
      * @return The count.
@@ -927,7 +894,8 @@ public final class PbHeaderV3 {
     }
 
     public static final int HASH_CODE_FIELD_NUMBER = 4;
-    private volatile java.lang.Object hashCode_;
+    @SuppressWarnings("serial")
+    private volatile java.lang.Object hashCode_ = "";
     /**
      * <code>string hash_code = 4;</code>
      * @return The hashCode.
@@ -965,7 +933,8 @@ public final class PbHeaderV3 {
     }
 
     public static final int DESCRIPTION_FIELD_NUMBER = 5;
-    private volatile java.lang.Object description_;
+    @SuppressWarnings("serial")
+    private volatile java.lang.Object description_ = "";
     /**
      * <code>string description = 5;</code>
      * @return The description.
@@ -1003,6 +972,7 @@ public final class PbHeaderV3 {
     }
 
     public static final int DATA_SOURCE_FIELD_NUMBER = 11;
+    @SuppressWarnings("serial")
     private java.util.List<org.xresloader.pb.PbHeaderV3.xresloader_data_source> dataSource_;
     /**
      * <code>repeated .org.xresloader.pb.xresloader_data_source data_source = 11;</code>
@@ -1204,11 +1174,13 @@ public final class PbHeaderV3 {
       return com.google.protobuf.GeneratedMessageV3
           .parseWithIOException(PARSER, input, extensionRegistry);
     }
+
     public static org.xresloader.pb.PbHeaderV3.xresloader_header parseDelimitedFrom(java.io.InputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseDelimitedWithIOException(PARSER, input);
     }
+
     public static org.xresloader.pb.PbHeaderV3.xresloader_header parseDelimitedFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
@@ -1283,23 +1255,19 @@ public final class PbHeaderV3 {
       @java.lang.Override
       public Builder clear() {
         super.clear();
+        bitField0_ = 0;
         xresVer_ = "";
-
         dataVer_ = "";
-
         count_ = 0;
-
         hashCode_ = "";
-
         description_ = "";
-
         if (dataSourceBuilder_ == null) {
           dataSource_ = java.util.Collections.emptyList();
         } else {
           dataSource_ = null;
           dataSourceBuilder_.clear();
         }
-        bitField0_ = (bitField0_ & ~0x00000001);
+        bitField0_ = (bitField0_ & ~0x00000020);
         return this;
       }
 
@@ -1326,57 +1294,43 @@ public final class PbHeaderV3 {
       @java.lang.Override
       public org.xresloader.pb.PbHeaderV3.xresloader_header buildPartial() {
         org.xresloader.pb.PbHeaderV3.xresloader_header result = new org.xresloader.pb.PbHeaderV3.xresloader_header(this);
-        int from_bitField0_ = bitField0_;
-        result.xresVer_ = xresVer_;
-        result.dataVer_ = dataVer_;
-        result.count_ = count_;
-        result.hashCode_ = hashCode_;
-        result.description_ = description_;
+        buildPartialRepeatedFields(result);
+        if (bitField0_ != 0) { buildPartial0(result); }
+        onBuilt();
+        return result;
+      }
+
+      private void buildPartialRepeatedFields(org.xresloader.pb.PbHeaderV3.xresloader_header result) {
         if (dataSourceBuilder_ == null) {
-          if (((bitField0_ & 0x00000001) != 0)) {
+          if (((bitField0_ & 0x00000020) != 0)) {
             dataSource_ = java.util.Collections.unmodifiableList(dataSource_);
-            bitField0_ = (bitField0_ & ~0x00000001);
+            bitField0_ = (bitField0_ & ~0x00000020);
           }
           result.dataSource_ = dataSource_;
         } else {
           result.dataSource_ = dataSourceBuilder_.build();
         }
-        onBuilt();
-        return result;
       }
 
-      @java.lang.Override
-      public Builder clone() {
-        return super.clone();
+      private void buildPartial0(org.xresloader.pb.PbHeaderV3.xresloader_header result) {
+        int from_bitField0_ = bitField0_;
+        if (((from_bitField0_ & 0x00000001) != 0)) {
+          result.xresVer_ = xresVer_;
+        }
+        if (((from_bitField0_ & 0x00000002) != 0)) {
+          result.dataVer_ = dataVer_;
+        }
+        if (((from_bitField0_ & 0x00000004) != 0)) {
+          result.count_ = count_;
+        }
+        if (((from_bitField0_ & 0x00000008) != 0)) {
+          result.hashCode_ = hashCode_;
+        }
+        if (((from_bitField0_ & 0x00000010) != 0)) {
+          result.description_ = description_;
+        }
       }
-      @java.lang.Override
-      public Builder setField(
-          com.google.protobuf.Descriptors.FieldDescriptor field,
-          java.lang.Object value) {
-        return super.setField(field, value);
-      }
-      @java.lang.Override
-      public Builder clearField(
-          com.google.protobuf.Descriptors.FieldDescriptor field) {
-        return super.clearField(field);
-      }
-      @java.lang.Override
-      public Builder clearOneof(
-          com.google.protobuf.Descriptors.OneofDescriptor oneof) {
-        return super.clearOneof(oneof);
-      }
-      @java.lang.Override
-      public Builder setRepeatedField(
-          com.google.protobuf.Descriptors.FieldDescriptor field,
-          int index, java.lang.Object value) {
-        return super.setRepeatedField(field, index, value);
-      }
-      @java.lang.Override
-      public Builder addRepeatedField(
-          com.google.protobuf.Descriptors.FieldDescriptor field,
-          java.lang.Object value) {
-        return super.addRepeatedField(field, value);
-      }
+
       @java.lang.Override
       public Builder mergeFrom(com.google.protobuf.Message other) {
         if (other instanceof org.xresloader.pb.PbHeaderV3.xresloader_header) {
@@ -1391,10 +1345,12 @@ public final class PbHeaderV3 {
         if (other == org.xresloader.pb.PbHeaderV3.xresloader_header.getDefaultInstance()) return this;
         if (!other.getXresVer().isEmpty()) {
           xresVer_ = other.xresVer_;
+          bitField0_ |= 0x00000001;
           onChanged();
         }
         if (!other.getDataVer().isEmpty()) {
           dataVer_ = other.dataVer_;
+          bitField0_ |= 0x00000002;
           onChanged();
         }
         if (other.getCount() != 0) {
@@ -1402,17 +1358,19 @@ public final class PbHeaderV3 {
         }
         if (!other.getHashCode().isEmpty()) {
           hashCode_ = other.hashCode_;
+          bitField0_ |= 0x00000008;
           onChanged();
         }
         if (!other.getDescription().isEmpty()) {
           description_ = other.description_;
+          bitField0_ |= 0x00000010;
           onChanged();
         }
         if (dataSourceBuilder_ == null) {
           if (!other.dataSource_.isEmpty()) {
             if (dataSource_.isEmpty()) {
               dataSource_ = other.dataSource_;
-              bitField0_ = (bitField0_ & ~0x00000001);
+              bitField0_ = (bitField0_ & ~0x00000020);
             } else {
               ensureDataSourceIsMutable();
               dataSource_.addAll(other.dataSource_);
@@ -1425,7 +1383,7 @@ public final class PbHeaderV3 {
               dataSourceBuilder_.dispose();
               dataSourceBuilder_ = null;
               dataSource_ = other.dataSource_;
-              bitField0_ = (bitField0_ & ~0x00000001);
+              bitField0_ = (bitField0_ & ~0x00000020);
               dataSourceBuilder_ = 
                 com.google.protobuf.GeneratedMessageV3.alwaysUseFieldBuilders ?
                    getDataSourceFieldBuilder() : null;
@@ -1462,27 +1420,27 @@ public final class PbHeaderV3 {
                 break;
               case 10: {
                 xresVer_ = input.readStringRequireUtf8();
-
+                bitField0_ |= 0x00000001;
                 break;
               } // case 10
               case 18: {
                 dataVer_ = input.readStringRequireUtf8();
-
+                bitField0_ |= 0x00000002;
                 break;
               } // case 18
               case 24: {
                 count_ = input.readUInt32();
-
+                bitField0_ |= 0x00000004;
                 break;
               } // case 24
               case 34: {
                 hashCode_ = input.readStringRequireUtf8();
-
+                bitField0_ |= 0x00000008;
                 break;
               } // case 34
               case 42: {
                 description_ = input.readStringRequireUtf8();
-
+                bitField0_ |= 0x00000010;
                 break;
               } // case 42
               case 90: {
@@ -1556,11 +1514,9 @@ public final class PbHeaderV3 {
        */
       public Builder setXresVer(
           java.lang.String value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  
+        if (value == null) { throw new NullPointerException(); }
         xresVer_ = value;
+        bitField0_ |= 0x00000001;
         onChanged();
         return this;
       }
@@ -1569,8 +1525,8 @@ public final class PbHeaderV3 {
        * @return This builder for chaining.
        */
       public Builder clearXresVer() {
-        
         xresVer_ = getDefaultInstance().getXresVer();
+        bitField0_ = (bitField0_ & ~0x00000001);
         onChanged();
         return this;
       }
@@ -1581,12 +1537,10 @@ public final class PbHeaderV3 {
        */
       public Builder setXresVerBytes(
           com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  checkByteStringIsUtf8(value);
-        
+        if (value == null) { throw new NullPointerException(); }
+        checkByteStringIsUtf8(value);
         xresVer_ = value;
+        bitField0_ |= 0x00000001;
         onChanged();
         return this;
       }
@@ -1632,11 +1586,9 @@ public final class PbHeaderV3 {
        */
       public Builder setDataVer(
           java.lang.String value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  
+        if (value == null) { throw new NullPointerException(); }
         dataVer_ = value;
+        bitField0_ |= 0x00000002;
         onChanged();
         return this;
       }
@@ -1645,8 +1597,8 @@ public final class PbHeaderV3 {
        * @return This builder for chaining.
        */
       public Builder clearDataVer() {
-        
         dataVer_ = getDefaultInstance().getDataVer();
+        bitField0_ = (bitField0_ & ~0x00000002);
         onChanged();
         return this;
       }
@@ -1657,12 +1609,10 @@ public final class PbHeaderV3 {
        */
       public Builder setDataVerBytes(
           com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  checkByteStringIsUtf8(value);
-        
+        if (value == null) { throw new NullPointerException(); }
+        checkByteStringIsUtf8(value);
         dataVer_ = value;
+        bitField0_ |= 0x00000002;
         onChanged();
         return this;
       }
@@ -1682,8 +1632,9 @@ public final class PbHeaderV3 {
        * @return This builder for chaining.
        */
       public Builder setCount(int value) {
-        
+
         count_ = value;
+        bitField0_ |= 0x00000004;
         onChanged();
         return this;
       }
@@ -1692,7 +1643,7 @@ public final class PbHeaderV3 {
        * @return This builder for chaining.
        */
       public Builder clearCount() {
-        
+        bitField0_ = (bitField0_ & ~0x00000004);
         count_ = 0;
         onChanged();
         return this;
@@ -1739,11 +1690,9 @@ public final class PbHeaderV3 {
        */
       public Builder setHashCode(
           java.lang.String value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  
+        if (value == null) { throw new NullPointerException(); }
         hashCode_ = value;
+        bitField0_ |= 0x00000008;
         onChanged();
         return this;
       }
@@ -1752,8 +1701,8 @@ public final class PbHeaderV3 {
        * @return This builder for chaining.
        */
       public Builder clearHashCode() {
-        
         hashCode_ = getDefaultInstance().getHashCode();
+        bitField0_ = (bitField0_ & ~0x00000008);
         onChanged();
         return this;
       }
@@ -1764,12 +1713,10 @@ public final class PbHeaderV3 {
        */
       public Builder setHashCodeBytes(
           com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  checkByteStringIsUtf8(value);
-        
+        if (value == null) { throw new NullPointerException(); }
+        checkByteStringIsUtf8(value);
         hashCode_ = value;
+        bitField0_ |= 0x00000008;
         onChanged();
         return this;
       }
@@ -1815,11 +1762,9 @@ public final class PbHeaderV3 {
        */
       public Builder setDescription(
           java.lang.String value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  
+        if (value == null) { throw new NullPointerException(); }
         description_ = value;
+        bitField0_ |= 0x00000010;
         onChanged();
         return this;
       }
@@ -1828,8 +1773,8 @@ public final class PbHeaderV3 {
        * @return This builder for chaining.
        */
       public Builder clearDescription() {
-        
         description_ = getDefaultInstance().getDescription();
+        bitField0_ = (bitField0_ & ~0x00000010);
         onChanged();
         return this;
       }
@@ -1840,12 +1785,10 @@ public final class PbHeaderV3 {
        */
       public Builder setDescriptionBytes(
           com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  checkByteStringIsUtf8(value);
-        
+        if (value == null) { throw new NullPointerException(); }
+        checkByteStringIsUtf8(value);
         description_ = value;
+        bitField0_ |= 0x00000010;
         onChanged();
         return this;
       }
@@ -1853,9 +1796,9 @@ public final class PbHeaderV3 {
       private java.util.List<org.xresloader.pb.PbHeaderV3.xresloader_data_source> dataSource_ =
         java.util.Collections.emptyList();
       private void ensureDataSourceIsMutable() {
-        if (!((bitField0_ & 0x00000001) != 0)) {
+        if (!((bitField0_ & 0x00000020) != 0)) {
           dataSource_ = new java.util.ArrayList<org.xresloader.pb.PbHeaderV3.xresloader_data_source>(dataSource_);
-          bitField0_ |= 0x00000001;
+          bitField0_ |= 0x00000020;
          }
       }
 
@@ -2005,7 +1948,7 @@ public final class PbHeaderV3 {
       public Builder clearDataSource() {
         if (dataSourceBuilder_ == null) {
           dataSource_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x00000001);
+          bitField0_ = (bitField0_ & ~0x00000020);
           onChanged();
         } else {
           dataSourceBuilder_.clear();
@@ -2082,7 +2025,7 @@ public final class PbHeaderV3 {
           dataSourceBuilder_ = new com.google.protobuf.RepeatedFieldBuilderV3<
               org.xresloader.pb.PbHeaderV3.xresloader_data_source, org.xresloader.pb.PbHeaderV3.xresloader_data_source.Builder, org.xresloader.pb.PbHeaderV3.xresloader_data_sourceOrBuilder>(
                   dataSource_,
-                  ((bitField0_ & 0x00000001) != 0),
+                  ((bitField0_ & 0x00000020) != 0),
                   getParentForChildren(),
                   isClean());
           dataSource_ = null;
@@ -2225,11 +2168,6 @@ public final class PbHeaderV3 {
       return new xresloader_datablocks();
     }
 
-    @java.lang.Override
-    public final com.google.protobuf.UnknownFieldSet
-    getUnknownFields() {
-      return this.unknownFields;
-    }
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
       return org.xresloader.pb.PbHeaderV3.internal_static_org_xresloader_pb_xresloader_datablocks_descriptor;
@@ -2266,10 +2204,11 @@ public final class PbHeaderV3 {
      */
     @java.lang.Override
     public org.xresloader.pb.PbHeaderV3.xresloader_headerOrBuilder getHeaderOrBuilder() {
-      return getHeader();
+      return header_ == null ? org.xresloader.pb.PbHeaderV3.xresloader_header.getDefaultInstance() : header_;
     }
 
     public static final int DATA_BLOCK_FIELD_NUMBER = 2;
+    @SuppressWarnings("serial")
     private java.util.List<com.google.protobuf.ByteString> dataBlock_;
     /**
      * <code>repeated bytes data_block = 2;</code>
@@ -2297,7 +2236,8 @@ public final class PbHeaderV3 {
     }
 
     public static final int DATA_MESSAGE_TYPE_FIELD_NUMBER = 3;
-    private volatile java.lang.Object dataMessageType_;
+    @SuppressWarnings("serial")
+    private volatile java.lang.Object dataMessageType_ = "";
     /**
      * <code>string data_message_type = 3;</code>
      * @return The dataMessageType.
@@ -2476,11 +2416,13 @@ public final class PbHeaderV3 {
       return com.google.protobuf.GeneratedMessageV3
           .parseWithIOException(PARSER, input, extensionRegistry);
     }
+
     public static org.xresloader.pb.PbHeaderV3.xresloader_datablocks parseDelimitedFrom(java.io.InputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseDelimitedWithIOException(PARSER, input);
     }
+
     public static org.xresloader.pb.PbHeaderV3.xresloader_datablocks parseDelimitedFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
@@ -2555,16 +2497,14 @@ public final class PbHeaderV3 {
       @java.lang.Override
       public Builder clear() {
         super.clear();
-        if (headerBuilder_ == null) {
-          header_ = null;
-        } else {
-          header_ = null;
+        bitField0_ = 0;
+        header_ = null;
+        if (headerBuilder_ != null) {
+          headerBuilder_.dispose();
           headerBuilder_ = null;
         }
         dataBlock_ = java.util.Collections.emptyList();
-        bitField0_ = (bitField0_ & ~0x00000001);
         dataMessageType_ = "";
-
         return this;
       }
 
@@ -2591,54 +2531,32 @@ public final class PbHeaderV3 {
       @java.lang.Override
       public org.xresloader.pb.PbHeaderV3.xresloader_datablocks buildPartial() {
         org.xresloader.pb.PbHeaderV3.xresloader_datablocks result = new org.xresloader.pb.PbHeaderV3.xresloader_datablocks(this);
-        int from_bitField0_ = bitField0_;
-        if (headerBuilder_ == null) {
-          result.header_ = header_;
-        } else {
-          result.header_ = headerBuilder_.build();
-        }
-        if (((bitField0_ & 0x00000001) != 0)) {
-          dataBlock_ = java.util.Collections.unmodifiableList(dataBlock_);
-          bitField0_ = (bitField0_ & ~0x00000001);
-        }
-        result.dataBlock_ = dataBlock_;
-        result.dataMessageType_ = dataMessageType_;
+        buildPartialRepeatedFields(result);
+        if (bitField0_ != 0) { buildPartial0(result); }
         onBuilt();
         return result;
       }
 
-      @java.lang.Override
-      public Builder clone() {
-        return super.clone();
+      private void buildPartialRepeatedFields(org.xresloader.pb.PbHeaderV3.xresloader_datablocks result) {
+        if (((bitField0_ & 0x00000002) != 0)) {
+          dataBlock_ = java.util.Collections.unmodifiableList(dataBlock_);
+          bitField0_ = (bitField0_ & ~0x00000002);
+        }
+        result.dataBlock_ = dataBlock_;
       }
-      @java.lang.Override
-      public Builder setField(
-          com.google.protobuf.Descriptors.FieldDescriptor field,
-          java.lang.Object value) {
-        return super.setField(field, value);
+
+      private void buildPartial0(org.xresloader.pb.PbHeaderV3.xresloader_datablocks result) {
+        int from_bitField0_ = bitField0_;
+        if (((from_bitField0_ & 0x00000001) != 0)) {
+          result.header_ = headerBuilder_ == null
+              ? header_
+              : headerBuilder_.build();
+        }
+        if (((from_bitField0_ & 0x00000004) != 0)) {
+          result.dataMessageType_ = dataMessageType_;
+        }
       }
-      @java.lang.Override
-      public Builder clearField(
-          com.google.protobuf.Descriptors.FieldDescriptor field) {
-        return super.clearField(field);
-      }
-      @java.lang.Override
-      public Builder clearOneof(
-          com.google.protobuf.Descriptors.OneofDescriptor oneof) {
-        return super.clearOneof(oneof);
-      }
-      @java.lang.Override
-      public Builder setRepeatedField(
-          com.google.protobuf.Descriptors.FieldDescriptor field,
-          int index, java.lang.Object value) {
-        return super.setRepeatedField(field, index, value);
-      }
-      @java.lang.Override
-      public Builder addRepeatedField(
-          com.google.protobuf.Descriptors.FieldDescriptor field,
-          java.lang.Object value) {
-        return super.addRepeatedField(field, value);
-      }
+
       @java.lang.Override
       public Builder mergeFrom(com.google.protobuf.Message other) {
         if (other instanceof org.xresloader.pb.PbHeaderV3.xresloader_datablocks) {
@@ -2657,7 +2575,7 @@ public final class PbHeaderV3 {
         if (!other.dataBlock_.isEmpty()) {
           if (dataBlock_.isEmpty()) {
             dataBlock_ = other.dataBlock_;
-            bitField0_ = (bitField0_ & ~0x00000001);
+            bitField0_ = (bitField0_ & ~0x00000002);
           } else {
             ensureDataBlockIsMutable();
             dataBlock_.addAll(other.dataBlock_);
@@ -2666,6 +2584,7 @@ public final class PbHeaderV3 {
         }
         if (!other.getDataMessageType().isEmpty()) {
           dataMessageType_ = other.dataMessageType_;
+          bitField0_ |= 0x00000004;
           onChanged();
         }
         this.mergeUnknownFields(other.getUnknownFields());
@@ -2698,7 +2617,7 @@ public final class PbHeaderV3 {
                 input.readMessage(
                     getHeaderFieldBuilder().getBuilder(),
                     extensionRegistry);
-
+                bitField0_ |= 0x00000001;
                 break;
               } // case 10
               case 18: {
@@ -2709,7 +2628,7 @@ public final class PbHeaderV3 {
               } // case 18
               case 26: {
                 dataMessageType_ = input.readStringRequireUtf8();
-
+                bitField0_ |= 0x00000004;
                 break;
               } // case 26
               default: {
@@ -2737,7 +2656,7 @@ public final class PbHeaderV3 {
        * @return Whether the header field is set.
        */
       public boolean hasHeader() {
-        return headerBuilder_ != null || header_ != null;
+        return ((bitField0_ & 0x00000001) != 0);
       }
       /**
        * <code>.org.xresloader.pb.xresloader_header header = 1;</code>
@@ -2759,11 +2678,11 @@ public final class PbHeaderV3 {
             throw new NullPointerException();
           }
           header_ = value;
-          onChanged();
         } else {
           headerBuilder_.setMessage(value);
         }
-
+        bitField0_ |= 0x00000001;
+        onChanged();
         return this;
       }
       /**
@@ -2773,11 +2692,11 @@ public final class PbHeaderV3 {
           org.xresloader.pb.PbHeaderV3.xresloader_header.Builder builderForValue) {
         if (headerBuilder_ == null) {
           header_ = builderForValue.build();
-          onChanged();
         } else {
           headerBuilder_.setMessage(builderForValue.build());
         }
-
+        bitField0_ |= 0x00000001;
+        onChanged();
         return this;
       }
       /**
@@ -2785,38 +2704,38 @@ public final class PbHeaderV3 {
        */
       public Builder mergeHeader(org.xresloader.pb.PbHeaderV3.xresloader_header value) {
         if (headerBuilder_ == null) {
-          if (header_ != null) {
-            header_ =
-              org.xresloader.pb.PbHeaderV3.xresloader_header.newBuilder(header_).mergeFrom(value).buildPartial();
+          if (((bitField0_ & 0x00000001) != 0) &&
+            header_ != null &&
+            header_ != org.xresloader.pb.PbHeaderV3.xresloader_header.getDefaultInstance()) {
+            getHeaderBuilder().mergeFrom(value);
           } else {
             header_ = value;
           }
-          onChanged();
         } else {
           headerBuilder_.mergeFrom(value);
         }
-
+        bitField0_ |= 0x00000001;
+        onChanged();
         return this;
       }
       /**
        * <code>.org.xresloader.pb.xresloader_header header = 1;</code>
        */
       public Builder clearHeader() {
-        if (headerBuilder_ == null) {
-          header_ = null;
-          onChanged();
-        } else {
-          header_ = null;
+        bitField0_ = (bitField0_ & ~0x00000001);
+        header_ = null;
+        if (headerBuilder_ != null) {
+          headerBuilder_.dispose();
           headerBuilder_ = null;
         }
-
+        onChanged();
         return this;
       }
       /**
        * <code>.org.xresloader.pb.xresloader_header header = 1;</code>
        */
       public org.xresloader.pb.PbHeaderV3.xresloader_header.Builder getHeaderBuilder() {
-        
+        bitField0_ |= 0x00000001;
         onChanged();
         return getHeaderFieldBuilder().getBuilder();
       }
@@ -2850,10 +2769,10 @@ public final class PbHeaderV3 {
 
       private java.util.List<com.google.protobuf.ByteString> dataBlock_ = java.util.Collections.emptyList();
       private void ensureDataBlockIsMutable() {
-        if (!((bitField0_ & 0x00000001) != 0)) {
+        if (!((bitField0_ & 0x00000002) != 0)) {
           dataBlock_ = new java.util.ArrayList<com.google.protobuf.ByteString>(dataBlock_);
-          bitField0_ |= 0x00000001;
-         }
+          bitField0_ |= 0x00000002;
+        }
       }
       /**
        * <code>repeated bytes data_block = 2;</code>
@@ -2861,7 +2780,7 @@ public final class PbHeaderV3 {
        */
       public java.util.List<com.google.protobuf.ByteString>
           getDataBlockList() {
-        return ((bitField0_ & 0x00000001) != 0) ?
+        return ((bitField0_ & 0x00000002) != 0) ?
                  java.util.Collections.unmodifiableList(dataBlock_) : dataBlock_;
       }
       /**
@@ -2887,10 +2806,8 @@ public final class PbHeaderV3 {
        */
       public Builder setDataBlock(
           int index, com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  ensureDataBlockIsMutable();
+        if (value == null) { throw new NullPointerException(); }
+        ensureDataBlockIsMutable();
         dataBlock_.set(index, value);
         onChanged();
         return this;
@@ -2901,10 +2818,8 @@ public final class PbHeaderV3 {
        * @return This builder for chaining.
        */
       public Builder addDataBlock(com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  ensureDataBlockIsMutable();
+        if (value == null) { throw new NullPointerException(); }
+        ensureDataBlockIsMutable();
         dataBlock_.add(value);
         onChanged();
         return this;
@@ -2928,7 +2843,7 @@ public final class PbHeaderV3 {
        */
       public Builder clearDataBlock() {
         dataBlock_ = java.util.Collections.emptyList();
-        bitField0_ = (bitField0_ & ~0x00000001);
+        bitField0_ = (bitField0_ & ~0x00000002);
         onChanged();
         return this;
       }
@@ -2974,11 +2889,9 @@ public final class PbHeaderV3 {
        */
       public Builder setDataMessageType(
           java.lang.String value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  
+        if (value == null) { throw new NullPointerException(); }
         dataMessageType_ = value;
+        bitField0_ |= 0x00000004;
         onChanged();
         return this;
       }
@@ -2987,8 +2900,8 @@ public final class PbHeaderV3 {
        * @return This builder for chaining.
        */
       public Builder clearDataMessageType() {
-        
         dataMessageType_ = getDefaultInstance().getDataMessageType();
+        bitField0_ = (bitField0_ & ~0x00000004);
         onChanged();
         return this;
       }
@@ -2999,12 +2912,10 @@ public final class PbHeaderV3 {
        */
       public Builder setDataMessageTypeBytes(
           com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  checkByteStringIsUtf8(value);
-        
+        if (value == null) { throw new NullPointerException(); }
+        checkByteStringIsUtf8(value);
         dataMessageType_ = value;
+        bitField0_ |= 0x00000004;
         onChanged();
         return this;
       }

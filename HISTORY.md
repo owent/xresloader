@@ -11,6 +11,18 @@
    + 增加 `UeCfg-IncludeHeader` 选项，对所有输出的UE代码额外包含头文件
    + 增加 `org.xresloader.ue.include_header` 插件用于对于特定的Message额外附加包含文件
 3. 修复Lua输出 `</` 时追加了冗余的 `\` 导致转移错误的问题。
+4. 修复一处在Plain模式中oneof内使用enum类型时，无法导出输出的问题。
+2. 更新 `org.jacoco.jacoco-maven-plugin` 到 0.8.10
+3. 更新 `org.apache.maven.plugins.maven-compiler-plugin` 到 3.11.0
+4. 更新 `maven-surefire-plugin` 到 3.1.0
+5. 更新 `org.apache.maven.plugins.maven-shade-plugin` 到 3.4.1
+6. 更新 `log4j` 到 2.20.0
+7. 更新 `protobuf` 到 3.23.0
+8. 更新 `org.apache.pdfbox` 到 2.0.28
+9. 更新 `org.apache.santuario.xmlsec` 到 3.0.2
+10. 更新 `org.dom4j` 到 2.1.4
+11. 更新 `org.apache.commons.commons-csv` 到 1.10.0
+12. 更新 `junit` 到 5.9.3
 
 ## 2.13.0
 

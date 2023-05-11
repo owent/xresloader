@@ -1,31 +1,32 @@
 ﻿# Benchmark
+
 ## Run without CallbackScript
 
 Days              : 0
 Hours             : 0
 Minutes           : 1
-Seconds           : 22
-Milliseconds      : 491
-Ticks             : 824918229
-TotalDays         : 0.00095476646875
-TotalHours        : 0.02291439525
-TotalMinutes      : 1.374863715
-TotalSeconds      : 82.4918229
-TotalMilliseconds : 82491.8229
+Seconds           : 26
+Milliseconds      : 988
+Ticks             : 869888068
+TotalDays         : 0.00100681489351852
+TotalHours        : 0.0241635574444444
+TotalMinutes      : 1.44981344666667
+TotalSeconds      : 86.9888068
+TotalMilliseconds : 86988.8068
 
 
 ## Run with CallbackScript
 
 Days              : 0
 Hours             : 0
-Minutes           : 1
-Seconds           : 31
-Milliseconds      : 78
-Ticks             : 910785886
-TotalDays         : 0.00105415033101852
-TotalHours        : 0.0252996079444444
-TotalMinutes      : 1.51797647666667
-TotalSeconds      : 91.0785886
-TotalMilliseconds : 91078.5886
+Minutes           : 2
+Seconds           : 10
+Milliseconds      : 387
+Ticks             : 1303876221
+TotalDays         : 0.00150911599652778
+TotalHours        : 0.0362187839166667
+TotalMinutes      : 2.173127035
+TotalSeconds      : 130.3876221
+TotalMilliseconds : 130387.6221
 
 

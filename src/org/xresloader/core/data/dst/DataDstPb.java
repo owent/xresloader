@@ -1503,7 +1503,7 @@ public class DataDstPb extends DataDstImpl {
             if (val instanceof Descriptors.EnumValueDescriptor) {
                 enum_val = (Descriptors.EnumValueDescriptor) val;
             } else {
-                val = get_enum_value(cachePbs, fd.getEnumType(), (Integer) val);
+                enum_val = get_enum_value(cachePbs, fd.getEnumType(), (Integer) val);
             }
 
             if (null == enum_val) {

@@ -29,6 +29,8 @@ public abstract class DataDstJava extends DataDstImpl {
     }
 
     public static class SpecialInnerHashMap<K, V> extends HashMap<K, V> {
+        private static final long serialVersionUID = 1L;
+
         public SpecialInnerHashMap(int initialCapacity, float loadFactor) {
             super(initialCapacity, loadFactor);
         }

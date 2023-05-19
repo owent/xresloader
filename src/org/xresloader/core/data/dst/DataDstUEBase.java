@@ -1753,10 +1753,14 @@ public abstract class DataDstUEBase extends DataDstJava {
         if (enable) {
             if (null == ueTypeName) {
                 String ueTypeNameIdent = null;
+                String ueOriginTypeName = null;
                 if (null != fieldDesc) {
                     ueTypeNameIdent = fieldDesc.mutableExtension().mutableUE().ueTypeName;
+                    ueOriginTypeName = fieldDesc.mutableExtension().mutableUE().ueOriginTypeName;
                 }
-                if (ueTypeNameIdent == null || ueTypeNameIdent.isEmpty()) {
+                if (ueOriginTypeName != null && !ueOriginTypeName.trim().isEmpty()) {
+                    ueTypeName = ueOriginTypeName.trim();
+                } else if (ueTypeNameIdent == null || ueTypeNameIdent.isEmpty()) {
                     ueTypeName = getUETypeName(typeDesc);
                 } else {
                     if (null != fieldDesc && fieldDesc.mutableExtension().mutableUE().ueTypeIsClass) {
@@ -1771,8 +1775,11 @@ public abstract class DataDstUEBase extends DataDstJava {
             if (fieldDesc.isMap() && typeDesc != null && typeDesc.getSortedFields().size() >= 2) {
                 String keyUeTypeName = getUETypeName(typeDesc.getSortedFields().get(0).getTypeDescriptor());
                 String ueTypeNameIdent = fieldDesc.mutableExtension().mutableUE().ueTypeName;
+                String ueOriginTypeName = fieldDesc.mutableExtension().mutableUE().ueOriginTypeName;
                 String valueUeTypeName;
-                if (ueTypeNameIdent == null || ueTypeNameIdent.isEmpty()) {
+                if (ueOriginTypeName != null && !ueOriginTypeName.trim().isEmpty()) {
+                    valueUeTypeName = ueOriginTypeName.trim();
+                } else if (ueTypeNameIdent == null || ueTypeNameIdent.isEmpty()) {
                     valueUeTypeName = getUETypeName(typeDesc.getSortedFields().get(1).getTypeDescriptor());
                 } else {
                     if (null != fieldDesc && fieldDesc.mutableExtension().mutableUE().ueTypeIsClass) {
@@ -1843,7 +1850,11 @@ public abstract class DataDstUEBase extends DataDstJava {
     protected final String getUETypeDefault(DataDstFieldDescriptor field) {
         DataDstWriterNode.JAVA_TYPE descType = field.getType();
         String ueTypeNameIdent = field.mutableExtension().mutableUE().ueTypeName;
+        String ueOriginTypeDefaultValue = field.mutableExtension().mutableUE().ueOriginTypeDefaultValue;
 
+        if (ueOriginTypeDefaultValue != null && !ueOriginTypeDefaultValue.trim().isEmpty()) {
+            return ueOriginTypeDefaultValue.trim();
+        }
         if (ueTypeNameIdent != null && !ueTypeNameIdent.isEmpty()) {
             return "nullptr";
         }

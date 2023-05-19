@@ -445,6 +445,16 @@ public class DataDstPb extends DataDstImpl {
             child_field.mutableExtension().mutableUE().ueTypeIsClass = fd.getOptions()
                     .getExtension(XresloaderUe.ueTypeIsClass);
         }
+
+        if (fd.getOptions().hasExtension(XresloaderUe.ueOriginTypeName)) {
+            child_field.mutableExtension().mutableUE().ueOriginTypeName = fd.getOptions()
+                    .getExtension(XresloaderUe.ueOriginTypeName);
+        }
+
+        if (fd.getOptions().hasExtension(XresloaderUe.ueOriginTypeDefaultValue)) {
+            child_field.mutableExtension().mutableUE().ueOriginTypeDefaultValue = fd.getOptions()
+                    .getExtension(XresloaderUe.ueOriginTypeDefaultValue);
+        }
     }
 
     static private void setup_extension(DataDstTypeDescriptor parent_message, DataDstOneofDescriptor child_field,

@@ -34,6 +34,8 @@ public class DataDstWriterNode {
         public long keyTag = 0;
         public String ueTypeName = null;
         public boolean ueTypeIsClass = false;
+        public String ueOriginTypeName = null;
+        public String ueOriginTypeDefaultValue = null;
     }
 
     static public class DataDstFieldExt {

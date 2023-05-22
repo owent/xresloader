@@ -5,6 +5,7 @@
 1. 增加 `org.xresloader.ue.ue_origin_type_name` 来设置输出UE代码的原始类型
 2. 增加 `org.xresloader.ue.ue_origin_type_default_value` 来设置输出UE代码的原始类型的默认值
 3. 修复打包时 `Discovered module-info.class. Shading will break its strong encapsulation.` 的告警
+4. 允许在Excel同一列里配置多个字段，由转表工具自动复制
 
 ## 2.13.1
 

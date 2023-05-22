@@ -283,8 +283,22 @@ public class DataSrcExcel extends DataSrcImpl {
                     DataContainer<String> k = getStringCache("");
                     ExcelEngine.cell2s(k, rowWrapper, column_ident, res.formula);
                     IdentifyDescriptor ident = IdentifyEngine.n2i(k.get(), i);
-                    res.nameMapping.put(ident.name, ident);
-                    res.indexMapping.add(ident);
+                    String[] multipleNames = ident.name.split(",");
+                    if (multipleNames.length > 1) {
+                        for (String realName : multipleNames) {
+                            String trimName = realName.trim();
+                            if (trimName.isEmpty()) {
+                                continue;
+                            }
+                            IdentifyDescriptor copyIdent = ident.clone();
+                            copyIdent.name = trimName;
+                            res.nameMapping.put(copyIdent.name, ident);
+                            res.indexMapping.add(copyIdent);
+                        }
+                    } else {
+                        res.nameMapping.put(ident.name, ident);
+                        res.indexMapping.add(ident);
+                    }
                 }
             }
 
@@ -458,7 +472,7 @@ public class DataSrcExcel extends DataSrcImpl {
     }
 
     @Override
-    public LinkedList<IdentifyDescriptor> getColumns() {
+    public LinkedList<IdentifyDescriptor> getMappedColumns() {
         if (null == current) {
             return null;
         }

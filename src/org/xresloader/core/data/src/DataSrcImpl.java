@@ -155,7 +155,7 @@ public abstract class DataSrcImpl {
         return null;
     }
 
-    public LinkedList<IdentifyDescriptor> getColumns() {
+    public LinkedList<IdentifyDescriptor> getMappedColumns() {
         return null;
     }
 

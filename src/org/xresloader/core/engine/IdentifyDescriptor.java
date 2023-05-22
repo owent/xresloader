@@ -7,7 +7,7 @@ import org.xresloader.core.data.dst.DataDstWriterNode;
 import org.xresloader.core.data.vfy.DataVerifyImpl;
 
 /**
- * Created by owt50 on 2016/12/7. 这个数据结构对应Excel里的一列
+ * Created by owent on 2016/12/7. 这个数据结构对应Excel里的一列
  */
 public class IdentifyDescriptor {
     /**
@@ -68,5 +68,16 @@ public class IdentifyDescriptor {
         }
 
         return referToWriterNode.getReferBrothers().innerFieldDesc.mutableExtension().ratio;
+    }
+
+    public IdentifyDescriptor clone() {
+        IdentifyDescriptor ret = new IdentifyDescriptor();
+        ret.name = this.name;
+        ret.index = this.index;
+        ret.dataSourceFieldVerifier = this.dataSourceFieldVerifier;
+        ret.verifyEngine = this.verifyEngine;
+        ret.referToWriterNode = this.referToWriterNode;
+
+        return ret;
     }
 }

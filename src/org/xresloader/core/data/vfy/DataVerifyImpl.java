@@ -19,7 +19,7 @@ public abstract class DataVerifyImpl {
         name = _name;
     }
 
-    public boolean get(long number, DataVerifyResult res) {
+    public boolean get(double number, DataVerifyResult res) {
         // 0 值永久有效
         if (0 == number) {
             res.success = true;
@@ -27,7 +27,7 @@ public abstract class DataVerifyImpl {
             return res.success;
         }
 
-        if (all_numbers.contains((Long) number)) {
+        if (all_numbers.contains(Math.round(number))) {
             res.success = true;
             res.value = number;
             return res.success;
@@ -58,7 +58,7 @@ public abstract class DataVerifyImpl {
 
         if (is_numeric) {
             if (is_double) {
-                return get(Math.round(Double.valueOf(enum_name)), res);
+                return get(Double.valueOf(enum_name), res);
             } else {
                 return get(Long.valueOf(enum_name), res);
             }
@@ -84,6 +84,10 @@ public abstract class DataVerifyImpl {
     }
 
     static public long getAndVerify(List<DataVerifyImpl> verifyEngine, String path, long n) throws ConvException {
+        return Math.round(getAndVerify(verifyEngine, path, (double) n));
+    }
+
+    static public double getAndVerify(List<DataVerifyImpl> verifyEngine, String path, double n) throws ConvException {
         if (verifyEngine == null || verifyEngine.isEmpty()) {
             return n;
         }
@@ -103,7 +107,8 @@ public abstract class DataVerifyImpl {
         throw new ConvException(String.format("Check %d for %s failed, check data failed.", n, path));
     }
 
-    static public long getAndVerify(List<DataVerifyImpl> verifyEngine, String path, String val) throws ConvException {
+    static public double getAndVerifyToDouble(List<DataVerifyImpl> verifyEngine, String path, String val)
+            throws ConvException {
         boolean is_numeric = true;
         boolean is_double = false;
         for (int i = 0; is_numeric && i < val.length(); ++i) {
@@ -118,16 +123,16 @@ public abstract class DataVerifyImpl {
 
         if (is_numeric) {
             if (is_double) {
-                return getAndVerify(verifyEngine, path, Math.round(Double.valueOf(val)));
+                return getAndVerify(verifyEngine, path, Double.valueOf(val));
             } else {
-                return getAndVerify(verifyEngine, path, Long.valueOf(val));    
+                return getAndVerify(verifyEngine, path, Long.valueOf(val));
             }
         }
 
         try {
             if (verifyEngine == null || verifyEngine.isEmpty()) {
                 if (is_double) {
-                    return Math.round(Double.valueOf(val));
+                    return Double.valueOf(val);
                 } else {
                     return Long.valueOf(val);
                 }
@@ -145,5 +150,10 @@ public abstract class DataVerifyImpl {
         }
 
         throw new ConvException(String.format("Convert %s for %s failed, check data failed.", val, path));
+    }
+
+    static public long getAndVerifyToLong(List<DataVerifyImpl> verifyEngine, String path, String val)
+            throws ConvException {
+        return Math.round(getAndVerifyToDouble(verifyEngine, path, val));
     }
 }

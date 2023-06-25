@@ -3,13 +3,45 @@ package org.xresloader.core.data.vfy;
 import org.xresloader.core.ProgramOptions;
 
 public class DataVerifyIntRange extends DataVerifyImpl {
-    private long lowerBound = 0;
-    private long upperBound = 0;
+    private double lowerBound = 0.0;
+    private double upperBound = 0.0;
 
     public DataVerifyIntRange(String range) {
         super(range);
 
         if (range.isEmpty()) {
+            return;
+        }
+
+        if (range.charAt(0) == '>' || range.charAt(0) == '<') {
+            String value;
+            boolean include = false;
+            if (range.length() > 0 && range.charAt(1) == '=') {
+                include = true;
+                value = range.substring(2).trim();
+            } else {
+                value = range.substring(1).trim();
+            }
+            try {
+                double bound = Double.valueOf(value).doubleValue();
+                if (range.charAt(0) == '>') {
+                    if (include) {
+                        this.lowerBound = bound - Math.ulp(bound);
+                    } else {
+                        this.lowerBound = bound + Math.ulp(bound);
+                    }
+                    this.upperBound = Double.MAX_VALUE;
+                } else {
+                    if (include) {
+                        this.upperBound = bound + Math.ulp(bound);
+                    } else {
+                        this.upperBound = bound - Math.ulp(bound);
+                    }
+                    this.lowerBound = Double.MIN_VALUE;
+                }
+            } catch (NumberFormatException e) {
+                ProgramOptions.getLoger().error("Invalid integer range %s verifier", range);
+            }
             return;
         }
 
@@ -22,16 +54,17 @@ public class DataVerifyIntRange extends DataVerifyImpl {
 
         try {
             if (split_pos >= range.length()) {
-                lowerBound = Math.round(Double.valueOf(range));
-                upperBound = lowerBound + 1;
+                double bound = Double.valueOf(range).doubleValue();
+                this.lowerBound = bound - Math.ulp(bound);
+                this.upperBound = bound + Math.ulp(bound);
             }
 
-            lowerBound = Math.round(Double.valueOf(range.substring(0, split_pos).trim()));
+            double bound = Double.valueOf(range.substring(0, split_pos).trim()).doubleValue();
+            this.lowerBound = bound - Math.ulp(bound);
             if (split_pos + 1 < range.length()) {
-                upperBound = Math.round(Double.valueOf(range.substring(split_pos + 1).trim())) + 1;
-            } else {
-                upperBound = lowerBound + 1;
+                bound = Double.valueOf(range.substring(split_pos + 1).trim()).doubleValue();
             }
+            this.upperBound = bound + Math.ulp(bound);
         } catch (NumberFormatException e) {
             ProgramOptions.getLoger().error("Invalid integer range %s verifier", range);
         }
@@ -42,7 +75,7 @@ public class DataVerifyIntRange extends DataVerifyImpl {
     }
 
     @Override
-    public boolean get(long number, DataVerifyResult res) {
+    public boolean get(double number, DataVerifyResult res) {
         // 0 值永久有效,因为空数据项会被填充默认值
         if (0 == number) {
             res.success = true;
@@ -50,7 +83,7 @@ public class DataVerifyIntRange extends DataVerifyImpl {
             return res.success;
         }
 
-        if (number >= lowerBound && number < upperBound) {
+        if (number >= lowerBound && number <= upperBound) {
             res.success = true;
             res.value = number;
             return res.success;
@@ -77,7 +110,7 @@ public class DataVerifyIntRange extends DataVerifyImpl {
 
         if (is_numeric) {
             if (is_double) {
-                return get(Math.round(Double.valueOf(intstr)), res);
+                return get(Double.valueOf(intstr), res);
             } else {
                 return get(Long.valueOf(intstr), res);
             }

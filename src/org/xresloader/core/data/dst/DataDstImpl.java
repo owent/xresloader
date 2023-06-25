@@ -203,12 +203,12 @@ public abstract class DataDstImpl {
         String item = ExcelEngine.tryMacro(input.trim());
         Long ret;
         if (ident != null) {
-            ret = DataVerifyImpl.getAndVerify(ident.getVerifier(), ident.name, item);
+            ret = DataVerifyImpl.getAndVerifyToLong(ident.getVerifier(), ident.name, item);
             if (ident.getRatio() != 1) {
                 ret *= ident.getRatio();
             }
         } else if (field != null) {
-            ret = DataVerifyImpl.getAndVerify(field.getVerifier(), field.getName(), item);
+            ret = DataVerifyImpl.getAndVerifyToLong(field.getVerifier(), field.getName(), item);
             if (field.mutableExtension().ratio != 1) {
                 ret *= field.mutableExtension().ratio;
             }
@@ -241,12 +241,14 @@ public abstract class DataDstImpl {
 
         try {
             String item = ExcelEngine.tryMacro(input.trim());
-            Double ret = Double.valueOf(item);
+            Double ret = 0.0;
             if (ident != null) {
+                ret = DataVerifyImpl.getAndVerifyToDouble(ident.getVerifier(), ident.name, item);
                 if (ident.getRatio() != 1) {
                     ret *= ident.getRatio();
                 }
             } else if (field != null) {
+                ret = DataVerifyImpl.getAndVerifyToDouble(field.getVerifier(), field.getName(), item);
                 if (field.mutableExtension().ratio != 1) {
                     ret *= field.mutableExtension().ratio;
                 }
@@ -476,10 +478,11 @@ public abstract class DataDstImpl {
         String item = ExcelEngine.tryMacro(groups[0].trim());
         Long select;
         if (ident != null) {
-            select = DataVerifyImpl.getAndVerify(ident.getVerifier(), ident.name, item);
+            select = DataVerifyImpl.getAndVerifyToLong(ident.getVerifier(), ident.name, item);
         } else {
             try {
-                select = Long.valueOf(DataVerifyImpl.getAndVerify(oneof.getVerifier(), "[PLAIN TEXT]", item.trim()));
+                select = Long
+                        .valueOf(DataVerifyImpl.getAndVerifyToLong(oneof.getVerifier(), "[PLAIN TEXT]", item.trim()));
             } catch (java.lang.NumberFormatException e) {
                 throw new ConvException(String.format("Try to convert %s to oneof case failed.", input));
             }

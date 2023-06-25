@@ -505,7 +505,7 @@ public class ExcelEngine {
         if (null != rowWrapper.getCustomRowIndex()) {
             String val = rowWrapper.getCustomRowIndex().getCellValue(col.index);
             if (val != null && !val.isEmpty()) {
-                out.set(DataVerifyImpl.getAndVerify(col.getVerifier(), col.name, tryMacro(val)));
+                out.set(DataVerifyImpl.getAndVerifyToLong(col.getVerifier(), col.name, tryMacro(val)));
             }
             return;
         }
@@ -592,7 +592,7 @@ public class ExcelEngine {
                     break;
                 }
 
-                out.set(DataVerifyImpl.getAndVerify(col.getVerifier(), col.name, tryMacro(val)));
+                out.set(DataVerifyImpl.getAndVerifyToLong(col.getVerifier(), col.name, tryMacro(val)));
                 break;
             }
             default:
@@ -629,9 +629,10 @@ public class ExcelEngine {
 
         if (null != rowWrapper.getCustomRowIndex()) {
             String val = rowWrapper.getCustomRowIndex().getCellValue(col.index);
+
             if (val != null && !val.isEmpty()) {
                 try {
-                    out.set(Double.valueOf(tryMacro(val)));
+                    out.set(DataVerifyImpl.getAndVerifyToDouble(col.getVerifier(), col.name, tryMacro(val)));
                 } catch (java.lang.NumberFormatException e) {
                     throw new ConvException(
                             String.format("Table %s, Row %d, Column %d : %s can not be converted to a number",
@@ -720,7 +721,7 @@ public class ExcelEngine {
                 }
 
                 try {
-                    out.set(Double.valueOf(tryMacro(val)));
+                    out.set(DataVerifyImpl.getAndVerifyToDouble(col.getVerifier(), col.name, tryMacro(val)));
                 } catch (java.lang.NumberFormatException e) {
                     throw new ConvException(
                             String.format("Table %s, Row %d, Column %d : %s can not be converted to a number",

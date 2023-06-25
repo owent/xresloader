@@ -516,7 +516,8 @@ public class DataDstPb extends DataDstImpl {
                     continue;
                 }
 
-                if (rule.charAt(0) == '-' || (rule.charAt(0) >= '0' && rule.charAt(0) <= '9')) {
+                if (rule.charAt(0) == '-' || (rule.charAt(0) >= '0' && rule.charAt(0) <= '9')
+                        || (rule.charAt(0) == '>' || rule.charAt(0) == '<')) {
                     DataVerifyIntRange vfy = new DataVerifyIntRange(rule);
                     if (vfy.isValid()) {
                         ret.add(vfy);

@@ -101,10 +101,10 @@ public abstract class DataVerifyImpl {
                 }
             }
         } catch (Exception e) {
-            throw new ConvException(String.format("Check %d for %s failed, %s", n, path, e.getMessage()));
+            throw new ConvException(String.format("Check %g for %s failed, %s", n, path, e.getMessage()));
         }
 
-        throw new ConvException(String.format("Check %d for %s failed, check data failed.", n, path));
+        throw new ConvException(String.format("Check %g for %s failed, check data failed.", n, path));
     }
 
     static public double getAndVerifyToDouble(List<DataVerifyImpl> verifyEngine, String path, String val)

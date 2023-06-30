@@ -18,6 +18,7 @@
 PROTOBUF_PRAGMA_INIT_SEG
 namespace _pb = ::PROTOBUF_NAMESPACE_ID;
 namespace _pbi = ::PROTOBUF_NAMESPACE_ID::internal;
+template <typename>
 PROTOBUF_CONSTEXPR role_cfg::role_cfg(
     ::_pbi::ConstantInitialized): _impl_{
     /*decltype(_impl_._has_bits_)*/{}
@@ -67,6 +68,7 @@ struct role_cfgDefaultTypeInternal {
 
 PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT
     PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 role_cfgDefaultTypeInternal _role_cfg_default_instance_;
+template <typename>
 PROTOBUF_CONSTEXPR role_upgrade_cfg::role_upgrade_cfg(
     ::_pbi::ConstantInitialized): _impl_{
     /*decltype(_impl_.id_)*/ 0u
@@ -90,6 +92,7 @@ struct role_upgrade_cfgDefaultTypeInternal {
 
 PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT
     PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 role_upgrade_cfgDefaultTypeInternal _role_upgrade_cfg_default_instance_;
+template <typename>
 PROTOBUF_CONSTEXPR arr_in_arr_test_nested_message::arr_in_arr_test_nested_message(
     ::_pbi::ConstantInitialized): _impl_{
     /*decltype(_impl_.test_onof_)*/{}
@@ -105,6 +108,7 @@ struct arr_in_arr_test_nested_messageDefaultTypeInternal {
 
 PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT
     PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 arr_in_arr_test_nested_messageDefaultTypeInternal _arr_in_arr_test_nested_message_default_instance_;
+template <typename>
 PROTOBUF_CONSTEXPR arr_in_arr::arr_in_arr(
     ::_pbi::ConstantInitialized): _impl_{
     /*decltype(_impl_.int_arr_)*/ {}
@@ -128,6 +132,7 @@ struct arr_in_arrDefaultTypeInternal {
 
 PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT
     PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 arr_in_arrDefaultTypeInternal _arr_in_arr_default_instance_;
+template <typename>
 PROTOBUF_CONSTEXPR test_msg_verifier::test_msg_verifier(
     ::_pbi::ConstantInitialized): _impl_{
     /*decltype(_impl_.test_id_1_)*/ 0u
@@ -145,6 +150,7 @@ struct test_msg_verifierDefaultTypeInternal {
 
 PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT
     PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 test_msg_verifierDefaultTypeInternal _test_msg_verifier_default_instance_;
+template <typename>
 PROTOBUF_CONSTEXPR arr_in_arr_cfg_TestMapIsEntry_DoNotUse::arr_in_arr_cfg_TestMapIsEntry_DoNotUse(
     ::_pbi::ConstantInitialized) {}
 struct arr_in_arr_cfg_TestMapIsEntry_DoNotUseDefaultTypeInternal {
@@ -157,6 +163,7 @@ struct arr_in_arr_cfg_TestMapIsEntry_DoNotUseDefaultTypeInternal {
 
 PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT
     PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 arr_in_arr_cfg_TestMapIsEntry_DoNotUseDefaultTypeInternal _arr_in_arr_cfg_TestMapIsEntry_DoNotUse_default_instance_;
+template <typename>
 PROTOBUF_CONSTEXPR arr_in_arr_cfg_TestMapSmEntry_DoNotUse::arr_in_arr_cfg_TestMapSmEntry_DoNotUse(
     ::_pbi::ConstantInitialized) {}
 struct arr_in_arr_cfg_TestMapSmEntry_DoNotUseDefaultTypeInternal {
@@ -169,6 +176,7 @@ struct arr_in_arr_cfg_TestMapSmEntry_DoNotUseDefaultTypeInternal {
 
 PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT
     PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 arr_in_arr_cfg_TestMapSmEntry_DoNotUseDefaultTypeInternal _arr_in_arr_cfg_TestMapSmEntry_DoNotUse_default_instance_;
+template <typename>
 PROTOBUF_CONSTEXPR arr_in_arr_cfg::arr_in_arr_cfg(
     ::_pbi::ConstantInitialized): _impl_{
     /*decltype(_impl_._has_bits_)*/{}
@@ -196,6 +204,7 @@ struct arr_in_arr_cfgDefaultTypeInternal {
 
 PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT
     PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 arr_in_arr_cfgDefaultTypeInternal _arr_in_arr_cfg_default_instance_;
+template <typename>
 PROTOBUF_CONSTEXPR event_reward_item::event_reward_item(
     ::_pbi::ConstantInitialized): _impl_{
     /*decltype(_impl_.item_id_)*/ 0u
@@ -215,6 +224,7 @@ struct event_reward_itemDefaultTypeInternal {
 
 PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT
     PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 event_reward_itemDefaultTypeInternal _event_reward_item_default_instance_;
+template <typename>
 PROTOBUF_CONSTEXPR event_rule_item::event_rule_item(
     ::_pbi::ConstantInitialized): _impl_{
     /*decltype(_impl_.rule_id_)*/ 0u
@@ -234,6 +244,7 @@ struct event_rule_itemDefaultTypeInternal {
 
 PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT
     PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 event_rule_itemDefaultTypeInternal _event_rule_item_default_instance_;
+template <typename>
 PROTOBUF_CONSTEXPR event_cfg::event_cfg(
     ::_pbi::ConstantInitialized): _impl_{
     /*decltype(_impl_._has_bits_)*/{}
@@ -259,6 +270,7 @@ struct event_cfgDefaultTypeInternal {
 
 PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT
     PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 event_cfgDefaultTypeInternal _event_cfg_default_instance_;
+template <typename>
 PROTOBUF_CONSTEXPR keep_or_strip_empty_list_cfg::keep_or_strip_empty_list_cfg(
     ::_pbi::ConstantInitialized): _impl_{
     /*decltype(_impl_.array_msg_)*/{}
@@ -282,6 +294,7 @@ struct keep_or_strip_empty_list_cfgDefaultTypeInternal {
 
 PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT
     PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 keep_or_strip_empty_list_cfgDefaultTypeInternal _keep_or_strip_empty_list_cfg_default_instance_;
+template <typename>
 PROTOBUF_CONSTEXPR combine_id::combine_id(
     ::_pbi::ConstantInitialized): _impl_{
     /*decltype(_impl_.prefix_)*/ 0u
@@ -299,6 +312,7 @@ struct combine_idDefaultTypeInternal {
 
 PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT
     PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 combine_idDefaultTypeInternal _combine_id_default_instance_;
+template <typename>
 PROTOBUF_CONSTEXPR process_by_script_MapU32StringEntry_DoNotUse::process_by_script_MapU32StringEntry_DoNotUse(
     ::_pbi::ConstantInitialized) {}
 struct process_by_script_MapU32StringEntry_DoNotUseDefaultTypeInternal {
@@ -311,6 +325,7 @@ struct process_by_script_MapU32StringEntry_DoNotUseDefaultTypeInternal {
 
 PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT
     PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 process_by_script_MapU32StringEntry_DoNotUseDefaultTypeInternal _process_by_script_MapU32StringEntry_DoNotUse_default_instance_;
+template <typename>
 PROTOBUF_CONSTEXPR process_by_script_TestMapIsEntry_DoNotUse::process_by_script_TestMapIsEntry_DoNotUse(
     ::_pbi::ConstantInitialized) {}
 struct process_by_script_TestMapIsEntry_DoNotUseDefaultTypeInternal {
@@ -323,6 +338,7 @@ struct process_by_script_TestMapIsEntry_DoNotUseDefaultTypeInternal {
 
 PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT
     PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 process_by_script_TestMapIsEntry_DoNotUseDefaultTypeInternal _process_by_script_TestMapIsEntry_DoNotUse_default_instance_;
+template <typename>
 PROTOBUF_CONSTEXPR process_by_script_TestMapSmEntry_DoNotUse::process_by_script_TestMapSmEntry_DoNotUse(
     ::_pbi::ConstantInitialized) {}
 struct process_by_script_TestMapSmEntry_DoNotUseDefaultTypeInternal {
@@ -335,6 +351,7 @@ struct process_by_script_TestMapSmEntry_DoNotUseDefaultTypeInternal {
 
 PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT
     PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 process_by_script_TestMapSmEntry_DoNotUseDefaultTypeInternal _process_by_script_TestMapSmEntry_DoNotUse_default_instance_;
+template <typename>
 PROTOBUF_CONSTEXPR process_by_script::process_by_script(
     ::_pbi::ConstantInitialized): _impl_{
     /*decltype(_impl_._has_bits_)*/{}
@@ -360,6 +377,7 @@ struct process_by_scriptDefaultTypeInternal {
 
 PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT
     PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 process_by_scriptDefaultTypeInternal _process_by_script_default_instance_;
+template <typename>
 PROTOBUF_CONSTEXPR large_file_test::large_file_test(
     ::_pbi::ConstantInitialized): _impl_{
     /*decltype(_impl_._has_bits_)*/{}

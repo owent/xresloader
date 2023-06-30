@@ -11,8 +11,8 @@ return {
     },
     data_ver = "1.0.0.0",
     description = "Test event_cfg with oneof fields",
-    hash_code = "sha256:2abbfaec80e850340ee2e1c9b9b9eb3dc69241d7d933dfae8f9c0a1358429fd2",
-    xres_ver = "2.13.1",
+    hash_code = "sha256:2e945c1183b802221577637ae9d698460370507f420342f1c332100e002f9d28",
+    xres_ver = "2.14.0-rc1",
   },
   [2] = "event_cfg",
   event_cfg = {
@@ -68,7 +68,7 @@ return {
           rule_param = 822,
         },
       },
-      user_exp = 1473624235014785965,
+      user_exp = 1473624235014786048,
     },
     {
       enum_type = 10001,

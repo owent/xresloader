@@ -21,6 +21,7 @@ namespace _pbi = ::PROTOBUF_NAMESPACE_ID::internal;
 namespace org {
 namespace xresloader {
 namespace pb {
+template <typename>
 PROTOBUF_CONSTEXPR xresloader_data_source::xresloader_data_source(
     ::_pbi::ConstantInitialized): _impl_{
     /*decltype(_impl_.file_)*/ {
@@ -42,6 +43,7 @@ struct xresloader_data_sourceDefaultTypeInternal {
 
 PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT
     PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 xresloader_data_sourceDefaultTypeInternal _xresloader_data_source_default_instance_;
+template <typename>
 PROTOBUF_CONSTEXPR xresloader_header::xresloader_header(
     ::_pbi::ConstantInitialized): _impl_{
     /*decltype(_impl_.data_source_)*/{}
@@ -74,6 +76,7 @@ struct xresloader_headerDefaultTypeInternal {
 
 PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT
     PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 xresloader_headerDefaultTypeInternal _xresloader_header_default_instance_;
+template <typename>
 PROTOBUF_CONSTEXPR xresloader_datablocks::xresloader_datablocks(
     ::_pbi::ConstantInitialized): _impl_{
     /*decltype(_impl_._has_bits_)*/{}

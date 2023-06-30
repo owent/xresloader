@@ -283,7 +283,7 @@ public class DataSrcExcel extends DataSrcImpl {
                     DataContainer<String> k = getStringCache("");
                     ExcelEngine.cell2s(k, rowWrapper, column_ident, res.formula);
                     IdentifyDescriptor ident = IdentifyEngine.n2i(k.get(), i);
-                    String[] multipleNames = ident.name.split(",");
+                    String[] multipleNames = ident.name.split("[,;|]");
                     if (multipleNames.length > 1) {
                         for (String realName : multipleNames) {
                             String trimName = realName.trim();

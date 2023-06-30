@@ -51,7 +51,7 @@
         "GroupName": "XResConfig",
         "DestinationPath": "ConfigRec",
         "FactoryName": "ReimportDataTableFactory",
-        "Filenames": ["D:\\workspace\\github\\xresloader\\xresloader\\sample\\proto_v3\\csv\\ArrInArrCfgRec.csv"],
+        "Filenames": ["D:\\workspace\\git\\github\\xresloader\\xresloader\\sample\\proto_v3\\csv\\ArrInArrCfgRec.csv"],
         "ImportSettings": {
             "ImportType": "ECSV_DataTable",
             "ImportRowStruct": "ArrInArrCfg"
@@ -63,7 +63,7 @@
         "GroupName": "XResConfig",
         "DestinationPath": "ConfigRec",
         "FactoryName": "ReimportDataTableFactory",
-        "Filenames": ["D:\\workspace\\github\\xresloader\\xresloader\\sample\\proto_v3\\csv\\RoleUpgradeCfgRec.csv"],
+        "Filenames": ["D:\\workspace\\git\\github\\xresloader\\xresloader\\sample\\proto_v3\\csv\\RoleUpgradeCfgRec.csv"],
         "ImportSettings": {
             "ImportType": "ECSV_DataTable",
             "ImportRowStruct": "RoleUpgradeCfg"
@@ -75,7 +75,7 @@
         "GroupName": "XResConfig",
         "DestinationPath": "ConfigRec",
         "FactoryName": "ReimportDataTableFactory",
-        "Filenames": ["D:\\workspace\\github\\xresloader\\xresloader\\sample\\proto_v3\\csv\\EventCfgRec.csv"],
+        "Filenames": ["D:\\workspace\\git\\github\\xresloader\\xresloader\\sample\\proto_v3\\csv\\EventCfgRec.csv"],
         "ImportSettings": {
             "ImportType": "ECSV_DataTable",
             "ImportRowStruct": "EventCfg"
@@ -87,7 +87,7 @@
         "GroupName": "XResConfig",
         "DestinationPath": "ConfigRec",
         "FactoryName": "ReimportDataTableFactory",
-        "Filenames": ["D:\\workspace\\github\\xresloader\\xresloader\\sample\\proto_v3\\csv\\StripListTailCfg.csv"],
+        "Filenames": ["D:\\workspace\\git\\github\\xresloader\\xresloader\\sample\\proto_v3\\csv\\StripListTailCfg.csv"],
         "ImportSettings": {
             "ImportType": "ECSV_DataTable",
             "ImportRowStruct": "KeepOrStripEmptyListCfg"

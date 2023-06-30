@@ -13,8 +13,8 @@
     ],
     "data_ver": "1.0.0.0",
     "description": "Test role_upgrade_cfg with multi keys\r\nTest role_upgrade_cfg with multi keys",
-    "hash_code": "sha256:555ac19246c2a7bff93dd4319caafeb16248bc2430d5d4931dbd1398f4f7e84d",
-    "xres_ver": "2.13.1"
+    "hash_code": "sha256:e356806bc55be9cc8a6c701d4295989e0fc3887b368681bb9457b0e51df8f445",
+    "xres_ver": "2.14.0-rc1"
   },
   {"role_upgrade_cfg": [
     {
@@ -245,7 +245,7 @@
     },
     {
       "CostType": 10001,
-      "CostValue": 1473624235014785965,
+      "CostValue": 1473624235014786048,
       "Id": 10001,
       "Level": 39
     },

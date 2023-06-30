@@ -532,9 +532,6 @@ public class ProgramOptions {
                     "[WARN] Unknown console charset %s, we will try use UTF-8 for console output", e.getCharsetName()));
         }
 
-        if (null == logger) {
-            // logger = LogManager.get
-        }
         return logger;
     }
 

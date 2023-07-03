@@ -15,10 +15,12 @@ public class DataVerifyPbEnum extends DataVerifyImpl {
             all_numbers.add((long) val_desc.getNumber());
 
             // alias extension
-            if (val_desc.getOptions().hasExtension(Xresloader.enumAlias)) {
-                String alias_name = val_desc.getOptions().getExtension(Xresloader.enumAlias);
-                if (!alias_name.isEmpty()) {
-                    all_names.put(alias_name, (long) val_desc.getNumber());
+            if (val_desc.getOptions().getExtensionCount(Xresloader.enumAlias) > 0) {
+                for (String alias_name : val_desc.getOptions().getExtension(Xresloader.enumAlias)) {
+                    String alias_name_striped = alias_name.strip();
+                    if (!alias_name_striped.isEmpty()) {
+                        all_names.put(alias_name_striped, (long) val_desc.getNumber());
+                    }
                 }
             }
         }

@@ -2,6 +2,9 @@
 
 ## Unrelease
 
+1. `org.xresloader.field_alias` 和 `org.xresloader.enum_alias` 允许多个别名
+2. 修订repeated字段映射使用别名的问题
+
 ## 2.14.0-rc1
 
 1. 增加 `org.xresloader.ue.ue_origin_type_name` 来设置输出UE代码的原始类型

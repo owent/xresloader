@@ -224,19 +224,23 @@ public class DataETProcessor extends DataDstJava {
         }
     }
 
-    public DynamicMessage.Builder dumpPbMessage(Descriptor currentMsgDesc, DataDstWriterNode node)
+    public DynamicMessage.Builder dumpPbMessage(Descriptor currentMsgDesc, DataDstWriterNode node,
+            DataRowContext rowContext,
+            String fieldPath)
             throws ConvException {
         DynamicMessage.Builder builder = DynamicMessage.newBuilder(currentMsgDesc);
         HashMap<String, Object> msgMap = new HashMap<>();
-        if (dumpMapMessage(msgMap, node) == false) {
+        if (dumpMapMessage(msgMap, node, rowContext, fieldPath) == false) {
             return null;
         }
         fillMap2Message(currentMsgDesc, msgMap, builder);
         return builder;
     }
 
-    public boolean dumpMapMessage(HashMap<String, Object> builder, DataDstWriterNode node) throws ConvException {
-        boolean dumpSucceed = dumpMessage(builder, node);
+    public boolean dumpMapMessage(HashMap<String, Object> builder, DataDstWriterNode node, DataRowContext rowContext,
+            String fieldPath)
+            throws ConvException {
+        boolean dumpSucceed = dumpMessage(builder, node, rowContext, fieldPath);
         if (dumpSucceed == false) {
             return dumpSucceed;
         }

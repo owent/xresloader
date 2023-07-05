@@ -121,13 +121,15 @@ message event_cfg {
     option (org.xresloader.ue.helper)       = "helper";
     option (org.xresloader.msg_description) = "Test event_cfg with oneof fields";
 
-    uint32 id      = 1 [ (org.xresloader.ue.key_tag) = 100 ];
-    uint32 process = 2 [ (org.xresloader.ue.key_tag) = 1 ];
+    uint32 id      = 1 [ (org.xresloader.ue.key_tag) = 100, (org.xresloader.field_not_null) = true, (org.xresloader.field_unique_tag) = "unique_tag" ];
+    uint32 process = 2 [ (org.xresloader.ue.key_tag) = 1, (org.xresloader.field_not_null) = true, (org.xresloader.field_unique_tag) = "unique_tag" ];
 
     event_rule_item rule          = 6;
     event_rule_item specify_field = 7;
 
     oneof reward {
+        option (org.xresloader.oneof_not_null) = true;
+
         event_reward_item item      = 11 [ (org.xresloader.field_alias) = "奖励道具" ];
         int64             user_exp  = 12 [ (org.xresloader.field_alias) = "奖励经验" ];
         string            note      = 13 [ (org.xresloader.field_alias) = "描述文本" ];

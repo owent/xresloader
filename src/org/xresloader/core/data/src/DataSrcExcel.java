@@ -442,6 +442,10 @@ public class DataSrcExcel extends DataSrcImpl {
 
     @Override
     public int getCurrentRowNum() {
+        if (null == current) {
+            return 0;
+        }
+
         if (null == current.currentRow) {
             return 0;
         }
@@ -450,7 +454,24 @@ public class DataSrcExcel extends DataSrcImpl {
     }
 
     @Override
+    public boolean hasCurrentRow() {
+        if (null == current) {
+            return false;
+        }
+
+        if (null == current.currentRow) {
+            return false;
+        }
+
+        return true;
+    }
+
+    @Override
     public String getCurrentTableName() {
+        if (null == current) {
+            return "";
+        }
+
         if (null != current.userModuleTable) {
             return current.userModuleTable.getSheetName();
         }
@@ -464,6 +485,10 @@ public class DataSrcExcel extends DataSrcImpl {
 
     @Override
     public String getCurrentFileName() {
+        if (null == current) {
+            return "";
+        }
+
         if (null == current.fileName) {
             return "";
         }

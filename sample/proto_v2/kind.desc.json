@@ -27,12 +27,12 @@
           "EN_CT_DIAMOND": {
             "name": "EN_CT_DIAMOND",
             "number": 10101,
-            "options": {"enum_alias": "钻石"}
+            "options": {"enum_alias": ["钻石"]}
           },
           "EN_CT_MONEY": {
             "name": "EN_CT_MONEY",
             "number": 10001,
-            "options": {"enum_alias": "金币"}
+            "options": {"enum_alias": ["金币"]}
           },
           "EN_CT_UNKNOWN": {
             "name": "EN_CT_UNKNOWN",
@@ -249,31 +249,39 @@
           "enum_type": {
             "name": "enum_type",
             "number": 14,
-            "options": {"field_alias": "货币类型"},
+            "options": {"field_alias": ["货币类型"]},
             "type_name": "ENUM"
           },
           "id": {
             "name": "id",
             "number": 1,
-            "options": {"key_tag": 100},
+            "options": {
+              "field_not_null": true,
+              "field_unique_tag": ["unique_tag"],
+              "key_tag": 100
+            },
             "type_name": "UINT32"
           },
           "item": {
             "name": "item",
             "number": 11,
-            "options": {"field_alias": "奖励道具"},
+            "options": {"field_alias": ["奖励道具"]},
             "type_name": "MESSAGE"
           },
           "note": {
             "name": "note",
             "number": 13,
-            "options": {"field_alias": "描述文本"},
+            "options": {"field_alias": ["描述文本"]},
             "type_name": "STRING"
           },
           "process": {
             "name": "process",
             "number": 2,
-            "options": {"key_tag": 1},
+            "options": {
+              "field_not_null": true,
+              "field_unique_tag": ["unique_tag"],
+              "key_tag": 1
+            },
             "type_name": "UINT32"
           },
           "rule": {
@@ -301,19 +309,22 @@
           "user_exp": {
             "name": "user_exp",
             "number": 12,
-            "options": {"field_alias": "奖励经验"},
+            "options": {"field_alias": ["奖励经验"]},
             "type_name": "INT64"
           },
           "user_level": {
             "name": "user_level",
             "number": 51,
-            "options": {"field_alias": "玩家等级"},
+            "options": {"field_alias": ["玩家等级"]},
             "type_name": "UINT32"
           }
         },
         "name": "event_cfg",
         "oneof_decl": {
-          "reward": {"name": "reward"},
+          "reward": {
+            "name": "reward",
+            "options": {"oneof_not_null": true}
+          },
           "unlock_type": {"name": "unlock_type"}
         },
         "options": {
@@ -336,13 +347,13 @@
           "nested_enum_type": {
             "name": "nested_enum_type",
             "number": 12,
-            "options": {"field_alias": "货币类型"},
+            "options": {"field_alias": ["货币类型"]},
             "type_name": "ENUM"
           },
           "nested_note": {
             "name": "nested_note",
             "number": 11,
-            "options": {"field_alias": "描述文本"},
+            "options": {"field_alias": ["描述文本"]},
             "type_name": "STRING"
           }
         },
@@ -354,13 +365,13 @@
           "nested_enum_type": {
             "name": "nested_enum_type",
             "number": 12,
-            "options": {"field_alias": "货币类型"},
+            "options": {"field_alias": ["货币类型"]},
             "type_name": "ENUM"
           },
           "nested_note": {
             "name": "nested_note",
             "number": 11,
-            "options": {"field_alias": "描述文本"},
+            "options": {"field_alias": ["描述文本"]},
             "type_name": "STRING"
           },
           "rule_id": {
@@ -677,7 +688,7 @@
           "test_id_2": {
             "name": "test_id_2",
             "number": 10002,
-            "options": {"field_alias": "测试ID别名2"},
+            "options": {"field_alias": ["测试ID别名2"]},
             "type_name": "UINT32"
           }
         },

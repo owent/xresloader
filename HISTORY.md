@@ -2,6 +2,14 @@
 
 ## Unrelease
 
+## 2.14.0-rc2
+
+1. `org.xresloader.field_alias` 和 `org.xresloader.enum_alias` 允许多个别名
+2. 修订repeated字段映射使用别名的问题
+3. 增加 `org.xresloader.field_not_null` 插件和 `org.xresloader.oneof_not_null` 用以忽略Excel中指定数据为空的数据行
+4. 增加 `org.xresloader.field_unique_tag` 插件用以支持唯一性检测
+5. `-p` 支持传入多个pb文件
+
 ## 2.14.0-rc1
 
 1. 增加 `org.xresloader.ue.ue_origin_type_name` 来设置输出UE代码的原始类型

@@ -17,6 +17,7 @@ import java.time.format.DateTimeParseException;
 import java.time.format.ResolverStyle;
 import java.time.temporal.ChronoField;
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.regex.Pattern;
 
 import org.xresloader.core.data.dst.DataDstWriterNode.JAVA_TYPE;
@@ -25,6 +26,7 @@ import org.xresloader.core.data.src.DataSrcImpl;
 import org.xresloader.core.data.vfy.DataVerifyImpl;
 import org.xresloader.core.engine.ExcelEngine;
 import org.xresloader.core.engine.IdentifyDescriptor;
+import org.json.JSONObject;
 import org.xresloader.core.ProgramOptions;
 
 /**
@@ -44,6 +46,116 @@ public abstract class DataDstImpl {
             systemEndl = "\r\n";
         }
         return systemEndl;
+    }
+
+    static public class DataRowContext {
+        public boolean ignore = false;
+        public String fileName;
+        public String tableName;
+        public int row;
+        private HashMap<String, JSONObject> uniqueCache = null;
+
+        DataRowContext(String fileName, String tableName, int row) {
+            this.fileName = fileName;
+            this.tableName = tableName;
+            this.row = row;
+        }
+
+        public void addUniqueCache(String tagName, String fieldPath, Object value) {
+            if (this.uniqueCache == null) {
+                this.uniqueCache = new HashMap<>();
+            }
+
+            JSONObject tagObject = this.uniqueCache.getOrDefault(tagName, null);
+            if (tagObject == null) {
+                tagObject = new JSONObject();
+                this.uniqueCache.put(tagName, tagObject);
+            }
+
+            try {
+                if (tagObject.opt(fieldPath) != null) {
+                    return;
+                }
+
+                tagObject.putOpt(fieldPath, value);
+            } catch (Exception _e) {
+                // Ignore error
+            }
+        }
+    }
+
+    static public class DataTableContext {
+        public HashMap<String, HashMap<String, LinkedList<DataRowContext>>> uniqueCache = new HashMap<>();
+
+        public void addUniqueCache(DataRowContext rowContext)
+                throws ConvException {
+            if (rowContext.ignore) {
+                return;
+            }
+
+            if (rowContext.uniqueCache == null) {
+                return;
+            }
+
+            if (rowContext.uniqueCache.isEmpty()) {
+                return;
+            }
+
+            for (var tagObject : rowContext.uniqueCache.entrySet()) {
+                if (tagObject.getValue() == null) {
+                    continue;
+                }
+                if (tagObject.getValue().isEmpty()) {
+                    continue;
+                }
+
+                HashMap<String, LinkedList<DataRowContext>> tagSet = this.uniqueCache.getOrDefault(
+                        tagObject.getKey(),
+                        null);
+                if (tagSet == null) {
+                    tagSet = new HashMap<>();
+                    this.uniqueCache.put(tagObject.getKey(), tagSet);
+                }
+
+                try {
+                    String uniqueKey = DataDstJson.stringify(tagObject.getValue(), 0).toString();
+                    LinkedList<DataRowContext> rowSet = tagSet.getOrDefault(uniqueKey, null);
+                    if (rowSet == null) {
+                        rowSet = new LinkedList<>();
+                        tagSet.put(uniqueKey, rowSet);
+                    }
+                    rowSet.add(rowContext);
+                } catch (Exception e) {
+                    throw new ConvException(String.format("Generate unique key for tag %s failed. %s",
+                            tagObject.getKey(), e.getMessage()));
+                }
+
+            }
+        }
+
+        public String checkUnique() {
+            StringBuffer sb = new StringBuffer();
+            for (var tagSet : this.uniqueCache.entrySet()) {
+                for (var rowSet : tagSet.getValue().entrySet()) {
+                    if (rowSet.getValue().size() <= 1) {
+                        continue;
+                    }
+
+                    sb.append(String.format("Unique validator check failed. tag: %s, path: %s\n", tagSet.getKey(),
+                            rowSet.getKey()));
+                    for (var ref : rowSet.getValue()) {
+                        sb.append(
+                                String.format("    File: %s, sheet: %s, row: %d\n", ref.fileName, ref.tableName,
+                                        ref.row));
+                    }
+                }
+            }
+
+            if (sb.length() <= 0) {
+                return null;
+            }
+            return sb.toString();
+        }
     }
 
     /**

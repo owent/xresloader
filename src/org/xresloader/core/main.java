@@ -283,10 +283,31 @@ public class main {
 
                 fos.close();
             } catch (ConvException e) {
-                ProgramOptions.getLoger().error(
-                        "Convert data failed.%s  > %s%s  > File: %s, Table: %s, Row: %d, Column: %d%s  > %s", endl,
-                        String.join(" ", args), endl, ds.getCurrentFileName(), ds.getCurrentTableName(),
-                        ds.getCurrentRowNum() + 1, ds.getLastColomnNum() + 1, endl, e.getMessage());
+                String fileName = ds.getCurrentFileName();
+                String tableName = ds.getCurrentTableName();
+
+                if (!fileName.isEmpty() && !tableName.isEmpty() && ds.hasCurrentRow()) {
+                    ProgramOptions.getLoger().error(
+                            "Convert data failed.%s  > %s%s  > File: %s, Table: %s, Row: %d, Column: %d%s  > %s", endl,
+                            String.join(" ", args), endl, fileName, tableName,
+                            ds.getCurrentRowNum() + 1, ds.getLastColomnNum() + 1, endl, e.getMessage());
+                } else if (!fileName.isEmpty() && !tableName.isEmpty()) {
+                    ProgramOptions.getLoger().error(
+                            "Convert data failed.%s  > %s%s  > File: %s, Table: %s%s  > %s", endl,
+                            String.join(" ", args), endl, fileName, tableName,
+                            endl, e.getMessage());
+                } else if (!fileName.isEmpty()) {
+                    ProgramOptions.getLoger().error(
+                            "Convert data failed.%s  > %s%s  > File: %s%s  > %s", endl,
+                            String.join(" ", args), endl, fileName,
+                            endl, e.getMessage());
+                } else {
+                    ProgramOptions.getLoger().error(
+                            "Convert data failed.%s  > %s%s  > %s", endl,
+                            String.join(" ", args),
+                            endl, e.getMessage());
+                }
+
                 ++failed_count;
                 continue;
             } catch (java.io.IOException e) {

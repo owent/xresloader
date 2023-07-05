@@ -37,7 +37,7 @@ public class ProgramOptions {
     public FileType outType;
 
     public Protocol protocol;
-    public String protocolFile = "";
+    public String[] protocolFile = null;
     public boolean protocolIgnoreUnknownDependency = false;
     public String outputDirectory = ".";
     public String[] dataSourceDirectory = null;
@@ -87,7 +87,7 @@ public class ProgramOptions {
     public void reset() {
         outType = FileType.BIN;
         protocol = Protocol.PROTOBUF;
-        protocolFile = "";
+        protocolFile = null;
         protocolIgnoreUnknownDependency = false;
         outputDirectory = "";
         dataSourceDirectory = null;
@@ -324,10 +324,14 @@ public class ProgramOptions {
         }
 
         // protocol file
-        protocolFile = cmd.getOptionValue('f', "");
-        if (protocolFile.isEmpty()) {
+        protocolFile = cmd.getOptionValues('f');
+        if (protocolFile == null) {
             return 1;
         }
+        if (protocolFile.length == 0) {
+            return 1;
+        }
+
         protocolIgnoreUnknownDependency = cmd.hasOption("ignore-unknown-dependency");
 
         luaGlobal = cmd.hasOption("lua-global");

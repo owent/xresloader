@@ -67,4 +67,5 @@ for proto_dir in proto_v2 proto_v3; do
 
   echo "Run with --stdin: $CMDS"
   echo "$CMDS" | java -client -jar "$XRESLOADER" --stdin --data-version 1.0.0.0
+  echo "Exit code: $?"
 done

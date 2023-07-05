@@ -107,6 +107,10 @@ public abstract class DataSrcImpl {
         return 0;
     }
 
+    public boolean hasCurrentRow() {
+        return getCurrentRowNum() >= 0;
+    }
+
     public String getCurrentTableName() {
         return "";
     }

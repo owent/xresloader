@@ -819,42 +819,43 @@ const char descriptor_table_protodef_kind_2eproto[] PROTOBUF_SECTION_VARIABLE(pr
     "le_item\022\017\n\007rule_id\030\001 \001(\r\022\022\n\nrule_param\030\002"
     " \001(\r\022&\n\013nested_note\030\013 \001(\tB\017\242\?\014\346\217\217\350\277\260\346\226\207\346"
     "\234\254H\000\0227\n\020nested_enum_type\030\014 \001(\0162\n.cost_ty"
-    "peB\017\242\?\014\350\264\247\345\270\201\347\261\273\345\236\213H\000B\010\n\006nested\"\360\003\n\teven"
-    "t_cfg\022\017\n\002id\030\001 \001(\rB\003\350Dd\022\024\n\007process\030\002 \001(\rB"
-    "\003\350D\001\022\036\n\004rule\030\006 \001(\0132\020.event_rule_item\022\'\n\r"
-    "specify_field\030\007 \001(\0132\020.event_rule_item\0223\n"
-    "\004item\030\013 \001(\0132\022.event_reward_itemB\017\242\?\014\345\245\226\345"
-    "\212\261\351\201\223\345\205\267H\000\022#\n\010user_exp\030\014 \001(\003B\017\242\?\014\345\245\226\345\212\261\347"
-    "\273\217\351\252\214H\000\022\037\n\004note\030\r \001(\tB\017\242\?\014\346\217\217\350\277\260\346\226\207\346\234\254H\000"
-    "\0220\n\tenum_type\030\016 \001(\0162\n.cost_typeB\017\242\?\014\350\264\247\345"
-    "\270\201\347\261\273\345\236\213H\000\022%\n\nuser_level\0303 \001(\rB\017\242\?\014\347\216\251\345\256"
-    "\266\347\255\211\347\272\247H\001\022(\n\010test_arr\030[ \003(\0132\020.event_rule"
-    "_itemB\004\262\?\001;\022.\n\016test_empty_arr\030\\ \003(\0132\020.ev"
-    "ent_rule_itemB\004\262\?\001;:,\312> Test event_cfg w"
-    "ith oneof fields\352D\006helperB\010\n\006rewardB\r\n\013u"
-    "nlock_type\"\266\001\n\034keep_or_strip_empty_list_"
-    "cfg\022\037\n\002id\030\001 \001(\rB\023\232\?\rThis is a Key\350D\001\022\034\n\t"
-    "array_msg\030\002 \003(\0132\t.dep2_cfg\022\"\n\017array_plai"
-    "n_msg\030\003 \003(\0132\t.dep2_cfg\022\023\n\013array_int32\030\004 "
-    "\003(\005\022\023\n\013array_int64\030\005 \003(\003:\t\352D\006helper\"4\n\nc"
-    "ombine_id\022\016\n\006prefix\030\001 \001(\r\022\026\n\002id\030\002 \001(\rB\n\312"
-    ">\0070-99999\"\333\003\n\021process_by_script\022\n\n\002id\030\001 "
-    "\001(\r\022<\n\016map_u32_string\030\002 \003(\0132$.process_by"
-    "_script.MapU32StringEntry\022\033\n\023human_reada"
-    "ble_date\030\003 \001(\t\022(\n\004date\030\004 \001(\0132\032.google.pr"
-    "otobuf.Timestamp\0226\n\013test_map_is\030\007 \003(\0132!."
-    "process_by_script.TestMapIsEntry\022<\n\013test"
-    "_map_sm\030\010 \003(\0132!.process_by_script.TestMa"
-    "pSmEntryB\004\262\?\001|\022\033\n\005id_id\030\351\007 \001(\0132\013.combine"
-    "_id\0323\n\021MapU32StringEntry\022\013\n\003key\030\001 \001(\r\022\r\n"
-    "\005value\030\002 \001(\t:\0028\001\0320\n\016TestMapIsEntry\022\013\n\003ke"
-    "y\030\001 \001(\005\022\r\n\005value\030\002 \001(\t:\0028\001\032;\n\016TestMapSmE"
-    "ntry\022\013\n\003key\030\001 \001(\t\022\030\n\005value\030\002 \001(\0132\t.dep2_"
-    "cfg:\0028\001\"\222\001\n\017large_file_test\022\n\n\002id\030\001 \001(\r\022"
-    "\020\n\010i32value\030\002 \001(\005\022\020\n\010u64value\030\003 \001(\004\022\020\n\010f"
-    "64value\030\004 \001(\001\022\020\n\010f32value\030\005 \001(\002\022\017\n\007szval"
-    "ue\030\006 \001(\t\022\032\n\005id_id\030\007 \001(\0132\013.combine_idb\006pr"
-    "oto3"
+    "peB\017\242\?\014\350\264\247\345\270\201\347\261\273\345\236\213H\000B\010\n\006nested\"\225\004\n\teven"
+    "t_cfg\022\037\n\002id\030\001 \001(\rB\023\322>\nunique_tag\330>\001\350Dd\022$"
+    "\n\007process\030\002 \001(\rB\023\322>\nunique_tag\330>\001\350D\001\022\036\n\004"
+    "rule\030\006 \001(\0132\020.event_rule_item\022\'\n\rspecify_"
+    "field\030\007 \001(\0132\020.event_rule_item\0223\n\004item\030\013 "
+    "\001(\0132\022.event_reward_itemB\017\242\?\014\345\245\226\345\212\261\351\201\223\345\205\267"
+    "H\000\022#\n\010user_exp\030\014 \001(\003B\017\242\?\014\345\245\226\345\212\261\347\273\217\351\252\214H\000\022"
+    "\037\n\004note\030\r \001(\tB\017\242\?\014\346\217\217\350\277\260\346\226\207\346\234\254H\000\0220\n\tenum"
+    "_type\030\016 \001(\0162\n.cost_typeB\017\242\?\014\350\264\247\345\270\201\347\261\273\345\236\213"
+    "H\000\022%\n\nuser_level\0303 \001(\rB\017\242\?\014\347\216\251\345\256\266\347\255\211\347\272\247H"
+    "\001\022(\n\010test_arr\030[ \003(\0132\020.event_rule_itemB\004\262"
+    "\?\001;\022.\n\016test_empty_arr\030\\ \003(\0132\020.event_rule"
+    "_itemB\004\262\?\001;:,\312> Test event_cfg with oneo"
+    "f fields\352D\006helperB\r\n\006reward\022\003\330>\001B\r\n\013unlo"
+    "ck_type\"\266\001\n\034keep_or_strip_empty_list_cfg"
+    "\022\037\n\002id\030\001 \001(\rB\023\232\?\rThis is a Key\350D\001\022\034\n\tarr"
+    "ay_msg\030\002 \003(\0132\t.dep2_cfg\022\"\n\017array_plain_m"
+    "sg\030\003 \003(\0132\t.dep2_cfg\022\023\n\013array_int32\030\004 \003(\005"
+    "\022\023\n\013array_int64\030\005 \003(\003:\t\352D\006helper\"4\n\ncomb"
+    "ine_id\022\016\n\006prefix\030\001 \001(\r\022\026\n\002id\030\002 \001(\rB\n\312>\0070"
+    "-99999\"\333\003\n\021process_by_script\022\n\n\002id\030\001 \001(\r"
+    "\022<\n\016map_u32_string\030\002 \003(\0132$.process_by_sc"
+    "ript.MapU32StringEntry\022\033\n\023human_readable"
+    "_date\030\003 \001(\t\022(\n\004date\030\004 \001(\0132\032.google.proto"
+    "buf.Timestamp\0226\n\013test_map_is\030\007 \003(\0132!.pro"
+    "cess_by_script.TestMapIsEntry\022<\n\013test_ma"
+    "p_sm\030\010 \003(\0132!.process_by_script.TestMapSm"
+    "EntryB\004\262\?\001|\022\033\n\005id_id\030\351\007 \001(\0132\013.combine_id"
+    "\0323\n\021MapU32StringEntry\022\013\n\003key\030\001 \001(\r\022\r\n\005va"
+    "lue\030\002 \001(\t:\0028\001\0320\n\016TestMapIsEntry\022\013\n\003key\030\001"
+    " \001(\005\022\r\n\005value\030\002 \001(\t:\0028\001\032;\n\016TestMapSmEntr"
+    "y\022\013\n\003key\030\001 \001(\t\022\030\n\005value\030\002 \001(\0132\t.dep2_cfg"
+    ":\0028\001\"\222\001\n\017large_file_test\022\n\n\002id\030\001 \001(\r\022\020\n\010"
+    "i32value\030\002 \001(\005\022\020\n\010u64value\030\003 \001(\004\022\020\n\010f64v"
+    "alue\030\004 \001(\001\022\020\n\010f32value\030\005 \001(\002\022\017\n\007szvalue\030"
+    "\006 \001(\t\022\032\n\005id_id\030\007 \001(\0132\013.combine_idb\006proto"
+    "3"
 };
 static const ::_pbi::DescriptorTable* const descriptor_table_kind_2eproto_deps[6] =
     {
@@ -869,7 +870,7 @@ static ::absl::once_flag descriptor_table_kind_2eproto_once;
 const ::_pbi::DescriptorTable descriptor_table_kind_2eproto = {
     false,
     false,
-    3884,
+    3921,
     descriptor_table_protodef_kind_2eproto,
     "kind.proto",
     &descriptor_table_kind_2eproto_once,
@@ -4508,7 +4509,7 @@ const char* event_cfg::_InternalParse(const char* ptr, ::_pbi::ParseContext* ctx
     ::uint32_t tag;
     ptr = ::_pbi::ReadTag(ptr, &tag);
     switch (tag >> 3) {
-      // uint32 id = 1 [(.org.xresloader.ue.key_tag) = 100];
+      // uint32 id = 1 [(.org.xresloader.field_unique_tag) = "unique_tag", (.org.xresloader.field_not_null) = true, (.org.xresloader.ue.key_tag) = 100];
       case 1:
         if (PROTOBUF_PREDICT_TRUE(static_cast<::uint8_t>(tag) == 8)) {
           _impl_.id_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint32(&ptr);
@@ -4517,7 +4518,7 @@ const char* event_cfg::_InternalParse(const char* ptr, ::_pbi::ParseContext* ctx
           goto handle_unusual;
         }
         continue;
-      // uint32 process = 2 [(.org.xresloader.ue.key_tag) = 1];
+      // uint32 process = 2 [(.org.xresloader.field_unique_tag) = "unique_tag", (.org.xresloader.field_not_null) = true, (.org.xresloader.ue.key_tag) = 1];
       case 2:
         if (PROTOBUF_PREDICT_TRUE(static_cast<::uint8_t>(tag) == 16)) {
           _impl_.process_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint32(&ptr);
@@ -4650,14 +4651,14 @@ failure:
   ::uint32_t cached_has_bits = 0;
   (void) cached_has_bits;
 
-  // uint32 id = 1 [(.org.xresloader.ue.key_tag) = 100];
+  // uint32 id = 1 [(.org.xresloader.field_unique_tag) = "unique_tag", (.org.xresloader.field_not_null) = true, (.org.xresloader.ue.key_tag) = 100];
   if (this->_internal_id() != 0) {
     target = stream->EnsureSpace(target);
     target = ::_pbi::WireFormatLite::WriteUInt32ToArray(
         1, this->_internal_id(), target);
   }
 
-  // uint32 process = 2 [(.org.xresloader.ue.key_tag) = 1];
+  // uint32 process = 2 [(.org.xresloader.field_unique_tag) = "unique_tag", (.org.xresloader.field_not_null) = true, (.org.xresloader.ue.key_tag) = 1];
   if (this->_internal_process() != 0) {
     target = stream->EnsureSpace(target);
     target = ::_pbi::WireFormatLite::WriteUInt32ToArray(
@@ -4777,13 +4778,13 @@ failure:
     }
 
   }
-  // uint32 id = 1 [(.org.xresloader.ue.key_tag) = 100];
+  // uint32 id = 1 [(.org.xresloader.field_unique_tag) = "unique_tag", (.org.xresloader.field_not_null) = true, (.org.xresloader.ue.key_tag) = 100];
   if (this->_internal_id() != 0) {
     total_size += ::_pbi::WireFormatLite::UInt32SizePlusOne(
         this->_internal_id());
   }
 
-  // uint32 process = 2 [(.org.xresloader.ue.key_tag) = 1];
+  // uint32 process = 2 [(.org.xresloader.field_unique_tag) = "unique_tag", (.org.xresloader.field_not_null) = true, (.org.xresloader.ue.key_tag) = 1];
   if (this->_internal_process() != 0) {
     total_size += ::_pbi::WireFormatLite::UInt32SizePlusOne(
         this->_internal_process());

@@ -18,10 +18,12 @@ public class DataVerifyPbOneof extends DataVerifyImpl {
             all_numbers.add((long) fd.getNumber());
 
             // alias extension
-            if (fd.getOptions().hasExtension(Xresloader.fieldAlias)) {
-                String alias_name = fd.getOptions().getExtension(Xresloader.fieldAlias);
-                if (!alias_name.isEmpty()) {
-                    all_names.put(alias_name, (long) fd.getNumber());
+            if (fd.getOptions().getExtensionCount(Xresloader.fieldAlias) > 0) {
+                for (String alias_name : fd.getOptions().getExtension(Xresloader.fieldAlias)) {
+                    String alias_name_striped = alias_name.strip();
+                    if (!alias_name_striped.isEmpty()) {
+                        all_names.put(alias_name_striped, (long) fd.getNumber());
+                    }
                 }
             }
         }
@@ -56,10 +58,12 @@ public class DataVerifyPbOneof extends DataVerifyImpl {
             all_numbers.add((long) fd.getNumber());
 
             // alias extension
-            if (fd.getOptions().hasExtension(Xresloader.fieldAlias)) {
-                String alias_name = fd.getOptions().getExtension(Xresloader.fieldAlias);
-                if (!alias_name.isEmpty()) {
-                    all_names.put(alias_name, (long) fd.getNumber());
+            if (fd.getOptions().getExtensionCount(Xresloader.fieldAlias) > 0) {
+                for (String alias_name : fd.getOptions().getExtension(Xresloader.fieldAlias)) {
+                    String alias_name_striped = alias_name.strip();
+                    if (!alias_name_striped.isEmpty()) {
+                        all_names.put(alias_name_striped, (long) fd.getNumber());
+                    }
                 }
             }
         }

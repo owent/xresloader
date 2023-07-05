@@ -107,7 +107,8 @@ public abstract class DataDstJava extends DataDstImpl {
         public String data_message_type = "";
     }
 
-    protected HashMap<String, Object> buildCurrentRow(DataDstTableContent table) throws ConvException {
+    protected HashMap<String, Object> buildCurrentRow(DataDstTableContent table, DataRowContext rowContext)
+            throws ConvException {
         if (table.descriptor == null) {
             return null;
         }
@@ -115,9 +116,10 @@ public abstract class DataDstJava extends DataDstImpl {
         HashMap<String, Object> ret = new HashMap<String, Object>();
         boolean dumpSucceed = false;
         if (SchemeConf.getInstance().getCallbackScriptPath().isEmpty()) {
-            dumpSucceed = dumpMessage(ret, table.descriptor);
+            dumpSucceed = dumpMessage(ret, table.descriptor, rowContext, table.descriptor.getMessageName());
         } else {
-            dumpSucceed = DataETProcessor.getInstance().dumpMapMessage(ret, table.descriptor);
+            dumpSucceed = DataETProcessor.getInstance().dumpMapMessage(ret, table.descriptor, rowContext,
+                    table.descriptor.getMessageName());
         }
         if (dumpSucceed) {
             return ret;
@@ -126,15 +128,22 @@ public abstract class DataDstJava extends DataDstImpl {
         return null;
     }
 
-    protected DataDstTableContent buildCurrentTable(DataDstImpl compiler) throws ConvException {
+    protected DataDstTableContent buildCurrentTable(DataDstImpl compiler, DataTableContext tableContext)
+            throws ConvException {
         DataDstTableContent ret = new DataDstTableContent();
 
         ret.descriptor = compiler.compile();
 
         while (DataSrcImpl.getOurInstance().nextRow()) {
-            HashMap<String, Object> msg = buildCurrentRow(ret);
-            if (msg != null) {
+            DataRowContext rowContext = new DataRowContext(DataSrcImpl.getOurInstance().getCurrentFileName(),
+                    DataSrcImpl.getOurInstance().getCurrentTableName(),
+                    DataSrcImpl.getOurInstance().getCurrentRowNum());
+
+            HashMap<String, Object> msg = buildCurrentRow(ret, rowContext);
+            if (msg != null && !rowContext.ignore) {
                 ret.rows.add(msg);
+
+                tableContext.addUniqueCache(rowContext);
             }
         }
 
@@ -163,8 +172,9 @@ public abstract class DataDstJava extends DataDstImpl {
         List<Object> item_list = new ArrayList<Object>();
         ret.body.put(SchemeConf.getInstance().getProtoName(), item_list);
 
+        DataTableContext tableContext = new DataTableContext();
         while (DataSrcImpl.getOurInstance().nextTable()) {
-            DataDstTableContent table = buildCurrentTable(compiler);
+            DataDstTableContent table = buildCurrentTable(compiler, tableContext);
             if (table == null) {
                 continue;
             }
@@ -183,6 +193,11 @@ public abstract class DataDstJava extends DataDstImpl {
             data_source.add(table.data_source);
         }
 
+        String validateResult = tableContext.checkUnique();
+        if (validateResult != null && !validateResult.isEmpty()) {
+            throw new ConvException(validateResult);
+        }
+
         if (!description_list.isEmpty()) {
             ret.header.put("description", String.join(getSystemEndl(), description_list));
         }
@@ -194,7 +209,7 @@ public abstract class DataDstJava extends DataDstImpl {
             updateHashCode(sha256, item_list);
             ret.header.put("hash_code", "sha256:" + Hex.encodeHexString(sha256.digest()));
         } catch (NoSuchAlgorithmException e) {
-            this.logErrorMessage("failed to find sha-256 algorithm.");
+            ProgramOptions.getLoger().error("%s", e.getMessage());
         }
 
         return ret;
@@ -278,7 +293,8 @@ public abstract class DataDstJava extends DataDstImpl {
         return val;
     }
 
-    private Object getValueFromDataSource(DataDstWriterNode desc) throws ConvException {
+    private Object getValueFromDataSource(DataDstWriterNode desc, DataRowContext rowContext, String fieldPath)
+            throws ConvException {
         Object val = null;
         switch (desc.getType()) {
             case INT: {
@@ -344,7 +360,7 @@ public abstract class DataDstJava extends DataDstImpl {
 
             case MESSAGE: {
                 HashMap<String, Object> node = new HashMap<String, Object>();
-                if (dumpMessage(node, desc)) {
+                if (dumpMessage(node, desc, rowContext, fieldPath)) {
                     val = node;
                 }
                 break;
@@ -399,28 +415,73 @@ public abstract class DataDstJava extends DataDstImpl {
      * @return 有数据则返回true
      * @throws ConvException
      */
-    protected boolean dumpMessage(HashMap<String, Object> builder, DataDstWriterNode node) throws ConvException {
+    protected boolean dumpMessage(HashMap<String, Object> builder, DataDstWriterNode node, DataRowContext rowContext,
+            String fieldPath)
+            throws ConvException {
         boolean ret = false;
 
         for (Map.Entry<String, DataDstWriterNode.DataDstChildrenNode> c : node.getChildren().entrySet()) {
+            if (rowContext.ignore) {
+                break;
+            }
+
             if (c.getValue().isOneof()) {
+                boolean fieldHasValue = false;
+                String subFieldPath = String.format("%s.%s", fieldPath, c.getKey());
+
                 for (DataDstWriterNode child : c.getValue().nodes) {
-                    if (dumpPlainField(builder, child.identify, child.getOneofDescriptor(), child)) {
+                    if (dumpPlainField(builder, child.identify, child.getOneofDescriptor(), child, rowContext,
+                            subFieldPath)) {
                         ret = true;
+                        fieldHasValue = true;
                     }
+                }
+                if (!fieldHasValue && c.getValue().isNotNull()) {
+                    rowContext.ignore = true;
+                    ProgramOptions.getLoger().warn(
+                            "File: %s, Sheet: %s, Row: %d\n    oneof %s is empty but set not null, we will ignore this row",
+                            rowContext.fileName, rowContext.tableName, rowContext.row,
+                            subFieldPath);
                 }
             } else if (c.getValue().mode == DataDstWriterNode.CHILD_NODE_TYPE.STANDARD) {
+                boolean fieldHasValue = false;
                 for (int i = 0; i < c.getValue().nodes.size(); i++) {
                     DataDstWriterNode child = c.getValue().nodes.get(i);
-                    if (dumpStandardField(builder, child, c.getValue())) {
+                    String subFieldPath;
+                    if (c.getValue().isList()) {
+                        subFieldPath = String.format("%s.%s.%d", fieldPath, c.getKey(), i);
+                    } else {
+                        subFieldPath = String.format("%s.%s", fieldPath, c.getKey());
+                    }
+                    if (dumpStandardField(builder, child, c.getValue(), rowContext, subFieldPath)) {
                         ret = true;
+                        fieldHasValue = true;
                     }
                 }
+                if (!fieldHasValue && c.getValue().isNotNull()) {
+                    rowContext.ignore = true;
+                    ProgramOptions.getLoger().warn(
+                            "File: %s, Sheet: %s, Row: %d\n    field %s is empty but set not null, we will ignore this row",
+                            rowContext.fileName, rowContext.tableName, rowContext.row,
+                            String.format("%s.%s", fieldPath, c.getKey()));
+                }
             } else if (c.getValue().mode == DataDstWriterNode.CHILD_NODE_TYPE.PLAIN) {
+                boolean fieldHasValue = false;
+                String subFieldPath = String.format("%s.%s", fieldPath, c.getKey());
+
                 for (DataDstWriterNode child : c.getValue().nodes) {
-                    if (dumpPlainField(builder, child.identify, child.getFieldDescriptor(), child)) {
+                    if (dumpPlainField(builder, child.identify, child.getFieldDescriptor(), child, rowContext,
+                            subFieldPath)) {
                         ret = true;
+                        fieldHasValue = true;
                     }
+                }
+                if (!fieldHasValue && c.getValue().isNotNull()) {
+                    rowContext.ignore = true;
+                    ProgramOptions.getLoger().warn(
+                            "File: %s, Sheet: %s, Row: %d\n    field %s is empty but set not null, we will ignore this row",
+                            rowContext.fileName, rowContext.tableName, rowContext.row,
+                            subFieldPath);
                 }
             }
         }
@@ -430,22 +491,25 @@ public abstract class DataDstJava extends DataDstImpl {
 
     @SuppressWarnings("unchecked")
     private boolean dumpStandardField(HashMap<String, Object> builder, DataDstWriterNode desc,
-            DataDstWriterNode.DataDstChildrenNode as_child) throws ConvException {
+            DataDstWriterNode.DataDstChildrenNode as_child, DataRowContext rowContext, String fieldPath)
+            throws ConvException {
         if (null == desc.identify && DataDstWriterNode.JAVA_TYPE.MESSAGE != desc.getType()) {
             if (as_child.isRequired()
                     || ProgramOptions.getInstance().stripListRule == ProgramOptions.ListStripRule.KEEP_ALL) {
                 dumpDefault(builder, as_child);
             }
+
             return false;
         }
 
-        Object val = getValueFromDataSource(desc);
+        Object val = getValueFromDataSource(desc, rowContext, fieldPath);
 
         if (null == val) {
             if (as_child.isRequired()
                     || ProgramOptions.getInstance().stripListRule == ProgramOptions.ListStripRule.KEEP_ALL) {
                 dumpDefault(builder, as_child);
             }
+
             return false;
         }
 
@@ -460,6 +524,13 @@ public abstract class DataDstJava extends DataDstImpl {
                     builder.put(as_child.innerFieldDesc.getName(), old);
                 }
                 old.put(mapKey, mapValue);
+
+                if (null != as_child.getUniqueTags() && !(mapValue instanceof Map<?, ?>)) {
+                    String subFieldPath = String.format("%s.%s", fieldPath, mapKey.toString());
+                    for (var tagKey : as_child.getUniqueTags()) {
+                        rowContext.addUniqueCache(tagKey, subFieldPath, mapValue);
+                    }
+                }
             }
         } else if (as_child.innerFieldDesc.isList()) {
             ArrayList<Object> old = (ArrayList<Object>) builder.getOrDefault(as_child.innerFieldDesc.getName(), null);
@@ -482,15 +553,30 @@ public abstract class DataDstJava extends DataDstImpl {
             } else {
                 old.add(val);
             }
+
+            if (null != as_child.getUniqueTags() && !(val instanceof Map<?, ?>)) {
+                String subFieldPath = String.format("%s.%d", fieldPath, index);
+                for (var tagKey : as_child.getUniqueTags()) {
+                    rowContext.addUniqueCache(tagKey, subFieldPath, val);
+                }
+            }
         } else {
             builder.put(as_child.innerFieldDesc.getName(), val);
+
+            if (null != as_child.getUniqueTags() && !(val instanceof Map<?, ?>)) {
+                for (var tagKey : as_child.getUniqueTags()) {
+                    rowContext.addUniqueCache(tagKey, fieldPath, val);
+                }
+            }
         }
 
         return true;
     }
 
     private boolean dumpPlainField(HashMap<String, Object> builder, IdentifyDescriptor ident,
-            DataDstWriterNode.DataDstOneofDescriptor field, DataDstWriterNode maybeFromNode) throws ConvException {
+            DataDstWriterNode.DataDstOneofDescriptor field, DataDstWriterNode maybeFromNode,
+            DataRowContext rowContext,
+            String fieldPath) throws ConvException {
         if (field == null) {
             return false;
         }
@@ -504,42 +590,64 @@ public abstract class DataDstJava extends DataDstImpl {
             return false;
         }
 
-        return dumpPlainField(builder, ident, field, maybeFromNode, res.value);
+        return dumpPlainField(builder, ident, field, maybeFromNode, res.value, rowContext, fieldPath);
     }
 
     private boolean dumpPlainField(HashMap<String, Object> builder, IdentifyDescriptor ident,
-            DataDstWriterNode.DataDstOneofDescriptor field, DataDstWriterNode maybeFromNode, String input)
+            DataDstWriterNode.DataDstOneofDescriptor field, DataDstWriterNode maybeFromNode, String input,
+            DataRowContext rowContext,
+            String fieldPath)
             throws ConvException {
         if (field == null) {
             return false;
         }
 
-        Object[] res = parsePlainDataOneof(input, ident, field);
-        if (null == res) {
-            return false;
+        boolean ret = false;
+        DataDstWriterNode.DataDstFieldDescriptor sub_field = null;
+        do {
+            Object[] res = parsePlainDataOneof(input, ident, field);
+            if (null == res) {
+                break;
+            }
+
+            if (res.length < 1) {
+                break;
+            }
+
+            sub_field = (DataDstWriterNode.DataDstFieldDescriptor) res[0];
+
+            if (sub_field == null) {
+                break;
+            }
+
+            if (res.length == 1) {
+                dumpDefault(builder, sub_field);
+                ret = true;
+                break;
+            }
+
+            // 非顶层，不用验证类型
+            ret = dumpPlainField(builder, null, sub_field, null, (String) res[1], rowContext, fieldPath);
+        } while (false);
+
+        for (var subField : field.getSortedFields()) {
+            if (subField.isNotNull() && subField != sub_field) {
+                rowContext.ignore = true;
+                ProgramOptions.getLoger().warn(
+                        "File: %s, Sheet: %s, Row: %d\n    field %s is empty but set not null, we will ignore this row",
+                        rowContext.fileName, rowContext.tableName, rowContext.row,
+                        String.format("%s.%s", fieldPath, subField.getName()));
+                break;
+            }
         }
 
-        if (res.length < 1) {
-            return false;
-        }
-
-        DataDstWriterNode.DataDstFieldDescriptor sub_field = (DataDstWriterNode.DataDstFieldDescriptor) res[0];
-
-        if (sub_field == null) {
-            return false;
-        }
-
-        if (res.length == 1) {
-            dumpDefault(builder, sub_field);
-            return true;
-        }
-
-        // 非顶层，不用验证类型
-        return dumpPlainField(builder, null, sub_field, null, (String) res[1]);
+        return ret;
     }
 
     private boolean dumpPlainField(HashMap<String, Object> builder, IdentifyDescriptor ident,
-            DataDstWriterNode.DataDstFieldDescriptor field, DataDstWriterNode maybeFromNode) throws ConvException {
+            DataDstWriterNode.DataDstFieldDescriptor field, DataDstWriterNode maybeFromNode,
+            DataRowContext rowContext,
+            String fieldPath) throws ConvException {
         if (null == ident) {
             // Plain模式的repeated对于STRIP_EMPTY_TAIL也可以直接全部strip掉，下同
             if (field.isRequired()
@@ -558,12 +666,14 @@ public abstract class DataDstJava extends DataDstImpl {
             return false;
         }
 
-        return dumpPlainField(builder, ident, field, maybeFromNode, res.value);
+        return dumpPlainField(builder, ident, field, maybeFromNode, res.value, rowContext, fieldPath);
     }
 
     @SuppressWarnings("unchecked")
     private boolean dumpPlainField(HashMap<String, Object> builder, IdentifyDescriptor ident,
-            DataDstWriterNode.DataDstFieldDescriptor field, DataDstWriterNode maybeFromNode, String input)
+            DataDstWriterNode.DataDstFieldDescriptor field, DataDstWriterNode maybeFromNode, String input,
+            DataRowContext rowContext,
+            String fieldPath)
             throws ConvException {
 
         if ((null != maybeFromNode && null != maybeFromNode.identify && !field.isList())
@@ -699,7 +809,8 @@ public abstract class DataDstJava extends DataDstImpl {
                         for (int i = 0; i < groups.length; ++i) {
                             String v = groups[i];
                             String[] subGroups = splitPlainGroups(v, getPlainMessageSeparator(field));
-                            ParseResult res = parsePlainDataMessage(subGroups, ident, field);
+                            ParseResult res = parsePlainDataMessage(subGroups, ident, field, rowContext,
+                                    String.format("%s.%d", fieldPath, i));
                             if (res != null && res.value != null) {
                                 Object mapKey = res.value.getOrDefault("key", null);
                                 Object mapValue = res.value.getOrDefault("value", null);
@@ -726,7 +837,8 @@ public abstract class DataDstJava extends DataDstImpl {
                         for (int i = 0; i < groups.length; ++i) {
                             String v = groups[i];
                             String[] subGroups = splitPlainGroups(v, getPlainMessageSeparator(field));
-                            ParseResult res = parsePlainDataMessage(subGroups, ident, field);
+                            ParseResult res = parsePlainDataMessage(subGroups, ident, field, rowContext,
+                                    String.format("%s.%d", fieldPath, i));
                             if (res != null && res.value != null) {
                                 tmp.add(res.value);
 
@@ -759,13 +871,19 @@ public abstract class DataDstJava extends DataDstImpl {
                 SpecialInnerHashMap<Object, Object> parsedMap = (SpecialInnerHashMap<Object, Object>) parsedDatas;
                 SpecialInnerHashMap<Object, Object> valMap = (SpecialInnerHashMap<Object, Object>) val;
                 valMap.putAll(parsedMap);
+
+                if (null != field.getUniqueTags()) {
+                    for (var tagKey : field.getUniqueTags()) {
+                        rowContext.addUniqueCache(tagKey, fieldPath, valMap);
+                    }
+                }
             } else if (parsedDatas != null) {
                 ArrayList<Object> parsedArray = (ArrayList<Object>) parsedDatas;
                 ArrayList<Object> valArray = (ArrayList<Object>) val;
                 if (null != maybeFromNode && maybeFromNode.getListIndex() >= 0) {
                     if (parsedArray.size() != 1) {
                         throw new ConvException(
-                                String.format("Try to convert %s.%s[%d] failed, too many elements(found %d).",
+                                String.format("Try to convert %s.%s.%d failed, too many elements(found %d).",
                                         field.getTypeDescriptor().getFullName(), field.getName(),
                                         maybeFromNode.getListIndex(), parsedArray.size()));
                     }
@@ -786,6 +904,12 @@ public abstract class DataDstJava extends DataDstImpl {
                     }
                 } else {
                     valArray.addAll(parsedArray);
+                }
+
+                if (null != field.getUniqueTags() && DataDstWriterNode.JAVA_TYPE.MESSAGE != field.getType()) {
+                    for (var tagKey : field.getUniqueTags()) {
+                        rowContext.addUniqueCache(tagKey, fieldPath, valArray);
+                    }
                 }
             } else if (ProgramOptions.getInstance().stripListRule == ProgramOptions.ListStripRule.KEEP_ALL) {
                 ArrayList<Object> valArray = (ArrayList<Object>) val;
@@ -832,7 +956,7 @@ public abstract class DataDstJava extends DataDstImpl {
 
                 case MESSAGE: {
                     String[] groups = splitPlainGroups(input.trim(), getPlainMessageSeparator(field));
-                    ParseResult res = parsePlainDataMessage(groups, ident, field);
+                    ParseResult res = parsePlainDataMessage(groups, ident, field, rowContext, fieldPath);
                     if (res != null && res.value != null) {
                         val = res.value;
                         if (res.origin != null && field.getReferOriginField() != null) {
@@ -853,12 +977,20 @@ public abstract class DataDstJava extends DataDstImpl {
             }
 
             builder.put(field.getName(), val);
+
+            if (null != field.getUniqueTags() && DataDstWriterNode.JAVA_TYPE.MESSAGE != field.getType()) {
+                for (var tagKey : field.getUniqueTags()) {
+                    rowContext.addUniqueCache(tagKey, fieldPath, val);
+                }
+            }
             return true;
         }
     }
 
     public ParseResult parsePlainDataMessage(String[] inputs, IdentifyDescriptor ident,
-            org.xresloader.core.data.dst.DataDstWriterNode.DataDstFieldDescriptor field) throws ConvException {
+            org.xresloader.core.data.dst.DataDstWriterNode.DataDstFieldDescriptor field,
+            DataRowContext rowContext,
+            String fieldPath) throws ConvException {
         if (field.getTypeDescriptor() == null || inputs == null || inputs.length == 0) {
             return null;
         }
@@ -912,6 +1044,10 @@ public abstract class DataDstJava extends DataDstImpl {
         int usedInputIdx = 0;
         int fieldSize = 0;
         for (int i = 0; i < children.size(); ++i) {
+            if (rowContext.ignore) {
+                break;
+            }
+
             if (children.get(i).getLinkedValueField() != null) {
                 ++fieldSize;
                 continue;
@@ -934,8 +1070,17 @@ public abstract class DataDstJava extends DataDstImpl {
                             usedInputIdx + 1, inputs.length));
                 }
 
-                if (dumpPlainField(ret.value, null, children.get(i).getReferOneof(), null, inputs[usedInputIdx])) {
+                if (dumpPlainField(ret.value, null, children.get(i).getReferOneof(), null, inputs[usedInputIdx],
+                        rowContext, fieldPath)) {
                     dumpedOneof.add(children.get(i).getReferOneof().getFullName());
+                } else {
+                    if (children.get(i).isNotNull()) {
+                        rowContext.ignore = true;
+                        ProgramOptions.getLoger().warn(
+                                "File: %s, Sheet: %s, Row: %d\n    oneof %s is empty but set not null, we will ignore this row",
+                                rowContext.fileName, rowContext.tableName, rowContext.row,
+                                String.format("%s.%s", fieldPath, children.get(i).getName()));
+                    }
                 }
 
                 ++fieldSize;
@@ -948,7 +1093,17 @@ public abstract class DataDstJava extends DataDstImpl {
                             inputs.length));
                 }
 
-                dumpPlainField(ret.value, null, children.get(i), null, inputs[usedInputIdx]);
+                String subFieldPath = String.format("%s.%s", fieldPath, children.get(i).getName());
+                if (!dumpPlainField(ret.value, null, children.get(i), null, inputs[usedInputIdx], rowContext,
+                        subFieldPath)) {
+                    if (children.get(i).isNotNull()) {
+                        rowContext.ignore = true;
+                        ProgramOptions.getLoger().warn(
+                                "File: %s, Sheet: %s, Row: %d\n    field %s is empty but set not null, we will ignore this row",
+                                rowContext.fileName, rowContext.tableName, rowContext.row,
+                                subFieldPath);
+                    }
+                }
 
                 ++fieldSize;
                 ++usedInputIdx;

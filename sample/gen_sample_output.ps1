@@ -72,4 +72,5 @@ foreach ($proto_dir in "proto_v2", "proto_v3") {
     )
     Write-Output "Write-Output '$($TASK_LINES -join "`n")' | java `"-Dfile.encoding=UTF-8`" `"-Dlog4j.appender.console.encoding=UTF-8`" -client -jar `"$XRESLOADER`" --stdin --data-version 1.0.0.0"
     $TASK_LINES -join "`n" | java "-Dfile.encoding=UTF-8" "-Dlog4j.appender.console.encoding=UTF-8" -client -jar "$XRESLOADER" --stdin --data-version 1.0.0.0
+    Write-Output "Exit code: $LastExitCode"
 }

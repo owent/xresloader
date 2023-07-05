@@ -240,11 +240,11 @@ public class DataDstPb extends DataDstImpl {
 
         } catch (FileNotFoundException e) {
             ProgramOptions.getLoger().error("Read protocol file \"%s\" failed. %s",
-                    ProgramOptions.getInstance().protocolFile, e.toString());
+                    String.join(",", ProgramOptions.getInstance().protocolFile), e.toString());
             return false;
         } catch (IOException e) {
             ProgramOptions.getLoger().error("Parse protocol file \"%s\" failed. %s",
-                    ProgramOptions.getInstance().protocolFile, e.toString());
+                    String.join(",", ProgramOptions.getInstance().protocolFile), e.toString());
             return false;
         }
 
@@ -680,9 +680,11 @@ public class DataDstPb extends DataDstImpl {
 
     @Override
     public boolean init() {
-        if (false == load_pb_file(cachePbs, ProgramOptions.getInstance().protocolFile, true,
-                ProgramOptions.getInstance().protocolIgnoreUnknownDependency, null)) {
-            return false;
+        for (String pbsFile : ProgramOptions.getInstance().protocolFile) {
+            if (false == load_pb_file(cachePbs, pbsFile, true,
+                    ProgramOptions.getInstance().protocolIgnoreUnknownDependency, null)) {
+                return false;
+            }
         }
 
         currentMsgDesc = get_message_proto(cachePbs, SchemeConf.getInstance().getProtoName());
@@ -2359,8 +2361,10 @@ public class DataDstPb extends DataDstImpl {
      */
     @SuppressWarnings("unchecked")
     public HashMap<String, Object> buildConst() {
-        if (false == load_pb_file(cachePbs, ProgramOptions.getInstance().protocolFile, true, true, null)) {
-            return null;
+        for (String pbsFile : ProgramOptions.getInstance().protocolFile) {
+            if (false == load_pb_file(cachePbs, pbsFile, true, true, null)) {
+                return null;
+            }
         }
 
         if (null == cachePbs.enums) {
@@ -2423,21 +2427,24 @@ public class DataDstPb extends DataDstImpl {
      */
     public final byte[] dumpConst(HashMap<String, Object> data) throws ConvException, IOException {
         // protobuf的常量输出直接复制描述文件就好了
-        if (ProgramOptions.getInstance().protocolFile.equals(ProgramOptions.getInstance().protoDumpFile)) {
+        if (ProgramOptions.getInstance().protocolFile.length == 1
+                && ProgramOptions.getInstance().protocolFile[0].equals(ProgramOptions.getInstance().protoDumpFile)) {
             return null;
         }
 
         try {
-            File f = new File(ProgramOptions.getInstance().protocolFile);
+            DescriptorProtos.FileDescriptorSet.Builder fdsBuilder = DescriptorProtos.FileDescriptorSet.newBuilder();
+            for (var fdp : cachePbs.files.entrySet()) {
+                if (fdp.getValue().getPackage().equals("google.protobuf")) {
+                    continue;
+                }
 
-            FileInputStream fin = new FileInputStream(ProgramOptions.getInstance().protocolFile);
-            byte[] all_buffer = new byte[(int) f.length()];
-            fin.read(all_buffer);
-            fin.close();
+                fdsBuilder.addFile(fdp.getValue());
+            }
 
-            return all_buffer;
-        } catch (FileNotFoundException e) {
-            this.logErrorMessage("protocol file %s not found.", ProgramOptions.getInstance().protocolFile);
+            return fdsBuilder.build().toByteArray();
+        } catch (Exception e) {
+            this.logErrorMessage("Serialize FileDescriptorSet failed: %s.", e.toString());
         }
 
         return null;
@@ -2449,8 +2456,10 @@ public class DataDstPb extends DataDstImpl {
      * @return 选项数据,不支持的时候返回空
      */
     public HashMap<String, Object> buildOptions(ProgramOptions.ProtoDumpType dumpType) {
-        if (false == load_pb_file(cachePbs, ProgramOptions.getInstance().protocolFile, true, true, null)) {
-            return null;
+        for (String pbsFile : ProgramOptions.getInstance().protocolFile) {
+            if (false == load_pb_file(cachePbs, pbsFile, true, true, null)) {
+                return null;
+            }
         }
 
         com.google.protobuf.ExtensionRegistry custom_extensions = com.google.protobuf.ExtensionRegistry.newInstance();

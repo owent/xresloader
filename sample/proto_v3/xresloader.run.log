@@ -1,0 +1,10 @@
+[2023-07-05 20:02:06.328]:[WARN ] xresloader - File: D:\workspace\git\github\xresloader\xresloader/sample/资源转换示例.xlsx, Sheet: test_oneof, Row: 6
+    oneof event_cfg.reward is empty but set not null, we will ignore this row
+[2023-07-05 20:02:06.331]:[WARN ] xresloader - File: D:\workspace\git\github\xresloader\xresloader/sample/资源转换示例.xlsx, Sheet: test_oneof, Row: 7
+    field event_cfg.process is empty but set not null, we will ignore this row
+[2023-07-05 20:02:06.335]:[ERROR] xresloader - Convert data failed.
+  > -t bin -o D:\workspace\git\github\xresloader\xresloader/sample/proto_v3/ -f D:\workspace\git\github\xresloader\xresloader/sample/proto_v3/kind.pb -m DataSource=D:\workspace\git\github\xresloader\xresloader/sample/资源转换示例.xlsx|test_oneof|3,1 -m MacroSource=D:\workspace\git\github\xresloader\xresloader/sample/资源转换示例.xlsx|macro|2,1 -m ProtoName=event_cfg -m OutputFile=event_cfg.bin -m KeyRow=2
+  > Unique validator check failed. tag: unique_tag, path: {"event_cfg.id":50004,"event_cfg.process":4}
+    File: D:\workspace\git\github\xresloader\xresloader/sample/资源转换示例.xlsx, sheet: test_oneof, row: 5
+    File: D:\workspace\git\github\xresloader\xresloader/sample/资源转换示例.xlsx, sheet: test_oneof, row: 9
+

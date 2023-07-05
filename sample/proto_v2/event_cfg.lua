@@ -2,7 +2,7 @@
 
 return {
   [1] = {
-    count = 5,
+    count = 7,
     data_source = {
       {
         file = "./资源转换示例.xlsx",
@@ -11,8 +11,8 @@ return {
     },
     data_ver = "1.0.0.0",
     description = "Test event_cfg with oneof fields",
-    hash_code = "sha256:2e945c1183b802221577637ae9d698460370507f420342f1c332100e002f9d28",
-    xres_ver = "2.14.0-rc1",
+    hash_code = "sha256:f54ea4a17140ed6e75a9136bff6c0053251bb5a4cd3954d905cf5bac8fcce998",
+    xres_ver = "2.14.0-rc2",
   },
   [2] = "event_cfg",
   event_cfg = {
@@ -93,11 +93,12 @@ return {
       },
     },
     {
-      id = 50005,
-      process = 5,
+      id = 50004,
+      note = "",
+      process = 6,
       rule = {
-        rule_id = 551,
-        rule_param = 552,
+        rule_id = 561,
+        rule_param = 562,
       },
     },
   },

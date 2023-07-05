@@ -2,8 +2,12 @@
 
 ## Unrelease
 
+## 2.14.0-rc2
+
 1. `org.xresloader.field_alias` 和 `org.xresloader.enum_alias` 允许多个别名
 2. 修订repeated字段映射使用别名的问题
+3. 增加 `org.xresloader.field_not_null` 插件和 `org.xresloader.oneof_not_null` 用以忽略Excel中指定数据为空的数据行
+4. 增加 `org.xresloader.field_unique_tag` 插件用以支持唯一性检测
 
 ## 2.14.0-rc1
 

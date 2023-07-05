@@ -2623,7 +2623,7 @@ class event_cfg final :
   void unsafe_arena_set_allocated_specify_field(
       ::event_rule_item* specify_field);
   ::event_rule_item* unsafe_arena_release_specify_field();
-  // uint32 id = 1 [(.org.xresloader.ue.key_tag) = 100];
+  // uint32 id = 1 [(.org.xresloader.field_unique_tag) = "unique_tag", (.org.xresloader.field_not_null) = true, (.org.xresloader.ue.key_tag) = 100];
   void clear_id() ;
   ::uint32_t id() const;
   void set_id(::uint32_t value);
@@ -2633,7 +2633,7 @@ class event_cfg final :
   void _internal_set_id(::uint32_t value);
 
   public:
-  // uint32 process = 2 [(.org.xresloader.ue.key_tag) = 1];
+  // uint32 process = 2 [(.org.xresloader.field_unique_tag) = "unique_tag", (.org.xresloader.field_not_null) = true, (.org.xresloader.ue.key_tag) = 1];
   void clear_process() ;
   ::uint32_t process() const;
   void set_process(::uint32_t value);
@@ -6071,7 +6071,7 @@ inline event_rule_item::NestedCase event_rule_item::nested_case() const {
 
 // event_cfg
 
-// uint32 id = 1 [(.org.xresloader.ue.key_tag) = 100];
+// uint32 id = 1 [(.org.xresloader.field_unique_tag) = "unique_tag", (.org.xresloader.field_not_null) = true, (.org.xresloader.ue.key_tag) = 100];
 inline void event_cfg::clear_id() {
   _impl_.id_ = 0u;
 }
@@ -6091,7 +6091,7 @@ inline void event_cfg::_internal_set_id(::uint32_t value) {
   _impl_.id_ = value;
 }
 
-// uint32 process = 2 [(.org.xresloader.ue.key_tag) = 1];
+// uint32 process = 2 [(.org.xresloader.field_unique_tag) = "unique_tag", (.org.xresloader.field_not_null) = true, (.org.xresloader.ue.key_tag) = 1];
 inline void event_cfg::clear_process() {
   _impl_.process_ = 0u;
 }

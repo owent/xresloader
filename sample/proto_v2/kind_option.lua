@@ -11,14 +11,18 @@ local const_res = {
               name = "EN_CT_DIAMOND",
               number = 10101,
               options = {
-                enum_alias = "钻石",
+                enum_alias = {
+                  "钻石",
+                },
               },
             },
             EN_CT_MONEY = {
               name = "EN_CT_MONEY",
               number = 10001,
               options = {
-                enum_alias = "金币",
+                enum_alias = {
+                  "金币",
+                },
               },
             },
           },
@@ -128,7 +132,9 @@ local const_res = {
               name = "enum_type",
               number = 14,
               options = {
-                field_alias = "货币类型",
+                field_alias = {
+                  "货币类型",
+                },
               },
               type_name = "ENUM",
             },
@@ -136,6 +142,10 @@ local const_res = {
               name = "id",
               number = 1,
               options = {
+                field_not_null = true,
+                field_unique_tag = {
+                  "unique_tag",
+                },
                 key_tag = 100,
               },
               type_name = "UINT32",
@@ -144,7 +154,9 @@ local const_res = {
               name = "item",
               number = 11,
               options = {
-                field_alias = "奖励道具",
+                field_alias = {
+                  "奖励道具",
+                },
               },
               type_name = "MESSAGE",
             },
@@ -152,7 +164,9 @@ local const_res = {
               name = "note",
               number = 13,
               options = {
-                field_alias = "描述文本",
+                field_alias = {
+                  "描述文本",
+                },
               },
               type_name = "STRING",
             },
@@ -160,6 +174,10 @@ local const_res = {
               name = "process",
               number = 2,
               options = {
+                field_not_null = true,
+                field_unique_tag = {
+                  "unique_tag",
+                },
                 key_tag = 1,
               },
               type_name = "UINT32",
@@ -184,7 +202,9 @@ local const_res = {
               name = "user_exp",
               number = 12,
               options = {
-                field_alias = "奖励经验",
+                field_alias = {
+                  "奖励经验",
+                },
               },
               type_name = "INT64",
             },
@@ -192,12 +212,22 @@ local const_res = {
               name = "user_level",
               number = 51,
               options = {
-                field_alias = "玩家等级",
+                field_alias = {
+                  "玩家等级",
+                },
               },
               type_name = "UINT32",
             },
           },
           name = "event_cfg",
+          oneof_decl = {
+            reward = {
+              name = "reward",
+              options = {
+                oneof_not_null = true,
+              },
+            },
+          },
           options = {
             helper = "helper",
             msg_description = "Test event_cfg with oneof fields",
@@ -209,7 +239,9 @@ local const_res = {
               name = "nested_enum_type",
               number = 12,
               options = {
-                field_alias = "货币类型",
+                field_alias = {
+                  "货币类型",
+                },
               },
               type_name = "ENUM",
             },
@@ -217,7 +249,9 @@ local const_res = {
               name = "nested_note",
               number = 11,
               options = {
-                field_alias = "描述文本",
+                field_alias = {
+                  "描述文本",
+                },
               },
               type_name = "STRING",
             },
@@ -230,7 +264,9 @@ local const_res = {
               name = "nested_enum_type",
               number = 12,
               options = {
-                field_alias = "货币类型",
+                field_alias = {
+                  "货币类型",
+                },
               },
               type_name = "ENUM",
             },
@@ -238,7 +274,9 @@ local const_res = {
               name = "nested_note",
               number = 11,
               options = {
-                field_alias = "描述文本",
+                field_alias = {
+                  "描述文本",
+                },
               },
               type_name = "STRING",
             },
@@ -372,7 +410,9 @@ local const_res = {
               name = "test_id_2",
               number = 10002,
               options = {
-                field_alias = "测试ID别名2",
+                field_alias = {
+                  "测试ID别名2",
+                },
               },
               type_name = "UINT32",
             },

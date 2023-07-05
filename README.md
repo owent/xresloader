@@ -303,14 +303,16 @@ Excel里的Key使用@后缀的字段名，@后面的部分都属于验证器。�
 
 |             插件名称                             |                                                    插件功能                                                                                  |
 | :----------------------------------------------: | :------------------------------------------------------------------------------------------------------------------------------------------: |
-|      org.xresloader.verifier                     |                             验证器，可填范围(log-high),message名，enum名。多个由 `|` 分隔。任意验证器通过检查则认为数据有效                  |
-| org.xresloader.field_description                 |                                   字段描述信息，会写入输出的header中和代码中                                                                 |
-|    org.xresloader.field_alias                    |                      字段别名，配合 **验证器** 功能，允许在数据源中直接填写别名来配置数据                                                    |
-|    org.xresloader.field_ratio                    |             字段放大，用于比如配置百分率为 0.12，当 org.xresloader.field_ratio=100时转出的数据为12                                           |
-|  org.xresloader.field_separator                  |             Plain模式分隔符，可指定多个，用于在一个单元格内配置复杂格式时的分隔符列表，默认值: `,;| `                                        |
-|   org.xresloader.field_required                  |                     设置字段为 **required** ，用于向proto3提供，proto2的 **required** 约束                                                   |
-| org.xresloader.field_origin_value                |                           写出原始数据到指定字段（ `TImestamp` 和 `Duration` 类型）                                                          |
-|     org.xresloader.ue.key_tag                    |                生成UE代码时，如果需要支持多个Key组合成一个Name，用这个字段指定系数（必须大于0）                                              |
+|      org.xresloader.verifier                     | 验证器，可填范围(log-high),message名，enum名。多个由 `|` 分隔。任意验证器通过检查则认为数据有效                                              |
+|     org.xresloader.field_unique_tag              | 设置唯一性检测Tag，多个相同tag的字段将合并并在转出数据时检测唯一性（可多个）                                                                 |
+|     org.xresloader.field_not_null                | 如果配置了字段映射且某个数据行对应的oneof数据为空，则忽略此行                                                                                |
+| org.xresloader.field_description                 | 字段描述信息，会写入输出的header中和代码中                                                                                                   |
+|    org.xresloader.field_alias                    | 字段别名，配合 **验证器** 功能，允许在数据源中直接填写别名来配置数据                                                                         |
+|    org.xresloader.field_ratio                    | 字段放大，用于比如配置百分率为 0.12，当 org.xresloader.field_ratio=100时转出的数据为12                                                       |
+|  org.xresloader.field_separator                  | Plain模式分隔符，可指定多个，用于在一个单元格内配置复杂格式时的分隔符列表，默认值: `,;| `                                                    |
+|   org.xresloader.field_required                  | 设置字段为 **required** ，用于向proto3提供，proto2的 **required** 约束                                                                       |
+| org.xresloader.field_origin_value                | 写出原始数据到指定字段（ `Timestamp` 和 `Duration` 类型）                                                                                    |
+|     org.xresloader.ue.key_tag                    | 生成UE代码时，如果需要支持多个Key组合成一个Name，用这个字段指定系数（必须大于0）                                                             |
 |   org.xresloader.ue.ue_type_name                 | 生成UE代码时，如果指定了这个字段，那么生成的字段类型将是 `TSoftObjectPtr<ue_type_name>` , 并且支持蓝图中直接引用                             |
 |   org.xresloader.ue.ue_type_is_class             | 生成UE代码时，如果指定了这个字段，那么生成的字段类型将是 `TSoftClassPtr<ue_type_name>` , 并且支持蓝图中直接引用                              |
 |   org.xresloader.ue.ue_origin_type_name          | 生成UE代码时，如果指定了这个字段，那么生成的字段类型将使用这个类型，需要用户自己确保类型有效且对应的proto类型可以隐式转换到该类型            |
@@ -320,15 +322,16 @@ Excel里的Key使用@后缀的字段名，@后面的部分都属于验证器。�
 
 |             插件名称             |                                插件功能                                |
 | :------------------------------: | :--------------------------------------------------------------------: |
-| org.xresloader.enumv_description |            枚举值描述信息，可能会写入输出的header中和代码中            |
+| org.xresloader.enumv_description | 枚举值描述信息，可能会写入输出的header中和代码中                       |
 |    org.xresloader.enum_alias     | 枚举值别名，配合 **验证器** 功能，允许在数据源中直接填写别名来配置数据 |
 
 #### Protobuf插件 - Oneof插件(2.8.0版本及以上)
 
 |             插件名称             |                                               插件功能                                               |
 | :------------------------------: | :--------------------------------------------------------------------------------------------------: |
-| org.xresloader.oneof_description |                           oneof描述信息，可能会写入输出的header中和代码中                            |
+| org.xresloader.oneof_description | oneof描述信息，可能会写入输出的header中和代码中                                                      |
 |  org.xresloader.oneof_separator  | Plain模式类型和值字段的分隔符，可指定多个，用于在一个单元格内配置复杂格式时的分隔符列表，默认值: `,;|` |
+|  org.xresloader.oneof_not_null   | 如果配置了字段映射且某个数据行对应的oneof数据为空，则忽略此行                                        |
 
 ## 生态和工具
 

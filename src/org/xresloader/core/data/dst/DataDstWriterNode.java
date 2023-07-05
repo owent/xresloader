@@ -43,6 +43,8 @@ public class DataDstWriterNode {
         public String verifier = null;
         public String plainSeparator = null;
         public int ratio = 1;
+        public boolean notNull = false;
+        public ArrayList<String> uniqueTags = null;
         private DataDstFieldExtUE ue = null;
 
         public DataDstFieldExtUE mutableUE() {
@@ -58,6 +60,7 @@ public class DataDstWriterNode {
     static public class DataDstOneofExt {
         public String description = null;
         public String plainSeparator = null;
+        public boolean notNull = false;
     }
 
     static public class DataDstMessageExtUE {
@@ -167,6 +170,22 @@ public class DataDstWriterNode {
             }
 
             return SPECIAL_MESSAGE_TYPE.NONE;
+        }
+
+        public ArrayList<String> getUniqueTags() {
+            if (this.extension == null) {
+                return null;
+            }
+
+            return this.extension.uniqueTags;
+        }
+
+        public boolean isNotNull() {
+            if (this.extension == null) {
+                return false;
+            }
+
+            return this.extension.notNull;
         }
 
         public boolean isRequired() {
@@ -318,6 +337,14 @@ public class DataDstWriterNode {
                 return Integer.compare(l.getIndex(), r.getIndex());
             });
             return this.sortedFields;
+        }
+
+        public boolean isNotNull() {
+            if (this.extension == null) {
+                return false;
+            }
+
+            return this.extension.notNull;
         }
     }
 
@@ -482,6 +509,26 @@ public class DataDstWriterNode {
         public CHILD_NODE_TYPE mode = CHILD_NODE_TYPE.STANDARD;
         public Object rawDescriptor = null;
         public ArrayList<DataDstWriterNode> nodes = null;
+
+        public boolean isNotNull() {
+            if (this.innerFieldDesc != null) {
+                return this.innerFieldDesc.isNotNull();
+            }
+
+            if (this.innerOneofDesc != null) {
+                return this.innerOneofDesc.isNotNull();
+            }
+
+            return false;
+        }
+
+        public ArrayList<String> getUniqueTags() {
+            if (this.innerFieldDesc == null) {
+                return null;
+            }
+
+            return this.innerFieldDesc.getUniqueTags();
+        }
 
         public boolean isRequired() {
             return this.innerFieldDesc != null && this.innerFieldDesc.isRequired();

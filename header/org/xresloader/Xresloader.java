@@ -12,6 +12,8 @@ public final class Xresloader {
     registry.add(org.xresloader.Xresloader.msgRequireMappingAll);
     registry.add(org.xresloader.Xresloader.msgSeparator);
     registry.add(org.xresloader.Xresloader.verifier);
+    registry.add(org.xresloader.Xresloader.fieldUniqueTag);
+    registry.add(org.xresloader.Xresloader.fieldNotNull);
     registry.add(org.xresloader.Xresloader.fieldDescription);
     registry.add(org.xresloader.Xresloader.fieldAlias);
     registry.add(org.xresloader.Xresloader.fieldRatio);
@@ -20,6 +22,7 @@ public final class Xresloader {
     registry.add(org.xresloader.Xresloader.fieldOriginValue);
     registry.add(org.xresloader.Xresloader.oneofDescription);
     registry.add(org.xresloader.Xresloader.oneofSeparator);
+    registry.add(org.xresloader.Xresloader.oneofNotNull);
     registry.add(org.xresloader.Xresloader.enumDescription);
     registry.add(org.xresloader.Xresloader.enumvDescription);
     registry.add(org.xresloader.Xresloader.enumAlias);
@@ -104,6 +107,36 @@ public final class Xresloader {
       java.lang.String> verifier = com.google.protobuf.GeneratedMessage
           .newFileScopedGeneratedExtension(
         java.lang.String.class,
+        null);
+  public static final int FIELD_UNIQUE_TAG_FIELD_NUMBER = 1002;
+  /**
+   * <pre>
+   * 唯一性检测Tag，所有tag相同的字段会组合刀一起检查唯一性
+   * </pre>
+   *
+   * <code>extend .google.protobuf.FieldOptions { ... }</code>
+   */
+  public static final
+    com.google.protobuf.GeneratedMessage.GeneratedExtension<
+      com.google.protobuf.DescriptorProtos.FieldOptions,
+      java.util.List<java.lang.String>> fieldUniqueTag = com.google.protobuf.GeneratedMessage
+          .newFileScopedGeneratedExtension(
+        java.lang.String.class,
+        null);
+  public static final int FIELD_NOT_NULL_FIELD_NUMBER = 1003;
+  /**
+   * <pre>
+   * 如果配置了字段映射，忽略此项为空的行
+   * </pre>
+   *
+   * <code>extend .google.protobuf.FieldOptions { ... }</code>
+   */
+  public static final
+    com.google.protobuf.GeneratedMessage.GeneratedExtension<
+      com.google.protobuf.DescriptorProtos.FieldOptions,
+      java.lang.Boolean> fieldNotNull = com.google.protobuf.GeneratedMessage
+          .newFileScopedGeneratedExtension(
+        java.lang.Boolean.class,
         null);
   public static final int FIELD_DESCRIPTION_FIELD_NUMBER = 1011;
   /**
@@ -226,6 +259,21 @@ public final class Xresloader {
           .newFileScopedGeneratedExtension(
         java.lang.String.class,
         null);
+  public static final int ONEOF_NOT_NULL_FIELD_NUMBER = 1003;
+  /**
+   * <pre>
+   * 如果配置了字段映射，忽略此项为空的行
+   * </pre>
+   *
+   * <code>extend .google.protobuf.OneofOptions { ... }</code>
+   */
+  public static final
+    com.google.protobuf.GeneratedMessage.GeneratedExtension<
+      com.google.protobuf.DescriptorProtos.OneofOptions,
+      java.lang.Boolean> oneofNotNull = com.google.protobuf.GeneratedMessage
+          .newFileScopedGeneratedExtension(
+        java.lang.Boolean.class,
+        null);
   public static final int ENUM_DESCRIPTION_FIELD_NUMBER = 1001;
   /**
    * <pre>
@@ -288,23 +336,28 @@ public final class Xresloader {
       "mapping_all\022\037.google.protobuf.MessageOpt" +
       "ions\030\363\007 \001(\010:7\n\rmsg_separator\022\037.google.pr" +
       "otobuf.MessageOptions\030\364\007 \001(\t:0\n\010verifier" +
-      "\022\035.google.protobuf.FieldOptions\030\351\007 \001(\t:9" +
-      "\n\021field_description\022\035.google.protobuf.Fi" +
-      "eldOptions\030\363\007 \001(\t:3\n\013field_alias\022\035.googl" +
-      "e.protobuf.FieldOptions\030\364\007 \003(\t:3\n\013field_" +
-      "ratio\022\035.google.protobuf.FieldOptions\030\365\007 " +
-      "\001(\005:7\n\017field_separator\022\035.google.protobuf" +
-      ".FieldOptions\030\366\007 \001(\t:6\n\016field_required\022\035" +
-      ".google.protobuf.FieldOptions\030\367\007 \001(\010::\n\022" +
-      "field_origin_value\022\035.google.protobuf.Fie" +
-      "ldOptions\030\370\007 \001(\t:9\n\021oneof_description\022\035." +
-      "google.protobuf.OneofOptions\030\351\007 \001(\t:7\n\017o" +
-      "neof_separator\022\035.google.protobuf.OneofOp" +
-      "tions\030\352\007 \001(\t:7\n\020enum_description\022\034.googl" +
-      "e.protobuf.EnumOptions\030\351\007 \001(\t:=\n\021enumv_d" +
-      "escription\022!.google.protobuf.EnumValueOp" +
-      "tions\030\351\007 \001(\t:6\n\nenum_alias\022!.google.prot" +
-      "obuf.EnumValueOptions\030\352\007 \003(\tb\006proto3"
+      "\022\035.google.protobuf.FieldOptions\030\351\007 \001(\t:8" +
+      "\n\020field_unique_tag\022\035.google.protobuf.Fie" +
+      "ldOptions\030\352\007 \003(\t:6\n\016field_not_null\022\035.goo" +
+      "gle.protobuf.FieldOptions\030\353\007 \001(\010:9\n\021fiel" +
+      "d_description\022\035.google.protobuf.FieldOpt" +
+      "ions\030\363\007 \001(\t:3\n\013field_alias\022\035.google.prot" +
+      "obuf.FieldOptions\030\364\007 \003(\t:3\n\013field_ratio\022" +
+      "\035.google.protobuf.FieldOptions\030\365\007 \001(\005:7\n" +
+      "\017field_separator\022\035.google.protobuf.Field" +
+      "Options\030\366\007 \001(\t:6\n\016field_required\022\035.googl" +
+      "e.protobuf.FieldOptions\030\367\007 \001(\010::\n\022field_" +
+      "origin_value\022\035.google.protobuf.FieldOpti" +
+      "ons\030\370\007 \001(\t:9\n\021oneof_description\022\035.google" +
+      ".protobuf.OneofOptions\030\351\007 \001(\t:7\n\017oneof_s" +
+      "eparator\022\035.google.protobuf.OneofOptions\030" +
+      "\352\007 \001(\t:6\n\016oneof_not_null\022\035.google.protob" +
+      "uf.OneofOptions\030\353\007 \001(\010:7\n\020enum_descripti" +
+      "on\022\034.google.protobuf.EnumOptions\030\351\007 \001(\t:" +
+      "=\n\021enumv_description\022!.google.protobuf.E" +
+      "numValueOptions\030\351\007 \001(\t:6\n\nenum_alias\022!.g" +
+      "oogle.protobuf.EnumValueOptions\030\352\007 \003(\tb\006" +
+      "proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
@@ -316,17 +369,20 @@ public final class Xresloader {
     msgRequireMappingAll.internalInit(descriptor.getExtensions().get(2));
     msgSeparator.internalInit(descriptor.getExtensions().get(3));
     verifier.internalInit(descriptor.getExtensions().get(4));
-    fieldDescription.internalInit(descriptor.getExtensions().get(5));
-    fieldAlias.internalInit(descriptor.getExtensions().get(6));
-    fieldRatio.internalInit(descriptor.getExtensions().get(7));
-    fieldSeparator.internalInit(descriptor.getExtensions().get(8));
-    fieldRequired.internalInit(descriptor.getExtensions().get(9));
-    fieldOriginValue.internalInit(descriptor.getExtensions().get(10));
-    oneofDescription.internalInit(descriptor.getExtensions().get(11));
-    oneofSeparator.internalInit(descriptor.getExtensions().get(12));
-    enumDescription.internalInit(descriptor.getExtensions().get(13));
-    enumvDescription.internalInit(descriptor.getExtensions().get(14));
-    enumAlias.internalInit(descriptor.getExtensions().get(15));
+    fieldUniqueTag.internalInit(descriptor.getExtensions().get(5));
+    fieldNotNull.internalInit(descriptor.getExtensions().get(6));
+    fieldDescription.internalInit(descriptor.getExtensions().get(7));
+    fieldAlias.internalInit(descriptor.getExtensions().get(8));
+    fieldRatio.internalInit(descriptor.getExtensions().get(9));
+    fieldSeparator.internalInit(descriptor.getExtensions().get(10));
+    fieldRequired.internalInit(descriptor.getExtensions().get(11));
+    fieldOriginValue.internalInit(descriptor.getExtensions().get(12));
+    oneofDescription.internalInit(descriptor.getExtensions().get(13));
+    oneofSeparator.internalInit(descriptor.getExtensions().get(14));
+    oneofNotNull.internalInit(descriptor.getExtensions().get(15));
+    enumDescription.internalInit(descriptor.getExtensions().get(16));
+    enumvDescription.internalInit(descriptor.getExtensions().get(17));
+    enumAlias.internalInit(descriptor.getExtensions().get(18));
     com.google.protobuf.DescriptorProtos.getDescriptor();
   }
 

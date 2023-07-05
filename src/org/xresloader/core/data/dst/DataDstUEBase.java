@@ -791,8 +791,10 @@ public abstract class DataDstUEBase extends DataDstJava {
     }
 
     protected final void build_data(Object buildObj, DataDstImpl compiler) throws ConvException, IOException {
+        DataTableContext tableContext = new DataTableContext();
+
         while (DataSrcImpl.getOurInstance().nextTable()) {
-            DataDstTableContent table = buildCurrentTable(compiler);
+            DataDstTableContent table = buildCurrentTable(compiler, tableContext);
             if (table == null) {
                 continue;
             }
@@ -855,6 +857,11 @@ public abstract class DataDstUEBase extends DataDstJava {
 
             // 写出导出文件
             writeImportSettings(codeInfo);
+        }
+
+        String validateResult = tableContext.checkUnique();
+        if (validateResult != null && !validateResult.isEmpty()) {
+            throw new ConvException(validateResult);
         }
     }
 

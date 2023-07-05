@@ -161,7 +161,7 @@
     },
     {
         "EnumType": 0,
-        "Id": 50005,
+        "Id": 50004,
         "Item": {
             "ItemCount": 0,
             "ItemId": 0,
@@ -169,15 +169,16 @@
             "NestedEnumType": 0,
             "NestedNote": ""
         },
-        "Name": 5000505,
+        "Name": 5000406,
         "Note": "",
-        "Process": 5,
+        "Process": 6,
+        "Reward": "Note",
         "Rule": {
             "Nested": "",
             "NestedEnumType": 0,
             "NestedNote": "",
-            "RuleId": 551,
-            "RuleParam": 552
+            "RuleId": 561,
+            "RuleParam": 562
         },
         "SpecifyField": {
             "Nested": 0,

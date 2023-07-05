@@ -3,7 +3,6 @@ package org.xresloader.core.data.dst;
 import com.google.protobuf.*;
 import com.google.protobuf.Descriptors.FieldDescriptor.JavaType;
 import org.apache.commons.codec.binary.Hex;
-import org.apache.poi.hpsf.Array;
 import org.xresloader.Xresloader;
 import org.xresloader.core.ProgramOptions;
 import org.xresloader.core.data.dst.DataDstWriterNode.DataDstChildrenNode;
@@ -15,6 +14,7 @@ import org.xresloader.core.data.et.DataETProcessor;
 import org.xresloader.core.data.src.DataContainer;
 import org.xresloader.core.data.src.DataSrcImpl;
 import org.xresloader.core.data.vfy.*;
+import org.xresloader.core.data.vfy.DataVerifyImpl.ValidatorTokens;
 import org.xresloader.core.engine.IdentifyDescriptor;
 import org.xresloader.core.scheme.SchemeConf;
 import org.xresloader.pb.PbHeaderV3;
@@ -26,6 +26,7 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.time.Instant;
 import java.util.*;
+import java.util.regex.Pattern;
 
 import static com.google.protobuf.Descriptors.FieldDescriptor.JavaType.MESSAGE;
 

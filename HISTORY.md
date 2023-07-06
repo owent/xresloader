@@ -2,6 +2,8 @@
 
 ## Unrelease
 
+1. 插件重命名 `verifier` -> `validator`
+
 ## 2.14.0-rc2
 
 1. `org.xresloader.field_alias` 和 `org.xresloader.enum_alias` 允许多个别名

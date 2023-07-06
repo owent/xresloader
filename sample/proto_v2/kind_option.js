@@ -118,7 +118,7 @@ exports.files = [
             name : "id",
             number : 2,
             options : {
-              verifier : "0-99999"
+              validator : "0-99999"
             },
             type_name : "UINT32"
           }
@@ -376,7 +376,7 @@ exports.files = [
             number : 3,
             options : {
               field_description : "Refer to cost_type",
-              verifier : "cost_type"
+              validator : "cost_type"
             },
             type_name : "UINT32"
           },

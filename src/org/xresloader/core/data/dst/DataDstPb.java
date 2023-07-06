@@ -372,11 +372,21 @@ public class DataDstPb extends DataDstImpl {
     static private void setup_extension(DataDstTypeDescriptor parent_message, DataDstFieldDescriptor child_field,
             Descriptors.FieldDescriptor fd) {
         String verifierExpr = null;
-        if (fd.getOptions().hasExtension(Xresloader.verifier)) {
-            verifierExpr = fd.getOptions().getExtension(Xresloader.verifier);
-            child_field.mutableExtension().verifier = verifierExpr;
+        if (fd.getOptions().hasExtension(Xresloader.validator)) {
+            verifierExpr = fd.getOptions().getExtension(Xresloader.validator);
         }
-        LinkedList<DataVerifyImpl> gen = setup_verifier(verifierExpr, fd);
+        // 兼容旧版本
+        if (fd.getOptions().hasExtension(Xresloader.verifier)) {
+            if (verifierExpr == null) {
+                verifierExpr = fd.getOptions().getExtension(Xresloader.verifier);
+            } else {
+                verifierExpr = String.join("|", verifierExpr, fd.getOptions().getExtension(Xresloader.verifier));
+            }
+        }
+        if (verifierExpr != null && !verifierExpr.isEmpty()) {
+            child_field.mutableExtension().validator = verifierExpr;
+        }
+        LinkedList<DataVerifyImpl> gen = setup_verifier(null, verifierExpr, fd);
         if (gen != null && !gen.isEmpty()) {
             for (DataVerifyImpl vfy : gen) {
                 child_field.addVerifier(vfy);
@@ -475,7 +485,7 @@ public class DataDstPb extends DataDstImpl {
     static private void setup_extension(DataDstTypeDescriptor parent_message, DataDstOneofDescriptor child_field,
             Descriptors.Descriptor container,
             Descriptors.OneofDescriptor fd) {
-        LinkedList<DataVerifyImpl> gen = setup_verifier(container, fd);
+        LinkedList<DataVerifyImpl> gen = setup_verifier(null, container, fd);
         if (gen != null && !gen.isEmpty()) {
             for (DataVerifyImpl vfy : gen) {
                 child_field.addVerifier(vfy);
@@ -497,9 +507,12 @@ public class DataDstPb extends DataDstImpl {
         }
     }
 
-    static private LinkedList<DataVerifyImpl> setup_verifier(Descriptors.Descriptor container,
+    static private LinkedList<DataVerifyImpl> setup_verifier(LinkedList<DataVerifyImpl> result,
+            Descriptors.Descriptor container,
             Descriptors.OneofDescriptor fd) {
-        LinkedList<DataVerifyImpl> ret = new LinkedList<DataVerifyImpl>();
+        if (result == null) {
+            result = new LinkedList<DataVerifyImpl>();
+        }
 
         String rule = String.format("%s.%s.%s", container.getFile().getPackage(), container.getName(), fd.getName());
         if (rule.length() > 0 && rule.charAt(0) == '.') {
@@ -509,16 +522,16 @@ public class DataDstPb extends DataDstImpl {
             DataVerifyImpl vfy = cachePbs.validator.getOrDefault(rule, null);
             // 命中缓存
             if (null != vfy) {
-                ret.add(vfy);
-                return ret;
+                result.add(vfy);
+                return result;
             }
         }
 
         DataVerifyPbOneof new_vfy = new DataVerifyPbOneof(fd);
         cachePbs.validator.put(rule, new_vfy);
-        ret.add(new_vfy);
+        result.add(new_vfy);
 
-        return ret;
+        return result;
     }
 
     static private DataVerifyImpl create_verifier(DataVerifyImpl.ValidatorTokens ruleObject) {
@@ -575,7 +588,8 @@ public class DataDstPb extends DataDstImpl {
         return null;
     }
 
-    static private LinkedList<DataVerifyImpl> setup_verifier(String verifier, Descriptors.FieldDescriptor fd) {
+    static private LinkedList<DataVerifyImpl> setup_verifier(LinkedList<DataVerifyImpl> result, String verifier,
+            Descriptors.FieldDescriptor fd) {
         if (verifier == null) {
             verifier = "";
         } else {
@@ -594,7 +608,9 @@ public class DataDstPb extends DataDstImpl {
             return null;
         }
 
-        LinkedList<DataVerifyImpl> ret = new LinkedList<DataVerifyImpl>();
+        if (result == null) {
+            result = new LinkedList<DataVerifyImpl>();
+        }
         boolean containsAutoValidator = false;
 
         if (verifier != null && !verifier.isEmpty()) {
@@ -609,7 +625,7 @@ public class DataDstPb extends DataDstImpl {
                 }
 
                 if (vfy != null) {
-                    ret.add(vfy);
+                    result.add(vfy);
 
                     if (autoValidatorRule != null && ruleObject.name.equals(autoValidatorRule)) {
                         containsAutoValidator = true;
@@ -645,11 +661,11 @@ public class DataDstPb extends DataDstImpl {
             }
 
             if (vfy != null) {
-                ret.add(vfy);
+                result.add(vfy);
             }
         }
 
-        return ret;
+        return result;
     }
 
     private void setup_node_identify(DataDstWriterNode node, DataDstChildrenNode child, IdentifyDescriptor identify,
@@ -660,7 +676,7 @@ public class DataDstPb extends DataDstImpl {
         identify.resetVerifier();
 
         if (null != identify.dataSourceFieldVerifier && !identify.dataSourceFieldVerifier.isEmpty()) {
-            LinkedList<DataVerifyImpl> gen = setup_verifier(identify.dataSourceFieldVerifier, fd);
+            LinkedList<DataVerifyImpl> gen = setup_verifier(null, identify.dataSourceFieldVerifier, fd);
             if (gen != null && !gen.isEmpty()) {
                 for (DataVerifyImpl vfy : gen) {
                     identify.addVerifier(vfy);

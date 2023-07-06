@@ -40,7 +40,7 @@ public class DataDstWriterNode {
 
     static public class DataDstFieldExt {
         public String description = null;
-        public String verifier = null;
+        public String validator = null;
         public String plainSeparator = null;
         public int ratio = 1;
         public boolean notNull = false;

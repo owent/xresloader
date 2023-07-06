@@ -37,7 +37,7 @@ message role_upgrade_cfg {
 
     uint32 Id        = 1 [ (org.xresloader.ue.key_tag) = 1000 ];
     uint32 Level     = 2 [ (org.xresloader.ue.key_tag) = 1 ];
-    uint32 CostType  = 3 [ (org.xresloader.verifier) = "cost_type", (org.xresloader.field_description) = "Refer to cost_type" ];
+    uint32 CostType  = 3 [ (org.xresloader.validator) = "cost_type", (org.xresloader.field_description) = "Refer to cost_type" ];
     int64  CostValue = 4;
     int32  ScoreAdd  = 5;
 }
@@ -154,7 +154,7 @@ message keep_or_strip_empty_list_cfg {
 
 message combine_id {
     uint32 prefix = 1;
-    uint32 id     = 2 [ (org.xresloader.verifier) = "0-99999" ];
+    uint32 id     = 2 [ (org.xresloader.validator) = "0-99999" ];
 }
 
 message process_by_script {

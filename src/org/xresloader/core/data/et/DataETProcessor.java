@@ -54,7 +54,7 @@ public class DataETProcessor extends DataDstJava {
                 engineInitSucceed = true;
             }
         } catch (ScriptException | FileNotFoundException e) {
-            throw new ConvException(e.toString());
+            throw new ConvException(e.getMessage());
         }
         invocable = null;
         if (engineInitSucceed) {
@@ -68,7 +68,7 @@ public class DataETProcessor extends DataDstJava {
                 invocable.invokeFunction("initDataSource");
             }
         } catch (NoSuchMethodException | ScriptException e) {
-            throw (new ConvException(e.toString()));
+            throw (new ConvException(e.getMessage()));
         }
     }
 
@@ -219,7 +219,7 @@ public class DataETProcessor extends DataDstJava {
             } catch (Exception e) {
                 e.printStackTrace();
                 throw new ConvException(
-                        String.format("FillMap2PbMsg failed\nFullName: %s\n%s\n", fd.getFullName(), e.toString()));
+                        String.format("FillMap2PbMsg failed\nFullName: %s\n%s\n", fd.getFullName(), e.getMessage()));
             }
         }
     }
@@ -261,7 +261,7 @@ public class DataETProcessor extends DataDstJava {
                     throw new ConvException("Script return " + ret);
                 }
             } catch (ScriptException | NoSuchMethodException e) {
-                throw new ConvException(e.toString());
+                throw new ConvException(e.getMessage());
             }
         }
         return dumpSucceed;

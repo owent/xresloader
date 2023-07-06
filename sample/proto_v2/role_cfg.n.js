@@ -5,7 +5,7 @@ exports.role_cfg_header = {
   count : 7,
   data_source : [
     {
-      file : "./资源转换示例.xlsx",
+      file : "资源转换示例.xlsx",
       sheet : "kind"
     }
   ],

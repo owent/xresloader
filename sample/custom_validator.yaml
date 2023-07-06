@@ -1,0 +1,13 @@
+validator:
+  - name: "custom_rule1"
+    rules:
+      - custom_rule2
+  - name: "custom_rule2"
+    rules:
+      - cost_type
+  - name: "custom_rule3"
+    rules:
+      - InTableColumn("资源转换示例.xlsx", "kind", 3, 2, "0Id")
+  - name: "custom_rule4"
+    rules:
+      - InText("intext-validator.txt")

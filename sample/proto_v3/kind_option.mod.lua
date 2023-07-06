@@ -143,6 +143,7 @@ local const_res = {
                   "unique_tag",
                 },
                 key_tag = 100,
+                validator = "custom_rule4",
               },
               type_name = "UINT32",
             },
@@ -373,7 +374,7 @@ local const_res = {
               number = 3,
               options = {
                 field_description = "Refer to cost_type",
-                validator = "cost_type",
+                validator = "custom_rule1",
               },
               type_name = "UINT32",
             },
@@ -382,6 +383,7 @@ local const_res = {
               number = 1,
               options = {
                 key_tag = 1000,
+                validator = "custom_rule3",
               },
               type_name = "UINT32",
             },

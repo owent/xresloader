@@ -786,7 +786,7 @@ class role_upgrade_cfg final :
     kCostTypeFieldNumber = 3,
     kScoreAddFieldNumber = 5,
   };
-  // optional uint32 Id = 1 [(.org.xresloader.ue.key_tag) = 1000];
+  // optional uint32 Id = 1 [(.org.xresloader.validator) = "custom_rule3", (.org.xresloader.ue.key_tag) = 1000];
   bool has_id() const;
   void clear_id() ;
   ::uint32_t id() const;
@@ -819,7 +819,7 @@ class role_upgrade_cfg final :
   void _internal_set_costvalue(::int64_t value);
 
   public:
-  // optional uint32 CostType = 3 [(.org.xresloader.verifier) = "cost_type", (.org.xresloader.field_description) = "Refer to cost_type"];
+  // optional uint32 CostType = 3 [(.org.xresloader.validator) = "custom_rule1", (.org.xresloader.field_description) = "Refer to cost_type"];
   bool has_costtype() const;
   void clear_costtype() ;
   ::uint32_t costtype() const;
@@ -2297,7 +2297,7 @@ class event_cfg final :
   void unsafe_arena_set_allocated_specify_field(
       ::event_rule_item* specify_field);
   ::event_rule_item* unsafe_arena_release_specify_field();
-  // optional uint32 id = 1 [(.org.xresloader.field_unique_tag) = "unique_tag", (.org.xresloader.field_not_null) = true, (.org.xresloader.ue.key_tag) = 100];
+  // optional uint32 id = 1 [(.org.xresloader.validator) = "custom_rule4", (.org.xresloader.field_unique_tag) = "unique_tag", (.org.xresloader.field_not_null) = true, (.org.xresloader.ue.key_tag) = 100];
   bool has_id() const;
   void clear_id() ;
   ::uint32_t id() const;
@@ -2829,7 +2829,7 @@ class combine_id final :
   void _internal_set_prefix(::uint32_t value);
 
   public:
-  // optional uint32 id = 2 [(.org.xresloader.verifier) = "0-99999"];
+  // optional uint32 id = 2 [(.org.xresloader.validator) = "0-99999"];
   bool has_id() const;
   void clear_id() ;
   ::uint32_t id() const;
@@ -4490,7 +4490,7 @@ role_cfg::_internal_mutable_origin_duration_arr() {
 
 // role_upgrade_cfg
 
-// optional uint32 Id = 1 [(.org.xresloader.ue.key_tag) = 1000];
+// optional uint32 Id = 1 [(.org.xresloader.validator) = "custom_rule3", (.org.xresloader.ue.key_tag) = 1000];
 inline bool role_upgrade_cfg::has_id() const {
   bool value = (_impl_._has_bits_[0] & 0x00000001u) != 0;
   return value;
@@ -4540,7 +4540,7 @@ inline void role_upgrade_cfg::_internal_set_level(::uint32_t value) {
   _impl_.level_ = value;
 }
 
-// optional uint32 CostType = 3 [(.org.xresloader.verifier) = "cost_type", (.org.xresloader.field_description) = "Refer to cost_type"];
+// optional uint32 CostType = 3 [(.org.xresloader.validator) = "custom_rule1", (.org.xresloader.field_description) = "Refer to cost_type"];
 inline bool role_upgrade_cfg::has_costtype() const {
   bool value = (_impl_._has_bits_[0] & 0x00000008u) != 0;
   return value;
@@ -5595,7 +5595,7 @@ inline event_rule_item::NestedCase event_rule_item::nested_case() const {
 
 // event_cfg
 
-// optional uint32 id = 1 [(.org.xresloader.field_unique_tag) = "unique_tag", (.org.xresloader.field_not_null) = true, (.org.xresloader.ue.key_tag) = 100];
+// optional uint32 id = 1 [(.org.xresloader.validator) = "custom_rule4", (.org.xresloader.field_unique_tag) = "unique_tag", (.org.xresloader.field_not_null) = true, (.org.xresloader.ue.key_tag) = 100];
 inline bool event_cfg::has_id() const {
   bool value = (_impl_._has_bits_[0] & 0x00000004u) != 0;
   return value;
@@ -6428,7 +6428,7 @@ inline void combine_id::_internal_set_prefix(::uint32_t value) {
   _impl_.prefix_ = value;
 }
 
-// optional uint32 id = 2 [(.org.xresloader.verifier) = "0-99999"];
+// optional uint32 id = 2 [(.org.xresloader.validator) = "0-99999"];
 inline bool combine_id::has_id() const {
   bool value = (_impl_._has_bits_[0] & 0x00000002u) != 0;
   return value;

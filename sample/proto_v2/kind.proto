@@ -35,9 +35,9 @@ message role_upgrade_cfg {
     option (org.xresloader.ue.helper)       = "helper";
     option (org.xresloader.msg_description) = "Test role_upgrade_cfg with multi keys";
 
-    optional uint32 Id        = 1 [ (org.xresloader.ue.key_tag) = 1000 ];
+    optional uint32 Id        = 1 [ (org.xresloader.ue.key_tag) = 1000, (org.xresloader.validator) = "custom_rule3" ];
     optional uint32 Level     = 2 [ (org.xresloader.ue.key_tag) = 1 ];
-    optional uint32 CostType  = 3 [ (org.xresloader.validator) = "cost_type", (org.xresloader.field_description) = "Refer to cost_type" ];
+    optional uint32 CostType  = 3 [ (org.xresloader.validator) = "custom_rule1", (org.xresloader.field_description) = "Refer to cost_type" ];
     optional int64  CostValue = 4;
     optional int32  ScoreAdd  = 5;
 }
@@ -98,7 +98,7 @@ message event_cfg {
     option (org.xresloader.ue.helper)       = "helper";
     option (org.xresloader.msg_description) = "Test event_cfg with oneof fields";
 
-    optional uint32 id      = 1 [ (org.xresloader.ue.key_tag) = 100, (org.xresloader.field_not_null) = true, (org.xresloader.field_unique_tag) = "unique_tag" ];
+    optional uint32 id      = 1 [ (org.xresloader.ue.key_tag) = 100, (org.xresloader.field_not_null) = true, (org.xresloader.field_unique_tag) = "unique_tag", (org.xresloader.validator) = "custom_rule4" ];
     optional uint32 process = 2 [ (org.xresloader.ue.key_tag) = 1, (org.xresloader.field_not_null) = true, (org.xresloader.field_unique_tag) = "unique_tag" ];
 
     optional event_rule_item rule          = 6;

@@ -119,6 +119,7 @@ echo "
 | --javascript-export         | 导出javascript数据的模式        | 可选项(nodejs: 使用兼容nodejs的exports, amd: 使用兼容amd的define, 其他: 写入全局(window或global))        |
 | --javascript-global         | 导出javascript全局空间          | 导出数据到全局时，可以指定写入的名字空间                                                                 |
 | --ignore-unknown-dependency | 忽略未知的依赖项                | 忽略未知的输入协议的依赖项(>=2.9.0版本)                                                                  |
+| --validator-rules           | 指定自定义验证器配置文件路径    | 指定自定义验证器配置文件路径                                                                             |
 
 ### 协议类型
 
@@ -276,10 +277,25 @@ echo "
 
 Excel里的Key使用@后缀的字段名，@后面的部分都属于验证器。如果一个字段使用了验证器，验证器可以使用以下值:
 
++ 函数: `InText("文件名"[, 第几个字段[, \"字段分隔正则表达式\"]])` : 从文本文件（UTF-8编码）,可以指定读第几个字段和用于字段分隔的正则表达式
++ 函数: `InTableColumn("文件名", "Sheet名", 从第几行开始, 从第几列开始)` : 从Excel数据列读取可用值,指定数据行和数据列
++ 函数: `InTableColumn("文件名", "Sheet名", 从第几行开始, KeyRow, KeyValue)` : 从Excel数据列读取可用值,指定数据行并通过某一行的的值获取数据列
++ 自定义验证器名（通过 `--validator-rules` 加载）
 + 协议类型（对应protobuf的message里的每个field，excel里可以填field number或者field name）
 + 枚举类型（对应protobuf的enum里的每个number，excel里可以填enum number或者enum name）
-+ 值范围A-B（比如0-1234）
++ 值范围: `A-B`（比如 `0-1234` ）或 `>=A`（比如 `>=1234` ）或 `<=A`（比如 `<=1234` ）或 `>A`（比如 `>1234` ）或 `<A`（比如 `<1234` ）
 + 多个验证器可以使用“或”符号（“|”)来分隔开， 任意一个验证器满足条件则认为时合法数据(如: 100-200|2000-3000|test_msg_verifier)
+
+自定义验证器的配置格式(YAML):
+
+```yaml
+validator:
+  - name: "validator name"
+    rules:
+      - validator_rule1
+      - validator_rule2
+      - ...
+```
 
 详见 [sample/资源转换示例.xlsx](sample/资源转换示例.xlsx) 的upgrade_10001和upgrade_10002表
 

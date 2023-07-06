@@ -21,6 +21,10 @@ public abstract class DataVerifyImpl {
         name = _name;
     }
 
+    protected DataVerifyImpl(ValidatorTokens tokens) {
+        name = tokens.name;
+    }
+
     public boolean get(double number, DataVerifyResult res) {
         // 0 值永久有效
         if (0 == number) {
@@ -81,6 +85,22 @@ public abstract class DataVerifyImpl {
         return name;
     }
 
+    public String getName() {
+        return name;
+    }
+
+    static public String collectValidatorNames(List<DataVerifyImpl> verifyEngine) {
+        StringBuffer sb = new StringBuffer();
+        for (DataVerifyImpl vfy : verifyEngine) {
+            if (sb.length() > 0) {
+                sb.append("|");
+            }
+            sb.append(vfy.getName());
+        }
+
+        return sb.toString();
+    }
+
     static public long getAndVerify(List<DataVerifyImpl> verifyEngine, String path, int n) throws ConvException {
         return getAndVerify(verifyEngine, path, (long) n);
     }
@@ -99,14 +119,38 @@ public abstract class DataVerifyImpl {
 
             for (DataVerifyImpl vfy : verifyEngine) {
                 if (vfy.get(n, verify_cache)) {
-                    return verify_cache.value;
+                    if (verify_cache.value == null) {
+                        return 0;
+                    }
+                    if (verify_cache.value instanceof Double) {
+                        return (double) verify_cache.value;
+                    }
+                    if (verify_cache.value instanceof Long) {
+                        return ((Long) verify_cache.value).doubleValue();
+                    }
+                    return Double.valueOf(verify_cache.value.toString());
                 }
             }
         } catch (Exception e) {
-            throw new ConvException(String.format("Check %g for %s failed, %s", n, path, e.getMessage()));
+            String value;
+            if (n == (long) n) {
+                value = String.format("%d", (long) n);
+            } else {
+                value = String.format("%g", n);
+            }
+            throw new ConvException(String.format("Check %s for %s with validator(s) %s failed, %s", value, path,
+                    collectValidatorNames(verifyEngine), e.getMessage()));
         }
 
-        throw new ConvException(String.format("Check %g for %s failed, check data failed.", n, path));
+        String value;
+        if (n == (long) n) {
+            value = String.format("%d", (long) n);
+        } else {
+            value = String.format("%g", n);
+        }
+        throw new ConvException(
+                String.format("Check %s for %s with validator(s) %s failed, check data failed.", value, path,
+                        collectValidatorNames(verifyEngine)));
     }
 
     static public double getAndVerifyToDouble(List<DataVerifyImpl> verifyEngine, String path, String val)
@@ -144,14 +188,63 @@ public abstract class DataVerifyImpl {
 
             for (DataVerifyImpl vfy : verifyEngine) {
                 if (vfy.get(val, verify_cache)) {
-                    return verify_cache.value;
+                    if (verify_cache.value == null) {
+                        return 0;
+                    }
+                    if (verify_cache.value instanceof Double) {
+                        return (double) verify_cache.value;
+                    }
+                    if (verify_cache.value instanceof Long) {
+                        return ((Long) verify_cache.value).doubleValue();
+                    }
+                    return Double.valueOf(verify_cache.value.toString());
                 }
             }
         } catch (Exception e) {
-            throw new ConvException(String.format("Convert %s for %s failed, %s", val, path, e.getMessage()));
+            throw new ConvException(String.format("Convert %s for %s with validator(s) %s failed, %s", val, path,
+                    collectValidatorNames(verifyEngine), e.getMessage()));
         }
 
-        throw new ConvException(String.format("Convert %s for %s failed, check data failed.", val, path));
+        throw new ConvException(String.format("Convert %s for %s with validator(s) %s failed, check data failed.", val,
+                path, collectValidatorNames(verifyEngine)));
+    }
+
+    static public String getAndVerifyToString(List<DataVerifyImpl> verifyEngine, String path, String val)
+            throws ConvException {
+        try {
+            if (verifyEngine == null || verifyEngine.isEmpty()) {
+                return val;
+            }
+
+            DataVerifyResult verify_cache = new DataVerifyResult();
+
+            for (DataVerifyImpl vfy : verifyEngine) {
+                if (vfy.get(val, verify_cache)) {
+                    if (verify_cache.value == null) {
+                        return "";
+                    }
+                    if (verify_cache.value instanceof Double) {
+                        String value;
+                        if ((double) verify_cache.value == (long) ((double) verify_cache.value)) {
+                            value = String.format("%d", (long) ((double) verify_cache.value));
+                        } else {
+                            value = String.format("%g", (double) verify_cache.value);
+                        }
+                        return value;
+                    }
+                    if (verify_cache.value instanceof Long) {
+                        return ((Long) verify_cache.value).toString();
+                    }
+                    return verify_cache.value.toString();
+                }
+            }
+        } catch (Exception e) {
+            throw new ConvException(String.format("Convert %s for %s with validator(s) %s failed, %s", val, path,
+                    collectValidatorNames(verifyEngine), e.getMessage()));
+        }
+
+        throw new ConvException(String.format("Convert %s for %s with validator(s) %s failed, check data failed.", val,
+                path, collectValidatorNames(verifyEngine)));
     }
 
     static public long getAndVerifyToLong(List<DataVerifyImpl> verifyEngine, String path, String val)

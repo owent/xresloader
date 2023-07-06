@@ -1,8 +1,10 @@
 package org.xresloader.core.data.src;
 
+import org.xresloader.core.ProgramOptions;
 import org.xresloader.core.data.err.ConvException;
 import org.xresloader.core.engine.IdentifyDescriptor;
 
+import java.io.File;
 import java.lang.reflect.InvocationTargetException;
 import java.util.HashMap;
 import java.util.LinkedList;
@@ -170,5 +172,28 @@ public abstract class DataSrcImpl {
 
         return !item.equals("0") && !item.equals("0.0") && !item.equalsIgnoreCase("false")
                 && !item.equalsIgnoreCase("no") && !item.equalsIgnoreCase("disable");
+    }
+
+    public static File getDataFile(String filePath) {
+        File file = new File(filePath);
+        if (!file.isAbsolute()) {
+            File fallbackFile = file;
+            for (String testFileDir : ProgramOptions.getInstance().dataSourceDirectory) {
+                file = new File(testFileDir, filePath);
+                if (file.exists()) {
+                    return file;
+                }
+            }
+
+            if (fallbackFile.exists()) {
+                return fallbackFile;
+            }
+        }
+
+        if (file.exists()) {
+            return file;
+        }
+
+        return null;
     }
 }

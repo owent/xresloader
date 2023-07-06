@@ -2,5 +2,6 @@ package org.xresloader.core.data.vfy;
 
 public class DataVerifyResult {
     public boolean success = false;
-    public double value = 0;
+    // Only can be String, Double or Long
+    public Object value = null;
 }

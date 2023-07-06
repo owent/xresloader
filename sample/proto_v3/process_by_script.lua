@@ -5,11 +5,11 @@ return {
     count = 20,
     data_source = {
       {
-        file = "./资源转换示例.xlsx",
+        file = "资源转换示例.xlsx",
         sheet = "process_by_script1",
       },
       {
-        file = "./资源转换示例.xlsx",
+        file = "资源转换示例.xlsx",
         sheet = "process_by_script2",
       },
     },

@@ -2,6 +2,15 @@
 
 ## Unrelease
 
+## 2.14.0-rc3
+
+1. 插件重命名 `verifier` -> `validator`
+2. 增加函数验证器: `InText("文件名"[, 第几个字段[, \"字段分隔正则表达式\"]])` : 从文本文件（UTF-8编码）,可以指定读第几个字段和用于字段分隔的正则表达式
+3. 增加函数验证器: `InTableColumn("文件名", "Sheet名", 从第几行开始, 从第几列开始)` : 从Excel数据列读取可用值,指定数据行和数据列
+4. 增加函数验证器: `InTableColumn("文件名", "Sheet名", 从第几行开始, KeyRow, KeyValue)` : 从Excel数据列读取可用值,指定数据行并通过某一行的的值获取数据列
+5. 增加选项 `--validator-rules` 用于指定自定义验证器组合
+6. 增加自定义索引器缓存，缓存30000行以下的表格，加快读取速度
+
 ## 2.14.0-rc2
 
 1. `org.xresloader.field_alias` 和 `org.xresloader.enum_alias` 允许多个别名

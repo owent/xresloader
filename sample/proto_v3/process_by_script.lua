@@ -5,17 +5,17 @@ return {
     count = 20,
     data_source = {
       {
-        file = "./资源转换示例.xlsx",
+        file = "资源转换示例.xlsx",
         sheet = "process_by_script1",
       },
       {
-        file = "./资源转换示例.xlsx",
+        file = "资源转换示例.xlsx",
         sheet = "process_by_script2",
       },
     },
     data_ver = "1.0.0.0",
     hash_code = "sha256:fcc0bde151e4556a4dbea40a41b8e6394c46cb77b2c59cdaa1e365c642f9f0e2",
-    xres_ver = "2.14.0-rc2",
+    xres_ver = "2.14.0-rc3",
   },
   [2] = "process_by_script",
   process_by_script = {

@@ -15,26 +15,29 @@ parseInt = Integer.valueOf;
 var G = {};
 
 var mapSource2ID = {
-  "./资源转换示例.xlsx|process_by_script1": 1,
-  "./资源转换示例.xlsx|process_by_script2": 2,
+  "资源转换示例.xlsx|process_by_script1": 1,
+  "资源转换示例.xlsx|process_by_script2": 2,
 
-  "./资源转换示例-大文件.xlsx|process_by_script1": 1,
-  "./资源转换示例-大文件.xlsx|process_by_script2": 2,
-  "./资源转换示例-大文件.xlsx|process_by_script3": 3,
-  "./资源转换示例-大文件.xlsx|process_by_script4": 4,
-  "./资源转换示例-大文件.xlsx|process_by_script5": 5,
-  "./资源转换示例-大文件.xlsx|process_by_script6": 6,
-  "./资源转换示例-大文件.xlsx|process_by_script7": 7,
-  "./资源转换示例-大文件.xlsx|process_by_script8": 8,
+  "资源转换示例-大文件.xlsx|process_by_script1": 1,
+  "资源转换示例-大文件.xlsx|process_by_script2": 2,
+  "资源转换示例-大文件.xlsx|process_by_script3": 3,
+  "资源转换示例-大文件.xlsx|process_by_script4": 4,
+  "资源转换示例-大文件.xlsx|process_by_script5": 5,
+  "资源转换示例-大文件.xlsx|process_by_script6": 6,
+  "资源转换示例-大文件.xlsx|process_by_script7": 7,
+  "资源转换示例-大文件.xlsx|process_by_script8": 8,
 };
 
 function initDataSource() {
-  G.currentID =
-    mapSource2ID[
-      dataSrcImplInstance.getCurrentFileName() +
-        "|" +
-        dataSrcImplInstance.getCurrentTableName()
-    ];
+  var key =
+    dataSrcImplInstance.getCurrentFileName() +
+    "|" +
+    dataSrcImplInstance.getCurrentTableName();
+  if (mapSource2ID[key]) {
+    G.currentID = mapSource2ID[key];
+  } else {
+    G.currentID = mapSource2ID["./" + key];
+  }
 
   var curFileName = gOurInstance.getCurrentFileName();
   var curSheetName = gOurInstance.getCurrentTableName();

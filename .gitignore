@@ -32,3 +32,4 @@ hs_err_pid*
 /sample/gen_protocol_v2.gen.sh
 /sample/gen_protocol_v3.gen.sh
 /sample/*/large_file_test.*
+/sample/proto_*/xresloader.run.log

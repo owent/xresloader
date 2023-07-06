@@ -284,10 +284,19 @@ public abstract class DataDstImpl {
             return null;
         }
 
+        String item;
         if (DataSrcImpl.getOurInstance().isInitialized() && ProgramOptions.getInstance().enableStringMacro) {
-            return ExcelEngine.tryMacro(input.trim());
+            item = ExcelEngine.tryMacro(input.trim());
         } else {
-            return input.trim();
+            item = input.trim();
+        }
+
+        if (ident != null) {
+            return DataVerifyImpl.getAndVerifyToString(ident.getVerifier(), ident.name, item);
+        } else if (field != null) {
+            return DataVerifyImpl.getAndVerifyToString(field.getVerifier(), field.getName(), item);
+        } else {
+            return item;
         }
     }
 

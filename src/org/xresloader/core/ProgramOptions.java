@@ -53,6 +53,7 @@ public class ProgramOptions {
     public ListStripRule stripListRule = ListStripRule.STRIP_EMPTY_ALL;
     public int prettyIndent = 0;
     public boolean enableStdin = false;
+    public String[] customValidatorRules = null;
 
     private static String dataVersion = null;
     public String protoDumpFile = "";
@@ -103,6 +104,7 @@ public class ProgramOptions {
         stripListRule = ListStripRule.STRIP_EMPTY_ALL;
         prettyIndent = 0;
         enableStdin = false;
+        customValidatorRules = null;
         dataVersion = null;
         protoDumpFile = "";
         protoDumpType = ProtoDumpType.NONE;
@@ -216,6 +218,8 @@ public class ProgramOptions {
         options.addOption(null, "stdin", false, "enable read from stdin and convert more files.");
         options.addOption(null, "lua-global", false, "add data to _G if in lua mode when print const data");
         options.addOption(null, "lua-module", true, "module(MODULE_NAME, package.seeall) if in lua mode");
+        options.addOption(Option.builder().longOpt("validator-rules")
+                .desc("set file to load custom validator").hasArg().argName("FILE PATH").build());
 
         return options;
     }
@@ -457,6 +461,9 @@ public class ProgramOptions {
             enableFormular = true;
         }
 
+        // custom validator rule file
+        customValidatorRules = cmd.getOptionValues("validator-rules");
+
         return 0;
     }
 
@@ -471,7 +478,7 @@ public class ProgramOptions {
             properties.load(inCfg);
             inCfg.close();
         } catch (IOException e) {
-            ProgramOptions.getLoger().error("Get properties file application.properties failed.\n%s", e.toString());
+            ProgramOptions.getLoger().error("Get properties file application.properties failed.\n%s", e.getMessage());
         }
 
         return properties;
@@ -525,7 +532,7 @@ public class ProgramOptions {
         // File("log4j2.xml").toURI().toString());
         // } catch (Exception e) {
         // System.err.println(String.format("[ERROR] set
-        // -Dlog4j.configuration=log4j2.xml failed.\n%s", e.toString()));
+        // -Dlog4j.configuration=log4j2.xml failed.\n%s", e.getMessage()));
         // }
         String name = getProperties().getProperty("name", "xresloader");
 

@@ -1,7 +1,9 @@
 package org.xresloader.core.data.vfy;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.LinkedList;
 import java.util.List;
 
 import org.xresloader.core.data.err.ConvException;
@@ -17,6 +19,10 @@ public abstract class DataVerifyImpl {
 
     protected DataVerifyImpl(String _name) {
         name = _name;
+    }
+
+    protected DataVerifyImpl(ValidatorTokens tokens) {
+        name = tokens.name;
     }
 
     public boolean get(double number, DataVerifyResult res) {
@@ -79,6 +85,22 @@ public abstract class DataVerifyImpl {
         return name;
     }
 
+    public String getName() {
+        return name;
+    }
+
+    static public String collectValidatorNames(List<DataVerifyImpl> verifyEngine) {
+        StringBuffer sb = new StringBuffer();
+        for (DataVerifyImpl vfy : verifyEngine) {
+            if (sb.length() > 0) {
+                sb.append("|");
+            }
+            sb.append(vfy.getName());
+        }
+
+        return sb.toString();
+    }
+
     static public long getAndVerify(List<DataVerifyImpl> verifyEngine, String path, int n) throws ConvException {
         return getAndVerify(verifyEngine, path, (long) n);
     }
@@ -97,14 +119,38 @@ public abstract class DataVerifyImpl {
 
             for (DataVerifyImpl vfy : verifyEngine) {
                 if (vfy.get(n, verify_cache)) {
-                    return verify_cache.value;
+                    if (verify_cache.value == null) {
+                        return 0;
+                    }
+                    if (verify_cache.value instanceof Double) {
+                        return (double) verify_cache.value;
+                    }
+                    if (verify_cache.value instanceof Long) {
+                        return ((Long) verify_cache.value).doubleValue();
+                    }
+                    return Double.valueOf(verify_cache.value.toString());
                 }
             }
         } catch (Exception e) {
-            throw new ConvException(String.format("Check %g for %s failed, %s", n, path, e.getMessage()));
+            String value;
+            if (n == (long) n) {
+                value = String.format("%d", (long) n);
+            } else {
+                value = String.format("%g", n);
+            }
+            throw new ConvException(String.format("Check %s for %s with validator(s) %s failed, %s", value, path,
+                    collectValidatorNames(verifyEngine), e.getMessage()));
         }
 
-        throw new ConvException(String.format("Check %g for %s failed, check data failed.", n, path));
+        String value;
+        if (n == (long) n) {
+            value = String.format("%d", (long) n);
+        } else {
+            value = String.format("%g", n);
+        }
+        throw new ConvException(
+                String.format("Check %s for %s with validator(s) %s failed, check data failed.", value, path,
+                        collectValidatorNames(verifyEngine)));
     }
 
     static public double getAndVerifyToDouble(List<DataVerifyImpl> verifyEngine, String path, String val)
@@ -142,18 +188,216 @@ public abstract class DataVerifyImpl {
 
             for (DataVerifyImpl vfy : verifyEngine) {
                 if (vfy.get(val, verify_cache)) {
-                    return verify_cache.value;
+                    if (verify_cache.value == null) {
+                        return 0;
+                    }
+                    if (verify_cache.value instanceof Double) {
+                        return (double) verify_cache.value;
+                    }
+                    if (verify_cache.value instanceof Long) {
+                        return ((Long) verify_cache.value).doubleValue();
+                    }
+                    return Double.valueOf(verify_cache.value.toString());
                 }
             }
         } catch (Exception e) {
-            throw new ConvException(String.format("Convert %s for %s failed, %s", val, path, e.getMessage()));
+            throw new ConvException(String.format("Convert %s for %s with validator(s) %s failed, %s", val, path,
+                    collectValidatorNames(verifyEngine), e.getMessage()));
         }
 
-        throw new ConvException(String.format("Convert %s for %s failed, check data failed.", val, path));
+        throw new ConvException(String.format("Convert %s for %s with validator(s) %s failed, check data failed.", val,
+                path, collectValidatorNames(verifyEngine)));
+    }
+
+    static public String getAndVerifyToString(List<DataVerifyImpl> verifyEngine, String path, String val)
+            throws ConvException {
+        try {
+            if (verifyEngine == null || verifyEngine.isEmpty()) {
+                return val;
+            }
+
+            DataVerifyResult verify_cache = new DataVerifyResult();
+
+            for (DataVerifyImpl vfy : verifyEngine) {
+                if (vfy.get(val, verify_cache)) {
+                    if (verify_cache.value == null) {
+                        return "";
+                    }
+                    if (verify_cache.value instanceof Double) {
+                        String value;
+                        if ((double) verify_cache.value == (long) ((double) verify_cache.value)) {
+                            value = String.format("%d", (long) ((double) verify_cache.value));
+                        } else {
+                            value = String.format("%g", (double) verify_cache.value);
+                        }
+                        return value;
+                    }
+                    if (verify_cache.value instanceof Long) {
+                        return ((Long) verify_cache.value).toString();
+                    }
+                    return verify_cache.value.toString();
+                }
+            }
+        } catch (Exception e) {
+            throw new ConvException(String.format("Convert %s for %s with validator(s) %s failed, %s", val, path,
+                    collectValidatorNames(verifyEngine), e.getMessage()));
+        }
+
+        throw new ConvException(String.format("Convert %s for %s with validator(s) %s failed, check data failed.", val,
+                path, collectValidatorNames(verifyEngine)));
     }
 
     static public long getAndVerifyToLong(List<DataVerifyImpl> verifyEngine, String path, String val)
             throws ConvException {
         return Math.round(getAndVerifyToDouble(verifyEngine, path, val));
+    }
+
+    static public class ValidatorTokens {
+        public String name = "";
+        public ArrayList<String> parameters = new ArrayList<String>();
+
+        public ValidatorTokens() {
+        }
+
+        public boolean initialize() {
+            if (this.parameters.size() == 0) {
+                return false;
+            }
+
+            // Special mode(>NUM,>=NUM,<NUM,<=NUM,LOW-HIGH)
+            if (this.parameters.size() == 1) {
+                char firstChar = this.parameters.get(0).charAt(0);
+                if (firstChar == '>' || firstChar == '<' || firstChar == '-' || firstChar >= '0' || firstChar <= '9') {
+                    this.name = this.parameters.get(0).replaceAll("\\s+", "");
+                } else {
+                    this.name = this.parameters.get(0);
+                }
+
+                return this.name.length() > 0;
+            }
+
+            StringBuilder sb = new StringBuilder();
+            sb.append(this.parameters.get(0));
+            sb.append("(\"");
+            for (int i = 1; i < this.parameters.size(); ++i) {
+                sb.append(this.parameters.get(i).replace("\\", "\\\\").replace("\"", "\\\""));
+                if (i + 1 != this.parameters.size()) {
+                    sb.append("\",\"");
+                }
+            }
+            sb.append("\")");
+            this.name = sb.toString();
+            return this.name.length() > 0;
+        }
+    }
+
+    static private ValidatorTokens appendValidator(ValidatorTokens previous, String param, boolean stringMode) {
+        if (!stringMode) {
+            param = param.strip();
+            if (param.isEmpty()) {
+                return previous;
+            }
+        }
+
+        if (null == previous) {
+            previous = new ValidatorTokens();
+        }
+        previous.parameters.add(param.strip());
+        return previous;
+    }
+
+    static public LinkedList<ValidatorTokens> buildValidators(String verifier) {
+        if (null == verifier) {
+            return null;
+        }
+
+        String stripedVerifer = verifier.trim();
+        if (stripedVerifer.isEmpty()) {
+            return null;
+        }
+
+        LinkedList<ValidatorTokens> ret = new LinkedList<ValidatorTokens>();
+        int start = 0;
+        int end = 0;
+        char stringMark = 0;
+        ValidatorTokens current = null;
+        boolean startParameter = false;
+        for (; end < stripedVerifer.length(); ++end) {
+            char c = stripedVerifer.charAt(end);
+
+            // Close string
+            if (stringMark != 0) {
+                if (c == stringMark) {
+                    if (end > start) {
+                        current = appendValidator(current, stripedVerifer.substring(start, end), true);
+                    } else {
+                        current = appendValidator(current, "", true);
+                    }
+                    start = end + 1;
+                    stringMark = 0;
+                }
+
+                continue;
+            }
+
+            // Start string
+            if (c == '"' || c == '\'') {
+                if (end > start) {
+                    current = appendValidator(current, stripedVerifer.substring(start, end), false);
+                }
+
+                start = end + 1;
+                stringMark = c;
+                continue;
+            }
+
+            if (c == '|') {
+                if (end > start) {
+                    current = appendValidator(current, stripedVerifer.substring(start, end), false);
+                }
+
+                if (current != null) {
+                    if (current.initialize()) {
+                        ret.add(current);
+                    }
+                }
+
+                current = null;
+                start = end + 1;
+                continue;
+            }
+
+            if (startParameter) {
+                if (c == ')' || c == ',') {
+                    if (end > start) {
+                        current = appendValidator(current, stripedVerifer.substring(start, end), false);
+                    }
+
+                    if (c == ')') {
+                        startParameter = false;
+                    }
+                    start = end + 1;
+                }
+            } else {
+                if (c == '(') {
+                    if (end > start) {
+                        current = appendValidator(current, stripedVerifer.substring(start, end), false);
+                    }
+                    startParameter = true;
+                    start = end + 1;
+                }
+            }
+        }
+
+        if (start < stripedVerifer.length()) {
+            current = appendValidator(current, stripedVerifer.substring(start), false);
+        }
+        if (current != null) {
+            if (current.initialize()) {
+                ret.add(current);
+            }
+        }
+
+        return ret;
     }
 }

@@ -153,6 +153,9 @@ public class ExcelXSSFStreamSheetHandle implements XSSFSheetXMLHandler.SheetCont
         } catch (java.io.IOException e) {
             ProgramOptions.getLoger().error("Open source file \"%s\" and parse sheet \"%s\" failed, %s.",
                     file.getPath(), sheet_name, e.getMessage());
+        } catch (Exception e) {
+            ProgramOptions.getLoger().error("Open source file \"%s\" and parse sheet \"%s\" failed, %s.",
+                    file.getPath(), sheet_name, e.getMessage());
         }
 
         return null;

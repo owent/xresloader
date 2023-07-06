@@ -118,7 +118,7 @@ exports.files = [
             name : "id",
             number : 2,
             options : {
-              verifier : "0-99999"
+              validator : "0-99999"
             },
             type_name : "UINT32"
           }
@@ -145,7 +145,8 @@ exports.files = [
               field_unique_tag : [
                 "unique_tag"
               ],
-              key_tag : 100
+              key_tag : 100,
+              validator : "custom_rule4"
             },
             type_name : "UINT32"
           },
@@ -376,7 +377,7 @@ exports.files = [
             number : 3,
             options : {
               field_description : "Refer to cost_type",
-              verifier : "cost_type"
+              validator : "custom_rule1"
             },
             type_name : "UINT32"
           },
@@ -384,7 +385,8 @@ exports.files = [
             name : "Id",
             number : 1,
             options : {
-              key_tag : 1000
+              key_tag : 1000,
+              validator : "custom_rule3"
             },
             type_name : "UINT32"
           },

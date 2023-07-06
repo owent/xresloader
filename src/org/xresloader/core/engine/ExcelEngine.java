@@ -32,6 +32,11 @@ public class ExcelEngine {
     static private HashMap<String, Workbook> openedWorkbooks = new HashMap<String, Workbook>();
 
     /**
+     * 开启的自定义索引缓存，减少打开和分析文件的耗时
+     */
+    static private HashMap<String, HashMap<String, CustomDataTableIndex>> openedCustomDataTableIndex = new HashMap<>();
+
+    /**
      * 日期格式列缓存，XSSF在获取Style时性能极其低下，缓存一下有助于提升性能 导致的副作用就是只接受第一个数据行的日期格式
      */
     // static private HashMap<Integer, SimpleDateFormat> dateTypeStyle = new
@@ -251,11 +256,41 @@ public class ExcelEngine {
     }
 
     static public CustomDataTableIndex openStreamTableIndex(File file, String sheet_name) {
-        if (file.getName().toLowerCase().endsWith(".xls")) {
-            return ExcelHSSFStreamSheetHandle.buildCustomTableIndex(file, sheet_name);
+        String realPath = null;
+        try {
+            realPath = file.getCanonicalPath().replaceAll("\\\\", "/");
+        } catch (Exception _e) {
+        }
+        try {
+            if (realPath == null) {
+                realPath = file.getAbsolutePath().replaceAll("\\\\", "/");
+            }
+        } catch (Exception _e) {
+        }
+        if (realPath == null) {
+            realPath = file.getPath().replaceAll("\\\\", "/");
+        }
+        CustomDataTableIndex ret;
+        var fileCache = openedCustomDataTableIndex.getOrDefault(realPath, null);
+        if (fileCache == null) {
+            fileCache = new HashMap<String, CustomDataTableIndex>();
+            openedCustomDataTableIndex.put(realPath, fileCache);
+        }
+        ret = fileCache.getOrDefault(sheet_name, null);
+        if (ret != null) {
+            return ret;
         }
 
-        return ExcelXSSFStreamSheetHandle.buildCustomTableIndex(file, sheet_name);
+        if (file.getName().toLowerCase().endsWith(".xls")) {
+            ret = ExcelHSSFStreamSheetHandle.buildCustomTableIndex(file, sheet_name);
+        } else {
+            ret = ExcelXSSFStreamSheetHandle.buildCustomTableIndex(file, sheet_name);
+        }
+
+        if (ret != null && ret.getLastRowNum() < 30000) {
+            fileCache.put(sheet_name, ret);
+        }
+        return ret;
     }
 
     static public String tryMacro(String m) {
@@ -402,7 +437,7 @@ public class ExcelEngine {
                 try {
                     out.set(FormulaError.forInt(error_code).getString());
                 } catch (IllegalArgumentException e) {
-                    out.set(e.toString());
+                    out.set(e.getMessage());
                 }
                 break;
             }
@@ -565,7 +600,7 @@ public class ExcelEngine {
                 try {
                     ProgramOptions.getLoger().warn("Error message: %s", FormulaError.forInt(error_code).getString());
                 } catch (IllegalArgumentException e) {
-                    ProgramOptions.getLoger().warn("Error message: %s", e.toString());
+                    ProgramOptions.getLoger().warn("Error message: %s", e.getMessage());
                 }
                 break;
             }
@@ -697,7 +732,7 @@ public class ExcelEngine {
                 try {
                     ProgramOptions.getLoger().warn("Error message: %s", FormulaError.forInt(error_code).getString());
                 } catch (IllegalArgumentException e) {
-                    ProgramOptions.getLoger().warn("Error message: %s", e.toString());
+                    ProgramOptions.getLoger().warn("Error message: %s", e.getMessage());
                 }
                 break;
             }
@@ -822,7 +857,7 @@ public class ExcelEngine {
                 try {
                     ProgramOptions.getLoger().warn("Error message: %s", FormulaError.forInt(error_code).getString());
                 } catch (IllegalArgumentException e) {
-                    ProgramOptions.getLoger().warn("Error message: %s", e.toString());
+                    ProgramOptions.getLoger().warn("Error message: %s", e.getMessage());
                 }
                 break;
             }

@@ -5,7 +5,6 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.regex.Pattern;
 
 import org.xresloader.core.data.err.ConvException;
 
@@ -161,24 +160,41 @@ public abstract class DataVerifyImpl {
     }
 
     static public class ValidatorTokens {
-        public String normalizeName = null;
+        public String name = "";
         public ArrayList<String> parameters = new ArrayList<String>();
 
         public ValidatorTokens() {
         }
 
         public boolean initialize() {
+            if (this.parameters.size() == 0) {
+                return false;
+            }
+
             // Special mode(>NUM,>=NUM,<NUM,<=NUM,LOW-HIGH)
             if (this.parameters.size() == 1) {
                 char firstChar = this.parameters.get(0).charAt(0);
                 if (firstChar == '>' || firstChar == '<' || firstChar == '-' || firstChar >= '0' || firstChar <= '9') {
-                    this.normalizeName = this.parameters.get(0).replaceAll("\\s+", "");
-                    return this.normalizeName.length() > 0;
+                    this.name = this.parameters.get(0).replaceAll("\\s+", "");
+                } else {
+                    this.name = this.parameters.get(0);
                 }
+
+                return this.name.length() > 0;
             }
 
-            this.normalizeName = String.join(",", this.parameters);
-            return this.normalizeName.length() > 0;
+            StringBuilder sb = new StringBuilder();
+            sb.append(this.parameters.get(0));
+            sb.append("(\"");
+            for (int i = 1; i < this.parameters.size(); ++i) {
+                sb.append(this.parameters.get(i).replace("\\", "\\\\").replace("\"", "\\\""));
+                if (i + 1 != this.parameters.size()) {
+                    sb.append("\",\"");
+                }
+            }
+            sb.append("\")");
+            this.name = sb.toString();
+            return this.name.length() > 0;
         }
     }
 

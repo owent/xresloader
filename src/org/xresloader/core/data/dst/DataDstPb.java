@@ -69,7 +69,7 @@ public class DataDstPb extends DataDstImpl {
         public HashMap<String, HashMap<Integer, Descriptors.EnumValueDescriptor>> enum_values_descs = new HashMap<String, HashMap<Integer, Descriptors.EnumValueDescriptor>>();
 
         // ========================== 验证器 ==========================
-        HashMap<String, DataVerifyImpl> identifiers = new HashMap<String, DataVerifyImpl>();
+        HashMap<String, DataVerifyImpl> validator = new HashMap<String, DataVerifyImpl>();
 
         // ========================== 内建AST类型缓存 ==========================
         HashMap<String, DataDstTypeDescriptor> dataDstDescs = new HashMap<String, DataDstTypeDescriptor>();
@@ -506,7 +506,7 @@ public class DataDstPb extends DataDstImpl {
             rule = rule.substring(1);
         }
         {
-            DataVerifyImpl vfy = cachePbs.identifiers.getOrDefault(rule, null);
+            DataVerifyImpl vfy = cachePbs.validator.getOrDefault(rule, null);
             // 命中缓存
             if (null != vfy) {
                 ret.add(vfy);
@@ -515,116 +515,132 @@ public class DataDstPb extends DataDstImpl {
         }
 
         DataVerifyPbOneof new_vfy = new DataVerifyPbOneof(fd);
-        cachePbs.identifiers.put(rule, new_vfy);
+        cachePbs.validator.put(rule, new_vfy);
         ret.add(new_vfy);
 
         return ret;
     }
 
+    static private DataVerifyImpl create_verifier(DataVerifyImpl.ValidatorTokens ruleObject) {
+        // TODO: 第一优先级，函数验证器
+
+        // 第二优先级，范围验证器
+        if (ruleObject.name.charAt(0) == '-' || (ruleObject.name.charAt(0) >= '0' && ruleObject.name.charAt(0) <= '9')
+                || (ruleObject.name.charAt(0) == '>' || ruleObject.name.charAt(0) == '<')) {
+            DataVerifyIntRange vfyRange = new DataVerifyIntRange(ruleObject.name);
+            if (vfyRange.isValid()) {
+                return vfyRange;
+            } else {
+                ProgramOptions.getLoger().error("Validator %s(DataVerifyIntRange) is invalid",
+                        ruleObject.name);
+            }
+            return null;
+        }
+
+        // 第三优先级，协议验证器
+        DescriptorProtos.EnumDescriptorProto enum_desc = get_alias_list_element(ruleObject.name, cachePbs.enums,
+                "enum type");
+        if (enum_desc != null) {
+            return new DataVerifyPbEnum(enum_desc);
+        }
+
+        DescriptorProtos.DescriptorProto msg_desc = get_alias_list_element(ruleObject.name, cachePbs.messages,
+                "message type");
+        if (msg_desc != null) {
+            return new DataVerifyPbMsgField(msg_desc);
+        }
+
+        DescriptorProtos.OneofDescriptorProto oneof_desc = get_alias_list_element(ruleObject.name,
+                cachePbs.oneofs, "oneof type");
+        if (oneof_desc != null) {
+            int message_bound = ruleObject.name.lastIndexOf('.');
+            if (message_bound > 0 && message_bound < ruleObject.name.length()) {
+                msg_desc = get_alias_list_element(ruleObject.name.substring(0, message_bound),
+                        cachePbs.messages, "message type");
+            } else {
+                String oneof_full_name = get_alias_list_element_full_name(ruleObject.name, cachePbs.oneofs,
+                        "oneof type");
+                message_bound = oneof_full_name.lastIndexOf('.');
+                if (message_bound > 0 && message_bound < oneof_full_name.length()) {
+                    msg_desc = get_alias_list_element(oneof_full_name.substring(0, message_bound),
+                            cachePbs.messages, "message type");
+                }
+            }
+
+            if (oneof_desc != null && msg_desc != null) {
+                return new DataVerifyPbOneof(oneof_desc, msg_desc);
+            }
+        }
+
+        return null;
+    }
+
     static private LinkedList<DataVerifyImpl> setup_verifier(String verifier, Descriptors.FieldDescriptor fd) {
-        if (!(verifier != null && !verifier.trim().isEmpty()) && !(fd != null && fd.getJavaType() == JavaType.ENUM)) {
+        if (verifier == null) {
+            verifier = "";
+        } else {
+            verifier = verifier.trim();
+        }
+
+        String autoValidatorRule = null;
+        if (fd != null && fd.getJavaType() == JavaType.ENUM) {
+            autoValidatorRule = fd.getEnumType().getFullName();
+            if (autoValidatorRule.length() > 0 && autoValidatorRule.charAt(0) == '.') {
+                autoValidatorRule = autoValidatorRule.substring(1);
+            }
+        }
+
+        if (verifier.isEmpty() && autoValidatorRule == null) {
             return null;
         }
 
         LinkedList<DataVerifyImpl> ret = new LinkedList<DataVerifyImpl>();
-        if (verifier != null && !verifier.trim().isEmpty()) {
-            String[] all_verify_rules = verifier.split("\\|");
-            for (String vfy_rule : all_verify_rules) {
-                String rule = vfy_rule.trim();
-                if (rule.isEmpty()) {
-                    continue;
+        boolean containsAutoValidator = false;
+
+        if (verifier != null && !verifier.isEmpty()) {
+            var allRules = DataVerifyImpl.buildValidators(verifier);
+            for (DataVerifyImpl.ValidatorTokens ruleObject : allRules) {
+                DataVerifyImpl vfy = cachePbs.validator.getOrDefault(ruleObject.name, null);
+                boolean isCached = false;
+                if (null != vfy) {
+                    isCached = true;
+                } else {
+                    vfy = create_verifier(ruleObject);
                 }
 
-                if (rule.charAt(0) == '-' || (rule.charAt(0) >= '0' && rule.charAt(0) <= '9')
-                        || (rule.charAt(0) == '>' || rule.charAt(0) == '<')) {
-                    DataVerifyIntRange vfy = new DataVerifyIntRange(rule);
-                    if (vfy.isValid()) {
-                        ret.add(vfy);
-                    } else {
-                        ProgramOptions.getLoger().error("Try to add DataVerifyIntRange(%s) in %s failed", rule,
-                                DataSrcImpl.getOurInstance().getCurrentTableName());
+                if (vfy != null) {
+                    ret.add(vfy);
+
+                    if (autoValidatorRule != null && ruleObject.name.equals(autoValidatorRule)) {
+                        containsAutoValidator = true;
                     }
 
-                    continue;
+                    if (!isCached) {
+                        cachePbs.validator.put(ruleObject.name, vfy);
+                    }
                 } else {
-                    // 协议验证器
-                    DataVerifyImpl vfy = cachePbs.identifiers.getOrDefault(rule, null);
-                    if (null == vfy) {
-                        DescriptorProtos.EnumDescriptorProto enum_desc = get_alias_list_element(rule, cachePbs.enums,
-                                "enum type");
-                        if (enum_desc != null) {
-                            vfy = new DataVerifyPbEnum(enum_desc);
-                        }
-
-                        if (null == vfy) {
-                            DescriptorProtos.DescriptorProto msg_desc = get_alias_list_element(rule, cachePbs.messages,
-                                    "message type");
-                            if (msg_desc != null) {
-                                vfy = new DataVerifyPbMsgField(msg_desc);
-                            }
-                        }
-
-                        if (null == vfy) {
-                            DescriptorProtos.OneofDescriptorProto oneof_desc = get_alias_list_element(rule,
-                                    cachePbs.oneofs, "oneof type");
-                            if (oneof_desc != null) {
-                                DescriptorProtos.DescriptorProto msg_desc = null;
-                                int message_bound = rule.lastIndexOf('.');
-                                if (message_bound > 0 && message_bound < rule.length()) {
-                                    msg_desc = get_alias_list_element(rule.substring(0, message_bound),
-                                            cachePbs.messages, "message type");
-                                } else {
-                                    String oneof_full_name = get_alias_list_element_full_name(rule, cachePbs.oneofs,
-                                            "oneof type");
-                                    message_bound = oneof_full_name.lastIndexOf('.');
-                                    if (message_bound > 0 && message_bound < oneof_full_name.length()) {
-                                        msg_desc = get_alias_list_element(oneof_full_name.substring(0, message_bound),
-                                                cachePbs.messages, "message type");
-                                    }
-                                }
-
-                                if (oneof_desc != null && msg_desc != null) {
-                                    vfy = new DataVerifyPbOneof(oneof_desc, msg_desc);
-                                }
-                            }
-                        }
-
-                        if (null != vfy) {
-                            cachePbs.identifiers.put(rule, vfy);
-                        } else {
-                            ProgramOptions.getLoger().error("Enum, oneof or message \"%s\" not found", rule);
-                        }
-                    }
-
-                    if (vfy != null) {
-                        ret.add(vfy);
-                    } else {
-                        ProgramOptions.getLoger().error("Try to add data verifier %s in %s failed", rule,
-                                DataSrcImpl.getOurInstance().getCurrentTableName());
-                    }
+                    ProgramOptions.getLoger().error("Unknown validator %s",
+                            ruleObject.name);
                 }
             }
         }
 
         // auto verifier for enum
-        if (fd != null && fd.getJavaType() == JavaType.ENUM) {
-            String rule = fd.getEnumType().getFullName();
-            if (rule.length() > 0 && rule.charAt(0) == '.') {
-                rule = rule.substring(1);
-            }
-            DataVerifyImpl vfy = cachePbs.identifiers.getOrDefault(rule, null);
+        if (autoValidatorRule != null && !containsAutoValidator) {
+            DataVerifyImpl vfy = cachePbs.validator.getOrDefault(autoValidatorRule, null);
             if (null == vfy) {
-                DescriptorProtos.EnumDescriptorProto enum_desc = get_alias_list_element(rule, cachePbs.enums,
+                DescriptorProtos.EnumDescriptorProto enum_desc = get_alias_list_element(autoValidatorRule,
+                        cachePbs.enums,
                         "enum type");
                 if (enum_desc != null) {
                     vfy = new DataVerifyPbEnum(enum_desc);
                 }
 
                 if (null != vfy) {
-                    cachePbs.identifiers.put(rule, vfy);
+                    cachePbs.validator.put(autoValidatorRule, vfy);
                 } else {
                     ProgramOptions.getLoger().error("Enum verifier \"%s\" setup error, please report this bug to %s",
-                            rule, ProgramOptions.getReportUrl());
+                            autoValidatorRule, ProgramOptions.getReportUrl());
                 }
             }
 

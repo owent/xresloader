@@ -156,10 +156,11 @@ echo "
 | UeCfg-UProperty           | UnrealEngine配置支持的字段属性                                    | 字段分组            | 蓝图权限        | 编辑权限        | *可选*,默认值: XResConfig\|BlueprintReadOnly\|EditAnywhere                                                          |
 | UeCfg-CaseConvert         | 是否开启驼峰命名转换（默认开启）                                  | `true/false`        |                 |                 | *可选*,开启后将使用首字母大写的驼峰命名法生成字段名和类名                                                           |
 | UeCfg-CodeOutput          | 代码输出目录                                                      | 代码输出根目录      | Publich目录前缀 | Private目录前缀 | *可选*                                                                                                              |
-| UeCfg-DestinationPath     | 资源输出目录（uassert目录，默认会根据代码输出目录猜测）           | 资源输出目录        |                 |                 | *可选*                                                                                                              |
-| CallbackScript            | 使用Javascript脚本处理输出的数据                                  | Javascript脚本路径  |                 |                 | *可选*, （2.13.0版本开始支持）                                                                                      |
+| UeCfg-DestinationPath     | 资源输出目录（uassert目录，默认会根据代码输出目录猜测）           | 左包裹字符          | 右包裹字符      |                 | *可选*                                                                                                              |
+| UeCfg-CsvObjectWrapper    | 指定 `Ue-Csv` 模式输出时，map和array的包裹字符                    | 资源输出目录        |                 |                 | *可选*                                                                                                              |
 | UeCfg-EnableDefaultLoader | 是否启用UE默认的Loader                                            | `true/false`        |                 |                 | *可选*,默认值: `true`                                                                                               |
-| UeCfg-IncludeHeader       | 是否启用UE默认的Loader                                            | 头文件路径          | 头文件路径      | 头文件路径      | *可选*,三个路径都可选，此选项可以多次出现                                                                           |
+| UeCfg-IncludeHeader       | UE代码额外的自定义包含头文件                                      | 头文件路径          | 头文件路径      | 头文件路径      | *可选*,三个路径都可选，此选项可以多次出现                                                                           |
+| CallbackScript            | 使用Javascript脚本处理输出的数据                                  | Javascript脚本路径  |                 |                 | *可选*, （2.13.0版本开始支持）                                                                                      |
 
 ### 数据源描述的特别说明
 
@@ -251,6 +252,9 @@ echo "
   > pbc_config_manager:load_buffer_kl(协议名, 二进制, function(序号, 转出的lua table) return key的值 end) -- 读取key-list型数据接口
 
 + 如果你使用protobuf的 [upb][2]和 [upb][2] 的Lua binding加载配置，可以使用 [xres-code-generator][4] 子项目 来生成加载配置的代码
++ UE支持:
+  + 可以直接输出支持UE DataTable的 `Ue-Csv` 或者 `Ue-Json` 格式，同时也会输出对应结构的代码和导入设置。
+  + 也可以通过 [xres-code-generator][4] 子项目来生成C++接口，再通过 `template/UE*` 的UE模板来生成蓝图支持的Wrapper接口。通过这种方式加载数据支持多版本并存和支持复杂的多级索引和多个索引。
 
 ## 其他输出格式
 
@@ -275,7 +279,7 @@ echo "
 
 ### 验证器
 
-Excel里的Key使用@后缀的字段名，@后面的部分都属于验证器。如果一个字段使用了验证器，验证器可以使用以下值:
+Excel里的Key使用@后缀的字段名，@后面的部分都属于验证器。或者也可以通过协议插件来设置验证器，如果一个字段使用了验证器，验证器可以使用以下值:
 
 + 函数: `InText("文件名"[, 第几个字段[, \"字段分隔正则表达式\"]])` : 从文本文件（UTF-8编码）,可以指定读第几个字段和用于字段分隔的正则表达式
 + 函数: `InTableColumn("文件名", "Sheet名", 从第几行开始, 从第几列开始)` : 从Excel数据列读取可用值,指定数据行和数据列

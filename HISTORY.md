@@ -2,6 +2,9 @@
 
 ## Unrelease
 
+1. 修订老Scheme配置模式的输出格式
+2. 优化调整内部Validator变量名
+
 ## 2.14.0-rc3
 
 1. 插件重命名 `verifier` -> `validator`

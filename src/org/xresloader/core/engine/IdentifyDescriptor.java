@@ -23,7 +23,7 @@ public class IdentifyDescriptor {
     /**
      * 验证器文本
      */
-    public String dataSourceFieldVerifier = null;
+    public String dataSourceFieldValidator = null;
     /**
      * 验证器列表，包含配置在数据源里的验证器和协议里的验证器
      */
@@ -37,15 +37,15 @@ public class IdentifyDescriptor {
     public IdentifyDescriptor() {
     }
 
-    public boolean hasVerifier() {
+    public boolean hasValidator() {
         return null != verifyEngine && false == verifyEngine.isEmpty();
     }
 
-    public void resetVerifier() {
+    public void resetValidator() {
         verifyEngine = null;
     }
 
-    public void addVerifier(DataVerifyImpl ver) {
+    public void addValidator(DataVerifyImpl ver) {
         if (null == ver) {
             return;
         }
@@ -57,7 +57,7 @@ public class IdentifyDescriptor {
         verifyEngine.add(ver);
     }
 
-    public List<DataVerifyImpl> getVerifier() {
+    public List<DataVerifyImpl> getValidator() {
         return verifyEngine;
     }
 
@@ -74,7 +74,7 @@ public class IdentifyDescriptor {
         IdentifyDescriptor ret = new IdentifyDescriptor();
         ret.name = this.name;
         ret.index = this.index;
-        ret.dataSourceFieldVerifier = this.dataSourceFieldVerifier;
+        ret.dataSourceFieldValidator = this.dataSourceFieldValidator;
         ret.verifyEngine = this.verifyEngine;
         ret.referToWriterNode = this.referToWriterNode;
 

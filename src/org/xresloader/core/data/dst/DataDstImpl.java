@@ -292,9 +292,9 @@ public abstract class DataDstImpl {
         }
 
         if (ident != null) {
-            return DataVerifyImpl.getAndVerifyToString(ident.getVerifier(), ident.name, item);
+            return DataVerifyImpl.getAndVerifyToString(ident.getValidator(), ident.name, item);
         } else if (field != null) {
-            return DataVerifyImpl.getAndVerifyToString(field.getVerifier(), field.getName(), item);
+            return DataVerifyImpl.getAndVerifyToString(field.getValidator(), field.getName(), item);
         } else {
             return item;
         }
@@ -324,12 +324,12 @@ public abstract class DataDstImpl {
         String item = ExcelEngine.tryMacro(input.trim());
         Long ret;
         if (ident != null) {
-            ret = DataVerifyImpl.getAndVerifyToLong(ident.getVerifier(), ident.name, item);
+            ret = DataVerifyImpl.getAndVerifyToLong(ident.getValidator(), ident.name, item);
             if (ident.getRatio() != 1) {
                 ret *= ident.getRatio();
             }
         } else if (field != null) {
-            ret = DataVerifyImpl.getAndVerifyToLong(field.getVerifier(), field.getName(), item);
+            ret = DataVerifyImpl.getAndVerifyToLong(field.getValidator(), field.getName(), item);
             if (field.mutableExtension().ratio != 1) {
                 ret *= field.mutableExtension().ratio;
             }
@@ -364,12 +364,12 @@ public abstract class DataDstImpl {
             String item = ExcelEngine.tryMacro(input.trim());
             Double ret = 0.0;
             if (ident != null) {
-                ret = DataVerifyImpl.getAndVerifyToDouble(ident.getVerifier(), ident.name, item);
+                ret = DataVerifyImpl.getAndVerifyToDouble(ident.getValidator(), ident.name, item);
                 if (ident.getRatio() != 1) {
                     ret *= ident.getRatio();
                 }
             } else if (field != null) {
-                ret = DataVerifyImpl.getAndVerifyToDouble(field.getVerifier(), field.getName(), item);
+                ret = DataVerifyImpl.getAndVerifyToDouble(field.getValidator(), field.getName(), item);
                 if (field.mutableExtension().ratio != 1) {
                     ret *= field.mutableExtension().ratio;
                 }
@@ -599,11 +599,11 @@ public abstract class DataDstImpl {
         String item = ExcelEngine.tryMacro(groups[0].trim());
         Long select;
         if (ident != null) {
-            select = DataVerifyImpl.getAndVerifyToLong(ident.getVerifier(), ident.name, item);
+            select = DataVerifyImpl.getAndVerifyToLong(ident.getValidator(), ident.name, item);
         } else {
             try {
                 select = Long
-                        .valueOf(DataVerifyImpl.getAndVerifyToLong(oneof.getVerifier(), "[PLAIN TEXT]", item.trim()));
+                        .valueOf(DataVerifyImpl.getAndVerifyToLong(oneof.getValidator(), "[PLAIN TEXT]", item.trim()));
             } catch (java.lang.NumberFormatException e) {
                 throw new ConvException(String.format("Try to convert %s to oneof case failed.", input));
             }

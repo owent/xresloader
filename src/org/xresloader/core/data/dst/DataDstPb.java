@@ -388,13 +388,13 @@ public class DataDstPb extends DataDstImpl {
         if (verifierExpr != null && !verifierExpr.isEmpty()) {
             child_field.mutableExtension().validator = verifierExpr;
         }
-        LinkedList<DataVerifyImpl> gen = setup_verifier(null, verifierExpr, fd);
+        LinkedList<DataVerifyImpl> gen = setup_validator(null, verifierExpr, fd);
         if (gen != null && !gen.isEmpty()) {
             for (DataVerifyImpl vfy : gen) {
-                child_field.addVerifier(vfy);
+                child_field.addValidator(vfy);
             }
         } else {
-            child_field.resetVerifier();
+            child_field.resetValidator();
         }
 
         if (fd.getOptions().hasExtension(Xresloader.fieldDescription)) {
@@ -487,13 +487,13 @@ public class DataDstPb extends DataDstImpl {
     static private void setup_extension(DataDstTypeDescriptor parent_message, DataDstOneofDescriptor child_field,
             Descriptors.Descriptor container,
             Descriptors.OneofDescriptor fd) {
-        LinkedList<DataVerifyImpl> gen = setup_verifier(null, container, fd);
+        LinkedList<DataVerifyImpl> gen = setup_validator(null, container, fd);
         if (gen != null && !gen.isEmpty()) {
             for (DataVerifyImpl vfy : gen) {
-                child_field.addVerifier(vfy);
+                child_field.addValidator(vfy);
             }
         } else {
-            child_field.resetVerifier();
+            child_field.resetValidator();
         }
 
         if (fd.getOptions().hasExtension(Xresloader.oneofDescription)) {
@@ -551,7 +551,7 @@ public class DataDstPb extends DataDstImpl {
         return result;
     }
 
-    static private LinkedList<DataVerifyImpl> setup_verifier(LinkedList<DataVerifyImpl> result,
+    static private LinkedList<DataVerifyImpl> setup_validator(LinkedList<DataVerifyImpl> result,
             Descriptors.Descriptor container,
             Descriptors.OneofDescriptor fd) {
         if (result == null) {
@@ -661,7 +661,7 @@ public class DataDstPb extends DataDstImpl {
         return null;
     }
 
-    static private LinkedList<DataVerifyImpl> setup_verifier(LinkedList<DataVerifyImpl> result, String verifier,
+    static private LinkedList<DataVerifyImpl> setup_validator(LinkedList<DataVerifyImpl> result, String verifier,
             Descriptors.FieldDescriptor fd) {
         if (verifier == null) {
             verifier = "";
@@ -746,23 +746,23 @@ public class DataDstPb extends DataDstImpl {
         node.identify = identify;
 
         identify.referToWriterNode = node;
-        identify.resetVerifier();
+        identify.resetValidator();
 
-        if (null != identify.dataSourceFieldVerifier && !identify.dataSourceFieldVerifier.isEmpty()) {
-            LinkedList<DataVerifyImpl> gen = setup_verifier(null, identify.dataSourceFieldVerifier, fd);
+        if (null != identify.dataSourceFieldValidator && !identify.dataSourceFieldValidator.isEmpty()) {
+            LinkedList<DataVerifyImpl> gen = setup_validator(null, identify.dataSourceFieldValidator, fd);
             if (gen != null && !gen.isEmpty()) {
                 for (DataVerifyImpl vfy : gen) {
-                    identify.addVerifier(vfy);
+                    identify.addValidator(vfy);
                 }
             } else {
-                identify.resetVerifier();
+                identify.resetValidator();
             }
         }
 
         // merge verifier from field descriptor
-        if (child.innerFieldDesc != null && child.innerFieldDesc.hasVerifier()) {
-            for (DataVerifyImpl vfy : child.innerFieldDesc.getVerifier()) {
-                identify.addVerifier(vfy);
+        if (child.innerFieldDesc != null && child.innerFieldDesc.hasValidator()) {
+            for (DataVerifyImpl vfy : child.innerFieldDesc.getValidator()) {
+                identify.addValidator(vfy);
             }
         }
     }
@@ -772,14 +772,14 @@ public class DataDstPb extends DataDstImpl {
         node.identify = identify;
 
         identify.referToWriterNode = node;
-        identify.resetVerifier();
+        identify.resetValidator();
 
         // Data source field verifier is ignored in oneof descriptor
 
         // merge verifier from oneof descriptor
-        if (child.innerOneofDesc != null && child.innerOneofDesc.hasVerifier()) {
-            for (DataVerifyImpl vfy : child.innerOneofDesc.getVerifier()) {
-                identify.addVerifier(vfy);
+        if (child.innerOneofDesc != null && child.innerOneofDesc.hasValidator()) {
+            for (DataVerifyImpl vfy : child.innerOneofDesc.getValidator()) {
+                identify.addValidator(vfy);
             }
         }
     }

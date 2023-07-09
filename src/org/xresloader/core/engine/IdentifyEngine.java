@@ -23,7 +23,7 @@ public class IdentifyEngine {
         ret.index = index;
         int verify_index = _name.lastIndexOf('@');
         if (verify_index >= 0) {
-            ret.dataSourceFieldVerifier = _name.substring(verify_index + 1);
+            ret.dataSourceFieldValidator = _name.substring(verify_index + 1);
             segs = _name.substring(0, verify_index).trim().split("\\.");
         } else {
             segs = _name.trim().split("\\.");

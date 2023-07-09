@@ -115,15 +115,15 @@ public class DataDstWriterNode {
             return rawDescriptor;
         }
 
-        public boolean hasVerifier() {
+        public boolean hasValidator() {
             return null != verifyEngine && false == verifyEngine.isEmpty();
         }
 
-        public void resetVerifier() {
+        public void resetValidator() {
             verifyEngine = null;
         }
 
-        public void addVerifier(DataVerifyImpl ver) {
+        public void addValidator(DataVerifyImpl ver) {
             if (null == ver) {
                 return;
             }
@@ -135,7 +135,7 @@ public class DataDstWriterNode {
             verifyEngine.add(ver);
         }
 
-        public List<DataVerifyImpl> getVerifier() {
+        public List<DataVerifyImpl> getValidator() {
             return verifyEngine;
         }
 
@@ -262,15 +262,15 @@ public class DataDstWriterNode {
             return rawDescriptor;
         }
 
-        public boolean hasVerifier() {
+        public boolean hasValidator() {
             return null != verifyEngine && false == verifyEngine.isEmpty();
         }
 
-        public void resetVerifier() {
+        public void resetValidator() {
             verifyEngine = null;
         }
 
-        public void addVerifier(DataVerifyImpl ver) {
+        public void addValidator(DataVerifyImpl ver) {
             if (null == ver) {
                 return;
             }
@@ -282,7 +282,7 @@ public class DataDstWriterNode {
             verifyEngine.add(ver);
         }
 
-        public List<DataVerifyImpl> getVerifier() {
+        public List<DataVerifyImpl> getValidator() {
             return verifyEngine;
         }
 

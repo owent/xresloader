@@ -208,12 +208,13 @@ public class main {
                 if (descBuilder.length() > 0) {
                     descBuilder.append(',');
                 }
-                descBuilder.append(di.file_path);
 
                 if (!di.file_path.isEmpty()) {
+                    descBuilder.append(di.file_path);
                     descBuilder.append('|');
-                    descBuilder.append(di.table_name);
                 }
+
+                descBuilder.append(di.table_name);
             }
             sn = descBuilder.toString();
 

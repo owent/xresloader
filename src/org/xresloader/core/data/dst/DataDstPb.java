@@ -80,6 +80,11 @@ public class DataDstPb extends DataDstImpl {
         }
     }
 
+    static private class SetupValidatorResult {
+        public boolean success = true;
+        public LinkedList<DataVerifyImpl> validator = null;
+    }
+
     private Descriptors.Descriptor currentMsgDesc = null;
     static private com.google.protobuf.ExtensionRegistryLite pb_extensions = null;
     static private PbInfoSet cachePbs = new PbInfoSet();
@@ -371,7 +376,7 @@ public class DataDstPb extends DataDstImpl {
         }
     }
 
-    static private void setup_extension(DataDstTypeDescriptor parent_message, DataDstFieldDescriptor child_field,
+    static private boolean setup_extension(DataDstTypeDescriptor parent_message, DataDstFieldDescriptor child_field,
             Descriptors.FieldDescriptor fd) {
         String verifierExpr = null;
         if (fd.getOptions().hasExtension(Xresloader.validator)) {
@@ -388,9 +393,9 @@ public class DataDstPb extends DataDstImpl {
         if (verifierExpr != null && !verifierExpr.isEmpty()) {
             child_field.mutableExtension().validator = verifierExpr;
         }
-        LinkedList<DataVerifyImpl> gen = setup_validator(null, verifierExpr, fd);
-        if (gen != null && !gen.isEmpty()) {
-            for (DataVerifyImpl vfy : gen) {
+        var gen = setup_validator(null, verifierExpr, fd);
+        if (gen != null && gen.validator != null && !gen.validator.isEmpty()) {
+            for (DataVerifyImpl vfy : gen.validator) {
                 child_field.addValidator(vfy);
             }
         } else {
@@ -482,14 +487,19 @@ public class DataDstPb extends DataDstImpl {
             child_field.mutableExtension().mutableUE().ueOriginTypeDefaultValue = fd.getOptions()
                     .getExtension(XresloaderUe.ueOriginTypeDefaultValue);
         }
+
+        if (gen == null) {
+            return true;
+        }
+        return gen.success;
     }
 
-    static private void setup_extension(DataDstTypeDescriptor parent_message, DataDstOneofDescriptor child_field,
+    static private boolean setup_extension(DataDstTypeDescriptor parent_message, DataDstOneofDescriptor child_field,
             Descriptors.Descriptor container,
             Descriptors.OneofDescriptor fd) {
-        LinkedList<DataVerifyImpl> gen = setup_validator(null, container, fd);
-        if (gen != null && !gen.isEmpty()) {
-            for (DataVerifyImpl vfy : gen) {
+        var gen = setup_validator(null, container, fd);
+        if (gen != null && gen.validator != null && !gen.validator.isEmpty()) {
+            for (DataVerifyImpl vfy : gen.validator) {
                 child_field.addValidator(vfy);
             }
         } else {
@@ -507,6 +517,11 @@ public class DataDstPb extends DataDstImpl {
         if (fd.getOptions().hasExtension(Xresloader.oneofNotNull)) {
             child_field.mutableExtension().notNull = fd.getOptions().getExtension(Xresloader.oneofNotNull);
         }
+
+        if (gen == null) {
+            return true;
+        }
+        return gen.success;
     }
 
     static private DataVerifyImpl getValidatorFromCache(String name) {
@@ -551,12 +566,16 @@ public class DataDstPb extends DataDstImpl {
         return result;
     }
 
-    static private LinkedList<DataVerifyImpl> setup_validator(LinkedList<DataVerifyImpl> result,
+    static private SetupValidatorResult setup_validator(LinkedList<DataVerifyImpl> result,
             Descriptors.Descriptor container,
             Descriptors.OneofDescriptor fd) {
+        SetupValidatorResult ret = new SetupValidatorResult();
+
         if (result == null) {
             result = new LinkedList<DataVerifyImpl>();
         }
+        ret.success = true;
+        ret.validator = result;
 
         String rule = String.format("%s.%s.%s", container.getFile().getPackage(), container.getName(), fd.getName());
         if (rule.length() > 0 && rule.charAt(0) == '.') {
@@ -567,7 +586,7 @@ public class DataDstPb extends DataDstImpl {
             // 命中缓存
             if (null != vfy) {
                 result.add(vfy);
-                return result;
+                return ret;
             }
         }
 
@@ -575,7 +594,7 @@ public class DataDstPb extends DataDstImpl {
         setValidatorStableCache(rule, new_vfy);
         result.add(new_vfy);
 
-        return result;
+        return ret;
     }
 
     static private DataVerifyImpl createValidator(DataVerifyImpl.ValidatorTokens ruleObject) {
@@ -661,7 +680,7 @@ public class DataDstPb extends DataDstImpl {
         return null;
     }
 
-    static private LinkedList<DataVerifyImpl> setup_validator(LinkedList<DataVerifyImpl> result, String verifier,
+    static private SetupValidatorResult setup_validator(LinkedList<DataVerifyImpl> result, String verifier,
             Descriptors.FieldDescriptor fd) {
         if (verifier == null) {
             verifier = "";
@@ -681,11 +700,14 @@ public class DataDstPb extends DataDstImpl {
             return null;
         }
 
+        SetupValidatorResult ret = new SetupValidatorResult();
         if (result == null) {
             result = new LinkedList<DataVerifyImpl>();
         }
-        boolean containsAutoValidator = false;
+        ret.success = true;
+        ret.validator = result;
 
+        boolean containsAutoValidator = false;
         if (verifier != null && !verifier.isEmpty()) {
             var allRules = DataVerifyImpl.buildValidators(verifier);
             for (DataVerifyImpl.ValidatorTokens ruleObject : allRules) {
@@ -710,6 +732,7 @@ public class DataDstPb extends DataDstImpl {
                 } else {
                     ProgramOptions.getLoger().error("Unknown validator %s",
                             ruleObject.name);
+                    ret.success = false;
                 }
             }
         }
@@ -730,6 +753,7 @@ public class DataDstPb extends DataDstImpl {
                 } else {
                     ProgramOptions.getLoger().error("Enum verifier \"%s\" setup error, please report this bug to %s",
                             autoValidatorRule, ProgramOptions.getReportUrl());
+                    ret.success = false;
                 }
             }
 
@@ -738,7 +762,7 @@ public class DataDstPb extends DataDstImpl {
             }
         }
 
-        return result;
+        return ret;
     }
 
     private void setup_node_identify(DataDstWriterNode node, DataDstChildrenNode child, IdentifyDescriptor identify,
@@ -749,9 +773,9 @@ public class DataDstPb extends DataDstImpl {
         identify.resetValidator();
 
         if (null != identify.dataSourceFieldValidator && !identify.dataSourceFieldValidator.isEmpty()) {
-            LinkedList<DataVerifyImpl> gen = setup_validator(null, identify.dataSourceFieldValidator, fd);
-            if (gen != null && !gen.isEmpty()) {
-                for (DataVerifyImpl vfy : gen) {
+            SetupValidatorResult gen = setup_validator(null, identify.dataSourceFieldValidator, fd);
+            if (gen != null && gen.validator != null && !gen.validator.isEmpty()) {
+                for (DataVerifyImpl vfy : gen.validator) {
                     identify.addValidator(vfy);
                 }
             } else {
@@ -901,7 +925,7 @@ public class DataDstPb extends DataDstImpl {
     }
 
     static private void buildDataDstDescriptorMessage(PbInfoSet pbs, Descriptors.Descriptor pbDesc,
-            DataDstTypeDescriptor innerDesc) {
+            DataDstTypeDescriptor innerDesc) throws ConvException {
         if (null == pbDesc || null == innerDesc) {
             return;
         }
@@ -944,20 +968,26 @@ public class DataDstPb extends DataDstImpl {
         for (Descriptors.FieldDescriptor field : pbDesc.getFields()) {
             DataDstFieldDescriptor innerField = innerDesc.fields.getOrDefault(field.getName(), null);
             if (null != innerField) {
-                setup_extension(innerDesc, innerField, field);
+                if (!setup_extension(innerDesc, innerField, field)) {
+                    throw new ConvException(
+                            String.format("setup extension for %s failed, field name: %s", field.getFullName()));
+                }
             }
         }
 
         for (Descriptors.OneofDescriptor oneof : pbDesc.getOneofs()) {
             DataDstOneofDescriptor innerField = innerDesc.oneofs.getOrDefault(oneof.getName(), null);
             if (null != innerField) {
-                setup_extension(innerDesc, innerField, pbDesc, oneof);
+                if (!setup_extension(innerDesc, innerField, pbDesc, oneof)) {
+                    throw new ConvException(
+                            String.format("setup extension failed, field name: %s", oneof.getFullName()));
+                }
             }
         }
     }
 
     static private DataDstTypeDescriptor mutableDataDstDescriptor(PbInfoSet pbs, Descriptors.Descriptor pbDesc,
-            DataDstWriterNode.JAVA_TYPE type) {
+            DataDstWriterNode.JAVA_TYPE type) throws ConvException {
         String key = null;
         if (null == pbDesc) {
             key = type.toString();
@@ -1026,12 +1056,12 @@ public class DataDstPb extends DataDstImpl {
     }
 
     static private DataDstWriterNode createMessageWriterNode(PbInfoSet pbs, DataDstWriterNode.JAVA_TYPE type,
-            int listIndex) {
+            int listIndex) throws ConvException {
         return DataDstWriterNode.create(null, mutableDataDstDescriptor(pbs, null, type), listIndex);
     }
 
     static private DataDstWriterNode createMessageWriterNode(PbInfoSet pbs, Descriptors.Descriptor pbDesc,
-            DataDstWriterNode.JAVA_TYPE type, int listIndex) {
+            DataDstWriterNode.JAVA_TYPE type, int listIndex) throws ConvException {
         if (null == pbDesc) {
             return createMessageWriterNode(pbs, type, listIndex);
         }

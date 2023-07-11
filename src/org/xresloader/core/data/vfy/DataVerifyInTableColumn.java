@@ -1,9 +1,7 @@
 package org.xresloader.core.data.vfy;
 
-import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.InputStreamReader;
+import java.util.ArrayList;
 import java.util.HashSet;
 
 import org.xresloader.core.ProgramOptions;
@@ -15,6 +13,8 @@ import org.xresloader.core.engine.ExcelEngine.CustomDataTableIndex;
 public class DataVerifyInTableColumn extends DataVerifyImpl {
     private boolean valid = false;
     private HashSet<String> dataSet = new HashSet<String>();
+    private File file = null;
+    private ArrayList<String> parameters = null;
 
     public DataVerifyInTableColumn(ValidatorTokens tokens) {
         super(tokens);
@@ -23,30 +23,48 @@ public class DataVerifyInTableColumn extends DataVerifyImpl {
             ProgramOptions.getLoger().error("Invalid in text validator %s", tokens.name);
             return;
         }
+        this.parameters = tokens.parameters;
+
+        File file = DataSrcImpl.getDataFile(this.parameters.get(1));
+        if (file == null) {
+            ProgramOptions.getLoger().error("Can not find file % for validator %s", this.parameters.get(1),
+                    tokens.name);
+            return;
+        }
+
+        this.valid = true;
+    }
+
+    public boolean isValid() {
+        return this.valid;
+    }
+
+    private boolean loadFile() {
+        if (this.file == null) {
+            return true;
+        }
+
+        if (this.parameters.size() < 5) {
+            ProgramOptions.getLoger().error("Invalid in text validator %s", this.name);
+            return false;
+        }
 
         try {
-            String filePath = tokens.parameters.get(1);
-            String sheetName = tokens.parameters.get(2);
-            int startRow = Integer.parseInt(tokens.parameters.get(3)) - 1;
-
-            File file = DataSrcImpl.getDataFile(filePath);
-            if (file == null) {
-                ProgramOptions.getLoger().error("Can not find file % for validator %s", filePath, tokens.name);
-                return;
-            }
+            String sheetName = this.parameters.get(2);
+            int startRow = Integer.parseInt(this.parameters.get(3)) - 1;
 
             CustomDataTableIndex tableIndex = ExcelEngine.openStreamTableIndex(file, sheetName);
 
             int startColumn = -1;
-            if (tokens.parameters.size() == 5) {
-                startColumn = Integer.parseInt(tokens.parameters.get(4));
+            if (this.parameters.size() == 5) {
+                startColumn = Integer.parseInt(this.parameters.get(4));
             } else {
-                int keyRow = Integer.parseInt(tokens.parameters.get(4)) - 1;
-                String keyValue = tokens.parameters.get(5).trim();
+                int keyRow = Integer.parseInt(this.parameters.get(4)) - 1;
+                String keyValue = this.parameters.get(5).trim();
                 CustomDataRowIndex row = tableIndex.getRow(keyRow);
                 if (null == row) {
-                    ProgramOptions.getLoger().error("Invalid key row in table column validator %s", tokens.name);
-                    return;
+                    ProgramOptions.getLoger().error("Invalid key row in table column validator %s", this.name);
+                    return false;
                 }
                 for (int i = 0; i < row.getColumnSize(); ++i) {
                     String value = row.getCellValue(i);
@@ -61,13 +79,13 @@ public class DataVerifyInTableColumn extends DataVerifyImpl {
             }
 
             if (startRow < 0) {
-                ProgramOptions.getLoger().error("Invalid start row in table column validator %s", tokens.name);
-                return;
+                ProgramOptions.getLoger().error("Invalid start row in table column validator %s", this.name);
+                return false;
             }
             if (startColumn < 0) {
                 ProgramOptions.getLoger().error("Invalid column or column not found in table column validator %s",
-                        tokens.name);
-                return;
+                        this.name);
+                return false;
             }
 
             for (int i = startRow; i <= tableIndex.getLastRowNum(); ++i) {
@@ -88,21 +106,20 @@ public class DataVerifyInTableColumn extends DataVerifyImpl {
 
                 dataSet.add(value);
             }
-
-            this.valid = true;
         } catch (NumberFormatException e) {
             ProgramOptions.getLoger().error("Can not parse number of validator %s: %s",
-                    tokens.name,
+                    this.name,
                     e.getMessage());
+            return false;
         } catch (Exception e) {
-            ProgramOptions.getLoger().error("Can not open file %s for %s validator: %s", tokens.parameters.get(1),
-                    tokens.name,
+            ProgramOptions.getLoger().error("Can not open file %s for %s validator: %s", this.parameters.get(1),
+                    this.name,
                     e.getMessage());
+            return false;
         }
-    }
 
-    public boolean isValid() {
-        return this.valid;
+        this.file = null;
+        return true;
     }
 
     @Override
@@ -112,6 +129,11 @@ public class DataVerifyInTableColumn extends DataVerifyImpl {
             res.success = true;
             res.value = number;
             return true;
+        }
+
+        if (!loadFile()) {
+            res.success = false;
+            return false;
         }
 
         String value;
@@ -137,6 +159,12 @@ public class DataVerifyInTableColumn extends DataVerifyImpl {
             res.success = true;
             res.value = "";
             return true;
+        }
+
+        if (!loadFile()) {
+            res.success = false;
+            res.value = "";
+            return false;
         }
 
         if (dataSet.contains(input)) {

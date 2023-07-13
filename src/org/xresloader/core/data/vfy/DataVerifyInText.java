@@ -23,6 +23,7 @@ public class DataVerifyInText extends DataVerifyImpl {
     public DataVerifyInText(ValidatorTokens tokens) {
         super(tokens);
 
+        this.valid = false;
         if (tokens.parameters.size() < 2) {
             ProgramOptions.getLoger().error("Invalid in text validator %s", tokens.name);
             return;

@@ -891,13 +891,6 @@ public class DataDstPb extends DataDstImpl {
             vfy.setup(deps);
         }
 
-        // Check circle dependency
-        for (DataVerifyCustomRule vfy : customValidators) {
-            if (!vfy.check()) {
-                ret = false;
-            }
-        }
-
         return ret;
     }
 
@@ -970,7 +963,7 @@ public class DataDstPb extends DataDstImpl {
             if (null != innerField) {
                 if (!setup_extension(innerDesc, innerField, field)) {
                     throw new ConvException(
-                            String.format("setup extension for %s failed, field name: %s", field.getFullName()));
+                            String.format("setup extension failed, field name: %s", field.getFullName()));
                 }
             }
         }

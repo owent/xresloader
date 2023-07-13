@@ -9,6 +9,7 @@ import org.xresloader.core.data.src.DataSrcImpl;
 import org.xresloader.core.engine.ExcelEngine;
 import org.xresloader.core.engine.ExcelEngine.CustomDataRowIndex;
 import org.xresloader.core.engine.ExcelEngine.CustomDataTableIndex;
+import org.xresloader.core.engine.IdentifyEngine;
 
 public class DataVerifyInTableColumn extends DataVerifyImpl {
     private boolean valid = false;
@@ -19,13 +20,14 @@ public class DataVerifyInTableColumn extends DataVerifyImpl {
     public DataVerifyInTableColumn(ValidatorTokens tokens) {
         super(tokens);
 
+        this.valid = false;
         if (tokens.parameters.size() < 5) {
             ProgramOptions.getLoger().error("Invalid in text validator %s", tokens.name);
             return;
         }
         this.parameters = tokens.parameters;
 
-        File file = DataSrcImpl.getDataFile(this.parameters.get(1));
+        this.file = DataSrcImpl.getDataFile(this.parameters.get(1));
         if (file == null) {
             ProgramOptions.getLoger().error("Can not find file % for validator %s", this.parameters.get(1),
                     tokens.name);
@@ -61,6 +63,7 @@ public class DataVerifyInTableColumn extends DataVerifyImpl {
             } else {
                 int keyRow = Integer.parseInt(this.parameters.get(4)) - 1;
                 String keyValue = this.parameters.get(5).trim();
+                String normalizedkeyValue = IdentifyEngine.normalize(keyValue);
                 CustomDataRowIndex row = tableIndex.getRow(keyRow);
                 if (null == row) {
                     ProgramOptions.getLoger().error("Invalid key row in table column validator %s", this.name);
@@ -71,7 +74,9 @@ public class DataVerifyInTableColumn extends DataVerifyImpl {
                     if (value == null) {
                         continue;
                     }
-                    if (value.trim().equals(keyValue)) {
+
+                    String trimedValue = value.trim();
+                    if (trimedValue.equals(keyValue) || trimedValue.equals(normalizedkeyValue)) {
                         startColumn = i;
                         break;
                     }

@@ -17,6 +17,7 @@ public class DataVerifyCustomRule extends DataVerifyImpl {
     private ArrayList<String> rules = null;
     private Boolean checkResult = null;
     private boolean checking = false;
+    private String description = null;
 
     public class RuleConfigure {
         public String name;
@@ -29,6 +30,32 @@ public class DataVerifyCustomRule extends DataVerifyImpl {
         this.rules = rules;
     }
 
+    public String getDescription() {
+        if (this.description != null) {
+            return this.description;
+        }
+
+        StringBuilder sb = new StringBuilder();
+        sb.append(getName());
+        sb.append("[");
+        boolean first = true;
+        boolean checked = check();
+        for (DataVerifyImpl vfy : this.validators) {
+            if (!first) {
+                sb.append(", ");
+            }
+            if (checked) {
+                sb.append(vfy.getDescription());
+            } else {
+                sb.append(vfy.getName());
+            }
+            first = false;
+        }
+        sb.append("]");
+
+        return sb.toString();
+    }
+
     public void setup(ArrayList<DataVerifyImpl> validators) {
         this.validators = validators;
         this.checkResult = null;
@@ -39,6 +66,7 @@ public class DataVerifyCustomRule extends DataVerifyImpl {
     }
 
     public boolean check() {
+        // Check circle dependency
         if (this.checkResult != null) {
             return this.checkResult;
         }
@@ -99,6 +127,11 @@ public class DataVerifyCustomRule extends DataVerifyImpl {
             return true;
         }
 
+        if (!check()) {
+            res.success = false;
+            return false;
+        }
+
         for (DataVerifyImpl vfy : this.validators) {
             if (vfy.get(number, res)) {
                 return true;
@@ -115,6 +148,11 @@ public class DataVerifyCustomRule extends DataVerifyImpl {
             res.success = true;
             res.value = input;
             return true;
+        }
+
+        if (!check()) {
+            res.success = false;
+            return false;
         }
 
         for (DataVerifyImpl vfy : this.validators) {

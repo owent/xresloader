@@ -89,13 +89,17 @@ public abstract class DataVerifyImpl {
         return name;
     }
 
+    public String getDescription() {
+        return getName();
+    }
+
     static public String collectValidatorNames(List<DataVerifyImpl> verifyEngine) {
         StringBuffer sb = new StringBuffer();
         for (DataVerifyImpl vfy : verifyEngine) {
             if (sb.length() > 0) {
                 sb.append("|");
             }
-            sb.append(vfy.getName());
+            sb.append(vfy.getDescription());
         }
 
         return sb.toString();
@@ -107,6 +111,14 @@ public abstract class DataVerifyImpl {
 
     static public long getAndVerify(List<DataVerifyImpl> verifyEngine, String path, long n) throws ConvException {
         return Math.round(getAndVerify(verifyEngine, path, (double) n));
+    }
+
+    static private String getValidatorWord(List<DataVerifyImpl> verifyEngine) {
+        if (verifyEngine == null || verifyEngine.isEmpty() || verifyEngine.size() == 1) {
+            return "validator";
+        }
+
+        return "validator(s)";
     }
 
     static public double getAndVerify(List<DataVerifyImpl> verifyEngine, String path, double n) throws ConvException {
@@ -138,8 +150,8 @@ public abstract class DataVerifyImpl {
             } else {
                 value = String.format("%g", n);
             }
-            throw new ConvException(String.format("Check %s for %s with validator(s) %s failed, %s", value, path,
-                    collectValidatorNames(verifyEngine), e.getMessage()));
+            throw new ConvException(String.format("Check %s for %s with %s %s failed, %s", value, path,
+                    getValidatorWord(verifyEngine), collectValidatorNames(verifyEngine), e.getMessage()));
         }
 
         String value;
@@ -149,8 +161,8 @@ public abstract class DataVerifyImpl {
             value = String.format("%g", n);
         }
         throw new ConvException(
-                String.format("Check %s for %s with validator(s) %s failed, check data failed.", value, path,
-                        collectValidatorNames(verifyEngine)));
+                String.format("Check %s for %s with %s %s failed, check data failed.", value, path,
+                        getValidatorWord(verifyEngine), collectValidatorNames(verifyEngine)));
     }
 
     static public double getAndVerifyToDouble(List<DataVerifyImpl> verifyEngine, String path, String val)
@@ -201,12 +213,12 @@ public abstract class DataVerifyImpl {
                 }
             }
         } catch (Exception e) {
-            throw new ConvException(String.format("Convert %s for %s with validator(s) %s failed, %s", val, path,
-                    collectValidatorNames(verifyEngine), e.getMessage()));
+            throw new ConvException(String.format("Convert %s for %s with %s %s failed, %s", val, path,
+                    getValidatorWord(verifyEngine), collectValidatorNames(verifyEngine), e.getMessage()));
         }
 
-        throw new ConvException(String.format("Convert %s for %s with validator(s) %s failed, check data failed.", val,
-                path, collectValidatorNames(verifyEngine)));
+        throw new ConvException(String.format("Convert %s for %s with %s %s failed, check data failed.", val,
+                path, getValidatorWord(verifyEngine), collectValidatorNames(verifyEngine)));
     }
 
     static public String getAndVerifyToString(List<DataVerifyImpl> verifyEngine, String path, String val)
@@ -239,12 +251,12 @@ public abstract class DataVerifyImpl {
                 }
             }
         } catch (Exception e) {
-            throw new ConvException(String.format("Convert %s for %s with validator(s) %s failed, %s", val, path,
-                    collectValidatorNames(verifyEngine), e.getMessage()));
+            throw new ConvException(String.format("Convert %s for %s with %s %s failed, %s", val, path,
+                    getValidatorWord(verifyEngine), collectValidatorNames(verifyEngine), e.getMessage()));
         }
 
-        throw new ConvException(String.format("Convert %s for %s with validator(s) %s failed, check data failed.", val,
-                path, collectValidatorNames(verifyEngine)));
+        throw new ConvException(String.format("Convert %s for %s with %s %s failed, check data failed.", val,
+                path, getValidatorWord(verifyEngine), collectValidatorNames(verifyEngine)));
     }
 
     static public long getAndVerifyToLong(List<DataVerifyImpl> verifyEngine, String path, String val)

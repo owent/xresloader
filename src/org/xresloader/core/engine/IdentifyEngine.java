@@ -24,17 +24,27 @@ public class IdentifyEngine {
         int verify_index = _name.lastIndexOf('@');
         if (verify_index >= 0) {
             ret.dataSourceFieldValidator = _name.substring(verify_index + 1);
-            segs = _name.substring(0, verify_index).trim().split("\\.");
+            ret.name = normalize(_name.substring(0, verify_index));
         } else {
-            segs = _name.trim().split("\\.");
+            ret.name = normalize(_name);
         }
 
-        for (int i = 0; i < segs.length; ++i) {
-            segs[i] = make_word(segs[i]);
-        }
-
-        ret.name = String.join(".", segs);
         return ret;
+    }
+
+    /**
+     * 把配置名称转换成标识符
+     *
+     * @param _name 配置名称
+     * @return
+     */
+    static public String normalize(String name) {
+        String[] segs = name.trim().split("\\.");
+        for (int i = 0; i < segs.length; ++i) {
+            segs[i] = make_word(segs[i]).trim();
+        }
+
+        return String.join(".", segs);
     }
 
     static private String make_word(String ident) {

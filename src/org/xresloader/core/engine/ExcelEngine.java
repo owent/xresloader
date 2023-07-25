@@ -598,9 +598,17 @@ public class ExcelEngine {
             case ERROR: {
                 byte error_code = cal_cell2err(c, cv);
                 try {
-                    ProgramOptions.getLoger().warn("Error message: %s", FormulaError.forInt(error_code).getString());
+                    ProgramOptions.getLoger().warn("Error formula: %s%s  > File: %s, Table: %s, Row: %d, Column: %d",
+                            FormulaError.forInt(error_code).getString(), ProgramOptions.getEndl(),
+                            DataSrcImpl.getOurInstance().getCurrentFileName(),
+                            DataSrcImpl.getOurInstance().getCurrentTableName(), row.getRowNum() + 1,
+                            c.getRowIndex() + 1);
                 } catch (IllegalArgumentException e) {
-                    ProgramOptions.getLoger().warn("Error message: %s", e.getMessage());
+                    ProgramOptions.getLoger().warn(
+                            "Error or unsupported cell value: %s%s  > File: %s, Table: %s, Row: %d, Column: %d",
+                            e.getMessage(), ProgramOptions.getEndl(), DataSrcImpl.getOurInstance().getCurrentFileName(),
+                            DataSrcImpl.getOurInstance().getCurrentTableName(), row.getRowNum() + 1,
+                            c.getRowIndex() + 1);
                 }
                 break;
             }
@@ -730,9 +738,17 @@ public class ExcelEngine {
             case ERROR: {
                 byte error_code = cal_cell2err(c, cv);
                 try {
-                    ProgramOptions.getLoger().warn("Error message: %s", FormulaError.forInt(error_code).getString());
+                    ProgramOptions.getLoger().warn("Error formula: %s%s  > File: %s, Table: %s, Row: %d, Column: %d",
+                            FormulaError.forInt(error_code).getString(), ProgramOptions.getEndl(),
+                            DataSrcImpl.getOurInstance().getCurrentFileName(),
+                            DataSrcImpl.getOurInstance().getCurrentTableName(), row.getRowNum() + 1,
+                            c.getRowIndex() + 1);
                 } catch (IllegalArgumentException e) {
-                    ProgramOptions.getLoger().warn("Error message: %s", e.getMessage());
+                    ProgramOptions.getLoger().warn(
+                            "Error or unsupported cell value: %s%s  > File: %s, Table: %s, Row: %d, Column: %d",
+                            e.getMessage(), ProgramOptions.getEndl(), DataSrcImpl.getOurInstance().getCurrentFileName(),
+                            DataSrcImpl.getOurInstance().getCurrentTableName(), row.getRowNum() + 1,
+                            c.getRowIndex() + 1);
                 }
                 break;
             }
@@ -855,9 +871,17 @@ public class ExcelEngine {
             case ERROR: {
                 byte error_code = cal_cell2err(c, cv);
                 try {
-                    ProgramOptions.getLoger().warn("Error message: %s", FormulaError.forInt(error_code).getString());
+                    ProgramOptions.getLoger().warn("Error formula: %s%s  > File: %s, Table: %s, Row: %d, Column: %d",
+                            FormulaError.forInt(error_code).getString(), ProgramOptions.getEndl(),
+                            DataSrcImpl.getOurInstance().getCurrentFileName(),
+                            DataSrcImpl.getOurInstance().getCurrentTableName(), row.getRowNum() + 1,
+                            c.getRowIndex() + 1);
                 } catch (IllegalArgumentException e) {
-                    ProgramOptions.getLoger().warn("Error message: %s", e.getMessage());
+                    ProgramOptions.getLoger().warn(
+                            "Error or unsupported cell value: %s%s  > File: %s, Table: %s, Row: %d, Column: %d",
+                            e.getMessage(), ProgramOptions.getEndl(), DataSrcImpl.getOurInstance().getCurrentFileName(),
+                            DataSrcImpl.getOurInstance().getCurrentTableName(), row.getRowNum() + 1,
+                            c.getRowIndex() + 1);
                 }
                 break;
             }

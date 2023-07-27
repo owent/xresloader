@@ -45,6 +45,7 @@ public class ProgramOptions {
     public FileType dataSourceType;
     public String[] dataSourceMetas = null;
     public String dataSourceMetaDelimiter = "\\|";
+    public int dataSourceLruCacheRows = 300000;
     public boolean enableStringMacro = false;
     public RenameRule renameRule = null;
     public boolean requireMappingAllFields = false;
@@ -96,6 +97,7 @@ public class ProgramOptions {
         dataSourceType = FileType.BIN;
         dataSourceMetas = null;
         dataSourceMetaDelimiter = "\\|";
+        dataSourceLruCacheRows = 300000;
         enableStringMacro = false;
         renameRule = null;
         requireMappingAllFields = false;
@@ -220,6 +222,8 @@ public class ProgramOptions {
         options.addOption(null, "lua-module", true, "module(MODULE_NAME, package.seeall) if in lua mode");
         options.addOption(Option.builder().longOpt("validator-rules")
                 .desc("set file to load custom validator").hasArg().argName("FILE PATH").build());
+        options.addOption(Option.builder().longOpt("data-source-lru-cache-rows")
+                .desc("set row number for LRU cache").hasArg().argName("NUMBER").build());
 
         return options;
     }
@@ -350,6 +354,9 @@ public class ProgramOptions {
         dataSourceDirectory = cmd.getOptionValues('d');
         if (dataSourceDirectory == null || dataSourceDirectory.length == 0) {
             dataSourceDirectory = new String[] { "." };
+        }
+        if (cmd.hasOption("data-source-lru-cache-rows")) {
+            dataSourceLruCacheRows = Integer.parseInt(cmd.getOptionValue("data-source-lru-cache-rows", "300000"));
         }
 
         // pretty print

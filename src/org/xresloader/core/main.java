@@ -289,9 +289,11 @@ public class main {
 
                 if (!fileName.isEmpty() && !tableName.isEmpty() && ds.hasCurrentRow()) {
                     ProgramOptions.getLoger().error(
-                            "Convert data failed.%s  > %s%s  > File: %s, Table: %s, Row: %d, Column: %d%s  > %s", endl,
+                            "Convert data failed.%s  > %s%s  > File: %s, Table: %s, Row: %d, Column: %d(%s)%s  > %s",
+                            endl,
                             String.join(" ", args), endl, fileName, tableName,
-                            ds.getCurrentRowNum() + 1, ds.getLastColomnNum() + 1, endl, e.getMessage());
+                            ds.getCurrentRowNum() + 1, ds.getLastColomnNum() + 1,
+                            ExcelEngine.getColumnName(ds.getLastColomnNum() + 1), endl, e.getMessage());
                 } else if (!fileName.isEmpty() && !tableName.isEmpty()) {
                     ProgramOptions.getLoger().error(
                             "Convert data failed.%s  > %s%s  > File: %s, Table: %s%s  > %s", endl,

@@ -11,6 +11,7 @@ import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.ss.formula.eval.NotImplementedException;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.apache.poi.util.IOUtils;
+import org.apache.commons.collections4.map.LRUMap;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -34,7 +35,8 @@ public class ExcelEngine {
     /**
      * 开启的自定义索引缓存，减少打开和分析文件的耗时
      */
-    static private HashMap<String, HashMap<String, CustomDataTableIndex>> openedCustomDataTableIndex = new HashMap<>();
+    static private LRUMap<String, CustomDataTableIndex> openedCustomDataTableIndex = new LRUMap<>();
+    static private int openedCustomDataTableRows = 0;
 
     /**
      * 日期格式列缓存，XSSF在获取Style时性能极其低下，缓存一下有助于提升性能 导致的副作用就是只接受第一个数据行的日期格式
@@ -182,6 +184,26 @@ public class ExcelEngine {
     }
 
     /**
+     * 获取列名称
+     * 
+     * @param column 列号(从1开始)
+     */
+    static public String getColumnName(int column) {
+        if (column <= 0) {
+            return "UNKNOWN";
+        }
+
+        --column;
+        String ret = String.valueOf((char) (column % 26) + 'A');
+        while (column >= 26) {
+            column /= 26;
+            ret = String.valueOf((char) (column % 26) + 'A') + ret;
+        }
+
+        return ret;
+    }
+
+    /**
      * 打开Excel文件
      *
      * @param file_path 文件路径
@@ -271,12 +293,8 @@ public class ExcelEngine {
             realPath = file.getPath().replaceAll("\\\\", "/");
         }
         CustomDataTableIndex ret;
-        var fileCache = openedCustomDataTableIndex.getOrDefault(realPath, null);
-        if (fileCache == null) {
-            fileCache = new HashMap<String, CustomDataTableIndex>();
-            openedCustomDataTableIndex.put(realPath, fileCache);
-        }
-        ret = fileCache.getOrDefault(sheet_name, null);
+        String lruCacheKey = String.format("%s|%s", realPath, sheet_name);
+        ret = openedCustomDataTableIndex.getOrDefault(lruCacheKey, null);
         if (ret != null) {
             return ret;
         }
@@ -287,8 +305,22 @@ public class ExcelEngine {
             ret = ExcelXSSFStreamSheetHandle.buildCustomTableIndex(file, sheet_name);
         }
 
-        if (ret != null && ret.getLastRowNum() < 30000) {
-            fileCache.put(sheet_name, ret);
+        if (ret != null) {
+            int maxCacheRows = ProgramOptions.getInstance().dataSourceLruCacheRows;
+            if (maxCacheRows <= 0) {
+                maxCacheRows = Integer.MAX_VALUE;
+            }
+            if (ret.getLastRowNum() + 1 < maxCacheRows) {
+                openedCustomDataTableIndex.put(lruCacheKey, ret);
+                openedCustomDataTableRows += ret.getLastRowNum() + 1;
+
+                while (openedCustomDataTableRows >= maxCacheRows) {
+                    Map.Entry<String, CustomDataTableIndex> first = openedCustomDataTableIndex.entrySet().iterator()
+                            .next();
+                    openedCustomDataTableRows -= first.getValue().getLastRowNum() + 1;
+                    openedCustomDataTableIndex.remove(first.getKey());
+                }
+            }
         }
         return ret;
     }
@@ -394,17 +426,18 @@ public class ExcelEngine {
                     cv = formula.evalor.evaluate(c);
                 } catch (NotImplementedException e) {
                     ProgramOptions.getLoger().warn(
-                            "Formular has unsupported function(s).We will use cached data.Consider using --disable-excel-formular?%s  > File: %s, Table: %s, Row: %d, Column: %d%s  > Formular Content: %s",
+                            "Formular has unsupported function(s).We will use cached data.Consider using --disable-excel-formular?%s  > File: %s, Table: %s, Row: %d, Column: %d(%s)%s  > Formular Content: %s",
                             ProgramOptions.getEndl(), DataSrcImpl.getOurInstance().getCurrentFileName(),
                             DataSrcImpl.getOurInstance().getCurrentTableName(), row.getRowNum() + 1,
-                            c.getRowIndex() + 1, ProgramOptions.getEndl(), c.getCellFormula());
+                            c.getRowIndex() + 1, getColumnName(c.getRowIndex() + 1), ProgramOptions.getEndl(),
+                            c.getCellFormula());
                     cv = null;
                 } catch (Exception e) {
                     ProgramOptions.getLoger().warn(
-                            "Evaluate formular failed: %s%s  > File: %s, Table: %s, Row: %d, Column: %d",
+                            "Evaluate formular failed: %s%s  > File: %s, Table: %s, Row: %d, Column: %d(%s)",
                             e.getMessage(), ProgramOptions.getEndl(), DataSrcImpl.getOurInstance().getCurrentFileName(),
                             DataSrcImpl.getOurInstance().getCurrentTableName(), row.getRowNum() + 1,
-                            c.getRowIndex() + 1);
+                            c.getRowIndex() + 1, getColumnName(c.getRowIndex() + 1));
                     cv = null;
                 }
             } else {
@@ -562,17 +595,18 @@ public class ExcelEngine {
                     cv = formula.evalor.evaluate(c);
                 } catch (NotImplementedException e) {
                     ProgramOptions.getLoger().warn(
-                            "Formular has unsupported function(s).We will use cached data.Consider using --disable-excel-formular?%s  > File: %s, Table: %s, Row: %d, Column: %d%s  > Formular Content: %s",
+                            "Formular has unsupported function(s).We will use cached data.Consider using --disable-excel-formular?%s  > File: %s, Table: %s, Row: %d, Column: %d(%s)%s  > Formular Content: %s",
                             ProgramOptions.getEndl(), DataSrcImpl.getOurInstance().getCurrentFileName(),
                             DataSrcImpl.getOurInstance().getCurrentTableName(), row.getRowNum() + 1,
-                            c.getRowIndex() + 1, ProgramOptions.getEndl(), c.getCellFormula());
+                            c.getRowIndex() + 1, getColumnName(c.getRowIndex() + 1), ProgramOptions.getEndl(),
+                            c.getCellFormula());
                     cv = null;
                 } catch (Exception e) {
                     ProgramOptions.getLoger().warn(
-                            "Evaluate formular failed: %s%s  > File: %s, Table: %s, Row: %d, Column: %d",
+                            "Evaluate formular failed: %s%s  > File: %s, Table: %s, Row: %d, Column: %d(%s)",
                             e.getMessage(), ProgramOptions.getEndl(), DataSrcImpl.getOurInstance().getCurrentFileName(),
                             DataSrcImpl.getOurInstance().getCurrentTableName(), row.getRowNum() + 1,
-                            c.getRowIndex() + 1);
+                            c.getRowIndex() + 1, getColumnName(c.getRowIndex() + 1));
                     cv = null;
                 }
             else
@@ -598,17 +632,18 @@ public class ExcelEngine {
             case ERROR: {
                 byte error_code = cal_cell2err(c, cv);
                 try {
-                    ProgramOptions.getLoger().warn("Error formula: %s%s  > File: %s, Table: %s, Row: %d, Column: %d",
+                    ProgramOptions.getLoger().warn(
+                            "Error formula: %s%s  > File: %s, Table: %s, Row: %d, Column: %d(%s)",
                             FormulaError.forInt(error_code).getString(), ProgramOptions.getEndl(),
                             DataSrcImpl.getOurInstance().getCurrentFileName(),
                             DataSrcImpl.getOurInstance().getCurrentTableName(), row.getRowNum() + 1,
-                            c.getRowIndex() + 1);
+                            c.getRowIndex() + 1, getColumnName(c.getRowIndex() + 1));
                 } catch (IllegalArgumentException e) {
                     ProgramOptions.getLoger().warn(
-                            "Error or unsupported cell value: %s%s  > File: %s, Table: %s, Row: %d, Column: %d",
+                            "Error or unsupported cell value: %s%s  > File: %s, Table: %s, Row: %d, Column: %d(%s)",
                             e.getMessage(), ProgramOptions.getEndl(), DataSrcImpl.getOurInstance().getCurrentFileName(),
                             DataSrcImpl.getOurInstance().getCurrentTableName(), row.getRowNum() + 1,
-                            c.getRowIndex() + 1);
+                            c.getRowIndex() + 1, getColumnName(c.getRowIndex() + 1));
                 }
                 break;
             }
@@ -703,17 +738,18 @@ public class ExcelEngine {
                     cv = formula.evalor.evaluate(c);
                 } catch (NotImplementedException e) {
                     ProgramOptions.getLoger().warn(
-                            "Formular has unsupported function(s).We will use cached data.Consider using --disable-excel-formular?%s  > File: %s, Table: %s, Row: %d, Column: %d%s  > Formular Content: %s",
+                            "Formular has unsupported function(s).We will use cached data.Consider using --disable-excel-formular?%s  > File: %s, Table: %s, Row: %d, Column: %d(%s)%s  > Formular Content: %s",
                             ProgramOptions.getEndl(), DataSrcImpl.getOurInstance().getCurrentFileName(),
                             DataSrcImpl.getOurInstance().getCurrentTableName(), row.getRowNum() + 1,
-                            c.getRowIndex() + 1, ProgramOptions.getEndl(), c.getCellFormula());
+                            c.getRowIndex() + 1, getColumnName(c.getRowIndex() + 1), ProgramOptions.getEndl(),
+                            c.getCellFormula());
                     cv = null;
                 } catch (Exception e) {
                     ProgramOptions.getLoger().warn(
-                            "Evaluate formular failed: %s%s  > File: %s, Table: %s, Row: %d, Column: %d",
+                            "Evaluate formular failed: %s%s  > File: %s, Table: %s, Row: %d, Column: %d(%s)",
                             e.getMessage(), ProgramOptions.getEndl(), DataSrcImpl.getOurInstance().getCurrentFileName(),
                             DataSrcImpl.getOurInstance().getCurrentTableName(), row.getRowNum() + 1,
-                            c.getRowIndex() + 1);
+                            c.getRowIndex() + 1, getColumnName(c.getRowIndex() + 1));
                     cv = null;
                 }
             } else {
@@ -738,17 +774,18 @@ public class ExcelEngine {
             case ERROR: {
                 byte error_code = cal_cell2err(c, cv);
                 try {
-                    ProgramOptions.getLoger().warn("Error formula: %s%s  > File: %s, Table: %s, Row: %d, Column: %d",
+                    ProgramOptions.getLoger().warn(
+                            "Error formula: %s%s  > File: %s, Table: %s, Row: %d, Column: %d(%s)",
                             FormulaError.forInt(error_code).getString(), ProgramOptions.getEndl(),
                             DataSrcImpl.getOurInstance().getCurrentFileName(),
                             DataSrcImpl.getOurInstance().getCurrentTableName(), row.getRowNum() + 1,
-                            c.getRowIndex() + 1);
+                            c.getRowIndex() + 1, getColumnName(c.getRowIndex() + 1));
                 } catch (IllegalArgumentException e) {
                     ProgramOptions.getLoger().warn(
-                            "Error or unsupported cell value: %s%s  > File: %s, Table: %s, Row: %d, Column: %d",
+                            "Error or unsupported cell value: %s%s  > File: %s, Table: %s, Row: %d, Column: %d(%s)",
                             e.getMessage(), ProgramOptions.getEndl(), DataSrcImpl.getOurInstance().getCurrentFileName(),
                             DataSrcImpl.getOurInstance().getCurrentTableName(), row.getRowNum() + 1,
-                            c.getRowIndex() + 1);
+                            c.getRowIndex() + 1, getColumnName(c.getRowIndex() + 1));
                 }
                 break;
             }
@@ -835,17 +872,18 @@ public class ExcelEngine {
                     cv = formula.evalor.evaluate(c);
                 } catch (NotImplementedException e) {
                     ProgramOptions.getLoger().warn(
-                            "Formular has unsupported function(s).We will use cached data.Consider using --disable-excel-formular?%s  > File: %s, Table: %s, Row: %d, Column: %d%s  > Formular Content: %s",
+                            "Formular has unsupported function(s).We will use cached data.Consider using --disable-excel-formular?%s  > File: %s, Table: %s, Row: %d, Column: %d(%s)%s  > Formular Content: %s",
                             ProgramOptions.getEndl(), DataSrcImpl.getOurInstance().getCurrentFileName(),
                             DataSrcImpl.getOurInstance().getCurrentTableName(), row.getRowNum() + 1,
-                            c.getRowIndex() + 1, ProgramOptions.getEndl(), c.getCellFormula());
+                            c.getRowIndex() + 1, getColumnName(c.getRowIndex() + 1), ProgramOptions.getEndl(),
+                            c.getCellFormula());
                     cv = null;
                 } catch (Exception e) {
                     ProgramOptions.getLoger().warn(
-                            "Evaluate formular failed: %s%s  > File: %s, Table: %s, Row: %d, Column: %d",
+                            "Evaluate formular failed: %s%s  > File: %s, Table: %s, Row: %d, Column: %d(%s)",
                             e.getMessage(), ProgramOptions.getEndl(), DataSrcImpl.getOurInstance().getCurrentFileName(),
                             DataSrcImpl.getOurInstance().getCurrentTableName(), row.getRowNum() + 1,
-                            c.getRowIndex() + 1);
+                            c.getRowIndex() + 1, getColumnName(c.getRowIndex() + 1));
                     cv = null;
                 }
             } else {
@@ -871,17 +909,18 @@ public class ExcelEngine {
             case ERROR: {
                 byte error_code = cal_cell2err(c, cv);
                 try {
-                    ProgramOptions.getLoger().warn("Error formula: %s%s  > File: %s, Table: %s, Row: %d, Column: %d",
+                    ProgramOptions.getLoger().warn(
+                            "Error formula: %s%s  > File: %s, Table: %s, Row: %d, Column: %d(%s)",
                             FormulaError.forInt(error_code).getString(), ProgramOptions.getEndl(),
                             DataSrcImpl.getOurInstance().getCurrentFileName(),
                             DataSrcImpl.getOurInstance().getCurrentTableName(), row.getRowNum() + 1,
-                            c.getRowIndex() + 1);
+                            c.getRowIndex() + 1, getColumnName(c.getRowIndex() + 1));
                 } catch (IllegalArgumentException e) {
                     ProgramOptions.getLoger().warn(
-                            "Error or unsupported cell value: %s%s  > File: %s, Table: %s, Row: %d, Column: %d",
+                            "Error or unsupported cell value: %s%s  > File: %s, Table: %s, Row: %d, Column: %d(%s)",
                             e.getMessage(), ProgramOptions.getEndl(), DataSrcImpl.getOurInstance().getCurrentFileName(),
                             DataSrcImpl.getOurInstance().getCurrentTableName(), row.getRowNum() + 1,
-                            c.getRowIndex() + 1);
+                            c.getRowIndex() + 1, getColumnName(c.getRowIndex() + 1));
                 }
                 break;
             }

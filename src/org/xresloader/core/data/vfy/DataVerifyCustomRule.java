@@ -24,10 +24,14 @@ public class DataVerifyCustomRule extends DataVerifyImpl {
         public List<String> rules;
     }
 
-    public DataVerifyCustomRule(String name, ArrayList<String> rules) {
+    public DataVerifyCustomRule(String name, ArrayList<String> rules, String description) {
         super(name);
 
         this.rules = rules;
+
+        if (description != null && !description.isEmpty()) {
+            this.description = description;
+        }
     }
 
     public String getDescription() {
@@ -198,6 +202,7 @@ public class DataVerifyCustomRule extends DataVerifyImpl {
                     }
 
                     Object nameObj = ((Map<?, ?>) ruleObject).get("name");
+                    Object descriptionObj = ((Map<?, ?>) ruleObject).getOrDefault("description", null);
                     Object rulesObj = ((Map<?, ?>) ruleObject).get("rules");
                     if (nameObj == null || !(nameObj instanceof String)) {
                         continue;
@@ -208,6 +213,11 @@ public class DataVerifyCustomRule extends DataVerifyImpl {
                     }
 
                     String name = (String) nameObj;
+                    String description = null;
+                    if (descriptionObj != null && descriptionObj instanceof String) {
+                        description = (String) descriptionObj;
+                    }
+
                     ArrayList<String> rules = new ArrayList<String>();
                     rules.ensureCapacity(((List<?>) rulesObj).size());
                     for (Object ruleData : ((List<?>) rulesObj)) {
@@ -217,7 +227,7 @@ public class DataVerifyCustomRule extends DataVerifyImpl {
                         }
                     }
 
-                    if (null != ret.put(name, new DataVerifyCustomRule(name, rules))) {
+                    if (null != ret.put(name, new DataVerifyCustomRule(name, rules, description))) {
                         ProgramOptions.getLoger().warn(
                                 "Load custom validator file \"%s\" with more than one rule with name \"%s\", we will use the last one.",
                                 filePath,

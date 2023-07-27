@@ -6,6 +6,7 @@ import org.xresloader.core.data.err.ConvException;
 import org.xresloader.core.data.et.DataETProcessor;
 import org.xresloader.core.data.src.DataContainer;
 import org.xresloader.core.data.src.DataSrcImpl;
+import org.xresloader.core.engine.ExcelEngine;
 import org.xresloader.core.engine.IdentifyDescriptor;
 import org.xresloader.core.scheme.SchemeConf;
 
@@ -1117,10 +1118,11 @@ public abstract class DataDstJava extends DataDstImpl {
                         field.getTypeDescriptor().getFullName(), fieldSize, inputs.length);
             } else {
                 ProgramOptions.getLoger().warn(
-                        "Try to convert %s need %d fields, but provide %d fields.%s  > File: %s, Table: %s, Row: %d, Column: %d",
+                        "Try to convert %s need %d fields, but provide %d fields.%s  > File: %s, Table: %s, Row: %d, Column: %d(%s)",
                         field.getTypeDescriptor().getFullName(), fieldSize, inputs.length, ProgramOptions.getEndl(),
                         current_source.getCurrentFileName(), current_source.getCurrentTableName(),
-                        current_source.getCurrentRowNum() + 1, current_source.getLastColomnNum() + 1);
+                        current_source.getCurrentRowNum() + 1, current_source.getLastColomnNum() + 1,
+                        ExcelEngine.getColumnName(current_source.getLastColomnNum() + 1));
             }
         }
 

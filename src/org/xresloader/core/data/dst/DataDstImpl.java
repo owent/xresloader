@@ -146,7 +146,7 @@ public abstract class DataDstImpl {
                     for (var ref : rowSet.getValue()) {
                         sb.append(
                                 String.format("    File: %s, sheet: %s, row: %d\n", ref.fileName, ref.tableName,
-                                        ref.row));
+                                        ref.row + 1));
                     }
                 }
             }
@@ -628,11 +628,12 @@ public abstract class DataDstImpl {
             }
             if (current_source != null) {
                 ProgramOptions.getLoger().warn(
-                        "Convert %s from \"%s\", we need only %d fields but provided %d, \"%s\" may be ignored.%s  > File: %s, Table: %s, Row: %d, Column: %d",
+                        "Convert %s from \"%s\", we need only %d fields but provided %d, \"%s\" may be ignored.%s  > File: %s, Table: %s, Row: %d, Column: %d(%s)",
                         oneof.getFullName(), input, 2, ret.length, String.join("\",\"", ignored),
                         ProgramOptions.getEndl(), current_source.getCurrentFileName(),
                         current_source.getCurrentTableName(), current_source.getCurrentRowNum() + 1,
-                        current_source.getLastColomnNum() + 1);
+                        current_source.getLastColomnNum() + 1,
+                        ExcelEngine.getColumnName(current_source.getLastColomnNum() + 1));
             } else {
                 ProgramOptions.getLoger().warn(
                         "Convert %s from \"%s\", we need only %d fields but provided %d, \"%s\" may be ignored.",

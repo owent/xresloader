@@ -213,8 +213,12 @@ public abstract class DataVerifyImpl {
                 }
             }
         } catch (Exception e) {
-            throw new ConvException(String.format("Convert %s for %s with %s %s failed, %s", val, path,
-                    getValidatorWord(verifyEngine), collectValidatorNames(verifyEngine), e.getMessage()));
+            if (verifyEngine == null || verifyEngine.isEmpty()) {
+                throw new ConvException(String.format("Convert %s for %s failed, %s", val, path, e.getMessage()));
+            } else {
+                throw new ConvException(String.format("Convert %s for %s with %s %s failed, %s", val, path,
+                        getValidatorWord(verifyEngine), collectValidatorNames(verifyEngine), e.getMessage()));
+            }
         }
 
         throw new ConvException(String.format("Convert %s for %s with %s %s failed, check data failed.", val,

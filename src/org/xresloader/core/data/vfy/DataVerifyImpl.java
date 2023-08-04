@@ -5,6 +5,8 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import org.xresloader.core.data.err.ConvException;
 
@@ -16,6 +18,9 @@ public abstract class DataVerifyImpl {
     protected HashMap<String, Long> all_names = new HashMap<String, Long>();
     protected HashSet<Long> all_numbers = new HashSet<Long>();
     protected String name = "";
+
+    private static Pattern PERCENT_PATTERN = Pattern.compile("^\\s*((\\-\\s*)?[0-9]+(\\.[0-9]+)?)\\s*%\\s*$");
+    private static Pattern INTEGER_WITH_DOT_PATTERN = Pattern.compile("^\\s*([0-9\\,]+)\\s*$");
 
     protected DataVerifyImpl(String _name) {
         name = _name;
@@ -43,6 +48,22 @@ public abstract class DataVerifyImpl {
         return false;
     }
 
+    private static double doubleValueOf(String input) {
+        Matcher matcher = PERCENT_PATTERN.matcher(input);
+        if (matcher.matches()) {
+            return Double.valueOf(matcher.group(1).trim()) / 100.0;
+        }
+        return Double.valueOf(input);
+    }
+
+    private static long longValueOf(String input) {
+        Matcher matcher = INTEGER_WITH_DOT_PATTERN.matcher(input);
+        if (matcher.matches()) {
+            return Long.valueOf(matcher.group(1).trim());
+        }
+        return Long.valueOf(input);
+    }
+
     public boolean get(String enum_name, DataVerifyResult res) {
         if (null == enum_name || enum_name.isEmpty()) {
             res.success = true;
@@ -64,9 +85,9 @@ public abstract class DataVerifyImpl {
 
         if (is_numeric) {
             if (is_double) {
-                return get(Double.valueOf(enum_name), res);
+                return get(doubleValueOf(enum_name), res);
             } else {
-                return get(Long.valueOf(enum_name), res);
+                return get(longValueOf(enum_name), res);
             }
         }
 
@@ -140,7 +161,7 @@ public abstract class DataVerifyImpl {
                     if (verify_cache.value instanceof Long) {
                         return ((Long) verify_cache.value).doubleValue();
                     }
-                    return Double.valueOf(verify_cache.value.toString());
+                    return doubleValueOf(verify_cache.value.toString());
                 }
             }
         } catch (Exception e) {
@@ -181,18 +202,18 @@ public abstract class DataVerifyImpl {
 
         if (is_numeric) {
             if (is_double) {
-                return getAndVerify(verifyEngine, path, Double.valueOf(val));
+                return getAndVerify(verifyEngine, path, doubleValueOf(val));
             } else {
-                return getAndVerify(verifyEngine, path, Long.valueOf(val));
+                return getAndVerify(verifyEngine, path, longValueOf(val));
             }
         }
 
         try {
             if (verifyEngine == null || verifyEngine.isEmpty()) {
                 if (is_double) {
-                    return Double.valueOf(val);
+                    return doubleValueOf(val);
                 } else {
-                    return Long.valueOf(val);
+                    return longValueOf(val);
                 }
             }
 
@@ -209,7 +230,7 @@ public abstract class DataVerifyImpl {
                     if (verify_cache.value instanceof Long) {
                         return ((Long) verify_cache.value).doubleValue();
                     }
-                    return Double.valueOf(verify_cache.value.toString());
+                    return doubleValueOf(verify_cache.value.toString());
                 }
             }
         } catch (Exception e) {

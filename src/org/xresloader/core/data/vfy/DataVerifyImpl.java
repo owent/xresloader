@@ -20,7 +20,7 @@ public abstract class DataVerifyImpl {
     protected String name = "";
 
     private static Pattern PERCENT_PATTERN = Pattern.compile("^\\s*((\\-\\s*)?[0-9]+(\\.[0-9]+)?)\\s*%\\s*$");
-    private static Pattern INTEGER_WITH_DOT_PATTERN = Pattern.compile("^\\s*([0-9\\,]+)\\s*$");
+    private static Pattern INTEGER_WITH_DOT_PATTERN = Pattern.compile("^\\s*((\\-\\s*)?[0-9\\,]+)\\s*$");
 
     protected DataVerifyImpl(String _name) {
         name = _name;

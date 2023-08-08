@@ -194,10 +194,10 @@ public class ExcelEngine {
         }
 
         --column;
-        String ret = String.valueOf((char) (column % 26) + 'A');
+        String ret = String.valueOf((char) ((column % 26) + 'A'));
         while (column >= 26) {
             column /= 26;
-            ret = String.valueOf((char) (column % 26) + 'A') + ret;
+            ret = String.valueOf((char) ((column % 26) + 'A')) + ret;
         }
 
         return ret;

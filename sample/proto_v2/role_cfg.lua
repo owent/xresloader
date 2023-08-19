@@ -11,7 +11,7 @@ return {
         },
         data_ver = "1.0.0.0",
         hash_code = "sha256:f83885dbe713ab6b423cf917a202d67da647d58a4636dbad41575d5479a6e87a",
-        xres_ver = "2.14.0-rc3",
+        xres_ver = "2.14.0",
     },
     [2] = "role_cfg",
     role_cfg = {

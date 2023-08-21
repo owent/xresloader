@@ -88,11 +88,6 @@ public abstract class DataDstJava extends DataDstImpl {
         return "java";
     }
 
-    public class DataDstDataSource {
-        String file = null;
-        String sheet = null;
-    }
-
     public class DataDstObject {
         public HashMap<String, Object> header = new HashMap<String, Object>();
         public HashMap<String, List<Object>> body = new HashMap<String, List<Object>>();
@@ -134,6 +129,7 @@ public abstract class DataDstJava extends DataDstImpl {
         DataDstTableContent ret = new DataDstTableContent();
 
         ret.descriptor = compiler.compile();
+        int previousRowNum = ret.rows.size();
 
         while (DataSrcImpl.getOurInstance().nextRow()) {
             DataRowContext rowContext = new DataRowContext(DataSrcImpl.getOurInstance().getCurrentFileName(),
@@ -155,6 +151,7 @@ public abstract class DataDstJava extends DataDstImpl {
         ret.data_message_type = ret.descriptor.getFullName();
         ret.data_source.put("file", DataSrcImpl.getOurInstance().getCurrentFileName());
         ret.data_source.put("sheet", DataSrcImpl.getOurInstance().getCurrentTableName());
+        ret.data_source.put("count", ret.rows.size() - previousRowNum);
 
         return ret;
     }

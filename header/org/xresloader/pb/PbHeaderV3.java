@@ -41,6 +41,12 @@ public final class PbHeaderV3 {
      */
     com.google.protobuf.ByteString
         getSheetBytes();
+
+    /**
+     * <code>int32 count = 3;</code>
+     * @return The count.
+     */
+    int getCount();
   }
   /**
    * Protobuf type {@code org.xresloader.pb.xresloader_data_source}
@@ -157,6 +163,17 @@ public final class PbHeaderV3 {
       }
     }
 
+    public static final int COUNT_FIELD_NUMBER = 3;
+    private int count_ = 0;
+    /**
+     * <code>int32 count = 3;</code>
+     * @return The count.
+     */
+    @java.lang.Override
+    public int getCount() {
+      return count_;
+    }
+
     private byte memoizedIsInitialized = -1;
     @java.lang.Override
     public final boolean isInitialized() {
@@ -177,6 +194,9 @@ public final class PbHeaderV3 {
       if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(sheet_)) {
         com.google.protobuf.GeneratedMessageV3.writeString(output, 2, sheet_);
       }
+      if (count_ != 0) {
+        output.writeInt32(3, count_);
+      }
       getUnknownFields().writeTo(output);
     }
 
@@ -191,6 +211,10 @@ public final class PbHeaderV3 {
       }
       if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(sheet_)) {
         size += com.google.protobuf.GeneratedMessageV3.computeStringSize(2, sheet_);
+      }
+      if (count_ != 0) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(3, count_);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSize = size;
@@ -211,6 +235,8 @@ public final class PbHeaderV3 {
           .equals(other.getFile())) return false;
       if (!getSheet()
           .equals(other.getSheet())) return false;
+      if (getCount()
+          != other.getCount()) return false;
       if (!getUnknownFields().equals(other.getUnknownFields())) return false;
       return true;
     }
@@ -226,6 +252,8 @@ public final class PbHeaderV3 {
       hash = (53 * hash) + getFile().hashCode();
       hash = (37 * hash) + SHEET_FIELD_NUMBER;
       hash = (53 * hash) + getSheet().hashCode();
+      hash = (37 * hash) + COUNT_FIELD_NUMBER;
+      hash = (53 * hash) + getCount();
       hash = (29 * hash) + getUnknownFields().hashCode();
       memoizedHashCode = hash;
       return hash;
@@ -359,6 +387,7 @@ public final class PbHeaderV3 {
         bitField0_ = 0;
         file_ = "";
         sheet_ = "";
+        count_ = 0;
         return this;
       }
 
@@ -397,6 +426,9 @@ public final class PbHeaderV3 {
         }
         if (((from_bitField0_ & 0x00000002) != 0)) {
           result.sheet_ = sheet_;
+        }
+        if (((from_bitField0_ & 0x00000004) != 0)) {
+          result.count_ = count_;
         }
       }
 
@@ -454,6 +486,9 @@ public final class PbHeaderV3 {
           bitField0_ |= 0x00000002;
           onChanged();
         }
+        if (other.getCount() != 0) {
+          setCount(other.getCount());
+        }
         this.mergeUnknownFields(other.getUnknownFields());
         onChanged();
         return this;
@@ -490,6 +525,11 @@ public final class PbHeaderV3 {
                 bitField0_ |= 0x00000002;
                 break;
               } // case 18
+              case 24: {
+                count_ = input.readInt32();
+                bitField0_ |= 0x00000004;
+                break;
+              } // case 24
               default: {
                 if (!super.parseUnknownField(input, extensionRegistry, tag)) {
                   done = true; // was an endgroup tag
@@ -647,6 +687,38 @@ public final class PbHeaderV3 {
         checkByteStringIsUtf8(value);
         sheet_ = value;
         bitField0_ |= 0x00000002;
+        onChanged();
+        return this;
+      }
+
+      private int count_ ;
+      /**
+       * <code>int32 count = 3;</code>
+       * @return The count.
+       */
+      @java.lang.Override
+      public int getCount() {
+        return count_;
+      }
+      /**
+       * <code>int32 count = 3;</code>
+       * @param value The count to set.
+       * @return This builder for chaining.
+       */
+      public Builder setCount(int value) {
+
+        count_ = value;
+        bitField0_ |= 0x00000004;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>int32 count = 3;</code>
+       * @return This builder for chaining.
+       */
+      public Builder clearCount() {
+        bitField0_ = (bitField0_ & ~0x00000004);
+        count_ = 0;
         onChanged();
         return this;
       }
@@ -3104,16 +3176,16 @@ public final class PbHeaderV3 {
   static {
     java.lang.String[] descriptorData = {
       "\n\022pb_header_v3.proto\022\021org.xresloader.pb\"" +
-      "5\n\026xresloader_data_source\022\014\n\004file\030\001 \001(\t\022" +
-      "\r\n\005sheet\030\002 \001(\t\"\256\001\n\021xresloader_header\022\020\n\010" +
-      "xres_ver\030\001 \001(\t\022\020\n\010data_ver\030\002 \001(\t\022\r\n\005coun" +
-      "t\030\003 \001(\r\022\021\n\thash_code\030\004 \001(\t\022\023\n\013descriptio" +
-      "n\030\005 \001(\t\022>\n\013data_source\030\013 \003(\0132).org.xresl" +
-      "oader.pb.xresloader_data_source\"|\n\025xresl" +
-      "oader_datablocks\0224\n\006header\030\001 \001(\0132$.org.x" +
-      "resloader.pb.xresloader_header\022\022\n\ndata_b" +
-      "lock\030\002 \003(\014\022\031\n\021data_message_type\030\003 \001(\tb\006p" +
-      "roto3"
+      "D\n\026xresloader_data_source\022\014\n\004file\030\001 \001(\t\022" +
+      "\r\n\005sheet\030\002 \001(\t\022\r\n\005count\030\003 \001(\005\"\256\001\n\021xreslo" +
+      "ader_header\022\020\n\010xres_ver\030\001 \001(\t\022\020\n\010data_ve" +
+      "r\030\002 \001(\t\022\r\n\005count\030\003 \001(\r\022\021\n\thash_code\030\004 \001(" +
+      "\t\022\023\n\013description\030\005 \001(\t\022>\n\013data_source\030\013 " +
+      "\003(\0132).org.xresloader.pb.xresloader_data_" +
+      "source\"|\n\025xresloader_datablocks\0224\n\006heade" +
+      "r\030\001 \001(\0132$.org.xresloader.pb.xresloader_h" +
+      "eader\022\022\n\ndata_block\030\002 \003(\014\022\031\n\021data_messag" +
+      "e_type\030\003 \001(\tb\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
@@ -3124,7 +3196,7 @@ public final class PbHeaderV3 {
     internal_static_org_xresloader_pb_xresloader_data_source_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_org_xresloader_pb_xresloader_data_source_descriptor,
-        new java.lang.String[] { "File", "Sheet", });
+        new java.lang.String[] { "File", "Sheet", "Count", });
     internal_static_org_xresloader_pb_xresloader_header_descriptor =
       getDescriptor().getMessageTypes().get(1);
     internal_static_org_xresloader_pb_xresloader_header_fieldAccessorTable = new

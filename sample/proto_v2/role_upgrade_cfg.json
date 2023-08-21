@@ -3,10 +3,12 @@
     "count": 102,
     "data_source": [
       {
+        "count": 42,
         "file": "资源转换示例.xlsx",
         "sheet": "upgrade_10001"
       },
       {
+        "count": 60,
         "file": "资源转换示例.xlsx",
         "sheet": "upgrade_10002"
       }
@@ -14,7 +16,7 @@
     "data_ver": "1.0.0.0",
     "description": "Test role_upgrade_cfg with multi keys\r\nTest role_upgrade_cfg with multi keys",
     "hash_code": "sha256:e356806bc55be9cc8a6c701d4295989e0fc3887b368681bb9457b0e51df8f445",
-    "xres_ver": "2.14.0"
+    "xres_ver": "2.14.1"
   },
   {"role_upgrade_cfg": [
     {

@@ -5,6 +5,7 @@ return {
     count = 3,
     data_source = {
       {
+        count = 3,
         file = "资源转换示例.xlsx",
         sheet = "arr_in_arr",
       },
@@ -12,7 +13,7 @@ return {
     data_ver = "1.0.0.0",
     description = "Test arr_in_arr_cfg",
     hash_code = "sha256:3ed958da23b37c20c42341e5ad614314abdf83a8d492829679dd0d5e769d4307",
-    xres_ver = "2.14.0",
+    xres_ver = "2.14.1",
   },
   [2] = "arr_in_arr_cfg",
   arr_in_arr_cfg = {

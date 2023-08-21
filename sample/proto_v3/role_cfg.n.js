@@ -5,13 +5,14 @@ exports.role_cfg_header = {
   count : 7,
   data_source : [
     {
+      count : 7,
       file : "资源转换示例.xlsx",
       sheet : "kind"
     }
   ],
   data_ver : "1.0.0.0",
   hash_code : "sha256:eeaf27d61a221566a4129cce5f868e1d929d571f6ad2859de106242f0acc820f",
-  xres_ver : "2.14.0"
+  xres_ver : "2.14.1"
 };
 exports.role_cfg = [
   {

@@ -5,13 +5,14 @@ return {
         count = 7,
         data_source = {
             {
+                count = 7,
                 file = "资源转换示例.xlsx",
                 sheet = "kind",
             },
         },
         data_ver = "1.0.0.0",
         hash_code = "sha256:f83885dbe713ab6b423cf917a202d67da647d58a4636dbad41575d5479a6e87a",
-        xres_ver = "2.14.0",
+        xres_ver = "2.14.1",
     },
     [2] = "role_cfg",
     role_cfg = {

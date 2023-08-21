@@ -1108,6 +1108,7 @@ public class DataDstPb extends DataDstImpl {
         while (DataSrcImpl.getOurInstance().nextTable()) {
             // 生成描述集
             DataDstWriterNode desc = src.compile();
+            int previousRowNum = blocks.getDataBlockCount();
 
             while (DataSrcImpl.getOurInstance().nextRow()) {
                 DataRowContext rowContext = new DataRowContext(DataSrcImpl.getOurInstance().getCurrentFileName(),
@@ -1136,6 +1137,7 @@ public class DataDstPb extends DataDstImpl {
             PbHeaderV3.xresloader_data_source.Builder data_source = header.addDataSourceBuilder();
             data_source.setFile(DataSrcImpl.getOurInstance().getCurrentFileName());
             data_source.setSheet(DataSrcImpl.getOurInstance().getCurrentTableName());
+            data_source.setCount(blocks.getDataBlockCount() - previousRowNum);
         }
 
         String validateResult = tableContext.checkUnique();

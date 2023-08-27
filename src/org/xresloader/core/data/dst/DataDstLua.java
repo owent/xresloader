@@ -131,7 +131,6 @@ public class DataDstLua extends DataDstJava {
             return w.toString();
         }
 
-        char b;
         char c = 0;
         String hhhh;
         int i;
@@ -139,7 +138,6 @@ public class DataDstLua extends DataDstJava {
 
         w.write('"');
         for (i = 0; i < len; i += 1) {
-            b = c;
             c = input.charAt(i);
             switch (c) {
                 case '\\':

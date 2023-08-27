@@ -17,8 +17,6 @@ public class IdentifyEngine {
      * @return
      */
     static public IdentifyDescriptor n2i(String _name, int index) {
-        String[] segs = null;
-
         IdentifyDescriptor ret = new IdentifyDescriptor();
         ret.index = index;
         int verify_index = _name.lastIndexOf('@');

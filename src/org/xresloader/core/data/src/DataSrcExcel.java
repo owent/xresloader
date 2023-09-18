@@ -203,7 +203,7 @@ public class DataSrcExcel extends DataSrcImpl {
             }
 
             if (file_path.isEmpty() || src.table_name.isEmpty() || src.data_col <= 0 || src.data_row <= 0) {
-                ProgramOptions.getLoger().error("Data source file \"%s\" (%s:%d，%d) ignored.", src.file_path,
+                ProgramOptions.getLoger().error("Data source file \"%s\" (%s:%d, %d) ignored.", src.file_path,
                         src.table_name, src.data_row, src.data_col);
                 continue;
             }
@@ -212,7 +212,7 @@ public class DataSrcExcel extends DataSrcImpl {
             if (file == null) {
                 ProgramOptions.getLoger().warn("Open data source file \"%s\" failed, not found.", file_path,
                         src.table_name);
-                continue;
+                return -54;
             }
 
             DataSheetInfo res = new DataSheetInfo();
@@ -224,14 +224,14 @@ public class DataSrcExcel extends DataSrcImpl {
                 } else {
                     ProgramOptions.getLoger().error("Open data source file \"%s\" or sheet \"%s\" failed.",
                             src.file_path, src.table_name);
-                    continue;
+                    return -55;
                 }
             } else {
                 res.userModuleTable = ExcelEngine.openUserModuleSheet(file, src.table_name);
                 if (null == res.userModuleTable) {
                     ProgramOptions.getLoger().error("Open data source file \"%s\" or sheet \"%s\" failed.",
                             src.file_path, src.table_name);
-                    continue;
+                    return -55;
                 }
                 res.lastRowNumber = res.userModuleTable.getLastRowNum();
 

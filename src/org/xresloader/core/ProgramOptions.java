@@ -64,6 +64,7 @@ public class ProgramOptions {
     public String xmlRootName = "root";
     public String javascriptExport = null;
     public String javascriptGlobalVar = "";
+    public int tolerateContinueEmptyRows = 100000;
 
     private ProgramOptions() {
         dataSourceMetas = new String[] {};
@@ -115,6 +116,7 @@ public class ProgramOptions {
         xmlRootName = "root";
         javascriptExport = null;
         javascriptGlobalVar = "";
+        tolerateContinueEmptyRows = 100000;
     }
 
     private static Options get_options_group() {
@@ -224,6 +226,8 @@ public class ProgramOptions {
                 .desc("set file to load custom validator").hasArg().argName("FILE PATH").build());
         options.addOption(Option.builder().longOpt("data-source-lru-cache-rows")
                 .desc("set row number for LRU cache").hasArg().argName("NUMBER").build());
+        options.addOption(Option.builder().longOpt("tolerate-max-empty-rows")
+                .desc("set max continue empty rows").hasArg().argName("NUMBER").build());
 
         return options;
     }
@@ -357,6 +361,9 @@ public class ProgramOptions {
         }
         if (cmd.hasOption("data-source-lru-cache-rows")) {
             dataSourceLruCacheRows = Integer.parseInt(cmd.getOptionValue("data-source-lru-cache-rows", "300000"));
+        }
+        if (cmd.hasOption("tolerate-max-empty-rows")) {
+            tolerateContinueEmptyRows = Integer.parseInt(cmd.getOptionValue("tolerate-max-empty-rows", "100000"));
         }
 
         // pretty print

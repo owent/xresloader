@@ -121,6 +121,7 @@ echo "
 | --ignore-unknown-dependency  | 忽略未知的依赖项                | 忽略未知的输入协议的依赖项(>=2.9.0版本)                                                                  |
 | --validator-rules            | 指定自定义验证器配置文件路径    | 指定自定义验证器配置文件路径                                                                             |
 | --data-source-lru-cache-rows | 数据源的LRU Cache行数           | 仅缓存流式索引                                                                                           |
+| --tolerate-max-empty-rows    | 连续空行检测的行数              | 设置连续空行检测的行数(>=2.14.1版本) ，大量的连续空行通常是误操作                                        |
 
 ### 协议类型
 

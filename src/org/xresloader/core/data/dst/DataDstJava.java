@@ -131,6 +131,8 @@ public abstract class DataDstJava extends DataDstImpl {
         ret.descriptor = compiler.compile();
         int previousRowNum = ret.rows.size();
 
+        int tolerateContinueEmptyRows = ProgramOptions.getInstance().tolerateContinueEmptyRows;
+        int currentContinueEmptyRows = 0;
         while (DataSrcImpl.getOurInstance().nextRow()) {
             DataRowContext rowContext = new DataRowContext(DataSrcImpl.getOurInstance().getCurrentFileName(),
                     DataSrcImpl.getOurInstance().getCurrentTableName(),
@@ -141,6 +143,15 @@ public abstract class DataDstJava extends DataDstImpl {
                 ret.rows.add(msg);
 
                 tableContext.addUniqueCache(rowContext);
+                currentContinueEmptyRows = 0;
+            } else {
+                currentContinueEmptyRows++;
+                if (currentContinueEmptyRows > tolerateContinueEmptyRows) {
+                    throw new ConvException(String.format(
+                            "Too many empty row detected, maybe some cells in file \"%s\" , sheet \"%s\" is set by mistake.Or you can use --tolerate-max-empty-rows to change the bound if it's not a mistake.",
+                            DataSrcImpl.getOurInstance().getCurrentFileName(),
+                            DataSrcImpl.getOurInstance().getCurrentTableName()));
+                }
             }
         }
 

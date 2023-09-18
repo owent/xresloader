@@ -84,9 +84,6 @@ public final class SchemeDataSourceExcel extends SchemeDataSourceBase {
         // 数据项必须在这之后
         for (++data_row; data_row < row_num; ++data_row) {
             ExcelEngine.DataRowWrapper rowWrapper = new ExcelEngine.DataRowWrapper(table.getRow(data_row));
-            if (null == rowWrapper) {
-                continue;
-            }
 
             String key = cell2str(rowWrapper, key_col);
             ArrayList<String> datas = new ArrayList<String>();

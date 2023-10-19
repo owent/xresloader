@@ -29,7 +29,7 @@ public class DataVerifyInTableColumn extends DataVerifyImpl {
 
         this.file = DataSrcImpl.getDataFile(this.parameters.get(1));
         if (file == null) {
-            ProgramOptions.getLoger().error("Can not find file % for validator %s", this.parameters.get(1),
+            ProgramOptions.getLoger().error("Can not find file %s for validator %s", this.parameters.get(1),
                     tokens.name);
             return;
         }

@@ -2,6 +2,8 @@
 
 ## Unrelease
 
+1. 修订 `DataVerifyInTableColumn` 验证器的文件错误输出。
+
 ## 2.14.1
 
 1. 增加输出每个数据源的数据个数

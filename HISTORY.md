@@ -2,7 +2,23 @@
 
 ## Unrelease
 
+## 2.15.0
+
 1. 修订 `DataVerifyInTableColumn` 验证器的文件错误输出。
+2. 新增 `org.xresloader.map_key_validator` 和 `org.xresloader.map_value_validator` 插件用于设置map类型的内部字段验证器。
+3. 更新依赖库
+  + `org.jacoco.jacoco-maven-plugin` -> 0.8.11
+  + `maven-surefire-plugin` -> 3.2.2
+  + `maven-shade-plugin` -> 3.5.1
+  + `commons-cli` -> 1.6.0
+  + `log4j` -> 2.22.0
+  + `msgpack-core` -> 0.9.6
+  + `org.json` -> 20231013
+  + `com.google.protobuf` -> 3.25.1
+  + `org.apache.santuario` -> 4.0.0
+  + `org.apache.poi` -> 5.2.4
+  + `org.snakeyaml` -> 2.7
+  + `org.junit.jupiter` -> 5.10.1
 
 ## 2.14.1
 
@@ -72,17 +88,17 @@
    + 增加 `org.xresloader.ue.include_header` 插件用于对于特定的Message额外附加包含文件
 3. 修复Lua输出 `</` 时追加了冗余的 `\` 导致转移错误的问题。
 4. 修复一处在Plain模式中oneof内使用enum类型时，无法导出输出的问题。
-2. 更新 `org.jacoco.jacoco-maven-plugin` 到 0.8.10
-3. 更新 `org.apache.maven.plugins.maven-compiler-plugin` 到 3.11.0
-4. 更新 `maven-surefire-plugin` 到 3.1.0
-5. 更新 `org.apache.maven.plugins.maven-shade-plugin` 到 3.4.1
-6. 更新 `log4j` 到 2.20.0
-7. 更新 `protobuf` 到 3.23.0
-8. 更新 `org.apache.pdfbox` 到 2.0.28
-9. 更新 `org.apache.santuario.xmlsec` 到 3.0.2
-10. 更新 `org.dom4j` 到 2.1.4
-11. 更新 `org.apache.commons.commons-csv` 到 1.10.0
-12. 更新 `junit` 到 5.9.3
+5. 更新 `org.jacoco.jacoco-maven-plugin` 到 0.8.10
+6. 更新 `org.apache.maven.plugins.maven-compiler-plugin` 到 3.11.0
+7. 更新 `maven-surefire-plugin` 到 3.1.0
+8. 更新 `org.apache.maven.plugins.maven-shade-plugin` 到 3.4.1
+9. 更新 `log4j` 到 2.20.0
+10. 更新 `protobuf` 到 3.23.0
+11. 更新 `org.apache.pdfbox` 到 2.0.28
+12. 更新 `org.apache.santuario.xmlsec` 到 3.0.2
+13. 更新 `org.dom4j` 到 2.1.4
+14. 更新 `org.apache.commons.commons-csv` 到 1.10.0
+15. 更新 `junit` 到 5.9.3
 
 ## 2.13.0
 

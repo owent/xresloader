@@ -403,6 +403,64 @@ public class DataDstPb extends DataDstImpl {
             child_field.resetValidator();
         }
 
+        do {
+            if (!fd.isMapField()) {
+                break;
+            }
+            if (!fd.getOptions().hasExtension(Xresloader.mapKeyValidator) &&
+                    !fd.getOptions().hasExtension(Xresloader.mapValueValidator)) {
+                break;
+            }
+
+            DataDstTypeDescriptor mapTypeDesc = child_field.getTypeDescriptor();
+            if (null == mapTypeDesc) {
+                break;
+            }
+
+            DataDstFieldDescriptor mapKeyField = null;
+            DataDstFieldDescriptor mapValueField = null;
+            for (DataDstFieldDescriptor mapField : mapTypeDesc.getSortedFields()) {
+                if (mapField.getName().equalsIgnoreCase("key")) {
+                    mapKeyField = mapField;
+                } else if (mapField.getName().equalsIgnoreCase("value")) {
+                    mapValueField = mapField;
+                }
+            }
+            if (mapKeyField == null || mapValueField == null) {
+                break;
+            }
+
+            if (fd.getOptions().hasExtension(Xresloader.mapKeyValidator)) {
+                verifierExpr = fd.getOptions().getExtension(Xresloader.mapKeyValidator);
+                if (verifierExpr != null && !verifierExpr.isEmpty()) {
+                    mapKeyField.mutableExtension().validator = verifierExpr;
+                    gen = setup_validator(null, verifierExpr, null);
+                    if (gen != null && gen.validator != null && !gen.validator.isEmpty()) {
+                        for (DataVerifyImpl vfy : gen.validator) {
+                            mapKeyField.addValidator(vfy);
+                        }
+                    } else {
+                        mapKeyField.resetValidator();
+                    }
+                }
+            }
+
+            if (fd.getOptions().hasExtension(Xresloader.mapValueValidator)) {
+                verifierExpr = fd.getOptions().getExtension(Xresloader.mapValueValidator);
+                if (verifierExpr != null && !verifierExpr.isEmpty()) {
+                    mapValueField.mutableExtension().validator = verifierExpr;
+                    gen = setup_validator(null, verifierExpr, null);
+                    if (gen != null && gen.validator != null && !gen.validator.isEmpty()) {
+                        for (DataVerifyImpl vfy : gen.validator) {
+                            mapValueField.addValidator(vfy);
+                        }
+                    } else {
+                        mapValueField.resetValidator();
+                    }
+                }
+            }
+        } while (false);
+
         if (fd.getOptions().hasExtension(Xresloader.fieldDescription)) {
             child_field.mutableExtension().description = fd.getOptions().getExtension(Xresloader.fieldDescription);
         }

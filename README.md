@@ -329,6 +329,8 @@ validator:
 |      org.xresloader.validator                    | 验证器，可填范围(log-high),message名，enum名。多个由 `|` 分隔。任意验证器通过检查则认为数据有效                                              |
 |     org.xresloader.field_unique_tag              | 设置唯一性检测Tag，多个相同tag的字段将合并并在转出数据时检测唯一性（可多个）                                                                 |
 |     org.xresloader.field_not_null                | 如果配置了字段映射且某个数据行对应的oneof数据为空，则忽略此行                                                                                |
+|     org.xresloader.map_key_validator             | 用于Map类型Key的验证器，可填范围(log-high),message名，enum名。多个由 `|` 分隔。任意验证器通过检查则认为数据有效                              |
+|     org.xresloader.map_value_validator           | 用于Map类型Value的验证器，可填范围(log-high),message名，enum名。多个由 `|` 分隔。任意验证器通过检查则认为数据有效                            |
 | org.xresloader.field_description                 | 字段描述信息，会写入输出的header中和代码中                                                                                                   |
 |    org.xresloader.field_alias                    | 字段别名，配合 **验证器** 功能，允许在数据源中直接填写别名来配置数据                                                                         |
 |    org.xresloader.field_ratio                    | 字段放大，用于比如配置百分率为 0.12，当 org.xresloader.field_ratio=100时转出的数据为12                                                       |

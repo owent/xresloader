@@ -2,6 +2,8 @@
 
 ## Unrelease
 
+1. 修复转出bin类型数据时，所有字段都是默认值（转出的数据零字节）时，此行会被裁减掉的BUG。
+
 ## 2.15.0
 
 1. 修订 `DataVerifyInTableColumn` 验证器的文件错误输出。

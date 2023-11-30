@@ -1176,7 +1176,8 @@ public class DataDstPb extends DataDstImpl {
                         DataSrcImpl.getOurInstance().getCurrentRowNum());
 
                 ByteString data = convData(desc, tableContext, rowContext);
-                if (null != data && !data.isEmpty() && !rowContext.ignore) {
+                // Empty ByteString is allowed because maybe all fields are default value.
+                if (null != data && !rowContext.ignore) {
                     ++count;
                     blocks.addDataBlock(data);
 

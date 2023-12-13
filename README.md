@@ -446,6 +446,17 @@ Ans: 这个提示通常是堆内存不足， [xresloader][1] 默认使用的POI�
 
 在 [xresloader][1] **2.10.0** 及以上的版本，可以使用 `--disable-excel-formular` 选项关闭实时公式计算\(仅仅时关闭公式实时计算，还是会读Excel里已经缓存的计算结果的\)。这时候 [xresloader][1] 会使用流式读取并使用 [xresloader][1] 内部实现的缓存机制，同时关闭文件级缓存和表级缓存，能大幅降低内存消耗。
 
+8. 如何设置默认时区
+
+Ans: 可以通过环境变量 `TZ` 或者java运行时属性 `user.timezone` 设置时区。
+
++ 环境变量 `TZ`: `export TZ=UTC`
++ 运行时属性 `user.timezone`: `java -Duser.timezone=UTC -jar <jar file>`
+
+可用的区域示例(`+HH:mm`,`-HH:mm`,别名,完整时区名): `+08:00`, `UTC`, `GMT`, `Asia/Shanghai`, `America/Los_Angeles`, `Asia/Singapore` .
+
+See https://en.wikipedia.org/wiki/List_of_tz_database_time_zones and https://www.iana.org/time-zones for details.
+
 [1]: https://github.com/xresloader/xresloader/releases
 [2]: https://github.com/protocolbuffers/upb
 [3]: https://github.com/cloudwu/pbc

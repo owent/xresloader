@@ -11,6 +11,8 @@ import java.util.LinkedList;
 import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import org.apache.poi.openxml4j.util.ZipSecureFile;
 import org.xresloader.core.data.dst.DataDstImpl;
 import org.xresloader.core.data.dst.DataDstJavascript;
 import org.xresloader.core.data.dst.DataDstJson;
@@ -378,6 +380,7 @@ public class main {
 
         // 全局设置
         ExcelEngine.setMaxByteArraySize(Integer.MAX_VALUE);
+        ZipSecureFile.setMinInflateRatio(0);
 
         // 先尝试根据传入参数转表
         int ret_code = 1;

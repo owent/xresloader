@@ -2,7 +2,22 @@
 
 ## Unrelease
 
+## 2.15.1
+
 1. 修复转出bin类型数据时，所有字段都是默认值（转出的数据零字节）时，此行会被裁减掉的BUG。
+2. 修复Excel文件压缩率过高时无法打开文件的问题。
+3. 更新依赖库
+  + `maven-compiler-plugin` -> 3.12.1
+  + `maven-surefire-plugin` -> 3.2.5
+  + `build-helper-maven-plugin` -> 3.5.0
+  + `commons-codec` -> 1.16.1
+  + `log4j` -> 2.22.1
+  + `msgpack-core` -> 0.9.8
+  + `org.json` ->20240205
+  + `com.google.protobuf` -> 3.25.3
+  + `xmlsec` -> 4.0.1
+  + `org.apache.poi` -> 5.2.5
+  + `junit-jupiter-api` -> 5.10.2
 
 ## 2.15.0
 

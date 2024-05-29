@@ -22,6 +22,10 @@ public class DataDstWriterNode {
         NONE, MAP, TIMEPOINT, DURATION
     }
 
+    public enum SPECIAL_TYPE_LIMIT {
+        NONE, INT32, UINT32
+    }
+
     public enum FIELD_LABEL_TYPE {
         OPTIONAL, LIST, REQUIRED
     }
@@ -170,6 +174,22 @@ public class DataDstWriterNode {
             }
 
             return SPECIAL_MESSAGE_TYPE.NONE;
+        }
+
+        public SPECIAL_TYPE_LIMIT getSpecialTypeLimit() {
+            if (this.referTypeDescriptor != null) {
+                return this.referTypeDescriptor.getSpecialTypeLimit();
+            }
+
+            return SPECIAL_TYPE_LIMIT.NONE;
+        }
+
+        public String validateTypeLimit(Object value) {
+            if (this.referTypeDescriptor != null) {
+                return this.referTypeDescriptor.validateTypeLimit(value);
+            }
+
+            return null;
         }
 
         public ArrayList<String> getUniqueTags() {
@@ -351,6 +371,7 @@ public class DataDstWriterNode {
     static public class DataDstTypeDescriptor {
         private JAVA_TYPE type = JAVA_TYPE.INT;
         private SPECIAL_MESSAGE_TYPE special_message_type = SPECIAL_MESSAGE_TYPE.NONE;
+        private SPECIAL_TYPE_LIMIT special_type_limit = SPECIAL_TYPE_LIMIT.NONE;
         private String packageName = null;
         private String messageName = null;
         private String fullName = null;
@@ -362,7 +383,7 @@ public class DataDstWriterNode {
         private Object rawDescriptor = null;
 
         public DataDstTypeDescriptor(JAVA_TYPE type, String pkgName, String msgName, Object rawDesc,
-                SPECIAL_MESSAGE_TYPE specialMessageType) {
+                SPECIAL_MESSAGE_TYPE specialMessageType, SPECIAL_TYPE_LIMIT specialTypeLimit) {
             this.type = type;
             if (msgName == null || msgName.isEmpty()) {
                 msgName = type.toString();
@@ -378,6 +399,7 @@ public class DataDstWriterNode {
             this.rawDescriptor = rawDesc;
 
             this.special_message_type = specialMessageType;
+            this.special_type_limit = specialTypeLimit;
         }
 
         public Object getRawDescriptor() {
@@ -392,6 +414,10 @@ public class DataDstWriterNode {
             return this.special_message_type;
         }
 
+        public SPECIAL_TYPE_LIMIT getSpecialTypeLimit() {
+            return this.special_type_limit;
+        }
+
         public String getPackageName() {
             return this.packageName;
         }
@@ -402,6 +428,31 @@ public class DataDstWriterNode {
 
         public String getFullName() {
             return this.fullName;
+        }
+
+        public String validateTypeLimit(Object value) {
+            switch (getSpecialTypeLimit()) {
+                case INT32:
+                    if (value instanceof Long) {
+                        long v = (long) value;
+                        if (v > Integer.MAX_VALUE || v < Integer.MIN_VALUE) {
+                            return String.format("Value %d out of int32 range", v);
+                        }
+                    }
+                    break;
+                case UINT32:
+                    if (value instanceof Long) {
+                        long v = (long) value;
+                        if (v > 0xFFFFFFFFL || v < 0) {
+                            return String.format("Value %d out of uint32 range", v);
+                        }
+                    }
+                    break;
+                default:
+                    break;
+            }
+
+            return null;
         }
 
         public DataDstMessageExt mutableExtension() {
@@ -572,10 +623,11 @@ public class DataDstWriterNode {
     private DataDstChildrenNode referBrothers = null;
     private int listIndex = -1;
 
-    static private HashMap<JAVA_TYPE, DataDstTypeDescriptor> defaultDescs = new HashMap<JAVA_TYPE, DataDstTypeDescriptor>();
+    static private HashMap<String, DataDstTypeDescriptor> defaultDescs = new HashMap<String, DataDstTypeDescriptor>();
 
-    static public DataDstTypeDescriptor getDefaultMessageDescriptor(JAVA_TYPE type) {
-        DataDstTypeDescriptor ret = defaultDescs.getOrDefault(type, null);
+    static public DataDstTypeDescriptor getDefaultMessageDescriptor(JAVA_TYPE type, SPECIAL_TYPE_LIMIT typeLimit) {
+        String key = String.format("%s:%s", type.name(), typeLimit.name());
+        DataDstTypeDescriptor ret = defaultDescs.getOrDefault(key, null);
         if (ret != null) {
             return ret;
         }
@@ -587,8 +639,8 @@ public class DataDstWriterNode {
             return null;
         }
 
-        ret = new DataDstTypeDescriptor(type, null, null, null, SPECIAL_MESSAGE_TYPE.NONE);
-        defaultDescs.put(type, ret);
+        ret = new DataDstTypeDescriptor(type, null, null, null, SPECIAL_MESSAGE_TYPE.NONE, typeLimit);
+        defaultDescs.put(key, ret);
         return ret;
     }
 
@@ -654,6 +706,18 @@ public class DataDstWriterNode {
 
         // enum retrun JAVA_TYPE as UNKNOWN
         return JAVA_TYPE.UNKNOWN;
+    }
+
+    public String validateTypeLimit(Object value) {
+        if (this.typeDescriptor != null) {
+            return this.typeDescriptor.validateTypeLimit(value);
+        }
+
+        if (this.fieldDescriptor != null) {
+            return this.fieldDescriptor.validateTypeLimit(value);
+        }
+
+        return null;
     }
 
     public String getPackageName() {

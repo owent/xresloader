@@ -242,7 +242,13 @@ public class DataDstJson extends DataDstJava {
                 // not all Numbers may match actual JSON Numbers. i.e. fractions or Imaginary
                 final String numberAsString = JSONObject.numberToString((Number) value);
                 if (NUMBER_PATTERN.matcher(numberAsString).matches()) {
-                    writer.write(numberAsString);
+                    // IEEE 754
+                    if (value instanceof Long
+                            && ((long) value > ((1L << 53) - 1) || (long) value < -((1L << 53) - 1))) {
+                        JSONObject.quote(numberAsString, writer);
+                    } else {
+                        writer.write(numberAsString);
+                    }
                 } else {
                     // The Number value is not a valid JSON number.
                     // Instead we will quote it as a string

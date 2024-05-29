@@ -347,7 +347,7 @@ public class ProgramOptions {
         protocolIgnoreUnknownDependency = cmd.hasOption("ignore-unknown-dependency");
 
         luaGlobal = cmd.hasOption("lua-global");
-        luaModule = cmd.getOptionValue("lua-module", null);
+        luaModule = cmd.getOptionValue("lua-module", (String) null);
         xmlRootName = cmd.getOptionValue("xml-root", xmlRootName);
         javascriptExport = cmd.getOptionValue("javascript-export", javascriptExport);
         javascriptGlobalVar = cmd.getOptionValue("javascript-global", javascriptGlobalVar);

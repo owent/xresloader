@@ -2,6 +2,23 @@
 
 ## Unrelease
 
+## 2.15.2
+
+1. 增加int32和uint32的范围检测。
+2. JSON和Javascript类型输出时，超过 `2^53` 和低于 `-2^53` 的值转为字符串类型表示。
+3. 修复无效的空行忽略提示
+4. 更新依赖库
+   + `jacoco-maven-plugin` -> 0.8.12
+   + `maven-compiler-plugin` -> 3.13.0
+   + `maven-shade-plugin` -> 3.5.3
+   + `build-helper-maven-plugin` -> 3.6.0
+   + `commons-cli` -> 1.8.0
+   + `commons-codec` -> 1.17.0
+   + `log4j` -> 2.23.1
+   + `org.json` -> 20240303
+   + `com.google.protobuf` -> 4.27.0
+   + `commons-csv` -> 1.11.0
+
 ## 2.15.1
 
 1. 修复转出bin类型数据时，所有字段都是默认值（转出的数据零字节）时，此行会被裁减掉的BUG。

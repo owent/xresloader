@@ -379,7 +379,7 @@ exports.files = [
               field_description : "Refer to cost_type",
               validator : "custom_rule1"
             },
-            type_name : "UINT32"
+            type_name : "INT32"
           },
           Id : {
             name : "Id",

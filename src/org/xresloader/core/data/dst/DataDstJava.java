@@ -139,12 +139,19 @@ public abstract class DataDstJava extends DataDstImpl {
                     DataSrcImpl.getOurInstance().getCurrentRowNum());
 
             HashMap<String, Object> msg = buildCurrentRow(ret, rowContext);
-            if (msg != null && !rowContext.ignore) {
+
+            if (msg != null && !rowContext.shouldIgnore()) {
                 ret.rows.add(msg);
 
                 tableContext.addUniqueCache(rowContext);
                 currentContinueEmptyRows = 0;
             } else {
+                if (msg != null && rowContext.shouldIgnore()) {
+                    ProgramOptions.getLoger().warn(
+                            "File: %s, Sheet: %s, Row: %d%s",
+                            rowContext.fileName, rowContext.tableName, rowContext.row,
+                            rowContext.buildIgnoreIgnoreMessage(4));
+                }
                 currentContinueEmptyRows++;
                 if (currentContinueEmptyRows > tolerateContinueEmptyRows) {
                     throw new ConvException(String.format(
@@ -309,6 +316,11 @@ public abstract class DataDstJava extends DataDstImpl {
             case INT: {
                 DataContainer<Long> ret = DataSrcImpl.getOurInstance().getValue(desc.identify, 0L);
                 if (null != ret && ret.valid) {
+                    String validateErrorMessage = desc.validateTypeLimit(ret.value);
+                    if (null != validateErrorMessage) {
+                        throw new ConvException(validateErrorMessage);
+                    }
+
                     val = ret.value.intValue();
                 }
                 break;
@@ -317,6 +329,11 @@ public abstract class DataDstJava extends DataDstImpl {
             case LONG: {
                 DataContainer<Long> ret = DataSrcImpl.getOurInstance().getValue(desc.identify, 0L);
                 if (null != ret && ret.valid) {
+                    String validateErrorMessage = desc.validateTypeLimit(ret.value);
+                    if (null != validateErrorMessage) {
+                        throw new ConvException(validateErrorMessage);
+                    }
+
                     val = ret.value.longValue();
                 }
                 break;
@@ -325,6 +342,11 @@ public abstract class DataDstJava extends DataDstImpl {
             case FLOAT: {
                 DataContainer<Double> ret = DataSrcImpl.getOurInstance().getValue(desc.identify, 0.0);
                 if (null != ret && ret.valid) {
+                    String validateErrorMessage = desc.validateTypeLimit(ret.value);
+                    if (null != validateErrorMessage) {
+                        throw new ConvException(validateErrorMessage);
+                    }
+
                     val = ret.value.floatValue();
                 }
                 break;
@@ -333,6 +355,11 @@ public abstract class DataDstJava extends DataDstImpl {
             case DOUBLE: {
                 DataContainer<Double> ret = DataSrcImpl.getOurInstance().getValue(desc.identify, 0.0);
                 if (null != ret && ret.valid) {
+                    String validateErrorMessage = desc.validateTypeLimit(ret.value);
+                    if (null != validateErrorMessage) {
+                        throw new ConvException(validateErrorMessage);
+                    }
+
                     val = ret.value.doubleValue();
                 }
                 break;
@@ -341,6 +368,11 @@ public abstract class DataDstJava extends DataDstImpl {
             case BOOLEAN: {
                 DataContainer<Boolean> ret = DataSrcImpl.getOurInstance().getValue(desc.identify, false);
                 if (null != ret && ret.valid) {
+                    String validateErrorMessage = desc.validateTypeLimit(ret.value);
+                    if (null != validateErrorMessage) {
+                        throw new ConvException(validateErrorMessage);
+                    }
+
                     val = ret.value.booleanValue();
                 }
                 break;
@@ -349,6 +381,11 @@ public abstract class DataDstJava extends DataDstImpl {
             case STRING: {
                 DataContainer<String> ret = DataSrcImpl.getOurInstance().getValue(desc.identify, "");
                 if (null != ret && ret.valid) {
+                    String validateErrorMessage = desc.validateTypeLimit(ret.value);
+                    if (null != validateErrorMessage) {
+                        throw new ConvException(validateErrorMessage);
+                    }
+
                     val = ret.value;
                 }
                 break;
@@ -357,6 +394,11 @@ public abstract class DataDstJava extends DataDstImpl {
             case BYTES: {
                 DataContainer<String> res = DataSrcImpl.getOurInstance().getValue(desc.identify, "");
                 if (null != res && res.valid) {
+                    String validateErrorMessage = desc.validateTypeLimit(res.value);
+                    if (null != validateErrorMessage) {
+                        throw new ConvException(validateErrorMessage);
+                    }
+
                     String encoding = SchemeConf.getInstance().getKey().getEncoding();
                     if (null == encoding || encoding.isEmpty()) {
                         val = com.google.protobuf.ByteString.copyFrom(res.value.getBytes());
@@ -428,11 +470,7 @@ public abstract class DataDstJava extends DataDstImpl {
             String fieldPath)
             throws ConvException {
         boolean ret = false;
-
         for (Map.Entry<String, DataDstWriterNode.DataDstChildrenNode> c : node.getChildren().entrySet()) {
-            if (rowContext.ignore) {
-                break;
-            }
 
             if (c.getValue().isOneof()) {
                 boolean fieldHasValue = false;
@@ -446,11 +484,8 @@ public abstract class DataDstJava extends DataDstImpl {
                     }
                 }
                 if (!fieldHasValue && c.getValue().isNotNull()) {
-                    rowContext.ignore = true;
-                    ProgramOptions.getLoger().warn(
-                            "File: %s, Sheet: %s, Row: %d\n    oneof %s is empty but set not null, we will ignore this row",
-                            rowContext.fileName, rowContext.tableName, rowContext.row,
-                            subFieldPath);
+                    rowContext.addIgnoreReason(
+                            String.format("oneof %s is empty but set not null, we will ignore this row", subFieldPath));
                 }
             } else if (c.getValue().mode == DataDstWriterNode.CHILD_NODE_TYPE.STANDARD) {
                 boolean fieldHasValue = false;
@@ -468,11 +503,9 @@ public abstract class DataDstJava extends DataDstImpl {
                     }
                 }
                 if (!fieldHasValue && c.getValue().isNotNull()) {
-                    rowContext.ignore = true;
-                    ProgramOptions.getLoger().warn(
-                            "File: %s, Sheet: %s, Row: %d\n    field %s is empty but set not null, we will ignore this row",
-                            rowContext.fileName, rowContext.tableName, rowContext.row,
-                            String.format("%s.%s", fieldPath, c.getKey()));
+                    rowContext.addIgnoreReason(
+                            String.format("field %s.%s is empty but set not null, we will ignore this row",
+                                    fieldPath, c.getKey()));
                 }
             } else if (c.getValue().mode == DataDstWriterNode.CHILD_NODE_TYPE.PLAIN) {
                 boolean fieldHasValue = false;
@@ -486,11 +519,9 @@ public abstract class DataDstJava extends DataDstImpl {
                     }
                 }
                 if (!fieldHasValue && c.getValue().isNotNull()) {
-                    rowContext.ignore = true;
-                    ProgramOptions.getLoger().warn(
-                            "File: %s, Sheet: %s, Row: %d\n    field %s is empty but set not null, we will ignore this row",
-                            rowContext.fileName, rowContext.tableName, rowContext.row,
-                            subFieldPath);
+                    rowContext.addIgnoreReason(
+                            String.format("field %s is empty but set not null, we will ignore this row",
+                                    subFieldPath));
                 }
             }
         }
@@ -641,11 +672,9 @@ public abstract class DataDstJava extends DataDstImpl {
 
         for (var subField : field.getSortedFields()) {
             if (subField.isNotNull() && subField != sub_field) {
-                rowContext.ignore = true;
-                ProgramOptions.getLoger().warn(
-                        "File: %s, Sheet: %s, Row: %d\n    field %s is empty but set not null, we will ignore this row",
-                        rowContext.fileName, rowContext.tableName, rowContext.row,
-                        String.format("%s.%s", fieldPath, subField.getName()));
+                rowContext.addIgnoreReason(
+                        String.format("field %s.%s is empty but set not null, we will ignore this row",
+                                fieldPath, subField.getName()));
                 break;
             }
         }
@@ -721,6 +750,11 @@ public abstract class DataDstJava extends DataDstImpl {
                     if (values != null) {
                         tmp.ensureCapacity(values.length);
                         for (Long v : values) {
+                            String validateErrorMessage = field.validateTypeLimit(v);
+                            if (null != validateErrorMessage) {
+                                throw new ConvException(validateErrorMessage);
+                            }
+
                             tmp.add(v.intValue());
                         }
                     }
@@ -737,6 +771,11 @@ public abstract class DataDstJava extends DataDstImpl {
                     if (values != null) {
                         tmp.ensureCapacity(values.length);
                         for (Long v : values) {
+                            String validateErrorMessage = field.validateTypeLimit(v);
+                            if (null != validateErrorMessage) {
+                                throw new ConvException(validateErrorMessage);
+                            }
+
                             tmp.add(v);
                         }
                     }
@@ -753,6 +792,11 @@ public abstract class DataDstJava extends DataDstImpl {
                     if (values != null) {
                         tmp.ensureCapacity(values.length);
                         for (Double v : values) {
+                            String validateErrorMessage = field.validateTypeLimit(v);
+                            if (null != validateErrorMessage) {
+                                throw new ConvException(validateErrorMessage);
+                            }
+
                             tmp.add(v.floatValue());
                         }
                     }
@@ -769,6 +813,11 @@ public abstract class DataDstJava extends DataDstImpl {
                     if (values != null) {
                         tmp.ensureCapacity(values.length);
                         for (Double v : values) {
+                            String validateErrorMessage = field.validateTypeLimit(v);
+                            if (null != validateErrorMessage) {
+                                throw new ConvException(validateErrorMessage);
+                            }
+
                             tmp.add(v);
                         }
                     }
@@ -785,6 +834,11 @@ public abstract class DataDstJava extends DataDstImpl {
                     if (values != null) {
                         tmp.ensureCapacity(values.length);
                         for (Boolean v : values) {
+                            String validateErrorMessage = field.validateTypeLimit(v);
+                            if (null != validateErrorMessage) {
+                                throw new ConvException(validateErrorMessage);
+                            }
+
                             tmp.add(v);
                         }
                     }
@@ -802,6 +856,11 @@ public abstract class DataDstJava extends DataDstImpl {
                     if (values != null) {
                         tmp.ensureCapacity(values.length);
                         for (String v : values) {
+                            String validateErrorMessage = field.validateTypeLimit(v);
+                            if (null != validateErrorMessage) {
+                                throw new ConvException(validateErrorMessage);
+                            }
+
                             tmp.add(v);
                         }
                     }
@@ -933,33 +992,59 @@ public abstract class DataDstJava extends DataDstImpl {
 
             switch (field.getType()) {
                 case INT: {
-                    val = parsePlainDataLong(input.trim(), ident, field).intValue();
+                    Long res = parsePlainDataLong(input.trim(), ident, field);
+                    String validateErrorMessage = field.validateTypeLimit(res);
+                    if (null != validateErrorMessage) {
+                        throw new ConvException(validateErrorMessage);
+                    }
+                    val = res.intValue();
                     break;
                 }
 
                 case LONG: {
                     val = parsePlainDataLong(input.trim(), ident, field);
+                    String validateErrorMessage = field.validateTypeLimit(val);
+                    if (null != validateErrorMessage) {
+                        throw new ConvException(validateErrorMessage);
+                    }
                     break;
                 }
 
                 case FLOAT: {
-                    val = parsePlainDataDouble(input.trim(), ident, field).floatValue();
+                    Double res = parsePlainDataDouble(input.trim(), ident, field);
+                    String validateErrorMessage = field.validateTypeLimit(res);
+                    if (null != validateErrorMessage) {
+                        throw new ConvException(validateErrorMessage);
+                    }
+                    val = res.floatValue();
                     break;
                 }
 
                 case DOUBLE: {
                     val = parsePlainDataDouble(input.trim(), ident, field);
+                    String validateErrorMessage = field.validateTypeLimit(val);
+                    if (null != validateErrorMessage) {
+                        throw new ConvException(validateErrorMessage);
+                    }
                     break;
                 }
 
                 case BOOLEAN: {
                     val = parsePlainDataBoolean(input.trim(), ident, field);
+                    String validateErrorMessage = field.validateTypeLimit(val);
+                    if (null != validateErrorMessage) {
+                        throw new ConvException(validateErrorMessage);
+                    }
                     break;
                 }
 
                 case STRING:
                 case BYTES: {
                     val = parsePlainDataString(input.trim(), ident, field);
+                    String validateErrorMessage = field.validateTypeLimit(val);
+                    if (null != validateErrorMessage) {
+                        throw new ConvException(validateErrorMessage);
+                    }
                     break;
                 }
 
@@ -1053,10 +1138,6 @@ public abstract class DataDstJava extends DataDstImpl {
         int usedInputIdx = 0;
         int fieldSize = 0;
         for (int i = 0; i < children.size(); ++i) {
-            if (rowContext.ignore) {
-                break;
-            }
-
             if (children.get(i).getLinkedValueField() != null) {
                 ++fieldSize;
                 continue;
@@ -1084,11 +1165,9 @@ public abstract class DataDstJava extends DataDstImpl {
                     dumpedOneof.add(children.get(i).getReferOneof().getFullName());
                 } else {
                     if (children.get(i).isNotNull()) {
-                        rowContext.ignore = true;
-                        ProgramOptions.getLoger().warn(
-                                "File: %s, Sheet: %s, Row: %d\n    oneof %s is empty but set not null, we will ignore this row",
-                                rowContext.fileName, rowContext.tableName, rowContext.row,
-                                String.format("%s.%s", fieldPath, children.get(i).getName()));
+                        rowContext.addIgnoreReason(
+                                String.format("oneof %s.%s is empty but set not null, we will ignore this row",
+                                        fieldPath, children.get(i).getName()));
                     }
                 }
 
@@ -1106,11 +1185,9 @@ public abstract class DataDstJava extends DataDstImpl {
                 if (!dumpPlainField(ret.value, null, children.get(i), null, inputs[usedInputIdx], rowContext,
                         subFieldPath)) {
                     if (children.get(i).isNotNull()) {
-                        rowContext.ignore = true;
-                        ProgramOptions.getLoger().warn(
-                                "File: %s, Sheet: %s, Row: %d\n    field %s is empty but set not null, we will ignore this row",
-                                rowContext.fileName, rowContext.tableName, rowContext.row,
-                                subFieldPath);
+                        rowContext.addIgnoreReason(
+                                String.format("field %s is empty but set not null, we will ignore this row",
+                                        subFieldPath));
                     }
                 }
 

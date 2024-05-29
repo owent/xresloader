@@ -6,7 +6,7 @@
 
 1. 增加int32和uint32的范围检测。
 2. JSON和Javascript类型输出时，超过 `2^53` 和低于 `-2^53` 的值转为字符串类型表示。
-3. 修复无效的空行忽略提示
+3. 修复无效的空行忽略提示(空通过Scheme `JsonCfg-LargeNumberAsString=true/false` 来控制)
 4. 更新依赖库
    + `jacoco-maven-plugin` -> 0.8.12
    + `maven-compiler-plugin` -> 3.13.0

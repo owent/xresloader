@@ -20,6 +20,10 @@ public class SchemeConf {
         public int data_col;
     }
 
+    public class DataExtJson {
+        public Boolean enableLargeNumberAsString = true;
+    }
+
     public class DataExtUE {
         public String blueprintAccess = "BlueprintReadOnly";
         public String category = "XResConfig";
@@ -46,6 +50,7 @@ public class SchemeConf {
     private SchemeKeyConf key;
     private SchemeDataSourceImpl scheme;
 
+    private DataExtJson extJson = new DataExtJson();
     private DataExtUE extUECSV = new DataExtUE();
 
     private String outputFilePathCache = "";
@@ -90,6 +95,8 @@ public class SchemeConf {
 
         scheme = null;
 
+        extJson.enableLargeNumberAsString = true;
+
         extUECSV.blueprintAccess = "BlueprintReadOnly";
         extUECSV.category = "XResConfig";
         extUECSV.editAccess = "EditAnywhere";
@@ -114,6 +121,8 @@ public class SchemeConf {
         protoName = "";
         outputFile = "";
         key = new SchemeKeyConf();
+
+        extJson.enableLargeNumberAsString = true;
 
         extUECSV.blueprintAccess = "BlueprintReadOnly";
         extUECSV.category = "XResConfig";
@@ -366,6 +375,18 @@ public class SchemeConf {
     }
 
     /**
+     * 设置Json属性选项
+     * 
+     */
+    public void setJsonOptionEnableLargeNumberAsString(String value) {
+        if (value == null || value.isEmpty()) {
+            extJson.enableLargeNumberAsString = true;
+        } else {
+            extJson.enableLargeNumberAsString = getLogicalValue(value);
+        }
+    }
+
+    /**
      * 设置UE属性选项
      * 
      * @param category        分类名称
@@ -477,6 +498,10 @@ public class SchemeConf {
         if (h3 != null && !h3.isEmpty()) {
             extUECSV.codeOutputIncludeHeader.add(h1);
         }
+    }
+
+    public DataExtJson getJsonOptions() {
+        return extJson;
     }
 
     public DataExtUE getUEOptions() {

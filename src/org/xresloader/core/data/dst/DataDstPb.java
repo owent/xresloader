@@ -998,7 +998,9 @@ public class DataDstPb extends DataDstImpl {
                 inner_label = DataDstWriterNode.FIELD_LABEL_TYPE.REQUIRED;
             }
             DataDstFieldDescriptor innerField = new DataDstFieldDescriptor(
-                    mutableDataDstDescriptor(pbs, fieldPbDesc, pbTypeToInnerType(field.getType())), field.getNumber(),
+                    mutableDataDstDescriptor(pbs, fieldPbDesc, pbTypeToInnerType(field.getType()),
+                            pbTypeToTypeLimit(field.getType())),
+                    field.getNumber(),
                     field.getName(), inner_label, field);
             innerDesc.fields.put(field.getName(), innerField);
         }
@@ -1039,20 +1041,21 @@ public class DataDstPb extends DataDstImpl {
     }
 
     static private DataDstTypeDescriptor mutableDataDstDescriptor(PbInfoSet pbs, Descriptors.Descriptor pbDesc,
-            DataDstWriterNode.JAVA_TYPE type) throws ConvException {
+            DataDstWriterNode.JAVA_TYPE type, DataDstWriterNode.SPECIAL_TYPE_LIMIT typeLimit) throws ConvException {
         String key = null;
         if (null == pbDesc) {
             key = type.toString();
         } else {
             key = pbDesc.getFullName();
         }
+        key = String.format("%s:%s", key, typeLimit.toString());
         DataDstTypeDescriptor ret = pbs.dataDstDescs.getOrDefault(key, null);
         if (ret != null) {
             return ret;
         }
 
         if (pbDesc == null) {
-            ret = DataDstWriterNode.getDefaultMessageDescriptor(type);
+            ret = DataDstWriterNode.getDefaultMessageDescriptor(type, typeLimit);
         } else {
             DataDstWriterNode.SPECIAL_MESSAGE_TYPE smt = DataDstWriterNode.SPECIAL_MESSAGE_TYPE.NONE;
             if (pbDesc.getOptions().getMapEntry()) {
@@ -1062,7 +1065,8 @@ public class DataDstPb extends DataDstImpl {
             } else if (pbDesc.getFullName().equals(Duration.getDescriptor().getFullName())) {
                 smt = DataDstWriterNode.SPECIAL_MESSAGE_TYPE.DURATION;
             }
-            ret = new DataDstTypeDescriptor(type, pbDesc.getFile().getPackage(), pbDesc.getName(), pbDesc, smt);
+            ret = new DataDstTypeDescriptor(type, pbDesc.getFile().getPackage(), pbDesc.getName(), pbDesc, smt,
+                    typeLimit);
         }
         pbs.dataDstDescs.put(key, ret);
 
@@ -1108,17 +1112,19 @@ public class DataDstPb extends DataDstImpl {
     }
 
     static private DataDstWriterNode createMessageWriterNode(PbInfoSet pbs, DataDstWriterNode.JAVA_TYPE type,
+            DataDstWriterNode.SPECIAL_TYPE_LIMIT typeLimit,
             int listIndex) throws ConvException {
-        return DataDstWriterNode.create(null, mutableDataDstDescriptor(pbs, null, type), listIndex);
+        return DataDstWriterNode.create(null, mutableDataDstDescriptor(pbs, null, type, typeLimit), listIndex);
     }
 
     static private DataDstWriterNode createMessageWriterNode(PbInfoSet pbs, Descriptors.Descriptor pbDesc,
-            DataDstWriterNode.JAVA_TYPE type, int listIndex) throws ConvException {
+            DataDstWriterNode.JAVA_TYPE type, DataDstWriterNode.SPECIAL_TYPE_LIMIT typeLimit, int listIndex)
+            throws ConvException {
         if (null == pbDesc) {
-            return createMessageWriterNode(pbs, type, listIndex);
+            return createMessageWriterNode(pbs, type, typeLimit, listIndex);
         }
 
-        return DataDstWriterNode.create(pbDesc, mutableDataDstDescriptor(pbs, pbDesc, type), listIndex);
+        return DataDstWriterNode.create(pbDesc, mutableDataDstDescriptor(pbs, pbDesc, type, typeLimit), listIndex);
     }
 
     static private DataDstWriterNode createOneofWriterNode(PbInfoSet pbs, DataDstOneofDescriptor oneofDesc) {
@@ -1133,6 +1139,7 @@ public class DataDstPb extends DataDstImpl {
     @Override
     public final DataDstWriterNode compile() throws ConvException {
         DataDstWriterNode ret = createMessageWriterNode(cachePbs, currentMsgDesc, DataDstWriterNode.JAVA_TYPE.MESSAGE,
+                DataDstWriterNode.SPECIAL_TYPE_LIMIT.NONE,
                 -1);
         if (test(ret, new LinkedList<String>())) {
             return ret;
@@ -1177,7 +1184,7 @@ public class DataDstPb extends DataDstImpl {
 
                 ByteString data = convData(desc, tableContext, rowContext);
                 // Empty ByteString is allowed because maybe all fields are default value.
-                if (null != data && !rowContext.ignore) {
+                if (null != data && !rowContext.shouldIgnore()) {
                     ++count;
                     blocks.addDataBlock(data);
 
@@ -1271,6 +1278,20 @@ public class DataDstPb extends DataDstImpl {
         }
     }
 
+    static DataDstWriterNode.SPECIAL_TYPE_LIMIT pbTypeToTypeLimit(Descriptors.FieldDescriptor.Type t) {
+        switch (t) {
+            case INT32:
+            case FIXED32:
+            case SFIXED32:
+            case SINT32:
+                return DataDstWriterNode.SPECIAL_TYPE_LIMIT.INT32;
+            case UINT32:
+                return DataDstWriterNode.SPECIAL_TYPE_LIMIT.UINT32;
+            default:
+                return DataDstWriterNode.SPECIAL_TYPE_LIMIT.NONE;
+        }
+    }
+
     private void filterMissingFields(LinkedList<String> missingFields, HashMap<String, String> oneofField,
             Descriptors.FieldDescriptor fd, boolean isMissing) throws ConvException {
         if (missingFields == null && oneofField == null) {
@@ -1351,7 +1372,7 @@ public class DataDstPb extends DataDstImpl {
                         name_list.addLast("");
                         for (;; ++count) {
                             DataDstWriterNode c = createMessageWriterNode(cachePbs, fd.getMessageType(),
-                                    DataDstWriterNode.JAVA_TYPE.MESSAGE, count);
+                                    DataDstWriterNode.JAVA_TYPE.MESSAGE, pbTypeToTypeLimit(fd.getType()), count);
                             boolean test_passed = false;
 
                             name_list.removeLast();
@@ -1433,7 +1454,7 @@ public class DataDstPb extends DataDstImpl {
 
                             if (null != col) {
                                 DataDstWriterNode c = createMessageWriterNode(cachePbs, fd.getMessageType(),
-                                        DataDstWriterNode.JAVA_TYPE.MESSAGE, -1);
+                                        DataDstWriterNode.JAVA_TYPE.MESSAGE, pbTypeToTypeLimit(fd.getType()), -1);
                                 child = node.addChild(fd.getName(), c, fd, DataDstWriterNode.CHILD_NODE_TYPE.PLAIN);
                                 setup_node_identify(c, child, col, fd);
                                 ret = true;
@@ -1445,7 +1466,7 @@ public class DataDstPb extends DataDstImpl {
                         }
                     } else {
                         DataDstWriterNode c = createMessageWriterNode(cachePbs, fd.getMessageType(),
-                                DataDstWriterNode.JAVA_TYPE.MESSAGE, -1);
+                                DataDstWriterNode.JAVA_TYPE.MESSAGE, pbTypeToTypeLimit(fd.getType()), -1);
                         boolean test_passed = false;
 
                         name_list.addLast(DataDstWriterNode.makeNodeName(fd.getName()));
@@ -1536,7 +1557,8 @@ public class DataDstPb extends DataDstImpl {
                             }
 
                             if (null != col) {
-                                DataDstWriterNode c = createMessageWriterNode(cachePbs, inner_type, count);
+                                DataDstWriterNode c = createMessageWriterNode(cachePbs, inner_type,
+                                        pbTypeToTypeLimit(fd.getType()), count);
                                 child = node.addChild(fd.getName(), c, fd, DataDstWriterNode.CHILD_NODE_TYPE.STANDARD);
                                 setup_node_identify(c, child, col, fd);
                                 ret = true;
@@ -1566,7 +1588,8 @@ public class DataDstPb extends DataDstImpl {
                             }
 
                             if (null != col) {
-                                DataDstWriterNode c = createMessageWriterNode(cachePbs, inner_type, -1);
+                                DataDstWriterNode c = createMessageWriterNode(cachePbs, inner_type,
+                                        pbTypeToTypeLimit(fd.getType()), -1);
                                 child = node.addChild(fd.getName(), c, fd, DataDstWriterNode.CHILD_NODE_TYPE.PLAIN);
                                 setup_node_identify(c, child, col, fd);
                                 ret = true;
@@ -1596,14 +1619,16 @@ public class DataDstPb extends DataDstImpl {
 
                         if (null != col) {
                             filterMissingFields(missingFields, oneofField, fd, false);
-                            DataDstWriterNode c = createMessageWriterNode(cachePbs, inner_type, -1);
+                            DataDstWriterNode c = createMessageWriterNode(cachePbs, inner_type,
+                                    pbTypeToTypeLimit(fd.getType()), -1);
                             child = node.addChild(fd.getName(), c, fd, DataDstWriterNode.CHILD_NODE_TYPE.STANDARD);
                             setup_node_identify(c, child, col, fd);
                             ret = true;
                         } else {
                             filterMissingFields(missingFields, oneofField, fd, true);
                             if (checkFieldIsRequired(fd)) {
-                                DataDstWriterNode c = createMessageWriterNode(cachePbs, inner_type, -1);
+                                DataDstWriterNode c = createMessageWriterNode(cachePbs, inner_type,
+                                        pbTypeToTypeLimit(fd.getType()), -1);
                                 // required 字段要dump默认数据
                                 child = node.addChild(fd.getName(), c, fd, DataDstWriterNode.CHILD_NODE_TYPE.STANDARD);
                             }
@@ -1699,7 +1724,16 @@ public class DataDstPb extends DataDstImpl {
             valid_data = (root != null);
         }
         // 过滤空项
-        if (!valid_data || rowContext.ignore || root == null) {
+        if (!valid_data || root == null) {
+            return null;
+        }
+
+        if (rowContext.shouldIgnore()) {
+            ProgramOptions.getLoger().warn(
+                    "File: %s, Sheet: %s, Row: %d%s",
+                    rowContext.fileName, rowContext.tableName, rowContext.row,
+                    rowContext.buildIgnoreIgnoreMessage(4));
+
             return null;
         }
 
@@ -1779,6 +1813,11 @@ public class DataDstPb extends DataDstImpl {
             case INT: {
                 DataContainer<Long> ret = DataSrcImpl.getOurInstance().getValue(desc.identify, 0L);
                 if (null != ret && ret.valid) {
+                    String validateErrorMessage = field.validateTypeLimit(ret.value);
+                    if (null != validateErrorMessage) {
+                        throw new ConvException(validateErrorMessage);
+                    }
+
                     val = ret.value.intValue();
                 }
                 break;
@@ -1787,6 +1826,11 @@ public class DataDstPb extends DataDstImpl {
             case LONG: {
                 DataContainer<Long> ret = DataSrcImpl.getOurInstance().getValue(desc.identify, 0L);
                 if (null != ret && ret.valid) {
+                    String validateErrorMessage = field.validateTypeLimit(ret.value);
+                    if (null != validateErrorMessage) {
+                        throw new ConvException(validateErrorMessage);
+                    }
+
                     val = ret.value.longValue();
                 }
                 break;
@@ -1795,6 +1839,11 @@ public class DataDstPb extends DataDstImpl {
             case FLOAT: {
                 DataContainer<Double> ret = DataSrcImpl.getOurInstance().getValue(desc.identify, 0.0);
                 if (null != ret && ret.valid) {
+                    String validateErrorMessage = field.validateTypeLimit(ret.value);
+                    if (null != validateErrorMessage) {
+                        throw new ConvException(validateErrorMessage);
+                    }
+
                     val = ret.value.floatValue();
                 }
                 break;
@@ -1803,6 +1852,11 @@ public class DataDstPb extends DataDstImpl {
             case DOUBLE: {
                 DataContainer<Double> ret = DataSrcImpl.getOurInstance().getValue(desc.identify, 0.0);
                 if (null != ret && ret.valid) {
+                    String validateErrorMessage = field.validateTypeLimit(ret.value);
+                    if (null != validateErrorMessage) {
+                        throw new ConvException(validateErrorMessage);
+                    }
+
                     val = ret.value.doubleValue();
                 }
                 break;
@@ -1811,6 +1865,11 @@ public class DataDstPb extends DataDstImpl {
             case BOOLEAN: {
                 DataContainer<Boolean> ret = DataSrcImpl.getOurInstance().getValue(desc.identify, false);
                 if (null != ret && ret.valid) {
+                    String validateErrorMessage = field.validateTypeLimit(ret.value);
+                    if (null != validateErrorMessage) {
+                        throw new ConvException(validateErrorMessage);
+                    }
+
                     val = ret.value.booleanValue();
                 }
                 break;
@@ -1819,6 +1878,11 @@ public class DataDstPb extends DataDstImpl {
             case STRING: {
                 DataContainer<String> ret = DataSrcImpl.getOurInstance().getValue(desc.identify, "");
                 if (null != ret && ret.valid) {
+                    String validateErrorMessage = field.validateTypeLimit(ret.value);
+                    if (null != validateErrorMessage) {
+                        throw new ConvException(validateErrorMessage);
+                    }
+
                     val = ret.value;
                 }
                 break;
@@ -1827,6 +1891,11 @@ public class DataDstPb extends DataDstImpl {
             case BYTE_STRING: {
                 DataContainer<String> res = DataSrcImpl.getOurInstance().getValue(desc.identify, "");
                 if (null != res && res.valid) {
+                    String validateErrorMessage = field.validateTypeLimit(res.value);
+                    if (null != validateErrorMessage) {
+                        throw new ConvException(validateErrorMessage);
+                    }
+
                     String encoding = SchemeConf.getInstance().getKey().getEncoding();
                     if (null == encoding || encoding.isEmpty()) {
                         val = com.google.protobuf.ByteString.copyFrom(res.value.getBytes());
@@ -1839,6 +1908,11 @@ public class DataDstPb extends DataDstImpl {
             case ENUM: {
                 DataContainer<Long> ret = DataSrcImpl.getOurInstance().getValue(desc.identify, 0L);
                 if (null != ret && ret.valid) {
+                    String validateErrorMessage = field.validateTypeLimit(ret.value.intValue());
+                    if (null != validateErrorMessage) {
+                        throw new ConvException(validateErrorMessage);
+                    }
+
                     val = fd.getEnumType().findValueByNumber(ret.value.intValue());
                 }
 
@@ -1979,11 +2053,9 @@ public class DataDstPb extends DataDstImpl {
                     }
                 }
                 if (null != rowContext && !fieldHasValue && c.getValue().isNotNull()) {
-                    rowContext.ignore = true;
-                    ProgramOptions.getLoger().warn(
-                            "File: %s, Sheet: %s, Row: %d\n    oneof %s is empty but set not null, we will ignore this row",
-                            rowContext.fileName, rowContext.tableName, rowContext.row,
-                            subFieldPath);
+                    rowContext.addIgnoreReason(
+                            String.format("oneof %s is empty but set not null, we will ignore this row",
+                                    subFieldPath));
                 }
             } else if (c.getValue().mode == DataDstWriterNode.CHILD_NODE_TYPE.STANDARD) {
                 boolean fieldHasValue = false;
@@ -2009,11 +2081,9 @@ public class DataDstPb extends DataDstImpl {
                 }
 
                 if (null != rowContext && !fieldHasValue && c.getValue().isNotNull()) {
-                    rowContext.ignore = true;
-                    ProgramOptions.getLoger().warn(
-                            "File: %s, Sheet: %s, Row: %d\n    field %s is empty but set not null, we will ignore this row",
-                            rowContext.fileName, rowContext.tableName, rowContext.row,
-                            String.format("%s.%s", fieldPath, c.getKey()));
+                    rowContext.addIgnoreReason(
+                            String.format("field %s.%s is empty but set not null, we will ignore this row",
+                                    fieldPath, c.getKey()));
                 }
             } else if (c.getValue().mode == DataDstWriterNode.CHILD_NODE_TYPE.PLAIN) {
                 boolean fieldHasValue = false;
@@ -2028,11 +2098,9 @@ public class DataDstPb extends DataDstImpl {
                 }
 
                 if (null != rowContext && !fieldHasValue && c.getValue().isNotNull()) {
-                    rowContext.ignore = true;
-                    ProgramOptions.getLoger().warn(
-                            "File: %s, Sheet: %s, Row: %d\n    field %s is empty but set not null, we will ignore this row",
-                            rowContext.fileName, rowContext.tableName, rowContext.row,
-                            subFieldPath);
+                    rowContext.addIgnoreReason(
+                            String.format("field %s is empty but set not null, we will ignore this row",
+                                    subFieldPath));
                 }
             }
         }
@@ -2129,11 +2197,9 @@ public class DataDstPb extends DataDstImpl {
 
         for (var subField : field.getSortedFields()) {
             if (subField.isNotNull() && subField != sub_field) {
-                rowContext.ignore = true;
-                ProgramOptions.getLoger().warn(
-                        "File: %s, Sheet: %s, Row: %d\n    field %s is empty but set not null, we will ignore this row",
-                        rowContext.fileName, rowContext.tableName, rowContext.row,
-                        String.format("%s.%s", fieldPath, subField.getName()));
+                rowContext.addIgnoreReason(
+                        String.format("field %s.%s is empty but set not null, we will ignore this row",
+                                fieldPath, subField.getName()));
                 break;
             }
         }
@@ -2206,6 +2272,10 @@ public class DataDstPb extends DataDstImpl {
                                     tmp.add(enum_val);
                                 }
                             } else {
+                                String validateErrorMessage = field.validateTypeLimit(v);
+                                if (null != validateErrorMessage) {
+                                    throw new ConvException(validateErrorMessage);
+                                }
                                 tmp.add(v.intValue());
                             }
                         }
@@ -2222,6 +2292,10 @@ public class DataDstPb extends DataDstImpl {
                     if (values != null) {
                         tmp.ensureCapacity(values.length);
                         for (Long v : values) {
+                            String validateErrorMessage = field.validateTypeLimit(v);
+                            if (null != validateErrorMessage) {
+                                throw new ConvException(validateErrorMessage);
+                            }
                             tmp.add(v);
                         }
                     }
@@ -2237,6 +2311,10 @@ public class DataDstPb extends DataDstImpl {
                     if (values != null) {
                         tmp.ensureCapacity(values.length);
                         for (Double v : values) {
+                            String validateErrorMessage = field.validateTypeLimit(v);
+                            if (null != validateErrorMessage) {
+                                throw new ConvException(validateErrorMessage);
+                            }
                             tmp.add(v.floatValue());
                         }
                     }
@@ -2252,6 +2330,10 @@ public class DataDstPb extends DataDstImpl {
                     if (values != null) {
                         tmp.ensureCapacity(values.length);
                         for (Double v : values) {
+                            String validateErrorMessage = field.validateTypeLimit(v);
+                            if (null != validateErrorMessage) {
+                                throw new ConvException(validateErrorMessage);
+                            }
                             tmp.add(v);
                         }
                     }
@@ -2267,6 +2349,10 @@ public class DataDstPb extends DataDstImpl {
                     if (values != null) {
                         tmp.ensureCapacity(values.length);
                         for (Boolean v : values) {
+                            String validateErrorMessage = field.validateTypeLimit(v);
+                            if (null != validateErrorMessage) {
+                                throw new ConvException(validateErrorMessage);
+                            }
                             tmp.add(v);
                         }
                     }
@@ -2283,6 +2369,10 @@ public class DataDstPb extends DataDstImpl {
                     if (values != null) {
                         tmp.ensureCapacity(values.length);
                         for (String v : values) {
+                            String validateErrorMessage = field.validateTypeLimit(v);
+                            if (null != validateErrorMessage) {
+                                throw new ConvException(validateErrorMessage);
+                            }
                             tmp.add(v);
                         }
                     }
@@ -2395,33 +2485,59 @@ public class DataDstPb extends DataDstImpl {
 
             switch (field.getType()) {
                 case INT: {
-                    val = parsePlainDataLong(input.trim(), ident, field).intValue();
+                    Long res = parsePlainDataLong(input.trim(), ident, field);
+                    String validateErrorMessage = field.validateTypeLimit(res);
+                    if (null != validateErrorMessage) {
+                        throw new ConvException(validateErrorMessage);
+                    }
+                    val = res.intValue();
                     break;
                 }
 
                 case LONG: {
                     val = parsePlainDataLong(input.trim(), ident, field);
+                    String validateErrorMessage = field.validateTypeLimit(val);
+                    if (null != validateErrorMessage) {
+                        throw new ConvException(validateErrorMessage);
+                    }
                     break;
                 }
 
                 case FLOAT: {
-                    val = parsePlainDataDouble(input.trim(), ident, field).floatValue();
+                    Double res = parsePlainDataDouble(input.trim(), ident, field);
+                    String validateErrorMessage = field.validateTypeLimit(res);
+                    if (null != validateErrorMessage) {
+                        throw new ConvException(validateErrorMessage);
+                    }
+                    val = res.floatValue();
                     break;
                 }
 
                 case DOUBLE: {
                     val = parsePlainDataDouble(input.trim(), ident, field);
+                    String validateErrorMessage = field.validateTypeLimit(val);
+                    if (null != validateErrorMessage) {
+                        throw new ConvException(validateErrorMessage);
+                    }
                     break;
                 }
 
                 case BOOLEAN: {
                     val = parsePlainDataBoolean(input.trim(), ident, field);
+                    String validateErrorMessage = field.validateTypeLimit(val);
+                    if (null != validateErrorMessage) {
+                        throw new ConvException(validateErrorMessage);
+                    }
                     break;
                 }
 
                 case STRING:
                 case BYTES: {
                     val = parsePlainDataString(input.trim(), ident, field);
+                    String validateErrorMessage = field.validateTypeLimit(val);
+                    if (null != validateErrorMessage) {
+                        throw new ConvException(validateErrorMessage);
+                    }
                     break;
                 }
 
@@ -2572,11 +2688,9 @@ public class DataDstPb extends DataDstImpl {
                     dumpedOneof.add(child.getReferOneof().getFullName());
                 } else {
                     if (child.isNotNull()) {
-                        rowContext.ignore = true;
-                        ProgramOptions.getLoger().warn(
-                                "File: %s, Sheet: %s, Row: %d\n    oneof %s is empty but set not null, we will ignore this row",
-                                rowContext.fileName, rowContext.tableName, rowContext.row,
-                                String.format("%s.%s", fieldPath, child.getName()));
+                        rowContext.addIgnoreReason(
+                                String.format("oneof %s.%s is empty but set not null, we will ignore this row",
+                                        fieldPath, child.getName()));
                     }
                 }
 
@@ -2596,11 +2710,9 @@ public class DataDstPb extends DataDstImpl {
                     hasData = true;
                 } else {
                     if (child.isNotNull()) {
-                        rowContext.ignore = true;
-                        ProgramOptions.getLoger().warn(
-                                "File: %s, Sheet: %s, Row: %d\n    field %s is empty but set not null, we will ignore this row",
-                                rowContext.fileName, rowContext.tableName, rowContext.row,
-                                subFieldPath);
+                        rowContext.addIgnoreReason(
+                                String.format("field %s is empty but set not null, we will ignore this row",
+                                        subFieldPath));
                     }
                 }
 

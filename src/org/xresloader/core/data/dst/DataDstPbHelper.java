@@ -770,7 +770,7 @@ public class DataDstPbHelper {
         }
     }
 
-    private static <T extends com.google.protobuf.GeneratedMessageV3.ExtendableMessage<T>> HashMap<String, Object> dumpMessageExtensions(
+    private static <T extends com.google.protobuf.GeneratedMessage.ExtendableMessage<T>> HashMap<String, Object> dumpMessageExtensions(
             T msg, Map<Descriptors.FieldDescriptor, Object> options,
             com.google.protobuf.ExtensionRegistry custom_extensions) {
         HashMap<String, Object> ret = null;

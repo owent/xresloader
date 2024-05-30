@@ -641,7 +641,7 @@
           "cost_type": {
             "name": "cost_type",
             "number": 3,
-            "type_name": "UINT32"
+            "type_name": "INT32"
           },
           "cost_value": {
             "name": "cost_value",
@@ -715,7 +715,7 @@
               "field_description": "Refer to cost_type",
               "validator": "custom_rule1"
             },
-            "type_name": "UINT32"
+            "type_name": "INT32"
           },
           "CostValue": {
             "name": "CostValue",

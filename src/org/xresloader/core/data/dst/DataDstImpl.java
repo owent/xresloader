@@ -49,16 +49,45 @@ public abstract class DataDstImpl {
     }
 
     static public class DataRowContext {
-        public boolean ignore = false;
         public String fileName;
         public String tableName;
         public int row;
+
+        private LinkedList<String> ignore = null;
         private HashMap<String, JSONObject> uniqueCache = null;
 
         DataRowContext(String fileName, String tableName, int row) {
             this.fileName = fileName;
             this.tableName = tableName;
             this.row = row;
+        }
+
+        public void addIgnoreReason(String reason) {
+            if (this.ignore == null) {
+                this.ignore = new LinkedList<>();
+            }
+
+            this.ignore.add(reason);
+        }
+
+        public boolean shouldIgnore() {
+            return this.ignore != null && !this.ignore.isEmpty();
+        }
+
+        public String buildIgnoreIgnoreMessage(int ident) {
+            if (this.ignore == null || this.ignore.isEmpty()) {
+                return "";
+            }
+
+            String identString = "\n" + " ".repeat(ident);
+
+            StringBuffer sb = new StringBuffer();
+            for (String reason : this.ignore) {
+                sb.append(identString);
+                sb.append(reason);
+            }
+
+            return sb.toString();
         }
 
         public void addUniqueCache(String tagName, String fieldPath, Object value) {
@@ -89,7 +118,7 @@ public abstract class DataDstImpl {
 
         public void addUniqueCache(DataRowContext rowContext)
                 throws ConvException {
-            if (rowContext.ignore) {
+            if (rowContext.shouldIgnore()) {
                 return;
             }
 

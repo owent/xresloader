@@ -1109,6 +1109,10 @@ public abstract class DataDstUEBase extends DataDstJava {
             case INT: {
                 DataContainer<Long> ret = DataSrcImpl.getOurInstance().getValue(desc.identify, 0L);
                 if (null != ret && ret.valid) {
+                    String validateErrorMessage = desc.validateTypeLimit(ret.value);
+                    if (null != validateErrorMessage) {
+                        throw new ConvException(validateErrorMessage);
+                    }
                     return ret.value.intValue();
                 } else if (ProgramOptions.getInstance().stripListRule == ProgramOptions.ListStripRule.KEEP_ALL) {
                     return Integer.valueOf(0);
@@ -1119,6 +1123,11 @@ public abstract class DataDstUEBase extends DataDstJava {
             case LONG: {
                 DataContainer<Long> ret = DataSrcImpl.getOurInstance().getValue(desc.identify, 0L);
                 if (null != ret && ret.valid) {
+                    String validateErrorMessage = desc.validateTypeLimit(ret.value);
+                    if (null != validateErrorMessage) {
+                        throw new ConvException(validateErrorMessage);
+                    }
+
                     return ret.value.longValue();
                 } else if (ProgramOptions.getInstance().stripListRule == ProgramOptions.ListStripRule.KEEP_ALL) {
                     return Long.valueOf(0);
@@ -1129,6 +1138,11 @@ public abstract class DataDstUEBase extends DataDstJava {
             case FLOAT: {
                 DataContainer<Double> ret = DataSrcImpl.getOurInstance().getValue(desc.identify, 0.0);
                 if (null != ret && ret.valid) {
+                    String validateErrorMessage = desc.validateTypeLimit(ret.value);
+                    if (null != validateErrorMessage) {
+                        throw new ConvException(validateErrorMessage);
+                    }
+
                     return ret.value.floatValue();
                 } else if (ProgramOptions.getInstance().stripListRule == ProgramOptions.ListStripRule.KEEP_ALL) {
                     return Float.valueOf(0);
@@ -1139,6 +1153,11 @@ public abstract class DataDstUEBase extends DataDstJava {
             case DOUBLE: {
                 DataContainer<Double> ret = DataSrcImpl.getOurInstance().getValue(desc.identify, 0.0);
                 if (null != ret && ret.valid) {
+                    String validateErrorMessage = desc.validateTypeLimit(ret.value);
+                    if (null != validateErrorMessage) {
+                        throw new ConvException(validateErrorMessage);
+                    }
+
                     return ret.value.doubleValue();
                 } else if (ProgramOptions.getInstance().stripListRule == ProgramOptions.ListStripRule.KEEP_ALL) {
                     return Double.valueOf(0);
@@ -1149,6 +1168,11 @@ public abstract class DataDstUEBase extends DataDstJava {
             case BOOLEAN: {
                 DataContainer<Boolean> ret = DataSrcImpl.getOurInstance().getValue(desc.identify, false);
                 if (null != ret && ret.valid) {
+                    String validateErrorMessage = desc.validateTypeLimit(ret.value);
+                    if (null != validateErrorMessage) {
+                        throw new ConvException(validateErrorMessage);
+                    }
+
                     return ret.value.booleanValue();
                 } else if (ProgramOptions.getInstance().stripListRule == ProgramOptions.ListStripRule.KEEP_ALL) {
                     return Boolean.valueOf(false);
@@ -1159,6 +1183,11 @@ public abstract class DataDstUEBase extends DataDstJava {
             case STRING: {
                 DataContainer<String> ret = DataSrcImpl.getOurInstance().getValue(desc.identify, "");
                 if (null != ret && ret.valid) {
+                    String validateErrorMessage = desc.validateTypeLimit(ret.value);
+                    if (null != validateErrorMessage) {
+                        throw new ConvException(validateErrorMessage);
+                    }
+
                     return ret.value;
                 } else if (ProgramOptions.getInstance().stripListRule == ProgramOptions.ListStripRule.KEEP_ALL) {
                     return "";
@@ -1169,6 +1198,11 @@ public abstract class DataDstUEBase extends DataDstJava {
             case BYTES: {
                 DataContainer<String> res = DataSrcImpl.getOurInstance().getValue(desc.identify, "");
                 if (null != res && res.valid) {
+                    String validateErrorMessage = desc.validateTypeLimit(res.value);
+                    if (null != validateErrorMessage) {
+                        throw new ConvException(validateErrorMessage);
+                    }
+
                     String encoding = SchemeConf.getInstance().getKey().getEncoding();
                     if (null == encoding || encoding.isEmpty()) {
                         return Base64.getEncoder().encodeToString(res.value.getBytes());
@@ -1396,7 +1430,9 @@ public abstract class DataDstUEBase extends DataDstJava {
         // ======================================================================================================
         LinkedList<DataDstWriterNodeWrapper> expandedDesc = new LinkedList<DataDstWriterNodeWrapper>();
         ddNode = DataDstWriterNode.create(null,
-                DataDstWriterNode.getDefaultMessageDescriptor(DataDstWriterNode.JAVA_TYPE.STRING), -1);
+                DataDstWriterNode.getDefaultMessageDescriptor(DataDstWriterNode.JAVA_TYPE.STRING,
+                        DataDstWriterNode.SPECIAL_TYPE_LIMIT.NONE),
+                -1);
         ddNode.setFieldDescriptor(new DataDstFieldDescriptor(ddNode.getTypeDescriptor(), 1, "Name",
                 DataDstWriterNode.FIELD_LABEL_TYPE.OPTIONAL, null));
         ddNode.identify = IdentifyEngine.n2i("Name", 0);
@@ -1406,7 +1442,9 @@ public abstract class DataDstUEBase extends DataDstJava {
         expandedDesc.add(constNameNode);
 
         ddNode = DataDstWriterNode.create(null,
-                DataDstWriterNode.getDefaultMessageDescriptor(DataDstWriterNode.JAVA_TYPE.INT), -1);
+                DataDstWriterNode.getDefaultMessageDescriptor(DataDstWriterNode.JAVA_TYPE.INT,
+                        DataDstWriterNode.SPECIAL_TYPE_LIMIT.INT32),
+                -1);
         ddNode.setFieldDescriptor(new DataDstFieldDescriptor(ddNode.getTypeDescriptor(), 2, "Value",
                 DataDstWriterNode.FIELD_LABEL_TYPE.OPTIONAL, null));
         ddNode.identify = IdentifyEngine.n2i("Value", 1);
@@ -1987,7 +2025,11 @@ public abstract class DataDstUEBase extends DataDstJava {
     }
 
     static DataDstFieldDescriptor createVirtualFieldDescriptor(String name, int index, JAVA_TYPE type) {
-        return new DataDstFieldDescriptor(DataDstWriterNode.getDefaultMessageDescriptor(type), index, name,
+        SPECIAL_TYPE_LIMIT typeLimit = SPECIAL_TYPE_LIMIT.NONE;
+        if (type == JAVA_TYPE.INT) {
+            typeLimit = SPECIAL_TYPE_LIMIT.INT32;
+        }
+        return new DataDstFieldDescriptor(DataDstWriterNode.getDefaultMessageDescriptor(type, typeLimit), index, name,
                 FIELD_LABEL_TYPE.OPTIONAL, null);
     }
 

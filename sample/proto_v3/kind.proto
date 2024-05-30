@@ -12,7 +12,7 @@ import "google/protobuf/timestamp.proto";
 message role_cfg {
     uint32  id           = 1;
     uint32  unlock_level = 2;
-    uint32  cost_type    = 3;
+    int32   cost_type    = 3;
     int32   cost_value   = 4;
     string  name         = 5;
     dep_cfg dep_test     = 10;
@@ -37,7 +37,7 @@ message role_upgrade_cfg {
 
     uint32 Id        = 1 [ (org.xresloader.ue.key_tag) = 1000, (org.xresloader.validator) = "custom_rule3" ];
     uint32 Level     = 2 [ (org.xresloader.ue.key_tag) = 1 ];
-    uint32 CostType  = 3 [ (org.xresloader.validator) = "custom_rule1", (org.xresloader.field_description) = "Refer to cost_type" ];
+    int32  CostType  = 3 [ (org.xresloader.validator) = "custom_rule1", (org.xresloader.field_description) = "Refer to cost_type" ];
     int64  CostValue = 4;
     int32  ScoreAdd  = 5;
 }

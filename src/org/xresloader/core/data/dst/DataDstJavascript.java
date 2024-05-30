@@ -220,7 +220,8 @@ public class DataDstJavascript extends DataDstJava {
         // 枚举值已被转为Java Long，会在这里执行
         if (data instanceof Number) {
             // IEEE 754
-            if (data instanceof Long && ((long) data > ((1L << 53) - 1) || (long) data < -((1L << 53) - 1))) {
+            if (SchemeConf.getInstance().getJsonOptions().enableLargeNumberAsString && data instanceof Long
+                    && ((long) data > ((1L << 53) - 1) || (long) data < -((1L << 53) - 1))) {
                 sb.append(JSONObject.quote(data.toString()));
             } else {
                 sb.append(data.toString());

@@ -28,11 +28,13 @@ public class ProgramOptions {
     /**
      * 单例
      */
-    private static ProgramOptions instance = null;
+    private static ThreadLocal<ProgramOptions> instance = null;
     private static Options options = null;
     private static String version = null;
-    private static String defaultDataVersion = null;
     private static Properties properties = null;
+
+    private String defaultDataVersion = null;
+    private String dataVersion = null;
 
     public FileType outType;
 
@@ -56,7 +58,6 @@ public class ProgramOptions {
     public boolean enableStdin = false;
     public String[] customValidatorRules = null;
 
-    private static String dataVersion = null;
     public String protoDumpFile = "";
     public ProtoDumpType protoDumpType = ProtoDumpType.NONE;
     public boolean luaGlobal = false;
@@ -80,11 +81,15 @@ public class ProgramOptions {
 
     public static ProgramOptions getInstance() {
         if (instance == null) {
-            instance = new ProgramOptions();
-            instance.reset();
+            instance = new ThreadLocal<>();
         }
 
-        return instance;
+        if (null == instance.get()) {
+            instance.set(new ProgramOptions());
+            instance.get().reset();
+        }
+
+        return instance.get();
     }
 
     public void reset() {
@@ -108,7 +113,7 @@ public class ProgramOptions {
         prettyIndent = 0;
         enableStdin = false;
         customValidatorRules = null;
-        dataVersion = null;
+
         protoDumpFile = "";
         protoDumpType = ProtoDumpType.NONE;
         luaGlobal = false;
@@ -117,9 +122,11 @@ public class ProgramOptions {
         javascriptExport = null;
         javascriptGlobalVar = "";
         tolerateContinueEmptyRows = 100000;
+
+        dataVersion = null;
     }
 
-    private static Options get_options_group() {
+    private static synchronized Options get_options_group() {
         if (null != options) {
             return options;
         }
@@ -240,7 +247,10 @@ public class ProgramOptions {
         CommandLine cmd = null;
         try {
             // parse the command line arguments
-            cmd = parser.parse(get_options_group(), args);
+            Options options = get_options_group();
+            synchronized (options) {
+                cmd = parser.parse(get_options_group(), args);
+            }
         } catch (ParseException exp) {
             // oops, something went wrong
             ProgramOptions.getLoger().error("Parsing failed.  reason: \"%s\" failed", exp.getMessage());
@@ -258,7 +268,11 @@ public class ProgramOptions {
             String script = System.getProperty("java.class.path");
             HelpFormatter formatter = new HelpFormatter();
             formatter.setWidth(140);
-            formatter.printHelp(String.format("java -client -jar \"%s\" [options...]", script), get_options_group());
+            Options options = get_options_group();
+            synchronized (options) {
+                formatter.printHelp(String.format("java -client -jar \"%s\" [options...]", script),
+                        options);
+            }
             System.out.println("");
             System.out.println("You can add -Dlog4j.configuration=log4j2.xml to use your own log configure.");
             return 1;
@@ -481,7 +495,7 @@ public class ProgramOptions {
         return 0;
     }
 
-    public static Properties getProperties() {
+    public static synchronized Properties getProperties() {
         if (properties != null) {
             return properties;
         }
@@ -498,7 +512,7 @@ public class ProgramOptions {
         return properties;
     }
 
-    public String getVersion() {
+    public synchronized String getVersion() {
         if (version == null) {
             version = getProperties().getProperty("version", "Unknown");
         }
@@ -536,25 +550,19 @@ public class ProgramOptions {
         STRIP_EMPTY_ALL, STRIP_EMPTY_TAIL, KEEP_ALL,
     }
 
-    static public Logger getLoger() {
+    static public synchronized Logger getLoger() {
         if (null != logger) {
             return logger;
         }
 
-        // try {
-        // System.setProperty("log4j.configurationFile", new
-        // File("log4j2.xml").toURI().toString());
-        // } catch (Exception e) {
-        // System.err.println(String.format("[ERROR] set
-        // -Dlog4j.configuration=log4j2.xml failed.\n%s", e.getMessage()));
-        // }
         String name = getProperties().getProperty("name", "xresloader");
 
         try {
             logger = LogManager.getFormatterLogger(name);
         } catch (UnsupportedCharsetException e) {
             System.err.println(String.format(
-                    "[WARN] Unknown console charset %s, we will try use UTF-8 for console output", e.getCharsetName()));
+                    "[WARN] Unknown console charset %s, we will try use UTF-8 for console output",
+                    e.getCharsetName()));
         }
 
         return logger;

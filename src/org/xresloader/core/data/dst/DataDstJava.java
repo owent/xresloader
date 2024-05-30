@@ -2,6 +2,7 @@ package org.xresloader.core.data.dst;
 
 import org.apache.commons.codec.binary.Hex;
 import org.xresloader.core.ProgramOptions;
+import org.xresloader.core.data.dst.DataDstWriterNode.DataDstFieldDescriptor;
 import org.xresloader.core.data.err.ConvException;
 import org.xresloader.core.data.et.DataETProcessor;
 import org.xresloader.core.data.src.DataContainer;
@@ -17,12 +18,14 @@ import java.security.NoSuchAlgorithmException;
 import java.time.Instant;
 import java.util.*;
 import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
 /**
  * Created by owentou on 2015/04/29.
  */
 public abstract class DataDstJava extends DataDstImpl {
-    private static Pattern strick_identify_rule = Pattern.compile("^[a-zA-Z]\\w*$", Pattern.CASE_INSENSITIVE);
+    private static ThreadLocal<Pattern> strick_identify_rule = ThreadLocal
+            .withInitial(() -> Pattern.compile("^[a-zA-Z]\\w*$", Pattern.CASE_INSENSITIVE));
 
     static private class ParseResult {
         public HashMap<String, Object> value = null;
@@ -78,7 +81,7 @@ public abstract class DataDstJava extends DataDstImpl {
             return false;
         }
 
-        return strick_identify_rule.matcher(input).matches();
+        return strick_identify_rule.get().matcher(input).matches();
     }
 
     /**
@@ -1137,53 +1140,67 @@ public abstract class DataDstJava extends DataDstImpl {
 
         int usedInputIdx = 0;
         int fieldSize = 0;
+        int atLeastFieldSize = 0;
+        HashMap<Integer, DataDstFieldDescriptor> missingFields = new HashMap<>();
         for (int i = 0; i < children.size(); ++i) {
-            if (children.get(i).getLinkedValueField() != null) {
+            DataDstFieldDescriptor child = children.get(i);
+            if (child.allowMissingInPlainMode()) {
+                continue;
+            }
+
+            if (child.getReferOneof() != null) {
+                if (child.getReferOneof().allowMissingInPlainMode()) {
+                    continue;
+                }
+            }
+
+            missingFields.put(child.getIndex(), child);
+            atLeastFieldSize += 1;
+        }
+
+        for (int i = 0; i < children.size(); ++i) {
+            DataDstFieldDescriptor child = children.get(i);
+
+            if (child.getLinkedValueField() != null) {
                 ++fieldSize;
                 continue;
             }
 
-            if (null != children.get(i).getReferOneof()) {
+            if (null != child.getReferOneof()) {
                 if (dumpedOneof == null) {
                     throw new ConvException(String.format(
                             "Try to convert field %s of %s failed, found oneof descriptor but oneof set is not initialized.",
-                            children.get(i).getName(), field.getTypeDescriptor().getFullName()));
+                            child.getName(), field.getTypeDescriptor().getFullName()));
                 }
-                if (dumpedOneof.contains(children.get(i).getReferOneof().getFullName())) {
+                if (dumpedOneof.contains(child.getReferOneof().getFullName())) {
                     continue;
                 }
 
-                if (usedInputIdx >= inputs.length) {
-                    throw new ConvException(String.format(
-                            "Try to convert %s of %s failed, field count not matched(expect %d, real %d).",
-                            children.get(i).getReferOneof().getName(), field.getTypeDescriptor().getFullName(),
-                            usedInputIdx + 1, inputs.length));
-                }
+                if (usedInputIdx < inputs.length
+                        && dumpPlainField(ret.value, null, child.getReferOneof(), null, inputs[usedInputIdx],
+                                rowContext, fieldPath)) {
+                    dumpedOneof.add(child.getReferOneof().getFullName());
 
-                if (dumpPlainField(ret.value, null, children.get(i).getReferOneof(), null, inputs[usedInputIdx],
-                        rowContext, fieldPath)) {
-                    dumpedOneof.add(children.get(i).getReferOneof().getFullName());
+                    for (var subField : child.getReferOneof().getSortedFields()) {
+                        missingFields.remove(subField.getIndex());
+                    }
                 } else {
-                    if (children.get(i).isNotNull()) {
+                    if (child.isNotNull()) {
                         rowContext.addIgnoreReason(
                                 String.format("oneof %s.%s is empty but set not null, we will ignore this row",
-                                        fieldPath, children.get(i).getName()));
+                                        fieldPath, child.getName()));
                     }
                 }
 
                 ++fieldSize;
                 ++usedInputIdx;
             } else {
-                if (usedInputIdx >= inputs.length) {
-                    throw new ConvException(String.format(
-                            "Try to convert %s of %s failed, field count not matched(expect %d, real %d).",
-                            children.get(i).getName(), field.getTypeDescriptor().getFullName(), usedInputIdx + 1,
-                            inputs.length));
-                }
-
                 String subFieldPath = String.format("%s.%s", fieldPath, children.get(i).getName());
-                if (!dumpPlainField(ret.value, null, children.get(i), null, inputs[usedInputIdx], rowContext,
-                        subFieldPath)) {
+                if (usedInputIdx < inputs.length
+                        && dumpPlainField(ret.value, null, children.get(i), null, inputs[usedInputIdx], rowContext,
+                                subFieldPath)) {
+                    missingFields.remove(child.getIndex());
+                } else {
                     if (children.get(i).isNotNull()) {
                         rowContext.addIgnoreReason(
                                 String.format("field %s is empty but set not null, we will ignore this row",
@@ -1196,19 +1213,20 @@ public abstract class DataDstJava extends DataDstImpl {
             }
         }
 
-        if (fieldSize != inputs.length) {
-            DataSrcImpl current_source = DataSrcImpl.getOurInstance();
-            if (null == current_source) {
-                ProgramOptions.getLoger().warn("Try to convert %s need %d fields, but provide %d fields.",
-                        field.getTypeDescriptor().getFullName(), fieldSize, inputs.length);
-            } else {
-                ProgramOptions.getLoger().warn(
-                        "Try to convert %s need %d fields, but provide %d fields.%s  > File: %s, Table: %s, Row: %d, Column: %d(%s)",
-                        field.getTypeDescriptor().getFullName(), fieldSize, inputs.length, ProgramOptions.getEndl(),
-                        current_source.getCurrentFileName(), current_source.getCurrentTableName(),
-                        current_source.getCurrentRowNum() + 1, current_source.getLastColomnNum() + 1,
-                        ExcelEngine.getColumnName(current_source.getLastColomnNum() + 1));
-            }
+        if (!missingFields.isEmpty()) {
+            String message = String.format(
+                    "Try to convert %s need at least %d fields, at most %d fields, but only provide %d fields.%s  > Missing fields: %s",
+                    field.getTypeDescriptor().getFullName(), atLeastFieldSize, fieldSize, inputs.length,
+                    ProgramOptions.getEndl(),
+                    String.join(",", missingFields.values().stream().map(DataDstFieldDescriptor::getName)
+                            .collect(Collectors.toList())));
+            ProgramOptions.getLoger().warn(message);
+        } else if (inputs.length > fieldSize) {
+            String message = String.format(
+                    "Try to convert %s need at least %d fields, at most %d fields, but provide %d fields.",
+                    field.getTypeDescriptor().getFullName(), atLeastFieldSize, fieldSize, inputs.length,
+                    ProgramOptions.getEndl());
+            throw new ConvException(message);
         }
 
         if (ret.value.isEmpty()) {

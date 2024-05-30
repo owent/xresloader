@@ -19,8 +19,10 @@ public abstract class DataVerifyImpl {
     protected HashSet<Long> all_numbers = new HashSet<Long>();
     protected String name = "";
 
-    private static Pattern PERCENT_PATTERN = Pattern.compile("^\\s*((\\-\\s*)?[0-9]+(\\.[0-9]+)?)\\s*%\\s*$");
-    private static Pattern INTEGER_WITH_DOT_PATTERN = Pattern.compile("^\\s*((\\-\\s*)?[0-9\\,]+)\\s*$");
+    private static ThreadLocal<Pattern> PERCENT_PATTERN = ThreadLocal
+            .withInitial(() -> Pattern.compile("^\\s*((\\-\\s*)?[0-9]+(\\.[0-9]+)?)\\s*%\\s*$"));
+    private static ThreadLocal<Pattern> INTEGER_WITH_DOT_PATTERN = ThreadLocal
+            .withInitial(() -> Pattern.compile("^\\s*((\\-\\s*)?[0-9\\,]+)\\s*$"));
 
     protected DataVerifyImpl(String _name) {
         name = _name;
@@ -49,7 +51,7 @@ public abstract class DataVerifyImpl {
     }
 
     private static double doubleValueOf(String input) {
-        Matcher matcher = PERCENT_PATTERN.matcher(input);
+        Matcher matcher = PERCENT_PATTERN.get().matcher(input);
         if (matcher.matches()) {
             return Double.valueOf(matcher.group(1).trim()) / 100.0;
         }
@@ -57,7 +59,7 @@ public abstract class DataVerifyImpl {
     }
 
     private static long longValueOf(String input) {
-        Matcher matcher = INTEGER_WITH_DOT_PATTERN.matcher(input);
+        Matcher matcher = INTEGER_WITH_DOT_PATTERN.get().matcher(input);
         if (matcher.matches()) {
             return Long.valueOf(matcher.group(1).trim());
         }

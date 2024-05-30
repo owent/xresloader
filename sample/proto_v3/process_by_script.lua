@@ -17,7 +17,7 @@ return {
     },
     data_ver = "1.0.0.0",
     hash_code = "sha256:fcc0bde151e4556a4dbea40a41b8e6394c46cb77b2c59cdaa1e365c642f9f0e2",
-    xres_ver = "2.15.2",
+    xres_ver = "2.16.0",
   },
   [2] = "process_by_script",
   process_by_script = {

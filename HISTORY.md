@@ -2,12 +2,14 @@
 
 ## Unrelease
 
-## 2.15.2
+## 2.16.0
 
 1. 增加int32和uint32的范围检测。
 2. JSON和Javascript类型输出时，超过 `2^53` 和低于 `-2^53` 的值转为字符串类型表示。
-3. 修复无效的空行忽略提示(空通过Scheme `JsonCfg-LargeNumberAsString=true/false` 来控制)
-4. 更新依赖库
+3. 修复无效的空行忽略提示(空通过Scheme `JsonCfg-LargeNumberAsString=true/false` 来控制)。
+4. 单例增加同步锁和ThreadLocal，预埋下个版本可能会增加内置的多线程并发。
+5. 增加 `org.xresloader.field_allow_missing_in_plain_mode` 和 `org.xresloader.oneof_allow_missing_in_plain_mode` 以允许Plain模式下部分字段可选
+6. 更新依赖库
    + `jacoco-maven-plugin` -> 0.8.12
    + `maven-compiler-plugin` -> 3.13.0
    + `maven-shade-plugin` -> 3.5.3

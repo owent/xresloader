@@ -387,7 +387,7 @@ public class main {
         try {
             ret_code = build_group(args);
         } catch (InitializeException e) {
-            ProgramOptions.getLoger().error("Initlize failed.%s%s> %s", e.getMessage(), endl, String.join(" ", args));
+            ProgramOptions.getLoger().error("Initlize failed.%s%s  > %s", e.getMessage(), endl, String.join(" ", args));
         } catch (Exception e) {
             ProgramOptions.getLoger().error("%s", e.getMessage());
             for (StackTraceElement frame : e.getStackTrace()) {
@@ -408,7 +408,7 @@ public class main {
                         ret_code += build_group(stdin_args);
                     } catch (InitializeException e) {
                         ++ret_code;
-                        ProgramOptions.getLoger().error("Initlize failed.%s%s> %s", e.getMessage(), endl,
+                        ProgramOptions.getLoger().error("Initlize failed.%s%s  > %s", e.getMessage(), endl,
                                 String.join(" ", stdin_args));
                     } catch (Exception e) {
                         ++ret_code;

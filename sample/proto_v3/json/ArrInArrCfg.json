@@ -132,20 +132,24 @@
         ],
         "TestPlainMsg": {
             "TestId1": 1,
-            "TestId2": 2
+            "TestId2": 2,
+            "TestId3": 0
         },
         "TestPlainMsgArr": [
             {
                 "TestId1": 1,
-                "TestId2": 2
+                "TestId2": 2,
+                "TestId3": 0
             },
             {
                 "TestId1": 3,
-                "TestId2": 4
+                "TestId2": 4,
+                "TestId3": 0
             },
             {
                 "TestId1": 5,
-                "TestId2": 6
+                "TestId2": 6,
+                "TestId3": 0
             }
         ]
     },
@@ -282,16 +286,19 @@
         ],
         "TestPlainMsg": {
             "TestId1": 3,
-            "TestId2": 4
+            "TestId2": 4,
+            "TestId3": 5
         },
         "TestPlainMsgArr": [
             {
                 "TestId1": 7,
-                "TestId2": 8
+                "TestId2": 8,
+                "TestId3": 0
             },
             {
                 "TestId1": 9,
-                "TestId2": 10
+                "TestId2": 10,
+                "TestId3": 0
             }
         ]
     },
@@ -415,12 +422,14 @@
             9
         ],
         "TestPlainMsg": {
-            "TestId1": 5,
-            "TestId2": 6
+            "TestId1": 6,
+            "TestId2": 0,
+            "TestId3": 0
         },
         "TestPlainMsgArr": [{
             "TestId1": 11,
-            "TestId2": 12
+            "TestId2": 12,
+            "TestId3": 0
         }]
     }
 ]

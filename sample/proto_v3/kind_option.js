@@ -411,6 +411,14 @@ exports.files = [
               ]
             },
             type_name : "UINT32"
+          },
+          test_id_3 : {
+            name : "test_id_3",
+            number : 10003,
+            options : {
+              field_allow_missing_in_plain_mode : true
+            },
+            type_name : "UINT32"
           }
         },
         name : "test_msg_verifier",

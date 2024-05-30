@@ -48,6 +48,7 @@ public class DataDstWriterNode {
         public String plainSeparator = null;
         public int ratio = 1;
         public boolean notNull = false;
+        public boolean allowMissingInPlainMode = false;
         public ArrayList<String> uniqueTags = null;
         private DataDstFieldExtUE ue = null;
 
@@ -65,6 +66,7 @@ public class DataDstWriterNode {
         public String description = null;
         public String plainSeparator = null;
         public boolean notNull = false;
+        public boolean allowMissingInPlainMode = false;
     }
 
     static public class DataDstMessageExtUE {
@@ -206,6 +208,14 @@ public class DataDstWriterNode {
             }
 
             return this.extension.notNull;
+        }
+
+        public boolean allowMissingInPlainMode() {
+            if (this.extension == null) {
+                return false;
+            }
+
+            return this.extension.allowMissingInPlainMode;
         }
 
         public boolean isRequired() {
@@ -365,6 +375,14 @@ public class DataDstWriterNode {
             }
 
             return this.extension.notNull;
+        }
+
+        public boolean allowMissingInPlainMode() {
+            if (this.extension == null) {
+                return false;
+            }
+
+            return this.extension.allowMissingInPlainMode;
         }
     }
 

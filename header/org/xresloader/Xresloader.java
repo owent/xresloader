@@ -34,9 +34,11 @@ public final class Xresloader {
     registry.add(org.xresloader.Xresloader.fieldSeparator);
     registry.add(org.xresloader.Xresloader.fieldRequired);
     registry.add(org.xresloader.Xresloader.fieldOriginValue);
+    registry.add(org.xresloader.Xresloader.fieldAllowMissingInPlainMode);
     registry.add(org.xresloader.Xresloader.oneofDescription);
     registry.add(org.xresloader.Xresloader.oneofSeparator);
     registry.add(org.xresloader.Xresloader.oneofNotNull);
+    registry.add(org.xresloader.Xresloader.oneofAllowMissingInPlainMode);
     registry.add(org.xresloader.Xresloader.enumDescription);
     registry.add(org.xresloader.Xresloader.enumvDescription);
     registry.add(org.xresloader.Xresloader.enumAlias);
@@ -288,6 +290,21 @@ public final class Xresloader {
           .newFileScopedGeneratedExtension(
         java.lang.String.class,
         null);
+  public static final int FIELD_ALLOW_MISSING_IN_PLAIN_MODE_FIELD_NUMBER = 1017;
+  /**
+   * <pre>
+   * Plain模式下允许字段缺失
+   * </pre>
+   *
+   * <code>extend .google.protobuf.FieldOptions { ... }</code>
+   */
+  public static final
+    com.google.protobuf.GeneratedMessage.GeneratedExtension<
+      com.google.protobuf.DescriptorProtos.FieldOptions,
+      java.lang.Boolean> fieldAllowMissingInPlainMode = com.google.protobuf.GeneratedMessage
+          .newFileScopedGeneratedExtension(
+        java.lang.Boolean.class,
+        null);
   public static final int ONEOF_DESCRIPTION_FIELD_NUMBER = 1001;
   /**
    * <pre>
@@ -330,6 +347,21 @@ public final class Xresloader {
     com.google.protobuf.GeneratedMessage.GeneratedExtension<
       com.google.protobuf.DescriptorProtos.OneofOptions,
       java.lang.Boolean> oneofNotNull = com.google.protobuf.GeneratedMessage
+          .newFileScopedGeneratedExtension(
+        java.lang.Boolean.class,
+        null);
+  public static final int ONEOF_ALLOW_MISSING_IN_PLAIN_MODE_FIELD_NUMBER = 1004;
+  /**
+   * <pre>
+   * Plain模式下允许字段缺失
+   * </pre>
+   *
+   * <code>extend .google.protobuf.OneofOptions { ... }</code>
+   */
+  public static final
+    com.google.protobuf.GeneratedMessage.GeneratedExtension<
+      com.google.protobuf.DescriptorProtos.OneofOptions,
+      java.lang.Boolean> oneofAllowMissingInPlainMode = com.google.protobuf.GeneratedMessage
           .newFileScopedGeneratedExtension(
         java.lang.Boolean.class,
         null);
@@ -411,16 +443,20 @@ public final class Xresloader {
       "tobuf.FieldOptions\030\366\007 \001(\t:6\n\016field_requi" +
       "red\022\035.google.protobuf.FieldOptions\030\367\007 \001(" +
       "\010::\n\022field_origin_value\022\035.google.protobu" +
-      "f.FieldOptions\030\370\007 \001(\t:9\n\021oneof_descripti" +
-      "on\022\035.google.protobuf.OneofOptions\030\351\007 \001(\t" +
-      ":7\n\017oneof_separator\022\035.google.protobuf.On" +
-      "eofOptions\030\352\007 \001(\t:6\n\016oneof_not_null\022\035.go" +
-      "ogle.protobuf.OneofOptions\030\353\007 \001(\010:7\n\020enu" +
-      "m_description\022\034.google.protobuf.EnumOpti" +
-      "ons\030\351\007 \001(\t:=\n\021enumv_description\022!.google" +
-      ".protobuf.EnumValueOptions\030\351\007 \001(\t:6\n\nenu" +
-      "m_alias\022!.google.protobuf.EnumValueOptio" +
-      "ns\030\352\007 \003(\tb\006proto3"
+      "f.FieldOptions\030\370\007 \001(\t:I\n!field_allow_mis" +
+      "sing_in_plain_mode\022\035.google.protobuf.Fie" +
+      "ldOptions\030\371\007 \001(\010:9\n\021oneof_description\022\035." +
+      "google.protobuf.OneofOptions\030\351\007 \001(\t:7\n\017o" +
+      "neof_separator\022\035.google.protobuf.OneofOp" +
+      "tions\030\352\007 \001(\t:6\n\016oneof_not_null\022\035.google." +
+      "protobuf.OneofOptions\030\353\007 \001(\010:I\n!oneof_al" +
+      "low_missing_in_plain_mode\022\035.google.proto" +
+      "buf.OneofOptions\030\354\007 \001(\010:7\n\020enum_descript" +
+      "ion\022\034.google.protobuf.EnumOptions\030\351\007 \001(\t" +
+      ":=\n\021enumv_description\022!.google.protobuf." +
+      "EnumValueOptions\030\351\007 \001(\t:6\n\nenum_alias\022!." +
+      "google.protobuf.EnumValueOptions\030\352\007 \003(\tb" +
+      "\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
@@ -443,12 +479,14 @@ public final class Xresloader {
     fieldSeparator.internalInit(descriptor.getExtensions().get(13));
     fieldRequired.internalInit(descriptor.getExtensions().get(14));
     fieldOriginValue.internalInit(descriptor.getExtensions().get(15));
-    oneofDescription.internalInit(descriptor.getExtensions().get(16));
-    oneofSeparator.internalInit(descriptor.getExtensions().get(17));
-    oneofNotNull.internalInit(descriptor.getExtensions().get(18));
-    enumDescription.internalInit(descriptor.getExtensions().get(19));
-    enumvDescription.internalInit(descriptor.getExtensions().get(20));
-    enumAlias.internalInit(descriptor.getExtensions().get(21));
+    fieldAllowMissingInPlainMode.internalInit(descriptor.getExtensions().get(16));
+    oneofDescription.internalInit(descriptor.getExtensions().get(17));
+    oneofSeparator.internalInit(descriptor.getExtensions().get(18));
+    oneofNotNull.internalInit(descriptor.getExtensions().get(19));
+    oneofAllowMissingInPlainMode.internalInit(descriptor.getExtensions().get(20));
+    enumDescription.internalInit(descriptor.getExtensions().get(21));
+    enumvDescription.internalInit(descriptor.getExtensions().get(22));
+    enumAlias.internalInit(descriptor.getExtensions().get(23));
     descriptor.resolveAllFeaturesImmutable();
     com.google.protobuf.DescriptorProtos.getDescriptor();
   }

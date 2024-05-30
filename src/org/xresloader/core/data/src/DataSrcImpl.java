@@ -15,44 +15,49 @@ import java.util.LinkedList;
 public abstract class DataSrcImpl {
     static public final int LOG_PROCESS_BOUND = 5000;
 
-    private static DataSrcImpl ourInstance = null;
+    private static ThreadLocal<DataSrcImpl> ourInstance = new ThreadLocal<>();
     private int last_column_index_ = 0;
-    private static DataContainer<Boolean> dc_cache_bool_ = new DataContainer<Boolean>();
-    private static DataContainer<String> dc_cache_str_ = new DataContainer<String>();
-    private static DataContainer<Double> dc_cache_dbl_ = new DataContainer<Double>();
-    private static DataContainer<Long> dc_cache_long_ = new DataContainer<Long>();
+    private static ThreadLocal<DataContainer<Boolean>> dc_cache_bool_ = ThreadLocal
+            .withInitial(() -> new DataContainer<Boolean>());
+    private static ThreadLocal<DataContainer<String>> dc_cache_str_ = ThreadLocal
+            .withInitial(() -> new DataContainer<String>());
+    private static ThreadLocal<DataContainer<Double>> dc_cache_dbl_ = ThreadLocal
+            .withInitial(() -> new DataContainer<Double>());
+    private static ThreadLocal<DataContainer<Long>> dc_cache_long_ = ThreadLocal
+            .withInitial(() -> new DataContainer<Long>());
 
     protected DataSrcImpl() {
     }
 
     public static DataContainer<Boolean> getBoolCache(boolean default_val) {
-        dc_cache_bool_.value = default_val;
-        dc_cache_bool_.valid = false;
-        return dc_cache_bool_;
+        dc_cache_bool_.get().value = default_val;
+        dc_cache_bool_.get().valid = false;
+        return dc_cache_bool_.get();
     }
 
     public static DataContainer<String> getStringCache(String default_val) {
-        dc_cache_str_.value = default_val;
-        dc_cache_str_.valid = false;
-        return dc_cache_str_;
+        dc_cache_str_.get().value = default_val;
+        dc_cache_str_.get().valid = false;
+        return dc_cache_str_.get();
     }
 
     public static DataContainer<Double> getDoubleCache(double default_val) {
-        dc_cache_dbl_.value = default_val;
-        dc_cache_dbl_.valid = false;
-        return dc_cache_dbl_;
+        dc_cache_dbl_.get().value = default_val;
+        dc_cache_dbl_.get().valid = false;
+        return dc_cache_dbl_.get();
     }
 
     public static DataContainer<Long> getLongCache(long default_val) {
-        dc_cache_long_.value = default_val;
-        dc_cache_long_.valid = false;
-        return dc_cache_long_;
+        dc_cache_long_.get().value = default_val;
+        dc_cache_long_.get().valid = false;
+        return dc_cache_long_.get();
     }
 
     public static DataSrcImpl create(Class<?> clazz) {
         try {
             // return ourInstance = (DataSrcImpl) clazz.newInstance();
-            return ourInstance = (DataSrcImpl) clazz.getDeclaredConstructor().newInstance();
+            ourInstance.set((DataSrcImpl) clazz.getDeclaredConstructor().newInstance());
+            return ourInstance.get();
         } catch (InstantiationException e) {
             e.printStackTrace();
         } catch (IllegalAccessException e) {
@@ -67,11 +72,12 @@ public abstract class DataSrcImpl {
             e.printStackTrace();
         }
 
-        return ourInstance = null;
+        ourInstance.set(null);
+        return ourInstance.get();
     }
 
     public static DataSrcImpl getOurInstance() {
-        return ourInstance;
+        return ourInstance.get();
     }
 
     public int init() {

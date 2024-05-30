@@ -304,6 +304,7 @@ class test_msg_verifier final : public ::google::protobuf::Message
   enum : int {
     kTestId1FieldNumber = 10001,
     kTestId2FieldNumber = 10002,
+    kTestId3FieldNumber = 10003,
   };
   // uint32 test_id_1 = 10001;
   void clear_test_id_1() ;
@@ -325,12 +326,22 @@ class test_msg_verifier final : public ::google::protobuf::Message
   void _internal_set_test_id_2(::uint32_t value);
 
   public:
+  // uint32 test_id_3 = 10003 [(.org.xresloader.field_allow_missing_in_plain_mode) = true];
+  void clear_test_id_3() ;
+  ::uint32_t test_id_3() const;
+  void set_test_id_3(::uint32_t value);
+
+  private:
+  ::uint32_t _internal_test_id_3() const;
+  void _internal_set_test_id_3(::uint32_t value);
+
+  public:
   // @@protoc_insertion_point(class_scope:test_msg_verifier)
  private:
   class _Internal;
   friend class ::google::protobuf::internal::TcParser;
   static const ::google::protobuf::internal::TcParseTable<
-      0, 2, 0,
+      0, 3, 0,
       0, 7>
       _table_;
 
@@ -353,6 +364,7 @@ class test_msg_verifier final : public ::google::protobuf::Message
                           const test_msg_verifier& from_msg);
     ::uint32_t test_id_1_;
     ::uint32_t test_id_2_;
+    ::uint32_t test_id_3_;
     mutable ::google::protobuf::internal::CachedSize _cached_size_;
     PROTOBUF_TSAN_DECLARE_MEMBER
   };
@@ -5552,6 +5564,28 @@ inline ::uint32_t test_msg_verifier::_internal_test_id_2() const {
 inline void test_msg_verifier::_internal_set_test_id_2(::uint32_t value) {
   ::google::protobuf::internal::TSanWrite(&_impl_);
   _impl_.test_id_2_ = value;
+}
+
+// uint32 test_id_3 = 10003 [(.org.xresloader.field_allow_missing_in_plain_mode) = true];
+inline void test_msg_verifier::clear_test_id_3() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.test_id_3_ = 0u;
+}
+inline ::uint32_t test_msg_verifier::test_id_3() const {
+  // @@protoc_insertion_point(field_get:test_msg_verifier.test_id_3)
+  return _internal_test_id_3();
+}
+inline void test_msg_verifier::set_test_id_3(::uint32_t value) {
+  _internal_set_test_id_3(value);
+  // @@protoc_insertion_point(field_set:test_msg_verifier.test_id_3)
+}
+inline ::uint32_t test_msg_verifier::_internal_test_id_3() const {
+  ::google::protobuf::internal::TSanRead(&_impl_);
+  return _impl_.test_id_3_;
+}
+inline void test_msg_verifier::_internal_set_test_id_3(::uint32_t value) {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.test_id_3_ = value;
 }
 
 // -------------------------------------------------------------------

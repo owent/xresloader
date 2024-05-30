@@ -12,8 +12,8 @@ return {
     },
     data_ver = "1.0.0.0",
     description = "Test arr_in_arr_cfg",
-    hash_code = "sha256:3ed958da23b37c20c42341e5ad614314abdf83a8d492829679dd0d5e769d4307",
-    xres_ver = "2.15.2",
+    hash_code = "sha256:6b2919a501f5cb402ca608dd55aa11785ba4214ff99908aba25609118cb9e0e7",
+    xres_ver = "2.16.0",
   },
   [2] = "arr_in_arr_cfg",
   arr_in_arr_cfg = {
@@ -139,6 +139,7 @@ return {
       test_plain_msg = {
         test_id_1 = 3,
         test_id_2 = 4,
+        test_id_3 = 5,
       },
       test_plain_msg_arr = {
         {
@@ -195,8 +196,7 @@ return {
         9,
       },
       test_plain_msg = {
-        test_id_1 = 5,
-        test_id_2 = 6,
+        test_id_1 = 6,
       },
       test_plain_msg_arr = {
         {

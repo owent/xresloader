@@ -79,6 +79,7 @@ message test_msg_verifier {
 
     uint32 test_id_1 = 10001;
     uint32 test_id_2 = 10002 [ (org.xresloader.field_alias) = "测试ID别名2" ];
+    uint32 test_id_3 = 10003 [ (org.xresloader.field_allow_missing_in_plain_mode) = true ];
 }
 
 message arr_in_arr_cfg {

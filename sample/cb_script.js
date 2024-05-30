@@ -41,7 +41,7 @@ function initDataSource() {
 
   var curFileName = gOurInstance.getCurrentFileName();
   var curSheetName = gOurInstance.getCurrentTableName();
-  print("> Check source : " + curFileName + ", " + curSheetName);
+  print("  > Check source : " + curFileName + ", " + curSheetName);
 }
 
 function extractRealKey(keyWithPrefix) {

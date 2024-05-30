@@ -27,6 +27,7 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.time.Instant;
 import java.util.*;
+import java.util.stream.Collectors;
 
 import static com.google.protobuf.Descriptors.FieldDescriptor.JavaType.MESSAGE;
 
@@ -477,6 +478,11 @@ public class DataDstPb extends DataDstImpl {
             child_field.mutableExtension().notNull = fd.getOptions().getExtension(Xresloader.fieldNotNull);
         }
 
+        if (fd.getOptions().hasExtension(Xresloader.fieldAllowMissingInPlainMode)) {
+            child_field.mutableExtension().allowMissingInPlainMode = fd.getOptions()
+                    .getExtension(Xresloader.fieldAllowMissingInPlainMode);
+        }
+
         if (fd.getOptions().getExtensionCount(Xresloader.fieldUniqueTag) > 0) {
             var ext = child_field.mutableExtension();
             ext.uniqueTags = new ArrayList<>();
@@ -575,6 +581,11 @@ public class DataDstPb extends DataDstImpl {
 
         if (fd.getOptions().hasExtension(Xresloader.oneofNotNull)) {
             child_field.mutableExtension().notNull = fd.getOptions().getExtension(Xresloader.oneofNotNull);
+        }
+
+        if (fd.getOptions().hasExtension(Xresloader.oneofAllowMissingInPlainMode)) {
+            child_field.mutableExtension().allowMissingInPlainMode = fd.getOptions()
+                    .getExtension(Xresloader.oneofAllowMissingInPlainMode);
         }
 
         if (gen == null) {
@@ -2658,8 +2669,27 @@ public class DataDstPb extends DataDstImpl {
 
         int usedInputIdx = 0;
         int fieldSize = 0;
+        int atLeastFieldSize = 0;
+        HashMap<Integer, DataDstFieldDescriptor> missingFields = new HashMap<>();
         for (int i = 0; i < children.size(); ++i) {
             DataDstFieldDescriptor child = children.get(i);
+            if (child.allowMissingInPlainMode()) {
+                continue;
+            }
+
+            if (child.getReferOneof() != null) {
+                if (child.getReferOneof().allowMissingInPlainMode()) {
+                    continue;
+                }
+            }
+
+            missingFields.put(child.getIndex(), child);
+            atLeastFieldSize += 1;
+        }
+
+        for (int i = 0; i < children.size(); ++i) {
+            DataDstFieldDescriptor child = children.get(i);
+
             if (child.getLinkedValueField() != null) {
                 ++fieldSize;
                 continue;
@@ -2675,17 +2705,15 @@ public class DataDstPb extends DataDstImpl {
                     continue;
                 }
 
-                if (usedInputIdx >= inputs.length) {
-                    throw new ConvException(String.format(
-                            "Try to convert %s of %s failed, field count not matched(expect %d, real %d).",
-                            child.getReferOneof().getName(), field.getTypeDescriptor().getFullName(),
-                            usedInputIdx + 1, inputs.length));
-                }
-
-                if (dumpPlainField(builder, null, child.getReferOneof(), null, inputs[usedInputIdx],
-                        rowContext, fieldPath)) {
+                if (usedInputIdx < inputs.length
+                        && dumpPlainField(builder, null, child.getReferOneof(), null, inputs[usedInputIdx],
+                                rowContext, fieldPath)) {
                     hasData = true;
                     dumpedOneof.add(child.getReferOneof().getFullName());
+
+                    for (var subField : child.getReferOneof().getSortedFields()) {
+                        missingFields.remove(subField.getIndex());
+                    }
                 } else {
                     if (child.isNotNull()) {
                         rowContext.addIgnoreReason(
@@ -2697,17 +2725,13 @@ public class DataDstPb extends DataDstImpl {
                 ++usedInputIdx;
                 ++fieldSize;
             } else {
-                if (usedInputIdx >= inputs.length) {
-                    throw new ConvException(String.format(
-                            "Try to convert %s of %s failed, field count not matched(expect %d, real %d).",
-                            child.getName(), field.getTypeDescriptor().getFullName(), usedInputIdx + 1,
-                            inputs.length));
-                }
-
                 String subFieldPath = String.format("%s.%s", fieldPath, child.getName());
-                if (dumpPlainField(builder, null, child, null, inputs[usedInputIdx], rowContext,
-                        subFieldPath)) {
+                if (usedInputIdx < inputs.length
+                        && dumpPlainField(builder, null, child, null, inputs[usedInputIdx], rowContext,
+                                subFieldPath)) {
                     hasData = true;
+
+                    missingFields.remove(child.getIndex());
                 } else {
                     if (child.isNotNull()) {
                         rowContext.addIgnoreReason(
@@ -2721,19 +2745,20 @@ public class DataDstPb extends DataDstImpl {
             }
         }
 
-        if (fieldSize != inputs.length) {
-            DataSrcImpl current_source = DataSrcImpl.getOurInstance();
-            if (null == current_source) {
-                ProgramOptions.getLoger().warn("Try to convert %s need %d fields, but provide %d fields.",
-                        field.getTypeDescriptor().getFullName(), fieldSize, inputs.length);
-            } else {
-                ProgramOptions.getLoger().warn(
-                        "Try to convert %s need %d fields, but provide %d fields.%s  > File: %s, Table: %s, Row: %d, Column: %d(%s)",
-                        field.getTypeDescriptor().getFullName(), fieldSize, inputs.length, ProgramOptions.getEndl(),
-                        current_source.getCurrentFileName(), current_source.getCurrentTableName(),
-                        current_source.getCurrentRowNum() + 1, current_source.getLastColomnNum() + 1,
-                        ExcelEngine.getColumnName(current_source.getLastColomnNum() + 1));
-            }
+        if (!missingFields.isEmpty()) {
+            String message = String.format(
+                    "Try to convert %s need at least %d fields, at most %d fields, but only provide %d fields.%s  > Missing fields: %s",
+                    field.getTypeDescriptor().getFullName(), atLeastFieldSize, fieldSize, inputs.length,
+                    ProgramOptions.getEndl(),
+                    String.join(",", missingFields.values().stream().map(DataDstFieldDescriptor::getName)
+                            .collect(Collectors.toList())));
+            ProgramOptions.getLoger().warn(message);
+        } else if (inputs.length > fieldSize) {
+            String message = String.format(
+                    "Try to convert %s need at least %d fields, at most %d fields, but provide %d fields.",
+                    field.getTypeDescriptor().getFullName(), atLeastFieldSize, fieldSize, inputs.length,
+                    ProgramOptions.getEndl());
+            throw new ConvException(message);
         }
 
         if (!hasData) {

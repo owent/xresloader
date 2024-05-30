@@ -42,7 +42,8 @@ public class SchemeConf {
     /**
      * 单例
      */
-    private static SchemeConf instance = null;
+    private static ThreadLocal<SchemeConf> instance = new ThreadLocal<>();
+
     private LinkedList<DataInfo> dateSource = new LinkedList<DataInfo>();
     private LinkedList<DataInfo> macroSource = new LinkedList<DataInfo>();
     private String protoName;
@@ -80,10 +81,11 @@ public class SchemeConf {
     }
 
     public static SchemeConf getInstance() {
-        if (instance == null) {
-            instance = new SchemeConf();
+        if (null == instance.get()) {
+            instance.set(new SchemeConf());
         }
-        return instance;
+
+        return instance.get();
     }
 
     public void reset() {

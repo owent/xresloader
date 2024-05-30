@@ -155,7 +155,7 @@ echo "
 | KeySuffix                   | 字段名固定后缀                                                    |                     |                 |                 | *可选*,字段名映射时附加的后缀,不需要请留空                                                                          |
 | KeyWordRegex                | 分词规则(判断规则,移除分词符号规则,前缀过滤规则)                  | `[A-Z_\$ \t\r\n]`   | `[_\$ \t\r\n]`  | `[a-zA-Z_\$]`   | *(可选)*,字段名映射时单词的分词规则,正则表达式,不需要请留空                                                         |
 | Encoding                    | 编码转换                                                          | UTF-8               |                 |                 | 注：Google的protobuf库的代码里写死了UTF-8，故而该选项对Protobuf的二进制输出无效                                     |
-| JsonCfg-LargeNumberAsString | 是否把大数字转换成字符串                                          | true                |                 |                 | 控制是否把大数字转换成字符串（Json和Javascript，2.15.2版本开始支持）                                                |
+| JsonCfg-LargeNumberAsString | 是否把大数字转换成字符串                                          | true                |                 |                 | 控制是否把大数字转换成字符串（Json和Javascript，2.16.0版本开始支持）                                                |
 | UeCfg-UProperty             | UnrealEngine配置支持的字段属性                                    | 字段分组            | 蓝图权限        | 编辑权限        | *可选*,默认值: XResConfig\|BlueprintReadOnly\|EditAnywhere                                                          |
 | UeCfg-CaseConvert           | 是否开启驼峰命名转换（默认开启）                                  | `true/false`        |                 |                 | *可选*,开启后将使用首字母大写的驼峰命名法生成字段名和类名                                                           |
 | UeCfg-CodeOutput            | 代码输出目录                                                      | 代码输出根目录      | Publich目录前缀 | Private目录前缀 | *可选*                                                                                                              |
@@ -338,6 +338,7 @@ validator:
 |  org.xresloader.field_separator                  | Plain模式分隔符，可指定多个，用于在一个单元格内配置复杂格式时的分隔符列表，默认值: `,;| `                                                    |
 |   org.xresloader.field_required                  | 设置字段为 **required** ，用于向proto3提供，proto2的 **required** 约束                                                                       |
 | org.xresloader.field_origin_value                | 写出原始数据到指定字段（ `Timestamp` 和 `Duration` 类型）                                                                                    |
+| org.xresloader.field_allow_missing_in_plain_mode | Plain模式下设置此字段可选，如果未设置则使用默认值（版本 2.16.0 版本开始支持）                                                                |
 |     org.xresloader.ue.key_tag                    | 生成UE代码时，如果需要支持多个Key组合成一个Name，用这个字段指定系数（必须大于0）                                                             |
 |   org.xresloader.ue.ue_type_name                 | 生成UE代码时，如果指定了这个字段，那么生成的字段类型将是 `TSoftObjectPtr<ue_type_name>` , 并且支持蓝图中直接引用                             |
 |   org.xresloader.ue.ue_type_is_class             | 生成UE代码时，如果指定了这个字段，那么生成的字段类型将是 `TSoftClassPtr<ue_type_name>` , 并且支持蓝图中直接引用                              |
@@ -353,11 +354,12 @@ validator:
 
 #### Protobuf插件 - Oneof插件(2.8.0版本及以上)
 
-|             插件名称             |                                               插件功能                                               |
-| :------------------------------: | :--------------------------------------------------------------------------------------------------: |
-| org.xresloader.oneof_description | oneof描述信息，可能会写入输出的header中和代码中                                                      |
-|  org.xresloader.oneof_separator  | Plain模式类型和值字段的分隔符，可指定多个，用于在一个单元格内配置复杂格式时的分隔符列表，默认值: `,;|` |
-|  org.xresloader.oneof_not_null   | 如果配置了字段映射且某个数据行对应的oneof数据为空，则忽略此行                                        |
+|                     插件名称                     |                                               插件功能                                               |
+| :----------------------------------------------: | :--------------------------------------------------------------------------------------------------: |
+|         org.xresloader.oneof_description         |                           oneof描述信息，可能会写入输出的header中和代码中                            |
+|          org.xresloader.oneof_separator          | Plain模式类型和值字段的分隔符，可指定多个，用于在一个单元格内配置复杂格式时的分隔符列表，默认值: `,; | ` |
+|          org.xresloader.oneof_not_null           |                    如果配置了字段映射且某个数据行对应的oneof数据为空，则忽略此行                     |
+| org.xresloader.oneof_allow_missing_in_plain_mode |            Plain模式下设置此字段可选，如果未设置则使用默认值（版本 2.16.0 版本开始支持）             |
 
 ## 生态和工具
 

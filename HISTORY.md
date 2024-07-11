@@ -2,6 +2,13 @@
 
 ## Unrelease
 
+## 2.16.1
+
+1. 修复字段别名的一处错误
+2. 更新依赖库
+   + `com.google.protobuf` -> 4.27.2
+   + `org.apache.poi` -> 5.3.0
+
 ## 2.16.0
 
 1. 增加int32和uint32的范围检测。

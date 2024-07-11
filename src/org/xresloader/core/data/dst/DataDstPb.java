@@ -1156,7 +1156,9 @@ public class DataDstPb extends DataDstImpl {
             return ret;
         }
 
-        throw new ConvException(String.format("protocol %s compile mapping relationship failed", name()));
+        throw new ConvException(String.format(
+                "Protocol %s compile mapping relationship failed, maybe can not find any message's field in KeyRow",
+                name()));
     }
 
     @Override
@@ -1364,8 +1366,7 @@ public class DataDstPb extends DataDstImpl {
         for (Descriptors.FieldDescriptor fd : desc.getFields()) {
             DataDstChildrenNode child = null;
             ArrayList<String> field_alias = null;
-            if (enable_alias_mapping && fd.getOptions().hasExtension(Xresloader.fieldAlias)
-                    && fd.getOptions().getExtensionCount(Xresloader.fieldAlias) > 0) {
+            if (enable_alias_mapping && fd.getOptions().getExtensionCount(Xresloader.fieldAlias) > 0) {
                 field_alias = new ArrayList<>();
                 field_alias.ensureCapacity(fd.getOptions().getExtensionCount(Xresloader.fieldAlias));
                 for (String alias_name : fd.getOptions().getExtension(Xresloader.fieldAlias)) {

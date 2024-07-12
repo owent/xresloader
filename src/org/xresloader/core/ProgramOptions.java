@@ -57,6 +57,7 @@ public class ProgramOptions {
     public int prettyIndent = 0;
     public boolean enableStdin = false;
     public String[] customValidatorRules = null;
+    public boolean enableDataValidator = true;
 
     public String protoDumpFile = "";
     public ProtoDumpType protoDumpType = ProtoDumpType.NONE;
@@ -231,6 +232,8 @@ public class ProgramOptions {
         options.addOption(null, "lua-module", true, "module(MODULE_NAME, package.seeall) if in lua mode");
         options.addOption(Option.builder().longOpt("validator-rules")
                 .desc("set file to load custom validator").hasArg().argName("FILE PATH").build());
+        options.addOption(null, "disable-data-validator", false,
+                "disable data validator, so it will not show warnings when data checking failed.");
         options.addOption(Option.builder().longOpt("data-source-lru-cache-rows")
                 .desc("set row number for LRU cache").hasArg().argName("NUMBER").build());
         options.addOption(Option.builder().longOpt("tolerate-max-empty-rows")
@@ -491,6 +494,12 @@ public class ProgramOptions {
 
         // custom validator rule file
         customValidatorRules = cmd.getOptionValues("validator-rules");
+
+        if (cmd.hasOption("disable-data-validator")) {
+            enableDataValidator = false;
+        } else {
+            enableDataValidator = true;
+        }
 
         return 0;
     }

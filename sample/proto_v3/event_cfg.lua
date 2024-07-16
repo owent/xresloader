@@ -2,7 +2,7 @@
 
 return {
   [1] = {
-    count = 7,
+    count = 5,
     data_source = {
       {
         count = 5,
@@ -13,7 +13,7 @@ return {
     data_ver = "1.0.0.0",
     description = "Test event_cfg with oneof fields",
     hash_code = "sha256:f54ea4a17140ed6e75a9136bff6c0053251bb5a4cd3954d905cf5bac8fcce998",
-    xres_ver = "2.16.0",
+    xres_ver = "2.17.1",
   },
   [2] = "event_cfg",
   event_cfg = {

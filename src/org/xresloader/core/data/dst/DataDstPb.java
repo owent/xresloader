@@ -1393,7 +1393,7 @@ public class DataDstPb extends DataDstImpl {
                                 child = node.addChild(fd.getName(), c, fd, DataDstWriterNode.CHILD_NODE_TYPE.STANDARD);
                                 ret = true;
                                 test_passed = true;
-                            } else if (0 == count && null != field_alias) {
+                            } else if (null != field_alias) {
                                 for (String alias_name : field_alias) {
                                     String test_field_name = alias_name.strip();
                                     if (test_field_name.isEmpty()) {
@@ -1415,7 +1415,7 @@ public class DataDstPb extends DataDstImpl {
                                 // try plain mode - array item
                                 String real_name = DataDstWriterNode.makeChildPath(prefix, fd.getName(), count);
                                 IdentifyDescriptor col = data_src.getColumnByName(real_name);
-                                if (null == col && 0 == count && null != field_alias) {
+                                if (null == col && null != field_alias) {
                                     for (String alias_name : field_alias) {
                                         String test_field_name = alias_name.strip();
                                         if (test_field_name.isEmpty()) {
@@ -1553,7 +1553,7 @@ public class DataDstPb extends DataDstImpl {
                         for (;; ++count) {
                             String real_name = DataDstWriterNode.makeChildPath(prefix, fd.getName(), count);
                             IdentifyDescriptor col = data_src.getColumnByName(real_name);
-                            if (null == col && 0 == count && null != field_alias) {
+                            if (null == col && null != field_alias) {
                                 for (String alias_name : field_alias) {
                                     String test_field_name = alias_name.strip();
                                     if (test_field_name.isEmpty()) {

@@ -220,6 +220,7 @@ public abstract class DataDstJava extends DataDstImpl {
         if (!description_list.isEmpty()) {
             ret.header.put("description", String.join(getSystemEndl(), description_list));
         }
+        ret.header.replace("count", item_list.size());
 
         // 校验码
         MessageDigest sha256 = null;

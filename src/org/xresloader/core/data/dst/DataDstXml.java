@@ -88,17 +88,6 @@ public class DataDstXml extends DataDstJava {
 
         writeData(header, data_obj.header, header.getName());
 
-        // body
-        for (Map.Entry<String, List<Object>> item : data_obj.body.entrySet()) {
-            for (Object obj : item.getValue()) {
-                Element xml_item = DocumentHelper.createElement(item.getKey());
-
-                writeData(xml_item, obj, item.getKey());
-
-                body.add(xml_item);
-            }
-        }
-
         writeData(body, data_obj.body, body.getName());
 
         writeData(data_message_type, data_obj.data_message_type, data_message_type.getName());

@@ -35,6 +35,9 @@ public final class Xresloader {
     registry.add(org.xresloader.Xresloader.fieldRequired);
     registry.add(org.xresloader.Xresloader.fieldOriginValue);
     registry.add(org.xresloader.Xresloader.fieldAllowMissingInPlainMode);
+    registry.add(org.xresloader.Xresloader.fieldListStripOption);
+    registry.add(org.xresloader.Xresloader.fieldListMinSize);
+    registry.add(org.xresloader.Xresloader.fieldListMaxSize);
     registry.add(org.xresloader.Xresloader.oneofDescription);
     registry.add(org.xresloader.Xresloader.oneofSeparator);
     registry.add(org.xresloader.Xresloader.oneofNotNull);
@@ -49,6 +52,173 @@ public final class Xresloader {
     registerAllExtensions(
         (com.google.protobuf.ExtensionRegistryLite) registry);
   }
+  /**
+   * Protobuf enum {@code org.xresloader.ListStripOption}
+   */
+  public enum ListStripOption
+      implements com.google.protobuf.ProtocolMessageEnum {
+    /**
+     * <pre>
+     * 使用默认设置（受--list-strip-all-empty/--list-keep-empty/--list-strip-empty-tail影响）
+     * </pre>
+     *
+     * <code>LIST_STRIP_DEFAULT = 0;</code>
+     */
+    LIST_STRIP_DEFAULT(0),
+    /**
+     * <pre>
+     * 不裁剪任何值，相当于 --list-keep-empty
+     * </pre>
+     *
+     * <code>LIST_STRIP_NOTHING = 1;</code>
+     */
+    LIST_STRIP_NOTHING(1),
+    /**
+     * <pre>
+     * 裁剪尾部空值，相当于 --list-strip-empty-tail
+     * </pre>
+     *
+     * <code>LIST_STRIP_TAIL = 2;</code>
+     */
+    LIST_STRIP_TAIL(2),
+    /**
+     * <pre>
+     * 裁剪全部空值，相当于 --list-strip-all-empty
+     * </pre>
+     *
+     * <code>LIST_STRIP_ALL = 3;</code>
+     */
+    LIST_STRIP_ALL(3),
+    UNRECOGNIZED(-1),
+    ;
+
+    static {
+      com.google.protobuf.RuntimeVersion.validateProtobufGencodeVersion(
+        com.google.protobuf.RuntimeVersion.RuntimeDomain.PUBLIC,
+        /* major= */ 4,
+        /* minor= */ 27,
+        /* patch= */ 0,
+        /* suffix= */ "",
+        ListStripOption.class.getName());
+    }
+    /**
+     * <pre>
+     * 使用默认设置（受--list-strip-all-empty/--list-keep-empty/--list-strip-empty-tail影响）
+     * </pre>
+     *
+     * <code>LIST_STRIP_DEFAULT = 0;</code>
+     */
+    public static final int LIST_STRIP_DEFAULT_VALUE = 0;
+    /**
+     * <pre>
+     * 不裁剪任何值，相当于 --list-keep-empty
+     * </pre>
+     *
+     * <code>LIST_STRIP_NOTHING = 1;</code>
+     */
+    public static final int LIST_STRIP_NOTHING_VALUE = 1;
+    /**
+     * <pre>
+     * 裁剪尾部空值，相当于 --list-strip-empty-tail
+     * </pre>
+     *
+     * <code>LIST_STRIP_TAIL = 2;</code>
+     */
+    public static final int LIST_STRIP_TAIL_VALUE = 2;
+    /**
+     * <pre>
+     * 裁剪全部空值，相当于 --list-strip-all-empty
+     * </pre>
+     *
+     * <code>LIST_STRIP_ALL = 3;</code>
+     */
+    public static final int LIST_STRIP_ALL_VALUE = 3;
+
+
+    public final int getNumber() {
+      if (this == UNRECOGNIZED) {
+        throw new java.lang.IllegalArgumentException(
+            "Can't get the number of an unknown enum value.");
+      }
+      return value;
+    }
+
+    /**
+     * @param value The numeric wire value of the corresponding enum entry.
+     * @return The enum associated with the given numeric wire value.
+     * @deprecated Use {@link #forNumber(int)} instead.
+     */
+    @java.lang.Deprecated
+    public static ListStripOption valueOf(int value) {
+      return forNumber(value);
+    }
+
+    /**
+     * @param value The numeric wire value of the corresponding enum entry.
+     * @return The enum associated with the given numeric wire value.
+     */
+    public static ListStripOption forNumber(int value) {
+      switch (value) {
+        case 0: return LIST_STRIP_DEFAULT;
+        case 1: return LIST_STRIP_NOTHING;
+        case 2: return LIST_STRIP_TAIL;
+        case 3: return LIST_STRIP_ALL;
+        default: return null;
+      }
+    }
+
+    public static com.google.protobuf.Internal.EnumLiteMap<ListStripOption>
+        internalGetValueMap() {
+      return internalValueMap;
+    }
+    private static final com.google.protobuf.Internal.EnumLiteMap<
+        ListStripOption> internalValueMap =
+          new com.google.protobuf.Internal.EnumLiteMap<ListStripOption>() {
+            public ListStripOption findValueByNumber(int number) {
+              return ListStripOption.forNumber(number);
+            }
+          };
+
+    public final com.google.protobuf.Descriptors.EnumValueDescriptor
+        getValueDescriptor() {
+      if (this == UNRECOGNIZED) {
+        throw new java.lang.IllegalStateException(
+            "Can't get the descriptor of an unrecognized enum value.");
+      }
+      return getDescriptor().getValues().get(ordinal());
+    }
+    public final com.google.protobuf.Descriptors.EnumDescriptor
+        getDescriptorForType() {
+      return getDescriptor();
+    }
+    public static final com.google.protobuf.Descriptors.EnumDescriptor
+        getDescriptor() {
+      return org.xresloader.Xresloader.getDescriptor().getEnumTypes().get(0);
+    }
+
+    private static final ListStripOption[] VALUES = values();
+
+    public static ListStripOption valueOf(
+        com.google.protobuf.Descriptors.EnumValueDescriptor desc) {
+      if (desc.getType() != getDescriptor()) {
+        throw new java.lang.IllegalArgumentException(
+          "EnumValueDescriptor is not for this type.");
+      }
+      if (desc.getIndex() == -1) {
+        return UNRECOGNIZED;
+      }
+      return VALUES[desc.getIndex()];
+    }
+
+    private final int value;
+
+    private ListStripOption(int value) {
+      this.value = value;
+    }
+
+    // @@protoc_insertion_point(enum_scope:org.xresloader.ListStripOption)
+  }
+
   public static final int FILE_DESCRIPTION_FIELD_NUMBER = 1001;
   /**
    * <pre>
@@ -305,6 +475,51 @@ public final class Xresloader {
           .newFileScopedGeneratedExtension(
         java.lang.Boolean.class,
         null);
+  public static final int FIELD_LIST_STRIP_OPTION_FIELD_NUMBER = 1018;
+  /**
+   * <pre>
+   * List类型裁剪选项
+   * </pre>
+   *
+   * <code>extend .google.protobuf.FieldOptions { ... }</code>
+   */
+  public static final
+    com.google.protobuf.GeneratedMessage.GeneratedExtension<
+      com.google.protobuf.DescriptorProtos.FieldOptions,
+      org.xresloader.Xresloader.ListStripOption> fieldListStripOption = com.google.protobuf.GeneratedMessage
+          .newFileScopedGeneratedExtension(
+        org.xresloader.Xresloader.ListStripOption.class,
+        null);
+  public static final int FIELD_LIST_MIN_SIZE_FIELD_NUMBER = 1019;
+  /**
+   * <pre>
+   * List类型最小长度
+   * </pre>
+   *
+   * <code>extend .google.protobuf.FieldOptions { ... }</code>
+   */
+  public static final
+    com.google.protobuf.GeneratedMessage.GeneratedExtension<
+      com.google.protobuf.DescriptorProtos.FieldOptions,
+      java.lang.Integer> fieldListMinSize = com.google.protobuf.GeneratedMessage
+          .newFileScopedGeneratedExtension(
+        java.lang.Integer.class,
+        null);
+  public static final int FIELD_LIST_MAX_SIZE_FIELD_NUMBER = 1020;
+  /**
+   * <pre>
+   * List类型最大长度
+   * </pre>
+   *
+   * <code>extend .google.protobuf.FieldOptions { ... }</code>
+   */
+  public static final
+    com.google.protobuf.GeneratedMessage.GeneratedExtension<
+      com.google.protobuf.DescriptorProtos.FieldOptions,
+      java.lang.Integer> fieldListMaxSize = com.google.protobuf.GeneratedMessage
+          .newFileScopedGeneratedExtension(
+        java.lang.Integer.class,
+        null);
   public static final int ONEOF_DESCRIPTION_FIELD_NUMBER = 1001;
   /**
    * <pre>
@@ -420,43 +635,51 @@ public final class Xresloader {
   static {
     java.lang.String[] descriptorData = {
       "\n\020xresloader.proto\022\016org.xresloader\032 goog" +
-      "le/protobuf/descriptor.proto:7\n\020file_des" +
-      "cription\022\034.google.protobuf.FileOptions\030\351" +
-      "\007 \001(\t:9\n\017msg_description\022\037.google.protob" +
-      "uf.MessageOptions\030\351\007 \001(\t:A\n\027msg_require_" +
-      "mapping_all\022\037.google.protobuf.MessageOpt" +
-      "ions\030\363\007 \001(\010:7\n\rmsg_separator\022\037.google.pr" +
-      "otobuf.MessageOptions\030\364\007 \001(\t:1\n\tvalidato" +
-      "r\022\035.google.protobuf.FieldOptions\030\351\007 \001(\t:" +
-      "8\n\020field_unique_tag\022\035.google.protobuf.Fi" +
-      "eldOptions\030\352\007 \003(\t:6\n\016field_not_null\022\035.go" +
-      "ogle.protobuf.FieldOptions\030\353\007 \001(\010:9\n\021map" +
-      "_key_validator\022\035.google.protobuf.FieldOp" +
-      "tions\030\354\007 \001(\t:;\n\023map_value_validator\022\035.go" +
-      "ogle.protobuf.FieldOptions\030\355\007 \001(\t:0\n\010ver" +
-      "ifier\022\035.google.protobuf.FieldOptions\030\361\007 " +
-      "\001(\t:9\n\021field_description\022\035.google.protob" +
-      "uf.FieldOptions\030\363\007 \001(\t:3\n\013field_alias\022\035." +
-      "google.protobuf.FieldOptions\030\364\007 \003(\t:3\n\013f" +
-      "ield_ratio\022\035.google.protobuf.FieldOption" +
-      "s\030\365\007 \001(\005:7\n\017field_separator\022\035.google.pro" +
-      "tobuf.FieldOptions\030\366\007 \001(\t:6\n\016field_requi" +
-      "red\022\035.google.protobuf.FieldOptions\030\367\007 \001(" +
-      "\010::\n\022field_origin_value\022\035.google.protobu" +
-      "f.FieldOptions\030\370\007 \001(\t:I\n!field_allow_mis" +
-      "sing_in_plain_mode\022\035.google.protobuf.Fie" +
-      "ldOptions\030\371\007 \001(\010:9\n\021oneof_description\022\035." +
-      "google.protobuf.OneofOptions\030\351\007 \001(\t:7\n\017o" +
-      "neof_separator\022\035.google.protobuf.OneofOp" +
-      "tions\030\352\007 \001(\t:6\n\016oneof_not_null\022\035.google." +
-      "protobuf.OneofOptions\030\353\007 \001(\010:I\n!oneof_al" +
-      "low_missing_in_plain_mode\022\035.google.proto" +
-      "buf.OneofOptions\030\354\007 \001(\010:7\n\020enum_descript" +
-      "ion\022\034.google.protobuf.EnumOptions\030\351\007 \001(\t" +
-      ":=\n\021enumv_description\022!.google.protobuf." +
-      "EnumValueOptions\030\351\007 \001(\t:6\n\nenum_alias\022!." +
-      "google.protobuf.EnumValueOptions\030\352\007 \003(\tb" +
-      "\006proto3"
+      "le/protobuf/descriptor.proto*j\n\017ListStri" +
+      "pOption\022\026\n\022LIST_STRIP_DEFAULT\020\000\022\026\n\022LIST_" +
+      "STRIP_NOTHING\020\001\022\023\n\017LIST_STRIP_TAIL\020\002\022\022\n\016" +
+      "LIST_STRIP_ALL\020\003:7\n\020file_description\022\034.g" +
+      "oogle.protobuf.FileOptions\030\351\007 \001(\t:9\n\017msg" +
+      "_description\022\037.google.protobuf.MessageOp" +
+      "tions\030\351\007 \001(\t:A\n\027msg_require_mapping_all\022" +
+      "\037.google.protobuf.MessageOptions\030\363\007 \001(\010:" +
+      "7\n\rmsg_separator\022\037.google.protobuf.Messa" +
+      "geOptions\030\364\007 \001(\t:1\n\tvalidator\022\035.google.p" +
+      "rotobuf.FieldOptions\030\351\007 \001(\t:8\n\020field_uni" +
+      "que_tag\022\035.google.protobuf.FieldOptions\030\352" +
+      "\007 \003(\t:6\n\016field_not_null\022\035.google.protobu" +
+      "f.FieldOptions\030\353\007 \001(\010:9\n\021map_key_validat" +
+      "or\022\035.google.protobuf.FieldOptions\030\354\007 \001(\t" +
+      ":;\n\023map_value_validator\022\035.google.protobu" +
+      "f.FieldOptions\030\355\007 \001(\t:0\n\010verifier\022\035.goog" +
+      "le.protobuf.FieldOptions\030\361\007 \001(\t:9\n\021field" +
+      "_description\022\035.google.protobuf.FieldOpti" +
+      "ons\030\363\007 \001(\t:3\n\013field_alias\022\035.google.proto" +
+      "buf.FieldOptions\030\364\007 \003(\t:3\n\013field_ratio\022\035" +
+      ".google.protobuf.FieldOptions\030\365\007 \001(\005:7\n\017" +
+      "field_separator\022\035.google.protobuf.FieldO" +
+      "ptions\030\366\007 \001(\t:6\n\016field_required\022\035.google" +
+      ".protobuf.FieldOptions\030\367\007 \001(\010::\n\022field_o" +
+      "rigin_value\022\035.google.protobuf.FieldOptio" +
+      "ns\030\370\007 \001(\t:I\n!field_allow_missing_in_plai" +
+      "n_mode\022\035.google.protobuf.FieldOptions\030\371\007" +
+      " \001(\010:`\n\027field_list_strip_option\022\035.google" +
+      ".protobuf.FieldOptions\030\372\007 \001(\0162\037.org.xres" +
+      "loader.ListStripOption:;\n\023field_list_min" +
+      "_size\022\035.google.protobuf.FieldOptions\030\373\007 " +
+      "\001(\005:;\n\023field_list_max_size\022\035.google.prot" +
+      "obuf.FieldOptions\030\374\007 \001(\005:9\n\021oneof_descri" +
+      "ption\022\035.google.protobuf.OneofOptions\030\351\007 " +
+      "\001(\t:7\n\017oneof_separator\022\035.google.protobuf" +
+      ".OneofOptions\030\352\007 \001(\t:6\n\016oneof_not_null\022\035" +
+      ".google.protobuf.OneofOptions\030\353\007 \001(\010:I\n!" +
+      "oneof_allow_missing_in_plain_mode\022\035.goog" +
+      "le.protobuf.OneofOptions\030\354\007 \001(\010:7\n\020enum_" +
+      "description\022\034.google.protobuf.EnumOption" +
+      "s\030\351\007 \001(\t:=\n\021enumv_description\022!.google.p" +
+      "rotobuf.EnumValueOptions\030\351\007 \001(\t:6\n\nenum_" +
+      "alias\022!.google.protobuf.EnumValueOptions" +
+      "\030\352\007 \003(\tb\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
@@ -480,13 +703,16 @@ public final class Xresloader {
     fieldRequired.internalInit(descriptor.getExtensions().get(14));
     fieldOriginValue.internalInit(descriptor.getExtensions().get(15));
     fieldAllowMissingInPlainMode.internalInit(descriptor.getExtensions().get(16));
-    oneofDescription.internalInit(descriptor.getExtensions().get(17));
-    oneofSeparator.internalInit(descriptor.getExtensions().get(18));
-    oneofNotNull.internalInit(descriptor.getExtensions().get(19));
-    oneofAllowMissingInPlainMode.internalInit(descriptor.getExtensions().get(20));
-    enumDescription.internalInit(descriptor.getExtensions().get(21));
-    enumvDescription.internalInit(descriptor.getExtensions().get(22));
-    enumAlias.internalInit(descriptor.getExtensions().get(23));
+    fieldListStripOption.internalInit(descriptor.getExtensions().get(17));
+    fieldListMinSize.internalInit(descriptor.getExtensions().get(18));
+    fieldListMaxSize.internalInit(descriptor.getExtensions().get(19));
+    oneofDescription.internalInit(descriptor.getExtensions().get(20));
+    oneofSeparator.internalInit(descriptor.getExtensions().get(21));
+    oneofNotNull.internalInit(descriptor.getExtensions().get(22));
+    oneofAllowMissingInPlainMode.internalInit(descriptor.getExtensions().get(23));
+    enumDescription.internalInit(descriptor.getExtensions().get(24));
+    enumvDescription.internalInit(descriptor.getExtensions().get(25));
+    enumAlias.internalInit(descriptor.getExtensions().get(26));
     descriptor.resolveAllFeaturesImmutable();
     com.google.protobuf.DescriptorProtos.getDescriptor();
   }

@@ -374,7 +374,7 @@ public class DataDstUEJson extends DataDstUEBase {
                 old = new JSONArray();
                 builder.put(varName, old);
             }
-            if (ProgramOptions.getInstance().stripListRule == ProgramOptions.ListStripRule.KEEP_ALL) {
+            if (fd.getListStripRule() == DataDstWriterNode.ListStripRule.STRIP_NOTHING) {
                 Object val = getDefault(fd);
                 if (val == null) {
                     return old;

@@ -12,8 +12,8 @@ return {
     },
     data_ver = "1.0.0.0",
     description = "Test arr_in_arr_cfg",
-    hash_code = "sha256:6b2919a501f5cb402ca608dd55aa11785ba4214ff99908aba25609118cb9e0e7",
-    xres_ver = "2.17.1",
+    hash_code = "sha256:dd55e67e5c1312ca507fedd631c54b8c1266ab82859ed36bd535db90ac36a95f",
+    xres_ver = "2.18.0",
   },
   [2] = "arr_in_arr_cfg",
   arr_in_arr_cfg = {
@@ -157,11 +157,13 @@ return {
         {
           int_arr = {
             301,
+            0,
           },
           name = "测试项-C",
         },
         {
           int_arr = {
+            0,
             311,
           },
           name = "测试项-B",

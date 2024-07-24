@@ -305,7 +305,10 @@
     {
         "Arr": [
             {
-                "IntArr": [301],
+                "IntArr": [
+                    301,
+                    0
+                ],
                 "Name": "测试项-C",
                 "StrArr": [],
                 "TestInfoRole": {
@@ -350,7 +353,10 @@
                 }
             },
             {
-                "IntArr": [311],
+                "IntArr": [
+                    0,
+                    311
+                ],
                 "Name": "测试项-B",
                 "StrArr": ["哦哦哦哦"],
                 "TestInfoRole": {

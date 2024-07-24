@@ -10,7 +10,7 @@
 ![GitHub forks](https://img.shields.io/github/forks/xresloader/xresloader?style=social)
 ![GitHub stars](https://img.shields.io/github/stars/xresloader/xresloader?style=social)
 
-文档: https://xresloader.atframe.work
+文档: <https://xresloader.atframe.work>
 
 ## 主要功能
 
@@ -37,9 +37,9 @@
 
 本工程只是转表引擎工具，批处理（批量转表）工具的请参见：
 
-+ 批量转表配置规范: https://github.com/xresloader/xresconv-conf
-+ 跨平台GUI工具(Windows/Linux/macOS): https://github.com/xresloader/xresconv-gui
-+ 跨平台命令行工具(兼容python2和python3，Windows/Linux/macOS): https://github.com/xresloader/xresconv-cli
++ 批量转表配置规范: <https://github.com/xresloader/xresconv-conf>
++ 跨平台GUI工具(Windows/Linux/macOS): <https://github.com/xresloader/xresconv-gui>
++ 跨平台命令行工具(兼容python2和python3，Windows/Linux/macOS): <https://github.com/xresloader/xresconv-cli>
 
 ## v2.11.0-rc2及以前版本更新迁移指引
 
@@ -139,7 +139,6 @@ echo "
 | .json              | 视作json文件，数据源描述表为json内的第一层子节点名称                      | 已实现(必须是UTF-8编码,不支持自动合表) |
 | .xml               | 视作xml文件，数据源描述表为xml内的根节点下的子节点TagName，并且只取第一个 | (暂未支持)                             |
 
-
 ## 数据源描述表配置项及示例
 
 | 字段                        | 简介                                                              | 主配置              | 次配置          | 补充配置        | 说明                                                                                                                |
@@ -187,12 +186,13 @@ echo "
   >
 11. Encoding指明输出的字符串内容都是UTF-8编码。（目前最好只用UTF-8，因为protobuf里写死了UTF-8编码，其他编码不保证完全正常）
 12. CallbackScript指向的脚本中，需要满足已下条件:
-  + 可使用 `gOurInstance` 访问数据源接口（ `DataSrcImpl.getOurInstance()` ）
-  + 可使用 `gSchemeConf` 访问数据转换配置接口（ `SchemeConf.getInstance()` ）
-  + 提供 `function initDataSource()` 函数，将在切换数据源时触发（文件名或sheet名）。
-  + 提供 `function currentMessageCallback(originMsg, typeDesc)` 函数，将在切换数据源时触发（文件名或sheet名）。
-    + `originMsg` 为原始数据结构的 `HashMap` 结构
-    + `typeDesc` 为数据类型描述信息, `org.xresloader.core.data.dst.DataDstWriterNode.DataDstTypeDescriptor` 结构
+
++ 可使用 `gOurInstance` 访问数据源接口（ `DataSrcImpl.getOurInstance()` ）
++ 可使用 `gSchemeConf` 访问数据转换配置接口（ `SchemeConf.getInstance()` ）
++ 提供 `function initDataSource()` 函数，将在切换数据源时触发（文件名或sheet名）。
++ 提供 `function currentMessageCallback(originMsg, typeDesc)` 函数，将在切换数据源时触发（文件名或sheet名）。
+  + `originMsg` 为原始数据结构的 `HashMap` 结构
+  + `typeDesc` 为数据类型描述信息, `org.xresloader.core.data.dst.DataDstWriterNode.DataDstTypeDescriptor` 结构
 
 上面的配置中，数据从第3行读取，Key从第2行读取。那么第一行可以用来写一些说明或描述性数据。
 
@@ -226,7 +226,7 @@ echo "
 转出的数据都采用header+data_block的形式。本工具并不规定怎么读取转表导出的数据，开发者可以按照转出的数据规则自由操作。
 
 > 建议项目中使用导出的协议二进制或者msgpack。协议二进制可以用任意语言加载protobuf或者其他类似工具（如：[pbc][3] 或 [upb][2] ）加载。
-> 
+>
 > 而其他导出类型可以用于一些外部工具的集成，比如基于Web的GM工具，基于Lua的远程调试工具等等。
 
 但是为了使用方便，在[loader-binding](loader-binding)里提供了几种基本的读表方式。
@@ -329,18 +329,21 @@ validator:
 
 |             插件名称                             |                                                    插件功能                                                                                  |
 | :----------------------------------------------: | :------------------------------------------------------------------------------------------------------------------------------------------: |
-|      org.xresloader.validator                    | 验证器，可填范围(log-high),message名，enum名。多个由 `|` 分隔。任意验证器通过检查则认为数据有效                                              |
+|      org.xresloader.validator                    | 验证器，可填范围(log-high),message名，enum名。多个由 `\|` 分隔。任意验证器通过检查则认为数据有效                                             |
 |     org.xresloader.field_unique_tag              | 设置唯一性检测Tag，多个相同tag的字段将合并并在转出数据时检测唯一性（可多个）                                                                 |
 |     org.xresloader.field_not_null                | 如果配置了字段映射且某个数据行对应的oneof数据为空，则忽略此行                                                                                |
-|     org.xresloader.map_key_validator             | 用于Map类型Key的验证器，可填范围(log-high),message名，enum名。多个由 `|` 分隔。任意验证器通过检查则认为数据有效                              |
-|     org.xresloader.map_value_validator           | 用于Map类型Value的验证器，可填范围(log-high),message名，enum名。多个由 `|` 分隔。任意验证器通过检查则认为数据有效                            |
+|     org.xresloader.map_key_validator             | 用于Map类型Key的验证器，可填范围(log-high),message名，enum名。多个由 `\|` 分隔。任意验证器通过检查则认为数据有效                             |
+|     org.xresloader.map_value_validator           | 用于Map类型Value的验证器，可填范围(log-high),message名，enum名。多个由 `\|` 分隔。任意验证器通过检查则认为数据有效                           |
 | org.xresloader.field_description                 | 字段描述信息，会写入输出的header中和代码中                                                                                                   |
 |    org.xresloader.field_alias                    | 字段别名，配合 **验证器** 功能，允许在数据源中直接填写别名来配置数据                                                                         |
 |    org.xresloader.field_ratio                    | 字段放大，用于比如配置百分率为 0.12，当 org.xresloader.field_ratio=100时转出的数据为12                                                       |
-|  org.xresloader.field_separator                  | Plain模式分隔符，可指定多个，用于在一个单元格内配置复杂格式时的分隔符列表，默认值: `,;| `                                                    |
+|  org.xresloader.field_separator                  | Plain模式分隔符，可指定多个，用于在一个单元格内配置复杂格式时的分隔符列表，默认值: `,;\| `                                                   |
 |   org.xresloader.field_required                  | 设置字段为 **required** ，用于向proto3提供，proto2的 **required** 约束                                                                       |
 | org.xresloader.field_origin_value                | 写出原始数据到指定字段（ `Timestamp` 和 `Duration` 类型）                                                                                    |
 | org.xresloader.field_allow_missing_in_plain_mode | Plain模式下设置此字段可选，如果未设置则使用默认值（版本 2.16.0 版本开始支持）                                                                |
+| org.xresloader.field_list_strip_option           | 给单个字段设置数组裁剪，可选值( `LIST_STRIP_DEFAULT\|LIST_STRIP_NOTHING\|LIST_STRIP_TAIL\|LIST_STRIP_ALL` )（版本 2.16.0 版本开始支持）      |
+| org.xresloader.field_list_min_size               | 给单个字段设置数组最小长度，可选值（版本 2.18.0 版本开始支持）                                                                               |
+| org.xresloader.field_list_max_size               | 给单个字段设置数组最大长度，可选值（版本 2.18.0 版本开始支持）                                                                               |
 |     org.xresloader.ue.key_tag                    | 生成UE代码时，如果需要支持多个Key组合成一个Name，用这个字段指定系数（必须大于0）                                                             |
 |   org.xresloader.ue.ue_type_name                 | 生成UE代码时，如果指定了这个字段，那么生成的字段类型将是 `TSoftObjectPtr<ue_type_name>` , 并且支持蓝图中直接引用                             |
 |   org.xresloader.ue.ue_type_is_class             | 生成UE代码时，如果指定了这个字段，那么生成的字段类型将是 `TSoftClassPtr<ue_type_name>` , 并且支持蓝图中直接引用                              |
@@ -359,17 +362,17 @@ validator:
 |                     插件名称                     |                                               插件功能                                               |
 | :----------------------------------------------: | :--------------------------------------------------------------------------------------------------: |
 |         org.xresloader.oneof_description         |                           oneof描述信息，可能会写入输出的header中和代码中                            |
-|          org.xresloader.oneof_separator          | Plain模式类型和值字段的分隔符，可指定多个，用于在一个单元格内配置复杂格式时的分隔符列表，默认值: `,; | ` |
+|          org.xresloader.oneof_separator          | Plain模式类型和值字段的分隔符，可指定多个，用于在一个单元格内配置复杂格式时的分隔符列表，默认值: `,;\| ` |
 |          org.xresloader.oneof_not_null           |                    如果配置了字段映射且某个数据行对应的oneof数据为空，则忽略此行                     |
 | org.xresloader.oneof_allow_missing_in_plain_mode |            Plain模式下设置此字段可选，如果未设置则使用默认值（版本 2.16.0 版本开始支持）             |
 
 ## 生态和工具
 
-+ [xresconv-gui][5]: GUI批量转表工具。 https://github.com/xresloader/xresconv-gui
-+ [xresconv-cli][6]: 命令行批量转表工具。 https://github.com/xresloader/xresconv-cli
-+ [xres-code-generator][4]: 读表代码生成工具。 https://github.com/xresloader/xres-code-generator
-+ [xresloader-dump-bin][7]: 二进制输出的dump工具。 https://github.com/xresloader/xresloader-dump-bin
-  > 用于把转表生成的二进制导出为Human-Readable的文本，方便调试。可以直接从 https://github.com/xresloader/xresloader-dump-bin/releases 下载对应平台的可执行程序
++ [xresconv-gui][5]: GUI批量转表工具。 <https://github.com/xresloader/xresconv-gui>
++ [xresconv-cli][6]: 命令行批量转表工具。 <https://github.com/xresloader/xresconv-cli>
++ [xres-code-generator][4]: 读表代码生成工具。 <https://github.com/xresloader/xres-code-generator>
++ [xresloader-dump-bin][7]: 二进制输出的dump工具。 <https://github.com/xresloader/xresloader-dump-bin>
+  > 用于把转表生成的二进制导出为Human-Readable的文本，方便调试。可以直接从 <https://github.com/xresloader/xresloader-dump-bin/releases> 下载对应平台的可执行程序
 
 ## 编译和打包（For developer）
 
@@ -399,7 +402,7 @@ Ans: Excel里编辑过的单元格即便删除了也会留下不可见的样式�
 
 2. 为什么Excel里填的时间，但是转出来是一个负数？
 
-Ans: Excel里的日期时间类型转成协议里整数时会转为Unix时间戳，但是Excel的时间是以1900年1月0号为基准的，这意味着如果时间格式是hh:mm:dd的话，49:30:01会被转为1900-1-2 1:31:01。时间戳会是一个很大的负数 
+Ans: Excel里的日期时间类型转成协议里整数时会转为Unix时间戳，但是Excel的时间是以1900年1月0号为基准的，这意味着如果时间格式是hh:mm:dd的话，49:30:01会被转为1900-1-2 1:31:01。时间戳会是一个很大的负数
 
 介于这个原因，不建议在Excel中使用时间类型
 
@@ -460,7 +463,7 @@ Ans: 可以通过环境变量 `TZ` 或者java运行时属性 `user.timezone` 设
 
 可用的区域示例(`+HH:mm`,`-HH:mm`,别名,完整时区名): `+08:00`, `UTC`, `GMT`, `Asia/Shanghai`, `America/Los_Angeles`, `Asia/Singapore` .
 
-See https://en.wikipedia.org/wiki/List_of_tz_database_time_zones and https://www.iana.org/time-zones for details.
+See <https://en.wikipedia.org/wiki/List_of_tz_database_time_zones> and <https://www.iana.org/time-zones> for details.
 
 [1]: https://github.com/xresloader/xresloader/releases
 [2]: https://github.com/protocolbuffers/upb

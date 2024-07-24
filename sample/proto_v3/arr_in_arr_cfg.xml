@@ -11,8 +11,8 @@
     </data_source>
     <data_ver>1.0.0.0</data_ver>
     <description>Test arr_in_arr_cfg</description>
-    <hash_code>sha256:6b2919a501f5cb402ca608dd55aa11785ba4214ff99908aba25609118cb9e0e7</hash_code>
-    <xres_ver>2.17.1</xres_ver>
+    <hash_code>sha256:dd55e67e5c1312ca507fedd631c54b8c1266ab82859ed36bd535db90ac36a95f</hash_code>
+    <xres_ver>2.18.0</xres_ver>
   </header>
   <body mode="message">
     <arr_in_arr_cfg for="0" mode="message">
@@ -121,10 +121,12 @@
     <arr_in_arr_cfg for="2" mode="message">
       <arr for="0" mode="message">
         <int_arr for="0">301</int_arr>
+        <int_arr for="1">0</int_arr>
         <name>测试项-C</name>
       </arr>
       <arr for="1" mode="message">
-        <int_arr for="0">311</int_arr>
+        <int_arr for="0">0</int_arr>
+        <int_arr for="1">311</int_arr>
         <name>测试项-B</name>
         <str_arr for="0">哦哦哦哦</str_arr>
       </arr>

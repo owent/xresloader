@@ -42,6 +42,16 @@ public class DataDstWriterNode {
         public String ueOriginTypeDefaultValue = null;
     }
 
+    public enum ListStripRule {
+        DEFAULT, STRIP_TAIL, STRIP_NOTHING, STRIP_ALL
+    }
+
+    static public class DataDstFieldExtList {
+        public ListStripRule stripOption = ListStripRule.DEFAULT;
+        public int minSize = 0;
+        public int maxSize = 0;
+    }
+
     static public class DataDstFieldExt {
         public String description = null;
         public String validator = null;
@@ -51,6 +61,7 @@ public class DataDstWriterNode {
         public boolean allowMissingInPlainMode = false;
         public ArrayList<String> uniqueTags = null;
         private DataDstFieldExtUE ue = null;
+        private DataDstFieldExtList list = null;
 
         public DataDstFieldExtUE mutableUE() {
             if (null != ue) {
@@ -59,6 +70,19 @@ public class DataDstWriterNode {
 
             ue = new DataDstFieldExtUE();
             return ue;
+        }
+
+        public DataDstFieldExtList mutableList() {
+            if (null != list) {
+                return list;
+            }
+
+            list = new DataDstFieldExtList();
+            return list;
+        }
+
+        public DataDstFieldExtList getList() {
+            return list;
         }
     }
 
@@ -92,6 +116,18 @@ public class DataDstWriterNode {
             ue = new DataDstMessageExtUE();
             return ue;
         }
+    }
+
+    static public ListStripRule getDefaultListStripRule() {
+        if (ProgramOptions.getInstance().stripListRule == ProgramOptions.ListStripRule.KEEP_ALL) {
+            return ListStripRule.STRIP_NOTHING;
+        }
+
+        if (ProgramOptions.getInstance().stripListRule == ProgramOptions.ListStripRule.STRIP_EMPTY_TAIL) {
+            return ListStripRule.STRIP_TAIL;
+        }
+
+        return ListStripRule.STRIP_ALL;
     }
 
     static public class DataDstFieldDescriptor {
@@ -229,6 +265,30 @@ public class DataDstWriterNode {
 
             extension = new DataDstFieldExt();
             return extension;
+        }
+
+        public DataDstFieldExtList getListExtension() {
+            if (this.extension == null) {
+                return null;
+            }
+
+            return this.extension.getList();
+        }
+
+        public ListStripRule getListStripRule() {
+            if (this.extension == null) {
+                return getDefaultListStripRule();
+            }
+
+            if (this.extension.list == null) {
+                return getDefaultListStripRule();
+            }
+
+            if (this.extension.list.stripOption == ListStripRule.DEFAULT) {
+                return getDefaultListStripRule();
+            }
+
+            return this.extension.list.stripOption;
         }
 
         public void setReferOneof(DataDstOneofDescriptor fd) {
@@ -619,6 +679,14 @@ public class DataDstWriterNode {
             return this.innerFieldDesc.getIndex();
         }
 
+        public ListStripRule getFieldListStripRule() {
+            if (this.innerFieldDesc == null) {
+                return getDefaultListStripRule();
+            }
+
+            return this.innerFieldDesc.getListStripRule();
+        }
+
         public boolean isOneof() {
             return this.innerOneofDesc != null;
         }
@@ -796,6 +864,14 @@ public class DataDstWriterNode {
         }
 
         return this.fieldDescriptor.mutableExtension();
+    }
+
+    public ListStripRule getFieldListStripRule() {
+        if (this.fieldDescriptor == null) {
+            return getDefaultListStripRule();
+        }
+
+        return this.fieldDescriptor.getListStripRule();
     }
 
     public DataDstOneofDescriptor getOneofDescriptor() {

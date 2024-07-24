@@ -395,6 +395,7 @@ public class DataDstPb extends DataDstImpl {
         if (verifierExpr != null && !verifierExpr.isEmpty()) {
             child_field.mutableExtension().validator = verifierExpr;
         }
+        boolean ret = true;
         var gen = setup_validator(null, verifierExpr, fd);
         if (gen != null && gen.validator != null && !gen.validator.isEmpty()) {
             for (DataVerifyImpl vfy : gen.validator) {
@@ -553,8 +554,63 @@ public class DataDstPb extends DataDstImpl {
                     .getExtension(XresloaderUe.ueOriginTypeDefaultValue);
         }
 
+        // setup list extension
+        if (fd.isRepeated()) {
+            if (fd.getOptions().hasExtension(Xresloader.fieldListStripOption)) {
+                switch (fd.getOptions().getExtension(Xresloader.fieldListStripOption).getNumber()) {
+                    case Xresloader.ListStripOption.LIST_STRIP_DEFAULT_VALUE: {
+                        child_field.mutableExtension()
+                                .mutableList().stripOption = DataDstWriterNode.ListStripRule.DEFAULT;
+                        break;
+                    }
+                    case Xresloader.ListStripOption.LIST_STRIP_NOTHING_VALUE: {
+                        child_field.mutableExtension()
+                                .mutableList().stripOption = DataDstWriterNode.ListStripRule.STRIP_NOTHING;
+                        break;
+                    }
+                    case Xresloader.ListStripOption.LIST_STRIP_TAIL_VALUE: {
+                        child_field.mutableExtension()
+                                .mutableList().stripOption = DataDstWriterNode.ListStripRule.STRIP_TAIL;
+                        break;
+                    }
+                    case Xresloader.ListStripOption.LIST_STRIP_ALL_VALUE: {
+                        child_field.mutableExtension()
+                                .mutableList().stripOption = DataDstWriterNode.ListStripRule.STRIP_ALL;
+                        break;
+                    }
+                }
+            }
+
+            if (fd.getOptions().hasExtension(Xresloader.fieldListMinSize)) {
+                child_field.mutableExtension()
+                        .mutableList().minSize = fd.getOptions().getExtension(Xresloader.fieldListMinSize);
+            }
+            if (fd.getOptions().hasExtension(Xresloader.fieldListMaxSize)) {
+                child_field.mutableExtension()
+                        .mutableList().maxSize = fd.getOptions().getExtension(Xresloader.fieldListMaxSize);
+
+                if (child_field.mutableExtension()
+                        .mutableList().maxSize != 0
+                        && child_field.mutableExtension()
+                                .mutableList().maxSize < child_field.mutableExtension()
+                                        .mutableList().minSize) {
+                    ProgramOptions.getLoger().error(
+                            "\"%s\" has invalid extension settings(field_list_max_size (%d) is smaller than field_list_min_size (%d)",
+                            fd.getFullName(),
+                            child_field.mutableExtension()
+                                    .mutableList().maxSize,
+                            child_field.mutableExtension()
+                                    .mutableList().minSize);
+                    ret = false;
+                    if (gen != null) {
+                        gen.success = false;
+                    }
+                }
+            }
+        }
+
         if (gen == null) {
-            return true;
+            return ret;
         }
         return gen.success;
     }
@@ -1444,6 +1500,24 @@ public class DataDstPb extends DataDstImpl {
 
                         if (count > 0) {
                             filterMissingFields(missingFields, oneofField, fd, false);
+                            if (child != null && child.innerFieldDesc != null) {
+                                int minSize = child.innerFieldDesc.mutableExtension().mutableList().minSize;
+                                int maxSize = child.innerFieldDesc.mutableExtension().mutableList().maxSize;
+                                if (minSize > 0 && child.nodes.size() < minSize) {
+                                    throw new ConvException(
+                                            String.format(
+                                                    "\"%s.%s\" for %s.%s require at least %d element(s), real got %d element(s).",
+                                                    desc.getFullName(), fd.getName(),
+                                                    prefix, fd.getName(), minSize, child.nodes.size()));
+                                }
+                                if (maxSize > 0 && child.nodes.size() > maxSize) {
+                                    throw new ConvException(
+                                            String.format(
+                                                    "\"%s.%s\" for %s.%s require at most %d element(s), real got %d element(s).",
+                                                    desc.getFullName(), fd.getName(),
+                                                    prefix, fd.getName(), maxSize, child.nodes.size()));
+                                }
+                            }
                         } else {
                             // try plain mode - the whole array
                             String real_name = DataDstWriterNode.makeChildPath(prefix, fd.getName());
@@ -1581,6 +1655,24 @@ public class DataDstPb extends DataDstImpl {
 
                         if (count > 0) {
                             filterMissingFields(missingFields, oneofField, fd, false);
+                            if (child != null && child.innerFieldDesc != null) {
+                                int minSize = child.innerFieldDesc.mutableExtension().mutableList().minSize;
+                                int maxSize = child.innerFieldDesc.mutableExtension().mutableList().maxSize;
+                                if (minSize > 0 && child.nodes.size() < minSize) {
+                                    throw new ConvException(
+                                            String.format(
+                                                    "\"%s.%s\" for %s.%s require at least %d element(s), real got %d element(s).",
+                                                    desc.getFullName(), fd.getName(),
+                                                    prefix, fd.getName(), minSize, child.nodes.size()));
+                                }
+                                if (maxSize > 0 && child.nodes.size() > maxSize) {
+                                    throw new ConvException(
+                                            String.format(
+                                                    "\"%s.%s\" for %s.%s require at most %d element(s), real got %d element(s).",
+                                                    desc.getFullName(), fd.getName(),
+                                                    prefix, fd.getName(), maxSize, child.nodes.size()));
+                                }
+                            }
                         } else {
                             // try plain mode
                             String real_name = DataDstWriterNode.makeChildPath(prefix, fd.getName());
@@ -1953,12 +2045,12 @@ public class DataDstPb extends DataDstImpl {
     private void dumpValue(DynamicMessage.Builder builder, DataDstFieldDescriptor field, Object val, int index,
             DataRowContext rowContext,
             String fieldPath) {
-        ProgramOptions.ListStripRule stripListRule = ProgramOptions.getInstance().stripListRule;
+        DataDstWriterNode.ListStripRule stripListRule = field.getListStripRule();
         Descriptors.FieldDescriptor fd = (Descriptors.FieldDescriptor) field.getRawDescriptor();
 
         if (fd.isRepeated()
-                && (stripListRule == ProgramOptions.ListStripRule.KEEP_ALL
-                        || stripListRule == ProgramOptions.ListStripRule.STRIP_EMPTY_TAIL)) {
+                && (stripListRule == DataDstWriterNode.ListStripRule.STRIP_NOTHING
+                        || stripListRule == DataDstWriterNode.ListStripRule.STRIP_TAIL)) {
             int fill_default_size = builder.getRepeatedFieldCount(fd);
             for (int i = fill_default_size; i < index; ++i) {
                 Object defaultVal = getDefault(builder, field);
@@ -2111,8 +2203,31 @@ public class DataDstPb extends DataDstImpl {
 
                 if (null != rowContext && !fieldHasValue && c.getValue().isNotNull()) {
                     rowContext.addIgnoreReason(
-                            String.format("field %s is empty but set not null, we will ignore this row",
+                            String.format("Field %s is empty but set not null, we will ignore this row",
                                     subFieldPath));
+                }
+            }
+
+            // Check list size
+            if (c.getValue().isList() && c.getValue().innerFieldDesc != null) {
+                var listExt = c.getValue().innerFieldDesc.getListExtension();
+                if (listExt != null && c.getValue().innerFieldDesc != null) {
+                    Descriptors.FieldDescriptor fd = (Descriptors.FieldDescriptor) c.getValue().innerFieldDesc
+                            .getRawDescriptor();
+                    if (listExt.minSize > 0 && listExt.minSize > builder.getRepeatedFieldCount(fd)) {
+                        throw new ConvException(
+                                String.format(
+                                        "Try to convert %s failed, require at least %d element(s), real got %d element(s).",
+                                        fd.getFullName(),
+                                        listExt.minSize, builder.getRepeatedFieldCount(fd)));
+                    }
+                    if (listExt.maxSize > 0 && listExt.maxSize < builder.getRepeatedFieldCount(fd)) {
+                        throw new ConvException(
+                                String.format(
+                                        "Try to convert %s failed, require at most %d element(s), real got %d element(s).",
+                                        fd.getFullName(),
+                                        listExt.maxSize, builder.getRepeatedFieldCount(fd)));
+                    }
                 }
             }
         }
@@ -2126,7 +2241,7 @@ public class DataDstPb extends DataDstImpl {
         if (null == desc.identify && DataDstWriterNode.JAVA_TYPE.MESSAGE != field.getType()) {
             // required 空字段填充默认值
             if (field.isRequired()
-                    || ProgramOptions.getInstance().stripListRule == ProgramOptions.ListStripRule.KEEP_ALL) {
+                    || field.getListStripRule() == DataDstWriterNode.ListStripRule.STRIP_NOTHING) {
                 dumpDefault(builder, field, desc.getListIndex());
             }
 
@@ -2137,7 +2252,7 @@ public class DataDstPb extends DataDstImpl {
 
         if (null == val) {
             if (field.isRequired()
-                    || ProgramOptions.getInstance().stripListRule == ProgramOptions.ListStripRule.KEEP_ALL) {
+                    || field.getListStripRule() == DataDstWriterNode.ListStripRule.STRIP_NOTHING) {
                 dumpDefault(builder, field, desc.getListIndex());
             }
 
@@ -2157,7 +2272,7 @@ public class DataDstPb extends DataDstImpl {
         }
 
         if (null == ident) {
-            if (ProgramOptions.getInstance().stripListRule == ProgramOptions.ListStripRule.KEEP_ALL) {
+            if (DataDstWriterNode.getDefaultListStripRule() == DataDstWriterNode.ListStripRule.STRIP_NOTHING) {
                 dumpDefault(builder, field);
             }
             return false;
@@ -2225,7 +2340,7 @@ public class DataDstPb extends DataDstImpl {
             String fieldPath) throws ConvException {
         if (null == ident) {
             if (field.isRequired()
-                    || ProgramOptions.getInstance().stripListRule == ProgramOptions.ListStripRule.KEEP_ALL) {
+                    || field.getListStripRule() == DataDstWriterNode.ListStripRule.STRIP_NOTHING) {
                 dumpDefault(builder, field, 0);
             }
             return false;
@@ -2234,7 +2349,7 @@ public class DataDstPb extends DataDstImpl {
         DataContainer<String> res = DataSrcImpl.getOurInstance().getValue(ident, "");
         if (null == res || !res.valid) {
             if (field.isRequired()
-                    || ProgramOptions.getInstance().stripListRule == ProgramOptions.ListStripRule.KEEP_ALL) {
+                    || field.getListStripRule() == DataDstWriterNode.ListStripRule.STRIP_NOTHING) {
                 dumpDefault(builder, field, 0);
             }
             return false;
@@ -2270,6 +2385,7 @@ public class DataDstPb extends DataDstImpl {
             }
             Object parsedDatas = null;
 
+            boolean ret = true;
             switch (field.getType()) {
                 case INT: {
                     Long[] values = parsePlainDataLong(groups, ident, field);
@@ -2441,15 +2557,15 @@ public class DataDstPb extends DataDstImpl {
                 if (null != maybeFromNode && maybeFromNode.getListIndex() >= 0) {
                     if (values.size() != 1) {
                         throw new ConvException(
-                                String.format("Try to convert %s.%s.%d failed, too many elements(found %d).",
+                                String.format("Try to convert %s.%s.%d failed, too many element(s)(found %d).",
                                         field.getTypeDescriptor().getFullName(), field.getName(),
                                         maybeFromNode.getListIndex(), values.size()));
                     }
 
                     int index = maybeFromNode.getListIndex();
-                    ProgramOptions.ListStripRule stripListRule = ProgramOptions.getInstance().stripListRule;
-                    if (stripListRule == ProgramOptions.ListStripRule.KEEP_ALL
-                            || stripListRule == ProgramOptions.ListStripRule.STRIP_EMPTY_TAIL) {
+                    DataDstWriterNode.ListStripRule stripListRule = field.getListStripRule();
+                    if (stripListRule == DataDstWriterNode.ListStripRule.STRIP_NOTHING
+                            || stripListRule == DataDstWriterNode.ListStripRule.STRIP_TAIL) {
                         while (builder.getRepeatedFieldCount(fd) < index) {
                             builder.addRepeatedField(fd, getDefault(builder, field));
                         }
@@ -2485,13 +2601,34 @@ public class DataDstPb extends DataDstImpl {
                         }
                     }
                 }
-            } else if (ProgramOptions.getInstance().stripListRule == ProgramOptions.ListStripRule.KEEP_ALL) {
+            } else if (field.getListStripRule() == DataDstWriterNode.ListStripRule.STRIP_NOTHING) {
                 builder.addRepeatedField(fd, getDefault(builder, field));
             } else {
-                return false;
+                ret = false;
             }
 
-            return true;
+            // Check list size
+            {
+                var listExt = field.getListExtension();
+                if (listExt != null) {
+                    if (listExt.minSize > 0 && listExt.minSize > builder.getRepeatedFieldCount(fd)) {
+                        throw new ConvException(
+                                String.format(
+                                        "Try to convert %s failed, require at least %d element(s), real got %d element(s).",
+                                        fd.getFullName(),
+                                        listExt.minSize, builder.getRepeatedFieldCount(fd)));
+                    }
+                    if (listExt.maxSize > 0 && listExt.maxSize < builder.getRepeatedFieldCount(fd)) {
+                        throw new ConvException(
+                                String.format(
+                                        "Try to convert %s failed, require at most %d element(s), real got %d element(s).",
+                                        fd.getFullName(),
+                                        listExt.maxSize, builder.getRepeatedFieldCount(fd)));
+                    }
+                }
+            }
+
+            return ret;
         } else {
             Object val = null;
 

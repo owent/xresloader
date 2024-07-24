@@ -47,6 +47,12 @@ local const_res = {
               name = "int_arr",
               number = 2,
               options = {
+                field_list_max_size = 3,
+                field_list_min_size = 1,
+                field_list_strip_option = {
+                  name = "LIST_STRIP_NOTHING",
+                  number = 1,
+                },
                 packed = true,
               },
               type_name = "INT32",

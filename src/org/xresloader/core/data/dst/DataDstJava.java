@@ -11,6 +11,8 @@ import org.xresloader.core.engine.ExcelEngine;
 import org.xresloader.core.engine.IdentifyDescriptor;
 import org.xresloader.core.scheme.SchemeConf;
 
+import com.google.protobuf.Descriptors;
+
 import java.nio.ByteBuffer;
 import java.nio.charset.Charset;
 import java.security.MessageDigest;
@@ -528,6 +530,32 @@ public abstract class DataDstJava extends DataDstImpl {
                                     subFieldPath));
                 }
             }
+
+            // Check list size
+            if (c.getValue().isList() && c.getValue().innerFieldDesc != null) {
+                var listExt = c.getValue().innerFieldDesc.getListExtension();
+                if (listExt != null && c.getValue().innerFieldDesc != null) {
+                    var childList = builder.getOrDefault(c.getValue().innerFieldDesc.getName(), null);
+                    int listSize = 0;
+                    if (childList != null && childList instanceof List<?>) {
+                        listSize = ((List<?>) childList).size();
+                    }
+                    if (listExt.minSize > 0 && listExt.minSize > listSize) {
+                        throw new ConvException(
+                                String.format(
+                                        "Try to convert %s failed, require at least %d element(s), real got %d element(s).",
+                                        fieldPath,
+                                        listExt.minSize, listSize));
+                    }
+                    if (listExt.maxSize > 0 && listExt.maxSize < listSize) {
+                        throw new ConvException(
+                                String.format(
+                                        "Try to convert %s failed, require at most %d element(s), real got %d element(s).",
+                                        fieldPath,
+                                        listExt.maxSize, listSize));
+                    }
+                }
+            }
         }
 
         return ret;
@@ -539,7 +567,7 @@ public abstract class DataDstJava extends DataDstImpl {
             throws ConvException {
         if (null == desc.identify && DataDstWriterNode.JAVA_TYPE.MESSAGE != desc.getType()) {
             if (as_child.isRequired()
-                    || ProgramOptions.getInstance().stripListRule == ProgramOptions.ListStripRule.KEEP_ALL) {
+                    || as_child.getFieldListStripRule() == DataDstWriterNode.ListStripRule.STRIP_NOTHING) {
                 dumpDefault(builder, as_child);
             }
 
@@ -550,7 +578,7 @@ public abstract class DataDstJava extends DataDstImpl {
 
         if (null == val) {
             if (as_child.isRequired()
-                    || ProgramOptions.getInstance().stripListRule == ProgramOptions.ListStripRule.KEEP_ALL) {
+                    || as_child.getFieldListStripRule() == DataDstWriterNode.ListStripRule.STRIP_NOTHING) {
                 dumpDefault(builder, as_child);
             }
 
@@ -584,9 +612,9 @@ public abstract class DataDstJava extends DataDstImpl {
             }
 
             int index = desc.getListIndex();
-            ProgramOptions.ListStripRule stripListRule = ProgramOptions.getInstance().stripListRule;
-            if (stripListRule == ProgramOptions.ListStripRule.KEEP_ALL ||
-                    stripListRule == ProgramOptions.ListStripRule.STRIP_EMPTY_TAIL) {
+            DataDstWriterNode.ListStripRule stripListRule = as_child.getFieldListStripRule();
+            if (stripListRule == DataDstWriterNode.ListStripRule.STRIP_NOTHING ||
+                    stripListRule == DataDstWriterNode.ListStripRule.STRIP_TAIL) {
                 while (old.size() < index) {
                     dumpDefault(builder, as_child);
                 }
@@ -693,7 +721,7 @@ public abstract class DataDstJava extends DataDstImpl {
         if (null == ident) {
             // Plain模式的repeated对于STRIP_EMPTY_TAIL也可以直接全部strip掉，下同
             if (field.isRequired()
-                    || ProgramOptions.getInstance().stripListRule == ProgramOptions.ListStripRule.KEEP_ALL) {
+                    || field.getListStripRule() == DataDstWriterNode.ListStripRule.STRIP_NOTHING) {
                 dumpDefault(builder, field);
             }
             return false;
@@ -702,7 +730,7 @@ public abstract class DataDstJava extends DataDstImpl {
         DataContainer<String> res = DataSrcImpl.getOurInstance().getValue(ident, "");
         if (null == res || !res.valid) {
             if (field.isRequired()
-                    || ProgramOptions.getInstance().stripListRule == ProgramOptions.ListStripRule.KEEP_ALL) {
+                    || field.getListStripRule() == DataDstWriterNode.ListStripRule.STRIP_NOTHING) {
                 dumpDefault(builder, field);
             }
             return false;
@@ -728,6 +756,7 @@ public abstract class DataDstJava extends DataDstImpl {
 
         if (field.isList()) {
             Object val = builder.getOrDefault(field.getName(), null);
+            boolean ret = true;
             if (field.isMap()) {
                 if (val == null || !(val instanceof SpecialInnerHashMap<?, ?>)) {
                     val = new SpecialInnerHashMap<Object, Object>();
@@ -961,9 +990,9 @@ public abstract class DataDstJava extends DataDstImpl {
                     }
 
                     int index = maybeFromNode.getListIndex();
-                    ProgramOptions.ListStripRule stripListRule = ProgramOptions.getInstance().stripListRule;
-                    if (stripListRule == ProgramOptions.ListStripRule.KEEP_ALL
-                            || stripListRule == ProgramOptions.ListStripRule.STRIP_EMPTY_TAIL) {
+                    DataDstWriterNode.ListStripRule stripListRule = field.getListStripRule();
+                    if (stripListRule == DataDstWriterNode.ListStripRule.STRIP_NOTHING
+                            || stripListRule == DataDstWriterNode.ListStripRule.STRIP_TAIL) {
                         while (valArray.size() < index) {
                             valArray.add(getDefault(field));
                         }
@@ -983,14 +1012,39 @@ public abstract class DataDstJava extends DataDstImpl {
                         rowContext.addUniqueCache(tagKey, fieldPath, valArray);
                     }
                 }
-            } else if (ProgramOptions.getInstance().stripListRule == ProgramOptions.ListStripRule.KEEP_ALL) {
+            } else if (field.getListStripRule() == DataDstWriterNode.ListStripRule.STRIP_NOTHING) {
                 ArrayList<Object> valArray = (ArrayList<Object>) val;
                 valArray.add(getDefault(field));
             } else {
-                return false;
+                ret = false;
             }
 
-            return true;
+            // Check list size
+            {
+                var listExt = field.getListExtension();
+                if (listExt != null) {
+                    var childList = builder.getOrDefault(field.getName(), null);
+                    int listSize = 0;
+                    if (childList != null && childList instanceof List<?>) {
+                        listSize = ((List<?>) childList).size();
+                    }
+                    if (listExt.minSize > 0 && listExt.minSize > listSize) {
+                        throw new ConvException(
+                                String.format(
+                                        "Try to convert %s failed, require at least %d element(s), real got %d element(s).",
+                                        fieldPath,
+                                        listExt.minSize, listSize));
+                    }
+                    if (listExt.maxSize > 0 && listExt.maxSize < listSize) {
+                        throw new ConvException(
+                                String.format(
+                                        "Try to convert %s failed, require at most %d element(s), real got %d element(s).",
+                                        fieldPath,
+                                        listExt.maxSize, listSize));
+                    }
+                }
+            }
+            return ret;
         } else {
             Object val = null;
 

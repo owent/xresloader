@@ -1114,7 +1114,7 @@ public abstract class DataDstUEBase extends DataDstJava {
                         throw new ConvException(validateErrorMessage);
                     }
                     return ret.value.intValue();
-                } else if (ProgramOptions.getInstance().stripListRule == ProgramOptions.ListStripRule.KEEP_ALL) {
+                } else if (desc.getFieldListStripRule() == DataDstWriterNode.ListStripRule.STRIP_NOTHING) {
                     return Integer.valueOf(0);
                 }
                 break;
@@ -1129,7 +1129,7 @@ public abstract class DataDstUEBase extends DataDstJava {
                     }
 
                     return ret.value.longValue();
-                } else if (ProgramOptions.getInstance().stripListRule == ProgramOptions.ListStripRule.KEEP_ALL) {
+                } else if (desc.getFieldListStripRule() == DataDstWriterNode.ListStripRule.STRIP_NOTHING) {
                     return Long.valueOf(0);
                 }
                 break;
@@ -1144,7 +1144,7 @@ public abstract class DataDstUEBase extends DataDstJava {
                     }
 
                     return ret.value.floatValue();
-                } else if (ProgramOptions.getInstance().stripListRule == ProgramOptions.ListStripRule.KEEP_ALL) {
+                } else if (desc.getFieldListStripRule() == DataDstWriterNode.ListStripRule.STRIP_NOTHING) {
                     return Float.valueOf(0);
                 }
                 break;
@@ -1159,7 +1159,7 @@ public abstract class DataDstUEBase extends DataDstJava {
                     }
 
                     return ret.value.doubleValue();
-                } else if (ProgramOptions.getInstance().stripListRule == ProgramOptions.ListStripRule.KEEP_ALL) {
+                } else if (desc.getFieldListStripRule() == DataDstWriterNode.ListStripRule.STRIP_NOTHING) {
                     return Double.valueOf(0);
                 }
                 break;
@@ -1174,7 +1174,7 @@ public abstract class DataDstUEBase extends DataDstJava {
                     }
 
                     return ret.value.booleanValue();
-                } else if (ProgramOptions.getInstance().stripListRule == ProgramOptions.ListStripRule.KEEP_ALL) {
+                } else if (desc.getFieldListStripRule() == DataDstWriterNode.ListStripRule.STRIP_NOTHING) {
                     return Boolean.valueOf(false);
                 }
                 break;
@@ -1189,7 +1189,7 @@ public abstract class DataDstUEBase extends DataDstJava {
                     }
 
                     return ret.value;
-                } else if (ProgramOptions.getInstance().stripListRule == ProgramOptions.ListStripRule.KEEP_ALL) {
+                } else if (desc.getFieldListStripRule() == DataDstWriterNode.ListStripRule.STRIP_NOTHING) {
                     return "";
                 }
                 break;
@@ -1209,7 +1209,7 @@ public abstract class DataDstUEBase extends DataDstJava {
                     } else {
                         return Base64.getEncoder().encodeToString(res.value.getBytes(Charset.forName(encoding)));
                     }
-                } else if (ProgramOptions.getInstance().stripListRule == ProgramOptions.ListStripRule.KEEP_ALL) {
+                } else if (desc.getFieldListStripRule() == DataDstWriterNode.ListStripRule.STRIP_NOTHING) {
                     return "";
                 }
                 break;

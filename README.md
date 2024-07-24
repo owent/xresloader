@@ -341,7 +341,7 @@ validator:
 |   org.xresloader.field_required                  | 设置字段为 **required** ，用于向proto3提供，proto2的 **required** 约束                                                                       |
 | org.xresloader.field_origin_value                | 写出原始数据到指定字段（ `Timestamp` 和 `Duration` 类型）                                                                                    |
 | org.xresloader.field_allow_missing_in_plain_mode | Plain模式下设置此字段可选，如果未设置则使用默认值（版本 2.16.0 版本开始支持）                                                                |
-| org.xresloader.field_list_strip_option           | 给单个字段设置数组裁剪，可选值( `LIST_STRIP_DEFAULT\|LIST_STRIP_NOTHING\|LIST_STRIP_TAIL\|LIST_STRIP_ALL` )（版本 2.16.0 版本开始支持）      |
+| org.xresloader.field_list_strip_option           | 给单个字段设置数组裁剪，可选值( `LIST_STRIP_DEFAULT\|LIST_STRIP_NOTHING\|LIST_STRIP_TAIL\|LIST_STRIP_ALL` )（版本 2.18.0 版本开始支持）      |
 | org.xresloader.field_list_min_size               | 给单个字段设置数组最小长度，可选值（版本 2.18.0 版本开始支持）                                                                               |
 | org.xresloader.field_list_max_size               | 给单个字段设置数组最大长度，可选值（版本 2.18.0 版本开始支持）                                                                               |
 |     org.xresloader.ue.key_tag                    | 生成UE代码时，如果需要支持多个Key组合成一个Name，用这个字段指定系数（必须大于0）                                                             |

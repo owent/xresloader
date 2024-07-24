@@ -501,9 +501,9 @@ public final class Xresloader {
   public static final
     com.google.protobuf.GeneratedMessage.GeneratedExtension<
       com.google.protobuf.DescriptorProtos.FieldOptions,
-      java.lang.Integer> fieldListMinSize = com.google.protobuf.GeneratedMessage
+      java.lang.String> fieldListMinSize = com.google.protobuf.GeneratedMessage
           .newFileScopedGeneratedExtension(
-        java.lang.Integer.class,
+        java.lang.String.class,
         null);
   public static final int FIELD_LIST_MAX_SIZE_FIELD_NUMBER = 1020;
   /**
@@ -516,9 +516,9 @@ public final class Xresloader {
   public static final
     com.google.protobuf.GeneratedMessage.GeneratedExtension<
       com.google.protobuf.DescriptorProtos.FieldOptions,
-      java.lang.Integer> fieldListMaxSize = com.google.protobuf.GeneratedMessage
+      java.lang.String> fieldListMaxSize = com.google.protobuf.GeneratedMessage
           .newFileScopedGeneratedExtension(
-        java.lang.Integer.class,
+        java.lang.String.class,
         null);
   public static final int ONEOF_DESCRIPTION_FIELD_NUMBER = 1001;
   /**
@@ -667,8 +667,8 @@ public final class Xresloader {
       ".protobuf.FieldOptions\030\372\007 \001(\0162\037.org.xres" +
       "loader.ListStripOption:;\n\023field_list_min" +
       "_size\022\035.google.protobuf.FieldOptions\030\373\007 " +
-      "\001(\005:;\n\023field_list_max_size\022\035.google.prot" +
-      "obuf.FieldOptions\030\374\007 \001(\005:9\n\021oneof_descri" +
+      "\001(\t:;\n\023field_list_max_size\022\035.google.prot" +
+      "obuf.FieldOptions\030\374\007 \001(\t:9\n\021oneof_descri" +
       "ption\022\035.google.protobuf.OneofOptions\030\351\007 " +
       "\001(\t:7\n\017oneof_separator\022\035.google.protobuf" +
       ".OneofOptions\030\352\007 \001(\t:6\n\016oneof_not_null\022\035" +

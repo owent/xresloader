@@ -86,5 +86,9 @@
     {
         "Name": "game_const_config.EN_GCC_SOLDIER_TYPE_MASK",
         "Value": 100
+    },
+    {
+        "Name": "game_const_config.EN_GCC_UNKNOWN",
+        "Value": 0
     }
 ]

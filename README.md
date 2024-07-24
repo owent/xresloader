@@ -346,8 +346,8 @@ validator:
 |                                                  | + `LIST_STRIP_NOTHING`: 不裁剪数据，相当于 `--list-keep-empty`                                                                               |
 |                                                  | + `LIST_STRIP_TAIL`: 裁剪尾部空值，相当于 `--list-strip-empty-tail`                                                                          |
 |                                                  | + `LIST_STRIP_ALL`: 裁剪全部空值，相当于 `--list-strip-all-empty`                                                                            |
-| org.xresloader.field_list_min_size               | 给单个字段设置数组最小长度，可选值（版本 2.18.0 版本开始支持）                                                                               |
-| org.xresloader.field_list_max_size               | 给单个字段设置数组最大长度，可选值（版本 2.18.0 版本开始支持）                                                                               |
+| org.xresloader.field_list_min_size               | 给单个字段设置数组最小长度，输入字符串：`"<N>\|枚举名"`（版本 2.18.0 版本开始支持）                                                          |
+| org.xresloader.field_list_max_size               | 给单个字段设置数组最大长度，输入字符串：`"<N>\|枚举名"`（版本 2.18.0 版本开始支持）                                                          |
 |     org.xresloader.ue.key_tag                    | 生成UE代码时，如果需要支持多个Key组合成一个Name，用这个字段指定系数（必须大于0）                                                             |
 |   org.xresloader.ue.ue_type_name                 | 生成UE代码时，如果指定了这个字段，那么生成的字段类型将是 `TSoftObjectPtr<ue_type_name>` , 并且支持蓝图中直接引用                             |
 |   org.xresloader.ue.ue_type_is_class             | 生成UE代码时，如果指定了这个字段，那么生成的字段类型将是 `TSoftClassPtr<ue_type_name>` , 并且支持蓝图中直接引用                              |

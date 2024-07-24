@@ -5,8 +5,8 @@
 ## 2.18.0
 
 1. 增加插件 `org.xresloader.field_list_strip_option=LIST_STRIP_DEFAULT|LIST_STRIP_NOTHING|LIST_STRIP_TAIL|LIST_STRIP_ALL` 用于给单个字段设置数组裁剪。
-2. 增加插件 `org.xresloader.field_list_min_size=<N>` 用于给单个字段数组最小长度要求。
-3. 增加插件 `org.xresloader.field_list_max_size=<N>` 用于给单个字段数组最大长度要求。
+2. 增加插件 `org.xresloader.field_list_min_size="<N>|枚举名"` 用于给单个字段数组最小长度要求。
+3. 增加插件 `org.xresloader.field_list_max_size="<N>|枚举名"` 用于给单个字段数组最大长度要求。
 
 ## 2.17.1
 

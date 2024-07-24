@@ -68,6 +68,9 @@ public class DataDstPb extends DataDstImpl {
         /*** 类型信息-Message描述器集合 ***/
         public HashMap<String, PbAliasNode<Descriptors.Descriptor>> message_descs = new HashMap<String, PbAliasNode<Descriptors.Descriptor>>();
         public HashMap<String, HashMap<Integer, Descriptors.EnumValueDescriptor>> enum_values_descs = new HashMap<String, HashMap<Integer, Descriptors.EnumValueDescriptor>>();
+        /*** 类型信息-快速整数别名集合 ***/
+        public HashMap<String, Integer> quick_integer_values_alias = new HashMap<String, Integer>();
+        public HashSet<String> quick_integer_values_container = new HashSet<String>();
 
         // ========================== 验证器 ==========================
         HashMap<String, DataVerifyImpl> validator = new HashMap<String, DataVerifyImpl>();
@@ -98,7 +101,7 @@ public class DataDstPb extends DataDstImpl {
             full_name = full_name.substring(1);
         }
 
-        if (!short_name.isEmpty()) {
+        if (!short_name.isEmpty() && !short_name.equals(full_name)) {
             PbAliasNode<T> ls = hashmap.getOrDefault(short_name, null);
             if (null == ls) {
                 ls = new PbAliasNode<T>();
@@ -182,6 +185,67 @@ public class DataDstPb extends DataDstImpl {
         XresloaderUe.registerAllExtensions(pb_extensions);
 
         return pb_extensions;
+    }
+
+    static private Integer get_quick_integer_value(PbInfoSet pbs, String name) {
+        while (name.length() > 0 && name.charAt(0) == '.') {
+            name = name.substring(1);
+        }
+
+        int dotPos = name.lastIndexOf('.');
+        if (dotPos < 0) {
+            return null;
+        }
+
+        var ret = pbs.quick_integer_values_alias.getOrDefault(name, null);
+        if (ret != null) {
+            return ret;
+        }
+
+        String container = name.substring(0, dotPos);
+        if (pbs.quick_integer_values_container.contains(container)) {
+            return null;
+        }
+        pbs.quick_integer_values_container.add(container);
+
+        // Try enum
+        var enumDesc = get_alias_list_element(container, pbs.enums, "enum type");
+        if (enumDesc != null) {
+            for (var enumValue : enumDesc.getValueList()) {
+                pbs.quick_integer_values_alias.put(String.format("%s.%s", container, enumValue.getName()),
+                        Integer.valueOf(enumValue.getNumber()));
+            }
+            return pbs.quick_integer_values_alias.getOrDefault(name, null);
+        }
+
+        // Try message
+        var msgDesc = get_alias_list_element(container, pbs.messages, "message type");
+        if (msgDesc != null) {
+            for (var fieldDesc : msgDesc.getFieldList()) {
+                pbs.quick_integer_values_alias.put(String.format("%s.%s", container, fieldDesc.getName()),
+                        Integer.valueOf(fieldDesc.getNumber()));
+            }
+            return pbs.quick_integer_values_alias.getOrDefault(name, null);
+        }
+
+        return null;
+    }
+
+    static private Integer try_parse_quick_integer_value(PbInfoSet pbs, String name) {
+        name = name.trim();
+        if (name.isEmpty()) {
+            return null;
+        }
+
+        if (name.charAt(0) >= '0' && name.charAt(0) <= '9') {
+            try {
+                return Integer.valueOf(name);
+            } catch (NumberFormatException e) {
+                return null;
+            }
+        }
+
+        return get_quick_integer_value(pbs, name);
     }
 
     static void load_pb_message(PbInfoSet pbs, DescriptorProtos.DescriptorProto mdp, String package_name,
@@ -582,12 +646,38 @@ public class DataDstPb extends DataDstImpl {
             }
 
             if (fd.getOptions().hasExtension(Xresloader.fieldListMinSize)) {
-                child_field.mutableExtension()
-                        .mutableList().minSize = fd.getOptions().getExtension(Xresloader.fieldListMinSize);
+                var intValue = try_parse_quick_integer_value(cachePbs,
+                        fd.getOptions().getExtension(Xresloader.fieldListMinSize));
+                if (null == intValue) {
+                    ProgramOptions.getLoger().error(
+                            "\"%s\" has invalid extension settings field_list_min_size (%s)",
+                            fd.getFullName(),
+                            fd.getOptions().getExtension(Xresloader.fieldListMinSize));
+                    ret = false;
+                    if (gen != null) {
+                        gen.success = false;
+                    }
+                } else {
+                    child_field.mutableExtension()
+                            .mutableList().minSize = intValue.intValue();
+                }
             }
             if (fd.getOptions().hasExtension(Xresloader.fieldListMaxSize)) {
-                child_field.mutableExtension()
-                        .mutableList().maxSize = fd.getOptions().getExtension(Xresloader.fieldListMaxSize);
+                var intValue = try_parse_quick_integer_value(cachePbs,
+                        fd.getOptions().getExtension(Xresloader.fieldListMaxSize));
+                if (null == intValue) {
+                    ProgramOptions.getLoger().error(
+                            "\"%s\" has invalid extension settings field_list_max_size (%s)",
+                            fd.getFullName(),
+                            fd.getOptions().getExtension(Xresloader.fieldListMaxSize));
+                    ret = false;
+                    if (gen != null) {
+                        gen.success = false;
+                    }
+                } else {
+                    child_field.mutableExtension()
+                            .mutableList().maxSize = intValue.intValue();
+                }
 
                 if (child_field.mutableExtension()
                         .mutableList().maxSize != 0
@@ -1091,7 +1181,7 @@ public class DataDstPb extends DataDstImpl {
             if (null != innerField) {
                 if (!setup_extension(innerDesc, innerField, field)) {
                     throw new ConvException(
-                            String.format("setup extension failed, field name: %s", field.getFullName()));
+                            String.format("Setup extension failed, field name: %s", field.getFullName()));
                 }
             }
         }
@@ -1101,7 +1191,7 @@ public class DataDstPb extends DataDstImpl {
             if (null != innerField) {
                 if (!setup_extension(innerDesc, innerField, pbDesc, oneof)) {
                     throw new ConvException(
-                            String.format("setup extension failed, field name: %s", oneof.getFullName()));
+                            String.format("Setup extension failed, field name: %s", oneof.getFullName()));
                 }
             }
         }

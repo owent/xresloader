@@ -48,7 +48,7 @@ message arr_in_arr {
     option (org.xresloader.ue.include_header) = "Engine/CompositeDataTable.h";
 
     string          name    = 1 [ (org.xresloader.field_description) = "This is a test name in array" ];
-    repeated int32  int_arr = 2 [ (org.xresloader.field_list_min_size) = 1, (org.xresloader.field_list_max_size) = 3, (org.xresloader.field_list_strip_option) = LIST_STRIP_NOTHING ];
+    repeated int32  int_arr = 2 [ (org.xresloader.field_list_min_size) = "game_const_config.EN_GCC_UNKNOWN", (org.xresloader.field_list_max_size) = "3", (org.xresloader.field_list_strip_option) = LIST_STRIP_NOTHING ];
     repeated string str_arr = 3;
 
     oneof test_onof {
@@ -89,7 +89,7 @@ message arr_in_arr_cfg {
     uint32              id  = 1 [ (org.xresloader.ue.key_tag) = 1, (org.xresloader.field_description) = "This is a Key" ];
     repeated arr_in_arr arr = 2;
 
-    repeated int32             test_plain_int_arr  = 3 [ (org.xresloader.field_list_min_size) = 1, (org.xresloader.field_list_max_size) = 3 ];
+    repeated int32             test_plain_int_arr  = 3 [ (org.xresloader.field_list_min_size) = "1", (org.xresloader.field_list_max_size) = "3" ];
     repeated cost_type         test_plain_enum_arr = 4;
     test_msg_verifier          test_plain_msg      = 5 [ (org.xresloader.field_separator) = "&" ];
     repeated test_msg_verifier test_plain_msg_arr  = 6;

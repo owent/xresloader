@@ -79,18 +79,18 @@ const char descriptor_table_protodef_dependency_2eproto[] ABSL_ATTRIBUTE_SECTION
     protodesc_cold) = {
     "\n\020dependency.proto\032\020xresloader.proto\032\020de"
     "p_level2.proto\"<\n\007dep_cfg\022\n\n\002id\030\001 \001(\r\022\014\n"
-    "\004name\030\002 \001(\t\022\027\n\004dep2\030\003 \001(\0132\t.dep2_cfg*\267\002\n"
-    "\021game_const_config\022\030\n\023EN_GCC_PERCENT_BAS"
-    "E\020\220N\022\034\n\030EN_GCC_RANDOM_RANGE_UNIT\020\n\022 \n\031EN"
-    "_GCC_RESOURCE_MAX_LIMIT\020\377\254\342\004\022\027\n\022EN_GCC_L"
-    "EVEL_LIMIT\020\347\007\022\034\n\030EN_GCC_SOLDIER_TYPE_MAS"
-    "K\020d\022\036\n\031EN_GCC_ACTIVITY_TYPE_MASK\020\350\007\022\035\n\031E"
-    "N_GCC_FORMULAR_TYPE_MASK\020\n\022\030\n\023EN_GCC_SCR"
-    "EEN_WIDTH\020\360\010\022\031\n\024EN_GCC_SCREEN_HEIGHT\020\200\005\022"
-    "\031\n\024EN_GCC_CAMERA_OFFSET\020\214\002\032\002\020\001*Z\n\tcost_t"
-    "ype\022\021\n\rEN_CT_UNKNOWN\020\000\022\033\n\013EN_CT_MONEY\020\221N"
-    "\032\t\322>\006\351\207\221\345\270\201\022\035\n\rEN_CT_DIAMOND\020\365N\032\t\322>\006\351\222\273\347"
-    "\237\263"
+    "\004name\030\002 \001(\t\022\027\n\004dep2\030\003 \001(\0132\t.dep2_cfg*\313\002\n"
+    "\021game_const_config\022\022\n\016EN_GCC_UNKNOWN\020\000\022\030"
+    "\n\023EN_GCC_PERCENT_BASE\020\220N\022\034\n\030EN_GCC_RANDO"
+    "M_RANGE_UNIT\020\n\022 \n\031EN_GCC_RESOURCE_MAX_LI"
+    "MIT\020\377\254\342\004\022\027\n\022EN_GCC_LEVEL_LIMIT\020\347\007\022\034\n\030EN_"
+    "GCC_SOLDIER_TYPE_MASK\020d\022\036\n\031EN_GCC_ACTIVI"
+    "TY_TYPE_MASK\020\350\007\022\035\n\031EN_GCC_FORMULAR_TYPE_"
+    "MASK\020\n\022\030\n\023EN_GCC_SCREEN_WIDTH\020\360\010\022\031\n\024EN_G"
+    "CC_SCREEN_HEIGHT\020\200\005\022\031\n\024EN_GCC_CAMERA_OFF"
+    "SET\020\214\002\032\002\020\001*Z\n\tcost_type\022\021\n\rEN_CT_UNKNOWN"
+    "\020\000\022\033\n\013EN_CT_MONEY\020\221N\032\t\322>\006\351\207\221\345\270\201\022\035\n\rEN_CT"
+    "_DIAMOND\020\365N\032\t\322>\006\351\222\273\347\237\263"
 };
 static const ::_pbi::DescriptorTable* const descriptor_table_dependency_2eproto_deps[2] =
     {
@@ -101,7 +101,7 @@ static ::absl::once_flag descriptor_table_dependency_2eproto_once;
 PROTOBUF_CONSTINIT const ::_pbi::DescriptorTable descriptor_table_dependency_2eproto = {
     false,
     false,
-    522,
+    542,
     descriptor_table_protodef_dependency_2eproto,
     "dependency.proto",
     &descriptor_table_dependency_2eproto_once,
@@ -119,7 +119,7 @@ const ::google::protobuf::EnumDescriptor* game_const_config_descriptor() {
   return file_level_enum_descriptors_dependency_2eproto[0];
 }
 PROTOBUF_CONSTINIT const uint32_t game_const_config_internal_data_[] = {
-    65546u, 524288u, 1000u, 640u, 10000u, 268u, 999u, 1136u, 9999999u, 100u, };
+    65536u, 524320u, 512u, 1000u, 640u, 10000u, 268u, 999u, 1136u, 9999999u, 100u, };
 bool game_const_config_IsValid(int value) {
   return ::_pbi::ValidateEnum(value, game_const_config_internal_data_);
 }

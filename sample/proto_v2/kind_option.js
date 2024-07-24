@@ -45,8 +45,8 @@ exports.files = [
             name : "int_arr",
             number : 2,
             options : {
-              field_list_max_size : 3,
-              field_list_min_size : 1,
+              field_list_max_size : "3",
+              field_list_min_size : "game_const_config.EN_GCC_UNKNOWN",
               field_list_strip_option : {
                 name : "LIST_STRIP_NOTHING",
                 number : 1
@@ -102,6 +102,15 @@ exports.files = [
               field_separator : "|"
             },
             type_name : "MESSAGE"
+          },
+          test_plain_int_arr : {
+            name : "test_plain_int_arr",
+            number : 3,
+            options : {
+              field_list_max_size : "3",
+              field_list_min_size : "1"
+            },
+            type_name : "INT32"
           },
           test_plain_msg : {
             name : "test_plain_msg",

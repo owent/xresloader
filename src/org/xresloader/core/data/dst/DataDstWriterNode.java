@@ -944,7 +944,7 @@ public class DataDstWriterNode {
 
         if (null == child_field_desc && null == child_oneof_desc) {
             throw new ConvException(
-                    String.format("can not find any child with name \"%s\" for %s.", child_name, getFullName()));
+                    String.format("Can not find any child with name \"%s\" for %s.", child_name, getFullName()));
         }
 
         DataDstChildrenNode res = getChildren().getOrDefault(child_name, null);

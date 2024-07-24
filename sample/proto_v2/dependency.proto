@@ -5,31 +5,32 @@ import "xresloader.proto";
 import "dep_level2.proto";
 
 message dep_cfg {
-  optional uint32 id = 1;
-  optional string name = 2;
-  optional dep2_cfg dep2 = 3;
+    optional uint32   id   = 1;
+    optional string   name = 2;
+    optional dep2_cfg dep2 = 3;
 }
 
 // 常量类型
 enum game_const_config {
-  option allow_alias = true;
+    option allow_alias = true;
 
-  EN_GCC_PERCENT_BASE = 10000;
-  EN_GCC_RANDOM_RANGE_UNIT = 10;
-  EN_GCC_RESOURCE_MAX_LIMIT = 9999999;
-  EN_GCC_LEVEL_LIMIT = 999;
-  EN_GCC_SOLDIER_TYPE_MASK = 100;
-  EN_GCC_ACTIVITY_TYPE_MASK = 1000;
-  EN_GCC_FORMULAR_TYPE_MASK = 10;
+    EN_GCC_UNKNOWN            = 0;
+    EN_GCC_PERCENT_BASE       = 10000;
+    EN_GCC_RANDOM_RANGE_UNIT  = 10;
+    EN_GCC_RESOURCE_MAX_LIMIT = 9999999;
+    EN_GCC_LEVEL_LIMIT        = 999;
+    EN_GCC_SOLDIER_TYPE_MASK  = 100;
+    EN_GCC_ACTIVITY_TYPE_MASK = 1000;
+    EN_GCC_FORMULAR_TYPE_MASK = 10;
 
-  EN_GCC_SCREEN_WIDTH = 1136;
-  EN_GCC_SCREEN_HEIGHT = 640;
-  EN_GCC_CAMERA_OFFSET = 268;
+    EN_GCC_SCREEN_WIDTH  = 1136;
+    EN_GCC_SCREEN_HEIGHT = 640;
+    EN_GCC_CAMERA_OFFSET = 268;
 }
 
 // 常量类型
 enum cost_type {
-  EN_CT_UNKNOWN = 0;
-  EN_CT_MONEY = 10001 [(org.xresloader.enum_alias) = "金币"];
-  EN_CT_DIAMOND = 10101 [(org.xresloader.enum_alias) = "钻石"];
+    EN_CT_UNKNOWN = 0;
+    EN_CT_MONEY   = 10001 [ (org.xresloader.enum_alias) = "金币" ];
+    EN_CT_DIAMOND = 10101 [ (org.xresloader.enum_alias) = "钻石" ];
 }

@@ -3387,7 +3387,7 @@ class arr_in_arr final : public ::google::protobuf::Message
     kTestInfoRoleFieldNumber = 11,
     kTestRoleUpgradeCfgFieldNumber = 12,
   };
-  // repeated int32 int_arr = 2 [(.org.xresloader.field_list_strip_option) = LIST_STRIP_NOTHING, (.org.xresloader.field_list_min_size) = 1, (.org.xresloader.field_list_max_size) = 3];
+  // repeated int32 int_arr = 2 [(.org.xresloader.field_list_strip_option) = LIST_STRIP_NOTHING, (.org.xresloader.field_list_min_size) = "game_const_config.EN_GCC_UNKNOWN", (.org.xresloader.field_list_max_size) = "3"];
   int int_arr_size() const;
   private:
   int _internal_int_arr_size() const;
@@ -3688,7 +3688,7 @@ class arr_in_arr_cfg final : public ::google::protobuf::Message
   const ::arr_in_arr& arr(int index) const;
   ::arr_in_arr* add_arr();
   const ::google::protobuf::RepeatedPtrField<::arr_in_arr>& arr() const;
-  // repeated int32 test_plain_int_arr = 3 [(.org.xresloader.field_list_min_size) = 1, (.org.xresloader.field_list_max_size) = 3];
+  // repeated int32 test_plain_int_arr = 3 [(.org.xresloader.field_list_min_size) = "1", (.org.xresloader.field_list_max_size) = "3"];
   int test_plain_int_arr_size() const;
   private:
   int _internal_test_plain_int_arr_size() const;
@@ -5204,7 +5204,7 @@ inline void arr_in_arr::set_allocated_name(std::string* value) {
   // @@protoc_insertion_point(field_set_allocated:arr_in_arr.name)
 }
 
-// repeated int32 int_arr = 2 [(.org.xresloader.field_list_strip_option) = LIST_STRIP_NOTHING, (.org.xresloader.field_list_min_size) = 1, (.org.xresloader.field_list_max_size) = 3];
+// repeated int32 int_arr = 2 [(.org.xresloader.field_list_strip_option) = LIST_STRIP_NOTHING, (.org.xresloader.field_list_min_size) = "game_const_config.EN_GCC_UNKNOWN", (.org.xresloader.field_list_max_size) = "3"];
 inline int arr_in_arr::_internal_int_arr_size() const {
   return _internal_int_arr().size();
 }
@@ -5667,7 +5667,7 @@ arr_in_arr_cfg::_internal_mutable_arr() {
   return &_impl_.arr_;
 }
 
-// repeated int32 test_plain_int_arr = 3 [(.org.xresloader.field_list_min_size) = 1, (.org.xresloader.field_list_max_size) = 3];
+// repeated int32 test_plain_int_arr = 3 [(.org.xresloader.field_list_min_size) = "1", (.org.xresloader.field_list_max_size) = "3"];
 inline int arr_in_arr_cfg::_internal_test_plain_int_arr_size() const {
   return _internal_test_plain_int_arr().size();
 }

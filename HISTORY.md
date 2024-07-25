@@ -9,6 +9,7 @@
 3. 增加插件 `org.xresloader.field_list_max_size="<N>|枚举名"` 用于给单个字段数组最大长度要求。
 4. 增加选项 `--disable-alias-mapping` 用于关闭字段映射时使用别名。
 5. 修复使用别名时，message结构未被正确映射的问题。
+6. 修复对Excel对大数字自动附加的 `,` 的适配。
 
 ### BREAKCHANGES
 

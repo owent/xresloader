@@ -11,7 +11,7 @@ return {
       },
     },
     data_ver = "1.0.0.0",
-    hash_code = "sha256:9a34adc87f8576240d82bfda90295964233c3e3102e3ca4889cea3d8b8b4157c",
+    hash_code = "sha256:f7be6e49644c9dc400f09df3c23276e0c1f3c233fa208720999ca0e6db00afd6",
     xres_ver = "2.18.0",
   },
   [2] = "outer_alias_message",
@@ -20,7 +20,7 @@ return {
       iId = 1,
       inners = {
         {
-          iType = 11,
+          iType = 11000000,
           paramList = {
             111,
             112,
@@ -46,7 +46,7 @@ return {
       iId = 2,
       inners = {
         {
-          iType = 21,
+          iType = 21000000,
           paramList = {
             211,
             212,

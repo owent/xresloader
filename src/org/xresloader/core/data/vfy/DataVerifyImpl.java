@@ -62,7 +62,7 @@ public abstract class DataVerifyImpl {
     private static long longValueOf(String input) {
         Matcher matcher = INTEGER_WITH_DOT_PATTERN.get().matcher(input);
         if (matcher.matches()) {
-            return Long.valueOf(matcher.group(1).trim());
+            return Long.valueOf(input.replaceAll(",", "").trim());
         }
         return Long.valueOf(input);
     }

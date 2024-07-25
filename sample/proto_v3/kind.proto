@@ -180,3 +180,13 @@ message large_file_test {
     string     szvalue  = 6;
     combine_id id_id    = 7;
 }
+
+message inner_alias_message {
+    int32          iType     = 1 [ (org.xresloader.field_alias) = "Type" ];
+    repeated int64 paramList = 2 [ (org.xresloader.field_alias) = "Param" ];
+}
+
+message outer_alias_message {
+    int32                        iId    = 1 [ (org.xresloader.field_alias) = "ID" ];
+    repeated inner_alias_message inners = 2 [ (org.xresloader.field_alias) = "Condition" ];
+}

@@ -99,7 +99,8 @@ echo "
 | -v --version                 | 打印版本号                      |                                                                                                          |
 | -n --rename                  | 重命名输出文件名                | 正则表达式 （如：/(?i)\\.bin$/\\.lua/）                                                                  |
 | --require-mapping-all        | 开启所有字段映射检查            | 开启所有字段映射检查后，转出结构中所有的字段都必须配置映射关系，数组字段至少要有一个元素                 |
-| --enable-alias-mapping       | 开启别名匹配                    | 映射Excel列到目标数据结构，允许使用别名                                                                  |
+| --enable-alias-mapping       | 开启别名匹配                    | 映射Excel列到目标数据结构，允许使用别名(<2.18.0版本时默认值)                                             |
+| --disable-alias-mapping      | 关闭别名匹配                    | 映射Excel列到目标数据结构，不允许使用别名(>=2.18.0版本)                                                  |
 | -c --const-print             | 输出协议描述中的常量            | 参数为字符串，表示输出的文件名                                                                           |
 | -i --option-print            | 输出协议描述中的选项            | 参数为字符串，表示输出的文件名                                                                           |
 | -r --descriptor-print        | 输出完整协议描述信息            | 参数为字符串，表示输出的文件名                                                                           |

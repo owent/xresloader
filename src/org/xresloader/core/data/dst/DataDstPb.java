@@ -1466,7 +1466,7 @@ public class DataDstPb extends DataDstImpl {
             String old_field = oneofField.get(oneof.getFullName());
             if (old_field != null) {
                 setLastErrorMessage(
-                        "field \"%s\" in oneof descriptor \"%s\" already exists, can not add another field \"%s\" with the same oneof descriptor",
+                        "Field \"%s\" in oneof descriptor \"%s\" already exists, can not add another field \"%s\" with the same oneof descriptor",
                         old_field, oneof.getFullName(), fd.getName());
                 throw new ConvException(getLastErrorMessage());
             }
@@ -1534,27 +1534,32 @@ public class DataDstPb extends DataDstImpl {
                             boolean test_passed = false;
 
                             name_list.removeLast();
-                            name_list.addLast(DataDstWriterNode.makeNodeName(fd.getName(), count));
-                            if (test(c, name_list)) {
-                                child = node.addChild(fd.getName(), c, fd, DataDstWriterNode.CHILD_NODE_TYPE.STANDARD);
-                                ret = true;
-                                test_passed = true;
+                            // 检测使用的名字，message不允许混合别名。以防别名组合指数级膨胀
+                            String select_name = "";
+                            if (data_src.containsIdentifyMappingPrefix(
+                                    DataDstWriterNode.makeChildPath(prefix, fd.getName(),
+                                            count))) {
+                                select_name = fd.getName();
                             } else if (null != field_alias) {
                                 for (String alias_name : field_alias) {
                                     String test_field_name = alias_name.strip();
                                     if (test_field_name.isEmpty()) {
                                         continue;
                                     }
-                                    name_list.removeLast();
-                                    name_list.addLast(DataDstWriterNode.makeNodeName(test_field_name, count));
-                                    if (test(c, name_list)) {
-                                        child = node.addChild(fd.getName(), c, fd,
-                                                DataDstWriterNode.CHILD_NODE_TYPE.STANDARD);
-                                        ret = true;
-                                        test_passed = true;
+
+                                    if (data_src.containsIdentifyMappingPrefix(
+                                            DataDstWriterNode.makeChildPath(prefix, test_field_name,
+                                                    count))) {
+                                        select_name = test_field_name;
                                         break;
                                     }
                                 }
+                            }
+                            name_list.addLast(DataDstWriterNode.makeNodeName(select_name, count));
+                            if (!select_name.isEmpty() && test(c, name_list)) {
+                                child = node.addChild(fd.getName(), c, fd, DataDstWriterNode.CHILD_NODE_TYPE.STANDARD);
+                                ret = true;
+                                test_passed = true;
                             }
 
                             if (!test_passed) {
@@ -1645,34 +1650,34 @@ public class DataDstPb extends DataDstImpl {
                                 DataDstWriterNode.JAVA_TYPE.MESSAGE, pbTypeToTypeLimit(fd.getType()), -1);
                         boolean test_passed = false;
 
-                        name_list.addLast(DataDstWriterNode.makeNodeName(fd.getName()));
-                        if (test(c, name_list)) {
-                            filterMissingFields(missingFields, oneofField, fd, false);
-                            child = node.addChild(fd.getName(), c, fd, DataDstWriterNode.CHILD_NODE_TYPE.STANDARD);
-                            ret = true;
-                            test_passed = true;
+                        // 检测使用的名字，message不允许混合别名。以防别名组合指数级膨胀
+                        String select_name = "";
+                        if (data_src.containsIdentifyMappingPrefix(
+                                DataDstWriterNode.makeChildPath(prefix, fd.getName()))) {
+                            select_name = fd.getName();
                         } else if (null != field_alias) {
                             for (String alias_name : field_alias) {
                                 String test_field_name = alias_name.strip();
                                 if (test_field_name.isEmpty()) {
                                     continue;
                                 }
-                                name_list.removeLast();
-                                name_list.addLast(DataDstWriterNode.makeNodeName(test_field_name));
-                                if (test(c, name_list)) {
-                                    filterMissingFields(missingFields, oneofField, fd, false);
-                                    child = node.addChild(fd.getName(), c, fd,
-                                            DataDstWriterNode.CHILD_NODE_TYPE.STANDARD);
-                                    ret = true;
-                                    test_passed = true;
+
+                                if (data_src.containsIdentifyMappingPrefix(
+                                        DataDstWriterNode.makeChildPath(prefix, test_field_name))) {
+                                    select_name = test_field_name;
                                     break;
                                 }
                             }
                         }
+                        name_list.addLast(DataDstWriterNode.makeNodeName(select_name));
+                        if (test(c, name_list)) {
+                            filterMissingFields(missingFields, oneofField, fd, false);
+                            child = node.addChild(fd.getName(), c, fd, DataDstWriterNode.CHILD_NODE_TYPE.STANDARD);
+                            ret = true;
+                            test_passed = true;
+                        }
 
                         if (!test_passed) {
-                            filterMissingFields(missingFields, oneofField, fd, true);
-
                             // try plain mode
                             String real_name = DataDstWriterNode.makeChildPath(prefix, fd.getName());
                             IdentifyDescriptor col = data_src.getColumnByName(real_name);
@@ -1837,7 +1842,7 @@ public class DataDstPb extends DataDstImpl {
         for (Descriptors.OneofDescriptor fd : desc.getOneofs()) {
             if (node.getTypeDescriptor() == null) {
                 setLastErrorMessage(
-                        "type descriptor \"%s\" not found, it's probably a BUG, please report to %s, current version: %s",
+                        "Type descriptor \"%s\" not found, it's probably a BUG, please report to %s, current version: %s",
                         node.getFullName(), ProgramOptions.getReportUrl(), ProgramOptions.getInstance().getVersion());
                 throw new ConvException(getLastErrorMessage());
             }
@@ -1845,7 +1850,7 @@ public class DataDstPb extends DataDstImpl {
             DataDstOneofDescriptor oneof_inner_desc = node.getTypeDescriptor().oneofs.getOrDefault(fd.getName(), null);
             if (oneof_inner_desc == null) {
                 setLastErrorMessage(
-                        "oneof descriptor \"%s\" not found in type descriptor \"%s\", it's probably a BUG, please report to %s, current version: %s",
+                        "Oneof descriptor \"%s\" not found in type descriptor \"%s\", it's probably a BUG, please report to %s, current version: %s",
                         fd.getFullName(), node.getFullName(), ProgramOptions.getReportUrl(),
                         ProgramOptions.getInstance().getVersion());
                 throw new ConvException(getLastErrorMessage());
@@ -1862,7 +1867,7 @@ public class DataDstPb extends DataDstImpl {
             String old_field = oneofField.getOrDefault(fd.getFullName(), null);
             if (old_field != null) {
                 setLastErrorMessage(
-                        "field \"%s\" in oneof descriptor \"%s\" already exists, can not add the oneof writer again",
+                        "Field \"%s\" in oneof descriptor \"%s\" already exists, can not add the oneof writer again",
                         old_field, fd.getFullName());
                 throw new ConvException(getLastErrorMessage());
             }
@@ -1877,9 +1882,9 @@ public class DataDstPb extends DataDstImpl {
         }
 
         if (require_mapping_all_fields) {
-            String missingFliedDesc = "";
+            String missingFieldDesc = "";
             if (missingFields != null && !missingFields.isEmpty()) {
-                missingFliedDesc = String.format(" fields %s", String.join(",", missingFields));
+                missingFieldDesc = String.format(" fields %s", String.join(",", missingFields));
             }
 
             String missingOneofDesc = "";
@@ -1894,9 +1899,14 @@ public class DataDstPb extends DataDstImpl {
                 missingOneofDesc = String.format(" oneof %s", String.join(",", missingOneofs));
             }
 
-            if (!missingFliedDesc.isEmpty() || !missingOneofDesc.isEmpty()) {
-                setLastErrorMessage("message %s in %s can not find%s%s in data source", desc.getFullName(), prefix,
-                        missingFliedDesc, missingOneofDesc);
+            if (!missingFieldDesc.isEmpty() || !missingOneofDesc.isEmpty()) {
+                if (prefix.isEmpty()) {
+                    setLastErrorMessage("Message %s can not find%s%s in data source", desc.getFullName(),
+                            missingFieldDesc, missingOneofDesc);
+                } else {
+                    setLastErrorMessage("Message %s in %s can not find%s%s in data source", desc.getFullName(), prefix,
+                            missingFieldDesc, missingOneofDesc);
+                }
                 throw new ConvException(getLastErrorMessage());
             }
         }

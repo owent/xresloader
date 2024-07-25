@@ -300,6 +300,31 @@ exports.files = [
         },
         name : "event_rule_item"
       },
+      inner_alias_message : {
+        field : {
+          iType : {
+            name : "iType",
+            number : 1,
+            options : {
+              field_alias : [
+                "Type"
+              ]
+            },
+            type_name : "INT32"
+          },
+          paramList : {
+            name : "paramList",
+            number : 2,
+            options : {
+              field_alias : [
+                "Param"
+              ]
+            },
+            type_name : "INT64"
+          }
+        },
+        name : "inner_alias_message"
+      },
       keep_or_strip_empty_list_cfg : {
         field : {
           id : {
@@ -316,6 +341,31 @@ exports.files = [
         options : {
           helper : "helper"
         }
+      },
+      outer_alias_message : {
+        field : {
+          iId : {
+            name : "iId",
+            number : 1,
+            options : {
+              field_alias : [
+                "ID"
+              ]
+            },
+            type_name : "INT32"
+          },
+          inners : {
+            name : "inners",
+            number : 2,
+            options : {
+              field_alias : [
+                "Condition"
+              ]
+            },
+            type_name : "MESSAGE"
+          }
+        },
+        name : "outer_alias_message"
       },
       process_by_script : {
         enum_type : {

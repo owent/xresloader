@@ -51,7 +51,7 @@ public class ProgramOptions {
     public boolean enableStringMacro = false;
     public RenameRule renameRule = null;
     public boolean requireMappingAllFields = false;
-    public boolean enableAliasMapping = false;
+    public boolean enableAliasMapping = true;
     public boolean enableFormular = false;
     public ListStripRule stripListRule = ListStripRule.STRIP_EMPTY_ALL;
     public int prettyIndent = 0;
@@ -77,7 +77,7 @@ public class ProgramOptions {
         dataSourceDirectory = new String[] { outputDirectory };
         dataSourceType = FileType.BIN;
         requireMappingAllFields = false;
-        enableAliasMapping = false;
+        enableAliasMapping = true;
     }
 
     public static ProgramOptions getInstance() {
@@ -108,7 +108,7 @@ public class ProgramOptions {
         enableStringMacro = false;
         renameRule = null;
         requireMappingAllFields = false;
-        enableAliasMapping = false;
+        enableAliasMapping = true;
         enableFormular = false;
         stripListRule = ListStripRule.STRIP_EMPTY_ALL;
         prettyIndent = 0;
@@ -187,6 +187,7 @@ public class ProgramOptions {
         options.addOption(null, "require-mapping-all", false,
                 "require all fields in protocol message to be mapped from data source");
         options.addOption(null, "enable-alias-mapping", false, "allow to use alias when mapping fields");
+        options.addOption(null, "disable-alias-mapping", false, "do not use alias when mapping fields");
 
         options.addOption(Option.builder("a").longOpt("data-version").desc("set data version").hasArg()
                 .argName("DATA VERSION").build());
@@ -483,6 +484,10 @@ public class ProgramOptions {
 
         if (cmd.hasOption("enable-alias-mapping")) {
             enableAliasMapping = true;
+        }
+
+        if (cmd.hasOption("disable-alias-mapping")) {
+            enableAliasMapping = false;
         }
 
         // special functions

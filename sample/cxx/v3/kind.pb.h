@@ -86,12 +86,18 @@ extern event_reward_itemDefaultTypeInternal _event_reward_item_default_instance_
 class event_rule_item;
 struct event_rule_itemDefaultTypeInternal;
 extern event_rule_itemDefaultTypeInternal _event_rule_item_default_instance_;
+class inner_alias_message;
+struct inner_alias_messageDefaultTypeInternal;
+extern inner_alias_messageDefaultTypeInternal _inner_alias_message_default_instance_;
 class keep_or_strip_empty_list_cfg;
 struct keep_or_strip_empty_list_cfgDefaultTypeInternal;
 extern keep_or_strip_empty_list_cfgDefaultTypeInternal _keep_or_strip_empty_list_cfg_default_instance_;
 class large_file_test;
 struct large_file_testDefaultTypeInternal;
 extern large_file_testDefaultTypeInternal _large_file_test_default_instance_;
+class outer_alias_message;
+struct outer_alias_messageDefaultTypeInternal;
+extern outer_alias_messageDefaultTypeInternal _outer_alias_message_default_instance_;
 class process_by_script;
 struct process_by_scriptDefaultTypeInternal;
 extern process_by_scriptDefaultTypeInternal _process_by_script_default_instance_;
@@ -636,6 +642,198 @@ class process_by_script_MapU32StringEntry_DoNotUse final
         &_process_by_script_MapU32StringEntry_DoNotUse_default_instance_);
   }
 const ::google::protobuf::Message::ClassData* GetClassData() const final;
+  friend struct ::TableStruct_kind_2eproto;
+};
+// -------------------------------------------------------------------
+
+class inner_alias_message final : public ::google::protobuf::Message
+/* @@protoc_insertion_point(class_definition:inner_alias_message) */ {
+ public:
+  inline inner_alias_message() : inner_alias_message(nullptr) {}
+  ~inner_alias_message() override;
+  template <typename = void>
+  explicit PROTOBUF_CONSTEXPR inner_alias_message(
+      ::google::protobuf::internal::ConstantInitialized);
+
+  inline inner_alias_message(const inner_alias_message& from) : inner_alias_message(nullptr, from) {}
+  inline inner_alias_message(inner_alias_message&& from) noexcept
+      : inner_alias_message(nullptr, std::move(from)) {}
+  inline inner_alias_message& operator=(const inner_alias_message& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  inline inner_alias_message& operator=(inner_alias_message&& from) noexcept {
+    if (this == &from) return *this;
+    if (GetArena() == from.GetArena()
+#ifdef PROTOBUF_FORCE_COPY_IN_MOVE
+        && GetArena() != nullptr
+#endif  // !PROTOBUF_FORCE_COPY_IN_MOVE
+    ) {
+      InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const
+      ABSL_ATTRIBUTE_LIFETIME_BOUND {
+    return _internal_metadata_.unknown_fields<::google::protobuf::UnknownFieldSet>(::google::protobuf::UnknownFieldSet::default_instance);
+  }
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields()
+      ABSL_ATTRIBUTE_LIFETIME_BOUND {
+    return _internal_metadata_.mutable_unknown_fields<::google::protobuf::UnknownFieldSet>();
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor() {
+    return GetDescriptor();
+  }
+  static const ::google::protobuf::Descriptor* GetDescriptor() {
+    return default_instance().GetMetadata().descriptor;
+  }
+  static const ::google::protobuf::Reflection* GetReflection() {
+    return default_instance().GetMetadata().reflection;
+  }
+  static const inner_alias_message& default_instance() {
+    return *internal_default_instance();
+  }
+  static inline const inner_alias_message* internal_default_instance() {
+    return reinterpret_cast<const inner_alias_message*>(
+        &_inner_alias_message_default_instance_);
+  }
+  static constexpr int kIndexInFileMessages = 18;
+  friend void swap(inner_alias_message& a, inner_alias_message& b) { a.Swap(&b); }
+  inline void Swap(inner_alias_message* other) {
+    if (other == this) return;
+#ifdef PROTOBUF_FORCE_COPY_IN_SWAP
+    if (GetArena() != nullptr && GetArena() == other->GetArena()) {
+#else   // PROTOBUF_FORCE_COPY_IN_SWAP
+    if (GetArena() == other->GetArena()) {
+#endif  // !PROTOBUF_FORCE_COPY_IN_SWAP
+      InternalSwap(other);
+    } else {
+      ::google::protobuf::internal::GenericSwap(this, other);
+    }
+  }
+  void UnsafeArenaSwap(inner_alias_message* other) {
+    if (other == this) return;
+    ABSL_DCHECK(GetArena() == other->GetArena());
+    InternalSwap(other);
+  }
+
+  // implements Message ----------------------------------------------
+
+  inner_alias_message* New(::google::protobuf::Arena* arena = nullptr) const final {
+    return ::google::protobuf::Message::DefaultConstruct<inner_alias_message>(arena);
+  }
+  using ::google::protobuf::Message::CopyFrom;
+  void CopyFrom(const inner_alias_message& from);
+  using ::google::protobuf::Message::MergeFrom;
+  void MergeFrom(const inner_alias_message& from) { inner_alias_message::MergeImpl(*this, from); }
+
+  private:
+  static void MergeImpl(
+      ::google::protobuf::MessageLite& to_msg,
+      const ::google::protobuf::MessageLite& from_msg);
+
+  public:
+  bool IsInitialized() const {
+    return true;
+  }
+  ABSL_ATTRIBUTE_REINITIALIZES void Clear() final;
+  ::size_t ByteSizeLong() const final;
+  ::uint8_t* _InternalSerialize(
+      ::uint8_t* target,
+      ::google::protobuf::io::EpsCopyOutputStream* stream) const final;
+  int GetCachedSize() const { return _impl_._cached_size_.Get(); }
+
+  private:
+  void SharedCtor(::google::protobuf::Arena* arena);
+  void SharedDtor();
+  void InternalSwap(inner_alias_message* other);
+ private:
+  friend class ::google::protobuf::internal::AnyMetadata;
+  static ::absl::string_view FullMessageName() { return "inner_alias_message"; }
+
+ protected:
+  explicit inner_alias_message(::google::protobuf::Arena* arena);
+  inner_alias_message(::google::protobuf::Arena* arena, const inner_alias_message& from);
+  inner_alias_message(::google::protobuf::Arena* arena, inner_alias_message&& from) noexcept
+      : inner_alias_message(arena) {
+    *this = ::std::move(from);
+  }
+  const ::google::protobuf::Message::ClassData* GetClassData() const final;
+
+ public:
+  ::google::protobuf::Metadata GetMetadata() const;
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+  enum : int {
+    kParamListFieldNumber = 2,
+    kITypeFieldNumber = 1,
+  };
+  // repeated int64 paramList = 2 [(.org.xresloader.field_alias) = "Param"];
+  int paramlist_size() const;
+  private:
+  int _internal_paramlist_size() const;
+
+  public:
+  void clear_paramlist() ;
+  ::int64_t paramlist(int index) const;
+  void set_paramlist(int index, ::int64_t value);
+  void add_paramlist(::int64_t value);
+  const ::google::protobuf::RepeatedField<::int64_t>& paramlist() const;
+  ::google::protobuf::RepeatedField<::int64_t>* mutable_paramlist();
+
+  private:
+  const ::google::protobuf::RepeatedField<::int64_t>& _internal_paramlist() const;
+  ::google::protobuf::RepeatedField<::int64_t>* _internal_mutable_paramlist();
+
+  public:
+  // int32 iType = 1 [(.org.xresloader.field_alias) = "Type"];
+  void clear_itype() ;
+  ::int32_t itype() const;
+  void set_itype(::int32_t value);
+
+  private:
+  ::int32_t _internal_itype() const;
+  void _internal_set_itype(::int32_t value);
+
+  public:
+  // @@protoc_insertion_point(class_scope:inner_alias_message)
+ private:
+  class _Internal;
+  friend class ::google::protobuf::internal::TcParser;
+  static const ::google::protobuf::internal::TcParseTable<
+      1, 2, 0,
+      0, 2>
+      _table_;
+
+  static constexpr const void* _raw_default_instance_ =
+      &_inner_alias_message_default_instance_;
+
+  friend class ::google::protobuf::MessageLite;
+  friend class ::google::protobuf::Arena;
+  template <typename T>
+  friend class ::google::protobuf::Arena::InternalHelper;
+  using InternalArenaConstructable_ = void;
+  using DestructorSkippable_ = void;
+  struct Impl_ {
+    inline explicit constexpr Impl_(
+        ::google::protobuf::internal::ConstantInitialized) noexcept;
+    inline explicit Impl_(::google::protobuf::internal::InternalVisibility visibility,
+                          ::google::protobuf::Arena* arena);
+    inline explicit Impl_(::google::protobuf::internal::InternalVisibility visibility,
+                          ::google::protobuf::Arena* arena, const Impl_& from,
+                          const inner_alias_message& from_msg);
+    ::google::protobuf::RepeatedField<::int64_t> paramlist_;
+    mutable ::google::protobuf::internal::CachedSize _paramlist_cached_byte_size_;
+    ::int32_t itype_;
+    mutable ::google::protobuf::internal::CachedSize _cached_size_;
+    PROTOBUF_TSAN_DECLARE_MEMBER
+  };
+  union { Impl_ _impl_; };
   friend struct ::TableStruct_kind_2eproto;
 };
 // -------------------------------------------------------------------
@@ -1329,6 +1527,196 @@ class process_by_script_TestMapSmEntry_DoNotUse final
         &_process_by_script_TestMapSmEntry_DoNotUse_default_instance_);
   }
 const ::google::protobuf::Message::ClassData* GetClassData() const final;
+  friend struct ::TableStruct_kind_2eproto;
+};
+// -------------------------------------------------------------------
+
+class outer_alias_message final : public ::google::protobuf::Message
+/* @@protoc_insertion_point(class_definition:outer_alias_message) */ {
+ public:
+  inline outer_alias_message() : outer_alias_message(nullptr) {}
+  ~outer_alias_message() override;
+  template <typename = void>
+  explicit PROTOBUF_CONSTEXPR outer_alias_message(
+      ::google::protobuf::internal::ConstantInitialized);
+
+  inline outer_alias_message(const outer_alias_message& from) : outer_alias_message(nullptr, from) {}
+  inline outer_alias_message(outer_alias_message&& from) noexcept
+      : outer_alias_message(nullptr, std::move(from)) {}
+  inline outer_alias_message& operator=(const outer_alias_message& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  inline outer_alias_message& operator=(outer_alias_message&& from) noexcept {
+    if (this == &from) return *this;
+    if (GetArena() == from.GetArena()
+#ifdef PROTOBUF_FORCE_COPY_IN_MOVE
+        && GetArena() != nullptr
+#endif  // !PROTOBUF_FORCE_COPY_IN_MOVE
+    ) {
+      InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const
+      ABSL_ATTRIBUTE_LIFETIME_BOUND {
+    return _internal_metadata_.unknown_fields<::google::protobuf::UnknownFieldSet>(::google::protobuf::UnknownFieldSet::default_instance);
+  }
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields()
+      ABSL_ATTRIBUTE_LIFETIME_BOUND {
+    return _internal_metadata_.mutable_unknown_fields<::google::protobuf::UnknownFieldSet>();
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor() {
+    return GetDescriptor();
+  }
+  static const ::google::protobuf::Descriptor* GetDescriptor() {
+    return default_instance().GetMetadata().descriptor;
+  }
+  static const ::google::protobuf::Reflection* GetReflection() {
+    return default_instance().GetMetadata().reflection;
+  }
+  static const outer_alias_message& default_instance() {
+    return *internal_default_instance();
+  }
+  static inline const outer_alias_message* internal_default_instance() {
+    return reinterpret_cast<const outer_alias_message*>(
+        &_outer_alias_message_default_instance_);
+  }
+  static constexpr int kIndexInFileMessages = 19;
+  friend void swap(outer_alias_message& a, outer_alias_message& b) { a.Swap(&b); }
+  inline void Swap(outer_alias_message* other) {
+    if (other == this) return;
+#ifdef PROTOBUF_FORCE_COPY_IN_SWAP
+    if (GetArena() != nullptr && GetArena() == other->GetArena()) {
+#else   // PROTOBUF_FORCE_COPY_IN_SWAP
+    if (GetArena() == other->GetArena()) {
+#endif  // !PROTOBUF_FORCE_COPY_IN_SWAP
+      InternalSwap(other);
+    } else {
+      ::google::protobuf::internal::GenericSwap(this, other);
+    }
+  }
+  void UnsafeArenaSwap(outer_alias_message* other) {
+    if (other == this) return;
+    ABSL_DCHECK(GetArena() == other->GetArena());
+    InternalSwap(other);
+  }
+
+  // implements Message ----------------------------------------------
+
+  outer_alias_message* New(::google::protobuf::Arena* arena = nullptr) const final {
+    return ::google::protobuf::Message::DefaultConstruct<outer_alias_message>(arena);
+  }
+  using ::google::protobuf::Message::CopyFrom;
+  void CopyFrom(const outer_alias_message& from);
+  using ::google::protobuf::Message::MergeFrom;
+  void MergeFrom(const outer_alias_message& from) { outer_alias_message::MergeImpl(*this, from); }
+
+  private:
+  static void MergeImpl(
+      ::google::protobuf::MessageLite& to_msg,
+      const ::google::protobuf::MessageLite& from_msg);
+
+  public:
+  bool IsInitialized() const {
+    return true;
+  }
+  ABSL_ATTRIBUTE_REINITIALIZES void Clear() final;
+  ::size_t ByteSizeLong() const final;
+  ::uint8_t* _InternalSerialize(
+      ::uint8_t* target,
+      ::google::protobuf::io::EpsCopyOutputStream* stream) const final;
+  int GetCachedSize() const { return _impl_._cached_size_.Get(); }
+
+  private:
+  void SharedCtor(::google::protobuf::Arena* arena);
+  void SharedDtor();
+  void InternalSwap(outer_alias_message* other);
+ private:
+  friend class ::google::protobuf::internal::AnyMetadata;
+  static ::absl::string_view FullMessageName() { return "outer_alias_message"; }
+
+ protected:
+  explicit outer_alias_message(::google::protobuf::Arena* arena);
+  outer_alias_message(::google::protobuf::Arena* arena, const outer_alias_message& from);
+  outer_alias_message(::google::protobuf::Arena* arena, outer_alias_message&& from) noexcept
+      : outer_alias_message(arena) {
+    *this = ::std::move(from);
+  }
+  const ::google::protobuf::Message::ClassData* GetClassData() const final;
+
+ public:
+  ::google::protobuf::Metadata GetMetadata() const;
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+  enum : int {
+    kInnersFieldNumber = 2,
+    kIIdFieldNumber = 1,
+  };
+  // repeated .inner_alias_message inners = 2 [(.org.xresloader.field_alias) = "Condition"];
+  int inners_size() const;
+  private:
+  int _internal_inners_size() const;
+
+  public:
+  void clear_inners() ;
+  ::inner_alias_message* mutable_inners(int index);
+  ::google::protobuf::RepeatedPtrField<::inner_alias_message>* mutable_inners();
+
+  private:
+  const ::google::protobuf::RepeatedPtrField<::inner_alias_message>& _internal_inners() const;
+  ::google::protobuf::RepeatedPtrField<::inner_alias_message>* _internal_mutable_inners();
+  public:
+  const ::inner_alias_message& inners(int index) const;
+  ::inner_alias_message* add_inners();
+  const ::google::protobuf::RepeatedPtrField<::inner_alias_message>& inners() const;
+  // int32 iId = 1 [(.org.xresloader.field_alias) = "ID"];
+  void clear_iid() ;
+  ::int32_t iid() const;
+  void set_iid(::int32_t value);
+
+  private:
+  ::int32_t _internal_iid() const;
+  void _internal_set_iid(::int32_t value);
+
+  public:
+  // @@protoc_insertion_point(class_scope:outer_alias_message)
+ private:
+  class _Internal;
+  friend class ::google::protobuf::internal::TcParser;
+  static const ::google::protobuf::internal::TcParseTable<
+      1, 2, 1,
+      0, 2>
+      _table_;
+
+  static constexpr const void* _raw_default_instance_ =
+      &_outer_alias_message_default_instance_;
+
+  friend class ::google::protobuf::MessageLite;
+  friend class ::google::protobuf::Arena;
+  template <typename T>
+  friend class ::google::protobuf::Arena::InternalHelper;
+  using InternalArenaConstructable_ = void;
+  using DestructorSkippable_ = void;
+  struct Impl_ {
+    inline explicit constexpr Impl_(
+        ::google::protobuf::internal::ConstantInitialized) noexcept;
+    inline explicit Impl_(::google::protobuf::internal::InternalVisibility visibility,
+                          ::google::protobuf::Arena* arena);
+    inline explicit Impl_(::google::protobuf::internal::InternalVisibility visibility,
+                          ::google::protobuf::Arena* arena, const Impl_& from,
+                          const outer_alias_message& from_msg);
+    ::google::protobuf::RepeatedPtrField< ::inner_alias_message > inners_;
+    ::int32_t iid_;
+    mutable ::google::protobuf::internal::CachedSize _cached_size_;
+    PROTOBUF_TSAN_DECLARE_MEMBER
+  };
+  union { Impl_ _impl_; };
   friend struct ::TableStruct_kind_2eproto;
 };
 // -------------------------------------------------------------------
@@ -7784,6 +8172,152 @@ inline void large_file_test::set_allocated_id_id(::combine_id* value) {
 
   _impl_.id_id_ = reinterpret_cast<::combine_id*>(value);
   // @@protoc_insertion_point(field_set_allocated:large_file_test.id_id)
+}
+
+// -------------------------------------------------------------------
+
+// inner_alias_message
+
+// int32 iType = 1 [(.org.xresloader.field_alias) = "Type"];
+inline void inner_alias_message::clear_itype() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.itype_ = 0;
+}
+inline ::int32_t inner_alias_message::itype() const {
+  // @@protoc_insertion_point(field_get:inner_alias_message.iType)
+  return _internal_itype();
+}
+inline void inner_alias_message::set_itype(::int32_t value) {
+  _internal_set_itype(value);
+  // @@protoc_insertion_point(field_set:inner_alias_message.iType)
+}
+inline ::int32_t inner_alias_message::_internal_itype() const {
+  ::google::protobuf::internal::TSanRead(&_impl_);
+  return _impl_.itype_;
+}
+inline void inner_alias_message::_internal_set_itype(::int32_t value) {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.itype_ = value;
+}
+
+// repeated int64 paramList = 2 [(.org.xresloader.field_alias) = "Param"];
+inline int inner_alias_message::_internal_paramlist_size() const {
+  return _internal_paramlist().size();
+}
+inline int inner_alias_message::paramlist_size() const {
+  return _internal_paramlist_size();
+}
+inline void inner_alias_message::clear_paramlist() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.paramlist_.Clear();
+}
+inline ::int64_t inner_alias_message::paramlist(int index) const {
+  // @@protoc_insertion_point(field_get:inner_alias_message.paramList)
+  return _internal_paramlist().Get(index);
+}
+inline void inner_alias_message::set_paramlist(int index, ::int64_t value) {
+  _internal_mutable_paramlist()->Set(index, value);
+  // @@protoc_insertion_point(field_set:inner_alias_message.paramList)
+}
+inline void inner_alias_message::add_paramlist(::int64_t value) {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _internal_mutable_paramlist()->Add(value);
+  // @@protoc_insertion_point(field_add:inner_alias_message.paramList)
+}
+inline const ::google::protobuf::RepeatedField<::int64_t>& inner_alias_message::paramlist() const
+    ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  // @@protoc_insertion_point(field_list:inner_alias_message.paramList)
+  return _internal_paramlist();
+}
+inline ::google::protobuf::RepeatedField<::int64_t>* inner_alias_message::mutable_paramlist()
+    ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  // @@protoc_insertion_point(field_mutable_list:inner_alias_message.paramList)
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  return _internal_mutable_paramlist();
+}
+inline const ::google::protobuf::RepeatedField<::int64_t>&
+inner_alias_message::_internal_paramlist() const {
+  ::google::protobuf::internal::TSanRead(&_impl_);
+  return _impl_.paramlist_;
+}
+inline ::google::protobuf::RepeatedField<::int64_t>* inner_alias_message::_internal_mutable_paramlist() {
+  ::google::protobuf::internal::TSanRead(&_impl_);
+  return &_impl_.paramlist_;
+}
+
+// -------------------------------------------------------------------
+
+// outer_alias_message
+
+// int32 iId = 1 [(.org.xresloader.field_alias) = "ID"];
+inline void outer_alias_message::clear_iid() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.iid_ = 0;
+}
+inline ::int32_t outer_alias_message::iid() const {
+  // @@protoc_insertion_point(field_get:outer_alias_message.iId)
+  return _internal_iid();
+}
+inline void outer_alias_message::set_iid(::int32_t value) {
+  _internal_set_iid(value);
+  // @@protoc_insertion_point(field_set:outer_alias_message.iId)
+}
+inline ::int32_t outer_alias_message::_internal_iid() const {
+  ::google::protobuf::internal::TSanRead(&_impl_);
+  return _impl_.iid_;
+}
+inline void outer_alias_message::_internal_set_iid(::int32_t value) {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.iid_ = value;
+}
+
+// repeated .inner_alias_message inners = 2 [(.org.xresloader.field_alias) = "Condition"];
+inline int outer_alias_message::_internal_inners_size() const {
+  return _internal_inners().size();
+}
+inline int outer_alias_message::inners_size() const {
+  return _internal_inners_size();
+}
+inline void outer_alias_message::clear_inners() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.inners_.Clear();
+}
+inline ::inner_alias_message* outer_alias_message::mutable_inners(int index)
+    ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  // @@protoc_insertion_point(field_mutable:outer_alias_message.inners)
+  return _internal_mutable_inners()->Mutable(index);
+}
+inline ::google::protobuf::RepeatedPtrField<::inner_alias_message>* outer_alias_message::mutable_inners()
+    ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  // @@protoc_insertion_point(field_mutable_list:outer_alias_message.inners)
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  return _internal_mutable_inners();
+}
+inline const ::inner_alias_message& outer_alias_message::inners(int index) const
+    ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  // @@protoc_insertion_point(field_get:outer_alias_message.inners)
+  return _internal_inners().Get(index);
+}
+inline ::inner_alias_message* outer_alias_message::add_inners() ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  ::inner_alias_message* _add = _internal_mutable_inners()->Add();
+  // @@protoc_insertion_point(field_add:outer_alias_message.inners)
+  return _add;
+}
+inline const ::google::protobuf::RepeatedPtrField<::inner_alias_message>& outer_alias_message::inners() const
+    ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  // @@protoc_insertion_point(field_list:outer_alias_message.inners)
+  return _internal_inners();
+}
+inline const ::google::protobuf::RepeatedPtrField<::inner_alias_message>&
+outer_alias_message::_internal_inners() const {
+  ::google::protobuf::internal::TSanRead(&_impl_);
+  return _impl_.inners_;
+}
+inline ::google::protobuf::RepeatedPtrField<::inner_alias_message>*
+outer_alias_message::_internal_mutable_inners() {
+  ::google::protobuf::internal::TSanRead(&_impl_);
+  return &_impl_.inners_;
 }
 
 #ifdef __GNUC__

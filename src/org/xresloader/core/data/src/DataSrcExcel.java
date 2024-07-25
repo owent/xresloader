@@ -27,6 +27,7 @@ public class DataSrcExcel extends DataSrcImpl {
         public int lastRowNumber = -1;
         public HashMap<String, IdentifyDescriptor> nameMapping = new HashMap<String, IdentifyDescriptor>();
         public LinkedList<IdentifyDescriptor> indexMapping = new LinkedList<IdentifyDescriptor>();
+        public HashMap<String, Boolean> identifyPrefixAvailable = new HashMap<String, Boolean>();
     }
 
     private HashMap<String, String> macros = null;
@@ -261,7 +262,7 @@ public class DataSrcExcel extends DataSrcImpl {
                     DataContainer<String> k = getStringCache("");
                     ExcelEngine.cell2s(k, rowWrapper, column_ident, res.formula);
                     IdentifyDescriptor ident = IdentifyEngine.n2i(k.get(), i);
-                    String[] multipleNames = ident.name.split("[,;|]");
+                    String[] multipleNames = ident.name.split("[,;\\|]");
                     if (multipleNames.length > 1) {
                         for (String realName : multipleNames) {
                             String trimName = realName.trim();
@@ -411,6 +412,34 @@ public class DataSrcExcel extends DataSrcImpl {
     @Override
     public IdentifyDescriptor getColumnByName(String _name) {
         return current.nameMapping.getOrDefault(_name, null);
+    }
+
+    @Override
+    public boolean containsIdentifyMappingPrefix(String _name) {
+        var ret = current.identifyPrefixAvailable.getOrDefault(_name, null);
+        if (ret != null) {
+            return ret.booleanValue();
+        }
+
+        boolean res = false;
+        for (HashMap.Entry<String, IdentifyDescriptor> ident : current.nameMapping.entrySet()) {
+            if (!ident.getKey().startsWith(_name)) {
+                continue;
+            }
+
+            if (ident.getKey().length() == _name.length()) {
+                res = true;
+                break;
+            }
+
+            if (ident.getKey().charAt(_name.length()) == '.' || ident.getKey().charAt(_name.length()) == '[') {
+                res = true;
+                break;
+            }
+        }
+
+        current.identifyPrefixAvailable.put(_name, res);
+        return res;
     }
 
     @Override

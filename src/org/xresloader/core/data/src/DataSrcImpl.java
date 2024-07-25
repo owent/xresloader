@@ -163,6 +163,10 @@ public abstract class DataSrcImpl {
         return null;
     }
 
+    public boolean containsIdentifyMappingPrefix(String _name) {
+        return false;
+    }
+
     public HashMap<String, String> getMacros() {
         return null;
     }

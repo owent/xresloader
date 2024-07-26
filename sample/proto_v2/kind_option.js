@@ -316,7 +316,8 @@ exports.files = [
             options : {
               field_alias : [
                 "Param"
-              ]
+              ],
+              field_list_min_size : "2"
             },
             type_name : "INT64"
           }
@@ -361,6 +362,17 @@ exports.files = [
               ]
             },
             type_name : "MESSAGE"
+          },
+          nest_int : {
+            name : "nest_int",
+            number : 3,
+            options : {
+              field_alias : [
+                "Nest"
+              ],
+              field_list_min_size : "2"
+            },
+            type_name : "INT32"
           }
         },
         name : "outer_alias_message"

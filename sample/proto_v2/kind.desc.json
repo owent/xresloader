@@ -416,7 +416,10 @@
           "paramList": {
             "name": "paramList",
             "number": 2,
-            "options": {"field_alias": ["Param"]},
+            "options": {
+              "field_alias": ["Param"],
+              "field_list_min_size": "2"
+            },
             "type_name": "INT64"
           }
         },
@@ -510,6 +513,15 @@
             "number": 2,
             "options": {"field_alias": ["Condition"]},
             "type_name": "MESSAGE"
+          },
+          "nest_int": {
+            "name": "nest_int",
+            "number": 3,
+            "options": {
+              "field_alias": ["Nest"],
+              "field_list_min_size": "2"
+            },
+            "type_name": "INT32"
           }
         },
         "name": "outer_alias_message"

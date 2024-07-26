@@ -773,7 +773,7 @@ class inner_alias_message final : public ::google::protobuf::Message
     kParamListFieldNumber = 2,
     kITypeFieldNumber = 1,
   };
-  // repeated int64 paramList = 2 [(.org.xresloader.field_alias) = "Param"];
+  // repeated int64 paramList = 2 [(.org.xresloader.field_alias) = "Param", (.org.xresloader.field_list_min_size) = "2"];
   int paramlist_size() const;
   private:
   int _internal_paramlist_size() const;
@@ -1656,6 +1656,7 @@ class outer_alias_message final : public ::google::protobuf::Message
   // accessors -------------------------------------------------------
   enum : int {
     kInnersFieldNumber = 2,
+    kNestIntFieldNumber = 3,
     kIIdFieldNumber = 1,
   };
   // repeated .inner_alias_message inners = 2 [(.org.xresloader.field_alias) = "Condition"];
@@ -1675,6 +1676,24 @@ class outer_alias_message final : public ::google::protobuf::Message
   const ::inner_alias_message& inners(int index) const;
   ::inner_alias_message* add_inners();
   const ::google::protobuf::RepeatedPtrField<::inner_alias_message>& inners() const;
+  // repeated int32 nest_int = 3 [(.org.xresloader.field_alias) = "Nest", (.org.xresloader.field_list_min_size) = "2"];
+  int nest_int_size() const;
+  private:
+  int _internal_nest_int_size() const;
+
+  public:
+  void clear_nest_int() ;
+  ::int32_t nest_int(int index) const;
+  void set_nest_int(int index, ::int32_t value);
+  void add_nest_int(::int32_t value);
+  const ::google::protobuf::RepeatedField<::int32_t>& nest_int() const;
+  ::google::protobuf::RepeatedField<::int32_t>* mutable_nest_int();
+
+  private:
+  const ::google::protobuf::RepeatedField<::int32_t>& _internal_nest_int() const;
+  ::google::protobuf::RepeatedField<::int32_t>* _internal_mutable_nest_int();
+
+  public:
   // int32 iId = 1 [(.org.xresloader.field_alias) = "ID"];
   void clear_iid() ;
   ::int32_t iid() const;
@@ -1690,7 +1709,7 @@ class outer_alias_message final : public ::google::protobuf::Message
   class _Internal;
   friend class ::google::protobuf::internal::TcParser;
   static const ::google::protobuf::internal::TcParseTable<
-      1, 2, 1,
+      2, 3, 1,
       0, 2>
       _table_;
 
@@ -1712,6 +1731,8 @@ class outer_alias_message final : public ::google::protobuf::Message
                           ::google::protobuf::Arena* arena, const Impl_& from,
                           const outer_alias_message& from_msg);
     ::google::protobuf::RepeatedPtrField< ::inner_alias_message > inners_;
+    ::google::protobuf::RepeatedField<::int32_t> nest_int_;
+    mutable ::google::protobuf::internal::CachedSize _nest_int_cached_byte_size_;
     ::int32_t iid_;
     mutable ::google::protobuf::internal::CachedSize _cached_size_;
     PROTOBUF_TSAN_DECLARE_MEMBER
@@ -8200,7 +8221,7 @@ inline void inner_alias_message::_internal_set_itype(::int32_t value) {
   _impl_.itype_ = value;
 }
 
-// repeated int64 paramList = 2 [(.org.xresloader.field_alias) = "Param"];
+// repeated int64 paramList = 2 [(.org.xresloader.field_alias) = "Param", (.org.xresloader.field_list_min_size) = "2"];
 inline int inner_alias_message::_internal_paramlist_size() const {
   return _internal_paramlist().size();
 }
@@ -8318,6 +8339,51 @@ inline ::google::protobuf::RepeatedPtrField<::inner_alias_message>*
 outer_alias_message::_internal_mutable_inners() {
   ::google::protobuf::internal::TSanRead(&_impl_);
   return &_impl_.inners_;
+}
+
+// repeated int32 nest_int = 3 [(.org.xresloader.field_alias) = "Nest", (.org.xresloader.field_list_min_size) = "2"];
+inline int outer_alias_message::_internal_nest_int_size() const {
+  return _internal_nest_int().size();
+}
+inline int outer_alias_message::nest_int_size() const {
+  return _internal_nest_int_size();
+}
+inline void outer_alias_message::clear_nest_int() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.nest_int_.Clear();
+}
+inline ::int32_t outer_alias_message::nest_int(int index) const {
+  // @@protoc_insertion_point(field_get:outer_alias_message.nest_int)
+  return _internal_nest_int().Get(index);
+}
+inline void outer_alias_message::set_nest_int(int index, ::int32_t value) {
+  _internal_mutable_nest_int()->Set(index, value);
+  // @@protoc_insertion_point(field_set:outer_alias_message.nest_int)
+}
+inline void outer_alias_message::add_nest_int(::int32_t value) {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _internal_mutable_nest_int()->Add(value);
+  // @@protoc_insertion_point(field_add:outer_alias_message.nest_int)
+}
+inline const ::google::protobuf::RepeatedField<::int32_t>& outer_alias_message::nest_int() const
+    ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  // @@protoc_insertion_point(field_list:outer_alias_message.nest_int)
+  return _internal_nest_int();
+}
+inline ::google::protobuf::RepeatedField<::int32_t>* outer_alias_message::mutable_nest_int()
+    ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  // @@protoc_insertion_point(field_mutable_list:outer_alias_message.nest_int)
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  return _internal_mutable_nest_int();
+}
+inline const ::google::protobuf::RepeatedField<::int32_t>&
+outer_alias_message::_internal_nest_int() const {
+  ::google::protobuf::internal::TSanRead(&_impl_);
+  return _impl_.nest_int_;
+}
+inline ::google::protobuf::RepeatedField<::int32_t>* outer_alias_message::_internal_mutable_nest_int() {
+  ::google::protobuf::internal::TSanRead(&_impl_);
+  return &_impl_.nest_int_;
 }
 
 #ifdef __GNUC__

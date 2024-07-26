@@ -204,6 +204,8 @@ PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT
 inline constexpr outer_alias_message::Impl_::Impl_(
     ::_pbi::ConstantInitialized) noexcept
       : inners_{},
+        nest_int_{},
+        _nest_int_cached_byte_size_{0},
         iid_{0},
         _cached_size_{0} {}
 
@@ -782,6 +784,7 @@ const ::uint32_t
         ~0u,  // no sizeof(Split)
         PROTOBUF_FIELD_OFFSET(::outer_alias_message, _impl_.iid_),
         PROTOBUF_FIELD_OFFSET(::outer_alias_message, _impl_.inners_),
+        PROTOBUF_FIELD_OFFSET(::outer_alias_message, _impl_.nest_int_),
 };
 
 static const ::_pbi::MigrationSchema
@@ -931,12 +934,12 @@ const char descriptor_table_protodef_kind_2eproto[] ABSL_ATTRIBUTE_SECTION_VARIA
     "\017large_file_test\022\n\n\002id\030\001 \001(\r\022\020\n\010i32value"
     "\030\002 \001(\005\022\020\n\010u64value\030\003 \001(\004\022\020\n\010f64value\030\004 \001"
     "(\001\022\020\n\010f32value\030\005 \001(\002\022\017\n\007szvalue\030\006 \001(\t\022\032\n"
-    "\005id_id\030\007 \001(\0132\013.combine_id\"J\n\023inner_alias"
-    "_message\022\026\n\005iType\030\001 \001(\005B\007\242\?\004Type\022\033\n\tpara"
-    "mList\030\002 \003(\003B\010\242\?\005Param\"]\n\023outer_alias_mes"
-    "sage\022\022\n\003iId\030\001 \001(\005B\005\242\?\002ID\0222\n\006inners\030\002 \003(\013"
-    "2\024.inner_alias_messageB\014\242\?\tConditionb\006pr"
-    "oto3"
+    "\005id_id\030\007 \001(\0132\013.combine_id\"N\n\023inner_alias"
+    "_message\022\026\n\005iType\030\001 \001(\005B\007\242\?\004Type\022\037\n\tpara"
+    "mList\030\002 \003(\003B\014\242\?\005Param\332\?\0012\"|\n\023outer_alias"
+    "_message\022\022\n\003iId\030\001 \001(\005B\005\242\?\002ID\0222\n\006inners\030\002"
+    " \003(\0132\024.inner_alias_messageB\014\242\?\tCondition"
+    "\022\035\n\010nest_int\030\003 \003(\005B\013\242\?\004Nest\332\?\0012b\006proto3"
 };
 static const ::_pbi::DescriptorTable* const descriptor_table_kind_2eproto_deps[6] =
     {
@@ -951,7 +954,7 @@ static ::absl::once_flag descriptor_table_kind_2eproto_once;
 PROTOBUF_CONSTINIT const ::_pbi::DescriptorTable descriptor_table_kind_2eproto = {
     false,
     false,
-    4204,
+    4239,
     descriptor_table_protodef_kind_2eproto,
     "kind.proto",
     &descriptor_table_kind_2eproto_once,
@@ -6350,7 +6353,7 @@ const ::_pbi::TcParseTable<1, 2, 0, 0, 2> inner_alias_message::_table_ = {
     ::_pbi::TcParser::GetTable<::inner_alias_message>(),  // to_prefetch
     #endif  // PROTOBUF_PREFETCH_PARSE_TABLE
   }, {{
-    // repeated int64 paramList = 2 [(.org.xresloader.field_alias) = "Param"];
+    // repeated int64 paramList = 2 [(.org.xresloader.field_alias) = "Param", (.org.xresloader.field_list_min_size) = "2"];
     {::_pbi::TcParser::FastV64P1,
      {18, 63, 0, PROTOBUF_FIELD_OFFSET(inner_alias_message, _impl_.paramlist_)}},
     // int32 iType = 1 [(.org.xresloader.field_alias) = "Type"];
@@ -6362,7 +6365,7 @@ const ::_pbi::TcParseTable<1, 2, 0, 0, 2> inner_alias_message::_table_ = {
     // int32 iType = 1 [(.org.xresloader.field_alias) = "Type"];
     {PROTOBUF_FIELD_OFFSET(inner_alias_message, _impl_.itype_), 0, 0,
     (0 | ::_fl::kFcSingular | ::_fl::kInt32)},
-    // repeated int64 paramList = 2 [(.org.xresloader.field_alias) = "Param"];
+    // repeated int64 paramList = 2 [(.org.xresloader.field_alias) = "Param", (.org.xresloader.field_list_min_size) = "2"];
     {PROTOBUF_FIELD_OFFSET(inner_alias_message, _impl_.paramlist_), 0, 0,
     (0 | ::_fl::kFcRepeated | ::_fl::kPackedInt64)},
   }},
@@ -6397,7 +6400,7 @@ PROTOBUF_NOINLINE void inner_alias_message::Clear() {
             stream, this->_internal_itype(), target);
   }
 
-  // repeated int64 paramList = 2 [(.org.xresloader.field_alias) = "Param"];
+  // repeated int64 paramList = 2 [(.org.xresloader.field_alias) = "Param", (.org.xresloader.field_list_min_size) = "2"];
   {
     int byte_size = _impl_._paramlist_cached_byte_size_.Get();
     if (byte_size > 0) {
@@ -6424,7 +6427,7 @@ PROTOBUF_NOINLINE void inner_alias_message::Clear() {
   (void) cached_has_bits;
 
   ::_pbi::Prefetch5LinesFrom7Lines(reinterpret_cast<const void*>(this));
-  // repeated int64 paramList = 2 [(.org.xresloader.field_alias) = "Param"];
+  // repeated int64 paramList = 2 [(.org.xresloader.field_alias) = "Param", (.org.xresloader.field_list_min_size) = "2"];
   {
     std::size_t data_size = ::_pbi::WireFormatLite::Int64Size(
         this->_internal_paramlist())
@@ -6495,6 +6498,8 @@ inline PROTOBUF_NDEBUG_INLINE outer_alias_message::Impl_::Impl_(
     ::google::protobuf::internal::InternalVisibility visibility, ::google::protobuf::Arena* arena,
     const Impl_& from, const ::outer_alias_message& from_msg)
       : inners_{visibility, arena, from.inners_},
+        nest_int_{visibility, arena, from.nest_int_},
+        _nest_int_cached_byte_size_{0},
         _cached_size_{0} {}
 
 outer_alias_message::outer_alias_message(
@@ -6514,6 +6519,8 @@ inline PROTOBUF_NDEBUG_INLINE outer_alias_message::Impl_::Impl_(
     ::google::protobuf::internal::InternalVisibility visibility,
     ::google::protobuf::Arena* arena)
       : inners_{visibility, arena},
+        nest_int_{visibility, arena},
+        _nest_int_cached_byte_size_{0},
         _cached_size_{0} {}
 
 inline void outer_alias_message::SharedCtor(::_pb::Arena* arena) {
@@ -6551,15 +6558,15 @@ outer_alias_message::GetClassData() const {
   return _data_.base();
 }
 PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1
-const ::_pbi::TcParseTable<1, 2, 1, 0, 2> outer_alias_message::_table_ = {
+const ::_pbi::TcParseTable<2, 3, 1, 0, 2> outer_alias_message::_table_ = {
   {
     0,  // no _has_bits_
     0, // no _extensions_
-    2, 8,  // max_field_number, fast_idx_mask
+    3, 24,  // max_field_number, fast_idx_mask
     offsetof(decltype(_table_), field_lookup_table),
-    4294967292,  // skipmap
+    4294967288,  // skipmap
     offsetof(decltype(_table_), field_entries),
-    2,  // num_field_entries
+    3,  // num_field_entries
     1,  // num_aux_entries
     offsetof(decltype(_table_), aux_entries),
     &_outer_alias_message_default_instance_._instance,
@@ -6569,12 +6576,16 @@ const ::_pbi::TcParseTable<1, 2, 1, 0, 2> outer_alias_message::_table_ = {
     ::_pbi::TcParser::GetTable<::outer_alias_message>(),  // to_prefetch
     #endif  // PROTOBUF_PREFETCH_PARSE_TABLE
   }, {{
-    // repeated .inner_alias_message inners = 2 [(.org.xresloader.field_alias) = "Condition"];
-    {::_pbi::TcParser::FastMtR1,
-     {18, 63, 0, PROTOBUF_FIELD_OFFSET(outer_alias_message, _impl_.inners_)}},
+    {::_pbi::TcParser::MiniParse, {}},
     // int32 iId = 1 [(.org.xresloader.field_alias) = "ID"];
     {::_pbi::TcParser::SingularVarintNoZag1<::uint32_t, offsetof(outer_alias_message, _impl_.iid_), 63>(),
      {8, 63, 0, PROTOBUF_FIELD_OFFSET(outer_alias_message, _impl_.iid_)}},
+    // repeated .inner_alias_message inners = 2 [(.org.xresloader.field_alias) = "Condition"];
+    {::_pbi::TcParser::FastMtR1,
+     {18, 63, 0, PROTOBUF_FIELD_OFFSET(outer_alias_message, _impl_.inners_)}},
+    // repeated int32 nest_int = 3 [(.org.xresloader.field_alias) = "Nest", (.org.xresloader.field_list_min_size) = "2"];
+    {::_pbi::TcParser::FastV32P1,
+     {26, 63, 0, PROTOBUF_FIELD_OFFSET(outer_alias_message, _impl_.nest_int_)}},
   }}, {{
     65535, 65535
   }}, {{
@@ -6584,6 +6595,9 @@ const ::_pbi::TcParseTable<1, 2, 1, 0, 2> outer_alias_message::_table_ = {
     // repeated .inner_alias_message inners = 2 [(.org.xresloader.field_alias) = "Condition"];
     {PROTOBUF_FIELD_OFFSET(outer_alias_message, _impl_.inners_), 0, 0,
     (0 | ::_fl::kFcRepeated | ::_fl::kMessage | ::_fl::kTvTable)},
+    // repeated int32 nest_int = 3 [(.org.xresloader.field_alias) = "Nest", (.org.xresloader.field_list_min_size) = "2"];
+    {PROTOBUF_FIELD_OFFSET(outer_alias_message, _impl_.nest_int_), 0, 0,
+    (0 | ::_fl::kFcRepeated | ::_fl::kPackedInt32)},
   }}, {{
     {::_pbi::TcParser::GetTable<::inner_alias_message>()},
   }}, {{
@@ -6598,6 +6612,7 @@ PROTOBUF_NOINLINE void outer_alias_message::Clear() {
   (void) cached_has_bits;
 
   _impl_.inners_.Clear();
+  _impl_.nest_int_.Clear();
   _impl_.iid_ = 0;
   _internal_metadata_.Clear<::google::protobuf::UnknownFieldSet>();
 }
@@ -6627,6 +6642,15 @@ PROTOBUF_NOINLINE void outer_alias_message::Clear() {
             target, stream);
   }
 
+  // repeated int32 nest_int = 3 [(.org.xresloader.field_alias) = "Nest", (.org.xresloader.field_list_min_size) = "2"];
+  {
+    int byte_size = _impl_._nest_int_cached_byte_size_.Get();
+    if (byte_size > 0) {
+      target = stream->WriteInt32Packed(
+          3, _internal_nest_int(), byte_size, target);
+    }
+  }
+
   if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
     target =
         ::_pbi::WireFormat::InternalSerializeUnknownFieldsToArray(
@@ -6650,6 +6674,19 @@ PROTOBUF_NOINLINE void outer_alias_message::Clear() {
   for (const auto& msg : this->_internal_inners()) {
     total_size += ::google::protobuf::internal::WireFormatLite::MessageSize(msg);
   }
+  // repeated int32 nest_int = 3 [(.org.xresloader.field_alias) = "Nest", (.org.xresloader.field_list_min_size) = "2"];
+  {
+    std::size_t data_size = ::_pbi::WireFormatLite::Int32Size(
+        this->_internal_nest_int())
+    ;
+    _impl_._nest_int_cached_byte_size_.Set(::_pbi::ToCachedSize(data_size));
+    std::size_t tag_size = data_size == 0
+        ? 0
+        : 1 + ::_pbi::WireFormatLite::Int32Size(
+                            static_cast<int32_t>(data_size))
+    ;
+    total_size += tag_size + data_size;
+  }
   // int32 iId = 1 [(.org.xresloader.field_alias) = "ID"];
   if (this->_internal_iid() != 0) {
     total_size += ::_pbi::WireFormatLite::Int32SizePlusOne(
@@ -6670,6 +6707,7 @@ void outer_alias_message::MergeImpl(::google::protobuf::MessageLite& to_msg, con
 
   _this->_internal_mutable_inners()->MergeFrom(
       from._internal_inners());
+  _this->_internal_mutable_nest_int()->MergeFrom(from._internal_nest_int());
   if (from._internal_iid() != 0) {
     _this->_impl_.iid_ = from._impl_.iid_;
   }
@@ -6688,6 +6726,7 @@ void outer_alias_message::InternalSwap(outer_alias_message* PROTOBUF_RESTRICT ot
   using std::swap;
   _internal_metadata_.InternalSwap(&other->_internal_metadata_);
   _impl_.inners_.InternalSwap(&other->_impl_.inners_);
+  _impl_.nest_int_.InternalSwap(&other->_impl_.nest_int_);
         swap(_impl_.iid_, other->_impl_.iid_);
 }
 

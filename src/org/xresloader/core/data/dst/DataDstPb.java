@@ -1035,7 +1035,7 @@ public class DataDstPb extends DataDstImpl {
 
         currentMsgDesc = get_message_proto(cachePbs, SchemeConf.getInstance().getProtoName());
         if (null == currentMsgDesc) {
-            this.setLastErrorMessage("Can not find protocol message %s", SchemeConf.getInstance().getProtoName());
+            this.logErrorMessage("Can not find protocol message %s", SchemeConf.getInstance().getProtoName());
             return false;
         }
 
@@ -1055,7 +1055,7 @@ public class DataDstPb extends DataDstImpl {
                         oneFileCustomValidatorMode ? cachePbs.oneCustomValidatorFiles
                                 : cachePbs.mixedCustomValidatorFiles);
                 if (null == validatorSet) {
-                    this.setLastErrorMessage("Can not build custom validators from file \"%s\"",
+                    this.logErrorMessage("Can not build custom validators from file \"%s\"",
                             ruleFilePath);
                     return false;
                 }
@@ -1465,7 +1465,7 @@ public class DataDstPb extends DataDstImpl {
         if (!isMissing && oneof != null && oneofField.containsKey(oneof.getFullName())) {
             String old_field = oneofField.get(oneof.getFullName());
             if (old_field != null) {
-                setLastErrorMessage(
+                this.logErrorMessage(
                         "Field \"%s\" in oneof descriptor \"%s\" already exists, can not add another field \"%s\" with the same oneof descriptor",
                         old_field, oneof.getFullName(), fd.getName());
                 throw new ConvException(getLastErrorMessage());
@@ -1841,7 +1841,7 @@ public class DataDstPb extends DataDstImpl {
         // 索引oneof
         for (Descriptors.OneofDescriptor fd : desc.getOneofs()) {
             if (node.getTypeDescriptor() == null) {
-                setLastErrorMessage(
+                this.logErrorMessage(
                         "Type descriptor \"%s\" not found, it's probably a BUG, please report to %s, current version: %s",
                         node.getFullName(), ProgramOptions.getReportUrl(), ProgramOptions.getInstance().getVersion());
                 throw new ConvException(getLastErrorMessage());
@@ -1849,7 +1849,7 @@ public class DataDstPb extends DataDstImpl {
 
             DataDstOneofDescriptor oneof_inner_desc = node.getTypeDescriptor().oneofs.getOrDefault(fd.getName(), null);
             if (oneof_inner_desc == null) {
-                setLastErrorMessage(
+                this.logErrorMessage(
                         "Oneof descriptor \"%s\" not found in type descriptor \"%s\", it's probably a BUG, please report to %s, current version: %s",
                         fd.getFullName(), node.getFullName(), ProgramOptions.getReportUrl(),
                         ProgramOptions.getInstance().getVersion());
@@ -1866,7 +1866,7 @@ public class DataDstPb extends DataDstImpl {
 
             String old_field = oneofField.getOrDefault(fd.getFullName(), null);
             if (old_field != null) {
-                setLastErrorMessage(
+                this.logErrorMessage(
                         "Field \"%s\" in oneof descriptor \"%s\" already exists, can not add the oneof writer again",
                         old_field, fd.getFullName());
                 throw new ConvException(getLastErrorMessage());
@@ -1901,10 +1901,10 @@ public class DataDstPb extends DataDstImpl {
 
             if (!missingFieldDesc.isEmpty() || !missingOneofDesc.isEmpty()) {
                 if (prefix.isEmpty()) {
-                    setLastErrorMessage("Message %s can not find%s%s in data source", desc.getFullName(),
+                    this.logErrorMessage("Message %s can not find%s%s in data source", desc.getFullName(),
                             missingFieldDesc, missingOneofDesc);
                 } else {
-                    setLastErrorMessage("Message %s in %s can not find%s%s in data source", desc.getFullName(), prefix,
+                    this.logErrorMessage("Message %s in %s can not find%s%s in data source", desc.getFullName(), prefix,
                             missingFieldDesc, missingOneofDesc);
                 }
                 throw new ConvException(getLastErrorMessage());
@@ -1944,14 +1944,23 @@ public class DataDstPb extends DataDstImpl {
         try {
             return root.build().toByteString();
         } catch (Exception e) {
-            this.logErrorMessage("serialize failed. %s", e.getMessage());
+            this.logErrorMessage("Serialize failed. %s", e.getMessage());
             return null;
         }
     }
 
-    private Object getDefault(DynamicMessage.Builder builder, DataDstFieldDescriptor field) {
+    private Object getDefault(DynamicMessage.Builder builder, DataDstFieldDescriptor field, int listIndex)
+            throws ConvException {
         Descriptors.FieldDescriptor fd = (Descriptors.FieldDescriptor) field.getRawDescriptor();
         Object val = null;
+        if (field.isList() && field.getListExtension() != null
+                && field.getListExtension().minSize >= listIndex + 1) {
+            this.logErrorMessage(
+                    "Field \"%s\" in \"%s\" has set field_list_min_size %d, which is not allowed to be auto filled with default value.",
+                    field.getName(), fd.getContainingType().getFullName(),
+                    field.getListExtension().minSize);
+            throw new ConvException(getLastErrorMessage());
+        }
         switch (fd.getType()) {
             case DOUBLE:
                 val = Double.valueOf(0.0);
@@ -1993,6 +2002,13 @@ public class DataDstPb extends DataDstImpl {
                     for (DataDstFieldDescriptor subField : field.getTypeDescriptor().getSortedFields()) {
                         if (subField.isRequired()) {
                             dumpDefault(subnode, subField, 0);
+                        } else if (subField.isList() && subField.getListExtension() != null
+                                && subField.getListExtension().minSize > 0) {
+                            this.logErrorMessage(
+                                    "Field \"%s\" in \"%s\" has set field_list_min_size %d, which is not allowed to be auto filled with default value.",
+                                    subField.getName(), fd.getFullName(),
+                                    subField.getListExtension().minSize);
+                            throw new ConvException(getLastErrorMessage());
                         }
                     }
 
@@ -2144,7 +2160,7 @@ public class DataDstPb extends DataDstImpl {
 
     private void dumpValue(DynamicMessage.Builder builder, DataDstFieldDescriptor field, Object val, int index,
             DataRowContext rowContext,
-            String fieldPath) {
+            String fieldPath) throws ConvException {
         DataDstWriterNode.ListStripRule stripListRule = field.getListStripRule();
         Descriptors.FieldDescriptor fd = (Descriptors.FieldDescriptor) field.getRawDescriptor();
 
@@ -2153,7 +2169,7 @@ public class DataDstPb extends DataDstImpl {
                         || stripListRule == DataDstWriterNode.ListStripRule.STRIP_TAIL)) {
             int fill_default_size = builder.getRepeatedFieldCount(fd);
             for (int i = fill_default_size; i < index; ++i) {
-                Object defaultVal = getDefault(builder, field);
+                Object defaultVal = getDefault(builder, field, i);
                 if (defaultVal != null) {
                     builder.addRepeatedField(fd, defaultVal);
                 }
@@ -2225,8 +2241,9 @@ public class DataDstPb extends DataDstImpl {
         builder.clearOneof((Descriptors.OneofDescriptor) oneof.getRawDescriptor());
     }
 
-    private void dumpDefault(DynamicMessage.Builder builder, DataDstFieldDescriptor field, int index) {
-        Object val = getDefault(builder, field);
+    private void dumpDefault(DynamicMessage.Builder builder, DataDstFieldDescriptor field, int index)
+            throws ConvException {
+        Object val = getDefault(builder, field, index);
         if (val != null) {
             dumpValue(builder, field, val, index, null, "");
         }
@@ -2667,7 +2684,7 @@ public class DataDstPb extends DataDstImpl {
                     if (stripListRule == DataDstWriterNode.ListStripRule.STRIP_NOTHING
                             || stripListRule == DataDstWriterNode.ListStripRule.STRIP_TAIL) {
                         while (builder.getRepeatedFieldCount(fd) < index) {
-                            builder.addRepeatedField(fd, getDefault(builder, field));
+                            builder.addRepeatedField(fd, getDefault(builder, field, builder.getRepeatedFieldCount(fd)));
                         }
                     }
 
@@ -2702,7 +2719,12 @@ public class DataDstPb extends DataDstImpl {
                     }
                 }
             } else if (field.getListStripRule() == DataDstWriterNode.ListStripRule.STRIP_NOTHING) {
-                builder.addRepeatedField(fd, getDefault(builder, field));
+                if (null != maybeFromNode && maybeFromNode.getListIndex() >= 0) {
+                    int index = maybeFromNode.getListIndex();
+                    while (builder.getRepeatedFieldCount(fd) <= index) {
+                        builder.addRepeatedField(fd, getDefault(builder, field, builder.getRepeatedFieldCount(fd)));
+                    }
+                }
             } else {
                 ret = false;
             }

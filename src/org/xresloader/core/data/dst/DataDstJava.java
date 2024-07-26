@@ -272,7 +272,7 @@ public abstract class DataDstJava extends DataDstImpl {
             throws ConvException {
         Object val = null;
         if (field.isList() && listIndex >= 0 && field.getListExtension() != null
-                && field.getListExtension().minSize >= listIndex + 1) {
+                && field.getListExtension().strictSize && field.getListExtension().minSize >= listIndex + 1) {
             if (container != null) {
                 this.logErrorMessage(
                         "Field \"%s\" in \"%s\" has set field_list_min_size %d, which is not allowed to be auto filled with default value.",
@@ -318,6 +318,7 @@ public abstract class DataDstJava extends DataDstImpl {
                         dumpDefault(sub_msg, field
                                 .getTypeDescriptor(), sub_item.getValue(), 0);
                     } else if (sub_item.getValue().isList() && sub_item.getValue().getListExtension() != null
+                            && sub_item.getValue().getListExtension().strictSize
                             && sub_item.getValue().getListExtension().minSize > 0) {
                         this.logErrorMessage(
                                 "Field \"%s\" in \"%s\" has set field_list_min_size %d, which is not allowed to be auto filled with default value.",

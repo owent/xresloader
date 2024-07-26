@@ -50,6 +50,7 @@ public class DataDstWriterNode {
         public ListStripRule stripOption = ListStripRule.DEFAULT;
         public int minSize = 0;
         public int maxSize = 0;
+        public boolean strictSize = false;
     }
 
     static public class DataDstFieldExt {

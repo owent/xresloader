@@ -697,6 +697,10 @@ public class DataDstPb extends DataDstImpl {
                     }
                 }
             }
+            if (fd.getOptions().hasExtension(Xresloader.fieldListStrictSize)) {
+                child_field.mutableExtension()
+                        .mutableList().strictSize = fd.getOptions().getExtension(Xresloader.fieldListStrictSize);
+            }
         }
 
         if (gen == null) {
@@ -1954,7 +1958,7 @@ public class DataDstPb extends DataDstImpl {
         Descriptors.FieldDescriptor fd = (Descriptors.FieldDescriptor) field.getRawDescriptor();
         Object val = null;
         if (field.isList() && field.getListExtension() != null
-                && field.getListExtension().minSize >= listIndex + 1) {
+                && field.getListExtension().strictSize && field.getListExtension().minSize >= listIndex + 1) {
             this.logErrorMessage(
                     "Field \"%s\" in \"%s\" has set field_list_min_size %d, which is not allowed to be auto filled with default value.",
                     field.getName(), fd.getContainingType().getFullName(),
@@ -2003,7 +2007,7 @@ public class DataDstPb extends DataDstImpl {
                         if (subField.isRequired()) {
                             dumpDefault(subnode, subField, 0);
                         } else if (subField.isList() && subField.getListExtension() != null
-                                && subField.getListExtension().minSize > 0) {
+                                && subField.getListExtension().strictSize && subField.getListExtension().minSize > 0) {
                             this.logErrorMessage(
                                     "Field \"%s\" in \"%s\" has set field_list_min_size %d, which is not allowed to be auto filled with default value.",
                                     subField.getName(), fd.getFullName(),

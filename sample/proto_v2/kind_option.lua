@@ -46,6 +46,12 @@ local const_res = {
               name = "int_arr",
               number = 2,
               options = {
+                field_list_max_size = "3",
+                field_list_min_size = "game_const_config.EN_GCC_UNKNOWN",
+                field_list_strip_option = {
+                  name = "LIST_STRIP_NOTHING",
+                  number = 1,
+                },
                 packed = true,
               },
               type_name = "INT32",
@@ -97,6 +103,15 @@ local const_res = {
                 field_separator = "|",
               },
               type_name = "MESSAGE",
+            },
+            test_plain_int_arr = {
+              name = "test_plain_int_arr",
+              number = 3,
+              options = {
+                field_list_max_size = "3",
+                field_list_min_size = "1",
+              },
+              type_name = "INT32",
             },
             test_plain_msg = {
               name = "test_plain_msg",
@@ -284,6 +299,32 @@ local const_res = {
           },
           name = "event_rule_item",
         },
+        inner_alias_message = {
+          field = {
+            iType = {
+              name = "iType",
+              number = 1,
+              options = {
+                field_alias = {
+                  "Type",
+                },
+              },
+              type_name = "INT32",
+            },
+            paramList = {
+              name = "paramList",
+              number = 2,
+              options = {
+                field_alias = {
+                  "Param",
+                },
+                field_list_min_size = "2",
+              },
+              type_name = "INT64",
+            },
+          },
+          name = "inner_alias_message",
+        },
         keep_or_strip_empty_list_cfg = {
           field = {
             id = {
@@ -300,6 +341,42 @@ local const_res = {
           options = {
             helper = "helper",
           },
+        },
+        outer_alias_message = {
+          field = {
+            iId = {
+              name = "iId",
+              number = 1,
+              options = {
+                field_alias = {
+                  "ID",
+                },
+              },
+              type_name = "INT32",
+            },
+            inners = {
+              name = "inners",
+              number = 2,
+              options = {
+                field_alias = {
+                  "Condition",
+                },
+              },
+              type_name = "MESSAGE",
+            },
+            nest_int = {
+              name = "nest_int",
+              number = 3,
+              options = {
+                field_alias = {
+                  "Nest",
+                },
+                field_list_min_size = "2",
+              },
+              type_name = "INT32",
+            },
+          },
+          name = "outer_alias_message",
         },
         process_by_script = {
           enum_type = {

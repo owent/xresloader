@@ -11,6 +11,8 @@ import org.xresloader.core.engine.ExcelEngine;
 import org.xresloader.core.engine.IdentifyDescriptor;
 import org.xresloader.core.scheme.SchemeConf;
 
+import com.google.protobuf.Descriptors;
+
 import java.nio.ByteBuffer;
 import java.nio.charset.Charset;
 import java.security.MessageDigest;
@@ -265,8 +267,26 @@ public abstract class DataDstJava extends DataDstImpl {
         }
     }
 
-    private Object getDefault(DataDstWriterNode.DataDstFieldDescriptor field) {
+    private Object getDefault(DataDstWriterNode.DataDstTypeDescriptor container,
+            DataDstWriterNode.DataDstFieldDescriptor field, int listIndex)
+            throws ConvException {
         Object val = null;
+        if (field.isList() && listIndex >= 0 && field.getListExtension() != null
+                && field.getListExtension().strictSize && field.getListExtension().minSize >= listIndex + 1) {
+            if (container != null) {
+                this.logErrorMessage(
+                        "Field \"%s\" in \"%s\" has set field_list_min_size %d, which is not allowed to be auto filled with default value.",
+                        field.getName(), container.getFullName(),
+                        field.getListExtension().minSize);
+            } else {
+                this.logErrorMessage(
+                        "Field \"%s\" has set field_list_min_size %d, which is not allowed to be auto filled with default value.",
+                        field.getName(),
+                        field.getListExtension().minSize);
+            }
+            throw new ConvException(getLastErrorMessage());
+        }
+
         switch (field.getType()) {
             case INT:
                 val = Integer.valueOf(0);
@@ -295,7 +315,16 @@ public abstract class DataDstJava extends DataDstImpl {
                         .getTypeDescriptor().fields.entrySet()) {
                     // 仅仅Required需要导出默认值
                     if (sub_item.getValue().isRequired()) {
-                        dumpDefault(sub_msg, sub_item.getValue());
+                        dumpDefault(sub_msg, field
+                                .getTypeDescriptor(), sub_item.getValue(), 0);
+                    } else if (sub_item.getValue().isList() && sub_item.getValue().getListExtension() != null
+                            && sub_item.getValue().getListExtension().strictSize
+                            && sub_item.getValue().getListExtension().minSize > 0) {
+                        this.logErrorMessage(
+                                "Field \"%s\" in \"%s\" has set field_list_min_size %d, which is not allowed to be auto filled with default value.",
+                                sub_item.getValue().getName(), field.getTypeDescriptor().getFullName(),
+                                sub_item.getValue().getListExtension().minSize);
+                        throw new ConvException(getLastErrorMessage());
                     }
                 }
                 val = sub_msg;
@@ -427,13 +456,17 @@ public abstract class DataDstJava extends DataDstImpl {
         return val;
     }
 
-    private void dumpDefault(HashMap<String, Object> builder, DataDstWriterNode.DataDstChildrenNode as_child) {
-        dumpDefault(builder, as_child.innerFieldDesc);
+    private void dumpDefault(HashMap<String, Object> builder, DataDstWriterNode.DataDstTypeDescriptor container,
+            DataDstWriterNode.DataDstChildrenNode as_child, int listIndex)
+            throws ConvException {
+        dumpDefault(builder, container, as_child.innerFieldDesc, listIndex);
     }
 
     @SuppressWarnings("unchecked")
-    private void dumpDefault(HashMap<String, Object> builder, DataDstWriterNode.DataDstFieldDescriptor field) {
-        Object val = getDefault(field);
+    private void dumpDefault(HashMap<String, Object> builder, DataDstWriterNode.DataDstTypeDescriptor container,
+            DataDstWriterNode.DataDstFieldDescriptor field, int listIndex)
+            throws ConvException {
+        Object val = getDefault(container, field, listIndex);
         if (val == null) {
             return;
         }
@@ -481,7 +514,8 @@ public abstract class DataDstJava extends DataDstImpl {
                 String subFieldPath = String.format("%s.%s", fieldPath, c.getKey());
 
                 for (DataDstWriterNode child : c.getValue().nodes) {
-                    if (dumpPlainField(builder, child.identify, child.getOneofDescriptor(), child, rowContext,
+                    if (dumpPlainField(builder, node.getTypeDescriptor(), child.identify, child.getOneofDescriptor(),
+                            child, rowContext,
                             subFieldPath)) {
                         ret = true;
                         fieldHasValue = true;
@@ -501,7 +535,8 @@ public abstract class DataDstJava extends DataDstImpl {
                     } else {
                         subFieldPath = String.format("%s.%s", fieldPath, c.getKey());
                     }
-                    if (dumpStandardField(builder, child, c.getValue(), rowContext, subFieldPath)) {
+                    if (dumpStandardField(builder, node.getTypeDescriptor(), child, c.getValue(), rowContext,
+                            subFieldPath)) {
                         ret = true;
                         fieldHasValue = true;
                     }
@@ -516,7 +551,8 @@ public abstract class DataDstJava extends DataDstImpl {
                 String subFieldPath = String.format("%s.%s", fieldPath, c.getKey());
 
                 for (DataDstWriterNode child : c.getValue().nodes) {
-                    if (dumpPlainField(builder, child.identify, child.getFieldDescriptor(), child, rowContext,
+                    if (dumpPlainField(builder, node.getTypeDescriptor(), child.identify, child.getFieldDescriptor(),
+                            child, rowContext,
                             subFieldPath)) {
                         ret = true;
                         fieldHasValue = true;
@@ -528,19 +564,46 @@ public abstract class DataDstJava extends DataDstImpl {
                                     subFieldPath));
                 }
             }
+
+            // Check list size
+            if (c.getValue().isList() && c.getValue().innerFieldDesc != null) {
+                var listExt = c.getValue().innerFieldDesc.getListExtension();
+                if (listExt != null && c.getValue().innerFieldDesc != null) {
+                    var childList = builder.getOrDefault(c.getValue().innerFieldDesc.getName(), null);
+                    int listSize = 0;
+                    if (childList != null && childList instanceof List<?>) {
+                        listSize = ((List<?>) childList).size();
+                    }
+                    if (listExt.minSize > 0 && listExt.minSize > listSize) {
+                        throw new ConvException(
+                                String.format(
+                                        "Try to convert %s failed, require at least %d element(s), real got %d element(s).",
+                                        fieldPath,
+                                        listExt.minSize, listSize));
+                    }
+                    if (listExt.maxSize > 0 && listExt.maxSize < listSize) {
+                        throw new ConvException(
+                                String.format(
+                                        "Try to convert %s failed, require at most %d element(s), real got %d element(s).",
+                                        fieldPath,
+                                        listExt.maxSize, listSize));
+                    }
+                }
+            }
         }
 
         return ret;
     }
 
     @SuppressWarnings("unchecked")
-    private boolean dumpStandardField(HashMap<String, Object> builder, DataDstWriterNode desc,
+    private boolean dumpStandardField(HashMap<String, Object> builder,
+            DataDstWriterNode.DataDstTypeDescriptor container, DataDstWriterNode desc,
             DataDstWriterNode.DataDstChildrenNode as_child, DataRowContext rowContext, String fieldPath)
             throws ConvException {
         if (null == desc.identify && DataDstWriterNode.JAVA_TYPE.MESSAGE != desc.getType()) {
             if (as_child.isRequired()
-                    || ProgramOptions.getInstance().stripListRule == ProgramOptions.ListStripRule.KEEP_ALL) {
-                dumpDefault(builder, as_child);
+                    || as_child.getFieldListStripRule() == DataDstWriterNode.ListStripRule.STRIP_NOTHING) {
+                dumpDefault(builder, container, as_child, desc.getListIndex());
             }
 
             return false;
@@ -550,8 +613,8 @@ public abstract class DataDstJava extends DataDstImpl {
 
         if (null == val) {
             if (as_child.isRequired()
-                    || ProgramOptions.getInstance().stripListRule == ProgramOptions.ListStripRule.KEEP_ALL) {
-                dumpDefault(builder, as_child);
+                    || as_child.getFieldListStripRule() == DataDstWriterNode.ListStripRule.STRIP_NOTHING) {
+                dumpDefault(builder, container, as_child, desc.getListIndex());
             }
 
             return false;
@@ -584,11 +647,11 @@ public abstract class DataDstJava extends DataDstImpl {
             }
 
             int index = desc.getListIndex();
-            ProgramOptions.ListStripRule stripListRule = ProgramOptions.getInstance().stripListRule;
-            if (stripListRule == ProgramOptions.ListStripRule.KEEP_ALL ||
-                    stripListRule == ProgramOptions.ListStripRule.STRIP_EMPTY_TAIL) {
+            DataDstWriterNode.ListStripRule stripListRule = as_child.getFieldListStripRule();
+            if (stripListRule == DataDstWriterNode.ListStripRule.STRIP_NOTHING ||
+                    stripListRule == DataDstWriterNode.ListStripRule.STRIP_TAIL) {
                 while (old.size() < index) {
-                    dumpDefault(builder, as_child);
+                    dumpDefault(builder, container, as_child, old.size());
                 }
             }
 
@@ -617,7 +680,8 @@ public abstract class DataDstJava extends DataDstImpl {
         return true;
     }
 
-    private boolean dumpPlainField(HashMap<String, Object> builder, IdentifyDescriptor ident,
+    private boolean dumpPlainField(HashMap<String, Object> builder, DataDstWriterNode.DataDstTypeDescriptor container,
+            IdentifyDescriptor ident,
             DataDstWriterNode.DataDstOneofDescriptor field, DataDstWriterNode maybeFromNode,
             DataRowContext rowContext,
             String fieldPath) throws ConvException {
@@ -634,10 +698,11 @@ public abstract class DataDstJava extends DataDstImpl {
             return false;
         }
 
-        return dumpPlainField(builder, ident, field, maybeFromNode, res.value, rowContext, fieldPath);
+        return dumpPlainField(builder, container, ident, field, maybeFromNode, res.value, rowContext, fieldPath);
     }
 
-    private boolean dumpPlainField(HashMap<String, Object> builder, IdentifyDescriptor ident,
+    private boolean dumpPlainField(HashMap<String, Object> builder, DataDstWriterNode.DataDstTypeDescriptor container,
+            IdentifyDescriptor ident,
             DataDstWriterNode.DataDstOneofDescriptor field, DataDstWriterNode maybeFromNode, String input,
             DataRowContext rowContext,
             String fieldPath)
@@ -665,13 +730,17 @@ public abstract class DataDstJava extends DataDstImpl {
             }
 
             if (res.length == 1) {
-                dumpDefault(builder, sub_field);
+                if (maybeFromNode != null) {
+                    dumpDefault(builder, container, sub_field, maybeFromNode.getListIndex());
+                } else {
+                    dumpDefault(builder, container, sub_field, 0);
+                }
                 ret = true;
                 break;
             }
 
             // 非顶层，不用验证类型
-            ret = dumpPlainField(builder, null, sub_field, null, (String) res[1], rowContext, fieldPath);
+            ret = dumpPlainField(builder, container, null, sub_field, null, (String) res[1], rowContext, fieldPath);
         } while (false);
 
         for (var subField : field.getSortedFields()) {
@@ -686,15 +755,20 @@ public abstract class DataDstJava extends DataDstImpl {
         return ret;
     }
 
-    private boolean dumpPlainField(HashMap<String, Object> builder, IdentifyDescriptor ident,
+    private boolean dumpPlainField(HashMap<String, Object> builder, DataDstWriterNode.DataDstTypeDescriptor container,
+            IdentifyDescriptor ident,
             DataDstWriterNode.DataDstFieldDescriptor field, DataDstWriterNode maybeFromNode,
             DataRowContext rowContext,
             String fieldPath) throws ConvException {
         if (null == ident) {
             // Plain模式的repeated对于STRIP_EMPTY_TAIL也可以直接全部strip掉，下同
             if (field.isRequired()
-                    || ProgramOptions.getInstance().stripListRule == ProgramOptions.ListStripRule.KEEP_ALL) {
-                dumpDefault(builder, field);
+                    || field.getListStripRule() == DataDstWriterNode.ListStripRule.STRIP_NOTHING) {
+                if (maybeFromNode != null) {
+                    dumpDefault(builder, container, field, maybeFromNode.getListIndex());
+                } else {
+                    dumpDefault(builder, container, field, 0);
+                }
             }
             return false;
         }
@@ -702,17 +776,22 @@ public abstract class DataDstJava extends DataDstImpl {
         DataContainer<String> res = DataSrcImpl.getOurInstance().getValue(ident, "");
         if (null == res || !res.valid) {
             if (field.isRequired()
-                    || ProgramOptions.getInstance().stripListRule == ProgramOptions.ListStripRule.KEEP_ALL) {
-                dumpDefault(builder, field);
+                    || field.getListStripRule() == DataDstWriterNode.ListStripRule.STRIP_NOTHING) {
+                if (maybeFromNode != null) {
+                    dumpDefault(builder, container, field, maybeFromNode.getListIndex());
+                } else {
+                    dumpDefault(builder, container, field, 0);
+                }
             }
             return false;
         }
 
-        return dumpPlainField(builder, ident, field, maybeFromNode, res.value, rowContext, fieldPath);
+        return dumpPlainField(builder, container, ident, field, maybeFromNode, res.value, rowContext, fieldPath);
     }
 
     @SuppressWarnings("unchecked")
-    private boolean dumpPlainField(HashMap<String, Object> builder, IdentifyDescriptor ident,
+    private boolean dumpPlainField(HashMap<String, Object> builder, DataDstWriterNode.DataDstTypeDescriptor container,
+            IdentifyDescriptor ident,
             DataDstWriterNode.DataDstFieldDescriptor field, DataDstWriterNode maybeFromNode, String input,
             DataRowContext rowContext,
             String fieldPath)
@@ -728,6 +807,7 @@ public abstract class DataDstJava extends DataDstImpl {
 
         if (field.isList()) {
             Object val = builder.getOrDefault(field.getName(), null);
+            boolean ret = true;
             if (field.isMap()) {
                 if (val == null || !(val instanceof SpecialInnerHashMap<?, ?>)) {
                     val = new SpecialInnerHashMap<Object, Object>();
@@ -961,11 +1041,11 @@ public abstract class DataDstJava extends DataDstImpl {
                     }
 
                     int index = maybeFromNode.getListIndex();
-                    ProgramOptions.ListStripRule stripListRule = ProgramOptions.getInstance().stripListRule;
-                    if (stripListRule == ProgramOptions.ListStripRule.KEEP_ALL
-                            || stripListRule == ProgramOptions.ListStripRule.STRIP_EMPTY_TAIL) {
+                    DataDstWriterNode.ListStripRule stripListRule = field.getListStripRule();
+                    if (stripListRule == DataDstWriterNode.ListStripRule.STRIP_NOTHING
+                            || stripListRule == DataDstWriterNode.ListStripRule.STRIP_TAIL) {
                         while (valArray.size() < index) {
-                            valArray.add(getDefault(field));
+                            valArray.add(getDefault(container, field, valArray.size()));
                         }
                     }
 
@@ -983,14 +1063,44 @@ public abstract class DataDstJava extends DataDstImpl {
                         rowContext.addUniqueCache(tagKey, fieldPath, valArray);
                     }
                 }
-            } else if (ProgramOptions.getInstance().stripListRule == ProgramOptions.ListStripRule.KEEP_ALL) {
-                ArrayList<Object> valArray = (ArrayList<Object>) val;
-                valArray.add(getDefault(field));
+            } else if (field.getListStripRule() == DataDstWriterNode.ListStripRule.STRIP_NOTHING) {
+                if (null != maybeFromNode && maybeFromNode.getListIndex() >= 0) {
+                    int index = maybeFromNode.getListIndex();
+                    ArrayList<Object> valArray = (ArrayList<Object>) val;
+                    while (valArray.size() <= index) {
+                        valArray.add(getDefault(container, field, valArray.size()));
+                    }
+                }
             } else {
-                return false;
+                ret = false;
             }
 
-            return true;
+            // Check list size
+            {
+                var listExt = field.getListExtension();
+                if (listExt != null) {
+                    var childList = builder.getOrDefault(field.getName(), null);
+                    int listSize = 0;
+                    if (childList != null && childList instanceof List<?>) {
+                        listSize = ((List<?>) childList).size();
+                    }
+                    if (listExt.minSize > 0 && listExt.minSize > listSize) {
+                        throw new ConvException(
+                                String.format(
+                                        "Try to convert %s failed, require at least %d element(s), real got %d element(s).",
+                                        fieldPath,
+                                        listExt.minSize, listSize));
+                    }
+                    if (listExt.maxSize > 0 && listExt.maxSize < listSize) {
+                        throw new ConvException(
+                                String.format(
+                                        "Try to convert %s failed, require at most %d element(s), real got %d element(s).",
+                                        fieldPath,
+                                        listExt.maxSize, listSize));
+                    }
+                }
+            }
+            return ret;
         } else {
             Object val = null;
 
@@ -1061,7 +1171,7 @@ public abstract class DataDstJava extends DataDstImpl {
                             builder.put(field.getReferOriginField().getName(), res.origin);
                         }
                     } else if (field.isRequired()) {
-                        dumpDefault(builder, field);
+                        dumpDefault(builder, container, field, -1);
                     }
                     break;
                 }
@@ -1178,7 +1288,8 @@ public abstract class DataDstJava extends DataDstImpl {
                 }
 
                 if (usedInputIdx < inputs.length
-                        && dumpPlainField(ret.value, null, child.getReferOneof(), null, inputs[usedInputIdx],
+                        && dumpPlainField(ret.value, field.getTypeDescriptor(), null, child.getReferOneof(), null,
+                                inputs[usedInputIdx],
                                 rowContext, fieldPath)) {
                     dumpedOneof.add(child.getReferOneof().getFullName());
 
@@ -1198,7 +1309,8 @@ public abstract class DataDstJava extends DataDstImpl {
             } else {
                 String subFieldPath = String.format("%s.%s", fieldPath, children.get(i).getName());
                 if (usedInputIdx < inputs.length
-                        && dumpPlainField(ret.value, null, children.get(i), null, inputs[usedInputIdx], rowContext,
+                        && dumpPlainField(ret.value, field.getTypeDescriptor(), null, children.get(i), null,
+                                inputs[usedInputIdx], rowContext,
                                 subFieldPath)) {
                     missingFields.remove(child.getIndex());
                 } else {

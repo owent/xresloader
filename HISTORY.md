@@ -2,10 +2,25 @@
 
 ## Unrelease
 
+## 2.18.0
+
+1. 增加插件 `org.xresloader.field_list_strip_option=LIST_STRIP_DEFAULT|LIST_STRIP_NOTHING|LIST_STRIP_TAIL|LIST_STRIP_ALL` 用于给单个字段设置数组裁剪。
+2. 增加插件 `org.xresloader.field_list_min_size="<N>|枚举名"` 用于给单个字段数组最小长度要求。
+3. 增加插件 `org.xresloader.field_list_max_size="<N>|枚举名"` 用于给单个字段数组最大长度要求。
+4. 增加插件 `org.xresloader.field_list_strict_size=<true|false>` 用于设置单个字段数组的严格长度要求，即不自动补全最小长度，而是报错。
+5. 增加选项 `--disable-alias-mapping` 用于关闭字段映射时使用别名。
+6. 修复使用别名时，message结构未被正确映射的问题。
+7. 修复对Excel对大数字自动附加的 `,` 的适配。
+8. 修复对非裁剪模式下的数组数据自动补全问题。
+
+### BREAKCHANGES
+
++ 在此版本后，默认启用 `--enable-alias-mapping` 开启字段别名映射。如果出现别名重名出现冲突，请使用 `--disable-alias-mapping` 还原之前的默认行为。
+
 ## 2.17.1
 
-1. 修复数组别名丢失字段映射的问题
-2. 修复文本模式输出跨分组转出数据没清理干净的问题
+1. 修复数组别名丢失字段映射的问题。
+2. 修复文本模式输出跨分组转出数据没清理干净的问题。
 
 ## 2.17.0
 

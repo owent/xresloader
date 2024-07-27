@@ -61,6 +61,7 @@ namespace protobuf {
 }  // namespace google
 
 enum game_const_config : int {
+  EN_GCC_UNKNOWN = 0,
   EN_GCC_PERCENT_BASE = 10000,
   EN_GCC_RANDOM_RANGE_UNIT = 10,
   EN_GCC_RESOURCE_MAX_LIMIT = 9999999,
@@ -75,7 +76,7 @@ enum game_const_config : int {
 
 bool game_const_config_IsValid(int value);
 extern const uint32_t game_const_config_internal_data_[];
-constexpr game_const_config game_const_config_MIN = static_cast<game_const_config>(10);
+constexpr game_const_config game_const_config_MIN = static_cast<game_const_config>(0);
 constexpr game_const_config game_const_config_MAX = static_cast<game_const_config>(9999999);
 constexpr int game_const_config_ARRAYSIZE = 9999999 + 1;
 const ::google::protobuf::EnumDescriptor*

@@ -92,6 +92,26 @@ struct process_by_script_MapU32StringEntry_DoNotUseDefaultTypeInternal {
 PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT
     PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 process_by_script_MapU32StringEntry_DoNotUseDefaultTypeInternal _process_by_script_MapU32StringEntry_DoNotUse_default_instance_;
 
+inline constexpr inner_alias_message::Impl_::Impl_(
+    ::_pbi::ConstantInitialized) noexcept
+      : _cached_size_{0},
+        paramlist_{},
+        itype_{0} {}
+
+template <typename>
+PROTOBUF_CONSTEXPR inner_alias_message::inner_alias_message(::_pbi::ConstantInitialized)
+    : _impl_(::_pbi::ConstantInitialized()) {}
+struct inner_alias_messageDefaultTypeInternal {
+  PROTOBUF_CONSTEXPR inner_alias_messageDefaultTypeInternal() : _instance(::_pbi::ConstantInitialized{}) {}
+  ~inner_alias_messageDefaultTypeInternal() {}
+  union {
+    inner_alias_message _instance;
+  };
+};
+
+PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT
+    PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 inner_alias_messageDefaultTypeInternal _inner_alias_message_default_instance_;
+
 inline constexpr event_rule_item::Impl_::Impl_(
     ::_pbi::ConstantInitialized) noexcept
       : _cached_size_{0},
@@ -203,6 +223,27 @@ struct process_by_script_TestMapSmEntry_DoNotUseDefaultTypeInternal {
 
 PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT
     PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 process_by_script_TestMapSmEntry_DoNotUseDefaultTypeInternal _process_by_script_TestMapSmEntry_DoNotUse_default_instance_;
+
+inline constexpr outer_alias_message::Impl_::Impl_(
+    ::_pbi::ConstantInitialized) noexcept
+      : _cached_size_{0},
+        inners_{},
+        nest_int_{},
+        iid_{0} {}
+
+template <typename>
+PROTOBUF_CONSTEXPR outer_alias_message::outer_alias_message(::_pbi::ConstantInitialized)
+    : _impl_(::_pbi::ConstantInitialized()) {}
+struct outer_alias_messageDefaultTypeInternal {
+  PROTOBUF_CONSTEXPR outer_alias_messageDefaultTypeInternal() : _instance(::_pbi::ConstantInitialized{}) {}
+  ~outer_alias_messageDefaultTypeInternal() {}
+  union {
+    outer_alias_message _instance;
+  };
+};
+
+PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT
+    PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 outer_alias_messageDefaultTypeInternal _outer_alias_message_default_instance_;
 
 inline constexpr large_file_test::Impl_::Impl_(
     ::_pbi::ConstantInitialized) noexcept
@@ -699,6 +740,32 @@ const ::uint32_t
         6,
         0,
         1,
+        PROTOBUF_FIELD_OFFSET(::inner_alias_message, _impl_._has_bits_),
+        PROTOBUF_FIELD_OFFSET(::inner_alias_message, _internal_metadata_),
+        ~0u,  // no _extensions_
+        ~0u,  // no _oneof_case_
+        ~0u,  // no _weak_field_map_
+        ~0u,  // no _inlined_string_donated_
+        ~0u,  // no _split_
+        ~0u,  // no sizeof(Split)
+        PROTOBUF_FIELD_OFFSET(::inner_alias_message, _impl_.itype_),
+        PROTOBUF_FIELD_OFFSET(::inner_alias_message, _impl_.paramlist_),
+        0,
+        ~0u,
+        PROTOBUF_FIELD_OFFSET(::outer_alias_message, _impl_._has_bits_),
+        PROTOBUF_FIELD_OFFSET(::outer_alias_message, _internal_metadata_),
+        ~0u,  // no _extensions_
+        ~0u,  // no _oneof_case_
+        ~0u,  // no _weak_field_map_
+        ~0u,  // no _inlined_string_donated_
+        ~0u,  // no _split_
+        ~0u,  // no sizeof(Split)
+        PROTOBUF_FIELD_OFFSET(::outer_alias_message, _impl_.iid_),
+        PROTOBUF_FIELD_OFFSET(::outer_alias_message, _impl_.inners_),
+        PROTOBUF_FIELD_OFFSET(::outer_alias_message, _impl_.nest_int_),
+        0,
+        ~0u,
+        ~0u,
 };
 
 static const ::_pbi::MigrationSchema
@@ -720,6 +787,8 @@ static const ::_pbi::MigrationSchema
         {256, 266, -1, sizeof(::process_by_script_TestMapSmEntry_DoNotUse)},
         {268, 281, -1, sizeof(::process_by_script)},
         {286, 301, -1, sizeof(::large_file_test)},
+        {308, 318, -1, sizeof(::inner_alias_message)},
+        {320, 331, -1, sizeof(::outer_alias_message)},
 };
 static const ::_pb::Message* const file_default_instances[] = {
     &::_role_cfg_default_instance_._instance,
@@ -739,6 +808,8 @@ static const ::_pb::Message* const file_default_instances[] = {
     &::_process_by_script_TestMapSmEntry_DoNotUse_default_instance_._instance,
     &::_process_by_script_default_instance_._instance,
     &::_large_file_test_default_instance_._instance,
+    &::_inner_alias_message_default_instance_._instance,
+    &::_outer_alias_message_default_instance_._instance,
 };
 const char descriptor_table_protodef_kind_2eproto[] ABSL_ATTRIBUTE_SECTION_VARIABLE(
     protodesc_cold) = {
@@ -770,64 +841,71 @@ const char descriptor_table_protodef_kind_2eproto[] ABSL_ATTRIBUTE_SECTION_VARIA
     "ade_cfg with multi keys\352D\006helper\"o\n\021test"
     "_msg_verifier\022\022\n\ttest_id_1\030\221N \001(\r\022&\n\ttes"
     "t_id_2\030\222N \001(\rB\022\242\?\017\346\265\213\350\257\225ID\345\210\253\345\220\2152\022\027\n\ttes"
-    "t_id_3\030\223N \001(\rB\003\310\?\001:\005\242\?\002-^\"o\n\narr_in_arr\022"
-    "-\n\004name\030\001 \001(\tB\037\232\?\034This is a test name in"
-    " array\022\023\n\007int_arr\030\002 \003(\005B\002\020\001\022\017\n\007str_arr\030\003"
-    " \003(\t:\014\352D\006helper\360D\001\"\362\003\n\016arr_in_arr_cfg\022\037\n"
-    "\002id\030\001 \001(\rB\023\232\?\rThis is a Key\350D\001\022\030\n\003arr\030\002 "
-    "\003(\0132\013.arr_in_arr\022\032\n\022test_plain_int_arr\030\003"
-    " \003(\005\022\'\n\023test_plain_enum_arr\030\004 \003(\0162\n.cost"
-    "_type\0220\n\016test_plain_msg\030\005 \001(\0132\022.test_msg"
-    "_verifierB\004\262\?\001&\022.\n\022test_plain_msg_arr\030\006 "
-    "\003(\0132\022.test_msg_verifier\0223\n\013test_map_is\030\007"
-    " \003(\0132\036.arr_in_arr_cfg.TestMapIsEntry\0229\n\013"
-    "test_map_sm\030\010 \003(\0132\036.arr_in_arr_cfg.TestM"
-    "apSmEntryB\004\262\?\001|\0320\n\016TestMapIsEntry\022\013\n\003key"
-    "\030\001 \001(\005\022\r\n\005value\030\002 \001(\t:\0028\001\032;\n\016TestMapSmEn"
-    "try\022\013\n\003key\030\001 \001(\t\022\030\n\005value\030\002 \001(\0132\t.dep2_c"
-    "fg:\0028\001:\037\312>\023Test arr_in_arr_cfg\352D\006helper\""
-    "\243\001\n\021event_reward_item\022\017\n\007item_id\030\001 \001(\r\022\022"
-    "\n\nitem_count\030\002 \001(\r\022&\n\013nested_note\030\013 \001(\tB"
-    "\017\242\?\014\346\217\217\350\277\260\346\226\207\346\234\254H\000\0227\n\020nested_enum_type\030\014"
-    " \001(\0162\n.cost_typeB\017\242\?\014\350\264\247\345\270\201\347\261\273\345\236\213H\000B\010\n\006n"
-    "ested\"\241\001\n\017event_rule_item\022\017\n\007rule_id\030\001 \001"
-    "(\r\022\022\n\nrule_param\030\002 \001(\r\022&\n\013nested_note\030\013 "
-    "\001(\tB\017\242\?\014\346\217\217\350\277\260\346\226\207\346\234\254H\000\0227\n\020nested_enum_ty"
-    "pe\030\014 \001(\0162\n.cost_typeB\017\242\?\014\350\264\247\345\270\201\347\261\273\345\236\213H\000B"
-    "\010\n\006nested\"\244\004\n\tevent_cfg\022.\n\002id\030\001 \001(\rB\"\312>\014"
-    "custom_rule4\322>\nunique_tag\330>\001\350Dd\022$\n\007proce"
-    "ss\030\002 \001(\rB\023\322>\nunique_tag\330>\001\350D\001\022\036\n\004rule\030\006 "
-    "\001(\0132\020.event_rule_item\022\'\n\rspecify_field\030\007"
-    " \001(\0132\020.event_rule_item\0223\n\004item\030\013 \001(\0132\022.e"
-    "vent_reward_itemB\017\242\?\014\345\245\226\345\212\261\351\201\223\345\205\267H\000\022#\n\010u"
-    "ser_exp\030\014 \001(\003B\017\242\?\014\345\245\226\345\212\261\347\273\217\351\252\214H\000\022\037\n\004note"
-    "\030\r \001(\tB\017\242\?\014\346\217\217\350\277\260\346\226\207\346\234\254H\000\0220\n\tenum_type\030\016"
-    " \001(\0162\n.cost_typeB\017\242\?\014\350\264\247\345\270\201\347\261\273\345\236\213H\000\022%\n\nu"
-    "ser_level\0303 \001(\rB\017\242\?\014\347\216\251\345\256\266\347\255\211\347\272\247H\001\022(\n\010te"
-    "st_arr\030[ \003(\0132\020.event_rule_itemB\004\262\?\001;\022.\n\016"
-    "test_empty_arr\030\\ \003(\0132\020.event_rule_itemB\004"
-    "\262\?\001;:,\312> Test event_cfg with oneof field"
-    "s\352D\006helperB\r\n\006reward\022\003\330>\001B\r\n\013unlock_type"
-    "\"\266\001\n\034keep_or_strip_empty_list_cfg\022\037\n\002id\030"
-    "\001 \001(\rB\023\232\?\rThis is a Key\350D\001\022\034\n\tarray_msg\030"
-    "\002 \003(\0132\t.dep2_cfg\022\"\n\017array_plain_msg\030\003 \003("
-    "\0132\t.dep2_cfg\022\023\n\013array_int32\030\004 \003(\005\022\023\n\013arr"
-    "ay_int64\030\005 \003(\003:\t\352D\006helper\"4\n\ncombine_id\022"
-    "\016\n\006prefix\030\001 \001(\r\022\026\n\002id\030\002 \001(\rB\n\312>\0070-99999\""
-    "\224\003\n\021process_by_script\022\n\n\002id\030\001 \001(\r\022<\n\016map"
-    "_u32_string\030\002 \003(\0132$.process_by_script.Ma"
-    "pU32StringEntry\0226\n\013test_map_is\030\007 \003(\0132!.p"
-    "rocess_by_script.TestMapIsEntry\022<\n\013test_"
-    "map_sm\030\010 \003(\0132!.process_by_script.TestMap"
-    "SmEntryB\004\262\?\001|\022\033\n\005id_id\030\351\007 \001(\0132\013.combine_"
-    "id\0323\n\021MapU32StringEntry\022\013\n\003key\030\001 \001(\r\022\r\n\005"
-    "value\030\002 \001(\t:\0028\001\0320\n\016TestMapIsEntry\022\013\n\003key"
-    "\030\001 \001(\005\022\r\n\005value\030\002 \001(\t:\0028\001\032;\n\016TestMapSmEn"
-    "try\022\013\n\003key\030\001 \001(\t\022\030\n\005value\030\002 \001(\0132\t.dep2_c"
-    "fg:\0028\001\"\222\001\n\017large_file_test\022\n\n\002id\030\001 \001(\r\022\020"
-    "\n\010i32value\030\002 \001(\005\022\020\n\010u64value\030\003 \001(\004\022\020\n\010f6"
-    "4value\030\004 \001(\001\022\020\n\010f32value\030\005 \001(\002\022\017\n\007szvalu"
-    "e\030\006 \001(\t\022\032\n\005id_id\030\007 \001(\0132\013.combine_id"
+    "t_id_3\030\223N \001(\rB\003\310\?\001:\005\242\?\002-^\"\231\001\n\narr_in_arr"
+    "\022-\n\004name\030\001 \001(\tB\037\232\?\034This is a test name i"
+    "n array\022=\n\007int_arr\030\002 \003(\005B,\020\001\320\?\001\332\? game_c"
+    "onst_config.EN_GCC_UNKNOWN\342\?\0013\022\017\n\007str_ar"
+    "r\030\003 \003(\t:\014\352D\006helper\360D\001\"\374\003\n\016arr_in_arr_cfg"
+    "\022\037\n\002id\030\001 \001(\rB\023\232\?\rThis is a Key\350D\001\022\030\n\003arr"
+    "\030\002 \003(\0132\013.arr_in_arr\022$\n\022test_plain_int_ar"
+    "r\030\003 \003(\005B\010\332\?\0011\342\?\0013\022\'\n\023test_plain_enum_arr"
+    "\030\004 \003(\0162\n.cost_type\0220\n\016test_plain_msg\030\005 \001"
+    "(\0132\022.test_msg_verifierB\004\262\?\001&\022.\n\022test_pla"
+    "in_msg_arr\030\006 \003(\0132\022.test_msg_verifier\0223\n\013"
+    "test_map_is\030\007 \003(\0132\036.arr_in_arr_cfg.TestM"
+    "apIsEntry\0229\n\013test_map_sm\030\010 \003(\0132\036.arr_in_"
+    "arr_cfg.TestMapSmEntryB\004\262\?\001|\0320\n\016TestMapI"
+    "sEntry\022\013\n\003key\030\001 \001(\005\022\r\n\005value\030\002 \001(\t:\0028\001\032;"
+    "\n\016TestMapSmEntry\022\013\n\003key\030\001 \001(\t\022\030\n\005value\030\002"
+    " \001(\0132\t.dep2_cfg:\0028\001:\037\312>\023Test arr_in_arr_"
+    "cfg\352D\006helper\"\243\001\n\021event_reward_item\022\017\n\007it"
+    "em_id\030\001 \001(\r\022\022\n\nitem_count\030\002 \001(\r\022&\n\013neste"
+    "d_note\030\013 \001(\tB\017\242\?\014\346\217\217\350\277\260\346\226\207\346\234\254H\000\0227\n\020neste"
+    "d_enum_type\030\014 \001(\0162\n.cost_typeB\017\242\?\014\350\264\247\345\270\201"
+    "\347\261\273\345\236\213H\000B\010\n\006nested\"\241\001\n\017event_rule_item\022\017"
+    "\n\007rule_id\030\001 \001(\r\022\022\n\nrule_param\030\002 \001(\r\022&\n\013n"
+    "ested_note\030\013 \001(\tB\017\242\?\014\346\217\217\350\277\260\346\226\207\346\234\254H\000\0227\n\020n"
+    "ested_enum_type\030\014 \001(\0162\n.cost_typeB\017\242\?\014\350\264"
+    "\247\345\270\201\347\261\273\345\236\213H\000B\010\n\006nested\"\244\004\n\tevent_cfg\022.\n\002"
+    "id\030\001 \001(\rB\"\312>\014custom_rule4\322>\nunique_tag\330>"
+    "\001\350Dd\022$\n\007process\030\002 \001(\rB\023\322>\nunique_tag\330>\001\350"
+    "D\001\022\036\n\004rule\030\006 \001(\0132\020.event_rule_item\022\'\n\rsp"
+    "ecify_field\030\007 \001(\0132\020.event_rule_item\0223\n\004i"
+    "tem\030\013 \001(\0132\022.event_reward_itemB\017\242\?\014\345\245\226\345\212\261"
+    "\351\201\223\345\205\267H\000\022#\n\010user_exp\030\014 \001(\003B\017\242\?\014\345\245\226\345\212\261\347\273\217"
+    "\351\252\214H\000\022\037\n\004note\030\r \001(\tB\017\242\?\014\346\217\217\350\277\260\346\226\207\346\234\254H\000\0220"
+    "\n\tenum_type\030\016 \001(\0162\n.cost_typeB\017\242\?\014\350\264\247\345\270\201"
+    "\347\261\273\345\236\213H\000\022%\n\nuser_level\0303 \001(\rB\017\242\?\014\347\216\251\345\256\266\347"
+    "\255\211\347\272\247H\001\022(\n\010test_arr\030[ \003(\0132\020.event_rule_i"
+    "temB\004\262\?\001;\022.\n\016test_empty_arr\030\\ \003(\0132\020.even"
+    "t_rule_itemB\004\262\?\001;:,\312> Test event_cfg wit"
+    "h oneof fields\352D\006helperB\r\n\006reward\022\003\330>\001B\r"
+    "\n\013unlock_type\"\266\001\n\034keep_or_strip_empty_li"
+    "st_cfg\022\037\n\002id\030\001 \001(\rB\023\232\?\rThis is a Key\350D\001\022"
+    "\034\n\tarray_msg\030\002 \003(\0132\t.dep2_cfg\022\"\n\017array_p"
+    "lain_msg\030\003 \003(\0132\t.dep2_cfg\022\023\n\013array_int32"
+    "\030\004 \003(\005\022\023\n\013array_int64\030\005 \003(\003:\t\352D\006helper\"4"
+    "\n\ncombine_id\022\016\n\006prefix\030\001 \001(\r\022\026\n\002id\030\002 \001(\r"
+    "B\n\312>\0070-99999\"\224\003\n\021process_by_script\022\n\n\002id"
+    "\030\001 \001(\r\022<\n\016map_u32_string\030\002 \003(\0132$.process"
+    "_by_script.MapU32StringEntry\0226\n\013test_map"
+    "_is\030\007 \003(\0132!.process_by_script.TestMapIsE"
+    "ntry\022<\n\013test_map_sm\030\010 \003(\0132!.process_by_s"
+    "cript.TestMapSmEntryB\004\262\?\001|\022\033\n\005id_id\030\351\007 \001"
+    "(\0132\013.combine_id\0323\n\021MapU32StringEntry\022\013\n\003"
+    "key\030\001 \001(\r\022\r\n\005value\030\002 \001(\t:\0028\001\0320\n\016TestMapI"
+    "sEntry\022\013\n\003key\030\001 \001(\005\022\r\n\005value\030\002 \001(\t:\0028\001\032;"
+    "\n\016TestMapSmEntry\022\013\n\003key\030\001 \001(\t\022\030\n\005value\030\002"
+    " \001(\0132\t.dep2_cfg:\0028\001\"\222\001\n\017large_file_test\022"
+    "\n\n\002id\030\001 \001(\r\022\020\n\010i32value\030\002 \001(\005\022\020\n\010u64valu"
+    "e\030\003 \001(\004\022\020\n\010f64value\030\004 \001(\001\022\020\n\010f32value\030\005 "
+    "\001(\002\022\017\n\007szvalue\030\006 \001(\t\022\032\n\005id_id\030\007 \001(\0132\013.co"
+    "mbine_id\"N\n\023inner_alias_message\022\026\n\005iType"
+    "\030\001 \001(\005B\007\242\?\004Type\022\037\n\tparamList\030\002 \003(\003B\014\242\?\005P"
+    "aram\332\?\0012\"|\n\023outer_alias_message\022\022\n\003iId\030\001"
+    " \001(\005B\005\242\?\002ID\0222\n\006inners\030\002 \003(\0132\024.inner_alia"
+    "s_messageB\014\242\?\tCondition\022\035\n\010nest_int\030\003 \003("
+    "\005B\013\242\?\004Nest\332\?\0012"
 };
 static const ::_pbi::DescriptorTable* const descriptor_table_kind_2eproto_deps[6] =
     {
@@ -842,13 +920,13 @@ static ::absl::once_flag descriptor_table_kind_2eproto_once;
 PROTOBUF_CONSTINIT const ::_pbi::DescriptorTable descriptor_table_kind_2eproto = {
     false,
     false,
-    3435,
+    3694,
     descriptor_table_protodef_kind_2eproto,
     "kind.proto",
     &descriptor_table_kind_2eproto_once,
     descriptor_table_kind_2eproto_deps,
     6,
-    17,
+    19,
     schemas,
     file_default_instances,
     TableStruct_kind_2eproto::offsets,
@@ -2229,7 +2307,7 @@ const ::_pbi::TcParseTable<2, 3, 0, 30, 2> arr_in_arr::_table_ = {
     // optional string name = 1 [(.org.xresloader.field_description) = "This is a test name in array"];
     {::_pbi::TcParser::FastSS1,
      {10, 0, 0, PROTOBUF_FIELD_OFFSET(arr_in_arr, _impl_.name_)}},
-    // repeated int32 int_arr = 2 [packed = true];
+    // repeated int32 int_arr = 2 [packed = true, (.org.xresloader.field_list_strip_option) = LIST_STRIP_NOTHING, (.org.xresloader.field_list_min_size) = "game_const_config.EN_GCC_UNKNOWN", (.org.xresloader.field_list_max_size) = "3"];
     {::_pbi::TcParser::FastV32P1,
      {18, 63, 0, PROTOBUF_FIELD_OFFSET(arr_in_arr, _impl_.int_arr_)}},
     // repeated string str_arr = 3;
@@ -2241,7 +2319,7 @@ const ::_pbi::TcParseTable<2, 3, 0, 30, 2> arr_in_arr::_table_ = {
     // optional string name = 1 [(.org.xresloader.field_description) = "This is a test name in array"];
     {PROTOBUF_FIELD_OFFSET(arr_in_arr, _impl_.name_), _Internal::kHasBitsOffset + 0, 0,
     (0 | ::_fl::kFcOptional | ::_fl::kRawString | ::_fl::kRepAString)},
-    // repeated int32 int_arr = 2 [packed = true];
+    // repeated int32 int_arr = 2 [packed = true, (.org.xresloader.field_list_strip_option) = LIST_STRIP_NOTHING, (.org.xresloader.field_list_min_size) = "game_const_config.EN_GCC_UNKNOWN", (.org.xresloader.field_list_max_size) = "3"];
     {PROTOBUF_FIELD_OFFSET(arr_in_arr, _impl_.int_arr_), -1, 0,
     (0 | ::_fl::kFcRepeated | ::_fl::kPackedInt32)},
     // repeated string str_arr = 3;
@@ -2290,7 +2368,7 @@ PROTOBUF_NOINLINE void arr_in_arr::Clear() {
     target = stream->WriteStringMaybeAliased(1, _s, target);
   }
 
-  // repeated int32 int_arr = 2 [packed = true];
+  // repeated int32 int_arr = 2 [packed = true, (.org.xresloader.field_list_strip_option) = LIST_STRIP_NOTHING, (.org.xresloader.field_list_min_size) = "game_const_config.EN_GCC_UNKNOWN", (.org.xresloader.field_list_max_size) = "3"];
   {
     int byte_size = _impl_._int_arr_cached_byte_size_.Get();
     if (byte_size > 0) {
@@ -2325,7 +2403,7 @@ PROTOBUF_NOINLINE void arr_in_arr::Clear() {
   (void) cached_has_bits;
 
   ::_pbi::Prefetch5LinesFrom7Lines(reinterpret_cast<const void*>(this));
-  // repeated int32 int_arr = 2 [packed = true];
+  // repeated int32 int_arr = 2 [packed = true, (.org.xresloader.field_list_strip_option) = LIST_STRIP_NOTHING, (.org.xresloader.field_list_min_size) = "game_const_config.EN_GCC_UNKNOWN", (.org.xresloader.field_list_max_size) = "3"];
   {
     std::size_t data_size = ::_pbi::WireFormatLite::Int32Size(
         this->_internal_int_arr())
@@ -2568,7 +2646,7 @@ const ::_pbi::TcParseTable<3, 8, 7, 53, 2> arr_in_arr_cfg::_table_ = {
     // repeated .arr_in_arr arr = 2;
     {::_pbi::TcParser::FastMtR1,
      {18, 63, 0, PROTOBUF_FIELD_OFFSET(arr_in_arr_cfg, _impl_.arr_)}},
-    // repeated int32 test_plain_int_arr = 3;
+    // repeated int32 test_plain_int_arr = 3 [(.org.xresloader.field_list_min_size) = "1", (.org.xresloader.field_list_max_size) = "3"];
     {::_pbi::TcParser::FastV32R1,
      {24, 63, 0, PROTOBUF_FIELD_OFFSET(arr_in_arr_cfg, _impl_.test_plain_int_arr_)}},
     // repeated .cost_type test_plain_enum_arr = 4;
@@ -2590,7 +2668,7 @@ const ::_pbi::TcParseTable<3, 8, 7, 53, 2> arr_in_arr_cfg::_table_ = {
     // repeated .arr_in_arr arr = 2;
     {PROTOBUF_FIELD_OFFSET(arr_in_arr_cfg, _impl_.arr_), -1, 0,
     (0 | ::_fl::kFcRepeated | ::_fl::kMessage | ::_fl::kTvTable)},
-    // repeated int32 test_plain_int_arr = 3;
+    // repeated int32 test_plain_int_arr = 3 [(.org.xresloader.field_list_min_size) = "1", (.org.xresloader.field_list_max_size) = "3"];
     {PROTOBUF_FIELD_OFFSET(arr_in_arr_cfg, _impl_.test_plain_int_arr_), -1, 0,
     (0 | ::_fl::kFcRepeated | ::_fl::kInt32)},
     // repeated .cost_type test_plain_enum_arr = 4;
@@ -2679,7 +2757,7 @@ PROTOBUF_NOINLINE void arr_in_arr_cfg::Clear() {
             target, stream);
   }
 
-  // repeated int32 test_plain_int_arr = 3;
+  // repeated int32 test_plain_int_arr = 3 [(.org.xresloader.field_list_min_size) = "1", (.org.xresloader.field_list_max_size) = "3"];
   for (int i = 0, n = this->_internal_test_plain_int_arr_size(); i < n; ++i) {
     target = stream->EnsureSpace(target);
     target = ::_pbi::WireFormatLite::WriteInt32ToArray(
@@ -2788,7 +2866,7 @@ PROTOBUF_NOINLINE void arr_in_arr_cfg::Clear() {
   for (const auto& msg : this->_internal_arr()) {
     total_size += ::google::protobuf::internal::WireFormatLite::MessageSize(msg);
   }
-  // repeated int32 test_plain_int_arr = 3;
+  // repeated int32 test_plain_int_arr = 3 [(.org.xresloader.field_list_min_size) = "1", (.org.xresloader.field_list_max_size) = "3"];
   {
     std::size_t data_size = ::_pbi::WireFormatLite::Int32Size(
         this->_internal_test_plain_int_arr())
@@ -5656,6 +5734,485 @@ void large_file_test::InternalSwap(large_file_test* PROTOBUF_RESTRICT other) {
 }
 
 ::google::protobuf::Metadata large_file_test::GetMetadata() const {
+  return ::google::protobuf::Message::GetMetadataImpl(GetClassData()->full());
+}
+// ===================================================================
+
+class inner_alias_message::_Internal {
+ public:
+  using HasBits =
+      decltype(std::declval<inner_alias_message>()._impl_._has_bits_);
+  static constexpr ::int32_t kHasBitsOffset =
+      8 * PROTOBUF_FIELD_OFFSET(inner_alias_message, _impl_._has_bits_);
+};
+
+inner_alias_message::inner_alias_message(::google::protobuf::Arena* arena)
+    : ::google::protobuf::Message(arena) {
+  SharedCtor(arena);
+  // @@protoc_insertion_point(arena_constructor:inner_alias_message)
+}
+inline PROTOBUF_NDEBUG_INLINE inner_alias_message::Impl_::Impl_(
+    ::google::protobuf::internal::InternalVisibility visibility, ::google::protobuf::Arena* arena,
+    const Impl_& from, const ::inner_alias_message& from_msg)
+      : _has_bits_{from._has_bits_},
+        _cached_size_{0},
+        paramlist_{visibility, arena, from.paramlist_} {}
+
+inner_alias_message::inner_alias_message(
+    ::google::protobuf::Arena* arena,
+    const inner_alias_message& from)
+    : ::google::protobuf::Message(arena) {
+  inner_alias_message* const _this = this;
+  (void)_this;
+  _internal_metadata_.MergeFrom<::google::protobuf::UnknownFieldSet>(
+      from._internal_metadata_);
+  new (&_impl_) Impl_(internal_visibility(), arena, from._impl_, from);
+  _impl_.itype_ = from._impl_.itype_;
+
+  // @@protoc_insertion_point(copy_constructor:inner_alias_message)
+}
+inline PROTOBUF_NDEBUG_INLINE inner_alias_message::Impl_::Impl_(
+    ::google::protobuf::internal::InternalVisibility visibility,
+    ::google::protobuf::Arena* arena)
+      : _cached_size_{0},
+        paramlist_{visibility, arena} {}
+
+inline void inner_alias_message::SharedCtor(::_pb::Arena* arena) {
+  new (&_impl_) Impl_(internal_visibility(), arena);
+  _impl_.itype_ = {};
+}
+inner_alias_message::~inner_alias_message() {
+  // @@protoc_insertion_point(destructor:inner_alias_message)
+  _internal_metadata_.Delete<::google::protobuf::UnknownFieldSet>();
+  SharedDtor();
+}
+inline void inner_alias_message::SharedDtor() {
+  ABSL_DCHECK(GetArena() == nullptr);
+  _impl_.~Impl_();
+}
+
+const ::google::protobuf::MessageLite::ClassData*
+inner_alias_message::GetClassData() const {
+  PROTOBUF_CONSTINIT static const ::google::protobuf::MessageLite::
+      ClassDataFull _data_ = {
+          {
+              &_table_.header,
+              nullptr,  // OnDemandRegisterArenaDtor
+              nullptr,  // IsInitialized
+              PROTOBUF_FIELD_OFFSET(inner_alias_message, _impl_._cached_size_),
+              false,
+          },
+          &inner_alias_message::MergeImpl,
+          &inner_alias_message::kDescriptorMethods,
+          &descriptor_table_kind_2eproto,
+          nullptr,  // tracker
+      };
+  ::google::protobuf::internal::PrefetchToLocalCache(&_data_);
+  ::google::protobuf::internal::PrefetchToLocalCache(_data_.tc_table);
+  return _data_.base();
+}
+PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1
+const ::_pbi::TcParseTable<1, 2, 0, 0, 2> inner_alias_message::_table_ = {
+  {
+    PROTOBUF_FIELD_OFFSET(inner_alias_message, _impl_._has_bits_),
+    0, // no _extensions_
+    2, 8,  // max_field_number, fast_idx_mask
+    offsetof(decltype(_table_), field_lookup_table),
+    4294967292,  // skipmap
+    offsetof(decltype(_table_), field_entries),
+    2,  // num_field_entries
+    0,  // num_aux_entries
+    offsetof(decltype(_table_), field_names),  // no aux_entries
+    &_inner_alias_message_default_instance_._instance,
+    nullptr,  // post_loop_handler
+    ::_pbi::TcParser::GenericFallback,  // fallback
+    #ifdef PROTOBUF_PREFETCH_PARSE_TABLE
+    ::_pbi::TcParser::GetTable<::inner_alias_message>(),  // to_prefetch
+    #endif  // PROTOBUF_PREFETCH_PARSE_TABLE
+  }, {{
+    // repeated int64 paramList = 2 [(.org.xresloader.field_alias) = "Param", (.org.xresloader.field_list_min_size) = "2"];
+    {::_pbi::TcParser::FastV64R1,
+     {16, 63, 0, PROTOBUF_FIELD_OFFSET(inner_alias_message, _impl_.paramlist_)}},
+    // optional int32 iType = 1 [(.org.xresloader.field_alias) = "Type"];
+    {::_pbi::TcParser::SingularVarintNoZag1<::uint32_t, offsetof(inner_alias_message, _impl_.itype_), 0>(),
+     {8, 0, 0, PROTOBUF_FIELD_OFFSET(inner_alias_message, _impl_.itype_)}},
+  }}, {{
+    65535, 65535
+  }}, {{
+    // optional int32 iType = 1 [(.org.xresloader.field_alias) = "Type"];
+    {PROTOBUF_FIELD_OFFSET(inner_alias_message, _impl_.itype_), _Internal::kHasBitsOffset + 0, 0,
+    (0 | ::_fl::kFcOptional | ::_fl::kInt32)},
+    // repeated int64 paramList = 2 [(.org.xresloader.field_alias) = "Param", (.org.xresloader.field_list_min_size) = "2"];
+    {PROTOBUF_FIELD_OFFSET(inner_alias_message, _impl_.paramlist_), -1, 0,
+    (0 | ::_fl::kFcRepeated | ::_fl::kInt64)},
+  }},
+  // no aux_entries
+  {{
+  }},
+};
+
+PROTOBUF_NOINLINE void inner_alias_message::Clear() {
+// @@protoc_insertion_point(message_clear_start:inner_alias_message)
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  ::uint32_t cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  _impl_.paramlist_.Clear();
+  _impl_.itype_ = 0;
+  _impl_._has_bits_.Clear();
+  _internal_metadata_.Clear<::google::protobuf::UnknownFieldSet>();
+}
+
+::uint8_t* inner_alias_message::_InternalSerialize(
+    ::uint8_t* target,
+    ::google::protobuf::io::EpsCopyOutputStream* stream) const {
+  // @@protoc_insertion_point(serialize_to_array_start:inner_alias_message)
+  ::uint32_t cached_has_bits = 0;
+  (void)cached_has_bits;
+
+  cached_has_bits = _impl_._has_bits_[0];
+  // optional int32 iType = 1 [(.org.xresloader.field_alias) = "Type"];
+  if (cached_has_bits & 0x00000001u) {
+    target = ::google::protobuf::internal::WireFormatLite::
+        WriteInt32ToArrayWithField<1>(
+            stream, this->_internal_itype(), target);
+  }
+
+  // repeated int64 paramList = 2 [(.org.xresloader.field_alias) = "Param", (.org.xresloader.field_list_min_size) = "2"];
+  for (int i = 0, n = this->_internal_paramlist_size(); i < n; ++i) {
+    target = stream->EnsureSpace(target);
+    target = ::_pbi::WireFormatLite::WriteInt64ToArray(
+        2, this->_internal_paramlist().Get(i), target);
+  }
+
+  if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
+    target =
+        ::_pbi::WireFormat::InternalSerializeUnknownFieldsToArray(
+            _internal_metadata_.unknown_fields<::google::protobuf::UnknownFieldSet>(::google::protobuf::UnknownFieldSet::default_instance), target, stream);
+  }
+  // @@protoc_insertion_point(serialize_to_array_end:inner_alias_message)
+  return target;
+}
+
+::size_t inner_alias_message::ByteSizeLong() const {
+// @@protoc_insertion_point(message_byte_size_start:inner_alias_message)
+  ::size_t total_size = 0;
+
+  ::uint32_t cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  ::_pbi::Prefetch5LinesFrom7Lines(reinterpret_cast<const void*>(this));
+  // repeated int64 paramList = 2 [(.org.xresloader.field_alias) = "Param", (.org.xresloader.field_list_min_size) = "2"];
+  {
+    std::size_t data_size = ::_pbi::WireFormatLite::Int64Size(
+        this->_internal_paramlist())
+    ;
+    std::size_t tag_size = std::size_t{1} *
+        ::_pbi::FromIntSize(this->_internal_paramlist_size());
+    ;
+    total_size += tag_size + data_size;
+  }
+  // optional int32 iType = 1 [(.org.xresloader.field_alias) = "Type"];
+  cached_has_bits = _impl_._has_bits_[0];
+  if (cached_has_bits & 0x00000001u) {
+    total_size += ::_pbi::WireFormatLite::Int32SizePlusOne(
+        this->_internal_itype());
+  }
+
+  return MaybeComputeUnknownFieldsSize(total_size, &_impl_._cached_size_);
+}
+
+
+void inner_alias_message::MergeImpl(::google::protobuf::MessageLite& to_msg, const ::google::protobuf::MessageLite& from_msg) {
+  auto* const _this = static_cast<inner_alias_message*>(&to_msg);
+  auto& from = static_cast<const inner_alias_message&>(from_msg);
+  // @@protoc_insertion_point(class_specific_merge_from_start:inner_alias_message)
+  ABSL_DCHECK_NE(&from, _this);
+  ::uint32_t cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  _this->_internal_mutable_paramlist()->MergeFrom(from._internal_paramlist());
+  cached_has_bits = from._impl_._has_bits_[0];
+  if (cached_has_bits & 0x00000001u) {
+    _this->_impl_.itype_ = from._impl_.itype_;
+  }
+  _this->_impl_._has_bits_[0] |= cached_has_bits;
+  _this->_internal_metadata_.MergeFrom<::google::protobuf::UnknownFieldSet>(from._internal_metadata_);
+}
+
+void inner_alias_message::CopyFrom(const inner_alias_message& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:inner_alias_message)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+
+void inner_alias_message::InternalSwap(inner_alias_message* PROTOBUF_RESTRICT other) {
+  using std::swap;
+  _internal_metadata_.InternalSwap(&other->_internal_metadata_);
+  swap(_impl_._has_bits_[0], other->_impl_._has_bits_[0]);
+  _impl_.paramlist_.InternalSwap(&other->_impl_.paramlist_);
+        swap(_impl_.itype_, other->_impl_.itype_);
+}
+
+::google::protobuf::Metadata inner_alias_message::GetMetadata() const {
+  return ::google::protobuf::Message::GetMetadataImpl(GetClassData()->full());
+}
+// ===================================================================
+
+class outer_alias_message::_Internal {
+ public:
+  using HasBits =
+      decltype(std::declval<outer_alias_message>()._impl_._has_bits_);
+  static constexpr ::int32_t kHasBitsOffset =
+      8 * PROTOBUF_FIELD_OFFSET(outer_alias_message, _impl_._has_bits_);
+};
+
+outer_alias_message::outer_alias_message(::google::protobuf::Arena* arena)
+    : ::google::protobuf::Message(arena) {
+  SharedCtor(arena);
+  // @@protoc_insertion_point(arena_constructor:outer_alias_message)
+}
+inline PROTOBUF_NDEBUG_INLINE outer_alias_message::Impl_::Impl_(
+    ::google::protobuf::internal::InternalVisibility visibility, ::google::protobuf::Arena* arena,
+    const Impl_& from, const ::outer_alias_message& from_msg)
+      : _has_bits_{from._has_bits_},
+        _cached_size_{0},
+        inners_{visibility, arena, from.inners_},
+        nest_int_{visibility, arena, from.nest_int_} {}
+
+outer_alias_message::outer_alias_message(
+    ::google::protobuf::Arena* arena,
+    const outer_alias_message& from)
+    : ::google::protobuf::Message(arena) {
+  outer_alias_message* const _this = this;
+  (void)_this;
+  _internal_metadata_.MergeFrom<::google::protobuf::UnknownFieldSet>(
+      from._internal_metadata_);
+  new (&_impl_) Impl_(internal_visibility(), arena, from._impl_, from);
+  _impl_.iid_ = from._impl_.iid_;
+
+  // @@protoc_insertion_point(copy_constructor:outer_alias_message)
+}
+inline PROTOBUF_NDEBUG_INLINE outer_alias_message::Impl_::Impl_(
+    ::google::protobuf::internal::InternalVisibility visibility,
+    ::google::protobuf::Arena* arena)
+      : _cached_size_{0},
+        inners_{visibility, arena},
+        nest_int_{visibility, arena} {}
+
+inline void outer_alias_message::SharedCtor(::_pb::Arena* arena) {
+  new (&_impl_) Impl_(internal_visibility(), arena);
+  _impl_.iid_ = {};
+}
+outer_alias_message::~outer_alias_message() {
+  // @@protoc_insertion_point(destructor:outer_alias_message)
+  _internal_metadata_.Delete<::google::protobuf::UnknownFieldSet>();
+  SharedDtor();
+}
+inline void outer_alias_message::SharedDtor() {
+  ABSL_DCHECK(GetArena() == nullptr);
+  _impl_.~Impl_();
+}
+
+const ::google::protobuf::MessageLite::ClassData*
+outer_alias_message::GetClassData() const {
+  PROTOBUF_CONSTINIT static const ::google::protobuf::MessageLite::
+      ClassDataFull _data_ = {
+          {
+              &_table_.header,
+              nullptr,  // OnDemandRegisterArenaDtor
+              nullptr,  // IsInitialized
+              PROTOBUF_FIELD_OFFSET(outer_alias_message, _impl_._cached_size_),
+              false,
+          },
+          &outer_alias_message::MergeImpl,
+          &outer_alias_message::kDescriptorMethods,
+          &descriptor_table_kind_2eproto,
+          nullptr,  // tracker
+      };
+  ::google::protobuf::internal::PrefetchToLocalCache(&_data_);
+  ::google::protobuf::internal::PrefetchToLocalCache(_data_.tc_table);
+  return _data_.base();
+}
+PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1
+const ::_pbi::TcParseTable<2, 3, 1, 0, 2> outer_alias_message::_table_ = {
+  {
+    PROTOBUF_FIELD_OFFSET(outer_alias_message, _impl_._has_bits_),
+    0, // no _extensions_
+    3, 24,  // max_field_number, fast_idx_mask
+    offsetof(decltype(_table_), field_lookup_table),
+    4294967288,  // skipmap
+    offsetof(decltype(_table_), field_entries),
+    3,  // num_field_entries
+    1,  // num_aux_entries
+    offsetof(decltype(_table_), aux_entries),
+    &_outer_alias_message_default_instance_._instance,
+    nullptr,  // post_loop_handler
+    ::_pbi::TcParser::GenericFallback,  // fallback
+    #ifdef PROTOBUF_PREFETCH_PARSE_TABLE
+    ::_pbi::TcParser::GetTable<::outer_alias_message>(),  // to_prefetch
+    #endif  // PROTOBUF_PREFETCH_PARSE_TABLE
+  }, {{
+    {::_pbi::TcParser::MiniParse, {}},
+    // optional int32 iId = 1 [(.org.xresloader.field_alias) = "ID"];
+    {::_pbi::TcParser::SingularVarintNoZag1<::uint32_t, offsetof(outer_alias_message, _impl_.iid_), 0>(),
+     {8, 0, 0, PROTOBUF_FIELD_OFFSET(outer_alias_message, _impl_.iid_)}},
+    // repeated .inner_alias_message inners = 2 [(.org.xresloader.field_alias) = "Condition"];
+    {::_pbi::TcParser::FastMtR1,
+     {18, 63, 0, PROTOBUF_FIELD_OFFSET(outer_alias_message, _impl_.inners_)}},
+    // repeated int32 nest_int = 3 [(.org.xresloader.field_alias) = "Nest", (.org.xresloader.field_list_min_size) = "2"];
+    {::_pbi::TcParser::FastV32R1,
+     {24, 63, 0, PROTOBUF_FIELD_OFFSET(outer_alias_message, _impl_.nest_int_)}},
+  }}, {{
+    65535, 65535
+  }}, {{
+    // optional int32 iId = 1 [(.org.xresloader.field_alias) = "ID"];
+    {PROTOBUF_FIELD_OFFSET(outer_alias_message, _impl_.iid_), _Internal::kHasBitsOffset + 0, 0,
+    (0 | ::_fl::kFcOptional | ::_fl::kInt32)},
+    // repeated .inner_alias_message inners = 2 [(.org.xresloader.field_alias) = "Condition"];
+    {PROTOBUF_FIELD_OFFSET(outer_alias_message, _impl_.inners_), -1, 0,
+    (0 | ::_fl::kFcRepeated | ::_fl::kMessage | ::_fl::kTvTable)},
+    // repeated int32 nest_int = 3 [(.org.xresloader.field_alias) = "Nest", (.org.xresloader.field_list_min_size) = "2"];
+    {PROTOBUF_FIELD_OFFSET(outer_alias_message, _impl_.nest_int_), -1, 0,
+    (0 | ::_fl::kFcRepeated | ::_fl::kInt32)},
+  }}, {{
+    {::_pbi::TcParser::GetTable<::inner_alias_message>()},
+  }}, {{
+  }},
+};
+
+PROTOBUF_NOINLINE void outer_alias_message::Clear() {
+// @@protoc_insertion_point(message_clear_start:outer_alias_message)
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  ::uint32_t cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  _impl_.inners_.Clear();
+  _impl_.nest_int_.Clear();
+  _impl_.iid_ = 0;
+  _impl_._has_bits_.Clear();
+  _internal_metadata_.Clear<::google::protobuf::UnknownFieldSet>();
+}
+
+::uint8_t* outer_alias_message::_InternalSerialize(
+    ::uint8_t* target,
+    ::google::protobuf::io::EpsCopyOutputStream* stream) const {
+  // @@protoc_insertion_point(serialize_to_array_start:outer_alias_message)
+  ::uint32_t cached_has_bits = 0;
+  (void)cached_has_bits;
+
+  cached_has_bits = _impl_._has_bits_[0];
+  // optional int32 iId = 1 [(.org.xresloader.field_alias) = "ID"];
+  if (cached_has_bits & 0x00000001u) {
+    target = ::google::protobuf::internal::WireFormatLite::
+        WriteInt32ToArrayWithField<1>(
+            stream, this->_internal_iid(), target);
+  }
+
+  // repeated .inner_alias_message inners = 2 [(.org.xresloader.field_alias) = "Condition"];
+  for (unsigned i = 0, n = static_cast<unsigned>(
+                           this->_internal_inners_size());
+       i < n; i++) {
+    const auto& repfield = this->_internal_inners().Get(i);
+    target =
+        ::google::protobuf::internal::WireFormatLite::InternalWriteMessage(
+            2, repfield, repfield.GetCachedSize(),
+            target, stream);
+  }
+
+  // repeated int32 nest_int = 3 [(.org.xresloader.field_alias) = "Nest", (.org.xresloader.field_list_min_size) = "2"];
+  for (int i = 0, n = this->_internal_nest_int_size(); i < n; ++i) {
+    target = stream->EnsureSpace(target);
+    target = ::_pbi::WireFormatLite::WriteInt32ToArray(
+        3, this->_internal_nest_int().Get(i), target);
+  }
+
+  if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
+    target =
+        ::_pbi::WireFormat::InternalSerializeUnknownFieldsToArray(
+            _internal_metadata_.unknown_fields<::google::protobuf::UnknownFieldSet>(::google::protobuf::UnknownFieldSet::default_instance), target, stream);
+  }
+  // @@protoc_insertion_point(serialize_to_array_end:outer_alias_message)
+  return target;
+}
+
+::size_t outer_alias_message::ByteSizeLong() const {
+// @@protoc_insertion_point(message_byte_size_start:outer_alias_message)
+  ::size_t total_size = 0;
+
+  ::uint32_t cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  ::_pbi::Prefetch5LinesFrom7Lines(reinterpret_cast<const void*>(this));
+  // repeated .inner_alias_message inners = 2 [(.org.xresloader.field_alias) = "Condition"];
+  total_size += 1UL * this->_internal_inners_size();
+  for (const auto& msg : this->_internal_inners()) {
+    total_size += ::google::protobuf::internal::WireFormatLite::MessageSize(msg);
+  }
+  // repeated int32 nest_int = 3 [(.org.xresloader.field_alias) = "Nest", (.org.xresloader.field_list_min_size) = "2"];
+  {
+    std::size_t data_size = ::_pbi::WireFormatLite::Int32Size(
+        this->_internal_nest_int())
+    ;
+    std::size_t tag_size = std::size_t{1} *
+        ::_pbi::FromIntSize(this->_internal_nest_int_size());
+    ;
+    total_size += tag_size + data_size;
+  }
+  // optional int32 iId = 1 [(.org.xresloader.field_alias) = "ID"];
+  cached_has_bits = _impl_._has_bits_[0];
+  if (cached_has_bits & 0x00000001u) {
+    total_size += ::_pbi::WireFormatLite::Int32SizePlusOne(
+        this->_internal_iid());
+  }
+
+  return MaybeComputeUnknownFieldsSize(total_size, &_impl_._cached_size_);
+}
+
+
+void outer_alias_message::MergeImpl(::google::protobuf::MessageLite& to_msg, const ::google::protobuf::MessageLite& from_msg) {
+  auto* const _this = static_cast<outer_alias_message*>(&to_msg);
+  auto& from = static_cast<const outer_alias_message&>(from_msg);
+  // @@protoc_insertion_point(class_specific_merge_from_start:outer_alias_message)
+  ABSL_DCHECK_NE(&from, _this);
+  ::uint32_t cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  _this->_internal_mutable_inners()->MergeFrom(
+      from._internal_inners());
+  _this->_internal_mutable_nest_int()->MergeFrom(from._internal_nest_int());
+  cached_has_bits = from._impl_._has_bits_[0];
+  if (cached_has_bits & 0x00000001u) {
+    _this->_impl_.iid_ = from._impl_.iid_;
+  }
+  _this->_impl_._has_bits_[0] |= cached_has_bits;
+  _this->_internal_metadata_.MergeFrom<::google::protobuf::UnknownFieldSet>(from._internal_metadata_);
+}
+
+void outer_alias_message::CopyFrom(const outer_alias_message& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:outer_alias_message)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+
+void outer_alias_message::InternalSwap(outer_alias_message* PROTOBUF_RESTRICT other) {
+  using std::swap;
+  _internal_metadata_.InternalSwap(&other->_internal_metadata_);
+  swap(_impl_._has_bits_[0], other->_impl_._has_bits_[0]);
+  _impl_.inners_.InternalSwap(&other->_impl_.inners_);
+  _impl_.nest_int_.InternalSwap(&other->_impl_.nest_int_);
+        swap(_impl_.iid_, other->_impl_.iid_);
+}
+
+::google::protobuf::Metadata outer_alias_message::GetMetadata() const {
   return ::google::protobuf::Message::GetMetadataImpl(GetClassData()->full());
 }
 // @@protoc_insertion_point(namespace_scope)

@@ -55,7 +55,7 @@ message arr_in_arr {
     option (org.xresloader.ue.not_data_table) = true;
 
     optional string name    = 1 [ (org.xresloader.field_description) = "This is a test name in array" ];
-    repeated int32  int_arr = 2 [ packed = true ];
+    repeated int32  int_arr = 2 [ packed = true, (org.xresloader.field_list_min_size) = "game_const_config.EN_GCC_UNKNOWN", (org.xresloader.field_list_max_size) = "3", (org.xresloader.field_list_strip_option) = LIST_STRIP_NOTHING ];
     repeated string str_arr = 3;
 }
 
@@ -66,7 +66,7 @@ message arr_in_arr_cfg {
     optional uint32     id  = 1 [ (org.xresloader.ue.key_tag) = 1, (org.xresloader.field_description) = "This is a Key" ];
     repeated arr_in_arr arr = 2;
 
-    repeated int32             test_plain_int_arr  = 3;
+    repeated int32             test_plain_int_arr  = 3 [ (org.xresloader.field_list_min_size) = "1", (org.xresloader.field_list_max_size) = "3" ];
     repeated cost_type         test_plain_enum_arr = 4;
     optional test_msg_verifier test_plain_msg      = 5 [ (org.xresloader.field_separator) = "&" ];
     repeated test_msg_verifier test_plain_msg_arr  = 6;
@@ -153,4 +153,15 @@ message large_file_test {
     optional float      f32value = 5;
     optional string     szvalue  = 6;
     optional combine_id id_id    = 7;
+}
+
+message inner_alias_message {
+    optional int32 iType     = 1 [ (org.xresloader.field_alias) = "Type" ];
+    repeated int64 paramList = 2 [ (org.xresloader.field_alias) = "Param", (org.xresloader.field_list_min_size) = "2" ];
+}
+
+message outer_alias_message {
+    optional int32               iId      = 1 [ (org.xresloader.field_alias) = "ID" ];
+    repeated inner_alias_message inners   = 2 [ (org.xresloader.field_alias) = "Condition" ];
+    repeated int32               nest_int = 3 [ (org.xresloader.field_alias) = "Nest", (org.xresloader.field_list_min_size) = "2" ];
 }

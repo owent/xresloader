@@ -38,7 +38,7 @@ common_args = [
 # java 文件为非LITE版本
 proto_file_data = open(proto_file).read()
 proto_file_no_lite_data = re.sub(
-    '\s*option\s*optimize_for\s*=\s*LITE_RUNTIME\s*;',
+    '\\s*option\\s*optimize_for\\s*=\\s*LITE_RUNTIME\\s*;',
     '// option optimize_for = LITE_RUNTIME;', proto_file_data)
 open(proto_file, 'wb').write(proto_file_no_lite_data.encode('utf-8'))
 

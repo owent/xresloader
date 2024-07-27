@@ -68,6 +68,9 @@ public class DataDstPb extends DataDstImpl {
         /*** 类型信息-Message描述器集合 ***/
         public HashMap<String, PbAliasNode<Descriptors.Descriptor>> message_descs = new HashMap<String, PbAliasNode<Descriptors.Descriptor>>();
         public HashMap<String, HashMap<Integer, Descriptors.EnumValueDescriptor>> enum_values_descs = new HashMap<String, HashMap<Integer, Descriptors.EnumValueDescriptor>>();
+        /*** 类型信息-快速整数别名集合 ***/
+        public HashMap<String, Integer> quick_integer_values_alias = new HashMap<String, Integer>();
+        public HashSet<String> quick_integer_values_container = new HashSet<String>();
 
         // ========================== 验证器 ==========================
         HashMap<String, DataVerifyImpl> validator = new HashMap<String, DataVerifyImpl>();
@@ -98,7 +101,7 @@ public class DataDstPb extends DataDstImpl {
             full_name = full_name.substring(1);
         }
 
-        if (!short_name.isEmpty()) {
+        if (!short_name.isEmpty() && !short_name.equals(full_name)) {
             PbAliasNode<T> ls = hashmap.getOrDefault(short_name, null);
             if (null == ls) {
                 ls = new PbAliasNode<T>();
@@ -182,6 +185,67 @@ public class DataDstPb extends DataDstImpl {
         XresloaderUe.registerAllExtensions(pb_extensions);
 
         return pb_extensions;
+    }
+
+    static private Integer get_quick_integer_value(PbInfoSet pbs, String name) {
+        while (name.length() > 0 && name.charAt(0) == '.') {
+            name = name.substring(1);
+        }
+
+        int dotPos = name.lastIndexOf('.');
+        if (dotPos < 0) {
+            return null;
+        }
+
+        var ret = pbs.quick_integer_values_alias.getOrDefault(name, null);
+        if (ret != null) {
+            return ret;
+        }
+
+        String container = name.substring(0, dotPos);
+        if (pbs.quick_integer_values_container.contains(container)) {
+            return null;
+        }
+        pbs.quick_integer_values_container.add(container);
+
+        // Try enum
+        var enumDesc = get_alias_list_element(container, pbs.enums, "enum type");
+        if (enumDesc != null) {
+            for (var enumValue : enumDesc.getValueList()) {
+                pbs.quick_integer_values_alias.put(String.format("%s.%s", container, enumValue.getName()),
+                        Integer.valueOf(enumValue.getNumber()));
+            }
+            return pbs.quick_integer_values_alias.getOrDefault(name, null);
+        }
+
+        // Try message
+        var msgDesc = get_alias_list_element(container, pbs.messages, "message type");
+        if (msgDesc != null) {
+            for (var fieldDesc : msgDesc.getFieldList()) {
+                pbs.quick_integer_values_alias.put(String.format("%s.%s", container, fieldDesc.getName()),
+                        Integer.valueOf(fieldDesc.getNumber()));
+            }
+            return pbs.quick_integer_values_alias.getOrDefault(name, null);
+        }
+
+        return null;
+    }
+
+    static private Integer try_parse_quick_integer_value(PbInfoSet pbs, String name) {
+        name = name.trim();
+        if (name.isEmpty()) {
+            return null;
+        }
+
+        if (name.charAt(0) >= '0' && name.charAt(0) <= '9') {
+            try {
+                return Integer.valueOf(name);
+            } catch (NumberFormatException e) {
+                return null;
+            }
+        }
+
+        return get_quick_integer_value(pbs, name);
     }
 
     static void load_pb_message(PbInfoSet pbs, DescriptorProtos.DescriptorProto mdp, String package_name,
@@ -395,6 +459,7 @@ public class DataDstPb extends DataDstImpl {
         if (verifierExpr != null && !verifierExpr.isEmpty()) {
             child_field.mutableExtension().validator = verifierExpr;
         }
+        boolean ret = true;
         var gen = setup_validator(null, verifierExpr, fd);
         if (gen != null && gen.validator != null && !gen.validator.isEmpty()) {
             for (DataVerifyImpl vfy : gen.validator) {
@@ -553,8 +618,93 @@ public class DataDstPb extends DataDstImpl {
                     .getExtension(XresloaderUe.ueOriginTypeDefaultValue);
         }
 
+        // setup list extension
+        if (fd.isRepeated()) {
+            if (fd.getOptions().hasExtension(Xresloader.fieldListStripOption)) {
+                switch (fd.getOptions().getExtension(Xresloader.fieldListStripOption).getNumber()) {
+                    case Xresloader.ListStripOption.LIST_STRIP_DEFAULT_VALUE: {
+                        child_field.mutableExtension()
+                                .mutableList().stripOption = DataDstWriterNode.ListStripRule.DEFAULT;
+                        break;
+                    }
+                    case Xresloader.ListStripOption.LIST_STRIP_NOTHING_VALUE: {
+                        child_field.mutableExtension()
+                                .mutableList().stripOption = DataDstWriterNode.ListStripRule.STRIP_NOTHING;
+                        break;
+                    }
+                    case Xresloader.ListStripOption.LIST_STRIP_TAIL_VALUE: {
+                        child_field.mutableExtension()
+                                .mutableList().stripOption = DataDstWriterNode.ListStripRule.STRIP_TAIL;
+                        break;
+                    }
+                    case Xresloader.ListStripOption.LIST_STRIP_ALL_VALUE: {
+                        child_field.mutableExtension()
+                                .mutableList().stripOption = DataDstWriterNode.ListStripRule.STRIP_ALL;
+                        break;
+                    }
+                }
+            }
+
+            if (fd.getOptions().hasExtension(Xresloader.fieldListMinSize)) {
+                var intValue = try_parse_quick_integer_value(cachePbs,
+                        fd.getOptions().getExtension(Xresloader.fieldListMinSize));
+                if (null == intValue) {
+                    ProgramOptions.getLoger().error(
+                            "\"%s\" has invalid extension settings field_list_min_size (%s)",
+                            fd.getFullName(),
+                            fd.getOptions().getExtension(Xresloader.fieldListMinSize));
+                    ret = false;
+                    if (gen != null) {
+                        gen.success = false;
+                    }
+                } else {
+                    child_field.mutableExtension()
+                            .mutableList().minSize = intValue.intValue();
+                }
+            }
+            if (fd.getOptions().hasExtension(Xresloader.fieldListMaxSize)) {
+                var intValue = try_parse_quick_integer_value(cachePbs,
+                        fd.getOptions().getExtension(Xresloader.fieldListMaxSize));
+                if (null == intValue) {
+                    ProgramOptions.getLoger().error(
+                            "\"%s\" has invalid extension settings field_list_max_size (%s)",
+                            fd.getFullName(),
+                            fd.getOptions().getExtension(Xresloader.fieldListMaxSize));
+                    ret = false;
+                    if (gen != null) {
+                        gen.success = false;
+                    }
+                } else {
+                    child_field.mutableExtension()
+                            .mutableList().maxSize = intValue.intValue();
+                }
+
+                if (child_field.mutableExtension()
+                        .mutableList().maxSize != 0
+                        && child_field.mutableExtension()
+                                .mutableList().maxSize < child_field.mutableExtension()
+                                        .mutableList().minSize) {
+                    ProgramOptions.getLoger().error(
+                            "\"%s\" has invalid extension settings(field_list_max_size (%d) is smaller than field_list_min_size (%d)",
+                            fd.getFullName(),
+                            child_field.mutableExtension()
+                                    .mutableList().maxSize,
+                            child_field.mutableExtension()
+                                    .mutableList().minSize);
+                    ret = false;
+                    if (gen != null) {
+                        gen.success = false;
+                    }
+                }
+            }
+            if (fd.getOptions().hasExtension(Xresloader.fieldListStrictSize)) {
+                child_field.mutableExtension()
+                        .mutableList().strictSize = fd.getOptions().getExtension(Xresloader.fieldListStrictSize);
+            }
+        }
+
         if (gen == null) {
-            return true;
+            return ret;
         }
         return gen.success;
     }
@@ -889,7 +1039,7 @@ public class DataDstPb extends DataDstImpl {
 
         currentMsgDesc = get_message_proto(cachePbs, SchemeConf.getInstance().getProtoName());
         if (null == currentMsgDesc) {
-            this.setLastErrorMessage("Can not find protocol message %s", SchemeConf.getInstance().getProtoName());
+            this.logErrorMessage("Can not find protocol message %s", SchemeConf.getInstance().getProtoName());
             return false;
         }
 
@@ -909,7 +1059,7 @@ public class DataDstPb extends DataDstImpl {
                         oneFileCustomValidatorMode ? cachePbs.oneCustomValidatorFiles
                                 : cachePbs.mixedCustomValidatorFiles);
                 if (null == validatorSet) {
-                    this.setLastErrorMessage("Can not build custom validators from file \"%s\"",
+                    this.logErrorMessage("Can not build custom validators from file \"%s\"",
                             ruleFilePath);
                     return false;
                 }
@@ -1035,7 +1185,7 @@ public class DataDstPb extends DataDstImpl {
             if (null != innerField) {
                 if (!setup_extension(innerDesc, innerField, field)) {
                     throw new ConvException(
-                            String.format("setup extension failed, field name: %s", field.getFullName()));
+                            String.format("Setup extension failed, field name: %s", field.getFullName()));
                 }
             }
         }
@@ -1045,7 +1195,7 @@ public class DataDstPb extends DataDstImpl {
             if (null != innerField) {
                 if (!setup_extension(innerDesc, innerField, pbDesc, oneof)) {
                     throw new ConvException(
-                            String.format("setup extension failed, field name: %s", oneof.getFullName()));
+                            String.format("Setup extension failed, field name: %s", oneof.getFullName()));
                 }
             }
         }
@@ -1319,8 +1469,8 @@ public class DataDstPb extends DataDstImpl {
         if (!isMissing && oneof != null && oneofField.containsKey(oneof.getFullName())) {
             String old_field = oneofField.get(oneof.getFullName());
             if (old_field != null) {
-                setLastErrorMessage(
-                        "field \"%s\" in oneof descriptor \"%s\" already exists, can not add another field \"%s\" with the same oneof descriptor",
+                this.logErrorMessage(
+                        "Field \"%s\" in oneof descriptor \"%s\" already exists, can not add another field \"%s\" with the same oneof descriptor",
                         old_field, oneof.getFullName(), fd.getName());
                 throw new ConvException(getLastErrorMessage());
             }
@@ -1388,27 +1538,32 @@ public class DataDstPb extends DataDstImpl {
                             boolean test_passed = false;
 
                             name_list.removeLast();
-                            name_list.addLast(DataDstWriterNode.makeNodeName(fd.getName(), count));
-                            if (test(c, name_list)) {
-                                child = node.addChild(fd.getName(), c, fd, DataDstWriterNode.CHILD_NODE_TYPE.STANDARD);
-                                ret = true;
-                                test_passed = true;
+                            // 检测使用的名字，message不允许混合别名。以防别名组合指数级膨胀
+                            String select_name = "";
+                            if (data_src.containsIdentifyMappingPrefix(
+                                    DataDstWriterNode.makeChildPath(prefix, fd.getName(),
+                                            count))) {
+                                select_name = fd.getName();
                             } else if (null != field_alias) {
                                 for (String alias_name : field_alias) {
                                     String test_field_name = alias_name.strip();
                                     if (test_field_name.isEmpty()) {
                                         continue;
                                     }
-                                    name_list.removeLast();
-                                    name_list.addLast(DataDstWriterNode.makeNodeName(test_field_name, count));
-                                    if (test(c, name_list)) {
-                                        child = node.addChild(fd.getName(), c, fd,
-                                                DataDstWriterNode.CHILD_NODE_TYPE.STANDARD);
-                                        ret = true;
-                                        test_passed = true;
+
+                                    if (data_src.containsIdentifyMappingPrefix(
+                                            DataDstWriterNode.makeChildPath(prefix, test_field_name,
+                                                    count))) {
+                                        select_name = test_field_name;
                                         break;
                                     }
                                 }
+                            }
+                            name_list.addLast(DataDstWriterNode.makeNodeName(select_name, count));
+                            if (!select_name.isEmpty() && test(c, name_list)) {
+                                child = node.addChild(fd.getName(), c, fd, DataDstWriterNode.CHILD_NODE_TYPE.STANDARD);
+                                ret = true;
+                                test_passed = true;
                             }
 
                             if (!test_passed) {
@@ -1444,6 +1599,24 @@ public class DataDstPb extends DataDstImpl {
 
                         if (count > 0) {
                             filterMissingFields(missingFields, oneofField, fd, false);
+                            if (child != null && child.innerFieldDesc != null) {
+                                int minSize = child.innerFieldDesc.mutableExtension().mutableList().minSize;
+                                int maxSize = child.innerFieldDesc.mutableExtension().mutableList().maxSize;
+                                if (minSize > 0 && child.nodes.size() < minSize) {
+                                    throw new ConvException(
+                                            String.format(
+                                                    "\"%s.%s\" for %s.%s require at least %d element(s), real got %d element(s).",
+                                                    desc.getFullName(), fd.getName(),
+                                                    prefix, fd.getName(), minSize, child.nodes.size()));
+                                }
+                                if (maxSize > 0 && child.nodes.size() > maxSize) {
+                                    throw new ConvException(
+                                            String.format(
+                                                    "\"%s.%s\" for %s.%s require at most %d element(s), real got %d element(s).",
+                                                    desc.getFullName(), fd.getName(),
+                                                    prefix, fd.getName(), maxSize, child.nodes.size()));
+                                }
+                            }
                         } else {
                             // try plain mode - the whole array
                             String real_name = DataDstWriterNode.makeChildPath(prefix, fd.getName());
@@ -1481,34 +1654,34 @@ public class DataDstPb extends DataDstImpl {
                                 DataDstWriterNode.JAVA_TYPE.MESSAGE, pbTypeToTypeLimit(fd.getType()), -1);
                         boolean test_passed = false;
 
-                        name_list.addLast(DataDstWriterNode.makeNodeName(fd.getName()));
-                        if (test(c, name_list)) {
-                            filterMissingFields(missingFields, oneofField, fd, false);
-                            child = node.addChild(fd.getName(), c, fd, DataDstWriterNode.CHILD_NODE_TYPE.STANDARD);
-                            ret = true;
-                            test_passed = true;
+                        // 检测使用的名字，message不允许混合别名。以防别名组合指数级膨胀
+                        String select_name = "";
+                        if (data_src.containsIdentifyMappingPrefix(
+                                DataDstWriterNode.makeChildPath(prefix, fd.getName()))) {
+                            select_name = fd.getName();
                         } else if (null != field_alias) {
                             for (String alias_name : field_alias) {
                                 String test_field_name = alias_name.strip();
                                 if (test_field_name.isEmpty()) {
                                     continue;
                                 }
-                                name_list.removeLast();
-                                name_list.addLast(DataDstWriterNode.makeNodeName(test_field_name));
-                                if (test(c, name_list)) {
-                                    filterMissingFields(missingFields, oneofField, fd, false);
-                                    child = node.addChild(fd.getName(), c, fd,
-                                            DataDstWriterNode.CHILD_NODE_TYPE.STANDARD);
-                                    ret = true;
-                                    test_passed = true;
+
+                                if (data_src.containsIdentifyMappingPrefix(
+                                        DataDstWriterNode.makeChildPath(prefix, test_field_name))) {
+                                    select_name = test_field_name;
                                     break;
                                 }
                             }
                         }
+                        name_list.addLast(DataDstWriterNode.makeNodeName(select_name));
+                        if (test(c, name_list)) {
+                            filterMissingFields(missingFields, oneofField, fd, false);
+                            child = node.addChild(fd.getName(), c, fd, DataDstWriterNode.CHILD_NODE_TYPE.STANDARD);
+                            ret = true;
+                            test_passed = true;
+                        }
 
                         if (!test_passed) {
-                            filterMissingFields(missingFields, oneofField, fd, true);
-
                             // try plain mode
                             String real_name = DataDstWriterNode.makeChildPath(prefix, fd.getName());
                             IdentifyDescriptor col = data_src.getColumnByName(real_name);
@@ -1581,6 +1754,24 @@ public class DataDstPb extends DataDstImpl {
 
                         if (count > 0) {
                             filterMissingFields(missingFields, oneofField, fd, false);
+                            if (child != null && child.innerFieldDesc != null) {
+                                int minSize = child.innerFieldDesc.mutableExtension().mutableList().minSize;
+                                int maxSize = child.innerFieldDesc.mutableExtension().mutableList().maxSize;
+                                if (minSize > 0 && child.nodes.size() < minSize) {
+                                    throw new ConvException(
+                                            String.format(
+                                                    "\"%s.%s\" for %s.%s require at least %d element(s), real got %d element(s).",
+                                                    desc.getFullName(), fd.getName(),
+                                                    prefix, fd.getName(), minSize, child.nodes.size()));
+                                }
+                                if (maxSize > 0 && child.nodes.size() > maxSize) {
+                                    throw new ConvException(
+                                            String.format(
+                                                    "\"%s.%s\" for %s.%s require at most %d element(s), real got %d element(s).",
+                                                    desc.getFullName(), fd.getName(),
+                                                    prefix, fd.getName(), maxSize, child.nodes.size()));
+                                }
+                            }
                         } else {
                             // try plain mode
                             String real_name = DataDstWriterNode.makeChildPath(prefix, fd.getName());
@@ -1654,16 +1845,16 @@ public class DataDstPb extends DataDstImpl {
         // 索引oneof
         for (Descriptors.OneofDescriptor fd : desc.getOneofs()) {
             if (node.getTypeDescriptor() == null) {
-                setLastErrorMessage(
-                        "type descriptor \"%s\" not found, it's probably a BUG, please report to %s, current version: %s",
+                this.logErrorMessage(
+                        "Type descriptor \"%s\" not found, it's probably a BUG, please report to %s, current version: %s",
                         node.getFullName(), ProgramOptions.getReportUrl(), ProgramOptions.getInstance().getVersion());
                 throw new ConvException(getLastErrorMessage());
             }
 
             DataDstOneofDescriptor oneof_inner_desc = node.getTypeDescriptor().oneofs.getOrDefault(fd.getName(), null);
             if (oneof_inner_desc == null) {
-                setLastErrorMessage(
-                        "oneof descriptor \"%s\" not found in type descriptor \"%s\", it's probably a BUG, please report to %s, current version: %s",
+                this.logErrorMessage(
+                        "Oneof descriptor \"%s\" not found in type descriptor \"%s\", it's probably a BUG, please report to %s, current version: %s",
                         fd.getFullName(), node.getFullName(), ProgramOptions.getReportUrl(),
                         ProgramOptions.getInstance().getVersion());
                 throw new ConvException(getLastErrorMessage());
@@ -1679,8 +1870,8 @@ public class DataDstPb extends DataDstImpl {
 
             String old_field = oneofField.getOrDefault(fd.getFullName(), null);
             if (old_field != null) {
-                setLastErrorMessage(
-                        "field \"%s\" in oneof descriptor \"%s\" already exists, can not add the oneof writer again",
+                this.logErrorMessage(
+                        "Field \"%s\" in oneof descriptor \"%s\" already exists, can not add the oneof writer again",
                         old_field, fd.getFullName());
                 throw new ConvException(getLastErrorMessage());
             }
@@ -1695,9 +1886,9 @@ public class DataDstPb extends DataDstImpl {
         }
 
         if (require_mapping_all_fields) {
-            String missingFliedDesc = "";
+            String missingFieldDesc = "";
             if (missingFields != null && !missingFields.isEmpty()) {
-                missingFliedDesc = String.format(" fields %s", String.join(",", missingFields));
+                missingFieldDesc = String.format(" fields %s", String.join(",", missingFields));
             }
 
             String missingOneofDesc = "";
@@ -1712,9 +1903,14 @@ public class DataDstPb extends DataDstImpl {
                 missingOneofDesc = String.format(" oneof %s", String.join(",", missingOneofs));
             }
 
-            if (!missingFliedDesc.isEmpty() || !missingOneofDesc.isEmpty()) {
-                setLastErrorMessage("message %s in %s can not find%s%s in data source", desc.getFullName(), prefix,
-                        missingFliedDesc, missingOneofDesc);
+            if (!missingFieldDesc.isEmpty() || !missingOneofDesc.isEmpty()) {
+                if (prefix.isEmpty()) {
+                    this.logErrorMessage("Message %s can not find%s%s in data source", desc.getFullName(),
+                            missingFieldDesc, missingOneofDesc);
+                } else {
+                    this.logErrorMessage("Message %s in %s can not find%s%s in data source", desc.getFullName(), prefix,
+                            missingFieldDesc, missingOneofDesc);
+                }
                 throw new ConvException(getLastErrorMessage());
             }
         }
@@ -1752,14 +1948,23 @@ public class DataDstPb extends DataDstImpl {
         try {
             return root.build().toByteString();
         } catch (Exception e) {
-            this.logErrorMessage("serialize failed. %s", e.getMessage());
+            this.logErrorMessage("Serialize failed. %s", e.getMessage());
             return null;
         }
     }
 
-    private Object getDefault(DynamicMessage.Builder builder, DataDstFieldDescriptor field) {
+    private Object getDefault(DynamicMessage.Builder builder, DataDstFieldDescriptor field, int listIndex)
+            throws ConvException {
         Descriptors.FieldDescriptor fd = (Descriptors.FieldDescriptor) field.getRawDescriptor();
         Object val = null;
+        if (field.isList() && field.getListExtension() != null
+                && field.getListExtension().strictSize && field.getListExtension().minSize >= listIndex + 1) {
+            this.logErrorMessage(
+                    "Field \"%s\" in \"%s\" has set field_list_min_size %d, which is not allowed to be auto filled with default value.",
+                    field.getName(), fd.getContainingType().getFullName(),
+                    field.getListExtension().minSize);
+            throw new ConvException(getLastErrorMessage());
+        }
         switch (fd.getType()) {
             case DOUBLE:
                 val = Double.valueOf(0.0);
@@ -1801,6 +2006,13 @@ public class DataDstPb extends DataDstImpl {
                     for (DataDstFieldDescriptor subField : field.getTypeDescriptor().getSortedFields()) {
                         if (subField.isRequired()) {
                             dumpDefault(subnode, subField, 0);
+                        } else if (subField.isList() && subField.getListExtension() != null
+                                && subField.getListExtension().strictSize && subField.getListExtension().minSize > 0) {
+                            this.logErrorMessage(
+                                    "Field \"%s\" in \"%s\" has set field_list_min_size %d, which is not allowed to be auto filled with default value.",
+                                    subField.getName(), fd.getFullName(),
+                                    subField.getListExtension().minSize);
+                            throw new ConvException(getLastErrorMessage());
                         }
                     }
 
@@ -1952,16 +2164,16 @@ public class DataDstPb extends DataDstImpl {
 
     private void dumpValue(DynamicMessage.Builder builder, DataDstFieldDescriptor field, Object val, int index,
             DataRowContext rowContext,
-            String fieldPath) {
-        ProgramOptions.ListStripRule stripListRule = ProgramOptions.getInstance().stripListRule;
+            String fieldPath) throws ConvException {
+        DataDstWriterNode.ListStripRule stripListRule = field.getListStripRule();
         Descriptors.FieldDescriptor fd = (Descriptors.FieldDescriptor) field.getRawDescriptor();
 
         if (fd.isRepeated()
-                && (stripListRule == ProgramOptions.ListStripRule.KEEP_ALL
-                        || stripListRule == ProgramOptions.ListStripRule.STRIP_EMPTY_TAIL)) {
+                && (stripListRule == DataDstWriterNode.ListStripRule.STRIP_NOTHING
+                        || stripListRule == DataDstWriterNode.ListStripRule.STRIP_TAIL)) {
             int fill_default_size = builder.getRepeatedFieldCount(fd);
             for (int i = fill_default_size; i < index; ++i) {
-                Object defaultVal = getDefault(builder, field);
+                Object defaultVal = getDefault(builder, field, i);
                 if (defaultVal != null) {
                     builder.addRepeatedField(fd, defaultVal);
                 }
@@ -2033,8 +2245,9 @@ public class DataDstPb extends DataDstImpl {
         builder.clearOneof((Descriptors.OneofDescriptor) oneof.getRawDescriptor());
     }
 
-    private void dumpDefault(DynamicMessage.Builder builder, DataDstFieldDescriptor field, int index) {
-        Object val = getDefault(builder, field);
+    private void dumpDefault(DynamicMessage.Builder builder, DataDstFieldDescriptor field, int index)
+            throws ConvException {
+        Object val = getDefault(builder, field, index);
         if (val != null) {
             dumpValue(builder, field, val, index, null, "");
         }
@@ -2111,8 +2324,31 @@ public class DataDstPb extends DataDstImpl {
 
                 if (null != rowContext && !fieldHasValue && c.getValue().isNotNull()) {
                     rowContext.addIgnoreReason(
-                            String.format("field %s is empty but set not null, we will ignore this row",
+                            String.format("Field %s is empty but set not null, we will ignore this row",
                                     subFieldPath));
+                }
+            }
+
+            // Check list size
+            if (c.getValue().isList() && c.getValue().innerFieldDesc != null) {
+                var listExt = c.getValue().innerFieldDesc.getListExtension();
+                if (listExt != null && c.getValue().innerFieldDesc != null) {
+                    Descriptors.FieldDescriptor fd = (Descriptors.FieldDescriptor) c.getValue().innerFieldDesc
+                            .getRawDescriptor();
+                    if (listExt.minSize > 0 && listExt.minSize > builder.getRepeatedFieldCount(fd)) {
+                        throw new ConvException(
+                                String.format(
+                                        "Try to convert %s failed, require at least %d element(s), real got %d element(s).",
+                                        fd.getFullName(),
+                                        listExt.minSize, builder.getRepeatedFieldCount(fd)));
+                    }
+                    if (listExt.maxSize > 0 && listExt.maxSize < builder.getRepeatedFieldCount(fd)) {
+                        throw new ConvException(
+                                String.format(
+                                        "Try to convert %s failed, require at most %d element(s), real got %d element(s).",
+                                        fd.getFullName(),
+                                        listExt.maxSize, builder.getRepeatedFieldCount(fd)));
+                    }
                 }
             }
         }
@@ -2126,7 +2362,7 @@ public class DataDstPb extends DataDstImpl {
         if (null == desc.identify && DataDstWriterNode.JAVA_TYPE.MESSAGE != field.getType()) {
             // required 空字段填充默认值
             if (field.isRequired()
-                    || ProgramOptions.getInstance().stripListRule == ProgramOptions.ListStripRule.KEEP_ALL) {
+                    || field.getListStripRule() == DataDstWriterNode.ListStripRule.STRIP_NOTHING) {
                 dumpDefault(builder, field, desc.getListIndex());
             }
 
@@ -2137,7 +2373,7 @@ public class DataDstPb extends DataDstImpl {
 
         if (null == val) {
             if (field.isRequired()
-                    || ProgramOptions.getInstance().stripListRule == ProgramOptions.ListStripRule.KEEP_ALL) {
+                    || field.getListStripRule() == DataDstWriterNode.ListStripRule.STRIP_NOTHING) {
                 dumpDefault(builder, field, desc.getListIndex());
             }
 
@@ -2157,7 +2393,7 @@ public class DataDstPb extends DataDstImpl {
         }
 
         if (null == ident) {
-            if (ProgramOptions.getInstance().stripListRule == ProgramOptions.ListStripRule.KEEP_ALL) {
+            if (DataDstWriterNode.getDefaultListStripRule() == DataDstWriterNode.ListStripRule.STRIP_NOTHING) {
                 dumpDefault(builder, field);
             }
             return false;
@@ -2225,7 +2461,7 @@ public class DataDstPb extends DataDstImpl {
             String fieldPath) throws ConvException {
         if (null == ident) {
             if (field.isRequired()
-                    || ProgramOptions.getInstance().stripListRule == ProgramOptions.ListStripRule.KEEP_ALL) {
+                    || field.getListStripRule() == DataDstWriterNode.ListStripRule.STRIP_NOTHING) {
                 dumpDefault(builder, field, 0);
             }
             return false;
@@ -2234,7 +2470,7 @@ public class DataDstPb extends DataDstImpl {
         DataContainer<String> res = DataSrcImpl.getOurInstance().getValue(ident, "");
         if (null == res || !res.valid) {
             if (field.isRequired()
-                    || ProgramOptions.getInstance().stripListRule == ProgramOptions.ListStripRule.KEEP_ALL) {
+                    || field.getListStripRule() == DataDstWriterNode.ListStripRule.STRIP_NOTHING) {
                 dumpDefault(builder, field, 0);
             }
             return false;
@@ -2270,6 +2506,7 @@ public class DataDstPb extends DataDstImpl {
             }
             Object parsedDatas = null;
 
+            boolean ret = true;
             switch (field.getType()) {
                 case INT: {
                     Long[] values = parsePlainDataLong(groups, ident, field);
@@ -2441,17 +2678,17 @@ public class DataDstPb extends DataDstImpl {
                 if (null != maybeFromNode && maybeFromNode.getListIndex() >= 0) {
                     if (values.size() != 1) {
                         throw new ConvException(
-                                String.format("Try to convert %s.%s.%d failed, too many elements(found %d).",
+                                String.format("Try to convert %s.%s.%d failed, too many element(s)(found %d).",
                                         field.getTypeDescriptor().getFullName(), field.getName(),
                                         maybeFromNode.getListIndex(), values.size()));
                     }
 
                     int index = maybeFromNode.getListIndex();
-                    ProgramOptions.ListStripRule stripListRule = ProgramOptions.getInstance().stripListRule;
-                    if (stripListRule == ProgramOptions.ListStripRule.KEEP_ALL
-                            || stripListRule == ProgramOptions.ListStripRule.STRIP_EMPTY_TAIL) {
+                    DataDstWriterNode.ListStripRule stripListRule = field.getListStripRule();
+                    if (stripListRule == DataDstWriterNode.ListStripRule.STRIP_NOTHING
+                            || stripListRule == DataDstWriterNode.ListStripRule.STRIP_TAIL) {
                         while (builder.getRepeatedFieldCount(fd) < index) {
-                            builder.addRepeatedField(fd, getDefault(builder, field));
+                            builder.addRepeatedField(fd, getDefault(builder, field, builder.getRepeatedFieldCount(fd)));
                         }
                     }
 
@@ -2485,13 +2722,39 @@ public class DataDstPb extends DataDstImpl {
                         }
                     }
                 }
-            } else if (ProgramOptions.getInstance().stripListRule == ProgramOptions.ListStripRule.KEEP_ALL) {
-                builder.addRepeatedField(fd, getDefault(builder, field));
+            } else if (field.getListStripRule() == DataDstWriterNode.ListStripRule.STRIP_NOTHING) {
+                if (null != maybeFromNode && maybeFromNode.getListIndex() >= 0) {
+                    int index = maybeFromNode.getListIndex();
+                    while (builder.getRepeatedFieldCount(fd) <= index) {
+                        builder.addRepeatedField(fd, getDefault(builder, field, builder.getRepeatedFieldCount(fd)));
+                    }
+                }
             } else {
-                return false;
+                ret = false;
             }
 
-            return true;
+            // Check list size
+            {
+                var listExt = field.getListExtension();
+                if (listExt != null) {
+                    if (listExt.minSize > 0 && listExt.minSize > builder.getRepeatedFieldCount(fd)) {
+                        throw new ConvException(
+                                String.format(
+                                        "Try to convert %s failed, require at least %d element(s), real got %d element(s).",
+                                        fd.getFullName(),
+                                        listExt.minSize, builder.getRepeatedFieldCount(fd)));
+                    }
+                    if (listExt.maxSize > 0 && listExt.maxSize < builder.getRepeatedFieldCount(fd)) {
+                        throw new ConvException(
+                                String.format(
+                                        "Try to convert %s failed, require at most %d element(s), real got %d element(s).",
+                                        fd.getFullName(),
+                                        listExt.maxSize, builder.getRepeatedFieldCount(fd)));
+                    }
+                }
+            }
+
+            return ret;
         } else {
             Object val = null;
 

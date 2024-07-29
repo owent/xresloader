@@ -1674,7 +1674,7 @@ public class DataDstPb extends DataDstImpl {
                             }
                         }
                         name_list.addLast(DataDstWriterNode.makeNodeName(select_name));
-                        if (test(c, name_list)) {
+                        if (!select_name.isEmpty() && test(c, name_list)) {
                             filterMissingFields(missingFields, oneofField, fd, false);
                             child = node.addChild(fd.getName(), c, fd, DataDstWriterNode.CHILD_NODE_TYPE.STANDARD);
                             ret = true;

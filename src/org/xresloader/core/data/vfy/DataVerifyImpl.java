@@ -100,8 +100,10 @@ public abstract class DataVerifyImpl {
         boolean is_double = false;
         for (int i = 0; is_numeric && i < enum_name.length(); ++i) {
             char c = enum_name.charAt(i);
-            if ((c < '0' || c > '9') && '.' != c && '-' != c) {
-                is_numeric = false;
+            if ((c < '0' || c > '9') && '.' != c && '-' != c && ',' != c) {
+                if (!PERCENT_PATTERN.get().matcher(enum_name).matches()) {
+                    is_numeric = false;
+                }
             }
             if ('.' == c) {
                 is_double = true;
@@ -297,7 +299,7 @@ public abstract class DataVerifyImpl {
         String message = String.format("Convert %s for %s with %s %s failed, check data failed.", val,
                 path, getValidatorWord(verifyEngine), collectValidatorNames(verifyEngine));
         if (ProgramOptions.getInstance().enableDataValidator) {
-            throw new ConvException();
+            throw new ConvException(message);
         } else {
             ProgramOptions.getLoger().warn(message);
             return 0.0;

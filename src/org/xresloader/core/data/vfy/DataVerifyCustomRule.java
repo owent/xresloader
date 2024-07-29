@@ -147,7 +147,7 @@ public class DataVerifyCustomRule extends DataVerifyImpl {
     }
 
     @Override
-    public boolean get(String input, DataVerifyResult res) {
+    public boolean get(String input, DataVerifyResult res) throws NumberFormatException {
         if (this.validators == null || this.validators.size() == 0) {
             res.success = true;
             res.value = input;

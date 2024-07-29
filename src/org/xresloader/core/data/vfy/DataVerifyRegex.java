@@ -67,7 +67,7 @@ public class DataVerifyRegex extends DataVerifyImpl {
     }
 
     @Override
-    public boolean get(String input, DataVerifyResult res) {
+    public boolean get(String input, DataVerifyResult res) throws NumberFormatException {
         // 空值永久有效,因为空数据项会被填充默认值
         if (input.isEmpty()) {
             res.success = true;

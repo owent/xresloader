@@ -94,7 +94,7 @@ public class DataVerifyIntRange extends DataVerifyImpl {
     }
 
     @Override
-    public boolean get(String intstr, DataVerifyResult res) {
+    public boolean get(String intstr, DataVerifyResult res) throws NumberFormatException {
         // check if it's a number
         boolean is_numeric = true;
         boolean is_double = false;

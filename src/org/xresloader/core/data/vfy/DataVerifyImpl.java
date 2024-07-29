@@ -21,9 +21,9 @@ public abstract class DataVerifyImpl {
     protected String name = "";
 
     private static ThreadLocal<Pattern> PERCENT_PATTERN = ThreadLocal
-            .withInitial(() -> Pattern.compile("^\\s*((\\-\\s*)?[0-9]+(\\.[0-9]+)?)\\s*%\\s*$"));
+            .withInitial(() -> Pattern.compile("^\\s*((\\-\\s*)?[0-9\\,]+(\\.[0-9\\,]+)?)\\s*%\\s*$"));
     private static ThreadLocal<Pattern> INTEGER_WITH_DOT_PATTERN = ThreadLocal
-            .withInitial(() -> Pattern.compile("^\\s*((\\-\\s*)?[0-9\\,]+)\\s*$"));
+            .withInitial(() -> Pattern.compile("^\\s*((\\-\\s*)?[0-9\\,]+)\\s*(%\\s*)?$"));
 
     protected DataVerifyImpl(String _name) {
         name = _name;
@@ -51,7 +51,14 @@ public abstract class DataVerifyImpl {
         return false;
     }
 
-    private static double doubleValueOf(String input) {
+    private static double doubleValueOf(String input) throws NumberFormatException {
+        {
+            Matcher matcher = INTEGER_WITH_DOT_PATTERN.get().matcher(input);
+            if (matcher.matches()) {
+                input = input.replaceAll(",", "").trim();
+            }
+        }
+
         Matcher matcher = PERCENT_PATTERN.get().matcher(input);
         if (matcher.matches()) {
             return Double.valueOf(matcher.group(1).trim()) / 100.0;
@@ -59,15 +66,30 @@ public abstract class DataVerifyImpl {
         return Double.valueOf(input);
     }
 
-    private static long longValueOf(String input) {
-        Matcher matcher = INTEGER_WITH_DOT_PATTERN.get().matcher(input);
-        if (matcher.matches()) {
-            return Long.valueOf(input.replaceAll(",", "").trim());
+    private static long longValueOf(String input) throws NumberFormatException {
+        long ret;
+        {
+            Matcher matcher = INTEGER_WITH_DOT_PATTERN.get().matcher(input);
+            if (matcher.matches()) {
+                input = input.replaceAll(",", "").trim();
+            }
         }
-        return Long.valueOf(input);
+
+        Matcher matcher = PERCENT_PATTERN.get().matcher(input);
+        if (matcher.matches()) {
+            ret = Long.valueOf(matcher.group(1).trim());
+            if (ret % 100 != 0) {
+                throw new NumberFormatException(
+                        String.format("The number part of %s can not be devided by 100", input));
+            }
+        } else {
+            ret = Long.valueOf(input);
+        }
+
+        return ret;
     }
 
-    public boolean get(String enum_name, DataVerifyResult res) {
+    public boolean get(String enum_name, DataVerifyResult res) throws NumberFormatException {
         if (null == enum_name || enum_name.isEmpty()) {
             res.success = true;
             res.value = 0;
@@ -208,23 +230,25 @@ public abstract class DataVerifyImpl {
         boolean is_double = false;
         for (int i = 0; is_numeric && i < val.length(); ++i) {
             char c = val.charAt(i);
-            if ((c < '0' || c > '9') && '.' != c && '-' != c) {
-                is_numeric = false;
+            if ((c < '0' || c > '9') && '.' != c && '-' != c && ',' != c) {
+                if (!PERCENT_PATTERN.get().matcher(val).matches()) {
+                    is_numeric = false;
+                }
             }
             if ('.' == c) {
                 is_double = true;
             }
         }
 
-        if (is_numeric) {
-            if (is_double) {
-                return getAndVerify(verifyEngine, path, doubleValueOf(val));
-            } else {
-                return getAndVerify(verifyEngine, path, longValueOf(val));
-            }
-        }
-
         try {
+            if (is_numeric) {
+                if (is_double) {
+                    return getAndVerify(verifyEngine, path, doubleValueOf(val));
+                } else {
+                    return getAndVerify(verifyEngine, path, longValueOf(val));
+                }
+            }
+
             if (verifyEngine == null || verifyEngine.isEmpty()) {
                 if (is_double) {
                     return doubleValueOf(val);

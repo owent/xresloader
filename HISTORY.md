@@ -2,6 +2,10 @@
 
 ## Unrelease
 
+## 2.18.1
+
+1. 修复 `%` 后缀和带验证器时Excel对大数字自动附加的 `,` 的适配。
+
 ## 2.18.0
 
 1. 增加插件 `org.xresloader.field_list_strip_option=LIST_STRIP_DEFAULT|LIST_STRIP_NOTHING|LIST_STRIP_TAIL|LIST_STRIP_ALL` 用于给单个字段设置数组裁剪。

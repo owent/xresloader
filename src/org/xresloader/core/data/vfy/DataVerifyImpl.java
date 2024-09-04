@@ -296,8 +296,14 @@ public abstract class DataVerifyImpl {
             }
         }
 
-        String message = String.format("Convert %s for %s with %s %s failed, check data failed.", val,
-                path, getValidatorWord(verifyEngine), collectValidatorNames(verifyEngine));
+        String message;
+        if (verifyEngine == null || verifyEngine.isEmpty()) {
+            message = String.format("Convert %s for %s, check data failed.", val,
+                    path);
+        } else {
+            message = String.format("Convert %s for %s with %s %s failed, check data failed.", val,
+                    path, getValidatorWord(verifyEngine), collectValidatorNames(verifyEngine));
+        }
         if (ProgramOptions.getInstance().enableDataValidator) {
             throw new ConvException(message);
         } else {
@@ -346,8 +352,14 @@ public abstract class DataVerifyImpl {
             }
         }
 
-        String message = String.format("Convert %s for %s with %s %s failed, check data failed.", val,
-                path, getValidatorWord(verifyEngine), collectValidatorNames(verifyEngine));
+        String message;
+        if (verifyEngine == null || verifyEngine.isEmpty()) {
+            message = String.format("Convert %s for %s failed, check data failed.", val,
+                    path);
+        } else {
+            message = String.format("Convert %s for %s with %s %s failed, check data failed.", val,
+                    path, getValidatorWord(verifyEngine), collectValidatorNames(verifyEngine));
+        }
         if (ProgramOptions.getInstance().enableDataValidator) {
             throw new ConvException(message);
         } else {
@@ -358,7 +370,24 @@ public abstract class DataVerifyImpl {
 
     static public long getAndVerifyToLong(List<DataVerifyImpl> verifyEngine, String path, String val)
             throws ConvException {
-        return Math.round(getAndVerifyToDouble(verifyEngine, path, val));
+        double value = getAndVerifyToDouble(verifyEngine, path, val);
+        long ret = Math.round(value);
+        if (Math.abs(value - (double) ret) > 1e-6) {
+            String message;
+            if (verifyEngine == null || verifyEngine.isEmpty()) {
+                message = String.format("Convert %s for %s failed, not a integer.", val,
+                        path);
+            } else {
+                message = String.format("Convert %s for %s with %s %s failed, not a integer.", val,
+                        path, getValidatorWord(verifyEngine), collectValidatorNames(verifyEngine));
+            }
+            if (ProgramOptions.getInstance().enableDataValidator) {
+                throw new ConvException(message);
+            } else {
+                ProgramOptions.getLoger().warn(message);
+            }
+        }
+        return ret;
     }
 
     static public class ValidatorTokens {

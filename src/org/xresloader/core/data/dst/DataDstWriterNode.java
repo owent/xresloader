@@ -7,6 +7,7 @@ import org.xresloader.core.engine.IdentifyDescriptor;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -61,6 +62,7 @@ public class DataDstWriterNode {
         public boolean notNull = false;
         public boolean allowMissingInPlainMode = false;
         public ArrayList<String> uniqueTags = null;
+        public HashSet<String> fieldTags = null;
         private DataDstFieldExtUE ue = null;
         private DataDstFieldExtList list = null;
 
@@ -92,6 +94,7 @@ public class DataDstWriterNode {
         public String plainSeparator = null;
         public boolean notNull = false;
         public boolean allowMissingInPlainMode = false;
+        public HashSet<String> fieldTags = null;
     }
 
     static public class DataDstMessageExtUE {
@@ -237,6 +240,28 @@ public class DataDstWriterNode {
             }
 
             return this.extension.uniqueTags;
+        }
+
+        public HashSet<String> getFieldTags() {
+            if (this.extension == null) {
+                return null;
+            }
+
+            return this.extension.fieldTags;
+        }
+
+        public boolean containsFieldTags(String[] tags) {
+            if (this.extension == null || tags == null) {
+                return false;
+            }
+
+            for (var tag : tags) {
+                if (this.extension.fieldTags.contains(tag)) {
+                    return true;
+                }
+            }
+
+            return false;
         }
 
         public boolean isNotNull() {
@@ -444,6 +469,28 @@ public class DataDstWriterNode {
             }
 
             return this.extension.allowMissingInPlainMode;
+        }
+
+        public HashSet<String> getFieldTags() {
+            if (this.extension == null) {
+                return null;
+            }
+
+            return this.extension.fieldTags;
+        }
+
+        public boolean containsFieldTags(String[] tags) {
+            if (this.extension == null || tags == null) {
+                return false;
+            }
+
+            for (var tag : tags) {
+                if (this.extension.fieldTags.contains(tag)) {
+                    return true;
+                }
+            }
+
+            return false;
         }
     }
 
@@ -658,6 +705,30 @@ public class DataDstWriterNode {
             }
 
             return this.innerFieldDesc.getUniqueTags();
+        }
+
+        public HashSet<String> getFieldTags() {
+            if (this.innerFieldDesc != null) {
+                return this.innerFieldDesc.getFieldTags();
+            }
+
+            if (this.innerOneofDesc != null) {
+                return this.innerOneofDesc.getFieldTags();
+            }
+
+            return null;
+        }
+
+        public boolean containsFieldTags(String[] tags) {
+            if (this.innerFieldDesc != null) {
+                return this.innerFieldDesc.containsFieldTags(tags);
+            }
+
+            if (this.innerOneofDesc != null) {
+                return this.innerOneofDesc.containsFieldTags(tags);
+            }
+
+            return false;
         }
 
         public boolean isRequired() {

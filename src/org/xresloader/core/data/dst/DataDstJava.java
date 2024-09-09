@@ -618,6 +618,9 @@ public abstract class DataDstJava extends DataDstImpl {
             }
 
             return false;
+        } else if (as_child.containsFieldTags(ProgramOptions.getInstance().ignoreFieldTags)) {
+            dumpDefault(builder, container, as_child, desc.getListIndex());
+            return true;
         }
 
         if (as_child.innerFieldDesc.isMap()) {
@@ -729,7 +732,7 @@ public abstract class DataDstJava extends DataDstImpl {
                 break;
             }
 
-            if (res.length == 1) {
+            if (res.length == 1 || field.containsFieldTags(ProgramOptions.getInstance().ignoreFieldTags)) {
                 if (maybeFromNode != null) {
                     dumpDefault(builder, container, sub_field, maybeFromNode.getListIndex());
                 } else {
@@ -784,6 +787,13 @@ public abstract class DataDstJava extends DataDstImpl {
                 }
             }
             return false;
+        } else if (field.containsFieldTags(ProgramOptions.getInstance().ignoreFieldTags)) {
+            if (maybeFromNode != null) {
+                dumpDefault(builder, container, field, maybeFromNode.getListIndex());
+            } else {
+                dumpDefault(builder, container, field, 0);
+            }
+            return true;
         }
 
         return dumpPlainField(builder, container, ident, field, maybeFromNode, res.value, rowContext, fieldPath);
@@ -805,18 +815,23 @@ public abstract class DataDstJava extends DataDstImpl {
             return false;
         }
 
+        boolean ignoreFieldTags = field.containsFieldTags(ProgramOptions.getInstance().ignoreFieldTags);
         if (field.isList()) {
             Object val = builder.getOrDefault(field.getName(), null);
             boolean ret = true;
             if (field.isMap()) {
                 if (val == null || !(val instanceof SpecialInnerHashMap<?, ?>)) {
                     val = new SpecialInnerHashMap<Object, Object>();
-                    builder.put(field.getName(), val);
+                    if (!ignoreFieldTags) {
+                        builder.put(field.getName(), val);
+                    }
                 }
             } else {
                 if (val == null || !(val instanceof ArrayList<?>)) {
                     val = new ArrayList<Object>();
-                    builder.put(field.getName(), val);
+                    if (!ignoreFieldTags) {
+                        builder.put(field.getName(), val);
+                    }
                 }
             }
 
@@ -980,7 +995,7 @@ public abstract class DataDstJava extends DataDstImpl {
                         DataDstWriterNode.DataDstFieldDescriptor referOriginField = field
                                 .getReferOriginField();
                         ArrayList<Object> referOrigin = null;
-                        if (referOriginField != null) {
+                        if (referOriginField != null && !ignoreFieldTags) {
                             Object refer = builder.getOrDefault(referOriginField.getName(), null);
                             if (refer != null && refer instanceof ArrayList<?>) {
                                 referOrigin = (ArrayList<Object>) refer;
@@ -998,7 +1013,9 @@ public abstract class DataDstJava extends DataDstImpl {
                                     if (referOrigin == null) {
                                         referOrigin = new ArrayList<Object>();
                                         referOrigin.ensureCapacity(groups.length);
-                                        builder.put(referOriginField.getName(), referOrigin);
+                                        if (!ignoreFieldTags) {
+                                            builder.put(referOriginField.getName(), referOrigin);
+                                        }
                                     }
                                     while (referOrigin.size() <= i) {
                                         referOrigin.add("");
@@ -1084,7 +1101,7 @@ public abstract class DataDstJava extends DataDstImpl {
                     if (childList != null && childList instanceof List<?>) {
                         listSize = ((List<?>) childList).size();
                     }
-                    if (listExt.minSize > 0 && listExt.minSize > listSize) {
+                    if (listExt.minSize > 0 && listExt.minSize > listSize && !ignoreFieldTags) {
                         throw new ConvException(
                                 String.format(
                                         "Try to convert %s failed, require at least %d element(s), real got %d element(s).",
@@ -1167,7 +1184,7 @@ public abstract class DataDstJava extends DataDstImpl {
                     ParseResult res = parsePlainDataMessage(groups, ident, field, rowContext, fieldPath);
                     if (res != null && res.value != null) {
                         val = res.value;
-                        if (res.origin != null && field.getReferOriginField() != null) {
+                        if (res.origin != null && field.getReferOriginField() != null && !ignoreFieldTags) {
                             builder.put(field.getReferOriginField().getName(), res.origin);
                         }
                     } else if (field.isRequired()) {
@@ -1182,6 +1199,11 @@ public abstract class DataDstJava extends DataDstImpl {
 
             if (val == null) {
                 return false;
+            }
+
+            if (ignoreFieldTags) {
+                dumpDefault(builder, container, field, -1);
+                return true;
             }
 
             builder.put(field.getName(), val);

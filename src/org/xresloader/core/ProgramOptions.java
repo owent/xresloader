@@ -58,6 +58,7 @@ public class ProgramOptions {
     public boolean enableStdin = false;
     public String[] customValidatorRules = null;
     public boolean enableDataValidator = true;
+    public String[] ignoreFieldTags = null;
 
     public String protoDumpFile = "";
     public ProtoDumpType protoDumpType = ProtoDumpType.NONE;
@@ -114,6 +115,8 @@ public class ProgramOptions {
         prettyIndent = 0;
         enableStdin = false;
         customValidatorRules = null;
+        enableDataValidator = true;
+        ignoreFieldTags = null;
 
         protoDumpFile = "";
         protoDumpType = ProtoDumpType.NONE;
@@ -235,6 +238,9 @@ public class ProgramOptions {
                 .desc("set file to load custom validator").hasArg().argName("FILE PATH").build());
         options.addOption(null, "disable-data-validator", false,
                 "disable data validator, so it will not show warnings when data checking failed.");
+        options.addOption(Option.builder().longOpt("ignore-field-tags")
+                .desc("ignore data and only dump the default value of specify field tags.").hasArg().argName("TAG")
+                .build());
         options.addOption(Option.builder().longOpt("data-source-lru-cache-rows")
                 .desc("set row number for LRU cache").hasArg().argName("NUMBER").build());
         options.addOption(Option.builder().longOpt("tolerate-max-empty-rows")
@@ -505,6 +511,9 @@ public class ProgramOptions {
         } else {
             enableDataValidator = true;
         }
+
+        // ignore field tags
+        ignoreFieldTags = cmd.getOptionValues("ignore-field-tags");
 
         return 0;
     }

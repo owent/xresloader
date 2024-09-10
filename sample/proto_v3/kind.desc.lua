@@ -89,6 +89,16 @@ local const_res = {
             },
           },
           field = {
+            arr = {
+              name = "arr",
+              number = 2,
+              options = {
+                field_tag = {
+                  "server_only",
+                },
+              },
+              type_name = "MESSAGE",
+            },
             id = {
               name = "id",
               number = 1,
@@ -112,6 +122,9 @@ local const_res = {
               options = {
                 field_list_max_size = "3",
                 field_list_min_size = "1",
+                field_tag = {
+                  "server_only",
+                },
               },
               type_name = "INT32",
             },
@@ -200,6 +213,16 @@ local const_res = {
               },
               type_name = "UINT32",
             },
+            specify_field = {
+              name = "specify_field",
+              number = 7,
+              options = {
+                field_tag = {
+                  "server_only",
+                },
+              },
+              type_name = "MESSAGE",
+            },
             test_arr = {
               name = "test_arr",
               number = 91,
@@ -243,6 +266,9 @@ local const_res = {
               name = "reward",
               options = {
                 oneof_not_null = true,
+                oneof_tag = {
+                  "server_only",
+                },
               },
             },
           },
@@ -493,6 +519,9 @@ local const_res = {
               options = {
                 field_alias = {
                   "测试ID别名2",
+                },
+                field_tag = {
+                  "server_only",
                 },
               },
               type_name = "UINT32",

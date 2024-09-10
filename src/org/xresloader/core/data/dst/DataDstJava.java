@@ -319,7 +319,8 @@ public abstract class DataDstJava extends DataDstImpl {
                                 .getTypeDescriptor(), sub_item.getValue(), 0);
                     } else if (sub_item.getValue().isList() && sub_item.getValue().getListExtension() != null
                             && sub_item.getValue().getListExtension().strictSize
-                            && sub_item.getValue().getListExtension().minSize > 0) {
+                            && sub_item.getValue().getListExtension().minSize > 0
+                            && !sub_item.getValue().containsFieldTags(ProgramOptions.getInstance().ignoreFieldTags)) {
                         this.logErrorMessage(
                                 "Field \"%s\" in \"%s\" has set field_list_min_size %d, which is not allowed to be auto filled with default value.",
                                 sub_item.getValue().getName(), field.getTypeDescriptor().getFullName(),
@@ -489,7 +490,13 @@ public abstract class DataDstJava extends DataDstImpl {
                 old = new ArrayList<Object>();
                 builder.put(field.getName(), old);
             }
-            old.add(val);
+
+            while (listIndex > old.size()) {
+                old.add(val);
+            }
+            if (listIndex == old.size()) {
+                old.add(val);
+            }
         } else {
             builder.put(field.getName(), val);
         }
@@ -508,6 +515,7 @@ public abstract class DataDstJava extends DataDstImpl {
             throws ConvException {
         boolean ret = false;
         for (Map.Entry<String, DataDstWriterNode.DataDstChildrenNode> c : node.getChildren().entrySet()) {
+            boolean ignoreFieldTags = c.getValue().containsFieldTags(ProgramOptions.getInstance().ignoreFieldTags);
 
             if (c.getValue().isOneof()) {
                 boolean fieldHasValue = false;
@@ -574,7 +582,7 @@ public abstract class DataDstJava extends DataDstImpl {
                     if (childList != null && childList instanceof List<?>) {
                         listSize = ((List<?>) childList).size();
                     }
-                    if (listExt.minSize > 0 && listExt.minSize > listSize) {
+                    if (listExt.minSize > 0 && listExt.minSize > listSize && !ignoreFieldTags) {
                         throw new ConvException(
                                 String.format(
                                         "Try to convert %s failed, require at least %d element(s), real got %d element(s).",
@@ -619,7 +627,9 @@ public abstract class DataDstJava extends DataDstImpl {
 
             return false;
         } else if (as_child.containsFieldTags(ProgramOptions.getInstance().ignoreFieldTags)) {
-            dumpDefault(builder, container, as_child, desc.getListIndex());
+            if (as_child.isRequired() || as_child.isList()) {
+                dumpDefault(builder, container, as_child, -1);
+            }
             return true;
         }
 
@@ -732,7 +742,7 @@ public abstract class DataDstJava extends DataDstImpl {
                 break;
             }
 
-            if (res.length == 1 || field.containsFieldTags(ProgramOptions.getInstance().ignoreFieldTags)) {
+            if (res.length == 1) {
                 if (maybeFromNode != null) {
                     dumpDefault(builder, container, sub_field, maybeFromNode.getListIndex());
                 } else {
@@ -787,13 +797,6 @@ public abstract class DataDstJava extends DataDstImpl {
                 }
             }
             return false;
-        } else if (field.containsFieldTags(ProgramOptions.getInstance().ignoreFieldTags)) {
-            if (maybeFromNode != null) {
-                dumpDefault(builder, container, field, maybeFromNode.getListIndex());
-            } else {
-                dumpDefault(builder, container, field, 0);
-            }
-            return true;
         }
 
         return dumpPlainField(builder, container, ident, field, maybeFromNode, res.value, rowContext, fieldPath);
@@ -1202,7 +1205,9 @@ public abstract class DataDstJava extends DataDstImpl {
             }
 
             if (ignoreFieldTags) {
-                dumpDefault(builder, container, field, -1);
+                if (field.isRequired() || field.isList()) {
+                    dumpDefault(builder, container, field, -1);
+                }
                 return true;
             }
 

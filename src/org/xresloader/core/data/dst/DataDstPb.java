@@ -2023,7 +2023,8 @@ public class DataDstPb extends DataDstImpl {
                         if (subField.isRequired()) {
                             dumpDefault(subnode, subField, 0);
                         } else if (subField.isList() && subField.getListExtension() != null
-                                && subField.getListExtension().strictSize && subField.getListExtension().minSize > 0) {
+                                && subField.getListExtension().strictSize && subField.getListExtension().minSize > 0
+                                && !subField.containsFieldTags(ProgramOptions.getInstance().ignoreFieldTags)) {
                             this.logErrorMessage(
                                     "Field \"%s\" in \"%s\" has set field_list_min_size %d, which is not allowed to be auto filled with default value.",
                                     subField.getName(), fd.getFullName(),
@@ -2263,6 +2264,10 @@ public class DataDstPb extends DataDstImpl {
 
     private void dumpDefault(DynamicMessage.Builder builder, DataDstFieldDescriptor field, int index)
             throws ConvException {
+        if (field.isList() && index < 0) {
+            return;
+        }
+
         Object val = getDefault(builder, field, index);
         if (val != null) {
             dumpValue(builder, field, val, index, null, "");
@@ -2282,6 +2287,8 @@ public class DataDstPb extends DataDstImpl {
         boolean ret = false;
 
         for (Map.Entry<String, DataDstWriterNode.DataDstChildrenNode> c : node.getChildren().entrySet()) {
+            boolean ignoreFieldTags = c.getValue().containsFieldTags(ProgramOptions.getInstance().ignoreFieldTags);
+
             if (c.getValue().isOneof()) {
                 // dump oneof data
                 boolean fieldHasValue = false;
@@ -2351,7 +2358,8 @@ public class DataDstPb extends DataDstImpl {
                 if (listExt != null && c.getValue().innerFieldDesc != null) {
                     Descriptors.FieldDescriptor fd = (Descriptors.FieldDescriptor) c.getValue().innerFieldDesc
                             .getRawDescriptor();
-                    if (listExt.minSize > 0 && listExt.minSize > builder.getRepeatedFieldCount(fd)) {
+                    if (listExt.minSize > 0 && listExt.minSize > builder.getRepeatedFieldCount(fd)
+                            && !ignoreFieldTags) {
                         throw new ConvException(
                                 String.format(
                                         "Try to convert %s failed, require at least %d element(s), real got %d element(s).",
@@ -2395,7 +2403,9 @@ public class DataDstPb extends DataDstImpl {
 
             return false;
         } else if (field.containsFieldTags(ProgramOptions.getInstance().ignoreFieldTags)) {
-            dumpDefault(builder, field, desc.getListIndex());
+            if (field.isRequired() || field.isList()) {
+                dumpDefault(builder, field, -1);
+            }
             return true;
         }
 
@@ -2421,11 +2431,6 @@ public class DataDstPb extends DataDstImpl {
         DataContainer<String> res = DataSrcImpl.getOurInstance().getValue(ident, "");
         if (null == res || !res.valid) {
             return false;
-        }
-
-        if (field.containsFieldTags(ProgramOptions.getInstance().ignoreFieldTags)) {
-            dumpDefault(builder, field);
-            return true;
         }
 
         return dumpPlainField(builder, ident, field, maybeFromNode, res.value, rowContext, fieldPath);
@@ -2457,7 +2462,7 @@ public class DataDstPb extends DataDstImpl {
                 break;
             }
 
-            if (res.length == 1 || field.containsFieldTags(ProgramOptions.getInstance().ignoreFieldTags)) {
+            if (res.length == 1) {
                 dumpDefault(builder, sub_field, 0);
                 ret = true;
                 break;
@@ -2498,9 +2503,6 @@ public class DataDstPb extends DataDstImpl {
                 dumpDefault(builder, field, 0);
             }
             return false;
-        } else if (field.containsFieldTags(ProgramOptions.getInstance().ignoreFieldTags)) {
-            dumpDefault(builder, field, 0);
-            return true;
         }
 
         return dumpPlainField(builder, ident, field, maybeFromNode, res.value, rowContext, fieldPath);
@@ -2876,7 +2878,9 @@ public class DataDstPb extends DataDstImpl {
             }
 
             if (ignoreFieldTags) {
-                dumpDefault(builder, field, 0);
+                if (field.isRequired() || field.isList()) {
+                    dumpDefault(builder, field, -1);
+                }
                 return true;
             }
 

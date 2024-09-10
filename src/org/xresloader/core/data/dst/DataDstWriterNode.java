@@ -63,6 +63,8 @@ public class DataDstWriterNode {
         public boolean allowMissingInPlainMode = false;
         public ArrayList<String> uniqueTags = null;
         public HashSet<String> fieldTags = null;
+        private Boolean withIgnoredFieldTagsValueCache = null;
+        private String[] withIgnoredFieldTagsCheckCache = null;
         private DataDstFieldExtUE ue = null;
         private DataDstFieldExtList list = null;
 
@@ -95,6 +97,8 @@ public class DataDstWriterNode {
         public boolean notNull = false;
         public boolean allowMissingInPlainMode = false;
         public HashSet<String> fieldTags = null;
+        private Boolean withIgnoredFieldTagsValueCache = null;
+        private String[] withIgnoredFieldTagsCheckCache = null;
     }
 
     static public class DataDstMessageExtUE {
@@ -252,16 +256,42 @@ public class DataDstWriterNode {
 
         public boolean containsFieldTags(String[] tags) {
             if (this.extension == null || tags == null) {
-                return false;
-            }
-
-            for (var tag : tags) {
-                if (this.extension.fieldTags.contains(tag)) {
-                    return true;
+                if (null != this.referOneofDescriptor) {
+                    return this.referOneofDescriptor.containsFieldTags(tags);
+                } else {
+                    return false;
                 }
             }
 
-            return false;
+            if (this.extension.fieldTags == null) {
+                if (null != this.referOneofDescriptor) {
+                    return this.referOneofDescriptor.containsFieldTags(tags);
+                } else {
+                    return false;
+                }
+            }
+
+            if (this.extension.withIgnoredFieldTagsValueCache != null
+                    && this.extension.withIgnoredFieldTagsCheckCache == tags) {
+                return this.extension.withIgnoredFieldTagsValueCache;
+            }
+
+            this.extension.withIgnoredFieldTagsCheckCache = tags;
+            this.extension.withIgnoredFieldTagsValueCache = false;
+            for (var tag : tags) {
+                if (this.extension.fieldTags.contains(tag)) {
+                    this.extension.withIgnoredFieldTagsValueCache = true;
+                    break;
+                }
+            }
+
+            if (null != this.referOneofDescriptor) {
+                if (this.referOneofDescriptor.containsFieldTags(tags)) {
+                    this.extension.withIgnoredFieldTagsValueCache = true;
+                }
+            }
+
+            return this.extension.withIgnoredFieldTagsValueCache;
         }
 
         public boolean isNotNull() {
@@ -484,13 +514,25 @@ public class DataDstWriterNode {
                 return false;
             }
 
+            if (this.extension.fieldTags == null) {
+                return false;
+            }
+
+            if (this.extension.withIgnoredFieldTagsValueCache != null
+                    && this.extension.withIgnoredFieldTagsCheckCache == tags) {
+                return this.extension.withIgnoredFieldTagsValueCache;
+            }
+
+            this.extension.withIgnoredFieldTagsCheckCache = tags;
+            this.extension.withIgnoredFieldTagsValueCache = false;
             for (var tag : tags) {
                 if (this.extension.fieldTags.contains(tag)) {
-                    return true;
+                    this.extension.withIgnoredFieldTagsValueCache = true;
+                    break;
                 }
             }
 
-            return false;
+            return this.extension.withIgnoredFieldTagsValueCache;
         }
     }
 

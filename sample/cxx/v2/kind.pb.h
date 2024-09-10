@@ -2864,7 +2864,7 @@ class event_cfg final : public ::google::protobuf::Message
   ::event_rule_item* _internal_mutable_rule();
 
   public:
-  // optional .event_rule_item specify_field = 7;
+  // optional .event_rule_item specify_field = 7 [(.org.xresloader.field_tag) = "server_only"];
   bool has_specify_field() const;
   void clear_specify_field() ;
   const ::event_rule_item& specify_field() const;
@@ -3976,7 +3976,7 @@ class arr_in_arr_cfg final : public ::google::protobuf::Message
     kTestPlainMsgFieldNumber = 5,
     kIdFieldNumber = 1,
   };
-  // repeated .arr_in_arr arr = 2;
+  // repeated .arr_in_arr arr = 2 [(.org.xresloader.field_tag) = "server_only"];
   int arr_size() const;
   private:
   int _internal_arr_size() const;
@@ -3993,7 +3993,7 @@ class arr_in_arr_cfg final : public ::google::protobuf::Message
   const ::arr_in_arr& arr(int index) const;
   ::arr_in_arr* add_arr();
   const ::google::protobuf::RepeatedPtrField<::arr_in_arr>& arr() const;
-  // repeated int32 test_plain_int_arr = 3 [(.org.xresloader.field_list_min_size) = "1", (.org.xresloader.field_list_max_size) = "3"];
+  // repeated int32 test_plain_int_arr = 3 [(.org.xresloader.field_list_min_size) = "1", (.org.xresloader.field_list_max_size) = "3", (.org.xresloader.field_tag) = "server_only"];
   int test_plain_int_arr_size() const;
   private:
   int _internal_test_plain_int_arr_size() const;
@@ -5617,7 +5617,7 @@ inline void arr_in_arr_cfg::_internal_set_id(::uint32_t value) {
   _impl_.id_ = value;
 }
 
-// repeated .arr_in_arr arr = 2;
+// repeated .arr_in_arr arr = 2 [(.org.xresloader.field_tag) = "server_only"];
 inline int arr_in_arr_cfg::_internal_arr_size() const {
   return _internal_arr().size();
 }
@@ -5666,7 +5666,7 @@ arr_in_arr_cfg::_internal_mutable_arr() {
   return &_impl_.arr_;
 }
 
-// repeated int32 test_plain_int_arr = 3 [(.org.xresloader.field_list_min_size) = "1", (.org.xresloader.field_list_max_size) = "3"];
+// repeated int32 test_plain_int_arr = 3 [(.org.xresloader.field_list_min_size) = "1", (.org.xresloader.field_list_max_size) = "3", (.org.xresloader.field_tag) = "server_only"];
 inline int arr_in_arr_cfg::_internal_test_plain_int_arr_size() const {
   return _internal_test_plain_int_arr().size();
 }
@@ -6487,7 +6487,7 @@ inline void event_cfg::set_allocated_rule(::event_rule_item* value) {
   // @@protoc_insertion_point(field_set_allocated:event_cfg.rule)
 }
 
-// optional .event_rule_item specify_field = 7;
+// optional .event_rule_item specify_field = 7 [(.org.xresloader.field_tag) = "server_only"];
 inline bool event_cfg::has_specify_field() const {
   bool value = (_impl_._has_bits_[0] & 0x00000002u) != 0;
   PROTOBUF_ASSUME(!value || _impl_.specify_field_ != nullptr);

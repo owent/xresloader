@@ -5,7 +5,7 @@
 ## 2.19.0
 
 1. 优化整数类型的验证，不允许浮点数转整数。
-2. 增加 `org.xresloader.field_tag=<Tag>` 插件，并允许通过 `ignore-field-tags` 忽略部分数据。
+2. 增加 `org.xresloader.field_tag=<Tag>` 和 `org.xresloader.oneof_tag=<Tag>` 插件，并允许通过 `--ignore-field-tags` 忽略部分数据。
 3. 更新依赖库
    + `maven-surefire-plugin` -> 3.5.0
    + `maven-shade-plugin` -> 3.6.0

@@ -243,6 +243,7 @@
           "arr": {
             "name": "arr",
             "number": 2,
+            "options": {"field_tag": ["server_only"]},
             "type_name": "MESSAGE"
           },
           "id": {
@@ -275,7 +276,8 @@
             "number": 3,
             "options": {
               "field_list_max_size": "3",
-              "field_list_min_size": "1"
+              "field_list_min_size": "1",
+              "field_tag": ["server_only"]
             },
             "type_name": "INT32"
           },
@@ -362,6 +364,7 @@
           "specify_field": {
             "name": "specify_field",
             "number": 7,
+            "options": {"field_tag": ["server_only"]},
             "type_name": "MESSAGE"
           },
           "test_arr": {
@@ -393,7 +396,10 @@
         "oneof_decl": {
           "reward": {
             "name": "reward",
-            "options": {"oneof_not_null": true}
+            "options": {
+              "oneof_not_null": true,
+              "oneof_tag": ["server_only"]
+            }
           },
           "unlock_type": {"name": "unlock_type"}
         },
@@ -817,7 +823,10 @@
           "test_id_2": {
             "name": "test_id_2",
             "number": 10002,
-            "options": {"field_alias": ["测试ID别名2"]},
+            "options": {
+              "field_alias": ["测试ID别名2"],
+              "field_tag": ["server_only"]
+            },
             "type_name": "UINT32"
           },
           "test_id_3": {

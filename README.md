@@ -124,6 +124,7 @@ echo "
 | --disable-data-validator     | 允许忽略数据验证错误            | (>=2.17.0版本)                                                                                           |
 | --data-source-lru-cache-rows | 数据源的LRU Cache行数           | 仅缓存流式索引                                                                                           |
 | --tolerate-max-empty-rows    | 连续空行检测的行数              | 设置连续空行检测的行数(>=2.14.1版本) ，大量的连续空行通常是误操作                                        |
+| --ignore-field-tags          | 字段Tag                         | 忽略指定tag的字段转出(>=2.19.0版本)                                                                      |
 
 ### 协议类型
 
@@ -316,30 +317,30 @@ validator:
 
 #### Protobuf插件 - Message插件
 
-|                插件名称                |                                              插件功能                                              |
-| :------------------------------------  | :------------------------------------------------------------------------------------------------  |
-|     org.xresloader.msg_description     |                            消息体描述信息，会写入输出的header中和代码中                            |
-| org.xresloader.msg_require_mapping_all |                                设置message的所有字段必须被全部映射                                 |
-|      org.xresloader.msg_separator      |     Plain模式字段分隔符，可指定多个，用于在一个单元格内配置复杂格式时的分隔符列表，默认值: `,;、|` |
-|        org.xresloader.ue.helper        |                                    生成UE Utility代码的类名后缀                                    |
-|    org.xresloader.ue.not_data_table    |                              不是DataTable，helper类里不生成加载代码                               |
-|    org.xresloader.ue.default_loader    | Message是否开启默认Loader（`EN_LOADER_MODE_DEFAULT,EN_LOADER_MODE_ENABLE,EN_LOADER_MODE_DISABLE`） |
-|    org.xresloader.ue.include_header    |                              Message输出的代码额外包含头文件，可多个                               |
+| 插件名称                               | 插件功能                                                                                           |
+| :------------------------------------- | :------------------------------------------------------------------------------------------------- |
+| org.xresloader.msg_description         | 消息体描述信息，会写入输出的header中和代码中                                                       |
+| org.xresloader.msg_require_mapping_all | 设置message的所有字段必须被全部映射                                                                |
+| org.xresloader.msg_separator           | Plain模式字段分隔符，可指定多个，用于在一个单元格内配置复杂格式时的分隔符列表，默认值: `,;、       | ` |
+| org.xresloader.ue.helper               | 生成UE Utility代码的类名后缀                                                                       |
+| org.xresloader.ue.not_data_table       | 不是DataTable，helper类里不生成加载代码                                                            |
+| org.xresloader.ue.default_loader       | Message是否开启默认Loader（`EN_LOADER_MODE_DEFAULT,EN_LOADER_MODE_ENABLE,EN_LOADER_MODE_DISABLE`） |
+| org.xresloader.ue.include_header       | Message输出的代码额外包含头文件，可多个                                                            |
 
 #### Protobuf插件 - Field插件
 
-|             插件名称                             |                                                    插件功能                                                                                  |
-| :----------------------------------------------  | :------------------------------------------------------------------------------------------------------------------------------------------  |
-|      org.xresloader.validator                    | 验证器，可填范围(log-high),message名，enum名。多个由 `\|` 分隔。任意验证器通过检查则认为数据有效                                             |
-|     org.xresloader.field_unique_tag              | 设置唯一性检测Tag，多个相同tag的字段将合并并在转出数据时检测唯一性（可多个）                                                                 |
-|     org.xresloader.field_not_null                | 如果配置了字段映射且某个数据行对应的oneof数据为空，则忽略此行                                                                                |
-|     org.xresloader.map_key_validator             | 用于Map类型Key的验证器，可填范围(log-high),message名，enum名。多个由 `\|` 分隔。任意验证器通过检查则认为数据有效                             |
-|     org.xresloader.map_value_validator           | 用于Map类型Value的验证器，可填范围(log-high),message名，enum名。多个由 `\|` 分隔。任意验证器通过检查则认为数据有效                           |
+| 插件名称                                         | 插件功能                                                                                                                                     |
+| :----------------------------------------------- | :------------------------------------------------------------------------------------------------------------------------------------------- |
+| org.xresloader.validator                         | 验证器，可填范围(log-high),message名，enum名。多个由 `\|` 分隔。任意验证器通过检查则认为数据有效                                             |
+| org.xresloader.field_unique_tag                  | 设置唯一性检测Tag，多个相同tag的字段将合并并在转出数据时检测唯一性（可多个）                                                                 |
+| org.xresloader.field_not_null                    | 如果配置了字段映射且某个数据行对应的oneof数据为空，则忽略此行                                                                                |
+| org.xresloader.map_key_validator                 | 用于Map类型Key的验证器，可填范围(low-high),message名，enum名。多个由 `\|` 分隔。任意验证器通过检查则认为数据有效                             |
+| org.xresloader.map_value_validator               | 用于Map类型Value的验证器，可填范围(low-high),message名，enum名。多个由 `\|` 分隔。任意验证器通过检查则认为数据有效                           |
 | org.xresloader.field_description                 | 字段描述信息，会写入输出的header中和代码中                                                                                                   |
-|    org.xresloader.field_alias                    | 字段别名，配合 **验证器** 功能，允许在数据源中直接填写别名来配置数据                                                                         |
-|    org.xresloader.field_ratio                    | 字段放大，用于比如配置百分率为 0.12，当 org.xresloader.field_ratio=100时转出的数据为12                                                       |
-|  org.xresloader.field_separator                  | Plain模式分隔符，可指定多个，用于在一个单元格内配置复杂格式时的分隔符列表，默认值: `,;\| `                                                   |
-|   org.xresloader.field_required                  | 设置字段为 **required** ，用于向proto3提供，proto2的 **required** 约束                                                                       |
+| org.xresloader.field_alias                       | 字段别名，配合 **验证器** 功能，允许在数据源中直接填写别名来配置数据                                                                         |
+| org.xresloader.field_ratio                       | 字段放大，用于比如配置百分率为 0.12，当 org.xresloader.field_ratio=100时转出的数据为12                                                       |
+| org.xresloader.field_separator                   | Plain模式分隔符，可指定多个，用于在一个单元格内配置复杂格式时的分隔符列表，默认值: `,;\| `                                                   |
+| org.xresloader.field_required                    | 设置字段为 **required** ，用于向proto3提供，proto2的 **required** 约束                                                                       |
 | org.xresloader.field_origin_value                | 写出原始数据到指定字段（ `Timestamp` 和 `Duration` 类型）                                                                                    |
 | org.xresloader.field_allow_missing_in_plain_mode | Plain模式下设置此字段可选，如果未设置则使用默认值（版本 2.16.0 版本开始支持）                                                                |
 | org.xresloader.field_list_strip_option           | 给单个字段设置数组裁剪，可选值( `LIST_STRIP_DEFAULT\|LIST_STRIP_NOTHING\|LIST_STRIP_TAIL\|LIST_STRIP_ALL` )（版本 2.18.0 版本开始支持）      |
@@ -350,27 +351,29 @@ validator:
 | org.xresloader.field_list_min_size               | 给单个字段设置数组最小长度，输入字符串：`"<N>\|枚举名"`（版本 2.18.0 版本开始支持）                                                          |
 | org.xresloader.field_list_max_size               | 给单个字段设置数组最大长度，输入字符串：`"<N>\|枚举名"`（版本 2.18.0 版本开始支持）                                                          |
 | org.xresloader.field_list_strict_size            | 设置单个字段设置数组严格长度要求，即不自动补全最小长度，而是报错。：`false\|true`（默认值: `false` ，版本 2.18.0 版本开始支持）              |
-|     org.xresloader.ue.key_tag                    | 生成UE代码时，如果需要支持多个Key组合成一个Name，用这个字段指定系数（必须大于0）                                                             |
-|   org.xresloader.ue.ue_type_name                 | 生成UE代码时，如果指定了这个字段，那么生成的字段类型将是 `TSoftObjectPtr<ue_type_name>` , 并且支持蓝图中直接引用                             |
-|   org.xresloader.ue.ue_type_is_class             | 生成UE代码时，如果指定了这个字段，那么生成的字段类型将是 `TSoftClassPtr<ue_type_name>` , 并且支持蓝图中直接引用                              |
-|   org.xresloader.ue.ue_origin_type_name          | 生成UE代码时，如果指定了这个字段，那么生成的字段类型将使用这个类型，需要用户自己确保类型有效且对应的proto类型可以隐式转换到该类型            |
-|   org.xresloader.ue.ue_origin_type_default_value | 生成UE代码时，如果指定了这个字段，那么生成的字段的Reset代码将使用这个表达式，需要用户自己确保表达式有效且对应的proto类型可以隐式转换到该类型 |
+| org.xresloader.field_tag                         | 设置字段Tag，配合 `--ignore-field-tags` 选项可用于跳过某些数据。（版本 2.19.0 版本开始支持）                                                 |
+| org.xresloader.ue.key_tag                        | 生成UE代码时，如果需要支持多个Key组合成一个Name，用这个字段指定系数（必须大于0）                                                             |
+| org.xresloader.ue.ue_type_name                   | 生成UE代码时，如果指定了这个字段，那么生成的字段类型将是 `TSoftObjectPtr<ue_type_name>` , 并且支持蓝图中直接引用                             |
+| org.xresloader.ue.ue_type_is_class               | 生成UE代码时，如果指定了这个字段，那么生成的字段类型将是 `TSoftClassPtr<ue_type_name>` , 并且支持蓝图中直接引用                              |
+| org.xresloader.ue.ue_origin_type_name            | 生成UE代码时，如果指定了这个字段，那么生成的字段类型将使用这个类型，需要用户自己确保类型有效且对应的proto类型可以隐式转换到该类型            |
+| org.xresloader.ue.ue_origin_type_default_value   | 生成UE代码时，如果指定了这个字段，那么生成的字段的Reset代码将使用这个表达式，需要用户自己确保表达式有效且对应的proto类型可以隐式转换到该类型 |
 
 #### Protobuf插件 - EnumValue插件
 
-|             插件名称             |                                插件功能                                |
-| :------------------------------  | :--------------------------------------------------------------------  |
+| 插件名称                         | 插件功能                                                               |
+| :------------------------------- | :--------------------------------------------------------------------- |
 | org.xresloader.enumv_description | 枚举值描述信息，可能会写入输出的header中和代码中                       |
-|    org.xresloader.enum_alias     | 枚举值别名，配合 **验证器** 功能，允许在数据源中直接填写别名来配置数据 |
+| org.xresloader.enum_alias        | 枚举值别名，配合 **验证器** 功能，允许在数据源中直接填写别名来配置数据 |
 
 #### Protobuf插件 - Oneof插件(2.8.0版本及以上)
 
-|                     插件名称                     |                                               插件功能                                               |
-| :----------------------------------------------  | :--------------------------------------------------------------------------------------------------  |
-|         org.xresloader.oneof_description         |                           oneof描述信息，可能会写入输出的header中和代码中                            |
-|          org.xresloader.oneof_separator          | Plain模式类型和值字段的分隔符，可指定多个，用于在一个单元格内配置复杂格式时的分隔符列表，默认值: `,;\| ` |
-|          org.xresloader.oneof_not_null           |                    如果配置了字段映射且某个数据行对应的oneof数据为空，则忽略此行                     |
-| org.xresloader.oneof_allow_missing_in_plain_mode |            Plain模式下设置此字段可选，如果未设置则使用默认值（版本 2.16.0 版本开始支持）             |
+| 插件名称                                         | 插件功能                                                                                                 |
+| :----------------------------------------------- | :------------------------------------------------------------------------------------------------------- |
+| org.xresloader.oneof_description                 | oneof描述信息，可能会写入输出的header中和代码中                                                          |
+| org.xresloader.oneof_separator                   | Plain模式类型和值字段的分隔符，可指定多个，用于在一个单元格内配置复杂格式时的分隔符列表，默认值: `,;\| ` |
+| org.xresloader.oneof_not_null                    | 如果配置了字段映射且某个数据行对应的oneof数据为空，则忽略此行                                            |
+| org.xresloader.oneof_allow_missing_in_plain_mode | Plain模式下设置此字段可选，如果未设置则使用默认值（版本 2.16.0 版本开始支持）                            |
+| org.xresloader.oneof_tag                         | 设置字段Tag，配合 `--ignore-field-tags` 选项可用于跳过某些数据。（版本 2.19.0 版本开始支持）             |
 
 ## 生态和工具
 

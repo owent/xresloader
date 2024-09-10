@@ -2,7 +2,18 @@
 
 ## Unrelease
 
-1. 优化整数类型的验证，不允许浮点数转整数
+## 2.19.0
+
+1. 优化整数类型的验证，不允许浮点数转整数。
+2. 增加 `org.xresloader.field_tag=<Tag>` 插件，并允许通过 `ignore-field-tags` 忽略部分数据。
+3. 更新依赖库
+   + `maven-surefire-plugin` -> 3.5.0
+   + `maven-shade-plugin` -> 3.6.0
+   + `commons-cli` -> 1.9.0
+   + `commons-codec` -> 1.17.1
+   + `log4j` -> 2.24.0
+   + `com.google.protobuf` -> 4.28.0
+   + `org.apache.poi` -> 5.3.0
 
 ## 2.18.2
 

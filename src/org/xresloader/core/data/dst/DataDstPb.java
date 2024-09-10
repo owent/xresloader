@@ -557,6 +557,14 @@ public class DataDstPb extends DataDstImpl {
             }
         }
 
+        if (fd.getOptions().getExtensionCount(Xresloader.fieldTag) > 0) {
+            var ext = child_field.mutableExtension();
+            ext.fieldTags = new HashSet<>();
+            for (String tag : fd.getOptions().getExtension(Xresloader.fieldTag)) {
+                ext.fieldTags.add(tag);
+            }
+        }
+
         // origin refer
         if (fd.getOptions().hasExtension(Xresloader.fieldOriginValue)) {
             String originValue = fd.getOptions().getExtension(Xresloader.fieldOriginValue);
@@ -736,6 +744,14 @@ public class DataDstPb extends DataDstImpl {
         if (fd.getOptions().hasExtension(Xresloader.oneofAllowMissingInPlainMode)) {
             child_field.mutableExtension().allowMissingInPlainMode = fd.getOptions()
                     .getExtension(Xresloader.oneofAllowMissingInPlainMode);
+        }
+
+        if (fd.getOptions().getExtensionCount(Xresloader.oneofTag) > 0) {
+            var ext = child_field.mutableExtension();
+            ext.fieldTags = new HashSet<>();
+            for (String tag : fd.getOptions().getExtension(Xresloader.oneofTag)) {
+                ext.fieldTags.add(tag);
+            }
         }
 
         if (gen == null) {
@@ -2007,7 +2023,8 @@ public class DataDstPb extends DataDstImpl {
                         if (subField.isRequired()) {
                             dumpDefault(subnode, subField, 0);
                         } else if (subField.isList() && subField.getListExtension() != null
-                                && subField.getListExtension().strictSize && subField.getListExtension().minSize > 0) {
+                                && subField.getListExtension().strictSize && subField.getListExtension().minSize > 0
+                                && !subField.containsFieldTags(ProgramOptions.getInstance().ignoreFieldTags)) {
                             this.logErrorMessage(
                                     "Field \"%s\" in \"%s\" has set field_list_min_size %d, which is not allowed to be auto filled with default value.",
                                     subField.getName(), fd.getFullName(),
@@ -2247,6 +2264,10 @@ public class DataDstPb extends DataDstImpl {
 
     private void dumpDefault(DynamicMessage.Builder builder, DataDstFieldDescriptor field, int index)
             throws ConvException {
+        if (field.isList() && index < 0) {
+            return;
+        }
+
         Object val = getDefault(builder, field, index);
         if (val != null) {
             dumpValue(builder, field, val, index, null, "");
@@ -2266,6 +2287,8 @@ public class DataDstPb extends DataDstImpl {
         boolean ret = false;
 
         for (Map.Entry<String, DataDstWriterNode.DataDstChildrenNode> c : node.getChildren().entrySet()) {
+            boolean ignoreFieldTags = c.getValue().containsFieldTags(ProgramOptions.getInstance().ignoreFieldTags);
+
             if (c.getValue().isOneof()) {
                 // dump oneof data
                 boolean fieldHasValue = false;
@@ -2335,7 +2358,8 @@ public class DataDstPb extends DataDstImpl {
                 if (listExt != null && c.getValue().innerFieldDesc != null) {
                     Descriptors.FieldDescriptor fd = (Descriptors.FieldDescriptor) c.getValue().innerFieldDesc
                             .getRawDescriptor();
-                    if (listExt.minSize > 0 && listExt.minSize > builder.getRepeatedFieldCount(fd)) {
+                    if (listExt.minSize > 0 && listExt.minSize > builder.getRepeatedFieldCount(fd)
+                            && !ignoreFieldTags) {
                         throw new ConvException(
                                 String.format(
                                         "Try to convert %s failed, require at least %d element(s), real got %d element(s).",
@@ -2378,6 +2402,11 @@ public class DataDstPb extends DataDstImpl {
             }
 
             return false;
+        } else if (field.containsFieldTags(ProgramOptions.getInstance().ignoreFieldTags)) {
+            if (field.isRequired() || field.isList()) {
+                dumpDefault(builder, field, -1);
+            }
+            return true;
         }
 
         dumpValue(builder, field, val, desc.getListIndex(), rowContext, fieldPath);
@@ -2497,6 +2526,8 @@ public class DataDstPb extends DataDstImpl {
                     field.getTypeDescriptor().getFullName(), field.getName());
             return false;
         }
+
+        boolean ignoreFieldTags = field.containsFieldTags(ProgramOptions.getInstance().ignoreFieldTags);
         if (field.isList()) {
             String[] groups;
             if (null != maybeFromNode && maybeFromNode.getListIndex() >= 0) {
@@ -2650,7 +2681,7 @@ public class DataDstPb extends DataDstImpl {
                                 subFieldPath);
                         if (res != null && res.value != null) {
                             tmp.add(res.value);
-                            if (res.origin != null && referOriginField != null) {
+                            if (res.origin != null && referOriginField != null && !ignoreFieldTags) {
                                 while (builder.getRepeatedFieldCount(referOriginFd) < i) {
                                     builder.addRepeatedField(referOriginFd, "");
                                 }
@@ -2687,19 +2718,24 @@ public class DataDstPb extends DataDstImpl {
                     DataDstWriterNode.ListStripRule stripListRule = field.getListStripRule();
                     if (stripListRule == DataDstWriterNode.ListStripRule.STRIP_NOTHING
                             || stripListRule == DataDstWriterNode.ListStripRule.STRIP_TAIL) {
-                        while (builder.getRepeatedFieldCount(fd) < index) {
+                        while (builder.getRepeatedFieldCount(fd) < index && !ignoreFieldTags) {
                             builder.addRepeatedField(fd, getDefault(builder, field, builder.getRepeatedFieldCount(fd)));
                         }
                     }
 
-                    if (index >= 0 && builder.getRepeatedFieldCount(fd) > index) {
-                        builder.setRepeatedField(fd, index, values.get(0));
-                    } else {
-                        builder.addRepeatedField(fd, values.get(0));
+                    if (!ignoreFieldTags) {
+                        if (index >= 0 && builder.getRepeatedFieldCount(fd) > index) {
+                            builder.setRepeatedField(fd, index, values.get(0));
+                        } else {
+                            builder.addRepeatedField(fd, values.get(0));
+                        }
                     }
                 } else {
-                    for (int i = 0; i < values.size(); ++i) {
-                        dumpValue(builder, field, values.get(i), i, rowContext, String.format("%s.%d", fieldPath, i));
+                    if (!ignoreFieldTags) {
+                        for (int i = 0; i < values.size(); ++i) {
+                            dumpValue(builder, field, values.get(i), i, rowContext,
+                                    String.format("%s.%d", fieldPath, i));
+                        }
                     }
                 }
 
@@ -2723,7 +2759,7 @@ public class DataDstPb extends DataDstImpl {
                     }
                 }
             } else if (field.getListStripRule() == DataDstWriterNode.ListStripRule.STRIP_NOTHING) {
-                if (null != maybeFromNode && maybeFromNode.getListIndex() >= 0) {
+                if (null != maybeFromNode && maybeFromNode.getListIndex() >= 0 && !ignoreFieldTags) {
                     int index = maybeFromNode.getListIndex();
                     while (builder.getRepeatedFieldCount(fd) <= index) {
                         builder.addRepeatedField(fd, getDefault(builder, field, builder.getRepeatedFieldCount(fd)));
@@ -2737,7 +2773,8 @@ public class DataDstPb extends DataDstImpl {
             {
                 var listExt = field.getListExtension();
                 if (listExt != null) {
-                    if (listExt.minSize > 0 && listExt.minSize > builder.getRepeatedFieldCount(fd)) {
+                    if (listExt.minSize > 0 && listExt.minSize > builder.getRepeatedFieldCount(fd)
+                            && !ignoreFieldTags) {
                         throw new ConvException(
                                 String.format(
                                         "Try to convert %s failed, require at least %d element(s), real got %d element(s).",
@@ -2821,7 +2858,7 @@ public class DataDstPb extends DataDstImpl {
                     ParseResult res = parsePlainDataMessage(groups, ident, field, rowContext, fieldPath);
                     if (res != null && res.value != null) {
                         val = res.value;
-                        if (res.origin != null && field.getReferOriginField() != null) {
+                        if (res.origin != null && field.getReferOriginField() != null && !ignoreFieldTags) {
                             dumpValue(builder,
                                     field.getReferOriginField(),
                                     res.origin, 0, rowContext, fieldPath);
@@ -2838,6 +2875,13 @@ public class DataDstPb extends DataDstImpl {
 
             if (val == null) {
                 return false;
+            }
+
+            if (ignoreFieldTags) {
+                if (field.isRequired() || field.isList()) {
+                    dumpDefault(builder, field, -1);
+                }
+                return true;
             }
 
             if (fd.isRepeated() && val instanceof ArrayList<?>) {

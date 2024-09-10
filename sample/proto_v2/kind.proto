@@ -46,7 +46,7 @@ message test_msg_verifier {
     option (org.xresloader.msg_separator) = "-^";
 
     optional uint32 test_id_1 = 10001;
-    optional uint32 test_id_2 = 10002 [ (org.xresloader.field_alias) = "测试ID别名2" ];
+    optional uint32 test_id_2 = 10002 [ (org.xresloader.field_alias) = "测试ID别名2", (org.xresloader.field_tag) = "server_only" ];
     optional uint32 test_id_3 = 10003 [ (org.xresloader.field_allow_missing_in_plain_mode) = true ];
 }
 
@@ -64,9 +64,9 @@ message arr_in_arr_cfg {
     option (org.xresloader.msg_description) = "Test arr_in_arr_cfg";
 
     optional uint32     id  = 1 [ (org.xresloader.ue.key_tag) = 1, (org.xresloader.field_description) = "This is a Key" ];
-    repeated arr_in_arr arr = 2;
+    repeated arr_in_arr arr = 2 [ (org.xresloader.field_tag) = "server_only" ];
 
-    repeated int32             test_plain_int_arr  = 3 [ (org.xresloader.field_list_min_size) = "1", (org.xresloader.field_list_max_size) = "3" ];
+    repeated int32             test_plain_int_arr  = 3 [ (org.xresloader.field_list_min_size) = "1", (org.xresloader.field_list_max_size) = "3", (org.xresloader.field_tag) = "server_only" ];
     repeated cost_type         test_plain_enum_arr = 4;
     optional test_msg_verifier test_plain_msg      = 5 [ (org.xresloader.field_separator) = "&" ];
     repeated test_msg_verifier test_plain_msg_arr  = 6;
@@ -103,10 +103,11 @@ message event_cfg {
     optional uint32 process = 2 [ (org.xresloader.ue.key_tag) = 1, (org.xresloader.field_not_null) = true, (org.xresloader.field_unique_tag) = "unique_tag" ];
 
     optional event_rule_item rule          = 6;
-    optional event_rule_item specify_field = 7;
+    optional event_rule_item specify_field = 7 [ (org.xresloader.field_tag) = "server_only" ];
 
     oneof reward {
         option (org.xresloader.oneof_not_null) = true;
+        option (org.xresloader.oneof_tag)      = "server_only";
 
         event_reward_item item      = 11 [ (org.xresloader.field_alias) = "奖励道具" ];
         int64             user_exp  = 12 [ (org.xresloader.field_alias) = "奖励经验" ];

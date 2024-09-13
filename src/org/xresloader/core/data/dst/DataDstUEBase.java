@@ -1720,7 +1720,7 @@ public abstract class DataDstUEBase extends DataDstJava {
         }
 
         fout.write(dumpString(getHeaderFieldUProperty()));
-        fout.write(dumpString(String.format("    %s %s;\r\n", ueTypeName, varName)));
+        fout.write(dumpString(String.format("    %s %s = %s;\r\n", ueTypeName, varName, "TEXT(\"\")")));
     }
 
     private final void writeCodeHeaderField(FileOutputStream fout, DataDstFieldDescriptor fieldDesc, String varName,
@@ -1839,7 +1839,13 @@ public abstract class DataDstUEBase extends DataDstJava {
             } else if (fieldDesc.isList()) {
                 fout.write(dumpString(String.format("    TArray< %s > %s;\r\n", ueTypeName, varName)));
             } else {
-                fout.write(dumpString(String.format("    %s %s;\r\n", ueTypeName, varName)));
+                if (fieldDesc.getType() != DataDstWriterNode.JAVA_TYPE.MESSAGE
+                        && fieldDesc.getType() != DataDstWriterNode.JAVA_TYPE.UNKNOWN) {
+                    fout.write(dumpString(
+                            String.format("    %s %s = %s;\r\n", ueTypeName, varName, getUETypeDefault(fieldDesc))));
+                } else {
+                    fout.write(dumpString(String.format("    %s %s;\r\n", ueTypeName, varName)));
+                }
             }
         }
     }

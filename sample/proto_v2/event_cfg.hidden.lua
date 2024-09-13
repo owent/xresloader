@@ -13,7 +13,7 @@ return {
     data_ver = "1.0.0.0",
     description = "Test event_cfg with oneof fields",
     hash_code = "sha256:1ee8cc927336f8c693fbc5c5ca1f78d0e28d0f614de15d7dbe42cdd51b56f5f2",
-    xres_ver = "2.19.0",
+    xres_ver = "2.19.1",
   },
   [2] = "event_cfg",
   event_cfg = {

@@ -1839,21 +1839,39 @@ public abstract class DataDstUEBase extends DataDstJava {
             } else if (fieldDesc.isList()) {
                 fout.write(dumpString(String.format("    TArray< %s > %s;\r\n", ueTypeName, varName)));
             } else {
-                if (fieldDesc.getType() != DataDstWriterNode.JAVA_TYPE.MESSAGE
-                        && fieldDesc.getType() != DataDstWriterNode.JAVA_TYPE.UNKNOWN) {
-                    fout.write(dumpString(
-                            String.format("    %s %s = %s;\r\n", ueTypeName, varName, getUETypeDefault(fieldDesc))));
-                } else if (fieldDesc.getType() == DataDstWriterNode.JAVA_TYPE.STRING) {
-                    String ueOriginTypeDefaultValue = fieldDesc.mutableExtension().mutableUE().ueOriginTypeDefaultValue;
-                    if (ueOriginTypeDefaultValue != null && !ueOriginTypeDefaultValue.trim().isEmpty()) {
-                        fout.write(dumpString(
-                                String.format("    %s %s = %s;\r\n", ueTypeName, varName,
-                                        getUETypeDefault(fieldDesc))));
-                    } else {
+                switch (fieldDesc.getType()) {
+                    case MESSAGE:
+                    case UNKNOWN: {
                         fout.write(dumpString(String.format("    %s %s;\r\n", ueTypeName, varName)));
+                        break;
                     }
-                } else {
-                    fout.write(dumpString(String.format("    %s %s;\r\n", ueTypeName, varName)));
+                    case STRING: {
+                        String ueOriginTypeDefaultValue = fieldDesc.mutableExtension()
+                                .mutableUE().ueOriginTypeDefaultValue;
+                        if (ueOriginTypeDefaultValue != null && !ueOriginTypeDefaultValue.trim().isEmpty()) {
+                            fout.write(dumpString(
+                                    String.format("    %s %s = %s;\r\n", ueTypeName, varName,
+                                            getUETypeDefault(fieldDesc))));
+                        } else {
+                            fout.write(dumpString(String.format("    %s %s;\r\n", ueTypeName, varName)));
+                        }
+                        break;
+                    }
+                    default: {
+                        String ueOriginTypeName = fieldDesc.mutableExtension().mutableUE().ueOriginTypeName;
+                        String ueOriginTypeDefaultValue = fieldDesc.mutableExtension()
+                                .mutableUE().ueOriginTypeDefaultValue;
+                        if (ueOriginTypeName != null && !ueOriginTypeName.trim().isEmpty() &&
+                                !(ueOriginTypeDefaultValue != null && !ueOriginTypeDefaultValue.trim().isEmpty())) {
+                            fout.write(dumpString(String.format("    %s %s;\r\n", ueTypeName, varName)));
+                        } else {
+                            fout.write(dumpString(
+                                    String.format("    %s %s = %s;\r\n", ueTypeName, varName,
+                                            getUETypeDefault(fieldDesc))));
+                        }
+
+                        break;
+                    }
                 }
             }
         }

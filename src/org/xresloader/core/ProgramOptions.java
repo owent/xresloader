@@ -1,15 +1,26 @@
 package org.xresloader.core;
 
 import org.apache.commons.cli.*;
+import org.apache.commons.codec.binary.Hex;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.OutputStream;
+import java.nio.charset.Charset;
 import java.nio.charset.UnsupportedCharsetException;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.HashMap;
 import java.util.Properties;
+import java.util.Scanner;
 import java.util.regex.Pattern;
 import java.util.regex.PatternSyntaxException;
 
@@ -32,6 +43,9 @@ public class ProgramOptions {
     private static Options options = null;
     private static String version = null;
     private static Properties properties = null;
+    private static String dataSourceMappingFile = "";
+    private static HashMap<String, String> dataSourceMappingResult = new HashMap<String, String>();
+    private static String dataSourceMappingHashSeed = "xresloader";
 
     private String defaultDataVersion = null;
     private String dataVersion = null;
@@ -68,6 +82,7 @@ public class ProgramOptions {
     public String javascriptExport = null;
     public String javascriptGlobalVar = "";
     public int tolerateContinueEmptyRows = 100000;
+    public DataSourceMappingType dataSourceMappingType = DataSourceMappingType.NONE;
 
     private ProgramOptions() {
         dataSourceMetas = new String[] {};
@@ -126,6 +141,8 @@ public class ProgramOptions {
         javascriptExport = null;
         javascriptGlobalVar = "";
         tolerateContinueEmptyRows = 100000;
+
+        dataSourceMappingType = DataSourceMappingType.NONE;
 
         dataVersion = null;
     }
@@ -245,6 +262,17 @@ public class ProgramOptions {
                 .desc("set row number for LRU cache").hasArg().argName("NUMBER").build());
         options.addOption(Option.builder().longOpt("tolerate-max-empty-rows")
                 .desc("set max continue empty rows").hasArg().argName("NUMBER").build());
+
+        options.addOption(Option.builder().longOpt("data-source-mapping-file")
+                .desc("set where to store data source mapping result").hasArg().argName("FILE PATH").build());
+
+        options.addOption(Option.builder().longOpt("data-source-mapping-mode")
+                .desc("set where to store data source mapping mode(none, md5, sha1, sha256)").hasArg()
+                .argName("ALGORITHM").build());
+
+        options.addOption(Option.builder().longOpt("data-source-mapping-seed")
+                .desc("set data source mapping seed").hasArg()
+                .argName("SEED").build());
 
         return options;
     }
@@ -388,6 +416,34 @@ public class ProgramOptions {
         }
         if (cmd.hasOption("tolerate-max-empty-rows")) {
             tolerateContinueEmptyRows = Integer.parseInt(cmd.getOptionValue("tolerate-max-empty-rows", "100000"));
+        }
+        if (cmd.hasOption("data-source-mapping-file")) {
+            String filePath = cmd.getOptionValue("data-source-mapping-file", "");
+            if (!filePath.isEmpty()) {
+                synchronized (dataSourceMappingFile) {
+                    dataSourceMappingFile = filePath;
+                }
+            }
+        }
+        if (cmd.hasOption("data-source-mapping-mode")) {
+            String mode = cmd.getOptionValue("data-source-mapping-mode", "none");
+            if (mode.equalsIgnoreCase("md5")) {
+                dataSourceMappingType = DataSourceMappingType.MD5;
+            } else if (mode.equalsIgnoreCase("sha1")) {
+                dataSourceMappingType = DataSourceMappingType.SHA1;
+            } else if (mode.equalsIgnoreCase("sha256")) {
+                dataSourceMappingType = DataSourceMappingType.SHA256;
+            } else if (mode.equalsIgnoreCase("none") || mode.isEmpty()) {
+                dataSourceMappingType = DataSourceMappingType.NONE;
+            } else {
+                ProgramOptions.getLoger().warn("Unknown --data-source-mapping-mode %s.", mode);
+                dataSourceMappingType = DataSourceMappingType.NONE;
+            }
+        }
+        if (cmd.hasOption("data-source-mapping-seed")) {
+            synchronized (dataSourceMappingHashSeed) {
+                dataSourceMappingHashSeed = cmd.getOptionValue("data-source-mapping-seed", "xresloader");
+            }
         }
 
         // pretty print
@@ -557,6 +613,54 @@ public class ProgramOptions {
         return defaultDataVersion;
     }
 
+    public String getDataSourceMapping(String input, boolean pathMode) {
+        if (DataSourceMappingType.NONE == dataSourceMappingType) {
+            return input;
+        }
+
+        if (null == input) {
+            return input;
+        }
+
+        if (input.isEmpty()) {
+            return input;
+        }
+
+        if (pathMode) {
+            input = input.replaceAll("\\\\", "/");
+        }
+
+        synchronized (dataSourceMappingResult) {
+            if (dataSourceMappingResult.containsKey(input)) {
+                return dataSourceMappingResult.get(input);
+            }
+
+            MessageDigest hasher = null;
+            try {
+                if (DataSourceMappingType.MD5 == dataSourceMappingType) {
+                    hasher = MessageDigest.getInstance("MD5");
+                } else if (DataSourceMappingType.SHA1 == dataSourceMappingType) {
+                    hasher = MessageDigest.getInstance("SHA-1");
+                } else {
+                    hasher = MessageDigest.getInstance("SHA-256");
+                }
+
+                synchronized (dataSourceMappingHashSeed) {
+                    if (dataSourceMappingHashSeed != null && !dataSourceMappingHashSeed.equals(input)) {
+                        hasher.update(dataSourceMappingHashSeed.getBytes());
+                    }
+                }
+                hasher.update(input.getBytes(Charset.forName("UTF-8")));
+                String result = Hex.encodeHexString(hasher.digest());
+                dataSourceMappingResult.put(result, input);
+                return result;
+            } catch (NoSuchAlgorithmException e) {
+                ProgramOptions.getLoger().error("%s", e.getMessage());
+                return input;
+            }
+        }
+    }
+
     public enum FileType {
         BIN, LUA, MSGPACK, JSON, XML, INI, EXCEL, JAVASCRIPT, UECSV, UEJSON
     }
@@ -571,6 +675,10 @@ public class ProgramOptions {
 
     public enum ListStripRule {
         STRIP_EMPTY_ALL, STRIP_EMPTY_TAIL, KEEP_ALL,
+    }
+
+    public enum DataSourceMappingType {
+        NONE, MD5, SHA1, SHA256
     }
 
     static public synchronized Logger getLoger() {
@@ -605,5 +713,114 @@ public class ProgramOptions {
         }
 
         return endl;
+    }
+
+    static public int dumpDataSourceMapping() {
+        int ret = 0;
+        OutputStream out = null;
+        File file = null;
+        synchronized (dataSourceMappingFile) {
+            if (dataSourceMappingFile.isEmpty()) {
+                return ret;
+            }
+            file = new File(dataSourceMappingFile);
+        }
+
+        Charset utf8 = Charset.forName("UTF-8");
+
+        HashMap<String, String> dataSourceMappingOrigin = new HashMap<String, String>();
+        if (file.exists()) {
+            try {
+                InputStream in = new FileInputStream(file);
+                Scanner s = new Scanner(in, utf8);
+                while (s.hasNextLine()) {
+                    String line = s.nextLine();
+                    String[] parts = line.split("\\s+", 2);
+                    if (parts.length < 2) {
+                        continue;
+                    }
+                    if (parts[0].isEmpty()) {
+                        continue;
+                    }
+
+                    dataSourceMappingOrigin.put(parts[0], parts[1]);
+                }
+                s.close();
+                in.close();
+            } catch (IOException e) {
+                ProgramOptions.getLoger().error("Load data source mapping file %s failed.\n%s", dataSourceMappingFile,
+                        e.getMessage());
+                ret += 1;
+            }
+        }
+
+        try {
+            File dir = new File(file.getParent());
+            if (!dir.exists()) {
+                dir.mkdirs();
+            }
+            out = new FileOutputStream(file);
+        } catch (IOException e) {
+            ProgramOptions.getLoger().error("Open data source mapping file %s failed.\n%s", dataSourceMappingFile,
+                    e.getMessage());
+            ret += 1;
+            return ret;
+        }
+
+        ArrayList<String> keys = new ArrayList<String>();
+
+        synchronized (dataSourceMappingResult) {
+            for (String key : dataSourceMappingResult.keySet()) {
+                if (null == key) {
+                    continue;
+                }
+                if (key.isEmpty()) {
+                    continue;
+                }
+                keys.add(key);
+            }
+
+            for (String key : dataSourceMappingOrigin.keySet()) {
+                if (null == key) {
+                    continue;
+                }
+                if (key.isEmpty()) {
+                    continue;
+                }
+                if (!dataSourceMappingResult.containsKey(key)) {
+                    keys.add(key);
+                }
+            }
+
+            keys.sort((l, r) -> {
+                return l.compareTo(r);
+            });
+
+            for (String key : keys) {
+                try {
+                    out.write(key.getBytes(utf8));
+                    out.write(" ".getBytes(utf8));
+                    if (dataSourceMappingResult.containsKey(key)) {
+                        out.write(dataSourceMappingResult.get(key).getBytes(utf8));
+                    } else {
+                        out.write(dataSourceMappingOrigin.get(key).getBytes(utf8));
+                    }
+                    out.write(getEndl().getBytes());
+                } catch (IOException e) {
+                    ProgramOptions.getLoger().error("Write data source mapping %s failed.\n%s", key, e.getMessage());
+                    ret += 1;
+                }
+            }
+        }
+
+        try {
+            out.close();
+        } catch (IOException e) {
+            ProgramOptions.getLoger().error("Close data source mapping file %s failed.\n%s",
+                    file.getAbsoluteFile().getPath(),
+                    e.getMessage());
+            ret += 1;
+        }
+        return ret;
     }
 }

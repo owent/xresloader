@@ -27,10 +27,10 @@
         "GroupName": "XResConfig",
         "DestinationPath": "ConfigRec",
         "FactoryName": "ReimportDataTableFactory",
-        "Filenames": ["D:\\workspace\\git\\github\\xresloader\\xresloader\\sample\\proto_v3\\csv\\StripListTailCfg.csv"],
+        "Filenames": ["D:\\workspace\\git\\github\\xresloader\\xresloader\\sample\\proto_v3\\csv\\EventCfgRec.csv"],
         "ImportSettings": {
             "ImportType": "ECSV_DataTable",
-            "ImportRowStruct": "KeepOrStripEmptyListCfg"
+            "ImportRowStruct": "EventCfg"
         },
         "bSkipReadOnly": "true",
         "bReplaceExisting": "true"
@@ -39,10 +39,10 @@
         "GroupName": "XResConfig",
         "DestinationPath": "ConfigRec",
         "FactoryName": "ReimportDataTableFactory",
-        "Filenames": ["D:\\workspace\\git\\github\\xresloader\\xresloader\\sample\\proto_v3\\csv\\EventCfgRec.csv"],
+        "Filenames": ["D:\\workspace\\git\\github\\xresloader\\xresloader\\sample\\proto_v3\\csv\\StripListTailCfg.csv"],
         "ImportSettings": {
             "ImportType": "ECSV_DataTable",
-            "ImportRowStruct": "EventCfg"
+            "ImportRowStruct": "KeepOrStripEmptyListCfg"
         },
         "bSkipReadOnly": "true",
         "bReplaceExisting": "true"

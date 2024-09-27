@@ -1385,14 +1385,18 @@ public class DataDstPb extends DataDstImpl {
             }
 
             if (desc.getMessageExtension().description != null) {
-                descriptionList.add(desc.getMessageExtension().description);
+                descriptionList
+                        .add(ProgramOptions.getInstance().getDataSourceMapping(desc.getMessageExtension().description,
+                                false));
             }
 
             blocks.setDataMessageType(desc.getFullName());
 
             PbHeaderV3.xresloader_data_source.Builder data_source = header.addDataSourceBuilder();
-            data_source.setFile(DataSrcImpl.getOurInstance().getCurrentFileName());
-            data_source.setSheet(DataSrcImpl.getOurInstance().getCurrentTableName());
+            data_source.setFile(ProgramOptions.getInstance()
+                    .getDataSourceMapping(DataSrcImpl.getOurInstance().getCurrentFileName(), true));
+            data_source.setSheet(ProgramOptions.getInstance()
+                    .getDataSourceMapping(DataSrcImpl.getOurInstance().getCurrentTableName(), false));
             data_source.setCount(blocks.getDataBlockCount() - previousRowNum);
         }
 

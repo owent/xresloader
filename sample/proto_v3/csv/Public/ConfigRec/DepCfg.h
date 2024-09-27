@@ -21,7 +21,7 @@ struct FDepCfg : public FTableRowBase
     // Start of fields
     /** Field Type: STRING, Name: Name, Index: 2. This field is generated for UE Editor compatible. **/
     UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "XResConfig")
-    FName Name = TEXT("");
+    FName Name;
 
     /** Field Type: INT, Name: Id, Index: 1. This field is generated for UE Editor compatible. **/
     UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "XResConfig")

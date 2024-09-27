@@ -6,12 +6,12 @@ return {
     data_source = {
       {
         count = 5,
-        file = "资源转换示例.xlsx",
-        sheet = "test_oneof",
+        file = "b8af9bb6f35231297dcf553e984e193ff4266b5a784191e5ab6baba2f760e166",
+        sheet = "e12a7838113bb6c5f3dc4870002c1dd1399e0b63812a749c756e280a7d25bff7",
       },
     },
     data_ver = "1.0.0.0",
-    description = "Test event_cfg with oneof fields",
+    description = "9ee5db50099f5abf0549d2c89f47e995bceb6dbd12066fdd3875911fad832d44",
     hash_code = "sha256:1ee8cc927336f8c693fbc5c5ca1f78d0e28d0f614de15d7dbe42cdd51b56f5f2",
     xres_ver = "2.19.1",
   },

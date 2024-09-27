@@ -23,7 +23,7 @@ struct FRoleCfg : public FTableRowBase
     // Start of fields
     /** Field Type: STRING, Name: Name, Index: 5. This field is generated for UE Editor compatible. **/
     UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "XResConfig")
-    FName Name = TEXT("");
+    FName Name;
 
     /** Field Type: INT, Name: Id, Index: 1. This field is generated for UE Editor compatible. **/
     UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "XResConfig")
@@ -51,7 +51,7 @@ struct FRoleCfg : public FTableRowBase
 
     /** Field Type: STRING, Name: IntAsString, Index: 12. This field is generated for UE Editor compatible. **/
     UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "XResConfig")
-    FString IntAsString = TEXT("");
+    FString IntAsString;
 
     /** Field Type: INT, Name: TestPlainEnumArray, Index: 13. This field is generated for UE Editor compatible. **/
     UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "XResConfig")
@@ -63,7 +63,7 @@ struct FRoleCfg : public FTableRowBase
 
     /** Field Type: STRING, Name: OriginTimepointOne, Index: 22. This field is generated for UE Editor compatible. **/
     UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "XResConfig")
-    FString OriginTimepointOne = TEXT("");
+    FString OriginTimepointOne;
 
     /** Field Type: MESSAGE, Name: ConvertDurationOne, Index: 23. This field is generated for UE Editor compatible. **/
     UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "XResConfig")
@@ -71,7 +71,7 @@ struct FRoleCfg : public FTableRowBase
 
     /** Field Type: STRING, Name: OriginDurationOne, Index: 24. This field is generated for UE Editor compatible. **/
     UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "XResConfig")
-    FString OriginDurationOne = TEXT("");
+    FString OriginDurationOne;
 
     /** Field Type: MESSAGE, Name: ConvertTimepointArr, Index: 25. This field is generated for UE Editor compatible. **/
     UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "XResConfig")

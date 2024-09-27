@@ -426,6 +426,7 @@ public class main {
         }
 
         // 退出码为失败的任务个数，用以外部捕获转换失败
+        ret_code += ProgramOptions.dumpDataSourceMapping();
         if (ret_code > 255) {
             ret_code = 255;
         }

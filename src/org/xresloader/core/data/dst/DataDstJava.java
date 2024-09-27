@@ -168,12 +168,17 @@ public abstract class DataDstJava extends DataDstImpl {
         }
 
         if (ret.descriptor.getMessageExtension().description != null) {
-            ret.description = ret.descriptor.getMessageExtension().description;
+            ret.description = ProgramOptions.getInstance()
+                    .getDataSourceMapping(ret.descriptor.getMessageExtension().description, false);
         }
 
         ret.data_message_type = ret.descriptor.getFullName();
-        ret.data_source.put("file", DataSrcImpl.getOurInstance().getCurrentFileName());
-        ret.data_source.put("sheet", DataSrcImpl.getOurInstance().getCurrentTableName());
+        ret.data_source.put("file",
+                ProgramOptions.getInstance().getDataSourceMapping(DataSrcImpl.getOurInstance().getCurrentFileName(),
+                        true));
+        ret.data_source.put("sheet",
+                ProgramOptions.getInstance().getDataSourceMapping(DataSrcImpl.getOurInstance().getCurrentTableName(),
+                        false));
         ret.data_source.put("count", ret.rows.size() - previousRowNum);
 
         return ret;

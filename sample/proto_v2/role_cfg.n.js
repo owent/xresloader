@@ -6,8 +6,8 @@ exports.role_cfg_header = {
   data_source : [
     {
       count : 7,
-      file : "资源转换示例.xlsx",
-      sheet : "kind"
+      file : "b8af9bb6f35231297dcf553e984e193ff4266b5a784191e5ab6baba2f760e166",
+      sheet : "68ce177474c5b28540d585a37734cae0bb69f3ddfa9eca4765053049788fa93f"
     }
   ],
   data_ver : "1.0.0.0",

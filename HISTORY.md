@@ -2,9 +2,10 @@
 
 ## Unrelease
 
-## 2.19.0
+## 2.19.1
 
 1. 输出的UE代码的默认值也输出到 USTRUCT 申明中（不包含 `FString` ）。
+2. 增加 `--data-source-mapping-file`, `--data-source-mapping-mode`, `--data-source-mapping-seed` 控制数据源输出通过Hash隐藏原始文件。
 
 ## 2.19.0
 

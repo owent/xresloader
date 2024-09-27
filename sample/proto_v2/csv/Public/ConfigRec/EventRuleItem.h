@@ -23,7 +23,7 @@ struct FEventRuleItem : public FTableRowBase
     // Start of fields
     /** Field Type: oneof/union -> FString, Name: Nested, Index: 0. This field is generated for UE Editor compatible. **/
     UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "XResConfig")
-    FString Nested = TEXT("");
+    FString Nested;
 
     /** Field Type: INT, Name: RuleId, Index: 1. This field is generated for UE Editor compatible. **/
     UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "XResConfig")
@@ -35,7 +35,7 @@ struct FEventRuleItem : public FTableRowBase
 
     /** Field Type: STRING, Name: NestedNote, Index: 11. This field is generated for UE Editor compatible. **/
     UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "XResConfig")
-    FString NestedNote = TEXT("");
+    FString NestedNote;
 
     /** Field Type: INT, Name: NestedEnumType, Index: 12. This field is generated for UE Editor compatible. **/
     UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "XResConfig")

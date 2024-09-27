@@ -125,6 +125,9 @@ echo "
 | --data-source-lru-cache-rows | 数据源的LRU Cache行数           | 仅缓存流式索引                                                                                           |
 | --tolerate-max-empty-rows    | 连续空行检测的行数              | 设置连续空行检测的行数(>=2.14.1版本) ，大量的连续空行通常是误操作                                        |
 | --ignore-field-tags          | 字段Tag                         | 忽略指定tag的字段转出(>=2.19.0版本)                                                                      |
+| --data-source-mapping-file   | 数据源映射输出文件              | (>=2.19.1版本)                                                                                           |
+| --data-source-mapping-mode   | 数据源映射输出模式              | `none`, `md5`, `sha1`, `sha256` (>=2.19.1版本)                                                           |
+| --data-source-mapping-seed   | 数据源映射输出Hash Seed         | (>=2.19.1版本)                                                                                           |
 
 ### 协议类型
 

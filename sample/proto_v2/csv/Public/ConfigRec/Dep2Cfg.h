@@ -24,6 +24,6 @@ struct FDep2Cfg : public FTableRowBase
 
     /** Field Type: STRING, Name: Level, Index: 2. This field is generated for UE Editor compatible. **/
     UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "XResConfig")
-    FString Level = TEXT("");
+    FString Level;
 
 };

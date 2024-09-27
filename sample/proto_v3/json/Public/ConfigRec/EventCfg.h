@@ -26,7 +26,7 @@ struct FEventCfg : public FTableRowBase
     // Start of fields
     /** Field Type: STRING, Name: Name, Index: 0. This field is generated for UE Editor compatible. **/
     UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "XResConfig")
-    FName Name = TEXT("");
+    FName Name;
 
     /** Field Type: INT, Name: Id, Index: 1. This field is generated for UE Editor compatible. **/
     UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "XResConfig")
@@ -38,11 +38,11 @@ struct FEventCfg : public FTableRowBase
 
     /** Field Type: oneof/union -> FString, Name: Reward, Index: 0. This field is generated for UE Editor compatible. **/
     UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "XResConfig")
-    FString Reward = TEXT("");
+    FString Reward;
 
     /** Field Type: oneof/union -> FString, Name: UnlockType, Index: 1. This field is generated for UE Editor compatible. **/
     UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "XResConfig")
-    FString UnlockType = TEXT("");
+    FString UnlockType;
 
     /** Field Type: MESSAGE, Name: Rule, Index: 6. This field is generated for UE Editor compatible. **/
     UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "XResConfig")
@@ -62,7 +62,7 @@ struct FEventCfg : public FTableRowBase
 
     /** Field Type: STRING, Name: Note, Index: 13. This field is generated for UE Editor compatible. **/
     UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "XResConfig")
-    FString Note = TEXT("");
+    FString Note;
 
     /** Field Type: INT, Name: EnumType, Index: 14. This field is generated for UE Editor compatible. **/
     UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "XResConfig")

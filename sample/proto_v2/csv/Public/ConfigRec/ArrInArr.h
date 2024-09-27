@@ -21,7 +21,7 @@ struct FArrInArr : public FTableRowBase
     // This is a test name in array
     /** Field Type: STRING, Name: Name, Index: 1. This field is generated for UE Editor compatible. **/
     UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "XResConfig")
-    FName Name = TEXT("");
+    FName Name;
 
     /** Field Type: INT, Name: IntArr, Index: 2. This field is generated for UE Editor compatible. **/
     UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "XResConfig")

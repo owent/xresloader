@@ -2,6 +2,10 @@
 
 ## Unrelease
 
+## 2.19.2
+
+1. 修复 `--data-source-mapping-file` 指向的地址无效时的 stacktrace 。
+
 ## 2.19.1
 
 1. 输出的UE代码的默认值也输出到 USTRUCT 申明中（不包含 `FString` ）。

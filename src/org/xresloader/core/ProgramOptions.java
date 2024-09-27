@@ -755,10 +755,14 @@ public class ProgramOptions {
         }
 
         try {
-            File dir = new File(file.getParent());
-            if (!dir.exists()) {
-                dir.mkdirs();
+            String dirPath = file.getParent();
+            if (dirPath != null && !dirPath.isEmpty()) {
+                File dir = new File(file.getParent());
+                if (!dir.exists()) {
+                    dir.mkdirs();
+                }
             }
+
             out = new FileOutputStream(file);
         } catch (IOException e) {
             ProgramOptions.getLoger().error("Open data source mapping file %s failed.\n%s", dataSourceMappingFile,

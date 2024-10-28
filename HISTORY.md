@@ -5,6 +5,9 @@
 ## 2.19.2
 
 1. 修复 `--data-source-mapping-file` 指向的地址无效时的 stacktrace 。
+2. 优化Warning的输出数据源
+3. 更新依赖库
+   + `com.google.protobuf` -> 4.28.3
 
 ## 2.19.1
 

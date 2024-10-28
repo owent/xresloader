@@ -3059,8 +3059,12 @@ public class DataDstPb extends DataDstImpl {
 
         if (!missingFields.isEmpty()) {
             String message = String.format(
-                    "Try to convert %s need at least %d fields, at most %d fields, but only provide %d fields.%s  > Missing fields: %s",
+                    "Try to convert %s need at least %d fields, at most %d fields, but only provide %d fields.%s  > File: %s, Table: %s, Row: %d, Column: %d(%s)%s  > Missing fields: %s",
                     field.getTypeDescriptor().getFullName(), atLeastFieldSize, fieldSize, inputs.length,
+                    ProgramOptions.getEndl(),
+                    rowContext.fileName, rowContext.tableName,
+                    rowContext.row + 1, DataSrcImpl.getOurInstance().getLastColomnNum() + 1,
+                    ExcelEngine.getColumnName(DataSrcImpl.getOurInstance().getLastColomnNum() + 1),
                     ProgramOptions.getEndl(),
                     String.join(",", missingFields.values().stream().map(DataDstFieldDescriptor::getName)
                             .collect(Collectors.toList())));

@@ -9,6 +9,8 @@ import org.xresloader.core.data.dst.DataDstWriterNode.DataDstChildrenNode;
 import org.xresloader.core.data.dst.DataDstWriterNode.DataDstFieldDescriptor;
 import org.xresloader.core.data.dst.DataDstWriterNode.DataDstOneofDescriptor;
 import org.xresloader.core.data.dst.DataDstWriterNode.DataDstTypeDescriptor;
+import org.xresloader.core.data.dst.DataDstWriterNode.DataDstEnumDescriptor;
+import org.xresloader.core.data.dst.DataDstWriterNode.DataDstEnumValueDescriptor;
 import org.xresloader.core.data.err.ConvException;
 import org.xresloader.core.data.et.DataETProcessor;
 import org.xresloader.core.data.src.DataContainer;
@@ -67,7 +69,7 @@ public class DataDstPb extends DataDstImpl {
         public HashSet<String> file_descs_failed = new HashSet<String>();
         /*** 类型信息-Message描述器集合 ***/
         public HashMap<String, PbAliasNode<Descriptors.Descriptor>> message_descs = new HashMap<String, PbAliasNode<Descriptors.Descriptor>>();
-        public HashMap<String, HashMap<Integer, Descriptors.EnumValueDescriptor>> enum_values_descs = new HashMap<String, HashMap<Integer, Descriptors.EnumValueDescriptor>>();
+        public HashMap<String, DataDstEnumDescriptor> enum_descs = new HashMap<String, DataDstEnumDescriptor>();
         /*** 类型信息-快速整数别名集合 ***/
         public HashMap<String, Integer> quick_integer_values_alias = new HashMap<String, Integer>();
         public HashSet<String> quick_integer_values_container = new HashSet<String>();
@@ -332,20 +334,16 @@ public class DataDstPb extends DataDstImpl {
 
     static Descriptors.EnumValueDescriptor get_enum_value(PbInfoSet pbs, Descriptors.EnumDescriptor enum_desc,
             Integer val) {
-        String name = enum_desc.getFullName();
-        while (!name.isEmpty() && '.' == name.charAt(0)) {
-            name = name.substring(1);
-        }
-        HashMap<Integer, Descriptors.EnumValueDescriptor> cache_set = pbs.enum_values_descs.getOrDefault(name, null);
-        if (cache_set == null) {
-            cache_set = new HashMap<Integer, Descriptors.EnumValueDescriptor>();
-            pbs.enum_values_descs.put(name, cache_set);
-            for (Descriptors.EnumValueDescriptor enum_val : enum_desc.getValues()) {
-                cache_set.put(Integer.valueOf(enum_val.getNumber()), enum_val);
-            }
+        DataDstEnumDescriptor cache_set = mutableDataDstEnumDescriptor(pbs, enum_desc);
+        if (null == cache_set) {
+            return null;
         }
 
-        return cache_set.getOrDefault(val, null);
+        DataDstEnumValueDescriptor res = cache_set.getValueById(val.intValue());
+        if (null == res) {
+            return null;
+        }
+        return (Descriptors.EnumValueDescriptor) res.getRawDescriptor();
     }
 
     static Descriptors.FileDescriptor try_get_inner_detail_desc(String name) {
@@ -1174,9 +1172,10 @@ public class DataDstPb extends DataDstImpl {
             } else if (checkFieldIsRequired(field)) {
                 inner_label = DataDstWriterNode.FIELD_LABEL_TYPE.REQUIRED;
             }
+
             DataDstFieldDescriptor innerField = new DataDstFieldDescriptor(
                     mutableDataDstDescriptor(pbs, fieldPbDesc, pbTypeToInnerType(field.getType()),
-                            pbTypeToTypeLimit(field.getType())),
+                            pbTypeToTypeLimit(field.getType()), mutableDataDstEnumDescriptor(pbs, field)),
                     field.getNumber(),
                     field.getName(), inner_label, field);
             innerDesc.fields.put(field.getName(), innerField);
@@ -1217,8 +1216,48 @@ public class DataDstPb extends DataDstImpl {
         }
     }
 
+    static private DataDstEnumDescriptor mutableDataDstEnumDescriptor(PbInfoSet pbs,
+            Descriptors.EnumDescriptor enumDesc) {
+        if (null == enumDesc) {
+            return null;
+        }
+
+        String name = enumDesc.getFullName();
+        while (!name.isEmpty() && '.' == name.charAt(0)) {
+            name = name.substring(1);
+        }
+
+        DataDstEnumDescriptor cache_set = pbs.enum_descs.getOrDefault(name, null);
+        if (cache_set == null) {
+            cache_set = new DataDstEnumDescriptor(name, enumDesc.getName(), enumDesc);
+
+            for (Descriptors.EnumValueDescriptor enum_val : enumDesc.getValues()) {
+                cache_set.addValue(new DataDstEnumValueDescriptor(cache_set, enum_val.getNumber(),
+                        enum_val.getName(),
+                        enum_val));
+            }
+            pbs.enum_descs.put(name, cache_set);
+        }
+
+        return cache_set;
+    }
+
+    static private DataDstEnumDescriptor mutableDataDstEnumDescriptor(PbInfoSet pbs,
+            Descriptors.FieldDescriptor field) {
+        if (field == null) {
+            return null;
+        }
+
+        if (field.getJavaType() != JavaType.ENUM) {
+            return null;
+        }
+
+        return mutableDataDstEnumDescriptor(pbs, field.getEnumType());
+    }
+
     static private DataDstTypeDescriptor mutableDataDstDescriptor(PbInfoSet pbs, Descriptors.Descriptor pbDesc,
-            DataDstWriterNode.JAVA_TYPE type, DataDstWriterNode.SPECIAL_TYPE_LIMIT typeLimit) throws ConvException {
+            DataDstWriterNode.JAVA_TYPE type, DataDstWriterNode.SPECIAL_TYPE_LIMIT typeLimit,
+            DataDstEnumDescriptor referEnum) throws ConvException {
         String key = null;
         if (null == pbDesc) {
             key = type.toString();
@@ -1232,7 +1271,7 @@ public class DataDstPb extends DataDstImpl {
         }
 
         if (pbDesc == null) {
-            ret = DataDstWriterNode.getDefaultMessageDescriptor(type, typeLimit);
+            ret = DataDstWriterNode.getDefaultMessageDescriptor(type, typeLimit, referEnum);
         } else {
             DataDstWriterNode.SPECIAL_MESSAGE_TYPE smt = DataDstWriterNode.SPECIAL_MESSAGE_TYPE.NONE;
             if (pbDesc.getOptions().getMapEntry()) {
@@ -1243,7 +1282,7 @@ public class DataDstPb extends DataDstImpl {
                 smt = DataDstWriterNode.SPECIAL_MESSAGE_TYPE.DURATION;
             }
             ret = new DataDstTypeDescriptor(type, pbDesc.getFile().getPackage(), pbDesc.getName(), pbDesc, smt,
-                    typeLimit);
+                    typeLimit, referEnum);
         }
         pbs.dataDstDescs.put(key, ret);
 
@@ -1289,19 +1328,22 @@ public class DataDstPb extends DataDstImpl {
     }
 
     static private DataDstWriterNode createMessageWriterNode(PbInfoSet pbs, DataDstWriterNode.JAVA_TYPE type,
-            DataDstWriterNode.SPECIAL_TYPE_LIMIT typeLimit,
+            DataDstWriterNode.SPECIAL_TYPE_LIMIT typeLimit, DataDstEnumDescriptor referEnum,
             int listIndex) throws ConvException {
-        return DataDstWriterNode.create(null, mutableDataDstDescriptor(pbs, null, type, typeLimit), listIndex);
+        return DataDstWriterNode.create(null, mutableDataDstDescriptor(pbs, null, type, typeLimit, referEnum),
+                listIndex);
     }
 
     static private DataDstWriterNode createMessageWriterNode(PbInfoSet pbs, Descriptors.Descriptor pbDesc,
-            DataDstWriterNode.JAVA_TYPE type, DataDstWriterNode.SPECIAL_TYPE_LIMIT typeLimit, int listIndex)
+            DataDstWriterNode.JAVA_TYPE type, DataDstWriterNode.SPECIAL_TYPE_LIMIT typeLimit,
+            DataDstEnumDescriptor referEnum, int listIndex)
             throws ConvException {
         if (null == pbDesc) {
-            return createMessageWriterNode(pbs, type, typeLimit, listIndex);
+            return createMessageWriterNode(pbs, type, typeLimit, referEnum, listIndex);
         }
 
-        return DataDstWriterNode.create(pbDesc, mutableDataDstDescriptor(pbs, pbDesc, type, typeLimit), listIndex);
+        return DataDstWriterNode.create(pbDesc, mutableDataDstDescriptor(pbs, pbDesc, type, typeLimit, null),
+                listIndex);
     }
 
     static private DataDstWriterNode createOneofWriterNode(PbInfoSet pbs, DataDstOneofDescriptor oneofDesc) {
@@ -1316,7 +1358,7 @@ public class DataDstPb extends DataDstImpl {
     @Override
     public final DataDstWriterNode compile() throws ConvException {
         DataDstWriterNode ret = createMessageWriterNode(cachePbs, currentMsgDesc, DataDstWriterNode.JAVA_TYPE.MESSAGE,
-                DataDstWriterNode.SPECIAL_TYPE_LIMIT.NONE,
+                DataDstWriterNode.SPECIAL_TYPE_LIMIT.NONE, null,
                 -1);
         if (test(ret, new LinkedList<String>())) {
             return ret;
@@ -1554,7 +1596,8 @@ public class DataDstPb extends DataDstImpl {
                         name_list.addLast("");
                         for (;; ++count) {
                             DataDstWriterNode c = createMessageWriterNode(cachePbs, fd.getMessageType(),
-                                    DataDstWriterNode.JAVA_TYPE.MESSAGE, pbTypeToTypeLimit(fd.getType()), count);
+                                    DataDstWriterNode.JAVA_TYPE.MESSAGE, pbTypeToTypeLimit(fd.getType()),
+                                    mutableDataDstEnumDescriptor(cachePbs, fd), count);
                             boolean test_passed = false;
 
                             name_list.removeLast();
@@ -1659,7 +1702,8 @@ public class DataDstPb extends DataDstImpl {
 
                             if (null != col) {
                                 DataDstWriterNode c = createMessageWriterNode(cachePbs, fd.getMessageType(),
-                                        DataDstWriterNode.JAVA_TYPE.MESSAGE, pbTypeToTypeLimit(fd.getType()), -1);
+                                        DataDstWriterNode.JAVA_TYPE.MESSAGE, pbTypeToTypeLimit(fd.getType()),
+                                        mutableDataDstEnumDescriptor(cachePbs, fd), -1);
                                 child = node.addChild(fd.getName(), c, fd, DataDstWriterNode.CHILD_NODE_TYPE.PLAIN);
                                 setup_node_identify(c, child, col, fd);
                                 ret = true;
@@ -1671,7 +1715,8 @@ public class DataDstPb extends DataDstImpl {
                         }
                     } else {
                         DataDstWriterNode c = createMessageWriterNode(cachePbs, fd.getMessageType(),
-                                DataDstWriterNode.JAVA_TYPE.MESSAGE, pbTypeToTypeLimit(fd.getType()), -1);
+                                DataDstWriterNode.JAVA_TYPE.MESSAGE, pbTypeToTypeLimit(fd.getType()),
+                                mutableDataDstEnumDescriptor(cachePbs, fd), -1);
                         boolean test_passed = false;
 
                         // 检测使用的名字，message不允许混合别名。以防别名组合指数级膨胀
@@ -1743,6 +1788,7 @@ public class DataDstPb extends DataDstImpl {
                     DataDstWriterNode.JAVA_TYPE inner_type = pbTypeToInnerType(fd.getType());
                     if (fd.isRepeated()) {
                         int count = 0;
+                        DataDstEnumDescriptor referEnum = mutableDataDstEnumDescriptor(cachePbs, fd);
                         for (;; ++count) {
                             String real_name = DataDstWriterNode.makeChildPath(prefix, fd.getName(), count);
                             IdentifyDescriptor col = data_src.getColumnByName(real_name);
@@ -1763,7 +1809,8 @@ public class DataDstPb extends DataDstImpl {
 
                             if (null != col) {
                                 DataDstWriterNode c = createMessageWriterNode(cachePbs, inner_type,
-                                        pbTypeToTypeLimit(fd.getType()), count);
+                                        pbTypeToTypeLimit(fd.getType()), referEnum,
+                                        count);
                                 child = node.addChild(fd.getName(), c, fd, DataDstWriterNode.CHILD_NODE_TYPE.STANDARD);
                                 setup_node_identify(c, child, col, fd);
                                 ret = true;
@@ -1812,7 +1859,7 @@ public class DataDstPb extends DataDstImpl {
 
                             if (null != col) {
                                 DataDstWriterNode c = createMessageWriterNode(cachePbs, inner_type,
-                                        pbTypeToTypeLimit(fd.getType()), -1);
+                                        pbTypeToTypeLimit(fd.getType()), referEnum, -1);
                                 child = node.addChild(fd.getName(), c, fd, DataDstWriterNode.CHILD_NODE_TYPE.PLAIN);
                                 setup_node_identify(c, child, col, fd);
                                 ret = true;
@@ -1843,7 +1890,7 @@ public class DataDstPb extends DataDstImpl {
                         if (null != col) {
                             filterMissingFields(missingFields, oneofField, fd, false);
                             DataDstWriterNode c = createMessageWriterNode(cachePbs, inner_type,
-                                    pbTypeToTypeLimit(fd.getType()), -1);
+                                    pbTypeToTypeLimit(fd.getType()), mutableDataDstEnumDescriptor(cachePbs, fd), -1);
                             child = node.addChild(fd.getName(), c, fd, DataDstWriterNode.CHILD_NODE_TYPE.STANDARD);
                             setup_node_identify(c, child, col, fd);
                             ret = true;
@@ -1851,7 +1898,8 @@ public class DataDstPb extends DataDstImpl {
                             filterMissingFields(missingFields, oneofField, fd, true);
                             if (checkFieldIsRequired(fd)) {
                                 DataDstWriterNode c = createMessageWriterNode(cachePbs, inner_type,
-                                        pbTypeToTypeLimit(fd.getType()), -1);
+                                        pbTypeToTypeLimit(fd.getType()), mutableDataDstEnumDescriptor(cachePbs, fd),
+                                        -1);
                                 // required 字段要dump默认数据
                                 child = node.addChild(fd.getName(), c, fd, DataDstWriterNode.CHILD_NODE_TYPE.STANDARD);
                             }

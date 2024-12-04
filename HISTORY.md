@@ -2,6 +2,14 @@
 
 ## Unrelease
 
+### 2.20.0
+
+1. Ue-Json和Ue-Csv模式下输出的代码中转出Enum类型
+
+### BREAKCHANGES
+
++ Ue-Json和Ue-Csv模式下输出的代码中转出Enum类型，原来是int32类型
+
 ### 2.19.3
 
 1. 优化Warning的输出数据源

@@ -18,7 +18,7 @@ return {
     data_ver = "1.0.0.0",
     description = "3d3fc799606b8a633ccb27f240752e03a26e5df289b88ecf1d6155ece00c7b6f\r\n3d3fc799606b8a633ccb27f240752e03a26e5df289b88ecf1d6155ece00c7b6f",
     hash_code = "sha256:e356806bc55be9cc8a6c701d4295989e0fc3887b368681bb9457b0e51df8f445",
-    xres_ver = "2.19.1",
+    xres_ver = "2.20.0",
   },
   [2] = "role_upgrade_cfg",
   role_upgrade_cfg = {

@@ -12,7 +12,7 @@
     <data_ver>1.0.0.0</data_ver>
     <description>b741684279f664b9aa427c27ec2c76529c908834d322a737a7dfabfd6dc425ea</description>
     <hash_code>sha256:dd55e67e5c1312ca507fedd631c54b8c1266ab82859ed36bd535db90ac36a95f</hash_code>
-    <xres_ver>2.19.1</xres_ver>
+    <xres_ver>2.20.0</xres_ver>
   </header>
   <body mode="message">
     <arr_in_arr_cfg for="0" mode="message">

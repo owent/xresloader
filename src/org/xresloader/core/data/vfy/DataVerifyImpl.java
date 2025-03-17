@@ -16,6 +16,20 @@ import org.xresloader.core.data.err.ConvException;
  */
 
 public abstract class DataVerifyImpl {
+    public enum ValidatorFailedLevel {
+        WARNING(1), ERROR(2);
+
+        private final int value;
+
+        private ValidatorFailedLevel(int value) {
+            this.value = value;
+        }
+
+        public int getValue() {
+            return value;
+        }
+    }
+
     protected HashMap<String, Long> all_names = new HashMap<String, Long>();
     protected HashSet<Long> all_numbers = new HashSet<Long>();
     protected String name = "";
@@ -31,6 +45,10 @@ public abstract class DataVerifyImpl {
 
     protected DataVerifyImpl(ValidatorTokens tokens) {
         name = tokens.name;
+    }
+
+    public int getVersion() {
+        return 0;
     }
 
     public boolean get(double number, DataVerifyResult res) {
@@ -169,6 +187,50 @@ public abstract class DataVerifyImpl {
         return "validator(s)";
     }
 
+    static private ValidatorFailedLevel getValidatorFailedLevel(DataVerifyImpl verifyEngine) {
+        if (!ProgramOptions.getInstance().enableDataValidator) {
+            return ValidatorFailedLevel.WARNING;
+        }
+
+        if (verifyEngine == null) {
+            return ValidatorFailedLevel.ERROR;
+        }
+
+        // version: 0 means always make failed as a error
+        if (0 == verifyEngine.getVersion()) {
+            return ValidatorFailedLevel.ERROR;
+        }
+
+        int noErrorVersion = ProgramOptions.getInstance().dataValidatorNoErrorVersion;
+        if (noErrorVersion <= 0) {
+            return ValidatorFailedLevel.ERROR;
+        }
+
+        if (verifyEngine.getVersion() >= noErrorVersion) {
+            return ValidatorFailedLevel.WARNING;
+        }
+        return ValidatorFailedLevel.ERROR;
+    }
+
+    static private ValidatorFailedLevel getValidatorFailedLevel(List<DataVerifyImpl> verifyEngine) {
+        if (verifyEngine == null || verifyEngine.isEmpty()) {
+            if (!ProgramOptions.getInstance().enableDataValidator) {
+                return ValidatorFailedLevel.WARNING;
+            }
+            return ValidatorFailedLevel.ERROR;
+        }
+
+        ValidatorFailedLevel ret = ValidatorFailedLevel.ERROR;
+        for (var vfy : verifyEngine) {
+            ValidatorFailedLevel level = getValidatorFailedLevel(vfy);
+            if (level.getValue() < ret.getValue()) {
+                ret = level;
+            }
+        }
+
+        return ret;
+    }
+
     static public double getAndVerify(List<DataVerifyImpl> verifyEngine, String path, double n) throws ConvException {
         if (verifyEngine == null || verifyEngine.isEmpty()) {
             return n;
@@ -199,7 +261,7 @@ public abstract class DataVerifyImpl {
                 }
                 String message = String.format("Check %s for %s with validator %s failed, %s", value, path,
                         vfy.getDescription(), e.getMessage());
-                if (ProgramOptions.getInstance().enableDataValidator) {
+                if (getValidatorFailedLevel(vfy) == ValidatorFailedLevel.ERROR) {
                     throw new ConvException(
                             message);
                 } else {
@@ -217,7 +279,7 @@ public abstract class DataVerifyImpl {
 
         String message = String.format("Check %s for %s with %s %s failed, check data failed.", value, path,
                 getValidatorWord(verifyEngine), collectValidatorNames(verifyEngine));
-        if (ProgramOptions.getInstance().enableDataValidator) {
+        if (getValidatorFailedLevel(verifyEngine) == ValidatorFailedLevel.ERROR) {
             throw new ConvException(
                     message);
         } else {
@@ -278,7 +340,7 @@ public abstract class DataVerifyImpl {
                 } catch (Exception e) {
                     String message = String.format("Check %s for %s with validator %s failed, %s", val, path,
                             vfy.getDescription(), e.getMessage());
-                    if (ProgramOptions.getInstance().enableDataValidator) {
+                    if (getValidatorFailedLevel(vfy) == ValidatorFailedLevel.ERROR) {
                         throw new ConvException(
                                 message);
                     } else {
@@ -288,7 +350,7 @@ public abstract class DataVerifyImpl {
             }
         } catch (Exception e) {
             String message = String.format("Convert %s for %s failed, %s", val, path, e.getMessage());
-            if (ProgramOptions.getInstance().enableDataValidator) {
+            if (getValidatorFailedLevel(verifyEngine) == ValidatorFailedLevel.ERROR) {
                 throw new ConvException(
                         message);
             } else {
@@ -304,7 +366,7 @@ public abstract class DataVerifyImpl {
             message = String.format("Convert %s for %s with %s %s failed, check data failed.", val,
                     path, getValidatorWord(verifyEngine), collectValidatorNames(verifyEngine));
         }
-        if (ProgramOptions.getInstance().enableDataValidator) {
+        if (getValidatorFailedLevel(verifyEngine) == ValidatorFailedLevel.ERROR) {
             throw new ConvException(message);
         } else {
             ProgramOptions.getLoger().warn(message);
@@ -343,7 +405,7 @@ public abstract class DataVerifyImpl {
             } catch (Exception e) {
                 String message = String.format("Check %s for %s with validator %s failed, %s", val, path,
                         vfy.getDescription(), e.getMessage());
-                if (ProgramOptions.getInstance().enableDataValidator) {
+                if (getValidatorFailedLevel(vfy) == ValidatorFailedLevel.ERROR) {
                     throw new ConvException(
                             message);
                 } else {
@@ -360,7 +422,7 @@ public abstract class DataVerifyImpl {
             message = String.format("Convert %s for %s with %s %s failed, check data failed.", val,
                     path, getValidatorWord(verifyEngine), collectValidatorNames(verifyEngine));
         }
-        if (ProgramOptions.getInstance().enableDataValidator) {
+        if (getValidatorFailedLevel(verifyEngine) == ValidatorFailedLevel.ERROR) {
             throw new ConvException(message);
         } else {
             ProgramOptions.getLoger().warn(message);
@@ -381,7 +443,7 @@ public abstract class DataVerifyImpl {
                 message = String.format("Convert %s for %s with %s %s failed, not a integer.", val,
                         path, getValidatorWord(verifyEngine), collectValidatorNames(verifyEngine));
             }
-            if (ProgramOptions.getInstance().enableDataValidator) {
+            if (getValidatorFailedLevel(verifyEngine) == ValidatorFailedLevel.ERROR) {
                 throw new ConvException(message);
             } else {
                 ProgramOptions.getLoger().warn(message);

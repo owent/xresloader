@@ -523,9 +523,12 @@ public class DataDstWriterNode {
             this.fields_by_id = new HashMap<Integer, DataDstFieldDescriptor>();
             for (HashMap.Entry<String, DataDstFieldDescriptor> d : fields.entrySet()) {
                 this.fields_by_id.put(d.getValue().getIndex(), d.getValue());
-                d.getValue().setReferOneof(this);
             }
             this.fullName = String.format("%s.%s", owner.getFullName(), name);
+
+            for (HashMap.Entry<String, DataDstFieldDescriptor> d : fields.entrySet()) {
+                d.getValue().setReferOneof(this);
+            }
         }
 
         public Object getRawDescriptor() {

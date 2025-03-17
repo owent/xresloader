@@ -72,6 +72,7 @@ public class ProgramOptions {
     public boolean enableStdin = false;
     public String[] customValidatorRules = null;
     public boolean enableDataValidator = true;
+    public int dataValidatorNoErrorVersion = 0;
     public String[] ignoreFieldTags = null;
 
     public String protoDumpFile = "";
@@ -131,6 +132,7 @@ public class ProgramOptions {
         enableStdin = false;
         customValidatorRules = null;
         enableDataValidator = true;
+        dataValidatorNoErrorVersion = 0;
         ignoreFieldTags = null;
 
         protoDumpFile = "";
@@ -254,7 +256,10 @@ public class ProgramOptions {
         options.addOption(Option.builder().longOpt("validator-rules")
                 .desc("set file to load custom validator").hasArg().argName("FILE PATH").build());
         options.addOption(null, "disable-data-validator", false,
-                "disable data validator, so it will not show warnings when data checking failed.");
+                "disable data validator, so validators only issue warnings without failing when validation checks fail.");
+        options.addOption(Option.builder().longOpt("data-validator-error-version")
+                .desc("set data validator error version, only validators with versions below this version will generate failures, 0 means always failure.")
+                .hasArg().argName("VERSION NUMBER").build());
         options.addOption(Option.builder().longOpt("ignore-field-tags")
                 .desc("ignore data and only dump the default value of specify field tags.").hasArg().argName("TAG")
                 .build());
@@ -566,6 +571,12 @@ public class ProgramOptions {
             enableDataValidator = false;
         } else {
             enableDataValidator = true;
+        }
+
+        if (cmd.hasOption("data-validator-no-error-version")) {
+            dataValidatorNoErrorVersion = Integer.parseInt(cmd.getOptionValue("data-validator-no-error-version", "0"));
+        } else {
+            dataValidatorNoErrorVersion = 0;
         }
 
         // ignore field tags

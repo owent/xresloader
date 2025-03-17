@@ -84,50 +84,51 @@ echo "
 
 ### 可用参数列表
 
-| 参数选项                     | 描述                            | 说明                                                                                                     |
-| ---------------------------- | ------------------------------- | -------------------------------------------------------------------------------------------------------- |
-| -h --help                    | 帮助信息                        | 显示帮助和支持的参数列表                                                                                 |
-| -t --output-type             | 输出类型                        | bin（默认值）,lua,msgpack,json,xml,javascript,js,ue-csv,ue-json                                          |
-| -p --proto                   | 协议描述类型                    | protobuf(默认值),capnproto(暂未实现),flatbuffer(暂未实现)                                                |
-| -f --proto-file              | 协议描述文件                    |                                                                                                          |
-| -o --output-dir              | 输出目录                        | 默认为当前目录                                                                                           |
-| -d --data-src-dir            | 数据源根目录                    | 默认为当前目录                                                                                           |
-| -s --src-file                | 数据源描述文件                  | 后缀可以是 .xls, .xlsx, .cvs, .xlsm, .ods, .ini, .cfg, .conf, .json                                      |
-| -m --src-meta                | 数据源描述表                    | 可多个                                                                                                   |
-| --enable-string-macro        | 设置Macro表也对字符串类型生效   | 可以通过全局开启此选项，特定表使用 `--disable-string-macro` 来实现默认开启字符串文本替换，特定表不替换   |
-| --disable-string-macro       | 设置Macro表也对字符串类型不生效 | (默认)                                                                                                   |
-| -v --version                 | 打印版本号                      |                                                                                                          |
-| -n --rename                  | 重命名输出文件名                | 正则表达式 （如：/(?i)\\.bin$/\\.lua/）                                                                  |
-| --require-mapping-all        | 开启所有字段映射检查            | 开启所有字段映射检查后，转出结构中所有的字段都必须配置映射关系，数组字段至少要有一个元素                 |
-| --enable-alias-mapping       | 开启别名匹配                    | 映射Excel列到目标数据结构，允许使用别名(<2.18.0版本时默认值)                                             |
-| --disable-alias-mapping      | 关闭别名匹配                    | 映射Excel列到目标数据结构，不允许使用别名(>=2.18.0版本)                                                  |
-| -c --const-print             | 输出协议描述中的常量            | 参数为字符串，表示输出的文件名                                                                           |
-| -i --option-print            | 输出协议描述中的选项            | 参数为字符串，表示输出的文件名                                                                           |
-| -r --descriptor-print        | 输出完整协议描述信息            | 参数为字符串，表示输出的文件名                                                                           |
-| -a --data-version            | 设置数据版本号                  | 参数为字符串，表示输出的数据的data_ver字段。如果不设置将按执行时间自动生成一个                           |
-| --pretty                     | 格式化输出                      | 参数为整数，0代表关闭美化输出功能，大于0表示格式化时的缩进量                                             |
-| --enable-excel-formular      | 开启Excel公式实时计算           | 开启公式实时计算会减慢转表速度(2.11-RC3版本后默认关闭)                                                   |
-| --disable-excel-formular     | 关闭Excel公式实时计算           | 关闭公式实时计算，会使用新的流式索引器，大幅加快转表速度，降低内存开销。（注: 也会关闭对日期格式的探测） |
-| --disable-empty-list         | 移除数组空项                    | (废弃)，请使用 `--list-strip-all-empty`                                                                  |
-| --enable-empty-list          | 保留全部数组空项                | (废弃)，请使用 `--list-keep-empty`                                                                       |
-| --list-strip-all-empty       | 移除数组空项                    | (默认) 移除数组空项，自动删除Excel中的未填充数据，不会转出到输出文件中                                   |
-| --list-keep-empty            | 保留全部数组空项                | 保留全部数组空项，未填充数据将使用默认的空值来填充，并转出到输出文件中                                   |
-| --list-strip-empty-tail      | 移除数组尾部空项                | 移除数组尾部空项，自动删除尾部的未填充数据，其他的未填充数据将使用默认的空值，并转出到输出文件中         |
-| --stdin                      | 通过标准输入批量转表            | 通过标准输入批量转表，参数可上面的一样,每行一项，字符串参数可以用单引号或双引号包裹，但是都不支持转义    |
-| --lua-global                 | lua输出写到全局表               | 输出协议描述中的常量到Lua脚本时，同时导入符号到全局表_G中（仅对常量导出有效）                            |
-| --lua-module                 | lua输出使用module写出           | 输出Lua脚本时，使用 module(模块名, package.seeall) 导出到全局                                            |
-| --xml-root                   | xml输出的根节点tag              | 输出格式为xml时的根节点的TagName                                                                         |
-| --javascript-export          | 导出javascript数据的模式        | 可选项(nodejs: 使用兼容nodejs的exports, amd: 使用兼容amd的define, 其他: 写入全局(window或global))        |
-| --javascript-global          | 导出javascript全局空间          | 导出数据到全局时，可以指定写入的名字空间                                                                 |
-| --ignore-unknown-dependency  | 忽略未知的依赖项                | 忽略未知的输入协议的依赖项(>=2.9.0版本)                                                                  |
-| --validator-rules            | 指定自定义验证器配置文件路径    | 指定自定义验证器配置文件路径                                                                             |
-| --disable-data-validator     | 允许忽略数据验证错误            | (>=2.17.0版本)                                                                                           |
-| --data-source-lru-cache-rows | 数据源的LRU Cache行数           | 仅缓存流式索引                                                                                           |
-| --tolerate-max-empty-rows    | 连续空行检测的行数              | 设置连续空行检测的行数(>=2.14.1版本) ，大量的连续空行通常是误操作                                        |
-| --ignore-field-tags          | 字段Tag                         | 忽略指定tag的字段转出(>=2.19.0版本)                                                                      |
-| --data-source-mapping-file   | 数据源映射输出文件              | (>=2.19.1版本)                                                                                           |
-| --data-source-mapping-mode   | 数据源映射输出模式              | `none`, `md5`, `sha1`, `sha256` (>=2.19.1版本)                                                           |
-| --data-source-mapping-seed   | 数据源映射输出Hash Seed         | (>=2.19.1版本)                                                                                           |
+| 参数选项                          | 描述                            | 说明                                                                                                     |
+| --------------------------------- | ------------------------------- | -------------------------------------------------------------------------------------------------------- |
+| -h --help                         | 帮助信息                        | 显示帮助和支持的参数列表                                                                                 |
+| -t --output-type                  | 输出类型                        | bin（默认值）,lua,msgpack,json,xml,javascript,js,ue-csv,ue-json                                          |
+| -p --proto                        | 协议描述类型                    | protobuf(默认值),capnproto(暂未实现),flatbuffer(暂未实现)                                                |
+| -f --proto-file                   | 协议描述文件                    |                                                                                                          |
+| -o --output-dir                   | 输出目录                        | 默认为当前目录                                                                                           |
+| -d --data-src-dir                 | 数据源根目录                    | 默认为当前目录                                                                                           |
+| -s --src-file                     | 数据源描述文件                  | 后缀可以是 .xls, .xlsx, .cvs, .xlsm, .ods, .ini, .cfg, .conf, .json                                      |
+| -m --src-meta                     | 数据源描述表                    | 可多个                                                                                                   |
+| --enable-string-macro             | 设置Macro表也对字符串类型生效   | 可以通过全局开启此选项，特定表使用 `--disable-string-macro` 来实现默认开启字符串文本替换，特定表不替换   |
+| --disable-string-macro            | 设置Macro表也对字符串类型不生效 | (默认)                                                                                                   |
+| -v --version                      | 打印版本号                      |                                                                                                          |
+| -n --rename                       | 重命名输出文件名                | 正则表达式 （如：/(?i)\\.bin$/\\.lua/）                                                                  |
+| --require-mapping-all             | 开启所有字段映射检查            | 开启所有字段映射检查后，转出结构中所有的字段都必须配置映射关系，数组字段至少要有一个元素                 |
+| --enable-alias-mapping            | 开启别名匹配                    | 映射Excel列到目标数据结构，允许使用别名(<2.18.0版本时默认值)                                             |
+| --disable-alias-mapping           | 关闭别名匹配                    | 映射Excel列到目标数据结构，不允许使用别名(>=2.18.0版本)                                                  |
+| -c --const-print                  | 输出协议描述中的常量            | 参数为字符串，表示输出的文件名                                                                           |
+| -i --option-print                 | 输出协议描述中的选项            | 参数为字符串，表示输出的文件名                                                                           |
+| -r --descriptor-print             | 输出完整协议描述信息            | 参数为字符串，表示输出的文件名                                                                           |
+| -a --data-version                 | 设置数据版本号                  | 参数为字符串，表示输出的数据的data_ver字段。如果不设置将按执行时间自动生成一个                           |
+| --pretty                          | 格式化输出                      | 参数为整数，0代表关闭美化输出功能，大于0表示格式化时的缩进量                                             |
+| --enable-excel-formular           | 开启Excel公式实时计算           | 开启公式实时计算会减慢转表速度(2.11-RC3版本后默认关闭)                                                   |
+| --disable-excel-formular          | 关闭Excel公式实时计算           | 关闭公式实时计算，会使用新的流式索引器，大幅加快转表速度，降低内存开销。（注: 也会关闭对日期格式的探测） |
+| --disable-empty-list              | 移除数组空项                    | (废弃)，请使用 `--list-strip-all-empty`                                                                  |
+| --enable-empty-list               | 保留全部数组空项                | (废弃)，请使用 `--list-keep-empty`                                                                       |
+| --list-strip-all-empty            | 移除数组空项                    | (默认) 移除数组空项，自动删除Excel中的未填充数据，不会转出到输出文件中                                   |
+| --list-keep-empty                 | 保留全部数组空项                | 保留全部数组空项，未填充数据将使用默认的空值来填充，并转出到输出文件中                                   |
+| --list-strip-empty-tail           | 移除数组尾部空项                | 移除数组尾部空项，自动删除尾部的未填充数据，其他的未填充数据将使用默认的空值，并转出到输出文件中         |
+| --stdin                           | 通过标准输入批量转表            | 通过标准输入批量转表，参数可上面的一样,每行一项，字符串参数可以用单引号或双引号包裹，但是都不支持转义    |
+| --lua-global                      | lua输出写到全局表               | 输出协议描述中的常量到Lua脚本时，同时导入符号到全局表_G中（仅对常量导出有效）                            |
+| --lua-module                      | lua输出使用module写出           | 输出Lua脚本时，使用 module(模块名, package.seeall) 导出到全局                                            |
+| --xml-root                        | xml输出的根节点tag              | 输出格式为xml时的根节点的TagName                                                                         |
+| --javascript-export               | 导出javascript数据的模式        | 可选项(nodejs: 使用兼容nodejs的exports, amd: 使用兼容amd的define, 其他: 写入全局(window或global))        |
+| --javascript-global               | 导出javascript全局空间          | 导出数据到全局时，可以指定写入的名字空间                                                                 |
+| --ignore-unknown-dependency       | 忽略未知的依赖项                | 忽略未知的输入协议的依赖项(>=2.9.0版本)                                                                  |
+| --validator-rules                 | 指定自定义验证器配置文件路径    | 指定自定义验证器配置文件路径                                                                             |
+| --disable-data-validator          | 允许忽略数据验证错误            | (>=2.17.0版本)                                                                                           |
+| --data-validator-no-error-version | 设置数据验证错误的起始版本号    | 低于这个版本的验证器才会验证失败，否则仅输出告警。0表示总是错误。(>=2.21.0版本)                          |
+| --data-source-lru-cache-rows      | 数据源的LRU Cache行数           | 仅缓存流式索引                                                                                           |
+| --tolerate-max-empty-rows         | 连续空行检测的行数              | 设置连续空行检测的行数(>=2.14.1版本) ，大量的连续空行通常是误操作                                        |
+| --ignore-field-tags               | 字段Tag                         | 忽略指定tag的字段转出(>=2.19.0版本)                                                                      |
+| --data-source-mapping-file        | 数据源映射输出文件              | (>=2.19.1版本)                                                                                           |
+| --data-source-mapping-mode        | 数据源映射输出模式              | `none`, `md5`, `sha1`, `sha256` (>=2.19.1版本)                                                           |
+| --data-source-mapping-seed        | 数据源映射输出Hash Seed         | (>=2.19.1版本)                                                                                           |
 
 ### 协议类型
 
@@ -306,6 +307,7 @@ Excel里的Key使用@后缀的字段名，@后面的部分都属于验证器。�
 validator:
   - name: "validator name"
     description: "（可选）描述"
+    version: 0 # 版本，从 2.21.0 版本开始支持
     rules:
       - validator_rule1
       - validator_rule2

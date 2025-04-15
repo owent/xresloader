@@ -67,6 +67,29 @@ public class DataVerifyRegex extends DataVerifyImpl {
     }
 
     @Override
+    public boolean get(long number, DataVerifyResult res) {
+        // 0 值永久有效,因为空数据项会被填充默认值
+        if (0 == number) {
+            res.success = true;
+            res.value = number;
+            return true;
+        }
+
+        String value;
+        value = String.format("%d", number);
+
+        for (Pattern rule : this.rules) {
+            if (rule.matcher(value).matches()) {
+                res.success = true;
+                res.value = number;
+                return true;
+            }
+        }
+        res.success = false;
+        return false;
+    }
+
+    @Override
     public boolean get(String input, DataVerifyResult res) throws NumberFormatException {
         // 空值永久有效,因为空数据项会被填充默认值
         if (input.isEmpty()) {

@@ -866,11 +866,11 @@ public class DataDstPb extends DataDstImpl {
         // 第二优先级，范围验证器
         if (ruleObject.name.charAt(0) == '-' || (ruleObject.name.charAt(0) >= '0' && ruleObject.name.charAt(0) <= '9')
                 || (ruleObject.name.charAt(0) == '>' || ruleObject.name.charAt(0) == '<')) {
-            DataVerifyIntRange vfyRange = new DataVerifyIntRange(ruleObject.name);
+            DataVerifyNumberRange vfyRange = new DataVerifyNumberRange(ruleObject.name);
             if (vfyRange.isValid()) {
                 return vfyRange;
             } else {
-                ProgramOptions.getLoger().error("Validator %s(DataVerifyIntRange) is invalid",
+                ProgramOptions.getLoger().error("Validator %s(DataVerifyNumberRange) is invalid",
                         ruleObject.name);
             }
             return null;

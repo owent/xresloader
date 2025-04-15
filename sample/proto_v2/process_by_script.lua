@@ -16,13 +16,12 @@ return {
       },
     },
     data_ver = "1.0.0.0",
-    hash_code = "sha256:9cefa62f0e07599754aed162aee8ac41e55ec4a86523ff8574aefa2f214f2c7d",
+    hash_code = "sha256:1bb67ae6a56b1048bd21464e622b8cb4b14151733aa960c9b536f7dc11820207",
     xres_ver = "2.20.0",
   },
   [2] = "process_by_script",
   process_by_script = {
     {
-      id = 100001,
       id_id = {
         id = 1,
       },
@@ -42,7 +41,6 @@ return {
       },
     },
     {
-      id = 100002,
       id_id = {
         id = 2,
       },
@@ -62,7 +60,6 @@ return {
       },
     },
     {
-      id = 100003,
       id_id = {
         id = 3,
       },
@@ -82,7 +79,6 @@ return {
       },
     },
     {
-      id = 100004,
       id_id = {
         id = 4,
       },
@@ -102,7 +98,6 @@ return {
       },
     },
     {
-      id = 100005,
       id_id = {
         id = 5,
       },
@@ -122,7 +117,6 @@ return {
       },
     },
     {
-      id = 100006,
       id_id = {
         id = 6,
       },
@@ -142,7 +136,6 @@ return {
       },
     },
     {
-      id = 100007,
       id_id = {
         id = 7,
       },
@@ -162,7 +155,6 @@ return {
       },
     },
     {
-      id = 100008,
       id_id = {
         id = 8,
       },
@@ -182,7 +174,6 @@ return {
       },
     },
     {
-      id = 100009,
       id_id = {
         id = 9,
       },
@@ -202,7 +193,6 @@ return {
       },
     },
     {
-      id = 100010,
       id_id = {
         id = 10,
       },
@@ -222,7 +212,6 @@ return {
       },
     },
     {
-      id = 200001,
       id_id = {
         id = 1,
       },
@@ -242,7 +231,6 @@ return {
       },
     },
     {
-      id = 200002,
       id_id = {
         id = 2,
       },
@@ -262,7 +250,6 @@ return {
       },
     },
     {
-      id = 200003,
       id_id = {
         id = 3,
       },
@@ -282,7 +269,6 @@ return {
       },
     },
     {
-      id = 200004,
       id_id = {
         id = 4,
       },
@@ -302,7 +288,6 @@ return {
       },
     },
     {
-      id = 200005,
       id_id = {
         id = 5,
       },
@@ -322,7 +307,6 @@ return {
       },
     },
     {
-      id = 200006,
       id_id = {
         id = 6,
       },
@@ -342,7 +326,6 @@ return {
       },
     },
     {
-      id = 200007,
       id_id = {
         id = 7,
       },
@@ -362,7 +345,6 @@ return {
       },
     },
     {
-      id = 200008,
       id_id = {
         id = 8,
       },
@@ -382,7 +364,6 @@ return {
       },
     },
     {
-      id = 200009,
       id_id = {
         id = 9,
       },
@@ -402,7 +383,6 @@ return {
       },
     },
     {
-      id = 200010,
       id_id = {
         id = 10,
       },

@@ -122,7 +122,7 @@ echo "
 | --ignore-unknown-dependency       | 忽略未知的依赖项                | 忽略未知的输入协议的依赖项(>=2.9.0版本)                                                                  |
 | --validator-rules                 | 指定自定义验证器配置文件路径    | 指定自定义验证器配置文件路径                                                                             |
 | --disable-data-validator          | 允许忽略数据验证错误            | (>=2.17.0版本)                                                                                           |
-| --data-validator-no-error-version | 设置数据验证错误的起始版本号    | 低于这个版本的验证器才会验证失败，否则仅输出告警。0表示总是错误。(>=2.21.0版本)                          |
+| --data-validator-error-version    | 设置数据验证错误的起始版本号    | 低于这个版本的验证器才会验证失败，否则仅输出告警。0表示总是错误。(>=2.21.0版本)                          |
 | --data-source-lru-cache-rows      | 数据源的LRU Cache行数           | 仅缓存流式索引                                                                                           |
 | --tolerate-max-empty-rows         | 连续空行检测的行数              | 设置连续空行检测的行数(>=2.14.1版本) ，大量的连续空行通常是误操作                                        |
 | --ignore-field-tags               | 字段Tag                         | 忽略指定tag的字段转出(>=2.19.0版本)                                                                      |

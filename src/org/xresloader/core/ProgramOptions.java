@@ -573,8 +573,8 @@ public class ProgramOptions {
             enableDataValidator = true;
         }
 
-        if (cmd.hasOption("data-validator-no-error-version")) {
-            dataValidatorNoErrorVersion = Integer.parseInt(cmd.getOptionValue("data-validator-no-error-version", "0"));
+        if (cmd.hasOption("data-validator-error-version")) {
+            dataValidatorNoErrorVersion = Integer.parseInt(cmd.getOptionValue("data-validator-error-version", "0"));
         } else {
             dataValidatorNoErrorVersion = 0;
         }

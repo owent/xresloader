@@ -11,3 +11,7 @@ validator:
   - name: "custom_rule4"
     rules:
       - InText("intext-validator.txt")
+  - name: "custom_rule5"
+    version: 6
+    rules:
+      - "<=1473624235014785965"

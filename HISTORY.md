@@ -2,7 +2,7 @@
 
 ## Unrelease
 
-1. 增加 `--data-validator-no-error-version` ，仅仅低于这个版本的验证器会报错。高于或等于这个版本的验证器仅warning。用于新增不兼容规则时，预留版本迁移期。
+1. 增加 `--data-validator-error-version` ，仅仅低于这个版本的验证器会报错。高于或等于这个版本的验证器仅warning。用于新增不兼容规则时，预留版本迁移期。
 2. 自定义验证器增加 `version` 字段用于标识版本号。
 
 ### 2.20.0

@@ -12,7 +12,7 @@ return {
     },
     data_ver = "1.0.0.0",
     description = "9ee5db50099f5abf0549d2c89f47e995bceb6dbd12066fdd3875911fad832d44",
-    hash_code = "sha256:f54ea4a17140ed6e75a9136bff6c0053251bb5a4cd3954d905cf5bac8fcce998",
+    hash_code = "sha256:5c3ae2d553c03a8ed7bf069a599bcff4ce725d3d0167025d1f36de30d31f2276",
     xres_ver = "2.20.0",
   },
   [2] = "event_cfg",
@@ -69,7 +69,7 @@ return {
           rule_param = 822,
         },
       },
-      user_exp = 1473624235014786048,
+      user_exp = 1473624235014785965,
     },
     {
       enum_type = 10001,

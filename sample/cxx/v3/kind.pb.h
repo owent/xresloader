@@ -563,7 +563,7 @@ class role_upgrade_cfg final : public ::google::protobuf::Message
   void _internal_set_level(::uint32_t value);
 
   public:
-  // int64 CostValue = 4;
+  // int64 CostValue = 4 [(.org.xresloader.validator) = "custom_rule5"];
   void clear_costvalue() ;
   ::int64_t costvalue() const;
   void set_costvalue(::int64_t value);
@@ -5511,7 +5511,7 @@ inline void role_upgrade_cfg::_internal_set_costtype(::int32_t value) {
   _impl_.costtype_ = value;
 }
 
-// int64 CostValue = 4;
+// int64 CostValue = 4 [(.org.xresloader.validator) = "custom_rule5"];
 inline void role_upgrade_cfg::clear_costvalue() {
   ::google::protobuf::internal::TSanWrite(&_impl_);
   _impl_.costvalue_ = ::int64_t{0};

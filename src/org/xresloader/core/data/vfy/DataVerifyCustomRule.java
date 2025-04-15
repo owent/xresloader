@@ -179,6 +179,29 @@ public class DataVerifyCustomRule extends DataVerifyImpl {
     }
 
     @Override
+    public boolean get(long number, DataVerifyResult res) {
+        if (this.validators == null || this.validators.size() == 0) {
+            res.success = true;
+            res.value = number;
+            return true;
+        }
+
+        if (!check()) {
+            res.success = false;
+            return false;
+        }
+
+        for (DataVerifyImpl vfy : this.validators) {
+            if (vfy.get(number, res)) {
+                return true;
+            }
+        }
+
+        res.success = false;
+        return false;
+    }
+
+    @Override
     public boolean get(String input, DataVerifyResult res) throws NumberFormatException {
         if (this.validators == null || this.validators.size() == 0) {
             res.success = true;

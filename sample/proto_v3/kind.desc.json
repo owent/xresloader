@@ -784,6 +784,7 @@
           "CostValue": {
             "name": "CostValue",
             "number": 4,
+            "options": {"validator": "custom_rule5"},
             "type_name": "INT64"
           },
           "Id": {

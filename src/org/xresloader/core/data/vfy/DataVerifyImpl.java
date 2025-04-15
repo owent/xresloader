@@ -69,6 +69,24 @@ public abstract class DataVerifyImpl {
         return false;
     }
 
+    public boolean get(long number, DataVerifyResult res) {
+        // 0 值永久有效
+        if (0 == number) {
+            res.success = true;
+            res.value = number;
+            return res.success;
+        }
+
+        if (all_numbers.contains(number)) {
+            res.success = true;
+            res.value = number;
+            return res.success;
+        }
+
+        res.success = false;
+        return false;
+    }
+
     private static double doubleValueOf(String input) throws NumberFormatException {
         {
             Matcher matcher = INTEGER_WITH_DOT_PATTERN.get().matcher(input);
@@ -176,7 +194,47 @@ public abstract class DataVerifyImpl {
     }
 
     static public long getAndVerify(List<DataVerifyImpl> verifyEngine, String path, long n) throws ConvException {
-        return Math.round(getAndVerify(verifyEngine, path, (double) n));
+        // 不能直接调用double版本，会发生数据裁剪
+        if (verifyEngine == null || verifyEngine.isEmpty()) {
+            return n;
+        }
+
+        DataVerifyResult verify_cache = new DataVerifyResult();
+        for (DataVerifyImpl vfy : verifyEngine) {
+            try {
+                if (vfy.get(n, verify_cache)) {
+                    if (verify_cache.value == null) {
+                        return 0;
+                    }
+                    if (verify_cache.value instanceof Double) {
+                        return Math.round((Double) verify_cache.value);
+                    }
+                    if (verify_cache.value instanceof Long) {
+                        return ((Long) verify_cache.value).longValue();
+                    }
+                    return longValueOf(verify_cache.value.toString());
+                }
+            } catch (Exception e) {
+                String message = String.format("Check %d for %s with validator %s failed, %s", n, path,
+                        vfy.getDescription(), e.getMessage());
+                if (getValidatorFailedLevel(vfy) == ValidatorFailedLevel.ERROR) {
+                    throw new ConvException(
+                            message);
+                } else {
+                    ProgramOptions.getLoger().warn(message);
+                }
+            }
+        }
+
+        String message = String.format("Check %d for %s with %s %s failed, check data failed.", n, path,
+                getValidatorWord(verifyEngine), collectValidatorNames(verifyEngine));
+        if (getValidatorFailedLevel(verifyEngine) == ValidatorFailedLevel.ERROR) {
+            throw new ConvException(
+                    message);
+        } else {
+            ProgramOptions.getLoger().warn(message);
+            return n;
+        }
     }
 
     static private String getValidatorWord(List<DataVerifyImpl> verifyEngine) {
@@ -284,14 +342,15 @@ public abstract class DataVerifyImpl {
                     message);
         } else {
             ProgramOptions.getLoger().warn(message);
-            return 0.0;
+            return n;
         }
     }
 
-    static public double getAndVerifyToDouble(List<DataVerifyImpl> verifyEngine, String path, String val)
+    static public Number getAndVerifyToNumber(List<DataVerifyImpl> verifyEngine, String path, String val,
+            boolean is_double)
             throws ConvException {
         boolean is_numeric = true;
-        boolean is_double = false;
+        boolean has_dot = false;
         for (int i = 0; is_numeric && i < val.length(); ++i) {
             char c = val.charAt(i);
             if ((c < '0' || c > '9') && '.' != c && '-' != c && ',' != c) {
@@ -300,6 +359,15 @@ public abstract class DataVerifyImpl {
                 }
             }
             if ('.' == c) {
+                has_dot = true;
+            }
+        }
+        if (!is_double && is_numeric && has_dot) {
+            is_double = true;
+        }
+        if (!is_double && is_numeric) {
+            Double test_range = Double.valueOf(doubleValueOf(val));
+            if (test_range > Long.MAX_VALUE || test_range < Long.MIN_VALUE) {
                 is_double = true;
             }
         }
@@ -307,17 +375,17 @@ public abstract class DataVerifyImpl {
         try {
             if (is_numeric) {
                 if (is_double) {
-                    return getAndVerify(verifyEngine, path, doubleValueOf(val));
+                    return Double.valueOf(getAndVerify(verifyEngine, path, doubleValueOf(val)));
                 } else {
-                    return getAndVerify(verifyEngine, path, longValueOf(val));
+                    return Long.valueOf(getAndVerify(verifyEngine, path, longValueOf(val)));
                 }
             }
 
             if (verifyEngine == null || verifyEngine.isEmpty()) {
                 if (is_double) {
-                    return doubleValueOf(val);
+                    return Double.valueOf(doubleValueOf(val));
                 } else {
-                    return longValueOf(val);
+                    return Long.valueOf(longValueOf(val));
                 }
             }
 
@@ -330,12 +398,16 @@ public abstract class DataVerifyImpl {
                             return 0;
                         }
                         if (verify_cache.value instanceof Double) {
-                            return (double) verify_cache.value;
+                            return (Double) verify_cache.value;
                         }
                         if (verify_cache.value instanceof Long) {
-                            return ((Long) verify_cache.value).doubleValue();
+                            return (Long) verify_cache.value;
                         }
-                        return doubleValueOf(verify_cache.value.toString());
+                        if (is_double) {
+                            return Double.valueOf(doubleValueOf(verify_cache.value.toString()));
+                        } else {
+                            return Long.valueOf(longValueOf(verify_cache.value.toString()));
+                        }
                     }
                 } catch (Exception e) {
                     String message = String.format("Check %s for %s with validator %s failed, %s", val, path,
@@ -370,6 +442,22 @@ public abstract class DataVerifyImpl {
             throw new ConvException(message);
         } else {
             ProgramOptions.getLoger().warn(message);
+            if (is_double) {
+                return Double.valueOf(0);
+            } else {
+                return Long.valueOf(0);
+            }
+        }
+    }
+
+    static public double getAndVerifyToDouble(List<DataVerifyImpl> verifyEngine, String path, String val)
+            throws ConvException {
+        Number value = getAndVerifyToNumber(verifyEngine, path, val, true);
+        if (value instanceof Double) {
+            return (Double) value;
+        } else if (value instanceof Long) {
+            return ((Long) value).doubleValue();
+        } else {
             return 0.0;
         }
     }
@@ -432,22 +520,29 @@ public abstract class DataVerifyImpl {
 
     static public long getAndVerifyToLong(List<DataVerifyImpl> verifyEngine, String path, String val)
             throws ConvException {
-        double value = getAndVerifyToDouble(verifyEngine, path, val);
-        long ret = Math.round(value);
-        if (Math.abs(value - (double) ret) > 1e-6) {
-            String message;
-            if (verifyEngine == null || verifyEngine.isEmpty()) {
-                message = String.format("Convert %s for %s failed, not a integer.", val,
-                        path);
-            } else {
-                message = String.format("Convert %s for %s with %s %s failed, not a integer.", val,
-                        path, getValidatorWord(verifyEngine), collectValidatorNames(verifyEngine));
+        Number value = getAndVerifyToNumber(verifyEngine, path, val, false);
+        long ret;
+        if (value instanceof Double) {
+            ret = Math.round(value.doubleValue());
+            if (Math.abs(value.doubleValue() - (double) ret) > 1e-6) {
+                String message;
+                if (verifyEngine == null || verifyEngine.isEmpty()) {
+                    message = String.format("Convert %s for %s failed, not a integer.", val,
+                            path);
+                } else {
+                    message = String.format("Convert %s for %s with %s %s failed, not a integer.", val,
+                            path, getValidatorWord(verifyEngine), collectValidatorNames(verifyEngine));
+                }
+                if (getValidatorFailedLevel(verifyEngine) == ValidatorFailedLevel.ERROR) {
+                    throw new ConvException(message);
+                } else {
+                    ProgramOptions.getLoger().warn(message);
+                }
             }
-            if (getValidatorFailedLevel(verifyEngine) == ValidatorFailedLevel.ERROR) {
-                throw new ConvException(message);
-            } else {
-                ProgramOptions.getLoger().warn(message);
-            }
+        } else if (value instanceof Long) {
+            ret = value.longValue();
+        } else {
+            ret = 0;
         }
         return ret;
     }

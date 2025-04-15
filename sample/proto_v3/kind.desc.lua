@@ -487,6 +487,14 @@ local const_res = {
               },
               type_name = "INT32",
             },
+            CostValue = {
+              name = "CostValue",
+              number = 4,
+              options = {
+                validator = "custom_rule5",
+              },
+              type_name = "INT64",
+            },
             Id = {
               name = "Id",
               number = 1,

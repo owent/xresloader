@@ -326,6 +326,19 @@ exports.files = [
         },
         name : "event_rule_item"
       },
+      field_alias_message : {
+        field : {
+          value : {
+            name : "value",
+            number : 2,
+            options : {
+              validator : "custom_rule6"
+            },
+            type_name : "INT32"
+          }
+        },
+        name : "field_alias_message"
+      },
       inner_alias_message : {
         field : {
           iType : {
@@ -485,6 +498,14 @@ exports.files = [
               validator : "custom_rule1"
             },
             type_name : "INT32"
+          },
+          CostValue : {
+            name : "CostValue",
+            number : 4,
+            options : {
+              validator : "custom_rule5"
+            },
+            type_name : "INT64"
           },
           Id : {
             name : "Id",

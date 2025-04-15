@@ -42,7 +42,7 @@ public class DataDstUECsv extends DataDstUEBase {
     protected Object buildForUEOnInit() throws IOException {
         UEBuildObject ret = new UEBuildObject();
         ret.sb = new StringBuffer();
-        ret.csv = new CSVPrinter(ret.sb, CSVFormat.INFORMIX_UNLOAD_CSV.builder().setQuoteMode(QuoteMode.ALL).build());
+        ret.csv = new CSVPrinter(ret.sb, CSVFormat.INFORMIX_UNLOAD_CSV.builder().setQuoteMode(QuoteMode.ALL).get());
 
         appendCommonHeader(ret.csv);
         ret.csv.printComment(String.format("%s=%s", "xres_ver", ProgramOptions.getInstance().getVersion()));
@@ -259,7 +259,7 @@ public class DataDstUECsv extends DataDstUEBase {
     public String dumpConstForUE(HashMap<String, Object> data, UEDataRowRule rule) throws IOException, ConvException {
         StringBuffer sb = new StringBuffer();
         CSVPrinter csv = new CSVPrinter(sb,
-                CSVFormat.EXCEL.builder().setHeader(getIdentName("Name"), getIdentName("Value")).build());
+                CSVFormat.EXCEL.builder().setHeader(getIdentName("Name"), getIdentName("Value")).get());
 
         appendCommonHeader(csv);
         writeConstData(csv, data, "");

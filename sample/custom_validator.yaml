@@ -11,3 +11,11 @@ validator:
   - name: "custom_rule4"
     rules:
       - InText("intext-validator.txt")
+  - name: "custom_rule5"
+    version: 6
+    rules:
+      - "<=1473624235014785965"
+  - name: "custom_rule6"
+    version: 6
+    rules:
+      - InMacroTable("资源转换示例.xlsx", "field_alias_macro", 3, 2, "key", "value")

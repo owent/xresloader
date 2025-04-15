@@ -2,6 +2,33 @@
 
 ## Unrelease
 
+### 2.20.0
+
+1. Ue-Json和Ue-Csv模式下输出的代码中转出Enum类型
+2. 增加 `--data-validator-error-version` ，仅仅低于这个版本的验证器会报错。高于或等于这个版本的验证器仅warning。用于新增不兼容规则时，预留版本迁移期。
+3. 自定义验证器增加 `version` 字段用于标识版本号。
+4. 修复一处验证器BUG(大整数转换错误)
+5. 增加支持针对单个字段设置别名文本替换规则，类似于Macro表，但是Macro表是对全局生效的。（通过 `InMacroTable` 验证器）
+   + 语法格式(指定列号): `InMacroTable("文件名", "Sheet名", 从第几行开始, 第几列是映射Key, 第几列是映射Value)`
+   + 语法格式(指定列名): `InMacroTable("文件名", "Sheet名", 从第几行开始, KeyRow, 映射Key字段名, 映射Value字段名)`
+6. 更新依赖库
+   + `jacoco-maven-plugin` -> 0.8.13
+   + `maven-compiler-plugin` -> 3.14.0
+   + `maven-surefire-plugin` -> 3.5.3
+   + `commons-codec` -> 1.18.0
+   + `log4j` -> 2.24.3
+   + `msgpack-core` -> 0.9.9
+   + `org.json` -> 20250107
+   + `com.google.protobuf` -> 4.30.2
+   + `org.apache.poi` -> 5.4.1
+   + `commons-csv` -> 1.14.0
+   + `snakeyaml-engine` -> 2.9
+   + `org.junit.jupiter` -> 5.13.0-M2
+
+### BREAKCHANGES
+
++ Ue-Json和Ue-Csv模式下输出的代码中转出Enum类型，原来是int32类型
+
 ### 2.19.3
 
 1. 优化Warning的输出数据源
@@ -11,7 +38,6 @@
 ## 2.19.2
 
 1. 修复 `--data-source-mapping-file` 指向的地址无效时的 stacktrace 。
-
 
 ## 2.19.1
 

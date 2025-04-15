@@ -18,16 +18,19 @@ public class DataVerifyCustomRule extends DataVerifyImpl {
     private Boolean checkResult = null;
     private boolean checking = false;
     private String description = null;
+    private int version = 0;
+    private Integer versionResult = null;
 
     public class RuleConfigure {
         public String name;
         public List<String> rules;
     }
 
-    public DataVerifyCustomRule(String name, ArrayList<String> rules, String description) {
+    public DataVerifyCustomRule(String name, ArrayList<String> rules, String description, int version) {
         super(name);
 
         this.rules = rules;
+        this.version = version;
 
         if (description != null && !description.isEmpty()) {
             this.description = description;
@@ -63,6 +66,7 @@ public class DataVerifyCustomRule extends DataVerifyImpl {
     public void setup(ArrayList<DataVerifyImpl> validators) {
         this.validators = validators;
         this.checkResult = null;
+        this.versionResult = null;
     }
 
     public boolean hasChecked() {
@@ -124,7 +128,58 @@ public class DataVerifyCustomRule extends DataVerifyImpl {
     }
 
     @Override
+    public int getVersion() {
+        if (this.versionResult != null) {
+            return this.versionResult.intValue();
+        }
+
+        DataVerifyImpl useChild = null;
+        int maxVersion = this.version;
+        for (DataVerifyImpl vfy : this.validators) {
+            int v = vfy.getVersion();
+            if (v > maxVersion) {
+                maxVersion = v;
+                useChild = vfy;
+            }
+        }
+        this.versionResult = maxVersion;
+        if (null != useChild && this.version > 0) {
+            ProgramOptions.getLoger().warn(
+                    "Custom validator rule \"%s\" use child rule \"%s\" with higher version %d, which will implicit increase the version from %d to %d.",
+                    getName(),
+                    useChild.getName(),
+                    useChild.getVersion(),
+                    this.version,
+                    maxVersion);
+        }
+        return maxVersion;
+    }
+
+    @Override
     public boolean get(double number, DataVerifyResult res) {
+        if (this.validators == null || this.validators.size() == 0) {
+            res.success = true;
+            res.value = number;
+            return true;
+        }
+
+        if (!check()) {
+            res.success = false;
+            return false;
+        }
+
+        for (DataVerifyImpl vfy : this.validators) {
+            if (vfy.get(number, res)) {
+                return true;
+            }
+        }
+
+        res.success = false;
+        return false;
+    }
+
+    @Override
+    public boolean get(long number, DataVerifyResult res) {
         if (this.validators == null || this.validators.size() == 0) {
             res.success = true;
             res.value = number;
@@ -219,6 +274,28 @@ public class DataVerifyCustomRule extends DataVerifyImpl {
                     }
 
                     ArrayList<String> rules = new ArrayList<String>();
+                    int version = 0;
+                    Object versionObj = ((Map<?, ?>) ruleObject).get("version");
+                    if (versionObj != null) {
+                        if (versionObj instanceof Integer) {
+                            version = ((Integer) versionObj).intValue();
+                        } else if (versionObj instanceof String) {
+                            try {
+                                version = Integer.parseInt((String) versionObj);
+                            } catch (NumberFormatException e) {
+                                ProgramOptions.getLoger().warn(
+                                        "Load custom validator file \"%s\" with invalid version \"%s\", we will use 0.",
+                                        filePath,
+                                        versionObj);
+                            }
+                        } else {
+                            ProgramOptions.getLoger().warn(
+                                    "Load custom validator file \"%s\" with invalid version \"%s\", we will use 0.",
+                                    filePath,
+                                    versionObj.toString());
+                        }
+                    }
+
                     rules.ensureCapacity(((List<?>) rulesObj).size());
                     for (Object ruleData : ((List<?>) rulesObj)) {
                         String ruleStr = ruleData.toString().trim();
@@ -227,7 +304,7 @@ public class DataVerifyCustomRule extends DataVerifyImpl {
                         }
                     }
 
-                    if (null != ret.put(name, new DataVerifyCustomRule(name, rules, description))) {
+                    if (null != ret.put(name, new DataVerifyCustomRule(name, rules, description, version))) {
                         ProgramOptions.getLoger().warn(
                                 "Load custom validator file \"%s\" with more than one rule with name \"%s\", we will use the last one.",
                                 filePath,

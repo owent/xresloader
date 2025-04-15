@@ -27,13 +27,19 @@ public abstract class DataDstUEBase extends DataDstJava {
             " * You can find more information about this xresloader on %s .",
             " * If there is any problem, please find or report issues on %s .", " */", "");
     static private String codeHeaderPrefixGuard = String.join("\r\n", "#pragma once", "");
-    static private String codeHeaderPrefix1 = String.join("\r\n", "", "#include \"CoreMinimal.h\"",
+    static private String codeHeaderUStructIncludePrefix = String.join("\r\n", "", "#include \"CoreMinimal.h\"",
             "#include \"UObject/ConstructorHelpers.h\"", "#include \"Engine/DataTable.h\"", "");
+    static private String codeHeaderUEnumIncludePrefix = String.join("\r\n", "", "#include \"CoreMinimal.h\"",
+            "");
     static private String codeHeaderIncludeGenerated = "#include \"%s.generated.h\"";
-    static private String codeHeaderPrefix2 = String.join("\r\n", "", "", "", "USTRUCT(BlueprintType)", "");
-    static private String codeHeaderClassName = "struct %s : public FTableRowBase";
-    static private String codeHeaderPrefix3 = String.join("\r\n", "", "{", "    GENERATED_USTRUCT_BODY()", "",
+    static private String codeHeaderUStructPrefix = String.join("\r\n", "", "", "", "USTRUCT(BlueprintType)", "");
+    static private String codeHeaderUStructClassName = "struct %s : public FTableRowBase";
+    static private String codeHeaderUStructBodyPrefix = String.join("\r\n", "", "{", "    GENERATED_USTRUCT_BODY()", "",
             "    // Start of fields");
+    static private String codeHeaderUEnumPrefix = String.join("\r\n", "", "", "", "UENUM(BlueprintType)", "");
+    static private String codeHeaderUEnumClassName = "enum class %s : uint8";
+    static private String codeHeaderUEnumtBodyPrefix = String.join("\r\n", "", "{", "",
+            "    // Start of enum values");
     static private String codeHeaderSuffix = "\r\n};";
     static private String codeSourceInclude = "#include \"%s.h\"\r\n";
     static private String ueImportFile = "UnreaImportSettings.json";
@@ -127,7 +133,7 @@ public abstract class DataDstUEBase extends DataDstJava {
 
         void initClazzName(String originClazzName) {
             this.clazzName = originClazzName;
-            if (!originClazzName.isEmpty() && originClazzName.charAt(0) == 'F') {
+            if (!originClazzName.isEmpty() && (originClazzName.charAt(0) == 'F' || originClazzName.charAt(0) == 'E')) {
                 this.baseName = originClazzName.substring(1);
             } else {
                 this.baseName = originClazzName;
@@ -147,7 +153,9 @@ public abstract class DataDstUEBase extends DataDstJava {
             clazzName = getIdentName(clazzName);
         }
 
-        return globalCodeCache.getOrDefault(clazzName, null);
+        synchronized (globalCodeCache) {
+            return globalCodeCache.getOrDefault(clazzName, null);
+        }
     }
 
     static void setCodeCache(String clazzName, UECodeInfo code) {
@@ -157,7 +165,9 @@ public abstract class DataDstUEBase extends DataDstJava {
             clazzName = getIdentName(clazzName);
         }
 
-        globalCodeCache.put(clazzName, code);
+        synchronized (globalCodeCache) {
+            globalCodeCache.put(clazzName, code);
+        }
     }
 
     static public class OneofDataObject {
@@ -173,6 +183,7 @@ public abstract class DataDstUEBase extends DataDstJava {
     static public class DataDstWriterNodeWrapper implements Comparable<DataDstWriterNodeWrapper> {
         private String varName = null;
         private boolean isGenerated = false;
+        private DataDstEnumDescriptor referEnumDescriptor = null;
         private DataDstTypeDescriptor referTypeDescriptor = null;
         private DataDstFieldDescriptor referFieldDescriptor = null;
         private DataDstOneofDescriptor referOneofDescriptor = null;
@@ -192,6 +203,15 @@ public abstract class DataDstUEBase extends DataDstJava {
                 this.referOneofDescriptor = this.referNode.getOneofDescriptor();
                 this.referTypeDescriptor = this.referNode.getTypeDescriptor();
             }
+        }
+
+        public DataDstWriterNodeWrapper(String varName, boolean isGenerated, DataDstTypeDescriptor referTypeDescriptor,
+                DataDstEnumDescriptor referEnumNode) {
+            this.varName = varName;
+            this.isGenerated = isGenerated;
+
+            this.referTypeDescriptor = referTypeDescriptor;
+            this.referEnumDescriptor = referEnumNode;
         }
 
         public String getVarName() {
@@ -268,6 +288,20 @@ public abstract class DataDstUEBase extends DataDstJava {
             }
 
             return null;
+        }
+
+        public DataDstEnumDescriptor getReferEnumDescriptor() {
+            if (this.referEnumDescriptor != null) {
+                return this.referEnumDescriptor;
+            }
+
+            DataDstTypeDescriptor typeDesc = getTypeDescriptor();
+            if (null == typeDesc) {
+                return null;
+            }
+
+            this.referEnumDescriptor = typeDesc.getReferEnumType();
+            return this.referEnumDescriptor;
         }
 
         void setTypeDescriptor(DataDstTypeDescriptor t) {
@@ -430,11 +464,14 @@ public abstract class DataDstUEBase extends DataDstJava {
     }
 
     static public String[] getIdentSegments(String in) {
+        boolean allUpperCaseMode = in.toUpperCase().equals(in);
         String[] segs = fileToClassMatcher.split(in);
         if (SchemeConf.getInstance().getUEOptions().enableCaseConvert) {
             for (int i = 0; i < segs.length; ++i) {
                 if (!segs[i].isEmpty() && Character.isLowerCase(segs[i].charAt(0))) {
                     segs[i] = Character.toUpperCase(segs[i].charAt(0)) + segs[i].substring(1);
+                } else if (!segs[i].isEmpty() && allUpperCaseMode) {
+                    segs[i] = segs[i].charAt(0) + segs[i].substring(1).toLowerCase();
                 }
             }
             return segs;
@@ -650,7 +687,16 @@ public abstract class DataDstUEBase extends DataDstJava {
                 fos.write(dumpString(String.format("// %s\r\n", descLine)));
             }
         }
-        fos.write(dumpString(codeHeaderPrefix1));
+        boolean enumMode = false;
+        if (null != code.writerNodeWrapper
+                && null != code.writerNodeWrapper.getReferEnumDescriptor()) {
+            enumMode = true;
+        }
+        if (enumMode) {
+            fos.write(dumpString(codeHeaderUEnumIncludePrefix));
+        } else {
+            fos.write(dumpString(codeHeaderUStructIncludePrefix));
+        }
 
         // include all dependicies
         if (code.dependencies != null) {
@@ -708,9 +754,15 @@ public abstract class DataDstUEBase extends DataDstJava {
 
         fos.write(dumpString("\r\n"));
         fos.write(dumpString(String.format(codeHeaderIncludeGenerated, code.baseName)));
-        fos.write(dumpString(codeHeaderPrefix2));
-        fos.write(dumpString(String.format(codeHeaderClassName, code.clazzName)));
-        fos.write(dumpString(codeHeaderPrefix3));
+        if (enumMode) {
+            fos.write(dumpString(codeHeaderUEnumPrefix));
+            fos.write(dumpString(String.format(codeHeaderUEnumClassName, code.clazzName)));
+            fos.write(dumpString(codeHeaderUEnumtBodyPrefix));
+        } else {
+            fos.write(dumpString(codeHeaderUStructPrefix));
+            fos.write(dumpString(String.format(codeHeaderUStructClassName, code.clazzName)));
+            fos.write(dumpString(codeHeaderUStructBodyPrefix));
+        }
 
         return fos;
     }
@@ -776,7 +828,7 @@ public abstract class DataDstUEBase extends DataDstJava {
         DataDstTypeDescriptor msgDesc = codeInfo.writerNodeWrapper.getTypeDescriptor();
         LinkedList<DataDstWriterNodeWrapper> expandedDesc = buildWriterNodeWraper(codeInfo.writerNodeWrapper, msgDesc);
 
-        if (expandedDesc == null || expandedDesc.isEmpty()) {
+        if (expandedDesc == null) {
             return null;
         }
 
@@ -884,7 +936,8 @@ public abstract class DataDstUEBase extends DataDstJava {
                 }
 
                 // 代码仅提取第一层获取类型即可
-                if (children.get(0).getJavaType() != JAVA_TYPE.MESSAGE) {
+                if (children.get(0).getJavaType() != JAVA_TYPE.MESSAGE
+                        && children.get(0).getReferEnumDescriptor() == null) {
                     continue;
                 }
 
@@ -1260,65 +1313,72 @@ public abstract class DataDstUEBase extends DataDstJava {
         return ret;
     }
 
+    protected void buildWriterNodeWraperForWriterNode(DataDstWriterNodeWrapper root,
+            DataDstWriterNode referWriterNode, DataDstTypeDescriptor messageDesc) {
+        HashMap<String, DataDstWriterNodeWrapper> oneofCache = null;
+
+        for (DataDstFieldDescriptor field : messageDesc.getSortedFields()) {
+            DataDstWriterNodeWrapper referOneof = null;
+            // dump oneof if field refer to a oneof descriptor
+            if (field.getReferOneof() != null) {
+                if (oneofCache == null) {
+                    oneofCache = new HashMap<String, DataDstWriterNodeWrapper>();
+                }
+
+                // 非嵌套模式不支持oneof
+                referOneof = mutableOneofWriterNodeWrapper(root, oneofCache, field.getReferOneof());
+            }
+
+            String baseVarName = getIdentName(field.getName());
+            // 可能是虚拟节点，直接生成一个元素即可
+            if (referWriterNode == null) {
+                DataDstWriterNodeWrapper res = buildWriterNodeWraper(baseVarName, null, field, true);
+                res.setReferOneofNode(referOneof);
+                root.addChidlren(res);
+                continue;
+            }
+
+            DataDstChildrenNode referChildren = referWriterNode.getChildren().getOrDefault(field.getName(), null);
+            if (referChildren == null || referChildren.nodes == null || referChildren.nodes.isEmpty()) {
+                // 生成一个元素用于填充默认值即可
+                DataDstWriterNodeWrapper res = buildWriterNodeWraper(baseVarName, null, field, false);
+                res.setReferOneofNode(referOneof);
+                root.addChidlren(res);
+                continue;
+            }
+
+            if (null != referOneof) {
+                referOneof.setReferField(field);
+            }
+
+            if (field.isList()) {
+                ArrayList<DataDstWriterNodeWrapper> children = new ArrayList<>();
+                children.ensureCapacity(referChildren.nodes.size());
+                for (int i = 0; i < referChildren.nodes.size(); ++i) {
+                    DataDstWriterNodeWrapper res = buildWriterNodeWraper(baseVarName, referChildren.nodes.get(i),
+                            field, false);
+                    res.setReferOneofNode(referOneof);
+                    children.add(res);
+                }
+                root.addChidlren(children);
+            } else {
+                DataDstWriterNodeWrapper res = buildWriterNodeWraper(baseVarName, referChildren.nodes.get(0), field,
+                        false);
+                res.setReferOneofNode(referOneof);
+                root.addChidlren(res);
+            }
+        }
+    }
+
     protected LinkedList<DataDstWriterNodeWrapper> buildWriterNodeWraper(DataDstWriterNodeWrapper root,
-            DataDstTypeDescriptor messageDesc) {
-        DataDstWriterNode referWriterNode = root.getReferNode();
+            DataDstTypeDescriptor typeDesc) {
+        if (null != typeDesc.getReferEnumType()) {
+            return new LinkedList<DataDstWriterNodeWrapper>();
+        }
 
         // 只需要build一次
         if (!root.hasChidlren()) {
-            HashMap<String, DataDstWriterNodeWrapper> oneofCache = null;
-
-            for (DataDstFieldDescriptor field : messageDesc.getSortedFields()) {
-                DataDstWriterNodeWrapper referOneof = null;
-                // dump oneof if field refer to a oneof descriptor
-                if (field.getReferOneof() != null) {
-                    if (oneofCache == null) {
-                        oneofCache = new HashMap<String, DataDstWriterNodeWrapper>();
-                    }
-
-                    // 非嵌套模式不支持oneof
-                    referOneof = mutableOneofWriterNodeWrapper(root, oneofCache, field.getReferOneof());
-                }
-
-                String baseVarName = getIdentName(field.getName());
-                // 可能是虚拟节点，直接生成一个元素即可
-                if (referWriterNode == null) {
-                    DataDstWriterNodeWrapper res = buildWriterNodeWraper(baseVarName, null, field, true);
-                    res.setReferOneofNode(referOneof);
-                    root.addChidlren(res);
-                    continue;
-                }
-
-                DataDstChildrenNode referChildren = referWriterNode.getChildren().getOrDefault(field.getName(), null);
-                if (referChildren == null || referChildren.nodes == null || referChildren.nodes.isEmpty()) {
-                    // 生成一个元素用于填充默认值即可
-                    DataDstWriterNodeWrapper res = buildWriterNodeWraper(baseVarName, null, field, false);
-                    res.setReferOneofNode(referOneof);
-                    root.addChidlren(res);
-                    continue;
-                }
-
-                if (null != referOneof) {
-                    referOneof.setReferField(field);
-                }
-
-                if (field.isList()) {
-                    ArrayList<DataDstWriterNodeWrapper> children = new ArrayList<>();
-                    children.ensureCapacity(referChildren.nodes.size());
-                    for (int i = 0; i < referChildren.nodes.size(); ++i) {
-                        DataDstWriterNodeWrapper res = buildWriterNodeWraper(baseVarName, referChildren.nodes.get(i),
-                                field, false);
-                        res.setReferOneofNode(referOneof);
-                        children.add(res);
-                    }
-                    root.addChidlren(children);
-                } else {
-                    DataDstWriterNodeWrapper res = buildWriterNodeWraper(baseVarName, referChildren.nodes.get(0), field,
-                            false);
-                    res.setReferOneofNode(referOneof);
-                    root.addChidlren(res);
-                }
-            }
+            buildWriterNodeWraperForWriterNode(root, root.getReferNode(), typeDesc);
         }
 
         LinkedList<DataDstWriterNodeWrapper> ret = new LinkedList<DataDstWriterNodeWrapper>();
@@ -1332,6 +1392,12 @@ public abstract class DataDstUEBase extends DataDstJava {
         if (isGenerated && oneofDesc != null) {
             ret.setReferOneof(oneofDesc);
         }
+        return ret;
+    }
+
+    protected DataDstWriterNodeWrapper buildWriterNodeWraper(String varName, DataDstWriterNode referNode,
+            DataDstTypeDescriptor typeDesc, DataDstEnumDescriptor enumDesc, boolean isGenerated) {
+        DataDstWriterNodeWrapper ret = new DataDstWriterNodeWrapper(varName, isGenerated, typeDesc, enumDesc);
         return ret;
     }
 
@@ -1431,7 +1497,7 @@ public abstract class DataDstUEBase extends DataDstJava {
         LinkedList<DataDstWriterNodeWrapper> expandedDesc = new LinkedList<DataDstWriterNodeWrapper>();
         ddNode = DataDstWriterNode.create(null,
                 DataDstWriterNode.getDefaultMessageDescriptor(DataDstWriterNode.JAVA_TYPE.STRING,
-                        DataDstWriterNode.SPECIAL_TYPE_LIMIT.NONE),
+                        DataDstWriterNode.SPECIAL_TYPE_LIMIT.NONE, null),
                 -1);
         ddNode.setFieldDescriptor(new DataDstFieldDescriptor(ddNode.getTypeDescriptor(), 1, "Name",
                 DataDstWriterNode.FIELD_LABEL_TYPE.OPTIONAL, null));
@@ -1443,7 +1509,7 @@ public abstract class DataDstUEBase extends DataDstJava {
 
         ddNode = DataDstWriterNode.create(null,
                 DataDstWriterNode.getDefaultMessageDescriptor(DataDstWriterNode.JAVA_TYPE.INT,
-                        DataDstWriterNode.SPECIAL_TYPE_LIMIT.INT32),
+                        DataDstWriterNode.SPECIAL_TYPE_LIMIT.INT32, null),
                 -1);
         ddNode.setFieldDescriptor(new DataDstFieldDescriptor(ddNode.getTypeDescriptor(), 2, "Value",
                 DataDstWriterNode.FIELD_LABEL_TYPE.OPTIONAL, null));
@@ -1747,15 +1813,6 @@ public abstract class DataDstUEBase extends DataDstJava {
             }
         }
 
-        if (isGenerated) {
-            fout.write(dumpString(String.format(
-                    "    /** Field Type: %s, Name: %s, Index: %d. This field is generated for UE Editor compatible. **/\r\n",
-                    descType.name(), varName, fieldDesc.getIndex())));
-        } else {
-            fout.write(dumpString(String.format("    /** Field Type: %s, Name: %s, Index: %d **/\r\n", descType.name(),
-                    varName, fieldDesc.getIndex())));
-        }
-
         String ueTypeName = null;
         boolean enable = true;
         switch (descType) {
@@ -1777,7 +1834,7 @@ public abstract class DataDstUEBase extends DataDstJava {
                 }
                 fout.write(
                         dumpString(
-                                String.format("    /** Bytes data will be encoded by base64 for %s */\r\n", varName)));
+                                String.format("    /** Bytes data will be encoded by base64 for %s **/\r\n", varName)));
                 break;
             }
 
@@ -1788,7 +1845,7 @@ public abstract class DataDstUEBase extends DataDstJava {
 
             default:
                 enable = false;
-                fout.write(dumpString(String.format("    /** invalid data type %s of UE DataTable for %s */\r\n",
+                fout.write(dumpString(String.format("    /** invalid data type %s of UE DataTable for %s **/\r\n",
                         descType.name(), varName)));
                 this.logErrorMessage("invalid data type %s of UE DataTable for %s, should not called here.",
                         descType.name(), varName);
@@ -1815,6 +1872,16 @@ public abstract class DataDstUEBase extends DataDstJava {
                     }
                 }
             }
+            if (isGenerated) {
+                fout.write(dumpString(String.format(
+                        "    /** Field Type: %s, Name: %s, Index: %d. This field is generated for UE Editor compatible. **/\r\n",
+                        ueTypeName, varName, fieldDesc.getIndex())));
+            } else {
+                fout.write(
+                        dumpString(String.format("    /** Field Type: %s, Name: %s, Index: %d **/\r\n", ueTypeName,
+                                varName, fieldDesc.getIndex())));
+            }
+
             fout.write(dumpString(getHeaderFieldUProperty()));
 
             if (fieldDesc.isMap() && typeDesc != null && typeDesc.getSortedFields().size() >= 2) {
@@ -1877,6 +1944,19 @@ public abstract class DataDstUEBase extends DataDstJava {
         }
     }
 
+    private final void writeCodeHeaderField(FileOutputStream fout, DataDstEnumValueDescriptor enumValueDesc,
+            String varName) throws IOException {
+        if ((varName == null || varName.isEmpty())) {
+            varName = getIdentName(enumValueDesc.getName());
+        }
+
+        fout.write(dumpString(String.format("    /** Enum value, Name: %s, Index: %d **/\r\n", varName,
+                enumValueDesc.getIndex())));
+        fout.write(dumpString(
+                String.format("    %s = %d,\r\n", varName,
+                        enumValueDesc.getIndex())));
+    }
+
     static private final String getUETypeName(DataDstWriterNode desc) {
         if (null == desc) {
             return "FString";
@@ -1896,6 +1976,10 @@ public abstract class DataDstUEBase extends DataDstJava {
     static private final String getUETypeName(DataDstTypeDescriptor desc) {
         if (null == desc) {
             return "FString";
+        }
+
+        if (null != desc.getReferEnumType()) {
+            return String.format("E%s", getIdentName(desc.getReferEnumType().getFullName()));
         }
 
         DataDstWriterNode.JAVA_TYPE type = desc.getType();
@@ -1935,6 +2019,11 @@ public abstract class DataDstUEBase extends DataDstJava {
         }
         if (ueTypeNameIdent != null && !ueTypeNameIdent.isEmpty()) {
             return "nullptr";
+        }
+
+        if (null != field.getReferEnumType()) {
+            return String.format("%s::%s", getUETypeName(field.getTypeDescriptor()),
+                    getIdentName(field.getReferEnumType().getDefaultValue().getName()));
         }
 
         switch (descType) {
@@ -2062,7 +2151,8 @@ public abstract class DataDstUEBase extends DataDstJava {
         if (type == JAVA_TYPE.INT) {
             typeLimit = SPECIAL_TYPE_LIMIT.INT32;
         }
-        return new DataDstFieldDescriptor(DataDstWriterNode.getDefaultMessageDescriptor(type, typeLimit), index, name,
+        return new DataDstFieldDescriptor(DataDstWriterNode.getDefaultMessageDescriptor(type, typeLimit, null), index,
+                name,
                 FIELD_LABEL_TYPE.OPTIONAL, null);
     }
 
@@ -2203,17 +2293,27 @@ public abstract class DataDstUEBase extends DataDstJava {
     }
 
     private final void writeCodeHeaderFile(UEDataRowRule rule, UECodeInfo codeInfo) throws IOException {
-        if (globalCodeWrittenCache.contains(codeInfo.header)) {
-            return;
+        synchronized (globalCodeWrittenCache) {
+            if (globalCodeWrittenCache.contains(codeInfo.header)) {
+                return;
+            }
+            globalCodeWrittenCache.add(codeInfo.header);
         }
-        globalCodeWrittenCache.add(codeInfo.header);
 
         // 加载代码
         FileOutputStream headerFs = createCodeHeaderFileStream(rule, codeInfo);
 
+        // 枚举类型
+        if (null != codeInfo.writerNodeWrapper && null != codeInfo.writerNodeWrapper.getReferEnumDescriptor()) {
+            for (DataDstEnumValueDescriptor enumValueDesc : codeInfo.writerNodeWrapper.getReferEnumDescriptor()
+                    .getSortedValues()) {
+                writeCodeHeaderField(headerFs, enumValueDesc, null);
+            }
+        }
+
         HashSet<String> dumpedFields = new HashSet<String>();
         // The key field of 0 is FName Name
-        for (int i = 0; i < rule.keyFields.size(); ++i) {
+        for (int i = 0; rule.keyFields != null && i < rule.keyFields.size(); ++i) {
             DataDstWriterNodeWrapper descWraper = rule.keyFields.get(i);
             DataDstFieldDescriptor field = descWraper.getReferField();
             if (null == field) {
@@ -2225,7 +2325,7 @@ public abstract class DataDstUEBase extends DataDstJava {
             writeCodeHeaderField(headerFs, descWraper.getReferField(), descWraper.varName, descWraper.isGenerated);
         }
 
-        for (int i = 0; i < rule.valueFields.size(); ++i) {
+        for (int i = 0; rule.valueFields != null && i < rule.valueFields.size(); ++i) {
             DataDstWriterNodeWrapper descWraper = rule.valueFields.get(i);
             dumpedFields.add(descWraper.varName);
 
@@ -2242,24 +2342,27 @@ public abstract class DataDstUEBase extends DataDstJava {
 
         // 还要补全未使用的字段
         if (null != codeInfo.writerNodeWrapper) {
-            for (DataDstFieldDescriptor field : codeInfo.writerNodeWrapper.getTypeDescriptor().getSortedFields()) {
-
-                // Write oneof
-                if (field.getReferOneof() != null) {
-                    String oneofVarName = getIdentName(field.getReferOneof().getName());
-                    if (!dumpedFields.contains(oneofVarName)) {
-                        writeCodeHeaderField(headerFs, field.getReferOneof(), oneofVarName, false);
-                        dumpedFields.add(oneofVarName);
+            ArrayList<DataDstFieldDescriptor> sortedFields = codeInfo.writerNodeWrapper.getTypeDescriptor()
+                    .getSortedFields();
+            if (sortedFields != null) {
+                for (DataDstFieldDescriptor field : codeInfo.writerNodeWrapper.getTypeDescriptor().getSortedFields()) {
+                    // Write oneof
+                    if (field.getReferOneof() != null) {
+                        String oneofVarName = getIdentName(field.getReferOneof().getName());
+                        if (!dumpedFields.contains(oneofVarName)) {
+                            writeCodeHeaderField(headerFs, field.getReferOneof(), oneofVarName, false);
+                            dumpedFields.add(oneofVarName);
+                        }
                     }
-                }
 
-                String varName = getIdentName(field.getName());
-                if (dumpedFields.contains(varName)) {
-                    continue;
-                }
-                dumpedFields.add(varName);
+                    String varName = getIdentName(field.getName());
+                    if (dumpedFields.contains(varName)) {
+                        continue;
+                    }
+                    dumpedFields.add(varName);
 
-                writeCodeHeaderField(headerFs, field, varName, false);
+                    writeCodeHeaderField(headerFs, field, varName, false);
+                }
             }
         }
 
@@ -2369,10 +2472,12 @@ public abstract class DataDstUEBase extends DataDstJava {
     }
 
     private final void writeCodeSourceFile(UEDataRowRule rule, UECodeInfo codeInfo) throws IOException {
-        if (globalCodeWrittenCache.contains(codeInfo.source)) {
-            return;
+        synchronized (globalCodeWrittenCache) {
+            if (globalCodeWrittenCache.contains(codeInfo.source)) {
+                return;
+            }
+            globalCodeWrittenCache.add(codeInfo.source);
         }
-        globalCodeWrittenCache.add(codeInfo.source);
 
         FileOutputStream sourceFs = createCodeSourceFileStream(rule, codeInfo);
 

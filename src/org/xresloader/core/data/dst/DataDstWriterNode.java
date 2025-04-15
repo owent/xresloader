@@ -230,6 +230,14 @@ public class DataDstWriterNode {
             return SPECIAL_TYPE_LIMIT.NONE;
         }
 
+        public DataDstEnumDescriptor getReferEnumType() {
+            if (this.referTypeDescriptor != null) {
+                return this.referTypeDescriptor.getReferEnumType();
+            }
+
+            return null;
+        }
+
         public String validateTypeLimit(Object value) {
             if (this.referTypeDescriptor != null) {
                 return this.referTypeDescriptor.validateTypeLimit(value);
@@ -375,6 +383,122 @@ public class DataDstWriterNode {
         }
     }
 
+    static public class DataDstEnumValueDescriptor {
+        private int index = 0;
+        private String name = null;
+        private String fullName = null;
+        private Object rawDescriptor = null;
+        private DataDstEnumDescriptor owner = null;
+
+        public DataDstEnumValueDescriptor(DataDstEnumDescriptor owner, int index, String name, Object rawDesc) {
+            this.index = index;
+            this.name = name;
+            this.owner = owner;
+            this.rawDescriptor = rawDesc;
+
+            this.fullName = String.format("%s.%s", owner.getFullName(), name);
+        }
+
+        public Object getRawDescriptor() {
+            return rawDescriptor;
+        }
+
+        public DataDstEnumDescriptor getOwnerDescriptor() {
+            return this.owner;
+        }
+
+        public int getIndex() {
+            return this.index;
+        }
+
+        public String getName() {
+            return this.name;
+        }
+
+        public String getFullName() {
+            return this.fullName;
+        }
+    }
+
+    static public class DataDstEnumDescriptor {
+        private String name = null;
+        private String fullName = null;
+        private Object rawDescriptor = null;
+        private HashMap<String, DataDstEnumValueDescriptor> values_by_name = null;
+        private HashMap<Integer, DataDstEnumValueDescriptor> values_by_id = null;
+        private ArrayList<DataDstEnumValueDescriptor> sorted_values = null;
+
+        public DataDstEnumDescriptor(String fullName, String name, Object rawDesc) {
+            this.values_by_name = new HashMap<String, DataDstEnumValueDescriptor>();
+            this.name = name;
+            this.rawDescriptor = rawDesc;
+            this.values_by_id = new HashMap<Integer, DataDstEnumValueDescriptor>();
+
+            if (fullName == null || fullName.isEmpty()) {
+                this.fullName = name;
+            } else {
+                this.fullName = fullName;
+            }
+        }
+
+        public void addValue(DataDstEnumValueDescriptor value) {
+            if (null == value) {
+                return;
+            }
+
+            this.values_by_id.put(value.getIndex(), value);
+            this.values_by_name.put(value.getName(), value);
+        }
+
+        public String getName() {
+            return this.name;
+        }
+
+        public String getFullName() {
+            return this.fullName;
+        }
+
+        public Object getRawDescriptor() {
+            return rawDescriptor;
+        }
+
+        public DataDstEnumValueDescriptor getDefaultValue() {
+            DataDstEnumValueDescriptor ret = values_by_id.getOrDefault(0, null);
+            if (ret == null) {
+                ArrayList<DataDstEnumValueDescriptor> sv = getSortedValues();
+                if (!sv.isEmpty()) {
+                    ret = sv.get(0);
+                }
+            }
+
+            return ret;
+        }
+
+        public DataDstEnumValueDescriptor getValueById(int index) {
+            return values_by_id.getOrDefault(index, null);
+        }
+
+        public DataDstEnumValueDescriptor getValueByName(String name) {
+            return values_by_name.getOrDefault(name, null);
+        }
+
+        public ArrayList<DataDstEnumValueDescriptor> getSortedValues() {
+            if (this.sorted_values != null && this.sorted_values.size() == this.values_by_name.size()) {
+                return this.sorted_values;
+            }
+
+            this.sorted_values = new ArrayList<DataDstEnumValueDescriptor>();
+            this.sorted_values.ensureCapacity(this.values_by_name.size());
+            for (HashMap.Entry<String, DataDstEnumValueDescriptor> d : this.values_by_name.entrySet()) {
+                this.sorted_values.add(d.getValue());
+            }
+            this.sorted_values.sort((l, r) -> {
+                return Integer.compare(l.getIndex(), r.getIndex());
+            });
+            return this.sorted_values;
+        }
+    }
+
     static public class DataDstOneofDescriptor {
         private int index = 0;
         private String name = null;
@@ -399,9 +523,12 @@ public class DataDstWriterNode {
             this.fields_by_id = new HashMap<Integer, DataDstFieldDescriptor>();
             for (HashMap.Entry<String, DataDstFieldDescriptor> d : fields.entrySet()) {
                 this.fields_by_id.put(d.getValue().getIndex(), d.getValue());
-                d.getValue().setReferOneof(this);
             }
             this.fullName = String.format("%s.%s", owner.getFullName(), name);
+
+            for (HashMap.Entry<String, DataDstFieldDescriptor> d : fields.entrySet()) {
+                d.getValue().setReferOneof(this);
+            }
         }
 
         public Object getRawDescriptor() {
@@ -548,10 +675,12 @@ public class DataDstWriterNode {
         public HashMap<String, DataDstOneofDescriptor> oneofs = null;
         private ArrayList<DataDstFieldDescriptor> sortedFields = null;
         private ArrayList<DataDstOneofDescriptor> sortedOneofs = null;
+        private DataDstEnumDescriptor referToEnum = null;
         private Object rawDescriptor = null;
 
         public DataDstTypeDescriptor(JAVA_TYPE type, String pkgName, String msgName, Object rawDesc,
-                SPECIAL_MESSAGE_TYPE specialMessageType, SPECIAL_TYPE_LIMIT specialTypeLimit) {
+                SPECIAL_MESSAGE_TYPE specialMessageType, SPECIAL_TYPE_LIMIT specialTypeLimit,
+                DataDstEnumDescriptor referToEnum) {
             this.type = type;
             if (msgName == null || msgName.isEmpty()) {
                 msgName = type.toString();
@@ -568,6 +697,7 @@ public class DataDstWriterNode {
 
             this.special_message_type = specialMessageType;
             this.special_type_limit = specialTypeLimit;
+            this.referToEnum = referToEnum;
         }
 
         public Object getRawDescriptor() {
@@ -584,6 +714,10 @@ public class DataDstWriterNode {
 
         public SPECIAL_TYPE_LIMIT getSpecialTypeLimit() {
             return this.special_type_limit;
+        }
+
+        public DataDstEnumDescriptor getReferEnumType() {
+            return this.referToEnum;
         }
 
         public String getPackageName() {
@@ -825,7 +959,8 @@ public class DataDstWriterNode {
 
     static private HashMap<String, DataDstTypeDescriptor> defaultDescs = new HashMap<String, DataDstTypeDescriptor>();
 
-    static public DataDstTypeDescriptor getDefaultMessageDescriptor(JAVA_TYPE type, SPECIAL_TYPE_LIMIT typeLimit) {
+    static public DataDstTypeDescriptor getDefaultMessageDescriptor(JAVA_TYPE type, SPECIAL_TYPE_LIMIT typeLimit,
+            DataDstEnumDescriptor referToEnum) {
         String key = String.format("%s:%s", type.name(), typeLimit.name());
         DataDstTypeDescriptor ret = defaultDescs.getOrDefault(key, null);
         if (ret != null) {
@@ -839,7 +974,7 @@ public class DataDstWriterNode {
             return null;
         }
 
-        ret = new DataDstTypeDescriptor(type, null, null, null, SPECIAL_MESSAGE_TYPE.NONE, typeLimit);
+        ret = new DataDstTypeDescriptor(type, null, null, null, SPECIAL_MESSAGE_TYPE.NONE, typeLimit, referToEnum);
         defaultDescs.put(key, ret);
         return ret;
     }

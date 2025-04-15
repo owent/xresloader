@@ -695,9 +695,9 @@ public abstract class DataDstUEBase extends DataDstJava {
             enumMode = true;
             DataDstEnumDescriptor enumDesc = code.writerNodeWrapper.getReferEnumDescriptor();
             if (!enumDesc.getSortedValues().isEmpty()) {
-                if (enumDesc.getSortedValues().getFirst().getIndex() < 0) {
+                if (enumDesc.getSortedValues().get(0).getIndex() < 0) {
                     enumSupportBlueprint = false;
-                } else if (enumDesc.getSortedValues().getLast().getIndex() > 255) {
+                } else if (enumDesc.getSortedValues().get(enumDesc.getSortedValues().size() - 1).getIndex() > 255) {
                     enumSupportBlueprint = false;
                 }
             }

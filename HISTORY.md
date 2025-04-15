@@ -2,6 +2,10 @@
 
 ## Unrelease
 
+### 2.20.1
+
+1. 修复Ue-Json和Ue-Csv模式下，对于过大的enum也输出了不兼容的 `UENUM(BlueprintType)` 的问题。
+
 ### 2.20.0
 
 1. Ue-Json和Ue-Csv模式下输出的代码中转出Enum类型

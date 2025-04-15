@@ -37,7 +37,8 @@ public abstract class DataDstUEBase extends DataDstJava {
     static private String codeHeaderUStructBodyPrefix = String.join("\r\n", "", "{", "    GENERATED_USTRUCT_BODY()", "",
             "    // Start of fields");
     static private String codeHeaderUEnumPrefix = String.join("\r\n", "", "", "", "UENUM(BlueprintType)", "");
-    static private String codeHeaderUEnumClassName = "enum class %s : uint8";
+    static private String codeHeaderUEnumBasicClassName = "enum class %s : int32";
+    static private String codeHeaderUEnumBlueprintClassName = "enum class %s : uint8";
     static private String codeHeaderUEnumtBodyPrefix = String.join("\r\n", "", "{", "",
             "    // Start of enum values");
     static private String codeHeaderSuffix = "\r\n};";
@@ -688,10 +689,20 @@ public abstract class DataDstUEBase extends DataDstJava {
             }
         }
         boolean enumMode = false;
+        boolean enumSupportBlueprint = true;
         if (null != code.writerNodeWrapper
                 && null != code.writerNodeWrapper.getReferEnumDescriptor()) {
             enumMode = true;
+            DataDstEnumDescriptor enumDesc = code.writerNodeWrapper.getReferEnumDescriptor();
+            if (!enumDesc.getSortedValues().isEmpty()) {
+                if (enumDesc.getSortedValues().getFirst().getIndex() < 0) {
+                    enumSupportBlueprint = false;
+                } else if (enumDesc.getSortedValues().getLast().getIndex() > 255) {
+                    enumSupportBlueprint = false;
+                }
+            }
         }
+
         if (enumMode) {
             fos.write(dumpString(codeHeaderUEnumIncludePrefix));
         } else {
@@ -753,10 +764,17 @@ public abstract class DataDstUEBase extends DataDstJava {
         }
 
         fos.write(dumpString("\r\n"));
-        fos.write(dumpString(String.format(codeHeaderIncludeGenerated, code.baseName)));
+        if ((enumMode && enumSupportBlueprint) || !enumMode) {
+            fos.write(dumpString(String.format(codeHeaderIncludeGenerated, code.baseName)));
+        }
         if (enumMode) {
-            fos.write(dumpString(codeHeaderUEnumPrefix));
-            fos.write(dumpString(String.format(codeHeaderUEnumClassName, code.clazzName)));
+            if (enumSupportBlueprint) {
+                fos.write(dumpString(codeHeaderUEnumPrefix));
+                fos.write(dumpString(String.format(codeHeaderUEnumBlueprintClassName, code.clazzName)));
+            } else {
+                fos.write(dumpString("\r\n"));
+                fos.write(dumpString(String.format(codeHeaderUEnumBasicClassName, code.clazzName)));
+            }
             fos.write(dumpString(codeHeaderUEnumtBodyPrefix));
         } else {
             fos.write(dumpString(codeHeaderUStructPrefix));

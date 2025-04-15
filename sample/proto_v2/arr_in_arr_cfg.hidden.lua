@@ -13,7 +13,7 @@ return {
     data_ver = "1.0.0.0",
     description = "b741684279f664b9aa427c27ec2c76529c908834d322a737a7dfabfd6dc425ea",
     hash_code = "sha256:b4d268d9a7b1a8cf6fc18489dd67c4a298408e7bffbde43c91d6ac2f47836601",
-    xres_ver = "2.20.0",
+    xres_ver = "2.20.1",
   },
   [2] = "arr_in_arr_cfg",
   arr_in_arr_cfg = {

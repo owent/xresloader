@@ -16,7 +16,7 @@
     "data_ver": "1.0.0.0",
     "description": "3d3fc799606b8a633ccb27f240752e03a26e5df289b88ecf1d6155ece00c7b6f\r\n3d3fc799606b8a633ccb27f240752e03a26e5df289b88ecf1d6155ece00c7b6f",
     "hash_code": "sha256:d4f6ec7ff8175befd31c8c88b9ec0fe2f3a3d318a0749bcf66b7bd657e8bf323",
-    "xres_ver": "2.20.0"
+    "xres_ver": "2.20.1"
   },
   {"role_upgrade_cfg": [
     {

@@ -312,7 +312,7 @@ Excel里的Key使用@后缀的字段名，@后面的部分都属于验证器。�
 validator:
   - name: "validator name"
     description: "（可选）描述"
-    version: 0 # 版本，从 2.21.0 版本开始支持
+    version: 0 # 版本，从 2.20.0 版本开始支持
     rules:
       - validator_rule1
       - validator_rule2

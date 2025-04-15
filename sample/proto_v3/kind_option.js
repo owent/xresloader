@@ -326,6 +326,19 @@ exports.files = [
         },
         name : "event_rule_item"
       },
+      field_alias_message : {
+        field : {
+          value : {
+            name : "value",
+            number : 2,
+            options : {
+              validator : "custom_rule6"
+            },
+            type_name : "INT32"
+          }
+        },
+        name : "field_alias_message"
+      },
       inner_alias_message : {
         field : {
           iType : {

@@ -166,3 +166,8 @@ message outer_alias_message {
     repeated inner_alias_message inners   = 2 [ (org.xresloader.field_alias) = "Condition" ];
     repeated int32               nest_int = 3 [ (org.xresloader.field_alias) = "Nest", (org.xresloader.field_list_min_size) = "2" ];
 }
+
+message field_alias_message {
+    optional int32 id    = 1;
+    optional int32 value = 2 [ (org.xresloader.validator) = "custom_rule6" ];
+}

@@ -18,4 +18,4 @@ validator:
   - name: "custom_rule6"
     version: 6
     rules:
-      - "<=1473624235014785965"
+      - InMacroTable("资源转换示例.xlsx", "field_alias_macro", 3, 2, "key", "value")

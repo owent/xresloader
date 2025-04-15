@@ -94,6 +94,10 @@ class event_rule_item;
 struct event_rule_itemDefaultTypeInternal;
 extern event_rule_itemDefaultTypeInternal _event_rule_item_default_instance_;
 extern const ::google::protobuf::internal::ClassDataFull event_rule_item_class_data_;
+class field_alias_message;
+struct field_alias_messageDefaultTypeInternal;
+extern field_alias_messageDefaultTypeInternal _field_alias_message_default_instance_;
+extern const ::google::protobuf::internal::ClassDataFull field_alias_message_class_data_;
 class inner_alias_message;
 struct inner_alias_messageDefaultTypeInternal;
 extern inner_alias_messageDefaultTypeInternal _inner_alias_message_default_instance_;
@@ -899,6 +903,211 @@ class inner_alias_message final : public ::google::protobuf::Message
 };
 
 extern const ::google::protobuf::internal::ClassDataFull inner_alias_message_class_data_;
+// -------------------------------------------------------------------
+
+class field_alias_message final : public ::google::protobuf::Message
+/* @@protoc_insertion_point(class_definition:field_alias_message) */ {
+ public:
+  inline field_alias_message() : field_alias_message(nullptr) {}
+  ~field_alias_message() PROTOBUF_FINAL;
+
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+  void operator delete(field_alias_message* PROTOBUF_NONNULL msg, std::destroying_delete_t) {
+    SharedDtor(*msg);
+    ::google::protobuf::internal::SizedDelete(msg, sizeof(field_alias_message));
+  }
+#endif
+
+  template <typename = void>
+  explicit PROTOBUF_CONSTEXPR field_alias_message(::google::protobuf::internal::ConstantInitialized);
+
+  inline field_alias_message(const field_alias_message& from) : field_alias_message(nullptr, from) {}
+  inline field_alias_message(field_alias_message&& from) noexcept
+      : field_alias_message(nullptr, std::move(from)) {}
+  inline field_alias_message& operator=(const field_alias_message& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  inline field_alias_message& operator=(field_alias_message&& from) noexcept {
+    if (this == &from) return *this;
+    if (::google::protobuf::internal::CanMoveWithInternalSwap(GetArena(), from.GetArena())) {
+      InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const
+      ABSL_ATTRIBUTE_LIFETIME_BOUND {
+    return _internal_metadata_.unknown_fields<::google::protobuf::UnknownFieldSet>(::google::protobuf::UnknownFieldSet::default_instance);
+  }
+  inline ::google::protobuf::UnknownFieldSet* PROTOBUF_NONNULL mutable_unknown_fields()
+      ABSL_ATTRIBUTE_LIFETIME_BOUND {
+    return _internal_metadata_.mutable_unknown_fields<::google::protobuf::UnknownFieldSet>();
+  }
+
+  static const ::google::protobuf::Descriptor* PROTOBUF_NONNULL descriptor() {
+    return GetDescriptor();
+  }
+  static const ::google::protobuf::Descriptor* PROTOBUF_NONNULL GetDescriptor() {
+    return default_instance().GetMetadata().descriptor;
+  }
+  static const ::google::protobuf::Reflection* PROTOBUF_NONNULL GetReflection() {
+    return default_instance().GetMetadata().reflection;
+  }
+  static const field_alias_message& default_instance() {
+    return *reinterpret_cast<const field_alias_message*>(
+        &_field_alias_message_default_instance_);
+  }
+  static constexpr int kIndexInFileMessages = 19;
+  friend void swap(field_alias_message& a, field_alias_message& b) { a.Swap(&b); }
+  inline void Swap(field_alias_message* PROTOBUF_NONNULL other) {
+    if (other == this) return;
+    if (::google::protobuf::internal::CanUseInternalSwap(GetArena(), other->GetArena())) {
+      InternalSwap(other);
+    } else {
+      ::google::protobuf::internal::GenericSwap(this, other);
+    }
+  }
+  void UnsafeArenaSwap(field_alias_message* PROTOBUF_NONNULL other) {
+    if (other == this) return;
+    ABSL_DCHECK(GetArena() == other->GetArena());
+    InternalSwap(other);
+  }
+
+  // implements Message ----------------------------------------------
+
+  field_alias_message* PROTOBUF_NONNULL New(::google::protobuf::Arena* PROTOBUF_NULLABLE arena = nullptr) const {
+    return ::google::protobuf::Message::DefaultConstruct<field_alias_message>(arena);
+  }
+  using ::google::protobuf::Message::CopyFrom;
+  void CopyFrom(const field_alias_message& from);
+  using ::google::protobuf::Message::MergeFrom;
+  void MergeFrom(const field_alias_message& from) { field_alias_message::MergeImpl(*this, from); }
+
+  private:
+  static void MergeImpl(::google::protobuf::MessageLite& to_msg,
+                        const ::google::protobuf::MessageLite& from_msg);
+
+  public:
+  bool IsInitialized() const {
+    return true;
+  }
+  ABSL_ATTRIBUTE_REINITIALIZES void Clear() PROTOBUF_FINAL;
+  #if defined(PROTOBUF_CUSTOM_VTABLE)
+  private:
+  static ::size_t ByteSizeLong(const ::google::protobuf::MessageLite& msg);
+  static ::uint8_t* PROTOBUF_NONNULL _InternalSerialize(
+      const ::google::protobuf::MessageLite& msg, ::uint8_t* PROTOBUF_NONNULL target,
+      ::google::protobuf::io::EpsCopyOutputStream* PROTOBUF_NONNULL stream);
+
+  public:
+  ::size_t ByteSizeLong() const { return ByteSizeLong(*this); }
+  ::uint8_t* PROTOBUF_NONNULL _InternalSerialize(
+      ::uint8_t* PROTOBUF_NONNULL target,
+      ::google::protobuf::io::EpsCopyOutputStream* PROTOBUF_NONNULL stream) const {
+    return _InternalSerialize(*this, target, stream);
+  }
+  #else   // PROTOBUF_CUSTOM_VTABLE
+  ::size_t ByteSizeLong() const final;
+  ::uint8_t* PROTOBUF_NONNULL _InternalSerialize(
+      ::uint8_t* PROTOBUF_NONNULL target,
+      ::google::protobuf::io::EpsCopyOutputStream* PROTOBUF_NONNULL stream) const final;
+  #endif  // PROTOBUF_CUSTOM_VTABLE
+  int GetCachedSize() const { return _impl_._cached_size_.Get(); }
+
+  private:
+  void SharedCtor(::google::protobuf::Arena* PROTOBUF_NULLABLE arena);
+  static void SharedDtor(MessageLite& self);
+  void InternalSwap(field_alias_message* PROTOBUF_NONNULL other);
+ private:
+  template <typename T>
+  friend ::absl::string_view(::google::protobuf::internal::GetAnyMessageName)();
+  static ::absl::string_view FullMessageName() { return "field_alias_message"; }
+
+ protected:
+  explicit field_alias_message(::google::protobuf::Arena* PROTOBUF_NULLABLE arena);
+  field_alias_message(::google::protobuf::Arena* PROTOBUF_NULLABLE arena, const field_alias_message& from);
+  field_alias_message(
+      ::google::protobuf::Arena* PROTOBUF_NULLABLE arena, field_alias_message&& from) noexcept
+      : field_alias_message(arena) {
+    *this = ::std::move(from);
+  }
+  const ::google::protobuf::internal::ClassData* PROTOBUF_NONNULL GetClassData() const PROTOBUF_FINAL;
+  static void* PROTOBUF_NONNULL PlacementNew_(
+      const void* PROTOBUF_NONNULL, void* PROTOBUF_NONNULL mem,
+      ::google::protobuf::Arena* PROTOBUF_NULLABLE arena);
+  static constexpr auto InternalNewImpl_();
+
+ public:
+  static constexpr auto InternalGenerateClassData_();
+
+  ::google::protobuf::Metadata GetMetadata() const;
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+  enum : int {
+    kIdFieldNumber = 1,
+    kValueFieldNumber = 2,
+  };
+  // optional int32 id = 1;
+  bool has_id() const;
+  void clear_id() ;
+  ::int32_t id() const;
+  void set_id(::int32_t value);
+
+  private:
+  ::int32_t _internal_id() const;
+  void _internal_set_id(::int32_t value);
+
+  public:
+  // optional int32 value = 2 [(.org.xresloader.validator) = "custom_rule6"];
+  bool has_value() const;
+  void clear_value() ;
+  ::int32_t value() const;
+  void set_value(::int32_t value);
+
+  private:
+  ::int32_t _internal_value() const;
+  void _internal_set_value(::int32_t value);
+
+  public:
+  // @@protoc_insertion_point(class_scope:field_alias_message)
+ private:
+  class _Internal;
+  friend class ::google::protobuf::internal::TcParser;
+  static const ::google::protobuf::internal::TcParseTable<1, 2,
+                                   0, 0,
+                                   2>
+      _table_;
+
+  friend class ::google::protobuf::MessageLite;
+  friend class ::google::protobuf::Arena;
+  template <typename T>
+  friend class ::google::protobuf::Arena::InternalHelper;
+  using InternalArenaConstructable_ = void;
+  using DestructorSkippable_ = void;
+  struct Impl_ {
+    inline explicit constexpr Impl_(::google::protobuf::internal::ConstantInitialized) noexcept;
+    inline explicit Impl_(
+        ::google::protobuf::internal::InternalVisibility visibility,
+        ::google::protobuf::Arena* PROTOBUF_NULLABLE arena);
+    inline explicit Impl_(
+        ::google::protobuf::internal::InternalVisibility visibility,
+        ::google::protobuf::Arena* PROTOBUF_NULLABLE arena, const Impl_& from,
+        const field_alias_message& from_msg);
+    ::google::protobuf::internal::HasBits<1> _has_bits_;
+    ::google::protobuf::internal::CachedSize _cached_size_;
+    ::int32_t id_;
+    ::int32_t value_;
+    PROTOBUF_TSAN_DECLARE_MEMBER
+  };
+  union { Impl_ _impl_; };
+  friend struct ::TableStruct_kind_2eproto;
+};
+
+extern const ::google::protobuf::internal::ClassDataFull field_alias_message_class_data_;
 // -------------------------------------------------------------------
 
 class event_rule_item final : public ::google::protobuf::Message
@@ -8070,6 +8279,66 @@ inline ::google::protobuf::RepeatedField<::int32_t>* PROTOBUF_NONNULL
 outer_alias_message::_internal_mutable_nest_int() {
   ::google::protobuf::internal::TSanRead(&_impl_);
   return &_impl_.nest_int_;
+}
+
+// -------------------------------------------------------------------
+
+// field_alias_message
+
+// optional int32 id = 1;
+inline bool field_alias_message::has_id() const {
+  bool value = (_impl_._has_bits_[0] & 0x00000001u) != 0;
+  return value;
+}
+inline void field_alias_message::clear_id() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.id_ = 0;
+  _impl_._has_bits_[0] &= ~0x00000001u;
+}
+inline ::int32_t field_alias_message::id() const {
+  // @@protoc_insertion_point(field_get:field_alias_message.id)
+  return _internal_id();
+}
+inline void field_alias_message::set_id(::int32_t value) {
+  _internal_set_id(value);
+  _impl_._has_bits_[0] |= 0x00000001u;
+  // @@protoc_insertion_point(field_set:field_alias_message.id)
+}
+inline ::int32_t field_alias_message::_internal_id() const {
+  ::google::protobuf::internal::TSanRead(&_impl_);
+  return _impl_.id_;
+}
+inline void field_alias_message::_internal_set_id(::int32_t value) {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.id_ = value;
+}
+
+// optional int32 value = 2 [(.org.xresloader.validator) = "custom_rule6"];
+inline bool field_alias_message::has_value() const {
+  bool value = (_impl_._has_bits_[0] & 0x00000002u) != 0;
+  return value;
+}
+inline void field_alias_message::clear_value() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.value_ = 0;
+  _impl_._has_bits_[0] &= ~0x00000002u;
+}
+inline ::int32_t field_alias_message::value() const {
+  // @@protoc_insertion_point(field_get:field_alias_message.value)
+  return _internal_value();
+}
+inline void field_alias_message::set_value(::int32_t value) {
+  _internal_set_value(value);
+  _impl_._has_bits_[0] |= 0x00000002u;
+  // @@protoc_insertion_point(field_set:field_alias_message.value)
+}
+inline ::int32_t field_alias_message::_internal_value() const {
+  ::google::protobuf::internal::TSanRead(&_impl_);
+  return _impl_.value_;
+}
+inline void field_alias_message::_internal_set_value(::int32_t value) {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.value_ = value;
 }
 
 #ifdef __GNUC__

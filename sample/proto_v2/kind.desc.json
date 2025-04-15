@@ -411,6 +411,22 @@
         "name": "event_rule_item",
         "oneof_decl": {"nested": {"name": "nested"}}
       },
+      "field_alias_message": {
+        "field": {
+          "id": {
+            "name": "id",
+            "number": 1,
+            "type_name": "INT32"
+          },
+          "value": {
+            "name": "value",
+            "number": 2,
+            "options": {"validator": "custom_rule6"},
+            "type_name": "INT32"
+          }
+        },
+        "name": "field_alias_message"
+      },
       "inner_alias_message": {
         "field": {
           "iType": {
@@ -721,6 +737,7 @@
           "CostValue": {
             "name": "CostValue",
             "number": 4,
+            "options": {"validator": "custom_rule5"},
             "type_name": "INT64"
           },
           "Id": {

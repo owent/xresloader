@@ -858,6 +858,15 @@ public class DataDstPb extends DataDstImpl {
                             ruleObject.name);
                 }
                 return null;
+            } else if (ruleObject.parameters.get(0).equalsIgnoreCase("InMacroTable")) {
+                DataVerifyInMacroTable vfyInTableColumn = new DataVerifyInMacroTable(ruleObject);
+                if (vfyInTableColumn.isValid()) {
+                    return vfyInTableColumn;
+                } else {
+                    ProgramOptions.getLoger().error("Validator %s(DataVerifyInMacroTable) is invalid",
+                            ruleObject.name);
+                }
+                return null;
             }
 
             return null;

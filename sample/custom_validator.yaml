@@ -15,3 +15,7 @@ validator:
     version: 6
     rules:
       - "<=1473624235014785965"
+  - name: "custom_rule6"
+    version: 6
+    rules:
+      - "<=1473624235014785965"

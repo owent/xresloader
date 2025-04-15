@@ -38,7 +38,7 @@ message role_upgrade_cfg {
     optional uint32 Id        = 1 [ (org.xresloader.ue.key_tag) = 1000, (org.xresloader.validator) = "custom_rule3" ];
     optional uint32 Level     = 2 [ (org.xresloader.ue.key_tag) = 1 ];
     optional int32  CostType  = 3 [ (org.xresloader.validator) = "custom_rule1", (org.xresloader.field_description) = "Refer to cost_type" ];
-    optional int64  CostValue = 4;
+    optional int64  CostValue = 4 [ (org.xresloader.validator) = "custom_rule5" ];
     optional int32  ScoreAdd  = 5;
 }
 

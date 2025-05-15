@@ -2,11 +2,20 @@
 
 ## Unrelease
 
-### 2.20.1
+## 2.21.0
+
+1. 修复Javascript插件Patch完数据后转回去可能类型错误的问题。
+2. 引入 `org.openjdk.nashorn` 和 `org.mozilla.rhino` 包，解决JDK 17以上没有javascript引擎的问题。
+
+###
+
++ 此版本开始依赖Java 17运行时
+
+## 2.20.1
 
 1. 修复Ue-Json和Ue-Csv模式下，对于过大的enum也输出了不兼容的 `UENUM(BlueprintType)` 的问题。
 
-### 2.20.0
+## 2.20.0
 
 1. Ue-Json和Ue-Csv模式下输出的代码中转出Enum类型
 2. 增加 `--data-validator-error-version` ，仅仅低于这个版本的验证器会报错。高于或等于这个版本的验证器仅warning。用于新增不兼容规则时，预留版本迁移期。

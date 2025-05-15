@@ -1,19 +1,27 @@
 package org.xresloader.core.data.et;
 
 import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
+import java.io.FileInputStream;
+import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
 import javax.script.Invocable;
-import javax.script.ScriptEngine;
-import javax.script.ScriptEngineManager;
+import javax.script.ScriptContext;
 import javax.script.ScriptException;
 import javax.script.SimpleScriptContext;
+import javax.script.ScriptEngineManager;
+import javax.script.ScriptEngine;
+import javax.script.Bindings;
 
+import java.util.function.Predicate;
+
+import org.openjdk.nashorn.internal.runtime.Undefined;
+import org.mozilla.javascript.engine.RhinoScriptEngine;
+import org.apache.commons.io.IOUtils;
+import org.xresloader.core.ProgramOptions;
 import org.xresloader.core.data.dst.DataDstJava;
 import org.xresloader.core.data.dst.DataDstWriterNode;
 import org.xresloader.core.data.err.ConvException;
@@ -37,42 +45,139 @@ public class DataETProcessor extends DataDstJava {
     private String lastDataSourceFile = "";
     private String lastDataSourceTable = "";
     private String lastOutputFile = "";
+    private Object undefinedObject = null;
 
-    private DataETProcessor() {
+    private DataETProcessor() throws ConvException {
         ScriptEngineManager mgr = new ScriptEngineManager();
-        scriptEngine = mgr.getEngineByName("javascript");
+        for (String name : new String[] { "nashorn", "rhino", "javascript", "js", "JavaScript", "graal.js" }) {
+            if (scriptEngine != null) {
+                break;
+            }
+            scriptEngine = mgr.getEngineByName(name);
+
+            if (scriptEngine != null && name.equals("graal.js")) {
+                Bindings bindings = scriptEngine.getBindings(ScriptContext.ENGINE_SCOPE);
+                bindings.put("polyglot.js.allowHostAccess", true);
+                bindings.put("polyglot.js.allowNativeAccess", true);
+                bindings.put("polyglot.js.allowIO", true);
+                bindings.put("polyglot.js.allowHostClassLookup", (Predicate<String>) s -> true);
+                bindings.put("polyglot.js.allowHostClassLoading", true);
+                bindings.put("polyglot.js.allowAllAccess", true);
+            }
+        }
+    }
+
+    private void initRhinoEngine(SimpleScriptContext sc) throws ScriptException {
+        Bindings scope = sc.getBindings(ScriptContext.ENGINE_SCOPE);
+        String loadFunc = "function load(file) { " +
+                "  var FileReader = java.io.FileReader;" +
+                "  var BufferedReader = java.io.BufferedReader;" +
+                "  var reader = new BufferedReader(new FileReader(file));" +
+                "  var line;" +
+                "  var script = '';" +
+                "  while ((line = reader.readLine()) !== null) { script += line + '\\n'; }" +
+                "  reader.close();" +
+                "  eval(script);" +
+                "};" +
+                "var global = this;";
+
+        scriptEngine.eval(loadFunc, scope);
+
+        scope.put("__moduleCache", new org.mozilla.javascript.NativeObject());
+        scope.put("__basePath", ProgramOptions.getInstance().dataSourceDirectory);
+        // new java.io.File().exists()
+
+        // 注入简化版的require函数
+        String simpleRequire = "function require(modulePath) {\n" +
+                "    // 解析完整路径\n" +
+                "    if (!modulePath.endsWith('.js')) modulePath += '.js';\n" +
+                "    var fullPath = modulePath;\n" +
+                "    for(var __i in __basePath) {\n" +
+                "      var f = new java.io.File(__basePath[__i], modulePath);\n" +
+                "      if (f.exists()) {\n" +
+                "        fullPath = f.getCanonicalPath();\n" +
+                "        break;\n" +
+                "      }\n" +
+                "    }\n" +
+                "    \n" +
+                "    // 检查缓存\n" +
+                "    if (__moduleCache[fullPath]) return __moduleCache[fullPath].exports;\n" +
+                "    \n" +
+                "    // 创建模块\n" +
+                "    var module = { exports: {} };\n" +
+                "    __moduleCache[fullPath] = module;\n" +
+                "    \n" +
+                "    // 读取模块内容\n" +
+                "    var content = '';\n" +
+                "    var reader = new java.io.FileReader(fullPath);\n" +
+                "    var buffer = new java.io.BufferedReader(reader);\n" +
+                "    var line;\n" +
+                "    while ((line = buffer.readLine()) !== null) content += line + '\\n';\n" +
+                "    buffer.close();\n" +
+                "    \n" +
+                "    // 执行模块代码\n" +
+                "    var dirName = new java.io.File(fullPath).getParent();\n" +
+                "    var wrapper = new Function('exports', 'require', 'module', '__dirname', '__filename', content);\n"
+                +
+                "    wrapper(module.exports, require, module, dirName, fullPath);\n" +
+                "    \n" +
+                "    return module.exports;\n" +
+                "}";
+        scriptEngine.eval(simpleRequire, scope);
     }
 
     public void reset() throws ConvException {
-        boolean engineInitSucceed = false;
+        // boolean engineInitSucceed = false;
         try {
             if (scriptEngine != null && !SchemeConf.getInstance().getCallbackScriptPath().isEmpty()) {
-                scriptEngine.setContext(new SimpleScriptContext());
-                scriptEngine.put("gOurInstance", DataSrcImpl.getOurInstance());
-                scriptEngine.put("gSchemeConf", SchemeConf.getInstance());
-                scriptEngine.eval(new FileReader(new File(SchemeConf.getInstance().getCallbackScriptPath())));
-                engineInitSucceed = true;
+                SimpleScriptContext sc = new SimpleScriptContext();
+                scriptEngine.setContext(sc);
+                Bindings scope = scriptEngine.getBindings(ScriptContext.GLOBAL_SCOPE);
+                if (scope == null) {
+                    scope = scriptEngine.getBindings(ScriptContext.ENGINE_SCOPE);
+                }
+                // scriptEngine.put("gOurInstance", DataSrcImpl.getOurInstance());
+                // scriptEngine.put("gSchemeConf", SchemeConf.getInstance());
+                scope.put("gOurInstance", DataSrcImpl.getOurInstance());
+                scope.put("gSchemeConf", SchemeConf.getInstance());
+                String bootStrapCodes = IOUtils.toString(
+                        new FileInputStream(new File(SchemeConf.getInstance().getCallbackScriptPath())),
+                        "UTF-8");
+
+                scriptEngine.eval("var global = global || this;", scope);
+                if (scriptEngine instanceof RhinoScriptEngine) {
+                    initRhinoEngine(sc);
+                }
+
+                scriptEngine.eval(bootStrapCodes, scope);
+                if (undefinedObject == null) {
+                    undefinedObject = scriptEngine.eval("(function(){ return undefined;})()");
+                }
+
+                invocable = (Invocable) scriptEngine;
             }
-        } catch (ScriptException | FileNotFoundException e) {
+        } catch (ScriptException e) {
+            e.printStackTrace();
             throw new ConvException(e.getMessage());
-        }
-        invocable = null;
-        if (engineInitSucceed) {
-            invocable = (Invocable) scriptEngine;
+        } catch (IOException e) {
+            throw new ConvException(e.getMessage());
         }
     }
 
     public void initNextTable() throws ConvException {
         try {
-            if (invocable != null) {
+            if (scriptEngine instanceof RhinoScriptEngine) {
+                ((RhinoScriptEngine) scriptEngine).invokeFunction("initDataSource");
+            } else if (invocable != null) {
                 invocable.invokeFunction("initDataSource");
             }
-        } catch (NoSuchMethodException | ScriptException e) {
+        } catch (Exception e) {
+            e.printStackTrace();
             throw (new ConvException(e.getMessage()));
         }
     }
 
-    public static DataETProcessor getInstance() {
+    public static DataETProcessor getInstance() throws ConvException {
         if (instance == null) {
             instance = new DataETProcessor();
         }
@@ -92,7 +197,8 @@ public class DataETProcessor extends DataDstJava {
                     val = Double.valueOf((String) obj);
                 } else {
                     throw new ConvException(
-                            fd.getFullName() + " expected " + fd.getType().toString() + ", got " + obj.toString() + "");
+                            fd.getFullName() + " expected " + fd.getType().toString() + ", got " + obj.toString() + "("
+                                    + obj.getClass().getName() + ")");
                 }
                 break;
             case FLOAT:
@@ -102,7 +208,8 @@ public class DataETProcessor extends DataDstJava {
                     val = Float.valueOf((String) obj);
                 } else {
                     throw new ConvException(
-                            fd.getFullName() + " expected " + fd.getType().toString() + ", got " + obj.toString() + "");
+                            fd.getFullName() + " expected " + fd.getType().toString() + ", got " + obj.toString() + "("
+                                    + obj.getClass().getName() + ")");
                 }
                 break;
             case FIXED32:
@@ -116,7 +223,8 @@ public class DataETProcessor extends DataDstJava {
                     val = Integer.valueOf((String) obj);
                 } else {
                     throw new ConvException(
-                            fd.getFullName() + " expected " + fd.getType().toString() + ", got " + obj.toString() + "");
+                            fd.getFullName() + " expected " + fd.getType().toString() + ", got " + obj.toString() + "("
+                                    + obj.getClass().getName() + ")");
                 }
                 break;
             case FIXED64:
@@ -130,7 +238,8 @@ public class DataETProcessor extends DataDstJava {
                     val = Long.valueOf((String) obj);
                 } else {
                     throw new ConvException(
-                            fd.getFullName() + " expected " + fd.getType().toString() + ", got " + obj.toString() + "");
+                            fd.getFullName() + " expected " + fd.getType().toString() + ", got " + obj.toString() + "("
+                                    + obj.getClass().getName() + ")");
                 }
                 break;
             case ENUM:
@@ -162,6 +271,28 @@ public class DataETProcessor extends DataDstJava {
         return val;
     }
 
+    private boolean isUndefinedOrNull(Object obj) {
+        if (obj == null) {
+            return true;
+        }
+
+        if (undefinedObject != null) {
+            if (obj.equals(undefinedObject)) {
+                return true;
+            }
+
+            if (!(undefinedObject instanceof String) && obj.getClass().equals(undefinedObject.getClass())) {
+                return true;
+            }
+        }
+
+        if (obj instanceof Undefined) {
+            return true;
+        }
+
+        return false;
+    }
+
     /**
      * @param msgDesc
      * @param src     Map<String, Object>，配置行按类型转换后的Map
@@ -178,10 +309,13 @@ public class DataETProcessor extends DataDstJava {
         for (FieldDescriptor fd : msgDesc.getFields()) {
             try {
                 Object curValue = srcMap.getOrDefault(fd.getName(), null);
-                if (curValue == null)
+                if ((isUndefinedOrNull(curValue)))
                     continue;
                 if (fd.isMapField()) {
                     for (Map.Entry<?, ?> mapItem : ((SpecialInnerHashMap<?, ?>) curValue).entrySet()) {
+                        if (isUndefinedOrNull(mapItem.getKey()) || isUndefinedOrNull(mapItem.getValue())) {
+                            continue;
+                        }
                         // Map类型是List<MapEntry>，只能通过MapEntry.value类型判断是否为Message
                         Descriptor mapKVDesc = fd.getMessageType();
                         DynamicMessage.Builder pushMapItem = DynamicMessage.newBuilder(mapKVDesc);
@@ -199,6 +333,9 @@ public class DataETProcessor extends DataDstJava {
                     }
                 } else if (fd.isRepeated()) {
                     for (Object arrItem : (ArrayList<?>) curValue) {
+                        if (isUndefinedOrNull(arrItem)) {
+                            continue;
+                        }
                         if (fd.getType() == Type.MESSAGE) {
                             DynamicMessage.Builder subMsgBuild = DynamicMessage.newBuilder(fd.getMessageType());
                             fillMap2Message(fd.getMessageType(), arrItem, subMsgBuild);
@@ -256,11 +393,19 @@ public class DataETProcessor extends DataDstJava {
         }
         if (invocable instanceof Invocable) {
             try {
-                Object ret = invocable.invokeFunction("currentMessageCallback", builder, node.getTypeDescriptor());
+                Object ret;
+                if (scriptEngine instanceof RhinoScriptEngine) {
+                    ret = ((RhinoScriptEngine) scriptEngine).invokeFunction("currentMessageCallback", builder,
+                            node.getTypeDescriptor());
+                } else {
+                    ret = invocable.invokeFunction("currentMessageCallback", builder,
+                            node.getTypeDescriptor());
+                }
                 if (ret instanceof Boolean && ret.equals(false)) {
                     throw new ConvException("Script return " + ret);
                 }
-            } catch (ScriptException | NoSuchMethodException e) {
+            } catch (Exception e) {
+                e.printStackTrace();
                 throw new ConvException(e.getMessage());
             }
         }

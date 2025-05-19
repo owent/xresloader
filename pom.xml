@@ -293,6 +293,7 @@
             <version>15.6</version>
         </dependency>
 
+        <!--
         <dependency>
             <groupId>org.mozilla</groupId>
             <artifactId>rhino</artifactId>
@@ -303,6 +304,7 @@
             <artifactId>rhino-engine</artifactId>
             <version>${rhino.version}</version>
         </dependency>
+        -->
 
         <dependency>
             <groupId>org.junit.jupiter</groupId>

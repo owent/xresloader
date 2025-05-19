@@ -19,7 +19,7 @@ import javax.script.Bindings;
 import java.util.function.Predicate;
 
 import org.openjdk.nashorn.internal.runtime.Undefined;
-import org.mozilla.javascript.engine.RhinoScriptEngine;
+//import org.mozilla.javascript.engine.RhinoScriptEngine;
 import org.apache.commons.io.IOUtils;
 import org.xresloader.core.ProgramOptions;
 import org.xresloader.core.data.dst.DataDstJava;
@@ -67,6 +67,9 @@ public class DataETProcessor extends DataDstJava {
         }
 
         if (scriptEngine == null) {
+            ProgramOptions.getLoger().warn(
+                    "Failed to load org.openjdk.nashorn from ScriptEngineManager(classpath=%s), try to call NashornScriptEngineFactory directly",
+                    System.getProperty("java.class.path"));
             scriptEngine = new org.openjdk.nashorn.api.scripting.NashornScriptEngineFactory().getScriptEngine();
         }
 
@@ -76,64 +79,67 @@ public class DataETProcessor extends DataDstJava {
         }
     }
 
-    private void initRhinoEngine(SimpleScriptContext sc) throws ScriptException {
-        Bindings scope = sc.getBindings(ScriptContext.ENGINE_SCOPE);
-        String loadFunc = "function load(file) { " +
-                "  var FileReader = java.io.FileReader;" +
-                "  var BufferedReader = java.io.BufferedReader;" +
-                "  var reader = new BufferedReader(new FileReader(file));" +
-                "  var line;" +
-                "  var script = '';" +
-                "  while ((line = reader.readLine()) !== null) { script += line + '\\n'; }" +
-                "  reader.close();" +
-                "  eval(script);" +
-                "};" +
-                "var global = this;";
-
-        scriptEngine.eval(loadFunc, scope);
-
-        scope.put("__moduleCache", new org.mozilla.javascript.NativeObject());
-        scope.put("__basePath", ProgramOptions.getInstance().dataSourceDirectory);
-        // new java.io.File().exists()
-
-        // 注入简化版的require函数
-        String simpleRequire = "function require(modulePath) {\n" +
-                "    // 解析完整路径\n" +
-                "    if (!modulePath.endsWith('.js')) modulePath += '.js';\n" +
-                "    var fullPath = modulePath;\n" +
-                "    for(var __i in __basePath) {\n" +
-                "      var f = new java.io.File(__basePath[__i], modulePath);\n" +
-                "      if (f.exists()) {\n" +
-                "        fullPath = f.getCanonicalPath();\n" +
-                "        break;\n" +
-                "      }\n" +
-                "    }\n" +
-                "    \n" +
-                "    // 检查缓存\n" +
-                "    if (__moduleCache[fullPath]) return __moduleCache[fullPath].exports;\n" +
-                "    \n" +
-                "    // 创建模块\n" +
-                "    var module = { exports: {} };\n" +
-                "    __moduleCache[fullPath] = module;\n" +
-                "    \n" +
-                "    // 读取模块内容\n" +
-                "    var content = '';\n" +
-                "    var reader = new java.io.FileReader(fullPath);\n" +
-                "    var buffer = new java.io.BufferedReader(reader);\n" +
-                "    var line;\n" +
-                "    while ((line = buffer.readLine()) !== null) content += line + '\\n';\n" +
-                "    buffer.close();\n" +
-                "    \n" +
-                "    // 执行模块代码\n" +
-                "    var dirName = new java.io.File(fullPath).getParent();\n" +
-                "    var wrapper = new Function('exports', 'require', 'module', '__dirname', '__filename', content);\n"
-                +
-                "    wrapper(module.exports, require, module, dirName, fullPath);\n" +
-                "    \n" +
-                "    return module.exports;\n" +
-                "}";
-        scriptEngine.eval(simpleRequire, scope);
-    }
+    /**
+     * private void initRhinoEngine(SimpleScriptContext sc) throws ScriptException {
+     * Bindings scope = sc.getBindings(ScriptContext.ENGINE_SCOPE);
+     * String loadFunc = "function load(file) { " +
+     * " var FileReader = java.io.FileReader;" +
+     * " var BufferedReader = java.io.BufferedReader;" +
+     * " var reader = new BufferedReader(new FileReader(file));" +
+     * " var line;" +
+     * " var script = '';" +
+     * " while ((line = reader.readLine()) !== null) { script += line + '\\n'; }" +
+     * " reader.close();" +
+     * " eval(script);" +
+     * "};" +
+     * "var global = this;";
+     * 
+     * scriptEngine.eval(loadFunc, scope);
+     * 
+     * scope.put("__moduleCache", new org.mozilla.javascript.NativeObject());
+     * scope.put("__basePath", ProgramOptions.getInstance().dataSourceDirectory);
+     * // new java.io.File().exists()
+     * 
+     * // 注入简化版的require函数
+     * String simpleRequire = "function require(modulePath) {\n" +
+     * " // 解析完整路径\n" +
+     * " if (!modulePath.endsWith('.js')) modulePath += '.js';\n" +
+     * " var fullPath = modulePath;\n" +
+     * " for(var __i in __basePath) {\n" +
+     * " var f = new java.io.File(__basePath[__i], modulePath);\n" +
+     * " if (f.exists()) {\n" +
+     * " fullPath = f.getCanonicalPath();\n" +
+     * " break;\n" +
+     * " }\n" +
+     * " }\n" +
+     * " \n" +
+     * " // 检查缓存\n" +
+     * " if (__moduleCache[fullPath]) return __moduleCache[fullPath].exports;\n" +
+     * " \n" +
+     * " // 创建模块\n" +
+     * " var module = { exports: {} };\n" +
+     * " __moduleCache[fullPath] = module;\n" +
+     * " \n" +
+     * " // 读取模块内容\n" +
+     * " var content = '';\n" +
+     * " var reader = new java.io.FileReader(fullPath);\n" +
+     * " var buffer = new java.io.BufferedReader(reader);\n" +
+     * " var line;\n" +
+     * " while ((line = buffer.readLine()) !== null) content += line + '\\n';\n" +
+     * " buffer.close();\n" +
+     * " \n" +
+     * " // 执行模块代码\n" +
+     * " var dirName = new java.io.File(fullPath).getParent();\n" +
+     * " var wrapper = new Function('exports', 'require', 'module', '__dirname',
+     * '__filename', content);\n"
+     * +
+     * " wrapper(module.exports, require, module, dirName, fullPath);\n" +
+     * " \n" +
+     * " return module.exports;\n" +
+     * "}";
+     * scriptEngine.eval(simpleRequire, scope);
+     * }
+     **/
 
     public void reset() throws ConvException {
         // boolean engineInitSucceed = false;
@@ -154,9 +160,9 @@ public class DataETProcessor extends DataDstJava {
                         "UTF-8");
 
                 scriptEngine.eval("var global = global || this;", scope);
-                if (scriptEngine instanceof RhinoScriptEngine) {
-                    initRhinoEngine(sc);
-                }
+                // if (scriptEngine instanceof RhinoScriptEngine) {
+                // initRhinoEngine(sc);
+                // }
 
                 scriptEngine.eval(bootStrapCodes, scope);
                 if (undefinedObject == null) {
@@ -175,9 +181,11 @@ public class DataETProcessor extends DataDstJava {
 
     public void initNextTable() throws ConvException {
         try {
-            if (scriptEngine instanceof RhinoScriptEngine) {
-                ((RhinoScriptEngine) scriptEngine).invokeFunction("initDataSource");
-            } else if (invocable != null) {
+            // if (scriptEngine instanceof RhinoScriptEngine) {
+            // ((RhinoScriptEngine) scriptEngine).invokeFunction("initDataSource");
+            // return;
+            // }
+            if (invocable != null) {
                 invocable.invokeFunction("initDataSource");
             }
         } catch (Exception e) {
@@ -403,13 +411,14 @@ public class DataETProcessor extends DataDstJava {
         if (invocable instanceof Invocable) {
             try {
                 Object ret;
-                if (scriptEngine instanceof RhinoScriptEngine) {
-                    ret = ((RhinoScriptEngine) scriptEngine).invokeFunction("currentMessageCallback", builder,
-                            node.getTypeDescriptor());
-                } else {
-                    ret = invocable.invokeFunction("currentMessageCallback", builder,
-                            node.getTypeDescriptor());
-                }
+                // if (scriptEngine instanceof RhinoScriptEngine) {
+                // ret = ((RhinoScriptEngine)
+                // scriptEngine).invokeFunction("currentMessageCallback", builder,
+                // node.getTypeDescriptor());
+                // } else {
+                ret = invocable.invokeFunction("currentMessageCallback", builder,
+                        node.getTypeDescriptor());
+                // }
                 if (ret instanceof Boolean && ret.equals(false)) {
                     throw new ConvException("Script return " + ret);
                 }

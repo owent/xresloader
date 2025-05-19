@@ -49,7 +49,7 @@ public class DataETProcessor extends DataDstJava {
 
     private DataETProcessor() throws ConvException {
         ScriptEngineManager mgr = new ScriptEngineManager();
-        for (String name : new String[] { "nashorn", "rhino", "javascript", "js", "JavaScript", "graal.js" }) {
+        for (String name : new String[] { "nashorn", "javascript", "js", "JavaScript", "rhino", "graal.js" }) {
             if (scriptEngine != null) {
                 break;
             }
@@ -64,6 +64,15 @@ public class DataETProcessor extends DataDstJava {
                 bindings.put("polyglot.js.allowHostClassLoading", true);
                 bindings.put("polyglot.js.allowAllAccess", true);
             }
+        }
+
+        if (scriptEngine == null) {
+            scriptEngine = new org.openjdk.nashorn.api.scripting.NashornScriptEngineFactory().getScriptEngine();
+        }
+
+        if (scriptEngine == null) {
+            ProgramOptions.getLoger().warn(
+                    "Failed to initialize script engine(nashorn,javascript,rhino,graal.js), script plugin will not be available");
         }
     }
 

@@ -18,8 +18,6 @@ import javax.script.Bindings;
 
 import java.util.function.Predicate;
 
-import org.openjdk.nashorn.internal.runtime.Undefined;
-//import org.mozilla.javascript.engine.RhinoScriptEngine;
 import org.apache.commons.io.IOUtils;
 import org.xresloader.core.ProgramOptions;
 import org.xresloader.core.data.dst.DataDstJava;
@@ -46,6 +44,7 @@ public class DataETProcessor extends DataDstJava {
     private String lastDataSourceTable = "";
     private String lastOutputFile = "";
     private Object undefinedObject = null;
+    private Class<?> undefinedClass = null;
 
     private DataETProcessor() throws ConvException {
         ScriptEngineManager mgr = new ScriptEngineManager();
@@ -171,6 +170,23 @@ public class DataETProcessor extends DataDstJava {
 
                 invocable = (Invocable) scriptEngine;
             }
+
+            if (undefinedClass == null) {
+                try {
+                    undefinedClass = Class.forName("org.openjdk.nashorn.internal.runtime.Undefined");
+                } catch (ClassNotFoundException _e) {
+                    // Ignore exception
+                }
+
+                if (undefinedClass == null) {
+                    try {
+                        undefinedClass = Class.forName("jdk.nashorn.internal.runtime.Undefined");
+                    } catch (ClassNotFoundException _e) {
+                        // Ignore exception
+                    }
+                }
+            }
+
         } catch (ScriptException e) {
             e.printStackTrace();
             throw new ConvException(e.getMessage());
@@ -303,8 +319,10 @@ public class DataETProcessor extends DataDstJava {
             }
         }
 
-        if (obj instanceof Undefined) {
-            return true;
+        if (undefinedClass != null) {
+            if (undefinedClass.isInstance(obj)) {
+                return true;
+            }
         }
 
         return false;

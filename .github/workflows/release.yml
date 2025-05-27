@@ -38,7 +38,19 @@ jobs:
           python3 gen_header_v2.py
           python3 gen_header_v3.py
           cd ..
+          mkdir -p target/package
+          mvn -Dproject.target.javaVersion=11 package --file pom.xml
+          for JAR_FILE in target/*.jar; do
+            if [[ -e "$JAR_FILE" ]]; then
+              JAR_BASENAME=$(basename "$JAR_FILE")
+              mv "$JAR_FILE" "target/package/${JAR_BASENAME/.jar/-jre11.jar}"
+            fi
+          done
           mvn package --file pom.xml
+          for JAR_FILE in target/*.jar; do
+            mv "$JAR_FILE" "target/package/"
+          done
+
           if [[ -e "target/protocols.zip" ]]; then rm -f "target/protocols.zip"; fi
           if [[ -e "target/tools.zip" ]]; then rm -f "target/tools.zip"; fi
           mkdir target/protocols
@@ -49,7 +61,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          file: "target/protocols.zip;target/tools.zip;target/*.jar"
+          file: "target/protocols.zip;target/tools.zip;target/package/*.jar"
           tags: true
           draft: true
           overwrite: true

@@ -32,6 +32,7 @@ jobs:
           host=cnb.cool
           username=$CNB_TOOL_USER
           password=$CNB_TOOL_TOKEN" | git credential-store --file $GIT_CREDENTIAL_FILE store
+          git config --global lfs.https://cnb.cool/xresloader/xresloader.git/info/lfs.locksverify true
       - name: Sync branch or tags
         shell: bash
         if: ${{ github.event_name == 'push' }}

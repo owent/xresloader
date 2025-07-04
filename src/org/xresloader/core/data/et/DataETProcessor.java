@@ -16,8 +16,6 @@ import javax.script.ScriptEngineManager;
 import javax.script.ScriptEngine;
 import javax.script.Bindings;
 
-import java.util.function.Predicate;
-
 import org.apache.commons.io.IOUtils;
 import org.xresloader.core.ProgramOptions;
 import org.xresloader.core.data.dst.DataDstJava;
@@ -44,25 +42,39 @@ public class DataETProcessor extends DataDstJava {
     private String lastDataSourceTable = "";
     private String lastOutputFile = "";
     private Object undefinedObject = null;
-    private Class<?> undefinedClass = null;
+    private Class<?> undefinedClass11 = null;
+    private Class<?> undefinedClass17 = null;
+
+    static {
+        // System.setProperty("polyglot.js.allowAllAccess", "true");
+        // System.setProperty("polyglot.js.allowIO", "true");
+        // System.setProperty("polyglot.js.allowHostAccess", "true");
+        // System.setProperty("polyglot.js.allowNativeAccess", "true");
+        // System.setProperty("polyglot.js.allowHostClassLoading", "true");
+        // System.setProperty("polyglot.engine.WarnInterpreterOnly", "false");
+    }
 
     private DataETProcessor() throws ConvException {
-        ScriptEngineManager mgr = new ScriptEngineManager();
+        ScriptEngineManager mgr = new ScriptEngineManager(
+                Thread.currentThread().getContextClassLoader());
         for (String name : new String[] { "nashorn", "javascript", "js", "JavaScript", "rhino", "graal.js" }) {
             if (scriptEngine != null) {
                 break;
             }
             scriptEngine = mgr.getEngineByName(name);
 
-            if (scriptEngine != null && name.equals("graal.js")) {
-                Bindings bindings = scriptEngine.getBindings(ScriptContext.ENGINE_SCOPE);
-                bindings.put("polyglot.js.allowHostAccess", true);
-                bindings.put("polyglot.js.allowNativeAccess", true);
-                bindings.put("polyglot.js.allowIO", true);
-                bindings.put("polyglot.js.allowHostClassLookup", (Predicate<String>) s -> true);
-                bindings.put("polyglot.js.allowHostClassLoading", true);
-                bindings.put("polyglot.js.allowAllAccess", true);
-            }
+            /**
+             * if (scriptEngine != null && name.equals("graal.js")) {
+             * Bindings bindings = scriptEngine.getBindings(ScriptContext.ENGINE_SCOPE);
+             * bindings.put("polyglot.js.allowHostAccess", true);
+             * bindings.put("polyglot.js.allowNativeAccess", true);
+             * bindings.put("polyglot.js.allowIO", true);
+             * bindings.put("polyglot.js.allowHostClassLookup", (Predicate<String>) s ->
+             * true);
+             * bindings.put("polyglot.js.allowHostClassLoading", true);
+             * bindings.put("polyglot.js.allowAllAccess", true);
+             * }
+             **/
         }
 
         if (scriptEngine == null) {
@@ -171,19 +183,18 @@ public class DataETProcessor extends DataDstJava {
                 invocable = (Invocable) scriptEngine;
             }
 
-            if (undefinedClass == null) {
+            if (undefinedClass17 == null) {
                 try {
-                    undefinedClass = Class.forName("org.openjdk.nashorn.internal.runtime.Undefined");
+                    undefinedClass17 = Class.forName("org.openjdk.nashorn.internal.runtime.Undefined");
                 } catch (ClassNotFoundException _e) {
                     // Ignore exception
                 }
-
-                if (undefinedClass == null) {
-                    try {
-                        undefinedClass = Class.forName("jdk.nashorn.internal.runtime.Undefined");
-                    } catch (ClassNotFoundException _e) {
-                        // Ignore exception
-                    }
+            }
+            if (undefinedClass11 == null) {
+                try {
+                    undefinedClass11 = Class.forName("jdk.nashorn.internal.runtime.Undefined");
+                } catch (ClassNotFoundException _e) {
+                    // Ignore exception
                 }
             }
 
@@ -319,8 +330,14 @@ public class DataETProcessor extends DataDstJava {
             }
         }
 
-        if (undefinedClass != null) {
-            if (undefinedClass.isInstance(obj)) {
+        if (undefinedClass17 != null) {
+            if (undefinedClass17.isInstance(obj)) {
+                return true;
+            }
+        }
+
+        if (undefinedClass11 != null) {
+            if (undefinedClass11.isInstance(obj)) {
                 return true;
             }
         }

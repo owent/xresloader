@@ -74,6 +74,7 @@ public class ProgramOptions {
     public boolean enableDataValidator = true;
     public int dataValidatorNoErrorVersion = 0;
     public String[] ignoreFieldTags = null;
+    public String defaultFieldSeparator = ",;|";
 
     public String protoDumpFile = "";
     public ProtoDumpType protoDumpType = ProtoDumpType.NONE;
@@ -134,6 +135,7 @@ public class ProgramOptions {
         enableDataValidator = true;
         dataValidatorNoErrorVersion = 0;
         ignoreFieldTags = null;
+        defaultFieldSeparator = ",;|";
 
         protoDumpFile = "";
         protoDumpType = ProtoDumpType.NONE;
@@ -262,6 +264,11 @@ public class ProgramOptions {
                 .hasArg().argName("VERSION NUMBER").build());
         options.addOption(Option.builder().longOpt("ignore-field-tags")
                 .desc("ignore data and only dump the default value of specify field tags.").hasArg().argName("TAG")
+                .build());
+        options.addOption(Option.builder().longOpt("default-field-separator")
+                .desc(String.format("set default field separator(default: %s)", getInstance().defaultFieldSeparator))
+                .hasArg()
+                .argName("SEPARATOR")
                 .build());
         options.addOption(Option.builder().longOpt("data-source-lru-cache-rows")
                 .desc("set row number for LRU cache").hasArg().argName("NUMBER").build());
@@ -581,6 +588,16 @@ public class ProgramOptions {
 
         // ignore field tags
         ignoreFieldTags = cmd.getOptionValues("ignore-field-tags");
+
+        // default separator
+        if (cmd.hasOption("default-field-separator")) {
+            // 允许使用space \t \r \n, 不要trim
+            defaultFieldSeparator = cmd.getOptionValue("default-field-separator", defaultFieldSeparator);
+            if (defaultFieldSeparator.isEmpty()) {
+                ProgramOptions.getLoger().error("Invalid default field separator %s", defaultFieldSeparator);
+                return -3;
+            }
+        }
 
         return 0;
     }

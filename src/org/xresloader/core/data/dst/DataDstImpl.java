@@ -264,7 +264,7 @@ public abstract class DataDstImpl {
 
     static public String[] splitPlainGroups(String input, String sep) {
         if (sep == null || sep.isEmpty()) {
-            sep = ",;|";
+            sep = ProgramOptions.getInstance().defaultFieldSeparator;
         }
 
         if (input == null || input.isEmpty()) {

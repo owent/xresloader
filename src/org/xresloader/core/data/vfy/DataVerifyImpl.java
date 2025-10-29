@@ -488,8 +488,8 @@ public abstract class DataVerifyImpl {
                         }
                         return value;
                     }
-                    if (verify_cache.value instanceof Long l) {
-                        return (l).toString();
+                    if (verify_cache.value instanceof Long) {
+                        return verify_cache.value.toString();
                     }
                     return verify_cache.value.toString();
                 }

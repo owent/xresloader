@@ -271,8 +271,8 @@ public abstract class DataVerifyCustomRule extends DataVerifyImpl {
                     int version = 0;
                     Object versionObj = ((Map<?, ?>) ruleObject).get("version");
                     if (versionObj != null) {
-                        if (versionObj instanceof Integer integer) {
-                            version = integer;
+                        if (versionObj instanceof Integer) {
+                            version = (Integer) versionObj;
                         } else if (versionObj instanceof String string) {
                             try {
                                 version = Integer.parseInt(string);
@@ -280,7 +280,7 @@ public abstract class DataVerifyCustomRule extends DataVerifyImpl {
                                 ProgramOptions.getLoger().warn(
                                         "Load custom validator file \"%s\" with invalid version \"%s\", we will use 0.",
                                         filePath,
-                                        string);
+                                        versionObj);
                             }
                         } else {
                             ProgramOptions.getLoger().warn(

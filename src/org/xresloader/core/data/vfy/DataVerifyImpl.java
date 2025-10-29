@@ -400,11 +400,11 @@ public abstract class DataVerifyImpl {
                         if (verify_cache.value == null) {
                             return 0;
                         }
-                        if (verify_cache.value instanceof Double d) {
-                            return d;
+                        if (verify_cache.value instanceof Double) {
+                            return (Double) verify_cache.value;
                         }
-                        if (verify_cache.value instanceof Long l) {
-                            return l;
+                        if (verify_cache.value instanceof Long) {
+                            return (Long) verify_cache.value;
                         }
                         if (is_double) {
                             return Double.valueOf(doubleValueOf(verify_cache.value.toString()));

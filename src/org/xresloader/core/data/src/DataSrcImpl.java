@@ -1,13 +1,13 @@
 package org.xresloader.core.data.src;
 
-import org.xresloader.core.ProgramOptions;
-import org.xresloader.core.data.err.ConvException;
-import org.xresloader.core.engine.IdentifyDescriptor;
-
 import java.io.File;
 import java.lang.reflect.InvocationTargetException;
 import java.util.HashMap;
 import java.util.LinkedList;
+
+import org.xresloader.core.ProgramOptions;
+import org.xresloader.core.data.err.ConvException;
+import org.xresloader.core.engine.IdentifyDescriptor;
 
 /**
  * Created by owentou on 2014/10/9.
@@ -58,17 +58,8 @@ public abstract class DataSrcImpl {
             // return ourInstance = (DataSrcImpl) clazz.newInstance();
             ourInstance.set((DataSrcImpl) clazz.getDeclaredConstructor().newInstance());
             return ourInstance.get();
-        } catch (InstantiationException e) {
-            e.printStackTrace();
-        } catch (IllegalAccessException e) {
-            e.printStackTrace();
-        } catch (IllegalArgumentException e) {
-            e.printStackTrace();
-        } catch (InvocationTargetException e) {
-            e.printStackTrace();
-        } catch (NoSuchMethodException e) {
-            e.printStackTrace();
-        } catch (SecurityException e) {
+        } catch (InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException
+                | NoSuchMethodException | SecurityException e) {
             e.printStackTrace();
         }
 

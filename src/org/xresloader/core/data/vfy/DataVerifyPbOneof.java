@@ -37,7 +37,7 @@ public class DataVerifyPbOneof extends DataVerifyImpl {
         int oneof_index = -1;
         int check_index = 0;
         for (DescriptorProtos.OneofDescriptorProto fd : msgDesc.getOneofDeclList()) {
-            if (fd == desc || fd.getName() == desc.getName()) {
+            if (fd == desc || fd.getName().equals(desc.getName())) {
                 oneof_index = check_index;
                 break;
             }
@@ -67,5 +67,10 @@ public class DataVerifyPbOneof extends DataVerifyImpl {
                 }
             }
         }
+    }
+
+    @Override
+    public boolean isValid() {
+        return true;
     }
 }

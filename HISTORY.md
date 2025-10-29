@@ -7,6 +7,10 @@
 1. 修复Javascript插件Patch完数据后转回去可能类型错误的问题。
 2. 引入 `org.openjdk.nashorn` 和 `org.mozilla.rhino` 包，解决JDK 17以上没有javascript引擎的问题。
 3. 增加 `--default-field-separator` 选项允许设置Plain模式解析分隔符的默认值。
+4. 增加 `And("子验证器", ...)` 验证器
+5. 增加 `Or("子验证器", ...)` 验证器
+6. 修复一些兼容性问题
+7. 优化依赖库管理，更新依赖库
 
 ###
 

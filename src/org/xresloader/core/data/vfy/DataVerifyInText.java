@@ -41,6 +41,7 @@ public class DataVerifyInText extends DataVerifyImpl {
         this.valid = true;
     }
 
+    @Override
     public boolean isValid() {
         return this.valid;
     }

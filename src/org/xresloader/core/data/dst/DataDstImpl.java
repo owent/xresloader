@@ -3,14 +3,14 @@ package org.xresloader.core.data.dst;
 import java.io.IOException;
 import java.time.DateTimeException;
 import java.time.Instant;
-import java.time.ZoneId;
-import java.time.ZoneOffset;
-import java.time.ZonedDateTime;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.OffsetDateTime;
 import java.time.OffsetTime;
+import java.time.ZoneId;
+import java.time.ZoneOffset;
+import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeFormatterBuilder;
 import java.time.format.DateTimeParseException;
@@ -20,14 +20,14 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.regex.Pattern;
 
+import org.json.JSONObject;
+import org.xresloader.core.ProgramOptions;
 import org.xresloader.core.data.dst.DataDstWriterNode.JAVA_TYPE;
 import org.xresloader.core.data.err.ConvException;
 import org.xresloader.core.data.src.DataSrcImpl;
 import org.xresloader.core.data.vfy.DataVerifyImpl;
 import org.xresloader.core.engine.ExcelEngine;
 import org.xresloader.core.engine.IdentifyDescriptor;
-import org.json.JSONObject;
-import org.xresloader.core.ProgramOptions;
 
 /**
  * Created by owentou on 2014/10/10.
@@ -81,7 +81,7 @@ public abstract class DataDstImpl {
 
             String identString = "\n" + " ".repeat(ident);
 
-            StringBuffer sb = new StringBuffer();
+            StringBuilder sb = new StringBuilder();
             for (String reason : this.ignore) {
                 sb.append(identString);
                 sb.append(reason);
@@ -163,7 +163,7 @@ public abstract class DataDstImpl {
         }
 
         public String checkUnique() {
-            StringBuffer sb = new StringBuffer();
+            StringBuilder sb = new StringBuilder();
             for (var tagSet : this.uniqueCache.entrySet()) {
                 for (var rowSet : tagSet.getValue().entrySet()) {
                     if (rowSet.getValue().size() <= 1) {
@@ -550,11 +550,11 @@ public abstract class DataDstImpl {
             try {
                 int dot = item.indexOf('.');
                 if (dot >= 0) {
-                    Long sec = Long.parseLong(item.substring(0, dot));
+                    long sec = Long.parseLong(item.substring(0, dot));
                     Double nanos = Double.parseDouble(item.substring(dot)) * 1000000000;
                     return Instant.ofEpochSecond(sec).plusNanos(nanos.longValue());
                 } else {
-                    Long sec = Long.parseLong(item);
+                    long sec = Long.parseLong(item);
                     return Instant.ofEpochSecond(sec);
                 }
             } catch (NumberFormatException e) {
@@ -631,8 +631,7 @@ public abstract class DataDstImpl {
             select = DataVerifyImpl.getAndVerifyToLong(ident.getValidator(), ident.name, item);
         } else {
             try {
-                select = Long
-                        .valueOf(DataVerifyImpl.getAndVerifyToLong(oneof.getValidator(), "[PLAIN TEXT]", item.trim()));
+                select = DataVerifyImpl.getAndVerifyToLong(oneof.getValidator(), "[PLAIN TEXT]", item.trim());
             } catch (java.lang.NumberFormatException e) {
                 throw new ConvException(String.format("Try to convert %s to oneof case failed.", input));
             }

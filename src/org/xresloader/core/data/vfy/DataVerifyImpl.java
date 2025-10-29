@@ -30,8 +30,8 @@ public abstract class DataVerifyImpl {
         }
     }
 
-    protected HashMap<String, Long> all_names = new HashMap<String, Long>();
-    protected HashSet<Long> all_numbers = new HashSet<Long>();
+    protected HashMap<String, Long> all_names = new HashMap<>();
+    protected HashSet<Long> all_numbers = new HashSet<>();
     protected String name = "";
 
     private static ThreadLocal<Pattern> PERCENT_PATTERN = ThreadLocal
@@ -50,6 +50,8 @@ public abstract class DataVerifyImpl {
     public int getVersion() {
         return 0;
     }
+
+    abstract public boolean isValid();
 
     public boolean get(double number, DataVerifyResult res) {
         // 0 值永久有效
@@ -97,9 +99,9 @@ public abstract class DataVerifyImpl {
 
         Matcher matcher = PERCENT_PATTERN.get().matcher(input);
         if (matcher.matches()) {
-            return Double.valueOf(matcher.group(1).trim()) / 100.0;
+            return Double.parseDouble(matcher.group(1).trim()) / 100.0;
         }
-        return Double.valueOf(input);
+        return Double.parseDouble(input);
     }
 
     private static long longValueOf(String input) throws NumberFormatException {
@@ -113,13 +115,13 @@ public abstract class DataVerifyImpl {
 
         Matcher matcher = PERCENT_PATTERN.get().matcher(input);
         if (matcher.matches()) {
-            ret = Long.valueOf(matcher.group(1).trim());
+            ret = Long.parseLong(matcher.group(1).trim());
             if (ret % 100 != 0) {
                 throw new NumberFormatException(
                         String.format("The number part of %s can not be devided by 100", input));
             }
         } else {
-            ret = Long.valueOf(input);
+            ret = Long.parseLong(input);
         }
 
         return ret;
@@ -165,6 +167,7 @@ public abstract class DataVerifyImpl {
         return res.success;
     }
 
+    @Override
     public String toString() {
         return name;
     }
@@ -178,7 +181,7 @@ public abstract class DataVerifyImpl {
     }
 
     static public String collectValidatorNames(List<DataVerifyImpl> verifyEngine) {
-        StringBuffer sb = new StringBuffer();
+        StringBuilder sb = new StringBuilder();
         for (DataVerifyImpl vfy : verifyEngine) {
             if (sb.length() > 0) {
                 sb.append("|");
@@ -366,7 +369,7 @@ public abstract class DataVerifyImpl {
             is_double = true;
         }
         if (!is_double && is_numeric) {
-            Double test_range = Double.valueOf(doubleValueOf(val));
+            double test_range = doubleValueOf(val);
             if (test_range > Long.MAX_VALUE || test_range < Long.MIN_VALUE) {
                 is_double = true;
             }
@@ -397,11 +400,11 @@ public abstract class DataVerifyImpl {
                         if (verify_cache.value == null) {
                             return 0;
                         }
-                        if (verify_cache.value instanceof Double) {
-                            return (Double) verify_cache.value;
+                        if (verify_cache.value instanceof Double d) {
+                            return d;
                         }
-                        if (verify_cache.value instanceof Long) {
-                            return (Long) verify_cache.value;
+                        if (verify_cache.value instanceof Long l) {
+                            return l;
                         }
                         if (is_double) {
                             return Double.valueOf(doubleValueOf(verify_cache.value.toString()));
@@ -485,8 +488,8 @@ public abstract class DataVerifyImpl {
                         }
                         return value;
                     }
-                    if (verify_cache.value instanceof Long) {
-                        return ((Long) verify_cache.value).toString();
+                    if (verify_cache.value instanceof Long l) {
+                        return (l).toString();
                     }
                     return verify_cache.value.toString();
                 }
@@ -503,7 +506,7 @@ public abstract class DataVerifyImpl {
         }
 
         String message;
-        if (verifyEngine == null || verifyEngine.isEmpty()) {
+        if (verifyEngine.isEmpty()) {
             message = String.format("Convert %s for %s failed, check data failed.", val,
                     path);
         } else {
@@ -549,13 +552,13 @@ public abstract class DataVerifyImpl {
 
     static public class ValidatorTokens {
         public String name = "";
-        public ArrayList<String> parameters = new ArrayList<String>();
+        public ArrayList<String> parameters = new ArrayList<>();
 
         public ValidatorTokens() {
         }
 
         public boolean initialize() {
-            if (this.parameters.size() == 0) {
+            if (this.parameters.isEmpty()) {
                 return false;
             }
 
@@ -611,7 +614,7 @@ public abstract class DataVerifyImpl {
             return null;
         }
 
-        LinkedList<ValidatorTokens> ret = new LinkedList<ValidatorTokens>();
+        LinkedList<ValidatorTokens> ret = new LinkedList<>();
         int start = 0;
         int end = 0;
         char stringMark = 0;

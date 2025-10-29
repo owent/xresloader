@@ -12,7 +12,7 @@ return {
     },
     data_ver = "1.0.0.0",
     hash_code = "sha256:bef5c76679b43b65aec7906f42010530fadae99f0e386d94e3a77e94a7d12e8e",
-    xres_ver = "2.21.0",
+    xres_ver = "2.21.0-previous",
   },
   [2] = "keep_or_strip_empty_list_cfg",
   keep_or_strip_empty_list_cfg = {

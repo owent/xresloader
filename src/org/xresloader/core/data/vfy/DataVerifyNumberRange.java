@@ -7,7 +7,7 @@ public class DataVerifyNumberRange extends DataVerifyImpl {
     private Number upperBound = 0.0;
 
     private static Number parseLowerBound(String value, boolean include) throws NumberFormatException {
-        double bound = Double.valueOf(value).doubleValue();
+        Double bound = Double.valueOf(value);
         boolean is_double = false;
         if (value.indexOf('.') >= 0) {
             is_double = true;
@@ -18,12 +18,12 @@ public class DataVerifyNumberRange extends DataVerifyImpl {
         if (is_double) {
             return include ? bound - Math.ulp(bound) : bound + Math.ulp(bound);
         } else {
-            return include ? Long.valueOf(value) : Long.valueOf(value) + 1;
+            return include ? Long.valueOf(value) : Long.valueOf(Long.parseLong(value) + 1);
         }
     }
 
     private static Number parseUpperBound(String value, boolean include) throws NumberFormatException {
-        double bound = Double.valueOf(value).doubleValue();
+        Double bound = Double.valueOf(value);
         boolean is_double = false;
         if (value.indexOf('.') >= 0) {
             is_double = true;
@@ -34,7 +34,7 @@ public class DataVerifyNumberRange extends DataVerifyImpl {
         if (is_double) {
             return include ? bound + Math.ulp(bound) : bound - Math.ulp(bound);
         } else {
-            return include ? Long.valueOf(value) : Long.valueOf(value) - 1;
+            return include ? Long.valueOf(value) : Long.valueOf(Long.parseLong(value) - 1);
         }
     }
 
@@ -100,11 +100,12 @@ public class DataVerifyNumberRange extends DataVerifyImpl {
         }
     }
 
+    @Override
     public boolean isValid() {
         if (upperBound instanceof Double || lowerBound instanceof Double) {
-            return upperBound.doubleValue() > lowerBound.doubleValue();
+            return upperBound.doubleValue() >= lowerBound.doubleValue();
         }
-        return upperBound.longValue() > lowerBound.longValue();
+        return upperBound.longValue() >= lowerBound.longValue();
     }
 
     @Override
@@ -183,9 +184,9 @@ public class DataVerifyNumberRange extends DataVerifyImpl {
 
         if (is_numeric) {
             if (is_double) {
-                return get(Double.valueOf(intstr), res);
+                return get(Double.parseDouble(intstr), res);
             } else {
-                return get(Long.valueOf(intstr), res);
+                return get(Long.parseLong(intstr), res);
             }
         }
 

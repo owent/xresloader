@@ -2,6 +2,7 @@ package org.xresloader.core.data.dst;
 
 import com.google.protobuf.*;
 import com.google.protobuf.Descriptors.FieldDescriptor.JavaType;
+
 import org.apache.commons.codec.binary.Hex;
 import org.xresloader.Xresloader;
 import org.xresloader.core.ProgramOptions;
@@ -29,6 +30,7 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.time.Instant;
 import java.util.*;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 
 import static com.google.protobuf.Descriptors.FieldDescriptor.JavaType.MESSAGE;
@@ -831,6 +833,23 @@ public class DataDstPb extends DataDstImpl {
         return ret;
     }
 
+    static private HashMap<String, Function<DataVerifyImpl.ValidatorTokens, DataVerifyImpl>> initFuncValidatorCreator() {
+        HashMap<String, Function<DataVerifyImpl.ValidatorTokens, DataVerifyImpl>> funcMap = new HashMap<>();
+
+        funcMap.put("intext", (ruleObject) -> new DataVerifyInText(ruleObject));
+        funcMap.put("intablecolumn", (ruleObject) -> new DataVerifyInTableColumn(ruleObject));
+        funcMap.put("inmacrotable", (ruleObject) -> new DataVerifyInMacroTable(ruleObject));
+        funcMap.put("regex", (ruleObject) -> new DataVerifyRegex(ruleObject));
+        funcMap.put("and", (ruleObject) -> new DataVerifyCustomAndRule(ruleObject.name,
+                new ArrayList<>(ruleObject.parameters.subList(1, ruleObject.parameters.size())), null, 0));
+        funcMap.put("or", (ruleObject) -> new DataVerifyCustomOrRule(ruleObject.name,
+                new ArrayList<>(ruleObject.parameters.subList(1, ruleObject.parameters.size())), null, 0));
+
+        return funcMap;
+    }
+
+    private static final HashMap<String, Function<DataVerifyImpl.ValidatorTokens, DataVerifyImpl>> funcValidatorCreator = initFuncValidatorCreator();
+
     static private DataVerifyImpl createValidator(DataVerifyImpl.ValidatorTokens ruleObject) {
         if (ruleObject == null) {
             return null;
@@ -838,37 +857,24 @@ public class DataDstPb extends DataDstImpl {
 
         // 第一优先级，函数验证器
         if (ruleObject.parameters.size() > 1) {
-            if (ruleObject.parameters.get(0).equalsIgnoreCase("InText")) {
-                DataVerifyInText vfyInText = new DataVerifyInText(ruleObject);
-                if (vfyInText.isValid()) {
-                    return vfyInText;
+            Function<DataVerifyImpl.ValidatorTokens, DataVerifyImpl> creator = null;
+            synchronized (funcValidatorCreator) {
+                String funcName = ruleObject.parameters.get(0).toLowerCase();
+                creator = funcValidatorCreator.get(funcName);
+            }
+
+            if (creator != null) {
+                DataVerifyImpl fnVfy = creator.apply(ruleObject);
+                if (fnVfy != null && fnVfy.isValid()) {
+                    return fnVfy;
                 } else {
-                    ProgramOptions.getLoger().error("Validator %s(DataVerifyInText) is invalid",
-                            ruleObject.name);
+                    ProgramOptions.getLoger().error("Validator %s(%s) is invalid",
+                            ruleObject.name, fnVfy == null ? "UnknownValidator" : fnVfy.getClass().getSimpleName());
                 }
                 return null;
             }
 
-            if (ruleObject.parameters.get(0).equalsIgnoreCase("InTableColumn")) {
-                DataVerifyInTableColumn vfyInTableColumn = new DataVerifyInTableColumn(ruleObject);
-                if (vfyInTableColumn.isValid()) {
-                    return vfyInTableColumn;
-                } else {
-                    ProgramOptions.getLoger().error("Validator %s(DataVerifyInTableColumn) is invalid",
-                            ruleObject.name);
-                }
-                return null;
-            } else if (ruleObject.parameters.get(0).equalsIgnoreCase("InMacroTable")) {
-                DataVerifyInMacroTable vfyInTableColumn = new DataVerifyInMacroTable(ruleObject);
-                if (vfyInTableColumn.isValid()) {
-                    return vfyInTableColumn;
-                } else {
-                    ProgramOptions.getLoger().error("Validator %s(DataVerifyInMacroTable) is invalid",
-                            ruleObject.name);
-                }
-                return null;
-            }
-
+            ProgramOptions.getLoger().error("Unknown function validator %s", ruleObject.name);
             return null;
         }
 

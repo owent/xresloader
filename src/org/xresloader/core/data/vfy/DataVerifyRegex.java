@@ -35,6 +35,7 @@ public class DataVerifyRegex extends DataVerifyImpl {
         }
     }
 
+    @Override
     public boolean isValid() {
         return this.valid;
     }

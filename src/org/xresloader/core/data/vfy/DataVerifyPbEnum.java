@@ -25,4 +25,9 @@ public class DataVerifyPbEnum extends DataVerifyImpl {
             }
         }
     }
+
+    @Override
+    public boolean isValid() {
+        return true;
+    }
 }

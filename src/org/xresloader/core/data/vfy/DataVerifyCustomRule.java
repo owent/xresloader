@@ -12,8 +12,8 @@ import org.snakeyaml.engine.v2.api.LoadSettings;
 import org.xresloader.core.ProgramOptions;
 import org.xresloader.core.data.src.DataSrcImpl;
 
-public class DataVerifyCustomRule extends DataVerifyImpl {
-    private ArrayList<DataVerifyImpl> validators = null;
+public abstract class DataVerifyCustomRule extends DataVerifyImpl {
+    protected ArrayList<DataVerifyImpl> validators = null;
     private ArrayList<String> rules = null;
     private Boolean checkResult = null;
     private boolean checking = false;
@@ -37,6 +37,7 @@ public class DataVerifyCustomRule extends DataVerifyImpl {
         }
     }
 
+    @Override
     public String getDescription() {
         if (this.description != null) {
             return this.description;
@@ -69,6 +70,11 @@ public class DataVerifyCustomRule extends DataVerifyImpl {
         this.versionResult = null;
     }
 
+    @Override
+    public boolean isValid() {
+        return this.rules != null && !this.rules.isEmpty();
+    }
+
     public boolean hasChecked() {
         return this.checkResult != null;
     }
@@ -84,13 +90,13 @@ public class DataVerifyCustomRule extends DataVerifyImpl {
 
         this.checking = true;
         this.checkResult = false;
-        if (this.rules == null || this.rules.size() == 0) {
+        if (this.rules == null || this.rules.isEmpty()) {
             this.checking = false;
             this.checkResult = true;
             return this.checkResult;
         }
 
-        if (this.validators == null || this.validators.size() == 0) {
+        if (this.validators == null || this.validators.isEmpty()) {
             this.checking = false;
             ProgramOptions.getLoger().error("Check custom validator rule %s without setup it", getName());
             return this.checkResult;
@@ -130,7 +136,7 @@ public class DataVerifyCustomRule extends DataVerifyImpl {
     @Override
     public int getVersion() {
         if (this.versionResult != null) {
-            return this.versionResult.intValue();
+            return this.versionResult;
         }
 
         DataVerifyImpl useChild = null;
@@ -155,9 +161,15 @@ public class DataVerifyCustomRule extends DataVerifyImpl {
         return maxVersion;
     }
 
+    public abstract boolean batchGetSubValidators(double number, DataVerifyResult res);
+
+    public abstract boolean batchGetSubValidators(long number, DataVerifyResult res);
+
+    public abstract boolean batchGetSubValidators(String input, DataVerifyResult res);
+
     @Override
     public boolean get(double number, DataVerifyResult res) {
-        if (this.validators == null || this.validators.size() == 0) {
+        if (this.validators == null || this.validators.isEmpty()) {
             res.success = true;
             res.value = number;
             return true;
@@ -168,19 +180,13 @@ public class DataVerifyCustomRule extends DataVerifyImpl {
             return false;
         }
 
-        for (DataVerifyImpl vfy : this.validators) {
-            if (vfy.get(number, res)) {
-                return true;
-            }
-        }
-
-        res.success = false;
-        return false;
+        res.success = this.batchGetSubValidators(number, res);
+        return res.success;
     }
 
     @Override
     public boolean get(long number, DataVerifyResult res) {
-        if (this.validators == null || this.validators.size() == 0) {
+        if (this.validators == null || this.validators.isEmpty()) {
             res.success = true;
             res.value = number;
             return true;
@@ -191,19 +197,13 @@ public class DataVerifyCustomRule extends DataVerifyImpl {
             return false;
         }
 
-        for (DataVerifyImpl vfy : this.validators) {
-            if (vfy.get(number, res)) {
-                return true;
-            }
-        }
-
-        res.success = false;
-        return false;
+        res.success = this.batchGetSubValidators(number, res);
+        return res.success;
     }
 
     @Override
     public boolean get(String input, DataVerifyResult res) throws NumberFormatException {
-        if (this.validators == null || this.validators.size() == 0) {
+        if (this.validators == null || this.validators.isEmpty()) {
             res.success = true;
             res.value = input;
             return true;
@@ -214,14 +214,8 @@ public class DataVerifyCustomRule extends DataVerifyImpl {
             return false;
         }
 
-        for (DataVerifyImpl vfy : this.validators) {
-            if (vfy.get(input, res)) {
-                return true;
-            }
-        }
-
-        res.success = false;
-        return false;
+        res.success = this.batchGetSubValidators(input, res);
+        return res.success;
     }
 
     public static HashMap<String, DataVerifyImpl> loadFromFile(String filePath) {
@@ -236,7 +230,7 @@ public class DataVerifyCustomRule extends DataVerifyImpl {
             Load load = new Load(settings);
 
             var allRootObjects = load.loadAllFromInputStream(new FileInputStream(yamlFile));
-            HashMap<String, DataVerifyImpl> ret = new HashMap<String, DataVerifyImpl>();
+            HashMap<String, DataVerifyImpl> ret = new HashMap<>();
             for (Object object : allRootObjects) {
                 if (!(object instanceof Map<?, ?>)) {
                     continue;
@@ -273,20 +267,20 @@ public class DataVerifyCustomRule extends DataVerifyImpl {
                         description = (String) descriptionObj;
                     }
 
-                    ArrayList<String> rules = new ArrayList<String>();
+                    ArrayList<String> rules = new ArrayList<>();
                     int version = 0;
                     Object versionObj = ((Map<?, ?>) ruleObject).get("version");
                     if (versionObj != null) {
-                        if (versionObj instanceof Integer) {
-                            version = ((Integer) versionObj).intValue();
-                        } else if (versionObj instanceof String) {
+                        if (versionObj instanceof Integer integer) {
+                            version = integer;
+                        } else if (versionObj instanceof String string) {
                             try {
-                                version = Integer.parseInt((String) versionObj);
+                                version = Integer.parseInt(string);
                             } catch (NumberFormatException e) {
                                 ProgramOptions.getLoger().warn(
                                         "Load custom validator file \"%s\" with invalid version \"%s\", we will use 0.",
                                         filePath,
-                                        versionObj);
+                                        string);
                             }
                         } else {
                             ProgramOptions.getLoger().warn(
@@ -304,7 +298,7 @@ public class DataVerifyCustomRule extends DataVerifyImpl {
                         }
                     }
 
-                    if (null != ret.put(name, new DataVerifyCustomRule(name, rules, description, version))) {
+                    if (null != ret.put(name, new DataVerifyCustomOrRule(name, rules, description, version))) {
                         ProgramOptions.getLoger().warn(
                                 "Load custom validator file \"%s\" with more than one rule with name \"%s\", we will use the last one.",
                                 filePath,
@@ -314,7 +308,7 @@ public class DataVerifyCustomRule extends DataVerifyImpl {
             }
 
             return ret;
-        } catch (Exception e) {
+        } catch (java.io.IOException | NumberFormatException e) {
             ProgramOptions.getLoger().error("Load custom validator file \"%s\" failed, %s", filePath, e.getMessage());
             return null;
         }

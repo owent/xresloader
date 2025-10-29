@@ -37,6 +37,7 @@ public class DataVerifyInTableColumn extends DataVerifyImpl {
         this.valid = true;
     }
 
+    @Override
     public boolean isValid() {
         return this.valid;
     }

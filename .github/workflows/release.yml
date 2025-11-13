@@ -24,11 +24,11 @@ jobs:
         with:
           lfs: true
           submodules: true
-      - name: Set up JDK 17
+      - name: Set up JDK 21
         uses: actions/setup-java@v4 # https://github.com/actions/setup-java
         with:
           distribution: temurin
-          java-version: "17"
+          java-version: "21"
           java-package: jdk
           architecture: x64
       - name: Build with Maven
@@ -39,11 +39,11 @@ jobs:
           python3 gen_header_v3.py
           cd ..
           mkdir -p target/package
-          mvn -Dproject.target.javaVersion=11 package --file pom.xml
+          mvn -Dproject.target.javaVersion=21 package --file pom.xml
           for JAR_FILE in target/*.jar; do
             if [[ -e "$JAR_FILE" ]]; then
               JAR_BASENAME=$(basename "$JAR_FILE")
-              mv "$JAR_FILE" "target/package/${JAR_BASENAME/.jar/-jre11.jar}"
+              mv "$JAR_FILE" "target/package/${JAR_BASENAME/.jar/-jre21.jar}"
             fi
           done
           mvn package --file pom.xml

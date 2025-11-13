@@ -53,6 +53,7 @@ public class DataDstXml extends DataDstJava {
     /**
      * @return 协议处理器名字
      */
+    @Override
     public String name() {
         return "xml";
     }
@@ -241,6 +242,7 @@ public class DataDstXml extends DataDstJava {
      * 
      * @return 常量数据,不支持的时候返回空
      */
+    @Override
     public final byte[] dumpConst(HashMap<String, Object> data) throws ConvException, IOException {
         // pretty print
         OutputFormat of = null;

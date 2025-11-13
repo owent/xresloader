@@ -316,6 +316,7 @@ validator:
   - name: "validator name"
     description: "（可选）描述"
     version: 0 # 版本，从 2.20.0 版本开始支持
+    mode: or # 模式: or, and, not 。从 2.21.1 版本开始支持, 默认为 or
     rules:
       - validator_rule1
       - validator_rule2

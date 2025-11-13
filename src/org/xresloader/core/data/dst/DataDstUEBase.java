@@ -9,6 +9,7 @@ import org.xresloader.core.data.dst.DataDstWriterNode.*;
 import org.xresloader.core.data.err.ConvException;
 import org.xresloader.core.data.src.DataContainer;
 import org.xresloader.core.data.src.DataSrcImpl;
+import org.xresloader.core.data.vfy.DataVerifyImpl;
 import org.xresloader.core.engine.IdentifyEngine;
 import org.xresloader.core.scheme.SchemeConf;
 
@@ -1514,8 +1515,7 @@ public abstract class DataDstUEBase extends DataDstJava {
         // ======================================================================================================
         LinkedList<DataDstWriterNodeWrapper> expandedDesc = new LinkedList<DataDstWriterNodeWrapper>();
         ddNode = DataDstWriterNode.create(null,
-                DataDstWriterNode.getDefaultMessageDescriptor(DataDstWriterNode.JAVA_TYPE.STRING,
-                        DataDstWriterNode.SPECIAL_TYPE_LIMIT.NONE, null),
+                DataDstWriterNode.getDefaultMessageDescriptor(DataDstWriterNode.JAVA_TYPE.STRING, null, null),
                 -1);
         ddNode.setFieldDescriptor(new DataDstFieldDescriptor(ddNode.getTypeDescriptor(), 1, "Name",
                 DataDstWriterNode.FIELD_LABEL_TYPE.OPTIONAL, null));
@@ -1527,7 +1527,7 @@ public abstract class DataDstUEBase extends DataDstJava {
 
         ddNode = DataDstWriterNode.create(null,
                 DataDstWriterNode.getDefaultMessageDescriptor(DataDstWriterNode.JAVA_TYPE.INT,
-                        DataDstWriterNode.SPECIAL_TYPE_LIMIT.INT32, null),
+                        DataDstWriterNode.getDefaultTypeValidatorInt32(), null),
                 -1);
         ddNode.setFieldDescriptor(new DataDstFieldDescriptor(ddNode.getTypeDescriptor(), 2, "Value",
                 DataDstWriterNode.FIELD_LABEL_TYPE.OPTIONAL, null));
@@ -2165,11 +2165,12 @@ public abstract class DataDstUEBase extends DataDstJava {
     }
 
     static DataDstFieldDescriptor createVirtualFieldDescriptor(String name, int index, JAVA_TYPE type) {
-        SPECIAL_TYPE_LIMIT typeLimit = SPECIAL_TYPE_LIMIT.NONE;
+        DataVerifyImpl typeValidator = null;
         if (type == JAVA_TYPE.INT) {
-            typeLimit = SPECIAL_TYPE_LIMIT.INT32;
+            typeValidator = DataDstWriterNode.getDefaultTypeValidatorInt32();
         }
-        return new DataDstFieldDescriptor(DataDstWriterNode.getDefaultMessageDescriptor(type, typeLimit, null), index,
+        return new DataDstFieldDescriptor(DataDstWriterNode.getDefaultMessageDescriptor(type, typeValidator, null),
+                index,
                 name,
                 FIELD_LABEL_TYPE.OPTIONAL, null);
     }

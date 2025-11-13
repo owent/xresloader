@@ -213,7 +213,7 @@ public abstract class DataVerifyImpl {
                         return Math.round((Double) verify_cache.value);
                     }
                     if (verify_cache.value instanceof Long) {
-                        return ((Long) verify_cache.value).longValue();
+                        return ((Long) verify_cache.value);
                     }
                     return longValueOf(verify_cache.value.toString());
                 }
@@ -349,6 +349,7 @@ public abstract class DataVerifyImpl {
         }
     }
 
+    @SuppressWarnings("UseSpecificCatch")
     static public Number getAndVerifyToNumber(List<DataVerifyImpl> verifyEngine, String path, String val,
             boolean is_double)
             throws ConvException {
@@ -378,17 +379,17 @@ public abstract class DataVerifyImpl {
         try {
             if (is_numeric) {
                 if (is_double) {
-                    return Double.valueOf(getAndVerify(verifyEngine, path, doubleValueOf(val)));
+                    return getAndVerify(verifyEngine, path, doubleValueOf(val));
                 } else {
-                    return Long.valueOf(getAndVerify(verifyEngine, path, longValueOf(val)));
+                    return getAndVerify(verifyEngine, path, longValueOf(val));
                 }
             }
 
             if (verifyEngine == null || verifyEngine.isEmpty()) {
                 if (is_double) {
-                    return Double.valueOf(doubleValueOf(val));
+                    return doubleValueOf(val);
                 } else {
-                    return Long.valueOf(longValueOf(val));
+                    return longValueOf(val);
                 }
             }
 
@@ -407,9 +408,9 @@ public abstract class DataVerifyImpl {
                             return (Long) verify_cache.value;
                         }
                         if (is_double) {
-                            return Double.valueOf(doubleValueOf(verify_cache.value.toString()));
+                            return doubleValueOf(verify_cache.value.toString());
                         } else {
-                            return Long.valueOf(longValueOf(verify_cache.value.toString()));
+                            return longValueOf(verify_cache.value.toString());
                         }
                     }
                 } catch (Exception e) {
@@ -465,6 +466,7 @@ public abstract class DataVerifyImpl {
         }
     }
 
+    @SuppressWarnings("UseSpecificCatch")
     static public String getAndVerifyToString(List<DataVerifyImpl> verifyEngine, String path, String val)
             throws ConvException {
         if (verifyEngine == null || verifyEngine.isEmpty()) {

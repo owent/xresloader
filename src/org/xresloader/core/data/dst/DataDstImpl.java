@@ -631,7 +631,9 @@ public abstract class DataDstImpl {
             select = DataVerifyImpl.getAndVerifyToLong(ident.getValidator(), ident.name, item);
         } else {
             try {
-                select = DataVerifyImpl.getAndVerifyToLong(oneof.getValidator(), "[PLAIN TEXT]", item.trim());
+                select = DataVerifyImpl.getAndVerifyToLong(oneof.getValidator(),
+                        String.format("[oneof: %s]", oneof.getFullName()),
+                        item.trim());
             } catch (java.lang.NumberFormatException e) {
                 throw new ConvException(String.format("Try to convert %s to oneof case failed.", input));
             }

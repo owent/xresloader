@@ -38,6 +38,7 @@ public class DataDstLua extends DataDstJava {
     /**
      * @return 协议处理器名字
      */
+    @Override
     public String name() {
         return "lua";
     }
@@ -252,7 +253,7 @@ public class DataDstLua extends DataDstJava {
                         sb.append(item.getKey()).append("] = ");
                     }
                 } else {
-                    if (item.getKey() instanceof String && !isStrictIdentify((String) item.getKey())) {
+                    if (item.getKey() instanceof String && !isStrictIdentifier((String) item.getKey())) {
                         sb.append("[");
                         sb.append(quote((String) item.getKey())).append("] = ");
                     } else {

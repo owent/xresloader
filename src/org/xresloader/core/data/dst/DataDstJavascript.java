@@ -302,7 +302,7 @@ public class DataDstJavascript extends DataDstJava {
                         sb.append(item.getKey()).append(" : ");
                     }
                 } else {
-                    if (item.getKey() instanceof String && !isStrictIdentify((String) item.getKey())) {
+                    if (item.getKey() instanceof String && !isStrictIdentifier((String) item.getKey())) {
                         sb.append(JSONObject.quote((String) item.getKey())).append(" : ");
                     } else {
                         sb.append(item.getKey()).append(" : ");

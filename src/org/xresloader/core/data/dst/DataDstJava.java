@@ -26,7 +26,7 @@ import java.util.stream.Collectors;
  * Created by owentou on 2015/04/29.
  */
 public abstract class DataDstJava extends DataDstImpl {
-    private static ThreadLocal<Pattern> strick_identify_rule = ThreadLocal
+    private static ThreadLocal<Pattern> strictIdentifierPattern = ThreadLocal
             .withInitial(() -> Pattern.compile("^[a-zA-Z]\\w*$", Pattern.CASE_INSENSITIVE));
 
     static private class ParseResult {
@@ -74,7 +74,7 @@ public abstract class DataDstJava extends DataDstImpl {
         }
     }
 
-    static public boolean isStrictIdentify(String input) {
+    static public boolean isStrictIdentifier(String input) {
         if (input == null) {
             return false;
         }
@@ -83,7 +83,7 @@ public abstract class DataDstJava extends DataDstImpl {
             return false;
         }
 
-        return strick_identify_rule.get().matcher(input).matches();
+        return strictIdentifierPattern.get().matcher(input).matches();
     }
 
     /**

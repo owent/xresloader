@@ -39,7 +39,11 @@ public class DataVerifyNumberRange extends DataVerifyImpl {
     }
 
     public DataVerifyNumberRange(String range) {
-        super(range);
+        this(range, range);
+    }
+
+    public DataVerifyNumberRange(String name, String range) {
+        super(name);
 
         if (range.isEmpty()) {
             return;

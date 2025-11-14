@@ -1,24 +1,38 @@
 package org.xresloader.core.engine;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
+import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.Map;
+import java.util.regex.Pattern;
+
+import org.apache.commons.collections4.map.LRUMap;
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+import org.apache.poi.ooxml.POIXMLException;
+import org.apache.poi.ss.formula.eval.NotImplementedException;
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.CellType;
+import org.apache.poi.ss.usermodel.CellValue;
+import org.apache.poi.ss.usermodel.DateUtil;
+import org.apache.poi.ss.usermodel.FormulaError;
+import org.apache.poi.ss.usermodel.FormulaEvaluator;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.util.IOUtils;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.xresloader.core.ProgramOptions;
 import org.xresloader.core.data.err.ConvException;
 import org.xresloader.core.data.src.DataContainer;
 import org.xresloader.core.data.src.DataSrcImpl;
 import org.xresloader.core.data.vfy.DataVerifyImpl;
-import org.apache.poi.hssf.usermodel.HSSFWorkbook;
-import org.apache.poi.ooxml.POIXMLException;
-import org.apache.poi.ss.usermodel.*;
-import org.apache.poi.ss.formula.eval.NotImplementedException;
-import org.apache.poi.xssf.usermodel.XSSFWorkbook;
-import org.apache.poi.util.IOUtils;
-import org.apache.commons.collections4.map.LRUMap;
-
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.text.SimpleDateFormat;
-import java.util.*;
-import java.util.regex.Pattern;
 
 /**
  * Created by owentou on 2014/10/9.
@@ -30,7 +44,7 @@ public class ExcelEngine {
     /**
      * 开启的workbook缓存，减少打开和分析文件的耗时
      */
-    static private HashMap<String, Workbook> openedWorkbooks = new HashMap<String, Workbook>();
+    static private HashMap<String, Workbook> openedWorkbooks = new HashMap<>();
 
     /**
      * 开启的自定义索引缓存，减少打开和分析文件的耗时
@@ -53,7 +67,7 @@ public class ExcelEngine {
     }
 
     static public class CustomDataRowIndex {
-        private ArrayList<String> columns = new ArrayList<String>();
+        private ArrayList<String> columns = new ArrayList<>();
         private int rowNumber = 0;
         private CustomDataTableIndex ownerSheet = null;
 
@@ -96,7 +110,7 @@ public class ExcelEngine {
         private String sheetName = null;
         private int lastRowNum = -1;
 
-        private HashMap<Integer, CustomDataRowIndex> rows = new HashMap<Integer, CustomDataRowIndex>();
+        private HashMap<Integer, CustomDataRowIndex> rows = new HashMap<>();
 
         public CustomDataTableIndex(String file_path, String sheet_name) {
             this.filePath = file_path;
@@ -213,7 +227,7 @@ public class ExcelEngine {
         // 无论打开什么Excel文件，都要清空缓存
         clearAllCache();
 
-        String file_path = null;
+        String file_path;
         try {
             file_path = file.getCanonicalPath();
         } catch (IOException e) {
@@ -226,7 +240,7 @@ public class ExcelEngine {
             return ret;
         }
 
-        FileInputStream is = null;
+        FileInputStream is;
         try {
             is = new FileInputStream(file_path);
 
@@ -277,6 +291,7 @@ public class ExcelEngine {
         return wb.getSheet(sheet_name);
     }
 
+    @SuppressWarnings("UseSpecificCatch")
     static public CustomDataTableIndex openStreamTableIndex(File file, String sheet_name) {
         String realPath = null;
         try {
@@ -347,7 +362,8 @@ public class ExcelEngine {
      * @param col        列号
      * @return
      */
-    static public void cell2s(DataContainer<String> out, DataRowWrapper rowWrapper, IdentifyDescriptor col) {
+    static public void cell2s(DataContainer<String> out, DataRowWrapper rowWrapper, IdentifyDescriptor col)
+            throws ConvException {
         cell2s(out, rowWrapper, col, null);
     }
 
@@ -392,7 +408,7 @@ public class ExcelEngine {
      * @return
      */
     static public void cell2s(DataContainer<String> out, DataRowWrapper rowWrapper, IdentifyDescriptor col,
-            FormulaWrapper formula) {
+            FormulaWrapper formula) throws ConvException {
         if (null == rowWrapper) {
             return;
         }
@@ -401,7 +417,8 @@ public class ExcelEngine {
             String val = rowWrapper.getCustomRowIndex().getCellValue(col.index);
             if (val != null && !val.isEmpty()) {
                 if (DataSrcImpl.getOurInstance().isInitialized() && ProgramOptions.getInstance().enableStringMacro) {
-                    out.set(tryMacro(val));
+                    out.set(DataVerifyImpl.getAndVerifyToString(col.getValidator(), col.getTypeValidator(), col.name,
+                            tryMacro(val)));
                 } else {
                     out.set(val);
                 }
@@ -442,9 +459,11 @@ public class ExcelEngine {
                 }
             } else {
                 if (DataSrcImpl.getOurInstance().isInitialized() && ProgramOptions.getInstance().enableStringMacro) {
-                    out.set(tryMacro(c.toString()));
+                    out.set(DataVerifyImpl.getAndVerifyToString(col.getValidator(), col.getTypeValidator(), col.name,
+                            tryMacro(c.toString())));
                 } else {
-                    out.set(c.toString());
+                    out.set(DataVerifyImpl.getAndVerifyToString(col.getValidator(), col.getTypeValidator(), col.name,
+                            c.toString()));
                 }
                 return;
             }
@@ -490,7 +509,7 @@ public class ExcelEngine {
                     int idx = fs.indexOf(";@");
                     if (idx > 0 && idx < fs.length()) {
                         // 包含年月日
-                        LinkedList<String> rfs = new LinkedList<String>();
+                        LinkedList<String> rfs = new LinkedList<>();
 
                         if (checkDate.matcher(fs).find())
                             rfs.addLast("yyyy-MM-dd");
@@ -532,9 +551,11 @@ public class ExcelEngine {
                     DataSrcImpl data_source = DataSrcImpl.getOurInstance();
                     if (null != data_source && data_source.isInitialized()
                             && ProgramOptions.getInstance().enableStringMacro) {
-                        out.set(tryMacro(val));
+                        out.set(DataVerifyImpl.getAndVerifyToString(col.getValidator(), col.getTypeValidator(),
+                                col.name, tryMacro(val)));
                     } else {
-                        out.set(val);
+                        out.set(DataVerifyImpl.getAndVerifyToString(col.getValidator(), col.getTypeValidator(),
+                                col.name, val));
                     }
                 }
                 break;
@@ -573,7 +594,8 @@ public class ExcelEngine {
         if (null != rowWrapper.getCustomRowIndex()) {
             String val = rowWrapper.getCustomRowIndex().getCellValue(col.index);
             if (val != null && !val.isEmpty()) {
-                out.set(DataVerifyImpl.getAndVerifyToLong(col.getValidator(), col.name, tryMacro(val)));
+                out.set(DataVerifyImpl.getAndVerifyToLong(col.getValidator(), col.getTypeValidator(), col.name,
+                        tryMacro(val)));
             }
             return;
         }
@@ -626,7 +648,8 @@ public class ExcelEngine {
                 break;
             case BOOLEAN: {
                 boolean res = cal_cell2bool(c, cv);
-                out.set(DataVerifyImpl.getAndVerify(col.getValidator(), col.name, res ? 1 : 0));
+                out.set(DataVerifyImpl.getAndVerifyNumeric(col.getValidator(), col.getTypeValidator(), col.name,
+                        res ? 1 : 0));
                 break;
             }
             case ERROR: {
@@ -650,7 +673,7 @@ public class ExcelEngine {
             case FORMULA:
                 break;
             case NUMERIC: {
-                long val = 0;
+                long val;
                 if (DateUtil.isCellDateFormatted(c)) {
                     val = dateToUnixTimestamp(c.getDateCellValue());
                 } else {
@@ -661,7 +684,7 @@ public class ExcelEngine {
                     }
                 }
 
-                out.set(DataVerifyImpl.getAndVerify(col.getValidator(), col.name, val));
+                out.set(DataVerifyImpl.getAndVerifyNumeric(col.getValidator(), col.getTypeValidator(), col.name, val));
                 break;
             }
             case STRING: {
@@ -670,7 +693,8 @@ public class ExcelEngine {
                     break;
                 }
 
-                out.set(DataVerifyImpl.getAndVerifyToLong(col.getValidator(), col.name, tryMacro(val)));
+                out.set(DataVerifyImpl.getAndVerifyToLong(col.getValidator(), col.getTypeValidator(), col.name,
+                        tryMacro(val)));
                 break;
             }
             default:
@@ -710,7 +734,8 @@ public class ExcelEngine {
 
             if (val != null && !val.isEmpty()) {
                 try {
-                    out.set(DataVerifyImpl.getAndVerifyToDouble(col.getValidator(), col.name, tryMacro(val)));
+                    out.set(DataVerifyImpl.getAndVerifyToDouble(col.getValidator(), col.getTypeValidator(), col.name,
+                            tryMacro(val)));
                 } catch (java.lang.NumberFormatException e) {
                     throw new ConvException(
                             String.format("Table %s, Row %d, Column %d : %s can not be converted to a number",
@@ -809,7 +834,8 @@ public class ExcelEngine {
                 }
 
                 try {
-                    out.set(DataVerifyImpl.getAndVerifyToDouble(col.getValidator(), col.name, tryMacro(val)));
+                    out.set(DataVerifyImpl.getAndVerifyToDouble(col.getValidator(), col.getTypeValidator(), col.name,
+                            tryMacro(val)));
                 } catch (java.lang.NumberFormatException e) {
                     throw new ConvException(
                             String.format("Table %s, Row %d, Column %d : %s can not be converted to a number",
@@ -829,7 +855,8 @@ public class ExcelEngine {
      * @param col        列号
      * @return
      */
-    static public void cell2b(DataContainer<Boolean> out, DataRowWrapper rowWrapper, IdentifyDescriptor col) {
+    static public void cell2b(DataContainer<Boolean> out, DataRowWrapper rowWrapper, IdentifyDescriptor col)
+            throws ConvException {
         cell2b(out, rowWrapper, col, null);
     }
 
@@ -842,7 +869,7 @@ public class ExcelEngine {
      * @return
      */
     static public void cell2b(DataContainer<Boolean> out, DataRowWrapper rowWrapper, IdentifyDescriptor col,
-            FormulaWrapper formula) {
+            FormulaWrapper formula) throws ConvException {
         if (null == rowWrapper) {
             return;
         }
@@ -850,7 +877,9 @@ public class ExcelEngine {
         if (null != rowWrapper.getCustomRowIndex()) {
             String val = rowWrapper.getCustomRowIndex().getCellValue(col.index);
             if (val != null && !val.isEmpty()) {
-                out.set(DataSrcImpl.getBooleanFromString(tryMacro(val)));
+                out.set(DataSrcImpl.getBooleanFromString(
+                        DataVerifyImpl.getAndVerifyToString(col.getValidator(), col.getTypeValidator(), col.name,
+                                tryMacro(val))));
             }
             return;
         }
@@ -930,7 +959,10 @@ public class ExcelEngine {
                 out.set(cal_cell2num(c, cv) != 0 && col.getRatio() != 0);
                 break;
             case STRING:
-                String item = tryMacro(cal_cell2str(c, cv).trim()).toLowerCase();
+                String item = DataVerifyImpl
+                        .getAndVerifyToString(col.getValidator(), col.getTypeValidator(), col.name,
+                                tryMacro(cal_cell2str(c, cv).trim()))
+                        .toLowerCase();
                 if (item.isEmpty()) {
                     break;
                 }

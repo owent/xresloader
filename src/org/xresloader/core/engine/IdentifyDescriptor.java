@@ -51,7 +51,7 @@ public class IdentifyDescriptor {
         }
 
         if (null == verifyEngine) {
-            verifyEngine = new LinkedList<DataVerifyImpl>();
+            verifyEngine = new LinkedList<>();
         }
 
         verifyEngine.add(ver);
@@ -59,6 +59,22 @@ public class IdentifyDescriptor {
 
     public List<DataVerifyImpl> getValidator() {
         return verifyEngine;
+    }
+
+    public DataVerifyImpl getTypeValidator() {
+        if (this.referToWriterNode != null) {
+            if (this.referToWriterNode.getFieldDescriptor() != null) {
+                return this.referToWriterNode.getFieldDescriptor().getTypeValidator();
+            }
+            if (this.referToWriterNode.getOneofDescriptor() != null) {
+                return this.referToWriterNode.getOneofDescriptor().getTypeValidator();
+            }
+            if (this.referToWriterNode.getTypeDescriptor() != null) {
+                return this.referToWriterNode.getTypeDescriptor().getTypeValidator();
+            }
+        }
+
+        return null;
     }
 
     public int getRatio() {

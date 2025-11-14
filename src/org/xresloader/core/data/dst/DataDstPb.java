@@ -10,6 +10,7 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.time.Instant;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedList;
@@ -1198,7 +1199,7 @@ public class DataDstPb extends DataDstImpl {
                 }
             }
             DataDstOneofDescriptor innerField = new DataDstOneofDescriptor(innerDesc, fields, oneof.getIndex(),
-                    oneof.getName(), oneof);
+                    oneof.getName(), oneof, pbTypeToTypeLimit(oneof));
             innerDesc.oneofs.put(oneof.getName(), innerField);
         }
 
@@ -1514,6 +1515,21 @@ public class DataDstPb extends DataDstImpl {
             }
             default -> null;
         };
+    }
+
+    static DataVerifyImpl pbTypeToTypeLimit(Descriptors.OneofDescriptor t) {
+        String autoValidatorRule = t.getFullName();
+        if (autoValidatorRule.length() > 0 && autoValidatorRule.charAt(0) == '.') {
+            autoValidatorRule = autoValidatorRule.substring(1);
+        }
+
+        DataVerifyImpl vfy = getValidatorFromCache(autoValidatorRule);
+        if (null == vfy) {
+            vfy = new DataVerifyPbOneof(t);
+            setValidatorStableCache(autoValidatorRule, vfy);
+        }
+
+        return vfy;
     }
 
     private void filterMissingFields(LinkedList<String> missingFields, HashMap<String, String> oneofField,
@@ -1927,7 +1943,7 @@ public class DataDstPb extends DataDstImpl {
                 throw new ConvException(getLastErrorMessage());
             }
 
-            DataDstChildrenNode child = null;
+            DataDstChildrenNode child;
             String real_name = DataDstWriterNode.makeChildPath(prefix, fd.getName());
             IdentifyDescriptor col = data_src.getColumnByName(real_name);
 
@@ -2080,11 +2096,6 @@ public class DataDstPb extends DataDstImpl {
             case INT -> {
                 DataContainer<Long> ret = DataSrcImpl.getOurInstance().getValue(desc.identify, 0L);
                 if (null != ret && ret.valid) {
-                    String validateErrorMessage = field.validateTypeLimit(ret.value);
-                    if (null != validateErrorMessage) {
-                        throw new ConvException(validateErrorMessage);
-                    }
-
                     val = ret.value.intValue();
                 }
             }
@@ -2092,11 +2103,6 @@ public class DataDstPb extends DataDstImpl {
             case LONG -> {
                 DataContainer<Long> ret = DataSrcImpl.getOurInstance().getValue(desc.identify, 0L);
                 if (null != ret && ret.valid) {
-                    String validateErrorMessage = field.validateTypeLimit(ret.value);
-                    if (null != validateErrorMessage) {
-                        throw new ConvException(validateErrorMessage);
-                    }
-
                     val = ret.value;
                 }
             }
@@ -2104,11 +2110,6 @@ public class DataDstPb extends DataDstImpl {
             case FLOAT -> {
                 DataContainer<Double> ret = DataSrcImpl.getOurInstance().getValue(desc.identify, 0.0);
                 if (null != ret && ret.valid) {
-                    String validateErrorMessage = field.validateTypeLimit(ret.value);
-                    if (null != validateErrorMessage) {
-                        throw new ConvException(validateErrorMessage);
-                    }
-
                     val = ret.value.floatValue();
                 }
             }
@@ -2116,11 +2117,6 @@ public class DataDstPb extends DataDstImpl {
             case DOUBLE -> {
                 DataContainer<Double> ret = DataSrcImpl.getOurInstance().getValue(desc.identify, 0.0);
                 if (null != ret && ret.valid) {
-                    String validateErrorMessage = field.validateTypeLimit(ret.value);
-                    if (null != validateErrorMessage) {
-                        throw new ConvException(validateErrorMessage);
-                    }
-
                     val = ret.value;
                 }
             }
@@ -2128,11 +2124,6 @@ public class DataDstPb extends DataDstImpl {
             case BOOLEAN -> {
                 DataContainer<Boolean> ret = DataSrcImpl.getOurInstance().getValue(desc.identify, false);
                 if (null != ret && ret.valid) {
-                    String validateErrorMessage = field.validateTypeLimit(ret.value);
-                    if (null != validateErrorMessage) {
-                        throw new ConvException(validateErrorMessage);
-                    }
-
                     val = ret.value;
                 }
             }
@@ -2140,11 +2131,6 @@ public class DataDstPb extends DataDstImpl {
             case STRING -> {
                 DataContainer<String> ret = DataSrcImpl.getOurInstance().getValue(desc.identify, "");
                 if (null != ret && ret.valid) {
-                    String validateErrorMessage = field.validateTypeLimit(ret.value);
-                    if (null != validateErrorMessage) {
-                        throw new ConvException(validateErrorMessage);
-                    }
-
                     val = ret.value;
                 }
             }
@@ -2152,11 +2138,6 @@ public class DataDstPb extends DataDstImpl {
             case BYTE_STRING -> {
                 DataContainer<String> res = DataSrcImpl.getOurInstance().getValue(desc.identify, "");
                 if (null != res && res.valid) {
-                    String validateErrorMessage = field.validateTypeLimit(res.value);
-                    if (null != validateErrorMessage) {
-                        throw new ConvException(validateErrorMessage);
-                    }
-
                     String encoding = SchemeConf.getInstance().getKey().getEncoding();
                     if (null == encoding || encoding.isEmpty()) {
                         val = com.google.protobuf.ByteString.copyFrom(res.value.getBytes());
@@ -2168,11 +2149,6 @@ public class DataDstPb extends DataDstImpl {
             case ENUM -> {
                 DataContainer<Long> ret = DataSrcImpl.getOurInstance().getValue(desc.identify, 0L);
                 if (null != ret && ret.valid) {
-                    String validateErrorMessage = field.validateTypeLimit(ret.value.intValue());
-                    if (null != validateErrorMessage) {
-                        throw new ConvException(validateErrorMessage);
-                    }
-
                     val = fd.getEnumType().findValueByNumber(ret.value.intValue());
                 }
 
@@ -2557,7 +2533,7 @@ public class DataDstPb extends DataDstImpl {
 
             boolean ret = true;
             switch (field.getType()) {
-                case INT: {
+                case INT -> {
                     Long[] values = parsePlainDataLong(groups, ident, field);
                     ArrayList<Object> tmp = new ArrayList<>();
                     if (values != null) {
@@ -2570,10 +2546,6 @@ public class DataDstPb extends DataDstImpl {
                                     tmp.add(enum_val);
                                 }
                             } else {
-                                String validateErrorMessage = field.validateTypeLimit(v);
-                                if (null != validateErrorMessage) {
-                                    throw new ConvException(validateErrorMessage);
-                                }
                                 tmp.add(v.intValue());
                             }
                         }
@@ -2581,106 +2553,70 @@ public class DataDstPb extends DataDstImpl {
                     if (!tmp.isEmpty()) {
                         parsedDatas = tmp;
                     }
-                    break;
                 }
 
-                case LONG: {
+                case LONG -> {
                     Long[] values = parsePlainDataLong(groups, ident, field);
                     ArrayList<Object> tmp = new ArrayList<>();
                     if (values != null) {
                         tmp.ensureCapacity(values.length);
-                        for (Long v : values) {
-                            String validateErrorMessage = field.validateTypeLimit(v);
-                            if (null != validateErrorMessage) {
-                                throw new ConvException(validateErrorMessage);
-                            }
-                            tmp.add(v);
-                        }
+                        tmp.addAll(Arrays.asList(values));
                     }
                     if (!tmp.isEmpty()) {
                         parsedDatas = tmp;
                     }
-                    break;
                 }
 
-                case FLOAT: {
+                case FLOAT -> {
                     Double[] values = parsePlainDataDouble(groups, ident, field);
                     ArrayList<Object> tmp = new ArrayList<>();
                     if (values != null) {
                         tmp.ensureCapacity(values.length);
                         for (Double v : values) {
-                            String validateErrorMessage = field.validateTypeLimit(v);
-                            if (null != validateErrorMessage) {
-                                throw new ConvException(validateErrorMessage);
-                            }
                             tmp.add(v.floatValue());
                         }
                     }
                     if (!tmp.isEmpty()) {
                         parsedDatas = tmp;
                     }
-                    break;
                 }
 
-                case DOUBLE: {
+                case DOUBLE -> {
                     Double[] values = parsePlainDataDouble(groups, ident, field);
                     ArrayList<Object> tmp = new ArrayList<>();
                     if (values != null) {
                         tmp.ensureCapacity(values.length);
-                        for (Double v : values) {
-                            String validateErrorMessage = field.validateTypeLimit(v);
-                            if (null != validateErrorMessage) {
-                                throw new ConvException(validateErrorMessage);
-                            }
-                            tmp.add(v);
-                        }
+                        tmp.addAll(Arrays.asList(values));
                     }
                     if (!tmp.isEmpty()) {
                         parsedDatas = tmp;
                     }
-                    break;
                 }
 
-                case BOOLEAN: {
+                case BOOLEAN -> {
                     Boolean[] values = parsePlainDataBoolean(groups, ident, field);
                     ArrayList<Object> tmp = new ArrayList<>();
                     if (values != null) {
                         tmp.ensureCapacity(values.length);
-                        for (Boolean v : values) {
-                            String validateErrorMessage = field.validateTypeLimit(v);
-                            if (null != validateErrorMessage) {
-                                throw new ConvException(validateErrorMessage);
-                            }
-                            tmp.add(v);
-                        }
+                        tmp.addAll(Arrays.asList(values));
                     }
                     if (!tmp.isEmpty()) {
                         parsedDatas = tmp;
                     }
-                    break;
                 }
 
-                case STRING:
-                case BYTES: {
+                case STRING, BYTES -> {
                     String[] values = parsePlainDataString(groups, ident, field);
                     ArrayList<Object> tmp = new ArrayList<>();
                     if (values != null) {
                         tmp.ensureCapacity(values.length);
-                        for (String v : values) {
-                            String validateErrorMessage = field.validateTypeLimit(v);
-                            if (null != validateErrorMessage) {
-                                throw new ConvException(validateErrorMessage);
-                            }
-                            tmp.add(v);
-                        }
+                        tmp.addAll(Arrays.asList(values));
                     }
                     if (!tmp.isEmpty()) {
                         parsedDatas = tmp;
                     }
-                    break;
                 }
-
-                case MESSAGE: {
+                case MESSAGE -> {
                     ArrayList<DynamicMessage> tmp = new ArrayList<>();
                     tmp.ensureCapacity(groups.length);
                     DataDstFieldDescriptor referOriginField = null;
@@ -2690,7 +2626,6 @@ public class DataDstPb extends DataDstImpl {
                                 .getReferOriginField();
                         referOriginFd = (Descriptors.FieldDescriptor) referOriginField.getRawDescriptor();
                     }
-
                     for (int i = 0; i < groups.length; ++i) {
                         String v = groups[i];
                         String[] subGroups = splitPlainGroups(v, getPlainMessageSeparator(field));
@@ -2710,13 +2645,12 @@ public class DataDstPb extends DataDstImpl {
                     if (!tmp.isEmpty()) {
                         parsedDatas = tmp;
                     }
-                    break;
                 }
 
-                default:
-                    // oneof can not be repeated
-                    break;
+                default -> {
+                }
             }
+            // oneof can not be repeated
 
             if (parsedDatas != null) {
                 if (!(parsedDatas instanceof ArrayList<?>)) {
@@ -2814,64 +2748,32 @@ public class DataDstPb extends DataDstImpl {
             Object val = null;
 
             switch (field.getType()) {
-                case INT: {
+                case INT -> {
                     Long res = parsePlainDataLong(input.trim(), ident, field);
-                    String validateErrorMessage = field.validateTypeLimit(res);
-                    if (null != validateErrorMessage) {
-                        throw new ConvException(validateErrorMessage);
-                    }
                     val = res.intValue();
-                    break;
                 }
 
-                case LONG: {
+                case LONG -> {
                     val = parsePlainDataLong(input.trim(), ident, field);
-                    String validateErrorMessage = field.validateTypeLimit(val);
-                    if (null != validateErrorMessage) {
-                        throw new ConvException(validateErrorMessage);
-                    }
-                    break;
                 }
 
-                case FLOAT: {
+                case FLOAT -> {
                     Double res = parsePlainDataDouble(input.trim(), ident, field);
-                    String validateErrorMessage = field.validateTypeLimit(res);
-                    if (null != validateErrorMessage) {
-                        throw new ConvException(validateErrorMessage);
-                    }
                     val = res.floatValue();
-                    break;
                 }
 
-                case DOUBLE: {
+                case DOUBLE -> {
                     val = parsePlainDataDouble(input.trim(), ident, field);
-                    String validateErrorMessage = field.validateTypeLimit(val);
-                    if (null != validateErrorMessage) {
-                        throw new ConvException(validateErrorMessage);
-                    }
-                    break;
                 }
 
-                case BOOLEAN: {
+                case BOOLEAN -> {
                     val = parsePlainDataBoolean(input.trim(), ident, field);
-                    String validateErrorMessage = field.validateTypeLimit(val);
-                    if (null != validateErrorMessage) {
-                        throw new ConvException(validateErrorMessage);
-                    }
-                    break;
                 }
 
-                case STRING:
-                case BYTES: {
+                case STRING, BYTES -> {
                     val = parsePlainDataString(input.trim(), ident, field);
-                    String validateErrorMessage = field.validateTypeLimit(val);
-                    if (null != validateErrorMessage) {
-                        throw new ConvException(validateErrorMessage);
-                    }
-                    break;
                 }
-
-                case MESSAGE: {
+                case MESSAGE -> {
                     String[] groups = splitPlainGroups(input.trim(), getPlainMessageSeparator(field));
                     ParseResult res = parsePlainDataMessage(groups, ident, field, rowContext, fieldPath);
                     if (res != null && res.value != null) {
@@ -2884,11 +2786,10 @@ public class DataDstPb extends DataDstImpl {
                     } else if (field.isRequired()) {
                         dumpDefault(builder, field, 0);
                     }
-                    break;
                 }
 
-                default:
-                    break;
+                default -> {
+                }
             }
 
             if (val == null) {
@@ -2930,7 +2831,7 @@ public class DataDstPb extends DataDstImpl {
         }
     }
 
-    public ParseResult parsePlainDataMessage(String[] inputs, IdentifyDescriptor ident,
+    private ParseResult parsePlainDataMessage(String[] inputs, IdentifyDescriptor ident,
             DataDstWriterNode.DataDstFieldDescriptor field, DataRowContext rowContext,
             String fieldPath) throws ConvException {
         if (field.getTypeDescriptor() == null || inputs == null || inputs.length == 0) {

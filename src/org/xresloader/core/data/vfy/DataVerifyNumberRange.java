@@ -39,7 +39,11 @@ public class DataVerifyNumberRange extends DataVerifyImpl {
     }
 
     public DataVerifyNumberRange(String range) {
-        super(range);
+        this(range, range);
+    }
+
+    public DataVerifyNumberRange(String name, String range) {
+        super(name);
 
         if (range.isEmpty()) {
             return;
@@ -175,7 +179,7 @@ public class DataVerifyNumberRange extends DataVerifyImpl {
                 is_double = true;
             }
         }
-        if (!is_double) {
+        if (is_numeric && !is_double) {
             Double d = Double.valueOf(intstr);
             if (d > Long.MAX_VALUE || d < Long.MIN_VALUE) {
                 is_double = true;

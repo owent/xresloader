@@ -13,6 +13,7 @@
 hs_err_pid*
 /out
 /target
+/build
 /bin
 .idea
 .vscode
@@ -20,6 +21,9 @@ hs_err_pid*
 /.settings
 /.factorypath
 /.project
+/.gradle
+
+/gradle
 
 # sample
 /sample/cxx/build

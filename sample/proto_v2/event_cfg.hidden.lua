@@ -13,7 +13,7 @@ return {
     data_ver = "1.0.0.0",
     description = "9ee5db50099f5abf0549d2c89f47e995bceb6dbd12066fdd3875911fad832d44",
     hash_code = "sha256:1ee8cc927336f8c693fbc5c5ca1f78d0e28d0f614de15d7dbe42cdd51b56f5f2",
-    xres_ver = "2.21.0-previous",
+    xres_ver = "dev",
   },
   [2] = "event_cfg",
   event_cfg = {

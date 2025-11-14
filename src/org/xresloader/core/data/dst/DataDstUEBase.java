@@ -9,6 +9,7 @@ import org.xresloader.core.data.dst.DataDstWriterNode.*;
 import org.xresloader.core.data.err.ConvException;
 import org.xresloader.core.data.src.DataContainer;
 import org.xresloader.core.data.src.DataSrcImpl;
+import org.xresloader.core.data.vfy.DataVerifyImpl;
 import org.xresloader.core.engine.IdentifyEngine;
 import org.xresloader.core.scheme.SchemeConf;
 
@@ -887,7 +888,7 @@ public abstract class DataDstUEBase extends DataDstJava {
             }
 
             // 输出header
-            ArrayList<DataDstWriterNodeWrapper> row_data = new ArrayList<DataDstWriterNodeWrapper>();
+            ArrayList<DataDstWriterNodeWrapper> row_data = new ArrayList<>();
             row_data.ensureCapacity(rule.keyFields.size() + rule.valueFields.size());
             for (int i = 0; i < rule.keyFields.size(); ++i) {
                 row_data.add(rule.keyFields.get(i));
@@ -1180,10 +1181,6 @@ public abstract class DataDstUEBase extends DataDstJava {
             case INT: {
                 DataContainer<Long> ret = DataSrcImpl.getOurInstance().getValue(desc.identify, 0L);
                 if (null != ret && ret.valid) {
-                    String validateErrorMessage = desc.validateTypeLimit(ret.value);
-                    if (null != validateErrorMessage) {
-                        throw new ConvException(validateErrorMessage);
-                    }
                     return ret.value.intValue();
                 } else if (desc.getFieldListStripRule() == DataDstWriterNode.ListStripRule.STRIP_NOTHING) {
                     return Integer.valueOf(0);
@@ -1194,11 +1191,6 @@ public abstract class DataDstUEBase extends DataDstJava {
             case LONG: {
                 DataContainer<Long> ret = DataSrcImpl.getOurInstance().getValue(desc.identify, 0L);
                 if (null != ret && ret.valid) {
-                    String validateErrorMessage = desc.validateTypeLimit(ret.value);
-                    if (null != validateErrorMessage) {
-                        throw new ConvException(validateErrorMessage);
-                    }
-
                     return ret.value.longValue();
                 } else if (desc.getFieldListStripRule() == DataDstWriterNode.ListStripRule.STRIP_NOTHING) {
                     return Long.valueOf(0);
@@ -1209,11 +1201,6 @@ public abstract class DataDstUEBase extends DataDstJava {
             case FLOAT: {
                 DataContainer<Double> ret = DataSrcImpl.getOurInstance().getValue(desc.identify, 0.0);
                 if (null != ret && ret.valid) {
-                    String validateErrorMessage = desc.validateTypeLimit(ret.value);
-                    if (null != validateErrorMessage) {
-                        throw new ConvException(validateErrorMessage);
-                    }
-
                     return ret.value.floatValue();
                 } else if (desc.getFieldListStripRule() == DataDstWriterNode.ListStripRule.STRIP_NOTHING) {
                     return Float.valueOf(0);
@@ -1224,11 +1211,6 @@ public abstract class DataDstUEBase extends DataDstJava {
             case DOUBLE: {
                 DataContainer<Double> ret = DataSrcImpl.getOurInstance().getValue(desc.identify, 0.0);
                 if (null != ret && ret.valid) {
-                    String validateErrorMessage = desc.validateTypeLimit(ret.value);
-                    if (null != validateErrorMessage) {
-                        throw new ConvException(validateErrorMessage);
-                    }
-
                     return ret.value.doubleValue();
                 } else if (desc.getFieldListStripRule() == DataDstWriterNode.ListStripRule.STRIP_NOTHING) {
                     return Double.valueOf(0);
@@ -1239,11 +1221,6 @@ public abstract class DataDstUEBase extends DataDstJava {
             case BOOLEAN: {
                 DataContainer<Boolean> ret = DataSrcImpl.getOurInstance().getValue(desc.identify, false);
                 if (null != ret && ret.valid) {
-                    String validateErrorMessage = desc.validateTypeLimit(ret.value);
-                    if (null != validateErrorMessage) {
-                        throw new ConvException(validateErrorMessage);
-                    }
-
                     return ret.value.booleanValue();
                 } else if (desc.getFieldListStripRule() == DataDstWriterNode.ListStripRule.STRIP_NOTHING) {
                     return Boolean.valueOf(false);
@@ -1254,11 +1231,6 @@ public abstract class DataDstUEBase extends DataDstJava {
             case STRING: {
                 DataContainer<String> ret = DataSrcImpl.getOurInstance().getValue(desc.identify, "");
                 if (null != ret && ret.valid) {
-                    String validateErrorMessage = desc.validateTypeLimit(ret.value);
-                    if (null != validateErrorMessage) {
-                        throw new ConvException(validateErrorMessage);
-                    }
-
                     return ret.value;
                 } else if (desc.getFieldListStripRule() == DataDstWriterNode.ListStripRule.STRIP_NOTHING) {
                     return "";
@@ -1269,11 +1241,6 @@ public abstract class DataDstUEBase extends DataDstJava {
             case BYTES: {
                 DataContainer<String> res = DataSrcImpl.getOurInstance().getValue(desc.identify, "");
                 if (null != res && res.valid) {
-                    String validateErrorMessage = desc.validateTypeLimit(res.value);
-                    if (null != validateErrorMessage) {
-                        throw new ConvException(validateErrorMessage);
-                    }
-
                     String encoding = SchemeConf.getInstance().getKey().getEncoding();
                     if (null == encoding || encoding.isEmpty()) {
                         return Base64.getEncoder().encodeToString(res.value.getBytes());
@@ -1514,8 +1481,7 @@ public abstract class DataDstUEBase extends DataDstJava {
         // ======================================================================================================
         LinkedList<DataDstWriterNodeWrapper> expandedDesc = new LinkedList<DataDstWriterNodeWrapper>();
         ddNode = DataDstWriterNode.create(null,
-                DataDstWriterNode.getDefaultMessageDescriptor(DataDstWriterNode.JAVA_TYPE.STRING,
-                        DataDstWriterNode.SPECIAL_TYPE_LIMIT.NONE, null),
+                DataDstWriterNode.getDefaultMessageDescriptor(DataDstWriterNode.JAVA_TYPE.STRING, null, null),
                 -1);
         ddNode.setFieldDescriptor(new DataDstFieldDescriptor(ddNode.getTypeDescriptor(), 1, "Name",
                 DataDstWriterNode.FIELD_LABEL_TYPE.OPTIONAL, null));
@@ -1527,7 +1493,7 @@ public abstract class DataDstUEBase extends DataDstJava {
 
         ddNode = DataDstWriterNode.create(null,
                 DataDstWriterNode.getDefaultMessageDescriptor(DataDstWriterNode.JAVA_TYPE.INT,
-                        DataDstWriterNode.SPECIAL_TYPE_LIMIT.INT32, null),
+                        DataDstWriterNode.getDefaultTypeValidatorInt32(), null),
                 -1);
         ddNode.setFieldDescriptor(new DataDstFieldDescriptor(ddNode.getTypeDescriptor(), 2, "Value",
                 DataDstWriterNode.FIELD_LABEL_TYPE.OPTIONAL, null));
@@ -2089,7 +2055,7 @@ public abstract class DataDstUEBase extends DataDstJava {
         if (field.getType() == JAVA_TYPE.MESSAGE) {
             // 如果开启了嵌套模式，还要补全未使用的字段，因为可能被别处用到
             if (field.getTypeDescriptor().hasChildrenFields()) {
-                HashSet<String> dumpedOneof = new HashSet<String>();
+                HashSet<String> dumpedOneof = new HashSet<>();
 
                 for (DataDstFieldDescriptor subField : field.getTypeDescriptor().getSortedFields()) {
 
@@ -2165,11 +2131,12 @@ public abstract class DataDstUEBase extends DataDstJava {
     }
 
     static DataDstFieldDescriptor createVirtualFieldDescriptor(String name, int index, JAVA_TYPE type) {
-        SPECIAL_TYPE_LIMIT typeLimit = SPECIAL_TYPE_LIMIT.NONE;
+        DataVerifyImpl typeValidator = null;
         if (type == JAVA_TYPE.INT) {
-            typeLimit = SPECIAL_TYPE_LIMIT.INT32;
+            typeValidator = DataDstWriterNode.getDefaultTypeValidatorInt32();
         }
-        return new DataDstFieldDescriptor(DataDstWriterNode.getDefaultMessageDescriptor(type, typeLimit, null), index,
+        return new DataDstFieldDescriptor(DataDstWriterNode.getDefaultMessageDescriptor(type, typeValidator, null),
+                index,
                 name,
                 FIELD_LABEL_TYPE.OPTIONAL, null);
     }

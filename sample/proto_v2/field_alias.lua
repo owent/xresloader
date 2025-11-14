@@ -12,7 +12,7 @@ return {
     },
     data_ver = "1.0.0.0",
     hash_code = "sha256:ef7f8c16749eaade17de51b58810cd06c57a8ec45cee89a8e450b4326e9eb2ae",
-    xres_ver = "2.21.0-previous",
+    xres_ver = "dev",
   },
   [2] = "field_alias_message",
   field_alias_message = {

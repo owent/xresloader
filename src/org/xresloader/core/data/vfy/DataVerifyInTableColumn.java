@@ -58,6 +58,12 @@ public class DataVerifyInTableColumn extends DataVerifyImpl {
 
             CustomDataTableIndex tableIndex = ExcelEngine.openStreamTableIndex(file, sheetName);
 
+            if (tableIndex == null) {
+                ProgramOptions.getLoger().error("Can not open sheet %s in %s for table column validator %s",
+                        sheetName, this.file.getAbsolutePath(), this.name);
+                return false;
+            }
+
             int startColumn = -1;
             if (this.parameters.size() == 5) {
                 startColumn = Integer.parseInt(this.parameters.get(4));

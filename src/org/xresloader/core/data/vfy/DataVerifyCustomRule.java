@@ -252,6 +252,7 @@ public abstract class DataVerifyCustomRule extends DataVerifyImpl {
 
                     Object nameObj = ((Map<?, ?>) ruleObject).get("name");
                     Object descriptionObj = ((Map<?, ?>) ruleObject).getOrDefault("description", null);
+                    Object modeObj = ((Map<?, ?>) ruleObject).getOrDefault("mode", null);
                     Object rulesObj = ((Map<?, ?>) ruleObject).get("rules");
                     if (nameObj == null || !(nameObj instanceof String)) {
                         continue;
@@ -263,8 +264,12 @@ public abstract class DataVerifyCustomRule extends DataVerifyImpl {
 
                     String name = (String) nameObj;
                     String description = null;
+                    String mode = "";
                     if (descriptionObj != null && descriptionObj instanceof String) {
                         description = (String) descriptionObj;
+                    }
+                    if (modeObj != null && modeObj instanceof String) {
+                        mode = (String) modeObj;
                     }
 
                     ArrayList<String> rules = new ArrayList<>();
@@ -298,11 +303,28 @@ public abstract class DataVerifyCustomRule extends DataVerifyImpl {
                         }
                     }
 
-                    if (null != ret.put(name, new DataVerifyCustomOrRule(name, rules, description, version))) {
-                        ProgramOptions.getLoger().warn(
-                                "Load custom validator file \"%s\" with more than one rule with name \"%s\", we will use the last one.",
-                                filePath,
-                                name);
+                    if (mode.equalsIgnoreCase("and")) {
+                        if (null != ret.put(name, new DataVerifyCustomAndRule(name, rules, description, version))) {
+                            ProgramOptions.getLoger().warn(
+                                    "Load custom validator file \"%s\" with more than one rule with name \"%s\", we will use the last one.",
+                                    filePath,
+                                    name);
+                        }
+                    } else if (mode.equalsIgnoreCase("not")) {
+                        if (null != ret.put(name, new DataVerifyCustomNotRule(name, rules, description, version))) {
+                            ProgramOptions.getLoger().warn(
+                                    "Load custom validator file \"%s\" with more than one rule with name \"%s\", we will use the last one.",
+                                    filePath,
+                                    name);
+                        }
+                    } else {
+                        // Default is or
+                        if (null != ret.put(name, new DataVerifyCustomOrRule(name, rules, description, version))) {
+                            ProgramOptions.getLoger().warn(
+                                    "Load custom validator file \"%s\" with more than one rule with name \"%s\", we will use the last one.",
+                                    filePath,
+                                    name);
+                        }
                     }
                 }
             }

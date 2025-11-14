@@ -1,17 +1,17 @@
 package org.xresloader.core.data.src;
 
+import java.io.File;
+import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.List;
+
+import org.apache.poi.ss.usermodel.Sheet;
 import org.xresloader.core.ProgramOptions;
 import org.xresloader.core.data.err.ConvException;
 import org.xresloader.core.engine.ExcelEngine;
 import org.xresloader.core.engine.IdentifyDescriptor;
 import org.xresloader.core.engine.IdentifyEngine;
 import org.xresloader.core.scheme.SchemeConf;
-import org.apache.poi.ss.usermodel.Sheet;
-
-import java.io.File;
-import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.List;
 
 /**
  * Created by owentou on 2014/10/9.
@@ -25,13 +25,13 @@ public class DataSrcExcel extends DataSrcImpl {
         public ExcelEngine.DataRowWrapper currentRow = null;
         public int nextIndex = 0;
         public int lastRowNumber = -1;
-        public HashMap<String, IdentifyDescriptor> nameMapping = new HashMap<String, IdentifyDescriptor>();
-        public LinkedList<IdentifyDescriptor> indexMapping = new LinkedList<IdentifyDescriptor>();
-        public HashMap<String, Boolean> identifyPrefixAvailable = new HashMap<String, Boolean>();
+        public HashMap<String, IdentifyDescriptor> nameMapping = new HashMap<>();
+        public LinkedList<IdentifyDescriptor> indexMapping = new LinkedList<>();
+        public HashMap<String, Boolean> identifyPrefixAvailable = new HashMap<>();
     }
 
     private HashMap<String, String> macros = null;
-    private LinkedList<DataSheetInfo> tables = new LinkedList<DataSheetInfo>();
+    private final LinkedList<DataSheetInfo> tables = new LinkedList<>();
     private DataSheetInfo current = null;
     private int recordNumber = 0;
     private boolean initialized = false;
@@ -44,15 +44,20 @@ public class DataSrcExcel extends DataSrcImpl {
 
     @Override
     public int init() {
-        int ret = init_macros();
-        if (ret < 0)
-            return ret;
+        try {
+            int ret = init_macros();
+            if (ret < 0)
+                return ret;
 
-        ret = init_sheet();
-        if (ret >= 0) {
-            initialized = true;
+            ret = init_sheet();
+            if (ret >= 0) {
+                initialized = true;
+            }
+            return ret;
+        } catch (ConvException ex) {
+            ProgramOptions.getLoger().error("Initialize DataSrcExcel failed: %s", ex.getMessage());
+            return -1;
         }
-        return ret;
     }
 
     @Override
@@ -62,7 +67,7 @@ public class DataSrcExcel extends DataSrcImpl {
 
     private class MacroFileCache {
         public SchemeConf.DataInfo file = null;
-        public HashMap<String, String> macros = new HashMap<String, String>();
+        public HashMap<String, String> macros = new HashMap<>();
 
         public MacroFileCache(SchemeConf.DataInfo _f, String fixed_file_name) {
             file = _f;
@@ -75,17 +80,17 @@ public class DataSrcExcel extends DataSrcImpl {
      */
     static private class MacroCacheInfo {
         /*** file_path:key->value ***/
-        private HashMap<String, MacroFileCache> cache = new HashMap<String, MacroFileCache>();
-        private HashMap<String, String> empty = new HashMap<String, String>(); // 空项特殊处理
+        private final HashMap<String, MacroFileCache> cache = new HashMap<>();
+        private final HashMap<String, String> empty = new HashMap<>(); // 空项特殊处理
     }
 
-    static private MacroCacheInfo macro_cache = new MacroCacheInfo();
+    private static final MacroCacheInfo macro_cache = new MacroCacheInfo();
 
     /***
      * 构建macro表cache，由于macro表大多数情况下都一样，所以加缓存优化
      */
-    HashMap<String, String> init_macro_with_cache(List<SchemeConf.DataInfo> src_list) {
-        LinkedList<HashMap<String, String>> data_filled = new LinkedList<HashMap<String, String>>();
+    HashMap<String, String> init_macro_with_cache(List<SchemeConf.DataInfo> src_list) throws ConvException {
+        LinkedList<HashMap<String, String>> data_filled = new LinkedList<>();
 
         IdentifyDescriptor column_ident = new IdentifyDescriptor();
 
@@ -168,7 +173,7 @@ public class DataSrcExcel extends DataSrcImpl {
             return data_filled.getFirst();
         }
 
-        HashMap<String, String> ret = new HashMap<String, String>();
+        HashMap<String, String> ret = new HashMap<>();
         for (HashMap<String, String> copy_from : data_filled) {
             ret.putAll(copy_from);
         }
@@ -181,14 +186,14 @@ public class DataSrcExcel extends DataSrcImpl {
      *
      * @return
      */
-    private int init_macros() {
+    private int init_macros() throws ConvException {
         SchemeConf scfg = SchemeConf.getInstance();
         macros = init_macro_with_cache(scfg.getMacroSource());
 
         return 0;
     }
 
-    private int init_sheet() {
+    private int init_sheet() throws ConvException {
         tables.clear();
         recordNumber = 0;
 

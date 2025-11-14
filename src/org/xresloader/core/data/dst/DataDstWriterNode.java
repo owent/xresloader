@@ -3,6 +3,8 @@ package org.xresloader.core.data.dst;
 import org.xresloader.core.ProgramOptions;
 import org.xresloader.core.data.err.ConvException;
 import org.xresloader.core.data.vfy.DataVerifyImpl;
+import org.xresloader.core.data.vfy.DataVerifyNumberRange;
+import org.xresloader.core.data.vfy.DataVerifyResult;
 import org.xresloader.core.engine.IdentifyDescriptor;
 
 import java.util.ArrayList;
@@ -21,10 +23,6 @@ public class DataDstWriterNode {
 
     public enum SPECIAL_MESSAGE_TYPE {
         NONE, MAP, TIMEPOINT, DURATION
-    }
-
-    public enum SPECIAL_TYPE_LIMIT {
-        NONE, INT32, UINT32
     }
 
     public enum FIELD_LABEL_TYPE {
@@ -179,14 +177,14 @@ public class DataDstWriterNode {
             }
 
             if (null == verifyEngine) {
-                verifyEngine = new LinkedList<DataVerifyImpl>();
+                verifyEngine = new LinkedList<>();
             }
 
             verifyEngine.add(ver);
         }
 
         public List<DataVerifyImpl> getValidator() {
-            return verifyEngine;
+            return this.verifyEngine;
         }
 
         public JAVA_TYPE getType() {
@@ -222,25 +220,33 @@ public class DataDstWriterNode {
             return SPECIAL_MESSAGE_TYPE.NONE;
         }
 
-        public SPECIAL_TYPE_LIMIT getSpecialTypeLimit() {
+        public DataVerifyImpl getTypeValidator() {
             if (this.referTypeDescriptor != null) {
-                return this.referTypeDescriptor.getSpecialTypeLimit();
+                return this.referTypeDescriptor.getTypeValidator();
             }
 
-            return SPECIAL_TYPE_LIMIT.NONE;
-        }
-
-        public DataDstEnumDescriptor getReferEnumType() {
-            if (this.referTypeDescriptor != null) {
-                return this.referTypeDescriptor.getReferEnumType();
+            if (this.referOneofDescriptor != null) {
+                return this.referOneofDescriptor.getTypeValidator();
             }
 
             return null;
         }
 
-        public String validateTypeLimit(Object value) {
+        public boolean hasTypeValidator() {
             if (this.referTypeDescriptor != null) {
-                return this.referTypeDescriptor.validateTypeLimit(value);
+                return this.referTypeDescriptor.hasTypeValidator();
+            }
+
+            if (this.referOneofDescriptor != null) {
+                return this.referOneofDescriptor.hasTypeValidator();
+            }
+
+            return false;
+        }
+
+        public DataDstEnumDescriptor getReferEnumType() {
+            if (this.referTypeDescriptor != null) {
+                return this.referTypeDescriptor.getReferEnumType();
             }
 
             return null;
@@ -429,10 +435,10 @@ public class DataDstWriterNode {
         private ArrayList<DataDstEnumValueDescriptor> sorted_values = null;
 
         public DataDstEnumDescriptor(String fullName, String name, Object rawDesc) {
-            this.values_by_name = new HashMap<String, DataDstEnumValueDescriptor>();
+            this.values_by_name = new HashMap<>();
             this.name = name;
             this.rawDescriptor = rawDesc;
-            this.values_by_id = new HashMap<Integer, DataDstEnumValueDescriptor>();
+            this.values_by_id = new HashMap<>();
 
             if (fullName == null || fullName.isEmpty()) {
                 this.fullName = name;
@@ -487,7 +493,7 @@ public class DataDstWriterNode {
                 return this.sorted_values;
             }
 
-            this.sorted_values = new ArrayList<DataDstEnumValueDescriptor>();
+            this.sorted_values = new ArrayList<>();
             this.sorted_values.ensureCapacity(this.values_by_name.size());
             for (HashMap.Entry<String, DataDstEnumValueDescriptor> d : this.values_by_name.entrySet()) {
                 this.sorted_values.add(d.getValue());
@@ -503,32 +509,35 @@ public class DataDstWriterNode {
         private int index = 0;
         private String name = null;
         private String fullName = null;
-        private HashMap<String, DataDstFieldDescriptor> fields_by_name = null;
-        private HashMap<Integer, DataDstFieldDescriptor> fields_by_id = null;
+        private HashMap<String, DataDstFieldDescriptor> fieldsByName = null;
+        private HashMap<Integer, DataDstFieldDescriptor> fieldsById = null;
         private ArrayList<DataDstFieldDescriptor> sortedFields = null;
         private DataDstTypeDescriptor owner = null;
         private DataDstOneofExt extension = null;
         private List<DataVerifyImpl> verifyEngine = null;
+        private DataVerifyImpl typeValidator = null;
         private Object rawDescriptor = null;
 
         public DataDstOneofDescriptor(DataDstTypeDescriptor owner, HashMap<String, DataDstFieldDescriptor> fields,
-                int index, String name, Object rawDesc) {
+                int index, String name, Object rawDesc, DataVerifyImpl typeValidator) {
             this.owner = owner;
-            this.fields_by_name = fields;
+            this.fieldsByName = fields;
             this.index = index;
             this.name = name;
 
             this.rawDescriptor = rawDesc;
 
-            this.fields_by_id = new HashMap<Integer, DataDstFieldDescriptor>();
+            this.fieldsById = new HashMap<>();
             for (HashMap.Entry<String, DataDstFieldDescriptor> d : fields.entrySet()) {
-                this.fields_by_id.put(d.getValue().getIndex(), d.getValue());
+                this.fieldsById.put(d.getValue().getIndex(), d.getValue());
             }
             this.fullName = String.format("%s.%s", owner.getFullName(), name);
 
             for (HashMap.Entry<String, DataDstFieldDescriptor> d : fields.entrySet()) {
                 d.getValue().setReferOneof(this);
             }
+
+            this.typeValidator = typeValidator;
         }
 
         public Object getRawDescriptor() {
@@ -549,14 +558,22 @@ public class DataDstWriterNode {
             }
 
             if (null == verifyEngine) {
-                verifyEngine = new LinkedList<DataVerifyImpl>();
+                verifyEngine = new LinkedList<>();
             }
 
             verifyEngine.add(ver);
         }
 
         public List<DataVerifyImpl> getValidator() {
-            return verifyEngine;
+            return this.verifyEngine;
+        }
+
+        public DataVerifyImpl getTypeValidator() {
+            return this.typeValidator;
+        }
+
+        public boolean hasTypeValidator() {
+            return this.typeValidator != null && this.typeValidator.isValid();
         }
 
         public DataDstTypeDescriptor getOwnerDescriptor() {
@@ -585,25 +602,25 @@ public class DataDstWriterNode {
         }
 
         public DataDstFieldDescriptor getFieldById(int index) {
-            return fields_by_id.getOrDefault(index, null);
+            return fieldsById.getOrDefault(index, null);
         }
 
         public DataDstFieldDescriptor getFieldByName(String name) {
-            return fields_by_name.getOrDefault(name, null);
+            return fieldsByName.getOrDefault(name, null);
         }
 
         public ArrayList<DataDstFieldDescriptor> getSortedFields() {
-            if (this.fields_by_name == null) {
+            if (this.fieldsByName == null) {
                 return null;
             }
 
-            if (this.sortedFields != null && this.sortedFields.size() == this.fields_by_name.size()) {
+            if (this.sortedFields != null && this.sortedFields.size() == this.fieldsByName.size()) {
                 return this.sortedFields;
             }
 
-            this.sortedFields = new ArrayList<DataDstFieldDescriptor>();
-            this.sortedFields.ensureCapacity(this.fields_by_name.size());
-            for (HashMap.Entry<String, DataDstFieldDescriptor> d : this.fields_by_name.entrySet()) {
+            this.sortedFields = new ArrayList<>();
+            this.sortedFields.ensureCapacity(this.fieldsByName.size());
+            for (HashMap.Entry<String, DataDstFieldDescriptor> d : this.fieldsByName.entrySet()) {
                 this.sortedFields.add(d.getValue());
             }
             this.sortedFields.sort((l, r) -> {
@@ -665,8 +682,8 @@ public class DataDstWriterNode {
 
     static public class DataDstTypeDescriptor {
         private JAVA_TYPE type = JAVA_TYPE.INT;
-        private SPECIAL_MESSAGE_TYPE special_message_type = SPECIAL_MESSAGE_TYPE.NONE;
-        private SPECIAL_TYPE_LIMIT special_type_limit = SPECIAL_TYPE_LIMIT.NONE;
+        private SPECIAL_MESSAGE_TYPE specialMessageType = SPECIAL_MESSAGE_TYPE.NONE;
+        private DataVerifyImpl typeValidator = null;
         private String packageName = null;
         private String messageName = null;
         private String fullName = null;
@@ -679,7 +696,7 @@ public class DataDstWriterNode {
         private Object rawDescriptor = null;
 
         public DataDstTypeDescriptor(JAVA_TYPE type, String pkgName, String msgName, Object rawDesc,
-                SPECIAL_MESSAGE_TYPE specialMessageType, SPECIAL_TYPE_LIMIT specialTypeLimit,
+                SPECIAL_MESSAGE_TYPE specialMessageType, DataVerifyImpl typeValidator,
                 DataDstEnumDescriptor referToEnum) {
             this.type = type;
             if (msgName == null || msgName.isEmpty()) {
@@ -695,9 +712,10 @@ public class DataDstWriterNode {
             }
             this.rawDescriptor = rawDesc;
 
-            this.special_message_type = specialMessageType;
-            this.special_type_limit = specialTypeLimit;
+            this.specialMessageType = specialMessageType;
             this.referToEnum = referToEnum;
+
+            this.typeValidator = typeValidator;
         }
 
         public Object getRawDescriptor() {
@@ -709,11 +727,15 @@ public class DataDstWriterNode {
         }
 
         public SPECIAL_MESSAGE_TYPE getSpecialMessageType() {
-            return this.special_message_type;
+            return this.specialMessageType;
         }
 
-        public SPECIAL_TYPE_LIMIT getSpecialTypeLimit() {
-            return this.special_type_limit;
+        public DataVerifyImpl getTypeValidator() {
+            return this.typeValidator;
+        }
+
+        public boolean hasTypeValidator() {
+            return this.typeValidator != null && this.typeValidator.isValid();
         }
 
         public DataDstEnumDescriptor getReferEnumType() {
@@ -730,31 +752,6 @@ public class DataDstWriterNode {
 
         public String getFullName() {
             return this.fullName;
-        }
-
-        public String validateTypeLimit(Object value) {
-            switch (getSpecialTypeLimit()) {
-                case INT32:
-                    if (value instanceof Long) {
-                        long v = (long) value;
-                        if (v > Integer.MAX_VALUE || v < Integer.MIN_VALUE) {
-                            return String.format("Value %d out of int32 range", v);
-                        }
-                    }
-                    break;
-                case UINT32:
-                    if (value instanceof Long) {
-                        long v = (long) value;
-                        if (v > 0xFFFFFFFFL || v < 0) {
-                            return String.format("Value %d out of uint32 range", v);
-                        }
-                    }
-                    break;
-                default:
-                    break;
-            }
-
-            return null;
         }
 
         public DataDstMessageExt mutableExtension() {
@@ -779,7 +776,7 @@ public class DataDstWriterNode {
                 return sortedFields;
             }
 
-            sortedFields = new ArrayList<DataDstFieldDescriptor>();
+            sortedFields = new ArrayList<>();
             sortedFields.ensureCapacity(fields.size());
             for (HashMap.Entry<String, DataDstFieldDescriptor> d : fields.entrySet()) {
                 sortedFields.add(d.getValue());
@@ -835,7 +832,7 @@ public class DataDstWriterNode {
                 return sortedOneofs;
             }
 
-            sortedOneofs = new ArrayList<DataDstOneofDescriptor>();
+            sortedOneofs = new ArrayList<>();
             sortedOneofs.ensureCapacity(fields.size());
             for (HashMap.Entry<String, DataDstOneofDescriptor> d : oneofs.entrySet()) {
                 sortedOneofs.add(d.getValue());
@@ -957,11 +954,41 @@ public class DataDstWriterNode {
     private DataDstChildrenNode referBrothers = null;
     private int listIndex = -1;
 
-    static private HashMap<String, DataDstTypeDescriptor> defaultDescs = new HashMap<String, DataDstTypeDescriptor>();
+    static private HashMap<String, DataDstTypeDescriptor> defaultDescs = new HashMap<>();
 
-    static public DataDstTypeDescriptor getDefaultMessageDescriptor(JAVA_TYPE type, SPECIAL_TYPE_LIMIT typeLimit,
+    static DataVerifyImpl defaultValidatorInt32 = null;
+    static DataVerifyImpl defaultValidatorUInt32 = null;
+    static DataVerifyImpl defaultValidatorUInt64 = null;
+
+    static public DataVerifyImpl getDefaultTypeValidatorInt32() {
+        if (defaultValidatorInt32 == null) {
+            defaultValidatorInt32 = new DataVerifyNumberRange("int32", "-2147483648-2147483647");
+        }
+        return defaultValidatorInt32;
+    }
+
+    static public DataVerifyImpl getDefaultTypeValidatorUInt32() {
+        if (defaultValidatorUInt32 == null) {
+            defaultValidatorUInt32 = new DataVerifyNumberRange("uint32", "0-4294967295");
+        }
+        return defaultValidatorUInt32;
+    }
+
+    static public DataVerifyImpl getDefaultTypeValidatorUInt64() {
+        if (defaultValidatorUInt64 == null) {
+            defaultValidatorUInt64 = new DataVerifyNumberRange("uint64", ">=0");
+        }
+        return defaultValidatorUInt64;
+    }
+
+    static public DataDstTypeDescriptor getDefaultMessageDescriptor(JAVA_TYPE type, DataVerifyImpl typeValidator,
             DataDstEnumDescriptor referToEnum) {
-        String key = String.format("%s:%s", type.name(), typeLimit.name());
+        String key;
+        if (typeValidator != null) {
+            key = String.format("%s:%s", type.name(), typeValidator.getName());
+        } else {
+            key = String.format("%s", type.name());
+        }
         DataDstTypeDescriptor ret = defaultDescs.getOrDefault(key, null);
         if (ret != null) {
             return ret;
@@ -974,7 +1001,7 @@ public class DataDstWriterNode {
             return null;
         }
 
-        ret = new DataDstTypeDescriptor(type, null, null, null, SPECIAL_MESSAGE_TYPE.NONE, typeLimit, referToEnum);
+        ret = new DataDstTypeDescriptor(type, null, null, null, SPECIAL_MESSAGE_TYPE.NONE, typeValidator, referToEnum);
         defaultDescs.put(key, ret);
         return ret;
     }
@@ -1022,7 +1049,7 @@ public class DataDstWriterNode {
 
     public HashMap<String, DataDstChildrenNode> getChildren() {
         if (null == children)
-            children = new HashMap<String, DataDstChildrenNode>();
+            children = new HashMap<>();
         return children;
     }
 
@@ -1041,18 +1068,6 @@ public class DataDstWriterNode {
 
         // enum retrun JAVA_TYPE as UNKNOWN
         return JAVA_TYPE.UNKNOWN;
-    }
-
-    public String validateTypeLimit(Object value) {
-        if (this.typeDescriptor != null) {
-            return this.typeDescriptor.validateTypeLimit(value);
-        }
-
-        if (this.fieldDescriptor != null) {
-            return this.fieldDescriptor.validateTypeLimit(value);
-        }
-
-        return null;
     }
 
     public String getPackageName() {
@@ -1207,7 +1222,7 @@ public class DataDstWriterNode {
 
         res.mode = mode;
         if (null == res.nodes) {
-            res.nodes = new ArrayList<DataDstWriterNode>();
+            res.nodes = new ArrayList<>();
         }
         res.nodes.add(node);
         node.referBrothers = res;

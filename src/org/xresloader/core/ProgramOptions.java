@@ -44,7 +44,7 @@ public class ProgramOptions {
     private static String version = null;
     private static Properties properties = null;
     private static String dataSourceMappingFile = "";
-    private static HashMap<String, String> dataSourceMappingResult = new HashMap<String, String>();
+    private static HashMap<String, String> dataSourceMappingResult = new HashMap<>();
     private static String dataSourceMappingHashSeed = "xresloader";
 
     private String defaultDataVersion = null;
@@ -538,7 +538,7 @@ public class ProgramOptions {
                     break;
                 }
 
-                Pattern match_rule = null;
+                Pattern match_rule;
                 try {
                     match_rule = Pattern.compile(groups[start_index]);
                 } catch (PatternSyntaxException e) {
@@ -608,10 +608,10 @@ public class ProgramOptions {
         }
 
         properties = new Properties();
-        try {
-            InputStream inCfg = getInstance().getClass().getClassLoader().getResourceAsStream("application.properties");
+
+        try (InputStream inCfg = getInstance().getClass().getClassLoader()
+                .getResourceAsStream("application.properties")) {
             properties.load(inCfg);
-            inCfg.close();
         } catch (IOException e) {
             ProgramOptions.getLoger().error("Get properties file application.properties failed.\n%s", e.getMessage());
         }
@@ -620,9 +620,15 @@ public class ProgramOptions {
     }
 
     public synchronized String getVersion() {
-        if (version == null) {
+        if (version != null) {
+            return version;
+        }
+
+        version = System.getProperty("xresloader.version");
+        if (version == null || version.strip().isEmpty()) {
             version = getProperties().getProperty("version", "Unknown");
         }
+
         return version;
     }
 
@@ -745,8 +751,8 @@ public class ProgramOptions {
 
     static public int dumpDataSourceMapping() {
         int ret = 0;
-        OutputStream out = null;
-        File file = null;
+        OutputStream out;
+        File file;
         synchronized (dataSourceMappingFile) {
             if (dataSourceMappingFile.isEmpty()) {
                 return ret;
@@ -799,7 +805,7 @@ public class ProgramOptions {
             return ret;
         }
 
-        ArrayList<String> keys = new ArrayList<String>();
+        ArrayList<String> keys = new ArrayList<>();
 
         synchronized (dataSourceMappingResult) {
             for (String key : dataSourceMappingResult.keySet()) {

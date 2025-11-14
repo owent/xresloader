@@ -97,12 +97,16 @@ public final class SchemeDataSourceExcel extends SchemeDataSourceBase {
         return true;
     }
 
-    private String cell2str(ExcelEngine.DataRowWrapper rowWrapper, int col) {
+    private String cell2str(ExcelEngine.DataRowWrapper rowWrapper, int col) throws InitializeException {
         IdentifyDescriptor ident = new IdentifyDescriptor();
         ident.index = col;
 
         DataContainer<String> cache = DataSrcImpl.getStringCache("");
-        ExcelEngine.cell2s(cache, rowWrapper, ident);
+        try {
+            ExcelEngine.cell2s(cache, rowWrapper, ident);
+        } catch (ConvException ex) {
+            throw new InitializeException("convert excel cell to string failed", ex);
+        }
         return cache.get();
     }
 

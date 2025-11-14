@@ -30,11 +30,11 @@ jobs:
         with:
           lfs: true
           submodules: true
-      - name: Set up JDK 17
+      - name: Set up JDK 21
         uses: actions/setup-java@v4 # https://github.com/actions/setup-java
         with:
           distribution: temurin
-          java-version: "17"
+          java-version: "21"
           java-package: jdk
           architecture: x64
       - name: Build with Maven
@@ -45,7 +45,7 @@ jobs:
           python3 gen_header_v2.py
           python3 gen_header_v3.py
           cd ..
-          mvn -Dproject.target.javaVersion=11 package --file pom.xml
+          mvn -Dproject.target.javaVersion=21 package --file pom.xml
           mvn package --file pom.xml
           cd sample
           bash gen_sample_output.sh

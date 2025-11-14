@@ -179,7 +179,7 @@ public class DataVerifyNumberRange extends DataVerifyImpl {
                 is_double = true;
             }
         }
-        if (!is_double) {
+        if (is_numeric && !is_double) {
             Double d = Double.valueOf(intstr);
             if (d > Long.MAX_VALUE || d < Long.MIN_VALUE) {
                 is_double = true;

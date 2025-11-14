@@ -22,8 +22,8 @@ for proto_dir in proto_v2 proto_v3; do
   java -client -jar "$XRESLOADER" -t lua -p protobuf -o $proto_dir -f $proto_dir/kind.pb --pretty 2 -c kind_const.lua
   java -client -jar "$XRESLOADER" -t lua -p protobuf -o $proto_dir -f $proto_dir/kind.pb --pretty 2 --lua-module ProtoEnums.Kind -c kind_const_module.lua
   java -client -jar "$XRESLOADER" -t bin -p protobuf -o $proto_dir -f $proto_dir/kind.pb -s $XLSX_FILE -m scheme_kind -a 1.0.0.0
-  java -client -jar "$XRESLOADER" -t lua -p protobuf -o $proto_dir -f $proto_dir/kind.pb --pretty 4 -s $XLSX_FILE -m scheme_kind -n "/(?i)\.bin\$/\.lua/" --data-version 1.0.0.0
-  java -client -jar "$XRESLOADER" -t lua -p protobuf -o $proto_dir -f $proto_dir/kind.pb --lua-module ProtoData.Kind -s $XLSX_FILE -m scheme_kind -n "/(?i)\.bin\$/_module\.lua/" --data-version 1.0.0.0
+  java "-Dxresloader.version=dev" -client -jar "$XRESLOADER" -t lua -p protobuf -o $proto_dir -f $proto_dir/kind.pb --pretty 4 -s $XLSX_FILE -m scheme_kind -n "/(?i)\.bin\$/\.lua/" --data-version 1.0.0.0
+  java "-Dxresloader.version=dev" -client -jar "$XRESLOADER" -t lua -p protobuf -o $proto_dir -f $proto_dir/kind.pb --lua-module ProtoData.Kind -s $XLSX_FILE -m scheme_kind -n "/(?i)\.bin\$/_module\.lua/" --data-version 1.0.0.0
   echo "Generate sample data for $proto_dir, batchmode using --stdin"
   CMDS='
         -t lua -p protobuf -o '$proto_dir'     -f '$proto_dir/kind.pb' --pretty 2 -i kind.desc.lua --data-source-mapping-mode sha256 --data-source-mapping-file '$proto_dir/data_source_mapping.txt'
@@ -74,6 +74,6 @@ for proto_dir in proto_v2 proto_v3; do
     '
 
   echo "Run with --stdin: $CMDS"
-  echo "$CMDS" | java -client -jar "$XRESLOADER" --stdin --data-version 1.0.0.0
+  echo "$CMDS" | java "-Dxresloader.version=dev" -client -jar "$XRESLOADER" --stdin --data-version 1.0.0.0
   echo "Exit code: $?"
 done

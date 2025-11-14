@@ -204,11 +204,11 @@ public abstract class DataVerifyImpl {
         }
 
         if (!typeValidator.get(n, verifyCache)) {
-            String message = String.format("Check %d for %s with type validator %s failed, check data failed.", n,
-                    path, typeValidator.getName());
             if (testMode) {
                 return n;
             }
+            String message = String.format("Check %d for %s with type validator %s failed, check data failed.", n,
+                    path, typeValidator.getName());
             if (getValidatorFailedLevel(typeValidator) == ValidatorFailedLevel.ERROR) {
                 throw new ConvException(
                         message);
@@ -238,11 +238,11 @@ public abstract class DataVerifyImpl {
         }
 
         if (!typeValidator.get(n, verifyCache)) {
-            String message = String.format("Check %f for %s with type validator %s failed, check data failed.", n,
-                    path, typeValidator.getName());
             if (testMode) {
                 return n;
             }
+            String message = String.format("Check %f for %s with type validator %s failed, check data failed.", n,
+                    path, typeValidator.getName());
             if (getValidatorFailedLevel(typeValidator) == ValidatorFailedLevel.ERROR) {
                 throw new ConvException(
                         message);
@@ -271,11 +271,11 @@ public abstract class DataVerifyImpl {
         }
 
         if (!typeValidator.get(val, verifyCache)) {
-            String message = String.format("Check %s for %s with type validator %s failed, check data failed.", val,
-                    path, typeValidator.getName());
             if (testMode) {
                 return val;
             }
+            String message = String.format("Check %s for %s with type validator %s failed, check data failed.", val,
+                    path, typeValidator.getName());
             if (getValidatorFailedLevel(typeValidator) == ValidatorFailedLevel.ERROR) {
                 throw new ConvException(
                         message);
@@ -497,6 +497,7 @@ public abstract class DataVerifyImpl {
             }
         }
 
+        boolean hasValidator = verifyEngine != null && !verifyEngine.isEmpty();
         try {
             if (is_numeric) {
                 if (is_double) {
@@ -507,47 +508,48 @@ public abstract class DataVerifyImpl {
             }
 
             DataVerifyResult verifyCache = new DataVerifyResult();
+            if (hasValidator) {
+                for (DataVerifyImpl vfy : verifyEngine) {
+                    try {
+                        if (vfy.get(val, verifyCache)) {
+                            if (verifyCache.value == null) {
+                                return getAndVerifyTypeValidator(typeValidator, path, 0, verifyCache, false);
+                            }
+                            if (verifyCache.value instanceof Double) {
+                                return getAndVerifyTypeValidator(typeValidator, path, (Double) verifyCache.value,
+                                        verifyCache, false);
+                            }
+                            if (verifyCache.value instanceof Long) {
+                                return getAndVerifyTypeValidator(typeValidator, path, (Long) verifyCache.value,
+                                        verifyCache, false);
+                            }
+                            if (is_double) {
+                                return getAndVerifyTypeValidator(typeValidator, path,
+                                        doubleValueOf(verifyCache.value.toString()), verifyCache, false);
+                            } else {
+                                return getAndVerifyTypeValidator(typeValidator, path,
+                                        longValueOf(verifyCache.value.toString()), verifyCache, false);
+                            }
+                        }
+                    } catch (Exception e) {
+                        String message = String.format("Check %s for %s with validator %s failed, %s", val, path,
+                                vfy.getDescription(), e.getMessage());
+                        if (getValidatorFailedLevel(vfy) == ValidatorFailedLevel.ERROR) {
+                            throw new ConvException(
+                                    message);
+                        } else {
+                            ProgramOptions.getLoger().warn(message);
+                        }
+                    }
+                }
+            }
 
-            // 对于需要执行数据类型转换的情况，需要先测试类型验证器的转换
+            // 如果有类型验证器，且自定义验证器无效的情况，可以尝试先执行类型验证器的数据转换
             if (typeValidator != null) {
                 val = getAndVerifyTypeValidator(typeValidator, path, val, verifyCache, true);
                 if (verifyCache.success) {
                     // 如果成功，下一步不需要再处理类型验证器了
                     return getAndVerifyToNumber(verifyEngine, null, path, val, is_double);
-                }
-            }
-
-            for (DataVerifyImpl vfy : verifyEngine) {
-                try {
-                    if (vfy.get(val, verifyCache)) {
-                        if (verifyCache.value == null) {
-                            return getAndVerifyTypeValidator(typeValidator, path, 0, verifyCache, false);
-                        }
-                        if (verifyCache.value instanceof Double) {
-                            return getAndVerifyTypeValidator(typeValidator, path, (Double) verifyCache.value,
-                                    verifyCache, false);
-                        }
-                        if (verifyCache.value instanceof Long) {
-                            return getAndVerifyTypeValidator(typeValidator, path, (Long) verifyCache.value,
-                                    verifyCache, false);
-                        }
-                        if (is_double) {
-                            return getAndVerifyTypeValidator(typeValidator, path,
-                                    doubleValueOf(verifyCache.value.toString()), verifyCache, false);
-                        } else {
-                            return getAndVerifyTypeValidator(typeValidator, path,
-                                    longValueOf(verifyCache.value.toString()), verifyCache, false);
-                        }
-                    }
-                } catch (Exception e) {
-                    String message = String.format("Check %s for %s with validator %s failed, %s", val, path,
-                            vfy.getDescription(), e.getMessage());
-                    if (getValidatorFailedLevel(vfy) == ValidatorFailedLevel.ERROR) {
-                        throw new ConvException(
-                                message);
-                    } else {
-                        ProgramOptions.getLoger().warn(message);
-                    }
                 }
             }
         } catch (Exception e) {
@@ -561,7 +563,7 @@ public abstract class DataVerifyImpl {
         }
 
         String message;
-        if (verifyEngine == null || verifyEngine.isEmpty()) {
+        if (!hasValidator) {
             message = String.format("Convert %s for %s, check data failed.", val,
                     path);
         } else {

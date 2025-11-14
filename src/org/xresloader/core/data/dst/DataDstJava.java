@@ -1113,7 +1113,7 @@ public abstract class DataDstJava extends DataDstImpl {
         }
     }
 
-    public ParseResult parsePlainDataMessage(String[] inputs, IdentifyDescriptor ident,
+    private ParseResult parsePlainDataMessage(String[] inputs, IdentifyDescriptor ident,
             org.xresloader.core.data.dst.DataDstWriterNode.DataDstFieldDescriptor field,
             DataRowContext rowContext,
             String fieldPath) throws ConvException {

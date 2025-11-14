@@ -888,7 +888,7 @@ public abstract class DataDstUEBase extends DataDstJava {
             }
 
             // 输出header
-            ArrayList<DataDstWriterNodeWrapper> row_data = new ArrayList<DataDstWriterNodeWrapper>();
+            ArrayList<DataDstWriterNodeWrapper> row_data = new ArrayList<>();
             row_data.ensureCapacity(rule.keyFields.size() + rule.valueFields.size());
             for (int i = 0; i < rule.keyFields.size(); ++i) {
                 row_data.add(rule.keyFields.get(i));
@@ -2055,7 +2055,7 @@ public abstract class DataDstUEBase extends DataDstJava {
         if (field.getType() == JAVA_TYPE.MESSAGE) {
             // 如果开启了嵌套模式，还要补全未使用的字段，因为可能被别处用到
             if (field.getTypeDescriptor().hasChildrenFields()) {
-                HashSet<String> dumpedOneof = new HashSet<String>();
+                HashSet<String> dumpedOneof = new HashSet<>();
 
                 for (DataDstFieldDescriptor subField : field.getTypeDescriptor().getSortedFields()) {
 

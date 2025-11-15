@@ -46,6 +46,7 @@ jobs:
               mv "$JAR_FILE" "target/package/${JAR_BASENAME/.jar/-jre21.jar}"
             fi
           done
+          mvn clean --file pom.xml
           mvn package --file pom.xml
           for JAR_FILE in target/*.jar; do
             mv "$JAR_FILE" "target/package/"

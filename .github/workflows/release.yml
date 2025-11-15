@@ -47,7 +47,7 @@ jobs:
             fi
           done
           mvn clean --file pom.xml
-          mvn package --file pom.xml
+          mvn -Dproject.target.javaVersion=17 package --file pom.xml
           for JAR_FILE in target/*.jar; do
             mv "$JAR_FILE" "target/package/"
           done

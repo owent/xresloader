@@ -18,16 +18,28 @@ public class DataVerifyCustomNotRule extends DataVerifyCustomRule {
       return true;
     }
 
+    Object oldValue = null;
+    if (res != null) {
+      oldValue = res.value;
+    }
+
     for (DataVerifyImpl vfy : this.validators) {
       if (vfy.get(number, res)) {
-        res.success = false;
+        if (res != null) {
+          res.success = false;
+        }
         return false;
       }
     }
 
     if (res != null) {
       res.success = true;
-      res.value = number;
+      // 优先使用原始值，不改变已经通过的验证器转化的数据
+      if (oldValue != null) {
+        res.value = oldValue;
+      } else {
+        res.value = number;
+      }
     }
     return true;
   }
@@ -42,16 +54,28 @@ public class DataVerifyCustomNotRule extends DataVerifyCustomRule {
       return true;
     }
 
+    Object oldValue = null;
+    if (res != null) {
+      oldValue = res.value;
+    }
+
     for (DataVerifyImpl vfy : this.validators) {
       if (vfy.get(number, res)) {
-        res.success = false;
+        if (res != null) {
+          res.success = false;
+        }
         return false;
       }
     }
 
     if (res != null) {
       res.success = true;
-      res.value = number;
+      // 优先使用原始值，不改变已经通过的验证器转化的数据
+      if (oldValue != null) {
+        res.value = oldValue;
+      } else {
+        res.value = number;
+      }
     }
     return true;
   }
@@ -66,16 +90,28 @@ public class DataVerifyCustomNotRule extends DataVerifyCustomRule {
       return true;
     }
 
+    Object oldValue = null;
+    if (res != null) {
+      oldValue = res.value;
+    }
+
     for (DataVerifyImpl vfy : this.validators) {
       if (vfy.get(input, res)) {
-        res.success = false;
+        if (res != null) {
+          res.success = false;
+        }
         return false;
       }
     }
 
     if (res != null) {
       res.success = true;
-      res.value = input;
+      // 优先使用原始值，不改变已经通过的验证器转化的数据
+      if (oldValue != null) {
+        res.value = oldValue;
+      } else {
+        res.value = input;
+      }
     }
     return true;
   }

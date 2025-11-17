@@ -32,6 +32,7 @@ import org.xresloader.core.data.et.DataETProcessor;
 import org.xresloader.core.data.src.DataContainer;
 import org.xresloader.core.data.src.DataSrcImpl;
 import org.xresloader.core.data.vfy.DataVerifyCustomAndRule;
+import org.xresloader.core.data.vfy.DataVerifyCustomNotRule;
 import org.xresloader.core.data.vfy.DataVerifyCustomOrRule;
 import org.xresloader.core.data.vfy.DataVerifyCustomRule;
 import org.xresloader.core.data.vfy.DataVerifyImpl;
@@ -40,6 +41,7 @@ import org.xresloader.core.data.vfy.DataVerifyInMacroTable;
 import org.xresloader.core.data.vfy.DataVerifyInTableColumn;
 import org.xresloader.core.data.vfy.DataVerifyInText;
 import org.xresloader.core.data.vfy.DataVerifyNumberRange;
+import org.xresloader.core.data.vfy.DataVerifyInValues;
 import org.xresloader.core.data.vfy.DataVerifyPbEnum;
 import org.xresloader.core.data.vfy.DataVerifyPbMsgField;
 import org.xresloader.core.data.vfy.DataVerifyPbOneof;
@@ -876,6 +878,10 @@ public class DataDstPb extends DataDstImpl {
                 new ArrayList<>(ruleObject.parameters.subList(1, ruleObject.parameters.size())), null, 0));
         funcMap.put("or", (ruleObject) -> new DataVerifyCustomOrRule(ruleObject.name,
                 new ArrayList<>(ruleObject.parameters.subList(1, ruleObject.parameters.size())), null, 0));
+        funcMap.put("not", (ruleObject) -> new DataVerifyCustomNotRule(ruleObject.name,
+                new ArrayList<>(ruleObject.parameters.subList(1, ruleObject.parameters.size())), null, 0));
+        funcMap.put("invalues", (ruleObject) -> new DataVerifyInValues(
+                ruleObject.parameters.subList(1, ruleObject.parameters.size())));
 
         return funcMap;
     }

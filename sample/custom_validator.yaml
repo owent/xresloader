@@ -22,3 +22,4 @@ validator:
     mode: "and"
     rules:
       - InMacroTable("资源转换示例.xlsx", "field_alias_macro", 3, 2, "key", "value")
+      - InValues(1234, 5678, "别名测试-月卡", "别名测试-年卡")

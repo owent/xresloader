@@ -10,8 +10,6 @@ public class DataVerifyRegex extends DataVerifyImpl {
     private boolean valid = false;
     private ArrayList<Pattern> rules = new ArrayList<>();
 
-    static Pattern SPACE_SPLITOR = Pattern.compile("\\s+");
-
     public DataVerifyRegex(ValidatorTokens tokens) {
         super(tokens);
 

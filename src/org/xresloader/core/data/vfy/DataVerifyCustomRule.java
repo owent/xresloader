@@ -1,32 +1,20 @@
 package org.xresloader.core.data.vfy;
 
-import java.io.File;
-import java.io.FileInputStream;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
-import org.snakeyaml.engine.v2.api.Load;
-import org.snakeyaml.engine.v2.api.LoadSettings;
 import org.xresloader.core.ProgramOptions;
-import org.xresloader.core.data.src.DataSrcImpl;
 
 public abstract class DataVerifyCustomRule extends DataVerifyImpl {
-    protected ArrayList<DataVerifyImpl> validators = null;
-    private ArrayList<String> rules = null;
+    protected List<DataVerifyImpl> validators = null;
+    private List<ValidatorParameter> rules = null;
     private Boolean checkResult = null;
     private boolean checking = false;
     private String description = null;
     private int version = 0;
     private Integer versionResult = null;
 
-    public class RuleConfigure {
-        public String name;
-        public List<String> rules;
-    }
-
-    public DataVerifyCustomRule(String name, ArrayList<String> rules, String description, int version) {
+    public DataVerifyCustomRule(String name, List<ValidatorParameter> rules, String description, int version) {
         super(name);
 
         this.rules = rules;
@@ -45,33 +33,74 @@ public abstract class DataVerifyCustomRule extends DataVerifyImpl {
 
         StringBuilder sb = new StringBuilder();
         sb.append(getName());
-        sb.append("[");
-        boolean first = true;
-        boolean checked = check();
-        for (DataVerifyImpl vfy : this.validators) {
-            if (!first) {
-                sb.append(", ");
+        if (this.validators != null) {
+            sb.append("[");
+            boolean first = true;
+            boolean checked = check();
+            for (DataVerifyImpl vfy : this.validators) {
+                if (!first) {
+                    sb.append(", ");
+                }
+                if (checked) {
+                    sb.append(vfy.getDescription());
+                } else {
+                    sb.append(vfy.getName());
+                }
+                first = false;
             }
-            if (checked) {
-                sb.append(vfy.getDescription());
-            } else {
-                sb.append(vfy.getName());
-            }
-            first = false;
+            sb.append("]");
         }
-        sb.append("]");
 
         return sb.toString();
     }
 
-    public void setup(ArrayList<DataVerifyImpl> validators) {
-        this.validators = validators;
+    @Override
+    public boolean setup(DataValidatorCache cache) {
+        // 第一次setup失败就会退出，不需要反复失败重试
+        if (this.validators != null) {
+            return true;
+        }
+
+        this.validators = new ArrayList<>();
+        ((ArrayList<DataVerifyImpl>) this.validators).ensureCapacity(this.rules.size());
         this.checkResult = null;
         this.versionResult = null;
+
+        for (ValidatorParameter rule : this.rules) {
+            if (rule.isToken()) {
+                // setup阶段，尝试创建token对应的验证器
+                DataVerifyImpl vfy = DataValidatorFactory.createValidator(cache, rule.getTokens());
+                if (vfy == null) {
+                    ProgramOptions.getLoger().error(
+                            "Setup custom validator rule \"%s\" failed because sub-rule \"%s\" not found",
+                            getName(), rule.toString());
+                    this.validators.clear();
+                    return false;
+                }
+                this.validators.add(vfy);
+            } else {
+                // setup阶段，尝试创建token对应的验证器
+                DataVerifyImpl vfy = DataValidatorFactory.createValidator(cache,
+                        cache.mutableSymbolToTokens(rule.toString()));
+                if (vfy == null) {
+                    ProgramOptions.getLoger().error(
+                            "Setup custom validator rule \"%s\" failed because sub-rule \"%s\" not found",
+                            getName(), rule.toString());
+                    this.validators.clear();
+                    return false;
+                }
+                this.validators.add(vfy);
+            }
+        }
+
+        return true;
     }
 
     @Override
     public boolean isValid() {
+        if (this.validators != null && this.validators.isEmpty()) {
+            return false;
+        }
         return this.rules != null && !this.rules.isEmpty();
     }
 
@@ -129,7 +158,7 @@ public abstract class DataVerifyCustomRule extends DataVerifyImpl {
         return this.checkResult;
     }
 
-    public ArrayList<String> getRules() {
+    public List<ValidatorParameter> getRules() {
         return this.rules;
     }
 
@@ -216,123 +245,5 @@ public abstract class DataVerifyCustomRule extends DataVerifyImpl {
 
         res.success = this.batchGetSubValidators(input, res);
         return res.success;
-    }
-
-    public static HashMap<String, DataVerifyImpl> loadFromFile(String filePath) {
-        File yamlFile = DataSrcImpl.getDataFile(filePath);
-        if (null == yamlFile) {
-            ProgramOptions.getLoger().error("Can not find custom validator file \"%s\"", filePath);
-            return null;
-        }
-
-        try {
-            LoadSettings settings = LoadSettings.builder().setLabel("xresloader.DataVerifyCustomRule").build();
-            Load load = new Load(settings);
-
-            var allRootObjects = load.loadAllFromInputStream(new FileInputStream(yamlFile));
-            HashMap<String, DataVerifyImpl> ret = new HashMap<>();
-            for (Object object : allRootObjects) {
-                if (!(object instanceof Map<?, ?>)) {
-                    continue;
-                }
-
-                Object ruleSet = ((Map<?, ?>) object).get("validator");
-                if (null == ruleSet) {
-                    continue;
-                }
-
-                if (!(ruleSet instanceof List<?>)) {
-                    continue;
-                }
-
-                for (Object ruleObject : (List<?>) ruleSet) {
-                    if (!(ruleObject instanceof Map<?, ?>)) {
-                        continue;
-                    }
-
-                    Object nameObj = ((Map<?, ?>) ruleObject).get("name");
-                    Object descriptionObj = ((Map<?, ?>) ruleObject).getOrDefault("description", null);
-                    Object modeObj = ((Map<?, ?>) ruleObject).getOrDefault("mode", null);
-                    Object rulesObj = ((Map<?, ?>) ruleObject).get("rules");
-                    if (nameObj == null || !(nameObj instanceof String)) {
-                        continue;
-                    }
-
-                    if (rulesObj == null || !(rulesObj instanceof List<?>)) {
-                        continue;
-                    }
-
-                    String name = (String) nameObj;
-                    String description = null;
-                    String mode = "";
-                    if (descriptionObj != null && descriptionObj instanceof String) {
-                        description = (String) descriptionObj;
-                    }
-                    if (modeObj != null && modeObj instanceof String) {
-                        mode = (String) modeObj;
-                    }
-
-                    ArrayList<String> rules = new ArrayList<>();
-                    int version = 0;
-                    Object versionObj = ((Map<?, ?>) ruleObject).get("version");
-                    if (versionObj != null) {
-                        if (versionObj instanceof Integer) {
-                            version = (Integer) versionObj;
-                        } else if (versionObj instanceof String) {
-                            try {
-                                version = Integer.parseInt((String) versionObj);
-                            } catch (NumberFormatException e) {
-                                ProgramOptions.getLoger().warn(
-                                        "Load custom validator file \"%s\" with invalid version \"%s\", we will use 0.",
-                                        filePath,
-                                        versionObj);
-                            }
-                        } else {
-                            ProgramOptions.getLoger().warn(
-                                    "Load custom validator file \"%s\" with invalid version \"%s\", we will use 0.",
-                                    filePath,
-                                    versionObj.toString());
-                        }
-                    }
-
-                    rules.ensureCapacity(((List<?>) rulesObj).size());
-                    for (Object ruleData : ((List<?>) rulesObj)) {
-                        String ruleStr = ruleData.toString().trim();
-                        if (!ruleStr.isEmpty()) {
-                            rules.add(ruleStr);
-                        }
-                    }
-
-                    if (mode.equalsIgnoreCase("and")) {
-                        if (null != ret.put(name, new DataVerifyCustomAndRule(name, rules, description, version))) {
-                            ProgramOptions.getLoger().warn(
-                                    "Load custom validator file \"%s\" with more than one rule with name \"%s\", we will use the last one.",
-                                    filePath,
-                                    name);
-                        }
-                    } else if (mode.equalsIgnoreCase("not")) {
-                        if (null != ret.put(name, new DataVerifyCustomNotRule(name, rules, description, version))) {
-                            ProgramOptions.getLoger().warn(
-                                    "Load custom validator file \"%s\" with more than one rule with name \"%s\", we will use the last one.",
-                                    filePath,
-                                    name);
-                        }
-                    } else {
-                        // Default is or
-                        if (null != ret.put(name, new DataVerifyCustomOrRule(name, rules, description, version))) {
-                            ProgramOptions.getLoger().warn(
-                                    "Load custom validator file \"%s\" with more than one rule with name \"%s\", we will use the last one.",
-                                    filePath,
-                                    name);
-                        }
-                    }
-                }
-            }
-
-            return ret;
-        } catch (java.io.IOException | NumberFormatException e) {
-            ProgramOptions.getLoger().error("Load custom validator file \"%s\" failed, %s", filePath, e.getMessage());
-            return null;
-        }
     }
 }

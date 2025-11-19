@@ -14,7 +14,7 @@ import org.xresloader.core.data.src.DataSrcImpl;
 
 public class DataVerifyInText extends DataVerifyImpl {
     private boolean valid = false;
-    private HashSet<String> dataSet = new HashSet<String>();
+    private HashSet<String> dataSet = new HashSet<>();
     private File file = null;
     private ArrayList<String> parameters = null;
 
@@ -23,22 +23,31 @@ public class DataVerifyInText extends DataVerifyImpl {
     public DataVerifyInText(ValidatorTokens tokens) {
         super(tokens);
 
-        this.valid = false;
-        if (tokens.parameters.size() < 2) {
-            ProgramOptions.getLoger().error("Invalid in text validator %s", tokens.name);
-            return;
-        }
-        this.parameters = tokens.parameters;
-
-        this.file = DataSrcImpl.getDataFile(tokens.parameters.get(1));
-        if (this.file == null) {
-            ProgramOptions.getLoger().error("Can not find file %s for validator %s.",
-                    tokens.parameters.get(1),
-                    tokens.name);
-            return;
-        }
-
         this.valid = true;
+        this.parameters = new ArrayList<>();
+        this.parameters.ensureCapacity(tokens.getParameters().size());
+        for (ValidatorParameter param : tokens.getParameters()) {
+            if (!param.isString()) {
+                ProgramOptions.getLoger().error("Only string parameter is supported for validator %s",
+                        tokens.getName());
+                this.valid = false;
+                continue;
+            }
+            this.parameters.add(param.toString());
+        }
+        if (this.parameters.size() < 2) {
+            this.valid = false;
+            ProgramOptions.getLoger().error("Invalid in text validator %s", tokens.getName());
+            return;
+        }
+
+        this.file = DataSrcImpl.getDataFile(this.parameters.get(1));
+        if (this.file == null) {
+            this.valid = false;
+            ProgramOptions.getLoger().error("Can not find file %s for validator %s.",
+                    this.parameters.get(1),
+                    tokens.getName());
+        }
     }
 
     @Override

@@ -14,7 +14,7 @@
 
 ## 主要功能
 
-+ 跨平台（java 11 or upper）
++ 跨平台（java 17 or upper）
 + Excel => protobuf/msgpack/lua/javascript/json/xml
 + 完整支持协议结构，包括嵌套结构和数组嵌套
 + 同时支持protobuf proto v2 和 proto v3

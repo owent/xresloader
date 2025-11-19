@@ -1,10 +1,10 @@
 package org.xresloader.core.data.vfy;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public class DataVerifyCustomNotRule extends DataVerifyCustomRule {
 
-  public DataVerifyCustomNotRule(String name, ArrayList<String> rules, String description, int version) {
+  public DataVerifyCustomNotRule(String name, List<ValidatorParameter> rules, String description, int version) {
     super(name, rules, description, version);
   }
 

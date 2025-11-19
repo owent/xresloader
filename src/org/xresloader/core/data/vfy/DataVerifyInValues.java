@@ -1,15 +1,23 @@
 package org.xresloader.core.data.vfy;
 
-import java.util.List;
-
 import org.xresloader.core.ProgramOptions;
 
 public class DataVerifyInValues extends DataVerifyImpl {
-    public DataVerifyInValues(List<String> values) {
-        super(String.format("InValues(%s)", String.join(",", values)));
+    private boolean valid = false;
 
-        for (String value : values) {
-            String stripValue = value.trim();
+    public DataVerifyInValues(ValidatorTokens tokens) {
+        super(tokens.toString());
+
+        this.valid = true;
+        for (ValidatorParameter value : tokens.getParameters()) {
+            if (!value.isString()) {
+                ProgramOptions.getLoger().error(
+                        String.format("DataVerifyInValues: value '%s' is not a valid value\n",
+                                value.toString()));
+                this.valid = false;
+                continue;
+            }
+            String stripValue = value.toString().trim();
 
             boolean isNumber = true;
             for (int i = 0; i < stripValue.length(); ++i) {
@@ -31,13 +39,13 @@ public class DataVerifyInValues extends DataVerifyImpl {
                                     stripValue));
                 }
             }
-            this.allNames.put(value, numValue);
+            this.allNames.put(stripValue, numValue);
         }
     }
 
     @Override
     public boolean isValid() {
-        return !this.allNames.isEmpty();
+        return !this.allNames.isEmpty() && this.valid;
     }
 
     @Override

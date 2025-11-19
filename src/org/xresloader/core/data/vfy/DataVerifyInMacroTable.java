@@ -2,8 +2,8 @@ package org.xresloader.core.data.vfy;
 
 import java.io.File;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.HashMap;
+import java.util.HashSet;
 
 import org.xresloader.core.ProgramOptions;
 import org.xresloader.core.data.src.DataSrcImpl;
@@ -14,29 +14,39 @@ import org.xresloader.core.engine.IdentifyEngine;
 
 public class DataVerifyInMacroTable extends DataVerifyImpl {
     private boolean valid = false;
-    private HashSet<String> dataValues = new HashSet<String>();
-    private HashMap<String, String> dataKeyMapping = new HashMap<String, String>();
+    private HashSet<String> dataValues = new HashSet<>();
+    private HashMap<String, String> dataKeyMapping = new HashMap<>();
     private File file = null;
     private ArrayList<String> parameters = null;
 
     public DataVerifyInMacroTable(ValidatorTokens tokens) {
         super(tokens);
 
-        this.valid = false;
-        if (tokens.parameters.size() < 6) {
-            ProgramOptions.getLoger().error("Invalid in macro table validator %s", tokens.name);
+        this.valid = true;
+        this.parameters = new ArrayList<>();
+        this.parameters.ensureCapacity(tokens.getParameters().size());
+        for (ValidatorParameter param : tokens.getParameters()) {
+            if (!param.isString()) {
+                ProgramOptions.getLoger().error("Only string parameter is supported for validator %s",
+                        tokens.getName());
+                this.valid = false;
+                continue;
+            }
+            this.parameters.add(param.toString());
+        }
+
+        if (this.parameters.size() < 6) {
+            this.valid = false;
+            ProgramOptions.getLoger().error("Invalid in macro table validator %s", tokens.getName());
             return;
         }
-        this.parameters = tokens.parameters;
 
         this.file = DataSrcImpl.getDataFile(this.parameters.get(1));
         if (file == null) {
+            this.valid = false;
             ProgramOptions.getLoger().error("Can not find file %s for validator %s", this.parameters.get(1),
-                    tokens.name);
-            return;
+                    tokens.getName());
         }
-
-        this.valid = true;
     }
 
     @Override

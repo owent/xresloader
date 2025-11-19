@@ -6,8 +6,10 @@ validator:
     rules:
       - cost_type
   - name: "custom_rule3"
+    mode: "and"
     rules:
       - InTableColumn("资源转换示例.xlsx", "kind", 3, 2, "0Id")
+      - Not(InValues(0))
   - name: "custom_rule4"
     mode: "or"
     rules:

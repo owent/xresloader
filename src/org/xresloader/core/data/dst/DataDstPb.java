@@ -14,8 +14,8 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Map;
-import java.util.function.Function;
 import java.util.stream.Collectors;
 
 import org.apache.commons.codec.binary.Hex;
@@ -31,21 +31,13 @@ import org.xresloader.core.data.err.ConvException;
 import org.xresloader.core.data.et.DataETProcessor;
 import org.xresloader.core.data.src.DataContainer;
 import org.xresloader.core.data.src.DataSrcImpl;
-import org.xresloader.core.data.vfy.DataVerifyCustomAndRule;
-import org.xresloader.core.data.vfy.DataVerifyCustomNotRule;
-import org.xresloader.core.data.vfy.DataVerifyCustomOrRule;
-import org.xresloader.core.data.vfy.DataVerifyCustomRule;
+import org.xresloader.core.data.vfy.DataValidatorCache;
+import org.xresloader.core.data.vfy.DataValidatorFactory;
 import org.xresloader.core.data.vfy.DataVerifyImpl;
 import org.xresloader.core.data.vfy.DataVerifyImpl.ValidatorTokens;
-import org.xresloader.core.data.vfy.DataVerifyInMacroTable;
-import org.xresloader.core.data.vfy.DataVerifyInTableColumn;
-import org.xresloader.core.data.vfy.DataVerifyInText;
-import org.xresloader.core.data.vfy.DataVerifyNumberRange;
-import org.xresloader.core.data.vfy.DataVerifyInValues;
 import org.xresloader.core.data.vfy.DataVerifyPbEnum;
 import org.xresloader.core.data.vfy.DataVerifyPbMsgField;
 import org.xresloader.core.data.vfy.DataVerifyPbOneof;
-import org.xresloader.core.data.vfy.DataVerifyRegex;
 import org.xresloader.core.engine.ExcelEngine;
 import org.xresloader.core.engine.IdentifyDescriptor;
 import org.xresloader.core.scheme.SchemeConf;
@@ -114,15 +106,66 @@ public class DataDstPb extends DataDstImpl {
         public HashSet<String> quick_integer_values_container = new HashSet<>();
 
         // ========================== 验证器 ==========================
-        HashMap<String, DataVerifyImpl> validator = new HashMap<>();
-        HashMap<String, HashMap<String, DataVerifyImpl>> mixedCustomValidatorFiles = new HashMap<>();
-        HashMap<String, HashMap<String, DataVerifyImpl>> oneCustomValidatorFiles = new HashMap<>();
-        HashMap<String, DataVerifyImpl> stableValidator = new HashMap<>();
+        DataValidatorCache validatorCache = new DataValidatorCache();
 
         // ========================== 内建AST类型缓存 ==========================
         HashMap<String, DataDstTypeDescriptor> dataDstDescs = new HashMap<>();
 
         public PbInfoSet() {
+            setupValidatorCreator();
+        }
+
+        private void setupValidatorCreator() {
+            validatorCache.registerCreator(this.getClass().getTypeName(), (DataVerifyImpl.ValidatorTokens tokens) -> {
+                return this.createPbValidator(tokens);
+            });
+        }
+
+        private DataVerifyImpl createPbValidator(DataVerifyImpl.ValidatorTokens tokens) {
+            if (tokens == null) {
+                return null;
+            }
+
+            if (tokens.isFunctionMode()) {
+                return null;
+            }
+
+            String name = tokens.getName();
+
+            DescriptorProtos.EnumDescriptorProto enum_desc = get_alias_list_element(name, this.enums,
+                    "enum type");
+            if (enum_desc != null) {
+                return new DataVerifyPbEnum(enum_desc);
+            }
+
+            DescriptorProtos.DescriptorProto msg_desc = get_alias_list_element(name, this.messages,
+                    "message type");
+            if (msg_desc != null) {
+                return new DataVerifyPbMsgField(msg_desc);
+            }
+
+            DescriptorProtos.OneofDescriptorProto oneof_desc = get_alias_list_element(name,
+                    this.oneofs, "oneof type");
+            if (oneof_desc != null) {
+                int message_bound = name.lastIndexOf('.');
+                if (message_bound > 0 && message_bound < name.length()) {
+                    msg_desc = get_alias_list_element(name.substring(0, message_bound),
+                            this.messages, "message type");
+                } else {
+                    String oneof_full_name = get_alias_list_element_full_name(name, this.oneofs,
+                            "oneof type");
+                    message_bound = oneof_full_name.lastIndexOf('.');
+                    if (message_bound > 0 && message_bound < oneof_full_name.length()) {
+                        msg_desc = get_alias_list_element(oneof_full_name.substring(0, message_bound),
+                                this.messages, "message type");
+                    }
+                }
+
+                if (msg_desc != null) {
+                    return new DataVerifyPbOneof(oneof_desc, msg_desc);
+                }
+            }
+            return null;
         }
     }
 
@@ -794,50 +837,8 @@ public class DataDstPb extends DataDstImpl {
         return gen.success;
     }
 
-    static private DataVerifyImpl getValidatorFromCache(String name) {
-        DataVerifyImpl vfy = cachePbs.validator.getOrDefault(name, null);
-        if (null != vfy) {
-            return vfy;
-        }
-
-        vfy = cachePbs.stableValidator.getOrDefault(name, null);
-        if (null != vfy) {
-            cachePbs.validator.put(vfy.getName(), vfy);
-            return vfy;
-        }
-        return vfy;
-    }
-
-    static private void setValidatorStableCache(String name, DataVerifyImpl vfy) {
-        if (vfy == null) {
-            return;
-        }
-        if (name == null || name.isEmpty()) {
-            return;
-        }
-
-        cachePbs.validator.put(name, vfy);
-        cachePbs.stableValidator.put(name, vfy);
-    }
-
-    static private HashMap<String, DataVerifyImpl> buildCustomValidator(String filePath,
-            HashMap<String, HashMap<String, DataVerifyImpl>> cache) {
-        HashMap<String, DataVerifyImpl> result = cache.getOrDefault(filePath, null);
-
-        if (result != null) {
-            return result;
-        }
-
-        result = DataVerifyCustomRule.loadFromFile(filePath);
-
-        if (result != null) {
-            cache.put(filePath, result);
-        }
-        return result;
-    }
-
     static private SetupValidatorResult setup_validator(LinkedList<DataVerifyImpl> result,
-            Descriptors.Descriptor container,
+            @SuppressWarnings("unused") Descriptors.Descriptor container,
             Descriptors.OneofDescriptor fd) {
         SetupValidatorResult ret = new SetupValidatorResult();
 
@@ -847,124 +848,20 @@ public class DataDstPb extends DataDstImpl {
         ret.success = true;
         ret.validator = result;
 
-        String rule = String.format("%s.%s.%s", container.getFile().getPackage(), container.getName(), fd.getName());
+        String rule = fd.getFullName();
         if (rule.length() > 0 && rule.charAt(0) == '.') {
             rule = rule.substring(1);
         }
-        {
-            DataVerifyImpl vfy = getValidatorFromCache(rule);
-            // 命中缓存
-            if (null != vfy) {
-                result.add(vfy);
-                return ret;
-            }
+
+        DataVerifyImpl vfy = DataValidatorFactory.createSymbolValidator(cachePbs.validatorCache, rule);
+        if (vfy == null) {
+            ProgramOptions.getLoger().error("Setup type validator for oneof descriptor %s failed", rule);
+            ret.success = false;
+            return ret;
         }
 
-        DataVerifyPbOneof new_vfy = new DataVerifyPbOneof(fd);
-        setValidatorStableCache(rule, new_vfy);
-        result.add(new_vfy);
-
+        result.add(vfy);
         return ret;
-    }
-
-    static private HashMap<String, Function<DataVerifyImpl.ValidatorTokens, DataVerifyImpl>> initFuncValidatorCreator() {
-        HashMap<String, Function<DataVerifyImpl.ValidatorTokens, DataVerifyImpl>> funcMap = new HashMap<>();
-
-        funcMap.put("intext", (ruleObject) -> new DataVerifyInText(ruleObject));
-        funcMap.put("intablecolumn", (ruleObject) -> new DataVerifyInTableColumn(ruleObject));
-        funcMap.put("inmacrotable", (ruleObject) -> new DataVerifyInMacroTable(ruleObject));
-        funcMap.put("regex", (ruleObject) -> new DataVerifyRegex(ruleObject));
-        funcMap.put("and", (ruleObject) -> new DataVerifyCustomAndRule(ruleObject.name,
-                new ArrayList<>(ruleObject.parameters.subList(1, ruleObject.parameters.size())), null, 0));
-        funcMap.put("or", (ruleObject) -> new DataVerifyCustomOrRule(ruleObject.name,
-                new ArrayList<>(ruleObject.parameters.subList(1, ruleObject.parameters.size())), null, 0));
-        funcMap.put("not", (ruleObject) -> new DataVerifyCustomNotRule(ruleObject.name,
-                new ArrayList<>(ruleObject.parameters.subList(1, ruleObject.parameters.size())), null, 0));
-        funcMap.put("invalues", (ruleObject) -> new DataVerifyInValues(
-                ruleObject.parameters.subList(1, ruleObject.parameters.size())));
-
-        return funcMap;
-    }
-
-    private static final HashMap<String, Function<DataVerifyImpl.ValidatorTokens, DataVerifyImpl>> funcValidatorCreator = initFuncValidatorCreator();
-
-    static private DataVerifyImpl createValidator(DataVerifyImpl.ValidatorTokens ruleObject) {
-        if (ruleObject == null) {
-            return null;
-        }
-
-        // 第一优先级，函数验证器
-        if (ruleObject.parameters.size() > 1) {
-            Function<DataVerifyImpl.ValidatorTokens, DataVerifyImpl> creator;
-            synchronized (funcValidatorCreator) {
-                String funcName = ruleObject.parameters.get(0).toLowerCase();
-                creator = funcValidatorCreator.get(funcName);
-            }
-
-            if (creator != null) {
-                DataVerifyImpl fnVfy = creator.apply(ruleObject);
-                if (fnVfy != null && fnVfy.isValid()) {
-                    return fnVfy;
-                } else {
-                    ProgramOptions.getLoger().error("Validator %s(%s) is invalid",
-                            ruleObject.name, fnVfy == null ? "UnknownValidator" : fnVfy.getClass().getSimpleName());
-                }
-                return null;
-            }
-
-            ProgramOptions.getLoger().error("Unknown function validator %s", ruleObject.name);
-            return null;
-        }
-
-        // 第二优先级，范围验证器
-        if (ruleObject.name.charAt(0) == '-' || (ruleObject.name.charAt(0) >= '0' && ruleObject.name.charAt(0) <= '9')
-                || (ruleObject.name.charAt(0) == '>' || ruleObject.name.charAt(0) == '<')) {
-            DataVerifyNumberRange vfyRange = new DataVerifyNumberRange(ruleObject.name);
-            if (vfyRange.isValid()) {
-                return vfyRange;
-            } else {
-                ProgramOptions.getLoger().error("Validator %s(DataVerifyNumberRange) is invalid",
-                        ruleObject.name);
-            }
-            return null;
-        }
-
-        // 第三优先级，协议验证器
-        DescriptorProtos.EnumDescriptorProto enum_desc = get_alias_list_element(ruleObject.name, cachePbs.enums,
-                "enum type");
-        if (enum_desc != null) {
-            return new DataVerifyPbEnum(enum_desc);
-        }
-
-        DescriptorProtos.DescriptorProto msg_desc = get_alias_list_element(ruleObject.name, cachePbs.messages,
-                "message type");
-        if (msg_desc != null) {
-            return new DataVerifyPbMsgField(msg_desc);
-        }
-
-        DescriptorProtos.OneofDescriptorProto oneof_desc = get_alias_list_element(ruleObject.name,
-                cachePbs.oneofs, "oneof type");
-        if (oneof_desc != null) {
-            int message_bound = ruleObject.name.lastIndexOf('.');
-            if (message_bound > 0 && message_bound < ruleObject.name.length()) {
-                msg_desc = get_alias_list_element(ruleObject.name.substring(0, message_bound),
-                        cachePbs.messages, "message type");
-            } else {
-                String oneof_full_name = get_alias_list_element_full_name(ruleObject.name, cachePbs.oneofs,
-                        "oneof type");
-                message_bound = oneof_full_name.lastIndexOf('.');
-                if (message_bound > 0 && message_bound < oneof_full_name.length()) {
-                    msg_desc = get_alias_list_element(oneof_full_name.substring(0, message_bound),
-                            cachePbs.messages, "message type");
-                }
-            }
-
-            if (msg_desc != null) {
-                return new DataVerifyPbOneof(oneof_desc, msg_desc);
-            }
-        }
-
-        return null;
     }
 
     static private SetupValidatorResult setup_validator(LinkedList<DataVerifyImpl> result, String verifier,
@@ -987,26 +884,19 @@ public class DataDstPb extends DataDstImpl {
         ret.validator = result;
 
         if (!verifier.isEmpty()) {
-            var allRules = DataVerifyImpl.buildValidators(verifier);
-            for (DataVerifyImpl.ValidatorTokens ruleObject : allRules) {
-                DataVerifyImpl vfy = getValidatorFromCache(ruleObject.name);
-                boolean isCached = false;
-                if (null != vfy) {
-                    isCached = true;
-                } else {
-                    vfy = createValidator(ruleObject);
-                }
-
-                if (vfy != null) {
-                    result.add(vfy);
-
-                    if (!isCached) {
-                        setValidatorStableCache(ruleObject.name, vfy);
+            List<ValidatorTokens> tokens = DataValidatorFactory.buildValidatorTokens(verifier);
+            for (ValidatorTokens token : tokens) {
+                DataVerifyImpl vfy = DataValidatorFactory.createValidator(cachePbs.validatorCache, token);
+                if (vfy == null) {
+                    String fullName = "";
+                    if (fd != null) {
+                        fullName = fd.getFullName();
                     }
-                } else {
-                    ProgramOptions.getLoger().error("Unknown validator %s",
-                            ruleObject.name);
+                    ProgramOptions.getLoger().error("Setup validator %s for field %s failed", token.toString(),
+                            fullName);
                     ret.success = false;
+                } else {
+                    result.add(vfy);
                 }
             }
         }
@@ -1015,7 +905,7 @@ public class DataDstPb extends DataDstImpl {
     }
 
     private void setup_node_identify(DataDstWriterNode node, DataDstChildrenNode child, IdentifyDescriptor identify,
-            Descriptors.FieldDescriptor fd) {
+            Descriptors.FieldDescriptor fd) throws ConvException {
         node.identify = identify;
 
         identify.referToWriterNode = node;
@@ -1023,9 +913,22 @@ public class DataDstPb extends DataDstImpl {
 
         if (null != identify.dataSourceFieldValidator && !identify.dataSourceFieldValidator.isEmpty()) {
             SetupValidatorResult gen = setup_validator(null, identify.dataSourceFieldValidator, fd);
-            if (gen != null && gen.validator != null && !gen.validator.isEmpty()) {
-                for (DataVerifyImpl vfy : gen.validator) {
-                    identify.addValidator(vfy);
+            if (gen != null) {
+                if (gen.validator != null && !gen.validator.isEmpty()) {
+                    for (DataVerifyImpl vfy : gen.validator) {
+                        identify.addValidator(vfy);
+                    }
+                }
+                if (gen.success == false) {
+                    String fullName;
+                    if (fd != null) {
+                        fullName = fd.getFullName();
+                    } else {
+                        fullName = node.getFullName();
+                    }
+                    this.logErrorMessage("Setup validator for %s failed, field name: %s",
+                            identify.name, fullName);
+                    throw new ConvException(this.getLastErrorMessage());
                 }
             } else {
                 identify.resetValidator();
@@ -1041,7 +944,7 @@ public class DataDstPb extends DataDstImpl {
     }
 
     private void setup_node_identify(DataDstWriterNode node, DataDstChildrenNode child, IdentifyDescriptor identify,
-            @SuppressWarnings("unused") Descriptors.OneofDescriptor fd) {
+            @SuppressWarnings("unused") Descriptors.OneofDescriptor fd) throws ConvException {
         node.identify = identify;
 
         identify.referToWriterNode = node;
@@ -1072,74 +975,21 @@ public class DataDstPb extends DataDstImpl {
             return false;
         }
 
-        // reset validator set
-        cachePbs.validator.clear();
-
         // Setup custom validators
         String[] customValidatorRules = ProgramOptions.getInstance().customValidatorRules;
-        boolean oneFileCustomValidatorMode = false;
         if (customValidatorRules != null) {
-            if (customValidatorRules.length == 1) {
-                oneFileCustomValidatorMode = true;
-            }
-
             for (String ruleFilePath : customValidatorRules) {
-                HashMap<String, DataVerifyImpl> validatorSet = buildCustomValidator(ruleFilePath,
-                        oneFileCustomValidatorMode ? cachePbs.oneCustomValidatorFiles
-                                : cachePbs.mixedCustomValidatorFiles);
-                if (null == validatorSet) {
-                    this.logErrorMessage("Can not build custom validators from file \"%s\"",
-                            ruleFilePath);
+                if (null == DataValidatorFactory.loadFromFile(cachePbs.validatorCache, ruleFilePath)) {
+                    this.logErrorMessage("Can not load validator rule file %s", ruleFilePath);
                     return false;
                 }
-
-                for (var vfyPair : validatorSet.entrySet()) {
-                    if (null != cachePbs.validator.put(vfyPair.getKey(), vfyPair.getValue())) {
-                        ProgramOptions.getLoger().warn(
-                                "Load custom validator with more than one rule with name \"%s\", we will use the last one.",
-                                vfyPair.getKey());
-                    }
-                }
-            }
-        }
-        ArrayList<DataVerifyCustomRule> customValidators = new ArrayList<>();
-        customValidators.ensureCapacity(cachePbs.validator.size());
-        for (DataVerifyImpl vfy : cachePbs.validator.values()) {
-            if (vfy instanceof DataVerifyCustomRule) {
-                if (oneFileCustomValidatorMode && ((DataVerifyCustomRule) vfy).hasChecked()) {
-                    continue;
-                }
-                customValidators.add((DataVerifyCustomRule) vfy);
             }
         }
 
-        boolean ret = true;
-        for (DataVerifyCustomRule vfy : customValidators) {
-            var rules = vfy.getRules();
-            ArrayList<DataVerifyImpl> deps = new ArrayList<>();
-            deps.ensureCapacity(rules.size());
-            for (int i = 0; i < rules.size(); ++i) {
-                DataVerifyImpl findDep = getValidatorFromCache(rules.get(i));
-                if (null != findDep) {
-                    deps.add(findDep);
-                    continue;
-                }
+        // 初始化数据验证器工厂，允许创建验证器
+        DataValidatorFactory.Initialize();
 
-                LinkedList<ValidatorTokens> tokensList = DataVerifyImpl.buildValidators(rules.get(i));
-                for (ValidatorTokens tokens : tokensList) {
-                    findDep = createValidator(tokens);
-                    if (null == findDep) {
-                        ProgramOptions.getLoger().error("Unknown validator %s", tokens.name);
-                        ret = false;
-                    } else {
-                        deps.add(findDep);
-                    }
-                }
-            }
-            vfy.setup(deps);
-        }
-
-        return ret;
+        return true;
     }
 
     /**
@@ -1501,7 +1351,7 @@ public class DataDstPb extends DataDstImpl {
         };
     }
 
-    static DataVerifyImpl pbTypeToTypeLimit(Descriptors.FieldDescriptor t) {
+    static private DataVerifyImpl pbTypeToTypeLimit(Descriptors.FieldDescriptor t) throws ConvException {
         return switch (t.getType()) {
             case INT32, FIXED32, SFIXED32, SINT32 -> DataDstWriterNode.getDefaultTypeValidatorInt32();
             case UINT32 -> DataDstWriterNode.getDefaultTypeValidatorUInt32();
@@ -1512,10 +1362,11 @@ public class DataDstPb extends DataDstImpl {
                     autoValidatorRule = autoValidatorRule.substring(1);
                 }
 
-                DataVerifyImpl vfy = getValidatorFromCache(autoValidatorRule);
-                if (null == vfy) {
-                    vfy = new DataVerifyPbEnum(t.getEnumType().toProto());
-                    setValidatorStableCache(autoValidatorRule, vfy);
+                DataVerifyImpl vfy = DataValidatorFactory.createSymbolValidator(cachePbs.validatorCache,
+                        autoValidatorRule);
+                if (vfy == null) {
+                    throw new ConvException(
+                            String.format("Setup type validator for oneof descriptor %s failed", autoValidatorRule));
                 }
                 yield vfy;
             }
@@ -1523,18 +1374,17 @@ public class DataDstPb extends DataDstImpl {
         };
     }
 
-    static DataVerifyImpl pbTypeToTypeLimit(Descriptors.OneofDescriptor t) {
+    static private DataVerifyImpl pbTypeToTypeLimit(Descriptors.OneofDescriptor t) throws ConvException {
         String autoValidatorRule = t.getFullName();
         if (autoValidatorRule.length() > 0 && autoValidatorRule.charAt(0) == '.') {
             autoValidatorRule = autoValidatorRule.substring(1);
         }
 
-        DataVerifyImpl vfy = getValidatorFromCache(autoValidatorRule);
-        if (null == vfy) {
-            vfy = new DataVerifyPbOneof(t);
-            setValidatorStableCache(autoValidatorRule, vfy);
+        DataVerifyImpl vfy = DataValidatorFactory.createSymbolValidator(cachePbs.validatorCache, autoValidatorRule);
+        if (vfy == null) {
+            throw new ConvException(
+                    String.format("Setup type validator for oneof descriptor %s failed", autoValidatorRule));
         }
-
         return vfy;
     }
 

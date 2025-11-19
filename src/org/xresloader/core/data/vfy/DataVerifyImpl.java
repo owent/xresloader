@@ -3,7 +3,6 @@ package org.xresloader.core.data.vfy;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -39,12 +38,12 @@ public abstract class DataVerifyImpl {
     private static ThreadLocal<Pattern> INTEGER_WITH_DOT_PATTERN = ThreadLocal
             .withInitial(() -> Pattern.compile("^\\s*((\\-\\s*)?[0-9\\,]+)\\s*(%\\s*)?$"));
 
-    protected DataVerifyImpl(String _name) {
-        name = _name;
+    protected DataVerifyImpl(String input_name) {
+        this.name = input_name;
     }
 
     protected DataVerifyImpl(ValidatorTokens tokens) {
-        name = tokens.name;
+        this.name = tokens.getName();
     }
 
     public int getVersion() {
@@ -52,6 +51,10 @@ public abstract class DataVerifyImpl {
     }
 
     abstract public boolean isValid();
+
+    public boolean setup(DataValidatorCache cache) {
+        return true;
+    }
 
     public boolean get(double number, DataVerifyResult res) {
         // 0 值永久有效
@@ -688,152 +691,191 @@ public abstract class DataVerifyImpl {
         return ret;
     }
 
-    static public class ValidatorTokens {
-        public String name = "";
-        public ArrayList<String> parameters = new ArrayList<>();
+    static public final class ValidatorParameter {
+        private final ValidatorTokens token;
+        private final String value;
 
-        public ValidatorTokens() {
+        private ValidatorParameter(String value) {
+            this.token = null;
+            this.value = value;
         }
 
-        public boolean initialize() {
+        private ValidatorParameter(ValidatorTokens value) {
+            this.token = value;
+            this.value = null;
+        }
+
+        public static ValidatorParameter ofToken(ValidatorTokens v) {
+            return new ValidatorParameter(v);
+        }
+
+        public static ValidatorParameter ofString(String v) {
+            return new ValidatorParameter(v);
+        }
+
+        public boolean isToken() {
+            return this.token != null;
+        }
+
+        public boolean isString() {
+            return this.value != null;
+        }
+
+        @Override
+        public String toString() {
+            if (isToken()) {
+                return this.token.toString();
+            } else if (this.value != null) {
+                return this.value;
+            } else {
+                return "";
+            }
+        }
+
+        public ValidatorTokens getTokens() {
+            return this.token;
+        }
+
+        public String getStringValue() {
+            if (this.value == null) {
+                return "";
+            }
+
+            return this.value;
+        }
+    }
+
+    static public final class ValidatorTokens {
+        private String name = null;
+        private String key = null;
+        private final ArrayList<ValidatorParameter> parameters = new ArrayList<>();
+        private boolean functionMode = false;
+
+        public ValidatorTokens(String name, boolean functionMode) {
+            this.parameters.add(ValidatorParameter.ofString(name));
+            this.functionMode = functionMode;
+        }
+
+        private boolean initialize() {
+            if (this.name != null) {
+                return true;
+            }
+
             if (this.parameters.isEmpty()) {
                 return false;
             }
 
             // Special mode(>NUM,>=NUM,<NUM,<=NUM,LOW-HIGH)
-            if (this.parameters.size() == 1) {
-                char firstChar = this.parameters.get(0).charAt(0);
+            if (this.parameters.size() == 1 && this.parameters.get(0).isString()) {
+                String asString = this.parameters.get(0).toString();
+                char firstChar = asString.charAt(0);
                 if (firstChar == '>' || firstChar == '<' || firstChar == '-' || firstChar >= '0' || firstChar <= '9') {
-                    this.name = this.parameters.get(0).replaceAll("\\s+", "");
+                    this.name = asString.replaceAll("\\s+", "");
                 } else {
-                    this.name = this.parameters.get(0);
+                    this.name = asString;
+                }
+                if (this.functionMode) {
+                    this.key = this.name.toLowerCase();
+                } else {
+                    this.key = this.name;
                 }
 
                 return this.name.length() > 0;
             }
 
-            StringBuilder sb = new StringBuilder();
-            sb.append(this.parameters.get(0));
-            sb.append("(\"");
-            for (int i = 1; i < this.parameters.size(); ++i) {
-                sb.append(this.parameters.get(i).replace("\\", "\\\\").replace("\"", "\\\""));
-                if (i + 1 != this.parameters.size()) {
-                    sb.append("\",\"");
+            if (this.functionMode) {
+                StringBuilder sbName = new StringBuilder();
+                StringBuilder sbKey = new StringBuilder();
+                sbName.append(this.parameters.get(0).toString());
+                if (this.functionMode) {
+                    sbKey.append(this.parameters.get(0).toString().toLowerCase());
+                } else {
+                    sbKey.append(this.parameters.get(0).toString());
                 }
+
+                sbName.append('(');
+                sbKey.append('(');
+                for (int i = 1; i < this.parameters.size(); ++i) {
+                    ValidatorParameter param = this.parameters.get(i);
+                    if (param.isToken()) {
+                        sbName.append(param.getTokens().getName());
+                        sbKey.append(param.getTokens().getKey());
+                    } else {
+                        sbName.append('"');
+                        sbKey.append('"');
+                        String value = param.toString()
+                                .replace("\\", "\\\\")
+                                .replace("\"", "\\\"");
+                        sbName.append(value);
+                        sbKey.append(value);
+                        sbName.append('"');
+                        sbKey.append('"');
+                    }
+                    if (i + 1 != this.parameters.size()) {
+                        sbName.append(",");
+                        sbKey.append(",");
+                    }
+                }
+                sbName.append(')');
+                sbKey.append(')');
+                this.name = sbName.toString();
+                this.key = sbKey.toString();
+            } else {
+                this.name = this.parameters.get(0).toString();
+                this.key = this.name;
             }
-            sb.append("\")");
-            this.name = sb.toString();
+
             return this.name.length() > 0;
         }
-    }
 
-    static private ValidatorTokens appendValidator(ValidatorTokens previous, String param, boolean stringMode) {
-        if (!stringMode) {
-            param = param.strip();
-            if (param.isEmpty()) {
-                return previous;
-            }
+        @Override
+        public String toString() {
+            return this.getName();
         }
 
-        if (null == previous) {
-            previous = new ValidatorTokens();
-        }
-        previous.parameters.add(param.strip());
-        return previous;
-    }
-
-    static public LinkedList<ValidatorTokens> buildValidators(String verifier) {
-        if (null == verifier) {
-            return null;
-        }
-
-        String stripedVerifer = verifier.trim();
-        if (stripedVerifer.isEmpty()) {
-            return null;
-        }
-
-        LinkedList<ValidatorTokens> ret = new LinkedList<>();
-        int start = 0;
-        int end = 0;
-        char stringMark = 0;
-        ValidatorTokens current = null;
-        boolean startParameter = false;
-        for (; end < stripedVerifer.length(); ++end) {
-            char c = stripedVerifer.charAt(end);
-
-            // Close string
-            if (stringMark != 0) {
-                if (c == stringMark) {
-                    if (end > start) {
-                        current = appendValidator(current, stripedVerifer.substring(start, end), true);
-                    } else {
-                        current = appendValidator(current, "", true);
-                    }
-                    start = end + 1;
-                    stringMark = 0;
-                }
-
-                continue;
+        public String getName() {
+            if (this.name == null) {
+                this.initialize();
             }
 
-            // Start string
-            if (c == '"' || c == '\'') {
-                if (end > start) {
-                    current = appendValidator(current, stripedVerifer.substring(start, end), false);
-                }
-
-                start = end + 1;
-                stringMark = c;
-                continue;
+            if (this.name == null) {
+                return "";
             }
 
-            if (c == '|') {
-                if (end > start) {
-                    current = appendValidator(current, stripedVerifer.substring(start, end), false);
-                }
-
-                if (current != null) {
-                    if (current.initialize()) {
-                        ret.add(current);
-                    }
-                }
-
-                current = null;
-                start = end + 1;
-                continue;
-            }
-
-            if (startParameter) {
-                if (c == ')' || c == ',') {
-                    if (end > start) {
-                        current = appendValidator(current, stripedVerifer.substring(start, end), false);
-                    }
-
-                    if (c == ')') {
-                        startParameter = false;
-                    }
-                    start = end + 1;
-                }
-            } else {
-                if (c == '(') {
-                    if (end > start) {
-                        current = appendValidator(current, stripedVerifer.substring(start, end), false);
-                    }
-                    startParameter = true;
-                    start = end + 1;
-                }
-            }
+            return this.name;
         }
 
-        if (start < stripedVerifer.length()) {
-            current = appendValidator(current, stripedVerifer.substring(start), false);
-        }
-        if (current != null) {
-            if (current.initialize()) {
-                ret.add(current);
+        public String getKey() {
+            if (this.key == null) {
+                this.initialize();
             }
+
+            if (this.key == null) {
+                return "";
+            }
+
+            return this.key;
         }
 
-        return ret;
+        public List<ValidatorParameter> getParameters() {
+            if (this.name == null || this.name.isEmpty()) {
+                this.initialize();
+            }
+            return this.parameters;
+        }
+
+        public void appendParameter(ValidatorParameter param) {
+            if (param == null) {
+                return;
+            }
+
+            this.parameters.add(param);
+            this.name = null;
+            this.key = null;
+        }
+
+        public boolean isFunctionMode() {
+            return this.functionMode;
+        }
     }
 }

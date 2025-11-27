@@ -149,6 +149,7 @@ public class DataDstMsgPack extends DataDstJava {
      * 
      * @return 常量数据,不支持的时候返回空
      */
+    @Override
     public final byte[] dumpConst(HashMap<String, Object> data) throws ConvException, IOException {
         MessageBufferPacker packer = MessagePack.newDefaultBufferPacker();
 

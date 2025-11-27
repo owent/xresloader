@@ -40,41 +40,37 @@ public class Main {
     private static DataDstImpl createOutputDescriptor(DataDstImpl protocolDescriptor) {
         DataDstImpl outputDescriptor = null;
         switch (ProgramOptions.getInstance().outType) {
-            case BIN:
-                outputDescriptor = protocolDescriptor;
-                break;
-            case LUA:
+            case BIN -> outputDescriptor = protocolDescriptor;
+            case LUA -> {
                 outputDescriptor = new DataDstLua();
                 outputDescriptor = outputDescriptor.init() ? outputDescriptor : null;
-                break;
-            case MSGPACK:
+            }
+            case MSGPACK -> {
                 outputDescriptor = new DataDstMsgPack();
                 outputDescriptor = outputDescriptor.init() ? outputDescriptor : null;
-                break;
-            case JSON:
+            }
+            case JSON -> {
                 outputDescriptor = new DataDstJson();
                 outputDescriptor = outputDescriptor.init() ? outputDescriptor : null;
-                break;
-            case XML:
+            }
+            case XML -> {
                 outputDescriptor = new DataDstXml();
                 outputDescriptor = outputDescriptor.init() ? outputDescriptor : null;
-                break;
-            case JAVASCRIPT:
+            }
+            case JAVASCRIPT -> {
                 outputDescriptor = new DataDstJavascript();
                 outputDescriptor = outputDescriptor.init() ? outputDescriptor : null;
-                break;
-            case UECSV:
+            }
+            case UECSV -> {
                 outputDescriptor = new DataDstUECsv();
                 outputDescriptor = outputDescriptor.init() ? outputDescriptor : null;
-                break;
-            case UEJSON:
+            }
+            case UEJSON -> {
                 outputDescriptor = new DataDstUEJson();
                 outputDescriptor = outputDescriptor.init() ? outputDescriptor : null;
-                break;
-            default:
-                ProgramOptions.getLoger().error("Output type \"%s\" invalid",
-                        ProgramOptions.getInstance().outType.toString());
-                break;
+            }
+            default -> ProgramOptions.getLoger().error("Output type \"%s\" invalid",
+                    ProgramOptions.getInstance().outType.toString());
         }
 
         return outputDescriptor;
@@ -83,13 +79,9 @@ public class Main {
     private static int printProtoData() {
         DataDstImpl protocolDescriptor = null;
         switch (ProgramOptions.getInstance().protocol) {
-            case PROTOBUF:
-                protocolDescriptor = new DataDstPb();
-                break;
-            default:
-                ProgramOptions.getLoger().error("Protocol type \"%s\" invalid",
-                        ProgramOptions.getInstance().protocol.toString());
-                break;
+            case PROTOBUF -> protocolDescriptor = new DataDstPb();
+            default -> ProgramOptions.getLoger().error("Protocol type \"%s\" invalid",
+                    ProgramOptions.getInstance().protocol.toString());
         }
 
         if (protocolDescriptor == null) {
@@ -105,17 +97,16 @@ public class Main {
         String dumpName = null;
 
         switch (ProgramOptions.getInstance().protoDumpType) {
-            case CONST:
+            case CONST -> {
                 dumpData = protocolDescriptor.buildConst();
                 dumpName = "const";
-                break;
-            case DESCRIPTOR:
-            case OPTIONS:
+            }
+            case DESCRIPTOR, OPTIONS -> {
                 dumpData = protocolDescriptor.buildOptions(ProgramOptions.getInstance().protoDumpType);
                 dumpName = "option";
-                break;
-            default:
-                break;
+            }
+            default -> {
+            }
         }
 
         if (dumpData == null) {
@@ -177,8 +168,7 @@ public class Main {
 
         int failedCount = 0;
         boolean continueNextScheme = true;
-        for (int i = 0;
-                continueNextScheme && i < ProgramOptions.getInstance().dataSourceMetas.length; ++i) {
+        for (int i = 0; continueNextScheme && i < ProgramOptions.getInstance().dataSourceMetas.length; ++i) {
             String sourceName = ProgramOptions.getInstance().dataSourceMetas[i];
 
             SchemeConf.getInstance().getMacroSource().clear();
@@ -199,12 +189,12 @@ public class Main {
                     descriptionBuilder.append(',');
                 }
 
-                if (!dataInfo.file_path.isEmpty()) {
-                    descriptionBuilder.append(dataInfo.file_path);
+                if (!dataInfo.filePath.isEmpty()) {
+                    descriptionBuilder.append(dataInfo.filePath);
                     descriptionBuilder.append('|');
                 }
 
-                descriptionBuilder.append(dataInfo.table_name);
+                descriptionBuilder.append(dataInfo.tableName);
             }
             sourceName = descriptionBuilder.toString();
 
@@ -226,14 +216,12 @@ public class Main {
 
             DataDstImpl protocolDescriptor = null;
             switch (ProgramOptions.getInstance().protocol) {
-                case PROTOBUF:
-                    protocolDescriptor = new DataDstPb();
-                    break;
-                default:
+                case PROTOBUF -> protocolDescriptor = new DataDstPb();
+                default -> {
                     ProgramOptions.getLoger().error("Protocol type \"%s\" invalid",
                             ProgramOptions.getInstance().protocol.toString());
                     ++failedCount;
-                    break;
+                }
             }
 
             if (protocolDescriptor == null) {
@@ -272,13 +260,13 @@ public class Main {
                 String currentFileName = dataSource.getCurrentFileName();
                 String currentTableName = dataSource.getCurrentTableName();
 
-                if (!currentFileName.isEmpty() && !currentTableName.isEmpty() && dataSource.hasCurrentRow()) {
+                if (!currentFileName.isEmpty() && !currentTableName.isEmpty() && dataSource.hasCurrentDataGrid()) {
                     ProgramOptions.getLoger().error(
                             "Convert data failed.%s  > %s%s  > File: %s, Table: %s, Row: %d, Column: %d(%s)%s  > %s",
                             lineSeparator,
                             String.join(" ", arguments), lineSeparator, currentFileName, currentTableName,
-                            dataSource.getCurrentRowNum() + 1, dataSource.getLastColomnNum() + 1,
-                            ExcelEngine.getColumnName(dataSource.getLastColomnNum() + 1), lineSeparator,
+                            dataSource.getLastRowNum() + 1, dataSource.getLastColumnNum() + 1,
+                            ExcelEngine.getColumnName(dataSource.getLastColumnNum() + 1), lineSeparator,
                             exception.getMessage());
                 } else if (!currentFileName.isEmpty() && !currentTableName.isEmpty()) {
                     ProgramOptions.getLoger().error(
@@ -324,7 +312,7 @@ public class Main {
         }
 
         Matcher matcher = INPUT_ARGUMENT_PATTERN.matcher(input.nextLine());
-        LinkedList<String> tokens = new LinkedList<String>();
+        LinkedList<String> tokens = new LinkedList<>();
 
         while (matcher.find()) {
             String token = matcher.group();
@@ -370,7 +358,7 @@ public class Main {
         }
 
         if (ProgramOptions.getInstance().enableStdin) {
-            String[] stdinArguments = null;
+            String[] stdinArguments;
             Scanner stdinScanner = new Scanner(System.in);
             while ((stdinArguments = readArgsFromStdin(stdinScanner)) != null) {
                 if (stdinArguments.length == 0) {

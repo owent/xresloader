@@ -4,7 +4,6 @@ import org.xresloader.core.ProgramOptions;
 import org.xresloader.core.data.err.ConvException;
 import org.xresloader.core.data.vfy.DataVerifyImpl;
 import org.xresloader.core.data.vfy.DataVerifyNumberRange;
-import org.xresloader.core.data.vfy.DataVerifyResult;
 import org.xresloader.core.engine.IdentifyDescriptor;
 
 import java.util.ArrayList;

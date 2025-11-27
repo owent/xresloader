@@ -129,7 +129,7 @@ public class DataVerifyInMacroTable extends DataVerifyImpl {
                 return false;
             }
 
-            for (int i = startRow; i <= tableIndex.getLastRowNum(); ++i) {
+            for (int i = startRow; i <= tableIndex.getLastRowIndex(); ++i) {
                 CustomDataRowIndex row = tableIndex.getRow(i);
                 if (null == row) {
                     continue;

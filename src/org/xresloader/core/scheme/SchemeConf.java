@@ -13,11 +13,13 @@ import org.xresloader.core.data.err.InitializeException;
  */
 public class SchemeConf {
 
-    public class DataInfo {
-        public String file_path = "";
-        public String table_name = "";
-        public int data_row;
-        public int data_col;
+    public static class DataInfo {
+        public String filePath = "";
+        public String tableName = "";
+        public int dataRowBegin = 0;
+        public int dataColumnBegin = 0;
+        public int dataRowEnd = 0;
+        public int dataColumnEnd = 0;
     }
 
     public class DataExtJson {
@@ -42,17 +44,17 @@ public class SchemeConf {
     /**
      * 单例
      */
-    private static ThreadLocal<SchemeConf> instance = new ThreadLocal<>();
+    private static final ThreadLocal<SchemeConf> instance = new ThreadLocal<>();
 
-    private LinkedList<DataInfo> dateSource = new LinkedList<DataInfo>();
-    private LinkedList<DataInfo> macroSource = new LinkedList<DataInfo>();
+    private LinkedList<DataInfo> dateSource = new LinkedList<>();
+    private LinkedList<DataInfo> macroSource = new LinkedList<>();
     private String protoName;
     private String outputFile;
     private SchemeKeyConf key;
     private SchemeDataSourceImpl scheme;
 
-    private DataExtJson extJson = new DataExtJson();
-    private DataExtUE extUECSV = new DataExtUE();
+    private final DataExtJson extJson = new DataExtJson();
+    private final DataExtUE extUECSV = new DataExtUE();
 
     private String outputFilePathCache = "";
     private String outputFileAbsPathCache = "";
@@ -89,8 +91,8 @@ public class SchemeConf {
     }
 
     public void reset() {
-        dateSource = new LinkedList<DataInfo>();
-        macroSource = new LinkedList<DataInfo>();
+        dateSource = new LinkedList<>();
+        macroSource = new LinkedList<>();
         protoName = "";
         outputFile = "";
         key = new SchemeKeyConf();
@@ -157,12 +159,14 @@ public class SchemeConf {
      * @param row        行号
      * @param col        列号
      */
-    public void addDataSource(String file_path, String table_name, int row, int col) {
+    public void addDataSource(String file_path, String table_name, int rowBegin, int colBegin, int rowEnd, int colEnd) {
         DataInfo data = new DataInfo();
-        data.file_path = file_path;
-        data.table_name = table_name;
-        data.data_row = row;
-        data.data_col = col;
+        data.filePath = file_path;
+        data.tableName = table_name;
+        data.dataRowBegin = rowBegin;
+        data.dataColumnBegin = colBegin;
+        data.dataRowEnd = rowEnd;
+        data.dataColumnEnd = colEnd;
 
         dateSource.add(data);
     }
@@ -175,11 +179,13 @@ public class SchemeConf {
      * @param position   行号,列号
      */
     public void addDataSource(String file_path, String table_name, String position) {
-        int row = 2;
-        int col = 1;
+        int rowBegin = 2;
+        int colBegin = 1;
+        int rowEnd = 0;
+        int colEnd = 0;
 
         String[] group = position.split("[^\\d]");
-        ArrayList<String> valid_group = new ArrayList<String>();
+        ArrayList<String> valid_group = new ArrayList<>();
         for (String n : group) {
             if (false == n.isEmpty()) {
                 valid_group.add(n);
@@ -187,14 +193,22 @@ public class SchemeConf {
         }
 
         if (valid_group.size() >= 1) {
-            row = Integer.parseInt(valid_group.get(0));
+            rowBegin = Integer.parseInt(valid_group.get(0));
         }
 
         if (valid_group.size() >= 2) {
-            col = Integer.parseInt(valid_group.get(1));
+            colBegin = Integer.parseInt(valid_group.get(1));
         }
 
-        addDataSource(file_path, table_name, row, col);
+        if (valid_group.size() >= 3) {
+            rowEnd = Integer.parseInt(valid_group.get(2));
+        }
+
+        if (valid_group.size() >= 4) {
+            colEnd = Integer.parseInt(valid_group.get(3));
+        }
+
+        addDataSource(file_path, table_name, rowBegin, colBegin, rowEnd, colEnd);
     }
 
     /**
@@ -214,12 +228,14 @@ public class SchemeConf {
      * @param row        行号
      * @param col        列号
      */
-    public void addMacroSource(String file_path, String table_name, int row, int col) {
+    public void addMacroSource(String file_path, String table_name, int rowBegin, int colBegin) {
         DataInfo data = new DataInfo();
-        data.file_path = file_path;
-        data.table_name = table_name;
-        data.data_row = row;
-        data.data_col = col;
+        data.filePath = file_path;
+        data.tableName = table_name;
+        data.dataRowBegin = rowBegin;
+        data.dataColumnBegin = colBegin;
+        data.dataRowEnd = 0;
+        data.dataColumnEnd = 0;
 
         macroSource.add(data);
     }
@@ -236,7 +252,7 @@ public class SchemeConf {
         int col = 1;
 
         String[] group = position.split("[^\\d]");
-        ArrayList<String> valid_group = new ArrayList<String>();
+        ArrayList<String> valid_group = new ArrayList<>();
         for (String n : group) {
             if (false == n.isEmpty()) {
                 valid_group.add(n);
@@ -352,23 +368,19 @@ public class SchemeConf {
 
     public int initScheme() throws InitializeException {
         switch (ProgramOptions.getInstance().dataSourceType) {
-            case BIN: {
+            case BIN -> {
                 scheme = new SchemeDataSourceCmd();
-                break;
             }
-            case EXCEL: {
+            case EXCEL -> {
                 scheme = new SchemeDataSourceExcel();
-                break;
             }
-            case INI: {
+            case INI -> {
                 scheme = new SchemeDataSourceConf();
-                break;
             }
-            case JSON: {
+            case JSON -> {
                 scheme = new SchemeDataSourceJson();
-                break;
             }
-            default: {
+            default -> {
                 throw new InitializeException("data source file type error.");
             }
         }

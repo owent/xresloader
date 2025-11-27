@@ -1,0 +1,146 @@
+plugins {
+    id 'java'
+    id 'jacoco'
+    id 'com.gradleup.shadow' version '9.2.2'
+}
+
+group = 'org.xresloader'
+version = '2.23.0'
+description = 'xresloader'
+buildDir = 'target'
+
+ext {
+    targetJava = 17
+    targetJavaVersion = JavaVersion.toVersion(targetJava)
+    versions = [
+        nashorn        : '15.7',
+        protobuf       : '4.33.1',
+        poi            : '5.5.0',
+        log4j          : '2.25.2',
+        commonsCli     : '1.11.0',
+        commonsCodec   : '1.20.0',
+        ini4j          : '0.5.4',
+        msgpack        : '0.9.10',
+        json           : '20250517',
+        dom4j          : '2.2.0',
+        commonsCsv     : '1.14.1',
+        snakeyamlEngine: '3.0.1',
+        junitJupiter   : '6.0.1',
+        junitPlatform  : '6.0.1'
+    ]
+}
+
+repositories {
+    mavenCentral()
+}
+
+java {
+    if (!JavaVersion.current().isCompatibleWith(targetJavaVersion)) {
+        toolchain {
+            languageVersion = JavaLanguageVersion.of(targetJava)
+        }
+    }
+}
+
+sourceSets {
+    main {
+        java.srcDirs = ['src', 'header']
+        resources.srcDirs = ['src/org/xresloader/core/resource']
+    }
+    test {
+        java.srcDirs = ['test']
+    }
+}
+
+dependencies {
+    implementation "commons-cli:commons-cli:${versions.commonsCli}"
+    implementation "commons-codec:commons-codec:${versions.commonsCodec}"
+    implementation "org.apache.logging.log4j:log4j-api:${versions.log4j}"
+    implementation "org.apache.logging.log4j:log4j-core:${versions.log4j}"
+    implementation "org.ini4j:ini4j:${versions.ini4j}"
+    implementation "org.msgpack:msgpack-core:${versions.msgpack}"
+    implementation "org.json:json:${versions.json}"
+    implementation "com.google.protobuf:protobuf-java:${versions.protobuf}"
+    implementation "com.google.protobuf:protobuf-java-util:${versions.protobuf}"
+    implementation "org.apache.poi:poi-ooxml:${versions.poi}"
+    implementation "org.apache.poi:poi:${versions.poi}"
+    implementation "org.dom4j:dom4j:${versions.dom4j}"
+    implementation "org.apache.commons:commons-csv:${versions.commonsCsv}"
+    implementation "org.snakeyaml:snakeyaml-engine:${versions.snakeyamlEngine}"
+    implementation "org.openjdk.nashorn:nashorn-core:${versions.nashorn}"
+
+    testImplementation "org.junit.jupiter:junit-jupiter-api:${versions.junitJupiter}"
+    testRuntimeOnly "org.junit.jupiter:junit-jupiter-engine:${versions.junitJupiter}"
+    testRuntimeOnly "org.junit.platform:junit-platform-launcher:${versions.junitPlatform}"
+}
+
+tasks.withType(JavaCompile).configureEach {
+    options.encoding = 'UTF-8'
+    options.release = targetJava
+    options.compilerArgs += ['-Xlint:all,-options,-path']
+}
+
+tasks.test {
+    useJUnitPlatform()
+}
+
+tasks.jacocoTestReport {
+    dependsOn tasks.test
+    reports {
+        xml.required = true
+        csv.required = false
+        html.outputLocation = layout.buildDirectory.dir('reports/jacoco/test/html')
+    }
+}
+
+tasks.processResources {
+    filteringCharset = 'UTF-8'
+    inputs.property('projectVersion', project.version)
+    inputs.property('projectName', project.name)
+    def expandTokens = [project: [version: project.version, name: project.name]]
+    filesMatching('**/*.properties') {
+        expand(expandTokens)
+    }
+    from('header') {
+        include '*.pb'
+    }
+}
+
+tasks.jar {
+    archiveClassifier.set('plain')
+    manifest {
+        attributes(
+            'Main-Class': 'org.xresloader.core.Main',
+            'Multi-Release': 'true'
+        )
+    }
+}
+
+tasks.shadowJar {
+    archiveClassifier.set('')
+    mergeServiceFiles()
+    manifest {
+        attributes(
+            'Main-Class': 'org.xresloader.core.Main',
+            'Multi-Release': 'true'
+        )
+    }
+    exclude 'module-info.class'
+    exclude 'META-INF/*.MF'
+    exclude 'META-INF/*.SF'
+    exclude 'META-INF/*.DSA'
+    exclude 'META-INF/*.RSA'
+    exclude 'META-INF/LICENSE.txt'
+    exclude 'META-INF/NOTICE.txt'
+    exclude 'META-INF/DEPENDENCIES'
+    exclude 'META-INF/LICENSE*'
+    exclude 'META-INF/NOTICE*'
+    exclude 'META-INF.versions.*.module-info'
+    dependencies {
+        exclude(dependency('junit:junit'))
+    }
+}
+
+tasks.assemble {
+    dependsOn tasks.shadowJar
+}

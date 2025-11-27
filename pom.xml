@@ -6,7 +6,7 @@
 
     <groupId>org.xresloader</groupId>
     <artifactId>xresloader</artifactId>
-    <version>2.22.3</version>
+    <version>2.23.0</version>
     <packaging>jar</packaging>
     <name>xresloader</name>
 
@@ -15,22 +15,22 @@
         <project.target.javaVersion>17</project.target.javaVersion>
         <nashorn.version>15.7</nashorn.version>
         <protobuf.version>4.33.1</protobuf.version>
-        <poi.version>5.4.1</poi.version>
+        <poi.version>5.5.0</poi.version>
         <log4j.version>2.25.2</log4j.version>
-        <commons-cli.version>1.10.0</commons-cli.version>
-        <commons-codec.version>1.19.0</commons-codec.version>
+        <commons-cli.version>1.11.0</commons-cli.version>
+        <commons-codec.version>1.20.0</commons-codec.version>
         <ini4j.version>0.5.4</ini4j.version>
         <msgpack.version>0.9.10</msgpack.version>
         <json.version>20250517</json.version>
         <dom4j.version>2.2.0</dom4j.version>
         <commons-csv.version>1.14.1</commons-csv.version>
-        <snakeyaml-engine.version>2.10</snakeyaml-engine.version>
+        <snakeyaml-engine.version>3.0.1</snakeyaml-engine.version>
         <jacoco-maven-plugin.version>0.8.14</jacoco-maven-plugin.version>
         <maven-compiler-plugin.version>3.14.1</maven-compiler-plugin.version>
         <maven-surefire-plugin.version>3.5.4</maven-surefire-plugin.version>
         <maven-shade-plugin.version>3.6.1</maven-shade-plugin.version>
         <build-helper-maven-plugin.version>3.6.1</build-helper-maven-plugin.version>
-        <junit-jupiter.version>5.13.0-M2</junit-jupiter.version>
+        <junit-jupiter.version>6.0.1</junit-jupiter.version>
 
         <graalvm.version>22.3.3</graalvm.version>
         <rhino.version>1.8.0</rhino.version>

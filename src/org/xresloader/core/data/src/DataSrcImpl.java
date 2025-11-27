@@ -7,6 +7,7 @@ import java.util.LinkedList;
 
 import org.xresloader.core.ProgramOptions;
 import org.xresloader.core.data.err.ConvException;
+import org.xresloader.core.engine.ExcelEngine;
 import org.xresloader.core.engine.IdentifyDescriptor;
 
 /**
@@ -15,44 +16,46 @@ import org.xresloader.core.engine.IdentifyDescriptor;
 public abstract class DataSrcImpl {
     static public final int LOG_PROCESS_BOUND = 5000;
 
-    private static ThreadLocal<DataSrcImpl> ourInstance = new ThreadLocal<>();
-    private int last_column_index_ = 0;
-    private static ThreadLocal<DataContainer<Boolean>> dc_cache_bool_ = ThreadLocal
+    private static final ThreadLocal<DataSrcImpl> ourInstance = new ThreadLocal<>();
+    private int lastDataFieldIndex = 0;
+
+    private static final ThreadLocal<DataContainer<Boolean>> dcCacheBool = ThreadLocal
             .withInitial(() -> new DataContainer<Boolean>());
-    private static ThreadLocal<DataContainer<String>> dc_cache_str_ = ThreadLocal
+    private static final ThreadLocal<DataContainer<String>> dcCacheString = ThreadLocal
             .withInitial(() -> new DataContainer<String>());
-    private static ThreadLocal<DataContainer<Double>> dc_cache_dbl_ = ThreadLocal
+    private static final ThreadLocal<DataContainer<Double>> dcCacheDouble = ThreadLocal
             .withInitial(() -> new DataContainer<Double>());
-    private static ThreadLocal<DataContainer<Long>> dc_cache_long_ = ThreadLocal
+    private static final ThreadLocal<DataContainer<Long>> dcCacheLong = ThreadLocal
             .withInitial(() -> new DataContainer<Long>());
 
     protected DataSrcImpl() {
     }
 
     public static DataContainer<Boolean> getBoolCache(boolean default_val) {
-        dc_cache_bool_.get().value = default_val;
-        dc_cache_bool_.get().valid = false;
-        return dc_cache_bool_.get();
+        dcCacheBool.get().value = default_val;
+        dcCacheBool.get().valid = false;
+        return dcCacheBool.get();
     }
 
     public static DataContainer<String> getStringCache(String default_val) {
-        dc_cache_str_.get().value = default_val;
-        dc_cache_str_.get().valid = false;
-        return dc_cache_str_.get();
+        dcCacheString.get().value = default_val;
+        dcCacheString.get().valid = false;
+        return dcCacheString.get();
     }
 
     public static DataContainer<Double> getDoubleCache(double default_val) {
-        dc_cache_dbl_.get().value = default_val;
-        dc_cache_dbl_.get().valid = false;
-        return dc_cache_dbl_.get();
+        dcCacheDouble.get().value = default_val;
+        dcCacheDouble.get().valid = false;
+        return dcCacheDouble.get();
     }
 
     public static DataContainer<Long> getLongCache(long default_val) {
-        dc_cache_long_.get().value = default_val;
-        dc_cache_long_.get().valid = false;
-        return dc_cache_long_.get();
+        dcCacheLong.get().value = default_val;
+        dcCacheLong.get().valid = false;
+        return dcCacheLong.get();
     }
 
+    @SuppressWarnings("CallToPrintStackTrace")
     public static DataSrcImpl create(Class<?> clazz) {
         try {
             // return ourInstance = (DataSrcImpl) clazz.newInstance();
@@ -77,6 +80,8 @@ public abstract class DataSrcImpl {
 
     public abstract boolean isInitialized();
 
+    public abstract ExcelEngine.DataItemGridWrapper getCurrentDataItemGrid();
+
     /**
      * @brief 获取下一个数据源
      * @note 每次调用这个函数之后最好重做一次列名映射，否则可能数据不匹配
@@ -94,20 +99,30 @@ public abstract class DataSrcImpl {
         return false;
     }
 
-    public int getLastColomnNum() {
-        return last_column_index_;
+    public int getLastColumnNum() {
+        ExcelEngine.DataItemGridWrapper currentItemGrid = getCurrentDataItemGrid();
+        if (currentItemGrid == null) {
+            return -1;
+        }
+
+        return currentItemGrid.getOriginColumnIndex(this.lastDataFieldIndex);
     }
 
-    protected void setLastColumnNum(int c) {
-        last_column_index_ = c;
+    private void setDataFieldIndex(int dataFieldIndex) {
+        this.lastDataFieldIndex = dataFieldIndex;
     }
 
-    public int getCurrentRowNum() {
-        return 0;
+    public int getLastRowNum() {
+        ExcelEngine.DataItemGridWrapper currentItemGrid = getCurrentDataItemGrid();
+        if (currentItemGrid == null) {
+            return -1;
+        }
+
+        return currentItemGrid.getOriginRowIndex(this.lastDataFieldIndex);
     }
 
-    public boolean hasCurrentRow() {
-        return getCurrentRowNum() >= 0;
+    public boolean hasCurrentDataGrid() {
+        return getLastRowNum() >= 0;
     }
 
     public String getCurrentTableName() {
@@ -120,28 +135,28 @@ public abstract class DataSrcImpl {
 
     public DataContainer<Boolean> getValue(IdentifyDescriptor ident, boolean dv) throws ConvException {
         if (null != ident) {
-            setLastColumnNum(ident.index);
+            setDataFieldIndex(ident.getDataFieldIndex());
         }
         return getBoolCache(dv);
     }
 
     public DataContainer<String> getValue(IdentifyDescriptor ident, String dv) throws ConvException {
         if (null != ident) {
-            setLastColumnNum(ident.index);
+            setDataFieldIndex(ident.getDataFieldIndex());
         }
         return getStringCache(dv);
     }
 
     public DataContainer<Long> getValue(IdentifyDescriptor ident, long dv) throws ConvException {
         if (null != ident) {
-            setLastColumnNum(ident.index);
+            setDataFieldIndex(ident.getDataFieldIndex());
         }
         return getLongCache(dv);
     }
 
     public DataContainer<Double> getValue(IdentifyDescriptor ident, double dv) throws ConvException {
         if (null != ident) {
-            setLastColumnNum(ident.index);
+            setDataFieldIndex(ident.getDataFieldIndex());
         }
         return getDoubleCache(dv);
     }

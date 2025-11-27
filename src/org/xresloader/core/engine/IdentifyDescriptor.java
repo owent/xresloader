@@ -9,16 +9,16 @@ import org.xresloader.core.data.vfy.DataVerifyImpl;
 /**
  * Created by owent on 2016/12/7. 这个数据结构对应Excel里的一列
  */
-public class IdentifyDescriptor {
+public class IdentifyDescriptor implements Cloneable {
     /**
      * 名字，对应标准化后的映射路径
      */
     public String name = "";
 
     /**
-     * 索引，即Excel里的列号
+     * 数据Field所在数据源的位置，从0开始（transpose模式为行号，非transpose模式为列号）
      */
-    public int index = 0;
+    private int dataFieldIndex = 0;
 
     /**
      * 验证器文本
@@ -34,7 +34,16 @@ public class IdentifyDescriptor {
      */
     public DataDstWriterNode referToWriterNode;
 
-    public IdentifyDescriptor() {
+    public IdentifyDescriptor(int dataFieldIndex) {
+        this.dataFieldIndex = dataFieldIndex;
+    }
+
+    public void resetDataSourcePosition(int dataFieldIndex) {
+        this.dataFieldIndex = dataFieldIndex;
+    }
+
+    public int getDataFieldIndex() {
+        return dataFieldIndex;
     }
 
     public boolean hasValidator() {
@@ -86,14 +95,8 @@ public class IdentifyDescriptor {
         return referToWriterNode.getReferBrothers().innerFieldDesc.mutableExtension().ratio;
     }
 
-    public IdentifyDescriptor clone() {
-        IdentifyDescriptor ret = new IdentifyDescriptor();
-        ret.name = this.name;
-        ret.index = this.index;
-        ret.dataSourceFieldValidator = this.dataSourceFieldValidator;
-        ret.verifyEngine = this.verifyEngine;
-        ret.referToWriterNode = this.referToWriterNode;
-
-        return ret;
+    @Override
+    public IdentifyDescriptor clone() throws CloneNotSupportedException {
+        return (IdentifyDescriptor) super.clone();
     }
 }

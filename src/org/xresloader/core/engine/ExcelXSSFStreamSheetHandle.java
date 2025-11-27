@@ -99,8 +99,8 @@ public class ExcelXSSFStreamSheetHandle implements XSSFSheetXMLHandler.SheetCont
         currentRowIndex.getColumns().set(thisCol, formattedValue);
     }
 
-    static public ExcelEngine.CustomDataTableIndex buildCustomTableIndex(File file, String sheet_name) {
-        if (file == null || sheet_name == null) {
+    static public ExcelEngine.CustomDataTableIndex buildCustomTableIndex(File file, String sheetName) {
+        if (file == null || sheetName == null) {
             return null;
         }
 
@@ -111,12 +111,12 @@ public class ExcelXSSFStreamSheetHandle implements XSSFSheetXMLHandler.SheetCont
             XSSFReader.SheetIterator iter = (XSSFReader.SheetIterator) xssf_reader.getSheetsData();
             while (iter.hasNext()) {
                 try (InputStream stream = iter.next()) {
-                    if (!sheet_name.equals(iter.getSheetName())) {
+                    if (!sheetName.equals(iter.getSheetName())) {
                         continue;
                     }
 
                     ExcelEngine.CustomDataTableIndex tableIndex = new ExcelEngine.CustomDataTableIndex(
-                            file.getCanonicalPath(), sheet_name);
+                            file.getCanonicalPath(), sheetName);
 
                     DataFormatter formatter = new DataFormatter();
                     InputSource sheet_source = new InputSource(stream);
@@ -131,31 +131,31 @@ public class ExcelXSSFStreamSheetHandle implements XSSFSheetXMLHandler.SheetCont
                     } catch (org.xml.sax.SAXException e) {
                         ProgramOptions.getLoger().error(
                                 "Open source file \"%s\" and parse sheet \"%s\" failed, SAX engine appears to be broken - %s.",
-                                file.getPath(), sheet_name, e.getMessage());
+                                file.getPath(), sheetName, e.getMessage());
                     } catch (ParserConfigurationException e) {
                         ProgramOptions.getLoger().error(
                                 "Open source file \"%s\" and parse sheet \"%s\" failed, SAX parser appears to be broken - %s.",
-                                file.getPath(), sheet_name, e.getMessage());
+                                file.getPath(), sheetName, e.getMessage());
                     } catch (java.io.IOException e) {
                         ProgramOptions.getLoger().error("open source file \"%s\" and parse sheet \"%s\" failed, %s.",
-                                file.getPath(), sheet_name, e.getMessage());
+                                file.getPath(), sheetName, e.getMessage());
                     }
                 }
             }
         } catch (org.apache.poi.openxml4j.exceptions.OpenXML4JException e) {
             ProgramOptions.getLoger().error(
                     "Open source file \"%s\" and parse sheet \"%s\" failed, OpenXML4J engine appears to be broken - %s.",
-                    file.getPath(), sheet_name, e.getMessage());
+                    file.getPath(), sheetName, e.getMessage());
         } catch (org.xml.sax.SAXException e) {
             ProgramOptions.getLoger().error(
                     "Open source file \"%s\" and parse sheet \"%s\" failed, SAX engine appears to be broken - %s.",
-                    file.getPath(), sheet_name, e.getMessage());
+                    file.getPath(), sheetName, e.getMessage());
         } catch (java.io.IOException e) {
             ProgramOptions.getLoger().error("Open source file \"%s\" and parse sheet \"%s\" failed, %s.",
-                    file.getPath(), sheet_name, e.getMessage());
+                    file.getPath(), sheetName, e.getMessage());
         } catch (Exception e) {
             ProgramOptions.getLoger().error("Open source file \"%s\" and parse sheet \"%s\" failed, %s.",
-                    file.getPath(), sheet_name, e.getMessage());
+                    file.getPath(), sheetName, e.getMessage());
         }
 
         return null;

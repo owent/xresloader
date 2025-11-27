@@ -86,8 +86,9 @@ public class DataDstJson extends DataDstJava {
      * 
      * @return 常量数据,不支持的时候返回空
      */
+    @Override
     public final byte[] dumpConst(HashMap<String, Object> data) throws ConvException, IOException {
-        JSONObject wrapper = null;
+        JSONObject wrapper;
 
         if (null != data) {
             wrapper = new JSONObject(data);
@@ -117,6 +118,7 @@ public class DataDstJson extends DataDstJava {
         }
     }
 
+    @SuppressWarnings("UseSpecificCatch")
     static Writer stringifyWriteObject(Writer writer, JSONObject value, int indentFactor, int indent)
             throws JSONException {
         try {

@@ -33,6 +33,7 @@ import org.xresloader.core.data.err.ConvException;
 import org.xresloader.core.data.src.DataContainer;
 import org.xresloader.core.data.src.DataSrcImpl;
 import org.xresloader.core.data.vfy.DataVerifyImpl;
+import org.xresloader.core.scheme.SchemeConf;
 
 /**
  * Created by owentou on 2014/10/9.
@@ -96,7 +97,7 @@ public class ExcelEngine {
             return ret;
         }
 
-        public int getRowNum() {
+        public int getRowIndex() {
             return rowNumber;
         }
 
@@ -109,12 +110,13 @@ public class ExcelEngine {
         private String filePath = null;
         private String sheetName = null;
         private int lastRowNum = -1;
+        private int lastColumnNum = -1;
 
         private HashMap<Integer, CustomDataRowIndex> rows = new HashMap<>();
 
-        public CustomDataTableIndex(String file_path, String sheet_name) {
+        public CustomDataTableIndex(String file_path, String sheetName) {
             this.filePath = file_path;
-            this.sheetName = sheet_name;
+            this.sheetName = sheetName;
         }
 
         public String getFilePath() {
@@ -125,8 +127,12 @@ public class ExcelEngine {
             return sheetName;
         }
 
-        public int getLastRowNum() {
+        public int getLastRowIndex() {
             return lastRowNum;
+        }
+
+        public int getLastColumnIndex() {
+            return lastColumnNum;
         }
 
         public void addRow(CustomDataRowIndex row) {
@@ -134,9 +140,12 @@ public class ExcelEngine {
                 return;
             }
 
-            rows.put(row.getRowNum(), row);
-            if (row.getRowNum() > lastRowNum) {
-                lastRowNum = row.getRowNum();
+            rows.put(row.getRowIndex(), row);
+            if (row.getRowIndex() > lastRowNum) {
+                lastRowNum = row.getRowIndex();
+            }
+            if (row.getColumnSize() - 1 > lastColumnNum) {
+                lastColumnNum = row.getColumnSize() - 1;
             }
         }
 
@@ -179,14 +188,116 @@ public class ExcelEngine {
             return -1;
         }
 
-        public int getRowNum() {
+        public int getRowIndex() {
             if (null != userModuleRow) {
                 return userModuleRow.getRowNum();
             }
             if (null != customRow) {
-                return customRow.getRowNum();
+                return customRow.getRowIndex();
             }
             return -1;
+        }
+    }
+
+    static public abstract class DataSheetWrapper {
+        private final SchemeConf.DataInfo dataSource;
+
+        public DataSheetWrapper(SchemeConf.DataInfo dataSource) {
+            this.dataSource = dataSource;
+        }
+
+        public SchemeConf.DataInfo getDataSource() {
+            return dataSource;
+        }
+
+        public abstract DataRowWrapper getRow(int keyRow);
+
+        public abstract int getLastRowIndex();
+
+        public abstract int getLastColumnIndex();
+    }
+
+    static public abstract class DataItemGridWrapper {
+        boolean transpose;
+        int dataItemIndex;
+
+        /**
+         * Constructor
+         * 
+         * @param transpose     是否转置
+         * @param dataItemIndex 数据项索引（从0开始）
+         */
+        public DataItemGridWrapper(boolean transpose, int dataItemIndex) {
+            this.transpose = transpose;
+            this.dataItemIndex = dataItemIndex;
+        }
+
+        public boolean isTranspose() {
+            return transpose;
+        }
+
+        public int getDataItemIndex() {
+            return dataItemIndex;
+        }
+
+        /**
+         * 获取最后一个数据字段索引（从0开始）
+         * 
+         * @return 最后一个数据字段索引
+         */
+        abstract public int getLastDataFieldIndex();
+
+        /**
+         * 获取自定义行索引单元格的值
+         * 
+         * @param itemGrid 数据网格(数据体)
+         * @param ident    标识符(数据字段信息)
+         * @return 自定义行索引单元格的值,如果不是自定义索引则返回null
+         */
+        abstract public String getCustomRowIndexCellValue(DataItemGridWrapper itemGrid, IdentifyDescriptor ident);
+
+        /**
+         * 获取POI索引单元格
+         * 
+         * @param itemGrid 数据网格(数据体)
+         * @param ident    标识符(数据字段信息)
+         * @return POI单元格,如果不是POI索引或数据不存在则返回null
+         */
+        abstract public Cell getUserModuleRowCell(DataItemGridWrapper itemGrid, IdentifyDescriptor ident);
+
+        /**
+         * 获取数据源信息
+         * 
+         * @return 数据源信息
+         */
+        abstract public SchemeConf.DataInfo getDataSource();
+
+        /**
+         * 获取原始行索引
+         * 
+         * @param dataFieldIndex 数据字段索引
+         * @return 原始行索引
+         */
+        public int getOriginRowIndex(int dataFieldIndex) {
+            if (this.transpose) {
+                return dataFieldIndex;
+            } else {
+                return this.dataItemIndex;
+            }
+        }
+
+        /**
+         * 获取原始列索引
+         * 
+         * @param dataFieldIndex 数据字段索引
+         * @return 原始列索引
+         */
+        public int getOriginColumnIndex(int dataFieldIndex) {
+            if (this.transpose) {
+                return this.dataItemIndex;
+            } else {
+                return dataFieldIndex;
+            }
         }
     }
 
@@ -247,16 +358,16 @@ public class ExcelEngine {
             // 类型枚举，以后能支持 ods等非微软格式？
             if (file_path.toLowerCase().endsWith(".xls")) {
                 ret = new HSSFWorkbook(is);
-                org.apache.poi.hssf.extractor.ExcelExtractor extractor = new org.apache.poi.hssf.extractor.ExcelExtractor(
-                        (HSSFWorkbook) ret);
-                extractor.setFormulasNotResults(false);
-                extractor.close();
+                try (org.apache.poi.hssf.extractor.ExcelExtractor extractor = new org.apache.poi.hssf.extractor.ExcelExtractor(
+                        (HSSFWorkbook) ret)) {
+                    extractor.setFormulasNotResults(false);
+                }
             } else {
                 ret = new XSSFWorkbook(is);
-                org.apache.poi.xssf.extractor.XSSFExcelExtractor extractor = new org.apache.poi.xssf.extractor.XSSFExcelExtractor(
-                        (XSSFWorkbook) ret);
-                extractor.setFormulasNotResults(false);
-                extractor.close();
+                try (org.apache.poi.xssf.extractor.XSSFExcelExtractor extractor = new org.apache.poi.xssf.extractor.XSSFExcelExtractor(
+                        (XSSFWorkbook) ret)) {
+                    extractor.setFormulasNotResults(false);
+                }
             }
 
             openedWorkbooks.put(file_path, ret);
@@ -279,20 +390,20 @@ public class ExcelEngine {
     /**
      * 打开工作簿
      *
-     * @param file_path  Excel文件
-     * @param sheet_name 表名
+     * @param file_path Excel文件
+     * @param sheetName 表名
      * @return Sheet对象
      */
-    static public Sheet openUserModuleSheet(File file, String sheet_name) {
+    static public Sheet openUserModuleSheet(File file, String sheetName) {
         Workbook wb = openWorkbook(file);
         if (null == wb)
             return null;
 
-        return wb.getSheet(sheet_name);
+        return wb.getSheet(sheetName);
     }
 
     @SuppressWarnings("UseSpecificCatch")
-    static public CustomDataTableIndex openStreamTableIndex(File file, String sheet_name) {
+    static public CustomDataTableIndex openStreamTableIndex(File file, String sheetName) {
         String realPath = null;
         try {
             realPath = file.getCanonicalPath().replaceAll("\\\\", "/");
@@ -308,16 +419,16 @@ public class ExcelEngine {
             realPath = file.getPath().replaceAll("\\\\", "/");
         }
         CustomDataTableIndex ret;
-        String lruCacheKey = String.format("%s|%s", realPath, sheet_name);
+        String lruCacheKey = String.format("%s|%s", realPath, sheetName);
         ret = openedCustomDataTableIndex.getOrDefault(lruCacheKey, null);
         if (ret != null) {
             return ret;
         }
 
         if (file.getName().toLowerCase().endsWith(".xls")) {
-            ret = ExcelHSSFStreamSheetHandle.buildCustomTableIndex(file, sheet_name);
+            ret = ExcelHSSFStreamSheetHandle.buildCustomTableIndex(file, sheetName);
         } else {
-            ret = ExcelXSSFStreamSheetHandle.buildCustomTableIndex(file, sheet_name);
+            ret = ExcelXSSFStreamSheetHandle.buildCustomTableIndex(file, sheetName);
         }
 
         if (ret != null) {
@@ -325,14 +436,14 @@ public class ExcelEngine {
             if (maxCacheRows <= 0) {
                 maxCacheRows = Integer.MAX_VALUE;
             }
-            if (ret.getLastRowNum() + 1 < maxCacheRows) {
+            if (ret.getLastRowIndex() + 1 < maxCacheRows) {
                 openedCustomDataTableIndex.put(lruCacheKey, ret);
-                openedCustomDataTableRows += ret.getLastRowNum() + 1;
+                openedCustomDataTableRows += ret.getLastRowIndex() + 1;
 
                 while (openedCustomDataTableRows >= maxCacheRows) {
                     Map.Entry<String, CustomDataTableIndex> first = openedCustomDataTableIndex.entrySet().iterator()
                             .next();
-                    openedCustomDataTableRows -= first.getValue().getLastRowNum() + 1;
+                    openedCustomDataTableRows -= first.getValue().getLastRowIndex() + 1;
                     openedCustomDataTableIndex.remove(first.getKey());
                 }
             }
@@ -340,31 +451,37 @@ public class ExcelEngine {
         return ret;
     }
 
-    static public String tryMacro(String m) {
+    static public String tryMacro(DataSrcImpl dataSrcImpl, String m) {
         if (m == null || m.isEmpty()) {
             return m;
         }
 
-        if (null == DataSrcImpl.getOurInstance())
+        if (null == dataSrcImpl)
             return m;
 
-        HashMap<String, String> hm = DataSrcImpl.getOurInstance().getMacros();
+        HashMap<String, String> hm = dataSrcImpl.getMacros();
         if (null == hm)
             return m;
 
         return hm.getOrDefault(m, m);
     }
 
+    static public String tryMacro(String m) {
+        return tryMacro(DataSrcImpl.getOurInstance(), m);
+    }
+
     /**
      * 单元格数据转换（String）
      *
-     * @param rowWrapper 行
-     * @param col        列号
+     * @param itemGrid    数据网格
+     * @param ident       定位标识
+     * @param dataSrcImpl 指定数据源
      * @return
      */
-    static public void cell2s(DataContainer<String> out, DataRowWrapper rowWrapper, IdentifyDescriptor col)
+    static public void cell2s(DataContainer<String> out, DataItemGridWrapper itemGrid, IdentifyDescriptor ident,
+            DataSrcImpl dataSrcImpl)
             throws ConvException {
-        cell2s(out, rowWrapper, col, null);
+        cell2s(out, itemGrid, ident, null, dataSrcImpl);
     }
 
     static private byte cal_cell2err(Cell c, CellValue cv) {
@@ -402,36 +519,34 @@ public class ExcelEngine {
     /**
      * 单元格数据转换（String）
      *
-     * @param rowWrapper 行
-     * @param col        列号
-     * @param formula    公式管理器
+     * @param itemGrid    数据网格
+     * @param ident       定位标识
+     * @param formula     公式管理器
+     * @param dataSrcImpl 指定数据源
      * @return
      */
-    static public void cell2s(DataContainer<String> out, DataRowWrapper rowWrapper, IdentifyDescriptor col,
-            FormulaWrapper formula) throws ConvException {
-        if (null == rowWrapper) {
+    static public void cell2s(DataContainer<String> out, DataItemGridWrapper itemGrid, IdentifyDescriptor ident,
+            FormulaWrapper formula, DataSrcImpl dataSrcImpl) throws ConvException {
+        if (null == itemGrid) {
             return;
         }
 
-        if (null != rowWrapper.getCustomRowIndex()) {
-            String val = rowWrapper.getCustomRowIndex().getCellValue(col.index);
-            if (val != null && !val.isEmpty()) {
-                if (DataSrcImpl.getOurInstance().isInitialized() && ProgramOptions.getInstance().enableStringMacro) {
-                    out.set(DataVerifyImpl.getAndVerifyToString(col.getValidator(), col.getTypeValidator(), col.name,
-                            tryMacro(val)));
+        String plainValue = itemGrid.getCustomRowIndexCellValue(itemGrid, ident);
+        if (null != plainValue) {
+            if (!plainValue.isEmpty()) {
+                if (dataSrcImpl != null && dataSrcImpl.isInitialized()
+                        && ProgramOptions.getInstance().enableStringMacro) {
+                    out.set(DataVerifyImpl.getAndVerifyToString(ident.getValidator(), ident.getTypeValidator(),
+                            ident.name,
+                            tryMacro(dataSrcImpl, plainValue)));
                 } else {
-                    out.set(val);
+                    out.set(plainValue);
                 }
             }
             return;
         }
 
-        Row row = rowWrapper.getUserModuleRow();
-        if (null == row) {
-            return;
-        }
-
-        Cell c = row.getCell(col.index);
+        Cell c = itemGrid.getUserModuleRowCell(itemGrid, ident);
         if (null == c) {
             return;
         }
@@ -444,25 +559,28 @@ public class ExcelEngine {
                 } catch (NotImplementedException e) {
                     ProgramOptions.getLoger().warn(
                             "Formular has unsupported function(s).We will use cached data.Consider using --disable-excel-formular?%s  > File: %s, Table: %s, Row: %d, Column: %d(%s)%s  > Formular Content: %s",
-                            ProgramOptions.getEndl(), DataSrcImpl.getOurInstance().getCurrentFileName(),
-                            DataSrcImpl.getOurInstance().getCurrentTableName(), row.getRowNum() + 1,
-                            c.getRowIndex() + 1, getColumnName(c.getRowIndex() + 1), ProgramOptions.getEndl(),
+                            ProgramOptions.getEndl(), itemGrid.getDataSource().filePath,
+                            itemGrid.getDataSource().tableName, c.getRowIndex() + 1,
+                            c.getColumnIndex() + 1, getColumnName(c.getColumnIndex() + 1), ProgramOptions.getEndl(),
                             c.getCellFormula());
                     cv = null;
                 } catch (Exception e) {
                     ProgramOptions.getLoger().warn(
                             "Evaluate formular failed: %s%s  > File: %s, Table: %s, Row: %d, Column: %d(%s)",
-                            e.getMessage(), ProgramOptions.getEndl(), DataSrcImpl.getOurInstance().getCurrentFileName(),
-                            DataSrcImpl.getOurInstance().getCurrentTableName(), row.getRowNum() + 1,
-                            c.getRowIndex() + 1, getColumnName(c.getRowIndex() + 1));
+                            e.getMessage(), ProgramOptions.getEndl(), itemGrid.getDataSource().filePath,
+                            itemGrid.getDataSource().tableName, c.getRowIndex() + 1,
+                            c.getColumnIndex() + 1, getColumnName(c.getColumnIndex() + 1));
                     cv = null;
                 }
             } else {
-                if (DataSrcImpl.getOurInstance().isInitialized() && ProgramOptions.getInstance().enableStringMacro) {
-                    out.set(DataVerifyImpl.getAndVerifyToString(col.getValidator(), col.getTypeValidator(), col.name,
-                            tryMacro(c.toString())));
+                if (dataSrcImpl != null && dataSrcImpl.isInitialized()
+                        && ProgramOptions.getInstance().enableStringMacro) {
+                    out.set(DataVerifyImpl.getAndVerifyToString(ident.getValidator(), ident.getTypeValidator(),
+                            ident.name,
+                            tryMacro(dataSrcImpl, c.toString())));
                 } else {
-                    out.set(DataVerifyImpl.getAndVerifyToString(col.getValidator(), col.getTypeValidator(), col.name,
+                    out.set(DataVerifyImpl.getAndVerifyToString(ident.getValidator(), ident.getTypeValidator(),
+                            ident.name,
                             c.toString()));
                 }
                 return;
@@ -479,26 +597,23 @@ public class ExcelEngine {
         }
 
         switch (type) {
-            case BLANK:
-                break;
-            case BOOLEAN:
-                out.set(cal_cell2bool(c, cv).toString());
-                break;
-            case ERROR: {
+            case BLANK -> {
+            }
+            case BOOLEAN -> out.set(cal_cell2bool(c, cv).toString());
+            case ERROR -> {
                 byte error_code = cal_cell2err(c, cv);
                 try {
                     out.set(FormulaError.forInt(error_code).getString());
                 } catch (IllegalArgumentException e) {
                     out.set(e.getMessage());
                 }
-                break;
             }
-            case FORMULA:
+            case FORMULA -> {
                 if (null == cv) {
                     out.set(c.getCellFormula());
                 }
-                break;
-            case NUMERIC:
+            }
+            case NUMERIC -> {
                 if (DateUtil.isCellDateFormatted(c)) {
                     // 参照POI DateUtil.isADateFormat函数，去除无效字符
                     String fs = c.getCellStyle().getDataFormatString().replaceAll("\\\\-", "-").replaceAll("\\\\,", ",")
@@ -535,77 +650,71 @@ public class ExcelEngine {
                 }
 
                 double dv = cal_cell2num(c, cv);
-                if (col.getRatio() != 1) {
-                    dv = dv * col.getRatio();
+                if (ident.getRatio() != 1) {
+                    dv = dv * ident.getRatio();
                 }
                 if (dv == (long) dv) {
                     out.set(String.format("%d", (long) dv));
                 } else {
                     out.set(String.format("%s", dv));
                 }
-                break;
-            case STRING:
+            }
+            case STRING -> {
                 String val = cal_cell2str(c, cv).trim();
                 if (!val.isEmpty()) {
                     // Const 和 option导出时，没有数据源，也不需要文本/宏替换
-                    DataSrcImpl data_source = DataSrcImpl.getOurInstance();
-                    if (null != data_source && data_source.isInitialized()
+                    if (null != dataSrcImpl && dataSrcImpl.isInitialized()
                             && ProgramOptions.getInstance().enableStringMacro) {
-                        out.set(DataVerifyImpl.getAndVerifyToString(col.getValidator(), col.getTypeValidator(),
-                                col.name, tryMacro(val)));
+                        out.set(DataVerifyImpl.getAndVerifyToString(ident.getValidator(), ident.getTypeValidator(),
+                                ident.name, tryMacro(dataSrcImpl, val)));
                     } else {
-                        out.set(DataVerifyImpl.getAndVerifyToString(col.getValidator(), col.getTypeValidator(),
-                                col.name, val));
+                        out.set(DataVerifyImpl.getAndVerifyToString(ident.getValidator(), ident.getTypeValidator(),
+                                ident.name, val));
                     }
                 }
-                break;
-            default:
-                break;
+            }
+            default -> {
+            }
         }
     }
 
     /**
      * 单元格数据转换（Integer）
      *
-     * @param rowWrapper 行
-     * @param col        列号
+     * @param itemGrid 数据网格
+     * @param ident    定位标识
      * @return
      */
-    static public void cell2i(DataContainer<Long> out, DataRowWrapper rowWrapper, IdentifyDescriptor col)
+    static public void cell2i(DataContainer<Long> out, DataItemGridWrapper itemGrid, IdentifyDescriptor ident)
             throws ConvException {
-        cell2i(out, rowWrapper, col, null);
+        cell2i(out, itemGrid, ident, null);
     }
 
     /**
      * 单元格数据转换（Integer）
      *
-     * @param rowWrapper 行
-     * @param col        列号
-     * @param formula    公式管理器
+     * @param itemGrid 数据网格
+     * @param ident    定位标识
+     * @param formula  公式管理器
      * @return
      */
-    static public void cell2i(DataContainer<Long> out, DataRowWrapper rowWrapper, IdentifyDescriptor col,
+    static public void cell2i(DataContainer<Long> out, DataItemGridWrapper itemGrid, IdentifyDescriptor ident,
             FormulaWrapper formula) throws ConvException {
 
-        if (null == rowWrapper) {
+        if (null == itemGrid) {
             return;
         }
 
-        if (null != rowWrapper.getCustomRowIndex()) {
-            String val = rowWrapper.getCustomRowIndex().getCellValue(col.index);
-            if (val != null && !val.isEmpty()) {
-                out.set(DataVerifyImpl.getAndVerifyToLong(col.getValidator(), col.getTypeValidator(), col.name,
-                        tryMacro(val)));
+        String plainValue = itemGrid.getCustomRowIndexCellValue(itemGrid, ident);
+        if (null != plainValue) {
+            if (!plainValue.isEmpty()) {
+                out.set(DataVerifyImpl.getAndVerifyToLong(ident.getValidator(), ident.getTypeValidator(), ident.name,
+                        tryMacro(plainValue)));
             }
             return;
         }
 
-        Row row = rowWrapper.getUserModuleRow();
-        if (null == row) {
-            return;
-        }
-
-        Cell c = row.getCell(col.index);
+        Cell c = itemGrid.getUserModuleRowCell(itemGrid, ident);
         if (null == c) {
             return;
         }
@@ -618,17 +727,17 @@ public class ExcelEngine {
                 } catch (NotImplementedException e) {
                     ProgramOptions.getLoger().warn(
                             "Formular has unsupported function(s).We will use cached data.Consider using --disable-excel-formular?%s  > File: %s, Table: %s, Row: %d, Column: %d(%s)%s  > Formular Content: %s",
-                            ProgramOptions.getEndl(), DataSrcImpl.getOurInstance().getCurrentFileName(),
-                            DataSrcImpl.getOurInstance().getCurrentTableName(), row.getRowNum() + 1,
-                            c.getRowIndex() + 1, getColumnName(c.getRowIndex() + 1), ProgramOptions.getEndl(),
+                            ProgramOptions.getEndl(), itemGrid.getDataSource().filePath,
+                            itemGrid.getDataSource().tableName, c.getRowIndex() + 1,
+                            c.getColumnIndex() + 1, getColumnName(c.getColumnIndex() + 1), ProgramOptions.getEndl(),
                             c.getCellFormula());
                     cv = null;
                 } catch (Exception e) {
                     ProgramOptions.getLoger().warn(
                             "Evaluate formular failed: %s%s  > File: %s, Table: %s, Row: %d, Column: %d(%s)",
-                            e.getMessage(), ProgramOptions.getEndl(), DataSrcImpl.getOurInstance().getCurrentFileName(),
-                            DataSrcImpl.getOurInstance().getCurrentTableName(), row.getRowNum() + 1,
-                            c.getRowIndex() + 1, getColumnName(c.getRowIndex() + 1));
+                            e.getMessage(), ProgramOptions.getEndl(), itemGrid.getDataSource().filePath,
+                            itemGrid.getDataSource().tableName, c.getRowIndex() + 1,
+                            c.getColumnIndex() + 1, getColumnName(c.getColumnIndex() + 1));
                     cv = null;
                 }
             else
@@ -644,114 +753,111 @@ public class ExcelEngine {
             type = c.getCellType();
         }
         switch (type) {
-            case BLANK:
-                break;
-            case BOOLEAN: {
-                boolean res = cal_cell2bool(c, cv);
-                out.set(DataVerifyImpl.getAndVerifyNumeric(col.getValidator(), col.getTypeValidator(), col.name,
-                        res ? 1 : 0));
-                break;
+            case BLANK -> {
             }
-            case ERROR: {
+            case BOOLEAN -> {
+                boolean res = cal_cell2bool(c, cv);
+                out.set(DataVerifyImpl.getAndVerifyNumeric(ident.getValidator(), ident.getTypeValidator(), ident.name,
+                        res ? 1 : 0));
+            }
+            case ERROR -> {
                 byte error_code = cal_cell2err(c, cv);
                 try {
                     ProgramOptions.getLoger().warn(
                             "Error formula: %s%s  > File: %s, Table: %s, Row: %d, Column: %d(%s)",
                             FormulaError.forInt(error_code).getString(), ProgramOptions.getEndl(),
-                            DataSrcImpl.getOurInstance().getCurrentFileName(),
-                            DataSrcImpl.getOurInstance().getCurrentTableName(), row.getRowNum() + 1,
-                            c.getRowIndex() + 1, getColumnName(c.getRowIndex() + 1));
+                            itemGrid.getDataSource().filePath,
+                            itemGrid.getDataSource().tableName, c.getRowIndex() + 1,
+                            c.getColumnIndex() + 1, getColumnName(c.getColumnIndex() + 1));
                 } catch (IllegalArgumentException e) {
                     ProgramOptions.getLoger().warn(
                             "Error or unsupported cell value: %s%s  > File: %s, Table: %s, Row: %d, Column: %d(%s)",
-                            e.getMessage(), ProgramOptions.getEndl(), DataSrcImpl.getOurInstance().getCurrentFileName(),
-                            DataSrcImpl.getOurInstance().getCurrentTableName(), row.getRowNum() + 1,
-                            c.getRowIndex() + 1, getColumnName(c.getRowIndex() + 1));
+                            e.getMessage(), ProgramOptions.getEndl(), itemGrid.getDataSource().filePath,
+                            itemGrid.getDataSource().tableName, c.getRowIndex() + 1,
+                            c.getColumnIndex() + 1, getColumnName(c.getColumnIndex() + 1));
                 }
-                break;
             }
-            case FORMULA:
-                break;
-            case NUMERIC: {
+            case FORMULA -> {
+            }
+            case NUMERIC -> {
                 long val;
                 if (DateUtil.isCellDateFormatted(c)) {
                     val = dateToUnixTimestamp(c.getDateCellValue());
                 } else {
-                    if (col.getRatio() == 1) {
+                    if (ident.getRatio() == 1) {
                         val = Math.round(cal_cell2num(c, cv));
                     } else {
-                        val = Math.round(cal_cell2num(c, cv) * col.getRatio());
+                        val = Math.round(cal_cell2num(c, cv) * ident.getRatio());
                     }
                 }
 
-                out.set(DataVerifyImpl.getAndVerifyNumeric(col.getValidator(), col.getTypeValidator(), col.name, val));
-                break;
+                out.set(DataVerifyImpl.getAndVerifyNumeric(ident.getValidator(), ident.getTypeValidator(), ident.name,
+                        val));
             }
-            case STRING: {
+            case STRING -> {
                 String val = cal_cell2str(c, cv).trim();
                 if (val.isEmpty()) {
-                    break;
                 }
 
-                out.set(DataVerifyImpl.getAndVerifyToLong(col.getValidator(), col.getTypeValidator(), col.name,
+                out.set(DataVerifyImpl.getAndVerifyToLong(ident.getValidator(), ident.getTypeValidator(), ident.name,
                         tryMacro(val)));
-                break;
             }
-            default:
-                break;
+            default -> {
+            }
         }
     }
 
     /**
      * 单元格数据转换（Double）
      *
-     * @param rowWrapper 行
-     * @param col        列号
+     * @param itemGrid 数据网格
+     * @param ident    定位标识
      * @return
      */
-    static public void cell2d(DataContainer<Double> out, DataRowWrapper rowWrapper, IdentifyDescriptor col)
+    static public void cell2d(DataContainer<Double> out, DataItemGridWrapper itemGrid, IdentifyDescriptor ident)
             throws ConvException {
-        cell2d(out, rowWrapper, col, null);
+        cell2d(out, itemGrid, ident, null);
     }
 
     /**
      * 单元格数据转换（Double）
      *
-     * @param rowWrapper 行
-     * @param col        列号
-     * @param formula    公式管理器
+     * @param itemGrid 数据网格
+     * @param ident    定位标识
+     * @param formula  公式管理器
      * @return
      */
-    static public void cell2d(DataContainer<Double> out, DataRowWrapper rowWrapper, IdentifyDescriptor col,
+    static public void cell2d(DataContainer<Double> out, DataItemGridWrapper itemGrid, IdentifyDescriptor ident,
             FormulaWrapper formula) throws ConvException {
 
-        if (null == rowWrapper) {
+        if (null == itemGrid) {
             return;
         }
 
-        if (null != rowWrapper.getCustomRowIndex()) {
-            String val = rowWrapper.getCustomRowIndex().getCellValue(col.index);
-
-            if (val != null && !val.isEmpty()) {
+        String plainValue = itemGrid.getCustomRowIndexCellValue(itemGrid, ident);
+        if (null != plainValue) {
+            if (!plainValue.isEmpty()) {
                 try {
-                    out.set(DataVerifyImpl.getAndVerifyToDouble(col.getValidator(), col.getTypeValidator(), col.name,
-                            tryMacro(val)));
+                    out.set(DataVerifyImpl.getAndVerifyToDouble(ident.getValidator(), ident.getTypeValidator(),
+                            ident.name,
+                            tryMacro(plainValue)));
                 } catch (java.lang.NumberFormatException e) {
+                    int originRow = itemGrid.getOriginRowIndex(ident.getDataFieldIndex());
+                    int originCol = itemGrid.getOriginColumnIndex(ident.getDataFieldIndex());
                     throw new ConvException(
-                            String.format("Table %s, Row %d, Column %d : %s can not be converted to a number",
-                                    rowWrapper.getCustomRowIndex().getTable().getSheetName(),
-                                    rowWrapper.getCustomRowIndex().getRowNum() + 1, col.index + 1, val));
+                            String.format(
+                                    "File: %s, Table: %s, Row: %d, Column: %d(%s)%s  > %s can not be converted to a number",
+                                    itemGrid.getDataSource().filePath, itemGrid.getDataSource().tableName,
+                                    originRow + 1, originCol + 1,
+                                    getColumnName(originCol + 1),
+                                    ProgramOptions.getEndl(),
+                                    plainValue));
                 }
             }
             return;
         }
 
-        Row row = rowWrapper.getUserModuleRow();
-        if (null == row) {
-            return;
-        }
-
-        Cell c = row.getCell(col.index);
+        Cell c = itemGrid.getUserModuleRowCell(itemGrid, ident);
         if (null == c) {
             return;
         }
@@ -764,17 +870,17 @@ public class ExcelEngine {
                 } catch (NotImplementedException e) {
                     ProgramOptions.getLoger().warn(
                             "Formular has unsupported function(s).We will use cached data.Consider using --disable-excel-formular?%s  > File: %s, Table: %s, Row: %d, Column: %d(%s)%s  > Formular Content: %s",
-                            ProgramOptions.getEndl(), DataSrcImpl.getOurInstance().getCurrentFileName(),
-                            DataSrcImpl.getOurInstance().getCurrentTableName(), row.getRowNum() + 1,
-                            c.getRowIndex() + 1, getColumnName(c.getRowIndex() + 1), ProgramOptions.getEndl(),
+                            ProgramOptions.getEndl(), itemGrid.getDataSource().filePath,
+                            itemGrid.getDataSource().tableName, c.getRowIndex() + 1,
+                            c.getColumnIndex() + 1, getColumnName(c.getColumnIndex() + 1), ProgramOptions.getEndl(),
                             c.getCellFormula());
                     cv = null;
                 } catch (Exception e) {
                     ProgramOptions.getLoger().warn(
                             "Evaluate formular failed: %s%s  > File: %s, Table: %s, Row: %d, Column: %d(%s)",
-                            e.getMessage(), ProgramOptions.getEndl(), DataSrcImpl.getOurInstance().getCurrentFileName(),
-                            DataSrcImpl.getOurInstance().getCurrentTableName(), row.getRowNum() + 1,
-                            c.getRowIndex() + 1, getColumnName(c.getRowIndex() + 1));
+                            e.getMessage(), ProgramOptions.getEndl(), itemGrid.getDataSource().filePath,
+                            itemGrid.getDataSource().tableName, c.getRowIndex() + 1,
+                            c.getColumnIndex() + 1, getColumnName(c.getColumnIndex() + 1));
                     cv = null;
                 }
             } else {
@@ -791,105 +897,100 @@ public class ExcelEngine {
             type = c.getCellType();
         }
         switch (type) {
-            case BLANK:
-                break;
-            case BOOLEAN:
-                out.set(cal_cell2bool(c, cv) ? 1.0 : 0.0);
-                break;
-            case ERROR: {
+            case BLANK -> {
+            }
+            case BOOLEAN -> out.set(cal_cell2bool(c, cv) ? 1.0 : 0.0);
+            case ERROR -> {
                 byte error_code = cal_cell2err(c, cv);
                 try {
                     ProgramOptions.getLoger().warn(
                             "Error formula: %s%s  > File: %s, Table: %s, Row: %d, Column: %d(%s)",
                             FormulaError.forInt(error_code).getString(), ProgramOptions.getEndl(),
-                            DataSrcImpl.getOurInstance().getCurrentFileName(),
-                            DataSrcImpl.getOurInstance().getCurrentTableName(), row.getRowNum() + 1,
-                            c.getRowIndex() + 1, getColumnName(c.getRowIndex() + 1));
+                            itemGrid.getDataSource().filePath,
+                            itemGrid.getDataSource().tableName, c.getRowIndex() + 1,
+                            c.getColumnIndex() + 1, getColumnName(c.getColumnIndex() + 1));
                 } catch (IllegalArgumentException e) {
                     ProgramOptions.getLoger().warn(
                             "Error or unsupported cell value: %s%s  > File: %s, Table: %s, Row: %d, Column: %d(%s)",
-                            e.getMessage(), ProgramOptions.getEndl(), DataSrcImpl.getOurInstance().getCurrentFileName(),
-                            DataSrcImpl.getOurInstance().getCurrentTableName(), row.getRowNum() + 1,
-                            c.getRowIndex() + 1, getColumnName(c.getRowIndex() + 1));
+                            e.getMessage(), ProgramOptions.getEndl(), itemGrid.getDataSource().filePath,
+                            itemGrid.getDataSource().tableName, c.getRowIndex() + 1,
+                            c.getColumnIndex() + 1, getColumnName(c.getColumnIndex() + 1));
                 }
-                break;
             }
-            case FORMULA:
-                break;
-            case NUMERIC:
+            case FORMULA -> {
+            }
+            case NUMERIC -> {
                 if (DateUtil.isCellDateFormatted(c)) {
                     out.set((double) dateToUnixTimestamp(c.getDateCellValue()));
                     break;
                 }
-                if (col.getRatio() == 1) {
+                if (ident.getRatio() == 1) {
                     out.set(cal_cell2num(c, cv));
                 } else {
-                    out.set(cal_cell2num(c, cv) * col.getRatio());
+                    out.set(cal_cell2num(c, cv) * ident.getRatio());
                 }
-                break;
-            case STRING: {
+            }
+            case STRING -> {
                 String val = cal_cell2str(c, cv).trim();
                 if (val.isEmpty()) {
-                    break;
                 }
 
                 try {
-                    out.set(DataVerifyImpl.getAndVerifyToDouble(col.getValidator(), col.getTypeValidator(), col.name,
+                    out.set(DataVerifyImpl.getAndVerifyToDouble(ident.getValidator(), ident.getTypeValidator(),
+                            ident.name,
                             tryMacro(val)));
                 } catch (java.lang.NumberFormatException e) {
+                    int originRow = itemGrid.getOriginRowIndex(ident.getDataFieldIndex());
+                    int originCol = itemGrid.getOriginColumnIndex(ident.getDataFieldIndex());
                     throw new ConvException(
-                            String.format("Table %s, Row %d, Column %d : %s can not be converted to a number",
-                                    row.getSheet().getSheetName(), c.getRowIndex() + 1, c.getColumnIndex() + 1, val));
+                            String.format(
+                                    "File: %s, Table: %s, Row: %d, Column: %d(%s)%s  > %s can not be converted to a number",
+                                    itemGrid.getDataSource().filePath, itemGrid.getDataSource().tableName,
+                                    originRow + 1, originCol + 1,
+                                    getColumnName(originCol + 1), ProgramOptions.getEndl(), val));
                 }
-                break;
             }
-            default:
-                break;
+            default -> {
+            }
         }
     }
 
     /**
      * 单元格数据转换（boolean）
      *
-     * @param rowWrapper 行
-     * @param col        列号
-     * @return
+     * @param itemGrid 数据网格
+     * @param ident    定位标识 * @return
      */
-    static public void cell2b(DataContainer<Boolean> out, DataRowWrapper rowWrapper, IdentifyDescriptor col)
+    static public void cell2b(DataContainer<Boolean> out, DataItemGridWrapper itemGrid, IdentifyDescriptor ident)
             throws ConvException {
-        cell2b(out, rowWrapper, col, null);
+        cell2b(out, itemGrid, ident, null);
     }
 
     /**
      * 单元格数据转换（boolean）
      *
-     * @param rowWrapper 行
-     * @param col        列号
-     * @param formula    公式管理器
+     * @param itemGrid 数据网格
+     * @param ident    定位标识
+     * @param formula  公式管理器
      * @return
      */
-    static public void cell2b(DataContainer<Boolean> out, DataRowWrapper rowWrapper, IdentifyDescriptor col,
+    static public void cell2b(DataContainer<Boolean> out, DataItemGridWrapper itemGrid, IdentifyDescriptor ident,
             FormulaWrapper formula) throws ConvException {
-        if (null == rowWrapper) {
+        if (null == itemGrid) {
             return;
         }
 
-        if (null != rowWrapper.getCustomRowIndex()) {
-            String val = rowWrapper.getCustomRowIndex().getCellValue(col.index);
-            if (val != null && !val.isEmpty()) {
+        String plainValue = itemGrid.getCustomRowIndexCellValue(itemGrid, ident);
+        if (null != plainValue) {
+            if (!plainValue.isEmpty()) {
                 out.set(DataSrcImpl.getBooleanFromString(
-                        DataVerifyImpl.getAndVerifyToString(col.getValidator(), col.getTypeValidator(), col.name,
-                                tryMacro(val))));
+                        DataVerifyImpl.getAndVerifyToString(ident.getValidator(), ident.getTypeValidator(), ident.name,
+                                tryMacro(plainValue))));
             }
             return;
         }
 
-        Row row = rowWrapper.getUserModuleRow();
-        if (null == row) {
-            return;
-        }
-
-        Cell c = row.getCell(col.index);
+        Cell c = itemGrid.getUserModuleRowCell(itemGrid, ident);
         if (null == c) {
             return;
         }
@@ -902,17 +1003,17 @@ public class ExcelEngine {
                 } catch (NotImplementedException e) {
                     ProgramOptions.getLoger().warn(
                             "Formular has unsupported function(s).We will use cached data.Consider using --disable-excel-formular?%s  > File: %s, Table: %s, Row: %d, Column: %d(%s)%s  > Formular Content: %s",
-                            ProgramOptions.getEndl(), DataSrcImpl.getOurInstance().getCurrentFileName(),
-                            DataSrcImpl.getOurInstance().getCurrentTableName(), row.getRowNum() + 1,
-                            c.getRowIndex() + 1, getColumnName(c.getRowIndex() + 1), ProgramOptions.getEndl(),
+                            ProgramOptions.getEndl(), itemGrid.getDataSource().filePath,
+                            itemGrid.getDataSource().tableName, c.getRowIndex() + 1,
+                            c.getColumnIndex() + 1, getColumnName(c.getColumnIndex() + 1), ProgramOptions.getEndl(),
                             c.getCellFormula());
                     cv = null;
                 } catch (Exception e) {
                     ProgramOptions.getLoger().warn(
                             "Evaluate formular failed: %s%s  > File: %s, Table: %s, Row: %d, Column: %d(%s)",
-                            e.getMessage(), ProgramOptions.getEndl(), DataSrcImpl.getOurInstance().getCurrentFileName(),
-                            DataSrcImpl.getOurInstance().getCurrentTableName(), row.getRowNum() + 1,
-                            c.getRowIndex() + 1, getColumnName(c.getRowIndex() + 1));
+                            e.getMessage(), ProgramOptions.getEndl(), itemGrid.getDataSource().filePath,
+                            itemGrid.getDataSource().tableName, c.getRowIndex() + 1,
+                            c.getColumnIndex() + 1, getColumnName(c.getColumnIndex() + 1));
                     cv = null;
                 }
             } else {
@@ -930,37 +1031,32 @@ public class ExcelEngine {
             type = c.getCellType();
         }
         switch (type) {
-            case BLANK:
-                break;
-            case BOOLEAN:
-                out.set(cal_cell2bool(c, cv));
-                break;
-            case ERROR: {
+            case BLANK -> {
+            }
+            case BOOLEAN -> out.set(cal_cell2bool(c, cv));
+            case ERROR -> {
                 byte error_code = cal_cell2err(c, cv);
                 try {
                     ProgramOptions.getLoger().warn(
                             "Error formula: %s%s  > File: %s, Table: %s, Row: %d, Column: %d(%s)",
                             FormulaError.forInt(error_code).getString(), ProgramOptions.getEndl(),
-                            DataSrcImpl.getOurInstance().getCurrentFileName(),
-                            DataSrcImpl.getOurInstance().getCurrentTableName(), row.getRowNum() + 1,
-                            c.getRowIndex() + 1, getColumnName(c.getRowIndex() + 1));
+                            itemGrid.getDataSource().filePath,
+                            itemGrid.getDataSource().tableName, c.getRowIndex() + 1,
+                            c.getColumnIndex() + 1, getColumnName(c.getColumnIndex() + 1));
                 } catch (IllegalArgumentException e) {
                     ProgramOptions.getLoger().warn(
                             "Error or unsupported cell value: %s%s  > File: %s, Table: %s, Row: %d, Column: %d(%s)",
-                            e.getMessage(), ProgramOptions.getEndl(), DataSrcImpl.getOurInstance().getCurrentFileName(),
-                            DataSrcImpl.getOurInstance().getCurrentTableName(), row.getRowNum() + 1,
-                            c.getRowIndex() + 1, getColumnName(c.getRowIndex() + 1));
+                            e.getMessage(), ProgramOptions.getEndl(), itemGrid.getDataSource().filePath,
+                            itemGrid.getDataSource().tableName, c.getRowIndex() + 1,
+                            c.getColumnIndex() + 1, getColumnName(c.getColumnIndex() + 1));
                 }
-                break;
             }
-            case FORMULA:
-                break;
-            case NUMERIC:
-                out.set(cal_cell2num(c, cv) != 0 && col.getRatio() != 0);
-                break;
-            case STRING:
+            case FORMULA -> {
+            }
+            case NUMERIC -> out.set(cal_cell2num(c, cv) != 0 && ident.getRatio() != 0);
+            case STRING -> {
                 String item = DataVerifyImpl
-                        .getAndVerifyToString(col.getValidator(), col.getTypeValidator(), col.name,
+                        .getAndVerifyToString(ident.getValidator(), ident.getTypeValidator(), ident.name,
                                 tryMacro(cal_cell2str(c, cv).trim()))
                         .toLowerCase();
                 if (item.isEmpty()) {
@@ -968,9 +1064,9 @@ public class ExcelEngine {
                 }
 
                 out.set(DataSrcImpl.getBooleanFromString(item));
-                break;
-            default:
-                break;
+            }
+            default -> {
+            }
         }
     }
 

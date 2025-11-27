@@ -245,7 +245,7 @@ public class DataDstXml extends DataDstJava {
     @Override
     public final byte[] dumpConst(HashMap<String, Object> data) throws ConvException, IOException {
         // pretty print
-        OutputFormat of = null;
+        OutputFormat of;
         if (ProgramOptions.getInstance().prettyIndent <= 0) {
             of = OutputFormat.createCompactFormat();
         } else {

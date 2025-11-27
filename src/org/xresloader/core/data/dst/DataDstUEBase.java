@@ -410,15 +410,15 @@ public abstract class DataDstUEBase extends DataDstJava {
             }
 
             if (referNode != null && referNode.identify != null) {
-                lv = referNode.identify.index;
+                lv = referNode.identify.getDataFieldIndex();
             } else {
-                lv = 0;
+                lv = -1;
             }
 
             if (r.referNode != null && r.referNode.identify != null) {
-                rv = r.referNode.identify.index;
+                rv = r.referNode.identify.getDataFieldIndex();
             } else {
-                rv = 0;
+                rv = -1;
             }
 
             if (lv != rv) {
@@ -1470,16 +1470,17 @@ public abstract class DataDstUEBase extends DataDstJava {
      * @return 常量数据,不支持的时候返回空
      * @throws IOException
      */
+    @Override
     public final byte[] dumpConst(HashMap<String, Object> data) throws ConvException, IOException {
         globalCodeCache.clear();
 
         // 加载代码
         UECodeInfo codeInfo = getCodeInfo(SchemeConf.getInstance().getOutputFileAbsPath(), null, null);
-        DataDstWriterNode ddNode = null;
+        DataDstWriterNode ddNode;
 
         // const完整路径都在data里了，不需要额外的包名(可能包含多个包)
         // ======================================================================================================
-        LinkedList<DataDstWriterNodeWrapper> expandedDesc = new LinkedList<DataDstWriterNodeWrapper>();
+        LinkedList<DataDstWriterNodeWrapper> expandedDesc = new LinkedList<>();
         ddNode = DataDstWriterNode.create(null,
                 DataDstWriterNode.getDefaultMessageDescriptor(DataDstWriterNode.JAVA_TYPE.STRING, null, null),
                 -1);
@@ -1520,7 +1521,7 @@ public abstract class DataDstUEBase extends DataDstJava {
         return dumpString(constCode);
     }
 
-    private final String getHeaderFieldUProperty() {
+    private String getHeaderFieldUProperty() {
         if (null == headerFieldUProperty) {
             LinkedList<String> ls = new LinkedList<String>();
             if (!SchemeConf.getInstance().getUEOptions().editAccess.isEmpty()) {
@@ -1538,9 +1539,9 @@ public abstract class DataDstUEBase extends DataDstJava {
         return headerFieldUProperty;
     }
 
-    private final String getHeaderFieldUFunction() {
+    private String getHeaderFieldUFunction() {
         if (null == headerFieldUFunction) {
-            LinkedList<String> ls = new LinkedList<String>();
+            LinkedList<String> ls = new LinkedList<>();
 
             ls.add("BlueprintCallable");
             if (!SchemeConf.getInstance().getUEOptions().category.isEmpty()) {
@@ -1552,7 +1553,7 @@ public abstract class DataDstUEBase extends DataDstJava {
         return headerFieldUFunction;
     }
 
-    private final String getDataRowKeyToNameParamsSpecify(UEDataRowRule rule) {
+    private String getDataRowKeyToNameParamsSpecify(UEDataRowRule rule) {
         if (null == rule || null == rule.keyFields) {
             return "";
         }
@@ -1586,7 +1587,7 @@ public abstract class DataDstUEBase extends DataDstJava {
         return String.join(", ", params);
     }
 
-    private final String getDataRowKeyToNameParamsPass(UEDataRowRule rule, String prefix) {
+    private String getDataRowKeyToNameParamsPass(UEDataRowRule rule, String prefix) {
         if (null == rule || null == rule.keyFields) {
             return "";
         }
@@ -1624,7 +1625,7 @@ public abstract class DataDstUEBase extends DataDstJava {
      * @param rule
      * @return
      */
-    private final String getDataRowKeyToNameExpression(UEDataRowRule rule) {
+    private String getDataRowKeyToNameExpression(UEDataRowRule rule) {
         if (null == rule || null == rule.keyFields) {
             return "";
         }
@@ -1725,7 +1726,7 @@ public abstract class DataDstUEBase extends DataDstJava {
         return String.format("E%sCase", getIdentName(oneofDesc.getName()));
     }
 
-    private final void writeCodeHeaderField(FileOutputStream fout, DataDstOneofDescriptor oneofDesc, String varName,
+    private void writeCodeHeaderField(FileOutputStream fout, DataDstOneofDescriptor oneofDesc, String varName,
             boolean isGenerated) throws IOException {
         if (oneofDesc == null) {
             return;
@@ -1773,7 +1774,7 @@ public abstract class DataDstUEBase extends DataDstJava {
         fout.write(dumpString(String.format("    %s %s;\r\n", ueTypeName, varName)));
     }
 
-    private final void writeCodeHeaderField(FileOutputStream fout, DataDstFieldDescriptor fieldDesc, String varName,
+    private void writeCodeHeaderField(FileOutputStream fout, DataDstFieldDescriptor fieldDesc, String varName,
             boolean isGenerated) throws IOException {
         if (fieldDesc == null) {
             return;
@@ -1928,7 +1929,7 @@ public abstract class DataDstUEBase extends DataDstJava {
         }
     }
 
-    private final void writeCodeHeaderField(FileOutputStream fout, DataDstEnumValueDescriptor enumValueDesc,
+    private void writeCodeHeaderField(FileOutputStream fout, DataDstEnumValueDescriptor enumValueDesc,
             String varName) throws IOException {
         if ((varName == null || varName.isEmpty())) {
             varName = getIdentName(enumValueDesc.getName());
@@ -1941,7 +1942,7 @@ public abstract class DataDstUEBase extends DataDstJava {
                         enumValueDesc.getIndex())));
     }
 
-    static private final String getUETypeName(DataDstWriterNode desc) {
+    static private String getUETypeName(DataDstWriterNode desc) {
         if (null == desc) {
             return "FString";
         }
@@ -1949,7 +1950,7 @@ public abstract class DataDstUEBase extends DataDstJava {
         return getUETypeName(desc.getTypeDescriptor());
     }
 
-    static private final String getUETypeName(DataDstFieldDescriptor desc) {
+    static private String getUETypeName(DataDstFieldDescriptor desc) {
         if (null == desc) {
             return "FString";
         }
@@ -1957,7 +1958,7 @@ public abstract class DataDstUEBase extends DataDstJava {
         return getUETypeName(desc.getTypeDescriptor());
     }
 
-    static private final String getUETypeName(DataDstTypeDescriptor desc) {
+    static private String getUETypeName(DataDstTypeDescriptor desc) {
         if (null == desc) {
             return "FString";
         }
@@ -2032,7 +2033,7 @@ public abstract class DataDstUEBase extends DataDstJava {
         }
     }
 
-    private final void writeUETypeSetDefaultCode(FileOutputStream sourceFs, String prefix, String varName,
+    private void writeUETypeSetDefaultCode(FileOutputStream sourceFs, String prefix, String varName,
             DataDstOneofDescriptor oneof) throws IOException {
         // UE only support UENUM of uint8, so we can only use field name as case
         // sourceFs.write(dumpString(String.format("%s.%s =
@@ -2041,7 +2042,7 @@ public abstract class DataDstUEBase extends DataDstJava {
         sourceFs.write(dumpString(String.format("%s.%s = TEXT(\"\");\r\n", prefix, varName)));
     }
 
-    private final void writeUETypeSetDefaultCode(FileOutputStream sourceFs, String prefix, String varName,
+    private void writeUETypeSetDefaultCode(FileOutputStream sourceFs, String prefix, String varName,
             DataDstFieldDescriptor field) throws IOException {
         // if (wrapper.desc != null && wrapper.desc)
         if (field.isMap()) {
@@ -2078,7 +2079,7 @@ public abstract class DataDstUEBase extends DataDstJava {
         sourceFs.write(dumpString(String.format("%s.%s = %s;\r\n", prefix, varName, getUETypeDefault(field))));
     }
 
-    private final String getUETypeFormat(DataDstWriterNode.JAVA_TYPE type) {
+    private String getUETypeFormat(DataDstWriterNode.JAVA_TYPE type) {
         switch (type) {
             case INT:
                 return "%d";
@@ -2101,7 +2102,7 @@ public abstract class DataDstUEBase extends DataDstJava {
         }
     }
 
-    private final NAME_TYPE getUENameType(DataDstFieldDescriptor field) {
+    private NAME_TYPE getUENameType(DataDstFieldDescriptor field) {
         if (field == null) {
             return NAME_TYPE.STRING;
         }
@@ -2164,7 +2165,7 @@ public abstract class DataDstUEBase extends DataDstJava {
         return ret;
     }
 
-    private final UEDataRowRule buildUEDataRowCodeRule(LinkedList<DataDstWriterNodeWrapper> originAllFields)
+    private UEDataRowRule buildUEDataRowCodeRule(LinkedList<DataDstWriterNodeWrapper> originAllFields)
             throws ConvException {
         UEDataRowRule ret = new UEDataRowRule();
         if (originAllFields.isEmpty()) {
@@ -2202,7 +2203,7 @@ public abstract class DataDstUEBase extends DataDstJava {
         return ret;
     }
 
-    private final UEDataRowRule buildUEDataRowCodeRuleInner(UEDataRowRule ret,
+    private UEDataRowRule buildUEDataRowCodeRuleInner(UEDataRowRule ret,
             ArrayList<DataDstWriterNodeWrapper> allFields) throws ConvException {
         if (allFields.isEmpty()) {
             return ret;
@@ -2277,7 +2278,7 @@ public abstract class DataDstUEBase extends DataDstJava {
         return ret;
     }
 
-    private final void writeCodeHeaderFile(UEDataRowRule rule, UECodeInfo codeInfo) throws IOException {
+    private void writeCodeHeaderFile(UEDataRowRule rule, UECodeInfo codeInfo) throws IOException {
         synchronized (globalCodeWrittenCache) {
             if (globalCodeWrittenCache.contains(codeInfo.header)) {
                 return;
@@ -2456,7 +2457,7 @@ public abstract class DataDstUEBase extends DataDstJava {
         headerFs.close();
     }
 
-    private final void writeCodeSourceFile(UEDataRowRule rule, UECodeInfo codeInfo) throws IOException {
+    private void writeCodeSourceFile(UEDataRowRule rule, UECodeInfo codeInfo) throws IOException {
         synchronized (globalCodeWrittenCache) {
             if (globalCodeWrittenCache.contains(codeInfo.source)) {
                 return;

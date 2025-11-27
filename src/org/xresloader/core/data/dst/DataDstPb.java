@@ -39,6 +39,7 @@ import org.xresloader.core.data.vfy.DataVerifyPbEnum;
 import org.xresloader.core.data.vfy.DataVerifyPbMsgField;
 import org.xresloader.core.data.vfy.DataVerifyPbOneof;
 import org.xresloader.core.engine.ExcelEngine;
+import org.xresloader.core.engine.ExcelEngine.DataItemGridWrapper;
 import org.xresloader.core.engine.IdentifyDescriptor;
 import org.xresloader.core.scheme.SchemeConf;
 import org.xresloader.pb.PbHeaderV3;
@@ -1238,6 +1239,7 @@ public class DataDstPb extends DataDstImpl {
     }
 
     @Override
+    @SuppressWarnings("CallToPrintStackTrace")
     public final byte[] build(DataDstImpl src) throws ConvException {
         // 初始化header
         PbHeaderV3.xresloader_datablocks.Builder blocks = PbHeaderV3.xresloader_datablocks.newBuilder();
@@ -1267,9 +1269,9 @@ public class DataDstPb extends DataDstImpl {
             int tolerateContinueEmptyRows = ProgramOptions.getInstance().tolerateContinueEmptyRows;
             int currentContinueEmptyRows = 0;
             while (DataSrcImpl.getOurInstance().nextRow()) {
+                DataItemGridWrapper dataItemGrid = DataSrcImpl.getOurInstance().getCurrentDataItemGrid();
                 DataRowContext rowContext = new DataRowContext(DataSrcImpl.getOurInstance().getCurrentFileName(),
-                        DataSrcImpl.getOurInstance().getCurrentTableName(),
-                        DataSrcImpl.getOurInstance().getCurrentRowNum());
+                        DataSrcImpl.getOurInstance().getCurrentTableName(), dataItemGrid);
 
                 ByteString data = convData(desc, tableContext, rowContext);
                 // Empty ByteString is allowed because maybe all fields are default value.
@@ -1330,7 +1332,7 @@ public class DataDstPb extends DataDstImpl {
             blocks.build().writeTo(writer);
         } catch (IOException e) {
             e.printStackTrace();
-            this.logErrorMessage("try to serialize protobuf data failed. %s", e.getMessage());
+            this.logErrorMessage("try to serialize protobuf data failed. %s", e.getStackTrace(), e.getMessage());
             ProgramOptions.getLoger().error("%s", blocks.getInitializationErrorString());
         }
         return writer.toByteArray();
@@ -1878,8 +1880,9 @@ public class DataDstPb extends DataDstImpl {
 
         if (rowContext.shouldIgnore()) {
             ProgramOptions.getLoger().warn(
-                    "File: %s, Sheet: %s, Row: %d%s",
-                    rowContext.fileName, rowContext.tableName, rowContext.row,
+                    "File: %s, Sheet: %s, %s: %d%s",
+                    rowContext.fileName, rowContext.tableName, rowContext.getDataItemIndexName(),
+                    rowContext.dataItemGrid.getDataItemIndex() + 1,
                     rowContext.buildIgnoreIgnoreMessage(4));
 
             return null;
@@ -2834,8 +2837,9 @@ public class DataDstPb extends DataDstImpl {
                     field.getTypeDescriptor().getFullName(), atLeastFieldSize, fieldSize, inputs.length,
                     ProgramOptions.getEndl(),
                     rowContext.fileName, rowContext.tableName,
-                    rowContext.row + 1, DataSrcImpl.getOurInstance().getLastColomnNum() + 1,
-                    ExcelEngine.getColumnName(DataSrcImpl.getOurInstance().getLastColomnNum() + 1),
+                    DataSrcImpl.getOurInstance().getLastRowNum() + 1,
+                    DataSrcImpl.getOurInstance().getLastColumnNum() + 1,
+                    ExcelEngine.getColumnName(DataSrcImpl.getOurInstance().getLastColumnNum() + 1),
                     ProgramOptions.getEndl(),
                     String.join(",", missingFields.values().stream().map(DataDstFieldDescriptor::getName)
                             .collect(Collectors.toList())));

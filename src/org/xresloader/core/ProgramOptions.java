@@ -43,9 +43,9 @@ public class ProgramOptions {
     private static Options options = null;
     private static String version = null;
     private static Properties properties = null;
-    private static String dataSourceMappingFile = "";
-    private static HashMap<String, String> dataSourceMappingResult = new HashMap<>();
-    private static String dataSourceMappingHashSeed = "xresloader";
+    private volatile static String dataSourceMappingFile = "";
+    private final static HashMap<String, String> dataSourceMappingResult = new HashMap<>();
+    private volatile static String dataSourceMappingHashSeed = "xresloader";
 
     private String defaultDataVersion = null;
     private String dataVersion = null;
@@ -62,6 +62,7 @@ public class ProgramOptions {
     public String[] dataSourceMetas = null;
     public String dataSourceMetaDelimiter = "\\|";
     public int dataSourceLruCacheRows = 300000;
+    public boolean dataSourceMappingTranspose = false;
     public boolean enableStringMacro = false;
     public RenameRule renameRule = null;
     public boolean requireMappingAllFields = false;
@@ -94,6 +95,7 @@ public class ProgramOptions {
         outputDirectory = System.getProperty("user.dir");
         dataSourceDirectory = new String[] { outputDirectory };
         dataSourceType = FileType.BIN;
+        dataSourceMappingTranspose = false;
         requireMappingAllFields = false;
         enableAliasMapping = true;
     }
@@ -123,6 +125,7 @@ public class ProgramOptions {
         dataSourceMetas = null;
         dataSourceMetaDelimiter = "\\|";
         dataSourceLruCacheRows = 300000;
+        dataSourceMappingTranspose = false;
         enableStringMacro = false;
         renameRule = null;
         requireMappingAllFields = false;
@@ -160,43 +163,33 @@ public class ProgramOptions {
         options = new Options();
         options.addOption("h", "help", false, "print this help message and exit");
 
-        options.addOption(Option.builder("t").longOpt("output-type")
-                .desc("output type(bin, lua, msgpack, json, xml, javascript/js, ue-csv, ue-json)").hasArg()
-                .argName("TYPE").build());
+        options.addOption(new Option("t", "output-type", true,
+                "output type(bin, lua, msgpack, json, xml, javascript/js, ue-csv, ue-json)"));
 
-        options.addOption(
-                Option.builder("p").longOpt("proto").desc("protocol(protobuf)").hasArg().argName("PROTOCOL").build());
+        options.addOption(new Option("p", "proto", true, "protocol(protobuf)"));
 
-        options.addOption(Option.builder("f").longOpt("proto-file").desc("protocol description file").hasArg()
-                .argName("FILE NAME").build());
+        options.addOption(new Option("f", "proto-file", true, "protocol description file"));
 
         options.addOption(null, "ignore-unknown-dependency", false,
                 "ignore unknown dependency when initialize protocol files.");
 
-        options.addOption(Option.builder("o").longOpt("output-dir").desc("output directory").hasArg()
-                .argName("DIRECTORY PATH").build());
+        options.addOption(new Option("o", "output-dir", true, "output directory"));
 
-        options.addOption(Option.builder("d").longOpt("data-src-dir")
-                .desc("data source directories(where to find excel files, can be used more than once.)").hasArg()
-                .argName("DIRECTORY PATH")
-                .build());
+        options.addOption(new Option("d", "data-src-dir", true,
+                "data source directories(where to find excel files, can be used more than once.)"));
 
-        options.addOption(Option.builder("s").longOpt("src-file")
-                .desc("data source file(.xls, .xlsx, .cvs, .xlsm, .ods, .ini, .cfg, .conf, .json)").hasArg()
-                .argName("META FILE PATH").build());
+        options.addOption(new Option("s", "src-file", true,
+                "data source file(.xls, .xlsx, .cvs, .xlsm, .ods, .ini, .cfg, .conf, .json)"));
 
-        options.addOption(Option.builder("m").longOpt("src-meta")
-                .desc(String.format("%s\n\t%-32s=>%s\n\t%-32s=>%s\n\t%-32s=>%s\n\t%-32s=>%s",
+        options.addOption(new Option("m", "src-meta", true,
+                String.format("%s\n\t%-32s=>%s\n\t%-32s=>%s\n\t%-32s=>%s\n\t%-32s=>%s",
                         "data description meta information of data source.", ".xls,/xlsx/.cvx/.xlsm/.dos",
                         "scheme sheet name", ".ini/.cfg/.conf", "scheme section name", ".json", "scheme key name",
-                        "[NOTHING]", "KEY=VALUE1|VAL2|VAL3 pair of scheme configures"))
-                .hasArg().argName("META NAME").build());
+                        "[NOTHING]", "KEY=VALUE1|VAL2|VAL3 pair of scheme configures")));
 
-        options.addOption(Option.builder("l").longOpt("delimiter")
-                .desc(String.format(
-                        "regex delimiter for description meta when data source file is [NOTHING].(default: %s)",
-                        getInstance().dataSourceMetaDelimiter))
-                .hasArg().argName("DELTMITER").build());
+        options.addOption(new Option("l", "delimiter", true, String.format(
+                "regex delimiter for description meta when data source file is [NOTHING].(default: %s)",
+                getInstance().dataSourceMetaDelimiter)));
 
         options.addOption(null, "enable-string-macro", false,
                 "macro will also apply to string value.");
@@ -205,38 +198,31 @@ public class ProgramOptions {
 
         options.addOption("v", "version", false, "print version and exit");
 
-        options.addOption(Option.builder("n").longOpt("rename")
-                .desc("rename output file name(regex), sample: /(?i)\\.bin$/\\.lua/").hasArg().argName("RENAME PATTERN")
-                .build());
+        options.addOption(
+                new Option("n", "rename", true, "rename output file name(regex), sample: /(?i)\\.bin$/\\.lua/"));
         options.addOption(null, "require-mapping-all", false,
                 "require all fields in protocol message to be mapped from data source");
         options.addOption(null, "enable-alias-mapping", false, "allow to use alias when mapping fields");
         options.addOption(null, "disable-alias-mapping", false, "do not use alias when mapping fields");
 
-        options.addOption(Option.builder("a").longOpt("data-version").desc("set data version").hasArg()
-                .argName("DATA VERSION").build());
+        options.addOption(new Option("a", "data-version", true, "set data version"));
 
-        options.addOption(Option.builder().longOpt("pretty").desc(
-                "set pretty output and set ident length when output type supported.(disable pretty output by set to 0)")
-                .hasArg().argName("INDENT LENGTH").build());
+        options.addOption(new Option(null, "pretty", true,
+                "set pretty output and set ident length when output type supported.(disable pretty output by set to 0)"));
 
-        options.addOption(Option.builder("c").longOpt("const-print").desc("print all const data to file").hasArg()
-                .argName("OUTPUT FILE PATH").build());
+        options.addOption(new Option("c", "const-print", true, "print all const data to file"));
 
-        options.addOption(Option.builder("i").longOpt("option-print").desc("print all option data to file").hasArg()
-                .argName("OUTPUT FILE PATH").build());
+        options.addOption(new Option("i", "option-print", true, "print all option data to file"));
 
-        options.addOption(Option.builder("r").longOpt("descriptor-print").desc("print all descriptor data to file")
-                .hasArg().argName("OUTPUT FILE PATH").build());
+        options.addOption(new Option("r", "descriptor-print", true, "print all descriptor data to file"));
 
-        options.addOption(Option.builder().longOpt("xml-root").desc("set xml root node name.(default: root)").hasArg()
-                .argName("ROOT NAME").build());
+        options.addOption(new Option(null, "xml-root", true, "set xml root node name.(default: root)"));
 
-        options.addOption(Option.builder().longOpt("javascript-export")
-                .desc("set javascript export mode(nodejs, amd or global)").hasArg().argName("EXPORT MODE").build());
+        options.addOption(
+                new Option(null, "javascript-export", true, "set javascript export mode(nodejs, amd or global)"));
 
-        options.addOption(Option.builder().longOpt("javascript-global")
-                .desc("set javascript export namespace of window or global").hasArg().argName("NAME").build());
+        options.addOption(
+                new Option(null, "javascript-global", true, "set javascript export namespace of window or global"));
 
         options.addOption(null, "disable-excel-formular", false,
                 "disable formular in excel. will be faster when convert data.");
@@ -255,36 +241,26 @@ public class ProgramOptions {
         options.addOption(null, "stdin", false, "enable read from stdin and convert more files.");
         options.addOption(null, "lua-global", false, "add data to _G if in lua mode when print const data");
         options.addOption(null, "lua-module", true, "module(MODULE_NAME, package.seeall) if in lua mode");
-        options.addOption(Option.builder().longOpt("validator-rules")
-                .desc("set file to load custom validator").hasArg().argName("FILE PATH").build());
+        options.addOption(new Option(null, "validator-rules", true, "set file to load custom validator"));
         options.addOption(null, "disable-data-validator", false,
                 "disable data validator, so validators only issue warnings without failing when validation checks fail.");
-        options.addOption(Option.builder().longOpt("data-validator-error-version")
-                .desc("set data validator error version, only validators with versions below this version will generate failures, 0 means always failure.")
-                .hasArg().argName("VERSION NUMBER").build());
-        options.addOption(Option.builder().longOpt("ignore-field-tags")
-                .desc("ignore data and only dump the default value of specify field tags.").hasArg().argName("TAG")
-                .build());
-        options.addOption(Option.builder().longOpt("default-field-separator")
-                .desc(String.format("set default field separator(default: %s)", getInstance().defaultFieldSeparator))
-                .hasArg()
-                .argName("SEPARATOR")
-                .build());
-        options.addOption(Option.builder().longOpt("data-source-lru-cache-rows")
-                .desc("set row number for LRU cache").hasArg().argName("NUMBER").build());
-        options.addOption(Option.builder().longOpt("tolerate-max-empty-rows")
-                .desc("set max continue empty rows").hasArg().argName("NUMBER").build());
+        options.addOption(new Option(null, "data-validator-error-version", true,
+                "set data validator error version, only validators with versions below this version will generate failures, 0 means always failure."));
+        options.addOption(new Option(null, "ignore-field-tags", true,
+                "ignore data and only dump the default value of specify field tags."));
+        options.addOption(new Option(null, "default-field-separator", true,
+                String.format("set default field separator(default: %s)", getInstance().defaultFieldSeparator)));
+        options.addOption(new Option(null, "data-source-lru-cache-rows", true, "set row number for LRU cache"));
+        options.addOption(new Option(null, "tolerate-max-empty-rows", true, "set max continue empty rows"));
 
-        options.addOption(Option.builder().longOpt("data-source-mapping-file")
-                .desc("set where to store data source mapping result").hasArg().argName("FILE PATH").build());
+        options.addOption(
+                new Option(null, "data-source-mapping-file", true, "set where to store data source mapping result"));
 
-        options.addOption(Option.builder().longOpt("data-source-mapping-mode")
-                .desc("set where to store data source mapping mode(none, md5, sha1, sha256)").hasArg()
-                .argName("ALGORITHM").build());
+        options.addOption(new Option(null, "data-source-mapping-mode", true,
+                "set where to store data source mapping mode(none, md5, sha1, sha256)"));
 
-        options.addOption(Option.builder().longOpt("data-source-mapping-seed")
-                .desc("set data source mapping seed").hasArg()
-                .argName("SEED").build());
+        options.addOption(new Option(null, "data-source-mapping-seed", true, "set data source mapping seed"));
+        options.addOption(new Option(null, "transpose-data-source", false, "transpose row and column of data source"));
 
         return options;
     }
@@ -294,11 +270,11 @@ public class ProgramOptions {
 
         // create parser
         DefaultParser parser = new DefaultParser();
-        CommandLine cmd = null;
+        CommandLine cmd;
         try {
             // parse the command line arguments
-            Options options = get_options_group();
-            synchronized (options) {
+            Options sharedOptions = get_options_group();
+            synchronized (sharedOptions) {
                 cmd = parser.parse(get_options_group(), args);
             }
         } catch (ParseException exp) {
@@ -308,7 +284,7 @@ public class ProgramOptions {
             String script = System.getProperty("java.class.path");
             HelpFormatter formatter = new HelpFormatter();
             formatter.setWidth(140);
-            formatter.printHelp("Usage: java -client -jar " + script + " [options...]", options);
+            formatter.printHelp("Usage: java -client -jar " + script + " [options...]", get_options_group());
             System.out.println("");
             System.out.println("You can add -Dlog4j.configuration=log4j2.xml to use your own log configure.");
             return -1;
@@ -318,10 +294,10 @@ public class ProgramOptions {
             String script = System.getProperty("java.class.path");
             HelpFormatter formatter = new HelpFormatter();
             formatter.setWidth(140);
-            Options options = get_options_group();
-            synchronized (options) {
+            Options sharedOptions = get_options_group();
+            synchronized (sharedOptions) {
                 formatter.printHelp(String.format("java -client -jar \"%s\" [options...]", script),
-                        options);
+                        sharedOptions);
             }
             System.out.println("");
             System.out.println("You can add -Dlog4j.configuration=log4j2.xml to use your own log configure.");
@@ -432,9 +408,7 @@ public class ProgramOptions {
         if (cmd.hasOption("data-source-mapping-file")) {
             String filePath = cmd.getOptionValue("data-source-mapping-file", "");
             if (!filePath.isEmpty()) {
-                synchronized (dataSourceMappingFile) {
-                    dataSourceMappingFile = filePath;
-                }
+                dataSourceMappingFile = filePath;
             }
         }
         if (cmd.hasOption("data-source-mapping-mode")) {
@@ -453,10 +427,10 @@ public class ProgramOptions {
             }
         }
         if (cmd.hasOption("data-source-mapping-seed")) {
-            synchronized (dataSourceMappingHashSeed) {
-                dataSourceMappingHashSeed = cmd.getOptionValue("data-source-mapping-seed", "xresloader");
-            }
+            dataSourceMappingHashSeed = cmd.getOptionValue("data-source-mapping-seed", "xresloader");
         }
+
+        dataSourceMappingTranspose = cmd.hasOption("transpose-data-source");
 
         // pretty print
         prettyIndent = Integer.parseInt(cmd.getOptionValue("pretty", "0"));
@@ -574,11 +548,7 @@ public class ProgramOptions {
         // custom validator rule file
         customValidatorRules = cmd.getOptionValues("validator-rules");
 
-        if (cmd.hasOption("disable-data-validator")) {
-            enableDataValidator = false;
-        } else {
-            enableDataValidator = true;
-        }
+        enableDataValidator = !cmd.hasOption("disable-data-validator");
 
         if (cmd.hasOption("data-validator-error-version")) {
             dataValidatorNoErrorVersion = Integer.parseInt(cmd.getOptionValue("data-validator-error-version", "0"));
@@ -669,20 +639,21 @@ public class ProgramOptions {
                 return dataSourceMappingResult.get(input);
             }
 
-            MessageDigest hasher = null;
+            MessageDigest hasher;
             try {
-                if (DataSourceMappingType.MD5 == dataSourceMappingType) {
-                    hasher = MessageDigest.getInstance("MD5");
-                } else if (DataSourceMappingType.SHA1 == dataSourceMappingType) {
-                    hasher = MessageDigest.getInstance("SHA-1");
-                } else {
+                if (null == dataSourceMappingType) {
                     hasher = MessageDigest.getInstance("SHA-256");
+                } else {
+                    hasher = switch (dataSourceMappingType) {
+                        case MD5 -> MessageDigest.getInstance("MD5");
+                        case SHA1 -> MessageDigest.getInstance("SHA-1");
+                        default -> MessageDigest.getInstance("SHA-256");
+                    };
                 }
 
-                synchronized (dataSourceMappingHashSeed) {
-                    if (dataSourceMappingHashSeed != null && !dataSourceMappingHashSeed.equals(input)) {
-                        hasher.update(dataSourceMappingHashSeed.getBytes());
-                    }
+                String seed = dataSourceMappingHashSeed;
+                if (seed != null && !seed.equals(input)) {
+                    hasher.update(seed.getBytes());
                 }
                 hasher.update(input.getBytes(Charset.forName("UTF-8")));
                 String result = Hex.encodeHexString(hasher.digest());
@@ -753,20 +724,17 @@ public class ProgramOptions {
         int ret = 0;
         OutputStream out;
         File file;
-        synchronized (dataSourceMappingFile) {
-            if (dataSourceMappingFile.isEmpty()) {
-                return ret;
-            }
-            file = new File(dataSourceMappingFile);
+
+        if (dataSourceMappingFile.isEmpty()) {
+            return ret;
         }
+        file = new File(dataSourceMappingFile);
 
         Charset utf8 = Charset.forName("UTF-8");
 
-        HashMap<String, String> dataSourceMappingOrigin = new HashMap<String, String>();
+        HashMap<String, String> dataSourceMappingOrigin = new HashMap<>();
         if (file.exists()) {
-            try {
-                InputStream in = new FileInputStream(file);
-                Scanner s = new Scanner(in, utf8);
+            try (InputStream in = new FileInputStream(file); Scanner s = new Scanner(in, utf8)) {
                 while (s.hasNextLine()) {
                     String line = s.nextLine();
                     String[] parts = line.split("\\s+", 2);
@@ -779,8 +747,6 @@ public class ProgramOptions {
 
                     dataSourceMappingOrigin.put(parts[0], parts[1]);
                 }
-                s.close();
-                in.close();
             } catch (IOException e) {
                 ProgramOptions.getLoger().error("Load data source mapping file %s failed.\n%s", dataSourceMappingFile,
                         e.getMessage());

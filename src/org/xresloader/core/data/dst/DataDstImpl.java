@@ -27,6 +27,7 @@ import org.xresloader.core.data.err.ConvException;
 import org.xresloader.core.data.src.DataSrcImpl;
 import org.xresloader.core.data.vfy.DataVerifyImpl;
 import org.xresloader.core.engine.ExcelEngine;
+import org.xresloader.core.engine.ExcelEngine.DataItemGridWrapper;
 import org.xresloader.core.engine.IdentifyDescriptor;
 
 /**
@@ -51,15 +52,23 @@ public abstract class DataDstImpl {
     static public class DataRowContext {
         public String fileName;
         public String tableName;
-        public int row;
+        public DataItemGridWrapper dataItemGrid = null;
 
         private LinkedList<String> ignore = null;
         private HashMap<String, JSONObject> uniqueCache = null;
 
-        DataRowContext(String fileName, String tableName, int row) {
+        DataRowContext(String fileName, String tableName, DataItemGridWrapper dataItemGrid) {
             this.fileName = fileName;
             this.tableName = tableName;
-            this.row = row;
+            this.dataItemGrid = dataItemGrid;
+        }
+
+        public String getDataItemIndexName() {
+            if (this.dataItemGrid != null && this.dataItemGrid.isTranspose()) {
+                return "Column";
+            } else {
+                return "Row";
+            }
         }
 
         public void addIgnoreReason(String reason) {
@@ -176,8 +185,9 @@ public abstract class DataDstImpl {
                             rowSet.getKey()));
                     for (var ref : rowSet.getValue()) {
                         sb.append(
-                                String.format("    File: %s, sheet: %s, row: %d\n", ref.fileName, ref.tableName,
-                                        ref.row + 1));
+                                String.format("    File: %s, Sheet: %s, %s: %d\n", ref.fileName, ref.tableName,
+                                        ref.getDataItemIndexName(),
+                                        ref.dataItemGrid.getDataItemIndex() + 1));
                     }
                 }
             }
@@ -282,7 +292,15 @@ public abstract class DataDstImpl {
             sepC = input.charAt(i);
         }
 
-        return input.split("\\" + sepC);
+        if (sepC == '\r' || sepC == '\n') {
+            return input.split("[\\r\\n]+");
+        }
+
+        if (sepC == ' ' || sepC == '\t') {
+            return input.split("[ \\t]+");
+        }
+
+        return input.split(Pattern.quote(String.valueOf(sepC)));
     }
 
     static public Boolean parsePlainDataBoolean(String input, IdentifyDescriptor ident,
@@ -677,9 +695,9 @@ public abstract class DataDstImpl {
                         "Convert %s from \"%s\", we need only %d fields but provided %d, \"%s\" may be ignored.%s  > File: %s, Table: %s, Row: %d, Column: %d(%s)",
                         oneof.getFullName(), input, 2, ret.length, String.join("\",\"", ignored),
                         ProgramOptions.getEndl(), current_source.getCurrentFileName(),
-                        current_source.getCurrentTableName(), current_source.getCurrentRowNum() + 1,
-                        current_source.getLastColomnNum() + 1,
-                        ExcelEngine.getColumnName(current_source.getLastColomnNum() + 1));
+                        current_source.getCurrentTableName(), current_source.getLastRowNum() + 1,
+                        current_source.getLastColumnNum() + 1,
+                        ExcelEngine.getColumnName(current_source.getLastColumnNum() + 1));
             } else {
                 ProgramOptions.getLoger().warn(
                         "Convert %s from \"%s\", we need only %d fields but provided %d, \"%s\" may be ignored.",

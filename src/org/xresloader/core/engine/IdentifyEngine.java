@@ -1,9 +1,9 @@
 package org.xresloader.core.engine;
 
+import java.util.LinkedList;
+
 import org.xresloader.core.scheme.SchemeConf;
 import org.xresloader.core.scheme.SchemeKeyConf;
-
-import java.util.LinkedList;
 
 /**
  * Created by owentou on 2014/10/10.
@@ -11,20 +11,20 @@ import java.util.LinkedList;
 public class IdentifyEngine {
 
     /**
-     * 把配置名称转换成标识符
+     * 把配置名称转换成标识符描述
      *
-     * @param _name 配置名称
-     * @return
+     * @param name           配置名称
+     * @param dataFieldIndex 数据字段序号（实际值）
+     * @return 标识符描述对象
      */
-    static public IdentifyDescriptor n2i(String _name, int index) {
-        IdentifyDescriptor ret = new IdentifyDescriptor();
-        ret.index = index;
-        int verify_index = _name.lastIndexOf('@');
+    static public IdentifyDescriptor n2i(String name, int dataFieldIndex) {
+        IdentifyDescriptor ret = new IdentifyDescriptor(dataFieldIndex);
+        int verify_index = name.lastIndexOf('@');
         if (verify_index >= 0) {
-            ret.dataSourceFieldValidator = _name.substring(verify_index + 1);
-            ret.name = normalize(_name.substring(0, verify_index));
+            ret.dataSourceFieldValidator = name.substring(verify_index + 1);
+            ret.name = normalize(name.substring(0, verify_index));
         } else {
-            ret.name = normalize(_name);
+            ret.name = normalize(name);
         }
 
         return ret;
@@ -70,7 +70,7 @@ public class IdentifyEngine {
         }
 
         // 分词
-        LinkedList<String> words = new LinkedList<String>();
+        LinkedList<String> words = new LinkedList<>();
         String this_word = "";
         for (char c : ident.toCharArray()) {
             if (cfg.getKeyWordRegex().matcher(String.valueOf(c)).matches()) {

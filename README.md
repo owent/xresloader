@@ -130,6 +130,7 @@ echo "
 | --data-source-mapping-file     | 数据源映射输出文件              | (>=2.19.1版本)                                                                                                                  |
 | --data-source-mapping-mode     | 数据源映射输出模式              | `none`, `md5`, `sha1`, `sha256` (>=2.19.1版本)                                                                                  |
 | --data-source-mapping-seed     | 数据源映射输出Hash Seed         | (>=2.19.1版本)                                                                                                                  |
+| --transpose-data-source        | 是否翻转数据源的行和列          | 可用于按行配字段映射，每列一组数据 (>=2.23.0版本)                                                                               |
 
 ### 协议类型
 
@@ -148,29 +149,29 @@ echo "
 
 ## 数据源描述表配置项及示例
 
-| 字段                        | 简介                                                              | 主配置              | 次配置          | 补充配置        | 说明                                                                                                                |
-| --------------------------- | ----------------------------------------------------------------- | ------------------- | --------------- | --------------- | ------------------------------------------------------------------------------------------------------------------- |
-| DataSource                  | 配置数据源(主配置:文件路径,次配置:表名,补充配置:起始行号，列号)   | ./资源转换示例.xlsx | kind            | 3,1             | **必须**，可多个。多个则表示把多个Excel表数据合并再生成配置输出，这意味着这多个Excel表的描述Key的顺序和个数必须相同 |
-| MacroSource                 | 元数据数据源(主配置:文件路径,次配置:表名,补充配置:起始行号，列号) | ./资源转换示例.xlsx | macro           | 2,1             | *可选*                                                                                                              |
+| 字段                        | 简介                                                                               | 主配置              | 次配置          | 补充配置        | 说明                                                                                                        |
+| --------------------------- | ---------------------------------------------------------------------------------- | ------------------- | --------------- | --------------- | ----------------------------------------------------------------------------------------------------------- |
+| DataSource                  | 配置数据源(主配置:文件路径,次配置:表名,补充配置:起始行号，列号\[,结束行号，列号\]) | ./资源转换示例.xlsx | kind            | 3,1             | **必须**，可多个。多个则表示把多个Excel表数据合并再生成配置输出。结束行号，列号为可选配置，不填则读到最后。 |
+| MacroSource                 | 元数据数据源(主配置:文件路径,次配置:表名,补充配置:起始行号，列号)                  | ./资源转换示例.xlsx | macro           | 2,1             | *可选*                                                                                                      |
 | 编程接口配置                |
-| ProtoName                   | 协议描述名称                                                      | role_cfg            |                 |                 | **必须**, 这个名字可以直接是类型名称[MessageName]，也可以是[PackageName].[MessageName]                              |
-| OutputFile                  | 输出文件                                                          | role_cfg.bin        |                 |                 | **必须**                                                                                                            |
-| KeyRow                      | 字段名描述行                                                      | 2                   |                 |                 | **必须**                                                                                                            |
-| KeyCase                     | 字段名大小写                                                      | 小写                |                 |                 | 大写/小写/不变(大小写转换，如果不需要则留空或小写)                                                                  |
-| KeyWordSplit                | 字段名分词字符                                                    | _                   |                 |                 | *可选*,字段名映射时单词之间填充的字符串,不需要请留空                                                                |
-| KeyPrefix                   | 字段名固定前缀                                                    |                     |                 |                 | *可选*,字段名映射时附加的前缀,不需要请留空                                                                          |
-| KeySuffix                   | 字段名固定后缀                                                    |                     |                 |                 | *可选*,字段名映射时附加的后缀,不需要请留空                                                                          |
-| KeyWordRegex                | 分词规则(判断规则,移除分词符号规则,前缀过滤规则)                  | `[A-Z_\$ \t\r\n]`   | `[_\$ \t\r\n]`  | `[a-zA-Z_\$]`   | *(可选)*,字段名映射时单词的分词规则,正则表达式,不需要请留空                                                         |
-| Encoding                    | 编码转换                                                          | UTF-8               |                 |                 | 注：Google的protobuf库的代码里写死了UTF-8，故而该选项对Protobuf的二进制输出无效                                     |
-| JsonCfg-LargeNumberAsString | 是否把大数字转换成字符串                                          | true                |                 |                 | 控制是否把大数字转换成字符串（Json和Javascript，2.16.0版本开始支持）                                                |
-| UeCfg-UProperty             | UnrealEngine配置支持的字段属性                                    | 字段分组            | 蓝图权限        | 编辑权限        | *可选*,默认值: XResConfig\|BlueprintReadOnly\|EditAnywhere                                                          |
-| UeCfg-CaseConvert           | 是否开启驼峰命名转换（默认开启）                                  | `true/false`        |                 |                 | *可选*,开启后将使用首字母大写的驼峰命名法生成字段名和类名                                                           |
-| UeCfg-CodeOutput            | 代码输出目录                                                      | 代码输出根目录      | Publich目录前缀 | Private目录前缀 | *可选*                                                                                                              |
-| UeCfg-DestinationPath       | 资源输出目录（uassert目录，默认会根据代码输出目录猜测）           | 左包裹字符          | 右包裹字符      |                 | *可选*                                                                                                              |
-| UeCfg-CsvObjectWrapper      | 指定 `Ue-Csv` 模式输出时，map和array的包裹字符                    | 资源输出目录        |                 |                 | *可选*                                                                                                              |
-| UeCfg-EnableDefaultLoader   | 是否启用UE默认的Loader                                            | `true/false`        |                 |                 | *可选*,默认值: `true`                                                                                               |
-| UeCfg-IncludeHeader         | UE代码额外的自定义包含头文件                                      | 头文件路径          | 头文件路径      | 头文件路径      | *可选*,三个路径都可选，此选项可以多次出现                                                                           |
-| CallbackScript              | 使用Javascript脚本处理输出的数据                                  | Javascript脚本路径  |                 |                 | *可选*, （2.13.0版本开始支持）                                                                                      |
+| ProtoName                   | 协议描述名称                                                                       | role_cfg            |                 |                 | **必须**, 这个名字可以直接是类型名称[MessageName]，也可以是[PackageName].[MessageName]                      |
+| OutputFile                  | 输出文件                                                                           | role_cfg.bin        |                 |                 | **必须**                                                                                                    |
+| KeyRow                      | 字段名描述行                                                                       | 2                   |                 |                 | **必须**                                                                                                    |
+| KeyCase                     | 字段名大小写                                                                       | 小写                |                 |                 | 大写/小写/不变(大小写转换，如果不需要则留空或小写)                                                          |
+| KeyWordSplit                | 字段名分词字符                                                                     | _                   |                 |                 | *可选*,字段名映射时单词之间填充的字符串,不需要请留空                                                        |
+| KeyPrefix                   | 字段名固定前缀                                                                     |                     |                 |                 | *可选*,字段名映射时附加的前缀,不需要请留空                                                                  |
+| KeySuffix                   | 字段名固定后缀                                                                     |                     |                 |                 | *可选*,字段名映射时附加的后缀,不需要请留空                                                                  |
+| KeyWordRegex                | 分词规则(判断规则,移除分词符号规则,前缀过滤规则)                                   | `[A-Z_\$ \t\r\n]`   | `[_\$ \t\r\n]`  | `[a-zA-Z_\$]`   | *(可选)*,字段名映射时单词的分词规则,正则表达式,不需要请留空                                                 |
+| Encoding                    | 编码转换                                                                           | UTF-8               |                 |                 | 注：Google的protobuf库的代码里写死了UTF-8，故而该选项对Protobuf的二进制输出无效                             |
+| JsonCfg-LargeNumberAsString | 是否把大数字转换成字符串                                                           | true                |                 |                 | 控制是否把大数字转换成字符串（Json和Javascript，2.16.0版本开始支持）                                        |
+| UeCfg-UProperty             | UnrealEngine配置支持的字段属性                                                     | 字段分组            | 蓝图权限        | 编辑权限        | *可选*,默认值: XResConfig\|BlueprintReadOnly\|EditAnywhere                                                  |
+| UeCfg-CaseConvert           | 是否开启驼峰命名转换（默认开启）                                                   | `true/false`        |                 |                 | *可选*,开启后将使用首字母大写的驼峰命名法生成字段名和类名                                                   |
+| UeCfg-CodeOutput            | 代码输出目录                                                                       | 代码输出根目录      | Publich目录前缀 | Private目录前缀 | *可选*                                                                                                      |
+| UeCfg-DestinationPath       | 资源输出目录（uassert目录，默认会根据代码输出目录猜测）                            | 左包裹字符          | 右包裹字符      |                 | *可选*                                                                                                      |
+| UeCfg-CsvObjectWrapper      | 指定 `Ue-Csv` 模式输出时，map和array的包裹字符                                     | 资源输出目录        |                 |                 | *可选*                                                                                                      |
+| UeCfg-EnableDefaultLoader   | 是否启用UE默认的Loader                                                             | `true/false`        |                 |                 | *可选*,默认值: `true`                                                                                       |
+| UeCfg-IncludeHeader         | UE代码额外的自定义包含头文件                                                       | 头文件路径          | 头文件路径      | 头文件路径      | *可选*,三个路径都可选，此选项可以多次出现                                                                   |
+| CallbackScript              | 使用Javascript脚本处理输出的数据                                                   | Javascript脚本路径  |                 |                 | *可选*, （2.13.0版本开始支持）                                                                              |
 
 ### 数据源描述的特别说明
 
@@ -193,13 +194,13 @@ echo "
   >
 11. Encoding指明输出的字符串内容都是UTF-8编码。（目前最好只用UTF-8，因为protobuf里写死了UTF-8编码，其他编码不保证完全正常）
 12. CallbackScript指向的脚本中，需要满足已下条件:
-
-+ 可使用 `gOurInstance` 访问数据源接口（ `DataSrcImpl.getOurInstance()` ）
-+ 可使用 `gSchemeConf` 访问数据转换配置接口（ `SchemeConf.getInstance()` ）
-+ 提供 `function initDataSource()` 函数，将在切换数据源时触发（文件名或sheet名）。
-+ 提供 `function currentMessageCallback(originMsg, typeDesc)` 函数，将在切换数据源时触发（文件名或sheet名）。
-  + `originMsg` 为原始数据结构的 `HashMap` 结构
-  + `typeDesc` 为数据类型描述信息, `org.xresloader.core.data.dst.DataDstWriterNode.DataDstTypeDescriptor` 结构
+  + 可使用 `gOurInstance` 访问数据源接口（ `DataSrcImpl.getOurInstance()` ）
+  + 可使用 `gSchemeConf` 访问数据转换配置接口（ `SchemeConf.getInstance()` ）
+  + 提供 `function initDataSource()` 函数，将在切换数据源时触发（文件名或sheet名）。
+  + 提供 `function currentMessageCallback(originMsg, typeDesc)` 函数，将在切换数据源时触发（文件名或sheet名）。
+    + `originMsg` 为原始数据结构的 `HashMap` 结构
+    + `typeDesc` 为数据类型描述信息, `org.xresloader.core.data.dst.DataDstWriterNode.DataDstTypeDescriptor` 结构
+13. DataSource的 **结束行号，列号** 设置要求版本 >=2.23.0 。包含指定的行和列，填0为不限制。
 
 上面的配置中，数据从第3行读取，Key从第2行读取。那么第一行可以用来写一些说明或描述性数据。
 

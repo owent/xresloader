@@ -8,6 +8,7 @@ import org.xresloader.core.data.et.DataETProcessor;
 import org.xresloader.core.data.src.DataContainer;
 import org.xresloader.core.data.src.DataSrcImpl;
 import org.xresloader.core.engine.ExcelEngine;
+import org.xresloader.core.engine.ExcelEngine.DataItemGridWrapper;
 import org.xresloader.core.engine.IdentifyDescriptor;
 import org.xresloader.core.scheme.SchemeConf;
 
@@ -138,9 +139,9 @@ public abstract class DataDstJava extends DataDstImpl {
         int tolerateContinueEmptyRows = ProgramOptions.getInstance().tolerateContinueEmptyRows;
         int currentContinueEmptyRows = 0;
         while (DataSrcImpl.getOurInstance().nextRow()) {
+            DataItemGridWrapper dataItemGrid = DataSrcImpl.getOurInstance().getCurrentDataItemGrid();
             DataRowContext rowContext = new DataRowContext(DataSrcImpl.getOurInstance().getCurrentFileName(),
-                    DataSrcImpl.getOurInstance().getCurrentTableName(),
-                    DataSrcImpl.getOurInstance().getCurrentRowNum());
+                    DataSrcImpl.getOurInstance().getCurrentTableName(), dataItemGrid);
 
             HashMap<String, Object> msg = buildCurrentRow(ret, rowContext);
 
@@ -152,8 +153,9 @@ public abstract class DataDstJava extends DataDstImpl {
             } else {
                 if (msg != null && rowContext.shouldIgnore()) {
                     ProgramOptions.getLoger().warn(
-                            "File: %s, Sheet: %s, Row: %d%s",
-                            rowContext.fileName, rowContext.tableName, rowContext.row,
+                            "File: %s, Sheet: %s, %s: %d%s",
+                            rowContext.fileName, rowContext.tableName, rowContext.getDataItemIndexName(),
+                            rowContext.dataItemGrid.getDataItemIndex() + 1,
                             rowContext.buildIgnoreIgnoreMessage(4));
                 }
                 currentContinueEmptyRows++;
@@ -1250,8 +1252,9 @@ public abstract class DataDstJava extends DataDstImpl {
                     field.getTypeDescriptor().getFullName(), atLeastFieldSize, fieldSize, inputs.length,
                     ProgramOptions.getEndl(),
                     rowContext.fileName, rowContext.tableName,
-                    rowContext.row + 1, DataSrcImpl.getOurInstance().getLastColomnNum() + 1,
-                    ExcelEngine.getColumnName(DataSrcImpl.getOurInstance().getLastColomnNum() + 1),
+                    DataSrcImpl.getOurInstance().getLastRowNum() + 1,
+                    DataSrcImpl.getOurInstance().getLastColumnNum() + 1,
+                    ExcelEngine.getColumnName(DataSrcImpl.getOurInstance().getLastColumnNum() + 1),
                     ProgramOptions.getEndl(),
                     String.join(",", missingFields.values().stream().map(DataDstFieldDescriptor::getName)
                             .collect(Collectors.toList())));

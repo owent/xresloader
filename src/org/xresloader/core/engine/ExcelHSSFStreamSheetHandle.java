@@ -236,14 +236,14 @@ public class ExcelHSSFStreamSheetHandle implements HSSFListener {
         }
     }
 
-    static public ExcelEngine.CustomDataTableIndex buildCustomTableIndex(File file, String sheet_name) {
-        if (file == null || sheet_name == null) {
+    static public ExcelEngine.CustomDataTableIndex buildCustomTableIndex(File file, String sheetName) {
+        if (file == null || sheetName == null) {
             return null;
         }
 
         try (POIFSFileSystem xls_fs = new POIFSFileSystem(new FileInputStream(file))) {
             ExcelEngine.CustomDataTableIndex tableIndex = new ExcelEngine.CustomDataTableIndex(file.getCanonicalPath(),
-                    sheet_name);
+                    sheetName);
 
             ExcelHSSFStreamSheetHandle handle = new ExcelHSSFStreamSheetHandle(tableIndex);
 
@@ -267,7 +267,7 @@ public class ExcelHSSFStreamSheetHandle implements HSSFListener {
             return tableIndex;
         } catch (java.io.IOException e) {
             ProgramOptions.getLoger().error("Open source file \"%s\" and parse sheet \"%s\" failed, %s.",
-                    file.getPath(), sheet_name, e.getMessage());
+                    file.getPath(), sheetName, e.getMessage());
         }
 
         return null;

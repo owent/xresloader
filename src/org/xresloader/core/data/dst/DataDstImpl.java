@@ -614,13 +614,21 @@ public abstract class DataDstImpl {
             try {
                 int dot = numberPartValue.indexOf('.');
                 if (dot >= 0) {
-                    Double sec = Double.valueOf(numberPartValue);
+                    // 分开解析，否则会导致丢精度
+                    long sec = Long.parseLong(item.substring(0, dot));
+                    Double nanos = Double.parseDouble(item.substring(dot)) * 1000000000;
+
                     if (unitSec != 0) {
                         sec = sec * unitSec;
+                        nanos = nanos * unitSec;
                     } else {
                         sec = sec * unitNanos / 1_000_000_000;
+                        nanos = nanos * unitNanos / 1_000_000_000;
                     }
-                    Double nanos = (sec - Math.floor(sec)) * 1000000000;
+                    if (nanos >= 1.0) {
+                        sec += nanos.longValue() / 1_000_000_000;
+                        nanos = nanos % 1_000_000_000;
+                    }
                     if (nanos > Float.MIN_VALUE || nanos < -Float.MIN_VALUE) {
                         return Instant.ofEpochSecond((long) Math.floor(sec)).plusNanos(nanos.longValue());
                     } else {

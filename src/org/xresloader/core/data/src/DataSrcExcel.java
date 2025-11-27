@@ -79,7 +79,7 @@ public class DataSrcExcel extends DataSrcImpl {
 
         @Override
         public int getLastColumnIndex() {
-            if (this.lastColumnIndex < -2) {
+            if (this.lastColumnIndex <= -2) {
                 this.lastColumnIndex = -1;
                 if (null != userModuleTable) {
                     for (int i = userModuleTable.getFirstRowNum(); i <= userModuleTable.getLastRowNum(); ++i) {

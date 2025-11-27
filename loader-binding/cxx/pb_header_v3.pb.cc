@@ -208,13 +208,14 @@ const char descriptor_table_protodef_pb_5fheader_5fv3_2eproto[] ABSL_ATTRIBUTE_S
     "source\"|\n\025xresloader_datablocks\0224\n\006heade"
     "r\030\001 \001(\0132$.org.xresloader.pb.xresloader_h"
     "eader\022\022\n\ndata_block\030\002 \003(\014\022\031\n\021data_messag"
-    "e_type\030\003 \001(\tb\006proto3"
+    "e_type\030\003 \001(\tB2Z0github.com/xresloader/xr"
+    "esloader;xresloader_coreb\006proto3"
 };
 static ::absl::once_flag descriptor_table_pb_5fheader_5fv3_2eproto_once;
 PROTOBUF_CONSTINIT const ::_pbi::DescriptorTable descriptor_table_pb_5fheader_5fv3_2eproto = {
     false,
     false,
-    420,
+    472,
     descriptor_table_protodef_pb_5fheader_5fv3_2eproto,
     "pb_header_v3.proto",
     &descriptor_table_pb_5fheader_5fv3_2eproto_once,

@@ -448,6 +448,8 @@ public abstract class DataDstImpl {
     static private final Pattern TIME_CHECK_RULE = Pattern.compile("\\d+:\\d+:\\d+");
     static private final Pattern ZONE_CHECK_RULE = Pattern.compile(":\\d+(\\.\\d*)?(Z|[+-])");
     static private final Pattern DIGITAL_CHECK_RULE = Pattern.compile("[+-]?\\d+(\\.\\d*)?");
+    static private final Pattern SPECIAL_DURATION_WITH_UNIT = Pattern.compile(
+            "([+-]?\\d+(\\.\\d*)?)\\s*(w|weeks|d|days|h|hours|m|minutes|s|seconds|ms|milliseconds|us|microseconds|ns|nanoseconds)");
     static DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd").withZone(ZoneId.systemDefault())
             .withResolverStyle(ResolverStyle.SMART);
     static DateTimeFormatter DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")
@@ -579,16 +581,64 @@ public abstract class DataDstImpl {
         }
 
         String item = ExcelEngine.tryMacro(input.trim()).trim();
-        if (DIGITAL_CHECK_RULE.matcher(item).matches()) {
+        var numberOnly = DIGITAL_CHECK_RULE.matcher(item);
+        var specialUnit = SPECIAL_DURATION_WITH_UNIT.matcher(item);
+        if (specialUnit.matches() || numberOnly.matches()) {
+            String numberPartValue = item;
+            long unitSec = 1;
+            long unitNanos = 0;
+            if (specialUnit.matches()) {
+                numberPartValue = specialUnit.group(1);
+                String unit = specialUnit.group(3).toLowerCase();
+                if (unit.equals("w") || unit.equals("weeks")) {
+                    unitSec = 7 * 24 * 3600;
+                } else if (unit.equals("d") || unit.equals("days")) {
+                    unitSec = 24 * 3600;
+                } else if (unit.equals("h") || unit.equals("hours")) {
+                    unitSec = 3600;
+                } else if (unit.equals("m") || unit.equals("minutes")) {
+                    unitSec = 60;
+                } else if (unit.equals("s") || unit.equals("seconds")) {
+                    unitSec = 1;
+                } else if (unit.equals("ms") || unit.equals("milliseconds")) {
+                    unitSec = 0;
+                    unitNanos = 1000000;
+                } else if (unit.equals("us") || unit.equals("microseconds")) {
+                    unitSec = 0;
+                    unitNanos = 1000;
+                } else if (unit.equals("ns") || unit.equals("nanoseconds")) {
+                    unitSec = 0;
+                    unitNanos = 1;
+                }
+            }
             try {
-                int dot = item.indexOf('.');
+                int dot = numberPartValue.indexOf('.');
                 if (dot >= 0) {
-                    long sec = Long.parseLong(item.substring(0, dot));
-                    Double nanos = Double.parseDouble(item.substring(dot)) * 1000000000;
-                    return Instant.ofEpochSecond(sec).plusNanos(nanos.longValue());
+                    Double sec = Double.valueOf(numberPartValue);
+                    if (unitSec != 0) {
+                        sec = sec * unitSec;
+                    } else {
+                        sec = sec * unitNanos / 1_000_000_000;
+                    }
+                    Double nanos = (sec - Math.floor(sec)) * 1000000000;
+                    if (nanos > Float.MIN_VALUE || nanos < -Float.MIN_VALUE) {
+                        return Instant.ofEpochSecond((long) Math.floor(sec)).plusNanos(nanos.longValue());
+                    } else {
+                        return Instant.ofEpochSecond((long) Math.floor(sec));
+                    }
                 } else {
-                    long sec = Long.parseLong(item);
-                    return Instant.ofEpochSecond(sec);
+                    long sec = Long.parseLong(numberPartValue);
+                    if (unitSec != 0) {
+                        sec = sec * unitSec;
+                        return Instant.ofEpochSecond(sec);
+                    } else {
+                        long nanos = sec * unitNanos;
+                        if (sec % 1_000_000_000 == 0) {
+                            return Instant.ofEpochSecond(nanos / 1_000_000_000);
+                        } else {
+                            return Instant.ofEpochSecond(nanos / 1_000_000_000).plusNanos(nanos % 1_000_000_000);
+                        }
+                    }
                 }
             } catch (NumberFormatException e) {
                 throw new ConvException(String.format(

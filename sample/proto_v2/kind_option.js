@@ -337,6 +337,57 @@ exports.files = [
         },
         name : "field_alias_message"
       },
+      global_settings : {
+        enum_type : {
+          TestMapIsEntry : {
+            name : "TestMapIsEntry",
+            options : {
+              map_entry : true
+            }
+          },
+          TestMapSmEntry : {
+            name : "TestMapSmEntry",
+            options : {
+              map_entry : true
+            }
+          }
+        },
+        field : {
+          test_arr : {
+            name : "test_arr",
+            number : 7,
+            options : {
+              field_separator : "\n"
+            },
+            type_name : "MESSAGE"
+          },
+          test_map_sm : {
+            name : "test_map_sm",
+            number : 12,
+            options : {
+              field_separator : "|"
+            },
+            type_name : "MESSAGE"
+          },
+          test_plain_msg : {
+            name : "test_plain_msg",
+            number : 6,
+            options : {
+              field_separator : "&"
+            },
+            type_name : "MESSAGE"
+          },
+          test_repeated_timestamp : {
+            name : "test_repeated_timestamp",
+            number : 8,
+            options : {
+              field_separator : "\n"
+            },
+            type_name : "MESSAGE"
+          }
+        },
+        name : "global_settings"
+      },
       inner_alias_message : {
         field : {
           iType : {

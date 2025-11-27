@@ -156,7 +156,7 @@ echo "
 | 编程接口配置                |
 | ProtoName                   | 协议描述名称                                                                       | role_cfg            |                 |                 | **必须**, 这个名字可以直接是类型名称[MessageName]，也可以是[PackageName].[MessageName]                      |
 | OutputFile                  | 输出文件                                                                           | role_cfg.bin        |                 |                 | **必须**                                                                                                    |
-| KeyRow                      | 字段名描述行                                                                       | 2                   |                 |                 | **必须**                                                                                                    |
+| KeyRow                      | 字段名描述行                                                                       | 2                   |                 |                 | **必须** ( 如果开启 `--transpose-data-source` ，这个表示列号，否则表示行号)                                 |
 | KeyCase                     | 字段名大小写                                                                       | 小写                |                 |                 | 大写/小写/不变(大小写转换，如果不需要则留空或小写)                                                          |
 | KeyWordSplit                | 字段名分词字符                                                                     | _                   |                 |                 | *可选*,字段名映射时单词之间填充的字符串,不需要请留空                                                        |
 | KeyPrefix                   | 字段名固定前缀                                                                     |                     |                 |                 | *可选*,字段名映射时附加的前缀,不需要请留空                                                                  |
@@ -201,6 +201,9 @@ echo "
     + `originMsg` 为原始数据结构的 `HashMap` 结构
     + `typeDesc` 为数据类型描述信息, `org.xresloader.core.data.dst.DataDstWriterNode.DataDstTypeDescriptor` 结构
 13. DataSource的 **结束行号，列号** 设置要求版本 >=2.23.0 。包含指定的行和列，填0为不限制。
+14. `Duration` 类型支持填数字+单位，或者 `HH:MM:SS` 的形式。HH可以大于24。
+  > 单位支持(从2.23.0版本开始): w/weeks,d/days,h/hours,m/minutes,s/seconds,ms/milliseconds,us/microseconds,ns/nanoseconds 。
+  > 单位不填默认是秒。
 
 上面的配置中，数据从第3行读取，Key从第2行读取。那么第一行可以用来写一些说明或描述性数据。
 

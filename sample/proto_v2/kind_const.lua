@@ -44,6 +44,8 @@ local const_res = {
     EN_GCC_SOLDIER_TYPE_MASK = 100,
     EN_GCC_UNKNOWN = 0,
   },
+  global_settings = {
+  },
   process_by_script = {
   },
 }

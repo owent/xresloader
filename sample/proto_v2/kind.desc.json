@@ -427,6 +427,114 @@
         },
         "name": "field_alias_message"
       },
+      "global_settings": {
+        "enum_type": {
+          "TestMapIsEntry": {
+            "field": {
+              "key": {
+                "name": "key",
+                "number": 1,
+                "type_name": "INT32"
+              },
+              "value": {
+                "name": "value",
+                "number": 2,
+                "type_name": "STRING"
+              }
+            },
+            "name": "TestMapIsEntry",
+            "options": {"map_entry": true}
+          },
+          "TestMapSmEntry": {
+            "field": {
+              "key": {
+                "name": "key",
+                "number": 1,
+                "type_name": "STRING"
+              },
+              "value": {
+                "name": "value",
+                "number": 2,
+                "type_name": "MESSAGE"
+              }
+            },
+            "name": "TestMapSmEntry",
+            "options": {"map_entry": true}
+          }
+        },
+        "field": {
+          "i18n_system_admin": {
+            "name": "i18n_system_admin",
+            "number": 5,
+            "type_name": "STRING"
+          },
+          "mail_max_count_per_major_type": {
+            "name": "mail_max_count_per_major_type",
+            "number": 4,
+            "type_name": "INT32"
+          },
+          "test_arr": {
+            "name": "test_arr",
+            "number": 7,
+            "options": {"field_separator": "\n"},
+            "type_name": "MESSAGE"
+          },
+          "test_duration1": {
+            "name": "test_duration1",
+            "number": 1,
+            "type_name": "MESSAGE"
+          },
+          "test_duration2": {
+            "name": "test_duration2",
+            "number": 2,
+            "type_name": "MESSAGE"
+          },
+          "test_map_is": {
+            "name": "test_map_is",
+            "number": 11,
+            "type_name": "MESSAGE"
+          },
+          "test_map_sm": {
+            "name": "test_map_sm",
+            "number": 12,
+            "options": {"field_separator": "|"},
+            "type_name": "MESSAGE"
+          },
+          "test_plain_enum_array": {
+            "name": "test_plain_enum_array",
+            "number": 10,
+            "type_name": "ENUM"
+          },
+          "test_plain_msg": {
+            "name": "test_plain_msg",
+            "number": 6,
+            "options": {"field_separator": "&"},
+            "type_name": "MESSAGE"
+          },
+          "test_repeated_timestamp": {
+            "name": "test_repeated_timestamp",
+            "number": 8,
+            "options": {"field_separator": "\n"},
+            "type_name": "MESSAGE"
+          },
+          "test_standard_msg": {
+            "name": "test_standard_msg",
+            "number": 13,
+            "type_name": "MESSAGE"
+          },
+          "test_timestamp": {
+            "name": "test_timestamp",
+            "number": 3,
+            "type_name": "MESSAGE"
+          },
+          "timezone_base_timestamp": {
+            "name": "timezone_base_timestamp",
+            "number": 9,
+            "type_name": "MESSAGE"
+          }
+        },
+        "name": "global_settings"
+      },
       "inner_alias_message": {
         "field": {
           "iType": {

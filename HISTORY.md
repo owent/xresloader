@@ -10,7 +10,8 @@
 3. 优化Plain模式的分隔符。如果分隔符包含换行符，会抹除跨平台差异。如果分隔符包含空格或制表符，会消除连续的空格和制表符。
 4. 数据源配置（DataSource）支持设置 **结束行号，列号** 。
 5. 部分升级JDK后的代码重构。
-6. 更新依赖库。
+6. 时间周期的配置支持额外的单位: w/weeks,d/days,h/hours,m/minutes,s/seconds,ms/milliseconds,us/microseconds,ns/nanoseconds
+7. 更新依赖库。
 
 ## 2.22.3
 

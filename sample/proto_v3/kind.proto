@@ -197,3 +197,19 @@ message field_alias_message {
     int32 id    = 1;
     int32 value = 2 [ (org.xresloader.validator) = "custom_rule6" ];
 }
+
+message global_settings {
+    google.protobuf.Duration  test_duration1                   = 1;
+    google.protobuf.Duration  test_duration2                   = 2;
+    google.protobuf.Timestamp test_timestamp                   = 3;
+    int32                     mail_max_count_per_major_type    = 4;
+    string                    i18n_system_admin                = 5;
+    test_msg_verifier         test_plain_msg                   = 6 [ (org.xresloader.field_separator) = "&" ];
+    repeated event_rule_item  test_arr                         = 7 [ (org.xresloader.field_separator) = "\n" ];
+    repeated google.protobuf.Timestamp test_repeated_timestamp = 8 [ (org.xresloader.field_separator) = "\n" ];
+    google.protobuf.Timestamp          timezone_base_timestamp = 9;
+    repeated cost_type                 test_plain_enum_array   = 10;
+    map<int32, string>                 test_map_is             = 11;
+    map<string, dep2_cfg>              test_map_sm             = 12 [ (org.xresloader.field_separator) = "|" ];
+    dep2_cfg                           test_standard_msg       = 13;
+}

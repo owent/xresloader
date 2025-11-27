@@ -12,7 +12,7 @@ define({
       }
     ],
     data_ver : "1.0.0.0",
-    hash_code : "sha256:eeaf27d61a221566a4129cce5f868e1d929d571f6ad2859de106242f0acc820f",
+    hash_code : "sha256:e5426406f98df7709bb22259a710b0d6cee0432cc086fef7fba244bec1f13f17",
     xres_ver : "dev"
   },
   "role_cfg": [
@@ -322,7 +322,7 @@ define({
     },
     {
       convert_duration_one : {
-        nanos : 123000000,
+        nanos : 122999999,
         seconds : 45915
       },
       convert_timepoint_one : {

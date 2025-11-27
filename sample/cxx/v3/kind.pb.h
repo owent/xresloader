@@ -107,6 +107,18 @@ class field_alias_message;
 struct field_alias_messageDefaultTypeInternal;
 extern field_alias_messageDefaultTypeInternal _field_alias_message_default_instance_;
 extern const ::google::protobuf::internal::ClassDataFull field_alias_message_class_data_;
+class global_settings;
+struct global_settingsDefaultTypeInternal;
+extern global_settingsDefaultTypeInternal _global_settings_default_instance_;
+extern const ::google::protobuf::internal::ClassDataFull global_settings_class_data_;
+class global_settings_TestMapIsEntry_DoNotUse;
+struct global_settings_TestMapIsEntry_DoNotUseDefaultTypeInternal;
+extern global_settings_TestMapIsEntry_DoNotUseDefaultTypeInternal _global_settings_TestMapIsEntry_DoNotUse_default_instance_;
+extern const ::google::protobuf::internal::ClassDataFull global_settings_TestMapIsEntry_DoNotUse_class_data_;
+class global_settings_TestMapSmEntry_DoNotUse;
+struct global_settings_TestMapSmEntry_DoNotUseDefaultTypeInternal;
+extern global_settings_TestMapSmEntry_DoNotUseDefaultTypeInternal _global_settings_TestMapSmEntry_DoNotUse_default_instance_;
+extern const ::google::protobuf::internal::ClassDataFull global_settings_TestMapSmEntry_DoNotUse_class_data_;
 class inner_alias_message;
 struct inner_alias_messageDefaultTypeInternal;
 extern inner_alias_messageDefaultTypeInternal _inner_alias_message_default_instance_;
@@ -972,6 +984,45 @@ class inner_alias_message final : public ::google::protobuf::Message
 };
 
 extern const ::google::protobuf::internal::ClassDataFull inner_alias_message_class_data_;
+// -------------------------------------------------------------------
+
+class global_settings_TestMapIsEntry_DoNotUse final
+    : public ::google::protobuf::internal::MapEntry<::int32_t, std::string,
+                             ::google::protobuf::internal::WireFormatLite::TYPE_INT32,
+                             ::google::protobuf::internal::WireFormatLite::TYPE_STRING> {
+ public:
+  using SuperType =
+      ::google::protobuf::internal::MapEntry<::int32_t, std::string,
+                      ::google::protobuf::internal::WireFormatLite::TYPE_INT32,
+                      ::google::protobuf::internal::WireFormatLite::TYPE_STRING>;
+  global_settings_TestMapIsEntry_DoNotUse();
+  template <typename = void>
+  explicit PROTOBUF_CONSTEXPR global_settings_TestMapIsEntry_DoNotUse(::google::protobuf::internal::ConstantInitialized);
+  explicit global_settings_TestMapIsEntry_DoNotUse(::google::protobuf::Arena* PROTOBUF_NULLABLE arena);
+  static constexpr const void* PROTOBUF_NONNULL internal_default_instance() {
+    return &_global_settings_TestMapIsEntry_DoNotUse_default_instance_;
+  }
+
+
+  static constexpr auto InternalGenerateClassData_();
+
+ private:
+  friend class ::google::protobuf::MessageLite;
+  friend struct ::TableStruct_kind_2eproto;
+
+  friend class ::google::protobuf::internal::TcParser;
+  static const ::google::protobuf::internal::TcParseTable<1, 2,
+                                   0, 44,
+                                   2>
+      _table_;
+
+  const ::google::protobuf::internal::ClassData* PROTOBUF_NONNULL GetClassData() const PROTOBUF_FINAL;
+  static void* PROTOBUF_NONNULL PlacementNew_(
+      const void* PROTOBUF_NONNULL, void* PROTOBUF_NONNULL mem,
+      ::google::protobuf::Arena* PROTOBUF_NULLABLE arena);
+  static constexpr auto InternalNewImpl_();
+};
+extern const ::google::protobuf::internal::ClassDataFull global_settings_TestMapIsEntry_DoNotUse_class_data_;
 // -------------------------------------------------------------------
 
 class field_alias_message final : public ::google::protobuf::Message
@@ -2733,6 +2784,45 @@ class keep_or_strip_empty_list_cfg final : public ::google::protobuf::Message
 extern const ::google::protobuf::internal::ClassDataFull keep_or_strip_empty_list_cfg_class_data_;
 // -------------------------------------------------------------------
 
+class global_settings_TestMapSmEntry_DoNotUse final
+    : public ::google::protobuf::internal::MapEntry<std::string, ::google::protobuf::Message,
+                             ::google::protobuf::internal::WireFormatLite::TYPE_STRING,
+                             ::google::protobuf::internal::WireFormatLite::TYPE_MESSAGE> {
+ public:
+  using SuperType =
+      ::google::protobuf::internal::MapEntry<std::string, ::google::protobuf::Message,
+                      ::google::protobuf::internal::WireFormatLite::TYPE_STRING,
+                      ::google::protobuf::internal::WireFormatLite::TYPE_MESSAGE>;
+  global_settings_TestMapSmEntry_DoNotUse();
+  template <typename = void>
+  explicit PROTOBUF_CONSTEXPR global_settings_TestMapSmEntry_DoNotUse(::google::protobuf::internal::ConstantInitialized);
+  explicit global_settings_TestMapSmEntry_DoNotUse(::google::protobuf::Arena* PROTOBUF_NULLABLE arena);
+  static constexpr const void* PROTOBUF_NONNULL internal_default_instance() {
+    return &_global_settings_TestMapSmEntry_DoNotUse_default_instance_;
+  }
+
+
+  static constexpr auto InternalGenerateClassData_();
+
+ private:
+  friend class ::google::protobuf::MessageLite;
+  friend struct ::TableStruct_kind_2eproto;
+
+  friend class ::google::protobuf::internal::TcParser;
+  static const ::google::protobuf::internal::TcParseTable<1, 2,
+                                   1, 42,
+                                   2>
+      _table_;
+
+  const ::google::protobuf::internal::ClassData* PROTOBUF_NONNULL GetClassData() const PROTOBUF_FINAL;
+  static void* PROTOBUF_NONNULL PlacementNew_(
+      const void* PROTOBUF_NONNULL, void* PROTOBUF_NONNULL mem,
+      ::google::protobuf::Arena* PROTOBUF_NULLABLE arena);
+  static constexpr auto InternalNewImpl_();
+};
+extern const ::google::protobuf::internal::ClassDataFull global_settings_TestMapSmEntry_DoNotUse_class_data_;
+// -------------------------------------------------------------------
+
 class event_cfg final : public ::google::protobuf::Message
 /* @@protoc_insertion_point(class_definition:event_cfg) */ {
  public:
@@ -3936,6 +4026,416 @@ class process_by_script final : public ::google::protobuf::Message
 };
 
 extern const ::google::protobuf::internal::ClassDataFull process_by_script_class_data_;
+// -------------------------------------------------------------------
+
+class global_settings final : public ::google::protobuf::Message
+/* @@protoc_insertion_point(class_definition:global_settings) */ {
+ public:
+  inline global_settings() : global_settings(nullptr) {}
+  ~global_settings() PROTOBUF_FINAL;
+
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+  void operator delete(global_settings* PROTOBUF_NONNULL msg, std::destroying_delete_t) {
+    SharedDtor(*msg);
+    ::google::protobuf::internal::SizedDelete(msg, sizeof(global_settings));
+  }
+#endif
+
+  template <typename = void>
+  explicit PROTOBUF_CONSTEXPR global_settings(::google::protobuf::internal::ConstantInitialized);
+
+  inline global_settings(const global_settings& from) : global_settings(nullptr, from) {}
+  inline global_settings(global_settings&& from) noexcept
+      : global_settings(nullptr, std::move(from)) {}
+  inline global_settings& operator=(const global_settings& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  inline global_settings& operator=(global_settings&& from) noexcept {
+    if (this == &from) return *this;
+    if (::google::protobuf::internal::CanMoveWithInternalSwap(GetArena(), from.GetArena())) {
+      InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const
+      ABSL_ATTRIBUTE_LIFETIME_BOUND {
+    return _internal_metadata_.unknown_fields<::google::protobuf::UnknownFieldSet>(::google::protobuf::UnknownFieldSet::default_instance);
+  }
+  inline ::google::protobuf::UnknownFieldSet* PROTOBUF_NONNULL mutable_unknown_fields()
+      ABSL_ATTRIBUTE_LIFETIME_BOUND {
+    return _internal_metadata_.mutable_unknown_fields<::google::protobuf::UnknownFieldSet>();
+  }
+
+  static const ::google::protobuf::Descriptor* PROTOBUF_NONNULL descriptor() {
+    return GetDescriptor();
+  }
+  static const ::google::protobuf::Descriptor* PROTOBUF_NONNULL GetDescriptor() {
+    return default_instance().GetMetadata().descriptor;
+  }
+  static const ::google::protobuf::Reflection* PROTOBUF_NONNULL GetReflection() {
+    return default_instance().GetMetadata().reflection;
+  }
+  static const global_settings& default_instance() {
+    return *reinterpret_cast<const global_settings*>(
+        &_global_settings_default_instance_);
+  }
+  static constexpr int kIndexInFileMessages = 23;
+  friend void swap(global_settings& a, global_settings& b) { a.Swap(&b); }
+  inline void Swap(global_settings* PROTOBUF_NONNULL other) {
+    if (other == this) return;
+    if (::google::protobuf::internal::CanUseInternalSwap(GetArena(), other->GetArena())) {
+      InternalSwap(other);
+    } else {
+      ::google::protobuf::internal::GenericSwap(this, other);
+    }
+  }
+  void UnsafeArenaSwap(global_settings* PROTOBUF_NONNULL other) {
+    if (other == this) return;
+    ABSL_DCHECK(GetArena() == other->GetArena());
+    InternalSwap(other);
+  }
+
+  // implements Message ----------------------------------------------
+
+  global_settings* PROTOBUF_NONNULL New(::google::protobuf::Arena* PROTOBUF_NULLABLE arena = nullptr) const {
+    return ::google::protobuf::Message::DefaultConstruct<global_settings>(arena);
+  }
+  using ::google::protobuf::Message::CopyFrom;
+  void CopyFrom(const global_settings& from);
+  using ::google::protobuf::Message::MergeFrom;
+  void MergeFrom(const global_settings& from) { global_settings::MergeImpl(*this, from); }
+
+  private:
+  static void MergeImpl(::google::protobuf::MessageLite& to_msg,
+                        const ::google::protobuf::MessageLite& from_msg);
+
+  public:
+  bool IsInitialized() const {
+    return true;
+  }
+  ABSL_ATTRIBUTE_REINITIALIZES void Clear() PROTOBUF_FINAL;
+  #if defined(PROTOBUF_CUSTOM_VTABLE)
+  private:
+  static ::size_t ByteSizeLong(const ::google::protobuf::MessageLite& msg);
+  static ::uint8_t* PROTOBUF_NONNULL _InternalSerialize(
+      const ::google::protobuf::MessageLite& msg, ::uint8_t* PROTOBUF_NONNULL target,
+      ::google::protobuf::io::EpsCopyOutputStream* PROTOBUF_NONNULL stream);
+
+  public:
+  ::size_t ByteSizeLong() const { return ByteSizeLong(*this); }
+  ::uint8_t* PROTOBUF_NONNULL _InternalSerialize(
+      ::uint8_t* PROTOBUF_NONNULL target,
+      ::google::protobuf::io::EpsCopyOutputStream* PROTOBUF_NONNULL stream) const {
+    return _InternalSerialize(*this, target, stream);
+  }
+  #else   // PROTOBUF_CUSTOM_VTABLE
+  ::size_t ByteSizeLong() const final;
+  ::uint8_t* PROTOBUF_NONNULL _InternalSerialize(
+      ::uint8_t* PROTOBUF_NONNULL target,
+      ::google::protobuf::io::EpsCopyOutputStream* PROTOBUF_NONNULL stream) const final;
+  #endif  // PROTOBUF_CUSTOM_VTABLE
+  int GetCachedSize() const { return _impl_._cached_size_.Get(); }
+
+  private:
+  void SharedCtor(::google::protobuf::Arena* PROTOBUF_NULLABLE arena);
+  static void SharedDtor(MessageLite& self);
+  void InternalSwap(global_settings* PROTOBUF_NONNULL other);
+ private:
+  template <typename T>
+  friend ::absl::string_view(::google::protobuf::internal::GetAnyMessageName)();
+  static ::absl::string_view FullMessageName() { return "global_settings"; }
+
+ protected:
+  explicit global_settings(::google::protobuf::Arena* PROTOBUF_NULLABLE arena);
+  global_settings(::google::protobuf::Arena* PROTOBUF_NULLABLE arena, const global_settings& from);
+  global_settings(
+      ::google::protobuf::Arena* PROTOBUF_NULLABLE arena, global_settings&& from) noexcept
+      : global_settings(arena) {
+    *this = ::std::move(from);
+  }
+  const ::google::protobuf::internal::ClassData* PROTOBUF_NONNULL GetClassData() const PROTOBUF_FINAL;
+  static void* PROTOBUF_NONNULL PlacementNew_(
+      const void* PROTOBUF_NONNULL, void* PROTOBUF_NONNULL mem,
+      ::google::protobuf::Arena* PROTOBUF_NULLABLE arena);
+  static constexpr auto InternalNewImpl_();
+
+ public:
+  static constexpr auto InternalGenerateClassData_();
+
+  ::google::protobuf::Metadata GetMetadata() const;
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+  enum : int {
+    kTestArrFieldNumber = 7,
+    kTestRepeatedTimestampFieldNumber = 8,
+    kTestPlainEnumArrayFieldNumber = 10,
+    kTestMapIsFieldNumber = 11,
+    kTestMapSmFieldNumber = 12,
+    kI18NSystemAdminFieldNumber = 5,
+    kTestDuration1FieldNumber = 1,
+    kTestDuration2FieldNumber = 2,
+    kTestTimestampFieldNumber = 3,
+    kTestPlainMsgFieldNumber = 6,
+    kTimezoneBaseTimestampFieldNumber = 9,
+    kTestStandardMsgFieldNumber = 13,
+    kMailMaxCountPerMajorTypeFieldNumber = 4,
+  };
+  // repeated .event_rule_item test_arr = 7 [(.org.xresloader.field_separator) = "\n"];
+  int test_arr_size() const;
+  private:
+  int _internal_test_arr_size() const;
+
+  public:
+  void clear_test_arr() ;
+  ::event_rule_item* PROTOBUF_NONNULL mutable_test_arr(int index);
+  ::google::protobuf::RepeatedPtrField<::event_rule_item>* PROTOBUF_NONNULL mutable_test_arr();
+
+  private:
+  const ::google::protobuf::RepeatedPtrField<::event_rule_item>& _internal_test_arr() const;
+  ::google::protobuf::RepeatedPtrField<::event_rule_item>* PROTOBUF_NONNULL _internal_mutable_test_arr();
+  public:
+  const ::event_rule_item& test_arr(int index) const;
+  ::event_rule_item* PROTOBUF_NONNULL add_test_arr();
+  const ::google::protobuf::RepeatedPtrField<::event_rule_item>& test_arr() const;
+  // repeated .google.protobuf.Timestamp test_repeated_timestamp = 8 [(.org.xresloader.field_separator) = "\n"];
+  int test_repeated_timestamp_size() const;
+  private:
+  int _internal_test_repeated_timestamp_size() const;
+
+  public:
+  void clear_test_repeated_timestamp() ;
+  ::google::protobuf::Timestamp* PROTOBUF_NONNULL mutable_test_repeated_timestamp(int index);
+  ::google::protobuf::RepeatedPtrField<::google::protobuf::Timestamp>* PROTOBUF_NONNULL mutable_test_repeated_timestamp();
+
+  private:
+  const ::google::protobuf::RepeatedPtrField<::google::protobuf::Timestamp>& _internal_test_repeated_timestamp() const;
+  ::google::protobuf::RepeatedPtrField<::google::protobuf::Timestamp>* PROTOBUF_NONNULL _internal_mutable_test_repeated_timestamp();
+  public:
+  const ::google::protobuf::Timestamp& test_repeated_timestamp(int index) const;
+  ::google::protobuf::Timestamp* PROTOBUF_NONNULL add_test_repeated_timestamp();
+  const ::google::protobuf::RepeatedPtrField<::google::protobuf::Timestamp>& test_repeated_timestamp() const;
+  // repeated .cost_type test_plain_enum_array = 10;
+  int test_plain_enum_array_size() const;
+  private:
+  int _internal_test_plain_enum_array_size() const;
+
+  public:
+  void clear_test_plain_enum_array() ;
+  public:
+  ::cost_type test_plain_enum_array(int index) const;
+  void set_test_plain_enum_array(int index, ::cost_type value);
+  void add_test_plain_enum_array(::cost_type value);
+  const ::google::protobuf::RepeatedField<int>& test_plain_enum_array() const;
+  ::google::protobuf::RepeatedField<int>* PROTOBUF_NONNULL mutable_test_plain_enum_array();
+
+  private:
+  const ::google::protobuf::RepeatedField<int>& _internal_test_plain_enum_array() const;
+  ::google::protobuf::RepeatedField<int>* PROTOBUF_NONNULL _internal_mutable_test_plain_enum_array();
+
+  public:
+  // map<int32, string> test_map_is = 11;
+  int test_map_is_size() const;
+  private:
+  int _internal_test_map_is_size() const;
+
+  public:
+  void clear_test_map_is() ;
+  const ::google::protobuf::Map<::int32_t, std::string>& test_map_is() const;
+  ::google::protobuf::Map<::int32_t, std::string>* PROTOBUF_NONNULL mutable_test_map_is();
+
+  private:
+  const ::google::protobuf::Map<::int32_t, std::string>& _internal_test_map_is() const;
+  ::google::protobuf::Map<::int32_t, std::string>* PROTOBUF_NONNULL _internal_mutable_test_map_is();
+
+  public:
+  // map<string, .dep2_cfg> test_map_sm = 12 [(.org.xresloader.field_separator) = "|"];
+  int test_map_sm_size() const;
+  private:
+  int _internal_test_map_sm_size() const;
+
+  public:
+  void clear_test_map_sm() ;
+  const ::google::protobuf::Map<std::string, ::dep2_cfg>& test_map_sm() const;
+  ::google::protobuf::Map<std::string, ::dep2_cfg>* PROTOBUF_NONNULL mutable_test_map_sm();
+
+  private:
+  const ::google::protobuf::Map<std::string, ::dep2_cfg>& _internal_test_map_sm() const;
+  ::google::protobuf::Map<std::string, ::dep2_cfg>* PROTOBUF_NONNULL _internal_mutable_test_map_sm();
+
+  public:
+  // string i18n_system_admin = 5;
+  void clear_i18n_system_admin() ;
+  const std::string& i18n_system_admin() const;
+  template <typename Arg_ = const std::string&, typename... Args_>
+  void set_i18n_system_admin(Arg_&& arg, Args_... args);
+  std::string* PROTOBUF_NONNULL mutable_i18n_system_admin();
+  [[nodiscard]] std::string* PROTOBUF_NULLABLE release_i18n_system_admin();
+  void set_allocated_i18n_system_admin(std::string* PROTOBUF_NULLABLE value);
+
+  private:
+  const std::string& _internal_i18n_system_admin() const;
+  PROTOBUF_ALWAYS_INLINE void _internal_set_i18n_system_admin(const std::string& value);
+  std::string* PROTOBUF_NONNULL _internal_mutable_i18n_system_admin();
+
+  public:
+  // .google.protobuf.Duration test_duration1 = 1;
+  bool has_test_duration1() const;
+  void clear_test_duration1() ;
+  const ::google::protobuf::Duration& test_duration1() const;
+  [[nodiscard]] ::google::protobuf::Duration* PROTOBUF_NULLABLE release_test_duration1();
+  ::google::protobuf::Duration* PROTOBUF_NONNULL mutable_test_duration1();
+  void set_allocated_test_duration1(::google::protobuf::Duration* PROTOBUF_NULLABLE value);
+  void unsafe_arena_set_allocated_test_duration1(::google::protobuf::Duration* PROTOBUF_NULLABLE value);
+  ::google::protobuf::Duration* PROTOBUF_NULLABLE unsafe_arena_release_test_duration1();
+
+  private:
+  const ::google::protobuf::Duration& _internal_test_duration1() const;
+  ::google::protobuf::Duration* PROTOBUF_NONNULL _internal_mutable_test_duration1();
+
+  public:
+  // .google.protobuf.Duration test_duration2 = 2;
+  bool has_test_duration2() const;
+  void clear_test_duration2() ;
+  const ::google::protobuf::Duration& test_duration2() const;
+  [[nodiscard]] ::google::protobuf::Duration* PROTOBUF_NULLABLE release_test_duration2();
+  ::google::protobuf::Duration* PROTOBUF_NONNULL mutable_test_duration2();
+  void set_allocated_test_duration2(::google::protobuf::Duration* PROTOBUF_NULLABLE value);
+  void unsafe_arena_set_allocated_test_duration2(::google::protobuf::Duration* PROTOBUF_NULLABLE value);
+  ::google::protobuf::Duration* PROTOBUF_NULLABLE unsafe_arena_release_test_duration2();
+
+  private:
+  const ::google::protobuf::Duration& _internal_test_duration2() const;
+  ::google::protobuf::Duration* PROTOBUF_NONNULL _internal_mutable_test_duration2();
+
+  public:
+  // .google.protobuf.Timestamp test_timestamp = 3;
+  bool has_test_timestamp() const;
+  void clear_test_timestamp() ;
+  const ::google::protobuf::Timestamp& test_timestamp() const;
+  [[nodiscard]] ::google::protobuf::Timestamp* PROTOBUF_NULLABLE release_test_timestamp();
+  ::google::protobuf::Timestamp* PROTOBUF_NONNULL mutable_test_timestamp();
+  void set_allocated_test_timestamp(::google::protobuf::Timestamp* PROTOBUF_NULLABLE value);
+  void unsafe_arena_set_allocated_test_timestamp(::google::protobuf::Timestamp* PROTOBUF_NULLABLE value);
+  ::google::protobuf::Timestamp* PROTOBUF_NULLABLE unsafe_arena_release_test_timestamp();
+
+  private:
+  const ::google::protobuf::Timestamp& _internal_test_timestamp() const;
+  ::google::protobuf::Timestamp* PROTOBUF_NONNULL _internal_mutable_test_timestamp();
+
+  public:
+  // .test_msg_verifier test_plain_msg = 6 [(.org.xresloader.field_separator) = "&"];
+  bool has_test_plain_msg() const;
+  void clear_test_plain_msg() ;
+  const ::test_msg_verifier& test_plain_msg() const;
+  [[nodiscard]] ::test_msg_verifier* PROTOBUF_NULLABLE release_test_plain_msg();
+  ::test_msg_verifier* PROTOBUF_NONNULL mutable_test_plain_msg();
+  void set_allocated_test_plain_msg(::test_msg_verifier* PROTOBUF_NULLABLE value);
+  void unsafe_arena_set_allocated_test_plain_msg(::test_msg_verifier* PROTOBUF_NULLABLE value);
+  ::test_msg_verifier* PROTOBUF_NULLABLE unsafe_arena_release_test_plain_msg();
+
+  private:
+  const ::test_msg_verifier& _internal_test_plain_msg() const;
+  ::test_msg_verifier* PROTOBUF_NONNULL _internal_mutable_test_plain_msg();
+
+  public:
+  // .google.protobuf.Timestamp timezone_base_timestamp = 9;
+  bool has_timezone_base_timestamp() const;
+  void clear_timezone_base_timestamp() ;
+  const ::google::protobuf::Timestamp& timezone_base_timestamp() const;
+  [[nodiscard]] ::google::protobuf::Timestamp* PROTOBUF_NULLABLE release_timezone_base_timestamp();
+  ::google::protobuf::Timestamp* PROTOBUF_NONNULL mutable_timezone_base_timestamp();
+  void set_allocated_timezone_base_timestamp(::google::protobuf::Timestamp* PROTOBUF_NULLABLE value);
+  void unsafe_arena_set_allocated_timezone_base_timestamp(::google::protobuf::Timestamp* PROTOBUF_NULLABLE value);
+  ::google::protobuf::Timestamp* PROTOBUF_NULLABLE unsafe_arena_release_timezone_base_timestamp();
+
+  private:
+  const ::google::protobuf::Timestamp& _internal_timezone_base_timestamp() const;
+  ::google::protobuf::Timestamp* PROTOBUF_NONNULL _internal_mutable_timezone_base_timestamp();
+
+  public:
+  // .dep2_cfg test_standard_msg = 13;
+  bool has_test_standard_msg() const;
+  void clear_test_standard_msg() ;
+  const ::dep2_cfg& test_standard_msg() const;
+  [[nodiscard]] ::dep2_cfg* PROTOBUF_NULLABLE release_test_standard_msg();
+  ::dep2_cfg* PROTOBUF_NONNULL mutable_test_standard_msg();
+  void set_allocated_test_standard_msg(::dep2_cfg* PROTOBUF_NULLABLE value);
+  void unsafe_arena_set_allocated_test_standard_msg(::dep2_cfg* PROTOBUF_NULLABLE value);
+  ::dep2_cfg* PROTOBUF_NULLABLE unsafe_arena_release_test_standard_msg();
+
+  private:
+  const ::dep2_cfg& _internal_test_standard_msg() const;
+  ::dep2_cfg* PROTOBUF_NONNULL _internal_mutable_test_standard_msg();
+
+  public:
+  // int32 mail_max_count_per_major_type = 4;
+  void clear_mail_max_count_per_major_type() ;
+  ::int32_t mail_max_count_per_major_type() const;
+  void set_mail_max_count_per_major_type(::int32_t value);
+
+  private:
+  ::int32_t _internal_mail_max_count_per_major_type() const;
+  void _internal_set_mail_max_count_per_major_type(::int32_t value);
+
+  public:
+  // @@protoc_insertion_point(class_scope:global_settings)
+ private:
+  class _Internal;
+  friend class ::google::protobuf::internal::TcParser;
+  static const ::google::protobuf::internal::TcParseTable<4, 13,
+                                   11, 71,
+                                   2>
+      _table_;
+
+  friend class ::google::protobuf::MessageLite;
+  friend class ::google::protobuf::Arena;
+  template <typename T>
+  friend class ::google::protobuf::Arena::InternalHelper;
+  using InternalArenaConstructable_ = void;
+  using DestructorSkippable_ = void;
+  struct Impl_ {
+    inline explicit constexpr Impl_(::google::protobuf::internal::ConstantInitialized) noexcept;
+    inline explicit Impl_(
+        ::google::protobuf::internal::InternalVisibility visibility,
+        ::google::protobuf::Arena* PROTOBUF_NULLABLE arena);
+    inline explicit Impl_(
+        ::google::protobuf::internal::InternalVisibility visibility,
+        ::google::protobuf::Arena* PROTOBUF_NULLABLE arena, const Impl_& from,
+        const global_settings& from_msg);
+    ::google::protobuf::internal::HasBits<1> _has_bits_;
+    ::google::protobuf::internal::CachedSize _cached_size_;
+    ::google::protobuf::RepeatedPtrField< ::event_rule_item > test_arr_;
+    ::google::protobuf::RepeatedPtrField< ::google::protobuf::Timestamp > test_repeated_timestamp_;
+    ::google::protobuf::RepeatedField<int> test_plain_enum_array_;
+    ::google::protobuf::internal::CachedSize _test_plain_enum_array_cached_byte_size_;
+    ::google::protobuf::internal::MapField<global_settings_TestMapIsEntry_DoNotUse, ::int32_t, std::string,
+                      ::google::protobuf::internal::WireFormatLite::TYPE_INT32,
+                      ::google::protobuf::internal::WireFormatLite::TYPE_STRING>
+        test_map_is_;
+    ::google::protobuf::internal::MapField<global_settings_TestMapSmEntry_DoNotUse, std::string, ::dep2_cfg,
+                      ::google::protobuf::internal::WireFormatLite::TYPE_STRING,
+                      ::google::protobuf::internal::WireFormatLite::TYPE_MESSAGE>
+        test_map_sm_;
+    ::google::protobuf::internal::ArenaStringPtr i18n_system_admin_;
+    ::google::protobuf::Duration* PROTOBUF_NULLABLE test_duration1_;
+    ::google::protobuf::Duration* PROTOBUF_NULLABLE test_duration2_;
+    ::google::protobuf::Timestamp* PROTOBUF_NULLABLE test_timestamp_;
+    ::test_msg_verifier* PROTOBUF_NULLABLE test_plain_msg_;
+    ::google::protobuf::Timestamp* PROTOBUF_NULLABLE timezone_base_timestamp_;
+    ::dep2_cfg* PROTOBUF_NULLABLE test_standard_msg_;
+    ::int32_t mail_max_count_per_major_type_;
+    PROTOBUF_TSAN_DECLARE_MEMBER
+  };
+  union { Impl_ _impl_; };
+  friend struct ::TableStruct_kind_2eproto;
+};
+
+extern const ::google::protobuf::internal::ClassDataFull global_settings_class_data_;
 // -------------------------------------------------------------------
 
 class arr_in_arr_test_nested_message final : public ::google::protobuf::Message
@@ -9085,6 +9585,862 @@ inline ::int32_t field_alias_message::_internal_value() const {
 inline void field_alias_message::_internal_set_value(::int32_t value) {
   ::google::protobuf::internal::TSanWrite(&_impl_);
   _impl_.value_ = value;
+}
+
+// -------------------------------------------------------------------
+
+// -------------------------------------------------------------------
+
+// -------------------------------------------------------------------
+
+// global_settings
+
+// .google.protobuf.Duration test_duration1 = 1;
+inline bool global_settings::has_test_duration1() const {
+  bool value = (_impl_._has_bits_[0] & 0x00000002u) != 0;
+  PROTOBUF_ASSUME(!value || _impl_.test_duration1_ != nullptr);
+  return value;
+}
+inline const ::google::protobuf::Duration& global_settings::_internal_test_duration1() const {
+  ::google::protobuf::internal::TSanRead(&_impl_);
+  const ::google::protobuf::Duration* p = _impl_.test_duration1_;
+  return p != nullptr ? *p : reinterpret_cast<const ::google::protobuf::Duration&>(::google::protobuf::_Duration_default_instance_);
+}
+inline const ::google::protobuf::Duration& global_settings::test_duration1() const ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  // @@protoc_insertion_point(field_get:global_settings.test_duration1)
+  return _internal_test_duration1();
+}
+inline void global_settings::unsafe_arena_set_allocated_test_duration1(
+    ::google::protobuf::Duration* PROTOBUF_NULLABLE value) {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  if (GetArena() == nullptr) {
+    delete reinterpret_cast<::google::protobuf::MessageLite*>(_impl_.test_duration1_);
+  }
+  _impl_.test_duration1_ = reinterpret_cast<::google::protobuf::Duration*>(value);
+  if (value != nullptr) {
+    _impl_._has_bits_[0] |= 0x00000002u;
+  } else {
+    _impl_._has_bits_[0] &= ~0x00000002u;
+  }
+  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:global_settings.test_duration1)
+}
+inline ::google::protobuf::Duration* PROTOBUF_NULLABLE global_settings::release_test_duration1() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+
+  _impl_._has_bits_[0] &= ~0x00000002u;
+  ::google::protobuf::Duration* released = _impl_.test_duration1_;
+  _impl_.test_duration1_ = nullptr;
+  if (::google::protobuf::internal::DebugHardenForceCopyInRelease()) {
+    auto* old = reinterpret_cast<::google::protobuf::MessageLite*>(released);
+    released = ::google::protobuf::internal::DuplicateIfNonNull(released);
+    if (GetArena() == nullptr) {
+      delete old;
+    }
+  } else {
+    if (GetArena() != nullptr) {
+      released = ::google::protobuf::internal::DuplicateIfNonNull(released);
+    }
+  }
+  return released;
+}
+inline ::google::protobuf::Duration* PROTOBUF_NULLABLE global_settings::unsafe_arena_release_test_duration1() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  // @@protoc_insertion_point(field_release:global_settings.test_duration1)
+
+  _impl_._has_bits_[0] &= ~0x00000002u;
+  ::google::protobuf::Duration* temp = _impl_.test_duration1_;
+  _impl_.test_duration1_ = nullptr;
+  return temp;
+}
+inline ::google::protobuf::Duration* PROTOBUF_NONNULL global_settings::_internal_mutable_test_duration1() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  if (_impl_.test_duration1_ == nullptr) {
+    auto* p = ::google::protobuf::Message::DefaultConstruct<::google::protobuf::Duration>(GetArena());
+    _impl_.test_duration1_ = reinterpret_cast<::google::protobuf::Duration*>(p);
+  }
+  return _impl_.test_duration1_;
+}
+inline ::google::protobuf::Duration* PROTOBUF_NONNULL global_settings::mutable_test_duration1()
+    ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  _impl_._has_bits_[0] |= 0x00000002u;
+  ::google::protobuf::Duration* _msg = _internal_mutable_test_duration1();
+  // @@protoc_insertion_point(field_mutable:global_settings.test_duration1)
+  return _msg;
+}
+inline void global_settings::set_allocated_test_duration1(::google::protobuf::Duration* PROTOBUF_NULLABLE value) {
+  ::google::protobuf::Arena* message_arena = GetArena();
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  if (message_arena == nullptr) {
+    delete reinterpret_cast<::google::protobuf::MessageLite*>(_impl_.test_duration1_);
+  }
+
+  if (value != nullptr) {
+    ::google::protobuf::Arena* submessage_arena = reinterpret_cast<::google::protobuf::Message*>(value)->GetArena();
+    if (message_arena != submessage_arena) {
+      value = ::google::protobuf::internal::GetOwnedMessage(message_arena, value, submessage_arena);
+    }
+    _impl_._has_bits_[0] |= 0x00000002u;
+  } else {
+    _impl_._has_bits_[0] &= ~0x00000002u;
+  }
+
+  _impl_.test_duration1_ = reinterpret_cast<::google::protobuf::Duration*>(value);
+  // @@protoc_insertion_point(field_set_allocated:global_settings.test_duration1)
+}
+
+// .google.protobuf.Duration test_duration2 = 2;
+inline bool global_settings::has_test_duration2() const {
+  bool value = (_impl_._has_bits_[0] & 0x00000004u) != 0;
+  PROTOBUF_ASSUME(!value || _impl_.test_duration2_ != nullptr);
+  return value;
+}
+inline const ::google::protobuf::Duration& global_settings::_internal_test_duration2() const {
+  ::google::protobuf::internal::TSanRead(&_impl_);
+  const ::google::protobuf::Duration* p = _impl_.test_duration2_;
+  return p != nullptr ? *p : reinterpret_cast<const ::google::protobuf::Duration&>(::google::protobuf::_Duration_default_instance_);
+}
+inline const ::google::protobuf::Duration& global_settings::test_duration2() const ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  // @@protoc_insertion_point(field_get:global_settings.test_duration2)
+  return _internal_test_duration2();
+}
+inline void global_settings::unsafe_arena_set_allocated_test_duration2(
+    ::google::protobuf::Duration* PROTOBUF_NULLABLE value) {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  if (GetArena() == nullptr) {
+    delete reinterpret_cast<::google::protobuf::MessageLite*>(_impl_.test_duration2_);
+  }
+  _impl_.test_duration2_ = reinterpret_cast<::google::protobuf::Duration*>(value);
+  if (value != nullptr) {
+    _impl_._has_bits_[0] |= 0x00000004u;
+  } else {
+    _impl_._has_bits_[0] &= ~0x00000004u;
+  }
+  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:global_settings.test_duration2)
+}
+inline ::google::protobuf::Duration* PROTOBUF_NULLABLE global_settings::release_test_duration2() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+
+  _impl_._has_bits_[0] &= ~0x00000004u;
+  ::google::protobuf::Duration* released = _impl_.test_duration2_;
+  _impl_.test_duration2_ = nullptr;
+  if (::google::protobuf::internal::DebugHardenForceCopyInRelease()) {
+    auto* old = reinterpret_cast<::google::protobuf::MessageLite*>(released);
+    released = ::google::protobuf::internal::DuplicateIfNonNull(released);
+    if (GetArena() == nullptr) {
+      delete old;
+    }
+  } else {
+    if (GetArena() != nullptr) {
+      released = ::google::protobuf::internal::DuplicateIfNonNull(released);
+    }
+  }
+  return released;
+}
+inline ::google::protobuf::Duration* PROTOBUF_NULLABLE global_settings::unsafe_arena_release_test_duration2() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  // @@protoc_insertion_point(field_release:global_settings.test_duration2)
+
+  _impl_._has_bits_[0] &= ~0x00000004u;
+  ::google::protobuf::Duration* temp = _impl_.test_duration2_;
+  _impl_.test_duration2_ = nullptr;
+  return temp;
+}
+inline ::google::protobuf::Duration* PROTOBUF_NONNULL global_settings::_internal_mutable_test_duration2() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  if (_impl_.test_duration2_ == nullptr) {
+    auto* p = ::google::protobuf::Message::DefaultConstruct<::google::protobuf::Duration>(GetArena());
+    _impl_.test_duration2_ = reinterpret_cast<::google::protobuf::Duration*>(p);
+  }
+  return _impl_.test_duration2_;
+}
+inline ::google::protobuf::Duration* PROTOBUF_NONNULL global_settings::mutable_test_duration2()
+    ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  _impl_._has_bits_[0] |= 0x00000004u;
+  ::google::protobuf::Duration* _msg = _internal_mutable_test_duration2();
+  // @@protoc_insertion_point(field_mutable:global_settings.test_duration2)
+  return _msg;
+}
+inline void global_settings::set_allocated_test_duration2(::google::protobuf::Duration* PROTOBUF_NULLABLE value) {
+  ::google::protobuf::Arena* message_arena = GetArena();
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  if (message_arena == nullptr) {
+    delete reinterpret_cast<::google::protobuf::MessageLite*>(_impl_.test_duration2_);
+  }
+
+  if (value != nullptr) {
+    ::google::protobuf::Arena* submessage_arena = reinterpret_cast<::google::protobuf::Message*>(value)->GetArena();
+    if (message_arena != submessage_arena) {
+      value = ::google::protobuf::internal::GetOwnedMessage(message_arena, value, submessage_arena);
+    }
+    _impl_._has_bits_[0] |= 0x00000004u;
+  } else {
+    _impl_._has_bits_[0] &= ~0x00000004u;
+  }
+
+  _impl_.test_duration2_ = reinterpret_cast<::google::protobuf::Duration*>(value);
+  // @@protoc_insertion_point(field_set_allocated:global_settings.test_duration2)
+}
+
+// .google.protobuf.Timestamp test_timestamp = 3;
+inline bool global_settings::has_test_timestamp() const {
+  bool value = (_impl_._has_bits_[0] & 0x00000008u) != 0;
+  PROTOBUF_ASSUME(!value || _impl_.test_timestamp_ != nullptr);
+  return value;
+}
+inline const ::google::protobuf::Timestamp& global_settings::_internal_test_timestamp() const {
+  ::google::protobuf::internal::TSanRead(&_impl_);
+  const ::google::protobuf::Timestamp* p = _impl_.test_timestamp_;
+  return p != nullptr ? *p : reinterpret_cast<const ::google::protobuf::Timestamp&>(::google::protobuf::_Timestamp_default_instance_);
+}
+inline const ::google::protobuf::Timestamp& global_settings::test_timestamp() const ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  // @@protoc_insertion_point(field_get:global_settings.test_timestamp)
+  return _internal_test_timestamp();
+}
+inline void global_settings::unsafe_arena_set_allocated_test_timestamp(
+    ::google::protobuf::Timestamp* PROTOBUF_NULLABLE value) {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  if (GetArena() == nullptr) {
+    delete reinterpret_cast<::google::protobuf::MessageLite*>(_impl_.test_timestamp_);
+  }
+  _impl_.test_timestamp_ = reinterpret_cast<::google::protobuf::Timestamp*>(value);
+  if (value != nullptr) {
+    _impl_._has_bits_[0] |= 0x00000008u;
+  } else {
+    _impl_._has_bits_[0] &= ~0x00000008u;
+  }
+  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:global_settings.test_timestamp)
+}
+inline ::google::protobuf::Timestamp* PROTOBUF_NULLABLE global_settings::release_test_timestamp() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+
+  _impl_._has_bits_[0] &= ~0x00000008u;
+  ::google::protobuf::Timestamp* released = _impl_.test_timestamp_;
+  _impl_.test_timestamp_ = nullptr;
+  if (::google::protobuf::internal::DebugHardenForceCopyInRelease()) {
+    auto* old = reinterpret_cast<::google::protobuf::MessageLite*>(released);
+    released = ::google::protobuf::internal::DuplicateIfNonNull(released);
+    if (GetArena() == nullptr) {
+      delete old;
+    }
+  } else {
+    if (GetArena() != nullptr) {
+      released = ::google::protobuf::internal::DuplicateIfNonNull(released);
+    }
+  }
+  return released;
+}
+inline ::google::protobuf::Timestamp* PROTOBUF_NULLABLE global_settings::unsafe_arena_release_test_timestamp() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  // @@protoc_insertion_point(field_release:global_settings.test_timestamp)
+
+  _impl_._has_bits_[0] &= ~0x00000008u;
+  ::google::protobuf::Timestamp* temp = _impl_.test_timestamp_;
+  _impl_.test_timestamp_ = nullptr;
+  return temp;
+}
+inline ::google::protobuf::Timestamp* PROTOBUF_NONNULL global_settings::_internal_mutable_test_timestamp() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  if (_impl_.test_timestamp_ == nullptr) {
+    auto* p = ::google::protobuf::Message::DefaultConstruct<::google::protobuf::Timestamp>(GetArena());
+    _impl_.test_timestamp_ = reinterpret_cast<::google::protobuf::Timestamp*>(p);
+  }
+  return _impl_.test_timestamp_;
+}
+inline ::google::protobuf::Timestamp* PROTOBUF_NONNULL global_settings::mutable_test_timestamp()
+    ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  _impl_._has_bits_[0] |= 0x00000008u;
+  ::google::protobuf::Timestamp* _msg = _internal_mutable_test_timestamp();
+  // @@protoc_insertion_point(field_mutable:global_settings.test_timestamp)
+  return _msg;
+}
+inline void global_settings::set_allocated_test_timestamp(::google::protobuf::Timestamp* PROTOBUF_NULLABLE value) {
+  ::google::protobuf::Arena* message_arena = GetArena();
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  if (message_arena == nullptr) {
+    delete reinterpret_cast<::google::protobuf::MessageLite*>(_impl_.test_timestamp_);
+  }
+
+  if (value != nullptr) {
+    ::google::protobuf::Arena* submessage_arena = reinterpret_cast<::google::protobuf::Message*>(value)->GetArena();
+    if (message_arena != submessage_arena) {
+      value = ::google::protobuf::internal::GetOwnedMessage(message_arena, value, submessage_arena);
+    }
+    _impl_._has_bits_[0] |= 0x00000008u;
+  } else {
+    _impl_._has_bits_[0] &= ~0x00000008u;
+  }
+
+  _impl_.test_timestamp_ = reinterpret_cast<::google::protobuf::Timestamp*>(value);
+  // @@protoc_insertion_point(field_set_allocated:global_settings.test_timestamp)
+}
+
+// int32 mail_max_count_per_major_type = 4;
+inline void global_settings::clear_mail_max_count_per_major_type() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.mail_max_count_per_major_type_ = 0;
+  _impl_._has_bits_[0] &= ~0x00000080u;
+}
+inline ::int32_t global_settings::mail_max_count_per_major_type() const {
+  // @@protoc_insertion_point(field_get:global_settings.mail_max_count_per_major_type)
+  return _internal_mail_max_count_per_major_type();
+}
+inline void global_settings::set_mail_max_count_per_major_type(::int32_t value) {
+  _internal_set_mail_max_count_per_major_type(value);
+  _impl_._has_bits_[0] |= 0x00000080u;
+  // @@protoc_insertion_point(field_set:global_settings.mail_max_count_per_major_type)
+}
+inline ::int32_t global_settings::_internal_mail_max_count_per_major_type() const {
+  ::google::protobuf::internal::TSanRead(&_impl_);
+  return _impl_.mail_max_count_per_major_type_;
+}
+inline void global_settings::_internal_set_mail_max_count_per_major_type(::int32_t value) {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.mail_max_count_per_major_type_ = value;
+}
+
+// string i18n_system_admin = 5;
+inline void global_settings::clear_i18n_system_admin() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.i18n_system_admin_.ClearToEmpty();
+  _impl_._has_bits_[0] &= ~0x00000001u;
+}
+inline const std::string& global_settings::i18n_system_admin() const
+    ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  // @@protoc_insertion_point(field_get:global_settings.i18n_system_admin)
+  return _internal_i18n_system_admin();
+}
+template <typename Arg_, typename... Args_>
+PROTOBUF_ALWAYS_INLINE void global_settings::set_i18n_system_admin(Arg_&& arg, Args_... args) {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_._has_bits_[0] |= 0x00000001u;
+  _impl_.i18n_system_admin_.Set(static_cast<Arg_&&>(arg), args..., GetArena());
+  // @@protoc_insertion_point(field_set:global_settings.i18n_system_admin)
+}
+inline std::string* PROTOBUF_NONNULL global_settings::mutable_i18n_system_admin()
+    ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  std::string* _s = _internal_mutable_i18n_system_admin();
+  // @@protoc_insertion_point(field_mutable:global_settings.i18n_system_admin)
+  return _s;
+}
+inline const std::string& global_settings::_internal_i18n_system_admin() const {
+  ::google::protobuf::internal::TSanRead(&_impl_);
+  return _impl_.i18n_system_admin_.Get();
+}
+inline void global_settings::_internal_set_i18n_system_admin(const std::string& value) {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_._has_bits_[0] |= 0x00000001u;
+  _impl_.i18n_system_admin_.Set(value, GetArena());
+}
+inline std::string* PROTOBUF_NONNULL global_settings::_internal_mutable_i18n_system_admin() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_._has_bits_[0] |= 0x00000001u;
+  return _impl_.i18n_system_admin_.Mutable( GetArena());
+}
+inline std::string* PROTOBUF_NULLABLE global_settings::release_i18n_system_admin() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  // @@protoc_insertion_point(field_release:global_settings.i18n_system_admin)
+  if ((_impl_._has_bits_[0] & 0x00000001u) == 0) {
+    return nullptr;
+  }
+  _impl_._has_bits_[0] &= ~0x00000001u;
+  auto* released = _impl_.i18n_system_admin_.Release();
+  if (::google::protobuf::internal::DebugHardenForceCopyDefaultString()) {
+    _impl_.i18n_system_admin_.Set("", GetArena());
+  }
+  return released;
+}
+inline void global_settings::set_allocated_i18n_system_admin(std::string* PROTOBUF_NULLABLE value) {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  if (value != nullptr) {
+    _impl_._has_bits_[0] |= 0x00000001u;
+  } else {
+    _impl_._has_bits_[0] &= ~0x00000001u;
+  }
+  _impl_.i18n_system_admin_.SetAllocated(value, GetArena());
+  if (::google::protobuf::internal::DebugHardenForceCopyDefaultString() && _impl_.i18n_system_admin_.IsDefault()) {
+    _impl_.i18n_system_admin_.Set("", GetArena());
+  }
+  // @@protoc_insertion_point(field_set_allocated:global_settings.i18n_system_admin)
+}
+
+// .test_msg_verifier test_plain_msg = 6 [(.org.xresloader.field_separator) = "&"];
+inline bool global_settings::has_test_plain_msg() const {
+  bool value = (_impl_._has_bits_[0] & 0x00000010u) != 0;
+  PROTOBUF_ASSUME(!value || _impl_.test_plain_msg_ != nullptr);
+  return value;
+}
+inline void global_settings::clear_test_plain_msg() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  if (_impl_.test_plain_msg_ != nullptr) _impl_.test_plain_msg_->Clear();
+  _impl_._has_bits_[0] &= ~0x00000010u;
+}
+inline const ::test_msg_verifier& global_settings::_internal_test_plain_msg() const {
+  ::google::protobuf::internal::TSanRead(&_impl_);
+  const ::test_msg_verifier* p = _impl_.test_plain_msg_;
+  return p != nullptr ? *p : reinterpret_cast<const ::test_msg_verifier&>(::_test_msg_verifier_default_instance_);
+}
+inline const ::test_msg_verifier& global_settings::test_plain_msg() const ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  // @@protoc_insertion_point(field_get:global_settings.test_plain_msg)
+  return _internal_test_plain_msg();
+}
+inline void global_settings::unsafe_arena_set_allocated_test_plain_msg(
+    ::test_msg_verifier* PROTOBUF_NULLABLE value) {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  if (GetArena() == nullptr) {
+    delete reinterpret_cast<::google::protobuf::MessageLite*>(_impl_.test_plain_msg_);
+  }
+  _impl_.test_plain_msg_ = reinterpret_cast<::test_msg_verifier*>(value);
+  if (value != nullptr) {
+    _impl_._has_bits_[0] |= 0x00000010u;
+  } else {
+    _impl_._has_bits_[0] &= ~0x00000010u;
+  }
+  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:global_settings.test_plain_msg)
+}
+inline ::test_msg_verifier* PROTOBUF_NULLABLE global_settings::release_test_plain_msg() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+
+  _impl_._has_bits_[0] &= ~0x00000010u;
+  ::test_msg_verifier* released = _impl_.test_plain_msg_;
+  _impl_.test_plain_msg_ = nullptr;
+  if (::google::protobuf::internal::DebugHardenForceCopyInRelease()) {
+    auto* old = reinterpret_cast<::google::protobuf::MessageLite*>(released);
+    released = ::google::protobuf::internal::DuplicateIfNonNull(released);
+    if (GetArena() == nullptr) {
+      delete old;
+    }
+  } else {
+    if (GetArena() != nullptr) {
+      released = ::google::protobuf::internal::DuplicateIfNonNull(released);
+    }
+  }
+  return released;
+}
+inline ::test_msg_verifier* PROTOBUF_NULLABLE global_settings::unsafe_arena_release_test_plain_msg() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  // @@protoc_insertion_point(field_release:global_settings.test_plain_msg)
+
+  _impl_._has_bits_[0] &= ~0x00000010u;
+  ::test_msg_verifier* temp = _impl_.test_plain_msg_;
+  _impl_.test_plain_msg_ = nullptr;
+  return temp;
+}
+inline ::test_msg_verifier* PROTOBUF_NONNULL global_settings::_internal_mutable_test_plain_msg() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  if (_impl_.test_plain_msg_ == nullptr) {
+    auto* p = ::google::protobuf::Message::DefaultConstruct<::test_msg_verifier>(GetArena());
+    _impl_.test_plain_msg_ = reinterpret_cast<::test_msg_verifier*>(p);
+  }
+  return _impl_.test_plain_msg_;
+}
+inline ::test_msg_verifier* PROTOBUF_NONNULL global_settings::mutable_test_plain_msg()
+    ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  _impl_._has_bits_[0] |= 0x00000010u;
+  ::test_msg_verifier* _msg = _internal_mutable_test_plain_msg();
+  // @@protoc_insertion_point(field_mutable:global_settings.test_plain_msg)
+  return _msg;
+}
+inline void global_settings::set_allocated_test_plain_msg(::test_msg_verifier* PROTOBUF_NULLABLE value) {
+  ::google::protobuf::Arena* message_arena = GetArena();
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  if (message_arena == nullptr) {
+    delete reinterpret_cast<::google::protobuf::MessageLite*>(_impl_.test_plain_msg_);
+  }
+
+  if (value != nullptr) {
+    ::google::protobuf::Arena* submessage_arena = value->GetArena();
+    if (message_arena != submessage_arena) {
+      value = ::google::protobuf::internal::GetOwnedMessage(message_arena, value, submessage_arena);
+    }
+    _impl_._has_bits_[0] |= 0x00000010u;
+  } else {
+    _impl_._has_bits_[0] &= ~0x00000010u;
+  }
+
+  _impl_.test_plain_msg_ = reinterpret_cast<::test_msg_verifier*>(value);
+  // @@protoc_insertion_point(field_set_allocated:global_settings.test_plain_msg)
+}
+
+// repeated .event_rule_item test_arr = 7 [(.org.xresloader.field_separator) = "\n"];
+inline int global_settings::_internal_test_arr_size() const {
+  return _internal_test_arr().size();
+}
+inline int global_settings::test_arr_size() const {
+  return _internal_test_arr_size();
+}
+inline void global_settings::clear_test_arr() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.test_arr_.Clear();
+}
+inline ::event_rule_item* PROTOBUF_NONNULL global_settings::mutable_test_arr(int index)
+    ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  // @@protoc_insertion_point(field_mutable:global_settings.test_arr)
+  return _internal_mutable_test_arr()->Mutable(index);
+}
+inline ::google::protobuf::RepeatedPtrField<::event_rule_item>* PROTOBUF_NONNULL global_settings::mutable_test_arr()
+    ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  // @@protoc_insertion_point(field_mutable_list:global_settings.test_arr)
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  return _internal_mutable_test_arr();
+}
+inline const ::event_rule_item& global_settings::test_arr(int index) const
+    ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  // @@protoc_insertion_point(field_get:global_settings.test_arr)
+  return _internal_test_arr().Get(index);
+}
+inline ::event_rule_item* PROTOBUF_NONNULL global_settings::add_test_arr()
+    ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  ::event_rule_item* _add = _internal_mutable_test_arr()->Add();
+  // @@protoc_insertion_point(field_add:global_settings.test_arr)
+  return _add;
+}
+inline const ::google::protobuf::RepeatedPtrField<::event_rule_item>& global_settings::test_arr() const
+    ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  // @@protoc_insertion_point(field_list:global_settings.test_arr)
+  return _internal_test_arr();
+}
+inline const ::google::protobuf::RepeatedPtrField<::event_rule_item>&
+global_settings::_internal_test_arr() const {
+  ::google::protobuf::internal::TSanRead(&_impl_);
+  return _impl_.test_arr_;
+}
+inline ::google::protobuf::RepeatedPtrField<::event_rule_item>* PROTOBUF_NONNULL
+global_settings::_internal_mutable_test_arr() {
+  ::google::protobuf::internal::TSanRead(&_impl_);
+  return &_impl_.test_arr_;
+}
+
+// repeated .google.protobuf.Timestamp test_repeated_timestamp = 8 [(.org.xresloader.field_separator) = "\n"];
+inline int global_settings::_internal_test_repeated_timestamp_size() const {
+  return _internal_test_repeated_timestamp().size();
+}
+inline int global_settings::test_repeated_timestamp_size() const {
+  return _internal_test_repeated_timestamp_size();
+}
+inline ::google::protobuf::Timestamp* PROTOBUF_NONNULL global_settings::mutable_test_repeated_timestamp(int index)
+    ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  // @@protoc_insertion_point(field_mutable:global_settings.test_repeated_timestamp)
+  return _internal_mutable_test_repeated_timestamp()->Mutable(index);
+}
+inline ::google::protobuf::RepeatedPtrField<::google::protobuf::Timestamp>* PROTOBUF_NONNULL global_settings::mutable_test_repeated_timestamp()
+    ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  // @@protoc_insertion_point(field_mutable_list:global_settings.test_repeated_timestamp)
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  return _internal_mutable_test_repeated_timestamp();
+}
+inline const ::google::protobuf::Timestamp& global_settings::test_repeated_timestamp(int index) const
+    ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  // @@protoc_insertion_point(field_get:global_settings.test_repeated_timestamp)
+  return _internal_test_repeated_timestamp().Get(index);
+}
+inline ::google::protobuf::Timestamp* PROTOBUF_NONNULL global_settings::add_test_repeated_timestamp()
+    ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  ::google::protobuf::Timestamp* _add = _internal_mutable_test_repeated_timestamp()->Add();
+  // @@protoc_insertion_point(field_add:global_settings.test_repeated_timestamp)
+  return _add;
+}
+inline const ::google::protobuf::RepeatedPtrField<::google::protobuf::Timestamp>& global_settings::test_repeated_timestamp() const
+    ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  // @@protoc_insertion_point(field_list:global_settings.test_repeated_timestamp)
+  return _internal_test_repeated_timestamp();
+}
+inline const ::google::protobuf::RepeatedPtrField<::google::protobuf::Timestamp>&
+global_settings::_internal_test_repeated_timestamp() const {
+  ::google::protobuf::internal::TSanRead(&_impl_);
+  return _impl_.test_repeated_timestamp_;
+}
+inline ::google::protobuf::RepeatedPtrField<::google::protobuf::Timestamp>* PROTOBUF_NONNULL
+global_settings::_internal_mutable_test_repeated_timestamp() {
+  ::google::protobuf::internal::TSanRead(&_impl_);
+  return &_impl_.test_repeated_timestamp_;
+}
+
+// .google.protobuf.Timestamp timezone_base_timestamp = 9;
+inline bool global_settings::has_timezone_base_timestamp() const {
+  bool value = (_impl_._has_bits_[0] & 0x00000020u) != 0;
+  PROTOBUF_ASSUME(!value || _impl_.timezone_base_timestamp_ != nullptr);
+  return value;
+}
+inline const ::google::protobuf::Timestamp& global_settings::_internal_timezone_base_timestamp() const {
+  ::google::protobuf::internal::TSanRead(&_impl_);
+  const ::google::protobuf::Timestamp* p = _impl_.timezone_base_timestamp_;
+  return p != nullptr ? *p : reinterpret_cast<const ::google::protobuf::Timestamp&>(::google::protobuf::_Timestamp_default_instance_);
+}
+inline const ::google::protobuf::Timestamp& global_settings::timezone_base_timestamp() const ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  // @@protoc_insertion_point(field_get:global_settings.timezone_base_timestamp)
+  return _internal_timezone_base_timestamp();
+}
+inline void global_settings::unsafe_arena_set_allocated_timezone_base_timestamp(
+    ::google::protobuf::Timestamp* PROTOBUF_NULLABLE value) {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  if (GetArena() == nullptr) {
+    delete reinterpret_cast<::google::protobuf::MessageLite*>(_impl_.timezone_base_timestamp_);
+  }
+  _impl_.timezone_base_timestamp_ = reinterpret_cast<::google::protobuf::Timestamp*>(value);
+  if (value != nullptr) {
+    _impl_._has_bits_[0] |= 0x00000020u;
+  } else {
+    _impl_._has_bits_[0] &= ~0x00000020u;
+  }
+  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:global_settings.timezone_base_timestamp)
+}
+inline ::google::protobuf::Timestamp* PROTOBUF_NULLABLE global_settings::release_timezone_base_timestamp() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+
+  _impl_._has_bits_[0] &= ~0x00000020u;
+  ::google::protobuf::Timestamp* released = _impl_.timezone_base_timestamp_;
+  _impl_.timezone_base_timestamp_ = nullptr;
+  if (::google::protobuf::internal::DebugHardenForceCopyInRelease()) {
+    auto* old = reinterpret_cast<::google::protobuf::MessageLite*>(released);
+    released = ::google::protobuf::internal::DuplicateIfNonNull(released);
+    if (GetArena() == nullptr) {
+      delete old;
+    }
+  } else {
+    if (GetArena() != nullptr) {
+      released = ::google::protobuf::internal::DuplicateIfNonNull(released);
+    }
+  }
+  return released;
+}
+inline ::google::protobuf::Timestamp* PROTOBUF_NULLABLE global_settings::unsafe_arena_release_timezone_base_timestamp() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  // @@protoc_insertion_point(field_release:global_settings.timezone_base_timestamp)
+
+  _impl_._has_bits_[0] &= ~0x00000020u;
+  ::google::protobuf::Timestamp* temp = _impl_.timezone_base_timestamp_;
+  _impl_.timezone_base_timestamp_ = nullptr;
+  return temp;
+}
+inline ::google::protobuf::Timestamp* PROTOBUF_NONNULL global_settings::_internal_mutable_timezone_base_timestamp() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  if (_impl_.timezone_base_timestamp_ == nullptr) {
+    auto* p = ::google::protobuf::Message::DefaultConstruct<::google::protobuf::Timestamp>(GetArena());
+    _impl_.timezone_base_timestamp_ = reinterpret_cast<::google::protobuf::Timestamp*>(p);
+  }
+  return _impl_.timezone_base_timestamp_;
+}
+inline ::google::protobuf::Timestamp* PROTOBUF_NONNULL global_settings::mutable_timezone_base_timestamp()
+    ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  _impl_._has_bits_[0] |= 0x00000020u;
+  ::google::protobuf::Timestamp* _msg = _internal_mutable_timezone_base_timestamp();
+  // @@protoc_insertion_point(field_mutable:global_settings.timezone_base_timestamp)
+  return _msg;
+}
+inline void global_settings::set_allocated_timezone_base_timestamp(::google::protobuf::Timestamp* PROTOBUF_NULLABLE value) {
+  ::google::protobuf::Arena* message_arena = GetArena();
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  if (message_arena == nullptr) {
+    delete reinterpret_cast<::google::protobuf::MessageLite*>(_impl_.timezone_base_timestamp_);
+  }
+
+  if (value != nullptr) {
+    ::google::protobuf::Arena* submessage_arena = reinterpret_cast<::google::protobuf::Message*>(value)->GetArena();
+    if (message_arena != submessage_arena) {
+      value = ::google::protobuf::internal::GetOwnedMessage(message_arena, value, submessage_arena);
+    }
+    _impl_._has_bits_[0] |= 0x00000020u;
+  } else {
+    _impl_._has_bits_[0] &= ~0x00000020u;
+  }
+
+  _impl_.timezone_base_timestamp_ = reinterpret_cast<::google::protobuf::Timestamp*>(value);
+  // @@protoc_insertion_point(field_set_allocated:global_settings.timezone_base_timestamp)
+}
+
+// repeated .cost_type test_plain_enum_array = 10;
+inline int global_settings::_internal_test_plain_enum_array_size() const {
+  return _internal_test_plain_enum_array().size();
+}
+inline int global_settings::test_plain_enum_array_size() const {
+  return _internal_test_plain_enum_array_size();
+}
+inline void global_settings::clear_test_plain_enum_array() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.test_plain_enum_array_.Clear();
+}
+inline ::cost_type global_settings::test_plain_enum_array(int index) const {
+  // @@protoc_insertion_point(field_get:global_settings.test_plain_enum_array)
+  return static_cast<::cost_type>(_internal_test_plain_enum_array().Get(index));
+}
+inline void global_settings::set_test_plain_enum_array(int index, ::cost_type value) {
+  _internal_mutable_test_plain_enum_array()->Set(index, value);
+  // @@protoc_insertion_point(field_set:global_settings.test_plain_enum_array)
+}
+inline void global_settings::add_test_plain_enum_array(::cost_type value) {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _internal_mutable_test_plain_enum_array()->Add(value);
+  // @@protoc_insertion_point(field_add:global_settings.test_plain_enum_array)
+}
+inline const ::google::protobuf::RepeatedField<int>& global_settings::test_plain_enum_array() const
+    ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  // @@protoc_insertion_point(field_list:global_settings.test_plain_enum_array)
+  return _internal_test_plain_enum_array();
+}
+inline ::google::protobuf::RepeatedField<int>* PROTOBUF_NONNULL global_settings::mutable_test_plain_enum_array()
+    ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  // @@protoc_insertion_point(field_mutable_list:global_settings.test_plain_enum_array)
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  return _internal_mutable_test_plain_enum_array();
+}
+inline const ::google::protobuf::RepeatedField<int>& global_settings::_internal_test_plain_enum_array()
+    const {
+  ::google::protobuf::internal::TSanRead(&_impl_);
+  return _impl_.test_plain_enum_array_;
+}
+inline ::google::protobuf::RepeatedField<int>* PROTOBUF_NONNULL
+global_settings::_internal_mutable_test_plain_enum_array() {
+  ::google::protobuf::internal::TSanRead(&_impl_);
+  return &_impl_.test_plain_enum_array_;
+}
+
+// map<int32, string> test_map_is = 11;
+inline int global_settings::_internal_test_map_is_size() const {
+  return _internal_test_map_is().size();
+}
+inline int global_settings::test_map_is_size() const {
+  return _internal_test_map_is_size();
+}
+inline void global_settings::clear_test_map_is() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.test_map_is_.Clear();
+}
+inline const ::google::protobuf::Map<::int32_t, std::string>& global_settings::_internal_test_map_is() const {
+  ::google::protobuf::internal::TSanRead(&_impl_);
+  return _impl_.test_map_is_.GetMap();
+}
+inline const ::google::protobuf::Map<::int32_t, std::string>& global_settings::test_map_is() const ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  // @@protoc_insertion_point(field_map:global_settings.test_map_is)
+  return _internal_test_map_is();
+}
+inline ::google::protobuf::Map<::int32_t, std::string>* PROTOBUF_NONNULL global_settings::_internal_mutable_test_map_is() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  return _impl_.test_map_is_.MutableMap();
+}
+inline ::google::protobuf::Map<::int32_t, std::string>* PROTOBUF_NONNULL global_settings::mutable_test_map_is()
+    ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  // @@protoc_insertion_point(field_mutable_map:global_settings.test_map_is)
+  return _internal_mutable_test_map_is();
+}
+
+// map<string, .dep2_cfg> test_map_sm = 12 [(.org.xresloader.field_separator) = "|"];
+inline int global_settings::_internal_test_map_sm_size() const {
+  return _internal_test_map_sm().size();
+}
+inline int global_settings::test_map_sm_size() const {
+  return _internal_test_map_sm_size();
+}
+inline const ::google::protobuf::Map<std::string, ::dep2_cfg>& global_settings::_internal_test_map_sm() const {
+  ::google::protobuf::internal::TSanRead(&_impl_);
+  return _impl_.test_map_sm_.GetMap();
+}
+inline const ::google::protobuf::Map<std::string, ::dep2_cfg>& global_settings::test_map_sm() const ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  // @@protoc_insertion_point(field_map:global_settings.test_map_sm)
+  return _internal_test_map_sm();
+}
+inline ::google::protobuf::Map<std::string, ::dep2_cfg>* PROTOBUF_NONNULL global_settings::_internal_mutable_test_map_sm() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  return _impl_.test_map_sm_.MutableMap();
+}
+inline ::google::protobuf::Map<std::string, ::dep2_cfg>* PROTOBUF_NONNULL global_settings::mutable_test_map_sm()
+    ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  // @@protoc_insertion_point(field_mutable_map:global_settings.test_map_sm)
+  return _internal_mutable_test_map_sm();
+}
+
+// .dep2_cfg test_standard_msg = 13;
+inline bool global_settings::has_test_standard_msg() const {
+  bool value = (_impl_._has_bits_[0] & 0x00000040u) != 0;
+  PROTOBUF_ASSUME(!value || _impl_.test_standard_msg_ != nullptr);
+  return value;
+}
+inline const ::dep2_cfg& global_settings::_internal_test_standard_msg() const {
+  ::google::protobuf::internal::TSanRead(&_impl_);
+  const ::dep2_cfg* p = _impl_.test_standard_msg_;
+  return p != nullptr ? *p : reinterpret_cast<const ::dep2_cfg&>(::_dep2_cfg_default_instance_);
+}
+inline const ::dep2_cfg& global_settings::test_standard_msg() const ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  // @@protoc_insertion_point(field_get:global_settings.test_standard_msg)
+  return _internal_test_standard_msg();
+}
+inline void global_settings::unsafe_arena_set_allocated_test_standard_msg(
+    ::dep2_cfg* PROTOBUF_NULLABLE value) {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  if (GetArena() == nullptr) {
+    delete reinterpret_cast<::google::protobuf::MessageLite*>(_impl_.test_standard_msg_);
+  }
+  _impl_.test_standard_msg_ = reinterpret_cast<::dep2_cfg*>(value);
+  if (value != nullptr) {
+    _impl_._has_bits_[0] |= 0x00000040u;
+  } else {
+    _impl_._has_bits_[0] &= ~0x00000040u;
+  }
+  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:global_settings.test_standard_msg)
+}
+inline ::dep2_cfg* PROTOBUF_NULLABLE global_settings::release_test_standard_msg() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+
+  _impl_._has_bits_[0] &= ~0x00000040u;
+  ::dep2_cfg* released = _impl_.test_standard_msg_;
+  _impl_.test_standard_msg_ = nullptr;
+  if (::google::protobuf::internal::DebugHardenForceCopyInRelease()) {
+    auto* old = reinterpret_cast<::google::protobuf::MessageLite*>(released);
+    released = ::google::protobuf::internal::DuplicateIfNonNull(released);
+    if (GetArena() == nullptr) {
+      delete old;
+    }
+  } else {
+    if (GetArena() != nullptr) {
+      released = ::google::protobuf::internal::DuplicateIfNonNull(released);
+    }
+  }
+  return released;
+}
+inline ::dep2_cfg* PROTOBUF_NULLABLE global_settings::unsafe_arena_release_test_standard_msg() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  // @@protoc_insertion_point(field_release:global_settings.test_standard_msg)
+
+  _impl_._has_bits_[0] &= ~0x00000040u;
+  ::dep2_cfg* temp = _impl_.test_standard_msg_;
+  _impl_.test_standard_msg_ = nullptr;
+  return temp;
+}
+inline ::dep2_cfg* PROTOBUF_NONNULL global_settings::_internal_mutable_test_standard_msg() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  if (_impl_.test_standard_msg_ == nullptr) {
+    auto* p = ::google::protobuf::Message::DefaultConstruct<::dep2_cfg>(GetArena());
+    _impl_.test_standard_msg_ = reinterpret_cast<::dep2_cfg*>(p);
+  }
+  return _impl_.test_standard_msg_;
+}
+inline ::dep2_cfg* PROTOBUF_NONNULL global_settings::mutable_test_standard_msg()
+    ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  _impl_._has_bits_[0] |= 0x00000040u;
+  ::dep2_cfg* _msg = _internal_mutable_test_standard_msg();
+  // @@protoc_insertion_point(field_mutable:global_settings.test_standard_msg)
+  return _msg;
+}
+inline void global_settings::set_allocated_test_standard_msg(::dep2_cfg* PROTOBUF_NULLABLE value) {
+  ::google::protobuf::Arena* message_arena = GetArena();
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  if (message_arena == nullptr) {
+    delete reinterpret_cast<::google::protobuf::MessageLite*>(_impl_.test_standard_msg_);
+  }
+
+  if (value != nullptr) {
+    ::google::protobuf::Arena* submessage_arena = reinterpret_cast<::google::protobuf::Message*>(value)->GetArena();
+    if (message_arena != submessage_arena) {
+      value = ::google::protobuf::internal::GetOwnedMessage(message_arena, value, submessage_arena);
+    }
+    _impl_._has_bits_[0] |= 0x00000040u;
+  } else {
+    _impl_._has_bits_[0] &= ~0x00000040u;
+  }
+
+  _impl_.test_standard_msg_ = reinterpret_cast<::dep2_cfg*>(value);
+  // @@protoc_insertion_point(field_set_allocated:global_settings.test_standard_msg)
 }
 
 #ifdef __GNUC__

@@ -36,6 +36,8 @@ import org.xresloader.core.data.vfy.DataValidatorFactory;
 import org.xresloader.core.data.vfy.DataVerifyImpl;
 import org.xresloader.core.data.vfy.DataVerifyImpl.ValidatorTokens;
 import org.xresloader.core.data.vfy.DataVerifyPbEnum;
+import org.xresloader.core.data.vfy.DataVerifyPbEnumValue;
+import org.xresloader.core.data.vfy.DataVerifyPbMsgOneField;
 import org.xresloader.core.data.vfy.DataVerifyPbMsgField;
 import org.xresloader.core.data.vfy.DataVerifyPbOneof;
 import org.xresloader.core.engine.ExcelEngine;
@@ -79,6 +81,16 @@ public class DataDstPb extends DataDstImpl {
         public String origin = null;
     }
 
+    static private class PbProtoWithFullName<T> {
+        public T element;
+        public String fullName;
+
+        public PbProtoWithFullName(T ele, String name) {
+            this.element = ele;
+            this.fullName = name;
+        }
+    };
+
     /***
      * protobuf 的描述信息生成是按文件的，所以要缓存并先生成依赖，再生成需要的文件描述数据
      */
@@ -90,8 +102,10 @@ public class DataDstPb extends DataDstImpl {
         public HashMap<String, DescriptorProtos.FileDescriptorProto> files = new HashMap<>();
         /*** 描述信息-消息描述集合 ***/
         public HashMap<String, PbAliasNode<DescriptorProtos.DescriptorProto>> messages = new HashMap<>();
+        public HashMap<String, PbAliasNode<PbProtoWithFullName<DescriptorProtos.FieldDescriptorProto>>> messageFields = new HashMap<>();
         /*** 描述信息-枚举描述集合 ***/
         public HashMap<String, PbAliasNode<DescriptorProtos.EnumDescriptorProto>> enums = new HashMap<>();
+        public HashMap<String, PbAliasNode<PbProtoWithFullName<DescriptorProtos.EnumValueDescriptorProto>>> enumValues = new HashMap<>();
         /*** 描述信息-oneof描述集合 ***/
         public HashMap<String, PbAliasNode<DescriptorProtos.OneofDescriptorProto>> oneofs = new HashMap<>();
 
@@ -133,16 +147,30 @@ public class DataDstPb extends DataDstImpl {
 
             String name = tokens.getName();
 
-            DescriptorProtos.EnumDescriptorProto enum_desc = get_alias_list_element(name, this.enums,
+            DescriptorProtos.EnumDescriptorProto enumDesc = get_alias_list_element(name, this.enums,
                     "enum type");
-            if (enum_desc != null) {
-                return new DataVerifyPbEnum(enum_desc);
+            if (enumDesc != null) {
+                return new DataVerifyPbEnum(enumDesc);
+            }
+
+            PbProtoWithFullName<DescriptorProtos.EnumValueDescriptorProto> enumValueDesc = get_alias_list_element(name,
+                    this.enumValues,
+                    "enum value type");
+            if (enumValueDesc != null) {
+                return new DataVerifyPbEnumValue(enumValueDesc.element, enumValueDesc.fullName);
             }
 
             DescriptorProtos.DescriptorProto msg_desc = get_alias_list_element(name, this.messages,
                     "message type");
             if (msg_desc != null) {
                 return new DataVerifyPbMsgField(msg_desc);
+            }
+
+            PbProtoWithFullName<DescriptorProtos.FieldDescriptorProto> messageFieldDesc = get_alias_list_element(name,
+                    this.messageFields,
+                    "message field type");
+            if (messageFieldDesc != null) {
+                return new DataVerifyPbMsgOneField(messageFieldDesc.element, messageFieldDesc.fullName);
             }
 
             DescriptorProtos.OneofDescriptorProto oneof_desc = get_alias_list_element(name,
@@ -180,13 +208,13 @@ public class DataDstPb extends DataDstImpl {
     private static final PbInfoSet cachePbs = new PbInfoSet();
     static private HashMap<String, Descriptors.FileDescriptor> inner_file_descs = null;
 
-    static <T> void append_alias_list(String short_name, String full_name, HashMap<String, PbAliasNode<T>> hashmap,
+    static <T> void append_alias_list(String short_name, String fullName, HashMap<String, PbAliasNode<T>> hashmap,
             T ele) {
-        while (full_name.length() > 0 && full_name.charAt(0) == '.') {
-            full_name = full_name.substring(1);
+        while (fullName.length() > 0 && fullName.charAt(0) == '.') {
+            fullName = fullName.substring(1);
         }
 
-        if (!short_name.isEmpty() && !short_name.equals(full_name)) {
+        if (!short_name.isEmpty() && !short_name.equals(fullName)) {
             PbAliasNode<T> ls = hashmap.getOrDefault(short_name, null);
             if (null == ls) {
                 ls = new PbAliasNode<>();
@@ -196,16 +224,16 @@ public class DataDstPb extends DataDstImpl {
                 ls.names = new LinkedList<>();
             }
             ls.element = ele;
-            if (!full_name.isEmpty()) {
-                ls.names.addLast(full_name);
+            if (!fullName.isEmpty()) {
+                ls.names.addLast(fullName);
             }
         }
 
-        if (!full_name.isEmpty()) {
-            PbAliasNode<T> ls = hashmap.getOrDefault(full_name, null);
+        if (!fullName.isEmpty()) {
+            PbAliasNode<T> ls = hashmap.getOrDefault(fullName, null);
             if (null == ls) {
                 ls = new PbAliasNode<>();
-                hashmap.put(full_name, ls);
+                hashmap.put(fullName, ls);
             }
             ls.element = ele;
         }
@@ -226,8 +254,8 @@ public class DataDstPb extends DataDstImpl {
 
         ProgramOptions.getLoger().error(
                 "There is more than one %s \"%s\" matched, please use full name. available names:", type_name, name);
-        for (String full_name : ls.names) {
-            ProgramOptions.getLoger().error("\t%s", full_name);
+        for (String fullName : ls.names) {
+            ProgramOptions.getLoger().error("\t%s", fullName);
         }
 
         return null;
@@ -247,8 +275,8 @@ public class DataDstPb extends DataDstImpl {
             ProgramOptions.getLoger().error(
                     "There is more than one %s \"%s\" matched, please use full name. available names:", type_name,
                     name);
-            for (String full_name : ls.names) {
-                ProgramOptions.getLoger().error("\t%s", full_name);
+            for (String fullName : ls.names) {
+                ProgramOptions.getLoger().error("\t%s", fullName);
             }
         }
 
@@ -335,17 +363,33 @@ public class DataDstPb extends DataDstImpl {
 
     static void load_pb_message(PbInfoSet pbs, DescriptorProtos.DescriptorProto mdp, String package_name,
             HashMap<String, PbAliasNode<DescriptorProtos.DescriptorProto>> hashmap) {
-        String full_name = String.format("%s.%s", package_name, mdp.getName());
-        append_alias_list(mdp.getName(), full_name, pbs.messages, mdp);
+        String fullName = String.format("%s.%s", package_name, mdp.getName());
+        append_alias_list(mdp.getName(), fullName, pbs.messages, mdp);
+
+        // fields
+        for (DescriptorProtos.FieldDescriptorProto fdp : mdp.getFieldList()) {
+            String fieldFullName = String.format("%s.%s", fullName, fdp.getName());
+            append_alias_list(fdp.getName(), fieldFullName, pbs.messageFields,
+                    new PbProtoWithFullName<>(fdp, fieldFullName));
+
+        }
 
         // nest messages
         for (DescriptorProtos.DescriptorProto sub_mdp : mdp.getNestedTypeList()) {
-            load_pb_message(pbs, sub_mdp, full_name, hashmap);
+            load_pb_message(pbs, sub_mdp, fullName, hashmap);
         }
 
-        // enums
+        // nest enums
         for (DescriptorProtos.EnumDescriptorProto edp : mdp.getEnumTypeList()) {
-            append_alias_list(edp.getName(), String.format("%s.%s", full_name, edp.getName()), pbs.enums, edp);
+            String enumFullName = String.format("%s.%s", fullName, edp.getName());
+            append_alias_list(edp.getName(), String.format("%s.%s", fullName, edp.getName()), pbs.enums, edp);
+
+            // enum values
+            for (DescriptorProtos.EnumValueDescriptorProto evdp : edp.getValueList()) {
+                String valueFullName = String.format("%s.%s", enumFullName, evdp.getName());
+                append_alias_list(evdp.getName(), valueFullName, pbs.enumValues,
+                        new PbProtoWithFullName<>(evdp, valueFullName));
+            }
         }
 
         // oneof
@@ -380,8 +424,16 @@ public class DataDstPb extends DataDstImpl {
 
                 if (build_msg) {
                     for (DescriptorProtos.EnumDescriptorProto edp : fdp.getEnumTypeList()) {
-                        append_alias_list(edp.getName(), String.format("%s.%s", fdp.getPackage(), edp.getName()),
+                        String enumFullName = String.format("%s.%s", fdp.getPackage(), edp.getName());
+                        append_alias_list(edp.getName(), enumFullName,
                                 pbs.enums, edp);
+
+                        // enum values
+                        for (DescriptorProtos.EnumValueDescriptorProto evdp : edp.getValueList()) {
+                            String valueFullName = String.format("%s.%s", enumFullName, evdp.getName());
+                            append_alias_list(evdp.getName(), valueFullName, pbs.enumValues,
+                                    new PbProtoWithFullName<>(evdp, valueFullName));
+                        }
                     }
 
                     for (DescriptorProtos.DescriptorProto mdp : fdp.getMessageTypeList()) {

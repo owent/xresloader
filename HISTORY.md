@@ -2,6 +2,8 @@
 
 ## Unrelease
 
+1. 验证器也支持枚举的单个Value类型和Message里的单个字段。
+
 ## 2.23.0
 
 1. 支持gradle构建系统

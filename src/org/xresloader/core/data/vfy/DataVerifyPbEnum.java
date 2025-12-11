@@ -1,6 +1,7 @@
 package org.xresloader.core.data.vfy;
 
 import org.xresloader.Xresloader;
+
 import com.google.protobuf.DescriptorProtos;
 
 /**

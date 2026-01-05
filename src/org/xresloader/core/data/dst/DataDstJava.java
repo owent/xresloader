@@ -1221,6 +1221,12 @@ public abstract class DataDstJava extends DataDstImpl {
                     if ((child.isList() || child.isMap()) && (child.getListExtension() == null ||
                             child.getListExtension().minSize <= 0)) {
                         missingFields.remove(child.getIndex());
+                    } else if (child.getType() == DataDstWriterNode.JAVA_TYPE.STRING
+                            || child.getType() == DataDstWriterNode.JAVA_TYPE.BYTES
+                            || child.getType() == DataDstWriterNode.JAVA_TYPE.MESSAGE) {
+                        // 字符串类型允许空
+                        // Message类型允许空，如果由字段缺失缺要求填充，子调用里会处理
+                        missingFields.remove(child.getIndex());
                     }
                     if (child.isNotNull()) {
                         rowContext.addIgnoreReason(

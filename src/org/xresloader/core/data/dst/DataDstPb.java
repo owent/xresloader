@@ -37,6 +37,7 @@ import org.xresloader.core.data.vfy.DataVerifyImpl;
 import org.xresloader.core.data.vfy.DataVerifyImpl.ValidatorTokens;
 import org.xresloader.core.data.vfy.DataVerifyPbEnum;
 import org.xresloader.core.data.vfy.DataVerifyPbEnumValue;
+import org.xresloader.core.data.vfy.DataVerifyPbMsgOneField;
 import org.xresloader.core.data.vfy.DataVerifyPbMsgField;
 import org.xresloader.core.data.vfy.DataVerifyPbMsgOneField;
 import org.xresloader.core.data.vfy.DataVerifyPbOneof;

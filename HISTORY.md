@@ -9,6 +9,8 @@
 1. 验证器也支持枚举的单个Value类型和Message里的单个字段。
 2. 修复Plain模式内的repeated和map字段为空时会报数据错误的问题。
 
+1. 验证器也支持枚举的单个Value类型和Message里的单个字段。
+
 ## 2.23.0
 
 1. 支持gradle构建系统

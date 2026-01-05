@@ -1,8 +1,9 @@
 # 更新记录
 
-## Unrelease
+## 2.23.1
 
 1. 验证器也支持枚举的单个Value类型和Message里的单个字段。
+2. 修复Plain模式内的repeated和map字段为空时会报数据错误的问题。
 
 ## 2.23.0
 

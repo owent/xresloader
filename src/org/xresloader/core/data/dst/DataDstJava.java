@@ -1217,6 +1217,11 @@ public abstract class DataDstJava extends DataDstImpl {
                         missingFields.remove(subField.getIndex());
                     }
                 } else {
+                    // list和map允许空
+                    if ((child.isList() || child.isMap()) && (child.getListExtension() == null ||
+                            child.getListExtension().minSize <= 0)) {
+                        missingFields.remove(child.getIndex());
+                    }
                     if (child.isNotNull()) {
                         rowContext.addIgnoreReason(
                                 String.format("oneof %s.%s is empty but set not null, we will ignore this row",

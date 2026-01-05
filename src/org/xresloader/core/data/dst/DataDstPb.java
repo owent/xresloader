@@ -37,8 +37,8 @@ import org.xresloader.core.data.vfy.DataVerifyImpl;
 import org.xresloader.core.data.vfy.DataVerifyImpl.ValidatorTokens;
 import org.xresloader.core.data.vfy.DataVerifyPbEnum;
 import org.xresloader.core.data.vfy.DataVerifyPbEnumValue;
-import org.xresloader.core.data.vfy.DataVerifyPbMsgOneField;
 import org.xresloader.core.data.vfy.DataVerifyPbMsgField;
+import org.xresloader.core.data.vfy.DataVerifyPbMsgOneField;
 import org.xresloader.core.data.vfy.DataVerifyPbOneof;
 import org.xresloader.core.engine.ExcelEngine;
 import org.xresloader.core.engine.ExcelEngine.DataItemGridWrapper;
@@ -2871,6 +2871,11 @@ public class DataDstPb extends DataDstImpl {
 
                     missingFields.remove(child.getIndex());
                 } else {
+                    // list和map允许空
+                    if ((child.isList() || child.isMap()) && (child.getListExtension() == null ||
+                            child.getListExtension().minSize <= 0)) {
+                        missingFields.remove(child.getIndex());
+                    }
                     if (child.isNotNull()) {
                         rowContext.addIgnoreReason(
                                 String.format("field %s is empty but set not null, we will ignore this row",

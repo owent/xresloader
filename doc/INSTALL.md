@@ -36,17 +36,17 @@ mvn package
 比如:
 ```xml
         <mirror>
-            <id>tencent-cloud</id>
-            <mirrorOf>central</mirrorOf>
-            <name>Tencent Cloud Mirror.</name>
+            <id>nexus-tencentyun</id>
+            <mirrorOf>*</mirrorOf>
+            <name>Nexus tencentyun</name>
             <url>http://mirrors.cloud.tencent.com/nexus/repository/maven-public/</url>
-        </mirror>
+        </mirror> 
 
         <mirror>
-            <id>aliyun</id>
-            <mirrorOf>central</mirrorOf>
-            <name>Aliyun Mirror.</name>
-            <url>http://maven.aliyun.com/nexus/content/groups/public/</url>
+            <id>aliyunmaven</id>
+            <mirrorOf>*</mirrorOf>
+            <name>阿里云公共仓库</name>
+            <url>https://maven.aliyun.com/repository/public/</url>
         </mirror>
 
         <mirror>

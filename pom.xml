@@ -20,7 +20,7 @@
         <commons-cli.version>1.11.0</commons-cli.version>
         <commons-codec.version>1.20.0</commons-codec.version>
         <ini4j.version>0.5.4</ini4j.version>
-        <msgpack.version>0.9.10</msgpack.version>
+        <msgpack.version>0.9.11</msgpack.version>
         <json.version>20250517</json.version>
         <dom4j.version>2.2.0</dom4j.version>
         <commons-csv.version>1.14.1</commons-csv.version>

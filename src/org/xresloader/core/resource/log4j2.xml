@@ -8,13 +8,13 @@
         <Console name="ConsoleOut" ignoreExceptions="true" target="SYSTEM_OUT">
             <PatternLayout pattern="%highlight{[%-5level] %logger{36} - %msg%n}{INFO=Bright Green, DEBUG=Bright Cyan, TRACE=Bright White}" />
             <Filters>
-                <ThresholdFilter level="WARN" onMatch="DENY" onMismatch="ACCEPT"/>
+                <LevelRangeFilter minLevel="TRACE" maxLevel="INFO" onMatch="ACCEPT" onMismatch="DENY"/>
             </Filters>
         </Console>
         <Console name="ConsoleErr" ignoreExceptions="true" target="SYSTEM_ERR">
             <PatternLayout pattern="%highlight{[%-5level] %logger{36} - %msg%n}{FATAL=Bright Magenta, ERROR=Bright Red, WARN=Bright Yellow}" />
             <Filters>
-                <ThresholdFilter level="WARN" onMatch="ACCEPT" onMismatch="DENY"/>
+                <LevelRangeFilter minLevel="WARN" maxLevel="FATAL" onMatch="ACCEPT" onMismatch="DENY"/>
             </Filters>
         </Console>
         <File name="File" fileName="${filename}" append="false" ignoreExceptions="true">

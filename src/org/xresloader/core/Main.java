@@ -1,12 +1,10 @@
-/**
- *
- */
 package org.xresloader.core;
 
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
+import java.net.URL;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Scanner;
@@ -34,6 +32,46 @@ import org.xresloader.core.scheme.SchemeConf;
  * @author owentou
  */
 public class Main {
+
+    /**
+     * Initialize stream protection and Log4j2 configuration BEFORE any Log4j2
+     * classes are loaded.
+     * This prevents Log4j2's ConsoleAppender lifecycle from closing stdout/stderr
+     * and ensures
+     * Log4j2 uses the correct configuration from the start (avoiding
+     * DefaultConfiguration).
+     */
+    static {
+        // FIRST: Protect stdout/stderr from being closed
+        StreamProtector.init();
+
+        // SECOND: Set log4j.configurationFile system property if not already set
+        // This must happen BEFORE any Log4j2 class is loaded
+        initializeLog4j2SystemProperty();
+    }
+
+    private static void initializeLog4j2SystemProperty() {
+        try {
+            // Check if user has specified a custom configuration
+            String configFile = System.getProperty("log4j.configurationFile");
+            if (configFile == null || configFile.isEmpty()) {
+                configFile = System.getProperty("log4j2.configurationFile");
+            }
+
+            if (configFile == null || configFile.isEmpty()) {
+                // No custom config specified, set the system property to our bundled default
+                // Log4j2 will find log4j2.xml in classpath automatically, but we set the
+                // property explicitly to ensure it's loaded before any logging occurs
+                URL defaultConfig = Main.class.getClassLoader().getResource("log4j2.xml");
+                if (defaultConfig != null) {
+                    System.setProperty("log4j2.configurationFile", defaultConfig.toURI().toString());
+                }
+            }
+            // If user already specified a config, Log4j2 will use it automatically
+        } catch (Exception ignored) {
+            // If this fails, Log4j2 will fall back to defaults
+        }
+    }
 
     private static String lineSeparator = "\n";
 

@@ -286,7 +286,7 @@ public class ProgramOptions {
             formatter.setWidth(140);
             formatter.printHelp("Usage: java -client -jar " + script + " [options...]", get_options_group());
             System.out.println("");
-            System.out.println("You can add -Dlog4j.configuration=log4j2.xml to use your own log configure.");
+            System.out.println("You can add -Dlog4j.configurationFile=log4j2.xml to use your own log4j2 configure.");
             return -1;
         }
 
@@ -300,7 +300,7 @@ public class ProgramOptions {
                         sharedOptions);
             }
             System.out.println("");
-            System.out.println("You can add -Dlog4j.configuration=log4j2.xml to use your own log configure.");
+            System.out.println("You can add -Dlog4j.configurationFile=log4j2.xml to use your own log4j2 configure.");
             return 1;
         }
 

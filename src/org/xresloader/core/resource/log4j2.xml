@@ -1,20 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Configuration status="OFF">
+<Configuration status="WARN">
     <Properties>
         <Property name="filename">xresloader.run.log</Property>
         <Property name="formatMsgNoLookups">true</Property>
     </Properties>
     <Appenders>
-        <Console name="ConsoleOut" ignoreExceptions="true" target="SYSTEM_OUT">
+        <Console name="ConsoleOut" ignoreExceptions="false" target="SYSTEM_OUT" follow="true" immediateFlush="true">
             <PatternLayout pattern="%highlight{[%-5level] %logger{36} - %msg%n}{INFO=Bright Green, DEBUG=Bright Cyan, TRACE=Bright White}" />
             <Filters>
-                <LevelRangeFilter minLevel="TRACE" maxLevel="INFO" onMatch="ACCEPT" onMismatch="DENY"/>
+                <LevelRangeFilter minLevel="INFO" maxLevel="TRACE" onMatch="ACCEPT" onMismatch="DENY"/>
             </Filters>
         </Console>
-        <Console name="ConsoleErr" ignoreExceptions="true" target="SYSTEM_ERR">
+        <Console name="ConsoleErr" ignoreExceptions="false" target="SYSTEM_ERR" follow="true" immediateFlush="true">
             <PatternLayout pattern="%highlight{[%-5level] %logger{36} - %msg%n}{FATAL=Bright Magenta, ERROR=Bright Red, WARN=Bright Yellow}" />
             <Filters>
-                <LevelRangeFilter minLevel="WARN" maxLevel="FATAL" onMatch="ACCEPT" onMismatch="DENY"/>
+                <LevelRangeFilter minLevel="FATAL" maxLevel="WARN" onMatch="ACCEPT" onMismatch="DENY"/>
             </Filters>
         </Console>
         <File name="File" fileName="${filename}" append="false" ignoreExceptions="true">

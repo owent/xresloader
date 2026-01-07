@@ -1,5 +1,9 @@
 # 更新记录
 
+## 2.23.3
+
+1. 通过 `-Dlog4j.configurationFile=log4j2.xml` 重定向日志输出，可能导致stdout被关闭的问题。
+
 ## 2.23.2
 
 1. 修复Plain模式内的string类型字段允许为空。

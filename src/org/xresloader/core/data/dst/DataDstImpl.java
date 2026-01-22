@@ -821,4 +821,29 @@ public abstract class DataDstImpl {
 
         return oneof.mutableExtension().plainSeparator;
     }
+
+    static public String joinPlainInputHint(String sep, String[] inputs) {
+        if (inputs == null || inputs.length <= 0) {
+            return "";
+        }
+
+        if (sep == null || sep.isEmpty()) {
+            sep = ProgramOptions.getInstance().defaultFieldSeparator;
+        }
+        for (char c : sep.toCharArray()) {
+            boolean valid = true;
+            for (int i = 0; i < inputs.length; ++i) {
+                if (inputs[i].indexOf(c) != -1) {
+                    valid = false;
+                    break;
+                }
+            }
+            if (valid) {
+                sep = String.valueOf(c);
+                break;
+            }
+        }
+
+        return String.join(sep, inputs);
+    }
 }

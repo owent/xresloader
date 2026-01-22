@@ -1171,7 +1171,7 @@ public abstract class DataDstJava extends DataDstImpl {
 
         int usedInputIdx = 0;
         int fieldSize = 0;
-        int atLeastFieldSize = 0;
+        int atLeastFieldSize = field.getTypeDescriptor().getSortedOneofs().size();
         HashMap<Integer, DataDstFieldDescriptor> missingFields = new HashMap<>();
         for (int i = 0; i < children.size(); ++i) {
             DataDstFieldDescriptor child = children.get(i);
@@ -1183,10 +1183,11 @@ public abstract class DataDstJava extends DataDstImpl {
                 if (child.getReferOneof().allowMissingInPlainMode()) {
                     continue;
                 }
+
+                atLeastFieldSize += 1;
             }
 
             missingFields.put(child.getIndex(), child);
-            atLeastFieldSize += 1;
         }
 
         for (int i = 0; i < children.size(); ++i) {
@@ -1259,7 +1260,7 @@ public abstract class DataDstJava extends DataDstImpl {
 
         if (!missingFields.isEmpty()) {
             String message = String.format(
-                    "Try to convert %s need at least %d fields, at most %d fields, but only provide %d fields.%s  > File: %s, Table: %s, Row: %d, Column: %d(%s)%s  > Missing fields: %s",
+                    "Try to convert %s need at least %d fields, at most %d fields, but only provide %d fields.%s  > File: %s, Table: %s, Row: %d, Column: %d(%s)%s  > Missing fields: %s%s  > Data: %s",
                     field.getTypeDescriptor().getFullName(), atLeastFieldSize, fieldSize, inputs.length,
                     ProgramOptions.getEndl(),
                     rowContext.fileName, rowContext.tableName,
@@ -1268,13 +1269,16 @@ public abstract class DataDstJava extends DataDstImpl {
                     ExcelEngine.getColumnName(DataSrcImpl.getOurInstance().getLastColumnNum() + 1),
                     ProgramOptions.getEndl(),
                     String.join(",", missingFields.values().stream().map(DataDstFieldDescriptor::getName)
-                            .collect(Collectors.toList())));
+                            .collect(Collectors.toList())),
+                    ProgramOptions.getEndl(),
+                    joinPlainInputHint(field.getTypeDescriptor().mutableExtension().plainSeparator, inputs));
             ProgramOptions.getLoger().warn(message);
         } else if (inputs.length > fieldSize) {
             String message = String.format(
-                    "Try to convert %s need at least %d fields, at most %d fields, but provide %d fields.",
+                    "Try to convert %s need at least %d fields, at most %d fields, but provide %d fields.%s  > Data: %s",
                     field.getTypeDescriptor().getFullName(), atLeastFieldSize, fieldSize, inputs.length,
-                    ProgramOptions.getEndl());
+                    ProgramOptions.getEndl(),
+                    joinPlainInputHint(field.getTypeDescriptor().mutableExtension().plainSeparator, inputs));
             throw new ConvException(message);
         }
 

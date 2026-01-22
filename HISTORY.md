@@ -1,5 +1,10 @@
 # 更新记录
 
+## Unreleased
+
+1. 修复plain模式下，有oneof时。字段数量检查失败的输出信息错误的问题。
+2. 优化plain模式失败的提示输出。
+
 ## 2.23.3
 
 1. 通过 `-Dlog4j.configurationFile=log4j2.xml` 重定向日志输出，可能导致stdout被关闭的问题。

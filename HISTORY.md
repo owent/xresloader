@@ -1,9 +1,17 @@
 # 更新记录
 
-## Unreleased
+## 2.23.4
 
 1. 修复plain模式下，有oneof时。字段数量检查失败的输出信息错误的问题。
 2. 优化plain模式失败的提示输出。
+3. 更新依赖库
+   + `com.google.protobuf:protobuf-java` -> 4.33.5
+   + `org.apache.poi:poi` -> 5.5.1
+   + `org.apache.poi:poi-ooxml` -> 5.5.1
+   + `org.msgpack:msgpack-core` -> 0.9.11
+   + `org.junit.jupiter:junit-jupiter` -> 6.0.2
+   + `org.junit.platform:junit-platform-launcher` -> 6.0.2
+   + `com.gradleup.shadow` (gradle plugin) -> 9.3.1
 
 ## 2.23.3
 

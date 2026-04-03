@@ -1,11 +1,22 @@
+buildscript {
+    repositories {
+        maven { url 'https://maven.aliyun.com/repository/public/' }
+        mavenCentral()
+    }
+    dependencies {
+        classpath 'com.gradleup.shadow:shadow-gradle-plugin:8.3.10'
+    }
+}
+
 plugins {
     id 'java'
     id 'jacoco'
-    id 'com.gradleup.shadow' version '9.3.1'
 }
 
+apply plugin: 'com.gradleup.shadow'
+
 group = 'org.xresloader'
-version = '2.23.4'
+version = '2.23.5'
 description = 'xresloader'
 buildDir = 'target'
 
@@ -14,19 +25,19 @@ ext {
     targetJavaVersion = JavaVersion.toVersion(targetJava)
     versions = [
         nashorn        : '15.7',
-        protobuf       : '4.33.5',
+        protobuf       : '4.34.1',
         poi            : '5.5.1',
-        log4j          : '2.25.3',
+        log4j          : '2.25.4',
         commonsCli     : '1.11.0',
-        commonsCodec   : '1.20.0',
+        commonsCodec   : '1.21.0',
         ini4j          : '0.5.4',
         msgpack        : '0.9.11',
-        json           : '20250517',
+        json           : '20251224',
         dom4j          : '2.2.0',
         commonsCsv     : '1.14.1',
         snakeyamlEngine: '3.0.1',
-        junitJupiter   : '6.0.2',
-        junitPlatform  : '6.0.2'
+        junitJupiter   : '6.0.3',
+        junitPlatform  : '6.0.3'
     ]
 }
 

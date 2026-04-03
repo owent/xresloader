@@ -137,7 +137,7 @@ public abstract class DataVerifyImpl {
             return res.success;
         }
 
-        boolean is_numeric = true;
+        boolean is_numeric = !enum_name.isEmpty();
         boolean is_double = false;
         for (int i = 0; is_numeric && i < enum_name.length(); ++i) {
             char c = enum_name.charAt(i);
@@ -477,7 +477,7 @@ public abstract class DataVerifyImpl {
             String path, String val,
             boolean is_double)
             throws ConvException {
-        boolean is_numeric = true;
+        boolean is_numeric = !val.isEmpty();
         boolean has_dot = false;
         for (int i = 0; is_numeric && i < val.length(); ++i) {
             char c = val.charAt(i);

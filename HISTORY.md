@@ -1,5 +1,23 @@
 # 更新记录
 
+## 2.23.5
+
+1. 修复验证器处理空字符串时，错误地按数值类型参与校验的问题。
+2. 调整Gradle构建中 Shadow 插件的接入方式，以兼容 Gradle 8.x 环境。
+3. 更新依赖库
+   + `com.google.protobuf:protobuf-java` -> 4.34.1
+   + `com.google.protobuf:protobuf-java-util` -> 4.34.1
+   + `org.apache.logging.log4j:log4j-api` -> 2.25.4
+   + `org.apache.logging.log4j:log4j-core` -> 2.25.4
+   + `commons-codec:commons-codec` -> 1.21.0
+   + `org.json:json` -> 20251224
+   + `org.apache.maven.plugins:maven-compiler-plugin` -> 3.15.0
+   + `org.apache.maven.plugins:maven-surefire-plugin` -> 3.5.5
+   + `org.apache.maven.plugins:maven-shade-plugin` -> 3.6.2
+   + `org.junit.jupiter:junit-jupiter` -> 6.0.3
+   + `org.junit.platform:junit-platform-launcher` -> 6.0.3
+   + `com.gradleup.shadow` (gradle plugin) -> 8.3.10
+
 ## 2.23.4
 
 1. 修复plain模式下，有oneof时。字段数量检查失败的输出信息错误的问题。

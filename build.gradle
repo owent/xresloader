@@ -4,7 +4,7 @@ buildscript {
         mavenCentral()
     }
     dependencies {
-        classpath 'com.gradleup.shadow:shadow-gradle-plugin:8.3.10'
+        classpath 'com.gradleup.shadow:shadow-gradle-plugin:9.4.1'
     }
 }
 
@@ -16,7 +16,7 @@ plugins {
 apply plugin: 'com.gradleup.shadow'
 
 group = 'org.xresloader'
-version = '2.23.5'
+version = '2.23.6'
 description = 'xresloader'
 buildDir = 'target'
 
@@ -27,11 +27,11 @@ ext {
         nashorn        : '15.7',
         protobuf       : '4.34.1',
         poi            : '5.5.1',
-        log4j          : '2.25.4',
+        log4j          : '2.26.0',
         commonsCli     : '1.11.0',
-        commonsCodec   : '1.21.0',
+        commonsCodec   : '1.22.0',
         ini4j          : '0.5.4',
-        msgpack        : '0.9.11',
+        msgpack        : '0.9.12',
         json           : '20251224',
         dom4j          : '2.2.0',
         commonsCsv     : '1.14.1',

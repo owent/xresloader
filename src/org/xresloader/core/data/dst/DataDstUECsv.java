@@ -72,8 +72,8 @@ public class DataDstUECsv extends DataDstUEBase {
             return;
         }
 
-        HashSet<String> dumpedFields = new HashSet<String>();
-        ArrayList<String> finalRowData = new ArrayList<String>();
+        HashSet<String> dumpedFields = new HashSet<>();
+        ArrayList<String> finalRowData = new ArrayList<>();
         ArrayList<DataDstWriterNodeWrapper> headerAutocomplete = new ArrayList<>();
 
         ((UEBuildObject) buildObj).hasPrintHeader = true;
@@ -137,15 +137,15 @@ public class DataDstUECsv extends DataDstUEBase {
         // 3. 补全空字段(提取自
         // codeInfo.writerNodeWrapper.getTypeDescriptor().getSortedFields())
 
-        HashSet<String> dumpedFields = new HashSet<String>();
-        ArrayList<String> finalRowData = new ArrayList<String>();
+        HashSet<String> dumpedFields = new HashSet<>();
+        ArrayList<String> finalRowData = new ArrayList<>();
         finalRowData.ensureCapacity(
                 bobj.headerNodes.size() + bobj.headerAutocomplete.size() + 1);
 
         // 额外写出一份 --- 的Key
         if (!bobj.headerNodes.isEmpty()) {
             StringBuffer fieldSb = new StringBuffer();
-            dumpField(fieldSb, new HashSet<String>(), bobj.headerNodes.get(0), rowData, true);
+            dumpField(fieldSb, new HashSet<>(), bobj.headerNodes.get(0), rowData, true);
             finalRowData.add(fieldSb.toString());
         }
 
@@ -203,8 +203,8 @@ public class DataDstUECsv extends DataDstUEBase {
         }
 
         // 布尔
-        if (data instanceof Boolean) {
-            sp.printRecord(prefix, ((Boolean) data) ? "True" : "False");
+        if (data instanceof Boolean aBoolean) {
+            sp.printRecord(prefix, aBoolean ? "True" : "False");
             return;
         }
 
@@ -230,7 +230,7 @@ public class DataDstUECsv extends DataDstUEBase {
         // Hashmap
         if (data instanceof Map) {
             Map<String, Object> mp = (Map<String, Object>) data;
-            ArrayList<Map.Entry<String, Object>> sorted_array = new ArrayList<Map.Entry<String, Object>>();
+            ArrayList<Map.Entry<String, Object>> sorted_array = new ArrayList<>();
             sorted_array.ensureCapacity(mp.size());
             sorted_array.addAll(mp.entrySet());
             sorted_array.sort((l, r) -> {
@@ -314,23 +314,23 @@ public class DataDstUECsv extends DataDstUEBase {
     }
 
     private void dumpFieldValue(StringBuffer sb, DataDstWriterNodeWrapper descWraper, Object data, boolean isTopLevel) {
-        if (data instanceof List<?>) {
+        if (data instanceof List<?> list) {
             sb.append(SchemeConf.getInstance().getUEOptions().codeOutputCsvObjectBegin);
             boolean isFirst = true;
-            for (Object val : (List<?>) data) {
+            for (Object val : list) {
                 isFirst = tryWriteSeprator(sb, isFirst);
                 dumpFieldValue(sb, descWraper, val, false);
             }
             sb.append(SchemeConf.getInstance().getUEOptions().codeOutputCsvObjectEnd);
-        } else if (data instanceof SpecialInnerHashMap<?, ?>) {
+        } else if (data instanceof SpecialInnerHashMap<?, ?> specialInnerHashMap) {
             ArrayList<DataDstWriterNodeWrapper> valueDesc = descWraper.getMapValueField();
 
             sb.append(SchemeConf.getInstance().getUEOptions().codeOutputCsvObjectBegin);
             if (!valueDesc.isEmpty()) {
                 boolean isFirst = true;
-                ArrayList<Map.Entry<?, ?>> sorted_array = new ArrayList<Map.Entry<?, ?>>();
-                sorted_array.ensureCapacity(((SpecialInnerHashMap<?, ?>) data).size());
-                sorted_array.addAll(((SpecialInnerHashMap<?, ?>) data).entrySet());
+                ArrayList<Map.Entry<?, ?>> sorted_array = new ArrayList<>();
+                sorted_array.ensureCapacity(specialInnerHashMap.size());
+                sorted_array.addAll(specialInnerHashMap.entrySet());
                 sorted_array.sort((l, r) -> {
                     if (l.getKey() instanceof Integer && r.getKey() instanceof Integer) {
                         return ((Integer) l.getKey()).compareTo((Integer) r.getKey());
@@ -353,13 +353,13 @@ public class DataDstUECsv extends DataDstUEBase {
             }
 
             sb.append(SchemeConf.getInstance().getUEOptions().codeOutputCsvObjectEnd);
-        } else if (data instanceof HashMap<?, ?>) {
-            dumpMessage(sb, descWraper, (HashMap<?, ?>) data);
+        } else if (data instanceof HashMap<?, ?> hashMap) {
+            dumpMessage(sb, descWraper, hashMap);
         } else {
             if (data instanceof Number) {
                 sb.append(data);
-            } else if (data instanceof Boolean) {
-                if ((Boolean) data) {
+            } else if (data instanceof Boolean aBoolean) {
+                if (aBoolean) {
                     sb.append("True");
                 } else {
                     sb.append("False");
@@ -372,19 +372,19 @@ public class DataDstUECsv extends DataDstUEBase {
                 if (!isTopLevel) {
                     sb.append("\"");
                 }
-            } else if (data instanceof com.google.protobuf.ByteString) {
+            } else if (data instanceof com.google.protobuf.ByteString byteString) {
                 if (!isTopLevel) {
                     sb.append("\"");
                 }
-                sb.append(((com.google.protobuf.ByteString) data).toString().replaceAll("\"", "\"\""));
+                sb.append(byteString.toString().replaceAll("\"", "\"\""));
                 if (!isTopLevel) {
                     sb.append("\"");
                 }
-            } else if (data instanceof byte[]) {
+            } else if (data instanceof byte[] bs) {
                 if (!isTopLevel) {
                     sb.append("\"");
                 }
-                sb.append(((byte[]) data).toString().replaceAll("\"", "\"\""));
+                sb.append(Arrays.toString(bs).replaceAll("\"", "\"\""));
                 if (!isTopLevel) {
                     sb.append("\"");
                 }
@@ -439,30 +439,21 @@ public class DataDstUECsv extends DataDstUEBase {
         }
 
         switch (fd.getType()) {
-            case INT:
-            case LONG:
-            case FLOAT:
-            case DOUBLE: {
+            case INT, LONG, FLOAT, DOUBLE -> {
                 sb.append("0");
-                break;
             }
-            case BOOLEAN: {
+            case BOOLEAN -> {
                 sb.append("False");
-                break;
             }
-            case STRING:
-            case BYTES: {
+            case STRING, BYTES -> {
                 if (fillEmpty && !isTopLevel) {
                     sb.append("\"\"");
                 } else {
                     return false;
                 }
-
-                break;
             }
-            case MESSAGE: {
+            case MESSAGE -> {
                 sb.append(SchemeConf.getInstance().getUEOptions().codeOutputCsvObjectBegin);
-
                 HashSet<String> dumpedOneof = new HashSet<String>();
                 boolean isFirstField = true;
                 for (DataDstFieldDescriptor subField : fd.getSortedFields()) {
@@ -497,12 +488,11 @@ public class DataDstUECsv extends DataDstUEBase {
                         pickValueFieldCsvDefaultImpl(sb, subField, true, false);
                     }
                 }
-
                 sb.append(SchemeConf.getInstance().getUEOptions().codeOutputCsvObjectEnd);
-                break;
             }
-            default:
+            default -> {
                 return false;
+            }
         }
 
         return true;

@@ -213,3 +213,8 @@ message global_settings {
     map<string, dep2_cfg>              test_map_sm             = 12 [ (org.xresloader.field_separator) = "|" ];
     dep2_cfg                           test_standard_msg       = 13;
 }
+
+message ue_explicit_set_name_field_cfg {
+    string name = 1;
+    string content = 2;
+}

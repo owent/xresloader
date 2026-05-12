@@ -71,6 +71,7 @@ public abstract class DataDstUEBase extends DataDstJava {
     /**
      * @return 协议处理器名字
      */
+    @Override
     public String name() {
         return "ue";
     }
@@ -103,7 +104,7 @@ public abstract class DataDstUEBase extends DataDstJava {
             UECodeInfo ret = getCodeCache(originClazzName);
             if (ret != null) {
                 if (null == dependencies) {
-                    dependencies = new HashMap<String, UECodeInfo>();
+                    dependencies = new HashMap<>();
                 }
                 dependencies.put(originClazzName, ret);
 
@@ -125,7 +126,7 @@ public abstract class DataDstUEBase extends DataDstJava {
             ret.initClazzName(originClazzName);
 
             if (null == dependencies) {
-                dependencies = new HashMap<String, UECodeInfo>();
+                dependencies = new HashMap<>();
             }
             dependencies.put(originClazzName, ret);
 
@@ -145,8 +146,8 @@ public abstract class DataDstUEBase extends DataDstJava {
         }
     }
 
-    static private HashMap<String, UECodeInfo> globalCodeCache = new HashMap<String, UECodeInfo>();
-    static private HashSet<String> globalCodeWrittenCache = new HashSet<String>();
+    static private final HashMap<String, UECodeInfo> globalCodeCache = new HashMap<>();
+    static private final HashSet<String> globalCodeWrittenCache = new HashSet<>();
 
     static UECodeInfo getCodeCache(String clazzName) {
         if (clazzName == null || clazzName.isEmpty()) {
@@ -354,7 +355,7 @@ public abstract class DataDstUEBase extends DataDstJava {
 
             ArrayList<DataDstWriterNodeWrapper> values = this.children.getOrDefault(child.getVarName(), null);
             if (values == null) {
-                values = new ArrayList<DataDstWriterNodeWrapper>();
+                values = new ArrayList<>();
                 this.children.put(child.getVarName(), values);
             }
 
@@ -566,6 +567,7 @@ public abstract class DataDstUEBase extends DataDstJava {
         return ret;
     }
 
+    @SuppressWarnings("UseSpecificCatch")
     public void writeImportSettings(UECodeInfo code) {
         File importFile = new File(code.outputDir + File.separator + ueImportFile);
         if (!importFile.getParentFile().exists()) {
@@ -651,9 +653,9 @@ public abstract class DataDstUEBase extends DataDstJava {
             // add new item
             groupObj.put(selectedItem);
 
-            FileOutputStream fos = new FileOutputStream(importFile, false);
-            fos.write(dumpString(importObj.toString(4)));
-            fos.close();
+            try (FileOutputStream fos = new FileOutputStream(importFile, false)) {
+                fos.write(dumpString(importObj.toString(4)));
+            }
         } catch (Exception e) {
             this.logErrorMessage("Write json to %s failed, %s", importFile.getAbsolutePath(), e.getMessage());
         }
@@ -667,7 +669,7 @@ public abstract class DataDstUEBase extends DataDstJava {
         // 带编码的输出
         String encoding = SchemeConf.getInstance().getKey().getEncoding();
         if (null == encoding || encoding.isEmpty())
-            return in.toString().getBytes();
+            return in.getBytes();
 
         encodingCache = Charset.forName(encoding);
         return in.getBytes(encodingCache);
@@ -1038,8 +1040,8 @@ public abstract class DataDstUEBase extends DataDstJava {
             return;
         }
 
-        if (val instanceof List<?>) {
-            for (Object element : (List<?>) val) {
+        if (val instanceof List<?> list) {
+            for (Object element : list) {
                 if (!(element instanceof HashMap<?, ?>)) {
                     break;
                 }
@@ -1051,12 +1053,12 @@ public abstract class DataDstUEBase extends DataDstJava {
                     fillOneofCache(children.get(0), (HashMap<?, ?>) element);
                 }
             }
-        } else if (val instanceof HashMap<?, ?>) {
+        } else if (val instanceof HashMap<?, ?> hashMap) {
             for (ArrayList<DataDstWriterNodeWrapper> children : field.getChildren().values()) {
                 if (children.isEmpty()) {
                     continue;
                 }
-                fillOneofCache(children.get(0), (HashMap<?, ?>) val);
+                fillOneofCache(children.get(0), hashMap);
             }
         }
 
@@ -1079,19 +1081,28 @@ public abstract class DataDstUEBase extends DataDstJava {
         return ret;
     }
 
-    private Object pickNameField(Object buildObj, UEDataRowRule rule, HashMap<String, Object> data)
+    private Object pickNameField(@SuppressWarnings("unused") Object buildObj, UEDataRowRule rule,
+            HashMap<String, Object> data)
             throws ConvException {
         if (rule.keyFields.isEmpty()) {
             return null;
         }
 
         // 如果是直接采用原始字段则直接返回原始字段数据
-        if (1 == rule.keyFields.size() && null != rule.keyFields.get(0).getReferNode()) {
-            return pickJavaFieldValue(data, rule.keyFields.get(0));
+        if (1 == rule.keyFields.size()) {
+            DataDstWriterNodeWrapper keyWrapper = rule.keyFields.get(0);
+            Object val = pickJavaFieldValue(data, keyWrapper);
+            if (val instanceof String strVal) {
+                if (strVal.isEmpty()) {
+                    return null;
+                }
+            } else if (val != null) {
+                return val;
+            }
         }
 
         switch (rule.nameType) {
-            case LONG: {
+            case LONG -> {
                 long ret = 0;
                 for (int i = 1; i < rule.keyFields.size(); ++i) {
                     DataDstWriterNodeWrapper wrapper = rule.keyFields.get(i);
@@ -1099,13 +1110,13 @@ public abstract class DataDstUEBase extends DataDstJava {
                     if (null == val) {
                         continue;
                     }
-                    if (val instanceof Number) {
+                    if (val instanceof Number number) {
                         ret = ret + wrapper.getFieldExtension().mutableUE().keyTag
-                                * ((Number) val).longValue();
+                                * number.longValue();
                     } else {
                         try {
                             ret = ret + wrapper.getFieldExtension().mutableUE().keyTag
-                                    * Long.valueOf(val.toString());
+                                    * Long.parseLong(val.toString());
                         } catch (NumberFormatException e) {
                             throw new ConvException(
                                     String.format("Try to convert %s to integer failed.%s", val.toString(),
@@ -1116,7 +1127,7 @@ public abstract class DataDstUEBase extends DataDstJava {
 
                 return ret != 0 ? ret : null;
             }
-            case DOUBLE: {
+            case DOUBLE -> {
                 double ret = 0.0;
                 for (int i = 1; i < rule.keyFields.size(); ++i) {
                     DataDstWriterNodeWrapper wrapper = rule.keyFields.get(i);
@@ -1124,13 +1135,13 @@ public abstract class DataDstUEBase extends DataDstJava {
                     if (null == val) {
                         continue;
                     }
-                    if (val instanceof Number) {
+                    if (val instanceof Number number) {
                         ret = ret + wrapper.getFieldExtension().mutableUE().keyTag
-                                * ((Number) val).doubleValue();
+                                * number.doubleValue();
                     } else {
                         try {
                             ret = ret + wrapper.getFieldExtension().mutableUE().keyTag
-                                    * Double.valueOf(val.toString());
+                                    * Double.parseDouble(val.toString());
                         } catch (NumberFormatException e) {
                             throw new ConvException(
                                     String.format("Try to convert %s to number failed.%s", val.toString(),
@@ -1141,8 +1152,8 @@ public abstract class DataDstUEBase extends DataDstJava {
 
                 return ret != 0 ? ret : null;
             }
-            case STRING: {
-                ArrayList<String> ls = new ArrayList<String>();
+            case STRING -> {
+                ArrayList<String> ls = new ArrayList<>();
                 ls.ensureCapacity(rule.keyFields.size());
                 for (int i = 1; i < rule.keyFields.size(); ++i) {
                     DataDstWriterNodeWrapper wrapper = rule.keyFields.get(i);
@@ -1158,8 +1169,9 @@ public abstract class DataDstUEBase extends DataDstJava {
                 }
                 return String.join("", ls);
             }
-            default:
+            default -> {
                 return null;
+            }
         }
     }
 
@@ -1178,67 +1190,61 @@ public abstract class DataDstUEBase extends DataDstJava {
         }
 
         switch (desc.getType()) {
-            case INT: {
+            case INT -> {
                 DataContainer<Long> ret = DataSrcImpl.getOurInstance().getValue(desc.identify, 0L);
                 if (null != ret && ret.valid) {
                     return ret.value.intValue();
                 } else if (desc.getFieldListStripRule() == DataDstWriterNode.ListStripRule.STRIP_NOTHING) {
-                    return Integer.valueOf(0);
+                    return 0;
                 }
-                break;
             }
 
-            case LONG: {
+            case LONG -> {
                 DataContainer<Long> ret = DataSrcImpl.getOurInstance().getValue(desc.identify, 0L);
                 if (null != ret && ret.valid) {
-                    return ret.value.longValue();
+                    return ret.value;
                 } else if (desc.getFieldListStripRule() == DataDstWriterNode.ListStripRule.STRIP_NOTHING) {
                     return Long.valueOf(0);
                 }
-                break;
             }
 
-            case FLOAT: {
+            case FLOAT -> {
                 DataContainer<Double> ret = DataSrcImpl.getOurInstance().getValue(desc.identify, 0.0);
                 if (null != ret && ret.valid) {
                     return ret.value.floatValue();
                 } else if (desc.getFieldListStripRule() == DataDstWriterNode.ListStripRule.STRIP_NOTHING) {
                     return Float.valueOf(0);
                 }
-                break;
             }
 
-            case DOUBLE: {
+            case DOUBLE -> {
                 DataContainer<Double> ret = DataSrcImpl.getOurInstance().getValue(desc.identify, 0.0);
                 if (null != ret && ret.valid) {
-                    return ret.value.doubleValue();
+                    return ret.value;
                 } else if (desc.getFieldListStripRule() == DataDstWriterNode.ListStripRule.STRIP_NOTHING) {
                     return Double.valueOf(0);
                 }
-                break;
             }
 
-            case BOOLEAN: {
+            case BOOLEAN -> {
                 DataContainer<Boolean> ret = DataSrcImpl.getOurInstance().getValue(desc.identify, false);
                 if (null != ret && ret.valid) {
-                    return ret.value.booleanValue();
+                    return ret.value;
                 } else if (desc.getFieldListStripRule() == DataDstWriterNode.ListStripRule.STRIP_NOTHING) {
-                    return Boolean.valueOf(false);
+                    return false;
                 }
-                break;
             }
 
-            case STRING: {
+            case STRING -> {
                 DataContainer<String> ret = DataSrcImpl.getOurInstance().getValue(desc.identify, "");
                 if (null != ret && ret.valid) {
                     return ret.value;
                 } else if (desc.getFieldListStripRule() == DataDstWriterNode.ListStripRule.STRIP_NOTHING) {
                     return "";
                 }
-                break;
             }
 
-            case BYTES: {
+            case BYTES -> {
                 DataContainer<String> res = DataSrcImpl.getOurInstance().getValue(desc.identify, "");
                 if (null != res && res.valid) {
                     String encoding = SchemeConf.getInstance().getKey().getEncoding();
@@ -1250,14 +1256,12 @@ public abstract class DataDstUEBase extends DataDstJava {
                 } else if (desc.getFieldListStripRule() == DataDstWriterNode.ListStripRule.STRIP_NOTHING) {
                     return "";
                 }
-                break;
             }
 
-            case MESSAGE: {
-                break;
+            case MESSAGE -> {
             }
-            default:
-                break;
+            default -> {
+            }
         }
 
         return null;
@@ -1307,7 +1311,7 @@ public abstract class DataDstUEBase extends DataDstJava {
             // dump oneof if field refer to a oneof descriptor
             if (field.getReferOneof() != null) {
                 if (oneofCache == null) {
-                    oneofCache = new HashMap<String, DataDstWriterNodeWrapper>();
+                    oneofCache = new HashMap<>();
                 }
 
                 // 非嵌套模式不支持oneof
@@ -1358,7 +1362,7 @@ public abstract class DataDstUEBase extends DataDstJava {
     protected LinkedList<DataDstWriterNodeWrapper> buildWriterNodeWraper(DataDstWriterNodeWrapper root,
             DataDstTypeDescriptor typeDesc) {
         if (null != typeDesc.getReferEnumType()) {
-            return new LinkedList<DataDstWriterNodeWrapper>();
+            return new LinkedList<>();
         }
 
         // 只需要build一次
@@ -1366,7 +1370,7 @@ public abstract class DataDstUEBase extends DataDstJava {
             buildWriterNodeWraperForWriterNode(root, root.getReferNode(), typeDesc);
         }
 
-        LinkedList<DataDstWriterNodeWrapper> ret = new LinkedList<DataDstWriterNodeWrapper>();
+        LinkedList<DataDstWriterNodeWrapper> ret = new LinkedList<>();
         ret.add(root);
         return ret;
     }
@@ -1403,7 +1407,7 @@ public abstract class DataDstUEBase extends DataDstJava {
             // dump oneof if field refer to a oneof descriptor
             if (field.getReferOneof() != null) {
                 if (oneofCache == null) {
-                    oneofCache = new HashMap<String, DataDstWriterNodeWrapper>();
+                    oneofCache = new HashMap<>();
                 }
 
                 // 非嵌套模式不支持oneof
@@ -1523,7 +1527,7 @@ public abstract class DataDstUEBase extends DataDstJava {
 
     private String getHeaderFieldUProperty() {
         if (null == headerFieldUProperty) {
-            LinkedList<String> ls = new LinkedList<String>();
+            LinkedList<String> ls = new LinkedList<>();
             if (!SchemeConf.getInstance().getUEOptions().editAccess.isEmpty()) {
                 ls.add(SchemeConf.getInstance().getUEOptions().editAccess);
             }
@@ -1568,7 +1572,7 @@ public abstract class DataDstUEBase extends DataDstJava {
 
         // keyField can not be list, so it must has only 1 element
         DataDstWriterNodeWrapper nameNode = rule.keyFields.get(0);
-        if (nameNode.getReferNode() != null) {
+        if (nameNode.getReferField() != null) {
             String ueTypeName = getUETypeName(nameNode.getReferField());
             if (ueTypeName.equalsIgnoreCase("FString")) {
                 ueTypeName = "FName";
@@ -1576,7 +1580,7 @@ public abstract class DataDstUEBase extends DataDstJava {
             return String.format("%s %s", ueTypeName, nameNode.varName);
         }
 
-        ArrayList<String> params = new ArrayList<String>();
+        ArrayList<String> params = new ArrayList<>();
         params.ensureCapacity(rule.keyFields.size());
         for (int i = 1; i < rule.keyFields.size(); ++i) {
             // keyField can not be list, so it must has only 1 element
@@ -1606,11 +1610,11 @@ public abstract class DataDstUEBase extends DataDstJava {
 
         // keyField can not be list, so it must has only 1 element
         DataDstWriterNodeWrapper nameNode = rule.keyFields.get(0);
-        if (nameNode.getReferNode() != null) {
+        if (nameNode.getReferField() != null) {
             return String.format("%s%s", prefix, nameNode.varName);
         }
 
-        ArrayList<String> params = new ArrayList<String>();
+        ArrayList<String> params = new ArrayList<>();
         params.ensureCapacity(rule.keyFields.size());
         for (int i = 1; i < rule.keyFields.size(); ++i) {
             // keyField can not be list, so it must has only 1 element
@@ -1640,7 +1644,7 @@ public abstract class DataDstUEBase extends DataDstJava {
 
         // keyField can not be list, so it must has only 1 element
         DataDstWriterNodeWrapper nameNode = rule.keyFields.get(0);
-        if (nameNode.getReferNode() != null) {
+        if (nameNode.getReferField() != null) {
             String ueTypeNameIdent = null;
             if (null != nameNode.getFieldExtension()) {
                 ueTypeNameIdent = nameNode.getFieldExtension().mutableUE().ueTypeName;
@@ -1649,22 +1653,19 @@ public abstract class DataDstUEBase extends DataDstJava {
                 return String.format("*%s.ToString()", nameNode.varName);
             }
 
-            switch (rule.nameType) {
-                case LONG:
-                    return String.format("*FString::Printf(TEXT(\"%%lld\"), static_cast<long long>(%s))",
-                            nameNode.varName);
-                case DOUBLE:
-                    return String.format("*FString::Printf(TEXT(\"%%g\"), static_cast<double>(%s))", nameNode.varName);
-                case STRING:
-                    return nameNode.varName;
-                default:
-                    return "/** Error Key Set **/";
-            }
+            return switch (rule.nameType) {
+                case LONG -> String.format("*FString::Printf(TEXT(\"%%lld\"), static_cast<long long>(%s))",
+                        nameNode.varName);
+                case DOUBLE ->
+                    String.format("*FString::Printf(TEXT(\"%%g\"), static_cast<double>(%s))", nameNode.varName);
+                case STRING -> nameNode.varName;
+                default -> "/** Error Key Set **/";
+            };
         }
 
         switch (rule.nameType) {
-            case LONG: {
-                ArrayList<String> params = new ArrayList<String>();
+            case LONG -> {
+                ArrayList<String> params = new ArrayList<>();
                 params.ensureCapacity(rule.keyFields.size());
                 for (int i = 1; i < rule.keyFields.size(); ++i) {
                     // keyField can not be list, so it must has only 1 element
@@ -1678,8 +1679,8 @@ public abstract class DataDstUEBase extends DataDstJava {
                 }
                 return String.format("*FString::Printf(TEXT(\"%%lld\"), %s)", String.join(" + ", params));
             }
-            case DOUBLE: {
-                ArrayList<String> params = new ArrayList<String>();
+            case DOUBLE -> {
+                ArrayList<String> params = new ArrayList<>();
                 params.ensureCapacity(rule.keyFields.size());
                 for (int i = 1; i < rule.keyFields.size(); ++i) {
                     // keyField can not be list, so it must has only 1 element
@@ -1693,9 +1694,9 @@ public abstract class DataDstUEBase extends DataDstJava {
                 }
                 return String.format("*FString::Printf(TEXT(\"%%g\"), %s)", String.join(" + ", params));
             }
-            case STRING: {
-                ArrayList<String> paramTypes = new ArrayList<String>();
-                ArrayList<String> paramValues = new ArrayList<String>();
+            case STRING -> {
+                ArrayList<String> paramTypes = new ArrayList<>();
+                ArrayList<String> paramValues = new ArrayList<>();
                 paramTypes.ensureCapacity(rule.keyFields.size());
                 paramValues.ensureCapacity(rule.keyFields.size());
                 for (int i = 1; i < rule.keyFields.size(); ++i) {
@@ -1717,8 +1718,9 @@ public abstract class DataDstUEBase extends DataDstJava {
                 return String.format("*FString::Printf(TEXT(\"%s\"), %s)", String.join("", paramTypes),
                         String.join(", ", paramValues));
             }
-            default:
+            default -> {
                 return "/** Error Key Set **/";
+            }
         }
     }
 
@@ -1790,7 +1792,7 @@ public abstract class DataDstUEBase extends DataDstJava {
         DataDstWriterNode.JAVA_TYPE descType = DataDstWriterNode.JAVA_TYPE.STRING;
         if (null != typeDesc) {
             descType = typeDesc.getType();
-            if (null != fieldDesc && fieldDesc.mutableExtension().description != null) {
+            if (fieldDesc.mutableExtension().description != null) {
                 for (String descLine : fieldDesc.mutableExtension().description.replace("\r\n", "\n")
                         .replace("\r", "\n").split("\n")) {
                     fout.write(dumpString(String.format("    // %s\r\n", descLine)));
@@ -1801,56 +1803,43 @@ public abstract class DataDstUEBase extends DataDstJava {
         String ueTypeName = null;
         boolean enable = true;
         switch (descType) {
-            case INT:
-            case LONG:
-            case FLOAT:
-            case DOUBLE:
-            case BOOLEAN:
-                break;
-            case STRING: {
+            case INT, LONG, FLOAT, DOUBLE, BOOLEAN -> {
+            }
+            case STRING -> {
                 if (varName.equalsIgnoreCase("Name")) {
                     ueTypeName = "FName";
                 }
-                break;
             }
-            case BYTES: {
+            case BYTES -> {
                 if (varName.equalsIgnoreCase("Name")) {
                     ueTypeName = "FName";
                 }
                 fout.write(
                         dumpString(
                                 String.format("    /** Bytes data will be encoded by base64 for %s **/\r\n", varName)));
-                break;
             }
-
-            case MESSAGE: {
+            case MESSAGE -> {
                 ueTypeName = getUETypeName(typeDesc);
-                break;
             }
-
-            default:
+            default -> {
                 enable = false;
                 fout.write(dumpString(String.format("    /** invalid data type %s of UE DataTable for %s **/\r\n",
                         descType.name(), varName)));
                 this.logErrorMessage("invalid data type %s of UE DataTable for %s, should not called here.",
                         descType.name(), varName);
-                break;
+            }
         }
 
         if (enable) {
             if (null == ueTypeName) {
-                String ueTypeNameIdent = null;
-                String ueOriginTypeName = null;
-                if (null != fieldDesc) {
-                    ueTypeNameIdent = fieldDesc.mutableExtension().mutableUE().ueTypeName;
-                    ueOriginTypeName = fieldDesc.mutableExtension().mutableUE().ueOriginTypeName;
-                }
+                String ueTypeNameIdent = fieldDesc.mutableExtension().mutableUE().ueTypeName;
+                String ueOriginTypeName = fieldDesc.mutableExtension().mutableUE().ueOriginTypeName;
                 if (ueOriginTypeName != null && !ueOriginTypeName.trim().isEmpty()) {
                     ueTypeName = ueOriginTypeName.trim();
                 } else if (ueTypeNameIdent == null || ueTypeNameIdent.isEmpty()) {
                     ueTypeName = getUETypeName(typeDesc);
                 } else {
-                    if (null != fieldDesc && fieldDesc.mutableExtension().mutableUE().ueTypeIsClass) {
+                    if (fieldDesc.mutableExtension().mutableUE().ueTypeIsClass) {
                         ueTypeName = String.format("TSoftClassPtr< %s >", ueTypeNameIdent);
                     } else {
                         ueTypeName = String.format("TSoftObjectPtr< %s >", ueTypeNameIdent);
@@ -1879,7 +1868,7 @@ public abstract class DataDstUEBase extends DataDstJava {
                 } else if (ueTypeNameIdent == null || ueTypeNameIdent.isEmpty()) {
                     valueUeTypeName = getUETypeName(typeDesc.getSortedFields().get(1).getTypeDescriptor());
                 } else {
-                    if (null != fieldDesc && fieldDesc.mutableExtension().mutableUE().ueTypeIsClass) {
+                    if (fieldDesc.mutableExtension().mutableUE().ueTypeIsClass) {
                         valueUeTypeName = String.format("TSoftClassPtr< %s >", ueTypeNameIdent);
                     } else {
                         valueUeTypeName = String.format("TSoftObjectPtr< %s >", ueTypeNameIdent);
@@ -1892,12 +1881,10 @@ public abstract class DataDstUEBase extends DataDstJava {
                 fout.write(dumpString(String.format("    TArray< %s > %s;\r\n", ueTypeName, varName)));
             } else {
                 switch (fieldDesc.getType()) {
-                    case MESSAGE:
-                    case UNKNOWN: {
+                    case MESSAGE, UNKNOWN -> {
                         fout.write(dumpString(String.format("    %s %s;\r\n", ueTypeName, varName)));
-                        break;
                     }
-                    case STRING: {
+                    case STRING -> {
                         String ueOriginTypeDefaultValue = fieldDesc.mutableExtension()
                                 .mutableUE().ueOriginTypeDefaultValue;
                         if (ueOriginTypeDefaultValue != null && !ueOriginTypeDefaultValue.trim().isEmpty()) {
@@ -1907,9 +1894,8 @@ public abstract class DataDstUEBase extends DataDstJava {
                         } else {
                             fout.write(dumpString(String.format("    %s %s;\r\n", ueTypeName, varName)));
                         }
-                        break;
                     }
-                    default: {
+                    default -> {
                         String ueOriginTypeName = fieldDesc.mutableExtension().mutableUE().ueOriginTypeName;
                         String ueOriginTypeDefaultValue = fieldDesc.mutableExtension()
                                 .mutableUE().ueOriginTypeDefaultValue;
@@ -1921,8 +1907,6 @@ public abstract class DataDstUEBase extends DataDstJava {
                                     String.format("    %s %s = %s;\r\n", ueTypeName, varName,
                                             getUETypeDefault(fieldDesc))));
                         }
-
-                        break;
                     }
                 }
             }
@@ -1969,28 +1953,37 @@ public abstract class DataDstUEBase extends DataDstJava {
 
         DataDstWriterNode.JAVA_TYPE type = desc.getType();
         switch (type) {
-            case INT:
+            case INT -> {
                 return "int32";
-            case LONG:
+            }
+            case LONG -> {
                 return "int64";
-            case FLOAT:
+            }
+            case FLOAT -> {
                 return "float";
-            case DOUBLE:
+            }
+            case DOUBLE -> {
                 return "double";
-            case BOOLEAN:
+            }
+            case BOOLEAN -> {
                 return "bool";
-            case STRING:
+            }
+            case STRING -> {
                 return "FString";
-            case BYTES:
+            }
+            case BYTES -> {
                 return "FString";
-            case MESSAGE:
+            }
+            case MESSAGE -> {
                 if (desc.getPackageName() == null || desc.getPackageName().isEmpty()) {
                     return String.format("F%s", getIdentName(desc.getMessageName()));
                 } else {
                     return String.format("F%s", getIdentName(desc.getPackageName() + "_" + desc.getMessageName()));
                 }
-            default:
+            }
+            default -> {
                 return "";
+            }
         }
     }
 
@@ -2011,30 +2004,21 @@ public abstract class DataDstUEBase extends DataDstJava {
                     getIdentName(field.getReferEnumType().getDefaultValue().getName()));
         }
 
-        switch (descType) {
-            case INT:
-                return "0";
-            case LONG:
-                return "0";
-            case FLOAT:
-                return "0";
-            case DOUBLE:
-                return "0";
-            case BOOLEAN:
-                return "false";
-            case STRING:
-                return "TEXT(\"\")";
-            case BYTES:
-                return "TEXT(\"\")";
-            case MESSAGE:
-                return "nullptr";
-            default:
-                return "NULL";
-        }
+        return switch (descType) {
+            case INT -> "0";
+            case LONG -> "0";
+            case FLOAT -> "0";
+            case DOUBLE -> "0";
+            case BOOLEAN -> "false";
+            case STRING -> "TEXT(\"\")";
+            case BYTES -> "TEXT(\"\")";
+            case MESSAGE -> "nullptr";
+            default -> "NULL";
+        };
     }
 
     private void writeUETypeSetDefaultCode(FileOutputStream sourceFs, String prefix, String varName,
-            DataDstOneofDescriptor oneof) throws IOException {
+            @SuppressWarnings("unused") DataDstOneofDescriptor oneof) throws IOException {
         // UE only support UENUM of uint8, so we can only use field name as case
         // sourceFs.write(dumpString(String.format("%s.%s =
         // decltype(%s.%s)::%s_NOT_SET;\r\n", prefix, varName,
@@ -2080,26 +2064,17 @@ public abstract class DataDstUEBase extends DataDstJava {
     }
 
     private String getUETypeFormat(DataDstWriterNode.JAVA_TYPE type) {
-        switch (type) {
-            case INT:
-                return "%d";
-            case LONG:
-                return "%lld";
-            case FLOAT:
-                return "%f";
-            case DOUBLE:
-                return "%llf";
-            case BOOLEAN:
-                return "%d";
-            case STRING:
-                return "%s";
-            case BYTES:
-                return "%s";
-            case MESSAGE:
-                return "nullptr";
-            default:
-                return "NULL";
-        }
+        return switch (type) {
+            case INT -> "%d";
+            case LONG -> "%lld";
+            case FLOAT -> "%f";
+            case DOUBLE -> "%llf";
+            case BOOLEAN -> "%d";
+            case STRING -> "%s";
+            case BYTES -> "%s";
+            case MESSAGE -> "nullptr";
+            default -> "NULL";
+        };
     }
 
     private NAME_TYPE getUENameType(DataDstFieldDescriptor field) {
@@ -2114,21 +2089,12 @@ public abstract class DataDstUEBase extends DataDstJava {
             }
         }
 
-        switch (field.getType()) {
-            case INT:
-            case LONG:
-            case BOOLEAN:
-                return NAME_TYPE.LONG;
-            case FLOAT:
-            case DOUBLE:
-                return NAME_TYPE.DOUBLE;
-            case STRING:
-            case BYTES:
-            case MESSAGE:
-                return NAME_TYPE.STRING;
-            default:
-                return NAME_TYPE.LONG;
-        }
+        return switch (field.getType()) {
+            case INT, LONG, BOOLEAN -> NAME_TYPE.LONG;
+            case FLOAT, DOUBLE -> NAME_TYPE.DOUBLE;
+            case STRING, BYTES, MESSAGE -> NAME_TYPE.STRING;
+            default -> NAME_TYPE.LONG;
+        };
     }
 
     static DataDstFieldDescriptor createVirtualFieldDescriptor(String name, int index, JAVA_TYPE type) {
@@ -2142,6 +2108,7 @@ public abstract class DataDstUEBase extends DataDstJava {
                 FIELD_LABEL_TYPE.OPTIONAL, null);
     }
 
+    @SuppressWarnings("unused")
     static DataDstFieldDescriptor createVirtualFieldDescriptor(String name, int index, DataDstTypeDescriptor msgDesc) {
         return new DataDstFieldDescriptor(msgDesc, index, name, FIELD_LABEL_TYPE.OPTIONAL, null);
     }
@@ -2172,7 +2139,7 @@ public abstract class DataDstUEBase extends DataDstJava {
             return ret;
         }
 
-        ArrayList<DataDstWriterNodeWrapper> allFields = new ArrayList<DataDstWriterNodeWrapper>();
+        ArrayList<DataDstWriterNodeWrapper> allFields = new ArrayList<>();
 
         // if originAllFields is a Message, unpack it
         if (originAllFields.size() == 1 && originAllFields.getFirst().getChildren() != null) {
@@ -2222,7 +2189,7 @@ public abstract class DataDstUEBase extends DataDstJava {
 
         // 如果字段里本来就有，就直接用原始的字段
         if (nameIndex >= 0) {
-            ret.keyFields = new ArrayList<DataDstWriterNodeWrapper>();
+            ret.keyFields = new ArrayList<>();
             ret.keyFields.add(allFields.get(nameIndex));
             allFields.remove(nameIndex);
             ret.valueFields = allFields;
@@ -2233,10 +2200,10 @@ public abstract class DataDstUEBase extends DataDstJava {
         // 检查 key_tag，如果找到了，就优先用 key_tag
         DataDstWriterNodeWrapper namedKey = createVirtualWriterNodeWrapper("Name", 0, JAVA_TYPE.STRING);
 
-        ret.keyFields = new ArrayList<DataDstWriterNodeWrapper>();
+        ret.keyFields = new ArrayList<>();
         ret.keyFields.add(namedKey);
 
-        ret.valueFields = new ArrayList<DataDstWriterNodeWrapper>();
+        ret.valueFields = new ArrayList<>();
         ret.valueFields.ensureCapacity(allFields.size());
 
         ret.nameType = NAME_TYPE.LONG;
@@ -2286,175 +2253,178 @@ public abstract class DataDstUEBase extends DataDstJava {
             globalCodeWrittenCache.add(codeInfo.header);
         }
 
-        // 加载代码
-        FileOutputStream headerFs = createCodeHeaderFileStream(rule, codeInfo);
-
         // 枚举类型
-        if (null != codeInfo.writerNodeWrapper && null != codeInfo.writerNodeWrapper.getReferEnumDescriptor()) {
-            for (DataDstEnumValueDescriptor enumValueDesc : codeInfo.writerNodeWrapper.getReferEnumDescriptor()
-                    .getSortedValues()) {
-                writeCodeHeaderField(headerFs, enumValueDesc, null);
-            }
-        }
-
-        HashSet<String> dumpedFields = new HashSet<String>();
-        // The key field of 0 is FName Name
-        for (int i = 0; rule.keyFields != null && i < rule.keyFields.size(); ++i) {
-            DataDstWriterNodeWrapper descWraper = rule.keyFields.get(i);
-            DataDstFieldDescriptor field = descWraper.getReferField();
-            if (null == field) {
-                continue;
-            }
-
-            dumpedFields.add(descWraper.varName);
-
-            writeCodeHeaderField(headerFs, descWraper.getReferField(), descWraper.varName, descWraper.isGenerated);
-        }
-
-        for (int i = 0; rule.valueFields != null && i < rule.valueFields.size(); ++i) {
-            DataDstWriterNodeWrapper descWraper = rule.valueFields.get(i);
-            dumpedFields.add(descWraper.varName);
-
-            // oneof 处理
-            if (descWraper.getReferOneof() != null) {
-                writeCodeHeaderField(headerFs, descWraper.getReferOneof(), descWraper.varName,
-                        descWraper.isGenerated);
-                dumpedFields.add(descWraper.varName);
-                continue;
-            }
-
-            writeCodeHeaderField(headerFs, descWraper.getReferField(), descWraper.varName, descWraper.isGenerated);
-        }
-
-        // 还要补全未使用的字段
-        if (null != codeInfo.writerNodeWrapper) {
-            ArrayList<DataDstFieldDescriptor> sortedFields = codeInfo.writerNodeWrapper.getTypeDescriptor()
-                    .getSortedFields();
-            if (sortedFields != null) {
-                for (DataDstFieldDescriptor field : codeInfo.writerNodeWrapper.getTypeDescriptor().getSortedFields()) {
-                    // Write oneof
-                    if (field.getReferOneof() != null) {
-                        String oneofVarName = getIdentName(field.getReferOneof().getName());
-                        if (!dumpedFields.contains(oneofVarName)) {
-                            writeCodeHeaderField(headerFs, field.getReferOneof(), oneofVarName, false);
-                            dumpedFields.add(oneofVarName);
-                        }
-                    }
-
-                    String varName = getIdentName(field.getName());
-                    if (dumpedFields.contains(varName)) {
-                        continue;
-                    }
-                    dumpedFields.add(varName);
-
-                    writeCodeHeaderField(headerFs, field, varName, false);
+        try ( // 加载代码
+                FileOutputStream headerFs = createCodeHeaderFileStream(rule, codeInfo)) {
+            // 枚举类型
+            if (null != codeInfo.writerNodeWrapper && null != codeInfo.writerNodeWrapper.getReferEnumDescriptor()) {
+                for (DataDstEnumValueDescriptor enumValueDesc : codeInfo.writerNodeWrapper.getReferEnumDescriptor()
+                        .getSortedValues()) {
+                    writeCodeHeaderField(headerFs, enumValueDesc, null);
                 }
             }
-        }
 
-        headerFs.write(dumpString(codeHeaderSuffix));
+            HashSet<String> dumpedFields = new HashSet<>();
+            // The key field of 0 is FName Name
+            for (int i = 0; rule.keyFields != null && i < rule.keyFields.size(); ++i) {
+                DataDstWriterNodeWrapper descWraper = rule.keyFields.get(i);
+                DataDstFieldDescriptor field = descWraper.getReferField();
+                if (null == field) {
+                    continue;
+                }
 
-        if (rule.helper == null || rule.helper.isEmpty()) {
-            headerFs.close();
-            return;
-        }
+                dumpedFields.add(descWraper.varName);
 
-        boolean enableDataTable = true;
-        if (rule.keyFields.isEmpty()) {
-            enableDataTable = false;
-        }
-        if (null != codeInfo.writerNodeWrapper) {
-            DataDstMessageExtUE ueExt = codeInfo.writerNodeWrapper.getMessageExtension().mutableUE();
-            if (ueExt.notDataTable) {
+                writeCodeHeaderField(headerFs, descWraper.getReferField(), descWraper.varName, descWraper.isGenerated);
+            }
+
+            for (int i = 0; rule.valueFields != null && i < rule.valueFields.size(); ++i) {
+                DataDstWriterNodeWrapper descWraper = rule.valueFields.get(i);
+                dumpedFields.add(descWraper.varName);
+
+                // oneof 处理
+                if (descWraper.getReferOneof() != null) {
+                    writeCodeHeaderField(headerFs, descWraper.getReferOneof(), descWraper.varName,
+                            descWraper.isGenerated);
+                    dumpedFields.add(descWraper.varName);
+                    continue;
+                }
+
+                writeCodeHeaderField(headerFs, descWraper.getReferField(), descWraper.varName, descWraper.isGenerated);
+            }
+
+            // 还要补全未使用的字段
+            if (null != codeInfo.writerNodeWrapper) {
+                ArrayList<DataDstFieldDescriptor> sortedFields = codeInfo.writerNodeWrapper.getTypeDescriptor()
+                        .getSortedFields();
+                if (sortedFields != null) {
+                    for (DataDstFieldDescriptor field : codeInfo.writerNodeWrapper.getTypeDescriptor()
+                            .getSortedFields()) {
+                        // Write oneof
+                        if (field.getReferOneof() != null) {
+                            String oneofVarName = getIdentName(field.getReferOneof().getName());
+                            if (!dumpedFields.contains(oneofVarName)) {
+                                writeCodeHeaderField(headerFs, field.getReferOneof(), oneofVarName, false);
+                                dumpedFields.add(oneofVarName);
+                            }
+                        }
+
+                        String varName = getIdentName(field.getName());
+                        if (dumpedFields.contains(varName)) {
+                            continue;
+                        }
+                        dumpedFields.add(varName);
+
+                        writeCodeHeaderField(headerFs, field, varName, false);
+                    }
+                }
+            }
+
+            headerFs.write(dumpString(codeHeaderSuffix));
+
+            if (rule.helper == null || rule.helper.isEmpty()) {
+                return;
+            }
+
+            boolean enableDataTable = true;
+            if (rule.keyFields.isEmpty()) {
                 enableDataTable = false;
             }
+            if (null != codeInfo.writerNodeWrapper) {
+                DataDstMessageExtUE ueExt = codeInfo.writerNodeWrapper.getMessageExtension().mutableUE();
+                if (ueExt.notDataTable) {
+                    enableDataTable = false;
+                }
+            }
+
+            headerFs.write(dumpString("\r\n"));
+            headerFs.write(dumpString("\r\n"));
+            headerFs.write(dumpString("\r\n"));
+            // 辅助代码类定义
+            String helperClazzName = getIdentName(codeInfo.baseName + "_" + rule.helper);
+            headerFs.write(dumpString("UCLASS(Blueprintable, BlueprintType)\r\n"));
+            headerFs.write(dumpString(String.format("class U%s : public UObject\r\n", helperClazzName)));
+            headerFs.write(dumpString("{\r\n"));
+            headerFs.write(dumpString("    GENERATED_BODY()\r\n"));
+            headerFs.write(dumpString("\r\n"));
+
+            headerFs.write(dumpString("public:\r\n"));
+            headerFs.write(dumpString(String.format("    U%s();\r\n", helperClazzName)));
+            headerFs.write(dumpString("\r\n"));
+
+            if (enableDataTable) {
+                headerFs.write(dumpString("    void OnReload();\r\n"));
+                headerFs.write(dumpString("\r\n"));
+
+                headerFs.write(dumpString(
+                        "    void SetLoader(TSharedPtr<ConstructorHelpers::FObjectFinder<UDataTable> > NewLoader);\r\n"));
+                headerFs.write(dumpString("\r\n"));
+
+                headerFs.write(dumpString("    void InitializeDefaultLoader() const;\r\n"));
+                headerFs.write(dumpString("\r\n"));
+
+                headerFs.write(dumpString("    void DisableDefaultLoader();\r\n"));
+                headerFs.write(dumpString("\r\n"));
+
+                headerFs.write(dumpString("    const TCHAR* GetObjectPath() const;\r\n"));
+                headerFs.write(dumpString("\r\n"));
+
+                headerFs.write(dumpString(
+                        String.format("    static FName GetRowName(%s);\r\n", getDataRowKeyToNameParamsSpecify(rule))));
+                headerFs.write(dumpString("\r\n"));
+
+                headerFs.write(dumpString(getHeaderFieldUFunction()));
+                headerFs.write(dumpString(
+                        String.format("    FName GetDataRowName(%s) const;\r\n",
+                                getDataRowKeyToNameParamsSpecify(rule))));
+                headerFs.write(dumpString("\r\n"));
+
+                headerFs.write(dumpString(getHeaderFieldUFunction()));
+                headerFs.write(dumpString(
+                        String.format("    FName GetTableRowName(const %s& TableRow) const;\r\n", codeInfo.clazzName)));
+                headerFs.write(dumpString("\r\n"));
+
+                headerFs.write(dumpString(getHeaderFieldUFunction()));
+                headerFs.write(dumpString(
+                        String.format("    const %s& GetDataRowByName(const FName& Name, bool& IsValid) const;\r\n",
+                                codeInfo.clazzName)));
+                headerFs.write(dumpString("\r\n"));
+
+                headerFs.write(dumpString(getHeaderFieldUFunction()));
+                headerFs.write(dumpString(String.format("    const %s& GetDataRowByKey(%s, bool& IsValid) const;\r\n",
+                        codeInfo.clazzName, getDataRowKeyToNameParamsSpecify(rule))));
+                headerFs.write(dumpString("\r\n"));
+
+                headerFs.write(dumpString(String.format(
+                        "    bool ForeachRow(TFunctionRef<void (const FName& Key, const %s& Value)> Predicate) const;\r\n",
+                        codeInfo.clazzName)));
+                headerFs.write(dumpString("\r\n"));
+
+                headerFs.write(dumpString(getHeaderFieldUFunction()));
+                headerFs.write(dumpString("    UDataTable* GetRawDataTable(bool& IsValid) const;\r\n"));
+                headerFs.write(dumpString("\r\n"));
+            }
+
+            headerFs.write(
+                    dumpString(String.format("    static void ClearRow(%s& TableRow);\r\n", codeInfo.clazzName)));
+            headerFs.write(dumpString("\r\n"));
+
+            headerFs.write(dumpString(getHeaderFieldUFunction()));
+            headerFs.write(
+                    dumpString(String.format("    void ClearDataRow(%s& TableRow) const;\r\n", codeInfo.clazzName)));
+            headerFs.write(dumpString("\r\n"));
+
+            headerFs.write(dumpString("private:\r\n"));
+            if (enableDataTable) {
+                headerFs.write(
+                        dumpString("    TSharedPtr<ConstructorHelpers::FObjectFinder<UDataTable> > Loader;\r\n"));
+                headerFs.write(dumpString("    UDataTable* DataTable;\r\n"));
+                headerFs.write(dumpString("    bool EnableDefaultLoader;\r\n"));
+            }
+            headerFs.write(dumpString(String.format("    %s Empty;\r\n", codeInfo.clazzName)));
+            headerFs.write(dumpString("};\r\n"));
+            headerFs.write(dumpString("\r\n"));
         }
-
-        headerFs.write(dumpString("\r\n"));
-        headerFs.write(dumpString("\r\n"));
-        headerFs.write(dumpString("\r\n"));
-        // 辅助代码类定义
-        String helperClazzName = getIdentName(codeInfo.baseName + "_" + rule.helper);
-        headerFs.write(dumpString("UCLASS(Blueprintable, BlueprintType)\r\n"));
-        headerFs.write(dumpString(String.format("class U%s : public UObject\r\n", helperClazzName)));
-        headerFs.write(dumpString("{\r\n"));
-        headerFs.write(dumpString("    GENERATED_BODY()\r\n"));
-        headerFs.write(dumpString("\r\n"));
-
-        headerFs.write(dumpString("public:\r\n"));
-        headerFs.write(dumpString(String.format("    U%s();\r\n", helperClazzName)));
-        headerFs.write(dumpString("\r\n"));
-
-        if (enableDataTable) {
-            headerFs.write(dumpString("    void OnReload();\r\n"));
-            headerFs.write(dumpString("\r\n"));
-
-            headerFs.write(dumpString(
-                    "    void SetLoader(TSharedPtr<ConstructorHelpers::FObjectFinder<UDataTable> > NewLoader);\r\n"));
-            headerFs.write(dumpString("\r\n"));
-
-            headerFs.write(dumpString("    void InitializeDefaultLoader() const;\r\n"));
-            headerFs.write(dumpString("\r\n"));
-
-            headerFs.write(dumpString("    void DisableDefaultLoader();\r\n"));
-            headerFs.write(dumpString("\r\n"));
-
-            headerFs.write(dumpString("    const TCHAR* GetObjectPath() const;\r\n"));
-            headerFs.write(dumpString("\r\n"));
-
-            headerFs.write(dumpString(
-                    String.format("    static FName GetRowName(%s);\r\n", getDataRowKeyToNameParamsSpecify(rule))));
-            headerFs.write(dumpString("\r\n"));
-
-            headerFs.write(dumpString(getHeaderFieldUFunction()));
-            headerFs.write(dumpString(
-                    String.format("    FName GetDataRowName(%s) const;\r\n", getDataRowKeyToNameParamsSpecify(rule))));
-            headerFs.write(dumpString("\r\n"));
-
-            headerFs.write(dumpString(getHeaderFieldUFunction()));
-            headerFs.write(dumpString(
-                    String.format("    FName GetTableRowName(const %s& TableRow) const;\r\n", codeInfo.clazzName)));
-            headerFs.write(dumpString("\r\n"));
-
-            headerFs.write(dumpString(getHeaderFieldUFunction()));
-            headerFs.write(dumpString(
-                    String.format("    const %s& GetDataRowByName(const FName& Name, bool& IsValid) const;\r\n",
-                            codeInfo.clazzName)));
-            headerFs.write(dumpString("\r\n"));
-
-            headerFs.write(dumpString(getHeaderFieldUFunction()));
-            headerFs.write(dumpString(String.format("    const %s& GetDataRowByKey(%s, bool& IsValid) const;\r\n",
-                    codeInfo.clazzName, getDataRowKeyToNameParamsSpecify(rule))));
-            headerFs.write(dumpString("\r\n"));
-
-            headerFs.write(dumpString(String.format(
-                    "    bool ForeachRow(TFunctionRef<void (const FName& Key, const %s& Value)> Predicate) const;\r\n",
-                    codeInfo.clazzName)));
-            headerFs.write(dumpString("\r\n"));
-
-            headerFs.write(dumpString(getHeaderFieldUFunction()));
-            headerFs.write(dumpString("    UDataTable* GetRawDataTable(bool& IsValid) const;\r\n"));
-            headerFs.write(dumpString("\r\n"));
-        }
-
-        headerFs.write(dumpString(String.format("    static void ClearRow(%s& TableRow);\r\n", codeInfo.clazzName)));
-        headerFs.write(dumpString("\r\n"));
-
-        headerFs.write(dumpString(getHeaderFieldUFunction()));
-        headerFs.write(dumpString(String.format("    void ClearDataRow(%s& TableRow) const;\r\n", codeInfo.clazzName)));
-        headerFs.write(dumpString("\r\n"));
-
-        headerFs.write(dumpString("private:\r\n"));
-        if (enableDataTable) {
-            headerFs.write(dumpString("    TSharedPtr<ConstructorHelpers::FObjectFinder<UDataTable> > Loader;\r\n"));
-            headerFs.write(dumpString("    UDataTable* DataTable;\r\n"));
-            headerFs.write(dumpString("    bool EnableDefaultLoader;\r\n"));
-        }
-        headerFs.write(dumpString(String.format("    %s Empty;\r\n", codeInfo.clazzName)));
-        headerFs.write(dumpString("};\r\n"));
-        headerFs.write(dumpString("\r\n"));
-
-        headerFs.close();
     }
 
     private void writeCodeSourceFile(UEDataRowRule rule, UECodeInfo codeInfo) throws IOException {
@@ -2465,291 +2435,290 @@ public abstract class DataDstUEBase extends DataDstJava {
             globalCodeWrittenCache.add(codeInfo.source);
         }
 
-        FileOutputStream sourceFs = createCodeSourceFileStream(rule, codeInfo);
+        try (FileOutputStream sourceFs = createCodeSourceFileStream(rule, codeInfo)) {
+            if (rule.helper == null || rule.helper.isEmpty()) {
+                return;
+            }
 
-        if (rule.helper == null || rule.helper.isEmpty()) {
-            sourceFs.close();
-            return;
-        }
-
-        String varIsValidName = "IsValid";
-        boolean varIsValidCheck = true;
-        boolean enableDataTable = true;
-        boolean enableDefaultLoader = SchemeConf.getInstance().getUEOptions().codeOutputEnableDefaultLoader;
-        if (rule.keyFields.isEmpty()) {
-            enableDataTable = false;
-        }
-        if (null != codeInfo.writerNodeWrapper) {
-            DataDstMessageExtUE ueExt = codeInfo.writerNodeWrapper.getMessageExtension().mutableUE();
-            if (ueExt.notDataTable) {
+            String varIsValidName = "IsValid";
+            boolean varIsValidCheck = true;
+            boolean enableDataTable = true;
+            boolean enableDefaultLoader = SchemeConf.getInstance().getUEOptions().codeOutputEnableDefaultLoader;
+            if (rule.keyFields.isEmpty()) {
                 enableDataTable = false;
             }
-            if (ueExt.enableDefaultLoader != null) {
-                enableDefaultLoader = ueExt.enableDefaultLoader;
-            }
-        }
-
-        while (varIsValidCheck) {
-            varIsValidCheck = false;
-            for (int i = 1; i < rule.keyFields.size(); ++i) {
-                if (rule.keyFields.get(i).varName.equalsIgnoreCase(varIsValidName)) {
-                    varIsValidName = varIsValidName + "DTR";
-                    varIsValidCheck = true;
+            if (null != codeInfo.writerNodeWrapper) {
+                DataDstMessageExtUE ueExt = codeInfo.writerNodeWrapper.getMessageExtension().mutableUE();
+                if (ueExt.notDataTable) {
+                    enableDataTable = false;
+                }
+                if (ueExt.enableDefaultLoader != null) {
+                    enableDefaultLoader = ueExt.enableDefaultLoader;
                 }
             }
-        }
 
-        sourceFs.write(dumpString("\r\n"));
-        sourceFs.write(dumpString("\r\n"));
-        sourceFs.write(dumpString("\r\n"));
-        // 辅助代码类实现
-        String helperClazzName = getIdentName(codeInfo.baseName + "_" + rule.helper);
-        String helperDestination;
-        if (codeInfo.destinationPath.isEmpty()) {
-            helperDestination = codeInfo.baseName;
-        } else {
-            File filePath = new File(codeInfo.outputFile);
-            String fileBaseName = filePath.getName();
-            int suffixSplit = fileBaseName.lastIndexOf('.');
-            if (suffixSplit > 0) {
-                fileBaseName = fileBaseName.substring(0, suffixSplit);
-            }
-            helperDestination = String.format("%s/%s", codeInfo.destinationPath, fileBaseName);
-        }
-
-        // constructor
-        sourceFs.write(dumpString(String.format("U%s::U%s() : Super()\r\n", helperClazzName, helperClazzName)));
-        sourceFs.write(dumpString("{\r\n"));
-        // 初始化Empty
-        sourceFs.write(dumpString(String.format("    U%s::ClearRow(this->Empty);\r\n", helperClazzName)));
-        if (enableDataTable) {
-            sourceFs.write(dumpString("    this->DataTable = nullptr;\r\n"));
-            if (enableDefaultLoader) {
-                sourceFs.write(dumpString("    this->EnableDefaultLoader = true;\r\n"));
-                sourceFs.write(dumpString("    this->InitializeDefaultLoader();\r\n"));
-            } else {
-                sourceFs.write(dumpString("    this->EnableDefaultLoader = false;\r\n"));
-            }
-        }
-        sourceFs.write(dumpString("}\r\n\r\n"));
-
-        if (enableDataTable) {
-            // OnReload()
-            sourceFs.write(dumpString(String.format("void U%s::OnReload()\r\n", helperClazzName)));
-            sourceFs.write(dumpString("{\r\n"));
-            sourceFs.write(dumpString("    // TODO Rebuild Index\r\n"));
-            sourceFs.write(dumpString("}\r\n\r\n"));
-
-            // void SetLoader(TSharedPtr<ConstructorHelpers::FObjectFinder<UDataTable> >
-            // NewLoader);
-            sourceFs.write(dumpString(String.format(
-                    "void U%s::SetLoader(TSharedPtr<ConstructorHelpers::FObjectFinder<UDataTable> > NewLoader)\r\n",
-                    helperClazzName)));
-            sourceFs.write(dumpString("{\r\n"));
-            sourceFs.write(dumpString("    this->Loader = NewLoader;\r\n"));
-            // 初始化事件监听
-            sourceFs.write(dumpString("    if (this->Loader && this->Loader->Succeeded())\r\n"));
-            sourceFs.write(dumpString("    {\r\n"));
-            sourceFs.write(dumpString("        this->DataTable = this->Loader->Object;\r\n"));
-            sourceFs.write(dumpString(
-                    String.format("        this->DataTable->OnDataTableChanged().AddUObject(this, &U%s::OnReload);\r\n",
-                            helperClazzName)));
-            sourceFs.write(dumpString("        OnReload();\r\n"));
-            sourceFs.write(dumpString("    }\r\n"));
-            sourceFs.write(dumpString("    else\r\n"));
-            sourceFs.write(dumpString("    {\r\n"));
-            sourceFs.write(dumpString("        this->DataTable = nullptr;\r\n"));
-            sourceFs.write(dumpString("    }\r\n"));
-            sourceFs.write(dumpString("}\r\n\r\n"));
-
-            // void InitializeDefaultLoader() const;
-            sourceFs.write(dumpString(String.format("void U%s::InitializeDefaultLoader() const\r\n", helperClazzName,
-                    codeInfo.clazzName)));
-            sourceFs.write(dumpString("{\r\n"));
-            sourceFs.write(dumpString("    if (!this->EnableDefaultLoader) {\r\n"));
-            sourceFs.write(dumpString("        return;\r\n"));
-            sourceFs.write(dumpString("    }\r\n"));
-            sourceFs.write(dumpString(
-                    String.format("    const_cast<U%s*>(this)->EnableDefaultLoader = false;\r\n", helperClazzName)));
-            sourceFs.write(dumpString(String.format(
-                    "    const_cast<U%s*>(this)->SetLoader(MakeShareable(new ConstructorHelpers::FObjectFinder<UDataTable>(GetObjectPath())));\r\n",
-                    helperClazzName)));
-            sourceFs.write(dumpString("}\r\n\r\n"));
-
-            // void DisableDefaultLoader();
-            sourceFs.write(dumpString(
-                    String.format("void U%s::DisableDefaultLoader()\r\n", helperClazzName, codeInfo.clazzName)));
-            sourceFs.write(dumpString("{\r\n"));
-            sourceFs.write(dumpString("    this->EnableDefaultLoader = false;\r\n"));
-            sourceFs.write(dumpString("}\r\n\r\n"));
-
-            // void GetObjectPath();
-            sourceFs.write(dumpString(
-                    String.format("const TCHAR* U%s::GetObjectPath() const\r\n", helperClazzName, codeInfo.clazzName)));
-            sourceFs.write(dumpString("{\r\n"));
-            sourceFs.write(
-                    dumpString(String.format("    return TEXT(\"DataTable'/Game/%s'\");\r\n", helperDestination)));
-            sourceFs.write(dumpString("}\r\n\r\n"));
-
-            // GetRowName(...)
-            sourceFs.write(dumpString(String.format("FName U%s::GetRowName(%s)\r\n", helperClazzName,
-                    getDataRowKeyToNameParamsSpecify(rule))));
-            sourceFs.write(dumpString("{\r\n"));
-            sourceFs.write(dumpString(String.format("    return %s;\r\n", getDataRowKeyToNameExpression(rule))));
-            sourceFs.write(dumpString("}\r\n\r\n"));
-
-            // GetDataRowName(...)
-            sourceFs.write(dumpString(String.format("FName U%s::GetDataRowName(%s) const\r\n", helperClazzName,
-                    getDataRowKeyToNameParamsSpecify(rule))));
-            sourceFs.write(dumpString("{\r\n"));
-            sourceFs.write(dumpString(String.format("    return U%s::GetRowName(%s);\r\n", helperClazzName,
-                    getDataRowKeyToNameParamsPass(rule, ""))));
-            sourceFs.write(dumpString("}\r\n\r\n"));
-
-            // GetTableRowName(const T& TableRow)
-            sourceFs.write(dumpString(String.format("FName U%s::GetTableRowName(const %s& TableRow) const\r\n",
-                    helperClazzName, codeInfo.clazzName)));
-            sourceFs.write(dumpString("{\r\n"));
-            sourceFs.write(dumpString(String.format("    return GetDataRowName(%s);\r\n",
-                    getDataRowKeyToNameParamsPass(rule, "TableRow."))));
-            sourceFs.write(dumpString("}\r\n\r\n"));
-
-            // GetTableRowName(const T& TableRow)
-            sourceFs.write(
-                    dumpString(String.format("const %s& U%s::GetDataRowByName(const FName& Name, bool& %s) const\r\n",
-                            codeInfo.clazzName, helperClazzName, varIsValidName)));
-            sourceFs.write(dumpString("{\r\n"));
-            sourceFs.write(dumpString(String.format("    %s = false;\r\n", varIsValidName)));
-            sourceFs.write(dumpString("    if (!this->DataTable) {\r\n"));
-            sourceFs.write(dumpString("        return this->Empty;\r\n"));
-            sourceFs.write(dumpString("    }\r\n"));
-            sourceFs.write(dumpString("\r\n"));
-            sourceFs.write(dumpString("    FString Context;\r\n"));
-            sourceFs.write(
-                    dumpString(String.format("    %s* LookupRow = DataTable->FindRow<%s>(Name, Context, false);\r\n",
-                            codeInfo.clazzName, codeInfo.clazzName)));
-            sourceFs.write(dumpString("    if (!LookupRow) {\r\n"));
-            sourceFs.write(dumpString("        return this->Empty;\r\n"));
-            sourceFs.write(dumpString("    };\r\n"));
-            sourceFs.write(dumpString("\r\n"));
-            sourceFs.write(dumpString(String.format("    %s = true;\r\n", varIsValidName)));
-            sourceFs.write(dumpString("    return *LookupRow;\r\n"));
-            sourceFs.write(dumpString("}\r\n\r\n"));
-
-            // GetDataRowByKey(..., bool& IsValid)
-            sourceFs.write(dumpString(String.format("const %s& U%s::GetDataRowByKey(%s, bool& %s) const\r\n",
-                    codeInfo.clazzName, helperClazzName, getDataRowKeyToNameParamsSpecify(rule), varIsValidName)));
-            sourceFs.write(dumpString("{\r\n"));
-            sourceFs.write(dumpString(String.format("    return GetDataRowByName(GetDataRowName(%s), %s);\r\n",
-                    getDataRowKeyToNameParamsPass(rule, ""), varIsValidName)));
-            sourceFs.write(dumpString("}\r\n\r\n"));
-
-            // ForeachRow(TFunctionRef<void (const FName& Key, const T& Value)> Predicate)
-            sourceFs.write(dumpString(String.format(
-                    "bool U%s::ForeachRow(TFunctionRef<void (const FName& Key, const %s& Value)> Predicate) const\r\n",
-                    helperClazzName, codeInfo.clazzName)));
-            sourceFs.write(dumpString("{\r\n"));
-            sourceFs.write(dumpString("    if (!this->DataTable) {\r\n"));
-            sourceFs.write(dumpString("        return false;\r\n"));
-            sourceFs.write(dumpString("    }\r\n"));
-            sourceFs.write(dumpString("\r\n"));
-            sourceFs.write(dumpString("    FString Context;\r\n"));
-            sourceFs.write(dumpString("    this->DataTable->ForeachRow(Context, Predicate);\r\n"));
-            sourceFs.write(dumpString("    return true;\r\n"));
-            sourceFs.write(dumpString("}\r\n\r\n"));
-
-            // GetRawDataTable(bool& IsValid)
-            sourceFs.write(dumpString(String.format("UDataTable* U%s::GetRawDataTable(bool& %s) const\r\n",
-                    helperClazzName, varIsValidName)));
-            sourceFs.write(dumpString("{\r\n"));
-            sourceFs.write(dumpString(String.format("    %s = false;\r\n", varIsValidName)));
-            sourceFs.write(dumpString("    if (!this->DataTable) {\r\n"));
-            sourceFs.write(dumpString("        return NULL;\r\n"));
-            sourceFs.write(dumpString("    }\r\n"));
-            sourceFs.write(dumpString("\r\n"));
-            sourceFs.write(dumpString(String.format("    %s = true;\r\n", varIsValidName)));
-            sourceFs.write(dumpString("    return this->DataTable;\r\n"));
-            sourceFs.write(dumpString("}\r\n\r\n"));
-        }
-
-        // static void ClearDataRow(const %s& TableRow);
-        sourceFs.write(
-                dumpString(String.format("void U%s::ClearRow(%s& TableRow)\r\n", helperClazzName, codeInfo.clazzName)));
-        sourceFs.write(dumpString("{\r\n"));
-        HashSet<String> dumpedFields = new HashSet<String>();
-
-        // The key field of 0 is FName Name
-        for (int i = 0; i < rule.keyFields.size(); ++i) {
-            DataDstWriterNodeWrapper wrapper = rule.keyFields.get(i);
-            if (wrapper == null) {
-                continue;
-            }
-
-            DataDstFieldDescriptor field = wrapper.getReferField();
-            if (null == field) {
-                continue;
-            }
-            writeUETypeSetDefaultCode(sourceFs, "    TableRow", wrapper.varName, field);
-            if (null != dumpedFields) {
-                dumpedFields.add(wrapper.varName);
-            }
-        }
-
-        HashSet<String> dumpedOneof = new HashSet<String>();
-        for (int i = 0; i < rule.valueFields.size(); ++i) {
-            DataDstWriterNodeWrapper wrapper = rule.valueFields.get(i);
-            if (wrapper == null) {
-                continue;
-            }
-
-            if (wrapper.getReferOneof() != null) {
-                writeUETypeSetDefaultCode(sourceFs, "    TableRow", wrapper.varName, wrapper.getReferOneof());
-                dumpedOneof.add(wrapper.varName);
-                continue;
-            }
-
-            DataDstFieldDescriptor field = wrapper.getReferField();
-            if (null == field) {
-                continue;
-            }
-            writeUETypeSetDefaultCode(sourceFs, "    TableRow", wrapper.varName, field);
-            if (null != dumpedFields) {
-                dumpedFields.add(wrapper.varName);
-            }
-        }
-
-        // 如果开启了嵌套模式，还要补全未使用的字段，因为可能被别处用到
-        if (null != codeInfo.writerNodeWrapper) {
-            for (DataDstFieldDescriptor field : codeInfo.writerNodeWrapper.getTypeDescriptor().getSortedFields()) {
-                // Write oneof
-                if (field.getReferOneof() != null) {
-                    String oneofVarName = getIdentName(field.getReferOneof().getName());
-                    if (!dumpedOneof.contains(oneofVarName)) {
-                        writeUETypeSetDefaultCode(sourceFs, "    TableRow", oneofVarName, field.getReferOneof());
-                        dumpedOneof.add(oneofVarName);
+            while (varIsValidCheck) {
+                varIsValidCheck = false;
+                for (int i = 1; i < rule.keyFields.size(); ++i) {
+                    if (rule.keyFields.get(i).varName.equalsIgnoreCase(varIsValidName)) {
+                        varIsValidName = varIsValidName + "DTR";
+                        varIsValidCheck = true;
                     }
                 }
+            }
 
-                String varName = getIdentName(field.getName());
-                if (dumpedFields != null) {
+            sourceFs.write(dumpString("\r\n"));
+            sourceFs.write(dumpString("\r\n"));
+            sourceFs.write(dumpString("\r\n"));
+            // 辅助代码类实现
+            String helperClazzName = getIdentName(codeInfo.baseName + "_" + rule.helper);
+            String helperDestination;
+            if (codeInfo.destinationPath.isEmpty()) {
+                helperDestination = codeInfo.baseName;
+            } else {
+                File filePath = new File(codeInfo.outputFile);
+                String fileBaseName = filePath.getName();
+                int suffixSplit = fileBaseName.lastIndexOf('.');
+                if (suffixSplit > 0) {
+                    fileBaseName = fileBaseName.substring(0, suffixSplit);
+                }
+                helperDestination = String.format("%s/%s", codeInfo.destinationPath, fileBaseName);
+            }
+
+            // constructor
+            sourceFs.write(dumpString(String.format("U%s::U%s() : Super()\r\n", helperClazzName, helperClazzName)));
+            sourceFs.write(dumpString("{\r\n"));
+            // 初始化Empty
+            sourceFs.write(dumpString(String.format("    U%s::ClearRow(this->Empty);\r\n", helperClazzName)));
+            if (enableDataTable) {
+                sourceFs.write(dumpString("    this->DataTable = nullptr;\r\n"));
+                if (enableDefaultLoader) {
+                    sourceFs.write(dumpString("    this->EnableDefaultLoader = true;\r\n"));
+                    sourceFs.write(dumpString("    this->InitializeDefaultLoader();\r\n"));
+                } else {
+                    sourceFs.write(dumpString("    this->EnableDefaultLoader = false;\r\n"));
+                }
+            }
+            sourceFs.write(dumpString("}\r\n\r\n"));
+
+            if (enableDataTable) {
+                // OnReload()
+                sourceFs.write(dumpString(String.format("void U%s::OnReload()\r\n", helperClazzName)));
+                sourceFs.write(dumpString("{\r\n"));
+                sourceFs.write(dumpString("    // TODO Rebuild Index\r\n"));
+                sourceFs.write(dumpString("}\r\n\r\n"));
+
+                // void SetLoader(TSharedPtr<ConstructorHelpers::FObjectFinder<UDataTable> >
+                // NewLoader);
+                sourceFs.write(dumpString(String.format(
+                        "void U%s::SetLoader(TSharedPtr<ConstructorHelpers::FObjectFinder<UDataTable> > NewLoader)\r\n",
+                        helperClazzName)));
+                sourceFs.write(dumpString("{\r\n"));
+                sourceFs.write(dumpString("    this->Loader = NewLoader;\r\n"));
+                // 初始化事件监听
+                sourceFs.write(dumpString("    if (this->Loader && this->Loader->Succeeded())\r\n"));
+                sourceFs.write(dumpString("    {\r\n"));
+                sourceFs.write(dumpString("        this->DataTable = this->Loader->Object;\r\n"));
+                sourceFs.write(dumpString(
+                        String.format(
+                                "        this->DataTable->OnDataTableChanged().AddUObject(this, &U%s::OnReload);\r\n",
+                                helperClazzName)));
+                sourceFs.write(dumpString("        OnReload();\r\n"));
+                sourceFs.write(dumpString("    }\r\n"));
+                sourceFs.write(dumpString("    else\r\n"));
+                sourceFs.write(dumpString("    {\r\n"));
+                sourceFs.write(dumpString("        this->DataTable = nullptr;\r\n"));
+                sourceFs.write(dumpString("    }\r\n"));
+                sourceFs.write(dumpString("}\r\n\r\n"));
+
+                // void InitializeDefaultLoader() const;
+                sourceFs.write(
+                        dumpString(String.format("void U%s::InitializeDefaultLoader() const\r\n", helperClazzName,
+                                codeInfo.clazzName)));
+                sourceFs.write(dumpString("{\r\n"));
+                sourceFs.write(dumpString("    if (!this->EnableDefaultLoader) {\r\n"));
+                sourceFs.write(dumpString("        return;\r\n"));
+                sourceFs.write(dumpString("    }\r\n"));
+                sourceFs.write(dumpString(
+                        String.format("    const_cast<U%s*>(this)->EnableDefaultLoader = false;\r\n",
+                                helperClazzName)));
+                sourceFs.write(dumpString(String.format(
+                        "    const_cast<U%s*>(this)->SetLoader(MakeShareable(new ConstructorHelpers::FObjectFinder<UDataTable>(GetObjectPath())));\r\n",
+                        helperClazzName)));
+                sourceFs.write(dumpString("}\r\n\r\n"));
+
+                // void DisableDefaultLoader();
+                sourceFs.write(dumpString(
+                        String.format("void U%s::DisableDefaultLoader()\r\n", helperClazzName, codeInfo.clazzName)));
+                sourceFs.write(dumpString("{\r\n"));
+                sourceFs.write(dumpString("    this->EnableDefaultLoader = false;\r\n"));
+                sourceFs.write(dumpString("}\r\n\r\n"));
+
+                // void GetObjectPath();
+                sourceFs.write(dumpString(
+                        String.format("const TCHAR* U%s::GetObjectPath() const\r\n", helperClazzName,
+                                codeInfo.clazzName)));
+                sourceFs.write(dumpString("{\r\n"));
+                sourceFs.write(
+                        dumpString(String.format("    return TEXT(\"DataTable'/Game/%s'\");\r\n", helperDestination)));
+                sourceFs.write(dumpString("}\r\n\r\n"));
+
+                // GetRowName(...)
+                sourceFs.write(dumpString(String.format("FName U%s::GetRowName(%s)\r\n", helperClazzName,
+                        getDataRowKeyToNameParamsSpecify(rule))));
+                sourceFs.write(dumpString("{\r\n"));
+                sourceFs.write(dumpString(String.format("    return %s;\r\n", getDataRowKeyToNameExpression(rule))));
+                sourceFs.write(dumpString("}\r\n\r\n"));
+
+                // GetDataRowName(...)
+                sourceFs.write(dumpString(String.format("FName U%s::GetDataRowName(%s) const\r\n", helperClazzName,
+                        getDataRowKeyToNameParamsSpecify(rule))));
+                sourceFs.write(dumpString("{\r\n"));
+                sourceFs.write(dumpString(String.format("    return U%s::GetRowName(%s);\r\n", helperClazzName,
+                        getDataRowKeyToNameParamsPass(rule, ""))));
+                sourceFs.write(dumpString("}\r\n\r\n"));
+
+                // GetTableRowName(const T& TableRow)
+                sourceFs.write(dumpString(String.format("FName U%s::GetTableRowName(const %s& TableRow) const\r\n",
+                        helperClazzName, codeInfo.clazzName)));
+                sourceFs.write(dumpString("{\r\n"));
+                sourceFs.write(dumpString(String.format("    return GetDataRowName(%s);\r\n",
+                        getDataRowKeyToNameParamsPass(rule, "TableRow."))));
+                sourceFs.write(dumpString("}\r\n\r\n"));
+
+                // GetTableRowName(const T& TableRow)
+                sourceFs.write(
+                        dumpString(
+                                String.format("const %s& U%s::GetDataRowByName(const FName& Name, bool& %s) const\r\n",
+                                        codeInfo.clazzName, helperClazzName, varIsValidName)));
+                sourceFs.write(dumpString("{\r\n"));
+                sourceFs.write(dumpString(String.format("    %s = false;\r\n", varIsValidName)));
+                sourceFs.write(dumpString("    if (!this->DataTable) {\r\n"));
+                sourceFs.write(dumpString("        return this->Empty;\r\n"));
+                sourceFs.write(dumpString("    }\r\n"));
+                sourceFs.write(dumpString("\r\n"));
+                sourceFs.write(dumpString("    FString Context;\r\n"));
+                sourceFs.write(
+                        dumpString(
+                                String.format("    %s* LookupRow = DataTable->FindRow<%s>(Name, Context, false);\r\n",
+                                        codeInfo.clazzName, codeInfo.clazzName)));
+                sourceFs.write(dumpString("    if (!LookupRow) {\r\n"));
+                sourceFs.write(dumpString("        return this->Empty;\r\n"));
+                sourceFs.write(dumpString("    };\r\n"));
+                sourceFs.write(dumpString("\r\n"));
+                sourceFs.write(dumpString(String.format("    %s = true;\r\n", varIsValidName)));
+                sourceFs.write(dumpString("    return *LookupRow;\r\n"));
+                sourceFs.write(dumpString("}\r\n\r\n"));
+
+                // GetDataRowByKey(..., bool& IsValid)
+                sourceFs.write(dumpString(String.format("const %s& U%s::GetDataRowByKey(%s, bool& %s) const\r\n",
+                        codeInfo.clazzName, helperClazzName, getDataRowKeyToNameParamsSpecify(rule), varIsValidName)));
+                sourceFs.write(dumpString("{\r\n"));
+                sourceFs.write(dumpString(String.format("    return GetDataRowByName(GetDataRowName(%s), %s);\r\n",
+                        getDataRowKeyToNameParamsPass(rule, ""), varIsValidName)));
+                sourceFs.write(dumpString("}\r\n\r\n"));
+
+                // ForeachRow(TFunctionRef<void (const FName& Key, const T& Value)> Predicate)
+                sourceFs.write(dumpString(String.format(
+                        "bool U%s::ForeachRow(TFunctionRef<void (const FName& Key, const %s& Value)> Predicate) const\r\n",
+                        helperClazzName, codeInfo.clazzName)));
+                sourceFs.write(dumpString("{\r\n"));
+                sourceFs.write(dumpString("    if (!this->DataTable) {\r\n"));
+                sourceFs.write(dumpString("        return false;\r\n"));
+                sourceFs.write(dumpString("    }\r\n"));
+                sourceFs.write(dumpString("\r\n"));
+                sourceFs.write(dumpString("    FString Context;\r\n"));
+                sourceFs.write(dumpString("    this->DataTable->ForeachRow(Context, Predicate);\r\n"));
+                sourceFs.write(dumpString("    return true;\r\n"));
+                sourceFs.write(dumpString("}\r\n\r\n"));
+
+                // GetRawDataTable(bool& IsValid)
+                sourceFs.write(dumpString(String.format("UDataTable* U%s::GetRawDataTable(bool& %s) const\r\n",
+                        helperClazzName, varIsValidName)));
+                sourceFs.write(dumpString("{\r\n"));
+                sourceFs.write(dumpString(String.format("    %s = false;\r\n", varIsValidName)));
+                sourceFs.write(dumpString("    if (!this->DataTable) {\r\n"));
+                sourceFs.write(dumpString("        return NULL;\r\n"));
+                sourceFs.write(dumpString("    }\r\n"));
+                sourceFs.write(dumpString("\r\n"));
+                sourceFs.write(dumpString(String.format("    %s = true;\r\n", varIsValidName)));
+                sourceFs.write(dumpString("    return this->DataTable;\r\n"));
+                sourceFs.write(dumpString("}\r\n\r\n"));
+            }
+
+            // static void ClearDataRow(const %s& TableRow);
+            sourceFs.write(
+                    dumpString(String.format("void U%s::ClearRow(%s& TableRow)\r\n", helperClazzName,
+                            codeInfo.clazzName)));
+            sourceFs.write(dumpString("{\r\n"));
+            HashSet<String> dumpedFields = new HashSet<>();
+
+            // The key field of 0 is FName Name
+            for (int i = 0; i < rule.keyFields.size(); ++i) {
+                DataDstWriterNodeWrapper wrapper = rule.keyFields.get(i);
+                if (wrapper == null) {
+                    continue;
+                }
+
+                DataDstFieldDescriptor field = wrapper.getReferField();
+                if (null == field) {
+                    continue;
+                }
+                writeUETypeSetDefaultCode(sourceFs, "    TableRow", wrapper.varName, field);
+                dumpedFields.add(wrapper.varName);
+            }
+
+            HashSet<String> dumpedOneof = new HashSet<>();
+            for (int i = 0; i < rule.valueFields.size(); ++i) {
+                DataDstWriterNodeWrapper wrapper = rule.valueFields.get(i);
+                if (wrapper == null) {
+                    continue;
+                }
+
+                if (wrapper.getReferOneof() != null) {
+                    writeUETypeSetDefaultCode(sourceFs, "    TableRow", wrapper.varName, wrapper.getReferOneof());
+                    dumpedOneof.add(wrapper.varName);
+                    continue;
+                }
+
+                DataDstFieldDescriptor field = wrapper.getReferField();
+                if (null == field) {
+                    continue;
+                }
+                writeUETypeSetDefaultCode(sourceFs, "    TableRow", wrapper.varName, field);
+                dumpedFields.add(wrapper.varName);
+            }
+
+            // 如果开启了嵌套模式，还要补全未使用的字段，因为可能被别处用到
+            if (null != codeInfo.writerNodeWrapper) {
+                for (DataDstFieldDescriptor field : codeInfo.writerNodeWrapper.getTypeDescriptor().getSortedFields()) {
+                    // Write oneof
+                    if (field.getReferOneof() != null) {
+                        String oneofVarName = getIdentName(field.getReferOneof().getName());
+                        if (!dumpedOneof.contains(oneofVarName)) {
+                            writeUETypeSetDefaultCode(sourceFs, "    TableRow", oneofVarName, field.getReferOneof());
+                            dumpedOneof.add(oneofVarName);
+                        }
+                    }
+
+                    String varName = getIdentName(field.getName());
                     if (dumpedFields.contains(varName)) {
                         continue;
                     }
                     dumpedFields.add(varName);
+
+                    writeUETypeSetDefaultCode(sourceFs, "    TableRow", varName, field);
                 }
-
-                writeUETypeSetDefaultCode(sourceFs, "    TableRow", varName, field);
             }
+            sourceFs.write(dumpString("}\r\n\r\n"));
+
+            // void ClearDataRow(const %s& TableRow) const;
+            sourceFs.write(dumpString(
+                    String.format("void U%s::ClearDataRow(%s& TableRow) const\r\n", helperClazzName,
+                            codeInfo.clazzName)));
+            sourceFs.write(dumpString("{\r\n"));
+            sourceFs.write(dumpString(String.format("    U%s::ClearRow(TableRow);\r\n", helperClazzName)));
+            sourceFs.write(dumpString("}\r\n\r\n"));
         }
-        sourceFs.write(dumpString("}\r\n\r\n"));
-
-        // void ClearDataRow(const %s& TableRow) const;
-        sourceFs.write(dumpString(
-                String.format("void U%s::ClearDataRow(%s& TableRow) const\r\n", helperClazzName, codeInfo.clazzName)));
-        sourceFs.write(dumpString("{\r\n"));
-        sourceFs.write(dumpString(String.format("    U%s::ClearRow(TableRow);\r\n", helperClazzName)));
-        sourceFs.write(dumpString("}\r\n\r\n"));
-
-        sourceFs.close();
     }
 }

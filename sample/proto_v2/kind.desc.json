@@ -900,6 +900,21 @@
         },
         "name": "test_msg_verifier",
         "options": {"msg_separator": "-^"}
+      },
+      "ue_explicit_set_name_field_cfg": {
+        "field": {
+          "content": {
+            "name": "content",
+            "number": 2,
+            "type_name": "STRING"
+          },
+          "name": {
+            "name": "name",
+            "number": 1,
+            "type_name": "STRING"
+          }
+        },
+        "name": "ue_explicit_set_name_field_cfg"
       }
     },
     "name": "kind.proto",

@@ -163,6 +163,10 @@ class test_msg_verifier;
 struct test_msg_verifierDefaultTypeInternal;
 extern test_msg_verifierDefaultTypeInternal _test_msg_verifier_default_instance_;
 extern const ::google::protobuf::internal::ClassDataFull test_msg_verifier_class_data_;
+class ue_explicit_set_name_field_cfg;
+struct ue_explicit_set_name_field_cfgDefaultTypeInternal;
+extern ue_explicit_set_name_field_cfgDefaultTypeInternal _ue_explicit_set_name_field_cfg_default_instance_;
+extern const ::google::protobuf::internal::ClassDataFull ue_explicit_set_name_field_cfg_class_data_;
 namespace google {
 namespace protobuf {
 template <>
@@ -240,6 +244,219 @@ inline bool arr_in_arr_test_nested_enum_Parse(
 // ===================================================================
 
 
+// -------------------------------------------------------------------
+
+class ue_explicit_set_name_field_cfg final : public ::google::protobuf::Message
+/* @@protoc_insertion_point(class_definition:ue_explicit_set_name_field_cfg) */ {
+ public:
+  inline ue_explicit_set_name_field_cfg() : ue_explicit_set_name_field_cfg(nullptr) {}
+  ~ue_explicit_set_name_field_cfg() PROTOBUF_FINAL;
+
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+  void operator delete(ue_explicit_set_name_field_cfg* PROTOBUF_NONNULL msg, std::destroying_delete_t) {
+    SharedDtor(*msg);
+    ::google::protobuf::internal::SizedDelete(msg, sizeof(ue_explicit_set_name_field_cfg));
+  }
+#endif
+
+  template <typename = void>
+  explicit PROTOBUF_CONSTEXPR ue_explicit_set_name_field_cfg(::google::protobuf::internal::ConstantInitialized);
+
+  inline ue_explicit_set_name_field_cfg(const ue_explicit_set_name_field_cfg& from) : ue_explicit_set_name_field_cfg(nullptr, from) {}
+  inline ue_explicit_set_name_field_cfg(ue_explicit_set_name_field_cfg&& from) noexcept
+      : ue_explicit_set_name_field_cfg(nullptr, std::move(from)) {}
+  inline ue_explicit_set_name_field_cfg& operator=(const ue_explicit_set_name_field_cfg& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  inline ue_explicit_set_name_field_cfg& operator=(ue_explicit_set_name_field_cfg&& from) noexcept {
+    if (this == &from) return *this;
+    if (::google::protobuf::internal::CanMoveWithInternalSwap(GetArena(), from.GetArena())) {
+      InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const
+      ABSL_ATTRIBUTE_LIFETIME_BOUND {
+    return _internal_metadata_.unknown_fields<::google::protobuf::UnknownFieldSet>(::google::protobuf::UnknownFieldSet::default_instance);
+  }
+  inline ::google::protobuf::UnknownFieldSet* PROTOBUF_NONNULL mutable_unknown_fields()
+      ABSL_ATTRIBUTE_LIFETIME_BOUND {
+    return _internal_metadata_.mutable_unknown_fields<::google::protobuf::UnknownFieldSet>();
+  }
+
+  static const ::google::protobuf::Descriptor* PROTOBUF_NONNULL descriptor() {
+    return GetDescriptor();
+  }
+  static const ::google::protobuf::Descriptor* PROTOBUF_NONNULL GetDescriptor() {
+    return default_instance().GetMetadata().descriptor;
+  }
+  static const ::google::protobuf::Reflection* PROTOBUF_NONNULL GetReflection() {
+    return default_instance().GetMetadata().reflection;
+  }
+  static const ue_explicit_set_name_field_cfg& default_instance() {
+    return *reinterpret_cast<const ue_explicit_set_name_field_cfg*>(
+        &_ue_explicit_set_name_field_cfg_default_instance_);
+  }
+  static constexpr int kIndexInFileMessages = 24;
+  friend void swap(ue_explicit_set_name_field_cfg& a, ue_explicit_set_name_field_cfg& b) { a.Swap(&b); }
+  inline void Swap(ue_explicit_set_name_field_cfg* PROTOBUF_NONNULL other) {
+    if (other == this) return;
+    if (::google::protobuf::internal::CanUseInternalSwap(GetArena(), other->GetArena())) {
+      InternalSwap(other);
+    } else {
+      ::google::protobuf::internal::GenericSwap(this, other);
+    }
+  }
+  void UnsafeArenaSwap(ue_explicit_set_name_field_cfg* PROTOBUF_NONNULL other) {
+    if (other == this) return;
+    ABSL_DCHECK(GetArena() == other->GetArena());
+    InternalSwap(other);
+  }
+
+  // implements Message ----------------------------------------------
+
+  ue_explicit_set_name_field_cfg* PROTOBUF_NONNULL New(::google::protobuf::Arena* PROTOBUF_NULLABLE arena = nullptr) const {
+    return ::google::protobuf::Message::DefaultConstruct<ue_explicit_set_name_field_cfg>(arena);
+  }
+  using ::google::protobuf::Message::CopyFrom;
+  void CopyFrom(const ue_explicit_set_name_field_cfg& from);
+  using ::google::protobuf::Message::MergeFrom;
+  void MergeFrom(const ue_explicit_set_name_field_cfg& from) { ue_explicit_set_name_field_cfg::MergeImpl(*this, from); }
+
+  private:
+  static void MergeImpl(::google::protobuf::MessageLite& to_msg,
+                        const ::google::protobuf::MessageLite& from_msg);
+
+  public:
+  bool IsInitialized() const {
+    return true;
+  }
+  ABSL_ATTRIBUTE_REINITIALIZES void Clear() PROTOBUF_FINAL;
+  #if defined(PROTOBUF_CUSTOM_VTABLE)
+  private:
+  static ::size_t ByteSizeLong(const ::google::protobuf::MessageLite& msg);
+  static ::uint8_t* PROTOBUF_NONNULL _InternalSerialize(
+      const ::google::protobuf::MessageLite& msg, ::uint8_t* PROTOBUF_NONNULL target,
+      ::google::protobuf::io::EpsCopyOutputStream* PROTOBUF_NONNULL stream);
+
+  public:
+  ::size_t ByteSizeLong() const { return ByteSizeLong(*this); }
+  ::uint8_t* PROTOBUF_NONNULL _InternalSerialize(
+      ::uint8_t* PROTOBUF_NONNULL target,
+      ::google::protobuf::io::EpsCopyOutputStream* PROTOBUF_NONNULL stream) const {
+    return _InternalSerialize(*this, target, stream);
+  }
+  #else   // PROTOBUF_CUSTOM_VTABLE
+  ::size_t ByteSizeLong() const final;
+  ::uint8_t* PROTOBUF_NONNULL _InternalSerialize(
+      ::uint8_t* PROTOBUF_NONNULL target,
+      ::google::protobuf::io::EpsCopyOutputStream* PROTOBUF_NONNULL stream) const final;
+  #endif  // PROTOBUF_CUSTOM_VTABLE
+  int GetCachedSize() const { return _impl_._cached_size_.Get(); }
+
+  private:
+  void SharedCtor(::google::protobuf::Arena* PROTOBUF_NULLABLE arena);
+  static void SharedDtor(MessageLite& self);
+  void InternalSwap(ue_explicit_set_name_field_cfg* PROTOBUF_NONNULL other);
+ private:
+  template <typename T>
+  friend ::absl::string_view(::google::protobuf::internal::GetAnyMessageName)();
+  static ::absl::string_view FullMessageName() { return "ue_explicit_set_name_field_cfg"; }
+
+ protected:
+  explicit ue_explicit_set_name_field_cfg(::google::protobuf::Arena* PROTOBUF_NULLABLE arena);
+  ue_explicit_set_name_field_cfg(::google::protobuf::Arena* PROTOBUF_NULLABLE arena, const ue_explicit_set_name_field_cfg& from);
+  ue_explicit_set_name_field_cfg(
+      ::google::protobuf::Arena* PROTOBUF_NULLABLE arena, ue_explicit_set_name_field_cfg&& from) noexcept
+      : ue_explicit_set_name_field_cfg(arena) {
+    *this = ::std::move(from);
+  }
+  const ::google::protobuf::internal::ClassData* PROTOBUF_NONNULL GetClassData() const PROTOBUF_FINAL;
+  static void* PROTOBUF_NONNULL PlacementNew_(
+      const void* PROTOBUF_NONNULL, void* PROTOBUF_NONNULL mem,
+      ::google::protobuf::Arena* PROTOBUF_NULLABLE arena);
+  static constexpr auto InternalNewImpl_();
+
+ public:
+  static constexpr auto InternalGenerateClassData_();
+
+  ::google::protobuf::Metadata GetMetadata() const;
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+  enum : int {
+    kNameFieldNumber = 1,
+    kContentFieldNumber = 2,
+  };
+  // string name = 1;
+  void clear_name() ;
+  const std::string& name() const;
+  template <typename Arg_ = const std::string&, typename... Args_>
+  void set_name(Arg_&& arg, Args_... args);
+  std::string* PROTOBUF_NONNULL mutable_name();
+  [[nodiscard]] std::string* PROTOBUF_NULLABLE release_name();
+  void set_allocated_name(std::string* PROTOBUF_NULLABLE value);
+
+  private:
+  const std::string& _internal_name() const;
+  PROTOBUF_ALWAYS_INLINE void _internal_set_name(const std::string& value);
+  std::string* PROTOBUF_NONNULL _internal_mutable_name();
+
+  public:
+  // string content = 2;
+  void clear_content() ;
+  const std::string& content() const;
+  template <typename Arg_ = const std::string&, typename... Args_>
+  void set_content(Arg_&& arg, Args_... args);
+  std::string* PROTOBUF_NONNULL mutable_content();
+  [[nodiscard]] std::string* PROTOBUF_NULLABLE release_content();
+  void set_allocated_content(std::string* PROTOBUF_NULLABLE value);
+
+  private:
+  const std::string& _internal_content() const;
+  PROTOBUF_ALWAYS_INLINE void _internal_set_content(const std::string& value);
+  std::string* PROTOBUF_NONNULL _internal_mutable_content();
+
+  public:
+  // @@protoc_insertion_point(class_scope:ue_explicit_set_name_field_cfg)
+ private:
+  class _Internal;
+  friend class ::google::protobuf::internal::TcParser;
+  static const ::google::protobuf::internal::TcParseTable<1, 2,
+                                   0, 50,
+                                   2>
+      _table_;
+
+  friend class ::google::protobuf::MessageLite;
+  friend class ::google::protobuf::Arena;
+  template <typename T>
+  friend class ::google::protobuf::Arena::InternalHelper;
+  using InternalArenaConstructable_ = void;
+  using DestructorSkippable_ = void;
+  struct Impl_ {
+    inline explicit constexpr Impl_(::google::protobuf::internal::ConstantInitialized) noexcept;
+    inline explicit Impl_(
+        ::google::protobuf::internal::InternalVisibility visibility,
+        ::google::protobuf::Arena* PROTOBUF_NULLABLE arena);
+    inline explicit Impl_(
+        ::google::protobuf::internal::InternalVisibility visibility,
+        ::google::protobuf::Arena* PROTOBUF_NULLABLE arena, const Impl_& from,
+        const ue_explicit_set_name_field_cfg& from_msg);
+    ::google::protobuf::internal::HasBits<1> _has_bits_;
+    ::google::protobuf::internal::CachedSize _cached_size_;
+    ::google::protobuf::internal::ArenaStringPtr name_;
+    ::google::protobuf::internal::ArenaStringPtr content_;
+    PROTOBUF_TSAN_DECLARE_MEMBER
+  };
+  union { Impl_ _impl_; };
+  friend struct ::TableStruct_kind_2eproto;
+};
+
+extern const ::google::protobuf::internal::ClassDataFull ue_explicit_set_name_field_cfg_class_data_;
 // -------------------------------------------------------------------
 
 class test_msg_verifier final : public ::google::protobuf::Message
@@ -10441,6 +10658,140 @@ inline void global_settings::set_allocated_test_standard_msg(::dep2_cfg* PROTOBU
 
   _impl_.test_standard_msg_ = reinterpret_cast<::dep2_cfg*>(value);
   // @@protoc_insertion_point(field_set_allocated:global_settings.test_standard_msg)
+}
+
+// -------------------------------------------------------------------
+
+// ue_explicit_set_name_field_cfg
+
+// string name = 1;
+inline void ue_explicit_set_name_field_cfg::clear_name() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.name_.ClearToEmpty();
+  _impl_._has_bits_[0] &= ~0x00000001u;
+}
+inline const std::string& ue_explicit_set_name_field_cfg::name() const
+    ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  // @@protoc_insertion_point(field_get:ue_explicit_set_name_field_cfg.name)
+  return _internal_name();
+}
+template <typename Arg_, typename... Args_>
+PROTOBUF_ALWAYS_INLINE void ue_explicit_set_name_field_cfg::set_name(Arg_&& arg, Args_... args) {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_._has_bits_[0] |= 0x00000001u;
+  _impl_.name_.Set(static_cast<Arg_&&>(arg), args..., GetArena());
+  // @@protoc_insertion_point(field_set:ue_explicit_set_name_field_cfg.name)
+}
+inline std::string* PROTOBUF_NONNULL ue_explicit_set_name_field_cfg::mutable_name()
+    ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  std::string* _s = _internal_mutable_name();
+  // @@protoc_insertion_point(field_mutable:ue_explicit_set_name_field_cfg.name)
+  return _s;
+}
+inline const std::string& ue_explicit_set_name_field_cfg::_internal_name() const {
+  ::google::protobuf::internal::TSanRead(&_impl_);
+  return _impl_.name_.Get();
+}
+inline void ue_explicit_set_name_field_cfg::_internal_set_name(const std::string& value) {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_._has_bits_[0] |= 0x00000001u;
+  _impl_.name_.Set(value, GetArena());
+}
+inline std::string* PROTOBUF_NONNULL ue_explicit_set_name_field_cfg::_internal_mutable_name() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_._has_bits_[0] |= 0x00000001u;
+  return _impl_.name_.Mutable( GetArena());
+}
+inline std::string* PROTOBUF_NULLABLE ue_explicit_set_name_field_cfg::release_name() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  // @@protoc_insertion_point(field_release:ue_explicit_set_name_field_cfg.name)
+  if ((_impl_._has_bits_[0] & 0x00000001u) == 0) {
+    return nullptr;
+  }
+  _impl_._has_bits_[0] &= ~0x00000001u;
+  auto* released = _impl_.name_.Release();
+  if (::google::protobuf::internal::DebugHardenForceCopyDefaultString()) {
+    _impl_.name_.Set("", GetArena());
+  }
+  return released;
+}
+inline void ue_explicit_set_name_field_cfg::set_allocated_name(std::string* PROTOBUF_NULLABLE value) {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  if (value != nullptr) {
+    _impl_._has_bits_[0] |= 0x00000001u;
+  } else {
+    _impl_._has_bits_[0] &= ~0x00000001u;
+  }
+  _impl_.name_.SetAllocated(value, GetArena());
+  if (::google::protobuf::internal::DebugHardenForceCopyDefaultString() && _impl_.name_.IsDefault()) {
+    _impl_.name_.Set("", GetArena());
+  }
+  // @@protoc_insertion_point(field_set_allocated:ue_explicit_set_name_field_cfg.name)
+}
+
+// string content = 2;
+inline void ue_explicit_set_name_field_cfg::clear_content() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.content_.ClearToEmpty();
+  _impl_._has_bits_[0] &= ~0x00000002u;
+}
+inline const std::string& ue_explicit_set_name_field_cfg::content() const
+    ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  // @@protoc_insertion_point(field_get:ue_explicit_set_name_field_cfg.content)
+  return _internal_content();
+}
+template <typename Arg_, typename... Args_>
+PROTOBUF_ALWAYS_INLINE void ue_explicit_set_name_field_cfg::set_content(Arg_&& arg, Args_... args) {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_._has_bits_[0] |= 0x00000002u;
+  _impl_.content_.Set(static_cast<Arg_&&>(arg), args..., GetArena());
+  // @@protoc_insertion_point(field_set:ue_explicit_set_name_field_cfg.content)
+}
+inline std::string* PROTOBUF_NONNULL ue_explicit_set_name_field_cfg::mutable_content()
+    ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  std::string* _s = _internal_mutable_content();
+  // @@protoc_insertion_point(field_mutable:ue_explicit_set_name_field_cfg.content)
+  return _s;
+}
+inline const std::string& ue_explicit_set_name_field_cfg::_internal_content() const {
+  ::google::protobuf::internal::TSanRead(&_impl_);
+  return _impl_.content_.Get();
+}
+inline void ue_explicit_set_name_field_cfg::_internal_set_content(const std::string& value) {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_._has_bits_[0] |= 0x00000002u;
+  _impl_.content_.Set(value, GetArena());
+}
+inline std::string* PROTOBUF_NONNULL ue_explicit_set_name_field_cfg::_internal_mutable_content() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_._has_bits_[0] |= 0x00000002u;
+  return _impl_.content_.Mutable( GetArena());
+}
+inline std::string* PROTOBUF_NULLABLE ue_explicit_set_name_field_cfg::release_content() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  // @@protoc_insertion_point(field_release:ue_explicit_set_name_field_cfg.content)
+  if ((_impl_._has_bits_[0] & 0x00000002u) == 0) {
+    return nullptr;
+  }
+  _impl_._has_bits_[0] &= ~0x00000002u;
+  auto* released = _impl_.content_.Release();
+  if (::google::protobuf::internal::DebugHardenForceCopyDefaultString()) {
+    _impl_.content_.Set("", GetArena());
+  }
+  return released;
+}
+inline void ue_explicit_set_name_field_cfg::set_allocated_content(std::string* PROTOBUF_NULLABLE value) {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  if (value != nullptr) {
+    _impl_._has_bits_[0] |= 0x00000002u;
+  } else {
+    _impl_._has_bits_[0] &= ~0x00000002u;
+  }
+  _impl_.content_.SetAllocated(value, GetArena());
+  if (::google::protobuf::internal::DebugHardenForceCopyDefaultString() && _impl_.content_.IsDefault()) {
+    _impl_.content_.Set("", GetArena());
+  }
+  // @@protoc_insertion_point(field_set_allocated:ue_explicit_set_name_field_cfg.content)
 }
 
 #ifdef __GNUC__

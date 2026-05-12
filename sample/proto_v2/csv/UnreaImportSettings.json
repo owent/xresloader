@@ -46,5 +46,17 @@
         },
         "bSkipReadOnly": "true",
         "bReplaceExisting": "true"
+    },
+    {
+        "GroupName": "XResConfig",
+        "DestinationPath": "ConfigRec",
+        "FactoryName": "ReimportDataTableFactory",
+        "Filenames": ["D:\\workspace\\git\\github\\xresloader\\xresloader\\sample\\proto_v2\\csv\\UeExplicitSetNameFieldCfg.csv"],
+        "ImportSettings": {
+            "ImportType": "ECSV_DataTable",
+            "ImportRowStruct": "UeExplicitSetNameFieldCfg"
+        },
+        "bSkipReadOnly": "true",
+        "bReplaceExisting": "true"
     }
 ]}

@@ -2364,8 +2364,7 @@ public abstract class DataDstUEBase extends DataDstJava {
 
                 // void InitializeDefaultLoader() const;
                 sourceFs.write(
-                        dumpString(String.format("void U%s::InitializeDefaultLoader() const\r\n", helperClazzName,
-                                codeInfo.clazzName)));
+                        dumpString(String.format("void U%s::InitializeDefaultLoader() const\r\n", helperClazzName)));
                 sourceFs.write(dumpString("{\r\n"));
                 sourceFs.write(dumpString("    if (!this->EnableDefaultLoader) {\r\n"));
                 sourceFs.write(dumpString("        return;\r\n"));
@@ -2380,15 +2379,14 @@ public abstract class DataDstUEBase extends DataDstJava {
 
                 // void DisableDefaultLoader();
                 sourceFs.write(dumpString(
-                        String.format("void U%s::DisableDefaultLoader()\r\n", helperClazzName, codeInfo.clazzName)));
+                        String.format("void U%s::DisableDefaultLoader()\r\n", helperClazzName)));
                 sourceFs.write(dumpString("{\r\n"));
                 sourceFs.write(dumpString("    this->EnableDefaultLoader = false;\r\n"));
                 sourceFs.write(dumpString("}\r\n\r\n"));
 
                 // void GetObjectPath();
                 sourceFs.write(dumpString(
-                        String.format("const TCHAR* U%s::GetObjectPath() const\r\n", helperClazzName,
-                                codeInfo.clazzName)));
+                        String.format("const TCHAR* U%s::GetObjectPath() const\r\n", helperClazzName)));
                 sourceFs.write(dumpString("{\r\n"));
                 sourceFs.write(
                         dumpString(String.format("    return TEXT(\"DataTable'/Game/%s'\");\r\n", helperDestination)));

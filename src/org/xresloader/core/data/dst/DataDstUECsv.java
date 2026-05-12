@@ -104,7 +104,7 @@ public class DataDstUECsv extends DataDstUEBase {
                         dumpedFields.add(oneofVarName);
                         finalRowData.add(oneofVarName);
 
-                        DataDstWriterNodeWrapper virtualNode = new DataDstWriterNodeWrapper(oneofVarName, true, null);
+                        DataDstWriterNodeWrapper virtualNode = new DataDstWriterNodeWrapper(oneofVarName, true);
                         virtualNode.setReferOneof(field.getReferOneof());
                         headerAutocomplete.add(virtualNode);
                     }
@@ -115,7 +115,7 @@ public class DataDstUECsv extends DataDstUEBase {
                 }
                 dumpedFields.add(varName);
                 finalRowData.add(varName);
-                DataDstWriterNodeWrapper virtualNode = new DataDstWriterNodeWrapper(varName, true, null);
+                DataDstWriterNodeWrapper virtualNode = new DataDstWriterNodeWrapper(varName, true);
                 virtualNode.setReferField(field);
                 headerAutocomplete.add(virtualNode);
             }

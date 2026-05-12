@@ -10,7 +10,6 @@ import org.xresloader.core.data.err.ConvException;
 import org.xresloader.core.data.src.DataContainer;
 import org.xresloader.core.data.src.DataSrcImpl;
 import org.xresloader.core.data.vfy.DataVerifyImpl;
-import org.xresloader.core.engine.IdentifyEngine;
 import org.xresloader.core.scheme.SchemeConf;
 
 import java.io.*;
@@ -191,21 +190,13 @@ public abstract class DataDstUEBase extends DataDstJava {
         private DataDstFieldDescriptor referFieldDescriptor = null;
         private DataDstOneofDescriptor referOneofDescriptor = null;
         private DataDstWriterNodeWrapper referOneofNode = null;
-        private DataDstWriterNode referNode = null;
 
         // key为原始field name
         private HashMap<String, ArrayList<DataDstWriterNodeWrapper>> children = null;
 
-        public DataDstWriterNodeWrapper(String varName, boolean isGenerated, DataDstWriterNode referNode) {
+        public DataDstWriterNodeWrapper(String varName, boolean isGenerated) {
             this.varName = varName;
             this.isGenerated = isGenerated;
-
-            this.referNode = referNode;
-            if (this.referNode != null) {
-                this.referFieldDescriptor = this.referNode.getFieldDescriptor();
-                this.referOneofDescriptor = this.referNode.getOneofDescriptor();
-                this.referTypeDescriptor = this.referNode.getTypeDescriptor();
-            }
         }
 
         public DataDstWriterNodeWrapper(String varName, boolean isGenerated, DataDstTypeDescriptor referTypeDescriptor,
@@ -230,15 +221,11 @@ public abstract class DataDstUEBase extends DataDstJava {
                 return this.referFieldDescriptor;
             }
 
-            if (this.referNode != null) {
-                return this.referNode.getFieldDescriptor();
-            }
-
             return null;
         }
 
         public void setReferField(DataDstFieldDescriptor field) {
-            if (!this.isGenerated || this.referNode != null) {
+            if (!this.isGenerated && field == null) {
                 return;
             }
 
@@ -250,23 +237,15 @@ public abstract class DataDstUEBase extends DataDstJava {
                 return this.referOneofDescriptor;
             }
 
-            if (this.referNode != null) {
-                return this.referNode.getOneofDescriptor();
-            }
-
             return null;
         }
 
         public void setReferOneof(DataDstOneofDescriptor oneof) {
-            if (!this.isGenerated || this.referNode != null) {
+            if (!this.isGenerated && oneof == null) {
                 return;
             }
 
             this.referOneofDescriptor = oneof;
-        }
-
-        public DataDstWriterNode getReferNode() {
-            return referNode;
         }
 
         public DataDstWriterNodeWrapper getReferOneofNode() {
@@ -280,10 +259,6 @@ public abstract class DataDstUEBase extends DataDstJava {
         public DataDstTypeDescriptor getTypeDescriptor() {
             if (this.referTypeDescriptor != null) {
                 return this.referTypeDescriptor;
-            }
-
-            if (referNode != null) {
-                return referNode.getTypeDescriptor();
             }
 
             if (this.referFieldDescriptor != null) {
@@ -309,7 +284,7 @@ public abstract class DataDstUEBase extends DataDstJava {
 
         void setTypeDescriptor(DataDstTypeDescriptor t) {
             // 如果不是生成的，或有绑定数据源则不能设置关联field
-            if (!this.isGenerated || null != this.referNode) {
+            if (!this.isGenerated && t == null) {
                 return;
             }
 
@@ -404,28 +379,6 @@ public abstract class DataDstUEBase extends DataDstJava {
                 return lv - rv;
             }
 
-            lv = referNode == null ? 0 : referNode.getListIndex();
-            rv = r.referNode == null ? 0 : r.referNode.getListIndex();
-            if (lv != rv) {
-                return lv - rv;
-            }
-
-            if (referNode != null && referNode.identify != null) {
-                lv = referNode.identify.getDataFieldIndex();
-            } else {
-                lv = -1;
-            }
-
-            if (r.referNode != null && r.referNode.identify != null) {
-                rv = r.referNode.identify.getDataFieldIndex();
-            } else {
-                rv = -1;
-            }
-
-            if (lv != rv) {
-                return lv - rv;
-            }
-
             return getVarName().compareTo(r.getVarName());
         }
 
@@ -495,18 +448,14 @@ public abstract class DataDstUEBase extends DataDstJava {
             throws IOException {
         File ofd = new File(outputFile);
         if (originClazzName == null || originClazzName.isEmpty()) {
-            if (null == writerNodeWrapper || null == writerNodeWrapper.getReferNode()) {
-                String fileName = ofd.getName();
-                int lastDot = fileName.lastIndexOf('.');
-                if (lastDot < 0) {
-                    originClazzName = fileName;
-                } else {
-                    originClazzName = fileName.substring(0, lastDot);
-                }
-                originClazzName = "F" + getIdentName(originClazzName);
+            String fileName = ofd.getName();
+            int lastDot = fileName.lastIndexOf('.');
+            if (lastDot < 0) {
+                originClazzName = fileName;
             } else {
-                originClazzName = getUETypeName(writerNodeWrapper.getTypeDescriptor());
+                originClazzName = fileName.substring(0, lastDot);
             }
+            originClazzName = "F" + getIdentName(originClazzName);
         }
 
         UECodeInfo ret = getCodeCache(originClazzName);
@@ -874,7 +823,7 @@ public abstract class DataDstUEBase extends DataDstJava {
 
             // 这里规则必须和 makeDependence(table.descriptor)一样
             String originClazzName = getUETypeName(table.descriptor);
-            DataDstWriterNodeWrapper rootWriterNodeWrapper = new DataDstWriterNodeWrapper("", true, null);
+            DataDstWriterNodeWrapper rootWriterNodeWrapper = new DataDstWriterNodeWrapper("", true);
             rootWriterNodeWrapper.setTypeDescriptor(table.descriptor.getTypeDescriptor());
 
             UECodeInfo codeInfo = getCodeInfo(SchemeConf.getInstance().getOutputFileAbsPath(), originClazzName,
@@ -1096,6 +1045,7 @@ public abstract class DataDstUEBase extends DataDstJava {
                 if (strVal.isEmpty()) {
                     return null;
                 }
+                return strVal;
             } else if (val != null) {
                 return val;
             }
@@ -1276,26 +1226,8 @@ public abstract class DataDstUEBase extends DataDstJava {
             return ret;
         }
 
-        do {
-            DataDstWriterNode rootNode = root.getReferNode();
-            // 虚拟节点自动生成生成oneof
-            if (rootNode == null) {
-                break;
-            }
-
-            DataDstChildrenNode referOneof = rootNode.getChildren().getOrDefault(oneof.getName(), null);
-            if (referOneof == null) {
-                break;
-            }
-
-            // 配置了oneof的映射走这里,oneof和repeated冲突，只会有一个
-            ret = buildWriterNodeWraper(baseVarName, referOneof.nodes.get(0), oneof, false);
-        } while (false);
-
-        // 没有配置了oneof的映射要生成一个
-        if (ret == null) {
-            ret = buildWriterNodeWraper(baseVarName, null, oneof, true);
-        }
+        // 虚拟节点自动生成oneof
+        ret = buildWriterNodeWraper(baseVarName, oneof, true);
 
         root.addChidlren(ret);
         cache.put(baseVarName, ret);
@@ -1303,7 +1235,7 @@ public abstract class DataDstUEBase extends DataDstJava {
     }
 
     protected void buildWriterNodeWraperForWriterNode(DataDstWriterNodeWrapper root,
-            DataDstWriterNode referWriterNode, DataDstTypeDescriptor messageDesc) {
+            DataDstTypeDescriptor messageDesc) {
         HashMap<String, DataDstWriterNodeWrapper> oneofCache = null;
 
         for (DataDstFieldDescriptor field : messageDesc.getSortedFields()) {
@@ -1320,42 +1252,9 @@ public abstract class DataDstUEBase extends DataDstJava {
 
             String baseVarName = getIdentName(field.getName());
             // 可能是虚拟节点，直接生成一个元素即可
-            if (referWriterNode == null) {
-                DataDstWriterNodeWrapper res = buildWriterNodeWraper(baseVarName, null, field, true);
-                res.setReferOneofNode(referOneof);
-                root.addChidlren(res);
-                continue;
-            }
-
-            DataDstChildrenNode referChildren = referWriterNode.getChildren().getOrDefault(field.getName(), null);
-            if (referChildren == null || referChildren.nodes == null || referChildren.nodes.isEmpty()) {
-                // 生成一个元素用于填充默认值即可
-                DataDstWriterNodeWrapper res = buildWriterNodeWraper(baseVarName, null, field, false);
-                res.setReferOneofNode(referOneof);
-                root.addChidlren(res);
-                continue;
-            }
-
-            if (null != referOneof) {
-                referOneof.setReferField(field);
-            }
-
-            if (field.isList()) {
-                ArrayList<DataDstWriterNodeWrapper> children = new ArrayList<>();
-                children.ensureCapacity(referChildren.nodes.size());
-                for (int i = 0; i < referChildren.nodes.size(); ++i) {
-                    DataDstWriterNodeWrapper res = buildWriterNodeWraper(baseVarName, referChildren.nodes.get(i),
-                            field, false);
-                    res.setReferOneofNode(referOneof);
-                    children.add(res);
-                }
-                root.addChidlren(children);
-            } else {
-                DataDstWriterNodeWrapper res = buildWriterNodeWraper(baseVarName, referChildren.nodes.get(0), field,
-                        false);
-                res.setReferOneofNode(referOneof);
-                root.addChidlren(res);
-            }
+            DataDstWriterNodeWrapper res = buildWriterNodeWraper(baseVarName, field, true);
+            res.setReferOneofNode(referOneof);
+            root.addChidlren(res);
         }
     }
 
@@ -1367,7 +1266,7 @@ public abstract class DataDstUEBase extends DataDstJava {
 
         // 只需要build一次
         if (!root.hasChidlren()) {
-            buildWriterNodeWraperForWriterNode(root, root.getReferNode(), typeDesc);
+            buildWriterNodeWraperForWriterNode(root, typeDesc);
         }
 
         LinkedList<DataDstWriterNodeWrapper> ret = new LinkedList<>();
@@ -1375,24 +1274,24 @@ public abstract class DataDstUEBase extends DataDstJava {
         return ret;
     }
 
-    protected DataDstWriterNodeWrapper buildWriterNodeWraper(String varName, DataDstWriterNode referNode,
-            DataDstOneofDescriptor oneofDesc, boolean isGenerated) {
-        DataDstWriterNodeWrapper ret = new DataDstWriterNodeWrapper(varName, isGenerated, referNode);
+    protected DataDstWriterNodeWrapper buildWriterNodeWraper(String varName, DataDstOneofDescriptor oneofDesc,
+            boolean isGenerated) {
+        DataDstWriterNodeWrapper ret = new DataDstWriterNodeWrapper(varName, isGenerated);
         if (isGenerated && oneofDesc != null) {
             ret.setReferOneof(oneofDesc);
         }
         return ret;
     }
 
-    protected DataDstWriterNodeWrapper buildWriterNodeWraper(String varName, DataDstWriterNode referNode,
-            DataDstTypeDescriptor typeDesc, DataDstEnumDescriptor enumDesc, boolean isGenerated) {
+    protected DataDstWriterNodeWrapper buildWriterNodeWraper(String varName, DataDstTypeDescriptor typeDesc,
+            DataDstEnumDescriptor enumDesc, boolean isGenerated) {
         DataDstWriterNodeWrapper ret = new DataDstWriterNodeWrapper(varName, isGenerated, typeDesc, enumDesc);
         return ret;
     }
 
-    protected DataDstWriterNodeWrapper buildWriterNodeWraper(String varName, DataDstWriterNode referNode,
-            DataDstFieldDescriptor fieldDesc, boolean isGenerated) {
-        DataDstWriterNodeWrapper ret = new DataDstWriterNodeWrapper(varName, isGenerated, referNode);
+    protected DataDstWriterNodeWrapper buildWriterNodeWraper(String varName, DataDstFieldDescriptor fieldDesc,
+            boolean isGenerated) {
+        DataDstWriterNodeWrapper ret = new DataDstWriterNodeWrapper(varName, isGenerated);
         if (isGenerated && fieldDesc != null) {
             ret.setReferField(fieldDesc);
         }
@@ -1416,44 +1315,9 @@ public abstract class DataDstUEBase extends DataDstJava {
 
             String baseVarName = getIdentName(field.getName());
             // 可能是虚拟节点，直接生成一个元素即可
-            if (referNode == null) {
-                DataDstWriterNodeWrapper res = buildWriterNodeWraper(baseVarName, null, field, true);
-                res.setReferOneofNode(referOneof);
-                ret.addChidlren(res);
-                continue;
-            }
-
-            DataDstChildrenNode referChildren = referNode.getChildren().getOrDefault(field.getName(), null);
-            if (referChildren == null || referChildren.nodes == null || referChildren.nodes.isEmpty()) {
-                // 生成一个元素用于填充默认值即可
-                DataDstWriterNodeWrapper res = buildWriterNodeWraper(baseVarName, null, field, true);
-                res.setReferOneofNode(referOneof);
-                ret.addChidlren(res);
-                continue;
-            }
-
-            if (null != referOneof) {
-                referOneof.setReferField(field);
-            }
-
-            if (field.isList()) {
-                ArrayList<DataDstWriterNodeWrapper> children = new ArrayList<>();
-                children.ensureCapacity(referChildren.nodes.size());
-                for (int i = 0; i < referChildren.nodes.size(); ++i) {
-                    String childVarName = baseVarName;
-
-                    DataDstWriterNodeWrapper res = buildWriterNodeWraper(childVarName, referChildren.nodes.get(i),
-                            field, false);
-                    res.setReferOneofNode(referOneof);
-                    children.add(res);
-                }
-                ret.addChidlren(children);
-            } else {
-                DataDstWriterNodeWrapper res = buildWriterNodeWraper(baseVarName, referChildren.nodes.get(0), field,
-                        false);
-                res.setReferOneofNode(referOneof);
-                ret.addChidlren(res);
-            }
+            DataDstWriterNodeWrapper res = buildWriterNodeWraper(baseVarName, field, true);
+            res.setReferOneofNode(referOneof);
+            ret.addChidlren(res);
         }
 
         return ret;
@@ -1480,31 +1344,16 @@ public abstract class DataDstUEBase extends DataDstJava {
 
         // 加载代码
         UECodeInfo codeInfo = getCodeInfo(SchemeConf.getInstance().getOutputFileAbsPath(), null, null);
-        DataDstWriterNode ddNode;
 
         // const完整路径都在data里了，不需要额外的包名(可能包含多个包)
         // ======================================================================================================
         LinkedList<DataDstWriterNodeWrapper> expandedDesc = new LinkedList<>();
-        ddNode = DataDstWriterNode.create(null,
-                DataDstWriterNode.getDefaultMessageDescriptor(DataDstWriterNode.JAVA_TYPE.STRING, null, null),
-                -1);
-        ddNode.setFieldDescriptor(new DataDstFieldDescriptor(ddNode.getTypeDescriptor(), 1, "Name",
-                DataDstWriterNode.FIELD_LABEL_TYPE.OPTIONAL, null));
-        ddNode.identify = IdentifyEngine.n2i("Name", 0);
 
-        DataDstWriterNodeWrapper constNameNode = createVirtualWriterNodeWrapper("Name", 1, JAVA_TYPE.STRING, ddNode);
+        DataDstWriterNodeWrapper constNameNode = createVirtualWriterNodeWrapper("Name", 1, JAVA_TYPE.STRING);
         constNameNode.varName = getIdentName("Name");
         expandedDesc.add(constNameNode);
 
-        ddNode = DataDstWriterNode.create(null,
-                DataDstWriterNode.getDefaultMessageDescriptor(DataDstWriterNode.JAVA_TYPE.INT,
-                        DataDstWriterNode.getDefaultTypeValidatorInt32(), null),
-                -1);
-        ddNode.setFieldDescriptor(new DataDstFieldDescriptor(ddNode.getTypeDescriptor(), 2, "Value",
-                DataDstWriterNode.FIELD_LABEL_TYPE.OPTIONAL, null));
-        ddNode.identify = IdentifyEngine.n2i("Value", 1);
-
-        DataDstWriterNodeWrapper constValueNode = createVirtualWriterNodeWrapper("Value", 2, JAVA_TYPE.INT, ddNode);
+        DataDstWriterNodeWrapper constValueNode = createVirtualWriterNodeWrapper("Value", 2, JAVA_TYPE.INT);
         constValueNode.varName = getIdentName("Value");
         expandedDesc.add(constValueNode);
 
@@ -1572,7 +1421,7 @@ public abstract class DataDstUEBase extends DataDstJava {
 
         // keyField can not be list, so it must has only 1 element
         DataDstWriterNodeWrapper nameNode = rule.keyFields.get(0);
-        if (nameNode.getReferField() != null) {
+        if (rule.keyFields.size() == 1 && nameNode.getReferField() != null) {
             String ueTypeName = getUETypeName(nameNode.getReferField());
             if (ueTypeName.equalsIgnoreCase("FString")) {
                 ueTypeName = "FName";
@@ -1610,7 +1459,7 @@ public abstract class DataDstUEBase extends DataDstJava {
 
         // keyField can not be list, so it must has only 1 element
         DataDstWriterNodeWrapper nameNode = rule.keyFields.get(0);
-        if (nameNode.getReferField() != null) {
+        if (rule.keyFields.size() == 1 && nameNode.getReferField() != null) {
             return String.format("%s%s", prefix, nameNode.varName);
         }
 
@@ -1644,7 +1493,7 @@ public abstract class DataDstUEBase extends DataDstJava {
 
         // keyField can not be list, so it must has only 1 element
         DataDstWriterNodeWrapper nameNode = rule.keyFields.get(0);
-        if (nameNode.getReferField() != null) {
+        if (rule.keyFields.size() == 1 && nameNode.getReferField() != null) {
             String ueTypeNameIdent = null;
             if (null != nameNode.getFieldExtension()) {
                 ueTypeNameIdent = nameNode.getFieldExtension().mutableUE().ueTypeName;
@@ -2108,26 +1957,8 @@ public abstract class DataDstUEBase extends DataDstJava {
                 FIELD_LABEL_TYPE.OPTIONAL, null);
     }
 
-    @SuppressWarnings("unused")
-    static DataDstFieldDescriptor createVirtualFieldDescriptor(String name, int index, DataDstTypeDescriptor msgDesc) {
-        return new DataDstFieldDescriptor(msgDesc, index, name, FIELD_LABEL_TYPE.OPTIONAL, null);
-    }
-
-    static DataDstWriterNodeWrapper createVirtualWriterNodeWrapper(String name, int index, JAVA_TYPE type,
-            DataDstWriterNode referWriterNode) {
-        DataDstWriterNodeWrapper ret;
-        if (type != JAVA_TYPE.MESSAGE) {
-            ret = new DataDstWriterNodeWrapper(name, true, referWriterNode);
-            ret.setReferField(createVirtualFieldDescriptor(name, index, type));
-        } else {
-            ret = new DataDstWriterNodeWrapper(name, true, referWriterNode);
-            ret.setTypeDescriptor(referWriterNode.getTypeDescriptor());
-        }
-        return ret;
-    }
-
     static DataDstWriterNodeWrapper createVirtualWriterNodeWrapper(String name, int index, JAVA_TYPE type) {
-        DataDstWriterNodeWrapper ret = new DataDstWriterNodeWrapper(name, true, null);
+        DataDstWriterNodeWrapper ret = new DataDstWriterNodeWrapper(name, true);
         ret.setReferField(createVirtualFieldDescriptor(name, index, type));
         return ret;
     }

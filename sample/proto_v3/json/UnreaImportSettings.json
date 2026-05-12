@@ -27,18 +27,6 @@
         "GroupName": "XResConfig",
         "DestinationPath": "ConfigRec",
         "FactoryName": "ReimportDataTableFactory",
-        "Filenames": ["D:\\workspace\\git\\github\\xresloader\\xresloader\\sample\\proto_v3\\json\\RoleUpgradeCfg.json"],
-        "ImportSettings": {
-            "ImportType": "ECSV_DataTable",
-            "ImportRowStruct": "RoleUpgradeCfg"
-        },
-        "bSkipReadOnly": "true",
-        "bReplaceExisting": "true"
-    },
-    {
-        "GroupName": "XResConfig",
-        "DestinationPath": "ConfigRec",
-        "FactoryName": "ReimportDataTableFactory",
         "Filenames": ["D:\\workspace\\git\\github\\xresloader\\xresloader\\sample\\proto_v3\\json\\EventCfg.json"],
         "ImportSettings": {
             "ImportType": "ECSV_DataTable",
@@ -55,6 +43,18 @@
         "ImportSettings": {
             "ImportType": "ECSV_DataTable",
             "ImportRowStruct": "KeepOrStripEmptyListCfg"
+        },
+        "bSkipReadOnly": "true",
+        "bReplaceExisting": "true"
+    },
+    {
+        "GroupName": "XResConfig",
+        "DestinationPath": "ConfigRec",
+        "FactoryName": "ReimportDataTableFactory",
+        "Filenames": ["D:\\workspace\\git\\github\\xresloader\\xresloader\\sample\\proto_v3\\json\\RoleUpgradeCfg.json"],
+        "ImportSettings": {
+            "ImportType": "ECSV_DataTable",
+            "ImportRowStruct": "RoleUpgradeCfg"
         },
         "bSkipReadOnly": "true",
         "bReplaceExisting": "true"

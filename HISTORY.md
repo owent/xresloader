@@ -1,5 +1,14 @@
 # 更新记录
 
+## 2.23.6
+
+1. 更新依赖库
+   + `commons-codec:commons-codec` -> 1.22.0
+   + `org.apache.logging.log4j:log4j-api` -> 2.26.0
+   + `org.apache.logging.log4j:log4j-core` -> 2.26.0
+   + `org.msgpack:msgpack-core` -> 0.9.12
+   + `com.gradleup.shadow` (gradle plugin) -> 9.4.1
+
 ## 2.23.5
 
 1. 修复验证器处理空字符串时，错误地按数值类型参与校验的问题。

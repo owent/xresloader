@@ -3,7 +3,6 @@ package org.xresloader.core.data.dst;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.xresloader.core.ProgramOptions;
 import org.xresloader.core.data.dst.DataDstWriterNode.DataDstFieldDescriptor;
 import org.xresloader.core.data.err.ConvException;
 import org.xresloader.core.scheme.SchemeConf;
@@ -62,7 +61,7 @@ public class DataDstUEJson extends DataDstUEBase {
     protected void buildForUEOnPrintRecord(Object buildObj, HashMap<String, Object> rowData, UEDataRowRule rule,
             UECodeInfo codeInfo) throws IOException {
         JSONObject jobj = new JSONObject();
-        HashSet<String> dumpedFields = new HashSet<String>();
+        HashSet<String> dumpedFields = new HashSet<>();
 
         UEBuildObject bobj = ((UEBuildObject) buildObj);
         // 顺序约定:
@@ -253,7 +252,7 @@ public class DataDstUEJson extends DataDstUEBase {
         // Hashmap
         if (data instanceof Map) {
             Map<String, Object> mp = (Map<String, Object>) data;
-            ArrayList<Map.Entry<String, Object>> sorted_array = new ArrayList<Map.Entry<String, Object>>();
+            ArrayList<Map.Entry<String, Object>> sorted_array = new ArrayList<>();
             sorted_array.ensureCapacity(mp.size());
             sorted_array.addAll(mp.entrySet());
             sorted_array.sort((l, r) -> {
@@ -299,25 +298,23 @@ public class DataDstUEJson extends DataDstUEBase {
 
     private Object getDefault(DataDstFieldDescriptor fd) {
         switch (fd.getType()) {
-            case INT: {
-                return Integer.valueOf(0);
+            case INT -> {
+                return 0;
             }
-            case LONG: {
+            case LONG -> {
                 return Long.valueOf(0);
             }
-            case BOOLEAN: {
+            case BOOLEAN -> {
                 return false;
             }
-            case STRING:
-            case BYTES: {
+            case STRING, BYTES -> {
                 return "";
             }
-            case FLOAT:
-            case DOUBLE: {
+            case FLOAT, DOUBLE -> {
                 return 0.0f;
             }
-            case MESSAGE: {
-                HashSet<String> dumpedOneof = new HashSet<String>();
+            case MESSAGE -> {
+                HashSet<String> dumpedOneof = new HashSet<>();
                 JSONObject ret = new JSONObject();
                 for (DataDstFieldDescriptor subField : fd.getTypeDescriptor().getSortedFields()) {
                     String varName = getIdentName(subField.getName());
@@ -341,8 +338,9 @@ public class DataDstUEJson extends DataDstUEBase {
 
                 return ret;
             }
-            default:
+            default -> {
                 return null;
+            }
         }
     }
 

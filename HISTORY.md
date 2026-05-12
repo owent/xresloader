@@ -2,7 +2,9 @@
 
 ## 2.23.6
 
-1. 更新依赖库
+1. 修复UE导出的字段中有Name字段时的key判定错误 (#58)
+2. 优化UE数据导出代码
+3. 更新依赖库
    + `commons-codec:commons-codec` -> 1.22.0
    + `org.apache.logging.log4j:log4j-api` -> 2.26.0
    + `org.apache.logging.log4j:log4j-core` -> 2.26.0

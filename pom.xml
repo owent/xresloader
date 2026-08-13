@@ -16,7 +16,7 @@
         <nashorn.version>15.7</nashorn.version>
         <protobuf.version>4.34.1</protobuf.version>
         <poi.version>5.5.1</poi.version>
-        <log4j.version>2.26.0</log4j.version>
+        <log4j.version>2.26.1</log4j.version>
         <commons-cli.version>1.11.0</commons-cli.version>
         <commons-codec.version>1.22.0</commons-codec.version>
         <ini4j.version>0.5.4</ini4j.version>

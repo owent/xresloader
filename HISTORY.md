@@ -1,5 +1,24 @@
 # 更新记录
 
+## Unreleased
+
+1. 更新依赖库
+   + `com.google.protobuf:protobuf-java` -> 4.36.2
+   + `com.google.protobuf:protobuf-java-util` -> 4.36.2
+   + `org.apache.logging.log4j:log4j-api` -> 2.26.1
+   + `org.apache.logging.log4j:log4j-core` -> 2.26.1
+   + `commons-codec:commons-codec` -> 1.22.1
+   + `org.json:json` -> 20260814
+   + `org.snakeyaml:snakeyaml-engine` -> 3.1.1
+   + `org.junit.jupiter:junit-jupiter` -> 6.1.3
+   + `org.junit.platform:junit-platform-launcher` -> 6.1.3
+   + `org.jacoco:jacoco-maven-plugin` -> 0.8.15
+   + `org.apache.maven.plugins:maven-compiler-plugin` -> 3.16.0
+   + `org.apache.maven.plugins:maven-surefire-plugin` -> 3.6.0
+   + `org.codehaus.mojo:build-helper-maven-plugin` -> 3.6.2
+   + `com.gradleup.shadow` (gradle plugin) -> 9.6.1
+2. 更新 `tools` 目录下捆绑的 protoc 到 36.2，并使用其重新生成 `header` 内的Java代码和 `sample`、`loader-binding` 内的C++代码
+
 ## 2.23.6
 
 1. 修复UE导出的字段中有Name字段时的key判定错误 (#58)

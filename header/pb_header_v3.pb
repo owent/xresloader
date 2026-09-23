@@ -1,5 +1,5 @@
 
-™
+Í
 pb_header_v3.protoorg.xresloader.pb"X
 xresloader_data_source
 file (	Rfile
@@ -17,4 +17,4 @@ dataSource" 
 header (2$.org.xresloader.pb.xresloader_headerRheader
 
 data_block (R	dataBlock*
-data_message_type (	RdataMessageTypebproto3
+data_message_type (	RdataMessageTypeB2Z0github.com/xresloader/xresloader;xresloader_corebproto3

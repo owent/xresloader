@@ -1,8 +1,8 @@
 buildscript {
-    repositories {
-        maven { url 'https://maven.aliyun.com/repository/public/' }
-        mavenCentral()
-    }
+    // repositories {
+    //     maven { url 'https://maven.aliyun.com/repository/public/' }
+    //     mavenCentral()
+    // }
     dependencies {
         classpath 'com.gradleup.shadow:shadow-gradle-plugin:9.6.1'
     }
@@ -41,11 +41,11 @@ ext {
     ]
 }
 
-repositories {
-    maven { url 'https://mirrors.cloud.tencent.com/nexus/repository/maven-public/' }
-    maven { url 'https://maven.aliyun.com/repository/public/' }
-    mavenCentral()
-}
+// repositories {
+//     maven { url 'https://mirrors.cloud.tencent.com/nexus/repository/maven-public/' }
+//     maven { url 'https://maven.aliyun.com/repository/public/' }
+//     mavenCentral()
+// }
 
 java {
     if (!JavaVersion.current().isCompatibleWith(targetJavaVersion)) {

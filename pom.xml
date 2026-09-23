@@ -37,6 +37,7 @@
     </properties>
 
     <!-- 配置国内镜像仓库，加速依赖下载 -->
+    <!--
     <repositories>
         <repository>
             <id>aliyun-central</id>
@@ -83,6 +84,7 @@
             </snapshots>
         </repository>
     </repositories>
+    -->
 
     <pluginRepositories>
         <pluginRepository>

@@ -1,8 +1,9 @@
 # 更新记录
 
-## Unreleased
+## 2.23.7
 
-1. 更新依赖库
+1. 修复Enum嵌套InTableColumn验证器时，字符串解析没有正确转换的问题
+2. 更新依赖库
    + `com.google.protobuf:protobuf-java` -> 4.36.2
    + `com.google.protobuf:protobuf-java-util` -> 4.36.2
    + `org.apache.logging.log4j:log4j-api` -> 2.26.1
@@ -17,7 +18,7 @@
    + `org.apache.maven.plugins:maven-surefire-plugin` -> 3.6.0
    + `org.codehaus.mojo:build-helper-maven-plugin` -> 3.6.2
    + `com.gradleup.shadow` (gradle plugin) -> 9.6.1
-2. 更新 `tools` 目录下捆绑的 protoc 到 36.2，并使用其重新生成 `header` 内的Java代码和 `sample`、`loader-binding` 内的C++代码
+3. 更新 `tools` 目录下捆绑的 protoc 到 36.2，并使用其重新生成 `header` 内的Java代码和 `sample`、`loader-binding` 内的C++代码
 
 ## 2.23.6
 

@@ -46,7 +46,7 @@
 由于 v2.11.0-rc3 版本变更了默认的索引器，导致对Excel一些内置的数据类型处理和先前有一些差异。比如对于日期时间类型、百分率等。
 现在会先转出原始的文本，再根据protocol的目标类型做转换。如果需要回退到老的POI索引，可以使用 `--enable-excel-formular` 选项切换到老的索引器。
 
-新版本开始使用JDK 11打包，如果仍然需要 JDK1.8打包请自行下载源码并修改 `pom.xml` 内 `maven-compiler-plugin` 的 `source` 和 `target` 后使用 `mvn package` 命令打包。
+当前版本要求 Java 17 或以上版本。默认打包目标为 Java 17，也可以通过 `mvn -Dproject.target.javaVersion=21 clean package` 打包为 Java 21（需要 JDK 21 或以上版本）。
 
 ## License
 
@@ -406,18 +406,26 @@ validator:
 ## 编译和打包（For developer）
 
 + 本项目使用[apache maven](https://maven.apache.org/)管理包依赖和打包构建流程。
-+ JDK 需要1.8或以上版本
++ JDK 需要17或以上版本，默认生成兼容 Java 17 的程序。
 
 ```bash
 # 编译
 mvn compile
 # 打包
 mvn package
+# 全量重编译和打包（切换目标 Java 版本时使用）
+mvn clean package
+# 打包并验证独立 JAR 的启动、Excel 读写和 JavaScript 服务发现
+mvn verify
 ```
 
 以上命令会自动下载依赖文件、包和插件。
 
 编译完成后，输出的结果默认会放在 ***target*** 目录下。
+
+`target/xresloader-<版本>.jar` 包含运行依赖，可直接使用 `java -jar` 执行；`original-*.jar` 是合并依赖前的构建中间产物。
+重复执行 `mvn package` 时会重新生成合并前的 JAR，避免把上次的完整包再次作为 Shade 输入。
+打包时会合并 `META-INF/services`，保留 POI 等依赖的全部服务提供者；只排除各依赖的模块描述符，保留多版本 JAR 的实现类。
 
 ### 更新依赖包
 

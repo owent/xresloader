@@ -1,6 +1,8 @@
 package org.xresloader.core;
 
 import org.apache.commons.cli.*;
+import org.apache.commons.cli.help.HelpFormatter;
+import org.apache.commons.cli.help.TextHelpAppendable;
 import org.apache.commons.codec.binary.Hex;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -265,6 +267,25 @@ public class ProgramOptions {
         return options;
     }
 
+    private boolean printHelp() {
+        TextHelpAppendable output = new TextHelpAppendable(System.out);
+        output.setMaxWidth(140);
+        HelpFormatter formatter = HelpFormatter.builder().setHelpAppendable(output).setShowSince(false).get();
+        Options sharedOptions = get_options_group();
+        try {
+            synchronized (sharedOptions) {
+                formatter.printHelp(String.format("java -client -jar \"%s\" [options...]",
+                        System.getProperty("java.class.path")), null, sharedOptions, null, false);
+            }
+        } catch (IOException exp) {
+            ProgramOptions.getLoger().error("Printing help failed: %s", exp.getMessage());
+            return false;
+        }
+        System.out.println("");
+        System.out.println("You can add -Dlog4j.configurationFile=log4j2.xml to use your own log4j2 configure.");
+        return true;
+    }
+
     public int init(String[] args) {
         reset();
 
@@ -281,27 +302,12 @@ public class ProgramOptions {
             // oops, something went wrong
             ProgramOptions.getLoger().error("Parsing failed.  reason: \"%s\" failed", exp.getMessage());
 
-            String script = System.getProperty("java.class.path");
-            HelpFormatter formatter = new HelpFormatter();
-            formatter.setWidth(140);
-            formatter.printHelp("Usage: java -client -jar " + script + " [options...]", get_options_group());
-            System.out.println("");
-            System.out.println("You can add -Dlog4j.configurationFile=log4j2.xml to use your own log4j2 configure.");
+            printHelp();
             return -1;
         }
 
         if (cmd.hasOption('h')) {
-            String script = System.getProperty("java.class.path");
-            HelpFormatter formatter = new HelpFormatter();
-            formatter.setWidth(140);
-            Options sharedOptions = get_options_group();
-            synchronized (sharedOptions) {
-                formatter.printHelp(String.format("java -client -jar \"%s\" [options...]", script),
-                        sharedOptions);
-            }
-            System.out.println("");
-            System.out.println("You can add -Dlog4j.configurationFile=log4j2.xml to use your own log4j2 configure.");
-            return 1;
+            return printHelp() ? 1 : -1;
         }
 
         if (cmd.hasOption("stdin")) {

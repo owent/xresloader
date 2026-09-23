@@ -45,7 +45,9 @@ jobs:
           python3 gen_header_v2.py
           python3 gen_header_v3.py
           cd ..
-          mvn -Dproject.target.javaVersion=21 package --file pom.xml
-          mvn package --file pom.xml
+          mvn -Dproject.target.javaVersion=21 clean verify --file pom.xml
+          mvn clean verify --file pom.xml
+          # Repeated packaging must not shade the previous uber JAR again.
+          mvn verify --file pom.xml
           cd sample
           bash gen_sample_output.sh

@@ -20,6 +20,7 @@
    + `com.gradleup.shadow` (gradle plugin) -> 9.6.1
 3. 更新 `tools` 目录下捆绑的 protoc 到 36.2，并使用其重新生成 `header` 内的Java代码和 `sample`、`loader-binding` 内的C++代码
 4. 更新CI的GitHub Actions（ `actions/checkout` -> v7, `actions/setup-java` -> v6, `actions/stale` -> v11 ）
+5. 优化打包
 
 ## 2.23.6
 

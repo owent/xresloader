@@ -515,6 +515,7 @@ public class DataDstPbHelper {
                         return ((EnumValueDescriptor) value).getNumber();
                     }
                 }
+                return null;
             }
             case MESSAGE: {
                 if (value instanceof List<?>) {

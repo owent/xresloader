@@ -531,12 +531,12 @@ public class DataDstWriterNode {
                 this.fieldsById.put(d.getValue().getIndex(), d.getValue());
             }
             this.fullName = String.format("%s.%s", owner.getFullName(), name);
+            this.typeValidator = typeValidator;
 
             for (HashMap.Entry<String, DataDstFieldDescriptor> d : fields.entrySet()) {
-                d.getValue().setReferOneof(this);
+                // Link the descriptors without passing this to an overridable method during construction.
+                d.getValue().referOneofDescriptor = this;
             }
-
-            this.typeValidator = typeValidator;
         }
 
         public Object getRawDescriptor() {

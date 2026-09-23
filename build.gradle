@@ -36,6 +36,7 @@ ext {
         dom4j          : '2.2.0',
         commonsCsv     : '1.14.1',
         snakeyamlEngine: '3.1.1',
+        spotbugsAnnotations: '4.9.8',
         junitJupiter   : '6.1.3',
         junitPlatform  : '6.1.3'
     ]
@@ -82,6 +83,9 @@ dependencies {
     implementation "org.snakeyaml:snakeyaml-engine:${versions.snakeyamlEngine}"
     implementation "org.openjdk.nashorn:nashorn-core:${versions.nashorn}"
 
+    // Resolve CSVPrinter's class-file annotations without bundling them at runtime.
+    compileOnly "com.github.spotbugs:spotbugs-annotations:${versions.spotbugsAnnotations}"
+
     testImplementation "org.junit.jupiter:junit-jupiter-api:${versions.junitJupiter}"
     testRuntimeOnly "org.junit.jupiter:junit-jupiter-engine:${versions.junitJupiter}"
     testRuntimeOnly "org.junit.platform:junit-platform-launcher:${versions.junitPlatform}"
@@ -95,6 +99,8 @@ tasks.withType(JavaCompile).configureEach {
 
 tasks.test {
     useJUnitPlatform()
+    // Packaged JAR integration tests run after Shade via Maven Failsafe (mvn verify).
+    exclude '**/*IT.class'
 }
 
 tasks.jacocoTestReport {
@@ -131,6 +137,10 @@ tasks.jar {
 
 tasks.shadowJar {
     archiveClassifier.set('')
+    // Let the service transformer see all providers before duplicate entries are removed.
+    filesMatching('META-INF/services/**') {
+        duplicatesStrategy = DuplicatesStrategy.INCLUDE
+    }
     mergeServiceFiles()
     manifest {
         attributes(
@@ -148,7 +158,7 @@ tasks.shadowJar {
     exclude 'META-INF/DEPENDENCIES'
     exclude 'META-INF/LICENSE*'
     exclude 'META-INF/NOTICE*'
-    exclude 'META-INF.versions.*.module-info'
+    exclude 'META-INF/versions/**/module-info.class'
     dependencies {
         exclude(dependency('junit:junit'))
     }

@@ -518,20 +518,29 @@ public abstract class DataVerifyImpl {
                             if (verifyCache.value == null) {
                                 return getAndVerifyTypeValidator(typeValidator, path, 0, verifyCache, false);
                             }
-                            if (verifyCache.value instanceof Double) {
-                                return getAndVerifyTypeValidator(typeValidator, path, (Double) verifyCache.value,
+                            if (verifyCache.value instanceof Double aDouble) {
+                                return getAndVerifyTypeValidator(typeValidator, path, aDouble,
                                         verifyCache, false);
                             }
-                            if (verifyCache.value instanceof Long) {
-                                return getAndVerifyTypeValidator(typeValidator, path, (Long) verifyCache.value,
+                            if (verifyCache.value instanceof Long aLong) {
+                                return getAndVerifyTypeValidator(typeValidator, path, aLong,
                                         verifyCache, false);
                             }
                             if (is_double) {
                                 return getAndVerifyTypeValidator(typeValidator, path,
                                         doubleValueOf(verifyCache.value.toString()), verifyCache, false);
-                            } else {
+                            } else if (is_numeric) {
                                 return getAndVerifyTypeValidator(typeValidator, path,
                                         longValueOf(verifyCache.value.toString()), verifyCache, false);
+                            } else {
+                                String parsedValue = getAndVerifyTypeValidator(typeValidator, path,
+                                        verifyCache.value.toString(),
+                                        verifyCache, false);
+                                is_double = parsedValue.contains(".");
+                                if (is_double) {
+                                    return doubleValueOf(parsedValue);
+                                }
+                                return longValueOf(parsedValue);
                             }
                         }
                     } catch (Exception e) {

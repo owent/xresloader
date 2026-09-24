@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="128" height="128" viewBox="0 0 128 128" role="img" aria-labelledby="title desc">
+<title id="title">xresloader app icon</title>
+<desc id="desc">A detached table cell and two crossing ribbons form an X, representing structured data conversion.</desc>
+<rect width="128" height="128" rx="28" fill="#102B32"/><path fill="#90EDC2" d="M24 84 84 24h16a4 4 0 0 1 4 4v16l-60 60H28a4 4 0 0 1-4-4Z"/>
+  <path fill="#3CB99A" d="m60 48 44 44v8a4 4 0 0 1-4 4H84L48 68Z"/>
+  <rect x="24" y="24" width="22" height="22" rx="4" fill="#F4F7F3"/>
+</svg>

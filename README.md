@@ -1,5 +1,11 @@
 # xresloader
 
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="doc/brand/readme-dark.svg">
+  <source media="(prefers-color-scheme: light)" srcset="doc/brand/readme-light.svg">
+  <img alt="xresloader — From tables to game data. 将 Excel 表格转换为多种结构化数据格式。" src="doc/brand/readme-light.svg" width="1280">
+</picture>
+
 [![GitHub Actions status](https://github.com/xresloader/xresloader/workflows/Main%20Building/badge.svg)](https://github.com/xresloader/xresloader/actions)
 [![Release](https://github.com/xresloader/xresloader/workflows/Release/badge.svg)](https://github.com/xresloader/xresloader/actions?query=workflow%3ARelease)
 [![GitHub release (latest by date)](https://img.shields.io/github/v/release/xresloader/xresloader)](https://github.com/xresloader/xresloader/releases)
@@ -11,6 +17,8 @@
 ![GitHub stars](https://img.shields.io/github/stars/xresloader/xresloader?style=social)
 
 文档: <https://xresloader.atframe.work>
+
+图标、横幅与分享封面: [视觉资源与使用说明](doc/brand/README.md)
 
 ## 主要功能
 

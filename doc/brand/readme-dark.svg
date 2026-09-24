@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="400" viewBox="0 0 1280 400" role="img" aria-labelledby="title desc">
+<title id="title">xresloader — From tables to game data.</title>
+<desc id="desc">Schema-driven spreadsheet conversion to Protobuf, MessagePack, Lua, JavaScript, JSON and XML.</desc>
+<rect width="1280" height="400" rx="24" fill="#102B32"/>
+  <path d="M800 0v400M840 0v400M880 0v400M920 0v400M960 0v400M1000 0v400M1040 0v400M1080 0v400M1120 0v400M1160 0v400M1200 0v400M1240 0v400M800 40h480M800 80h480M800 120h480M800 160h480M800 200h480M800 240h480M800 280h480M800 320h480M800 360h480" fill="none" stroke="#36524F" opacity=".45"/>
+  <g transform="translate(42 44) scale(.72)"><path fill="#90EDC2" d="M24 84 84 24h16a4 4 0 0 1 4 4v16l-60 60H28a4 4 0 0 1-4-4Z"/>
+  <path fill="#3CB99A" d="m60 48 44 44v8a4 4 0 0 1-4 4H84L48 68Z"/>
+  <rect x="24" y="24" width="22" height="22" rx="4" fill="#90EDC2"/></g>
+  <g transform="translate(152 70) scale(1.13)" fill="none" stroke="#F4F7F3" stroke-width="5.5" stroke-linecap="round" stroke-linejoin="round"><path transform="translate(0 0)" d="M3 13 30 49M30 13 3 49"/><path transform="translate(42 0)" d="M5 49V14M5 26Q9 12 23 14"/><path transform="translate(77 0)" d="M5 30H31Q31 13 18 13C0 13 0 49 18 49Q26 49 31 44"/><path transform="translate(120 0)" d="M29 17Q24 13 17 13C0 13 0 29 17 31C36 33 34 49 17 49Q8 49 3 44"/><path transform="translate(160 0)" d="M6 1V42Q6 49 12 49"/><path transform="translate(183 0)" d="M19 13C-1 13-1 49 19 49C39 49 39 13 19 13Z"/><path transform="translate(227 0)" d="M31 14V49M31 25C31 9 4 9 4 31C4 53 31 53 31 37"/><path transform="translate(271 0)" d="M31 1V49M31 25C31 9 4 9 4 31C4 53 31 53 31 37"/><path transform="translate(315 0)" d="M5 30H31Q31 13 18 13C0 13 0 49 18 49Q26 49 31 44"/><path transform="translate(358 0)" d="M5 49V14M5 26Q9 12 23 14"/></g>
+  <g font-family="Segoe UI,Arial,sans-serif">
+    <text x="62" y="211" fill="#F4F7F3" font-size="39" font-weight="600" letter-spacing="-1">From tables to game data.</text>
+    <text x="64" y="253" fill="#AAC3BE" font-size="20">Schema-driven. Multi-format. Built for your pipeline.</text>
+    <text x="64" y="338" fill="#90EDC2" font-size="15" letter-spacing="2">EXCEL</text>
+    <path d="M132 332h35m-6-5 6 5-6 5" fill="none" stroke="#90EDC2" stroke-width="1.5"/>
+    <text x="187" y="338" fill="#AAC3BE" font-size="16">Protobuf · MessagePack · Lua · JavaScript · JSON · XML</text>
+  </g>
+  <rect x="906" y="82" width="212" height="236" rx="22" fill="#1C3B3E" stroke="#36524F"/>
+  <g transform="translate(914 96) scale(1.5)"><path fill="#90EDC2" d="M24 84 84 24h16a4 4 0 0 1 4 4v16l-60 60H28a4 4 0 0 1-4-4Z"/>
+  <path fill="#3CB99A" d="m60 48 44 44v8a4 4 0 0 1-4 4H84L48 68Z"/>
+  <rect x="24" y="24" width="22" height="22" rx="4" fill="#90EDC2"/></g>
+  <rect x="860" y="250" width="70" height="78" rx="14" fill="#102B32" stroke="#36524F"/>
+  <g transform="translate(879 271)" fill="none" stroke="#90EDC2" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="32" height="36" rx="5"/><path d="M0 11h32M0 23h32M11 11v25"/></g>
+  <rect x="1090" y="70" width="64" height="64" rx="14" fill="#90EDC2"/>
+  <path d="m1113 91-8 11 8 11m18-22 8 11-8 11" fill="none" stroke="#102B32" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>

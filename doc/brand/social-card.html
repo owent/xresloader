@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>xresloader — Social preview source</title>
+<link rel="stylesheet" href="palette.css">
+<style>
+  * { box-sizing: border-box; }
+  html, body { margin: 0; width: 1280px; height: 640px; overflow: hidden; }
+  body { position: relative; background: var(--xres-ink); color: var(--xres-paper); font-family: 'Segoe UI', Arial, sans-serif; }
+  .art { position: absolute; width: 800px; height: 640px; right: 0; top: 0; object-fit: cover; object-position: right center; }
+  .shade { position: absolute; inset: 0; background: linear-gradient(90deg, #102b32 0%, #102b32 35%, #102b32e8 43%, #102b3200 68%); }
+  main { position: relative; padding: 56px 64px; }
+  .logo { width: 333px; height: auto; margin-left: -14px; }
+  h1 { margin: 71px 0 23px; font-size: 68px; line-height: 1.08; letter-spacing: -3px; font-weight: 600; }
+  h1 span { color: var(--xres-mint); }
+  p { margin: 0; color: #b5cac4; font-size: 22px; line-height: 1.55; }
+  footer { position: absolute; bottom: 47px; left: 64px; color: var(--xres-mint); font-size: 15px; letter-spacing: 2px; }
+  footer::before { content: ''; display: inline-block; width: 24px; height: 2px; margin: 0 12px 5px 0; background: currentColor; }
+</style>
+<img class="art" src="hero-art.png" alt="Ceramic spreadsheet cells transforming into data modules">
+<div class="shade"></div>
+<main>
+  <img class="logo" src="logo-dark.svg" alt="xresloader">
+  <h1>From tables<br>to <span>game data.</span></h1>
+  <p>Schema-driven conversion.<br>One source. Multiple formats.</p>
+</main>
+<footer>OPEN SOURCE · CROSS PLATFORM</footer>
+</html>

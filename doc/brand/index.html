@@ -1,0 +1,180 @@
+<!doctype html>
+<html lang="zh-CN" data-theme="light">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <title>xresloader · 视觉资源</title>
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="palette.css">
+  <style>
+    * { box-sizing: border-box; }
+    :root { --bg: var(--xres-paper); --fg: var(--xres-ink); --sub: var(--xres-muted); --border: var(--xres-line); --card: #fff; }
+    :root[data-theme="dark"] { --bg: var(--xres-ink); --fg: var(--xres-paper); --sub: #b5cac4; --border: #36524f; --card: #19383d; }
+    html { scroll-behavior: smooth; }
+    body { margin: 0; background: var(--bg); color: var(--fg); font-family: 'Segoe UI', 'Microsoft YaHei', sans-serif; -webkit-font-smoothing: antialiased; }
+    a { color: inherit; text-underline-offset: 5px; }
+    button, a { -webkit-tap-highlight-color: transparent; }
+    a:focus-visible, button:focus-visible { outline: 3px solid #168a79; outline-offset: 5px; }
+    .wrap { max-width: 1232px; margin: 0 auto; padding: 0 48px; }
+    header { display: flex; align-items: center; justify-content: space-between; gap: 20px; padding: 26px 0; border-bottom: 1px solid var(--border); }
+    .header-logo { display: block; width: 184px; }
+    .dark-logo { display: none; }
+    [data-theme="dark"] .light-logo { display: none; }
+    [data-theme="dark"] .dark-logo { display: block; }
+    .header-right { display: flex; gap: 24px; align-items: center; }
+    .eyebrow { font-size: 11px; letter-spacing: 2px; font-weight: 600; }
+    .theme-switch { display: flex; border: 1px solid var(--border); border-radius: 30px; padding: 4px; }
+    .theme-switch button { border: 0; background: none; color: var(--sub); border-radius: 20px; padding: 6px 12px; font: inherit; font-size: 12px; cursor: pointer; }
+    .theme-switch button[aria-pressed="true"] { background: var(--fg); color: var(--bg); }
+    .hero { display: grid; grid-template-columns: 1.03fr 1fr; gap: 56px; align-items: center; padding: 60px 0 58px; }
+    .kicker { display: flex; align-items: center; gap: 10px; color: var(--sub); font-size: 12px; letter-spacing: 1.4px; }
+    .kicker::before { content: ''; width: 7px; height: 7px; border-radius: 50%; background: var(--xres-teal); }
+    h1 { font-size: clamp(36px, 4.2vw, 58px); font-weight: 600; line-height: 1.26; letter-spacing: -2px; margin: 25px 0 20px; }
+    h1 span { color: var(--xres-teal); }
+    [data-theme="dark"] h1 span { color: var(--xres-mint); }
+    .intro { color: var(--sub); font-size: 15px; line-height: 1.9; margin: 0 0 28px; max-width: 390px; }
+    .cta { display: inline-flex; gap: 36px; text-decoration: none; background: var(--fg); color: var(--bg); font-size: 13px; padding: 14px 21px; border-radius: 7px; }
+    .hero-visual { position: relative; display: grid; place-items: center; aspect-ratio: 1.2; border-radius: 20px; overflow: hidden; background: #e6eee7; background-image: linear-gradient(#102b3209 1px, transparent 1px), linear-gradient(90deg,#102b3209 1px, transparent 1px); background-size: 30px 30px; }
+    .hero-visual::before { content: ''; position: absolute; width: 66%; aspect-ratio: 1; border-radius: 50%; border: 1px solid #102b3218; }
+    .hero-visual img { position: relative; width: 52%; filter: drop-shadow(0 23px 25px #102b3220); }
+    .corner { position: absolute; left: 24px; top: 22px; color: #526a6c; font-size: 10px; letter-spacing: 2px; }
+    .corner.bottom { left: auto; top: auto; right: 24px; bottom: 22px; }
+    section { padding: 33px 0; border-top: 1px solid var(--border); }
+    .section-head { display: flex; justify-content: space-between; gap: 20px; align-items: baseline; margin-bottom: 24px; }
+    h2 { font-size: 19px; font-weight: 600; margin: 0; letter-spacing: -.4px; }
+    .num { font-family: Consolas, monospace; font-size: 11px; color: var(--sub); margin-right: 17px; }
+    .hint { color: var(--sub); font-size: 12px; margin: 0; }
+    .logos { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .logo-card { display: flex; flex-direction: column; justify-content: space-between; border-radius: 12px; padding: 20px 24px 15px; min-height: 176px; }
+    .logo-card img { display: block; width: 80%; margin: 10px auto 20px; }
+    .logo-card.light { background: #fff; color: #526a6c; border: 1px solid #d8e3dd; }
+    .logo-card.dark { background: #102b32; color: #b5cac4; border: 1px solid #36524f; }
+    .caption { display: flex; justify-content: space-between; font-size: 11px; }
+    .size-strip { display: flex; align-items: center; gap: 30px; margin: 25px 0 0; flex-wrap: wrap; }
+    .size-strip figure { display: grid; justify-items: center; align-content: end; gap: 10px; margin: 0; height: 90px; min-width: 35px; }
+    figcaption { font: 10px Consolas, monospace; color: var(--sub); }
+    .size-note { font-size: 12px; color: var(--sub); margin-left: auto; max-width: 260px; line-height: 1.8; }
+    .banner { width: 100%; border-radius: 12px; }
+    .banner-links { display: flex; flex-wrap: wrap; gap: 22px; font-size: 12px; margin-top: 16px; color: var(--sub); }
+    .lower { display: grid; grid-template-columns: 1.2fr 1fr; gap: 32px; }
+    .artwork { display: block; width: 100%; aspect-ratio: 1.5; object-fit: cover; border-radius: 12px; }
+    .swatches { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin: 0 0 23px; }
+    .swatch { height: 70px; border-radius: 9px; border: 1px solid var(--border); }
+    .swatches small { display: block; font: 10px Consolas, monospace; color: var(--sub); margin-top: 10px; }
+    .feature-icons { display: flex; gap: 16px; margin: 24px 0; }
+    .feature-icons a { display: grid; place-items: center; background: #e6eee7; width: 48px; height: 48px; border-radius: 10px; }
+    .feature-icons img { width: 24px; height: 24px; }
+    .downloads { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+    .downloads a { text-decoration: none; font-size: 12px; padding: 15px; border: 1px solid var(--border); border-radius: 7px; }
+    .downloads a:hover { background: var(--card); }
+    footer { padding: 26px 0 36px; border-top: 1px solid var(--border); display: flex; justify-content: space-between; gap: 20px; color: var(--sub); font-size: 11px; line-height: 1.8; }
+    @media (max-width: 760px) {
+      .wrap { padding: 0 22px; }
+      .header-right .eyebrow { display: none; }
+      .header-logo { width: 144px; }
+      .hero { grid-template-columns: 1fr; gap: 30px; padding: 38px 0; }
+      h1 { font-size: 44px; }
+      .hero-visual { aspect-ratio: 1.25; }
+      .logos, .lower { grid-template-columns: 1fr; }
+      .section-head { align-items: flex-start; flex-direction: column; gap: 8px; }
+      .size-strip { gap: 20px; }
+      .size-note { margin-left: 0; max-width: none; }
+      .lower { gap: 0; }
+      footer { flex-direction: column; }
+    }
+    @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <a href="../../README.md" aria-label="xresloader 项目说明">
+        <img class="header-logo light-logo" src="logo-light.svg" alt="xresloader">
+        <img class="header-logo dark-logo" src="logo-dark.svg" alt="xresloader">
+      </a>
+      <div class="header-right">
+        <span class="eyebrow">VISUAL ASSETS / 2026</span>
+        <div class="theme-switch" role="group" aria-label="预览主题">
+          <button type="button" data-theme-choice="light" aria-pressed="true">浅色</button>
+          <button type="button" data-theme-choice="dark" aria-pressed="false">深色</button>
+        </div>
+      </div>
+    </header>
+    <main>
+      <div class="hero">
+        <div>
+          <div class="kicker">XRESLOADER / 表格数据转换引擎</div>
+          <h1>结构有序。<br><span>转换自由。</span></h1>
+          <p class="intro">从一格数据，到多种可能。以单元格与交汇的路径构成全新 X 标志，让数据转换拥有清晰、轻盈的视觉语言。</p>
+          <a class="cta" href="icon.svg" download>下载主图标 SVG <span aria-hidden="true">↗</span></a>
+        </div>
+        <div class="hero-visual">
+          <span class="corner">01 / THE DATA WEAVE</span>
+          <img src="icon.svg" alt="深墨色圆角底上的青绿色模块化 X 标志" width="256" height="256">
+          <span class="corner bottom">TABLES → STRUCTURED DATA</span>
+        </div>
+      </div>
+      <section aria-labelledby="identity-title">
+        <div class="section-head"><h2 id="identity-title"><span class="num">01</span>一个标志，明暗皆宜</h2><p class="hint">原生矢量 · 透明背景 · 独立绘制字标</p></div>
+        <div class="logos">
+          <div class="logo-card light"><img src="logo-light.svg" alt="浅色背景用 xresloader 标志"><div class="caption"><span>LIGHT / 浅色背景</span><a href="logo-light.svg" download>下载 SVG ↗</a></div></div>
+          <div class="logo-card dark"><img src="logo-dark.svg" alt="深色背景用 xresloader 标志"><div class="caption"><span>DARK / 深色背景</span><a href="logo-dark.svg" download>下载 SVG ↗</a></div></div>
+        </div>
+        <div class="size-strip" aria-label="图标实际显示尺寸">
+          <figure><img src="icon-16.png" width="16" height="16" alt="16 像素图标"><figcaption>16 px</figcaption></figure>
+          <figure><img src="icon-32.png" width="32" height="32" alt="32 像素图标"><figcaption>32 px</figcaption></figure>
+          <figure><img src="icon-48.png" width="48" height="48" alt="48 像素图标"><figcaption>48 px</figcaption></figure>
+          <figure><img src="icon-192.png" width="64" height="64" alt="64 像素图标"><figcaption>64 px</figcaption></figure>
+          <figure><img src="mark-mono.svg" width="64" height="64" alt="单色图标" style="background:#fff;border-radius:8px"><figcaption>MONO</figcaption></figure>
+          <p class="size-note">从浏览器标签到项目头像，<br>同一套轮廓，保持清晰辨识。</p>
+        </div>
+      </section>
+      <section aria-labelledby="banner-title">
+        <div class="section-head"><h2 id="banner-title"><span class="num">02</span>让项目的第一眼更鲜明</h2><p class="hint">README 横幅 / 1280 × 400</p></div>
+        <img class="banner light-logo" src="readme-light.svg" alt="xresloader 横幅：From tables to game data.">
+        <img class="banner dark-logo" src="readme-dark.svg" alt="xresloader 深色横幅：From tables to game data.">
+        <div class="banner-links"><a href="readme-light.svg" download>浅色横幅 SVG ↗</a><a href="readme-dark.svg" download>深色横幅 SVG ↗</a><a href="social-preview.png" download>分享封面 PNG · 1280 × 640 ↗</a></div>
+      </section>
+      <div class="lower">
+        <section aria-labelledby="art-title">
+          <div class="section-head"><h2 id="art-title"><span class="num">03</span>数据，从平面走向立体</h2></div>
+          <a href="hero-art.png" download><img class="artwork" src="hero-art.png" alt="立体表格中的单元格流向结构化的数据模块"></a>
+          <p class="hint" style="margin-top:14px">配套插画 · 1536 × 1024 · 点击下载原图</p>
+        </section>
+        <section aria-labelledby="kit-title">
+          <div class="section-head"><h2 id="kit-title"><span class="num">04</span>克制的颜色，完整的配套</h2></div>
+          <div class="swatches">
+            <div><div class="swatch" style="background:#102b32"></div><small>INK<br>#102B32</small></div>
+            <div><div class="swatch" style="background:#168a79"></div><small>TEAL<br>#168A79</small></div>
+            <div><div class="swatch" style="background:#90edc2"></div><small>MINT<br>#90EDC2</small></div>
+            <div><div class="swatch" style="background:#f4f7f3"></div><small>PAPER<br>#F4F7F3</small></div>
+          </div>
+          <div class="feature-icons" aria-label="功能图标下载">
+            <a href="features/spreadsheet.svg" download aria-label="下载表格图标"><img src="features/spreadsheet.svg" alt="表格"></a>
+            <a href="features/schema.svg" download aria-label="下载协议结构图标"><img src="features/schema.svg" alt="协议结构"></a>
+            <a href="features/validation.svg" download aria-label="下载验证图标"><img src="features/validation.svg" alt="验证"></a>
+            <a href="features/export.svg" download aria-label="下载导出图标"><img src="features/export.svg" alt="导出"></a>
+          </div>
+          <div class="downloads">
+            <a href="icon-1024.png" download>项目头像 PNG ↗</a>
+            <a href="favicon.ico" download>网站图标 ICO ↗</a>
+            <a href="apple-touch-icon.png" download>触屏图标 PNG ↗</a>
+            <a href="README.md">使用说明与完整清单 ↗</a>
+          </div>
+        </section>
+      </div>
+    </main>
+    <footer><span>xresloader · From tables to game data.</span><span>SVG + PNG + ICO · <a href="../../LICENSE">MIT</a> · <a href="README.md">资源使用说明</a></span></footer>
+  </div>
+  <script>
+    const themeButtons = document.querySelectorAll('[data-theme-choice]');
+    function setTheme(theme) {
+      document.documentElement.dataset.theme = theme;
+      themeButtons.forEach(button => button.setAttribute('aria-pressed', String(button.dataset.themeChoice === theme)));
+    }
+    themeButtons.forEach(button => button.addEventListener('click', () => setTheme(button.dataset.themeChoice)));
+    setTheme(matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+  </script>
+</body>
+</html>

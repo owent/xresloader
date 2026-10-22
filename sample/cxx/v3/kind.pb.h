@@ -107,6 +107,14 @@ extern const ::google::protobuf::internal::ClassDataFull combine_id_class_data_;
 #else
 extern const combine_idGlobalsTypeInternal combine_id_globals_;
 #endif  // PROTOBUF_MESSAGE_GLOBALS
+class enum_and_in_table;
+struct enum_and_in_tableGlobalsTypeInternal;
+#ifndef PROTOBUF_MESSAGE_GLOBALS
+extern enum_and_in_tableGlobalsTypeInternal enum_and_in_table_globals_;
+extern const ::google::protobuf::internal::ClassDataFull enum_and_in_table_class_data_;
+#else
+extern const enum_and_in_tableGlobalsTypeInternal enum_and_in_table_globals_;
+#endif  // PROTOBUF_MESSAGE_GLOBALS
 class event_cfg;
 struct event_cfgGlobalsTypeInternal;
 #ifndef PROTOBUF_MESSAGE_GLOBALS
@@ -2144,6 +2152,207 @@ class  PROTOBUF_FUTURE_ADD_EARLY_WARN_UNUSED event_reward_item final : public ::
       int nested_enum_type_;
     } nested_;
     ::uint32_t _oneof_case_[1];
+    PROTOBUF_TSAN_DECLARE_MEMBER
+  };
+  union { Impl_ _impl_; };
+  friend struct ::TableStruct_kind_2eproto;
+};
+// -------------------------------------------------------------------
+
+class  PROTOBUF_FUTURE_ADD_EARLY_WARN_UNUSED enum_and_in_table final : public ::google::protobuf::Message
+/* @@protoc_insertion_point(class_definition:enum_and_in_table) */ {
+  using Super_ = ::google::protobuf::Message;
+
+ public:
+  inline enum_and_in_table() : enum_and_in_table(nullptr) {}
+  ~enum_and_in_table() PROTOBUF_FINAL;
+
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+  void operator delete(enum_and_in_table* PROTOBUF_NONNULL msg, ::std::destroying_delete_t) {
+    SharedDtor(*msg);
+    ::google::protobuf::internal::SizedDelete(msg, sizeof(enum_and_in_table));
+  }
+#endif
+
+  template <typename = void>
+  explicit constexpr enum_and_in_table(::google::protobuf::internal::ConstantInitialized,
+                           const ::google::protobuf::internal::ClassData* PROTOBUF_NONNULL
+                               class_data);
+
+  inline enum_and_in_table(const enum_and_in_table& from) : enum_and_in_table(nullptr, from) {}
+  inline enum_and_in_table(enum_and_in_table&& from) noexcept : enum_and_in_table(nullptr, ::std::move(from)) {}
+  inline enum_and_in_table& operator=(const enum_and_in_table& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  inline enum_and_in_table& operator=(enum_and_in_table&& from) noexcept {
+    if (this == &from) return *this;
+    if (::google::protobuf::internal::CanMoveWithInternalSwap(GetArena(), from.GetArena())) {
+      InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+
+  [[nodiscard]] inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const
+      ABSL_ATTRIBUTE_LIFETIME_BOUND {
+    return _internal_metadata_.unknown_fields<::google::protobuf::UnknownFieldSet>(::google::protobuf::UnknownFieldSet::default_instance);
+  }
+  [[nodiscard]] inline ::google::protobuf::UnknownFieldSet* PROTOBUF_NONNULL
+  mutable_unknown_fields() ABSL_ATTRIBUTE_LIFETIME_BOUND {
+    return _internal_metadata_.mutable_unknown_fields<::google::protobuf::UnknownFieldSet>();
+  }
+
+  [[nodiscard]] static const ::google::protobuf::Descriptor* PROTOBUF_NONNULL descriptor() {
+    return GetDescriptor();
+  }
+  [[nodiscard]] static const ::google::protobuf::Descriptor* PROTOBUF_NONNULL
+  GetDescriptor() {
+    return default_instance().GetMetadata().descriptor;
+  }
+  [[nodiscard]] static const ::google::protobuf::Reflection* PROTOBUF_NONNULL GetReflection() {
+    return default_instance().GetMetadata().reflection;
+  }
+  [[nodiscard]] static const enum_and_in_table& default_instance() {
+    return *::google::protobuf::internal::MessageGlobalsBase::ToDefaultInstance<enum_and_in_table>(&enum_and_in_table_globals_);
+  }
+  static constexpr int kIndexInFileMessages = 25;
+  friend void swap(enum_and_in_table& a, enum_and_in_table& b) { a.Swap(&b); }
+  inline void Swap(enum_and_in_table* PROTOBUF_NONNULL other) {
+    if (other == this) return;
+    if (::google::protobuf::internal::CanUseInternalSwap(GetArena(), other->GetArena())) {
+      InternalSwap(other);
+    } else {
+      ::google::protobuf::internal::GenericSwap(this, other);
+    }
+  }
+  void UnsafeArenaSwap(enum_and_in_table* PROTOBUF_NONNULL other) {
+    if (other == this) return;
+    ABSL_DCHECK(GetArena() == other->GetArena());
+    InternalSwap(other);
+  }
+
+  // implements Message ----------------------------------------------
+
+  [[nodiscard]] enum_and_in_table* PROTOBUF_NONNULL
+  New(::google::protobuf::Arena* PROTOBUF_NULLABLE arena = nullptr) const {
+    return Super_::DefaultConstruct<enum_and_in_table>(arena);
+  }
+  using Super_::CopyFrom;
+  void CopyFrom(const enum_and_in_table& from);
+  using Super_::MergeFrom;
+  void MergeFrom(const enum_and_in_table& from) { enum_and_in_table::MergeImpl(*this, from); }
+
+  private:
+  static void MergeImpl(::google::protobuf::MessageLite& to_msg,
+                        const ::google::protobuf::MessageLite& from_msg);
+
+  public:
+  [[nodiscard]] bool IsInitialized() const {
+    return true;
+  }
+  ABSL_ATTRIBUTE_REINITIALIZES void Clear() PROTOBUF_FINAL;
+  #if defined(PROTOBUF_CUSTOM_VTABLE)
+  private:
+  [[nodiscard]] static ::size_t ByteSizeLong(const ::google::protobuf::MessageLite& msg);
+  [[nodiscard]] static ::uint8_t* PROTOBUF_NONNULL _InternalSerialize(
+      const ::google::protobuf::MessageLite& msg, ::uint8_t* PROTOBUF_NONNULL target,
+      ::google::protobuf::io::EpsCopyOutputStream* PROTOBUF_NONNULL stream);
+
+  public:
+  [[nodiscard]] ::size_t ByteSizeLong() const { return ByteSizeLong(*this); }
+  [[nodiscard]] ::uint8_t* PROTOBUF_NONNULL _InternalSerialize(
+      ::uint8_t* PROTOBUF_NONNULL target,
+      ::google::protobuf::io::EpsCopyOutputStream* PROTOBUF_NONNULL stream) const {
+    return _InternalSerialize(*this, target, stream);
+  }
+  #else   // PROTOBUF_CUSTOM_VTABLE
+  [[nodiscard]] ::size_t ByteSizeLong() const final;
+  [[nodiscard]] ::uint8_t* PROTOBUF_NONNULL _InternalSerialize(
+      ::uint8_t* PROTOBUF_NONNULL target,
+      ::google::protobuf::io::EpsCopyOutputStream* PROTOBUF_NONNULL stream) const final;
+  #endif  // PROTOBUF_CUSTOM_VTABLE
+  [[nodiscard]] int GetCachedSize() const {
+    return _impl_._cached_size_.Get();
+  }
+
+  private:
+  void SharedCtor(::google::protobuf::Arena* PROTOBUF_NULLABLE arena);
+  static void SharedDtor(MessageLite& self);
+  void InternalSwap(enum_and_in_table* PROTOBUF_NONNULL other);
+ private:
+  static ::absl::string_view FullMessageName() { return "enum_and_in_table"; }
+
+  explicit enum_and_in_table(::google::protobuf::Arena* PROTOBUF_NULLABLE arena);
+  enum_and_in_table(::google::protobuf::Arena* PROTOBUF_NULLABLE arena, const enum_and_in_table& from);
+  enum_and_in_table(
+      ::google::protobuf::Arena* PROTOBUF_NULLABLE arena, enum_and_in_table&& from) noexcept
+      : enum_and_in_table(arena) {
+    *this = ::std::move(from);
+  }
+  const ::google::protobuf::internal::ClassData* PROTOBUF_NONNULL GetClassData() const PROTOBUF_FINAL;
+  static void* PROTOBUF_NONNULL PlacementNew_(
+      const void* PROTOBUF_NONNULL, void* PROTOBUF_NONNULL mem,
+      ::google::protobuf::Arena* PROTOBUF_NULLABLE arena);
+  static constexpr auto InternalNewImpl_();
+
+ public:
+  static constexpr auto InternalGenerateClassData_(
+      const MessageLite& prototype,
+      const ::google::protobuf::internal::TcParseTableBase* PROTOBUF_NULLABLE tc_table = nullptr);
+
+  [[nodiscard]] ::google::protobuf::Metadata GetMetadata() const;
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+  enum : int {
+    kKeyFieldNumber = 1,
+  };
+  // .cost_type key = 1;
+  void clear_key() ;
+  [[nodiscard]] ::cost_type key() const;
+  void set_key(::cost_type value);
+
+  private:
+  ::cost_type _internal_key() const;
+  void _internal_set_key(::cost_type value);
+
+  public:
+  // @@protoc_insertion_point(class_scope:enum_and_in_table)
+ private:
+  class _Internal;
+  using ParseTableT_ =
+      ::google::protobuf::internal::TcParseTable<0, 1,
+                          0, 0,
+                          2>;
+  static constexpr ParseTableT_ InternalGenerateParseTable_(
+      const ::google::protobuf::internal::ClassData* PROTOBUF_NONNULL class_data);
+  friend class ::google::protobuf::internal::TcParser;
+  #ifndef PROTOBUF_MESSAGE_GLOBALS
+  static const ParseTableT_ _table_;
+  #endif
+
+  friend class ::google::protobuf::MessageLite;
+  friend class ::google::protobuf::Arena;
+  friend ::google::protobuf::internal::PrivateAccess;
+  template <typename T>
+  friend class ::google::protobuf::Arena::InternalHelper;
+  using InternalArenaConstructable_ = void;
+  using DestructorSkippable_ = void;
+  struct Impl_ {
+    inline explicit constexpr Impl_(::google::protobuf::internal::InternalVisibility visibility,
+                                    ::google::protobuf::internal::ConstantInitialized) noexcept;
+    inline explicit Impl_(
+        ::google::protobuf::internal::InternalVisibility visibility,
+        ::google::protobuf::Arena* PROTOBUF_NULLABLE arena);
+    inline explicit Impl_(
+        ::google::protobuf::internal::InternalVisibility visibility,
+        ::google::protobuf::Arena* PROTOBUF_NULLABLE arena, const Impl_& from,
+        const enum_and_in_table& from_msg);
+    ::google::protobuf::internal::HasBits<1> _has_bits_;
+    ::google::protobuf::internal::CachedSize _cached_size_;
+    int key_;
     PROTOBUF_TSAN_DECLARE_MEMBER
   };
   union { Impl_ _impl_; };
@@ -11298,6 +11507,34 @@ inline void ue_explicit_set_name_field_cfg::set_allocated_content(::std::string*
     _impl_.content_.Set("", GetArena());
   }
   // @@protoc_insertion_point(field_set_allocated:ue_explicit_set_name_field_cfg.content)
+}
+
+// -------------------------------------------------------------------
+
+// enum_and_in_table
+
+// .cost_type key = 1;
+inline void enum_and_in_table::clear_key() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.key_ = 0;
+  ClearHasBit(_impl_._has_bits_[0], 0x00000001U);
+}
+inline ::cost_type enum_and_in_table::key() const {
+  // @@protoc_insertion_point(field_get:enum_and_in_table.key)
+  return _internal_key();
+}
+inline void enum_and_in_table::set_key(::cost_type value) {
+  _internal_set_key(value);
+  SetHasBit(_impl_._has_bits_[0], 0x00000001U);
+  // @@protoc_insertion_point(field_set:enum_and_in_table.key)
+}
+inline ::cost_type enum_and_in_table::_internal_key() const {
+  ::google::protobuf::internal::TSanRead(&_impl_);
+  return static_cast<::cost_type>(_impl_.key_);
+}
+inline void enum_and_in_table::_internal_set_key(::cost_type value) {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.key_ = value;
 }
 
 #ifdef __GNUC__

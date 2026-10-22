@@ -77,6 +77,8 @@ PROTOBUF_CONSTINIT ::google::protobuf::internal::ReflectionData
         {&::_pbi::kDescriptorMethods, &::descriptor_table_kind_2eproto, /* tracker*/ nullptr,},
         // ::ue_explicit_set_name_field_cfg
         {&::_pbi::kDescriptorMethods, &::descriptor_table_kind_2eproto, /* tracker*/ nullptr,},
+        // ::enum_and_in_table
+        {&::_pbi::kDescriptorMethods, &::descriptor_table_kind_2eproto, /* tracker*/ nullptr,},
 };
 }  // namespace
 #endif
@@ -1551,6 +1553,148 @@ const ::_pbi::ClassData* event_reward_item_get_class_data() {
   return event_reward_item_globals_.GetClassData();
 #else
   return event_reward_item_class_data_.base();
+#endif  // PROTOBUF_MESSAGE_GLOBALS
+}
+}  // namespace
+#endif  // PROTOBUF_CUSTOM_VTABLE
+class enum_and_in_table::_Internal {
+ public:
+  using HasBits = decltype(::std::declval<enum_and_in_table>()._impl_._has_bits_);
+  static constexpr ::int32_t kHasBitsOffset =
+      8 * PROTOBUF_FIELD_OFFSET(enum_and_in_table, _impl_._has_bits_);
+};
+
+constexpr enum_and_in_table::ParseTableT_ enum_and_in_table::InternalGenerateParseTable_(const ::_pbi::ClassData* class_data) {
+  return ParseTableT_{
+    {
+      PROTOBUF_FIELD_OFFSET(enum_and_in_table, _impl_._has_bits_),
+      0, // no _extensions_
+      1, 0,  // max_field_number, fast_idx_mask
+      offsetof(ParseTableT_, field_lookup_table),
+      4294967294,  // skipmap
+      offsetof(ParseTableT_, field_entries),
+      1,  // num_field_entries
+      1,  // num_aux_entries
+      offsetof(ParseTableT_, aux_entries),
+      class_data,
+      nullptr,  // post_loop_handler
+      ::_pbi::TcParser::MpUnknownFields,  // fallback
+      #ifdef PROTOBUF_PREFETCH_PARSE_TABLE
+      ::_pbi::TcParser::GetTable<::enum_and_in_table>(),  // to_prefetch
+      #endif  // PROTOBUF_PREFETCH_PARSE_TABLE
+    }, {{
+      // optional .cost_type key = 1 [(.org.xresloader.validator) = "custom_rule7"];
+      {::_pbi::TcParser::FastEvS1,
+       {8, 0, 0,
+        PROTOBUF_FIELD_OFFSET(enum_and_in_table, _impl_.key_)}},
+    }}, {{
+      65535, 65535
+    }}, {{
+      // optional .cost_type key = 1 [(.org.xresloader.validator) = "custom_rule7"];
+      {PROTOBUF_FIELD_OFFSET(enum_and_in_table, _impl_.key_), _Internal::kHasBitsOffset + 0, 0, (0 | ::_fl::kFcOptional | ::_fl::kEnum)},
+    }},
+    {{
+        {::_pbi::FieldAuxEnumData{}, ::cost_type_internal_data_},
+    }},
+    {{
+    }},
+  };
+}
+
+
+inline constexpr enum_and_in_table::Impl_::Impl_(
+    [[maybe_unused]] ::google::protobuf::internal::InternalVisibility visibility,
+    ::_pbi::ConstantInitialized) noexcept
+      : key_{static_cast< ::cost_type >(0)} {}
+
+template <typename>
+constexpr enum_and_in_table::enum_and_in_table(::_pbi::ConstantInitialized,
+                       const ::_pbi::ClassData* PROTOBUF_NONNULL class_data)
+    : Super_(
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+          class_data
+#endif  // PROTOBUF_CUSTOM_VTABLE
+          ),
+      _impl_(internal_visibility(), ::_pbi::ConstantInitialized()) {
+}
+inline void* PROTOBUF_NONNULL enum_and_in_table::PlacementNew_(
+    const void* PROTOBUF_NONNULL, void* PROTOBUF_NONNULL mem,
+    ::google::protobuf::Arena* PROTOBUF_NULLABLE arena) {
+  return ::new (mem) enum_and_in_table(arena);
+}
+constexpr auto enum_and_in_table::InternalNewImpl_() {
+  return ::google::protobuf::internal::MessageCreator::ZeroInit(sizeof(enum_and_in_table), alignof(enum_and_in_table));
+}
+constexpr auto enum_and_in_table::InternalGenerateClassData_(
+    const MessageLite& prototype,
+    const ::google::protobuf::internal::TcParseTableBase* tc_table) {
+  return ::google::protobuf::internal::ClassDataFull{
+      ::google::protobuf::internal::ClassData{
+          &prototype,
+#ifndef PROTOBUF_MESSAGE_GLOBALS
+          &_table_.header,
+#else
+          tc_table,
+#endif
+          nullptr,  // IsInitialized
+          &enum_and_in_table::MergeImpl,
+          Super_::GetNewImpl<enum_and_in_table>(),
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+          &enum_and_in_table::SharedDtor,
+          Super_::GetClearImpl<enum_and_in_table>(), &enum_and_in_table::ByteSizeLong,
+              &enum_and_in_table::_InternalSerialize,
+#endif  // PROTOBUF_CUSTOM_VTABLE
+          PROTOBUF_FIELD_OFFSET(enum_and_in_table, _impl_._cached_size_),
+          false,
+      },
+#ifdef PROTOBUF_MESSAGE_GLOBALS
+      &file_reflection_data[24],
+#else   // !PROTOBUF_MESSAGE_GLOBALS
+      &::_pbi::kDescriptorMethods,
+      &descriptor_table_kind_2eproto,
+      nullptr,  // tracker
+#endif  // PROTOBUF_MESSAGE_GLOBALS
+  };
+}
+struct enum_and_in_tableGlobalsTypeInternal : ::_pbi::MessageGlobalsBase {
+  constexpr enum_and_in_tableGlobalsTypeInternal()
+      :
+#ifndef PROTOBUF_MESSAGE_GLOBALS
+        _default(::_pbi::ConstantInitialized{},
+                 enum_and_in_table_class_data_.base())
+#else   // !PROTOBUF_MESSAGE_GLOBALS
+        MessageGlobalsBase(enum_and_in_table::InternalGenerateClassData_(
+            _default, &enum_and_in_table_globals_._table.header)),
+        _default(::_pbi::ConstantInitialized{}, GetClassData()),
+        _table(::_pbi::PrivateAccess::GenerateParseTable<enum_and_in_table>(
+            GetClassData()))
+#endif  // PROTOBUF_MESSAGE_GLOBALS
+  {
+  }
+  ~enum_and_in_tableGlobalsTypeInternal() {}
+  union {
+    alignas(::_pbi::kMaxMessageAlignment) enum_and_in_table _default;
+  };
+#ifdef PROTOBUF_MESSAGE_GLOBALS
+  decltype(::_pbi::PrivateAccess::GenerateParseTable<enum_and_in_table>(
+      ::std::declval<const ::_pbi::ClassData*>())) _table;
+#endif
+};
+#ifdef PROTOBUF_MESSAGE_GLOBALS
+static_assert(PROTOBUF_FIELD_OFFSET(enum_and_in_tableGlobalsTypeInternal, _default) ==
+              ::_pbi::MessageGlobalsBase::OffsetToDefault());
+#endif  // PROTOBUF_MESSAGE_GLOBALS
+
+PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT
+    PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 PROTOBUF_MESSAGE_GLOBALS_CONST enum_and_in_tableGlobalsTypeInternal enum_and_in_table_globals_
+        PROTOBUF_MESSAGE_GLOBALS_SECTION(.data.rel.ro);
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+namespace {
+const ::_pbi::ClassData* enum_and_in_table_get_class_data() {
+#ifdef PROTOBUF_MESSAGE_GLOBALS
+  return enum_and_in_table_globals_.GetClassData();
+#else
+  return enum_and_in_table_class_data_.base();
 #endif  // PROTOBUF_MESSAGE_GLOBALS
 }
 }  // namespace
@@ -4569,6 +4713,11 @@ const ::uint32_t
         PROTOBUF_FIELD_OFFSET(::ue_explicit_set_name_field_cfg, _impl_.content_),
         0,
         1,
+        0x081, // bitmap
+        PROTOBUF_FIELD_OFFSET(::enum_and_in_table, _impl_._has_bits_),
+        4, // hasbit index offset
+        PROTOBUF_FIELD_OFFSET(::enum_and_in_table, _impl_.key_),
+        0,
 };
 
 static const ::_pbi::MigrationSchema
@@ -4597,6 +4746,7 @@ static const ::_pbi::MigrationSchema
         {256, sizeof(::global_settings_TestMapSmEntry_DoNotUse)},
         {263, sizeof(::global_settings)},
         {292, sizeof(::ue_explicit_set_name_field_cfg)},
+        {299, sizeof(::enum_and_in_table)},
 };
 static const ::_pbi::MessageGlobalsBase* PROTOBUF_NONNULL const
     file_message_globals[] = {
@@ -4624,6 +4774,7 @@ static const ::_pbi::MessageGlobalsBase* PROTOBUF_NONNULL const
         &::global_settings_TestMapSmEntry_DoNotUse_globals_,
         &::global_settings_globals_,
         &::ue_explicit_set_name_field_cfg_globals_,
+        &::enum_and_in_table_globals_,
 };
 const char descriptor_table_protodef_kind_2eproto[] ABSL_ATTRIBUTE_SECTION_VARIABLE(
     protodesc_cold) = {
@@ -4744,7 +4895,8 @@ const char descriptor_table_protodef_kind_2eproto[] ABSL_ATTRIBUTE_SECTION_VARIA
     "\016TestMapSmEntry\022\013\n\003key\030\001 \001(\t\022\030\n\005value\030\002 "
     "\001(\0132\t.dep2_cfg:\0028\001\"\?\n\036ue_explicit_set_na"
     "me_field_cfg\022\014\n\004name\030\001 \001(\t\022\017\n\007content\030\002 "
-    "\001(\t"
+    "\001(\t\"=\n\021enum_and_in_table\022(\n\003key\030\001 \001(\0162\n."
+    "cost_typeB\017\312>\014custom_rule7"
 };
 static const ::_pbi::DescriptorTable* PROTOBUF_NONNULL const
     descriptor_table_kind_2eproto_deps[6] = {
@@ -4759,13 +4911,13 @@ static ::absl::once_flag descriptor_table_kind_2eproto_once;
 PROTOBUF_CONSTINIT const ::_pbi::DescriptorTable descriptor_table_kind_2eproto = {
     false,
     false,
-    4683,
+    4746,
     descriptor_table_protodef_kind_2eproto,
     "kind.proto",
     &descriptor_table_kind_2eproto_once,
     descriptor_table_kind_2eproto_deps,
     6,
-    24,
+    25,
     schemas,
     file_message_globals,
     TableStruct_kind_2eproto::offsets,
@@ -11191,6 +11343,186 @@ void ue_explicit_set_name_field_cfg::InternalSwap(ue_explicit_set_name_field_cfg
 }
 
 ::google::protobuf::Metadata ue_explicit_set_name_field_cfg::GetMetadata() const {
+  return Super_::GetMetadataImpl(GetClassData()->full());
+}
+// ===================================================================
+
+enum_and_in_table::enum_and_in_table(::google::protobuf::Arena* PROTOBUF_NULLABLE arena)
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+    : Super_(arena, enum_and_in_table_get_class_data()) {
+#else   // PROTOBUF_CUSTOM_VTABLE
+    : Super_(arena) {
+#endif  // PROTOBUF_CUSTOM_VTABLE
+  SharedCtor(arena);
+  // @@protoc_insertion_point(arena_constructor:enum_and_in_table)
+}
+enum_and_in_table::enum_and_in_table(
+    ::google::protobuf::Arena* PROTOBUF_NULLABLE arena, const enum_and_in_table& from)
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+    : Super_(arena, enum_and_in_table_get_class_data()),
+#else   // PROTOBUF_CUSTOM_VTABLE
+    : Super_(arena),
+#endif  // PROTOBUF_CUSTOM_VTABLE
+      _impl_(from._impl_) {
+  _internal_metadata_.MergeFrom<::google::protobuf::UnknownFieldSet>(
+      from._internal_metadata_);
+}
+PROTOBUF_NDEBUG_INLINE enum_and_in_table::Impl_::Impl_(
+    [[maybe_unused]] ::google::protobuf::internal::InternalVisibility visibility,
+    [[maybe_unused]] ::google::protobuf::Arena* PROTOBUF_NULLABLE arena)
+     {}
+
+inline void enum_and_in_table::SharedCtor(::_pb::Arena* PROTOBUF_NULLABLE arena) {
+  new (&_impl_) Impl_(internal_visibility(), arena);
+  _impl_.key_ = {};
+}
+enum_and_in_table::~enum_and_in_table() {
+  // @@protoc_insertion_point(destructor:enum_and_in_table)
+  SharedDtor(*this);
+}
+inline void enum_and_in_table::SharedDtor(MessageLite& self) {
+  enum_and_in_table& this_ = static_cast<enum_and_in_table&>(self);
+  if constexpr (::_pbi::DebugHardenCheckHasBitConsistency()) {
+    this_.CheckHasBitConsistency();
+  }
+  this_._internal_metadata_.Delete<::google::protobuf::UnknownFieldSet>();
+  ABSL_DCHECK(this_.GetArena() == nullptr);
+  this_._impl_.~Impl_();
+}
+
+#ifndef PROTOBUF_MESSAGE_GLOBALS
+PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 const
+    ::google::protobuf::internal::ClassDataFull enum_and_in_table_class_data_ =
+        enum_and_in_table::InternalGenerateClassData_(enum_and_in_table_globals_._default);
+
+PROTOBUF_ATTRIBUTE_WEAK const ::google::protobuf::internal::ClassData* PROTOBUF_NONNULL
+enum_and_in_table::GetClassData() const {
+  ::google::protobuf::internal::PrefetchToLocalCache(&enum_and_in_table_class_data_);
+  ::google::protobuf::internal::PrefetchToLocalCache(enum_and_in_table_class_data_.tc_table);
+  return enum_and_in_table_class_data_.base();
+}
+#else
+PROTOBUF_ATTRIBUTE_WEAK const ::google::protobuf::internal::ClassData* PROTOBUF_NONNULL
+enum_and_in_table::GetClassData() const {
+  ::google::protobuf::internal::PrefetchToLocalCache(&enum_and_in_table_globals_);
+  ::google::protobuf::internal::PrefetchToLocalCache(
+      ::google::protobuf::internal::MessageGlobalsBase::ToParseTableBase(&enum_and_in_table_globals_));
+  return enum_and_in_table_globals_.GetClassData();
+}
+#endif  // !PROTOBUF_MESSAGE_GLOBALS
+#ifndef PROTOBUF_MESSAGE_GLOBALS
+PROTOBUF_CONSTINIT
+PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 const enum_and_in_table::ParseTableT_
+    enum_and_in_table::_table_ =
+        enum_and_in_table::InternalGenerateParseTable_(enum_and_in_table_class_data_.base());
+#endif  // !PROTOBUF_MESSAGE_GLOBALS
+PROTOBUF_NOINLINE void enum_and_in_table::Clear() {
+  auto& this_ [[maybe_unused]] = *this;
+  // @@protoc_insertion_point(message_clear_start:enum_and_in_table)
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  ::uint32_t cached_has_bits [[maybe_unused]] = 0;
+
+  this_._impl_.key_ = 0;
+  _impl_._has_bits_.Clear();
+  _internal_metadata_.Clear<::google::protobuf::UnknownFieldSet>();
+}
+
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+::uint8_t* PROTOBUF_NONNULL enum_and_in_table::_InternalSerialize(
+    const ::google::protobuf::MessageLite& base, ::uint8_t* PROTOBUF_NONNULL target,
+    ::google::protobuf::io::EpsCopyOutputStream* PROTOBUF_NONNULL stream) {
+  const enum_and_in_table& this_ = static_cast<const enum_and_in_table&>(base);
+#else   // PROTOBUF_CUSTOM_VTABLE
+::uint8_t* PROTOBUF_NONNULL enum_and_in_table::_InternalSerialize(
+    ::uint8_t* PROTOBUF_NONNULL target,
+    ::google::protobuf::io::EpsCopyOutputStream* PROTOBUF_NONNULL stream) const {
+  const enum_and_in_table& this_ = *this;
+#endif  // PROTOBUF_CUSTOM_VTABLE
+  if constexpr (::_pbi::DebugHardenCheckHasBitConsistency()) {
+    this_.CheckHasBitConsistency();
+  }
+  // @@protoc_insertion_point(serialize_to_array_start:enum_and_in_table)
+  ::uint32_t cached_has_bits = 0;
+  (void)cached_has_bits;
+
+  cached_has_bits = this_._impl_._has_bits_[0];
+  // optional .cost_type key = 1 [(.org.xresloader.validator) = "custom_rule7"];
+  if (CheckHasBit(cached_has_bits, 0x00000001U)) {
+    target = stream->EnsureSpace(target);
+    target = ::_pbi::WireFormatLite::WriteEnumToArray(
+        1, this_._internal_key(), target);
+  }
+
+  if (ABSL_PREDICT_FALSE(this_._internal_metadata_.have_unknown_fields())) {
+    target =
+        ::_pbi::WireFormat::InternalSerializeUnknownFieldsToArray(
+            this_._internal_metadata_.unknown_fields<::google::protobuf::UnknownFieldSet>(::google::protobuf::UnknownFieldSet::default_instance), target, stream);
+  }
+  // @@protoc_insertion_point(serialize_to_array_end:enum_and_in_table)
+  return target;
+}
+
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+::size_t enum_and_in_table::ByteSizeLong(const MessageLite& base) {
+  const enum_and_in_table& this_ = static_cast<const enum_and_in_table&>(base);
+#else   // PROTOBUF_CUSTOM_VTABLE
+::size_t enum_and_in_table::ByteSizeLong() const {
+  const enum_and_in_table& this_ = *this;
+#endif  // PROTOBUF_CUSTOM_VTABLE
+  // @@protoc_insertion_point(message_byte_size_start:enum_and_in_table)
+  ::size_t total_size = 0;
+
+  ::uint32_t cached_has_bits [[maybe_unused]] = 0;
+
+   {
+    // optional .cost_type key = 1 [(.org.xresloader.validator) = "custom_rule7"];
+    cached_has_bits = this_._impl_._has_bits_[0];
+    if (CheckHasBit(cached_has_bits, 0x00000001U)) {
+      total_size += 1 +
+                    ::_pbi::WireFormatLite::EnumSize(this_._internal_key());
+    }
+  }
+  return this_.MaybeComputeUnknownFieldsSize(total_size,
+                                             &this_._impl_._cached_size_);
+}
+
+void enum_and_in_table::MergeImpl(::google::protobuf::MessageLite& to_msg,
+                      const ::google::protobuf::MessageLite& from_msg) {
+   auto* const _this = static_cast<enum_and_in_table*>(&to_msg);
+  auto& from = static_cast<const enum_and_in_table&>(from_msg);
+  if constexpr (::_pbi::DebugHardenCheckHasBitConsistency()) {
+    from.CheckHasBitConsistency();
+  }
+  // @@protoc_insertion_point(class_specific_merge_from_start:enum_and_in_table)
+  ABSL_DCHECK_NE(&from, _this);
+  ::uint32_t cached_has_bits = 0;
+  (void)cached_has_bits;
+
+  cached_has_bits = from._impl_._has_bits_[0];
+  if (CheckHasBit(cached_has_bits, 0x00000001U)) {
+    _this->_impl_.key_ = from._impl_.key_;
+  }
+  _this->_impl_._has_bits_[0] |= cached_has_bits;
+  _this->_internal_metadata_.MergeFrom<::google::protobuf::UnknownFieldSet>(
+      from._internal_metadata_);
+}
+
+void enum_and_in_table::CopyFrom(const enum_and_in_table& from) {
+  // @@protoc_insertion_point(class_specific_copy_from_start:enum_and_in_table)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+
+void enum_and_in_table::InternalSwap(enum_and_in_table* PROTOBUF_RESTRICT PROTOBUF_NONNULL other) {
+  using ::std::swap;
+  _internal_metadata_.InternalSwap(&other->_internal_metadata_);
+  swap(_impl_._has_bits_[0], other->_impl_._has_bits_[0]);
+  swap(_impl_.key_, other->_impl_.key_);
+}
+
+::google::protobuf::Metadata enum_and_in_table::GetMetadata() const {
   return Super_::GetMetadataImpl(GetClassData()->full());
 }
 // @@protoc_insertion_point(namespace_scope)

@@ -154,6 +154,19 @@ local const_res = {
           },
           name = "combine_id",
         },
+        enum_and_in_table = {
+          field = {
+            key = {
+              name = "key",
+              number = 1,
+              options = {
+                validator = "custom_rule7",
+              },
+              type_name = "ENUM",
+            },
+          },
+          name = "enum_and_in_table",
+        },
         event_cfg = {
           field = {
             enum_type = {

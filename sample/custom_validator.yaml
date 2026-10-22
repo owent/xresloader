@@ -25,3 +25,7 @@ validator:
     rules:
       - InMacroTable("资源转换示例.xlsx", "field_alias_macro", 3, 2, "key", "value")
       - InValues(1234, 5678, "别名测试-月卡", "别名测试-年卡")
+  - name: "custom_rule7"
+    version: 6
+    rules:
+      - InTableColumn("资源转换示例.xlsx", "enum_and_in_table_source", 3, 2, "key")

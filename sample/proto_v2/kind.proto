@@ -192,3 +192,7 @@ message ue_explicit_set_name_field_cfg {
     optional string name = 1;
     optional string content = 2;
 }
+
+message enum_and_in_table {
+    optional cost_type key = 1 [ (org.xresloader.validator) = "custom_rule7" ];
+}

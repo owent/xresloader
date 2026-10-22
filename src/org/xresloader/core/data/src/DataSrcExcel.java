@@ -10,9 +10,9 @@ import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.xresloader.core.ProgramOptions;
 import org.xresloader.core.data.err.ConvException;
-import org.xresloader.core.engine.ExcelEngine;
 import org.xresloader.core.engine.ExcelEngine.DataItemGridWrapper;
 import org.xresloader.core.engine.ExcelEngine.DataSheetWrapper;
+import org.xresloader.core.engine.ExcelEngine;
 import org.xresloader.core.engine.IdentifyDescriptor;
 import org.xresloader.core.engine.IdentifyEngine;
 import org.xresloader.core.scheme.SchemeConf;
@@ -242,7 +242,8 @@ public class DataSrcExcel extends DataSrcImpl {
         private final HashMap<String, String> empty = new HashMap<>(); // 空项特殊处理
     }
 
-    private static final MacroCacheInfo macroCache = new MacroCacheInfo();
+    // Expanded macros can depend on task options; raw sheets are shared by ExcelEngine.
+    private final MacroCacheInfo macroCache = new MacroCacheInfo();
 
     /**
      * 创建DataSheetWrapper对象

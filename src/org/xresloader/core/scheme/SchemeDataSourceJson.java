@@ -1,16 +1,15 @@
 package org.xresloader.core.scheme;
 
-import org.xresloader.core.ProgramOptions;
-import org.json.JSONObject;
-
+import java.io.File;
 import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
-import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import org.json.JSONObject;
+import org.xresloader.core.ProgramOptions;
 import org.xresloader.core.data.err.InitializeException;
+import org.xresloader.core.engine.InputFileCache;
 
 /**
  * Created by owentou on 2015/04/29.
@@ -23,7 +22,10 @@ public final class SchemeDataSourceJson extends SchemeDataSourceBase {
 
         String filePath = ProgramOptions.getInstance().dataSourceFile;
         try {
-            byte[] data = Files.readAllBytes(Path.of(filePath));
+            byte[] data;
+            try (var input = InputFileCache.open(new File(filePath))) {
+                data = input.readAllBytes();
+            }
             int offset = data.length >= 3 && data[0] == (byte) 0xef && data[1] == (byte) 0xbb
                     && data[2] == (byte) 0xbf ? 3 : 0;
             currentObject = new JSONObject(new String(data, offset, data.length - offset, StandardCharsets.UTF_8));

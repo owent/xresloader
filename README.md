@@ -88,6 +88,18 @@ echo "
 " | java -Dfile.encoding=UTF-8 -client -jar ../target/xresloader-1.3.3.0.jar --stdin
 ```
 
+stdin 批次支持 `--parallelism N|auto`，默认 `auto`，按 CPU 和 JVM 堆预算选择 1–8 个并发任务：
+
+```bash
+java -jar xresloader.jar --stdin --parallelism auto --data-version 1.0.0 < tasks.txt
+```
+
+每个非空输入行是一项任务，表内行不拆分。参数和可变转换状态使用任务 TLS，只读输入使用全局读写锁缓存。
+文件按输入顺序写出；单项失败后继续执行，退出前汇总全部任务结果。
+依赖前一项输出或共享脚本外部状态的批次请显式设置 `--parallelism 1`。
+
+详细规则见 [并发转表](doc/parallelism.md)。
+
 其他调用形式见[sample](sample)
 
 ### 可用参数列表
@@ -121,6 +133,7 @@ echo "
 | --list-strip-all-empty         | 移除数组空项                    | (默认) 移除数组空项，自动删除Excel中的未填充数据，不会转出到输出文件中                                                          |
 | --list-keep-empty              | 保留全部数组空项                | 保留全部数组空项，未填充数据将使用默认的空值来填充，并转出到输出文件中                                                          |
 | --list-strip-empty-tail        | 移除数组尾部空项                | 移除数组尾部空项，自动删除尾部的未填充数据，其他的未填充数据将使用默认的空值，并转出到输出文件中                                |
+| --parallelism                  | stdin 并发任务数                | 正整数或 auto，默认 auto；auto 按 CPU/堆预算选择且最多 8；在启动命令上设置，单张表内部不拆分                                                                               |
 | --stdin                        | 通过标准输入批量转表            | 通过标准输入批量转表，参数可上面的一样,每行一项，字符串参数可以用单引号或双引号包裹，但是都不支持转义                           |
 | --lua-global                   | lua输出写到全局表               | 输出协议描述中的常量到Lua脚本时，同时导入符号到全局表_G中（仅对常量导出有效）                                                   |
 | --lua-module                   | lua输出使用module写出           | 输出Lua脚本时，使用 module(模块名, package.seeall) 导出到全局                                                                   |
@@ -439,7 +452,12 @@ sh ./gradlew --no-daemon --warning-mode=all test shadowJar
 打包时会合并 `META-INF/services`，保留 POI 等依赖的全部服务提供者；只排除各依赖的模块描述符，保留多版本 JAR 的实现类。
 
 Gradle 的可执行包为 `target/libs/xresloader-<版本>.jar`，`*-plain.jar` 不包含运行依赖。
-两种构建共享 `target`，不要同时执行构建。
+Maven 类文件位于 `target/maven`，Gradle 类文件位于 `target/classes/java`，可交替构建而无需清理。
+两者的 `clean` 都会删除 `target`，不要同时执行构建。
+测试结果和输出保存在 `target/surefire-reports`、`target/failsafe-reports`；非法输入用例的预期错误不影响构建结果。
+
+发布使用带有非空消息的附注 tag（`git tag -a`），Release 正文采用完整 tag 消息，重跑时同步覆盖。
+流水线校验 tag 指向构建提交，验证 Java 17 和 Java 21 包后上传至草稿 Release。
 
 修改转换逻辑或依赖前后，可用 [sample 回归工具](sample/README.md#输出回归验证) 对完整生成文件集逐字节比较。
 依赖更新依据、兼容约定和验证结果见 [2026-10 更新记录](doc/DEPENDENCY_UPGRADE_2026-10.md)。

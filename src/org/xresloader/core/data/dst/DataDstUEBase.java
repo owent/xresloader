@@ -1,5 +1,10 @@
 package org.xresloader.core.data.dst;
 
+import java.io.*;
+import java.nio.charset.Charset;
+import java.util.*;
+import java.util.regex.Pattern;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -11,11 +16,6 @@ import org.xresloader.core.data.src.DataContainer;
 import org.xresloader.core.data.src.DataSrcImpl;
 import org.xresloader.core.data.vfy.DataVerifyImpl;
 import org.xresloader.core.scheme.SchemeConf;
-
-import java.io.*;
-import java.nio.charset.Charset;
-import java.util.*;
-import java.util.regex.Pattern;
 
 /**
  * Created by owentou on 2019/04/08.
@@ -145,7 +145,11 @@ public abstract class DataDstUEBase extends DataDstJava {
         }
     }
 
-    private static final HashMap<String, UECodeInfo> globalCodeCache = new HashMap<>();
+    private static final ThreadLocal<HashMap<String, UECodeInfo>> taskCodeCache = ThreadLocal.withInitial(HashMap::new);
+
+    public static void clearThreadState() {
+        taskCodeCache.remove();
+    }
     private static final HashSet<String> globalCodeWrittenCache = new HashSet<>();
 
     static UECodeInfo getCodeCache(String clazzName) {
@@ -155,9 +159,7 @@ public abstract class DataDstUEBase extends DataDstJava {
             clazzName = getIdentName(clazzName);
         }
 
-        synchronized (globalCodeCache) {
-            return globalCodeCache.getOrDefault(clazzName, null);
-        }
+        return taskCodeCache.get().getOrDefault(clazzName, null);
     }
 
     static void setCodeCache(String clazzName, UECodeInfo code) {
@@ -167,9 +169,7 @@ public abstract class DataDstUEBase extends DataDstJava {
             clazzName = getIdentName(clazzName);
         }
 
-        synchronized (globalCodeCache) {
-            globalCodeCache.put(clazzName, code);
-        }
+        taskCodeCache.get().put(clazzName, code);
     }
 
     public static class OneofDataObject {
@@ -346,7 +346,7 @@ public abstract class DataDstUEBase extends DataDstJava {
             return typeDesc.getType();
         }
 
-        private static DataDstMessageExt emptyMsgExt = new DataDstMessageExt();
+        private final DataDstMessageExt emptyMsgExt = new DataDstMessageExt();
 
         public DataDstMessageExt getMessageExtension() {
             DataDstTypeDescriptor rawDesc = getTypeDescriptor();
@@ -357,7 +357,7 @@ public abstract class DataDstUEBase extends DataDstJava {
             return rawDesc.mutableExtension();
         }
 
-        private static DataDstFieldExt emptyFieldExt = new DataDstFieldExt();
+        private final DataDstFieldExt emptyFieldExt = new DataDstFieldExt();
 
         public DataDstFieldExt getFieldExtension() {
             DataDstFieldDescriptor field = getReferField();
@@ -518,6 +518,7 @@ public abstract class DataDstUEBase extends DataDstJava {
 
     @SuppressWarnings("UseSpecificCatch")
     public void writeImportSettings(UECodeInfo code) {
+        org.xresloader.core.TaskOrder.awaitOutputTurn();
         File importFile = new File(code.outputDir + File.separator + ueImportFile);
         if (!importFile.getParentFile().exists()) {
             importFile.getParentFile().mkdirs();
@@ -763,7 +764,7 @@ public abstract class DataDstUEBase extends DataDstJava {
     public final byte[] build(DataDstImpl compiler) throws ConvException {
         // DataDstJava.DataDstObject data_obj = build_data(compiler);
         Object buildObj = null;
-        globalCodeCache.clear();
+        taskCodeCache.get().clear();
 
         try {
             buildObj = buildForUEOnInit();
@@ -894,6 +895,7 @@ public abstract class DataDstUEBase extends DataDstJava {
     }
 
     private void writeCodeFiles(UEDataRowRule rule, UECodeInfo codeInfo) throws IOException, ConvException {
+        org.xresloader.core.TaskOrder.awaitOutputTurn();
         if (null == codeInfo || codeInfo.hasGeneratedCode || null == rule) {
             return;
         }
@@ -1346,7 +1348,7 @@ public abstract class DataDstUEBase extends DataDstJava {
      */
     @Override
     public final byte[] dumpConst(HashMap<String, Object> data) throws ConvException, IOException {
-        globalCodeCache.clear();
+        taskCodeCache.get().clear();
 
         // 加载代码
         UECodeInfo codeInfo = getCodeInfo(SchemeConf.getInstance().getOutputFileAbsPath(), null, null);

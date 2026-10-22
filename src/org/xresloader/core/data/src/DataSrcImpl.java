@@ -31,6 +31,14 @@ public abstract class DataSrcImpl {
     protected DataSrcImpl() {
     }
 
+    public static void clearThreadState() {
+        ourInstance.remove();
+        dcCacheBool.remove();
+        dcCacheString.remove();
+        dcCacheDouble.remove();
+        dcCacheLong.remove();
+    }
+
     public static DataContainer<Boolean> getBoolCache(boolean defaultVal) {
         dcCacheBool.get().value = defaultVal;
         dcCacheBool.get().valid = false;

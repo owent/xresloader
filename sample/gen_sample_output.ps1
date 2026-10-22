@@ -1,6 +1,8 @@
-﻿param([string]$XresloaderJar)
+﻿param([string]$XresloaderJar, [string]$Parallelism = '')
 
 $ErrorActionPreference = 'Stop'
+$parallelArgs = @()
+if ($Parallelism -and $Parallelism -ne '0') { $parallelArgs = @('--parallelism', $Parallelism) }
 $PSDefaultParameterValues['*:Encoding'] = 'UTF-8'
 
 $OutputEncoding = [System.Text.UTF8Encoding]::new()
@@ -95,7 +97,7 @@ foreach ($proto_dir in "proto_v2", "proto_v3") {
         "-t ue-csv -o '$proto_dir/csv' -f '$proto_dir/kind.pb' -m 'DataSource=$XLSX_FILE|ue_explicit_set_name_field_cfg|3,1' -m ProtoName=ue_explicit_set_name_field_cfg -m OutputFile=UeExplicitSetNameFieldCfg.csv -m KeyRow=2 -m UeCfg-CodeOutput=|Public/ConfigRec|Private/ConfigRec --data-source-mapping-mode sha256 --data-source-mapping-file '$proto_dir/data_source_mapping.txt'",
         " -t lua  -p protobuf -o '$proto_dir' -f '$proto_dir/kind.pb' --validator-rules custom_validator.yaml -m 'DataSource=$XLSX_FILE|enum_and_in_table_checked|3,1' -m ProtoName=enum_and_in_table -m OutputFile=enum_and_in_table.lua -m KeyRow=2 --pretty 2 --data-source-mapping-mode sha256 --data-source-mapping-file '$proto_dir/data_source_mapping.txt'"
     )
-    Write-Output "Write-Output '$($TASK_LINES -join "`n")' | java `"-Dfile.encoding=UTF-8`" `"-Dlog4j.appender.console.encoding=UTF-8`" `"-Dxresloader.version=dev`" -client -jar `"$XRESLOADER`" --stdin --data-version 1.0.0.0"
-    $TASK_LINES -join "`n" | Invoke-Xresloader "-Dfile.encoding=UTF-8" "-Dlog4j.appender.console.encoding=UTF-8" "-Dxresloader.version=dev"  -client -jar "$XRESLOADER" --stdin --data-version 1.0.0.0
+    Write-Output "Write-Output '$($TASK_LINES -join "`n")' | java `"-Dfile.encoding=UTF-8`" `"-Dlog4j.appender.console.encoding=UTF-8`" `"-Dxresloader.version=dev`" -client -jar `"$XRESLOADER`" --stdin @parallelArgs --data-version 1.0.0.0"
+    $TASK_LINES -join "`n" | Invoke-Xresloader "-Dfile.encoding=UTF-8" "-Dlog4j.appender.console.encoding=UTF-8" "-Dxresloader.version=dev"  -client -jar "$XRESLOADER" --stdin @parallelArgs --data-version 1.0.0.0
     Write-Output "Exit code: $LastExitCode"
 }

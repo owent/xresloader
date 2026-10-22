@@ -1,7 +1,7 @@
 package org.xresloader.core.data.vfy;
 
 import java.io.File;
-import java.io.FileInputStream;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedList;
@@ -15,6 +15,7 @@ import org.xresloader.core.ProgramOptions;
 import org.xresloader.core.data.src.DataSrcImpl;
 import org.xresloader.core.data.vfy.DataVerifyImpl.ValidatorParameter;
 import org.xresloader.core.data.vfy.DataVerifyImpl.ValidatorTokens;
+import org.xresloader.core.engine.InputFileCache;
 
 public class DataValidatorFactory {
   private static HashMap<String, Function<DataVerifyImpl.ValidatorTokens, DataVerifyImpl>> initFuncValidatorCreator() {
@@ -36,7 +37,7 @@ public class DataValidatorFactory {
   }
 
   private static final HashMap<String, Function<DataVerifyImpl.ValidatorTokens, DataVerifyImpl>> funcValidatorCreator = initFuncValidatorCreator();
-  private static boolean isInited = false;
+  private static volatile boolean isInited = false;
 
   /** @deprecated Use {@link #initialize()}. */
   @Deprecated
@@ -45,9 +46,6 @@ public class DataValidatorFactory {
   }
 
   public static void initialize() {
-    if (isInited) {
-      return;
-    }
     isInited = true;
   }
 
@@ -346,7 +344,7 @@ public class DataValidatorFactory {
       return null;
     }
 
-    try (FileInputStream input = new FileInputStream(yamlFile)) {
+    try (InputStream input = InputFileCache.open(yamlFile)) {
       LoadSettings settings = LoadSettings.builder().setLabel("xresloader.DataVerifyCustomRule").build();
       Load load = new Load(settings);
 

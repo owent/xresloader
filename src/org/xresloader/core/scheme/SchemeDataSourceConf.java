@@ -1,16 +1,17 @@
 package org.xresloader.core.scheme;
 
-import org.xresloader.core.ProgramOptions;
-import org.ini4j.ConfigParser;
-
-import java.io.FileInputStream;
+import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.ini4j.ConfigParser;
+import org.xresloader.core.ProgramOptions;
 import org.xresloader.core.data.err.InitializeException;
+import org.xresloader.core.engine.InputFileCache;
 
 /**
  * Created by owentou on 2015/04/29.
@@ -23,11 +24,12 @@ public final class SchemeDataSourceConf extends SchemeDataSourceBase {
 
         String filePath = ProgramOptions.getInstance().dataSourceFile;
         String errorMessage = null;
-        try (FileInputStream input = new FileInputStream(filePath)) {
+        try (InputStream input = InputFileCache.open(new File(filePath))) {
+            input.mark(3);
             byte[] utf8Bom = input.readNBytes(3);
             if (utf8Bom.length != 3 || utf8Bom[0] != (byte) 0xef || utf8Bom[1] != (byte) 0xbb
                     || utf8Bom[2] != (byte) 0xbf) {
-                input.getChannel().position(0);
+                input.reset();
             }
 
             currentFile.read(input);

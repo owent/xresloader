@@ -62,6 +62,9 @@ public class PackagedJarIT {
             assertNotNull(jar.getJarEntry("org/xresloader/core/Main.class"));
             assertFalse(jar.stream().anyMatch(entry -> entry.getName().startsWith("org/apache/poi/")),
                     "Repeated packaging must recreate the unshaded input JAR");
+            assertTrue(jar.stream().filter(entry -> entry.getName().endsWith(".class"))
+                    .allMatch(entry -> entry.getName().startsWith("org/xresloader/")),
+                    "The input JAR must not contain nested Gradle main or test classes");
         }
         try (JarFile jar = new JarFile(packagedJar().toFile())) {
             assertEquals("org.xresloader.core.Main", jar.getManifest().getMainAttributes().getValue("Main-Class"));
@@ -71,6 +74,10 @@ public class PackagedJarIT {
             assertTrue(jar.stream().anyMatch(entry -> entry.getName().startsWith("META-INF/versions/")
                     && entry.getName().endsWith(".class")));
             assertFalse(jar.stream().anyMatch(entry -> entry.getName().startsWith("edu/umd/cs/findbugs/")));
+            assertFalse(jar.stream().anyMatch(entry -> entry.getName().startsWith("java/main/")
+                    || entry.getName().startsWith("java/test/")
+                    || entry.getName().startsWith("org/junit/")),
+                    "The executable JAR must not include foreign build outputs or test dependencies");
             var providers = jar.getJarEntry("META-INF/services/org.apache.poi.ss.usermodel.WorkbookProvider");
             assertNotNull(providers);
             try (var input = jar.getInputStream(providers)) {

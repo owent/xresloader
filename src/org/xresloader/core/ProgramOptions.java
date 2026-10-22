@@ -1,12 +1,5 @@
 package org.xresloader.core;
 
-import org.apache.commons.cli.*;
-import org.apache.commons.cli.help.HelpFormatter;
-import org.apache.commons.cli.help.TextHelpAppendable;
-import org.apache.commons.codec.binary.Hex;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -18,20 +11,28 @@ import java.nio.charset.UnsupportedCharsetException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Properties;
 import java.util.Scanner;
+import java.util.TreeMap;
+import java.util.concurrent.locks.ReentrantReadWriteLock;
 import java.util.regex.Pattern;
 import java.util.regex.PatternSyntaxException;
+
+import org.apache.commons.cli.*;
+import org.apache.commons.cli.help.HelpFormatter;
+import org.apache.commons.cli.help.TextHelpAppendable;
+import org.apache.commons.codec.binary.Hex;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 // Import log4j classes.
 
 public class ProgramOptions {
 
     private static Logger logger = null;
-    private static String endl = null;
+    private static final String endl = System.getProperty("line.separator", "\n");
 
     public class RenameRule {
         public Pattern match;
@@ -41,13 +42,18 @@ public class ProgramOptions {
     /**
      * 单例
      */
-    private static ThreadLocal<ProgramOptions> instance = null;
+    private static final ThreadLocal<ProgramOptions> instance = ThreadLocal.withInitial(() -> {
+        ProgramOptions value = new ProgramOptions();
+        value.reset();
+        return value;
+    });
     private static Options options = null;
-    private static String version = null;
+    private static volatile String version = null;
     private static Properties properties = null;
-    private volatile static String dataSourceMappingFile = "";
-    private final static HashMap<String, String> dataSourceMappingResult = new HashMap<>();
-    private volatile static String dataSourceMappingHashSeed = "xresloader";
+    private String dataSourceMappingFile = "";
+    private String dataSourceMappingHashSeed = "xresloader";
+    private static final HashMap<String, HashMap<String, String>> mappingResults = new HashMap<>();
+    private static final ReentrantReadWriteLock mappingLock = new ReentrantReadWriteLock();
 
     private String defaultDataVersion = null;
     private String dataVersion = null;
@@ -73,6 +79,8 @@ public class ProgramOptions {
     public ListStripRule stripListRule = ListStripRule.STRIP_EMPTY_ALL;
     public int prettyIndent = 0;
     public boolean enableStdin = false;
+    public int parallelism = autoParallelism(Runtime.getRuntime().availableProcessors(), Runtime.getRuntime().maxMemory());
+    public boolean automaticParallelism = true;
     public String[] customValidatorRules = null;
     public boolean enableDataValidator = true;
     public int dataValidatorNoErrorVersion = 0;
@@ -103,16 +111,34 @@ public class ProgramOptions {
     }
 
     public static ProgramOptions getInstance() {
-        if (instance == null) {
-            instance = new ThreadLocal<>();
-        }
-
-        if (null == instance.get()) {
-            instance.set(new ProgramOptions());
-            instance.get().reset();
-        }
-
         return instance.get();
+    }
+
+    /** Called on the input thread before parsing each stdin line. */
+    static ProgramOptions nextTask() {
+        ProgramOptions previous = getInstance();
+        ProgramOptions next = new ProgramOptions();
+        next.reset();
+        next.defaultDataVersion = previous.getDefaultDataVersion();
+        next.dataSourceMappingFile = previous.dataSourceMappingFile;
+        next.dataSourceMappingHashSeed = previous.dataSourceMappingHashSeed;
+        instance.set(next);
+        return next;
+    }
+
+    static void install(ProgramOptions options) {
+        instance.set(options);
+    }
+
+    static void clearThreadState() {
+        instance.remove();
+    }
+
+    /** Conservative automatic sizing; arbitrary table sizes still require an appropriate JVM heap. */
+    static int autoParallelism(int processors, long maxHeapBytes) {
+        int cpuLimit = Math.max(1, processors / 2 + processors % 2);
+        long heapLimit = Math.max(1, maxHeapBytes / (256L * 1024 * 1024));
+        return (int) Math.min(8L, Math.min(cpuLimit, heapLimit));
     }
 
     public void reset() {
@@ -136,6 +162,8 @@ public class ProgramOptions {
         stripListRule = ListStripRule.STRIP_EMPTY_ALL;
         prettyIndent = 0;
         enableStdin = false;
+        parallelism = autoParallelism(Runtime.getRuntime().availableProcessors(), Runtime.getRuntime().maxMemory());
+        automaticParallelism = true;
         customValidatorRules = null;
         enableDataValidator = true;
         dataValidatorNoErrorVersion = 0;
@@ -240,6 +268,8 @@ public class ProgramOptions {
                 "keep empty elements in a list or repeated field with default value.");
         options.addOption(null, "list-strip-empty-tail", false,
                 "remove all tail empty elements in a list or repeated field.");
+        options.addOption(null, "parallelism", true,
+                "maximum concurrent stdin conversion tasks (positive integer or auto, default: auto).");
         options.addOption(null, "stdin", false, "enable read from stdin and convert more files.");
         options.addOption(null, "lua-global", false, "add data to _G if in lua mode when print const data");
         options.addOption(null, "lua-module", true, "module(MODULE_NAME, package.seeall) if in lua mode");
@@ -308,6 +338,21 @@ public class ProgramOptions {
 
         if (cmd.hasOption('h')) {
             return printHelp() ? 1 : -1;
+        }
+
+        if (cmd.hasOption("parallelism")) {
+            try {
+                automaticParallelism = "auto".equalsIgnoreCase(cmd.getOptionValue("parallelism"));
+                parallelism = automaticParallelism
+                        ? autoParallelism(Runtime.getRuntime().availableProcessors(), Runtime.getRuntime().maxMemory())
+                        : Integer.parseInt(cmd.getOptionValue("parallelism"));
+                if (parallelism < 1) {
+                    throw new NumberFormatException();
+                }
+            } catch (NumberFormatException exception) {
+                getLogger().error("--parallelism must be a positive integer or auto: %s", cmd.getOptionValue("parallelism"));
+                return -1;
+            }
         }
 
         if (cmd.hasOption("stdin")) {
@@ -640,35 +685,30 @@ public class ProgramOptions {
             input = input.replaceAll("\\\\", "/");
         }
 
-        synchronized (dataSourceMappingResult) {
-            if (dataSourceMappingResult.containsKey(input)) {
-                return dataSourceMappingResult.get(input);
+        try {
+            MessageDigest hasher = MessageDigest.getInstance(dataSourceMappingType == null ? "SHA-256" : switch (dataSourceMappingType) {
+                case MD5 -> "MD5";
+                case SHA1 -> "SHA-1";
+                default -> "SHA-256";
+            });
+            if (dataSourceMappingHashSeed != null && !dataSourceMappingHashSeed.equals(input)) {
+                hasher.update(dataSourceMappingHashSeed.getBytes());
             }
-
-            MessageDigest hasher;
-            try {
-                if (null == dataSourceMappingType) {
-                    hasher = MessageDigest.getInstance("SHA-256");
-                } else {
-                    hasher = switch (dataSourceMappingType) {
-                        case MD5 -> MessageDigest.getInstance("MD5");
-                        case SHA1 -> MessageDigest.getInstance("SHA-1");
-                        default -> MessageDigest.getInstance("SHA-256");
-                    };
+            hasher.update(input.getBytes(Charset.forName("UTF-8")));
+            String result = Hex.encodeHexString(hasher.digest());
+            if (!dataSourceMappingFile.isEmpty()) {
+                String path = new File(dataSourceMappingFile).getCanonicalPath();
+                mappingLock.writeLock().lock();
+                try {
+                    mappingResults.computeIfAbsent(path, ignored -> new HashMap<>()).put(result, input);
+                } finally {
+                    mappingLock.writeLock().unlock();
                 }
-
-                String seed = dataSourceMappingHashSeed;
-                if (seed != null && !seed.equals(input)) {
-                    hasher.update(seed.getBytes());
-                }
-                hasher.update(input.getBytes(Charset.forName("UTF-8")));
-                String result = Hex.encodeHexString(hasher.digest());
-                dataSourceMappingResult.put(result, input);
-                return result;
-            } catch (NoSuchAlgorithmException e) {
-                ProgramOptions.getLogger().error("%s", e.getMessage());
-                return input;
             }
+            return result;
+        } catch (NoSuchAlgorithmException | IOException exception) {
+            getLogger().error("%s", exception.getMessage());
+            return input;
         }
     }
 
@@ -729,118 +769,58 @@ public class ProgramOptions {
     }
 
     public static String getEndl() {
-        if (endl == null) {
-            endl = System.getProperty("line.separator", "\n");
-        }
-
         return endl;
     }
 
     public static int dumpDataSourceMapping() {
-        int ret = 0;
-        OutputStream out;
-        File file;
-
-        if (dataSourceMappingFile.isEmpty()) {
-            return ret;
+        HashMap<String, HashMap<String, String>> snapshot = new HashMap<>();
+        mappingLock.readLock().lock();
+        try {
+            mappingResults.forEach((path, values) -> snapshot.put(path, new HashMap<>(values)));
+        } finally {
+            mappingLock.readLock().unlock();
         }
-        file = new File(dataSourceMappingFile);
-
+        String currentFile = getInstance().dataSourceMappingFile;
+        if (!currentFile.isEmpty()) {
+            try {
+                snapshot.putIfAbsent(new File(currentFile).getCanonicalPath(), new HashMap<>());
+            } catch (IOException exception) {
+                getLogger().error("%s", exception.getMessage());
+                return 1;
+            }
+        }
+        int failed = 0;
         Charset utf8 = Charset.forName("UTF-8");
-
-        HashMap<String, String> dataSourceMappingOrigin = new HashMap<>();
-        if (file.exists()) {
-            try (InputStream in = new FileInputStream(file); Scanner s = new Scanner(in, utf8)) {
-                while (s.hasNextLine()) {
-                    String line = s.nextLine();
-                    String[] parts = line.split("\\s+", 2);
-                    if (parts.length < 2) {
-                        continue;
+        for (var entry : snapshot.entrySet()) {
+            File file = new File(entry.getKey());
+            TreeMap<String, String> merged = new TreeMap<>();
+            if (file.exists()) {
+                try (InputStream input = new FileInputStream(file); Scanner scanner = new Scanner(input, utf8)) {
+                    while (scanner.hasNextLine()) {
+                        String[] parts = scanner.nextLine().split("\\s+", 2);
+                        if (parts.length == 2 && !parts[0].isEmpty()) {
+                            merged.put(parts[0], parts[1]);
+                        }
                     }
-                    if (parts[0].isEmpty()) {
-                        continue;
-                    }
-
-                    dataSourceMappingOrigin.put(parts[0], parts[1]);
+                } catch (IOException exception) {
+                    getLogger().error("Load data source mapping file %s failed. %s", file, exception.getMessage());
+                    ++failed;
                 }
-            } catch (IOException e) {
-                ProgramOptions.getLogger().error("Load data source mapping file %s failed.\n%s", dataSourceMappingFile,
-                        e.getMessage());
-                ret += 1;
+            }
+            merged.putAll(entry.getValue());
+            File directory = file.getParentFile();
+            if (directory != null) {
+                directory.mkdirs();
+            }
+            try (OutputStream output = new FileOutputStream(file)) {
+                for (var value : merged.entrySet()) {
+                    output.write((value.getKey() + " " + value.getValue() + getEndl()).getBytes(utf8));
+                }
+            } catch (IOException exception) {
+                getLogger().error("Write data source mapping file %s failed. %s", file, exception.getMessage());
+                ++failed;
             }
         }
-
-        try {
-            String dirPath = file.getParent();
-            if (dirPath != null && !dirPath.isEmpty()) {
-                File dir = new File(file.getParent());
-                if (!dir.exists()) {
-                    dir.mkdirs();
-                }
-            }
-
-            out = new FileOutputStream(file);
-        } catch (IOException e) {
-            ProgramOptions.getLogger().error("Open data source mapping file %s failed.\n%s", dataSourceMappingFile,
-                    e.getMessage());
-            ret += 1;
-            return ret;
-        }
-
-        ArrayList<String> keys = new ArrayList<>();
-
-        synchronized (dataSourceMappingResult) {
-            for (String key : dataSourceMappingResult.keySet()) {
-                if (null == key) {
-                    continue;
-                }
-                if (key.isEmpty()) {
-                    continue;
-                }
-                keys.add(key);
-            }
-
-            for (String key : dataSourceMappingOrigin.keySet()) {
-                if (null == key) {
-                    continue;
-                }
-                if (key.isEmpty()) {
-                    continue;
-                }
-                if (!dataSourceMappingResult.containsKey(key)) {
-                    keys.add(key);
-                }
-            }
-
-            keys.sort((l, r) -> {
-                return l.compareTo(r);
-            });
-
-            for (String key : keys) {
-                try {
-                    out.write(key.getBytes(utf8));
-                    out.write(" ".getBytes(utf8));
-                    if (dataSourceMappingResult.containsKey(key)) {
-                        out.write(dataSourceMappingResult.get(key).getBytes(utf8));
-                    } else {
-                        out.write(dataSourceMappingOrigin.get(key).getBytes(utf8));
-                    }
-                    out.write(getEndl().getBytes());
-                } catch (IOException e) {
-                    ProgramOptions.getLogger().error("Write data source mapping %s failed.\n%s", key, e.getMessage());
-                    ret += 1;
-                }
-            }
-        }
-
-        try {
-            out.close();
-        } catch (IOException e) {
-            ProgramOptions.getLogger().error("Close data source mapping file %s failed.\n%s",
-                    file.getAbsoluteFile().getPath(),
-                    e.getMessage());
-            ret += 1;
-        }
-        return ret;
+        return failed;
     }
 }

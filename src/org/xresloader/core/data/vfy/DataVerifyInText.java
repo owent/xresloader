@@ -2,7 +2,7 @@ package org.xresloader.core.data.vfy;
 
 import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileInputStream;
+import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
@@ -12,6 +12,7 @@ import java.util.regex.PatternSyntaxException;
 
 import org.xresloader.core.ProgramOptions;
 import org.xresloader.core.data.src.DataSrcImpl;
+import org.xresloader.core.engine.InputFileCache;
 
 public class DataVerifyInText extends DataVerifyImpl {
     private boolean valid = false;
@@ -76,7 +77,7 @@ public class DataVerifyInText extends DataVerifyImpl {
                 separator = Pattern.compile(this.parameters.get(3));
             }
 
-            try (FileInputStream fileInputStream = new FileInputStream(this.file);
+            try (InputStream fileInputStream = InputFileCache.open(this.file);
                     InputStreamReader inputStreamReader = new InputStreamReader(fileInputStream, StandardCharsets.UTF_8);
                     BufferedReader bufferedReader = new BufferedReader(inputStreamReader)) {
 

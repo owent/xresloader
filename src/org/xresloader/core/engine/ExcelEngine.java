@@ -1,8 +1,8 @@
 package org.xresloader.core.engine;
 
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -10,10 +10,11 @@ import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.LinkedList;
-import java.util.Map;
+import java.util.concurrent.atomic.AtomicLong;
+import java.util.concurrent.locks.ReentrantReadWriteLock;
+import java.util.function.Supplier;
 import java.util.regex.Pattern;
 
-import org.apache.commons.collections4.map.LRUMap;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ooxml.POIXMLException;
 import org.apache.poi.ss.formula.eval.NotImplementedException;
@@ -45,13 +46,45 @@ public class ExcelEngine {
     /**
      * 开启的workbook缓存，减少打开和分析文件的耗时
      */
-    private static HashMap<String, Workbook> openedWorkbooks = new HashMap<>();
+    // POI workbooks/evaluators are mutable parser sessions, not shared IO data.
+    private static final ThreadLocal<HashMap<String, Workbook>> openedWorkbooks = ThreadLocal.withInitial(HashMap::new);
+
+    public static void clearThreadState() {
+        for (Workbook workbook : openedWorkbooks.get().values()) {
+            try {
+                workbook.close();
+            } catch (IOException exception) {
+                ProgramOptions.getLogger().warn("Close workbook failed: %s", exception.getMessage());
+            }
+        }
+        openedWorkbooks.remove();
+    }
 
     /**
      * 开启的自定义索引缓存，减少打开和分析文件的耗时
      */
-    private static LRUMap<String, CustomDataTableIndex> openedCustomDataTableIndex = new LRUMap<>();
-    private static int openedCustomDataTableRows = 0;
+    private static final class CachedTable {
+        final CustomDataTableIndex table;
+        final AtomicLong lastAccess = new AtomicLong();
+
+        CachedTable(CustomDataTableIndex table) {
+            this.table = table;
+        }
+    }
+
+    private record TableCacheKey(String filePath, String sheetName) {}
+
+    private static final HashMap<TableCacheKey, CachedTable> openedCustomDataTableIndex = new HashMap<>();
+    private static final class FileTableLoad {
+        final ReentrantReadWriteLock lock = new ReentrantReadWriteLock();
+        // Includes callers waiting for the file lock; guarded by tableCacheLock.
+        int users;
+    }
+
+    private static final HashMap<String, FileTableLoad> pendingTableLoads = new HashMap<>();
+    private static final ReentrantReadWriteLock tableCacheLock = new ReentrantReadWriteLock();
+    private static final AtomicLong tableAccessSequence = new AtomicLong();
+    private static long openedCustomDataTableRows = 0;
 
     /**
      * 日期格式列缓存，XSSF在获取Style时性能极其低下，缓存一下有助于提升性能 导致的副作用就是只接受第一个数据行的日期格式
@@ -346,28 +379,20 @@ public class ExcelEngine {
             filePath = file.getPath();
         }
 
-        Workbook ret = openedWorkbooks.get(filePath);
+        Workbook ret = openedWorkbooks.get().get(filePath);
         if (null != ret) {
             return ret;
         }
 
-        try (FileInputStream input = new FileInputStream(filePath)) {
+        try (InputStream input = InputFileCache.open(new File(filePath))) {
             // 类型枚举，以后能支持 ods等非微软格式？
             if (filePath.toLowerCase().endsWith(".xls")) {
                 ret = new HSSFWorkbook(input);
-                try (org.apache.poi.hssf.extractor.ExcelExtractor extractor = new org.apache.poi.hssf.extractor.ExcelExtractor(
-                        (HSSFWorkbook) ret)) {
-                    extractor.setFormulasNotResults(false);
-                }
             } else {
                 ret = new XSSFWorkbook(input);
-                try (org.apache.poi.xssf.extractor.XSSFExcelExtractor extractor = new org.apache.poi.xssf.extractor.XSSFExcelExtractor(
-                        (XSSFWorkbook) ret)) {
-                    extractor.setFormulasNotResults(false);
-                }
             }
 
-            openedWorkbooks.put(filePath, ret);
+            openedWorkbooks.get().put(filePath, ret);
         } catch (java.io.IOException e) {
             ProgramOptions.getLogger().error("Open file % failed, %s", file.getPath(), e.getMessage());
         } catch (POIXMLException e) {
@@ -415,37 +440,106 @@ public class ExcelEngine {
         if (realPath == null) {
             realPath = file.getPath().replaceAll("\\\\", "/");
         }
-        CustomDataTableIndex ret;
-        String lruCacheKey = String.format("%s|%s", realPath, sheetName);
-        ret = openedCustomDataTableIndex.getOrDefault(lruCacheKey, null);
-        if (ret != null) {
-            return ret;
-        }
+        return getOrBuildStreamTableIndex(realPath, sheetName,
+                () -> file.getName().toLowerCase().endsWith(".xls")
+                        ? ExcelHSSFStreamSheetHandle.buildCustomTableIndex(file, sheetName)
+                        : ExcelXSSFStreamSheetHandle.buildCustomTableIndex(file, sheetName));
+    }
 
-        if (file.getName().toLowerCase().endsWith(".xls")) {
-            ret = ExcelHSSFStreamSheetHandle.buildCustomTableIndex(file, sheetName);
-        } else {
-            ret = ExcelXSSFStreamSheetHandle.buildCustomTableIndex(file, sheetName);
-        }
-
-        if (ret != null) {
-            int maxCacheRows = ProgramOptions.getInstance().dataSourceLruCacheRows;
-            if (maxCacheRows <= 0) {
-                maxCacheRows = Integer.MAX_VALUE;
+    private static CustomDataTableIndex findCachedTable(TableCacheKey cacheKey) {
+        tableCacheLock.readLock().lock();
+        try {
+            CachedTable cached = openedCustomDataTableIndex.get(cacheKey);
+            if (cached != null) {
+                cached.lastAccess.set(tableAccessSequence.incrementAndGet());
+                return cached.table;
             }
-            if (ret.getLastRowIndex() + 1 < maxCacheRows) {
-                openedCustomDataTableIndex.put(lruCacheKey, ret);
-                openedCustomDataTableRows += ret.getLastRowIndex() + 1;
+            return null;
+        } finally {
+            tableCacheLock.readLock().unlock();
+        }
+    }
 
-                while (openedCustomDataTableRows >= maxCacheRows) {
-                    Map.Entry<String, CustomDataTableIndex> first = openedCustomDataTableIndex.entrySet().iterator()
-                            .next();
-                    openedCustomDataTableRows -= first.getValue().getLastRowIndex() + 1;
-                    openedCustomDataTableIndex.remove(first.getKey());
+    static CustomDataTableIndex getOrBuildStreamTableIndex(String realPath, String sheetName,
+            Supplier<CustomDataTableIndex> loader) {
+        TableCacheKey cacheKey = new TableCacheKey(realPath, sheetName);
+        CustomDataTableIndex cached = findCachedTable(cacheKey);
+        if (cached != null) {
+            return cached;
+        }
+
+        FileTableLoad fileLoad;
+        // Retain before waiting: eviction or another caller finishing must not replace this file's lock.
+        tableCacheLock.writeLock().lock();
+        try {
+            fileLoad = pendingTableLoads.computeIfAbsent(realPath, ignored -> new FileTableLoad());
+            ++fileLoad.users;
+        } finally {
+            tableCacheLock.writeLock().unlock();
+        }
+        try {
+            // Never wait for a file lock while holding the global index lock.
+            fileLoad.lock.readLock().lock();
+            try {
+                cached = findCachedTable(cacheKey);
+                if (cached != null) {
+                    return cached;
+                }
+            } finally {
+                fileLoad.lock.readLock().unlock();
+            }
+
+            // Drop the read lock before acquiring write, then recheck for a completed load.
+            fileLoad.lock.writeLock().lock();
+            try {
+                cached = findCachedTable(cacheKey);
+                if (cached != null) {
+                    return cached;
+                }
+                CustomDataTableIndex table = loader.get();
+                if (table != null) {
+                    cacheTable(cacheKey, table);
+                }
+                return table;
+            } finally {
+                fileLoad.lock.writeLock().unlock();
+            }
+        } finally {
+            tableCacheLock.writeLock().lock();
+            try {
+                if (--fileLoad.users == 0) {
+                    pendingTableLoads.remove(realPath);
+                }
+            } finally {
+                tableCacheLock.writeLock().unlock();
+            }
+        }
+    }
+
+    private static void cacheTable(TableCacheKey cacheKey, CustomDataTableIndex table) {
+        tableCacheLock.writeLock().lock();
+        try {
+            long maxRows = ProgramOptions.getInstance().dataSourceLruCacheRows;
+            if (maxRows <= 0) {
+                maxRows = Integer.MAX_VALUE;
+            }
+            long rows = (long) table.getLastRowIndex() + 1;
+            if (rows < maxRows) {
+                CachedTable cached = new CachedTable(table);
+                cached.lastAccess.set(tableAccessSequence.incrementAndGet());
+                openedCustomDataTableIndex.put(cacheKey, cached);
+                openedCustomDataTableRows += rows;
+                while (openedCustomDataTableRows >= maxRows && !openedCustomDataTableIndex.isEmpty()) {
+                    // Readers update only atomic access stamps; the map is never mutated under a read lock.
+                    var oldest = openedCustomDataTableIndex.entrySet().stream()
+                            .min(java.util.Comparator.comparingLong(entry -> entry.getValue().lastAccess.get())).orElseThrow();
+                    openedCustomDataTableRows -= (long) oldest.getValue().table.getLastRowIndex() + 1;
+                    openedCustomDataTableIndex.remove(oldest.getKey());
                 }
             }
+        } finally {
+            tableCacheLock.writeLock().unlock();
         }
-        return ret;
     }
 
     public static String tryMacro(DataSrcImpl dataSrcImpl, String m) {

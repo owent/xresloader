@@ -40,6 +40,7 @@ jobs:
       - name: Build with Maven
         # uses: .github/action/build-with-maven
         run: |
+          python3 -m unittest discover -s test/tools -p 'test_*.py'
           cd tools
           python3 -m pip install --user -r requirements.txt
           python3 gen_header_v2.py
@@ -49,8 +50,18 @@ jobs:
           sh ./mvnw clean verify --file pom.xml
           # Repeated packaging must not shade the previous uber JAR again.
           sh ./mvnw verify --file pom.xml
-          python3 tools/verify_samples.py --jar target/xresloader-2.23.7.jar --snapshot build/sample-baseline.json --capture
+          jar_name=$(python3 -c 'import xml.etree.ElementTree as ET; p = ET.parse("pom.xml").getroot(); ns = "{http://maven.apache.org/POM/4.0.0}"; print(p.findtext(ns + "artifactId") + "-" + p.findtext(ns + "version") + ".jar")')
+          echo "XRESLOADER_JAR_NAME=$jar_name" >> "$GITHUB_ENV"
+          python3 tools/verify_samples.py --jar "target/$jar_name" --snapshot build/sample-baseline.json --capture
+          for parallelism in 1 4 8 auto; do
+            python3 tools/verify_samples.py --jar "target/$jar_name" --snapshot build/sample-baseline.json --parallelism "$parallelism"
+          done
+      - name: Stress cache publication, TLS isolation and ordered output
+        run: |
+          python3 tools/run_concurrency_stress.py --jar "target/$XRESLOADER_JAR_NAME" --work-dir build/jcstress-ci -- -m quick -iters 2 -time 100 -f 1 -c 2 -hs 128 -af NONE -pth false
       - name: Verify Gradle and compare sample outputs
         run: |
-          sh ./gradlew --no-daemon --console=plain --warning-mode=all test shadowJar
-          python3 tools/verify_samples.py --jar target/libs/xresloader-2.23.7.jar --snapshot build/sample-baseline.json
+          sh ./gradlew --no-daemon --console=plain --warning-mode=all test shadowJar jacocoTestReport
+          python3 tools/verify_samples.py --jar "target/libs/$XRESLOADER_JAR_NAME" --snapshot build/sample-baseline.json --parallelism 4
+          # Maven must also package and report coverage after Gradle, without cleaning.
+          sh ./mvnw verify --file pom.xml

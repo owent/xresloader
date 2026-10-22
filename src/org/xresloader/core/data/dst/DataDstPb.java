@@ -1,7 +1,7 @@
 package org.xresloader.core.data.dst;
 
 import java.io.ByteArrayOutputStream;
-import java.io.FileInputStream;
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
@@ -33,16 +33,18 @@ import org.xresloader.core.data.src.DataContainer;
 import org.xresloader.core.data.src.DataSrcImpl;
 import org.xresloader.core.data.vfy.DataValidatorCache;
 import org.xresloader.core.data.vfy.DataValidatorFactory;
-import org.xresloader.core.data.vfy.DataVerifyImpl;
 import org.xresloader.core.data.vfy.DataVerifyImpl.ValidatorTokens;
+import org.xresloader.core.data.vfy.DataVerifyImpl;
 import org.xresloader.core.data.vfy.DataVerifyPbEnum;
 import org.xresloader.core.data.vfy.DataVerifyPbEnumValue;
 import org.xresloader.core.data.vfy.DataVerifyPbMsgField;
 import org.xresloader.core.data.vfy.DataVerifyPbMsgOneField;
 import org.xresloader.core.data.vfy.DataVerifyPbOneof;
-import org.xresloader.core.engine.ExcelEngine;
 import org.xresloader.core.engine.ExcelEngine.DataItemGridWrapper;
+import org.xresloader.core.engine.ExcelEngine;
 import org.xresloader.core.engine.IdentifyDescriptor;
+import org.xresloader.core.engine.InputFileCache;
+import org.xresloader.core.engine.SharedCache;
 import org.xresloader.core.scheme.SchemeConf;
 import org.xresloader.pb.PbHeaderV3;
 import org.xresloader.ue.XresloaderUe;
@@ -51,9 +53,8 @@ import com.google.protobuf.AnyProto;
 import com.google.protobuf.ApiProto;
 import com.google.protobuf.ByteString;
 import com.google.protobuf.DescriptorProtos;
-import com.google.protobuf.Descriptors;
 import com.google.protobuf.Descriptors.FieldDescriptor.JavaType;
-import static com.google.protobuf.Descriptors.FieldDescriptor.JavaType.MESSAGE;
+import com.google.protobuf.Descriptors;
 import com.google.protobuf.Duration;
 import com.google.protobuf.DurationProto;
 import com.google.protobuf.DynamicMessage;
@@ -67,29 +68,20 @@ import com.google.protobuf.TypeProto;
 import com.google.protobuf.UninitializedMessageException;
 import com.google.protobuf.WrappersProto;
 
+import static com.google.protobuf.Descriptors.FieldDescriptor.JavaType.MESSAGE;
+
 /**
  * Created by owent on 2014/10/10.
  */
 public class DataDstPb extends DataDstImpl {
-    private static class PbAliasNode<T> {
-        public T element = null;
-        LinkedList<String> names = null;
-    };
+    private record PbAliasNode<T>(T element, List<String> names) {}
 
     private static class ParseResult {
         public DynamicMessage value = null;
         public String origin = null;
     }
 
-    private static class PbProtoWithFullName<T> {
-        public T element;
-        public String fullName;
-
-        public PbProtoWithFullName(T ele, String name) {
-            this.element = ele;
-            this.fullName = name;
-        }
-    };
+    private record PbProtoWithFullName<T>(T element, String fullName) {}
 
     /***
      * protobuf 的描述信息生成是按文件的，所以要缓存并先生成依赖，再生成需要的文件描述数据
@@ -99,22 +91,23 @@ public class DataDstPb extends DataDstImpl {
         /*** 已加载文件集合，用于文件读取去重(.pb文件) ***/
         public HashSet<String> fileNames = new HashSet<>();
         /*** 描述信息-已加载文件描述集，用于文件描述去重(.proto文件) ***/
-        public HashMap<String, DescriptorProtos.FileDescriptorProto> files = new HashMap<>();
+        public Map<String, DescriptorProtos.FileDescriptorProto> files = new HashMap<>();
         /*** 描述信息-消息描述集合 ***/
-        public HashMap<String, PbAliasNode<DescriptorProtos.DescriptorProto>> messages = new HashMap<>();
-        public HashMap<String, PbAliasNode<PbProtoWithFullName<DescriptorProtos.FieldDescriptorProto>>> messageFields = new HashMap<>();
+        public Map<String, PbAliasNode<DescriptorProtos.DescriptorProto>> messages = new HashMap<>();
+        public Map<String, PbAliasNode<PbProtoWithFullName<DescriptorProtos.FieldDescriptorProto>>> messageFields = new HashMap<>();
         /*** 描述信息-枚举描述集合 ***/
-        public HashMap<String, PbAliasNode<DescriptorProtos.EnumDescriptorProto>> enums = new HashMap<>();
-        public HashMap<String, PbAliasNode<PbProtoWithFullName<DescriptorProtos.EnumValueDescriptorProto>>> enumValues = new HashMap<>();
+        public Map<String, PbAliasNode<DescriptorProtos.EnumDescriptorProto>> enums = new HashMap<>();
+        public Map<String, PbAliasNode<PbProtoWithFullName<DescriptorProtos.EnumValueDescriptorProto>>> enumValues = new HashMap<>();
         /*** 描述信息-oneof描述集合 ***/
-        public HashMap<String, PbAliasNode<DescriptorProtos.OneofDescriptorProto>> oneofs = new HashMap<>();
+        public Map<String, PbAliasNode<DescriptorProtos.OneofDescriptorProto>> oneofs = new HashMap<>();
 
         // ========================== 配置描述集 ==========================
         /*** 类型信息-文件描述器集合 ***/
-        public HashMap<String, Descriptors.FileDescriptor> fileDescs = new HashMap<>();
+        public Map<String, Descriptors.FileDescriptor> fileDescs = new HashMap<>();
         public HashSet<String> fileDescsFailed = new HashSet<>();
         /*** 类型信息-Message描述器集合 ***/
-        public HashMap<String, PbAliasNode<Descriptors.Descriptor>> messageDescs = new HashMap<>();
+        public Map<String, PbAliasNode<Descriptors.Descriptor>> messageDescs = new HashMap<>();
+        private boolean sharedProtocol;
         public HashMap<String, DataDstEnumDescriptor> enumDescs = new HashMap<>();
         /*** 类型信息-快速整数别名集合 ***/
         public HashMap<String, Integer> quickIntegerValuesAlias = new HashMap<>();
@@ -128,6 +121,22 @@ public class DataDstPb extends DataDstImpl {
 
         public PbInfoSet() {
             setupValidatorCreator();
+        }
+
+        // Only incremental loads detach. Normal tasks read the shared maps without copying them.
+        private void makeProtocolMutable() {
+            if (!sharedProtocol) {
+                return;
+            }
+            files = new HashMap<>(files);
+            messages = new HashMap<>(messages);
+            messageFields = new HashMap<>(messageFields);
+            enums = new HashMap<>(enums);
+            enumValues = new HashMap<>(enumValues);
+            oneofs = new HashMap<>(oneofs);
+            fileDescs = new HashMap<>(fileDescs);
+            messageDescs = new HashMap<>(messageDescs);
+            sharedProtocol = false;
         }
 
         private void setupValidatorCreator() {
@@ -205,41 +214,131 @@ public class DataDstPb extends DataDstImpl {
 
     private Descriptors.Descriptor currentMsgDesc = null;
     private static com.google.protobuf.ExtensionRegistryLite pbExtensions = null;
-    private static final PbInfoSet cachePbs = new PbInfoSet();
-    private static HashMap<String, Descriptors.FileDescriptor> innerFileDescs = null;
+    private static final ThreadLocal<PbInfoSet> taskPbs = ThreadLocal.withInitial(PbInfoSet::new);
+    private static final SharedCache<InputFileCache.FileKey, DescriptorProtos.FileDescriptorSet> inputPbs =
+            new SharedCache<>();
 
-    static <T> void appendAliasList(String shortName, String fullName, HashMap<String, PbAliasNode<T>> hashmap,
-            T ele) {
-        while (fullName.length() > 0 && fullName.charAt(0) == '.') {
-            fullName = fullName.substring(1);
+    private record SchemaKey(List<InputFileCache.FileKey> inputs, boolean allowUnknownDependencies) {}
+
+    /** Only protocol input indexes are shared. Bound fields and validators remain in taskPbs. */
+    private static final class ProtocolSchema {
+        private final Map<String, DescriptorProtos.FileDescriptorProto> files;
+        private final Map<String, PbAliasNode<DescriptorProtos.DescriptorProto>> messages;
+        private final Map<String, PbAliasNode<PbProtoWithFullName<DescriptorProtos.FieldDescriptorProto>>> messageFields;
+        private final Map<String, PbAliasNode<DescriptorProtos.EnumDescriptorProto>> enums;
+        private final Map<String, PbAliasNode<PbProtoWithFullName<DescriptorProtos.EnumValueDescriptorProto>>> enumValues;
+        private final Map<String, PbAliasNode<DescriptorProtos.OneofDescriptorProto>> oneofs;
+        private final Map<String, Descriptors.FileDescriptor> fileDescs;
+        private final Map<String, PbAliasNode<Descriptors.Descriptor>> messageDescs;
+
+        ProtocolSchema(PbInfoSet source) {
+            files = java.util.Collections.unmodifiableMap(new HashMap<>(source.files));
+            messages = java.util.Collections.unmodifiableMap(new HashMap<>(source.messages));
+            messageFields = java.util.Collections.unmodifiableMap(new HashMap<>(source.messageFields));
+            enums = java.util.Collections.unmodifiableMap(new HashMap<>(source.enums));
+            enumValues = java.util.Collections.unmodifiableMap(new HashMap<>(source.enumValues));
+            oneofs = java.util.Collections.unmodifiableMap(new HashMap<>(source.oneofs));
+            fileDescs = java.util.Collections.unmodifiableMap(new HashMap<>(source.fileDescs));
+            messageDescs = java.util.Collections.unmodifiableMap(new HashMap<>(source.messageDescs));
         }
 
-        if (!shortName.isEmpty() && !shortName.equals(fullName)) {
-            PbAliasNode<T> ls = hashmap.getOrDefault(shortName, null);
-            if (null == ls) {
-                ls = new PbAliasNode<>();
-                hashmap.put(shortName, ls);
-            }
-            if (null == ls.names) {
-                ls.names = new LinkedList<>();
-            }
-            ls.element = ele;
-            if (!fullName.isEmpty()) {
-                ls.names.addLast(fullName);
-            }
-        }
-
-        if (!fullName.isEmpty()) {
-            PbAliasNode<T> ls = hashmap.getOrDefault(fullName, null);
-            if (null == ls) {
-                ls = new PbAliasNode<>();
-                hashmap.put(fullName, ls);
-            }
-            ls.element = ele;
+        void install(PbInfoSet target) {
+            target.files = files;
+            target.messages = messages;
+            target.messageFields = messageFields;
+            target.enums = enums;
+            target.enumValues = enumValues;
+            target.oneofs = oneofs;
+            target.fileDescs = fileDescs;
+            target.messageDescs = messageDescs;
+            target.sharedProtocol = true;
         }
     }
 
-    static <T> T getAliasListElement(String name, HashMap<String, PbAliasNode<T>> hashmap, String typeName) {
+    private static final SharedCache<SchemaKey, ProtocolSchema> protocolSchemas = new SharedCache<>();
+
+    private static boolean loadProtocolFiles(boolean allowUnknownDependencies) {
+        PbInfoSet target = taskPbs.get();
+        String[] paths = ProgramOptions.getInstance().protocolFile;
+        if (target.fileNames.containsAll(Arrays.asList(paths))) {
+            return true;
+        }
+        // Nonempty or incomplete task contexts retain the original incremental/error behavior.
+        if (!target.fileNames.isEmpty()) {
+            for (String path : paths) {
+                if (!loadPbFile(target, path, true, allowUnknownDependencies, null)) {
+                    return false;
+                }
+            }
+            return true;
+        }
+        try {
+            var inputs = new ArrayList<InputFileCache.FileKey>();
+            for (String path : paths) {
+                inputs.add(InputFileCache.key(new File(path)));
+            }
+            boolean[] loaded = {true};
+            ProtocolSchema schema = protocolSchemas.getOrLoad(new SchemaKey(List.copyOf(inputs), allowUnknownDependencies), () -> {
+                // Only this ordered input set is locked; other schema keys can build concurrently.
+                for (String path : paths) {
+                    if (!loadPbFile(target, path, true, allowUnknownDependencies, null)) {
+                        loaded[0] = false;
+                        return null;
+                    }
+                }
+                // Failed or incomplete linking must be retried and diagnosed in every task.
+                if (!target.fileDescsFailed.isEmpty() || target.fileDescs.size() != target.files.size()) {
+                    return null;
+                }
+                return new ProtocolSchema(target);
+            });
+            // The building task keeps its original map traversal order (observable in constant dumps).
+            // Cache hits share the published maps directly, without another per-task putAll copy.
+            if (schema != null && target.fileNames.isEmpty()) {
+                schema.install(target);
+                target.fileNames.addAll(Arrays.asList(paths));
+            }
+            return loaded[0];
+        } catch (IOException exception) {
+            // Preserve the detailed legacy diagnostic and failure result for unavailable inputs.
+            for (String path : paths) {
+                if (!loadPbFile(target, path, true, allowUnknownDependencies, null)) {
+                    return false;
+                }
+            }
+            return true;
+        }
+    }
+
+    public static void clearThreadState() {
+        taskPbs.remove();
+        DataDstWriterNode.clearThreadState();
+    }
+    private static HashMap<String, Descriptors.FileDescriptor> innerFileDescs = null;
+
+    static <T> void appendAliasList(String shortName, String fullName, Map<String, PbAliasNode<T>> hashmap,
+            T ele) {
+        while (!fullName.isEmpty() && fullName.charAt(0) == '.') {
+            fullName = fullName.substring(1);
+        }
+        if (!shortName.isEmpty() && !shortName.equals(fullName)) {
+            PbAliasNode<T> previous = hashmap.get(shortName);
+            var names = new ArrayList<String>();
+            if (previous != null && previous.names != null) {
+                names.addAll(previous.names);
+            }
+            if (!fullName.isEmpty()) {
+                names.add(fullName);
+            }
+            hashmap.put(shortName, new PbAliasNode<>(ele, List.copyOf(names)));
+        }
+        if (!fullName.isEmpty()) {
+            PbAliasNode<T> previous = hashmap.get(fullName);
+            hashmap.put(fullName, new PbAliasNode<>(ele, previous == null ? null : previous.names));
+        }
+    }
+
+    static <T> T getAliasListElement(String name, Map<String, PbAliasNode<T>> hashmap, String typeName) {
         while (name.length() > 0 && name.charAt(0) == '.') {
             name = name.substring(1);
         }
@@ -261,7 +360,7 @@ public class DataDstPb extends DataDstImpl {
         return null;
     }
 
-    static <T> String getAliasListElementFullName(String name, HashMap<String, PbAliasNode<T>> hashmap,
+    static <T> String getAliasListElementFullName(String name, Map<String, PbAliasNode<T>> hashmap,
             String typeName) {
         while (name.length() > 0 && name.charAt(0) == '.') {
             name = name.substring(1);
@@ -287,15 +386,15 @@ public class DataDstPb extends DataDstImpl {
         return name;
     }
 
-    private static com.google.protobuf.ExtensionRegistryLite getExtensionRegistry() {
+    private static synchronized com.google.protobuf.ExtensionRegistryLite getExtensionRegistry() {
         if (null != pbExtensions) {
             return pbExtensions;
         }
 
-        pbExtensions = com.google.protobuf.ExtensionRegistryLite.newInstance();
-
-        Xresloader.registerAllExtensions(pbExtensions);
-        XresloaderUe.registerAllExtensions(pbExtensions);
+        var extensions = com.google.protobuf.ExtensionRegistryLite.newInstance();
+        Xresloader.registerAllExtensions(extensions);
+        XresloaderUe.registerAllExtensions(extensions);
+        pbExtensions = extensions.getUnmodifiable();
 
         return pbExtensions;
     }
@@ -362,7 +461,7 @@ public class DataDstPb extends DataDstImpl {
     }
 
     static void loadPbMessage(PbInfoSet pbs, DescriptorProtos.DescriptorProto mdp, String packageName,
-            HashMap<String, PbAliasNode<DescriptorProtos.DescriptorProto>> hashmap) {
+            Map<String, PbAliasNode<DescriptorProtos.DescriptorProto>> hashmap) {
         String fullName = String.format("%s.%s", packageName, mdp.getName());
         appendAliasList(mdp.getName(), fullName, pbs.messages, mdp);
 
@@ -413,9 +512,20 @@ public class DataDstPb extends DataDstImpl {
 
             // 文件描述集读取
             DescriptorProtos.FileDescriptorSet fds;
-            try (InputStream input = new FileInputStream(filePath)) {
-                fds = DescriptorProtos.FileDescriptorSet.parseFrom(input, exts);
+            if (exts == getExtensionRegistry()) {
+                InputFileCache.FileKey key = InputFileCache.key(new File(filePath));
+                fds = inputPbs.getOrLoad(key, () -> {
+                    try (InputStream input = InputFileCache.open(new File(key.path()))) {
+                        return DescriptorProtos.FileDescriptorSet.parseFrom(input, getExtensionRegistry());
+                    }
+                });
+            } else {
+                // Custom extension registries are specific to descriptor-print tasks.
+                try (InputStream input = InputFileCache.open(new File(filePath))) {
+                    fds = DescriptorProtos.FileDescriptorSet.parseFrom(input, exts);
+                }
             }
+            pbs.makeProtocolMutable();
             pbs.fileNames.add(filePath);
             // 保存文件名和文件描述Proto的关系
             for (DescriptorProtos.FileDescriptorProto fdp : fds.getFileList()) {
@@ -483,7 +593,7 @@ public class DataDstPb extends DataDstImpl {
         return (Descriptors.EnumValueDescriptor) res.getRawDescriptor();
     }
 
-    static Descriptors.FileDescriptor tryGetInnerDetailDesc(String name) {
+    static synchronized Descriptors.FileDescriptor tryGetInnerDetailDesc(String name) {
         if (innerFileDescs != null) {
             return innerFileDescs.getOrDefault(name.replace('\\', '/').toLowerCase(), null);
         }
@@ -785,7 +895,7 @@ public class DataDstPb extends DataDstImpl {
             }
 
             if (fd.getOptions().hasExtension(Xresloader.fieldListMinSize)) {
-                var intValue = tryParseQuickIntegerValue(cachePbs,
+                var intValue = tryParseQuickIntegerValue(taskPbs.get(),
                         fd.getOptions().getExtension(Xresloader.fieldListMinSize));
                 if (null == intValue) {
                     ProgramOptions.getLogger().error(
@@ -802,7 +912,7 @@ public class DataDstPb extends DataDstImpl {
                 }
             }
             if (fd.getOptions().hasExtension(Xresloader.fieldListMaxSize)) {
-                var intValue = tryParseQuickIntegerValue(cachePbs,
+                var intValue = tryParseQuickIntegerValue(taskPbs.get(),
                         fd.getOptions().getExtension(Xresloader.fieldListMaxSize));
                 if (null == intValue) {
                     ProgramOptions.getLogger().error(
@@ -908,7 +1018,7 @@ public class DataDstPb extends DataDstImpl {
             rule = rule.substring(1);
         }
 
-        DataVerifyImpl vfy = DataValidatorFactory.createSymbolValidator(cachePbs.validatorCache, rule);
+        DataVerifyImpl vfy = DataValidatorFactory.createSymbolValidator(taskPbs.get().validatorCache, rule);
         if (vfy == null) {
             ProgramOptions.getLogger().error("Setup type validator for oneof descriptor %s failed", rule);
             ret.success = false;
@@ -941,7 +1051,7 @@ public class DataDstPb extends DataDstImpl {
         if (!verifier.isEmpty()) {
             List<ValidatorTokens> tokens = DataValidatorFactory.buildValidatorTokens(verifier);
             for (ValidatorTokens token : tokens) {
-                DataVerifyImpl vfy = DataValidatorFactory.createValidator(cachePbs.validatorCache, token);
+                DataVerifyImpl vfy = DataValidatorFactory.createValidator(taskPbs.get().validatorCache, token);
                 if (vfy == null) {
                     String fullName = "";
                     if (fd != null) {
@@ -1017,14 +1127,11 @@ public class DataDstPb extends DataDstImpl {
 
     @Override
     public boolean init() {
-        for (String pbsFile : ProgramOptions.getInstance().protocolFile) {
-            if (false == loadPbFile(cachePbs, pbsFile, true,
-                    ProgramOptions.getInstance().protocolIgnoreUnknownDependency, null)) {
-                return false;
-            }
+        if (!loadProtocolFiles(ProgramOptions.getInstance().protocolIgnoreUnknownDependency)) {
+            return false;
         }
 
-        currentMsgDesc = getMessageProto(cachePbs, SchemeConf.getInstance().getProtoName());
+        currentMsgDesc = getMessageProto(taskPbs.get(), SchemeConf.getInstance().getProtoName());
         if (null == currentMsgDesc) {
             this.logErrorMessage("Can not find protocol message %s", SchemeConf.getInstance().getProtoName());
             return false;
@@ -1034,7 +1141,7 @@ public class DataDstPb extends DataDstImpl {
         String[] customValidatorRules = ProgramOptions.getInstance().customValidatorRules;
         if (customValidatorRules != null) {
             for (String ruleFilePath : customValidatorRules) {
-                if (null == DataValidatorFactory.loadFromFile(cachePbs.validatorCache, ruleFilePath)) {
+                if (null == DataValidatorFactory.loadFromFile(taskPbs.get().validatorCache, ruleFilePath)) {
                     this.logErrorMessage("Can not load validator rule file %s", ruleFilePath);
                     return false;
                 }
@@ -1280,7 +1387,7 @@ public class DataDstPb extends DataDstImpl {
 
     @Override
     public final DataDstWriterNode compile() throws ConvException {
-        DataDstWriterNode ret = createMessageWriterNode(cachePbs, currentMsgDesc, DataDstWriterNode.JAVA_TYPE.MESSAGE,
+        DataDstWriterNode ret = createMessageWriterNode(taskPbs.get(), currentMsgDesc, DataDstWriterNode.JAVA_TYPE.MESSAGE,
                 null, null,
                 -1);
         if (test(ret, new LinkedList<>())) {
@@ -1418,7 +1525,7 @@ public class DataDstPb extends DataDstImpl {
                     autoValidatorRule = autoValidatorRule.substring(1);
                 }
 
-                DataVerifyImpl vfy = DataValidatorFactory.createSymbolValidator(cachePbs.validatorCache,
+                DataVerifyImpl vfy = DataValidatorFactory.createSymbolValidator(taskPbs.get().validatorCache,
                         autoValidatorRule);
                 if (vfy == null) {
                     throw new ConvException(
@@ -1436,7 +1543,7 @@ public class DataDstPb extends DataDstImpl {
             autoValidatorRule = autoValidatorRule.substring(1);
         }
 
-        DataVerifyImpl vfy = DataValidatorFactory.createSymbolValidator(cachePbs.validatorCache, autoValidatorRule);
+        DataVerifyImpl vfy = DataValidatorFactory.createSymbolValidator(taskPbs.get().validatorCache, autoValidatorRule);
         if (vfy == null) {
             throw new ConvException(
                     String.format("Setup type validator for oneof descriptor %s failed", autoValidatorRule));
@@ -1522,9 +1629,9 @@ public class DataDstPb extends DataDstImpl {
                         int count = 0;
                         nameList.addLast("");
                         for (;; ++count) {
-                            DataDstWriterNode c = createMessageWriterNode(cachePbs, fd.getMessageType(),
+                            DataDstWriterNode c = createMessageWriterNode(taskPbs.get(), fd.getMessageType(),
                                     DataDstWriterNode.JAVA_TYPE.MESSAGE, pbTypeToTypeLimit(fd),
-                                    mutableDataDstEnumDescriptor(cachePbs, fd), count);
+                                    mutableDataDstEnumDescriptor(taskPbs.get(), fd), count);
                             boolean testPassed = false;
 
                             nameList.removeLast();
@@ -1628,9 +1735,9 @@ public class DataDstPb extends DataDstImpl {
                             }
 
                             if (null != col) {
-                                DataDstWriterNode c = createMessageWriterNode(cachePbs, fd.getMessageType(),
+                                DataDstWriterNode c = createMessageWriterNode(taskPbs.get(), fd.getMessageType(),
                                         DataDstWriterNode.JAVA_TYPE.MESSAGE, pbTypeToTypeLimit(fd),
-                                        mutableDataDstEnumDescriptor(cachePbs, fd), -1);
+                                        mutableDataDstEnumDescriptor(taskPbs.get(), fd), -1);
                                 child = node.addChild(fd.getName(), c, fd, DataDstWriterNode.CHILD_NODE_TYPE.PLAIN);
                                 setupNodeIdentify(c, child, col, fd);
                                 ret = true;
@@ -1641,9 +1748,9 @@ public class DataDstPb extends DataDstImpl {
                             }
                         }
                     } else {
-                        DataDstWriterNode c = createMessageWriterNode(cachePbs, fd.getMessageType(),
+                        DataDstWriterNode c = createMessageWriterNode(taskPbs.get(), fd.getMessageType(),
                                 DataDstWriterNode.JAVA_TYPE.MESSAGE, pbTypeToTypeLimit(fd),
-                                mutableDataDstEnumDescriptor(cachePbs, fd), -1);
+                                mutableDataDstEnumDescriptor(taskPbs.get(), fd), -1);
                         boolean testPassed = false;
 
                         // 检测使用的名字，message不允许混合别名。以防别名组合指数级膨胀
@@ -1715,7 +1822,7 @@ public class DataDstPb extends DataDstImpl {
                     DataDstWriterNode.JAVA_TYPE innerType = pbTypeToInnerType(fd.getType());
                     if (fd.isRepeated()) {
                         int count = 0;
-                        DataDstEnumDescriptor referEnum = mutableDataDstEnumDescriptor(cachePbs, fd);
+                        DataDstEnumDescriptor referEnum = mutableDataDstEnumDescriptor(taskPbs.get(), fd);
                         for (;; ++count) {
                             String realName = DataDstWriterNode.makeChildPath(prefix, fd.getName(), count);
                             IdentifyDescriptor col = dataSrc.getColumnByName(realName);
@@ -1735,7 +1842,7 @@ public class DataDstPb extends DataDstImpl {
                             }
 
                             if (null != col) {
-                                DataDstWriterNode c = createMessageWriterNode(cachePbs, innerType,
+                                DataDstWriterNode c = createMessageWriterNode(taskPbs.get(), innerType,
                                         pbTypeToTypeLimit(fd), referEnum,
                                         count);
                                 child = node.addChild(fd.getName(), c, fd, DataDstWriterNode.CHILD_NODE_TYPE.STANDARD);
@@ -1785,7 +1892,7 @@ public class DataDstPb extends DataDstImpl {
                             }
 
                             if (null != col) {
-                                DataDstWriterNode c = createMessageWriterNode(cachePbs, innerType,
+                                DataDstWriterNode c = createMessageWriterNode(taskPbs.get(), innerType,
                                         pbTypeToTypeLimit(fd), referEnum, -1);
                                 child = node.addChild(fd.getName(), c, fd, DataDstWriterNode.CHILD_NODE_TYPE.PLAIN);
                                 setupNodeIdentify(c, child, col, fd);
@@ -1816,16 +1923,16 @@ public class DataDstPb extends DataDstImpl {
 
                         if (null != col) {
                             filterMissingFields(missingFields, oneofField, fd, false);
-                            DataDstWriterNode c = createMessageWriterNode(cachePbs, innerType,
-                                    pbTypeToTypeLimit(fd), mutableDataDstEnumDescriptor(cachePbs, fd), -1);
+                            DataDstWriterNode c = createMessageWriterNode(taskPbs.get(), innerType,
+                                    pbTypeToTypeLimit(fd), mutableDataDstEnumDescriptor(taskPbs.get(), fd), -1);
                             child = node.addChild(fd.getName(), c, fd, DataDstWriterNode.CHILD_NODE_TYPE.STANDARD);
                             setupNodeIdentify(c, child, col, fd);
                             ret = true;
                         } else {
                             filterMissingFields(missingFields, oneofField, fd, true);
                             if (checkFieldIsRequired(fd)) {
-                                DataDstWriterNode c = createMessageWriterNode(cachePbs, innerType,
-                                        pbTypeToTypeLimit(fd), mutableDataDstEnumDescriptor(cachePbs, fd),
+                                DataDstWriterNode c = createMessageWriterNode(taskPbs.get(), innerType,
+                                        pbTypeToTypeLimit(fd), mutableDataDstEnumDescriptor(taskPbs.get(), fd),
                                         -1);
                                 // required 字段要dump默认数据
                                 child = node.addChild(fd.getName(), c, fd, DataDstWriterNode.CHILD_NODE_TYPE.STANDARD);
@@ -1873,7 +1980,7 @@ public class DataDstPb extends DataDstImpl {
 
             oneofField.replace(fd.getFullName(), fd.getName());
 
-            DataDstWriterNode c = createOneofWriterNode(cachePbs, oneofInnerDesc);
+            DataDstWriterNode c = createOneofWriterNode(taskPbs.get(), oneofInnerDesc);
             // oneof field must be a plain field
             child = node.addChild(fd.getName(), c, fd, DataDstWriterNode.CHILD_NODE_TYPE.PLAIN);
             setupNodeIdentify(c, child, col, fd);
@@ -2108,7 +2215,7 @@ public class DataDstPb extends DataDstImpl {
             if (val instanceof Descriptors.EnumValueDescriptor) {
                 enumVal = (Descriptors.EnumValueDescriptor) val;
             } else {
-                enumVal = getEnumValue(cachePbs, fd.getEnumType(), (Integer) val);
+                enumVal = getEnumValue(taskPbs.get(), fd.getEnumType(), (Integer) val);
             }
 
             if (null == enumVal) {
@@ -2453,7 +2560,7 @@ public class DataDstPb extends DataDstImpl {
                         tmp.ensureCapacity(values.length);
                         for (Long v : values) {
                             if (fd.getType() == Descriptors.FieldDescriptor.Type.ENUM) {
-                                Descriptors.EnumValueDescriptor enumVal = getEnumValue(cachePbs, fd.getEnumType(),
+                                Descriptors.EnumValueDescriptor enumVal = getEnumValue(taskPbs.get(), fd.getEnumType(),
                                         v.intValue());
                                 if (enumVal != null) {
                                     tmp.add(enumVal);
@@ -2936,19 +3043,17 @@ public class DataDstPb extends DataDstImpl {
     @SuppressWarnings("unchecked")
     @Override
     public HashMap<String, Object> buildConst() {
-        for (String pbsFile : ProgramOptions.getInstance().protocolFile) {
-            if (false == loadPbFile(cachePbs, pbsFile, true, true, null)) {
-                return null;
-            }
+        if (!loadProtocolFiles(true)) {
+            return null;
         }
 
-        if (null == cachePbs.enums) {
+        if (null == taskPbs.get().enums) {
             return null;
         }
 
         HashMap<String, Object> ret = new HashMap<>();
 
-        for (HashMap.Entry<String, Descriptors.FileDescriptor> fdp : cachePbs.fileDescs.entrySet()) {
+        for (HashMap.Entry<String, Descriptors.FileDescriptor> fdp : taskPbs.get().fileDescs.entrySet()) {
             if (fdp.getValue().getPackage().equals("google.protobuf")) {
                 continue;
             }
@@ -3010,7 +3115,7 @@ public class DataDstPb extends DataDstImpl {
 
         try {
             DescriptorProtos.FileDescriptorSet.Builder fdsBuilder = DescriptorProtos.FileDescriptorSet.newBuilder();
-            for (var fdp : cachePbs.files.entrySet()) {
+            for (var fdp : taskPbs.get().files.entrySet()) {
                 if (fdp.getValue().getPackage().equals("google.protobuf")) {
                     continue;
                 }
@@ -3033,10 +3138,8 @@ public class DataDstPb extends DataDstImpl {
      */
     @Override
     public HashMap<String, Object> buildOptions(ProgramOptions.ProtoDumpType dumpType) {
-        for (String pbsFile : ProgramOptions.getInstance().protocolFile) {
-            if (false == loadPbFile(cachePbs, pbsFile, true, true, null)) {
-                return null;
-            }
+        if (!loadProtocolFiles(true)) {
+            return null;
         }
 
         com.google.protobuf.ExtensionRegistry customExtensions = com.google.protobuf.ExtensionRegistry.newInstance();
@@ -3044,7 +3147,7 @@ public class DataDstPb extends DataDstImpl {
         Xresloader.registerAllExtensions(customExtensions);
         XresloaderUe.registerAllExtensions(customExtensions);
 
-        for (HashMap.Entry<String, Descriptors.FileDescriptor> fdp : cachePbs.fileDescs.entrySet()) {
+        for (HashMap.Entry<String, Descriptors.FileDescriptor> fdp : taskPbs.get().fileDescs.entrySet()) {
             for (Descriptors.FieldDescriptor subDesc : fdp.getValue().getExtensions()) {
                 if (subDesc.getJavaType() == Descriptors.FieldDescriptor.JavaType.MESSAGE) {
                     customExtensions.add(subDesc, DynamicMessage.newBuilder(subDesc.getMessageType()).build());
@@ -3058,8 +3161,8 @@ public class DataDstPb extends DataDstImpl {
         LinkedList<Object> files = new LinkedList<>();
 
         ArrayList<HashMap.Entry<String, Descriptors.FileDescriptor>> sortedArray = new ArrayList<>();
-        sortedArray.ensureCapacity(cachePbs.fileDescs.size());
-        sortedArray.addAll(cachePbs.fileDescs.entrySet());
+        sortedArray.ensureCapacity(taskPbs.get().fileDescs.size());
+        sortedArray.addAll(taskPbs.get().fileDescs.entrySet());
         sortedArray.sort((l, r) -> {
             return l.getValue().getFullName().compareTo(r.getValue().getFullName());
         });

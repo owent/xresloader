@@ -61,6 +61,15 @@ def run(args):
     else:
         command = ["bash", str(sample / "gen_sample_output.sh")]
     environment = dict(os.environ, XRESLOADER=str(jar))
+    if args.parallelism is not None:
+        if args.parallelism != "auto" and int(args.parallelism) < 1:
+            raise ValueError("--parallelism must be positive or auto")
+        if os.name == "nt":
+            command.extend(["-Parallelism", str(args.parallelism)])
+        else:
+            environment["XRESLOADER_PARALLELISM"] = str(args.parallelism)
+    else:
+        environment.pop("XRESLOADER_PARALLELISM", None)
     log = work / "generator.log"
     with log.open("wb") as output:
         subprocess.run(command, cwd=sample, env=environment, stdout=output,
@@ -94,7 +103,7 @@ def run(args):
         removed = sorted(before.keys() - outputs.keys())
         changed = sorted(name for name in before.keys() & outputs.keys() if before[name] != outputs[name])
         report = {"baselineJarSha256": baseline["jarSha256"], "candidateJarSha256": manifest["jarSha256"],
-                  "compared": len(outputs), "added": added, "removed": removed, "changed": changed}
+                  "parallelism": args.parallelism, "compared": len(outputs), "added": added, "removed": removed, "changed": changed}
         (work / "comparison.json").write_text(json.dumps(report, indent=2) + "\n", encoding="utf-8")
         if added or removed or changed:
             raise AssertionError(json.dumps(report, indent=2))
@@ -106,6 +115,7 @@ if __name__ == "__main__":
     parser.add_argument("--jar", type=Path, required=True)
     parser.add_argument("--snapshot", type=Path, required=True)
     parser.add_argument("--work-dir", type=Path, default=Path("build/sample-regression"))
+    parser.add_argument("--parallelism", help="Forward worker count to the sample stdin batches")
     parser.add_argument("--capture", action="store_true")
     try:
         run(parser.parse_args())

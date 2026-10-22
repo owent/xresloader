@@ -1,20 +1,21 @@
 package org.xresloader.core.data.et;
 
-import java.io.FileInputStream;
+import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.script.Bindings;
 import javax.script.Invocable;
 import javax.script.ScriptContext;
+import javax.script.ScriptEngine;
+import javax.script.ScriptEngineManager;
 import javax.script.ScriptException;
 import javax.script.SimpleScriptContext;
-import javax.script.ScriptEngineManager;
-import javax.script.ScriptEngine;
-import javax.script.Bindings;
 
 import org.apache.commons.io.IOUtils;
 import org.xresloader.core.ProgramOptions;
@@ -22,19 +23,20 @@ import org.xresloader.core.data.dst.DataDstJava;
 import org.xresloader.core.data.dst.DataDstWriterNode;
 import org.xresloader.core.data.err.ConvException;
 import org.xresloader.core.data.src.DataSrcImpl;
+import org.xresloader.core.engine.InputFileCache;
 import org.xresloader.core.scheme.SchemeConf;
 
-import com.google.protobuf.DynamicMessage;
 import com.google.protobuf.Descriptors.Descriptor;
-import com.google.protobuf.Descriptors.FieldDescriptor;
 import com.google.protobuf.Descriptors.FieldDescriptor.Type;
+import com.google.protobuf.Descriptors.FieldDescriptor;
+import com.google.protobuf.DynamicMessage;
 
 /**
  * Created by anakin on 2020/10/20.
  */
 public class DataETProcessor extends DataDstJava {
 
-    private static DataETProcessor instance;
+    private static final ThreadLocal<DataETProcessor> instance = new ThreadLocal<>();
 
     private ScriptEngine scriptEngine = null;
     private Invocable invocable = null;
@@ -94,7 +96,7 @@ public class DataETProcessor extends DataDstJava {
      * private void initRhinoEngine(SimpleScriptContext sc) throws ScriptException {
      * Bindings scope = sc.getBindings(ScriptContext.ENGINE_SCOPE);
      * String loadFunc = "function load(file) { " +
-     * " var FileReader = java.io.FileReader;" +
+     * " var FileReader = FileReader;" +
      * " var BufferedReader = java.io.BufferedReader;" +
      * " var reader = new BufferedReader(new FileReader(file));" +
      * " var line;" +
@@ -109,7 +111,7 @@ public class DataETProcessor extends DataDstJava {
      * 
      * scope.put("__moduleCache", new org.mozilla.javascript.NativeObject());
      * scope.put("__basePath", ProgramOptions.getInstance().dataSourceDirectory);
-     * // new java.io.File().exists()
+     * // new File().exists()
      * 
      * // 注入简化版的require函数
      * String simpleRequire = "function require(modulePath) {\n" +
@@ -117,7 +119,7 @@ public class DataETProcessor extends DataDstJava {
      * " if (!modulePath.endsWith('.js')) modulePath += '.js';\n" +
      * " var fullPath = modulePath;\n" +
      * " for(var __i in __basePath) {\n" +
-     * " var f = new java.io.File(__basePath[__i], modulePath);\n" +
+     * " var f = new File(__basePath[__i], modulePath);\n" +
      * " if (f.exists()) {\n" +
      * " fullPath = f.getCanonicalPath();\n" +
      * " break;\n" +
@@ -133,14 +135,14 @@ public class DataETProcessor extends DataDstJava {
      * " \n" +
      * " // 读取模块内容\n" +
      * " var content = '';\n" +
-     * " var reader = new java.io.FileReader(fullPath);\n" +
+     * " var reader = new FileReader(fullPath);\n" +
      * " var buffer = new java.io.BufferedReader(reader);\n" +
      * " var line;\n" +
      * " while ((line = buffer.readLine()) !== null) content += line + '\\n';\n" +
      * " buffer.close();\n" +
      * " \n" +
      * " // 执行模块代码\n" +
-     * " var dirName = new java.io.File(fullPath).getParent();\n" +
+     * " var dirName = new File(fullPath).getParent();\n" +
      * " var wrapper = new Function('exports', 'require', 'module', '__dirname',
      * '__filename', content);\n"
      * +
@@ -152,7 +154,14 @@ public class DataETProcessor extends DataDstJava {
      * }
      **/
 
+    public static void clearThreadState() {
+        instance.remove();
+    }
+
     public void reset() throws ConvException {
+        invocable = null;
+        lastDataSourceFile = "";
+        lastDataSourceTable = "";
         // boolean engineInitSucceed = false;
         try {
             if (scriptEngine != null && !SchemeConf.getInstance().getCallbackScriptPath().isEmpty()) {
@@ -167,7 +176,7 @@ public class DataETProcessor extends DataDstJava {
                 scope.put("gOurInstance", DataSrcImpl.getOurInstance());
                 scope.put("gSchemeConf", SchemeConf.getInstance());
                 String bootstrapCode;
-                try (FileInputStream input = new FileInputStream(SchemeConf.getInstance().getCallbackScriptPath())) {
+                try (InputStream input = InputFileCache.open(new File(SchemeConf.getInstance().getCallbackScriptPath()))) {
                     bootstrapCode = IOUtils.toString(input, StandardCharsets.UTF_8);
                 }
 
@@ -223,10 +232,10 @@ public class DataETProcessor extends DataDstJava {
     }
 
     public static DataETProcessor getInstance() throws ConvException {
-        if (instance == null) {
-            instance = new DataETProcessor();
+        if (instance.get() == null) {
+            instance.set(new DataETProcessor());
         }
-        return instance;
+        return instance.get();
     }
 
     Object transformJava2Pb(FieldDescriptor fd, Object obj) throws UnsupportedEncodingException, ConvException {

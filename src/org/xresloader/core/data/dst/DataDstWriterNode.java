@@ -1,16 +1,16 @@
 package org.xresloader.core.data.dst;
 
-import org.xresloader.core.ProgramOptions;
-import org.xresloader.core.data.err.ConvException;
-import org.xresloader.core.data.vfy.DataVerifyImpl;
-import org.xresloader.core.data.vfy.DataVerifyNumberRange;
-import org.xresloader.core.engine.IdentifyDescriptor;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
+
+import org.xresloader.core.ProgramOptions;
+import org.xresloader.core.data.err.ConvException;
+import org.xresloader.core.data.vfy.DataVerifyImpl;
+import org.xresloader.core.data.vfy.DataVerifyNumberRange;
+import org.xresloader.core.engine.IdentifyDescriptor;
 
 /**
  * Created by owentou on 2014/10/11.
@@ -953,30 +953,26 @@ public class DataDstWriterNode {
     private DataDstChildrenNode referBrothers = null;
     private int listIndex = -1;
 
-    private static HashMap<String, DataDstTypeDescriptor> defaultDescs = new HashMap<>();
+    private static final ThreadLocal<HashMap<String, DataDstTypeDescriptor>> defaultDescs =
+            ThreadLocal.withInitial(HashMap::new);
 
-    static DataVerifyImpl defaultValidatorInt32 = null;
-    static DataVerifyImpl defaultValidatorUInt32 = null;
-    static DataVerifyImpl defaultValidatorUInt64 = null;
+    public static void clearThreadState() {
+        defaultDescs.remove();
+    }
+
+    private static final DataVerifyImpl defaultValidatorInt32 = new DataVerifyNumberRange("int32", "-2147483648-2147483647");
+    private static final DataVerifyImpl defaultValidatorUInt32 = new DataVerifyNumberRange("uint32", "0-4294967295");
+    private static final DataVerifyImpl defaultValidatorUInt64 = new DataVerifyNumberRange("uint64", ">=0");
 
     public static DataVerifyImpl getDefaultTypeValidatorInt32() {
-        if (defaultValidatorInt32 == null) {
-            defaultValidatorInt32 = new DataVerifyNumberRange("int32", "-2147483648-2147483647");
-        }
         return defaultValidatorInt32;
     }
 
     public static DataVerifyImpl getDefaultTypeValidatorUInt32() {
-        if (defaultValidatorUInt32 == null) {
-            defaultValidatorUInt32 = new DataVerifyNumberRange("uint32", "0-4294967295");
-        }
         return defaultValidatorUInt32;
     }
 
     public static DataVerifyImpl getDefaultTypeValidatorUInt64() {
-        if (defaultValidatorUInt64 == null) {
-            defaultValidatorUInt64 = new DataVerifyNumberRange("uint64", ">=0");
-        }
         return defaultValidatorUInt64;
     }
 
@@ -988,7 +984,7 @@ public class DataDstWriterNode {
         } else {
             key = String.format("%s", type.name());
         }
-        DataDstTypeDescriptor ret = defaultDescs.getOrDefault(key, null);
+        DataDstTypeDescriptor ret = defaultDescs.get().getOrDefault(key, null);
         if (ret != null) {
             return ret;
         }
@@ -1001,7 +997,7 @@ public class DataDstWriterNode {
         }
 
         ret = new DataDstTypeDescriptor(type, null, null, null, SPECIAL_MESSAGE_TYPE.NONE, typeValidator, referToEnum);
-        defaultDescs.put(key, ret);
+        defaultDescs.get().put(key, ret);
         return ret;
     }
 

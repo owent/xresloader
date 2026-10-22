@@ -18,12 +18,22 @@ jobs:
       matrix:
         os: [ubuntu-latest]
     runs-on: ${{ matrix.os }}
+    permissions:
+      contents: write
+    env:
+      RELEASE_TAG: ${{ github.ref_name }}
+      BUILD_SHA: ${{ github.sha }}
     steps:
       - name: Checkout
         uses: actions/checkout@v7 # https://github.com/actions/checkout
         with:
           lfs: true
           submodules: true
+          fetch-depth: 0
+      - name: Read annotated tag message
+        run: |
+          python3 -m unittest discover -s test/tools -p 'test_*.py'
+          python3 tools/release_notes.py --tag "$RELEASE_TAG" --commit "$BUILD_SHA" --output build/release-notes.md
       - name: Set up JDK 21
         uses: actions/setup-java@v6 # https://github.com/actions/setup-java
         with:
@@ -38,32 +48,41 @@ jobs:
           python3 gen_header_v2.py
           python3 gen_header_v3.py
           cd ..
-          mkdir -p target/package
-          sh ./mvnw -Dproject.target.javaVersion=21 package --file pom.xml
-          for JAR_FILE in target/*.jar; do
-            if [[ -e "$JAR_FILE" ]]; then
-              JAR_BASENAME=$(basename "$JAR_FILE")
-              mv "$JAR_FILE" "target/package/${JAR_BASENAME/.jar/-jre21.jar}"
-            fi
+          # Keep both variants outside target so the next clean preserves them.
+          mkdir -p build/release-package
+          sh ./mvnw -Dproject.target.javaVersion=21 clean verify --file pom.xml
+          for JAR_FILE in target/xresloader-*.jar; do
+            JAR_BASENAME=$(basename "$JAR_FILE")
+            cp "$JAR_FILE" "build/release-package/${JAR_BASENAME/.jar/-jre21.jar}"
           done
-          sh ./mvnw clean --file pom.xml
-          mkdir -p target/package
-          sh ./mvnw -Dproject.target.javaVersion=17 package --file pom.xml
-          for JAR_FILE in target/*.jar; do
-            mv "$JAR_FILE" "target/package/"
+          sh ./mvnw -Dproject.target.javaVersion=17 clean verify --file pom.xml
+          for JAR_FILE in target/xresloader-*.jar; do
+            cp "$JAR_FILE" build/release-package/
           done
 
           if [[ -e "target/protocols.zip" ]]; then rm -f "target/protocols.zip"; fi
           if [[ -e "target/tools.zip" ]]; then rm -f "target/tools.zip"; fi
           mkdir target/protocols
           cp -rf third_party/xresloader-protocol/core/*.proto third_party/xresloader-protocol/core/extensions header/*.pb target/protocols/
-          echo $(cd target/protocols && zip -r "../protocols.zip" *)
-          echo $(cd tools && zip -r "../target/tools.zip" requirements.txt extensions.pb *.py)
-      - uses: xresloader/upload-to-github-release@v1
+          (cd target/protocols && zip -r "../protocols.zip" *)
+          (cd tools && zip -r "../target/tools.zip" requirements.txt extensions.pb *.py)
+      - name: Upload release assets and tag message
+        id: release
+        uses: xresloader/upload-to-github-release@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          file: "target/protocols.zip;target/tools.zip;target/package/*.jar"
+          file: "target/protocols.zip;target/tools.zip;build/release-package/*.jar"
           tags: true
+          tag_name: ${{ github.ref_name }}
+          default_release_name: ${{ github.ref_name }}
+          update_release_body_path: build/release-notes.md
           draft: true
           overwrite: true
+      - name: Verify Release body
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          RELEASE_ID: ${{ steps.release.outputs.release_id }}
+        run: |
+          gh api "repos/$GITHUB_REPOSITORY/releases/$RELEASE_ID" > build/release.json
+          python3 tools/release_notes.py --tag "$RELEASE_TAG" --commit "$BUILD_SHA" --verify-release build/release.json

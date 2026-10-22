@@ -6,13 +6,15 @@
 
     <groupId>org.xresloader</groupId>
     <artifactId>xresloader</artifactId>
-    <version>2.23.7</version>
+    <version>2.24.0-beta</version>
     <packaging>jar</packaging>
     <name>xresloader</name>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.target.javaVersion>17</project.target.javaVersion>
+        <!-- Keep expected failure diagnostics in the test reports, with failures still reported on the console. -->
+        <maven.test.redirectTestOutputToFile>true</maven.test.redirectTestOutputToFile>
         <nashorn.version>15.7</nashorn.version>
         <protobuf.version>4.36.2</protobuf.version>
         <poi.version>5.5.1</poi.version>
@@ -133,6 +135,9 @@
 
         <sourceDirectory>src</sourceDirectory>
         <testSourceDirectory>test</testSourceDirectory>
+        <!-- Gradle uses target/classes/java; Maven must not scan or package that subtree. -->
+        <outputDirectory>${project.build.directory}/maven/classes</outputDirectory>
+        <testOutputDirectory>${project.build.directory}/maven/test-classes</testOutputDirectory>
 
         <plugins>
             <plugin>

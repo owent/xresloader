@@ -6,7 +6,7 @@ plugins {
 
 
 group = 'org.xresloader'
-version = '2.23.7'
+version = '2.24.0-beta'
 description = 'xresloader'
 layout.buildDirectory = layout.projectDirectory.dir('target')
 

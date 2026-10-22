@@ -73,6 +73,10 @@ public class SchemeConf {
         key = new SchemeKeyConf();
     }
 
+    public static void clearThreadState() {
+        instance.remove();
+    }
+
     public static boolean getLogicalValue(String data) {
         if (data == null || data.isEmpty() || 0 == data.compareTo("0") || 0 == data.compareToIgnoreCase("no")
                 || 0 == data.compareToIgnoreCase("false") || 0 == data.compareToIgnoreCase("disable")) {

@@ -23,7 +23,7 @@ import org.xresloader.core.scheme.SchemeConf;
  */
 public class DataDstXml extends DataDstJava {
 
-    static Pattern xmlTagNameValidateRule = null;
+    private static final Pattern xmlTagNameValidateRule = Pattern.compile("[a-zA-Z][^\\s:]*");
 
     static boolean validateTagName(String in) {
         if (in == null) {
@@ -36,10 +36,6 @@ public class DataDstXml extends DataDstJava {
 
         if (in.length() >= 3 && in.substring(0, 3).equalsIgnoreCase("xml")) {
             return false;
-        }
-
-        if (xmlTagNameValidateRule == null) {
-            xmlTagNameValidateRule = Pattern.compile("[a-zA-Z][^\\s:]*");
         }
 
         return xmlTagNameValidateRule.matcher(in).matches();

@@ -11,7 +11,7 @@ import org.xresloader.core.data.vfy.DataVerifyImpl.ValidatorTokens;
 public class ValidatorTokensTest {
 
   @Test
-  public void IdentityTest() {
+  public void identityTest() {
     var vfys = DataValidatorFactory.buildValidatorTokens("\"test.a.b\"  | b.c|d|gf");
     assert vfys.size() == 4;
     assert vfys.get(0).toString().equals("test.a.b");
@@ -21,7 +21,7 @@ public class ValidatorTokensTest {
   }
 
   @Test
-  public void RangeTest() {
+  public void rangeTest() {
     var vfys = DataValidatorFactory.buildValidatorTokens("\">= 123\"  | <456 |-9 - -10|0-100");
     assert vfys.size() == 4;
     assert vfys.get(0).toString().equals(">=123");
@@ -31,7 +31,7 @@ public class ValidatorTokensTest {
   }
 
   @Test
-  public void FunctionTest() {
+  public void functionTest() {
     var vfys = DataValidatorFactory
         .buildValidatorTokens(
             "\"InText\"(\"text.log\", 2)| InTable  (  Test.xlsx , \"Test | Sheet\", 10  )|In.Table(Test.xlsx,TestSheet,10)");
@@ -42,19 +42,19 @@ public class ValidatorTokensTest {
   }
 
   @Test
-  public void NullExpressionReturnsNull() {
+  public void nullExpressionReturnsNull() {
     assertNull(DataValidatorFactory.buildValidatorTokens(null));
   }
 
   @Test
-  public void WhitespaceExpressionReturnsEmptyList() {
+  public void whitespaceExpressionReturnsEmptyList() {
     var vfys = DataValidatorFactory.buildValidatorTokens("   \t  \r\n   ");
     assertNotNull(vfys);
     assertTrue(vfys.isEmpty());
   }
 
   @Test
-  public void ConsecutiveAndTrailingPipesIgnored() {
+  public void consecutiveAndTrailingPipesIgnored() {
     var vfys = DataValidatorFactory.buildValidatorTokens("foo||bar| |baz|");
     assertEquals(3, vfys.size());
     assertEquals("foo", vfys.get(0).toString());
@@ -63,7 +63,7 @@ public class ValidatorTokensTest {
   }
 
   @Test
-  public void NestedFunctionsPreserveStructure() {
+  public void nestedFunctionsPreserveStructure() {
     var vfys = DataValidatorFactory
         .buildValidatorTokens("Outer(InnerOne(\"v1\"),InnerTwo(InnerThree(123)))|Simple");
     assertEquals(2, vfys.size());
@@ -83,7 +83,7 @@ public class ValidatorTokensTest {
   }
 
   @Test
-  public void PipeInsideStringStaysLiteral() {
+  public void pipeInsideStringStaysLiteral() {
     var vfys = DataValidatorFactory.buildValidatorTokens("InText(\"a|b,c\")|'dangling|pipe'");
     assertEquals(2, vfys.size());
     assertEquals("InText(\"a|b,c\")", vfys.get(0).toString());

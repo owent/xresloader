@@ -25,7 +25,7 @@ public class DataVerifyInTableColumn extends DataVerifyImpl {
         this.parameters.ensureCapacity(tokens.getParameters().size());
         for (ValidatorParameter param : tokens.getParameters()) {
             if (!param.isString()) {
-                ProgramOptions.getLoger().error("Only string parameter is supported for validator %s",
+                ProgramOptions.getLogger().error("Only string parameter is supported for validator %s",
                         tokens.getName());
                 this.valid = false;
                 continue;
@@ -34,14 +34,14 @@ public class DataVerifyInTableColumn extends DataVerifyImpl {
         }
         if (this.parameters.size() < 5) {
             this.valid = false;
-            ProgramOptions.getLoger().error("Invalid in text validator %s", tokens.getName());
+            ProgramOptions.getLogger().error("Invalid in text validator %s", tokens.getName());
             return;
         }
 
         this.file = DataSrcImpl.getDataFile(this.parameters.get(1));
         if (file == null) {
             this.valid = false;
-            ProgramOptions.getLoger().error("Can not find file %s for validator %s", this.parameters.get(1),
+            ProgramOptions.getLogger().error("Can not find file %s for validator %s", this.parameters.get(1),
                     tokens.getName());
         }
     }
@@ -57,7 +57,7 @@ public class DataVerifyInTableColumn extends DataVerifyImpl {
         }
 
         if (this.parameters.size() < 5) {
-            ProgramOptions.getLoger().error("Invalid in text validator %s", this.name);
+            ProgramOptions.getLogger().error("Invalid in text validator %s", this.name);
             return false;
         }
 
@@ -68,7 +68,7 @@ public class DataVerifyInTableColumn extends DataVerifyImpl {
             CustomDataTableIndex tableIndex = ExcelEngine.openStreamTableIndex(file, sheetName);
 
             if (tableIndex == null) {
-                ProgramOptions.getLoger().error("Can not open sheet %s in %s for table column validator %s",
+                ProgramOptions.getLogger().error("Can not open sheet %s in %s for table column validator %s",
                         sheetName, this.file.getAbsolutePath(), this.name);
                 return false;
             }
@@ -79,10 +79,10 @@ public class DataVerifyInTableColumn extends DataVerifyImpl {
             } else {
                 int keyRow = Integer.parseInt(this.parameters.get(4)) - 1;
                 String keyValue = this.parameters.get(5).trim();
-                String normalizedkeyValue = IdentifyEngine.normalize(keyValue);
+                String normalizedKeyValue = IdentifyEngine.normalize(keyValue);
                 CustomDataRowIndex row = tableIndex.getRow(keyRow);
                 if (null == row) {
-                    ProgramOptions.getLoger().error("Invalid key row in table column validator %s", this.name);
+                    ProgramOptions.getLogger().error("Invalid key row in table column validator %s", this.name);
                     return false;
                 }
                 for (int i = 0; i < row.getColumnSize(); ++i) {
@@ -91,8 +91,8 @@ public class DataVerifyInTableColumn extends DataVerifyImpl {
                         continue;
                     }
 
-                    String trimedValue = value.trim();
-                    if (trimedValue.equals(keyValue) || trimedValue.equals(normalizedkeyValue)) {
+                    String trimmedValue = value.trim();
+                    if (trimmedValue.equals(keyValue) || trimmedValue.equals(normalizedKeyValue)) {
                         startColumn = i;
                         break;
                     }
@@ -100,11 +100,11 @@ public class DataVerifyInTableColumn extends DataVerifyImpl {
             }
 
             if (startRow < 0) {
-                ProgramOptions.getLoger().error("Invalid start row in table column validator %s", this.name);
+                ProgramOptions.getLogger().error("Invalid start row in table column validator %s", this.name);
                 return false;
             }
             if (startColumn < 0) {
-                ProgramOptions.getLoger().error("Invalid column or column not found in table column validator %s",
+                ProgramOptions.getLogger().error("Invalid column or column not found in table column validator %s",
                         this.name);
                 return false;
             }
@@ -128,12 +128,12 @@ public class DataVerifyInTableColumn extends DataVerifyImpl {
                 dataSet.add(value);
             }
         } catch (NumberFormatException e) {
-            ProgramOptions.getLoger().error("Can not parse number of validator %s: %s",
+            ProgramOptions.getLogger().error("Can not parse number of validator %s: %s",
                     this.name,
                     e.getMessage());
             return false;
         } catch (Exception e) {
-            ProgramOptions.getLoger().error("Can not open file %s for %s validator: %s", this.parameters.get(1),
+            ProgramOptions.getLogger().error("Can not open file %s for %s validator: %s", this.parameters.get(1),
                     this.name,
                     e.getMessage());
             return false;

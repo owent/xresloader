@@ -17,12 +17,12 @@ public class IdentifyEngine {
      * @param dataFieldIndex 数据字段序号（实际值）
      * @return 标识符描述对象
      */
-    static public IdentifyDescriptor n2i(String name, int dataFieldIndex) {
+    public static IdentifyDescriptor n2i(String name, int dataFieldIndex) {
         IdentifyDescriptor ret = new IdentifyDescriptor(dataFieldIndex);
-        int verify_index = name.lastIndexOf('@');
-        if (verify_index >= 0) {
-            ret.dataSourceFieldValidator = name.substring(verify_index + 1);
-            ret.name = normalize(name.substring(0, verify_index));
+        int verifyIndex = name.lastIndexOf('@');
+        if (verifyIndex >= 0) {
+            ret.dataSourceFieldValidator = name.substring(verifyIndex + 1);
+            ret.name = normalize(name.substring(0, verifyIndex));
         } else {
             ret.name = normalize(name);
         }
@@ -33,19 +33,19 @@ public class IdentifyEngine {
     /**
      * 把配置名称转换成标识符
      *
-     * @param _name 配置名称
+     * @param name 配置名称
      * @return
      */
-    static public String normalize(String name) {
+    public static String normalize(String name) {
         String[] segs = name.trim().split("\\.");
         for (int i = 0; i < segs.length; ++i) {
-            segs[i] = make_word(segs[i]).trim();
+            segs[i] = makeWord(segs[i]).trim();
         }
 
         return String.join(".", segs);
     }
 
-    static private String make_word(String ident) {
+    private static String makeWord(String ident) {
         SchemeKeyConf cfg = SchemeConf.getInstance().getKey();
 
         // 如果无分词规则就直接返回
@@ -60,47 +60,47 @@ public class IdentifyEngine {
 
         // 过滤不合法前缀
         if (null != cfg.getKeyWordRegexPrefixRule()) {
-            int invalid_index = 0;
-            for (; invalid_index < ident.length(); ++invalid_index) {
-                if (cfg.getKeyWordRegexPrefixRule().matcher(ident.substring(invalid_index, invalid_index + 1))
+            int invalidIndex = 0;
+            for (; invalidIndex < ident.length(); ++invalidIndex) {
+                if (cfg.getKeyWordRegexPrefixRule().matcher(ident.substring(invalidIndex, invalidIndex + 1))
                         .matches())
                     break;
             }
-            ident = ident.substring(invalid_index);
+            ident = ident.substring(invalidIndex);
         }
 
         // 分词
         LinkedList<String> words = new LinkedList<>();
-        String this_word = "";
+        String thisWord = "";
         for (char c : ident.toCharArray()) {
             if (cfg.getKeyWordRegex().matcher(String.valueOf(c)).matches()) {
-                if (!this_word.isEmpty()) {
+                if (!thisWord.isEmpty()) {
                     if (SchemeKeyConf.KeyCase.LOWER == cfg.getLetterCase())
-                        this_word = this_word.toLowerCase();
+                        thisWord = thisWord.toLowerCase();
                     else if (SchemeKeyConf.KeyCase.UPPER == cfg.getLetterCase())
-                        this_word = this_word.toUpperCase();
+                        thisWord = thisWord.toUpperCase();
 
-                    words.add(this_word);
+                    words.add(thisWord);
                 }
 
                 if (null != cfg.getKeyWordRegexRemoveRule()
                         && !cfg.getKeyWordRegexRemoveRule().matcher(String.valueOf(c)).matches())
-                    this_word = String.valueOf(c);
+                    thisWord = String.valueOf(c);
                 else
-                    this_word = "";
+                    thisWord = "";
             } else {
-                this_word += c;
+                thisWord += c;
             }
         }
 
         // 最后一个词
-        if (!this_word.isEmpty()) {
+        if (!thisWord.isEmpty()) {
             if (SchemeKeyConf.KeyCase.LOWER == cfg.getLetterCase())
-                this_word = this_word.toLowerCase();
+                thisWord = thisWord.toLowerCase();
             else if (SchemeKeyConf.KeyCase.UPPER == cfg.getLetterCase())
-                this_word = this_word.toUpperCase();
+                thisWord = thisWord.toUpperCase();
 
-            words.add(this_word);
+            words.add(thisWord);
         }
 
         // 加前后缀，加分词符

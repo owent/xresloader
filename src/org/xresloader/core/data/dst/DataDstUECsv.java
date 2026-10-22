@@ -230,14 +230,14 @@ public class DataDstUECsv extends DataDstUEBase {
         // Hashmap
         if (data instanceof Map) {
             Map<String, Object> mp = (Map<String, Object>) data;
-            ArrayList<Map.Entry<String, Object>> sorted_array = new ArrayList<>();
-            sorted_array.ensureCapacity(mp.size());
-            sorted_array.addAll(mp.entrySet());
-            sorted_array.sort((l, r) -> {
+            ArrayList<Map.Entry<String, Object>> sortedArray = new ArrayList<>();
+            sortedArray.ensureCapacity(mp.size());
+            sortedArray.addAll(mp.entrySet());
+            sortedArray.sort((l, r) -> {
                 return l.getKey().compareTo(r.getKey());
             });
 
-            for (Map.Entry<String, Object> item : sorted_array) {
+            for (Map.Entry<String, Object> item : sortedArray) {
                 if (prefix.isEmpty()) {
                     writeConstData(sp, item.getValue(), String.format("%s", item.getKey()));
                 } else {
@@ -328,10 +328,10 @@ public class DataDstUECsv extends DataDstUEBase {
             sb.append(SchemeConf.getInstance().getUEOptions().codeOutputCsvObjectBegin);
             if (!valueDesc.isEmpty()) {
                 boolean isFirst = true;
-                ArrayList<Map.Entry<?, ?>> sorted_array = new ArrayList<>();
-                sorted_array.ensureCapacity(specialInnerHashMap.size());
-                sorted_array.addAll(specialInnerHashMap.entrySet());
-                sorted_array.sort((l, r) -> {
+                ArrayList<Map.Entry<?, ?>> sortedArray = new ArrayList<>();
+                sortedArray.ensureCapacity(specialInnerHashMap.size());
+                sortedArray.addAll(specialInnerHashMap.entrySet());
+                sortedArray.sort((l, r) -> {
                     if (l.getKey() instanceof Integer && r.getKey() instanceof Integer) {
                         return ((Integer) l.getKey()).compareTo((Integer) r.getKey());
                     } else if (l.getKey() instanceof Long && r.getKey() instanceof Long) {
@@ -341,7 +341,7 @@ public class DataDstUECsv extends DataDstUEBase {
                     }
                 });
 
-                for (Map.Entry<?, ?> subval : sorted_array) {
+                for (Map.Entry<?, ?> subval : sortedArray) {
                     isFirst = tryWriteSeprator(sb, isFirst);
                     sb.append(SchemeConf.getInstance().getUEOptions().codeOutputCsvObjectBegin);
                     sb.append("\"");
@@ -423,7 +423,7 @@ public class DataDstUECsv extends DataDstUEBase {
         dumpFieldValue(sb, descWraper, val, isTopLevel);
     }
 
-    static private boolean tryWriteSeprator(StringBuffer sb, boolean isFirst) {
+    private static boolean tryWriteSeprator(StringBuffer sb, boolean isFirst) {
         if (isFirst) {
             return false;
         }

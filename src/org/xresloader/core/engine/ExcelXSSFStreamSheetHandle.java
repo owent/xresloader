@@ -58,7 +58,7 @@ public class ExcelXSSFStreamSheetHandle implements XSSFSheetXMLHandler.SheetCont
 
         if (rowNum >= DataSrcImpl.LOG_PROCESS_BOUND && rowNum % DataSrcImpl.LOG_PROCESS_BOUND == 0
                 && currentTableIndex != null) {
-            ProgramOptions.getLoger().info("  > File: %s, Table: %s, indexes %d rows", currentTableIndex.getFilePath(),
+            ProgramOptions.getLogger().info("  > File: %s, Table: %s, indexes %d rows", currentTableIndex.getFilePath(),
                     currentTableIndex.getSheetName(), rowNum);
         }
     }
@@ -74,7 +74,7 @@ public class ExcelXSSFStreamSheetHandle implements XSSFSheetXMLHandler.SheetCont
     public void endSheet() {
         if (this.maxRowNumber > DataSrcImpl.LOG_PROCESS_BOUND && this.maxRowNumber % DataSrcImpl.LOG_PROCESS_BOUND != 0
                 && this.currentTableIndex != null) {
-            ProgramOptions.getLoger().info("  > File: %s, Table: %s, indexes %d rows",
+            ProgramOptions.getLogger().info("  > File: %s, Table: %s, indexes %d rows",
                     this.currentTableIndex.getFilePath(), this.currentTableIndex.getSheetName(), this.maxRowNumber);
         }
     }
@@ -99,16 +99,16 @@ public class ExcelXSSFStreamSheetHandle implements XSSFSheetXMLHandler.SheetCont
         currentRowIndex.getColumns().set(thisCol, formattedValue);
     }
 
-    static public ExcelEngine.CustomDataTableIndex buildCustomTableIndex(File file, String sheetName) {
+    public static ExcelEngine.CustomDataTableIndex buildCustomTableIndex(File file, String sheetName) {
         if (file == null || sheetName == null) {
             return null;
         }
 
-        try (OPCPackage xlsx_package = OPCPackage.open(file, PackageAccess.READ)) {
-            ReadOnlySharedStringsTable strings = new ReadOnlySharedStringsTable(xlsx_package);
-            XSSFReader xssf_reader = new XSSFReader(xlsx_package);
-            StylesTable styles = xssf_reader.getStylesTable();
-            XSSFReader.SheetIterator iter = (XSSFReader.SheetIterator) xssf_reader.getSheetsData();
+        try (OPCPackage xlsxPackage = OPCPackage.open(file, PackageAccess.READ)) {
+            ReadOnlySharedStringsTable strings = new ReadOnlySharedStringsTable(xlsxPackage);
+            XSSFReader xssfReader = new XSSFReader(xlsxPackage);
+            StylesTable styles = xssfReader.getStylesTable();
+            XSSFReader.SheetIterator iter = (XSSFReader.SheetIterator) xssfReader.getSheetsData();
             while (iter.hasNext()) {
                 try (InputStream stream = iter.next()) {
                     if (!sheetName.equals(iter.getSheetName())) {
@@ -119,42 +119,42 @@ public class ExcelXSSFStreamSheetHandle implements XSSFSheetXMLHandler.SheetCont
                             file.getCanonicalPath(), sheetName);
 
                     DataFormatter formatter = new DataFormatter();
-                    InputSource sheet_source = new InputSource(stream);
+                    InputSource sheetSource = new InputSource(stream);
                     try {
-                        XMLReader sheet_parser = XMLHelper.newXMLReader();
+                        XMLReader sheetParser = XMLHelper.newXMLReader();
                         ContentHandler handler = new XSSFSheetXMLHandler(styles, null, strings,
                                 new ExcelXSSFStreamSheetHandle(tableIndex), formatter, false);
-                        sheet_parser.setContentHandler(handler);
-                        sheet_parser.parse(sheet_source);
+                        sheetParser.setContentHandler(handler);
+                        sheetParser.parse(sheetSource);
 
                         return tableIndex;
                     } catch (org.xml.sax.SAXException e) {
-                        ProgramOptions.getLoger().error(
+                        ProgramOptions.getLogger().error(
                                 "Open source file \"%s\" and parse sheet \"%s\" failed, SAX engine appears to be broken - %s.",
                                 file.getPath(), sheetName, e.getMessage());
                     } catch (ParserConfigurationException e) {
-                        ProgramOptions.getLoger().error(
+                        ProgramOptions.getLogger().error(
                                 "Open source file \"%s\" and parse sheet \"%s\" failed, SAX parser appears to be broken - %s.",
                                 file.getPath(), sheetName, e.getMessage());
                     } catch (java.io.IOException e) {
-                        ProgramOptions.getLoger().error("open source file \"%s\" and parse sheet \"%s\" failed, %s.",
+                        ProgramOptions.getLogger().error("open source file \"%s\" and parse sheet \"%s\" failed, %s.",
                                 file.getPath(), sheetName, e.getMessage());
                     }
                 }
             }
         } catch (org.apache.poi.openxml4j.exceptions.OpenXML4JException e) {
-            ProgramOptions.getLoger().error(
+            ProgramOptions.getLogger().error(
                     "Open source file \"%s\" and parse sheet \"%s\" failed, OpenXML4J engine appears to be broken - %s.",
                     file.getPath(), sheetName, e.getMessage());
         } catch (org.xml.sax.SAXException e) {
-            ProgramOptions.getLoger().error(
+            ProgramOptions.getLogger().error(
                     "Open source file \"%s\" and parse sheet \"%s\" failed, SAX engine appears to be broken - %s.",
                     file.getPath(), sheetName, e.getMessage());
         } catch (java.io.IOException e) {
-            ProgramOptions.getLoger().error("Open source file \"%s\" and parse sheet \"%s\" failed, %s.",
+            ProgramOptions.getLogger().error("Open source file \"%s\" and parse sheet \"%s\" failed, %s.",
                     file.getPath(), sheetName, e.getMessage());
         } catch (Exception e) {
-            ProgramOptions.getLoger().error("Open source file \"%s\" and parse sheet \"%s\" failed, %s.",
+            ProgramOptions.getLogger().error("Open source file \"%s\" and parse sheet \"%s\" failed, %s.",
                     file.getPath(), sheetName, e.getMessage());
         }
 

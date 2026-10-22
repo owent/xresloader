@@ -21,7 +21,7 @@ import org.xresloader.core.scheme.SchemeConf;
  * Created by owentou on 2014/10/9.
  */
 public class DataSrcExcel extends DataSrcImpl {
-    static private class DataSheetInfo extends ExcelEngine.DataSheetWrapper {
+    private static class DataSheetInfo extends ExcelEngine.DataSheetWrapper {
         public Sheet userModuleTable = null;
         public ExcelEngine.CustomDataTableIndex customTableIndex = null;
         public ExcelEngine.FormulaWrapper formula = null;
@@ -106,7 +106,7 @@ public class DataSrcExcel extends DataSrcImpl {
         }
     }
 
-    static private class DataExcelGridInfo extends ExcelEngine.DataItemGridWrapper {
+    private static class DataExcelGridInfo extends ExcelEngine.DataItemGridWrapper {
         private DataSheetInfo sheetInfo = null;
 
         public DataExcelGridInfo(DataSheetInfo sheetInfo, boolean transpose, int dataItemIndex) {
@@ -204,7 +204,7 @@ public class DataSrcExcel extends DataSrcImpl {
             }
             return ret;
         } catch (ConvException ex) {
-            ProgramOptions.getLoger().error("Initialize DataSrcExcel failed: %s", ex.getMessage());
+            ProgramOptions.getLogger().error("Initialize DataSrcExcel failed: %s", ex.getMessage());
             return -1;
         }
     }
@@ -227,22 +227,22 @@ public class DataSrcExcel extends DataSrcImpl {
         public SchemeConf.DataInfo file = null;
         public HashMap<String, String> macros = new HashMap<>();
 
-        public MacroFileCache(SchemeConf.DataInfo _f, String fixed_file_name) {
-            file = _f;
-            file.filePath = fixed_file_name;
+        public MacroFileCache(SchemeConf.DataInfo f, String fixedFileName) {
+            file = f;
+            file.filePath = fixedFileName;
         }
     }
 
     /***
      * macro表cache
      */
-    static private class MacroCacheInfo {
+    private static class MacroCacheInfo {
         /*** filePath:key->value ***/
         private final HashMap<String, MacroFileCache> cache = new HashMap<>();
         private final HashMap<String, String> empty = new HashMap<>(); // 空项特殊处理
     }
 
-    private static final MacroCacheInfo macro_cache = new MacroCacheInfo();
+    private static final MacroCacheInfo macroCache = new MacroCacheInfo();
 
     /**
      * 创建DataSheetWrapper对象
@@ -256,7 +256,7 @@ public class DataSrcExcel extends DataSrcImpl {
             boolean enableFormula) {
         File file = DataSrcImpl.getDataFile(dataSource.filePath);
         if (file == null) {
-            ProgramOptions.getLoger().warn("Open data source file \"%s\" failed, not found.", dataSource.filePath,
+            ProgramOptions.getLogger().warn("Open data source file \"%s\" failed, not found.", dataSource.filePath,
                     dataSource.tableName);
             return null;
         }
@@ -266,14 +266,14 @@ public class DataSrcExcel extends DataSrcImpl {
         if (false == enableFormula) {
             ret.customTableIndex = ExcelEngine.openStreamTableIndex(file, dataSource.tableName);
             if (ret.customTableIndex == null) {
-                ProgramOptions.getLoger().error("Open data source file \"%s\" or sheet \"%s\" failed.",
+                ProgramOptions.getLogger().error("Open data source file \"%s\" or sheet \"%s\" failed.",
                         file.getPath(), dataSource.tableName);
                 return null;
             }
         } else {
             ret.userModuleTable = ExcelEngine.openUserModuleSheet(file, dataSource.tableName);
             if (null == ret.userModuleTable) {
-                ProgramOptions.getLoger().error("Open data source file \"%s\" or sheet \"%s\" failed.",
+                ProgramOptions.getLogger().error("Open data source file \"%s\" or sheet \"%s\" failed.",
                         file.getPath(), dataSource.tableName);
                 return null;
             }
@@ -302,30 +302,30 @@ public class DataSrcExcel extends DataSrcImpl {
     /***
      * 构建macro表cache，由于macro表大多数情况下都一样，所以加缓存优化
      */
-    HashMap<String, String> initMacroWithCache(List<SchemeConf.DataInfo> src_list) throws ConvException {
-        LinkedList<HashMap<String, String>> data_filled = new LinkedList<>();
+    HashMap<String, String> initMacroWithCache(List<SchemeConf.DataInfo> srcList) throws ConvException {
+        LinkedList<HashMap<String, String>> dataFilled = new LinkedList<>();
 
         IdentifyDescriptor columnIdent = new IdentifyDescriptor(-1);
 
         // 枚举所有macro表信息
-        for (SchemeConf.DataInfo src : src_list) {
+        for (SchemeConf.DataInfo src : srcList) {
             String filePath = "";
             if (false == src.filePath.isEmpty()) {
                 filePath = src.filePath;
             }
-            String fp_name = filePath + "/" + src.tableName;
+            String fpName = filePath + "/" + src.tableName;
 
             // 优先读缓存
-            MacroFileCache res = macro_cache.cache.getOrDefault(fp_name, null);
+            MacroFileCache res = macroCache.cache.getOrDefault(fpName, null);
             if (null != res) {
                 // macros 表不处理数据结束行列
                 if (res.file.filePath.equals(filePath) && res.file.tableName.equals(src.tableName)
                         && res.file.dataRowBegin == src.dataRowBegin
                         && res.file.dataColumnBegin == src.dataColumnBegin) {
-                    data_filled.add(res.macros);
+                    dataFilled.add(res.macros);
                     continue;
                 } else {
-                    ProgramOptions.getLoger().warn(
+                    ProgramOptions.getLogger().warn(
                             "Try to open macro source \"%s:%s\" (row=%d,col=%d) but already has cache \"%s:%s\" (row=%d,col=%d). the old macros will be covered",
                             filePath, src.tableName, src.dataRowBegin, src.dataColumnBegin, res.file.filePath,
                             res.file.tableName, res.file.dataRowBegin, res.file.dataColumnBegin);
@@ -334,21 +334,21 @@ public class DataSrcExcel extends DataSrcImpl {
             res = new MacroFileCache(src, filePath);
 
             if (filePath.isEmpty() || src.tableName.isEmpty() || src.dataColumnBegin <= 0 || src.dataRowBegin <= 0) {
-                ProgramOptions.getLoger().warn("Macro source \"%s\" (%s:%d, %d) ignored.", filePath, src.tableName,
+                ProgramOptions.getLogger().warn("Macro source \"%s\" (%s:%d, %d) ignored.", filePath, src.tableName,
                         src.dataRowBegin, src.dataColumnBegin);
                 continue;
             }
 
             File file = DataSrcImpl.getDataFile(filePath);
             if (file == null) {
-                ProgramOptions.getLoger().warn("Open data source file \"%s\" failed, not found.", filePath,
+                ProgramOptions.getLogger().warn("Open data source file \"%s\" failed, not found.", filePath,
                         src.tableName);
                 continue;
             }
 
             ExcelEngine.CustomDataTableIndex tb = ExcelEngine.openStreamTableIndex(file, src.tableName);
             if (null == tb) {
-                ProgramOptions.getLoger().warn("Open macro source \"%s\" or sheet %s failed.", filePath,
+                ProgramOptions.getLogger().warn("Open macro source \"%s\" or sheet %s failed.", filePath,
                         src.tableName);
                 continue;
             }
@@ -357,43 +357,43 @@ public class DataSrcExcel extends DataSrcImpl {
                 continue;
             }
 
-            int row_num = tb.getLastRowIndex() + 1;
-            for (int i = src.dataRowBegin - 1; i < row_num; ++i) {
+            int rowNum = tb.getLastRowIndex() + 1;
+            for (int i = src.dataRowBegin - 1; i < rowNum; ++i) {
                 DataItemGridWrapper itemGrid = createDataExcelGridWrapper(sheetWrapper, false, i);
                 columnIdent.resetDataSourcePosition(src.dataColumnBegin - 1);
-                DataContainer<String> data_cache = getStringCache("");
-                ExcelEngine.cell2s(data_cache, itemGrid, columnIdent, DataSrcImpl.getOurInstance());
-                String key = data_cache.get();
+                DataContainer<String> dataCache = getStringCache("");
+                ExcelEngine.cell2s(dataCache, itemGrid, columnIdent, DataSrcImpl.getOurInstance());
+                String key = dataCache.get();
                 columnIdent.resetDataSourcePosition(src.dataColumnBegin);
-                data_cache = getStringCache("");
-                ExcelEngine.cell2s(data_cache, itemGrid, columnIdent, null);
+                dataCache = getStringCache("");
+                ExcelEngine.cell2s(dataCache, itemGrid, columnIdent, null);
 
-                String val = data_cache.get();
+                String val = dataCache.get();
                 if (null != key && null != val && !key.isEmpty() && !val.isEmpty()) {
                     if (res.macros.containsKey(key)) {
-                        ProgramOptions.getLoger().warn("Macro key \"%s\" is used more than once.", key);
+                        ProgramOptions.getLogger().warn("Macro key \"%s\" is used more than once.", key);
                     }
                     res.macros.put(key, val);
                 }
             }
 
-            macro_cache.cache.put(fp_name, res);
-            data_filled.add(res.macros);
+            macroCache.cache.put(fpName, res);
+            dataFilled.add(res.macros);
         }
 
         // 空对象特殊处理
-        if (data_filled.isEmpty()) {
-            return macro_cache.empty;
+        if (dataFilled.isEmpty()) {
+            return macroCache.empty;
         }
 
         // 只有一个macro项，则直接返回
-        if (1 == data_filled.size()) {
-            return data_filled.getFirst();
+        if (1 == dataFilled.size()) {
+            return dataFilled.getFirst();
         }
 
         HashMap<String, String> ret = new HashMap<>();
-        for (HashMap<String, String> copy_from : data_filled) {
-            ret.putAll(copy_from);
+        for (HashMap<String, String> copyFrom : dataFilled) {
+            ret.putAll(copyFrom);
         }
 
         return ret;
@@ -427,7 +427,7 @@ public class DataSrcExcel extends DataSrcImpl {
             }
 
             if (filePath.isEmpty() || src.tableName.isEmpty() || src.dataColumnBegin <= 0 || src.dataRowBegin <= 0) {
-                ProgramOptions.getLoger().error("Data source file \"%s\" (%s:%d, %d) ignored.", src.filePath,
+                ProgramOptions.getLogger().error("Data source file \"%s\" (%s:%d, %d) ignored.", src.filePath,
                         src.tableName, src.dataRowBegin, src.dataColumnBegin);
                 continue;
             }
@@ -550,7 +550,7 @@ public class DataSrcExcel extends DataSrcImpl {
 
                 if (current.lastDataItemIndex > LOG_PROCESS_BOUND
                         && current.lastDataItemIndex % LOG_PROCESS_BOUND != 0) {
-                    ProgramOptions.getLoger().info("  > File: %s, Table: %s, process %d/%d rows",
+                    ProgramOptions.getLogger().info("  > File: %s, Table: %s, process %d/%d rows",
                             current.getDataSource().filePath,
                             current.getDataSource().tableName, current.lastDataItemIndex + 1,
                             current.lastDataItemIndex + 1);
@@ -560,7 +560,7 @@ public class DataSrcExcel extends DataSrcImpl {
 
             current.currentDataGrid = createDataExcelGridWrapper(current, transpose, current.nextDataItemIndex);
             if (current.nextDataItemIndex >= LOG_PROCESS_BOUND && current.nextDataItemIndex % LOG_PROCESS_BOUND == 0) {
-                ProgramOptions.getLoger().info("  > File: %s, Table: %s, process %d/%d rows",
+                ProgramOptions.getLogger().info("  > File: %s, Table: %s, process %d/%d rows",
                         current.getDataSource().filePath,
                         current.getDataSource().tableName, current.nextDataItemIndex,
                         current.lastDataItemIndex + 1);

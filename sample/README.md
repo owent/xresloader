@@ -56,6 +56,24 @@ event_cfg.bin       | oneof功能示例协议二进制输出                    
 event_cfg.lua       | oneof功能示例协议lua输出                           | java -client -jar xresloader.jar -t lua --pretty 2 -m 'DataSource=$XLSX_FILE|test_oneof|3,1' -m 'MacroSource=$XLSX_FILE|macro|2,1' -m ProtoName=event_cfg -m OutputFile=event_cfg.lua -m KeyRow=2 -o $proto_dir
 
 
+## 输出回归验证
+
+`tools/verify_samples.py` 在隔离目录中复制输入，执行本平台的完整 sample 脚本，记录所有生成文件的 SHA-256。比较同时检查新增、缺失和内容变化，不忽略数据字段、换行或排序。运行日志不参与比较，输入文件也必须保持一致。
+
+先用修改前的可执行 JAR 建立基线，再使用修改后的 Maven 或 Gradle JAR 验证：
+
+```bash
+python tools/verify_samples.py --jar build/before.jar --snapshot build/sample-baseline.json --capture
+python tools/verify_samples.py --jar target/xresloader-2.23.7.jar --snapshot build/sample-baseline.json
+python tools/verify_samples.py --jar target/libs/xresloader-2.23.7.jar --snapshot build/sample-baseline.json
+```
+
+命令从仓库根目录执行，需要 Python 3.10 或以上版本。默认工作目录为 `build/sample-regression`，基线 JAR、快照和日志都应放在 `target` 之外，以免被构建清理。工具只清理带有自身标记的隔离 sample 目录。前后必须使用相同输入、平台和工作目录，因为 UE 导入配置包含绝对路径。
+
+Windows 使用 PowerShell 脚本，Unix 使用 Bash 脚本。脚本遇到缺失 JAR 或转换失败会返回失败。也可单独通过 PowerShell 的 `-XresloaderJar` 参数或 Bash 的 `XRESLOADER` 环境变量指定可执行 JAR。
+
+CI 使用 Maven 产物建立快照，再验证 Gradle 产物；修改前后行为比较则需要按上面的步骤保存修改前 JAR。
+
 TODO LIST
 ======
 

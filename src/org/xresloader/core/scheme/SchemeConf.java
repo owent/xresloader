@@ -73,7 +73,7 @@ public class SchemeConf {
         key = new SchemeKeyConf();
     }
 
-    static public boolean getLogicalValue(String data) {
+    public static boolean getLogicalValue(String data) {
         if (data == null || data.isEmpty() || 0 == data.compareTo("0") || 0 == data.compareToIgnoreCase("no")
                 || 0 == data.compareToIgnoreCase("false") || 0 == data.compareToIgnoreCase("disable")) {
             return false;
@@ -154,15 +154,15 @@ public class SchemeConf {
     /**
      * 添加配置数据源
      * 
-     * @param file_path  文件路径
-     * @param table_name 表名
+     * @param filePath  文件路径
+     * @param tableName 表名
      * @param row        行号
      * @param col        列号
      */
-    public void addDataSource(String file_path, String table_name, int rowBegin, int colBegin, int rowEnd, int colEnd) {
+    public void addDataSource(String filePath, String tableName, int rowBegin, int colBegin, int rowEnd, int colEnd) {
         DataInfo data = new DataInfo();
-        data.filePath = file_path;
-        data.tableName = table_name;
+        data.filePath = filePath;
+        data.tableName = tableName;
         data.dataRowBegin = rowBegin;
         data.dataColumnBegin = colBegin;
         data.dataRowEnd = rowEnd;
@@ -174,41 +174,41 @@ public class SchemeConf {
     /**
      * 添加配置数据源
      * 
-     * @param file_path  文件路径
-     * @param table_name 表名
+     * @param filePath  文件路径
+     * @param tableName 表名
      * @param position   行号,列号
      */
-    public void addDataSource(String file_path, String table_name, String position) {
+    public void addDataSource(String filePath, String tableName, String position) {
         int rowBegin = 2;
         int colBegin = 1;
         int rowEnd = 0;
         int colEnd = 0;
 
         String[] group = position.split("[^\\d]");
-        ArrayList<String> valid_group = new ArrayList<>();
+        ArrayList<String> validGroup = new ArrayList<>();
         for (String n : group) {
             if (false == n.isEmpty()) {
-                valid_group.add(n);
+                validGroup.add(n);
             }
         }
 
-        if (valid_group.size() >= 1) {
-            rowBegin = Integer.parseInt(valid_group.get(0));
+        if (validGroup.size() >= 1) {
+            rowBegin = Integer.parseInt(validGroup.get(0));
         }
 
-        if (valid_group.size() >= 2) {
-            colBegin = Integer.parseInt(valid_group.get(1));
+        if (validGroup.size() >= 2) {
+            colBegin = Integer.parseInt(validGroup.get(1));
         }
 
-        if (valid_group.size() >= 3) {
-            rowEnd = Integer.parseInt(valid_group.get(2));
+        if (validGroup.size() >= 3) {
+            rowEnd = Integer.parseInt(validGroup.get(2));
         }
 
-        if (valid_group.size() >= 4) {
-            colEnd = Integer.parseInt(valid_group.get(3));
+        if (validGroup.size() >= 4) {
+            colEnd = Integer.parseInt(validGroup.get(3));
         }
 
-        addDataSource(file_path, table_name, rowBegin, colBegin, rowEnd, colEnd);
+        addDataSource(filePath, tableName, rowBegin, colBegin, rowEnd, colEnd);
     }
 
     /**
@@ -223,15 +223,15 @@ public class SchemeConf {
     /**
      * 添加宏数据源
      * 
-     * @param file_path  文件路径
-     * @param table_name 表名
+     * @param filePath  文件路径
+     * @param tableName 表名
      * @param row        行号
      * @param col        列号
      */
-    public void addMacroSource(String file_path, String table_name, int rowBegin, int colBegin) {
+    public void addMacroSource(String filePath, String tableName, int rowBegin, int colBegin) {
         DataInfo data = new DataInfo();
-        data.filePath = file_path;
-        data.tableName = table_name;
+        data.filePath = filePath;
+        data.tableName = tableName;
         data.dataRowBegin = rowBegin;
         data.dataColumnBegin = colBegin;
         data.dataRowEnd = 0;
@@ -243,31 +243,31 @@ public class SchemeConf {
     /**
      * 添加宏数据源
      * 
-     * @param file_path  文件路径
-     * @param table_name 表名
+     * @param filePath  文件路径
+     * @param tableName 表名
      * @param position   行号,列号
      */
-    public void addMacroSource(String file_path, String table_name, String position) {
+    public void addMacroSource(String filePath, String tableName, String position) {
         int row = 2;
         int col = 1;
 
         String[] group = position.split("[^\\d]");
-        ArrayList<String> valid_group = new ArrayList<>();
+        ArrayList<String> validGroup = new ArrayList<>();
         for (String n : group) {
             if (false == n.isEmpty()) {
-                valid_group.add(n);
+                validGroup.add(n);
             }
         }
 
-        if (valid_group.size() >= 1) {
-            row = Integer.parseInt(valid_group.get(0));
+        if (validGroup.size() >= 1) {
+            row = Integer.parseInt(validGroup.get(0));
         }
 
-        if (valid_group.size() >= 2) {
-            col = Integer.parseInt(valid_group.get(1));
+        if (validGroup.size() >= 2) {
+            col = Integer.parseInt(validGroup.get(1));
         }
 
-        addMacroSource(file_path, table_name, row, col);
+        addMacroSource(filePath, tableName, row, col);
     }
 
     /**
@@ -303,9 +303,9 @@ public class SchemeConf {
             return this.outputFilePathCache;
         }
 
-        ProgramOptions.RenameRule rename_rule = ProgramOptions.getInstance().renameRule;
-        if (null != rename_rule) {
-            this.outputFilePathCache = rename_rule.match.matcher(outputFile).replaceAll(rename_rule.replace);
+        ProgramOptions.RenameRule renameRule = ProgramOptions.getInstance().renameRule;
+        if (null != renameRule) {
+            this.outputFilePathCache = renameRule.match.matcher(outputFile).replaceAll(renameRule.replace);
         } else {
             this.outputFilePathCache = outputFile;
         }
@@ -418,7 +418,7 @@ public class SchemeConf {
                 || blueprintAccess.equalsIgnoreCase("BlueprintSetter")) {
             extUECSV.blueprintAccess = blueprintAccess;
         } else if (!blueprintAccess.isEmpty()) {
-            ProgramOptions.getLoger().warn(
+            ProgramOptions.getLogger().warn(
                     "BlueprintAccess for UECSV can only be one of BlueprintReadOnly/BlueprintReadWrite/BlueprintGetter/BlueprintSetter, the invalid %s will be ignored",
                     blueprintAccess);
         }
@@ -429,7 +429,7 @@ public class SchemeConf {
                 || editAccess.equalsIgnoreCase("EditDefaultsOnly")) {
             extUECSV.editAccess = editAccess;
         } else if (!editAccess.isEmpty()) {
-            ProgramOptions.getLoger().warn(
+            ProgramOptions.getLogger().warn(
                     "EditAccess for UECSV can only be one of EditAnywhere/EditInstanceOnly/EditDefaultsOnly, the invalid %s will be ignored",
                     editAccess);
         }

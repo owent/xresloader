@@ -8,14 +8,14 @@ public class DataVerifyNumberRange extends DataVerifyImpl {
 
     private static Number parseLowerBound(String value, boolean include) throws NumberFormatException {
         Double bound = Double.valueOf(value);
-        boolean is_double = false;
+        boolean isDouble = false;
         if (value.indexOf('.') >= 0) {
-            is_double = true;
+            isDouble = true;
         } else if (bound > Long.MAX_VALUE || bound < Long.MIN_VALUE) {
-            is_double = true;
+            isDouble = true;
         }
 
-        if (is_double) {
+        if (isDouble) {
             return include ? bound - Math.ulp(bound) : bound + Math.ulp(bound);
         } else {
             return include ? Long.valueOf(value) : Long.valueOf(Long.parseLong(value) + 1);
@@ -24,14 +24,14 @@ public class DataVerifyNumberRange extends DataVerifyImpl {
 
     private static Number parseUpperBound(String value, boolean include) throws NumberFormatException {
         Double bound = Double.valueOf(value);
-        boolean is_double = false;
+        boolean isDouble = false;
         if (value.indexOf('.') >= 0) {
-            is_double = true;
+            isDouble = true;
         } else if (bound > Long.MAX_VALUE || bound < Long.MIN_VALUE) {
-            is_double = true;
+            isDouble = true;
         }
 
-        if (is_double) {
+        if (isDouble) {
             return include ? bound + Math.ulp(bound) : bound - Math.ulp(bound);
         } else {
             return include ? Long.valueOf(value) : Long.valueOf(Long.parseLong(value) - 1);
@@ -75,32 +75,32 @@ public class DataVerifyNumberRange extends DataVerifyImpl {
                     this.lowerBound = Double.MIN_VALUE;
                 }
             } catch (NumberFormatException e) {
-                ProgramOptions.getLoger().error("Invalid integer range %s verifier", range);
+                ProgramOptions.getLogger().error("Invalid integer range %s verifier", range);
             }
             return;
         }
 
-        int split_pos = 1;
-        for (; split_pos < range.length(); ++split_pos) {
-            if ('-' == range.charAt(split_pos)) {
+        int splitPos = 1;
+        for (; splitPos < range.length(); ++splitPos) {
+            if ('-' == range.charAt(splitPos)) {
                 break;
             }
         }
 
         try {
-            if (split_pos >= range.length()) {
+            if (splitPos >= range.length()) {
                 this.lowerBound = parseLowerBound(range, true);
                 this.upperBound = parseUpperBound(range, true);
             }
 
-            this.lowerBound = parseLowerBound(range.substring(0, split_pos).trim(), true);
-            if (split_pos + 1 < range.length()) {
-                this.upperBound = parseUpperBound(range.substring(split_pos + 1).trim(), true);
+            this.lowerBound = parseLowerBound(range.substring(0, splitPos).trim(), true);
+            if (splitPos + 1 < range.length()) {
+                this.upperBound = parseUpperBound(range.substring(splitPos + 1).trim(), true);
             } else {
                 this.upperBound = this.lowerBound;
             }
         } catch (NumberFormatException e) {
-            ProgramOptions.getLoger().error("Invalid integer range %s verifier", range);
+            ProgramOptions.getLogger().error("Invalid integer range %s verifier", range);
         }
     }
 
@@ -168,26 +168,26 @@ public class DataVerifyNumberRange extends DataVerifyImpl {
     @Override
     public boolean get(String intstr, DataVerifyResult res) throws NumberFormatException {
         // check if it's a number
-        boolean is_numeric = true;
-        boolean is_double = false;
-        for (int i = 0; is_numeric && i < intstr.length(); ++i) {
+        boolean isNumeric = true;
+        boolean isDouble = false;
+        for (int i = 0; isNumeric && i < intstr.length(); ++i) {
             char c = intstr.charAt(i);
             if ((c < '0' || c > '9') && '.' != c && '-' != c) {
-                is_numeric = false;
+                isNumeric = false;
             }
             if ('.' == c) {
-                is_double = true;
+                isDouble = true;
             }
         }
-        if (is_numeric && !is_double) {
+        if (isNumeric && !isDouble) {
             Double d = Double.valueOf(intstr);
             if (d > Long.MAX_VALUE || d < Long.MIN_VALUE) {
-                is_double = true;
+                isDouble = true;
             }
         }
 
-        if (is_numeric) {
-            if (is_double) {
+        if (isNumeric) {
+            if (isDouble) {
                 return get(Double.parseDouble(intstr), res);
             } else {
                 return get(Long.parseLong(intstr), res);

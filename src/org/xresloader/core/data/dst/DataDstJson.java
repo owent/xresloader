@@ -54,11 +54,11 @@ public class DataDstJson extends DataDstJava {
     @Override
     public final byte[] build(DataDstImpl compiler) throws ConvException {
         JSONArray wrapper = new JSONArray();
-        DataDstJava.DataDstObject data_obj = build_data(compiler);
+        DataDstJava.DataDstObject dataObj = buildData(compiler);
 
-        wrapper.put(data_obj.header);
-        wrapper.put(data_obj.body);
-        wrapper.put(data_obj.data_message_type);
+        wrapper.put(dataObj.header);
+        wrapper.put(dataObj.body);
+        wrapper.put(dataObj.data_message_type);
 
         try {
             String encoded = stringify(wrapper, ProgramOptions.getInstance().prettyIndent).toString();
@@ -111,7 +111,7 @@ public class DataDstJson extends DataDstJava {
         }
     }
 
-    static public final Writer stringify(Object value, int indentFactor) throws JSONException {
+    public static final Writer stringify(Object value, int indentFactor) throws JSONException {
         StringWriter writer = new StringWriter();
         synchronized (writer.getBuffer()) {
             return stringifyWriteValue(writer, value, indentFactor, 0);
@@ -141,14 +141,14 @@ public class DataDstJson extends DataDstJava {
             } else if (length != 0) {
                 final int newIndent = indent + indentFactor;
                 Map<String, Object> mp = value.toMap();
-                ArrayList<Map.Entry<String, ?>> sorted_array = new ArrayList<Map.Entry<String, ?>>();
-                sorted_array.ensureCapacity(mp.size());
-                sorted_array.addAll(mp.entrySet());
-                sorted_array.sort((l, r) -> {
+                ArrayList<Map.Entry<String, ?>> sortedArray = new ArrayList<Map.Entry<String, ?>>();
+                sortedArray.ensureCapacity(mp.size());
+                sortedArray.addAll(mp.entrySet());
+                sortedArray.sort((l, r) -> {
                     return l.getKey().compareTo(r.getKey());
                 });
 
-                for (final Map.Entry<String, ?> entry : sorted_array) {
+                for (final Map.Entry<String, ?> entry : sortedArray) {
                     if (needsComma) {
                         writer.write(',');
                     }

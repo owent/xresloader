@@ -1,8 +1,8 @@
 package org.xresloader.core.data.vfy;
 
+import java.util.ArrayDeque;
+import java.util.Deque;
 import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.List;
 import java.util.Map;
 import java.util.function.Function;
 
@@ -11,7 +11,7 @@ public class DataValidatorCache {
   private final HashMap<String, HashMap<String, DataVerifyImpl>> fileCache = new HashMap<>();
   private final HashMap<String, Function<DataVerifyImpl.ValidatorTokens, DataVerifyImpl>> creator = new HashMap<>();
   private final HashMap<String, DataVerifyImpl.ValidatorTokens> symbolToTokens = new HashMap<>();
-  private final List<DataVerifyImpl> pendingToSetup = new LinkedList<>();
+  private final Deque<DataVerifyImpl> pendingToSetup = new ArrayDeque<>();
 
   public DataValidatorCache() {
   }
@@ -62,7 +62,7 @@ public class DataValidatorCache {
     }
 
     synchronized (this.validator) {
-      DataVerifyImpl oldValue = this.validator.getOrDefault(key, null);
+      DataVerifyImpl oldValue = this.validator.get(key);
       if (oldValue == validator) {
         return;
       }
@@ -71,7 +71,7 @@ public class DataValidatorCache {
     }
 
     synchronized (this.pendingToSetup) {
-      this.pendingToSetup.add(validator);
+      this.pendingToSetup.addLast(validator);
     }
   }
 
@@ -81,7 +81,7 @@ public class DataValidatorCache {
     }
 
     synchronized (this.validator) {
-      DataVerifyImpl oldValue = this.validator.getOrDefault(name, null);
+      DataVerifyImpl oldValue = this.validator.get(name);
       if (oldValue == validator) {
         return;
       }
@@ -90,18 +90,13 @@ public class DataValidatorCache {
     }
 
     synchronized (this.pendingToSetup) {
-      this.pendingToSetup.add(validator);
+      this.pendingToSetup.addLast(validator);
     }
   }
 
   public DataVerifyImpl popUnsetupValidator() {
     synchronized (this.pendingToSetup) {
-      if (this.pendingToSetup.isEmpty()) {
-        return null;
-      }
-
-      LinkedList<DataVerifyImpl> list = (LinkedList<DataVerifyImpl>) this.pendingToSetup;
-      return list.pop();
+      return this.pendingToSetup.pollFirst();
     }
   }
 
@@ -111,7 +106,7 @@ public class DataValidatorCache {
     }
 
     synchronized (this.fileCache) {
-      return this.fileCache.getOrDefault(filePath, null);
+      return this.fileCache.get(filePath);
     }
   }
 
@@ -131,7 +126,7 @@ public class DataValidatorCache {
     }
 
     synchronized (this.symbolToTokens) {
-      DataVerifyImpl.ValidatorTokens ret = this.symbolToTokens.getOrDefault(name, null);
+      DataVerifyImpl.ValidatorTokens ret = this.symbolToTokens.get(name);
       if (ret == null) {
         ret = new DataVerifyImpl.ValidatorTokens(name, false);
         this.symbolToTokens.put(name, ret);

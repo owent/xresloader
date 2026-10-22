@@ -25,442 +25,442 @@ import org.xresloader.core.ProgramOptions;
 public class DataDstPbHelper {
     // ==================== dump const ====================
     @SuppressWarnings("unchecked")
-    static public void dumpConstIntoHashMap(String package_name, HashMap<String, Object> parent,
-            Descriptors.EnumDescriptor enum_desc) {
-        String enum_seg = enum_desc.getName();
-        HashMap<String, Object> enum_root;
-        if (parent.containsKey(enum_seg)) {
-            Object node = parent.get(enum_seg);
+    public static void dumpConstIntoHashMap(String packageName, HashMap<String, Object> parent,
+            Descriptors.EnumDescriptor enumDesc) {
+        String enumSeg = enumDesc.getName();
+        HashMap<String, Object> enumRoot;
+        if (parent.containsKey(enumSeg)) {
+            Object node = parent.get(enumSeg);
             if (node instanceof HashMap) {
-                enum_root = (HashMap<String, Object>) node;
+                enumRoot = (HashMap<String, Object>) node;
             } else {
-                ProgramOptions.getLoger().error("Enum name %s.%s conflict.", package_name, enum_seg);
+                ProgramOptions.getLogger().error("Enum name %s.%s conflict.", packageName, enumSeg);
                 return;
             }
         } else {
-            enum_root = new HashMap<String, Object>();
-            parent.put(enum_seg, enum_root);
+            enumRoot = new HashMap<String, Object>();
+            parent.put(enumSeg, enumRoot);
         }
 
         // 写出所有常量值
-        for (Descriptors.EnumValueDescriptor enum_val : enum_desc.getValues()) {
-            enum_root.put(enum_val.getName(), enum_val.getNumber());
+        for (Descriptors.EnumValueDescriptor enumVal : enumDesc.getValues()) {
+            enumRoot.put(enumVal.getName(), enumVal.getNumber());
         }
     }
 
     @SuppressWarnings("unchecked")
-    static public void dumpConstIntoHashMap(String package_name, HashMap<String, Object> parent,
-            Descriptors.OneofDescriptor oneof_desc) {
-        String oneof_seg = oneof_desc.getName();
-        HashMap<String, Object> oneof_root;
-        if (parent.containsKey(oneof_seg)) {
-            Object node = parent.get(oneof_seg);
+    public static void dumpConstIntoHashMap(String packageName, HashMap<String, Object> parent,
+            Descriptors.OneofDescriptor oneofDesc) {
+        String oneofSeg = oneofDesc.getName();
+        HashMap<String, Object> oneofRoot;
+        if (parent.containsKey(oneofSeg)) {
+            Object node = parent.get(oneofSeg);
             if (node instanceof HashMap) {
-                oneof_root = (HashMap<String, Object>) node;
+                oneofRoot = (HashMap<String, Object>) node;
             } else {
-                ProgramOptions.getLoger().error("Oneof name %s.%s conflict.", package_name, oneof_seg);
+                ProgramOptions.getLogger().error("Oneof name %s.%s conflict.", packageName, oneofSeg);
                 return;
             }
         } else {
-            oneof_root = new HashMap<String, Object>();
-            parent.put(oneof_seg, oneof_root);
+            oneofRoot = new HashMap<String, Object>();
+            parent.put(oneofSeg, oneofRoot);
         }
 
         // 写出所有常量值
-        for (Descriptors.FieldDescriptor oneof_option : oneof_desc.getFields()) {
-            String field_name = oneof_option.getJsonName();
-            if (field_name.length() > 0) {
-                field_name = Character.toUpperCase(field_name.charAt(0)) + field_name.substring(1);
+        for (Descriptors.FieldDescriptor oneofOption : oneofDesc.getFields()) {
+            String fieldName = oneofOption.getJsonName();
+            if (fieldName.length() > 0) {
+                fieldName = Character.toUpperCase(fieldName.charAt(0)) + fieldName.substring(1);
             }
-            field_name = String.format("k%s", field_name);
-            oneof_root.put(field_name, oneof_option.getNumber());
+            fieldName = String.format("k%s", fieldName);
+            oneofRoot.put(fieldName, oneofOption.getNumber());
         }
     }
 
     @SuppressWarnings("unchecked")
-    static public void dumpConstIntoHashMap(String package_name, HashMap<String, Object> parent,
-            Descriptors.Descriptor msg_desc) {
-        String msg_seg = msg_desc.getName();
-        HashMap<String, Object> msg_root = null;
-        Object msg_node = parent.getOrDefault(msg_seg, null);
-        String msg_full_name = String.format("%s.%s", package_name, msg_seg);
-        if (msg_node != null) {
-            if (msg_node instanceof HashMap) {
-                msg_root = (HashMap<String, Object>) msg_node;
+    public static void dumpConstIntoHashMap(String packageName, HashMap<String, Object> parent,
+            Descriptors.Descriptor msgDesc) {
+        String msgSeg = msgDesc.getName();
+        HashMap<String, Object> msgRoot = null;
+        Object msgNode = parent.getOrDefault(msgSeg, null);
+        String msgFullName = String.format("%s.%s", packageName, msgSeg);
+        if (msgNode != null) {
+            if (msgNode instanceof HashMap) {
+                msgRoot = (HashMap<String, Object>) msgNode;
             } else {
-                ProgramOptions.getLoger().error("Message name %s conflict.", msg_full_name);
+                ProgramOptions.getLogger().error("Message name %s conflict.", msgFullName);
                 return;
             }
         }
 
         // enum in message.
-        for (Descriptors.EnumDescriptor enum_desc : msg_desc.getEnumTypes()) {
-            if (null == msg_root) {
-                msg_root = new HashMap<String, Object>();
-                parent.put(msg_seg, msg_root);
+        for (Descriptors.EnumDescriptor enumDesc : msgDesc.getEnumTypes()) {
+            if (null == msgRoot) {
+                msgRoot = new HashMap<String, Object>();
+                parent.put(msgSeg, msgRoot);
             }
 
-            dumpConstIntoHashMap(msg_full_name, msg_root, enum_desc);
+            dumpConstIntoHashMap(msgFullName, msgRoot, enumDesc);
         }
 
         // if has oneof in message, dump all fields's number.
-        for (Descriptors.OneofDescriptor oneof_desc : msg_desc.getOneofs()) {
-            if (oneof_desc.getFieldCount() <= 0) {
+        for (Descriptors.OneofDescriptor oneofDesc : msgDesc.getOneofs()) {
+            if (oneofDesc.getFieldCount() <= 0) {
                 continue;
             }
-            if (null == msg_root) {
-                msg_root = new HashMap<String, Object>();
-                parent.put(msg_seg, msg_root);
+            if (null == msgRoot) {
+                msgRoot = new HashMap<String, Object>();
+                parent.put(msgSeg, msgRoot);
             }
 
-            dumpConstIntoHashMap(msg_full_name, msg_root, oneof_desc);
+            dumpConstIntoHashMap(msgFullName, msgRoot, oneofDesc);
         }
 
         // nested message
-        for (Descriptors.Descriptor sub_msg_desc : msg_desc.getNestedTypes()) {
-            if (null == msg_root) {
-                msg_root = new HashMap<String, Object>();
-                parent.put(msg_seg, msg_root);
+        for (Descriptors.Descriptor subMsgDesc : msgDesc.getNestedTypes()) {
+            if (null == msgRoot) {
+                msgRoot = new HashMap<String, Object>();
+                parent.put(msgSeg, msgRoot);
             }
 
-            dumpConstIntoHashMap(msg_full_name, msg_root, sub_msg_desc);
+            dumpConstIntoHashMap(msgFullName, msgRoot, subMsgDesc);
         }
     }
 
     // ==================== dump options ====================
 
-    static public HashMap<String, Object> dumpOptionsIntoHashMap(ProgramOptions.ProtoDumpType dump_type,
-            Descriptors.EnumValueDescriptor msg_desc, com.google.protobuf.ExtensionRegistry custom_extensions) {
-        HashMap<String, Object> msg_root = new HashMap<String, Object>();
-        boolean has_data = dump_type == ProgramOptions.ProtoDumpType.DESCRIPTOR;
+    public static HashMap<String, Object> dumpOptionsIntoHashMap(ProgramOptions.ProtoDumpType dumpType,
+            Descriptors.EnumValueDescriptor msgDesc, com.google.protobuf.ExtensionRegistry customExtensions) {
+        HashMap<String, Object> msgRoot = new HashMap<String, Object>();
+        boolean hasData = dumpType == ProgramOptions.ProtoDumpType.DESCRIPTOR;
 
-        HashMap<String, Object> options_data = dumpMessageExtensions(msg_desc.getOptions(),
-                msg_desc.getOptions().getAllFields(), custom_extensions);
-        if (options_data != null && !options_data.isEmpty()) {
-            has_data = true;
-            msg_root.put("options", options_data);
+        HashMap<String, Object> optionsData = dumpMessageExtensions(msgDesc.getOptions(),
+                msgDesc.getOptions().getAllFields(), customExtensions);
+        if (optionsData != null && !optionsData.isEmpty()) {
+            hasData = true;
+            msgRoot.put("options", optionsData);
         }
 
-        if (has_data) {
-            msg_root.put("name", msg_desc.getName());
-            msg_root.put("number", msg_desc.getNumber());
-            return msg_root;
+        if (hasData) {
+            msgRoot.put("name", msgDesc.getName());
+            msgRoot.put("number", msgDesc.getNumber());
+            return msgRoot;
         }
 
         return null;
     }
 
-    static public HashMap<String, Object> dumpOptionsIntoHashMap(ProgramOptions.ProtoDumpType dump_type,
-            Descriptors.EnumDescriptor msg_desc, com.google.protobuf.ExtensionRegistry custom_extensions) {
-        HashMap<String, Object> msg_root = new HashMap<String, Object>();
-        boolean has_data = dump_type == ProgramOptions.ProtoDumpType.DESCRIPTOR;
+    public static HashMap<String, Object> dumpOptionsIntoHashMap(ProgramOptions.ProtoDumpType dumpType,
+            Descriptors.EnumDescriptor msgDesc, com.google.protobuf.ExtensionRegistry customExtensions) {
+        HashMap<String, Object> msgRoot = new HashMap<String, Object>();
+        boolean hasData = dumpType == ProgramOptions.ProtoDumpType.DESCRIPTOR;
 
-        HashMap<String, Object> options_data = dumpMessageExtensions(msg_desc.getOptions(),
-                msg_desc.getOptions().getAllFields(), custom_extensions);
-        if (options_data != null && !options_data.isEmpty()) {
-            has_data = true;
-            msg_root.put("options", options_data);
+        HashMap<String, Object> optionsData = dumpMessageExtensions(msgDesc.getOptions(),
+                msgDesc.getOptions().getAllFields(), customExtensions);
+        if (optionsData != null && !optionsData.isEmpty()) {
+            hasData = true;
+            msgRoot.put("options", optionsData);
         }
 
         // value
-        HashMap<String, Object> child_message = null;
-        for (Descriptors.EnumValueDescriptor sub_desc : msg_desc.getValues()) {
-            HashMap<String, Object> subset = dumpOptionsIntoHashMap(dump_type, sub_desc, custom_extensions);
+        HashMap<String, Object> childMessage = null;
+        for (Descriptors.EnumValueDescriptor subDesc : msgDesc.getValues()) {
+            HashMap<String, Object> subset = dumpOptionsIntoHashMap(dumpType, subDesc, customExtensions);
             if (subset == null) {
                 continue;
             }
 
-            if (child_message == null) {
-                child_message = new HashMap<String, Object>();
-                msg_root.put("value", child_message);
+            if (childMessage == null) {
+                childMessage = new HashMap<String, Object>();
+                msgRoot.put("value", childMessage);
             }
 
-            has_data = true;
-            child_message.put(sub_desc.getName(), subset);
+            hasData = true;
+            childMessage.put(subDesc.getName(), subset);
         }
 
-        if (has_data) {
-            msg_root.put("name", msg_desc.getName());
-            return msg_root;
-        }
-
-        return null;
-    }
-
-    static public HashMap<String, Object> dumpOptionsIntoHashMap(ProgramOptions.ProtoDumpType dump_type,
-            Descriptors.OneofDescriptor msg_desc, com.google.protobuf.ExtensionRegistry custom_extensions) {
-        HashMap<String, Object> msg_root = new HashMap<String, Object>();
-        boolean has_data = dump_type == ProgramOptions.ProtoDumpType.DESCRIPTOR;
-
-        HashMap<String, Object> options_data = dumpMessageExtensions(msg_desc.getOptions(),
-                msg_desc.getOptions().getAllFields(), custom_extensions);
-        if (options_data != null && !options_data.isEmpty()) {
-            has_data = true;
-            msg_root.put("options", options_data);
-        }
-
-        if (has_data) {
-            msg_root.put("name", msg_desc.getName());
-            return msg_root;
+        if (hasData) {
+            msgRoot.put("name", msgDesc.getName());
+            return msgRoot;
         }
 
         return null;
     }
 
-    static public HashMap<String, Object> dumpOptionsIntoHashMap(ProgramOptions.ProtoDumpType dump_type,
-            Descriptors.FieldDescriptor msg_desc, com.google.protobuf.ExtensionRegistry custom_extensions) {
-        HashMap<String, Object> msg_root = new HashMap<String, Object>();
-        boolean has_data = dump_type == ProgramOptions.ProtoDumpType.DESCRIPTOR;
+    public static HashMap<String, Object> dumpOptionsIntoHashMap(ProgramOptions.ProtoDumpType dumpType,
+            Descriptors.OneofDescriptor msgDesc, com.google.protobuf.ExtensionRegistry customExtensions) {
+        HashMap<String, Object> msgRoot = new HashMap<String, Object>();
+        boolean hasData = dumpType == ProgramOptions.ProtoDumpType.DESCRIPTOR;
 
-        HashMap<String, Object> options_data = dumpMessageExtensions(msg_desc.getOptions(),
-                msg_desc.getOptions().getAllFields(), custom_extensions);
-        if (options_data != null && !options_data.isEmpty()) {
-            has_data = true;
-            msg_root.put("options", options_data);
+        HashMap<String, Object> optionsData = dumpMessageExtensions(msgDesc.getOptions(),
+                msgDesc.getOptions().getAllFields(), customExtensions);
+        if (optionsData != null && !optionsData.isEmpty()) {
+            hasData = true;
+            msgRoot.put("options", optionsData);
         }
 
-        if (has_data) {
-            msg_root.put("name", msg_desc.getName());
-            msg_root.put("type_name", msg_desc.getType().name());
-            msg_root.put("number", msg_desc.getNumber());
-            return msg_root;
+        if (hasData) {
+            msgRoot.put("name", msgDesc.getName());
+            return msgRoot;
         }
 
         return null;
     }
 
-    static public HashMap<String, Object> dumpOptionsIntoHashMap(ProgramOptions.ProtoDumpType dump_type,
-            Descriptors.Descriptor msg_desc, com.google.protobuf.ExtensionRegistry custom_extensions) {
-        HashMap<String, Object> msg_root = new HashMap<String, Object>();
-        boolean has_data = dump_type == ProgramOptions.ProtoDumpType.DESCRIPTOR;
+    public static HashMap<String, Object> dumpOptionsIntoHashMap(ProgramOptions.ProtoDumpType dumpType,
+            Descriptors.FieldDescriptor msgDesc, com.google.protobuf.ExtensionRegistry customExtensions) {
+        HashMap<String, Object> msgRoot = new HashMap<String, Object>();
+        boolean hasData = dumpType == ProgramOptions.ProtoDumpType.DESCRIPTOR;
 
-        HashMap<String, Object> options_data = dumpMessageExtensions(msg_desc.getOptions(),
-                msg_desc.getOptions().getAllFields(), custom_extensions);
-        if (options_data != null && !options_data.isEmpty()) {
-            has_data = true;
-            msg_root.put("options", options_data);
+        HashMap<String, Object> optionsData = dumpMessageExtensions(msgDesc.getOptions(),
+                msgDesc.getOptions().getAllFields(), customExtensions);
+        if (optionsData != null && !optionsData.isEmpty()) {
+            hasData = true;
+            msgRoot.put("options", optionsData);
+        }
+
+        if (hasData) {
+            msgRoot.put("name", msgDesc.getName());
+            msgRoot.put("type_name", msgDesc.getType().name());
+            msgRoot.put("number", msgDesc.getNumber());
+            return msgRoot;
+        }
+
+        return null;
+    }
+
+    public static HashMap<String, Object> dumpOptionsIntoHashMap(ProgramOptions.ProtoDumpType dumpType,
+            Descriptors.Descriptor msgDesc, com.google.protobuf.ExtensionRegistry customExtensions) {
+        HashMap<String, Object> msgRoot = new HashMap<String, Object>();
+        boolean hasData = dumpType == ProgramOptions.ProtoDumpType.DESCRIPTOR;
+
+        HashMap<String, Object> optionsData = dumpMessageExtensions(msgDesc.getOptions(),
+                msgDesc.getOptions().getAllFields(), customExtensions);
+        if (optionsData != null && !optionsData.isEmpty()) {
+            hasData = true;
+            msgRoot.put("options", optionsData);
         }
 
         // nested_type
-        HashMap<String, Object> child_message = null;
-        for (Descriptors.Descriptor sub_desc : msg_desc.getNestedTypes()) {
-            HashMap<String, Object> subset = dumpOptionsIntoHashMap(dump_type, sub_desc, custom_extensions);
+        HashMap<String, Object> childMessage = null;
+        for (Descriptors.Descriptor subDesc : msgDesc.getNestedTypes()) {
+            HashMap<String, Object> subset = dumpOptionsIntoHashMap(dumpType, subDesc, customExtensions);
             if (subset == null) {
                 continue;
             }
 
-            if (child_message == null) {
-                child_message = new HashMap<String, Object>();
-                msg_root.put("enum_type", child_message);
+            if (childMessage == null) {
+                childMessage = new HashMap<String, Object>();
+                msgRoot.put("enum_type", childMessage);
             }
 
-            has_data = true;
-            child_message.put(sub_desc.getName(), subset);
+            hasData = true;
+            childMessage.put(subDesc.getName(), subset);
         }
 
         // enum_type
-        child_message = null;
-        for (Descriptors.EnumDescriptor sub_desc : msg_desc.getEnumTypes()) {
-            HashMap<String, Object> subset = dumpOptionsIntoHashMap(dump_type, sub_desc, custom_extensions);
+        childMessage = null;
+        for (Descriptors.EnumDescriptor subDesc : msgDesc.getEnumTypes()) {
+            HashMap<String, Object> subset = dumpOptionsIntoHashMap(dumpType, subDesc, customExtensions);
             if (subset == null) {
                 continue;
             }
 
-            if (child_message == null) {
-                child_message = new HashMap<String, Object>();
-                msg_root.put("nested_type", child_message);
+            if (childMessage == null) {
+                childMessage = new HashMap<String, Object>();
+                msgRoot.put("nested_type", childMessage);
             }
 
-            has_data = true;
-            child_message.put(sub_desc.getName(), subset);
+            hasData = true;
+            childMessage.put(subDesc.getName(), subset);
         }
 
         // oneof_decl
-        child_message = null;
-        for (Descriptors.OneofDescriptor sub_desc : msg_desc.getOneofs()) {
-            HashMap<String, Object> subset = dumpOptionsIntoHashMap(dump_type, sub_desc, custom_extensions);
+        childMessage = null;
+        for (Descriptors.OneofDescriptor subDesc : msgDesc.getOneofs()) {
+            HashMap<String, Object> subset = dumpOptionsIntoHashMap(dumpType, subDesc, customExtensions);
             if (subset == null) {
                 continue;
             }
 
-            if (child_message == null) {
-                child_message = new HashMap<String, Object>();
-                msg_root.put("oneof_decl", child_message);
+            if (childMessage == null) {
+                childMessage = new HashMap<String, Object>();
+                msgRoot.put("oneof_decl", childMessage);
             }
 
-            has_data = true;
-            child_message.put(sub_desc.getName(), subset);
+            hasData = true;
+            childMessage.put(subDesc.getName(), subset);
         }
 
         // field
-        child_message = null;
-        for (Descriptors.FieldDescriptor sub_desc : msg_desc.getFields()) {
-            HashMap<String, Object> subset = dumpOptionsIntoHashMap(dump_type, sub_desc, custom_extensions);
+        childMessage = null;
+        for (Descriptors.FieldDescriptor subDesc : msgDesc.getFields()) {
+            HashMap<String, Object> subset = dumpOptionsIntoHashMap(dumpType, subDesc, customExtensions);
             if (subset == null) {
                 continue;
             }
 
-            if (child_message == null) {
-                child_message = new HashMap<String, Object>();
-                msg_root.put("field", child_message);
+            if (childMessage == null) {
+                childMessage = new HashMap<String, Object>();
+                msgRoot.put("field", childMessage);
             }
 
-            has_data = true;
-            child_message.put(sub_desc.getName(), subset);
+            hasData = true;
+            childMessage.put(subDesc.getName(), subset);
         }
 
-        if (has_data) {
-            msg_root.put("name", msg_desc.getName());
-            return msg_root;
-        }
-
-        return null;
-    }
-
-    static public HashMap<String, Object> dumpOptionsIntoHashMap(ProgramOptions.ProtoDumpType dump_type,
-            Descriptors.MethodDescriptor msg_desc, com.google.protobuf.ExtensionRegistry custom_extensions) {
-        HashMap<String, Object> msg_root = new HashMap<String, Object>();
-        boolean has_data = dump_type == ProgramOptions.ProtoDumpType.DESCRIPTOR;
-
-        HashMap<String, Object> options_data = dumpMessageExtensions(msg_desc.getOptions(),
-                msg_desc.getOptions().getAllFields(), custom_extensions);
-        if (options_data != null && !options_data.isEmpty()) {
-            has_data = true;
-            msg_root.put("options", options_data);
-        }
-
-        if (has_data) {
-            msg_root.put("name", msg_desc.getName());
-            msg_root.put("input_type", msg_desc.getInputType().getFullName());
-            msg_root.put("output_type", msg_desc.getOutputType().getFullName());
-            return msg_root;
+        if (hasData) {
+            msgRoot.put("name", msgDesc.getName());
+            return msgRoot;
         }
 
         return null;
     }
 
-    static public HashMap<String, Object> dumpOptionsIntoHashMap(ProgramOptions.ProtoDumpType dump_type,
-            Descriptors.ServiceDescriptor msg_desc, com.google.protobuf.ExtensionRegistry custom_extensions) {
-        HashMap<String, Object> msg_root = new HashMap<String, Object>();
-        boolean has_data = dump_type == ProgramOptions.ProtoDumpType.DESCRIPTOR;
+    public static HashMap<String, Object> dumpOptionsIntoHashMap(ProgramOptions.ProtoDumpType dumpType,
+            Descriptors.MethodDescriptor msgDesc, com.google.protobuf.ExtensionRegistry customExtensions) {
+        HashMap<String, Object> msgRoot = new HashMap<String, Object>();
+        boolean hasData = dumpType == ProgramOptions.ProtoDumpType.DESCRIPTOR;
 
-        HashMap<String, Object> options_data = dumpMessageExtensions(msg_desc.getOptions(),
-                msg_desc.getOptions().getAllFields(), custom_extensions);
-        if (options_data != null && !options_data.isEmpty()) {
-            has_data = true;
-            msg_root.put("options", options_data);
+        HashMap<String, Object> optionsData = dumpMessageExtensions(msgDesc.getOptions(),
+                msgDesc.getOptions().getAllFields(), customExtensions);
+        if (optionsData != null && !optionsData.isEmpty()) {
+            hasData = true;
+            msgRoot.put("options", optionsData);
+        }
+
+        if (hasData) {
+            msgRoot.put("name", msgDesc.getName());
+            msgRoot.put("input_type", msgDesc.getInputType().getFullName());
+            msgRoot.put("output_type", msgDesc.getOutputType().getFullName());
+            return msgRoot;
+        }
+
+        return null;
+    }
+
+    public static HashMap<String, Object> dumpOptionsIntoHashMap(ProgramOptions.ProtoDumpType dumpType,
+            Descriptors.ServiceDescriptor msgDesc, com.google.protobuf.ExtensionRegistry customExtensions) {
+        HashMap<String, Object> msgRoot = new HashMap<String, Object>();
+        boolean hasData = dumpType == ProgramOptions.ProtoDumpType.DESCRIPTOR;
+
+        HashMap<String, Object> optionsData = dumpMessageExtensions(msgDesc.getOptions(),
+                msgDesc.getOptions().getAllFields(), customExtensions);
+        if (optionsData != null && !optionsData.isEmpty()) {
+            hasData = true;
+            msgRoot.put("options", optionsData);
         }
 
         // method
-        HashMap<String, Object> child_message = null;
-        for (Descriptors.MethodDescriptor sub_desc : msg_desc.getMethods()) {
-            HashMap<String, Object> subset = dumpOptionsIntoHashMap(dump_type, sub_desc, custom_extensions);
+        HashMap<String, Object> childMessage = null;
+        for (Descriptors.MethodDescriptor subDesc : msgDesc.getMethods()) {
+            HashMap<String, Object> subset = dumpOptionsIntoHashMap(dumpType, subDesc, customExtensions);
             if (subset == null) {
                 continue;
             }
 
-            if (child_message == null) {
-                child_message = new HashMap<String, Object>();
-                msg_root.put("method", child_message);
+            if (childMessage == null) {
+                childMessage = new HashMap<String, Object>();
+                msgRoot.put("method", childMessage);
             }
 
-            has_data = true;
-            child_message.put(sub_desc.getName(), subset);
+            hasData = true;
+            childMessage.put(subDesc.getName(), subset);
         }
 
-        if (has_data) {
-            msg_root.put("name", msg_desc.getName());
-            return msg_root;
+        if (hasData) {
+            msgRoot.put("name", msgDesc.getName());
+            return msgRoot;
         }
 
         return null;
     }
 
-    static public void dumpOptionsIntoHashMap(ProgramOptions.ProtoDumpType dump_type, LinkedList<Object> parent,
-            Descriptors.FileDescriptor file_desc, com.google.protobuf.ExtensionRegistry custom_extensions) {
-        HashMap<String, Object> msg_root = new HashMap<String, Object>();
-        boolean has_data = dump_type == ProgramOptions.ProtoDumpType.DESCRIPTOR;
+    public static void dumpOptionsIntoHashMap(ProgramOptions.ProtoDumpType dumpType, LinkedList<Object> parent,
+            Descriptors.FileDescriptor fileDesc, com.google.protobuf.ExtensionRegistry customExtensions) {
+        HashMap<String, Object> msgRoot = new HashMap<String, Object>();
+        boolean hasData = dumpType == ProgramOptions.ProtoDumpType.DESCRIPTOR;
 
-        HashMap<String, Object> options_data = dumpMessageExtensions(file_desc.getOptions(),
-                file_desc.getOptions().getAllFields(), custom_extensions);
-        if (options_data != null && !options_data.isEmpty()) {
-            has_data = true;
-            msg_root.put("options", options_data);
+        HashMap<String, Object> optionsData = dumpMessageExtensions(fileDesc.getOptions(),
+                fileDesc.getOptions().getAllFields(), customExtensions);
+        if (optionsData != null && !optionsData.isEmpty()) {
+            hasData = true;
+            msgRoot.put("options", optionsData);
         }
 
-        HashMap<String, Object> child_message = null;
-        for (Descriptors.Descriptor sub_desc : file_desc.getMessageTypes()) {
-            HashMap<String, Object> subset = dumpOptionsIntoHashMap(dump_type, sub_desc, custom_extensions);
+        HashMap<String, Object> childMessage = null;
+        for (Descriptors.Descriptor subDesc : fileDesc.getMessageTypes()) {
+            HashMap<String, Object> subset = dumpOptionsIntoHashMap(dumpType, subDesc, customExtensions);
             if (subset == null) {
                 continue;
             }
 
-            if (child_message == null) {
-                child_message = new HashMap<String, Object>();
-                msg_root.put("message_type", child_message);
+            if (childMessage == null) {
+                childMessage = new HashMap<String, Object>();
+                msgRoot.put("message_type", childMessage);
             }
 
-            has_data = true;
-            child_message.put(sub_desc.getName(), subset);
+            hasData = true;
+            childMessage.put(subDesc.getName(), subset);
         }
 
         // enum_type
-        child_message = null;
-        for (Descriptors.EnumDescriptor sub_desc : file_desc.getEnumTypes()) {
-            HashMap<String, Object> subset = dumpOptionsIntoHashMap(dump_type, sub_desc, custom_extensions);
+        childMessage = null;
+        for (Descriptors.EnumDescriptor subDesc : fileDesc.getEnumTypes()) {
+            HashMap<String, Object> subset = dumpOptionsIntoHashMap(dumpType, subDesc, customExtensions);
             if (subset == null) {
                 continue;
             }
 
-            if (child_message == null) {
-                child_message = new HashMap<String, Object>();
-                msg_root.put("enum_type", child_message);
+            if (childMessage == null) {
+                childMessage = new HashMap<String, Object>();
+                msgRoot.put("enum_type", childMessage);
             }
 
-            has_data = true;
-            child_message.put(sub_desc.getName(), subset);
+            hasData = true;
+            childMessage.put(subDesc.getName(), subset);
         }
 
         // service
-        child_message = null;
-        for (Descriptors.ServiceDescriptor sub_desc : file_desc.getServices()) {
-            HashMap<String, Object> subset = dumpOptionsIntoHashMap(dump_type, sub_desc, custom_extensions);
+        childMessage = null;
+        for (Descriptors.ServiceDescriptor subDesc : fileDesc.getServices()) {
+            HashMap<String, Object> subset = dumpOptionsIntoHashMap(dumpType, subDesc, customExtensions);
             if (subset == null) {
                 continue;
             }
 
-            if (child_message == null) {
-                child_message = new HashMap<String, Object>();
-                msg_root.put("extension", child_message);
+            if (childMessage == null) {
+                childMessage = new HashMap<String, Object>();
+                msgRoot.put("extension", childMessage);
             }
 
-            has_data = true;
-            child_message.put(sub_desc.getName(), subset);
+            hasData = true;
+            childMessage.put(subDesc.getName(), subset);
         }
 
         // extensions
-        child_message = null;
-        for (Descriptors.FieldDescriptor sub_desc : file_desc.getExtensions()) {
-            HashMap<String, Object> subset = dumpOptionsIntoHashMap(dump_type, sub_desc, custom_extensions);
+        childMessage = null;
+        for (Descriptors.FieldDescriptor subDesc : fileDesc.getExtensions()) {
+            HashMap<String, Object> subset = dumpOptionsIntoHashMap(dumpType, subDesc, customExtensions);
             if (subset == null) {
                 continue;
             }
 
-            if (child_message == null) {
-                child_message = new HashMap<String, Object>();
-                msg_root.put("extension", child_message);
+            if (childMessage == null) {
+                childMessage = new HashMap<String, Object>();
+                msgRoot.put("extension", childMessage);
             }
 
-            has_data = true;
-            child_message.put(sub_desc.getName(), subset);
+            hasData = true;
+            childMessage.put(subDesc.getName(), subset);
         }
 
-        if (has_data) {
-            msg_root.put("package", file_desc.getPackage());
-            msg_root.put("path", file_desc.getName());
-            msg_root.put("name", new File(file_desc.getName()).getName());
+        if (hasData) {
+            msgRoot.put("package", fileDesc.getPackage());
+            msgRoot.put("path", fileDesc.getName());
+            msgRoot.put("name", new File(fileDesc.getName()).getName());
 
-            parent.add(msg_root);
+            parent.add(msgRoot);
         }
     }
 
@@ -485,11 +485,11 @@ public class DataDstPbHelper {
                         ArrayList<HashMap<String, Object>> ret = new ArrayList<HashMap<String, Object>>();
                         ret.ensureCapacity(((List<?>) value).size());
 
-                        for (Object enum_value_desc : (List<?>) value) {
-                            if (enum_value_desc instanceof EnumValueDescriptor) {
+                        for (Object enumValueDesc : (List<?>) value) {
+                            if (enumValueDesc instanceof EnumValueDescriptor) {
                                 HashMap<String, Object> res = new HashMap<String, Object>();
-                                res.put("name", ((EnumValueDescriptor) enum_value_desc).getName());
-                                res.put("number", ((EnumValueDescriptor) enum_value_desc).getNumber());
+                                res.put("name", ((EnumValueDescriptor) enumValueDesc).getName());
+                                res.put("number", ((EnumValueDescriptor) enumValueDesc).getNumber());
                                 ret.add(res);
                             }
                         }
@@ -498,9 +498,9 @@ public class DataDstPbHelper {
                         ArrayList<Integer> ret = new ArrayList<Integer>();
                         ret.ensureCapacity(((List<?>) value).size());
 
-                        for (Object enum_value_desc : (List<?>) value) {
-                            if (enum_value_desc instanceof EnumValueDescriptor) {
-                                ret.add(((EnumValueDescriptor) enum_value_desc).getNumber());
+                        for (Object enumValueDesc : (List<?>) value) {
+                            if (enumValueDesc instanceof EnumValueDescriptor) {
+                                ret.add(((EnumValueDescriptor) enumValueDesc).getNumber());
                             }
                         }
                         return ret;
@@ -552,218 +552,218 @@ public class DataDstPbHelper {
         return ret;
     }
 
-    private static Object pickMessageField(com.google.protobuf.UnknownFieldSet.Field field_data,
-            FieldDescriptor field_desc, Message defaultInstance, boolean expandEnum)
+    private static Object pickMessageField(com.google.protobuf.UnknownFieldSet.Field fieldData,
+            FieldDescriptor fieldDesc, Message defaultInstance, boolean expandEnum)
             throws InvalidProtocolBufferException, UnsupportedEncodingException {
-        if (null == field_desc || null == field_data) {
+        if (null == fieldDesc || null == fieldData) {
             return null;
         }
 
-        switch (field_desc.getType()) {
+        switch (fieldDesc.getType()) {
             case DOUBLE: {
-                List<Long> raw_data = field_data.getFixed64List();
-                if (raw_data == null || raw_data.isEmpty()) {
+                List<Long> rawData = fieldData.getFixed64List();
+                if (rawData == null || rawData.isEmpty()) {
                     return null;
                 }
 
-                if (field_desc.isRepeated()) {
+                if (fieldDesc.isRepeated()) {
                     ArrayList<Double> ret = new ArrayList<Double>();
-                    ret.ensureCapacity(raw_data.size());
-                    for (Long v : raw_data) {
+                    ret.ensureCapacity(rawData.size());
+                    for (Long v : rawData) {
                         ret.add(Double.longBitsToDouble(v));
                     }
                     return ret;
                 } else {
-                    return Double.longBitsToDouble(raw_data.get(0));
+                    return Double.longBitsToDouble(rawData.get(0));
                 }
             }
             case FLOAT: {
-                List<Integer> raw_data = field_data.getFixed32List();
-                if (raw_data == null || raw_data.isEmpty()) {
+                List<Integer> rawData = fieldData.getFixed32List();
+                if (rawData == null || rawData.isEmpty()) {
                     return null;
                 }
 
-                if (field_desc.isRepeated()) {
+                if (fieldDesc.isRepeated()) {
                     ArrayList<Float> ret = new ArrayList<Float>();
-                    ret.ensureCapacity(raw_data.size());
-                    for (Integer v : raw_data) {
+                    ret.ensureCapacity(rawData.size());
+                    for (Integer v : rawData) {
                         ret.add(Float.intBitsToFloat(v));
                     }
                     return ret;
                 } else {
-                    return Float.intBitsToFloat(raw_data.get(0));
+                    return Float.intBitsToFloat(rawData.get(0));
                 }
             }
             case INT64:
             case UINT64:
             case INT32:
             case UINT32: {
-                List<Long> raw_data = field_data.getVarintList();
-                if (raw_data == null || raw_data.isEmpty()) {
+                List<Long> rawData = fieldData.getVarintList();
+                if (rawData == null || rawData.isEmpty()) {
                     return null;
                 }
 
-                if (field_desc.isRepeated()) {
-                    return raw_data;
+                if (fieldDesc.isRepeated()) {
+                    return rawData;
                 } else {
-                    return raw_data.get(0);
+                    return rawData.get(0);
                 }
             }
 
             case SINT64: {
-                List<Long> raw_data = field_data.getVarintList();
-                if (raw_data == null || raw_data.isEmpty()) {
+                List<Long> rawData = fieldData.getVarintList();
+                if (rawData == null || rawData.isEmpty()) {
                     return null;
                 }
 
-                if (field_desc.isRepeated()) {
+                if (fieldDesc.isRepeated()) {
                     ArrayList<Long> ret = new ArrayList<Long>();
-                    ret.ensureCapacity(raw_data.size());
-                    for (int i = 0; i < raw_data.size(); ++i) {
-                        ret.add((raw_data.get(i) << 63) ^ (raw_data.get(i) >> 63));
+                    ret.ensureCapacity(rawData.size());
+                    for (int i = 0; i < rawData.size(); ++i) {
+                        ret.add((rawData.get(i) << 63) ^ (rawData.get(i) >> 63));
                     }
-                    return raw_data;
+                    return rawData;
                 } else {
-                    return (raw_data.get(0) << 63) ^ (raw_data.get(0) >> 63);
+                    return (rawData.get(0) << 63) ^ (rawData.get(0) >> 63);
                 }
             }
             case SINT32: {
-                List<Long> raw_data = field_data.getVarintList();
-                if (raw_data == null || raw_data.isEmpty()) {
+                List<Long> rawData = fieldData.getVarintList();
+                if (rawData == null || rawData.isEmpty()) {
                     return null;
                 }
 
-                if (field_desc.isRepeated()) {
+                if (fieldDesc.isRepeated()) {
                     ArrayList<Integer> ret = new ArrayList<Integer>();
-                    ret.ensureCapacity(raw_data.size());
-                    for (int i = 0; i < raw_data.size(); ++i) {
-                        ret.add((raw_data.get(i).intValue() << 31) ^ (raw_data.get(i).intValue() >> 31));
+                    ret.ensureCapacity(rawData.size());
+                    for (int i = 0; i < rawData.size(); ++i) {
+                        ret.add((rawData.get(i).intValue() << 31) ^ (rawData.get(i).intValue() >> 31));
                     }
-                    return raw_data;
+                    return rawData;
                 } else {
-                    return (raw_data.get(0).intValue() << 31) ^ (raw_data.get(0).intValue() >> 31);
+                    return (rawData.get(0).intValue() << 31) ^ (rawData.get(0).intValue() >> 31);
                 }
             }
 
             case ENUM: {
-                List<Long> raw_data = field_data.getVarintList();
-                if (raw_data == null || raw_data.isEmpty()) {
+                List<Long> rawData = fieldData.getVarintList();
+                if (rawData == null || rawData.isEmpty()) {
                     return null;
                 }
 
-                if (field_desc.isRepeated()) {
+                if (fieldDesc.isRepeated()) {
                     ArrayList<EnumValueDescriptor> res = new ArrayList<EnumValueDescriptor>();
-                    res.ensureCapacity(raw_data.size());
-                    for (int i = 0; i < raw_data.size(); ++i) {
-                        EnumValueDescriptor enum_value_desc = field_desc.getEnumType()
-                                .findValueByNumber(raw_data.get(0).intValue());
-                        if (null == enum_value_desc) {
+                    res.ensureCapacity(rawData.size());
+                    for (int i = 0; i < rawData.size(); ++i) {
+                        EnumValueDescriptor enumValueDesc = fieldDesc.getEnumType()
+                                .findValueByNumber(rawData.get(0).intValue());
+                        if (null == enumValueDesc) {
                             continue;
                         }
-                        res.add(enum_value_desc);
+                        res.add(enumValueDesc);
                     }
-                    return convertMessageFieldIntoObject(field_desc, res, expandEnum);
+                    return convertMessageFieldIntoObject(fieldDesc, res, expandEnum);
                 } else {
-                    EnumValueDescriptor enum_value_desc = field_desc.getEnumType()
-                            .findValueByNumber(raw_data.get(0).intValue());
-                    if (null == enum_value_desc) {
+                    EnumValueDescriptor enumValueDesc = fieldDesc.getEnumType()
+                            .findValueByNumber(rawData.get(0).intValue());
+                    if (null == enumValueDesc) {
                         return null;
                     }
 
-                    return convertMessageFieldIntoObject(field_desc, enum_value_desc, expandEnum);
+                    return convertMessageFieldIntoObject(fieldDesc, enumValueDesc, expandEnum);
                 }
             }
             case BOOL: {
-                List<Long> raw_data = field_data.getVarintList();
-                if (raw_data == null || raw_data.isEmpty()) {
+                List<Long> rawData = fieldData.getVarintList();
+                if (rawData == null || rawData.isEmpty()) {
                     return null;
                 }
 
-                if (field_desc.isRepeated()) {
+                if (fieldDesc.isRepeated()) {
                     ArrayList<Boolean> ret = new ArrayList<Boolean>();
-                    ret.ensureCapacity(raw_data.size());
-                    for (int i = 0; i < raw_data.size(); ++i) {
-                        ret.add(raw_data.get(i) != 0);
+                    ret.ensureCapacity(rawData.size());
+                    for (int i = 0; i < rawData.size(); ++i) {
+                        ret.add(rawData.get(i) != 0);
                     }
                     return ret;
                 } else {
-                    return raw_data.get(0) != 0;
+                    return rawData.get(0) != 0;
                 }
             }
             case SFIXED64:
             case FIXED64: {
-                List<Long> raw_data = field_data.getFixed64List();
-                if (raw_data == null || raw_data.isEmpty()) {
+                List<Long> rawData = fieldData.getFixed64List();
+                if (rawData == null || rawData.isEmpty()) {
                     return null;
                 }
 
-                if (field_desc.isRepeated()) {
-                    return raw_data;
+                if (fieldDesc.isRepeated()) {
+                    return rawData;
                 } else {
-                    return raw_data.get(0);
+                    return rawData.get(0);
                 }
             }
             case SFIXED32:
             case FIXED32: {
-                List<Integer> raw_data = field_data.getFixed32List();
-                if (raw_data == null || raw_data.isEmpty()) {
+                List<Integer> rawData = fieldData.getFixed32List();
+                if (rawData == null || rawData.isEmpty()) {
                     return null;
                 }
 
-                if (field_desc.isRepeated()) {
-                    return raw_data;
+                if (fieldDesc.isRepeated()) {
+                    return rawData;
                 } else {
-                    return raw_data.get(0);
+                    return rawData.get(0);
                 }
             }
             case STRING: {
-                List<ByteString> raw_data = field_data.getLengthDelimitedList();
-                if (raw_data == null || raw_data.isEmpty()) {
+                List<ByteString> rawData = fieldData.getLengthDelimitedList();
+                if (rawData == null || rawData.isEmpty()) {
                     return null;
                 }
 
-                if (field_desc.isRepeated()) {
+                if (fieldDesc.isRepeated()) {
                     ArrayList<String> ret = new ArrayList<String>();
-                    ret.ensureCapacity(raw_data.size());
-                    for (int i = 0; i < raw_data.size(); ++i) {
-                        ret.add(new String(raw_data.get(i).toByteArray(), "UTF-8"));
+                    ret.ensureCapacity(rawData.size());
+                    for (int i = 0; i < rawData.size(); ++i) {
+                        ret.add(new String(rawData.get(i).toByteArray(), "UTF-8"));
                     }
                     return ret;
                 } else {
-                    return new String(raw_data.get(0).toByteArray(), "UTF-8");
+                    return new String(rawData.get(0).toByteArray(), "UTF-8");
                 }
             }
             case GROUP: // ignore & skip
                 return null;
             case MESSAGE: {
-                List<ByteString> raw_data = field_data.getLengthDelimitedList();
-                if (raw_data == null || raw_data.isEmpty()) {
+                List<ByteString> rawData = fieldData.getLengthDelimitedList();
+                if (rawData == null || rawData.isEmpty()) {
                     return null;
                 }
 
-                if (field_desc.isRepeated()) {
+                if (fieldDesc.isRepeated()) {
                     ArrayList<HashMap<String, Object>> ret = new ArrayList<HashMap<String, Object>>();
-                    ret.ensureCapacity(raw_data.size());
-                    for (int i = 0; i < raw_data.size(); ++i) {
+                    ret.ensureCapacity(rawData.size());
+                    for (int i = 0; i < rawData.size(); ++i) {
                         Message.Builder builder = defaultInstance.newBuilderForType();
-                        ret.add(convertMessageIntoInnerMap(builder.mergeFrom(raw_data.get(i)).build(), expandEnum));
+                        ret.add(convertMessageIntoInnerMap(builder.mergeFrom(rawData.get(i)).build(), expandEnum));
                     }
                     return ret;
                 } else {
                     Message.Builder builder = defaultInstance.newBuilderForType();
-                    return convertMessageIntoInnerMap(builder.mergeFrom(raw_data.get(0)).build(), expandEnum);
+                    return convertMessageIntoInnerMap(builder.mergeFrom(rawData.get(0)).build(), expandEnum);
                 }
             }
             case BYTES: {
-                List<ByteString> raw_data = field_data.getLengthDelimitedList();
-                if (raw_data == null || raw_data.isEmpty()) {
+                List<ByteString> rawData = fieldData.getLengthDelimitedList();
+                if (rawData == null || rawData.isEmpty()) {
                     return null;
                 }
 
-                if (field_desc.isRepeated()) {
-                    return raw_data;
+                if (fieldDesc.isRepeated()) {
+                    return rawData;
                 } else {
-                    return raw_data.get(0);
+                    return rawData.get(0);
                 }
             }
             default:
@@ -773,11 +773,11 @@ public class DataDstPbHelper {
 
     private static <T extends com.google.protobuf.GeneratedMessage.ExtendableMessage<T>> HashMap<String, Object> dumpMessageExtensions(
             T msg, Map<Descriptors.FieldDescriptor, Object> options,
-            com.google.protobuf.ExtensionRegistry custom_extensions) {
+            com.google.protobuf.ExtensionRegistry customExtensions) {
         HashMap<String, Object> ret = null;
         HashMap<String, String> conflictChecker = new HashMap<String, String>();
         String empty = "";
-        if (null == custom_extensions) {
+        if (null == customExtensions) {
             return ret;
         }
 
@@ -789,33 +789,33 @@ public class DataDstPbHelper {
             }
         }
 
-        Map<Integer, com.google.protobuf.UnknownFieldSet.Field> all_unknown_fields = msg.getUnknownFields().asMap();
-        if (all_unknown_fields.isEmpty()) {
+        Map<Integer, com.google.protobuf.UnknownFieldSet.Field> allUnknownFields = msg.getUnknownFields().asMap();
+        if (allUnknownFields.isEmpty()) {
             return ret;
         }
 
-        Set<ExtensionInfo> all_ext_types = custom_extensions
+        Set<ExtensionInfo> allExtTypes = customExtensions
                 .getAllImmutableExtensionsByExtendedType(msg.getDescriptorForType().getFullName());
 
-        if (all_ext_types.isEmpty()) {
+        if (allExtTypes.isEmpty()) {
             return ret;
         }
 
-        for (ExtensionInfo ext_type : all_ext_types) {
-            com.google.protobuf.UnknownFieldSet.Field field_data = all_unknown_fields
-                    .getOrDefault(ext_type.descriptor.getNumber(), null);
-            if (field_data == null) {
+        for (ExtensionInfo extType : allExtTypes) {
+            com.google.protobuf.UnknownFieldSet.Field fieldData = allUnknownFields
+                    .getOrDefault(extType.descriptor.getNumber(), null);
+            if (fieldData == null) {
                 continue;
             }
 
-            String shortName = ext_type.descriptor.getName();
+            String shortName = extType.descriptor.getName();
             if (ret != null && ret.containsKey(shortName)) {
                 continue;
             }
 
             try {
                 Object val;
-                val = pickMessageField(field_data, ext_type.descriptor, ext_type.defaultInstance, true);
+                val = pickMessageField(fieldData, extType.descriptor, extType.defaultInstance, true);
                 if (null != val) {
                     if (ret == null) {
                         ret = new HashMap<String, Object>();
@@ -834,10 +834,10 @@ public class DataDstPbHelper {
                             conflictChecker.replace(shortName, empty);
                         }
 
-                        ret.put(ext_type.descriptor.getFullName(), val);
+                        ret.put(extType.descriptor.getFullName(), val);
                     } else {
-                        conflictChecker.put(shortName, ext_type.descriptor.getFullName());
-                        ret.put(ext_type.descriptor.getName(), val);
+                        conflictChecker.put(shortName, extType.descriptor.getFullName());
+                        ret.put(extType.descriptor.getName(), val);
                     }
                 }
             } catch (InvalidProtocolBufferException | UnsupportedEncodingException e) {

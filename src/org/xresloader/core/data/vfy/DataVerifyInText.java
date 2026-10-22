@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStreamReader;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.regex.Pattern;
@@ -18,7 +19,7 @@ public class DataVerifyInText extends DataVerifyImpl {
     private File file = null;
     private ArrayList<String> parameters = null;
 
-    static Pattern SPACE_SPLITOR = Pattern.compile("\\s+");
+    private static final Pattern SPACE_SEPARATOR = Pattern.compile("\\s+");
 
     public DataVerifyInText(ValidatorTokens tokens) {
         super(tokens);
@@ -28,7 +29,7 @@ public class DataVerifyInText extends DataVerifyImpl {
         this.parameters.ensureCapacity(tokens.getParameters().size());
         for (ValidatorParameter param : tokens.getParameters()) {
             if (!param.isString()) {
-                ProgramOptions.getLoger().error("Only string parameter is supported for validator %s",
+                ProgramOptions.getLogger().error("Only string parameter is supported for validator %s",
                         tokens.getName());
                 this.valid = false;
                 continue;
@@ -37,14 +38,14 @@ public class DataVerifyInText extends DataVerifyImpl {
         }
         if (this.parameters.size() < 2) {
             this.valid = false;
-            ProgramOptions.getLoger().error("Invalid in text validator %s", tokens.getName());
+            ProgramOptions.getLogger().error("Invalid in text validator %s", tokens.getName());
             return;
         }
 
         this.file = DataSrcImpl.getDataFile(this.parameters.get(1));
         if (this.file == null) {
             this.valid = false;
-            ProgramOptions.getLoger().error("Can not find file %s for validator %s.",
+            ProgramOptions.getLogger().error("Can not find file %s for validator %s.",
                     this.parameters.get(1),
                     tokens.getName());
         }
@@ -61,7 +62,7 @@ public class DataVerifyInText extends DataVerifyImpl {
         }
 
         if (this.parameters.size() < 2) {
-            ProgramOptions.getLoger().error("Invalid in text validator %s", this.name);
+            ProgramOptions.getLogger().error("Invalid in text validator %s", this.name);
             return false;
         }
 
@@ -70,51 +71,49 @@ public class DataVerifyInText extends DataVerifyImpl {
             if (this.parameters.size() > 2) {
                 fieldIndex = Integer.parseInt(this.parameters.get(2)) - 1;
             }
-            Pattern separator = SPACE_SPLITOR;
+            Pattern separator = SPACE_SEPARATOR;
             if (this.parameters.size() > 3) {
                 separator = Pattern.compile(this.parameters.get(3));
             }
 
-            FileInputStream fileInputStream = new FileInputStream(this.file);
-            InputStreamReader inputStreamReader = new InputStreamReader(fileInputStream, "UTF-8");
-            BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
+            try (FileInputStream fileInputStream = new FileInputStream(this.file);
+                    InputStreamReader inputStreamReader = new InputStreamReader(fileInputStream, StandardCharsets.UTF_8);
+                    BufferedReader bufferedReader = new BufferedReader(inputStreamReader)) {
 
-            String line;
-            int lineNumber = 0;
-            while ((line = bufferedReader.readLine()) != null) {
-                ++lineNumber;
-                if (fieldIndex < 0) {
-                    dataSet.add(line.trim());
-                } else {
-                    String[] fields = separator.split(line.trim());
-                    if (fieldIndex < fields.length) {
-                        dataSet.add(fields[fieldIndex]);
+                String line;
+                int lineNumber = 0;
+                while ((line = bufferedReader.readLine()) != null) {
+                    ++lineNumber;
+                    if (fieldIndex < 0) {
+                        dataSet.add(line.trim());
                     } else {
-                        ProgramOptions.getLoger().warn("%s will skip line %d(%s) because it has not enough fields",
-                                this.name,
-                                lineNumber,
-                                line.trim());
+                        String[] fields = separator.split(line.trim());
+                        if (fieldIndex < fields.length) {
+                            dataSet.add(fields[fieldIndex]);
+                        } else {
+                            ProgramOptions.getLogger().warn("%s will skip line %d(%s) because it has not enough fields",
+                                    this.name,
+                                    lineNumber,
+                                    line.trim());
+                        }
                     }
                 }
-            }
 
-            bufferedReader.close();
-            inputStreamReader.close();
-            fileInputStream.close();
+            }
         } catch (NumberFormatException e) {
-            ProgramOptions.getLoger().error("Can not parse field number %s for validator %s : %s",
+            ProgramOptions.getLogger().error("Can not parse field number %s for validator %s : %s",
                     this.parameters.get(2),
                     this.name,
                     e.getMessage());
             return false;
         } catch (PatternSyntaxException e) {
-            ProgramOptions.getLoger().error("Can not parse field separator %s for validator %s : %s",
+            ProgramOptions.getLogger().error("Can not parse field separator %s for validator %s : %s",
                     this.parameters.get(3),
                     this.name,
                     e.getMessage());
             return false;
         } catch (Exception e) {
-            ProgramOptions.getLoger().error("Can not open file %s for validator %s : %s", this.parameters.get(1),
+            ProgramOptions.getLogger().error("Can not open file %s for validator %s : %s", this.parameters.get(1),
                     this.name,
                     e.getMessage());
             return false;

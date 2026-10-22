@@ -107,7 +107,7 @@ public class Main {
                 outputDescriptor = new DataDstUEJson();
                 outputDescriptor = outputDescriptor.init() ? outputDescriptor : null;
             }
-            default -> ProgramOptions.getLoger().error("Output type \"%s\" invalid",
+            default -> ProgramOptions.getLogger().error("Output type \"%s\" invalid",
                     ProgramOptions.getInstance().outType.toString());
         }
 
@@ -118,7 +118,7 @@ public class Main {
         DataDstImpl protocolDescriptor = null;
         switch (ProgramOptions.getInstance().protocol) {
             case PROTOBUF -> protocolDescriptor = new DataDstPb();
-            default -> ProgramOptions.getLoger().error("Protocol type \"%s\" invalid",
+            default -> ProgramOptions.getLogger().error("Protocol type \"%s\" invalid",
                     ProgramOptions.getInstance().protocol.toString());
         }
 
@@ -148,7 +148,7 @@ public class Main {
         }
 
         if (dumpData == null) {
-            ProgramOptions.getLoger().error("Protocol description \"%s\" initialize and build %s values failed",
+            ProgramOptions.getLogger().error("Protocol description \"%s\" initialize and build %s values failed",
                     ProgramOptions.getInstance().protocol.toString(), dumpName);
             return 1;
         }
@@ -165,17 +165,17 @@ public class Main {
             if (data != null) {
                 outputStream.write(data);
             } else {
-                ProgramOptions.getLoger().error("Write %s data to file \"%s\" failed, output type invalid.", dumpName,
+                ProgramOptions.getLogger().error("Write %s data to file \"%s\" failed, output type invalid.", dumpName,
                         ProgramOptions.getInstance().protoDumpFile);
                 return 1;
             }
         } catch (IOException | ConvException exception) {
-            ProgramOptions.getLoger().error("Write data to file \"%s\" failed%s  > %s",
+            ProgramOptions.getLogger().error("Write data to file \"%s\" failed%s  > %s",
                     ProgramOptions.getInstance().protoDumpFile, lineSeparator, exception.getMessage());
             return 1;
         }
 
-        ProgramOptions.getLoger().info("Write %s data to \"%s\" success.(charset: %s)", dumpName,
+        ProgramOptions.getLogger().info("Write %s data to \"%s\" success.(charset: %s)", dumpName,
                 ProgramOptions.getInstance().protoDumpFile, SchemeConf.getInstance().getKey().getEncoding());
 
         return 0;
@@ -212,9 +212,9 @@ public class Main {
             SchemeConf.getInstance().getMacroSource().clear();
             SchemeConf.getInstance().getDataSource().clear();
 
-            if (!SchemeConf.getInstance().getScheme().load_scheme(sourceName)) {
+            if (!SchemeConf.getInstance().getScheme().loadScheme(sourceName)) {
                 sourceName = String.join(" ", ProgramOptions.getInstance().dataSourceMetas);
-                ProgramOptions.getLoger().error("Convert from \"%s\" failed", sourceName);
+                ProgramOptions.getLogger().error("Convert from \"%s\" failed", sourceName);
                 ++failedCount;
                 continue;
             }
@@ -239,14 +239,14 @@ public class Main {
             Class<?> dataSourceClass = DataSrcExcel.class;
             DataSrcImpl dataSource = DataSrcImpl.create(dataSourceClass);
             if (dataSource == null) {
-                ProgramOptions.getLoger().error("Create data source class \"%s\" failed", dataSourceClass.getName());
+                ProgramOptions.getLogger().error("Create data source class \"%s\" failed", dataSourceClass.getName());
                 ++failedCount;
                 continue;
             }
 
             int dataSourceInitResult = dataSource.init();
             if (dataSourceInitResult < 0) {
-                ProgramOptions.getLoger().error("Initialize data source class \"%s\" failed",
+                ProgramOptions.getLogger().error("Initialize data source class \"%s\" failed",
                         dataSourceClass.getName());
                 ++failedCount;
                 continue;
@@ -256,7 +256,7 @@ public class Main {
             switch (ProgramOptions.getInstance().protocol) {
                 case PROTOBUF -> protocolDescriptor = new DataDstPb();
                 default -> {
-                    ProgramOptions.getLoger().error("Protocol type \"%s\" invalid",
+                    ProgramOptions.getLogger().error("Protocol type \"%s\" invalid",
                             ProgramOptions.getInstance().protocol.toString());
                     ++failedCount;
                 }
@@ -266,11 +266,11 @@ public class Main {
                 continue;
             }
 
-            ProgramOptions.getLoger().trace("Convert from \"%s\" to \"%s\" started (protocol=%s) ...", sourceName,
+            ProgramOptions.getLogger().trace("Convert from \"%s\" to \"%s\" started (protocol=%s) ...", sourceName,
                     SchemeConf.getInstance().getOutputFile(), SchemeConf.getInstance().getProtoName());
 
             if (!protocolDescriptor.init()) {
-                ProgramOptions.getLoger().error("Protocol description \"%s\" initialize failed: %s ",
+                ProgramOptions.getLogger().error("Protocol description \"%s\" initialize failed: %s ",
                         ProgramOptions.getInstance().protocol.toString(),
                         protocolDescriptor.getLastErrorMessage());
                 ++failedCount;
@@ -299,7 +299,7 @@ public class Main {
                 String currentTableName = dataSource.getCurrentTableName();
 
                 if (!currentFileName.isEmpty() && !currentTableName.isEmpty() && dataSource.hasCurrentDataGrid()) {
-                    ProgramOptions.getLoger().error(
+                    ProgramOptions.getLogger().error(
                             "Convert data failed.%s  > %s%s  > File: %s, Table: %s, Row: %d, Column: %d(%s)%s  > %s",
                             lineSeparator,
                             String.join(" ", arguments), lineSeparator, currentFileName, currentTableName,
@@ -307,17 +307,17 @@ public class Main {
                             ExcelEngine.getColumnName(dataSource.getLastColumnNum() + 1), lineSeparator,
                             exception.getMessage());
                 } else if (!currentFileName.isEmpty() && !currentTableName.isEmpty()) {
-                    ProgramOptions.getLoger().error(
+                    ProgramOptions.getLogger().error(
                             "Convert data failed.%s  > %s%s  > File: %s, Table: %s%s  > %s", lineSeparator,
                             String.join(" ", arguments), lineSeparator, currentFileName, currentTableName,
                             lineSeparator, exception.getMessage());
                 } else if (!currentFileName.isEmpty()) {
-                    ProgramOptions.getLoger().error(
+                    ProgramOptions.getLogger().error(
                             "Convert data failed.%s  > %s%s  > File: %s%s  > %s", lineSeparator,
                             String.join(" ", arguments), lineSeparator, currentFileName,
                             lineSeparator, exception.getMessage());
                 } else {
-                    ProgramOptions.getLoger().error(
+                    ProgramOptions.getLogger().error(
                             "Convert data failed.%s  > %s%s  > %s", lineSeparator,
                             String.join(" ", arguments),
                             lineSeparator, exception.getMessage());
@@ -326,13 +326,13 @@ public class Main {
                 ++failedCount;
                 continue;
             } catch (IOException exception) {
-                ProgramOptions.getLoger().error("Write data to file \"%s\" failed%s  > %s",
+                ProgramOptions.getLogger().error("Write data to file \"%s\" failed%s  > %s",
                         SchemeConf.getInstance().getOutputFile(), lineSeparator, exception.getMessage());
                 ++failedCount;
                 continue;
             }
 
-            ProgramOptions.getLoger().info("Convert from \"%s\" to \"%s\" success.(charset: %s, %d excel row(s))",
+            ProgramOptions.getLogger().info("Convert from \"%s\" to \"%s\" success.(charset: %s, %d excel row(s))",
                     sourceName,
                     SchemeConf.getInstance().getOutputFile(), SchemeConf.getInstance().getKey().getEncoding(),
                     dataSource.getRecordNumber());
@@ -383,15 +383,15 @@ public class Main {
         try {
             exitCode = processArgumentGroup(arguments);
         } catch (InitializeException exception) {
-            ProgramOptions.getLoger().error("Initlize failed.%s%s  > %s", exception.getMessage(), lineSeparator,
+            ProgramOptions.getLogger().error("Initlize failed.%s%s  > %s", exception.getMessage(), lineSeparator,
                     String.join(" ", arguments));
         } catch (Exception exception) {
-            ProgramOptions.getLoger().error("%s", exception.getMessage());
+            ProgramOptions.getLogger().error("%s", exception.getMessage());
             for (StackTraceElement frame : exception.getStackTrace()) {
-                ProgramOptions.getLoger().error("\t%s", frame.toString());
+                ProgramOptions.getLogger().error("\t%s", frame.toString());
             }
 
-            ProgramOptions.getLoger().error("Panic!, it's probably a BUG, please report to %s, current version: %s",
+            ProgramOptions.getLogger().error("Panic!, it's probably a BUG, please report to %s, current version: %s",
                     ProgramOptions.getReportUrl(), ProgramOptions.getInstance().getVersion());
         }
 
@@ -407,16 +407,16 @@ public class Main {
                     exitCode += processArgumentGroup(stdinArguments);
                 } catch (InitializeException exception) {
                     ++exitCode;
-                    ProgramOptions.getLoger().error("Initlize failed.%s%s  > %s", exception.getMessage(),
+                    ProgramOptions.getLogger().error("Initlize failed.%s%s  > %s", exception.getMessage(),
                             lineSeparator, String.join(" ", stdinArguments));
                 } catch (Exception exception) {
                     ++exitCode;
-                    ProgramOptions.getLoger().error("%s", exception.getMessage());
+                    ProgramOptions.getLogger().error("%s", exception.getMessage());
                     for (StackTraceElement frame : exception.getStackTrace()) {
-                        ProgramOptions.getLoger().error("\t%s", frame.toString());
+                        ProgramOptions.getLogger().error("\t%s", frame.toString());
                     }
 
-                    ProgramOptions.getLoger().error(
+                    ProgramOptions.getLogger().error(
                             "Panic!, it's probably a BUG, please report to %s, current version: %s",
                             ProgramOptions.getReportUrl(), ProgramOptions.getInstance().getVersion());
                 }

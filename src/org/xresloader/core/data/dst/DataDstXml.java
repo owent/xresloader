@@ -70,7 +70,7 @@ public class DataDstXml extends DataDstJava {
         }
 
         // build data
-        DataDstObject data_obj = build_data(compiler);
+        DataDstObject dataObj = buildData(compiler);
 
         // build xml tree
         Document doc = DocumentHelper.createDocument();
@@ -85,17 +85,17 @@ public class DataDstXml extends DataDstJava {
 
         Element header = DocumentHelper.createElement("header");
         Element body = DocumentHelper.createElement("body");
-        Element data_message_type = DocumentHelper.createElement("data_message_type");
+        Element dataMessageType = DocumentHelper.createElement("data_message_type");
 
-        writeData(header, data_obj.header, header.getName());
+        writeData(header, dataObj.header, header.getName());
 
-        writeData(body, data_obj.body, body.getName());
+        writeData(body, dataObj.body, body.getName());
 
-        writeData(data_message_type, data_obj.data_message_type, data_message_type.getName());
+        writeData(dataMessageType, dataObj.data_message_type, dataMessageType.getName());
 
         doc.getRootElement().add(header);
         doc.getRootElement().add(body);
-        doc.getRootElement().add(data_message_type);
+        doc.getRootElement().add(dataMessageType);
 
         try {
             ByteArrayOutputStream bos = new ByteArrayOutputStream();
@@ -116,7 +116,7 @@ public class DataDstXml extends DataDstJava {
     }
 
     @SuppressWarnings("unchecked")
-    private void writeData(Element sb, Object data, String wrapper_name) {
+    private void writeData(Element sb, Object data, String wrapperName) {
         // null
         if (null == data) {
             return;
@@ -147,12 +147,12 @@ public class DataDstXml extends DataDstJava {
 
             int index = 0;
             for (Object obj : ls) {
-                Element list_ele = DocumentHelper.createElement(wrapper_name);
-                Attribute index_attr = DocumentHelper.createAttribute(list_ele, "for", String.valueOf(index));
-                list_ele.add(index_attr);
+                Element listEle = DocumentHelper.createElement(wrapperName);
+                Attribute indexAttr = DocumentHelper.createAttribute(listEle, "for", String.valueOf(index));
+                listEle.add(indexAttr);
 
-                writeData(list_ele, obj, wrapper_name);
-                sb.add(list_ele);
+                writeData(listEle, obj, wrapperName);
+                sb.add(listEle);
                 ++index;
             }
             return;
@@ -161,10 +161,10 @@ public class DataDstXml extends DataDstJava {
         // Hashmap
         if (data instanceof Map<?, ?>) {
             Map<?, ?> mp = (Map<?, ?>) data;
-            ArrayList<Map.Entry<?, ?>> sorted_array = new ArrayList<Map.Entry<?, ?>>();
-            sorted_array.ensureCapacity(mp.size());
-            sorted_array.addAll(mp.entrySet());
-            sorted_array.sort((l, r) -> {
+            ArrayList<Map.Entry<?, ?>> sortedArray = new ArrayList<Map.Entry<?, ?>>();
+            sortedArray.ensureCapacity(mp.size());
+            sortedArray.addAll(mp.entrySet());
+            sortedArray.sort((l, r) -> {
                 if (l.getValue() instanceof Integer && r.getValue() instanceof Integer) {
                     return ((Integer) l.getValue()).compareTo((Integer) r.getValue());
                 }
@@ -179,7 +179,7 @@ public class DataDstXml extends DataDstJava {
             });
 
             boolean hasInvalidTagName = false;
-            for (Map.Entry<?, ?> item : sorted_array) {
+            for (Map.Entry<?, ?> item : sortedArray) {
                 if (!(item.getKey() instanceof String)) {
                     hasInvalidTagName = true;
                     break;
@@ -197,7 +197,7 @@ public class DataDstXml extends DataDstJava {
                 sb.addAttribute("mode", "message");
             }
 
-            for (Map.Entry<?, ?> item : sorted_array) {
+            for (Map.Entry<?, ?> item : sortedArray) {
                 // 数据会多一层，这里去除
                 if (item.getValue() instanceof List) {
                     if (item.getKey() instanceof Number) {
@@ -206,7 +206,7 @@ public class DataDstXml extends DataDstJava {
                         writeData(sb, item.getValue(), item.getKey().toString());
                     }
                 } else {
-                    Element xml_item;
+                    Element xmlItem;
 
                     if (hasInvalidTagName || data instanceof SpecialInnerHashMap<?, ?>) {
                         String realTypeName;
@@ -218,23 +218,23 @@ public class DataDstXml extends DataDstJava {
                             realTypeName = item.getKey().getClass().getSimpleName().toLowerCase();
                         }
 
-                        xml_item = DocumentHelper.createElement(realTypeName);
-                        writeData(xml_item, item.getValue(), realTypeName);
-                        xml_item.addAttribute("key", item.getKey().toString());
-                        xml_item.addAttribute("type", realTypeName);
+                        xmlItem = DocumentHelper.createElement(realTypeName);
+                        writeData(xmlItem, item.getValue(), realTypeName);
+                        xmlItem.addAttribute("key", item.getKey().toString());
+                        xmlItem.addAttribute("type", realTypeName);
                     } else {
-                        xml_item = DocumentHelper.createElement(item.getKey().toString());
-                        writeData(xml_item, item.getValue(), item.getKey().toString());
+                        xmlItem = DocumentHelper.createElement(item.getKey().toString());
+                        writeData(xmlItem, item.getValue(), item.getKey().toString());
                     }
 
-                    sb.add(xml_item);
+                    sb.add(xmlItem);
                 }
             }
 
             return;
         }
 
-        ProgramOptions.getLoger().error("%s not support.", data.toString());
+        ProgramOptions.getLogger().error("%s not support.", data.toString());
     }
 
     /**

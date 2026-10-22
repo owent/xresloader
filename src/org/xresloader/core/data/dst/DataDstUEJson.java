@@ -252,14 +252,14 @@ public class DataDstUEJson extends DataDstUEBase {
         // Hashmap
         if (data instanceof Map) {
             Map<String, Object> mp = (Map<String, Object>) data;
-            ArrayList<Map.Entry<String, Object>> sorted_array = new ArrayList<>();
-            sorted_array.ensureCapacity(mp.size());
-            sorted_array.addAll(mp.entrySet());
-            sorted_array.sort((l, r) -> {
+            ArrayList<Map.Entry<String, Object>> sortedArray = new ArrayList<>();
+            sortedArray.ensureCapacity(mp.size());
+            sortedArray.addAll(mp.entrySet());
+            sortedArray.sort((l, r) -> {
                 return l.getKey().compareTo(r.getKey());
             });
 
-            for (Map.Entry<String, Object> item : sorted_array) {
+            for (Map.Entry<String, Object> item : sortedArray) {
                 if (prefix.isEmpty()) {
                     writeConstData(jo, item.getValue(), String.format("%s", item.getKey()), valSeg);
                 } else {

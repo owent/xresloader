@@ -1,4 +1,7 @@
-﻿$PSDefaultParameterValues['*:Encoding'] = 'UTF-8'
+﻿param([string]$XresloaderJar)
+
+$ErrorActionPreference = 'Stop'
+$PSDefaultParameterValues['*:Encoding'] = 'UTF-8'
 
 $OutputEncoding = [System.Text.UTF8Encoding]::new()
 
@@ -6,18 +9,27 @@ $SCRIPT_DIR = Split-Path -Parent $MyInvocation.MyCommand.Definition
 
 Set-Location $SCRIPT_DIR
 
-$XRESLOADER = Get-ChildItem -Path "../target" -Filter "xresloader-*-jar-with-dependencies.jar" -Name | Sort-Object LastWriteTime -Descending | Select-Object -First 1
-
-if (-Not $XRESLOADER) {
-    $XRESLOADER = Get-ChildItem -Path "../target" -Filter "*.jar" -Name -Exclude "original-*.jar" | Sort-Object LastWriteTime -Descending | Select-Object -First 1
+$XRESLOADER = $XresloaderJar
+if (!$XRESLOADER) {
+    $XRESLOADER = Get-ChildItem -Path "../target" -Filter "xresloader-*.jar" -Exclude "*-plain.jar" |
+        Sort-Object LastWriteTime -Descending | Select-Object -First 1 -ExpandProperty FullName
+}
+if (!$XRESLOADER -or !(Test-Path -LiteralPath $XRESLOADER)) {
+    throw "xresloader not found. Build the executable JAR first or pass -XresloaderJar."
 }
 
-
-$XRESLOADER = "../target/" + $XRESLOADER
-
-if (!(Test-Path $XRESLOADER)) {
-    Write-Output "xresloader not found."
-    exit 0;
+# Forward stdin as well as arguments, and stop on any failed conversion.
+$javaExecutable = (Get-Command java.exe -ErrorAction SilentlyContinue).Source
+if (!$javaExecutable) { $javaExecutable = (Get-Command java).Source }
+function Invoke-Xresloader {
+    if ($MyInvocation.ExpectingInput) {
+        $input | & $javaExecutable @args
+    } else {
+        & $javaExecutable @args
+    }
+    if ($LASTEXITCODE -ne 0) {
+        throw "xresloader failed with exit code $LASTEXITCODE"
+    }
 }
 
 Write-Output "Using xresloader=$XRESLOADER"
@@ -25,11 +37,11 @@ Write-Output "Using xresloader=$XRESLOADER"
 foreach ($proto_dir in "proto_v2", "proto_v3") {
     Write-Output "Generate sample data for $proto_dir, one per cmd";
     $XLSX_FILE = Get-ChildItem -Name -Filter "*.xlsx" | Sort-Object LastWriteTime -Descending | Select-Object -First 1
-    & java -client -jar "$XRESLOADER" -t lua -p protobuf -o "$proto_dir" -f "$proto_dir/kind.pb" --pretty 2 -c kind_const.lua ;
-    & java -client -jar "$XRESLOADER" -t lua -p protobuf -o "$proto_dir" -f "$proto_dir/kind.pb" --pretty 2 --lua-module ProtoEnums.Kind -c kind_const_module.lua ;
-    & java -client -jar "$XRESLOADER" -t bin -p protobuf -o "$proto_dir" -f "$proto_dir/kind.pb" -s "$XLSX_FILE" -m scheme_kind -a 1.0.0.0 ;
-    & java "-Dxresloader.version=dev" -client -jar "$XRESLOADER" -t lua -p protobuf -o "$proto_dir" -f "$proto_dir/kind.pb" --pretty 4 -s "$XLSX_FILE" -m scheme_kind -n '/(?i)\.bin$/\.lua/' --data-version 1.0.0.0 ;
-    & java "-Dxresloader.version=dev" -client -jar "$XRESLOADER" -t lua -p protobuf -o "$proto_dir" -f "$proto_dir/kind.pb" --lua-module ProtoData.Kind -s "$XLSX_FILE" -m scheme_kind -n '/(?i)\.bin$/_module\.lua/' --data-version 1.0.0.0 ;
+    Invoke-Xresloader -client -jar "$XRESLOADER" -t lua -p protobuf -o "$proto_dir" -f "$proto_dir/kind.pb" --pretty 2 -c kind_const.lua ;
+    Invoke-Xresloader -client -jar "$XRESLOADER" -t lua -p protobuf -o "$proto_dir" -f "$proto_dir/kind.pb" --pretty 2 --lua-module ProtoEnums.Kind -c kind_const_module.lua ;
+    Invoke-Xresloader -client -jar "$XRESLOADER" -t bin -p protobuf -o "$proto_dir" -f "$proto_dir/kind.pb" -s "$XLSX_FILE" -m scheme_kind -a 1.0.0.0 ;
+    Invoke-Xresloader "-Dxresloader.version=dev" -client -jar "$XRESLOADER" -t lua -p protobuf -o "$proto_dir" -f "$proto_dir/kind.pb" --pretty 4 -s "$XLSX_FILE" -m scheme_kind -n '/(?i)\.bin$/\.lua/' --data-version 1.0.0.0 ;
+    Invoke-Xresloader "-Dxresloader.version=dev" -client -jar "$XRESLOADER" -t lua -p protobuf -o "$proto_dir" -f "$proto_dir/kind.pb" --lua-module ProtoData.Kind -s "$XLSX_FILE" -m scheme_kind -n '/(?i)\.bin$/_module\.lua/' --data-version 1.0.0.0 ;
     Write-Output "Generate sample data for $proto_dir, batchmode using --stdin";
     $TASK_LINES = @(
         "-t lua -p protobuf -o '$proto_dir'     -f '$proto_dir/kind.pb' --pretty 2 -i kind.desc.lua --data-source-mapping-mode sha256 --data-source-mapping-file '$proto_dir/data_source_mapping.txt'",
@@ -84,6 +96,6 @@ foreach ($proto_dir in "proto_v2", "proto_v3") {
         " -t lua  -p protobuf -o '$proto_dir' -f '$proto_dir/kind.pb' --validator-rules custom_validator.yaml -m 'DataSource=$XLSX_FILE|enum_and_in_table_checked|3,1' -m ProtoName=enum_and_in_table -m OutputFile=enum_and_in_table.lua -m KeyRow=2 --pretty 2 --data-source-mapping-mode sha256 --data-source-mapping-file '$proto_dir/data_source_mapping.txt'"
     )
     Write-Output "Write-Output '$($TASK_LINES -join "`n")' | java `"-Dfile.encoding=UTF-8`" `"-Dlog4j.appender.console.encoding=UTF-8`" `"-Dxresloader.version=dev`" -client -jar `"$XRESLOADER`" --stdin --data-version 1.0.0.0"
-    $TASK_LINES -join "`n" | java "-Dfile.encoding=UTF-8" "-Dlog4j.appender.console.encoding=UTF-8" "-Dxresloader.version=dev"  -client -jar "$XRESLOADER" --stdin --data-version 1.0.0.0
+    $TASK_LINES -join "`n" | Invoke-Xresloader "-Dfile.encoding=UTF-8" "-Dlog4j.appender.console.encoding=UTF-8" "-Dxresloader.version=dev"  -client -jar "$XRESLOADER" --stdin --data-version 1.0.0.0
     Write-Output "Exit code: $LastExitCode"
 }

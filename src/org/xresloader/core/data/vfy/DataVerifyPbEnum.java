@@ -11,16 +11,16 @@ public class DataVerifyPbEnum extends DataVerifyImpl {
     public DataVerifyPbEnum(DescriptorProtos.EnumDescriptorProto desc) {
         super(desc.getName());
 
-        for (DescriptorProtos.EnumValueDescriptorProto val_desc : desc.getValueList()) {
-            allNames.put(val_desc.getName(), (long) val_desc.getNumber());
-            allNumbers.add((long) val_desc.getNumber());
+        for (DescriptorProtos.EnumValueDescriptorProto valDesc : desc.getValueList()) {
+            allNames.put(valDesc.getName(), (long) valDesc.getNumber());
+            allNumbers.add((long) valDesc.getNumber());
 
             // alias extension
-            if (val_desc.getOptions().getExtensionCount(Xresloader.enumAlias) > 0) {
-                for (String alias_name : val_desc.getOptions().getExtension(Xresloader.enumAlias)) {
-                    String alias_name_striped = alias_name.strip();
-                    if (!alias_name_striped.isEmpty()) {
-                        allNames.put(alias_name_striped, (long) val_desc.getNumber());
+            if (valDesc.getOptions().getExtensionCount(Xresloader.enumAlias) > 0) {
+                for (String aliasName : valDesc.getOptions().getExtension(Xresloader.enumAlias)) {
+                    String aliasNameStriped = aliasName.strip();
+                    if (!aliasNameStriped.isEmpty()) {
+                        allNames.put(aliasNameStriped, (long) valDesc.getNumber());
                     }
                 }
             }

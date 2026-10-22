@@ -44,3 +44,7 @@
 *.xlsx filter=lfs diff=lfs merge=lfs -text
 /tools/linux_x86_64/protoc filter=lfs diff=lfs merge=lfs -text
 /tools/macos_x86_64/protoc filter=lfs diff=lfs merge=lfs -text
+/mvnw text eol=lf
+/gradlew text eol=lf
+# Bootstrap the build without requiring Git LFS for the wrapper JAR.
+/gradle/wrapper/gradle-wrapper.jar -filter binary

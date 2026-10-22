@@ -31,7 +31,7 @@ import java.util.regex.PatternSyntaxException;
 public class ProgramOptions {
 
     private static Logger logger = null;
-    static private String endl = null;
+    private static String endl = null;
 
     public class RenameRule {
         public Pattern match;
@@ -156,7 +156,7 @@ public class ProgramOptions {
         dataVersion = null;
     }
 
-    private static synchronized Options get_options_group() {
+    private static synchronized Options getOptionsGroup() {
         if (null != options) {
             return options;
         }
@@ -271,14 +271,14 @@ public class ProgramOptions {
         TextHelpAppendable output = new TextHelpAppendable(System.out);
         output.setMaxWidth(140);
         HelpFormatter formatter = HelpFormatter.builder().setHelpAppendable(output).setShowSince(false).get();
-        Options sharedOptions = get_options_group();
+        Options sharedOptions = getOptionsGroup();
         try {
             synchronized (sharedOptions) {
                 formatter.printHelp(String.format("java -client -jar \"%s\" [options...]",
                         System.getProperty("java.class.path")), null, sharedOptions, null, false);
             }
         } catch (IOException exp) {
-            ProgramOptions.getLoger().error("Printing help failed: %s", exp.getMessage());
+            ProgramOptions.getLogger().error("Printing help failed: %s", exp.getMessage());
             return false;
         }
         System.out.println("");
@@ -294,13 +294,13 @@ public class ProgramOptions {
         CommandLine cmd;
         try {
             // parse the command line arguments
-            Options sharedOptions = get_options_group();
+            Options sharedOptions = getOptionsGroup();
             synchronized (sharedOptions) {
-                cmd = parser.parse(get_options_group(), args);
+                cmd = parser.parse(getOptionsGroup(), args);
             }
         } catch (ParseException exp) {
             // oops, something went wrong
-            ProgramOptions.getLoger().error("Parsing failed.  reason: \"%s\" failed", exp.getMessage());
+            ProgramOptions.getLogger().error("Parsing failed.  reason: \"%s\" failed", exp.getMessage());
 
             printHelp();
             return -1;
@@ -361,7 +361,7 @@ public class ProgramOptions {
             } else if (val.equalsIgnoreCase("ue-json")) {
                 outType = FileType.UEJSON;
             } else {
-                ProgramOptions.getLoger().error("Invalid output type ", val);
+                ProgramOptions.getLogger().error("Invalid output type ", val);
                 return -1;
             }
         }
@@ -376,7 +376,7 @@ public class ProgramOptions {
             } else if (val.equalsIgnoreCase("flatbuffer")) {
                 protocol = Protocol.FLATBUFFER;
             } else {
-                ProgramOptions.getLoger().error("Invalid protocol type ", val);
+                ProgramOptions.getLogger().error("Invalid protocol type ", val);
                 return -2;
             }
         }
@@ -428,7 +428,7 @@ public class ProgramOptions {
             } else if (mode.equalsIgnoreCase("none") || mode.isEmpty()) {
                 dataSourceMappingType = DataSourceMappingType.NONE;
             } else {
-                ProgramOptions.getLoger().warn("Unknown --data-source-mapping-mode %s.", mode);
+                ProgramOptions.getLogger().warn("Unknown --data-source-mapping-mode %s.", mode);
                 dataSourceMappingType = DataSourceMappingType.NONE;
             }
         }
@@ -461,20 +461,20 @@ public class ProgramOptions {
         // macro source file path
         if (cmd.hasOption('s')) {
             dataSourceFile = cmd.getOptionValue('s');
-            int dot_index = dataSourceFile.lastIndexOf('.');
+            int dotIndex = dataSourceFile.lastIndexOf('.');
 
-            String name_suffix = dot_index >= 0 && dot_index < dataSourceFile.length() - 1
-                    ? dataSourceFile.substring(dot_index + 1)
+            String nameSuffix = dotIndex >= 0 && dotIndex < dataSourceFile.length() - 1
+                    ? dataSourceFile.substring(dotIndex + 1)
                     : null;
-            if (null != name_suffix && (name_suffix.equalsIgnoreCase("xls") || name_suffix.equalsIgnoreCase("xlsx")
-                    || name_suffix.equalsIgnoreCase("cvs") || name_suffix.equalsIgnoreCase("xlsm")
-                    || name_suffix.equalsIgnoreCase("ods"))) {
+            if (null != nameSuffix && (nameSuffix.equalsIgnoreCase("xls") || nameSuffix.equalsIgnoreCase("xlsx")
+                    || nameSuffix.equalsIgnoreCase("cvs") || nameSuffix.equalsIgnoreCase("xlsm")
+                    || nameSuffix.equalsIgnoreCase("ods"))) {
                 dataSourceType = FileType.EXCEL;
 
-            } else if (null != name_suffix && (name_suffix.equalsIgnoreCase("ini")
-                    || name_suffix.equalsIgnoreCase("cfg") || name_suffix.equalsIgnoreCase("conf"))) {
+            } else if (null != nameSuffix && (nameSuffix.equalsIgnoreCase("ini")
+                    || nameSuffix.equalsIgnoreCase("cfg") || nameSuffix.equalsIgnoreCase("conf"))) {
                 dataSourceType = FileType.INI;
-            } else if (null != name_suffix && name_suffix.equalsIgnoreCase("json")) {
+            } else if (null != nameSuffix && nameSuffix.equalsIgnoreCase("json")) {
                 dataSourceType = FileType.JSON;
                 // } else if (null != name_suffix && name_suffix.equalsIgnoreCase("lua")) {
                 // dataSourceType = FileType.LUA;
@@ -493,42 +493,42 @@ public class ProgramOptions {
         // rename rules
         if (cmd.hasOption('n')) {
             do {
-                String rule_string = cmd.getOptionValue('n');
-                rule_string = rule_string.trim();
-                if (rule_string.isEmpty()) {
-                    ProgramOptions.getLoger().error("Invalid rename rule %s", rule_string);
+                String ruleString = cmd.getOptionValue('n');
+                ruleString = ruleString.trim();
+                if (ruleString.isEmpty()) {
+                    ProgramOptions.getLogger().error("Invalid rename rule %s", ruleString);
                     break;
                 }
 
-                if (rule_string.length() >= 2 && (rule_string.charAt(0) == '"' || rule_string.charAt(0) == '\'')
-                        && rule_string.charAt(0) == rule_string.charAt(rule_string.length() - 1)) {
-                    rule_string = rule_string.substring(1, rule_string.length() - 1);
+                if (ruleString.length() >= 2 && (ruleString.charAt(0) == '"' || ruleString.charAt(0) == '\'')
+                        && ruleString.charAt(0) == ruleString.charAt(ruleString.length() - 1)) {
+                    ruleString = ruleString.substring(1, ruleString.length() - 1);
                 }
 
-                String[] groups = rule_string.split(rule_string.substring(0, 1));
-                int start_index = 0;
-                for (; start_index < groups.length; ++start_index) {
-                    if (groups[start_index].isEmpty())
+                String[] groups = ruleString.split(ruleString.substring(0, 1));
+                int startIndex = 0;
+                for (; startIndex < groups.length; ++startIndex) {
+                    if (groups[startIndex].isEmpty())
                         continue;
                     break;
                 }
 
-                if (groups.length < start_index + 2) {
-                    ProgramOptions.getLoger().error("Invalid rename rule %s", rule_string);
+                if (groups.length < startIndex + 2) {
+                    ProgramOptions.getLogger().error("Invalid rename rule %s", ruleString);
                     break;
                 }
 
-                Pattern match_rule;
+                Pattern matchRule;
                 try {
-                    match_rule = Pattern.compile(groups[start_index]);
+                    matchRule = Pattern.compile(groups[startIndex]);
                 } catch (PatternSyntaxException e) {
-                    ProgramOptions.getLoger().error("Invalid rename regex rule %s", groups[start_index]);
+                    ProgramOptions.getLogger().error("Invalid rename regex rule %s", groups[startIndex]);
                     break;
                 }
 
                 renameRule = new RenameRule();
-                renameRule.match = match_rule;
-                renameRule.replace = groups[start_index + 1];
+                renameRule.match = matchRule;
+                renameRule.replace = groups[startIndex + 1];
             } while (false);
         }
 
@@ -570,7 +570,7 @@ public class ProgramOptions {
             // 允许使用space \t \r \n, 不要trim
             defaultFieldSeparator = cmd.getOptionValue("default-field-separator", defaultFieldSeparator);
             if (defaultFieldSeparator.isEmpty()) {
-                ProgramOptions.getLoger().error("Invalid default field separator %s", defaultFieldSeparator);
+                ProgramOptions.getLogger().error("Invalid default field separator %s", defaultFieldSeparator);
                 return -3;
             }
         }
@@ -589,7 +589,7 @@ public class ProgramOptions {
                 .getResourceAsStream("application.properties")) {
             properties.load(inCfg);
         } catch (IOException e) {
-            ProgramOptions.getLoger().error("Get properties file application.properties failed.\n%s", e.getMessage());
+            ProgramOptions.getLogger().error("Get properties file application.properties failed.\n%s", e.getMessage());
         }
 
         return properties;
@@ -666,7 +666,7 @@ public class ProgramOptions {
                 dataSourceMappingResult.put(result, input);
                 return result;
             } catch (NoSuchAlgorithmException e) {
-                ProgramOptions.getLoger().error("%s", e.getMessage());
+                ProgramOptions.getLogger().error("%s", e.getMessage());
                 return input;
             }
         }
@@ -692,7 +692,17 @@ public class ProgramOptions {
         NONE, MD5, SHA1, SHA256
     }
 
-    static public synchronized Logger getLoger() {
+    /**
+     * Compatibility entry point for existing callback scripts.
+     *
+     * @deprecated Use {@link #getLogger()}.
+     */
+    @Deprecated
+    public static Logger getLoger() {
+        return getLogger();
+    }
+
+    public static synchronized Logger getLogger() {
         if (null != logger) {
             return logger;
         }
@@ -710,15 +720,15 @@ public class ProgramOptions {
         return logger;
     }
 
-    static public String getReportUrl() {
+    public static String getReportUrl() {
         return getProperties().getProperty("report", "https://github.com/xresloader/xresloader/issues");
     }
 
-    static public String getHomeUrl() {
+    public static String getHomeUrl() {
         return getProperties().getProperty("home", "https://xresloader.atframe.work/");
     }
 
-    static public String getEndl() {
+    public static String getEndl() {
         if (endl == null) {
             endl = System.getProperty("line.separator", "\n");
         }
@@ -726,7 +736,7 @@ public class ProgramOptions {
         return endl;
     }
 
-    static public int dumpDataSourceMapping() {
+    public static int dumpDataSourceMapping() {
         int ret = 0;
         OutputStream out;
         File file;
@@ -754,7 +764,7 @@ public class ProgramOptions {
                     dataSourceMappingOrigin.put(parts[0], parts[1]);
                 }
             } catch (IOException e) {
-                ProgramOptions.getLoger().error("Load data source mapping file %s failed.\n%s", dataSourceMappingFile,
+                ProgramOptions.getLogger().error("Load data source mapping file %s failed.\n%s", dataSourceMappingFile,
                         e.getMessage());
                 ret += 1;
             }
@@ -771,7 +781,7 @@ public class ProgramOptions {
 
             out = new FileOutputStream(file);
         } catch (IOException e) {
-            ProgramOptions.getLoger().error("Open data source mapping file %s failed.\n%s", dataSourceMappingFile,
+            ProgramOptions.getLogger().error("Open data source mapping file %s failed.\n%s", dataSourceMappingFile,
                     e.getMessage());
             ret += 1;
             return ret;
@@ -817,7 +827,7 @@ public class ProgramOptions {
                     }
                     out.write(getEndl().getBytes());
                 } catch (IOException e) {
-                    ProgramOptions.getLoger().error("Write data source mapping %s failed.\n%s", key, e.getMessage());
+                    ProgramOptions.getLogger().error("Write data source mapping %s failed.\n%s", key, e.getMessage());
                     ret += 1;
                 }
             }
@@ -826,7 +836,7 @@ public class ProgramOptions {
         try {
             out.close();
         } catch (IOException e) {
-            ProgramOptions.getLoger().error("Close data source mapping file %s failed.\n%s",
+            ProgramOptions.getLogger().error("Close data source mapping file %s failed.\n%s",
                     file.getAbsoluteFile().getPath(),
                     e.getMessage());
             ret += 1;

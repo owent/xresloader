@@ -15,7 +15,7 @@ public class DataVerifyRegex extends DataVerifyImpl {
 
         this.valid = false;
         if (tokens.getParameters().size() < 2) {
-            ProgramOptions.getLoger().error("Invalid in regex validator %s", tokens.getName());
+            ProgramOptions.getLogger().error("Invalid in regex validator %s", tokens.getName());
             return;
         }
 
@@ -25,7 +25,7 @@ public class DataVerifyRegex extends DataVerifyImpl {
             try {
                 ValidatorParameter param = tokens.getParameters().get(i);
                 if (!param.isString()) {
-                    ProgramOptions.getLoger().error("Can not parse regex %s for validator %s : not a string",
+                    ProgramOptions.getLogger().error("Can not parse regex %s for validator %s : not a string",
                             param.toString(),
                             tokens.getName());
                     this.valid = false;
@@ -33,7 +33,7 @@ public class DataVerifyRegex extends DataVerifyImpl {
                 }
                 this.rules.add(Pattern.compile(param.toString()));
             } catch (PatternSyntaxException e) {
-                ProgramOptions.getLoger().error("Can not parse regex %s for validator %s : %s",
+                ProgramOptions.getLogger().error("Can not parse regex %s for validator %s : %s",
                         tokens.getParameters().get(i).toString(),
                         tokens.getName(),
                         e.getMessage());

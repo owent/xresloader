@@ -11,7 +11,7 @@ public class DataVerifyInValues extends DataVerifyImpl {
         this.valid = true;
         for (ValidatorParameter value : tokens.getParameters()) {
             if (!value.isString()) {
-                ProgramOptions.getLoger().error(
+                ProgramOptions.getLogger().error(
                         String.format("DataVerifyInValues: value '%s' is not a valid value\n",
                                 value.toString()));
                 this.valid = false;
@@ -34,7 +34,7 @@ public class DataVerifyInValues extends DataVerifyImpl {
                     numValue = Long.parseLong(stripValue);
                     this.allNumbers.add(numValue);
                 } catch (NumberFormatException e) {
-                    ProgramOptions.getLoger().warn(
+                    ProgramOptions.getLogger().warn(
                             String.format("DataVerifyInValues: value '%s' is not a valid number, treat as string\n",
                                     stripValue));
                 }

@@ -14,7 +14,7 @@ import org.xresloader.core.engine.IdentifyDescriptor;
  * Created by owentou on 2014/10/9.
  */
 public abstract class DataSrcImpl {
-    static public final int LOG_PROCESS_BOUND = 5000;
+    public static final int LOG_PROCESS_BOUND = 5000;
 
     private static final ThreadLocal<DataSrcImpl> ourInstance = new ThreadLocal<>();
     private int lastDataFieldIndex = 0;
@@ -31,26 +31,26 @@ public abstract class DataSrcImpl {
     protected DataSrcImpl() {
     }
 
-    public static DataContainer<Boolean> getBoolCache(boolean default_val) {
-        dcCacheBool.get().value = default_val;
+    public static DataContainer<Boolean> getBoolCache(boolean defaultVal) {
+        dcCacheBool.get().value = defaultVal;
         dcCacheBool.get().valid = false;
         return dcCacheBool.get();
     }
 
-    public static DataContainer<String> getStringCache(String default_val) {
-        dcCacheString.get().value = default_val;
+    public static DataContainer<String> getStringCache(String defaultVal) {
+        dcCacheString.get().value = defaultVal;
         dcCacheString.get().valid = false;
         return dcCacheString.get();
     }
 
-    public static DataContainer<Double> getDoubleCache(double default_val) {
-        dcCacheDouble.get().value = default_val;
+    public static DataContainer<Double> getDoubleCache(double defaultVal) {
+        dcCacheDouble.get().value = defaultVal;
         dcCacheDouble.get().valid = false;
         return dcCacheDouble.get();
     }
 
-    public static DataContainer<Long> getLongCache(long default_val) {
-        dcCacheLong.get().value = default_val;
+    public static DataContainer<Long> getLongCache(long defaultVal) {
+        dcCacheLong.get().value = defaultVal;
         dcCacheLong.get().valid = false;
         return dcCacheLong.get();
     }
@@ -165,11 +165,11 @@ public abstract class DataSrcImpl {
         return 0;
     }
 
-    public IdentifyDescriptor getColumnByName(String _name) {
+    public IdentifyDescriptor getColumnByName(String name) {
         return null;
     }
 
-    public boolean containsIdentifyMappingPrefix(String _name) {
+    public boolean containsIdentifyMappingPrefix(String name) {
         return false;
     }
 
@@ -181,7 +181,7 @@ public abstract class DataSrcImpl {
         return null;
     }
 
-    static public Boolean getBooleanFromString(String item) {
+    public static Boolean getBooleanFromString(String item) {
         if (item == null || item.isEmpty()) {
             return false;
         }

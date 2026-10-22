@@ -1,9 +1,9 @@
 package org.xresloader.core.data.et;
 
-import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -34,7 +34,7 @@ import com.google.protobuf.Descriptors.FieldDescriptor.Type;
  */
 public class DataETProcessor extends DataDstJava {
 
-    static private DataETProcessor instance;
+    private static DataETProcessor instance;
 
     private ScriptEngine scriptEngine = null;
     private Invocable invocable = null;
@@ -78,14 +78,14 @@ public class DataETProcessor extends DataDstJava {
         }
 
         if (scriptEngine == null) {
-            ProgramOptions.getLoger().warn(
+            ProgramOptions.getLogger().warn(
                     "Failed to load org.openjdk.nashorn from ScriptEngineManager(classpath=%s), try to call NashornScriptEngineFactory directly",
                     System.getProperty("java.class.path"));
             scriptEngine = new org.openjdk.nashorn.api.scripting.NashornScriptEngineFactory().getScriptEngine();
         }
 
         if (scriptEngine == null) {
-            ProgramOptions.getLoger().warn(
+            ProgramOptions.getLogger().warn(
                     "Failed to initialize script engine(nashorn,javascript,rhino,graal.js), script plugin will not be available");
         }
     }
@@ -166,16 +166,17 @@ public class DataETProcessor extends DataDstJava {
                 // scriptEngine.put("gSchemeConf", SchemeConf.getInstance());
                 scope.put("gOurInstance", DataSrcImpl.getOurInstance());
                 scope.put("gSchemeConf", SchemeConf.getInstance());
-                String bootStrapCodes = IOUtils.toString(
-                        new FileInputStream(new File(SchemeConf.getInstance().getCallbackScriptPath())),
-                        "UTF-8");
+                String bootstrapCode;
+                try (FileInputStream input = new FileInputStream(SchemeConf.getInstance().getCallbackScriptPath())) {
+                    bootstrapCode = IOUtils.toString(input, StandardCharsets.UTF_8);
+                }
 
                 scriptEngine.eval("var global = global || this;", scope);
                 // if (scriptEngine instanceof RhinoScriptEngine) {
                 // initRhinoEngine(sc);
                 // }
 
-                scriptEngine.eval(bootStrapCodes, scope);
+                scriptEngine.eval(bootstrapCode, scope);
                 if (undefinedObject == null) {
                     undefinedObject = scriptEngine.eval("(function(){ return undefined;})()");
                 }
@@ -186,14 +187,14 @@ public class DataETProcessor extends DataDstJava {
             if (undefinedClass17 == null) {
                 try {
                     undefinedClass17 = Class.forName("org.openjdk.nashorn.internal.runtime.Undefined");
-                } catch (ClassNotFoundException _e) {
+                } catch (ClassNotFoundException e) {
                     // Ignore exception
                 }
             }
             if (undefinedClass11 == null) {
                 try {
                     undefinedClass11 = Class.forName("jdk.nashorn.internal.runtime.Undefined");
-                } catch (ClassNotFoundException _e) {
+                } catch (ClassNotFoundException e) {
                     // Ignore exception
                 }
             }

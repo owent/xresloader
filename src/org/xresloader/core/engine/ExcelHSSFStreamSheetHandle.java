@@ -197,7 +197,7 @@ public class ExcelHSSFStreamSheetHandle implements HSSFListener {
 
         if (thisRow >= DataSrcImpl.LOG_PROCESS_BOUND && thisRow % DataSrcImpl.LOG_PROCESS_BOUND == 0
                 && currentTableIndex != null) {
-            ProgramOptions.getLoger().info("  > File: %s, Table: %s, indexes %d rows", currentTableIndex.getFilePath(),
+            ProgramOptions.getLogger().info("  > File: %s, Table: %s, indexes %d rows", currentTableIndex.getFilePath(),
                     currentTableIndex.getSheetName(), thisRow);
         }
 
@@ -236,12 +236,12 @@ public class ExcelHSSFStreamSheetHandle implements HSSFListener {
         }
     }
 
-    static public ExcelEngine.CustomDataTableIndex buildCustomTableIndex(File file, String sheetName) {
+    public static ExcelEngine.CustomDataTableIndex buildCustomTableIndex(File file, String sheetName) {
         if (file == null || sheetName == null) {
             return null;
         }
 
-        try (POIFSFileSystem xls_fs = new POIFSFileSystem(new FileInputStream(file))) {
+        try (POIFSFileSystem xlsFs = new POIFSFileSystem(new FileInputStream(file))) {
             ExcelEngine.CustomDataTableIndex tableIndex = new ExcelEngine.CustomDataTableIndex(file.getCanonicalPath(),
                     sheetName);
 
@@ -255,18 +255,18 @@ public class ExcelHSSFStreamSheetHandle implements HSSFListener {
             HSSFRequest request = new HSSFRequest();
 
             request.addListenerForAllRecords(formatListener);
-            factory.processWorkbookEvents(request, xls_fs);
+            factory.processWorkbookEvents(request, xlsFs);
 
             if (handle.maxRowNumber > DataSrcImpl.LOG_PROCESS_BOUND
                     && handle.maxRowNumber % DataSrcImpl.LOG_PROCESS_BOUND != 0 && handle.currentTableIndex != null) {
-                ProgramOptions.getLoger().info("  > File: %s, Table: %s, indexes %d rows",
+                ProgramOptions.getLogger().info("  > File: %s, Table: %s, indexes %d rows",
                         handle.currentTableIndex.getFilePath(), handle.currentTableIndex.getSheetName(),
                         handle.maxRowNumber);
             }
 
             return tableIndex;
         } catch (java.io.IOException e) {
-            ProgramOptions.getLoger().error("Open source file \"%s\" and parse sheet \"%s\" failed, %s.",
+            ProgramOptions.getLogger().error("Open source file \"%s\" and parse sheet \"%s\" failed, %s.",
                     file.getPath(), sheetName, e.getMessage());
         }
 

@@ -45,9 +45,12 @@ jobs:
           python3 gen_header_v2.py
           python3 gen_header_v3.py
           cd ..
-          mvn -Dproject.target.javaVersion=21 clean verify --file pom.xml
-          mvn clean verify --file pom.xml
+          sh ./mvnw -Dproject.target.javaVersion=21 clean verify --file pom.xml
+          sh ./mvnw clean verify --file pom.xml
           # Repeated packaging must not shade the previous uber JAR again.
-          mvn verify --file pom.xml
-          cd sample
-          bash gen_sample_output.sh
+          sh ./mvnw verify --file pom.xml
+          python3 tools/verify_samples.py --jar target/xresloader-2.23.7.jar --snapshot build/sample-baseline.json --capture
+      - name: Verify Gradle and compare sample outputs
+        run: |
+          sh ./gradlew --no-daemon --console=plain --warning-mode=all test shadowJar
+          python3 tools/verify_samples.py --jar target/libs/xresloader-2.23.7.jar --snapshot build/sample-baseline.json

@@ -19,10 +19,10 @@ public class DataVerifyPbOneof extends DataVerifyImpl {
 
             // alias extension
             if (fd.getOptions().getExtensionCount(Xresloader.fieldAlias) > 0) {
-                for (String alias_name : fd.getOptions().getExtension(Xresloader.fieldAlias)) {
-                    String alias_name_striped = alias_name.strip();
-                    if (!alias_name_striped.isEmpty()) {
-                        allNames.put(alias_name_striped, (long) fd.getNumber());
+                for (String aliasName : fd.getOptions().getExtension(Xresloader.fieldAlias)) {
+                    String aliasNameStriped = aliasName.strip();
+                    if (!aliasNameStriped.isEmpty()) {
+                        allNames.put(aliasNameStriped, (long) fd.getNumber());
                     }
                 }
             }
@@ -34,15 +34,15 @@ public class DataVerifyPbOneof extends DataVerifyImpl {
     public DataVerifyPbOneof(DescriptorProtos.OneofDescriptorProto desc, DescriptorProtos.DescriptorProto msgDesc) {
         super(desc.getName());
 
-        int oneof_index = -1;
-        int check_index = 0;
+        int oneofIndex = -1;
+        int checkIndex = 0;
         for (DescriptorProtos.OneofDescriptorProto fd : msgDesc.getOneofDeclList()) {
             if (fd == desc || fd.getName().equals(desc.getName())) {
-                oneof_index = check_index;
+                oneofIndex = checkIndex;
                 break;
             }
 
-            check_index = check_index + 1;
+            checkIndex = checkIndex + 1;
         }
 
         for (DescriptorProtos.FieldDescriptorProto fd : msgDesc.getFieldList()) {
@@ -50,7 +50,7 @@ public class DataVerifyPbOneof extends DataVerifyImpl {
                 continue;
             }
 
-            if (fd.getOneofIndex() != oneof_index) {
+            if (fd.getOneofIndex() != oneofIndex) {
                 continue;
             }
 
@@ -59,10 +59,10 @@ public class DataVerifyPbOneof extends DataVerifyImpl {
 
             // alias extension
             if (fd.getOptions().getExtensionCount(Xresloader.fieldAlias) > 0) {
-                for (String alias_name : fd.getOptions().getExtension(Xresloader.fieldAlias)) {
-                    String alias_name_striped = alias_name.strip();
-                    if (!alias_name_striped.isEmpty()) {
-                        allNames.put(alias_name_striped, (long) fd.getNumber());
+                for (String aliasName : fd.getOptions().getExtension(Xresloader.fieldAlias)) {
+                    String aliasNameStriped = aliasName.strip();
+                    if (!aliasNameStriped.isEmpty()) {
+                        allNames.put(aliasNameStriped, (long) fd.getNumber());
                     }
                 }
             }

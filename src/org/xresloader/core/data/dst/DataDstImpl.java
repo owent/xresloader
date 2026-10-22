@@ -49,7 +49,7 @@ public abstract class DataDstImpl {
         return systemEndl;
     }
 
-    static public class DataRowContext {
+    public static class DataRowContext {
         public String fileName;
         public String tableName;
         public DataItemGridWrapper dataItemGrid = null;
@@ -117,13 +117,13 @@ public abstract class DataDstImpl {
                 }
 
                 tagObject.putOpt(fieldPath, value);
-            } catch (Exception _e) {
+            } catch (Exception e) {
                 // Ignore error
             }
         }
     }
 
-    static public class DataTableContext {
+    public static class DataTableContext {
         public HashMap<String, HashMap<String, LinkedList<DataRowContext>>> uniqueCache = new HashMap<>();
 
         @SuppressWarnings("UseSpecificCatch")
@@ -271,10 +271,10 @@ public abstract class DataDstImpl {
 
     public void logErrorMessage(String format, Object... args) {
         this.setLastErrorMessage(format, args);
-        ProgramOptions.getLoger().error("%s", this.lastErrorMessage);
+        ProgramOptions.getLogger().error("%s", this.lastErrorMessage);
     }
 
-    static public String[] splitPlainGroups(String input, String sep) {
+    public static String[] splitPlainGroups(String input, String sep) {
         if (sep == null || sep.isEmpty()) {
             sep = ProgramOptions.getInstance().defaultFieldSeparator;
         }
@@ -303,7 +303,7 @@ public abstract class DataDstImpl {
         return input.split(Pattern.quote(String.valueOf(sepC)));
     }
 
-    static public Boolean parsePlainDataBoolean(String input, IdentifyDescriptor ident,
+    public static Boolean parsePlainDataBoolean(String input, IdentifyDescriptor ident,
             DataDstWriterNode.DataDstFieldDescriptor field) throws ConvException {
         if (input == null) {
             return false;
@@ -321,7 +321,7 @@ public abstract class DataDstImpl {
         return DataSrcImpl.getBooleanFromString(item);
     }
 
-    static public Boolean[] parsePlainDataBoolean(String[] groups, IdentifyDescriptor ident,
+    public static Boolean[] parsePlainDataBoolean(String[] groups, IdentifyDescriptor ident,
             DataDstWriterNode.DataDstFieldDescriptor field) throws ConvException {
         if (groups == null) {
             return null;
@@ -335,7 +335,7 @@ public abstract class DataDstImpl {
         return ret;
     }
 
-    static public String parsePlainDataString(String input, IdentifyDescriptor ident,
+    public static String parsePlainDataString(String input, IdentifyDescriptor ident,
             DataDstWriterNode.DataDstFieldDescriptor field) throws ConvException {
         if (input == null) {
             return null;
@@ -359,7 +359,7 @@ public abstract class DataDstImpl {
         }
     }
 
-    static public String[] parsePlainDataString(String[] groups, IdentifyDescriptor ident,
+    public static String[] parsePlainDataString(String[] groups, IdentifyDescriptor ident,
             DataDstWriterNode.DataDstFieldDescriptor field) throws ConvException {
         if (groups == null) {
             return null;
@@ -374,7 +374,7 @@ public abstract class DataDstImpl {
         return ret;
     }
 
-    static public Long parsePlainDataLong(String input, IdentifyDescriptor ident,
+    public static Long parsePlainDataLong(String input, IdentifyDescriptor ident,
             DataDstWriterNode.DataDstFieldDescriptor field) throws ConvException {
         if (input == null) {
             return null;
@@ -400,7 +400,7 @@ public abstract class DataDstImpl {
         return ret;
     }
 
-    static public Long[] parsePlainDataLong(String[] groups, IdentifyDescriptor ident,
+    public static Long[] parsePlainDataLong(String[] groups, IdentifyDescriptor ident,
             DataDstWriterNode.DataDstFieldDescriptor field) throws ConvException {
         if (groups == null) {
             return null;
@@ -414,7 +414,7 @@ public abstract class DataDstImpl {
         return ret;
     }
 
-    static public Double parsePlainDataDouble(String input, IdentifyDescriptor ident,
+    public static Double parsePlainDataDouble(String input, IdentifyDescriptor ident,
             DataDstWriterNode.DataDstFieldDescriptor field) throws ConvException {
         if (input == null) {
             return 0.0;
@@ -443,27 +443,27 @@ public abstract class DataDstImpl {
         }
     }
 
-    static private final Pattern DATE_CHECK_RULE = Pattern.compile("\\d+-\\d+-\\d+");
-    static private final Pattern TIME_SSS_CHECK_RULE = Pattern.compile("\\d+:\\d+:\\d+\\.\\d+");
-    static private final Pattern TIME_CHECK_RULE = Pattern.compile("\\d+:\\d+:\\d+");
-    static private final Pattern ZONE_CHECK_RULE = Pattern.compile(":\\d+(\\.\\d*)?(Z|[+-])");
-    static private final Pattern DIGITAL_CHECK_RULE = Pattern.compile("[+-]?\\d+(\\.\\d*)?");
-    static private final Pattern SPECIAL_DURATION_WITH_UNIT = Pattern.compile(
+    private static final Pattern DATE_CHECK_RULE = Pattern.compile("\\d+-\\d+-\\d+");
+    private static final Pattern TIME_SSS_CHECK_RULE = Pattern.compile("\\d+:\\d+:\\d+\\.\\d+");
+    private static final Pattern TIME_CHECK_RULE = Pattern.compile("\\d+:\\d+:\\d+");
+    private static final Pattern ZONE_CHECK_RULE = Pattern.compile(":\\d+(\\.\\d*)?(Z|[+-])");
+    private static final Pattern DIGITAL_CHECK_RULE = Pattern.compile("[+-]?\\d+(\\.\\d*)?");
+    private static final Pattern SPECIAL_DURATION_WITH_UNIT = Pattern.compile(
             "([+-]?\\d+(\\.\\d*)?)\\s*(w|weeks|d|days|h|hours|m|minutes|s|seconds|ms|milliseconds|us|microseconds|ns|nanoseconds)");
-    static DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd").withZone(ZoneId.systemDefault())
+    private static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd").withZone(ZoneId.systemDefault())
             .withResolverStyle(ResolverStyle.SMART);
-    static DateTimeFormatter DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")
+    private static final DateTimeFormatter DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")
             .withZone(ZoneId.systemDefault())
             .withResolverStyle(ResolverStyle.SMART);
-    static DateTimeFormatter DATE_TIME_SSS_FORMATTER = new DateTimeFormatterBuilder()
+    private static final DateTimeFormatter DATE_TIME_SSS_FORMATTER = new DateTimeFormatterBuilder()
             .appendPattern("yyyy-MM-dd HH:mm:ss")
             .appendFraction(ChronoField.NANO_OF_SECOND, 1, 9, true).toFormatter()
             .withZone(ZoneId.systemDefault())
             .withResolverStyle(ResolverStyle.SMART);
-    static DateTimeFormatter DATE_TIME_ZONE_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss[XXXXX][XXX]")
+    private static final DateTimeFormatter DATE_TIME_ZONE_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss[XXXXX][XXX]")
             .withZone(ZoneId.systemDefault())
             .withResolverStyle(ResolverStyle.SMART);
-    static DateTimeFormatter DATE_TIME_ZONE_SSS_FORMATTER = new DateTimeFormatterBuilder()
+    private static final DateTimeFormatter DATE_TIME_ZONE_SSS_FORMATTER = new DateTimeFormatterBuilder()
             .appendPattern("yyyy-MM-dd HH:mm:ss")
             .appendFraction(ChronoField.NANO_OF_SECOND, 1, 9, true)
             .optionalStart()
@@ -475,17 +475,17 @@ public abstract class DataDstImpl {
             .toFormatter()
             .withZone(ZoneId.systemDefault())
             .withResolverStyle(ResolverStyle.SMART);
-    static DateTimeFormatter TIME_FORMATTER = DateTimeFormatter.ofPattern("HH:mm:ss").withZone(ZoneId.systemDefault())
+    private static final DateTimeFormatter TIME_FORMATTER = DateTimeFormatter.ofPattern("HH:mm:ss").withZone(ZoneId.systemDefault())
             .withResolverStyle(ResolverStyle.SMART);
-    static DateTimeFormatter TIME_SSS_FORMATTER = new DateTimeFormatterBuilder()
+    private static final DateTimeFormatter TIME_SSS_FORMATTER = new DateTimeFormatterBuilder()
             .appendPattern("HH:mm:ss")
             .appendFraction(ChronoField.NANO_OF_SECOND, 1, 9, true).toFormatter()
             .withZone(ZoneId.systemDefault())
             .withResolverStyle(ResolverStyle.SMART);
-    static DateTimeFormatter TIME_ZONE_FORMATTER = DateTimeFormatter.ofPattern("HH:mm:ss[XXX][XXXXX]")
+    private static final DateTimeFormatter TIME_ZONE_FORMATTER = DateTimeFormatter.ofPattern("HH:mm:ss[XXX][XXXXX]")
             .withZone(ZoneId.systemDefault())
             .withResolverStyle(ResolverStyle.SMART);
-    static DateTimeFormatter TIME_ZONE_SSS_FORMATTER = new DateTimeFormatterBuilder()
+    private static final DateTimeFormatter TIME_ZONE_SSS_FORMATTER = new DateTimeFormatterBuilder()
             .appendPattern("HH:mm:ss")
             .appendFraction(ChronoField.NANO_OF_SECOND, 1, 9, true)
             .optionalStart()
@@ -497,10 +497,10 @@ public abstract class DataDstImpl {
             .toFormatter()
             .withZone(ZoneId.systemDefault())
             .withResolverStyle(ResolverStyle.SMART);
-    static ZoneOffset SYSTEM_ZONE_OFFSET = OffsetDateTime.now().getOffset();
-    static ZoneOffset UTC_ZONE_OFFSET = ZoneOffset.UTC;
+    private static final ZoneOffset SYSTEM_ZONE_OFFSET = OffsetDateTime.now().getOffset();
+    private static final ZoneOffset UTC_ZONE_OFFSET = ZoneOffset.UTC;
 
-    static public Instant parsePlainDataDatetime(String input) throws ConvException {
+    public static Instant parsePlainDataDatetime(String input) throws ConvException {
         if (input == null) {
             return null;
         }
@@ -575,7 +575,7 @@ public abstract class DataDstImpl {
         }
     }
 
-    static public Instant parsePlainDataDuration(String input) throws ConvException {
+    public static Instant parsePlainDataDuration(String input) throws ConvException {
         if (input == null) {
             return null;
         }
@@ -690,7 +690,7 @@ public abstract class DataDstImpl {
         }
     }
 
-    static public Double[] parsePlainDataDouble(String[] groups, IdentifyDescriptor ident,
+    public static Double[] parsePlainDataDouble(String[] groups, IdentifyDescriptor ident,
             DataDstWriterNode.DataDstFieldDescriptor field) throws ConvException {
         if (groups == null) {
             return null;
@@ -705,7 +705,7 @@ public abstract class DataDstImpl {
         return ret;
     }
 
-    static public Object[] parsePlainDataOneof(String input, IdentifyDescriptor ident,
+    public static Object[] parsePlainDataOneof(String input, IdentifyDescriptor ident,
             DataDstWriterNode.DataDstOneofDescriptor oneof) throws ConvException {
         if (input == null) {
             return null;
@@ -743,21 +743,21 @@ public abstract class DataDstImpl {
         }
 
         if (ret.length > 2) {
-            DataSrcImpl current_source = DataSrcImpl.getOurInstance();
+            DataSrcImpl currentSource = DataSrcImpl.getOurInstance();
             String[] ignored = new String[ret.length - 2];
             for (int i = 2; i < ret.length; ++i) {
                 ignored[i - 2] = groups[i];
             }
-            if (current_source != null) {
-                ProgramOptions.getLoger().warn(
+            if (currentSource != null) {
+                ProgramOptions.getLogger().warn(
                         "Convert %s from \"%s\", we need only %d fields but provided %d, \"%s\" may be ignored.%s  > File: %s, Table: %s, Row: %d, Column: %d(%s)",
                         oneof.getFullName(), input, 2, ret.length, String.join("\",\"", ignored),
-                        ProgramOptions.getEndl(), current_source.getCurrentFileName(),
-                        current_source.getCurrentTableName(), current_source.getLastRowNum() + 1,
-                        current_source.getLastColumnNum() + 1,
-                        ExcelEngine.getColumnName(current_source.getLastColumnNum() + 1));
+                        ProgramOptions.getEndl(), currentSource.getCurrentFileName(),
+                        currentSource.getCurrentTableName(), currentSource.getLastRowNum() + 1,
+                        currentSource.getLastColumnNum() + 1,
+                        ExcelEngine.getColumnName(currentSource.getLastColumnNum() + 1));
             } else {
-                ProgramOptions.getLoger().warn(
+                ProgramOptions.getLogger().warn(
                         "Convert %s from \"%s\", we need only %d fields but provided %d, \"%s\" may be ignored.",
                         oneof.getFullName(), input, 2, ret.length, String.join("\",\"", ignored));
             }
@@ -766,7 +766,7 @@ public abstract class DataDstImpl {
         return ret;
     }
 
-    static public String getPlainFieldSeparator(DataDstWriterNode.DataDstFieldDescriptor field) {
+    public static String getPlainFieldSeparator(DataDstWriterNode.DataDstFieldDescriptor field) {
         if (field == null) {
             return null;
         }
@@ -789,7 +789,7 @@ public abstract class DataDstImpl {
         return ret;
     }
 
-    static public String getPlainMessageSeparator(DataDstWriterNode.DataDstFieldDescriptor field) {
+    public static String getPlainMessageSeparator(DataDstWriterNode.DataDstFieldDescriptor field) {
         if (field == null) {
             return null;
         }
@@ -814,7 +814,7 @@ public abstract class DataDstImpl {
         return ret;
     }
 
-    static public String getPlainOneofSeparator(DataDstWriterNode.DataDstOneofDescriptor oneof) {
+    public static String getPlainOneofSeparator(DataDstWriterNode.DataDstOneofDescriptor oneof) {
         if (oneof == null) {
             return null;
         }
@@ -822,7 +822,7 @@ public abstract class DataDstImpl {
         return oneof.mutableExtension().plainSeparator;
     }
 
-    static public String joinPlainInputHint(String sep, String[] inputs) {
+    public static String joinPlainInputHint(String sep, String[] inputs) {
         if (inputs == null || inputs.length <= 0) {
             return "";
         }

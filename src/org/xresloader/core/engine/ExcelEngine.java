@@ -39,19 +39,19 @@ import org.xresloader.core.scheme.SchemeConf;
  * Created by owentou on 2014/10/9.
  */
 public class ExcelEngine {
-    static private Pattern checkDate = Pattern.compile("[/\\-\\.]");
-    static private Pattern checkTime = Pattern.compile(":");
+    private static Pattern checkDate = Pattern.compile("[/\\-\\.]");
+    private static Pattern checkTime = Pattern.compile(":");
 
     /**
      * 开启的workbook缓存，减少打开和分析文件的耗时
      */
-    static private HashMap<String, Workbook> openedWorkbooks = new HashMap<>();
+    private static HashMap<String, Workbook> openedWorkbooks = new HashMap<>();
 
     /**
      * 开启的自定义索引缓存，减少打开和分析文件的耗时
      */
-    static private LRUMap<String, CustomDataTableIndex> openedCustomDataTableIndex = new LRUMap<>();
-    static private int openedCustomDataTableRows = 0;
+    private static LRUMap<String, CustomDataTableIndex> openedCustomDataTableIndex = new LRUMap<>();
+    private static int openedCustomDataTableRows = 0;
 
     /**
      * 日期格式列缓存，XSSF在获取Style时性能极其低下，缓存一下有助于提升性能 导致的副作用就是只接受第一个数据行的日期格式
@@ -59,7 +59,7 @@ public class ExcelEngine {
     // static private HashMap<Integer, SimpleDateFormat> dateTypeStyle = new
     // HashMap<Integer, SimpleDateFormat>();
 
-    static public class FormulaWrapper {
+    public static class FormulaWrapper {
         public FormulaEvaluator evalor = null;
 
         public FormulaWrapper(FormulaEvaluator evalor) {
@@ -67,7 +67,7 @@ public class ExcelEngine {
         }
     }
 
-    static public class CustomDataRowIndex {
+    public static class CustomDataRowIndex {
         private ArrayList<String> columns = new ArrayList<>();
         private int rowNumber = 0;
         private CustomDataTableIndex ownerSheet = null;
@@ -106,7 +106,7 @@ public class ExcelEngine {
         }
     }
 
-    static public class CustomDataTableIndex {
+    public static class CustomDataTableIndex {
         private String filePath = null;
         private String sheetName = null;
         private int lastRowNum = -1;
@@ -114,8 +114,8 @@ public class ExcelEngine {
 
         private HashMap<Integer, CustomDataRowIndex> rows = new HashMap<>();
 
-        public CustomDataTableIndex(String file_path, String sheetName) {
-            this.filePath = file_path;
+        public CustomDataTableIndex(String filePath, String sheetName) {
+            this.filePath = filePath;
             this.sheetName = sheetName;
         }
 
@@ -154,7 +154,7 @@ public class ExcelEngine {
         }
     }
 
-    static public class DataRowWrapper {
+    public static class DataRowWrapper {
         private Row userModuleRow = null;
         private CustomDataRowIndex customRow = null;
 
@@ -199,7 +199,7 @@ public class ExcelEngine {
         }
     }
 
-    static public abstract class DataSheetWrapper {
+    public static abstract class DataSheetWrapper {
         private final SchemeConf.DataInfo dataSource;
 
         public DataSheetWrapper(SchemeConf.DataInfo dataSource) {
@@ -217,7 +217,7 @@ public class ExcelEngine {
         public abstract int getLastColumnIndex();
     }
 
-    static public abstract class DataItemGridWrapper {
+    public static abstract class DataItemGridWrapper {
         boolean transpose;
         int dataItemIndex;
 
@@ -245,7 +245,7 @@ public class ExcelEngine {
          * 
          * @return 最后一个数据字段索引
          */
-        abstract public int getLastDataFieldIndex();
+        public abstract int getLastDataFieldIndex();
 
         /**
          * 获取自定义行索引单元格的值
@@ -254,7 +254,7 @@ public class ExcelEngine {
          * @param ident    标识符(数据字段信息)
          * @return 自定义行索引单元格的值,如果不是自定义索引则返回null
          */
-        abstract public String getCustomRowIndexCellValue(DataItemGridWrapper itemGrid, IdentifyDescriptor ident);
+        public abstract String getCustomRowIndexCellValue(DataItemGridWrapper itemGrid, IdentifyDescriptor ident);
 
         /**
          * 获取POI索引单元格
@@ -263,14 +263,14 @@ public class ExcelEngine {
          * @param ident    标识符(数据字段信息)
          * @return POI单元格,如果不是POI索引或数据不存在则返回null
          */
-        abstract public Cell getUserModuleRowCell(DataItemGridWrapper itemGrid, IdentifyDescriptor ident);
+        public abstract Cell getUserModuleRowCell(DataItemGridWrapper itemGrid, IdentifyDescriptor ident);
 
         /**
          * 获取数据源信息
          * 
          * @return 数据源信息
          */
-        abstract public SchemeConf.DataInfo getDataSource();
+        public abstract SchemeConf.DataInfo getDataSource();
 
         /**
          * 获取原始行索引
@@ -304,7 +304,7 @@ public class ExcelEngine {
     /**
      * 清空缓存
      */
-    static public void clearAllCache() {
+    public static void clearAllCache() {
         // dateTypeStyle.clear();
     }
 
@@ -313,7 +313,7 @@ public class ExcelEngine {
      * 
      * @param column 列号(从1开始)
      */
-    static public String getColumnName(int column) {
+    public static String getColumnName(int column) {
         if (column <= 0) {
             return "UNKNOWN";
         }
@@ -331,57 +331,54 @@ public class ExcelEngine {
     /**
      * 打开Excel文件
      *
-     * @param file_path 文件路径
+     * @param filePath 文件路径
      * @return Excel Workbook对象
      */
-    static public Workbook openWorkbook(File file) {
+    public static Workbook openWorkbook(File file) {
         // 无论打开什么Excel文件，都要清空缓存
         clearAllCache();
 
-        String file_path;
+        String filePath;
         try {
-            file_path = file.getCanonicalPath();
+            filePath = file.getCanonicalPath();
         } catch (IOException e) {
-            ProgramOptions.getLoger().error("%s", e.getMessage());
-            file_path = file.getPath();
+            ProgramOptions.getLogger().error("%s", e.getMessage());
+            filePath = file.getPath();
         }
 
-        Workbook ret = openedWorkbooks.get(file_path);
+        Workbook ret = openedWorkbooks.get(filePath);
         if (null != ret) {
             return ret;
         }
 
-        FileInputStream is;
-        try {
-            is = new FileInputStream(file_path);
-
+        try (FileInputStream input = new FileInputStream(filePath)) {
             // 类型枚举，以后能支持 ods等非微软格式？
-            if (file_path.toLowerCase().endsWith(".xls")) {
-                ret = new HSSFWorkbook(is);
+            if (filePath.toLowerCase().endsWith(".xls")) {
+                ret = new HSSFWorkbook(input);
                 try (org.apache.poi.hssf.extractor.ExcelExtractor extractor = new org.apache.poi.hssf.extractor.ExcelExtractor(
                         (HSSFWorkbook) ret)) {
                     extractor.setFormulasNotResults(false);
                 }
             } else {
-                ret = new XSSFWorkbook(is);
+                ret = new XSSFWorkbook(input);
                 try (org.apache.poi.xssf.extractor.XSSFExcelExtractor extractor = new org.apache.poi.xssf.extractor.XSSFExcelExtractor(
                         (XSSFWorkbook) ret)) {
                     extractor.setFormulasNotResults(false);
                 }
             }
 
-            openedWorkbooks.put(file_path, ret);
+            openedWorkbooks.put(filePath, ret);
         } catch (java.io.IOException e) {
-            ProgramOptions.getLoger().error("Open file % failed, %s", file.getPath(), e.getMessage());
+            ProgramOptions.getLogger().error("Open file % failed, %s", file.getPath(), e.getMessage());
         } catch (POIXMLException e) {
-            ProgramOptions.getLoger().error("Open and unpack file % failed, %s", file.getPath(), e.getMessage());
+            ProgramOptions.getLogger().error("Open and unpack file % failed, %s", file.getPath(), e.getMessage());
             for (var stack : e.getStackTrace()) {
-                ProgramOptions.getLoger().error("\t%s.%s(%s:%d)", stack.getClassName(), stack.getMethodName(),
+                ProgramOptions.getLogger().error("\t%s.%s(%s:%d)", stack.getClassName(), stack.getMethodName(),
                         stack.getFileName(),
                         stack.getLineNumber());
             }
         } catch (RuntimeException e) {
-            ProgramOptions.getLoger().error("Open file % failed, %s", file.getPath(), e.getMessage());
+            ProgramOptions.getLogger().error("Open file % failed, %s", file.getPath(), e.getMessage());
         }
 
         return ret;
@@ -390,11 +387,11 @@ public class ExcelEngine {
     /**
      * 打开工作簿
      *
-     * @param file_path Excel文件
+     * @param filePath Excel文件
      * @param sheetName 表名
      * @return Sheet对象
      */
-    static public Sheet openUserModuleSheet(File file, String sheetName) {
+    public static Sheet openUserModuleSheet(File file, String sheetName) {
         Workbook wb = openWorkbook(file);
         if (null == wb)
             return null;
@@ -403,17 +400,17 @@ public class ExcelEngine {
     }
 
     @SuppressWarnings("UseSpecificCatch")
-    static public CustomDataTableIndex openStreamTableIndex(File file, String sheetName) {
+    public static CustomDataTableIndex openStreamTableIndex(File file, String sheetName) {
         String realPath = null;
         try {
             realPath = file.getCanonicalPath().replaceAll("\\\\", "/");
-        } catch (Exception _e) {
+        } catch (Exception e) {
         }
         try {
             if (realPath == null) {
                 realPath = file.getAbsolutePath().replaceAll("\\\\", "/");
             }
-        } catch (Exception _e) {
+        } catch (Exception e) {
         }
         if (realPath == null) {
             realPath = file.getPath().replaceAll("\\\\", "/");
@@ -451,7 +448,7 @@ public class ExcelEngine {
         return ret;
     }
 
-    static public String tryMacro(DataSrcImpl dataSrcImpl, String m) {
+    public static String tryMacro(DataSrcImpl dataSrcImpl, String m) {
         if (m == null || m.isEmpty()) {
             return m;
         }
@@ -466,7 +463,7 @@ public class ExcelEngine {
         return hm.getOrDefault(m, m);
     }
 
-    static public String tryMacro(String m) {
+    public static String tryMacro(String m) {
         return tryMacro(DataSrcImpl.getOurInstance(), m);
     }
 
@@ -478,13 +475,13 @@ public class ExcelEngine {
      * @param dataSrcImpl 指定数据源
      * @return
      */
-    static public void cell2s(DataContainer<String> out, DataItemGridWrapper itemGrid, IdentifyDescriptor ident,
+    public static void cell2s(DataContainer<String> out, DataItemGridWrapper itemGrid, IdentifyDescriptor ident,
             DataSrcImpl dataSrcImpl)
             throws ConvException {
         cell2s(out, itemGrid, ident, null, dataSrcImpl);
     }
 
-    static private byte cal_cell2err(Cell c, CellValue cv) {
+    private static byte evaluateCellError(Cell c, CellValue cv) {
         if (null == cv) {
             return c.getErrorCellValue();
         }
@@ -492,7 +489,7 @@ public class ExcelEngine {
         return cv.getErrorValue();
     }
 
-    static private double cal_cell2num(Cell c, CellValue cv) {
+    private static double evaluateCellNumber(Cell c, CellValue cv) {
         if (null == cv) {
             return c.getNumericCellValue();
         }
@@ -500,7 +497,7 @@ public class ExcelEngine {
         return cv.getNumberValue();
     }
 
-    static private String cal_cell2str(Cell c, CellValue cv) {
+    private static String evaluateCellString(Cell c, CellValue cv) {
         if (null == cv) {
             return c.getStringCellValue();
         }
@@ -508,7 +505,7 @@ public class ExcelEngine {
         return cv.getStringValue();
     }
 
-    static private Boolean cal_cell2bool(Cell c, CellValue cv) {
+    private static Boolean evaluateCellBoolean(Cell c, CellValue cv) {
         if (null == cv) {
             return c.getBooleanCellValue();
         }
@@ -525,7 +522,7 @@ public class ExcelEngine {
      * @param dataSrcImpl 指定数据源
      * @return
      */
-    static public void cell2s(DataContainer<String> out, DataItemGridWrapper itemGrid, IdentifyDescriptor ident,
+    public static void cell2s(DataContainer<String> out, DataItemGridWrapper itemGrid, IdentifyDescriptor ident,
             FormulaWrapper formula, DataSrcImpl dataSrcImpl) throws ConvException {
         if (null == itemGrid) {
             return;
@@ -557,7 +554,7 @@ public class ExcelEngine {
                 try {
                     cv = formula.evalor.evaluate(c);
                 } catch (NotImplementedException e) {
-                    ProgramOptions.getLoger().warn(
+                    ProgramOptions.getLogger().warn(
                             "Formular has unsupported function(s).We will use cached data.Consider using --disable-excel-formular?%s  > File: %s, Table: %s, Row: %d, Column: %d(%s)%s  > Formular Content: %s",
                             ProgramOptions.getEndl(), itemGrid.getDataSource().filePath,
                             itemGrid.getDataSource().tableName, c.getRowIndex() + 1,
@@ -565,7 +562,7 @@ public class ExcelEngine {
                             c.getCellFormula());
                     cv = null;
                 } catch (Exception e) {
-                    ProgramOptions.getLoger().warn(
+                    ProgramOptions.getLogger().warn(
                             "Evaluate formular failed: %s%s  > File: %s, Table: %s, Row: %d, Column: %d(%s)",
                             e.getMessage(), ProgramOptions.getEndl(), itemGrid.getDataSource().filePath,
                             itemGrid.getDataSource().tableName, c.getRowIndex() + 1,
@@ -599,11 +596,11 @@ public class ExcelEngine {
         switch (type) {
             case BLANK -> {
             }
-            case BOOLEAN -> out.set(cal_cell2bool(c, cv).toString());
+            case BOOLEAN -> out.set(evaluateCellBoolean(c, cv).toString());
             case ERROR -> {
-                byte error_code = cal_cell2err(c, cv);
+                byte errorCode = evaluateCellError(c, cv);
                 try {
-                    out.set(FormulaError.forInt(error_code).getString());
+                    out.set(FormulaError.forInt(errorCode).getString());
                 } catch (IllegalArgumentException e) {
                     out.set(e.getMessage());
                 }
@@ -649,7 +646,7 @@ public class ExcelEngine {
                     break;
                 }
 
-                double dv = cal_cell2num(c, cv);
+                double dv = evaluateCellNumber(c, cv);
                 if (ident.getRatio() != 1) {
                     dv = dv * ident.getRatio();
                 }
@@ -660,7 +657,7 @@ public class ExcelEngine {
                 }
             }
             case STRING -> {
-                String val = cal_cell2str(c, cv).trim();
+                String val = evaluateCellString(c, cv).trim();
                 if (!val.isEmpty()) {
                     // Const 和 option导出时，没有数据源，也不需要文本/宏替换
                     if (null != dataSrcImpl && dataSrcImpl.isInitialized()
@@ -685,7 +682,7 @@ public class ExcelEngine {
      * @param ident    定位标识
      * @return
      */
-    static public void cell2i(DataContainer<Long> out, DataItemGridWrapper itemGrid, IdentifyDescriptor ident)
+    public static void cell2i(DataContainer<Long> out, DataItemGridWrapper itemGrid, IdentifyDescriptor ident)
             throws ConvException {
         cell2i(out, itemGrid, ident, null);
     }
@@ -698,7 +695,7 @@ public class ExcelEngine {
      * @param formula  公式管理器
      * @return
      */
-    static public void cell2i(DataContainer<Long> out, DataItemGridWrapper itemGrid, IdentifyDescriptor ident,
+    public static void cell2i(DataContainer<Long> out, DataItemGridWrapper itemGrid, IdentifyDescriptor ident,
             FormulaWrapper formula) throws ConvException {
 
         if (null == itemGrid) {
@@ -725,7 +722,7 @@ public class ExcelEngine {
                 try {
                     cv = formula.evalor.evaluate(c);
                 } catch (NotImplementedException e) {
-                    ProgramOptions.getLoger().warn(
+                    ProgramOptions.getLogger().warn(
                             "Formular has unsupported function(s).We will use cached data.Consider using --disable-excel-formular?%s  > File: %s, Table: %s, Row: %d, Column: %d(%s)%s  > Formular Content: %s",
                             ProgramOptions.getEndl(), itemGrid.getDataSource().filePath,
                             itemGrid.getDataSource().tableName, c.getRowIndex() + 1,
@@ -733,7 +730,7 @@ public class ExcelEngine {
                             c.getCellFormula());
                     cv = null;
                 } catch (Exception e) {
-                    ProgramOptions.getLoger().warn(
+                    ProgramOptions.getLogger().warn(
                             "Evaluate formular failed: %s%s  > File: %s, Table: %s, Row: %d, Column: %d(%s)",
                             e.getMessage(), ProgramOptions.getEndl(), itemGrid.getDataSource().filePath,
                             itemGrid.getDataSource().tableName, c.getRowIndex() + 1,
@@ -756,21 +753,21 @@ public class ExcelEngine {
             case BLANK -> {
             }
             case BOOLEAN -> {
-                boolean res = cal_cell2bool(c, cv);
+                boolean res = evaluateCellBoolean(c, cv);
                 out.set(DataVerifyImpl.getAndVerifyNumeric(ident.getValidator(), ident.getTypeValidator(), ident.name,
                         res ? 1 : 0));
             }
             case ERROR -> {
-                byte error_code = cal_cell2err(c, cv);
+                byte errorCode = evaluateCellError(c, cv);
                 try {
-                    ProgramOptions.getLoger().warn(
+                    ProgramOptions.getLogger().warn(
                             "Error formula: %s%s  > File: %s, Table: %s, Row: %d, Column: %d(%s)",
-                            FormulaError.forInt(error_code).getString(), ProgramOptions.getEndl(),
+                            FormulaError.forInt(errorCode).getString(), ProgramOptions.getEndl(),
                             itemGrid.getDataSource().filePath,
                             itemGrid.getDataSource().tableName, c.getRowIndex() + 1,
                             c.getColumnIndex() + 1, getColumnName(c.getColumnIndex() + 1));
                 } catch (IllegalArgumentException e) {
-                    ProgramOptions.getLoger().warn(
+                    ProgramOptions.getLogger().warn(
                             "Error or unsupported cell value: %s%s  > File: %s, Table: %s, Row: %d, Column: %d(%s)",
                             e.getMessage(), ProgramOptions.getEndl(), itemGrid.getDataSource().filePath,
                             itemGrid.getDataSource().tableName, c.getRowIndex() + 1,
@@ -785,9 +782,9 @@ public class ExcelEngine {
                     val = dateToUnixTimestamp(c.getDateCellValue());
                 } else {
                     if (ident.getRatio() == 1) {
-                        val = Math.round(cal_cell2num(c, cv));
+                        val = Math.round(evaluateCellNumber(c, cv));
                     } else {
-                        val = Math.round(cal_cell2num(c, cv) * ident.getRatio());
+                        val = Math.round(evaluateCellNumber(c, cv) * ident.getRatio());
                     }
                 }
 
@@ -795,7 +792,7 @@ public class ExcelEngine {
                         val));
             }
             case STRING -> {
-                String val = cal_cell2str(c, cv).trim();
+                String val = evaluateCellString(c, cv).trim();
                 if (val.isEmpty()) {
                 }
 
@@ -814,7 +811,7 @@ public class ExcelEngine {
      * @param ident    定位标识
      * @return
      */
-    static public void cell2d(DataContainer<Double> out, DataItemGridWrapper itemGrid, IdentifyDescriptor ident)
+    public static void cell2d(DataContainer<Double> out, DataItemGridWrapper itemGrid, IdentifyDescriptor ident)
             throws ConvException {
         cell2d(out, itemGrid, ident, null);
     }
@@ -827,7 +824,7 @@ public class ExcelEngine {
      * @param formula  公式管理器
      * @return
      */
-    static public void cell2d(DataContainer<Double> out, DataItemGridWrapper itemGrid, IdentifyDescriptor ident,
+    public static void cell2d(DataContainer<Double> out, DataItemGridWrapper itemGrid, IdentifyDescriptor ident,
             FormulaWrapper formula) throws ConvException {
 
         if (null == itemGrid) {
@@ -868,7 +865,7 @@ public class ExcelEngine {
                 try {
                     cv = formula.evalor.evaluate(c);
                 } catch (NotImplementedException e) {
-                    ProgramOptions.getLoger().warn(
+                    ProgramOptions.getLogger().warn(
                             "Formular has unsupported function(s).We will use cached data.Consider using --disable-excel-formular?%s  > File: %s, Table: %s, Row: %d, Column: %d(%s)%s  > Formular Content: %s",
                             ProgramOptions.getEndl(), itemGrid.getDataSource().filePath,
                             itemGrid.getDataSource().tableName, c.getRowIndex() + 1,
@@ -876,7 +873,7 @@ public class ExcelEngine {
                             c.getCellFormula());
                     cv = null;
                 } catch (Exception e) {
-                    ProgramOptions.getLoger().warn(
+                    ProgramOptions.getLogger().warn(
                             "Evaluate formular failed: %s%s  > File: %s, Table: %s, Row: %d, Column: %d(%s)",
                             e.getMessage(), ProgramOptions.getEndl(), itemGrid.getDataSource().filePath,
                             itemGrid.getDataSource().tableName, c.getRowIndex() + 1,
@@ -899,18 +896,18 @@ public class ExcelEngine {
         switch (type) {
             case BLANK -> {
             }
-            case BOOLEAN -> out.set(cal_cell2bool(c, cv) ? 1.0 : 0.0);
+            case BOOLEAN -> out.set(evaluateCellBoolean(c, cv) ? 1.0 : 0.0);
             case ERROR -> {
-                byte error_code = cal_cell2err(c, cv);
+                byte errorCode = evaluateCellError(c, cv);
                 try {
-                    ProgramOptions.getLoger().warn(
+                    ProgramOptions.getLogger().warn(
                             "Error formula: %s%s  > File: %s, Table: %s, Row: %d, Column: %d(%s)",
-                            FormulaError.forInt(error_code).getString(), ProgramOptions.getEndl(),
+                            FormulaError.forInt(errorCode).getString(), ProgramOptions.getEndl(),
                             itemGrid.getDataSource().filePath,
                             itemGrid.getDataSource().tableName, c.getRowIndex() + 1,
                             c.getColumnIndex() + 1, getColumnName(c.getColumnIndex() + 1));
                 } catch (IllegalArgumentException e) {
-                    ProgramOptions.getLoger().warn(
+                    ProgramOptions.getLogger().warn(
                             "Error or unsupported cell value: %s%s  > File: %s, Table: %s, Row: %d, Column: %d(%s)",
                             e.getMessage(), ProgramOptions.getEndl(), itemGrid.getDataSource().filePath,
                             itemGrid.getDataSource().tableName, c.getRowIndex() + 1,
@@ -925,13 +922,13 @@ public class ExcelEngine {
                     break;
                 }
                 if (ident.getRatio() == 1) {
-                    out.set(cal_cell2num(c, cv));
+                    out.set(evaluateCellNumber(c, cv));
                 } else {
-                    out.set(cal_cell2num(c, cv) * ident.getRatio());
+                    out.set(evaluateCellNumber(c, cv) * ident.getRatio());
                 }
             }
             case STRING -> {
-                String val = cal_cell2str(c, cv).trim();
+                String val = evaluateCellString(c, cv).trim();
                 if (val.isEmpty()) {
                 }
 
@@ -961,7 +958,7 @@ public class ExcelEngine {
      * @param itemGrid 数据网格
      * @param ident    定位标识 * @return
      */
-    static public void cell2b(DataContainer<Boolean> out, DataItemGridWrapper itemGrid, IdentifyDescriptor ident)
+    public static void cell2b(DataContainer<Boolean> out, DataItemGridWrapper itemGrid, IdentifyDescriptor ident)
             throws ConvException {
         cell2b(out, itemGrid, ident, null);
     }
@@ -974,7 +971,7 @@ public class ExcelEngine {
      * @param formula  公式管理器
      * @return
      */
-    static public void cell2b(DataContainer<Boolean> out, DataItemGridWrapper itemGrid, IdentifyDescriptor ident,
+    public static void cell2b(DataContainer<Boolean> out, DataItemGridWrapper itemGrid, IdentifyDescriptor ident,
             FormulaWrapper formula) throws ConvException {
         if (null == itemGrid) {
             return;
@@ -1001,7 +998,7 @@ public class ExcelEngine {
                 try {
                     cv = formula.evalor.evaluate(c);
                 } catch (NotImplementedException e) {
-                    ProgramOptions.getLoger().warn(
+                    ProgramOptions.getLogger().warn(
                             "Formular has unsupported function(s).We will use cached data.Consider using --disable-excel-formular?%s  > File: %s, Table: %s, Row: %d, Column: %d(%s)%s  > Formular Content: %s",
                             ProgramOptions.getEndl(), itemGrid.getDataSource().filePath,
                             itemGrid.getDataSource().tableName, c.getRowIndex() + 1,
@@ -1009,7 +1006,7 @@ public class ExcelEngine {
                             c.getCellFormula());
                     cv = null;
                 } catch (Exception e) {
-                    ProgramOptions.getLoger().warn(
+                    ProgramOptions.getLogger().warn(
                             "Evaluate formular failed: %s%s  > File: %s, Table: %s, Row: %d, Column: %d(%s)",
                             e.getMessage(), ProgramOptions.getEndl(), itemGrid.getDataSource().filePath,
                             itemGrid.getDataSource().tableName, c.getRowIndex() + 1,
@@ -1033,18 +1030,18 @@ public class ExcelEngine {
         switch (type) {
             case BLANK -> {
             }
-            case BOOLEAN -> out.set(cal_cell2bool(c, cv));
+            case BOOLEAN -> out.set(evaluateCellBoolean(c, cv));
             case ERROR -> {
-                byte error_code = cal_cell2err(c, cv);
+                byte errorCode = evaluateCellError(c, cv);
                 try {
-                    ProgramOptions.getLoger().warn(
+                    ProgramOptions.getLogger().warn(
                             "Error formula: %s%s  > File: %s, Table: %s, Row: %d, Column: %d(%s)",
-                            FormulaError.forInt(error_code).getString(), ProgramOptions.getEndl(),
+                            FormulaError.forInt(errorCode).getString(), ProgramOptions.getEndl(),
                             itemGrid.getDataSource().filePath,
                             itemGrid.getDataSource().tableName, c.getRowIndex() + 1,
                             c.getColumnIndex() + 1, getColumnName(c.getColumnIndex() + 1));
                 } catch (IllegalArgumentException e) {
-                    ProgramOptions.getLoger().warn(
+                    ProgramOptions.getLogger().warn(
                             "Error or unsupported cell value: %s%s  > File: %s, Table: %s, Row: %d, Column: %d(%s)",
                             e.getMessage(), ProgramOptions.getEndl(), itemGrid.getDataSource().filePath,
                             itemGrid.getDataSource().tableName, c.getRowIndex() + 1,
@@ -1053,11 +1050,11 @@ public class ExcelEngine {
             }
             case FORMULA -> {
             }
-            case NUMERIC -> out.set(cal_cell2num(c, cv) != 0 && ident.getRatio() != 0);
+            case NUMERIC -> out.set(evaluateCellNumber(c, cv) != 0 && ident.getRatio() != 0);
             case STRING -> {
                 String item = DataVerifyImpl
                         .getAndVerifyToString(ident.getValidator(), ident.getTypeValidator(), ident.name,
-                                tryMacro(cal_cell2str(c, cv).trim()))
+                                tryMacro(evaluateCellString(c, cv).trim()))
                         .toLowerCase();
                 if (item.isEmpty()) {
                     break;
@@ -1070,7 +1067,7 @@ public class ExcelEngine {
         }
     }
 
-    static private long dateToUnixTimestamp(Date d) {
+    private static long dateToUnixTimestamp(Date d) {
         if (null == d) {
             return 0;
         }
@@ -1090,7 +1087,7 @@ public class ExcelEngine {
         return d.getTime() / 1000;
     }
 
-    static public void setMaxByteArraySize(int maxSize) {
+    public static void setMaxByteArraySize(int maxSize) {
         IOUtils.setByteArrayMaxOverride(maxSize);
     }
 }

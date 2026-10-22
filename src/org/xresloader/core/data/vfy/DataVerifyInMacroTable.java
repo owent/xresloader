@@ -27,7 +27,7 @@ public class DataVerifyInMacroTable extends DataVerifyImpl {
         this.parameters.ensureCapacity(tokens.getParameters().size());
         for (ValidatorParameter param : tokens.getParameters()) {
             if (!param.isString()) {
-                ProgramOptions.getLoger().error("Only string parameter is supported for validator %s",
+                ProgramOptions.getLogger().error("Only string parameter is supported for validator %s",
                         tokens.getName());
                 this.valid = false;
                 continue;
@@ -37,14 +37,14 @@ public class DataVerifyInMacroTable extends DataVerifyImpl {
 
         if (this.parameters.size() < 6) {
             this.valid = false;
-            ProgramOptions.getLoger().error("Invalid in macro table validator %s", tokens.getName());
+            ProgramOptions.getLogger().error("Invalid in macro table validator %s", tokens.getName());
             return;
         }
 
         this.file = DataSrcImpl.getDataFile(this.parameters.get(1));
         if (file == null) {
             this.valid = false;
-            ProgramOptions.getLoger().error("Can not find file %s for validator %s", this.parameters.get(1),
+            ProgramOptions.getLogger().error("Can not find file %s for validator %s", this.parameters.get(1),
                     tokens.getName());
         }
     }
@@ -60,7 +60,7 @@ public class DataVerifyInMacroTable extends DataVerifyImpl {
         }
 
         if (this.parameters.size() < 6) {
-            ProgramOptions.getLoger().error("Invalid in macro table validator %s", this.name);
+            ProgramOptions.getLogger().error("Invalid in macro table validator %s", this.name);
             return false;
         }
 
@@ -71,7 +71,7 @@ public class DataVerifyInMacroTable extends DataVerifyImpl {
             CustomDataTableIndex tableIndex = ExcelEngine.openStreamTableIndex(file, sheetName);
 
             if (tableIndex == null) {
-                ProgramOptions.getLoger().error("Can not open sheet %s in %s for table column validator %s",
+                ProgramOptions.getLogger().error("Can not open sheet %s in %s for table column validator %s",
                         sheetName, this.file.getAbsolutePath(), this.name);
                 return false;
             }
@@ -89,7 +89,7 @@ public class DataVerifyInMacroTable extends DataVerifyImpl {
                 String normalizedValueName = IdentifyEngine.normalize(aliasValueName);
                 CustomDataRowIndex row = tableIndex.getRow(keyRow);
                 if (null == row) {
-                    ProgramOptions.getLoger().error("Invalid key row in macro table validator %s", this.name);
+                    ProgramOptions.getLogger().error("Invalid key row in macro table validator %s", this.name);
                     return false;
                 }
                 for (int i = 0; i < row.getColumnSize(); ++i) {
@@ -98,10 +98,10 @@ public class DataVerifyInMacroTable extends DataVerifyImpl {
                         continue;
                     }
 
-                    String trimedValue = value.trim();
-                    if (trimedValue.equals(aliasKeyName) || trimedValue.equals(normalizedKeyName)) {
+                    String trimmedValue = value.trim();
+                    if (trimmedValue.equals(aliasKeyName) || trimmedValue.equals(normalizedKeyName)) {
                         aliasKeyColumn = i;
-                    } else if (trimedValue.equals(aliasValueName) || trimedValue.equals(normalizedValueName)) {
+                    } else if (trimmedValue.equals(aliasValueName) || trimmedValue.equals(normalizedValueName)) {
                         aliasValueColumn = i;
                     }
                     if (aliasKeyColumn >= 0 && aliasValueColumn >= 0) {
@@ -111,17 +111,17 @@ public class DataVerifyInMacroTable extends DataVerifyImpl {
             }
 
             if (startRow < 0) {
-                ProgramOptions.getLoger().error("Invalid start row in macro table validator %s", this.name);
+                ProgramOptions.getLogger().error("Invalid start row in macro table validator %s", this.name);
                 return false;
             }
             if (aliasKeyColumn < 0 || aliasValueColumn < 0) {
                 if (aliasKeyColumn < 0) {
-                    ProgramOptions.getLoger().error(
+                    ProgramOptions.getLogger().error(
                             "Invalid alias key name or alias key name not found in macro table validator %s",
                             this.name);
                 }
                 if (aliasValueColumn < 0) {
-                    ProgramOptions.getLoger().error(
+                    ProgramOptions.getLogger().error(
                             "Invalid alias value name or alias value name not found in macro table validator %s",
                             this.name);
                 }
@@ -160,12 +160,12 @@ public class DataVerifyInMacroTable extends DataVerifyImpl {
                 }
             }
         } catch (NumberFormatException e) {
-            ProgramOptions.getLoger().error("Can not parse number of validator %s: %s",
+            ProgramOptions.getLogger().error("Can not parse number of validator %s: %s",
                     this.name,
                     e.getMessage());
             return false;
         } catch (Exception e) {
-            ProgramOptions.getLoger().error("Can not open file %s for %s validator: %s", this.parameters.get(1),
+            ProgramOptions.getLogger().error("Can not open file %s for %s validator: %s", this.parameters.get(1),
                     this.name,
                     e.getMessage());
             return false;

@@ -22,25 +22,26 @@ public class SchemeDataSourceCmd extends SchemeDataSourceBase {
     }
 
     @Override
+    @Deprecated
     public boolean load_scheme(String table) throws InitializeException {
-        for (String cfg_val : ProgramOptions.getInstance().dataSourceMetas) {
-            String unwrap_val = cfg_val;
-            if (unwrap_val.length() > 2 && ('"' == unwrap_val.charAt(0) || '\'' == unwrap_val.charAt(0))
-                    && unwrap_val.charAt(0) == unwrap_val.charAt(unwrap_val.length() - 1)) {
-                unwrap_val = unwrap_val.substring(1, unwrap_val.length() - 1);
+        for (String cfgVal : ProgramOptions.getInstance().dataSourceMetas) {
+            String unwrapVal = cfgVal;
+            if (unwrapVal.length() > 2 && ('"' == unwrapVal.charAt(0) || '\'' == unwrapVal.charAt(0))
+                    && unwrapVal.charAt(0) == unwrapVal.charAt(unwrapVal.length() - 1)) {
+                unwrapVal = unwrapVal.substring(1, unwrapVal.length() - 1);
             }
 
-            int eq_index = unwrap_val.indexOf('=');
-            if (eq_index < 0) {
-                ProgramOptions.getLoger().error("Data meta %s error.Must be KEY=%s", unwrap_val, String
+            int eqIndex = unwrapVal.indexOf('=');
+            if (eqIndex < 0) {
+                ProgramOptions.getLogger().error("Data meta %s error.Must be KEY=%s", unwrapVal, String
                         .join(ProgramOptions.getInstance().dataSourceMetaDelimiter, "VALUE1", "VALUE2", "VALUE3"));
                 continue;
             }
 
             ArrayList<String> vals = new ArrayList<String>();
             vals.ensureCapacity(3);
-            if (unwrap_val.length() > eq_index + 1) {
-                for (String vn : unwrap_val.substring(eq_index + 1)
+            if (unwrapVal.length() > eqIndex + 1) {
+                for (String vn : unwrapVal.substring(eqIndex + 1)
                         .split(ProgramOptions.getInstance().dataSourceMetaDelimiter)) {
                     vals.add(vn.trim());
                 }
@@ -50,7 +51,7 @@ public class SchemeDataSourceCmd extends SchemeDataSourceBase {
                 vals.add("");
             }
 
-            set_scheme(unwrap_val.substring(0, eq_index).trim(), vals);
+            setScheme(unwrapVal.substring(0, eqIndex).trim(), vals);
         }
 
         boolean ret = true;

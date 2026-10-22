@@ -14,6 +14,12 @@ public abstract class SchemeDataSourceBase implements SchemeDataSourceImpl {
      * @param datas 配置Value
      * @return 成功或失败
      */
+    protected boolean setScheme(String key, ArrayList<String> datas) {
+        return set_scheme(key, datas);
+    }
+
+    /** @deprecated Override retained for existing scheme providers; use {@link #setScheme(String, ArrayList)}. */
+    @Deprecated
     protected boolean set_scheme(String key, ArrayList<String> datas) {
         while (datas.size() < 3) {
             datas.add(null);
@@ -40,10 +46,10 @@ public abstract class SchemeDataSourceBase implements SchemeDataSourceImpl {
             SchemeConf.getInstance().getKey()
                     .setRow(datas.get(0).isEmpty() ? 0 : (int) Math.round(Double.valueOf(datas.get(0))));
         } else if (key.equalsIgnoreCase("KeyCase")) {
-            String letter_case = datas.get(0).toLowerCase();
-            if (letter_case.equals("大写") || letter_case.equals("upper")) {
+            String letterCase = datas.get(0).toLowerCase();
+            if (letterCase.equals("大写") || letterCase.equals("upper")) {
                 SchemeConf.getInstance().getKey().setLetterCase(SchemeKeyConf.KeyCase.UPPER);
-            } else if (letter_case.equals("小写") || letter_case.equals("lower")) {
+            } else if (letterCase.equals("小写") || letterCase.equals("lower")) {
                 SchemeConf.getInstance().getKey().setLetterCase(SchemeKeyConf.KeyCase.LOWER);
             } else {
                 SchemeConf.getInstance().getKey().setLetterCase(SchemeKeyConf.KeyCase.NONE);

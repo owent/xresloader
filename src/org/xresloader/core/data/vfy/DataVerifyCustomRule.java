@@ -71,7 +71,7 @@ public abstract class DataVerifyCustomRule extends DataVerifyImpl {
                 // setup阶段，尝试创建token对应的验证器
                 DataVerifyImpl vfy = DataValidatorFactory.createValidator(cache, rule.getTokens());
                 if (vfy == null) {
-                    ProgramOptions.getLoger().error(
+                    ProgramOptions.getLogger().error(
                             "Setup custom validator rule \"%s\" failed because sub-rule \"%s\" not found",
                             getName(), rule.toString());
                     this.validators.clear();
@@ -83,7 +83,7 @@ public abstract class DataVerifyCustomRule extends DataVerifyImpl {
                 DataVerifyImpl vfy = DataValidatorFactory.createValidator(cache,
                         cache.mutableSymbolToTokens(rule.toString()));
                 if (vfy == null) {
-                    ProgramOptions.getLoger().error(
+                    ProgramOptions.getLogger().error(
                             "Setup custom validator rule \"%s\" failed because sub-rule \"%s\" not found",
                             getName(), rule.toString());
                     this.validators.clear();
@@ -127,7 +127,7 @@ public abstract class DataVerifyCustomRule extends DataVerifyImpl {
 
         if (this.validators == null || this.validators.isEmpty()) {
             this.checking = false;
-            ProgramOptions.getLoger().error("Check custom validator rule %s without setup it", getName());
+            ProgramOptions.getLogger().error("Check custom validator rule %s without setup it", getName());
             return this.checkResult;
         }
 
@@ -139,11 +139,11 @@ public abstract class DataVerifyCustomRule extends DataVerifyImpl {
             DataVerifyCustomRule depVfy = (DataVerifyCustomRule) vfy;
             if (!depVfy.check()) {
                 if (depVfy.checking) {
-                    ProgramOptions.getLoger().error(
+                    ProgramOptions.getLogger().error(
                             "Check custom validator rule \"%s\" with circular dependency from \"%s\"",
                             getName(), vfy.getName());
                 } else {
-                    ProgramOptions.getLoger().error(
+                    ProgramOptions.getLogger().error(
                             "Check custom validator rule \"%s\" failed because checking dependency \"%s\" failed",
                             getName(), vfy.getName());
                 }
@@ -179,7 +179,7 @@ public abstract class DataVerifyCustomRule extends DataVerifyImpl {
         }
         this.versionResult = maxVersion;
         if (null != useChild && this.version > 0) {
-            ProgramOptions.getLoger().warn(
+            ProgramOptions.getLogger().warn(
                     "Custom validator rule \"%s\" use child rule \"%s\" with higher version %d, which will implicit increase the version from %d to %d.",
                     getName(),
                     useChild.getName(),

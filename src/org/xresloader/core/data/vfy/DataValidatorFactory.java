@@ -17,7 +17,7 @@ import org.xresloader.core.data.vfy.DataVerifyImpl.ValidatorParameter;
 import org.xresloader.core.data.vfy.DataVerifyImpl.ValidatorTokens;
 
 public class DataValidatorFactory {
-  static private HashMap<String, Function<DataVerifyImpl.ValidatorTokens, DataVerifyImpl>> initFuncValidatorCreator() {
+  private static HashMap<String, Function<DataVerifyImpl.ValidatorTokens, DataVerifyImpl>> initFuncValidatorCreator() {
     HashMap<String, Function<DataVerifyImpl.ValidatorTokens, DataVerifyImpl>> funcMap = new HashMap<>();
 
     funcMap.put("intext", (ruleObject) -> new DataVerifyInText(ruleObject));
@@ -38,14 +38,20 @@ public class DataValidatorFactory {
   private static final HashMap<String, Function<DataVerifyImpl.ValidatorTokens, DataVerifyImpl>> funcValidatorCreator = initFuncValidatorCreator();
   private static boolean isInited = false;
 
-  static public void Initialize() {
+  /** @deprecated Use {@link #initialize()}. */
+  @Deprecated
+  public static void Initialize() {
+    initialize();
+  }
+
+  public static void initialize() {
     if (isInited) {
       return;
     }
     isInited = true;
   }
 
-  static private List<String> splitTokens(String expression) {
+  private static List<String> splitTokens(String expression) {
     List<String> ret = new ArrayList<>();
     ((ArrayList<String>) ret).ensureCapacity(16);
     if (null == expression) {
@@ -112,12 +118,12 @@ public class DataValidatorFactory {
     return ret;
   }
 
-  static public class BuildValidatorTokensCursor {
+  public static class BuildValidatorTokensCursor {
     public int nextIndex = 0;
     public ValidatorTokens result = null;
   }
 
-  static private BuildValidatorTokensCursor buildOneValidatorTokens(String name,
+  private static BuildValidatorTokensCursor buildOneValidatorTokens(String name,
       List<String> tokens,
       int paramStartIndex) {
     BuildValidatorTokensCursor ret = new BuildValidatorTokensCursor();
@@ -184,7 +190,7 @@ public class DataValidatorFactory {
     return ret;
   }
 
-  static public LinkedList<ValidatorTokens> buildValidatorTokens(String expression) {
+  public static LinkedList<ValidatorTokens> buildValidatorTokens(String expression) {
     if (null == expression) {
       return null;
     }
@@ -226,7 +232,7 @@ public class DataValidatorFactory {
     return allSuccess;
   }
 
-  static private DataVerifyImpl createValidator(DataVerifyImpl.ValidatorTokens ruleObject,
+  private static DataVerifyImpl createValidator(DataVerifyImpl.ValidatorTokens ruleObject,
       Map<String, Function<DataVerifyImpl.ValidatorTokens, DataVerifyImpl>> externalCreators) {
     if (ruleObject == null) {
       return null;
@@ -256,7 +262,7 @@ public class DataValidatorFactory {
       if (vfyRange.isValid()) {
         return vfyRange;
       } else {
-        ProgramOptions.getLoger().error("Validator %s(DataVerifyNumberRange) is invalid",
+        ProgramOptions.getLogger().error("Validator %s(DataVerifyNumberRange) is invalid",
             name);
       }
       return null;
@@ -277,16 +283,16 @@ public class DataValidatorFactory {
     }
 
     if (ruleObject.isFunctionMode()) {
-      ProgramOptions.getLoger().error("Unknown function validator %s", name);
+      ProgramOptions.getLogger().error("Unknown function validator %s", name);
     } else {
-      ProgramOptions.getLoger().error("Unknown identify validator %s", name);
+      ProgramOptions.getLogger().error("Unknown identify validator %s", name);
     }
     return null;
   }
 
-  static public DataVerifyImpl createValidator(DataValidatorCache cache, DataVerifyImpl.ValidatorTokens ruleObject) {
+  public static DataVerifyImpl createValidator(DataValidatorCache cache, DataVerifyImpl.ValidatorTokens ruleObject) {
     if (!isInited) {
-      ProgramOptions.getLoger()
+      ProgramOptions.getLogger()
           .error(
               "DataValidatorFactory.createValidator() should not be called before DataValidatorFactory.Initialize()");
       return null;
@@ -324,7 +330,7 @@ public class DataValidatorFactory {
     return ret;
   }
 
-  static public DataVerifyImpl createSymbolValidator(DataValidatorCache cache,
+  public static DataVerifyImpl createSymbolValidator(DataValidatorCache cache,
       String symbol) {
     if (cache == null || symbol == null || symbol.isEmpty()) {
       return null;
@@ -336,15 +342,15 @@ public class DataValidatorFactory {
   public static HashMap<String, DataVerifyImpl> internalLoadFromFile(DataValidatorCache cache, String filePath) {
     File yamlFile = DataSrcImpl.getDataFile(filePath);
     if (null == yamlFile) {
-      ProgramOptions.getLoger().error("Can not find custom validator file \"%s\"", filePath);
+      ProgramOptions.getLogger().error("Can not find custom validator file \"%s\"", filePath);
       return null;
     }
 
-    try {
+    try (FileInputStream input = new FileInputStream(yamlFile)) {
       LoadSettings settings = LoadSettings.builder().setLabel("xresloader.DataVerifyCustomRule").build();
       Load load = new Load(settings);
 
-      var allRootObjects = load.loadAllFromInputStream(new FileInputStream(yamlFile));
+      var allRootObjects = load.loadAllFromInputStream(input);
       HashMap<String, DataVerifyImpl> ret = new HashMap<>();
       for (Object object : allRootObjects) {
         if (!(object instanceof Map<?, ?>)) {
@@ -397,13 +403,13 @@ public class DataValidatorFactory {
               try {
                 version = Integer.parseInt((String) versionObj);
               } catch (NumberFormatException e) {
-                ProgramOptions.getLoger().warn(
+                ProgramOptions.getLogger().warn(
                     "Load custom validator file \"%s\" with invalid version \"%s\", we will use 0.",
                     filePath,
                     versionObj);
               }
             } else {
-              ProgramOptions.getLoger().warn(
+              ProgramOptions.getLogger().warn(
                   "Load custom validator file \"%s\" with invalid version \"%s\", we will use 0.",
                   filePath,
                   versionObj.toString());
@@ -440,7 +446,7 @@ public class DataValidatorFactory {
           if (mode.equalsIgnoreCase("and")) {
             DataVerifyImpl validator = new DataVerifyCustomAndRule(name, rules, description, version);
             if (null != ret.put(name, validator)) {
-              ProgramOptions.getLoger().warn(
+              ProgramOptions.getLogger().warn(
                   "Load custom validator file \"%s\" with more than one rule with name \"%s\", we will use the last one.",
                   filePath,
                   name);
@@ -451,7 +457,7 @@ public class DataValidatorFactory {
           } else if (mode.equalsIgnoreCase("not")) {
             DataVerifyImpl validator = new DataVerifyCustomNotRule(name, rules, description, version);
             if (null != ret.put(name, validator)) {
-              ProgramOptions.getLoger().warn(
+              ProgramOptions.getLogger().warn(
                   "Load custom validator file \"%s\" with more than one rule with name \"%s\", we will use the last one.",
                   filePath,
                   name);
@@ -463,7 +469,7 @@ public class DataValidatorFactory {
             // Default is or
             DataVerifyImpl validator = new DataVerifyCustomOrRule(name, rules, description, version);
             if (null != ret.put(name, validator)) {
-              ProgramOptions.getLoger().warn(
+              ProgramOptions.getLogger().warn(
                   "Load custom validator file \"%s\" with more than one rule with name \"%s\", we will use the last one.",
                   filePath,
                   name);
@@ -477,7 +483,7 @@ public class DataValidatorFactory {
 
       return ret;
     } catch (java.io.IOException | NumberFormatException e) {
-      ProgramOptions.getLoger().error("Load custom validator file \"%s\" failed, %s", filePath, e.getMessage());
+      ProgramOptions.getLogger().error("Load custom validator file \"%s\" failed, %s", filePath, e.getMessage());
       return null;
     }
   }

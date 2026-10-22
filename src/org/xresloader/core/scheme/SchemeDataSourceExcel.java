@@ -22,8 +22,8 @@ public final class SchemeDataSourceExcel extends SchemeDataSourceBase {
     @Override
     public int load() throws InitializeException {
 
-        String file_path = ProgramOptions.getInstance().dataSourceFile;
-        currentWorkbookFile = new File(file_path);
+        String filePath = ProgramOptions.getInstance().dataSourceFile;
+        currentWorkbookFile = new File(filePath);
         if (!currentWorkbookFile.exists() || !currentWorkbookFile.isFile()) {
             throw new InitializeException(
                     String.format("open file \"%s\" failed", ProgramOptions.getInstance().dataSourceFile));
@@ -33,11 +33,12 @@ public final class SchemeDataSourceExcel extends SchemeDataSourceBase {
     }
 
     @Override
+    @Deprecated
     public boolean load_scheme(String sheetName) throws InitializeException {
         // 数据及header
-        int data_row = 0;
-        int key_col = 0; // 字段列
-        int data_col[] = { 2, 3, 4 }; // 数据列
+        int dataRow = 0;
+        int keyCol = 0; // 字段列
+        int dataCol[] = { 2, 3, 4 }; // 数据列
 
         SchemeConf.DataInfo dataInfo = new SchemeConf.DataInfo();
         dataInfo.filePath = currentWorkbookFile.getPath();
@@ -46,57 +47,57 @@ public final class SchemeDataSourceExcel extends SchemeDataSourceBase {
         ExcelEngine.DataSheetWrapper sheetWrapper = DataSrcExcel.createDataSheetWrapper(dataInfo,
                 false);
 
-        int row_num = sheetWrapper.getLastRowIndex() + 1;
+        int rowNum = sheetWrapper.getLastRowIndex() + 1;
 
         // 查找“字段”列
-        for (; data_row < row_num; ++data_row) {
+        for (; dataRow < rowNum; ++dataRow) {
             ExcelEngine.DataItemGridWrapper itemGrid = DataSrcExcel.createDataExcelGridWrapper(sheetWrapper, false,
-                    data_row);
-            int col_num = itemGrid.getLastDataFieldIndex() + 1;
-            for (key_col = 0; key_col < col_num; ++key_col) {
-                String val = cell2str(itemGrid, key_col);
+                    dataRow);
+            int colNum = itemGrid.getLastDataFieldIndex() + 1;
+            for (keyCol = 0; keyCol < colNum; ++keyCol) {
+                String val = cell2str(itemGrid, keyCol);
                 val = val.trim();
                 if (val.equals("字段") || val.equalsIgnoreCase("header")) {
                     break;
                 }
             }
 
-            if (key_col >= col_num) {
+            if (keyCol >= colNum) {
                 continue;
             }
 
             // 数据列判定
-            for (int i = 0; i < col_num; ++i) {
+            for (int i = 0; i < colNum; ++i) {
                 String val = cell2str(itemGrid, i);
                 val = val.trim();
                 if (val.equals("主配置") || val.equalsIgnoreCase("major")) {
-                    data_col[0] = i;
+                    dataCol[0] = i;
                 } else if (val.equals("次配置") || val.equalsIgnoreCase("minor")) {
-                    data_col[1] = i;
+                    dataCol[1] = i;
                 } else if (val.equals("补充配置") || val.equalsIgnoreCase("addition")) {
-                    data_col[2] = i;
+                    dataCol[2] = i;
                 }
             }
             break;
         }
 
-        if (data_row >= row_num) {
+        if (dataRow >= rowNum) {
             throw new InitializeException(
                     String.format("scheme \"%s\" has no configure, or it's not a scheme sheet?", sheetName));
         }
 
         // 数据项必须在这之后
-        for (++data_row; data_row < row_num; ++data_row) {
+        for (++dataRow; dataRow < rowNum; ++dataRow) {
             ExcelEngine.DataItemGridWrapper itemGrid = DataSrcExcel.createDataExcelGridWrapper(sheetWrapper, false,
-                    data_row);
+                    dataRow);
 
-            String key = cell2str(itemGrid, key_col);
+            String key = cell2str(itemGrid, keyCol);
             ArrayList<String> datas = new ArrayList<>();
-            datas.add(cell2str(itemGrid, data_col[0]));
-            datas.add(cell2str(itemGrid, data_col[1]));
-            datas.add(cell2str(itemGrid, data_col[2]));
+            datas.add(cell2str(itemGrid, dataCol[0]));
+            datas.add(cell2str(itemGrid, dataCol[1]));
+            datas.add(cell2str(itemGrid, dataCol[2]));
 
-            set_scheme(key, datas);
+            setScheme(key, datas);
         }
 
         return true;

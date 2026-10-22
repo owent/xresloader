@@ -17,43 +17,42 @@ import org.xresloader.core.data.err.InitializeException;
  */
 public final class SchemeDataSourceConf extends SchemeDataSourceBase {
 
-    private ConfigParser current_file = new ConfigParser();
+    private ConfigParser currentFile = new ConfigParser();
 
     public int load() throws InitializeException {
 
-        String file_path = ProgramOptions.getInstance().dataSourceFile;
-        String error_message = null;
-        try {
-            FileInputStream fsi = new FileInputStream(file_path);
-            byte[] utf8_bom = new byte[3];
-            fsi.read(utf8_bom, 0, 3);
-            if (utf8_bom[0] != (byte) 0xef || utf8_bom[1] != (byte) 0xbb || utf8_bom[2] != (byte) 0xbf) {
-                fsi.close();
-                fsi = new FileInputStream(file_path);
+        String filePath = ProgramOptions.getInstance().dataSourceFile;
+        String errorMessage = null;
+        try (FileInputStream input = new FileInputStream(filePath)) {
+            byte[] utf8Bom = input.readNBytes(3);
+            if (utf8Bom.length != 3 || utf8Bom[0] != (byte) 0xef || utf8Bom[1] != (byte) 0xbb
+                    || utf8Bom[2] != (byte) 0xbf) {
+                input.getChannel().position(0);
             }
 
-            current_file.read(fsi);
+            currentFile.read(input);
         } catch (IOException e) {
             e.printStackTrace();
-            error_message = String.format("open file %s failed", file_path);
+            errorMessage = String.format("open file %s failed", filePath);
         }
 
-        if (error_message != null) {
-            throw new InitializeException(error_message);
+        if (errorMessage != null) {
+            throw new InitializeException(errorMessage);
         }
 
         return 0;
     }
 
-    public boolean load_scheme(String section_name) throws InitializeException {
-        Map<String, HashMap<String, ArrayList<String>>> all_conf = new HashMap<String, HashMap<String, ArrayList<String>>>();
+    @Deprecated
+    public boolean load_scheme(String sectionName) throws InitializeException {
+        Map<String, HashMap<String, ArrayList<String>>> allConf = new HashMap<String, HashMap<String, ArrayList<String>>>();
         List<Map.Entry<String, String>> datas = null;
         try {
-            datas = current_file.items(section_name);
+            datas = currentFile.items(sectionName);
         } catch (ConfigParser.NoSectionException e) {
-            ProgramOptions.getLoger().warn("Scheme section %s not found", section_name);
+            ProgramOptions.getLogger().warn("Scheme section %s not found", sectionName);
         } catch (ConfigParser.InterpolationMissingOptionException e) {
-            ProgramOptions.getLoger().warn("Read scheme error,%s", e.getMessage());
+            ProgramOptions.getLogger().warn("Read scheme error,%s", e.getMessage());
             e.printStackTrace();
         }
 
@@ -63,58 +62,58 @@ public final class SchemeDataSourceConf extends SchemeDataSourceBase {
                 for (int i = 0; i < keys.length; ++i) {
                     keys[i] = keys[i].trim();
                 }
-                dump_scheme(all_conf, keys, data.getValue());
+                dumpScheme(allConf, keys, data.getValue());
             }
         }
 
         // 数据项必须在这之后
-        for (Map.Entry<String, HashMap<String, ArrayList<String>>> element : all_conf.entrySet()) {
-            for (Map.Entry<String, ArrayList<String>> sub_datas : element.getValue().entrySet()) {
-                set_scheme(element.getKey(), sub_datas.getValue());
+        for (Map.Entry<String, HashMap<String, ArrayList<String>>> element : allConf.entrySet()) {
+            for (Map.Entry<String, ArrayList<String>> subDatas : element.getValue().entrySet()) {
+                setScheme(element.getKey(), subDatas.getValue());
             }
         }
 
         return true;
     }
 
-    private ArrayList<String> mutable_configure(Map<String, HashMap<String, ArrayList<String>>> out, String[] keys) {
+    private ArrayList<String> mutableConfigure(Map<String, HashMap<String, ArrayList<String>>> out, String[] keys) {
         ArrayList<String> ret = null;
         if (0 == keys.length) {
             return ret;
         }
 
-        HashMap<String, ArrayList<String>> first_layer = out.getOrDefault(keys[0], null);
-        if (first_layer == null) {
-            first_layer = new HashMap<String, ArrayList<String>>();
-            out.put(keys[0], first_layer);
+        HashMap<String, ArrayList<String>> firstLayer = out.getOrDefault(keys[0], null);
+        if (firstLayer == null) {
+            firstLayer = new HashMap<String, ArrayList<String>>();
+            out.put(keys[0], firstLayer);
         }
 
-        String second_key = "";
+        String secondKey = "";
         if (keys.length > 2) {
-            second_key = keys[1];
+            secondKey = keys[1];
             for (int i = 2; i < keys.length - 1; ++i) {
-                second_key += "." + keys[i];
+                secondKey += "." + keys[i];
             }
         }
 
-        ret = first_layer.getOrDefault(second_key, null);
+        ret = firstLayer.getOrDefault(secondKey, null);
         if (null == ret) {
             ret = new ArrayList<String>();
             for (int i = 0; i < 3; ++i) {
                 ret.add("");
             }
-            first_layer.put(second_key, ret);
+            firstLayer.put(secondKey, ret);
         }
 
         return ret;
     }
 
-    private void dump_scheme(Map<String, HashMap<String, ArrayList<String>>> out, String[] keys, String val) {
+    private void dumpScheme(Map<String, HashMap<String, ArrayList<String>>> out, String[] keys, String val) {
         if (keys.length <= 0) {
             return;
         }
 
-        ArrayList<String> opr = mutable_configure(out, keys);
+        ArrayList<String> opr = mutableConfigure(out, keys);
         if (null == opr) {
             return;
         }

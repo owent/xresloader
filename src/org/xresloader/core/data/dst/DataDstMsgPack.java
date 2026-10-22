@@ -91,10 +91,10 @@ public class DataDstMsgPack extends DataDstJava {
         if (data instanceof Map<?, ?>) {
             Map<?, ?> mp = (Map<?, ?>) data;
 
-            ArrayList<Map.Entry<?, ?>> sorted_array = new ArrayList<Map.Entry<?, ?>>();
-            sorted_array.ensureCapacity(mp.size());
-            sorted_array.addAll(mp.entrySet());
-            sorted_array.sort((l, r) -> {
+            ArrayList<Map.Entry<?, ?>> sortedArray = new ArrayList<Map.Entry<?, ?>>();
+            sortedArray.ensureCapacity(mp.size());
+            sortedArray.addAll(mp.entrySet());
+            sortedArray.sort((l, r) -> {
                 if (l.getKey() instanceof Integer && r.getKey() instanceof Integer) {
                     return ((Integer) l.getKey()).compareTo((Integer) r.getKey());
                 } else if (l.getKey() instanceof Long && r.getKey() instanceof Long) {
@@ -104,8 +104,8 @@ public class DataDstMsgPack extends DataDstJava {
                 }
             });
 
-            packer.packMapHeader(sorted_array.size());
-            for (Map.Entry<?, ?> item : sorted_array) {
+            packer.packMapHeader(sortedArray.size());
+            for (Map.Entry<?, ?> item : sortedArray) {
                 writeData(packer, item.getKey());
                 writeData(packer, item.getValue());
             }
@@ -120,16 +120,16 @@ public class DataDstMsgPack extends DataDstJava {
     public final byte[] build(DataDstImpl compiler) throws ConvException {
         MessageBufferPacker packer = MessagePack.newDefaultBufferPacker();
 
-        DataDstJava.DataDstObject data_obj = build_data(compiler);
+        DataDstJava.DataDstObject dataObj = buildData(compiler);
 
         try {
             packer.packMapHeader(3);
             packer.packString("header");
-            writeData(packer, data_obj.header);
+            writeData(packer, dataObj.header);
             packer.packString("data_block");
-            writeData(packer, data_obj.body);
+            writeData(packer, dataObj.body);
             packer.packString("data_message_type");
-            writeData(packer, data_obj.data_message_type);
+            writeData(packer, dataObj.data_message_type);
         } catch (IOException e) {
             this.logErrorMessage("MessagePacker write failed.");
             e.printStackTrace();

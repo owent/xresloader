@@ -1,16 +1,18 @@
 #!/bin/sh
 
+set -eu
+
 cd "$(dirname $0)"
 SCRIPT_DIR="$PWD"
 
-XRESLOADER="$(ls -t ../target/xresloader-*-jar-with-dependencies.jar 2>/dev/null | head -n 1)"
+XRESLOADER="${XRESLOADER:-$(ls -t ../target/xresloader-*-jar-with-dependencies.jar 2>/dev/null | head -n 1)}"
 if [ -z "$XRESLOADER" ] || [ ! -e "$XRESLOADER" ]; then
-  XRESLOADER="$(ls -t ../target/xresloader-*.jar 2>/dev/null | head -n 1)"
+  XRESLOADER="$(ls -t ../target/xresloader-*.jar 2>/dev/null | grep -v -- '-plain.jar$' | head -n 1)"
 fi
 
 if [ -z "$XRESLOADER" ] || [ ! -e "$XRESLOADER" ]; then
   echo "xresloader not found."
-  exit 0
+  exit 1
 fi
 
 echo "Using xresloader=$XRESLOADER"

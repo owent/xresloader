@@ -24,7 +24,8 @@ hs_err_pid*
 /.gradle
 /xresloader.run.log
 
-/gradle
+/gradle/*
+!/gradle/wrapper/
 
 # sample
 /sample/cxx/build

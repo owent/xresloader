@@ -33,13 +33,11 @@ public abstract class DataVerifyImpl {
     protected HashSet<Long> allNumbers = new HashSet<>();
     protected String name = "";
 
-    private static ThreadLocal<Pattern> PERCENT_PATTERN = ThreadLocal
-            .withInitial(() -> Pattern.compile("^\\s*((\\-\\s*)?[0-9\\,]+(\\.[0-9\\,]+)?)\\s*%\\s*$"));
-    private static ThreadLocal<Pattern> INTEGER_WITH_DOT_PATTERN = ThreadLocal
-            .withInitial(() -> Pattern.compile("^\\s*((\\-\\s*)?[0-9\\,]+)\\s*(%\\s*)?$"));
+    private static final Pattern PERCENT_PATTERN = Pattern.compile("^\\s*((\\-\\s*)?[0-9\\,]+(\\.[0-9\\,]+)?)\\s*%\\s*$");
+    private static final Pattern INTEGER_WITH_DOT_PATTERN = Pattern.compile("^\\s*((\\-\\s*)?[0-9\\,]+)\\s*(%\\s*)?$");
 
-    protected DataVerifyImpl(String input_name) {
-        this.name = input_name;
+    protected DataVerifyImpl(String inputName) {
+        this.name = inputName;
     }
 
     protected DataVerifyImpl(ValidatorTokens tokens) {
@@ -50,7 +48,7 @@ public abstract class DataVerifyImpl {
         return 0;
     }
 
-    abstract public boolean isValid();
+    public abstract boolean isValid();
 
     public boolean setup(DataValidatorCache cache) {
         return true;
@@ -94,13 +92,13 @@ public abstract class DataVerifyImpl {
 
     private static double doubleValueOf(String input) throws NumberFormatException {
         {
-            Matcher matcher = INTEGER_WITH_DOT_PATTERN.get().matcher(input);
+            Matcher matcher = INTEGER_WITH_DOT_PATTERN.matcher(input);
             if (matcher.matches()) {
                 input = input.replaceAll(",", "").trim();
             }
         }
 
-        Matcher matcher = PERCENT_PATTERN.get().matcher(input);
+        Matcher matcher = PERCENT_PATTERN.matcher(input);
         if (matcher.matches()) {
             return Double.parseDouble(matcher.group(1).trim()) / 100.0;
         }
@@ -110,13 +108,13 @@ public abstract class DataVerifyImpl {
     private static long longValueOf(String input) throws NumberFormatException {
         long ret;
         {
-            Matcher matcher = INTEGER_WITH_DOT_PATTERN.get().matcher(input);
+            Matcher matcher = INTEGER_WITH_DOT_PATTERN.matcher(input);
             if (matcher.matches()) {
                 input = input.replaceAll(",", "").trim();
             }
         }
 
-        Matcher matcher = PERCENT_PATTERN.get().matcher(input);
+        Matcher matcher = PERCENT_PATTERN.matcher(input);
         if (matcher.matches()) {
             ret = Long.parseLong(matcher.group(1).trim());
             if (ret % 100 != 0) {
@@ -130,36 +128,36 @@ public abstract class DataVerifyImpl {
         return ret;
     }
 
-    public boolean get(String enum_name, DataVerifyResult res) throws NumberFormatException {
-        if (null == enum_name || enum_name.isEmpty()) {
+    public boolean get(String enumName, DataVerifyResult res) throws NumberFormatException {
+        if (null == enumName || enumName.isEmpty()) {
             res.success = true;
             res.value = 0;
             return res.success;
         }
 
-        boolean is_numeric = !enum_name.isEmpty();
-        boolean is_double = false;
-        for (int i = 0; is_numeric && i < enum_name.length(); ++i) {
-            char c = enum_name.charAt(i);
+        boolean isNumeric = !enumName.isEmpty();
+        boolean isDouble = false;
+        for (int i = 0; isNumeric && i < enumName.length(); ++i) {
+            char c = enumName.charAt(i);
             if ((c < '0' || c > '9') && '.' != c && '-' != c && ',' != c) {
-                if (!PERCENT_PATTERN.get().matcher(enum_name).matches()) {
-                    is_numeric = false;
+                if (!PERCENT_PATTERN.matcher(enumName).matches()) {
+                    isNumeric = false;
                 }
             }
             if ('.' == c) {
-                is_double = true;
+                isDouble = true;
             }
         }
 
-        if (is_numeric) {
-            if (is_double) {
-                return get(doubleValueOf(enum_name), res);
+        if (isNumeric) {
+            if (isDouble) {
+                return get(doubleValueOf(enumName), res);
             } else {
-                return get(longValueOf(enum_name), res);
+                return get(longValueOf(enumName), res);
             }
         }
 
-        Long ret = allNames.getOrDefault(enum_name, null);
+        Long ret = allNames.getOrDefault(enumName, null);
         if (null == ret) {
             res.success = false;
             return false;
@@ -183,7 +181,7 @@ public abstract class DataVerifyImpl {
         return getName();
     }
 
-    static public String collectValidatorNames(List<DataVerifyImpl> verifyEngine) {
+    public static String collectValidatorNames(List<DataVerifyImpl> verifyEngine) {
         StringBuilder sb = new StringBuilder();
         for (DataVerifyImpl vfy : verifyEngine) {
             if (sb.length() > 0) {
@@ -195,12 +193,12 @@ public abstract class DataVerifyImpl {
         return sb.toString();
     }
 
-    static private int getAndVerifyTypeValidator(DataVerifyImpl typeValidator,
+    private static int getAndVerifyTypeValidator(DataVerifyImpl typeValidator,
             String path, int n, DataVerifyResult verifyCache, boolean testMode) throws ConvException {
         return (int) getAndVerifyTypeValidator(typeValidator, path, (long) n, verifyCache, testMode);
     }
 
-    static private long getAndVerifyTypeValidator(DataVerifyImpl typeValidator,
+    private static long getAndVerifyTypeValidator(DataVerifyImpl typeValidator,
             String path, long n, DataVerifyResult verifyCache, boolean testMode) throws ConvException {
         if (typeValidator == null || !typeValidator.isValid()) {
             return n;
@@ -216,7 +214,7 @@ public abstract class DataVerifyImpl {
                 throw new ConvException(
                         message);
             } else {
-                ProgramOptions.getLoger().warn(message);
+                ProgramOptions.getLogger().warn(message);
                 return n;
             }
         }
@@ -234,7 +232,7 @@ public abstract class DataVerifyImpl {
         return longValueOf(verifyCache.value.toString());
     }
 
-    static private double getAndVerifyTypeValidator(DataVerifyImpl typeValidator,
+    private static double getAndVerifyTypeValidator(DataVerifyImpl typeValidator,
             String path, double n, DataVerifyResult verifyCache, boolean testMode) throws ConvException {
         if (typeValidator == null || !typeValidator.isValid()) {
             return n;
@@ -250,7 +248,7 @@ public abstract class DataVerifyImpl {
                 throw new ConvException(
                         message);
             } else {
-                ProgramOptions.getLoger().warn(message);
+                ProgramOptions.getLogger().warn(message);
                 return n;
             }
         }
@@ -267,7 +265,7 @@ public abstract class DataVerifyImpl {
         return doubleValueOf(verifyCache.value.toString());
     }
 
-    static private String getAndVerifyTypeValidator(DataVerifyImpl typeValidator,
+    private static String getAndVerifyTypeValidator(DataVerifyImpl typeValidator,
             String path, String val, DataVerifyResult verifyCache, boolean testMode) throws ConvException {
         if (typeValidator == null || !typeValidator.isValid()) {
             return val;
@@ -283,7 +281,7 @@ public abstract class DataVerifyImpl {
                 throw new ConvException(
                         message);
             } else {
-                ProgramOptions.getLoger().warn(message);
+                ProgramOptions.getLogger().warn(message);
                 return val;
             }
         }
@@ -295,14 +293,14 @@ public abstract class DataVerifyImpl {
         return verifyCache.value.toString();
     }
 
-    static public long getAndVerifyNumeric(List<DataVerifyImpl> verifyEngine, DataVerifyImpl typeValidator,
+    public static long getAndVerifyNumeric(List<DataVerifyImpl> verifyEngine, DataVerifyImpl typeValidator,
             String path, int n)
             throws ConvException {
         return getAndVerifyNumeric(verifyEngine, typeValidator, path, (long) n);
     }
 
     @SuppressWarnings("UseSpecificCatch")
-    static public long getAndVerifyNumeric(List<DataVerifyImpl> verifyEngine, DataVerifyImpl typeValidator,
+    public static long getAndVerifyNumeric(List<DataVerifyImpl> verifyEngine, DataVerifyImpl typeValidator,
             String path, long n) throws ConvException {
         // 不能直接调用double版本，会发生数据裁剪
         if ((verifyEngine == null || verifyEngine.isEmpty()) && typeValidator == null) {
@@ -335,7 +333,7 @@ public abstract class DataVerifyImpl {
                         throw new ConvException(
                                 message);
                     } else {
-                        ProgramOptions.getLoger().warn(message);
+                        ProgramOptions.getLogger().warn(message);
                     }
                 }
             }
@@ -346,7 +344,7 @@ public abstract class DataVerifyImpl {
                 throw new ConvException(
                         message);
             } else {
-                ProgramOptions.getLoger().warn(message);
+                ProgramOptions.getLogger().warn(message);
                 return n;
             }
         } else {
@@ -354,7 +352,7 @@ public abstract class DataVerifyImpl {
         }
     }
 
-    static private String getValidatorWord(List<DataVerifyImpl> verifyEngine) {
+    private static String getValidatorWord(List<DataVerifyImpl> verifyEngine) {
         if (verifyEngine == null || verifyEngine.isEmpty() || verifyEngine.size() == 1) {
             return "validator";
         }
@@ -362,7 +360,7 @@ public abstract class DataVerifyImpl {
         return "validator(s)";
     }
 
-    static private ValidatorFailedLevel getValidatorFailedLevel(DataVerifyImpl verifyEngine) {
+    private static ValidatorFailedLevel getValidatorFailedLevel(DataVerifyImpl verifyEngine) {
         if (!ProgramOptions.getInstance().enableDataValidator) {
             return ValidatorFailedLevel.WARNING;
         }
@@ -387,7 +385,7 @@ public abstract class DataVerifyImpl {
         return ValidatorFailedLevel.ERROR;
     }
 
-    static private ValidatorFailedLevel getValidatorFailedLevel(List<DataVerifyImpl> verifyEngine) {
+    private static ValidatorFailedLevel getValidatorFailedLevel(List<DataVerifyImpl> verifyEngine) {
         if (verifyEngine == null || verifyEngine.isEmpty()) {
             if (!ProgramOptions.getInstance().enableDataValidator) {
                 return ValidatorFailedLevel.WARNING;
@@ -407,7 +405,7 @@ public abstract class DataVerifyImpl {
     }
 
     @SuppressWarnings("UseSpecificCatch")
-    static public double getAndVerifyNumeric(List<DataVerifyImpl> verifyEngine, DataVerifyImpl typeValidator,
+    public static double getAndVerifyNumeric(List<DataVerifyImpl> verifyEngine, DataVerifyImpl typeValidator,
             String path,
             double n) throws ConvException {
         if ((verifyEngine == null || verifyEngine.isEmpty()) && typeValidator == null) {
@@ -446,7 +444,7 @@ public abstract class DataVerifyImpl {
                         throw new ConvException(
                                 message);
                     } else {
-                        ProgramOptions.getLoger().warn(message);
+                        ProgramOptions.getLogger().warn(message);
                     }
                 }
             }
@@ -464,7 +462,7 @@ public abstract class DataVerifyImpl {
                 throw new ConvException(
                         message);
             } else {
-                ProgramOptions.getLoger().warn(message);
+                ProgramOptions.getLogger().warn(message);
                 return n;
             }
         } else {
@@ -473,37 +471,37 @@ public abstract class DataVerifyImpl {
     }
 
     @SuppressWarnings("UseSpecificCatch")
-    static public Number getAndVerifyToNumber(List<DataVerifyImpl> verifyEngine, DataVerifyImpl typeValidator,
+    public static Number getAndVerifyToNumber(List<DataVerifyImpl> verifyEngine, DataVerifyImpl typeValidator,
             String path, String val,
-            boolean is_double)
+            boolean isDouble)
             throws ConvException {
-        boolean is_numeric = !val.isEmpty();
-        boolean has_dot = false;
-        for (int i = 0; is_numeric && i < val.length(); ++i) {
+        boolean isNumeric = !val.isEmpty();
+        boolean hasDot = false;
+        for (int i = 0; isNumeric && i < val.length(); ++i) {
             char c = val.charAt(i);
             if ((c < '0' || c > '9') && '.' != c && '-' != c && ',' != c) {
-                if (!PERCENT_PATTERN.get().matcher(val).matches()) {
-                    is_numeric = false;
+                if (!PERCENT_PATTERN.matcher(val).matches()) {
+                    isNumeric = false;
                 }
             }
             if ('.' == c) {
-                has_dot = true;
+                hasDot = true;
             }
         }
-        if (!is_double && is_numeric && has_dot) {
-            is_double = true;
+        if (!isDouble && isNumeric && hasDot) {
+            isDouble = true;
         }
-        if (!is_double && is_numeric) {
-            double test_range = doubleValueOf(val);
-            if (test_range > Long.MAX_VALUE || test_range < Long.MIN_VALUE) {
-                is_double = true;
+        if (!isDouble && isNumeric) {
+            double testRange = doubleValueOf(val);
+            if (testRange > Long.MAX_VALUE || testRange < Long.MIN_VALUE) {
+                isDouble = true;
             }
         }
 
         boolean hasValidator = verifyEngine != null && !verifyEngine.isEmpty();
         try {
-            if (is_numeric) {
-                if (is_double) {
+            if (isNumeric) {
+                if (isDouble) {
                     return getAndVerifyNumeric(verifyEngine, typeValidator, path, doubleValueOf(val));
                 } else {
                     return getAndVerifyNumeric(verifyEngine, typeValidator, path, longValueOf(val));
@@ -526,18 +524,18 @@ public abstract class DataVerifyImpl {
                                 return getAndVerifyTypeValidator(typeValidator, path, aLong,
                                         verifyCache, false);
                             }
-                            if (is_double) {
+                            if (isDouble) {
                                 return getAndVerifyTypeValidator(typeValidator, path,
                                         doubleValueOf(verifyCache.value.toString()), verifyCache, false);
-                            } else if (is_numeric) {
+                            } else if (isNumeric) {
                                 return getAndVerifyTypeValidator(typeValidator, path,
                                         longValueOf(verifyCache.value.toString()), verifyCache, false);
                             } else {
                                 String parsedValue = getAndVerifyTypeValidator(typeValidator, path,
                                         verifyCache.value.toString(),
                                         verifyCache, false);
-                                is_double = parsedValue.contains(".");
-                                if (is_double) {
+                                isDouble = parsedValue.contains(".");
+                                if (isDouble) {
                                     return doubleValueOf(parsedValue);
                                 }
                                 return longValueOf(parsedValue);
@@ -550,7 +548,7 @@ public abstract class DataVerifyImpl {
                             throw new ConvException(
                                     message);
                         } else {
-                            ProgramOptions.getLoger().warn(message);
+                            ProgramOptions.getLogger().warn(message);
                         }
                     }
                 }
@@ -561,7 +559,7 @@ public abstract class DataVerifyImpl {
                 val = getAndVerifyTypeValidator(typeValidator, path, val, verifyCache, true);
                 if (verifyCache.success) {
                     // 如果成功，下一步不需要再处理类型验证器了
-                    return getAndVerifyToNumber(verifyEngine, null, path, val, is_double);
+                    return getAndVerifyToNumber(verifyEngine, null, path, val, isDouble);
                 }
             }
         } catch (Exception e) {
@@ -570,7 +568,7 @@ public abstract class DataVerifyImpl {
                 throw new ConvException(
                         message);
             } else {
-                ProgramOptions.getLoger().warn(message);
+                ProgramOptions.getLogger().warn(message);
             }
         }
 
@@ -585,8 +583,8 @@ public abstract class DataVerifyImpl {
         if (getValidatorFailedLevel(verifyEngine) == ValidatorFailedLevel.ERROR) {
             throw new ConvException(message);
         } else {
-            ProgramOptions.getLoger().warn(message);
-            if (is_double) {
+            ProgramOptions.getLogger().warn(message);
+            if (isDouble) {
                 return Double.valueOf(0);
             } else {
                 return Long.valueOf(0);
@@ -594,7 +592,7 @@ public abstract class DataVerifyImpl {
         }
     }
 
-    static public double getAndVerifyToDouble(List<DataVerifyImpl> verifyEngine, DataVerifyImpl typeValidator,
+    public static double getAndVerifyToDouble(List<DataVerifyImpl> verifyEngine, DataVerifyImpl typeValidator,
             String path, String val)
             throws ConvException {
         Number value = getAndVerifyToNumber(verifyEngine, typeValidator, path, val, true);
@@ -608,7 +606,7 @@ public abstract class DataVerifyImpl {
     }
 
     @SuppressWarnings("UseSpecificCatch")
-    static public String getAndVerifyToString(List<DataVerifyImpl> verifyEngine, DataVerifyImpl typeValidator,
+    public static String getAndVerifyToString(List<DataVerifyImpl> verifyEngine, DataVerifyImpl typeValidator,
             String path, String val)
             throws ConvException {
         if ((verifyEngine == null || verifyEngine.isEmpty()) && typeValidator == null) {
@@ -646,7 +644,7 @@ public abstract class DataVerifyImpl {
                         throw new ConvException(
                                 message);
                     } else {
-                        ProgramOptions.getLoger().warn(message);
+                        ProgramOptions.getLogger().warn(message);
                     }
                 }
             }
@@ -662,7 +660,7 @@ public abstract class DataVerifyImpl {
             if (getValidatorFailedLevel(verifyEngine) == ValidatorFailedLevel.ERROR) {
                 throw new ConvException(message);
             } else {
-                ProgramOptions.getLoger().warn(message);
+                ProgramOptions.getLogger().warn(message);
                 return "";
             }
         } else {
@@ -670,7 +668,7 @@ public abstract class DataVerifyImpl {
         }
     }
 
-    static public long getAndVerifyToLong(List<DataVerifyImpl> verifyEngine, DataVerifyImpl typeValidator, String path,
+    public static long getAndVerifyToLong(List<DataVerifyImpl> verifyEngine, DataVerifyImpl typeValidator, String path,
             String val)
             throws ConvException {
         Number value = getAndVerifyToNumber(verifyEngine, typeValidator, path, val, false);
@@ -689,7 +687,7 @@ public abstract class DataVerifyImpl {
                 if (getValidatorFailedLevel(verifyEngine) == ValidatorFailedLevel.ERROR) {
                     throw new ConvException(message);
                 } else {
-                    ProgramOptions.getLoger().warn(message);
+                    ProgramOptions.getLogger().warn(message);
                 }
             }
         } else if (value instanceof Long) {
@@ -700,7 +698,7 @@ public abstract class DataVerifyImpl {
         return ret;
     }
 
-    static public final class ValidatorParameter {
+    public static final class ValidatorParameter {
         private final ValidatorTokens token;
         private final String value;
 
@@ -754,7 +752,7 @@ public abstract class DataVerifyImpl {
         }
     }
 
-    static public final class ValidatorTokens {
+    public static final class ValidatorTokens {
         private String name = null;
         private String key = null;
         private final ArrayList<ValidatorParameter> parameters = new ArrayList<>();

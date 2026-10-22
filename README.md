@@ -54,7 +54,7 @@
 由于 v2.11.0-rc3 版本变更了默认的索引器，导致对Excel一些内置的数据类型处理和先前有一些差异。比如对于日期时间类型、百分率等。
 现在会先转出原始的文本，再根据protocol的目标类型做转换。如果需要回退到老的POI索引，可以使用 `--enable-excel-formular` 选项切换到老的索引器。
 
-当前版本要求 Java 17 或以上版本。默认打包目标为 Java 17，也可以通过 `mvn -Dproject.target.javaVersion=21 clean package` 打包为 Java 21（需要 JDK 21 或以上版本）。
+当前版本要求 Java 17 或以上版本。默认打包目标为 Java 17，也可以通过 `sh ./mvnw -Dproject.target.javaVersion=21 clean package` 打包为 Java 21（需要 JDK 21 或以上版本）。
 
 ## License
 
@@ -413,18 +413,21 @@ validator:
 
 ## 编译和打包（For developer）
 
-+ 本项目使用[apache maven](https://maven.apache.org/)管理包依赖和打包构建流程。
-+ JDK 需要17或以上版本，默认生成兼容 Java 17 的程序。
++ 本项目提供 Maven 3.10.0 和 Gradle 9.8.2 Wrapper，发行包均固定 SHA-256 校验和。
++ JDK 需要17或以上版本，默认生成兼容 Java 17 的程序。生成协议的 Python 工具使用 `tools/requirements.txt` 中固定的依赖版本。
++ 以下命令使用 POSIX shell；Windows 下将 `sh ./mvnw` 换为 `.\mvnw.cmd`，将 `sh ./gradlew` 换为 `.\gradlew.bat`。
 
 ```bash
 # 编译
-mvn compile
+sh ./mvnw compile
 # 打包
-mvn package
+sh ./mvnw package
 # 全量重编译和打包（切换目标 Java 版本时使用）
-mvn clean package
+sh ./mvnw clean package
 # 打包并验证独立 JAR 的启动、Excel 读写和 JavaScript 服务发现
-mvn verify
+sh ./mvnw verify
+# Gradle 构建和测试
+sh ./gradlew --no-daemon --warning-mode=all test shadowJar
 ```
 
 以上命令会自动下载依赖文件、包和插件。
@@ -432,8 +435,14 @@ mvn verify
 编译完成后，输出的结果默认会放在 ***target*** 目录下。
 
 `target/xresloader-<版本>.jar` 包含运行依赖，可直接使用 `java -jar` 执行；`original-*.jar` 是合并依赖前的构建中间产物。
-重复执行 `mvn package` 时会重新生成合并前的 JAR，避免把上次的完整包再次作为 Shade 输入。
+重复执行 `sh ./mvnw package` 时会重新生成合并前的 JAR，避免把上次的完整包再次作为 Shade 输入。
 打包时会合并 `META-INF/services`，保留 POI 等依赖的全部服务提供者；只排除各依赖的模块描述符，保留多版本 JAR 的实现类。
+
+Gradle 的可执行包为 `target/libs/xresloader-<版本>.jar`，`*-plain.jar` 不包含运行依赖。
+两种构建共享 `target`，不要同时执行构建。
+
+修改转换逻辑或依赖前后，可用 [sample 回归工具](sample/README.md#输出回归验证) 对完整生成文件集逐字节比较。
+依赖更新依据、兼容约定和验证结果见 [2026-10 更新记录](doc/DEPENDENCY_UPGRADE_2026-10.md)。
 
 ### 更新依赖包
 

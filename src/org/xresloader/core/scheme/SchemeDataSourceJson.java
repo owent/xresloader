@@ -3,8 +3,9 @@ package org.xresloader.core.scheme;
 import org.xresloader.core.ProgramOptions;
 import org.json.JSONObject;
 
-import java.io.File;
-import java.io.FileInputStream;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -16,69 +17,53 @@ import org.xresloader.core.data.err.InitializeException;
  */
 public final class SchemeDataSourceJson extends SchemeDataSourceBase {
 
-    private JSONObject current_object = null;
+    private JSONObject currentObject = null;
 
     public int load() throws InitializeException {
 
-        String file_path = ProgramOptions.getInstance().dataSourceFile;
+        String filePath = ProgramOptions.getInstance().dataSourceFile;
         try {
-            FileInputStream fis = new FileInputStream(file_path);
-            File fd = new File(file_path);
-
-            byte[] utf8_bom = new byte[3];
-            int file_length = (int) fd.length();
-
-            fis.read(utf8_bom);
-            if (utf8_bom[0] != (byte) 0xef || utf8_bom[1] != (byte) 0xbb || utf8_bom[2] != (byte) 0xbf) {
-                fis.close();
-
-                fis = new FileInputStream(file_path);
-            } else {
-                file_length -= 3;
-            }
-
-            byte[] data = new byte[file_length];
-            fis.read(data);
-
-            current_object = new JSONObject(new String(data, "utf-8"));
-
-            fis.close();
+            byte[] data = Files.readAllBytes(Path.of(filePath));
+            int offset = data.length >= 3 && data[0] == (byte) 0xef && data[1] == (byte) 0xbb
+                    && data[2] == (byte) 0xbf ? 3 : 0;
+            currentObject = new JSONObject(new String(data, offset, data.length - offset, StandardCharsets.UTF_8));
         } catch (Exception e) {
             e.printStackTrace();
-            throw new InitializeException(String.format("open file %s failed", file_path));
+            throw new InitializeException(String.format("open file %s failed", filePath));
         }
 
         return 0;
     }
 
     @SuppressWarnings("unchecked")
-    public boolean load_scheme(String section_name) throws InitializeException {
-        if (null == current_object || false == (current_object instanceof Map)) {
-            ProgramOptions.getLoger().warn("Scheme file error");
+    @Deprecated
+    public boolean load_scheme(String sectionName) throws InitializeException {
+        if (null == currentObject || false == (currentObject instanceof Map)) {
+            ProgramOptions.getLogger().warn("Scheme file error");
             return false;
         }
 
-        if (false == current_object.has(section_name)) {
-            ProgramOptions.getLoger().warn("Scheme section %s not found", section_name);
+        if (false == currentObject.has(sectionName)) {
+            ProgramOptions.getLogger().warn("Scheme section %s not found", sectionName);
             return false;
         }
 
-        Object scheme_obj = current_object.get(section_name);
-        if (false == (scheme_obj instanceof JSONObject)) {
-            ProgramOptions.getLoger().warn("Scheme section %s data invalid", section_name);
+        Object schemeObj = currentObject.get(sectionName);
+        if (false == (schemeObj instanceof JSONObject)) {
+            ProgramOptions.getLogger().warn("Scheme section %s data invalid", sectionName);
             return false;
         }
 
-        Map<Object, Object> scheme_map = (Map<Object, Object>) scheme_obj;
-        for (Map.Entry<Object, Object> item : scheme_map.entrySet()) {
-            load_segment(item.getKey().toString(), item.getValue());
+        Map<Object, Object> schemeMap = (Map<Object, Object>) schemeObj;
+        for (Map.Entry<Object, Object> item : schemeMap.entrySet()) {
+            loadSegment(item.getKey().toString(), item.getValue());
         }
 
         return true;
     }
 
     @SuppressWarnings("unchecked")
-    private void load_segment(String key, Object val) {
+    private void loadSegment(String key, Object val) {
         ArrayList<String> datas = new ArrayList<String>();
 
         if (val instanceof List) {
@@ -86,7 +71,7 @@ public final class SchemeDataSourceJson extends SchemeDataSourceBase {
 
             for (Object obj : (List<Object>) val) {
                 if (obj instanceof List) {
-                    load_segment(key, obj);
+                    loadSegment(key, obj);
                 } else {
                     datas.add(obj.toString());
                     ++index;
@@ -97,13 +82,13 @@ public final class SchemeDataSourceJson extends SchemeDataSourceBase {
                 for (; index < 3; ++index) {
                     datas.add("");
                 }
-                set_scheme(key, datas);
+                setScheme(key, datas);
             }
         } else if (null != val) {
             datas.add(val.toString());
             datas.add("");
             datas.add("");
-            set_scheme(key, datas);
+            setScheme(key, datas);
         }
     }
 }

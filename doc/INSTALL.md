@@ -5,13 +5,16 @@
 ======
 
 + 本项目使用[apache maven](https://maven.apache.org/)管理包依赖和打包构建流程。
-+ JDK 需要1.8或以上版本
++ JDK 需要 17 或以上版本。仓库自带 Maven 3.10.0 和 Gradle 9.8.2 Wrapper。
++ Windows 使用 `.\mvnw.cmd` 和 `.\gradlew.bat`；下面示例使用 POSIX shell。
 
 ```bash
 # 编译
-mvn compile
+sh ./mvnw compile
 # 打包
-mvn package
+sh ./mvnw verify
+# 或使用 Gradle
+sh ./gradlew --no-daemon test shadowJar
 ```
 
 以上命令会自动下载依赖文件、包和插件。
@@ -21,7 +24,9 @@ mvn package
 更新依赖包
 ------
 
-需要更新依赖包版本只要修改[pom.xml](pom.xml)并修改版本号即可。
+依赖和传递依赖约束需要同步修改 [pom.xml](../pom.xml) 与 [build.gradle](../build.gradle)，并分别运行 Maven、Gradle 测试及 [sample 输出回归](../sample/README.md#输出回归验证)。
+Maven、Gradle 的发行版本和 SHA-256 分别记录在 `.mvn/wrapper/maven-wrapper.properties` 与 `gradle/wrapper/gradle-wrapper.properties`。
+`tools/requirements.txt` 固定 Python Protobuf 版本；协议子模块与自带 protoc 需同时核对兼容性。
 
 依赖包和插件的组名、包名和版本可以在以下仓库内找到:
 

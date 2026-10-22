@@ -32,7 +32,7 @@ public class DataDstWriterNode {
         STANDARD, PLAIN
     }
 
-    static public class DataDstFieldExtUE {
+    public static class DataDstFieldExtUE {
         public long keyTag = 0;
         public String ueTypeName = null;
         public boolean ueTypeIsClass = false;
@@ -44,14 +44,14 @@ public class DataDstWriterNode {
         DEFAULT, STRIP_TAIL, STRIP_NOTHING, STRIP_ALL
     }
 
-    static public class DataDstFieldExtList {
+    public static class DataDstFieldExtList {
         public ListStripRule stripOption = ListStripRule.DEFAULT;
         public int minSize = 0;
         public int maxSize = 0;
         public boolean strictSize = false;
     }
 
-    static public class DataDstFieldExt {
+    public static class DataDstFieldExt {
         public String description = null;
         public String validator = null;
         public String plainSeparator = null;
@@ -88,7 +88,7 @@ public class DataDstWriterNode {
         }
     }
 
-    static public class DataDstOneofExt {
+    public static class DataDstOneofExt {
         public String description = null;
         public String plainSeparator = null;
         public boolean notNull = false;
@@ -98,14 +98,14 @@ public class DataDstWriterNode {
         private String[] withIgnoredFieldTagsCheckCache = null;
     }
 
-    static public class DataDstMessageExtUE {
+    public static class DataDstMessageExtUE {
         public String helper = null;
         public boolean notDataTable = false;
         public Boolean enableDefaultLoader = null;
         public List<String> includeHeader = null;
     }
 
-    static public class DataDstMessageExt {
+    public static class DataDstMessageExt {
         public String description = null;
         public String plainSeparator = null;
         // public List<Xresloader.IndexDescriptor> kvIndex = null;
@@ -123,7 +123,7 @@ public class DataDstWriterNode {
         }
     }
 
-    static public ListStripRule getDefaultListStripRule() {
+    public static ListStripRule getDefaultListStripRule() {
         if (ProgramOptions.getInstance().stripListRule == ProgramOptions.ListStripRule.KEEP_ALL) {
             return ListStripRule.STRIP_NOTHING;
         }
@@ -135,7 +135,7 @@ public class DataDstWriterNode {
         return ListStripRule.STRIP_ALL;
     }
 
-    static public class DataDstFieldDescriptor {
+    public static class DataDstFieldDescriptor {
         private int index = 0;
         private String name = null;
         private FIELD_LABEL_TYPE label = FIELD_LABEL_TYPE.OPTIONAL;
@@ -388,7 +388,7 @@ public class DataDstWriterNode {
         }
     }
 
-    static public class DataDstEnumValueDescriptor {
+    public static class DataDstEnumValueDescriptor {
         private int index = 0;
         private String name = null;
         private String fullName = null;
@@ -425,19 +425,19 @@ public class DataDstWriterNode {
         }
     }
 
-    static public class DataDstEnumDescriptor {
+    public static class DataDstEnumDescriptor {
         private String name = null;
         private String fullName = null;
         private Object rawDescriptor = null;
-        private HashMap<String, DataDstEnumValueDescriptor> values_by_name = null;
-        private HashMap<Integer, DataDstEnumValueDescriptor> values_by_id = null;
-        private ArrayList<DataDstEnumValueDescriptor> sorted_values = null;
+        private HashMap<String, DataDstEnumValueDescriptor> valuesByName = null;
+        private HashMap<Integer, DataDstEnumValueDescriptor> valuesById = null;
+        private ArrayList<DataDstEnumValueDescriptor> sortedValues = null;
 
         public DataDstEnumDescriptor(String fullName, String name, Object rawDesc) {
-            this.values_by_name = new HashMap<>();
+            this.valuesByName = new HashMap<>();
             this.name = name;
             this.rawDescriptor = rawDesc;
-            this.values_by_id = new HashMap<>();
+            this.valuesById = new HashMap<>();
 
             if (fullName == null || fullName.isEmpty()) {
                 this.fullName = name;
@@ -451,8 +451,8 @@ public class DataDstWriterNode {
                 return;
             }
 
-            this.values_by_id.put(value.getIndex(), value);
-            this.values_by_name.put(value.getName(), value);
+            this.valuesById.put(value.getIndex(), value);
+            this.valuesByName.put(value.getName(), value);
         }
 
         public String getName() {
@@ -468,7 +468,7 @@ public class DataDstWriterNode {
         }
 
         public DataDstEnumValueDescriptor getDefaultValue() {
-            DataDstEnumValueDescriptor ret = values_by_id.getOrDefault(0, null);
+            DataDstEnumValueDescriptor ret = valuesById.getOrDefault(0, null);
             if (ret == null) {
                 ArrayList<DataDstEnumValueDescriptor> sv = getSortedValues();
                 if (!sv.isEmpty()) {
@@ -480,31 +480,31 @@ public class DataDstWriterNode {
         }
 
         public DataDstEnumValueDescriptor getValueById(int index) {
-            return values_by_id.getOrDefault(index, null);
+            return valuesById.getOrDefault(index, null);
         }
 
         public DataDstEnumValueDescriptor getValueByName(String name) {
-            return values_by_name.getOrDefault(name, null);
+            return valuesByName.getOrDefault(name, null);
         }
 
         public ArrayList<DataDstEnumValueDescriptor> getSortedValues() {
-            if (this.sorted_values != null && this.sorted_values.size() == this.values_by_name.size()) {
-                return this.sorted_values;
+            if (this.sortedValues != null && this.sortedValues.size() == this.valuesByName.size()) {
+                return this.sortedValues;
             }
 
-            this.sorted_values = new ArrayList<>();
-            this.sorted_values.ensureCapacity(this.values_by_name.size());
-            for (HashMap.Entry<String, DataDstEnumValueDescriptor> d : this.values_by_name.entrySet()) {
-                this.sorted_values.add(d.getValue());
+            this.sortedValues = new ArrayList<>();
+            this.sortedValues.ensureCapacity(this.valuesByName.size());
+            for (HashMap.Entry<String, DataDstEnumValueDescriptor> d : this.valuesByName.entrySet()) {
+                this.sortedValues.add(d.getValue());
             }
-            this.sorted_values.sort((l, r) -> {
+            this.sortedValues.sort((l, r) -> {
                 return Integer.compare(l.getIndex(), r.getIndex());
             });
-            return this.sorted_values;
+            return this.sortedValues;
         }
     }
 
-    static public class DataDstOneofDescriptor {
+    public static class DataDstOneofDescriptor {
         private int index = 0;
         private String name = null;
         private String fullName = null;
@@ -679,7 +679,7 @@ public class DataDstWriterNode {
         }
     }
 
-    static public class DataDstTypeDescriptor {
+    public static class DataDstTypeDescriptor {
         private JAVA_TYPE type = JAVA_TYPE.INT;
         private SPECIAL_MESSAGE_TYPE specialMessageType = SPECIAL_MESSAGE_TYPE.NONE;
         private DataVerifyImpl typeValidator = null;
@@ -953,34 +953,34 @@ public class DataDstWriterNode {
     private DataDstChildrenNode referBrothers = null;
     private int listIndex = -1;
 
-    static private HashMap<String, DataDstTypeDescriptor> defaultDescs = new HashMap<>();
+    private static HashMap<String, DataDstTypeDescriptor> defaultDescs = new HashMap<>();
 
     static DataVerifyImpl defaultValidatorInt32 = null;
     static DataVerifyImpl defaultValidatorUInt32 = null;
     static DataVerifyImpl defaultValidatorUInt64 = null;
 
-    static public DataVerifyImpl getDefaultTypeValidatorInt32() {
+    public static DataVerifyImpl getDefaultTypeValidatorInt32() {
         if (defaultValidatorInt32 == null) {
             defaultValidatorInt32 = new DataVerifyNumberRange("int32", "-2147483648-2147483647");
         }
         return defaultValidatorInt32;
     }
 
-    static public DataVerifyImpl getDefaultTypeValidatorUInt32() {
+    public static DataVerifyImpl getDefaultTypeValidatorUInt32() {
         if (defaultValidatorUInt32 == null) {
             defaultValidatorUInt32 = new DataVerifyNumberRange("uint32", "0-4294967295");
         }
         return defaultValidatorUInt32;
     }
 
-    static public DataVerifyImpl getDefaultTypeValidatorUInt64() {
+    public static DataVerifyImpl getDefaultTypeValidatorUInt64() {
         if (defaultValidatorUInt64 == null) {
             defaultValidatorUInt64 = new DataVerifyNumberRange("uint64", ">=0");
         }
         return defaultValidatorUInt64;
     }
 
-    static public DataDstTypeDescriptor getDefaultMessageDescriptor(JAVA_TYPE type, DataVerifyImpl typeValidator,
+    public static DataDstTypeDescriptor getDefaultMessageDescriptor(JAVA_TYPE type, DataVerifyImpl typeValidator,
             DataDstEnumDescriptor referToEnum) {
         String key;
         if (typeValidator != null) {
@@ -994,7 +994,7 @@ public class DataDstWriterNode {
         }
 
         if (type == JAVA_TYPE.MESSAGE) {
-            ProgramOptions.getLoger().error(
+            ProgramOptions.getLogger().error(
                     "Can not get default description of message type, please report this bug to %s",
                     ProgramOptions.getReportUrl());
             return null;
@@ -1019,27 +1019,27 @@ public class DataDstWriterNode {
         this.listIndex = -1;
     }
 
-    static public String makeChildPath(String prefix, String child_name, int list_index) {
-        if (list_index >= 0)
-            return prefix.isEmpty() ? String.format("%s[%d]", child_name, list_index)
-                    : String.format("%s.%s[%d]", prefix, child_name, list_index);
+    public static String makeChildPath(String prefix, String childName, int listIndex) {
+        if (listIndex >= 0)
+            return prefix.isEmpty() ? String.format("%s[%d]", childName, listIndex)
+                    : String.format("%s.%s[%d]", prefix, childName, listIndex);
 
-        return makeChildPath(prefix, child_name);
+        return makeChildPath(prefix, childName);
     }
 
-    static public String makeChildPath(String prefix, String child_name) {
-        return prefix.isEmpty() ? child_name : String.format("%s.%s", prefix, child_name);
+    public static String makeChildPath(String prefix, String childName) {
+        return prefix.isEmpty() ? childName : String.format("%s.%s", prefix, childName);
     }
 
-    static public String makeNodeName(String _name, int list_index) {
-        if (list_index >= 0)
-            return String.format("%s[%d]", _name, list_index);
+    public static String makeNodeName(String name, int listIndex) {
+        if (listIndex >= 0)
+            return String.format("%s[%d]", name, listIndex);
 
-        return makeNodeName(_name);
+        return makeNodeName(name);
     }
 
-    static public String makeNodeName(String _name) {
-        return _name;
+    public static String makeNodeName(String name) {
+        return name;
     }
 
     public DataDstChildrenNode getReferBrothers() {
@@ -1177,46 +1177,46 @@ public class DataDstWriterNode {
         return this.listIndex;
     }
 
-    public String getChildPath(String prefix, int list_index, String child_name) {
-        DataDstChildrenNode res = getChildren().getOrDefault(child_name, null);
+    public String getChildPath(String prefix, int listIndex, String childName) {
+        DataDstChildrenNode res = getChildren().getOrDefault(childName, null);
         if (null == res)
             return null;
 
         if (res.innerFieldDesc.isList())
-            return String.format("%s[%d].%s", prefix, list_index, child_name);
+            return String.format("%s[%d].%s", prefix, listIndex, childName);
 
-        return getChildPath(prefix, child_name);
+        return getChildPath(prefix, childName);
     }
 
-    public String getChildPath(String prefix, String child_name) {
-        return prefix.isEmpty() ? child_name : String.format("%s.%s", prefix, child_name);
+    public String getChildPath(String prefix, String childName) {
+        return prefix.isEmpty() ? childName : String.format("%s.%s", prefix, childName);
     }
 
-    public DataDstChildrenNode addChild(String child_name, DataDstWriterNode node, Object _raw_descriptor,
+    public DataDstChildrenNode addChild(String childName, DataDstWriterNode node, Object rawDescriptor,
             CHILD_NODE_TYPE mode) throws ConvException {
-        DataDstFieldDescriptor child_field_desc = null;
-        DataDstOneofDescriptor child_oneof_desc = null;
+        DataDstFieldDescriptor childFieldDesc = null;
+        DataDstOneofDescriptor childOneofDesc = null;
         if (this.oneofDescriptor != null) {
-            child_field_desc = this.oneofDescriptor.getFieldByName(child_name);
+            childFieldDesc = this.oneofDescriptor.getFieldByName(childName);
         } else if (this.typeDescriptor != null) {
-            child_field_desc = this.typeDescriptor.fields.getOrDefault(child_name, null);
-            if (null == child_field_desc) {
-                child_oneof_desc = this.typeDescriptor.oneofs.getOrDefault(child_name, null);
+            childFieldDesc = this.typeDescriptor.fields.getOrDefault(childName, null);
+            if (null == childFieldDesc) {
+                childOneofDesc = this.typeDescriptor.oneofs.getOrDefault(childName, null);
             }
         }
 
-        if (null == child_field_desc && null == child_oneof_desc) {
+        if (null == childFieldDesc && null == childOneofDesc) {
             throw new ConvException(
-                    String.format("Can not find any child with name \"%s\" for %s.", child_name, getFullName()));
+                    String.format("Can not find any child with name \"%s\" for %s.", childName, getFullName()));
         }
 
-        DataDstChildrenNode res = getChildren().getOrDefault(child_name, null);
+        DataDstChildrenNode res = getChildren().getOrDefault(childName, null);
         if (null == res) {
             res = new DataDstChildrenNode();
-            getChildren().put(child_name, res);
-            res.innerFieldDesc = child_field_desc;
-            res.innerOneofDesc = child_oneof_desc;
-            res.rawDescriptor = _raw_descriptor;
+            getChildren().put(childName, res);
+            res.innerFieldDesc = childFieldDesc;
+            res.innerOneofDesc = childOneofDesc;
+            res.rawDescriptor = rawDescriptor;
         }
 
         res.mode = mode;
@@ -1257,7 +1257,7 @@ public class DataDstWriterNode {
      * @param typeDesc    内部描述类型
      * @return 创建的节点
      */
-    static public DataDstWriterNode create(Object privateData, DataDstTypeDescriptor typeDesc, int listIndex) {
+    public static DataDstWriterNode create(Object privateData, DataDstTypeDescriptor typeDesc, int listIndex) {
         return new DataDstWriterNode(privateData, typeDesc, listIndex);
     }
 
@@ -1268,7 +1268,7 @@ public class DataDstWriterNode {
      * @param typeDesc    内部描述类型
      * @return 创建的节点
      */
-    static public DataDstWriterNode create(Object privateData, DataDstOneofDescriptor oneofDesc) {
+    public static DataDstWriterNode create(Object privateData, DataDstOneofDescriptor oneofDesc) {
         return new DataDstWriterNode(privateData, oneofDesc);
     }
 }
